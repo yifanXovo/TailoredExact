@@ -1,5 +1,5 @@
 #include "Round96RouteOrder.hpp"
-#include "Round95FullBlockDescent.hpp"
+#include "PhysicalWitnessValidation.hpp"
 #include "Round61Candidates.hpp"
 #include "Parser.hpp"
 #include "FileSha256.hpp"
@@ -25,7 +25,7 @@ int main(int argc,char** argv){try {
             r.nodes.push_back(i);r.operations.push_back({i,p,d});}
         r.nodes.push_back(0);routes.push_back(std::move(r));
     }
-    const auto initial=ebrp::verifyRound95StartingWitness(in,routes,opt.lambda);
+    const auto initial=ebrp::verifyCompletePhysicalStartingWitness(in,routes,opt.lambda);
     const std::filesystem::path dest(argv[7]);if(std::filesystem::exists(dest))throw std::invalid_argument("Output exists");
     std::filesystem::create_directories(dest);
     const auto before_old=std::chrono::steady_clock::now();

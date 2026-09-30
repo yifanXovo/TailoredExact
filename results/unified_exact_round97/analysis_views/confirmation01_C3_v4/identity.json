@@ -1,0 +1,138 @@
+{
+  "schema": "round97-analysis-view-only-v1",
+  "analysis_only": true,
+  "source_batch": "confirmation01",
+  "source_role": "C3",
+  "source_identity_path": "results/unified_exact_round97/confirmation01/identity.json",
+  "source_identity_sha256": "cf443f4a38b23c7b28f77458cde1fcf856011ee79408be5cccc4013f31cd7abe",
+  "launches": [
+    {
+      "number": 7,
+      "id": "C3",
+      "arm": "FEEDBACK",
+      "mode": "feedback",
+      "operator": "r83",
+      "stage": "frozen_design_isolated_confirmation",
+      "panel": {
+        "id": "C3",
+        "V": 50,
+        "M": 4,
+        "Q": 25,
+        "geometry": "anisotropic_cloud",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 3600,
+        "method_order": [
+          "FEEDBACK",
+          "OFF",
+          "P-GRB"
+        ],
+        "input_path": "reference/round97_confirmation/C3.txt",
+        "instance_path": "reference/round97_confirmation/C3.txt",
+        "input_sha256": "8f440bf70eb96e51c709d36d6b29a12d5ba2539ac03798ff2512e69b3026991e",
+        "scenario_id": "round97-native-confirmation-v1-C3",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 987,
+        "total_target": 1063,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -773033508,
+          "canonical_sha256": "27ad8303644dad2e2316cb50502b003b61c60c45ec7f565a161ed6ad8b9ab917",
+          "columns": 13412,
+          "rows": 35696
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\confirmation01\\raw\\07_C3_FEEDBACK",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 8,
+      "id": "C3",
+      "arm": "OFF",
+      "mode": "observe",
+      "operator": "r83",
+      "stage": "frozen_design_isolated_confirmation",
+      "panel": {
+        "id": "C3",
+        "V": 50,
+        "M": 4,
+        "Q": 25,
+        "geometry": "anisotropic_cloud",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 3600,
+        "method_order": [
+          "FEEDBACK",
+          "OFF",
+          "P-GRB"
+        ],
+        "input_path": "reference/round97_confirmation/C3.txt",
+        "instance_path": "reference/round97_confirmation/C3.txt",
+        "input_sha256": "8f440bf70eb96e51c709d36d6b29a12d5ba2539ac03798ff2512e69b3026991e",
+        "scenario_id": "round97-native-confirmation-v1-C3",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 987,
+        "total_target": 1063,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -773033508,
+          "canonical_sha256": "27ad8303644dad2e2316cb50502b003b61c60c45ec7f565a161ed6ad8b9ab917",
+          "columns": 13412,
+          "rows": 35696
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\confirmation01\\raw\\08_C3_OFF",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 9,
+      "id": "C3",
+      "arm": "P-GRB",
+      "mode": "off",
+      "operator": "none",
+      "stage": "frozen_design_isolated_confirmation",
+      "panel": {
+        "id": "C3",
+        "V": 50,
+        "M": 4,
+        "Q": 25,
+        "geometry": "anisotropic_cloud",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 3600,
+        "method_order": [
+          "FEEDBACK",
+          "OFF",
+          "P-GRB"
+        ],
+        "input_path": "reference/round97_confirmation/C3.txt",
+        "instance_path": "reference/round97_confirmation/C3.txt",
+        "input_sha256": "8f440bf70eb96e51c709d36d6b29a12d5ba2539ac03798ff2512e69b3026991e",
+        "scenario_id": "round97-native-confirmation-v1-C3",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 987,
+        "total_target": 1063,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -773033508,
+          "canonical_sha256": "27ad8303644dad2e2316cb50502b003b61c60c45ec7f565a161ed6ad8b9ab917",
+          "columns": 13412,
+          "rows": 35696
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\confirmation01\\raw\\09_C3_P-GRB",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    }
+  ],
+  "maximum_new_solver_starts": 0,
+  "optimizer_calls": 0
+}

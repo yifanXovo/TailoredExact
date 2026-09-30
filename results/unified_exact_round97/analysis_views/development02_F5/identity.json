@@ -1,0 +1,204 @@
+{
+  "schema": "round97-analysis-view-only-v1",
+  "analysis_only": true,
+  "source_batch": "development02",
+  "source_role": "F5",
+  "source_identity_path": "results/unified_exact_round97/development02/identity.json",
+  "source_identity_sha256": "517e6d79827cdbb75b94ec98dcf5b4c0c724fc738cfa1bc7448c8b4c67d57550",
+  "launches": [
+    {
+      "number": 1,
+      "id": "F5",
+      "arm": "OLD-FEEDBACK",
+      "mode": "feedback",
+      "operator": "r83",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB",
+          "ORDER-ON"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 3600,
+        "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -1011005748,
+          "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+          "columns": 13410,
+          "rows": 35693
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\01_F5_OLD-FEEDBACK",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 2,
+      "id": "F5",
+      "arm": "FEEDBACK",
+      "mode": "feedback",
+      "operator": "r96",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB",
+          "ORDER-ON"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 3600,
+        "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -1011005748,
+          "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+          "columns": 13410,
+          "rows": 35693
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\02_F5_FEEDBACK",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 3,
+      "id": "F5",
+      "arm": "OFF",
+      "mode": "observe",
+      "operator": "r83",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB",
+          "ORDER-ON"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 3600,
+        "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -1011005748,
+          "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+          "columns": 13410,
+          "rows": 35693
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\03_F5_OFF",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 4,
+      "id": "F5",
+      "arm": "P-GRB",
+      "mode": "off",
+      "operator": "r83",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB",
+          "ORDER-ON"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 3600,
+        "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -1011005748,
+          "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+          "columns": 13410,
+          "rows": 35693
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\04_F5_P-GRB",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    }
+  ],
+  "maximum_new_solver_starts": 0,
+  "optimizer_calls": 0
+}

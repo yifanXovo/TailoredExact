@@ -1,5 +1,5 @@
 #include "Round96RouteOrder.hpp"
-#include "Round95FullBlockDescent.hpp"
+#include "PhysicalWitnessValidation.hpp"
 #include "Evaluator.hpp"
 #include "ProcessPhaseLedger.hpp"
 #include "Round61Candidates.hpp"
@@ -23,10 +23,11 @@ std::vector<RoutePlan> completeRoutes(const Instance& in,const std::vector<Route
 }
 }
 Round96OrderResult runRound96RouteOrder(const Instance& in,const SolveOptions& opt,
-    const std::vector<RoutePlan>& routes,const std::filesystem::path& trace) {
+    const std::vector<RoutePlan>& routes,const std::filesystem::path& trace,
+    const PhysicalAcceptedObserver& accepted) {
     if(in.M<1)throw std::invalid_argument("Invalid order fleet");
     Round96OrderResult out;out.routes=completeRoutes(in,routes);
-    out.verification=verifyRound95StartingWitness(in,out.routes,opt.lambda);
+    out.verification=verifyCompletePhysicalStartingWitness(in,out.routes,opt.lambda);
     std::ofstream events;
     if(!trace.empty()) {
         if(std::filesystem::exists(trace))throw std::invalid_argument("Route-order trace exists");
@@ -45,10 +46,15 @@ Round96OrderResult runRound96RouteOrder(const Instance& in,const SolveOptions& o
     for(;;) {
         if(processWorkDeadlineReached(opt)){out.stats.deadline=true;break;}
         auto old=runRound83ExchangeDescent(in,opt,out.routes,
-            trace.empty()?std::filesystem::path{}:trace/("old_"+std::to_string(out.stats.passes)));
+            trace.empty()?std::filesystem::path{}:trace/("old_"+std::to_string(out.stats.passes)),accepted);
         out.stats.old_neutral+=old.neutral;out.stats.insertions+=old.insertions;out.stats.quantities+=old.quantities;
         out.routes=completeRoutes(in,old.routes);
-        out.verification=verifyRound95StartingWitness(in,out.routes,opt.lambda);
+        out.verification=verifyCompletePhysicalStartingWitness(in,out.routes,opt.lambda);
+        if(!out.stats.initial_old_closure_recorded) {
+            out.stats.initial_old_closure_recorded=true;
+            out.stats.initial_old_closure_F=out.verification.objective;
+            out.stats.initial_old_closure_complete=(old.exhausted||old.zero)&&!old.verification_failed;
+        }
         if(old.verification_failed){out.stats.verification_failed=true;break;}
         if(old.deadline){out.stats.deadline=true;break;}
         if(old.zero){out.stats.zero=true;break;}
@@ -110,6 +116,7 @@ Round96OrderResult runRound96RouteOrder(const Instance& in,const SolveOptions& o
         }
         out.routes=std::move(best_routes);out.verification=std::move(checked);++out.stats.accepted;
         snapshot("order_"+std::to_string(out.stats.accepted)+".json");
+        if(accepted)accepted(out.routes,out.verification);
         if(events.is_open()) {
             events<<"{\"accepted\":"<<out.stats.accepted<<",\"F\":"<<out.verification.objective<<",\"duration\":[";
             for(std::size_t i=0;i<best.size();++i){if(i)events<<',';events<<best[i];}events<<"]}\n";

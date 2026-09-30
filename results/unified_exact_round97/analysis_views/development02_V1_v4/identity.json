@@ -1,0 +1,138 @@
+{
+  "schema": "round97-analysis-view-only-v1",
+  "analysis_only": true,
+  "source_batch": "development02",
+  "source_role": "V1",
+  "source_identity_path": "results/unified_exact_round97/development02/identity.json",
+  "source_identity_sha256": "517e6d79827cdbb75b94ec98dcf5b4c0c724fc738cfa1bc7448c8b4c67d57550",
+  "launches": [
+    {
+      "number": 8,
+      "id": "V1",
+      "arm": "OFF",
+      "mode": "observe",
+      "operator": "r83",
+      "panel": {
+        "id": "V1",
+        "V": 30,
+        "M": 3,
+        "Q": 25,
+        "geometry": "three_clusters",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "method_order": [
+          "P-GRB",
+          "ORDER-ON",
+          "ENS-C"
+        ],
+        "input_path": "reference/round96_primal_validation/V1.txt",
+        "instance_path": "reference/round96_primal_validation/V1.txt",
+        "input_sha256": "dd841e57b2c22158002b0c9ec4940a9f071c11b8881a32b65168bbdb182f6829",
+        "scenario_id": "round96-primal-validation-V1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 571,
+        "total_target": 620,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 2054431081,
+          "canonical_sha256": "a5a372c306b02b5b213cc3a16bbf0e1d3ad8b49c60d2355ae9674b9563ba7e6c",
+          "columns": 4234,
+          "rows": 10615
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\08_V1_OFF",
+      "stage": "complete_development",
+      "cap_seconds": 1800,
+      "hard_stop_seconds": 1798
+    },
+    {
+      "number": 9,
+      "id": "V1",
+      "arm": "FEEDBACK",
+      "mode": "feedback",
+      "operator": "r96",
+      "panel": {
+        "id": "V1",
+        "V": 30,
+        "M": 3,
+        "Q": 25,
+        "geometry": "three_clusters",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "method_order": [
+          "P-GRB",
+          "ORDER-ON",
+          "ENS-C"
+        ],
+        "input_path": "reference/round96_primal_validation/V1.txt",
+        "instance_path": "reference/round96_primal_validation/V1.txt",
+        "input_sha256": "dd841e57b2c22158002b0c9ec4940a9f071c11b8881a32b65168bbdb182f6829",
+        "scenario_id": "round96-primal-validation-V1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 571,
+        "total_target": 620,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 2054431081,
+          "canonical_sha256": "a5a372c306b02b5b213cc3a16bbf0e1d3ad8b49c60d2355ae9674b9563ba7e6c",
+          "columns": 4234,
+          "rows": 10615
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK",
+      "stage": "complete_development",
+      "cap_seconds": 1800,
+      "hard_stop_seconds": 1798
+    },
+    {
+      "number": 10,
+      "id": "V1",
+      "arm": "P-GRB",
+      "mode": "off",
+      "operator": "r83",
+      "panel": {
+        "id": "V1",
+        "V": 30,
+        "M": 3,
+        "Q": 25,
+        "geometry": "three_clusters",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "method_order": [
+          "P-GRB",
+          "ORDER-ON",
+          "ENS-C"
+        ],
+        "input_path": "reference/round96_primal_validation/V1.txt",
+        "instance_path": "reference/round96_primal_validation/V1.txt",
+        "input_sha256": "dd841e57b2c22158002b0c9ec4940a9f071c11b8881a32b65168bbdb182f6829",
+        "scenario_id": "round96-primal-validation-V1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 571,
+        "total_target": 620,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 2054431081,
+          "canonical_sha256": "a5a372c306b02b5b213cc3a16bbf0e1d3ad8b49c60d2355ae9674b9563ba7e6c",
+          "columns": 4234,
+          "rows": 10615
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\10_V1_P-GRB",
+      "stage": "complete_development",
+      "cap_seconds": 1800,
+      "hard_stop_seconds": 1798
+    }
+  ],
+  "maximum_new_solver_starts": 0,
+  "optimizer_calls": 0
+}

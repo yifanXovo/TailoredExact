@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "-c",
+    "import json,hashlib,csv;from pathlib import Path;p=Path('results/unified_exact_round97/final_summary');j=json.loads((p/'evidence_index.json').read_text());bad=[s for s,h in j['source_bindings'].items() if not Path(s).is_file() or hashlib.sha256(Path(s).read_bytes()).hexdigest()!=h];r=list(csv.DictReader((p/'all_solver_arms.csv').open()));assert all(x['operator']=='none' and x['physical_closure_active']=='False' for x in r if x['arm'] in ('P-GRB','OFF'));assert all(x['original_audit_passed']=='False' for x in r if (x['batch'],x['number']) in (('qualification01','1'),('development02','9')));print(dict(bindings=len(j['source_bindings']),rows=len(r),pairs=j['copied_pair_rows'],bad=bad));assert not bad"
+  ],
+  "optimizer_calls": 0
+}

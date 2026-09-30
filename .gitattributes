@@ -154,3 +154,10 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /scripts/round96*.py -text whitespace=cr-at-eol
 /tests/round96* -text whitespace=cr-at-eol
 /results/unified_exact_round96/**/*.log -whitespace
+
+# Round97 frozen drivers and evidence must preserve receipt hashes on checkout.
+/results/unified_exact_round97/** -text whitespace=cr-at-eol
+/scripts/round97*.py -text whitespace=cr-at-eol
+/tests/round97* -text whitespace=cr-at-eol
+/reference/round97*/** -text
+/results/unified_exact_round97/**/*.log -whitespace

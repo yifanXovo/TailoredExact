@@ -1,0 +1,177 @@
+{
+  "binary_sha256": "73516d12a7ff81770e9460394fda8a784bd65ab5a0d4003a723ec96b628bb524",
+  "committed_events": 27,
+  "native_calls_started": 7,
+  "native_calls_returned": 7,
+  "physical_witnesses": 3,
+  "native_physical_witnesses": 2,
+  "scoped_bound_events": 9,
+  "global_native_bound_events": 9,
+  "UB": 0.384304091687546,
+  "LB": 0.2814142343747263,
+  "gap": 0.10288985731281969,
+  "physical_upper_available": true,
+  "lower_bound_source": "complete_domain_native_evidence",
+  "certificate": false,
+  "solver_finalization_certificate": false,
+  "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+  "witnesses": [
+    {
+      "F": 0.384304091687546,
+      "G": 0.0795643099893529,
+      "P": 2.0315985446546208,
+      "stations": 47,
+      "pickup": 139,
+      "drop": 138,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "same_run_verified_startup",
+      "call": 0,
+      "sequence": 2,
+      "available": 12.765999999828637
+    },
+    {
+      "F": 0.384304091687546,
+      "G": 0.0795643099893529,
+      "P": 2.0315985446546208,
+      "stations": 47,
+      "pickup": 139,
+      "drop": 138,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 6,
+      "sequence": 14,
+      "available": 58.875
+    },
+    {
+      "F": 0.384304091687546,
+      "G": 0.0795643099893529,
+      "P": 2.0315985446546208,
+      "stations": 47,
+      "pickup": 139,
+      "drop": 138,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 20,
+      "available": 91.46900000004098
+    }
+  ],
+  "normal_result_certificate": false,
+  "final_only_physical_witness": false,
+  "final_physical_verification": {
+    "F": 0.384304091687546,
+    "G": 0.0795643099893529,
+    "P": 2.0315985446546208,
+    "stations": 47,
+    "pickup": 139,
+    "drop": 138,
+    "maximum_duration": 7178.05882397944,
+    "original_T_feasible": true
+  },
+  "endpoint": {
+    "U": 0.38430409168754603,
+    "L": 0.2814142343747263,
+    "gap": 0.10288985731281974,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "round31_c6_external_gini_tree_time_limit"
+  },
+  "five_native_parameter_readback": {
+    "threads": {
+      "requested": 1,
+      "effective": 1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "seed": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "presolve": {
+      "requested": -1,
+      "effective": -1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap_abs": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    }
+  },
+  "round97": {
+    "events": 4,
+    "status_counts": {
+      "physical_closure_no_strict_improvement": 4
+    },
+    "physical_witnesses": [
+      {
+        "path": "candidate_1.json",
+        "sha256": "1d2d18089ba5017f274ff1769b835d659574d9689548b1bd9783f8662368239c",
+        "F": 0.384304091687546
+      },
+      {
+        "path": "input_66bb2745eb1f92a2d13c1744489bbbfc8e77d14605c1a50a3949c34bfbfe3ca0.json",
+        "sha256": "6b2a875e5d7de0768a6bce529d2aba243a462d22dc2ea2f80bbd8a4bf88148fe",
+        "F": 0.384304091687546
+      }
+    ],
+    "verified_candidates": 0,
+    "strict_closure_improvements": 0,
+    "post_start_events": 0,
+    "vector_observations": 0,
+    "native_incumbent_changes": 0,
+    "archive_handoffs": 0,
+    "complete_callback_seconds": 0.1018331999999999,
+    "closure_seconds": 0.0069214,
+    "mapping_validation_seconds": 0
+  },
+  "passed": true,
+  "native_scope_adapter": {
+    "schema": "round94-native-scope-adapter-v3",
+    "arm": "SHADOW",
+    "native_calls": 7,
+    "lp_calls": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "mip_calls": [
+      6,
+      7
+    ],
+    "global_bound_call_ids": [
+      6,
+      7
+    ],
+    "ledger_sha256": "85caa32800d58c5ad7f43c52d8291620b1b16b8399e15f6cf2c68afde26eb8cf",
+    "settings": {
+      "read_return_code": 0,
+      "Threads": 1,
+      "Seed": 0,
+      "Presolve": -1,
+      "MIPGap": 0,
+      "MIPGapAbs": 0,
+      "FeasibilityTol": 1e-06,
+      "IntFeasTol": 1e-05,
+      "OptimalityTol": 1e-06
+    },
+    "all_flags_strictly_decoded": true
+  },
+  "lp_g_split_evidence": null,
+  "offline_audit_seconds": 0.09420290030539036
+}

@@ -12,6 +12,7 @@
 
 namespace ebrp {
 struct Round65Budget;
+class Round97NativeClosure;
 
 enum class FixedIntervalSolveKind {
     LegacyMipQuantum,
@@ -85,6 +86,8 @@ struct FixedIntervalMipCapabilities {
 };
 
 struct FixedIntervalMipRequest {
+    std::shared_ptr<Round97NativeClosure> round97_session;
+    long long round97_call = 0, round97_epoch = 0;
     std::shared_ptr<NativeEvidenceJournal> native_evidence;
     NativeEvidenceScope native_evidence_scope;
     double optional_work_limit = -1.0; // Round65 only; reset before every core call

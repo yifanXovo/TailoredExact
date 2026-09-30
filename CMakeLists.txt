@@ -26,6 +26,9 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Round76PhysicalClosure.cpp
   src/Round78BalancedRelocation.cpp
   src/Round83BlockExchange.cpp
+  src/Round97NativeClosure.cpp
+  src/Round96RouteOrder.cpp
+  src/PhysicalWitnessValidation.cpp
   src/Result.cpp
   src/StrictCertificate.cpp
   src/ModelCorrectness.cpp
@@ -112,6 +115,8 @@ else()
 endif()
 
 add_library(exact_ebrp_core ${EXACT_EBRP_LIB_SOURCES})
+add_executable(Round97NativeClosureTests tests/round97_native_closure_tests.cpp)
+target_link_libraries(Round97NativeClosureTests PRIVATE exact_ebrp_core)
 
 # Isolated Round93 source qualification. This source is deliberately absent
 # from exact_ebrp_core and the production ExactEBRP preset.
@@ -123,8 +128,8 @@ add_executable(Round93CoQuantityTests tests/round93_co_quantity_tests.cpp)
 target_link_libraries(Round93CoQuantityTests PRIVATE round93_co_quantity)
 add_test(NAME Round93CoQuantityTests COMMAND Round93CoQuantityTests)
 
-# Round95 complete-pair descent remains diagnostic only. R96 also links this
-# library for its strict starting-witness validator, without invoking the scan.
+# Round95 complete-pair descent remains diagnostic only. Its established
+# starting-witness validation is shared by core without linking the full scan.
 add_library(round95_full_block STATIC src/Round95FullBlockDescent.cpp)
 target_link_libraries(round95_full_block PUBLIC exact_ebrp_core)
 add_executable(Round95FullBlockDiagnostic tests/round95_full_block_diagnostic.cpp)
@@ -141,12 +146,14 @@ target_link_libraries(Round96MultiQuantityDiagnostic PRIVATE round96_multi_quant
 add_executable(Round96MultiQuantityTests tests/round96_multi_quantity_tests.cpp)
 target_link_libraries(Round96MultiQuantityTests PRIVATE round96_multi_quantity)
 
-add_library(round96_route_order STATIC src/Round96RouteOrder.cpp)
-target_link_libraries(round96_route_order PUBLIC round95_full_block)
+# Compatibility target; production R96 closure and shared validation live in
+# core. No core -> diagnostic -> core static-library cycle is introduced.
+add_library(round96_route_order INTERFACE)
+target_link_libraries(round96_route_order INTERFACE exact_ebrp_core)
 add_executable(Round96RouteOrderDiagnostic tests/round96_route_order_diagnostic.cpp)
 target_link_libraries(Round96RouteOrderDiagnostic PRIVATE round96_route_order)
 add_executable(Round96RouteOrderTests tests/round96_route_order_tests.cpp)
-target_link_libraries(Round96RouteOrderTests PRIVATE round96_route_order)
+target_link_libraries(Round96RouteOrderTests PRIVATE round96_route_order round95_full_block)
 add_test(NAME Round96MultiQuantityTests COMMAND Round96MultiQuantityTests)
 
 add_executable(NativeEvidenceJournalTests tests/native_evidence_journal_tests.cpp)

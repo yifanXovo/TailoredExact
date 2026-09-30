@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "wall_seconds": 0.16160499956458807,
+  "vectors": [
+    {
+      "event": 1,
+      "kind": "input",
+      "path": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/round97/vector_1.csv",
+      "sha256": "77c13acfa3585770654c929a640e3aaf90be0ba43ed3e6cad2600c9f46825d6b",
+      "model_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "columns": 3488,
+      "rows": 9269,
+      "maximum_absolute_residual": 2.220446049250313e-16,
+      "objective": 0.8853483009345782
+    },
+    {
+      "event": 4,
+      "kind": "input",
+      "path": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/round97/vector_4.csv",
+      "sha256": "44439a8c8abe034ed908861d1dc166fee246f2c55d5b01968f8eb09cd1c2b8f7",
+      "model_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "columns": 3488,
+      "rows": 9269,
+      "maximum_absolute_residual": 3.689951989793716e-14,
+      "objective": 0.8818725042185575
+    },
+    {
+      "event": 6,
+      "kind": "input",
+      "path": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/round97/vector_6.csv",
+      "sha256": "f5887a21419e9f6178f7f1c268d9859cbfce939f3b16f0f63cd40c31c6cbbafa",
+      "model_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "columns": 3488,
+      "rows": 9269,
+      "maximum_absolute_residual": 2.538789491135507e-14,
+      "objective": 0.8804527477348054
+    },
+    {
+      "event": 7,
+      "kind": "input",
+      "path": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/round97/vector_7.csv",
+      "sha256": "2e691eea717513d448091be17df1c8f22853586747ccd1f302241bf50ecf4437",
+      "model_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "columns": 3488,
+      "rows": 9269,
+      "maximum_absolute_residual": 2.4655832930875476e-12,
+      "objective": 0.8802499164513586
+    },
+    {
+      "event": 10,
+      "kind": "input",
+      "path": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/round97/vector_10.csv",
+      "sha256": "4464bcbae1d24f515a2f990f7af9b53a86f6079e527564d2aced4a8e427d680e",
+      "model_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "columns": 3488,
+      "rows": 9269,
+      "maximum_absolute_residual": 8.126832540256146e-13,
+      "objective": 0.8667828952865624
+    },
+    {
+      "event": 11,
+      "kind": "input",
+      "path": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/round97/vector_11.csv",
+      "sha256": "bc441c9f1abd04f21228dd86d368241c2c4014a314fedf7300cbd0bb44aaeee5",
+      "model_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "columns": 3488,
+      "rows": 9269,
+      "maximum_absolute_residual": 1.7486598107019358e-13,
+      "objective": 0.865943520322989
+    }
+  ],
+  "source_sha256": "ff505629a85dea69b9f2eb4eb590a42ab23ec492a75a728071b6123dca65a575",
+  "scope": "Every retained source/mapped CSV against its exact actual canonical linear model; numerical, not rational certificate."
+}

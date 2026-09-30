@@ -1,5 +1,6 @@
 #pragma once
 #include "Round78BalancedRelocation.hpp"
+#include "Round76PhysicalClosure.hpp"
 
 namespace ebrp {
 struct Round83Choice {
@@ -20,5 +21,6 @@ struct Round83Result : Round78BalancedDescentResult {
     std::uint64_t exchanges = 0, relocations = 0, equal_net_pairs = 0;
 };
 Round83Result runRound83ExchangeDescent(const Instance&, const SolveOptions&,
-    const std::vector<RoutePlan>&, const std::filesystem::path& trace = {});
+    const std::vector<RoutePlan>&, const std::filesystem::path& trace = {},
+    const PhysicalAcceptedObserver& accepted = {});
 } // namespace ebrp

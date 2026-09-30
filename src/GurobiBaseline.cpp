@@ -12,6 +12,7 @@
 #include "NativeEvidenceJournal.hpp"
 #include "NativeOtB1.hpp"
 #include "MipStartMapping.hpp"
+#include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
 #include "Round52GurobiCutAdapter.hpp"
@@ -365,6 +366,8 @@ bool evidenceParameterReadback(GurobiApi& api,GRBenv* env,NativeEvidenceScope& s
 }
 
 struct ProgressCallbackState {
+    std::shared_ptr<Round97NativeClosure> round97;
+    Round97Model round97_model;
     std::shared_ptr<NativeEvidenceJournal> native_evidence;
     const Instance* evidence_instance = nullptr;
     const std::vector<std::string>* evidence_names = nullptr;
@@ -925,6 +928,33 @@ int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
     if (!state || !state->api) return 0;
+    if(state->round97 && !state->round97->failed()) {
+        struct Timer {
+            Round97Model& m; Clock::time_point start=Clock::now();
+            ~Timer(){m.callback_seconds+=std::chrono::duration<double>(Clock::now()-start).count();++m.callback_count;}
+        } timer{state->round97_model};
+        if(where==GRB_CB_MIPSOL) {
+            try {
+                std::vector<double> values(state->round97_model.domain.names.size());
+                double objective=0,incumbent=GRB_INFINITY,nodes=0;
+                int count=0,phase=0;
+                const int rc=state->api->cbget(cbdata,where,GRB_CB_MIPSOL_SOL,values.data()) |
+                    state->api->cbget(cbdata,where,GRB_CB_MIPSOL_OBJ,&objective) |
+                    state->api->cbget(cbdata,where,GRB_CB_MIPSOL_OBJBST,&incumbent) |
+                    state->api->cbget(cbdata,where,GRB_CB_MIPSOL_NODCNT,&nodes) |
+                    state->api->cbget(cbdata,where,GRB_CB_MIPSOL_SOLCNT,&count) |
+                    state->api->cbget(cbdata,where,GRB_CB_MIPSOL_PHASE,&phase);
+                if(rc)state->round97->failure("round97_MIPSOL_read_failed");
+                else state->round97->solution(state->round97_model,values,objective,incumbent,nodes,count,phase,
+                    [&](const std::vector<double>& x,double& obj){return state->api->cbsolution(cbdata,x.data(),&obj);});
+            }catch(const std::exception& e){state->round97->failure(e.what());}
+             catch(...){state->round97->failure("round97_adapter_exception");}
+        } else if(where==GRB_CB_MIP) {
+            double incumbent=GRB_INFINITY;
+            if(!state->api->cbget(cbdata,where,GRB_CB_MIP_OBJBST,&incumbent))
+                state->round97->incumbent(state->round97_model,incumbent);
+        }
+    }
     if(where==GRB_CB_MIPSOL && state->native_evidence && state->native_evidence->enabled()) {
         // The full original-model vector is a documented MIPSOL callback read.
         // All new exceptions are contained inside the C callback boundary.
@@ -2546,6 +2576,38 @@ public:
             callback.round59_names = native_names;
         }
         callback.api = &api_;
+        if(request.round97_session && !out.lp_relaxation) {
+            const auto setup_started=Clock::now();
+            callback.round97=request.round97_session;
+            auto& m=callback.round97_model;
+            m.call=request.round97_call;m.epoch=request.round97_epoch;
+            m.leaf=request.leaf_id;m.sha=request.canonical_model_fingerprint;
+            m.lower=request.gamma_L;m.upper=request.gamma_U;m.cutoff=request.verified_cutoff;
+            if(request.round68_verified_start && out.warm_start_submitted)
+                m.start_hash=round97StateHash(instance_,options_.lambda,request.verified_start_routes);
+            m.domain.names=native_names;m.domain.variable_types=native_types;
+            m.domain.lower_bounds.resize(native_variables);m.domain.upper_bounds.resize(native_variables);
+            m.objective.resize(native_variables);
+            int sense=0,qterms=-1,qrows=-1;
+            const bool valid=api_.cbsolution && native_variables>0 &&
+                native_names.size()==static_cast<std::size_t>(native_variables) &&
+                native_types.size()==native_names.size() && out.model_general_constraint_count==0 &&
+                !api_.getintattr(model,GRB_INT_ATTR_MODELSENSE,&sense) && sense==GRB_MINIMIZE &&
+                !api_.getintattr(model,GRB_INT_ATTR_NUMQNZS,&qterms) && qterms==0 &&
+                !api_.getintattr(model,GRB_INT_ATTR_NUMQCONSTRS,&qrows) && qrows==0 &&
+                !api_.getdblattrarray(model,GRB_DBL_ATTR_LB,0,native_variables,m.domain.lower_bounds.data()) &&
+                !api_.getdblattrarray(model,GRB_DBL_ATTR_UB,0,native_variables,m.domain.upper_bounds.data()) &&
+                !api_.getdblattrarray(model,GRB_DBL_ATTR_OBJ,0,native_variables,m.objective.data()) &&
+                !api_.getdblattr(model,GRB_DBL_ATTR_OBJCON,&m.objective_constant) &&
+                readLinearModel(api_,model,native_variables,native_rows,m.linear);
+            std::ofstream receipt(request.native_log_path.string()+".round97.setup.json");
+            receipt<<std::setprecision(17)<<"{\"call\":"<<m.call<<",\"epoch\":"<<m.epoch
+                <<",\"model_sha256\":"<<std::quoted(m.sha)<<",\"valid\":"<<(valid?"true":"false")
+                <<",\"variables\":"<<native_variables<<",\"rows\":"<<native_rows
+                <<",\"setup_seconds\":"<<std::chrono::duration<double>(Clock::now()-setup_started).count()<<"}\n";
+            receipt.close();
+            if(!valid||!receipt)callback.round97->failure("round97_model_registry_or_receipt_failure");
+        }
         if (!out.lp_relaxation) callback.round62_external_stop=request.round62_external_stop;
         out.gurobi_cbsolution_symbol_loaded = api_.cbsolution != nullptr;
         out.round60_candidate_mode = request.round60_candidate_mode;
@@ -2742,6 +2804,20 @@ public:
             }
         }
         out.optimize_return_code = api_.optimize(model);
+        if(callback.round97) {
+            const auto began=Clock::now();
+            int count=0,status=0;double objective=GRB_INFINITY;std::vector<double> final_values;
+            api_.getintattr(model,GRB_INT_ATTR_STATUS,&status);
+            if(!api_.getintattr(model,GRB_INT_ATTR_SOLCOUNT,&count)&&count>0&&
+                !api_.getdblattr(model,GRB_DBL_ATTR_OBJVAL,&objective)) {
+                final_values.resize(native_variables);
+                if(api_.getdblattrarray(model,GRB_DBL_ATTR_X,0,native_variables,final_values.data()))final_values.clear();
+            }
+            callback.round97->returned(callback.round97_model,status,objective,final_values);
+            std::ofstream timing(request.native_log_path.string()+".round97.return.json");
+            timing<<std::setprecision(17)<<"{\"callback_seconds\":"<<callback.round97_model.callback_seconds
+                <<",\"return_observation_seconds\":"<<std::chrono::duration<double>(Clock::now()-began).count()<<"}\n";
+        }
         if(callback.native_evidence) callback.native_evidence->returned(callback.evidence_call,out.optimize_return_code);
         out.round68_start_vector_observed=callback.round68_start_vector_observed;
         out.round68_start_integer_vector_observed=callback.round68_start_integer_vector_observed;

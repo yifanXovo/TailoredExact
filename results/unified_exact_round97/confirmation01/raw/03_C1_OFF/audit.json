@@ -1,0 +1,409 @@
+{
+  "binary_sha256": "7ea6b0eb3500084f6b93748ca43bedfb7ac7ec04591dd19c889a195e1ad31943",
+  "committed_events": 2419,
+  "native_calls_started": 4,
+  "native_calls_returned": 4,
+  "physical_witnesses": 15,
+  "native_physical_witnesses": 14,
+  "scoped_bound_events": 2395,
+  "global_native_bound_events": 2395,
+  "UB": 0.4519946996793171,
+  "LB": 0.45171546401849083,
+  "gap": 0.0002792356608262714,
+  "physical_upper_available": true,
+  "lower_bound_source": "complete_domain_native_evidence",
+  "certificate": false,
+  "solver_finalization_certificate": false,
+  "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+  "witnesses": [
+    {
+      "F": 0.5424691956941228,
+      "G": 0.17082644287016754,
+      "P": 2.477618352159702,
+      "stations": 12,
+      "pickup": 47,
+      "drop": 42,
+      "maximum_duration": 5323.285329734753,
+      "original_T_feasible": true,
+      "source": "same_run_verified_startup",
+      "call": 0,
+      "sequence": 2,
+      "available": 0.4690000000409782
+    },
+    {
+      "F": 0.5424691956941228,
+      "G": 0.17082644287016754,
+      "P": 2.477618352159702,
+      "stations": 12,
+      "pickup": 47,
+      "drop": 42,
+      "maximum_duration": 5323.285329734753,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 10,
+      "available": 2.4070000001229346
+    },
+    {
+      "F": 0.5279282108880621,
+      "G": 0.1703832146193571,
+      "P": 2.383633308458033,
+      "stations": 11,
+      "pickup": 46,
+      "drop": 46,
+      "maximum_duration": 5389.669420263275,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 37,
+      "available": 7.859999999869615
+    },
+    {
+      "F": 0.5277261383671749,
+      "G": 0.16945989120561278,
+      "P": 2.3884416477437473,
+      "stations": 11,
+      "pickup": 46,
+      "drop": 46,
+      "maximum_duration": 5389.669420263275,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 38,
+      "available": 7.859999999869615
+    },
+    {
+      "F": 0.5178813703184965,
+      "G": 0.1623611121991422,
+      "P": 2.3701350541290287,
+      "stations": 10,
+      "pickup": 45,
+      "drop": 45,
+      "maximum_duration": 5389.669420263275,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 39,
+      "available": 8.546999999787658
+    },
+    {
+      "F": 0.5144911561405181,
+      "G": 0.16240662042376125,
+      "P": 2.3472302381117127,
+      "stations": 10,
+      "pickup": 45,
+      "drop": 45,
+      "maximum_duration": 5389.669420263275,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 40,
+      "available": 8.875
+    },
+    {
+      "F": 0.4873118870010593,
+      "G": 0.17469772275838383,
+      "P": 2.0840944282845033,
+      "stations": 11,
+      "pickup": 40,
+      "drop": 39,
+      "maximum_duration": 5389.669420263275,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 43,
+      "available": 14.890999999828637
+    },
+    {
+      "F": 0.47835228983407296,
+      "G": 0.17434963260937952,
+      "P": 2.0266843814979563,
+      "stations": 11,
+      "pickup": 40,
+      "drop": 40,
+      "maximum_duration": 5389.669420263275,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 44,
+      "available": 14.969000000040978
+    },
+    {
+      "F": 0.4776613030871306,
+      "G": 0.1741109249222663,
+      "P": 2.0236691877657624,
+      "stations": 11,
+      "pickup": 40,
+      "drop": 40,
+      "maximum_duration": 5398.952714494833,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 59,
+      "available": 27.42199999978766
+    },
+    {
+      "F": 0.47736761473617195,
+      "G": 0.1742695156311366,
+      "P": 2.020653994033569,
+      "stations": 11,
+      "pickup": 40,
+      "drop": 40,
+      "maximum_duration": 5398.952714494833,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 60,
+      "available": 27.42199999978766
+    },
+    {
+      "F": 0.4596717280725272,
+      "G": 0.17147174801511095,
+      "P": 1.921333200382775,
+      "stations": 10,
+      "pickup": 43,
+      "drop": 39,
+      "maximum_duration": 5398.952714494833,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 64,
+      "available": 28.203999999910593
+    },
+    {
+      "F": 0.4584011543525465,
+      "G": 0.17064003919412019,
+      "P": 1.918407434389509,
+      "stations": 10,
+      "pickup": 44,
+      "drop": 39,
+      "maximum_duration": 5398.952714494833,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 65,
+      "available": 28.203999999910593
+    },
+    {
+      "F": 0.4533353017758688,
+      "G": 0.16750933362321438,
+      "P": 1.9055064543510292,
+      "stations": 11,
+      "pickup": 44,
+      "drop": 39,
+      "maximum_duration": 5398.952714494833,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 66,
+      "available": 28.203999999910593
+    },
+    {
+      "F": 0.45297495978477964,
+      "G": 0.1674491067114903,
+      "P": 1.903505687155262,
+      "stations": 11,
+      "pickup": 44,
+      "drop": 39,
+      "maximum_duration": 5398.952714494833,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 67,
+      "available": 28.203999999910593
+    },
+    {
+      "F": 0.4519946996793171,
+      "G": 0.16380796743936116,
+      "P": 1.9212448815997063,
+      "stations": 11,
+      "pickup": 41,
+      "drop": 41,
+      "maximum_duration": 5398.952714494833,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 120,
+      "available": 72.04699999978766
+    }
+  ],
+  "normal_result_certificate": true,
+  "final_only_physical_witness": false,
+  "final_physical_verification": {
+    "F": 0.4519946996793171,
+    "G": 0.16380796743936116,
+    "P": 1.9212448815997063,
+    "stations": 11,
+    "pickup": 41,
+    "drop": 41,
+    "maximum_duration": 5398.952714494833,
+    "original_T_feasible": true
+  },
+  "endpoint": {
+    "U": 0.45199469967931727,
+    "L": 0.451994698207464,
+    "gap": 1.4718532503898984e-09,
+    "certificate": true,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "optimal"
+  },
+  "five_native_parameter_readback": {
+    "threads": {
+      "requested": 1,
+      "effective": 1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "seed": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "presolve": {
+      "requested": -1,
+      "effective": -1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap_abs": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    }
+  },
+  "round97": {
+    "events": 16,
+    "status_counts": {
+      "start_matching_state_observation_only": 1,
+      "observe_new_state": 13,
+      "observe_duplicate_state": 2
+    },
+    "physical_witnesses": [
+      {
+        "path": "input_0165455b4a68536cad674574137ba025c23461ff644217b03f59beaf5bafdad7.json",
+        "sha256": "33f52c2ac77dbb8fc75aa8fd688149ef4110fb691ae40bfe1166fe4e5e823669",
+        "F": 0.4776613030871306
+      },
+      {
+        "path": "input_1604c18e889d3ffd00489082d177aeb6bf310dcc254f3a660985ab388c49af57.json",
+        "sha256": "7aaf16c0f29eee10f8a8369437b37a746f67d8283fb5dfc0dcb0e2e0775fb4b7",
+        "F": 0.45297495978477964
+      },
+      {
+        "path": "input_23934860c9f66e93eec5f8377b989520cb953f657be095990fea7037c4a3af2f.json",
+        "sha256": "17802555d0e7ef1f146228ac9b4d61c9217803a4f40629f403686124495e63df",
+        "F": 0.5424691956941228
+      },
+      {
+        "path": "input_257f1e973814c09c9e0d960ee09d0fbb687cfd97a8499804cfaf63de808a8c02.json",
+        "sha256": "e35adf8dc124594771bc7ad310d2cd49c1abfa4bbb886883934b55ade1c06335",
+        "F": 0.5144911561405181
+      },
+      {
+        "path": "input_932fa5770a937f281df980445b84bac8af65a6d64cf0dc61f4046cc5117a2bad.json",
+        "sha256": "a831f38fae63fad6ef56fb4bc04a66066c47152f7115fa88de7dbeef88720c84",
+        "F": 0.47736761473617195
+      },
+      {
+        "path": "input_933658c0a9fced013809a0a2a685620068b686a9fbf4a55e14f40a7afca3f16d.json",
+        "sha256": "5af4a080d7abd7c6bb83cd32b154c360d8f79ba1c80521aa627db06def84616a",
+        "F": 0.5277261383671749
+      },
+      {
+        "path": "input_9c2018db3c2af7aafcb8ce68b8d32ad91d45f7dda474eb1c283842dce21fa98d.json",
+        "sha256": "e14eb481566a43b4a16f842ee7fcf8405d7cdadc758b279626456f1ff950a3f6",
+        "F": 0.5178813703184965
+      },
+      {
+        "path": "input_a21f54749ed4bfa1aca86783330b53ff0e7718b2d771e74c3004ee326b9b0e3e.json",
+        "sha256": "bf619323d0fddcdb75d3cc9b6875650e15c3461655a5849146389f3ae2eba1eb",
+        "F": 0.4584011543525465
+      },
+      {
+        "path": "input_b82add6678f780564206c92ee25677c9f204f5e37cc6d4a20eb5881c75691551.json",
+        "sha256": "12ddf795ef1b06494424b31fd3d3eab1065bd7d44e0f7c62a71718218e847448",
+        "F": 0.4533353017758688
+      },
+      {
+        "path": "input_c04a8e9c1aebe1f7cadfbd7ebd77a06ce8a34feebc8c0dc51d1f76f0bf34d1bd.json",
+        "sha256": "dd4297d0945e0063005d4e028de1cdf41e812cc2b5baec2c6d8172e4c0abd273",
+        "F": 0.5279282108880621
+      },
+      {
+        "path": "input_c5d35faf7e8a70f07ab106952ba1d3edaf5e4892d7698d07eb831154c3a31222.json",
+        "sha256": "8ebc2b3c1b0eec89fa5272f94e485f2aaaef35cade933fb7787e06dc332a4168",
+        "F": 0.4596717280725272
+      },
+      {
+        "path": "input_ceebc9000bc974b44bc00bf7cf35dd8dc126a0424c5d9d33c2625eae792e5df9.json",
+        "sha256": "ea85606fcb68035dd479d9ca3a0065ecacba43be7bf2c999516a37ffa911de62",
+        "F": 0.47835228983407296
+      },
+      {
+        "path": "input_e75cdbe62deca1af23b21650143a47ec22010eb71f495212c6eb7ae082e09a53.json",
+        "sha256": "6b0abcbf24e5e2029017e81d228f1a7f3b7009944e4cbfd2214ad0aab9b98175",
+        "F": 0.4873118870010593
+      },
+      {
+        "path": "input_f51e6c6a3d7c4c523647c1f30e2ccff970a93de6f7ed12b306e1cdd33fb66760.json",
+        "sha256": "af0ccebb97736ffc5a301e3ed0aa2405567ba04f2be527f989e8db3f0311e57b",
+        "F": 0.4519946996793171
+      }
+    ],
+    "verified_candidates": 0,
+    "strict_closure_improvements": 0,
+    "excluded_start_matching_events": 1,
+    "eligible_physical_events": 15,
+    "post_start_events": 15,
+    "accepted_order_moves": 0,
+    "order_proposals": 0,
+    "incremental_order_improvement_events": 0,
+    "incremental_order_count_scope": "Recorded fresh-closure joint R96/R83 increment; excludes cache reuse and interrupted improvements not retained by the best archive, so is a lower bound, not all discoveries.",
+    "vector_observations": 0,
+    "native_incumbent_changes": 0,
+    "archive_handoffs": 0,
+    "complete_callback_seconds": 0.09135050000008176,
+    "closure_seconds": 0,
+    "mapping_validation_seconds": 0
+  },
+  "passed": true,
+  "native_scope_adapter": {
+    "schema": "round94-native-scope-adapter-v3",
+    "arm": "OFF",
+    "native_calls": 4,
+    "lp_calls": [
+      1,
+      2,
+      3
+    ],
+    "mip_calls": [
+      4
+    ],
+    "global_bound_call_ids": [
+      4
+    ],
+    "ledger_sha256": "dbdf06eec99f2481d49f2eb552ed440565b9291706653df68942dff05e325241",
+    "settings": {
+      "read_return_code": 0,
+      "Threads": 1,
+      "Seed": 0,
+      "Presolve": -1,
+      "MIPGap": 0,
+      "MIPGapAbs": 0,
+      "FeasibilityTol": 1e-06,
+      "IntFeasTol": 1e-05,
+      "OptimalityTol": 1e-06
+    },
+    "all_flags_strictly_decoded": true
+  },
+  "lp_g_split_evidence": null,
+  "offline_audit_seconds": 0.06842650007456541
+}

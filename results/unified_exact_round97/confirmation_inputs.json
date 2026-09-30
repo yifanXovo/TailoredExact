@@ -1,0 +1,80 @@
+{
+  "roles": [
+    {
+      "id": "C1",
+      "V": 20,
+      "M": 2,
+      "Q": 25,
+      "geometry": "offset_annulus",
+      "inventory": "shortage",
+      "T_seconds": 5400,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "FEEDBACK",
+        "OFF"
+      ],
+      "input_path": "reference/round97_confirmation/C1.txt",
+      "instance_path": "reference/round97_confirmation/C1.txt",
+      "input_sha256": "21b96e97a298621c214a78625f03d5d77076e253e1ba223cb5908d0a0220a39e",
+      "scenario_id": "round97-native-confirmation-v1-C1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 377,
+      "total_target": 406
+    },
+    {
+      "id": "C2",
+      "V": 30,
+      "M": 4,
+      "Q": 15,
+      "geometry": "bent_corridor",
+      "inventory": "surplus",
+      "T_seconds": 5400,
+      "cap_seconds": 1800,
+      "method_order": [
+        "OFF",
+        "P-GRB",
+        "FEEDBACK"
+      ],
+      "input_path": "reference/round97_confirmation/C2.txt",
+      "instance_path": "reference/round97_confirmation/C2.txt",
+      "input_sha256": "02e0d367a6deaabfb312dfdd1629ca60932eac7cb33b69075aeed8fc56d00dce",
+      "scenario_id": "round97-native-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 639,
+      "total_target": 592
+    },
+    {
+      "id": "C3",
+      "V": 50,
+      "M": 4,
+      "Q": 25,
+      "geometry": "anisotropic_cloud",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 3600,
+      "method_order": [
+        "FEEDBACK",
+        "OFF",
+        "P-GRB"
+      ],
+      "input_path": "reference/round97_confirmation/C3.txt",
+      "instance_path": "reference/round97_confirmation/C3.txt",
+      "input_sha256": "8f440bf70eb96e51c709d36d6b29a12d5ba2539ac03798ff2512e69b3026991e",
+      "scenario_id": "round97-native-confirmation-v1-C3",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 987,
+      "total_target": 1063
+    }
+  ],
+  "recipe_sha256": "3719445261fd5c83f79978d070cd85f0d99700d884aed5d3300b7dbf002d9537",
+  "optimizer_calls": 0,
+  "wall_seconds": 0.022134500090032816,
+  "status": "All reserved, no confirmation Optimize yet."
+}
