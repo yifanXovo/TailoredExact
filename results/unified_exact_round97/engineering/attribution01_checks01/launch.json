@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-c",
+    "import ast,sys;from pathlib import Path;sys.path.insert(0,'scripts');import round97_operator_attribution as a;ast.parse(Path(a.__file__).read_text(encoding='utf-8'));ast.parse(Path('scripts/round97_confirmation.py').read_text(encoding='utf-8'));i=a.read(a.CAMP/'identity.json');a.check(i);a.prefix(i,0);assert not (a.OUT/'confirmation_candidate_freeze.json').exists();assert all(not a.Path(l['destination']).exists() for l in i['launches']);print('Frozen old-only three-role plan, budget, development prefix and unstarted destinations passed; confirmation draft syntax only, Optimize=0')"
+  ],
+  "optimizer_calls": 0
+}

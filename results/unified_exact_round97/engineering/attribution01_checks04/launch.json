@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-c",
+    "import sys;sys.path.insert(0,'scripts');import round97_operator_attribution as a;a.ext.ensure_idle();i=a.read(a.CAMP/'identity.json');a.check(i);a.prefix(i,0);assert all(not a.Path(l['destination']).exists() for l in i['launches']);print('Actual revised frozen admission still passes; Optimize=0')"
+  ],
+  "optimizer_calls": 0
+}

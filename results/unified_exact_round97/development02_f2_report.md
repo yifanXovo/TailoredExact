@@ -1,0 +1,29 @@
+# F2 certification protection and development attribution decision
+
+The registered F2 FEEDBACK/P-GRB/OFF arms all returned normally with the frozen v2 binary, original input `ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e`, mathematical T=3600s and common 900s process cap. All independent audits passed; ten FEEDBACK and six OFF retained vectors also passed actual-model validation. No run was repeated.
+
+| Arm | Process seconds | U | L | Normal-return numerical certificate |
+|---|---:|---:|---:|---|
+| FEEDBACK, combined | 547.141 | .8659435203229894 | .8659435203229897 | Yes |
+| Original P-GRB | 897.172 | .8659435203229894 | .7559358687503106 | No |
+| OFF | 594.656 | .8659435203229894 | .8659435203229890 | Yes |
+
+Both ENS arms retain the important certificate advantage over P at this budget. FEEDBACK's full process cost is 47.515s lower than OFF, about 7.99%, meeting the preregistered material-time threshold in this single pair. This is not a replicated speed distribution, and it does not prove R96 ordering caused the gain. Raw signed final gaps of minus/plus3.33e-16 are retained, not clipped; certificates use the unchanged original numerical contract, not rational exact arithmetic.
+
+FEEDBACK has 11 MIPSOL records, seven unique physical inputs, three excluded Start matches and eight eligible positive-node events. Four strict-improvement records include one cache reuse; there are three distinct improved candidates and three actual API submissions. All three later receive full-vector observations. Their per-submission threshold records are reported separately from source attribution. No archive handoff occurs. Five Optimize calls (three LP, two MIP) are verified complete for each ENS arm; P has one.
+
+The fresh candidates occur at events4/7/9, nodes616/920/1269. Their initial old-closure objectives already equal their final combined objectives: .88007350764137804, .86997805781778625, .86594352032298938. R96 accepts no order move and adds no recorded fresh improvement despite210 proposals. Thus this role supports the native timing of the existing physical closure, not an independent new-ordering benefit. Event4 also illustrates why true and model objectives must remain separate: native model G=.24338656160779143 exceeds true G=.24199393300201699. The legal mapped candidate is checked against all9269 model rows with its own G and objective.
+
+Complete callback totals are .1296528s for FEEDBACK and .1037155s for OFF. FEEDBACK records nested closure .0070541s and mapping .0115076s, included in the complete process cost. These small nested figures do not explain the47.515s native proof-path difference by subtraction. P has the eventual certified objective by the30s evidence checkpoint but remains unproved at exit; better-solution timing alone is therefore an inadequate performance claim.
+
+The common trajectories in `trajectories/development02_f2` preserve only committed evidence availability. They retain a positive last committed gap even after normal process termination because final native bounds arrive in the untimed final result. The final numerical certificate is recorded separately; no certificate timestamp is invented. `development02_analysis` now summarizes all13 registered development arms, including the explicit D7/V1 interruption limitations, with original source and endpoint provenance.
+
+## Next attribution step before freezing a candidate
+
+F5's common-build complete comparison favors old closure over combined closure, while D7/V1 lack a complete old-operator control. F2 confirms that old closure supplies all accepted candidate improvements here. These facts do not justify selecting the combined operator merely because it is new.
+
+Use the previously reserved attribution budget for exactly three additional old-closure FEEDBACK arms: D7/3600s, V1/1800s, F2/900s, in that order, under the same v2 build, original input/T and shared settings. They are new declared operator controls, not retries, and all outcomes will be retained. No OFF/P/combined arm is rerun. This resolves the old-versus-combined selection across the same four development roles without an interface/trigger/startup Cartesian search. No new algorithm is designed from confirmation data.
+
+After these controls, freeze one uniform operator for the unchanged three reserved confirmation roles (18900s maximum). Existing development outer cost is49941.903s; the additional6300s plus confirmation gives a maximum75141.903s before any justified further work, below the80000s allowance. Candidate selection and confirmation remain unfinished; default ENS-C is unchanged.
+
+The additional controls are explicitly development experiments selected after viewing the original development results, not independent confirmation. Before they begin, fix the selection rule: legal mapping/physics and the F2 certificate advantage are prerequisites. If only one operator preserves the F2 certificate, prefer that operator. If both preserve it, prefer the simpler old closure unless the combined operator has material favorable comparisons against old closure on at least two of the four development roles under the already frozen time/quality thresholds, with no material certified-completion-time regression or known new severe P disadvantage. No per-instance operator switching is allowed. If neither is sufficiently qualified, retain the negative/mixed development conclusion and reassess confirmation eligibility rather than force a winner. Interrupted comparisons can count only their independently verified common-window quality evidence; their unknown certificate ordering stays unknown and cannot be counted as a certificate gain or absence of a loss. All opposing results remain in the report; this rule selects a research candidate, not default adoption.

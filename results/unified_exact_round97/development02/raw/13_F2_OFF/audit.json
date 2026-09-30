@@ -1,0 +1,273 @@
+{
+  "binary_sha256": "7ea6b0eb3500084f6b93748ca43bedfb7ac7ec04591dd19c889a195e1ad31943",
+  "committed_events": 6185,
+  "native_calls_started": 5,
+  "native_calls_returned": 5,
+  "physical_witnesses": 8,
+  "native_physical_witnesses": 7,
+  "scoped_bound_events": 6166,
+  "global_native_bound_events": 6166,
+  "UB": 0.8659435203229896,
+  "LB": 0.8659281734909288,
+  "gap": 1.5346832060836313e-05,
+  "physical_upper_available": true,
+  "lower_bound_source": "complete_domain_native_evidence",
+  "certificate": false,
+  "solver_finalization_certificate": false,
+  "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+  "witnesses": [
+    {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true,
+      "source": "same_run_verified_startup",
+      "call": 0,
+      "sequence": 2,
+      "available": 0.375
+    },
+    {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 10,
+      "available": 2.2179999998770654
+    },
+    {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 15,
+      "available": 2.6090000001713634
+    },
+    {
+      "F": 0.8804798756127854,
+      "G": 0.24199393300201694,
+      "P": 4.256572950738456,
+      "stations": 7,
+      "pickup": 29,
+      "drop": 29,
+      "maximum_duration": 3595.0133423750403,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 46,
+      "available": 36.640000000130385
+    },
+    {
+      "F": 0.8802107830610713,
+      "G": 0.24269900441134187,
+      "P": 4.2500785243315296,
+      "stations": 7,
+      "pickup": 29,
+      "drop": 29,
+      "maximum_duration": 3595.0133423750403,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 47,
+      "available": 37.57800000021234
+    },
+    {
+      "F": 0.8800735076413781,
+      "G": 0.24353589295268763,
+      "P": 4.243584097924604,
+      "stations": 7,
+      "pickup": 29,
+      "drop": 29,
+      "maximum_duration": 3595.0133423750403,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 48,
+      "available": 37.57800000021234
+    },
+    {
+      "F": 0.8667828952865607,
+      "G": 0.2476091947237009,
+      "P": 4.1278246704190655,
+      "stations": 6,
+      "pickup": 31,
+      "drop": 31,
+      "maximum_duration": 3595.0133423750403,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 62,
+      "available": 63.17100000008941
+    },
+    {
+      "F": 0.8659435203229896,
+      "G": 0.24756565483918117,
+      "P": 4.12251910322539,
+      "stations": 6,
+      "pickup": 32,
+      "drop": 32,
+      "maximum_duration": 3595.0133423750403,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 89,
+      "available": 80.4210000000894
+    }
+  ],
+  "normal_result_certificate": true,
+  "final_only_physical_witness": false,
+  "final_physical_verification": {
+    "F": 0.8659435203229896,
+    "G": 0.24756565483918117,
+    "P": 4.12251910322539,
+    "stations": 6,
+    "pickup": 32,
+    "drop": 32,
+    "maximum_duration": 3595.0133423750403,
+    "original_T_feasible": true
+  },
+  "endpoint": {
+    "U": 0.8659435203229894,
+    "L": 0.865943520322989,
+    "gap": 3.3306690738754696e-16,
+    "certificate": true,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "optimal"
+  },
+  "five_native_parameter_readback": {
+    "threads": {
+      "requested": 1,
+      "effective": 1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "seed": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "presolve": {
+      "requested": -1,
+      "effective": -1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap_abs": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    }
+  },
+  "round97": {
+    "events": 12,
+    "status_counts": {
+      "start_matching_state_observation_only": 3,
+      "observe_new_state": 5,
+      "observe_duplicate_state": 4
+    },
+    "physical_witnesses": [
+      {
+        "path": "input_008305d35b087b25e494f8185dcee6bbc23b07072ffd530c9420e48739810d71.json",
+        "sha256": "2b972cbf4fcbf8a84cb046c0ac8118877b62f1179d8755bccda2bd6cc5509482",
+        "F": 0.8659435203229896
+      },
+      {
+        "path": "input_2d708bf92b1ff1bc4f3ce6fd5527840536b6da2ef70e91e14329ffc0012df3b5.json",
+        "sha256": "744ad12d882ea0dc6fe212b9c2cb9d3360fa4f2a4f36d7a9c1a3f74cf5d1900e",
+        "F": 0.8804798756127854
+      },
+      {
+        "path": "input_5867e8dfdebb7e1801280d3ffcddf34e734305d6eca137321323708035d5650f.json",
+        "sha256": "0dd8f67831f3d3350909c6944ef7b82bcb883c94b0ce2344eef50e926412113e",
+        "F": 0.8802107830610713
+      },
+      {
+        "path": "input_8f1189487aa1bdf3a1c4bd0fb91eaa524496efbf0370f96071449f77dd8e3e4e.json",
+        "sha256": "3e7432a9823a277a0d5377ef47e01ae3158297248b1f98514853d9f62bf052b2",
+        "F": 0.8667828952865607
+      },
+      {
+        "path": "input_a8c98f6dd4090fcc231f2f7b38a627696a0108e1695011f3e6716e378a7895a9.json",
+        "sha256": "fea018e082d9425cb7ddefc267de76f4a6f320c5ea0f977a2adf274ba2ca13ff",
+        "F": 0.8853483009345781
+      },
+      {
+        "path": "input_c61b27f739beeb6b4acae1a9e3ccfa82f61ebc726137760dcb7abee9a3f8a20e.json",
+        "sha256": "3f80981906ab8980a96426ea2fbb44014aa8c1ecaf6551f72ed8a268d3d0db73",
+        "F": 0.8800735076413781
+      }
+    ],
+    "verified_candidates": 0,
+    "strict_closure_improvements": 0,
+    "excluded_start_matching_events": 3,
+    "eligible_physical_events": 9,
+    "post_start_events": 9,
+    "accepted_order_moves": 0,
+    "order_proposals": 0,
+    "incremental_order_improvement_events": 0,
+    "incremental_order_count_scope": "Recorded fresh-closure joint R96/R83 increment; excludes cache reuse and interrupted improvements not retained by the best archive, so is a lower bound, not all discoveries.",
+    "vector_observations": 0,
+    "native_incumbent_changes": 0,
+    "archive_handoffs": 0,
+    "complete_callback_seconds": 0.10371550000019955,
+    "closure_seconds": 0,
+    "mapping_validation_seconds": 0
+  },
+  "passed": true,
+  "native_scope_adapter": {
+    "schema": "round94-native-scope-adapter-v3",
+    "arm": "OFF",
+    "native_calls": 5,
+    "lp_calls": [
+      1,
+      2,
+      3
+    ],
+    "mip_calls": [
+      4,
+      5
+    ],
+    "global_bound_call_ids": [
+      4,
+      5
+    ],
+    "ledger_sha256": "125f036d0e5cf8888308b33cdb2565d0ed0c9978cdb195a0d1cffd80363f0840",
+    "settings": {
+      "read_return_code": 0,
+      "Threads": 1,
+      "Seed": 0,
+      "Presolve": -1,
+      "MIPGap": 0,
+      "MIPGapAbs": 0,
+      "FeasibilityTol": 1e-06,
+      "IntFeasTol": 1e-05,
+      "OptimalityTol": 1e-06
+    },
+    "all_flags_strictly_decoded": true
+  },
+  "lp_g_split_evidence": null,
+  "offline_audit_seconds": 0.0862471996806562
+}

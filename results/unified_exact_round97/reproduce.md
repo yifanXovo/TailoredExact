@@ -210,3 +210,34 @@ failed audit status and uses the separately validated recovery only for exact
 arm9. Interrupted certificate, complete Optimize count and full callback time
 stay unknown. Threshold records and distinct recorded call/value pairs are
 not counts of actual native updates. See `development02_v1_report.md`.
+
+## Original development complete; additional operator attribution
+
+The original F2 block has now completed normally (FEEDBACK and OFF certified,
+P unproved at its cap). Do not repeat the F2 continuation. Actual completed
+offline commands are:
+
+```powershell
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_analyze_batch_v4.py development02
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories_v3.py development02 F2 development02_f2
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_export_f2.py
+```
+
+The compact F2 journal tar.gz files preserve all original member bytes, checked
+after creation. Their repository-relative member paths can be restored under
+a separate evidence root for inspection; do not extract over live/raw runs.
+Raw models/full vectors remain local with hashes in `development02/evidence_f2.json`.
+
+Three new OLD-FEEDBACK controls are prepared in `attribution01/identity.json`:
+D7/3600, V1/1800, F2/900. This is a declared post-development attribution
+extension, not confirmation or a rerun. Selection principles are frozen in
+`development02_f2_report.md`. Preparation/checks already passed; never prepare
+over the existing directory. Inspect actual processes/destinations before:
+
+```powershell
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_operator_attribution.py run-all
+```
+
+`round97_confirmation.py` is an unexecuted guarded draft. It refuses to prepare
+without a post-attribution uniform candidate freeze. No confirmation references,
+candidate freeze or timed confirmation exists at this checkpoint.
