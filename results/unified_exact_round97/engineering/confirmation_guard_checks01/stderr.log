@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\tests\round97_confirmation_guard_test.py", line 61, in <module>
+    save_identity(changed,refresh_prepared=False)
+  File "E:\codes\ExactEBRP\tests\round97_confirmation_guard_test.py", line 48, in save_identity
+    runner.write(fixture/'identity.json',value)
+  File "E:\codes\ExactEBRP\scripts\round96_prepare.py", line 33, in write
+    with p.open('x', encoding='utf-8', newline='\n') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: 'E:\\codes\\ExactEBRP\\tmp\\round97_confirmation_guard_test01\\identity.json'

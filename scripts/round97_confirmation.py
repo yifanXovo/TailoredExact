@@ -47,6 +47,24 @@ def expected_schedule():
             ('C3','FEEDBACK',3600),('C3','OFF',3600),('C3','P-GRB',3600)]
 
 
+def expected_launches(frozen,roles,references,prereg):
+    launches=[]
+    assert [(p['id'],a,p['cap_seconds']) for p in roles for a in p['method_order']]==expected_schedule()
+    for original in roles:
+        panel=dict(original,reference=references[original['id']])
+        for arm in panel['method_order']:
+            number=len(launches)+1;dest=CAMP/'raw'/f"{number:02d}_{panel['id']}_{arm}"
+            mode='off' if arm=='P-GRB' else 'observe' if arm=='OFF' else 'feedback'
+            operator='none' if arm=='P-GRB' else 'r83' if arm=='OFF' else frozen['selected_operator']
+            command=(r90.audited_runner_utilities.command_for(prereg,panel,arm,dest)
+                     if arm=='P-GRB' else r90.command_for(prereg,panel,'ENS-C',dest)+
+                     ['--round97-native-closure',mode,'--round97-native-operator',operator])
+            launches.append(dict(number=number,id=panel['id'],arm=arm,mode=mode,operator=operator,
+                stage='frozen_design_isolated_confirmation',panel=panel,destination=str(dest),
+                cap_seconds=panel['cap_seconds'],hard_stop_seconds=panel['cap_seconds']-2,command=command))
+    return launches
+
+
 def prepare():
     ext.ensure_idle();started=time.perf_counter()
     frozen=candidate();assert not CAMP.exists()
@@ -77,19 +95,7 @@ def prepare():
         references[panel['id']]=reference
     prereg=dict(candidate_binary=(BUILD/'ExactEBRP.exe').relative_to(ROOT).as_posix(),
         candidate_binary_sha256=sha(BUILD/'ExactEBRP.exe'),common=ext.COMMON)
-    launches=[]
-    for panel in roles:
-        panel=dict(panel,reference=references[panel['id']])
-        for arm in panel['method_order']:
-            number=len(launches)+1;dest=CAMP/'raw'/f"{number:02d}_{panel['id']}_{arm}"
-            mode='off' if arm=='P-GRB' else 'observe' if arm=='OFF' else 'feedback'
-            operator='none' if arm=='P-GRB' else 'r83' if arm=='OFF' else frozen['selected_operator']
-            command=(r90.audited_runner_utilities.command_for(prereg,panel,arm,dest)
-                     if arm=='P-GRB' else r90.command_for(prereg,panel,'ENS-C',dest)+
-                     ['--round97-native-closure',mode,'--round97-native-operator',operator])
-            launches.append(dict(number=number,id=panel['id'],arm=arm,mode=mode,operator=operator,
-                stage='frozen_design_isolated_confirmation',panel=panel,destination=str(dest),
-                cap_seconds=panel['cap_seconds'],hard_stop_seconds=panel['cap_seconds']-2,command=command))
+    launches=expected_launches(frozen,roles,references,prereg)
     assert [(r['id'],r['arm'],r['cap_seconds']) for r in launches]==expected_schedule()
     assert sum(r['cap_seconds'] for r in launches)==18900
     production=read(OUT/'production_v2_identity.json')
@@ -107,11 +113,17 @@ def prepare():
         maximum_starts=9,maximum_process_seconds=18900,optimizer_calls_in_preparation=0,
         wall_seconds_before_write=time.perf_counter()-started,
         policy='All once-generated reserved roles and outcomes retained. Uniform frozen candidate. No post-confirmation tuning, replacement inputs, extended windows, or adopted defaults.'))
+    write(CAMP/'prepared_batch.json',dict(batch_sha256=sha(CAMP/'identity.json'),
+        candidate_freeze_sha256=sha(FREEZE),optimizer_calls=0))
     print(json.dumps(dict(prepared='confirmation01',starts=9,maximum_process_seconds=18900,optimizer_calls=0)))
 
 
 def identity_check(identity):
     frozen=candidate()
+    assert read(CAMP/'identity.json')==identity
+    prepared=read(CAMP/'prepared_batch.json')
+    assert prepared['batch_sha256']==sha(CAMP/'identity.json')
+    assert prepared['candidate_freeze_sha256']==sha(FREEZE) and prepared['optimizer_calls']==0
     assert identity['runner_sha256']==sha(__file__)
     assert identity['auditor_sha256']==sha(campaign.__file__)
     assert identity['prereg_sha256']==sha(FREEZE)
@@ -124,7 +136,29 @@ def identity_check(identity):
     assert identity['reference_binary_sha256']==sha(REFERENCE)
     for group in ['helper_hashes','reference_bindings']:
         for path,expected in identity[group].items():assert sha(ROOT/path)==expected,path
-    assert [(r['id'],r['arm'],r['cap_seconds']) for r in identity['launches']]==expected_schedule()
+    prereg=dict(candidate_binary=(BUILD/'ExactEBRP.exe').relative_to(ROOT).as_posix(),
+        candidate_binary_sha256=frozen['candidate_binary_sha256'],common=ext.COMMON)
+    assert identity['prereg']==prereg
+    references={role:read(CAMP/'reference'/role/'build.json') for role in ('C1','C2','C3')}
+    assert identity['references']==references
+    assert identity['launches']==expected_launches(frozen,read(INPUTS)['roles'],references,prereg)
+
+
+def completed_roles(identity,role):
+    """A failed end-of-role audit is a failed predecessor, even after three good arms."""
+    batch_sha=sha(CAMP/'identity.json')
+    for prior in ('C1','C2','C3')[:('C1','C2','C3').index(role)]:
+        queue=CAMP/('queue_'+prior)
+        assert read(queue/'identity.json')['batch_sha256']==batch_sha
+        status=read(queue/'status.json')
+        assert status['phase']=='role_complete_requires_root_analysis' and status['role']==prior
+        events=[json.loads(s) for s in (queue/'events.jsonl').read_text(encoding='utf-8').splitlines()]
+        assert events[-1]==status
+        consistency=queue/'cross_arm_consistency.json';receipt=read(consistency)
+        assert status['consistency_sha256']==sha(consistency)
+        assert receipt['passed'] and receipt['optimizer_calls']==0 and receipt['batch_sha256']==batch_sha
+        for path,expected in receipt['evidence_bindings'].items():assert sha(ROOT/path)==expected,path
+        assert status['completed_prefix']==max(r['number'] for r in identity['launches'] if r['id']==prior)
 
 
 def prefix(identity,count):
@@ -150,6 +184,7 @@ def prefix(identity,count):
 def run_role(role):
     ext.ensure_idle();identity=read(CAMP/'identity.json');identity_check(identity)
     assert role in ('C1','C2','C3')
+    completed_roles(identity,role)
     selected=[r for r in identity['launches'] if r['id']==role]
     assert len(selected)==3
     prefix(identity,selected[0]['number']-1)
@@ -191,9 +226,13 @@ def run_role(role):
         lowers=[r['endpoint']['L'] for r in role_rows]
         assert not uppers or max(lowers)<=min(uppers)+1e-7,'cross-arm physical/bound contradiction'
         write(queue/'cross_arm_consistency.json',dict(passed=True,optimizer_calls=0,
+            batch_sha256=frozen_batch_sha,
+            evidence_bindings={str((Path(r['destination'])/name).relative_to(ROOT).as_posix()):
+                sha(Path(r['destination'])/name) for r in selected for name in ('audit.json','completion.json')},
             strongest_L=max(lowers),best_physical_U=min(uppers) if uppers else None,
             scope='Offline contradiction check only; never a combined certificate.'))
-        record('role_complete_requires_root_analysis',role=role,completed_prefix=selected[-1]['number'])
+        record('role_complete_requires_root_analysis',role=role,completed_prefix=selected[-1]['number'],
+            consistency_sha256=sha(queue/'cross_arm_consistency.json'))
     except BaseException as error:
         record('stopped_failure_no_restart',error=repr(error));raise
 

@@ -1,3 +1,42 @@
+# Current entry: attribution complete, confirmation prepared
+
+All qualification/development/attribution commands below are historical executed
+commands, not instructions to rerun existing directories. Exclusive-create
+guards deliberately reject overwriting evidence. The former "next" commands
+later in this chronology are superseded by this entry and RESUME.md.
+
+The current candidate is uniformly r83 FEEDBACK, frozen in
+`confirmation_candidate_freeze.json`; see `operator_selection.json` and
+`attribution_report.md`. The three original references and actual nine-arm
+manifest have been prepared with zero Optimize. `confirmation_admission01`
+passed. Before any launch, inspect actual processes, completed prefix and
+destination existence. The remaining schedule is executed one role at a time:
+
+```powershell
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_confirmation.py run-role --role C1
+# Only after C1 is terminal, audited and analyzed:
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_confirmation.py run-role --role C2
+# Only after C2 is terminal, audited and analyzed:
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_confirmation.py run-role --role C3
+```
+
+These are original unstarted roles at this checkpoint, not retry commands.
+Current preparation/freeze/admission outputs are immutable. The analyzer
+`round97_attribution_analysis.py` was executed before candidate freeze, as
+required by its development-only guard; do not rerun it now. Its16-arm/24-pair
+CSV output and original audit identities are retained for read-only inspection.
+`round97_candidate_selection.py analyze` and `freeze` likewise already ran.
+
+Evidence extraction/read-only validation is distinct from fresh reproduction:
+extract committed compact archives under a separate inspection root and check
+their indexed hashes, never over raw runs. Fresh timed reproduction requires a
+separate clean checkout/output root, the documented compiler/Gurobi environment,
+and a newly bound manifest; it must not mix fresh timings with this frozen run.
+Large local models/CSV vectors are indexed in the evidence manifests. Do not
+present their absence in a clean clone as a successful full matrix re-audit.
+
+---
+
 # Round 97 reproduction — active research
 
 Latest checkpoint: qualification03 completed normally in all3arms, all69
