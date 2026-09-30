@@ -322,6 +322,15 @@ def lp_g_split_evidence(launch: dict, result: dict | None, reason: str) -> dict:
         calls = [row for row in optimize if row["leaf_id"] == leaf
                  and row["solve_kind"] == "LP" and row["model_sha256"] == model_sha]
         assert calls, (leaf, model_sha, "no matching LP call")
+        immutable = sorted((external / "models").glob(f"{leaf}_epoch_*_generation_*.lp"))
+        if immutable:
+            matching = [path for path in immutable if sha(path) == model_sha]
+            assert matching, (leaf, model_sha, "immutable canonical bytes absent")
+            return dict(optimize_rows=[row["ledger_row_number"] for row in calls],
+                        canonical_sha256_at_audit=model_sha,
+                        later_optimize_rows_for_final_sha=[],
+                        canonical_path_at_audit=str(matching[0]),
+                        model_bytes_status="current_canonical_bytes_sha256_verified")
         canonical = external / "models" / f"{leaf}.lp"
         assert canonical.is_file(), (leaf, "canonical LP absent")
         current = sha(canonical)
