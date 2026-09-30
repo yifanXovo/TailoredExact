@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-c",
+    "import sys,json;from pathlib import Path;sys.path.insert(0,'scripts');from round97_campaign_v2 import ROOT,OUT,read,write,sha;import round97_outcome_evidence as o;c=OUT/'development02';i=read(c/'identity.json');rows=[json.loads(s) for s in (c/'summary.jsonl').read_text().splitlines()];paths=[]\nfor l,r in zip(i['launches'][7:10],rows[7:10]):\n a,receipt,result,extra,bounds=o.load(l,r);raw=Path(l['destination']);records=read(raw/'observations.json');w=result if result is not None else min((x['payload'] for x in records if x['payload']['kind']=='witness'),key=lambda x:x['objective']);p=c/'endpoint_witnesses'/('V1_'+l['arm']+'.json');assert not p.exists();write(p,dict(role='V1',arm=l['arm'],panel=l['panel'],endpoint=a['endpoint'],normal_result=result is not None,original_raw_audit_passed=r['audit_passed'],witness=w,optimizer_calls=0));paths.append(p);paths.extend(p for p in raw.rglob('*') if p.is_file())\npaths.extend([c/'hard_stop09_recovery.json',OUT/'development02_v1_report.md']);write(c/'evidence_v1.json',dict(optimizer_calls=0,new_solver_starts=0,files=[dict(path=p.relative_to(ROOT).as_posix(),bytes=p.stat().st_size,sha256=sha(p)) for p in sorted(set(paths))]));print('All V1 endpoints exported; raw evidence indexed, Optimize=0')"
+  ],
+  "optimizer_calls": 0
+}

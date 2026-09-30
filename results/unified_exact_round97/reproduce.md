@@ -180,3 +180,33 @@ development02_d7_report.md and development02_d7_interruption.md. Historical
 native_incumbent_changes CSV counts denote per-submission threshold records,
 not unique native updates; incumbent_observation_semantics.json documents the
 source-verified interpretation for all completed qualification/development.
+
+## V1 recovery and completed comparison (supersedes later-arm commands above)
+
+The original V1 queue stopped at arm9's missing buffered Optimize-ledger row.
+Its failed raw audit and summary remain unchanged. The exact, zero-Optimize
+recovery is `round97_recover_v1_interruption.py`; its existing sidecar must not
+be overwritten. Root MIP bounds alone support the recovered lower trajectory.
+`round97_continue_after_v1_recovery.py --completed 9 --through 10` subsequently
+ran the previously unstarted V1 P-GRB arm normally. Both queues are terminal;
+do not rerun them. Only the following original block remains unstarted at this
+checkpoint:
+
+```powershell
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_continue_after_v1_recovery.py --completed 10 --through 13
+```
+
+Inspect actual process state and destination existence before executing.
+Actual successful offline V1 reporting used:
+
+```powershell
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_analyze_role_v4.py development02 V1
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories_v3.py development02 V1 development02_v1
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_cost_ledger.py development02_v1_complete
+```
+
+Outputs already exist and are immutable. The v4 adapter preserves original
+failed audit status and uses the separately validated recovery only for exact
+arm9. Interrupted certificate, complete Optimize count and full callback time
+stay unknown. Threshold records and distinct recorded call/value pairs are
+not counts of actual native updates. See `development02_v1_report.md`.

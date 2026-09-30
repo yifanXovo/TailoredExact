@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-c",
+    "import ast,sys,copy;from pathlib import Path;sys.path.insert(0,'scripts');import round97_outcome_evidence as o;import round97_analyze_batch_v4 as a;from round97_campaign_v2 import read,OUT;[ast.parse(Path('scripts/'+f).read_text(encoding='utf-8')) for f in ['round97_outcome_evidence.py','round97_analyze_batch_v4.py','round97_analyze_role_v4.py','round97_trajectories_v3.py']];i=read(OUT/'development02/identity.json');r=[__import__('json').loads(s) for s in (OUT/'development02/summary.jsonl').read_text().splitlines()];x=o.load(i['launches'][8],r[8]);assert x[2] is None and len(x[4])==89 and not r[8]['audit_passed'];assert a.material_difference(None,.1,1e-5,.01) is None;bad=copy.deepcopy(i['launches'][8]);bad['id']='F2';\ntry:o.load(bad,r[8])\nexcept AssertionError:pass\nelse:raise AssertionError('mutated role accepted')\nbad=copy.deepcopy(r[8]);bad['audit_passed']=True\ntry:o.load(i['launches'][8],bad)\nexcept AssertionError:pass\nelse:raise AssertionError('raw failed status override accepted')\nprint('Syntax, exact recovery, null quality and wrong-role/raw-status rejection passed; Optimize=0')"
+  ],
+  "optimizer_calls": 0
+}
