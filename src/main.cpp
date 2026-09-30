@@ -1,4 +1,5 @@
 #include "Round63TimeResource.hpp"
+#include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
 #include "Bounds.hpp"
@@ -122,6 +123,7 @@ void usage() {
         << "[--round90-lp-g-split true|false] "
         << "[--round92-handling-activation true|false] "
         << "[--round96-route-order true|false] "
+        << "[--round98-state-service off|aggregate|projected] "
         << "[--round97-native-closure off|observe|shadow|feedback] "
         << "[--round97-native-operator r83|r96] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
@@ -257,6 +259,8 @@ std::string lowerAscii(std::string value) {
 }
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
+    if (opt.round98_state_service != "off")
+        return "research-round98-ensc-state-service-" + opt.round98_state_service;
     if (opt.round97_native_closure != "off")
         return "research-round97-v2-ensc-native-" + opt.round97_native_closure + "-" + opt.round97_native_operator;
     if (opt.round88_constructive_only_descent)
@@ -1430,6 +1434,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round96-route-order") opt.round96_route_order = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round98-state-service") opt.round98_state_service = lowerAscii(requireValue(i, argc, argv));
         else if (arg == "--round97-native-closure") opt.round97_native_closure = lowerAscii(requireValue(i, argc, argv));
         else if (arg == "--round97-native-operator") opt.round97_native_operator = lowerAscii(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
@@ -3356,6 +3361,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
          opt.round62_threshold_mode != "off" ||
          opt.external_gini_scheduling != "round31-nonblocking-native-bound"))
         throw std::runtime_error("Round96 route order requires isolated ENS-C Round83 gcap-frontier");
+    if (opt.round98_state_service != "off" &&
+        opt.round98_state_service != "aggregate" && opt.round98_state_service != "projected")
+        throw std::runtime_error("Invalid Round98 state/service mode");
+    if (!ebrp::round98IsIsolatedENS(opt))
+        throw std::runtime_error("Round98 requires isolated ENS-C with unchanged startup and VD-P");
     if ((opt.round97_native_operator != "r83" && opt.round97_native_operator != "r96") ||
         (opt.round97_native_closure == "off" && opt.round97_native_operator != "r83"))
         throw std::runtime_error("Round97 operator requires an active isolated native-closure mode");
@@ -3972,6 +3982,8 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             snapshot.preset_experimental_features_enabled += "," + feature;
         }
     };
+    if (opt.round98_state_service != "off")
+        append_explicit_research_feature("round98_state_service_" + opt.round98_state_service);
     if (opt.round66_arc_load_replacement) append_explicit_research_feature("round66_arc_load_replaces_node_big_m");
     if (opt.round68_verified_start) append_explicit_research_feature("round68_existing_complete_witness_native_start");
     if (opt.round65_budget) append_explicit_research_feature("round65_optional_credit_core_MIP_fallback");

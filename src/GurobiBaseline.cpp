@@ -370,6 +370,7 @@ struct ProgressCallbackState {
     Round97Model round97_model;
     std::shared_ptr<NativeEvidenceJournal> native_evidence;
     const Instance* evidence_instance = nullptr;
+    bool evidence_integer_operations = false;
     const std::vector<std::string>* evidence_names = nullptr;
     long long evidence_call = 0;
     Round63NativeState* round63 = nullptr;
@@ -970,7 +971,7 @@ int __stdcall progressAndBoundTargetCallback(
                         throw std::runtime_error("MIPSOL_original_vector_identity_invalid");
                 }
                 state->native_evidence->witness(
-                    reconstructCanonicalCompactRoutes(*state->evidence_instance,values),
+                    reconstructCanonicalCompactRoutes(*state->evidence_instance,values, state->evidence_integer_operations),
                     "native_MIPSOL_verified_original_routes",state->evidence_call);
             }
         } catch(const std::exception& e) {state->native_evidence->failure(e.what());}
@@ -2771,6 +2772,7 @@ public:
                 options_.round65_projection=="off" && !options_.round65_budget;
             callback.native_evidence=request.native_evidence;
             callback.evidence_instance=&instance_;callback.evidence_names=&native_names;
+            callback.evidence_integer_operations=options_.round98_state_service != "off";
             callback.evidence_call=request.native_evidence->beginCall(scope);
         }
         if (request.round68_verified_start) {
@@ -3665,8 +3667,17 @@ public:
                             values[name] = x[static_cast<std::size_t>(i)];
                         }
                     }
-                    std::vector<RoutePlan> routes =
-                        reconstructCanonicalCompactRoutes(instance_, values);
+                    std::vector<RoutePlan> routes;
+                    try {
+                        routes = reconstructCanonicalCompactRoutes(instance_, values,
+                            options_.round98_state_service != "off");
+                    } catch (const std::exception& error) {
+                        // A fractional physical operation is a failed solve outcome,
+                        // never a rounded witness or an original-problem certificate.
+                        out.failure_reason = error.what();
+                        invalidateRound89NativeOtB1FailedOutcome(out);
+                        return out;
+                    }
                     const Verification verification = options_.round92_handling_activation
                         ? round92AdmitWitness(instance_, routes, options_.lambda)
                         : verifySolution(instance_, routes, options_.lambda);
@@ -4432,6 +4443,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             scope.native_preconditions=evidenceParameterReadback(api,model_env,scope) &&
                 result.gurobi_native_domain_audit_passed && time_limit_rc==0;
             callback.evidence_instance=&instance;callback.evidence_names=&native_names;
+            callback.evidence_integer_operations=options.round98_state_service != "off";
             callback.evidence_call=callback.native_evidence->beginCall(scope);
         }
 

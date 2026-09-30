@@ -1,4 +1,5 @@
 #include "PaperExternalGiniTree.hpp"
+#include "Round98StateService.hpp"
 
 #include "CanonicalCompactModel.hpp"
 #include "ConnectivityFlow.hpp"
@@ -334,6 +335,10 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     const bool first_class_k1 = options.k1_am_sf_controller_enabled;
+    if (!round98IsIsolatedENS(options)) {
+        reason = "round98_requires_isolated_ensc_state_service";
+        return false;
+    }
     if (options.round97_native_closure != "off" &&
         ((!first_class_k1 || options.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
           options.method != "gcap-frontier" || options.round88_constructive_only_descent ||
