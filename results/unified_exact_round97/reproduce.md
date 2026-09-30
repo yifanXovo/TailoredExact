@@ -1,282 +1,153 @@
-# Current entry: attribution complete, confirmation prepared
+# Round97 reproduction and evidence entry
 
-All qualification/development/attribution commands below are historical executed
-commands, not instructions to rerun existing directories. Exclusive-create
-guards deliberately reject overwriting evidence. The former "next" commands
-later in this chronology are superseded by this entry and RESUME.md.
+C1/C2/C3 and all selected development/attribution arms are complete. No solver
+is currently scheduled. All launch commands below are historical records or
+fresh-reproduction instructions; never rerun them into existing destinations.
+Qualification01's two superseded, never-started arms remain explicitly unrun.
+The final stage decision and independent completion audit are in final_report.md
+and the final review named there. Protected ENS-C defaults remain unchanged.
 
-The current candidate is uniformly r83 FEEDBACK, frozen in
-`confirmation_candidate_freeze.json`; see `operator_selection.json` and
-`attribution_report.md`. The three original references and actual nine-arm
-manifest have been prepared with zero Optimize. `confirmation_admission01`
-passed. Before any launch, inspect actual processes, completed prefix and
-destination existence. The remaining schedule is executed one role at a time:
+## Inspect the delivered result
+
+Start with final_report.md, mathematical_algorithm.md and the role reports.
+`final_summary/all_solver_arms.csv` contains all36 actual solver attempts once,
+including the failed qualification and interrupted development runs. It retains
+batch purpose, source/build/input identity, mathematical T, cap, true U, legal L,
+signed gap, certificate status and full process cost. Unknown fields stay blank.
+`final_summary/within_build_pairs.csv` copies only existing reviewed comparisons,
+with an explicit version/context column; short qualification comparisons are
+not complete-performance evidence. Detailed event and nested-cost columns stay
+in the indexed source views. No cross-build pair is fabricated.
+
+`final_summary/evidence_index.json` binds these tables and the main immutable
+source artifacts. The final cost snapshot named in final_report.md supersedes
+earlier snapshots; do not add snapshots together. Original failed audits and
+all recovery sidecars remain separate. See `costs/*/unstarted.csv` for genuinely
+unexecuted arms, not missing successful results.
+
+Read-only hash verification of the final summary's listed files, from the
+repository root (requires the indexed local evidence to be present):
 
 ```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_confirmation.py run-role --role C1
-# Only after C1 is terminal, audited and analyzed:
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_confirmation.py run-role --role C2
-# Only after C2 is terminal, audited and analyzed:
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_confirmation.py run-role --role C3
+& 'D:/msys64/ucrt64/bin/python.exe' -c "import json,hashlib;from pathlib import Path;j=json.loads(Path('results/unified_exact_round97/final_summary/evidence_index.json').read_text());bad=[p for p,h in j['source_bindings'].items() if not Path(p).is_file() or hashlib.sha256(Path(p).read_bytes()).hexdigest()!=h];print(bad);assert not bad"
 ```
 
-These are original unstarted roles at this checkpoint, not retry commands.
-Current preparation/freeze/admission outputs are immutable. The analyzer
-`round97_attribution_analysis.py` was executed before candidate freeze, as
-required by its development-only guard; do not rerun it now. Its16-arm/24-pair
-CSV output and original audit identities are retained for read-only inspection.
-`round97_candidate_selection.py analyze` and `freeze` likewise already ran.
+A clean clone includes compact evidence sufficient for the main reported
+endpoints, original physical witnesses, event chains, receipt identities and
+cost tables. Full LP matrices, CSV vectors, native logs and binaries are local
+artifacts indexed by hashes; their absence does not count as a passed matrix
+re-audit. Compact tar.gz journal/observation archives were byte-checked member
+by member at export. Extract only into a separate inspection root, never over
+raw runs. The per-role evidence JSON files list archive hashes and contents.
 
-Evidence extraction/read-only validation is distinct from fresh reproduction:
-extract committed compact archives under a separate inspection root and check
-their indexed hashes, never over raw runs. Fresh timed reproduction requires a
-separate clean checkout/output root, the documented compiler/Gurobi environment,
-and a newly bound manifest; it must not mix fresh timings with this frozen run.
-Large local models/CSV vectors are indexed in the evidence manifests. Do not
-present their absence in a clean clone as a successful full matrix re-audit.
+## Frozen builds and numerical environment
 
----
+Repository `yifanXovo/TailoredExact`, branch
+`codex/round97-native-incumbent-closure`, draft PR159, base R96
+`93a29e7290e7e92821482c7f4e2c47dfe2f1e84e`.
 
-# Round 97 reproduction — active research
-
-Latest checkpoint: qualification03 completed normally in all3arms, all69
-actual-model vectors passed, and qualification03/gate.json was generated by
-the successful receipted gate script. The complete development02 identity is
-now prepared (13arms/33300s) under the unchanged v2 binary. Qualification
-commands below are historical examples, not instructions to rerun them.
-Use `scripts/round97_development_v2_queue.py --label f5 --completed 0 --through 4`
-only for the first still-unstarted frozen F5 block after checking RESUME and
-actual processes. Later blocks require successful prior block/vector audits.
-
-This file records completed identities and safe commands. The whole research
-stage is incomplete; consult RESUME.md and actual process/receipt state before
-starting anything. Never rerun a completed label or resume a failed arm into
-its old destination. Do not launch a second solver, compile, load large model
-audits, or compress artifacts alongside an active performance run.
-
-Repository: yifanXovo/TailoredExact. Research branch:
-`codex/round97-native-incumbent-closure`, stacked on R96
-`93a29e7290e7e92821482c7f4e2c47dfe2f1e84e`. Draft PR159 remains a research
-proposal, with ENS-C protected and no default promotion or merge.
-
-## Build and environment
-
-The frozen H1 production source is `ea37fbfcd`; its existing executable is
-`build/research/round97-native-closure/ExactEBRP.exe`, SHA256
+The H1 executable source is `ea37fbfcd`; binary
+`build/research/round97-native-closure/ExactEBRP.exe` has SHA256
 `73516d12a7ff81770e9460394fda8a784bd65ab5a0d4003a723ec96b628bb524`.
-Its completed experiments must not be associated with the later C++ sources.
+The v2 actual C++ source is `f0bdaed3f2b9c2205b05584cca29337ee9640c58`;
+`build/research/round97-native-closure-v2/ExactEBRP.exe` has SHA256
+`7ea6b0eb3500084f6b93748ca43bedfb7ac7ec04591dd19c889a195e1ad31943`.
+`production_v2_identity.json` binds actual source files, compiler, CMake cache,
+DLL, tests and build receipts. Later reporting commits do not redefine the
+compiled source identity. Do not mix H1 and v2 timings as a same-build pair.
 
-The revised v2 source is `f0bdaed3f2b9c2205b05584cca29337ee9640c58`.
-`production_v2_identity.json` binds every C++/header/CMake source, actual
-executable and CMake cache, compiler version, Gurobi DLL, passed engineering
-receipts and test sources. `scripts/round97_build_v2.py` documents the separate
-build. Keep the old binary intact. Blank CMake build type and original flags
-are part of the recorded environment; do not add optimization/fast-math flags
-and mix the resulting timing with this campaign.
+The recorded host uses Windows PowerShell, Python and GCC14.2 UCRT64 under
+`D:/msys64/ucrt64/bin`, and Gurobi13.0.2 at `D:/gurobi1302/win64`.
+Paid arms use Threads1, Seed0, PresolveAuto, affinity mask4 and original
+feasibility/integrality/objective/certificate tolerances. Requested native gaps
+are zero, not a rational exact certificate. Blank CMake build type and original
+flags are part of the identity; changing flags requires new common bindings.
 
-Windows PowerShell; Python `D:/msys64/ucrt64/bin/python.exe`; GCC14.2 from the
-same UCRT64 installation; Gurobi13.0.2 DLL at
-`D:/gurobi1302/win64/bin/gurobi130.dll`. All paid arms use one solver thread,
-Seed0, PresolveAuto, affinity mask4 and the unchanged tolerances/requested
-zero MIP gaps. The complete exact command arrays are in each batch's
-`identity.json`, then copied into individual launch receipts. Mathematical T
-is an input constraint, not the process cap. Startup, improvement, mapping,
-normal shutdown and any child optimizer work remain inside paid wall time.
-
-## Completed evidence
-
-`qualification01` retains the administratively stopped no-op submission
-attempt. Its remaining planned arms were never started and must not run.
-`qualification02` contains all three audited H1 functional runs; its F5 short
-arms observed only Start states and do not negate later opportunities.
-
-`development01` contains the four audited common3600s F5 arms, in registered
-order SHADOW, FEEDBACK, OFF, P-GRB. `development01_analysis` binds the input
-receipts and gives endpoint/pair CSVs. All are censored. The failed original
-continuation queue and successful recovery queue both remain recorded; the
-failure occurred before a new solver launch and is not a second paid arm.
-
-`native_order_replay/identity.json` fixes the eight completed offline cases
-and their inputs, source witnesses and helper identities. These zero-Optimize
-diagnostics are not full solver comparisons. Re-running them is unnecessary
-for the current research; use their saved candidate witnesses and audits.
-
-`engineering/revision02_*` records configuration/build, three passed micro
-executables and the reader fixture. The reader checked55 real saved input
-hashes,83actual Start associations and9mutations. Micro registries do not
-establish actual VD-P matrix qualification. The build freeze script performs
-no optimization and refuses to overwrite its identity.
-
-## Current revised qualification and later development
-
-`qualification03/identity.json` preregisters F5 SHADOW900, F5 FEEDBACK900,
-F2 FEEDBACK240, all with the fixed r96 combined operator. F5 mathematical
-T=7200 and F2 T=3600. Arm1 is active at this document's initial creation;
-inspect its receipts/process before any action. The guarded invocation for a
-never-started next arm is:
+On a separate clean checkout with the same dependencies and an empty build/
+output location, the recorded v2 build entry is:
 
 ```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_campaign_v2.py run qualification03 --number N
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_build_v2.py fresh_reproduction_build
 ```
 
-Each arm checks source/binary/DLL/input/helper/research-plan/build-gate
-hashes, requires a fully audited preceding prefix and creates a fresh raw
-directory. The supervisor retains full cost and failure evidence. After a
-solver exits, the separate matrix audit is:
+This creates an exclusive engineering receipt. It must run only while no solver
+is active. It builds ExactEBRP and the R95/R96/R97 micro/diagnostic targets.
+Compiler availability and a licensed Gurobi environment are prerequisites;
+this document does not install or alter them. A fresh binary must be rebound
+in a fresh manifest. Existing production identities deliberately reject changed
+binaries, helpers or inputs rather than silently calling them equivalent.
+
+## Exact executed experiment entry points
+
+Complete command arrays, input/hash/T/caps and original orders are in each
+batch identity and individual launch.json. These are the authoritative commands,
+including expected reference-model fingerprints and plain-baseline isolation.
+To print them without launching any solver:
 
 ```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_vector_audit.py RESULTS_DESTINATION FRESH_AUDIT_LABEL
+& 'D:/msys64/ucrt64/bin/python.exe' -c "import json;from pathlib import Path;j=json.loads(Path('results/unified_exact_round97/confirmation01/identity.json').read_text());[print(json.dumps(x['command'])) for x in j['launches']]"
 ```
 
-This loads the exact saved actual LP matrices with zero Optimize calls and
-independently checks every retained source/mapped CSV's complete columns,
-bounds, types, rows and objective. Run it only while idle. The production
-reader separately validates physical witnesses, initial seed and per-call
-actual Start matching, session operator and non-feedback isolation.
+|Executed stage|Entry/receipt and evidence|
+|---|---|
+|Failed initial qualification|qualification01; exact administrative stop and failed audit retained, remaining arms superseded|
+|H1 functional qualification|qualification02, qualification_report.md|
+|H1 common3600 F5 SHADOW/FEEDBACK/OFF/P|development01 and development01_analysis; failed queue then guarded recovery, no duplicate solver|
+|Eight fixed-state order replays|native_order_replay/identity.json; zero Optimize, nested child costs retained|
+|v2 build/micros/reader|engineering/revision02_* and production_v2_identity.json|
+|Real v2 qualification|qualification03 and qualification03/gate.json; all69 actual vectors passed|
+|Four-role development|development02, development02_analysis and four role reports|
+|Three old-operator controls|round97_operator_attribution.py prepare/run-all; attribution01 and attribution_report.md|
+|Uniform candidate selection|round97_candidate_selection.py analyze then freeze, after controls and before confirmation|
+|Three confirmation roles|round97_confirmation.py prepare, then run-role --role C1/C2/C3 once, each previous role terminal/audited/analyzed|
 
-`scripts/round97_development_v2.py` prepared the13-arm/33300s campaign
-after qualification03 passed its evidence-bound gate. Preparation receipt
-is engineering/development02_prepare01; the plan is revision02_plan.md.
-It preserves D7's actual d7dbd018… input/T18000 via the R96 fixed cases and
-matched R87 zero-Optimize original reference. V1 uses the R96 primal input
-dd841e57…/T7200. Old timing is never reused in new performance pairs.
+D7/P's cap hard-stop and V1/combined's missing buffered ledger row are not
+normal results. Their reviewed exact-exception continuations ran only previously
+unstarted arms. See development02_d7_interruption.md, development02_v1_interruption.md,
+review_v1_recovery.md and the bound sidecars. Do not use those exceptions to
+accept an arbitrary future failure or rewrite original audit status.
 
-## Interpretation and confirmation boundary
+The initial confirmation admission test required all nine raw destinations
+absent; rerunning it after completion is expected to fail. Selection, freeze,
+preparation and analysis scripts also use exclusive-create and chronological
+guards. Fresh timed reproduction therefore needs separate outputs and newly
+bound manifests, not deletion of existing evidence or disabling safeguards.
+It is a new experiment and cannot replace the retained original result.
 
-OFF's observer costs remain paid. SHADOW's optional candidate objective
-never changes official U. Submission API success/infinity, later full-vector
-observation and native incumbent changes are separate evidence, not unique
-source proof. Callback/closure/mapping measurements are nested and must not
-be summed as extra process expense. See mathematical_algorithm.md for
-state qualification, finite progress, mapping and safe archive handoff.
+## Analysis and independent validation
 
-C1/C2/C3 inputs were generated once and remain unoptimized at this
-checkpoint. Their recipe/hashes/caps are in confirmation_inputs.json. Freeze
-one uniform candidate after development before running them; do not redraw,
-resize or use their results for design while retaining confirmation status.
-Whole-stage final review and final decision remain pending. No current
-censored result establishes final certification time superiority.
-
-## Completed development02 F5 block and reporting
-
-The F5 four-arm queue/session19598 exited0. All four arms passed; never
-restart that queue. Read development02_f5_report.md and the current RESUME.md.
-The following zero-Optimize commands have already succeeded while idle:
+The following commands actually ran after each role became terminal, with
+zero Optimize; replace C3 only when inspecting another already recorded role:
 
 ```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_analyze_role.py development02 F5
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories.py development02 F5 development02_f5
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories.py development01 F5 development01_f5
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_cost_ledger.py development02_f5
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_analyze_role_v4.py confirmation01 C3
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories_v3.py confirmation01 C3 confirmation01_c3
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_export_normal_batch.py confirmation01 --role C3
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_final_summary.py
 ```
 
-These refuse to overwrite existing outputs. Role analysis is a nonlaunchable
-view of every registered arm for that role; it is not another experiment.
-Full-batch analysis must wait for all13arms. A later cost snapshot needs a
-fresh label and includes earlier reporting-command receipts. Timed curves
-use audited evidence availability and exclude untimed final endpoints.
+These exact output directories already exist and must not be overwritten.
+A new cost snapshot uses `scripts/round97_cost_ledger.py FRESH_LABEL`. Run
+receipted engineering commands through round97_build.run, with a fresh label,
+so their costs appear in the next snapshot. The final ledger's own wrapper is
+reported separately to avoid an infinite self-accounting loop.
 
-The next registered contiguous blocks, each invoked once only after the
-preceding block is terminal and analyzed, are:
+With original large matrices/vectors available and the machine idle, the
+independent actual-vector audit is a Python function (the module has no CLI):
 
 ```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_development_v2_queue.py --label d7 --completed 4 --through 7
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_development_v2_queue.py --label v1 --completed 7 --through 10
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_development_v2_queue.py --label f2 --completed 10 --through 13
+& 'D:/msys64/ucrt64/bin/python.exe' -c "import sys;from pathlib import Path;sys.path.insert(0,'scripts');import round97_campaign_v2 as c;import round97_vector_audit as v;c.ext.ensure_idle();v.check(Path('results/unified_exact_round97/confirmation01/raw/07_C3_FEEDBACK'),'fresh_c3_vector_check')"
 ```
 
-Inspect real process and queue state before invoking; this command listing
-does not authorize duplicate launches. Blocks retain frozen input/T/cap/order,
-audit actual matrices between solvers, stop on failure and never retry.
+It loads saved actual LP matrices with zero Optimize and checks full columns,
+bounds, types, rows and objective independently of candidate construction.
+The physical reader separately validates original route/operation witnesses,
+source hashes, actual Start matching and non-feedback isolation. Artificial
+micro registries alone do not prove actual-model mapping qualification.
 
-## D7 interruption and completed recovery (supersedes the queue commands above)
-
-D7 arm5 P-GRB reached the frozen supervisor hard stop; its complete result
-does not exist. The exact acknowledged interruption and old queue failure are
-preserved. Recovery completed only original arms6/7 normally, then exited0.
-Do not rerun either D7 queue. Because the original queue requires every prior
-arm normal, later V1/F2 must instead use the exact-exception continuation:
-
-```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_continue_development02.py --completed 7 --through 10
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_continue_development02.py --completed 10 --through 13
-```
-
-Only after the preceding block is terminal and analyzed. The exception is
-restricted to bound arm5 receipts, not arbitrary future interruptions.
-D7's actual successful zero-Optimize reporting commands were:
-
-```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_analyze_role_v3.py development02 D7
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories_v2.py development02 D7 development02_d7
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_cost_ledger.py development02_d7_complete
-```
-
-Existing outputs are immutable. The v3 analysis requires exact interrupted
-evidence bindings, leaves unavailable final/certificate/Optimize fields null,
-and distinguishes observed process cost from certification time. See
-development02_d7_report.md and development02_d7_interruption.md. Historical
-native_incumbent_changes CSV counts denote per-submission threshold records,
-not unique native updates; incumbent_observation_semantics.json documents the
-source-verified interpretation for all completed qualification/development.
-
-## V1 recovery and completed comparison (supersedes later-arm commands above)
-
-The original V1 queue stopped at arm9's missing buffered Optimize-ledger row.
-Its failed raw audit and summary remain unchanged. The exact, zero-Optimize
-recovery is `round97_recover_v1_interruption.py`; its existing sidecar must not
-be overwritten. Root MIP bounds alone support the recovered lower trajectory.
-`round97_continue_after_v1_recovery.py --completed 9 --through 10` subsequently
-ran the previously unstarted V1 P-GRB arm normally. Both queues are terminal;
-do not rerun them. Only the following original block remains unstarted at this
-checkpoint:
-
-```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_continue_after_v1_recovery.py --completed 10 --through 13
-```
-
-Inspect actual process state and destination existence before executing.
-Actual successful offline V1 reporting used:
-
-```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_analyze_role_v4.py development02 V1
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories_v3.py development02 V1 development02_v1
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_cost_ledger.py development02_v1_complete
-```
-
-Outputs already exist and are immutable. The v4 adapter preserves original
-failed audit status and uses the separately validated recovery only for exact
-arm9. Interrupted certificate, complete Optimize count and full callback time
-stay unknown. Threshold records and distinct recorded call/value pairs are
-not counts of actual native updates. See `development02_v1_report.md`.
-
-## Original development complete; additional operator attribution
-
-The original F2 block has now completed normally (FEEDBACK and OFF certified,
-P unproved at its cap). Do not repeat the F2 continuation. Actual completed
-offline commands are:
-
-```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_analyze_batch_v4.py development02
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories_v3.py development02 F2 development02_f2
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_export_f2.py
-```
-
-The compact F2 journal tar.gz files preserve all original member bytes, checked
-after creation. Their repository-relative member paths can be restored under
-a separate evidence root for inspection; do not extract over live/raw runs.
-Raw models/full vectors remain local with hashes in `development02/evidence_f2.json`.
-
-Three new OLD-FEEDBACK controls are prepared in `attribution01/identity.json`:
-D7/3600, V1/1800, F2/900. This is a declared post-development attribution
-extension, not confirmation or a rerun. Selection principles are frozen in
-`development02_f2_report.md`. Preparation/checks already passed; never prepare
-over the existing directory. Inspect actual processes/destinations before:
-
-```powershell
-& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_operator_attribution.py run-all
-```
-
-`round97_confirmation.py` is an unexecuted guarded draft. It refuses to prepare
-without a post-attribution uniform candidate freeze. No confirmation references,
-candidate freeze or timed confirmation exists at this checkpoint.
+Recorded trajectories use committed evidence availability. Untimed final
+certificates remain separate; no missing history, instantaneous acceptance,
+unique provenance or gap integral is invented. Callback/closure/map costs are
+nested inside full solver wall time. SHADOW candidate quality never changes
+its official U. No confirmation-driven tuning, default promotion or merge is
+part of this reproduction.

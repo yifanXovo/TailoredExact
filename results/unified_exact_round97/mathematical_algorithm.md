@@ -1,6 +1,6 @@
-# R97 原生整数路线闭环 — 开发与算子归因完成，确认进行中
+# R97 原生整数路线闭环 — 开发、算子归因与确认完成
 
-保护默认是ENS-C，新的`--round97-native-closure`默认off；实验OFF用observe，另有shadow/feedback。保留24+1及R83启动、VD-P/F0、AM0.08、深度/宽度、静态行、原生策略及R68 Start。已资格的H1算子仅R83/R76，完整F5长窗显示预算质量收益但四臂均未证；R96在预登记真实原生状态回放中有独立增量。第二版通过零Optimize微测及qualification03真实生产资格，69份源/映射向量独立通过实际矩阵检查；四角色开发与额外旧算子归因已完成，确认统一采用r83反馈候选。确认尚未完成，本说明不宣称阶段完成。
+保护默认是ENS-C，新的`--round97-native-closure`默认off；实验OFF用observe，另有shadow/feedback。保留24+1及R83启动、VD-P/F0、AM0.08、深度/宽度、静态行、原生策略及R68 Start。已资格的H1算子仅R83/R76，完整F5长窗显示预算质量收益但四臂均未证；R96在预登记真实原生状态回放中有独立增量。第二版通过零Optimize微测及qualification03真实生产资格，69份源/映射向量独立通过实际矩阵检查；四角色开发与额外旧算子归因已完成，三个设计隔离确认角色统一采用r83反馈候选并全部正常完成。数学规则在确认前冻结，此处只更新研究状态；mixed结果与阶段验收见final_report.md和root_final_review.md，不意味着默认采用。
 
 原目标/时长/数值合同完全继承R96 mathematical_algorithm.md：`F=G_true+lambda P`，`G_true=H/(nS)`及原S=0约定；空载出发、逐前缀[0,Q]、单次单向非零服务、允许带载回仓完整卸载，时长为实际有向旅行加`(c_pick+c_drop)*sum pickup`。不依赖距离对称性或三角不等式，数学T与进程cap分开。
 
@@ -59,7 +59,7 @@ r96组合先执行原R83/R76闭包，再完整扫描同路线相邻两非空块�
 
 ## 确认采用的固定版本与测试覆盖入口
 
-完整开发和三臂旧算子归因完成后，`confirmation_candidate_freeze.json`已将三个保留确认角色统一冻结为上述v2事件/缓存/映射/archive规则加**r83旧闭包**。r96组合保留为已完成的开发消融；不按角色切换，不叠加R96启动重排。选择理由与反例见`attribution_report.md`。确认仍在进行，冻结不表示阶段完成或默认采用。
+完整开发和三臂旧算子归因完成后，`confirmation_candidate_freeze.json`已将三个保留确认角色统一冻结为上述v2事件/缓存/映射/archive规则加**r83旧闭包**。r96组合保留为已完成的开发消融；不按角色切换，不叠加R96启动重排。选择理由与反例见`attribution_report.md`。三角色确认结果全部保留：C1认证时间相近、C2质量收益、C3对OFF回退。候选冻结与研究完成都不等于默认采用。
 
 以下覆盖来自已经执行的`tests/round97_native_closure_tests.cpp`，当前生产对应执行入口为`engineering/revision02_micro_r9701`，不是新跑的测试。该可执行程序使用人工语义registry和模拟submit函数，0Optimize；因此只能证明相应控制/物理语义断言，不能单独证明完整VD-P映射或真实Gurobi处理。
 
