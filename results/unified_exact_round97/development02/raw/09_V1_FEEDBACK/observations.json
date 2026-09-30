@@ -1,0 +1,3837 @@
+[
+  {
+    "sequence": 1,
+    "data_close_seconds": 3.4931647,
+    "first_observed_seconds": 3.5619999999180436,
+    "effective_available_seconds": 3.5619999999180436,
+    "sha256": "d83fb188cac15b2be91f4ff905414528c2524fb3998e44eb89404963a937ac0f",
+    "payload": {
+      "schema": 1,
+      "sequence": 1,
+      "kind": "identity",
+      "input_sha256": "dd841e57b2c22158002b0c9ec4940a9f071c11b8881a32b65168bbdb182f6829",
+      "preset": "research-round83-vds-equal-net-exchange",
+      "method": "gcap-frontier",
+      "lambda": 0.15,
+      "V": 30,
+      "M": 3,
+      "T": 7200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "analytical_full_domain_lower_bound": 0,
+      "certificate": "none_read_only_observation"
+    }
+  },
+  {
+    "sequence": 2,
+    "data_close_seconds": 3.493492,
+    "first_observed_seconds": 3.5619999999180436,
+    "effective_available_seconds": 3.5619999999180436,
+    "sha256": "852991ad93e3404080b68c674b63d4a000ba8d1d3aa26cc4b13023c6e4c212dd",
+    "payload": {
+      "schema": 1,
+      "sequence": 2,
+      "kind": "witness",
+      "call": 0,
+      "source": "same_run_verified_startup",
+      "improving": 1,
+      "objective": 0.28404156412463055,
+      "G": 0.07817039672778141,
+      "P": 1.3724744493123275,
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            19,
+            30,
+            15,
+            21,
+            24,
+            9,
+            25,
+            22,
+            13,
+            0
+          ],
+          "operations": [
+            {
+              "station": 19,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 30,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 15,
+              "pickup": 10,
+              "drop": 0
+            },
+            {
+              "station": 21,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 24,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 9,
+              "pickup": 0,
+              "drop": 2
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 12
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 10
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            11,
+            5,
+            29,
+            3,
+            18,
+            27,
+            8,
+            26,
+            17,
+            0
+          ],
+          "operations": [
+            {
+              "station": 11,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 5,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 29,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 3,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 8
+            },
+            {
+              "station": 27,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 8,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 8
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 7
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            28,
+            4,
+            10,
+            7,
+            14,
+            23,
+            2,
+            20,
+            6,
+            0
+          ],
+          "operations": [
+            {
+              "station": 28,
+              "pickup": 2,
+              "drop": 0
+            },
+            {
+              "station": 4,
+              "pickup": 0,
+              "drop": 2
+            },
+            {
+              "station": 10,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 7,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 14,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 23,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 2,
+              "pickup": 0,
+              "drop": 13
+            },
+            {
+              "station": 20,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 9
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 3,
+    "data_close_seconds": 5.0170664,
+    "first_observed_seconds": 5.108999999705702,
+    "effective_available_seconds": 5.108999999705702,
+    "sha256": "7a9cde151dd7e9eb06e210e2dc0f2c36497ea2da42a84ddef7813e939e7a4aa6",
+    "payload": {
+      "schema": 1,
+      "sequence": 3,
+      "kind": "call",
+      "call": 1,
+      "full_original": 0,
+      "native_preconditions": 0,
+      "leaf": "L0",
+      "model_sha256": "9b457392dbeea4747826f2f7be2da8fd0d48ff86189c52a98a7bfab794712435",
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\models\\L0.lp",
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "native_log_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\native_logs\\L0_lp.gurobi.log",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "lower_g": 0,
+      "upper_g": 0.28404156412463055,
+      "cutoff": 0.28404156412463055,
+      "gmax": 0.9666666666666667,
+      "cover": [
+        {
+          "id": "L0",
+          "source": "|objective_nonnegative_penalty_G_floor",
+          "lower_g": 0,
+          "upper_g": 0.28404156412463055,
+          "lower": 0,
+          "cutoff": 0.28404156412463055
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 4,
+    "data_close_seconds": 5.6418851,
+    "first_observed_seconds": 5.719000000040978,
+    "effective_available_seconds": 5.719000000040978,
+    "sha256": "68502f8350d7759ae4f8c454311b68bb6b254d1e6cd978c5715a8e5ccbf79fa1",
+    "payload": {
+      "schema": 1,
+      "sequence": 4,
+      "kind": "returned",
+      "call": 1,
+      "return_code": 0
+    }
+  },
+  {
+    "sequence": 5,
+    "data_close_seconds": 7.2288888,
+    "first_observed_seconds": 7.2969999997876585,
+    "effective_available_seconds": 7.2969999997876585,
+    "sha256": "5a411d0e9cdcfcb60471c6f62d8355ede5e1b99720e5ca12a46a5cf3366c3672",
+    "payload": {
+      "schema": 1,
+      "sequence": 5,
+      "kind": "call",
+      "call": 2,
+      "full_original": 0,
+      "native_preconditions": 0,
+      "leaf": "L0.0",
+      "model_sha256": "8622e475c59daa28e4b0853bb8ea68d0bf96b4e5fe92703e30bfba961be4bf7c",
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\models\\L0.0.lp",
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "native_log_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\native_logs\\L0.0_lp.gurobi.log",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "lower_g": 0,
+      "upper_g": 0.14202078206231528,
+      "cutoff": 0.28404156412463055,
+      "gmax": 0.9666666666666667,
+      "cover": [
+        {
+          "id": "L0",
+          "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+          "lower_g": 0,
+          "upper_g": 0.28404156412463055,
+          "lower": 0.12531061383851633,
+          "cutoff": 0.28404156412463055
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 6,
+    "data_close_seconds": 7.7795016,
+    "first_observed_seconds": 7.858999999705702,
+    "effective_available_seconds": 7.858999999705702,
+    "sha256": "85836f30d93f8a2862ad376fd42d395e181a9c8cd3d7d53d2b0e3d441511c1ce",
+    "payload": {
+      "schema": 1,
+      "sequence": 6,
+      "kind": "returned",
+      "call": 2,
+      "return_code": 0
+    }
+  },
+  {
+    "sequence": 7,
+    "data_close_seconds": 9.4613474,
+    "first_observed_seconds": 9.546999999787658,
+    "effective_available_seconds": 9.546999999787658,
+    "sha256": "ec48f83f547a3047ed2fb0caaf95fc33cd4c1a18fa978474c21d5d7adeb9c07a",
+    "payload": {
+      "schema": 1,
+      "sequence": 7,
+      "kind": "call",
+      "call": 3,
+      "full_original": 0,
+      "native_preconditions": 0,
+      "leaf": "L0.1",
+      "model_sha256": "df365ef3ed0b819e53648e1338d08ddc56dd197ed4b2ad38ef072b103b407331",
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\models\\L0.1.lp",
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "native_log_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\native_logs\\L0.1_lp.gurobi.log",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "lower_g": 0.14202078206231528,
+      "upper_g": 0.28404156412463055,
+      "cutoff": 0.28404156412463055,
+      "gmax": 0.9666666666666667,
+      "cover": [
+        {
+          "id": "L0",
+          "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+          "lower_g": 0,
+          "upper_g": 0.28404156412463055,
+          "lower": 0.12531061383851633,
+          "cutoff": 0.28404156412463055
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 8,
+    "data_close_seconds": 9.8802786,
+    "first_observed_seconds": 9.936999999918044,
+    "effective_available_seconds": 9.936999999918044,
+    "sha256": "e1a4338cdb0c4b7daa21e5c92af10dbba9c3713d39cee5c4c9895be78339416b",
+    "payload": {
+      "schema": 1,
+      "sequence": 8,
+      "kind": "returned",
+      "call": 3,
+      "return_code": 0
+    }
+  },
+  {
+    "sequence": 9,
+    "data_close_seconds": 10.0500445,
+    "first_observed_seconds": 10.140999999828637,
+    "effective_available_seconds": 10.140999999828637,
+    "sha256": "fc5cf04bd983bb62e9184d85df504df0ac238e104949bd367bfed0873f0b358b",
+    "payload": {
+      "schema": 1,
+      "sequence": 9,
+      "kind": "call",
+      "call": 4,
+      "full_original": 0,
+      "native_preconditions": 1,
+      "leaf": "L0",
+      "model_sha256": "9b457392dbeea4747826f2f7be2da8fd0d48ff86189c52a98a7bfab794712435",
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\models\\L0.lp",
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "native_log_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "lower_g": 0,
+      "upper_g": 0.28404156412463055,
+      "cutoff": 0.28404156412463055,
+      "gmax": 0.9666666666666667,
+      "cover": [
+        {
+          "id": "L0",
+          "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+          "lower_g": 0,
+          "upper_g": 0.28404156412463055,
+          "lower": 0.12531061383851633,
+          "cutoff": 0.28404156412463055
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 10,
+    "data_close_seconds": 10.0944747,
+    "first_observed_seconds": 10.140999999828637,
+    "effective_available_seconds": 10.140999999828637,
+    "sha256": "08af1fb4e272bb85ff3ed2c16b7c7137cda921a82ed53a7db3698dfcce189154",
+    "payload": {
+      "schema": 1,
+      "sequence": 10,
+      "kind": "witness",
+      "call": 4,
+      "source": "native_MIPSOL_verified_original_routes",
+      "improving": 0,
+      "objective": 0.28404156412463055,
+      "G": 0.07817039672778141,
+      "P": 1.3724744493123275,
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            19,
+            30,
+            15,
+            21,
+            24,
+            9,
+            25,
+            22,
+            13,
+            0
+          ],
+          "operations": [
+            {
+              "station": 19,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 30,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 15,
+              "pickup": 10,
+              "drop": 0
+            },
+            {
+              "station": 21,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 24,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 9,
+              "pickup": 0,
+              "drop": 2
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 12
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 10
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            11,
+            5,
+            29,
+            3,
+            18,
+            27,
+            8,
+            26,
+            17,
+            0
+          ],
+          "operations": [
+            {
+              "station": 11,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 5,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 29,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 3,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 8
+            },
+            {
+              "station": 27,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 8,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 8
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 7
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            28,
+            4,
+            10,
+            7,
+            14,
+            23,
+            2,
+            20,
+            6,
+            0
+          ],
+          "operations": [
+            {
+              "station": 28,
+              "pickup": 2,
+              "drop": 0
+            },
+            {
+              "station": 4,
+              "pickup": 0,
+              "drop": 2
+            },
+            {
+              "station": 10,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 7,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 14,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 23,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 2,
+              "pickup": 0,
+              "drop": 13
+            },
+            {
+              "station": 20,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 9
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 11,
+    "data_close_seconds": 10.5844538,
+    "first_observed_seconds": 10.655999999959022,
+    "effective_available_seconds": 10.655999999959022,
+    "sha256": "8a7b2beb057d3697acfd5d3cf9b215785aef9fd8744d55a5ffe150206451bfda",
+    "payload": {
+      "schema": 1,
+      "sequence": 11,
+      "kind": "bound",
+      "call": 4,
+      "native_bound": 0,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.12531061383851633
+    }
+  },
+  {
+    "sequence": 12,
+    "data_close_seconds": 11.0606809,
+    "first_observed_seconds": 11.140999999828637,
+    "effective_available_seconds": 11.140999999828637,
+    "sha256": "76323b4cb47363e941c90c35609b2745b2a82ede0e25676f8333e306aff6a6d1",
+    "payload": {
+      "schema": 1,
+      "sequence": 12,
+      "kind": "bound",
+      "call": 4,
+      "native_bound": 0.1253106138385163,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.12531061383851633
+    }
+  },
+  {
+    "sequence": 13,
+    "data_close_seconds": 13.8004188,
+    "first_observed_seconds": 13.905999999959022,
+    "effective_available_seconds": 13.905999999959022,
+    "sha256": "921513776a26649e2953eda7ec9cbdd2fd2d2c632753f06d69effb946949391e",
+    "payload": {
+      "schema": 1,
+      "sequence": 13,
+      "kind": "bound",
+      "call": 4,
+      "native_bound": 0.1386796006060046,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1386796006060046
+    }
+  },
+  {
+    "sequence": 14,
+    "data_close_seconds": 13.811908,
+    "first_observed_seconds": 13.905999999959022,
+    "effective_available_seconds": 13.905999999959022,
+    "sha256": "cadc74665bed0007671d9d62e6daf5254ab321dd2a49b3892a5e2a1ee69c7f7c",
+    "payload": {
+      "schema": 1,
+      "sequence": 14,
+      "kind": "returned",
+      "call": 4,
+      "return_code": 0
+    }
+  },
+  {
+    "sequence": 15,
+    "data_close_seconds": 13.9751337,
+    "first_observed_seconds": 14.030999999959022,
+    "effective_available_seconds": 14.030999999959022,
+    "sha256": "76613939b779275cff329d294662eab902190719c76a228124ad032ca7766d36",
+    "payload": {
+      "schema": 1,
+      "sequence": 15,
+      "kind": "call",
+      "call": 5,
+      "full_original": 0,
+      "native_preconditions": 1,
+      "leaf": "L0",
+      "model_sha256": "9b457392dbeea4747826f2f7be2da8fd0d48ff86189c52a98a7bfab794712435",
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\models\\L0.lp",
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "native_log_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "lower_g": 0,
+      "upper_g": 0.28404156412463055,
+      "cutoff": 0.28404156412463055,
+      "gmax": 0.9666666666666667,
+      "cover": [
+        {
+          "id": "L0",
+          "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation|valid_child_target_native_bound",
+          "lower_g": 0,
+          "upper_g": 0.28404156412463055,
+          "lower": 0.1386796006060046,
+          "cutoff": 0.28404156412463055
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 16,
+    "data_close_seconds": 13.9851695,
+    "first_observed_seconds": 14.094000000040978,
+    "effective_available_seconds": 14.094000000040978,
+    "sha256": "76205e74afca4af8058039b2e90a86bd046f5c493e8b2fd1de597a552afc2e4f",
+    "payload": {
+      "schema": 1,
+      "sequence": 16,
+      "kind": "witness",
+      "call": 5,
+      "source": "native_MIPSOL_verified_original_routes",
+      "improving": 0,
+      "objective": 0.28404156412463055,
+      "G": 0.07817039672778141,
+      "P": 1.3724744493123275,
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            19,
+            30,
+            15,
+            21,
+            24,
+            9,
+            25,
+            22,
+            13,
+            0
+          ],
+          "operations": [
+            {
+              "station": 19,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 30,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 15,
+              "pickup": 10,
+              "drop": 0
+            },
+            {
+              "station": 21,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 24,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 9,
+              "pickup": 0,
+              "drop": 2
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 12
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 10
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            11,
+            5,
+            29,
+            3,
+            18,
+            27,
+            8,
+            26,
+            17,
+            0
+          ],
+          "operations": [
+            {
+              "station": 11,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 5,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 29,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 3,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 8
+            },
+            {
+              "station": 27,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 8,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 8
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 7
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            28,
+            4,
+            10,
+            7,
+            14,
+            23,
+            2,
+            20,
+            6,
+            0
+          ],
+          "operations": [
+            {
+              "station": 28,
+              "pickup": 2,
+              "drop": 0
+            },
+            {
+              "station": 4,
+              "pickup": 0,
+              "drop": 2
+            },
+            {
+              "station": 10,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 7,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 14,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 23,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 2,
+              "pickup": 0,
+              "drop": 13
+            },
+            {
+              "station": 20,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 9
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 17,
+    "data_close_seconds": 14.4643425,
+    "first_observed_seconds": 14.546999999787658,
+    "effective_available_seconds": 14.546999999787658,
+    "sha256": "16fc48b1dfe7c2823f22f66ebadf5b875059ef25f7955c46abfaaabbe15e5ccd",
+    "payload": {
+      "schema": 1,
+      "sequence": 17,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1386796006060046
+    }
+  },
+  {
+    "sequence": 18,
+    "data_close_seconds": 14.8795632,
+    "first_observed_seconds": 14.936999999918044,
+    "effective_available_seconds": 14.936999999918044,
+    "sha256": "e7142c427755c8592b0dccaa7a9a97571cfb61540ba6996b3992fe59e2da57be",
+    "payload": {
+      "schema": 1,
+      "sequence": 18,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1253106138385163,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1386796006060046
+    }
+  },
+  {
+    "sequence": 19,
+    "data_close_seconds": 17.4263455,
+    "first_observed_seconds": 17.515999999828637,
+    "effective_available_seconds": 17.515999999828637,
+    "sha256": "de6b843f2ed4e703642b87b27daa246a0d885c48285fdca958f720334299b5ec",
+    "payload": {
+      "schema": 1,
+      "sequence": 19,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1386796006060046,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1386796006060046
+    }
+  },
+  {
+    "sequence": 20,
+    "data_close_seconds": 17.527061,
+    "first_observed_seconds": 17.608999999705702,
+    "effective_available_seconds": 17.608999999705702,
+    "sha256": "8c760ed54f2cdb44d2ee875e2d96d313dcab1c87e061399281f864e29c50062c",
+    "payload": {
+      "schema": 1,
+      "sequence": 20,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.13869903753686566,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.13869903753686566
+    }
+  },
+  {
+    "sequence": 21,
+    "data_close_seconds": 18.1110486,
+    "first_observed_seconds": 18.17199999978766,
+    "effective_available_seconds": 18.17199999978766,
+    "sha256": "680d01483ccd47e328718d2fe648e7f2251924464fdf580ef0fb9fca074c1ba4",
+    "payload": {
+      "schema": 1,
+      "sequence": 21,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1522513303850424,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1522513303850424
+    }
+  },
+  {
+    "sequence": 22,
+    "data_close_seconds": 18.8982103,
+    "first_observed_seconds": 19.0,
+    "effective_available_seconds": 19.0,
+    "sha256": "5639079a883d49ee44b2d2f93186ddc196b555f95760f7d73778be052059e24f",
+    "payload": {
+      "schema": 1,
+      "sequence": 22,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15225580886891543,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15225580886891543
+    }
+  },
+  {
+    "sequence": 23,
+    "data_close_seconds": 19.011688,
+    "first_observed_seconds": 19.108999999705702,
+    "effective_available_seconds": 19.108999999705702,
+    "sha256": "234764248fb25a6f732e44746908ad4d45de15ea243dc0a3834899ad89bcac7c",
+    "payload": {
+      "schema": 1,
+      "sequence": 23,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15226399082902672,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15226399082902672
+    }
+  },
+  {
+    "sequence": 24,
+    "data_close_seconds": 19.2515976,
+    "first_observed_seconds": 19.311999999918044,
+    "effective_available_seconds": 19.311999999918044,
+    "sha256": "73beff1b44a12c5a180f77c96257fa406c0c2eac1df1795da410f57a992a6610",
+    "payload": {
+      "schema": 1,
+      "sequence": 24,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15232126069497506,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15232126069497506
+    }
+  },
+  {
+    "sequence": 25,
+    "data_close_seconds": 20.1818248,
+    "first_observed_seconds": 20.265999999828637,
+    "effective_available_seconds": 20.265999999828637,
+    "sha256": "912ff86ec1009537cda08da71bae86e2ea1519a8b384e8ced86d490e482fb1d0",
+    "payload": {
+      "schema": 1,
+      "sequence": 25,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15232231963809684,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15232231963809684
+    }
+  },
+  {
+    "sequence": 26,
+    "data_close_seconds": 20.4991473,
+    "first_observed_seconds": 20.608999999705702,
+    "effective_available_seconds": 20.608999999705702,
+    "sha256": "ed926f9ba28b9c6836c1ae9daa054b1b01466991eae00da23ea4f257e1dca4de",
+    "payload": {
+      "schema": 1,
+      "sequence": 26,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15233190438866204,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15233190438866204
+    }
+  },
+  {
+    "sequence": 27,
+    "data_close_seconds": 21.6715466,
+    "first_observed_seconds": 21.733999999705702,
+    "effective_available_seconds": 21.733999999705702,
+    "sha256": "b933ccca88b4423b11c707b99d8955d9b8d0ca11e2b957c840d23253d9a6e751",
+    "payload": {
+      "schema": 1,
+      "sequence": 27,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15233934168446303,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15233934168446303
+    }
+  },
+  {
+    "sequence": 28,
+    "data_close_seconds": 22.8652782,
+    "first_observed_seconds": 22.983999999705702,
+    "effective_available_seconds": 22.983999999705702,
+    "sha256": "ae8731cf33d89c868735e197be12fc5de13c9fa3d7ba5421189adf3de24c0370",
+    "payload": {
+      "schema": 1,
+      "sequence": 28,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15236426242409812,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15236426242409812
+    }
+  },
+  {
+    "sequence": 29,
+    "data_close_seconds": 23.1776738,
+    "first_observed_seconds": 23.233999999705702,
+    "effective_available_seconds": 23.233999999705702,
+    "sha256": "e93881dd913752ca50d96160fbc8b75c75d3e32e4ee7b64d6bdb94285f235b31",
+    "payload": {
+      "schema": 1,
+      "sequence": 29,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15236426242409873,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15236426242409873
+    }
+  },
+  {
+    "sequence": 30,
+    "data_close_seconds": 27.5576447,
+    "first_observed_seconds": 27.625,
+    "effective_available_seconds": 27.625,
+    "sha256": "231999675755205472ef4db91ef276deed97c1410df3e91309dededd33b388f1",
+    "payload": {
+      "schema": 1,
+      "sequence": 30,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15241568243232587,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15241568243232587
+    }
+  },
+  {
+    "sequence": 31,
+    "data_close_seconds": 27.5924386,
+    "first_observed_seconds": 27.686999999918044,
+    "effective_available_seconds": 27.686999999918044,
+    "sha256": "d94fbf56e949d362bd78496f6b218e31940a4a3b288bbcdefd3601b43dbf3a90",
+    "payload": {
+      "schema": 1,
+      "sequence": 31,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15241814708158194,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15241814708158194
+    }
+  },
+  {
+    "sequence": 32,
+    "data_close_seconds": 27.6092067,
+    "first_observed_seconds": 27.686999999918044,
+    "effective_available_seconds": 27.686999999918044,
+    "sha256": "50c9a866baad9569b81b739eeccd61e79a90b1d1b1ad91e873cbdd491aa14b11",
+    "payload": {
+      "schema": 1,
+      "sequence": 32,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15243192963665522,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15243192963665522
+    }
+  },
+  {
+    "sequence": 33,
+    "data_close_seconds": 27.6295226,
+    "first_observed_seconds": 27.686999999918044,
+    "effective_available_seconds": 27.686999999918044,
+    "sha256": "0bb8cc15af5857f4003232bd019190e70f1dab4f53577fa8e45bec98cd9eb4df",
+    "payload": {
+      "schema": 1,
+      "sequence": 33,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15244149921442016,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15244149921442016
+    }
+  },
+  {
+    "sequence": 34,
+    "data_close_seconds": 27.6647935,
+    "first_observed_seconds": 27.765999999828637,
+    "effective_available_seconds": 27.765999999828637,
+    "sha256": "36267875ee8ef35c239f022174a85221216e2e9b0786a09dab4e42d0771b2937",
+    "payload": {
+      "schema": 1,
+      "sequence": 34,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15244627632112845,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15244627632112845
+    }
+  },
+  {
+    "sequence": 35,
+    "data_close_seconds": 33.1296801,
+    "first_observed_seconds": 33.2339999997057,
+    "effective_available_seconds": 33.2339999997057,
+    "sha256": "7916382e8d2689b0330413245484fd313384630c560b07388ec0880588b0bb7d",
+    "payload": {
+      "schema": 1,
+      "sequence": 35,
+      "kind": "witness",
+      "call": 5,
+      "source": "native_MIPSOL_verified_original_routes",
+      "improving": 1,
+      "objective": 0.2731235318632457,
+      "G": 0.07363023815532205,
+      "P": 1.3299552913861579,
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            30,
+            15,
+            19,
+            25,
+            22,
+            21,
+            24,
+            6,
+            9,
+            0
+          ],
+          "operations": [
+            {
+              "station": 30,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 15,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 19,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 12
+            },
+            {
+              "station": 21,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 24,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 9,
+              "pickup": 1,
+              "drop": 0
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            27,
+            3,
+            18,
+            5,
+            29,
+            26,
+            8,
+            23,
+            11,
+            0
+          ],
+          "operations": [
+            {
+              "station": 27,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 3,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 5,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 29,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 8,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 23,
+              "pickup": 0,
+              "drop": 5
+            },
+            {
+              "station": 11,
+              "pickup": 5,
+              "drop": 0
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            28,
+            4,
+            10,
+            7,
+            13,
+            20,
+            14,
+            17,
+            2,
+            0
+          ],
+          "operations": [
+            {
+              "station": 28,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 4,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 10,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 7,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 20,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 14,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 7
+            },
+            {
+              "station": 2,
+              "pickup": 0,
+              "drop": 13
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 36,
+    "data_close_seconds": 33.4341049,
+    "first_observed_seconds": 33.51599999982864,
+    "effective_available_seconds": 33.51599999982864,
+    "sha256": "e06a225623e5146b85b7ef23e4fef6337f6b3ef2c22da29c5475d4b3695b1ee9",
+    "payload": {
+      "schema": 1,
+      "sequence": 36,
+      "kind": "witness",
+      "call": 5,
+      "source": "native_MIPSOL_verified_original_routes",
+      "improving": 1,
+      "objective": 0.2441515231492018,
+      "G": 0.06867070622872752,
+      "P": 1.169872112803162,
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            30,
+            15,
+            19,
+            25,
+            22,
+            21,
+            24,
+            6,
+            9,
+            0
+          ],
+          "operations": [
+            {
+              "station": 30,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 15,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 19,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 12
+            },
+            {
+              "station": 21,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 24,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 9,
+              "pickup": 1,
+              "drop": 0
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            3,
+            27,
+            18,
+            5,
+            26,
+            29,
+            11,
+            8,
+            23,
+            0
+          ],
+          "operations": [
+            {
+              "station": 3,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 27,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 7
+            },
+            {
+              "station": 5,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 8
+            },
+            {
+              "station": 29,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 11,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 8,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 23,
+              "pickup": 0,
+              "drop": 8
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            28,
+            4,
+            10,
+            7,
+            13,
+            20,
+            14,
+            17,
+            2,
+            0
+          ],
+          "operations": [
+            {
+              "station": 28,
+              "pickup": 10,
+              "drop": 0
+            },
+            {
+              "station": 4,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 10,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 7,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 20,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 14,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 7
+            },
+            {
+              "station": 2,
+              "pickup": 0,
+              "drop": 13
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 37,
+    "data_close_seconds": 33.9918219,
+    "first_observed_seconds": 34.1089999997057,
+    "effective_available_seconds": 34.1089999997057,
+    "sha256": "d0a549cae2a181fa4b0be1551ba2460a08da1268d752440cf4a6546584363d0d",
+    "payload": {
+      "schema": 1,
+      "sequence": 37,
+      "kind": "witness",
+      "call": 5,
+      "source": "native_MIPSOL_verified_original_routes",
+      "improving": 1,
+      "objective": 0.18385034092393765,
+      "G": 0.0645022559349267,
+      "P": 0.7956538999267397,
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            27,
+            30,
+            6,
+            9,
+            11,
+            29,
+            26,
+            5,
+            8,
+            23,
+            0
+          ],
+          "operations": [
+            {
+              "station": 27,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 30,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 9,
+              "pickup": 0,
+              "drop": 1
+            },
+            {
+              "station": 11,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 29,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 5,
+              "pickup": 15,
+              "drop": 0
+            },
+            {
+              "station": 8,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 23,
+              "pickup": 0,
+              "drop": 10
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            3,
+            24,
+            18,
+            15,
+            21,
+            12,
+            25,
+            16,
+            19,
+            22,
+            0
+          ],
+          "operations": [
+            {
+              "station": 3,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 24,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 7
+            },
+            {
+              "station": 15,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 21,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 12,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 16,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 19,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 12
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            7,
+            28,
+            4,
+            10,
+            13,
+            14,
+            20,
+            17,
+            2,
+            0
+          ],
+          "operations": [
+            {
+              "station": 7,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 28,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 4,
+              "pickup": 0,
+              "drop": 12
+            },
+            {
+              "station": 10,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 14,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 20,
+              "pickup": 10,
+              "drop": 0
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 7
+            },
+            {
+              "station": 2,
+              "pickup": 0,
+              "drop": 12
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 38,
+    "data_close_seconds": 34.0062599,
+    "first_observed_seconds": 34.1089999997057,
+    "effective_available_seconds": 34.1089999997057,
+    "sha256": "e49c9c66a002163658f83d4decd72ed6e0ea9d2ec2d0c505ab13fe815569c3db",
+    "payload": {
+      "schema": 1,
+      "sequence": 38,
+      "kind": "witness",
+      "call": 5,
+      "source": "native_MIPSOL_verified_original_routes",
+      "improving": 1,
+      "objective": 0.17377347955132771,
+      "G": 0.06369212972715188,
+      "P": 0.7338756654945054,
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            3,
+            15,
+            21,
+            27,
+            8,
+            5,
+            26,
+            29,
+            11,
+            23,
+            0
+          ],
+          "operations": [
+            {
+              "station": 3,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 15,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 21,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 27,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 8,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 5,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 29,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 11,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 23,
+              "pickup": 0,
+              "drop": 10
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            12,
+            18,
+            24,
+            6,
+            30,
+            25,
+            16,
+            19,
+            22,
+            0
+          ],
+          "operations": [
+            {
+              "station": 12,
+              "pickup": 15,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 8
+            },
+            {
+              "station": 24,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 30,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 16,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 19,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 12
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            7,
+            28,
+            4,
+            10,
+            13,
+            14,
+            20,
+            17,
+            2,
+            0
+          ],
+          "operations": [
+            {
+              "station": 7,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 28,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 4,
+              "pickup": 0,
+              "drop": 12
+            },
+            {
+              "station": 10,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 14,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 20,
+              "pickup": 10,
+              "drop": 0
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 7
+            },
+            {
+              "station": 2,
+              "pickup": 0,
+              "drop": 12
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 39,
+    "data_close_seconds": 69.3837257,
+    "first_observed_seconds": 69.45299999974668,
+    "effective_available_seconds": 69.45299999974668,
+    "sha256": "0ff757d077a0061c1530a94f26b0592892fd982bec8ca496c6ad23fef7fc8caf",
+    "payload": {
+      "schema": 1,
+      "sequence": 39,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1524606201202589,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1524606201202589
+    }
+  },
+  {
+    "sequence": 40,
+    "data_close_seconds": 79.1728897,
+    "first_observed_seconds": 79.26599999982864,
+    "effective_available_seconds": 79.26599999982864,
+    "sha256": "e042f322340c7cb1bbeb0140b2f88c1b4373dc9772a04128d9d7b435f81e900d",
+    "payload": {
+      "schema": 1,
+      "sequence": 40,
+      "kind": "witness",
+      "call": 5,
+      "source": "native_MIPSOL_verified_original_routes",
+      "improving": 1,
+      "objective": 0.17355328820433558,
+      "G": 0.06441741898694428,
+      "P": 0.7275724614492755,
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            30,
+            9,
+            3,
+            15,
+            21,
+            8,
+            5,
+            26,
+            29,
+            11,
+            23,
+            0
+          ],
+          "operations": [
+            {
+              "station": 30,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 9,
+              "pickup": 0,
+              "drop": 2
+            },
+            {
+              "station": 3,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 15,
+              "pickup": 11,
+              "drop": 0
+            },
+            {
+              "station": 21,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 8,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 5,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 29,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 11,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 23,
+              "pickup": 0,
+              "drop": 10
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            27,
+            12,
+            18,
+            24,
+            6,
+            25,
+            16,
+            19,
+            22,
+            0
+          ],
+          "operations": [
+            {
+              "station": 27,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 12,
+              "pickup": 15,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 24,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 16,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 19,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 12
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            7,
+            28,
+            4,
+            10,
+            13,
+            14,
+            20,
+            17,
+            2,
+            0
+          ],
+          "operations": [
+            {
+              "station": 7,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 28,
+              "pickup": 10,
+              "drop": 0
+            },
+            {
+              "station": 4,
+              "pickup": 0,
+              "drop": 12
+            },
+            {
+              "station": 10,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 14,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 20,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 7
+            },
+            {
+              "station": 2,
+              "pickup": 0,
+              "drop": 12
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 41,
+    "data_close_seconds": 83.0941403,
+    "first_observed_seconds": 83.15599999995902,
+    "effective_available_seconds": 83.15599999995902,
+    "sha256": "5ab1738f2d173c8fa60a79c6932688faeea75f67fd007789658259afd5c458a9",
+    "payload": {
+      "schema": 1,
+      "sequence": 41,
+      "kind": "witness",
+      "call": 5,
+      "source": "native_MIPSOL_verified_original_routes",
+      "improving": 1,
+      "objective": 0.1695136426021273,
+      "G": 0.06313563738473599,
+      "P": 0.7091867014492754,
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            30,
+            9,
+            3,
+            15,
+            21,
+            8,
+            5,
+            26,
+            29,
+            11,
+            23,
+            0
+          ],
+          "operations": [
+            {
+              "station": 30,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 9,
+              "pickup": 0,
+              "drop": 2
+            },
+            {
+              "station": 3,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 15,
+              "pickup": 11,
+              "drop": 0
+            },
+            {
+              "station": 21,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 8,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 5,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 29,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 11,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 23,
+              "pickup": 0,
+              "drop": 10
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            27,
+            12,
+            18,
+            24,
+            6,
+            25,
+            16,
+            19,
+            1,
+            22,
+            0
+          ],
+          "operations": [
+            {
+              "station": 27,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 12,
+              "pickup": 15,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 24,
+              "pickup": 8,
+              "drop": 0
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 9
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 16,
+              "pickup": 0,
+              "drop": 11
+            },
+            {
+              "station": 19,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 1,
+              "pickup": 0,
+              "drop": 1
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 12
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            7,
+            28,
+            4,
+            10,
+            13,
+            14,
+            20,
+            17,
+            2,
+            0
+          ],
+          "operations": [
+            {
+              "station": 7,
+              "pickup": 6,
+              "drop": 0
+            },
+            {
+              "station": 28,
+              "pickup": 10,
+              "drop": 0
+            },
+            {
+              "station": 4,
+              "pickup": 0,
+              "drop": 12
+            },
+            {
+              "station": 10,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 10
+            },
+            {
+              "station": 14,
+              "pickup": 7,
+              "drop": 0
+            },
+            {
+              "station": 20,
+              "pickup": 9,
+              "drop": 0
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 7
+            },
+            {
+              "station": 2,
+              "pickup": 0,
+              "drop": 12
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 42,
+    "data_close_seconds": 92.9773905,
+    "first_observed_seconds": 93.06199999991804,
+    "effective_available_seconds": 93.06199999991804,
+    "sha256": "76d4cf398113690d27815f14749bf646300641f36e2665266abf2c336af74b4a",
+    "payload": {
+      "schema": 1,
+      "sequence": 42,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1526550113207668,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1526550113207668
+    }
+  },
+  {
+    "sequence": 43,
+    "data_close_seconds": 109.8173831,
+    "first_observed_seconds": 109.875,
+    "effective_available_seconds": 109.875,
+    "sha256": "8dcda9e530935959aca4c77215b8fd5fc67572717383b03df920346dd922f91f",
+    "payload": {
+      "schema": 1,
+      "sequence": 43,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1527114893895028,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1527114893895028
+    }
+  },
+  {
+    "sequence": 44,
+    "data_close_seconds": 110.1375395,
+    "first_observed_seconds": 110.18699999991804,
+    "effective_available_seconds": 110.18699999991804,
+    "sha256": "ee245b5d841d11ff650b922327ead6c2229247ce86508968354103b32e975f6b",
+    "payload": {
+      "schema": 1,
+      "sequence": 44,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15288052687236883,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15288052687236883
+    }
+  },
+  {
+    "sequence": 45,
+    "data_close_seconds": 112.6783146,
+    "first_observed_seconds": 112.76599999982864,
+    "effective_available_seconds": 112.76599999982864,
+    "sha256": "d54c2207de5e2d949228ef61b5a09450ef9778f70ec425f86ecfbc98395a299c",
+    "payload": {
+      "schema": 1,
+      "sequence": 45,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.152975636360482,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.152975636360482
+    }
+  },
+  {
+    "sequence": 46,
+    "data_close_seconds": 113.4886292,
+    "first_observed_seconds": 113.56199999991804,
+    "effective_available_seconds": 113.56199999991804,
+    "sha256": "b0f1f0af18a2b0396916b0dd2e758fbc7634e8c894cbc9b09c1c0f23e1686e0e",
+    "payload": {
+      "schema": 1,
+      "sequence": 46,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15303593769321114,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15303593769321114
+    }
+  },
+  {
+    "sequence": 47,
+    "data_close_seconds": 116.4015942,
+    "first_observed_seconds": 116.46900000004098,
+    "effective_available_seconds": 116.46900000004098,
+    "sha256": "589890c7e6f62a12618be8aa6435b24c07c274d6c4cdc9af3af6c6b6c75807cf",
+    "payload": {
+      "schema": 1,
+      "sequence": 47,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15305990550786283,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15305990550786283
+    }
+  },
+  {
+    "sequence": 48,
+    "data_close_seconds": 116.8412121,
+    "first_observed_seconds": 116.92199999978766,
+    "effective_available_seconds": 116.92199999978766,
+    "sha256": "fa0656da5d28a9dd0c4b12cb32cbf3ea5f624a6020752a442f076ff5b658f7a0",
+    "payload": {
+      "schema": 1,
+      "sequence": 48,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15306554078742243,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15306554078742243
+    }
+  },
+  {
+    "sequence": 49,
+    "data_close_seconds": 119.7819255,
+    "first_observed_seconds": 119.875,
+    "effective_available_seconds": 119.875,
+    "sha256": "22b0bddd8a9c1fafac79c95be8782a0448fa37a7c2692475a8d70fa397231fe3",
+    "payload": {
+      "schema": 1,
+      "sequence": 49,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15308476702281476,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15308476702281476
+    }
+  },
+  {
+    "sequence": 50,
+    "data_close_seconds": 120.0464773,
+    "first_observed_seconds": 120.1089999997057,
+    "effective_available_seconds": 120.1089999997057,
+    "sha256": "14d431a2364721e3120ab4b694c65929556f129a83ad9f020abff5a11c8eb424",
+    "payload": {
+      "schema": 1,
+      "sequence": 50,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15308494539167303,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15308494539167303
+    }
+  },
+  {
+    "sequence": 51,
+    "data_close_seconds": 120.3250726,
+    "first_observed_seconds": 120.42199999978766,
+    "effective_available_seconds": 120.42199999978766,
+    "sha256": "7c5e4eaaefb35f451526dbfc48341aa3c28e4516e0651329428d364e592b7e62",
+    "payload": {
+      "schema": 1,
+      "sequence": 51,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1530858602879211,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1530858602879211
+    }
+  },
+  {
+    "sequence": 52,
+    "data_close_seconds": 125.8005291,
+    "first_observed_seconds": 125.8589999997057,
+    "effective_available_seconds": 125.8589999997057,
+    "sha256": "af5db861d45e568f927cf41080c8f36680435e512b427a0d88586bd6260a44a9",
+    "payload": {
+      "schema": 1,
+      "sequence": 52,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1531078519259478,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1531078519259478
+    }
+  },
+  {
+    "sequence": 53,
+    "data_close_seconds": 126.0904181,
+    "first_observed_seconds": 126.18699999991804,
+    "effective_available_seconds": 126.18699999991804,
+    "sha256": "83433af9b5db11f106107ca425b980a53de56153b8e5c9b7d62222a4ca96c1c7",
+    "payload": {
+      "schema": 1,
+      "sequence": 53,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15312083278691227,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15312083278691227
+    }
+  },
+  {
+    "sequence": 54,
+    "data_close_seconds": 129.3489679,
+    "first_observed_seconds": 129.46900000004098,
+    "effective_available_seconds": 129.46900000004098,
+    "sha256": "373f4b1220a8eeccd67a1956b9d0d53c34ccf32c32d0233536efe14e8c559ef3",
+    "payload": {
+      "schema": 1,
+      "sequence": 54,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15312409407701164,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15312409407701164
+    }
+  },
+  {
+    "sequence": 55,
+    "data_close_seconds": 130.7644303,
+    "first_observed_seconds": 130.84400000004098,
+    "effective_available_seconds": 130.84400000004098,
+    "sha256": "868f6631eb24c3f99672857a87110640164c02f3b60035c2425a3cc13caca6da",
+    "payload": {
+      "schema": 1,
+      "sequence": 55,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15313028021473557,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15313028021473557
+    }
+  },
+  {
+    "sequence": 56,
+    "data_close_seconds": 134.3296025,
+    "first_observed_seconds": 134.43699999991804,
+    "effective_available_seconds": 134.43699999991804,
+    "sha256": "9597400a643fba6d43815e2d48f097f043037e090b0e6e9cada057f165e75302",
+    "payload": {
+      "schema": 1,
+      "sequence": 56,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15313205239013894,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15313205239013894
+    }
+  },
+  {
+    "sequence": 57,
+    "data_close_seconds": 134.8163041,
+    "first_observed_seconds": 134.90599999995902,
+    "effective_available_seconds": 134.90599999995902,
+    "sha256": "d455fd0fce836d43166e024c50df85ac478ee928bd5275af9ccc320d8e10dd58",
+    "payload": {
+      "schema": 1,
+      "sequence": 57,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15313205993782528,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15313205993782528
+    }
+  },
+  {
+    "sequence": 58,
+    "data_close_seconds": 135.3778599,
+    "first_observed_seconds": 135.4839999997057,
+    "effective_available_seconds": 135.4839999997057,
+    "sha256": "1261f145ae1bc20409e94dfceb3f3b3d46a0b03fb4c5d606179dabe9e6371126",
+    "payload": {
+      "schema": 1,
+      "sequence": 58,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15313553385261136,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15313553385261136
+    }
+  },
+  {
+    "sequence": 59,
+    "data_close_seconds": 138.6553911,
+    "first_observed_seconds": 138.75,
+    "effective_available_seconds": 138.75,
+    "sha256": "c5a113e1acfab4beb7e868de6e4a92a143feeff9a813dccdbfb8e0a44006d885",
+    "payload": {
+      "schema": 1,
+      "sequence": 59,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15313560342360968,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15313560342360968
+    }
+  },
+  {
+    "sequence": 60,
+    "data_close_seconds": 142.6053419,
+    "first_observed_seconds": 142.68699999991804,
+    "effective_available_seconds": 142.68699999991804,
+    "sha256": "62d5028c750c25ad977c65edf88c5316625821c9a3decb592cb9309219328869",
+    "payload": {
+      "schema": 1,
+      "sequence": 60,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15313560891655054,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15313560891655054
+    }
+  },
+  {
+    "sequence": 61,
+    "data_close_seconds": 143.5919687,
+    "first_observed_seconds": 143.65599999995902,
+    "effective_available_seconds": 143.65599999995902,
+    "sha256": "45d95c979c8bb23613c1471729dbf55e4d035435d022ba114358a08ddab27e0e",
+    "payload": {
+      "schema": 1,
+      "sequence": 61,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15313584491765564,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15313584491765564
+    }
+  },
+  {
+    "sequence": 62,
+    "data_close_seconds": 158.5799401,
+    "first_observed_seconds": 158.625,
+    "effective_available_seconds": 158.625,
+    "sha256": "94d147b1e2e37a15afb6aca231afa9b88ae2e421b216b053e035516c471bb473",
+    "payload": {
+      "schema": 1,
+      "sequence": 62,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15313584707614103,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15313584707614103
+    }
+  },
+  {
+    "sequence": 63,
+    "data_close_seconds": 233.4394689,
+    "first_observed_seconds": 233.51599999982864,
+    "effective_available_seconds": 233.51599999982864,
+    "sha256": "5796b1eb3eaa4de63dc5d2ef796f518040bcc166e3c18bcb95a8d7ae2fb86335",
+    "payload": {
+      "schema": 1,
+      "sequence": 63,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15313712709144905,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15313712709144905
+    }
+  },
+  {
+    "sequence": 64,
+    "data_close_seconds": 275.3197344,
+    "first_observed_seconds": 275.39099999982864,
+    "effective_available_seconds": 275.39099999982864,
+    "sha256": "ba1a562d9ae29284da38fec5db6822bf200053d7c53bde583e01b2f6bed42cd2",
+    "payload": {
+      "schema": 1,
+      "sequence": 64,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15333583063541517,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15333583063541517
+    }
+  },
+  {
+    "sequence": 65,
+    "data_close_seconds": 297.6685128,
+    "first_observed_seconds": 297.76599999982864,
+    "effective_available_seconds": 297.76599999982864,
+    "sha256": "fc944a846bf991f7949cc11fb6eddd6ae8e75a06c2d2618a5c1985441c2792f7",
+    "payload": {
+      "schema": 1,
+      "sequence": 65,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15334488359213705,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15334488359213705
+    }
+  },
+  {
+    "sequence": 66,
+    "data_close_seconds": 318.2236859,
+    "first_observed_seconds": 318.280999999959,
+    "effective_available_seconds": 318.280999999959,
+    "sha256": "694165fd2905c6c739c7eb30aa6c89b848b5fa2c0c8c5af94c64698a75883e40",
+    "payload": {
+      "schema": 1,
+      "sequence": 66,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1533585309268536,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1533585309268536
+    }
+  },
+  {
+    "sequence": 67,
+    "data_close_seconds": 356.0247345,
+    "first_observed_seconds": 356.0779999997467,
+    "effective_available_seconds": 356.0779999997467,
+    "sha256": "04214aef847786443c79ebe7a63330cdd8cef710966732305297ac82a09e0705",
+    "payload": {
+      "schema": 1,
+      "sequence": 67,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15335883117578547,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15335883117578547
+    }
+  },
+  {
+    "sequence": 68,
+    "data_close_seconds": 379.2897243,
+    "first_observed_seconds": 379.39099999982864,
+    "effective_available_seconds": 379.39099999982864,
+    "sha256": "c9c018fecd1576dc7ce7f9e391817f6a6c1f5ae2c5ce08195f7fe6e520ebd4f4",
+    "payload": {
+      "schema": 1,
+      "sequence": 68,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1533589303841656,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1533589303841656
+    }
+  },
+  {
+    "sequence": 69,
+    "data_close_seconds": 404.0128944,
+    "first_observed_seconds": 404.1089999997057,
+    "effective_available_seconds": 404.1089999997057,
+    "sha256": "a107c3df5772a0bb45797d7f518cfce0c93c0325a81c4e10c2986d6f7451fccf",
+    "payload": {
+      "schema": 1,
+      "sequence": 69,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15335906277214487,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15335906277214487
+    }
+  },
+  {
+    "sequence": 70,
+    "data_close_seconds": 446.1174244,
+    "first_observed_seconds": 446.2029999997467,
+    "effective_available_seconds": 446.2029999997467,
+    "sha256": "8188f707abdb80e7eefbd5d03218f4966505fd17001608eabdcd3aaee8e43b9e",
+    "payload": {
+      "schema": 1,
+      "sequence": 70,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15335937673621342,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15335937673621342
+    }
+  },
+  {
+    "sequence": 71,
+    "data_close_seconds": 462.5584524,
+    "first_observed_seconds": 462.625,
+    "effective_available_seconds": 462.625,
+    "sha256": "9399f09ca969a798df5755c1e3d9a8558901f1fbbd106f250cf7f8f3c7c4a5b7",
+    "payload": {
+      "schema": 1,
+      "sequence": 71,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.153361982635368,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.153361982635368
+    }
+  },
+  {
+    "sequence": 72,
+    "data_close_seconds": 485.0150471,
+    "first_observed_seconds": 485.0779999997467,
+    "effective_available_seconds": 485.0779999997467,
+    "sha256": "bf0627b4f51bd9be51c044b6e481b3f8a57c7567b21f946aee9be062bdbf3c0c",
+    "payload": {
+      "schema": 1,
+      "sequence": 72,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15337155082189075,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15337155082189075
+    }
+  },
+  {
+    "sequence": 73,
+    "data_close_seconds": 510.4437633,
+    "first_observed_seconds": 510.5,
+    "effective_available_seconds": 510.5,
+    "sha256": "1370d3cf741798fc8ede333047589b4037e1c760a6032702a3ec41cb2275d508",
+    "payload": {
+      "schema": 1,
+      "sequence": 73,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534038908324541,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534038908324541
+    }
+  },
+  {
+    "sequence": 74,
+    "data_close_seconds": 534.3511793,
+    "first_observed_seconds": 534.405999999959,
+    "effective_available_seconds": 534.405999999959,
+    "sha256": "a1c90725bc2aac157fb5ba790b08860fd361de818b91ff11e77538b6cbabb356",
+    "payload": {
+      "schema": 1,
+      "sequence": 74,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534146441794229,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534146441794229
+    }
+  },
+  {
+    "sequence": 75,
+    "data_close_seconds": 565.0017126,
+    "first_observed_seconds": 565.061999999918,
+    "effective_available_seconds": 565.061999999918,
+    "sha256": "c57c1eaea442d937766dd6bfad444c6ddca7269da0c924bfe79c735d173ad629",
+    "payload": {
+      "schema": 1,
+      "sequence": 75,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534273631253922,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534273631253922
+    }
+  },
+  {
+    "sequence": 76,
+    "data_close_seconds": 580.2863043,
+    "first_observed_seconds": 580.3589999997057,
+    "effective_available_seconds": 580.3589999997057,
+    "sha256": "8988e855ba95fc318a22364c4d6be681b85401e85ba036c65470b18eecd6d6d0",
+    "payload": {
+      "schema": 1,
+      "sequence": 76,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15343638464087575,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15343638464087575
+    }
+  },
+  {
+    "sequence": 77,
+    "data_close_seconds": 634.5065175,
+    "first_observed_seconds": 634.594000000041,
+    "effective_available_seconds": 634.594000000041,
+    "sha256": "787852e6837778e5a6e2025405deffce90cda21475bebe381d2ec44f8f5211c7",
+    "payload": {
+      "schema": 1,
+      "sequence": 77,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534378332899167,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534378332899167
+    }
+  },
+  {
+    "sequence": 78,
+    "data_close_seconds": 642.0585038,
+    "first_observed_seconds": 642.125,
+    "effective_available_seconds": 642.125,
+    "sha256": "286c2ee8fdcba051466722393c15ef7f66e201e28e0fafaf1f1fa5c5d7486e89",
+    "payload": {
+      "schema": 1,
+      "sequence": 78,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344010655919446,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344010655919446
+    }
+  },
+  {
+    "sequence": 79,
+    "data_close_seconds": 682.2892024,
+    "first_observed_seconds": 682.3589999997057,
+    "effective_available_seconds": 682.3589999997057,
+    "sha256": "a0d062ba94fb372a83f0e49113ca46d02ac432d922010b377f80472b713bacbf",
+    "payload": {
+      "schema": 1,
+      "sequence": 79,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534406102823857,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534406102823857
+    }
+  },
+  {
+    "sequence": 80,
+    "data_close_seconds": 696.2233609,
+    "first_observed_seconds": 696.311999999918,
+    "effective_available_seconds": 696.311999999918,
+    "sha256": "8038d730bac96bade1c57b90abc862620b726b4df6ae168a694ea10aea03ee28",
+    "payload": {
+      "schema": 1,
+      "sequence": 80,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344061028238573,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344061028238573
+    }
+  },
+  {
+    "sequence": 81,
+    "data_close_seconds": 704.6029451,
+    "first_observed_seconds": 704.655999999959,
+    "effective_available_seconds": 704.655999999959,
+    "sha256": "d25b44eceba84e469ec50cd06ba7ccfa09b73290867479449a165b85b582f2f3",
+    "payload": {
+      "schema": 1,
+      "sequence": 81,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344061028238587,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344061028238587
+    }
+  },
+  {
+    "sequence": 82,
+    "data_close_seconds": 704.8741521,
+    "first_observed_seconds": 704.9839999997057,
+    "effective_available_seconds": 704.9839999997057,
+    "sha256": "da398150a807ff91db7aeb97adeb53d66ea6ec5b9b1207e74b678f034098b3d8",
+    "payload": {
+      "schema": 1,
+      "sequence": 82,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344061028238598,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344061028238598
+    }
+  },
+  {
+    "sequence": 83,
+    "data_close_seconds": 718.60554,
+    "first_observed_seconds": 718.7029999997467,
+    "effective_available_seconds": 718.7029999997467,
+    "sha256": "90ff4d9cb1c29284f03e010a25b33deceaa2544341089c5660990ae4faa550ea",
+    "payload": {
+      "schema": 1,
+      "sequence": 83,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344061028238626,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344061028238626
+    }
+  },
+  {
+    "sequence": 84,
+    "data_close_seconds": 790.4475637,
+    "first_observed_seconds": 790.5469999997877,
+    "effective_available_seconds": 790.5469999997877,
+    "sha256": "f7377d3de08512b796bf8ab1453480c1ba688cd9d7cd6441e8ba8671585dc57b",
+    "payload": {
+      "schema": 1,
+      "sequence": 84,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534406102823864,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534406102823864
+    }
+  },
+  {
+    "sequence": 85,
+    "data_close_seconds": 811.3902004,
+    "first_observed_seconds": 811.469000000041,
+    "effective_available_seconds": 811.469000000041,
+    "sha256": "f5047883abc2865821bdd8c5075ef5b22e6b961e2425760e98c439b93b97d993",
+    "payload": {
+      "schema": 1,
+      "sequence": 85,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344061028238798,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344061028238798
+    }
+  },
+  {
+    "sequence": 86,
+    "data_close_seconds": 852.7597027,
+    "first_observed_seconds": 852.8589999997057,
+    "effective_available_seconds": 852.8589999997057,
+    "sha256": "e67040762dc515a55a327853db49549ef282fdaa162bce04a92e3121208b4133",
+    "payload": {
+      "schema": 1,
+      "sequence": 86,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534413282917655,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534413282917655
+    }
+  },
+  {
+    "sequence": 87,
+    "data_close_seconds": 861.6746009,
+    "first_observed_seconds": 861.7659999998286,
+    "effective_available_seconds": 861.7659999998286,
+    "sha256": "5f12fbe28a99a10529317b0448d81397101fd5312a6d97dd639175b2921c16ef",
+    "payload": {
+      "schema": 1,
+      "sequence": 87,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344214936262252,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344214936262252
+    }
+  },
+  {
+    "sequence": 88,
+    "data_close_seconds": 869.103164,
+    "first_observed_seconds": 869.186999999918,
+    "effective_available_seconds": 869.186999999918,
+    "sha256": "05474423e134f802402679c4cd0c06cdd58da07b35894796fdcbaa3a3dec3f2b",
+    "payload": {
+      "schema": 1,
+      "sequence": 88,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344214936262324,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344214936262324
+    }
+  },
+  {
+    "sequence": 89,
+    "data_close_seconds": 881.6141981,
+    "first_observed_seconds": 881.719000000041,
+    "effective_available_seconds": 881.719000000041,
+    "sha256": "6ba35c268976f0295520f90fd0a40e30207d876acd11be4a883daed2922c894a",
+    "payload": {
+      "schema": 1,
+      "sequence": 89,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534421493626234,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534421493626234
+    }
+  },
+  {
+    "sequence": 90,
+    "data_close_seconds": 889.7006961,
+    "first_observed_seconds": 889.811999999918,
+    "effective_available_seconds": 889.811999999918,
+    "sha256": "4520bc97524167b175a5e843a5934b43f72170949db3d1176c67f3ba46b43a73",
+    "payload": {
+      "schema": 1,
+      "sequence": 90,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344214936262351,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344214936262351
+    }
+  },
+  {
+    "sequence": 91,
+    "data_close_seconds": 902.0631634,
+    "first_observed_seconds": 902.1409999998286,
+    "effective_available_seconds": 902.1409999998286,
+    "sha256": "aa7371857ffde4c2c897be6d4edd89a38a23448f07433186fcc4625d146a5b7b",
+    "payload": {
+      "schema": 1,
+      "sequence": 91,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344214936262357,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344214936262357
+    }
+  },
+  {
+    "sequence": 92,
+    "data_close_seconds": 907.8578821,
+    "first_observed_seconds": 907.936999999918,
+    "effective_available_seconds": 907.936999999918,
+    "sha256": "bbb54ff8f0174901cc1250620b076a6f32f35fc4c250381e3455a8387d9fade8",
+    "payload": {
+      "schema": 1,
+      "sequence": 92,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344214936262604,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344214936262604
+    }
+  },
+  {
+    "sequence": 93,
+    "data_close_seconds": 923.374459,
+    "first_observed_seconds": 923.469000000041,
+    "effective_available_seconds": 923.469000000041,
+    "sha256": "323a7523152795f74d0fc8380868c8104dbc41109c205326e85faa77d6786278",
+    "payload": {
+      "schema": 1,
+      "sequence": 93,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344261613994797,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344261613994797
+    }
+  },
+  {
+    "sequence": 94,
+    "data_close_seconds": 928.5390259,
+    "first_observed_seconds": 928.6409999998286,
+    "effective_available_seconds": 928.6409999998286,
+    "sha256": "0bc4005244716efbe126a13f39254d53717d86127c15b71ba59f3306e0d2d27c",
+    "payload": {
+      "schema": 1,
+      "sequence": 94,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344261613994808,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344261613994808
+    }
+  },
+  {
+    "sequence": 95,
+    "data_close_seconds": 934.9330465,
+    "first_observed_seconds": 935.030999999959,
+    "effective_available_seconds": 935.030999999959,
+    "sha256": "bf6341ab2010246983f1e6b14bea0a021f67f7475e6b9a79210b5630ccd7748a",
+    "payload": {
+      "schema": 1,
+      "sequence": 95,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534446196264661,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534446196264661
+    }
+  },
+  {
+    "sequence": 96,
+    "data_close_seconds": 942.2897939,
+    "first_observed_seconds": 942.3589999997057,
+    "effective_available_seconds": 942.3589999997057,
+    "sha256": "3a24d4b900b1d8e66f0a1acc5528348b41e792db543c7f94ba6310153185fc5e",
+    "payload": {
+      "schema": 1,
+      "sequence": 96,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344461962646636,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344461962646636
+    }
+  },
+  {
+    "sequence": 97,
+    "data_close_seconds": 955.8704269,
+    "first_observed_seconds": 955.936999999918,
+    "effective_available_seconds": 955.936999999918,
+    "sha256": "df655675b704f6b567797259f583d040ed026a73e0dd142da875b9186fc5ed72",
+    "payload": {
+      "schema": 1,
+      "sequence": 97,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344723872148625,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344723872148625
+    }
+  },
+  {
+    "sequence": 98,
+    "data_close_seconds": 964.5112838,
+    "first_observed_seconds": 964.6089999997057,
+    "effective_available_seconds": 964.6089999997057,
+    "sha256": "a31eb8c6b42950dcbf1db7147f15c2be39d7ee760072567fd938b0b2bd22de5f",
+    "payload": {
+      "schema": 1,
+      "sequence": 98,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344843075454828,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344843075454828
+    }
+  },
+  {
+    "sequence": 99,
+    "data_close_seconds": 969.965421,
+    "first_observed_seconds": 970.0469999997877,
+    "effective_available_seconds": 970.0469999997877,
+    "sha256": "5a0bc3ded00318f7f4339766549bf26a7493a4c4c11bd472577c0459e58196d1",
+    "payload": {
+      "schema": 1,
+      "sequence": 99,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15344843075454878,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15344843075454878
+    }
+  },
+  {
+    "sequence": 100,
+    "data_close_seconds": 978.8255561,
+    "first_observed_seconds": 978.905999999959,
+    "effective_available_seconds": 978.905999999959,
+    "sha256": "07ddbb292b50fc9881d2e88d02579b4227d3f5a0938b2071c3cdc151debc66c1",
+    "payload": {
+      "schema": 1,
+      "sequence": 100,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15346389972046995,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15346389972046995
+    }
+  },
+  {
+    "sequence": 101,
+    "data_close_seconds": 1062.5551052,
+    "first_observed_seconds": 1062.625,
+    "effective_available_seconds": 1062.625,
+    "sha256": "da8c9646b40d82110b9b3102934a43199f81dd13c75ce46308c982c504797a67",
+    "payload": {
+      "schema": 1,
+      "sequence": 101,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15346389972047006,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15346389972047006
+    }
+  },
+  {
+    "sequence": 102,
+    "data_close_seconds": 1079.0705935,
+    "first_observed_seconds": 1079.1409999998286,
+    "effective_available_seconds": 1079.1409999998286,
+    "sha256": "bd05d16a1cd06e68d511e3b2c010cd5ef991faa4a2690168899fe29657f2dbed",
+    "payload": {
+      "schema": 1,
+      "sequence": 102,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.1534653381285161,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.1534653381285161
+    }
+  },
+  {
+    "sequence": 103,
+    "data_close_seconds": 1089.7472738,
+    "first_observed_seconds": 1089.8589999997057,
+    "effective_available_seconds": 1089.8589999997057,
+    "sha256": "48c65b3320852ee07392357a652332f084676952eeb81d924561347bcc1ef7dd",
+    "payload": {
+      "schema": 1,
+      "sequence": 103,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.153465338128518,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.153465338128518
+    }
+  },
+  {
+    "sequence": 104,
+    "data_close_seconds": 1096.5107361,
+    "first_observed_seconds": 1096.5779999997467,
+    "effective_available_seconds": 1096.5779999997467,
+    "sha256": "4d95135cb5fd04ac14979618ed86e9b5a7546c29ad98ccfd1c28432fb1a9b216",
+    "payload": {
+      "schema": 1,
+      "sequence": 104,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15346552962461693,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15346552962461693
+    }
+  },
+  {
+    "sequence": 105,
+    "data_close_seconds": 1108.7183506,
+    "first_observed_seconds": 1108.780999999959,
+    "effective_available_seconds": 1108.780999999959,
+    "sha256": "5de1b84742a83f7361b09f8b9c0b79f581262bdba682d6b03c86234c3b5e05a6",
+    "payload": {
+      "schema": 1,
+      "sequence": 105,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15346582763161962,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15346582763161962
+    }
+  },
+  {
+    "sequence": 106,
+    "data_close_seconds": 1126.3815621,
+    "first_observed_seconds": 1126.5,
+    "effective_available_seconds": 1126.5,
+    "sha256": "38f77480cfac4e9ad63b03b161ae33bf0cbf1ee30a9c10662fcc16874d327728",
+    "payload": {
+      "schema": 1,
+      "sequence": 106,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15346582763162087,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15346582763162087
+    }
+  },
+  {
+    "sequence": 107,
+    "data_close_seconds": 1171.2901834,
+    "first_observed_seconds": 1171.3909999998286,
+    "effective_available_seconds": 1171.3909999998286,
+    "sha256": "6fa9ca436241157801d15c4f1b6849936249479d086c68e5fae861527c2da19f",
+    "payload": {
+      "schema": 1,
+      "sequence": 107,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15346582763162453,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15346582763162453
+    }
+  },
+  {
+    "sequence": 108,
+    "data_close_seconds": 1238.7046797,
+    "first_observed_seconds": 1238.811999999918,
+    "effective_available_seconds": 1238.811999999918,
+    "sha256": "2d85b6765314e558a64d019bbe5e51b28638e64af6401e387043103780f888a2",
+    "payload": {
+      "schema": 1,
+      "sequence": 108,
+      "kind": "bound",
+      "call": 5,
+      "native_bound": 0.15346582763163313,
+      "global_available": 1,
+      "inconsistent": 0,
+      "reason": "complete_frozen_cover_native_callback",
+      "global_bound": 0.15346582763163313
+    }
+  }
+]
