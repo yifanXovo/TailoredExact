@@ -803,6 +803,13 @@ void writeCompactLp(const Instance& instance,
     const bool station_state_value_disaggregated =
         station_state_vdp || station_state_vdj || station_state_log;
     const bool aggregate_mc4 = station_state_mode == "aggregate-mc4";
+    const bool state_service = options.round98_state_service != "off";
+    const bool projected_service = options.round98_state_service == "projected";
+    if (state_service && (!strengthened || !station_state_vdp ||
+        cutoff == nullptr || !cutoff->enabled || options.plain_baseline ||
+        (options.round98_state_service != "aggregate" && !projected_service))) {
+        throw std::runtime_error("round98_requires_complete_strengthened_vdp_interval");
+    }
     if (station_state_mode != "bit-product" && !aggregate_mc4 &&
         !station_state_value_disaggregated) {
         throw std::runtime_error("unknown_round55_station_state_formulation");
@@ -883,9 +890,9 @@ void writeCompactLp(const Instance& instance,
             const int pmax = std::min(instance.initial[i], instance.Q[k]);
             const int dmax = std::min(instance.capacity[i] - instance.initial[i], instance.Q[k]);
             vars.add(zName(k, i), 0, 1, "B");
-            vars.add(mName(k, i), 0, 1, "B");
-            vars.add(pName(k, i), 0, pmax, "I");
-            vars.add(dName(k, i), 0, dmax, "I");
+            if (!projected_service) vars.add(mName(k, i), 0, 1, "B");
+            vars.add(pName(k, i), 0, pmax, projected_service ? "C" : "I");
+            vars.add(dName(k, i), 0, dmax, projected_service ? "C" : "I");
             vars.add(lName(k, i), 0, instance.Q[k],
                      options.round66_arc_load_replacement ? "C" : "I");
             vars.add(uName(k, i), 0, V, "C");
@@ -1804,6 +1811,18 @@ void writeCompactLp(const Instance& instance,
             writeConstraint(out, cid, ep, "<=", 0);
             Expr ed; addTerm(ed, dName(k, i), 1); addTerm(ed, zName(k, i), -dmax);
             writeConstraint(out, cid, ed, "<=", 0);
+            if (projected_service) {
+                // Exact continuous projection of the ORIGINAL mode block.
+                // ep/ed above retain each zero-cap direction and visit bound.
+                if (pmax > 0 && dmax > 0) {
+                    Expr direction;
+                    addTerm(direction, pName(k, i), static_cast<double>(dmax));
+                    addTerm(direction, dName(k, i), static_cast<double>(pmax));
+                    addTerm(direction, zName(k, i),
+                            -static_cast<double>(pmax) * static_cast<double>(dmax));
+                    writeConstraint(out, cid, direction, "<=", 0.0);
+                }
+            } else {
             Expr mm; addTerm(mm, mName(k, i), 1); addTerm(mm, zName(k, i), -1);
             writeConstraint(out, cid, mm, "<=", 0);
             Expr pm; addTerm(pm, pName(k, i), 1); addTerm(pm, mName(k, i), -pmax);
@@ -1825,6 +1844,7 @@ void writeCompactLp(const Instance& instance,
                 writeConstraint(out, cid, dm, "<=", 0);
             } else if (static_stats) {
                 ++static_stats->exact_duplicate_rows_omitted;
+            }
             }
             Expr nonzero; addTerm(nonzero, pName(k, i), 1); addTerm(nonzero, dName(k, i), 1); addTerm(nonzero, zName(k, i), -1);
             writeConstraint(out, cid, nonzero, ">=", 0);
@@ -2939,6 +2959,15 @@ void writeCompactLp(const Instance& instance,
             Expr product_reconstruction;
             Expr ratio_reconstruction;
             Expr penalty_reconstruction;
+            Expr movement_reconstruction;
+            Expr visit_reconstruction;
+            if (state_service) {
+                for (int k = 0; k < M; ++k) {
+                    addTerm(movement_reconstruction, pName(k, i), 1.0);
+                    addTerm(movement_reconstruction, dName(k, i), 1.0);
+                    addTerm(visit_reconstruction, zName(k, i), 1.0);
+                }
+            }
             addTerm(inventory_link, yName(i), 1.0);
             addTerm(g_reconstruction, "G", -1.0);
             addTerm(product_reconstruction, zprodName(i), 1.0);
@@ -2948,6 +2977,11 @@ void writeCompactLp(const Instance& instance,
                 const std::string selector = stateName(i, y);
                 const std::string selected_g = stateGName(i, y);
                 addTerm(selector_sum, selector, 1.0);
+                if (state_service) {
+                    addTerm(movement_reconstruction, selector,
+                            -std::fabs(static_cast<double>(instance.initial[i]) - y));
+                    if (y == instance.initial[i]) addTerm(visit_reconstruction, selector, 1.0);
+                }
                 addTerm(inventory_link, selector, -static_cast<double>(y));
                 addTerm(g_reconstruction, selected_g, 1.0);
                 addTerm(product_reconstruction, selected_g,
@@ -2966,6 +3000,10 @@ void writeCompactLp(const Instance& instance,
                 addTerm(perspective_upper, selected_g, 1.0);
                 addTerm(perspective_upper, selector, -g_ub);
                 writeConstraint(out, cid, perspective_upper, "<=", 0.0);
+            }
+            if (state_service) {
+                writeConstraint(out, cid, movement_reconstruction, "=", 0.0);
+                writeConstraint(out, cid, visit_reconstruction, "=", 1.0);
             }
             writeConstraint(out, cid, selector_sum, "=", 1.0);
             writeConstraint(out, cid, inventory_link, "=", 0.0);
@@ -3984,7 +4022,26 @@ std::unordered_map<std::string, double> solveRootRelaxation(
 }
 
 std::vector<RoutePlan> reconstructRoutes(const Instance& instance,
-                                         const std::unordered_map<std::string, double>& v) {
+                                         const std::unordered_map<std::string, double>& v,
+                                         bool enforce_integer_operations = false) {
+    if (enforce_integer_operations) {
+        // p/d remain PHYSICAL integers even when their native type is C.
+        // Check every operation column, including unvisited stations, before
+        // constructing int-valued RoutePlan. Use the inherited IntFeasTol.
+        for (int k = 0; k < instance.M; ++k) {
+            for (int i = 1; i <= instance.V; ++i) {
+                for (const auto& name : {pName(k, i), dName(k, i)}) {
+                    const auto it = v.find(name);
+                    if (it == v.end() || !std::isfinite(it->second) ||
+                        it->second < -1e-5 ||
+                        it->second > std::numeric_limits<int>::max() ||
+                        std::fabs(it->second - std::round(it->second)) > 1e-5) {
+                        throw std::runtime_error("round98_nonintegral_physical_operation:" + name);
+                    }
+                }
+            }
+        }
+    }
     std::vector<RoutePlan> routes;
     for (int k = 0; k < instance.M; ++k) {
         RoutePlan route;
@@ -4574,8 +4631,9 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
 
 std::vector<RoutePlan> reconstructCanonicalCompactRoutes(
     const Instance& instance,
-    const std::unordered_map<std::string, double>& named_values) {
-    return reconstructRoutes(instance, named_values);
+    const std::unordered_map<std::string, double>& named_values,
+    bool enforce_integer_operations) {
+    return reconstructRoutes(instance, named_values, enforce_integer_operations);
 }
 
 SolveResult solveCplexBaseline(const Instance& instance, const SolveOptions& options) {
