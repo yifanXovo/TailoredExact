@@ -19,6 +19,8 @@ H1流程（ea37fbfcd，第二版下述补充除外）：
 
 证据分开记录：API返回码、MIPSOL完整向量匹配、后续MIP或最终native incumbent变化、结束时完整向量匹配。MIPSOL提交返回infinity为待处理含义之一，非拒绝。相同向量不证明唯一来源。Start物理状态匹配与node count帮助界定后启动证据，不能仅以MIPSOL序号宣称native来源。
 
+遥测计数的精确定义：历史名`native_incumbent_change`由`incumbent()`对每个尚未标记的submission检查`value <= submitted.objective + 1e-8`且`value < submitted.before - 1e-8`后写一条。因此它是“该提交阈值随后被native incumbent满足”的记录数，不是不同原生incumbent更新次数，也不要求value等于候选目标。一个更好native值可以同时产生多条记录；按(call,value)去重也不是完整原生更新轨迹。原日志/CSV字段保留，解释及派生计数见incumbent_observation_semantics.json。此更正不改变算法、提交接口或实验结果。
+
 成本：全进程支付构造、规范化、验证、映射、持久化与正常收尾。adapter RAII累计新callback路径包含cbget和event flush；closure/map为其嵌套子项不重复加总。setup、return观测另存native日志旁收据；archive handoff由phase ledger计时。OFF观测包含向量核查与新状态写盘，必须实测其成本，不先验称零开销。
 
 ## 第二版：非Start匹配状态与固定算子

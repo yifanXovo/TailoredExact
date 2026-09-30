@@ -149,3 +149,34 @@ preceding block is terminal and analyzed, are:
 Inspect real process and queue state before invoking; this command listing
 does not authorize duplicate launches. Blocks retain frozen input/T/cap/order,
 audit actual matrices between solvers, stop on failure and never retry.
+
+## D7 interruption and completed recovery (supersedes the queue commands above)
+
+D7 arm5 P-GRB reached the frozen supervisor hard stop; its complete result
+does not exist. The exact acknowledged interruption and old queue failure are
+preserved. Recovery completed only original arms6/7 normally, then exited0.
+Do not rerun either D7 queue. Because the original queue requires every prior
+arm normal, later V1/F2 must instead use the exact-exception continuation:
+
+```powershell
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_continue_development02.py --completed 7 --through 10
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_continue_development02.py --completed 10 --through 13
+```
+
+Only after the preceding block is terminal and analyzed. The exception is
+restricted to bound arm5 receipts, not arbitrary future interruptions.
+D7's actual successful zero-Optimize reporting commands were:
+
+```powershell
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_analyze_role_v3.py development02 D7
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_trajectories_v2.py development02 D7 development02_d7
+& 'D:/msys64/ucrt64/bin/python.exe' scripts/round97_cost_ledger.py development02_d7_complete
+```
+
+Existing outputs are immutable. The v3 analysis requires exact interrupted
+evidence bindings, leaves unavailable final/certificate/Optimize fields null,
+and distinguishes observed process cost from certification time. See
+development02_d7_report.md and development02_d7_interruption.md. Historical
+native_incumbent_changes CSV counts denote per-submission threshold records,
+not unique native updates; incumbent_observation_semantics.json documents the
+source-verified interpretation for all completed qualification/development.

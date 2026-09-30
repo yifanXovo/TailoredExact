@@ -1,0 +1,153 @@
+{
+  "schema": "round97-analysis-view-only-v1",
+  "analysis_only": true,
+  "source_batch": "development02",
+  "source_role": "D7",
+  "source_identity_path": "results/unified_exact_round97/development02/identity.json",
+  "source_identity_sha256": "517e6d79827cdbb75b94ec98dcf5b4c0c724fc738cfa1bc7448c8b4c67d57550",
+  "launches": [
+    {
+      "number": 5,
+      "id": "D7",
+      "arm": "P-GRB",
+      "mode": "off",
+      "operator": "r83",
+      "panel": {
+        "id": "D7",
+        "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "family": "citibike443-regional-v1",
+        "geography": "regional",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "input_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -373258443,
+          "canonical_sha256": "4cd7967ea4d65804e6ab7ae8913033454ba495766ff9eb03529bd935f6e0bace",
+          "columns": 13360,
+          "rows": 35618
+        },
+        "cap_seconds": 3600
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\05_D7_P-GRB",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 6,
+      "id": "D7",
+      "arm": "OFF",
+      "mode": "observe",
+      "operator": "r83",
+      "panel": {
+        "id": "D7",
+        "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "family": "citibike443-regional-v1",
+        "geography": "regional",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "input_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -373258443,
+          "canonical_sha256": "4cd7967ea4d65804e6ab7ae8913033454ba495766ff9eb03529bd935f6e0bace",
+          "columns": 13360,
+          "rows": 35618
+        },
+        "cap_seconds": 3600
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\06_D7_OFF",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 7,
+      "id": "D7",
+      "arm": "FEEDBACK",
+      "mode": "feedback",
+      "operator": "r96",
+      "panel": {
+        "id": "D7",
+        "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "family": "citibike443-regional-v1",
+        "geography": "regional",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "input_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -373258443,
+          "canonical_sha256": "4cd7967ea4d65804e6ab7ae8913033454ba495766ff9eb03529bd935f6e0bace",
+          "columns": 13360,
+          "rows": 35618
+        },
+        "cap_seconds": 3600
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\07_D7_FEEDBACK",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    }
+  ],
+  "maximum_new_solver_starts": 0,
+  "optimizer_calls": 0
+}
