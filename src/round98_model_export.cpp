@@ -16,7 +16,7 @@ int main(int argc, char** argv) { try {
     spec.add_verified_incumbent_row=true;spec.verified_incumbent=std::stod(argv[8]);
     spec.station_state_formulation="vd-p";spec.round51_subset_duration_big_m="off";
     const std::filesystem::path dir(argv[9]);std::filesystem::create_directories(dir);
-    for (const auto& mode : {"off","aggregate","projected"}) {
+    for (const auto& mode : {"off","aggregate","projected","vehicle-state"}) {
         opt.round98_state_service=mode;
         const auto a=ebrp::writeCanonicalCompactModel(in,opt,dir/(std::string(mode)+".lp"),spec);
         if (!a.written) throw std::runtime_error(a.failure_reason);

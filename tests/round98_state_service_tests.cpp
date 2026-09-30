@@ -2,6 +2,7 @@
 #include "PaperK1AmSf.hpp"
 #include "Evaluator.hpp"
 #include "Round98StateService.hpp"
+#include "MipStartMapping.hpp"
 #include <cmath>
 #include <fstream>
 #include <iostream>
@@ -33,6 +34,8 @@ int main(int argc,char** argv){try{
     admission.external_gini_interval_mip_policy="round55-vd-p";
     admission.round98_state_service="projected";
     require(ebrp::round98IsIsolatedENS(admission),"isolated research admission failed");
+    admission.round98_state_service="vehicle-state";
+    require(ebrp::round98IsIsolatedENS(admission),"vehicle-state research admission failed");
     auto incompatible=admission;incompatible.round97_native_closure="feedback";
     require(!ebrp::round98IsIsolatedENS(incompatible),"feedback admitted to isolated study");
     incompatible=admission;incompatible.plain_baseline=true;
@@ -41,7 +44,7 @@ int main(int argc,char** argv){try{
     require(!ebrp::round98IsIsolatedENS(incompatible),"historical mode rows admitted to projection");
     ebrp::CanonicalCompactModelSpec spec;spec.strengthened=true;spec.interval_restricted=true;
     spec.gamma_U=2.0/3;spec.station_state_formulation="vd-p";spec.round51_subset_duration_big_m="off";
-    for(const auto& mode:{"off","aggregate","projected"}){
+    for(const auto& mode:{"off","aggregate","projected","vehicle-state"}){
         opt.round98_state_service=mode;
         auto a=ebrp::writeCanonicalCompactModel(in,opt,dir/(std::string(mode)+".lp"),spec);
         require(a.written,"complete micro model export failed");
@@ -55,7 +58,7 @@ int main(int argc,char** argv){try{
     spec.gamma_U=0;spec.add_verified_incumbent_row=true;spec.verified_incumbent=.01;
     require(ebrp::verifySolution(forced,{{0,{0,2,1,0},{{2,2,0},{1,0,1}}}},.15).feasible,
         "forced singleton loaded-return physical witness rejected");
-    for(const auto& mode:{"off","aggregate","projected"}){
+    for(const auto& mode:{"off","aggregate","projected","vehicle-state"}){
         opt.round98_state_service=mode;
         auto a=ebrp::writeCanonicalCompactModel(forced,opt,dir/(std::string(mode)+"_forced.lp"),spec);
         require(a.written,"forced-state model export failed");
@@ -63,6 +66,27 @@ int main(int argc,char** argv){try{
         a=ebrp::writeCanonicalCompactModel(empty,opt,dir/(std::string(mode)+"_empty.lp"),spec);
         require(a.written,"empty-domain infeasible contract export failed");
     }
+    // A heterogeneous physical witness: only Q=3 can pick all three at i=2.
+    // Exercise selected, unselected, and unvisited theta columns, plus rejection
+    // of a nonexistent capacity pair. This is independent of writer name loops.
+    opt.round98_state_service="vehicle-state";
+    const std::vector<ebrp::RoutePlan> theta_routes={{1,{0,2,0},{{2,3,0}}}};
+    const auto theta_verified=ebrp::verifySolution(in,theta_routes,opt.lambda);
+    require(theta_verified.feasible,"heterogeneous theta witness invalid");
+    ebrp::SolverNeutralModelDomain theta_domain;
+    theta_domain.names={"theta_0_2_1","theta_1_2_0","theta_1_2_1","theta_1_3_2"};
+    theta_domain.lower_bounds.assign(4,0);theta_domain.upper_bounds.assign(4,1);
+    theta_domain.variable_types.assign(4,'C');
+    const auto mapped=ebrp::mapVerifiedRoutesToCanonicalModel(in,opt,theta_routes,
+        "micro_original_physical",0,1,theta_verified.objective,theta_domain);
+    require(mapped.complete,"theta Start mapping failed");
+    require(mapped.values==std::vector<double>({0,1,0,0}),"theta ownership/state mapping incorrect");
+    auto invalid_theta=theta_domain;invalid_theta.names[0]="theta_0_2_0";
+    require(!ebrp::mapVerifiedRoutesToCanonicalModel(in,opt,theta_routes,
+        "invalid_pair",0,1,theta_verified.objective,invalid_theta).complete,"ineligible capacity pair mapped");
+    invalid_theta.names[0]="theta_1_2_3";
+    require(!ebrp::mapVerifiedRoutesToCanonicalModel(in,opt,theta_routes,
+        "initial_state",0,1,theta_verified.objective,invalid_theta).complete,"initial theta state mapped");
     std::unordered_map<std::string,double> values;
     for(int k=0;k<2;++k)for(int i=1;i<=3;++i){values["p_"+std::to_string(k)+"_"+std::to_string(i)]=0;
         values["d_"+std::to_string(k)+"_"+std::to_string(i)]=0;}
@@ -77,6 +101,6 @@ int main(int argc,char** argv){try{
     const double b=10,Y=.5*8+.5*12,P=1,D=1;
     require(Y==b&&P+D==.5*2+.5*2,"integer-mean counterexample missing");
     require(.5/2+.5/2<=1,"C-only simultaneous-direction counterexample missing");
-    std::cout<<"projection_checks="<<checks<<" models=3 strict_decoder=passed optimizer_calls=0\n";
+    std::cout<<"projection_checks="<<checks<<" models=12 theta_mapper=passed strict_decoder=passed optimizer_calls=0\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

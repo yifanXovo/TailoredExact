@@ -3,7 +3,8 @@
 namespace ebrp {
 inline bool round98IsIsolatedENS(const SolveOptions& o) {
     if(o.round98_state_service=="off")return true;
-    return (o.round98_state_service=="aggregate"||o.round98_state_service=="projected")&&
+    return (o.round98_state_service=="aggregate"||o.round98_state_service=="projected"||
+        o.round98_state_service=="vehicle-state")&&
         o.algorithm_preset=="research-round83-vds-equal-net-exchange"&&
         o.method=="gcap-frontier"&&o.k1_am_sf_controller_enabled&&!o.plain_baseline&&
         !o.round66_arc_load_replacement&&!o.round65_budget&&o.round65_projection=="off"&&

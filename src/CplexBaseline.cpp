@@ -290,6 +290,15 @@ std::string stateName(int i, int y) {
 std::string stateGName(int i, int y) {
     return "state_g_" + std::to_string(i) + "_" + std::to_string(y);
 }
+std::string vehicleStateName(int k, int i, int y) {
+    return "theta_" + std::to_string(k) + "_" + std::to_string(i) + "_" + std::to_string(y);
+}
+bool vehicleStateEligible(const Instance& instance, int k, int i, int y) {
+    // Single nonzero unidirectional service cannot move more than Q[k].
+    // This is a necessary capacity condition, not a feasible-route claim.
+    const long long delta = static_cast<long long>(instance.initial[i]) - y;
+    return delta != 0 && std::llabs(delta) <= instance.Q[k];
+}
 std::string stateCodeName(int i, int bit) {
     return "state_code_" + std::to_string(i) + "_" + std::to_string(bit);
 }
@@ -804,7 +813,8 @@ void writeCompactLp(const Instance& instance,
         station_state_vdp || station_state_vdj || station_state_log;
     const bool aggregate_mc4 = station_state_mode == "aggregate-mc4";
     const bool state_service = options.round98_state_service != "off";
-    const bool projected_service = options.round98_state_service == "projected";
+    const bool vehicle_state_service = options.round98_state_service == "vehicle-state";
+    const bool projected_service = options.round98_state_service == "projected" || vehicle_state_service;
     if (state_service && (!strengthened || !station_state_vdp ||
         cutoff == nullptr || !cutoff->enabled || options.plain_baseline ||
         (options.round98_state_service != "aggregate" && !projected_service))) {
@@ -934,6 +944,12 @@ void writeCompactLp(const Instance& instance,
             for (int y = y_lb[i]; y <= y_ub[i]; ++y) {
                 vars.add(stateName(i, y), 0, 1, station_state_log ? "C" : "B");
                 vars.add(stateGName(i, y), 0, g_ub, "C");
+                if (vehicle_state_service) {
+                    for (int k = 0; k < M; ++k) {
+                        if (vehicleStateEligible(instance, k, i, y))
+                            vars.add(vehicleStateName(k, i, y), 0, 1, "C");
+                    }
+                }
                 if (static_stats) {
                     ++static_stats->station_state_selector_variables;
                     ++static_stats->station_state_perspective_variables;
@@ -1814,7 +1830,7 @@ void writeCompactLp(const Instance& instance,
             if (projected_service) {
                 // Exact continuous projection of the ORIGINAL mode block.
                 // ep/ed above retain each zero-cap direction and visit bound.
-                if (pmax > 0 && dmax > 0) {
+                if (!vehicle_state_service && pmax > 0 && dmax > 0) {
                     Expr direction;
                     addTerm(direction, pName(k, i), static_cast<double>(dmax));
                     addTerm(direction, dName(k, i), static_cast<double>(pmax));
@@ -2961,7 +2977,7 @@ void writeCompactLp(const Instance& instance,
             Expr penalty_reconstruction;
             Expr movement_reconstruction;
             Expr visit_reconstruction;
-            if (state_service) {
+            if (state_service && !vehicle_state_service) {
                 for (int k = 0; k < M; ++k) {
                     addTerm(movement_reconstruction, pName(k, i), 1.0);
                     addTerm(movement_reconstruction, dName(k, i), 1.0);
@@ -2977,7 +2993,7 @@ void writeCompactLp(const Instance& instance,
                 const std::string selector = stateName(i, y);
                 const std::string selected_g = stateGName(i, y);
                 addTerm(selector_sum, selector, 1.0);
-                if (state_service) {
+                if (state_service && !vehicle_state_service) {
                     addTerm(movement_reconstruction, selector,
                             -std::fabs(static_cast<double>(instance.initial[i]) - y));
                     if (y == instance.initial[i]) addTerm(visit_reconstruction, selector, 1.0);
@@ -3001,9 +3017,39 @@ void writeCompactLp(const Instance& instance,
                 addTerm(perspective_upper, selector, -g_ub);
                 writeConstraint(out, cid, perspective_upper, "<=", 0.0);
             }
-            if (state_service) {
+            if (state_service && !vehicle_state_service) {
                 writeConstraint(out, cid, movement_reconstruction, "=", 0.0);
                 writeConstraint(out, cid, visit_reconstruction, "=", 1.0);
+            }
+            if (vehicle_state_service) {
+                // Every noninitial state is linked, including empty pools.
+                for (int y = y_lb[i]; y <= y_ub[i]; ++y) {
+                    if (y == instance.initial[i]) continue;
+                    Expr state_mass;addTerm(state_mass, stateName(i, y), -1.0);
+                    for (int k = 0; k < M; ++k) {
+                        if (vehicleStateEligible(instance, k, i, y))
+                            addTerm(state_mass, vehicleStateName(k, i, y), 1.0);
+                    }
+                    writeConstraint(out, cid, state_mass, "=", 0.0);
+                }
+                // Empty per-vehicle pools explicitly fix z/p/d to zero.
+                // These rows imply A/B and C; do not add redundant copies.
+                for (int k = 0; k < M; ++k) {
+                    Expr vehicle_mass, pickup, delivery;
+                    addTerm(vehicle_mass, zName(k, i), 1.0);
+                    addTerm(pickup, pName(k, i), 1.0);
+                    addTerm(delivery, dName(k, i), 1.0);
+                    for (int y = y_lb[i]; y <= y_ub[i]; ++y) {
+                        if (!vehicleStateEligible(instance, k, i, y)) continue;
+                        const std::string theta = vehicleStateName(k, i, y);
+                        addTerm(vehicle_mass, theta, -1.0);
+                        addTerm(pickup, theta, -std::max(0.0, static_cast<double>(instance.initial[i]) - y));
+                        addTerm(delivery, theta, -std::max(0.0, static_cast<double>(y) - instance.initial[i]));
+                    }
+                    writeConstraint(out, cid, vehicle_mass, "=", 0.0);
+                    writeConstraint(out, cid, pickup, "=", 0.0);
+                    writeConstraint(out, cid, delivery, "=", 0.0);
+                }
             }
             writeConstraint(out, cid, selector_sum, "=", 1.0);
             writeConstraint(out, cid, inventory_link, "=", 0.0);

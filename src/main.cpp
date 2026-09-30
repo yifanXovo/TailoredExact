@@ -123,7 +123,7 @@ void usage() {
         << "[--round90-lp-g-split true|false] "
         << "[--round92-handling-activation true|false] "
         << "[--round96-route-order true|false] "
-        << "[--round98-state-service off|aggregate|projected] "
+        << "[--round98-state-service off|aggregate|projected|vehicle-state] "
         << "[--round97-native-closure off|observe|shadow|feedback] "
         << "[--round97-native-operator r83|r96] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
@@ -3362,7 +3362,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
          opt.external_gini_scheduling != "round31-nonblocking-native-bound"))
         throw std::runtime_error("Round96 route order requires isolated ENS-C Round83 gcap-frontier");
     if (opt.round98_state_service != "off" &&
-        opt.round98_state_service != "aggregate" && opt.round98_state_service != "projected")
+        opt.round98_state_service != "aggregate" && opt.round98_state_service != "projected" &&
+        opt.round98_state_service != "vehicle-state")
         throw std::runtime_error("Invalid Round98 state/service mode");
     if (!ebrp::round98IsIsolatedENS(opt))
         throw std::runtime_error("Round98 requires isolated ENS-C with unchanged startup and VD-P");
