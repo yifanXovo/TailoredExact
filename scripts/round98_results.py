@@ -22,6 +22,8 @@ def extract(label,campaigns):
         for r in records:
             launch=identity['launches'][r['number']-1];d=Path(r['destination']);audit=read(d/'audit.json')
             e=r['endpoint'] or {};p=launch['panel'];c=r['completion']
+            native=read(d/'result.json') if (d/'result.json').exists() and c['stop_reason']=='normal_return' else {}
+            native_prefix='gurobi_' if r['arm']=='P-GRB' else 'external_gini_tree_'
             rows.append(dict(campaign=name,number=r['number'],role=r['id'],arm=r['arm'],
                 V=p['V'],M=p['M'],Q=json.dumps(p['Q_vector']),T=p['T_seconds'],cap=launch['cap_seconds'],
                 input_sha256=p['input_sha256'],binary_sha256=identity['candidate_binary_sha256'],
@@ -30,7 +32,12 @@ def extract(label,campaigns):
                 U=e.get('U'),L=e.get('L'),gap=e.get('gap'),
                 relative_gap=e['gap']/max(abs(e['U']),1e-12) if e.get('U') is not None and e.get('gap') is not None else None,
                 optimizer_calls=audit.get('native_calls_started'),receipt_sha256=sha(d/'completion.json'),
-                audit_sha256=sha(d/'audit.json'),endpoint_source=e.get('source'),status=e.get('status')))
+                audit_sha256=sha(d/'audit.json'),endpoint_source=e.get('source'),status=e.get('status'),
+                work=native.get(native_prefix+'work'),nodes=native.get('gurobi_node_count' if r['arm']=='P-GRB' else 'external_gini_tree_nodes'),
+                model_build_seconds=native.get('external_gini_tree_model_build_seconds') if r['arm']!='P-GRB' else None,
+                lp_calls=native.get('external_gini_tree_lp_optimize_count') if r['arm']!='P-GRB' else 0,
+                partial_mip_calls=native.get('external_gini_tree_partial_mip_optimize_count') if r['arm']!='P-GRB' else 0,
+                terminal_mip_calls=native.get('external_gini_tree_terminal_mip_optimize_count') if r['arm']!='P-GRB' else 1))
             cost.append(dict(category='full_'+name,label=f'{name}/{r["number"]}/{r["id"]}/{r["arm"]}',
                 experimental_starts=1,optimizer_calls=audit.get('native_calls_started'),
                 outer_seconds=c['process_wall_seconds'],failed=not r['audit_passed'],stop_reason=c['stop_reason']))

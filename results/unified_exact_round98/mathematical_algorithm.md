@@ -111,6 +111,48 @@ proof never replaces epigraph feasibility by G=true Gini. Unfinished optional
 LP points, fractional decoded operations, unclosed coverage and restricted
 fixed-route optima never become whole-original certificates.
 
+## Evidence-directed vehicle-state candidate
+
+The saved R2 root vectors also motivate a possible vehicle-state extension.
+This section is a prospective mathematical candidate, not an implemented mode
+or a performance conclusion. In saved F5 coordinates, station45/vehicle0 has
+movement6.7046086386; allocating its z mass from the actual noninitial state
+mass pool, even with capacity eligibility, permits at most6.6840379466.
+The same necessary-condition screen detects allocations on C2/C3/D6 that
+cannot be extended. Detection counts include overlapping tests, and the first
+screen relied on native LP residual readback rather than a new all-bound/row
+replay. Those distinctions must survive into the final qualification.
+
+For every noninitial allowed state emit sum_(eligible k)theta_kiy=s_iy,
+even when no eligible vehicle exists (then s_iy=0). For every vehicle emit
+sum_y theta_kiy=z_ki, p_ki=sum_y(b-y)+theta_kiy and
+d_ki=sum_y(y-b)+theta_kiy, including empty pools. Eligibility here means only
+abs(y-b)<=Q_k, a proved necessary single-service capacity condition. It makes
+no claim about travel, whole-route pickup, depot return or route feasibility.
+Theta is nonnegative continuous; s/z stay integer. At an integer selected
+noninitial state, its unit mass and the unique unit vehicle marginal force
+the one eligible theta to1 and all others0. Initial inventory has no theta
+mass and fixes all service quantities/visits0. Thus p/d remain implicitly
+integer and every original physical witness extends by setting just its
+service vehicle/state theta to1. Actual original objective is unchanged.
+
+These rows imply A/B. They also imply the original-coefficient C continuously:
+at each eligible single-direction state its normalized movement is at most1;
+multiply by theta and sum to obtain p/a+d/c<=z. Zero direction caps prohibit
+the corresponding states/quantities. Therefore a production extension can
+replace A/B and C rather than add all of them redundantly. Original individual
+visit upper bounds and nonzero rows can remain as explicit common safeguards.
+All route/load/time/coverage/epigraph conditions remain. A local joint hull
+claim, if used, must specify only the vehicle/state block; it cannot imply
+global BRP ideality or promise a better optimal LP value or certification time.
+
+Domain endpoint tightening has another valid derivation:
+a'=min(Q,max_(allowed y)(b-y)+), c'=min(Q,max_(allowed y)(y-b)+).
+It is a stronger envelope in general, not pure elimination of the old mode
+block. On the four screened root domains these coefficients do not change,
+so no new root strengthening can be credited to that hypothesis. It may
+change later safe subdomains; those have not been assessed here.
+
 ## Literature and novelty limits
 
 Joint finite-state convexification uses standard Balas disjunctive programming

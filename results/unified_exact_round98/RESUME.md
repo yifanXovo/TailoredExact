@@ -37,6 +37,48 @@ Fresh v2 build is now build/research/round98-state-service-v2, campaign
 development02 has17 frozen starts/27300s, prototype development01 will not run
 its15 never-started arms. Formal development02 prefix is the current work;
 inspect its summary/runtime_status and live process before any continuation.
+As of 2026-10-01 02:43 China time, development02 records1--6 are complete
+and passed all formal audits. F2 ENS/R2/R1 certified at584.032/391.969/
+638.328s; P remained unproved at897.172s. F5 R2/P completed their3600s
+windows, both unproved, U/L=.32406675299850807/.28143823909935073 and
+.43423583676402355/.2682505969243228. Record7 F5 ENS is still running in
+exec session78472; the serial batch command is round98_run_batch.py
+development02 5 6 7. Never replay5/6 or start8 until7 completes and passes.
+The provisional sampled ENS point is not a formal endpoint. Records8--17
+have not started. After this batch, continue the frozen10 remaining launches,
+then make the evidence-based uniform candidate/revision decision.
+Partial cost extraction progress_20261001_0245 covers only completed work:
+42 conservative experiment starts,82 actual Optimize calls,10842.655772s.
+It excludes live record7 and all unstarted work. Current remainder including
+confirmation/three fresh matrix references and one selected Start audit would
+bring the conservative total to66 starts; preserve the six-start margin for
+an evidence-directed revision if needed. This is an accounting forecast,
+not authorization to skip a required research step.
+Record7 subsequently completed normally and passed: F5 ENS U/L=
+.32932369464104827/.2814538063444285, unproved at3597.25s. The entire
+F5 long trio is now complete, all unproved; no eventual-time ordering.
+Active exec session3850 now runs round98_run_batch.py development02
+8 9 10 11 12 13 14 15 16 17 consecutively. Record8 C2/P was active at
+the latest sample; read runtime_status/summary before resuming, never replay.
+Offline saved_vector_vehicle_state_screen.json (no native process/Optimize)
+found capacity-qualified state allocation necessary-condition violations in
+F5/C2/C3/D6. Counts2/18/6/16 include redundant detection items; they are not
+independent anomaly counts. Domain endpoint coefficient tightening alone
+changes none of these four root models; this is not a claim about later
+intervals. The read-only reviewer confirmed the greedy necessary bounds and
+actual saved hashes/input/capacities. A full independent all-row/bound replay
+is still required before claiming complete-model strictness. The script v2
+adds finite/relevant bounds, input/Q and missing-mass error handling; run it
+only after current performance batch (new exclusive output). F2 was skipped
+because its earlier diagnostic record lacks native primal-violation readback.
+If the full development result justifies deeper R3 theta reconstruction,
+preserve s/z integer and p/d continuous; all noninitial state mass equations
+(even zero eligible) and empty per-vehicle reconstruction rows are mandatory.
+Capacity eligibility is abs(y-b)<=Q and is not route feasibility. Theta rows
+can replace A/B and imply the original C; no source implementation exists yet.
+Potential finite revision reservation: one qualification batch+one fresh P
+reference+four matched arms at one informative role=6 additional experiment
+starts; planned selected Start audit is already in the66-start forecast.
 No confirmation, draft PR or adoption decision has yet completed.
 Do not mark goal complete before these and final read-only review/delivery.
 

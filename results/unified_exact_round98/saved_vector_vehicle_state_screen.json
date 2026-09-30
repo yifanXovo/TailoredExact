@@ -1,0 +1,391 @@
+{
+  "optimizer_calls": 0,
+  "new_solver_processes": 0,
+  "scope": "Offline analysis of existing qualified root vectors. No new LP or MIP. A failed necessary allocation condition proves lack of theta extension; passed conditions do not prove extension.",
+  "records": [
+    {
+      "role": "F2",
+      "skipped": "Legacy diagnostic record lacks native primal-violation readback",
+      "domain_coefficient_changes": null,
+      "maximum_domain_envelope_residual": null,
+      "necessary_allocation_violations": []
+    },
+    {
+      "role": "F5",
+      "model_sha256": "fe8a160c728836c298d083961136a324d24d5aa558640240f0c3339e647c908e",
+      "values_sha256": "b6e88b45a3732d728497b1504322e701099f694dcae62eb4a9c99b9222db8148",
+      "native_reported_primal_violation": 1.049160758270773e-14,
+      "domain_coefficient_changes": 0,
+      "maximum_domain_envelope_residual": 3.552713678800501e-14,
+      "necessary_allocation_violations": [
+        {
+          "station": 45,
+          "vehicle": 0,
+          "test": "movement_maximum",
+          "value": 6.704608638571571,
+          "bound": 6.6840379466097755,
+          "residual": 0.020570691961795617
+        },
+        {
+          "station": 45,
+          "vehicle": 1,
+          "test": "movement_minimum",
+          "value": 0.03786877383876107,
+          "bound": 0.058439465800556506,
+          "residual": 0.020570691961795437
+        }
+      ]
+    },
+    {
+      "role": "R97-C2",
+      "model_sha256": "d7b3d73745e4eb1edff62fe718ca583eba49a1ef829b17ecb0fa3d6efbeb9d4c",
+      "values_sha256": "53cf8fef469828aea64c3917f31e344446fc1a3218201811ab126bf84c2beabd",
+      "native_reported_primal_violation": 0.0,
+      "domain_coefficient_changes": 0,
+      "maximum_domain_envelope_residual": 2.842170943040401e-14,
+      "necessary_allocation_violations": [
+        {
+          "station": 9,
+          "vehicle": 0,
+          "test": "pickup_maximum",
+          "value": 11.05185177020069,
+          "bound": 11.010370354040138,
+          "residual": 0.04148141616055234
+        },
+        {
+          "station": 9,
+          "vehicle": 0,
+          "test": "movement_maximum",
+          "value": 11.05185177020069,
+          "bound": 11.022222187228866,
+          "residual": 0.02962958297182361
+        },
+        {
+          "station": 9,
+          "vehicle": 2,
+          "test": "pickup_minimum",
+          "value": 0.0,
+          "bound": 0.041481416160551086,
+          "residual": 0.041481416160551086
+        },
+        {
+          "station": 9,
+          "vehicle": 2,
+          "test": "movement_minimum",
+          "value": 0.051851770200689984,
+          "bound": 0.0814813531725131,
+          "residual": 0.02962958297182311
+        },
+        {
+          "station": 12,
+          "vehicle": 1,
+          "test": "pickup_maximum",
+          "value": 7.507922622182599,
+          "bound": 5.047535733095593,
+          "residual": 2.4603868890870064
+        },
+        {
+          "station": 12,
+          "vehicle": 1,
+          "test": "movement_maximum",
+          "value": 7.507922622182599,
+          "bound": 5.047535733095593,
+          "residual": 2.4603868890870064
+        },
+        {
+          "station": 12,
+          "vehicle": 2,
+          "test": "pickup_minimum",
+          "value": 0.4920773778174006,
+          "bound": 2.9524642669044074,
+          "residual": 2.460386889087007
+        },
+        {
+          "station": 12,
+          "vehicle": 2,
+          "test": "movement_minimum",
+          "value": 0.4920773778174006,
+          "bound": 2.9524642669044074,
+          "residual": 2.460386889087007
+        },
+        {
+          "station": 27,
+          "vehicle": 0,
+          "test": "delivery_minimum",
+          "value": 0.0,
+          "bound": 0.6030927835051618,
+          "residual": 0.6030927835051618
+        },
+        {
+          "station": 27,
+          "vehicle": 0,
+          "test": "movement_minimum",
+          "value": 0.04639175257731942,
+          "bound": 0.6494845360824719,
+          "residual": 0.6030927835051525
+        },
+        {
+          "station": 27,
+          "vehicle": 1,
+          "test": "delivery_maximum",
+          "value": 9.04639175257732,
+          "bound": 8.443298969072165,
+          "residual": 0.6030927835051543
+        },
+        {
+          "station": 27,
+          "vehicle": 1,
+          "test": "movement_maximum",
+          "value": 9.04639175257732,
+          "bound": 8.443298969072165,
+          "residual": 0.6030927835051543
+        },
+        {
+          "station": 29,
+          "vehicle": 0,
+          "test": "delivery_minimum",
+          "value": 0.2436932113428678,
+          "bound": 0.6274469972533433,
+          "residual": 0.3837537859104755
+        },
+        {
+          "station": 29,
+          "vehicle": 0,
+          "test": "movement_minimum",
+          "value": 0.2436932113428678,
+          "bound": 0.6274469972533433,
+          "residual": 0.3837537859104755
+        },
+        {
+          "station": 29,
+          "vehicle": 2,
+          "test": "delivery_maximum",
+          "value": 4.235795333191809,
+          "bound": 3.953408977645688,
+          "residual": 0.2823863555461208
+        },
+        {
+          "station": 29,
+          "vehicle": 2,
+          "test": "movement_maximum",
+          "value": 4.235795333191809,
+          "bound": 3.953408977645688,
+          "residual": 0.2823863555461208
+        },
+        {
+          "station": 29,
+          "vehicle": 3,
+          "test": "delivery_maximum",
+          "value": 1.5205114554653234,
+          "bound": 1.4191440251009684,
+          "residual": 0.10136743036435503
+        },
+        {
+          "station": 29,
+          "vehicle": 3,
+          "test": "movement_maximum",
+          "value": 1.5205114554653234,
+          "bound": 1.4191440251009684,
+          "residual": 0.10136743036435503
+        }
+      ]
+    },
+    {
+      "role": "R97-C3",
+      "model_sha256": "f0caa2b03e29d7f09a23c5c6ca7d50c3073d4a8d71842e3c6447631389cc86c8",
+      "values_sha256": "cc9a790eae980a8a15a372800b008055f8fd93aeea23820833830996c9936472",
+      "native_reported_primal_violation": 0.0,
+      "domain_coefficient_changes": 0,
+      "maximum_domain_envelope_residual": 2.842170943040401e-14,
+      "necessary_allocation_violations": [
+        {
+          "station": 26,
+          "vehicle": 1,
+          "test": "pickup_minimum",
+          "value": 0.0,
+          "bound": 0.3271919487853092,
+          "residual": 0.3271919487853092
+        },
+        {
+          "station": 26,
+          "vehicle": 1,
+          "test": "movement_minimum",
+          "value": 0.2221588954477776,
+          "bound": 0.6664766863433328,
+          "residual": 0.44431779089555523
+        },
+        {
+          "station": 26,
+          "vehicle": 2,
+          "test": "pickup_minimum",
+          "value": 0.0,
+          "bound": 0.8590990310388782,
+          "residual": 0.8590990310388782
+        },
+        {
+          "station": 26,
+          "vehicle": 2,
+          "test": "movement_minimum",
+          "value": 1.021885142264975,
+          "bound": 1.1983837685969017,
+          "residual": 0.1764986263319266
+        },
+        {
+          "station": 26,
+          "vehicle": 3,
+          "test": "pickup_maximum",
+          "value": 6.244044037712753,
+          "bound": 4.718468320330541,
+          "residual": 1.5255757173822113
+        },
+        {
+          "station": 26,
+          "vehicle": 3,
+          "test": "movement_maximum",
+          "value": 6.244044037712753,
+          "bound": 5.273223126651345,
+          "residual": 0.9708209110614074
+        }
+      ]
+    },
+    {
+      "role": "D6",
+      "model_sha256": "b65747808307f69db570b142c7e1038b416d412c259e8df96638315c8400a9cd",
+      "values_sha256": "45eb0ff6b055542822c756624dc3500516983321dfaad08096b19fad7157862b",
+      "native_reported_primal_violation": 0.0,
+      "domain_coefficient_changes": 0,
+      "maximum_domain_envelope_residual": 1.0658141036401503e-14,
+      "necessary_allocation_violations": [
+        {
+          "station": 4,
+          "vehicle": 0,
+          "test": "pickup_maximum",
+          "value": 9.582608695652173,
+          "bound": 8.591304347826085,
+          "residual": 0.9913043478260875
+        },
+        {
+          "station": 4,
+          "vehicle": 0,
+          "test": "movement_maximum",
+          "value": 9.582608695652173,
+          "bound": 8.591304347826085,
+          "residual": 0.9913043478260875
+        },
+        {
+          "station": 4,
+          "vehicle": 1,
+          "test": "pickup_minimum",
+          "value": 0.0,
+          "bound": 0.9913043478260869,
+          "residual": 0.9913043478260869
+        },
+        {
+          "station": 4,
+          "vehicle": 1,
+          "test": "movement_minimum",
+          "value": 0.4956521739130435,
+          "bound": 1.4869565217391307,
+          "residual": 0.9913043478260872
+        },
+        {
+          "station": 6,
+          "vehicle": 0,
+          "test": "delivery_maximum",
+          "value": 6.177554966871472,
+          "bound": 6.056757040028352,
+          "residual": 0.12079792684312007
+        },
+        {
+          "station": 6,
+          "vehicle": 0,
+          "test": "movement_maximum",
+          "value": 6.177554966871472,
+          "bound": 6.063114825651675,
+          "residual": 0.11444014121979773
+        },
+        {
+          "station": 6,
+          "vehicle": 1,
+          "test": "delivery_minimum",
+          "value": 0.0,
+          "bound": 0.12079792684311996,
+          "residual": 0.12079792684311996
+        },
+        {
+          "station": 6,
+          "vehicle": 1,
+          "test": "movement_minimum",
+          "value": 0.09059844513234055,
+          "bound": 0.20503858635213973,
+          "residual": 0.11444014121979917
+        },
+        {
+          "station": 11,
+          "vehicle": 0,
+          "test": "delivery_maximum",
+          "value": 5.327534219308185,
+          "bound": 4.838660089309038,
+          "residual": 0.4888741299991466
+        },
+        {
+          "station": 11,
+          "vehicle": 0,
+          "test": "movement_maximum",
+          "value": 5.327534219308185,
+          "bound": 4.838660089309038,
+          "residual": 0.4888741299991466
+        },
+        {
+          "station": 11,
+          "vehicle": 1,
+          "test": "delivery_minimum",
+          "value": 0.0,
+          "bound": 0.4888741299991469,
+          "residual": 0.4888741299991469
+        },
+        {
+          "station": 11,
+          "vehicle": 1,
+          "test": "movement_minimum",
+          "value": 0.06666465409079318,
+          "bound": 0.555538784089941,
+          "residual": 0.48887412999914776
+        },
+        {
+          "station": 21,
+          "vehicle": 0,
+          "test": "delivery_maximum",
+          "value": 5.170271120085052,
+          "bound": 4.44548355902633,
+          "residual": 0.7247875610587213
+        },
+        {
+          "station": 21,
+          "vehicle": 0,
+          "test": "movement_maximum",
+          "value": 5.170271120085052,
+          "bound": 4.44548355902633,
+          "residual": 0.7247875610587213
+        },
+        {
+          "station": 21,
+          "vehicle": 1,
+          "test": "delivery_minimum",
+          "value": 0.09059844513234055,
+          "bound": 0.8153860061910649,
+          "residual": 0.7247875610587244
+        },
+        {
+          "station": 21,
+          "vehicle": 1,
+          "test": "movement_minimum",
+          "value": 0.09059844513234055,
+          "bound": 0.8153860061910649,
+          "residual": 0.7247875610587244
+        }
+      ]
+    }
+  ],
+  "source_sha256": "95d47cc6348ba01ec3c7ecb8e8df6c738e546606b2164c1b84a1ae49f3a4a832"
+}
