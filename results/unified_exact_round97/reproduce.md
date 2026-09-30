@@ -40,6 +40,11 @@ re-audit. Compact tar.gz journal/observation archives were byte-checked member
 by member at export. Extract only into a separate inspection root, never over
 raw runs. The per-role evidence JSON files list archive hashes and contents.
 
+`git_byte_preservation.json` documents the final repair of historical newline
+normalization in Git blobs. Frozen original bytes/hashes were retained and
+re-staged under existing `-text` attributes; this is no new experiment. The
+final Git blobs, not merely the local working files, were checked for equality.
+
 ## Frozen builds and numerical environment
 
 Repository `yifanXovo/TailoredExact`, branch

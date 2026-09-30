@@ -76,3 +76,17 @@ comparison scope. Threshold records are not unique incumbent updates. Same
 vectors are not unique provenance. The best later native endpoint need not be
 a closure output. Numeric zero-gap requests and tiny signed certificate gaps
 remain the inherited numerical contract, not rational exactness.
+
+## Byte-exact Git delivery
+
+A final packaging check first added15 indexed early receipts/results that had
+remained local. A subsequent comparison of Git blobs to frozen original bytes
+found older LF-normalized blobs despite current `-text` attributes. Among3309
+tracked Round97 result/script/test/reference files,1151 differed only in CRLF/LF
+encoding; there was no semantic difference. Original working files and all
+frozen hashes were preserved. Exact-path re-staging under the existing `-text`
+rules made all3309 Git index blobs byte-identical to originals. This corrects
+the earlier delivery commitf775b13c7; it does not rerun an experiment or alter
+its result. `git_byte_preservation.json` records each old blob and original
+SHA256. Unrelated user files were excluded. The goal was kept incomplete until
+this packaging repair and final PR synchronization were verified.
