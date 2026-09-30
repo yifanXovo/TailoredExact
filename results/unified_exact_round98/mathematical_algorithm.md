@@ -113,9 +113,9 @@ fixed-route optima never become whole-original certificates.
 
 ## Evidence-directed vehicle-state candidate
 
-The saved R2 root vectors also motivate a possible vehicle-state extension.
-This section is a prospective mathematical candidate, not an implemented mode
-or a performance conclusion. In saved F5 coordinates, station45/vehicle0 has
+The saved R2 root vectors motivate the implemented R3 vehicle-state extension.
+The mode is `vehicle-state`; performance remains unknown until its matched
+development and frozen confirmation. In saved F5 coordinates, station45/vehicle0 has
 movement6.7046086386; allocating its z mass from the actual noninitial state
 mass pool, even with capacity eligibility, permits at most6.6840379466.
 The same necessary-condition screen detects allocations on C2/C3/D6 that

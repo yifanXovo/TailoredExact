@@ -3,7 +3,7 @@ import hashlib,json,os,subprocess,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'results/unified_exact_round98'
-BUILD=ROOT/'build/research/round98-state-service-v2'
+BUILD=ROOT/'build/research/round98-state-service-v3'
 CMAKE=Path('D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe')
 NINJA=Path('D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe')
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()

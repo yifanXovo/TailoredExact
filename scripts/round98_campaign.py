@@ -4,7 +4,7 @@ prepare <name> <roles.json> pins the current source, runtime and fresh P matrix.
 run <name> <number> admits exactly the next never-started arm, no automatic retry.
 The inherited R90 supervisor accounts for the whole process and durable journal.
 """
-import argparse,json,math,subprocess,time
+import argparse,json,math,subprocess,time,shutil
 import round90_lp_g_g3 as r90
 import round94_lpg_formal_recovery_v3 as scope
 import round96_external as ext
@@ -29,7 +29,8 @@ def adapter(launch,observations,completion,identity):
             assert native_scope['native_calls']==ledger_count,'Optimize ledger/journal call count differs'
         expected={'P-GRB':'custom','ENS-C':'research-round83-vds-equal-net-exchange',
             'R1':'research-round98-ensc-state-service-aggregate',
-            'R2':'research-round98-ensc-state-service-projected'}[arm]
+            'R2':'research-round98-ensc-state-service-projected',
+            'R3':'research-round98-ensc-state-service-vehicle-state'}[arm]
         assert result['algorithm_preset']==expected
     audited=r90.evidence.audit(ROOT,launch['panel'],observations,identity['candidate_binary_sha256'])
     r90.evidence.finalize_endpoint(ROOT,launch['panel'],arm,audited,observations,result,reason,launch['panel']['reference'])
@@ -56,12 +57,63 @@ def adapter(launch,observations,completion,identity):
 
 def prepare(name,roles_path):
     ext.ensure_idle();camp=OUT/name;assert not camp.exists();camp.mkdir()
-    roles=read(roles_path)['roles'];binary=BUILD/'ExactEBRP.exe'
+    protocol=read(roles_path);roles=protocol['roles'];binary=BUILD/'ExactEBRP.exe'
+    grouped=protocol.get('reference_billing')=='one_finite_batch'
+    if grouped:
+        assert len(roles)==3 and protocol['phase']=='frozen independent confirmation'
+        write(camp/'reference_batch_launch.json',dict(planned_children=3,planned_optimizer_calls=0,
+            ids=[r['id'] for r in roles],maximum_child_seconds=60,source_sha256=sha(__file__)))
+    reference_batch_tick=time.perf_counter()
     prereg=dict(common=ext.COMMON,candidate_binary=binary.relative_to(ROOT).as_posix(),candidate_binary_sha256=sha(binary))
     references={};launches=[]
     for original in roles:
         p=dict(original);assert sha(ROOT/p['input_path'])==p['input_sha256']
         dest=camp/'reference'/p['id'];dest.mkdir(parents=True)
+        if 'prepaid_reference' in p:
+            # An explicitly declared earlier finite qualification already paid
+            # for this SAME frozen builder/input. Copy exact bytes, no process.
+            parent=OUT/'diagnostics'/p['prepaid_reference'];paid=read(parent/'summary.json')
+            assert paid['passed'] and paid['production_binary_sha256']==sha(binary)
+            assert paid['reference_binary_sha256']==sha(BUILD/'Round65ReferenceBuild.exe')
+            assert paid['source_bindings']==bindings() and paid['role']['input_sha256']==p['input_sha256']
+            source=parent/'plain_reference';fresh=read(source/'build.json')
+            for filename in ['build.json','original.lp']:shutil.copy2(source/filename,dest/filename)
+            write(dest/'completion.json',dict(returncode=0,outer_seconds=0,optimizer_calls=0,
+                already_billed_parent='qualification/'+p['prepaid_reference'],copy_only=True,
+                source_summary_sha256=sha(parent/'summary.json')))
+            write(dest/'launch.json',dict(copy_only=True,optimizer_calls=0,source=str(source)))
+        else:
+            fresh=build_reference(p,dest)
+        assert fresh['optimizer_calls']==0
+        if 'reference' in p:assert fresh==p['reference'],'fresh plain matrix drift'
+        p['reference']=references[p['id']]=fresh;p['instance_path']=p['input_path']
+        for arm in p['method_order']:
+            assert arm in ['P-GRB','ENS-C','R1','R2','R3']
+            number=len(launches)+1;dest=camp/'raw'/f'{number:02d}_{p["id"]}_{arm}'
+            command=(r90.audited_runner_utilities.command_for(prereg,p,arm,dest) if arm=='P-GRB'
+                     else r90.command_for(prereg,p,'ENS-C',dest))
+            if arm in ['R1','R2','R3']:command+=['--round98-state-service',
+                {'R1':'aggregate','R2':'projected','R3':'vehicle-state'}[arm]]
+            launches.append(dict(number=number,id=p['id'],arm=arm,panel=p,stage=name,destination=str(dest),
+                cap_seconds=p['cap_seconds'],hard_stop_seconds=p['cap_seconds']-2,command=command))
+    if grouped:
+        completions=[read(camp/'reference'/p['id']/'completion.json') for p in roles]
+        assert all(c['returncode']==0 and c['optimizer_calls']==0 for c in completions)
+        write(camp/'reference_batch_receipt.json',dict(actual_children=3,optimizer_calls=0,
+            outer_seconds=time.perf_counter()-reference_batch_tick,
+            child_seconds=sum(c['outer_seconds'] for c in completions),
+            completion_sha256={p['id']:sha(camp/'reference'/p['id']/'completion.json') for p in roles},
+            experimental_starts=1,stop_reason='normal_return',passed=True))
+    write(camp/'identity.json',dict(prereg=prereg,prereg_sha256=sha(roles_path),runner_sha256=sha(__file__),
+        candidate_binary_sha256=prereg['candidate_binary_sha256'],source_hashes=bindings(),helpers=helpers(),
+        dll_sha256=sha('D:/gurobi1302/win64/bin/gurobi130.dll'),input_manifest=str(Path(roles_path).resolve()),
+        reference_binary_sha256=sha(BUILD/'Round65ReferenceBuild.exe'),
+        references=references,launches=launches,planned_starts=len(launches),
+        maximum_process_seconds=sum(x['cap_seconds'] for x in launches),optimizer_calls=0,
+        no_algorithm_component_time_slices=True,prepared_unix=time.time()))
+    print(json.dumps(dict(prepared=name,planned_starts=len(launches),maximum_process_seconds=sum(x['cap_seconds'] for x in launches))))
+
+def build_reference(p,dest):
         cmd=list(map(str,[BUILD/'Round65ReferenceBuild.exe',p['input_path'],p['T_seconds'],p['pickup_seconds'],p['drop_seconds'],p['lambda'],dest]))
         write(dest/'launch.json',dict(command=cmd,optimizer_calls=0,binary_sha256=sha(BUILD/'Round65ReferenceBuild.exe')))
         tick=time.perf_counter()
@@ -71,23 +123,7 @@ def prepare(name,roles_path):
         assert ret.returncode==0
         fresh=read(dest/'build.json');assert fresh['optimizer_calls']==0
         if 'reference' in p:assert fresh==p['reference'],'fresh plain matrix drift'
-        p['reference']=references[p['id']]=fresh;p['instance_path']=p['input_path']
-        for arm in p['method_order']:
-            assert arm in ['P-GRB','ENS-C','R1','R2']
-            number=len(launches)+1;dest=camp/'raw'/f'{number:02d}_{p["id"]}_{arm}'
-            command=(r90.audited_runner_utilities.command_for(prereg,p,arm,dest) if arm=='P-GRB'
-                     else r90.command_for(prereg,p,'ENS-C',dest))
-            if arm in ['R1','R2']:command+=['--round98-state-service',{'R1':'aggregate','R2':'projected'}[arm]]
-            launches.append(dict(number=number,id=p['id'],arm=arm,panel=p,stage=name,destination=str(dest),
-                cap_seconds=p['cap_seconds'],hard_stop_seconds=p['cap_seconds']-2,command=command))
-    write(camp/'identity.json',dict(prereg=prereg,prereg_sha256=sha(roles_path),runner_sha256=sha(__file__),
-        candidate_binary_sha256=prereg['candidate_binary_sha256'],source_hashes=bindings(),helpers=helpers(),
-        dll_sha256=sha('D:/gurobi1302/win64/bin/gurobi130.dll'),input_manifest=str(Path(roles_path).resolve()),
-        reference_binary_sha256=sha(BUILD/'Round65ReferenceBuild.exe'),
-        references=references,launches=launches,planned_starts=len(launches),
-        maximum_process_seconds=sum(x['cap_seconds'] for x in launches),optimizer_calls=0,
-        no_algorithm_component_time_slices=True,prepared_unix=time.time()))
-    print(json.dumps(dict(prepared=name,planned_starts=len(launches),maximum_process_seconds=sum(x['cap_seconds'] for x in launches))))
+        return fresh
 
 def run(name,number):
     ext.ensure_idle();camp=OUT/name;q=read(camp/'identity.json')

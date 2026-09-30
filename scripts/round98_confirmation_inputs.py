@@ -39,5 +39,6 @@ def generate():
             pickup_seconds=60,drop_seconds=60,**{'lambda':.15},total_initial=sum(obj['initial']),
             total_target=sum(obj['target']),zero_excluded_by_stock_shortage=sum(obj['initial'])<sum(obj['target'])))
     write(OUT/'confirmation_protocol01.json',dict(roles=roles,recipe_sha256=sha(OUT/'confirmation_generation_recipe.json'),
-        candidate_freeze_sha256=sha(OUT/'candidate_freeze.json'),optimizer_calls=0,phase='frozen independent confirmation'))
+        candidate_freeze_sha256=sha(OUT/'candidate_freeze.json'),optimizer_calls=0,phase='frozen independent confirmation',
+        reference_billing='one_finite_batch'))
 if __name__=='__main__':{'freeze':freeze,'generate':generate}[sys.argv[1]]()
