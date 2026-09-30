@@ -22,6 +22,16 @@ implied integrality need full-run evidence despite equal LP projection.
 
 ## A/B and local hull
 
+The original physics remains Y_i=b_i+sum_k(d_ki-p_ki), r_i=Y_i/target_i,
+S=sum r_i, H=sum_(i<j)abs(r_i-r_j), true Gini=H/(V*S) for S>0 with
+the inherited zero-S convention. F=true Gini+lambda*sum_i weights_i*abs(r_i-1).
+Each station has at most one nonzero single-direction service. Vehicle k
+departs with load0, every route prefix has load in[0,Q_k], and the return load
+may be positive. Quantity/time convention remains
+travel+(pickup_time+drop_time)*sum pickup<=T. These local equations neither
+bound total pickup by Q_k nor conserve total station inventory. Mathematical
+T is separate from the experiment's whole-process cutoff.
+
 For nonnegative quantities, balance gives D-P=∑(y-b)s. A gives
 P+D=∑|b-y|s. Adding/subtracting yields exactly
 P=∑(b-y)+s and D=∑(y-b)+s. B gives v=∑(y!=b)s.
@@ -81,6 +91,25 @@ Complete ordered LP SHA/row_signature binds new rows/types/columns; native
 reuse is artifact/epoch scoped. Cutoff changes rebuild the state domain through
 the existing epoch invalidation. No matrix or old column order is reused across
 identities. New LP bounds may alter AM outcomes; full runs include that effect.
+
+At a legal original witness the final integer inventory chooses s=1, its q=G,
+all other s/q=0, actual route p/d/z/load unchanged. For a restricted leaf use
+the inherited legal true-G epigraph embedding inside its certified domain.
+At a new integer selection, A/balance force the appropriate one-direction
+quantity and B selects exactly one vehicle unless y=b. Old m is1 for pickup
+and0 for delivery/unvisited; if both direction caps vanish choose0. This
+constructs an old original feasible witness and identical original objective.
+It does not require preservation of irrelevant old auxiliary assignments.
+
+The new constraints preserve every legal original embedding in each valid
+cutoff/interval, and remove no physical witness from the union coverage. The
+inherited cutoff complement therefore remains valid. A LP/MIP leaf bound
+still requires the original numerical acceptance, actual interval identity,
+cutoff witness and complete current G-domain cover before global promotion.
+In particular G is an epigraph variable at arbitrary leaf points; the hull
+proof never replaces epigraph feasibility by G=true Gini. Unfinished optional
+LP points, fractional decoded operations, unclosed coverage and restricted
+fixed-route optima never become whole-original certificates.
 
 ## Literature and novelty limits
 

@@ -26,8 +26,18 @@ Next: finish/pin campaign harness and prospective dev order, fresh P-reference
 identity, real production complete R2 Start row audit. Then full development
 P/ENS/R2 on F2/F5/C2/C3/D6, informative R1 ablations, evidence-directed revision
 if first candidate poor, freeze and three design-isolated confirmations.
-Reserve two matched3600s groups (F5 and design-isolated medium/large). No formal
-full runs, confirmation, draft PR or adoption decision have yet completed.
+Reserve two matched3600s groups (F5 and design-isolated medium/large).
+Two v1 F2 production qualification processes completed (ENS584.25s, R2392.078s,
+both certified), but final R98 label was overwritten by the inherited snapshot.
+These are excluded from final performance. f371be680 corrects only the research
+identity; all original receipts remain. v1_paid_prefix_offline_audit and actual
+production_F2_R2_start passed, two complete Start vectors all rows/integer
+physical operations. Zero-Optimize v2 F2 matrices equal v1 bytes; ctest_v2 passed.
+Fresh v2 build is now build/research/round98-state-service-v2, campaign
+development02 has17 frozen starts/27300s, prototype development01 will not run
+its15 never-started arms. Formal development02 prefix is the current work;
+inspect its summary/runtime_status and live process before any continuation.
+No confirmation, draft PR or adoption decision has yet completed.
 Do not mark goal complete before these and final read-only review/delivery.
 
 Serial only: no compilation/heavy audits/compression while solver runs.
