@@ -1,0 +1,43 @@
+{
+  "batch": "analysis_views/confirmation01_C1_v4",
+  "source_bindings": {
+    "results/unified_exact_round97/analysis_views/confirmation01_C1_v4/identity.json": "ce530d3968edba6933d707225d7891b471ecd215108186ae56ab37aea0e6b1bd",
+    "results/unified_exact_round97/analysis_views/confirmation01_C1_v4/summary.jsonl": "3783e29ed37aca35a1356208a45ddb8e47db41cfacb951603d30f85edb7281ad",
+    "results/unified_exact_round97/confirmation01/raw/01_C1_P-GRB/audit.json": "a93d2ed74b82be6a1137a91ba0d6173e1deb04dbdb9993a0d9c94407b22c16b6",
+    "results/unified_exact_round97/confirmation01/raw/01_C1_P-GRB/completion.json": "903480a9367b69bbd023e2a4bc954c63d76c81443fa3ceddf819730b14c17007",
+    "results/unified_exact_round97/confirmation01/raw/01_C1_P-GRB/result.json": "cd3d94eb06702e4a85b6c5dc2d514eab220f818b92d44fed276ee0dd3b4502a5",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/external/round97/accepted_2_933658c0a9fced013809a0a2a685620068b686a9fbf4a55e14f40a7afca3f16d.json": "48abf76b3ce4786dcb836e3bbf872143eed9f0174800fd5bfb34dd4cb370aecd",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/external/round97/accepted_4_257f1e973814c09c9e0d960ee09d0fbb687cfd97a8499804cfaf63de808a8c02.json": "f2ab2ddf12f4fccd596ae80e367052f896c09e02856c1fbb1b21a86c5dd5687e",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/external/round97/accepted_6_b4c33ad8d1f80acdf1877e7f5fef84cd0766a64e20c5ad224c65393e47e2a6d8.json": "2c814187a8c0717ab7fad1a2b1297f8ec2666d6a36e41c8b7c7ce5668ffa787f",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/external/round97/accepted_6_0065920f328c3c775d2dca91e303088809ea0be0f19307f82755f6c91077a2dd.json": "91282e452a98d6af95cf81b6c4cb9edc4020e24a4ff6e99e4c48b4a3afdd0cb7",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/external/round97/accepted_6_6e46553009129a70bca99bf096d43176b7f56d842f656e36285817dc71f2ec54.json": "8f6d10ef5009811ce59187ef2945a56d02cd57d96e0bb44f351e0cee6eeb7af7",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/external/round97/accepted_8_8ce77ea77bc9c097ab889d2b16c775a9df6e0910970a946e063e5028bd893d30.json": "1ba5e2ebecda4c5abcb644afd9d7bbfb23b8e067e57cc6c098b740f43c3fe700",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/audit.json": "3b7a0e086a28aecc58c4d7c6166fe495a0f43d54897c30a01e9faff8a6e31766",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/completion.json": "d984f23921025a991c8b39dbb23312c9da49dbc92d66cab0dca0290fb234c943",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/result.json": "0bda4cd5a851c03817774827171673636521e7c7bfca01a7c9dd83e0ef7de75e",
+    "results/unified_exact_round97/confirmation01/raw/02_C1_FEEDBACK/external/round97/events.jsonl": "c436a7d1f358c72f793ca894ef8d5dd99b2af43f76507d6b9a7580cef3a8bfeb",
+    "results/unified_exact_round97/confirmation01/raw/03_C1_OFF/audit.json": "98a90480b9089b0492ef46f8685313e53944b1d283b5c50057e561474e608c42",
+    "results/unified_exact_round97/confirmation01/raw/03_C1_OFF/completion.json": "81d0508c2a80d870279c05cd5584e6be171d0263d89070d47713f2379f6db16d",
+    "results/unified_exact_round97/confirmation01/raw/03_C1_OFF/result.json": "ca034b31d6e0ef83d3a54a579857de389cf94696ebdc9ed79825c04b09647af2",
+    "results/unified_exact_round97/confirmation01/raw/03_C1_OFF/external/round97/events.jsonl": "ab22e54ed2c2f0e2c02d7059c5283b11196496d0d07f757ab812495b484749d1",
+    "scripts/round97_outcome_evidence.py": "e8ee63e517eed7895022383aca5610c24f30e0b81b76f628827131aba238a529"
+  },
+  "analyzer_sha256": "2c6b53a9bdcad60dbea78dd53508833b153a799b816b91b7af4d01fb0943af21",
+  "solver_starts": 3,
+  "new_optimizer_calls": 0,
+  "verified_completed_native_optimize_calls": 9,
+  "observed_native_call_scopes": 9,
+  "all_optimize_counts_complete": true,
+  "paid_process_seconds": 1301.4529999997467,
+  "caveats": [
+    "Frozen single-run comparisons, not causal timing subtraction.",
+    "Only exact acknowledged arm5 and independently recovered arm9 interruptions are accepted; original raw audits and summary outcomes are preserved.",
+    "An interrupted run has unknown complete Optimize count and unobserved certificate status; no certificate gain/loss or speed classification is inferred against it.",
+    "Missing physical U or gap remains null; no numeric substitute or invented quality comparison.",
+    "Optional SHADOW candidate F is never its official U.",
+    "Both censored endpoints do not establish eventual certification order.",
+    "Vector matches and per-submission incumbent-threshold records do not establish unique provenance; distinct recorded call/value pairs are not a complete count of native updates.",
+    "Recorded fresh joint R96/R83 increments are a lower-bound count; cache reuse is excluded and objective descent is not assigned to ordering alone.",
+    "Callback, closure and mapping timing fields are nested and must not be added together. Interrupted full callback totals remain null; retained completed-call telemetry is only a partial sum."
+  ]
+}
