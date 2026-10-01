@@ -1,10 +1,22 @@
 #pragma once
 #include "Instance.hpp"
 namespace ebrp {
+// Round99 separates representation from redundant quantity declarations.
+// q-integer (Q-I): project m, retain integer p/d.
+// m-binary (M-B): retain binary m and its original rows, continuous p/d.
+inline bool round98KnownStateService(const std::string& mode) {
+    return mode=="off" || mode=="aggregate" || mode=="projected" ||
+        mode=="vehicle-state" || mode=="q-integer" || mode=="m-binary";
+}
+inline bool round98ProjectsDirection(const std::string& mode) {
+    return mode=="projected" || mode=="vehicle-state" || mode=="q-integer";
+}
+inline bool round98ContinuousQuantities(const std::string& mode) {
+    return mode=="projected" || mode=="vehicle-state" || mode=="m-binary";
+}
 inline bool round98IsIsolatedENS(const SolveOptions& o) {
     if(o.round98_state_service=="off")return true;
-    return (o.round98_state_service=="aggregate"||o.round98_state_service=="projected"||
-        o.round98_state_service=="vehicle-state")&&
+    return round98KnownStateService(o.round98_state_service)&&
         o.algorithm_preset=="research-round83-vds-equal-net-exchange"&&
         o.method=="gcap-frontier"&&o.k1_am_sf_controller_enabled&&!o.plain_baseline&&
         !o.round66_arc_load_replacement&&!o.round65_budget&&o.round65_projection=="off"&&

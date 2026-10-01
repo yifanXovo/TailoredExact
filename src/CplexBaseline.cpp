@@ -2,6 +2,7 @@
 #include "Round62Thresholds.hpp"
 #include "Round63TimeResource.hpp"
 #include "Round64SharedResource.hpp"
+#include "Round98StateService.hpp"
 #include "CanonicalCompactModel.hpp"
 #include "ConnectivityFlow.hpp"
 #include "IntervalRowFactory.hpp"
@@ -814,10 +815,11 @@ void writeCompactLp(const Instance& instance,
     const bool aggregate_mc4 = station_state_mode == "aggregate-mc4";
     const bool state_service = options.round98_state_service != "off";
     const bool vehicle_state_service = options.round98_state_service == "vehicle-state";
-    const bool projected_service = options.round98_state_service == "projected" || vehicle_state_service;
+    const bool projected_service = round98ProjectsDirection(options.round98_state_service);
+    const bool continuous_quantities = round98ContinuousQuantities(options.round98_state_service);
     if (state_service && (!strengthened || !station_state_vdp ||
         cutoff == nullptr || !cutoff->enabled || options.plain_baseline ||
-        (options.round98_state_service != "aggregate" && !projected_service))) {
+        !round98KnownStateService(options.round98_state_service))) {
         throw std::runtime_error("round98_requires_complete_strengthened_vdp_interval");
     }
     if (station_state_mode != "bit-product" && !aggregate_mc4 &&
@@ -901,8 +903,8 @@ void writeCompactLp(const Instance& instance,
             const int dmax = std::min(instance.capacity[i] - instance.initial[i], instance.Q[k]);
             vars.add(zName(k, i), 0, 1, "B");
             if (!projected_service) vars.add(mName(k, i), 0, 1, "B");
-            vars.add(pName(k, i), 0, pmax, projected_service ? "C" : "I");
-            vars.add(dName(k, i), 0, dmax, projected_service ? "C" : "I");
+            vars.add(pName(k, i), 0, pmax, continuous_quantities ? "C" : "I");
+            vars.add(dName(k, i), 0, dmax, continuous_quantities ? "C" : "I");
             vars.add(lName(k, i), 0, instance.Q[k],
                      options.round66_arc_load_replacement ? "C" : "I");
             vars.add(uName(k, i), 0, V, "C");
