@@ -53,8 +53,10 @@ round98_verify_delivery.py passes physical/endpoint/cost checks. Independent
 review checks30 results/75 receipts,10 key physical routes and2 full selected
 Start matrices, not full independent performance reproduction.
 
-Final stacked draft URL and delivery commit are in delivery.json; target is the
-exact R97 branch, no merge/default promotion. If delivery.json is not yet present,
-only final independent-review documentation and Git/draft delivery remain,
-not optimization. After these, mark goal complete. Future research needs fresh
-authorization/budget and unused confirmation roles; existing confirmation is observed.
+Delivered stacked draft: https://github.com/yifanXovo/TailoredExact/pull/160 .
+Reviewed research commit3c40b6a39616145f6aa62e122584fd08143c6686; subsequent
+commit adds delivery metadata. delivery.json records the exact R97 base and
+final-head query command. No merge/default promotion and no outstanding research
+or independent-review work. After final Git synchronization, mark goal complete.
+Future research needs fresh authorization/budget and unused confirmation roles;
+existing confirmation is observed.

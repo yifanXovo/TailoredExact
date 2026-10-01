@@ -132,4 +132,4 @@ C3/R1 原 audit=false、endpoint=null 保留。cutoff epoch 原生缓存失效�
 
 已经完成证明与边界、实际 R1/R2/R3、完整5角色开发和必要消融、实质修订、统一冻结3角色确认、两组长窗、实际 Start/物理见证、全费用失败账本及独立只读审查。采用建议明确为保留 ENS 默认；“稳定最终快于 P”目标未达成，删失角色的最终排序未知。未进行 FEEDBACK/LP-G 组合、全 seed 网格、纯物理坐标 R3 严格投影证明或任意实数 near-unit writer 的全历史审计，均不作为已完成贡献。
 
-复现入口 [reproduce.md](reproduce.md)，当前无后台工作的状态 [RESUME.md](RESUME.md)。draft PR 地址、交付 commit 与最终基线检查在 `delivery.json`；没有自动合并或默认晋升。
+交付 [stacked draft PR160](https://github.com/yifanXovo/TailoredExact/pull/160)，研究内容 commit `3c40b6a39616145f6aa62e122584fd08143c6686`；随后仅补入交付元数据，最终 head 用 `delivery.json` 的查询命令读取。复现入口 [reproduce.md](reproduce.md)，当前无后台工作的状态 [RESUME.md](RESUME.md)。准确基线检查、成本与审查绑定在 `delivery.json`；没有自动合并或默认晋升。
