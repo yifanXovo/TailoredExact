@@ -24,6 +24,7 @@ def run(destination,label,mode):
                     vector=path.with_name(path.name[:-5]+'.values.csv')
                     with vector.open(newline='') as f:table=list(csv.DictReader(f))
                     assert [r['variable'] for r in table]==[v.VarName for v in m.getVars()]
+                    assert [r['type'] for r in table]==[v.VType for v in m.getVars()], 'actual restored column types differ from canonical model'
                     values={r['variable']:float(r['value']) for r in table}
                     assert all(math.isfinite(float(r['readback'])) and abs(float(r['value'])-float(r['readback']))<=1e-7 for r in table)
                     for v in m.getVars():
@@ -32,7 +33,8 @@ def run(destination,label,mode):
                     assert abs(audited['objective']-j['objective'])<=1e-7
                     records.append(dict(start_path=path.relative_to(ROOT).as_posix(),start_sha256=sha(path),vector_sha256=sha(vector),
                         model_sha256=h,mode=mode,rows=m.NumConstrs,columns=m.NumVars,objective=audited['objective'],
-                        max_residual=audited['maximum_absolute_residual'],actual_quantity_type=qt,direction_columns=len(modes)))
+                        max_residual=audited['maximum_absolute_residual'],actual_quantity_type=qt,direction_columns=len(modes),
+                        per_column_restored_type_checked=True))
     assert records
     write(OUT/'qualification'/(label+'.json'),dict(passed=True,optimizer_calls=0,starts=records,
         wall_seconds=time.monotonic()-tick,scope='all retained submitted Starts of this completed process',script_sha256=sha(__file__)))

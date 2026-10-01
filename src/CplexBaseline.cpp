@@ -817,6 +817,7 @@ void writeCompactLp(const Instance& instance,
     const bool vehicle_state_service = options.round98_state_service == "vehicle-state";
     const bool projected_service = round98ProjectsDirection(options.round98_state_service);
     const bool continuous_quantities = round98ContinuousQuantities(options.round98_state_service);
+    const bool linked_direction = round99LinksDirection(options.round98_state_service);
     if (state_service && (!strengthened || !station_state_vdp ||
         cutoff == nullptr || !cutoff->enabled || options.plain_baseline ||
         !round98KnownStateService(options.round98_state_service))) {
@@ -2979,11 +2980,13 @@ void writeCompactLp(const Instance& instance,
             Expr penalty_reconstruction;
             Expr movement_reconstruction;
             Expr visit_reconstruction;
+            Expr direction_reconstruction;
             if (state_service && !vehicle_state_service) {
                 for (int k = 0; k < M; ++k) {
                     addTerm(movement_reconstruction, pName(k, i), 1.0);
                     addTerm(movement_reconstruction, dName(k, i), 1.0);
                     addTerm(visit_reconstruction, zName(k, i), 1.0);
+                    if (linked_direction) addTerm(direction_reconstruction, mName(k, i), 1.0);
                 }
             }
             addTerm(inventory_link, yName(i), 1.0);
@@ -2999,6 +3002,7 @@ void writeCompactLp(const Instance& instance,
                     addTerm(movement_reconstruction, selector,
                             -std::fabs(static_cast<double>(instance.initial[i]) - y));
                     if (y == instance.initial[i]) addTerm(visit_reconstruction, selector, 1.0);
+                    if (linked_direction && y < instance.initial[i]) addTerm(direction_reconstruction, selector, -1.0);
                 }
                 addTerm(inventory_link, selector, -static_cast<double>(y));
                 addTerm(g_reconstruction, selected_g, 1.0);
@@ -3022,6 +3026,7 @@ void writeCompactLp(const Instance& instance,
             if (state_service && !vehicle_state_service) {
                 writeConstraint(out, cid, movement_reconstruction, "=", 0.0);
                 writeConstraint(out, cid, visit_reconstruction, "=", 1.0);
+                if (linked_direction) writeConstraint(out, cid, direction_reconstruction, "=", 0.0);
             }
             if (vehicle_state_service) {
                 // Every noninitial state is linked, including empty pools.

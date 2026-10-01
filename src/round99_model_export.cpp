@@ -14,7 +14,7 @@ int main(int argc,char** argv){try{
     s.verified_incumbent=std::stod(argv[8]);s.station_state_formulation="vd-p";s.round51_subset_duration_big_m="off";
     const std::filesystem::path dir(argv[9]);
     if(!std::filesystem::create_directories(dir))throw std::runtime_error("exclusive destination required");
-    for(const auto& mode:{"off","aggregate","q-integer","m-binary","projected"}){
+    for(const auto& mode:{"off","aggregate","q-integer","m-binary","projected","m-binary-linked"}){
         opt.round98_state_service=mode;
         auto a=ebrp::writeCanonicalCompactModel(in,opt,dir/(std::string(mode)+".lp"),s);
         if(!a.written)throw std::runtime_error(a.failure_reason);

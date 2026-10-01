@@ -123,7 +123,7 @@ void usage() {
         << "[--round90-lp-g-split true|false] "
         << "[--round92-handling-activation true|false] "
         << "[--round96-route-order true|false] "
-        << "[--round98-state-service off|aggregate|projected|vehicle-state|q-integer|m-binary] "
+        << "[--round98-state-service off|aggregate|projected|vehicle-state|q-integer|m-binary|m-binary-linked] "
         << "[--round97-native-closure off|observe|shadow|feedback] "
         << "[--round97-native-operator r83|r96] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
@@ -259,7 +259,7 @@ std::string lowerAscii(std::string value) {
 }
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
-    if (opt.round98_state_service == "q-integer" || opt.round98_state_service == "m-binary")
+    if (opt.round98_state_service == "q-integer" || opt.round98_state_service == "m-binary" || opt.round98_state_service == "m-binary-linked")
         return "research-round99-ensc-discrete-structure-" + opt.round98_state_service;
     if (opt.round98_state_service != "off")
         return "research-round98-ensc-state-service-" + opt.round98_state_service;

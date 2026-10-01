@@ -11,7 +11,7 @@ import round96_external as ext
 from round99_common import *
 
 def helpers():
-    names=['round98_campaign.py','round99_common.py','round90_lp_g_g3.py','round88_a1_g3.py',
+    names=['round99_campaign.py','round99_common.py','round90_lp_g_g3.py','round88_a1_g3.py',
         'round94_lpg_formal_recovery_v3.py','round94_lpg_contemporary.py','round86_native_evidence.py',
         'analyze_round61.py','round70_affinity.py','round83_audit_v2.py','round75_startup.py',
         'round96_external.py','round96_prepare.py']
@@ -32,7 +32,8 @@ def adapter(launch,observations,completion,identity):
             'R2':'research-round98-ensc-state-service-projected',
             'R3':'research-round98-ensc-state-service-vehicle-state',
             'Q-I':'research-round99-ensc-discrete-structure-q-integer',
-            'M-B':'research-round99-ensc-discrete-structure-m-binary'}[arm]
+            'M-B':'research-round99-ensc-discrete-structure-m-binary',
+            'M-BL':'research-round99-ensc-discrete-structure-m-binary-linked'}[arm]
         assert result['algorithm_preset']==expected
     audited=r90.evidence.audit(ROOT,launch['panel'],observations,identity['candidate_binary_sha256'])
     r90.evidence.finalize_endpoint(ROOT,launch['panel'],arm,audited,observations,result,reason,launch['panel']['reference'])
@@ -62,7 +63,7 @@ def prepare(name,roles_path):
     protocol=read(roles_path);roles=protocol['roles'];binary=BUILD/'ExactEBRP.exe'
     grouped=protocol.get('reference_billing')=='one_finite_batch'
     if grouped:
-        assert len(roles)==3 and protocol['phase']=='frozen independent confirmation'
+        assert len(roles)==3 and protocol['phase'] in ['frozen independent confirmation','full linked development']
         write(camp/'reference_batch_launch.json',dict(planned_children=3,planned_optimizer_calls=0,
             ids=[r['id'] for r in roles],maximum_child_seconds=60,source_sha256=sha(__file__)))
     reference_batch_tick=time.perf_counter()
@@ -90,12 +91,12 @@ def prepare(name,roles_path):
         if 'reference' in p:assert fresh==p['reference'],'fresh plain matrix drift'
         p['reference']=references[p['id']]=fresh;p['instance_path']=p['input_path']
         for arm in p['method_order']:
-            assert arm in ['P-GRB','ENS-C','R1','R2','R3','Q-I','M-B']
+            assert arm in ['P-GRB','ENS-C','R1','R2','R3','Q-I','M-B','M-BL']
             number=len(launches)+1;dest=camp/'raw'/f'{number:02d}_{p["id"]}_{arm}'
             command=(r90.audited_runner_utilities.command_for(prereg,p,arm,dest) if arm=='P-GRB'
                      else r90.command_for(prereg,p,'ENS-C',dest))
-            if arm in ['R1','R2','R3','Q-I','M-B']:command+=['--round98-state-service',
-                {'R1':'aggregate','R2':'projected','R3':'vehicle-state','Q-I':'q-integer','M-B':'m-binary'}[arm]]
+            if arm in ['R1','R2','R3','Q-I','M-B','M-BL']:command+=['--round98-state-service',
+                {'R1':'aggregate','R2':'projected','R3':'vehicle-state','Q-I':'q-integer','M-B':'m-binary','M-BL':'m-binary-linked'}[arm]]
             launches.append(dict(number=number,id=p['id'],arm=arm,panel=p,stage=name,destination=str(dest),
                 cap_seconds=p['cap_seconds'],hard_stop_seconds=p['cap_seconds']-2,command=command))
     if grouped:
@@ -129,6 +130,7 @@ def build_reference(p,dest):
 
 def run(name,number):
     ext.ensure_idle();camp=OUT/name;q=read(camp/'identity.json')
+    assert sha(__file__)==q['runner_sha256'],'frozen runner changed'
     assert q['source_hashes']==bindings() and q['helpers']==helpers()
     assert sha(ROOT/q['prereg']['candidate_binary'])==q['candidate_binary_sha256']
     assert sha(q['input_manifest'])==q['prereg_sha256']

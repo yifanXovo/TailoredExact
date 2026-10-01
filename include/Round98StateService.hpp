@@ -6,14 +6,15 @@ namespace ebrp {
 // m-binary (M-B): retain binary m and its original rows, continuous p/d.
 inline bool round98KnownStateService(const std::string& mode) {
     return mode=="off" || mode=="aggregate" || mode=="projected" ||
-        mode=="vehicle-state" || mode=="q-integer" || mode=="m-binary";
+        mode=="vehicle-state" || mode=="q-integer" || mode=="m-binary" || mode=="m-binary-linked";
 }
 inline bool round98ProjectsDirection(const std::string& mode) {
     return mode=="projected" || mode=="vehicle-state" || mode=="q-integer";
 }
 inline bool round98ContinuousQuantities(const std::string& mode) {
-    return mode=="projected" || mode=="vehicle-state" || mode=="m-binary";
+    return mode=="projected" || mode=="vehicle-state" || mode=="m-binary" || mode=="m-binary-linked";
 }
+inline bool round99LinksDirection(const std::string& mode) { return mode=="m-binary-linked"; }
 inline bool round98IsIsolatedENS(const SolveOptions& o) {
     if(o.round98_state_service=="off")return true;
     return round98KnownStateService(o.round98_state_service)&&

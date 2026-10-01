@@ -47,3 +47,16 @@ and surviving names do not license arbitrary vector reconstruction. Branching
 variables and unique cut causes are unknown unless directly observed.
 Sources: [Gurobi presolve explanation](https://support.gurobi.com/hc/en-us/articles/360024738352-How-does-presolve-work),
 [Gurobi13 C solving API](https://docs.gurobi.com/projects/optimizer/en/current/reference/c/solving.html).
+
+M-BL (`m-binary-linked`) retains M-B and adds only one equality per station:
+`sum_k mode_ki = sum_{y<b_i} state_iy`. The owner argument above forces m=1
+for pickup,0 for delivery and0 for unserved b; positive operation implies its
+positive cap. Thus this is redundant on the physical integer set, preserves
+all witnesses and inherited Start mapping. Fully relaxed extended space may
+shrink: the actual old LP points violate it by.2 on F2 and.03685364 on C2.
+All three qualified raw LP optima stay unchanged. No objective strengthening,
+shared-projection change, local convex hull or unique native cause is inferred.
+Exact qualification confirms all original rows and all ordered variable bounds,
+objectives/types unchanged, with20/20/30 new rows and no new columns. Micro
+base optimum.4833333333, forced-zero optimum0 and empty-domain infeasibility
+match M-B. Actual production DLL is the sole loaded engine in this qualification.

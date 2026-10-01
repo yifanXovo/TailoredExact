@@ -1,0 +1,326 @@
+{
+  "passed": true,
+  "optimizer_calls": 12,
+  "presolve_calls": 6,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "micro": [
+    {
+      "mode": "m-binary",
+      "case": "",
+      "status": 2,
+      "objective": 0.4833333333333333,
+      "residual": {
+        "max_bound": 0,
+        "max_row": 0,
+        "max_physical_operation_integrality": 0.0
+      },
+      "model_sha256": "4661baad8218c1f155e72287f1052ed243d910047885b04b8593498c8ac2889b"
+    },
+    {
+      "mode": "m-binary-linked",
+      "case": "",
+      "status": 2,
+      "objective": 0.4833333333333333,
+      "residual": {
+        "max_bound": 0,
+        "max_row": 0,
+        "max_physical_operation_integrality": 0.0
+      },
+      "model_sha256": "1da0f1cde3e2471f0f55b9043735a540323b8779cb2f20d417d2b1be99ebf110"
+    },
+    {
+      "mode": "m-binary",
+      "case": "_forced",
+      "status": 2,
+      "objective": 0.0,
+      "residual": {
+        "max_bound": 0.0,
+        "max_row": 0,
+        "max_physical_operation_integrality": 0.0
+      },
+      "model_sha256": "df49a11807310ada98d9e5d90afa2bd74f053446fd3717746306db5c25a4b9b2"
+    },
+    {
+      "mode": "m-binary-linked",
+      "case": "_forced",
+      "status": 2,
+      "objective": 0.0,
+      "residual": {
+        "max_bound": 0.0,
+        "max_row": 0,
+        "max_physical_operation_integrality": 0.0
+      },
+      "model_sha256": "9e29642602a8246e63df1de702bbf4fbeaf4df8f61c77f2d1446b0854e69e5db"
+    },
+    {
+      "mode": "m-binary",
+      "case": "_empty",
+      "status": 3,
+      "objective": null,
+      "residual": null,
+      "model_sha256": "0dd63bd3c8fc32e394fa5d21a16a3741a1cef1701ecf4c2ca85fc520df5a1ded"
+    },
+    {
+      "mode": "m-binary-linked",
+      "case": "_empty",
+      "status": 3,
+      "objective": null,
+      "residual": null,
+      "model_sha256": "7849bff23f7b930ce79f4e005e95bcbef5fc2a9349da0ea17d970762ed0925d9"
+    }
+  ],
+  "real": [
+    {
+      "role": "F2",
+      "records": [
+        {
+          "mode": "m-binary",
+          "model_sha256": "69da40bb1569404de84ef1eddb60bbfff8ea30258f4b99f314fcf192944251a2",
+          "original": {
+            "rows": 9309,
+            "columns": 3488,
+            "nonzeros": 53646,
+            "binary": 1567,
+            "integer": 1627
+          },
+          "presolved": {
+            "rows": 7594,
+            "columns": 3466,
+            "nonzeros": 44996,
+            "binary": 1567,
+            "integer": 1627
+          },
+          "raw_LP": 0.5967123750531154,
+          "raw_LP_runtime": 0.20300006866455078,
+          "raw_LP_iterations": 3153.0,
+          "maximum_residual": 1.8189894035458565e-12,
+          "typed_signature": "b23f619d51c6890a27a49af6b62b3a184cf19800ee154991854cea42b8816617"
+        },
+        {
+          "mode": "m-binary-linked",
+          "model_sha256": "81de58e630cb06033512759a5c548787eaad4726826d57f1a8bdbd8a05507e4d",
+          "original": {
+            "rows": 9329,
+            "columns": 3488,
+            "nonzeros": 53985,
+            "binary": 1567,
+            "integer": 1627
+          },
+          "presolved": {
+            "rows": 7614,
+            "columns": 3466,
+            "nonzeros": 45351,
+            "binary": 1567,
+            "integer": 1627
+          },
+          "raw_LP": 0.5967123750531158,
+          "raw_LP_runtime": 0.18599987030029297,
+          "raw_LP_iterations": 3129.0,
+          "maximum_residual": 6.366462912410498e-12,
+          "typed_signature": "442e3f43d169e94b91334e6e23f4fdd97f92615ebe6f965316702626524d92e0"
+        }
+      ],
+      "old_LP_point_new_row_maximum_violation": 0.2,
+      "new_row_violations": [
+        0.07002088738767945,
+        0.0,
+        0.03214285714285714,
+        0.0,
+        0.0,
+        0.2,
+        0.0,
+        0.15036365533257828,
+        0.062416304821412964,
+        0.0,
+        0.0,
+        0.10341286858907961,
+        0.07899482244562989,
+        0.0,
+        0.0,
+        0.0,
+        0.12121212121212122,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "exact_new_rows": 20,
+      "no_new_columns": true,
+      "old_rows_unchanged": true
+    },
+    {
+      "role": "R98-C1",
+      "records": [
+        {
+          "mode": "m-binary",
+          "model_sha256": "58f3cade6ee643951d680492544aff6397867ff425c17a5c9275ee3a10bc980a",
+          "original": {
+            "rows": 9138,
+            "columns": 3318,
+            "nonzeros": 53024,
+            "binary": 1482,
+            "integer": 1542
+          },
+          "presolved": {
+            "rows": 7200,
+            "columns": 3296,
+            "nonzeros": 42711,
+            "binary": 1482,
+            "integer": 1542
+          },
+          "raw_LP": 0.08641736888827943,
+          "raw_LP_runtime": 0.1549999713897705,
+          "raw_LP_iterations": 2824.0,
+          "maximum_residual": 9.094947017729282e-13,
+          "typed_signature": "e73f1937d92c6cdb3dfc7063f30f639a9991352827e23866bec02965fb951b19"
+        },
+        {
+          "mode": "m-binary-linked",
+          "model_sha256": "97d443060b8175f57c638e26de1cfcefe7c43ed47c5ab9eedc9a95714b83c5ff",
+          "original": {
+            "rows": 9158,
+            "columns": 3318,
+            "nonzeros": 53360,
+            "binary": 1482,
+            "integer": 1542
+          },
+          "presolved": {
+            "rows": 7220,
+            "columns": 3296,
+            "nonzeros": 43055,
+            "binary": 1482,
+            "integer": 1542
+          },
+          "raw_LP": 0.08641736888827953,
+          "raw_LP_runtime": 0.14600014686584473,
+          "raw_LP_iterations": 2504.0,
+          "maximum_residual": 1.0547118733938987e-14,
+          "typed_signature": "31172515226dc863938dcfde5bf639617d15b3f3c15aebd7398948dc6008e7f5"
+        }
+      ],
+      "old_LP_point_new_row_maximum_violation": 4.996003610813204e-16,
+      "new_row_violations": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.8041124150158794e-16,
+        0.0,
+        8.326672684688674e-17,
+        0.0,
+        0.0,
+        2.7755575615628914e-17,
+        5.551115123125783e-17,
+        0.0,
+        5.551115123125783e-17,
+        4.996003610813204e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "exact_new_rows": 20,
+      "no_new_columns": true,
+      "old_rows_unchanged": true
+    },
+    {
+      "role": "R98-C2",
+      "records": [
+        {
+          "mode": "m-binary",
+          "model_sha256": "a4145df15459f85c4e9414131cf0af2f4d913e9ae467fd6021ec520ebcff3973",
+          "original": {
+            "rows": 31141,
+            "columns": 8871,
+            "nonzeros": 194152,
+            "binary": 4066,
+            "integer": 4186
+          },
+          "presolved": {
+            "rows": 23594,
+            "columns": 8839,
+            "nonzeros": 229766,
+            "binary": 4066,
+            "integer": 4186
+          },
+          "raw_LP": 0.16123605049876005,
+          "raw_LP_runtime": 0.6690001487731934,
+          "raw_LP_iterations": 5684.0,
+          "maximum_residual": 9.094947017729282e-13,
+          "typed_signature": "da2d531165ac8092d3d784f6a43467b58ac183ca69cf8bf6eebdf7ca4650670b"
+        },
+        {
+          "mode": "m-binary-linked",
+          "model_sha256": "750ed0f700120cf0266bfb29f9cc9de234be06f452211c5462ca4342cb7306dc",
+          "original": {
+            "rows": 31171,
+            "columns": 8871,
+            "nonzeros": 194782,
+            "binary": 4066,
+            "integer": 4186
+          },
+          "presolved": {
+            "rows": 23624,
+            "columns": 8839,
+            "nonzeros": 230418,
+            "binary": 4066,
+            "integer": 4186
+          },
+          "raw_LP": 0.16123605049876005,
+          "raw_LP_runtime": 0.8580000400543213,
+          "raw_LP_iterations": 7217.0,
+          "maximum_residual": 9.094947017729282e-13,
+          "typed_signature": "2ff81e64069aa4778cf6d5e41a9bfc89dbf3334e55c8be0f1c84d0babcac41ca"
+        }
+      ],
+      "old_LP_point_new_row_maximum_violation": 0.036853637611089396,
+      "new_row_violations": [
+        1.6653345369377348e-16,
+        0.011575434018644581,
+        2.7755575615628914e-17,
+        0.0,
+        5.551115123125783e-17,
+        5.551115123125783e-17,
+        0.0,
+        0.0,
+        5.551115123125783e-17,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.326672684688674e-17,
+        2.7755575615628914e-17,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.036853637611089396,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.551115123125783e-17,
+        0.0,
+        0.0,
+        8.326672684688674e-17
+      ],
+      "exact_new_rows": 30,
+      "no_new_columns": true,
+      "old_rows_unchanged": true
+    }
+  ],
+  "binary_sha256": "2a568f1d729cfec9e5c759531ca39e82da0dc9f490b7a77f2f6aeb6da6be68cf",
+  "script_sha256": "fcdc253fcb11504791950d0aedb0172a86d13a5acafb424456cfb38483e56307",
+  "outer_seconds": 7.671999999321997,
+  "scope": "correctness/matrix qualification only; no end-to-end performance claim"
+}

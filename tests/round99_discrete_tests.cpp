@@ -16,7 +16,7 @@ int main(int argc,char** argv){try{
     admission.external_gini_interval_mip_policy="round55-vd-p";
     ebrp::CanonicalCompactModelSpec s;s.strengthened=true;s.interval_restricted=true;
     s.gamma_U=2.0/3;s.station_state_formulation="vd-p";s.round51_subset_duration_big_m="off";
-    for(const auto& mode:{"aggregate","q-integer","m-binary","projected"}){
+    for(const auto& mode:{"aggregate","q-integer","m-binary","projected","m-binary-linked"}){
         admission.round98_state_service=mode;require(ebrp::round98IsIsolatedENS(admission),"mode not admitted");
         auto bad=admission;bad.round97_native_closure="feedback";require(!ebrp::round98IsIsolatedENS(bad),"feedback admitted");
         o.round98_state_service=mode;
@@ -26,7 +26,7 @@ int main(int argc,char** argv){try{
     forced.target={0,1,1};forced.weights={0,1,1};forced.min_ratio={0,0,0};
     forced.dist.assign(3,std::vector<double>(3,1));for(int i=0;i<3;++i)forced.dist[i][i]=0;
     s.gamma_U=0;s.add_verified_incumbent_row=true;s.verified_incumbent=.01;
-    for(const auto& mode:{"q-integer","m-binary"}){
+    for(const auto& mode:{"q-integer","m-binary","m-binary-linked"}){
         o.round98_state_service=mode;
         require(ebrp::writeCanonicalCompactModel(forced,o,dir/(std::string(mode)+"_forced.lp"),s).written,"forced export failed");
         auto empty=forced;empty.total_time_limit=0;
@@ -35,5 +35,6 @@ int main(int argc,char** argv){try{
     require(ebrp::round98ProjectsDirection("q-integer")&&!ebrp::round98ContinuousQuantities("q-integer"),"Q-I coupling");
     require(!ebrp::round98ProjectsDirection("m-binary")&&ebrp::round98ContinuousQuantities("m-binary"),"M-B coupling");
     require(!ebrp::round98KnownStateService("unknown"),"unknown mode accepted");
-    std::cout<<"new_modes=2 fixtures=8 optimizer_calls=0\n";return 0;
+    require(ebrp::round99LinksDirection("m-binary-linked")&&!ebrp::round98ProjectsDirection("m-binary-linked")&&ebrp::round98ContinuousQuantities("m-binary-linked"),"linked direction traits");
+    std::cout<<"new_modes=3 fixtures=11 optimizer_calls=0\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
