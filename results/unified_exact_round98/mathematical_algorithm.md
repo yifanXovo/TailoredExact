@@ -1,6 +1,7 @@
 # Shared inventory state and service reconstruction
 
-This preliminary proof is frozen before performance selection. Original physics,
+The core proof was frozen before performance selection; the R3 extension and
+qualification were registered before R3 selection. Original physics,
 VD-P upper epigraph G, true-G embedding, cutoff complement, full leaf coverage,
 AM targets/finite control, numerical contract and distance restrictions are
 inherited from R96/R97 mathematical_algorithm.md. The new local algebra needs
@@ -75,7 +76,8 @@ continuous m recovery, including zero cases. A differing optimal raw LP
 value outside the numerical contract is a qualification failure, not evidence
 of new strengthening. Native presolve/cuts/branching/time may differ.
 
-Counterexamples: C alone allows z1,p=d=.5; integral mean Y10 with
+Counterexamples: with a=c=2, C alone allows z=1,p=d=1, which cannot
+recover an original binary direction; integral mean Y10 with
 s8=s12=.5 is not a unique state; relaxed z with two z=.5,p=.5 at y9
 does not imply integer operations. Removing any other m usage would need its
 own projection proof. Eligible vehicle-state pairs do not prove route existence.
@@ -114,8 +116,9 @@ fixed-route optima never become whole-original certificates.
 ## Evidence-directed vehicle-state candidate
 
 The saved R2 root vectors motivate the implemented R3 vehicle-state extension.
-The mode is `vehicle-state`; performance remains unknown until its matched
-development and frozen confirmation. In saved F5 coordinates, station45/vehicle0 has
+The mode is `vehicle-state`; its matched development and frozen confirmation
+are complete and mixed/negative for adoption (see final_report.md).
+In saved F5 coordinates, station45/vehicle0 has
 movement6.7046086386; allocating its z mass from the actual noninitial state
 mass pool, even with capacity eligibility, permits at most6.6840379466.
 The same necessary-condition screen detects allocations on C2/C3/D6 that

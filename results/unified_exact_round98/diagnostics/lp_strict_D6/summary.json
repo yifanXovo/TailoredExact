@@ -1,0 +1,756 @@
+{
+  "role": "D6",
+  "passed": true,
+  "optimizer_calls": 4,
+  "maximum_calls": 4,
+  "outer_seconds": 2.921000000089407,
+  "input_sha256": "070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+  "fixed_state": {
+    "id": "D6",
+    "scenario_id": "cb443_V30_compact_r1_shortage_M03_Q30_T18000",
+    "input_path": "reference/citibike443-regional-v1/instances/V30/cb443_V30_compact_r1_shortage_M03_Q30.txt",
+    "input_sha256": "070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+    "T_seconds": 18000,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "cap_seconds": 1800,
+    "method_order": [
+      "ENS-C",
+      "LP-G"
+    ],
+    "instance_path": "reference/citibike443-regional-v1/instances/V30/cb443_V30_compact_r1_shortage_M03_Q30.txt",
+    "V": 30,
+    "M": 3,
+    "Q_vector": [
+      30,
+      30,
+      30
+    ],
+    "historical_initial_witness": "results/unified_exact_round90/runner_lp_g_d6_tail/D6/raw/01_D6_ENS-C/external/initial_witness.json",
+    "historical_initial_witness_sha256": "a7c27db1ce4dd148a60703bab1749494d63b45a331ea4f407238a0afd7a39b36",
+    "diagnostic_cutoff": 0.15750980361456174,
+    "diagnostic_gamma_L": 0,
+    "diagnostic_gamma_U": 0.15750980361456174
+  },
+  "records": [
+    {
+      "mode": "off",
+      "status": 2,
+      "objective": 0.13138946503971005,
+      "original": {
+        "rows": 30485,
+        "columns": 8273,
+        "nonzeros": 190745,
+        "binary": 3767,
+        "integer": 4067
+      },
+      "presolved": {
+        "rows": 15089,
+        "columns": 8241,
+        "nonzeros": 164658,
+        "binary": 3767,
+        "integer": 4067
+      },
+      "model_sha256": "356a4653796c8eabc853ae077b00dfc1a70de7ee8bc1bdc16bbaa3e0d0477b89",
+      "feasibility_tolerance": 1e-08,
+      "optimality_tolerance": 1e-09,
+      "primal_violation": 0.0,
+      "dual_violation": 4.336808689942018e-19,
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": -0.33991278413299675,
+          "visit_residual": -0.7233201581027668,
+          "movement": 6.086956521739131,
+          "expected_movement": 6.426869305872128
+        },
+        {
+          "station": 2,
+          "movement_residual": 0.0,
+          "visit_residual": -0.6979405034324943,
+          "movement": 5.7391304347826075,
+          "expected_movement": 5.7391304347826075
+        },
+        {
+          "station": 3,
+          "movement_residual": -0.5435906707940443,
+          "visit_residual": -0.5566380794482729,
+          "movement": 6.913043478260869,
+          "expected_movement": 7.4566341490549135
+        },
+        {
+          "station": 4,
+          "movement_residual": -0.5435906707940426,
+          "visit_residual": -0.5217391304347826,
+          "movement": 9.08695652173913,
+          "expected_movement": 9.630547192533173
+        },
+        {
+          "station": 5,
+          "movement_residual": -1.1486443995747475,
+          "visit_residual": -0.7119565217391304,
+          "movement": 4.608695652173913,
+          "expected_movement": 5.757340051748661
+        },
+        {
+          "station": 6,
+          "movement_residual": -0.2719639502837419,
+          "visit_residual": -0.7101449275362319,
+          "movement": 6.086956521739131,
+          "expected_movement": 6.358920472022873
+        },
+        {
+          "station": 7,
+          "movement_residual": -0.9059844513234072,
+          "visit_residual": -0.5310559006211181,
+          "movement": 6.565217391304347,
+          "expected_movement": 7.471201842627754
+        },
+        {
+          "station": 8,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": -0.6318826610209898,
+          "movement": 7.086956521739131,
+          "expected_movement": 7.08695652173913
+        },
+        {
+          "station": 9,
+          "movement_residual": -4.5,
+          "visit_residual": -0.6538461538461539,
+          "movement": 9.0,
+          "expected_movement": 13.5
+        },
+        {
+          "station": 10,
+          "movement_residual": -1.0871813415880887,
+          "visit_residual": -0.5507246376811594,
+          "movement": 10.782608695652174,
+          "expected_movement": 11.869790037240262
+        },
+        {
+          "station": 11,
+          "movement_residual": -0.6876826661272792,
+          "visit_residual": -0.672463768115942,
+          "movement": 5.260869565217391,
+          "expected_movement": 5.94855223134467
+        },
+        {
+          "station": 12,
+          "movement_residual": -0.2720201552459809,
+          "visit_residual": -0.7322654462242563,
+          "movement": 5.086956521739131,
+          "expected_movement": 5.358976676985112
+        },
+        {
+          "station": 13,
+          "movement_residual": 0.0,
+          "visit_residual": -0.7043478260869565,
+          "movement": 7.391304347826086,
+          "expected_movement": 7.391304347826086
+        },
+        {
+          "station": 14,
+          "movement_residual": -0.5435906707940443,
+          "visit_residual": -0.5507246376811594,
+          "movement": 6.739130434782609,
+          "expected_movement": 7.282721105576654
+        },
+        {
+          "station": 15,
+          "movement_residual": -0.9059844513234072,
+          "visit_residual": -0.5471790890269151,
+          "movement": 8.086956521739129,
+          "expected_movement": 8.992940973062536
+        },
+        {
+          "station": 16,
+          "movement_residual": -1.0871813415880904,
+          "visit_residual": -0.5369565217391304,
+          "movement": 9.26086956521739,
+          "expected_movement": 10.348050906805481
+        },
+        {
+          "station": 17,
+          "movement_residual": -0.9059844513234072,
+          "visit_residual": -0.5163043478260869,
+          "movement": 7.739130434782609,
+          "expected_movement": 8.645114886106017
+        },
+        {
+          "station": 18,
+          "movement_residual": -0.9059844513234072,
+          "visit_residual": -0.5163043478260869,
+          "movement": 11.608695652173912,
+          "expected_movement": 12.51468010349732
+        },
+        {
+          "station": 19,
+          "movement_residual": -0.9059844513234072,
+          "visit_residual": -0.4956521739130435,
+          "movement": 8.260869565217392,
+          "expected_movement": 9.1668540165408
+        },
+        {
+          "station": 20,
+          "movement_residual": -5.53846153846154,
+          "visit_residual": -0.4,
+          "movement": 18.0,
+          "expected_movement": 23.53846153846154
+        },
+        {
+          "station": 21,
+          "movement_residual": -0.5517849984287686,
+          "visit_residual": -0.6711956521739131,
+          "movement": 5.260869565217391,
+          "expected_movement": 5.812654563646159
+        },
+        {
+          "station": 22,
+          "movement_residual": 0.0,
+          "visit_residual": -0.710997442455243,
+          "movement": 4.913043478260871,
+          "expected_movement": 4.913043478260871
+        },
+        {
+          "station": 23,
+          "movement_residual": -7.846153846153847,
+          "visit_residual": -0.5666666666666667,
+          "movement": 13.0,
+          "expected_movement": 20.846153846153847
+        },
+        {
+          "station": 24,
+          "movement_residual": -0.9059844513234072,
+          "visit_residual": -0.5507246376811594,
+          "movement": 8.08695652173913,
+          "expected_movement": 8.992940973062538
+        },
+        {
+          "station": 25,
+          "movement_residual": -6.8108108108108105,
+          "visit_residual": -0.6,
+          "movement": 12.0,
+          "expected_movement": 18.81081081081081
+        },
+        {
+          "station": 26,
+          "movement_residual": -6.432432432432435,
+          "visit_residual": -0.5666666666666667,
+          "movement": 13.0,
+          "expected_movement": 19.432432432432435
+        },
+        {
+          "station": 27,
+          "movement_residual": -1.0871813415880869,
+          "visit_residual": -0.5217391304347826,
+          "movement": 9.08695652173913,
+          "expected_movement": 10.174137863327218
+        },
+        {
+          "station": 28,
+          "movement_residual": -0.7247875610587258,
+          "visit_residual": -0.5900621118012421,
+          "movement": 5.739130434782609,
+          "expected_movement": 6.463917995841335
+        },
+        {
+          "station": 29,
+          "movement_residual": -0.7247875610587258,
+          "visit_residual": -0.4956521739130435,
+          "movement": 7.565217391304348,
+          "expected_movement": 8.290004952363073
+        },
+        {
+          "station": 30,
+          "movement_residual": -8.0,
+          "visit_residual": -0.5475105189340821,
+          "movement": 11.0,
+          "expected_movement": 19.0
+        }
+      ],
+      "values_sha256": "9987ec522136838d2e6f566063b2c29adc746d5f095780f5a1d42cbe993f3755"
+    },
+    {
+      "mode": "aggregate",
+      "status": 2,
+      "objective": 0.13138946503971002,
+      "original": {
+        "rows": 30545,
+        "columns": 8273,
+        "nonzeros": 191812,
+        "binary": 3767,
+        "integer": 4067
+      },
+      "presolved": {
+        "rows": 15119,
+        "columns": 8241,
+        "nonzeros": 165534,
+        "binary": 3767,
+        "integer": 4067
+      },
+      "model_sha256": "30521a4764e90c17b0b14c0c1af2e4b874a1fe18449737b0fa3be778221e7e2c",
+      "feasibility_tolerance": 1e-08,
+      "optimality_tolerance": 1e-09,
+      "primal_violation": 0.0,
+      "dual_violation": 0.0,
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.129968617682051,
+          "expected_movement": 6.129968617682051
+        },
+        {
+          "station": 2,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 5.739130434782609,
+          "expected_movement": 5.7391304347826075
+        },
+        {
+          "station": 3,
+          "movement_residual": 3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 7.456634149054918,
+          "expected_movement": 7.456634149054914
+        },
+        {
+          "station": 4,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 9.63054719253317,
+          "expected_movement": 9.630547192533173
+        },
+        {
+          "station": 5,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 4.608695652173913,
+          "expected_movement": 4.608695652173914
+        },
+        {
+          "station": 6,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 6.086956521739131,
+          "expected_movement": 6.08695652173913
+        },
+        {
+          "station": 7,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.471201842627753,
+          "expected_movement": 7.471201842627753
+        },
+        {
+          "station": 8,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.086956521739129,
+          "expected_movement": 7.086956521739129
+        },
+        {
+          "station": 9,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 10.087181341588085,
+          "expected_movement": 10.087181341588087
+        },
+        {
+          "station": 10,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 11.869790037240262,
+          "expected_movement": 11.869790037240266
+        },
+        {
+          "station": 11,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 5.2608695652173925,
+          "expected_movement": 5.260869565217391
+        },
+        {
+          "station": 12,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 5.105743409003009,
+          "expected_movement": 5.1057434090030105
+        },
+        {
+          "station": 13,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 7.391304347826087,
+          "expected_movement": 7.391304347826089
+        },
+        {
+          "station": 14,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 7.282721105576652,
+          "expected_movement": 7.282721105576651
+        },
+        {
+          "station": 15,
+          "movement_residual": 3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 8.99294097306254,
+          "expected_movement": 8.992940973062536
+        },
+        {
+          "station": 16,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.348050906805476,
+          "expected_movement": 10.348050906805476
+        },
+        {
+          "station": 17,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 8.645114886106011,
+          "expected_movement": 8.645114886106015
+        },
+        {
+          "station": 18,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": -5.551115123125783e-17,
+          "movement": 12.51468010349732,
+          "expected_movement": 12.514680103497318
+        },
+        {
+          "station": 19,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 9.166854016540796,
+          "expected_movement": 9.166854016540798
+        },
+        {
+          "station": 20,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 18.0,
+          "expected_movement": 18.0
+        },
+        {
+          "station": 21,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 5.260869565217391,
+          "expected_movement": 5.260869565217391
+        },
+        {
+          "station": 22,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 4.913043478260869,
+          "expected_movement": 4.913043478260873
+        },
+        {
+          "station": 23,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 13.0,
+          "expected_movement": 13.0
+        },
+        {
+          "station": 24,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 8.992940973062536,
+          "expected_movement": 8.992940973062536
+        },
+        {
+          "station": 25,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 12.09797188529738,
+          "expected_movement": 12.097971885297378
+        },
+        {
+          "station": 26,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 13.0,
+          "expected_movement": 12.999999999999998
+        },
+        {
+          "station": 27,
+          "movement_residual": -5.329070518200751e-15,
+          "visit_residual": 0.0,
+          "movement": 10.174137863327218,
+          "expected_movement": 10.174137863327223
+        },
+        {
+          "station": 28,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.4639179958413315,
+          "expected_movement": 6.4639179958413315
+        },
+        {
+          "station": 29,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 8.290004952363072,
+          "expected_movement": 8.290004952363073
+        },
+        {
+          "station": 30,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 11.005830413288791,
+          "expected_movement": 11.005830413288793
+        }
+      ],
+      "values_sha256": "0ec1d4727a1e190835c8341b76290f32c6318648c84f2493d5404e0fb3dab0a4"
+    },
+    {
+      "mode": "projected",
+      "status": 2,
+      "objective": 0.13138946503971002,
+      "original": {
+        "rows": 30365,
+        "columns": 8183,
+        "nonzeros": 191452,
+        "binary": 3677,
+        "integer": 3797
+      },
+      "presolved": {
+        "rows": 14939,
+        "columns": 8151,
+        "nonzeros": 165193,
+        "binary": 3677,
+        "integer": 3797
+      },
+      "model_sha256": "b65747808307f69db570b142c7e1038b416d412c259e8df96638315c8400a9cd",
+      "feasibility_tolerance": 1e-08,
+      "optimality_tolerance": 1e-09,
+      "primal_violation": 0.0,
+      "dual_violation": 1.308665903507894e-18,
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 6.086956521739131,
+          "expected_movement": 6.086956521739129
+        },
+        {
+          "station": 2,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 5.7391304347826075,
+          "expected_movement": 5.7391304347826075
+        },
+        {
+          "station": 3,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 7.456634149054912,
+          "expected_movement": 7.4566341490549135
+        },
+        {
+          "station": 4,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.078260869565216,
+          "expected_movement": 10.078260869565216
+        },
+        {
+          "station": 5,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 6.424052857509905,
+          "expected_movement": 6.4240528575099045
+        },
+        {
+          "station": 6,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 6.268153412003813,
+          "expected_movement": 6.268153412003814
+        },
+        {
+          "station": 7,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.471201842627753,
+          "expected_movement": 7.471201842627753
+        },
+        {
+          "station": 8,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 9.63304347826087,
+          "expected_movement": 9.633043478260868
+        },
+        {
+          "station": 9,
+          "movement_residual": 3.552713678800501e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 10.087181341588089,
+          "expected_movement": 10.087181341588085
+        },
+        {
+          "station": 10,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 16.069565217391304,
+          "expected_movement": 16.069565217391307
+        },
+        {
+          "station": 11,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 5.394198873398978,
+          "expected_movement": 5.394198873398978
+        },
+        {
+          "station": 12,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 5.086956521739131,
+          "expected_movement": 5.086956521739131
+        },
+        {
+          "station": 13,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 7.391304347826088,
+          "expected_movement": 7.391304347826089
+        },
+        {
+          "station": 14,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 7.28272110557665,
+          "expected_movement": 7.282721105576651
+        },
+        {
+          "station": 15,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 8.992940973062534,
+          "expected_movement": 8.992940973062536
+        },
+        {
+          "station": 16,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": -5.551115123125783e-17,
+          "movement": 10.348050906805476,
+          "expected_movement": 10.348050906805478
+        },
+        {
+          "station": 17,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.645114886106015,
+          "expected_movement": 8.645114886106015
+        },
+        {
+          "station": 18,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 12.514680103497318,
+          "expected_movement": 12.514680103497318
+        },
+        {
+          "station": 19,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 9.166854016540794,
+          "expected_movement": 9.166854016540796
+        },
+        {
+          "station": 20,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 18.0,
+          "expected_movement": 18.0
+        },
+        {
+          "station": 21,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 5.2608695652173925,
+          "expected_movement": 5.260869565217392
+        },
+        {
+          "station": 22,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 4.913043478260871,
+          "expected_movement": 4.91304347826087
+        },
+        {
+          "station": 23,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 13.0,
+          "expected_movement": 13.0
+        },
+        {
+          "station": 24,
+          "movement_residual": 0.0,
+          "visit_residual": 5.551115123125783e-17,
+          "movement": 8.992940973062536,
+          "expected_movement": 8.992940973062536
+        },
+        {
+          "station": 25,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 12.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 26,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 13.0,
+          "expected_movement": 12.999999999999998
+        },
+        {
+          "station": 27,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.174137863327214,
+          "expected_movement": 10.174137863327214
+        },
+        {
+          "station": 28,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 6.4639179958413315,
+          "expected_movement": 6.463917995841332
+        },
+        {
+          "station": 29,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.290004952363073,
+          "expected_movement": 8.290004952363073
+        },
+        {
+          "station": 30,
+          "movement_residual": 0.0,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 11.0,
+          "expected_movement": 11.0
+        }
+      ],
+      "values_sha256": "45eb0ff6b055542822c756624dc3500516983321dfaad08096b19fad7157862b"
+    }
+  ],
+  "completion": {
+    "status": 3,
+    "feasible": false,
+    "proved_no_extension": true,
+    "scope": "R1 known feasible; old common coordinates fixed, selectors/q/m free. This is NOT interval infeasibility."
+  },
+  "script_sha256": "6fb1d3c44ea7bcb562146acbfe615d4acb7cba09b2d20af116426d6c0b347cb9"
+}
