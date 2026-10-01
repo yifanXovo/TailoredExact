@@ -1,0 +1,11 @@
+{
+  "issue": "Round98 feature was appended, but final RunConfigSnapshot overwrote the effective preset with inherited R83 name",
+  "affected": "v1 R98 result identity only; actual canonical model/types, physics, startup/controller and native parameters unchanged",
+  "fix_commit": "f371be680",
+  "paid_originals_retained": true,
+  "formal_action": "exclude v1 prefix from final performance; fresh v2 all formal arms",
+  "v1_prefix_audit_sha256": "47a7cb6e44d3d2c62ceedc4834fadd6049f214e94aeb7319a9d47de62cf82269",
+  "actual_start_audit_sha256": "f1ade97c392bf97975b74b7827258e6ce973d2a349d5d994f1f87c53e825bb12",
+  "planned_v1_never_started": 15,
+  "optimizer_calls": 0
+}

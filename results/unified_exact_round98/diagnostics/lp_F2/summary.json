@@ -1,0 +1,541 @@
+{
+  "role": "F2",
+  "passed": true,
+  "optimizer_calls": 4,
+  "maximum_calls": 4,
+  "outer_seconds": 1.1409999998286366,
+  "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+  "fixed_state": {
+    "id": "F2",
+    "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+    "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+    "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+    "T_seconds": 3600,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "cap_seconds": 900,
+    "method_order": [
+      "ORDER-ON",
+      "P-GRB",
+      "ENS-C"
+    ],
+    "reference": {
+      "optimizer_calls": 0,
+      "fingerprint": 788240696,
+      "canonical_sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+      "columns": 1591,
+      "rows": 3689
+    },
+    "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+    "M": 2,
+    "V": 20,
+    "Q_vector": [
+      30,
+      30
+    ],
+    "historical_initial_witness": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/initial_witness.json",
+    "historical_initial_witness_sha256": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02",
+    "diagnostic_cutoff": 0.885348300934578,
+    "diagnostic_gamma_L": 0,
+    "diagnostic_gamma_U": 0.885348300934578
+  },
+  "records": [
+    {
+      "mode": "off",
+      "status": 2,
+      "objective": 0.5286256494653551,
+      "original": {
+        "rows": 9269,
+        "columns": 3488,
+        "nonzeros": 52879,
+        "binary": 1567,
+        "integer": 1707
+      },
+      "presolved": {
+        "rows": 7615,
+        "columns": 3466,
+        "nonzeros": 56116,
+        "binary": 1567,
+        "integer": 1707
+      },
+      "model_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": -3.7140869590232004,
+          "visit_residual": -0.8035333348775677,
+          "movement": 5.893999953672971,
+          "expected_movement": 9.608086912696171
+        },
+        {
+          "station": 2,
+          "movement_residual": -1.6305151058097587,
+          "visit_residual": -0.9198028824579486,
+          "movement": 2.4059135262615423,
+          "expected_movement": 4.036428632071301
+        },
+        {
+          "station": 3,
+          "movement_residual": -13.339113599517157,
+          "visit_residual": -0.9113760399778696,
+          "movement": 2.658718800663911,
+          "expected_movement": 15.997832400181068
+        },
+        {
+          "station": 4,
+          "movement_residual": -6.217996895861679,
+          "visit_residual": -0.9083333333333334,
+          "movement": 2.7499999999999982,
+          "expected_movement": 8.967996895861678
+        },
+        {
+          "station": 5,
+          "movement_residual": -9.382472051967556,
+          "visit_residual": -1.0,
+          "movement": 0.0,
+          "expected_movement": 9.382472051967556
+        },
+        {
+          "station": 6,
+          "movement_residual": -8.181818181818183,
+          "visit_residual": -0.7,
+          "movement": 9.0,
+          "expected_movement": 17.181818181818183
+        },
+        {
+          "station": 7,
+          "movement_residual": 0.0,
+          "visit_residual": -0.43333333333333335,
+          "movement": 17.0,
+          "expected_movement": 17.0
+        },
+        {
+          "station": 8,
+          "movement_residual": -4.2446708103122255,
+          "visit_residual": -0.42833126310870795,
+          "movement": 8.0,
+          "expected_movement": 12.244670810312225
+        },
+        {
+          "station": 9,
+          "movement_residual": -4.28156428684123,
+          "visit_residual": -0.8379222098562644,
+          "movement": 4.862333704312067,
+          "expected_movement": 9.143897991153297
+        },
+        {
+          "station": 10,
+          "movement_residual": -7.538229814111285,
+          "visit_residual": -1.0,
+          "movement": 0.0,
+          "expected_movement": 7.538229814111285
+        },
+        {
+          "station": 11,
+          "movement_residual": -8.37937064289847,
+          "visit_residual": -0.9617342025064874,
+          "movement": 1.147973924805376,
+          "expected_movement": 9.527344567703846
+        },
+        {
+          "station": 12,
+          "movement_residual": -2.6529192564451405,
+          "visit_residual": -0.8091493350011064,
+          "movement": 5.725519949966807,
+          "expected_movement": 8.378439206411947
+        },
+        {
+          "station": 13,
+          "movement_residual": -11.505285574047816,
+          "visit_residual": -0.8273255888105249,
+          "movement": 5.180232335684254,
+          "expected_movement": 16.68551790973207
+        },
+        {
+          "station": 14,
+          "movement_residual": -3.7140869590231977,
+          "visit_residual": -1.0,
+          "movement": 0.0,
+          "expected_movement": 3.7140869590231977
+        },
+        {
+          "station": 15,
+          "movement_residual": -5.836422364179311,
+          "visit_residual": -1.0,
+          "movement": 0.0,
+          "expected_movement": 5.836422364179311
+        },
+        {
+          "station": 16,
+          "movement_residual": -0.006402092723016395,
+          "visit_residual": -0.631578947368421,
+          "movement": 11.052631578947368,
+          "expected_movement": 11.059033671670385
+        },
+        {
+          "station": 17,
+          "movement_residual": -3.4487950333786834,
+          "visit_residual": -0.6666666666666667,
+          "movement": 10.0,
+          "expected_movement": 13.448795033378683
+        },
+        {
+          "station": 18,
+          "movement_residual": -5.333333333333334,
+          "visit_residual": -1.0,
+          "movement": 0.0,
+          "expected_movement": 5.333333333333334
+        },
+        {
+          "station": 19,
+          "movement_residual": 0.0,
+          "visit_residual": -0.6,
+          "movement": 12.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 20,
+          "movement_residual": -4.080899069529043,
+          "visit_residual": -0.8345238095238096,
+          "movement": 4.9642857142857135,
+          "expected_movement": 9.045184783814756
+        }
+      ],
+      "values_sha256": "67e742611bf8079d4ce2dbc28c358595b7467d35421a0ac99472a1d6073bb2d7"
+    },
+    {
+      "mode": "aggregate",
+      "status": 2,
+      "objective": 0.5967123750531154,
+      "original": {
+        "rows": 9309,
+        "columns": 3488,
+        "nonzeros": 53646,
+        "binary": 1567,
+        "integer": 1707
+      },
+      "presolved": {
+        "rows": 7634,
+        "columns": 3466,
+        "nonzeros": 57391,
+        "binary": 1567,
+        "integer": 1707
+      },
+      "model_sha256": "ce3085773358695dace120db62f095f67653984cc713b1940f2fb96fb37ea9e5",
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": 5.329070518200751e-15,
+          "visit_residual": 0.0,
+          "movement": 4.901462117137578,
+          "expected_movement": 4.901462117137573
+        },
+        {
+          "station": 2,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 2.778460344120287,
+          "expected_movement": 2.778460344120287
+        },
+        {
+          "station": 3,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 2.25,
+          "expected_movement": 2.25
+        },
+        {
+          "station": 4,
+          "movement_residual": 1.3322676295501878e-15,
+          "visit_residual": 0.0,
+          "movement": 2.932819252126971,
+          "expected_movement": 2.93281925212697
+        },
+        {
+          "station": 5,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 3.241537068140335,
+          "expected_movement": 3.241537068140335
+        },
+        {
+          "station": 6,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 7,
+          "movement_residual": 0.0,
+          "visit_residual": 2.7755575615628914e-17,
+          "movement": 17.0,
+          "expected_movement": 17.0
+        },
+        {
+          "station": 8,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.766364489966024,
+          "expected_movement": 6.766364489966024
+        },
+        {
+          "station": 9,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 5.149345147766572,
+          "expected_movement": 5.149345147766572
+        },
+        {
+          "station": 10,
+          "movement_residual": 4.440892098500626e-16,
+          "visit_residual": 0.0,
+          "movement": 2.9328192521269703,
+          "expected_movement": 2.93281925212697
+        },
+        {
+          "station": 11,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 3.395895976147017,
+          "expected_movement": 3.3958959761470178
+        },
+        {
+          "station": 12,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 4.653579086508582,
+          "expected_movement": 4.653579086508582
+        },
+        {
+          "station": 13,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 5.529637571194087,
+          "expected_movement": 5.529637571194089
+        },
+        {
+          "station": 14,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 0.0,
+          "expected_movement": 0.0
+        },
+        {
+          "station": 15,
+          "movement_residual": 1.9984014443252818e-15,
+          "visit_residual": 0.0,
+          "movement": 1.0215315550854207,
+          "expected_movement": 1.0215315550854187
+        },
+        {
+          "station": 16,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.158796086232062,
+          "expected_movement": 8.158796086232062
+        },
+        {
+          "station": 17,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.0,
+          "expected_movement": 10.0
+        },
+        {
+          "station": 18,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 0.0,
+          "expected_movement": 0.0
+        },
+        {
+          "station": 19,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 3.855709626466737,
+          "expected_movement": 3.855709626466738
+        },
+        {
+          "station": 20,
+          "movement_residual": 4.440892098500626e-16,
+          "visit_residual": 0.0,
+          "movement": 2.9328192521269703,
+          "expected_movement": 2.93281925212697
+        }
+      ],
+      "values_sha256": "2290fe285843af2cc6837157e3c050db0c64ee1a5f1e725c16e125c859e4d22d"
+    },
+    {
+      "mode": "projected",
+      "status": 2,
+      "objective": 0.5967123750531166,
+      "original": {
+        "rows": 9229,
+        "columns": 3448,
+        "nonzeros": 53486,
+        "binary": 1527,
+        "integer": 1587
+      },
+      "presolved": {
+        "rows": 7554,
+        "columns": 3426,
+        "nonzeros": 57092,
+        "binary": 1527,
+        "integer": 1587
+      },
+      "model_sha256": "a2f9f1cfdaef94ed69418faf4fc2879559251bb19520d24cf9ba55f6244fed5c",
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 4.901462117137548,
+          "expected_movement": 4.901462117137548
+        },
+        {
+          "station": 2,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 2.778460344120308,
+          "expected_movement": 2.778460344120309
+        },
+        {
+          "station": 3,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 2.25,
+          "expected_movement": 2.25
+        },
+        {
+          "station": 4,
+          "movement_residual": 4.440892098500626e-16,
+          "visit_residual": 0.0,
+          "movement": 2.9328192521269933,
+          "expected_movement": 2.932819252126993
+        },
+        {
+          "station": 5,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 3.2415370681403637,
+          "expected_movement": 3.241537068140362
+        },
+        {
+          "station": 6,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 7,
+          "movement_residual": 0.0,
+          "visit_residual": 2.7755575615628914e-17,
+          "movement": 17.0,
+          "expected_movement": 17.0
+        },
+        {
+          "station": 8,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.766364489966087,
+          "expected_movement": 6.766364489966087
+        },
+        {
+          "station": 9,
+          "movement_residual": -2.6645352591003757e-15,
+          "visit_residual": 2.220446049250313e-16,
+          "movement": 5.149345147766544,
+          "expected_movement": 5.149345147766547
+        },
+        {
+          "station": 10,
+          "movement_residual": 4.440892098500626e-16,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 2.932819252126991,
+          "expected_movement": 2.9328192521269907
+        },
+        {
+          "station": 11,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 3.3958959761470453,
+          "expected_movement": 3.3958959761470444
+        },
+        {
+          "station": 12,
+          "movement_residual": 3.552713678800501e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 4.653579086508554,
+          "expected_movement": 4.65357908650855
+        },
+        {
+          "station": 13,
+          "movement_residual": 2.6645352591003757e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 5.5296375711940575,
+          "expected_movement": 5.529637571194055
+        },
+        {
+          "station": 14,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 0.0,
+          "expected_movement": 0.0
+        },
+        {
+          "station": 15,
+          "movement_residual": -2.220446049250313e-15,
+          "visit_residual": 0.0,
+          "movement": 1.0215315550853745,
+          "expected_movement": 1.0215315550853767
+        },
+        {
+          "station": 16,
+          "movement_residual": 0.0,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 8.158796086232028,
+          "expected_movement": 8.158796086232028
+        },
+        {
+          "station": 17,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.0,
+          "expected_movement": 10.0
+        },
+        {
+          "station": 18,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 0.0,
+          "expected_movement": 0.0
+        },
+        {
+          "station": 19,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 3.8557096264667017,
+          "expected_movement": 3.8557096264667026
+        },
+        {
+          "station": 20,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 2.9328192521269916,
+          "expected_movement": 2.9328192521269907
+        }
+      ],
+      "values_sha256": "cf03bc2458842e9bbc2ad9edda506bc8d36f50a9b2b295dc56ad54624c03c408"
+    }
+  ],
+  "completion": {
+    "status": 3,
+    "feasible": false,
+    "proved_no_extension": true,
+    "scope": "R1 known feasible; old common coordinates fixed, selectors/q/m free. This is NOT interval infeasibility."
+  },
+  "script_sha256": "0060b156277b002f2d020ddcd09ffd059951810a7413ad67ffaba094769f399b"
+}

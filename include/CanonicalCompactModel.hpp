@@ -134,6 +134,7 @@ CanonicalCompactModelArtifact writeCanonicalCompactModel(
 
 std::vector<RoutePlan> reconstructCanonicalCompactRoutes(
     const Instance& instance,
-    const std::unordered_map<std::string, double>& named_values);
+    const std::unordered_map<std::string, double>& named_values,
+    bool enforce_integer_operations = false);
 
 } // namespace ebrp

@@ -161,3 +161,10 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /tests/round97* -text whitespace=cr-at-eol
 /reference/round97*/** -text
 /results/unified_exact_round97/**/*.log -whitespace
+
+# Round98 source and evidence retain frozen bytes across checkout.
+/results/unified_exact_round98/** -text whitespace=cr-at-eol
+/scripts/round98*.py -text whitespace=cr-at-eol
+/tests/round98* -text whitespace=cr-at-eol
+/reference/round98*/** -text
+/results/unified_exact_round98/**/*.log -whitespace

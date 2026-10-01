@@ -1,0 +1,770 @@
+{
+  "role": "R97-C2",
+  "passed": true,
+  "optimizer_calls": 4,
+  "maximum_calls": 4,
+  "outer_seconds": 4.155999999959022,
+  "input_sha256": "02e0d367a6deaabfb312dfdd1629ca60932eac7cb33b69075aeed8fc56d00dce",
+  "fixed_state": {
+    "id": "R97-C2",
+    "V": 30,
+    "M": 4,
+    "Q": 15,
+    "geometry": "bent_corridor",
+    "inventory": "surplus",
+    "T_seconds": 5400,
+    "cap_seconds": 900,
+    "method_order": [
+      "OFF",
+      "P-GRB",
+      "FEEDBACK"
+    ],
+    "input_path": "reference/round97_confirmation/C2.txt",
+    "instance_path": "reference/round97_confirmation/C2.txt",
+    "input_sha256": "02e0d367a6deaabfb312dfdd1629ca60932eac7cb33b69075aeed8fc56d00dce",
+    "scenario_id": "round97-native-confirmation-v1-C2",
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "total_initial": 639,
+    "total_target": 592,
+    "reference": {
+      "optimizer_calls": 0,
+      "fingerprint": 511273102,
+      "canonical_sha256": "1d5b25447d62d81eab7f8945a94459dc124d578eca1baf9c997b1b6d01515c89",
+      "columns": 5342,
+      "rows": 13616
+    },
+    "Q_vector": [
+      15,
+      15,
+      15,
+      15
+    ],
+    "historical_initial_witness": "results/unified_exact_round97/confirmation01/raw/04_C2_OFF/external/initial_witness.json",
+    "historical_initial_witness_sha256": "c7c4adb498f6b4320ab0d06a3c5c7678843a919afd5430ebd756bd38a8ca5810",
+    "diagnostic_cutoff": 0.17404536343054874,
+    "diagnostic_gamma_L": 0,
+    "diagnostic_gamma_U": 0.17404536343054874
+  },
+  "records": [
+    {
+      "mode": "off",
+      "status": 2,
+      "objective": 0.0,
+      "original": {
+        "rows": 38958,
+        "columns": 10295,
+        "nonzeros": 236932,
+        "binary": 4748,
+        "integer": 5138
+      },
+      "presolved": {
+        "rows": 33572,
+        "columns": 10265,
+        "nonzeros": 230373,
+        "binary": 4748,
+        "integer": 5140
+      },
+      "model_sha256": "a38098ab42407ab5ccf014265555b73c6144900a834523a400d92d78c515f6a8",
+      "feasibility_tolerance": 1e-08,
+      "optimality_tolerance": 1e-09,
+      "primal_violation": 0.0,
+      "dual_violation": 0.0,
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": -0.2977144289878131,
+          "movement": 10.0,
+          "expected_movement": 10.000000000000002
+        },
+        {
+          "station": 2,
+          "movement_residual": -5.09090909090909,
+          "visit_residual": -0.4482758620689655,
+          "movement": 7.0,
+          "expected_movement": 12.09090909090909
+        },
+        {
+          "station": 3,
+          "movement_residual": -8.0,
+          "visit_residual": -0.6,
+          "movement": 6.0,
+          "expected_movement": 14.0
+        },
+        {
+          "station": 4,
+          "movement_residual": -5.478260869565219,
+          "visit_residual": -0.22580645161290314,
+          "movement": 7.0,
+          "expected_movement": 12.478260869565219
+        },
+        {
+          "station": 5,
+          "movement_residual": -6.75,
+          "visit_residual": -0.6,
+          "movement": 6.0,
+          "expected_movement": 12.75
+        },
+        {
+          "station": 6,
+          "movement_residual": -1.2631578947368425,
+          "visit_residual": -0.19999999999999996,
+          "movement": 12.0,
+          "expected_movement": 13.263157894736842
+        },
+        {
+          "station": 7,
+          "movement_residual": -4.869565217391305,
+          "visit_residual": -0.4666666666666667,
+          "movement": 8.0,
+          "expected_movement": 12.869565217391305
+        },
+        {
+          "station": 8,
+          "movement_residual": -6.75,
+          "visit_residual": -0.6,
+          "movement": 6.0,
+          "expected_movement": 12.75
+        },
+        {
+          "station": 9,
+          "movement_residual": 0.0,
+          "visit_residual": 0.26666666666666666,
+          "movement": 11.0,
+          "expected_movement": 11.0
+        },
+        {
+          "station": 10,
+          "movement_residual": -8.8,
+          "visit_residual": -0.7333333333333334,
+          "movement": 4.0,
+          "expected_movement": 12.8
+        },
+        {
+          "station": 11,
+          "movement_residual": -4.869565217391305,
+          "visit_residual": -0.4666666666666667,
+          "movement": 8.0,
+          "expected_movement": 12.869565217391305
+        },
+        {
+          "station": 12,
+          "movement_residual": -4.869565217391305,
+          "visit_residual": -0.4666666666666667,
+          "movement": 8.0,
+          "expected_movement": 12.869565217391305
+        },
+        {
+          "station": 13,
+          "movement_residual": -2.0,
+          "visit_residual": -0.2666666666666666,
+          "movement": 11.0,
+          "expected_movement": 13.0
+        },
+        {
+          "station": 14,
+          "movement_residual": -3.428571428571429,
+          "visit_residual": -0.4,
+          "movement": 9.0,
+          "expected_movement": 12.428571428571429
+        },
+        {
+          "station": 15,
+          "movement_residual": 0.0,
+          "visit_residual": -0.33333333333333337,
+          "movement": 10.0,
+          "expected_movement": 10.0
+        },
+        {
+          "station": 16,
+          "movement_residual": -3.8181818181818183,
+          "visit_residual": -0.4,
+          "movement": 9.0,
+          "expected_movement": 12.818181818181818
+        },
+        {
+          "station": 17,
+          "movement_residual": -4.17391304347826,
+          "visit_residual": -0.4,
+          "movement": 9.0,
+          "expected_movement": 13.17391304347826
+        },
+        {
+          "station": 18,
+          "movement_residual": -8.88888888888889,
+          "visit_residual": -0.7333333333333334,
+          "movement": 4.0,
+          "expected_movement": 12.88888888888889
+        },
+        {
+          "station": 19,
+          "movement_residual": -11.0,
+          "visit_residual": -0.7333333333333334,
+          "movement": 4.0,
+          "expected_movement": 15.0
+        },
+        {
+          "station": 20,
+          "movement_residual": -8.357142857142858,
+          "visit_residual": -0.6,
+          "movement": 6.0,
+          "expected_movement": 14.357142857142858
+        },
+        {
+          "station": 21,
+          "movement_residual": -4.869565217391305,
+          "visit_residual": -0.4666666666666667,
+          "movement": 8.0,
+          "expected_movement": 12.869565217391305
+        },
+        {
+          "station": 22,
+          "movement_residual": -3.0,
+          "visit_residual": -0.4,
+          "movement": 9.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 23,
+          "movement_residual": -7.199999999999999,
+          "visit_residual": -0.6,
+          "movement": 6.0,
+          "expected_movement": 13.2
+        },
+        {
+          "station": 24,
+          "movement_residual": -10.0,
+          "visit_residual": -0.6666666666666667,
+          "movement": 5.0,
+          "expected_movement": 15.0
+        },
+        {
+          "station": 25,
+          "movement_residual": -0.6666666666666661,
+          "visit_residual": -0.13333333333333341,
+          "movement": 13.0,
+          "expected_movement": 13.666666666666666
+        },
+        {
+          "station": 26,
+          "movement_residual": -7.0,
+          "visit_residual": -0.4666666666666667,
+          "movement": 8.0,
+          "expected_movement": 15.0
+        },
+        {
+          "station": 27,
+          "movement_residual": -6.0,
+          "visit_residual": -0.4,
+          "movement": 9.0,
+          "expected_movement": 15.0
+        },
+        {
+          "station": 28,
+          "movement_residual": -1.3279590003358326,
+          "visit_residual": -0.1549285500391806,
+          "movement": 11.529183856807023,
+          "expected_movement": 12.857142857142856
+        },
+        {
+          "station": 29,
+          "movement_residual": -9.0,
+          "visit_residual": -0.5281914254288698,
+          "movement": 6.0,
+          "expected_movement": 15.0
+        },
+        {
+          "station": 30,
+          "movement_residual": -10.214285714285714,
+          "visit_residual": -0.7333333333333334,
+          "movement": 4.0,
+          "expected_movement": 14.214285714285714
+        }
+      ],
+      "values_sha256": "9f672abbe2166213746cb274d159a8ab84bbdefaff4a72d377c291fe7e27c740"
+    },
+    {
+      "mode": "aggregate",
+      "status": 2,
+      "objective": 0.0,
+      "original": {
+        "rows": 39018,
+        "columns": 10295,
+        "nonzeros": 238080,
+        "binary": 4748,
+        "integer": 5138
+      },
+      "presolved": {
+        "rows": 33607,
+        "columns": 10265,
+        "nonzeros": 231277,
+        "binary": 4748,
+        "integer": 5140
+      },
+      "model_sha256": "030a17a5281ff41acb6b59dc8a29eccb5f45b9ab38fa3ca621084db14bd740da",
+      "feasibility_tolerance": 1e-08,
+      "optimality_tolerance": 1e-09,
+      "primal_violation": 0.0,
+      "dual_violation": 0.0,
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 10.0,
+          "expected_movement": 10.000000000000004
+        },
+        {
+          "station": 2,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.0,
+          "expected_movement": 7.0
+        },
+        {
+          "station": 3,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.0,
+          "expected_movement": 6.0
+        },
+        {
+          "station": 4,
+          "movement_residual": 2.6645352591003757e-15,
+          "visit_residual": 0.0,
+          "movement": 7.0,
+          "expected_movement": 6.999999999999997
+        },
+        {
+          "station": 5,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 6.0,
+          "expected_movement": 6.0
+        },
+        {
+          "station": 6,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 11.999999999999998,
+          "expected_movement": 11.999999999999996
+        },
+        {
+          "station": 7,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 8,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 6.925531914893617,
+          "expected_movement": 6.925531914893616
+        },
+        {
+          "station": 9,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 11.0,
+          "expected_movement": 11.0
+        },
+        {
+          "station": 10,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 4.0,
+          "expected_movement": 3.999999999999999
+        },
+        {
+          "station": 11,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 12,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.999999999999999,
+          "expected_movement": 7.999999999999999
+        },
+        {
+          "station": 13,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 11.0,
+          "expected_movement": 10.999999999999998
+        },
+        {
+          "station": 14,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 15,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.0,
+          "expected_movement": 10.0
+        },
+        {
+          "station": 16,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 17,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 18,
+          "movement_residual": 3.552713678800501e-15,
+          "visit_residual": 5.551115123125783e-17,
+          "movement": 4.830545411443681,
+          "expected_movement": 4.830545411443677
+        },
+        {
+          "station": 19,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 6.723625507423906,
+          "expected_movement": 6.723625507423904
+        },
+        {
+          "station": 20,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.0,
+          "expected_movement": 6.0
+        },
+        {
+          "station": 21,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 22,
+          "movement_residual": 0.0,
+          "visit_residual": -5.551115123125783e-17,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 23,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 6.063829787234043,
+          "expected_movement": 6.0638297872340425
+        },
+        {
+          "station": 24,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 5.0,
+          "expected_movement": 4.999999999999999
+        },
+        {
+          "station": 25,
+          "movement_residual": 0.0,
+          "visit_residual": -1.3877787807814457e-17,
+          "movement": 13.0,
+          "expected_movement": 13.0
+        },
+        {
+          "station": 26,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 27,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 5.551115123125783e-17,
+          "movement": 9.0,
+          "expected_movement": 9.000000000000002
+        },
+        {
+          "station": 28,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 5.551115123125783e-17,
+          "movement": 10.000000000000002,
+          "expected_movement": 10.000000000000004
+        },
+        {
+          "station": 29,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 6.0,
+          "expected_movement": 5.999999999999999
+        },
+        {
+          "station": 30,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 4.0,
+          "expected_movement": 4.0
+        }
+      ],
+      "values_sha256": "504efd1f04694dd35bf12e471f47c0189c95c66f24c35906acbe576db6edcae8"
+    },
+    {
+      "mode": "projected",
+      "status": 2,
+      "objective": 0.0,
+      "original": {
+        "rows": 38778,
+        "columns": 10175,
+        "nonzeros": 237600,
+        "binary": 4628,
+        "integer": 4778
+      },
+      "presolved": {
+        "rows": 33479,
+        "columns": 10145,
+        "nonzeros": 232089,
+        "binary": 4628,
+        "integer": 4780
+      },
+      "model_sha256": "d7b3d73745e4eb1edff62fe718ca583eba49a1ef829b17ecb0fa3d6efbeb9d4c",
+      "feasibility_tolerance": 1e-08,
+      "optimality_tolerance": 1e-09,
+      "primal_violation": 0.0,
+      "dual_violation": 2.7755575615628914e-17,
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.0,
+          "expected_movement": 10.0
+        },
+        {
+          "station": 2,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.0,
+          "expected_movement": 7.0
+        },
+        {
+          "station": 3,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 6.0,
+          "expected_movement": 6.0
+        },
+        {
+          "station": 4,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.0,
+          "expected_movement": 7.0
+        },
+        {
+          "station": 5,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 5.551115123125783e-17,
+          "movement": 6.0,
+          "expected_movement": 5.999999999999999
+        },
+        {
+          "station": 6,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 12.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 7,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 8.0,
+          "expected_movement": 8.000000000000002
+        },
+        {
+          "station": 8,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.0,
+          "expected_movement": 6.0
+        },
+        {
+          "station": 9,
+          "movement_residual": 0.0,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 11.10370354040138,
+          "expected_movement": 11.10370354040138
+        },
+        {
+          "station": 10,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 4.0,
+          "expected_movement": 4.0
+        },
+        {
+          "station": 11,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 12,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 13,
+          "movement_residual": 0.0,
+          "visit_residual": 5.551115123125783e-17,
+          "movement": 11.0,
+          "expected_movement": 11.0
+        },
+        {
+          "station": 14,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 15,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.0,
+          "expected_movement": 10.0
+        },
+        {
+          "station": 16,
+          "movement_residual": 0.0,
+          "visit_residual": -5.551115123125783e-17,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 17,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 18,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 4.0,
+          "expected_movement": 4.0
+        },
+        {
+          "station": 19,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 4.0,
+          "expected_movement": 3.999999999999999
+        },
+        {
+          "station": 20,
+          "movement_residual": 0.0,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 6.248498465967035,
+          "expected_movement": 6.248498465967035
+        },
+        {
+          "station": 21,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 22,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": -5.551115123125783e-17,
+          "movement": 9.0,
+          "expected_movement": 9.000000000000002
+        },
+        {
+          "station": 23,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.0,
+          "expected_movement": 6.0
+        },
+        {
+          "station": 24,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 5.0,
+          "expected_movement": 5.0
+        },
+        {
+          "station": 25,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 13.0,
+          "expected_movement": 13.0
+        },
+        {
+          "station": 26,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 5.551115123125783e-17,
+          "movement": 8.0,
+          "expected_movement": 8.000000000000002
+        },
+        {
+          "station": 27,
+          "movement_residual": 7.105427357601002e-15,
+          "visit_residual": 3.3306690738754696e-16,
+          "movement": 9.092783505154639,
+          "expected_movement": 9.092783505154632
+        },
+        {
+          "station": 28,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.624999999999998,
+          "expected_movement": 10.624999999999998
+        },
+        {
+          "station": 29,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 5.551115123125783e-17,
+          "movement": 6.0,
+          "expected_movement": 5.999999999999999
+        },
+        {
+          "station": 30,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 12.21851489547393,
+          "expected_movement": 12.21851489547393
+        }
+      ],
+      "values_sha256": "53cf8fef469828aea64c3917f31e344446fc1a3218201811ab126bf84c2beabd"
+    }
+  ],
+  "completion": {
+    "status": 2,
+    "feasible": true,
+    "proved_no_extension": false,
+    "scope": "R1 known feasible; old common coordinates fixed, selectors/q/m free. This is NOT interval infeasibility."
+  },
+  "script_sha256": "6fb1d3c44ea7bcb562146acbfe615d4acb7cba09b2d20af116426d6c0b347cb9"
+}

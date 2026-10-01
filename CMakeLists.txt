@@ -115,6 +115,12 @@ else()
 endif()
 
 add_library(exact_ebrp_core ${EXACT_EBRP_LIB_SOURCES})
+add_executable(Round98ModelExport src/round98_model_export.cpp)
+target_link_libraries(Round98ModelExport PRIVATE exact_ebrp_core)
+add_executable(Round98StateServiceTests tests/round98_state_service_tests.cpp)
+target_link_libraries(Round98StateServiceTests PRIVATE exact_ebrp_core)
+add_test(NAME Round98StateServiceTests COMMAND Round98StateServiceTests
+    "${CMAKE_CURRENT_BINARY_DIR}/round98_ctest_models")
 add_executable(Round97NativeClosureTests tests/round97_native_closure_tests.cpp)
 target_link_libraries(Round97NativeClosureTests PRIVATE exact_ebrp_core)
 

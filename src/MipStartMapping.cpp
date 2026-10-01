@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <cstdlib>
 #include <limits>
 #include <numeric>
 #include <set>
@@ -225,6 +226,18 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             value = ratio_max;
         } else if (name == "W_SP") {
             value = objective_parts.S * objective_parts.P;
+        } else if (options.round98_state_service == "vehicle-state" &&
+                   parseIndexedName(name, "theta_", 3, indices) &&
+                   indices[0] >= 0 && indices[0] < instance.M &&
+                   indices[1] >= 1 && indices[1] <= instance.V &&
+                   indices[2] >= 0 && indices[2] <= instance.capacity[indices[1]] &&
+                   indices[2] != instance.initial[indices[1]] &&
+                   std::llabs(static_cast<long long>(indices[2]) - instance.initial[indices[1]])
+                       <= instance.Q[indices[0]]) {
+            const auto served = route_values.find("z_" + std::to_string(indices[0]) +
+                                                   "_" + std::to_string(indices[1]));
+            value = served != route_values.end() && served->second == 1.0 &&
+                final_inventory[indices[1]] == indices[2] ? 1.0 : 0.0;
         } else if (parseIndexedName(name, "state_", 2, indices) &&
                    indices[0] >= 1 && indices[0] <= instance.V) {
             value = final_inventory[indices[0]] == indices[1] ? 1.0 : 0.0;

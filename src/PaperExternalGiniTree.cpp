@@ -1,4 +1,5 @@
 #include "PaperExternalGiniTree.hpp"
+#include "Round98StateService.hpp"
 
 #include "CanonicalCompactModel.hpp"
 #include "ConnectivityFlow.hpp"
@@ -130,6 +131,7 @@ struct PaperLeafRuntime {
     bool artifact_ready = false;
     CanonicalCompactModelArtifact artifact;
     long long artifact_incumbent_epoch = -1;
+    long long artifact_generation = -1;
     bool lp_complete = false;
     PaperLpResult lp;
     long long lp_incumbent_epoch = -1;
@@ -334,6 +336,10 @@ bool round31C6FrozenOptionsValid(const SolveOptions& options,
         return false;
     }
     const bool first_class_k1 = options.k1_am_sf_controller_enabled;
+    if (!round98IsIsolatedENS(options)) {
+        reason = "round98_requires_isolated_ensc_state_service";
+        return false;
+    }
     if (options.round97_native_closure != "off" &&
         ((!first_class_k1 || options.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
           options.method != "gcap-frontier" || options.round88_constructive_only_descent ||
@@ -3696,8 +3702,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 options, "first_interval_model_build", "start",
                 "leaf=" + leaf.id);
         }
+        // Retain the exact bytes referenced by every earlier native event.
+        // A cutoff epoch invalidates native state without overwriting its
+        // historical canonical matrix, needed for independent scope replay.
+        state.artifact_generation =
+            result.external_gini_tree_canonical_artifact_generation_count + 1;
         state.artifact = writeCanonicalCompactModel(
-            instance, options, artifact_dir / "models" / (leaf.id + ".lp"),
+            instance, options, artifact_dir / "models" /
+                (leaf.id + "_epoch_" + std::to_string(incumbent_epoch) +
+                 "_generation_" + std::to_string(state.artifact_generation) + ".lp"),
             spec);
         if (options.round92_handling_activation) {
             const auto& a = state.artifact;
@@ -6340,7 +6353,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             std::string round90_fallback_reason = "not_candidate";
             if (options.round90_lp_g_split) {
                 const auto expected_parent_path = artifact_dir / "models" /
-                    (bounded.id + ".lp");
+                    (bounded.id + "_epoch_" + std::to_string(incumbent_epoch) +
+                     "_generation_" + std::to_string(selected_state.artifact_generation) + ".lp");
                 if (!selected_state.artifact_ready ||
                     !selected_state.artifact.written ||
                     selected_state.artifact_incumbent_epoch != incumbent_epoch ||
@@ -6524,7 +6538,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         }
                         const PaperLeafRuntime& state = state_it->second;
                         const auto expected_child_path = artifact_dir / "models" /
-                            (proposed.id + ".lp");
+                            (proposed.id + "_epoch_" + std::to_string(incumbent_epoch) +
+                             "_generation_" + std::to_string(state.artifact_generation) + ".lp");
                         if (state.artifact.path != expected_child_path) {
                             cache_identity_valid = false;
                             cache_identity_reason = "cached_child_model_path_mismatch";
@@ -6621,7 +6636,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     (child_state.artifact.gamma_L != child.gamma_L ||
                      child_state.artifact.gamma_U != child.gamma_U ||
                      child_state.artifact.path != artifact_dir / "models" /
-                         (child.id + ".lp") ||
+                         (child.id + "_epoch_" + std::to_string(incumbent_epoch) +
+                          "_generation_" + std::to_string(child_state.artifact_generation) + ".lp") ||
                      (child_state.lp_complete &&
                       (child_state.lp_incumbent_epoch != incumbent_epoch ||
                        child_state.lp_gamma_L != child.gamma_L ||

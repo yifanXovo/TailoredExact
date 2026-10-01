@@ -1,0 +1,16 @@
+{
+  "command": [
+    "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+    "--test-dir",
+    "E:\\codes\\ExactEBRP\\build\\research\\round98-state-service-v1",
+    "--output-on-failure",
+    "-R",
+    "^(Round98StateServiceTests|Round55StationStateChainTests|Round68StartTests)$"
+  ],
+  "kind": "engineering",
+  "cap": 60,
+  "planned_optimizer_calls": 0,
+  "command_file_bindings": {
+    "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe": "b46cdb9567231528c4847d0511ed2781a58b412641a7912bc463c557fb8aa29f"
+  }
+}

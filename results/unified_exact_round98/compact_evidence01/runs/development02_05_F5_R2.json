@@ -1,0 +1,1379 @@
+{
+  "schema": "round98-compact-original-evidence-v1",
+  "campaign": "development02",
+  "number": 5,
+  "role": "F5",
+  "arm": "R2",
+  "panel": {
+    "id": "F5",
+    "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+    "family": "synthetic",
+    "geography": "perturbed_grid",
+    "inventory": "paired_shortage",
+    "V": 50,
+    "M": 4,
+    "Q": 30,
+    "complete_Q_vector": [
+      30,
+      30,
+      30,
+      30
+    ],
+    "T_seconds": 7200,
+    "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+    "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+    "source_manifest": "results/unified_exact_round86/protocol.json",
+    "method_order": [
+      "R2",
+      "P-GRB",
+      "ENS-C"
+    ],
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "cap_seconds": 3600,
+    "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+    "reference": {
+      "optimizer_calls": 0,
+      "fingerprint": -1011005748,
+      "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+      "columns": 13410,
+      "rows": 35693
+    },
+    "Q_vector": [
+      30,
+      30,
+      30,
+      30
+    ],
+    "historical_initial_witness": "results/unified_exact_round97/development02/raw/03_F5_OFF/external/initial_witness.json",
+    "historical_initial_witness_sha256": "16698da7b0c4ea43f1b8608aa9162b6788fed436c943c7065823a23328754b8d",
+    "diagnostic_cutoff": 0.38430409168754603,
+    "diagnostic_gamma_L": 0,
+    "diagnostic_gamma_U": 0.38430409168754603
+  },
+  "binary_sha256": "362afcd3273aedbd5ea38a5a1cde06b6381d48e5e129b291e142b73defdc547d",
+  "original_source_hashes": {
+    "launch.json": "ce314bcdaf7aab60daf45eb4bd6bbeed7fb5d76938aa458218f0952849c9b17d",
+    "result.json": "8d939e8ce94a2927b8f5c7a724d2741b3c1531cc2567d5caa332a4344649ca0d",
+    "audit.json": "2268ecbe1565ff4aebdfa983b5545766db296b507f8e331f120e9e704458f536",
+    "completion.json": "57a63de5bc3a6e37faa7a8c42dc20b765537150ba5c95114830619c9cabb10ce",
+    "observations.json": "10fe365a3d4bbc96069e45905111ed3610c5b7a2c526fd3a31f3aeca64cbabee"
+  },
+  "original_summary": {
+    "number": 5,
+    "id": "F5",
+    "arm": "R2",
+    "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2",
+    "completion": {
+      "schema": "round90-lp-g-g3-completion-v1",
+      "number": 5,
+      "id": "F5",
+      "arm": "R2",
+      "returncode": 0,
+      "process_wall_seconds": 3597.186999999918,
+      "prelaunch_seconds": 0.23499999986961484,
+      "end_to_end_seconds": 3597.4219999997877,
+      "wrapper_wall_seconds": 3597.186999999918,
+      "fully_observed_end_to_end_seconds": 3597.4219999997877,
+      "postexit_drain_and_restore_seconds": 0.0,
+      "process_cap_seconds": 3600,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "committed_events": 59,
+      "ended_unix": 1790788181.5298183
+    },
+    "audit_passed": true,
+    "endpoint": {
+      "U": 0.32406675299850807,
+      "L": 0.28143823909935073,
+      "gap": 0.04262851389915734,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "round31_c6_external_gini_tree_time_limit"
+    },
+    "split_evidence": null,
+    "audit_error": null
+  },
+  "original_audit": {
+    "binary_sha256": "362afcd3273aedbd5ea38a5a1cde06b6381d48e5e129b291e142b73defdc547d",
+    "committed_events": 59,
+    "native_calls_started": 7,
+    "native_calls_returned": 7,
+    "physical_witnesses": 29,
+    "native_physical_witnesses": 28,
+    "scoped_bound_events": 15,
+    "global_native_bound_events": 15,
+    "UB": 0.324066752998508,
+    "LB": 0.28143823909935073,
+    "gap": 0.04262851389915728,
+    "physical_upper_available": true,
+    "lower_bound_source": "complete_domain_native_evidence",
+    "certificate": false,
+    "solver_finalization_certificate": false,
+    "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+    "witnesses": [
+      {
+        "F": 0.384304091687546,
+        "G": 0.0795643099893529,
+        "P": 2.0315985446546208,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 138,
+        "maximum_duration": 7178.05882397944,
+        "original_T_feasible": true,
+        "source": "same_run_verified_startup",
+        "call": 0,
+        "sequence": 2,
+        "available": 12.453000000212342
+      },
+      {
+        "F": 0.384304091687546,
+        "G": 0.0795643099893529,
+        "P": 2.0315985446546208,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 138,
+        "maximum_duration": 7178.05882397944,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 6,
+        "sequence": 14,
+        "available": 115.65599999995902
+      },
+      {
+        "F": 0.384304091687546,
+        "G": 0.0795643099893529,
+        "P": 2.0315985446546208,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 138,
+        "maximum_duration": 7178.05882397944,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 21,
+        "available": 195.7960000000894
+      },
+      {
+        "F": 0.37880518742545144,
+        "G": 0.0781302958317191,
+        "P": 2.004499277291549,
+        "stations": 48,
+        "pickup": 138,
+        "drop": 138,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 32,
+        "available": 843.405999999959
+      },
+      {
+        "F": 0.3787387562498038,
+        "G": 0.0782526626468488,
+        "P": 2.0032406240197003,
+        "stations": 48,
+        "pickup": 139,
+        "drop": 139,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 33,
+        "available": 848.7960000000894
+      },
+      {
+        "F": 0.37870371971966815,
+        "G": 0.07796385945004651,
+        "P": 2.0049324017974777,
+        "stations": 48,
+        "pickup": 139,
+        "drop": 139,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 34,
+        "available": 849.7650000001304
+      },
+      {
+        "F": 0.37836399134430515,
+        "G": 0.07780373107468354,
+        "P": 2.0037350684641444,
+        "stations": 48,
+        "pickup": 140,
+        "drop": 140,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 35,
+        "available": 852.9530000002123
+      },
+      {
+        "F": 0.3781260942005701,
+        "G": 0.07894701389142274,
+        "P": 1.9945272020609823,
+        "stations": 49,
+        "pickup": 141,
+        "drop": 141,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 36,
+        "available": 857.155999999959
+      },
+      {
+        "F": 0.37812390092886833,
+        "G": 0.0784627710742664,
+        "P": 1.997740865697346,
+        "stations": 49,
+        "pickup": 141,
+        "drop": 141,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 37,
+        "available": 858.061999999918
+      },
+      {
+        "F": 0.3778909267074254,
+        "G": 0.08000526534425963,
+        "P": 1.985904409087772,
+        "stations": 49,
+        "pickup": 140,
+        "drop": 140,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 38,
+        "available": 881.7960000000894
+      },
+      {
+        "F": 0.37788188446051474,
+        "G": 0.08041330396691417,
+        "P": 1.9831238699573372,
+        "stations": 49,
+        "pickup": 141,
+        "drop": 141,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 39,
+        "available": 882.0
+      },
+      {
+        "F": 0.37778561257884075,
+        "G": 0.08040773958524015,
+        "P": 1.9825191532906705,
+        "stations": 49,
+        "pickup": 141,
+        "drop": 141,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 40,
+        "available": 890.375
+      },
+      {
+        "F": 0.3572728740153217,
+        "G": 0.08343430261427712,
+        "P": 1.825590476006964,
+        "stations": 48,
+        "pickup": 137,
+        "drop": 136,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 41,
+        "available": 1396.9840000001714
+      },
+      {
+        "F": 0.3569803530969057,
+        "G": 0.08493445867567471,
+        "P": 1.8136392961415397,
+        "stations": 48,
+        "pickup": 137,
+        "drop": 136,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 42,
+        "available": 1399.0780000002123
+      },
+      {
+        "F": 0.3568733685188743,
+        "G": 0.08279885491286075,
+        "P": 1.8271634240400905,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 137,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 43,
+        "available": 1617.5
+      },
+      {
+        "F": 0.35424578357197484,
+        "G": 0.08177126851668591,
+        "P": 1.8164967670352594,
+        "stations": 47,
+        "pickup": 137,
+        "drop": 136,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 44,
+        "available": 1617.625
+      },
+      {
+        "F": 0.3536029215900925,
+        "G": 0.08196534131741229,
+        "P": 1.810917201817868,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 138,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 45,
+        "available": 1617.686999999918
+      },
+      {
+        "F": 0.3533592645196664,
+        "G": 0.0819754509136529,
+        "P": 1.8092254240400905,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 138,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 46,
+        "available": 1617.686999999918
+      },
+      {
+        "F": 0.34705261018415307,
+        "G": 0.08137201475995771,
+        "P": 1.7712039694946358,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 139,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 47,
+        "available": 1628.8590000001714
+      },
+      {
+        "F": 0.346032976530413,
+        "G": 0.08126539701530852,
+        "P": 1.7651171967673631,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 139,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 48,
+        "available": 1674.780999999959
+      },
+      {
+        "F": 0.34556520336698127,
+        "G": 0.08162514847308894,
+        "P": 1.7596003659592823,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 139,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 49,
+        "available": 1714.561999999918
+      },
+      {
+        "F": 0.3452911651329058,
+        "G": 0.08160487690568012,
+        "P": 1.7579085881815044,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 139,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 50,
+        "available": 1714.561999999918
+      },
+      {
+        "F": 0.3450475657832246,
+        "G": 0.08161504422266558,
+        "P": 1.7562168104037268,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 139,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 51,
+        "available": 1714.561999999918
+      },
+      {
+        "F": 0.3434011328267268,
+        "G": 0.08354042929153008,
+        "P": 1.7324046902346446,
+        "stations": 46,
+        "pickup": 137,
+        "drop": 137,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 53,
+        "available": 2741.342999999877
+      },
+      {
+        "F": 0.3270624319917739,
+        "G": 0.08361697573918599,
+        "P": 1.6229697083505865,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 139,
+        "maximum_duration": 7178.531321937735,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 54,
+        "available": 2759.25
+      },
+      {
+        "F": 0.32467240573887735,
+        "G": 0.08415622122541978,
+        "P": 1.6034412300897172,
+        "stations": 47,
+        "pickup": 145,
+        "drop": 145,
+        "maximum_duration": 7197.524029927115,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 55,
+        "available": 2767.4530000002123
+      },
+      {
+        "F": 0.32415132304525285,
+        "G": 0.08488638114049098,
+        "P": 1.5950996126984127,
+        "stations": 48,
+        "pickup": 148,
+        "drop": 148,
+        "maximum_duration": 7197.524029927115,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 56,
+        "available": 3315.592999999877
+      },
+      {
+        "F": 0.3240904688910374,
+        "G": 0.08476055831038613,
+        "P": 1.5955327372043415,
+        "stations": 48,
+        "pickup": 149,
+        "drop": 149,
+        "maximum_duration": 7197.524029927115,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 57,
+        "available": 3347.9530000002123
+      },
+      {
+        "F": 0.324066752998508,
+        "G": 0.08521889196331134,
+        "P": 1.592319073567978,
+        "stations": 48,
+        "pickup": 149,
+        "drop": 149,
+        "maximum_duration": 7197.524029927115,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 7,
+        "sequence": 58,
+        "available": 3347.9530000002123
+      }
+    ],
+    "normal_result_certificate": false,
+    "final_only_physical_witness": false,
+    "final_physical_verification": {
+      "F": 0.324066752998508,
+      "G": 0.08521889196331134,
+      "P": 1.592319073567978,
+      "stations": 48,
+      "pickup": 149,
+      "drop": 149,
+      "maximum_duration": 7197.524029927115,
+      "original_T_feasible": true
+    },
+    "endpoint": {
+      "U": 0.32406675299850807,
+      "L": 0.28143823909935073,
+      "gap": 0.04262851389915734,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "round31_c6_external_gini_tree_time_limit"
+    },
+    "neutral_exchange": {
+      "passed": true,
+      "initial": {
+        "F": 0.44858434741053826,
+        "G": 0.0851901448464336,
+        "P": 2.422628017094031,
+        "stations": 43,
+        "pickup": 121,
+        "drop": 120,
+        "maximum_duration": 7178.05882397944,
+        "original_T_feasible": true
+      },
+      "final": {
+        "F": 0.384304091687546,
+        "G": 0.0795643099893529,
+        "P": 2.0315985446546208,
+        "stations": 47,
+        "pickup": 139,
+        "drop": 138,
+        "maximum_duration": 7178.05882397944,
+        "original_T_feasible": true
+      },
+      "result": {
+        "F": 0.38430409168754603,
+        "neutral": 0,
+        "relocations": 0,
+        "exchanges": 0,
+        "equal_net_pairs": 790,
+        "insertions": 2,
+        "quantities": 8,
+        "exhausted": true,
+        "deadline": false,
+        "zero": false,
+        "verification_failed": false,
+        "optimizer_calls": 0
+      },
+      "transitions": [
+        {
+          "iteration": 0,
+          "closure": {
+            "initial_UB": 0.44858434741053826,
+            "final_UB": 0.38430409168754603,
+            "accepted": 10,
+            "counts": {
+              "insertions": 2,
+              "quantities": 8,
+              "singles": 0,
+              "pairs": 8,
+              "cross_vehicle": 0,
+              "sign_flips": 0,
+              "removed_stops": 0
+            },
+            "independently_checked_physical_witnesses": 12,
+            "returned_to_outer": true,
+            "insertion_placements": 43066,
+            "insertion_quantities": 925,
+            "quantity_feasible": 29101,
+            "terminal_status": "joint_neighborhood_exhausted",
+            "trace_interval_seconds": 0.07062129999999911,
+            "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+          },
+          "neutral_oracle": {
+            "balanced_blocks": 9,
+            "placements": 342,
+            "feasible": 0,
+            "improving": 0,
+            "exchange_pairs": 790,
+            "exchange_feasible": 5,
+            "exchange_improving": 0,
+            "best_key": null,
+            "best_potential": null,
+            "current_potential": [
+              7178.05882397944,
+              7144.59754728881,
+              7103.158461314604,
+              7022.184668280863
+            ]
+          }
+        }
+      ],
+      "neutral_states": 0,
+      "strict_moves": 10,
+      "unique_recorded_route_states": 2,
+      "offline_seconds": 0.04606000008061528,
+      "optimizer_calls": 0,
+      "scope": "Fixed-witness diagnosis; no complete performance claim"
+    },
+    "parameter_readback": {
+      "threads": {
+        "requested": 1,
+        "effective": 1,
+        "set_return_code": 0,
+        "get_return_code": 0
+      },
+      "seed": {
+        "requested": 0,
+        "effective": 0,
+        "set_return_code": 0,
+        "get_return_code": 0
+      },
+      "presolve": {
+        "requested": -1,
+        "effective": -1,
+        "set_return_code": 0,
+        "get_return_code": 0
+      },
+      "mip_gap": {
+        "requested": 0,
+        "effective": 0,
+        "set_return_code": 0,
+        "get_return_code": 0
+      },
+      "mip_gap_abs": {
+        "requested": 0,
+        "effective": 0,
+        "set_return_code": 0,
+        "get_return_code": 0
+      }
+    },
+    "native_scope_adapter": {
+      "schema": "round94-native-scope-adapter-v3",
+      "arm": "R2",
+      "native_calls": 7,
+      "lp_calls": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "mip_calls": [
+        6,
+        7
+      ],
+      "global_bound_call_ids": [
+        6,
+        7
+      ],
+      "ledger_sha256": "83d9ca2dc3c9d1770bd8d04becc720df735ad3f7def87d76fbb31b6bc422f87d",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "all_flags_strictly_decoded": true
+    },
+    "passed": true,
+    "offline_audit_seconds": 0.16472089989110827
+  },
+  "exact_recovery": null,
+  "qualified_endpoint": {
+    "U": 0.32406675299850807,
+    "L": 0.28143823909935073,
+    "gap": 0.04262851389915734,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "round31_c6_external_gini_tree_time_limit"
+  },
+  "models": [
+    {
+      "call": 1,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\models\\L0.lp",
+      "sha256": "fe8a160c728836c298d083961136a324d24d5aa558640240f0c3339e647c908e",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0,
+      "upper_g": 0.38430409168754603,
+      "cutoff": 0.38430409168754603,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 2,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\models\\L0.0.lp",
+      "sha256": "37f027bc94e9bd60eb84eee740cb82f4b8db8296128dcce0a93c14d61d8ce50e",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0,
+      "upper_g": 0.19215204584377302,
+      "cutoff": 0.38430409168754603,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 3,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\models\\L0.1.lp",
+      "sha256": "008bf94766bce06d97af7c9e12b0283082c3985a2602cca88976cc282da27779",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0.19215204584377302,
+      "upper_g": 0.38430409168754603,
+      "cutoff": 0.38430409168754603,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 4,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\models\\L0.0.0.lp",
+      "sha256": "ccc6bb52caefdebf387a2c05b99727b9e831641ca62b90fb44d464043dc9e781",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0,
+      "upper_g": 0.09607602292188651,
+      "cutoff": 0.38430409168754603,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 5,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\models\\L0.0.1.lp",
+      "sha256": "85d38d9977b6f5df9a9327f5b90706c829c457b7c72b4135a195a5f5df0fac56",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0.09607602292188651,
+      "upper_g": 0.19215204584377302,
+      "cutoff": 0.38430409168754603,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 6,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\models\\L0.0.lp",
+      "sha256": "37f027bc94e9bd60eb84eee740cb82f4b8db8296128dcce0a93c14d61d8ce50e",
+      "full_original": 0,
+      "native_preconditions": 1,
+      "lower_g": 0,
+      "upper_g": 0.19215204584377302,
+      "cutoff": 0.38430409168754603,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 7,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\models\\L0.0.lp",
+      "sha256": "37f027bc94e9bd60eb84eee740cb82f4b8db8296128dcce0a93c14d61d8ce50e",
+      "full_original": 0,
+      "native_preconditions": 1,
+      "lower_g": 0,
+      "upper_g": 0.19215204584377302,
+      "cutoff": 0.38430409168754603,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    }
+  ],
+  "optimizer_ledger": [
+    {
+      "leaf_id": "L0",
+      "solve_kind": "LP",
+      "native_status": "OPTIMAL",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "3579.6383608000001",
+      "solver_runtime": "23.717000007629395",
+      "work": "91.881792279543177",
+      "nodes": "0",
+      "simplex_iterations": "38644",
+      "barrier_iterations": "0",
+      "memory_gb": "0.26582671699999999",
+      "model_sha256": "fe8a160c728836c298d083961136a324d24d5aa558640240f0c3339e647c908e",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\native_logs\\L0_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.0",
+      "solve_kind": "LP",
+      "native_status": "OPTIMAL",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "3550.0043515000002",
+      "solver_runtime": "23.676000118255615",
+      "work": "88.343212244244114",
+      "nodes": "0",
+      "simplex_iterations": "37945",
+      "barrier_iterations": "0",
+      "memory_gb": "0.28359933500000001",
+      "model_sha256": "37f027bc94e9bd60eb84eee740cb82f4b8db8296128dcce0a93c14d61d8ce50e",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\native_logs\\L0.0_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.1",
+      "solve_kind": "LP",
+      "native_status": "INFEASIBLE",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "3520.4661801000002",
+      "solver_runtime": "3.869999885559082",
+      "work": "11.249011221089198",
+      "nodes": "0",
+      "simplex_iterations": "11481",
+      "barrier_iterations": "0",
+      "memory_gb": "0.28359933500000001",
+      "model_sha256": "008bf94766bce06d97af7c9e12b0283082c3985a2602cca88976cc282da27779",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\native_logs\\L0.1_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.0.0",
+      "solve_kind": "LP",
+      "native_status": "OPTIMAL",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "3510.6117829999998",
+      "solver_runtime": "18.049999952316284",
+      "work": "66.845766627537088",
+      "nodes": "0",
+      "simplex_iterations": "31136",
+      "barrier_iterations": "0",
+      "memory_gb": "0.28359933700000001",
+      "model_sha256": "ccc6bb52caefdebf387a2c05b99727b9e831641ca62b90fb44d464043dc9e781",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\native_logs\\L0.0.0_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.0.1",
+      "solve_kind": "LP",
+      "native_status": "OPTIMAL",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "3486.6069487999998",
+      "solver_runtime": "3.8549997806549072",
+      "work": "10.782075963051163",
+      "nodes": "0",
+      "simplex_iterations": "10491",
+      "barrier_iterations": "0",
+      "memory_gb": "0.299756933",
+      "model_sha256": "85d38d9977b6f5df9a9327f5b90706c829c457b7c72b4135a195a5f5df0fac56",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\native_logs\\L0.0.1_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.0",
+      "solve_kind": "CHILD_BOUND_TARGET_MIP",
+      "native_status": "INTERRUPTED",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "3481.9733775999998",
+      "solver_runtime": "79.567000150680542",
+      "work": "281.27230842192927",
+      "nodes": "1",
+      "simplex_iterations": "126558",
+      "barrier_iterations": "0",
+      "memory_gb": "0.54409084200000002",
+      "model_sha256": "37f027bc94e9bd60eb84eee740cb82f4b8db8296128dcce0a93c14d61d8ce50e",
+      "in_memory_model_reused": "1",
+      "integer_domain_restored": "0",
+      "basis_reuse_status": "not_requested",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\native_logs\\L0.0_c6_1_child_disjunction_target_mip.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.0",
+      "solve_kind": "MIP",
+      "native_status": "TIME_LIMIT",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "3401.8386783000001",
+      "solver_runtime": "3401.3150000572205",
+      "work": "10548.813095828053",
+      "nodes": "533",
+      "simplex_iterations": "3623223",
+      "barrier_iterations": "0",
+      "memory_gb": "0.73408322400000003",
+      "model_sha256": "37f027bc94e9bd60eb84eee740cb82f4b8db8296128dcce0a93c14d61d8ce50e",
+      "in_memory_model_reused": "1",
+      "integer_domain_restored": "0",
+      "basis_reuse_status": "not_requested",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\05_F5_R2\\external\\native_logs\\L0.0_terminal_mip.gurobi.log"
+    }
+  ],
+  "physical_witness": {
+    "F": 0.32406675299850807,
+    "routes": [
+      {
+        "vehicle": 0,
+        "nodes": [
+          0,
+          26,
+          13,
+          3,
+          2,
+          1,
+          11,
+          21,
+          31,
+          41,
+          32,
+          22,
+          12,
+          25,
+          0
+        ],
+        "operations": [
+          {
+            "station": 26,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 13,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 3,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 2,
+            "pickup": 6,
+            "drop": 0
+          },
+          {
+            "station": 1,
+            "pickup": 0,
+            "drop": 8
+          },
+          {
+            "station": 11,
+            "pickup": 9,
+            "drop": 0
+          },
+          {
+            "station": 21,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 31,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 41,
+            "pickup": 0,
+            "drop": 9
+          },
+          {
+            "station": 32,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 22,
+            "pickup": 5,
+            "drop": 0
+          },
+          {
+            "station": 12,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 25,
+            "pickup": 0,
+            "drop": 10
+          }
+        ]
+      },
+      {
+        "vehicle": 1,
+        "nodes": [
+          0,
+          36,
+          37,
+          17,
+          8,
+          20,
+          30,
+          40,
+          50,
+          39,
+          38,
+          48,
+          47,
+          46,
+          0
+        ],
+        "operations": [
+          {
+            "station": 36,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 37,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 17,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 8,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 20,
+            "pickup": 5,
+            "drop": 0
+          },
+          {
+            "station": 30,
+            "pickup": 0,
+            "drop": 11
+          },
+          {
+            "station": 40,
+            "pickup": 0,
+            "drop": 2
+          },
+          {
+            "station": 50,
+            "pickup": 5,
+            "drop": 0
+          },
+          {
+            "station": 39,
+            "pickup": 0,
+            "drop": 5
+          },
+          {
+            "station": 38,
+            "pickup": 0,
+            "drop": 12
+          },
+          {
+            "station": 48,
+            "pickup": 8,
+            "drop": 0
+          },
+          {
+            "station": 47,
+            "pickup": 0,
+            "drop": 7
+          },
+          {
+            "station": 46,
+            "pickup": 0,
+            "drop": 1
+          }
+        ]
+      },
+      {
+        "vehicle": 2,
+        "nodes": [
+          0,
+          27,
+          19,
+          29,
+          16,
+          5,
+          15,
+          24,
+          33,
+          43,
+          44,
+          34,
+          0
+        ],
+        "operations": [
+          {
+            "station": 27,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 19,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 29,
+            "pickup": 0,
+            "drop": 8
+          },
+          {
+            "station": 16,
+            "pickup": 4,
+            "drop": 0
+          },
+          {
+            "station": 5,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 15,
+            "pickup": 5,
+            "drop": 0
+          },
+          {
+            "station": 24,
+            "pickup": 0,
+            "drop": 9
+          },
+          {
+            "station": 33,
+            "pickup": 0,
+            "drop": 9
+          },
+          {
+            "station": 43,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 44,
+            "pickup": 5,
+            "drop": 0
+          },
+          {
+            "station": 34,
+            "pickup": 0,
+            "drop": 12
+          }
+        ]
+      },
+      {
+        "vehicle": 3,
+        "nodes": [
+          0,
+          35,
+          45,
+          42,
+          23,
+          14,
+          6,
+          7,
+          9,
+          10,
+          18,
+          28,
+          0
+        ],
+        "operations": [
+          {
+            "station": 35,
+            "pickup": 3,
+            "drop": 0
+          },
+          {
+            "station": 45,
+            "pickup": 4,
+            "drop": 0
+          },
+          {
+            "station": 42,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 23,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 14,
+            "pickup": 12,
+            "drop": 0
+          },
+          {
+            "station": 6,
+            "pickup": 4,
+            "drop": 0
+          },
+          {
+            "station": 7,
+            "pickup": 4,
+            "drop": 0
+          },
+          {
+            "station": 9,
+            "pickup": 0,
+            "drop": 4
+          },
+          {
+            "station": 10,
+            "pickup": 0,
+            "drop": 8
+          },
+          {
+            "station": 18,
+            "pickup": 0,
+            "drop": 8
+          },
+          {
+            "station": 28,
+            "pickup": 0,
+            "drop": 8
+          }
+        ]
+      }
+    ],
+    "inventory": [
+      50000,
+      16,
+      16,
+      18,
+      10,
+      24,
+      18,
+      21,
+      16,
+      18,
+      17,
+      8,
+      19,
+      19,
+      0,
+      16,
+      18,
+      20,
+      18,
+      14,
+      20,
+      18,
+      23,
+      8,
+      22,
+      15,
+      21,
+      17,
+      17,
+      20,
+      24,
+      24,
+      20,
+      24,
+      14,
+      22,
+      17,
+      21,
+      23,
+      17,
+      8,
+      18,
+      20,
+      18,
+      18,
+      24,
+      7,
+      16,
+      18,
+      17,
+      23
+    ],
+    "G": 0.08521889196331134,
+    "P": 1.592319073567978
+  },
+  "executor_physical_recheck": {
+    "F": 0.324066752998508,
+    "G": 0.08521889196331134,
+    "P": 1.592319073567978,
+    "stations": 48,
+    "pickup": 149,
+    "drop": 149,
+    "maximum_duration": 7197.524029927115,
+    "original_T_feasible": true
+  },
+  "scope": "Original complete-run endpoint and original physical routes; no fresh Optimize, no rational certificate."
+}
