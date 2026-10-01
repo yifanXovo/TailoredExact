@@ -12,7 +12,7 @@ def run(destination,label):
         f'(Get-CimInstance Win32_Process -Filter "ProcessId = {os.getppid()}").ParentProcessId'],text=True).strip())
     competing=[p for p in ext.r90.foreign_heavy_processes() if p['ProcessId'] not in {os.getpid(),os.getppid(),grandparent}]
     assert not competing,competing
-    dest=Path(destination);tick=time.monotonic();records=[]
+    dest=Path(destination).resolve();tick=time.monotonic();records=[]
     files={sha(p):p for p in (dest/'external/models').glob('*.lp')}
     starts=[(p,read(p)) for p in (dest/'external/native_logs').glob('*.round68.start.json')]
     assert starts,'no complete Start exposure'

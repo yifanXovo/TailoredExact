@@ -21,11 +21,28 @@ Formal identity pins full file bytes, not only these abbreviated commits.
 | outer controller | original24+1 startup/closure, AM0.08, depth/width, static policy | same rules | same rules | Improved LP may change actual AM path; full cost includes this interaction |
 | protected P-GRB | plain original compact; no Start/VD-P/new rows | unchanged | unchanged | Fresh original.lp SHA/fingerprint/rows/columns checked against actual P |
 
-No theta variables, new threshold, selection parameter, branch priority tuning,
+R1/R2 have no theta variables. No new threshold, selection parameter, branch priority tuning,
 resource switch, dynamic user cut, R97 feedback, R96 reorder, LP-G or H-ACT is
 active. The known50000 static-row policy is inherited. R62 service threshold
 and R66 arc/load replacement modes are disallowed by the shared admission
 predicate; their mathematical assumptions cannot silently enter elimination.
+
+R3 (`vehicle-state`, source17272d41a) extends the same production path:
+
+| Block | R3 change from R2 | Justification / scope |
+|---|---|---|
+| `theta_k_i_y` | continuous [0,1], only y!=b and abs(y-b)<=Q[k] in current safe domain | Capacity necessity only; no claim of route feasibility |
+| state allocation | sum eligible theta=s for EVERY noninitial state, including empty eligibility | No unallocated state mass; empty row fixes that s=0 |
+| vehicle quantities | z=sum theta, p=sum(b-y)+theta, d=sum(y-b)+theta for EVERY vehicle, even empty pools | Shared state/owner; empty pool fixes z=p=d=0 |
+| A/B and C | replaced by theta equations | Implied continuously; no redundant aggregate copies |
+| declarations | p/d/theta C, z/s B, Y/load I, no m | Original integer operation semantics proved and decoded |
+| Start | explicit theta mapping from actual service vehicle and final inventory | Unknown/ineligible names fail closed; actual whole-row audit still required |
+| outer/default/P | same frozen policy; defaultoff and original P unchanged | Every subsequent matched arm uses fresh common v3 build |
+
+C3 raw R3 has6976 additional continuous columns; total33393 columns,
+107144 rows,749224 nonzeros. Presolve:33355 columns,86235 rows,730262
+nonzeros. Actual raw LP remains equal to R2. Structural projection evidence
+does not by itself imply objective-bound or certification-time improvement.
 
 Actual generated rows use sequential canonical constraint IDs. Exact LP SHA,
 actual row coefficients and native ordered columns identify the model. Old

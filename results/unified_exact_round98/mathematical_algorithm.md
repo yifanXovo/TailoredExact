@@ -155,8 +155,12 @@ change later safe subdomains; those have not been assessed here.
 
 Actual v3 qualification uses the complete C3 root matrix: saved R2 point
 max all-row/bound residual3.64e-12. The R3 completion is infeasible both
-with ALL common coordinates fixed and with original common coordinates
+with ALL common coordinates fixed and with all common columns except s/q
 fixed while allowing fresh s/q/theta (Gurobi diagnostic numerical contract).
+The latter still fixes common auxiliary G/zprod/r/e/h/ord/conn/load columns;
+it is not a statement about the projection on only x/z/p/d/Y physical columns.
+The saved record label `fixed_original_physical_coordinates` has this
+precise common-column scope, as established by its actual fixing loop.
 Thus this is stronger than excluding one old auxiliary assignment. The
 optimal raw LP remains .15119197559116945 versus R2 .15119197559116950;
 no root-objective gain is claimed. R3 has6976 theta columns,33393 total

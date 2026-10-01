@@ -11,7 +11,7 @@ ROLES=[
     dict(id='C1',V=20,M=2,Q_vector=[12,18],geometry='three_clusters',inventory='surplus',T_seconds=4800,cap_seconds=900),
     dict(id='C2',V=30,M=3,Q_vector=[20,25,30],geometry='radial_spokes',inventory='shortage',T_seconds=7200,cap_seconds=1800),
     dict(id='C3',V=50,M=4,Q_vector=[20,25,30,35],geometry='separated_islands',inventory='shortage',T_seconds=7200,cap_seconds=3600)]
-ORDERS=[['P-GRB','R2','ENS-C'],['ENS-C','P-GRB','R2'],['R2','ENS-C','P-GRB']]
+ORDERS=[['P-GRB','R3','ENS-C'],['ENS-C','P-GRB','R3'],['R3','ENS-C','P-GRB']]
 def recipe():
     return dict(version=VERSION,roles=ROLES,orders=ORDERS,source_sha256=sha(__file__),
         landscape_source_sha256=sha(generation.__file__),writer_sha256=sha(generation.citi.__file__),
@@ -23,7 +23,7 @@ def freeze():write(OUT/'confirmation_generation_recipe.json',recipe())
 def generate():
     assert read(OUT/'confirmation_generation_recipe.json')==recipe()
     assert (OUT/'candidate_freeze.json').is_file(),'candidate rules freeze before generation'
-    assert read(OUT/'candidate_freeze.json')['selected_arm']=='R2','orders name the frozen uniform R2 candidate'
+    assert read(OUT/'candidate_freeze.json')['selected_arm']=='R3','orders name the frozen uniform R3 candidate'
     data=ROOT/'reference/round98_confirmation';assert not data.exists();data.mkdir()
     generation.VERSION=VERSION;roles=[]
     for r,order in zip(ROLES,ORDERS):

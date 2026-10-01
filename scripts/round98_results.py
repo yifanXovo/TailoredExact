@@ -59,19 +59,21 @@ def extract(label,campaigns):
     for name in campaigns:
         for role in sorted({r['role'] for r in rows if r['campaign']==name}):
             group={r['arm']:r for r in rows if r['campaign']==name and r['role']==role}
-            for ref in ['P-GRB','ENS-C','R1']:
-                if ref not in group or 'R2' not in group:continue
-                a,b=group[ref],group['R2'];both=a['certificate'] and b['certificate']
-                delta=b['outer_seconds']-a['outer_seconds'] if both else None
-                ratio=b['outer_seconds']/a['outer_seconds'] if both else None
-                pairs.append(dict(campaign=name,role=role,reference=ref,candidate='R2',reference_certified=a['certificate'],
+            comparisons=[(ref,candidate) for candidate in ['R1','R2','R3'] for ref in ['P-GRB','ENS-C']]
+            comparisons += [('R1','R2'),('R2','R3')]
+            for ref,candidate in comparisons:
+                if ref not in group or candidate not in group:continue
+                a,b=group[ref],group[candidate];both=a['certificate'] and b['certificate']
+                delta=b['end_to_end_seconds']-a['end_to_end_seconds'] if both else None
+                ratio=b['end_to_end_seconds']/a['end_to_end_seconds'] if both else None
+                pairs.append(dict(campaign=name,role=role,reference=ref,candidate=candidate,reference_certified=a['certificate'],
                     candidate_certified=b['certificate'],censoring='both_certified' if both else 'reference_only' if a['certificate']
                     else 'candidate_only' if b['certificate'] else 'both_unproved',certified_time_delta=delta,certified_time_ratio=ratio,
                     material_time_change=bool(both and abs(delta)>=30 and abs(ratio-1)>=.1),
                     severe_time_regression=bool(both and delta>=120 and ratio>=1.25),
                     reference_U=a['U'],candidate_U=b['U'],reference_L=a['L'],candidate_L=b['L'],
                     reference_gap=a['gap'],candidate_gap=b['gap'],reference_relative_gap=a['relative_gap'],candidate_relative_gap=b['relative_gap'],
-                    eventual_time_order_known=both))
+                    eventual_time_order_known=both,time_metric='fully_observed_end_to_end_seconds'))
     # Every diagnostic starts/complete ledger is charged exactly once; failed
     # wrappers never invent actual Optimize counts from their planned count.
     for d in sorted((OUT/'diagnostic_receipts').iterdir()):
