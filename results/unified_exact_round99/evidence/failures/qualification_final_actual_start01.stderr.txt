@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round99_final_start_batch.py", line 52, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round99_final_start_batch.py", line 9, in main
+    ensure_idle()
+  File "E:\codes\ExactEBRP\scripts\round99_idle.py", line 9, in ensure_idle
+    assert not foreign,('foreign solver or build process active',foreign)
+           ^^^^^^^^^^^
+AssertionError: ('foreign solver or build process active', [{'ProcessId': 25136, 'Name': 'python.exe', 'CommandLine': '"D:\\msys64\\ucrt64\\bin\\python.exe" -c "import sys; sys.path.insert(0,\'scripts\'); from round99_common import *; receipt(\'final_actual_start01\',[ROOT/\'build/research/round88-ot/venv/Scripts/python.exe\',ROOT/\'scripts/round99_final_start_batch.py\'],kind=\'qualification\',cap=300,optimizer_calls=0)"'}])

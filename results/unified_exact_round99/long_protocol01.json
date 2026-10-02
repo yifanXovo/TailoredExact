@@ -1,0 +1,70 @@
+{
+  "phase": "existing long-tail development protection",
+  "roles": [
+    {
+      "id": "F5",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+      "family": "synthetic",
+      "geography": "perturbed_grid",
+      "inventory": "paired_shortage",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "complete_Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "source_manifest": "results/unified_exact_round86/protocol.json",
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 3600,
+      "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": -1011005748,
+        "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+        "columns": 13410,
+        "rows": 35693
+      },
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "historical_initial_witness": "results/unified_exact_round97/development02/raw/03_F5_OFF/external/initial_witness.json",
+      "historical_initial_witness_sha256": "16698da7b0c4ea43f1b8608aa9162b6788fed436c943c7065823a23328754b8d",
+      "diagnostic_cutoff": 0.38430409168754603,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.38430409168754603
+    }
+  ],
+  "planned_formal_starts": 3,
+  "maximum_formal_seconds": 10800,
+  "reference_children": 1,
+  "reference_child_cap": 60,
+  "optimizer_calls": 0,
+  "mode": "m-binary",
+  "trigger": "M-B is the sole mode with replicated material C2 P budget UB/gap improvement; linked prototype recovers F2 but loses C2. F5 tests whether retained direction/continuous quantities still warrant independent confirmation. All24+1 startup/VD-P/F0/AM.08/static50000/R68/native defaults remain inherited.",
+  "selection": "If long-tail quality or certification creates a material P/ENS disadvantage that defeats C2 benefit, stop class without forced confirmation. If M-B remains worthwhile, freeze it uniformly before unused three-role comparison; no revival by selected role gates.",
+  "rejected_M_BL": {
+    "F2_cert_seconds": 576.436999999918,
+    "C1_cert_seconds": 200.53100000042468,
+    "C2_U": 0.21916681534452004,
+    "C2_L": 0.19006135807996036,
+    "C2_P_U": 0.1983028485838244,
+    "no_uniform_selection": true
+  },
+  "development_summary_sha256": "ac7023a99a1293817c6a611e1704cd54616eea4b61d3afc97d7165f4d0a390cc"
+}

@@ -1,0 +1,30 @@
+{
+  "number": 7,
+  "role": "N3",
+  "arm": "M-B",
+  "failed": true,
+  "optimizer_calls": 5,
+  "calls_returned": 4,
+  "charged_outer_seconds": 3600,
+  "exact_actual_outer_seconds": null,
+  "last_verified_process_seconds": 2881.438000000082,
+  "actual_measurement_scope": "Exact exit duration unavailable; reserve/charge the full predeclared3600s allowance conservatively, not measured runtime.",
+  "stop_reason": "external_session_interruption",
+  "old_child_pid": 44736,
+  "child_absence_verified": true,
+  "original_completion_missing": true,
+  "original_result_missing": true,
+  "checkpoint_endpoint": {
+    "U": 0.25943708839982244,
+    "L": 0.2144363625295323,
+    "gap": 0.04500072587029014,
+    "certificate": false,
+    "source": "interrupted_committed_evidence",
+    "status": "external_session_interruption"
+  },
+  "checkpoint_audit_sha256": "b19520cdd4b33dc5c180848baa8eaba5a3296ee99b65c1a1fa0a5be9db283df7",
+  "original_identity_sha256": "2f924de9f8fd32693dfe961a2b59c4e36e8794e2b45b6c0da7840f47a8f639db",
+  "no_restart_state_import": true,
+  "no_stitching": true,
+  "checked_unix": 1790928610.0968127
+}

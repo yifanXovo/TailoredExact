@@ -5,7 +5,7 @@ from round99_common import *
 from round98_projection_vector_audit import check
 from round99_factor_diagnostic import MODES
 def run(destination,label,mode):
-    assert mode in MODES or mode=='off'
+    assert mode in MODES or mode in ['off','m-binary-linked']
     dest=Path(destination).resolve();models={sha(p):p for p in (dest/'external/models').glob('*.lp')}
     starts=[(p,read(p)) for p in (dest/'external/native_logs').glob('*.round68.start.json')]
     assert starts;records=[];tick=time.monotonic()
@@ -16,7 +16,7 @@ def run(destination,label,mode):
             with gp.read(str(models[h]),env=env) as m:
                 modes=[v for v in m.getVars() if v.VarName.startswith('mode_')]
                 assert (not modes) if mode in ['projected','q-integer'] else (modes and all(v.VType=='B' for v in modes))
-                qt='C' if mode in ['projected','m-binary'] else 'I'
+                qt='C' if mode in ['projected','m-binary','m-binary-linked'] else 'I'
                 assert all(v.VType==qt for v in m.getVars() if v.VarName.startswith(('p_','d_')))
                 for path,j in starts:
                     if not j.get('submitted') or j['model_sha256']!=h:continue
@@ -39,4 +39,5 @@ def run(destination,label,mode):
     write(OUT/'qualification'/(label+'.json'),dict(passed=True,optimizer_calls=0,starts=records,
         wall_seconds=time.monotonic()-tick,scope='all retained submitted Starts of this completed process',script_sha256=sha(__file__)))
     print(json.dumps(dict(passed=True,mode=mode,starts=len(records),optimizer_calls=0)))
+    return records
 if __name__=='__main__':run(*sys.argv[1:])

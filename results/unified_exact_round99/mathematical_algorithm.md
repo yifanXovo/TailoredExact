@@ -25,7 +25,10 @@ still forces p/d integers. Its old binary m and all three direction rows remain.
 Every original physical witness extends using its unique y/state and service;
 every model integer solution reconstructs the same original physical solution.
 The same routes, prefix loads, empty departure, loaded return and time expression
-are preserved. Total pickup is not bounded by Q, nor station inventory conserved.
+are preserved. Total pickup is not bounded by Q. Station-only inventory need not
+stay constant: sum_i Y_i = sum_i b_i - sum_k returned_load_k. Including the
+returned load preserves total stock; no stronger station-only conservation row
+is added.
 
 Relaxing ALL integer declarations makes R1 and M-B byte-identical numerical
 matrices; Q-I and R2 likewise. The continuous m existence interval
