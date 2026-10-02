@@ -22,6 +22,7 @@
 #include "Round63TimeResource.hpp"
 #include "Round65Projection.hpp"
 #include "Round92HandlingActivation.hpp"
+#include "Round98StateService.hpp"
 
 #include <gurobi_c.h>
 
@@ -2772,7 +2773,7 @@ public:
                 options_.round65_projection=="off" && !options_.round65_budget;
             callback.native_evidence=request.native_evidence;
             callback.evidence_instance=&instance_;callback.evidence_names=&native_names;
-            callback.evidence_integer_operations=options_.round98_state_service != "off";
+            callback.evidence_integer_operations=researchChecksPhysicalQuantities(options_);
             callback.evidence_call=request.native_evidence->beginCall(scope);
         }
         if (request.round68_verified_start) {
@@ -3670,7 +3671,7 @@ public:
                     std::vector<RoutePlan> routes;
                     try {
                         routes = reconstructCanonicalCompactRoutes(instance_, values,
-                            options_.round98_state_service != "off");
+                            researchChecksPhysicalQuantities(options_));
                     } catch (const std::exception& error) {
                         // A fractional physical operation is a failed solve outcome,
                         // never a rounded witness or an original-problem certificate.
@@ -4443,7 +4444,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             scope.native_preconditions=evidenceParameterReadback(api,model_env,scope) &&
                 result.gurobi_native_domain_audit_passed && time_limit_rc==0;
             callback.evidence_instance=&instance;callback.evidence_names=&native_names;
-            callback.evidence_integer_operations=options.round98_state_service != "off";
+            callback.evidence_integer_operations=researchChecksPhysicalQuantities(options);
             callback.evidence_call=callback.native_evidence->beginCall(scope);
         }
 

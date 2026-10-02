@@ -124,6 +124,7 @@ void usage() {
         << "[--round92-handling-activation true|false] "
         << "[--round96-route-order true|false] "
         << "[--round98-state-service off|aggregate|projected|vehicle-state|q-integer|m-binary|m-binary-linked] "
+        << "[--round100-continuous-quantities] "
         << "[--round97-native-closure off|observe|shadow|feedback] "
         << "[--round97-native-operator r83|r96] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
@@ -259,6 +260,8 @@ std::string lowerAscii(std::string value) {
 }
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
+    if (opt.round100_continuous_quantities)
+        return "research-round100-ensc-continuous-quantities";
     if (opt.round98_state_service == "q-integer" || opt.round98_state_service == "m-binary" || opt.round98_state_service == "m-binary-linked")
         return "research-round99-ensc-discrete-structure-" + opt.round98_state_service;
     if (opt.round98_state_service != "off")
@@ -1437,6 +1440,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round96-route-order") opt.round96_route_order = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round98-state-service") opt.round98_state_service = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round100-continuous-quantities") opt.round100_continuous_quantities = true;
         else if (arg == "--round97-native-closure") opt.round97_native_closure = lowerAscii(requireValue(i, argc, argv));
         else if (arg == "--round97-native-operator") opt.round97_native_operator = lowerAscii(requireValue(i, argc, argv));
         else if (arg == "--primal-heuristic-stop") opt.primal_heuristic_stop = requireValue(i, argc, argv);
@@ -3983,6 +3987,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             snapshot.preset_experimental_features_enabled += "," + feature;
         }
     };
+    if (opt.round100_continuous_quantities) {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round100_continuous_quantities");
+        snapshot.preset_reason = "ENS-Q: original ENS-C rows, no A/B, only p/d native declarations continuous";
+    }
     if (opt.round98_state_service != "off") {
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round98_state_service_" + opt.round98_state_service);

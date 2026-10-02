@@ -816,11 +816,13 @@ void writeCompactLp(const Instance& instance,
     const bool state_service = options.round98_state_service != "off";
     const bool vehicle_state_service = options.round98_state_service == "vehicle-state";
     const bool projected_service = round98ProjectsDirection(options.round98_state_service);
-    const bool continuous_quantities = round98ContinuousQuantities(options.round98_state_service);
+    const bool continuous_quantities = options.round100_continuous_quantities ||
+        round98ContinuousQuantities(options.round98_state_service);
     const bool linked_direction = round99LinksDirection(options.round98_state_service);
-    if (state_service && (!strengthened || !station_state_vdp ||
+    if ((state_service || options.round100_continuous_quantities) && (!strengthened || !station_state_vdp ||
         cutoff == nullptr || !cutoff->enabled || options.plain_baseline ||
-        !round98KnownStateService(options.round98_state_service))) {
+        !round98KnownStateService(options.round98_state_service) ||
+        (options.round100_continuous_quantities && state_service))) {
         throw std::runtime_error("round98_requires_complete_strengthened_vdp_interval");
     }
     if (station_state_mode != "bit-product" && !aggregate_mc4 &&
