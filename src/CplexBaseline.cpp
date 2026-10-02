@@ -4083,11 +4083,16 @@ std::vector<RoutePlan> reconstructRoutes(const Instance& instance,
         // constructing int-valued RoutePlan. Use the inherited IntFeasTol.
         for (int k = 0; k < instance.M; ++k) {
             for (int i = 1; i <= instance.V; ++i) {
-                for (const auto& name : {pName(k, i), dName(k, i)}) {
+                const std::pair<std::string, int> operations[] = {
+                    {pName(k, i), std::min(instance.initial[i], instance.Q[k])},
+                    {dName(k, i), std::min(instance.capacity[i] - instance.initial[i], instance.Q[k])}
+                };
+                for (const auto& operation : operations) {
+                    const auto& name = operation.first;
                     const auto it = v.find(name);
                     if (it == v.end() || !std::isfinite(it->second) ||
                         it->second < -1e-5 ||
-                        it->second > std::numeric_limits<int>::max() ||
+                        it->second > static_cast<double>(operation.second) + 1e-5 ||
                         std::fabs(it->second - std::round(it->second)) > 1e-5) {
                         throw std::runtime_error("round98_nonintegral_physical_operation:" + name);
                     }
