@@ -1,0 +1,124 @@
+{
+  "roles": [
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 7200,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true
+    },
+    {
+      "id": "F5",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+      "family": "synthetic",
+      "geography": "perturbed_grid",
+      "inventory": "paired_shortage",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "complete_Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "source_manifest": "results/unified_exact_round86/protocol.json",
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 7200,
+      "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": -1011005748,
+        "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+        "columns": 13410,
+        "rows": 35693
+      },
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ]
+    },
+    {
+      "id": "R99-N2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        16,
+        22,
+        28
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "shortage",
+      "T_seconds": 6600,
+      "cap_seconds": 3600,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "input_path": "reference/round99_confirmation/N2.txt",
+      "instance_path": "reference/round99_confirmation/N2.txt",
+      "input_sha256": "370cb51b4d2351b3881cd74ab93406d76834efcf856430f742b8f243a9060a27",
+      "scenario_id": "round99-discrete-structure-confirmation-v1-N2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 601,
+      "total_target": 647,
+      "zero_excluded_by_stock_shortage": true
+    }
+  ],
+  "candidate_freeze_sha256": "b34702d12d69d1e6dd59b8a7b39d8ea82d8eb596d0511ee1440857e5212342cc",
+  "maximum_formal_seconds": 54000,
+  "planned_formal_starts": 9,
+  "optimizer_calls": 0,
+  "scope": "observed-role extension and protection, not new independent confirmation",
+  "N2_extension": "Only before any N2 start, if completed prior runs release enough of total80000 to fund all three7200 caps and5400 holdout; record common revision once.",
+  "fresh_reference_batches": [
+    {
+      "children": 2,
+      "child_cap": 60
+    },
+    {
+      "children": 1,
+      "child_cap": 60
+    }
+  ],
+  "all_arms_self_paid": true,
+  "no_cross_arm_start": true,
+  "no_algorithm_changes": true
+}
