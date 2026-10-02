@@ -1,7 +1,13 @@
 # Round99：显式离散结构、完整搜索与隔离确认
 
 状态：数学、生产资格、完整开发、三组冻结后确认及独立复核已完成。
-堆叠 draft PR 待创建；所有新增模式默认关闭，不自动晋升。
+已创建堆叠 [draft PR #161](https://github.com/yifanXovo/TailoredExact/pull/161)，
+base为R98 `codex/round98-state-service-reformulation`；所有新增模式默认关闭，不自动晋升。
+
+二因素源码阶段2458a3f7845d6a6cf6006361268aa737274ea53b，深入/实测v2源码阶段
+4f88a8c040047597dcfe9baa4a95a087cf925a0f，完整证据提交
+c1579eb9c5fe93b0e1f2aef8ce2e74e0ebdccbb1；随后交付提交仅记录PR与完成状态，
+不改变实测源或构建。PR当前head见交付消息及GitHub，不将打包head冒充全部历史实测源。
 
 本轮完成方向表达与 p/d 声明的二因素拆分，并深入检验一个方向状态等式。
 四模式物理整数问题等价、共同全连续 LP 投影一致，但完整认证与预算质量显著不同。
