@@ -1,0 +1,64 @@
+{
+  "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+  "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+  "F": 0.8659435203229894,
+  "U": 0.8659435203229894,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        9,
+        8,
+        7,
+        0
+      ],
+      "operations": [
+        {
+          "station": 9,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 17
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        17,
+        18,
+        16,
+        0
+      ],
+      "operations": [
+        {
+          "station": 17,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 18,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 16,
+          "pickup": 0,
+          "drop": 15
+        }
+      ]
+    }
+  ],
+  "source_result": "results/unified_exact_round99/repeat01/raw/02_F2_R1/result.json",
+  "source_sha256": "b013f3fb668c77c44dd788a68e66b14945d12d661ca44d36ba76fc1448be9a89"
+}

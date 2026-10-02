@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "starts": [
+    {
+      "start_path": "results/unified_exact_round99/factorial01/raw/04_F2_R1/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "start_sha256": "3578659acbad6f056567da98d3f1e4a7e84a14dc358d679da4f334f898c4f79e",
+      "vector_sha256": "166a1986bc394368b8fe3dab136e0422062f49b9efa488117b2a9490ab6544c9",
+      "model_sha256": "ce3085773358695dace120db62f095f67653984cc713b1940f2fb96fb37ea9e5",
+      "mode": "aggregate",
+      "rows": 9309,
+      "columns": 3488,
+      "objective": 0.8853483009345782,
+      "max_residual": 2.220446049250313e-16,
+      "actual_quantity_type": "I",
+      "direction_columns": 40,
+      "per_column_restored_type_checked": true
+    },
+    {
+      "start_path": "results/unified_exact_round99/factorial01/raw/04_F2_R1/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "start_sha256": "781433c61787929ada61abb76b86072b5ddfb16955c5804beb6e3553d47aff77",
+      "vector_sha256": "166a1986bc394368b8fe3dab136e0422062f49b9efa488117b2a9490ab6544c9",
+      "model_sha256": "ce3085773358695dace120db62f095f67653984cc713b1940f2fb96fb37ea9e5",
+      "mode": "aggregate",
+      "rows": 9309,
+      "columns": 3488,
+      "objective": 0.8853483009345782,
+      "max_residual": 2.220446049250313e-16,
+      "actual_quantity_type": "I",
+      "direction_columns": 40,
+      "per_column_restored_type_checked": true
+    }
+  ],
+  "wall_seconds": 0.2649999996647239,
+  "scope": "all retained submitted Starts of this completed process",
+  "script_sha256": "fae714658fe72ba764ad06fea6e835ab34c56831235e317cc4f7a81fbc1f21c9"
+}

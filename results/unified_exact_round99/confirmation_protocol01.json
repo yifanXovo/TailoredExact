@@ -1,0 +1,97 @@
+{
+  "roles": [
+    {
+      "id": "N1",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        16,
+        24
+      ],
+      "geometry": "offset_annulus",
+      "inventory": "surplus",
+      "T_seconds": 4500,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "input_path": "reference/round99_confirmation/N1.txt",
+      "instance_path": "reference/round99_confirmation/N1.txt",
+      "input_sha256": "71c23198b162c62e6a0fac1c0207642d541421def39685d8bdf73a5ed247f1e8",
+      "scenario_id": "round99-discrete-structure-confirmation-v1-N1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 472,
+      "total_target": 442,
+      "zero_excluded_by_stock_shortage": false
+    },
+    {
+      "id": "N2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        16,
+        22,
+        28
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "shortage",
+      "T_seconds": 6600,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "M-B"
+      ],
+      "input_path": "reference/round99_confirmation/N2.txt",
+      "instance_path": "reference/round99_confirmation/N2.txt",
+      "input_sha256": "370cb51b4d2351b3881cd74ab93406d76834efcf856430f742b8f243a9060a27",
+      "scenario_id": "round99-discrete-structure-confirmation-v1-N2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 601,
+      "total_target": 647,
+      "zero_excluded_by_stock_shortage": true
+    },
+    {
+      "id": "N3",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        18,
+        24,
+        30,
+        36
+      ],
+      "geometry": "anisotropic_cloud",
+      "inventory": "shortage",
+      "T_seconds": 7800,
+      "cap_seconds": 3600,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-GRB"
+      ],
+      "input_path": "reference/round99_confirmation/N3.txt",
+      "instance_path": "reference/round99_confirmation/N3.txt",
+      "input_sha256": "ad91afda9588e4adbfd104d8a54c89a2800b91dda6fd10a21e079f072c41763f",
+      "scenario_id": "round99-discrete-structure-confirmation-v1-N3",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 960,
+      "total_target": 1033,
+      "zero_excluded_by_stock_shortage": true
+    }
+  ],
+  "recipe_sha256": "f052c64251d791a52cedbc3c2d6f32b293a947cbe68a60298248e7115f62444c",
+  "candidate_freeze_sha256": "0f1fe75605197384d0bb31efdc3645f60de20c38d26ef020827f9316c9314d24",
+  "optimizer_calls": 0,
+  "phase": "frozen independent confirmation",
+  "reference_billing": "one_finite_batch",
+  "native_budget_scope": "9 complete production processes, all self-paid startup; no diagnostic state import"
+}

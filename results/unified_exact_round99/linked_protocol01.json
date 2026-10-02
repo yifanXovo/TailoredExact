@@ -1,0 +1,118 @@
+{
+  "roles": [
+    {
+      "id": "F2",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds": 3600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 900,
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "M-BL",
+        "P-GRB"
+      ],
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": 788240696,
+        "canonical_sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+        "columns": 1591,
+        "rows": 3689
+      },
+      "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "M": 2,
+      "V": 20,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "historical_initial_witness": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/initial_witness.json",
+      "historical_initial_witness_sha256": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02",
+      "diagnostic_cutoff": 0.885348300934578,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.885348300934578
+    },
+    {
+      "id": "R98-C1",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        12,
+        18
+      ],
+      "geometry": "three_clusters",
+      "inventory": "surplus",
+      "T_seconds": 4800,
+      "cap_seconds": 600,
+      "method_order": [
+        "M-BL",
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "input_path": "reference/round98_confirmation/C1.txt",
+      "instance_path": "reference/round98_confirmation/C1.txt",
+      "input_sha256": "149100d4f0b532787ac0d0f4f5d88da3667b70d92b3256c24ab8601926da40e7",
+      "scenario_id": "round98-state-service-confirmation-v1-C1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 426,
+      "total_target": 398,
+      "zero_excluded_by_stock_shortage": false,
+      "historical_initial_witness": "results/unified_exact_round98/confirmation01/raw/03_C1_ENS-C/external/initial_witness.json",
+      "historical_initial_witness_sha256": "17853e8d54cf79148ea4a57eab0bd66c90d80eae090505d3ca78c9a4acf49c06",
+      "diagnostic_cutoff": 0.3778461674562581,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.3778461674562581
+    },
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-GRB",
+        "M-BL"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true,
+      "historical_initial_witness": "results/unified_exact_round98/confirmation01/raw/04_C2_ENS-C/external/initial_witness.json",
+      "historical_initial_witness_sha256": "eb6941ed2748028d508da47f5c8d40d7696ec87de14ae5ac003f8a058b83a47d",
+      "diagnostic_cutoff": 0.39162089674952894,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.39162089674952894
+    }
+  ],
+  "phase": "full linked development",
+  "reference_billing": "one_finite_batch",
+  "planned_formal_starts": 12,
+  "maximum_formal_seconds": 13200,
+  "finite_reference_children": 3,
+  "reference_child_cap": 60,
+  "optimizer_calls": 0,
+  "selection": "predeclared material thresholds in research_plan.md; retain F2/C1 protection and improve genuine P deficit, no final candidate selected",
+  "qualification_sha256": "2baa0f079805e3f9b664dc7b0e476f58f1702d54b6ec640e6db3a961000d9ac2"
+}

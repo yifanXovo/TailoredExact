@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "starts": [
+    {
+      "start_path": "results/unified_exact_round99/linked01/raw/08_R98-C1_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "start_sha256": "d8f829e69f9e4962dc703943423aaced56ef0291537fd60d0c4053a2a21e3339",
+      "vector_sha256": "26f550ccd420ae63624be0bc8c31f40dc8124b6c106c5a7a3e8def55e974b219",
+      "model_sha256": "4a202e11396a3c34a86a58f60648adb0384c3d4b5133160d9309cb85c3216695",
+      "maximum_absolute_residual": 2.220446049250313e-16,
+      "mode": "off",
+      "rows": 9098,
+      "columns": 3318,
+      "objective": 0.3778461674562581,
+      "actual_quantity_type": "I",
+      "direction_columns": 40,
+      "per_column_restored_type_checked": true,
+      "ordered_native_columns_checked": true,
+      "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+    }
+  ]
+}

@@ -123,7 +123,7 @@ void usage() {
         << "[--round90-lp-g-split true|false] "
         << "[--round92-handling-activation true|false] "
         << "[--round96-route-order true|false] "
-        << "[--round98-state-service off|aggregate|projected|vehicle-state] "
+        << "[--round98-state-service off|aggregate|projected|vehicle-state|q-integer|m-binary|m-binary-linked] "
         << "[--round97-native-closure off|observe|shadow|feedback] "
         << "[--round97-native-operator r83|r96] "
         << "[--round34-c6-startup-variant hga-full|hga-light-1000|simple-start] "
@@ -259,6 +259,8 @@ std::string lowerAscii(std::string value) {
 }
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
+    if (opt.round98_state_service == "q-integer" || opt.round98_state_service == "m-binary" || opt.round98_state_service == "m-binary-linked")
+        return "research-round99-ensc-discrete-structure-" + opt.round98_state_service;
     if (opt.round98_state_service != "off")
         return "research-round98-ensc-state-service-" + opt.round98_state_service;
     if (opt.round97_native_closure != "off")
@@ -3361,9 +3363,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
          opt.round62_threshold_mode != "off" ||
          opt.external_gini_scheduling != "round31-nonblocking-native-bound"))
         throw std::runtime_error("Round96 route order requires isolated ENS-C Round83 gcap-frontier");
-    if (opt.round98_state_service != "off" &&
-        opt.round98_state_service != "aggregate" && opt.round98_state_service != "projected" &&
-        opt.round98_state_service != "vehicle-state")
+    if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     if (!ebrp::round98IsIsolatedENS(opt))
         throw std::runtime_error("Round98 requires isolated ENS-C with unchanged startup and VD-P");
@@ -3986,7 +3986,7 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
     if (opt.round98_state_service != "off") {
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round98_state_service_" + opt.round98_state_service);
-        snapshot.preset_reason = "Round98: isolated ENS-C shares inventory state with service; projected mode eliminates direction columns and uses implied operation integrality";
+        snapshot.preset_reason = "Isolated ENS-C state/service mode " + opt.round98_state_service + "; direction representation and quantity declarations follow the selected mode";
     }
     if (opt.round66_arc_load_replacement) append_explicit_research_feature("round66_arc_load_replaces_node_big_m");
     if (opt.round68_verified_start) append_explicit_research_feature("round68_existing_complete_witness_native_start");

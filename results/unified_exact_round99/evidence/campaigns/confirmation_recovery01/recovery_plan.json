@@ -1,0 +1,19 @@
+{
+  "fresh_repeat_starts": 1,
+  "never_started_original_starts": 2,
+  "optimizer_calls": "durable journal actual calls",
+  "caps": [
+    3600,
+    3600,
+    3600
+  ],
+  "method_order": [
+    "M-B",
+    "ENS-C",
+    "P-GRB"
+  ],
+  "no_automatic_retry": true,
+  "maximum_total_billed_starts_including_final_audit": 72,
+  "conservative_interrupted_allowance_seconds": 3600,
+  "reason": "Both previous observer/session handles missing and native PID verified absent; preserve interruption and do not concatenate windows."
+}
