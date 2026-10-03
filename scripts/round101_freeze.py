@@ -11,8 +11,18 @@ if __name__=='__main__':
     campaign=OUT/'development01';identity=read(campaign/'identity.json')
     rows=[json.loads(x) for x in (campaign/'summary.jsonl').read_text().splitlines()]
     assert len(rows)==6 and all(r['audit_passed'] for r in rows)
-    assert len(identity['launches'])==6 and identity['source_hashes']==bindings()
-    assert identity['candidate_binary_sha256']==sha(BUILD/'ExactEBRP.exe')
+    guard=read(OUT/'numeric_guard_revision.json')
+    assert len(identity['launches'])==6 and identity['source_hashes']==guard['before_source_hashes']
+    assert guard['after_source_hashes']==bindings() and guard['family_strength_range_unchanged']
+    protection=OUT/'protection01';protected=read(protection/'identity.json')
+    checks=[json.loads(x) for x in (protection/'summary.jsonl').read_text().splitlines()]
+    assert len(checks)==3 and all(r['audit_passed'] for r in checks)
+    assert {r['arm'] for r in checks}=={'P-GRB','ENS-C',fleet}
+    assert protected['source_hashes']==bindings() and protected['candidate_binary_sha256']==sha(BUILD/'ExactEBRP.exe')
+    for label in ['pure05','numeric_replay01','matrix_guards01']:
+        assert read(OUT/'qualification'/label/'receipt.json')['exit_code']==0
+    assert read(OUT/'diagnostics/numeric_replay01/summary.json')['passed']
+    assert read(OUT/'diagnostics/matrix_guards01/summary.json')['passed']
     assert fleet in ['FLEET-ROOT','FLEET-SUBMIT']
     assert not (ROOT/'reference/round101_confirmation').exists()
     budget=account();assert not budget['reserved'] and budget['within_limits']
@@ -29,11 +39,13 @@ if __name__=='__main__':
         native=dict(version='13.0.2',Threads=1,Seed=0,Presolve=-1,PreCrush=1,MIPGap=0,MIPGapAbs=0,
             FeasibilityTol=1e-6,IntFeasTol=1e-5,OptimalityTol=1e-6),
         candidate_binary_sha256=sha(BUILD/'ExactEBRP.exe'),source_hashes=bindings(),helper_hashes=helpers(),
-        archived_build_manifest_sha256=sha(OUT/'builds/post_cost_revision/manifest.json'),
+        archived_build_manifest_sha256=sha(OUT/'builds/final_numeric_guards/manifest.json'),
         dll_sha256=sha('D:/gurobi1302/win64/bin/gurobi130.dll'),delivery_head_at_freeze=head,
         inherited_base='541c032f04b35f90d750c83e4938e02df3ebf008',
         selection_evidence=dict(isolation_sha256=sha(OUT/'isolation01/summary.jsonl'),
-            development_sha256=sha(campaign/'summary.jsonl'),development_protocol_sha256=sha(OUT/'development_protocol01.json')),
+            development_sha256=sha(campaign/'summary.jsonl'),development_protocol_sha256=sha(OUT/'development_protocol01.json'),
+            numeric_guard_revision_sha256=sha(OUT/'numeric_guard_revision.json'),
+            final_source_protection_sha256=sha(protection/'summary.jsonl')),
         confirmation_generator_sha256=sha(ROOT/'scripts/round101_confirmation.py'),
         candidate_frozen_before_confirmation_inputs=True,
         prior_confirmation_inputs_observed=False,

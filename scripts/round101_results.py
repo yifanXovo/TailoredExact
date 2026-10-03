@@ -13,7 +13,7 @@ def main(label,campaigns):
         value=original_read(path)
         if Path(path).name=='receipt.json' and 'optimizer_calls' not in value:
             name=Path(path).parent.name
-            if name in ['pure01','pure02','pure03','pure04','cost_replay01','matrix_guards01']:
+            if name in ['pure01','pure02','pure03','pure04','pure05','cost_replay01','numeric_replay01','matrix_guards01']:
                 assert value['maximum_optimizer_calls']==0
                 value=dict(value,optimizer_calls=0)
         return value
