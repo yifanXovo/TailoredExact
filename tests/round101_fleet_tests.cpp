@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <limits>
 #include <stdexcept>
 using namespace ebrp;
 void check(bool ok,const char* message){if(!ok)throw std::runtime_error(message);}
@@ -42,6 +43,29 @@ int main(){try {
     check(proveFleetSmall(c,{{1,-1,1},{3,1,1}}).rank==2,"nonmetric extra shortcut");
     in=instance(2,1,2,1,{5});in.pickup_time=std::nextafter(1.0,2.0);c=physicalFleetContract(in);
     check(proveFleetSmall(c,{{1,-1,1},{2,-1,1}}).rank==2,"near boundary retained");
+    in=instance(1,1,10,1,{1});in.drop_time=3*std::ldexp(1.0,-53);c=physicalFleetContract(in);
+    check(c.valid&&c.handling_lower<=std::nextafter(1.0,2.0),"nonexact physical sum lower enclosure");
+    FleetStatistics no_columns;
+    check(separateFleetEvents(c,{},1e-5,no_columns).empty()&&no_columns.arithmetic_skips==1,"unmapped physical separator skipped");
+    in.pickup_time=std::numeric_limits<double>::max();in.drop_time=in.pickup_time;
+    check(!physicalFleetContract(in).valid,"nominal handling overflow rejected");
+    in=instance(1,1,100,1,{1});in.initial[1]=in.capacity[1]=std::numeric_limits<int>::max();
+    NativeOtB1LinearModel edge;
+    edge.names={"Y_1","state_1_2147483647","p_0_1","d_0_1","z_0_1","mode_0_1","ord_0_1","x_0_0_1","x_0_1_0"};
+    edge.types={'I','B','I','I','B','B','C','B','B'};
+    const double imax=std::numeric_limits<int>::max();
+    edge.lower_bounds={imax,0,0,0,0,0,0,0,0};edge.upper_bounds={imax,1,1,0,1,1,1,1,1};edge.row_starts={0};
+    auto add=[&](char sense,double rhs,std::initializer_list<std::pair<int,double>> a) {
+        edge.senses.push_back(sense);edge.rhs.push_back(rhs);
+        for(auto [j,v]:a){edge.column_indices.push_back(j);edge.coefficients.push_back(v);}
+        edge.row_starts.push_back(static_cast<int>(edge.coefficients.size()));
+    };
+    add('=',1,{{1,1}});add('=',0,{{0,1},{1,-imax}});
+    add('<',0,{{5,1},{4,-1}});add('<',0,{{2,1},{5,-1}});add('<',0,{{3,1}});
+    add('>',0,{{2,1},{3,1},{4,-1}});add('=',imax,{{0,1},{2,1},{3,-1}});add('<',1,{{4,1}});
+    add('=',0,{{8,1},{4,-1}});add('=',0,{{7,1},{4,-1}});
+    add('<',1,{{7,1}});add('=',0,{{7,1},{8,-1}});add('>',0,{{2,1},{3,-1}});add('<',100,{{2,1}});
+    check(prepareFleetContract(in,edge).valid,"fixed INT_MAX inventory endpoint audit");
     for(int M=1;M<=3;++M)for(int T=0;T<=6;++T)for(int cost=0;cost<=3;++cost)for(int pattern=0;pattern<64;++pattern) {
         in=instance(3,M,T,cost,M==1?std::vector<int>{1}:M==2?std::vector<int>{1,3}:std::vector<int>{1,2,3});
         es.clear();for(int i=1;i<=3;++i)es.push_back({i,(pattern&(1<<(i-1)))?1:-1,1+((pattern>>(i+2))&1)});

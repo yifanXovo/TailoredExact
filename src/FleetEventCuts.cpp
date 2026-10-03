@@ -19,7 +19,10 @@ namespace ebrp { namespace {
 double down(double v) { return std::nextafter(v,-std::numeric_limits<double>::infinity()); }
 double up(double v) { return std::nextafter(v,std::numeric_limits<double>::infinity()); }
 double plusLower(double a,double b) { if(a==0)return b;if(b==0)return a;return std::max(0.0,down(a+b)); }
-double timesLower(double a,long long b) { if(a==0||b==0)return 0;return std::max(0.0,down(a*static_cast<double>(b))); }
+double timesLower(double a,long long b) { if(a==0||b==0)return 0;
+    // An inexact integer conversion cannot justify exclusion. Unknown weakens.
+    if(b<0||b>9007199254740992LL)return 0;
+    return std::max(0.0,down(a*static_cast<double>(b))); }
 bool ready() {
     volatile double a=std::numeric_limits<double>::denorm_min(),b=a;
     volatile double sum=a+b;
@@ -38,7 +41,8 @@ void shortest(FleetContract& c) {
 }
 bool goodEvents(const FleetContract& c,const std::vector<FleetEvent>& es) {
     std::set<int> used;
-    if(!c.valid||!ready()||es.empty())return false;
+    if(!c.valid||!ready()||es.empty()||es.size()>static_cast<std::size_t>(std::numeric_limits<int>::max())||
+        c.capacities.empty()||c.capacities.size()>static_cast<std::size_t>(std::numeric_limits<int>::max()/2))return false;
     for(const auto& e:es)if(e.station<1||static_cast<std::size_t>(e.station)>=c.initial.size()||
         !used.insert(e.station).second||(e.direction!=-1&&e.direction!=1)||e.quantity<1||
         e.quantity>(e.direction<0?c.initial[e.station]:c.station_capacity[e.station]-c.initial[e.station]))return false;
@@ -88,9 +92,11 @@ int matching(const std::vector<std::vector<int>>& eligible_sets,const std::vecto
 
 FleetContract physicalFleetContract(const Instance& in) {
     FleetContract c;c.initial=in.initial;c.station_capacity=in.capacity;c.capacities=in.Q;
-    c.horizon_upper=up(in.total_time_limit+kPhysicalDurationTolerance);c.handling_lower=std::max(0.0,down(in.pickup_time+in.drop_time));c.travel_lower=in.dist;
-    if(!ready()||in.V<1||in.M<1||in.Q.size()!=static_cast<std::size_t>(in.M)||
-        in.initial.size()!=static_cast<std::size_t>(in.V+1)||in.capacity.size()!=in.initial.size()||
+    const double nominal_handling=in.pickup_time+in.drop_time;
+    c.horizon_upper=up(in.total_time_limit+kPhysicalDurationTolerance);c.handling_lower=std::max(0.0,down(nominal_handling));c.travel_lower=in.dist;
+    if(!ready()||in.V<1||in.V==std::numeric_limits<int>::max()||in.M<1||in.M>std::numeric_limits<int>::max()/2||
+        !std::isfinite(nominal_handling)||in.Q.size()!=static_cast<std::size_t>(in.M)||
+        in.initial.size()!=static_cast<std::size_t>(in.V)+1||in.capacity.size()!=in.initial.size()||
         in.dist.size()!=in.initial.size()||!std::isfinite(c.horizon_upper)||c.horizon_upper<0||
         !std::isfinite(in.pickup_time)||in.pickup_time<0||!std::isfinite(in.drop_time)||in.drop_time<0||
         !std::isfinite(c.handling_lower)){c.reason="invalid_physical_contract";return c;}
@@ -107,6 +113,9 @@ FleetContract prepareFleetContract(const Instance& in,const NativeOtB1LinearMode
     auto c=physicalFleetContract(in);c.valid=false;
     try {
         if(c.reason!="physical_only")throw std::runtime_error(c.reason);
+        if(m.names.size()>static_cast<std::size_t>(std::numeric_limits<int>::max())||
+            m.senses.size()>=static_cast<std::size_t>(std::numeric_limits<int>::max())||
+            m.coefficients.size()>static_cast<std::size_t>(std::numeric_limits<int>::max()))throw std::runtime_error("unsupported_matrix_dimensions");
         const int n=static_cast<int>(m.names.size()),R=static_cast<int>(m.senses.size());c.columns=n;
         if(n<1||m.types.size()!=m.names.size()||m.lower_bounds.size()!=m.names.size()||m.upper_bounds.size()!=m.names.size()||
             m.rhs.size()!=m.senses.size()||m.row_starts.size()!=static_cast<std::size_t>(R+1)||m.row_starts.front()!=0||
@@ -151,7 +160,8 @@ FleetContract prepareFleetContract(const Instance& in,const NativeOtB1LinearMode
             const int y=column("Y_"+std::to_string(i),'I',0,in.capacity[i]);
             const int L=static_cast<int>(std::ceil(m.lower_bounds[y])),U=static_cast<int>(std::floor(m.upper_bounds[y]));
             Row one,link{{y,1}},balance{{y,1}},unique;
-            for(int v=L;v<=U;++v) {
+            for(long long inventory=L;inventory<=U;++inventory) {
+                const int v=static_cast<int>(inventory);
                 const int s=column("state_"+std::to_string(i)+"_"+std::to_string(v),'B',0,1);
                 c.states[i].push_back({v,s});one[s]=1;link[s]=-static_cast<double>(v);
             }
@@ -213,8 +223,8 @@ FleetContract prepareFleetContract(const Instance& in,const NativeOtB1LinearMode
 }
 
 FleetProof proveFleetSmall(const FleetContract& c,const std::vector<FleetEvent>& es) {
-    FleetProof out;out.events=es;out.rank=static_cast<int>(es.size());out.method="complete_subset_dp";
-    if(!goodEvents(c,es)||es.size()>10){out.reason="invalid_or_unsupported_small_support";return out;}
+    FleetProof out;out.events=es;out.rank=es.size()<=static_cast<std::size_t>(std::numeric_limits<int>::max())?static_cast<int>(es.size()):0;out.method="complete_subset_dp";
+    if(!goodEvents(c,es)||es.size()>10){out.rank=0;out.reason="invalid_or_unsupported_small_support";return out;}
     const int n=static_cast<int>(es.size()),N=1<<n,M=static_cast<int>(c.capacities.size());
     auto travel=tours(c,es);
     for(int b=1;b<N;++b)for(int j=0;j<n;++j)if(b&(1<<j))travel[b]=std::max(travel[b],single(c,es[j].station));
@@ -247,13 +257,13 @@ FleetProof proveFleetSmall(const FleetContract& c,const std::vector<FleetEvent>&
 }
 
 FleetProof proveFleetLarge(const FleetContract& c,const std::vector<FleetEvent>& es,bool hall) {
-    FleetProof out;out.events=es;out.rank=static_cast<int>(es.size());out.method=hall?"eligibility_slot_upper":"sum_cardinality_upper";
-    if(!goodEvents(c,es)){out.reason="invalid_events_or_arithmetic";return out;}
+    FleetProof out;out.events=es;out.rank=es.size()<=static_cast<std::size_t>(std::numeric_limits<int>::max())?static_cast<int>(es.size()):0;out.method=hall?"eligibility_slot_upper":"sum_cardinality_upper";
+    if(!goodEvents(c,es)){out.rank=0;out.reason="invalid_events_or_arithmetic";return out;}
     const int M=static_cast<int>(c.capacities.size());out.pickup_counts.resize(M);out.drop_counts.resize(M);out.travel_min.resize(M);
     std::vector<std::vector<int>> sets;for(const auto& e:es) { std::vector<int> a;
         for(int k=0;k<M;++k)if(eligible(c,k,e))a.push_back(2*k+(e.direction>0));
         sets.push_back(std::move(a)); }
-    std::vector<int> caps(2*M);int total=0;
+    std::vector<int> caps(static_cast<std::size_t>(M)*2);long long total=0;
     for(int k=0;k<M;++k) {
         double ell=std::numeric_limits<double>::infinity();std::vector<int> pick,drop;
         for(const auto& e:es)if(eligible(c,k,e)) {ell=std::min(ell,single(c,e.station));(e.direction<0?pick:drop).push_back(e.quantity);}
@@ -263,29 +273,31 @@ FleetProof proveFleetLarge(const FleetContract& c,const std::vector<FleetEvent>&
                 if(std::isfinite(lb)&&lb>c.horizon_upper)break;
                 ++r;}return r; };
         out.pickup_counts[k]=caps[2*k]=count(pick);out.drop_counts[k]=caps[2*k+1]=count(drop);
-        total+=caps[2*k]+caps[2*k+1];
+        total+=static_cast<long long>(caps[2*k])+caps[2*k+1];
     }
     const bool same_eligibility=std::all_of(sets.begin(),sets.end(),[&](const auto& s){return s==sets.front();});
     // Uniform-q, same-direction pools have one common eligibility set on the
     // current common resource contract. Matching is then just slot counting.
-    int rank=total;
+    long long rank=total;
     if(hall) {
         if(same_eligibility){rank=0;for(int slot:sets.front())rank+=caps[slot];}
         else rank=matching(sets,caps);
     }
-    out.rank=std::min(static_cast<int>(es.size()),rank);
+    out.rank=static_cast<int>(std::min(static_cast<long long>(es.size()),rank));
     out.valid=true;out.reason="relaxed_eligibility_counts_upper_bound";return out;
 }
 
 std::vector<FleetCut> separateFleetEvents(const FleetContract& c,const std::vector<double>& point,double margin,FleetStatistics& stats,int max_rows) {
-    std::vector<FleetCut> rows;if(!c.valid||!ready()||point.size()!=static_cast<std::size_t>(c.columns)||
+    std::vector<FleetCut> rows;if(!c.valid||!ready()||c.columns<=0||c.states.size()!=c.initial.size()||
+        c.capacities.empty()||point.size()!=static_cast<std::size_t>(c.columns)||
         !std::isfinite(margin)||margin<0||max_rows<1||max_rows>8){++stats.arithmetic_skips;return rows;}
     for(double v:point)if(!std::isfinite(v)){++stats.arithmetic_skips;return rows;}
     if(stats.cache_contract!=c.proof_identity){stats.proof_cache.clear();stats.cache_order.clear();stats.cache_contract=c.proof_identity;}
     const int V=static_cast<int>(c.initial.size())-1,maxQ=*std::max_element(c.capacities.begin(),c.capacities.end());
     std::vector<std::vector<double>> low(V+1),high(V+1);
-    for(int i=1;i<=V;++i) {low[i].assign(maxQ+1,0);high[i].assign(maxQ+1,0);
-        for(auto [y,j]:c.states[i])for(int q=1;q<=maxQ;++q) {
+    for(int i=1;i<=V;++i) {low[i].assign(static_cast<std::size_t>(maxQ)+1,0);high[i].assign(static_cast<std::size_t>(maxQ)+1,0);
+        for(auto [y,j]:c.states[i])for(long long threshold=1;threshold<=maxQ;++threshold) {
+            const int q=static_cast<int>(threshold);
             if(y<=static_cast<long long>(c.initial[i])-q)low[i][q]+=point[j];
             if(y>=static_cast<long long>(c.initial[i])+q)high[i][q]+=point[j];
         }
@@ -321,9 +333,10 @@ std::vector<FleetCut> separateFleetEvents(const FleetContract& c,const std::vect
     };
     // Uniform-q pools: all positive-mass distinct stations, mass-ordered prefixes.
     // Large supports use polynomial upper bounds; only the best dense <=9 prefix uses DP.
-    for(int sign:{-1,1})for(int q=1;q<=maxQ;++q) {
+    for(int sign:{-1,1})for(long long threshold=1;threshold<=maxQ;++threshold) {
+        const int q=static_cast<int>(threshold);
         std::vector<FleetEvent> es;auto& mass=sign<0?low:high;
-        for(int i=1;i<=V;++i)if(q<static_cast<int>(mass[i].size())&&mass[i][q]>margin&&
+        for(int i=1;i<=V;++i)if(static_cast<std::size_t>(q)<mass[i].size()&&mass[i][q]>margin&&
             q<=(sign<0?c.initial[i]:c.station_capacity[i]-c.initial[i]))es.push_back({i,sign,q});
         std::sort(es.begin(),es.end(),[&](auto a,auto b){return mass[a.station][q]!=mass[b.station][q]?
             mass[a.station][q]>mass[b.station][q]:a.station<b.station;});
@@ -345,7 +358,8 @@ std::vector<FleetCut> separateFleetEvents(const FleetContract& c,const std::vect
     for(double quality:{0.5,0.75,0.9}) {
         std::vector<FleetEvent> es;
         for(int i=1;i<=V;++i) {
-            FleetEvent best;for(int sign:{-1,1})for(int q=1;q<=maxQ;++q) {
+            FleetEvent best;for(int sign:{-1,1})for(long long threshold=1;threshold<=maxQ;++threshold) {
+                const int q=static_cast<int>(threshold);
                 const double m=sign<0?low[i][q]:high[i][q];
                 if(m>=quality&&q>best.quantity)best={i,sign,q};
             }
@@ -362,7 +376,7 @@ std::vector<FleetCut> separateFleetEvents(const FleetContract& c,const std::vect
         bool overlap=false;
         for(const auto& old:selected) {
             int count=0;for(auto e:row.proof.events)for(auto f:old.proof.events)count+=e.station==f.station;
-            if(2*count>static_cast<int>(std::min(row.proof.events.size(),old.proof.events.size())))overlap=true;
+            if(2LL*count>static_cast<long long>(std::min(row.proof.events.size(),old.proof.events.size())))overlap=true;
         }
         if(overlap)continue;
         selected.push_back(std::move(row));if(static_cast<int>(selected.size())>=max_rows)break;
