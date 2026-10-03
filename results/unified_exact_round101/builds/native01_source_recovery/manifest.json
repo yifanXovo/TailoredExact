@@ -1,0 +1,12 @@
+{
+  "source_sha256": {
+    "src/FleetEventCuts.cpp": "c7806b8c6910d9cd3c61b363b8e702dde11fb0726cf2fb74cf278686d215b10a",
+    "src/GurobiBaseline.cpp": "b591fda9a6b5ea85c384dd9489a47640e205828e4a6cd6a0fc579915002f8cf4",
+    "src/round101_fleet_diagnostic.cpp": "eb7d908e38919b6f8e6eb59bb6930502cca8a0b6ec4d40e6cceb75002991a968"
+  },
+  "unchanged_sources": "native01/identity.json; current bytes match those hashes",
+  "recovery": "inverse of recorded cost and warning edits; every restored byte hash matches the prospectively recorded native01 identity",
+  "measured_binary_preserved": false,
+  "measured_binary_sha256": "3a15a1b6eb2d95a2e252068ba9180a8f31af19a39250af82a44345cdeb278bd5",
+  "limitation": "The measured v1 PE was overwritten. Recovered source is not a recovered measured binary. All later build05 binaries are archived separately."
+}

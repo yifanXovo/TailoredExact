@@ -1,0 +1,62 @@
+[
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "                if(found)throw std::runtime_error(\"ambiguous_duration_row\");found=true;++c.audited_rows;\n",
+    "new": "                if(found)throw std::runtime_error(\"ambiguous_duration_row\");\n                found=true;++c.audited_rows;\n"
+  },
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "        for(int k=0;k<M;++k)if(eligible(c,k,e))a.push_back(2*k+(e.direction>0));sets.push_back(std::move(a)); }\n",
+    "new": "        for(int k=0;k<M;++k)if(eligible(c,k,e))a.push_back(2*k+(e.direction>0));\n        sets.push_back(std::move(a)); }\n"
+  },
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "                if(std::isfinite(lb)&&lb>c.horizon_upper)break;++r;}return r; };\n",
+    "new": "                if(std::isfinite(lb)&&lb>c.horizon_upper)break;\n                ++r;}return r; };\n"
+  },
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "            if(y<=c.initial[i]-q)low[i][q]+=point[j];if(y>=c.initial[i]+q)high[i][q]+=point[j];\n",
+    "new": "            if(y<=static_cast<long long>(c.initial[i])-q)low[i][q]+=point[j];\n            if(y>=static_cast<long long>(c.initial[i])+q)high[i][q]+=point[j];\n"
+  },
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "        if(!keys.insert(row.key).second)continue;bool overlap=false;\n",
+    "new": "        if(!keys.insert(row.key).second)continue;\n        bool overlap=false;\n"
+  },
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "        if(overlap)continue;selected.push_back(std::move(row));if(static_cast<int>(selected.size())>=max_rows)break;\n",
+    "new": "        if(overlap)continue;\n        selected.push_back(std::move(row));if(static_cast<int>(selected.size())>=max_rows)break;\n"
+  },
+  {
+    "path": "src/GurobiBaseline.cpp",
+    "old": "                                if(code)throw std::runtime_error(\"fleet_GRBcbcut:\"+std::to_string(code));++state->fleet_api_ok;\n",
+    "new": "                                if(code)throw std::runtime_error(\"fleet_GRBcbcut:\"+std::to_string(code));\n                                ++state->fleet_api_ok;\n"
+  },
+  {
+    "path": "src/round101_fleet_diagnostic.cpp",
+    "old": "    if(!f)throw std::runtime_error(\"matrix parse\");auto c=ebrp::prepareFleetContract(in,m);\n",
+    "new": "    if(!f)throw std::runtime_error(\"matrix parse\");\n    auto c=ebrp::prepareFleetContract(in,m);\n"
+  },
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "int bits(unsigned int b) { int n=0;for(;b;b&=b-1)++n;return n; }\n",
+    "new": ""
+  },
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "        out.allowed[k][b]=static_cast<unsigned char>(possible); // unknown arithmetic retains assignment\n    }\n",
+    "new": "        out.allowed[k][b]=static_cast<unsigned char>(possible); // unknown arithmetic retains assignment\n    }\n    // A full disjoint assignment in the NECESSARY system proves rank=n and\n    // avoids the 3^r recurrence. Failure of this greedy attempt proves nothing.\n    int remaining=N-1;\n    for(int k=0;k<M&&remaining;++k) {\n        int best=0;\n        for(int a=remaining;a;a=(a-1)&remaining)if(out.allowed[k][a]&&counts[a]>counts[best])best=a;\n        remaining^=best;\n    }\n    if(!remaining){out.valid=true;out.reason=\"full_necessary_assignment_rank_is_support\";return out;}\n"
+  },
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "    out.rank=std::min(static_cast<int>(es.size()),hall?matching(sets,caps):total);\n",
+    "new": "    const bool same_eligibility=std::all_of(sets.begin(),sets.end(),[&](const auto& s){return s==sets.front();});\n    // Uniform-q, same-direction pools have one common eligibility set on the\n    // current common resource contract. Matching is then just slot counting.\n    int rank=total;\n    if(hall) {\n        if(same_eligibility){rank=0;for(int slot:sets.front())rank+=caps[slot];}\n        else rank=matching(sets,caps);\n    }\n    out.rank=std::min(static_cast<int>(es.size()),rank);\n"
+  },
+  {
+    "path": "src/FleetEventCuts.cpp",
+    "old": "            if(proof.valid) {\n",
+    "new": "            if(proof.valid && small) {\n"
+  }
+]

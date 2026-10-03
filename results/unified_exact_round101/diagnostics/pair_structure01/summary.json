@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "physical_pairs": 703,
+  "all_vehicles_eligible": true,
+  "support": 38,
+  "rank": 16,
+  "largest_pair_duration": 5733.1601592369325,
+  "smallest_T_margin": 1466.8398407630675,
+  "worst_pair_witness": {
+    "vehicle": 0,
+    "nodes": [
+      0,
+      11,
+      50,
+      0
+    ],
+    "operations": [
+      [
+        11,
+        12,
+        0
+      ],
+      [
+        50,
+        12,
+        0
+      ]
+    ],
+    "load_prefix": [
+      12,
+      24
+    ],
+    "return_load": 24,
+    "travel": 2853.1601592369325,
+    "duration": 5733.1601592369325
+  },
+  "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+  "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+  "event_row_source": "results\\unified_exact_round101\\diagnostics\\lp01\\F5\\raw.separation.json",
+  "event_row_sha256": "8104b8cfb94109423004e831ff80fa30a790b8a6bb4e72894cab34c79140a0d2",
+  "elapsed_offline_seconds": 0.006307799994829111,
+  "inference": "Every pair in this particular 38-event pickup set admits a direct legal physical route, yet the conservative fleet upper rank is16. Its deficit cannot be certified by the R62 all-pairs-incompatible clique test on that set.",
+  "limitation": "These are physical resource witnesses. They do not establish pair feasibility under the historical imported LP incumbent cutoff or G interval; no dominance over every R62 projection/support/native cut is claimed."
+}
