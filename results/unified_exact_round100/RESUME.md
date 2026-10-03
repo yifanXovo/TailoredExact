@@ -24,5 +24,8 @@ measurement01的0-native只读失败保留，02/03本地保留；最终04按同�
 
 大型LP/Start向量/完整原日志/binary保留本地并索引SHA，仓库交付紧凑必要证据。
 三个预存用户修改保持baseline.json的原SHA，不暂存；禁止git add -A。
-最后发布英文 `Round100:` stacked draft PR到R99分支、附到chat，并核对远端真实head、draft/base和可读文件。
-研究结果已完成；PR发布和远端核对完成前goal仍active，不合并或晋升默认。
+已发布英文 `Round100:` [stacked draft PR #162](https://github.com/yifanXovo/TailoredExact/pull/162)并附到chat。
+远端draft/open、R99 base及原PR161 head已核对，报告/数学/结果/复现/审查/时间CSV/输入/helper共8个
+远端文件实际读取并逐字节核对；本次元数据收尾提交再次push后核对最终head及文件。
+全部请求阶段已完成，未解决的算法认证问题按上述删失证据收口；不合并或晋升默认。
+最新完整交付SHA以PR162远端head为准，生产实测源码阶段仍是上文b5d6d83bb。
