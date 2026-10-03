@@ -36,6 +36,7 @@ set(EXACT_EBRP_LIB_SOURCES
   src/ProcessPhaseLedger.cpp
   src/NativeEvidenceJournal.cpp
   src/NativeOtB1.cpp
+  src/FleetEventCuts.cpp
   src/DenseProgress.cpp
   src/GurobiCertificate.cpp
   src/GurobiProgress.cpp
@@ -115,6 +116,11 @@ else()
 endif()
 
 add_library(exact_ebrp_core ${EXACT_EBRP_LIB_SOURCES})
+add_executable(Round101FleetTests tests/round101_fleet_tests.cpp)
+target_link_libraries(Round101FleetTests PRIVATE exact_ebrp_core)
+add_test(NAME Round101FleetTests COMMAND Round101FleetTests)
+add_executable(Round101FleetDiagnostic src/round101_fleet_diagnostic.cpp)
+target_link_libraries(Round101FleetDiagnostic PRIVATE exact_ebrp_core)
 add_executable(Round98ModelExport src/round98_model_export.cpp)
 target_link_libraries(Round98ModelExport PRIVATE exact_ebrp_core)
 add_executable(Round99ModelExport src/round99_model_export.cpp)

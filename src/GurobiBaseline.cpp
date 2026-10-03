@@ -11,6 +11,7 @@
 #include "ProcessPhaseLedger.hpp"
 #include "NativeEvidenceJournal.hpp"
 #include "NativeOtB1.hpp"
+#include "FleetEventCuts.hpp"
 #include "MipStartMapping.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
@@ -409,6 +410,14 @@ struct ProgressCallbackState {
     double native_ot_b1_callback_seconds = 0.0;
     std::map<std::string, long long> native_ot_b1_skip_reasons;
     std::string native_ot_b1_failure;
+    std::string fleet_mode="off", fleet_range="tree", fleet_failure;
+    FleetContract fleet_contract;
+    FleetStatistics fleet_statistics;
+    std::vector<double> fleet_values;
+    std::ofstream fleet_certificates;
+    std::set<std::string> fleet_recorded;
+    long long fleet_nodes=0,fleet_optimal=0,fleet_nonoptimal=0,fleet_root_rows=0,fleet_tree_rows=0,fleet_submissions=0,fleet_api_ok=0;
+    double fleet_seconds=0,fleet_margin=0;
     GurobiProgressStats progress;
     Clock::time_point telemetry_start = Clock::now();
     double last_record_time = -1.0;
@@ -1109,6 +1118,43 @@ int __stdcall progressAndBoundTargetCallback(
             state->round59_sample_seconds +=
                 std::chrono::duration<double>(Clock::now()-sample_started).count();
         }
+    }
+    if (where == GRB_CB_MIPNODE && state->fleet_mode != "off" && state->fleet_failure.empty()) {
+        const auto started=Clock::now();++state->fleet_nodes;
+        try {
+            if(state->fleet_mode!="shell") {
+                int status=0;double node=0;
+                if(state->api->cbget(cbdata,where,GRB_CB_MIPNODE_STATUS,&status))throw std::runtime_error("fleet_status_read");
+                if(status!=GRB_OPTIMAL)++state->fleet_nonoptimal;
+                else {
+                    ++state->fleet_optimal;
+                    if(state->api->cbget(cbdata,where,GRB_CB_MIPNODE_NODCNT,&node)||!std::isfinite(node)||node<0)throw std::runtime_error("fleet_node_read");
+                    if(state->fleet_range=="tree"||node==0) {
+                        auto& values=state->fleet_values;
+                        if(state->api->cbget(cbdata,where,GRB_CB_MIPNODE_REL,values.data()))throw std::runtime_error("fleet_relaxation_read");
+                        auto rows=separateFleetEvents(state->fleet_contract,values,state->fleet_margin,state->fleet_statistics);
+                        for(const auto& row:rows) {
+                            if(node==0)++state->fleet_root_rows;else ++state->fleet_tree_rows;
+                            int code=-1;
+                            if(state->fleet_mode=="submit") {
+                                ++state->fleet_submissions;
+                                code=state->api->cbcut(cbdata,static_cast<int>(row.indices.size()),row.indices.data(),row.coefficients.data(),GRB_LESS_EQUAL,row.proof.rank);
+                                if(code)throw std::runtime_error("fleet_GRBcbcut:"+std::to_string(code));
+                                ++state->fleet_api_ok;
+                            }
+                            // Re-submit a still violated cached certificate. API success
+                            // is not a permanent-retention claim. Persist UNIQUE proofs.
+                            if(state->fleet_recorded.insert(row.key).second) {
+                                auto& f=state->fleet_certificates;f<<std::setprecision(17)<<"{\"node\":"<<node<<",\"api_code\":"<<code<<",\"activity_lower\":"<<row.activity_lower<<",\"violation_lower\":"<<row.violation_lower<<",\"proof\":"<<fleetProofJson(row.proof)<<",\"columns\":[";
+                                for(std::size_t j=0;j<row.indices.size();++j){if(j)f<<',';const int col=row.indices[j];f<<'['<<col<<','<<row.coefficients[j]<<','<<values[col]<<']';}
+                                f<<"]}\n";f.flush();if(!f)throw std::runtime_error("fleet_certificate_write");
+                            }
+                        }
+                    }
+                }
+            }
+        } catch(const std::exception& e) {state->fleet_failure=e.what();state->api->terminate(model);}
+        state->fleet_seconds+=std::chrono::duration<double>(Clock::now()-started).count();
     }
     if (where == GRB_CB_MIPNODE && state->native_ot_b1_active &&
         state->native_ot_b1_failure.empty()) {
@@ -2348,6 +2394,33 @@ public:
         const bool native_ot_b1_active = options_.round89_native_ot_b1 &&
             (out.terminal_mip || out.partial_bound_target_mip);
         NativeOtB1Prepared native_ot_b1;
+        const bool fleet_active=options_.round101_fleet_cuts!="off"&&(out.terminal_mip||out.partial_bound_target_mip);
+        FleetContract fleet_contract;
+        double fleet_setup_seconds=0;
+        if(fleet_active) {
+            const auto started=Clock::now();
+            if(!out.model_fingerprint_matches_request||request.canonical_model_fingerprint.empty()||
+                request.canonical_model_scope.empty()||request.canonical_row_signature.empty()||request.leaf_id.empty()||
+                request.interval_mip_policy!="round55-vd-p"||round50_policy.station_state_formulation!="vd-p"||
+                out.model_general_constraint_count!=0||request.native_log_path.empty()||
+                !request.variable_bound_overrides.empty()||!request.additional_linear_rows.empty()||!request.round60_fixed_inventory.empty()) {
+                out.failure_reason="round101_identity_or_policy_invalid";return out;
+            }
+            if(options_.round101_fleet_cuts!="shell") {
+                NativeOtB1LinearModel identity;identity.names=native_names;identity.types=native_types;
+                identity.lower_bounds.resize(native_variables);identity.upper_bounds.resize(native_variables);
+                int audit_rows=0;SolverNeutralLinearModel linear;
+                if(api_.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&audit_rows)||
+                    api_.getdblattrarray(model,GRB_DBL_ATTR_LB,0,native_variables,identity.lower_bounds.data())||
+                    api_.getdblattrarray(model,GRB_DBL_ATTR_UB,0,native_variables,identity.upper_bounds.data())||
+                    !readLinearModel(api_,model,native_variables,audit_rows,linear)) {out.failure_reason="round101_matrix_read_failed";return out;}
+                identity.row_starts=std::move(linear.row_starts);identity.column_indices=std::move(linear.column_indices);
+                identity.coefficients=std::move(linear.coefficients);identity.senses=std::move(linear.senses);identity.rhs=std::move(linear.rhs);
+                fleet_contract=prepareFleetContract(instance_,identity);
+                if(!fleet_contract.valid){out.failure_reason="round101_model_audit:"+fleet_contract.reason;return out;}
+            }
+            fleet_setup_seconds=std::chrono::duration<double>(Clock::now()-started).count();
+        }
         if (native_ot_b1_active) {
             const auto setup_started = Clock::now();
             out.round89_native_ot_b1_active = true;
@@ -2547,6 +2620,23 @@ public:
         }
 
         ProgressCallbackState callback;
+        if(fleet_active) {
+            out.gurobi_precrush_requested=1;
+            out.gurobi_precrush_set_return_code=api_.setintparam(model_env,GRB_INT_PAR_PRECRUSH,1);
+            out.gurobi_precrush_get_return_code=api_.getintparam(model_env,GRB_INT_PAR_PRECRUSH,&out.gurobi_precrush_effective);
+            out.gurobi_precrush_roundtrip_valid=out.gurobi_precrush_set_return_code==0&&out.gurobi_precrush_get_return_code==0&&out.gurobi_precrush_effective==1;
+            double tol=0;
+            if(!out.gurobi_precrush_roundtrip_valid||!api_.cbcut||api_.getdblparam(model_env,GRB_DBL_PAR_FEASIBILITYTOL,&tol)||!std::isfinite(tol)||tol<0) {
+                out.failure_reason="round101_precrush_or_tolerance_failed";return out;
+            }
+            callback.fleet_mode=options_.round101_fleet_cuts;callback.fleet_range=options_.round101_fleet_range;
+            callback.fleet_contract=std::move(fleet_contract);callback.fleet_values.resize(native_variables);callback.fleet_margin=10*tol;
+            callback.fleet_certificates.open(request.native_log_path.string()+".round101.certificates.jsonl");
+            std::ofstream contract(request.native_log_path.string()+".round101.contract.json");
+            contract<<"{\"canonical_sha256\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"input_sha256\":"<<std::quoted(fileSha256(instance_.path))
+                <<",\"scope\":"<<std::quoted(request.canonical_model_scope)<<",\"leaf\":"<<std::quoted(request.leaf_id)<<",\"column_contract\":"<<fleetContractJson(callback.fleet_contract)<<"}\n";
+            if(!contract||!callback.fleet_certificates){out.failure_reason="round101_evidence_open_failed";return out;}
+        }
         if (native_ot_b1_active) {
             if (request.native_log_path.empty()) {
                 out.failure_reason = "round89_native_ot_b1_evidence_path_missing";
@@ -2788,7 +2878,7 @@ public:
                 out.failure_reason="round68_global_deadline_readback_failed";return out;
             }
         }
-        if (native_ot_b1_active && paper_solve) {
+        if ((native_ot_b1_active || fleet_active) && paper_solve) {
             const double remaining = std::max(0.0,
                 request.global_deadline_remaining_seconds -
                 std::chrono::duration<double>(
@@ -2807,6 +2897,18 @@ public:
             }
         }
         out.optimize_return_code = api_.optimize(model);
+        if(fleet_active) {
+            const auto& s=callback.fleet_statistics;
+            std::ofstream f(request.native_log_path.string()+".round101.summary.json");
+            f<<std::setprecision(17)<<"{\"mode\":"<<std::quoted(callback.fleet_mode)<<",\"range\":"<<std::quoted(callback.fleet_range)<<",\"failure\":"<<std::quoted(callback.fleet_failure)
+             <<",\"PreCrush\":"<<out.gurobi_precrush_effective<<",\"setup_seconds\":"<<fleet_setup_seconds<<",\"callback_seconds\":"<<callback.fleet_seconds
+             <<",\"mipnode_calls\":"<<callback.fleet_nodes<<",\"optimal_nodes\":"<<callback.fleet_optimal<<",\"nonoptimal_nodes\":"<<callback.fleet_nonoptimal
+             <<",\"candidates\":"<<s.candidates<<",\"proved\":"<<s.proofs<<",\"small_proofs\":"<<s.small_proofs<<",\"large_proofs\":"<<s.large_proofs
+             <<",\"unexcluded\":"<<s.greedy_full<<",\"reliable\":"<<s.reliable<<",\"duplicates\":"<<s.duplicates<<",\"arithmetic_skips\":"<<s.arithmetic_skips<<",\"cache_hits\":"<<s.cache_hits
+             <<",\"root_selected\":"<<callback.fleet_root_rows<<",\"tree_selected\":"<<callback.fleet_tree_rows<<",\"unique_rows\":"<<callback.fleet_recorded.size()
+             <<",\"submitted\":"<<callback.fleet_submissions<<",\"api_ok\":"<<callback.fleet_api_ok<<",\"violation_margin\":"<<callback.fleet_margin<<"}\n";
+            if(!f)callback.fleet_failure="fleet_summary_write_failed";
+        }
         if(callback.round97) {
             const auto began=Clock::now();
             int count=0,status=0;double objective=GRB_INFINITY;std::vector<double> final_values;
@@ -3743,6 +3845,7 @@ public:
             !out.model_fingerprint_matches_request ||
             !out.feasibility_consistency_gate || !domain_restore_ok ||
             log_rc != 0 ||
+            (fleet_active && (!callback.fleet_failure.empty() || !round89_status_read_ok || !out.native_status_supported)) ||
             (native_ot_b1_active &&
              (!callback.native_ot_b1_failure.empty() ||
               !round89_status_read_ok || !out.native_status_supported))) {
@@ -3772,6 +3875,10 @@ public:
         if (native_ot_b1_active) {
             // Any candidate engineering failure, including log-parameter or
             // domain-restore errors, must invalidate trace/certificate bits.
+            invalidateRound89NativeOtB1FailedOutcome(out);
+        }
+        if(fleet_active) {
+            if(!callback.fleet_failure.empty())out.failure_reason="round101_callback_failed:"+callback.fleet_failure;
             invalidateRound89NativeOtB1FailedOutcome(out);
         }
         if (out.lp_relaxation && round63_root_source_==request.native_log_path.string() &&

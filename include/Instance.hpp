@@ -482,6 +482,8 @@ struct SolveOptions {
     bool round88_constructive_only_descent = false;
     // Round89 native B1 user-cut prototype, default-off and R83-only.
     bool round89_native_ot_b1 = false;
+    std::string round101_fleet_cuts = "off";
+    std::string round101_fleet_range = "tree";
     // Round90 ENS-C ablation: use a current optimal parent LP G for the
     // first-class K1 split point when strictly interior; otherwise midpoint.
     bool round90_lp_g_split = false;
