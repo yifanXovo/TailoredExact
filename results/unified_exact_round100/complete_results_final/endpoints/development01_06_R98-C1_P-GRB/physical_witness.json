@@ -1,0 +1,112 @@
+{
+  "input_path": "reference/round98_confirmation/C1.txt",
+  "input_sha256": "149100d4f0b532787ac0d0f4f5d88da3667b70d92b3256c24ab8601926da40e7",
+  "F": 0.4076717406659222,
+  "U": 0.4076717406659222,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        2,
+        8,
+        17,
+        10,
+        1,
+        7,
+        16,
+        0
+      ],
+      "operations": [
+        {
+          "station": 2,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 0,
+          "drop": 5
+        },
+        {
+          "station": 17,
+          "pickup": 0,
+          "drop": 3
+        },
+        {
+          "station": 10,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 0,
+          "drop": 5
+        },
+        {
+          "station": 7,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 16,
+          "pickup": 0,
+          "drop": 9
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        11,
+        14,
+        12,
+        9,
+        3,
+        18,
+        6,
+        0
+      ],
+      "operations": [
+        {
+          "station": 11,
+          "pickup": 12,
+          "drop": 0
+        },
+        {
+          "station": 14,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 12,
+          "pickup": 0,
+          "drop": 9
+        },
+        {
+          "station": 9,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 3,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 18,
+          "pickup": 0,
+          "drop": 4
+        },
+        {
+          "station": 6,
+          "pickup": 0,
+          "drop": 3
+        }
+      ]
+    }
+  ],
+  "source_result": "results/unified_exact_round100/development01/raw/06_R98-C1_P-GRB/result.json",
+  "source_sha256": "2d687535a7798089542a711aac942ffc213c5b33ecf10f7750d71c2acecfac6e"
+}

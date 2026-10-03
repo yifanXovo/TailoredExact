@@ -168,3 +168,11 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /tests/round98* -text whitespace=cr-at-eol
 /reference/round98*/** -text
 /results/unified_exact_round98/**/*.log -whitespace
+
+# Round100 frozen input, driver and evidence hashes survive Windows checkout.
+/results/unified_exact_round100/** -text whitespace=cr-at-eol
+/scripts/round100*.py -text whitespace=cr-at-eol
+/tests/round100* -text whitespace=cr-at-eol
+/reference/round100_confirmation/** -text
+# This inherited role is consumed byte-exactly by the Round100 frozen protocol.
+/reference/round99_confirmation/N2.txt -text

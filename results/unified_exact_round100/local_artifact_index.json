@@ -1,0 +1,2516 @@
+{
+  "local_only_large_artifacts": true,
+  "files": [
+    {
+      "path": "results/unified_exact_round100/development01/identity.json",
+      "sha256": "ab958ed7670438908f31f832df17fd0dde65957f1004e6131ebbf37cfeed2a8d",
+      "bytes": 66573,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/summary.jsonl",
+      "sha256": "7aff6ece45942ca7695abbc709ac13d6644f4f8442b2a624ac2a9267316df493",
+      "bytes": 11177,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference_batch_receipt.json",
+      "sha256": "c7ac965e63e7fbb2d6e01cb218dd3a8e181e1d6280868f96fa6af838d38a9842",
+      "bytes": 480,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "ca4b9a0209d53796a9e573fe51f01f177a3629fdf739dbe9509d77ca58c478d0",
+      "bytes": 1214799,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "5fd4ef1012451719fb93c01518dafb7742d903d1cd37ab0aa6b384c63f76c485",
+      "bytes": 1227934,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "bytes": 1204519,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "7fcf269578f4798249e682a7de78708964e93f2fdeea1d06074a7d06a50ec7e1",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "166a1986bc394368b8fe3dab136e0422062f49b9efa488117b2a9490ab6544c9",
+      "bytes": 70968,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "b403cfb97964d706c76afea1ff8bd52a150fc24f7b891cdcd8a5f84abdc47086",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "166a1986bc394368b8fe3dab136e0422062f49b9efa488117b2a9490ab6544c9",
+      "bytes": 70968,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/result.json",
+      "sha256": "9d92b1897afd981af59c9bfb1de991b7a5b8f2e69e3d02dc706106f034d8cc07",
+      "bytes": 95077,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/observations.json",
+      "sha256": "5a03331d36d21c8889ed5fd8afecb5aa340ba0bffd61f6ab110598cb7561ec37",
+      "bytes": 3538388,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/phases.csv",
+      "sha256": "d548e4ce19b67c4479fa84ed5d5cba39c40d5f5ca59789df8a8297d426e3522e",
+      "bytes": 3243,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/initial_witness.json",
+      "sha256": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02",
+      "bytes": 430,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "251eb7a01579356d8841cd82f4c10509f4c47c2c001f57f8d2eb45cce5a32e2e",
+      "bytes": 1409,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "b3ca46c918b3853b0178a23ffccac38ec2957ff849538d4a11b6f11b18225783",
+      "bytes": 1409,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "3e046b139446d756be694cc4c643c62ac01fd1483c42f83e4218e854469865c6",
+      "bytes": 1906,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "9730b1eb7fef8936d7752e68e5000dde7b864b0dfa0213b5bbca9168619796fb",
+      "bytes": 1362,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/01_F2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "a6c61121c15141bc37c9234375c74d2ec9d652ddee8a4ef772743b99dd91b76d",
+      "bytes": 12507,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "705c56de8d489fbb8dae1195ab6719187ae97d851cb5608dfabc4825da7eff8f",
+      "bytes": 1214115,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "0c5c762a3b8f097353423e909fc644d54150d9cc20a6658cd700e6e8daff2b2b",
+      "bytes": 1227250,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "b360282fab456705c8908032a666b10d3a7167f89f4ba52246a1f6575b420619",
+      "bytes": 1203835,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "2b8653db21b9016000220c581481997388190ac30979e14f36ab5ed712b6258e",
+      "bytes": 554,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "2257dcd6f715aea89809c9232f7625f3d130cb4bbaf729d6f4e88773ecaaac98",
+      "bytes": 70968,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "5a5c02be7c553b2ba8468be36861512f0496d4be4b04efc1a96b09c9c8f6f596",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "2257dcd6f715aea89809c9232f7625f3d130cb4bbaf729d6f4e88773ecaaac98",
+      "bytes": 70968,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/result.json",
+      "sha256": "f9f2282cc71f132895cfb993938377f30b6c0b6a533aaeb732a7979db149ff4d",
+      "bytes": 95094,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/observations.json",
+      "sha256": "74155745f03df969472a52eae582af59ceb7ca93640dacd4f02530fb926d2b4b",
+      "bytes": 3849499,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/phases.csv",
+      "sha256": "eebb98d704ecb3553807a6f5ddb6a74c04dfc7180eb6908496547a075c7bc685",
+      "bytes": 3200,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/initial_witness.json",
+      "sha256": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02",
+      "bytes": 430,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "13dc44783932815bd0a624659d57ceb51b0917adb3dad537cb0b0ff8b057df02",
+      "bytes": 1409,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "225181ee30b4cbb016d3834f0b2d9f42a9f9df6e84d29ab58d9f38ca558ecffd",
+      "bytes": 1409,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "f3eb75cb81f35cb1c7cbac9379b1c3a6984ab06648ab028b8cfde3c12e5f70e1",
+      "bytes": 1906,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "01232d68fa348eb9e1e0bcea18bc422b78a3829aca3f5a7fa7b0ae528b0b8599",
+      "bytes": 1362,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/02_F2_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "f813643afc185c5969a9ea2aaf8ee04fd0a497ba829a76472bf3b09a2330d0e9",
+      "bytes": 16791,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "ffd936ab8b352a8b34776ef9ae1fe3a2cc8fd382483f9cf6d0fb40c230b53c0f",
+      "bytes": 1225691,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "aaeadf01fa12aaec1e7a5ea7afb465c5f9f10fe526ddfae14e8d44d8e3b975c3",
+      "bytes": 1238826,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "69da40bb1569404de84ef1eddb60bbfff8ea30258f4b99f314fcf192944251a2",
+      "bytes": 1215411,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "217211a909dab1a7448d154d668609b43aaf739558761c254d753dc77f93920b",
+      "bytes": 559,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "2257dcd6f715aea89809c9232f7625f3d130cb4bbaf729d6f4e88773ecaaac98",
+      "bytes": 70968,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "e605258746d23f2a465b5ff7ac7f4f7febe30183cdf375ad8496d491c09865b5",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "2257dcd6f715aea89809c9232f7625f3d130cb4bbaf729d6f4e88773ecaaac98",
+      "bytes": 70968,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/result.json",
+      "sha256": "f147e9568ff2bd9982aab1368cf70f8319e50da87522c0d8f295b34892e20daf",
+      "bytes": 95042,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/observations.json",
+      "sha256": "dcf7cb934f3108507700ea2da7c8a1476e6c57538d51ce3662052e1551813d70",
+      "bytes": 4631143,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/phases.csv",
+      "sha256": "43503d12efa39f2643a4f9758e8e7dac0aad73d3dc113f0c5ebba2be7d2ff3aa",
+      "bytes": 3173,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/initial_witness.json",
+      "sha256": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02",
+      "bytes": 430,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "6d24c8714b0b54d67baf6c1cc44201cce29b95dfacb0a99e9f6ed0774106de25",
+      "bytes": 1362,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "34611ba61af1f6c2e4755e4442f8161794104ef7dfac40f12c0c43ee58b6b5f3",
+      "bytes": 1362,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "f7c64312a1a84818a05ddff1f9e55d401886115d3d61053df15b9dab5e7ee51a",
+      "bytes": 1980,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "0597a7ac9b142667de5882b7513cdba86f6b2a4402a3ca2bced70229d07dbd6d",
+      "bytes": 1360,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/03_F2_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "d28f6320c30d33561bcbc75416500853fa7b930719cf0df5b0a3fdd6d5d390e3",
+      "bytes": 15522,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/04_F2_P-GRB/result.json",
+      "sha256": "e2ab72e34da1b19f7c99c772b539c022c242f84e056d26b471e759527c0a6cd3",
+      "bytes": 85544,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/04_F2_P-GRB/observations.json",
+      "sha256": "6cbe3f492c73b72915b9af2e209ce570ec39ad2effad5991db31ea35a47ad0d3",
+      "bytes": 1732329,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/04_F2_P-GRB/phases.csv",
+      "sha256": "489c69b26b74d97e1f703c7d362eb16e4f6bbd509104d83568b31bf79dcc28f1",
+      "bytes": 893,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/04_F2_P-GRB/native.log",
+      "sha256": "362c2aac633f42340c35e85355c843cc352eaffda16f6cda245d5f690b558dfd",
+      "bytes": 19063,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "39761ad6bebd1148d9764b210de3769fc374334030c91e664f530ec64171bcd2",
+      "bytes": 1197660,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "80cd118c7975985a86483a73bfd7c96ea62850f89afd450fc6651381f3c0fa6f",
+      "bytes": 1227587,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "58f3cade6ee643951d680492544aff6397867ff425c17a5c9275ee3a10bc980a",
+      "bytes": 1207195,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "e7741512c30d1cd3ef7083b37142e41596815a57fa61c3a9b15bd74e12dd095a",
+      "bytes": 565,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "d03e900628285cc1fe7c3a62af6f9ecbdd065ba80b21e3a85a3b5bbba9a58197",
+      "bytes": 67002,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/result.json",
+      "sha256": "a474a1120678bcd2e8ba9869493cdbb92a8f1d11ced3b2015761829c4262260f",
+      "bytes": 95834,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/observations.json",
+      "sha256": "3bb171ae558712369b9ce3ca33e0e3c03ad024df061e59f4baa203c029a7985a",
+      "bytes": 3691759,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/phases.csv",
+      "sha256": "17acefd6ce36c886a960e7d0fb1def3588f4527b94edb95f534ce79957e7a476",
+      "bytes": 3196,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/initial_witness.json",
+      "sha256": "17853e8d54cf79148ea4a57eab0bd66c90d80eae090505d3ca78c9a4acf49c06",
+      "bytes": 689,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "1c27cd9105fe7dc867768e9516fcfc7692ef5cc548c7261dec2b82a8e76612b7",
+      "bytes": 1411,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "5f94e6e1351f662924b837c071e919f25ec4690e27582bf648b629384d70c3c8",
+      "bytes": 1365,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "6e582f8ff9abef3c3bcb4722395b6b276d4837ccacfea6b4b0a32edcd6a8bee9",
+      "bytes": 1364,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/05_R98-C1_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "7eaac118a0a8ce83f13b3baf33e0b3ac99a1c7a8edf4974b6a66bf1256a9a5a2",
+      "bytes": 9377,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/06_R98-C1_P-GRB/result.json",
+      "sha256": "2d687535a7798089542a711aac942ffc213c5b33ecf10f7750d71c2acecfac6e",
+      "bytes": 86339,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/06_R98-C1_P-GRB/observations.json",
+      "sha256": "ee6aca63fc07867b1406b5144eaa132d26aa0372ff0489894bcd167d85aeb4c2",
+      "bytes": 745993,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/06_R98-C1_P-GRB/phases.csv",
+      "sha256": "b4c7aae9e675b0679c76faae5a537428d845632bdfccdd5b0f6792ac9c4b255f",
+      "bytes": 902,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/06_R98-C1_P-GRB/native.log",
+      "sha256": "983321629db2f6c5e1d02a5849527a7400bb63d4254c6ae90363e617883a4958",
+      "bytes": 21055,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "8829158b6ce4f82cbd44013cb652cf7c7270ba7bff5ae1dc35becf1ddf0ab623",
+      "bytes": 1187460,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "69a9d1b396ba13e18e0df6e81d5596cce8407b4b0f048b551324ed6ab92cb7cf",
+      "bytes": 1217387,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "8a300b6a6de1239abb4bd4773042e1f5b441dc7f14e55fbff716cd81f3b06e42",
+      "bytes": 1196995,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "0ae00b89e59e87da0259ed1b6ab5f79f4f43e9e4e59cfb845714b0f2531cd318",
+      "bytes": 565,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "d03e900628285cc1fe7c3a62af6f9ecbdd065ba80b21e3a85a3b5bbba9a58197",
+      "bytes": 67002,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/result.json",
+      "sha256": "56d073615b96e8b891f0fab09e5a037da88a772e727d1706e3acbdfa4e78550f",
+      "bytes": 95882,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/observations.json",
+      "sha256": "e5437f2292e0180422d724878e703b0e17f9cb4bd364148241ad8238d3bc04d5",
+      "bytes": 4997322,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/phases.csv",
+      "sha256": "94b4b4f8d5b6eec4f1a3e1ad6a5dcfdeebd4c74792d9cda93807a78ba4f02c27",
+      "bytes": 3196,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/initial_witness.json",
+      "sha256": "17853e8d54cf79148ea4a57eab0bd66c90d80eae090505d3ca78c9a4acf49c06",
+      "bytes": 689,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "49a63eba329a6faee7d7d0afa4168a0f8ad1c2c44523103a2c636c55830b068c",
+      "bytes": 1368,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "07879430b97376cc87099074534a90b4a0b1cec223a1baf4594509b146011af5",
+      "bytes": 1368,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "8250590279e6aab6eb42021176dc09633dd40fa1bc1067921c284439722c4eba",
+      "bytes": 1366,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "ecf97c9f606156895424fcb09f5d3982dfde5e354cdd9473ba95ecf3da7d96d9",
+      "bytes": 9674,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "7e9a0bf1f3d19bdab94fce8652a3183e9626628e40c7747f574b108c05134481",
+      "bytes": 1188144,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "8ea7ab6bd806cf90002a0c0f66c816392f865947e34648851a60de29f035f90f",
+      "bytes": 1218071,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "4a202e11396a3c34a86a58f60648adb0384c3d4b5133160d9309cb85c3216695",
+      "bytes": 1197679,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "1fd19ba2b5ac378b61c8a1fd9166b55ca7319543582711dfd6dd79da8d87961a",
+      "bytes": 565,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "26f550ccd420ae63624be0bc8c31f40dc8124b6c106c5a7a3e8def55e974b219",
+      "bytes": 67002,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/result.json",
+      "sha256": "cad84e35eb2e262c19164685e5735cf07910ccb58f24494fc7de83e3ec4e4ca6",
+      "bytes": 95786,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/observations.json",
+      "sha256": "0511668d2e42f80c3934fa14eed44ef1ec207cc6bc5a4e35f21a225a991e3404",
+      "bytes": 1950304,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/phases.csv",
+      "sha256": "02a4794393ad0b076a0fc52e9e4c8f2b25aafa98fb216b6b9b4dbbc645626adf",
+      "bytes": 3232,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/initial_witness.json",
+      "sha256": "17853e8d54cf79148ea4a57eab0bd66c90d80eae090505d3ca78c9a4acf49c06",
+      "bytes": 689,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "9501be7cd2362950e8f9611ea192d0b716f0699ec3e84b7fa90439659405de06",
+      "bytes": 1368,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "00889c046ece88f7f1dec6e6541209867cd0459da266625ede33dffd44f48fb2",
+      "bytes": 1368,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "378490741cd8cf388388410e4e53a61510ba9fa65b7a81f1103890ff3e2a3724",
+      "bytes": 1366,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/08_R98-C1_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "c60a25b01d8b74e4a78b7ab349f5f6f6804992ead4a2848e174620fd404ff4f5",
+      "bytes": 8005,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/09_R98-C2_P-GRB/result.json",
+      "sha256": "55b765faa6784e7c86155d9b974c95e52b4d135f0345828a68c0b05818a872c3",
+      "bytes": 87832,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/09_R98-C2_P-GRB/observations.json",
+      "sha256": "d00cff3799d51d1a5b38ca4d54e3bbdfbfec045cc6bb8a97ee6fab268451d629",
+      "bytes": 516388,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/09_R98-C2_P-GRB/phases.csv",
+      "sha256": "930fd862042a162f0e9c68ed294480119adb8cf285e455f682739985ee9510ae",
+      "bytes": 905,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/09_R98-C2_P-GRB/native.log",
+      "sha256": "19ccf95eb72f5c8687bcde437bfb48e5a9ea6997e27fa65e43bf9d728144bfff",
+      "bytes": 41098,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "245d3b7eafa84404a5bff115edb5d865e423e8b1f0e8cd18d223aa9ba0b4ded0",
+      "bytes": 4481948,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "0f050516cf3bc93be2b358967faa2b2a299daf8e906f953fc29158cf3167fd03",
+      "bytes": 4521587,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "f68364616d65beea3e97bed7d8de3f79d71b4574f34f524819c27c3ea81bd625",
+      "bytes": 4481948,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "bea38cee878d5f7dd7df72de8a3eaf662420f615686e5f5b0d9fe32b5b5b1cb5",
+      "bytes": 560,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "c1d67511bba56a6bd6574665c6063a32423c9ff48d566583540d7b9212b4955d",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "bd48395844013c9838090536a5a9b7bfa1feb081be672b40f1b4a9cc3eaec34c",
+      "bytes": 560,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "c1d67511bba56a6bd6574665c6063a32423c9ff48d566583540d7b9212b4955d",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/result.json",
+      "sha256": "9733c4b97f43cebd52865c478c11d16dbbb7978cc3c3513fa4283c157c8a80c0",
+      "bytes": 97221,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/observations.json",
+      "sha256": "7c9411b77a8e151db359e0e9f4eaf172294eb4fb61eaa10b2e46b48a7694ef05",
+      "bytes": 119362,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/phases.csv",
+      "sha256": "9fe2e562a9e1c32650176df9f8bd6a46e9cb1f483384d34c092f28db15637c5f",
+      "bytes": 3102,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/initial_witness.json",
+      "sha256": "eb6941ed2748028d508da47f5c8d40d7696ec87de14ae5ac003f8a058b83a47d",
+      "bytes": 1154,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "068d8061e6bc89e971b705471254a0d37a85912eb274f4ad9178ede5e93c0da2",
+      "bytes": 1374,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "12e6c06f779a98b0b182e6216e5f4cf7482d8da058dd08e43ecf6ffe69529fa9",
+      "bytes": 1374,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "a5ddc4e2dae39b66527ec024db177fdf2f5e1431b513572fd3cabd0c0db3bf14",
+      "bytes": 2212,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "1eec8594c31922e76d0362de4b7f8fd0d11bef8297ce950af4c4ee166187d337",
+      "bytes": 1371,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "5da37f80edcb5e18a24551b2cdb8ae347dce81accbc4d2e8dd9d334bf5a6adaf",
+      "bytes": 28580,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "9e4f853fa6ad07c63d68e828561113d0faf55b903ea9366e23abd92345c59265",
+      "bytes": 4483514,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "20f249a90bef7cea91b4128f9f2de58e7a0cd953e74563533845bb6bf78c0915",
+      "bytes": 4523153,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "41aacb59acd6bbb72cc56c9840a2ea0e47e0aad47a45304ad981bbd139a049bc",
+      "bytes": 4483514,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "a50be025026dde63a57c3b581baec55d2fe85490a5c6fac26629546c57cf6bde",
+      "bytes": 560,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "9d161de9ee76a07402fc22f513caf4bd04fb6aadb445911bd5edae9357ef4381",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "fcc81914932b2e63cc91549d3c1a924733f557a1708aac39f096878a786b7986",
+      "bytes": 555,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "9d161de9ee76a07402fc22f513caf4bd04fb6aadb445911bd5edae9357ef4381",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/result.json",
+      "sha256": "552dd3dad70b7d43f9abdb1d69cb7d90ea604662dbee6ea043182cb49d1d837c",
+      "bytes": 97291,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/observations.json",
+      "sha256": "c50f3da557918fadfe9691254d6bcf047556f263eedc4cb81eabf090779ba7d8",
+      "bytes": 227095,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/phases.csv",
+      "sha256": "2a702fb0d53745e5c1746cfe536c5302832879c294e8b7b8373f3814e2f9cd2a",
+      "bytes": 3068,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/initial_witness.json",
+      "sha256": "eb6941ed2748028d508da47f5c8d40d7696ec87de14ae5ac003f8a058b83a47d",
+      "bytes": 1154,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "ef04ec3a917bfcfad1d85f0f789b8762462188f4480835b2e8be9da49faa0572",
+      "bytes": 1374,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "539954110f33e62d15981bc99e2367fcb90125a6051d32fd6780804e6f71c177",
+      "bytes": 1373,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "11dd6e9c17bb0ab1677a90449b4ac8aef6b2804338c373813f0913adb31f66cd",
+      "bytes": 2213,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "4f51f5172c79b2a45cdf96591a4b579c7866101039d55b3d226f5427d9869491",
+      "bytes": 1372,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/11_R98-C2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "fc4b23c4f96aeec5e4fdedcbdaeb00100469842a47c69b37152878ccc727e38a",
+      "bytes": 31692,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "98c4a2d34379dd98aa229a49feb902ca84ec70d682e1fb4cabdedcd81f7a272b",
+      "bytes": 4502323,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "920341edf4a335f95d8fa5bf590276b16f98399649cd8ab3ee00f5f6b68bbd72",
+      "bytes": 4541962,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "a4145df15459f85c4e9414131cf0af2f4d913e9ae467fd6021ec520ebcff3973",
+      "bytes": 4502323,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "0c99908848ef3cc5a3dfe6276285ee8118301fd5241c60a0080ed59623a7165a",
+      "bytes": 560,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "c1d67511bba56a6bd6574665c6063a32423c9ff48d566583540d7b9212b4955d",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "597d080c455f1c4e3bd7aa837f4c0d9dc3b5a822eea8f5a4a7bde592684f4dc0",
+      "bytes": 555,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "c1d67511bba56a6bd6574665c6063a32423c9ff48d566583540d7b9212b4955d",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/result.json",
+      "sha256": "990848e7a051245718a2f125079e3adecd0e4defce3d1aaeb10243b7da6846d9",
+      "bytes": 97583,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/observations.json",
+      "sha256": "18e5844094008869352a0a38de9633191945de1e517c6284de9dfb48983852f4",
+      "bytes": 273876,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/phases.csv",
+      "sha256": "f827e5c101cd8ec0b734d8ce012a5e34f47d7600cc3fadaee12a4505a250ed6f",
+      "bytes": 3084,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/initial_witness.json",
+      "sha256": "eb6941ed2748028d508da47f5c8d40d7696ec87de14ae5ac003f8a058b83a47d",
+      "bytes": 1154,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "ae4c48cfa72f774bc731bd849617d761359bfc25fc80fbd6cb53fb5c138bd6cf",
+      "bytes": 1421,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "866ea0e60b9c3d4955ffc4d97960035beab52b6cd986046cc8f0bb756b0db6f5",
+      "bytes": 1372,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "55dcca34ca2bf5651608b39dfb0d609d70ffa143e6aca916488ca897fbe818ac",
+      "bytes": 2209,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "84852fbed2e6fcf4846dddc5749691168df7e3ecbb8595f2717bb5e89eb9ada5",
+      "bytes": 1370,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/raw/12_R98-C2_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "05bdc47fb194b6ab8e071ee9758e666bcd317d6ea76b0432ef216e5773e083c5",
+      "bytes": 30879,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/F2/build.json",
+      "sha256": "7a08202a1654109a73375bbfb4f1d4b0c1266ab94628732a9a2e66150f1aafde",
+      "bytes": 160,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/F2/completion.json",
+      "sha256": "cf4cf94d11b7fe3c8082009e58507678e1395166e2395a0f5d7f925798be1b54",
+      "bytes": 86,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/F2/launch.json",
+      "sha256": "4a4183a51ccb66627522465fb01a489a16d0769f9cff18ef0af805b6fdaa5481",
+      "bytes": 417,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/F2/original.lp",
+      "sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+      "bytes": 288481,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/R98-C1/build.json",
+      "sha256": "ddb62b78450d7c5823a29f02f6f5a2b33837c44e6b6b6281942c9c200dce2ece",
+      "bytes": 160,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/R98-C1/completion.json",
+      "sha256": "6381b87bbc082a2289e490c6778d2165e8eeef80a04a641672369cbb9cfb7c8d",
+      "bytes": 86,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/R98-C1/launch.json",
+      "sha256": "9d496ec61eef15a6d1043e0ef7dc77bf3814bdaba0e716fbd4f4964e063d5a29",
+      "bytes": 411,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/R98-C1/original.lp",
+      "sha256": "ae805fc3f12693812879c98b99c14d4303a334c5e9d00ceeab2bda013734927f",
+      "bytes": 287790,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/R98-C2/build.json",
+      "sha256": "f00e147f1ee4b02dbacd42472124e83a646d32f1eb8bcb7a07784f8546686960",
+      "bytes": 163,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/R98-C2/completion.json",
+      "sha256": "a3cdf8e2e844f5db80dfa263fa664bc9a7f84d2c2583c9e39f33b482ddcb08b3",
+      "bytes": 85,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/R98-C2/launch.json",
+      "sha256": "7ca44771be195efbea9355bdea19e6088f48acd4096efdd5c38cfb98e4e17602",
+      "bytes": 411,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/development01/reference/R98-C2/original.lp",
+      "sha256": "8205222d51e7a74bec2b66c6540acf45cd52b5ae6eaa9bdc5f1e8aac7db3c1b3",
+      "bytes": 883952,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/identity.json",
+      "sha256": "5501ea250a77903c834384cd7b77e1744049af64205077703572080480422222",
+      "bytes": 42748,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/summary.jsonl",
+      "sha256": "1cafe0b80981b53f7a81240053646fd8a4fb2395652f643549213fcaaf30f855",
+      "bytes": 5734,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/reference_batch_receipt.json",
+      "sha256": "6a4456f2b2bdcb743debbd6fd9777b357ae95240970ff5a777c5b6c0336992db",
+      "bytes": 398,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/01_R98-C2_P-GRB/result.json",
+      "sha256": "8b66e91ba31cd1c7e6ba8ed23d03a121867195c5b058c7aee7b23648c6f02d48",
+      "bytes": 87858,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/01_R98-C2_P-GRB/observations.json",
+      "sha256": "69561c609edac31db86db42d5cf503878f3237ff6e1541460715d7ef191dea19",
+      "bytes": 984795,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/01_R98-C2_P-GRB/phases.csv",
+      "sha256": "48c4001fe791d98524820dfd9af92a4acdffb475f7461606ef11d9839e6af37e",
+      "bytes": 908,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/01_R98-C2_P-GRB/native.log",
+      "sha256": "422dedbe5fe5b0f6bc172726bd13c75dc47e5193100cd3ecee8d505bfd50e84c",
+      "bytes": 122585,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "9e4f853fa6ad07c63d68e828561113d0faf55b903ea9366e23abd92345c59265",
+      "bytes": 4483514,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "20f249a90bef7cea91b4128f9f2de58e7a0cd953e74563533845bb6bf78c0915",
+      "bytes": 4523153,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "41aacb59acd6bbb72cc56c9840a2ea0e47e0aad47a45304ad981bbd139a049bc",
+      "bytes": 4483514,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "5d19e3ef4bd67490379a5539fdbf79fe61a4c629a42a22943590a4b0bfeeaf7e",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "9d161de9ee76a07402fc22f513caf4bd04fb6aadb445911bd5edae9357ef4381",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "ef65f3431a7c021301c560c2d307c897d0d284b343fc73fb224796db59230acf",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "9d161de9ee76a07402fc22f513caf4bd04fb6aadb445911bd5edae9357ef4381",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/result.json",
+      "sha256": "043af1f1fb7983e7b319ca648af3a81b5d114e9e8ef4cf19daf241bb48317b4a",
+      "bytes": 97377,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/observations.json",
+      "sha256": "73c1270f1bcca6ca2cd61d8d9260338b91d846da484e9b74ce04b3bf2be06ecd",
+      "bytes": 253106,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/phases.csv",
+      "sha256": "4809f6d6b7afa02857895e7162027a83abb9e36836fb4ac79c93a141ea330021",
+      "bytes": 3224,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/initial_witness.json",
+      "sha256": "eb6941ed2748028d508da47f5c8d40d7696ec87de14ae5ac003f8a058b83a47d",
+      "bytes": 1154,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "3250a4c87f5ac6308409e124f50b0589a935f56254a591aa006506e0e53f169b",
+      "bytes": 1379,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "3db6790d91d1af0afdc04993b61d74ee2c7119526bc7f4c24ebeb3ae3963b4ae",
+      "bytes": 1379,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "80c941bfaf7cda86544a065d31e660ab1a34816419c53bc951f89d15cd15f025",
+      "bytes": 2219,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "ecdcef86cd68ecf6bf96408457c8dd9cce0f0f267fd77c86d33421d6648d916b",
+      "bytes": 1377,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/02_R98-C2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "090ba7b77b6b3db451db0920d8e0a065b10ce35d4f00ec87ef4ed19d4520e887",
+      "bytes": 93152,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "98c4a2d34379dd98aa229a49feb902ca84ec70d682e1fb4cabdedcd81f7a272b",
+      "bytes": 4502323,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "920341edf4a335f95d8fa5bf590276b16f98399649cd8ab3ee00f5f6b68bbd72",
+      "bytes": 4541962,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "a4145df15459f85c4e9414131cf0af2f4d913e9ae467fd6021ec520ebcff3973",
+      "bytes": 4502323,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "628b9766fda7dcda78eeb9c0a9c6534f55060a83523f98151172185c96d8a0e9",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "c1d67511bba56a6bd6574665c6063a32423c9ff48d566583540d7b9212b4955d",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "6d33a088523c53f74a8405789ed379bfcbcb3b72c00112417ab40fd22a95ff7a",
+      "bytes": 555,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "c1d67511bba56a6bd6574665c6063a32423c9ff48d566583540d7b9212b4955d",
+      "bytes": 171781,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/result.json",
+      "sha256": "8d82dfe344ce3d4b9f66068d67b18065c40df02d1a81d773d8be798730118a74",
+      "bytes": 97696,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/observations.json",
+      "sha256": "f1a355072e3e553c9aadb559df0a855be9cdadc8507405fba4065c005ae59c68",
+      "bytes": 342201,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/phases.csv",
+      "sha256": "5f2238e2ed8352ed039d96a87a20686d5c5d025d0bb0073d88915e6516bfcda2",
+      "bytes": 3162,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/initial_witness.json",
+      "sha256": "eb6941ed2748028d508da47f5c8d40d7696ec87de14ae5ac003f8a058b83a47d",
+      "bytes": 1154,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "239e4fecb90d017dbdd828689d78261d3cd0492d2e40462b21653c93bf82f4cf",
+      "bytes": 1426,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "abdf478853dcfe74b2e3dbc2a297ceeda4369b1a68a00030788f38dc69484cca",
+      "bytes": 1375,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "c6e26af3f9aaf85477c8b0c528af55886b9fa80006ff500c2954faa4621edd4e",
+      "bytes": 2214,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "2637d6b951edfe5151b14580ca25a944ff4372bd7fdf4711f102b409e4b4a7b2",
+      "bytes": 1375,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/03_R98-C2_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "c7bc2682ac19a0fc6bffb8d6340e92c49cdf28ca0b22146d3f991f74ece65486",
+      "bytes": 94430,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/models/L0.0.0_epoch_0_generation_4.lp",
+      "sha256": "a323c604a42094287232ddb3ee4ec89e9432034da6263db52edbed57d5cf957f",
+      "bytes": 17001624,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/models/L0.0.1_epoch_0_generation_5.lp",
+      "sha256": "b6e4da81eb4c25a70cf62766ce54bc9f3af6cb5a3e248e1b5c8847a3096864d3",
+      "bytes": 17065169,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "6493bd9b60e94124f4d43bbd55d0a20a5650e65867a114db78d1386815ac9f19",
+      "bytes": 16998019,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "acb82d4189f6842c14ba83f7c399fc6d404680370c3f8b18d623aaa46a25cfa3",
+      "bytes": 16700670,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "813d3f1b8e0cb890daf11432695dd01474b0acd383ae43581b21b707281472b7",
+      "bytes": 16635319,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "12a1e3c5809645fed85935e46725518695148cf8baed1d65848daa7963547a69",
+      "bytes": 563,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "fe04c8a1c6a1429fb277a06ec8f044560f96cf58c1cda7602bec95d667eb2165",
+      "bytes": 506193,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "d1ca617619c8958af9ede2578e329ec442eef789acbe736b5c0c9bc594a75e60",
+      "bytes": 569,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "fe04c8a1c6a1429fb277a06ec8f044560f96cf58c1cda7602bec95d667eb2165",
+      "bytes": 506193,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/result.json",
+      "sha256": "abef4bb47e7d6aef480b877e103e47d163c01875097414cf12c8a2ac744f725f",
+      "bytes": 99423,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/observations.json",
+      "sha256": "a11e495e964e920fef44a8672fc7d956dbe86138a7188364ef8e6648309d9f9b",
+      "bytes": 351009,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/phases.csv",
+      "sha256": "20b41754b04094202a01e558ffdfd7b4c0d6f99aa7133f086c9cdaa07dc16c59",
+      "bytes": 3168,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/initial_witness.json",
+      "sha256": "16698da7b0c4ea43f1b8608aa9162b6788fed436c943c7065823a23328754b8d",
+      "bytes": 1991,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.0.0_lp.gurobi.log",
+      "sha256": "c77543a26b7855e3d67385bfcd91b66ef0d0ea6f62c273f3fee90b0495d88aef",
+      "bytes": 1382,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.0.1_lp.gurobi.log",
+      "sha256": "99392070e6fe2fb7cd03eeddd0e01b9ed361ad5b9435bc63d0a5f559374e7fad",
+      "bytes": 1385,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "59c77ef3f57790c446a78b4e1b0d1935a0ff78deeacf9701f30c2cbd445b994f",
+      "bytes": 2586,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "42ef5fc981af75a13e65962e374bf65163351773d589e0627f416f0a739324e8",
+      "bytes": 1380,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.0_terminal_mip.gurobi.log",
+      "sha256": "fd1cc37d3340083030d8e1098f1d895c6212a98236a363d28f32f5819519ddca",
+      "bytes": 27288,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "a1b84cefb8e6b5f809135e70c5d99a314b206b751337e506b746143b97def4ec",
+      "bytes": 1297,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/04_F5_ENS-C/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "ac458b37a2d980da9cfd8a2c20e77d6bfd6ff9134a64c5cf30b847cfe6a18254",
+      "bytes": 1377,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/models/L0.0.0_epoch_0_generation_4.lp",
+      "sha256": "0fd4f01d0263e8afc73fc9a6572b8ca3b423d5b9fa020314bbec2c4997ef9791",
+      "bytes": 17033277,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/models/L0.0.1_epoch_0_generation_5.lp",
+      "sha256": "a26df90cc0f93f8b6051940eee6ea3e391c5f55daa035b0a3dbd60500c8bbeda",
+      "bytes": 17096822,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "5009956c5505ad7ac7fb757c1b8f6a04ff2291f3499ae48dc194c79c9cd7b5d9",
+      "bytes": 17029672,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "d95454f4087746dcd4781f7c95ba190d6af4ebb101c284ee42c02368c8e55118",
+      "bytes": 16732323,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "735d910714f3b931864acefcef057d7e6fc3c6887cca02e7474ff5a588ceb056",
+      "bytes": 16666972,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "b5e117aeadb06e1a83865ee38de0202b60c0e798fbae3242412dc2767febd263",
+      "bytes": 569,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "fac1257c47ebb18c05c9336de3ee3528d17151f46f3f4abc1a0e169c698d30e7",
+      "bytes": 506193,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "5a11dc85606356f81e9f238a891b03c72d06d842a6aabed19ea037f9e6ba3a17",
+      "bytes": 569,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "fac1257c47ebb18c05c9336de3ee3528d17151f46f3f4abc1a0e169c698d30e7",
+      "bytes": 506193,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/result.json",
+      "sha256": "ae2f4a035e903376fe18c5439d9b9de260ec1642b16fee23cbecb8f1d2479c05",
+      "bytes": 99735,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/observations.json",
+      "sha256": "a6b851ac1bc92396ded9759c868246b7becd8d0a4fa3263871ae7e950b2c0ae2",
+      "bytes": 315322,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/phases.csv",
+      "sha256": "054f1b726f8bafb3e8087c3ae434eb1bc8932d98188b957aed2571e72cbd45e8",
+      "bytes": 3140,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/initial_witness.json",
+      "sha256": "16698da7b0c4ea43f1b8608aa9162b6788fed436c943c7065823a23328754b8d",
+      "bytes": 1991,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.0.0_lp.gurobi.log",
+      "sha256": "7ea716dcf0a9c69d1d29a3011e5155a5a06078504ba51837d9578c679e29d481",
+      "bytes": 1639,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.0.1_lp.gurobi.log",
+      "sha256": "2290c2f44bf9afcd1f5d80bbe4b87baaea3a4e686fe18109e6364a5a25b0c454",
+      "bytes": 1382,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "77a6c13d0f82341b6b1819d9910dbfe4ab40a230645fe19b38f81827a270895b",
+      "bytes": 2825,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "12cf1ee770020ed7d8c82a1dda94ed45f48d82059c82ccb47718537d3e943628",
+      "bytes": 1769,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.0_terminal_mip.gurobi.log",
+      "sha256": "d059a1e27b50b0961d19ce4232449b3c286e2c283a377f76f17805b8dd5d45e9",
+      "bytes": 30402,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "ff1520041c97e06c793770d20d20dc7787f4ae937c91921d1e095c9bef8b3e63",
+      "bytes": 1297,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/05_F5_M-B/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "63bdfe725095f0863d6d6626f8ac7c9327b7e36e7bc7891057814eea2440f307",
+      "bytes": 1637,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/06_F5_P-GRB/result.json",
+      "sha256": "343c8ba9e323967954c5833e7df43ca0cd677a33829e2266073d68dd323d0030",
+      "bytes": 89850,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/06_F5_P-GRB/observations.json",
+      "sha256": "69da8a059e0299638d91048d9d12fbecd7ffd62910a44841087b56123b37db99",
+      "bytes": 1082312,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/06_F5_P-GRB/phases.csv",
+      "sha256": "8356477f2e3faa3ea77857cf63702731d0b3b623cc08b4923cd95d1eefb01c7e",
+      "bytes": 918,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/raw/06_F5_P-GRB/native.log",
+      "sha256": "daadf077c7fcd02482a29391b2f4e29b78961806028ce62e90babab11e8df5d2",
+      "bytes": 108130,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/reference/F5/build.json",
+      "sha256": "857d6e669f3706177124bc8d5b44bc3a5b5c67c39c6dd3ce459b2df5e5b99f6e",
+      "bytes": 164,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/reference/F5/completion.json",
+      "sha256": "9b737cf8f50468f8079d6cd75d9eacf95b9b105a08a4d61dc8f507c1d8f97dfc",
+      "bytes": 85,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/reference/F5/launch.json",
+      "sha256": "23fea66e4b71afc032324e72682cd99d0f5a679644c26fa29a75e2d98e4a208b",
+      "bytes": 422,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/reference/F5/original.lp",
+      "sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+      "bytes": 3121652,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/reference/R98-C2/build.json",
+      "sha256": "f00e147f1ee4b02dbacd42472124e83a646d32f1eb8bcb7a07784f8546686960",
+      "bytes": 163,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/reference/R98-C2/completion.json",
+      "sha256": "fa8d9b976a7d1bad5547c22502705ddfb4c49c2ce749f4f7d42f8e9646a38092",
+      "bytes": 86,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/reference/R98-C2/launch.json",
+      "sha256": "045fd81b7f4758835171a8be9f5186261e6be7f2f46b9d2eb1a3868b7bdb9d3c",
+      "bytes": 416,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_CF01/reference/R98-C2/original.lp",
+      "sha256": "8205222d51e7a74bec2b66c6540acf45cd52b5ae6eaa9bdc5f1e8aac7db3c1b3",
+      "bytes": 883952,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/identity.json",
+      "sha256": "354d2aec008c7615b164c8e2d1d55363bfe3890af4ae9d7ee667436cbd485430",
+      "bytes": 31714,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/summary.jsonl",
+      "sha256": "c874908d20c49aac26fc863695d3f61f47dfe7ba8206718b149193d0dba7ffb9",
+      "bytes": 2879,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/reference_batch_receipt.json",
+      "sha256": "31b5bb7778b3127113aa247e749d40c4db8a8b026994dbd5b16f0f2098fb9e57",
+      "bytes": 322,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "fce0b6008e92ff726db82b4b59e817ecdbada687e84b670975917df3b83ba285",
+      "bytes": 4511667,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "b1a32c337bb7f9da4f921aa4719174274de595132a7614441d0e3d259eafdc97",
+      "bytes": 4546326,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "172ac8c52298bea427d8741e9f0c18f5f3bcc9ba22a75e43a7c098c74e98711a",
+      "bytes": 4511667,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "3f25eff4d5138aca0f756e8ff497f02a06809b08238ccd5dc7566af19180cdec",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "a1fe94db3c4de42f310e221ed05177202d184880dbff478831bcf8d96f7cb914",
+      "bytes": 169377,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "d691781c2dc4674b8de93e310b41870e67b6986da3d13cc17a25b9a4c82315c0",
+      "bytes": 560,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "a1fe94db3c4de42f310e221ed05177202d184880dbff478831bcf8d96f7cb914",
+      "bytes": 169377,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/result.json",
+      "sha256": "fd3e9e7fa702a3c74c401a018e56e68a4c7ef1e53b09676829fba6c16c03710d",
+      "bytes": 97674,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/observations.json",
+      "sha256": "710fa2220d1994c8f89bc5cdd07618c14ca615a5bf25df28d82d80011bdcd80a",
+      "bytes": 186772,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/phases.csv",
+      "sha256": "44fd75d195c188fb28c3813bb61228dcadb5bc021020c5335fc261f89c8c0386",
+      "bytes": 3095,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/initial_witness.json",
+      "sha256": "c2c48c970ff8cffffb15863409c4f68b1a25e6302840a658244fe89f6454e3cb",
+      "bytes": 1119,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "8c8f48534b26bf836523fd49a4849cb6bf812186f52c7c701b99e670fd1ac1b3",
+      "bytes": 1426,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "2a228c19f9398dcac4a797cf5d7411b7435865dd2b97b913697dd72dd275011b",
+      "bytes": 1422,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "d4dfa37d34bb83d09b068d801025b9c203158f8e8c712fee5522328c3dcbc2bd",
+      "bytes": 2229,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "ead2487b4121aae78f127b313bb848ed1e89d443bc656a1de7894bcb58ffbd23",
+      "bytes": 1377,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/01_R99-N2_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "734f4e18e3a62ee1d9e88cd8fb628374fa3fbb4ad890b168900b214afd08daa9",
+      "bytes": 52771,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/02_R99-N2_P-GRB/result.json",
+      "sha256": "3554a5f259ae27e30396304377a767eff7b847ff5b8c805301ad7f78e824f4ef",
+      "bytes": 88146,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/02_R99-N2_P-GRB/observations.json",
+      "sha256": "4d6deaecbfc83cb0b48ea5af9f7402cb75798e555fb8c355b1a74282f71fcbc2",
+      "bytes": 546018,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/02_R99-N2_P-GRB/phases.csv",
+      "sha256": "9fa2df9069bae78ea34dfa23c9faa5da4d9f8ac137a5a7f02ec6b3b49e8e97c4",
+      "bytes": 926,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/02_R99-N2_P-GRB/native.log",
+      "sha256": "2c039ba308b478495a97789ba644ccfc4f6fec8ab8cb9c1d3c1c929084808ba9",
+      "bytes": 70163,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "114c3220cc3df7c0cd9eb20c0c493da72bccd0be0201d51b3caf383a7f48693f",
+      "bytes": 4492285,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "8f3e49c05533c709887d2dd68c8a944e3b3febc701ee21d26e767e5d044fcb61",
+      "bytes": 4527305,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "7eb245f733f64f4d4901355d528f6453182dffa7839cae232d880b2c04fe54b4",
+      "bytes": 4492285,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "e4dda6432d87beaf360feccb60193273a6c3e2eab320f5a29effebbb98dd9110",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "5c6273a1a8a70a545806d2b42d44953ea8eef167f1f09654f1c2fe06baae1562",
+      "bytes": 169377,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "38a91c1cc24947bb1cfdac50666832e29004855e5b05bee7bf0205e9d75c7ee0",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "5c6273a1a8a70a545806d2b42d44953ea8eef167f1f09654f1c2fe06baae1562",
+      "bytes": 169377,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/result.json",
+      "sha256": "d37c6355183dd142816f144f2fa007f33a58be83f95145329dffd84ce11708f1",
+      "bytes": 97379,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/observations.json",
+      "sha256": "dc7be2a2a08e8c8ddb0b57d174151b87950129b0d44f54973457aa7196b6c7ae",
+      "bytes": 175402,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/phases.csv",
+      "sha256": "b8e406db3ee1755103ba726f22578421436f49904bd7ec2c15c93493979ecf39",
+      "bytes": 3204,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/initial_witness.json",
+      "sha256": "c2c48c970ff8cffffb15863409c4f68b1a25e6302840a658244fe89f6454e3cb",
+      "bytes": 1119,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "10af962eb3df38daf5f150363778c7f52b238c815843e3c54c79a8df2e4b5771",
+      "bytes": 1379,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "7d4eff34ca68d11c04019a336064c019498a99c03c1a402de203b48ce34e0c45",
+      "bytes": 1425,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "dd868e8950f6d4f5b051ef55d403ddfad3c9ef8337878e3f85a866ea6e629320",
+      "bytes": 2231,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "c3bd05ae606a9644cb96560f9ef34786d6b453f072100bb38db53255395a97c6",
+      "bytes": 1377,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/raw/03_R99-N2_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "0a720a4fcb394ccda67cbd8b816d683803f3322e85bccb792f33040172afa65f",
+      "bytes": 53911,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/reference/R99-N2/build.json",
+      "sha256": "735fd8c342cc7f98ca15ad9a68b22a2392cb428259976116f9388de20a843c4f",
+      "bytes": 161,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/reference/R99-N2/completion.json",
+      "sha256": "3c8ef7c6f5891bd5913a3354971cdf2bab37494eaaf22023e7511f151bd6b0b1",
+      "bytes": 86,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/reference/R99-N2/launch.json",
+      "sha256": "ebe7eedacf2d2c562c2af156433e3b579b9a16cf09c81863d6c14229a4731688",
+      "bytes": 416,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/certification_N201/reference/R99-N2/original.lp",
+      "sha256": "ad64dd6e83d31b8b2f9ffaa20f8004a9d889eb9795662941f17f82bf1b4d5a31",
+      "bytes": 884663,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/identity.json",
+      "sha256": "174413c16d17ccd2d767ff22dacdcd04ba0c0a0a3439a7d59dd5d0daec7e2de3",
+      "bytes": 31377,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/summary.jsonl",
+      "sha256": "a314a9841cb3fd5e06aa7937ec43e77485b0685a247e0de14ae2ab82b7e30007",
+      "bytes": 2737,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/reference_batch_receipt.json",
+      "sha256": "5787d64047dc816f9783b2a98ddae4fe723385416521f9582bde5b76fdfe1837",
+      "bytes": 319,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/01_H100_P-GRB/result.json",
+      "sha256": "0f6e0a16a9456246c0c367676ff95ee2905da3f0d7b263e475cc8e0a81edd09f",
+      "bytes": 86626,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/01_H100_P-GRB/observations.json",
+      "sha256": "2aa4844a6b395eebc53394fa21711f51eee5948f64907dea2487b79c39398f22",
+      "bytes": 3967035,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/01_H100_P-GRB/phases.csv",
+      "sha256": "b8cb595a8a9fc5c8f6fabf48809a6ac456f0186f7a743f165797030e0e7493ec",
+      "bytes": 896,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/01_H100_P-GRB/native.log",
+      "sha256": "ac0de05a2451f12d67d3cda9036cc7b4d45c6fa35dde46765d2b0fdcf761532f",
+      "bytes": 39339,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "04f01f2f4dee4555d889cd3b76955e04710f0171e4d50c03aa711a9ad20cb9a5",
+      "bytes": 1235018,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "85e125c47f9d0aaa5c95fbb7ac16031438636c5a6206ac207581963b66bd00e6",
+      "bytes": 1248537,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+      "bytes": 1224358,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "459e163252b12a4d406e15897baed9676c991f549d0ccbea97c48232f25266ac",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "414d01efba66dad10819896f033997c9cf2a2293f98d0bf1653d6be5554361b1",
+      "bytes": 70008,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "44022ee08ef9667d871546cf20f24fbdc95147ab30cd2fa9308a83d6b6ab1322",
+      "bytes": 559,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "414d01efba66dad10819896f033997c9cf2a2293f98d0bf1653d6be5554361b1",
+      "bytes": 70008,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/result.json",
+      "sha256": "08353351b6d14c85a14e33243e5a127bcd356bb4e5e35cae55263969242601ee",
+      "bytes": 95950,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/observations.json",
+      "sha256": "b9611571b1e6acc3747e5b1b88400fc0d349f6636d5d98ef32b3651f868ae0ae",
+      "bytes": 599038,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/phases.csv",
+      "sha256": "c75049f5026df70b44a80cad864be7bf2bf03b008d724d08fbeab82806f1a8be",
+      "bytes": 3098,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/initial_witness.json",
+      "sha256": "922f8dcc20e323b51a62f4429fdd9e065547856eea791089f5abd365e603150c",
+      "bytes": 765,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "9bd96c089cc62a14a7bcb9957d6bb13cea0718f0b572a0ba94b1262a7e43c283",
+      "bytes": 1407,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "e4ca1b9934f344444f01d85e054af92bd18a1e4c94017db8a78a4b7a320a289d",
+      "bytes": 1406,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "6d14e2f2be6046b401fd87afe7fcb2723696c9f47e168effa90e01036f005e19",
+      "bytes": 2233,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "5c2911cbc21987e4bc0622ad7927b56cd1018c3f6e18b7ce4b1e9e408f4561f6",
+      "bytes": 1405,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/02_H100_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "f3b21341f393f0cfd014e8497aa8201676a4fc2de9b65a2d9f4079e36d7cce91",
+      "bytes": 6621,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/models/L0.0_epoch_0_generation_2.lp",
+      "sha256": "bbafa5e713e61aab719263c6972f2f35e9011d13316167074572b8bf7ec4299b",
+      "bytes": 1223795,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/models/L0.1_epoch_0_generation_3.lp",
+      "sha256": "a1a3fae0c7872acc6b2ec82289181f0bbc3be198f21e7af15887b1473c7abbba",
+      "bytes": 1237314,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/models/L0_epoch_0_generation_1.lp",
+      "sha256": "b971967a288114623726e41bab642bb91131b34b87ebb0a9b81aaf3d37246563",
+      "bytes": 1213135,
+      "scope": "actual typed canonical model; retained locally without regeneration"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "sha256": "d4e59607926487aae37f54298b409e58a07275c5657738c14bb2339a6a6c96c5",
+      "bytes": 566,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "379b0e3061ba613a29fcc4316561823fb1521c50fcf2952d2bb41f701648c17a",
+      "bytes": 70008,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "sha256": "617ad44b43871e509b210e88f8b26d636f22e8d50a1ee66f878057cfb1bf120d",
+      "bytes": 565,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+      "sha256": "379b0e3061ba613a29fcc4316561823fb1521c50fcf2952d2bb41f701648c17a",
+      "bytes": 70008,
+      "scope": "actual complete submitted Start and per-column native readback"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/result.json",
+      "sha256": "1bcf6413889bcd8a778dbb754b7b67d7bbe7772d940dec60c64c2357ac6c9aa1",
+      "bytes": 95829,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/observations.json",
+      "sha256": "f857a7646073ebccbf886328ee08053a8ae051f68c464f6e895548c66477e91e",
+      "bytes": 596668,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/phases.csv",
+      "sha256": "b1b69ab876d3d843de5cd7b1776c2812fca05af2aea63f666d1e4a0026d38e9a",
+      "bytes": 3086,
+      "scope": "complete local performance evidence; compact endpoint/checkpoints committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/initial_witness.json",
+      "sha256": "922f8dcc20e323b51a62f4429fdd9e065547856eea791089f5abd365e603150c",
+      "bytes": 765,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+      "sha256": "fac4057a2decb10aaacc4247594877cb7b1d4ad57f0a4084b4f0868b65a69d93",
+      "bytes": 1363,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+      "sha256": "f7b14e6189857bd1af00079988e8c72e614e15fcc80c68a261b1405e3f8eee20",
+      "bytes": 1409,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+      "sha256": "bc9d2e8a43a305ab022d7dffa035f0b8f9185d57375c86a3cd774c4ad1dc7a08",
+      "bytes": 2227,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/native_logs/L0_lp.gurobi.log",
+      "sha256": "9f4a21e05c9ae9646e24d182a786d9a351c2422f3597f65153d4d35d21003dc5",
+      "bytes": 1361,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "sha256": "fc9e0da9d19ccabf47fb35d897bc9f9626a3850e727ce78527d37d320f81c8e2",
+      "bytes": 6887,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/reference/H100/build.json",
+      "sha256": "43ba0d9ea02ae63a3194b8718a37b54338e3bbf6b6fc55f45c1f830b5a42e6bd",
+      "bytes": 160,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/reference/H100/completion.json",
+      "sha256": "cd0c5d696300b3807a9a03e7a21f8f0b80e0562b29f09f3996d161faf03c8626",
+      "bytes": 86,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/reference/H100/launch.json",
+      "sha256": "258dfcee9e132907a0fc3b82d44af49dd388fff08ccd86e6ecdd33da63f4ed0c",
+      "bytes": 408,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/holdout01/reference/H100/original.lp",
+      "sha256": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+      "bytes": 288615,
+      "scope": "self-paid original plain reference model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_actual_start01/launch.json",
+      "sha256": "f3f0b965302e7dc0caf32754df474a6c1f0957544d70bcc36ac5c8a459d1b565",
+      "bytes": 556,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_actual_start01/receipt.json",
+      "sha256": "8eebbfe50845a6ed2bc9620face6ab11c08b252902e2b13122aa8f41bcbe0243",
+      "bytes": 149,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/matrix01/launch.json",
+      "sha256": "5ba67037d236c4524ef63714056995b145bc4f89b791c56a1d0fab98a4f187b4",
+      "bytes": 590,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/matrix01/receipt.json",
+      "sha256": "554b42973eb573ab4651ab7efc121660d5fad93523542504acc964be0f61d044",
+      "bytes": 149,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/micro01/launch.json",
+      "sha256": "290ab16d8bb9db473c5dda1d34cedb8c99dc5727f344d35b476b80adeb9c04eb",
+      "bytes": 588,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/micro01/receipt.json",
+      "sha256": "84e0d9124cd1ec0dd627d70f5579a56ae3488feb95ae69dc2f510ba8fbe63b0f",
+      "bytes": 150,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/micro_export01/launch.json",
+      "sha256": "6830d2a5ca643dcaacf6d8a8dc24d143f22857421af213f1c0f7a9a90738c37d",
+      "bytes": 460,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/micro_export01/receipt.json",
+      "sha256": "a5c6e5e4c0be5abfd986585fc046bb6a8ed11d4979c9dfbec47aa97f7dc7e0bc",
+      "bytes": 151,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/model_exports01/launch.json",
+      "sha256": "80b892ab260f19050d090055e418974ef12caf9d45b2ef4aaeede88f9b56eb38",
+      "bytes": 489,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/model_exports01/receipt.json",
+      "sha256": "f5f3f425e8164bef1e4038793eef11c81a67bf68677de13b9b685b98ba944338",
+      "bytes": 149,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/build01/launch.json",
+      "sha256": "1b19ebb101b6b2cbaf37476322c5941c61931f8349562b6cd772db5be5640ceb",
+      "bytes": 707,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/build01/receipt.json",
+      "sha256": "9428191700a03bce6a28b569ebd092cfcbbd467f373af71ed4b984c692c3bb27",
+      "bytes": 149,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/build01_configure/launch.json",
+      "sha256": "54a832f0e038b622ed6ee89f1e3a1c03063fff5f008d54bbe41695715f7f65c0",
+      "bytes": 939,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/build01_configure/receipt.json",
+      "sha256": "4959cbe394dd6c262404736f94ea6e0f57f30198c66cee95f912cd6f35425201",
+      "bytes": 150,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/CF_extract01/launch.json",
+      "sha256": "f5e54f2522d7c8aaa2de05c1dbb539c100624a1903d264c700f652e079115672",
+      "bytes": 541,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/CF_extract01/receipt.json",
+      "sha256": "f6c1bde9a68d593be5449b9ad4437388352e045368a14e220d91731ddfb8c9f1",
+      "bytes": 148,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/development_extract01/launch.json",
+      "sha256": "b675fafd1021845f85fac92ed2e08cb855872167d40188293ca63780bd1bdd22",
+      "bytes": 510,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/development_extract01/receipt.json",
+      "sha256": "28b97b4c6db7a8e8fe202f28ded9fcc30a908be1113a64c5f4594536501af115",
+      "bytes": 150,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/final_extract01/launch.json",
+      "sha256": "023e7e7c0949e6ffb7858dc96279f1488c4d16ed638b5517aa67428ae1a98bc5",
+      "bytes": 580,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/final_extract01/receipt.json",
+      "sha256": "f380efa04f61c65ab7d2b60b53c87f7392f34e7c1f8fcc2e703a7eefff69f9c4",
+      "bytes": 150,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/measurement01/launch.json",
+      "sha256": "23b4d6a67bbce191859ab8ca097dc97f7ec3f5c26161ec0995680a5fe576e129",
+      "bytes": 571,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/measurement01/receipt.json",
+      "sha256": "3dd4544ab5513d9aebd4d16cdd1c78b2f045f3e120a5bc024002fbf43db8c114",
+      "bytes": 153,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/measurement01/actual_calls_supplement.json",
+      "sha256": "8d58e3704635417db6ef3fa0710a210d247c2da9b6a461b72458e5689f8ac105",
+      "bytes": 305,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/measurement01/stderr.log",
+      "sha256": "946a7cc28aee5e91cb27e10058596bd13322726a17e79846bebc26430059de1c",
+      "bytes": 559,
+      "scope": "local original native log; sanitized full log or explicit excerpt committed"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/measurement02/launch.json",
+      "sha256": "449c1695935ee8e4acd10afb9f1640c93bc8c772efa2b91c9425320f8525d5ff",
+      "bytes": 571,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/measurement02/receipt.json",
+      "sha256": "33cf0d902257bed259b3375fb580336a285ea54ae25cd4198fd2108e9a00f86c",
+      "bytes": 149,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/measurement03/launch.json",
+      "sha256": "f7ff3020f441d29764967a9c7942ba32715561532f7d6d85f5e7021941be400e",
+      "bytes": 571,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/measurement03/receipt.json",
+      "sha256": "53675f50774064c986c2b4c9622451791ef9ba129206dbd1db1532a604d3e3a9",
+      "bytes": 150,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/engineering/package01/launch.json",
+      "sha256": "19f710fef53f91ffd1a0abc7d38133a1978faa75e1082247ab154d527a420915",
+      "bytes": 478,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_start_01.json",
+      "sha256": "ba0f7bad31de4354f5e72caa0526cb55a1b98ee1b0b12143190add6e8a72ae58",
+      "bytes": 1672,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_start_02.json",
+      "sha256": "fa72e3fa4794c83356a62e6c6b789b197cbed014204d93a32f5df30c8065e8a0",
+      "bytes": 1676,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_start_03.json",
+      "sha256": "03dd209b08332ed6d200a6f177301c79937cfbc3023804f14f77d86662706c5a",
+      "bytes": 1664,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_start_05.json",
+      "sha256": "d007f2506c64b389f5597667fb4663f5d69bdeeaf44c782f7b11fe255cbeb531",
+      "bytes": 947,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_start_07.json",
+      "sha256": "693d9bee31e2c31ce9266b03df1f8e7ddd2bdcc78e0462e0a813babe29a466f2",
+      "bytes": 961,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_start_08.json",
+      "sha256": "f5a525dd0322b13486ee7d8b58a05d0f20d84c424c510763f1004ddac309c812",
+      "bytes": 958,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_start_10.json",
+      "sha256": "cd372690def571b5c7d0ba3b053831c772b79c1303f0276f75a28f0123807067",
+      "bytes": 1683,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_start_11.json",
+      "sha256": "ed395891d0b84742f9935385b7882d7e585da0a0f35722957fcb800e8f9e1d74",
+      "bytes": 1679,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/qualification/dev_start_12.json",
+      "sha256": "4b51dc28f57120e39b335c3b1f7c9e8295726e02cd71d0433707a74d12c9e627",
+      "bytes": 1685,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/micro01/calls.jsonl",
+      "sha256": "9867719b88be2ae75c1aff01ef00ff8c6388eb7c8738583c91db53317b75acc5",
+      "bytes": 349,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/micro01/ENS-Q.log",
+      "sha256": "1ba8da2ed7aaa4b8849d80fbdf16a180bbbb0343a0be4852fa1315eb8867eaae",
+      "bytes": 68,
+      "scope": "local raw qualification vector/LP/native evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/micro01/ENS-Q_empty.log",
+      "sha256": "c34812a32556378a20cddd5db5fd04e2a6a5cd0d3dac02ed7dc72190a493fe75",
+      "bytes": 68,
+      "scope": "local raw qualification vector/LP/native evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/micro01/ENS-Q_forced.log",
+      "sha256": "1ba8da2ed7aaa4b8849d80fbdf16a180bbbb0343a0be4852fa1315eb8867eaae",
+      "bytes": 68,
+      "scope": "local raw qualification vector/LP/native evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/micro01/ENS-Q_forced_values.json",
+      "sha256": "955c463c2605e7284eddc6b68327584810fee2209ee76fdf48589dbf2f303776",
+      "bytes": 724,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/micro01/ENS-Q_values.json",
+      "sha256": "f287b766b26d1ad3f5ce416a0dd025edc417db4b74dd07a278e2ecf8a3fb1307",
+      "bytes": 2382,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/micro01/summary.json",
+      "sha256": "bf5a52720d4dd1b3bf994d42f35687c6a48acbc71b665d547647eafafdfd77a4",
+      "bytes": 19722,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/matrix01/calls.jsonl",
+      "sha256": "e824a36e669ff610f92c327ef913d39cdfdcce71996ae3d5051ed04b6ce590db",
+      "bytes": 391,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/matrix01/ENS-C_raw_LP.log",
+      "sha256": "c34812a32556378a20cddd5db5fd04e2a6a5cd0d3dac02ed7dc72190a493fe75",
+      "bytes": 68,
+      "scope": "local raw qualification vector/LP/native evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/matrix01/ENS-Q_raw_LP.log",
+      "sha256": "911ab1d8c88fb8a0dcc86612fb93aa0764ed7222957de8b0c5d47058f870d82b",
+      "bytes": 68,
+      "scope": "local raw qualification vector/LP/native evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/matrix01/M-B_raw_LP.log",
+      "sha256": "911ab1d8c88fb8a0dcc86612fb93aa0764ed7222957de8b0c5d47058f870d82b",
+      "bytes": 68,
+      "scope": "local raw qualification vector/LP/native evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/matrix01/matrix_comparison.json",
+      "sha256": "fbe641b90cbf999ee250b2df6cea108b53cc80309acc27d013c75ef4fbb6d9e7",
+      "bytes": 51241,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/diagnostics/matrix01/summary.json",
+      "sha256": "44513d92af2289c273155cf4409b93c4f546f90b05e34bd6709764b856af0e54",
+      "bytes": 19923,
+      "scope": "compact original copied to evidence"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/F2/ENS-C.json",
+      "sha256": "c90adaf17522348452105bf6345cd70e8e99bb10385601a99108984eabb6508f",
+      "bytes": 157,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/F2/ENS-C.lp",
+      "sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "bytes": 1204519,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/F2/ENS-Q.json",
+      "sha256": "8c1dc9cc196c2efc488e1d2b7cf2385939d1f7533e9e52687383d2c978a3b6f2",
+      "bytes": 157,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/F2/ENS-Q.lp",
+      "sha256": "b360282fab456705c8908032a666b10d3a7167f89f4ba52246a1f6575b420619",
+      "bytes": 1203835,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/F2/M-B.json",
+      "sha256": "e9a61c2ed5357bb833bc32ac57ff2c1b1fb769f70cd401150679b55818613840",
+      "bytes": 155,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/F2/M-B.lp",
+      "sha256": "69da40bb1569404de84ef1eddb60bbfff8ea30258f4b99f314fcf192944251a2",
+      "bytes": 1215411,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C1/ENS-C.json",
+      "sha256": "44b2147e1954e2650af224fdba40aa8164b29d0d24c5ef14f23ffaeca7b7683e",
+      "bytes": 157,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C1/ENS-C.lp",
+      "sha256": "4a202e11396a3c34a86a58f60648adb0384c3d4b5133160d9309cb85c3216695",
+      "bytes": 1197679,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C1/ENS-Q.json",
+      "sha256": "82ec9f9339079e44f3c7b8f0f3fa4173f27b7a967b1266376d91575adcbb87ee",
+      "bytes": 157,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C1/ENS-Q.lp",
+      "sha256": "8a300b6a6de1239abb4bd4773042e1f5b441dc7f14e55fbff716cd81f3b06e42",
+      "bytes": 1196995,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C1/M-B.json",
+      "sha256": "ea852b70d57f772edccde5800cbb7f708d5f1dcf39186d2d7f2514b78c062049",
+      "bytes": 155,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C1/M-B.lp",
+      "sha256": "58f3cade6ee643951d680492544aff6397867ff425c17a5c9275ee3a10bc980a",
+      "bytes": 1207195,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C2/ENS-C.json",
+      "sha256": "1917f1bc0fe5f39f5eb3d8797815b944b2b2d9600cc07bb551d20454ad4693ec",
+      "bytes": 159,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C2/ENS-C.lp",
+      "sha256": "41aacb59acd6bbb72cc56c9840a2ea0e47e0aad47a45304ad981bbd139a049bc",
+      "bytes": 4483514,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C2/ENS-Q.json",
+      "sha256": "dc42db53707ea655e24547526f4cd151379085a5936908b0b0a565e92c4be71c",
+      "bytes": 159,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C2/ENS-Q.lp",
+      "sha256": "f68364616d65beea3e97bed7d8de3f79d71b4574f34f524819c27c3ea81bd625",
+      "bytes": 4481948,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C2/M-B.json",
+      "sha256": "917633a335cd4957810fd6a173f64458b061fd6a9fe9d94e551ba07d26348d0d",
+      "bytes": 157,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/exports/R98-C2/M-B.lp",
+      "sha256": "a4145df15459f85c4e9414131cf0af2f4d913e9ae467fd6021ec520ebcff3973",
+      "bytes": 4502323,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/micro_models01/ENS-C.lp",
+      "sha256": "56768de1dd011d86160838f30de810f5839ecf5257cbae60d2893141ba27a10e",
+      "bytes": 14439,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/micro_models01/ENS-Q.lp",
+      "sha256": "428c4b705d06fd9c585cc52be16268d1883e63c572ab663fb58474b6e9ac766c",
+      "bytes": 14343,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/micro_models01/ENS-Q_empty.lp",
+      "sha256": "3a27a5f40ed71ee57dc5b370b72299671913ea264b3b589fcd93791c18170e44",
+      "bytes": 5359,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "results/unified_exact_round100/micro_models01/ENS-Q_forced.lp",
+      "sha256": "4ec91df70a52aa2ae19251e099398563c74fe3948abb5a66125dd348facef762",
+      "bytes": 4481,
+      "scope": "actual finite qualification writer model/identity"
+    },
+    {
+      "path": "build/research/round100-quantity-v1/ExactEBRP.exe",
+      "sha256": "fd2a30ea0bdba13dda7c19ee69e8c1f7f874482f3dad7cb2c1df48c4d7404f64",
+      "bytes": 18665169,
+      "scope": "actual frozen local experimental binary"
+    },
+    {
+      "path": "build/research/round100-quantity-v1/Round100ModelExport.exe",
+      "sha256": "87f4e1221f6d8cb5a9c1fef3adb7c0282a0b69098e2e3c77693a58e2dc9c0659",
+      "bytes": 7658564,
+      "scope": "actual frozen local experimental binary"
+    },
+    {
+      "path": "build/research/round100-quantity-v1/Round65ReferenceBuild.exe",
+      "sha256": "443910dc1abc182eb449a2fc9a0ff02169e8e66ca8e9ec71477346e565c73230",
+      "bytes": 7658980,
+      "scope": "actual frozen local experimental binary"
+    },
+    {
+      "path": "build/research/round100-quantity-v1/Round100QuantityTests.exe",
+      "sha256": "ee7af2d41909de816a90dd8eb9485fc0c801146fc695fb270458d66328830c8b",
+      "bytes": 7574854,
+      "scope": "actual frozen local experimental binary"
+    },
+    {
+      "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+      "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "bytes": 38766856,
+      "scope": "sole production native engine"
+    },
+    {
+      "path": "results/unified_exact_round100/complete_results_final/trajectories.csv",
+      "sha256": "d122a68b4007901c08aeb17a2eb39b9d4a7ce13d09065e1809a1fac7135c2bdd",
+      "bytes": 6672896,
+      "scope": "complete local trajectory; all physical events and scoped checkpoints committed separately"
+    }
+  ],
+  "no_model_regeneration": true,
+  "scope": "exact local bytes; SHA indexing is not an independent search reproduction; compact delivery preserves all physical witness events, audited endpoints, native calls and covered checkpoints",
+  "script_sha256": "aea067b828eed7aefac3987233c2577a332954f9fd390c7331a26948ced51958"
+}
