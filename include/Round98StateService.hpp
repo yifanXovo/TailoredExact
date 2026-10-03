@@ -15,8 +15,12 @@ inline bool round98ContinuousQuantities(const std::string& mode) {
     return mode=="projected" || mode=="vehicle-state" || mode=="m-binary" || mode=="m-binary-linked";
 }
 inline bool round99LinksDirection(const std::string& mode) { return mode=="m-binary-linked"; }
+inline bool researchChecksPhysicalQuantities(const SolveOptions& o) {
+    return o.round100_continuous_quantities || o.round98_state_service != "off";
+}
 inline bool round98IsIsolatedENS(const SolveOptions& o) {
-    if(o.round98_state_service=="off")return true;
+    if(o.round98_state_service=="off" && !o.round100_continuous_quantities)return true;
+    if(o.round100_continuous_quantities && o.round98_state_service!="off")return false;
     return round98KnownStateService(o.round98_state_service)&&
         o.algorithm_preset=="research-round83-vds-equal-net-exchange"&&
         o.method=="gcap-frontier"&&o.k1_am_sf_controller_enabled&&!o.plain_baseline&&

@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "current_production_bindings_unchanged": true,
+  "user_edit_sha256": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+  },
+  "campaigns": [
+    {
+      "campaign": "development01",
+      "identity_sha256": "ab958ed7670438908f31f832df17fd0dde65957f1004e6131ebbf37cfeed2a8d",
+      "complete_arms": 12,
+      "certificates": 6,
+      "passed": true
+    },
+    {
+      "campaign": "certification_CF01",
+      "identity_sha256": "5501ea250a77903c834384cd7b77e1744049af64205077703572080480422222",
+      "complete_arms": 6,
+      "certificates": 0,
+      "passed": true
+    },
+    {
+      "campaign": "certification_N201",
+      "identity_sha256": "354d2aec008c7615b164c8e2d1d55363bfe3890af4ae9d7ee667436cbd485430",
+      "complete_arms": 3,
+      "certificates": 0,
+      "passed": true
+    },
+    {
+      "campaign": "holdout01",
+      "identity_sha256": "174413c16d17ccd2d767ff22dacdcd04ba0c0a0a3439a7d59dd5d0daec7e2de3",
+      "complete_arms": 3,
+      "certificates": 2,
+      "passed": true
+    }
+  ],
+  "actual_starts": 33,
+  "actual_optimizer_calls": 99,
+  "charged_outer_seconds": 67471.79740550002,
+  "budget_passed": true,
+  "binary_sha256": "fd2a30ea0bdba13dda7c19ee69e8c1f7f874482f3dad7cb2c1df48c4d7404f64",
+  "dll_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "source_phase_commit": "b5d6d83bb8fc74682de6f1f6862c2e687712f4cf",
+  "audit_script_sha256": "be4d7c10c6c53bd379f5438c846c87cd69bc54523f6e98be76551b05554093aa",
+  "read_only_audit_seconds": 0.7375589000002947,
+  "scope": "executor metadata/self-audit; not the independent review or a native-search reproduction"
+}

@@ -1,0 +1,40 @@
+{
+  "roles": [
+    {
+      "id": "H100",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        13,
+        21
+      ],
+      "geometry": "anisotropic_cloud",
+      "inventory": "shortage",
+      "T_seconds": 5100,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "input_path": "reference/round100_confirmation/H100.txt",
+      "instance_path": "reference/round100_confirmation/H100.txt",
+      "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+      "scenario_id": "round100-minimal-integrality-holdout-v1-H100",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 408,
+      "total_target": 438,
+      "zero_excluded_by_stock_shortage": true
+    }
+  ],
+  "recipe_sha256": "ad79f4b7e8e823503ac7262f0190613a6b9395498c708332f8adadae7127481a",
+  "candidate_freeze_sha256": "b34702d12d69d1e6dd59b8a7b39d8ea82d8eb596d0511ee1440857e5212342cc",
+  "phase": "design-isolated confirmation",
+  "reference_billing": "one_finite_batch",
+  "optimizer_calls": 0,
+  "maximum_formal_starts": 3,
+  "maximum_formal_seconds": 5400,
+  "no_reseed_or_replacement": true
+}

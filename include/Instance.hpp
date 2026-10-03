@@ -31,6 +31,8 @@ struct Instance {
 struct SolveOptions {
     // Round68: supply the already-paid complete outer witness to native VD-P.
     bool round68_verified_start = false;
+    // ENS-Q: original ENS rows and binary direction, only p/d continuous.
+    bool round100_continuous_quantities = false;
     // R98 isolated shared inventory/service representation. Default off.
     std::string round98_state_service = "off"; // off|aggregate|projected|vehicle-state|q-integer|m-binary|m-binary-linked
     // Replace node-load Big-M recurrences by the exact arc-load formulation.

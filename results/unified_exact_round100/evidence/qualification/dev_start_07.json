@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "starts": [
+    {
+      "start_path": "results/unified_exact_round100/development01/raw/07_R98-C1_ENS-Q/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "start_sha256": "0ae00b89e59e87da0259ed1b6ab5f79f4f43e9e4e59cfb845714b0f2531cd318",
+      "vector_sha256": "d03e900628285cc1fe7c3a62af6f9ecbdd065ba80b21e3a85a3b5bbba9a58197",
+      "model_sha256": "8a300b6a6de1239abb4bd4773042e1f5b441dc7f14e55fbff716cd81f3b06e42",
+      "mode": "ens-q",
+      "rows": 9098,
+      "columns": 3318,
+      "objective": 0.3778461674562581,
+      "max_residual": 2.220446049250313e-16,
+      "actual_quantity_type": "C",
+      "direction_columns": 40,
+      "per_column_restored_type_checked": true
+    }
+  ],
+  "wall_seconds": 0.26600000000325963,
+  "scope": "all retained submitted Starts of this completed process",
+  "script_sha256": "37a24f48b5ef70083b056ec01d7e5bed793f0aa590b124e7450975c7756378e5"
+}

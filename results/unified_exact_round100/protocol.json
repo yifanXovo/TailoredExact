@@ -1,0 +1,42 @@
+{
+  "max_billed_starts": 72,
+  "max_outer_seconds": 80000,
+  "materiality": {
+    "time_absolute": 30,
+    "time_relative": 0.1,
+    "UB_absolute": 0.001,
+    "UB_relative": 0.01,
+    "gap_absolute": 0.001,
+    "gap_relative": 0.1,
+    "severe_time_absolute": 120,
+    "severe_time_relative": 0.25
+  },
+  "budgets": {
+    "qualification": 3000,
+    "development": 13200,
+    "long": 54000,
+    "holdout": 5400,
+    "reserve": 4400
+  },
+  "selection": "Before long/holdout: prefer ENS-Q if it preserves F2/C1 certificate protection and C2 material P benefit; select M-B if A/B matters for C2 and total evidence favors it; otherwise M-B only as certification observation, no promotion.",
+  "long_roles": [
+    {
+      "id": "R98-C2",
+      "cap": 7200
+    },
+    {
+      "id": "F5",
+      "cap": 7200
+    },
+    {
+      "id": "R99-N2",
+      "cap": 3600
+    }
+  ],
+  "long_order": "C2, F5, then N2; all three arms own full cap; N2 common extension only preregistered before any N2 start within total allowance",
+  "holdout": "One V20/V30 nonzero role after candidate freeze, generated once if no eligible unused dataset; skip only if long protection sufficiently rejects candidate.",
+  "no_tuning": true,
+  "no_cross_arm_start": true,
+  "no_implicit_extra_solver": true,
+  "performance_serial": true
+}
