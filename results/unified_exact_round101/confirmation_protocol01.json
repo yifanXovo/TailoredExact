@@ -1,0 +1,107 @@
+{
+  "roles": [
+    {
+      "id": "C101-V20",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        18,
+        26
+      ],
+      "T_seconds": 4800,
+      "cap_seconds": 1800,
+      "seed": 101201,
+      "geometry": "curved_corridor",
+      "input_path": "reference/round101_confirmation/C101-V20.txt",
+      "instance_path": "reference/round101_confirmation/C101-V20.txt",
+      "input_sha256": "b33a3fcae892c82ab54a44850c271c728dba84e47a8afe4ea3afdf67c9eb93f4",
+      "scenario_id": "round101-fleet-design-isolated-v1-C101-V20",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "inventory": "deterministic paired shortage",
+      "total_initial": 409,
+      "total_target": 430,
+      "zero_excluded_by_stock_shortage": true,
+      "method_order": [
+        "ENS-C",
+        "FLEET-ROOT",
+        "P-GRB"
+      ]
+    },
+    {
+      "id": "C101-V30",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        15,
+        23,
+        31
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 7200,
+      "seed": 101301,
+      "geometry": "elliptic_two_bands",
+      "input_path": "reference/round101_confirmation/C101-V30.txt",
+      "instance_path": "reference/round101_confirmation/C101-V30.txt",
+      "input_sha256": "3b2c95f0777fdcf022b1718a83b0fe24eacfabc81371f38de5d2f22ba0bb9ee9",
+      "scenario_id": "round101-fleet-design-isolated-v1-C101-V30",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "inventory": "deterministic paired shortage",
+      "total_initial": 545,
+      "total_target": 595,
+      "zero_excluded_by_stock_shortage": true,
+      "method_order": [
+        "P-GRB",
+        "FLEET-ROOT",
+        "ENS-C"
+      ]
+    },
+    {
+      "id": "C101-V50",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        20,
+        26,
+        32,
+        38
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "seed": 101501,
+      "geometry": "offset_lattice",
+      "input_path": "reference/round101_confirmation/C101-V50.txt",
+      "instance_path": "reference/round101_confirmation/C101-V50.txt",
+      "input_sha256": "4b0cf9a27af7515028de620f83773d9aa520d3a0794b8f39c5b6124f2042d032",
+      "scenario_id": "round101-fleet-design-isolated-v1-C101-V50",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "inventory": "deterministic paired shortage",
+      "total_initial": 1027,
+      "total_target": 1087,
+      "zero_excluded_by_stock_shortage": true,
+      "method_order": [
+        "FLEET-ROOT",
+        "P-GRB",
+        "ENS-C"
+      ]
+    }
+  ],
+  "phase": "fleet confirmation",
+  "reference_billing": "one_finite_batch",
+  "maximum_optimize_calls_per_arm": 2048,
+  "planning_call_envelope_not_production_gate": true,
+  "generator_sha256": "1eade1ce3ba2409a654fa55bd8bc2b27538fbc09ab59e30a91bce8db369d072f",
+  "candidate_freeze_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round101\\candidate_freeze.json",
+  "candidate_freeze_sha256": "4028ec09d2472a12d61823e61601056814510b5d121254eb4c55acb48fd43c3d",
+  "inputs_generated_after_candidate_freeze": true,
+  "all_generated_outputs_retained": true,
+  "no_redraw_reseed_or_outcome_replacement": true,
+  "nonzero_reason": "Empty departure and nonnegative loaded return imply total final station inventory cannot exceed initial station stock. Initial stock is below target sum and all penalty weights/lambda are positive, so F=0 is impossible. No station-stock equality is imposed.",
+  "maximum_formal_starts": 9,
+  "maximum_formal_seconds": 32400
+}
