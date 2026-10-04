@@ -272,6 +272,8 @@ std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
         return "research-round88-ensc-constructive-only";
     if (opt.round89_native_ot_b1)
         return "research-round89-ensc-native-ot-b1";
+    if (opt.round101_fleet_cuts != "off")
+        return "research-round101-ensc-fleet-" + opt.round101_fleet_cuts + "-" + opt.round101_fleet_range;
     if (opt.round90_lp_g_split)
         return "research-round90-ensc-lp-g-split";
     if (opt.round92_handling_activation)
@@ -1436,6 +1438,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--primal-heuristic-runs") opt.primal_heuristic_runs = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round88-constructive-only-descent") opt.round88_constructive_only_descent = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round89-native-ot-b1") opt.round89_native_ot_b1 = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round101-fleet-cuts") opt.round101_fleet_cuts = requireValue(i, argc, argv);
+        else if (arg == "--round101-fleet-range") opt.round101_fleet_range = requireValue(i, argc, argv);
         else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round96-route-order") opt.round96_route_order = parseBoolValue(requireValue(i, argc, argv));
@@ -3340,6 +3344,22 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round89 native OT B1 requires the ENS-C Round83 preset");
     if (opt.round89_native_ot_b1 && opt.round88_constructive_only_descent)
         throw std::runtime_error("Round89 native OT B1 cannot combine with the Round88 A1 ablation");
+    if (opt.round101_fleet_cuts != "off" && opt.round101_fleet_cuts != "shell" &&
+        opt.round101_fleet_cuts != "shadow" && opt.round101_fleet_cuts != "submit")
+        throw std::runtime_error("Invalid Round101 fleet mode");
+    if (opt.round101_fleet_range != "root" && opt.round101_fleet_range != "tree")
+        throw std::runtime_error("Invalid Round101 fleet range");
+    if (opt.round101_fleet_cuts != "off" &&
+        (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         opt.method != "gcap-frontier" || !opt.k1_am_sf_controller_enabled ||
+         opt.round89_native_ot_b1 || opt.round88_constructive_only_descent ||
+         opt.round90_lp_g_split || opt.round92_handling_activation || opt.round96_route_order ||
+         opt.round97_native_closure != "off" || opt.round98_state_service != "off" ||
+         opt.round100_continuous_quantities || opt.round60_candidate_mode != "off" ||
+         opt.round61_candidate_mode != "off" || opt.round62_threshold_mode != "off" ||
+         opt.round63_time_mode != "off" || opt.round64_shared_mode != "off" ||
+         opt.external_gini_scheduling != "round31-nonblocking-native-bound"))
+        throw std::runtime_error("Round101 requires isolated original ENS-C");
     if (opt.round90_lp_g_split &&
         (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
          opt.method != "gcap-frontier"))
@@ -4021,6 +4041,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round89_native_inventory_cdf_b1_user_cuts");
         snapshot.preset_reason = "Round89: ENS-C original-column native B1 user cuts in terminal and partial-target proof MIPs";
+    }
+    if (opt.round101_fleet_cuts != "off") {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round101_fleet_event_" + opt.round101_fleet_cuts + "_" + opt.round101_fleet_range);
+        snapshot.preset_reason = "Round101: original ENS-C with audited fleet event rank separation; default-off";
     }
     if (opt.round90_lp_g_split) {
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);

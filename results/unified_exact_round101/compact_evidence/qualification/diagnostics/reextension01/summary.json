@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "role": "F2",
+      "fixed_common_coordinates": 2194,
+      "free": "state selectors and state_g companions",
+      "status": 2,
+      "common_point_reextends": true,
+      "bank_rows": 2,
+      "actual_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091"
+    },
+    {
+      "role": "R98-C2",
+      "fixed_common_coordinates": 6679,
+      "free": "state selectors and state_g companions",
+      "status": 2,
+      "common_point_reextends": true,
+      "bank_rows": 2,
+      "actual_sha256": "41aacb59acd6bbb72cc56c9840a2ea0e47e0aad47a45304ad981bbd139a049bc"
+    },
+    {
+      "role": "R99-N2",
+      "fixed_common_coordinates": 6679,
+      "free": "state selectors and state_g companions",
+      "status": 2,
+      "common_point_reextends": true,
+      "bank_rows": 2,
+      "actual_sha256": "7eb245f733f64f4d4901355d528f6453182dffa7839cae232d880b2c04fe54b4"
+    },
+    {
+      "role": "F5",
+      "fixed_common_coordinates": 23029,
+      "free": "state selectors and state_g companions",
+      "status": 2,
+      "common_point_reextends": true,
+      "bank_rows": 2,
+      "actual_sha256": "813d3f1b8e0cb890daf11432695dd01474b0acd383ae43581b21b707281472b7"
+    }
+  ],
+  "optimizer_calls": 4,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "affinity": {
+    "launcher_pid": 11848,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  }
+}

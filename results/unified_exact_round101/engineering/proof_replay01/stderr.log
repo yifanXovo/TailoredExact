@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round101_verify_certificates.py", line 109, in <module>
+    if __name__=='__main__':verify(sys.argv[1],sys.argv[2])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round101_verify_certificates.py", line 104, in verify
+    records.append(dict(path=str(path.relative_to(ROOT)),sha256=sha(path),rows=len(rows),samples=summaries))
+                                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\pathlib.py", line 682, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: 'results\\unified_exact_round101\\confirmation01\\raw\\02_C101-V20_FLEET-ROOT\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round101.certificates.jsonl' is not in the subpath of 'E:\\codes\\ExactEBRP'

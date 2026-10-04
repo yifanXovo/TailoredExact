@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round101_recover_scope.py", line 142, in <module>
+    if __name__=='__main__':recover()
+                            ^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round101_recover_scope.py", line 112, in recover
+    assert '_terminal_mip.gurobi.log' in source and 'optimize.flush' not in source
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

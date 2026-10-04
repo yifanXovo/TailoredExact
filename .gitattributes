@@ -176,3 +176,10 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /reference/round100_confirmation/** -text
 # This inherited role is consumed byte-exactly by the Round100 frozen protocol.
 /reference/round99_confirmation/N2.txt -text
+
+# Round101 prospective driver, evidence and fixture hashes.
+/results/unified_exact_round101/** -text whitespace=cr-at-eol
+/scripts/round101*.py -text whitespace=cr-at-eol
+/tests/round101* -text whitespace=cr-at-eol
+/reference/round101_confirmation/** -text
+/results/unified_exact_round101/**/*.log -whitespace
