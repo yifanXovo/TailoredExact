@@ -12,6 +12,7 @@
 #include "NativeEvidenceJournal.hpp"
 #include "NativeOtB1.hpp"
 #include "FleetEventCuts.hpp"
+#include "ServiceResourceCuts.hpp"
 #include "MipStartMapping.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
@@ -419,6 +420,15 @@ struct ProgressCallbackState {
     std::set<std::string> fleet_recorded;
     long long fleet_nodes=0,fleet_optimal=0,fleet_nonoptimal=0,fleet_root_rows=0,fleet_tree_rows=0,fleet_submissions=0,fleet_api_ok=0;
     double fleet_seconds=0,fleet_margin=0;
+    std::string service_mode="off";
+    ServiceContract service_contract;
+    ServiceStatistics service_statistics;
+    std::vector<double> service_values;
+    std::ofstream service_certificates;
+    std::set<std::string> service_recorded;
+    long long service_nodes=0,service_optimal=0,service_rows=0,service_submissions=0,service_api_ok=0;
+    double service_seconds=0,service_margin=0;
+    std::string service_point_path;
     GurobiProgressStats progress;
     Clock::time_point telemetry_start = Clock::now();
     double last_record_time = -1.0;
@@ -962,6 +972,18 @@ void writeFleetSummary(ProgressCallbackState& state,const std::string& path,
       catch(...) {failFleetEvidence(state,"fleet_unknown_summary_exception");}
 }
 
+void writeServiceSummary(ProgressCallbackState& state,const std::string& path,int precrush,double setup) noexcept {
+    try {std::ofstream f(path);const auto&s=state.service_statistics;
+        f<<std::setprecision(17)<<"{\"mode\":"<<std::quoted(state.service_mode)<<",\"range\":\"root\",\"failure\":"<<std::quoted(state.fleet_failure)
+         <<",\"PreCrush\":"<<precrush<<",\"setup_seconds\":"<<setup<<",\"callback_seconds\":"<<state.service_seconds
+         <<",\"mipnode_calls\":"<<state.service_nodes<<",\"optimal_root_calls\":"<<state.service_optimal
+         <<",\"directions\":"<<s.directions<<",\"dp_calls\":"<<s.dp_calls<<",\"cache_hits\":"<<s.cache_hits
+         <<",\"reliable\":"<<s.reliable<<",\"unique_rows\":"<<state.service_recorded.size()<<",\"selected\":"<<state.service_rows
+         <<",\"submitted\":"<<state.service_submissions<<",\"api_ok\":"<<state.service_api_ok<<"}\n";
+        f.flush();f.close();if(!f)failFleetEvidence(state,"service_summary_write_failed");
+    }catch(const std::exception&e){failFleetEvidence(state,e.what());}catch(...){failFleetEvidence(state,"service_unknown_summary_exception");}
+}
+
 int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
@@ -1145,6 +1167,37 @@ int __stdcall progressAndBoundTargetCallback(
             state->round59_sample_seconds +=
                 std::chrono::duration<double>(Clock::now()-sample_started).count();
         }
+    }
+    if(where==GRB_CB_MIPNODE&&state->service_mode!="off"&&!state->fleet_failed){
+        const auto started=Clock::now();++state->service_nodes;
+        try{if(state->service_mode!="shell"){
+            int status=0;double node=0;
+            if(state->api->cbget(cbdata,where,GRB_CB_MIPNODE_STATUS,&status))throw std::runtime_error("service_status_read");
+            if(status==GRB_OPTIMAL){
+                if(state->api->cbget(cbdata,where,GRB_CB_MIPNODE_NODCNT,&node)||!std::isfinite(node)||node<0)throw std::runtime_error("service_node_read");
+                if(node==0){++state->service_optimal;auto& values=state->service_values;
+                    if(state->api->cbget(cbdata,where,GRB_CB_MIPNODE_REL,values.data()))throw std::runtime_error("service_relaxation_read");
+                    if(state->service_optimal==1){std::ofstream point(state->service_point_path);
+                        point<<std::setprecision(17)<<"{\"node\":0,\"source\":\"original-column optimal MIPNODE relaxation\",\"point\":[";
+                        for(std::size_t j=0;j<values.size();++j){if(j)point<<',';point<<values[j];}point<<"]}\n";
+                        point.flush();point.close();if(!point)throw std::runtime_error("service_point_write");}
+                    auto rows=separateServiceResources(state->service_contract,values,state->service_margin,state->service_statistics);
+                    for(const auto&r:rows){++state->service_rows;int code=-1;
+                        if(state->service_mode=="submit"){++state->service_submissions;
+                            code=state->api->cbcut(cbdata,static_cast<int>(r.indices.size()),r.indices.data(),r.coefficients.data(),GRB_LESS_EQUAL,r.rhs);
+                            if(code)throw std::runtime_error("service_GRBcbcut:"+std::to_string(code));
+                            ++state->service_api_ok;}
+                        if(state->service_recorded.insert(r.key).second){auto&f=state->service_certificates;
+                            f<<std::setprecision(17)<<"{\"node\":"<<node<<",\"api_code\":"<<code<<",\"rhs\":"<<r.rhs<<",\"activity_lower\":"<<r.activity_lower<<",\"violation_lower\":"<<r.violation_lower<<",\"proofs\":[";
+                            for(std::size_t k=0;k<r.proofs.size();++k){if(k)f<<',';f<<serviceSupportJson(r.proofs[k]);}f<<"],\"columns\":[";
+                            for(std::size_t j=0;j<r.indices.size();++j){if(j)f<<',';f<<'['<<r.indices[j]<<','<<r.coefficients[j]<<','<<values[r.indices[j]]<<']';}f<<"]}\n";
+                            f.flush();if(!f)throw std::runtime_error("service_certificate_write");}
+                    }
+                }
+            }
+        }}catch(const std::exception&e){failFleetEvidence(*state,e.what());state->api->terminate(model);}
+        catch(...){failFleetEvidence(*state,"service_unknown_callback_exception");state->api->terminate(model);}
+        state->service_seconds+=std::chrono::duration<double>(Clock::now()-started).count();
     }
     if (where == GRB_CB_MIPNODE && state->fleet_mode != "off" && !state->fleet_failed) {
         const auto started=Clock::now();++state->fleet_nodes;
@@ -2423,9 +2476,11 @@ public:
             (out.terminal_mip || out.partial_bound_target_mip);
         NativeOtB1Prepared native_ot_b1;
         const bool fleet_active=options_.round101_fleet_cuts!="off"&&(out.terminal_mip||out.partial_bound_target_mip);
+        const bool service_active=options_.round102_service_cuts!="off"&&(out.terminal_mip||out.partial_bound_target_mip);
         FleetContract fleet_contract;
+        ServiceContract service_contract;
         double fleet_setup_seconds=0;
-        if(fleet_active) {
+        if(fleet_active||service_active) {
             const auto started=Clock::now();
             if(!out.model_fingerprint_matches_request||request.canonical_model_fingerprint.empty()||
                 request.canonical_model_scope.empty()||request.canonical_row_signature.empty()||request.leaf_id.empty()||
@@ -2434,7 +2489,7 @@ public:
                 !request.variable_bound_overrides.empty()||!request.additional_linear_rows.empty()||!request.round60_fixed_inventory.empty()) {
                 out.failure_reason="round101_identity_or_policy_invalid";return out;
             }
-            if(options_.round101_fleet_cuts!="shell") {
+            if((fleet_active&&options_.round101_fleet_cuts!="shell")||(service_active&&options_.round102_service_cuts!="shell")) {
                 NativeOtB1LinearModel identity;identity.names=native_names;identity.types=native_types;
                 identity.lower_bounds.resize(native_variables);identity.upper_bounds.resize(native_variables);
                 int audit_rows=0;SolverNeutralLinearModel linear;
@@ -2444,8 +2499,10 @@ public:
                     !readLinearModel(api_,model,native_variables,audit_rows,linear)) {out.failure_reason="round101_matrix_read_failed";return out;}
                 identity.row_starts=std::move(linear.row_starts);identity.column_indices=std::move(linear.column_indices);
                 identity.coefficients=std::move(linear.coefficients);identity.senses=std::move(linear.senses);identity.rhs=std::move(linear.rhs);
-                fleet_contract=prepareFleetContract(instance_,identity);
-                if(!fleet_contract.valid){out.failure_reason="round101_model_audit:"+fleet_contract.reason;return out;}
+                if(fleet_active){fleet_contract=prepareFleetContract(instance_,identity);
+                    if(!fleet_contract.valid){out.failure_reason="round101_model_audit:"+fleet_contract.reason;return out;}}
+                if(service_active){service_contract=prepareServiceContract(instance_,identity);
+                    if(!service_contract.valid){out.failure_reason="round102_model_audit:"+service_contract.reason;return out;}}
             }
             fleet_setup_seconds=std::chrono::duration<double>(Clock::now()-started).count();
         }
@@ -2648,7 +2705,7 @@ public:
         }
 
         ProgressCallbackState callback;
-        if(fleet_active) {
+        if(fleet_active||service_active) {
             out.gurobi_precrush_requested=1;
             out.gurobi_precrush_set_return_code=api_.setintparam(model_env,GRB_INT_PAR_PRECRUSH,1);
             out.gurobi_precrush_get_return_code=api_.getintparam(model_env,GRB_INT_PAR_PRECRUSH,&out.gurobi_precrush_effective);
@@ -2657,14 +2714,24 @@ public:
             if(!out.gurobi_precrush_roundtrip_valid||!api_.cbcut||api_.getdblparam(model_env,GRB_DBL_PAR_FEASIBILITYTOL,&tol)||!std::isfinite(tol)||tol<0) {
                 out.failure_reason="round101_precrush_or_tolerance_failed";return out;
             }
-            callback.fleet_mode=options_.round101_fleet_cuts;callback.fleet_range=options_.round101_fleet_range;
+            if(service_active){
+                callback.service_mode=options_.round102_service_cuts;callback.service_contract=std::move(service_contract);
+                callback.service_values.resize(native_variables);callback.service_margin=10*tol;
+                callback.service_point_path=request.native_log_path.string()+".round102.point.json";
+                callback.service_certificates.open(request.native_log_path.string()+".round102.certificates.jsonl");
+                std::ofstream contract(request.native_log_path.string()+".round102.contract.json");
+                contract<<"{\"canonical_sha256\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"input_sha256\":"<<std::quoted(fileSha256(instance_.path))
+                    <<",\"scope\":"<<std::quoted(request.canonical_model_scope)<<",\"leaf\":"<<std::quoted(request.leaf_id)<<",\"column_contract\":"<<serviceContractJson(callback.service_contract)<<"}\n";
+                contract.flush();contract.close();if(!contract||!callback.service_certificates){out.failure_reason="round102_evidence_open_failed";return out;}
+            }
+            if(fleet_active){callback.fleet_mode=options_.round101_fleet_cuts;callback.fleet_range=options_.round101_fleet_range;
             callback.fleet_contract=std::move(fleet_contract);callback.fleet_values.resize(native_variables);callback.fleet_margin=10*tol;
             callback.fleet_certificates.open(request.native_log_path.string()+".round101.certificates.jsonl");
             std::ofstream contract(request.native_log_path.string()+".round101.contract.json");
             contract<<"{\"canonical_sha256\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"input_sha256\":"<<std::quoted(fileSha256(instance_.path))
                 <<",\"scope\":"<<std::quoted(request.canonical_model_scope)<<",\"leaf\":"<<std::quoted(request.leaf_id)<<",\"column_contract\":"<<fleetContractJson(callback.fleet_contract)<<"}\n";
             contract.flush();contract.close();
-            if(!contract||!callback.fleet_certificates){out.failure_reason="round101_evidence_open_failed";return out;}
+            if(!contract||!callback.fleet_certificates){out.failure_reason="round101_evidence_open_failed";return out;}}
         }
         if (native_ot_b1_active) {
             if (request.native_log_path.empty()) {
@@ -2907,7 +2974,7 @@ public:
                 out.failure_reason="round68_global_deadline_readback_failed";return out;
             }
         }
-        if ((native_ot_b1_active || fleet_active) && paper_solve) {
+        if ((native_ot_b1_active || fleet_active || service_active) && paper_solve) {
             const double remaining = std::max(0.0,
                 request.global_deadline_remaining_seconds -
                 std::chrono::duration<double>(
@@ -2929,6 +2996,7 @@ public:
         if(fleet_active)writeFleetSummary(callback,
             request.native_log_path.string()+".round101.summary.json",
             out.gurobi_precrush_effective,fleet_setup_seconds);
+        if(service_active)writeServiceSummary(callback,request.native_log_path.string()+".round102.summary.json",out.gurobi_precrush_effective,fleet_setup_seconds);
         if(callback.round97) {
             const auto began=Clock::now();
             int count=0,status=0;double objective=GRB_INFINITY;std::vector<double> final_values;
@@ -3865,7 +3933,7 @@ public:
             !out.model_fingerprint_matches_request ||
             !out.feasibility_consistency_gate || !domain_restore_ok ||
             log_rc != 0 ||
-            (fleet_active && (callback.fleet_failed || !round89_status_read_ok || !out.native_status_supported)) ||
+            ((fleet_active||service_active) && (callback.fleet_failed || !round89_status_read_ok || !out.native_status_supported)) ||
             (native_ot_b1_active &&
              (!callback.native_ot_b1_failure.empty() ||
               !round89_status_read_ok || !out.native_status_supported))) {
@@ -3901,6 +3969,8 @@ public:
             if(callback.fleet_failed)out.failure_reason="round101_callback_failed:"+callback.fleet_failure;
             invalidateRound89NativeOtB1FailedOutcome(out);
         }
+        if(service_active){if(callback.fleet_failed)out.failure_reason="round102_callback_failed:"+callback.fleet_failure;
+            invalidateRound89NativeOtB1FailedOutcome(out);}
         if (out.lp_relaxation && round63_root_source_==request.native_log_path.string() &&
             (!out.lp_terminal_valid||!out.model_fingerprint_matches_request)) {
             round63_root_rows_.clear();round63_root_failure_="invalid_source_lp_lifecycle";

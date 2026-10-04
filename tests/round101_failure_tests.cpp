@@ -83,6 +83,28 @@ int main(int argc,char** argv){try {
         require(terminated==before+1,"failed callback does not reenter separator");
     }
     fault=Fault::none;
+    const std::vector<std::tuple<std::string,Fault,std::string,std::string>> service_cases={
+        {"service_status",Fault::status,"shadow","service_status_read"},
+        {"service_cut",Fault::cut,"submit","service_GRBcbcut:10003"},
+        {"service_certificate",Fault::none,"shadow","service_certificate_write"},
+        {"service_unknown",Fault::unknown,"shadow","service_unknown_callback_exception"}};
+    for(const auto&[name,f,mode,reason]:service_cases){
+        ProgressCallbackState s;s.api=&api;s.service_mode=mode;s.service_margin=1e-5;
+        s.service_contract.valid=true;s.service_contract.resource=physicalFleetContract(in);s.service_contract.resource.columns=10;
+        s.service_contract.columns.assign(2,std::vector<std::array<int,3>>(6,{-1,-1,-1}));
+        for(int k=0;k<2;++k)for(int i=1;i<=5;++i)s.service_contract.columns[k][i]={2*(i-1),2*(i-1)+1,2*(i-1)};
+        s.service_contract.identity=serviceContractJson(s.service_contract);s.service_values.resize(10);
+        s.service_point_path=(root/(name+".point.json")).string();s.native_evidence=journal(in,root/name);s.evidence_call=1;
+        fault=f;const int before=terminated;
+        require(progressAndBoundTargetCallback(nullptr,nullptr,GRB_CB_MIPNODE,&s)==0,"service C callback safe return");
+        require(terminated==before+1,"service failure terminates");checkFailure(s,root/name,reason.c_str());
+        progressAndBoundTargetCallback(nullptr,nullptr,GRB_CB_MIPNODE,&s);require(terminated==before+1,"failed service callback no reentry");
+    }
+    fault=Fault::none;
+    ProgressCallbackState service_summary;service_summary.api=&api;service_summary.service_mode="submit";
+    service_summary.native_evidence=journal(in,root/"service_summary");service_summary.evidence_call=1;
+    writeServiceSummary(service_summary,root.string(),1,0);
+    checkFailure(service_summary,root/"service_summary","service_summary_write_failed");
     ProgressCallbackState summary;summary.api=&api;summary.fleet_mode="submit";
     summary.native_evidence=journal(in,root/"summary");summary.evidence_call=1;
     writeFleetSummary(summary,root.string(),1,0); // Existing directory cannot be opened as a file.
