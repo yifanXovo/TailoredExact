@@ -1,0 +1,274 @@
+{
+  "binary_sha256": "aef63f68b3ba367867f5c6e6bcc0e8c01e9186abd1de33bcd2a3cca7b1627a5c",
+  "committed_events": 9531,
+  "native_calls_started": 5,
+  "native_calls_returned": 5,
+  "physical_witnesses": 6,
+  "native_physical_witnesses": 5,
+  "scoped_bound_events": 9514,
+  "global_native_bound_events": 9514,
+  "UB": 0.8659435203229896,
+  "LB": 0.865939565668149,
+  "gap": 3.95465484059887e-06,
+  "physical_upper_available": true,
+  "lower_bound_source": "complete_domain_native_evidence",
+  "certificate": false,
+  "solver_finalization_certificate": false,
+  "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+  "witnesses": [
+    {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true,
+      "source": "same_run_verified_startup",
+      "call": 0,
+      "sequence": 2,
+      "available": 0.39100000000325963
+    },
+    {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 10,
+      "available": 2.172000000005937
+    },
+    {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 15,
+      "available": 2.5780000000086147
+    },
+    {
+      "F": 0.8836325211425131,
+      "G": 0.25646426680949846,
+      "P": 4.181121695553432,
+      "stations": 6,
+      "pickup": 34,
+      "drop": 31,
+      "maximum_duration": 3552.503195657818,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 41,
+      "available": 7.282000000006519
+    },
+    {
+      "F": 0.8726452088184173,
+      "G": 0.24775271262032322,
+      "P": 4.165949974653961,
+      "stations": 7,
+      "pickup": 31,
+      "drop": 31,
+      "maximum_duration": 3535.36690305553,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 42,
+      "available": 10.688000000009197
+    },
+    {
+      "F": 0.8659435203229896,
+      "G": 0.24756565483918117,
+      "P": 4.12251910322539,
+      "stations": 6,
+      "pickup": 32,
+      "drop": 32,
+      "maximum_duration": 3595.0133423750403,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 60,
+      "available": 43.61000000000058
+    }
+  ],
+  "normal_result_certificate": true,
+  "final_only_physical_witness": false,
+  "final_physical_verification": {
+    "F": 0.8659435203229896,
+    "G": 0.24756565483918117,
+    "P": 4.12251910322539,
+    "stations": 6,
+    "pickup": 32,
+    "drop": 32,
+    "maximum_duration": 3595.0133423750403,
+    "original_T_feasible": true
+  },
+  "endpoint": {
+    "U": 0.8659435203229894,
+    "L": 0.8659435203229883,
+    "gap": 1.1102230246251565e-15,
+    "certificate": true,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "optimal"
+  },
+  "neutral_exchange": {
+    "passed": true,
+    "initial": {
+      "F": 0.8872477316348517,
+      "G": 0.2402793186734339,
+      "P": 4.313122753076119,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true
+    },
+    "final": {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true
+    },
+    "result": {
+      "F": 0.885348300934578,
+      "neutral": 0,
+      "relocations": 0,
+      "exchanges": 0,
+      "equal_net_pairs": 4,
+      "insertions": 0,
+      "quantities": 2,
+      "exhausted": true,
+      "deadline": false,
+      "zero": false,
+      "verification_failed": false,
+      "optimizer_calls": 0
+    },
+    "transitions": [
+      {
+        "iteration": 0,
+        "closure": {
+          "initial_UB": 0.8872477316348519,
+          "final_UB": 0.885348300934578,
+          "accepted": 2,
+          "counts": {
+            "insertions": 0,
+            "quantities": 2,
+            "singles": 0,
+            "pairs": 2,
+            "cross_vehicle": 0,
+            "sign_flips": 0,
+            "removed_stops": 0
+          },
+          "independently_checked_physical_witnesses": 4,
+          "returned_to_outer": true,
+          "insertion_placements": 12600,
+          "insertion_quantities": 0,
+          "quantity_feasible": 341,
+          "terminal_status": "joint_neighborhood_exhausted",
+          "trace_interval_seconds": 0.0011258999999999852,
+          "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+        },
+        "neutral_oracle": {
+          "balanced_blocks": 2,
+          "placements": 10,
+          "feasible": 0,
+          "improving": 0,
+          "exchange_pairs": 4,
+          "exchange_feasible": 1,
+          "exchange_improving": 0,
+          "best_key": null,
+          "best_potential": null,
+          "current_potential": [
+            3563.1915890902783,
+            3535.36690305553
+          ]
+        }
+      }
+    ],
+    "neutral_states": 0,
+    "strict_moves": 2,
+    "unique_recorded_route_states": 2,
+    "offline_seconds": 0.004832399994484149,
+    "optimizer_calls": 0,
+    "scope": "Fixed-witness diagnosis; no complete performance claim"
+  },
+  "parameter_readback": {
+    "threads": {
+      "requested": 1,
+      "effective": 1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "seed": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "presolve": {
+      "requested": -1,
+      "effective": -1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap_abs": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    }
+  },
+  "native_scope_adapter": {
+    "schema": "round94-native-scope-adapter-v3",
+    "arm": "FLEET-ROOT",
+    "native_calls": 5,
+    "lp_calls": [
+      1,
+      2,
+      3
+    ],
+    "mip_calls": [
+      4,
+      5
+    ],
+    "global_bound_call_ids": [
+      4,
+      5
+    ],
+    "ledger_sha256": "2f8bd57d100a14eba89860776b292b516f090daa5f232b72d9486ec7f42e789b",
+    "settings": {
+      "read_return_code": 0,
+      "Threads": 1,
+      "Seed": 0,
+      "Presolve": -1,
+      "MIPGap": 0,
+      "MIPGapAbs": 0,
+      "FeasibilityTol": 1e-06,
+      "IntFeasTol": 1e-05,
+      "OptimalityTol": 1e-06
+    },
+    "all_flags_strictly_decoded": true
+  },
+  "passed": true,
+  "offline_audit_seconds": 0.11808980000205338
+}

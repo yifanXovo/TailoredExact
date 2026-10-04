@@ -84,7 +84,7 @@ def rank(c,p,d=None):
     assert p['rank']<=min(N,sum(caps))
     return p['rank']
 def verify(folder,output):
-    ensure_idle();folder=Path(folder);records=[];total=0;dp_checks=0;replayed=set()
+    ensure_idle();folder=Path(folder).resolve();records=[];total=0;dp_checks=0;replayed=set()
     for path in sorted(folder.rglob('*.round101.certificates.jsonl')):
         source=Path(str(path).replace('.certificates.jsonl','.contract.json'));binding=read(source);c=binding['column_contract'];d=replay_contract(c)
         rows=[json.loads(x) for x in path.read_text().splitlines()];summaries=[]

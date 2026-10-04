@@ -1,0 +1,117 @@
+{
+  "input_sha256": "b33a3fcae892c82ab54a44850c271c728dba84e47a8afe4ea3afdf67c9eb93f4",
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        7,
+        6,
+        5,
+        4,
+        2,
+        1,
+        8,
+        9,
+        0
+      ],
+      "operations": [
+        {
+          "station": 7,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 6,
+          "pickup": 0,
+          "drop": 3
+        },
+        {
+          "station": 5,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 4,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 2,
+          "pickup": 0,
+          "drop": 4
+        },
+        {
+          "station": 1,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 9,
+          "pickup": 0,
+          "drop": 5
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        10,
+        11,
+        13,
+        16,
+        15,
+        14,
+        12,
+        0
+      ],
+      "operations": [
+        {
+          "station": 10,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 11,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 13,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 16,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 15,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 14,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 12,
+          "pickup": 0,
+          "drop": 7
+        }
+      ]
+    }
+  ],
+  "F": 0.29299029645092717,
+  "result_path": "results\\unified_exact_round101\\confirmation01\\raw\\03_C101-V20_P-GRB\\result.json",
+  "result_sha256": "e2d80b1f6697897805168044e22750038440bc2e48c45f888ffd51cb50863f9d",
+  "scope": "Audited same-run final physical routes, not a new primal input"
+}

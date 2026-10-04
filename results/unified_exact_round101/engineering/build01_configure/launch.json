@@ -1,0 +1,22 @@
+{
+  "command": [
+    "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+    "-S",
+    "E:\\codes\\ExactEBRP",
+    "-B",
+    "E:\\codes\\ExactEBRP\\build\\research\\round101-fleet-v1",
+    "-G",
+    "Ninja",
+    "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+    "-DCMAKE_MAKE_PROGRAM=D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja\\ninja.exe",
+    "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+    "-DGUROBI_ROOT=D:/gurobi1302/win64",
+    "-DCMAKE_BUILD_TYPE="
+  ],
+  "kind": "engineering",
+  "cap": 600,
+  "maximum_optimizer_calls": 0,
+  "command_file_bindings": {
+    "D:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe": "76129878fe6dc5a2246415d442de8bc01688ff9a48eb5d9498ea374de8b5a086"
+  }
+}
