@@ -189,6 +189,10 @@ else()
 endif()
 
 if(EXACT_EBRP_ENABLE_GUROBI AND WIN32)
+  add_executable(Round101FailureTests tests/round101_failure_tests.cpp)
+  target_link_libraries(Round101FailureTests PRIVATE exact_ebrp_core)
+  target_include_directories(Round101FailureTests PRIVATE "${GUROBI_INCLUDE_DIR}")
+  # Manually invoked with a fresh artifact directory; zero Optimize calls.
   add_executable(Round89NativeOtB1Micro tests/round89_native_ot_b1_micro.cpp)
   target_link_libraries(Round89NativeOtB1Micro PRIVATE exact_ebrp_core)
   target_include_directories(Round89NativeOtB1Micro PRIVATE "${GUROBI_INCLUDE_DIR}")

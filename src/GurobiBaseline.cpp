@@ -411,6 +411,7 @@ struct ProgressCallbackState {
     std::map<std::string, long long> native_ot_b1_skip_reasons;
     std::string native_ot_b1_failure;
     std::string fleet_mode="off", fleet_range="tree", fleet_failure;
+    bool fleet_failed=false;
     FleetContract fleet_contract;
     FleetStatistics fleet_statistics;
     std::vector<double> fleet_values;
@@ -935,6 +936,32 @@ void attemptRound60CandidateNoexcept(
     }
 }
 
+// A fleet failure invalidates this run's durable bound stream as well as its
+// normal returned outcome. Keep the C callback boundary exception-safe.
+void failFleetEvidence(ProgressCallbackState& state,const char* reason) noexcept {
+    state.fleet_failed=true;
+    try {if(state.native_evidence)state.native_evidence->failure(reason);} catch(...) {}
+    try {state.fleet_failure=reason;} catch(...) {}
+}
+
+void writeFleetSummary(ProgressCallbackState& state,const std::string& path,
+    int precrush,double setup_seconds) noexcept {
+    try {
+        const auto& s=state.fleet_statistics;
+        std::ofstream f(path);
+        f<<std::setprecision(17)<<"{\"mode\":"<<std::quoted(state.fleet_mode)<<",\"range\":"<<std::quoted(state.fleet_range)<<",\"failure\":"<<std::quoted(state.fleet_failure)
+         <<",\"PreCrush\":"<<precrush<<",\"setup_seconds\":"<<setup_seconds<<",\"callback_seconds\":"<<state.fleet_seconds
+         <<",\"mipnode_calls\":"<<state.fleet_nodes<<",\"optimal_nodes\":"<<state.fleet_optimal<<",\"nonoptimal_nodes\":"<<state.fleet_nonoptimal
+         <<",\"candidates\":"<<s.candidates<<",\"proved\":"<<s.proofs<<",\"small_proofs\":"<<s.small_proofs<<",\"large_proofs\":"<<s.large_proofs
+         <<",\"unexcluded\":"<<s.greedy_full<<",\"reliable\":"<<s.reliable<<",\"duplicates\":"<<s.duplicates<<",\"arithmetic_skips\":"<<s.arithmetic_skips<<",\"cache_hits\":"<<s.cache_hits
+         <<",\"root_selected\":"<<state.fleet_root_rows<<",\"tree_selected\":"<<state.fleet_tree_rows<<",\"unique_rows\":"<<state.fleet_recorded.size()
+         <<",\"submitted\":"<<state.fleet_submissions<<",\"api_ok\":"<<state.fleet_api_ok<<",\"violation_margin\":"<<state.fleet_margin<<"}\n";
+        f.flush();f.close();
+        if(!f)failFleetEvidence(state,"fleet_summary_write_failed");
+    } catch(const std::exception& e) {failFleetEvidence(state,e.what());}
+      catch(...) {failFleetEvidence(state,"fleet_unknown_summary_exception");}
+}
+
 int __stdcall progressAndBoundTargetCallback(
     GRBmodel* model, void* cbdata, int where, void* usrdata) {
     auto* state = static_cast<ProgressCallbackState*>(usrdata);
@@ -1119,7 +1146,7 @@ int __stdcall progressAndBoundTargetCallback(
                 std::chrono::duration<double>(Clock::now()-sample_started).count();
         }
     }
-    if (where == GRB_CB_MIPNODE && state->fleet_mode != "off" && state->fleet_failure.empty()) {
+    if (where == GRB_CB_MIPNODE && state->fleet_mode != "off" && !state->fleet_failed) {
         const auto started=Clock::now();++state->fleet_nodes;
         try {
             if(state->fleet_mode!="shell") {
@@ -1153,7 +1180,8 @@ int __stdcall progressAndBoundTargetCallback(
                     }
                 }
             }
-        } catch(const std::exception& e) {state->fleet_failure=e.what();state->api->terminate(model);}
+        } catch(const std::exception& e) {failFleetEvidence(*state,e.what());state->api->terminate(model);}
+          catch(...) {failFleetEvidence(*state,"fleet_unknown_callback_exception");state->api->terminate(model);}
         state->fleet_seconds+=std::chrono::duration<double>(Clock::now()-started).count();
     }
     if (where == GRB_CB_MIPNODE && state->native_ot_b1_active &&
@@ -1361,7 +1389,7 @@ int __stdcall progressAndBoundTargetCallback(
     state->api->cbget(cbdata, where, GRB_CB_MIP_PHASE, &event.phase);
     event.incumbent_available = finiteNative(event.incumbent);
     event.best_bound_available = native_bound_read && finiteNative(event.best_bound);
-    if(state->native_evidence && event.best_bound_available) {
+    if(state->native_evidence && !state->fleet_failed && event.best_bound_available) {
         try {state->native_evidence->nativeBound(state->evidence_call,event.best_bound);}
         catch(const std::exception& e) {state->native_evidence->failure(e.what());}
         catch(...) {state->native_evidence->failure("MIP_bound_observer_exception");}
@@ -2635,6 +2663,7 @@ public:
             std::ofstream contract(request.native_log_path.string()+".round101.contract.json");
             contract<<"{\"canonical_sha256\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"input_sha256\":"<<std::quoted(fileSha256(instance_.path))
                 <<",\"scope\":"<<std::quoted(request.canonical_model_scope)<<",\"leaf\":"<<std::quoted(request.leaf_id)<<",\"column_contract\":"<<fleetContractJson(callback.fleet_contract)<<"}\n";
+            contract.flush();contract.close();
             if(!contract||!callback.fleet_certificates){out.failure_reason="round101_evidence_open_failed";return out;}
         }
         if (native_ot_b1_active) {
@@ -2897,18 +2926,9 @@ public:
             }
         }
         out.optimize_return_code = api_.optimize(model);
-        if(fleet_active) {
-            const auto& s=callback.fleet_statistics;
-            std::ofstream f(request.native_log_path.string()+".round101.summary.json");
-            f<<std::setprecision(17)<<"{\"mode\":"<<std::quoted(callback.fleet_mode)<<",\"range\":"<<std::quoted(callback.fleet_range)<<",\"failure\":"<<std::quoted(callback.fleet_failure)
-             <<",\"PreCrush\":"<<out.gurobi_precrush_effective<<",\"setup_seconds\":"<<fleet_setup_seconds<<",\"callback_seconds\":"<<callback.fleet_seconds
-             <<",\"mipnode_calls\":"<<callback.fleet_nodes<<",\"optimal_nodes\":"<<callback.fleet_optimal<<",\"nonoptimal_nodes\":"<<callback.fleet_nonoptimal
-             <<",\"candidates\":"<<s.candidates<<",\"proved\":"<<s.proofs<<",\"small_proofs\":"<<s.small_proofs<<",\"large_proofs\":"<<s.large_proofs
-             <<",\"unexcluded\":"<<s.greedy_full<<",\"reliable\":"<<s.reliable<<",\"duplicates\":"<<s.duplicates<<",\"arithmetic_skips\":"<<s.arithmetic_skips<<",\"cache_hits\":"<<s.cache_hits
-             <<",\"root_selected\":"<<callback.fleet_root_rows<<",\"tree_selected\":"<<callback.fleet_tree_rows<<",\"unique_rows\":"<<callback.fleet_recorded.size()
-             <<",\"submitted\":"<<callback.fleet_submissions<<",\"api_ok\":"<<callback.fleet_api_ok<<",\"violation_margin\":"<<callback.fleet_margin<<"}\n";
-            if(!f)callback.fleet_failure="fleet_summary_write_failed";
-        }
+        if(fleet_active)writeFleetSummary(callback,
+            request.native_log_path.string()+".round101.summary.json",
+            out.gurobi_precrush_effective,fleet_setup_seconds);
         if(callback.round97) {
             const auto began=Clock::now();
             int count=0,status=0;double objective=GRB_INFINITY;std::vector<double> final_values;
@@ -3845,7 +3865,7 @@ public:
             !out.model_fingerprint_matches_request ||
             !out.feasibility_consistency_gate || !domain_restore_ok ||
             log_rc != 0 ||
-            (fleet_active && (!callback.fleet_failure.empty() || !round89_status_read_ok || !out.native_status_supported)) ||
+            (fleet_active && (callback.fleet_failed || !round89_status_read_ok || !out.native_status_supported)) ||
             (native_ot_b1_active &&
              (!callback.native_ot_b1_failure.empty() ||
               !round89_status_read_ok || !out.native_status_supported))) {
@@ -3878,7 +3898,7 @@ public:
             invalidateRound89NativeOtB1FailedOutcome(out);
         }
         if(fleet_active) {
-            if(!callback.fleet_failure.empty())out.failure_reason="round101_callback_failed:"+callback.fleet_failure;
+            if(callback.fleet_failed)out.failure_reason="round101_callback_failed:"+callback.fleet_failure;
             invalidateRound89NativeOtB1FailedOutcome(out);
         }
         if (out.lp_relaxation && round63_root_source_==request.native_log_path.string() &&
