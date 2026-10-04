@@ -2,7 +2,8 @@
 Performance must be idle before this heavier artifact pass. No Optimize calls.
 """
 import sys,json
-import round100_results as inherited
+import round101_reporting_core as inherited
+from round101_recover_scope import records_view
 from round100_idle import ensure_idle
 from round101_common import *
 
@@ -22,7 +23,7 @@ def main(label,campaigns):
     target=OUT/label;fleet=[];isolation=[]
     for name in campaigns:
         camp=OUT/name
-        done=[json.loads(x) for x in (camp/'summary.jsonl').read_text().splitlines()]
+        done=records_view(camp)
         group={r['arm']:r for r in done if r['id']=='F2'}
         if name.startswith('isolation'):
             for reference,candidate in [('ENS-C','FLEET-SHELL'),('FLEET-SHELL','FLEET-SHADOW'),
@@ -41,16 +42,23 @@ def main(label,campaigns):
                 s=read(p);log=Path(str(p).replace('.round101.summary.json',''))
                 native,_,_=inherited.native_log(log)
                 cuts=json.loads(native['cuts'])
+                certs=Path(str(p).replace('.summary.json','.certificates.jsonl'))
+                saved=[json.loads(x) for x in certs.read_text().splitlines()] if certs.exists() else []
+                literal={ (tuple((col,coef) for col,coef,value in row['columns']),row['proof']['rank']) for row in saved }
                 fleet.append(dict(base,path=p.relative_to(ROOT).as_posix(),summary_sha256=sha(p),
-                    native_User_cut_count=cuts.get('User'),native_cut_counts=native['cuts'],**s))
+                    native_User_cut_count=cuts.get('User'),native_cut_counts=native['cuts'],
+                    unique_literal_rows_in_saved_certificates=len(literal),
+                    saved_row_nonzeros_min=min((len(row['columns']) for row in saved),default=None),
+                    saved_row_nonzeros_max=max((len(row['columns']) for row in saved),default=None),
+                    unique_event_rank_proof_keys=s.get('unique_rows'),**s))
     inherited.csv_write(target/'fleet_native_calls.csv',fleet)
     inherited.csv_write(target/'isolation_pairs.csv',isolation)
     from round101_budget import account
     budget=account();assert not budget['reserved'] and not budget['incomplete_receipt_batches'] and budget['within_limits']
     write(target/'fee_reconciliation.json',budget)
     write(target/'round101_reporting_identity.json',dict(optimizer_calls=0,
-        inherited_reader_sha256=sha(ROOT/'scripts/round100_results.py'),wrapper_sha256=sha(__file__),
-        receipt_adapter='Actual zero-Optimize standalone pure/replay qualification batches only; no forensic receipts modified',
+        inherited_reader_sha256=sha(ROOT/'scripts/round100_results.py'),adapted_reader_sha256=sha(inherited.__file__),wrapper_sha256=sha(__file__),
+        receipt_adapter='Actual zero-Optimize standalone pure/replay batches; missing native final results stay missing; immutable recovery06 overlay qualifies only original committed arm6 prefix; no forensic receipts modified',
         API_success_is_not_native_retention=True,default_changed=False))
     print(json.dumps(dict(passed=True,fleet_native_calls=len(fleet),billed_starts=budget['completed_charged_starts'],
         conservatively_charged_seconds=budget['completed_charged_seconds'],Optimize=0)))

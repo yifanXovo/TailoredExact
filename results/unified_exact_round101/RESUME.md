@@ -4,7 +4,9 @@
 
 The uniform final-source FLEET-ROOT candidate is frozen; all three one-time confirmation inputs were generated after freeze and retained. No further parameter, family, strength, range, numeric-contract, source or build changes are planned during confirmation.
 
-**Active serial batch:** `D:/msys64/ucrt64/bin/python.exe scripts/round101_run_batch.py confirmation01 1 2 3 4 5 6 7 8 9`, exec session **27343**. Arm1 C101-V20 ENS-C has started. Check actual PID, `confirmation01/processes.jsonl`, `runtime_status.json` and `summary.jsonl` before any continuation. Never restart an existing arm. The runner only admits the next never-started arm after an audited prefix; normal cap exits and audited committed-evidence hard stops are censored results, not automatic retry requests.
+**Active serial continuation:** `D:/msys64/ucrt64/bin/python.exe scripts/round101_continue.py`, exec session **24508**, original never-started arms7--9. C101-V50 ROOT has started. Original session27343 closed after arm6's reader failure. Check actual PID, `confirmation01/processes.jsonl`, `runtime_status.json`, raw `summary.jsonl` and the separate `recovery06` records before any continuation. Never restart an existing arm or this admission driver.
+
+Confirmation first5 passed: V20 ENS217.375s certified, ROOT266.640s certified (+22.7% vs ENS), P1797.5s unproved; V30 P7197.5s unproved and ROOT7197.391s unproved. Arm6 V30 ENS hit the registered hard stop7198.343s end-to-end. Its Optimize CSV retained only its header, so the frozen strict same-position scope reader rejected it. Original failure/summary/receipts remain immutable. The zero-Optimize specific read-only recovery verified368 commits,3 LP+2 actual typed MIP calls (4 returned),97 physical witnesses and261 global bounds. Derived interrupted endpoint U=.27382141472368104,L=.2307541028332916,gap=.043067311890389454,certificate=false. See `recovery06/notes.md`, original/derived audit hashes and the prospective admission for the exact remaining commands. No production/helper/source/build/input/parameter change and no rerun.
 
 Order and common caps: V20 ENS/ROOT/P, 1800 each; V30 P/ROOT/ENS, 7200 each; V50 ROOT/P/ENS, 1800 each. Source/helper/binary/input/DLL/parameters are prospectively pinned. Run serial single-threaded; no compilation, heavy audit, compression or production/helper edits while any performance process is active. Do not terminate unrelated processes.
 
@@ -18,7 +20,7 @@ Order and common caps: V20 ENS/ROOT/P, 1800 each; V30 P/ROOT/ENS, 7200 each; V50
 
 P's endpoint uses only interrupted committed original-domain evidence, no inferred engine optimality. ROOT's two actual MIP calls each selected/submitted two root rows, no tree rows; own callback .3693173s total, setup .2859598s total. API success does not establish retention. F5 is development, never a holdout. Final common-covered checkpoint analysis is still pending.
 
-Current conservative budget after long01: **36 billed starts /40308.1047954s**, plus nine confirmation arms reserved at32400s; maximum45 starts/72708.1047954s. Remaining after the whole plan27 starts/7291.8952046s within72/80000. Internal Optimize calls are recorded separately, not double charged. Do not spend this reserve on outcome-driven variants.
+Current conservative budget after confirmation arm6: **42 billed starts /64182.8537954s**, plus three remaining V50 arms at5400s; maximum45 starts/69582.8537954s. Remaining after the whole plan27 starts/10417.1462046s within72/80000. Internal Optimize calls are recorded separately, not double charged. Offline recovery costs are engineering, with no Optimize. Do not spend this reserve on outcome-driven variants.
 
 ## Immutable identities and protected files
 
@@ -44,8 +46,8 @@ Bounded numeric guards were committed separately after idle; build06/pure05/nume
 
 ## Remaining work after all confirmation arms finish
 
-1. Check every receipt/audit and reconcile fees; retain failures/hard stops and all missing/micro-gap fields. Both required common7200 long groups must be complete (F5 done, confirmationV30 pending).
-2. With performance idle, run prepared own exact-dyadic certificate replay and physical-witness-vs-row audit. These are execution-team verification, not independent review. Run `round101_results.py` /`round101_measure.py` through established R100 readers for all campaigns; use the documented common cap-minus10 scope-verified supplemental checkpoints. Never interpolate unproved exits or combine arms into a candidate certificate.
+1. Check every receipt/audit and reconcile fees; retain failures/hard stops and all missing/micro-gap fields. Both required common7200 long groups are complete (F5 and confirmationV30); V30 ENS uses the explicit committed-evidence recovery, with no final result/certificate. The three V50 arms remain active/pending.
+2. With performance idle, run prepared own exact-dyadic certificate replay and physical-witness-vs-row audit. These are execution-team verification, not independent review. Run `round101_results.py` /`round101_measure.py` using the explicit R100 reader adaptations for missing normal results and the hash-bound recovery overlay; use the documented common cap-minus10 scope-verified supplemental checkpoints. Never interpolate unproved exits or combine arms into a candidate certificate. Reporting readers are still unexecuted/unverified.
 3. Run prepared `round101_package.py` to retain compact real certificates/contracts/raw points/maximization witnesses/audits/routes and a large-local-file index. Do not commit DLL/PE/large matrices/logs/licenses/credentials. No heavy packaging during native runs.
 4. Finish concise `final_report.md`, math/history/delta/freeze/results+pairedCSV/cost+failure/reproduction docs and consolidate this recovery file to final status.
 5. Arrange exactly **one independent read-only final agent review**, explicitly user authorized. No agent has been spawned yet. Independently recompute small ranks and sample real rows; audit global scope/numeric/physical semantics/callback/frontier/P/all negatives. No native B&B rerun or edits; state its limits. No general delegation.

@@ -7,6 +7,7 @@ import ast,json,re,sys
 import analyze_round61 as physical
 from round100_idle import ensure_idle
 from round101_common import *
+from round101_recover_scope import records_view
 
 def verify(label,campaigns):
     ensure_idle();physical.ROOT=ROOT;panels={};witnesses={};ranks={};sources=[]
@@ -23,13 +24,13 @@ def verify(label,campaigns):
         witnesses.setdefault(h,set()).add(tuple(y));sources.append(dict(path=str(path),input_sha256=h,F=checked['F']))
     for name in campaigns:
         campaign=OUT/name;q=read(campaign/'identity.json')
-        done=[json.loads(x) for x in (campaign/'summary.jsonl').read_text().splitlines()]
+        done=records_view(campaign)
         assert len(done)==len(q['launches']) and all(x['audit_passed'] for x in done)
         for launch in q['launches']:
             panel=launch['panel'];folder=Path(launch['destination']);obs=read(folder/'observations.json')
             for r in obs:
                 if r['payload']['kind']=='witness':inventory(panel,r['payload'],str(folder/'observations.json')+'#'+str(r['sequence']))
-            result=read(folder/'result.json')
+            result=read(folder/'result.json') if (folder/'result.json').exists() else {}
             if result.get('routes'):
                 inventory(panel,dict(routes=result['routes'],F=result['upper_bound']),folder/'result.json')
             exchange=folder/'hga.csv.exchange'

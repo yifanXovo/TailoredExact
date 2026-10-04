@@ -4,6 +4,7 @@ No Optimize; no binaries, large matrices, license files or broad old-tree scan.
 import json,shutil,sys
 from round100_idle import ensure_idle
 from round101_common import *
+from round101_recover_scope import records_view,audit_view
 
 def package(label,campaigns):
     ensure_idle();target=OUT/label;target.mkdir(exist_ok=False);copied=[];selected=[]
@@ -22,7 +23,7 @@ def package(label,campaigns):
         copy(OUT/name,Path('qualification')/name)
     for campaign in campaigns:
         folder=OUT/campaign;identity=read(folder/'identity.json')
-        done=[json.loads(x) for x in (folder/'summary.jsonl').read_text().splitlines()]
+        done=records_view(folder)
         assert len(done)==len(identity['launches']) and all(x['audit_passed'] for x in done)
         for name in ['identity.json','summary.jsonl','reference_batch_receipt.json']:
             if (folder/name).exists():copy(folder/name,Path('campaigns')/campaign/name)
@@ -31,7 +32,15 @@ def package(label,campaigns):
             for file in ['completion.json','audit.json']:
                 copy(raw/file,Path('runs')/stem/file)
             # Final physical routes are extracted without unrelated result fields.
-            result=read(raw/'result.json')
+            result=read(raw/'result.json') if (raw/'result.json').exists() else {}
+            if not result:
+                audited=audit_view(raw);observations=read(raw/'observations.json')
+                witness=min(audited['witnesses'],key=lambda w:w['F'])
+                event=next(r['payload'] for r in observations if r['sequence']==witness['sequence'])
+                write(target/'runs'/stem/'interrupted_routes.json',dict(input_sha256=launch['panel']['input_sha256'],
+                    routes=event['routes'],F=witness['F'],journal_sequence=witness['sequence'],
+                    source_path=str((raw/'journal'/f'event_{witness["sequence"]}.json').relative_to(ROOT)),
+                    scope='Audited committed physical witness from interrupted process; not a native final result'))
             if result.get('routes'):
                 write(target/'runs'/stem/'final_routes.json',dict(input_sha256=launch['panel']['input_sha256'],
                     routes=result['routes'],F=result['upper_bound'],result_path=str((raw/'result.json').relative_to(ROOT)),
@@ -56,6 +65,8 @@ def package(label,campaigns):
                     source_records=len(rows),retained_records=len(wanted),source_line_numbers=[i+1 for i in sorted(wanted)],
                     target=dest.relative_to(ROOT).as_posix(),target_sha256=sha(dest),byte_exact_records=True,
                     selection='first/last plus first root, positive-node, small DP and scalable row; evidence packaging only, no score filtering'))
+    for p in sorted((OUT/'recovery06').glob('*.json')):
+        copy(p,Path('recovery06')/p.name)
     # Hash only this round's local tree, with explicit inherited matrix additions.
     artifacts=[]
     for path in sorted(OUT.rglob('*')):
