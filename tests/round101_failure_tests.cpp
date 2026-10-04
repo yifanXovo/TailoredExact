@@ -37,10 +37,14 @@ std::shared_ptr<NativeEvidenceJournal> journal(const Instance& in,const std::fil
     SolveOptions opt;opt.lambda=.15;opt.process_start_time_valid=true;
     opt.process_start_time=Clock::now();opt.native_evidence_dir=path.string();
     auto j=std::make_shared<NativeEvidenceJournal>(in,opt);
-    NativeEvidenceScope scope;scope.full_original=scope.native_preconditions=true;scope.gmax=1;
+    NativeEvidenceScope scope;scope.full_original=scope.native_preconditions=true;scope.gmax=.8;
     scope.model_path=in.path;scope.model_sha256=fileSha256(in.path);
     scope.settings_json="{\"read_return_code\":0,\"Threads\":1,\"Seed\":0,\"Presolve\":-1,\"MIPGap\":0,\"MIPGapAbs\":0,\"FeasibilityTol\":1e-6,\"IntFeasTol\":1e-5,\"OptimalityTol\":1e-6}";
-    require(j->beginCall(scope)==1,"first fixture call");j->nativeBound(1,.1);return j;
+    require(j->beginCall(scope)==1,"first fixture call");j->nativeBound(1,.1);
+    std::string data,why;
+    require(readNativeEvidenceReceipt(path/"event_3.commit",1,2,data,why)&&
+        data.find("\"global_available\":1")!=std::string::npos,"seeded bound has global eligibility");
+    return j;
 }
 void checkFailure(ProgressCallbackState& s,const std::filesystem::path& dir,const char* reason) {
     require(s.fleet_failed&&s.fleet_failure==reason,"fatal fleet state");
