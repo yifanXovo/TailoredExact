@@ -44,13 +44,15 @@ def main(label,campaigns):
                 cuts=json.loads(native['cuts'])
                 certs=Path(str(p).replace('.summary.json','.certificates.jsonl'))
                 saved=[json.loads(x) for x in certs.read_text().splitlines()] if certs.exists() else []
-                literal={ (tuple((col,coef) for col,coef,value in row['columns']),row['proof']['rank']) for row in saved }
+                literal={ (tuple(sorted((col,coef) for col,coef,value in row['columns'])),row['proof']['rank']) for row in saved }
                 fleet.append(dict(base,path=p.relative_to(ROOT).as_posix(),summary_sha256=sha(p),
                     native_User_cut_count=cuts.get('User'),native_cut_counts=native['cuts'],
                     unique_literal_rows_in_saved_certificates=len(literal),
                     saved_row_nonzeros_min=min((len(row['columns']) for row in saved),default=None),
                     saved_row_nonzeros_max=max((len(row['columns']) for row in saved),default=None),
-                    unique_event_rank_proof_keys=s.get('unique_rows'),**s))
+                    unique_event_rank_proof_keys=s.get('unique_rows'),
+                    completed_nontrivial_rank_problems=s['proved']-s['unexcluded'],
+                    proof_count_scope='Completed necessary-system ranks including cache hits; unexcluded means rank equals support; small/large counts are proof requests, not independent DP executions',**s))
     inherited.csv_write(target/'fleet_native_calls.csv',fleet)
     inherited.csv_write(target/'isolation_pairs.csv',isolation)
     from round101_budget import account
