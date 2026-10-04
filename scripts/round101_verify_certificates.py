@@ -2,8 +2,10 @@
 This is execution-team verification, separate from the independent review.
 """
 import sys,json,itertools,math
+import hashlib
 from fractions import Fraction as F
 from round101_common import *
+from round100_idle import ensure_idle
 def exact(v):return F.from_float(float(v))
 def replay_contract(c):
     d=[[exact(x) for x in row] for row in c['travel_lower']];n=len(d)
@@ -82,12 +84,15 @@ def rank(c,p,d=None):
     assert p['rank']<=min(N,sum(caps))
     return p['rank']
 def verify(folder,output):
-    folder=Path(folder);records=[];total=0;dp_checks=0;pair_compatible=0
+    ensure_idle();folder=Path(folder);records=[];total=0;dp_checks=0;replayed=set()
     for path in sorted(folder.rglob('*.round101.certificates.jsonl')):
         source=Path(str(path).replace('.certificates.jsonl','.contract.json'));binding=read(source);c=binding['column_contract'];d=replay_contract(c)
         rows=[json.loads(x) for x in path.read_text().splitlines()];summaries=[]
+        contract_key=hashlib.sha256(json.dumps(c,sort_keys=True).encode()).hexdigest()
         for row in rows:
-            p=row['proof'];rank(c,p,d);dp_checks+=p['method']=='complete_subset_dp';total+=1
+            p=row['proof'];proof_key=(contract_key,hashlib.sha256(json.dumps(p,sort_keys=True).encode()).hexdigest())
+            if proof_key not in replayed:rank(c,p,d);replayed.add(proof_key)
+            dp_checks+=p['method']=='complete_subset_dp';total+=1
             indices=[j for j,a,v in row['columns']];assert len(set(indices))==len(indices) and all(a==1 for j,a,v in row['columns'])
             expected=[]
             for i,s,q in p['events']:
@@ -97,7 +102,8 @@ def verify(folder,output):
             assert exact(row['violation_lower'])<=activity-p['rank'] and row['violation_lower']>0
             if len(summaries)<3:summaries.append(dict(node=row['node'],support=len(p['events']),rank=p['rank'],method=p['method'],violation=row['violation_lower']))
         records.append(dict(path=str(path.relative_to(ROOT)),sha256=sha(path),rows=len(rows),samples=summaries))
-    write(output,dict(passed=True,certificates=total,small_dp_certificates=dp_checks,records=records,
+        print(json.dumps(dict(verified=path.relative_to(ROOT).as_posix(),records=len(rows),total=total)),flush=True)
+    write(output,dict(passed=True,certificates=total,small_dp_certificates=dp_checks,distinct_contract_proof_replays=len(replayed),records=records,
         scope='exact dyadic lower-contract replay, complete DP layers and safe scalable caps; no native search rerun'))
     print(json.dumps(dict(passed=True,certificates=total,small_dp_certificates=dp_checks)))
 if __name__=='__main__':verify(sys.argv[1],sys.argv[2])

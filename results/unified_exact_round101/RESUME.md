@@ -1,5 +1,9 @@
 # Round101 recovery state
 
+Latest delivery of the recovery/admission is `704222f96`. Performance driver session24508 remains active; original V50 arm7 ROOT is running, arms8 P/9 ENS are admitted in their original sequential order. At the last lightweight check (17:40 local), arm7 had run780s, provisional U=.34631775584039837,L=.20046721422812955, not a formal endpoint. There is no active heavyweight monitor, compilation, compression, certificate replay or review agent. Poll this existing session and actual PID/state; do not restart the driver.
+
+Postperformance-only prepared readers now include `round101_reporting_core.py` and `round101_clock_core.py` (explicit R100 adaptations), `round101_final_audit.py` (all NEJ1 receipt/pin/protected-file/fee reconciliation), the exact-dyadic verifier with identical-contract/proof memoization, physical witness-vs-row checker, and compact package with >=256KiB local-large-artifact index. They have not been run yet; keep any engineering failures and repair readers without rewriting raw evidence. `final_report.md` is explicitly a pending working report and `reproduce.md` explains one-time vs fresh-label entry points. Do not claim final independent review or PR exists.
+
 ## Current authoritative stage
 
 The uniform final-source FLEET-ROOT candidate is frozen; all three one-time confirmation inputs were generated after freeze and retained. No further parameter, family, strength, range, numeric-contract, source or build changes are planned during confirmation.

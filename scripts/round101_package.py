@@ -68,19 +68,22 @@ def package(label,campaigns):
     for p in sorted((OUT/'recovery06').glob('*.json')):
         copy(p,Path('recovery06')/p.name)
     # Hash only this round's local tree, with explicit inherited matrix additions.
-    artifacts=[]
+    artifacts=[];local_count=0;local_bytes=0
     for path in sorted(OUT.rglob('*')):
         if not path.is_file() or path==OUT/'preexisting_untracked_paths.txt':continue
+        local_count+=1;local_bytes+=path.stat().st_size
+        if path.stat().st_size<262144:continue
         artifacts.append(dict(path=path.relative_to(ROOT).as_posix(),bytes=path.stat().st_size,sha256=sha(path)))
     for record in read(OUT/'diagnostics/lp01/summary.json')['records']:
         path=ROOT/record['actual_source'];assert sha(path)==record['actual_sha256']
         artifacts.append(dict(path=record['actual_source'],bytes=path.stat().st_size,sha256=record['actual_sha256'],
             inherited_actual_matrix=True))
     write(target/'manifest.json',dict(copies=copied,selected_native_records=selected,
-        all_local_artifacts=artifacts,optimizer_calls=0,script_sha256=sha(__file__),
+        large_local_artifacts=artifacts,local_file_count=local_count,local_total_bytes=local_bytes,
+        large_index_minimum_bytes=262144,optimizer_calls=0,script_sha256=sha(__file__),
         exclusions=['This final manifest itself, to avoid self-hash recursion','Preexisting unrelated untracked-path inventory,103MB'],
         original_native01_PE_missing=True,
-        scope='Complete local Round101 tree and four explicitly cited inherited matrices at packaging time; compact retained real rows/points/routes/receipts. Later final report/review/PR metadata are tracked separately. No native search rerun.'))
+        scope='Round101 local files>=256KiB plus four explicitly cited inherited matrices at packaging time; exact-byte compact copies and retained real rows/points/routes/receipts have their own hashes. Smaller journal events remain local and are verified against observations by the final audit; they are not replaced with hashes. Later final report/review/PR metadata are tracked separately. No native search rerun.'))
     print(json.dumps(dict(passed=True,local_files=len(artifacts),compact_copies=len(copied),native_samples=len(selected),Optimize=0)))
 
 if __name__=='__main__':package(sys.argv[1],sys.argv[2:])
