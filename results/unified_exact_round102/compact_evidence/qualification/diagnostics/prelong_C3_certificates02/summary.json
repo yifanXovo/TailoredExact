@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "Optimize": 0,
+  "certificates": 17,
+  "distinct_supports": 15,
+  "physical_row_witness_checks": 2992,
+  "unique_physical_witnesses": {
+    "defa0feb33841eca3d1079d9e7a6908a84b8ddecf5ffb308fdadf0037d491ec3": 176
+  },
+  "records": [
+    {
+      "path": "results/unified_exact_round102/confirmation01/raw/03_R98-C3_J-SUBMIT/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "0f1951bee4dab9a18f5d1ba0f6e806d77bc511cd051d38eedce817368b0fcf8c",
+      "rows": 2,
+      "API0": 2
+    },
+    {
+      "path": "results/unified_exact_round102/confirmation01/raw/03_R98-C3_J-SUBMIT/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "2159bc4fde764c5069d2f09e9b588401cfe4319651725b9883e89be4204f0ab5",
+      "rows": 15,
+      "API0": 15
+    }
+  ],
+  "seconds": 0.7532731000101194,
+  "script_sha256": "ba0c1587d2c663bcad21fb9a63f6315ec987ec16c678265f304337c8d6d55b76",
+  "scope": "Actual signed dyadic rows, global lower-contract containment, complete integer support upper replay, original physical routes; no independent native search or later full vector reconstruction"
+}

@@ -1,0 +1,70 @@
+{
+  "roles": [
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "J-SUBMIT"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true,
+      "question": "Medium heterogeneous service-coordinate mechanism and real P disadvantage, complete budget UB/LB trajectories."
+    },
+    {
+      "id": "R99-N2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        16,
+        22,
+        28
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "shortage",
+      "T_seconds": 6600,
+      "cap_seconds": 1800,
+      "method_order": [
+        "J-SUBMIT",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "input_path": "reference/round99_confirmation/N2.txt",
+      "instance_path": "reference/round99_confirmation/N2.txt",
+      "input_sha256": "370cb51b4d2351b3881cd74ab93406d76834efcf856430f742b8f243a9060a27",
+      "scenario_id": "round99-discrete-structure-confirmation-v1-N2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 601,
+      "total_target": 647,
+      "zero_excluded_by_stock_shortage": true,
+      "question": "Medium heterogeneous service-coordinate mechanism and real P disadvantage, complete budget UB/LB trajectories."
+    }
+  ],
+  "phase": "service development",
+  "reference_billing": "one_finite_batch",
+  "maximum_optimize_calls_per_arm": 8,
+  "uniform_candidate": "two exact-integer profit directions, audited DP, root-only, no R101 or M-B stacking",
+  "questions": "Medium heterogeneous service-coordinate mechanism and real P disadvantage, complete budget UB/LB trajectories.",
+  "planned_once": true
+}

@@ -1,0 +1,98 @@
+{
+  "fees": [
+    {
+      "label": "independent_final_N3",
+      "starts": 1,
+      "seconds": 3,
+      "observed_shell_call_wall_seconds": 2.1351147,
+      "actual_outer_seconds": null,
+      "observed_python_section_seconds": 1.8130219,
+      "observed_DP_section_seconds": [0.9304757, 0.8616607],
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent final N3 signed supports4516/197 and exact submitted activity recomputation after all performance ended, with an actual reject-on-active-process gate. Complete shell-call wall observed; conservative upward3-second fee, not a reconstructed child-process receipt. Four separate source-only reads totaling1.5054848 seconds are engineering. No subsequent mathematical calculation or native search."
+    },
+    {
+      "label": "independent_preconfirmation_N2_F5",
+      "starts": 1,
+      "seconds": 13,
+      "actual_outer_seconds": null,
+      "observed_python_section_seconds": 11.9207553,
+      "observed_DP_section_seconds": 11.5485136,
+      "shell_wait_chunks_seconds": [10.0087665, 0.0000107],
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent full N2 support and old-matrix/F5 prerequisite recomputation while performance idle. Conservative 13-second allowance; complete process outer time is unknown and is not reconstructed from wait chunks. Separate source-only shell reads 0.2558943 and 0.2565865 seconds are engineering, not experiments."
+    },
+    {
+      "label": "initial_direct_screen_import_failure",
+      "starts": 1,
+      "seconds": 1.0,
+      "actual_outer_seconds": null,
+      "failed": true,
+      "Optimize_calls": 0,
+      "stop_reason": "missing_numpy_before_environment_or_Optimize",
+      "scope": "Retrospective conservative one-second charge for a direct failed diagnostic startup before the exclusive wrapper; approximately0.258s tool wall observed, exact process boundary not retained. Not a reconstructed receipt."
+    },
+    {
+      "label": "independent_support_initial",
+      "starts": 1,
+      "seconds": 3,
+      "observed_shell_call_wall_seconds": 2.4637341,
+      "actual_outer_seconds": null,
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": true,
+      "stop_reason": "normal_return",
+      "scope": "Independent reviewer recorded complete shell-call wall; conservative upward integer-second fee, not a reconstructed child-process receipt. Pure mathematical recomputation, no native search. Initial engineering overlap has no performance credit."
+    },
+    {
+      "label": "independent_support_gated_redo",
+      "starts": 1,
+      "seconds": 4,
+      "observed_shell_call_wall_seconds": 3.6983263,
+      "actual_outer_seconds": null,
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent reviewer recorded complete shell-call wall; conservative upward integer-second fee, not a reconstructed child-process receipt. Pure mathematical recomputation, no native search. Initial engineering overlap has no performance credit."
+    },
+    {
+      "label": "independent_native_single_car",
+      "starts": 1,
+      "seconds": 3,
+      "observed_shell_call_wall_seconds": 2.0730498,
+      "actual_outer_seconds": null,
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent reviewer recorded complete shell-call wall; conservative upward integer-second fee, not a reconstructed child-process receipt. Pure mathematical recomputation, no native search. Initial engineering overlap has no performance credit."
+    },
+    {
+      "label": "independent_native02_submission",
+      "starts": 1,
+      "seconds": 2,
+      "observed_shell_call_wall_seconds": 1.462382,
+      "actual_outer_seconds": null,
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent reviewer recorded complete shell-call wall; conservative upward integer-second fee, not a reconstructed child-process receipt. Pure mathematical recomputation, no native search. Initial engineering overlap has no performance credit."
+    }
+  ],
+  "nonexperimental_failures": [
+    {
+      "reason": "PowerShell parser rejected script-generation command before execution",
+      "experimental_starts": 0,
+      "Optimize_calls": 0,
+      "scope": "Engineering syntax failure; no child diagnostic process/result"
+    }
+  ]
+}

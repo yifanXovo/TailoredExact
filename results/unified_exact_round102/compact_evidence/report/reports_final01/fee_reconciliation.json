@@ -1,0 +1,559 @@
+{
+  "completed_starts": 56,
+  "completed_seconds": 43126.28325889993,
+  "reserved_starts": 0,
+  "reserved_seconds": 0,
+  "maximum_plan_starts": 56,
+  "maximum_plan_seconds": 43126.28325889993,
+  "within_limits": true,
+  "remaining_starts": 16,
+  "remaining_seconds": 36873.71674110007,
+  "fees": [
+    {
+      "label": "confirmation01/1/R98-C3/P-GRB",
+      "seconds": 1797.4916720999754,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.1559999999881,
+      "observed_end_to_end_seconds": 1797.3439999999828,
+      "additional_postexit_audit_seconds": 0.14767209999263287,
+      "actual_Optimize_calls": 1,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "confirmation01/2/R98-C3/ENS-C",
+      "seconds": 1797.522466399998,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.125,
+      "observed_end_to_end_seconds": 1797.3600000000151,
+      "additional_postexit_audit_seconds": 0.16246639998280443,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "confirmation01/3/R98-C3/J-SUBMIT",
+      "seconds": 1797.5198964999872,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.1870000000054,
+      "observed_end_to_end_seconds": 1797.375,
+      "additional_postexit_audit_seconds": 0.14489649998722598,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "confirmation01/reference_batch",
+      "seconds": 0.9782490000070538,
+      "starts": 1,
+      "Optimize_calls": 0
+    },
+    {
+      "label": "confirmation_long01/1/R99-N3/J-SUBMIT",
+      "seconds": 3597.670091799984,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 3597.2189999999828,
+      "observed_end_to_end_seconds": 3597.4379999999946,
+      "additional_postexit_audit_seconds": 0.23209179998957552,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "confirmation_long01/2/R99-N3/P-GRB",
+      "seconds": 3597.529038299981,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 3597.1720000000205,
+      "observed_end_to_end_seconds": 3597.375,
+      "additional_postexit_audit_seconds": 0.15403829998103902,
+      "actual_Optimize_calls": 1,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "confirmation_long01/3/R99-N3/ENS-C",
+      "seconds": 3597.6942993999983,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 3597.2660000000033,
+      "observed_end_to_end_seconds": 3597.469000000012,
+      "additional_postexit_audit_seconds": 0.22529939998639748,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "confirmation_long01/reference_batch",
+      "seconds": 0.9794898999971338,
+      "starts": 1,
+      "Optimize_calls": 0
+    },
+    {
+      "label": "development01/1/R98-C2/P-GRB",
+      "seconds": 1797.4667258000118,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.1410000000033,
+      "observed_end_to_end_seconds": 1797.3910000000033,
+      "additional_postexit_audit_seconds": 0.07572580000851303,
+      "actual_Optimize_calls": 1,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "development01/2/R98-C2/ENS-C",
+      "seconds": 1797.401080199983,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.1409999999742,
+      "observed_end_to_end_seconds": 1797.3439999999828,
+      "additional_postexit_audit_seconds": 0.05708020000020042,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "development01/3/R98-C2/J-SUBMIT",
+      "seconds": 1797.4208507000003,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.1570000000065,
+      "observed_end_to_end_seconds": 1797.3600000000151,
+      "additional_postexit_audit_seconds": 0.06085069998516701,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "development01/4/R99-N2/J-SUBMIT",
+      "seconds": 1797.4230489000038,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.1719999999914,
+      "observed_end_to_end_seconds": 1797.375,
+      "additional_postexit_audit_seconds": 0.04804890000377782,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "development01/5/R99-N2/P-GRB",
+      "seconds": 1797.4647191000113,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.1870000000054,
+      "observed_end_to_end_seconds": 1797.3910000000033,
+      "additional_postexit_audit_seconds": 0.07371910000802018,
+      "actual_Optimize_calls": 1,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "development01/6/R99-N2/ENS-C",
+      "seconds": 1797.4239574999956,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.1719999999914,
+      "observed_end_to_end_seconds": 1797.375,
+      "additional_postexit_audit_seconds": 0.048957499995594844,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "development01/reference_batch",
+      "seconds": 0.6434274000057485,
+      "starts": 1,
+      "Optimize_calls": 0
+    },
+    {
+      "label": "isolation03/1/F2/J-SHADOW",
+      "seconds": 550.5290894999926,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 550.2190000000119,
+      "observed_end_to_end_seconds": 550.4219999999914,
+      "additional_postexit_audit_seconds": 0.10708950000116602,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "isolation03/reference_batch",
+      "seconds": 0.1538838999986183,
+      "starts": 1,
+      "Optimize_calls": 0
+    },
+    {
+      "label": "isolation04/1/R99-N2/J-SHADOW",
+      "seconds": 1797.4061505999707,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1797.1570000000065,
+      "observed_end_to_end_seconds": 1797.359999999986,
+      "additional_postexit_audit_seconds": 0.04615059998468496,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "isolation04/reference_batch",
+      "seconds": 0.34293469999101944,
+      "starts": 1,
+      "Optimize_calls": 0
+    },
+    {
+      "label": "long_tail01/1/F5/ENS-C",
+      "seconds": 3597.582217899995,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 3597.2179999999935,
+      "observed_end_to_end_seconds": 3597.4219999999914,
+      "additional_postexit_audit_seconds": 0.16021790000377223,
+      "actual_Optimize_calls": 7,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "long_tail01/2/F5/J-SUBMIT",
+      "seconds": 3597.559803500015,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 3597.1879999999946,
+      "observed_end_to_end_seconds": 3597.4070000000065,
+      "additional_postexit_audit_seconds": 0.15280350000830367,
+      "actual_Optimize_calls": 7,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "long_tail01/3/F5/P-GRB",
+      "seconds": 3597.5269893000077,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 3597.1570000000065,
+      "observed_end_to_end_seconds": 3597.3910000000033,
+      "additional_postexit_audit_seconds": 0.13598930000443943,
+      "actual_Optimize_calls": 1,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "long_tail01/reference_batch",
+      "seconds": 1.0053177999798208,
+      "starts": 1,
+      "Optimize_calls": 0
+    },
+    {
+      "label": "native01/1/F2/J-SHADOW",
+      "seconds": 117.83067869997467,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 117.59400000001187,
+      "observed_end_to_end_seconds": 117.81299999999464,
+      "additional_postexit_audit_seconds": 0.01767869998002425,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "native01/2/F2/J-SUBMIT",
+      "seconds": 117.35998979999567,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 117.09299999999348,
+      "observed_end_to_end_seconds": 117.34299999999348,
+      "additional_postexit_audit_seconds": 0.01698980000219308,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "native01/reference_batch",
+      "seconds": 0.32858880001003854,
+      "starts": 1,
+      "Optimize_calls": 0
+    },
+    {
+      "label": "native02/1/F2/J-SHADOW",
+      "seconds": 117.78367620002246,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 117.51500000001397,
+      "observed_end_to_end_seconds": 117.76500000001397,
+      "additional_postexit_audit_seconds": 0.018676200008485466,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "native02/2/F2/J-SUBMIT",
+      "seconds": 117.36002500000177,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 117.13999999998487,
+      "observed_end_to_end_seconds": 117.34299999999348,
+      "additional_postexit_audit_seconds": 0.01702500000828877,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "native02/reference_batch",
+      "seconds": 0.3137801999982912,
+      "starts": 1,
+      "Optimize_calls": 0
+    },
+    {
+      "label": "protection01/1/F2/ENS-C",
+      "seconds": 572.1518295000133,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 571.8600000000151,
+      "observed_end_to_end_seconds": 572.0629999999946,
+      "additional_postexit_audit_seconds": 0.088829500018619,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "protection01/2/F2/J-SUBMIT",
+      "seconds": 521.1854455999855,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 520.875,
+      "observed_end_to_end_seconds": 521.1089999999967,
+      "additional_postexit_audit_seconds": 0.0764455999888014,
+      "actual_Optimize_calls": 5,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "protection01/3/F2/P-GRB",
+      "seconds": 1197.4309588000178,
+      "starts": 1,
+      "failed": false,
+      "process_seconds": 1197.1560000000172,
+      "observed_end_to_end_seconds": 1197.4060000000172,
+      "additional_postexit_audit_seconds": 0.024958800000604242,
+      "actual_Optimize_calls": 1,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "protection01/reference_batch",
+      "seconds": 0.15263060000143014,
+      "starts": 1,
+      "Optimize_calls": 0
+    },
+    {
+      "label": "fees/cpp_replay01",
+      "seconds": 4.681025099998806,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/final_certificates01",
+      "seconds": 1.383018099993933,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/final_certificates02",
+      "seconds": 3.096250400005374,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/final_F5_points01",
+      "seconds": 4.309056600002805,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/final_native_points01",
+      "starts": 1,
+      "seconds": 1.0,
+      "actual_outer_seconds": null,
+      "observed_shell_call_wall_seconds": 0.1639354,
+      "failed": true,
+      "actual_Optimize_calls": 0,
+      "stop_reason": "CreateProcess_FileNotFound_before_child_start",
+      "scope": "The positional REMAINDER captured --cap as executable because options followed the label. Parent launcher failed before creating a child/Env/Optimize. Exclusive launch/stdout/stderr files remain; no child receipt exists. Conservative one-second startup allowance, not a reconstructed child timing. Retry uses a fresh label and options before the label."
+    },
+    {
+      "label": "fees/final_native_points02",
+      "seconds": 3.107893799984595,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/final_simple_budget01",
+      "seconds": 0.5768341999792028,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/final_simple_budget02",
+      "seconds": 0.6851947999966796,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/lp01",
+      "seconds": 185.89765130000887,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 24,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/native_points01",
+      "seconds": 1.0802149999944959,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/prelong_C3_certificates01",
+      "seconds": 0.0660210000060033,
+      "starts": 1,
+      "failed": true,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/prelong_C3_certificates02",
+      "seconds": 1.3726818000141066,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/prelong_C3_points01",
+      "seconds": 4.488426000025356,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/prelong_N3_certificates01",
+      "seconds": 1.2467887999955565,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/prelong_N3_points01",
+      "seconds": 4.295971800020197,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "fees/screen01",
+      "seconds": 3.3632267999928445,
+      "starts": 1,
+      "failed": false,
+      "maximum_Optimize_calls": 0,
+      "stop_reason": "normal_return"
+    },
+    {
+      "label": "independent_final_N3",
+      "starts": 1,
+      "seconds": 3,
+      "observed_shell_call_wall_seconds": 2.1351147,
+      "actual_outer_seconds": null,
+      "observed_python_section_seconds": 1.8130219,
+      "observed_DP_section_seconds": [
+        0.9304757,
+        0.8616607
+      ],
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent final N3 signed supports4516/197 and exact submitted activity recomputation after all performance ended, with an actual reject-on-active-process gate. Complete shell-call wall observed; conservative upward3-second fee, not a reconstructed child-process receipt. Four separate source-only reads totaling1.5054848 seconds are engineering. No subsequent mathematical calculation or native search."
+    },
+    {
+      "label": "independent_preconfirmation_N2_F5",
+      "starts": 1,
+      "seconds": 13,
+      "actual_outer_seconds": null,
+      "observed_python_section_seconds": 11.9207553,
+      "observed_DP_section_seconds": 11.5485136,
+      "shell_wait_chunks_seconds": [
+        10.0087665,
+        1.07e-05
+      ],
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent full N2 support and old-matrix/F5 prerequisite recomputation while performance idle. Conservative 13-second allowance; complete process outer time is unknown and is not reconstructed from wait chunks. Separate source-only shell reads 0.2558943 and 0.2565865 seconds are engineering, not experiments."
+    },
+    {
+      "label": "initial_direct_screen_import_failure",
+      "starts": 1,
+      "seconds": 1.0,
+      "actual_outer_seconds": null,
+      "failed": true,
+      "Optimize_calls": 0,
+      "stop_reason": "missing_numpy_before_environment_or_Optimize",
+      "scope": "Retrospective conservative one-second charge for a direct failed diagnostic startup before the exclusive wrapper; approximately0.258s tool wall observed, exact process boundary not retained. Not a reconstructed receipt."
+    },
+    {
+      "label": "independent_support_initial",
+      "starts": 1,
+      "seconds": 3,
+      "observed_shell_call_wall_seconds": 2.4637341,
+      "actual_outer_seconds": null,
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": true,
+      "stop_reason": "normal_return",
+      "scope": "Independent reviewer recorded complete shell-call wall; conservative upward integer-second fee, not a reconstructed child-process receipt. Pure mathematical recomputation, no native search. Initial engineering overlap has no performance credit."
+    },
+    {
+      "label": "independent_support_gated_redo",
+      "starts": 1,
+      "seconds": 4,
+      "observed_shell_call_wall_seconds": 3.6983263,
+      "actual_outer_seconds": null,
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent reviewer recorded complete shell-call wall; conservative upward integer-second fee, not a reconstructed child-process receipt. Pure mathematical recomputation, no native search. Initial engineering overlap has no performance credit."
+    },
+    {
+      "label": "independent_native_single_car",
+      "starts": 1,
+      "seconds": 3,
+      "observed_shell_call_wall_seconds": 2.0730498,
+      "actual_outer_seconds": null,
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent reviewer recorded complete shell-call wall; conservative upward integer-second fee, not a reconstructed child-process receipt. Pure mathematical recomputation, no native search. Initial engineering overlap has no performance credit."
+    },
+    {
+      "label": "independent_native02_submission",
+      "starts": 1,
+      "seconds": 2,
+      "observed_shell_call_wall_seconds": 1.462382,
+      "actual_outer_seconds": null,
+      "Optimize_calls": 0,
+      "failed": false,
+      "engineering_build_overlap": false,
+      "stop_reason": "normal_return",
+      "scope": "Independent reviewer recorded complete shell-call wall; conservative upward integer-second fee, not a reconstructed child-process receipt. Pure mathematical recomputation, no native search. Initial engineering overlap has no performance credit."
+    }
+  ],
+  "reserved": [],
+  "incomplete": [],
+  "engineering_separate": true,
+  "internal_Optimize_not_double_billed": true,
+  "seconds_scope": "Observed end-to-end receipts plus recorded postexit offline audits and explicit conservative allowances; unknown exact process durations remain labeled"
+}

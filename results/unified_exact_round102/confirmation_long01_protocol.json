@@ -1,0 +1,48 @@
+{
+  "roles": [
+    {
+      "id": "R99-N3",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        18,
+        24,
+        30,
+        36
+      ],
+      "geometry": "anisotropic_cloud",
+      "inventory": "shortage",
+      "T_seconds": 7800,
+      "cap_seconds": 3600,
+      "method_order": [
+        "J-SUBMIT",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "input_path": "reference/round99_confirmation/N3.txt",
+      "instance_path": "reference/round99_confirmation/N3.txt",
+      "input_sha256": "ad91afda9588e4adbfd104d8a54c89a2800b91dda6fd10a21e079f072c41763f",
+      "scenario_id": "round99-discrete-structure-confirmation-v1-N3",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 960,
+      "total_target": 1033,
+      "zero_excluded_by_stock_shortage": true,
+      "design_isolated_in_R102": true,
+      "historical_role_not_globally_unseen": true,
+      "selection": "The two retained larger roles C3/N3 in the prereferenced old input families; no outcomes/LPs inspected or reseed.",
+      "metadata_source": "results/unified_exact_round99/confirmation_protocol01.json",
+      "metadata_sha256": "6a31d455ca0ec99fc01d6a63f709a707b1c1dd54fa58de1648f811fd53bb8c4a",
+      "question": "Does the unchanged uniform original-service component generalize across new geography/heterogeneous capacities while preserving the P benchmark and certificate capability?"
+    }
+  ],
+  "phase": "service long",
+  "reference_billing": "one_finite_batch",
+  "maximum_optimize_calls_per_arm": 32,
+  "planned_once": true,
+  "uniform_candidate": "exact same frozen root two-direction single-car/fleet catalog, max2 selected, no parameter changes",
+  "questions": "Does the unchanged uniform original-service component generalize across new geography/heterogeneous capacities while preserving the P benchmark and certificate capability?",
+  "stage_admission": "After completing C3, unchanged candidate remains valid; this second untouched role resolves generalization and one required design-isolated long window",
+  "no_fresh_extension_or_checkpoint_stitching": true
+}

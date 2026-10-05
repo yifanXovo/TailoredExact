@@ -183,3 +183,8 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /tests/round101* -text whitespace=cr-at-eol
 /reference/round101_confirmation/** -text
 /results/unified_exact_round101/**/*.log -whitespace
+
+# Round102 proof/receipt/driver hashes retain exact bytes across checkout.
+/results/unified_exact_round102/** -text whitespace=cr-at-eol
+/scripts/round102*.py -text whitespace=cr-at-eol
+/results/unified_exact_round102/**/*.log -whitespace
