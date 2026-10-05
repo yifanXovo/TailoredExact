@@ -1,0 +1,515 @@
+{
+  "stages": [
+    "confirmation01",
+    "confirmation_long01",
+    "long_tail01"
+  ],
+  "arms": 9,
+  "physical_reference_children": 3,
+  "planned_arm_cap_seconds": 24300,
+  "sequential": true,
+  "no_retries": true,
+  "no_redraw": true,
+  "no_candidate_revision": true,
+  "production_freeze_sha256": "275c4ad5692d93f3962754caf74462e313fd6da9ad6862f26a78a0d55fd7920d",
+  "confirmation_freeze_sha256": "304727ff56952f3c8d286192ae630cfee93dcf2824e0565369f66215967b8010",
+  "admission_sha256": "dd14b782eca67f69edc448f6017706fc662b4c68265b505b26f717b448a77837",
+  "wrapper_sha256": "e05a99e7500587fe0587c92a90ec8922487be47253a3c5f1cd0ef83b4199a854",
+  "budget_before_batch": {
+    "completed_starts": 56,
+    "completed_seconds": 20582.106283300003,
+    "reserved_starts": 0,
+    "reserved_seconds": 0,
+    "maximum_plan_starts": 56,
+    "maximum_plan_seconds": 20582.106283300003,
+    "within_limits": true,
+    "remaining_starts": 16,
+    "remaining_seconds": 59417.8937167,
+    "fees": [
+      {
+        "label": "development01/1/R98-C2/P-GRB",
+        "seconds": 1797.466279299988,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1797.1570000000065,
+        "observed_end_to_end_seconds": 1797.375,
+        "additional_postexit_audit_seconds": 0.0912792999879457,
+        "native_Optimize_calls": 1,
+        "auxiliary_Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "development01/2/R98-C2/H-SUBMIT",
+        "seconds": 1797.5185014999588,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1797.125,
+        "observed_end_to_end_seconds": 1797.3899999999558,
+        "additional_postexit_audit_seconds": 0.12850150000303984,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 251,
+        "DP_calls": 250,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "development01/3/R98-C2/ENS-C",
+        "seconds": 1797.386088499974,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1797.1089999999967,
+        "observed_end_to_end_seconds": 1797.3279999999795,
+        "additional_postexit_audit_seconds": 0.058088499994482845,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "development01/4/R99-N2/ENS-C",
+        "seconds": 1797.4206539000152,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1797.1410000000033,
+        "observed_end_to_end_seconds": 1797.375,
+        "additional_postexit_audit_seconds": 0.04565390001516789,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "development01/5/R99-N2/P-GRB",
+        "seconds": 1797.4161228000885,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1797.1560000000172,
+        "observed_end_to_end_seconds": 1797.344000000041,
+        "additional_postexit_audit_seconds": 0.07212280004750937,
+        "native_Optimize_calls": 1,
+        "auxiliary_Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "development01/6/R99-N2/H-SUBMIT",
+        "seconds": 1797.5225491000456,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1797.1720000000205,
+        "observed_end_to_end_seconds": 1797.390000000014,
+        "additional_postexit_audit_seconds": 0.13254910003161058,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 307,
+        "DP_calls": 306,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "development01/reference_batch",
+        "seconds": 0.6373928999528289,
+        "starts": 2,
+        "inherited_finite_batch_billing_units": 1,
+        "Optimize_calls": 0,
+        "conservative_actual_child_start_count": true
+      },
+      {
+        "label": "native01/1/F2/H-SHADOW",
+        "seconds": 117.74987319999491,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 117.51500000001397,
+        "observed_end_to_end_seconds": 117.71799999999348,
+        "additional_postexit_audit_seconds": 0.031873200001427904,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 19,
+        "DP_calls": 18,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "native01/2/F2/H-SUBMIT",
+        "seconds": 117.34869049998815,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 117.10899999999674,
+        "observed_end_to_end_seconds": 117.2960000000021,
+        "additional_postexit_audit_seconds": 0.05269049998605624,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 19,
+        "DP_calls": 18,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "native01/reference_batch",
+        "seconds": 0.33668320000288077,
+        "starts": 1,
+        "inherited_finite_batch_billing_units": 1,
+        "Optimize_calls": 0,
+        "conservative_actual_child_start_count": true
+      },
+      {
+        "label": "protection01/1/F2/H-SUBMIT",
+        "seconds": 635.051770799997,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 634.6410000000033,
+        "observed_end_to_end_seconds": 634.8589999999967,
+        "additional_postexit_audit_seconds": 0.19277080000028946,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 19,
+        "DP_calls": 18,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "protection01/2/F2/ENS-C",
+        "seconds": 575.7738489000185,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 575.4219999999914,
+        "observed_end_to_end_seconds": 575.6719999999914,
+        "additional_postexit_audit_seconds": 0.10184890002710745,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "protection01/3/F2/P-GRB",
+        "seconds": 1197.470070499985,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1197.2029999999795,
+        "observed_end_to_end_seconds": 1197.4379999999655,
+        "additional_postexit_audit_seconds": 0.03207050001947209,
+        "native_Optimize_calls": 1,
+        "auxiliary_Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "protection01/4/F2/J-SUBMIT",
+        "seconds": 523.3924772000173,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 523.0939999999828,
+        "observed_end_to_end_seconds": 523.2970000000205,
+        "additional_postexit_audit_seconds": 0.09547719999682158,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "protection01/reference_batch",
+        "seconds": 0.15334820002317429,
+        "starts": 1,
+        "inherited_finite_batch_billing_units": 1,
+        "Optimize_calls": 0,
+        "conservative_actual_child_start_count": true
+      },
+      {
+        "label": "protection_C3/1/R98-C3/ENS-C",
+        "seconds": 1797.5535857000505,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1797.125,
+        "observed_end_to_end_seconds": 1797.3910000000033,
+        "additional_postexit_audit_seconds": 0.1625857000472024,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "protection_C3/2/R98-C3/H-SUBMIT",
+        "seconds": 1797.6636265999987,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1797.1570000000065,
+        "observed_end_to_end_seconds": 1797.359999999986,
+        "additional_postexit_audit_seconds": 0.30362660001264885,
+        "native_Optimize_calls": 5,
+        "auxiliary_Optimize_calls": 286,
+        "DP_calls": 285,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "protection_C3/3/R98-C3/P-GRB",
+        "seconds": 1797.5112371999421,
+        "starts": 1,
+        "failed": false,
+        "process_seconds": 1797.1410000000033,
+        "observed_end_to_end_seconds": 1797.359999999986,
+        "additional_postexit_audit_seconds": 0.15123719995608553,
+        "native_Optimize_calls": 1,
+        "auxiliary_Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "protection_C3/reference_batch",
+        "seconds": 0.9812418000074103,
+        "starts": 1,
+        "inherited_finite_batch_billing_units": 1,
+        "Optimize_calls": 0,
+        "conservative_actual_child_start_count": true
+      },
+      {
+        "label": "fees/anchor_point_C2_01",
+        "seconds": 18.673343299975386,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/anchor_point_F5_01",
+        "seconds": 23.89648899997701,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/anchor_selection_C2_01",
+        "seconds": 0.72619049999048,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/anchor_selection_F5_01",
+        "seconds": 1.003636200010078,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/capacity_anchor_C2_01",
+        "seconds": 91.43656009997358,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/capacity_anchor_F5_01",
+        "seconds": 358.36592089998885,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/capacity_C2_01",
+        "seconds": 77.2147330000007,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/capacity_F2_01",
+        "seconds": 134.6017661000078,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/capacity_F5_01",
+        "seconds": 334.3111884999962,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/evidence_development01",
+        "seconds": 1.3735281000263058,
+        "starts": 1,
+        "failed": true,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/evidence_development02",
+        "seconds": 16.302447800000664,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/finalpoint_F5_01",
+        "seconds": 3.64553869998781,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/independent_review01",
+        "seconds": 6.027296599990223,
+        "starts": 1,
+        "failed": true,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/point_C2_native01",
+        "seconds": 0.7337514999962877,
+        "starts": 1,
+        "failed": true,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/point_C2_native02",
+        "seconds": 7.441949000000022,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/point_C2_raw01",
+        "seconds": 8.903077900002245,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/point_F2_native01",
+        "seconds": 2.194611100014299,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/point_F2_raw01",
+        "seconds": 1.185221099993214,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/point_F5_native01",
+        "seconds": 34.30008479999378,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/point_F5_raw01",
+        "seconds": 50.221410899976036,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/point_N2_native01",
+        "seconds": 13.449885500012897,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/point_N2_raw01",
+        "seconds": 8.214179800008424,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/primal_F5_anchor01",
+        "seconds": 9.377346399996895,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/primal_F5_base01",
+        "seconds": 10.212828799994895,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/reports_development01",
+        "seconds": 5.763769100012723,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/root_faults01",
+        "seconds": 5.271340700011933,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/same_domain01",
+        "seconds": 3.50474380000378,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/same_domain02",
+        "seconds": 3.876902499992866,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/small_hull01",
+        "seconds": 0.611566599982325,
+        "starts": 1,
+        "failed": true,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/small_hull02",
+        "seconds": 0.7918966000434011,
+        "starts": 1,
+        "failed": true,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "fees/small_hull03",
+        "seconds": 1.1190365999937057,
+        "starts": 1,
+        "failed": false,
+        "stop_reason": "normal_return"
+      },
+      {
+        "label": "rejected_overlapping_launch_preflight",
+        "starts": 1,
+        "seconds": 1.0,
+        "failed": true,
+        "Optimize_calls": 0,
+        "DP_calls": 0,
+        "stop_reason": "ensure_idle rejected before receipt creation",
+        "scope": "conservative allowance for observed0.911s shell attempt; no optimizer started and no overlap occurred"
+      },
+      {
+        "label": "root_faults01_nested_solver_children",
+        "starts": 2,
+        "seconds": 0,
+        "failed": false,
+        "scope": "conservative additional count for two physical solver children; their complete costs and reader are already inside root_faults01 receipt, not added twice"
+      },
+      {
+        "label": "small_hull02_nested_reference_child",
+        "starts": 1,
+        "seconds": 0,
+        "failed": false,
+        "Optimize_calls": 0,
+        "DP_calls": 0,
+        "scope": "Conservative additional physical reference-child count; its observed duration is inside the paid parent receipt and is not added twice"
+      },
+      {
+        "label": "small_hull03_nested_reference_child",
+        "starts": 1,
+        "seconds": 0,
+        "failed": false,
+        "Optimize_calls": 0,
+        "DP_calls": 0,
+        "scope": "Conservative additional physical reference-child count; its observed duration is inside the paid parent receipt and is not added twice"
+      }
+    ],
+    "reserved": [],
+    "incomplete": [],
+    "engineering_separate": true,
+    "internal_Optimize_not_double_billed": true,
+    "seconds_scope": "Observed end-to-end receipts plus recorded postexit offline audits and explicit conservative allowances; unknown exact process durations remain labeled"
+  }
+}

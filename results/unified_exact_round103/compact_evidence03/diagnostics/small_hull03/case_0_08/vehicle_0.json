@@ -1,0 +1,244 @@
+{
+  "status": "OUTSIDE",
+  "reason": "complete_domain_dyadic_support_row",
+  "vehicle": 0,
+  "seconds": 0.0014543000143021345,
+  "Optimize_calls": 1,
+  "DP_calls": 1,
+  "columns": 8,
+  "duplicates": 0,
+  "tolerance": 1e-08,
+  "zero_width_residual": 0.0,
+  "history": [
+    {
+      "iteration": 1,
+      "restricted_distance": 0.5,
+      "verified_combination_residual": 0.5,
+      "support_lower": 0.0,
+      "support_upper": 2.328305881427184e-10,
+      "pricing_quantization_error": 2.328305881427184e-10,
+      "full_distance_lower": 0.49999999976716936,
+      "quantized_violation": 0.4999999998835847,
+      "normalization": 0.9999999997671694,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  ],
+  "restricted_distance": 0.5,
+  "full_distance_lower": 0.5,
+  "weights": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      1431655765,
+      1431655765,
+      -1431655765
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "coefficient_scale": 4294967296,
+  "safe_rhs_rational": "0",
+  "exact_activity_rational": "4294967295/8589934592",
+  "exact_excess_rational": "4294967295/8589934592",
+  "support": {
+    "valid": true,
+    "vehicle": 0,
+    "upper": 0,
+    "resource_limit": 2,
+    "weights": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1431655765,
+        1431655765,
+        -1431655765
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "levels": [
+      [
+        3,
+        2,
+        0
+      ]
+    ],
+    "solution": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "anchors": [],
+    "anchor_travel": [
+      0
+    ]
+  },
+  "combination": [
+    {
+      "lambda_rational": "1/4",
+      "lambda_float": 0.25,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "lambda_rational": "1/4",
+      "lambda_float": 0.25,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "lambda_rational": "1/4",
+      "lambda_float": 0.25,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "lambda_rational": "1/4",
+      "lambda_float": 0.25,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "verified_distance_upper": 0.5,
+  "verified_distance_upper_rational": "1/2"
+}

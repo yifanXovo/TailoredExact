@@ -1,4 +1,4 @@
-# Round103 decisions (development in progress)
+# Round103 decisions
 
 1. Stack on R102 PR164 delivery0b5640f0de5a29abf6545962dd776a2fab198f90,
    rather than main. The supplied measured source and PE were verified.
@@ -37,9 +37,23 @@
 8. Short native shadow/submit runs are qualification only. Complete F2
    development uses1200s and contemporaneous P/ENS/H plus one R102-J
    attribution arm. C2/N2 development and known C3 regression protection
-   follow. A worthwhile frozen candidate must retain two design-isolated
-   confirmation roles and two common3600–7200s groups; none are yet
-   executed or claimed. Default adoption remains undecided and OFF.
+   followed at1800s. Mixed incremental evidence admitted the unchanged
+   candidate through immutable stage_decision.json. The once-frozen V30
+   confirmation900s, V50 confirmation3600s and F5 long-tail3600s three-arm
+   groups all completed, without revision, redraw or cancellation.
+9. Final results preserve real N2/H1/F5 gains and C2/C3/H2 regressions.
+   F2 certifies against censored P but loses59.187s/10.28% to ENS and
+   111.562s/21.32% to J. No severe certification-time regression is observed;
+   all new confirmation/long arms are unproved. final_decision.json says
+   not_promote. ENS-C remains default and H remains explicit research opt-in.
+   These results do not establish universal hull weakness, stable complete
+   speedup or pure-cut causality. No further domain/threshold/mode is opened.
+10. Final engineering reconciliation adds the contemporary J's52 inherited
+    DP calls omitted from the new-hull cost subset. Two original summary
+    counters and their SHA are checked by the last independent reader.
+    Old snapshots/review are preserved. All72 charged starts/44907.451783s,
+    102 native Optimize/19675 auxiliary Optimize/18624 DP calls are retained,
+    including failures/readers; nested seconds are never charged twice.
 
 Failures and precision limitations stay in the evidence and fee records.
 The initial C2-native NameError was billed and retried under a fresh label.

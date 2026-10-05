@@ -16,6 +16,24 @@
       "seconds": 0,
       "failed": false,
       "scope": "conservative additional count for two physical solver children; their complete costs and reader are already inside root_faults01 receipt, not added twice"
+    },
+    {
+      "label": "small_hull02_nested_reference_child",
+      "starts": 1,
+      "seconds": 0,
+      "failed": false,
+      "Optimize_calls": 0,
+      "DP_calls": 0,
+      "scope": "Conservative additional physical reference-child count; its observed duration is inside the paid parent receipt and is not added twice"
+    },
+    {
+      "label": "small_hull03_nested_reference_child",
+      "starts": 1,
+      "seconds": 0,
+      "failed": false,
+      "Optimize_calls": 0,
+      "DP_calls": 0,
+      "scope": "Conservative additional physical reference-child count; its observed duration is inside the paid parent receipt and is not added twice"
     }
   ]
 }

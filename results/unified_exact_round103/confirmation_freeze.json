@@ -1,0 +1,93 @@
+{
+  "roles": [
+    {
+      "id": "R103-H1",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        18,
+        24,
+        30
+      ],
+      "T_seconds": 7200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "input_path": "reference/round103_confirmation/H1.txt",
+      "instance_path": "reference/round103_confirmation/H1.txt",
+      "input_sha256": "fe37d6a8ca5bcc206dedc0127c9995a00c82961de50c2bea6fd6a8a41210afd1",
+      "seed": 103050301,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "H-SUBMIT"
+      ],
+      "total_initial": 540,
+      "total_target": 614,
+      "zero_excluded_by_stock_shortage": true,
+      "all_station_weights_positive": true,
+      "design_isolated_in_R103": true,
+      "historical_role_not_globally_unseen": false,
+      "selection": "Two fixed seeds and layouts, no outcomes/LPs/routes inspected; no redraw",
+      "geometry": "three_rings",
+      "lambda": 0.15
+    },
+    {
+      "id": "R103-H2",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        16,
+        22,
+        28,
+        34
+      ],
+      "T_seconds": 7200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "input_path": "reference/round103_confirmation/H2.txt",
+      "instance_path": "reference/round103_confirmation/H2.txt",
+      "input_sha256": "73fcfa9147dabeedfb2438b3383c02a8495f9fe82a7256d4244968fa16e15d4c",
+      "seed": 103050502,
+      "cap_seconds": 3600,
+      "method_order": [
+        "H-SUBMIT",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "total_initial": 947,
+      "total_target": 1076,
+      "zero_excluded_by_stock_shortage": true,
+      "all_station_weights_positive": true,
+      "design_isolated_in_R103": true,
+      "historical_role_not_globally_unseen": false,
+      "selection": "Two fixed seeds and layouts, no outcomes/LPs/routes inspected; no redraw",
+      "geometry": "bent_grid",
+      "lambda": 0.15
+    }
+  ],
+  "stages": [
+    {
+      "name": "confirmation01",
+      "path": "results/unified_exact_round103/confirmation01_protocol.json",
+      "sha256": "886682f0a3758f5b80e1ed0ed58c64af257531998c27438adc1e49d3b7ad4a8f"
+    },
+    {
+      "name": "confirmation_long01",
+      "path": "results/unified_exact_round103/confirmation_long01_protocol.json",
+      "sha256": "6585708d2c0b0a93748becd9235786016b7e21a3467edfc1d947e84d2748f910"
+    },
+    {
+      "name": "long_tail01",
+      "path": "results/unified_exact_round103/long_tail01_protocol.json",
+      "sha256": "710c18280e89045e1cdeffe98a6eb8bbc1de49ba8a5ef00f70a6df2816105649"
+    }
+  ],
+  "production_freeze_sha256": "275c4ad5692d93f3962754caf74462e313fd6da9ad6862f26a78a0d55fd7920d",
+  "generator_sha256": "4c5ce1be59c18d785fe3b4e2818a5df8131f1b841c60ede17e07feca62a40687",
+  "before_any_confirmation_search": true,
+  "no_redraw": true,
+  "Optimize_calls": 0,
+  "disclosure": "New synthetic inputs; broad shortages/geometries belong to established research families, these bytes/seeds have no earlier data.",
+  "long_groups": "H2 design-isolated V50 and F5 existing tail, each common3600s three arms; no short-window stitching"
+}

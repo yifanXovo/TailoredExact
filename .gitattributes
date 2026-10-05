@@ -188,3 +188,10 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /results/unified_exact_round102/** -text whitespace=cr-at-eol
 /scripts/round102*.py -text whitespace=cr-at-eol
 /results/unified_exact_round102/**/*.log -whitespace
+
+# Round103 frozen driver, proof, receipt and input hashes survive checkout.
+/results/unified_exact_round103/** -text whitespace=cr-at-eol
+/scripts/round103*.py -text whitespace=cr-at-eol
+/tests/round103* -text whitespace=cr-at-eol
+/reference/round103_confirmation/** -text
+/results/unified_exact_round103/**/*.log -whitespace

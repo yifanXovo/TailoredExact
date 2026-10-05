@@ -1,68 +1,84 @@
-# Round103 active work
+# Round103 completed research and delivery state
 
-Stacked base R102/PR164 delivery 0b5640f0de5a29abf6545962dd776a2fab198f90;
-measured source 2b65d483ecacd6084782922cff8c8252be9d3a63 and PE SHA
-f1c071135b6dd7cc84d92a71efec17aec33187747ad1829d53a1058576871c1d verified.
-Branch codex/round103-resource-hull-separation. Three protected user-file
-hashes are recorded in baseline.json. No AGENTS.md applies. Do not stage
-unrelated files or overwrite any historical results.
+Research, mandatory experimental groups, final evidence readers and independent
+review are complete. No solver/batch remains active and no research start is
+reserved. Do not resume or rerun any existing label. The final delivery is a
+new English draft stacked on R102/PR164; never merge or change defaults.
 
-ENS-C remains protected default; M-B, R101 and R102-J are not promoted.
-The initial independent read-only mathematical review passed dual signs,
-physical scales, restricted-master bound direction, exact floating resource
-domain and the unique-access Lagrangian boundary theorem. No independent
-Optimize or native B&B was performed.
+- Branch: codex/round103-resource-hull-separation.
+- R102 base branch: codex/round102-service-space-resource-cuts.
+- Verified inherited delivery:0b5640f0de5a29abf6545962dd776a2fab198f90.
+- Measured R103 source:317579b974336233472acd6db80f9f5a4478c880.
+- Measured PE:836b2ee3f7e373c8be0a1f2bdf5b6e06ac67a95ea7ef65374972288acdc862ea.
+- Actual Gurobi13.0.2 DLL:9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88.
+- Final reporting/packaging commits do not represent a newly measured executable.
 
-Implementation source committed03973eb16. Production candidate is a single
-self-paid standard LP/hull separation pass before each new qualified
-canonical MIP, base domain only, at most one reliable row per vehicle.
-It includes actual-matrix auditing, disposable Gurobi master LPs, complete
-support traceback, dyadic static rows, exact readback, actual canonical
-SHA/row signature/cache updates before journal/Start, failure propagation
-and preparation-inclusive native-event clocks. Build08 and native01
-shadow/submit qualification passed; neither120s run certifies F2.
-The submit run writes2 rows, actual canonicalSHA2dcb2f8f5f7ce7b2d7c1a6667c8648df26eed6b154cebd186cc9d359271c0175;
-formal Start passed all9271 rows and native acceptance. Preparation0.408s,
-19 auxiliary LP/18 DP calls; shadow0.266s. No callback Optimize/PreCrush.
+## Conclusions and actual completion
 
-All8 initial real full points classified. C2 base and3-anchor enhanced
-hull close within1e-8 at unchanged objective0.16123605049876005. F5 saved
-old terminal classification retains one1.28465e-8 UNKNOWN; separately
-paid finite-column upper witnesses bracket base/enhanced objective near
-0.244169448027537 with original full-matrix numerical residuals. Preserve
-signed tiny bracket inversion, do not clamp or claim rational equality.
-F2 base closes within1e-8 at0.638005040404497 vsL0=.528625649465355 and
-finiteLJ=.5286753357380306;827 rows,456 outer/3188 master LP/3105 DP,
-134.6018s. This substantial capability supports production branch A.
-Anchor strengthening separates old points but objective/cost evidence
-rejects it for production. same_domain02 verifies all C2/F5/F2 inherited
-literal R102 support RHS on actual C++ domain. Base1728 and anchor552
-independent support enumerations plus7 injected-master fixtures pass.
+Eight full real points distinguish reliable OUTSIDE from explicit INSIDE
+within1e-8 and honest UNKNOWN. C2 same-domain convexification closes at the
+unchanged0.16123605049876005 objective. F5 retains original UNKNOWN, with a
+separately checked numerical finite-column full-model upper witness near
+0.244169448027537 and preserved tiny signed bracket inversions. F2 closes
+within1e-8 at0.638005040404497 versus finiteLJ0.5286753357380306. These are
+qualified numerical LP results, not strict rational optimality proofs.
 
-Fresh fees/diagnostics are under this directory. Each auxiliary LP Optimize
-and DP has a record. Never rerun an existing label. Before resuming, inspect
-fee process.json/PID and receipt.json, plus actual process inventory; a lost
-tool session does not imply process death. Performance and builds stay serial.
-Never rebuild while any performance/independent numerical process is active.
-Use git -c gc.auto=0 for later commits to avoid automatic maintenance.
+The only domain enhancement, three-anchor masks, has no useful C2/F5 objective
+gain and is rejected for production. One base-domain candidate generates a
+self-paid standard-LP point and certificate before each new qualified
+canonical MIP, at most one reliable row per car; no historical imports,
+callback Optimize, internal time/Work dispatch or B&B restarts.
 
-CURRENT: Independent reviewer/root/independent_hull_review has an exclusive
-idle window for one paid independent_review01 numerical receipt (no Optimize,
-own selected F2 support recomputation and exact member/full-matrix checks).
-Main must wait for done and inspect actual process inventory before launching.
-No other solver/build/git/python was active at dispatch. Existing native01
-and all diagnostic receipts finished; sessions99519/92593 finished.
+All22 full arms plus2 short qualification arms returned normally and audited:
+F2 H/ENS/P/J1200, C2/N2/C3 P/ENS/H1800, untouched H1 V30 P/ENS/H900,
+untouched H2 V50 H/P/ENS3600, and F5 ENS/P/H3600. No redraw, candidate
+revision, cancellation or group remains pending. Actual H rows by role:
+F2 2,C2 3,N2 3,C3 4,H1 3,H2 4,F5 3. H1/F5 materially improve both references
+at late common budgets; N2 improves ENS while losing P. C2/C3/H2 regress
+against ENS. F2 certifies at634.859s versus ENS575.672/J523.297; P remains
+unproved at1197.438s. All nine confirmation/long arms remain unproved;
+eventual certification-time ordering is unknown. No severe certified-time
+regression is observed. final_decision.json says not_promote; ENS-C remains
+protected default and H explicit research opt-in. M-B/R101/R102-J remain
+unpromoted. No broad stable improvement or pure-cut causality is claimed.
 
-Next: preserve any independent findings; adjust audit-only UNKNOWN handling
-before freeze (current native audit assumes all DP returns valid), record
-source/PE/DLL/runner/protocol freeze, then protection01 F2 four arms1200s
-(H/ENS/P/J) and development01 C2/N2 three arms1800s. Native01 campaigns
-must not rerun. Add known C3 regression protection, then worthwhile frozen
-candidate2 isolated confirmations including nonzero V30/V50 and two common
-3600–7200s three-arm groups (one F5 tail). Budget currently23 diagnostic
-starts +1 native referencebatch +2 native arms, well below72/80k; recompute
-actual account including all readers, failures and rejectedpreflight allowance.
-No complete native performance or confirmation has yet been claimed.
-Then compact evidence/package, reports, fee tables, reproduce and English
-draft PR against R102 branch, attach and verify readable. Do not mark the
-goal complete before remaining mandatory work is actually completed.
+## Evidence, review and budget
+
+Use final_report.md, mathematical_algorithm.md, capability_table.md,
+decision_log.md, reproduce.md, production_freeze.json, confirmation_freeze.json,
+immutable stage_decision.json and final_decision.json. Exact per-arm/pair/common
+checkpoint/clock data are in reports_final01 and reports_final01_clocks,
+and delivered through compact_evidence03/report. The exact-byte manifest
+maps original/canonical LPs, full vectors, supports/combinations, Start rows
+and values, native proofs, physical witnesses and failed attempts. Large
+local artifacts are indexed; executables/DLL/licenses are not uploaded.
+
+small_hull03:32 actual full-enumeration cases,81 LP/33 DP. Two failed
+predecessors remain charged. Development execution-team replay:12 supports,
+9 model reads,1835 physical row/witness checks; final replay:10 supports,
+6 model reads,1928 checks. Both zero Optimize/no native B&B. The first
+replay's rejected double-DLL import is preserved and charged.
+
+Independent mathematical review recomputes two supports using40 alternate
+level DP, validates254 legal plans and reads6 models without Optimize.
+Its final overstrict legacy-BEGIN assertion exits1 after successful numeric
+sections; raw attempt and scoped conclusion are preserved. Historical display
+rounding/normalized rational-weight reason limitations are documented.
+Independent final metadata review02 passes25805 checks,0 errors/missing,
+26 warnings,782 paid-associated calls files/0 orphans; zero Gurobi import,
+Optimize, DP, model read or B&B. review01 and snapshots remain preserved.
+The corrected full DP ledger includes52 inherited contemporaneous J calls
+from two returned R102 summaries, without inventing BEGINs or adding time.
+
+Final research ledger:72 charged starts/44907.45178329994 outer seconds,
+native Optimize102,auxiliary Optimize19675,DP18624. No remaining research
+start; no nested seconds added twice. All failures/readers/conservative
+physical-child allowances are retained. Pure builds, fixtures, reconciliation
+and exact-byte packaging are separate engineering. fees_final01 contains the
+complete ledger; engineering_final.json records the final engineering cutoff.
+
+The three pre-existing modified user files remain outside this delivery;
+baseline.json binds their preserved hashes. Production C++/header/include
+sources and explicit performance helpers remain identical to their freeze.
+Future work requires a separately authorized round rather than another mode,
+threshold fit, redraw or unbudgeted reader in this completed round.
