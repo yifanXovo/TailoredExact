@@ -1,6 +1,6 @@
 # Round102 completed research and publication state
 
-All research, qualification, complete comparisons, two design-isolated confirmation roles and both3600s long groups are complete. Every performance process exited normally and all24 run audits passed. Independent mathematical and closing report/fee review finished. Draft PR publication is the remaining delivery step; no experiments, builds or review calculations are active.
+All research, qualification, complete comparisons, two design-isolated confirmation roles and both3600s long groups are complete. Every performance process exited normally and all24 run audits passed. Independent mathematical and closing report/fee review finished. Delivery is the new stacked draft [PR164](https://github.com/yifanXovo/TailoredExact/pull/164), attached to this chat. No experiments, builds or review calculations are active.
 
 Branch: codex/round102-service-space-resource-cuts. Stack base: codex/round101-fleet-event-cuts / PR163, head6a505855dc539f0d35a983c13ab22258480b79de. Measured R102 C++ source:2b65d483ecacd6084782922cff8c8252be9d3a63; later documentation/scripts/evidence commits do not constitute a rebuilt measured executable. Production PE SHA:f1c071135b6dd7cc84d92a71efec17aec33187747ad1829d53a1058576871c1d. production_freeze.json and confirmation_freeze.json retain source/input/runtime/parameter identities. All183 source bindings, PE/DLL and three protected user-file hashes were verified unchanged after packaging.
 
