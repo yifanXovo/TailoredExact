@@ -210,6 +210,7 @@ struct FixedIntervalLpConstraintEvidence {
 };
 
 struct FixedIntervalMipOutcome {
+    double round103_preparation_seconds = 0;
     bool optional_unknown = false;
     bool round65_optional_base_charged = false;
     bool round65_proof_bound_available = false;
@@ -535,6 +536,9 @@ public:
     virtual FixedIntervalMipOutcome solve(
         const FixedIntervalMipRequest& request) = 0;
     virtual void discardLeaf(const std::string&) {}
+    // R103 changes the canonical artifact before its native journal/Start/MIP.
+    // No callback optimization or interruption of an active native search.
+    virtual void prepareResourceHull(FixedIntervalMipRequest&) {}
     // Idempotently release native resources before the final statistics
     // snapshot when an evidence path must prove environment/model symmetry.
     virtual void release() {}

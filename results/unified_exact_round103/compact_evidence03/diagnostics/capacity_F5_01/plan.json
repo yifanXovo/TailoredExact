@@ -1,0 +1,40 @@
+{
+  "role": {
+    "id": "F5",
+    "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+    "family": "synthetic",
+    "geography": "perturbed_grid",
+    "inventory": "paired_shortage",
+    "V": 50,
+    "M": 4,
+    "Q": 30,
+    "complete_Q_vector": [
+      30,
+      30,
+      30,
+      30
+    ],
+    "T_seconds": 7200,
+    "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+    "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+    "source_manifest": "results/unified_exact_round86/protocol.json",
+    "method_order": [],
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "cap_seconds": 7200,
+    "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+    "Q_vector": [
+      30,
+      30,
+      30,
+      30
+    ]
+  },
+  "cap_seconds": 600.0,
+  "source": "results\\unified_exact_round100\\certification_CF01\\raw\\04_F5_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+  "source_sha256": "813d3f1b8e0cb890daf11432695dd01474b0acd383ae43581b21b707281472b7",
+  "question": "same-scope L0, finite R102 LJ, certified outer approximation LH; close only at all-member optimal point",
+  "reuse": "only plans generated during this self-paid diagnostic; no imported historical directions",
+  "original_MIP_tolerances_unchanged": true
+}

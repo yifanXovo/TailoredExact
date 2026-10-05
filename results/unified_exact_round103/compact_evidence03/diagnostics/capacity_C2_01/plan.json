@@ -1,0 +1,33 @@
+{
+  "role": {
+    "id": "R98-C2",
+    "V": 30,
+    "M": 3,
+    "Q_vector": [
+      20,
+      25,
+      30
+    ],
+    "geometry": "radial_spokes",
+    "inventory": "shortage",
+    "T_seconds": 7200,
+    "cap_seconds": 7200,
+    "method_order": [],
+    "input_path": "reference/round98_confirmation/C2.txt",
+    "instance_path": "reference/round98_confirmation/C2.txt",
+    "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+    "scenario_id": "round98-state-service-confirmation-v1-C2",
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "total_initial": 554,
+    "total_target": 600,
+    "zero_excluded_by_stock_shortage": true
+  },
+  "cap_seconds": 600.0,
+  "source": "results\\unified_exact_round100\\exports\\R98-C2\\ENS-C.lp",
+  "source_sha256": "41aacb59acd6bbb72cc56c9840a2ea0e47e0aad47a45304ad981bbd139a049bc",
+  "question": "same-scope L0, finite R102 LJ, certified outer approximation LH; close only at all-member optimal point",
+  "reuse": "only plans generated during this self-paid diagnostic; no imported historical directions",
+  "original_MIP_tolerances_unchanged": true
+}

@@ -13,6 +13,7 @@
 #include "NativeOtB1.hpp"
 #include "FleetEventCuts.hpp"
 #include "ServiceResourceCuts.hpp"
+#include "ServiceResourceHull.hpp"
 #include "MipStartMapping.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
@@ -70,6 +71,8 @@ struct GurobiApi {
     decltype(&GRBgeterrormsg) geterrormsg = nullptr;
     decltype(&GRBversion) version = nullptr;
     decltype(&GRBreadmodel) readmodel = nullptr;
+    decltype(&GRBnewmodel) newmodel = nullptr;
+    decltype(&GRBaddvar) addvar = nullptr;
     decltype(&GRBcopymodel) copymodel = nullptr;
     decltype(&GRBfreemodel) freemodel = nullptr;
     decltype(&GRBgetenv) getenv = nullptr;
@@ -213,6 +216,8 @@ bool loadGurobiApi(const SolveOptions& options,
     LOAD_GRB(geterrormsg, "GRBgeterrormsg");
     LOAD_GRB(version, "GRBversion");
     LOAD_GRB(readmodel, "GRBreadmodel");
+    LOAD_GRB(newmodel, "GRBnewmodel");
+    LOAD_GRB(addvar, "GRBaddvar");
     LOAD_GRB(freemodel, "GRBfreemodel");
     LOAD_GRB(getenv, "GRBgetenv");
     LOAD_GRB(setintparam, "GRBsetintparam");
@@ -1812,6 +1817,8 @@ public:
         out.failure_reason = failure_reason_;
         return out;
     }
+
+#include "Round103GurobiHull.inc"
 
     FixedIntervalMipOutcome solve(
         const FixedIntervalMipRequest& request) override {

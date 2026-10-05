@@ -1,0 +1,42 @@
+{
+  "roles": [
+    {
+      "id": "R103-H1",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        18,
+        24,
+        30
+      ],
+      "T_seconds": 7200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "input_path": "reference/round103_confirmation/H1.txt",
+      "instance_path": "reference/round103_confirmation/H1.txt",
+      "input_sha256": "fe37d6a8ca5bcc206dedc0127c9995a00c82961de50c2bea6fd6a8a41210afd1",
+      "seed": 103050301,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "H-SUBMIT"
+      ],
+      "total_initial": 540,
+      "total_target": 614,
+      "zero_excluded_by_stock_shortage": true,
+      "all_station_weights_positive": true,
+      "design_isolated_in_R103": true,
+      "historical_role_not_globally_unseen": false,
+      "selection": "Two fixed seeds and layouts, no outcomes/LPs/routes inspected; no redraw",
+      "geometry": "three_rings",
+      "lambda": 0.15
+    }
+  ],
+  "phase": "hull confirmation",
+  "reference_billing": "one_finite_batch",
+  "planned_once": true,
+  "source_freeze_sha256": "275c4ad5692d93f3962754caf74462e313fd6da9ad6862f26a78a0d55fd7920d",
+  "no_candidate_revision": true,
+  "admission": "Only if completed development/protection leaves this unchanged candidate worthwhile; explicit cancellation otherwise."
+}

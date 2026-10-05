@@ -1,0 +1,72 @@
+{
+  "role": "F2",
+  "kind": "native",
+  "statuses": [
+    "INSIDE",
+    "OUTSIDE"
+  ],
+  "records": [
+    {
+      "status": "INSIDE",
+      "reason": "explicit_exact_dyadic_combination_within_declared_tolerance",
+      "vehicle": 0,
+      "seconds": 0.8606494000123348,
+      "Optimize_calls": 106,
+      "DP_calls": 105,
+      "columns": 106,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.0,
+      "normalized_residual": 7.133342040323684e-15
+    },
+    {
+      "status": "OUTSIDE",
+      "reason": "complete_domain_dyadic_support_row",
+      "vehicle": 1,
+      "seconds": 0.10688720000325702,
+      "Optimize_calls": 21,
+      "DP_calls": 21,
+      "columns": 21,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.07327586206896548,
+      "full_distance_lower": 0.07327586002166153,
+      "coefficient_scale": 1073741824,
+      "safe_rhs_rational": "0",
+      "exact_activity_rational": "22146269577410292117457/302231454903657293676544",
+      "exact_excess_rational": "22146269577410292117457/302231454903657293676544"
+    }
+  ],
+  "total_Optimize_calls": 127,
+  "total_DP_calls": 126,
+  "outer_seconds": 1.4147483999840915,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "affinity": {
+    "launcher_pid": 26340,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "actual_matrix_residual": {
+    "objective": 0.6071799602644684,
+    "maximum_absolute_residual": 3.183231456205249e-12,
+    "violations_over_native_feasibility_tol": []
+  },
+  "source_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091"
+}

@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "case": "calls_open",
+      "failure": "round103_preparation:round103_calls_exists",
+      "reader_rejected": true,
+      "native_MIP_Optimize": 0,
+      "auxiliary_Optimize_calls": 0,
+      "DP_calls": 0,
+      "required_LP_Optimize": 3,
+      "exit_code": 1,
+      "scope": "real production process; deliberate destination collision, no storage-loss or native B&B failure claim"
+    },
+    {
+      "case": "rows_write",
+      "failure": "round103_preparation:round103_evidence_exists:E:\\codes\\ExactEBRP\\results\\unified_exact_round103\\diagnostics\\root_faults01\\rows_write\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round103.rows.json",
+      "reader_rejected": true,
+      "native_MIP_Optimize": 0,
+      "auxiliary_Optimize_calls": 19,
+      "DP_calls": 18,
+      "required_LP_Optimize": 3,
+      "exit_code": 1,
+      "scope": "real production process; deliberate destination collision, no storage-loss or native B&B failure claim"
+    }
+  ],
+  "physical_solver_children": 2,
+  "no_native_BB": true,
+  "scope": "two actual preparation faults; whole process and reader included in parent receipt"
+}

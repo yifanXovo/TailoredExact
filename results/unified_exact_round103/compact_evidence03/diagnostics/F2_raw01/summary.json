@@ -1,0 +1,76 @@
+{
+  "role": "F2",
+  "kind": "raw",
+  "statuses": [
+    "OUTSIDE",
+    "OUTSIDE"
+  ],
+  "records": [
+    {
+      "status": "OUTSIDE",
+      "reason": "complete_domain_dyadic_support_row",
+      "vehicle": 0,
+      "seconds": 0.04991619999054819,
+      "Optimize_calls": 10,
+      "DP_calls": 10,
+      "columns": 10,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.09210526315789475,
+      "full_distance_lower": 0.09210526058450338,
+      "coefficient_scale": 1073741824,
+      "safe_rhs_rational": "0",
+      "exact_activity_rational": "55674213302963358386715/604462909807314587353088",
+      "exact_excess_rational": "55674213302963358386715/604462909807314587353088"
+    },
+    {
+      "status": "OUTSIDE",
+      "reason": "complete_domain_dyadic_support_row",
+      "vehicle": 1,
+      "seconds": 0.03893779998179525,
+      "Optimize_calls": 8,
+      "DP_calls": 8,
+      "columns": 8,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.14405015785808212,
+      "full_distance_lower": 0.0165935148394397,
+      "coefficient_scale": 1073741824,
+      "safe_rhs_rational": "140113995/536870912",
+      "exact_activity_rational": "335568996288522372062971/1208925819614629174706176",
+      "exact_excess_rational": "20060328452826602217211/1208925819614629174706176"
+    }
+  ],
+  "total_Optimize_calls": 18,
+  "total_DP_calls": 18,
+  "outer_seconds": 0.5282802000001539,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "affinity": {
+    "launcher_pid": 22920,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "actual_matrix_residual": {
+    "objective": 0.5286256494653551,
+    "maximum_absolute_residual": 7.105427357601002e-15,
+    "violations_over_native_feasibility_tol": []
+  },
+  "source_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091"
+}

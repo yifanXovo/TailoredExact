@@ -3538,7 +3538,16 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         proof_budget.ledger << "call,state,kind,status,grant_work,grant_seconds,work,seconds,optional_work,core_work,optional_seconds,core_seconds\n";
     }
     long long round68_start_sequence = 0;
-    auto solveBudgeted = [&](FixedIntervalMipRequest request) {
+    auto solveBudgeted = [&](FixedIntervalMipRequest& request) {
+        double hull_preparation_seconds = 0;
+        if (options.round103_resource_hull != "off" && request.solve_kind != FixedIntervalSolveKind::PaperLpRelaxation) {
+            const auto preparation_started = PaperClock::now();
+            try { backend->prepareResourceHull(request); }
+            catch(const std::exception& e) { if(native_evidence)native_evidence->failure(std::string("round103_preparation:")+e.what());throw; }
+            catch(...) { if(native_evidence)native_evidence->failure("round103_preparation:unknown_exception");throw; }
+            hull_preparation_seconds = std::chrono::duration<double>(PaperClock::now()-preparation_started).count();
+            request.global_deadline_remaining_seconds = globalDeadlineRemaining();
+        }
         if (options.round92_handling_activation)
             round92RequireProofEnvironment();
         if(native_evidence) {
@@ -3581,7 +3590,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 out.incumbent_objective = admitted.objective;
             }
         };
-        if (!options.round65_budget) {auto out=backend->solve(request);admitNative(out);captureNative(out);return out;}
+        if (!options.round65_budget) {auto out=backend->solve(request);out.round103_preparation_seconds=hull_preparation_seconds;admitNative(out);captureNative(out);return out;}
         const bool optional = request.solve_kind == FixedIntervalSolveKind::PaperLpRelaxation;
         const auto grant = proof_budget.grant(globalDeadlineRemaining());
         if (optional && !grant.allowed()) {
@@ -3935,7 +3944,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                  << outcome.work << ',' << outcome.nodes << ','
                  << outcome.simplex_iterations << ','
                  << outcome.barrier_iterations << ',' << outcome.memory_gb
-                 << ',' << state.artifact.sha256 << ','
+                 << ',' << request.canonical_model_fingerprint << ','
                  << outcome.in_memory_model_reused << ','
                  << outcome.integer_domain_restored << ','
                  << csvField(outcome.basis_reuse_status) << ','
@@ -4133,7 +4142,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                  << outcome.solver_runtime_seconds << ',' << outcome.work
                  << ',' << outcome.nodes << ',' << outcome.simplex_iterations
                  << ',' << outcome.barrier_iterations << ','
-                 << outcome.memory_gb << ',' << state.artifact.sha256 << ','
+                 << outcome.memory_gb << ',' << request.canonical_model_fingerprint << ','
                  << outcome.in_memory_model_reused << ','
                  << outcome.integer_domain_restored << ','
                  << csvField(outcome.basis_reuse_status) << ','
@@ -4146,8 +4155,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 continue;
             }
             writeGlobalTrace(
-                process_launch + native_event.solver_runtime_seconds,
-                exact_launch + native_event.solver_runtime_seconds,
+                process_launch + outcome.round103_preparation_seconds + native_event.solver_runtime_seconds,
+                exact_launch + outcome.round103_preparation_seconds + native_event.solver_runtime_seconds,
                 native_event.target_reached
                     ? (target_kind == "next_leaf"
                         ? "next_leaf_native_bound_target"
@@ -7722,7 +7731,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                          << outcome.simplex_iterations << ','
                          << outcome.barrier_iterations << ','
                          << outcome.memory_gb << ','
-                         << selected_state.artifact.sha256 << ','
+                         << request.canonical_model_fingerprint << ','
                          << outcome.in_memory_model_reused << ','
                          << outcome.integer_domain_restored << ','
                          << csvField(outcome.basis_reuse_status) << ','
@@ -7735,9 +7744,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         continue;
                     }
                     writeGlobalTrace(
-                        process_launch +
+                        process_launch + outcome.round103_preparation_seconds +
                             native_event.solver_runtime_seconds,
-                        exact_launch +
+                        exact_launch + outcome.round103_preparation_seconds +
                             native_event.solver_runtime_seconds,
                         native_event.target_reached
                             ? "partial_native_bound_target"
@@ -8140,7 +8149,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     << block_outcome.work << ',' << block_outcome.nodes << ','
                     << block_outcome.simplex_iterations << ','
                     << block_outcome.barrier_iterations << ','
-                    << block_outcome.memory_gb << ',' << block_artifact.sha256
+                    << block_outcome.memory_gb << ',' << block_request.canonical_model_fingerprint
                     << ',' << block_outcome.in_memory_model_reused << ','
                     << block_outcome.integer_domain_restored << ','
                     << csvField(block_outcome.basis_reuse_status) << ','
@@ -8474,7 +8483,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                             << ',' << block_outcome.simplex_iterations << ','
                             << block_outcome.barrier_iterations << ','
                             << block_outcome.memory_gb << ','
-                            << block_artifact.sha256 << ','
+                            << block_request.canonical_model_fingerprint << ','
                             << block_outcome.in_memory_model_reused << ','
                             << block_outcome.integer_domain_restored << ','
                             << csvField(block_outcome.basis_reuse_status) << ','
@@ -8484,9 +8493,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                             if (!native_event.native_bound_available ||
                                 !native_event.bound_improved) continue;
                             writeGlobalTrace(
-                                block_process_launch +
+                                block_process_launch + block_outcome.round103_preparation_seconds +
                                     native_event.solver_runtime_seconds,
-                                block_exact_launch +
+                                block_exact_launch + block_outcome.round103_preparation_seconds +
                                     native_event.solver_runtime_seconds,
                                 native_event.processed_nodes <= 0.0
                                     ? "round42_sibling_root_bound"
@@ -8792,7 +8801,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                  << ',' << outcome.solver_runtime_seconds << ',' << outcome.work
                  << ',' << outcome.nodes << ',' << outcome.simplex_iterations
                  << ',' << outcome.barrier_iterations << ',' << outcome.memory_gb
-                 << ',' << terminal_state.artifact.sha256 << ','
+                 << ',' << request.canonical_model_fingerprint << ','
                  << outcome.in_memory_model_reused << ','
                  << outcome.integer_domain_restored << ','
                  << csvField(outcome.basis_reuse_status) << ','
@@ -8804,9 +8813,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 continue;
             }
             writeGlobalTrace(
-                terminal_process_launch +
+                terminal_process_launch + outcome.round103_preparation_seconds +
                     native_event.solver_runtime_seconds,
-                terminal_exact_launch +
+                terminal_exact_launch + outcome.round103_preparation_seconds +
                     native_event.solver_runtime_seconds,
                 native_event.processed_nodes <= 0.0
                     ? "native_root_processing_bound"

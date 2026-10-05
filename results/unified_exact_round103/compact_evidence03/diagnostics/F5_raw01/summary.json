@@ -1,0 +1,114 @@
+{
+  "role": "F5",
+  "kind": "raw",
+  "statuses": [
+    "OUTSIDE",
+    "OUTSIDE",
+    "OUTSIDE",
+    "OUTSIDE"
+  ],
+  "records": [
+    {
+      "status": "OUTSIDE",
+      "reason": "complete_domain_dyadic_support_row",
+      "vehicle": 0,
+      "seconds": 2.6484407000243664,
+      "Optimize_calls": 64,
+      "DP_calls": 64,
+      "columns": 64,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.022139630984278756,
+      "full_distance_lower": 0.006887212846400845,
+      "coefficient_scale": 1073741824,
+      "safe_rhs_rational": "129003911/536870912",
+      "exact_activity_rational": "19124295191056558681880889/77371252455336267181195264",
+      "exact_excess_rational": "532872294770586521565497/77371252455336267181195264"
+    },
+    {
+      "status": "OUTSIDE",
+      "reason": "complete_domain_dyadic_support_row",
+      "vehicle": 1,
+      "seconds": 14.652542099996936,
+      "Optimize_calls": 293,
+      "DP_calls": 293,
+      "columns": 293,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.00015237883138357122,
+      "full_distance_lower": 0.00015237135165573526,
+      "coefficient_scale": 1073741824,
+      "safe_rhs_rational": "3532047/268435456",
+      "exact_activity_rational": "514916198756905244708271/38685626227668133590597632",
+      "exact_excess_rational": "5894581059142739578287/38685626227668133590597632"
+    },
+    {
+      "status": "OUTSIDE",
+      "reason": "complete_domain_dyadic_support_row",
+      "vehicle": 2,
+      "seconds": 19.618457700009458,
+      "Optimize_calls": 376,
+      "DP_calls": 376,
+      "columns": 376,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.0008753699531580151,
+      "full_distance_lower": 8.739204036994637e-05,
+      "coefficient_scale": 1073741824,
+      "safe_rhs_rational": "4945407/536870912",
+      "exact_activity_rational": "11511518262943168912359259/1237940039285380274899124224",
+      "exact_excess_rational": "108186104276702346280795/1237940039285380274899124224"
+    },
+    {
+      "status": "OUTSIDE",
+      "reason": "complete_domain_dyadic_support_row",
+      "vehicle": 3,
+      "seconds": 7.881540300004417,
+      "Optimize_calls": 165,
+      "DP_calls": 165,
+      "columns": 165,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.006713952172362101,
+      "full_distance_lower": 8.55218012773265e-05,
+      "coefficient_scale": 1073741824,
+      "safe_rhs_rational": "60639723/1073741824",
+      "exact_activity_rational": "2188084735744113539984211/38685626227668133590597632",
+      "exact_excess_rational": "3308464490912773483347/38685626227668133590597632"
+    }
+  ],
+  "total_Optimize_calls": 898,
+  "total_DP_calls": 898,
+  "outer_seconds": 49.54581800001324,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "affinity": {
+    "launcher_pid": 10316,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "actual_matrix_residual": {
+    "objective": 0.244169448027537,
+    "maximum_absolute_residual": 7.275957614183426e-12,
+    "violations_over_native_feasibility_tol": []
+  },
+  "source_sha256": "813d3f1b8e0cb890daf11432695dd01474b0acd383ae43581b21b707281472b7"
+}

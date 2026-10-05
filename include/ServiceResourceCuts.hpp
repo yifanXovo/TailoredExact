@@ -12,6 +12,10 @@ struct ServiceSupport {
     std::vector<ServiceWeight> weights;
     std::vector<int> stations, pickup_caps;
     std::vector<long long> level_maxima;
+    // Populated only by the explicit witness oracle. Never a physical route.
+    std::vector<std::array<int,3>> solution;
+    std::vector<int> anchors;
+    std::vector<double> anchor_travel;
 };
 struct ServiceContract {
     FleetContract resource;
@@ -33,7 +37,9 @@ struct ServiceStatistics {
     std::deque<std::string> order;
 };
 ServiceContract prepareServiceContract(const Instance&,const NativeOtB1LinearModel&);
-ServiceSupport proveServiceSupport(const FleetContract&,int,const std::vector<ServiceWeight>&);
+ServiceSupport proveServiceSupport(const FleetContract&,int,const std::vector<ServiceWeight>&,bool witness=false,const std::vector<int>& anchors={});
+bool validateServicePlan(const FleetContract&,int,const std::vector<std::array<int,3>>&,std::string&,const std::vector<int>& anchors={});
+std::vector<double> serviceAnchorTravel(const FleetContract&,const std::vector<int>&);
 std::vector<ServiceCut> separateServiceResources(const ServiceContract&,const std::vector<double>&,
     double,ServiceStatistics&);
 std::string serviceSupportJson(const ServiceSupport&);

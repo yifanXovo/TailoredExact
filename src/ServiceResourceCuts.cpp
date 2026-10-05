@@ -31,8 +31,8 @@ ServiceContract prepareServiceContract(const Instance& in,const NativeOtB1Linear
     }
     out.valid=true;out.reason="audited_original_integer_service_model";out.identity=serviceContractJson(out);return out;
 }
-ServiceSupport proveServiceSupport(const FleetContract& c,int k,const std::vector<ServiceWeight>& w){
-    ServiceSupport r;r.vehicle=k;r.weights=w;
+ServiceSupport proveServiceSupport(const FleetContract& c,int k,const std::vector<ServiceWeight>& w,bool witness,const std::vector<int>& anchors){
+    ServiceSupport r;r.vehicle=k;r.weights=w;r.anchors=anchors;
     const auto n=c.initial.size();
     if(!c.valid||!arithmeticReady()||k<0||static_cast<std::size_t>(k)>=c.capacities.size()||
         n<2||n!=c.station_capacity.size()||w.size()!=n||c.shortest_lower.size()!=n||
@@ -62,24 +62,73 @@ ServiceSupport proveServiceSupport(const FleetContract& c,int k,const std::vecto
         ++U;
     }
     if(U>dimension_limit){r.reason="unsupported_resource_dimension_no_bound";return r;}
-    r.resource_limit=U;const int stride=U+1;
+    try{r.anchor_travel=serviceAnchorTravel(c,anchors);}catch(const std::exception&e){r.reason=e.what();return r;}
+    std::vector<int> bit(n,0);for(std::size_t j=0;j<anchors.size();++j)bit[anchors[j]]=1<<j;
+    r.resource_limit=U;const int stride=U+1,masks=static_cast<int>(r.anchor_travel.size());
+    const std::size_t base=static_cast<std::size_t>(stride)*stride,cells=base*masks;
+    // Structural memory bound, not an elapsed-time or hardware-dependent rule.
+    if(witness && (n-1)>67108864ULL/cells){r.reason="witness_memory_limit_no_bound";return r;}
     std::vector<int> order(n-1);std::iota(order.begin(),order.end(),1);
     std::sort(order.begin(),order.end(),[&](int a,int b){return ell[a]!=ell[b]?ell[a]<ell[b]:a<b;});
-    std::vector<long long> dp(static_cast<std::size_t>(stride)*stride,absent);dp[0]=0;
+    std::vector<long long> dp(cells,absent);dp[0]=0;
+    std::vector<std::vector<short>> trace;
+    int winner_pos=-1,winner_p=0,winner_d=0,winner_mask=0;
     for(std::size_t pos=0;pos<order.size();++pos){const int i=order[pos];auto next=dp;
-        for(int p=0;p<=U;++p)for(int d=0;d<=U;++d){const auto v=dp[p*stride+d];if(v==absent)continue;
-            for(int a=1;a<=std::min(A[i],U-p);++a){auto& cell=next[(p+a)*stride+d];cell=std::max(cell,v+w[i][0]*a+w[i][2]);}
-            for(int b=1;b<=std::min(B[i],U-d);++b){auto& cell=next[p*stride+d+b];cell=std::max(cell,v+w[i][1]*b+w[i][2]);}
+        std::vector<short> choice;if(witness)choice.assign(cells,0);
+        for(int mask=0;mask<masks;++mask)for(int p=0;p<=U;++p)for(int d=0;d<=U;++d){const auto v=dp[mask*base+p*stride+d];if(v==absent)continue;
+            const std::size_t dest=(mask|bit[i])*base;
+            for(int a=1;a<=std::min(A[i],U-p);++a){const auto j=dest+(p+a)*stride+d;auto& cell=next[j];const auto score=v+w[i][0]*a+w[i][2];if(score>cell){cell=score;if(witness)choice[j]=static_cast<short>(a);}}
+            for(int b=1;b<=std::min(B[i],U-d);++b){const auto j=dest+p*stride+d+b;auto& cell=next[j];const auto score=v+w[i][1]*b+w[i][2];if(score>cell){cell=score;if(witness)choice[j]=static_cast<short>(-b);}}
         }
+        if(witness)trace.push_back(std::move(choice));
         dp.swap(next);
         if(pos+1<order.size()&&ell[order[pos+1]]==ell[i])continue;
         int cap=-1;long long best=absent;
-        for(int p=0;p<=U;++p){const double lb=addLower(ell[i],productLower(c.handling_lower,p));
+        for(int mask=0;mask<masks;++mask)for(int p=0;p<=U;++p){const double lb=addLower(std::max(ell[i],r.anchor_travel[mask]),productLower(c.handling_lower,p));
             if(std::isfinite(lb)&&lb>c.horizon_upper)break;
-            cap=p;for(int d=0;d<=p;++d)best=std::max(best,dp[p*stride+d]);}
+            cap=std::max(cap,p);for(int d=0;d<=p;++d){const auto value=dp[mask*base+p*stride+d];best=std::max(best,value);
+                if(witness&&value>r.upper){r.upper=value;winner_pos=static_cast<int>(pos);winner_p=p;winner_d=d;winner_mask=mask;}}}
         r.upper=std::max(r.upper,best);r.stations.push_back(i);r.pickup_caps.push_back(cap);r.level_maxima.push_back(best);
     }
+    if(witness){r.solution.assign(n,{0,0,0});int p=winner_p,d=winner_d,mask=winner_mask;
+        for(int pos=winner_pos;pos>=0;--pos){const int q=trace[pos][mask*base+p*stride+d],i=order[pos];
+            if(q>0){r.solution[i]={q,0,1};p-=q;}else if(q<0){r.solution[i]={0,-q,1};d+=q;}
+            if(q)mask&=~bit[i];}
+        if(p||d||mask){r.reason="traceback_initial_state";return r;}
+        std::string why;if(!validateServicePlan(c,k,r.solution,why,anchors)){r.reason="traceback_domain:"+why;return r;}
+        long long value=0;for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)value+=w[i][t]*r.solution[i][t];
+        if(value!=r.upper){r.reason="traceback_profit";return r;}}
     r.valid=true;r.reason="complete_integer_necessary_system_upper";return r;
+}
+std::vector<double> serviceAnchorTravel(const FleetContract&c,const std::vector<int>&anchors){
+    if(anchors.size()>3)throw std::runtime_error("anchor_dimension_limit");
+    std::vector<int> sorted=anchors;std::sort(sorted.begin(),sorted.end());
+    if(std::adjacent_find(sorted.begin(),sorted.end())!=sorted.end())throw std::runtime_error("duplicate_anchor");
+    for(int i:anchors)if(i<1||static_cast<std::size_t>(i)>=c.initial.size())throw std::runtime_error("anchor_index");
+    if(c.shortest_lower.size()!=c.initial.size())throw std::runtime_error("anchor_shortest_shape");
+    for(const auto&row:c.shortest_lower)if(row.size()!=c.initial.size())throw std::runtime_error("anchor_shortest_shape");
+    std::vector<double>travel(1<<anchors.size(),0.);
+    for(std::size_t mask=1;mask<travel.size();++mask){std::vector<int> selected;
+        for(std::size_t j=0;j<anchors.size();++j)if(mask&(1<<j))selected.push_back(anchors[j]);
+        std::sort(selected.begin(),selected.end());double best=std::numeric_limits<double>::infinity();
+        do{int prev=0;double cost=0.;for(int i:selected){const double a=c.shortest_lower[prev][i];if(!std::isfinite(a)||a<0)throw std::runtime_error("anchor_distance");cost=addLower(cost,a);prev=i;}
+            const double a=c.shortest_lower[prev][0];if(!std::isfinite(a)||a<0)throw std::runtime_error("anchor_distance");best=std::min(best,addLower(cost,a));
+        }while(std::next_permutation(selected.begin(),selected.end()));travel[mask]=best;}
+    return travel;
+}
+bool validateServicePlan(const FleetContract&c,int k,const std::vector<std::array<int,3>>&v,std::string&why,const std::vector<int>&anchors){
+    if(!c.valid||!arithmeticReady()||k<0||static_cast<std::size_t>(k)>=c.capacities.size()||v.size()!=c.initial.size()||c.station_capacity.size()!=v.size()||c.shortest_lower.size()!=v.size()||v.empty()||v[0]!=std::array<int,3>{0,0,0}){why="shape";return false;}
+    if(!std::isfinite(c.handling_lower)||c.handling_lower<0||!std::isfinite(c.horizon_upper)||c.horizon_upper<0){why="resource";return false;}
+    long long P=0,D=0;double travel=0;
+    for(std::size_t i=1;i<v.size();++i){const auto a=v[i];
+        if(c.shortest_lower[i].size()!=v.size()||c.shortest_lower[0].size()!=v.size()){why="shortest_shape";return false;}
+        if(a[0]<0||a[1]<0||a[0]>std::min(c.initial[i],c.capacities[k])||a[1]>std::min(c.station_capacity[i]-c.initial[i],c.capacities[k])||(a[0]&&a[1])||a[2]!=(a[0]+a[1]>0?1:0)){why="station_choice";return false;}
+        P+=a[0];D+=a[1];if(a[2]){const double f=c.shortest_lower[0][i],b=c.shortest_lower[i][0];if(!std::isfinite(f)||f<0||!std::isfinite(b)||b<0){why="travel";return false;}travel=std::max(travel,addLower(f,b));}}
+    if(D>P||P>std::numeric_limits<int>::max()){why="final_balance";return false;}
+    // Exactly the R102 retained predicate: nested nextafter-down operations.
+    if(!anchors.empty()){try{const auto tau=serviceAnchorTravel(c,anchors);int mask=0;for(std::size_t j=0;j<anchors.size();++j)if(v[anchors[j]][2])mask|=1<<j;travel=std::max(travel,tau[mask]);}catch(const std::exception&e){why=e.what();return false;}}
+    if(addLower(travel,productLower(c.handling_lower,static_cast<int>(P)))>c.horizon_upper){why="duration";return false;}
+    why="valid_declared_necessary_plan";return true;
 }
 std::vector<ServiceCut> separateServiceResources(const ServiceContract& c,const std::vector<double>& point,double margin,ServiceStatistics& stats){
     std::vector<ServiceCut> rows;
@@ -136,7 +185,10 @@ std::vector<ServiceCut> separateServiceResources(const ServiceContract& c,const 
 }
 std::string serviceSupportJson(const ServiceSupport&r){std::ostringstream s;s<<std::setprecision(17)<<"{\"valid\":"<<(r.valid?"true":"false")<<",\"vehicle\":"<<r.vehicle<<",\"upper\":"<<r.upper<<",\"resource_limit\":"<<r.resource_limit<<",\"weights\":[";
     for(std::size_t i=0;i<r.weights.size();++i){if(i)s<<',';auto w=r.weights[i];s<<'['<<w[0]<<','<<w[1]<<','<<w[2]<<']';}s<<"],\"levels\":[";
-    for(std::size_t i=0;i<r.stations.size();++i){if(i)s<<',';s<<'['<<r.stations[i]<<','<<r.pickup_caps[i]<<','<<r.level_maxima[i]<<']';}s<<"]}";return s.str();}
+    for(std::size_t i=0;i<r.stations.size();++i){if(i)s<<',';s<<'['<<r.stations[i]<<','<<r.pickup_caps[i]<<','<<r.level_maxima[i]<<']';}s<<"],\"solution\":[";
+    for(std::size_t i=0;i<r.solution.size();++i){if(i)s<<',';auto a=r.solution[i];s<<'['<<a[0]<<','<<a[1]<<','<<a[2]<<']';}s<<"],\"anchors\":[";
+    for(std::size_t i=0;i<r.anchors.size();++i){if(i)s<<',';s<<r.anchors[i];}s<<"],\"anchor_travel\":[";
+    for(std::size_t i=0;i<r.anchor_travel.size();++i){if(i)s<<',';s<<r.anchor_travel[i];}s<<"]}";return s.str();}
 std::string serviceContractJson(const ServiceContract&c){std::ostringstream s;s<<"{\"resource\":"<<fleetContractJson(c.resource)<<",\"service_columns\":[";
     for(std::size_t k=0;k<c.columns.size();++k){if(k)s<<',';s<<'[';for(std::size_t i=0;i<c.columns[k].size();++i){if(i)s<<',';auto a=c.columns[k][i];s<<'['<<a[0]<<','<<a[1]<<','<<a[2]<<']';}s<<']';}s<<"]}";return s.str();}
 } // namespace ebrp

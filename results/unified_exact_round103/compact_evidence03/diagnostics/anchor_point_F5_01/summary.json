@@ -1,0 +1,55 @@
+{
+  "role": "F5",
+  "statuses": [
+    "OUTSIDE",
+    "OUTSIDE",
+    "OUTSIDE",
+    "OUTSIDE"
+  ],
+  "anchors": {
+    "0": [
+      9,
+      20,
+      41
+    ],
+    "1": [
+      4,
+      21,
+      49
+    ],
+    "2": [
+      10,
+      22,
+      40
+    ],
+    "3": [
+      11,
+      29,
+      30
+    ]
+  },
+  "total_Optimize_calls": 242,
+  "total_DP_calls": 242,
+  "outer_seconds": 23.25624639997841,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "affinity": {
+    "launcher_pid": 25708,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  }
+}

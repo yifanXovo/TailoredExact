@@ -1,0 +1,21 @@
+{
+  "stages": [
+    {
+      "name": "development01",
+      "physical_reference_children": 2,
+      "arms": 6,
+      "cap_seconds": 1800
+    },
+    {
+      "name": "protection_C3",
+      "physical_reference_children": 1,
+      "arms": 3,
+      "cap_seconds": 1800
+    }
+  ],
+  "sequential": true,
+  "no_retries": true,
+  "no_candidate_revision": true,
+  "production_freeze_sha256": "275c4ad5692d93f3962754caf74462e313fd6da9ad6862f26a78a0d55fd7920d",
+  "wrapper_sha256": "e9114026dffdd6101102f8d8e678c59afcd394e480a15a487a18306f14060ff0"
+}
