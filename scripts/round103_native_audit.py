@@ -19,8 +19,15 @@ def audit(directory):
         assert len(ob)==len(orr)==q['Optimize_calls'] and len(db)==len(dr)==q['DP_calls']
         assert [r['serial'] for r in ob]==[r['serial'] for r in orr]==list(range(1,len(ob)+1))
         cc=c['column_contract'];resource=cc['resource'];columns=cc['service_columns']
-        for r in dr:
-            p=r['proof'];assert p['valid'];validate(resource,p['vehicle'],p['solution'],p['anchors'])
+        for begin,r in zip(db,dr):
+            p=r['proof'];assert p['vehicle']==begin['vehicle'] and not p['anchors']
+            if not p['valid']:
+                member=read(prefix+'.vehicle'+str(p['vehicle'])+'.json')
+                assert member['status']=='UNKNOWN' and member['reason'] in [
+                    'support_unknown:unsupported_resource_dimension_no_bound','support_unknown:witness_memory_limit_no_bound',
+                    'support_unknown:weight_range','support_unknown:score_range']
+                continue
+            validate(resource,p['vehicle'],p['solution'],p['anchors'])
             assert sum(a*b for w,r in zip(p['weights'],p['solution']) for a,b in zip(w,r))==p['upper']
         members=[]
         point=dict(read(prefix+'.point.json')['variables']) if q['root_optimal'] else {}

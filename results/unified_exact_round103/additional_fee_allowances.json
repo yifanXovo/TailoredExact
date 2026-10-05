@@ -1,0 +1,21 @@
+{
+  "fees": [
+    {
+      "label": "rejected_overlapping_launch_preflight",
+      "starts": 1,
+      "seconds": 1.0,
+      "failed": true,
+      "Optimize_calls": 0,
+      "DP_calls": 0,
+      "stop_reason": "ensure_idle rejected before receipt creation",
+      "scope": "conservative allowance for observed0.911s shell attempt; no optimizer started and no overlap occurred"
+    },
+    {
+      "label": "root_faults01_nested_solver_children",
+      "starts": 2,
+      "seconds": 0,
+      "failed": false,
+      "scope": "conservative additional count for two physical solver children; their complete costs and reader are already inside root_faults01 receipt, not added twice"
+    }
+  ]
+}

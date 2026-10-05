@@ -12,6 +12,12 @@ from fractions import Fraction as F
 import math
 from itertools import permutations
 def exact(x):return F.from_float(float(x))
+def float_upper(x):
+    value=float(x)
+    return math.nextafter(value,math.inf) if exact(value)<x else value
+def float_lower(x):
+    value=float(x)
+    return math.nextafter(value,-math.inf) if exact(value)>x else value
 def down(x):return math.nextafter(float(x),-math.inf)
 def add_lower(a,b):return b if a==0 else a if b==0 else max(0.,down(a+b))
 def mul_lower(a,b):return 0. if a==0 or b==0 else max(0.,down(a*b))
@@ -81,7 +87,8 @@ def classify(oracle,k,point,engine,directory,deadline,tolerance=1e-8,max_columns
     def finish(status,reason,**extra):
         if last_combination is not None:
             extra.setdefault('combination',[dict(lambda_rational=str(a),lambda_float=float(a),plan=p) for a,p in last_combination])
-            extra.setdefault('verified_distance_upper',float(last_residual))
+            extra.setdefault('verified_distance_upper',float_upper(last_residual))
+            extra.setdefault('verified_distance_upper_rational',str(last_residual))
         result=dict(status=status,reason=reason,vehicle=k,seconds=time.perf_counter()-start,Optimize_calls=calls,DP_calls=oracle.calls-dp_start,
             columns=len(plans),duplicates=duplicates,tolerance=tolerance,zero_width_residual=zero_residual,history=history,**extra)
         write(directory/f'vehicle_{k}.json',result);return result
@@ -142,17 +149,17 @@ def classify(oracle,k,point,engine,directory,deadline,tolerance=1e-8,max_columns
             continuous_act=sum(exact(x)*exact(a) for r,ww in zip(point,wf) for x,a in zip(r,ww))
             continuous_norm=sum(abs(exact(wf[i][t]))*s for i,t,s in coordinates)
             lower_bound=max(F(0),continuous_act-support_upper)/max(F(1),continuous_norm)
-            item=dict(iteration=calls,restricted_distance=restricted,verified_combination_residual=float(residual),
-                support_lower=float(sum(exact(a)*r for ww,pp in zip(wf,proof['solution']) for a,r in zip(ww,pp))),support_upper=float(support_upper),
-                pricing_quantization_error=float(error),full_distance_lower=float(lower_bound),quantized_violation=float(excess),normalization=float(qnorm),plan=proof['solution'])
+            item=dict(iteration=calls,restricted_distance=restricted,verified_combination_residual=float_upper(residual),
+                support_lower=float_lower(sum(exact(a)*r for ww,pp in zip(wf,proof['solution']) for a,r in zip(ww,pp))),support_upper=float_upper(support_upper),
+                pricing_quantization_error=float_upper(error),full_distance_lower=float_lower(lower_bound),quantized_violation=float_lower(excess),normalization=float(qnorm),plan=proof['solution'])
             history.append(item)
             # Positive violation is an exact binary-rational mathematical test.
             # Require the declared material diagnostic gap after normalization.
             if qnorm>0 and excess>exact(tolerance)*qnorm:
                 return finish('OUTSIDE','complete_domain_dyadic_support_row',restricted_distance=restricted,
-                    full_distance_lower=float(excess/qnorm),weights=weights,coefficient_scale=scale,safe_rhs_rational=str(safe_rhs),
+                    full_distance_lower=float_lower(excess/qnorm),weights=weights,coefficient_scale=scale,safe_rhs_rational=str(safe_rhs),
                     exact_activity_rational=str(act),exact_excess_rational=str(excess),support=proof)
             if not add(proof['solution']):
                 return finish('UNKNOWN','duplicate_column_without_membership_or_closed_pricing',restricted_distance=restricted,
-                    full_distance_lower=float(lower_bound),continuous_pricing_upper=float(support_upper))
+                    full_distance_lower=float_lower(lower_bound),continuous_pricing_upper=float_upper(support_upper))
         return finish('UNKNOWN','structural_column_limit')
