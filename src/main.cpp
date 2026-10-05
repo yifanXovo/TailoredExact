@@ -77,6 +77,7 @@ void usage() {
         << "[--external-gini-interval-mip-policy <uniform-policy>] "
         << "[--round62-archive-mode off|passive-observe|passive-cert|outer|submit] "
         << "[--round102-service-cuts off|shell|shadow|submit] "
+        << "[--round103-resource-hull off|shadow|submit] "
         << "[--round62-threshold-mode off|events|conflicts|projection|service|service-conflicts|projection-rlt|projection-service] "
         << "[--process-wall-time-limit <seconds>] [--process-shutdown-margin <seconds>] [--process-phase-ledger <csv>] "
         << "[--round56-scenario-id <id>] [--round56-mathematical-instance-sha256 <sha256>] [--round56-run-identity-sha256 <sha256>] "
@@ -273,6 +274,8 @@ std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
         return "research-round88-ensc-constructive-only";
     if (opt.round89_native_ot_b1)
         return "research-round89-ensc-native-ot-b1";
+    if (opt.round103_resource_hull != "off")
+        return "research-round103-ensc-hull-" + opt.round103_resource_hull + "-root";
     if (opt.round102_service_cuts != "off")
         return "research-round102-ensc-service-" + opt.round102_service_cuts + "-root";
     if (opt.round101_fleet_cuts != "off")
@@ -1444,6 +1447,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round101-fleet-cuts") opt.round101_fleet_cuts = requireValue(i, argc, argv);
         else if (arg == "--round101-fleet-range") opt.round101_fleet_range = requireValue(i, argc, argv);
         else if (arg == "--round102-service-cuts") opt.round102_service_cuts = requireValue(i, argc, argv);
+        else if (arg == "--round103-resource-hull") opt.round103_resource_hull = requireValue(i, argc, argv);
         else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round96-route-order") opt.round96_route_order = parseBoolValue(requireValue(i, argc, argv));
@@ -3358,7 +3362,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Invalid Round102 service mode");
     if (opt.round102_service_cuts != "off" && opt.round101_fleet_cuts != "off")
         throw std::runtime_error("Round102 cannot combine with Round101");
-    if ((opt.round101_fleet_cuts != "off" || opt.round102_service_cuts != "off") &&
+    if (opt.round103_resource_hull != "off" && opt.round103_resource_hull != "shadow" && opt.round103_resource_hull != "submit")
+        throw std::runtime_error("Invalid Round103 hull mode");
+    if (opt.round103_resource_hull != "off" && (opt.round101_fleet_cuts != "off" || opt.round102_service_cuts != "off"))
+        throw std::runtime_error("Round103 cannot combine with Round101/102");
+    if ((opt.round101_fleet_cuts != "off" || opt.round102_service_cuts != "off" || opt.round103_resource_hull != "off") &&
         (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
          opt.method != "gcap-frontier" || !opt.k1_am_sf_controller_enabled ||
          opt.round89_native_ot_b1 || opt.round88_constructive_only_descent ||
@@ -3368,7 +3376,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
          opt.round61_candidate_mode != "off" || opt.round62_threshold_mode != "off" ||
          opt.round63_time_mode != "off" || opt.round64_shared_mode != "off" ||
          opt.external_gini_scheduling != "round31-nonblocking-native-bound"))
-        throw std::runtime_error("Round101/102 requires isolated original ENS-C");
+        throw std::runtime_error("Round101/102/103 requires isolated original ENS-C");
     if (opt.round90_lp_g_split &&
         (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
          opt.method != "gcap-frontier"))
@@ -4060,6 +4068,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round102_service_resource_" + opt.round102_service_cuts + "_root");
         snapshot.preset_reason = "Round102: audited original-service integer quantity support; default-off root cuts";
+    }
+    if (opt.round103_resource_hull != "off") {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round103_certified_resource_hull_" + opt.round103_resource_hull + "_pre_mip");
+        snapshot.preset_reason = "Round103: one self-paid standard LP and certified resource-hull separation before each new canonical MIP; default off";
     }
     if (opt.round90_lp_g_split) {
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
