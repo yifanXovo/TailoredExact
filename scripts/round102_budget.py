@@ -12,20 +12,31 @@ def account():
         for arm in q['launches']:
             label=f'{camp.name}/{arm["number"]}/{arm["id"]}/{arm["arm"]}'
             if arm['number'] in done:
-                r=done[arm['number']];c=r['completion'];fees.append(dict(label=label,seconds=c['end_to_end_seconds'],starts=1,failed=not r['audit_passed'],
-                    process_seconds=c['process_wall_seconds'],stop_reason=c['stop_reason']))
+                r=done[arm['number']];c=r['completion'];audit=read(Path(arm['destination'])/'audit.json')
+                post_audit=audit.get('offline_audit_seconds',0)
+                fees.append(dict(label=label,seconds=c['end_to_end_seconds']+post_audit,starts=1,failed=not r['audit_passed'],
+                    process_seconds=c['process_wall_seconds'],observed_end_to_end_seconds=c['end_to_end_seconds'],
+                    additional_postexit_audit_seconds=post_audit,actual_Optimize_calls=audit['native_calls_started'],stop_reason=c['stop_reason']))
             else:reserved.append(dict(label=label,seconds=arm['cap_seconds'],starts=1,started=Path(arm['destination']).exists()))
         r=camp/'reference_batch_receipt.json'
         if r.exists():fees.append(dict(label=camp.name+'/reference_batch',seconds=read(r)['outer_seconds'],starts=1,Optimize_calls=0))
     for p in (OUT/'fees').glob('*/launch.json'):
         receipt_path=p.parent/'receipt.json'
-        if not receipt_path.exists():incomplete.append(str(p.relative_to(OUT)));continue
+        if not receipt_path.exists():
+            allowance=p.parent/'failure_allowance.json'
+            if allowance.exists():fees.append(read(allowance))
+            else:incomplete.append(str(p.relative_to(OUT)))
+            continue
         r=read(receipt_path);fees.append(dict(label='fees/'+p.parent.name,seconds=r['outer_seconds'],starts=1,failed=r['exit_code']!=0,
             maximum_Optimize_calls=r['maximum_Optimize_calls'],stop_reason=r['stop_reason']))
-    seconds=sum(f['seconds'] for f in fees);starts=len(fees);potential_seconds=seconds+sum(f['seconds'] for f in reserved)
+    extra=OUT/'additional_fee_allowances.json'
+    if extra.exists():
+        fees.extend(read(extra)['fees'])
+    seconds=sum(f['seconds'] for f in fees);starts=sum(f.get('starts',1) for f in fees);potential_seconds=seconds+sum(f['seconds'] for f in reserved)
     return dict(completed_starts=starts,completed_seconds=seconds,reserved_starts=len(reserved),reserved_seconds=sum(f['seconds'] for f in reserved),
         maximum_plan_starts=starts+len(reserved),maximum_plan_seconds=potential_seconds,within_limits=starts+len(reserved)<=72 and potential_seconds<=80000,
         remaining_starts=72-starts-len(reserved),remaining_seconds=80000-potential_seconds,fees=fees,reserved=reserved,incomplete=incomplete,
-        engineering_separate=True,internal_Optimize_not_double_billed=True)
+        engineering_separate=True,internal_Optimize_not_double_billed=True,
+        seconds_scope='Observed end-to-end receipts plus recorded postexit offline audits and explicit conservative allowances; unknown exact process durations remain labeled')
 if __name__=='__main__':
     r=account();print(json.dumps(r,indent=2));assert r['within_limits']

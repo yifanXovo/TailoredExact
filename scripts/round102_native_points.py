@@ -14,7 +14,6 @@ def main(label,campaign):
         engine.setParam('OutputFlag',0);engine.start();runtime=binding()
         for point in (OUT/campaign/'raw').rglob('*.round102.point.json'):
             q=read(point);contract_file=Path(str(point).replace('.point.json','.contract.json'));binding_record=read(contract_file);c=binding_record['column_contract']['resource']
-            arm=point.parents[1].name if point.parent.name=='external' else next(x.name for x in point.parents if x.name.startswith(('01_','02_','03_')))
             destination=next(x for x in point.parents if x.parent.name=='raw')
             models=[p for p in (destination/'external/models').glob('*.lp') if sha(p)==binding_record['canonical_sha256']]
             assert len(models)==1,(point,models,binding_record['canonical_sha256']);source=models[0]
@@ -33,7 +32,8 @@ def main(label,campaign):
                         support_certificate=r))
                 record=dict(point_source=str(point.relative_to(ROOT)),point_sha256=sha(point),actual_source=str(source.relative_to(ROOT)),actual_sha256=sha(source),
                     source='optimal original-column native root vector after native root processing',residual=residual,
-                    old_complete_model_feasible_to_tol=residual['maximum_absolute_residual']<=1e-6,J=J)
+                    canonical_precomponent_LP_feasible_to_tol=residual['maximum_absolute_residual']<=1e-6,
+                    matrix_scope='This native call canonical model before R102 callback rows; includes its ENS target/leaf restrictions. Historical full-old-LP equality requires a separate verified SHA match.',J=J)
                 write(d/(destination.name+'_'+point.name),record)
                 records.append({k:v for k,v in record.items() if k!='J'}|dict(J=[{k:v for k,v in r.items() if k!='support_certificate'} for r in J]))
     write(d/'summary.json',dict(records=records,runtime=runtime,Optimize_calls=0));print(json.dumps(records))

@@ -1,0 +1,347 @@
+{
+  "records": [
+    {
+      "role": "F2",
+      "actual_source": "results\\unified_exact_round100\\exports\\F2\\ENS-C.lp",
+      "actual_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "original_point_checks": [
+        {
+          "kind": "raw",
+          "residual": {
+            "objective": 0.5286256494653551,
+            "maximum_absolute_residual": 7.105427357601002e-15,
+            "violations_over_native_feasibility_tol": []
+          }
+        },
+        {
+          "kind": "implication_0",
+          "residual": {
+            "objective": 0.8853483009345781,
+            "maximum_absolute_residual": 6.661338147750939e-15,
+            "violations_over_native_feasibility_tol": []
+          }
+        },
+        {
+          "kind": "implication_1",
+          "residual": {
+            "objective": 0.885348300934578,
+            "maximum_absolute_residual": 3.219646771412954e-15,
+            "violations_over_native_feasibility_tol": []
+          }
+        }
+      ],
+      "original_objective": 0.5286256494653551,
+      "strengthened_objective": 0.5286753357380306,
+      "delta": 4.968627267554204e-05,
+      "implications": [
+        {
+          "event": "return",
+          "role": "F2",
+          "kind": "S0",
+          "status": 2,
+          "seconds": 0.10299992561340332,
+          "objective": 10.038311754774233,
+          "bound": 10.038311754774233,
+          "excess": -3.404545388082912,
+          "rhs": 13.442857142857145
+        },
+        {
+          "event": "return",
+          "role": "F2",
+          "kind": "S1",
+          "status": 2,
+          "seconds": 0.08599996566772461,
+          "objective": 15.932700014395884,
+          "bound": 15.932700014395884,
+          "excess": -4.111159634726928,
+          "rhs": 20.043859649122812
+        },
+        {
+          "event": "return",
+          "role": "F2",
+          "kind": "actual-direction",
+          "status": 2,
+          "seconds": 0.1700000762939453,
+          "objective": 3548.67247253565,
+          "bound": 3548.67247253565,
+          "excess": 556.6724725356498,
+          "rhs": 2992
+        },
+        {
+          "event": "return",
+          "role": "F2",
+          "kind": "fixed-charge",
+          "status": 2,
+          "seconds": 0.016000032424926758,
+          "objective": 118.28908241785479,
+          "bound": 118.28908241785479,
+          "excess": 118.28908241785479,
+          "rhs": 0
+        }
+      ]
+    },
+    {
+      "role": "R98-C2",
+      "actual_source": "results\\unified_exact_round100\\exports\\R98-C2\\ENS-C.lp",
+      "actual_sha256": "41aacb59acd6bbb72cc56c9840a2ea0e47e0aad47a45304ad981bbd139a049bc",
+      "original_point_checks": [
+        {
+          "kind": "raw",
+          "residual": {
+            "objective": 0.16123605049876005,
+            "maximum_absolute_residual": 1.1657341758564144e-14,
+            "violations_over_native_feasibility_tol": []
+          }
+        },
+        {
+          "kind": "implication_0",
+          "residual": {
+            "objective": 0.39162089674952927,
+            "maximum_absolute_residual": 3.001332515850663e-11,
+            "violations_over_native_feasibility_tol": []
+          }
+        },
+        {
+          "kind": "implication_1",
+          "residual": {
+            "objective": 0.3916208967495292,
+            "maximum_absolute_residual": 1.8189894035458565e-12,
+            "violations_over_native_feasibility_tol": []
+          }
+        }
+      ],
+      "original_objective": 0.16123605049876005,
+      "strengthened_objective": 0.16123605049876014,
+      "delta": 8.326672684688674e-17,
+      "implications": [
+        {
+          "event": "return",
+          "role": "R98-C2",
+          "kind": "S0",
+          "status": 2,
+          "seconds": 1.2719998359680176,
+          "objective": 70.39722075920105,
+          "bound": 70.39722075920105,
+          "excess": -29.036112574132304,
+          "rhs": 99.43333333333335
+        },
+        {
+          "event": "return",
+          "role": "R98-C2",
+          "kind": "S1",
+          "status": 2,
+          "seconds": 1.9609999656677246,
+          "objective": 32.464858811776416,
+          "bound": 32.464858811776416,
+          "excess": -23.41609356917597,
+          "rhs": 55.88095238095239
+        },
+        {
+          "event": "return",
+          "role": "R98-C2",
+          "kind": "actual-direction",
+          "status": 2,
+          "seconds": 1.8619999885559082,
+          "objective": 15739.417863360855,
+          "bound": 15739.417863360855,
+          "excess": -1101.5821366391447,
+          "rhs": 16841
+        },
+        {
+          "event": "return",
+          "role": "R98-C2",
+          "kind": "fixed-charge",
+          "status": 2,
+          "seconds": 0.8610000610351562,
+          "objective": 6313.466938641288,
+          "bound": 6313.466938641288,
+          "excess": -339.5330613587121,
+          "rhs": 6653
+        }
+      ]
+    },
+    {
+      "role": "R99-N2",
+      "actual_source": "results\\unified_exact_round100\\certification_N201\\raw\\03_R99-N2_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+      "actual_sha256": "7eb245f733f64f4d4901355d528f6453182dffa7839cae232d880b2c04fe54b4",
+      "original_point_checks": [
+        {
+          "kind": "raw",
+          "residual": {
+            "objective": 0.13283184331382947,
+            "maximum_absolute_residual": 2.1649348980190553e-14,
+            "violations_over_native_feasibility_tol": []
+          }
+        },
+        {
+          "kind": "implication_0",
+          "residual": {
+            "objective": 0.24990233360418215,
+            "maximum_absolute_residual": 9.094947017729282e-13,
+            "violations_over_native_feasibility_tol": []
+          }
+        },
+        {
+          "kind": "implication_1",
+          "residual": {
+            "objective": 0.24990233360418215,
+            "maximum_absolute_residual": 9.094947017729282e-13,
+            "violations_over_native_feasibility_tol": []
+          }
+        }
+      ],
+      "original_objective": 0.13283184331382947,
+      "strengthened_objective": 0.1328318433138295,
+      "delta": 2.7755575615628914e-17,
+      "implications": [
+        {
+          "event": "return",
+          "role": "R99-N2",
+          "kind": "S0",
+          "status": 2,
+          "seconds": 1.318000078201294,
+          "objective": 71.35954433815697,
+          "bound": 71.35954433815697,
+          "excess": -45.25712232850971,
+          "rhs": 116.61666666666667
+        },
+        {
+          "event": "return",
+          "role": "R99-N2",
+          "kind": "S1",
+          "status": 2,
+          "seconds": 1.7810001373291016,
+          "objective": 63.016860537002096,
+          "bound": 63.016860537002096,
+          "excess": -36.883139462997924,
+          "rhs": 99.90000000000002
+        },
+        {
+          "event": "return",
+          "role": "R99-N2",
+          "kind": "actual-direction",
+          "status": 2,
+          "seconds": 1.6599998474121094,
+          "objective": 15518.072429101303,
+          "bound": 15518.072429101303,
+          "excess": -558.927570898697,
+          "rhs": 16077
+        },
+        {
+          "event": "return",
+          "role": "R99-N2",
+          "kind": "fixed-charge",
+          "status": 2,
+          "seconds": 0.9780001640319824,
+          "objective": 6387.248422953358,
+          "bound": 6387.248422953358,
+          "excess": 206.24842295335839,
+          "rhs": 6181
+        }
+      ]
+    },
+    {
+      "role": "F5",
+      "actual_source": "results\\unified_exact_round100\\certification_CF01\\raw\\04_F5_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+      "actual_sha256": "813d3f1b8e0cb890daf11432695dd01474b0acd383ae43581b21b707281472b7",
+      "original_point_checks": [
+        {
+          "kind": "raw",
+          "residual": {
+            "objective": 0.244169448027537,
+            "maximum_absolute_residual": 7.275957614183426e-12,
+            "violations_over_native_feasibility_tol": []
+          }
+        },
+        {
+          "kind": "implication_0",
+          "residual": {
+            "objective": 0.38430409168754615,
+            "maximum_absolute_residual": 9.094947017729282e-13,
+            "violations_over_native_feasibility_tol": []
+          }
+        },
+        {
+          "kind": "implication_1",
+          "residual": {
+            "objective": 0.3843040916875461,
+            "maximum_absolute_residual": 1.825355866458267e-09,
+            "violations_over_native_feasibility_tol": []
+          }
+        }
+      ],
+      "original_objective": 0.244169448027537,
+      "strengthened_objective": 0.24416944802753707,
+      "delta": 5.551115123125783e-17,
+      "implications": [
+        {
+          "event": "return",
+          "role": "F5",
+          "kind": "S0",
+          "status": 2,
+          "seconds": 30.871000051498413,
+          "objective": 72.60734243484553,
+          "bound": 72.60734243484553,
+          "excess": -42.08405735043971,
+          "rhs": 114.69139978528524
+        },
+        {
+          "event": "return",
+          "role": "F5",
+          "kind": "S1",
+          "status": 2,
+          "seconds": 55.51099991798401,
+          "objective": 33.96840897716379,
+          "bound": 33.96840897716379,
+          "excess": -18.80301959426479,
+          "rhs": 52.77142857142858
+        },
+        {
+          "event": "return",
+          "role": "F5",
+          "kind": "actual-direction",
+          "status": 2,
+          "seconds": 35.59699988365173,
+          "objective": 20662.815481875976,
+          "bound": 20662.815481875976,
+          "excess": -2061.184518124024,
+          "rhs": 22724
+        },
+        {
+          "event": "return",
+          "role": "F5",
+          "kind": "fixed-charge",
+          "status": 2,
+          "seconds": 12.258000135421753,
+          "objective": 7635.318849405355,
+          "bound": 7635.318849405355,
+          "excess": -4243.681150594645,
+          "rhs": 11879
+        }
+      ]
+    }
+  ],
+  "Optimize_calls": 24,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "affinity": {
+    "launcher_pid": 18604,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "passed": true
+}

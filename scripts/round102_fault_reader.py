@@ -15,5 +15,6 @@ if __name__=='__main__':
         else:raise AssertionError('failed stream accepted')
         assert not (directory/'event_5.commit').exists()
         records.append(dict(case=name,prior_LB=.1,rejected='journal_failure',failure=r[-1]['payload']['reason']))
-    write(OUT/'engineering/fault_reader01.json',dict(records=records,Optimize_calls=0,limitations='fake API callback-control test, no native B&B or complete storage-loss qualification'))
+    label=sys.argv[2] if len(sys.argv)>2 else 'fault_reader01'
+    write(OUT/'engineering'/(label+'.json'),dict(records=records,Optimize_calls=0,limitations='fake API callback-control test, no native B&B or complete storage-loss qualification'))
     print('all ten complete failed streams rejected; zero Optimize')

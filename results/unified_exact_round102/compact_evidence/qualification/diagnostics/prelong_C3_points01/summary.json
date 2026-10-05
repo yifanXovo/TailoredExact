@@ -1,0 +1,125 @@
+{
+  "records": [
+    {
+      "point_source": "results\\unified_exact_round102\\confirmation01\\raw\\03_R98-C3_J-SUBMIT\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round102.point.json",
+      "point_sha256": "d728e9486b6a306688ef4a9672e5fec935206e5c3861702ac4caa8330c369601",
+      "actual_source": "results\\unified_exact_round102\\confirmation01\\raw\\03_R98-C3_J-SUBMIT\\external\\models\\L0_epoch_0_generation_1.lp",
+      "actual_sha256": "fad025f0120c09cbbae87c8aeb964f7e54fd97873195eb9d0a56cb5598046904",
+      "source": "optimal original-column native root vector after native root processing",
+      "residual": {
+        "objective": 0.16963804390396434,
+        "maximum_absolute_residual": 9.094947017729282e-13,
+        "violations_over_native_feasibility_tol": []
+      },
+      "canonical_precomponent_LP_feasible_to_tol": true,
+      "matrix_scope": "This native call canonical model before R102 callback rows; includes its ENS target/leaf restrictions. Historical full-old-LP equality requires a separate verified SHA match.",
+      "J": [
+        {
+          "family": "occupancy",
+          "fleet_excess": -32877.73913655444,
+          "per_vehicle_excesses": [
+            -7525.750561370565,
+            -7875.488808087683,
+            -8708.652308047425,
+            -8767.847459048766
+          ]
+        },
+        {
+          "family": "actual-direction",
+          "fleet_excess": -294.73913655443914,
+          "per_vehicle_excesses": [
+            182.24943862943445,
+            165.51119191231714,
+            -438.65230804742447,
+            -203.8474590487663
+          ]
+        },
+        {
+          "family": "desired-direction",
+          "fleet_excess": -1178.7391365544393,
+          "per_vehicle_excesses": [
+            182.24943862943445,
+            121.51119191231716,
+            -711.6523080474244,
+            -770.8474590487663
+          ]
+        },
+        {
+          "family": "fixed-charge",
+          "fleet_excess": -5316.1405371449555,
+          "per_vehicle_excesses": [
+            -154.74965223326004,
+            -99.29132042637599,
+            -2967.0488474260655,
+            -2095.0507170592537
+          ]
+        }
+      ]
+    },
+    {
+      "point_source": "results\\unified_exact_round102\\confirmation01\\raw\\03_R98-C3_J-SUBMIT\\external\\native_logs\\L0_terminal_mip.gurobi.log.round102.point.json",
+      "point_sha256": "d728e9486b6a306688ef4a9672e5fec935206e5c3861702ac4caa8330c369601",
+      "actual_source": "results\\unified_exact_round102\\confirmation01\\raw\\03_R98-C3_J-SUBMIT\\external\\models\\L0_epoch_0_generation_1.lp",
+      "actual_sha256": "fad025f0120c09cbbae87c8aeb964f7e54fd97873195eb9d0a56cb5598046904",
+      "source": "optimal original-column native root vector after native root processing",
+      "residual": {
+        "objective": 0.16963804390396434,
+        "maximum_absolute_residual": 9.094947017729282e-13,
+        "violations_over_native_feasibility_tol": []
+      },
+      "canonical_precomponent_LP_feasible_to_tol": true,
+      "matrix_scope": "This native call canonical model before R102 callback rows; includes its ENS target/leaf restrictions. Historical full-old-LP equality requires a separate verified SHA match.",
+      "J": [
+        {
+          "family": "occupancy",
+          "fleet_excess": -32877.73913655444,
+          "per_vehicle_excesses": [
+            -7525.750561370565,
+            -7875.488808087683,
+            -8708.652308047425,
+            -8767.847459048766
+          ]
+        },
+        {
+          "family": "actual-direction",
+          "fleet_excess": -294.73913655443914,
+          "per_vehicle_excesses": [
+            182.24943862943445,
+            165.51119191231714,
+            -438.65230804742447,
+            -203.8474590487663
+          ]
+        },
+        {
+          "family": "desired-direction",
+          "fleet_excess": -1178.7391365544393,
+          "per_vehicle_excesses": [
+            182.24943862943445,
+            121.51119191231716,
+            -711.6523080474244,
+            -770.8474590487663
+          ]
+        },
+        {
+          "family": "fixed-charge",
+          "fleet_excess": -5316.1405371449555,
+          "per_vehicle_excesses": [
+            -154.74965223326004,
+            -99.29132042637599,
+            -2967.0488474260655,
+            -2095.0507170592537
+          ]
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "Optimize_calls": 0
+}

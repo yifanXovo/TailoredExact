@@ -1,0 +1,39 @@
+{
+  "roles": [
+    {
+      "id": "F2",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds": 3600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 1200,
+      "method_order": [
+        "ENS-C",
+        "J-SUBMIT",
+        "P-GRB"
+      ],
+      "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "M": 2,
+      "V": 20,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "historical_initial_witness": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/initial_witness.json",
+      "historical_initial_witness_sha256": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02",
+      "diagnostic_cutoff": 0.885348300934578,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.885348300934578,
+      "question": "Complete nonzero certification protection and direct net component value; P remains main benchmark."
+    }
+  ],
+  "phase": "service development",
+  "reference_billing": "one_finite_batch",
+  "maximum_optimize_calls_per_arm": 8,
+  "uniform_candidate": "two exact-integer profit directions, audited DP, root-only, no R101 or M-B stacking",
+  "questions": "Complete nonzero certification protection and direct net component value; P remains main benchmark.",
+  "planned_once": true
+}
