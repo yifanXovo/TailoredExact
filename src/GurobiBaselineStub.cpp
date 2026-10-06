@@ -1,9 +1,18 @@
 #include "GurobiBaseline.hpp"
 #include "FixedIntervalMipBackend.hpp"
+#include "Round105Decomposition.hpp"
+#include <stdexcept>
 
 #include <memory>
 
 namespace ebrp {
+SolveResult solveRound105Decomposition(const Instance&, const SolveOptions&, const SolveResult&) {
+    throw std::runtime_error("round105_gurobi_backend_not_enabled");
+}
+Round105OracleResult solveRound105OracleDiagnostic(const Instance&, const SolveOptions&,
+    const Round105Pattern&, const std::filesystem::path&, bool) {
+    throw std::runtime_error("round105_gurobi_backend_not_enabled");
+}
 namespace {
 
 class UnavailableGurobiFixedIntervalBackend final

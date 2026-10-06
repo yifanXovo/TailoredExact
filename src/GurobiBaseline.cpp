@@ -26,6 +26,9 @@
 #include "Round65Projection.hpp"
 #include "Round92HandlingActivation.hpp"
 #include "Round98StateService.hpp"
+#include "Round105Decomposition.hpp"
+#include "PhysicalWitnessValidation.hpp"
+#include "PaperK1AmSf.hpp"
 
 #include <gurobi_c.h>
 
@@ -4189,12 +4192,45 @@ private:
     FixedIntervalMipBackendStats stats_;
 };
 
+#include "Round105GurobiDecomposition.inc"
+
 #endif // _WIN32
 
 } // namespace
 
 bool gurobiBackendBuildEnabled() {
     return true;
+}
+
+SolveResult solveRound105Decomposition(const Instance& in, const SolveOptions& opt,
+                                      const SolveResult& seed) {
+#ifdef _WIN32
+    SolveResult failed=seed;failed.lower_bound=0;
+    try { return r105Solve(in,opt,seed,failed); }
+    catch(const std::exception& ex) {
+        failed.status="error";
+        failed.strict_certified_original_problem=false;failed.strict_certificate_rejection_reason=ex.what();
+        const auto folder=std::filesystem::path(opt.external_gini_artifact_dir)/"round105";
+        std::filesystem::create_directories(folder);
+        std::ofstream error(folder/"initialization_error.json");
+        error<<std::setprecision(17)<<"{\"reason\":"<<std::quoted(ex.what())<<",\"LB\":"<<failed.lower_bound<<",\"UB\":"<<failed.upper_bound<<"}\n";
+        return failed;
+    }
+#else
+    (void)in; (void)opt; (void)seed;
+    throw std::runtime_error("round105_dynamic_backend_requires_windows");
+#endif
+}
+
+Round105OracleResult solveRound105OracleDiagnostic(const Instance& in, const SolveOptions& opt,
+    const Round105Pattern& pattern, const std::filesystem::path& folder, bool core) {
+#ifdef _WIN32
+    R105Session session(in,opt,folder);
+    return session.oracle(pattern,folder/"oracle",core);
+#else
+    (void)in; (void)opt; (void)pattern; (void)folder; (void)core;
+    throw std::runtime_error("round105_dynamic_backend_requires_windows");
+#endif
 }
 
 GurobiRuntimeProbe probeGurobiRuntime(const SolveOptions& options) {

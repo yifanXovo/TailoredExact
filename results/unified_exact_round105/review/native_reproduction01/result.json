@@ -1,0 +1,137 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "name": "actual_full_infeasible",
+      "status": 3,
+      "solutions": 0,
+      "native_seconds": 0.01600000000325963,
+      "model_sha256": "b5c64c410ad3c29e8b3abdcb6402da0557c8535351988cdcaeba70d12700dca4",
+      "parameters": {
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0.0,
+        "MIPGapAbs": 0.0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "runtime": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      }
+    },
+    {
+      "name": "actual_released_core_infeasible",
+      "status": 3,
+      "solutions": 0,
+      "native_seconds": 0.0,
+      "model_sha256": "d2a90a125286ce93adf62bb462f12915f07cf0406bb08efa9bbc5e4e6a863df2",
+      "parameters": {
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0.0,
+        "MIPGapAbs": 0.0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "runtime": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      }
+    },
+    {
+      "name": "actual_paid_seed_positive_control",
+      "status": 2,
+      "solutions": 1,
+      "native_seconds": 0.10899999999674037,
+      "model_sha256": "f620005b1b096962aab057329a481f6ae1debab5ed7ae01eb5f4471875d566f1",
+      "parameters": {
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0.0,
+        "MIPGapAbs": 0.0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "runtime": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "IntVio": 0.0,
+        "independent_raw_max_row_violation": 0.0,
+        "checked_rows": 2995
+      },
+      "route_check": {
+        "nodes": [
+          0,
+          7,
+          22,
+          12,
+          1,
+          26,
+          11,
+          16,
+          10,
+          9,
+          24,
+          14,
+          0
+        ],
+        "operations": {
+          "7": 9,
+          "22": 4,
+          "12": -7,
+          "26": 6,
+          "1": 8,
+          "11": -7,
+          "16": 7,
+          "10": -12,
+          "9": 6,
+          "14": -4,
+          "24": -10
+        },
+        "prefixes": [
+          9,
+          13,
+          6,
+          14,
+          20,
+          13,
+          20,
+          8,
+          14,
+          4,
+          0
+        ],
+        "return_load": 0,
+        "total_pickup": 40,
+        "travel": 2393.634304515107,
+        "handling": 4800,
+        "duration": 7193.634304515107,
+        "original_T": 7200,
+        "station_ok": true,
+        "load_ok": true,
+        "feasible": true
+      }
+    }
+  ],
+  "scope": "Independent author/physical six-order enumeration and route validation; same native floating engine; retained LP models, not independent model construction, not rational certificates, not independent full production reexecution or performance replication."
+}

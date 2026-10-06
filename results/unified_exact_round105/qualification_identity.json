@@ -1,0 +1,10 @@
+{
+  "recorded_after_execution":true,
+  "production_source_commit":"91ff7da1b319577bf2fe703417bdd7d994a790a3",
+  "production_PE_sha256":"8b17e33c612d9768edec0047df5ca9efdc088ee8fc5a67acfbf0dd1b5f5e19c9",
+  "native04_test_source_sha256":"7301355edaaaa0056657f76fee1f338dea16cbd6b5bb89caf7e80a4955683270",
+  "native_added01_test_source_sha256":"3dae02d53c749aeea5a078fcf788880448be11b1e7d37dcc768e6123588f61e5",
+  "native_added01_test_PE_sha256":"8766f0d14c99fd36a40411fc5830871ab32ca0af32225d803278bae41274c865",
+  "core_inc_sha256":"d741621a901182585134ff30366afa5d61410b2d774d402b0fad709e8001c24c",
+  "limits":"Tests are outside inherited production bindings. This consolidation records observed unchanged test bytes after execution; it is not a backdated pre-launch test-source freeze. Build/launch receipts independently retain production bindings and launched executable SHA. Native04 used the pre-metadata-fix main but the same core math implementation; native-added uses current production objects with only the test target rebuilt."
+}
