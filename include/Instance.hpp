@@ -486,6 +486,8 @@ struct SolveOptions {
     std::string round101_fleet_range = "tree";
     std::string round102_service_cuts = "off"; // off|shell|shadow|submit, root only
     std::string round103_resource_hull = "off"; // off|shadow|submit, one pre-MIP pass
+    bool round104_observe_native = false; // read-only full original-column samples
+    std::string round104_objective_resources = "off"; // off|shadow|active, self-paid pool
     // Round90 ENS-C ablation: use a current optimal parent LP G for the
     // first-class K1 split point when strictly interior; otherwise midpoint.
     bool round90_lp_g_split = false;

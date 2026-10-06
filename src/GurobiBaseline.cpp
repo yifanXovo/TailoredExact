@@ -396,6 +396,7 @@ struct ProgressCallbackState {
     std::vector<double> round59_first_root_values;
     std::vector<double> round59_latest_root_values;
     std::vector<std::pair<int, std::vector<double>>> round59_nonroot_values;
+    std::map<int,double> round59_nonroot_node_counts;
     std::vector<RootScalar> round59_root_scalars;
     bool round59_nonroot_observed = false;
     double round59_sample_seconds = 0.0;
@@ -1161,6 +1162,7 @@ int __stdcall progressAndBoundTargetCallback(
                         state->round59_sampled.insert(bucket);
                         state->round59_nonroot_values.push_back(
                             {bucket, values});
+                        state->round59_nonroot_node_counts[bucket]=node;
                     }
                 }
                 if (state->round59_samples) {
@@ -1819,6 +1821,7 @@ public:
     }
 
 #include "Round103GurobiHull.inc"
+#include "Round104GurobiObjective.inc"
 
     FixedIntervalMipOutcome solve(
         const FixedIntervalMipRequest& request) override {
@@ -3151,8 +3154,7 @@ public:
             }
             for (const auto& sample : callback.round59_nonroot_values) {
                 write_sample("bounded_nonroot_relaxation", 0, sample.first,
-                             sample.first == 1 ? 1.0
-                                 : (sample.first == 2 ? 10.0 : 100.0),
+                            callback.round59_nonroot_node_counts.at(sample.first),
                              sample.second);
             }
             std::ofstream scalars(

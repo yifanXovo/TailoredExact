@@ -30,13 +30,17 @@ double combinationResidual(const ServicePoint&point,const std::vector<std::array
     }return residual;
 }
 }
-HullMembership classifyServiceHull(const ServiceContract&c,int k,const ServicePoint&point,const HullLpSolver&solve,const std::vector<int>&anchors,double tolerance,const HullTrace&trace){
+HullMembership classifyServiceHull(const ServiceContract&c,int k,const ServicePoint&point,const HullLpSolver&solve,const std::vector<int>&anchors,double tolerance,const HullTrace&trace,std::vector<ServicePlan>*bank){
     HullMembership result;
     if(!c.valid||k<0||static_cast<std::size_t>(k)>=c.columns.size()||point.size()!=c.resource.initial.size()||!std::isfinite(tolerance)||tolerance<=0)throw std::runtime_error("hull_contract");
     for(auto r:point)for(auto a:r)if(!std::isfinite(a))throw std::runtime_error("hull_nonfinite_point");
     const auto s=widths(c.resource,k);const std::size_t n=point.size();
     for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(!s[i][t]&&std::fabs(point[i][t])>tolerance){result.reason="zero_width_residual";return result;}
     std::vector<ServicePlan>library(1,ServicePlan(n,{0,0,0}));std::set<ServicePlan>seen;seen.insert(library[0]);
+    if(bank)for(const auto&plan:*bank){std::string why;
+        if(!validateServicePlan(c.resource,k,plan,why,anchors))throw std::runtime_error("hull_seed_plan:"+why);
+        if(seen.insert(plan).second)library.push_back(plan);}
+    std::set<ServicePlan> bank_seen;if(bank)bank_seen.insert(bank->begin(),bank->end());
     long long total_width=0;for(auto row:s)for(int value:row){
         if(value<0||value>std::numeric_limits<long long>::max()-total_width){result.reason="physical_width_range";return result;}total_width+=value;}
     const double ratio=4.*std::max(1LL,total_width)/tolerance;
@@ -68,6 +72,7 @@ HullMembership classifyServiceHull(const ServiceContract&c,int k,const ServicePo
             result.reason="support_unknown:"+proof.reason;return result;
         }
         ServiceCut cut;cut.proofs.push_back(proof);double activity=0,qnorm=0;
+        if(bank&&bank->size()<4096&&bank_seen.insert(proof.solution).second)bank->push_back(proof.solution);
         cut.rhs=static_cast<double>(proof.upper)/scale;
         for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(w[i][t]){const double a=static_cast<double>(w[i][t])/scale;
             cut.indices.push_back(c.columns[k][i][t]);cut.coefficients.push_back(a);activity=down(activity+down(a*point[i][t]));qnorm=up(qnorm+up(std::fabs(a)*s[i][t]));}

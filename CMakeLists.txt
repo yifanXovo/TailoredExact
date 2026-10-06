@@ -6,6 +6,14 @@ set(GUROBI_ROOT "" CACHE PATH "Root of the local Gurobi win64 installation")
 
 enable_testing()
 
+add_library(round104_compression src/ObjectiveResourceCompression.cpp)
+target_include_directories(round104_compression PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+add_executable(Round104Compression src/round104_compress_main.cpp)
+target_link_libraries(Round104Compression PRIVATE round104_compression)
+add_executable(Round104CompressionTests tests/round104_compression_tests.cpp)
+target_link_libraries(Round104CompressionTests PRIVATE round104_compression)
+add_test(NAME Round104CompressionTests COMMAND Round104CompressionTests)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
