@@ -67,7 +67,11 @@ def audit(launch,observations,completion,identity,legacy_identity=False):
 def prepare(name,protocol_path):
     ensure_idle();protocol=read(protocol_path);camp=OUT/name;camp.mkdir(exist_ok=False)
     original.BUILD=BUILD
-    prereg=dict(common=original.ext.COMMON,candidate_binary=(BUILD/'ExactEBRP.exe').relative_to(ROOT).as_posix(),
+    common=dict(original.ext.COMMON)
+    if 'process_shutdown_margin_seconds' in protocol:
+        reserve=protocol['process_shutdown_margin_seconds'];assert reserve in [3,30]
+        common['shutdown_margin_seconds']=reserve
+    prereg=dict(common=common,candidate_binary=(BUILD/'ExactEBRP.exe').relative_to(ROOT).as_posix(),
                 candidate_binary_sha256=sha(BUILD/'ExactEBRP.exe'))
     launches=[];references={}
     for role in protocol['roles']:

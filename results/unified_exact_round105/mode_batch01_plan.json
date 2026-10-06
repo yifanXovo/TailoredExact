@@ -1,0 +1,18 @@
+{
+  "output": "mode_batch01",
+  "scope": "Nine complete integer master modes plus two self-paid seed positive controls; diagnostic caps only",
+  "production_handoff": false,
+  "jobs": [
+    {"label":"F2_01","number":1,"cap_seconds":120,"mode":"core"},
+    {"label":"F2_01","number":2,"cap_seconds":120,"mode":"core"},
+    {"label":"C2_01","number":1,"cap_seconds":120,"mode":"core"},
+    {"label":"C2_01","number":2,"cap_seconds":120,"mode":"core"},
+    {"label":"C2_01","number":3,"cap_seconds":120,"mode":"core"},
+    {"label":"F5_01","number":1,"cap_seconds":120,"mode":"core"},
+    {"label":"F5_01","number":2,"cap_seconds":120,"mode":"core"},
+    {"label":"F5_01","number":3,"cap_seconds":120,"mode":"core"},
+    {"label":"F5_01","number":4,"cap_seconds":120,"mode":"core"},
+    {"label":"C2_controls01","number":1,"cap_seconds":120,"mode":"full"},
+    {"label":"C2_controls01","number":2,"cap_seconds":120,"mode":"full"}
+  ]
+}

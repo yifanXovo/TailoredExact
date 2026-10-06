@@ -1,0 +1,174 @@
+{
+  "mode_sha256": "2cbe822b80ed32d954ee6d40597ae9d4af2128339a68e70bb8eeab40afd8bfc4",
+  "orders": [
+    {
+      "nodes": [
+        0,
+        6,
+        7,
+        9,
+        0
+      ],
+      "operations": {
+        "6": 9,
+        "7": -16,
+        "9": 7
+      },
+      "prefixes": [
+        9,
+        -7,
+        0
+      ],
+      "return_load": 0,
+      "total_pickup": 16,
+      "travel": 1661.1355644215034,
+      "handling": 1920,
+      "duration": 3581.1355644215037,
+      "original_T": 3600,
+      "station_ok": true,
+      "load_ok": false,
+      "feasible": false
+    },
+    {
+      "nodes": [
+        0,
+        6,
+        9,
+        7,
+        0
+      ],
+      "operations": {
+        "6": 9,
+        "7": -16,
+        "9": 7
+      },
+      "prefixes": [
+        9,
+        16,
+        0
+      ],
+      "return_load": 0,
+      "total_pickup": 16,
+      "travel": 1875.7147313603384,
+      "handling": 1920,
+      "duration": 3795.714731360338,
+      "original_T": 3600,
+      "station_ok": true,
+      "load_ok": true,
+      "feasible": false
+    },
+    {
+      "nodes": [
+        0,
+        7,
+        6,
+        9,
+        0
+      ],
+      "operations": {
+        "6": 9,
+        "7": -16,
+        "9": 7
+      },
+      "prefixes": [
+        -16,
+        -7,
+        0
+      ],
+      "return_load": 0,
+      "total_pickup": 16,
+      "travel": 1709.319230441526,
+      "handling": 1920,
+      "duration": 3629.319230441526,
+      "original_T": 3600,
+      "station_ok": true,
+      "load_ok": false,
+      "feasible": false
+    },
+    {
+      "nodes": [
+        0,
+        7,
+        9,
+        6,
+        0
+      ],
+      "operations": {
+        "6": 9,
+        "7": -16,
+        "9": 7
+      },
+      "prefixes": [
+        -16,
+        -9,
+        0
+      ],
+      "return_load": 0,
+      "total_pickup": 16,
+      "travel": 1875.7147313603384,
+      "handling": 1920,
+      "duration": 3795.714731360338,
+      "original_T": 3600,
+      "station_ok": true,
+      "load_ok": false,
+      "feasible": false
+    },
+    {
+      "nodes": [
+        0,
+        9,
+        6,
+        7,
+        0
+      ],
+      "operations": {
+        "6": 9,
+        "7": -16,
+        "9": 7
+      },
+      "prefixes": [
+        7,
+        16,
+        0
+      ],
+      "return_load": 0,
+      "total_pickup": 16,
+      "travel": 1709.319230441526,
+      "handling": 1920,
+      "duration": 3629.319230441526,
+      "original_T": 3600,
+      "station_ok": true,
+      "load_ok": true,
+      "feasible": false
+    },
+    {
+      "nodes": [
+        0,
+        9,
+        7,
+        6,
+        0
+      ],
+      "operations": {
+        "6": 9,
+        "7": -16,
+        "9": 7
+      },
+      "prefixes": [
+        7,
+        -9,
+        0
+      ],
+      "return_load": 0,
+      "total_pickup": 16,
+      "travel": 1661.1355644215034,
+      "handling": 1920,
+      "duration": 3581.1355644215037,
+      "original_T": 3600,
+      "station_ok": true,
+      "load_ok": false,
+      "feasible": false
+    }
+  ],
+  "conclusion": "all_six_original_orders_infeasible"
+}

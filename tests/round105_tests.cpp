@@ -46,7 +46,8 @@ static double conflictValue(const Round105Conflict& cut,const Instance& in,const
 }
 int main(int argc,char** argv) {
     try {
-        const bool native=argc==3 && std::string(argv[1])=="native";
+        const bool added=argc==3 && std::string(argv[1])=="native-added";
+        const bool native=argc==3 && (std::string(argv[1])=="native" || added);
         const std::filesystem::path dir=native ? argv[2] : "round105_test_artifacts";
         auto b=fixture({2,2,-3,-1},3,100);
         Round105Pattern bad{0,{0,2,2,-3,0}},good{0,{0,2,2,-3,-1}};
@@ -85,6 +86,7 @@ int main(int argc,char** argv) {
                 const bool truth=enumerate(in,p);out<<id<<','<<truth<<','<<static_cast<int>(r.status)<<','<<r.core_confirmed<<','<<r.core.size()<<'\n';out.flush();
                 require(r.status==(truth ? Round105OracleStatus::Feasible : Round105OracleStatus::ProvedInfeasible),"native/enumeration disagreement");
             };
+            if(!added) {
             test(b,bad,true);test(b,good,true);test(qlarge,bad,false);test(returning,pr,false);test(repeated,pp,false);
             a.total_time_limit=16;test(a,pa,true);a.total_time_limit=18;test(a,pa,false);
             test(b,Round105Pattern{0,{0,0,0,0,0}},false);
@@ -109,6 +111,34 @@ int main(int argc,char** argv) {
             std::ifstream summary(dir/"loop/round105/summary.json");std::string content((std::istreambuf_iterator<char>(summary)),{});
             require(content.find("\"conflicts\":0,")==std::string::npos,"tiny loop did not learn a conflict");
             out<<"loop,1,"<<result.status<<",0,0\n";
+            }
+            // Explicit integer-assignment A master, with an omitted unused car
+            // in the sparse seed. Uniform metric travel is exactly 2 per stop;
+            // the single supplier cannot be split under retained binary z.
+            a.total_time_limit=16;
+            SolveOptions ao;configurePaperK1AmSfOverrides(ao);ao.round105_decomposition="full";
+            ao.gurobi_home="D:/gurobi1302/win64";ao.external_gini_artifact_dir=(dir/"assignment_A").string();
+            ao.process_start_time=std::chrono::steady_clock::now();ao.process_start_time_valid=true;
+            ao.process_wall_time_limit=120;ao.process_shutdown_margin_seconds=0;
+            SolveResult sparse;sparse.routes={{0,{0,0},{}}};
+            sparse.verification=verifyCompletePhysicalStartingWitness(a,{{0,{0,0},{}},{1,{0,0},{}}},ao.lambda);
+            sparse.upper_bound=sparse.objective=sparse.verification.objective;sparse.final_inventory=a.initial;
+            const auto ar=solveRound105Decomposition(a,ao,sparse);
+            require(ar.strict_certified_original_problem && ar.lower_bound>1e-6,"A integer master accepted impossible zero target");
+            require(ar.routes.size()==2,"sparse seed omitted-car normalization lost vehicle");
+            out<<"assignment_A,0,"<<ar.status<<",0,0\n";
+            // A deadline already exhausted before any Optimize cannot prove
+            // infeasibility, cut a mode, improve a bound, or restart a timer.
+            ao.process_start_time=std::chrono::steady_clock::now()-std::chrono::seconds(1);
+            ao.process_wall_time_limit=0.001;
+            auto expired=solveRound105OracleDiagnostic(b,ao,bad,dir/"expired_oracle",true);
+            require(expired.status==Round105OracleStatus::Unknown && expired.core.empty(),"expired oracle fabricated proof");
+            ao.external_gini_artifact_dir=(dir/"expired_master").string();
+            const auto er=solveRound105Decomposition(a,ao,sparse);
+            require(!er.strict_certified_original_problem && er.lower_bound==0 &&
+                    std::abs(er.upper_bound-sparse.upper_bound)<1e-7,"expired master changed paid bound state");
+            out<<"expired_oracle,0,"<<static_cast<int>(expired.status)<<",0,0\n";
+            out<<"expired_master,0,"<<er.status<<",0,0\n";
         }
         std::cout<<"Round105 independent counterexamples and contracts PASS"<<(native ? "; native PASS" : "")<<'\n';
     } catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}return 0;

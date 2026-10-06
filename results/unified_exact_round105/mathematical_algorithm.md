@@ -129,8 +129,17 @@ Each infeasible round cuts its current mode, hence its fleet candidate. A
 feasible optimal round closes or errors. A repeated identical fleet candidate
 is an explicit ERROR, with no arbitrary repetition limit. This finite
 termination argument does not imply polynomial complexity or good costs.
-All runtime errors preserve the current result state, logs and durable error
-record; graceful UNKNOWN retains the paid UB and valid master LB.
+Handled C++ exceptions preserve the current result state, logs and durable
+error record; graceful UNKNOWN retains the paid UB and valid master LB.
+An external hard kill cannot execute finalization. The first F5 600s
+diagnostic was killed by the unchanged cap-2 supervisor after its native
+TimeLimit log, before after-call/quality/solution/summary persistence. It has
+no qualified endpoint and is retained as a charged failure, without log-based
+bound recovery. The retry and subsequent contemporary comparisons use the
+existing 30s whole-process shutdown reserve (same reserve for every paired
+arm). This is a work/finalization boundary within the original total budget,
+not a per-car limit, new timer or change to physical T or numeric tolerances.
+It does not establish graceful handling of every conceivable external kill.
 
 Primary references: [Gurobi 13 C solving/IIS API](https://docs.gurobi.com/projects/optimizer/en/current/reference/c/solving.html),
 [Gurobi IIS guide](https://support.gurobi.com/hc/en-us/articles/15656630439441-How-do-I-use-compute-IIS-to-find-a-subset-of-constraints-that-are-causing-model-infeasibility),
