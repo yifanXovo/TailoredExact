@@ -27,6 +27,7 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(EXACT_EBRP_LIB_SOURCES
+  src/Round105Decomposition.cpp
   src/Parser.cpp
   src/Evaluator.cpp
   src/Round73JointInsertion.cpp
@@ -483,6 +484,12 @@ add_test(NAME Round48K1AMFTests COMMAND Round48K1AMFTests)
 
 add_executable(Round49RCOfflineExtract src/round49_rc_extract_main.cpp)
 target_link_libraries(Round49RCOfflineExtract PRIVATE exact_ebrp_core)
+
+add_executable(Round105Tests tests/round105_tests.cpp)
+target_link_libraries(Round105Tests PRIVATE exact_ebrp_core)
+add_test(NAME Round105Tests COMMAND Round105Tests)
+add_executable(Round105Oracle src/round105_oracle_main.cpp)
+target_link_libraries(Round105Oracle PRIVATE exact_ebrp_core)
 
 add_executable(Round100QuantityTests tests/round100_quantity_tests.cpp)
 target_link_libraries(Round100QuantityTests PRIVATE exact_ebrp_core)

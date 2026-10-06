@@ -22,6 +22,7 @@
 #include "Round83BlockExchange.hpp"
 #include "Round96RouteOrder.hpp"
 #include "Round92HandlingActivation.hpp"
+#include "Round105Decomposition.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
@@ -274,6 +275,8 @@ std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
         return "research-round88-ensc-constructive-only";
     if (opt.round89_native_ot_b1)
         return "research-round89-ensc-native-ot-b1";
+    if (opt.round105_decomposition != "off")
+        return "research-round105-inventory-route-" + opt.round105_decomposition;
     if (opt.round104_objective_resources != "off")
         return "research-round104-ensc-objective-" + opt.round104_objective_resources + "-root";
     if (opt.round103_resource_hull != "off")
@@ -1452,6 +1455,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round103-resource-hull") opt.round103_resource_hull = requireValue(i, argc, argv);
         else if (arg == "--round104-observe-native") opt.round104_observe_native = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round104-objective-resources") opt.round104_objective_resources = requireValue(i, argc, argv);
+        else if (arg == "--round105-decomposition") opt.round105_decomposition = requireValue(i, argc, argv);
         else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round96-route-order") opt.round96_route_order = parseBoolValue(requireValue(i, argc, argv));
@@ -3370,6 +3374,42 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Invalid Round103 hull mode");
     if (opt.round103_resource_hull != "off" && (opt.round101_fleet_cuts != "off" || opt.round102_service_cuts != "off"))
         throw std::runtime_error("Round103 cannot combine with Round101/102");
+    if (opt.round105_decomposition != "off" && opt.round105_decomposition != "full" && opt.round105_decomposition != "core")
+        throw std::runtime_error("Invalid Round105 decomposition mode");
+    if (opt.round105_decomposition != "off" &&
+        (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         opt.method != "gcap-frontier" || !opt.k1_am_sf_controller_enabled ||
+         opt.round89_native_ot_b1 || opt.round88_constructive_only_descent ||
+         opt.round90_lp_g_split || opt.round92_handling_activation || opt.round96_route_order ||
+         opt.round97_native_closure != "off" || opt.round98_state_service != "off" ||
+         opt.round100_continuous_quantities || opt.round60_candidate_mode != "off" ||
+         opt.round61_candidate_mode != "off" || opt.round62_threshold_mode != "off" ||
+         opt.round63_time_mode != "off" || opt.round64_shared_mode != "off" ||
+         opt.round101_fleet_cuts != "off" || opt.round102_service_cuts != "off" ||
+         opt.round103_resource_hull != "off" || opt.round104_objective_resources != "off" ||
+         opt.external_gini_scheduling != "round31-nonblocking-native-bound" ||
+         opt.round66_arc_load_replacement || opt.gini_floor > 0 || opt.gini_cap >= 0 ||
+         opt.incumbent_archive_auto || opt.gcap_seed_cplex ||
+         !opt.external_incumbent_path.empty() || !opt.hga_incumbent_path.empty() || !opt.incumbent_json_path.empty()))
+        throw std::runtime_error("Round105 requires isolated ENS-C startup and a full non-strict global domain");
+    if (opt.round105_decomposition != "off") {
+        ebrp::SolveOptions expected;
+        expected.algorithm_preset = "research-round83-vds-equal-net-exchange";
+        applyAlgorithmPreset(expected);
+        if (opt.primal_heuristic != expected.primal_heuristic ||
+            opt.primal_heuristic_stop != expected.primal_heuristic_stop ||
+            opt.primal_heuristic_runs != expected.primal_heuristic_runs ||
+            opt.primal_heuristic_seed != expected.primal_heuristic_seed ||
+            opt.primal_heuristic_no_improve_generations != expected.primal_heuristic_no_improve_generations ||
+            opt.round34_c6_startup_variant != expected.round34_c6_startup_variant ||
+            opt.route_pool_incumbent != expected.route_pool_incumbent ||
+            opt.route_pool_max_columns_per_vehicle != expected.route_pool_max_columns_per_vehicle ||
+            opt.route_pool_keep_best_per_projection != expected.route_pool_keep_best_per_projection ||
+            opt.bpc_incumbent != expected.bpc_incumbent ||
+            opt.exact_phase_local_redecode_repair != expected.exact_phase_local_redecode_repair ||
+            opt.external_gini_interval_mip_policy != "round55-vd-p")
+            throw std::runtime_error("Round105 startup must retain original ENS-C settings");
+    }
     if (opt.round104_objective_resources != "off" && opt.round104_objective_resources != "shadow" && opt.round104_objective_resources != "active")
         throw std::runtime_error("Invalid Round104 objective-resource mode");
     if (opt.round104_objective_resources != "off" && (opt.round101_fleet_cuts != "off" || opt.round102_service_cuts != "off" || opt.round103_resource_hull != "off"))
@@ -13215,6 +13255,15 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         return result;
     }
 
+    if (opt.round105_decomposition != "off") {
+        result.exact_phase_started = true;
+        result.process_elapsed_at_exact_phase_start_seconds = ebrp::processElapsedSeconds(opt);
+        auto decomposed = ebrp::solveRound105Decomposition(instance,opt,result);
+        decomposed.runtime_seconds = elapsedSeconds();
+        decomposed.wall_time_seconds = decomposed.runtime_seconds;
+        decomposed.actual_runtime_seconds = decomposed.runtime_seconds;
+        return decomposed;
+    }
     if (opt.frontier_execution_mode == "global-gini-tree") {
         ebrp::SolveOptions global_opt = opt;
         global_opt.frontier_adaptive_max_depth =
