@@ -1,0 +1,112 @@
+{
+  "wrapper_starts": 25,
+  "known_nested_process_starts": 19,
+  "conservative_counted_starts": 44,
+  "charged_outer_seconds": 3804.2468159998534,
+  "native_Optimize_calls": 33,
+  "auxiliary_Optimize_calls": 8733,
+  "DP_calls": 7290,
+  "failed_paid_labels": [
+    "cpp_qualify01",
+    "native_points01",
+    "pool_C2_01",
+    "pool_F2_01",
+    "report01"
+  ],
+  "ceiling_starts": 72,
+  "ceiling_outer_seconds": 80000,
+  "nested_seconds_added_again": 0,
+  "engineering": [
+    {
+      "label": "candidate01",
+      "exit_code": 1,
+      "stop_reason": "normal_return",
+      "outer_seconds": 29.15373889997136,
+      "engineering": true,
+      "receipt_sha256": "11fe86cdfdca0da1a40ee0b3a60e491a03098e98ac0ad3d1ef39e6c91632144f"
+    },
+    {
+      "label": "candidate02",
+      "exit_code": 1,
+      "stop_reason": "normal_return",
+      "outer_seconds": 2.9089193000108935,
+      "engineering": true,
+      "receipt_sha256": "7d29d57b1c197d49f85f33f3e8062aa8b84381826975ff1d00c51d3f7422235a"
+    },
+    {
+      "label": "candidate03",
+      "exit_code": 0,
+      "stop_reason": "normal_return",
+      "outer_seconds": 10.994319399993401,
+      "engineering": true,
+      "receipt_sha256": "31941cd141746fd534f693c34d580747c001569d623b14a99efad484ffcbd2fe"
+    },
+    {
+      "label": "candidate04",
+      "exit_code": 0,
+      "stop_reason": "normal_return",
+      "outer_seconds": 1.4985637000063434,
+      "engineering": true,
+      "receipt_sha256": "a7b80848bddfde6d272c265247c31a00760676d700c62d7061030c616f7b2df0"
+    },
+    {
+      "label": "freeze01",
+      "exit_code": 0,
+      "stop_reason": "normal_return",
+      "outer_seconds": 0.636181799985934,
+      "engineering": true,
+      "receipt_sha256": "7866410264b20f427b6a618e9e1fc997ae16d1b17f7f8025ed395ac8118be435"
+    },
+    {
+      "label": "prototype01",
+      "exit_code": 0,
+      "stop_reason": "normal_return",
+      "outer_seconds": 35.282109699968714,
+      "engineering": true,
+      "receipt_sha256": "cb6db07a0dbcf6eb95ae92e8f1a06b6b6f30a424b6a229d3f4d2b15184543d44"
+    },
+    {
+      "label": "prototype01_configure",
+      "exit_code": 0,
+      "stop_reason": "normal_return",
+      "outer_seconds": 2.5169060000334866,
+      "engineering": true,
+      "receipt_sha256": "afa735aebed72888e05f135cc33b4f278abad54424f00313d475dff7410f5882"
+    },
+    {
+      "label": "prototype02",
+      "exit_code": 0,
+      "stop_reason": "normal_return",
+      "outer_seconds": 1.0769615999888629,
+      "engineering": true,
+      "receipt_sha256": "93105694b016c936e8ec6b0f92be9479844ccbc42365c8d85512ec17a04fad87"
+    },
+    {
+      "label": "reader_syntax01",
+      "exit_code": 0,
+      "stop_reason": "normal_return",
+      "outer_seconds": 0.07839119998971,
+      "engineering": true,
+      "receipt_sha256": "d65f9a466bd2e65a964656f1c6d6c90bc3972c432e17ecfcedd15cb83f7b735c"
+    },
+    {
+      "label": "unit01",
+      "exit_code": 0,
+      "stop_reason": "normal_return",
+      "outer_seconds": 0.1154499999829568,
+      "engineering": true,
+      "receipt_sha256": "7761086beb201ec3761b712e0921390e247d463f20326b55e66bc1d95ad66c9f"
+    },
+    {
+      "label": "unit02",
+      "exit_code": 0,
+      "stop_reason": "normal_return",
+      "outer_seconds": 0.790148500003852,
+      "engineering": true,
+      "receipt_sha256": "b6c77b0f188734e1d88ee5ce17101bf6c8bb50ee421a7c35b48107ff697c9884"
+    }
+  ],
+  "accounting": "wrapper process wall time includes every sequential child and postexit audit; separate conservative starts count wrapper plus observed child starts, not Optimize iterations",
+  "source_sha256": "ce531e63971f5164ffa555f43525d91557636e162346b41370e1ee4a3dd8eb1a",
+  "fee_csv_sha256": "2ce04941dc538e6ebab3289b87abc8a4379f5cfd0e66d341e553b69fa56350ba"
+}

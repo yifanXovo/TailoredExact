@@ -40,13 +40,26 @@ to zero because the native linear API omits them. The same signed interval
 global-bound compensation covers that conversion. Actual binary64 output is
 independently recomputed with Fraction, read back coefficient for coefficient,
 and reoptimized. This is numerical compression, not an equivalence claim.
-GROUPED treats binary64 nonnegative multipliers as exact dyadic values and
-accumulates products/sums exactly. For submitted coefficients ahat, set
+The offline Python GROUPED reader treats binary64 nonnegative multipliers
+as exact dyadic values and accumulates products/sums with Fraction. The C++
+primitive instead encloses each product/sum in outward binary64 intervals,
+checks round-to-nearest/subnormal behavior, and conservatively compensates
+their enclosures. For submitted coefficients ahat, set
 bhat>=bbar+sum max((ahat_i-abar_i)*LB_i,(ahat_i-abar_i)*UB_i), rounding RHS
 outward. Bounds must be globally valid and finite wherever the conversion
 changes a coefficient. This formula handles both signs. Dropping a tiny
 coefficient is a conversion and needs the same compensation. Conversion
 overflow or unsupported bounds is a failure/UNKNOWN, never an unsafe row.
+
+The historical Python GROUPED/FLEET numerical LPs did not read back each
+coefficient after API insertion. Three GROUPED0 coefficients below1e-13
+have nonzero variable domains; the exported coefficient-rounding compensation
+does not by itself certify the later API deletion. Thus the serialized row's
+validity and its actual native-row validity are distinct: the latter remains
+unqualified, not proved invalid. Actual C++ GROUPED/FLEET explicitly delete
+and compensate unsupported tiny terms and pass native readback. The primary
+actual aggregate proof uses those rows. Native-point separation evaluates
+the valid serialized aggregates; production ACTIVE has no such conversion.
 
 Repricing a quantized group direction on the full necessary domain gives a
 safe support upper bound h(wbar)<=sum lambda_j h(w_j). Repricing can improve
@@ -82,9 +95,17 @@ repair tiny positive Pi to zero and explicitly record that repair. A separate
 compressed LP is reoptimized, with full X/Pi/RC and ConstrVio/BoundVio/DualVio
 saved. The existing1e-7 certificate scale bounds numerical residual and
 objective loss for this qualified experiment; it is not a rational proof.
-If the deadline prevents qualification, retain the certified ALL rows and
-declare UNKNOWN. Other mapping/readback/duality/persistence failures propagate
-durably. No auxiliary LP bound is used as formal global LB or cutoff.
+An incomplete LP on the fully inserted pool retains certified ALL rows and
+declares UNKNOWN. Mapping/readback/duality/persistence failures propagate
+durably. Delivery review identified a separate untested deadline boundary:
+if only part of the vehicle loop appends new valid rows before time expires,
+those buffered rows are not yet inserted in the root LP. Later Pi readback
+can then fail explicitly rather than return a smooth ALL UNKNOWN result.
+No false closure or unqualified official bound was found to escape this path,
+and neither successful control triggered it. This is a STOP/no-adoption
+research-prototype limitation. Adoption or a claim of universal deadline
+fallback requires a repair and a new paired measurement freeze. No auxiliary
+LP bound is used as formal global LB or cutoff.
 
 SHADOW executes the same fresh generation and compression work but submits
 no new rows or bounds. ACTIVE inserts exact original rows before native MIP,

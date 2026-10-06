@@ -195,3 +195,9 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /tests/round103* -text whitespace=cr-at-eol
 /reference/round103_confirmation/** -text
 /results/unified_exact_round103/**/*.log -whitespace
+
+# Round104 frozen drivers, compact evidence and signed review retain exact bytes.
+/results/unified_exact_round104/** -text whitespace=cr-at-eol
+/scripts/round104*.py -text whitespace=cr-at-eol
+/tests/round104* -text whitespace=cr-at-eol
+/results/unified_exact_round104/**/*.log -whitespace

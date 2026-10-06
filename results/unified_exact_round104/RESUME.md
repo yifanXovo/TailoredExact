@@ -1,47 +1,53 @@
-# Round104 active research
+# Round104 completed research stage
 
-Base R103/PR165 delivery 7b60d3c1b07429ee96dbf371b4796e635499cb80.
-Branch codex/round104-objective-certificate-compression. ENS-C default unchanged.
-Do not reuse labels or launch while any performance/build process remains alive.
-Inspect process.json, closed receipts and campaign state before resuming.
+Decision: STOP the self-paid objective-selected single-vehicle necessary-resource
+root preprocessing route. Retain the primitive/default-off research identity;
+protected ENS-C remains the default. Do not repeat this pool/threshold family
+or revive unstarted confirmation as pending work.
 
-Completed: baseline restoration, all required R103 documents and full CSV report
-parse; SHA-bound F2 827/C2 133/F5 82 row pools recovered; same raw matrix
-RAW/PASS/ALL/ACTIVE/GROUPED/FLEET reoptimized. F2 positive objective compression;
-C2/F5 zero new dual support. Numerical qualifications and signed differences
-are retained. pool_F2_01 (missing scipy, one actual LP) and pool_C2_01 (legacy
-missing anchors, zero LP) failures are charged and preserved.
+Base: R103/PR165 branch `codex/round103-resource-hull-separation`, delivered
+SHA `7b60d3c1b07429ee96dbf371b4796e635499cb80`. R104 branch:
+`codex/round104-objective-certificate-compression`. Actual measured source:
+`339835c46c37f353c7cf9813ef749782098fff5d`; PE SHA
+`c469e9c9fcd0da968e02b6eb6d534d24473ef7c33975742c4aaab3b178284c4d`.
+Later report/evidence commits do not identify a newly measured build.
 
-Implementation: standalone C++ finite-pool compression with nonnegative dyadic
-floating weights, interval accumulation, signed global-bound RHS compensation,
-scope/error checks. No integrated self-paid production candidate is claimed yet.
-Original ENS observation uses existing complete R59 sampler via opt-in request
-path; actual positive node counts are corrected. Native parameters and models
-are unchanged. First independent static gate review awaits actual original ENS
-point increment evidence before any expanded candidate experiment.
+Completed: historical RAW/H-PASS/ALL/ACTIVE/GROUPED/FLEET diagnostics for
+F2/C2/F5, actual-scope F5 reoptimization, 12 full original-ENS native vectors,
+qualified compensated C++ aggregates, one complete two-support repricing
+revision, seven paid LP fixtures and three passing CTest targets. All failures
+are retained under exclusive original labels.
 
-Completed additions: native02 F2/C2/F5 observations and native_points02 twelve
-full vectors. F2 ACTIVE separates three positive-node samples; GROUPED loses
-them. C2 finite pool has no reliable violation at five points, F5 none at two.
-F5 narrower native L0.0 scope separately reoptimized in pool_F5_native01:
-ALL=RAW=.24420882282482045 and zero new dual support. F5 no positive node
-is observed. No implication of the full necessary domain by native cuts.
-cpp_qualify02 proves actual C++ compensation with Fraction, exact API readback
-and numerical LP preservation. cpp_qualify01 tiny-API readback failure remains
-charged. reprice01 has two complete-domain supports, no meaningful gain.
-dual_fixtures01 has seven numerical LP cases with constant/equality/bounds,
-zero/degenerate dual and descendant weakening. unit02 passes three targets.
+All four frozen F2 control01 arms returned normally and passed scoped audits:
+ACTIVE759.437s, complete SHADOW630.781s, ENS572.328s certified the same
+physical objective. P1197.422s was unproved/time_limit. ACTIVE versus ENS
+is+187.109s/+32.6926%, a prefrozen severe regression. Two independent
+reviews are signed, including an actual numerical recomputation with zero
+Optimize/DP. No performance or review process remains running. The two new
+holdouts and both3600-7200s groups were never started and are cancelled.
 
-First independent gate requires one F2 full self-paid ACTIVE/SHADOW/ENS/P
-control because ACTIVE retains genuine later node information. Isolated C++
-production src/Round104GurobiObjective.inc now pays fresh pool generation,
-legal local plan-bank reuse and compressed qualification. Code review found
-partial-vehicle deadline/UNKNOWN and missing numerical evidence issues; these
-are fixed before any full control. Build failures candidate01/02 are engineering
-and retained. control01_protocol.json freezes four1200s arms. No long-window
-confirmation is admitted. Final cost controls, scoped final independent
-recomputation, stopping/admission decision and draft PR remain outstanding.
+Paid ledger:44 conservative process starts,3804.246816 outer seconds,
+33 native Optimize,8733 auxiliary Optimize and7290 DP; nested time is not
+added twice. Hash/packing/reader-wording tasks are separately engineering.
+Never reuse old labels or overwrite old result files. The native01 reference
+preparation was abandoned before any native arm after the source changed.
 
-All work must stay within72 starts/80000 outer seconds, serial single-thread
-performance. Historical free-pool LP/MIP results must never be reported as
-end-to-end algorithm performance. P remains compact with no external Start.
+Limitations: floating duals are numerical qualifications, Python aggregate
+native tiny-term readback remains unqualified, and a partial-vehicle global
+deadline may cause a durable Pi readback error instead of graceful ALL UNKNOWN.
+No false formal bound was found, and controls did not trigger this boundary.
+Future promotion would require fixing it and new frozen paired measurements.
+No broad stable speedup, independent holdout confirmation, full-domain hidden-cut
+implication or universal valid-inequality rejection is claimed.
+
+Start at `final_report.md`, `capability_table.md`, `mathematical_algorithm.md`,
+`independent_review.md`, `fees.csv` and `reproduce.md`. Verify/restore exact
+compact evidence from the repository root:
+
+```powershell
+& D:/msys64/ucrt64/bin/python.exe scripts/round104_evidence.py verify
+& D:/msys64/ucrt64/bin/python.exe scripts/round104_evidence.py restore
+```
+
+Restore writes missing exact bytes only and rejects existing different files.
+The draft PR is stacked on R103; do not merge or change the default automatically.
