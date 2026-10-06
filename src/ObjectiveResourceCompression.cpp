@@ -49,7 +49,10 @@ std::vector<int> activeResourceRows(const std::vector<ObjectiveResourceRow>& row
 std::vector<CompressedResourceRow> compressObjectiveResources(
     const std::vector<ObjectiveResourceRow>& rows,const std::vector<double>& lower,
     const std::vector<double>& upper,bool fleet){
-    if(lower.size()!=upper.size()||std::fegetround()!=FE_TONEAREST||!std::numeric_limits<double>::is_iec559)
+    volatile double subnormal=std::numeric_limits<double>::denorm_min();
+    volatile double twice_subnormal=subnormal+subnormal;
+    if(lower.size()!=upper.size()||std::fegetround()!=FE_TONEAREST||!std::numeric_limits<double>::is_iec559||
+       twice_subnormal!=2*std::numeric_limits<double>::denorm_min())
         throw std::runtime_error("resource_compression_arithmetic_or_bounds");
     for(std::size_t i=0;i<lower.size();++i)
         if(std::isnan(lower[i])||std::isnan(upper[i])||lower[i]>upper[i])
@@ -74,6 +77,8 @@ std::vector<CompressedResourceRow> compressObjectiveResources(
             if(range.lo!=range.hi){finite(lower[i]);finite(upper[i]);}
             double margin=0;
             if(dl!=0||du!=0){finite(lower[i]);finite(upper[i]);
+                if(std::fabs(lower[i])>=1e100||std::fabs(upper[i])>=1e100)
+                    throw std::runtime_error("resource_compression_unbounded_conversion");
                 margin=std::max({product(dl,lower[i]).hi,product(dl,upper[i]).hi,
                     product(du,lower[i]).hi,product(du,upper[i]).hi});}
             correction=add(correction,{margin,margin});

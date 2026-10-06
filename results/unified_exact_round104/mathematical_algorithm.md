@@ -28,6 +28,12 @@ Every nonnegative combination of valid rows is valid, independent of dual
 optimality. Floating Pi and small numerical residuals do not prove rational
 dual optimality. The prototype retains every strictly negative new-row Pi
 in ACTIVE, without a fitted epsilon; zero and wrong-sign cases are recorded.
+The observed F2 ALL solution has twelve tiny positive new-row Pi values
+(maximum about1.30e-10). Python repairs these to zero for nonnegative validity.
+Its ACTIVE is therefore a repaired floating candidate, not the theorem's
+exact nonzero optimal dual support. Each expression is reoptimized. Signed
+objective differences must be interpreted with the recorded LP primal/dual
+gap and residuals; they are not exact rational equalities.
 GROUPED treats binary64 nonnegative multipliers as exact dyadic values and
 accumulates products/sums exactly. For submitted coefficients ahat, set
 bhat>=bbar+sum max((ahat_i-abar_i)*LB_i,(ahat_i-abar_i)*UB_i), rounding RHS
