@@ -289,3 +289,170 @@ integration, compiled numerical result or test was independently checked here.
 Disposition after real-pool inspection: the mathematical and finite-pool
 compression gates have useful qualified evidence. **Native information and
 complete-campaign expansion remain pending original-ENS observations.**
+
+## Original-ENS observation gate addendum
+
+Inspected `diagnostics/native_points02/summary.json`, its saved per-point
+records and `scripts/round104_native_points.py` after the three execution-team
+180s `native02` observations completed. The reader binds each complete point
+to the actual terminal native call's journal BEGIN, original source SHA,
+interval, cutoff and original native settings. It checks every model column
+and the full original matrix. This reviewer did not independently read models,
+recompute activities or run native search. These 180s runs are observations;
+they are not complete algorithm performance comparisons or independent
+replications. The 12 complete points have original-matrix maximum residuals
+at most `3.545897603318693e-11`.
+
+| Role / observed point | Point objective | ALL reliable rows | ACTIVE reliable rows | GROUPED reliable rows |
+|---|---:|---:|---:|---:|
+| F2 first root, sequence 1 | 0.6071799602644684 | 304 | 16 | 1 |
+| F2 latest observable root, sequence 16 | 0.7685866257357956 | 9 | 0 | 0 |
+| F2 positive node count 1 | 0.7730102300546992 | 5 | 2 | 0 |
+| F2 positive node count 10 | 0.7759151363566111 | 29 | 2 | 0 |
+| F2 positive node count 100 | 0.8116094016256583 | 9 | 1 | 0 |
+| C2 first root, sequence 1 | 0.16123605049876003 | 0 | 0 | 0 |
+| C2 latest observable root, sequence 12 | 0.18875094776129178 | 0 | 0 | 0 |
+| C2 positive node count 1 | 0.18874524284515182 | 0 | 0 | 0 |
+| C2 positive node count 10 | 0.18923586131527187 | 0 | 0 | 0 |
+| C2 positive node count 100 | 0.19052636623931793 | 0 | 0 | 0 |
+| F5 first root, sequence 1 | 0.24420882282482045 | 0 | 0 | 0 |
+| F5 latest observable root, sequence 4 | 0.28141416661991164 | 0 | 0 | 0 |
+
+Reliable means exact signed binary-rational activity above ten original
+FeasibilityTol in the submitted row scale. F2/C2 SHA exactly match their
+raw pool scopes. F5 uses the different actual terminal SHA
+`6493bd9b60e94124f4d43bbd55d0a20a5650e65867a114db78d1386815ac9f19`.
+Its historical pool can be tested for row satisfaction because the resource
+rows are global under the identical necessary contract, but its raw objective
+certificate and old `LH` do not become same-scope terminal evidence. Re-solve
+the finite pool on this actual F5 source before using its zero ACTIVE result
+as a terminal-scope selection conclusion. No F5 positive-node point was
+available within the observation window.
+
+F2's latest root point objective exceeds historical raw `LH`, yet nine ALL
+rows still separate it. This directly prevents an inference that higher
+native objective proves implication of the necessary domain. The saved point
+objective must also not be relabeled the native global LB. No claim is made
+that sequence 16 is the solver's internally final cut closure.
+
+The real observations support the theorem's information-loss warning:
+GROUPED's two rows preserve the raw numerical objective but miss all later
+F2 sampled nodes, while ACTIVE still separates them. ACTIVE's maximum signed
+violations at node counts 1/10/100 are respectively
+`0.05664459749194488`, `0.0034287695477375753`,
+`0.020242711877392832`. ALL also contains nine separating rows at the latest
+observable root which ACTIVE discarded. Neither root certificate compression
+nor zero violation at one point proves preservation of later proof progress.
+
+C2's 133-row pool has no positive signed activity at any of its five saved
+points; its maximum signed margins are negative, not merely under threshold.
+F5's 82-row pool likewise has negative maximum signed margins at both saved
+roots. These are strong finite-pool negative controls. They do not constitute
+full necessary-hull membership proofs, or show that newly repriced supports
+could never interact with native cuts. The zero compressed sets are tied to
+the returned old-objective dual support, not a general feasibility-domain
+redundancy theorem.
+
+**Recommendation: do not expand to long confirmation, and do not yet claim a
+complete C-type stop.** There is observed F2 positive-node information in
+ACTIVE; therefore the evidence is stronger than merely an old raw objective
+phenomenon and leaves the requested B/D practical-cost question unresolved.
+After the actual-F5-scope pool qualification, perform one bounded complete
+F2 cost control with a unified fresh generator, ACTIVE submission and faithful
+SHADOW, retaining contemporary unchanged ENS and P benchmarks. The window
+should cover the inherited roughly 575s ENS certification scale, rather than
+another short observation (a preregistered 1200--1800s window is appropriate).
+Every arm must start fresh; ACTIVE/SHADOW must pay all generation, objective
+LP, compression, Start and MIP costs. Do not use free historical 827-row
+replay time as an algorithm result. The unchanged official SHADOW bounds and
+cutoff must not consume its diagnostic improved LP bound.
+
+The evidence favors ACTIVE for this finite control. GROUPED currently loses
+all observed F2 positive-node separation and does not need its own complete
+performance matrix. This choice follows the present verified objective and
+structural evidence, not an instance dispatch rule. A completed control can
+justify explicit stopping if its net effect cannot offset generation cost
+and the actual medium-large scopes still have no useful proof information.
+Then cancel unstarted long confirmations and close the **objective-certified
+root preprocessing scheme** with its finite-domain/observational limits.
+If the control is worthwhile, medium-large opportunity must still be shown
+before large frozen confirmation; F2 success alone does not satisfy that
+gate. Do not reopen anchor families, parameter thresholds or arbitrary pools
+to rescue this scheme.
+
+This addendum is still the first mathematical/information gate review, not
+the separate delivery-stage independent numerical aggregation/RHS recompute.
+
+## Actual-F5 scope and production-control source addendum
+
+Read `diagnostics/pool_F5_native01` and its actual terminal source plan. On
+SHA `6493bd9b60e94124f4d43bbd55d0a20a5650e65867a114db78d1386815ac9f19`,
+RAW/ALL/ACTIVE/GROUPED are numerically 0.24420882282482045 with all 82 new
+Pi zero and zero compressed rows. ALL primal-minus-dual is
+`3.469446951953614e-15`; the empty model's is
+`2.7755575615628914e-16`. PASS remains separately signed at
+0.24420882282465986, with primal-minus-dual `4.652758539558377e-9`.
+This closes the finite-pool actual-F5-scope issue; historical full-domain
+UNKNOWN is unchanged.
+
+Statically read the new `src/Round104GurobiObjective.inc`, the changed
+paid-bank optional argument in `ServiceResourceHull.cpp`/header, the new
+backend API, isolated mode/default checks, `PaperExternalGiniTree.cpp`
+preparation/Start ordering, and the updated standalone interval primitive.
+No build, solver or test was executed by this reviewer.
+
+The new generator uses the current canonical source, self-paid standard and
+outer LPs, and valid complete-support rows. Its bank is empty for every new
+canonical preparation, contains only this call's paid oracle plans, validates
+seeds under the current contract, and leaves the inherited no-bank behavior
+intact. DP begin records precede actual supports, and Optimize begin records
+precede auxiliary optimization. A changed objective/row model is adopted only
+after exact old typed matrix/objective/bounds and added-row readback, and its
+SHA/signature replace the request before the existing all-row Start check.
+SHADOW does not submit rows, change request/cutoff or consume the diagnostic
+LP lower bound. The new mode is default off and isolated from R101/102/103.
+These are sound source-level prerequisites; actual accepted Start, cache,
+readback and numerical qualification remain execution evidence obligations.
+
+The generator does not call an unchanged objective a closure. Every fresh
+accepted direction eliminates the current point by a qualified signed margin;
+duplicate/no-admissible directions stop UNKNOWN, and the finite dyadic
+direction set plus the global deadline avoids an unsupported unlimited-LP
+claim. Selection keeps all strictly negative pool Pi, records small wrong-sign
+repair, and solves the selected LP anew. It labels this as numerical ACTIVE,
+not exact optimal-dual support. UNKNOWN fallback retains the valid ALL pool
+and its separate identity rather than pretending compression succeeded.
+
+**Fix before the complete control:** at the inspected source snapshot, the
+vehicle loop condition included `remaining()>0`, while `all_inside` started
+true. Deadline exhaustion after checking only INSIDE vehicles could skip the
+remaining vehicles and incorrectly emit `all_members_within_tolerance`.
+Require a completed-vehicle count equal to the fleet size, and label partial
+deadline coverage UNKNOWN. Likewise initialize the actual standard-LP value
+before a loop that deadline may prevent entering; do not emit zero as its
+value. On an incomplete last outer LP, distinguish the last qualified
+optimal value from the current unsolved pool value, preserving null/UNKNOWN
+where necessary. These issues affect certificate/status accuracy even though
+the already proved resource rows themselves remain valid.
+
+For the new complete control, save the compressed LP full vector and the
+pool/compressed primal/dual solver residuals, and put Runtime on each
+auxiliary return. The observed objective difference threshold alone does not
+establish a complete numerical qualification, and production stage cost must
+be reviewable. Full Pi/RC plus points allow the final independent reader to
+reconstruct more of the certificate. The inspected artifact row prefix was
+still `r103_hull_`; rename it to the current round to avoid misleading row
+provenance. These findings were sent to the execution agent before its
+campaign admission.
+
+The standalone interval implementation now has subnormal behavior detection,
+rejects infinity sentinels in changed-coordinate compensation, and explicitly
+sets tiny native-unsupported coefficients to zero with the same signed
+endpoint compensation. This addresses the earlier two arithmetic findings.
+The saved `qualify01` tiny-coefficient readback failure must remain in the
+failed-attempt ledger. Production ACTIVE copies source coefficients without
+this conversion, so its final exact readback remains essential.
+
+The single finite complete-control recommendation stands, conditional on the
+above deadline/status and evidence fixes plus actual qualification. It does
+not admit any long-window confirmation or default promotion.

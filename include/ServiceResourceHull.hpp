@@ -23,7 +23,8 @@ struct HullMembership {
 };
 // Full-domain certification, never based on a positive restricted LP distance.
 HullMembership classifyServiceHull(const ServiceContract&,int,const ServicePoint&,
-    const HullLpSolver&,const std::vector<int>& anchors={},double tolerance=1e-8,const HullTrace& trace={});
+    const HullLpSolver&,const std::vector<int>& anchors={},double tolerance=1e-8,const HullTrace& trace={},
+    std::vector<ServicePlan>* self_paid_bank=nullptr);
 std::vector<int> chooseServiceAnchors(const FleetContract&,int,const HullMembership&);
 std::string hullMembershipJson(const HullMembership&);
 } // namespace ebrp

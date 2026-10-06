@@ -34,6 +34,12 @@ Its ACTIVE is therefore a repaired floating candidate, not the theorem's
 exact nonzero optimal dual support. Each expression is reoptimized. Signed
 objective differences must be interpreted with the recorded LP primal/dual
 gap and residuals; they are not exact rational equalities.
+
+The compiled GROUPED primitive explicitly converts coefficients below1e-13
+to zero because the native linear API omits them. The same signed interval
+global-bound compensation covers that conversion. Actual binary64 output is
+independently recomputed with Fraction, read back coefficient for coefficient,
+and reoptimized. This is numerical compression, not an equivalence claim.
 GROUPED treats binary64 nonnegative multipliers as exact dyadic values and
 accumulates products/sums exactly. For submitted coefficients ahat, set
 bhat>=bbar+sum max((ahat_i-abar_i)*LB_i,(ahat_i-abar_i)*UB_i), rounding RHS
@@ -57,3 +63,34 @@ authoritative. Each compressed LP must be reoptimized and its actual signed
 objective difference and primal/dual residuals saved. Native point objective
 and native global bound are separate. A native LB above LH does not prove
 that native cuts imply the necessary domain, or exclude possible synergy.
+
+## Frozen production control
+
+The sole production candidate emits ACTIVE. Before each new qualified
+canonical MIP it pays for an original continuous LP and finite resource-row
+generation from its current points. Distance/pricing reuses only legal plans
+generated in that same preparation. Every DP and Optimize is logged before
+execution. Rows are globally necessary-domain supports with the inherited
+safe dyadic scale and admission margin. The pool remains intact while the
+objective LP is reoptimized; it is never replaced while searching for new
+directions. Stop on all explicit vehicle memberships, no new admissible
+certified direction (UNKNOWN), resource/precision UNKNOWN, or the overall
+algorithm deadline. No objective-stall or component-time gate exists.
+
+After a qualified optimal pool LP, retain strictly negative floating Pi,
+repair tiny positive Pi to zero and explicitly record that repair. A separate
+compressed LP is reoptimized, with full X/Pi/RC and ConstrVio/BoundVio/DualVio
+saved. The existing1e-7 certificate scale bounds numerical residual and
+objective loss for this qualified experiment; it is not a rational proof.
+If the deadline prevents qualification, retain the certified ALL rows and
+declare UNKNOWN. Other mapping/readback/duality/persistence failures propagate
+durably. No auxiliary LP bound is used as formal global LB or cutoff.
+
+SHADOW executes the same fresh generation and compression work but submits
+no new rows or bounds. ACTIVE inserts exact original rows before native MIP,
+verifies old columns/types/bounds/objective/constant/sense/every old row and
+all new coefficients/RHS, updates SHA and row signature, then validates the
+complete physical Start. Cache reuse binds source/input/leaf/scope/interval/
+cutoff/mode and paid artifact. There is no callback Optimize or compression
+restart during B&B. R103-H remains a separate research identity; ENS/P and
+the original native parameters are unchanged with the new mode off.

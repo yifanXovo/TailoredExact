@@ -72,7 +72,10 @@ std::vector<CompressedResourceRow> compressObjectiveResources(
         Interval correction;
         for(const auto& term:a){const int i=term.first;const auto range=term.second;
             // A representable interior coefficient, without deleting tiny terms.
-            const double coefficient=range.lo/2+range.hi/2;finite(coefficient);
+            double coefficient=range.lo/2+range.hi/2;finite(coefficient);
+            // Match the native linear API's tiny-coefficient support. This is
+            // an explicit conversion, compensated below, never equivalence.
+            if(std::fabs(coefficient)<1e-13)coefficient=0;
             const double dl=down(coefficient-range.hi),du=up(coefficient-range.lo);
             if(range.lo!=range.hi){finite(lower[i]);finite(upper[i]);}
             double margin=0;

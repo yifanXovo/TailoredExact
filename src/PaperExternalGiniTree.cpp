@@ -3546,9 +3546,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 throw std::runtime_error("round104_observer_path_invalid_or_exists");
         }
         double hull_preparation_seconds = 0;
-        if (options.round103_resource_hull != "off" && request.solve_kind != FixedIntervalSolveKind::PaperLpRelaxation) {
+        if ((options.round103_resource_hull != "off" || options.round104_objective_resources != "off") && request.solve_kind != FixedIntervalSolveKind::PaperLpRelaxation) {
             const auto preparation_started = PaperClock::now();
-            try { backend->prepareResourceHull(request); }
+            try {
+                if(options.round104_objective_resources != "off")backend->prepareObjectiveResources(request);
+                else backend->prepareResourceHull(request);
+            }
             catch(const std::exception& e) { if(native_evidence)native_evidence->failure(std::string("round103_preparation:")+e.what());throw; }
             catch(...) { if(native_evidence)native_evidence->failure("round103_preparation:unknown_exception");throw; }
             hull_preparation_seconds = std::chrono::duration<double>(PaperClock::now()-preparation_started).count();

@@ -539,6 +539,7 @@ public:
     // R103 changes the canonical artifact before its native journal/Start/MIP.
     // No callback optimization or interruption of an active native search.
     virtual void prepareResourceHull(FixedIntervalMipRequest&) {}
+    virtual void prepareObjectiveResources(FixedIntervalMipRequest&) {}
     // Idempotently release native resources before the final statistics
     // snapshot when an evidence path must prove environment/model symmetry.
     virtual void release() {}

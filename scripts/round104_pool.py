@@ -61,7 +61,7 @@ def pass_pool(role,resource):
         production_source_sha256=c['source_sha256'],scope=c['scope'],
         transfer='same all-station necessary resource contract; current old raw matrix unchanged')
 
-def main(label,role,cap):
+def main(label,role,cap,source_override=None):
     from round100_idle import ensure_idle
     from round100_gurobi_runtime import gp,binding
     from gurobipy import GRB
@@ -71,14 +71,24 @@ def main(label,role,cap):
     ensure_idle(); d=OUT/'diagnostics'/label; d.mkdir(parents=True,exist_ok=False)
     tick=time.perf_counter(); deadline=tick+cap; rows,origin=old_pool(role)
     source,expected,_,_=sources(role,'raw'); assert sha(source)==expected
+    old_source_sha=expected
+    if source_override:
+        source=Path(source_override).resolve();expected=sha(source)
     passed,pass_origin=pass_pool(role,origin['contract']['resource'])
     write(d/'plan.json',dict(role=role,source=source.relative_to(ROOT).as_posix(),source_sha256=expected,
-        inherited_pool=origin,actual_H_pass=pass_origin,historical_free_pool_diagnostic=True,cap_seconds=cap))
+        inherited_pool=origin,actual_H_pass=pass_origin,historical_free_pool_diagnostic=True,cap_seconds=cap,
+        original_raw_source_sha256=old_source_sha,native_scope_override=bool(source_override)))
     count=0; records={}
     with inherited_core() as affinity,gp.Env(empty=True) as engine:
         engine.setParam('OutputFlag',0); engine.start(); runtime=binding()
         with gp.read(str(source),env=engine) as original:
             typed_matrix(original,d/'matrix.txt')
+            if source_override:
+                from round103_hull import Oracle
+                panel=next(r for r in read(PRIOR/'development_inputs.json')['roles'] if r['id']==role)
+                oracle=Oracle(panel,d/'matrix.txt',d)
+                try:assert oracle.contract['resource']==origin['contract']['resource'], 'current native-scope resource contract differs'
+                finally:oracle.close()
             bounds={v.VarName:(v.LB,v.UB) for v in original.getVars()}
             def solve(kind,new):
                 nonlocal count
@@ -124,9 +134,9 @@ def main(label,role,cap):
                 tiny_nonzero=sum(0<l<1e-8 for l in multipliers),no_epsilon_pruning=True,negative_Pi_is_nonnegative_lagrange=True))
     write(d/'summary.json',dict(role=role,records=records,Optimize_calls=count,DP_calls=0,
         seconds=time.perf_counter()-tick,runtime=runtime,affinity=affinity,source_sha256=expected,
-        actual_LH=origin['summary']['LH'],historical_status=origin['summary']['status'],
+        actual_LH=origin['summary']['LH'] if not source_override else None,historical_status=origin['summary']['status'],
         signed_GROUPED_minus_ALL=records['GROUPED']['objective']-records['ALL']['objective'],
         scope='same old raw original LP; transferred H rows have identical necessary domain; numerical certificates only'))
     print(json.dumps(dict(role=role,objectives={k:r['objective'] for k,r in records.items()},
         counts={k:r['rows'] for k,r in records.items()},signed_GROUPED_minus_ALL=records['GROUPED']['objective']-records['ALL']['objective'])),flush=True)
-if __name__=='__main__':main(sys.argv[1],sys.argv[2],float(sys.argv[3]))
+if __name__=='__main__':main(sys.argv[1],sys.argv[2],float(sys.argv[3]),sys.argv[4] if len(sys.argv)>4 else None)

@@ -1821,6 +1821,7 @@ public:
     }
 
 #include "Round103GurobiHull.inc"
+#include "Round104GurobiObjective.inc"
 
     FixedIntervalMipOutcome solve(
         const FixedIntervalMipRequest& request) override {
