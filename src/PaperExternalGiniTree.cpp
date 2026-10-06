@@ -3539,6 +3539,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     }
     long long round68_start_sequence = 0;
     auto solveBudgeted = [&](FixedIntervalMipRequest& request) {
+        if (options.round104_observe_native &&
+            request.solve_kind == FixedIntervalSolveKind::PaperTerminalMip) {
+            request.round59_node_samples_path = request.native_log_path.string()+".round104.samples.csv";
+            if (request.native_log_path.empty() || std::filesystem::exists(request.round59_node_samples_path))
+                throw std::runtime_error("round104_observer_path_invalid_or_exists");
+        }
         double hull_preparation_seconds = 0;
         if (options.round103_resource_hull != "off" && request.solve_kind != FixedIntervalSolveKind::PaperLpRelaxation) {
             const auto preparation_started = PaperClock::now();

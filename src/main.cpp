@@ -1448,6 +1448,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round101-fleet-range") opt.round101_fleet_range = requireValue(i, argc, argv);
         else if (arg == "--round102-service-cuts") opt.round102_service_cuts = requireValue(i, argc, argv);
         else if (arg == "--round103-resource-hull") opt.round103_resource_hull = requireValue(i, argc, argv);
+        else if (arg == "--round104-observe-native") opt.round104_observe_native = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round96-route-order") opt.round96_route_order = parseBoolValue(requireValue(i, argc, argv));
