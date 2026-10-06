@@ -15,13 +15,19 @@ def helpers():
            'round88_a1_g3.py','analyze_round61.py','round75_startup.py','round83_audit_v2.py','round70_affinity.py']
     return {n:sha(ROOT/'scripts'/n) for n in files}
 
-def audit(launch,observations,completion,identity):
+def audit(launch,observations,completion,identity,legacy_identity=False):
     if not launch['arm'].startswith('IR-'):
         return original.adapter(launch,observations,completion,identity)
     dest=Path(launch['destination']);folder=dest/'external/round105'
     assert completion['stop_reason']=='normal_return', 'R105 interrupted external process: no invented endpoint'
     result=read(dest/'result.json');summary=read(folder/'summary.json')
-    assert result['algorithm_preset']=='research-round105-inventory-route-'+launch['arm'][3:].lower()
+    expected='research-round105-inventory-route-'+launch['arm'][3:].lower()
+    if legacy_identity:
+        assert launch['stage']=='diagnostic02' and launch['id']=='F2'
+        assert launch['command'][-2:]==['--round105-decomposition','full']
+        assert result['algorithm_preset']=='research-round83-vds-equal-net-exchange'
+        assert identity['runner_sha256']=='3104b0925fd5df2b7eb5762dd4ee1f316ae4ebcdc3be48dd0f530ef42f3c71e1'
+    else:assert result['algorithm_preset']==expected
     assert result['status']!='error' and not summary['status'].startswith('ERROR:')
     panel=launch['panel'];physical=r90.evidence.physical_module.physical
     r90.evidence.physical_module.ROOT=ROOT
@@ -99,4 +105,11 @@ def run(name,number):
 if __name__=='__main__':
     if sys.argv[1]=='prepare':prepare(sys.argv[2],sys.argv[3])
     elif sys.argv[1]=='run':run(sys.argv[2],int(sys.argv[3]))
+    elif sys.argv[1]=='recover-F2-label':
+        camp=OUT/'diagnostic02';q=read(camp/'identity.json');launch=q['launches'][0];dest=Path(launch['destination'])
+        audited=audit(launch,read(dest/'observations.json'),read(dest/'completion.json'),q,True)
+        write(dest/'audit_recovery.json',dict(audited,scope='read-only audit of original numeric evidence; no data relabel or Optimize',
+            original_failed_audit_sha256=sha(dest/'audit.json'),reader_sha256=sha(__file__),
+            original_source_hashes=q['source_hashes'],original_binary_sha256=q['candidate_binary_sha256']))
+        print(json.dumps(audited))
     else:raise ValueError('prepare|run only')

@@ -4127,6 +4127,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         append_explicit_research_feature("round104_objective_resources_" + opt.round104_objective_resources);
         snapshot.preset_reason = "Round104: self-paid finite necessary-resource pool and requalified objective ACTIVE rows; default off";
     }
+    if (opt.round105_decomposition != "off") {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round105_inventory_route_" + opt.round105_decomposition);
+        snapshot.preset_reason = "Round105: one inventory-assignment master, exact all-order routes and proved conflicts; unchanged paid ENS startup, no AM";
+    }
     if (opt.round90_lp_g_split) {
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round90_current_optimal_parent_lp_g_split_point");
