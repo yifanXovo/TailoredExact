@@ -115,6 +115,9 @@ def prepare(name,protocol_path):
 def run(name,number):
     ensure_idle();camp=OUT/name;q=read(camp/'identity.json');gate=read(OUT/'review/performance_admission.json')
     assert gate['decision']=='ACCEPT' and gate['production_PE_SHA']==q['candidate_binary_sha256']
+    qualification=OUT/'qualification/identity.json'
+    assert sha(qualification)==gate['qualification_identity_SHA']
+    assert q['source_hashes']==read(qualification)['source_bindings']
     assert q['source_hashes']==bindings() and q['helpers']==helpers() and sha(__file__)==q['runner_sha256']
     assert sha(BUILD/'ExactEBRP.exe')==q['candidate_binary_sha256'] and sha(DLL)==q['DLL_sha256']
     assert sha(q['protocol_path'])==q['prereg_sha256'] and sha(BUILD/'Round65ReferenceBuild.exe')==q['reference_PE_SHA']
