@@ -18,7 +18,7 @@ def receipt(label,command,cap=600,engineering=False,children=0):
     ensure_idle();b=budget()
     if b['unclosed']:
         control=OUT/'campaign_control/cli_and_development03'
-        assert engineering and b['unclosed']==['results/unified_exact_round107/fees/cli_and_development03'] and \
+        assert engineering and [p.replace('\\','/') for p in b['unclosed']]==['results/unified_exact_round107/fees/cli_and_development03'] and \
             (control/'02_CLI_after.json').exists() and not (control/'03_formal_before.json').exists(),b
     if not engineering:assert b['remaining_starts']>=1+children and b['remaining_outer_seconds']>=cap
     d=OUT/('engineering' if engineering else 'fees')/label;d.mkdir(parents=True,exist_ok=False)
