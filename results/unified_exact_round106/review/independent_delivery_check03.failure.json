@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "layer": "INDEPENDENT_ZERO_SOLVER_REVIEW",
+  "executed_source": "independent_delivery_check03.executed.py",
+  "reason": "Independent physical-mode key deduplication exposed a publication coverage error. F2 same-Q physical car modes total126; production summary distinct_car_modes and vehicle-tagged keys total134. real_modes_report.json incorrectly called134 a physical-parameter-only count. Root notified before compact freeze. Native algorithm/results remain unchanged. Future checker retains and compares both counts separately.",
+  "Optimize_calls": 0,
+  "IIS_calls": 0,
+  "native_process_starts": 0
+}

@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "layer": "INDEPENDENT_ZERO_SOLVER_REVIEW",
+  "executed_source": "independent_delivery_check01.executed.py",
+  "reason": "Reviewer checker incorrectly assumed all source files were BOM-free UTF-8 and hashed decoded/re-encoded source. src/hga_tgbc/HgaTgbcGreedy.cpp contains a BOM. Independent raw-byte follow-up confirmed all 201 source SHA bindings match. Checker will compare raw bytes in fresh identity 02.",
+  "Optimize_calls": 0,
+  "IIS_calls": 0,
+  "native_process_starts": 0
+}

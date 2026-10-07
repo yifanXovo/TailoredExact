@@ -201,3 +201,12 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /scripts/round104*.py -text whitespace=cr-at-eol
 /tests/round104* -text whitespace=cr-at-eol
 /results/unified_exact_round104/**/*.log -whitespace
+
+# Round106 public compact carriers and recovery identities retain exact bytes.
+/results/unified_exact_round106/** -text whitespace=cr-at-eol
+/scripts/round106*.py -text whitespace=cr-at-eol
+/tests/round106* -text whitespace=cr-at-eol
+/reference/round106*/** -text
+/include/Round106*.hpp -text
+/src/Round106* -text
+/results/unified_exact_round106/**/*.log -whitespace

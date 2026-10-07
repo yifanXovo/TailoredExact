@@ -1,0 +1,24 @@
+{
+  "status": "FAILED_CLOSED_MISSING_FROZEN_SHA_INDEX",
+  "reviewer": "/root/independent_review",
+  "root": "E:/r106-recovery/r105-02",
+  "source": "independent_math_check04.executed.py",
+  "source_sha256": "5a649ace202cf880c2e60d47accbebc5152e36b7412c71918871dfb1218df675",
+  "first_attempt": {
+    "interpreter": "C:/Users/Administrator/AppData/Local/Microsoft/WindowsApps/python.exe",
+    "exit_code": 1,
+    "output": "",
+    "description": "The system python alias did not execute the arithmetic script. No result was written."
+  },
+  "second_attempt": {
+    "interpreter": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+    "exit_code": 1,
+    "exception": "FileNotFoundError",
+    "missing_path": "E:/r106-recovery/r105-02/results/unified_exact_round105/compact_evidence/manifest.json",
+    "description": "Restored data existed, but the old archive did not include its own manifest. No fallback to original-tree data was made. No result was written."
+  },
+  "repair": "The root agent copied the exact frozen manifest into the recovery root with a separately identified engineering receipt. A new 05 execution passed; 04 remains a failed identity.",
+  "Optimize_calls": 0,
+  "IIS_calls": 0,
+  "native_solver_processes": 0
+}

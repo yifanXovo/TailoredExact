@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round105_evidence.py", line 64, in <module>
+    archive.verify(sys.argv[1]=='restore')
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round104_evidence.py", line 108, in verify
+    if path.exists():assert path.is_file() and sha(path)==r['sha256'],'existing different bytes: '+m.name
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: existing different bytes: results/unified_exact_round105/confirmation_policy.json

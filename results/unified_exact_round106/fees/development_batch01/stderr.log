@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_campaign.py", line 142, in <module>
+    elif sys.argv[1]=='batch':batch(sys.argv[2],int(sys.argv[3]),int(sys.argv[4]),sys.argv[5])
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_campaign.py", line 137, in batch
+    run(name,n);write(d/f'{n:02d}_after.json',dict(number=n,completed_and_audited=True))
+    ^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_campaign.py", line 127, in run
+    r90.CAMPAIGN=camp;r90.audit_launch=audit;r90.run_one(launch,q['prereg'],q)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round90_lp_g_g3.py", line 654, in run_one
+    assert not competing, f"Other solver/build/heavy process active: {competing}"
+           ^^^^^^^^^^^^^
+AssertionError: Other solver/build/heavy process active: [{'ProcessId': 22956, 'Name': 'python.exe', 'CommandLine': '"D:\\msys64\\ucrt64\\bin\\python.exe" scripts/round106_common.py development_batch01 12800 research --children=8 E:/codes/ExactEBRP/build/research/round88-ot/venv/Scripts/python.exe scripts/round106_campaign.py batch development01 1 8 batch01'}, {'ProcessId': 25884, 'Name': 'python.exe', 'CommandLine': 'E:/codes/ExactEBRP/build/research/round88-ot/venv/Scripts/python.exe scripts/round106_campaign.py batch development01 1 8 batch01'}]

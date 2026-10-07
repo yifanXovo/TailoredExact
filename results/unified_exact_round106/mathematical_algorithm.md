@@ -99,6 +99,14 @@ delivery<=total pickup forces all delivery thresholds to equal, and all
 outside service to vanish. We can then apply the complete six-order proof.
 This is not a generic quantity-monotonicity claim or a Y-only no-good.
 
+The threshold row LP-dominates its corresponding exact positive-group row:
+each of the three exact state terms is included in its threshold sum, all
+other selector coefficients are nonnegative, and both rows have RHS5.
+Its denser representation can still cost more to process. A's broader
+integer-mode coverage compared with a source FULL conflict does not, by
+itself, prove LP dominance or end-to-end speed. These three claims are
+reported separately.
+
 Actual F2 Q30,T3600,h120, services6:+9,7:-16,9:+7 give four prefix failures
 and two unrounded feasible-prefix durations3629.3192304 and3795.7147314s.
 Independent minimum unconstrained travel1661.135564s, produced lower1661.133s;
@@ -183,6 +191,27 @@ events and complete production performance are distinct evidence layers.
 The independent review uses its own Decimal/physical mathematics and
 restored raw evidence without production A/B functions. Same-engine
 qualification is not an independent-engine performance reproduction.
+
+Natural formal exposure is additional to the historical anchors. F2 STRUCT
+event2, car1, extracts {13:+5,16:-15,17:+10}, P=D=15 and L=1785.584s.
+Four orders fail a load prefix and two legal-prefix orders exceed T3600;
+L+120*16=3705.584>3600. The exact row has6 nonzeros; the global threshold
+certificate has79 terms and the actual mapped row has37 nonzeros, because
+absent root-domain states are fixed zero. Actual activity6, RHS5, Start
+activity3 and API return0 are retained. Event3
+then continues native search. C2 STRUCT event5, car2, extracts pickups
+{3:12,5:6,13:7,22:8,23:6,30:8}; P=47, MST=1742.919s and duration lower
+7382.919>7200. Its12-coefficient A row is violated by182.919, preserves
+Start, is actually submitted, and native event6 follows. All source vectors,
+certificates and row coefficients are retained in the compact package.
+
+C2 STRUCT event1555 has modelObj=.3761856153904 above independent
+Ftrue=.3750564072918 and nevertheless yields a complete verified physical
+fleet and an accepted canonical native vector. Conversely C2 FULL's final
+unresolved event leaves a temporary native objective .2227302947886; this
+is not an admitted physical UB. Its published UB remains .3912235843422
+and final_native_bound_qualified=false. Native status/solution count alone
+does not establish original feasibility or certification.
 
 Official interface checks: [callback C API](https://docs.gurobi.com/projects/optimizer/en/current/reference/c/callback.html),
 [callback codes](https://docs.gurobi.com/projects/optimizer/en/current/reference/numericcodes/callbacks.html),

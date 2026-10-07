@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "layer": "INDEPENDENT_ZERO_SOLVER_REVIEW",
+  "executed_source": "independent_delivery_check07.executed.py",
+  "reason": "Unfrozen reviewer extension correctly checked12 P/ENS raw calls and returns and CORE last full INF/IIS model, but incorrectly assumed two CORE repeated fleet events must be two repeated lazy submissions. Actual repeated fleet events are FEAS reencounters and must be described separately. Extension withdrawn; final checker restores previously passed06 logic, with JSON normalization for portable compare. No production defect.",
+  "Optimize_calls": 0,
+  "IIS_calls": 0,
+  "native_process_starts": 0
+}
