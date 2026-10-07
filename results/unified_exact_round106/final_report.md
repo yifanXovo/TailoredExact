@@ -334,4 +334,4 @@ modification paths. Pre-publication and final-publication SHA checkpoints
 are recorded separately; an exact initial byte-SHA baseline was not saved,
 so those later checks do not claim an unavailable initial byte comparison.
 All task edits occur in the attached R106 worktree. Original PR167 and main
-are not modified. Draft-PR publication and remote verification follow.
+are not modified. The authorized [English stacked draft PR168](https://github.com/yifanXovo/TailoredExact/pull/168) is OPEN/DRAFT on the correct R105 base. Publication and original-workspace checks are recorded in restoration/publication_verification01.json; final live head is verified after the concluding metadata-only push.

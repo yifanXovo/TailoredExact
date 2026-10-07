@@ -57,7 +57,23 @@ Restoration/index/review receipts and final independent output are public
 outside the frozen archive. Original whole archive remains local, not staged.
 No source/PE/DLL/numeric performance identity changed.
 
-Remaining administrative action: commit/push this completed delivery, create
-the authorized English draft PR with R105 base, record URL/final remote checks.
-Do not launch further research or confirmation. The exact final publication
-state will replace this paragraph after the draft exists.
+Final status: COMPLETE. English stacked draft PR168 is OPEN/DRAFT:
+https://github.com/yifanXovo/TailoredExact/pull/168
+Base codex/round105-inventory-route-decomposition, original base8dc274eb34.
+Evidence/report commit dfbf37034233403356d37d2473fdbb90762ab80b was pushed
+and verified on the new PR. This final metadata-only commit records the
+publication and protected-workspace checkpoint; final live head is verified
+after push rather than embedding a self-referential SHA here.
+
+No required research task remains. Qualification gate and final independent
+delivery review ACCEPT; RETAIN_COMPONENT_ONLY; fixedY UNKNOWN; all8 arms
+audited; all confirmation groups cancelled unstarted; actual portable
+public recovery03/std-reader/independent08 compare PASS. All research
+receipts remain closed at30 starts/13089.59282640001s. Do not re-run completed
+labels or launch cancelled groups. Future research needs a new user request.
+
+Old PR167 remains OPEN/DRAFT at8dc274eb34; original E:/ workspace HEAD and
+three user-modification paths remain preserved. Explicit pre/post-publication
+three-file SHA checkpoints match. Initial exact byte SHAs were not saved,
+and are not claimed. No old evidence, main, proxy/permissions/network settings,
+or default P/ENS behavior was changed.
