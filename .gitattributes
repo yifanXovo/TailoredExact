@@ -210,3 +210,9 @@ results/unified_exact_round85/figures/*.svg -whitespace
 /include/Round106*.hpp -text
 /src/Round106* -text
 /results/unified_exact_round106/**/*.log -whitespace
+
+# Round107 exact source, frozen protocol, raw receipts and compact carrier bytes.
+/results/unified_exact_round107/** -text whitespace=cr-at-eol
+/scripts/round107*.py -text whitespace=cr-at-eol
+/tests/round107* -text whitespace=cr-at-eol
+/results/unified_exact_round107/**/*.log -whitespace

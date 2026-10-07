@@ -29,6 +29,8 @@
 #include "Round105Decomposition.hpp"
 #include "Round106Events.hpp"
 #include "Round106Research.hpp"
+#include "Round107Scope.hpp"
+#include <cstdio>
 #include "Round61TimeOracle.hpp"
 #include "PhysicalWitnessValidation.hpp"
 #include "PaperK1AmSf.hpp"
@@ -4198,6 +4200,7 @@ private:
 #include "Round105GurobiDecomposition.inc"
 #include "Round106GurobiEvents.inc"
 #include "Round106GurobiResearch.inc"
+#include "Round107GurobiFrontier.inc"
 
 #endif // _WIN32
 
@@ -4244,6 +4247,22 @@ SolveResult solveRound106Events(const Instance& in, const SolveOptions& opt,
     }
 #else
     (void)in;(void)opt;(void)seed;throw std::runtime_error("round106_dynamic_backend_requires_windows");
+#endif
+}
+
+Round105OracleResult round107OracleDeadlineQualification(const Instance& in,const SolveOptions& opt,
+    const Round105Pattern& pattern,const std::filesystem::path& folder) {
+#ifdef _WIN32
+    R105Session session(in,opt,folder);session.deadline_callback=session.strict_numeric_status=true;
+    const auto answer=session.oracle(pattern,folder/"oracle",false);
+    std::ofstream f(folder/"deadline.json");f<<std::boolalpha<<std::setprecision(17)
+        <<"{\"actual_oracle_Optimize\":"<<session.oracle_calls<<",\"IIS\":"<<session.iis_calls
+        <<",\"cancelled\":"<<session.cancellation_requested<<",\"cancel_seconds\":"<<session.cancellation_seconds
+        <<",\"process_seconds\":"<<processElapsedSeconds(opt)<<",\"remaining\":"<<session.remaining()
+        <<",\"layer\":\"isolated native FULL with production inner deadline callback\",\"production_handoff\":false}\n";
+    f.flush();if(!f)throw std::runtime_error("round107_inner_deadline_evidence_failed");return answer;
+#else
+    (void)in;(void)opt;(void)pattern;(void)folder;throw std::runtime_error("round107_requires_windows");
 #endif
 }
 
@@ -5076,6 +5095,8 @@ SolveResult solveGurobiBaseline(const Instance& instance,
 std::unique_ptr<FixedIntervalMipBackend> makeGurobiFixedIntervalBackend(
     const Instance& instance, const SolveOptions& options) {
 #ifdef _WIN32
+    if (options.round107_frontier_struct)
+        return std::make_unique<R107FrontierBackend>(instance, options);
     return std::make_unique<GurobiFixedIntervalBackend>(instance, options);
 #else
     (void)instance;

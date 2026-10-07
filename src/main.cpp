@@ -264,6 +264,8 @@ std::string lowerAscii(std::string value) {
 }
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
+    if (opt.round107_frontier_struct)
+        return "research-round107-ensc-frontier-struct";
     if (opt.round100_continuous_quantities)
         return "research-round100-ensc-continuous-quantities";
     if (opt.round98_state_service == "q-integer" || opt.round98_state_service == "m-binary" || opt.round98_state_service == "m-binary-linked")
@@ -1459,6 +1461,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round104-observe-native") opt.round104_observe_native = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round104-objective-resources") opt.round104_objective_resources = requireValue(i, argc, argv);
         else if (arg == "--round105-decomposition") opt.round105_decomposition = requireValue(i, argc, argv);
+        else if (arg == "--round107-frontier-struct") opt.round107_frontier_struct = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round106-events") opt.round106_events = requireValue(i, argc, argv);
         else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
@@ -3380,6 +3383,26 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round103 cannot combine with Round101/102");
     if (opt.round105_decomposition != "off" && opt.round105_decomposition != "full" && opt.round105_decomposition != "core")
         throw std::runtime_error("Invalid Round105 decomposition mode");
+    if (opt.round107_frontier_struct &&
+        (opt.round106_events != "off" || opt.round105_decomposition != "off" ||
+         opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         opt.external_gini_interval_mip_policy != "round55-vd-p" ||
+         opt.method != "gcap-frontier" || !opt.k1_am_sf_controller_enabled ||
+         opt.round89_native_ot_b1 || opt.round88_constructive_only_descent ||
+         opt.round92_handling_activation || opt.round96_route_order ||
+         opt.round60_candidate_mode != "off" || opt.round62_threshold_mode != "off" ||
+         opt.round63_time_mode != "off" || opt.round64_shared_mode != "off" ||
+         opt.external_gini_scheduling != "round31-nonblocking-native-bound" ||
+         opt.round66_arc_load_replacement || opt.gini_floor > 0 || opt.gini_cap >= 0 ||
+         opt.incumbent_archive_auto || opt.gcap_seed_cplex ||
+         !opt.external_incumbent_path.empty() || !opt.hga_incumbent_path.empty() || !opt.incumbent_json_path.empty() ||
+         opt.round90_lp_g_split || opt.round97_native_closure != "off" ||
+         opt.round98_state_service != "off" || opt.round100_continuous_quantities ||
+         opt.round101_fleet_cuts != "off" || opt.round102_service_cuts != "off" ||
+         opt.round103_resource_hull != "off" || opt.round104_objective_resources != "off" ||
+         opt.round61_candidate_mode != "off" || opt.round65_budget || opt.round68_verified_start ||
+         opt.plain_baseline || opt.external_gini_backend != "gurobi"))
+        throw std::runtime_error("Round107 requires isolated original ENS-C scope/AM/startup contracts");
     if (opt.round106_events != "off" && opt.round106_events != "full" && opt.round106_events != "core" && opt.round106_events != "struct")
         throw std::runtime_error("Invalid Round106 event mode");
     if (opt.round106_events != "off" && opt.round105_decomposition != "off")
@@ -3400,7 +3423,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
          opt.incumbent_archive_auto || opt.gcap_seed_cplex ||
          !opt.external_incumbent_path.empty() || !opt.hga_incumbent_path.empty() || !opt.incumbent_json_path.empty()))
         throw std::runtime_error("Round105 requires isolated ENS-C startup and a full non-strict global domain");
-    if (opt.round105_decomposition != "off" || opt.round106_events != "off") {
+    if (opt.round105_decomposition != "off" || opt.round106_events != "off" || opt.round107_frontier_struct) {
         ebrp::SolveOptions expected;
         expected.algorithm_preset = "research-round83-vds-equal-net-exchange";
         applyAlgorithmPreset(expected);
@@ -3415,6 +3438,23 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.route_pool_keep_best_per_projection != expected.route_pool_keep_best_per_projection ||
             opt.bpc_incumbent != expected.bpc_incumbent ||
             opt.exact_phase_local_redecode_repair != expected.exact_phase_local_redecode_repair ||
+            (opt.round107_frontier_struct &&
+             (opt.round47_c6_adaptive_mass_tau != expected.round47_c6_adaptive_mass_tau ||
+              opt.initial_gini_interval_count != expected.initial_gini_interval_count ||
+              opt.split_point_rule != expected.split_point_rule || opt.split_score_rule != expected.split_score_rule ||
+              opt.split_threshold != expected.split_threshold || opt.maximum_split_depth != expected.maximum_split_depth ||
+              opt.minimum_interval_width != expected.minimum_interval_width || opt.split_factor != expected.split_factor ||
+              opt.child_infeasibility_policy != expected.child_infeasibility_policy ||
+              opt.native_target_policy != expected.native_target_policy || opt.exact_parent_closure != expected.exact_parent_closure ||
+              opt.external_gini_lifecycle != expected.external_gini_lifecycle ||
+              opt.frontier_execution_mode != expected.frontier_execution_mode ||
+              opt.round43_envelope_refinement != expected.round43_envelope_refinement ||
+              opt.round40_c6_coarse_start != expected.round40_c6_coarse_start ||
+              opt.round44_envelope_tail_repair != expected.round44_envelope_tail_repair ||
+              opt.round44_rank1_cuts != expected.round44_rank1_cuts ||
+              opt.round45_adaptive_parametric_partition != expected.round45_adaptive_parametric_partition ||
+              opt.round47_c6_adaptive_mass != expected.round47_c6_adaptive_mass ||
+              opt.round48_k1_amf != expected.round48_k1_amf || opt.round49_k1_am_rc != expected.round49_k1_am_rc)) ||
             opt.external_gini_interval_mip_policy != "round55-vd-p")
             throw std::runtime_error("Round105 startup must retain original ENS-C settings");
     }
@@ -4139,6 +4179,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round105_inventory_route_" + opt.round105_decomposition);
         snapshot.preset_reason = "Round105: one inventory-assignment master, exact all-order routes and proved conflicts; unchanged paid ENS startup, no AM";
+    }
+    if (opt.round107_frontier_struct) {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round107_scoped_frontier_struct");
+        snapshot.preset_reason = "Round107: original complete ENS-C intervals/AM/coverage with scoped assignment/STRUCT MIPSOL interface";
     }
     if (opt.round106_events != "off") {
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);

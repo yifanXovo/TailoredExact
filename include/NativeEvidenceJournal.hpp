@@ -40,6 +40,7 @@ public:
     void witness(const std::vector<RoutePlan>&, const std::string& source, long long call = 0);
     void nativeBound(long long call, double bound);
     void returned(long long call, int return_code);
+    void notStarted(long long call, const std::string& reason);
     void failure(const std::string& reason) noexcept;
     bool enabled() const { return !failed_; }
 private:
