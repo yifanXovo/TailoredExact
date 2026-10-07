@@ -17,6 +17,17 @@ public:
     long long master_calls = 0, oracle_calls = 0, iis_calls = 0, core_calls = 0;
     double master_seconds = 0, oracle_seconds = 0, iis_seconds = 0, core_seconds = 0;
     long long sequence = 0;
+    // Optional R106 inner-environment cancellation, off for historical R105.
+    bool deadline_callback = false, cancellation_requested = false, strict_numeric_status = false;
+    double cancellation_seconds = -1;
+    static int __stdcall deadlineCheck(GRBmodel* model,void*,int,void* userdata) {
+        auto& s=*static_cast<R105Session*>(userdata);
+        if(s.remaining()<=0) {
+            if(!s.cancellation_requested){s.cancellation_requested=true;s.cancellation_seconds=processElapsedSeconds(s.opt);}
+            s.api.terminate(model);
+        }
+        return 0;
+    }
     R105Session(const Instance& instance, const SolveOptions& options,
                 const std::filesystem::path& folder) : in(instance), opt(options), dir(folder) {
         std::filesystem::create_directories(dir);
@@ -79,7 +90,9 @@ public:
         calls << std::setprecision(17) << id << ',' << phase << ",before," << processElapsedSeconds(opt)
               << ',' << rem << ",,,,,," << fileSha256(path) << '\n'; calls.flush();
         if (!calls) throw std::runtime_error("round105_ahead_of_call_persist_failed");
+        if(deadline_callback)check(api.setcallbackfunc(model,deadlineCheck,this));
         const auto start=Clock::now();const int rc=api.optimize(model);
+        if(deadline_callback)check(api.setcallbackfunc(model,nullptr,nullptr));
         const double sec=std::chrono::duration<double>(Clock::now()-start).count();
         if (phase=="master") { ++master_calls;master_seconds+=sec; }
         else if (phase=="core_confirm") { ++core_calls;core_seconds+=sec; }
@@ -97,6 +110,7 @@ public:
         std::transform(text.begin(),text.end(),text.begin(),[](unsigned char c){return char(std::tolower(c));});
         for(const char* phrase : {"numerical trouble","numerical difficulties","unscaled primal violation","unscaled dual violation"})
             if(text.find(phrase)!=std::string::npos)throw std::runtime_error("round105_native_numerical_warning");
+        if(strict_numeric_status&&status==GRB_NUMERIC)throw std::runtime_error("round106_native_NUMERIC_status");
         if(solutions) {
             const auto d=domain(model);std::vector<double> x(d.names.size());
             check(api.getdblattrarray(model,"X",0,static_cast<int>(x.size()),x.data()));
@@ -163,9 +177,19 @@ public:
         check(api.setdblparam(api.getenv(model.value),"TimeLimit",remaining()));
         const long long id=++sequence;calls<<id<<",iis,before,"<<processElapsedSeconds(opt)<<','<<remaining()<<",,,,,,"<<fileSha256(path)<<'\n';calls.flush();
         if(!calls)throw std::runtime_error("round105_iis_ledger_failed");
+        if(deadline_callback)check(api.setcallbackfunc(model.value,deadlineCheck,this));
         const auto start=Clock::now();const int rc=compute(model.value);
+        if(deadline_callback)check(api.setcallbackfunc(model.value,nullptr,nullptr));
         const double sec=std::chrono::duration<double>(Clock::now()-start).count();++iis_calls;iis_seconds+=sec;
         calls<<id<<",iis,after,"<<processElapsedSeconds(opt)<<','<<remaining()<<','<<sec<<','<<rc<<",,,,"<<fileSha256(path)<<'\n';calls.flush();
+        if(strict_numeric_status) {
+            check(rc);
+            std::ifstream log(path.string()+".log");if(!log)throw std::runtime_error("round106_IIS_log_missing");
+            std::string text((std::istreambuf_iterator<char>(log)),{});
+            std::transform(text.begin(),text.end(),text.begin(),[](unsigned char c){return char(std::tolower(c));});
+            for(const char* phrase:{"numerical trouble","numerical difficulties","unscaled primal violation","unscaled dual violation"})
+                if(text.find(phrase)!=std::string::npos)throw std::runtime_error("round106_IIS_numerical_warning");
+        }
         if(rc || remaining()<=0) {out.reason="full_proof_retained_core_interrupted";return out;}
         check(api.write(model.value,(folder/"proposal.ilp").string().c_str()));
         int rows=0,minimal=0;check(api.getintattr(model.value,"NumConstrs",&rows));

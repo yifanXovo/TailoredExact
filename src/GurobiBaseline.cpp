@@ -27,6 +27,9 @@
 #include "Round92HandlingActivation.hpp"
 #include "Round98StateService.hpp"
 #include "Round105Decomposition.hpp"
+#include "Round106Events.hpp"
+#include "Round106Research.hpp"
+#include "Round61TimeOracle.hpp"
 #include "PhysicalWitnessValidation.hpp"
 #include "PaperK1AmSf.hpp"
 
@@ -4193,6 +4196,8 @@ private:
 };
 
 #include "Round105GurobiDecomposition.inc"
+#include "Round106GurobiEvents.inc"
+#include "Round106GurobiResearch.inc"
 
 #endif // _WIN32
 
@@ -4219,6 +4224,54 @@ SolveResult solveRound105Decomposition(const Instance& in, const SolveOptions& o
 #else
     (void)in; (void)opt; (void)seed;
     throw std::runtime_error("round105_dynamic_backend_requires_windows");
+#endif
+}
+
+SolveResult solveRound106Events(const Instance& in, const SolveOptions& opt,
+                               const SolveResult& seed) {
+#ifdef _WIN32
+    SolveResult failed=seed;failed.lower_bound=0;
+    try {return r106Solve(in,opt,seed,failed);}
+    catch(const std::exception& ex) {
+        failed.lower_bound=failed.external_gini_tree_global_lower_bound=0;
+        failed.gap=failed.upper_bound;
+        failed.status="error";failed.strict_certified_original_problem=false;
+        failed.strict_certificate_rejection_reason=ex.what();
+        const auto folder=std::filesystem::path(opt.external_gini_artifact_dir)/"round106";
+        std::filesystem::create_directories(folder);std::ofstream f(folder/"initialization_error.json");
+        f<<std::setprecision(17)<<"{\"reason\":"<<std::quoted(ex.what())<<",\"LB\":"<<failed.lower_bound
+         <<",\"UB\":"<<failed.upper_bound<<"}\n";return failed;
+    }
+#else
+    (void)in;(void)opt;(void)seed;throw std::runtime_error("round106_dynamic_backend_requires_windows");
+#endif
+}
+
+SolveResult round106Replay(const Instance& in,const SolveOptions& opt,
+    const std::filesystem::path& model,const std::filesystem::path& candidate,
+    const std::filesystem::path& start) {
+#ifdef _WIN32
+    return r106Replay(in,opt,model,candidate,start);
+#else
+    (void)in;(void)opt;(void)model;(void)candidate;(void)start;
+    throw std::runtime_error("round106_dynamic_backend_requires_windows");
+#endif
+}
+void round106AdapterContracts(const Instance& in,const SolveOptions& opt,
+    const std::filesystem::path& model,const std::filesystem::path& inf,
+    const std::filesystem::path& feas,const std::filesystem::path& start) {
+#ifdef _WIN32
+    r106Contracts(in,opt,model,inf,feas,start);
+#else
+    (void)in;(void)opt;(void)model;(void)inf;(void)feas;(void)start;
+    throw std::runtime_error("round106_dynamic_backend_requires_windows");
+#endif
+}
+std::string round106FixedFleet(const Instance& in,const SolveOptions& opt,const std::vector<int>& Y) {
+#ifdef _WIN32
+    return r106FixedFleet(in,opt,Y);
+#else
+    (void)in;(void)opt;(void)Y;throw std::runtime_error("round106_dynamic_backend_requires_windows");
 #endif
 }
 

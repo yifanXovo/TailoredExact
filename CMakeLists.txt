@@ -28,6 +28,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(EXACT_EBRP_LIB_SOURCES
   src/Round105Decomposition.cpp
+  src/Round106Events.cpp
   src/Parser.cpp
   src/Evaluator.cpp
   src/Round73JointInsertion.cpp
@@ -103,6 +104,9 @@ set(EXACT_EBRP_LIB_SOURCES
   src/Logger.cpp
   src/Round58Benchmark.cpp
 )
+
+add_executable(Round106Research src/round106_research_main.cpp)
+target_link_libraries(Round106Research PRIVATE exact_ebrp_core)
 
 if(EXACT_EBRP_ENABLE_GUROBI)
   add_test(NAME Round88ConstructiveOnlyCliTests COMMAND ${CMAKE_COMMAND}
@@ -487,6 +491,9 @@ target_link_libraries(Round49RCOfflineExtract PRIVATE exact_ebrp_core)
 
 add_executable(Round105Tests tests/round105_tests.cpp)
 target_link_libraries(Round105Tests PRIVATE exact_ebrp_core)
+add_executable(Round106Tests tests/round106_tests.cpp)
+target_link_libraries(Round106Tests PRIVATE exact_ebrp_core)
+add_test(NAME Round106Tests COMMAND Round106Tests)
 add_test(NAME Round105Tests COMMAND Round105Tests)
 add_executable(Round105Oracle src/round105_oracle_main.cpp)
 target_link_libraries(Round105Oracle PRIVATE exact_ebrp_core)
