@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "--fail",
+    "--silent",
+    "--show-error",
+    "--location",
+    "--connect-timeout",
+    "30",
+    "--max-time",
+    "300",
+    "https://raw.githubusercontent.com/yifanXovo/TailoredExact/4d85c66a28321a37ca83354ee7849eef5a3fcae3/results/unified_exact_round107/reports05/controller_LP_status.csv"
+  ],
+  "path": "results/unified_exact_round107/reports05/controller_LP_status.csv",
+  "expected_SHA": "b62e8326aa7e828f9e48fd03339c03fb90e443cae77d942b3a78690265431e72",
+  "expected_bytes": 2396
+}

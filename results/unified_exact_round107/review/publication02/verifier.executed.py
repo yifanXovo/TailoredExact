@@ -73,13 +73,10 @@ def verify(pr_url,label):
         entry=remote_entry(relative)
         assert entry['sha']==command(['git','rev-parse',head+':'+relative])
         assert entry['size']==size
-        raw_url=f'https://raw.githubusercontent.com/{REPOSITORY}/{head}/{quote(relative,safe="/")}'
+        api=f'repos/{REPOSITORY}/contents/{quote(relative,safe="/")}?ref={head}'
         stderr=destination/f'network_{number:03d}_stderr.log'
         tick=time.perf_counter();hasher=hashlib.sha256();length=0
-        # Native curl preserves compressed bytes; gh's Windows text conversion
-        # rejected the binary gzip header. TLS verification remains enabled.
-        args=['curl.exe','--fail','--silent','--show-error','--location',
-            '--connect-timeout','30','--max-time','300',raw_url]
+        args=['gh','api','-H','Accept: application/vnd.github.raw+json',api]
         write(destination/f'network_{number:03d}_before.json',dict(command=args,path=relative,expected_SHA=expected,expected_bytes=size))
         with stderr.open('x',encoding='utf-8') as error:
             process=subprocess.Popen(args,cwd=ROOT,stdout=subprocess.PIPE,stderr=error)
@@ -88,7 +85,7 @@ def verify(pr_url,label):
             code=process.wait(timeout=300)
         record=dict(path=relative,github_blob_SHA=entry['sha'],bytes=length,
             sha256=hasher.hexdigest(),returncode=code,engineering_seconds=time.perf_counter()-tick,
-            source_url=f'https://github.com/{REPOSITORY}/blob/{head}/{relative}',raw_download_url=raw_url)
+            source_url=f'https://github.com/{REPOSITORY}/blob/{head}/{relative}')
         write(destination/f'network_{number:03d}_after.json',record)
         assert code==0 and length==size and record['sha256']==expected,(relative,record,expected,size)
         checked.append(record)

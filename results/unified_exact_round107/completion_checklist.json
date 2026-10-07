@@ -1,5 +1,5 @@
 {
-  "status": "EVIDENCE_COMPLETE_PUBLICATION_PENDING",
+  "status": "COMPLETE",
   "stage": "STOP_TESTED_CONFIGURATION",
   "formal_arms_completed": 8,
   "confirmation_arms_started": 0,
@@ -186,7 +186,7 @@
         },
         {
           "path": "reproduce.md",
-          "sha256": "8d3bd2da00ba47c94afb379d265acd4ae857dea7516a45575c8fc3d033ef57e0"
+          "sha256": "087f23571dc4c3f47b6bd6694468398fdb0aff2d9b7706a66cecccfc6df4538b"
         },
         {
           "path": "compact_evidence/manifest.json",
@@ -195,6 +195,24 @@
         {
           "path": "compact_evidence/parts_manifest.json",
           "sha256": "9c77985bfc98c40e3270ce0c90a8adf57adebb98e988f62e6c5820e58bf28e70"
+        }
+      ]
+    },
+    {
+      "requirement": "13_new_stacked_draft_PR_actual_remote_bytes",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "review/publication03/result.json",
+          "sha256": "126e59def753ce99948acbbc79a454e8ac434d1cb377f9c9dab02a1b02ac751d"
+        },
+        {
+          "path": "review/publication03/PR_metadata_after.json",
+          "sha256": "4b24e86c5153107323c0ff55c42088693580622435123a62d9c645e9ef4934aa"
+        },
+        {
+          "path": "review/publication03/PR_body.md",
+          "sha256": "b9208dcaebf329110deba3a5741e9196b91f12db661985434d359e008e28aa83"
         }
       ]
     }
@@ -211,6 +229,21 @@
   "reader_SHA": "3b04fe6757ae097ec721c13937b4ff9f463af73bc07ec699572d034bc46b788e",
   "actual_public_only_restore_complete": true,
   "independent_engine_performance_rerun": false,
-  "draft_PR_creation_and_remote_payload_verification": "PENDING",
-  "recorded_utc": "2026-10-07T23:06:37Z"
+  "draft_PR_creation_and_remote_payload_verification": "COMPLETE",
+  "recorded_utc": "2026-10-07T23:22:57Z",
+  "publication": {
+    "PR_url": "https://github.com/yifanXovo/TailoredExact/pull/169",
+    "base_branch": "codex/round106-structural-conflict-events",
+    "base_commit": "0350dbcc60d1c68e5c499d2e9880ecc1deaf031c",
+    "head_branch": "codex/round107-ens-frontier-route-events",
+    "isDraft": true,
+    "PR_state": "OPEN",
+    "verified_payload_commit": "4d85c66a28321a37ca83354ee7849eef5a3fcae3",
+    "exact_public_files_verified": 62,
+    "production_source_bindings_verified": 205,
+    "publication_result_path": "review/publication03/result.json",
+    "publication_result_SHA": "126e59def753ce99948acbbc79a454e8ac434d1cb377f9c9dab02a1b02ac751d",
+    "PR_body_SHA": "b9208dcaebf329110deba3a5741e9196b91f12db661985434d359e008e28aa83",
+    "metadata_followup_scope": "Actual publication receipts, delivery-only verifier and completion/handoff/reproduction metadata only; scientific payload remains pinned to verified_payload_commit."
+  }
 }

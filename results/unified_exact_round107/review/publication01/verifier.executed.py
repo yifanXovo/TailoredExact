@@ -22,33 +22,14 @@ def verify(pr_url,label):
     remote={line.split()[1]:line.split()[0] for line in refs.splitlines()}
     assert remote['refs/heads/'+BASE]==BASE_COMMIT
     assert remote['refs/heads/'+HEAD_BRANCH]==head
-    # The complete inherited repository may exceed GitHub's recursive-tree limit.
-    # Traverse only needed directories, each anchored by its parent's exact tree SHA.
-    tree_cache={}
-    def entries_for(tree_sha):
-        if tree_sha not in tree_cache:
-            number=len(tree_cache)+1
-            args=['gh','api',f'repos/{REPOSITORY}/git/trees/{tree_sha}']
-            write(destination/f'tree_{number:03d}_before.json',dict(command=args,expected_tree_SHA=tree_sha))
-            tick=time.perf_counter();tree=json.loads(command(args))
-            assert tree['sha']==tree_sha and not tree.get('truncated',False)
-            tree_cache[tree_sha]={entry['path']:entry for entry in tree['tree']}
-            write(destination/f'tree_{number:03d}_after.json',dict(response=tree,engineering_seconds=time.perf_counter()-tick,returncode=0))
-        return tree_cache[tree_sha]
-    def remote_entry(relative):
-        components=relative.split('/');tree_sha=head
-        for index,component in enumerate(components):
-            entry=entries_for(tree_sha)[component]
-            if index+1<len(components):
-                assert entry['type']=='tree',(relative,entry)
-                tree_sha=entry['sha']
-        assert entry['type']=='blob',(relative,entry)
-        return entry
+    tree=json.loads(command(['gh','api',f'repos/{REPOSITORY}/git/trees/{head}?recursive=1']))
+    assert not tree.get('truncated',False)
+    entries={entry['path']:entry for entry in tree['tree'] if entry['type']=='blob'}
     identity=read(OUT/'development03/identity.json')
     bindings_checked=0
     for relative,expected in identity['source_hashes'].items():
         assert sha(ROOT/relative)==expected,relative
-        assert remote_entry(relative)['sha']==command(['git','rev-parse',head+':'+relative])
+        assert entries[relative]['sha']==command(['git','rev-parse',head+':'+relative])
         bindings_checked+=1
     package=OUT/'compact_evidence';manifest=read(package/'manifest.json')
     parts=read(package/'parts_manifest.json')
@@ -70,25 +51,21 @@ def verify(pr_url,label):
     checked=[]
     for number,relative in enumerate(sorted(set(required)),1):
         source=ROOT/relative;expected=sha(source);size=source.stat().st_size
-        entry=remote_entry(relative)
-        assert entry['sha']==command(['git','rev-parse',head+':'+relative])
-        assert entry['size']==size
-        raw_url=f'https://raw.githubusercontent.com/{REPOSITORY}/{head}/{quote(relative,safe="/")}'
+        assert entries[relative]['sha']==command(['git','rev-parse',head+':'+relative])
+        assert entries[relative]['size']==size
+        api=f'repos/{REPOSITORY}/contents/{quote(relative,safe="/")}?ref={head}'
         stderr=destination/f'network_{number:03d}_stderr.log'
         tick=time.perf_counter();hasher=hashlib.sha256();length=0
-        # Native curl preserves compressed bytes; gh's Windows text conversion
-        # rejected the binary gzip header. TLS verification remains enabled.
-        args=['curl.exe','--fail','--silent','--show-error','--location',
-            '--connect-timeout','30','--max-time','300',raw_url]
+        args=['gh','api','-H','Accept: application/vnd.github.raw+json',api]
         write(destination/f'network_{number:03d}_before.json',dict(command=args,path=relative,expected_SHA=expected,expected_bytes=size))
         with stderr.open('x',encoding='utf-8') as error:
             process=subprocess.Popen(args,cwd=ROOT,stdout=subprocess.PIPE,stderr=error)
             while block:=process.stdout.read(1024*1024):
                 hasher.update(block);length+=len(block)
             code=process.wait(timeout=300)
-        record=dict(path=relative,github_blob_SHA=entry['sha'],bytes=length,
+        record=dict(path=relative,github_blob_SHA=entries[relative]['sha'],bytes=length,
             sha256=hasher.hexdigest(),returncode=code,engineering_seconds=time.perf_counter()-tick,
-            source_url=f'https://github.com/{REPOSITORY}/blob/{head}/{relative}',raw_download_url=raw_url)
+            source_url=f'https://github.com/{REPOSITORY}/blob/{head}/{relative}')
         write(destination/f'network_{number:03d}_after.json',record)
         assert code==0 and length==size and record['sha256']==expected,(relative,record,expected,size)
         checked.append(record)
@@ -100,7 +77,6 @@ def verify(pr_url,label):
     result=dict(status='PASS_REMOTE_DRAFT_AND_EXACT_PUBLIC_PAYLOAD',PR=pr,
         verified_payload_commit=head,base_commit=BASE_COMMIT,remote_refs=remote,
         public_files=checked,public_file_count=len(checked),production_source_bindings_checked=bindings_checked,
-        nonrecursive_trees_checked=len(tree_cache),
         round107_archive_SHA=manifest['archive_sha256'],reader_SHA=manifest['reader_SHA'],
         no_unsplit_archive_or_forbidden_binary_in_new_diff=True,
         Optimize_calls=0,IIS_calls=0,paid_starts=0,

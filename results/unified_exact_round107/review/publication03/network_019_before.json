@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "--fail",
+    "--silent",
+    "--show-error",
+    "--location",
+    "--connect-timeout",
+    "30",
+    "--max-time",
+    "300",
+    "https://raw.githubusercontent.com/yifanXovo/TailoredExact/4d85c66a28321a37ca83354ee7849eef5a3fcae3/results/unified_exact_round107/mathematical_algorithm.md"
+  ],
+  "path": "results/unified_exact_round107/mathematical_algorithm.md",
+  "expected_SHA": "fcd23ab4c1356d7bfd5f2fb8c47e03b25875fa820a760f031b4497f847292fa7",
+  "expected_bytes": 10047
+}

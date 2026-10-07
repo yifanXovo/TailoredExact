@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "--fail",
+    "--silent",
+    "--show-error",
+    "--location",
+    "--connect-timeout",
+    "30",
+    "--max-time",
+    "300",
+    "https://raw.githubusercontent.com/yifanXovo/TailoredExact/4d85c66a28321a37ca83354ee7849eef5a3fcae3/results/unified_exact_round107/reports05/reader_receipt.json"
+  ],
+  "path": "results/unified_exact_round107/reports05/reader_receipt.json",
+  "expected_SHA": "58e4739eac814b7fdb5c4e83ed41655f9d7298dc8dfec3f202aed46cc139090f",
+  "expected_bytes": 1174
+}
