@@ -1,0 +1,249 @@
+{
+  "status": "COMPLETE",
+  "stage": "STOP_TESTED_CONFIGURATION",
+  "formal_arms_completed": 8,
+  "confirmation_arms_started": 0,
+  "confirmation_arms_cancelled": 9,
+  "optional_substantive_revision_used": false,
+  "requirements": [
+    {
+      "requirement": "1_inheritance_history_identity",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "review/inheritance_review.md",
+          "sha256": "082793828957b0540fe78df7f4056fbdd0b33f033ed008bcfaa3840dea1a7456"
+        },
+        {
+          "path": "inheritance/independent_inheritance_audit01.json",
+          "sha256": "59c8458a4e253189555cf1184bc2cacecbe3bcfa470b4563be0cd173073ddcae"
+        }
+      ]
+    },
+    {
+      "requirement": "2_original_physics_and_default_contract",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "mathematical_algorithm.md",
+          "sha256": "fcd23ab4c1356d7bfd5f2fb8c47e03b25875fa820a760f031b4497f847292fa7"
+        },
+        {
+          "path": "master_retention_table.md",
+          "sha256": "ff608a81562b2abb867ac20fb00b619d2f3313693ffb342a28cc119f486c078f"
+        }
+      ]
+    },
+    {
+      "requirement": "3_embedding_domain_cover_proof",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "scope_contract.md",
+          "sha256": "4ceeca760af8b38534852ac843e0b1bddf527b1d93bb08e8ac8955e3883f1b25"
+        },
+        {
+          "path": "mathematical_algorithm.md",
+          "sha256": "fcd23ab4c1356d7bfd5f2fb8c47e03b25875fa820a760f031b4497f847292fa7"
+        }
+      ]
+    },
+    {
+      "requirement": "4_original_ENS_integer_interface",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "review/final_implementation_performance_review.md",
+          "sha256": "5268b0894d15a2ff09110013def261553095e42dc6879ac3878011e3c498544e"
+        }
+      ]
+    },
+    {
+      "requirement": "5_A_B_FULL_cache_remap",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "review/threshold_remap_review.md",
+          "sha256": "16316337aac5a4d615360098d6914ef1a544ccdd8e5ef6d1e5f59ee7d323790c"
+        },
+        {
+          "path": "review/delivery_review.json",
+          "sha256": "6d327b6052a35d12767024c71e3a384ef32474eea4f713e22735e9fa35421f7f"
+        }
+      ]
+    },
+    {
+      "requirement": "6_candidates_UB_feedback_stop",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "scope_contract.md",
+          "sha256": "4ceeca760af8b38534852ac843e0b1bddf527b1d93bb08e8ac8955e3883f1b25"
+        },
+        {
+          "path": "reports05/request_outcomes.csv",
+          "sha256": "2bc9185f3911a6cc4346931e0ff4651f895ddcc749dea851829a07b323bf0694"
+        },
+        {
+          "path": "reports05/submission_attempts.csv",
+          "sha256": "4aa7e823a5f2d03c3d371138e23e80d2ac5df0e7715c6a72018e569ef23c5762"
+        }
+      ]
+    },
+    {
+      "requirement": "7_native_qualification_independent_admission",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "qualification/identity.json",
+          "sha256": "322e6d10f6b09e9fc8986173dcca3263fa32894cf2068496cfa26428786161a9"
+        },
+        {
+          "path": "review/performance_admission.json",
+          "sha256": "a14723ec57f010df99268dc58a508a19a58547dbfdc677f884342226c2ec95b6"
+        }
+      ]
+    },
+    {
+      "requirement": "8_complete_same_PE_eight",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "development03/identity.json",
+          "sha256": "b5820966314ca829636a039c8ca6584d4a1a0e4726685166241b851c0d9028b8"
+        },
+        {
+          "path": "reports05/arm_results.csv",
+          "sha256": "bcc98ee2af9ecde277858a19fa083ab718cad6dcb193f504f81e23b1fdaa83a9"
+        },
+        {
+          "path": "reports05/paired_results.csv",
+          "sha256": "39e20773a40d1c18e0140a5a1c06e9cad14cc244e23947ee4c0a0336e2c4adc4"
+        }
+      ]
+    },
+    {
+      "requirement": "9_stage_revision_confirmation",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "admission_decision.json",
+          "sha256": "23c052e9865888a6b5a5dfe6296ac099345c440032f0451762c60e0024ff0754"
+        },
+        {
+          "path": "confirmation_cancellation.json",
+          "sha256": "eb4831dbec34c17fb57a5f2e53a759393b4e6a77072d4a48f3c49021892c2c48"
+        },
+        {
+          "path": "confirmation_protocol.json",
+          "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b"
+        }
+      ]
+    },
+    {
+      "requirement": "10_resources_failures",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "reports05/fees.csv",
+          "sha256": "fd209f622c8261614844c457a286dd0dd3d1cacca5cf0f4951f8e96c3dd39ed4"
+        },
+        {
+          "path": "reports05/native_calls.csv",
+          "sha256": "1faf4c3baef0543fbac0d23a832fa1d20bac1a7f7ff5145b39cd1c7a96f65e6a"
+        },
+        {
+          "path": "fee_corrections/native_final01.json",
+          "sha256": "0fe5631d8656abd9939e3789900f45d4d3e738dbc7145df96ea3ce4b8fefe459"
+        }
+      ]
+    },
+    {
+      "requirement": "11_independent_final_review",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "review/final_implementation_performance_review.md",
+          "sha256": "5268b0894d15a2ff09110013def261553095e42dc6879ac3878011e3c498544e"
+        },
+        {
+          "path": "review/delivery_review.md",
+          "sha256": "277cd62e34e06c18ba80f75862242f8c67146703f78ecbd454400d3753d021d6"
+        },
+        {
+          "path": "review/delivery_review.json",
+          "sha256": "6d327b6052a35d12767024c71e3a384ef32474eea4f713e22735e9fa35421f7f"
+        }
+      ]
+    },
+    {
+      "requirement": "12_actual_public_only_restore_all_fields",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "restoration/isolated_verification.json",
+          "sha256": "b50535afabc359c7b399e4833c85b42cf89007a52a96e8ef9ea70d726e2fe00c"
+        },
+        {
+          "path": "reproduce.md",
+          "sha256": "087f23571dc4c3f47b6bd6694468398fdb0aff2d9b7706a66cecccfc6df4538b"
+        },
+        {
+          "path": "compact_evidence/manifest.json",
+          "sha256": "208627a0419d2a690d15a2ca70741b2a39c3ca78fa49547dcc0537b0492c2884"
+        },
+        {
+          "path": "compact_evidence/parts_manifest.json",
+          "sha256": "9c77985bfc98c40e3270ce0c90a8adf57adebb98e988f62e6c5820e58bf28e70"
+        }
+      ]
+    },
+    {
+      "requirement": "13_new_stacked_draft_PR_actual_remote_bytes",
+      "status": "COMPLETE",
+      "evidence": [
+        {
+          "path": "review/publication03/result.json",
+          "sha256": "126e59def753ce99948acbbc79a454e8ac434d1cb377f9c9dab02a1b02ac751d"
+        },
+        {
+          "path": "review/publication03/PR_metadata_after.json",
+          "sha256": "4b24e86c5153107323c0ff55c42088693580622435123a62d9c645e9ef4934aa"
+        },
+        {
+          "path": "review/publication03/PR_body.md",
+          "sha256": "b9208dcaebf329110deba3a5741e9196b91f12db661985434d359e008e28aa83"
+        }
+      ]
+    }
+  ],
+  "compared_CSV_tables": 31,
+  "compared_fields": 2388525,
+  "independent_delivery_status": "PASS_INDEPENDENT_PUBLIC_ONLY_FINAL_DELIVERY_REVIEW",
+  "paid_starts": 62,
+  "paid_outer_seconds": 15157.511650200002,
+  "actual_Optimize": 5946,
+  "IIS": 0,
+  "native_missing_after": 0,
+  "production_PE_SHA": "364501ac3dd2599834ee2bf40ccceca2d6c01bbb761cdc706f141832619088a2",
+  "reader_SHA": "3b04fe6757ae097ec721c13937b4ff9f463af73bc07ec699572d034bc46b788e",
+  "actual_public_only_restore_complete": true,
+  "independent_engine_performance_rerun": false,
+  "draft_PR_creation_and_remote_payload_verification": "COMPLETE",
+  "recorded_utc": "2026-10-07T23:22:57Z",
+  "publication": {
+    "PR_url": "https://github.com/yifanXovo/TailoredExact/pull/169",
+    "base_branch": "codex/round106-structural-conflict-events",
+    "base_commit": "0350dbcc60d1c68e5c499d2e9880ecc1deaf031c",
+    "head_branch": "codex/round107-ens-frontier-route-events",
+    "isDraft": true,
+    "PR_state": "OPEN",
+    "verified_payload_commit": "4d85c66a28321a37ca83354ee7849eef5a3fcae3",
+    "exact_public_files_verified": 62,
+    "production_source_bindings_verified": 205,
+    "publication_result_path": "review/publication03/result.json",
+    "publication_result_SHA": "126e59def753ce99948acbbc79a454e8ac434d1cb377f9c9dab02a1b02ac751d",
+    "PR_body_SHA": "b9208dcaebf329110deba3a5741e9196b91f12db661985434d359e008e28aa83",
+    "metadata_followup_scope": "Actual publication receipts, delivery-only verifier and completion/handoff/reproduction metadata only; scientific payload remains pinned to verified_payload_commit."
+  }
+}

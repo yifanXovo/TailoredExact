@@ -1,0 +1,95 @@
+{
+  "roles": [
+    {
+      "id": "F5",
+      "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 5400,
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "FRONTIER-STRUCT"
+      ]
+    },
+    {
+      "id": "N36",
+      "V": 36,
+      "M": 3,
+      "Q_vector": [
+        24,
+        30,
+        36
+      ],
+      "geometry": "three_clusters",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 5400,
+      "input_path": "reference/round106_confirmation/N36.txt",
+      "input_sha256": "52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea",
+      "scenario_id": "round106-structural-candidate-confirmation-v1-N36",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "method_order": [
+        "ENS-C",
+        "FRONTIER-STRUCT",
+        "P-GRB"
+      ]
+    },
+    {
+      "id": "S12",
+      "V": 12,
+      "M": 2,
+      "Q_vector": [
+        8,
+        12
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "surplus",
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "input_path": "reference/round106_confirmation/S12.txt",
+      "input_sha256": "475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f",
+      "scenario_id": "round106-structural-candidate-confirmation-v1-S12",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "method_order": [
+        "FRONTIER-STRUCT",
+        "P-GRB",
+        "ENS-C"
+      ]
+    }
+  ],
+  "process_shutdown_margin_seconds": 30,
+  "recipe_SHA": "4b98cf8e5649b6ed2cd3e137abd4d244b41fc4d332ec3ff9449590434cfd2b19",
+  "nominal_seconds": 35100,
+  "maximum_formal_children": 9,
+  "status": "SEALED_NOT_EXECUTED_PENDING_COMPLETE_DEVELOPMENT",
+  "Optimize_calls": 0,
+  "admission": {
+    "A": "At least one role: candidate certified, P not; or both certified and candidate complete observed time <=0.90 P. Other role candidate certified, or both P/candidate censored with candidate own U <=1.01 P and absolute complete-cover gap <=1.25 P.",
+    "B": "C2 own U <=0.99 P and complete-cover absolute gap <=0.80 P, with a better independently verified real fleet. F2 own U <=1.01 P and gap <=1.05 P. If F2 P certified, candidate must certify; both certified pass F2 without zero-gap ratios.",
+    "tolerance": "All improvements exceed original certificate/objective tolerances; contradictory bounds are ERROR, no clipping.",
+    "ENS_tradeoff": "Disclose ENS certification/time loss. A/B authorize only the sealed confirmation, not algorithm admission.",
+    "reject": "C2 remaining near0.37-0.39 versus P near0.20 does not authorize confirmation merely because F2 certification returns."
+  },
+  "retention": "All generated inputs kept; no feedback-based redraw; started matched groups completed even if negative.",
+  "cancellation": "Complete started three-arm groups. Cancel only wholly unstarted groups with a documented negative development/confirmation result. Any canceled/incomplete group precludes ADVANCE.",
+  "candidate": "FRONTIER-STRUCT",
+  "inherited_protocol_commit": "0350dbcc60d1c68e5c499d2e9880ecc1deaf031c",
+  "inherited_protocol_SHA": "0a4a4017ab5cdc68454fb967be66a858161db45d2280580a739b7016a1048150"
+}

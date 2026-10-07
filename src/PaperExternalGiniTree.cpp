@@ -1137,7 +1137,7 @@ PaperTerminalMipDecision evaluatePaperTerminalMipDecision(
     if (outcome.interrupted) {
         decision.valid = true;
         decision.leave_open_and_stop = true;
-        decision.reason = "global_deadline_interrupted_terminal_mip";
+        decision.reason = outcome.round107_open_stop ? outcome.round107_local_reason : "global_deadline_interrupted_terminal_mip";
         return decision;
     }
     decision.reason = "unsupported_terminal_mip_status";
@@ -3215,7 +3215,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         : prepareRound61Candidate(instance, options, artifact_dir / "round61");
     const bool round62_passive=round62PassiveMode(options.round61_candidate_mode);
     const bool round62_cert=options.round61_candidate_mode=="passive-cert";
-    bool round62_stopped=false;
+    bool round62_stopped=false, round107_stopped=false;
     bool round62_native_quality=true;
     long long round62_call_sequence=0;
     std::ofstream round62_coverage,round62_observations;
@@ -3529,6 +3529,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         ++result.external_gini_tree_global_deadline_interruption_count;
         result.external_gini_tree_failure_reason = "overall_global_deadline";
     };
+    auto stopScopedOpen = [&](const FixedIntervalMipOutcome& outcome) {
+        if (globalDeadlineRemaining() <= 0) { stopAtDeadline(); return; }
+        round107_stopped = true;
+        result.external_gini_tree_failure_reason = "round107_open_stop:" + outcome.round107_local_reason;
+        writeGlobalTrace(processElapsedSeconds(options), elapsedTelemetry(), "interruption", "",
+            scheduler.globalLowerBound(), std::numeric_limits<double>::infinity(),
+            result.external_gini_tree_failure_reason);
+    };
 
     Round65Budget proof_budget;
     proof_budget.seed_work = proof_budget.seed_seconds = options.round65_seed_credit;
@@ -3538,7 +3546,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         proof_budget.ledger << "call,state,kind,status,grant_work,grant_seconds,work,seconds,optional_work,core_work,optional_seconds,core_seconds\n";
     }
     long long round68_start_sequence = 0;
+    long long round107_request_sequence = 0;
     auto solveBudgeted = [&](FixedIntervalMipRequest& request) {
+        if (options.round107_frontier_struct) {
+            request.round107_request_id = ++round107_request_sequence;
+            request.round107_epoch = incumbent_epoch;
+            request.verified_start_routes = best_routes;
+            request.verified_start_source = "own_global_physical_witness_scope_checked_by_backend";
+        }
         if (options.round104_observe_native &&
             request.solve_kind == FixedIntervalSolveKind::PaperTerminalMip) {
             request.round59_node_samples_path = request.native_log_path.string()+".round104.samples.csv";
@@ -3583,6 +3598,18 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             request.global_deadline_remaining_seconds = globalDeadlineRemaining();
         }
         auto captureNative = [&](const FixedIntervalMipOutcome& out) {
+            // Failed scoped calls contribute no new bound/terminal status,
+            // but an independently verified physical UB remains global.
+            if (options.round107_frontier_struct &&
+                (!out.feasibility_consistency_gate || !out.solver_finalization_reached) &&
+                out.incumbent_available && out.incumbent_independently_verified &&
+                out.incumbent_objective < verified_ub - 1e-9) {
+                verified_ub = out.incumbent_objective; best_routes = out.incumbent_routes; ++incumbent_epoch;
+                std::string reason;
+                if (!scheduler.tightenVerifiedCutoff(verified_ub, &reason))
+                    throw std::runtime_error("round107_failed_call_physical_UB_handoff:" + reason);
+                persistCurrentWitness(verified_ub, best_routes, "round107_failed_call_physical_UB.json");
+            }
             if(round65_witness_audit && out.incumbent_available && out.incumbent_independently_verified)
                 persistCurrentWitness(out.incumbent_objective,out.incumbent_routes,
                     "native_"+std::to_string(round65_native_witness_count++)+"_witness.json");
@@ -4123,6 +4150,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             otherRelevantMinimum(bounded.id);
         const FixedIntervalMipOutcome outcome = solveBudgeted(request);
         mergeRound60CandidateOutcome(outcome);
+        if(outcome.round107_scoped&&outcome.round107_open_stop&&!outcome.attempted&&outcome.failure_reason=="none") {
+            stopScopedOpen(outcome);return C6TargetDisposition::Deadline;
+        }
         if (round44_active) {
             round44_start_ledger << bounded.id << ','
                 << csvField(adaptive_mip_starts) << ','
@@ -4327,13 +4357,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             native_targets << phase_index << ',' << bounded.id << ','
                            << target_kind << ',' << bounded.lower_bound << ','
                            << target << ',' << other_bound << ','
-                           << verified_ub << ",deadline_open,"
+                           << verified_ub << (outcome.round107_open_stop ? ",scoped_open_stop," : ",deadline_open,")
                            << csvField(outcome.native_status) << ','
                            << outcome.native_bound << ",0,0,0,"
                            << outcome.solver_runtime_seconds << ','
                            << outcome.work << ',' << outcome.nodes << ','
                            << csvField(event_source) << '\n';
-            stopAtDeadline();
+            if (outcome.round107_open_stop) stopScopedOpen(outcome); else stopAtDeadline();
             return C6TargetDisposition::Deadline;
         }
         result.external_gini_tree_failure_reason =
@@ -8837,6 +8867,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         }
         const PaperTerminalMipDecision terminal =
             evaluatePaperTerminalMipDecision(outcome);
+        if(outcome.round107_scoped&&outcome.round107_open_stop&&!outcome.attempted&&outcome.failure_reason=="none") {
+            stopScopedOpen(outcome);break;
+        }
         if (!terminal.valid) {
             hard_failure = true;
             result.external_gini_tree_failure_reason = terminal.reason + ":" +
@@ -8893,8 +8926,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     ? scheduler.findLeaf(bounded.id)->lower_bound
                     : bounded.lower_bound,
                 otherRelevantMinimum(bounded.id),
-                "overall_process_deadline_terminal_mip");
-            stopAtDeadline();
+                terminal.reason);
+            if (outcome.round107_open_stop) stopScopedOpen(outcome); else stopAtDeadline();
             break;
         }
         std::string close_reason;
@@ -9055,7 +9088,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             ? "hard_failure_final_valid_bound"
             : (global_deadline_stop
                 ? "graceful_deadline_final_valid_bound"
-                : "completed_exact_tree_final_bound"));
+                : (round107_stopped ? "scoped_open_stop_final_valid_bound" : "completed_exact_tree_final_bound")));
     backend->release();
     copyPaperBackendStats(result, backend->stats());
     result.external_gini_tree_model_build_seconds += total_model_build_seconds;
@@ -9083,7 +9116,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         (!incremental_model_reuse ||
             result.external_gini_tree_integer_domain_restore_count ==
                 result.external_gini_tree_lp_optimize_count) &&
-        result.external_gini_tree_fresh_restart_count == 0 &&
+        (options.round107_frontier_struct
+            ? result.external_gini_tree_fresh_restart_count == result.external_gini_tree_partial_mip_optimize_count + result.external_gini_tree_terminal_mip_optimize_count
+            : result.external_gini_tree_fresh_restart_count == 0) &&
         result.external_gini_tree_child_restart_count == 0 &&
         result.external_gini_tree_reset_call_count == 0;
 

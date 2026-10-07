@@ -107,6 +107,8 @@ set(EXACT_EBRP_LIB_SOURCES
 
 add_executable(Round106Research src/round106_research_main.cpp)
 target_link_libraries(Round106Research PRIVATE exact_ebrp_core)
+add_executable(Round107Tests tests/round107_tests.cpp)
+target_link_libraries(Round107Tests PRIVATE exact_ebrp_core)
 
 if(EXACT_EBRP_ENABLE_GUROBI)
   add_test(NAME Round88ConstructiveOnlyCliTests COMMAND ${CMAKE_COMMAND}

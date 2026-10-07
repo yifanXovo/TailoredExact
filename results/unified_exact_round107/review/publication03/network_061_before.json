@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "--fail",
+    "--silent",
+    "--show-error",
+    "--location",
+    "--connect-timeout",
+    "30",
+    "--max-time",
+    "300",
+    "https://raw.githubusercontent.com/yifanXovo/TailoredExact/4d85c66a28321a37ca83354ee7849eef5a3fcae3/scripts/round107_reader.py"
+  ],
+  "path": "scripts/round107_reader.py",
+  "expected_SHA": "3b04fe6757ae097ec721c13937b4ff9f463af73bc07ec699572d034bc46b788e",
+  "expected_bytes": 48395
+}

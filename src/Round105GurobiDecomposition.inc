@@ -3,7 +3,8 @@
 struct R105Model {
     const GurobiApi* api = nullptr;
     GRBmodel* value = nullptr;
-    ~R105Model() { if (value) api->freemodel(value); }
+    std::function<void(const char*,double)> lifecycle;
+    ~R105Model() { if (value) { api->freemodel(value); if(lifecycle)lifecycle("model_freed",0); } }
 };
 
 class R105Session {
@@ -17,6 +18,8 @@ public:
     long long master_calls = 0, oracle_calls = 0, iis_calls = 0, core_calls = 0;
     double master_seconds = 0, oracle_seconds = 0, iis_seconds = 0, core_seconds = 0;
     long long sequence = 0;
+    // Observation only; absent on the historical R105/R106 paths.
+    std::function<void(const char*,double)> lifecycle;
     // Optional R106 inner-environment cancellation, off for historical R105.
     bool deadline_callback = false, cancellation_requested = false, strict_numeric_status = false;
     double cancellation_seconds = -1;
@@ -29,12 +32,16 @@ public:
         return 0;
     }
     R105Session(const Instance& instance, const SolveOptions& options,
-                const std::filesystem::path& folder) : in(instance), opt(options), dir(folder) {
+                const std::filesystem::path& folder,
+                std::function<void(const char*,double)> observer={})
+                : in(instance), opt(options), dir(folder), lifecycle(std::move(observer)) {
         std::filesystem::create_directories(dir);
         std::filesystem::path root, library; std::string reason;
         if (!loadGurobiApi(opt,api,root,library,reason)) throw std::runtime_error(reason);
         try {
-            check(startSilentGurobiEnvironment(api,&env));
+            const int env_rc=startSilentGurobiEnvironment(api,&env);
+            if(env&&lifecycle)lifecycle("environment_created",0);
+            check(env_rc);
             check(api.setintparam(env,"Threads",1));
             check(api.setintparam(env,"Seed",0));
             check(api.setintparam(env,"Presolve",-1));
@@ -51,15 +58,18 @@ public:
                 throw std::runtime_error("round105_native_parameter_contract_failed");
             identity << parameters.settings_json << "}\n";
         } catch (...) {
-            if (env) api.freeenv(env);
+            if (env) { api.freeenv(env);if(lifecycle)lifecycle("environment_freed",0); }
             FreeLibrary(api.library); api.library=nullptr; throw;
         }
     }
-    ~R105Session() { if (env) api.freeenv(env); if (api.library) FreeLibrary(api.library); }
+    ~R105Session() { if (env) {api.freeenv(env);if(lifecycle)lifecycle("environment_freed",0);} if (api.library) FreeLibrary(api.library); }
     void check(int rc) const { if (rc) throw std::runtime_error(apiError(api,env,rc)); }
     double remaining() const { return processWorkRemainingSeconds(opt); }
     void read(R105Model& model, const std::filesystem::path& path) {
-        model.api=&api; check(api.readmodel(env,path.string().c_str(),&model.value));
+        model.api=&api;model.lifecycle=lifecycle;
+        const int rc=api.readmodel(env,path.string().c_str(),&model.value);
+        if(model.value&&lifecycle)lifecycle("model_created",0);
+        check(rc);if(lifecycle)lifecycle("model_read",0);
     }
     SolverNeutralModelDomain domain(GRBmodel* model) {
         int n=0;check(api.getintattr(model,"NumVars",&n));
@@ -91,12 +101,22 @@ public:
               << ',' << rem << ",,,,,," << fileSha256(path) << '\n'; calls.flush();
         if (!calls) throw std::runtime_error("round105_ahead_of_call_persist_failed");
         if(deadline_callback)check(api.setcallbackfunc(model,deadlineCheck,this));
+        if(lifecycle)lifecycle(phase=="master"?"master_optimize_intent":"inner_optimize_intent",0);
+        if(remaining()<=0) {
+            calls<<id<<','<<phase<<",not_started_deadline,"<<processElapsedSeconds(opt)<<','<<remaining()<<",0,"<<GRB_TIME_LIMIT<<",0,,,"<<fileSha256(path)<<'\n';calls.flush();
+            if(deadline_callback)check(api.setcallbackfunc(model,nullptr,nullptr));
+            return GRB_TIME_LIMIT;
+        }
+        if(lifecycle)lifecycle(phase=="master"?"master_optimize_start":"inner_optimize_start",0);
+        if(phase=="master")++master_calls;else if(phase=="core_confirm")++core_calls;else ++oracle_calls;
         const auto start=Clock::now();const int rc=api.optimize(model);
-        if(deadline_callback)check(api.setcallbackfunc(model,nullptr,nullptr));
+        if(lifecycle)lifecycle(phase=="master"?"master_native_rc":"inner_native_rc",rc);
         const double sec=std::chrono::duration<double>(Clock::now()-start).count();
-        if (phase=="master") { ++master_calls;master_seconds+=sec; }
-        else if (phase=="core_confirm") { ++core_calls;core_seconds+=sec; }
-        else { ++oracle_calls;oracle_seconds+=sec; }
+        if (phase=="master") master_seconds+=sec;
+        else if (phase=="core_confirm") core_seconds+=sec;
+        else oracle_seconds+=sec;
+        if(lifecycle)lifecycle(phase=="master"?"master_optimize_return":"inner_optimize_return",sec);
+        if(deadline_callback)check(api.setcallbackfunc(model,nullptr,nullptr));
         int status=0,solutions=0;double bound=0,objective=0;
         if (!rc) { check(api.getintattr(model,"Status",&status));check(api.getintattr(model,"SolCount",&solutions)); }
         const bool b=!rc && !api.getdblattr(model,"ObjBoundC",&bound) && std::isfinite(bound) && std::abs(bound)<GRB_INFINITY;

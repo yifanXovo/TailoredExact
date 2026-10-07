@@ -404,6 +404,8 @@ SolveResult r106Solve(const Instance& in,const SolveOptions& opt,const SolveResu
     if(!residual.valid)throw std::runtime_error("round106_start_base_row_residual");
     session.check(api.setdblattrarray(master.value,"Start",0,n,const_cast<double*>(start.values.data())));
     session.check(api.setintparam(api.getenv(master.value),"LazyConstraints",1));
+    int lazy_readback=0;session.check(api.getintparam(api.getenv(master.value),"LazyConstraints",&lazy_readback));
+    if(lazy_readback!=1)throw std::runtime_error("round106_LazyConstraints_readback");
     std::ofstream embedding(dir/"embedding.json");embedding<<std::setprecision(17)<<"{\"U0\":"<<U0<<",\"gamma_L\":0,\"gamma_U\":"<<GU<<",\"epsilon\":0,\"all_columns\":"<<n
       <<",\"checked_rows\":"<<rows<<",\"max_row_violation\":"<<residual.maximum_violation<<",\"original_sha256\":"<<std::quoted(original.sha256)<<",\"LazyConstraints\":1}\n";
     embedding.flush();if(!embedding)throw std::runtime_error("round106_embedding_persist");

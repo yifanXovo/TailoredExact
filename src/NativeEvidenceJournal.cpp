@@ -206,6 +206,9 @@ void NativeEvidenceJournal::nativeBound(long long call,double bound) {
 void NativeEvidenceJournal::returned(long long call,int rc) {
     publish("returned","\"call\":"+std::to_string(call)+",\"return_code\":"+std::to_string(rc));
 }
+void NativeEvidenceJournal::notStarted(long long call,const std::string& reason) {
+    publish("not_started","\"call\":"+std::to_string(call)+",\"reason\":"+quoted(reason)+",\"actual_Optimize\":false");
+}
 void NativeEvidenceJournal::failure(const std::string& reason) noexcept {
     try {publish("failure","\"reason\":"+quoted(reason));} catch(...) {}
     failed_=true;

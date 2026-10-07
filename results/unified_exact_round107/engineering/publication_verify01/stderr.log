@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_verify_publication.py", line 88, in <module>
+    if __name__=='__main__':verify(sys.argv[1],sys.argv[2])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_verify_publication.py", line 26, in verify
+    assert not tree.get('truncated',False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

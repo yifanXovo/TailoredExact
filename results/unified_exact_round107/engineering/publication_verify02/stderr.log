@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_verify_publication.py", line 109, in <module>
+    if __name__=='__main__':verify(sys.argv[1],sys.argv[2])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_verify_publication.py", line 90, in verify
+    assert code==0 and length==size and record['sha256']==expected,(relative,record,expected,size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('results/unified_exact_round107/compact_evidence/evidence.tar.gz.part001', {'path': 'results/unified_exact_round107/compact_evidence/evidence.tar.gz.part001', 'github_blob_SHA': 'c58eab6c29989b6da3a0e530cbb56746af04cbc9', 'bytes': 2, 'sha256': 'bedc34ba158f46e4c5c579d2fa4d120fbc7f25ad475cbaff2e9d88fd44fd8ce0', 'returncode': 1, 'engineering_seconds': 1.6031879000365734, 'source_url': 'https://github.com/yifanXovo/TailoredExact/blob/4d85c66a28321a37ca83354ee7849eef5a3fcae3/results/unified_exact_round107/compact_evidence/evidence.tar.gz.part001'}, 'e57fdaf9d09421e4234658afbd9d76b2c96a8fd46b8b54d08d465f40f7606754', 50331648)

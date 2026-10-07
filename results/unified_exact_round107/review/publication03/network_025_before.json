@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "--fail",
+    "--silent",
+    "--show-error",
+    "--location",
+    "--connect-timeout",
+    "30",
+    "--max-time",
+    "300",
+    "https://raw.githubusercontent.com/yifanXovo/TailoredExact/4d85c66a28321a37ca83354ee7849eef5a3fcae3/results/unified_exact_round107/reports05/confirmation_gate.json"
+  ],
+  "path": "results/unified_exact_round107/reports05/confirmation_gate.json",
+  "expected_SHA": "7a94946a63bdb4a9ba2371d81c97d01fb6132c2459187342fb5cf9516054d6a4",
+  "expected_bytes": 362
+}

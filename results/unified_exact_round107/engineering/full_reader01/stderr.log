@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 538, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 533, in main
+    root=a.root.resolve();dest=a.out.resolve();summary=rebuild(root,dest)
+                                                       ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 520, in rebuild
+    paid=fees(out);nc=native(root,out,campaigns,control_journals)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 171, in native
+    records.append(dict(path=p.relative_to(root).as_posix(),phase='LP',intents=len(qs),not_started=sum(not q['native_Optimize_started'] for q in qs),started=sum(q['native_Optimize_started'] for q in qs),returned=sum(q['native_Optimize_started'] for q in qs),missing_after=0,native_seconds=None))
+                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 171, in <genexpr>
+    records.append(dict(path=p.relative_to(root).as_posix(),phase='LP',intents=len(qs),not_started=sum(not q['native_Optimize_started'] for q in qs),started=sum(q['native_Optimize_started'] for q in qs),returned=sum(q['native_Optimize_started'] for q in qs),missing_after=0,native_seconds=None))
+                                                                                                           ~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'native_Optimize_started'
