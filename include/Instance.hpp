@@ -29,6 +29,7 @@ struct Instance {
 };
 
 struct SolveOptions {
+    std::string round106_events = "off"; // off|full|core|struct; one MIPSOL/lazy master
     std::string round105_decomposition = "off"; // off|full|core; global master, no AM
     // Round68: supply the already-paid complete outer witness to native VD-P.
     bool round68_verified_start = false;

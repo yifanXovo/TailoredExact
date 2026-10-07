@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "layer": "INDEPENDENT_ZERO_SOLVER_REVIEW",
+  "executed_source": "independent_delivery_check02.executed.py",
+  "reason": "Historical reviewer local_mode helper asserted strict p_raw>=0 and d_raw>=0 before integer interpretation. New native MIPSOL snapshots can contain tiny negative values that round to zero within the published integrality tolerance. New delivery decoder independently verifies finite/integral raw values, then exact nonnegative p/d integers and z/state mapping, without changing the historical helper or production.",
+  "Optimize_calls": 0,
+  "IIS_calls": 0,
+  "native_process_starts": 0
+}

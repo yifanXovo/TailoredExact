@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "layer": "INDEPENDENT_ZERO_SOLVER_REVIEW",
+  "executed_source": "independent_delivery_check04.executed.py",
+  "reason": "Reviewer checker compared full mathematical B_THRESHOLD certificate coefficients directly against currently available canonical state columns. Production certificates intentionally include global threshold states, with absent current-root-domain states fixed to zero when mapping to the actual lazy row. Revised checker separately verifies complete global threshold coefficients, absent-state names and actual mapped coefficients. No production defect found.",
+  "Optimize_calls": 0,
+  "IIS_calls": 0,
+  "native_process_starts": 0
+}

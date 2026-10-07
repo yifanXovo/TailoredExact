@@ -1,0 +1,46 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "/root/independent_review",
+  "date": "2026-10-07",
+  "scope": "Correctness admission of the frozen default-off Round106 implementation for the finite eight-arm development panel and separately frozen fixed-Y diagnosis",
+  "production_PE_SHA": "1ad7b9128288ff06eed64ac91154c1863963827c5399083b1b233a24ee2d09b4",
+  "research_PE_SHA": "803714ab4e86a39de198a351b1beeb314f07787f4f0aff67f3c51a0f99dfa722",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "qualification_identity_SHA": "84928d0bbc026fc494bbf4edbe3de070276c1b63e6527c9c7dc523030ae1789f",
+  "source_bindings_qualification_SHA": "84928d0bbc026fc494bbf4edbe3de070276c1b63e6527c9c7dc523030ae1789f",
+  "source_bindings_location": "results/unified_exact_round106/qualification/identity.json:source_bindings",
+  "source_binding_entries_independently_checked": 201,
+  "retained_qualification_hashes_independently_checked": 437,
+  "independent_zero_solver_audit": "results/unified_exact_round106/review/independent_qualification_check01.json",
+  "independent_zero_solver_audit_SHA": "d31cc590a22f45a60a1853711c51d7d825352c3673c0c7907ae0e765a5abecda",
+  "fixed_Y_protocol_SHA": "4ae6d2697cad29565e5ee5b18561d0c0c7ab53b8d75a3859acf4d8485744e03b",
+  "mathematical_admission": "A true conservative MST support row; B strictly budget-gated balanced-three-station six-order exact and threshold rows; inherited metric domain only",
+  "actual_native_coverage": [
+    "New tiny FULL/CORE/STRUCT fixtures: one outer Optimize, real MIPSOL snapshot, fallback INF lazy, FEAS complete-witness UB and deferred submission",
+    "New native B fixture: actual B_EXACT and B_THRESHOLD reliable violations submitted through lazy, same master continuation and physical certificate",
+    "C2 retained-model replay: actual A_MST lazy, four repeat candidate events and repeated lazy submission, continued same outer master and qualified global bound",
+    "F2 retained-model replay: actual B lazy application on original input",
+    "Actual nested full-oracle/IIS deadline: inner cancellation at 12.0001934 seconds, outer cancellation at 12.0138728, retained FULL rejection, no new proof call after deadline, LB0 and own UB retained without certificate",
+    "Current build's inherited native suite: 21 micro cases plus assignment/control and pre-expired safeguards"
+  ],
+  "coverage_limits": [
+    "This is correctness admission, with no favorable performance inference, default-policy promotion or full production benchmark result yet.",
+    "Historical retained-model replays use the same Gurobi engine and are interface qualification; they are not independent native-model or performance reproductions and have no formal-arm handoff.",
+    "High epigraph, FEAS submission deduplication, one-car rejection with other UNKNOWN, and UNKNOWN without a rejecting row are additionally exercised in explicitly scripted callback API tests on audited vectors. Those tests start zero Optimize/IIS and do not establish actual native observations of every branch.",
+    "The tiny native A fixture produced no A row because the base model excluded its target; A admission relies on independent arithmetic and actual C2 replay traces.",
+    "NUMERIC/API/evidence error handling and pending-candidate final-bound exclusion have been reviewed statically; no claim is made that every possible native error was experimentally induced.",
+    "The fixed-Y diagnostic is separately paid, releases all vehicles and orders, uses original T and Q, and has no production handoff or extension after UNKNOWN.",
+    "Any production PE or source-binding change requires appropriate requalification and a new admission identity; affected measurements must be rerun. Campaign scripts/inputs/helpers remain separately sealed."
+  ],
+  "formal_panel": {
+    "F2": {"arms": ["P-GRB", "ENS-C", "EVENT-STRUCT"], "cap_seconds": 1200},
+    "R98-C2": {"arms": ["ENS-C", "EVENT-FULL", "EVENT-CORE", "P-GRB", "EVENT-STRUCT"], "cap_seconds": 1800},
+    "common_reserve_seconds": 30,
+    "serial_only": true,
+    "complete_all_eight_before_stage_decision": true
+  },
+  "reviewer_Optimize_calls": 0,
+  "reviewer_IIS_calls": 0,
+  "reviewer_native_solver_processes": 0,
+  "review_paused_during_paid_measurements": true
+}

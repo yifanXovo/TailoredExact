@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_evidence.py", line 73, in <module>
+    assert sys.argv[1] in ['pack','split'];{'pack':pack,'split':split}[sys.argv[1]]()
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_evidence.py", line 70, in split
+    write(d/'manifest.json',q)
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round101_common.py", line 13, in write
+    with p.open('x',encoding='utf-8',newline='\n') as f:json.dump(v,f,indent=2,ensure_ascii=False,allow_nan=False);f.write('\n')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: 'C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round106\\compact_evidence\\manifest.json'

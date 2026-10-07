@@ -23,6 +23,7 @@
 #include "Round96RouteOrder.hpp"
 #include "Round92HandlingActivation.hpp"
 #include "Round105Decomposition.hpp"
+#include "Round106Events.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
@@ -275,6 +276,8 @@ std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
         return "research-round88-ensc-constructive-only";
     if (opt.round89_native_ot_b1)
         return "research-round89-ensc-native-ot-b1";
+    if (opt.round106_events != "off")
+        return "research-round106-candidate-events-" + opt.round106_events;
     if (opt.round105_decomposition != "off")
         return "research-round105-inventory-route-" + opt.round105_decomposition;
     if (opt.round104_objective_resources != "off")
@@ -1456,6 +1459,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round104-observe-native") opt.round104_observe_native = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round104-objective-resources") opt.round104_objective_resources = requireValue(i, argc, argv);
         else if (arg == "--round105-decomposition") opt.round105_decomposition = requireValue(i, argc, argv);
+        else if (arg == "--round106-events") opt.round106_events = requireValue(i, argc, argv);
         else if (arg == "--round90-lp-g-split") opt.round90_lp_g_split = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round92-handling-activation") opt.round92_handling_activation = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round96-route-order") opt.round96_route_order = parseBoolValue(requireValue(i, argc, argv));
@@ -3376,7 +3380,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round103 cannot combine with Round101/102");
     if (opt.round105_decomposition != "off" && opt.round105_decomposition != "full" && opt.round105_decomposition != "core")
         throw std::runtime_error("Invalid Round105 decomposition mode");
-    if (opt.round105_decomposition != "off" &&
+    if (opt.round106_events != "off" && opt.round106_events != "full" && opt.round106_events != "core" && opt.round106_events != "struct")
+        throw std::runtime_error("Invalid Round106 event mode");
+    if (opt.round106_events != "off" && opt.round105_decomposition != "off")
+        throw std::runtime_error("Round106 and Round105 cannot be combined");
+    if ((opt.round105_decomposition != "off" || opt.round106_events != "off") &&
         (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
          opt.method != "gcap-frontier" || !opt.k1_am_sf_controller_enabled ||
          opt.round89_native_ot_b1 || opt.round88_constructive_only_descent ||
@@ -3392,7 +3400,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
          opt.incumbent_archive_auto || opt.gcap_seed_cplex ||
          !opt.external_incumbent_path.empty() || !opt.hga_incumbent_path.empty() || !opt.incumbent_json_path.empty()))
         throw std::runtime_error("Round105 requires isolated ENS-C startup and a full non-strict global domain");
-    if (opt.round105_decomposition != "off") {
+    if (opt.round105_decomposition != "off" || opt.round106_events != "off") {
         ebrp::SolveOptions expected;
         expected.algorithm_preset = "research-round83-vds-equal-net-exchange";
         applyAlgorithmPreset(expected);
@@ -4131,6 +4139,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round105_inventory_route_" + opt.round105_decomposition);
         snapshot.preset_reason = "Round105: one inventory-assignment master, exact all-order routes and proved conflicts; unchanged paid ENS startup, no AM";
+    }
+    if (opt.round106_events != "off") {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round106_candidate_events_" + opt.round106_events);
+        snapshot.preset_reason = "Round106: one MIPSOL/lazy assignment master, qualified structural conflicts and exact routes; unchanged paid ENS startup, no AM";
     }
     if (opt.round90_lp_g_split) {
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
@@ -13260,6 +13273,14 @@ ebrp::SolveResult solveGiniFrontierDiagnostic(const ebrp::Instance& instance,
         return result;
     }
 
+    if (opt.round106_events != "off") {
+        result.exact_phase_started = true;
+        result.process_elapsed_at_exact_phase_start_seconds = ebrp::processElapsedSeconds(opt);
+        auto events = ebrp::solveRound106Events(instance,opt,result);
+        events.runtime_seconds = elapsedSeconds();
+        events.wall_time_seconds = events.actual_runtime_seconds = events.runtime_seconds;
+        return events;
+    }
     if (opt.round105_decomposition != "off") {
         result.exact_phase_started = true;
         result.process_elapsed_at_exact_phase_start_seconds = ebrp::processElapsedSeconds(opt);

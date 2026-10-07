@@ -1,0 +1,1383 @@
+{
+  "status": "PASS",
+  "reviewer": "/root/independent_review",
+  "Optimize_calls": 0,
+  "IIS_calls": 0,
+  "subprocess_calls": 0,
+  "DP_calls": 0,
+  "source_sha256": "5ee7cdccccaf2f6cf7e8a25f8f83fdd70f2b7bfb220bc8c54d0c1d4d0ef82367",
+  "source_absolute_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round106\\review\\independent_math_check.py",
+  "root_absolute_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP",
+  "invocation": [
+    ".\\results\\unified_exact_round106\\review\\independent_math_check.py",
+    "--root",
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP",
+    "--output",
+    ".\\results\\unified_exact_round106\\review\\independent_math_check02.json"
+  ],
+  "evidence_sha256": {
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_1.lp.sol": "d9091de53ef84c6cda5f84becdc9f829c43aedd7ee24c967ffc3eb628ef0e02a",
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_2.lp.sol": "0b8ae0bcd4ec3c7c127ec53d787a04a49e99d41021b629d8c94e620010023254",
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_3.lp.sol": "dfdb3ed3f6f82fdb0835989ae00f16576e69dd23550bc39db0a23413dc811954",
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_4.lp.sol": "4f1e56207520ccbe697af5e5e02b25f21f0550603ada32c9e4a2dc69ec378679",
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/start.mst": "1bdbf8113e8d2c3297e96361938cc475f85f15244eded6669161909d6653ec37",
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/seed.json": "eb6941ed2748028d508da47f5c8d40d7696ec87de14ae5ac003f8a058b83a47d",
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/patterns.csv": "738dba2cd3e4034e77803345e91a580f1d328b2b5701bb11976d460d9b283108",
+    "results/unified_exact_round105/diagnostic02/raw/01_F2_IR-FULL/external/round105/master_1.lp.sol": "2e492e5ae332f9c84c22d6e3cfabfca86c3c6c780b7fd2f4a3d6f4e10fdd21ac",
+    "results/unified_exact_round105/diagnostic02/raw/01_F2_IR-FULL/external/round105/start.mst": "23e3ee6ea9c45726bc4905855bd4123a47545a0a360e31b58a8f247bccc57be7",
+    "results/unified_exact_round105/diagnostic02/raw/01_F2_IR-FULL/external/round105/seed.json": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02"
+  },
+  "evidence_origins": {
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_1.lp.sol": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_1.lp.sol",
+      "source": "compact_archive_exact_bytes"
+    },
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_2.lp.sol": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_2.lp.sol",
+      "source": "compact_archive_exact_bytes"
+    },
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_3.lp.sol": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_3.lp.sol",
+      "source": "compact_archive_exact_bytes"
+    },
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_4.lp.sol": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/master_4.lp.sol",
+      "source": "compact_archive_exact_bytes"
+    },
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/patterns.csv": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/patterns.csv",
+      "source": "compact_archive_exact_bytes"
+    },
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/seed.json": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/seed.json",
+      "source": "compact_archive_exact_bytes"
+    },
+    "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/start.mst": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/control01/raw/06_R98-C2_IR-CORE/external/round105/start.mst",
+      "source": "compact_archive_exact_bytes"
+    },
+    "results/unified_exact_round105/diagnostic02/raw/01_F2_IR-FULL/external/round105/master_1.lp.sol": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/diagnostic02/raw/01_F2_IR-FULL/external/round105/master_1.lp.sol",
+      "source": "compact_archive_exact_bytes"
+    },
+    "results/unified_exact_round105/diagnostic02/raw/01_F2_IR-FULL/external/round105/seed.json": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/diagnostic02/raw/01_F2_IR-FULL/external/round105/seed.json",
+      "source": "compact_archive_exact_bytes"
+    },
+    "results/unified_exact_round105/diagnostic02/raw/01_F2_IR-FULL/external/round105/start.mst": {
+      "actual_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round105\\compact_evidence\\evidence.tar.gz",
+      "member": "results/unified_exact_round105/diagnostic02/raw/01_F2_IR-FULL/external/round105/start.mst",
+      "source": "compact_archive_exact_bytes"
+    }
+  },
+  "input_sha256": {
+    "F2": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+    "R98-C2": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76"
+  },
+  "input_absolute_paths": {
+    "R98-C2": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\reference\\round98_confirmation\\C2.txt",
+    "F2": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\reference\\round86_unadapted_confirmation\\F2.txt"
+  },
+  "numeric_contract": {
+    "FeasibilityTol": 1e-06,
+    "IntFeasTol": 1e-05,
+    "OptimalityTol": 1e-06,
+    "physical_duration_tolerance": 1e-07,
+    "structure_gate_margin": "1e-5*max(1,T)",
+    "lower_travel": "symmetric min; downward nextafter milliseconds; integer Floyd metric closure"
+  },
+  "C2": {
+    "Y": [
+      50000,
+      14,
+      17,
+      13,
+      11,
+      20,
+      19,
+      16,
+      18,
+      18,
+      16,
+      20,
+      20,
+      20,
+      20,
+      16,
+      19,
+      16,
+      21,
+      17,
+      18,
+      26,
+      23,
+      16,
+      14,
+      24,
+      16,
+      20,
+      14,
+      26,
+      26
+    ],
+    "objective": {
+      "G": 0.058131659605398366,
+      "P": 0.8986767711762846,
+      "F": 0.19293317528184106
+    },
+    "optimal_events": 4,
+    "distinct_Y": 1,
+    "distinct_memberships": 4,
+    "support": [
+      1,
+      5,
+      6,
+      13,
+      17,
+      21
+    ],
+    "pickup": 43,
+    "decimal_MST": "2387.254251416503680574062885",
+    "decimal_edges": [
+      [
+        1,
+        21,
+        "57.37450558876787005751030656820668125875774706039733019332961215621123"
+      ],
+      [
+        6,
+        21,
+        "204.964089431403676910288689626814806966885292253443027757072587364393"
+      ],
+      [
+        0,
+        1,
+        "289.4851709738821453778294492461462597255182022790701319898589483743475"
+      ],
+      [
+        0,
+        5,
+        "299.1536100593732690573755243618755756755805503425534065540986050885233"
+      ],
+      [
+        0,
+        13,
+        "762.5932286233744301186126859341302013491250077912582435397393647595827"
+      ],
+      [
+        17,
+        21,
+        "773.6836467397022890524462294340752625383040246315830150141214221832687"
+      ]
+    ],
+    "floor_MST_ms": 2387252,
+    "floor_edges": [
+      [
+        1,
+        21,
+        57374
+      ],
+      [
+        6,
+        21,
+        204964
+      ],
+      [
+        0,
+        1,
+        289485
+      ],
+      [
+        0,
+        5,
+        299153
+      ],
+      [
+        0,
+        13,
+        762593
+      ],
+      [
+        17,
+        21,
+        773683
+      ]
+    ],
+    "closed_MST_ms": 2387252,
+    "closed_edges": [
+      [
+        1,
+        21,
+        57374
+      ],
+      [
+        6,
+        21,
+        204964
+      ],
+      [
+        0,
+        1,
+        289485
+      ],
+      [
+        0,
+        5,
+        299153
+      ],
+      [
+        0,
+        13,
+        762593
+      ],
+      [
+        17,
+        21,
+        773683
+      ]
+    ],
+    "complete_lower_duration": 7547.252,
+    "A": {
+      "coefficients": {
+        "p_0_1": 120,
+        "p_0_5": 120,
+        "p_0_6": 120,
+        "p_0_13": 120,
+        "p_0_17": 120,
+        "p_0_21": 120,
+        "z_0_1": 2387.252,
+        "z_0_5": 2387.252,
+        "z_0_6": 2387.252,
+        "z_0_13": 2387.252,
+        "z_0_17": 2387.252,
+        "z_0_21": 2387.252
+      },
+      "rhs": 19136.260000000002,
+      "current_raw_violation": 347.25199999999677,
+      "legal_start_slack": 15789.008000000002
+    },
+    "paid_seed": {
+      "routes": [
+        {
+          "nodes": [
+            0,
+            7,
+            22,
+            12,
+            26,
+            1,
+            11,
+            16,
+            10,
+            9,
+            14,
+            24,
+            0
+          ],
+          "operations": {
+            "7": 9,
+            "22": 4,
+            "12": -7,
+            "26": 6,
+            "1": 8,
+            "11": -7,
+            "16": 7,
+            "10": -12,
+            "9": 6,
+            "14": -4,
+            "24": -10
+          },
+          "prefixes": [
+            9,
+            13,
+            6,
+            12,
+            20,
+            13,
+            20,
+            8,
+            14,
+            10,
+            0
+          ],
+          "pickup": 40,
+          "delivery": 40,
+          "return_load": 0,
+          "travel": 2388.636373432086,
+          "handling": 4800,
+          "duration": 7188.636373432086,
+          "station_ok": true,
+          "load_ok": true,
+          "feasible": true
+        },
+        {
+          "nodes": [
+            0,
+            5,
+            21,
+            15,
+            6,
+            17,
+            8,
+            29,
+            0
+          ],
+          "operations": {
+            "5": 6,
+            "21": 7,
+            "15": -10,
+            "6": 6,
+            "17": 9,
+            "8": -9,
+            "29": -9
+          },
+          "prefixes": [
+            6,
+            13,
+            3,
+            9,
+            18,
+            9,
+            0
+          ],
+          "pickup": 28,
+          "delivery": 28,
+          "return_load": 0,
+          "travel": 3707.9364185886525,
+          "handling": 3360,
+          "duration": 7067.9364185886525,
+          "station_ok": true,
+          "load_ok": true,
+          "feasible": true
+        },
+        {
+          "nodes": [
+            0,
+            23,
+            3,
+            28,
+            13,
+            18,
+            30,
+            20,
+            25,
+            0
+          ],
+          "operations": {
+            "23": 6,
+            "3": 12,
+            "28": -9,
+            "13": 7,
+            "18": -12,
+            "30": 8,
+            "20": -3,
+            "25": -9
+          },
+          "prefixes": [
+            6,
+            18,
+            9,
+            16,
+            4,
+            12,
+            9,
+            0
+          ],
+          "pickup": 33,
+          "delivery": 33,
+          "return_load": 0,
+          "travel": 3232.5930309933456,
+          "handling": 3960,
+          "duration": 7192.593030993346,
+          "station_ok": true,
+          "load_ok": true,
+          "feasible": true
+        }
+      ],
+      "objective": {
+        "G": 0.10291075184702161,
+        "P": 1.9247342993500494,
+        "F": 0.39162089674952905
+      }
+    }
+  },
+  "F2": {
+    "operations": {
+      "6": 9,
+      "7": -16,
+      "9": 7
+    },
+    "orders": [
+      {
+        "nodes": [
+          0,
+          6,
+          7,
+          9,
+          0
+        ],
+        "operations": {
+          "6": 9,
+          "7": -16,
+          "9": 7
+        },
+        "prefixes": [
+          9,
+          -7,
+          0
+        ],
+        "pickup": 16,
+        "delivery": 16,
+        "return_load": 0,
+        "travel": 1661.1355644215037,
+        "handling": 1920,
+        "duration": 3581.1355644215037,
+        "station_ok": true,
+        "load_ok": false,
+        "feasible": false,
+        "lower_travel": 1661.133,
+        "lower_duration": 3581.133
+      },
+      {
+        "nodes": [
+          0,
+          6,
+          9,
+          7,
+          0
+        ],
+        "operations": {
+          "6": 9,
+          "7": -16,
+          "9": 7
+        },
+        "prefixes": [
+          9,
+          16,
+          0
+        ],
+        "pickup": 16,
+        "delivery": 16,
+        "return_load": 0,
+        "travel": 1875.7147313603384,
+        "handling": 1920,
+        "duration": 3795.714731360338,
+        "station_ok": true,
+        "load_ok": true,
+        "feasible": false,
+        "lower_travel": 1875.712,
+        "lower_duration": 3795.712
+      },
+      {
+        "nodes": [
+          0,
+          7,
+          6,
+          9,
+          0
+        ],
+        "operations": {
+          "6": 9,
+          "7": -16,
+          "9": 7
+        },
+        "prefixes": [
+          -16,
+          -7,
+          0
+        ],
+        "pickup": 16,
+        "delivery": 16,
+        "return_load": 0,
+        "travel": 1709.319230441526,
+        "handling": 1920,
+        "duration": 3629.319230441526,
+        "station_ok": true,
+        "load_ok": false,
+        "feasible": false,
+        "lower_travel": 1709.317,
+        "lower_duration": 3629.317
+      },
+      {
+        "nodes": [
+          0,
+          7,
+          9,
+          6,
+          0
+        ],
+        "operations": {
+          "6": 9,
+          "7": -16,
+          "9": 7
+        },
+        "prefixes": [
+          -16,
+          -9,
+          0
+        ],
+        "pickup": 16,
+        "delivery": 16,
+        "return_load": 0,
+        "travel": 1875.7147313603384,
+        "handling": 1920,
+        "duration": 3795.714731360338,
+        "station_ok": true,
+        "load_ok": false,
+        "feasible": false,
+        "lower_travel": 1875.712,
+        "lower_duration": 3795.712
+      },
+      {
+        "nodes": [
+          0,
+          9,
+          6,
+          7,
+          0
+        ],
+        "operations": {
+          "6": 9,
+          "7": -16,
+          "9": 7
+        },
+        "prefixes": [
+          7,
+          16,
+          0
+        ],
+        "pickup": 16,
+        "delivery": 16,
+        "return_load": 0,
+        "travel": 1709.319230441526,
+        "handling": 1920,
+        "duration": 3629.319230441526,
+        "station_ok": true,
+        "load_ok": true,
+        "feasible": false,
+        "lower_travel": 1709.317,
+        "lower_duration": 3629.317
+      },
+      {
+        "nodes": [
+          0,
+          9,
+          7,
+          6,
+          0
+        ],
+        "operations": {
+          "6": 9,
+          "7": -16,
+          "9": 7
+        },
+        "prefixes": [
+          7,
+          -9,
+          0
+        ],
+        "pickup": 16,
+        "delivery": 16,
+        "return_load": 0,
+        "travel": 1661.1355644215037,
+        "handling": 1920,
+        "duration": 3581.1355644215037,
+        "station_ok": true,
+        "load_ok": false,
+        "feasible": false,
+        "lower_travel": 1661.133,
+        "lower_duration": 3581.133
+      }
+    ],
+    "exact_lower_travel": 1661.1355644215037,
+    "conservative_lower_travel": 1661.133,
+    "ordinary_MST": "978.5529470424949628755954914",
+    "extra_pickup_unit_lower_duration": 3701.133,
+    "strict_budget_gate": true,
+    "all_orders_rejected": true,
+    "threshold_coefficients": {
+      "z_0_6": 1,
+      "z_0_7": 1,
+      "z_0_9": 1,
+      "state_6_16": 1,
+      "state_6_17": 1,
+      "state_6_18": 1,
+      "state_6_19": 1,
+      "state_6_20": 1,
+      "state_6_21": 1,
+      "state_6_22": 1,
+      "state_6_23": 1,
+      "state_6_24": 1,
+      "state_6_25": 1,
+      "state_7_21": 1,
+      "state_7_22": 1,
+      "state_7_23": 1,
+      "state_7_24": 1,
+      "state_7_25": 1,
+      "state_7_26": 1,
+      "state_7_27": 1,
+      "state_9_9": 1,
+      "state_9_10": 1,
+      "state_9_11": 1,
+      "state_9_12": 1,
+      "state_9_13": 1,
+      "state_9_14": 1,
+      "state_9_15": 1,
+      "state_9_16": 1,
+      "state_9_17": 1,
+      "state_9_18": 1,
+      "state_9_19": 1,
+      "state_9_20": 1,
+      "state_9_21": 1,
+      "state_9_22": 1,
+      "state_9_23": 1,
+      "state_9_24": 1
+    },
+    "thresholds": [
+      {
+        "station": 6,
+        "operation": 9,
+        "inventory_threshold": 25,
+        "direction": "le"
+      },
+      {
+        "station": 7,
+        "operation": -16,
+        "inventory_threshold": 21,
+        "direction": "ge"
+      },
+      {
+        "station": 9,
+        "operation": 7,
+        "inventory_threshold": 24,
+        "direction": "le"
+      }
+    ],
+    "rhs": 5,
+    "nonzero_coefficients": 36,
+    "current_raw_violation": 1.0,
+    "legal_start_slack": 2.0,
+    "mapping_checks": [
+      {
+        "station": 6,
+        "y": 24,
+        "event": true,
+        "implied_amount": 10
+      },
+      {
+        "station": 6,
+        "y": 25,
+        "event": true,
+        "implied_amount": 9
+      },
+      {
+        "station": 6,
+        "y": 26,
+        "event": false,
+        "implied_amount": 8
+      },
+      {
+        "station": 7,
+        "y": 20,
+        "event": false,
+        "implied_amount": 15
+      },
+      {
+        "station": 7,
+        "y": 21,
+        "event": true,
+        "implied_amount": 16
+      },
+      {
+        "station": 7,
+        "y": 22,
+        "event": true,
+        "implied_amount": 17
+      },
+      {
+        "station": 9,
+        "y": 23,
+        "event": true,
+        "implied_amount": 8
+      },
+      {
+        "station": 9,
+        "y": 24,
+        "event": true,
+        "implied_amount": 7
+      },
+      {
+        "station": 9,
+        "y": 25,
+        "event": false,
+        "implied_amount": 6
+      }
+    ],
+    "threshold_budget_cases": 108
+  },
+  "counterexamples": {
+    "balanced_equality_boundary": {
+      "orders": [
+        {
+          "nodes": [
+            0,
+            1,
+            2,
+            3,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": -3,
+            "3": 1
+          },
+          "prefixes": [
+            2,
+            -1,
+            0
+          ],
+          "pickup": 3,
+          "delivery": 3,
+          "return_load": 0,
+          "travel": 12.0,
+          "handling": 6,
+          "duration": 18.0,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 12.0,
+          "lower_duration": 18.0
+        },
+        {
+          "nodes": [
+            0,
+            1,
+            3,
+            2,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": -3,
+            "3": 1
+          },
+          "prefixes": [
+            2,
+            3,
+            0
+          ],
+          "pickup": 3,
+          "delivery": 3,
+          "return_load": 0,
+          "travel": 14.48528137423857,
+          "handling": 6,
+          "duration": 20.485281374238568,
+          "station_ok": true,
+          "load_ok": true,
+          "feasible": false,
+          "lower_travel": 14.48528137423857,
+          "lower_duration": 20.485281374238568
+        },
+        {
+          "nodes": [
+            0,
+            2,
+            1,
+            3,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": -3,
+            "3": 1
+          },
+          "prefixes": [
+            -3,
+            -1,
+            0
+          ],
+          "pickup": 3,
+          "delivery": 3,
+          "return_load": 0,
+          "travel": 14.48528137423857,
+          "handling": 6,
+          "duration": 20.485281374238568,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 14.48528137423857,
+          "lower_duration": 20.485281374238568
+        },
+        {
+          "nodes": [
+            0,
+            2,
+            3,
+            1,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": -3,
+            "3": 1
+          },
+          "prefixes": [
+            -3,
+            -2,
+            0
+          ],
+          "pickup": 3,
+          "delivery": 3,
+          "return_load": 0,
+          "travel": 14.48528137423857,
+          "handling": 6,
+          "duration": 20.485281374238568,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 14.48528137423857,
+          "lower_duration": 20.485281374238568
+        },
+        {
+          "nodes": [
+            0,
+            3,
+            1,
+            2,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": -3,
+            "3": 1
+          },
+          "prefixes": [
+            1,
+            3,
+            0
+          ],
+          "pickup": 3,
+          "delivery": 3,
+          "return_load": 0,
+          "travel": 14.48528137423857,
+          "handling": 6,
+          "duration": 20.485281374238568,
+          "station_ok": true,
+          "load_ok": true,
+          "feasible": false,
+          "lower_travel": 14.48528137423857,
+          "lower_duration": 20.485281374238568
+        },
+        {
+          "nodes": [
+            0,
+            3,
+            2,
+            1,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": -3,
+            "3": 1
+          },
+          "prefixes": [
+            1,
+            -2,
+            0
+          ],
+          "pickup": 3,
+          "delivery": 3,
+          "return_load": 0,
+          "travel": 12.0,
+          "handling": 6,
+          "duration": 18.0,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 12.0,
+          "lower_duration": 18.0
+        }
+      ],
+      "lower": 12.0,
+      "minimum_prefix_feasible_duration": 20.485281374238568,
+      "extra_unit_budget": 20,
+      "strict_budget_gate": false,
+      "helper": {
+        "nodes": [
+          0,
+          1,
+          4,
+          2,
+          3,
+          0
+        ],
+        "operations": {
+          "1": 2,
+          "2": -3,
+          "3": 1,
+          "4": 1
+        },
+        "prefixes": [
+          2,
+          3,
+          0,
+          1
+        ],
+        "pickup": 4,
+        "delivery": 3,
+        "return_load": 1,
+        "travel": 12.0,
+        "handling": 8,
+        "duration": 20.0,
+        "station_ok": true,
+        "load_ok": true,
+        "feasible": true
+      },
+      "unsafe_absence_free_row_activity": 6,
+      "unsafe_rhs": 5
+    },
+    "unbalanced_capacity_helper": {
+      "orders": [
+        {
+          "nodes": [
+            0,
+            1,
+            2,
+            3,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": 2,
+            "3": -3
+          },
+          "prefixes": [
+            2,
+            4,
+            1
+          ],
+          "pickup": 4,
+          "delivery": 3,
+          "return_load": 1,
+          "travel": 0.0,
+          "handling": 8,
+          "duration": 8.0,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 0.0,
+          "lower_duration": 8.0
+        },
+        {
+          "nodes": [
+            0,
+            1,
+            3,
+            2,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": 2,
+            "3": -3
+          },
+          "prefixes": [
+            2,
+            -1,
+            1
+          ],
+          "pickup": 4,
+          "delivery": 3,
+          "return_load": 1,
+          "travel": 0.0,
+          "handling": 8,
+          "duration": 8.0,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 0.0,
+          "lower_duration": 8.0
+        },
+        {
+          "nodes": [
+            0,
+            2,
+            1,
+            3,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": 2,
+            "3": -3
+          },
+          "prefixes": [
+            2,
+            4,
+            1
+          ],
+          "pickup": 4,
+          "delivery": 3,
+          "return_load": 1,
+          "travel": 0.0,
+          "handling": 8,
+          "duration": 8.0,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 0.0,
+          "lower_duration": 8.0
+        },
+        {
+          "nodes": [
+            0,
+            2,
+            3,
+            1,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": 2,
+            "3": -3
+          },
+          "prefixes": [
+            2,
+            -1,
+            1
+          ],
+          "pickup": 4,
+          "delivery": 3,
+          "return_load": 1,
+          "travel": 0.0,
+          "handling": 8,
+          "duration": 8.0,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 0.0,
+          "lower_duration": 8.0
+        },
+        {
+          "nodes": [
+            0,
+            3,
+            1,
+            2,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": 2,
+            "3": -3
+          },
+          "prefixes": [
+            -3,
+            -1,
+            1
+          ],
+          "pickup": 4,
+          "delivery": 3,
+          "return_load": 1,
+          "travel": 0.0,
+          "handling": 8,
+          "duration": 8.0,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 0.0,
+          "lower_duration": 8.0
+        },
+        {
+          "nodes": [
+            0,
+            3,
+            2,
+            1,
+            0
+          ],
+          "operations": {
+            "1": 2,
+            "2": 2,
+            "3": -3
+          },
+          "prefixes": [
+            -3,
+            -1,
+            1
+          ],
+          "pickup": 4,
+          "delivery": 3,
+          "return_load": 1,
+          "travel": 0.0,
+          "handling": 8,
+          "duration": 8.0,
+          "station_ok": true,
+          "load_ok": false,
+          "feasible": false,
+          "lower_travel": 0.0,
+          "lower_duration": 8.0
+        }
+      ],
+      "helper": {
+        "nodes": [
+          0,
+          1,
+          4,
+          2,
+          3,
+          0
+        ],
+        "operations": {
+          "1": 2,
+          "2": 2,
+          "3": -3,
+          "4": -1
+        },
+        "prefixes": [
+          2,
+          1,
+          3,
+          0
+        ],
+        "pickup": 4,
+        "delivery": 4,
+        "return_load": 0,
+        "travel": 0.0,
+        "handling": 8,
+        "duration": 8.0,
+        "station_ok": true,
+        "load_ok": true,
+        "feasible": true
+      },
+      "balance_premise": false
+    },
+    "one_order_failure_is_insufficient": [
+      {
+        "nodes": [
+          0,
+          1,
+          2,
+          3,
+          0
+        ],
+        "operations": {
+          "1": 2,
+          "2": -1,
+          "3": -1
+        },
+        "prefixes": [
+          2,
+          1,
+          0
+        ],
+        "pickup": 2,
+        "delivery": 2,
+        "return_load": 0,
+        "travel": 6.0,
+        "handling": 4,
+        "duration": 10.0,
+        "station_ok": true,
+        "load_ok": true,
+        "feasible": true,
+        "lower_travel": 6.0,
+        "lower_duration": 10.0
+      },
+      {
+        "nodes": [
+          0,
+          1,
+          3,
+          2,
+          0
+        ],
+        "operations": {
+          "1": 2,
+          "2": -1,
+          "3": -1
+        },
+        "prefixes": [
+          2,
+          1,
+          0
+        ],
+        "pickup": 2,
+        "delivery": 2,
+        "return_load": 0,
+        "travel": 6.0,
+        "handling": 4,
+        "duration": 10.0,
+        "station_ok": true,
+        "load_ok": true,
+        "feasible": true,
+        "lower_travel": 6.0,
+        "lower_duration": 10.0
+      },
+      {
+        "nodes": [
+          0,
+          2,
+          1,
+          3,
+          0
+        ],
+        "operations": {
+          "1": 2,
+          "2": -1,
+          "3": -1
+        },
+        "prefixes": [
+          -1,
+          1,
+          0
+        ],
+        "pickup": 2,
+        "delivery": 2,
+        "return_load": 0,
+        "travel": 8.0,
+        "handling": 4,
+        "duration": 12.0,
+        "station_ok": true,
+        "load_ok": false,
+        "feasible": false,
+        "lower_travel": 8.0,
+        "lower_duration": 12.0
+      },
+      {
+        "nodes": [
+          0,
+          2,
+          3,
+          1,
+          0
+        ],
+        "operations": {
+          "1": 2,
+          "2": -1,
+          "3": -1
+        },
+        "prefixes": [
+          -1,
+          -2,
+          0
+        ],
+        "pickup": 2,
+        "delivery": 2,
+        "return_load": 0,
+        "travel": 6.0,
+        "handling": 4,
+        "duration": 10.0,
+        "station_ok": true,
+        "load_ok": false,
+        "feasible": false,
+        "lower_travel": 6.0,
+        "lower_duration": 10.0
+      },
+      {
+        "nodes": [
+          0,
+          3,
+          1,
+          2,
+          0
+        ],
+        "operations": {
+          "1": 2,
+          "2": -1,
+          "3": -1
+        },
+        "prefixes": [
+          -1,
+          1,
+          0
+        ],
+        "pickup": 2,
+        "delivery": 2,
+        "return_load": 0,
+        "travel": 8.0,
+        "handling": 4,
+        "duration": 12.0,
+        "station_ok": true,
+        "load_ok": false,
+        "feasible": false,
+        "lower_travel": 8.0,
+        "lower_duration": 12.0
+      },
+      {
+        "nodes": [
+          0,
+          3,
+          2,
+          1,
+          0
+        ],
+        "operations": {
+          "1": 2,
+          "2": -1,
+          "3": -1
+        },
+        "prefixes": [
+          -1,
+          -2,
+          0
+        ],
+        "pickup": 2,
+        "delivery": 2,
+        "return_load": 0,
+        "travel": 6.0,
+        "handling": 4,
+        "duration": 10.0,
+        "station_ok": true,
+        "load_ok": false,
+        "feasible": false,
+        "lower_travel": 6.0,
+        "lower_duration": 10.0
+      }
+    ],
+    "unique_supplier_integer_assignment": {
+      "nodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "operations": {
+        "1": 4,
+        "2": -1,
+        "3": -1,
+        "4": -1,
+        "5": -1
+      },
+      "prefixes": [
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "pickup": 4,
+      "delivery": 4,
+      "return_load": 0,
+      "travel": 10,
+      "handling": 8,
+      "duration": 18,
+      "station_ok": true,
+      "load_ok": true,
+      "feasible": false
+    }
+  },
+  "scope": "Independent arithmetic and physical checks of retained evidence; no independent model/performance rerun"
+}

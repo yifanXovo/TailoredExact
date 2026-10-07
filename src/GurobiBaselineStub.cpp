@@ -1,11 +1,26 @@
 #include "GurobiBaseline.hpp"
 #include "FixedIntervalMipBackend.hpp"
 #include "Round105Decomposition.hpp"
+#include "Round106Research.hpp"
 #include <stdexcept>
 
 #include <memory>
 
 namespace ebrp {
+SolveResult solveRound106Events(const Instance&,const SolveOptions&,const SolveResult&) {
+    throw std::runtime_error("gurobi_backend_not_compiled");
+}
+SolveResult round106Replay(const Instance&,const SolveOptions&,const std::filesystem::path&,
+    const std::filesystem::path&,const std::filesystem::path&) {
+    throw std::runtime_error("gurobi_backend_not_compiled");
+}
+void round106AdapterContracts(const Instance&,const SolveOptions&,const std::filesystem::path&,
+    const std::filesystem::path&,const std::filesystem::path&,const std::filesystem::path&) {
+    throw std::runtime_error("gurobi_backend_not_compiled");
+}
+std::string round106FixedFleet(const Instance&,const SolveOptions&,const std::vector<int>&) {
+    throw std::runtime_error("gurobi_backend_not_compiled");
+}
 SolveResult solveRound105Decomposition(const Instance&, const SolveOptions&, const SolveResult&) {
     throw std::runtime_error("round105_gurobi_backend_not_enabled");
 }
