@@ -89,7 +89,8 @@ def audit(launch,observations,completion,identity):
     if launch['arm']=='FRONTIER-STRUCT':return frontier_audit(launch,observations,completion,identity)
     return original.adapter(launch,observations,completion,identity)
 def helpers():
-    names=set(inherited.helpers())|{'round107_campaign.py','round107_common.py','round107_qualification.py'}
+    names=set(inherited.helpers())|{'round107_campaign.py','round107_common.py','round107_qualification.py',
+        'round107_cli_qualification.py','round107_cli_development.py','round107_lp_qualification.py','round107_repair_freeze.py'}
     return {n:sha(ROOT/'scripts'/n) for n in sorted(names)}
 def prepare(name,protocol_path):
     ensure_idle();protocol=read(protocol_path);camp=OUT/name;camp.mkdir(exist_ok=False)
@@ -106,7 +107,7 @@ def prepare(name,protocol_path):
             if arm=='FRONTIER-STRUCT':cmd+=['--round107-frontier-struct','true']
             launches.append(dict(number=n,id=p['id'],arm=arm,panel=p,destination=str(d),stage=name,cap_seconds=p['cap_seconds'],hard_stop_seconds=p['cap_seconds']-2,command=cmd))
     write(camp/'identity.json',dict(prereg=prereg,prereg_sha256=sha(protocol_path),runner_sha256=sha(__file__),source_hashes=bindings(),helpers=helpers(),
-        candidate_binary_sha256=sha(BUILD/'ExactEBRP.exe'),DLL_sha256=sha(DLL),protocol_path=str(Path(protocol_path).resolve()),references=references,launches=launches,
+        candidate_binary_sha256=sha(BUILD/'ExactEBRP.exe'),DLL_sha256=sha(DLL),protocol_path=str(Path(protocol_path).absolute()),references=references,launches=launches,
         reference_children=len(references),measured_source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),reference_PE_SHA=sha(BUILD/'Round65ReferenceBuild.exe'),
         prepared_unix=time.time(),Optimize_calls=0))
     print(json.dumps(dict(prepared=name,runs=len(launches))))

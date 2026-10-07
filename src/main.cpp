@@ -3400,7 +3400,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
          opt.round98_state_service != "off" || opt.round100_continuous_quantities ||
          opt.round101_fleet_cuts != "off" || opt.round102_service_cuts != "off" ||
          opt.round103_resource_hull != "off" || opt.round104_objective_resources != "off" ||
-         opt.round61_candidate_mode != "off" || opt.round65_budget || opt.round68_verified_start ||
+         opt.round61_candidate_mode != "off" || opt.round65_budget ||
          opt.plain_baseline || opt.external_gini_backend != "gurobi"))
         throw std::runtime_error("Round107 requires isolated original ENS-C scope/AM/startup contracts");
     if (opt.round106_events != "off" && opt.round106_events != "full" && opt.round106_events != "core" && opt.round106_events != "struct")
@@ -3439,7 +3439,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             opt.bpc_incumbent != expected.bpc_incumbent ||
             opt.exact_phase_local_redecode_repair != expected.exact_phase_local_redecode_repair ||
             (opt.round107_frontier_struct &&
-             (opt.round47_c6_adaptive_mass_tau != expected.round47_c6_adaptive_mass_tau ||
+             (opt.round68_verified_start != expected.round68_verified_start ||
+              opt.round47_c6_adaptive_mass_tau != expected.round47_c6_adaptive_mass_tau ||
               opt.initial_gini_interval_count != expected.initial_gini_interval_count ||
               opt.split_point_rule != expected.split_point_rule || opt.split_score_rule != expected.split_score_rule ||
               opt.split_threshold != expected.split_threshold || opt.maximum_split_depth != expected.maximum_split_depth ||

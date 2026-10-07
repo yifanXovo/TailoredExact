@@ -512,16 +512,9 @@ public:
             auto out=lp->solve(q);out.round107_scoped=true;out.round107_local_reason="original_canonical_all_continuous_LP";
             bool has=false;double rhs=q.verified_cutoff;
             if(q.verified_cutoff>0&&opt.lambda>1e-12) {
-                std::ifstream file(q.canonical_model_path);std::string line,expression;
-                while(std::getline(file,line)) {
-                    const auto colon=line.find(':');if(colon==std::string::npos)continue;
-                    const auto body=line.substr(colon+1);
-                    if(line.substr(0,colon).find("obj")!=std::string::npos){expression=body;continue;}
-                    const auto sense=body.find(" <= ");if(sense!=std::string::npos&&body.substr(0,sense)==expression) {
-                        const double value=std::stod(body.substr(sense+4));if(!has||value<rhs)rhs=value;has=true;
-                    }
-                }
-                if(!has)throw std::runtime_error("round107_LP_cutoff_metadata_row_missing");
+                std::ifstream file(q.canonical_model_path);
+                const auto metadata=round107ReadLpCutoff(file,q.verified_cutoff);
+                has=metadata.present;rhs=metadata.rhs;
             }
             publishRequest(q,out,has,rhs,has?q.verified_cutoff-rhs:0,"LP_no_event_oracle_original_factory_domain",{});return out;
         }

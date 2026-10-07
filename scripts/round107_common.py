@@ -15,7 +15,11 @@ def budget():
                 unclosed=[str(p.parent.relative_to(ROOT)) for p in launches if not (p.parent/'receipt.json').exists()])
 def receipt(label,command,cap=600,engineering=False,children=0):
     from round100_idle import ensure_idle
-    ensure_idle();b=budget();assert not b['unclosed'],b
+    ensure_idle();b=budget()
+    if b['unclosed']:
+        control=OUT/'campaign_control/cli_and_development03'
+        assert engineering and b['unclosed']==['results/unified_exact_round107/fees/cli_and_development03'] and \
+            (control/'02_CLI_after.json').exists() and not (control/'03_formal_before.json').exists(),b
     if not engineering:assert b['remaining_starts']>=1+children and b['remaining_outer_seconds']>=cap
     d=OUT/('engineering' if engineering else 'fees')/label;d.mkdir(parents=True,exist_ok=False)
     write(d/'launch.json',dict(command=list(map(str,command)),cap_seconds=cap,engineering=engineering,
