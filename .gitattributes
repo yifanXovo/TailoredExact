@@ -214,5 +214,10 @@ results/unified_exact_round85/figures/*.svg -whitespace
 # Round107 exact source, frozen protocol, raw receipts and compact carrier bytes.
 /results/unified_exact_round107/** -text whitespace=cr-at-eol
 /scripts/round107*.py -text whitespace=cr-at-eol
+/scripts/round107*.ps1 -text whitespace=cr-at-eol
 /tests/round107* -text whitespace=cr-at-eol
 /results/unified_exact_round107/**/*.log -whitespace
+
+# Preserve historical admission/review bytes, including their final blank lines.
+/results/unified_exact_round107/review/implementation_final17.md whitespace=cr-at-eol,-blank-at-eof
+/results/unified_exact_round107/review/performance_admission_final17.json whitespace=cr-at-eol,-blank-at-eof

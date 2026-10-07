@@ -1,6 +1,6 @@
 {
-  "production_PE_SHA": "bf06540df705aa8d1d517764bd5ebd0f4ce04b01b2797f6c562c60780367e732",
-  "fixture_PE_SHA": "4d2305aae6a4d7ae3416f059b641e37a48036ba36a899522fface4a5c2ed4684",
+  "production_PE_SHA": "364501ac3dd2599834ee2bf40ccceca2d6c01bbb761cdc706f141832619088a2",
+  "fixture_PE_SHA": "516e04b2b88c39e05ee75c706d75dc67e8087898ccd44a629b65379a7ddd8058",
   "reference_PE_SHA": "71ecb83507b29309d4f4427582134cfe9d4ffb4570b9ab11bd3d69976a3287c3",
   "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
   "source_bindings": {
@@ -34,7 +34,7 @@
     "src/InventoryRouteCuts.cpp": "f76e9dcf44339358b21cd2c2c508e32165d95ce43801160cd62329119ecee8fc",
     "src/InventoryRouteRootClosure.cpp": "543545f781a57d693434cc2b22902f45c84ae46c6615ff25a68d833004d94845",
     "src/Logger.cpp": "3cbab7e975f5c97ee5bbe98984716fc44c245f48604f329ad9d41d144d415b63",
-    "src/main.cpp": "a2a8012b7423db4043e6a1c6d419bdbb7f5c461fec7db2d6d63d413469a4f9e9",
+    "src/main.cpp": "66024988f458207920e71ab847dde539d65b9afc9f20ab10812a6a16760dedc4",
     "src/Master.cpp": "c18046da62482e8de2cbfc3df09bb4053e631cde830b6925d5e5921d44c2d1f0",
     "src/MipStartMapping.cpp": "f8e7d7412613a390d821145fb7f7c54f4d98bf201c84c76d2dfbf5737ba90873",
     "src/ModelCorrectness.cpp": "112499f70aee6865855532cfceb253d164433368626bf4c8fed3539b40c6e3ec",
@@ -160,8 +160,9 @@
     "include/Round105Decomposition.hpp": "eccca5f2ff4a8b0c8d6de114c251a3b1225fa13ef7a3c4d0d81e5e1f00e3f46a",
     "include/Round106Events.hpp": "8f7ec442881798652877694129cda936993e6f81dead7d422d8b15dcfb9e3e5a",
     "include/Round106Research.hpp": "c33bee11181eb029026b5010a9c89240416fad3be02c665dfc49295a7299f9f9",
+    "include/Round107LpMetadata.hpp": "5b57f944f69f16fa79c109ba49be646fe3625f7f38f6be91b0396a2685fc6007",
     "include/Round107Research.hpp": "207577fef6a37fd23514b9d97836f8e1a6e1450fe7f7a5d8a9dd5cf762b8cf3f",
-    "include/Round107Scope.hpp": "69d7211a2b365217390c57da7fdc5213652c1f4767bdacb327c683300c1f3d08",
+    "include/Round107Scope.hpp": "59f61ced9654b1b5c78aeb8a2fd53333a6337c870c87135506ade41d65b7e14c",
     "include/Round48K1AMF.hpp": "b878f176a8c7a888bd83f41e9928c29da9cc49544bc9c511e817fe5829d432c0",
     "include/Round49K1RC.hpp": "2343513138418e6f98b87e0939c276b2b15b7013a4bd77abddedb9e6b07730be",
     "include/Round50IntervalMip.hpp": "0a8f8f45f7deed6b04be377c410c6a39603f4271e9b14ff8fc56b2a8e7908208",
@@ -207,9 +208,10 @@
     "src/Round105GurobiDecomposition.inc": "92f31755e43820d24564bf27c44e1c3869e181752a5516d20bee742979c91ab6",
     "src/Round106GurobiEvents.inc": "94bc21f018e0b66a795dab81ade0746a11980a634d5039ff00c03a0c8c96d7b1",
     "src/Round106GurobiResearch.inc": "e9123e34a40129b6358a8981777a89190ea102c327ebb4aa120a9a2caa3d4e6f",
-    "src/Round107GurobiFrontier.inc": "35d7b9073b63486dc5c68d7c6e5a293d6569a91c711a7655c2894e205cb95c0e"
+    "src/Round107GurobiFrontier.inc": "248a9fdd263c8ee8db882d68875366589d22b09c948373a253a1e3687c4e461a"
   },
   "inheritance_head": "0350dbcc60d1c68e5c499d2e9880ecc1deaf031c",
   "default_algorithms_unchanged": true,
-  "qualifications": "Multiple exact fixture PE identities, same production bindings; original paid failures retained; selected native evidence listed in qualification/identity.json"
+  "qualifications": "Repaired PE has actual production CLI evidence. Selected earlier native scope/target/inner/outer fixtures retain exact original PE identities; reuse is by independently reviewed unchanged function bodies, separately from new parser regressions.",
+  "production_source_commit": "bb0017620008f9c98e40ba032d022f52f4f23788"
 }

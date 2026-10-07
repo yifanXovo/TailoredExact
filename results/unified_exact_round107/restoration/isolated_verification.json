@@ -1,0 +1,106 @@
+{
+  "public_root": "E:\\r107_public107_01",
+  "restored_root": "E:\\r107_restore107_01",
+  "reconstructed_root": "E:\\r107_reader107_01",
+  "executions": [
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\r107_public107_01\\scripts\\round107_restore.py",
+        "--public-root",
+        "E:\\r107_public107_01",
+        "--out",
+        "E:\\r107_restore107_01"
+      ],
+      "cwd": "E:\\r107_public107_01",
+      "started_unix": 1791412402.4705193,
+      "pid": 39136,
+      "returncode": 0,
+      "engineering_seconds": 62.1863289999892,
+      "Optimize_calls": 0,
+      "IIS_calls": 0
+    },
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\r107_restore107_01\\scripts\\round107_reader.py",
+        "--root",
+        "E:\\r107_restore107_01",
+        "--out",
+        "E:\\r107_reader107_01",
+        "--compare",
+        "E:\\r107_restore107_01\\results\\unified_exact_round107\\reports05"
+      ],
+      "cwd": "E:\\r107_restore107_01",
+      "started_unix": 1791412464.6573656,
+      "pid": 32480,
+      "returncode": 0,
+      "engineering_seconds": 249.32261430000653,
+      "Optimize_calls": 0,
+      "IIS_calls": 0
+    }
+  ],
+  "restore_receipt": {
+    "source_public_root": "E:\\r107_public107_01",
+    "restored_root": "E:\\r107_restore107_01",
+    "new_files": 72553,
+    "R106_files": 45827,
+    "R105_files": 1556,
+    "exact_legacy_supplement_files": 66,
+    "round107_archive_SHA": "db1bc414b4ca92f79506795e1debebdfd7868a3ac6af916201c2754080e162ae",
+    "round106_archive_SHA": "c196bb62c84d7775c239fe466b436466b327988a031c2c6f75814fca5609ec3c",
+    "round105_archive_SHA": "fd546a17045c8f0cb886338a865df4abad3e8bfa20718bb8d253762516f45125",
+    "manifest_SHA": "208627a0419d2a690d15a2ca70741b2a39c3ca78fa49547dcc0537b0492c2884",
+    "reader_SHA": "3b04fe6757ae097ec721c13937b4ff9f463af73bc07ec699572d034bc46b788e",
+    "restorer_SHA": "fe54baa02d699971b4d3d77d36ff0efb31a0bf78832a7075c8daba05490d14e6",
+    "public_parts_only": true,
+    "original_workspace_reads": false,
+    "Optimize_calls": 0,
+    "IIS_calls": 0
+  },
+  "reader_receipt": {
+    "source_root": "E:\\r107_restore107_01",
+    "reader_SHA": "3b04fe6757ae097ec721c13937b4ff9f463af73bc07ec699572d034bc46b788e",
+    "compared_fields": 2388525,
+    "summary": {
+      "formal_arms": 8,
+      "final_development_arms": 8,
+      "final_development_campaign": "development03",
+      "retained_superseded_completed_arms": 3,
+      "retained_failed_arms": 1,
+      "prepared_unstarted_arms": 12,
+      "paid_process_starts": 62,
+      "paid_outer_seconds": 15157.511650200002,
+      "all_Optimize_starts": 5946,
+      "all_IIS_starts": 0,
+      "P_ENS_Optimize_starts": 18,
+      "native_missing_after": 0,
+      "not_started_intents": 0,
+      "failed_fees": [
+        "cli01",
+        "development02_all",
+        "native_final01",
+        "native_inner02",
+        "native_scope01",
+        "native_scope02",
+        "native_scope04",
+        "native_target01",
+        "native_target02"
+      ],
+      "nested_native_time_added_to_outer_fee": false,
+      "reader_Optimize_calls": 0,
+      "reader_IIS_calls": 0,
+      "production_PE_SHA": "364501ac3dd2599834ee2bf40ccceca2d6c01bbb761cdc706f141832619088a2"
+    },
+    "Optimize_calls": 0,
+    "IIS_calls": 0
+  },
+  "all_published_CSV_fields_reconstructed_and_compared": true,
+  "summary_and_frozen_gate_exact_match": true,
+  "original_workspace_used_by_stdlib_children": false,
+  "solver_performance_rerun": false,
+  "Optimize_calls": 0,
+  "IIS_calls": 0
+}

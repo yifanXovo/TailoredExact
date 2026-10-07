@@ -1,0 +1,11 @@
+{
+  "IIS_calls": 0,
+  "Optimize_calls": 0,
+  "elapsed_seconds": null,
+  "conservative_process_starts": 0,
+  "invocation": "python -B -c preflight: syntax parse, measured source SHA, selected files, assert CSV count==33",
+  "exit_code": 1,
+  "engineering": true,
+  "timing_note": "Initial terminal preflight returned after a yielded session; elapsed time was not separately instrumented.",
+  "cause": "Incorrect editorial assertion of 33 CSV tables; actual reports05 has 30 nonempty CSV tables. Source/syntax and exact selection checks had already passed. No production or reader change."
+}

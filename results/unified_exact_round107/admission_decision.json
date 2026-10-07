@@ -1,0 +1,146 @@
+{
+  "stage": "STOP_TESTED_CONFIGURATION",
+  "final_development_campaign": "development03",
+  "authoritative_reports": "reports05",
+  "completed_confirmation_campaigns": [],
+  "formal_arms_completed": 8,
+  "production_PE_SHA": "364501ac3dd2599834ee2bf40ccceca2d6c01bbb761cdc706f141832619088a2",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "measured_source_commit": "bb0017620008f9c98e40ba032d022f52f4f23788",
+  "performance_admission_SHA": "a14723ec57f010df99268dc58a508a19a58547dbfdc677f884342226c2ec95b6",
+  "development_protocol_SHA": "4efb68123ffd1edb6275cff2b86fe926c1e5ceb4ce83b8887b334bd69c4619b3",
+  "confirmation_protocol_SHA": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+  "confirmation_gate": {
+    "campaign": "development03",
+    "A": false,
+    "B": false,
+    "admit_confirmation": false,
+    "strong_certificate_roles": {
+      "F2": false,
+      "R98-C2": false
+    },
+    "other_role_guard": {
+      "F2": true,
+      "R98-C2": false
+    },
+    "F2_B_guard": true,
+    "tolerance": 1e-07,
+    "thresholds_frozen_before_formal": true,
+    "statistical_significance_claim": false
+  },
+  "confirmation_groups": [
+    {
+      "id": "F5",
+      "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 5400,
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "FRONTIER-STRUCT"
+      ],
+      "methods": [
+        "P-GRB",
+        "ENS-C",
+        "FRONTIER-STRUCT"
+      ],
+      "actual_native_processes": 0,
+      "actual_Optimize_calls": 0,
+      "status": "NOT_STARTED_CANCELLED",
+      "reason": "Completed same-PE eight-arm development fails both frozen A/B gates; no F2 certificate recovery and C2 route quality remains far behind contemporary P."
+    },
+    {
+      "id": "N36",
+      "V": 36,
+      "M": 3,
+      "Q_vector": [
+        24,
+        30,
+        36
+      ],
+      "geometry": "three_clusters",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 5400,
+      "input_path": "reference/round106_confirmation/N36.txt",
+      "input_sha256": "52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea",
+      "scenario_id": "round106-structural-candidate-confirmation-v1-N36",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "method_order": [
+        "ENS-C",
+        "FRONTIER-STRUCT",
+        "P-GRB"
+      ],
+      "methods": [
+        "P-GRB",
+        "ENS-C",
+        "FRONTIER-STRUCT"
+      ],
+      "actual_native_processes": 0,
+      "actual_Optimize_calls": 0,
+      "status": "NOT_STARTED_CANCELLED",
+      "reason": "Completed same-PE eight-arm development fails both frozen A/B gates; no F2 certificate recovery and C2 route quality remains far behind contemporary P."
+    },
+    {
+      "id": "S12",
+      "V": 12,
+      "M": 2,
+      "Q_vector": [
+        8,
+        12
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "surplus",
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "input_path": "reference/round106_confirmation/S12.txt",
+      "input_sha256": "475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f",
+      "scenario_id": "round106-structural-candidate-confirmation-v1-S12",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "method_order": [
+        "FRONTIER-STRUCT",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "methods": [
+        "P-GRB",
+        "ENS-C",
+        "FRONTIER-STRUCT"
+      ],
+      "actual_native_processes": 0,
+      "actual_Optimize_calls": 0,
+      "status": "NOT_STARTED_CANCELLED",
+      "reason": "Completed same-PE eight-arm development fails both frozen A/B gates; no F2 certificate recovery and C2 route quality remains far behind contemporary P."
+    }
+  ],
+  "confirmation_arms_started": 0,
+  "confirmation_arms_cancelled": 9,
+  "substantive_revision": {
+    "used": false,
+    "reason": "No new evidence identifies a qualified frontier/event interface defect. Actual original AM, native target, requeue, same-epoch child cache and terminal paths are exposed. Changing cut families, route fallback, AM or runtime rules is outside this round."
+  },
+  "scope_of_stop": "The tested original ENS full-cover/AM plus existing assignment/STRUCT combination; no universal rejection of decomposition, physical cuts, or tailored exact methods.",
+  "paid_starts": 62,
+  "paid_outer_seconds": 15157.511650200002,
+  "no_default_algorithm_change": true,
+  "ADVANCE_CANDIDATE": false,
+  "final_independent_review_required": true,
+  "actual_public_only_restore_required": true
+}

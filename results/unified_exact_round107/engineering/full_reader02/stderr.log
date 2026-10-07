@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 557, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 552, in main
+    root=a.root.resolve();dest=a.out.resolve();summary=rebuild(root,dest)
+                                                       ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 539, in rebuild
+    paid=fees(out);nc=native(root,out,campaigns,control_journals)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 177, in native
+    assert len(legacy)==len(qs) and all(q['native_status']==2 for q in legacy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

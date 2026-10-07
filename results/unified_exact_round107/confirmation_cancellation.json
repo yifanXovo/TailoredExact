@@ -1,0 +1,108 @@
+{
+  "groups": [
+    {
+      "id": "F5",
+      "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 5400,
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "FRONTIER-STRUCT"
+      ],
+      "methods": [
+        "P-GRB",
+        "ENS-C",
+        "FRONTIER-STRUCT"
+      ],
+      "actual_native_processes": 0,
+      "actual_Optimize_calls": 0,
+      "status": "NOT_STARTED_CANCELLED",
+      "reason": "Completed same-PE eight-arm development fails both frozen A/B gates; no F2 certificate recovery and C2 route quality remains far behind contemporary P."
+    },
+    {
+      "id": "N36",
+      "V": 36,
+      "M": 3,
+      "Q_vector": [
+        24,
+        30,
+        36
+      ],
+      "geometry": "three_clusters",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 5400,
+      "input_path": "reference/round106_confirmation/N36.txt",
+      "input_sha256": "52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea",
+      "scenario_id": "round106-structural-candidate-confirmation-v1-N36",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "method_order": [
+        "ENS-C",
+        "FRONTIER-STRUCT",
+        "P-GRB"
+      ],
+      "methods": [
+        "P-GRB",
+        "ENS-C",
+        "FRONTIER-STRUCT"
+      ],
+      "actual_native_processes": 0,
+      "actual_Optimize_calls": 0,
+      "status": "NOT_STARTED_CANCELLED",
+      "reason": "Completed same-PE eight-arm development fails both frozen A/B gates; no F2 certificate recovery and C2 route quality remains far behind contemporary P."
+    },
+    {
+      "id": "S12",
+      "V": 12,
+      "M": 2,
+      "Q_vector": [
+        8,
+        12
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "surplus",
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "input_path": "reference/round106_confirmation/S12.txt",
+      "input_sha256": "475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f",
+      "scenario_id": "round106-structural-candidate-confirmation-v1-S12",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "method_order": [
+        "FRONTIER-STRUCT",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "methods": [
+        "P-GRB",
+        "ENS-C",
+        "FRONTIER-STRUCT"
+      ],
+      "actual_native_processes": 0,
+      "actual_Optimize_calls": 0,
+      "status": "NOT_STARTED_CANCELLED",
+      "reason": "Completed same-PE eight-arm development fails both frozen A/B gates; no F2 certificate recovery and C2 route quality remains far behind contemporary P."
+    }
+  ],
+  "nominal_seconds_not_started": 35100,
+  "paid_starts_not_added": 10,
+  "Optimize_calls": 0,
+  "IIS_calls": 0
+}
