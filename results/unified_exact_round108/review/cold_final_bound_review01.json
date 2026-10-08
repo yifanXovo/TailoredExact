@@ -1,0 +1,26 @@
+{
+  "decision": "ACCEPT",
+  "reader_source_SHA": "72e9597d24a87a7b71215b1a6e575f4355a13f1946884c128a70e2f24b5814d7",
+  "reviewer_script_SHA": "9d6c6d90adfe62fc29e16bb43f0a18539a7858d054abd095b479257cddb3113a",
+  "actual_command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "results/unified_exact_round108/review/cold_final_bound_finite_audit01.py",
+    "--root",
+    "E:/codes/ExactEBRP-round108",
+    "--out",
+    "E:/codes/ExactEBRP-round108/results/unified_exact_round108/review/cold_final_bound_finite_audit01"
+  ],
+  "explicit_read_root": "E:\\codes\\ExactEBRP-round108",
+  "actual_exit_code": 0,
+  "actual_seconds": 0.044890099961776286,
+  "checks_SHA": "847f4a55f5e326d01b695e2cb52395105fe225032d01b561f1e82ebc14137e83",
+  "receipt_SHA": "f2c5e0154e5afe825917aee35ef9678376a879cfb825f8a789bad613152e1b5c",
+  "cases": 20,
+  "synthetic_only": true,
+  "final_original_P_native_bound_can_exceed_all_callbacks": true,
+  "final_native_attribute_retained_without_printed_rounding": true,
+  "proof_available_only_at_linked_successful_return": true,
+  "wrong_original_scope_VType_log_path_model_SHA_return_status_bound_rejected": true,
+  "prior_callbacks_consistent_with_final_bound": true,
+  "zero_solver_calls": true
+}

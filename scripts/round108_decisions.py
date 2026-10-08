@@ -32,8 +32,10 @@ def pair(candidate,control):
         value.update(UB_improvement=p['U']-c['U'],gap_improvement=p['gap']-c['gap'],LB_change=c['L']-p['L'],
             a_U=max(.001,.01*abs(p['U'])),a_gap=max(.001,.10*abs(p['gap'])))
         if abs(p['U'])>ZERO_TOL:value['UB_ratio']=c['U']/p['U']
-        if p['gap']>CLOSURE_TOL:
+        if p['gap']>CLOSURE_TOL and c['gap']>=0:
             value['gap_ratio']=c['gap']/p['gap'];value['percentage_gap_path_applicable']=True
+        elif c['gap']<0 or p['gap']<0:
+            value['gap_ratio_null_reason']='tiny_negative_signed_gap_retained_no_percentage_division'
     if cc and not pc:
         value['classification']='WIN';value['basis']='candidate_only_complete_certificate'
     elif pc and not cc:
@@ -65,7 +67,7 @@ def bridge(arms):
     gates={}
     for role in ['F2','C2']:
         c,p=data[role,'M-B'],data[role,'P-GRB'];cmp=pair(c,p)
-        percentage=qualified_numbers(c) and qualified_numbers(p) and p['gap']>CLOSURE_TOL
+        percentage=qualified_numbers(c) and qualified_numbers(p) and p['gap']>CLOSURE_TOL and c['gap']>=0
         both_open=not c['certificate'] and not p['certificate']
         if role=='F2':
             passed=(c['certificate'] or both_open and percentage and c['U']<=1.01*p['U'] and c['gap']<=1.05*p['gap']) and not cmp['severe_regression']
