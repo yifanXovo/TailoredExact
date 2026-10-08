@@ -1,0 +1,32 @@
+{
+  "actual_command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\engineering\\public_remote_verify02\\verify.py",
+    "--root",
+    "E:\\codes\\ExactEBRP-round108",
+    "--pr-number",
+    "170",
+    "--head",
+    "ea14ac7b1762e360fb564b46a47946539f10b2bf",
+    "--label",
+    "phase02",
+    "--isolated-review",
+    "results/unified_exact_round108/review/public_isolated_review01.json"
+  ],
+  "exit_code": 1,
+  "source_SHA": "8b985a99f51e66a0bebfcf9bed79d83a95b06d894f619da711e6db74f4e675ca",
+  "download_exit_code": 1,
+  "stderr_SHA": "2b7e48bb4759add8355a0df1f7621ba3b3bc7f49bfdec3f37e9a560661afc995",
+  "error": "gh raw binary response transform: short source buffer",
+  "exact_script_failure_elapsed_seconds": null,
+  "repair": "Existing Windows curl 8.13.0 Schannel HTTPS raw streaming, without --insecure or any CA/proxy/network changes",
+  "prior_secure_HEAD_check": {
+    "exit_code": 0,
+    "HTTP_status": 200,
+    "part001_content_length": 94371840
+  },
+  "engineering": true,
+  "Optimize": 0,
+  "IIS": 0,
+  "conservative_solver_starts": 0
+}

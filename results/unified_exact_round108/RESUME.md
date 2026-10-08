@@ -2,7 +2,9 @@
 
 Scientific stage: **SELECT_MB_FOR_BROAD_EVALUATION**.
 All prescribed performance and public mathematical reconstruction are complete.
-The remaining delivery step is the new stacked draft PR and remote verification.
+Draft publication is complete: [Round108 PR #170](https://github.com/yifanXovo/TailoredExact/pull/170).
+The new draft is attached to the chat. Actual remote verification passed at
+scientific delivery head `ea14ac7b1762e360fb564b46a47946539f10b2bf`; this final supplement records that observed audit.
 
 The isolated checkout is `E:/codes/ExactEBRP-round108`, branch
 `codex/round108-frozen-mb-validation`, based on R107 delivery
@@ -100,8 +102,12 @@ The old chronological RESUME bytes are preserved in the immutable carrier at
 `fd6e9fc6b4c6b84f5a51229ac47e259e3cc49bf6216ce810b572ed2d467952df`.
 Earlier live/prefix states there are historical.
 
-Finish the new draft on R107, attach it to the chat and verify remote
-head/base/draft, readable files, carrier bytes and PR tables. The next scientific
+The new stacked draft and remote head/base/draft, readable files, exact carrier
+bytes and PR tables have passed actual verification. See
+`engineering/public_remote_verify03/phase03/receipt.json` and
+`public_delivery_receipt.json`. A later metadata-only delivery commit adds these
+receipts and is verified again before the final reply; science, carrier and PR
+result tables are unchanged by that supplement. The next scientific
 evidence is broader prospectively frozen evaluation of this same uniform M-B
 against P and ENS, including its ENS risk. The four measured confirmation inputs
 are now seen evidence for later design. The R107 assignment/STRUCT combination

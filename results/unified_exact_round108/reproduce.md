@@ -295,3 +295,31 @@ The actual audit returned ACCEPT, exit 0, in 320.8277053999482 seconds. Its seri
 A separate fresh-root metadata/table crosscheck returned ACCEPT, exit 0, in 8.581683399970643 seconds, with 13,727 checks. It matched all 961 physical UB rows, 68 models, 100 started/returned native calls, 30 submitted Starts / 32 mapping attempts, 108 checkpoint rows and 12 reliable-Fstar rows. Crosscheck source SHA is `012f46c8926c7e0fb95a3acf652d33cd5b427205ec8367968f891c0d52de93d9`; output SHA is `081ca3a7a8db46fa9b252d045cbcbb9735327c76f9d747deee529fbc10a69a86`. All raw-audit evidence reads were in the recovered root. Completed primary comparison/restore/run metadata was copied there byte-exactly as a new supplement for final review, without changing carrier members or rebuilt outputs.
 
 The independent raw audit, source-at-execution, launch/exit/time receipts, per-arm chronology, separate crosscheck and sealed `review/public_isolated_review01.json` / `.md` are separately public supplements. Final narrative and publication receipts are also supplements, avoiding a circular carrier of its own hash. No native environment, Optimize, LP solve, IIS, compiler, PE/DLL distribution or independent performance rerun occurs in this public reconstruction.
+
+## Actual stacked draft publication and remote verification
+
+New [Round108 draft PR #170](https://github.com/yifanXovo/TailoredExact/pull/170)
+was created on `codex/round107-ens-frontier-route-events` and attached to the chat.
+Scientific delivery commit: `ea14ac7b1762e360fb564b46a47946539f10b2bf`; base `b5db3f038f64215766a54498d8acc82e384de733`.
+The actual remote audit returned exit 0 after 39.32254190009553 seconds, with
+head/base/draft and latest R107 unchanged, all 27 selected public file bytes
+readable and exact, both compressed-byte parts and manifest actually downloaded
+and hashed, combined SHA `9ae11d97e81f9434b7ac438fe32d61341e8712ea6e1d6699b7030fa0b0f347d8`, and PR body
+exactly equal to its prepared report-derived text/tables. See
+`engineering/public_remote_verify03/phase03/receipt.json` / `file_checks.json`.
+
+The first Git staging attempt rejected intended engineering logs under the
+existing ignore rule. Its exact source/selected-path list and an honest failed
+receipt are preserved in `public_stage01` / `public_stage02`; the retry used
+force only on the explicit public allowlist. The first remote download attempt
+failed MSYS Python CA verification; the second gh raw binary fetch returned
+`transform: short source buffer`. Their original sources, actual commands,
+available outputs and failed receipts remain in `public_remote_verify01`–`03`.
+Neither failed script had a separately captured exact whole-script failure
+timer; this is disclosed. The successful final client is Windows curl 8.13.0
+Schannel HTTPS, with certificate verification enabled and no proxy, CA or network
+configuration change. These publication checks perform zero solver/native calls.
+
+This final metadata-only supplement publishes the observed successful audit and
+current durable state. Its final remote head is verified again before delivery;
+all scientific decisions, raw carrier and PR result tables remain unchanged.

@@ -15,7 +15,7 @@ The following maps the original eleven request sections to actual retained evide
 | 8. Fixed classification and selection | All seven P pairs evaluable, no severe P, F5 evaluable WIN, exact four eligible roles give 3 WIN / 0 LOSS / 1 TIE. All ENS losses (F2/F5/N36) and severe F5 ENS risk disclosed. No stable-generalization claim. |
 | 9. Budget, identities and failures | 46/48 conservative starts, 47514.073242100014/80000 outer seconds; 100 Optimize/100 returns, IIS and oracle 0. All formal groups completed normally. Reader/accounting/packaging failures and actual corrections retained; engineering separated. |
 | 10. Independent review and actual public recovery | New public export and different fresh recovery actually executed; 79,898 members / 15 pinned dependencies. All 30 CSV / 1,313,668 fields and all four JSON values match. Independent fresh-root raw audit and crosscheck ACCEPT. Exact two-part carrier and 49-case packaging review retain boundary failures; no PE/DLL/license/credentials distributed. |
-| 11. New stacked draft and remote verification | The new Round108 draft will be created on the unchanged R107 branch after this concrete result is committed. Actual remote head/base/draft, readable files, compressed carrier SHA and exact PR tables must pass before marking the task complete. |
+| 11. New stacked draft and remote verification | New [draft PR #170](https://github.com/yifanXovo/TailoredExact/pull/170) created on R107 and attached to the chat. Actual audit at ea14ac7b1762e360fb564b46a47946539f10b2bf passed head/base/draft, unchanged latest R107, all 27 critical public file bytes, both carrier parts / combined SHA, and exact PR body/report tables. Receipt: engineering/public_remote_verify03/phase03/receipt.json. |
 
 All eleven required artifacts exist: final_report.md, research_decision.md,
 candidate_identity.json, representation_contract.md, development_protocol.json,
@@ -30,4 +30,4 @@ Current primary reader SHA:
 Combined carrier SHA:
 `9ae11d97e81f9434b7ac438fe32d61341e8712ea6e1d6699b7030fa0b0f347d8`.
 
-Publication remains a delivery step; no scientific experiment is pending.
+Publication and remote verification passed. The final metadata-only supplement records these actual receipts; no scientific experiment is pending.
