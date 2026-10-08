@@ -1,0 +1,118 @@
+{
+  "common_parameters": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "nominal_seconds": 54900,
+  "formal_arms": 21,
+  "max_conservative_starts": 48,
+  "max_outer_solver_seconds": 80000,
+  "qualification_per_arm_cap_max": 120,
+  "qualification_recommended_seconds_max": 4000,
+  "representation_contract": "R100 frozen M-B; no ENS-Q flag; original full ENS; P cold compact",
+  "no_cross_arm_UB_Start_route_cut_cache": true,
+  "performance_serial": true,
+  "no_grid_multiseed_extension_or_third_draw": true,
+  "process_shutdown_margin_seconds": 30,
+  "materiality": {
+    "a_U": "max(0.001,0.01*abs(U_P))",
+    "a_gap": "max(0.001,0.10*abs(gap_P))",
+    "a_t": "max(30,0.10*t_P)"
+  },
+  "severe": {
+    "P_only_certificate": true,
+    "both_certified": "t_MB>=2*t_P and t_MB-t_P>=120",
+    "both_uncertified": "UB worse by >=max(0.001,0.05*abs(U_P)) AND gap worse by >=max(0.005,0.25*abs(gap_P))"
+  },
+  "certificate_priority": true,
+  "missing_finite_UL_both_uncertified": "UNEVALUABLE",
+  "relative_gap": "(U-L)/abs(U) only qualified finite U/L and abs(U)>original zero tolerance; else null",
+  "signed_gap_not_clipped": true,
+  "comparison_tolerance": 1e-07,
+  "percentage_bridge_path": "reference gap positive and > original closure tolerance; otherwise certificate branches only",
+  "stages": [
+    "SELECT_MB_FOR_BROAD_EVALUATION",
+    "NO_NEW_UNIFORM_CANDIDATE_SELECTED",
+    "STOP_MB_REOPENING_AT_BRIDGE",
+    "BLOCKED"
+  ],
+  "SELECT_requires": {
+    "all_21_same_final_PE": true,
+    "bridge_pass": true,
+    "all_seven_evaluable": true,
+    "unresolved_certificate_qualifications": 0,
+    "severe_regressions_vs_P": 0,
+    "F5_not_LOSS_and_evaluable": true,
+    "all_four_unseen": true,
+    "unseen_min_WIN": 2,
+    "unseen_max_LOSS": 1
+  },
+  "cancellation": "complete started three-arm group; cancel wholly unstarted groups only when SELECT mathematically unreachable; any cancellation prohibits SELECT",
+  "input_manifest_SHA": "b4b5553c9e6055bfebad5cd65ed2a41f70224cfcb9fd093b06d7113232e2f2ad",
+  "candidate_contract_SHA": "3f01453e6e2d2142c6f4e9748c93531d06876a1e1ef494a3e66f9c79901ca52a",
+  "roles": [
+    {
+      "id": "F2",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 1200,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ],
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "role_identity": "known_development_bridge",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15
+    },
+    {
+      "id": "C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "P-GRB"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "role_identity": "known_development_bridge",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15
+    }
+  ],
+  "phase": "six-arm current bridge",
+  "stage_nominal_seconds": 9000,
+  "C2_gate": "MB certified and P not; OR both certified with reduction>=30s AND>=10%; OR both uncertified with U_MB<=0.99*U_P AND gap_MB<=0.80*gap_P",
+  "F2_gate": "MB certified; OR both uncertified with U_MB<=1.01*U_P AND gap_MB<=1.05*gap_P; also no severe P regression",
+  "all_six_required_before_gate": true,
+  "negative_bridge_cancels_all_unstarted_confirmation": true
+}

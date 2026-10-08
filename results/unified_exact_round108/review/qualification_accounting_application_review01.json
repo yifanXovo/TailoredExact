@@ -1,0 +1,42 @@
+{
+  "decision": "ACCEPT",
+  "schema": "round108-independent-accounting-application-v1",
+  "reviewed_utc": "2026-10-08T06:04:55Z",
+  "prior_accounting_review_SHA": "2645d815acfc3e218fee50ce2bf0c29d5ceaba326d69d8b420321fc5c537bfd6",
+  "applied_corrections": [
+    {
+      "path": "results/unified_exact_round108/fee_corrections/qualification_prepare_inner_driver01.json",
+      "SHA": "5103082bb9eeb17248aac1699052ab8cd158455bd2a2df1e481057ef5b30d939",
+      "label": "qualification_prepare01",
+      "additional_conservative_starts": 1,
+      "corrected_conservative_starts": 12,
+      "original_launch_SHA": "f94dbc170d408c232b85935d45e98263cdf5f5626ea418e554760ee0416c6461",
+      "original_receipt_SHA": "1e4888dc0899a7bfd781f759c688a20e574d2c1587edaa926b323ea6586312b7"
+    },
+    {
+      "path": "results/unified_exact_round108/fee_corrections/qualification_cli_inner_driver01.json",
+      "SHA": "8a36f9bb3c20173f6068755955062b50e512a9a5562c07d1fb85f6a0b2761155",
+      "label": "qualification_cli01",
+      "additional_conservative_starts": 1,
+      "corrected_conservative_starts": 7,
+      "original_launch_SHA": "f0903258b301f77fdc9bda1e9ca70379308005f827b6264a673b67f0674353ab",
+      "original_receipt_SHA": "70ce1658af60254a1f49ec6fd5ff4418168c98bca01234360061e2ef05bbf95e"
+    }
+  ],
+  "corrected_qualification_starts": 19,
+  "qualification_plus_reserved_bridge_starts": 26,
+  "full_21_arm_plan_starts": 46,
+  "maximum_starts": 48,
+  "additional_outer_seconds": 0,
+  "frozen_budget_ignores_corrections_separate_pre_group_check_still_required": true,
+  "original_receipts_retained_and_hashed": true,
+  "reviewer_calls": {
+    "Optimize": 0,
+    "LP_solve": 0,
+    "IIS": 0,
+    "native_environment": 0,
+    "compiler": 0,
+    "full_reader": 0,
+    "raw_model_review": 0
+  }
+}

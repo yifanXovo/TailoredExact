@@ -221,3 +221,7 @@ results/unified_exact_round85/figures/*.svg -whitespace
 # Preserve historical admission/review bytes, including their final blank lines.
 /results/unified_exact_round107/review/implementation_final17.md whitespace=cr-at-eol,-blank-at-eof
 /results/unified_exact_round107/review/performance_admission_final17.json whitespace=cr-at-eol,-blank-at-eof
+# Preserve Round108 frozen protocols, inputs and raw reconstruction bytes.
+results/unified_exact_round108/** -text
+reference/round108_confirmation/** -text
+scripts/round108*.py -text

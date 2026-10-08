@@ -1,0 +1,20 @@
+{
+  "actual_command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "results/unified_exact_round108/engineering/public_stage01/stage.py",
+    "--root",
+    "E:\\codes\\ExactEBRP-round108"
+  ],
+  "exit_code": 1,
+  "observed_exec_command_seconds": 5.4598399,
+  "seconds_scope": "Enclosing exec_command observation; no exact script-only failure timer was captured",
+  "source_SHA": "34f40bb17f4f1ce231164455f727d06f2336c9f72a69b5e60d2b8e1ea952b75e",
+  "proposed_path_manifest_SHA": "119fc0e5898f01bfd623d358a61d0d6428931568201df9c167bc891f172ab4ff",
+  "reason": "git add rejected explicitly selected engineering stdout/stderr logs under existing ignore rules",
+  "partial_index_possible": true,
+  "repair": "Force-add only the same explicitly selected public allowlist; no ignore/config changes",
+  "engineering": true,
+  "Optimize": 0,
+  "IIS": 0,
+  "conservative_solver_starts": 0
+}

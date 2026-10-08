@@ -1,0 +1,72 @@
+{
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "E:\\round108-public-recovered-20261009-v1\\scripts\\round108_reader.py",
+    "--root",
+    "E:/round108-public-recovered-20261009-v1",
+    "--out",
+    "E:/round108-public-recovered-20261009-v1/rebuilt",
+    "--compare",
+    "E:/round108-public-recovered-20261009-v1/results/unified_exact_round108/reports_final"
+  ],
+  "cwd": "E:\\round108-public-recovered-20261009-v1",
+  "source_root": "E:\\round108-public-recovered-20261009-v1",
+  "engineering": true,
+  "seconds": 356.2101506999461,
+  "exit_code": 0,
+  "timed_out": false,
+  "stdout_SHA": "198e31a081e12805913e4a83de0d868f6673f117c0d7b512c75eb64ad4fd3679",
+  "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "launch_SHA": "24122cdc70079794923646fa4e98a0be582286b78bf25565288b9f3067324257",
+  "sources": [
+    {
+      "path": "E:/round108-public-recovered-20261009-v1/scripts/round107_reader.py",
+      "sha256": "3b04fe6757ae097ec721c13937b4ff9f463af73bc07ec699572d034bc46b788e",
+      "snapshot": "results/unified_exact_round108/engineering/public_rebuild01/source_snapshot/scripts/round107_reader.py"
+    },
+    {
+      "path": "E:/round108-public-recovered-20261009-v1/scripts/round108_decisions.py",
+      "sha256": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46",
+      "snapshot": "results/unified_exact_round108/engineering/public_rebuild01/source_snapshot/scripts/round108_decisions.py"
+    },
+    {
+      "path": "E:/round108-public-recovered-20261009-v1/scripts/round108_engineering.py",
+      "sha256": "0abff5270cd10c972fc117b048a7385dd968ea178f06e507d613e9db5f4993b4",
+      "snapshot": "results/unified_exact_round108/engineering/public_rebuild01/source_snapshot/scripts/round108_engineering.py"
+    },
+    {
+      "path": "E:/round108-public-recovered-20261009-v1/scripts/round108_public.py",
+      "sha256": "c35f285d76dbfba1ca16e4d73bd670de603b868337095b563eeda3e0f5786ce3",
+      "snapshot": "results/unified_exact_round108/engineering/public_rebuild01/source_snapshot/scripts/round108_public.py"
+    },
+    {
+      "path": "E:/round108-public-recovered-20261009-v1/scripts/round108_reader.py",
+      "sha256": "52cadcf5ff7ce5fcfb1f828efd1a81a1c4d14d5e31d9b6b72963f7348e8408c1",
+      "snapshot": "results/unified_exact_round108/engineering/public_rebuild01/source_snapshot/scripts/round108_reader.py"
+    },
+    {
+      "path": "E:/round108-public-recovered-20261009-v1/scripts/round108_report.py",
+      "sha256": "f3d5b5cbf8ce02882afe3e4a1e7a0b11689ceeb65bf1357438c0618882902a41",
+      "snapshot": "results/unified_exact_round108/engineering/public_rebuild01/source_snapshot/scripts/round108_report.py"
+    },
+    {
+      "path": "E:/round108-public-recovered-20261009-v1/scripts/round108_scopes.py",
+      "sha256": "4a9b9570d1142265fdc96b56df4a91021521732b521a649fe0609ac72de0c733",
+      "snapshot": "results/unified_exact_round108/engineering/public_rebuild01/source_snapshot/scripts/round108_scopes.py"
+    },
+    {
+      "path": "E:/round108-public-recovered-20261009-v1/scripts/round99_common.py",
+      "sha256": "bd1ecd710fa4e52093e6027a247ce77c4ddaa00b56ee0ef499cd45ccd41f8208",
+      "snapshot": "results/unified_exact_round108/engineering/public_rebuild01/source_snapshot/scripts/round99_common.py"
+    },
+    {
+      "path": "E:/round108-public-recovered-20261009-v1/scripts/round99_pure_start_audit.py",
+      "sha256": "c769dbdc978025ba84cbb8f566d493018f912f35c74346047434e2e21af4f882",
+      "snapshot": "results/unified_exact_round108/engineering/public_rebuild01/source_snapshot/scripts/round99_pure_start_audit.py"
+    }
+  ],
+  "conservative_solver_starts": 0,
+  "Optimize": 0,
+  "IIS": 0,
+  "route_oracle": 0
+}
