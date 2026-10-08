@@ -1,0 +1,205 @@
+{
+  "common_parameters": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "nominal_seconds": 54900,
+  "formal_arms": 21,
+  "max_conservative_starts": 48,
+  "max_outer_solver_seconds": 80000,
+  "qualification_per_arm_cap_max": 120,
+  "qualification_recommended_seconds_max": 4000,
+  "representation_contract": "R100 frozen M-B; no ENS-Q flag; original full ENS; P cold compact",
+  "no_cross_arm_UB_Start_route_cut_cache": true,
+  "performance_serial": true,
+  "no_grid_multiseed_extension_or_third_draw": true,
+  "process_shutdown_margin_seconds": 30,
+  "materiality": {
+    "a_U": "max(0.001,0.01*abs(U_P))",
+    "a_gap": "max(0.001,0.10*abs(gap_P))",
+    "a_t": "max(30,0.10*t_P)"
+  },
+  "severe": {
+    "P_only_certificate": true,
+    "both_certified": "t_MB>=2*t_P and t_MB-t_P>=120",
+    "both_uncertified": "UB worse by >=max(0.001,0.05*abs(U_P)) AND gap worse by >=max(0.005,0.25*abs(gap_P))"
+  },
+  "certificate_priority": true,
+  "missing_finite_UL_both_uncertified": "UNEVALUABLE",
+  "relative_gap": "(U-L)/abs(U) only qualified finite U/L and abs(U)>original zero tolerance; else null",
+  "signed_gap_not_clipped": true,
+  "comparison_tolerance": 1e-07,
+  "percentage_bridge_path": "reference gap positive and > original closure tolerance; otherwise certificate branches only",
+  "stages": [
+    "SELECT_MB_FOR_BROAD_EVALUATION",
+    "NO_NEW_UNIFORM_CANDIDATE_SELECTED",
+    "STOP_MB_REOPENING_AT_BRIDGE",
+    "BLOCKED"
+  ],
+  "SELECT_requires": {
+    "all_21_same_final_PE": true,
+    "bridge_pass": true,
+    "all_seven_evaluable": true,
+    "unresolved_certificate_qualifications": 0,
+    "severe_regressions_vs_P": 0,
+    "F5_not_LOSS_and_evaluable": true,
+    "all_four_unseen": true,
+    "unseen_min_WIN": 2,
+    "unseen_max_LOSS": 1
+  },
+  "cancellation": "complete started three-arm group; cancel wholly unstarted groups only when SELECT mathematically unreachable; any cancellation prohibits SELECT",
+  "input_manifest_SHA": "b4b5553c9e6055bfebad5cd65ed2a41f70224cfcb9fd093b06d7113232e2f2ad",
+  "candidate_contract_SHA": "3f01453e6e2d2142c6f4e9748c93531d06876a1e1ef494a3e66f9c79901ca52a",
+  "roles": [
+    {
+      "id": "S12",
+      "V": 12,
+      "M": 2,
+      "Q_vector": [
+        8,
+        12
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "input_path": "reference/round106_confirmation/S12.txt",
+      "input_sha256": "475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f",
+      "role_identity": "sealed_unused_for_selection",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15
+    },
+    {
+      "id": "B24",
+      "V": 24,
+      "M": 2,
+      "Q_vector": [
+        16,
+        24
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ],
+      "geometry": "anisotropic_cloud",
+      "inventory": "balanced",
+      "role_identity": "new_draw_unused_for_selection",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "input_path": "reference/round108_confirmation/B24.txt",
+      "input_sha256": "068cbb4edc3f851f8c16e234dad6aa99aa14da8734d8ae22ff76cfd7133ae8ca",
+      "scenario_id": "round108-uniform-candidate-confirmation-v1-B24",
+      "total_initial": 535,
+      "total_target": 535,
+      "zero_excluded_by_stock_shortage": false,
+      "minimum_weight": 0.287814,
+      "maximum_weight": 0.978083,
+      "derived_landscape_path": "reference/round108_confirmation/B24_landscape.json",
+      "derived_landscape_SHA": "e6b7183a81985168782ff67ea08fd7b78497a90fcb9ced081d6912139c326d53"
+    },
+    {
+      "id": "L48",
+      "V": 48,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "P-GRB"
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "role_identity": "new_draw_unused_for_selection",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "input_path": "reference/round108_confirmation/L48.txt",
+      "input_sha256": "8ce2bceb8de415a1ff62ea78790456ee54e3542ce57714a7a53505d30ea54755",
+      "scenario_id": "round108-uniform-candidate-confirmation-v1-L48",
+      "total_initial": 974,
+      "total_target": 1052,
+      "zero_excluded_by_stock_shortage": true,
+      "minimum_weight": 0.259019,
+      "maximum_weight": 0.998865,
+      "derived_landscape_path": "reference/round108_confirmation/L48_landscape.json",
+      "derived_landscape_SHA": "a1e52faf61890a3eaef794890b0e784f338165dc0311404996b579db8c7a3b6d"
+    },
+    {
+      "id": "F5",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 5400,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "role_identity": "known_pressure",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15
+    },
+    {
+      "id": "N36",
+      "V": 36,
+      "M": 3,
+      "Q_vector": [
+        24,
+        30,
+        36
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 5400,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ],
+      "input_path": "reference/round106_confirmation/N36.txt",
+      "input_sha256": "52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea",
+      "role_identity": "sealed_unused_for_selection",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15
+    }
+  ],
+  "phase": "conditional fifteen-arm frozen confirmation",
+  "stage_nominal_seconds": 45900,
+  "admission": "independently verified complete bridge pass; same candidate/PE/inputs/order"
+}
