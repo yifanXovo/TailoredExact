@@ -1,0 +1,1246 @@
+{
+  "decision": "ACCEPT",
+  "source_SHA": "838cd3fb2d7cce62f7abba9163b875b91f0face13af27745dfd594cf695ae187",
+  "subject_SHA": "61f4f3e8ef00c5bd0ca5bbe9571532772fb1450f1c2fa6ef573e273a4935e279",
+  "independent_rules_SHA": "9a176aa4b7433e9a013ac459311b419c6069d6d0fadc398196eeda7852635213",
+  "rectangle_cases": [
+    {
+      "case": 0,
+      "candidate_interval": [
+        50.0,
+        70.0
+      ],
+      "control_interval": [
+        100.0,
+        100.0
+      ],
+      "independent_corners": [
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": 100.0,
+        "severe_regression": false,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": 30.0,
+        "time_improvement": null,
+        "classification": "WIN",
+        "basis": "both_complete_certificate_original_time_inequalities_invariant_over_recorded_interval",
+        "evaluable": true,
+        "candidate_seconds_interval": [
+          50.0,
+          70.0
+        ],
+        "control_seconds_interval": [
+          100.0,
+          100.0
+        ],
+        "certified_time_ratio_interval": [
+          0.49999999999999994,
+          0.7000000000000001
+        ],
+        "time_improvement_interval": [
+          29.999999999999996,
+          50.00000000000001
+        ],
+        "a_t_interval": [
+          30.0,
+          30.0
+        ],
+        "entire_time_rectangle_classification_invariant": true,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 50.0,
+            "control_seconds": 100.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 50.0,
+            "control_seconds": 100.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 70.0,
+            "control_seconds": 100.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 70.0,
+            "control_seconds": 100.0,
+            "classification": "WIN",
+            "severe_regression": false
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": true
+      },
+      "independent_invariant": true
+    },
+    {
+      "case": 1,
+      "candidate_interval": [
+        70.0,
+        70.000001
+      ],
+      "control_interval": [
+        100.0,
+        100.0
+      ],
+      "independent_corners": [
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "TIE",
+          "severe_regression": false
+        },
+        {
+          "classification": "TIE",
+          "severe_regression": false
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": 100.0,
+        "severe_regression": null,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": 30.0,
+        "time_improvement": null,
+        "classification": "UNEVALUABLE",
+        "basis": "recorded_clock_interval_crosses_original_classification_or_severity_boundary",
+        "evaluable": false,
+        "candidate_seconds_interval": [
+          70.0,
+          70.000001
+        ],
+        "control_seconds_interval": [
+          100.0,
+          100.0
+        ],
+        "certified_time_ratio_interval": [
+          0.6999999999999998,
+          0.7000000100000001
+        ],
+        "time_improvement_interval": [
+          29.999999,
+          30.000000000000004
+        ],
+        "a_t_interval": [
+          30.0,
+          30.0
+        ],
+        "entire_time_rectangle_classification_invariant": false,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 70.0,
+            "control_seconds": 100.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 70.0,
+            "control_seconds": 100.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 70.000001,
+            "control_seconds": 100.0,
+            "classification": "TIE",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 70.000001,
+            "control_seconds": 100.0,
+            "classification": "TIE",
+            "severe_regression": false
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": false,
+        "possible_classifications": [
+          "TIE",
+          "WIN"
+        ],
+        "possible_severity": [
+          false
+        ]
+      },
+      "independent_invariant": false
+    },
+    {
+      "case": 2,
+      "candidate_interval": [
+        230.0,
+        250.0
+      ],
+      "control_interval": [
+        200.0,
+        200.0
+      ],
+      "independent_corners": [
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": 200.0,
+        "severe_regression": false,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": 30.0,
+        "time_improvement": null,
+        "classification": "LOSS",
+        "basis": "both_complete_certificate_original_time_inequalities_invariant_over_recorded_interval",
+        "evaluable": true,
+        "candidate_seconds_interval": [
+          230.0,
+          250.0
+        ],
+        "control_seconds_interval": [
+          200.0,
+          200.0
+        ],
+        "certified_time_ratio_interval": [
+          1.1499999999999997,
+          1.2500000000000002
+        ],
+        "time_improvement_interval": [
+          -50.00000000000001,
+          -29.999999999999996
+        ],
+        "a_t_interval": [
+          30.0,
+          30.0
+        ],
+        "entire_time_rectangle_classification_invariant": true,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 230.0,
+            "control_seconds": 200.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 230.0,
+            "control_seconds": 200.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 250.0,
+            "control_seconds": 200.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 250.0,
+            "control_seconds": 200.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": true
+      },
+      "independent_invariant": true
+    },
+    {
+      "case": 3,
+      "candidate_interval": [
+        399.0,
+        401.0
+      ],
+      "control_interval": [
+        200.0,
+        200.0
+      ],
+      "independent_corners": [
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": 200.0,
+        "severe_regression": null,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": 30.0,
+        "time_improvement": null,
+        "classification": "UNEVALUABLE",
+        "basis": "recorded_clock_interval_crosses_original_classification_or_severity_boundary",
+        "evaluable": false,
+        "candidate_seconds_interval": [
+          399.0,
+          401.0
+        ],
+        "control_seconds_interval": [
+          200.0,
+          200.0
+        ],
+        "certified_time_ratio_interval": [
+          1.9949999999999999,
+          2.0050000000000003
+        ],
+        "time_improvement_interval": [
+          -201.00000000000003,
+          -198.99999999999997
+        ],
+        "a_t_interval": [
+          30.0,
+          30.0
+        ],
+        "entire_time_rectangle_classification_invariant": false,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 399.0,
+            "control_seconds": 200.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 399.0,
+            "control_seconds": 200.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 401.0,
+            "control_seconds": 200.0,
+            "classification": "LOSS",
+            "severe_regression": true
+          },
+          {
+            "candidate_seconds": 401.0,
+            "control_seconds": 200.0,
+            "classification": "LOSS",
+            "severe_regression": true
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": false,
+        "possible_classifications": [
+          "LOSS"
+        ],
+        "possible_severity": [
+          false,
+          true
+        ]
+      },
+      "independent_invariant": false
+    },
+    {
+      "case": 4,
+      "candidate_interval": [
+        239.999999,
+        240.0
+      ],
+      "control_interval": [
+        120.0,
+        120.0
+      ],
+      "independent_corners": [
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": 120.0,
+        "severe_regression": null,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": 30.0,
+        "time_improvement": null,
+        "classification": "UNEVALUABLE",
+        "basis": "recorded_clock_interval_crosses_original_classification_or_severity_boundary",
+        "evaluable": false,
+        "candidate_seconds_interval": [
+          239.999999,
+          240.0
+        ],
+        "control_seconds_interval": [
+          120.0,
+          120.0
+        ],
+        "certified_time_ratio_interval": [
+          1.9999999916666664,
+          2.0000000000000004
+        ],
+        "time_improvement_interval": [
+          -120.00000000000001,
+          -119.99999899999999
+        ],
+        "a_t_interval": [
+          30.0,
+          30.0
+        ],
+        "entire_time_rectangle_classification_invariant": false,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 239.999999,
+            "control_seconds": 120.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 239.999999,
+            "control_seconds": 120.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 240.0,
+            "control_seconds": 120.0,
+            "classification": "LOSS",
+            "severe_regression": true
+          },
+          {
+            "candidate_seconds": 240.0,
+            "control_seconds": 120.0,
+            "classification": "LOSS",
+            "severe_regression": true
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": false,
+        "possible_classifications": [
+          "LOSS"
+        ],
+        "possible_severity": [
+          false,
+          true
+        ]
+      },
+      "independent_invariant": false
+    },
+    {
+      "case": 5,
+      "candidate_interval": [
+        150.0,
+        169.999999
+      ],
+      "control_interval": [
+        50.0,
+        50.0
+      ],
+      "independent_corners": [
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": false
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": 50.0,
+        "severe_regression": false,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": 30.0,
+        "time_improvement": null,
+        "classification": "LOSS",
+        "basis": "both_complete_certificate_original_time_inequalities_invariant_over_recorded_interval",
+        "evaluable": true,
+        "candidate_seconds_interval": [
+          150.0,
+          169.999999
+        ],
+        "control_seconds_interval": [
+          50.0,
+          50.0
+        ],
+        "certified_time_ratio_interval": [
+          2.9999999999999996,
+          3.3999999800000005
+        ],
+        "time_improvement_interval": [
+          -119.99999900000002,
+          -99.99999999999999
+        ],
+        "a_t_interval": [
+          30.0,
+          30.0
+        ],
+        "entire_time_rectangle_classification_invariant": true,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 150.0,
+            "control_seconds": 50.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 150.0,
+            "control_seconds": 50.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 169.999999,
+            "control_seconds": 50.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 169.999999,
+            "control_seconds": 50.0,
+            "classification": "LOSS",
+            "severe_regression": false
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": true
+      },
+      "independent_invariant": true
+    },
+    {
+      "case": 6,
+      "candidate_interval": [
+        170.0,
+        170.000001
+      ],
+      "control_interval": [
+        50.0,
+        50.0
+      ],
+      "independent_corners": [
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": 50.0,
+        "severe_regression": true,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": 30.0,
+        "time_improvement": null,
+        "classification": "LOSS",
+        "basis": "both_complete_certificate_original_time_inequalities_invariant_over_recorded_interval",
+        "evaluable": true,
+        "candidate_seconds_interval": [
+          170.0,
+          170.000001
+        ],
+        "control_seconds_interval": [
+          50.0,
+          50.0
+        ],
+        "certified_time_ratio_interval": [
+          3.3999999999999995,
+          3.4000000200000002
+        ],
+        "time_improvement_interval": [
+          -120.00000100000001,
+          -119.99999999999999
+        ],
+        "a_t_interval": [
+          30.0,
+          30.0
+        ],
+        "entire_time_rectangle_classification_invariant": true,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 170.0,
+            "control_seconds": 50.0,
+            "classification": "LOSS",
+            "severe_regression": true
+          },
+          {
+            "candidate_seconds": 170.0,
+            "control_seconds": 50.0,
+            "classification": "LOSS",
+            "severe_regression": true
+          },
+          {
+            "candidate_seconds": 170.000001,
+            "control_seconds": 50.0,
+            "classification": "LOSS",
+            "severe_regression": true
+          },
+          {
+            "candidate_seconds": 170.000001,
+            "control_seconds": 50.0,
+            "classification": "LOSS",
+            "severe_regression": true
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": true
+      },
+      "independent_invariant": true
+    },
+    {
+      "case": 7,
+      "candidate_interval": [
+        269.0,
+        271.0
+      ],
+      "control_interval": [
+        299.0,
+        301.0
+      ],
+      "independent_corners": [
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "TIE",
+          "severe_regression": false
+        },
+        {
+          "classification": "TIE",
+          "severe_regression": false
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": null,
+        "severe_regression": null,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": null,
+        "time_improvement": null,
+        "classification": "UNEVALUABLE",
+        "basis": "recorded_clock_interval_crosses_original_classification_or_severity_boundary",
+        "evaluable": false,
+        "candidate_seconds_interval": [
+          269.0,
+          271.0
+        ],
+        "control_seconds_interval": [
+          299.0,
+          301.0
+        ],
+        "certified_time_ratio_interval": [
+          0.8936877076411959,
+          0.9063545150501673
+        ],
+        "time_improvement_interval": [
+          27.999999999999996,
+          32.00000000000001
+        ],
+        "a_t_interval": [
+          30.0,
+          30.1
+        ],
+        "entire_time_rectangle_classification_invariant": false,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 269.0,
+            "control_seconds": 299.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 269.0,
+            "control_seconds": 301.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 271.0,
+            "control_seconds": 299.0,
+            "classification": "TIE",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 271.0,
+            "control_seconds": 301.0,
+            "classification": "TIE",
+            "severe_regression": false
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": false,
+        "possible_classifications": [
+          "TIE",
+          "WIN"
+        ],
+        "possible_severity": [
+          false
+        ]
+      },
+      "independent_invariant": false
+    },
+    {
+      "case": 8,
+      "candidate_interval": [
+        200.0,
+        201.0
+      ],
+      "control_interval": [
+        300.0,
+        600.0
+      ],
+      "independent_corners": [
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": null,
+        "severe_regression": false,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": null,
+        "time_improvement": null,
+        "classification": "WIN",
+        "basis": "both_complete_certificate_original_time_inequalities_invariant_over_recorded_interval",
+        "evaluable": true,
+        "candidate_seconds_interval": [
+          200.0,
+          201.0
+        ],
+        "control_seconds_interval": [
+          300.0,
+          600.0
+        ],
+        "certified_time_ratio_interval": [
+          0.33333333333333326,
+          0.6700000000000002
+        ],
+        "time_improvement_interval": [
+          98.99999999999999,
+          400.00000000000006
+        ],
+        "a_t_interval": [
+          30.0,
+          60.0
+        ],
+        "entire_time_rectangle_classification_invariant": true,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 200.0,
+            "control_seconds": 300.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 200.0,
+            "control_seconds": 600.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 201.0,
+            "control_seconds": 300.0,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 201.0,
+            "control_seconds": 600.0,
+            "classification": "WIN",
+            "severe_regression": false
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": true
+      },
+      "independent_invariant": true
+    },
+    {
+      "case": 9,
+      "candidate_interval": [
+        643.7820000000065,
+        645.352919
+      ],
+      "control_interval": [
+        112.51700630004052,
+        112.51700630004052
+      ],
+      "independent_corners": [
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        },
+        {
+          "classification": "LOSS",
+          "severe_regression": true
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": null,
+        "control_seconds": 112.51700630004052,
+        "severe_regression": true,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": 30.0,
+        "time_improvement": null,
+        "classification": "LOSS",
+        "basis": "both_complete_certificate_original_time_inequalities_invariant_over_recorded_interval",
+        "evaluable": true,
+        "candidate_seconds_interval": [
+          643.7820000000065,
+          645.352919
+        ],
+        "control_seconds_interval": [
+          112.51700630004052,
+          112.51700630004052
+        ],
+        "certified_time_ratio_interval": [
+          5.721641742611619,
+          5.735603356519162
+        ],
+        "time_improvement_interval": [
+          -532.8359126999596,
+          -531.2649936999659
+        ],
+        "a_t_interval": [
+          30.0,
+          30.0
+        ],
+        "entire_time_rectangle_classification_invariant": true,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 643.7820000000065,
+            "control_seconds": 112.51700630004052,
+            "classification": "LOSS",
+            "severe_regression": true
+          },
+          {
+            "candidate_seconds": 643.7820000000065,
+            "control_seconds": 112.51700630004052,
+            "classification": "LOSS",
+            "severe_regression": true
+          },
+          {
+            "candidate_seconds": 645.352919,
+            "control_seconds": 112.51700630004052,
+            "classification": "LOSS",
+            "severe_regression": true
+          },
+          {
+            "candidate_seconds": 645.352919,
+            "control_seconds": 112.51700630004052,
+            "classification": "LOSS",
+            "severe_regression": true
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": true
+      },
+      "independent_invariant": true
+    },
+    {
+      "case": 10,
+      "candidate_interval": [
+        112.51700630004052,
+        112.51700630004052
+      ],
+      "control_interval": [
+        643.7820000000065,
+        645.352919
+      ],
+      "independent_corners": [
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        },
+        {
+          "classification": "WIN",
+          "severe_regression": false
+        }
+      ],
+      "actual_result": {
+        "candidate": "M-B",
+        "control": "P-GRB",
+        "candidate_U": 0.0,
+        "candidate_L": 0.0,
+        "control_U": 0.0,
+        "control_L": 0.0,
+        "candidate_gap": 0.0,
+        "control_gap": 0.0,
+        "candidate_certified": true,
+        "control_certified": true,
+        "candidate_seconds": 112.51700630004052,
+        "control_seconds": null,
+        "severe_regression": false,
+        "UB_improvement": 0.0,
+        "gap_improvement": 0.0,
+        "LB_change": 0.0,
+        "certified_time_ratio": null,
+        "UB_ratio": null,
+        "gap_ratio": null,
+        "percentage_gap_path_applicable": false,
+        "a_U": 0.001,
+        "a_gap": 0.001,
+        "a_t": null,
+        "time_improvement": null,
+        "classification": "WIN",
+        "basis": "both_complete_certificate_original_time_inequalities_invariant_over_recorded_interval",
+        "evaluable": true,
+        "candidate_seconds_interval": [
+          112.51700630004052,
+          112.51700630004052
+        ],
+        "control_seconds_interval": [
+          643.7820000000065,
+          645.352919
+        ],
+        "certified_time_ratio_interval": [
+          0.17434957367883308,
+          0.17477501126163733
+        ],
+        "time_improvement_interval": [
+          531.2649936999659,
+          532.8359126999596
+        ],
+        "a_t_interval": [
+          64.37820000000066,
+          64.5352919
+        ],
+        "entire_time_rectangle_classification_invariant": true,
+        "time_corner_outcomes": [
+          {
+            "candidate_seconds": 112.51700630004052,
+            "control_seconds": 643.7820000000065,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 112.51700630004052,
+            "control_seconds": 645.352919,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 112.51700630004052,
+            "control_seconds": 643.7820000000065,
+            "classification": "WIN",
+            "severe_regression": false
+          },
+          {
+            "candidate_seconds": 112.51700630004052,
+            "control_seconds": 645.352919,
+            "classification": "WIN",
+            "severe_regression": false
+          }
+        ],
+        "exact_time_or_ratio_fabricated": false,
+        "original_materiality_thresholds_unchanged": true,
+        "severe_regression_qualified": true
+      },
+      "independent_invariant": true
+    }
+  ],
+  "rejected_invalid_clocks": [
+    "missing_fault_provenance",
+    "missing_unknown_flag",
+    "reversed_interval",
+    "nonpositive_interval",
+    "nonfinite_interval",
+    "at_or_over_cap"
+  ],
+  "checks": 17,
+  "Optimize": 0,
+  "native_environment": 0
+}

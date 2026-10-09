@@ -1,0 +1,20 @@
+{
+  "source_commit": "d11c94d81e6a2c5dcd64dad8c54b390f3cb4a027",
+  "inherited_parser_path": "results/unified_exact_round108/review/current_qualification_audit01.py",
+  "inherited_parser_SHA": "79a506461187fa41f4f3ac688475217222ee41b979f19f368c7afae70900d81b",
+  "inherited_raw_audit_path": "results/unified_exact_round108/review/campaign_raw_audit01.py",
+  "inherited_raw_audit_SHA": "47cb299f4a8844ca668fab0117b035076f760041fb44ba6c4be0cd751af15adc",
+  "parser_SHA": "ecfb894faa24bc8c5889a0466051f5cc709cfa2969c3ca6529ab826c237acb3a",
+  "kernel_SHA": "6d9dabb8f5daa67bf4d0eedbe1f74827895863a422662a059f1c1455a4e603f8",
+  "changes": [
+    "Remove historical fixed qualification, bridge and early cancellation",
+    "Native per-call Seed comes from frozen arm panel",
+    "Role plus Seed output keys avoid repeated-role collisions",
+    "Reference model path supplied by explicit R109 adapter",
+    "Returned native calls checked separately from actual no-Optimize skips",
+    "Zero own physical objective independently proves nonnegative floor without saved leaf"
+  ],
+  "Optimize": 0,
+  "native_environment": 0,
+  "production_edits": 0
+}

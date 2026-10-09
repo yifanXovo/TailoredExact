@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round109\results\unified_exact_round109\review\round109_stack_fault_review.py", line 34, in <module>
+    imports=re.findall(r'DLL Name:\s*(\S+)',headers);assert not any('stdc++' in n.lower() for n in imports)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
