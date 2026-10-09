@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round109\scripts\round109_public.py", line 258, in <module>
+    if a.operation=='pack':pack(a.root)
+                           ^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round109\scripts\round109_public.py", line 178, in pack
+    assert process.returncode==0,('missing explicit public historical dependency',name)
+           ^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('missing explicit public historical dependency', 'results/unified_exact_round108/goal.md')

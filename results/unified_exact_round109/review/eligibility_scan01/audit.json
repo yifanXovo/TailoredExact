@@ -1,0 +1,184 @@
+{
+  "decision": "ACCEPT",
+  "eligible": {
+    "G20-C1": true,
+    "G20-C2": true,
+    "G20-R1": true,
+    "G20-R2": true,
+    "G50-C1": true,
+    "G50-C2": true,
+    "G50-R1": true,
+    "G50-R2": true,
+    "G100-C1": true,
+    "G100-C2": true,
+    "G100-R1": true,
+    "G100-R2": true
+  },
+  "exact_main_denominator": 12,
+  "frozen_identity_tuples": [
+    {
+      "id": "G20-C1",
+      "input_SHA": "27b5e90ef70a1bf574bcb860ac33a0365920d8f832cad809ca2a6621b93cad09",
+      "T_seconds": 3600,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G20-C2",
+      "input_SHA": "180c30ab2e70a9c6afdc9c34744e50e86d09a234ceb55fdc2f52eb391e82aa1e",
+      "T_seconds": 7200,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G20-R1",
+      "input_SHA": "8e65808b3ccdb07f099a42a8c075cf28d0858d25b228dfba1fc19ceeea0526ff",
+      "T_seconds": 7200,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G20-R2",
+      "input_SHA": "5848338342898969c94d4391f4bfcb83c3a57ee227b8d2fd3db185693e8c8716",
+      "T_seconds": 3600,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G50-C1",
+      "input_SHA": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+      "T_seconds": 7200,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G50-C2",
+      "input_SHA": "64d70f9b0a932594bb5cb81430e33fe40e207f60d34d5d594748c04ebdf4cdc3",
+      "T_seconds": 18000,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G50-R1",
+      "input_SHA": "c7a5200b5a93095304ffc82f404e6a3e9548962d2cf5cd60ab34d64327b71f47",
+      "T_seconds": 7200,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G50-R2",
+      "input_SHA": "596886779e57c67b99d70385d59806b2e2d04619e2a07bf011e6d0fc5bdfc394",
+      "T_seconds": 18000,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G100-C1",
+      "input_SHA": "f70d9de06929576b62195f2df75c4394e9fd7b5eb8b2bfd20cc09a456101ef27",
+      "T_seconds": 18000,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G100-C2",
+      "input_SHA": "757ca48de0e7990a349a84c657a8164a2d56dff890741c8a98612960f3c7b454",
+      "T_seconds": 7200,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G100-R1",
+      "input_SHA": "5187c21b92ee3ec98757d08fa5481bee266657c616d0479b406c1d989698b94f",
+      "T_seconds": 7200,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    },
+    {
+      "id": "G100-R2",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "T_seconds": 18000,
+      "lambda": 0.15,
+      "pickup_seconds": 60,
+      "drop_seconds": 60
+    }
+  ],
+  "scans": [
+    {
+      "root": "E:\\codes\\ExactEBRP",
+      "command": [
+        "rg",
+        "-l",
+        "--fixed-strings",
+        "--file",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\review\\eligibility_scan01\\exact_input_SHA.txt",
+        "--glob",
+        "*.json",
+        "--glob",
+        "*.jsonl",
+        "--glob",
+        "*.csv",
+        "--glob",
+        "*.md",
+        "E:\\codes\\ExactEBRP\\results",
+        "E:\\codes\\ExactEBRP\\reference"
+      ],
+      "exit_code": 1,
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matched_paths": [],
+      "scope": "retained JSON/JSONL/CSV/Markdown under results and reference; compressed historical archives not decompressed",
+      "independently_hashed_plausible_reference_inputs": 208
+    },
+    {
+      "root": "E:\\codes\\ExactEBRP-round108",
+      "command": [
+        "rg",
+        "-l",
+        "--fixed-strings",
+        "--file",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\review\\eligibility_scan01\\exact_input_SHA.txt",
+        "--glob",
+        "*.json",
+        "--glob",
+        "*.jsonl",
+        "--glob",
+        "*.csv",
+        "--glob",
+        "*.md",
+        "E:\\codes\\ExactEBRP-round108\\results",
+        "E:\\codes\\ExactEBRP-round108\\reference"
+      ],
+      "exit_code": 1,
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matched_paths": [],
+      "scope": "retained JSON/JSONL/CSV/Markdown under results and reference; compressed historical archives not decompressed",
+      "independently_hashed_plausible_reference_inputs": 208
+    }
+  ],
+  "exact_SHA_matches": [],
+  "exact_reference_byte_matches": [],
+  "read_bindings": [],
+  "at_initial_freeze_only": true,
+  "new_formal_measurements_do_not_revoke_initial_eligibility": true,
+  "scope_limitation": "Retained explicit local uncompressed history and original reference inputs; unopened private bytes and historical compressed archives are not claimed reread.",
+  "current_source_commit": "d11c94d81e6a2c5dcd64dad8c54b390f3cb4a027",
+  "input_manifest_SHA": "1f701266c2e1947ea5e9094a411b4c21751164a5a02125f576282ec660b2d80d",
+  "source_SHA": "ed3a2c6da6c432268c9f4a83392c18e9214ae101fa2e6a75afb809e9c7b11e76",
+  "Optimize": 0,
+  "LP_solve": 0,
+  "native_environment": 0,
+  "production_edits": 0,
+  "elapsed_engineering_seconds": 70.87201480008662
+}

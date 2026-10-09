@@ -1,0 +1,455 @@
+{
+  "version": "round109-geographic-mb-evaluation-v1",
+  "roles": [
+    {
+      "number": 1,
+      "id": "G20-C1",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 2,
+      "id": "G20-C2",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 900,
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 3,
+      "id": "G20-R1",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "surplus",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 900,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 4,
+      "id": "G20-R2",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 5,
+      "id": "G50-C1",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "balanced",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 6,
+      "id": "G50-C2",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 7,
+      "id": "G50-R1",
+      "V": 50,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 8,
+      "id": "G50-R2",
+      "V": 50,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 9,
+      "id": "G100-C1",
+      "V": 100,
+      "M": 8,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "surplus",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40,
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 10,
+      "id": "G100-C2",
+      "V": 100,
+      "M": 8,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 3600,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 11,
+      "id": "G100-R1",
+      "V": 100,
+      "M": 8,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "balanced",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40,
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 3600,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 12,
+      "id": "G100-R2",
+      "V": 100,
+      "M": 8,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    }
+  ],
+  "seed_checks": [
+    {
+      "number": 13,
+      "id": "G20-C2",
+      "gurobi_seed": 1,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ]
+    },
+    {
+      "number": 14,
+      "id": "G50-R1",
+      "gurobi_seed": 1,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ]
+    },
+    {
+      "number": 15,
+      "id": "G100-R2",
+      "gurobi_seed": 1,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ]
+    }
+  ],
+  "common_parameters": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "formal_arms": 42,
+  "main_arms": 36,
+  "seed_arms": 6,
+  "nominal_seconds": 88200,
+  "main_nominal_seconds": 75600,
+  "seed_nominal_seconds": 12600,
+  "maximum_starts": 72,
+  "maximum_outer_seconds": 100000,
+  "qualification_starts_reserved": 8,
+  "qualification_outer_seconds_reserved": 1200,
+  "planned_formal_starts": 57,
+  "start_reserve": 7,
+  "serial": true,
+  "full_42_required_for_normal_results": true,
+  "no_early_performance_cancellation": true,
+  "no_best_of_two": true,
+  "no_cross_arm_UB_Start_route_cut_cache": true,
+  "materiality": {
+    "a_U": "max(.001,.01*abs(U_C))",
+    "a_gap": "max(.001,.10*abs(gap_C))",
+    "a_t": "max(30,.10*t_C)"
+  },
+  "severity": {
+    "control_only_certificate": true,
+    "both_certified": "t_A>=2*t_C and t_A-t_C>=120",
+    "both_uncertified": "U_A-U_C>=max(.001,.05*abs(U_C)) and gap_A-gap_C>=max(.005,.25*abs(gap_C))"
+  },
+  "closure_tolerance": 1e-07,
+  "zero_objective_tolerance": 1e-12,
+  "signed_gap_not_clipped": true,
+  "relative_gap": "qualified finite U/L and abs(U)>1e-12 else null",
+  "MIXED_not_WIN": true,
+  "support_requires": {
+    "all_42_valid_same_PE": true,
+    "all_12_eligible_at_initial_freeze": true,
+    "main_all_evaluable": true,
+    "main_MIN_WIN": 6,
+    "main_MAX_LOSS": 2,
+    "main_severe_regressions": 0,
+    "WIN_in_each_V": [
+      20,
+      50,
+      100
+    ],
+    "WIN_in_each_geometry": [
+      "compact",
+      "regional"
+    ],
+    "seed_all_evaluable": true,
+    "seed_severe_regressions": 0,
+    "seed_min_not_LOSS": 2,
+    "no_Seed0_WIN_to_Seed1_LOSS": true
+  },
+  "ENS_dominance_hidden_condition": false,
+  "stages": [
+    "BLOCKED",
+    "BROAD_PANEL_SUPPORT",
+    "BROAD_PANEL_NOT_SUPPORTED"
+  ],
+  "frozen_recipe_SHA": "ae70626a347cc4431fcaacb787d4b0da4b03f4f9b63ccdc9022c3788c37c76ed",
+  "frozen_candidate_SHA": "d176c2be4ea94ad1f2b428df4b82a2e588d3ea89299f687afbe6c87b771c5ed1"
+}

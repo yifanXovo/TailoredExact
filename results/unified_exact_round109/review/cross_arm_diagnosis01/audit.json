@@ -1,0 +1,4 @@
+{
+  "decision": "HOLD",
+  "error": "Traceback (most recent call last):\n  File \"E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\review\\round109_cross_arm_diagnosis.py\", line 50, in <module>\n    for n,v in ((f'x_{k}_{i}_{j}',1.),(f'conn_{k}_{i}_{j}',float(len(nodes)-1-position))):need(n in vals,'complete route family column '+n);vals[n]=v\n                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\review\\round109_cross_arm_diagnosis.py\", line 22, in need\n    if not x:raise AssertionError(m)\n             ^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: complete route family column conn_0_0_4\n"
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round109\results\unified_exact_round109\review\round109_main06_diagnosis.py", line 28, in <module>
+    need(ph['U']==ph['G']==ph['P']==raw['objective']==raw['upper_bound']==0 and ph['final_inventories']==raw['final_inventories']==q['target'],'own complete original integer physical zero fleet, all station targets reached')
+  File "E:\codes\ExactEBRP-round109\results\unified_exact_round109\review\round109_main06_diagnosis.py", line 13, in need
+    if not x:raise AssertionError(m)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: own complete original integer physical zero fleet, all station targets reached
+

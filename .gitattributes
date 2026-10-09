@@ -225,3 +225,12 @@ results/unified_exact_round85/figures/*.svg -whitespace
 results/unified_exact_round108/** -text
 reference/round108_confirmation/** -text
 scripts/round108*.py -text
+
+# Preserve Round109 frozen input, reader, report and exact public-carrier bytes.
+results/unified_exact_round109/** -text whitespace=cr-at-eol
+reference/round109_geographic/** -text
+scripts/round109* -text whitespace=cr-at-eol
+results/data_generation_citibike_round57/source_station_table.csv -text
+# Audit streams and this inherited parser preserve their actual final blank lines.
+results/unified_exact_round109/**/*.log -whitespace
+results/unified_exact_round109/**/round109_independent_parser.py whitespace=cr-at-eol,-blank-at-eof
