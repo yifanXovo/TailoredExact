@@ -14,8 +14,8 @@
 - [x] Actually exported to a new public directory and restored from its bound public script to a new empty root. Restore exit0, exact manifest/parts/guide hashes, no original-worktree read and no PE/DLL in restored root.
 - [x] Actual restored-root stdlib raw rebuild exited0 in642.1021036000457 seconds; all3,742,772 CSV fields and three report JSON files match exactly, with no numerical edits or solver.
 - [x] Independent public raw/physics/cover/decision review from only the restored root ACCEPT; actual cwd/source/launch/streams/exit/receipt retained. All152529 raw bindings and40 comparison reads are below that root, with isolated Python and no DLL/PE/original fallback.
-- [x] New English stacked OPEN draft PR171, correct R108 base and pushed payload479f7a4c2d0dc121676614260c17f13b24ab9253. Actual before/after remote head/base/OPEN/draft match;67 pinned key files/268037736 remote bytes, including both exact parts, match completely in remote_verification02.json.
+- [ ] New English stacked OPEN draft PR, correct R108 base/current remote head and actual pinned remote key scientific/part bytes.
 
 The performance stage is BLOCKED. This checklist tracks completion of the permitted failure-evidence delivery, not completion of the originally planned42-arm scientific panel. No default switch, merge, new variant or next-round performance work is authorized.
 
-Measured source/PE, payload479f7a4c2d0dc121676614260c17f13b24ab9253 and this later receipt/delivery-tooling supplement are separate identities. The preserved remote_verification02.json proves the preceding payload. The supplement's own final current-head check is performed externally after push, avoiding circular self-proof. The sole transport compatibility repair affects only the offline remote-byte helper; scientific source5, reports, input bytes and immutable carrier stay unchanged.
+Measured source/PE, the result-delivery commit and a later verification-receipt supplement are separate identities. A result commit cannot contain its own post-push verification; final remote receipt status will be recorded after the actual push.

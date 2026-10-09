@@ -9,14 +9,9 @@ Primary/local independent reconstruction and actual fresh public export,
 new-empty-root restore, all3,742,772 CSV fields/three JSON exact comparison,
 and restored-root independent/access closure are all CLOSED/ACCEPT. All13 fee
 wrappers are closed:51 conservative starts/18618.079987913487 outer seconds.
-Delivery closure: English stacked draft PR171 is OPEN/draft at
-https://github.com/yifanXovo/TailoredExact/pull/171, with the verified R108 base
-codex/round108-frozen-mb-validation atd11c94d81e6a2c5dcd64dad8c54b390f3cb4a027.
-Payload479f7a4c2d0dc121676614260c17f13b24ab9253 was pushed and its67 remote key
-files/268037736 bytes, including both exact parts, were actually verified.
-This later delivery-tooling/receipt supplement records that preceding payload
-proof. Its own post-push current head is checked externally, not circularly
-embedded in its own commit. ENS-C defaults and all205 source bindings unchanged.
+Remaining delivery work: new stacked English draft PR and pinned remote
+head/base/open/draft/key-byte verification, then a clearly separate receipt
+supplement. ENS-C defaults and all205 production source bindings are unchanged.
 
 ## Historical chronological entries (superseded)
 
@@ -517,40 +512,7 @@ execution directories were copied unchanged to delivery review supplements.
 Scientificstate remainsBLOCKED;24 valid14cert10open,failed25,unstarted26..42,
 all6formalSeed1andV100performanceunmeasured, original12/3denominators.
 
-No native work remains authorized. The immutable carrier remains unchanged.
-The remaining PR/remote steps in this section were completed as recorded next.
-
-## Post-push payload verification and delivery closure
-
-Payload commit479f7a4c2d0dc121676614260c17f13b24ab9253 has exact parent R108
-d11c94d81e6a2c5dcd64dad8c54b390f3cb4a027 and was actually pushed. PR171 was
-created as an English OPEN research draft on that verified R108 branch;
-creation wrapper exited0/5.154091599979438seconds. Original source body and
-actual creation/URL/source/cwd/streams/receipt are preserved.
-
-First remote-verifier execution actually failed because the CPython UCRT
-HTTPS issuer chain was unavailable: remote_verification01 exit1/3.1532872999086976
-seconds, no scientific discrepancy. Original source/command/streams/receipt
-remain. Only the offline delivery helper transport was corrected to Windows
-curl with existing OS certificate verification; no insecure flag, proxy,
-permission, network configuration or signed scientific source changed.
-remote_verification02 CLOSED0/26.421203100006096outer engineering seconds:
-67 pinned actual remote files/268037736bytes match their byte counts and SHA,
-both exact parts included; before/after remote head/base/OPEN/draft agree.
-Measured production source/PE, payload479f7a4... and this subsequent receipt/
-transport-tooling supplement are separate identities. The payload cannot
-contain this later proof, and this supplement cannot contain its own later
-post-push proof. The final actual current-head verification is reported
-outside the Git snapshot after the supplement push.
-
-Postpack delivery review02 ACCEPT_POSTPACK_DELIVERY_NARRATIVE, audit SHA
-49eab0e9670fce3110bca0e1373d95d96e7e9eae1c62f88a0105038df24b4105,
-actualexit0/.1591805seconds. Review01's actual over-strict fee-repetition
-checker failure is retained, with its source/streams/receipt/snapshots; it
-was a checker bug, not a scientific/document failure. RESUME's early ACTIVE
-states are preserved only as explicitly superseded historical entries.
-
-Original checkout remains on8dc274eb34ee6d8a575f0b94b57ef04476efc0f1; all3
-initial user-file hashes were actually rechecked unchanged before push.
-No production/default, input draw, PE, threshold, source5 or formal data
-changed during delivery. No merge or additional research is authorized.
+No native work remains authorized. Complete the new English stacked draft
+PR and actual pinned remote head/base/open/draft/key-byte verification; keep
+the immutable carrier unchanged. A later receipt-only commit must clearly
+verify the preceding payload commit and not claim to contain its own proof.

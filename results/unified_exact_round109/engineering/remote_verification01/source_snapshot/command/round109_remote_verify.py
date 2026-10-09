@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import time
 from urllib.parse import quote
+from urllib.request import Request, urlopen
 
 REPO = 'yifanXovo/TailoredExact'
 BASE_NAME = 'codex/round108-frozen-mb-validation'
@@ -37,22 +38,15 @@ def fetch(item, head):
     digest = hashlib.sha256()
     size = 0
     tick = time.perf_counter()
-    # The actual CPython UCRT runtime lacks its HTTPS issuer chain here.
-    # Windows curl uses the existing OS certificate store; no insecure flag,
-    # proxy/configuration change, custom CA or authentication is introduced.
-    process = subprocess.Popen(['C:/Windows/System32/curl.exe', '--fail', '--location',
-                                '--silent', '--show-error', '--max-time', '240',
-                                '--header', 'Accept-Encoding: identity', url],
-                               stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    while block := process.stdout.read(1024 * 1024):
-        digest.update(block)
-        size += len(block)
-    error = process.stderr.read().decode('utf-8', errors='replace')
-    assert process.wait() == 0, (item['path'], error)
+    request = Request(url, headers={'Accept-Encoding': 'identity', 'User-Agent': 'Round109-exact-byte-review'})
+    with urlopen(request, timeout=180) as response:
+        assert response.status == 200
+        while block := response.read(1024 * 1024):
+            digest.update(block)
+            size += len(block)
     actual = digest.hexdigest()
     assert size == item['bytes'] and actual == item['SHA'], item['path']
     return dict(path=item['path'], URL=url, bytes=size, SHA=actual,
-                transport='Windows curl with existing OS certificate verification',
                 seconds=time.perf_counter()-tick, passed=True)
 
 
