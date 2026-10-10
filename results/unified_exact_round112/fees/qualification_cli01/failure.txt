@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round112\scripts\round112_campaign.py", line 112, in billed
+    rec=supervised(launch,ident,arm_tick);dest=Path(launch['destination'])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round112\scripts\round112_campaign.py", line 58, in supervised
+    return namespace['run_one'](launch,identity['prereg'],identity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round112\scripts\round112_campaign.py::original_supervisor", line 139, in run_one
+    def command_for(prereg: dict, item: dict, arm: str, destination: Path) -> list[str]:
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Audit failed; retain evidence and stop before next arm

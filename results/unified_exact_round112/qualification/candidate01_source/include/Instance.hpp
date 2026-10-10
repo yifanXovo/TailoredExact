@@ -1,0 +1,750 @@
+#pragma once
+
+#include <chrono>
+#include <memory>
+#include <string>
+#include <utility>
+#include <vector>
+
+namespace ebrp {
+struct Round61CandidateSession;
+
+struct Instance {
+    std::string path;
+    std::string name;
+    int V = 0;
+    int M = 0;
+    std::vector<int> Q;                 // size M
+    std::vector<int> capacity;          // index 0 is depot
+    std::vector<int> initial;           // index 0 is depot
+    std::vector<int> target;            // index 0 is depot, station targets > 0
+    std::vector<double> weights;        // index 0 is depot
+    std::vector<double> min_ratio;      // index 0 is depot, parsed for compatibility
+    std::vector<std::pair<double, double>> points;
+    std::vector<std::vector<double>> dist;
+    double total_time_limit = 3600.0;
+    double pickup_time = 60.0;
+    double drop_time = 60.0;
+    std::string distance_convention;
+};
+
+struct SolveOptions {
+    bool round107_frontier_struct = false; // complete original ENS controller; scoped assignment events
+    std::string round106_events = "off"; // off|full|core|struct; one MIPSOL/lazy master
+    std::string round105_decomposition = "off"; // off|full|core; global master, no AM
+    // Round68: supply the already-paid complete outer witness to native VD-P.
+    bool round68_verified_start = false;
+    // ENS-Q: original ENS rows and binary direction, only p/d continuous.
+    bool round100_continuous_quantities = false;
+    // R98 isolated shared inventory/service representation. Default off.
+    std::string round98_state_service = "off"; // off|aggregate|projected|vehicle-state|q-integer|m-binary|m-binary-linked
+    // Replace node-load Big-M recurrences by the exact arc-load formulation.
+    // Research only; the original compact benchmark and stable presets stay off.
+    bool round66_arc_load_replacement = false;
+    std::string round63_time_mode = "off"; // explicit research resource block/separator
+    std::string round64_shared_mode = "off"; // global static Q/T/SEP/JOINT research
+    bool round65_hga_zero_stop = false;
+    bool round65_witness_audit = false; // observational route persistence only
+    bool round65_budget = false;
+    std::string round65_controller = "credit10"; // credit10|credit-seed
+    bool round65_release_load = false;
+    double round65_seed_credit = 30.0; // explicit stress-only override; frozen main policy=30
+    std::string round65_projection = "off"; // off|proof|sparse
+    std::string round62_threshold_mode = "off"; // off|events|conflicts|projection|service|service-conflicts|projection-rlt|projection-service
+    std::string method = "tailored";
+    std::string input_path;
+    std::string log_path;
+    std::string out_path;
+    // Round 56 paper-candidate provenance. These values are descriptive
+    // identities supplied by the frozen runner and never affect the model.
+    std::string round56_scenario_id;
+    std::string round56_mathematical_instance_sha256;
+    std::string round56_run_identity_sha256;
+    double lambda = 0.15;
+    double total_time_limit = 3600.0;
+    double solve_time_limit = 1000.0;
+    double pickup_time = 60.0;
+    double drop_time = 60.0;
+    int threads = 1;
+    int bpc_workers = 1;
+    int pricing_threads = 1;
+    bool parallel_frontier = false;
+    bool parallel_nodes = false;
+    bool plain_baseline = false;
+    bool gcap_seed_cplex = false;
+    std::string bpc_incumbent = "none";
+    double bpc_incumbent_seconds = 20.0;
+    int bpc_incumbent_rounds = 12;
+    std::string incumbent_json_path;
+    std::string incumbent_format = "auto";
+    std::string incumbent_source_name;
+    double gcap_seed_time_limit = -1.0;
+    double gini_cap = -1.0;
+    double gini_floor = -1.0;
+    int max_branch_nodes = 31;
+    int frontier_intervals = 4;
+    std::string frontier_execution_mode = "scheduler";
+    // CPLEX presolve is disabled for the single-tree implementation because
+    // it creates branches on the continuous G variable in a generic callback.
+    std::string global_gini_tree_presolve = "off";
+    std::string global_gini_tree_search = "traditional";
+    std::string global_gini_tree_child_estimate_mode = "parent-copy";
+    std::string global_gini_tree_row_attachment_mode = "full-inherited-pack";
+    std::string global_gini_tree_row_timing_mode = "deferred";
+    bool global_gini_tree_native_mip_start = false;
+    bool global_gini_tree_root_connectivity_flow = false;
+    // Empty preserves the legacy Boolean-only interface.  Explicit values are
+    // off, round20-current (F0), zero-return (F1), normalized (F2), and
+    // normalized-start-coupled (F3).
+    std::string global_gini_tree_root_connectivity_flow_variant;
+    std::string global_gini_tree_node_trace_path;
+    std::string global_gini_tree_bound_trace_path;
+    std::string global_gini_tree_manifest_path;
+    std::string global_gini_tree_root_export_path;
+    std::string global_gini_tree_post_row_trace_path;
+    std::string global_gini_tree_topology_trace_path;
+    std::string global_gini_tree_sibling_trace_path;
+    std::string global_gini_tree_row_delta_trace_path;
+    std::string global_gini_tree_memory_trace_path;
+    std::string global_gini_tree_mip_start_audit_path;
+    // Round 24 optional Gurobi and external-tree research modes.  These are
+    // uniform run options and may never be resolved from instance metadata.
+    int gurobi_threads = 1;
+    int gurobi_seed = 0;
+    int gurobi_presolve = -1;
+    bool gurobi_hga_start = false;
+    // Round112 isolated, self-paid current ENS startup into the original compact.
+    bool round112_ens_start_compact = false;
+    std::string gurobi_home;
+    std::string gurobi_progress_path;
+    std::string gurobi_model_export_path;
+    std::string cplex_model_export_path;
+    int round24_expected_gurobi_model_fingerprint = 0;
+    std::string round24_executable_sha256;
+    std::string round24_manifest_executable_sha256;
+    std::string external_gini_backend = "cplex";
+    // Uniform inner fixed-interval formulation policy.  Default v0 preserves
+    // all historical controllers; Round 53 may explicitly select F0-CLEAN.
+    std::string external_gini_interval_mip_policy = "interval-mip-v0";
+    std::string external_gini_lifecycle = "retained-per-leaf";
+    std::string external_gini_scheduling = "legacy-quanta";
+    bool external_gini_warm_start = false;
+    int external_gini_split_after_attempts = 2;
+    std::string external_gini_artifact_dir;
+    bool round24_research_mode = false;
+    bool allow_unsafe_continuous_branch_presolve_diagnostic = false;
+    // Exact-zero gap round trips are opt-in for the Round 24 external static
+    // interval adapter.  Legacy static/callback paths retain their frozen
+    // historical tolerance unless this research-only flag is set.
+    bool round24_external_exact_zero_gap = false;
+    bool round24_external_reuse_immutable_lp = false;
+    std::string round24_external_expected_lp_sha256;
+    // Round 22 production provenance and shared dense native progress capture.
+    bool round22_production_mode = false;
+    std::string round22_source_commit_sha;
+    std::string round22_executable_sha256;
+    std::string round22_production_manifest_sha256;
+    bool dense_progress_enabled = false;
+    std::string dense_progress_run_id;
+    std::string dense_progress_raw_event_path;
+    std::string dense_progress_checkpoint_path;
+    std::string dense_progress_algorithm_arm;
+    bool interval_row_factory_round19 = false;
+    int frontier_refine_splits = 0;
+    int frontier_split_batch = 0;
+    int frontier_retry_passes = 2;
+    int frontier_retry_nodes = -1;
+    double frontier_retry_reserve_seconds = 0.0;
+    double frontier_relax_seconds = -1.0;
+    bool frontier_final_closure = false;
+    int frontier_final_nodes = 1023;
+    int route_mask_max_v = 12;
+    int gcap_warmstart_level = 1; // 0=seed routes only, 1=sparse generic columns, 2=full generic columns
+    int gcap_pricing_columns = 1;
+    bool column_dominance = true;
+    std::string column_dominance_mode = "exact";
+    bool projection_bound = true;
+    bool penalty_domain_tightening = true;
+    bool movement_domain_tightening = true;
+    bool movement_bound_audit = false;
+    bool frontier_best_bound_scheduling = true;
+    bool frontier_relaxation_cache = true;
+    bool frontier_split_before_tree = false;
+    bool frontier_column_cache = false;
+    bool frontier_focused_min_lb_retry = true;
+    bool frontier_focused_intensification = true;
+    double frontier_focused_reserve_fraction = 0.25;
+    double frontier_focused_relax_seconds = 5.0;
+    int frontier_focused_max_passes = 2;
+    bool frontier_adaptive_split = true;
+    int frontier_adaptive_max_depth = 3;
+    bool frontier_adaptive_max_depth_explicit = false;
+    double frontier_adaptive_min_width = 1e-4;
+    int frontier_adaptive_split_factor = 2;
+    // First-class paper-facing K1-AM-SF controller.  Historical Round/C6
+    // fields remain available below for reproduction, but the canonical
+    // paper preset is evaluated exclusively through these fields.
+    bool k1_am_sf_controller_enabled = false;
+    int initial_gini_interval_count = 1;
+    std::string split_point_rule = "midpoint";
+    std::string split_score_rule = "balanced-normalized-closure";
+    double split_threshold = 0.08;
+    int maximum_split_depth = 8;
+    double minimum_interval_width = 1e-4;
+    int split_factor = 2;
+    std::string child_infeasibility_policy = "exact";
+    std::string native_target_policy = "existing-k1-am-sf";
+    bool exact_parent_closure = true;
+    bool frontier_pre_split_critical = false;
+    int frontier_critical_max_depth = 0;
+    bool route_pool_incumbent = true;
+    int route_pool_max_columns_per_vehicle = 5000;
+    bool route_pool_keep_best_per_projection = true;
+    bool pickup_drop_compat_flow = true;
+    bool pickup_drop_transfer_cap_flow = true;
+    bool vehicle_indexed_operation_relaxation = true;
+    bool vehicle_indexed_relaxation_audit = false;
+    bool vehicle_indexed_transfer_flow = true;
+    bool v20_safe_relaxation_cuts = true;
+    bool v20_cover_cuts = true;
+    int v20_cover_max_size = 4;
+    int v20_cover_max_cuts = 200;
+    double v20_cover_separation_seconds = 0.25;
+    bool station_residual_cover_cuts = true;
+    int station_residual_cover_max_cuts = 200;
+    std::string large_compact_flow_relaxation = "off";
+    double large_compact_flow_time_limit = 5.0;
+    bool large_compact_flow_connectivity = false;
+    bool service_operation_min_handling_cuts = false;
+    bool penalty_movement_lb_cuts = false;
+    bool transfer_subset_capacity_cuts = false;
+    bool gini_spread_cuts = false;
+    bool required_movement_cuts = false;
+    bool global_handling_capacity_cuts = false;
+    bool low_gini_ratio_band_tightening = false;
+    bool compact_bc_direct_gini_rows = true;
+    bool compact_bc_tight_mccormick = true;
+    bool compact_bc_inventory_conservation = true;
+    bool compact_bc_movement_reachability_domains = true;
+    bool compact_bc_visit_inventory_linking = true;
+    bool compact_bc_objective_estimator_cutoff = true;
+    bool compact_bc_penalty_lb_closure = true;
+    bool compact_bc_support_duration_cuts = true;
+    bool compact_bc_pairwise_transfer_compatibility = false;
+    bool compact_bc_receiver_source_cover_cuts = false;
+    std::string compact_bc_receiver_source_cover_mode = "off";
+    bool compact_bc_direct_gini_rows_explicit = false;
+    bool compact_bc_tight_mccormick_explicit = false;
+    bool compact_bc_inventory_conservation_explicit = false;
+    bool compact_bc_movement_reachability_domains_explicit = false;
+    bool compact_bc_visit_inventory_linking_explicit = false;
+    bool compact_bc_objective_estimator_cutoff_explicit = false;
+    bool compact_bc_penalty_lb_closure_explicit = false;
+    bool compact_bc_support_duration_cuts_explicit = false;
+    bool compact_bc_pairwise_transfer_compatibility_explicit = false;
+    bool compact_bc_receiver_source_cover_explicit = false;
+    bool gini_spread_cuts_explicit = false;
+    bool required_movement_cuts_explicit = false;
+    bool global_handling_capacity_cuts_explicit = false;
+    bool low_gini_ratio_band_tightening_explicit = false;
+    int compact_bc_support_cut_max_size = 3;
+    int compact_bc_support_cut_max_subsets = 50000;
+    std::string mip_solver = "cplex";
+    int cplex_threads = 0;
+    int mip_threads = 0;
+    int compact_bc_threads = 0;
+    double compact_bc_time_limit = 0.0;
+    int compact_bc_root_cut_rounds = 0;
+    bool compact_bc_root_cut_rounds_explicit = false;
+    double compact_bc_root_cut_time_limit = 0.0;
+    std::string compact_bc_dynamic_cut_families;
+    std::string compact_bc_root_probe = "lp";
+    double compact_bc_dynamic_cut_violation_tol = 1e-6;
+    std::string compact_bc_domain_propagation_mode = "static";
+    int compact_bc_domain_propagation_rounds = 1;
+    std::string compact_bc_low_gini_strengthening = "off";
+    std::string compact_bc_denominator_bound_mode = "basic";
+    std::string compact_bc_objective_estimator_mode = "single";
+    std::string compact_bc_s_range_refinement = "off";
+    int compact_bc_s_range_buckets = 1;
+    bool compact_bc_s_range_adaptive = false;
+    int compact_bc_s_range_bucket_id = -1;
+    double compact_bc_s_range_bucket_L = -1.0;
+    double compact_bc_s_range_bucket_U = -1.0;
+    bool compact_bc_variable_s_centering = false;
+    std::string compact_bc_rmin_rmax_propagation = "off";
+    std::string compact_bc_sp_product_estimator = "off";
+    std::string compact_bc_sp_product_bounds = "basic";
+    std::string compact_bc_low_gini_precheck = "off";
+    bool compact_bc_low_gini_strengthening_explicit = false;
+    bool compact_bc_denominator_bound_mode_explicit = false;
+    bool compact_bc_objective_estimator_mode_explicit = false;
+    std::string tailored_bc_s_bucket_ledger = "off";
+    int tailored_bc_s_bucket_count = 1;
+    std::string tailored_bc_s_bucket_policy = "uniform";
+    double tailored_bc_s_bucket_time_budget = 0.0;
+    bool tailored_bc_s_bucket_merge_audit = false;
+    int tailored_bc_s_bucket_max_depth = 0;
+    double tailored_bc_s_bucket_min_width = 0.0;
+    int tailored_bc_s_bucket_refine_top_k = 1;
+    std::string tailored_bc_s_bucket_refine_rule = "worst-gap";
+    bool tailored_bc_enabled = false;
+    bool tailored_bc_enabled_explicit = false;
+    std::string tailored_bc_mode = "off";
+    bool tailored_bc_mode_explicit = false;
+    std::string tailored_bc_branching_priority = "off";
+    bool tailored_bc_branching_priority_explicit = false;
+    std::string tailored_bc_gini_branching = "off";
+    bool tailored_bc_gini_branching_explicit = false;
+    double tailored_bc_gini_branch_min_width = 1e-4;
+    double tailored_bc_gini_branch_score_threshold = 0.0;
+    bool tailored_bc_gini_subset_envelope = false;
+    bool tailored_bc_gini_subset_envelope_explicit = false;
+    int tailored_bc_gini_subset_max_size = 3;
+    int tailored_bc_gini_subset_max_cuts = 50000;
+    std::string tailored_bc_callback_separation_pacing = "off";
+    int tailored_bc_callback_separation_min_calls = 25;
+    std::string tailored_bc_callback_cut_profile = "full";
+    bool tailored_bc_callback_cut_profile_explicit = false;
+    bool tailored_bc_low_gini_l1_centering = false;
+    bool tailored_bc_low_gini_l1_centering_explicit = false;
+    bool tailored_bc_local_centering = false;
+    bool tailored_bc_local_centering_explicit = false;
+    bool tailored_bc_subset_cross_h_centering = false;
+    int tailored_bc_subset_cross_h_max_size = 3;
+    int tailored_bc_subset_cross_h_max_cuts = 50000;
+    std::string tailored_bc_subset_cross_h_separation_profile = "deviation";
+    bool tailored_bc_local_q_centering = false;
+    bool tailored_bc_subset_inventory_imbalance = false;
+    bool tailored_bc_subset_inventory_imbalance_explicit = false;
+    int tailored_bc_subset_inventory_max_size = 3;
+    bool tailored_bc_transfer_cutset = false;
+    bool tailored_bc_transfer_cutset_explicit = false;
+    bool tailored_bc_compatible_source_transfer_cuts = false;
+    bool tailored_bc_required_external_source_cuts = false;
+    int tailored_bc_transfer_max_receiver_size = 2;
+    bool tailored_bc_bucket_ratio_domain_tightening = false;
+    bool tailored_bc_bucket_subset_ratio_domain = false;
+    int tailored_bc_bucket_subset_ratio_max_size = 2;
+    bool tailored_bc_bucket_integer_inventory_domain = false;
+    std::string tailored_bc_bucket_integer_inventory_domain_mode = "static";
+    bool tailored_bc_bucket_required_movement = false;
+    bool tailored_bc_bucket_required_visit = false;
+    int tailored_bc_bucket_required_movement_max_size = 1;
+    std::string tailored_bc_support_duration_cover_mode = "support_cover_lifted";
+    std::string tailored_bc_benders_inventory_cuts = "off";
+    bool tailored_bc_gs_product_coupling = false;
+    std::string tailored_bc_gs_product_coupling_mode = "static";
+    std::string tailored_bc_gs_product_lower_row = "off";
+    bool tailored_bc_disaggregated_sp_estimator = false;
+    std::string tailored_bc_disaggregated_sp_mode = "static";
+    bool tailored_bc_disaggregated_sp_replace_aggregate = false;
+    bool tailored_bc_vector_support_cover = false;
+    int tailored_bc_vector_support_cover_max_size = 3;
+    int tailored_bc_vector_support_cover_max_cuts = 50;
+    bool tailored_bc_vector_route_cutset = false;
+    int tailored_bc_vector_route_cutset_max_size = 3;
+    int tailored_bc_vector_route_cutset_max_cuts = 50;
+    double tailored_bc_vector_cut_min_violation = 1e-6;
+    std::string tailored_bc_vector_cut_candidate_source = "root";
+    std::string tailored_bc_structural_profile = "manual";
+    std::string compact_bc_model_size_policy = "full";
+    long long compact_bc_max_rows = 0;
+    long long compact_bc_max_cols = 0;
+    long long compact_bc_max_nonzeros = 0;
+    double compact_bc_max_memory_mb = 0.0;
+    std::string compact_bc_expensive_static_families = "auto";
+    bool compact_bc_use_dynamic_instead_of_static = false;
+    std::string compact_bc_cut_profile = "balanced";
+    std::string relaxation_portfolio_mode = "fixed";
+    double relaxation_portfolio_probe_seconds = 1.0;
+    int relaxation_portfolio_max_variants = 3;
+    double relaxation_portfolio_min_improvement = 1e-7;
+    bool relaxation_portfolio_keep_best_bound = true;
+    std::string relaxation_exhaustive_variants;
+    bool relaxation_exhaustive_stop_on_fathom = true;
+    std::string relaxation_certificate_mode = "bound";
+    double cutoff_feasibility_epsilon = 1e-8;
+    double cutoff_feasibility_time_limit = 0.0;
+    std::string interval_exact_cutoff_oracle = "off";
+    std::string interval_exact_oracle_mode = "cutoff-feasibility";
+    double interval_exact_cutoff_gamma_L = -1.0;
+    double interval_exact_cutoff_gamma_U = -1.0;
+    double interval_exact_cutoff_UB = -1.0;
+    double interval_exact_cutoff_epsilon = 1e-8;
+    double interval_exact_cutoff_time_limit = 0.0;
+    double interval_oracle_objective_bound_time_limit = 0.0;
+    double interval_oracle_cutoff_feasibility_time_limit = 0.0;
+    bool interval_oracle_merge_timeout_bound = false;
+    std::string interval_oracle_profile = "balanced";
+    std::string interval_exact_cutoff_export_lp;
+    std::string interval_exact_cutoff_result;
+    std::string interval_closure_mode = "off";
+    std::string interval_closure_input;
+    std::string interval_closure_target_instance;
+    std::string interval_closure_target_ids;
+    std::string interval_closure_range;
+    std::string interval_closure_output;
+    std::string interval_closure_merge_ledger;
+    double interval_closure_time_limit = 0.0;
+    std::string interval_closure_variant_mode = "best-fixed";
+    bool paper_run_sealed = false;
+    std::string paper_run_sealed_rejection_reason;
+    bool auto_interval_oracle = false;
+    double auto_interval_oracle_time_limit = 0.0;
+    double auto_interval_oracle_total_budget = 0.0;
+    double auto_interval_oracle_child_time_limit = 0.0;
+    int auto_interval_oracle_max_leaves = 0;
+    std::string auto_interval_oracle_order = "all";
+    std::string auto_interval_oracle_leaf_budget_policy = "per-leaf";
+    std::string auto_interval_oracle_leaf_budget_policy_requested = "omitted";
+    std::string auto_interval_oracle_leaf_budget_policy_parsed = "per-leaf";
+    bool auto_interval_oracle_leaf_budget_policy_explicit = false;
+    bool auto_interval_oracle_continue_after_timeout = true;
+    bool auto_interval_oracle_split_on_timeout = false;
+    bool auto_interval_oracle_recursive_split = false;
+    int auto_interval_oracle_child_split_count = 2;
+    int auto_interval_oracle_max_depth = 0;
+    double auto_interval_oracle_min_width = 0.0;
+    int auto_interval_oracle_max_children_total = 0;
+    bool auto_interval_oracle_merge = true;
+    bool auto_interval_oracle_restart_on_improved_ub = true;
+    bool auto_interval_bpc_fallback = false;
+    double auto_interval_bpc_time_limit = 0.0;
+    int auto_interval_bpc_max_leaves = 0;
+    int auto_interval_bpc_max_nodes = 0;
+    double auto_interval_bpc_pricing_time_per_call = 0.0;
+    bool interval_oracle_low_gini_tightening = false;
+    bool interval_oracle_objective_cutoff_row = true;
+    bool interval_oracle_penalty_domain_tightening = false;
+    bool interval_oracle_service_operation_tightening = true;
+    bool interval_oracle_symmetry_breaking = true;
+    std::string frontier_scheduling_mode = "default";
+    bool frontier_scheduling_mode_explicit = false;
+    bool controlling_leaf_checkpoint_merge = true;
+    double process_wall_time_limit = 0.0;
+    double process_elapsed_seconds_before_auto_oracle = 0.0;
+    std::chrono::steady_clock::time_point process_start_time{};
+    bool process_start_time_valid = false;
+    double process_shutdown_margin_seconds = 5.0;
+    std::string process_phase_ledger_path;
+    std::string native_evidence_dir; // default-off, read-only process-kill journal
+    bool frontier_critical_band_auto = false;
+    int frontier_critical_band_max_depth = 0;
+    double frontier_critical_band_min_width = 1e-4;
+    std::string frontier_bpc_fallback_mode = "off";
+    double frontier_bpc_fallback_reserve_fraction = 0.0;
+    double frontier_bpc_fallback_min_seconds = 0.0;
+    int frontier_bpc_fallback_max_intervals = 0;
+    bool support_duration_pruning = true;
+    bool pricing_completion_lb_pruning = false;
+    std::string pricing_dominance_mode = "safe";
+    bool pricing_dominance_mode_explicit = false;
+    std::string pricing_completion_bound = "basic";
+    bool pricing_completion_bound_explicit = false;
+    bool pricing_completion_bound_audit = false;
+    std::string pricing_decomposition = "auto";
+    bool pricing_decomposition_explicit = false;
+    bool pricing_load_dp_cache = false;
+    bool pricing_load_dp_cache_explicit = false;
+    std::string pricing_route_skeleton_mode = "standard";
+    bool pricing_route_skeleton_mode_explicit = false;
+    bool pricing_route_skeleton_cache = false;
+    bool pricing_route_skeleton_cache_explicit = false;
+    bool pricing_load_dp_dominance = true;
+    bool pricing_load_dp_dominance_explicit = false;
+    bool pricing_operation_dp_dominance = true;
+    bool pricing_operation_dp_dominance_explicit = false;
+    std::string bpc_seed_columns = "incumbent";
+    bool bpc_seed_columns_explicit = false;
+    int bpc_seed_column_max = 1000;
+    bool bpc_seed_column_max_explicit = false;
+    std::string bpc_cut_family = "station-operation,subset-row,inventory-domain,duration-cover,transfer-compat,gini-interval";
+    bool bpc_cut_family_explicit = false;
+    int bpc_cut_separation_rounds = 1;
+    bool bpc_cut_separation_rounds_explicit = false;
+    double core_relaxation_budget_fraction = 0.0;
+    double core_bpc_reserve_fraction = 0.0;
+    double core_bpc_min_seconds = 0.0;
+    int core_bpc_max_leaves = 0;
+    std::string core_bpc_leaf_selection = "min-lb";
+    bool route_mask_support_duration_pruning = true;
+    bool route_mask_operation_budget_cuts = true;
+    bool support_feasibility_oracle = false;
+    int support_duration_max_subset_size = 5;
+    std::string hga_incumbent_path;
+    std::string hga_incumbent_format = "auto";
+    std::string external_incumbent_path;
+    std::string external_incumbent_format = "auto";
+    std::string export_incumbent_path;
+    std::string primal_heuristic = "none";
+    bool primal_heuristic_explicit = false;
+    double primal_heuristic_seconds = 10.0;
+    unsigned primal_heuristic_seed = 20260626u;
+    int primal_heuristic_runs = 12;
+    // Round 88 A1 research ablation: only the verified joint constructive
+    // order enters the unchanged finite decoded descent. Default is ENS-C.
+    bool round88_constructive_only_descent = false;
+    // Round89 native B1 user-cut prototype, default-off and R83-only.
+    bool round89_native_ot_b1 = false;
+    std::string round101_fleet_cuts = "off";
+    std::string round101_fleet_range = "tree";
+    std::string round102_service_cuts = "off"; // off|shell|shadow|submit, root only
+    std::string round103_resource_hull = "off"; // off|shadow|submit, one pre-MIP pass
+    bool round104_observe_native = false; // read-only full original-column samples
+    std::string round104_objective_resources = "off"; // off|shadow|active, self-paid pool
+    // Round90 ENS-C ablation: use a current optimal parent LP G for the
+    // first-class K1 split point when strictly interior; otherwise midpoint.
+    bool round90_lp_g_split = false;
+    // Isolated Round92 ENS-C static handling/activation row, default off.
+    bool round92_handling_activation = false;
+    // R96 isolated finite route-order closure at the single R83 startup hook.
+    bool round96_route_order = false;
+    // Default-off R97: observe is OFF with event telemetry; shadow never
+    // changes official bounds. All modes retain the original ENS-C startup.
+    std::string round97_native_closure = "off"; // off|observe|shadow|feedback
+    // Both v2 operators process only non-start-matching physical states.
+    std::string round97_native_operator = "r83"; // r83|r96
+    std::string primal_heuristic_stop = "legacy-time";
+    int primal_heuristic_no_improve_generations = 2000;
+    std::string primal_heuristic_generation_log;
+    std::string primal_heuristic_phase_label = "primary_hga";
+    // Round 34 startup-ablation label.  This flag is consumed only by the
+    // frozen C6 configuration gate; it does not participate in any exact
+    // scheduling, bound, split, row, or closure decision.
+    // Round 59 attribution only; stable presets leave both disabled.
+    bool round59_simple_start = false;
+    bool round59_single_mip = false;
+    // Round 60 research controls. Every default preserves Round 59 and the
+    // stable paper preset byte-for-byte.
+    bool round60_hga_publish_verified = false;
+    std::string round60_hga_candidate_log;
+    std::string round60_candidate_mode = "off"; // off|dry|inject
+    std::string round61_candidate_mode = "off"; // off|archive|submit
+    int round60_candidate_maximum_evaluations = 512;
+    int round60_candidate_maximum_stations = 16;
+    std::string round60_candidate_log_dir;
+    std::string round34_c6_startup_variant = "hga-full";
+    // Round 36 causal-study controls.  "off" preserves the validated C6
+    // path.  Experimental arms are uniform run-level choices and are never
+    // inferred from instance size, scenario, M, or historical performance.
+    std::string round36_c6_causal_arm = "off";
+    std::string round36_c6_split_normalization = "proof";
+    // Round 37 exploratory geometry policy.  "off" is the frozen C6 default.
+    // The pilot arm is a uniform run-level choice; it is never inferred from
+    // an instance label, size, scenario, elapsed time, or solver effort.
+    std::string round37_c6_geometry_policy = "off";
+    // Round 40 coarse-start research. "off" is the validated K=4 default;
+    // the other values are explicit, uniform, default-off experiment arms.
+    std::string round40_c6_coarse_start = "off";
+    // Round 46 pure-C6 threshold screen. The value is shared by the original
+    // K4 cover and the Round 40 k1-adaptive initialization. Later-round
+    // historical old-C6 reconstructions remain frozen at 0.01.
+    double c6_normalized_split_threshold = 0.01;
+    bool c6_normalized_split_threshold_explicit = false;
+    // Round 47 lightweight residual-mass gate. "off" preserves every
+    // historical C6 path. Both research modes use the same globally frozen
+    // tau and only the already-computed midpoint child LP outcomes.
+    std::string round47_c6_adaptive_mass = "off";
+    double round47_c6_adaptive_mass_tau = 0.07915;
+    bool round47_c6_adaptive_mass_tau_explicit = false;
+    // Round 48 K1-only formulation-aware adaptive mass.  This explicit,
+    // default-off mode consumes the unchanged Round 47 K1-AM evidence and
+    // already-written canonical model bounds; it launches no score solve.
+    std::string round48_k1_amf = "off"; // off|k1-amf
+    // Round 49 K1-only LP primal-dual reduced-cost rescue.  The explicit
+    // diagnostic arm consumes attributes from the unchanged K1-AM parent and
+    // midpoint-child LP solves and never launches a scoring solve.
+    std::string round49_k1_am_rc = "off"; // off|d-rcd
+    // Restricted matched-action diagnostics.  These are never candidate
+    // settings and never issue an original-problem certificate.
+    std::string round48_counterfactual_mode = "off"; // off|retain|midpoint
+    std::string round48_counterfactual_interval;
+    // Round 40 incumbent-stable geometry research. "off" preserves the
+    // validated incumbent-rescaled K=4 cover. The experimental policy uses
+    // only a deterministic dyadic hierarchy rooted at the mathematical Gini
+    // maximum and the verified incumbent as an active-prefix cutoff.
+    std::string round40_c6_ub_geometry = "off";
+    // Round 41 static single-tree segmented formulations. Every non-off arm
+    // is explicit, uniformly defined, and constructed before optimize.
+    std::string round41_static_segmented_gini = "off";
+    // Root-LP diagnostics are separate from the one-native-MIP proof run.
+    std::string round41_static_segmented_solve = "mip";
+    // Direct fixed-interval LP references for K1 and the two K2 children.
+    std::string round41_root_reference_interval = "off";
+    // Round 42 explicit/default-off static block experiments.  These select
+    // only deterministic geometry/formulation variants; no instance or
+    // runtime observation participates in the choice.
+    std::string round42_static_architecture = "off";
+    std::string round42_static_solve = "mip";
+    // C6 terminal-stage sibling coalescing.  "off" preserves the validated
+    // C6 lifecycle exactly; non-off modes are structural research arms.
+    std::string round42_terminal_sibling_coalescing = "off";
+    // Round 43 unified K0/d/rho envelope-refinement research.  The entire
+    // family is default-off; K0 affects only the initial equal partition.
+    std::string round43_envelope_refinement = "off"; // off|atlas|algorithm
+    int round43_initial_k0 = 4;
+    int round43_lookahead_depth = 1;
+    double round43_rho = 0.01;
+    std::string round43_score = "d"; // d|max-d-c|old|no-adaptive
+    std::string round43_envelope_mode = "single"; // none|constant|single|iterated
+    std::string round43_width_measure = "g-mccormick-unit";
+    std::string round43_lifted_cuts = "off";
+    std::string round43_frontier_consolidation = "off";
+    // Round 44 C6-compatible K4 affine-envelope tail repair. The entire
+    // family is explicit and default-off.
+    std::string round44_envelope_tail_repair = "off"; // off|atlas|algorithm
+    int round44_initial_k0 = 4;
+    std::string round44_lookahead_policy = "frontier-d2";
+    std::string round44_envelope_injection = "all";
+    std::string round44_envelope_scope = "parent";
+    std::string round44_refinement_family = "c6-overlay";
+    double round44_rho_f = 0.5;
+    double round44_rho_m = 0.0;
+    double round44_rho_h = 0.0;
+    std::string round44_rank1_cuts = "off";
+    std::string round44_mip_starts = "off";
+    std::string round44_frontier_consolidation = "off";
+    // Round 45 unified adaptive timing and direct parametric-LP partition.
+    // Every non-off arm is explicit. K0 changes only the initial equal cover;
+    // K1 and K4 share the same timing and point operators.
+    std::string round45_adaptive_parametric_partition = "off"; // off|atlas|algorithm
+    int round45_initial_k0 = 4;
+    std::string round45_timing_rule = "gamma-positive";
+    double round45_rho_gamma = 0.0;
+    std::string round45_point_rule = "midpoint"; // midpoint|pmm|fpmm
+    double round45_minimum_child_width = 1e-4;
+    std::string round45_counterfactual_mode = "off"; // off|retain|midpoint|pmm|fpmm
+    bool exact_phase_local_redecode_repair = false;
+    bool exact_phase_local_redecode_repair_explicit = false;
+    double exact_phase_local_redecode_seconds = 10.0;
+    std::string heuristic_candidates_csv;
+    std::string large_instance_mode = "auto";
+    std::string pricing_engine = "auto";
+    std::string large_lb_mode = "auto";
+    std::string column_tracks = "auto";
+    bool relaxed_columns_in_rmp = false;
+    int relaxed_columns_max_per_pricing = 8;
+    std::string rmp_column_space = "auto";
+    bool allow_non_elementary_relaxed_columns = true;
+    bool relaxed_projection_strict = true;
+    bool ng_relaxed_closure = false;
+    double ng_relaxed_closure_time = 30.0;
+    long long ng_relaxed_max_labels = 0;
+    std::string ng_relaxed_pricing_checkpoint;
+    std::string ng_relaxed_pricing_resume;
+    bool relaxed_rmp_cg = false;
+    int relaxed_rmp_cg_max_iterations = 20;
+    double relaxed_rmp_cg_time = 30.0;
+    int relaxed_rmp_cg_columns_per_iteration = 8;
+    bool frontier_relaxed_rmp_cg = false;
+    double frontier_relaxed_rmp_cg_time_per_interval = 30.0;
+    int frontier_relaxed_rmp_cg_max_intervals = 0;
+    bool large_relaxed_rmp_cg = false;
+    int large_relaxed_rmp_column_budget = 256;
+    double large_relaxed_rmp_time = 300.0;
+    bool dssr_close_relaxed_pricing = false;
+    double dssr_relaxed_closure_time = 30.0;
+    long long dssr_relaxed_closure_max_labels = 0;
+    std::string dssr_relaxed_closure_checkpoint;
+    bool large_relaxed_rmp = false;
+    int ng_size = 12;
+    std::string ng_neighborhood_mode = "nearest";
+    int dssr_max_rounds = 4;
+    int dssr_expand_per_round = 4;
+    double dssr_time_limit = 30.0;
+    bool dssr_final_exact = true;
+    double cg_dual_box_radius = 1.0;
+    int cg_stabilization_max_nonimprove = 3;
+    std::string progress_log_path;
+    std::string ub_event_log_path;
+    double progress_interval_seconds = 0.0;
+    double compact_bc_progress_interval = 0.0;
+    bool compact_bc_diagnostic_force_leaf_solve = false;
+    std::string frontier_focus_interval_id = "auto";
+    std::string frontier_focus_range;
+    std::string frontier_focus_from_result;
+    std::string frontier_focus_leaf_id = "auto";
+    bool frontier_focus_only = false;
+    bool frontier_focus_use_existing_incumbent = true;
+    double frontier_focus_time_limit = -1.0;
+    double frontier_focus_relax_seconds = -1.0;
+    int frontier_focus_tree_nodes = -1;
+    std::vector<std::string> frontier_import_interval_bound_paths;
+    bool branch_inventory = true;
+    double branch_inventory_priority = 1.0;
+    bool branch_operation_mode = true;
+    std::string branch_selection = "auto";
+    int strong_branching_candidates = 3;
+    double strong_branching_time = 0.0;
+    bool reliability_branching = false;
+    std::string frontier_export_state_path;
+    std::string frontier_resume_state_path;
+    std::string frontier_resume_interval_id = "auto";
+    std::string frontier_resume_mode = "interval-only";
+    std::string frontier_closure_mode = "auto";
+    int closure_max_cg_iterations = 24;
+    double closure_pricing_time_per_call = 0.0;
+    int closure_returned_columns = 4;
+    bool closure_final_exact_pricing = true;
+    std::string cg_dual_stabilization = "none";
+    double cg_dual_smoothing_alpha = 0.7;
+    int cg_stabilization_switch_to_true_after = 8;
+    bool frontier_iterative_closure = false;
+    int frontier_iterative_max_rounds = 2;
+    double frontier_iterative_round_time = 60.0;
+    double frontier_iterative_target_gap = 0.0;
+    bool frontier_iterative_use_resume = true;
+    std::string frontier_iterative_export_dir;
+    bool frontier_export_open_nodes = true;
+    bool frontier_resume_open_nodes = true;
+    bool pricing_final_verifier = false;
+    double pricing_verifier_time = 30.0;
+    std::string pricing_verifier_checkpoint;
+    std::string pricing_verifier_resume;
+    std::string pricing_verifier_mode = "auto";
+    std::string algorithm_preset = "custom";
+    bool incumbent_archive_auto = false;
+    bool incumbent_archive_auto_explicit = false;
+    std::string incumbent_archive_dir = "results";
+    bool compact_fallback_enabled = false;
+    int inventory_probe_max_v = 7;
+    double inventory_probe_seconds = -1.0;
+};
+
+struct RunConfigSnapshot {
+    std::string algorithm_preset = "custom";
+    std::string preset_certificate_scope = "custom";
+    std::string preset_experimental_features_enabled;
+    std::string preset_disabled_features;
+    std::string preset_reason;
+    std::string column_tracks = "elementary-only";
+    std::string rmp_column_space = "elementary";
+    bool relaxed_columns_in_rmp = false;
+    std::string pricing_engine = "exact-label";
+    std::string final_pricing_engine = "exact-label";
+    std::string large_instance_mode = "off";
+    std::string station_set_backend = "uint64";
+    bool route_mask_all_subset_enumeration_enabled = true;
+    bool route_mask_all_subset_enumeration_certifying = true;
+    bool incumbent_archive_auto = false;
+    std::string primal_heuristic = "none";
+    bool compact_fallback_enabled = false;
+    bool relaxed_rmp_enabled = false;
+    bool plain_baseline = false;
+    bool cplex_seed = false;
+    bool column_dominance_enabled = true;
+    bool movement_domain_enabled = true;
+    bool projection_bound_enabled = true;
+    bool penalty_domain_enabled = true;
+    bool vehicle_indexed_relaxation_enabled = true;
+    bool vehicle_indexed_transfer_flow_enabled = true;
+    bool operation_budget_cuts_enabled = true;
+    bool branching_enabled = true;
+    bool two_track_enabled = false;
+    std::string instance_scope = "unknown";
+    std::string instance_hash;
+    std::string instance_source_path;
+};
+
+} // namespace ebrp

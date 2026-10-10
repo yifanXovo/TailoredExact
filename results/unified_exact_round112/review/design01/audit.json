@@ -1,0 +1,27 @@
+{
+  "schema": "round112_independent_design_v1",
+  "decision": "HOLD_REQUIRED_STARTUP_WRITE_GUARD",
+  "performance_admission_signed": false,
+  "source_snapshot_SHA256": "4ab88ac6b3b417b249722af19da3563c08266fa6a10b5bc1dd2b9db06c5d93ae",
+  "review_SHA256": "da90401a0c48b9241c335ae13af603b5b50689df396a6fb1daa0b4694c93f784",
+  "Optimize_calls": 0,
+  "native_process_starts": 0,
+  "compiler_starts": 0,
+  "production_source_modified_by_reviewer": false,
+  "resolved_findings": [
+    "remove original ENS startup seed override to Gurobi Seed",
+    "retain rejected paid startup only after complete revalidation succeeds"
+  ],
+  "open_findings": [
+    "exclusive checked write/flush/close for mandatory startup JSON before backend"
+  ],
+  "unproved_actual_paths": [
+    "fresh five-role original-P/P-S numeric model equivalence",
+    "H100 four actual Seed0 CLI complete clocks and same-H traces/fleets",
+    "finite full-column mapping/API failure qualification",
+    "positive5/24 actual P/P-S certificates",
+    "zero-objective actual P-S zero Optimize",
+    "final compiler/PE/DLL/performance-helper/input/full20 argv freeze"
+  ],
+  "manual_review_seconds": "unknown"
+}
