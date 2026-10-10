@@ -1,0 +1,328 @@
+{
+  "base_HEAD": "8977da23a0be50da0ab2fceb69ad3ee04e040855",
+  "local_HEAD": "8977da23a0be50da0ab2fceb69ad3ee04e040855",
+  "branch": "codex/round110-entry-repair-frozen-panel-confirmation",
+  "PR171": {
+    "baseRefName": "codex/round108-frozen-mb-validation",
+    "headRefName": "codex/round109-frozen-mb-geographic-evaluation",
+    "headRefOid": "8977da23a0be50da0ab2fceb69ad3ee04e040855",
+    "isDraft": true,
+    "state": "OPEN",
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/171"
+  },
+  "original_user_file_SHA": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+  },
+  "AGENTS_found": false,
+  "active_native_processes_before_start": 0,
+  "existing_round110_native_progress": false,
+  "data": [
+    {
+      "path": "reference/round109_geographic/G20-C1.txt",
+      "SHA": "27b5e90ef70a1bf574bcb860ac33a0365920d8f832cad809ca2a6621b93cad09",
+      "bytes": 1287,
+      "original_SHA": "27b5e90ef70a1bf574bcb860ac33a0365920d8f832cad809ca2a6621b93cad09"
+    },
+    {
+      "path": "reference/round109_geographic/G20-C1_selection.json",
+      "SHA": "f463643641804309dc20c7af609eab3ec2267240714b53c0ad2c47370c80bca7",
+      "bytes": 1762,
+      "original_SHA": "f463643641804309dc20c7af609eab3ec2267240714b53c0ad2c47370c80bca7"
+    },
+    {
+      "path": "reference/round109_geographic/G20-C1_landscape.json",
+      "SHA": "9bee414622981a4ccca837a6054254619cafa4367ff4f186b14686438db2e6f3",
+      "bytes": 11486,
+      "original_SHA": "9bee414622981a4ccca837a6054254619cafa4367ff4f186b14686438db2e6f3"
+    },
+    {
+      "path": "reference/round109_geographic/G20-C1_parsed.json",
+      "SHA": "06db4315b29442e43dbc3349149b848136cbc111a23e89b07c03fd02a016ec5f",
+      "bytes": 13343,
+      "original_SHA": "06db4315b29442e43dbc3349149b848136cbc111a23e89b07c03fd02a016ec5f"
+    },
+    {
+      "path": "reference/round109_geographic/G20-C2.txt",
+      "SHA": "180c30ab2e70a9c6afdc9c34744e50e86d09a234ceb55fdc2f52eb391e82aa1e",
+      "bytes": 1288,
+      "original_SHA": "180c30ab2e70a9c6afdc9c34744e50e86d09a234ceb55fdc2f52eb391e82aa1e"
+    },
+    {
+      "path": "reference/round109_geographic/G20-C2_selection.json",
+      "SHA": "c49ee021a56f7588877987c24dc9794ce49ac761ece0ccafa65427f2601f3875",
+      "bytes": 1733,
+      "original_SHA": "c49ee021a56f7588877987c24dc9794ce49ac761ece0ccafa65427f2601f3875"
+    },
+    {
+      "path": "reference/round109_geographic/G20-C2_landscape.json",
+      "SHA": "a9f164e0bdba7ab53c290e7706897f8b2109393d855e1b0482aa5ce9758d9e18",
+      "bytes": 11432,
+      "original_SHA": "a9f164e0bdba7ab53c290e7706897f8b2109393d855e1b0482aa5ce9758d9e18"
+    },
+    {
+      "path": "reference/round109_geographic/G20-C2_parsed.json",
+      "SHA": "1d2e7a04125d3e8be243172a226ead29d0632ceb13365ea48cc06c3bf6e5b8ed",
+      "bytes": 13286,
+      "original_SHA": "1d2e7a04125d3e8be243172a226ead29d0632ceb13365ea48cc06c3bf6e5b8ed"
+    },
+    {
+      "path": "reference/round109_geographic/G20-R1.txt",
+      "SHA": "8e65808b3ccdb07f099a42a8c075cf28d0858d25b228dfba1fc19ceeea0526ff",
+      "bytes": 1295,
+      "original_SHA": "8e65808b3ccdb07f099a42a8c075cf28d0858d25b228dfba1fc19ceeea0526ff"
+    },
+    {
+      "path": "reference/round109_geographic/G20-R1_selection.json",
+      "SHA": "c17512bde945df5dd7c6b59a2597a9a0d1c01ca56cbaa53147103a7398e2914e",
+      "bytes": 1806,
+      "original_SHA": "c17512bde945df5dd7c6b59a2597a9a0d1c01ca56cbaa53147103a7398e2914e"
+    },
+    {
+      "path": "reference/round109_geographic/G20-R1_landscape.json",
+      "SHA": "c2489a2be3d61058686b5b1ac682904273da22aaafc9ddfc9b55ee2dc126bfd7",
+      "bytes": 11502,
+      "original_SHA": "c2489a2be3d61058686b5b1ac682904273da22aaafc9ddfc9b55ee2dc126bfd7"
+    },
+    {
+      "path": "reference/round109_geographic/G20-R1_parsed.json",
+      "SHA": "9802bf494519114d1c8667eb8c27012f9a7b7056e6ad57de6ca6c718991a3af6",
+      "bytes": 13349,
+      "original_SHA": "9802bf494519114d1c8667eb8c27012f9a7b7056e6ad57de6ca6c718991a3af6"
+    },
+    {
+      "path": "reference/round109_geographic/G20-R2.txt",
+      "SHA": "5848338342898969c94d4391f4bfcb83c3a57ee227b8d2fd3db185693e8c8716",
+      "bytes": 1287,
+      "original_SHA": "5848338342898969c94d4391f4bfcb83c3a57ee227b8d2fd3db185693e8c8716"
+    },
+    {
+      "path": "reference/round109_geographic/G20-R2_selection.json",
+      "SHA": "a25a9a350baf7f12a1b391afc97e572cc71fb700b74a1dc6bd73aef449c405c8",
+      "bytes": 1799,
+      "original_SHA": "a25a9a350baf7f12a1b391afc97e572cc71fb700b74a1dc6bd73aef449c405c8"
+    },
+    {
+      "path": "reference/round109_geographic/G20-R2_landscape.json",
+      "SHA": "0f7335a519718104e8d0643291474108d977a44aa8c8009d2b3ec683ed639d6d",
+      "bytes": 11540,
+      "original_SHA": "0f7335a519718104e8d0643291474108d977a44aa8c8009d2b3ec683ed639d6d"
+    },
+    {
+      "path": "reference/round109_geographic/G20-R2_parsed.json",
+      "SHA": "f1faffcb0a72a375ab41d27912ca791e8ee47a856c61b314cf176a85ba3b29de",
+      "bytes": 13328,
+      "original_SHA": "f1faffcb0a72a375ab41d27912ca791e8ee47a856c61b314cf176a85ba3b29de"
+    },
+    {
+      "path": "reference/round109_geographic/G50-C1.txt",
+      "SHA": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+      "bytes": 2983,
+      "original_SHA": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5"
+    },
+    {
+      "path": "reference/round109_geographic/G50-C1_selection.json",
+      "SHA": "44e438720d5906067ecd502af7cb0fc0a898b92595d6ee4253c9e8f606de5adb",
+      "bytes": 1998,
+      "original_SHA": "44e438720d5906067ecd502af7cb0fc0a898b92595d6ee4253c9e8f606de5adb"
+    },
+    {
+      "path": "reference/round109_geographic/G50-C1_landscape.json",
+      "SHA": "11f4c5640de66ca18b3f0d639028cbf7cd635cbd5073b7ada374828e4a9a3ef4",
+      "bytes": 24413,
+      "original_SHA": "11f4c5640de66ca18b3f0d639028cbf7cd635cbd5073b7ada374828e4a9a3ef4"
+    },
+    {
+      "path": "reference/round109_geographic/G50-C1_parsed.json",
+      "SHA": "ba64c8dbf6440ac5755aa765aa4dc47e9e41d81048d5090608f4cd422b183779",
+      "bytes": 70679,
+      "original_SHA": "ba64c8dbf6440ac5755aa765aa4dc47e9e41d81048d5090608f4cd422b183779"
+    },
+    {
+      "path": "reference/round109_geographic/G50-C2.txt",
+      "SHA": "64d70f9b0a932594bb5cb81430e33fe40e207f60d34d5d594748c04ebdf4cdc3",
+      "bytes": 2997,
+      "original_SHA": "64d70f9b0a932594bb5cb81430e33fe40e207f60d34d5d594748c04ebdf4cdc3"
+    },
+    {
+      "path": "reference/round109_geographic/G50-C2_selection.json",
+      "SHA": "4f1b8f9d25dabca02742ac6a45d88125aaf8c60c1910c196e13f8cd95110ee56",
+      "bytes": 2033,
+      "original_SHA": "4f1b8f9d25dabca02742ac6a45d88125aaf8c60c1910c196e13f8cd95110ee56"
+    },
+    {
+      "path": "reference/round109_geographic/G50-C2_landscape.json",
+      "SHA": "17ec73499778b732efd50e53e9079a46e9ac7fe7e1e5d6865f169fadea867770",
+      "bytes": 24428,
+      "original_SHA": "17ec73499778b732efd50e53e9079a46e9ac7fe7e1e5d6865f169fadea867770"
+    },
+    {
+      "path": "reference/round109_geographic/G50-C2_parsed.json",
+      "SHA": "345f5bec29bb51b3686eb3d8639cea289cf8cedf94f3641150be4840956589d3",
+      "bytes": 70659,
+      "original_SHA": "345f5bec29bb51b3686eb3d8639cea289cf8cedf94f3641150be4840956589d3"
+    },
+    {
+      "path": "reference/round109_geographic/G50-R1.txt",
+      "SHA": "c7a5200b5a93095304ffc82f404e6a3e9548962d2cf5cd60ab34d64327b71f47",
+      "bytes": 2977,
+      "original_SHA": "c7a5200b5a93095304ffc82f404e6a3e9548962d2cf5cd60ab34d64327b71f47"
+    },
+    {
+      "path": "reference/round109_geographic/G50-R1_selection.json",
+      "SHA": "84ac3950b608d292bb3df0269611e57e51c820d267ac4fe097881c881d23764c",
+      "bytes": 2075,
+      "original_SHA": "84ac3950b608d292bb3df0269611e57e51c820d267ac4fe097881c881d23764c"
+    },
+    {
+      "path": "reference/round109_geographic/G50-R1_landscape.json",
+      "SHA": "f0b3c939212c95cc734e85fefe467e1aec003fd4c597d5da6ed666ba5e6ba963",
+      "bytes": 24642,
+      "original_SHA": "f0b3c939212c95cc734e85fefe467e1aec003fd4c597d5da6ed666ba5e6ba963"
+    },
+    {
+      "path": "reference/round109_geographic/G50-R1_parsed.json",
+      "SHA": "db0ab48571a015ac5ba869403b7f009d8c34f54d989ae685a141cfb02667bfd8",
+      "bytes": 71170,
+      "original_SHA": "db0ab48571a015ac5ba869403b7f009d8c34f54d989ae685a141cfb02667bfd8"
+    },
+    {
+      "path": "reference/round109_geographic/G50-R2.txt",
+      "SHA": "596886779e57c67b99d70385d59806b2e2d04619e2a07bf011e6d0fc5bdfc394",
+      "bytes": 2995,
+      "original_SHA": "596886779e57c67b99d70385d59806b2e2d04619e2a07bf011e6d0fc5bdfc394"
+    },
+    {
+      "path": "reference/round109_geographic/G50-R2_selection.json",
+      "SHA": "4b912a7ce3a632f46b2ca5439926b2f16f579e9c39d0dc2b1ebae39eb248089b",
+      "bytes": 2071,
+      "original_SHA": "4b912a7ce3a632f46b2ca5439926b2f16f579e9c39d0dc2b1ebae39eb248089b"
+    },
+    {
+      "path": "reference/round109_geographic/G50-R2_landscape.json",
+      "SHA": "411d61fac4f469e16936f6ed1fc0de5fdf807e7552b9fdbb5f37ee88b8e485b0",
+      "bytes": 24614,
+      "original_SHA": "411d61fac4f469e16936f6ed1fc0de5fdf807e7552b9fdbb5f37ee88b8e485b0"
+    },
+    {
+      "path": "reference/round109_geographic/G50-R2_parsed.json",
+      "SHA": "b24607ddeb2f591564fa71b7b9de8a33fd9b6a6921f7c53029ddf055a8ebd1a7",
+      "bytes": 71083,
+      "original_SHA": "b24607ddeb2f591564fa71b7b9de8a33fd9b6a6921f7c53029ddf055a8ebd1a7"
+    },
+    {
+      "path": "reference/round109_geographic/G100-C1.txt",
+      "SHA": "f70d9de06929576b62195f2df75c4394e9fd7b5eb8b2bfd20cc09a456101ef27",
+      "bytes": 5830,
+      "original_SHA": "f70d9de06929576b62195f2df75c4394e9fd7b5eb8b2bfd20cc09a456101ef27"
+    },
+    {
+      "path": "reference/round109_geographic/G100-C1_selection.json",
+      "SHA": "761cbd34eceaea397a2662b9cb39b3eb692cfd93c5ee9a4e1e23ef9cee8a0437",
+      "bytes": 2490,
+      "original_SHA": "761cbd34eceaea397a2662b9cb39b3eb692cfd93c5ee9a4e1e23ef9cee8a0437"
+    },
+    {
+      "path": "reference/round109_geographic/G100-C1_landscape.json",
+      "SHA": "a377c067a08046abcbccbda2e10f6444942c7e632c28baabf4bcdd17e3902779",
+      "bytes": 46252,
+      "original_SHA": "a377c067a08046abcbccbda2e10f6444942c7e632c28baabf4bcdd17e3902779"
+    },
+    {
+      "path": "reference/round109_geographic/G100-C1_parsed.json",
+      "SHA": "320d0d147c8e0df8745943de33c6c036a4f9d3530b1c170ff2ea8513c45d5325",
+      "bytes": 268920,
+      "original_SHA": "320d0d147c8e0df8745943de33c6c036a4f9d3530b1c170ff2ea8513c45d5325"
+    },
+    {
+      "path": "reference/round109_geographic/G100-C2.txt",
+      "SHA": "757ca48de0e7990a349a84c657a8164a2d56dff890741c8a98612960f3c7b454",
+      "bytes": 5822,
+      "original_SHA": "757ca48de0e7990a349a84c657a8164a2d56dff890741c8a98612960f3c7b454"
+    },
+    {
+      "path": "reference/round109_geographic/G100-C2_selection.json",
+      "SHA": "f9de08bcdd2c1c3fedae62565b152ff6eb028aea8926e1b7c63f56835c34988e",
+      "bytes": 2391,
+      "original_SHA": "f9de08bcdd2c1c3fedae62565b152ff6eb028aea8926e1b7c63f56835c34988e"
+    },
+    {
+      "path": "reference/round109_geographic/G100-C2_landscape.json",
+      "SHA": "6ebe62cbcfe5126a3222ffe87f563759e3ac43a4cbaa927dc0bf35699af5c3e2",
+      "bytes": 46258,
+      "original_SHA": "6ebe62cbcfe5126a3222ffe87f563759e3ac43a4cbaa927dc0bf35699af5c3e2"
+    },
+    {
+      "path": "reference/round109_geographic/G100-C2_parsed.json",
+      "SHA": "73779164d318b0ba1e40176a68debde5b2535ae0ae184535f2be5a0e38b3962b",
+      "bytes": 268798,
+      "original_SHA": "73779164d318b0ba1e40176a68debde5b2535ae0ae184535f2be5a0e38b3962b"
+    },
+    {
+      "path": "reference/round109_geographic/G100-R1.txt",
+      "SHA": "5187c21b92ee3ec98757d08fa5481bee266657c616d0479b406c1d989698b94f",
+      "bytes": 5818,
+      "original_SHA": "5187c21b92ee3ec98757d08fa5481bee266657c616d0479b406c1d989698b94f"
+    },
+    {
+      "path": "reference/round109_geographic/G100-R1_selection.json",
+      "SHA": "a9e6a6af093a3edd18e6134d932ec14bc3ebf7fb56b4bdeda4fb89f16fa67aeb",
+      "bytes": 2524,
+      "original_SHA": "a9e6a6af093a3edd18e6134d932ec14bc3ebf7fb56b4bdeda4fb89f16fa67aeb"
+    },
+    {
+      "path": "reference/round109_geographic/G100-R1_landscape.json",
+      "SHA": "633585e5d3032ddce3c0e72ab5f5f4662d0a1508de9ef7d51d914d5a02adb39e",
+      "bytes": 46832,
+      "original_SHA": "633585e5d3032ddce3c0e72ab5f5f4662d0a1508de9ef7d51d914d5a02adb39e"
+    },
+    {
+      "path": "reference/round109_geographic/G100-R1_parsed.json",
+      "SHA": "26ff74009f73e82fcf9980fe29cf4474c105ae89057462d9c8f062c57a4af99d",
+      "bytes": 269781,
+      "original_SHA": "26ff74009f73e82fcf9980fe29cf4474c105ae89057462d9c8f062c57a4af99d"
+    },
+    {
+      "path": "reference/round109_geographic/G100-R2.txt",
+      "SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "bytes": 5828,
+      "original_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f"
+    },
+    {
+      "path": "reference/round109_geographic/G100-R2_selection.json",
+      "SHA": "b9174bd10baad377a0e2b1a6ebe7006aaaad2de6f49bfa7515c6d307ec1cb18c",
+      "bytes": 2482,
+      "original_SHA": "b9174bd10baad377a0e2b1a6ebe7006aaaad2de6f49bfa7515c6d307ec1cb18c"
+    },
+    {
+      "path": "reference/round109_geographic/G100-R2_landscape.json",
+      "SHA": "ff8cfcb4d9b67f90dc2554267e86e97fa2e0cf9c10be2dd5bd0f9c8269a336c9",
+      "bytes": 46578,
+      "original_SHA": "ff8cfcb4d9b67f90dc2554267e86e97fa2e0cf9c10be2dd5bd0f9c8269a336c9"
+    },
+    {
+      "path": "reference/round109_geographic/G100-R2_parsed.json",
+      "SHA": "fa55a1de245dc0d8f855318e7f88a2431a0514d963a484398bb7a61879728503",
+      "bytes": 269753,
+      "original_SHA": "fa55a1de245dc0d8f855318e7f88a2431a0514d963a484398bb7a61879728503"
+    }
+  ],
+  "production_changes": {
+    "src/Parser.cpp": {
+      "old_SHA": "9402d2744b4b2a7a83c3152d90d6d6438ca9c3e417d1a57da14dd8101c3b2911",
+      "new_SHA": "acc0897e687dde82355f2153272e2fb1c68c1ec5507a549894109dd51b4b4ccc"
+    }
+  },
+  "inherited_original_PE_SHA": "4647ee9f146a010ae4bc48f191ec12d4b9113e167b8eeccf0e43a3764e0a8ee0",
+  "actual_original_PE_SHA": "4647ee9f146a010ae4bc48f191ec12d4b9113e167b8eeccf0e43a3764e0a8ee0",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "managed_worktree_failure": {
+    "operation_id": "da95c463-6860-406b-8baa-851f41b32ed7",
+    "reason": "C disk no space copying unrelated historical results; tool cleaned failed checkout",
+    "solver_starts": 0,
+    "exact_full_internal_command_and_engineering_duration": "unknown"
+  },
+  "sparse_worktree": "E:\\codes\\ExactEBRP-round110",
+  "unrelated_user_configuration_changed": false
+}
