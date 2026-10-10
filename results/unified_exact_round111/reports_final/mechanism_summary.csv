@@ -1,0 +1,9 @@
+campaign,id,arm,number,seed,panel_kind,initial_own_physical_U,actual_native_Optimize,LP_calls,partial_target_MIP_calls,child_bound_target_MIP_calls,next_leaf_target_MIP_calls,terminal_MIP_calls,other_solve_kinds,AM_action_counts,actual_tree_event_counts,maximum_open_relevant_leaves,multiple_open_relevant_leaves_observed,final_live_leaves,root_LP_lower_bounds,reported_integer_witnesses,no_assignment_route_oracle,lookahead_LP_is_committed_split,quantity_type_and_A_B_causal_contributions_reidentified
+qualification/cli01,H100,P-GRB,1,1,qualification,0.7873897825709573,1,0,0,0,0,1,{},{},{},0,False,,[],71,True,False,False
+qualification/cli01,H100,M-B,2,1,qualification,0.25452870897207136,5,3,1,1,0,1,{},"{""exact-close"":1,""native-target"":1}","{""child_lp_reuse"":1,""lp_complete"":1,""native_bound_target_reached"":1,""terminal_mip_complete"":1}",1,False,1,"[""0.089234901800339106""]",19,True,False,False
+campaign,G20-C2,P-GRB,1,1,seed,0.9533447777102387,1,0,0,0,0,1,{},{},{},0,False,,[],24,True,False,False
+campaign,G20-C2,M-B,2,1,seed,0.013075430267295598,4,3,0,0,0,1,{},"{""exact-close"":1}","{""lp_complete"":1,""terminal_mip_complete"":1}",1,False,1,"[""0""]",3,True,False,False
+campaign,G50-R1,M-B,3,1,seed,0.8922038076869183,8,6,1,1,0,1,{},"{""exact-close"":1,""native-target"":1}","{""lp_complete"":2,""native_bound_target_reached"":1}",1,False,1,"[""0.37524337047074552"",""0.37524337047076395""]",26,True,False,False
+campaign,G50-R1,P-GRB,4,1,seed,2.4990481642458104,1,0,0,0,0,1,{},{},{},0,False,,[],130,True,False,False
+campaign,G100-R2,P-GRB,5,1,seed,2.2018516835510535,1,0,0,0,0,1,{},{},{},0,False,,[],123,True,False,False
+campaign,G100-R2,M-B,6,1,seed,0.1584580742872277,4,3,0,0,0,1,{},"{""exact-close"":1}","{""lp_complete"":1}",1,False,1,"[""0""]",10,True,False,False

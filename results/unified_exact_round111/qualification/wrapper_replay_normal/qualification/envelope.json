@@ -1,0 +1,422 @@
+{
+  "passed": true,
+  "helper_SHA": "c114c6ea651dd27c192603b1c23de98bcf6b6a04fa1e2d69b5543ccaffbe818d",
+  "replay_plan_SHA": "9ead9d93e2e4b4c8d89f227149e71f357b2ebc7d64efaf8d221c946c010510f3",
+  "counterexamples_SHA": "1d0b4ded4f98b393b19418da9ff26de572267a790f3a0db3d7bd6abc4a7d5674",
+  "observations": [
+    {
+      "label": "new_arm37_replay01",
+      "receipt_SHA": "d90e4a9a7fa3f77347d1e3f62ba1a4787ceb6cb82fbc967d8bd8a906ea904505",
+      "kind": "new",
+      "number": 37,
+      "qualification_fixture": false,
+      "necessary_admission_identity_seconds": 0.08487190003506839,
+      "adapter_seconds": 0.14571020007133484,
+      "necessary_postexit_seconds": 0.14843399997334927,
+      "phases": {},
+      "phases_are_nested_do_not_sum": true,
+      "error": null,
+      "comparison": {
+        "exact_recursive_equal": true,
+        "excluded": [
+          "/offline_audit_seconds",
+          "/neutral_exchange/offline_seconds"
+        ],
+        "baseline_SHA": "9d75af8c93df5f8e6aff8a4adba9a45f0c306f8957037723885e215592428157",
+        "current_SHA": "d7e9ad23ecaa06c57e8ce66b4a80d81b4985883ad8a053c442f7db928495dc1c"
+      },
+      "output_metadata_cost_included": true,
+      "old_raw_read_only": true,
+      "Optimize": 0,
+      "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+      "optimized_phase_metrics": {
+        "content_identity_check_seconds": 0.00046630005817860365,
+        "model_read_parse_seconds": 0.041675199987366796,
+        "duplicate_row_Counter_seconds": 0.0007118999492377043,
+        "single_column_classification_seconds": 0.0010393999982625246,
+        "pure_model_cache_misses": 1.0,
+        "per_contract_type_and_input_check_seconds": 0.0013076000614091754,
+        "frozen_A_B_checks_seconds": 6.00004568696022e-07,
+        "per_call_scope_check_seconds": 9.00006853044033e-07,
+        "adapter_inclusive_seconds": 0.1405137999681756,
+        "cached_models_before_clear": 1,
+        "call_legality_cached": false,
+        "cached_models_after_clear": 0
+      }
+    },
+    {
+      "label": "new_arm38_replay01",
+      "receipt_SHA": "ac7bee3202be5235983e97c58211dcbe9ff6c55bd2fea8466fc0788ee8539abc",
+      "kind": "new",
+      "number": 38,
+      "qualification_fixture": false,
+      "necessary_admission_identity_seconds": 0.08409059990663081,
+      "adapter_seconds": 0.2520270000677556,
+      "necessary_postexit_seconds": 0.25442110002040863,
+      "phases": {},
+      "phases_are_nested_do_not_sum": true,
+      "error": null,
+      "comparison": {
+        "exact_recursive_equal": true,
+        "excluded": [
+          "/offline_audit_seconds",
+          "/neutral_exchange/offline_seconds"
+        ],
+        "baseline_SHA": "6cadc49e0a0e6b59a2396a0af8793828193ca94c47ba0f47753b45e13462db40",
+        "current_SHA": "8ff02ab1db1bd29b7f40845d4501698c4d49bd9258d08eb37c9d6f9ef273db89"
+      },
+      "output_metadata_cost_included": true,
+      "old_raw_read_only": true,
+      "Optimize": 0,
+      "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+      "optimized_phase_metrics": {
+        "content_identity_check_seconds": 0.0011922999983653426,
+        "model_read_parse_seconds": 0.11449140007607639,
+        "duplicate_row_Counter_seconds": 0.0018783999839797616,
+        "single_column_classification_seconds": 0.0014845000114291906,
+        "pure_model_cache_misses": 1.0,
+        "per_contract_type_and_input_check_seconds": 0.0011470000026747584,
+        "frozen_A_B_checks_seconds": 0.00012240000069141388,
+        "per_call_scope_check_seconds": 0.0014216999989002943,
+        "adapter_inclusive_seconds": 0.2457919999724254,
+        "cached_models_before_clear": 1,
+        "call_legality_cached": false,
+        "cached_models_after_clear": 0
+      }
+    },
+    {
+      "label": "new_arm39_replay01",
+      "receipt_SHA": "77054fad9fef5f6b01b54e4c88cfd09b2b165601a1ad350e967cf06f352062a3",
+      "kind": "new",
+      "number": 39,
+      "qualification_fixture": false,
+      "necessary_admission_identity_seconds": 0.10610209999140352,
+      "adapter_seconds": 3.9397848000517115,
+      "necessary_postexit_seconds": 3.9463728999253362,
+      "phases": {},
+      "phases_are_nested_do_not_sum": true,
+      "error": null,
+      "comparison": {
+        "exact_recursive_equal": true,
+        "excluded": [
+          "/offline_audit_seconds",
+          "/neutral_exchange/offline_seconds"
+        ],
+        "baseline_SHA": "324a51b352955a5c6956d8d3117b65cf885819bc27236582b53b88262c87b808",
+        "current_SHA": "90d6f82b9fe47993d8c15d25a2578cde62856b558338fe2ef4b0a79fd4db9367"
+      },
+      "output_metadata_cost_included": true,
+      "old_raw_read_only": true,
+      "Optimize": 0,
+      "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+      "optimized_phase_metrics": {
+        "content_identity_check_seconds": 0.02392769989091903,
+        "model_read_parse_seconds": 3.2955131999915466,
+        "duplicate_row_Counter_seconds": 0.057242400012910366,
+        "single_column_classification_seconds": 0.03095639997627586,
+        "pure_model_cache_misses": 2.0,
+        "per_contract_type_and_input_check_seconds": 0.016629999969154596,
+        "frozen_A_B_checks_seconds": 0.0019141000229865313,
+        "per_call_scope_check_seconds": 0.026820000144653022,
+        "adapter_inclusive_seconds": 3.7659943000180647,
+        "cached_models_before_clear": 2,
+        "call_legality_cached": false,
+        "cached_models_after_clear": 0
+      }
+    },
+    {
+      "label": "new_arm40_replay01",
+      "receipt_SHA": "d0669f62e861925499d07fe539087e1fb82ae54be0576d1bf3f552174259af61",
+      "kind": "new",
+      "number": 40,
+      "qualification_fixture": false,
+      "necessary_admission_identity_seconds": 0.0844238999998197,
+      "adapter_seconds": 0.7112075999611989,
+      "necessary_postexit_seconds": 0.7192856998881325,
+      "phases": {},
+      "phases_are_nested_do_not_sum": true,
+      "error": null,
+      "comparison": {
+        "exact_recursive_equal": true,
+        "excluded": [
+          "/offline_audit_seconds",
+          "/neutral_exchange/offline_seconds"
+        ],
+        "baseline_SHA": "fb3e3bca0258ade6449b813aeb775e26e31643bd6af40e5fdd2f585a93b92ed8",
+        "current_SHA": "e5b8e098b42c8a6ca7c80cda3c1e3956e18e873d3821d0ad62f799a15a90bc03"
+      },
+      "output_metadata_cost_included": true,
+      "old_raw_read_only": true,
+      "Optimize": 0,
+      "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+      "optimized_phase_metrics": {
+        "content_identity_check_seconds": 0.002637299941852689,
+        "model_read_parse_seconds": 0.4509517999831587,
+        "duplicate_row_Counter_seconds": 0.0076434999937191606,
+        "single_column_classification_seconds": 0.00868810003157705,
+        "pure_model_cache_misses": 1.0,
+        "per_contract_type_and_input_check_seconds": 0.003886499907821417,
+        "frozen_A_B_checks_seconds": 6.00004568696022e-07,
+        "per_call_scope_check_seconds": 9.00006853044033e-07,
+        "adapter_inclusive_seconds": 0.6872943000635132,
+        "cached_models_before_clear": 1,
+        "call_legality_cached": false,
+        "cached_models_after_clear": 0
+      }
+    },
+    {
+      "label": "new_arm41_replay01",
+      "receipt_SHA": "14a7ed44f37edd6f4cf31b7bf51dabfb9310f4fc39eeb7531c1718c9fe88b384",
+      "kind": "new",
+      "number": 41,
+      "qualification_fixture": false,
+      "necessary_admission_identity_seconds": 0.08532110007945448,
+      "adapter_seconds": 4.29703460005112,
+      "necessary_postexit_seconds": 4.308029699954204,
+      "phases": {},
+      "phases_are_nested_do_not_sum": true,
+      "error": null,
+      "comparison": {
+        "exact_recursive_equal": true,
+        "excluded": [
+          "/offline_audit_seconds",
+          "/neutral_exchange/offline_seconds"
+        ],
+        "baseline_SHA": "87b197c51461fe75f4642ba6a47089f535cfe9ee26f7315dd957cdaab409be3c",
+        "current_SHA": "5561d4b436c9f6a186407f97ccfd4b20a74d20648b73d17a3bce53df706f15a8"
+      },
+      "output_metadata_cost_included": true,
+      "old_raw_read_only": true,
+      "Optimize": 0,
+      "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+      "optimized_phase_metrics": {
+        "content_identity_check_seconds": 0.01734669995494187,
+        "model_read_parse_seconds": 3.5130457000341266,
+        "duplicate_row_Counter_seconds": 0.06632039998658001,
+        "single_column_classification_seconds": 0.05546109995339066,
+        "pure_model_cache_misses": 1.0,
+        "per_contract_type_and_input_check_seconds": 0.03483260003849864,
+        "frozen_A_B_checks_seconds": 1.0998919606208801e-06,
+        "per_call_scope_check_seconds": 1.100008375942707e-06,
+        "adapter_inclusive_seconds": 4.127230799989775,
+        "cached_models_before_clear": 1,
+        "call_legality_cached": false,
+        "cached_models_after_clear": 0
+      }
+    },
+    {
+      "label": "new_arm42_replay01",
+      "receipt_SHA": "0717ade8967977fc2eed0f98ee581785d07636b13bea3c21faee7c780f11b780",
+      "kind": "new",
+      "number": 42,
+      "qualification_fixture": false,
+      "necessary_admission_identity_seconds": 0.08257560001220554,
+      "adapter_seconds": 14.310885700047947,
+      "necessary_postexit_seconds": 14.315222800010815,
+      "phases": {},
+      "phases_are_nested_do_not_sum": true,
+      "error": null,
+      "comparison": {
+        "exact_recursive_equal": true,
+        "excluded": [
+          "/offline_audit_seconds",
+          "/neutral_exchange/offline_seconds"
+        ],
+        "baseline_SHA": "d3fcccab00b788c629cadc4b24bac40c683b17ab044018b5b73467f9ab8a6e4f",
+        "current_SHA": "e9ad66949987d2a81885974bd916280387628275175ee4cd0099ce19f974a51b"
+      },
+      "output_metadata_cost_included": true,
+      "old_raw_read_only": true,
+      "Optimize": 0,
+      "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+      "optimized_phase_metrics": {
+        "content_identity_check_seconds": 0.058420400018803775,
+        "model_read_parse_seconds": 8.273211500025354,
+        "duplicate_row_Counter_seconds": 0.14352120005059987,
+        "single_column_classification_seconds": 0.11634569999296218,
+        "pure_model_cache_misses": 1.0,
+        "per_contract_type_and_input_check_seconds": 0.03647289995569736,
+        "frozen_A_B_checks_seconds": 0.0025308000622317195,
+        "per_call_scope_check_seconds": 0.06134750007186085,
+        "adapter_inclusive_seconds": 13.897939900052734,
+        "cached_models_before_clear": 1,
+        "call_legality_cached": false,
+        "cached_models_after_clear": 0
+      }
+    },
+    {
+      "label": "new_arm42_replay02",
+      "receipt_SHA": "7c9493e940f00176c076f71815b60c6189aff9f04174e8bf1c100a9e8c02ef27",
+      "kind": "new",
+      "number": 42,
+      "qualification_fixture": false,
+      "necessary_admission_identity_seconds": 0.08698909997474402,
+      "adapter_seconds": 14.470104299951345,
+      "necessary_postexit_seconds": 14.474583099945448,
+      "phases": {},
+      "phases_are_nested_do_not_sum": true,
+      "error": null,
+      "comparison": {
+        "exact_recursive_equal": true,
+        "excluded": [
+          "/offline_audit_seconds",
+          "/neutral_exchange/offline_seconds"
+        ],
+        "baseline_SHA": "d3fcccab00b788c629cadc4b24bac40c683b17ab044018b5b73467f9ab8a6e4f",
+        "current_SHA": "cef81239756f00ef3bb575fac462218f120eb0697363db2fe4b5de53862cee6e"
+      },
+      "output_metadata_cost_included": true,
+      "old_raw_read_only": true,
+      "Optimize": 0,
+      "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+      "optimized_phase_metrics": {
+        "content_identity_check_seconds": 0.056532899965532124,
+        "model_read_parse_seconds": 8.425745000015013,
+        "duplicate_row_Counter_seconds": 0.14002280007116497,
+        "single_column_classification_seconds": 0.11363219993654639,
+        "pure_model_cache_misses": 1.0,
+        "per_contract_type_and_input_check_seconds": 0.03810090001206845,
+        "frozen_A_B_checks_seconds": 0.002547199954278767,
+        "per_call_scope_check_seconds": 0.06158280000090599,
+        "adapter_inclusive_seconds": 14.060656900051981,
+        "cached_models_before_clear": 1,
+        "call_legality_cached": false,
+        "cached_models_after_clear": 0
+      }
+    },
+    {
+      "label": "new_arm42_replay03",
+      "receipt_SHA": "797bc15d60bfec21ceb715dad7e6165a64ea758d52505ac0d6a520174cc3ea19",
+      "kind": "new",
+      "number": 42,
+      "qualification_fixture": false,
+      "necessary_admission_identity_seconds": 0.0831264000153169,
+      "adapter_seconds": 14.510740999947302,
+      "necessary_postexit_seconds": 14.515012299991213,
+      "phases": {},
+      "phases_are_nested_do_not_sum": true,
+      "error": null,
+      "comparison": {
+        "exact_recursive_equal": true,
+        "excluded": [
+          "/offline_audit_seconds",
+          "/neutral_exchange/offline_seconds"
+        ],
+        "baseline_SHA": "d3fcccab00b788c629cadc4b24bac40c683b17ab044018b5b73467f9ab8a6e4f",
+        "current_SHA": "ece7c25360e4cd4988b08ce91c80f245062ceb3fd69b203e9e89cb524422ef6a"
+      },
+      "output_metadata_cost_included": true,
+      "old_raw_read_only": true,
+      "Optimize": 0,
+      "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+      "optimized_phase_metrics": {
+        "content_identity_check_seconds": 0.056366999982856214,
+        "model_read_parse_seconds": 8.430463899974711,
+        "duplicate_row_Counter_seconds": 0.1456322999438271,
+        "single_column_classification_seconds": 0.11724389996379614,
+        "pure_model_cache_misses": 1.0,
+        "per_contract_type_and_input_check_seconds": 0.03636609995737672,
+        "frozen_A_B_checks_seconds": 0.0025538000045344234,
+        "per_call_scope_check_seconds": 0.061846100026741624,
+        "adapter_inclusive_seconds": 14.10977019998245,
+        "cached_models_before_clear": 1,
+        "call_legality_cached": false,
+        "cached_models_after_clear": 0
+      }
+    }
+  ],
+  "maximum_necessary_postexit_seconds": 14.515012299991213,
+  "maximum_measured_identity_entry_seconds": 0.10610209999140352,
+  "original_native_observation_exit_costs": [
+    {
+      "number": 37,
+      "native_end": 12.300504600047134,
+      "supervisor_observed": 3.3910000000614673,
+      "postexit_drain_and_restore": 0.0,
+      "combined_original_preentry_and_exit_offset": 8.909504599985667,
+      "original_whole": 12.457538800081238,
+      "cap": 900
+    },
+    {
+      "number": 38,
+      "native_end": 3.878207099973224,
+      "supervisor_observed": 3.812999999965541,
+      "postexit_drain_and_restore": 0.0,
+      "combined_original_preentry_and_exit_offset": 0.06520710000768304,
+      "original_whole": 4.188167699961923,
+      "cap": 900
+    },
+    {
+      "number": 39,
+      "native_end": 1774.5475586999673,
+      "supervisor_observed": 1770.375,
+      "postexit_drain_and_restore": 0.0,
+      "combined_original_preentry_and_exit_offset": 4.17255869996734,
+      "original_whole": 1780.0582540000323,
+      "cap": 1800
+    },
+    {
+      "number": 40,
+      "native_end": 1770.5347163000843,
+      "supervisor_observed": 1770.4379999999655,
+      "postexit_drain_and_restore": 0.0,
+      "combined_original_preentry_and_exit_offset": 0.09671630011871457,
+      "original_whole": 1771.2602832000703,
+      "cap": 1800
+    },
+    {
+      "number": 41,
+      "native_end": 3574.660547099891,
+      "supervisor_observed": 3570.515000000014,
+      "postexit_drain_and_restore": 0.0,
+      "combined_original_preentry_and_exit_offset": 4.145547099877149,
+      "original_whole": 3579.7267328999005,
+      "cap": 3600
+    },
+    {
+      "number": 42,
+      "native_end": 3571.0120709999464,
+      "supervisor_observed": 3570.890000000014,
+      "postexit_drain_and_restore": 0.0,
+      "combined_original_preentry_and_exit_offset": 0.12207099993247539,
+      "original_whole": 3600.7215734999627,
+      "cap": 3600
+    }
+  ],
+  "maximum_original_combined_preentry_exit_seconds": 8.909504599985667,
+  "shutdown_reserve_seconds": 30,
+  "conservative_empirical_remaining_seconds": 6.469381000031717,
+  "not_hard_realtime_bound": true,
+  "no_runtime_switch": true,
+  "current_dynamic_checks_in_cap": true,
+  "R110_arm42_still_invalid": true,
+  "old_raw_rehashed_unchanged": true,
+  "inherited_entry_evidence": [
+    {
+      "original_path": "results/unified_exact_round110/qualification/parser_equivalence_receipt.json",
+      "path": "results/unified_exact_round111/inherited_qualification/qualification/parser_equivalence_receipt.json",
+      "SHA": "47187d62e192d1687cff9ecb70c30cfde36674b11acbcc16ba79c1316b3497cf"
+    },
+    {
+      "original_path": "results/unified_exact_round110/qualification/main_entry_receipt.json",
+      "path": "results/unified_exact_round111/inherited_qualification/qualification/main_entry_receipt.json",
+      "SHA": "b01162a02fc9a8f5cea755fe260d21363012af79a017ad601860777bbc915b03"
+    },
+    {
+      "original_path": "results/unified_exact_round110/qualification/identity.json",
+      "path": "results/unified_exact_round111/inherited_qualification/qualification/identity.json",
+      "SHA": "1e6f2ce4f62265c472d1bd3f7582ad6657ca9b13471e3d5631df902f6cf6d43b"
+    },
+    {
+      "original_path": "results/unified_exact_round110/repair_evidence.json",
+      "path": "results/unified_exact_round111/inherited_qualification/repair_evidence.json",
+      "SHA": "2b533f9ef75755660d75baecce287c1b71dafa7a1d91497b0f50ee4421f90201"
+    },
+    {
+      "original_path": "results/unified_exact_round110/candidate_contract_freeze.json",
+      "path": "results/unified_exact_round111/inherited_qualification/candidate_contract_freeze.json",
+      "SHA": "62adf760b93bd0195d1722e38b8dfd95cacc0e4441d54a2a8294c049d9fb44e1"
+    }
+  ],
+  "note": "Old arm42 is the second arm of its group. Its audit is not attributed to historical first-arm admission. cProfile old replay is instrumented, not a new performance clock."
+}
