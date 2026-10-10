@@ -74,6 +74,21 @@ BLOCKED_PUBLIC_RESTORATION_VERIFIED, with no original-root science fallback.
 The historical admission reader binding is explicitly superseded by the
 independently reviewed final offline reader; 206 production source and 38
 performance-helper bindings remain unchanged.
-Next: later actual-recovery receipt commit; English stacked Draft PR base R111;
-remote verification and extra whole-goal audit. Scientific state stays BLOCKED.
+Actual-recovery receipts committed and pushed at
+1e90dbc5eacddedf925d88c8608e897c56b4ad69. English stacked Draft PR174 is open:
+https://github.com/yifanXovo/TailoredExact/pull/174, base R111 at ded38c756.
+Actual remote01 verifies that existing head/base/OPEN/DRAFT and all 890 required
+Git blobs, including 645 current-round files and the exact single carrier.
+Extra independent whole_goal01 is signed BLOCKED_DELIVERY_COMPLETE / delivery
+PASS, science BLOCKED. It independently observes PR174/head1e90/base ded38,
+the actual commit-to-tree connection, 890 required blobs and all 10 committed
+Round112 scripts, alongside the complete user-goal checklist. Its signature
+and actual read receipts are a later delivery layer. The publication verifier
+adds every committed Round112 script to the final check and never imports
+performance helpers or invokes native code.
+Only final receipt commit/push and read-only verification follow this snapshot.
+That final observation is stored outside this Git payload, at
+F:/ExactEBRP-Round112-final-remote01, after the last push; this snapshot does not
+claim a future commit was already verified. No performance work is pending.
+Scientific state remains BLOCKED, with two INCOMPLETE_ATTRIBUTION conclusions.
 No new mechanism, default change, old-PR rewrite or automatic follow-up long run.

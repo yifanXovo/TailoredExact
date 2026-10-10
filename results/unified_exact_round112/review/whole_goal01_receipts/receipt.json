@@ -1,0 +1,76 @@
+{
+  "observed_UTC": "2026-10-10T19:52:49.900241+00:00",
+  "head": "1e90dbc5eacddedf925d88c8608e897c56b4ad69",
+  "tree": "4ee493edc28c0db13a69e55a36e62b0b720d7671",
+  "base": "ded38c756a32a464bfa9800212da75778707d974",
+  "PR": "https://github.com/yifanXovo/TailoredExact/pull/174",
+  "state": "open",
+  "draft": true,
+  "commands": [
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/yifanXovo/TailoredExact/pulls/174"
+      ],
+      "label": "pr174_actual",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/yifanXovo/TailoredExact/pulls/173"
+      ],
+      "label": "pr173_actual",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/codex/round112-paid-start-backend-attribution",
+        "refs/heads/codex/round111-seed-block-confirmation"
+      ],
+      "label": "refs_actual",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "label": "local_head_actual",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "label": "local_tree_actual",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "ls-tree",
+        "-r",
+        "-l",
+        "-z",
+        "HEAD",
+        "--",
+        "scripts"
+      ],
+      "label": "local_scripts_actual",
+      "returncode": 0
+    }
+  ],
+  "native_starts": 0,
+  "Optimize": 0,
+  "compiler_starts": 0,
+  "future_commit_verified": false
+}
