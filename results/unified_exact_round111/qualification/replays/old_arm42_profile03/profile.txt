@@ -1,0 +1,78 @@
+         149928688 function calls (149691851 primitive calls) in 60.278 seconds
+
+   Ordered by: cumulative time
+   List reduced from 297 to 70 due to restriction <70>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.400    0.400   60.278   60.278 E:\codes\ExactEBRP-round111\scripts\round109_seed_audit.py:63(adapter)
+        1    0.005    0.005   48.954   48.954 E:\codes\ExactEBRP-round111\scripts\round109_seed_scope.py:18(qualify)
+        1    8.883    8.883   48.629   48.629 E:\codes\ExactEBRP-round111\scripts\round111_replay.py::instrumented_unchanged_contract:1(model_contract)
+ 17686600    5.862    0.000   20.636    0.000 D:\msys64\ucrt64\lib\python3.12\re\__init__.py:169(fullmatch)
+        1    1.813    1.813   18.641   18.641 E:\codes\ExactEBRP-round111\scripts\round108_reader.py:28(lp_model)
+   421624    1.609    0.000   15.347    0.000 E:\codes\ExactEBRP-round111\scripts\round108_reader.py:34(linear)
+   421624    5.871    0.000   12.178    0.000 E:\codes\ExactEBRP-round111\scripts\round99_pure_start_audit.py:14(expression)
+        1    0.000    0.000   10.924   10.924 E:\codes\ExactEBRP-round111\scripts\round100_campaign.py:22(adapter)
+        1    0.006    0.006   10.616   10.616 E:\codes\ExactEBRP-round111\scripts\round83_audit_v2.py:76(audit)
+       22    2.918    0.133    9.927    0.451 E:\codes\ExactEBRP-round111\scripts\round83_audit_v2.py:27(oracle)
+ 17687309    5.166    0.000    9.307    0.000 D:\msys64\ucrt64\lib\python3.12\re\__init__.py:280(_compile)
+ 25129252    8.436    0.000    8.436    0.000 {method 'fullmatch' of 're.Pattern' objects}
+  4993164    3.634    0.000    6.459    0.000 {built-in method builtins.sum}
+ 17845574    4.141    0.000    4.141    0.000 {built-in method builtins.isinstance}
+  3852687    1.279    0.000    2.801    0.000 E:\codes\ExactEBRP-round111\scripts\round108_reader.py:31(register)
+ 31909348    2.649    0.000    2.649    0.000 E:\codes\ExactEBRP-round111\scripts\round83_audit_v2.py:72(<genexpr>)
+   424283    0.614    0.000    1.481    0.000 {built-in method builtins.sorted}
+10396042/10395746    1.094    0.000    1.094    0.000 {built-in method builtins.len}
+  4011589    0.863    0.000    0.863    0.000 E:\codes\ExactEBRP-round111\scripts\round108_reader.py:37(<genexpr>)
+  4274991    0.832    0.000    0.832    0.000 {method 'append' of 'list' objects}
+   155993    0.126    0.000    0.675    0.000 E:\codes\ExactEBRP-round111\scripts\round83_audit_v2.py:44(check)
+  1106494    0.513    0.000    0.513    0.000 {method 'split' of 'str' objects}
+   312162    0.513    0.000    0.513    0.000 E:\codes\ExactEBRP-round111\scripts\round83_audit_v2.py:30(duration)
+      140    0.023    0.000    0.473    0.003 E:\codes\ExactEBRP-round111\scripts\analyze_round61.py:20(physical)
+       22    0.004    0.000    0.469    0.021 E:\codes\ExactEBRP-round111\scripts\round76_startup.py:27(replay_closure)
+   422331    0.463    0.000    0.463    0.000 {method 'search' of 're.Pattern' objects}
+  1399582    0.307    0.000    0.307    0.000 {method 'startswith' of 'str' objects}
+        3    0.000    0.000    0.302    0.101 D:\msys64\ucrt64\lib\python3.12\collections\__init__.py:595(__init__)
+        3    0.000    0.000    0.302    0.101 D:\msys64\ucrt64\lib\python3.12\collections\__init__.py:669(update)
+        3    0.302    0.101    0.302    0.101 {built-in method _collections._count_elements}
+        1    0.000    0.000    0.279    0.279 E:\codes\ExactEBRP-round111\scripts\round109_seed_audit.py:36(native_audit)
+        1    0.020    0.020    0.263    0.263 E:\codes\ExactEBRP-round111\scripts\round86_native_evidence.py:61(audit)
+  2622087    0.262    0.000    0.262    0.000 {built-in method math.isfinite}
+      700    0.013    0.000    0.199    0.000 E:\codes\ExactEBRP-round111\scripts\analyze_round61.py:22(vec)
+      212    0.011    0.000    0.198    0.001 E:\codes\ExactEBRP-round111\scripts\round107_reader.py:11(sha)
+      847    0.002    0.000    0.196    0.000 D:\msys64\ucrt64\lib\python3.12\ast.py:56(literal_eval)
+98606/2194    0.075    0.000    0.175    0.000 D:\msys64\ucrt64\lib\python3.12\copy.py:118(deepcopy)
+      581    0.174    0.000    0.174    0.000 {method 'read' of '_io.BufferedReader' objects}
+        1    0.005    0.005    0.170    0.170 E:\codes\ExactEBRP-round111\scripts\round111_replay.py:41(scope)
+5284/2232    0.010    0.000    0.169    0.000 D:\msys64\ucrt64\lib\python3.12\copy.py:217(_deepcopy_dict)
+        1    0.015    0.015    0.165    0.165 E:\codes\ExactEBRP-round111\scripts\round108_reader.py:303(model_scope_contract)
+   693140    0.100    0.000    0.156    0.000 E:\codes\ExactEBRP-round111\scripts\analyze_round61.py:53(<genexpr>)
+11084/185    0.020    0.000    0.147    0.001 D:\msys64\ucrt64\lib\python3.12\copy.py:191(_deepcopy_list)
+      847    0.011    0.000    0.143    0.000 D:\msys64\ucrt64\lib\python3.12\ast.py:34(parse)
+    38/30    0.006    0.000    0.139    0.005 {built-in method builtins.all}
+   684353    0.138    0.000    0.138    0.000 {method 'strip' of 'str' objects}
+      461    0.138    0.000    0.138    0.000 {built-in method _hashlib.openssl_sha256}
+      847    0.132    0.000    0.132    0.000 {built-in method builtins.compile}
+   427273    0.094    0.000    0.094    0.000 {method 'items' of 'dict' objects}
+   437868    0.093    0.000    0.093    0.000 {method 'get' of 'dict' objects}
+   421623    0.084    0.000    0.084    0.000 {method 'start' of 're.Match' objects}
+      364    0.072    0.000    0.072    0.000 {method 'update' of '_hashlib.HASH' objects}
+        4    0.000    0.000    0.071    0.018 D:\msys64\ucrt64\lib\python3.12\pathlib.py:1015(read_bytes)
+    81701    0.034    0.000    0.070    0.000 E:\codes\ExactEBRP-round111\scripts\round111_replay.py::instrumented_unchanged_contract:6(<genexpr>)
+      244    0.006    0.000    0.064    0.000 E:\codes\ExactEBRP-round111\scripts\round73_seed_diagnostic.py:21(route_hash)
+       48    0.002    0.000    0.063    0.001 E:\codes\ExactEBRP-round111\scripts\round75_startup.py:19(normalize)
+     4157    0.026    0.000    0.062    0.000 E:\codes\ExactEBRP-round111\scripts\round111_replay.py::instrumented_unchanged_contract:7(<genexpr>)
+   720227    0.059    0.000    0.059    0.000 {built-in method builtins.abs}
+       44    0.002    0.000    0.057    0.001 E:\codes\ExactEBRP-round111\scripts\round76_startup.py:19(normalize)
+101965/847    0.042    0.000    0.051    0.000 D:\msys64\ucrt64\lib\python3.12\ast.py:86(_convert)
+29019/4661    0.028    0.000    0.049    0.000 {method 'join' of 'str' objects}
+   192057    0.040    0.000    0.040    0.000 {method 'add' of 'set' objects}
+   160000    0.036    0.000    0.036    0.000 {method 'endswith' of 'str' objects}
+        2    0.000    0.000    0.034    0.017 E:\codes\ExactEBRP-round111\scripts\round109_seed_audit.py:28(checked_projection)
+        2    0.000    0.000    0.034    0.017 E:\codes\ExactEBRP-round111\scripts\round109_seed_scope.py:104(projected_records)
+    26310    0.012    0.000    0.032    0.000 E:\codes\ExactEBRP-round111\scripts\round73_seed_diagnostic.py:26(<genexpr>)
+      487    0.000    0.000    0.031    0.000 D:\msys64\ucrt64\lib\python3.12\pathlib.py:1005(open)
+      487    0.017    0.000    0.031    0.000 {built-in method _io.open}
+      243    0.001    0.000    0.029    0.000 D:\msys64\ucrt64\lib\python3.12\pathlib.py:1022(read_text)
+       21    0.002    0.000    0.027    0.001 E:\codes\ExactEBRP-round111\scripts\round83_audit_v2.py:15(materialize)
+
+

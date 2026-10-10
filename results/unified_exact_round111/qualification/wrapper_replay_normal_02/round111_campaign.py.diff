@@ -1,0 +1,50 @@
+--- actual_cli/round111_campaign.py
++++ final/round111_campaign.py
+@@ -114,15 +114,27 @@
+             same=[r for r in records(camp) if r['id']==launch['id']]
+             lower=[r['endpoint']['L'] for r in same];upper=[r['endpoint']['U'] for r in same if r['endpoint']['U'] is not None]
+             assert not upper or max(lower)<=min(upper)+1e-7,'offline contradictory cross-arm evidence'
+-            dest=Path(launch['destination']);seconds=time.perf_counter()-arm_tick
++            dest=Path(launch['destination'])
++            write(dest/'audit_execution_metrics.json',audit.last_metrics)
++            seconds=time.perf_counter()-arm_tick
+             write(dest/'whole_arm_receipt.json',dict(number=number,id=launch['id'],arm=launch['arm'],seed=1,complete_seconds=seconds,
+                 completion_SHA=sha(dest/'completion.json'),audit_SHA=sha(dest/'audit.json'),
+                 original_supervisor_observed_seconds=rec['completion']['fully_observed_end_to_end_seconds'],
+                 includes_admission_identity_checks_startup_native_calls_callbacks_raw_writes_postexit_audit_crosscheck=True,
+                 first_arm_includes_wrapper_creation_import_and_group_admission=number==first))
+-            write(dest/'audit_execution_metrics.json',audit.last_metrics)
+             write(d/f'{number:02d}_after.json',dict(completed_and_audited=True,whole_arm_receipt_SHA=sha(dest/'whole_arm_receipt.json')))
+             assert seconds<=launch['cap_seconds'],'full arm exceeded frozen cap'
++        if qualification:
++            recs=records(camp);assert len(recs)==2
++            mb=Path(ident['launches'][1]['destination'])
++            with (mb/'external/paper_optimize_ledger.csv').open(newline='') as f:rows=list(csv.DictReader(f))
++            starts=[p for p in (mb/'external/native_logs').glob('*.round68.start.json') if read(p).get('submitted')]
++            assert any(r['solve_kind']=='LP' for r in rows) and any(r['solve_kind']!='LP' for r in rows) and starts
++            write(OUT/'qualification/identity.json',dict(passed=True,production_PE_SHA=PE_SHA,DLL_SHA=DLL_SHA,
++                source_bindings=bindings(),helpers=helpers(),current_CLI_records=recs,
++                qualified_argv=[l['command'] for l in ident['launches']],LP_reached=True,MIP_reached=True,
++                submitted_Starts=[p.relative_to(ROOT).as_posix() for p in starts],legal_terminations=2,not_performance=True,
++                qualification_campaign_identity_SHA=sha(camp/'identity.json'),envelope_SHA=sha(OUT/'qualification/envelope.json')))
+     except BaseException:
+         code=1;(d/'failure.txt').write_text(traceback.format_exc(),encoding='utf-8');raise
+     finally:
+@@ -131,17 +143,6 @@
+             actual_native_children_with_launch=sum((Path(l['destination'])/'launch.json').exists() for l in ident['launches'][first-1:last]),
+             nested_seconds_added=False,earlier_failure_slots_refunded=False))
+         print(json.dumps(read(d/'receipt.json')),flush=True)
+-    if qualification:
+-        recs=records(camp);assert len(recs)==2
+-        mb=Path(ident['launches'][1]['destination'])
+-        with (mb/'external/paper_optimize_ledger.csv').open(newline='') as f:rows=list(csv.DictReader(f))
+-        starts=[p for p in (mb/'external/native_logs').glob('*.round68.start.json') if read(p).get('submitted')]
+-        assert any(r['solve_kind']=='LP' for r in rows) and any(r['solve_kind']!='LP' for r in rows) and starts
+-        write(OUT/'qualification/identity.json',dict(passed=True,production_PE_SHA=PE_SHA,DLL_SHA=DLL_SHA,
+-            source_bindings=bindings(),helpers=helpers(),current_CLI_records=recs,
+-            qualified_argv=[l['command'] for l in ident['launches']],LP_reached=True,MIP_reached=True,
+-            submitted_Starts=[p.relative_to(ROOT).as_posix() for p in starts],legal_terminations=2,not_performance=True,
+-            qualification_campaign_identity_SHA=sha(camp/'identity.json'),envelope_SHA=sha(OUT/'qualification/envelope.json')))
+ 
+ if __name__=='__main__':
+     if sys.argv[1]=='prepare':prepare()

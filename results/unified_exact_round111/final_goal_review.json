@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "stage": "CONFIRMATION_SUPPORT",
+  "evidence_layer": "R110_MAIN_36_PLUS_R111_SEED_6",
+  "analysis_unix": 1791634894.5959756,
+  "source_SHA": "1fc1aa102ecccbcbe34eacd3a75e2f7f36e27a0b596128c765a9d6d4c1b93724",
+  "cwd": "E:\\codes\\ExactEBRP-round111",
+  "scientific_payload_commit": "b92b27c895043af669e64ae32ef0b232262c3244",
+  "observed_PR_head": "16ada7a42ff9eb6a99f2b92e457cd44e672d3993",
+  "seed_materiality_analysis": {
+    "G20-C2": {
+      "both_own_zero_certificates": true,
+      "time_difference": 0.15793658082839102,
+      "time_materiality": 30
+    },
+    "G50-R1": {
+      "own_U_improvement": 0.3485378584548796,
+      "own_gap_improvement": 0.3840037230501351,
+      "U_materiality": 0.011567085551639829,
+      "gap_materiality": 0.0744227162964699
+    },
+    "G100-R2": {
+      "own_U_improvement": 0.08192940158565795,
+      "own_gap_improvement": 0.08191479586291187,
+      "U_materiality": 0.0011331278178367777,
+      "gap_materiality": 0.011329817606093168
+    }
+  },
+  "exact_current_clocks": [
+    {
+      "number": 1,
+      "native_end": 4.141368880984373,
+      "audit_end": 4.29482438089326,
+      "whole": 4.306077580899,
+      "cap": 900
+    },
+    {
+      "number": 2,
+      "native_end": 3.875937500037253,
+      "audit_end": 4.136482100002468,
+      "whole": 4.148141000070609,
+      "cap": 900
+    },
+    {
+      "number": 3,
+      "native_end": 1771.195491739316,
+      "audit_end": 1775.1128528394038,
+      "whole": 1775.1242041393416,
+      "cap": 1800
+    },
+    {
+      "number": 4,
+      "native_end": 1770.5680062000174,
+      "audit_end": 1771.3056044999976,
+      "whole": 1771.3181914000306,
+      "cap": 1800
+    },
+    {
+      "number": 5,
+      "native_end": 3571.468414805364,
+      "audit_end": 3575.7683851053007,
+      "whole": 3575.7809209054103,
+      "cap": 3600
+    },
+    {
+      "number": 6,
+      "native_end": 3570.638629800058,
+      "audit_end": 3584.8717891999986,
+      "whole": 3584.8850907000015,
+      "cap": 3600
+    }
+  ],
+  "frozen_narrative_SHA": {
+    "final_report.md": "2d63aa6ac407b45fcbbeee9c5969fa96f94a9cc04cbc1fc1c3d3a7beb6d38acc",
+    "contribution_evidence_map.md": "a08b43ca7851f46c3e2d16a994c7369a9d6b16ed22529ac327dcb23e1ea80437",
+    "paper_candidate_spec.md": "e5c105af2557faccea3299cc721e62230b936a9cea33951f837a8e8862e62db3",
+    "repair_scope.md": "db91567495de0b4b2d049c181fd294560cc033d6149c475f71c4a9234c897359"
+  },
+  "old_arm42_invalid_preserved": true,
+  "all_ENS_costs_disclosed": true,
+  "no_old_new_cherry_pick_or_cross_wrapper_exact_speedup": true,
+  "no_unproved_zero_or_unconditional_AM_or_causal_claim": true,
+  "necessary_validation_in_complete_clock": true,
+  "audit_improvement_is_engineering": true,
+  "no_new_solver_mechanism_or_task": true,
+  "actual_restored_root_primary_and_independent_reviews_pass": true,
+  "unresolved_goal_conditions": [],
+  "research": {
+    "paid_starts": 15,
+    "paid_outer_seconds": 11299.309934754972,
+    "remaining_starts": 9,
+    "remaining_outer_seconds": 6700.690065245028,
+    "qualification_starts": 6,
+    "qualification_seconds": 583.7201481292723,
+    "unclosed": []
+  },
+  "manual_time": "unknown",
+  "Optimize": 0,
+  "native_processes": 0
+}

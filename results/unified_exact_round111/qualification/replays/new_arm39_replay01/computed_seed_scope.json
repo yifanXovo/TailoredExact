@@ -1,0 +1,91 @@
+{
+  "schema": "round109-computed-seed-scope-v1",
+  "actual_seed": 1,
+  "recovered_calls": [
+    {
+      "call": 4,
+      "raw_native_preconditions": 0,
+      "computed_native_prerequisites": true,
+      "model": {
+        "path": "results/unified_exact_round110/campaign/raw/39_G50-R1_S1_M-B/external/models/L0_epoch_0_generation_1.lp",
+        "SHA": "639613c57f1fde724c3de35f88fcb383559eed011d8f21e552c06d34a48e985b",
+        "rows": 104139,
+        "columns": 25259,
+        "quantity_columns": 400,
+        "quantity_type": "C",
+        "direction_columns": 200,
+        "frozen_A_B_rows_checked": 100,
+        "route_load_Y_integer": true,
+        "state_assignment_direction_binary": true
+      },
+      "scope": {
+        "saved_G_lower": 0,
+        "saved_G_upper": 0.8922038076869184,
+        "saved_objective_cutoff": 0.8922038076869184,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "native_log_SHA": "ac4f4cd167f36120229a498b7efa434fa9b7e819b7679e9c948b1a5f7a93ba09",
+      "successful_return": true,
+      "actual_settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 1,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "other_conjuncts_basis": "unchanged full-production request defaults + actual canonical matrix/types + linked native return + backend postcondition gate",
+      "qualification_role": "offline mathematical scope proof; no raw callback/global flag promotion"
+    },
+    {
+      "call": 8,
+      "raw_native_preconditions": 0,
+      "computed_native_prerequisites": true,
+      "model": {
+        "path": "results/unified_exact_round110/campaign/raw/39_G50-R1_S1_M-B/external/models/L0_epoch_1_generation_4.lp",
+        "SHA": "9e2c260a8b184874815244e2d18a0b1d5e09d022821ef45ee70b881baed71948",
+        "rows": 104139,
+        "columns": 25259,
+        "quantity_columns": 400,
+        "quantity_type": "C",
+        "direction_columns": 200,
+        "frozen_A_B_rows_checked": 100,
+        "route_load_Y_integer": true,
+        "state_assignment_direction_binary": true
+      },
+      "scope": {
+        "saved_G_lower": 0,
+        "saved_G_upper": 0.8922038076869184,
+        "saved_objective_cutoff": 0.8603198738306246,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "native_log_SHA": "b78ad4b15459fec95ad00131b0dbeddd68399d80d3cf33ed0d92447816e574cf",
+      "successful_return": true,
+      "actual_settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 1,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "other_conjuncts_basis": "unchanged full-production request defaults + actual canonical matrix/types + linked native return + backend postcondition gate",
+      "qualification_role": "offline mathematical scope proof; no raw callback/global flag promotion"
+    }
+  ],
+  "observations_SHA": "9514067129ff534cb33247907e502cb65121653b63aca08690c3276e762039e9",
+  "completion_SHA": "49e12890d3d87713573450a1e3b8e60fac5d0df90103e0ec25e4c1d2ced55940",
+  "result_SHA": "3dec858885910b0f7f38f80291185c72a6bed3863354ad2e2aa25fcc4546669a",
+  "producer_source_SHA": "a124605525f7e2310771e9bb73b381c6fa72d89f2b61c221b604ab076add8d39",
+  "raw_flags_preserved": true,
+  "raw_global_available_and_global_bound_unchanged": true,
+  "production_or_search_changed": false
+}

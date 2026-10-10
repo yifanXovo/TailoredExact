@@ -1,0 +1,33 @@
+{
+  "kind": "old-profile",
+  "number": 42,
+  "qualification_fixture": false,
+  "necessary_admission_identity_seconds": 0.08568979997653514,
+  "adapter_seconds": 60.2785013000248,
+  "necessary_postexit_seconds": 60.28064060001634,
+  "phases": {
+    "model_read_parse": 18.645790199982002,
+    "column_type_classification": 0.26347689994145185,
+    "duplicate_row_Counter": 0.14419150003232062,
+    "input_read_parse": 0.013114500092342496,
+    "per_station_column_classification": 29.492820500046946,
+    "frozen_A_B_checks": 0.006992499344050884,
+    "scope_check_including_Counter": 0.16979109996464103
+  },
+  "phases_are_nested_do_not_sum": true,
+  "error": null,
+  "comparison": {
+    "exact_recursive_equal": true,
+    "excluded": [
+      "/offline_audit_seconds",
+      "/neutral_exchange/offline_seconds"
+    ],
+    "baseline_SHA": "d3fcccab00b788c629cadc4b24bac40c683b17ab044018b5b73467f9ab8a6e4f",
+    "current_SHA": "647cb347d46ae98a41c2072c831b575dd22216661557bdd4756b763879fa1e71"
+  },
+  "output_metadata_cost_included": true,
+  "old_raw_read_only": true,
+  "Optimize": 0,
+  "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+  "optimized_phase_metrics": null
+}

@@ -1,0 +1,117 @@
+--- /dev/null
++++ scripts/round111_seed_audit.py
+@@ -0,0 +1,114 @@
++"""Equivalent Seed audit with one column index and arm-local pure model data.
++
++Historical readers and predicates are unmodified. No call legality is cached.
++Current content SHA is checked on every model-cache access; parser and contract
++source identities are part of the key. Context and all dynamic data die at the
++end of one adapter invocation, including on rejection.
++"""
++import collections, re, time
++import round108_reader as core
++import round109_seed_audit as inherited
++
++PARSER_VERSION='round108-one-line-lp-v1'
++CONTRACT_VERSION='round111-original-model-contract-index-v1'
++last_metrics=None
++
++class ArmModels:
++    def __init__(self):
++        self.version=(PARSER_VERSION,core.sha(core.__file__),CONTRACT_VERSION,core.sha(__file__))
++        self.models={};self.by_id={};self.paths={};self.metrics=collections.defaultdict(float)
++
++    def data(self,path):
++        tick=time.perf_counter();digest=core.sha(path)
++        self.metrics['content_identity_check_seconds']+=time.perf_counter()-tick
++        key=(digest,self.version)
++        if key in self.models:
++            self.metrics['pure_model_cache_hits']+=1
++            self.paths[id(self.models[key][0])]=(path,digest)
++            return digest,self.models[key]
++        tick=time.perf_counter();model=core.lp_model(path)
++        self.metrics['model_read_parse_seconds']+=time.perf_counter()-tick
++        assert core.sha(path)==digest,'model bytes changed while parsing'
++        tick=time.perf_counter();counter=collections.Counter(model['rows'])
++        self.metrics['duplicate_row_Counter_seconds']+=time.perf_counter()-tick
++        tick=time.perf_counter();names=model['order'];quantities=[];quantity_suffix=collections.defaultdict(list)
++        states=collections.defaultdict(list);modes=[]
++        for name in names:
++            if name.startswith(('p_','d_')):
++                quantities.append(name)
++                # Exactly the old endswith('_'+str(i)), including name suffix
++                # spelling. No integer conversion of station names is allowed.
++                quantity_suffix[name.rsplit('_',1)[-1]].append(name)
++            if name.startswith('mode_'):modes.append(name)
++            match=re.fullmatch(r'state_([^_]+)_(\d+)',name)
++            if match:states[match[1]].append(name)
++        self.metrics['single_column_classification_seconds']+=time.perf_counter()-tick
++        data=(model,counter,quantities,quantity_suffix,states,modes)
++        self.models[key]=data;self.by_id[id(model)]=data;self.paths[id(model)]=(path,digest)
++        self.metrics['pure_model_cache_misses']+=1
++        return digest,data
++
++    def model_contract(self,root,p,path,arm):
++        digest,(m,counter,quantities,by_suffix,states,modes)=self.data(path)
++        tick=time.perf_counter();t=m['types'];names=m['order']
++        assert len(quantities)==2*p['V']*p['M']
++        assert all(t[n]==('C' if arm=='M-B' else 'I') for n in quantities)
++        assert all(t[n] in ['I','B'] for n in names if n.startswith(('x_','load_','Y_')))
++        assert all(t[n]=='B' for n in names if n.startswith(('mode_','z_','state_')) and not n.startswith('state_g_'))
++        assert len(modes)==p['V']*p['M']
++        a=core.evidence.instance(root,p);link_count=0
++        self.metrics['per_contract_type_and_input_check_seconds']+=time.perf_counter()-tick
++        tick=time.perf_counter()
++        if arm=='M-B':
++            for i in range(1,p['V']+1):
++                terms={n:1. for n in by_suffix[str(i)]}
++                selectors=states[str(i)]
++                assert selectors
++                for n in selectors:
++                    amount=abs(a['b'][i]-int(n.rsplit('_',1)[1]))
++                    if amount:terms[n]=-float(amount)
++                assert counter[(tuple(sorted(terms.items())),'=',0.)]>=1,('missing frozen A',path,i)
++                terms={f'z_{k}_{i}':1. for k in range(p['M'])};selector=f'state_{i}_{a["b"][i]}'
++                if selector in t:terms[selector]=1.
++                assert counter[(tuple(sorted(terms.items())),'=',1.)]>=1,('missing frozen B',path,i)
++                link_count+=2
++        self.metrics['frozen_A_B_checks_seconds']+=time.perf_counter()-tick
++        return dict(path=path.relative_to(root).as_posix(),SHA=digest,rows=len(m['rows']),columns=len(names),
++            quantity_columns=len(quantities),quantity_type='C' if arm=='M-B' else 'I',direction_columns=len(modes),
++            frozen_A_B_rows_checked=link_count,route_load_Y_integer=True,state_assignment_direction_binary=True),m
++
++    def model_scope_contract(self,call,model,p):
++        tick=time.perf_counter()
++        try:
++            if call['full_original']:return dict(full_original_reference_already_checked=True)
++            lo,hi,cutoff=call['lower_g'],call['upper_g'],call['cutoff']
++            assert model['bounds']['G']==(lo,hi),'native scope differs from saved G domain'
++            # Every Counter reuse is authorized by current bytes, not path/mtime.
++            path,digest=self.paths[id(model)]
++            assert core.sha(path)==digest,'model bytes changed before scope reuse'
++            # Same duplicate-preserving Counter, owned by this immutable parse.
++            counter=self.by_id[id(model)][1]
++            assert counter[(model['objective'][0],'<=',cutoff-model['objective'][1])]>=1,'saved objective cutoff differs from call'
++            for gamma,sense in [(hi,'<='),(lo,'>=')]:
++                terms={f'h_{i}_{k}':1. for i in range(1,p['V']+1) for k in range(i+1,p['V']+1)}
++                if gamma:
++                    for i in range(1,p['V']+1):terms[f'r_{i}']=-p['V']*gamma
++                assert counter[(tuple(sorted(terms.items())),sense,0.)]>=1,'saved true-G cap/floor differs from call'
++            return dict(saved_G_lower=lo,saved_G_upper=hi,saved_objective_cutoff=cutoff,
++                true_G_cap_floor_checked=True,metadata_scope_is_actual_model_scope=True)
++        finally:self.metrics['per_call_scope_check_seconds']+=time.perf_counter()-tick
++
++    def clear(self):
++        self.models.clear();self.by_id.clear();self.paths.clear()
++
++def adapter(launch,records,completion,identity):
++    global last_metrics
++    context=ArmModels();contract,scope=core.model_contract,core.model_scope_contract
++    core.model_contract=context.model_contract;core.model_scope_contract=context.model_scope_contract
++    tick=time.perf_counter()
++    try:return inherited.adapter(launch,records,completion,identity)
++    finally:
++        core.model_contract=contract;core.model_scope_contract=scope
++        last_metrics=dict(context.metrics,adapter_inclusive_seconds=time.perf_counter()-tick,
++            cached_models_before_clear=len(context.models),call_legality_cached=False)
++        context.clear();last_metrics['cached_models_after_clear']=len(context.models)
