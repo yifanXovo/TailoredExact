@@ -1,0 +1,38 @@
+{
+  "public_root": "F:\\ExactEBRP-Round112-public01",
+  "files": [
+    {
+      "path": "results/unified_exact_round112/compact_evidence/manifest.json",
+      "sha256": "daba452819ccc245a6251fc1f21e80114115ebab98aed9bc7a7c66f67c3becbf",
+      "bytes": 12134058,
+      "source": "Proposed public exact bytes"
+    },
+    {
+      "path": "results/unified_exact_round112/compact_evidence/evidence.tar.gz",
+      "sha256": "f35beeef7bf8ffdd286ceda1f7166f83eb57281c79b223791f886dd0b44cb81d",
+      "bytes": 82842777,
+      "source": "Proposed public exact bytes"
+    },
+    {
+      "path": "scripts/publish_round112.py",
+      "sha256": "e4020a6a51d24dfce251bb3fefab8a8b56714fe7d64e857214318fbcaf94ac3b",
+      "bytes": 6021,
+      "source": "Proposed public stdlib restorer"
+    },
+    {
+      "path": "scripts/round110_public.py",
+      "commit": "ded38c756a32a464bfa9800212da75778707d974",
+      "sha256": "3937ebf164e742e7a67a5ea3a87fe2364110bd0e2c093a0524f8f5ac875fe1a9",
+      "bytes": 20207,
+      "source": "Pinned public Git dependency"
+    }
+  ],
+  "only_proposed_public_files_and_explicit_public_dependencies": true,
+  "archive_SHA": "f35beeef7bf8ffdd286ceda1f7166f83eb57281c79b223791f886dd0b44cb81d",
+  "source_SHA": "e4020a6a51d24dfce251bb3fefab8a8b56714fe7d64e857214318fbcaf94ac3b",
+  "exit_code": 0,
+  "engineering": true,
+  "seconds": 0.4656364000402391,
+  "Optimize": 0,
+  "IIS": 0
+}

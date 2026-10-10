@@ -14,7 +14,8 @@ exported public script, with no original-worktree fallback:
 ```powershell
 python scripts/publish_round112.py export --root E:/codes/ExactEBRP-round112 --out F:/ExactEBRP-Round112-public01
 python F:/ExactEBRP-Round112-public01/scripts/publish_round112.py restore --public-root F:/ExactEBRP-Round112-public01 --out F:/ExactEBRP-Round112-restored01
-python F:/ExactEBRP-Round112-restored01/scripts/read_round112.py --root F:/ExactEBRP-Round112-restored01 --out F:/ExactEBRP-Round112-rebuilt01 --compare F:/ExactEBRP-Round112-restored01/results/unified_exact_round112/reports_final
+python F:/ExactEBRP-Round112-restored01/scripts/read_round112.py --root F:/ExactEBRP-Round112-restored01 --out F:/ExactEBRP-Round112-rebuilt01
+python -c "import csv,sys; csv.field_size_limit(67108864); sys.path.insert(0,'F:/ExactEBRP-Round112-restored01/scripts'); from read_round112 import compare; print(compare('F:/ExactEBRP-Round112-restored01/results/unified_exact_round112/reports_final','F:/ExactEBRP-Round112-rebuilt01'))"
 ```
 
 The reader is pure Python and loads no solver. It reconstructs twelve qualified
@@ -24,5 +25,14 @@ Absolute measured paths are translated strictly to the supplied restored root.
 Historical claim authorities are explicitly copied and bound, not replayed as
 current performance. Compare every current core CSV/JSON field; missing/null/error
 states remain missing/null/error. An independent restored-root review must then
-inspect the actual restored bytes. Actual results of this one recovery and remote
-PR verification are recorded later; this document makes no future success claim.
+inspect the actual restored bytes.
+
+The actual first recovery rebuilt all mathematical outputs, then its combined
+--compare invocation hit the standard CSV131072-byte field limit on the complete
+semantic trace field. That error receipt is retained. Only the separate comparison
+process's CSV field capacity was raised to64MiB; frozen reader bytes, validators,
+all raw and mathematical outputs remained unchanged. The affected comparison
+then passed619641 CSV fields and both JSON files. There was one public restore,
+one raw reconstruction and no native rerun or repack. Subsequent verification
+receipts identify the earlier scientific commit; they do not verify their own
+future commit. Remote PR verification is recorded separately when actually done.

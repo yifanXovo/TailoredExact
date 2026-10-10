@@ -1,0 +1,79 @@
+{
+  "schema": "round112_actual_recovery_delivery_receipts_v1",
+  "created_UTC": "2026-10-10T19:47:36.428848+00:00",
+  "scientific_payload_commit": "a3cac1df0ee1d4eaaeb87343508e0af31cfc3b40",
+  "measured_production_commit": "d0014a7163e3996fe120471420e56b089c9715ae",
+  "scientific_stage": "BLOCKED",
+  "independent_review": "BLOCKED_PUBLIC_RESTORATION_VERIFIED",
+  "bindings": [
+    {
+      "path": "results/unified_exact_round112/public_export_receipt.json",
+      "bytes": 1394,
+      "SHA256": "18439d6aa009d9c952fbc2e56bfed404ae2f6fdaaee5ee53fb7555fa09ac943f"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/actual_restore_receipt.json",
+      "bytes": 693,
+      "SHA256": "360ee54d7093673ff59702d7b10797b66cc1f1864424c52e74d55db931430ece"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/rebuild01/receipt.json",
+      "bytes": 424,
+      "SHA256": "b356517faa6d35f364a874d68a8444797041690aaecf0c73c745d2a4d790e672"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/rebuild01/stdout.txt",
+      "bytes": 2739,
+      "SHA256": "2ae259e6ca5df96af9abdc8cd5c500fc30258812d978228dabd9f5b14f667a57"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/rebuild01/stderr.txt",
+      "bytes": 1074,
+      "SHA256": "94a527673bd68642d9728f6cf3b35d8f67c7c4b042ee57308964a00657061a67"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/compare02/receipt.json",
+      "bytes": 496,
+      "SHA256": "b4adbcb8639da832de0819b0beacb43e4bd6037a87e3a18e930842370bf4a36c"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/compare02/stdout.txt",
+      "bytes": 346,
+      "SHA256": "4974162e3a66708c3356dd9eb2128982ab3d3c5c5f9f0daab516a2fe211a95dc"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/compare02/stderr.txt",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/core_file_SHA_comparison.json",
+      "bytes": 7651,
+      "SHA256": "21c0b0f8c42f8efb4e6ee5157a7ae81e64df7074d9f411be80445e4ec54318b0"
+    },
+    {
+      "path": "results/unified_exact_round112/review/restored_root01.json",
+      "bytes": 223302,
+      "SHA256": "31b33fa69aca3cdf8c2d3ebc90b90acd5a39c27238f9846030841bef907da23f"
+    },
+    {
+      "path": "results/unified_exact_round112/review/restored_root01.md",
+      "bytes": 5039,
+      "SHA256": "8f9dec2860cfba06a4fa63da24fb6f75249d6bd035c01da701c79140920076e6"
+    },
+    {
+      "path": "results/unified_exact_round112/public_restore_instructions.md",
+      "bytes": 2754,
+      "SHA256": "b1a54bfef649ad9c0b2e83e77d17a0f82f2e979fa85578cc871c90ffca89d6f3"
+    }
+  ],
+  "native_starts": 0,
+  "Optimize": 0,
+  "compiler_starts": 0,
+  "raw_rebuilds": 1,
+  "comparison_only_recovery": true,
+  "reader_unchanged": true,
+  "original_root_scientific_fallback": false,
+  "verified_future_receipt_commit": false,
+  "Git_remote_PR_checks_pending": true
+}

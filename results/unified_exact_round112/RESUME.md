@@ -61,8 +61,19 @@ Final reader02 succeeds offline:20 fixed positions,12 qualified endpoints,
 WIN/WIN/LOSS/UNEVALUABLE/UNEVALUABLE. Performance identity unchanged.
 Reader01 duplicate export field error is retained as engineering, zero native.
 Contribution map, final_report and one conditional next priority are written.
-Next: final reader delta review; current-only exact carrier and scientific
-payload commit; export/empty restore and rebuild from restore only; independent
-restored-root review; later verification-receipt commit; English stacked Draft
-PR base R111; remote verification and extra whole-goal audit.
+Scientific payload committed as a3cac1df0ee1d4eaaeb87343508e0af31cfc3b40.
+Final-reader delta review and current-only exact carrier are complete. Actual
+export to F:/ExactEBRP-Round112-public01 and empty-root restoration to
+F:/ExactEBRP-Round112-restored01 verified all 55,916 manifest members.
+One raw reconstruction from that restored root produced all 39 core files.
+Its combined comparison hit the default CSV field capacity; only comparison
+was repeated with a 64 MiB process field capacity, without changing reader/raw.
+All 619,641 CSV fields, both JSON files and 39 byte hashes match. Failed-step
+receipts remain in verification/rebuild01. Independent restored_root01 signs
+BLOCKED_PUBLIC_RESTORATION_VERIFIED, with no original-root science fallback.
+The historical admission reader binding is explicitly superseded by the
+independently reviewed final offline reader; 206 production source and 38
+performance-helper bindings remain unchanged.
+Next: later actual-recovery receipt commit; English stacked Draft PR base R111;
+remote verification and extra whole-goal audit. Scientific state stays BLOCKED.
 No new mechanism, default change, old-PR rewrite or automatic follow-up long run.
