@@ -1,5 +1,18 @@
 # Round111 resume boundary
 
+Delivery boundary: fixed native evaluation, qualification/admission, local
+independent review, actual public export/empty restore, restored-root exact
+primary comparison and independent raw review are COMPLETE. Unique stage is
+CONFIRMATION_SUPPORT, Seed TIE/WIN/WIN; old R110 stays BLOCKED. Draft PR173:
+https://github.com/yifanXovo/TailoredExact/pull/173, base verified R110 branch.
+Science b92b27c895043af669e64ae32ef0b232262c3244 is immutable. Later public
+receipts at16ada7a42ff9eb6a99f2b92e457cd44e672d3993 were pushed and actually
+verified OPEN/DRAFT with exact scientific files/parts. Extra final goal
+analysis also passed. Publication of these later remote/goal receipts has a
+separate final push/head receipt; see remote_validation and engineering.
+Do not repeat native, heavy math, packaging or solver tasks. Older pending
+paragraphs below describe historical boundaries and are superseded.
+
 Latest boundary: native campaign, current_reader01 and current_report02 are
 COMPLETE. All six current arms are formally qualified; fixed Seed pairs are
 TIE/WIN/WIN and layered stage CONFIRMATION_SUPPORT. No more native launches.
