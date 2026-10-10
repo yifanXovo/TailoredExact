@@ -101,16 +101,19 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
     std::unordered_map<std::string, double> route_values;
     std::vector<int> final_inventory = instance.initial;
     std::set<int> used_vehicles;
+    std::set<int> route_vehicles;
     std::set<int> used_stations;
     for (const RoutePlan& route : routes) {
         if (route.vehicle < 0 || route.vehicle >= instance.M ||
-            !used_vehicles.insert(route.vehicle).second) {
+            !route_vehicles.insert(route.vehicle).second) {
             return finish("invalid_or_duplicate_route_vehicle");
         }
         if (route.nodes.size() < 2 || route.nodes.front() != 0 ||
             route.nodes.back() != 0) {
             return finish("route_not_depot_closed");
         }
+        if (route.nodes == std::vector<int>{0,0} && route.operations.empty()) continue;
+        used_vehicles.insert(route.vehicle);
         for (std::size_t position = 1; position < route.nodes.size(); ++position) {
             const int from = route.nodes[position - 1];
             const int to = route.nodes[position];

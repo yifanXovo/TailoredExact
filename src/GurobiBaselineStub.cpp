@@ -62,7 +62,8 @@ GurobiRuntimeProbe probeGurobiRuntime(const SolveOptions&) {
 }
 
 SolveResult solveGurobiBaseline(const Instance& instance,
-                                const SolveOptions& options) {
+                                const SolveOptions& options,
+                                const SolveResult*) {
     SolveResult result;
     result.instance_name = instance.name;
     result.input_path = instance.path;

@@ -113,6 +113,8 @@ struct SolveOptions {
     int gurobi_seed = 0;
     int gurobi_presolve = -1;
     bool gurobi_hga_start = false;
+    // Round112 isolated, self-paid current ENS startup into the original compact.
+    bool round112_ens_start_compact = false;
     std::string gurobi_home;
     std::string gurobi_progress_path;
     std::string gurobi_model_export_path;
