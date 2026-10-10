@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "F:/ExactEBRP-Round112-restored01/scripts/read_round112.py", line 278, in <module>
+    if a.compare:print(json.dumps(compare(a.compare,a.out),allow_nan=False))
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:/ExactEBRP-Round112-restored01/scripts/read_round112.py", line 273, in compare
+    return core.compare(expected,actual)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\ExactEBRP-Round112-restored01\scripts\round108_reader.py", line 603, in compare
+    x,y=rows(path),rows(actual/path.name);assert len(x)==len(y),path.name
+        ^^^^^^^^^^
+  File "F:\ExactEBRP-Round112-restored01\scripts\round107_reader.py", line 18, in rows
+    with Path(p).open(encoding='utf-8',newline='') as f: return list(csv.DictReader(f))
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\csv.py", line 116, in __next__
+    row = next(self.reader)
+          ^^^^^^^^^^^^^^^^^
+_csv.Error: field larger than field limit (131072)

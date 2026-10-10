@@ -1,0 +1,20 @@
+{
+  "schema": "round112_independent_postformal_signature_v1",
+  "decision": "BLOCKED",
+  "reviewer": "/root/independent_review",
+  "signed_at_UTC": "2026-10-10T19:18:47.146144+00:00",
+  "bindings": {
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\review\\postformal_audit.py": "7a3e1155109e6f0ab5d9fdf6cb572a04c8bc2426070ded10dd7b0aae9123a126",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\review\\postformal_review.md": "cd938d342c3cb96724334df0089d7b6d3a3f49de5bb2bda8bec806fa870d5aae",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\review\\postformal03\\postformal_review.json": "91186f5089e649fe31f3dd420c2615b651446e59b8ab45aa2020382012a41e44",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\review\\postformal03\\process_snapshot.json": "e375fc8614f4c0e253043dacd41be4e93704787da0f26581dd9cfe3c320dc9c3"
+  },
+  "engineering_failure": {
+    "path": "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\review\\postformal02",
+    "type": "UnicodeDecodeError under default local encoding when reading UTF-8 failure.txt",
+    "native_starts": 0,
+    "Optimize": 0,
+    "compiler_starts": 0,
+    "repair": "explicit UTF-8 in reviewer offline report code; complete successful output under postformal03"
+  }
+}

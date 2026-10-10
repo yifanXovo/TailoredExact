@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "positive_production_function_vectors": [
+    {
+      "case": "actual_heterogeneous_H",
+      "columns": 1591,
+      "rows": 3689,
+      "maximum_row_residual": 1.6653345369377348e-16,
+      "objective": 0.25452870897207147,
+      "all_original_auxiliaries_from_own_fleet": true,
+      "before_SHA": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+      "after_SHA": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+      "vector_SHA": "46a7278f5ede42e8a8b24e89d9a9a8435a6ae1047a36afa533c77e730b896ad6"
+    },
+    {
+      "case": "empty_vehicle_0",
+      "columns": 1591,
+      "rows": 3689,
+      "maximum_row_residual": 4.440892098500626e-16,
+      "objective": 0.6251889987788299,
+      "all_original_auxiliaries_from_own_fleet": true,
+      "before_SHA": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+      "after_SHA": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+      "vector_SHA": "159a7cb9b1b3cbf62c6ef37ab8878223761e20a03bd2086bd301ff444ba01498"
+    },
+    {
+      "case": "loaded_return",
+      "columns": 1591,
+      "rows": 3689,
+      "maximum_row_residual": 1.942890293094024e-16,
+      "objective": 0.2620281966500958,
+      "all_original_auxiliaries_from_own_fleet": true,
+      "before_SHA": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+      "after_SHA": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+      "vector_SHA": "ce14922fb8a25cf7f73c69f7c44ff22b621f1112b91ee5109cd36334b0595e26"
+    }
+  ],
+  "reference_builder_PE_SHA": "dd4683f86808f6ac5f6e27b701bbae010088597c5245d985522ace1367a4a23c",
+  "reference_to_final_source_diff": {
+    "src/main.cpp": {
+      "reference": "3a55b678a2951774a66aecb78c9d1624c70f47408f2fcc0b8ab2626727b17265",
+      "final": "a78ce94b5a58c252fea80f08f659a763a6075e4886901eab607fb539abff59eb"
+    }
+  },
+  "main_not_reference_builder_dependency": true,
+  "distinct_candidate01_rejection": {
+    "status": "REJECTED",
+    "actual_native_children": 2,
+    "conservative_starts_charged": 5,
+    "remaining_H100_children_not_started": 2,
+    "reason": "P-S run-config snapshot overwrote effective identity as custom",
+    "diagnostic_all_remaining_predicates_pass": true,
+    "qualification_failure_retained": true,
+    "formal_starts": 0
+  },
+  "bindings": {
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\actual_heterogeneous_H.json": "27e730e60592acf8bf17a0f38a26f02fec40c545c58076d68f12ac06b3de02c6",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\actual_heterogeneous_H.before.matrix.json": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\actual_heterogeneous_H.after.matrix.json": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\actual_heterogeneous_H.values.csv": "46a7278f5ede42e8a8b24e89d9a9a8435a6ae1047a36afa533c77e730b896ad6",
+    "E:\\codes\\ExactEBRP-round112\\reference\\round100_confirmation\\H100.txt": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\empty_vehicle_0.json": "f8eb8ce02d95974974285f25589d2e5d71e0c5b9d91794559e6a7ee8015e84bd",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\empty_vehicle_0.before.matrix.json": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\empty_vehicle_0.after.matrix.json": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\empty_vehicle_0.values.csv": "159a7cb9b1b3cbf62c6ef37ab8878223761e20a03bd2086bd301ff444ba01498",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\loaded_return.json": "025cd611e44d3fff34f5f518aa0faa3e7de35a98aad781e25f93ffbf25978b0d",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\loaded_return.before.matrix.json": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\loaded_return.after.matrix.json": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\start_fault01\\loaded_return.values.csv": "ce14922fb8a25cf7f73c69f7c44ff22b621f1112b91ee5109cd36334b0595e26",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\production_identity.json": "84feccac058d30dc4d4d09696d5aa6d6c861c7dbb1410dffaac5ffeb3e91d707",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\fees\\reference01\\native_launch.json": "d8774eb2dfdf4530d82f06fce8874bb5cdda9c85e114c1f1f716b67b96a81e58",
+    "E:\\codes\\ExactEBRP-round112\\build\\research\\round112-paid-v1\\Round112ReferenceBatch.exe": "dd4683f86808f6ac5f6e27b701bbae010088597c5245d985522ace1367a4a23c",
+    "E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\qualification\\candidate01_failure.json": "13e10ada0e1abded60f8ecd7fadf43477af5ef2979e91ab0a03cc3b627090b89"
+  },
+  "reviewer_native_starts": 0,
+  "reviewer_Optimize": 0
+}

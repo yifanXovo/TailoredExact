@@ -1,0 +1,214 @@
+{
+  "roles": [
+    {
+      "number": 1,
+      "id": "F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 1200,
+      "method_order": [
+        "P-GRB",
+        "P-S",
+        "ENS-C",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 1296
+    },
+    {
+      "number": 2,
+      "id": "R98-C2",
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-S",
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 1867
+    },
+    {
+      "number": 3,
+      "id": "R108-L48",
+      "input_path": "reference/round108_confirmation/L48.txt",
+      "input_sha256": "8ce2bceb8de415a1ff62ea78790456ee54e3542ce57714a7a53505d30ea54755",
+      "V": 48,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "M-B",
+        "P-S"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 2901
+    },
+    {
+      "number": 4,
+      "id": "G50-C1",
+      "input_path": "reference/round109_geographic/G50-C1.txt",
+      "input_sha256": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-S",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 2983
+    },
+    {
+      "number": 5,
+      "id": "G100-R2",
+      "input_path": "reference/round109_geographic/G100-R2.txt",
+      "input_sha256": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "V": 100,
+      "M": 8,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "P-S",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 5828
+    }
+  ],
+  "qualification_roles": [
+    {
+      "id": "H100",
+      "input_path": "reference/round100_confirmation/H100.txt",
+      "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        13,
+        21
+      ],
+      "T_seconds": 5100,
+      "cap_seconds": 120,
+      "method_order": [
+        "P-GRB",
+        "P-S",
+        "ENS-C",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "qualification"
+    },
+    {
+      "id": "positive5over24",
+      "input_path": "tests/data/round59_tiny.txt",
+      "input_sha256": "8794991888f65387b21ae457635e32eed7a4072e837cf8e06b17f3c9751dcd16",
+      "V": 3,
+      "M": 1,
+      "Q_vector": [
+        3
+      ],
+      "T_seconds": 3,
+      "cap_seconds": 60,
+      "method_order": [
+        "P-GRB",
+        "P-S"
+      ],
+      "pickup_seconds": 0,
+      "drop_seconds": 0,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "qualification"
+    },
+    {
+      "id": "ownzero",
+      "input_path": "tests/data/round24_toy_V2_M1.txt",
+      "input_sha256": "88aea8fd01b752c7d76d0a3dff2229a4222a6fbad9bf8ef5a05c22ea144528a9",
+      "V": 2,
+      "M": 1,
+      "Q_vector": [
+        1
+      ],
+      "T_seconds": 60,
+      "cap_seconds": 60,
+      "method_order": [
+        "P-S"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "qualification"
+    }
+  ],
+  "geographies_added": 0,
+  "seeds_added": 0
+}

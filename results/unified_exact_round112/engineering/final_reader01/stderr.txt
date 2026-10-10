@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round112\scripts\read_round112.py", line 277, in <module>
+    a=p.parse_args();print(json.dumps(rebuild(a.root,a.out,a.qualification_only),allow_nan=False))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round112\scripts\read_round112.py", line 228, in rebuild
+    pair_rows.append(dict(id=role,**value,candidate_U=a['U'],candidate_L=a['L'],candidate_gap=a['gap'],candidate_certificate=a['certificate'],candidate_complete_seconds=a['complete_seconds'],control_U=c['U'],control_L=c['L'],control_gap=c['gap'],control_certificate=c['certificate'],control_complete_seconds=c['complete_seconds']))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: dict() got multiple values for keyword argument 'candidate_U'

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round112\scripts\round112_campaign.py", line 112, in billed
+    rec=supervised(launch,ident,arm_tick);dest=Path(launch['destination'])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round112\scripts\round112_campaign.py", line 58, in supervised
+    return namespace['run_one'](launch,identity['prereg'],identity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round112\scripts\round112_campaign.py::original_supervisor", line 72, in run_one
+    assert prereg["execution_order"] == [
+                        ^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round112\scripts\round88_a1_g3.py", line 64, in atomic_status
+    os.replace(temporary, path)
+PermissionError: [WinError 5] 拒绝访问。: 'E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\campaign\\runtime_status.json.tmp' -> 'E:\\codes\\ExactEBRP-round112\\results\\unified_exact_round112\\campaign\\runtime_status.json'
