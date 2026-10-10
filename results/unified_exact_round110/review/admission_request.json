@@ -1,0 +1,37 @@
+{
+  "production_PE_path": "build/research/round110-entry-v1/ExactEBRP.exe",
+  "actual_PE_header": {
+    "magic": 523,
+    "machine": 34404,
+    "stack_reserve": 2097152,
+    "stack_commit": 4096
+  },
+  "remaining_formal_overhead_seconds": 1800,
+  "artifacts": {
+    "qualification_plan": {
+      "path": "results/unified_exact_round110/qualification/admission_plan.json",
+      "SHA": "52aa4fd03699a4c073eaf8b11eb04d8fde7540d2bddc0f03b4a2831b84c6818d"
+    },
+    "parser_equivalence": {
+      "path": "results/unified_exact_round110/qualification/parser_equivalence_receipt.json",
+      "SHA": "47187d62e192d1687cff9ecb70c30cfde36674b11acbcc16ba79c1316b3497cf"
+    },
+    "main_entry": {
+      "path": "results/unified_exact_round110/qualification/main_entry_receipt.json",
+      "SHA": "b01162a02fc9a8f5cea755fe260d21363012af79a017ad601860777bbc915b03"
+    },
+    "finite_regressions": {
+      "path": "results/unified_exact_round110/qualification/finite_regression_evidence02.json",
+      "SHA": "d1119f249501aa9624663851e7f27c61e0c01d5851dbc614453965f02186d0fb"
+    },
+    "evidence_policy": {
+      "path": "results/unified_exact_round110/evidence_policy.json",
+      "SHA": "e250f250a66ea724b3e65eaf3c4d21adab3f08f3f2a5abaa4455b4e6738e35c0"
+    },
+    "repair_evidence": {
+      "path": "results/unified_exact_round110/repair_evidence.json",
+      "SHA": "2b533f9ef75755660d75baecce287c1b71dafa7a1d91497b0f50ee4421f90201"
+    }
+  },
+  "supersedes_request_SHA": "27fcc6afe799ce3dd3bfffd80c9b1a81e3f7c6bb0c7700b6faa1f447ab21af27"
+}

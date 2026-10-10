@@ -234,3 +234,8 @@ results/data_generation_citibike_round57/source_station_table.csv -text
 # Audit streams and this inherited parser preserve their actual final blank lines.
 results/unified_exact_round109/**/*.log -whitespace
 results/unified_exact_round109/**/round109_independent_parser.py whitespace=cr-at-eol,-blank-at-eof
+
+# Preserve Round110 actual build, qualification, frozen evidence and raw bytes.
+results/unified_exact_round110/** -text whitespace=cr-at-eol
+scripts/round110* -text whitespace=cr-at-eol
+results/unified_exact_round110/**/*.log -whitespace

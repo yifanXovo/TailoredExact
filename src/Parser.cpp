@@ -40,11 +40,14 @@ std::string firstLine(const std::string& text) {
 }
 
 std::string namedBracketPayload(const std::string& text, const std::string& name) {
-    const std::string pat = name + R"(\s*=\s*\[([\s\S]*?)\])";
+    const std::string pat = name + R"(\s*=\s*\[)";
     const std::regex re(pat);
     std::smatch m;
     if (!std::regex_search(text, m, re)) return {};
-    return m[1].str();
+    const auto begin = static_cast<std::size_t>(m.position() + m.length());
+    const auto end = text.find(']', begin);
+    if (end == std::string::npos) return {};
+    return text.substr(begin, end - begin);
 }
 
 std::vector<int> namedIntVector(const std::string& text, const std::string& name) {

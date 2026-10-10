@@ -1,0 +1,6 @@
+{
+  "decision": "HOLD",
+  "error": "Traceback (most recent call last):\n  File \"E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\review\\round110_independent_cold_rejection.py\", line 247, in main\n    value, result, models, q = audit(a, launch, identity, proposed)\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\review\\round110_independent_cold_rejection.py\", line 29, in audit\n    a.require(original_audit['binary_sha256'] == a.pe_sha, 'original actual observer records current production PE')\n              ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nKeyError: 'binary_sha256'\n",
+  "Optimize": 0,
+  "native_environment": 0
+}
