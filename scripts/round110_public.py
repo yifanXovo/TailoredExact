@@ -192,6 +192,7 @@ def pack(root):
         'results/unified_exact_round109/reports_final/pairs.csv',
         'results/unified_exact_round109/main09_stack_failure.md',
         'results/unified_exact_round109/review/mechanism_correction01.json',
+        'results/unified_exact_round109/review/performance_admission.json',
         'results/unified_exact_round109/review/round109_independent_parser.py',
         'results/unified_exact_round109/review/round109_independent_kernel.py',
         'results/unified_exact_round109/review/round109_independent_decision.py',
