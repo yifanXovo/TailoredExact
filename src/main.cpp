@@ -4145,6 +4145,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             snapshot.preset_experimental_features_enabled += "," + feature;
         }
     };
+    if (opt.round112_ens_start_compact) {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round112_self_paid_ENS_start_original_compact");
+        snapshot.preset_reason = "Round112: independently paid original ENS H and one complete Start on unchanged cold compact";
+    }
     if (opt.round100_continuous_quantities) {
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round100_continuous_quantities");
