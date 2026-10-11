@@ -1,0 +1,7 @@
+# Current bound consistency barrier
+
+G50 cold P returned normally (rc0), with one declared, actual and returned full-original MIP. Its necessary arm-local audit claimed U=0.26019451545210409, L=2.2806283239409983e-06, gap=0.26019223482378018. That audit did not establish cross-arm consistency. ENS-C independently produced a physically legal own integer zero fleet, Y=D, and independent global floor0.
+
+The unchanged current-call guard at scripts/round113_campaign.py:127 rejected 2.2806283239409983e-06 > 0+1e-7. The guard ran after required postexit audit and before audit_execution_metrics.json/whole_arm_receipt.json; those two files do not exist for cold P. The native process was not killed by display publication. No complete arm clock can be manufactured from its native completion or the enclosing group fee. Its endpoint is withheld, and all three new comparisons against cold P are UNEVALUABLE.
+
+This is a conflict between a recorded native bound claim and independent original-domain evidence. It does not identify a unique solver, scaling, model or mapping root cause. Current model SHA, original parameters and returned-bound records remain available for independent audit. No tolerance adjustment or historical exemption is applied. G100 arms5–8 were not started under the required authority barrier; ordinary negative results in earlier arms did not stop the run. Fixed arms are never rerun.

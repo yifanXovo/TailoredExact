@@ -30,6 +30,7 @@ def pack(root):
     for name in ('read_round113','compare_round112_startup','qualify_round113','qualify_round113_post','round113_seal','round113_pre_admission','round113_initialize','round113_report','publish_round113','verify_round113_publication'):
         add(root/'scripts'/(name+'.py'))
     add(root/'scripts/observe_round113.ps1')
+    add(root/'scripts/.gitattributes')
     for campaign in ('campaign','qualification/cli01','inherited_r112/authoritative/campaign'):
         for l in read(out/campaign/'identity.json')['launches']:
             p=l['panel'];assert sha(root/p['input_path'])==p['input_sha256'];add(root/p['input_path'])

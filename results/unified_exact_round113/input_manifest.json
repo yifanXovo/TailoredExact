@@ -1,0 +1,92 @@
+{
+  "roles": [
+    {
+      "number": 4,
+      "id": "G50-C1",
+      "input_path": "reference/round109_geographic/G50-C1.txt",
+      "input_sha256": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-S",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 2983
+    },
+    {
+      "number": 5,
+      "id": "G100-R2",
+      "input_path": "reference/round109_geographic/G100-R2.txt",
+      "input_sha256": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "V": 100,
+      "M": 8,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "P-S",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 5828
+    }
+  ],
+  "qualification_roles": [
+    {
+      "id": "H100",
+      "input_path": "reference/round100_confirmation/H100.txt",
+      "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        13,
+        21
+      ],
+      "T_seconds": 5100,
+      "cap_seconds": 120,
+      "method_order": [
+        "P-GRB",
+        "P-S",
+        "ENS-C",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "qualification"
+    }
+  ],
+  "new_geographies": 0,
+  "old_roles_repeated": false
+}

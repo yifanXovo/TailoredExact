@@ -1,0 +1,7 @@
+# Inherited numerical and physical policy
+
+Keep original input normalization, integer quantities, assigned vehicle Q, physical time T, lambda=.15, pickup/drop60/60, strict zero relative/absolute native gap parameters, FeasibilityTol/OptimalityTol1e-6, IntFeasTol1e-5 and complete certification tolerance1e-7. Keep signed floating gaps, null/error and current-call original-domain restrictions. The inherited L48 P-S gap-9.43689570931383e-16 is retained. Numeric certificates are not rational optimality proofs. Independent LP lower bounds and global nonnegative floor0 remain distinct.
+
+Any current bound conflicting with a separately verified feasible original-domain witness is rejected under the unchanged guard; no historical case name/sidecar exemption, arbitrary raised floor or enlarged tolerance. Necessary arm-local audit alone does not supersede cross-arm consistency or complete whole-clock qualification. Incomplete endpoints and times remain null.
+
+The P-S normal zero-Optimize audit distinguishes declaration, actual Optimize, returned and explicit not_started with source-supported phases/log/results. Three supported zero-call lifecycle branches are finite synthetic source-derived coverage; none occurred in the actual H100 or formal P-S execution. A pending actual call with missing return is not canceled. Actual mapped Start/API checks remain required if they happened, while native search/adoption/LB/OPTIMAL credit requires actual exposure.

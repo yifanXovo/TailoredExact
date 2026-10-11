@@ -1,0 +1,3200 @@
+{
+  "arms": [
+    {
+      "number": 1,
+      "id": "G50-C1",
+      "arm": "M-B",
+      "process_returncode": 0,
+      "stop_reason": "normal_return",
+      "process_wall_seconds": 1770.1410000000615,
+      "native_end_receipt": {
+        "complete_seconds_until_native_end": 1771.174145008903,
+        "ended_unix": 1791699384.2000785
+      },
+      "necessary_postexit_audit_receipt": {
+        "complete_seconds_until_audit_end": 1777.2730243088445,
+        "ended_unix": 1791699390.299461
+      },
+      "necessary_audit_passed": true,
+      "raw_claimed_endpoint": {
+        "U": 0.008182628062360801,
+        "L": 0,
+        "gap": 0.008182628062360801,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "internally_reconstructed_endpoint": {
+        "id": "G50-C1",
+        "arm": "M-B",
+        "U": 0.008182628062360805,
+        "L": 0.0,
+        "gap": 0.008182628062360805,
+        "certificate": false,
+        "certificate_qualified": true,
+        "numbers_qualified": true,
+        "certificate_basis": "qualified_complete_original_interval_cover_open",
+        "complete_seconds": 1770.375,
+        "formal_performance": false,
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "stop_reason": "normal_return",
+        "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+        "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "V": 50,
+        "M": 4,
+        "Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "input_SHA": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+        "native_Optimize": 4,
+        "route_oracle": 0,
+        "IIS": 0,
+        "source_commit": "d0014a7163e3996fe120471420e56b089c9715ae",
+        "tiny_negative_gap_within_original_tolerance": false,
+        "exact_native_first_witness_time_observed": false,
+        "raw_claimed_U": 0.008182628062360801,
+        "raw_claimed_L": 0,
+        "raw_claimed_strict_certificate": false,
+        "raw_claimed_relative_gap": 1,
+        "raw_tree_termination_reason": "overall_global_deadline",
+        "legacy_metadata_native_best_bound_return_code": -1,
+        "legacy_metadata_serialized_bound_matches_native": false,
+        "qualified_bounds_rebuilt_from_actual_native_journal_and_cover": true,
+        "relative_gap": 1.0,
+        "relative_gap_null_reason": null
+      },
+      "physical": {
+        "G": 0.0021826280623608025,
+        "P": 0.040000000000000015,
+        "F": 0.008182628062360805,
+        "Y": [
+          50000,
+          9,
+          10,
+          12,
+          10,
+          9,
+          10,
+          9,
+          10,
+          11,
+          10,
+          9,
+          11,
+          11,
+          11,
+          12,
+          12,
+          10,
+          10,
+          11,
+          8,
+          10,
+          10,
+          11,
+          13,
+          10,
+          11,
+          9,
+          9,
+          10,
+          11,
+          13,
+          9,
+          9,
+          10,
+          13,
+          9,
+          11,
+          11,
+          11,
+          10,
+          10,
+          11,
+          10,
+          13,
+          11,
+          10,
+          12,
+          10,
+          15,
+          9
+        ],
+        "maximum_duration": 7149.075539656113,
+        "pickups": [
+          26,
+          27,
+          24,
+          20
+        ],
+        "return_loads": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              4,
+              1,
+              2,
+              8,
+              3,
+              5,
+              15,
+              22,
+              12,
+              21,
+              32,
+              18,
+              10,
+              7,
+              0
+            ],
+            "operations": [
+              {
+                "station": 4,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 2,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 5,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 21,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 32,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 3
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              20,
+              25,
+              48,
+              47,
+              37,
+              38,
+              40,
+              41,
+              24,
+              17,
+              11,
+              28,
+              35,
+              50,
+              0
+            ],
+            "operations": [
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 48,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 47,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 37,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 38,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 40,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 41,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 24,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 11,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 28,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 50,
+                "pickup": 0,
+                "drop": 3
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              16,
+              14,
+              19,
+              30,
+              39,
+              33,
+              23,
+              46,
+              9,
+              13,
+              26,
+              6,
+              0
+            ],
+            "operations": [
+              {
+                "station": 16,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 19,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 39,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 33,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 23,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 46,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 26,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 3,
+            "nodes": [
+              0,
+              27,
+              36,
+              45,
+              49,
+              42,
+              31,
+              43,
+              34,
+              44,
+              29,
+              0
+            ],
+            "operations": [
+              {
+                "station": 27,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 36,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 45,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 49,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 42,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 31,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 43,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 34,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 44,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 4,
+        "empty_vehicles_added": 0
+      },
+      "native_declared": 4,
+      "actual_Optimize": 4,
+      "native_returned": 4,
+      "explicit_not_started": 0,
+      "parameter_readback": {
+        "threads": {
+          "requested": 1,
+          "effective": 1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "seed": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "presolve": {
+          "requested": -1,
+          "effective": -1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap_abs": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        }
+      },
+      "complete_scope_cover": {
+        "L": 0.0,
+        "raw_trace_final_L": 0.0,
+        "complete_coverage": true,
+        "all_relevant_closed": false,
+        "live_leaves": 1,
+        "open_leaves": 1,
+        "covered_gini_upper": 0.0325201793721973,
+        "timeline": [
+          {
+            "row": 1,
+            "process_elapsed_seconds": "10.4925499",
+            "exact_phase_elapsed_seconds": "0.013380700000000001",
+            "event_type": "exact_tree_initialization",
+            "active_leaf": "",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "initial_exact_interval_cover",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 2,
+            "process_elapsed_seconds": "17.451402000000002",
+            "exact_phase_elapsed_seconds": "6.9722325999999999",
+            "event_type": "parent_lp_completion",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "complete_parent_lp_optimal",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 3,
+            "process_elapsed_seconds": "24.852027499999998",
+            "exact_phase_elapsed_seconds": "14.3728581",
+            "event_type": "child_lp_completion",
+            "active_leaf": "L0.0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "0",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "complete_speculative_child_lp_optimal",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 4,
+            "process_elapsed_seconds": "33.684131800000003",
+            "exact_phase_elapsed_seconds": "23.204962399999999",
+            "event_type": "child_lp_completion",
+            "active_leaf": "L0.1",
+            "active_leaf_valid_lower_bound": "0.016260089686098649",
+            "other_open_leaf_min_valid_lower_bound": "0",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "complete_speculative_child_lp_optimal",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 5,
+            "process_elapsed_seconds": "33.685900199999999",
+            "exact_phase_elapsed_seconds": "23.206730799999999",
+            "event_type": "declined_split",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "c6_current_child_gain_not_strict_exact_closure",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 6,
+            "process_elapsed_seconds": "35.251485700000003",
+            "exact_phase_elapsed_seconds": "24.772316699999998",
+            "event_type": "native_root_processing_bound",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "gurobi_cb_mip_objbnd_valid_native_bound",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 7,
+            "process_elapsed_seconds": "1770.0679814",
+            "exact_phase_elapsed_seconds": "1759.5888116000001",
+            "event_type": "incumbent_improvement",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.0081826280623608014",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "independently_verified_native_incumbent",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 8,
+            "process_elapsed_seconds": "1770.0679878999999",
+            "exact_phase_elapsed_seconds": "1759.5888187999999",
+            "event_type": "interruption",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.0081826280623608014",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "global_deadline_interrupted_terminal_mip",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 9,
+            "process_elapsed_seconds": "1770.0679935999999",
+            "exact_phase_elapsed_seconds": "1759.5888244",
+            "event_type": "interruption",
+            "active_leaf": "",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.0081826280623608014",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "overall_process_deadline_open_coverage",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 10,
+            "process_elapsed_seconds": "1770.0683137999999",
+            "exact_phase_elapsed_seconds": "1759.5891443999999",
+            "event_type": "finalization",
+            "active_leaf": "",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.0081826280623608014",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "graceful_deadline_final_valid_bound",
+            "recomputed_complete_cover_bound": 0.0
+          }
+        ],
+        "leaves": [
+          {
+            "leaf_id": "L0",
+            "parent_id": "",
+            "depth": "0",
+            "child_index": "-1",
+            "gamma_L": "0",
+            "gamma_U": "0.032520179372197297",
+            "base_lower_bound": "0",
+            "lower_bound": "0",
+            "status": "open",
+            "lp_complete": "1",
+            "lp_optimal": "1",
+            "lp_infeasible": "0",
+            "lp_bound": "0",
+            "terminal_mip_started": "1",
+            "terminal_ready": "1",
+            "coalesced_block_id": "",
+            "coverage_member_ids": "",
+            "c6_native_phase_count": "0",
+            "c6_frontier_milestone_reached": "0",
+            "c6_children_ready": "0",
+            "single_child_contraction_parent": "0",
+            "strict_infeasible_half_verified": "0",
+            "contracted_infeasible_gamma_L": "",
+            "contracted_infeasible_gamma_U": "",
+            "contraction_source": "",
+            "closure_source": "",
+            "lower_bound_sources": "objective_nonnegative_penalty_G_floor;optimal_complete_lp_relaxation;native_terminal_mip_bound"
+          }
+        ],
+        "scoped_proofs": [
+          {
+            "call": 1,
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 4,
+            "source": "actual_optimal_complete_original_LP_relaxation"
+          },
+          {
+            "call": 2,
+            "lo": 0,
+            "hi": 0.01626008968609865,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 6,
+            "source": "actual_optimal_complete_original_LP_relaxation"
+          },
+          {
+            "call": 3,
+            "lo": 0.01626008968609865,
+            "hi": 0.0325201793721973,
+            "L": 0.01626008968609865,
+            "cutoff": 0.0325201793721973,
+            "sequence": 8,
+            "source": "actual_optimal_complete_original_LP_relaxation"
+          },
+          {
+            "call": 4,
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 11,
+            "source": "qualified_original_integer_native_bound"
+          },
+          {
+            "call": 4,
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 13,
+            "source": "linked_returned_original_integer_native_log_final_bound",
+            "native_status": "TIME_LIMIT",
+            "native_log": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+            "native_log_SHA": "8b41026daeb414d73e573add39f9b0f792bdafe0b0cdf3aed2c424272e4136ea",
+            "full_original": false
+          }
+        ]
+      },
+      "progress": {
+        "schema": "round113_optional_publication_v1",
+        "number": 1,
+        "id": "G50-C1",
+        "arm": "M-B",
+        "disabled": false,
+        "failure_count": 0,
+        "first_failure": null,
+        "attempts": 30,
+        "successes": 30,
+        "disabled_calls_skipped": 0,
+        "retries": 0,
+        "sleeps": 0,
+        "authoritative_samples_and_protections_unchanged": true,
+        "next_arm_uses_new_state": true,
+        "qualification_fault_injected": false,
+        "holder_process": null,
+        "sharing_mask": null,
+        "held_before_child_launch_until_supervisor_end": false,
+        "necessary_write_before_whole": true,
+        "global_namespace_modified": false
+      },
+      "full_arm_performance_qualified": true,
+      "whole_arm_receipt": {
+        "number": 1,
+        "id": "G50-C1",
+        "arm": "M-B",
+        "seed": 0,
+        "complete_seconds": 1777.2817804088118,
+        "includes_admission_identity_startup_native_outputs_necessary_postexit_audit_crosscheck_metrics": true,
+        "first_arm_includes_wrapper_creation_and_import": true,
+        "metrics_written_before_whole": true,
+        "progress_publication_receipt_written_before_whole": true,
+        "progress_receipt_SHA": "40f03e1475de98ec59dd98b8cfcc9a094aeb13086f6767904d07c4d125658ea4",
+        "cap_seconds": 1800
+      },
+      "qualified_endpoint": {
+        "id": "G50-C1",
+        "arm": "M-B",
+        "U": 0.008182628062360805,
+        "L": 0.0,
+        "gap": 0.008182628062360805,
+        "certificate": false,
+        "certificate_qualified": true,
+        "numbers_qualified": true,
+        "certificate_basis": "qualified_complete_original_interval_cover_open",
+        "complete_seconds": 1770.375,
+        "formal_performance": false,
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "stop_reason": "normal_return",
+        "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+        "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "V": 50,
+        "M": 4,
+        "Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "input_SHA": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+        "native_Optimize": 4,
+        "route_oracle": 0,
+        "IIS": 0,
+        "source_commit": "d0014a7163e3996fe120471420e56b089c9715ae",
+        "tiny_negative_gap_within_original_tolerance": false,
+        "exact_native_first_witness_time_observed": false,
+        "raw_claimed_U": 0.008182628062360801,
+        "raw_claimed_L": 0,
+        "raw_claimed_strict_certificate": false,
+        "raw_claimed_relative_gap": 1,
+        "raw_tree_termination_reason": "overall_global_deadline",
+        "legacy_metadata_native_best_bound_return_code": -1,
+        "legacy_metadata_serialized_bound_matches_native": false,
+        "qualified_bounds_rebuilt_from_actual_native_journal_and_cover": true,
+        "relative_gap": 1.0,
+        "relative_gap_null_reason": null
+      },
+      "complete_seconds": 1777.2817804088118,
+      "state": "QUALIFIED_COMPLETE_WHOLE"
+    },
+    {
+      "number": 2,
+      "id": "G50-C1",
+      "arm": "ENS-C",
+      "process_returncode": 0,
+      "stop_reason": "normal_return",
+      "process_wall_seconds": 316.18700000003446,
+      "native_end_receipt": {
+        "complete_seconds_until_native_end": 316.4884019000456,
+        "ended_unix": 1791699706.8110008
+      },
+      "necessary_postexit_audit_receipt": {
+        "complete_seconds_until_audit_end": 322.55211819999386,
+        "ended_unix": 1791699712.874723
+      },
+      "necessary_audit_passed": true,
+      "raw_claimed_endpoint": {
+        "U": 0,
+        "L": 0,
+        "gap": 0,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "internally_reconstructed_endpoint": {
+        "id": "G50-C1",
+        "arm": "ENS-C",
+        "U": 0.0,
+        "L": 0.0,
+        "gap": 0.0,
+        "certificate": true,
+        "certificate_qualified": true,
+        "numbers_qualified": true,
+        "certificate_basis": "qualified_complete_original_interval_cover_closed",
+        "complete_seconds": 316.4220000000205,
+        "formal_performance": false,
+        "status": "optimal",
+        "stop_reason": "normal_return",
+        "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+        "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "V": 50,
+        "M": 4,
+        "Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "input_SHA": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+        "native_Optimize": 4,
+        "route_oracle": 0,
+        "IIS": 0,
+        "source_commit": "d0014a7163e3996fe120471420e56b089c9715ae",
+        "tiny_negative_gap_within_original_tolerance": false,
+        "exact_native_first_witness_time_observed": false,
+        "raw_claimed_U": 0,
+        "raw_claimed_L": 0,
+        "raw_claimed_strict_certificate": true,
+        "raw_claimed_relative_gap": 0,
+        "raw_tree_termination_reason": "none",
+        "legacy_metadata_native_best_bound_return_code": -1,
+        "legacy_metadata_serialized_bound_matches_native": false,
+        "qualified_bounds_rebuilt_from_actual_native_journal_and_cover": true,
+        "relative_gap": null,
+        "relative_gap_null_reason": "original_zero_objective_tolerance"
+      },
+      "physical": {
+        "G": 0.0,
+        "P": 0.0,
+        "F": 0.0,
+        "Y": [
+          50000,
+          9,
+          10,
+          12,
+          10,
+          9,
+          10,
+          9,
+          10,
+          11,
+          10,
+          9,
+          11,
+          11,
+          11,
+          12,
+          12,
+          10,
+          10,
+          11,
+          9,
+          10,
+          10,
+          11,
+          13,
+          10,
+          11,
+          9,
+          9,
+          10,
+          11,
+          13,
+          9,
+          9,
+          10,
+          13,
+          9,
+          11,
+          11,
+          11,
+          10,
+          10,
+          11,
+          10,
+          13,
+          11,
+          10,
+          12,
+          10,
+          15,
+          9
+        ],
+        "maximum_duration": 7197.188309052213,
+        "pickups": [
+          26,
+          23,
+          24,
+          23
+        ],
+        "return_loads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              4,
+              1,
+              2,
+              8,
+              3,
+              5,
+              15,
+              22,
+              12,
+              21,
+              32,
+              18,
+              10,
+              7,
+              0
+            ],
+            "operations": [
+              {
+                "station": 4,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 2,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 5,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 21,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 32,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 3
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              37,
+              38,
+              41,
+              24,
+              13,
+              25,
+              48,
+              20,
+              17,
+              11,
+              28,
+              14,
+              0
+            ],
+            "operations": [
+              {
+                "station": 37,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 38,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 41,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 24,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 25,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 48,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 20,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 11,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 28,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              16,
+              19,
+              30,
+              39,
+              33,
+              23,
+              35,
+              46,
+              50,
+              6,
+              9,
+              47,
+              0
+            ],
+            "operations": [
+              {
+                "station": 16,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 39,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 33,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 23,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 46,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 50,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 47,
+                "pickup": 0,
+                "drop": 5
+              }
+            ]
+          },
+          {
+            "vehicle": 3,
+            "nodes": [
+              0,
+              40,
+              27,
+              36,
+              45,
+              26,
+              49,
+              43,
+              34,
+              31,
+              42,
+              44,
+              29,
+              0
+            ],
+            "operations": [
+              {
+                "station": 40,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 36,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 45,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 26,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 49,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 43,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 34,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 31,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 42,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 44,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 4,
+        "empty_vehicles_added": 0
+      },
+      "native_declared": 4,
+      "actual_Optimize": 4,
+      "native_returned": 4,
+      "explicit_not_started": 0,
+      "parameter_readback": {
+        "threads": {
+          "requested": 1,
+          "effective": 1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "seed": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "presolve": {
+          "requested": -1,
+          "effective": -1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap_abs": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        }
+      },
+      "complete_scope_cover": {
+        "L": 0.0,
+        "raw_trace_final_L": 0.0,
+        "complete_coverage": true,
+        "all_relevant_closed": true,
+        "live_leaves": 1,
+        "open_leaves": 0,
+        "covered_gini_upper": 0.0325201793721973,
+        "timeline": [
+          {
+            "row": 1,
+            "process_elapsed_seconds": "10.4444351",
+            "exact_phase_elapsed_seconds": "0.0126576",
+            "event_type": "exact_tree_initialization",
+            "active_leaf": "",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "initial_exact_interval_cover",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 2,
+            "process_elapsed_seconds": "17.135611399999998",
+            "exact_phase_elapsed_seconds": "6.7038339000000002",
+            "event_type": "parent_lp_completion",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "complete_parent_lp_optimal",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 3,
+            "process_elapsed_seconds": "23.992656799999999",
+            "exact_phase_elapsed_seconds": "13.5608793",
+            "event_type": "child_lp_completion",
+            "active_leaf": "L0.0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "0",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "complete_speculative_child_lp_optimal",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 4,
+            "process_elapsed_seconds": "30.919665200000001",
+            "exact_phase_elapsed_seconds": "20.487887799999999",
+            "event_type": "child_lp_completion",
+            "active_leaf": "L0.1",
+            "active_leaf_valid_lower_bound": "0.016260089686098649",
+            "other_open_leaf_min_valid_lower_bound": "0",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "complete_speculative_child_lp_optimal",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 5,
+            "process_elapsed_seconds": "30.921438299999998",
+            "exact_phase_elapsed_seconds": "20.489660799999999",
+            "event_type": "declined_split",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "c6_current_child_gain_not_strict_exact_closure",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 6,
+            "process_elapsed_seconds": "32.617647300000002",
+            "exact_phase_elapsed_seconds": "22.185870099999999",
+            "event_type": "native_root_processing_bound",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0.032520179372197297",
+            "open_relevant_leaf_count": "1",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "gurobi_cb_mip_objbnd_valid_native_bound",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 7,
+            "process_elapsed_seconds": "316.07742230000002",
+            "exact_phase_elapsed_seconds": "305.64564430000001",
+            "event_type": "incumbent_improvement",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "2.9976021664879229e-17",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0",
+            "open_relevant_leaf_count": "0",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "independently_verified_native_incumbent",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 8,
+            "process_elapsed_seconds": "316.0774341",
+            "exact_phase_elapsed_seconds": "305.64565690000001",
+            "event_type": "terminal_mip_closure",
+            "active_leaf": "L0",
+            "active_leaf_valid_lower_bound": "",
+            "other_open_leaf_min_valid_lower_bound": "0",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0",
+            "open_relevant_leaf_count": "0",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "native_terminal_mip_optimal",
+            "recomputed_complete_cover_bound": 0.0
+          },
+          {
+            "row": 9,
+            "process_elapsed_seconds": "316.07768019999997",
+            "exact_phase_elapsed_seconds": "305.64590279999999",
+            "event_type": "finalization",
+            "active_leaf": "",
+            "active_leaf_valid_lower_bound": "0",
+            "other_open_leaf_min_valid_lower_bound": "",
+            "valid_global_lower_bound": "0",
+            "verified_global_upper_bound": "0",
+            "open_relevant_leaf_count": "0",
+            "closed_relevant_leaf_count": "0",
+            "event_source": "completed_exact_tree_final_bound",
+            "recomputed_complete_cover_bound": 0.0
+          }
+        ],
+        "leaves": [
+          {
+            "leaf_id": "L0",
+            "parent_id": "",
+            "depth": "0",
+            "child_index": "-1",
+            "gamma_L": "0",
+            "gamma_U": "0.032520179372197297",
+            "base_lower_bound": "0",
+            "lower_bound": "2.9976021664879229e-17",
+            "status": "closed",
+            "lp_complete": "1",
+            "lp_optimal": "1",
+            "lp_infeasible": "0",
+            "lp_bound": "0",
+            "terminal_mip_started": "1",
+            "terminal_ready": "1",
+            "coalesced_block_id": "",
+            "coverage_member_ids": "",
+            "c6_native_phase_count": "0",
+            "c6_frontier_milestone_reached": "0",
+            "c6_children_ready": "0",
+            "single_child_contraction_parent": "0",
+            "strict_infeasible_half_verified": "0",
+            "contracted_infeasible_gamma_L": "",
+            "contracted_infeasible_gamma_U": "",
+            "contraction_source": "",
+            "closure_source": "native_terminal_mip_optimal",
+            "lower_bound_sources": "objective_nonnegative_penalty_G_floor;optimal_complete_lp_relaxation;native_terminal_mip_bound"
+          }
+        ],
+        "scoped_proofs": [
+          {
+            "call": 1,
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 4,
+            "source": "actual_optimal_complete_original_LP_relaxation"
+          },
+          {
+            "call": 2,
+            "lo": 0,
+            "hi": 0.01626008968609865,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 6,
+            "source": "actual_optimal_complete_original_LP_relaxation"
+          },
+          {
+            "call": 3,
+            "lo": 0.01626008968609865,
+            "hi": 0.0325201793721973,
+            "L": 0.01626008968609865,
+            "cutoff": 0.0325201793721973,
+            "sequence": 8,
+            "source": "actual_optimal_complete_original_LP_relaxation"
+          },
+          {
+            "call": 4,
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 11,
+            "source": "qualified_original_integer_native_bound"
+          },
+          {
+            "call": 4,
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 14,
+            "source": "linked_returned_original_integer_native_log_final_bound",
+            "native_status": "OPTIMAL",
+            "native_log": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log",
+            "native_log_SHA": "4ecef5a184dc2429d3bd19a5922dc1f6c6dbd7a77c56c6c1f675d99cfe72f921",
+            "full_original": false
+          }
+        ]
+      },
+      "progress": {
+        "schema": "round113_optional_publication_v1",
+        "number": 2,
+        "id": "G50-C1",
+        "arm": "ENS-C",
+        "disabled": false,
+        "failure_count": 0,
+        "first_failure": null,
+        "attempts": 6,
+        "successes": 6,
+        "disabled_calls_skipped": 0,
+        "retries": 0,
+        "sleeps": 0,
+        "authoritative_samples_and_protections_unchanged": true,
+        "next_arm_uses_new_state": true,
+        "qualification_fault_injected": false,
+        "holder_process": null,
+        "sharing_mask": null,
+        "held_before_child_launch_until_supervisor_end": false,
+        "necessary_write_before_whole": true,
+        "global_namespace_modified": false
+      },
+      "full_arm_performance_qualified": true,
+      "whole_arm_receipt": {
+        "number": 2,
+        "id": "G50-C1",
+        "arm": "ENS-C",
+        "seed": 0,
+        "complete_seconds": 322.5586690000491,
+        "includes_admission_identity_startup_native_outputs_necessary_postexit_audit_crosscheck_metrics": true,
+        "first_arm_includes_wrapper_creation_and_import": false,
+        "metrics_written_before_whole": true,
+        "progress_publication_receipt_written_before_whole": true,
+        "progress_receipt_SHA": "3cb43f9074b76e0a84c8a0decaa8f8d148b1671b5f21439815f4679d0a8f0d99",
+        "cap_seconds": 1800
+      },
+      "qualified_endpoint": {
+        "id": "G50-C1",
+        "arm": "ENS-C",
+        "U": 0.0,
+        "L": 0.0,
+        "gap": 0.0,
+        "certificate": true,
+        "certificate_qualified": true,
+        "numbers_qualified": true,
+        "certificate_basis": "qualified_complete_original_interval_cover_closed",
+        "complete_seconds": 316.4220000000205,
+        "formal_performance": false,
+        "status": "optimal",
+        "stop_reason": "normal_return",
+        "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+        "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "V": 50,
+        "M": 4,
+        "Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "input_SHA": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+        "native_Optimize": 4,
+        "route_oracle": 0,
+        "IIS": 0,
+        "source_commit": "d0014a7163e3996fe120471420e56b089c9715ae",
+        "tiny_negative_gap_within_original_tolerance": false,
+        "exact_native_first_witness_time_observed": false,
+        "raw_claimed_U": 0,
+        "raw_claimed_L": 0,
+        "raw_claimed_strict_certificate": true,
+        "raw_claimed_relative_gap": 0,
+        "raw_tree_termination_reason": "none",
+        "legacy_metadata_native_best_bound_return_code": -1,
+        "legacy_metadata_serialized_bound_matches_native": false,
+        "qualified_bounds_rebuilt_from_actual_native_journal_and_cover": true,
+        "relative_gap": null,
+        "relative_gap_null_reason": "original_zero_objective_tolerance"
+      },
+      "complete_seconds": 322.5586690000491,
+      "state": "QUALIFIED_COMPLETE_WHOLE"
+    },
+    {
+      "number": 3,
+      "id": "G50-C1",
+      "arm": "P-S",
+      "process_returncode": 0,
+      "stop_reason": "normal_return",
+      "process_wall_seconds": 1770.125,
+      "native_end_receipt": {
+        "complete_seconds_until_native_end": 1770.4268532999558,
+        "ended_unix": 1791701483.3174098
+      },
+      "necessary_postexit_audit_receipt": {
+        "complete_seconds_until_audit_end": 1771.3899664999917,
+        "ended_unix": 1791701484.2798789
+      },
+      "necessary_audit_passed": true,
+      "raw_claimed_endpoint": {
+        "U": 0.008182628062360805,
+        "L": 0.0,
+        "gap": 0.008182628062360805,
+        "certificate": false,
+        "status": "time_limit",
+        "source": "own_H_and_original_compact"
+      },
+      "internally_reconstructed_endpoint": {
+        "id": "G50-C1",
+        "arm": "P-S",
+        "U": 0.008182628062360805,
+        "L": 0.0,
+        "gap": 0.008182628062360805,
+        "certificate": false,
+        "certificate_qualified": true,
+        "numbers_qualified": true,
+        "status": "time_limit",
+        "native_Optimize": 1,
+        "declared_native_calls": 1,
+        "explicit_not_started": 0,
+        "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+        "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "cap_seconds": 1800,
+        "own_startup_U": 0.03252017937219731,
+        "native_adoption": {
+          "exact_vector_observed_in_mipsol": 1,
+          "integer_vector_observed_in_mipsol": 1,
+          "Optimize_count": 1,
+          "optimize_return_code": 0
+        }
+      },
+      "physical": {
+        "G": 0.0021826280623608025,
+        "P": 0.040000000000000015,
+        "F": 0.008182628062360805,
+        "Y": [
+          50000,
+          9,
+          10,
+          12,
+          10,
+          9,
+          10,
+          9,
+          10,
+          11,
+          10,
+          9,
+          11,
+          11,
+          11,
+          12,
+          12,
+          10,
+          10,
+          11,
+          8,
+          10,
+          10,
+          11,
+          13,
+          10,
+          11,
+          9,
+          9,
+          10,
+          11,
+          13,
+          9,
+          9,
+          10,
+          13,
+          9,
+          11,
+          11,
+          11,
+          10,
+          10,
+          11,
+          10,
+          13,
+          11,
+          10,
+          12,
+          10,
+          15,
+          9
+        ],
+        "maximum_duration": 7180.990933955269,
+        "pickups": [
+          23,
+          27,
+          27,
+          20
+        ],
+        "return_loads": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              5,
+              15,
+              3,
+              8,
+              2,
+              22,
+              12,
+              21,
+              32,
+              18,
+              42,
+              7,
+              0
+            ],
+            "operations": [
+              {
+                "station": 5,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 3,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 21,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 32,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 42,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 3
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              20,
+              25,
+              48,
+              47,
+              37,
+              38,
+              40,
+              24,
+              17,
+              11,
+              28,
+              41,
+              14,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 20,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 25,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 48,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 47,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 37,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 38,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 40,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 24,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 11,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 28,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 41,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 3
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              4,
+              16,
+              19,
+              33,
+              39,
+              30,
+              35,
+              50,
+              46,
+              23,
+              6,
+              9,
+              13,
+              10,
+              0
+            ],
+            "operations": [
+              {
+                "station": 4,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 16,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 33,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 39,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 50,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 46,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 23,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 3,
+            "nodes": [
+              0,
+              27,
+              36,
+              45,
+              31,
+              26,
+              49,
+              43,
+              34,
+              44,
+              29,
+              0
+            ],
+            "operations": [
+              {
+                "station": 27,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 36,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 45,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 31,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 26,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 49,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 43,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 34,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 44,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 4,
+        "empty_vehicles_added": 0
+      },
+      "native_declared": 1,
+      "actual_Optimize": 1,
+      "native_returned": 1,
+      "explicit_not_started": 0,
+      "parameter_readback": {
+        "threads": {
+          "requested": 1,
+          "effective": 1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "seed": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "presolve": {
+          "requested": -1,
+          "effective": -1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap_abs": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        }
+      },
+      "complete_scope_cover": null,
+      "progress": {
+        "schema": "round113_optional_publication_v1",
+        "number": 3,
+        "id": "G50-C1",
+        "arm": "P-S",
+        "disabled": false,
+        "failure_count": 0,
+        "first_failure": null,
+        "attempts": 30,
+        "successes": 30,
+        "disabled_calls_skipped": 0,
+        "retries": 0,
+        "sleeps": 0,
+        "authoritative_samples_and_protections_unchanged": true,
+        "next_arm_uses_new_state": true,
+        "qualification_fault_injected": false,
+        "holder_process": null,
+        "sharing_mask": null,
+        "held_before_child_launch_until_supervisor_end": false,
+        "necessary_write_before_whole": true,
+        "global_namespace_modified": false
+      },
+      "full_arm_performance_qualified": true,
+      "whole_arm_receipt": {
+        "number": 3,
+        "id": "G50-C1",
+        "arm": "P-S",
+        "seed": 0,
+        "complete_seconds": 1771.3991304999217,
+        "includes_admission_identity_startup_native_outputs_necessary_postexit_audit_crosscheck_metrics": true,
+        "first_arm_includes_wrapper_creation_and_import": false,
+        "metrics_written_before_whole": true,
+        "progress_publication_receipt_written_before_whole": true,
+        "progress_receipt_SHA": "829c2433ae63b92a25635554ca30fab51eae61e451bde86ca46083a65be8cac0",
+        "cap_seconds": 1800
+      },
+      "qualified_endpoint": {
+        "id": "G50-C1",
+        "arm": "P-S",
+        "U": 0.008182628062360805,
+        "L": 0.0,
+        "gap": 0.008182628062360805,
+        "certificate": false,
+        "certificate_qualified": true,
+        "numbers_qualified": true,
+        "status": "time_limit",
+        "native_Optimize": 1,
+        "declared_native_calls": 1,
+        "explicit_not_started": 0,
+        "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+        "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "cap_seconds": 1800,
+        "own_startup_U": 0.03252017937219731,
+        "native_adoption": {
+          "exact_vector_observed_in_mipsol": 1,
+          "integer_vector_observed_in_mipsol": 1,
+          "Optimize_count": 1,
+          "optimize_return_code": 0
+        }
+      },
+      "complete_seconds": 1771.3991304999217,
+      "state": "QUALIFIED_COMPLETE_WHOLE"
+    },
+    {
+      "number": 4,
+      "id": "G50-C1",
+      "arm": "P-GRB",
+      "process_returncode": 0,
+      "stop_reason": "normal_return",
+      "process_wall_seconds": 1770.140000000014,
+      "native_end_receipt": {
+        "complete_seconds_until_native_end": 1770.530276000034,
+        "ended_unix": 1791703254.827901
+      },
+      "necessary_postexit_audit_receipt": {
+        "complete_seconds_until_audit_end": 1770.6129656000994,
+        "ended_unix": 1791703254.9099593
+      },
+      "necessary_audit_passed": true,
+      "raw_claimed_endpoint": {
+        "U": 0.2601945154521041,
+        "L": 2.2806283239409983e-06,
+        "gap": 0.2601922348237802,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "internally_reconstructed_endpoint": {
+        "id": "G50-C1",
+        "arm": "P-GRB",
+        "U": 0.26019451545210387,
+        "L": 2.2806283239409983e-06,
+        "gap": 0.26019223482377996,
+        "certificate": false,
+        "certificate_qualified": true,
+        "numbers_qualified": true,
+        "certificate_basis": "complete_original_cold_compact_qualified_native_bound_open",
+        "complete_seconds": 1770.4529999999795,
+        "formal_performance": false,
+        "status": "time_limit",
+        "stop_reason": "normal_return",
+        "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+        "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "V": 50,
+        "M": 4,
+        "Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "input_SHA": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+        "native_Optimize": 1,
+        "route_oracle": 0,
+        "IIS": 0,
+        "source_commit": "d0014a7163e3996fe120471420e56b089c9715ae",
+        "tiny_negative_gap_within_original_tolerance": false,
+        "exact_native_first_witness_time_observed": false,
+        "raw_claimed_U": 0.2601945154521041,
+        "raw_claimed_L": 2.2806283239409983e-06,
+        "raw_claimed_strict_certificate": false,
+        "raw_claimed_relative_gap": null,
+        "raw_tree_termination_reason": "",
+        "legacy_metadata_native_best_bound_return_code": -1,
+        "legacy_metadata_serialized_bound_matches_native": false,
+        "qualified_bounds_rebuilt_from_actual_native_journal_and_cover": true,
+        "relative_gap": 0.9999912349100828,
+        "relative_gap_null_reason": null
+      },
+      "physical": {
+        "G": 0.05486123545210386,
+        "P": 1.3688885333333334,
+        "F": 0.26019451545210387,
+        "Y": [
+          50000,
+          9,
+          10,
+          12,
+          10,
+          9,
+          10,
+          7,
+          10,
+          11,
+          10,
+          11,
+          11,
+          11,
+          11,
+          12,
+          12,
+          10,
+          10,
+          11,
+          10,
+          10,
+          10,
+          11,
+          13,
+          10,
+          11,
+          10,
+          6,
+          10,
+          11,
+          13,
+          11,
+          11,
+          10,
+          13,
+          10,
+          11,
+          11,
+          11,
+          10,
+          6,
+          11,
+          6,
+          13,
+          11,
+          10,
+          12,
+          10,
+          20,
+          6
+        ],
+        "maximum_duration": 7173.859268697758,
+        "pickups": [
+          21,
+          20,
+          22,
+          19
+        ],
+        "return_loads": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              38,
+              37,
+              13,
+              23,
+              33,
+              30,
+              14,
+              21,
+              42,
+              44,
+              18,
+              0
+            ],
+            "operations": [
+              {
+                "station": 38,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 37,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 23,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 33,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 30,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 21,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 42,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 44,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              39,
+              35,
+              8,
+              7,
+              26,
+              34,
+              31,
+              10,
+              12,
+              5,
+              6,
+              0
+            ],
+            "operations": [
+              {
+                "station": 39,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 35,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 8,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 1
+              },
+              {
+                "station": 26,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 34,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 31,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 12,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 5,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 6,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          },
+          {
+            "vehicle": 2,
+            "nodes": [
+              0,
+              11,
+              24,
+              19,
+              4,
+              15,
+              22,
+              29,
+              25,
+              47,
+              36,
+              45,
+              32,
+              0
+            ],
+            "operations": [
+              {
+                "station": 11,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 24,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 19,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 4,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 22,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 29,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 25,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 47,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 36,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 45,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 32,
+                "pickup": 1,
+                "drop": 0
+              }
+            ]
+          },
+          {
+            "vehicle": 3,
+            "nodes": [
+              0,
+              3,
+              46,
+              16,
+              2,
+              1,
+              17,
+              40,
+              27,
+              20,
+              48,
+              9,
+              0
+            ],
+            "operations": [
+              {
+                "station": 3,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 46,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 16,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 1,
+                "pickup": 0,
+                "drop": 3
+              },
+              {
+                "station": 17,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 40,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 27,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 2,
+                "drop": 0
+              },
+              {
+                "station": 48,
+                "pickup": 0,
+                "drop": 4
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 4
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 4,
+        "empty_vehicles_added": 0
+      },
+      "native_declared": 1,
+      "actual_Optimize": 1,
+      "native_returned": 1,
+      "explicit_not_started": 0,
+      "parameter_readback": {
+        "threads": {
+          "requested": 1,
+          "effective": 1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "seed": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "presolve": {
+          "requested": -1,
+          "effective": -1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap_abs": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        }
+      },
+      "complete_scope_cover": null,
+      "progress": {
+        "schema": "round113_optional_publication_v1",
+        "number": 4,
+        "id": "G50-C1",
+        "arm": "P-GRB",
+        "disabled": false,
+        "failure_count": 0,
+        "first_failure": null,
+        "attempts": 30,
+        "successes": 30,
+        "disabled_calls_skipped": 0,
+        "retries": 0,
+        "sleeps": 0,
+        "authoritative_samples_and_protections_unchanged": true,
+        "next_arm_uses_new_state": true,
+        "qualification_fault_injected": false,
+        "holder_process": null,
+        "sharing_mask": null,
+        "held_before_child_launch_until_supervisor_end": false,
+        "necessary_write_before_whole": true,
+        "global_namespace_modified": false
+      },
+      "full_arm_performance_qualified": false,
+      "whole_arm_receipt": null,
+      "qualified_endpoint": null,
+      "complete_seconds": null,
+      "state": "NORMAL_RETURN_POSTVALIDATION_FAILED_NO_WHOLE",
+      "raw_numbers_retained_without_performance_promotion": true
+    }
+  ],
+  "models": [
+    {
+      "arm": "M-B",
+      "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/models/L0.0_epoch_0_generation_2.lp",
+      "SHA": "7c2bc3a3f541cb5b5a1c0213c00f057911bf949f041e1c18248e87f44a961876",
+      "rows": 102843,
+      "columns": 23953,
+      "quantity_columns": 400,
+      "quantity_type": "C",
+      "direction_columns": 200,
+      "frozen_A_B_rows_checked": 100,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true
+    },
+    {
+      "arm": "M-B",
+      "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/models/L0.1_epoch_0_generation_3.lp",
+      "SHA": "dd125a32593647df314b967e5d664d9a1098ece73b06a6f0e06f1ffef0585a1d",
+      "rows": 102442,
+      "columns": 23509,
+      "quantity_columns": 400,
+      "quantity_type": "C",
+      "direction_columns": 200,
+      "frozen_A_B_rows_checked": 100,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true
+    },
+    {
+      "arm": "M-B",
+      "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/models/L0_epoch_0_generation_1.lp",
+      "SHA": "2d4a2d6f42b1dd4d0c1903167307df79ff290bc4140b20be2b09c8b2d24857e2",
+      "rows": 102843,
+      "columns": 23953,
+      "quantity_columns": 400,
+      "quantity_type": "C",
+      "direction_columns": 200,
+      "frozen_A_B_rows_checked": 100,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true
+    },
+    {
+      "arm": "M-B",
+      "call": 1,
+      "model_SHA": "2d4a2d6f42b1dd4d0c1903167307df79ff290bc4140b20be2b09c8b2d24857e2",
+      "actual_scope": {
+        "saved_G_lower": 0,
+        "saved_G_upper": 0.0325201793721973,
+        "saved_objective_cutoff": 0.0325201793721973,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "full_original": 0,
+      "native_preconditions": 0,
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "LP"
+    },
+    {
+      "arm": "M-B",
+      "call": 2,
+      "model_SHA": "7c2bc3a3f541cb5b5a1c0213c00f057911bf949f041e1c18248e87f44a961876",
+      "actual_scope": {
+        "saved_G_lower": 0,
+        "saved_G_upper": 0.01626008968609865,
+        "saved_objective_cutoff": 0.0325201793721973,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "full_original": 0,
+      "native_preconditions": 0,
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "LP"
+    },
+    {
+      "arm": "M-B",
+      "call": 3,
+      "model_SHA": "dd125a32593647df314b967e5d664d9a1098ece73b06a6f0e06f1ffef0585a1d",
+      "actual_scope": {
+        "saved_G_lower": 0.01626008968609865,
+        "saved_G_upper": 0.0325201793721973,
+        "saved_objective_cutoff": 0.0325201793721973,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "full_original": 0,
+      "native_preconditions": 0,
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "LP"
+    },
+    {
+      "arm": "M-B",
+      "call": 4,
+      "model_SHA": "2d4a2d6f42b1dd4d0c1903167307df79ff290bc4140b20be2b09c8b2d24857e2",
+      "actual_scope": {
+        "saved_G_lower": 0,
+        "saved_G_upper": 0.0325201793721973,
+        "saved_objective_cutoff": 0.0325201793721973,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "full_original": 0,
+      "native_preconditions": 1,
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "MIP"
+    },
+    {
+      "arm": "ENS-C",
+      "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/models/L0.0_epoch_0_generation_2.lp",
+      "SHA": "74948437465c2f118e074d4aa2fd2675df91126c6c222360fc84a9b433848cdb",
+      "rows": 102743,
+      "columns": 23953,
+      "quantity_columns": 400,
+      "quantity_type": "I",
+      "direction_columns": 200,
+      "frozen_A_B_rows_checked": 0,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true
+    },
+    {
+      "arm": "ENS-C",
+      "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/models/L0.1_epoch_0_generation_3.lp",
+      "SHA": "2f9bfbcdb3a93afd91e201c9b4965bd094491f14dd0dbb255b63b043780deee7",
+      "rows": 102342,
+      "columns": 23509,
+      "quantity_columns": 400,
+      "quantity_type": "I",
+      "direction_columns": 200,
+      "frozen_A_B_rows_checked": 0,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true
+    },
+    {
+      "arm": "ENS-C",
+      "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/models/L0_epoch_0_generation_1.lp",
+      "SHA": "0a402b1d2fc25ac807e018f71659d8c703ece160a67ad037befe3bad91e53b2d",
+      "rows": 102743,
+      "columns": 23953,
+      "quantity_columns": 400,
+      "quantity_type": "I",
+      "direction_columns": 200,
+      "frozen_A_B_rows_checked": 0,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true
+    },
+    {
+      "arm": "ENS-C",
+      "call": 1,
+      "model_SHA": "0a402b1d2fc25ac807e018f71659d8c703ece160a67ad037befe3bad91e53b2d",
+      "actual_scope": {
+        "saved_G_lower": 0,
+        "saved_G_upper": 0.0325201793721973,
+        "saved_objective_cutoff": 0.0325201793721973,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "full_original": 0,
+      "native_preconditions": 0,
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "LP"
+    },
+    {
+      "arm": "ENS-C",
+      "call": 2,
+      "model_SHA": "74948437465c2f118e074d4aa2fd2675df91126c6c222360fc84a9b433848cdb",
+      "actual_scope": {
+        "saved_G_lower": 0,
+        "saved_G_upper": 0.01626008968609865,
+        "saved_objective_cutoff": 0.0325201793721973,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "full_original": 0,
+      "native_preconditions": 0,
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "LP"
+    },
+    {
+      "arm": "ENS-C",
+      "call": 3,
+      "model_SHA": "2f9bfbcdb3a93afd91e201c9b4965bd094491f14dd0dbb255b63b043780deee7",
+      "actual_scope": {
+        "saved_G_lower": 0.01626008968609865,
+        "saved_G_upper": 0.0325201793721973,
+        "saved_objective_cutoff": 0.0325201793721973,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "full_original": 0,
+      "native_preconditions": 0,
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "LP"
+    },
+    {
+      "arm": "ENS-C",
+      "call": 4,
+      "model_SHA": "0a402b1d2fc25ac807e018f71659d8c703ece160a67ad037befe3bad91e53b2d",
+      "actual_scope": {
+        "saved_G_lower": 0,
+        "saved_G_upper": 0.0325201793721973,
+        "saved_objective_cutoff": 0.0325201793721973,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "full_original": 0,
+      "native_preconditions": 1,
+      "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "MIP"
+    },
+    {
+      "arm": "P-S",
+      "path": "results/unified_exact_round113/campaign/raw/03_G50-C1_S0_P-S/compact.lp",
+      "SHA": "3c4385055008239f0b26af749792e95eeb7ef22403ef58035a51b5e75eb16b8c",
+      "rows": 35567,
+      "columns": 13326,
+      "quantity_columns": 400,
+      "quantity_type": "I",
+      "direction_columns": 200,
+      "frozen_A_B_rows_checked": 0,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true
+    },
+    {
+      "arm": "P-S",
+      "call": 1,
+      "model_SHA": "3c4385055008239f0b26af749792e95eeb7ef22403ef58035a51b5e75eb16b8c",
+      "actual_scope": {
+        "full_original_reference_already_checked": true
+      },
+      "full_original": 1,
+      "native_preconditions": 1,
+      "model_scope": "complete_original_compact_milp",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "MIP"
+    },
+    {
+      "arm": "P-GRB",
+      "path": "results/unified_exact_round113/campaign/raw/04_G50-C1_S0_P-GRB/compact.lp",
+      "SHA": "3c4385055008239f0b26af749792e95eeb7ef22403ef58035a51b5e75eb16b8c",
+      "rows": 35567,
+      "columns": 13326,
+      "quantity_columns": 400,
+      "quantity_type": "I",
+      "direction_columns": 200,
+      "frozen_A_B_rows_checked": 0,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true
+    },
+    {
+      "arm": "P-GRB",
+      "call": 1,
+      "model_SHA": "3c4385055008239f0b26af749792e95eeb7ef22403ef58035a51b5e75eb16b8c",
+      "actual_scope": {
+        "full_original_reference_already_checked": true
+      },
+      "full_original": 1,
+      "native_preconditions": 1,
+      "model_scope": "complete_original_compact_milp",
+      "actual_Optimize": true,
+      "returned": true,
+      "solve_kind": "MIP"
+    }
+  ],
+  "current_native_log_type_and_size_readbacks": [
+    {
+      "arm": "M-B",
+      "model_SHA": "2d4a2d6f42b1dd4d0c1903167307df79ff290bc4140b20be2b09c8b2d24857e2",
+      "solve_kind": "LP",
+      "rows": 102843,
+      "columns": 23953,
+      "actual_native_types": null,
+      "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0_lp.gurobi.log",
+      "SHA": "af047628a64654a84481fadf85560ae997c672be03707b4a456a2cf8f97e8514"
+    },
+    {
+      "arm": "M-B",
+      "model_SHA": "7c2bc3a3f541cb5b5a1c0213c00f057911bf949f041e1c18248e87f44a961876",
+      "solve_kind": "LP",
+      "rows": 102843,
+      "columns": 23953,
+      "actual_native_types": null,
+      "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0.0_lp.gurobi.log",
+      "SHA": "28d7e4aa77d2dcf8232ca5a77ff5690a404c39213f130cbb25f249b45014a34c"
+    },
+    {
+      "arm": "M-B",
+      "model_SHA": "dd125a32593647df314b967e5d664d9a1098ece73b06a6f0e06f1ffef0585a1d",
+      "solve_kind": "LP",
+      "rows": 102442,
+      "columns": 23509,
+      "actual_native_types": null,
+      "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0.1_lp.gurobi.log",
+      "SHA": "fd88e5ca58b3a25dca3d584957de0c489bb99f8eb7c3904003466c31abb2fe44"
+    },
+    {
+      "arm": "M-B",
+      "model_SHA": "2d4a2d6f42b1dd4d0c1903167307df79ff290bc4140b20be2b09c8b2d24857e2",
+      "solve_kind": "MIP",
+      "rows": 102843,
+      "columns": 23953,
+      "actual_native_types": {
+        "C": 12641,
+        "I": 250,
+        "B": 11062
+      },
+      "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+      "SHA": "8b41026daeb414d73e573add39f9b0f792bdafe0b0cdf3aed2c424272e4136ea"
+    },
+    {
+      "arm": "ENS-C",
+      "model_SHA": "0a402b1d2fc25ac807e018f71659d8c703ece160a67ad037befe3bad91e53b2d",
+      "solve_kind": "LP",
+      "rows": 102743,
+      "columns": 23953,
+      "actual_native_types": null,
+      "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0_lp.gurobi.log",
+      "SHA": "86b2b93190d3ce0db1dbe51eb899548b6cb900c17217af1e1141a7d4e509172e"
+    },
+    {
+      "arm": "ENS-C",
+      "model_SHA": "74948437465c2f118e074d4aa2fd2675df91126c6c222360fc84a9b433848cdb",
+      "solve_kind": "LP",
+      "rows": 102743,
+      "columns": 23953,
+      "actual_native_types": null,
+      "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+      "SHA": "90a92d645bcf9a1c69dd636a615a09016afef3395173d5dac2ca0adb9a438773"
+    },
+    {
+      "arm": "ENS-C",
+      "model_SHA": "2f9bfbcdb3a93afd91e201c9b4965bd094491f14dd0dbb255b63b043780deee7",
+      "solve_kind": "LP",
+      "rows": 102342,
+      "columns": 23509,
+      "actual_native_types": null,
+      "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+      "SHA": "f602e90ae8dc8a4b4d2212aeeef019d44b766bd167c8d5f014bd1467066a9633"
+    },
+    {
+      "arm": "ENS-C",
+      "model_SHA": "0a402b1d2fc25ac807e018f71659d8c703ece160a67ad037befe3bad91e53b2d",
+      "solve_kind": "MIP",
+      "rows": 102743,
+      "columns": 23953,
+      "actual_native_types": {
+        "C": 12241,
+        "I": 650,
+        "B": 11062
+      },
+      "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log",
+      "SHA": "4ecef5a184dc2429d3bd19a5922dc1f6c6dbd7a77c56c6c1f675d99cfe72f921"
+    },
+    {
+      "arm": "P-S",
+      "model_SHA": "3c4385055008239f0b26af749792e95eeb7ef22403ef58035a51b5e75eb16b8c",
+      "solve_kind": "MIP",
+      "rows": 35567,
+      "columns": 13326,
+      "actual_native_types": {
+        "C": 1826,
+        "I": 650,
+        "B": 10850
+      },
+      "path": "results/unified_exact_round113/campaign/raw/03_G50-C1_S0_P-S/native.log",
+      "SHA": "a628d1b3ecfa2ffda6ca0952a78251e1c28f0b6cbf274f725ef7cf3c0dd14c02"
+    },
+    {
+      "arm": "P-GRB",
+      "model_SHA": "3c4385055008239f0b26af749792e95eeb7ef22403ef58035a51b5e75eb16b8c",
+      "solve_kind": "MIP",
+      "rows": 35567,
+      "columns": 13326,
+      "actual_native_types": {
+        "C": 1826,
+        "I": 650,
+        "B": 10850
+      },
+      "path": "results/unified_exact_round113/campaign/raw/04_G50-C1_S0_P-GRB/native.log",
+      "SHA": "6ddb2f030add9dabdd6098bd86296b62580b018d2941cbb2500d534683d6cad0"
+    }
+  ],
+  "current_actual_Start_API_readbacks": [
+    {
+      "arm": "M-B",
+      "start_path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "start_sha256": "8138d6f3415dc13dd965fb163e887cafc88f313a20c825a1feb99e1a5fd66483",
+      "vector_sha256": "a5a9198bdcbade58a8a4b0976bc6d95dbd5cc8415f6be2e4aa0a947a5bdacb13",
+      "model_sha256": "2d4a2d6f42b1dd4d0c1903167307df79ff290bc4140b20be2b09c8b2d24857e2",
+      "maximum_absolute_residual": 4.9404924595819466e-14,
+      "mode": "m-binary",
+      "rows": 102843,
+      "columns": 23953,
+      "objective": 0.0325201793721973,
+      "actual_quantity_type": "C",
+      "direction_columns": 200,
+      "per_column_restored_type_checked": true,
+      "ordered_native_columns_checked": true,
+      "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+    },
+    {
+      "arm": "ENS-C",
+      "start_path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "start_sha256": "0fff46058007f5d76b8520f0b393ff44293348d0bbca50bb4212cf7de076bbd6",
+      "vector_sha256": "2cb664b2bb98ebbd89cfdd639172ce9658978c15cf98ae741301c7a93e45949b",
+      "model_sha256": "0a402b1d2fc25ac807e018f71659d8c703ece160a67ad037befe3bad91e53b2d",
+      "maximum_absolute_residual": 4.9404924595819466e-14,
+      "mode": "off",
+      "rows": 102743,
+      "columns": 23953,
+      "objective": 0.0325201793721973,
+      "actual_quantity_type": "I",
+      "direction_columns": 200,
+      "per_column_restored_type_checked": true,
+      "ordered_native_columns_checked": true,
+      "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+    },
+    {
+      "columns": 13326,
+      "rows": 35567,
+      "maximum_row_violation": 4.873879078104437e-14,
+      "objective": 0.0325201793721973,
+      "all_native_columns_checked": true,
+      "all_original_numeric_rows_checked": true,
+      "names_metadata_also_unchanged": true,
+      "before_SHA": "29bbffdd02ba923fe5e47dac1b5cef21b0d05ddb1961a74401584ef3285be4c2",
+      "after_SHA": "29bbffdd02ba923fe5e47dac1b5cef21b0d05ddb1961a74401584ef3285be4c2",
+      "vector_SHA": "67dd6737a24a9e44286125a901db0bce57d48e38ef7337fcf0f8daf1e6d97670",
+      "mapping_validation_submission_seconds": 0.2584153,
+      "arm": "P-S",
+      "API": "GRBsetdblattrarray(Start)",
+      "native_adoption": {
+        "exact_vector_observed_in_mipsol": 1,
+        "integer_vector_observed_in_mipsol": 1,
+        "Optimize_count": 1,
+        "optimize_return_code": 0
+      }
+    }
+  ],
+  "actual_Optimize": 10,
+  "actual_returned": 10
+}

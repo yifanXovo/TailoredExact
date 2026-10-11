@@ -1,0 +1,8 @@
+{
+  "failure_scope": "reviewer-only offline engineering",
+  "failed_assumption": "all call native_preconditions must be true",
+  "actual_evidence": "original ENS/MB LP calls deliberately lack MILP callback-bound flag and have separate LP return ledger; no bound event uses those calls",
+  "native_starts": 0,
+  "qualification_starts": 0,
+  "production_or_raw_changed": false
+}

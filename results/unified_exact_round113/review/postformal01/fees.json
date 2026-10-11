@@ -1,0 +1,102 @@
+{
+  "rows": [
+    {
+      "label": "cli01",
+      "qualification": true,
+      "conservative_process_starts": 5,
+      "actual_native_children": 4,
+      "exit_code": 0,
+      "outer_seconds_lower": 351.8160567067098,
+      "outer_seconds_upper": 458.15035343170166,
+      "actual_exit_observed": true,
+      "nested_native_seconds_added": false,
+      "helper_differences_from_final_admitted_closure": []
+    },
+    {
+      "label": "finite01",
+      "qualification": true,
+      "conservative_process_starts": 1,
+      "actual_native_children": 0,
+      "exit_code": 1,
+      "outer_seconds_lower": 1.1629389696754515,
+      "outer_seconds_upper": 1.692826747894287,
+      "actual_exit_observed": true,
+      "nested_native_seconds_added": false,
+      "helper_differences_from_final_admitted_closure": [
+        "scripts/round113_audit.py"
+      ]
+    },
+    {
+      "label": "finite02",
+      "qualification": true,
+      "conservative_process_starts": 1,
+      "actual_native_children": 0,
+      "exit_code": 0,
+      "outer_seconds_lower": 0.5074572545709088,
+      "outer_seconds_upper": 1.0107402801513672,
+      "actual_exit_observed": true,
+      "nested_native_seconds_added": false,
+      "helper_differences_from_final_admitted_closure": [
+        "scripts/round113_audit.py"
+      ]
+    },
+    {
+      "label": "finite03",
+      "qualification": true,
+      "conservative_process_starts": 1,
+      "actual_native_children": 0,
+      "exit_code": 0,
+      "outer_seconds_lower": 0.6464817640371621,
+      "outer_seconds_upper": 1.1783287525177002,
+      "actual_exit_observed": true,
+      "nested_native_seconds_added": false,
+      "helper_differences_from_final_admitted_closure": []
+    },
+    {
+      "label": "main01",
+      "qualification": false,
+      "conservative_process_starts": 5,
+      "actual_native_children": 4,
+      "exit_code": 1,
+      "outer_seconds_lower": 5641.891279108822,
+      "outer_seconds_upper": 5642.008212089539,
+      "actual_exit_observed": true,
+      "nested_native_seconds_added": false,
+      "helper_differences_from_final_admitted_closure": []
+    },
+    {
+      "label": "post01",
+      "qualification": true,
+      "conservative_process_starts": 1,
+      "actual_native_children": 0,
+      "exit_code": 1,
+      "outer_seconds_lower": 3.9376371793914586,
+      "outer_seconds_upper": 4.469872236251831,
+      "actual_exit_observed": true,
+      "nested_native_seconds_added": false,
+      "helper_differences_from_final_admitted_closure": []
+    },
+    {
+      "label": "post02",
+      "qualification": true,
+      "conservative_process_starts": 1,
+      "actual_native_children": 0,
+      "exit_code": 0,
+      "outer_seconds_lower": 3.9045369426021352,
+      "outer_seconds_upper": 3.990781307220459,
+      "actual_exit_observed": true,
+      "nested_native_seconds_added": false,
+      "helper_differences_from_final_admitted_closure": []
+    }
+  ],
+  "totals": {
+    "conservative_process_starts": 15,
+    "outer_seconds_upper": 6112.501114845276,
+    "qualification_starts": 10,
+    "qualification_outer_seconds_upper": 470.4929027557373,
+    "formal_conservative_starts": 5,
+    "formal_outer_seconds_upper": 5642.008212089539,
+    "all_fees_closed": true,
+    "failed_slots_refunded": false
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "status": "BLOCKED",
+  "kind": "CURRENT_ORIGINAL_COLD_BOUND_VS_INDEPENDENT_OWN_ZERO",
+  "cold_child_normal_return": true,
+  "actual_Optimize": 1,
+  "returned": 1,
+  "failed_stage": "postexit cross-arm consistency before metrics/whole",
+  "rejected_cold_claim": {
+    "U": 0.2601945154521041,
+    "L": 2.2806283239409983e-06,
+    "gap": 0.2601922348237802,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "time_limit"
+  },
+  "qualified_zero_arm": "ENS-C",
+  "qualified_zero_U": 0.0,
+  "original_consistency_tolerance": 1e-07,
+  "excess_over_zero": 2.2806283239409983e-06,
+  "first_global_positive_bound_sequence": 52,
+  "returned_sequence": 82,
+  "current_call_model_SHA": "3c4385055008239f0b26af749792e95eeb7ef22403ef58035a51b5e75eb16b8c",
+  "evidence": {
+    "results/unified_exact_round113/campaign/raw/04_G50-C1_S0_P-GRB/audit.json": "b91b7913eb3c201c7d6bb54fa89bdb3e11be5d86af95c717ce29dc326b8a4797",
+    "results/unified_exact_round113/campaign/raw/04_G50-C1_S0_P-GRB/completion.json": "6f14619fde9de5bc9592c917009c4e32ac81212967ca581537ef43612d55a29c",
+    "results/unified_exact_round113/campaign/raw/04_G50-C1_S0_P-GRB/result.json": "967078e9dc960df90e3f92c97f9e11e3384c1025dcc71fdc2c67560540ab9ea2",
+    "results/unified_exact_round113/campaign/raw/04_G50-C1_S0_P-GRB/observations.json": "555e8ed72fa02d76b0d4a7458a90219fd95a5a481f3fedd4cf5a83e02e956359",
+    "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/audit.json": "cec4e91bbbbf743e8bdd0a616c40e5f083a18f406f776eb1ada604bb469df541",
+    "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/whole_arm_receipt.json": "ea17ca92f6a15650ff673fe679859b5fea7f597ecbf5dcd3c02df5acbf581147",
+    "results/unified_exact_round113/fees/main01/failure.txt": "acf6791aa0d926d7cdbaabf3be448cee97aa6c88d00f623b32b0371ed96c2316",
+    "scripts/round113_campaign.py": "b76c63ad8a09683e43b737721d55523bd7c1c6ab2aadb5070aa5c6e8b29fd447"
+  },
+  "cold_formal_endpoint": false,
+  "whole_seconds": null,
+  "no_clock_synthesized": true,
+  "root_cause": "unknown; requires original model/numeric-bound qualification investigation",
+  "unstarted_numbers": [
+    5,
+    6,
+    7,
+    8
+  ],
+  "no_automatic_retry": true,
+  "PE_or_performance_helpers_changed": false
+}

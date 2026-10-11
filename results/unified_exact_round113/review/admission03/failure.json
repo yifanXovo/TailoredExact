@@ -1,0 +1,11 @@
+{
+  "engineering_review_only": true,
+  "exit_code": 1,
+  "reason": "Reviewer compared Python operation tuples to JSON operation arrays without serialization normalization",
+  "qualification_starts": 0,
+  "native_starts": 0,
+  "Optimize": 0,
+  "script_SHA": "2f39c2dfa01bf541bcd3364bb3910ecd4a522a05ab3a61c355511459fd47fc3f",
+  "failed_assertion": "same == read(post02/H100_same_H.json)",
+  "performance_helper_or_raw_modified": false
+}

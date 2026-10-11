@@ -1,0 +1,1609 @@
+{
+  "arms": [
+    {
+      "arm": "M-B",
+      "F": 0.008182628062360805,
+      "G": 0.0021826280623608025,
+      "P": 0.040000000000000015,
+      "Y": [
+        50000,
+        9,
+        10,
+        12,
+        10,
+        9,
+        10,
+        9,
+        10,
+        11,
+        10,
+        9,
+        11,
+        11,
+        11,
+        12,
+        12,
+        10,
+        10,
+        11,
+        8,
+        10,
+        10,
+        11,
+        13,
+        10,
+        11,
+        9,
+        9,
+        10,
+        11,
+        13,
+        9,
+        9,
+        10,
+        13,
+        9,
+        11,
+        11,
+        11,
+        10,
+        10,
+        11,
+        10,
+        13,
+        11,
+        10,
+        12,
+        10,
+        15,
+        9
+      ],
+      "D": [
+        0,
+        9,
+        10,
+        12,
+        10,
+        9,
+        10,
+        9,
+        10,
+        11,
+        10,
+        9,
+        11,
+        11,
+        11,
+        12,
+        12,
+        10,
+        10,
+        11,
+        9,
+        10,
+        10,
+        11,
+        13,
+        10,
+        11,
+        9,
+        9,
+        10,
+        11,
+        13,
+        9,
+        9,
+        10,
+        13,
+        9,
+        11,
+        11,
+        11,
+        10,
+        10,
+        11,
+        10,
+        13,
+        11,
+        10,
+        12,
+        10,
+        15,
+        9
+      ],
+      "inventory_differences": [
+        {
+          "station": 20,
+          "Y": 8,
+          "D": 9,
+          "deviation": -1
+        }
+      ],
+      "absolute_inventory_deviation": 1,
+      "routes": [
+        {
+          "vehicle": 0,
+          "Q": 30,
+          "nodes": [
+            0,
+            4,
+            1,
+            2,
+            8,
+            3,
+            5,
+            15,
+            22,
+            12,
+            21,
+            32,
+            18,
+            10,
+            7,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 4
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 1
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 2
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 8
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 3
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 5
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 15
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 22
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 12
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 21
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 32
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 18
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 10
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 7
+            }
+          ],
+          "prefix_loads": [
+            0,
+            3,
+            0,
+            4,
+            8,
+            12,
+            16,
+            12,
+            8,
+            4,
+            8,
+            11,
+            7,
+            3,
+            0
+          ],
+          "return_load": 0
+        },
+        {
+          "vehicle": 1,
+          "Q": 30,
+          "nodes": [
+            0,
+            20,
+            25,
+            48,
+            47,
+            37,
+            38,
+            40,
+            41,
+            24,
+            17,
+            11,
+            28,
+            35,
+            50,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 20
+            },
+            {
+              "drop": 0,
+              "pickup": 5,
+              "station": 25
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 48
+            },
+            {
+              "drop": 5,
+              "pickup": 0,
+              "station": 47
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 37
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 38
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 40
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 41
+            },
+            {
+              "drop": 0,
+              "pickup": 5,
+              "station": 24
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 17
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 11
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 28
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 35
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 50
+            }
+          ],
+          "prefix_loads": [
+            0,
+            4,
+            9,
+            5,
+            0,
+            3,
+            7,
+            10,
+            6,
+            11,
+            7,
+            10,
+            7,
+            3,
+            0
+          ],
+          "return_load": 0
+        },
+        {
+          "vehicle": 2,
+          "Q": 30,
+          "nodes": [
+            0,
+            16,
+            14,
+            19,
+            30,
+            39,
+            33,
+            23,
+            46,
+            9,
+            13,
+            26,
+            6,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 16
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 14
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 19
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 30
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 39
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 33
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 23
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 46
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 9
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 13
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 26
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 6
+            }
+          ],
+          "prefix_loads": [
+            0,
+            4,
+            0,
+            4,
+            8,
+            12,
+            16,
+            20,
+            16,
+            12,
+            8,
+            5,
+            1
+          ],
+          "return_load": 1
+        },
+        {
+          "vehicle": 3,
+          "Q": 30,
+          "nodes": [
+            0,
+            27,
+            36,
+            45,
+            49,
+            42,
+            31,
+            43,
+            34,
+            44,
+            29,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 27
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 36
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 45
+            },
+            {
+              "drop": 0,
+              "pickup": 5,
+              "station": 49
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 42
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 31
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 43
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 34
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 44
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 29
+            }
+          ],
+          "prefix_loads": [
+            0,
+            3,
+            7,
+            3,
+            8,
+            4,
+            8,
+            4,
+            8,
+            4,
+            0
+          ],
+          "return_load": 0
+        }
+      ],
+      "maximum_duration": 7149.075539656113,
+      "T": 7200,
+      "physical_recompute_source": "reports_final/fleets.csv; explicit original input",
+      "Optimize": 0
+    },
+    {
+      "arm": "ENS-C",
+      "F": 0.0,
+      "G": 0.0,
+      "P": 0.0,
+      "Y": [
+        50000,
+        9,
+        10,
+        12,
+        10,
+        9,
+        10,
+        9,
+        10,
+        11,
+        10,
+        9,
+        11,
+        11,
+        11,
+        12,
+        12,
+        10,
+        10,
+        11,
+        9,
+        10,
+        10,
+        11,
+        13,
+        10,
+        11,
+        9,
+        9,
+        10,
+        11,
+        13,
+        9,
+        9,
+        10,
+        13,
+        9,
+        11,
+        11,
+        11,
+        10,
+        10,
+        11,
+        10,
+        13,
+        11,
+        10,
+        12,
+        10,
+        15,
+        9
+      ],
+      "D": [
+        0,
+        9,
+        10,
+        12,
+        10,
+        9,
+        10,
+        9,
+        10,
+        11,
+        10,
+        9,
+        11,
+        11,
+        11,
+        12,
+        12,
+        10,
+        10,
+        11,
+        9,
+        10,
+        10,
+        11,
+        13,
+        10,
+        11,
+        9,
+        9,
+        10,
+        11,
+        13,
+        9,
+        9,
+        10,
+        13,
+        9,
+        11,
+        11,
+        11,
+        10,
+        10,
+        11,
+        10,
+        13,
+        11,
+        10,
+        12,
+        10,
+        15,
+        9
+      ],
+      "inventory_differences": [],
+      "absolute_inventory_deviation": 0,
+      "routes": [
+        {
+          "vehicle": 0,
+          "Q": 30,
+          "nodes": [
+            0,
+            4,
+            1,
+            2,
+            8,
+            3,
+            5,
+            15,
+            22,
+            12,
+            21,
+            32,
+            18,
+            10,
+            7,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 4
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 1
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 2
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 8
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 3
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 5
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 15
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 22
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 12
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 21
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 32
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 18
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 10
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 7
+            }
+          ],
+          "prefix_loads": [
+            0,
+            3,
+            0,
+            4,
+            8,
+            12,
+            16,
+            12,
+            8,
+            4,
+            8,
+            11,
+            7,
+            3,
+            0
+          ],
+          "return_load": 0
+        },
+        {
+          "vehicle": 1,
+          "Q": 30,
+          "nodes": [
+            0,
+            37,
+            38,
+            41,
+            24,
+            13,
+            25,
+            48,
+            20,
+            17,
+            11,
+            28,
+            14,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 37
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 38
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 41
+            },
+            {
+              "drop": 0,
+              "pickup": 5,
+              "station": 24
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 13
+            },
+            {
+              "drop": 0,
+              "pickup": 5,
+              "station": 25
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 48
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 20
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 17
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 11
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 28
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 14
+            }
+          ],
+          "prefix_loads": [
+            0,
+            3,
+            7,
+            3,
+            8,
+            4,
+            9,
+            5,
+            8,
+            4,
+            7,
+            4,
+            0
+          ],
+          "return_load": 0
+        },
+        {
+          "vehicle": 2,
+          "Q": 30,
+          "nodes": [
+            0,
+            16,
+            19,
+            30,
+            39,
+            33,
+            23,
+            35,
+            46,
+            50,
+            6,
+            9,
+            47,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 16
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 19
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 30
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 39
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 33
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 23
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 35
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 46
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 50
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 6
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 9
+            },
+            {
+              "drop": 5,
+              "pickup": 0,
+              "station": 47
+            }
+          ],
+          "prefix_loads": [
+            0,
+            4,
+            8,
+            12,
+            16,
+            20,
+            24,
+            20,
+            16,
+            13,
+            9,
+            5,
+            0
+          ],
+          "return_load": 0
+        },
+        {
+          "vehicle": 3,
+          "Q": 30,
+          "nodes": [
+            0,
+            40,
+            27,
+            36,
+            45,
+            26,
+            49,
+            43,
+            34,
+            31,
+            42,
+            44,
+            29,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 40
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 27
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 36
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 45
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 26
+            },
+            {
+              "drop": 0,
+              "pickup": 5,
+              "station": 49
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 43
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 34
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 31
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 42
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 44
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 29
+            }
+          ],
+          "prefix_loads": [
+            0,
+            3,
+            6,
+            10,
+            6,
+            3,
+            8,
+            4,
+            8,
+            12,
+            8,
+            4,
+            0
+          ],
+          "return_load": 0
+        }
+      ],
+      "maximum_duration": 7197.188309052213,
+      "T": 7200,
+      "physical_recompute_source": "reports_final/fleets.csv; explicit original input",
+      "Optimize": 0
+    },
+    {
+      "arm": "P-S",
+      "F": 0.008182628062360805,
+      "G": 0.0021826280623608025,
+      "P": 0.040000000000000015,
+      "Y": [
+        50000,
+        9,
+        10,
+        12,
+        10,
+        9,
+        10,
+        9,
+        10,
+        11,
+        10,
+        9,
+        11,
+        11,
+        11,
+        12,
+        12,
+        10,
+        10,
+        11,
+        8,
+        10,
+        10,
+        11,
+        13,
+        10,
+        11,
+        9,
+        9,
+        10,
+        11,
+        13,
+        9,
+        9,
+        10,
+        13,
+        9,
+        11,
+        11,
+        11,
+        10,
+        10,
+        11,
+        10,
+        13,
+        11,
+        10,
+        12,
+        10,
+        15,
+        9
+      ],
+      "D": [
+        0,
+        9,
+        10,
+        12,
+        10,
+        9,
+        10,
+        9,
+        10,
+        11,
+        10,
+        9,
+        11,
+        11,
+        11,
+        12,
+        12,
+        10,
+        10,
+        11,
+        9,
+        10,
+        10,
+        11,
+        13,
+        10,
+        11,
+        9,
+        9,
+        10,
+        11,
+        13,
+        9,
+        9,
+        10,
+        13,
+        9,
+        11,
+        11,
+        11,
+        10,
+        10,
+        11,
+        10,
+        13,
+        11,
+        10,
+        12,
+        10,
+        15,
+        9
+      ],
+      "inventory_differences": [
+        {
+          "station": 20,
+          "Y": 8,
+          "D": 9,
+          "deviation": -1
+        }
+      ],
+      "absolute_inventory_deviation": 1,
+      "routes": [
+        {
+          "vehicle": 0,
+          "Q": 30,
+          "nodes": [
+            0,
+            5,
+            15,
+            3,
+            8,
+            2,
+            22,
+            12,
+            21,
+            32,
+            18,
+            42,
+            7,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 5
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 15
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 3
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 8
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 2
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 22
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 12
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 21
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 32
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 18
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 42
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 7
+            }
+          ],
+          "prefix_loads": [
+            0,
+            4,
+            0,
+            4,
+            8,
+            12,
+            8,
+            4,
+            8,
+            11,
+            7,
+            3,
+            0
+          ],
+          "return_load": 0
+        },
+        {
+          "vehicle": 1,
+          "Q": 30,
+          "nodes": [
+            0,
+            20,
+            25,
+            48,
+            47,
+            37,
+            38,
+            40,
+            24,
+            17,
+            11,
+            28,
+            41,
+            14,
+            1,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 20
+            },
+            {
+              "drop": 0,
+              "pickup": 5,
+              "station": 25
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 48
+            },
+            {
+              "drop": 5,
+              "pickup": 0,
+              "station": 47
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 37
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 38
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 40
+            },
+            {
+              "drop": 0,
+              "pickup": 5,
+              "station": 24
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 17
+            },
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 11
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 28
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 41
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 14
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 1
+            }
+          ],
+          "prefix_loads": [
+            0,
+            4,
+            9,
+            5,
+            0,
+            3,
+            7,
+            10,
+            15,
+            11,
+            14,
+            11,
+            7,
+            3,
+            0
+          ],
+          "return_load": 0
+        },
+        {
+          "vehicle": 2,
+          "Q": 30,
+          "nodes": [
+            0,
+            4,
+            16,
+            19,
+            33,
+            39,
+            30,
+            35,
+            50,
+            46,
+            23,
+            6,
+            9,
+            13,
+            10,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 4
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 16
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 19
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 33
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 39
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 30
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 35
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 50
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 46
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 23
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 6
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 9
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 13
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 10
+            }
+          ],
+          "prefix_loads": [
+            0,
+            3,
+            7,
+            11,
+            15,
+            19,
+            23,
+            19,
+            16,
+            12,
+            16,
+            12,
+            8,
+            4,
+            0
+          ],
+          "return_load": 0
+        },
+        {
+          "vehicle": 3,
+          "Q": 30,
+          "nodes": [
+            0,
+            27,
+            36,
+            45,
+            31,
+            26,
+            49,
+            43,
+            34,
+            44,
+            29,
+            0
+          ],
+          "operations": [
+            {
+              "drop": 0,
+              "pickup": 3,
+              "station": 27
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 36
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 45
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 31
+            },
+            {
+              "drop": 3,
+              "pickup": 0,
+              "station": 26
+            },
+            {
+              "drop": 0,
+              "pickup": 5,
+              "station": 49
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 43
+            },
+            {
+              "drop": 0,
+              "pickup": 4,
+              "station": 34
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 44
+            },
+            {
+              "drop": 4,
+              "pickup": 0,
+              "station": 29
+            }
+          ],
+          "prefix_loads": [
+            0,
+            3,
+            7,
+            3,
+            7,
+            4,
+            9,
+            5,
+            9,
+            5,
+            1
+          ],
+          "return_load": 1
+        }
+      ],
+      "maximum_duration": 7180.990933955269,
+      "T": 7200,
+      "physical_recompute_source": "reports_final/fleets.csv; explicit original input",
+      "Optimize": 0
+    }
+  ],
+  "deterministic_single_change": {
+    "arm": "M-B",
+    "vehicle": 1,
+    "station": 20,
+    "change": "pickup 4 to 3",
+    "first_invalid_prefix": {
+      "station": 47,
+      "load": -1
+    },
+    "is_search": false,
+    "hidden_MIP_cause_identified": false
+  },
+  "Optimize": 0
+}
