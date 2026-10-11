@@ -1,0 +1,175 @@
+{
+  "passed": true,
+  "final_candidate_arms": [
+    {
+      "campaign": "cli02",
+      "id": "H100",
+      "arm": "P-GRB",
+      "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+      "whole_seconds": 91.18609437975101,
+      "cap": 120,
+      "passed": true,
+      "Optimize": 1,
+      "endpoint": {
+        "U": 0.24859149091954028,
+        "L": 0.10222047431302966,
+        "gap": 0.1463710166065106,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "raw": "results/unified_exact_round112/qualification/cli02/raw/01_H100_S0_P-GRB",
+      "whole_receipt_SHA": "1f5097295b1ae4f0567aff43fbef79d5d46006b347574f0da16000eead36cf3c",
+      "audit_SHA": "d241b08f8cbe420d46834b83fe46a580e9f3f53d466f9be80761d4b1feb86dde"
+    },
+    {
+      "campaign": "cli02",
+      "id": "H100",
+      "arm": "P-S",
+      "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+      "whole_seconds": 90.51369200006593,
+      "cap": 120,
+      "passed": true,
+      "Optimize": 1,
+      "endpoint": {
+        "U": 0.2148723471379297,
+        "L": 0.1019535837745477,
+        "gap": 0.11291876336338198,
+        "certificate": false,
+        "status": "time_limit",
+        "source": "own_H_and_original_compact"
+      },
+      "raw": "results/unified_exact_round112/qualification/cli02/raw/02_H100_S0_P-S",
+      "whole_receipt_SHA": "eaff5764d7fa8a9b96c9ecd287a644e7c8ab1e7f8110578898164b5ab70c0d59",
+      "audit_SHA": "78d2c0682c646e71436007863cb26820e97c8af450876b9b0f3317820315f597"
+    },
+    {
+      "campaign": "cli02",
+      "id": "H100",
+      "arm": "ENS-C",
+      "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+      "whole_seconds": 83.76623949990608,
+      "cap": 120,
+      "passed": true,
+      "Optimize": 5,
+      "endpoint": {
+        "U": 0.16058906725504907,
+        "L": 0.16058906725504885,
+        "gap": 2.220446049250313e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "raw": "results/unified_exact_round112/qualification/cli02/raw/03_H100_S0_ENS-C",
+      "whole_receipt_SHA": "0dfeedbfa351349dd7782541b52e8060c253e105f69de86cf8f44eb53ad75edd",
+      "audit_SHA": "c3bc1cb98f6b427a0ca9cc62eb468fac4e1ea6c291341bfe6ee9bbd1a4ed8d7c"
+    },
+    {
+      "campaign": "cli02",
+      "id": "H100",
+      "arm": "M-B",
+      "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+      "whole_seconds": 86.27905789995566,
+      "cap": 120,
+      "passed": true,
+      "Optimize": 5,
+      "endpoint": {
+        "U": 0.16058906725504907,
+        "L": 0.16058906725504873,
+        "gap": 3.3306690738754696e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "raw": "results/unified_exact_round112/qualification/cli02/raw/04_H100_S0_M-B",
+      "whole_receipt_SHA": "7f9387c58ba724fe504dcc72ac73ae788799977e66fc050f04e658abf9751f71",
+      "audit_SHA": "535e41f06febc2f639886925e3b58f2b6b008e51e7a617d65296918370c423b2"
+    },
+    {
+      "campaign": "positive01",
+      "id": "positive5over24",
+      "arm": "P-GRB",
+      "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+      "whole_seconds": 1.1441181498812512,
+      "cap": 60,
+      "passed": true,
+      "Optimize": 1,
+      "endpoint": {
+        "U": 0.20833333333333331,
+        "L": 0.20833333333333331,
+        "gap": 0.0,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "raw": "results/unified_exact_round112/qualification/positive01/raw/01_positive5over24_S0_P-GRB",
+      "whole_receipt_SHA": "7d2987f3d239f94a9480c3496c8115b87327421eae8f8cc0674b252e3000983c",
+      "audit_SHA": "abfbe1e880517d76773d6b0f29843822c3de15832b9a707976b7252000c5d34a"
+    },
+    {
+      "campaign": "positive01",
+      "id": "positive5over24",
+      "arm": "P-S",
+      "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+      "whole_seconds": 0.4735092999180779,
+      "cap": 60,
+      "passed": true,
+      "Optimize": 1,
+      "endpoint": {
+        "U": 0.20833333333333331,
+        "L": 0.20833333333333331,
+        "gap": 0.0,
+        "certificate": true,
+        "status": "optimal",
+        "source": "own_H_and_original_compact"
+      },
+      "raw": "results/unified_exact_round112/qualification/positive01/raw/02_positive5over24_S0_P-S",
+      "whole_receipt_SHA": "13f3dfdb1b9283cccfd63fa0228f183432ba9d27802984ef83dc30a2609fdbfc",
+      "audit_SHA": "a8b8896bbddd9764599e542589a734c94cf1f86f1915d3a85039239396515c53"
+    },
+    {
+      "campaign": "zero01",
+      "id": "ownzero",
+      "arm": "P-S",
+      "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+      "whole_seconds": 1.1486349776387215,
+      "cap": 60,
+      "passed": true,
+      "Optimize": 0,
+      "endpoint": {
+        "U": 0.0,
+        "L": 0,
+        "gap": 0.0,
+        "certificate": true,
+        "status": "startup_zero",
+        "source": "own_H_and_original_compact"
+      },
+      "raw": "results/unified_exact_round112/qualification/zero01/raw/01_ownzero_S0_P-S",
+      "whole_receipt_SHA": "6318379568063833263bad11f5d560a5f05750bde0fb2365afeb0dc3d5bf7f7f",
+      "audit_SHA": "0b280e4042faa7a733c5a2305db3d19280d7561fe62ca0c0e986b9504a40f368"
+    }
+  ],
+  "final_candidate_PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+  "same_H_SHA": "c4453b76ae7db88e7844d23109b08c32d01fa6cf50283633a55f8cc0be6cb7ac",
+  "original_model_equivalence_SHA": "a03c62a41ed353cbca8a01f2283d4d0e904249d00d444166ebc1ff9e0707e5b2",
+  "fault_batch_SHA": "bcd842c292c61ef3c92c7678e40b278377acaf3ad3a04f651976dbfb40fc3b76",
+  "offline_missing_column_SHA": "c8bfb94a99963537206986b38f5c0fb186b874064e227106b9b8a33ff3a93841",
+  "retained_failed_candidate_SHA": "13e10ada0e1abded60f8ecd7fadf43477af5ef2979e91ab0a03cc3b627090b89",
+  "budget": {
+    "paid_starts": 19,
+    "paid_outer_seconds": 698.0634860992432,
+    "qualification_starts": 19,
+    "qualification_seconds": 698.0634860992432,
+    "remaining_starts": 37,
+    "remaining_outer_seconds": 47301.93651390076,
+    "unclosed": []
+  },
+  "reference_batch_final_builder_binary_unchanged": true,
+  "formal_starts": 0,
+  "qualification_performance_claim": false,
+  "unexercised_paths": [
+    "actual uncontrolled Gurobi API failure",
+    "work-window exhaustion after mapping",
+    "startup output filesystem write failure"
+  ]
+}

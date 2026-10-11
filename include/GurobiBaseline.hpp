@@ -23,6 +23,7 @@ struct GurobiRuntimeProbe {
 bool gurobiBackendBuildEnabled();
 GurobiRuntimeProbe probeGurobiRuntime(const SolveOptions& options);
 SolveResult solveGurobiBaseline(const Instance& instance,
-                                const SolveOptions& options);
+                                const SolveOptions& options,
+                                const SolveResult* paid_ens_start = nullptr);
 
 } // namespace ebrp

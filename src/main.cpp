@@ -264,6 +264,8 @@ std::string lowerAscii(std::string value) {
 }
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
+    if (opt.round112_ens_start_compact)
+        return "research-round112-self-paid-ens-start-original-compact";
     if (opt.round107_frontier_struct)
         return "research-round107-ensc-frontier-struct";
     if (opt.round100_continuous_quantities)
@@ -854,6 +856,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-presolve") opt.gurobi_presolve = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-hga-start") opt.gurobi_hga_start = parseBoolValue(requireValue(i, argc, argv));
+        else if (arg == "--round112-ens-start-compact") opt.round112_ens_start_compact = true;
         else if (arg == "--gurobi-home") opt.gurobi_home = requireValue(i, argc, argv);
         else if (arg == "--gurobi-progress") opt.gurobi_progress_path = requireValue(i, argc, argv);
         else if (arg == "--gurobi-model-export") opt.gurobi_model_export_path = requireValue(i, argc, argv);
@@ -3601,6 +3604,27 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error(
             "Round 60 candidate work bounds are outside audited limits");
     }
+    if (opt.round112_ens_start_compact) {
+        const std::set<std::string> allowed = {
+            "--round112-ens-start-compact", "--input", "--lambda", "--T",
+            "--pickup-time", "--drop-time", "--time-limit", "--process-wall-time-limit",
+            "--process-shutdown-margin", "--threads", "--mip-threads", "--gurobi-seed",
+            "--gurobi-presolve", "--method", "--round61-candidate-mode", "--out", "--log",
+            "--process-phase-ledger", "--external-gini-artifact-dir",
+            "--primal-heuristic-generation-log", "--progress-log", "--native-evidence-dir",
+            "--plain-baseline", "--gurobi-model-export", "--gurobi-progress",
+            "--round24-expected-gurobi-model-fingerprint", "--round24-executable-sha256",
+            "--round24-manifest-executable-sha256"};
+        for (int i=1;i<argc;++i) {
+            const std::string flag=argv[i];
+            if (flag.rfind("--",0)==0 && allowed.count(flag)==0)
+                throw std::runtime_error("Round112 forbids mixed research/external options: "+flag);
+        }
+        if (opt.method!="gurobi" || !opt.plain_baseline || opt.algorithm_preset!="custom" ||
+            opt.round61_candidate_mode!="off" || opt.threads!=1 || opt.mip_threads!=1 ||
+            opt.gurobi_presolve!=-1 || opt.native_evidence_dir.empty())
+            throw std::runtime_error("Round112 requires isolated original compact with own journal");
+    }
     return opt;
 }
 
@@ -4121,6 +4145,11 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
             snapshot.preset_experimental_features_enabled += "," + feature;
         }
     };
+    if (opt.round112_ens_start_compact) {
+        snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round112_self_paid_ENS_start_original_compact");
+        snapshot.preset_reason = "Round112: independently paid original ENS H and one complete Start on unchanged cold compact";
+    }
     if (opt.round100_continuous_quantities) {
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round100_continuous_quantities");
@@ -20042,7 +20071,23 @@ int main(int argc, char** argv) {
             } else if (opt.method == "cplex") {
                 results.push_back(ebrp::solveCplexBaseline(instance, opt));
             } else if (opt.method == "gurobi") {
-                results.push_back(ebrp::solveGurobiBaseline(instance, opt));
+                if(opt.round112_ens_start_compact) {
+                    ebrp::SolveOptions h=opt;
+                    h.round112_ens_start_compact=false;h.plain_baseline=false;
+                    h.algorithm_preset="research-round83-vds-equal-net-exchange";
+                    applyAlgorithmPreset(h);
+                    h.round65_witness_audit=true;
+                    ebrp::recordProcessPhase(h,"round112_ENS_H","start");
+                    auto seed=solvePrimalHeuristicDiagnostic(instance,h);
+                    seed.process_elapsed_at_exact_phase_start_seconds=ebrp::processElapsedSeconds(h);
+                    const std::string startup_path=opt.out_path+".round112.startup.json";
+                    if(std::filesystem::exists(startup_path))throw std::runtime_error("Round112 startup evidence collision");
+                    std::ofstream startup_file(startup_path,std::ios::binary);
+                    startup_file<<ebrp::resultToJson(seed);startup_file.close();
+                    if(!startup_file)throw std::runtime_error("Round112 startup evidence write failed");
+                    ebrp::recordProcessPhase(h,"round112_ENS_H","complete");
+                    results.push_back(ebrp::solveGurobiBaseline(instance,opt,&seed));
+                } else results.push_back(ebrp::solveGurobiBaseline(instance, opt));
             } else if (opt.method == "interval-cutoff-oracle") {
                 results.push_back(ebrp::solveIntervalExactCutoffOracle(instance, opt));
             } else if (opt.method == "primal-heuristic") {

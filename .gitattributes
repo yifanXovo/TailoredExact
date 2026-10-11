@@ -239,3 +239,12 @@ results/unified_exact_round109/**/round109_independent_parser.py whitespace=cr-a
 results/unified_exact_round110/** -text whitespace=cr-at-eol
 scripts/round110* -text whitespace=cr-at-eol
 results/unified_exact_round110/**/*.log -whitespace
+
+# Preserve Round112 actual clocks, signatures, helpers and exact public carrier.
+results/unified_exact_round112/** -text whitespace=cr-at-eol
+scripts/*round112* -text whitespace=cr-at-eol
+results/unified_exact_round112/**/*.log -whitespace
+results/unified_exact_round112/goal.md whitespace=cr-at-eol,-blank-at-eof
+results/unified_exact_round112/history/authorities/** -whitespace
+results/unified_exact_round112/qualification/candidate01_source/** -whitespace
+results/unified_exact_round112/review/design01/production.diff -whitespace

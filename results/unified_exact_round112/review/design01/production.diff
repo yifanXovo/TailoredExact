@@ -1,0 +1,270 @@
+diff --git a/include/GurobiBaseline.hpp b/include/GurobiBaseline.hpp
+index dea7aaf72..67fcace8b 100644
+--- a/include/GurobiBaseline.hpp
++++ b/include/GurobiBaseline.hpp
+@@ -23,6 +23,7 @@ struct GurobiRuntimeProbe {
+ bool gurobiBackendBuildEnabled();
+ GurobiRuntimeProbe probeGurobiRuntime(const SolveOptions& options);
+ SolveResult solveGurobiBaseline(const Instance& instance,
+-                                const SolveOptions& options);
++                                const SolveOptions& options,
++                                const SolveResult* paid_ens_start = nullptr);
+ 
+ } // namespace ebrp
+diff --git a/include/Instance.hpp b/include/Instance.hpp
+index 5f340dd92..c796f1787 100644
+--- a/include/Instance.hpp
++++ b/include/Instance.hpp
+@@ -113,6 +113,8 @@ struct SolveOptions {
+     int gurobi_seed = 0;
+     int gurobi_presolve = -1;
+     bool gurobi_hga_start = false;
++    // Round112 isolated, self-paid current ENS startup into the original compact.
++    bool round112_ens_start_compact = false;
+     std::string gurobi_home;
+     std::string gurobi_progress_path;
+     std::string gurobi_model_export_path;
+diff --git a/src/GurobiBaseline.cpp b/src/GurobiBaseline.cpp
+index 6989cbf87..8e1ce1f56 100644
+--- a/src/GurobiBaseline.cpp
++++ b/src/GurobiBaseline.cpp
+@@ -4341,8 +4341,11 @@ GurobiRuntimeProbe probeGurobiRuntime(const SolveOptions& options) {
+ #endif
+ }
+ 
++#include "Round112CompactStart.inc"
++
+ SolveResult solveGurobiBaseline(const Instance& instance,
+-                                const SolveOptions& options) {
++                                const SolveOptions& options,
++                                const SolveResult* paid_ens_start) {
+     const auto start = Clock::now();
+     SolveResult result;
+     result.instance_name = instance.name;
+@@ -4369,7 +4372,46 @@ SolveResult solveGurobiBaseline(const Instance& instance,
+     result.strict_certificate_policy_version =
+         "round24-gurobi-engineering-exact-v1";
+ 
++    bool paid_start_verified=false;
++    auto retainOwnStartup=[&]() {
++        if(!paid_ens_start || !paid_start_verified)return;
++        const auto& s=*paid_ens_start;
++        if(!result.verification.original_solution_feasible || s.objective<result.objective) {
++            result.routes=s.routes;result.verification=s.verification;result.final_inventory=s.final_inventory;
++            result.objective=s.objective;result.G=s.G;result.P=s.P;result.upper_bound=s.objective;
++            result.final_UB=s.objective;result.incumbent_source="round112_own_ENS_startup";
++            result.verified_incumbent_objective_available=true;result.verified_incumbent_objective=s.objective;
++            result.verified_incumbent_original_problem_feasible=true;
++        }
++        result.initial_heuristic_UB=s.objective;
++        result.incumbent_generation_time_seconds=s.incumbent_generation_time_seconds;
++        result.process_elapsed_at_exact_phase_start_seconds=s.process_elapsed_at_exact_phase_start_seconds;
++    };
++
+     try {
++        std::shared_ptr<NativeEvidenceJournal> paid_journal;
++        if(options.round112_ens_start_compact!=(paid_ens_start!=nullptr))
++            throw std::runtime_error("round112_paid_start_entry_mismatch");
++        if(paid_ens_start) {
++            const auto v=verifySolution(instance,paid_ens_start->routes,options.lambda);
++            if(!v.original_solution_feasible || !v.original_objective_recomputed || !v.errors.empty() ||
++               !std::isfinite(v.objective) || v.objective!=paid_ens_start->objective)
++                throw std::runtime_error("round112_own_startup_verification_failed");
++            paid_start_verified=true;
++            retainOwnStartup();
++            paid_journal=std::make_shared<NativeEvidenceJournal>(instance,options);
++            paid_journal->witness(paid_ens_start->routes,"round112_own_verified_ENS_startup");
++            if(v.objective<=1e-7 || processWorkDeadlineReached(options)) {
++                const bool zero=v.objective<=1e-7;
++                result.status=zero?"startup_zero":"startup_deadline";
++                result.lower_bound=0;result.strict_certified_original_problem=zero;
++                result.strict_certificate_class=zero?"startup_zero_nonnegative_floor":"certificate_rejected";
++                result.strict_certificate_rejection_reason=zero?"none":"no_remaining_work_window";
++                result.certificate=zero?"own physical zero witness and full-domain F>=0":"own startup UB and independent F>=0";
++                result.runtime_seconds=std::chrono::duration<double>(Clock::now()-start).count();
++                result.wall_time_seconds=result.runtime_seconds;return result;
++            }
++        }
+         HgaTgbcResult hga_seed;
+         if (options.gurobi_hga_start) {
+             recordProcessPhase(
+@@ -4732,8 +4774,22 @@ SolveResult solveGurobiBaseline(const Instance& instance,
+             }
+         }
+ 
++        std::vector<double> paid_start_values;
++        std::vector<char> paid_start_types;
++        if(paid_ens_start) {
++            try {
++                recordProcessPhase(options,"round112_compact_start","start");
++                round112Submit(api,model,instance,options,*paid_ens_start,
++                    log_path.string()+".round112.start",paid_start_values,paid_start_types);
++                recordProcessPhase(options,"round112_compact_start","complete");
++            } catch(...) {cleanup();throw;}
++        }
+         ProgressCallbackState callback;
+         callback.api = &api;
++        if(paid_ens_start) {
++            callback.round68_start_values=&paid_start_values;
++            callback.round68_start_types=&paid_start_types;
++        }
+         const int callback_rc = api.setcallbackfunc(
+             model, progressAndBoundTargetCallback, &callback);
+         if (callback_rc != 0) {
+@@ -4750,7 +4806,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
+         }
+ 
+         if(!options.native_evidence_dir.empty()) {
+-            callback.native_evidence=std::make_shared<NativeEvidenceJournal>(instance,options);
++            callback.native_evidence=paid_journal?paid_journal:std::make_shared<NativeEvidenceJournal>(instance,options);
+             NativeEvidenceScope scope;scope.full_original=true;
+             scope.model_sha256=canonical.sha256;scope.model_path=canonical.path.string();
+             scope.model_scope=canonical.model_scope;scope.native_log_path=log_path.string();
+@@ -4770,6 +4826,12 @@ SolveResult solveGurobiBaseline(const Instance& instance,
+             processDeadlineConfigured(options)
+                 ? processWorkRemainingSeconds(options)
+                 : options.solve_time_limit;
++        if(paid_ens_start && optimize_remaining<=0) {
++            callback.native_evidence->notStarted(callback.evidence_call,"no_remaining_original_work_window");
++            cleanup();retainOwnStartup();result.status="startup_deadline";result.lower_bound=0;
++            result.runtime_seconds=std::chrono::duration<double>(Clock::now()-start).count();
++            result.wall_time_seconds=result.runtime_seconds;return result;
++        }
+         time_limit_rc = time_limit_rc == 0
+             ? api.setdblparam(
+                   model_env, GRB_DBL_PAR_TIMELIMIT,
+@@ -4782,6 +4844,13 @@ SolveResult solveGurobiBaseline(const Instance& instance,
+         result.gurobi_optimize_return_code = api.optimize(model);
+         if(callback.native_evidence) callback.native_evidence->returned(callback.evidence_call,result.gurobi_optimize_return_code);
+         ++result.gurobi_optimize_count;
++        if(paid_ens_start) {
++            std::ostringstream evidence;
++            evidence<<"{\"exact_vector_observed_in_mipsol\":"<<callback.round68_start_vector_observed
++                <<",\"integer_vector_observed_in_mipsol\":"<<callback.round68_start_integer_vector_observed
++                <<",\"Optimize_count\":1,\"optimize_return_code\":"<<result.gurobi_optimize_return_code<<"}\n";
++            round112Save(log_path.string()+".round112.native.json",evidence.str());
++        }
+         result.gurobi_solver_finalization_reached = true;
+         getInt(GRB_INT_ATTR_STATUS, result.gurobi_status);
+         result.gurobi_status_text = gurobiStatusName(result.gurobi_status);
+@@ -5087,6 +5156,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
+     }
+     result.runtime_seconds =
+         std::chrono::duration<double>(Clock::now() - start).count();
++    retainOwnStartup();
+     result.wall_time_seconds = result.runtime_seconds;
+     result.actual_runtime_seconds = result.runtime_seconds;
+     return result;
+diff --git a/src/GurobiBaselineStub.cpp b/src/GurobiBaselineStub.cpp
+index 6426b4ec9..f89dda237 100644
+--- a/src/GurobiBaselineStub.cpp
++++ b/src/GurobiBaselineStub.cpp
+@@ -62,7 +62,8 @@ GurobiRuntimeProbe probeGurobiRuntime(const SolveOptions&) {
+ }
+ 
+ SolveResult solveGurobiBaseline(const Instance& instance,
+-                                const SolveOptions& options) {
++                                const SolveOptions& options,
++                                const SolveResult*) {
+     SolveResult result;
+     result.instance_name = instance.name;
+     result.input_path = instance.path;
+diff --git a/src/MipStartMapping.cpp b/src/MipStartMapping.cpp
+index b67841061..714be5138 100644
+--- a/src/MipStartMapping.cpp
++++ b/src/MipStartMapping.cpp
+@@ -101,16 +101,19 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
+     std::unordered_map<std::string, double> route_values;
+     std::vector<int> final_inventory = instance.initial;
+     std::set<int> used_vehicles;
++    std::set<int> route_vehicles;
+     std::set<int> used_stations;
+     for (const RoutePlan& route : routes) {
+         if (route.vehicle < 0 || route.vehicle >= instance.M ||
+-            !used_vehicles.insert(route.vehicle).second) {
++            !route_vehicles.insert(route.vehicle).second) {
+             return finish("invalid_or_duplicate_route_vehicle");
+         }
+         if (route.nodes.size() < 2 || route.nodes.front() != 0 ||
+             route.nodes.back() != 0) {
+             return finish("route_not_depot_closed");
+         }
++        if (route.nodes == std::vector<int>{0,0} && route.operations.empty()) continue;
++        used_vehicles.insert(route.vehicle);
+         for (std::size_t position = 1; position < route.nodes.size(); ++position) {
+             const int from = route.nodes[position - 1];
+             const int to = route.nodes[position];
+diff --git a/src/main.cpp b/src/main.cpp
+index d9ba8b42f..0f96270c8 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -264,6 +264,8 @@ std::string lowerAscii(std::string value) {
+ }
+ 
+ std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
++    if (opt.round112_ens_start_compact)
++        return "research-round112-self-paid-ens-start-original-compact";
+     if (opt.round107_frontier_struct)
+         return "research-round107-ensc-frontier-struct";
+     if (opt.round100_continuous_quantities)
+@@ -854,6 +856,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
+         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
+         else if (arg == "--gurobi-presolve") opt.gurobi_presolve = std::stoi(requireValue(i, argc, argv));
+         else if (arg == "--gurobi-hga-start") opt.gurobi_hga_start = parseBoolValue(requireValue(i, argc, argv));
++        else if (arg == "--round112-ens-start-compact") opt.round112_ens_start_compact = true;
+         else if (arg == "--gurobi-home") opt.gurobi_home = requireValue(i, argc, argv);
+         else if (arg == "--gurobi-progress") opt.gurobi_progress_path = requireValue(i, argc, argv);
+         else if (arg == "--gurobi-model-export") opt.gurobi_model_export_path = requireValue(i, argc, argv);
+@@ -3601,7 +3604,28 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
+         throw std::runtime_error(
+             "Round 60 candidate work bounds are outside audited limits");
+     }
+-    return opt;
++    if (opt.round112_ens_start_compact) {
++        const std::set<std::string> allowed = {
++            "--round112-ens-start-compact", "--input", "--lambda", "--T",
++            "--pickup-time", "--drop-time", "--time-limit", "--process-wall-time-limit",
++            "--process-shutdown-margin", "--threads", "--mip-threads", "--gurobi-seed",
++            "--gurobi-presolve", "--method", "--round61-candidate-mode", "--out", "--log",
++            "--process-phase-ledger", "--external-gini-artifact-dir",
++            "--primal-heuristic-generation-log", "--progress-log", "--native-evidence-dir",
++            "--plain-baseline", "--gurobi-model-export", "--gurobi-progress",
++            "--round24-expected-gurobi-model-fingerprint", "--round24-executable-sha256",
++            "--round24-manifest-executable-sha256"};
++        for (int i=1;i<argc;++i) {
++            const std::string flag=argv[i];
++            if (flag.rfind("--",0)==0 && allowed.count(flag)==0)
++                throw std::runtime_error("Round112 forbids mixed research/external options: "+flag);
++        }
++        if (opt.method!="gurobi" || !opt.plain_baseline || opt.algorithm_preset!="custom" ||
++            opt.round61_candidate_mode!="off" || opt.threads!=1 || opt.mip_threads!=1 ||
++            opt.gurobi_presolve!=-1 || opt.native_evidence_dir.empty())
++            throw std::runtime_error("Round112 requires isolated original compact with own journal");
++    }
++    return opt;
+ }
+ 
+ std::string resolvedPricingEngine(const ebrp::Instance& instance,
+@@ -20041,8 +20065,20 @@ int main(int argc, char** argv) {
+                 results.push_back(ebrp::solveTailoredExact(instance, opt));
+             } else if (opt.method == "cplex") {
+                 results.push_back(ebrp::solveCplexBaseline(instance, opt));
+-            } else if (opt.method == "gurobi") {
+-                results.push_back(ebrp::solveGurobiBaseline(instance, opt));
++            } else if (opt.method == "gurobi") {
++                if(opt.round112_ens_start_compact) {
++                    ebrp::SolveOptions h=opt;
++                    h.round112_ens_start_compact=false;h.plain_baseline=false;
++                    h.algorithm_preset="research-round83-vds-equal-net-exchange";
++                    applyAlgorithmPreset(h);
++                    h.round65_witness_audit=true;
++                    ebrp::recordProcessPhase(h,"round112_ENS_H","start");
++                    auto seed=solvePrimalHeuristicDiagnostic(instance,h);
++                    seed.process_elapsed_at_exact_phase_start_seconds=ebrp::processElapsedSeconds(h);
++                    ebrp::writeTextFile(opt.out_path+".round112.startup.json",ebrp::resultToJson(seed));
++                    ebrp::recordProcessPhase(h,"round112_ENS_H","complete");
++                    results.push_back(ebrp::solveGurobiBaseline(instance,opt,&seed));
++                } else results.push_back(ebrp::solveGurobiBaseline(instance, opt));
+             } else if (opt.method == "interval-cutoff-oracle") {
+                 results.push_back(ebrp::solveIntervalExactCutoffOracle(instance, opt));
+             } else if (opt.method == "primal-heuristic") {

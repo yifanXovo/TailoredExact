@@ -1,0 +1,69 @@
+{
+  "stage": "BLOCKED",
+  "fixed_arm_positions": 20,
+  "qualified": 12,
+  "actually_interrupted": 1,
+  "unstarted": 7,
+  "affected_arm": 13,
+  "affected_role": "G50-C1",
+  "affected_method": "M-B",
+  "exception": "PermissionError WinError5 at frozen atomic_status os.replace",
+  "unique_handle_holder": "unknown",
+  "monitoring_conflict": "possible; assistant Get-Content reads; not established sole cause",
+  "native_process_cleanup": "frozen finally child.kill and wait; actual wrapper exit; subsequent idle process query",
+  "main04_exit_code": 1,
+  "no_formal_retry": true,
+  "no_remaining_formal_start": true,
+  "frozen_helpers_modified": false,
+  "qualified_endpoint_for_partial": false,
+  "conservative_starts": 39,
+  "outer_fee_seconds_upper": 18061.35593342781,
+  "bindings": [
+    {
+      "path": "results/unified_exact_round112/fees/main04/failure.txt",
+      "bytes": 1038,
+      "SHA": "3380812470409d1dc414a563d37cfaccf3201d5d3eef6877181f8faaee8c2a77"
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main04/launch.json",
+      "bytes": 4722,
+      "SHA": "796454a200c7879be0c1d9598b591ca98b205d6220b646daf168b4157a655412"
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main04/receipt.json",
+      "bytes": 559,
+      "SHA": "401460d9b4d54affdff8ebd6158064723534c2cc99c2f01464bff2c20a49e53c"
+    },
+    {
+      "path": "results/unified_exact_round112/campaign/runtime_status.json",
+      "bytes": 382,
+      "SHA": "3cff25a36ddd97304d7dbf9f7becec84e5461a78a8a033d1fb3fb22a453193f0"
+    },
+    {
+      "path": "results/unified_exact_round112/campaign/runtime_status.json.tmp",
+      "bytes": 381,
+      "SHA": "58a540130ed04ee217a2ae08c0f90be9ed94cde540c3ced04e756c1f66cb6829"
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/incident01/idle_query.json",
+      "bytes": 217,
+      "SHA": "ee539ebc9cda4bc873c5c47bca66ec447a431d7bd682027732ea8126ea2d0bba"
+    },
+    {
+      "path": "scripts/round88_a1_g3.py",
+      "bytes": 35352,
+      "SHA": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd"
+    },
+    {
+      "path": "scripts/round90_lp_g_g3.py",
+      "bytes": 51527,
+      "SHA": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996"
+    },
+    {
+      "path": "scripts/round112_campaign.py",
+      "bytes": 11408,
+      "SHA": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85"
+    }
+  ],
+  "Optimize": 0
+}

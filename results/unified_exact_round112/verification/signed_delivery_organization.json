@@ -1,0 +1,62 @@
+{
+  "schema": "round112_signed_delivery_organization_v1",
+  "created_UTC": "2026-10-10T20:01:56.675467+00:00",
+  "scientific_stage": "BLOCKED",
+  "backend_conclusions": {
+    "ENS-C": "INCOMPLETE_ATTRIBUTION",
+    "M-B": "INCOMPLETE_ATTRIBUTION"
+  },
+  "whole_goal_review": "BLOCKED_DELIVERY_COMPLETE",
+  "public_recovery": "BLOCKED_PUBLIC_RESTORATION_VERIFIED",
+  "PR": "https://github.com/yifanXovo/TailoredExact/pull/174",
+  "actually_observed_remote_head": "1e90dbc5eacddedf925d88c8608e897c56b4ad69",
+  "actually_observed_base": "ded38c756a32a464bfa9800212da75778707d974",
+  "scientific_payload_commit": "a3cac1df0ee1d4eaaeb87343508e0af31cfc3b40",
+  "measured_production_commit": "d0014a7163e3996fe120471420e56b089c9715ae",
+  "bindings": [
+    {
+      "path": "results/unified_exact_round112/review/whole_goal01.json",
+      "bytes": 59149,
+      "SHA256": "61cc6291806f5bb61b7b9aa31ee68e357de5902ee04a90c1cb700039daa04af6"
+    },
+    {
+      "path": "results/unified_exact_round112/review/whole_goal01.md",
+      "bytes": 5877,
+      "SHA256": "83c50c68fd67fb15f9c56d766a7da94fb78f7a6e101434da1f8f84925fbf6fca"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/remote01/receipt.json",
+      "bytes": 181780,
+      "SHA256": "9d0007d3d734fd9e2c9e1f7b2e16e3089af30ffe24c2d66cb4a0cfb6461c5305"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/actual_app_attachment.json",
+      "bytes": 419,
+      "SHA256": "253bfd086272df46aa51dd3d3d1609d5ed0ed2da7a43cf32854d4f99f86b37c9"
+    },
+    {
+      "path": "results/unified_exact_round112/verification/remote_delivery.md",
+      "bytes": 2700,
+      "SHA256": "b52fc71836bbf0be9e98bf0d212ea1f0e14098de38eaaedd02e6006e38290965"
+    },
+    {
+      "path": "results/unified_exact_round112/RESUME.md",
+      "bytes": 6653,
+      "SHA256": "cdc244be0e7e450071fe34326c77241a91bf1c005b3a675f1d86b13a1e45abe5"
+    },
+    {
+      "path": "scripts/verify_round112_publication.py",
+      "bytes": 9275,
+      "SHA256": "755bd1a806bd3c09a7a9cb6b906df395d1cb608411c2991c693b9e20e4ea39fe"
+    }
+  ],
+  "native_starts": 0,
+  "Optimize": 0,
+  "compiler_starts": 0,
+  "performance_retry_authorized": false,
+  "performance_work_pending": false,
+  "final_receipt_commit_and_push_pending": true,
+  "final_read_only_remote_check_pending": true,
+  "future_self_verification_claimed": false,
+  "designated_final_observation_root": "F:/ExactEBRP-Round112-final-remote01"
+}

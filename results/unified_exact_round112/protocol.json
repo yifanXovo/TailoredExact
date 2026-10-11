@@ -1,0 +1,226 @@
+{
+  "round": 112,
+  "base": "ded38c756a32a464bfa9800212da75778707d974",
+  "roles": [
+    {
+      "number": 1,
+      "id": "F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 1200,
+      "method_order": [
+        "P-GRB",
+        "P-S",
+        "ENS-C",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 1296
+    },
+    {
+      "number": 2,
+      "id": "R98-C2",
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-S",
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 1867
+    },
+    {
+      "number": 3,
+      "id": "R108-L48",
+      "input_path": "reference/round108_confirmation/L48.txt",
+      "input_sha256": "8ce2bceb8de415a1ff62ea78790456ee54e3542ce57714a7a53505d30ea54755",
+      "V": 48,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "M-B",
+        "P-S"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 2901
+    },
+    {
+      "number": 4,
+      "id": "G50-C1",
+      "input_path": "reference/round109_geographic/G50-C1.txt",
+      "input_sha256": "5740d09bf218cf6921cee6e60198f673151d6426fbcb0840259647129f3c4ed5",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-S",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 2983
+    },
+    {
+      "number": 5,
+      "id": "G100-R2",
+      "input_path": "reference/round109_geographic/G100-R2.txt",
+      "input_sha256": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "V": 100,
+      "M": 8,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "P-S",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 5828
+    }
+  ],
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "formal_arms": 20,
+  "formal_nominal_seconds": 40800,
+  "total_start_limit": 56,
+  "total_outer_seconds_limit": 48000,
+  "qualification_start_limit": 20,
+  "qualification_outer_seconds_limit": 1800,
+  "group_outer_administrative_reserve": 120,
+  "primary_benchmark": "cold P-GRB",
+  "default": "ENS-C",
+  "pairs": [
+    [
+      "ENS-C",
+      "P-GRB"
+    ],
+    [
+      "M-B",
+      "P-GRB"
+    ],
+    [
+      "P-S",
+      "P-GRB"
+    ],
+    [
+      "ENS-C",
+      "P-S"
+    ],
+    [
+      "M-B",
+      "P-S"
+    ],
+    [
+      "M-B",
+      "ENS-C"
+    ]
+  ],
+  "comparison_policy": "unchanged R111 materiality/severity, signed gap, full clocks; no new adoption gate",
+  "attribution_rules": [
+    "INCOMPLETE_ATTRIBUTION",
+    "POSITIVE_ONLY_OBSERVED",
+    "NO_POSITIVE_INCREMENT_OBSERVED",
+    "MIXED_INCREMENT_OBSERVED"
+  ],
+  "backend_exposure_required": true,
+  "zero_backend_not_exposed": true,
+  "zero_tolerance": 1e-07,
+  "cover_tolerance": 1e-07,
+  "full_goal_SHA": "7fb2c51072f4b003236cb994e1045fdd944e9817532762f0d404ea2d09baae17",
+  "startup_semantic_fields": [
+    "seed",
+    "logical steps",
+    "accepted actions",
+    "integer operations",
+    "original inventory",
+    "complete capacity-assigned fleet"
+  ],
+  "startup_metadata_exclusions": [
+    "timestamps and elapsed durations",
+    "file paths",
+    "method identity labels",
+    "witness hashes binding those labels"
+  ],
+  "no_formal_retry": true,
+  "no_new_geography_lambda_seed_grid": true
+}

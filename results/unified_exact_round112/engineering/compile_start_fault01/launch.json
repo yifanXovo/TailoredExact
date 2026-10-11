@@ -1,0 +1,19 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/g++.exe",
+    "-std=c++17",
+    "-DEXACT_EBRP_ENABLE_GUROBI=1",
+    "-Iinclude",
+    "-ID:/gurobi1302/win64/include",
+    "results/unified_exact_round112/qualification/start_fault_batch.cpp",
+    "build/research/round112-paid-v1/libexact_ebrp_core.a",
+    "-o",
+    "build/research/round112-paid-v1/Round112StartFaultBatch.exe",
+    "-Wl,--stack,2097152"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-round112",
+  "engineering": true,
+  "native_starts": 0,
+  "Optimize": 0,
+  "started_unix": 1791639908.9514494
+}
