@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round114\scripts\qualify_round114.py", line 193, in run
+    claim_cases(q/'claims');zero_call_cases(q/'zero_calls');journal_cases(q/'journal',q/'zero_calls/premodel_deadline');supervisor_cases(q/'supervisor')
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round114\scripts\qualify_round114.py", line 84, in journal_cases
+    try:audit.journal(ROOT,l,d,rows)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round114\scripts\round114_audit.py", line 23, in journal
+    checked=journal_receipts.receipt(d/'journal'/f'event_{seq}.commit',row['first_observed_seconds'],l['cap_seconds'])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round114\scripts\round86_native_evidence.py", line 21, in receipt
+    assert payload['schema'] == 1 and payload['sequence'] == sequence
+           ~~~~~~~^^^^^^^^^^
+KeyError: 'schema'

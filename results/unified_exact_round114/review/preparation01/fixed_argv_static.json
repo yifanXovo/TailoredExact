@@ -1,0 +1,85 @@
+{
+  "schema": "round114-independent-fixed-argv-static-check-v1",
+  "decision": "STATIC_PREPARATION_ONLY_NOT_ADMISSION",
+  "reviewer": "/root/independent_admission",
+  "old_fixed_G100_identity_SHA": "b38e5f80684c75026d67d28bbcc7bdd1e810cc46792559f97b479701a7d7e43c",
+  "current_campaign_identity_SHA": "0f1f37c263744fa3014f307d1401809a9ec00b739e84896ad7dc8c823845d53c",
+  "formal": [
+    {
+      "arm": "P-GRB",
+      "number": 1,
+      "settings_identical_to_R113_fixed_unstarted_G100": true,
+      "only_PE_and_output_paths_relocated": true,
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598,
+      "seed": 0
+    },
+    {
+      "arm": "ENS-C",
+      "number": 2,
+      "settings_identical_to_R113_fixed_unstarted_G100": true,
+      "only_PE_and_output_paths_relocated": true,
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598,
+      "seed": 0
+    },
+    {
+      "arm": "P-S",
+      "number": 3,
+      "settings_identical_to_R113_fixed_unstarted_G100": true,
+      "only_PE_and_output_paths_relocated": true,
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598,
+      "seed": 0
+    },
+    {
+      "arm": "M-B",
+      "number": 4,
+      "settings_identical_to_R113_fixed_unstarted_G100": true,
+      "only_PE_and_output_paths_relocated": true,
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598,
+      "seed": 0
+    }
+  ],
+  "qualification_order": [
+    "P-GRB",
+    "M-B"
+  ],
+  "qualification_caps": [
+    120,
+    120
+  ],
+  "input_bindings": {
+    "reference/round109_geographic/G100-R2.txt": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+    "reference/round100_confirmation/H100.txt": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71"
+  },
+  "inherited_reference_bindings": {
+    "results/unified_exact_round114/qualification/reference/G100-R2/original.lp": "c090f8eaa69e23343dddd24fc4d7a9dee1ab8b1885e26493c908099bfd1f6c2d",
+    "results/unified_exact_round114/qualification/reference/G100-R2/build.json": "67b8a32fbed597f2c0ec80e6e7cb2788479c3b6ef372ec8ec8631149eae055b2",
+    "results/unified_exact_round114/qualification/reference/H100/original.lp": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+    "results/unified_exact_round114/qualification/reference/H100/build.json": "43ba0d9ea02ae63a3194b8718a37b54338e3bbf6b6fc55f45c1f830b5a42e6bd"
+  },
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1E-06,
+    "OptimalityTol": 1E-06,
+    "IntFeasTol": 1E-05
+  },
+  "formal_nominal_seconds": 14400,
+  "formal_conservative_starts": 5,
+  "formal_administration_reserve_seconds": 120,
+  "native_starts": 0,
+  "Optimize": 0,
+  "qualification_driver_starts": 0
+}

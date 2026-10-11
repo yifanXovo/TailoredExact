@@ -1,0 +1,20 @@
+--- retained/previous_reader.py
++++ final/read_round114.py
+@@ -101,6 +101,7 @@
+             if not all((d/q).is_file() for q in required):
+                 status='UNSTARTED' if not (d/'launch.json').exists() else 'EXECUTION_OR_CLOSEOUT_BLOCKED'
+                 row=dict(label,origin_round=114,evidence_layer=LAYER,status=status,formal_protocol_qualified=False,
++                    formal_performance=False,planned_formal_position=formal,actually_executed=(d/'launch.json').is_file(),
+                     certificate_qualified=False,numbers_qualified=False,U=None,L=None,gap=None,certificate=None,complete_seconds=None,
+                     failure_reason='FIXED_ARM_NOT_STARTED' if status=='UNSTARTED' else 'REQUIRED_EXECUTION_OR_CLOCK_EVIDENCE_MISSING',
+                     missing_files=[q for q in required if not (d/q).is_file()],native_Optimize=None,PE_SHA=i['candidate_binary_sha256'],DLL_SHA=i['dll_sha256'])
+@@ -183,7 +184,8 @@
+             performance_helper_identity=sha(out/'candidate_identity.json'),original_clock_path=(d/'whole_arm_receipt.json').relative_to(root).as_posix(),
+             own_exact_zero=ind['own_exact_zero'],new_R114_measurement=True,raw_audit_passed=read(d/'audit.json')['passed'],
+             whole_within_cap=clock_valid,cap_excess_seconds=item['clock_record']['cap_excess_seconds'],
+-            execution_status='COMPLETE_WITHIN_CAP' if clock_valid else 'WHOLE_ARM_CAP_EXCEEDED')
++            execution_status='COMPLETE_WITHIN_CAP' if clock_valid else 'WHOLE_ARM_CAP_EXCEEDED',
++            formal_performance=endpoint['formal_protocol_qualified'],planned_formal_position=True,actually_executed=True)
+         row['relative_gap'],row['relative_gap_null_reason']=decisions.relative(row);new.append(row);item['final_arm']=row
+         if not clock_valid:recs['execution_failures'].append(dict(item['label'],failure_reason='WHOLE_ARM_CAP_EXCEEDED',
+             **item['clock_record'],formal_protocol_qualified=False))
