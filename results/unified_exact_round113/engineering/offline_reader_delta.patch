@@ -1,0 +1,67 @@
+--- admitted/read_round113.py
++++ offline/read_round113.py
+@@ -70,14 +70,36 @@
+             if not all((d/v).is_file() for v in required):
+                 launched=(d/'launch.json').is_file()
+                 status='INTERRUPTED_EXECUTION' if launched else 'UNSTARTED'
++                count=None;reason='FIXED_ARM_NOT_STARTED'
+                 if launched:
+                     events=[read(q) for q in sorted((d/'journal').glob('event_*.json'))]
+-                    recs['execution_failures'].append(dict(label,missing_required=[v for v in required if not (d/v).is_file()],
++                    reason='AUTHORITATIVE_EXECUTION_OR_CLOCK_INCOMPLETE'
++                    completion=read(d/'completion.json') if (d/'completion.json').exists() else None
++                    if completion and completion['returncode']==0 and completion['stop_reason']=='normal_return':
++                        status='POSTEXIT_VALIDATION_BLOCKED';reason='POSTEXIT_CONSISTENCY_FAILURE_WITHOUT_WHOLE_RECEIPT'
++                        # Verify returned native activity without promoting this arm's rejected endpoint.
++                        joint=core.evidence.journal(root,p,d)
++                        result=read(d/'result.json')
++                        assert result['gurobi_optimize_count']==joint['started']==joint['returned']
++                        assert l['arm']=='P-GRB' and joint['started']==1 and joint['not_started']==0
++                        phases=core.evidence.rows(d/'phases.csv')
++                        assert sum(v['event']=='plain_gurobi_optimize_launch' and v['status']=='start' for v in phases)==1
++                        assert sum(v['event']=='process_exit' and v['status']=='complete' and v['detail']=='rc=0' for v in phases)==1
++                        for call in joint['calls'].values():
++                            assert call['full_original'] and call['model_sha256']==p['reference']['canonical_sha256']
++                            assert sha(portable(root,call['model_path']))==call['model_sha256']
++                            log=native_log(root,call['native_log_path']);assert log.get('solver_seconds',0)>0
++                            recs['unqualified_native_calls'].append(dict(label,call=call['call'],actual_Optimize=True,returned=True,
++                                formal_endpoint=False,settings=call['settings'],full_original=True,**log))
++                        count=joint['started'];partial_started+=count;partial_returned+=joint['returned']
++                    recs['execution_failures'].append(dict(label,status=status,reason=reason,child_completion=completion,missing_required=[v for v in required if not (d/v).is_file()],
+                         formal_endpoint=False,whole_seconds=None,declared_calls=sum(e['kind']=='call' for e in events),
+-                        returned=sum(e['kind']=='returned' for e in events),actual_Optimize='unknown_without_joint_phase_log_qualification'))
+-                else:recs['unstarted'].append(label)
++                        returned=sum(e['kind']=='returned' for e in events),actual_Optimize=count if count is not None else 'unknown_without_joint_phase_log_qualification'))
++                else:
++                    if (out/'fees/main01/failure.txt').exists():reason='CURRENT_AUTHORITY_BARRIER_FIXED_STOP'
++                    recs['unstarted'].append(dict(label,reason=reason))
+                 if formal:
+-                    arms.append(dict(label,status=status,launched=launched,formal_performance=True,formal_protocol_qualified=False,certificate_qualified=False,numbers_qualified=False,U=None,L=None,gap=None,relative_gap=None,relative_gap_null_reason='NO_QUALIFIED_FORMAL_ENDPOINT',certificate=None,complete_seconds=None,native_Optimize=None,PE_SHA=i['candidate_binary_sha256'],DLL_SHA=i['dll_sha256'],input_SHA=p['input_sha256'],cap_seconds=l['cap_seconds'],seed=0,V=p['V'],M=p['M'],Q_vector=p['Q_vector'],T_seconds=p['T_seconds'],failure_reason='AUTHORITATIVE_EXECUTION_OR_CLOCK_INCOMPLETE' if launched else 'FIXED_ARM_NOT_STARTED',origin_round=113,evidence_layer=LAYER))
++                    arms.append(dict(label,status=status,launched=launched,formal_performance=True,formal_protocol_qualified=False,certificate_qualified=False,numbers_qualified=False,U=None,L=None,gap=None,relative_gap=None,relative_gap_null_reason='NO_QUALIFIED_FORMAL_ENDPOINT',certificate=None,complete_seconds=None,native_Optimize=count,PE_SHA=i['candidate_binary_sha256'],DLL_SHA=i['dll_sha256'],input_SHA=p['input_sha256'],cap_seconds=l['cap_seconds'],seed=0,V=p['V'],M=p['M'],Q_vector=p['Q_vector'],T_seconds=p['T_seconds'],failure_reason=reason,origin_round=113,evidence_layer=LAYER))
+                 continue
+             j=ps_journal(root,p,d) if l['arm']=='P-S' else core.evidence.journal(root,p,d)
+             t=clock(d,l,formal)
+@@ -183,7 +205,7 @@
+             for candidate,control in protocol['pairs']:
+                 if (role,candidate) in lookup and (role,control) in lookup:
+                     a,c=lookup[role,candidate],lookup[role,control];value=decisions.pair(a,c)
+-                    if not value['evaluable']:value['reason']='AUTHORITATIVE_EXECUTION_OR_CLOCK_INCOMPLETE' if any(v.get('status')=='INTERRUPTED_EXECUTION' for v in [a,c]) else 'FIXED_ARM_NOT_STARTED' if any(v.get('status')=='UNSTARTED' for v in [a,c]) else value.get('comparison_failure','INSUFFICIENT_COMPARISON')
++                    if not value['evaluable']:value['reason']=next((v['failure_reason'] for v in [a,c] if v.get('failure_reason')),value.get('comparison_failure','INSUFFICIENT_COMPARISON'))
+                     delta=dict(dU=a['U']-c['U'],dL=a['L']-c['L'],dGap=a['gap']-c['gap']) if value['evaluable'] else dict(dU=None,dL=None,dGap=None)
+                     pair_rows.append(dict(value,id=role,candidate_U=a['U'],candidate_L=a['L'],candidate_gap=a['gap'],candidate_certificate=a['certificate'],candidate_complete_seconds=a['complete_seconds'],control_U=c['U'],control_L=c['L'],control_gap=c['gap'],control_certificate=c['certificate'],control_complete_seconds=c['complete_seconds'],origin_round=113,evidence_layer=LAYER,**delta))
+                 else:pair_rows.append(dict(id=role,candidate=candidate,control=control,classification='UNEVALUABLE',evaluable=False,reason='FIXED_ARM_MISSING'))
+@@ -271,11 +293,13 @@
+     summary=dict(stage='QUALIFICATION_ONLY' if qualification_only else 'GEOGRAPHIC_ATTRIBUTION_COMPLETE' if qualified==8 else 'BLOCKED',
+         evidence_layer=LAYER,new_formal_arm_positions=0 if qualification_only else 8,new_qualified_formal_arms=qualified,
+         inherited_qualified_formal_arms=0 if qualification_only else 12,layered_arm_positions=len(arms),
+-        interrupted_new_formal_arms=len(recs['execution_failures']),unstarted_new_formal_arms=sum(a.get('status')=='UNSTARTED' for a in arms),
++        incomplete_new_formal_arms=len(recs['execution_failures']),interrupted_new_formal_arms=sum(a.get('status')=='INTERRUPTED_EXECUTION' for a in arms),postexit_blocked_new_formal_arms=sum(a.get('status')=='POSTEXIT_VALIDATION_BLOCKED' for a in arms),unstarted_new_formal_arms=sum(a.get('status')=='UNSTARTED' for a in arms),
+         pair_positions=len(pair_rows),new_pair_positions=0 if qualification_only else 12,inherited_evaluable_pairs=0 if qualification_only else 18,
+         evaluable_pairs=sum(v['evaluable'] for v in pair_rows),unevaluable_pairs=sum(not v['evaluable'] for v in pair_rows),qualified_qualification_arms=len(qual),backend_conclusions=conclusions,
+         conservative_starts=sum(f['starts'] for f in fees),outer_fee_seconds_upper=sum(f['outer_seconds_upper'] for f in fees),
+         native_Optimize_completed_new_and_qualification_journals=sum(j['started'] for _,j,_ in journals.values()),
++        unqualified_new_formal_actual_Optimize=partial_started,unqualified_new_formal_returned=partial_returned,
++        actual_Optimize_all_observed_new_and_qualification=sum(j['started'] for _,j,_ in journals.values())+partial_started,
+         formal_native_Optimize_qualified_new_arms=sum(j['started'] for key,(_,j,_) in journals.items() if key[0]=='campaign'),
+         reader_SHA=sha(__file__),pure_offline=True,native_rerun=False,default_ENS_changed=False,primary_benchmark='cold P-GRB',
+         prior_round112_state='BLOCKED',prior_partial13_endpoint_rejected=True,old_clock_adjusted=False,all20_measured_under_new_wrapper=False)

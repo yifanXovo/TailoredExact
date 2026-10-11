@@ -1,0 +1,178 @@
+{
+  "schema": "round113-independent-source-boundary-review-v1",
+  "reviewer": "/root/independent_review",
+  "signed_at_UTC": "2026-10-11T05:12:22.4528394+00:00",
+  "decision": "DESIGN_BOUNDARIES_RECORDED_NO_ADMISSION",
+  "scope": "Static source and retained signed R112 evidence only",
+  "applicable_AGENTS_found": [],
+  "production_commit": "d0014a7163e3996fe120471420e56b089c9715ae",
+  "production_PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "qualification_driver_starts": 0,
+  "native_child_starts": 0,
+  "Optimize": 0,
+  "compiler_starts": 0,
+  "production_mutations": 0,
+  "performance_helper_mutations": 0,
+  "LP_matrices_reparsed": 0,
+  "R112_inherited_state": "BLOCKED / 12 complete / 1 partial / 7 not started",
+  "R112_inherited_pairs": "18 evaluable / 12 UNEVALUABLE of 30",
+  "bindings": [
+    {
+      "path": "scripts/round88_a1_g3.py",
+      "sha256": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "scripts/round90_lp_g_g3.py",
+      "sha256": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "scripts/round112_campaign.py",
+      "sha256": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "scripts/round112_audit.py",
+      "sha256": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "scripts/read_round112.py",
+      "sha256": "63e388e63901bdebe53e19ff2d937d2cee858d990e60cd5557e05fcd62833b21",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "scripts/round86_native_evidence.py",
+      "sha256": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "scripts/round107_reader.py",
+      "sha256": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "scripts/round108_reader.py",
+      "sha256": "52cadcf5ff7ce5fcfb1f828efd1a81a1c4d14d5e31d9b6b72963f7348e8408c1",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "scripts/round94_lpg_contemporary.py",
+      "sha256": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "scripts/compare_round112_startup.py",
+      "sha256": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "src/GurobiBaseline.cpp",
+      "sha256": "e0cac52996ad8a27275a9c93f192b56e0ffab8065cdad4229d8bf795b103da07",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "src/Round112CompactStart.inc",
+      "sha256": "eac79743634dd5b7a5c8b4721831ed5967a35bab62d2009ceb542f7ff739419d",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "src/NativeEvidenceJournal.cpp",
+      "sha256": "446d39aec3a0d45471d4172281b2d94c680104acc297db2ca1b814d18b0b6af7",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "src/ProcessPhaseLedger.cpp",
+      "sha256": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "src/main.cpp",
+      "sha256": "a78ce94b5a58c252fea80f08f659a763a6075e4886901eab607fb539abff59eb",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/goal.md",
+      "sha256": "7fb2c51072f4b003236cb994e1045fdd944e9817532762f0d404ea2d09baae17",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/final_report.md",
+      "sha256": "0e0c992f671aec99c0bc27d6faf25ed4df0c5e2e6030db6bde8d0b724ecb5af2",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/blocking_incident.md",
+      "sha256": "a34aef56420461cb9f3a796c7107b29c72184ac06d3e550d0e9da01d9dc6a14d",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/qualification.md",
+      "sha256": "dc5ae51dbbed8dc6abfeb18ac50c5c05e66cde116d5d9f1cadf3d89e81d8e37b",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/production_identity.json",
+      "sha256": "84feccac058d30dc4d4d09696d5aa6d6c861c7dbb1410dffaac5ffeb3e91d707",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/candidate_identity.json",
+      "sha256": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/fixed_manifest.json",
+      "sha256": "e0b81124678b8276834c8a89804df1207f03fc27467b24f1ed1afb959ca24469",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/review/performance_admission.json",
+      "sha256": "73607ef3baec13f7a0f1c5c7cb599b0ab79c3b53b4360469b45ab71bee57a03f",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/review/final_reader_delta01.json",
+      "sha256": "0a5f3484c1fdeaeba7538c865a734ca48f1d63b6cd8e33497e282a6ec460c292",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/review/restored_root01.json",
+      "sha256": "31b33fa69aca3cdf8c2d3ebc90b90acd5a39c27238f9846030841bef907da23f",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/review/whole_goal01.json",
+      "sha256": "61cc6291806f5bb61b7b9aa31ee68e357de5902ee04a90c1cb700039daa04af6",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/summary.json",
+      "sha256": "b883be30a4359143d2d4b46aca620dbf32e42e19849e77369149dd189310e080",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/arms.csv",
+      "sha256": "5eb25cc2e2b16fda496a5d2626b11bef7513f4ad95917bef0005f044762c6b0e",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/mathematical_algorithm.md",
+      "sha256": "d09d138be6fb2ffc8d490ccf02d1be8d54e20eefcac7a44998f9f5771a901664",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/next_research_decision.md",
+      "sha256": "cf69677cc0adceb911f511d4b7e73b3f337b017622ff57dc86337ab4bf26a547",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    },
+    {
+      "path": "results/unified_exact_round112/RESUME.md",
+      "sha256": "cdc244be0e7e450071fe34326c77241a91bf1c005b3a675f1d86b13a1e45abe5",
+      "scope": "source or bounded signed history read; no model matrix replay"
+    }
+  ],
+  "pending": "Exact final R113 helper identity, finite no-solver qualification, four H100 CLI raw and actual fees, targeted legacy compatibility replay, independent admission before formal arm1"
+}

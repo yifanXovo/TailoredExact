@@ -1,0 +1,20 @@
+{
+  "schema": "round113-remote-verifier-engineering-failure-v1",
+  "observed_head": "8dd38b790a4584f17aa75094f9451519e07bcdbe",
+  "attempt_exit_code": 1,
+  "receipt_created": false,
+  "actual_error": "AssertionError: scripts/analyze_round61.py at line50: raw worktree Git-blob oid did not equal historical committed oid",
+  "rejected_assumption": "Historical raw frozen worktree helper bytes equal their existing normalized Git blob representation",
+  "first_rejected_path": "scripts/analyze_round61.py",
+  "raw_SHA256": "fad9154b399dd9eb3463510f8480dd1e8a22974729902e0a25ec78a9ae551cce",
+  "committed_SHA256": "2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861",
+  "exact_CRLF_to_LF_equivalence": true,
+  "verifier_prototype_SHA256": "2f11bd97f3e1cb7d3260d5fd91359678005c18049ff2267d33d323de210d855d",
+  "narrow_fix": "Compare actual committed Git objects with remote tree oid/size, while separately checking frozen raw byte identities against manifest members. Current new round artifacts keep exact blob bytes; any publication-tool working delta is explicit.",
+  "scientific_archive_repacked": false,
+  "performance_helpers_changed": 0,
+  "production_sources_changed": 0,
+  "Optimize": 0,
+  "native_starts": 0,
+  "engineering": true
+}

@@ -1,0 +1,231 @@
+{
+  "scope": "four new actual raw only; pure offline review supplement",
+  "rows": [
+    {
+      "arm": "M-B",
+      "all_five_result_parameter_roundtrips_pass": true,
+      "roundtrip": {
+        "threads": {
+          "requested": 1,
+          "effective": 1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "seed": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "presolve": {
+          "requested": -1,
+          "effective": -1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap_abs": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        }
+      },
+      "native_versions": [
+        {
+          "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0.0_lp.gurobi.log",
+          "SHA": "28d7e4aa77d2dcf8232ca5a77ff5690a404c39213f130cbb25f249b45014a34c",
+          "version": "13.0.2"
+        },
+        {
+          "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0.1_lp.gurobi.log",
+          "SHA": "fd88e5ca58b3a25dca3d584957de0c489bb99f8eb7c3904003466c31abb2fe44",
+          "version": "13.0.2"
+        },
+        {
+          "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0_lp.gurobi.log",
+          "SHA": "af047628a64654a84481fadf85560ae997c672be03707b4a456a2cf8f97e8514",
+          "version": "13.0.2"
+        },
+        {
+          "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA": "8b41026daeb414d73e573add39f9b0f792bdafe0b0cdf3aed2c424272e4136ea",
+          "version": "13.0.2"
+        }
+      ],
+      "ENS_MB_actual_Start_adoption": [
+        {
+          "path": "results/unified_exact_round113/campaign/raw/01_G50-C1_S0_M-B/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA": "8138d6f3415dc13dd965fb163e887cafc88f313a20c825a1feb99e1a5fd66483",
+          "submitted": true,
+          "original_vector_exact_MIPSOL_adoption": true,
+          "original_vector_integer_MIPSOL_adoption": true
+        }
+      ]
+    },
+    {
+      "arm": "ENS-C",
+      "all_five_result_parameter_roundtrips_pass": true,
+      "roundtrip": {
+        "threads": {
+          "requested": 1,
+          "effective": 1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "seed": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "presolve": {
+          "requested": -1,
+          "effective": -1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap_abs": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        }
+      },
+      "native_versions": [
+        {
+          "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0.0_lp.gurobi.log",
+          "SHA": "90a92d645bcf9a1c69dd636a615a09016afef3395173d5dac2ca0adb9a438773",
+          "version": "13.0.2"
+        },
+        {
+          "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0.1_lp.gurobi.log",
+          "SHA": "f602e90ae8dc8a4b4d2212aeeef019d44b766bd167c8d5f014bd1467066a9633",
+          "version": "13.0.2"
+        },
+        {
+          "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0_lp.gurobi.log",
+          "SHA": "86b2b93190d3ce0db1dbe51eb899548b6cb900c17217af1e1141a7d4e509172e",
+          "version": "13.0.2"
+        },
+        {
+          "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA": "4ecef5a184dc2429d3bd19a5922dc1f6c6dbd7a77c56c6c1f675d99cfe72f921",
+          "version": "13.0.2"
+        }
+      ],
+      "ENS_MB_actual_Start_adoption": [
+        {
+          "path": "results/unified_exact_round113/campaign/raw/02_G50-C1_S0_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA": "0fff46058007f5d76b8520f0b393ff44293348d0bbca50bb4212cf7de076bbd6",
+          "submitted": true,
+          "original_vector_exact_MIPSOL_adoption": true,
+          "original_vector_integer_MIPSOL_adoption": true
+        }
+      ]
+    },
+    {
+      "arm": "P-S",
+      "all_five_result_parameter_roundtrips_pass": true,
+      "roundtrip": {
+        "threads": {
+          "requested": 1,
+          "effective": 1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "seed": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "presolve": {
+          "requested": -1,
+          "effective": -1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap_abs": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        }
+      },
+      "native_versions": [
+        {
+          "path": "results/unified_exact_round113/campaign/raw/03_G50-C1_S0_P-S/native.log",
+          "SHA": "a628d1b3ecfa2ffda6ca0952a78251e1c28f0b6cbf274f725ef7cf3c0dd14c02",
+          "version": "13.0.2"
+        }
+      ],
+      "ENS_MB_actual_Start_adoption": []
+    },
+    {
+      "arm": "P-GRB",
+      "all_five_result_parameter_roundtrips_pass": true,
+      "roundtrip": {
+        "threads": {
+          "requested": 1,
+          "effective": 1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "seed": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "presolve": {
+          "requested": -1,
+          "effective": -1,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        },
+        "mip_gap_abs": {
+          "requested": 0,
+          "effective": 0,
+          "set_return_code": 0,
+          "get_return_code": 0
+        }
+      },
+      "native_versions": [
+        {
+          "path": "results/unified_exact_round113/campaign/raw/04_G50-C1_S0_P-GRB/native.log",
+          "SHA": "6ddb2f030add9dabdd6098bd86296b62580b018d2941cbb2500d534683d6cad0",
+          "version": "13.0.2"
+        }
+      ],
+      "ENS_MB_actual_Start_adoption": []
+    }
+  ],
+  "native_starts": 0,
+  "qualification_starts": 0,
+  "production_or_raw_changed": false,
+  "script_SHA": "844d9d3e2d17f0b2719fa1caae4d125c1c3eadd724aabee8682ad0a33d276f37"
+}
