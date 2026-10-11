@@ -1,0 +1,40 @@
+Round114 is **BLOCKED**: the fixed four-position G100 group ran cold P-GRB and ENS-C once; P is a qualified open endpoint, ENS completed normal return and necessary closeout but exceeded its 3600-second whole cap, and P-S/M-B never started. All six new pair positions are UNEVALUABLE. Both five-role backend conclusions remain INCOMPLETE_ATTRIBUTION. The qualified cold baseline has U=.03994210048354935, L=8.782082104514013e-7 and whole 3573.223369550775s. Total charged cost is 11 conservative starts / 7368.394686511601 outer seconds, including qualification 6 / 189.472980260849. Only next priority 3 applies: this finite round ends without another qualification cycle, rerun, mechanism search or adoption.
+
+## Protocol change and frozen scope
+
+This repairs the research claim-qualification and necessary closeout protocol that R113 omitted in preflight. It inherits R110's already-known G50 contradiction, independent floor/own-UB authority and R111's limited signed return authority. Production 206 source files, PE, Gurobi DLL, model, search, H, default ENS-C, numerical tolerances and comparison thresholds are unchanged. The 47 runtime helper files were frozen before signed admission and formal execution. The necessary audit/record protocol change is disclosed as such.
+
+Only a proven same-domain contradiction isolates the declaring call's bound, OPTIMAL/INFEASIBLE and dependent cover proofs. Local claims require local witness membership; cohort reconciliation is order invariant and never imports another arm's UB into its endpoint or online solver. Mandatory identity/model/physical/I/O/lifecycle failures still stop. The narrow terminal-MIP missing-returned exception requires the known latch plus complete independent normal-return evidence and own committed strict zero. Supported zero-Optimize branches now require status 0/0/false and lifecycle false, rejecting contradictory native declarations.
+
+Prospectively, every method may retain SOURCE_REDUCED_OPEN from its own in-clock physical UB and independent floor 0, or OWN_ZERO_CERTIFICATE from its own strict Y=D and floor, when all other mandatory evidence and clock requirements hold. No epsilon repair, clipping, later-small-bound rehabilitation or retrospective old clock is allowed. **No current G100 call was rejected and no current arm is source reduced.** Numerical solver trust outside the specified evidence remains unresolved.
+
+## Actual G100 evidence and limits
+
+|Method|Formal U|Formal L|True whole seconds|Result|
+|---|---:|---:|---:|---|
+|P-GRB|.03994210048354935|8.782082104514013e-7|3573.223369550775|Qualified open, certificate false|
+|ENS-C|null|null|3605.688342700014|WHOLE_ARM_CAP_EXCEEDED|
+|P-S|null|null|null|Never started|
+|M-B|null|null|null|Never started|
+
+ENS raw diagnostic U=.005528455284552843 and L=2.20888241772054e-7 are preserved; independently recomputed own physical U=.005528455284552848. Its true whole exceeds cap by approximately 5.688342700014s. Native process wall 3570.359999999986s and necessary audit inclusive 34.928690399974585s are observations, not causal shares or a replacement clock. The frozen supervisor wrote actual whole after all necessary own evidence/audit/metrics/closeout and then stopped. A source-reduced endpoint cannot override this cap failure.
+
+P differs from D at station22 (-6 bicycles) and station55 (+8), absolute inventory difference 14; ENS differs only at station19 (+2). Both fleets pass original physical integer/service/prefix/return-unloading/time checks; neither has strict Y=D. G100 zero optimality remains unknown. P has one actual/journal-returned/independently verified Optimize; ENS has four, three LP plus one terminal MIP, all returned. No actual atomic split occurred. P-S/M-B's absent H and backend exposure prevent the full 25-seed same-H comparison. The 9 current claims versus 153 verified witnesses yield no rejection.
+
+The layer R112_COMPLETE12_PLUS_R113_G50_4_PLUS_R114_G100_4 contains 20 arm positions, **16 qualified measurements (15 inherited + one current)** and **21/30 evaluable pairs**. The three old G50 cold-P pairs and six current G100 pairs remain missing, with null deltas. R113 remains BLOCKED: its cold P has no original whole/metrics and is never retroactively qualified. Original R112 twelve/eighteen and R113 three/three measurements/pairs retain their clocks, signed gaps and identities. Historical R113 G100 unstarted records remain separate. ENS vector W/W/L/W/UNEVALUABLE and M-B W/W/L/T/UNEVALUABLE are retained; uniform M-B remains a research candidate, cold P the primary benchmark and ENS-C the default.
+
+## Numerical evidence and finite validation
+
+The finite known-counterexample replay binds the actual old compact/model/result/event52/53/82/log readbacks. Complete rational checks over 13326 columns / 35567 rows have zero row/bound/integer violations, objectives 2.9256256379999997e-16 for printed decimal and 1.979712144217771e-16 for the specified same-SHA P-S API binary64 snapshot. The latter is not an unsaved cold API matrix. This independently reconfirms the R110-known inconsistency and rules out the saved matrix excluding that fleet; the unique hidden native presolve/cut/LP/bound-maintenance cause is **unknown**. The G50 stock-deficit lower bound .006 is not an objective grid. No numerical threshold or solver parameter was tightened.
+
+Finite replay covers attribution order/domain/dependencies, mandatory missing evidence, the limited return exception, zero-call contradictions and source-extracted closeout/deadline/kill-wait behavior; mocks are distinct from actual solver returns. Finite01's fixture-schema failure is retained and charged; finite02 passed. Exactly two final H100 cap 120 / Seed 0 CLI, P then M-B, passed under the admitted helper bytes, followed by the charged actual-evidence post driver. Independent admission ACCEPT preceded formal launch. Qualification 6 starts / 189.472980260849s plus formal 5 declared starts / 7178.921706250752s gives 11 / 7368.394686511601, all closed after actual OS exit. Only two formal children ran; two unstarted declared slots are still charged. There is no rerun credit.
+
+Two real postformal offline report errors were corrected with original/intermediate reader bytes, diffs, actual failed/successful receipts and targeted independent rechecks: retaining the over-cap true whole with a null endpoint, and marking the healthy P as formal/executed. Numeric endpoints, pair decisions, raw, clocks, admission and runtime helpers remain unchanged. Independent postformal and extra whole-goal reviews accept this blocked delivery.
+
+## Public recovery and publication
+
+One scientific carrier, **43954162 bytes (41.918MiB), 4850 members, 0 parts**, SHA256 132a2011ffaa3c271156c7cec1813c48541a52591e7bf80f41cabefc77e70b71. Public export and one actual empty-root restore use only this carrier, its manifest and self-contained restorer. All member bytes/SHA verify, and the restored-root reader reproduces all fields of 33 core CSV/JSON files at the 64MiB CSV limit without original-worktree fallback or native execution. A separate restored-root reviewer checks the carrier, all members, frozen source/helpers, all 33 file hashes and fields, historical 15 / 21 and the current blocked/cost conclusions.
+
+Scientific payload commit ebf50347f10d50403eab5c9328d0b139fd2b0399 precedes a separate commit containing actual restoration, review and observed remote-object receipts. Receipts verify only already-existing commits and never a future commit containing themselves. Git-normalized historical CRLF/LF identities are separated from exact raw manifest identities. PE/DLL/license/credentials are excluded. Measured offline engineering costs and unknown orchestration/human durations are separate from charged qualification/formal costs. Publication checks actual remote head/base/OPEN/DRAFT and untruncated tree blob OIDs/sizes plus committed carrier bytes.
+
+Base: PR 175 / codex/round113-geographic-attribution-completion at ea9410163aafd3877cdcde80e01ccd34d893f11b. No old PR conclusion, merge or default change is requested.

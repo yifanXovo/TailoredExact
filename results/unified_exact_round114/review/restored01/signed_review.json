@@ -1,0 +1,392 @@
+{
+  "schema": "round114_independent_restored_root_review_v1",
+  "review_id": "restored01",
+  "reviewer": "independent subagent /root/whole_goal_review",
+  "decision": "ACCEPT_RESTORED_BLOCKED_EVIDENCE",
+  "decision_definition": "Accept exact manifest-complete restored BLOCKED evidence and exact existing offline reconstruction; do not certify four-method collection completion, native solver reproduction, additional qualification, Git, remote push, or PR.",
+  "signed_at_utc": "2026-10-11T16:33:19.0204884+00:00",
+  "observation_started_at_utc": "2026-10-11T16:23:40.5172346+00:00",
+  "signature_kind": "evidence-bound reviewer attestation; not a cryptographic identity signature",
+  "scope": {
+    "allowed_artifact_roots": [
+      "E:/codes/ExactEBRP-round114-public",
+      "E:/codes/ExactEBRP-round114-restored"
+    ],
+    "all_shell_working_directories": "E:/codes/ExactEBRP-round114-restored",
+    "original_worktree_reads": false,
+    "earlier_worktree_reads": false,
+    "git_reads": false,
+    "remote_reads": false,
+    "original_worktree_fallback": false,
+    "existing_restored_members_modified": false,
+    "existing_source_raw_clock_permission_modified": false,
+    "added_files": [
+      "E:/codes/ExactEBRP-round114-restored/results/unified_exact_round114/review/restored01/report.md",
+      "E:/codes/ExactEBRP-round114-restored/results/unified_exact_round114/review/restored01/signed_review.json"
+    ],
+    "added_files_are_outside_scientific_carrier": true,
+    "solver_Optimize_calls": 0,
+    "qualification_driver_starts": 0,
+    "compile_starts": 0,
+    "formal_arm_starts": 0,
+    "reader_rebuilds_by_reviewer": 0,
+    "restoration_repeats_by_reviewer": 0
+  },
+  "frozen_identities": {
+    "carrier_path": "E:/codes/ExactEBRP-round114-public/results/unified_exact_round114/compact_evidence/evidence.tar.gz",
+    "carrier_SHA256": "132a2011ffaa3c271156c7cec1813c48541a52591e7bf80f41cabefc77e70b71",
+    "carrier_bytes": 43954162,
+    "carrier_parts": 0,
+    "manifest_path": "E:/codes/ExactEBRP-round114-public/results/unified_exact_round114/compact_evidence/manifest.json",
+    "manifest_SHA256": "b541248c7a12fce4a4768adc7d0903f3d3a207056841e0d71da705139c044d28",
+    "restorer_path": "E:/codes/ExactEBRP-round114-public/scripts/publish_round114.py",
+    "restorer_SHA256": "c3380da4ac002bb2d794ea3d17103eaba3991b74bb022453b557b4145fc3bc36",
+    "final_reader_path": "E:/codes/ExactEBRP-round114-restored/scripts/read_round114.py",
+    "final_reader_SHA": "625692f6091a93c49bb08fbcd78ea4c9a74924da705cfafae22def74a0369ef1",
+    "reviewed_corrected_prior_whole_goal_signed_SHA256": "16a82d5dec9fd52d2c88fe80cc7ba683a8cd324bd765336680aa10b4e5fcd03d"
+  },
+  "actual_receipt_and_identity_bindings": [
+    {
+      "path": "E:\\codes\\ExactEBRP-round114-restored\\restore_receipt.json",
+      "sha256": "3a1c4908417b5f186f2fb930e958f92d7a4c0d083d25a1f8ae750011851a0968"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round114-restored\\engineering\\restored_reader01\\receipt.json",
+      "sha256": "f189ab4495e83361f79688f958a6ca611b540e5bebe08abb8a8d1a7969c7d38a"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round114-restored\\engineering\\restored_reader01\\reader_output.txt",
+      "sha256": "3dc6d8961eb0fc9ba3e8ab36d092ab470c575a4bb02bfc84a65145649749fd64"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round114-public\\public_export_receipt.json",
+      "sha256": "b4bc65231e87a81905eb4593c73134a720e38ab5d5ff9bf66feda770a7d92457"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round114-restored\\results\\unified_exact_round114\\candidate_identity.json",
+      "sha256": "8c5a5bc25ef289f30a1d4fb1a8ee60723c41ca8a3238b00c0669605f7cd50175"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round114-restored\\results\\unified_exact_round114\\review\\performance_admission.json",
+      "sha256": "0279c84162d44eb9d81b56d8ddb5adb65e6c3be06c938e8028b760755f0fd69b"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round114-restored\\results\\unified_exact_round114\\public_dependency_closure.json",
+      "sha256": "afa3b3554b6bebf9fcc7c958818daa4993a279aceaf3a53545094360b137793c"
+    }
+  ],
+  "independent_checks": {
+    "archive_SHA": "132a2011ffaa3c271156c7cec1813c48541a52591e7bf80f41cabefc77e70b71",
+    "archive_bytes": 43954162,
+    "manifest_SHA": "b541248c7a12fce4a4768adc7d0903f3d3a207056841e0d71da705139c044d28",
+    "members": 4850,
+    "all_member_archive_and_restored_size_SHA_equal": true,
+    "total_member_bytes": 417755054,
+    "source206_and_helper47_verified": true,
+    "source_count": 206,
+    "helpers_count": 47,
+    "reader_SHA": "625692f6091a93c49bb08fbcd78ea4c9a74924da705cfafae22def74a0369ef1",
+    "restorer_SHA": "c3380da4ac002bb2d794ea3d17103eaba3991b74bb022453b557b4145fc3bc36",
+    "single_below95MiB_carrier": true,
+    "parts": 0,
+    "forbidden_file_names": [],
+    "actual_private_key_blocks": [],
+    "credential_parameter_output": [],
+    "static_marker_only_in_public_restorer_scanner": true,
+    "core_files": [
+      "arms.csv",
+      "backend_conclusions.json",
+      "checkpoints.csv",
+      "chronological_covers.csv",
+      "clock_qualification.csv",
+      "cohort_reconciliation.json",
+      "controller_AM.csv",
+      "controller_child_bounds.csv",
+      "controller_events.csv",
+      "controller_LP_status.csv",
+      "controller_native.csv",
+      "controller_targets.csv",
+      "covers.csv",
+      "execution_failures.csv",
+      "fees.csv",
+      "fleets.csv",
+      "historical_execution_ledger_G100_unstarted.csv",
+      "inherited_arms.csv",
+      "inherited_pairs.csv",
+      "native_bounds.csv",
+      "native_calls.csv",
+      "native_counts.csv",
+      "new_arms.csv",
+      "new_pairs.csv",
+      "own_UB_flow.csv",
+      "pairs.csv",
+      "progress_publication.csv",
+      "qualification_arms.csv",
+      "same_H_missing.csv",
+      "split_exposure.csv",
+      "summary.json",
+      "target_discovery.csv",
+      "time_partitions.csv"
+    ],
+    "all33_core_fields_and_bytes_equal": true,
+    "CSV_fields_compared": 27188,
+    "CSV_field_limit": 67108864,
+    "core_SHAs": [
+      {
+        "path": "arms.csv",
+        "sha256": "632bc70a665a0971f9720ecfa3e266d97b7e1e32aec08322d115a2d54ef6b97e"
+      },
+      {
+        "path": "backend_conclusions.json",
+        "sha256": "ef9d1e6d3329cee97e82c0f92c150a7bee87aea6a21258fb091db2826afbb964"
+      },
+      {
+        "path": "checkpoints.csv",
+        "sha256": "7687674cecd40a65766ae5d190c4448e1ecb1dabd4c4d26a69c4320a395d5758"
+      },
+      {
+        "path": "chronological_covers.csv",
+        "sha256": "f8c9c3d204b3dfb2f307d5af798e5463be0590c37f3cccb8bae52b3cab424c0f"
+      },
+      {
+        "path": "clock_qualification.csv",
+        "sha256": "5cb6cfe2f6b777614e2167601a377c941906bffc93d9165a4cdd1baeb88264ee"
+      },
+      {
+        "path": "cohort_reconciliation.json",
+        "sha256": "53643b336ab901133d6ccc4266f223b3a31fc4fd1ba65d7ab59361d442702eb3"
+      },
+      {
+        "path": "controller_AM.csv",
+        "sha256": "8175608b25f7ed90c73aa519cb4e7208e13aca71c856beb846b1e674f9e64511"
+      },
+      {
+        "path": "controller_child_bounds.csv",
+        "sha256": "6b7fc00a9f88b7aff8cfff25a81f3e78d5c1e99efed70cab1870e1bd0d163168"
+      },
+      {
+        "path": "controller_events.csv",
+        "sha256": "928c8f4ec04d0afc66a253a0027e943b04cfe924d6ae5e7d90cd2597549197f4"
+      },
+      {
+        "path": "controller_LP_status.csv",
+        "sha256": "05dc5d49194f4a158d68cd546dd00b86494f9003f768021835080250fb04982f"
+      },
+      {
+        "path": "controller_native.csv",
+        "sha256": "9206531c4e2a5650beb5c36346f2bd118bfd5b793122dc8fea44fa7d3c1c4c2d"
+      },
+      {
+        "path": "controller_targets.csv",
+        "sha256": "d30158ec85338c2544b80d5d9968462b23d5768a8918487df1c04dfcebb9f9f2"
+      },
+      {
+        "path": "covers.csv",
+        "sha256": "3da7940f4a17c08c375e8c6f4a0840877446e8173efaa3a3d11eeaf323f67fb8"
+      },
+      {
+        "path": "execution_failures.csv",
+        "sha256": "a423141e5292f4d4e18752caaa4e3f826bf021008985ef19d6f192df6c3e280b"
+      },
+      {
+        "path": "fees.csv",
+        "sha256": "1c3bb04951277ce23661b3ec0295a0f4373d3b800125d2c0340468165e68ccb5"
+      },
+      {
+        "path": "fleets.csv",
+        "sha256": "d683a5713929071bc5bd7f596dc82d16114b52b82adb3c6ceeb7f0d9da25ff02"
+      },
+      {
+        "path": "historical_execution_ledger_G100_unstarted.csv",
+        "sha256": "70f9b7c882f6851b2de52e0bed0ee2a37df1caa924902a81a145a300722741ee"
+      },
+      {
+        "path": "inherited_arms.csv",
+        "sha256": "4be336576ef4684bfb67171b0d0489b717813cf52fbd3a761bf8620fcc2b48db"
+      },
+      {
+        "path": "inherited_pairs.csv",
+        "sha256": "366392b90e61a289ba165a601e513b1ebaa9ad1697f32f10729c1b1190371f31"
+      },
+      {
+        "path": "native_bounds.csv",
+        "sha256": "e5e219b69bfaa943168bf5c38505fdbd6c6fb57ccd1e93567f280327f5c9520e"
+      },
+      {
+        "path": "native_calls.csv",
+        "sha256": "d2e8782fd55cf0c048d0894fb5ae540484fbb961946786b22c6d2c25bd6fd9fe"
+      },
+      {
+        "path": "native_counts.csv",
+        "sha256": "db9aaccfa753afbe12538a23d00097d1427161c6846c1e141c084351f80a67ea"
+      },
+      {
+        "path": "new_arms.csv",
+        "sha256": "e7ee06a92effa19102ae058d9ed062984e0f3e21f081ab73b208b2936cb45f77"
+      },
+      {
+        "path": "new_pairs.csv",
+        "sha256": "fa5d857703224b99ec54019582c0595da9e8b1b6caec34862d4e740ac394bd07"
+      },
+      {
+        "path": "own_UB_flow.csv",
+        "sha256": "917b3a5f727b7fa4020569fdbee62f1c763d4754821ec7b868733821779e286c"
+      },
+      {
+        "path": "pairs.csv",
+        "sha256": "cd98ad98225d01b8619982078d69db5f0a9355daf784cf002b0e4fd3dea43862"
+      },
+      {
+        "path": "progress_publication.csv",
+        "sha256": "65e2b9b8f08e0b93025514da88db64c812356e66cc697c62b4c81cb12d1a0734"
+      },
+      {
+        "path": "qualification_arms.csv",
+        "sha256": "25d6189b339f22a2932b4328f37cfdfdccf53c6c08afd05be5ed4bffa2fae000"
+      },
+      {
+        "path": "same_H_missing.csv",
+        "sha256": "541f8157a5b306203dd922a550f77b9bddc11c1a4565c3e81239100dce3a349a"
+      },
+      {
+        "path": "split_exposure.csv",
+        "sha256": "60a1cd5805916448ff595c1f46611e58323400218721ad676fc19bbab1c272a8"
+      },
+      {
+        "path": "summary.json",
+        "sha256": "cab24375cf81a055365e25cff42427f659b83fc1387e4092dc3748d2abc5097e"
+      },
+      {
+        "path": "target_discovery.csv",
+        "sha256": "7444cf73cfa0a33d7158071b48910490a55e03bbcbda0d935c17d00907c9f254"
+      },
+      {
+        "path": "time_partitions.csv",
+        "sha256": "af3efe79536a77874d529ced907a07f408099e944c28cbac212bfbf84e3a536f"
+      }
+    ],
+    "execution_status": "BLOCKED",
+    "qualified_measurements": 16,
+    "evaluable_pairs": 21,
+    "old_cold_P_still_missing": true,
+    "new6_pairs_unevaluable": true,
+    "formal_actual_children": 2,
+    "restored_reader_actual_engineering_seconds": 15.1394345,
+    "restoration_actual_engineering_seconds": 3.6425462999613956,
+    "reviewed_old_whole_goal_signed_SHA": "16a82d5dec9fd52d2c88fe80cc7ba683a8cd324bd765336680aa10b4e5fcd03d",
+    "manifest_verification_and_core_comparison_engineering_seconds": 6.190451100002974,
+    "solver_Optimize": 0,
+    "reader_rebuilds": 0,
+    "qualification_driver_starts": 0,
+    "authorized_roots_only": true,
+    "original_worktree_reads": false
+  },
+  "reconstruction_evidence": {
+    "existing_receipt_path": "E:/codes/ExactEBRP-round114-restored/engineering/restored_reader01/receipt.json",
+    "existing_output_path": "E:/codes/ExactEBRP-round114-restored/engineering/restored_reader01/reader_output.txt",
+    "rebuilt_directory": "E:/codes/ExactEBRP-round114-restored/rebuilt",
+    "packaged_core_directory": "E:/codes/ExactEBRP-round114-restored/results/unified_exact_round114/reports_final",
+    "existing_reader_rc": 0,
+    "existing_reader_final_reader_SHA": "625692f6091a93c49bb08fbcd78ea4c9a74924da705cfafae22def74a0369ef1",
+    "independent_comparison_excluded_fields": [],
+    "all_33_core_fields_equal": true,
+    "all_33_core_SHA256_equal": true,
+    "CSV_fields_compared": 27188,
+    "CSV_field_limit": 67108864
+  },
+  "scientific_state": {
+    "execution_status": "BLOCKED",
+    "four_method_collection_complete": false,
+    "planned_formal_positions": 4,
+    "actually_executed_formal_children": 2,
+    "P_GRB": {
+      "actually_executed": true,
+      "formal_performance": true,
+      "qualified": true,
+      "formal_U": 0.03994210048354935,
+      "whole_arm_seconds": 3573.223369550775
+    },
+    "M_ENS": {
+      "actually_executed": true,
+      "native_return_normal": true,
+      "formal_performance": false,
+      "qualified": false,
+      "failure": "WHOLE_ARM_CAP_EXCEEDED",
+      "whole_arm_seconds": 3605.688342700014,
+      "frozen_cap_seconds": 3600,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null
+    },
+    "P_S": {
+      "actually_executed": false,
+      "formal_performance": false,
+      "state": "UNSTARTED"
+    },
+    "M_B": {
+      "actually_executed": false,
+      "formal_performance": false,
+      "state": "UNSTARTED"
+    },
+    "inherited_qualified_measurements": 15,
+    "new_qualified_measurements": 1,
+    "total_qualified_measurements": 16,
+    "inherited_evaluable_pairs": 21,
+    "new_evaluable_pairs": 0,
+    "new_unevaluable_pairs": 6,
+    "both_vectors": "INCOMPLETE_ATTRIBUTION",
+    "old_G50_cold_P3_missing": {
+      "U": null,
+      "L": null,
+      "whole_arm_seconds": null,
+      "upgraded": false
+    },
+    "conservative_starts": 11,
+    "closed_start_seconds": 7368.394686511601,
+    "pending_fees": 0,
+    "cap_failure_recoverable_by_reconstruction_or_rerun": false,
+    "scientific_conclusion_upgraded": false
+  },
+  "exclusions_and_limits": {
+    "forbidden_filename_extension_matches": [],
+    "standalone_private_key_header_matches_in_checked_record_types": [],
+    "WLSSecret_WLSAccessID_parameter_output_matches_in_checked_record_types": [],
+    "scanner_string_literal_is_not_credential": true,
+    "arbitrary_secret_absence_proved": false,
+    "native_PE_DLL_license_artifacts_in_carrier": false,
+    "native_runtime_reproduced": false,
+    "hidden_Gurobi_internal_cause_independently_resolved": false,
+    "scientific_commit_parent_reported_only": "ebf50347f10d50403eab5c9328d0b139fd2b0399",
+    "scientific_commit_independent_git_verification": null,
+    "remote_push_independent_verification": null,
+    "PR_independent_verification": null
+  },
+  "engineering_time": {
+    "observed_wall_through_signature_preparation_seconds": 578.5032538,
+    "observation_start_utc": "2026-10-11T16:23:40.5172346+00:00",
+    "observation_end_utc": "2026-10-11T16:33:19.0204884+00:00",
+    "independently_measured_member_and_core_comparison_seconds": 6.190451100002974,
+    "comparison_is_nested_in_review_wall_do_not_add": true,
+    "earlier_actual_empty_root_restore_seconds": 3.6425462999613956,
+    "earlier_actual_explicit_root_reader_seconds": 15.1394345,
+    "restoration_and_reader_done_before_review_separate_receipts": true,
+    "solver_or_qualification_time_added_by_review_seconds": 0,
+    "subsequent_persistence_and_handoff_seconds": null,
+    "CPU_breakdown_seconds": null,
+    "human_breakdown_seconds": null,
+    "orchestration_breakdown_seconds": null,
+    "unknowns_are_not_zero": true
+  },
+  "review_probe_corrections": [
+    "Incorrect results-prefixed receipt probe corrected to root engineering/restored_reader01/receipt.json within restored root.",
+    "Manifest files list used after correcting an incorrect members-property assumption.",
+    "Private-key scanner literal false positive resolved with standalone-header checking and source inspection inside allowed roots."
+  ],
+  "attestation": "The findings above derive from actual read-only checks of the allowed public/restored artifacts. All 4850 manifest member size/SHA checks and all 33 parsed-field/file-SHA comparisons passed. No original-worktree or Git fallback was used, no native or reader execution was started by this review, and only the two new review receipts were written.",
+  "report_binding": {
+    "path": "E:/codes/ExactEBRP-round114-restored/results/unified_exact_round114/review/restored01/report.md",
+    "sha256": "ed6ad4bba1d11b674834ff509fd5c67104db9e25acd8e422aff6dffaa88a7a81"
+  }
+}
+
