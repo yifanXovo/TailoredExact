@@ -1,0 +1,462 @@
+{
+  "rejections": [],
+  "damaged_calls": [],
+  "all_claims": [
+    {
+      "arm": "ENS-C",
+      "call": 1,
+      "sequence": 4,
+      "model_SHA": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "scope": {
+        "schema": 1,
+        "sequence": 3,
+        "kind": "call",
+        "call": 1,
+        "full_original": 0,
+        "native_preconditions": 0,
+        "leaf": "L0",
+        "model_sha256": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+        "model_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\native_logs\\L0_lp.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.1584580742872275,
+        "cutoff": 0.1584580742872275,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor",
+            "lower_g": 0,
+            "upper_g": 0.1584580742872275,
+            "lower": 0,
+            "cutoff": 0.1584580742872275
+          }
+        ]
+      },
+      "value": 0.0,
+      "source": "linked_LP_terminal_log",
+      "available": 345.56299999996554,
+      "domain_verified": true,
+      "dependencies": [
+        1
+      ],
+      "native_proof_qualified": true
+    },
+    {
+      "arm": "ENS-C",
+      "call": 2,
+      "sequence": 6,
+      "model_SHA": "050547757b40e52d4dd79872cb74a8da06e5fce490ee53a1f0f46dae0e32caa7",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "scope": {
+        "schema": 1,
+        "sequence": 5,
+        "kind": "call",
+        "call": 2,
+        "full_original": 0,
+        "native_preconditions": 0,
+        "leaf": "L0.0",
+        "model_sha256": "050547757b40e52d4dd79872cb74a8da06e5fce490ee53a1f0f46dae0e32caa7",
+        "model_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\models\\L0.0_epoch_0_generation_2.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\native_logs\\L0.0_lp.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.07922903714361375,
+        "cutoff": 0.1584580742872275,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.1584580742872275,
+            "lower": 0,
+            "cutoff": 0.1584580742872275
+          }
+        ]
+      },
+      "value": 0.0,
+      "source": "linked_LP_terminal_log",
+      "available": 435.89100000006147,
+      "domain_verified": true,
+      "dependencies": [
+        2
+      ],
+      "native_proof_qualified": true
+    },
+    {
+      "arm": "ENS-C",
+      "call": 3,
+      "sequence": 8,
+      "model_SHA": "f1e11cb216b26d7477b107d87e041f42a50dcf3ab3a17b806b572966eb6d9e82",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "scope": {
+        "schema": 1,
+        "sequence": 7,
+        "kind": "call",
+        "call": 3,
+        "full_original": 0,
+        "native_preconditions": 0,
+        "leaf": "L0.1",
+        "model_sha256": "f1e11cb216b26d7477b107d87e041f42a50dcf3ab3a17b806b572966eb6d9e82",
+        "model_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\models\\L0.1_epoch_0_generation_3.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\native_logs\\L0.1_lp.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0.07922903714361375,
+        "upper_g": 0.1584580742872275,
+        "cutoff": 0.1584580742872275,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.1584580742872275,
+            "lower": 0,
+            "cutoff": 0.1584580742872275
+          }
+        ]
+      },
+      "value": 0.07922903714,
+      "source": "linked_LP_terminal_log",
+      "available": 515.1570000000065,
+      "domain_verified": true,
+      "dependencies": [
+        3
+      ],
+      "native_proof_qualified": true
+    },
+    {
+      "arm": "ENS-C",
+      "call": 4,
+      "sequence": 11,
+      "model_SHA": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "scope": {
+        "schema": 1,
+        "sequence": 9,
+        "kind": "call",
+        "call": 4,
+        "full_original": 0,
+        "native_preconditions": 1,
+        "leaf": "L0",
+        "model_sha256": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+        "model_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.1584580742872275,
+        "cutoff": 0.1584580742872275,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.1584580742872275,
+            "lower": 0,
+            "cutoff": 0.1584580742872275
+          }
+        ]
+      },
+      "value": 0,
+      "source": "committed_native_bound",
+      "available": 526.0320000000065,
+      "domain_verified": true,
+      "dependencies": [
+        4
+      ],
+      "native_proof_qualified": true
+    },
+    {
+      "arm": "ENS-C",
+      "call": 4,
+      "sequence": 18,
+      "model_SHA": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "scope": {
+        "schema": 1,
+        "sequence": 9,
+        "kind": "call",
+        "call": 4,
+        "full_original": 0,
+        "native_preconditions": 1,
+        "leaf": "L0",
+        "model_sha256": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+        "model_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.1584580742872275,
+        "cutoff": 0.1584580742872275,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.1584580742872275,
+            "lower": 0,
+            "cutoff": 0.1584580742872275
+          }
+        ]
+      },
+      "value": 2.20888241772054e-07,
+      "source": "committed_native_bound",
+      "available": 819.75,
+      "domain_verified": true,
+      "dependencies": [
+        4
+      ],
+      "native_proof_qualified": true
+    },
+    {
+      "arm": "ENS-C",
+      "call": 4,
+      "sequence": 23,
+      "model_SHA": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "scope": {
+        "schema": 1,
+        "sequence": 9,
+        "kind": "call",
+        "call": 4,
+        "full_original": 0,
+        "native_preconditions": 1,
+        "leaf": "L0",
+        "model_sha256": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+        "model_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\02_G100-R2_S0_ENS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.1584580742872275,
+        "cutoff": 0.1584580742872275,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.1584580742872275,
+            "lower": 0,
+            "cutoff": 0.1584580742872275
+          }
+        ]
+      },
+      "value": 2.208882417721e-07,
+      "source": "linked_MIP_terminal_log",
+      "available": 3570.234999999986,
+      "domain_verified": true,
+      "dependencies": [
+        4
+      ],
+      "native_proof_qualified": true
+    },
+    {
+      "arm": "P-GRB",
+      "call": 1,
+      "sequence": 3,
+      "model_SHA": "c090f8eaa69e23343dddd24fc4d7a9dee1ab8b1885e26493c908099bfd1f6c2d",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "scope": {
+        "schema": 1,
+        "sequence": 2,
+        "kind": "call",
+        "call": 1,
+        "full_original": 1,
+        "native_preconditions": 1,
+        "leaf": "",
+        "model_sha256": "c090f8eaa69e23343dddd24fc4d7a9dee1ab8b1885e26493c908099bfd1f6c2d",
+        "model_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\01_G100-R2_S0_P-GRB\\compact.lp",
+        "model_scope": "complete_original_compact_milp",
+        "native_log_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\01_G100-R2_S0_P-GRB\\native.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.99,
+        "cutoff": 0,
+        "gmax": 0.99,
+        "cover": []
+      },
+      "value": 0,
+      "source": "committed_native_bound",
+      "available": 10.26500000001397,
+      "domain_verified": true,
+      "dependencies": [
+        1
+      ],
+      "native_proof_qualified": true
+    },
+    {
+      "arm": "P-GRB",
+      "call": 1,
+      "sequence": 5,
+      "model_SHA": "c090f8eaa69e23343dddd24fc4d7a9dee1ab8b1885e26493c908099bfd1f6c2d",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "scope": {
+        "schema": 1,
+        "sequence": 2,
+        "kind": "call",
+        "call": 1,
+        "full_original": 1,
+        "native_preconditions": 1,
+        "leaf": "",
+        "model_sha256": "c090f8eaa69e23343dddd24fc4d7a9dee1ab8b1885e26493c908099bfd1f6c2d",
+        "model_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\01_G100-R2_S0_P-GRB\\compact.lp",
+        "model_scope": "complete_original_compact_milp",
+        "native_log_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\01_G100-R2_S0_P-GRB\\native.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.99,
+        "cutoff": 0,
+        "gmax": 0.99,
+        "cover": []
+      },
+      "value": 8.782082104514013e-07,
+      "source": "committed_native_bound",
+      "available": 70.53100000007544,
+      "domain_verified": true,
+      "dependencies": [
+        1
+      ],
+      "native_proof_qualified": true
+    },
+    {
+      "arm": "P-GRB",
+      "call": 1,
+      "sequence": 144,
+      "model_SHA": "c090f8eaa69e23343dddd24fc4d7a9dee1ab8b1885e26493c908099bfd1f6c2d",
+      "input_SHA": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "scope": {
+        "schema": 1,
+        "sequence": 2,
+        "kind": "call",
+        "call": 1,
+        "full_original": 1,
+        "native_preconditions": 1,
+        "leaf": "",
+        "model_sha256": "c090f8eaa69e23343dddd24fc4d7a9dee1ab8b1885e26493c908099bfd1f6c2d",
+        "model_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\01_G100-R2_S0_P-GRB\\compact.lp",
+        "model_scope": "complete_original_compact_milp",
+        "native_log_path": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\campaign\\raw\\01_G100-R2_S0_P-GRB\\native.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.99,
+        "cutoff": 0,
+        "gmax": 0.99,
+        "cover": []
+      },
+      "value": 8.782082104514013e-07,
+      "source": "final_ObjBoundC_API_and_terminal_log",
+      "available": 3571.234000000055,
+      "domain_verified": true,
+      "dependencies": [
+        1
+      ],
+      "native_proof_qualified": true
+    }
+  ],
+  "order_independent": true,
+  "tolerance": 1e-07,
+  "phase": "offline_final_cohort_reconciliation",
+  "original_whole_receipts_unchanged": true,
+  "own_evidence_created_inside_original_whole_only": true,
+  "future_review_charged_as_engineering": true
+}

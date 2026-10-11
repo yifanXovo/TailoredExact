@@ -1,0 +1,13 @@
+# Round114 finite qualification and final-byte CLI
+
+The protocol and claim policy were frozen prospectively. Only new scoped audit, closeout and reader code changes. The original 206 production files, PE and Gurobi13.0.2 DLL are unchanged, and no solver profile, reference rebuild or PE compilation was used.
+
+The finite driver has no OS children or native environment/Optimize calls. `finite01` failed because a generated unknown-event test lacked its required schema field; its raw evidence, failure and paid slot are preserved. The runtime helper bytes were unchanged by the test-field correction. `finite02` passes using the final 47-helper closure and candidate-bound test source.
+
+Passed coverage includes the actual saved G50 matrix counterexample with two exact interpretations; order-independent source/call attribution; same-domain versus outside-domain witnesses; rejection of all damaged-call proof dependencies; own independent open/zero endpoints; missing-own-evidence rejection; unchanged healthy endpoints; actual journal rejection of unknown event/failure/identity mismatch; all three supported zero-Optimize branches and four contradictory-field mutations; source-extracted R90 typed closeout through metrics/whole and the next fixed mock arm; necessary writes, unknown audit, deadlines, resource kill/wait; signed finite P15/17/25/26 return/clock contracts; historical 15 measurements and21 pairs.
+
+Exactly two actual CLI then run against the sealed bytes: H100 P-GRB followed by M-B, cap120, Seed0. P has normal return and an open U=.24859149091954028/L=.1022161142644159, whole91.76962376304436. M-B has normal return and a qualified positive-objective native certificate, U=.16058906725504907/L=.16058906725504873; its exact whole is in the retained receipt. These are qualification-only records, excluded from formal performance comparisons. They do not claim reproduction or injection of the G50 numerical failure.
+
+`post01` independently rebuilds their current physical/journal/model/Start/cover/clock evidence through the explicit-root reader, verifies both qualified actual CLI and the final test/post/reader/helper bindings, and exits normally. Its reports honestly show its own fee pending while the driver is alive; the later actual exit receipt closes that fee.
+
+All qualification fees are closed only after real operating-system process exit:6 conservative starts,189.472980260849 outer seconds. Both failed and successful slots count; no nested native runtime is added. Independent admission binds these originals, closed fees, final bytes and exact two qualification/four formal argv before any formal start.
