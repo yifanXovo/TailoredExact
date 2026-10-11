@@ -1,0 +1,342 @@
+{
+  "actual_observed_unix": 1791762973.7605622,
+  "seconds": 13.034005300025456,
+  "PR": {
+    "baseRefName": "codex/round114-bound-claim-isolation-g100",
+    "baseRefOid": "e436748521cf5aabbe84a24a5e9cf3836550563c",
+    "headRefName": "codex/round115-producer-clock-attribution-closure",
+    "headRefOid": "0885b4d678d422837891487f7aeeb3d8fec08544",
+    "isDraft": true,
+    "number": 177,
+    "state": "OPEN",
+    "title": "Round115: separate producer time from verification and close G100 backend attribution",
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/177"
+  },
+  "advertised_refs": {
+    "refs/heads/codex/round114-bound-claim-isolation-g100": "e436748521cf5aabbe84a24a5e9cf3836550563c",
+    "refs/heads/codex/round115-producer-clock-attribution-closure": "0885b4d678d422837891487f7aeeb3d8fec08544"
+  },
+  "commit_OID": "0885b4d678d422837891487f7aeeb3d8fec08544",
+  "root_tree_OID": "e285fb22dbc89bc667bfa0f55cad3199401c5a1d",
+  "all_necessary_file_OIDs_equal": true,
+  "files": {
+    "results/unified_exact_round115/measurement_policy_v2.md": {
+      "remote_OID": "3dded8c5ba05cdfa65d399f7b631dda52ee75ae3",
+      "local_OID": "3dded8c5ba05cdfa65d399f7b631dda52ee75ae3",
+      "equal": true
+    },
+    "results/unified_exact_round115/producer_dependency_graph.json": {
+      "remote_OID": "f851d53168987b45bc9caf09e66ae5e10fc3d9c7",
+      "local_OID": "f851d53168987b45bc9caf09e66ae5e10fc3d9c7",
+      "equal": true
+    },
+    "results/unified_exact_round115/minimal_diff.md": {
+      "remote_OID": "c8492b6c60c6c5ae2d28df0e290fcc4f298ec174",
+      "local_OID": "c8492b6c60c6c5ae2d28df0e290fcc4f298ec174",
+      "equal": true
+    },
+    "results/unified_exact_round115/protocol.json": {
+      "remote_OID": "8c7e5e866a262d19f4ad24a205d2e4edbfcd7663",
+      "local_OID": "8c7e5e866a262d19f4ad24a205d2e4edbfcd7663",
+      "equal": true
+    },
+    "results/unified_exact_round115/production_identity.json": {
+      "remote_OID": "2d084e8857c8b076759c83c4987b4349261a9435",
+      "local_OID": "2d084e8857c8b076759c83c4987b4349261a9435",
+      "equal": true
+    },
+    "results/unified_exact_round115/candidate_identity.json": {
+      "remote_OID": "de22369e393bd32574fffa43db7e556a67a1f3c1",
+      "local_OID": "de22369e393bd32574fffa43db7e556a67a1f3c1",
+      "equal": true
+    },
+    "results/unified_exact_round115/fixed_manifest.json": {
+      "remote_OID": "911ff0045bfe8f038faf5c848b0739197a7f7e6b",
+      "local_OID": "911ff0045bfe8f038faf5c848b0739197a7f7e6b",
+      "equal": true
+    },
+    "results/unified_exact_round115/input_manifest.json": {
+      "remote_OID": "b08fd5ea44b6688e2b8d435e98e77ab9bae34982",
+      "local_OID": "b08fd5ea44b6688e2b8d435e98e77ab9bae34982",
+      "equal": true
+    },
+    "results/unified_exact_round115/campaign/identity.json": {
+      "remote_OID": "911ff0045bfe8f038faf5c848b0739197a7f7e6b",
+      "local_OID": "911ff0045bfe8f038faf5c848b0739197a7f7e6b",
+      "equal": true
+    },
+    "results/unified_exact_round115/review/performance_admission.json": {
+      "remote_OID": "f78a11fd84326a247263d2064594aac34915a91a",
+      "local_OID": "f78a11fd84326a247263d2064594aac34915a91a",
+      "equal": true
+    },
+    "results/unified_exact_round115/review/whole_goal01/signed_review.json": {
+      "remote_OID": "ebec470619d0ab90e4b9756f964c916bfc69b46b",
+      "local_OID": "ebec470619d0ab90e4b9756f964c916bfc69b46b",
+      "equal": true
+    },
+    "results/unified_exact_round115/review/whole_goal01/review_boundary.md": {
+      "remote_OID": "5827463768e9ade4f68ecbf7d1a63df7685277fa",
+      "local_OID": "5827463768e9ade4f68ecbf7d1a63df7685277fa",
+      "equal": true
+    },
+    "results/unified_exact_round115/final_report.md": {
+      "remote_OID": "92876d9a6f626f7eec0935069753ba74007f79a1",
+      "local_OID": "92876d9a6f626f7eec0935069753ba74007f79a1",
+      "equal": true
+    },
+    "results/unified_exact_round115/research_phase_decision.md": {
+      "remote_OID": "2da26d2ace849fdd3c6accf9abaff31503152434",
+      "local_OID": "2da26d2ace849fdd3c6accf9abaff31503152434",
+      "equal": true
+    },
+    "results/unified_exact_round115/research_phase_decision.json": {
+      "remote_OID": "d16c0c38debd1819e5b4e47cec883481c6643e07",
+      "local_OID": "d16c0c38debd1819e5b4e47cec883481c6643e07",
+      "equal": true
+    },
+    "results/unified_exact_round115/physical_completion.json": {
+      "remote_OID": "7a553d68657f80a2dab1e20ac5a9b3cbeb187e36",
+      "local_OID": "7a553d68657f80a2dab1e20ac5a9b3cbeb187e36",
+      "equal": true
+    },
+    "results/unified_exact_round115/current_source_qualification.json": {
+      "remote_OID": "9e61ef81f5f8a6cf1e5a9243722421e8a1287656",
+      "local_OID": "9e61ef81f5f8a6cf1e5a9243722421e8a1287656",
+      "equal": true
+    },
+    "results/unified_exact_round115/formal_compact_Start.json": {
+      "remote_OID": "6d9bd938673dc806cf1936d8d6f57143ce970403",
+      "local_OID": "6d9bd938673dc806cf1936d8d6f57143ce970403",
+      "equal": true
+    },
+    "results/unified_exact_round115/objective_sublevel_analysis.md": {
+      "remote_OID": "c373452b84019ce0ac9a8be8a505dc00d2e3226b",
+      "local_OID": "c373452b84019ce0ac9a8be8a505dc00d2e3226b",
+      "equal": true
+    },
+    "results/unified_exact_round115/objective_sublevel_analysis.json": {
+      "remote_OID": "14a6899e6d618dbed424f59810d19ed8a3498004",
+      "local_OID": "14a6899e6d618dbed424f59810d19ed8a3498004",
+      "equal": true
+    },
+    "results/unified_exact_round115/objective_sublevel_analysis_raw.json": {
+      "remote_OID": "5feffa93959e3ba062f51a110a65a08785ce816e",
+      "local_OID": "5feffa93959e3ba062f51a110a65a08785ce816e",
+      "equal": true
+    },
+    "results/unified_exact_round115/reports_final/summary.json": {
+      "remote_OID": "f5c261c927797780a58cbb3f96275c257a70c0ed",
+      "local_OID": "f5c261c927797780a58cbb3f96275c257a70c0ed",
+      "equal": true
+    },
+    "results/unified_exact_round115/reports_final/new_arms.csv": {
+      "remote_OID": "54a7508d3c0c197b5c31bed97601b5789ae5913e",
+      "local_OID": "54a7508d3c0c197b5c31bed97601b5789ae5913e",
+      "equal": true
+    },
+    "results/unified_exact_round115/reports_final/new_pairs.csv": {
+      "remote_OID": "b21dd3b684257da6cfdfd53a7a0686ba4650afa5",
+      "local_OID": "b21dd3b684257da6cfdfd53a7a0686ba4650afa5",
+      "equal": true
+    },
+    "results/unified_exact_round115/reports_final/backend_conclusions.json": {
+      "remote_OID": "ee9faa4ed4367d8862b5ea4dfc40cb33f55ac4cf",
+      "local_OID": "ee9faa4ed4367d8862b5ea4dfc40cb33f55ac4cf",
+      "equal": true
+    },
+    "results/unified_exact_round115/reports_final/clock_qualification.csv": {
+      "remote_OID": "184cdc7d52787c02690c50e7cd7fcd5507b6ab62",
+      "local_OID": "184cdc7d52787c02690c50e7cd7fcd5507b6ab62",
+      "equal": true
+    },
+    "results/unified_exact_round115/reports_final/time_partitions.csv": {
+      "remote_OID": "59925935806838e5ae27eaa89833dee7718dec65",
+      "local_OID": "59925935806838e5ae27eaa89833dee7718dec65",
+      "equal": true
+    },
+    "results/unified_exact_round115/reports_final/native_counts.csv": {
+      "remote_OID": "4422076d1104104ce1d270f4453cdc91cce78ffb",
+      "local_OID": "4422076d1104104ce1d270f4453cdc91cce78ffb",
+      "equal": true
+    },
+    "results/unified_exact_round115/reports_final/same_H.csv": {
+      "remote_OID": "47c8b73952f23a9bc97a02b7f75d496590e9d596",
+      "local_OID": "47c8b73952f23a9bc97a02b7f75d496590e9d596",
+      "equal": true
+    },
+    "results/unified_exact_round115/secondary_total_pairs.csv": {
+      "remote_OID": "1f6f6ca295274a6074ef934aaceb56df008aaa9d",
+      "local_OID": "1f6f6ca295274a6074ef934aaceb56df008aaa9d",
+      "equal": true
+    },
+    "results/unified_exact_round115/secondary_time_comparison.json": {
+      "remote_OID": "bac4eda206ff83ce0880dcd5539cdc0e541b6f18",
+      "local_OID": "bac4eda206ff83ce0880dcd5539cdc0e541b6f18",
+      "equal": true
+    },
+    "results/unified_exact_round115/public_export_receipt.json": {
+      "remote_OID": "5f1b725e23f277904be8a89418ee1327e2cffc7e",
+      "local_OID": "5f1b725e23f277904be8a89418ee1327e2cffc7e",
+      "equal": true
+    },
+    "results/unified_exact_round115/public_restore_receipt.json": {
+      "remote_OID": "bf0352498cba523827b00ea3595d86a607e94a9f",
+      "local_OID": "bf0352498cba523827b00ea3595d86a607e94a9f",
+      "equal": true
+    },
+    "results/unified_exact_round115/public_dependency_supplement.json": {
+      "remote_OID": "208d9565a8b4d91fa41a3777a363df7856c8e1e5",
+      "local_OID": "208d9565a8b4d91fa41a3777a363df7856c8e1e5",
+      "equal": true
+    },
+    "results/unified_exact_round115/public_dependency_supplement_receipt.json": {
+      "remote_OID": "bfcb1c114fe36e03e67f40606daa73541109c910",
+      "local_OID": "bfcb1c114fe36e03e67f40606daa73541109c910",
+      "equal": true
+    },
+    "results/unified_exact_round115/public_dependency_incident.json": {
+      "remote_OID": "20a3453678412a7a534a5b0c6915b8d7204da449",
+      "local_OID": "20a3453678412a7a534a5b0c6915b8d7204da449",
+      "equal": true
+    },
+    "results/unified_exact_round115/public_reconstruction_receipt.json": {
+      "remote_OID": "b7cbad4d15c0e2e7361281792a5666e0aab36f7c",
+      "local_OID": "b7cbad4d15c0e2e7361281792a5666e0aab36f7c",
+      "equal": true
+    },
+    "results/unified_exact_round115/inherited_r113/public_pack_receipt.json": {
+      "remote_OID": "94ebd8b4ce5c9438784540bea63cbd5ff395cd0e",
+      "local_OID": "94ebd8b4ce5c9438784540bea63cbd5ff395cd0e",
+      "equal": true
+    },
+    "results/unified_exact_round115/public_pack_receipt.json": {
+      "remote_OID": "5d9274d11537ce4855d2cbf341b61533181ac421",
+      "local_OID": "5d9274d11537ce4855d2cbf341b61533181ac421",
+      "equal": true
+    },
+    "results/unified_exact_round115/public_dependency_closure.json": {
+      "remote_OID": "667c3b806a826a2fac405663e2543e79a72decad",
+      "local_OID": "667c3b806a826a2fac405663e2543e79a72decad",
+      "equal": true
+    },
+    "results/unified_exact_round115/delivery_costs.json": {
+      "remote_OID": "9f7dd1c5513bb78f9e34587ebd8e4d40dcecb32e",
+      "local_OID": "9f7dd1c5513bb78f9e34587ebd8e4d40dcecb32e",
+      "equal": true
+    },
+    "results/unified_exact_round115/delivery_report.md": {
+      "remote_OID": "1a8376ad38ae3f79aae3dc0ea5e5f399de27aef4",
+      "local_OID": "1a8376ad38ae3f79aae3dc0ea5e5f399de27aef4",
+      "equal": true
+    },
+    "results/unified_exact_round115/reproduce.md": {
+      "remote_OID": "dbf564774c93bda9b18fa6b53e5f8f08b04a9af3",
+      "local_OID": "dbf564774c93bda9b18fa6b53e5f8f08b04a9af3",
+      "equal": true
+    },
+    "results/unified_exact_round115/pr_body_delivery.md": {
+      "remote_OID": "2c1a88b5a8c33bb69207590b7b706945ba62865f",
+      "local_OID": "2c1a88b5a8c33bb69207590b7b706945ba62865f",
+      "equal": true
+    },
+    "results/unified_exact_round115/RESUME.md": {
+      "remote_OID": "6e1303b22d17e3a3ef78cf5b090ab5151a6db326",
+      "local_OID": "6e1303b22d17e3a3ef78cf5b090ab5151a6db326",
+      "equal": true
+    },
+    "results/unified_exact_round115/compact_evidence/manifest.json": {
+      "remote_OID": "483346d8a58d870d51b14085a8684534f64d82f6",
+      "local_OID": "483346d8a58d870d51b14085a8684534f64d82f6",
+      "equal": true
+    },
+    "results/unified_exact_round115/compact_evidence/evidence.tar.gz.part001": {
+      "remote_OID": "8cde60d0e06c3390038dd71bd94c9fda30c5657b",
+      "local_OID": "8cde60d0e06c3390038dd71bd94c9fda30c5657b",
+      "equal": true
+    },
+    "results/unified_exact_round115/compact_evidence/evidence.tar.gz.part002": {
+      "remote_OID": "9aa32c90d346746fa6e92646d5277ec1533803b4",
+      "local_OID": "9aa32c90d346746fa6e92646d5277ec1533803b4",
+      "equal": true
+    },
+    "results/unified_exact_round115/compact_evidence/evidence.tar.gz.part003": {
+      "remote_OID": "a88ac271637ad5cc73b6b6cd2c6dbdc0f4deb1db",
+      "local_OID": "a88ac271637ad5cc73b6b6cd2c6dbdc0f4deb1db",
+      "equal": true
+    },
+    ".gitattributes": {
+      "remote_OID": "3818c0b01a0ff422b616c2d809ccfc10e496f83e",
+      "local_OID": "3818c0b01a0ff422b616c2d809ccfc10e496f83e",
+      "equal": true
+    },
+    "scripts/round115_campaign.py": {
+      "remote_OID": "b7f56bff12329d1c10d19f271cc1c87e15e362a7",
+      "local_OID": "b7f56bff12329d1c10d19f271cc1c87e15e362a7",
+      "equal": true
+    },
+    "scripts/round115_common.py": {
+      "remote_OID": "ff00e3640365813d5f70d893e4576554ffc2152d",
+      "local_OID": "ff00e3640365813d5f70d893e4576554ffc2152d",
+      "equal": true
+    },
+    "scripts/round115_verify.py": {
+      "remote_OID": "1f2f019150e54f63fdd7f4c3c4e6a4534cfa707e",
+      "local_OID": "1f2f019150e54f63fdd7f4c3c4e6a4534cfa707e",
+      "equal": true
+    },
+    "scripts/read_round115.py": {
+      "remote_OID": "a76638ecea6b842565a59d93d82186e508bac1da",
+      "local_OID": "a76638ecea6b842565a59d93d82186e508bac1da",
+      "equal": true
+    },
+    "scripts/round115_sublevel.py": {
+      "remote_OID": "153b7336fe150574847d414bb56ad097c4cf23cb",
+      "local_OID": "153b7336fe150574847d414bb56ad097c4cf23cb",
+      "equal": true
+    },
+    "scripts/round115_organize.py": {
+      "remote_OID": "5427da96f8822b98d37ae876cdcf9006cea85ea8",
+      "local_OID": "5427da96f8822b98d37ae876cdcf9006cea85ea8",
+      "equal": true
+    },
+    "scripts/round115_postreview.py": {
+      "remote_OID": "85ea5f31f2cba96182ef28f8dec60d94222abf7a",
+      "local_OID": "85ea5f31f2cba96182ef28f8dec60d94222abf7a",
+      "equal": true
+    },
+    "scripts/round115_delivery.py": {
+      "remote_OID": "fb7d72fda0266aeede196c35dc976e2a151e2711",
+      "local_OID": "fb7d72fda0266aeede196c35dc976e2a151e2711",
+      "equal": true
+    },
+    "scripts/round115_dependency_repair.py": {
+      "remote_OID": "03d9643a73b1e2495aa7f3ef617c6f840a152c0c",
+      "local_OID": "03d9643a73b1e2495aa7f3ef617c6f840a152c0c",
+      "equal": true
+    },
+    "scripts/round115_review.py": {
+      "remote_OID": "61a205d72d025c309c7855b1abffce02acbaa143",
+      "local_OID": "61a205d72d025c309c7855b1abffce02acbaa143",
+      "equal": true
+    },
+    "scripts/qualify_round115.py": {
+      "remote_OID": "115db8dc34d120e76a4f8203c70ceae11f5367e7",
+      "local_OID": "115db8dc34d120e76a4f8203c70ceae11f5367e7",
+      "equal": true
+    },
+    "scripts/qualify_round115_post.py": {
+      "remote_OID": "65652aef0790a5c1a6aeca2c1c8e24f3f4c90a67",
+      "local_OID": "65652aef0790a5c1a6aeca2c1c8e24f3f4c90a67",
+      "equal": true
+    }
+  },
+  "remote_tree_reads": 10,
+  "production_source_paths_unchanged": true,
+  "scientific_payload_commit": "fcf9aa4881a76bbbb26f5ec409a74ea384672886",
+  "authority_supplement_commit": "70fd7c6fc3c3dbbb3ad218a52ebfd8ac173c42eb",
+  "scope": "actual remote state at observation; receipt does not claim future self-publication or later HEAD",
+  "checker_SHA": "b012090198276bf8ae56be36cf75705079a70f0d4436c0890fb1f178295fedc6",
+  "Optimize": 0,
+  "native_starts": 0
+}

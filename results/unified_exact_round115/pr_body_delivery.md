@@ -1,0 +1,24 @@
+Round115 prospectively separates complete algorithm production (`T_produce`) from serial postproduction verification (`T_verify`), while recording their shared-origin `T_total`. All four new G100-R2 arms completed exactly once and qualify after the full evidence checks. Production source206, PE/DLL, native argv, physical problem, online validations, 3600-second cap and 30-second reserve remain unchanged. This is a new measurement policy; R114 ENS's old overcap run and R113 cold P's missing clock retain their original eligibility.
+
+| Method | Own physical U | T_produce (s) | T_verify (s) | T_total (s) |
+| --- | ---: | ---: | ---: | ---: |
+| cold P-GRB | .03994210048354935 | 3571.484855 | .754338 | 3572.239192 |
+| ENS-C | .005528455284552848 | 3570.806678 | 34.907025 | 3605.713703 |
+| P-S | 0 | 1306.536729 | 10.792634 | 1317.329364 |
+| M-B | .011434738339920945 | 3570.692637 | 34.783963 | 3605.476600 |
+
+ENS and M-B both have total time above 3600. Ascending producer order is P-S/M-B/ENS/P, whereas total order is P-S/P/M-B/ENS. The less favorable total-time view is retained. The six current pairs are ENS/P WIN, M-B/P WIN, P-S/P WIN, ENS/P-S severe LOSS, M-B/P-S severe LOSS, and M-B/ENS severe LOSS; secondary total-time classification is unchanged.
+
+All three warm methods match complete self-paid 25-seed H semantics, accepted actions, inventories and capacity-assigned fleets, and all expose their backend. P-S's original compact Start checks 91,969 native columns and 260,160 rows. A contradictory call in each method is rejected as a whole call, including P-S's own call; later smaller bounds do not restore trust. The three positive endpoints use their own legal physical U and the independent floor 0. P-S retains its own strict-zero physical certificate. Its absent journal returned event satisfies only the inherited narrow terminal-MIP gate with independently verified actual return. The numerical engine remains unrepaired.
+
+The descriptive layer closes 19 qualified observations over 20 positions and 27 evaluable pairs over 30. ENS/P-S W/W/L/W/L and M-B/P-S W/W/L/T/L are both MIXED. Old roles retain their original whole clocks, while new G100 uses the producer clock. No cross-layer mean, exact speedup, overall win rate or unified-clock benchmark is claimed. Cold P remains primary, ENS default, M-B retains finite R111 candidate support, and P-S remains a contribution control.
+
+Zero-Optimize rational analysis validates G50's minimum realizable positive objective, beta=1837/224500, under decimal and parsed-binary64 coefficients. Existing legal M-B/P-S fleets attain beta, so strict improvement requires Y=D; historical ENS already establishes target existence. G100 beta=299/108120 is below all three current positive own U, so that sufficient condition is inapplicable. P-S actually attained zero through the frozen original compact method. The prior unknown-zero report label is transparently amended without changing admitted checker or producer bytes. R61's full-fleet fixed/released-Y infrastructure is inherited. No oracle, cut, branch or heuristic was implemented or measured.
+
+**Phase decision A:** close this phase, freeze the candidate and contribution boundary, and prioritize independent external coverage and paper experiments. No subsequent native work is automatically started.
+
+Validation includes finite zero-Optimize boundary/claim replay, four H100 V20/M2 cap120 children, full same-H postcheck, prospective admission, complete serial per-arm audits and order-invariant cohort reconstruction. Paid ledger: 12/24 conservative starts and 12590.651395/20000 outer seconds, including qualification 7/10 and 445.768154/600. Per-arm verification is included; separate read-only delivery costs and unknown orchestration costs are disclosed. There was no performance retry or production rebuild.
+
+One committed compact carrier was actually Git-exported and restored into a fresh empty root. A real first reconstruction failure exposed one omitted 394-byte inherited authority receipt; the exact signed Git-blob supplement fixes it without another carrier or archive. The recovered root then reproduces all fields of 35 core tables/JSON. One extra seven-question review ran after complete organization and restoration: seven PASS results. It is an implementer-authored separate executable with no third-party person/agent or native rerun claimed. Science payload, targeted dependency supplement and later actual execution receipts are separate commits. PE/DLL/licenses/credentials and full old carriers are excluded.
+
+Stacked research Draft PR on verified R114 branch `codex/round114-bound-claim-isolation-g100`. Few seeds and same-source inputs leave independent generalization and full paper coverage unestablished. See `final_report.md`, `delivery_report.md`, `reproduce.md`, `research_phase_decision.md` and the actual review/clock/fee records under `results/unified_exact_round115/`.

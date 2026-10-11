@@ -1,0 +1,329 @@
+{
+  "decision": "ACCEPT_COMPLETE_SCIENTIFIC_DELIVERY_FOR_DRAFT_PUBLICATION",
+  "checks": {
+    "1": {
+      "result": "PASS",
+      "basis": "Actual perf-counter producer seal boundaries and SHA/phase receipts; original prelaunch/H/online work retained. Runtime remains nested diagnostic.",
+      "clocks": {
+        "P-GRB": {
+          "complete_seconds": 3571.484854530776,
+          "T_produce": 3571.484854530776,
+          "T_verify": 0.7543377000838518,
+          "T_total": 3572.2391922308598,
+          "t0_perf": 821508.1147611692,
+          "t_produce_perf": 825079.5996157,
+          "t_verified_perf": 825080.3539534,
+          "t0_unix": 1791749195.0087795,
+          "t_produce_unix": 1791752766.493835,
+          "t_verified_unix": 1791752767.247905,
+          "within_cap": true,
+          "cap_seconds": 3600,
+          "cap_excess_seconds": 0.0,
+          "total_exceeds_3600": false,
+          "main_clock": "T_produce",
+          "measurement_policy": "v2",
+          "producer_receipt_SHA": "ed9cf4191011e58ea44f2007eb3b5ce710ba5aaa9730ff4d59a61530561fb8e8",
+          "total_receipt_SHA": "e0f2a5c9ee73f015e17699fd0fbbc3bc1cefa05b085c7685e379217a1166e081",
+          "group_future_review_in_arm": false
+        },
+        "ENS-C": {
+          "complete_seconds": 3570.8066784000257,
+          "T_produce": 3570.8066784000257,
+          "T_verify": 34.90702469996177,
+          "T_total": 3605.7137030999875,
+          "t0_perf": 825080.3665742,
+          "t_produce_perf": 828651.1732526,
+          "t_verified_perf": 828686.0802773,
+          "t0_unix": 1791752767.260906,
+          "t_produce_unix": 1791756338.0679526,
+          "t_verified_unix": 1791756372.9747305,
+          "within_cap": true,
+          "cap_seconds": 3600,
+          "cap_excess_seconds": 0.0,
+          "total_exceeds_3600": true,
+          "main_clock": "T_produce",
+          "measurement_policy": "v2",
+          "producer_receipt_SHA": "e1c8e8468f74f7f2959ff61df3038f45f427206cfae0454ae30aeb808f484c6b",
+          "total_receipt_SHA": "a8c673bf0d5fe8637b1ac33518731db437d0a22a675564b1b437a0974ab2f299",
+          "group_future_review_in_arm": false
+        },
+        "P-S": {
+          "complete_seconds": 1306.5367294000462,
+          "T_produce": 1306.5367294000462,
+          "T_verify": 10.792634399957024,
+          "T_total": 1317.3293638000032,
+          "t0_perf": 828686.0883769,
+          "t_produce_perf": 829992.6251063,
+          "t_verified_perf": 830003.4177407,
+          "t0_unix": 1791756372.983051,
+          "t_produce_unix": 1791757679.5194519,
+          "t_verified_unix": 1791757690.3123174,
+          "within_cap": true,
+          "cap_seconds": 3600,
+          "cap_excess_seconds": 0.0,
+          "total_exceeds_3600": false,
+          "main_clock": "T_produce",
+          "measurement_policy": "v2",
+          "producer_receipt_SHA": "0cd3c9f084db240c99fd77a6f2de6f13ebc35d3279f5464c0589f14dcf89ef27",
+          "total_receipt_SHA": "d881f141ede2244c3a44ddf176fc303e71ad4c185afcad38b5ab8a2c967b2901",
+          "group_future_review_in_arm": false
+        },
+        "M-B": {
+          "complete_seconds": 3570.692636599997,
+          "T_produce": 3570.692636599997,
+          "T_verify": 34.78396290005185,
+          "T_total": 3605.476599500049,
+          "t0_perf": 830003.425847,
+          "t_produce_perf": 833574.1184836,
+          "t_verified_perf": 833608.9024465,
+          "t0_unix": 1791757690.3203735,
+          "t_produce_unix": 1791761261.0131574,
+          "t_verified_unix": 1791761295.797095,
+          "within_cap": true,
+          "cap_seconds": 3600,
+          "cap_excess_seconds": 0.0,
+          "total_exceeds_3600": true,
+          "main_clock": "T_produce",
+          "measurement_policy": "v2",
+          "producer_receipt_SHA": "d4f2bc7be597328feb16394a16f5d03133ccfd50c69bdd0afbb893b71ba7dc17",
+          "total_receipt_SHA": "5609e355233550f7ccc571c44c2f4402d3d05d30477f84a15d6bf19e3af7fd79",
+          "group_future_review_in_arm": false
+        }
+      }
+    },
+    "2": {
+      "result": "PASS",
+      "basis": "All admitted helper/206 source/reader/math/policy/graph bytes match; sealed physical fleets exactly equal independent postproduction checks. Pending receipts remain null. Original source-extracted supervisor prefix retains cleanup and deadline behavior.",
+      "new_UB_or_native_certificate_backfilled": false,
+      "producer_SHA": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03"
+    },
+    "3": {
+      "result": "PASS",
+      "basis": "Signed inherited G50 cold-P clock/U/L stay absent; original R114 ENS whole3605.688342700014 stays ineligible. Six new pairs contain only origin115.",
+      "historical_clocks_rewritten": false,
+      "old_G50_P_missing": true
+    },
+    "4": {
+      "result": "PASS",
+      "basis": "All original argv/settings/windows/input/identity match. All four damaged calls are wholly rejected under the same unchanged policy. P-S missing returned is explicitly retained under the inherited narrow gate; actual return and all-column Start remain checked.",
+      "engine_repaired": false,
+      "damaged_calls": [
+        {
+          "arm": "ENS-C",
+          "call": 4
+        },
+        {
+          "arm": "M-B",
+          "call": 4
+        },
+        {
+          "arm": "P-GRB",
+          "call": 1
+        },
+        {
+          "arm": "P-S",
+          "call": 1
+        }
+      ]
+    },
+    "5": {
+      "result": "PASS",
+      "basis": "Direct rational Gini/penalty, all J states/phi, finite n2/3 capacity/total enumeration, and restored legal G50 own fleets independently reproduce beta under both coefficient interpretations. Positive sigma is excluded by total conservation. J is necessary only; no routing sufficiency or beta lattice claim.",
+      "arithmetic": {
+        "input_decimal": {
+          "beta": "1837/224500",
+          "delta": "3/500",
+          "minimizers": [
+            {
+              "station": 1,
+              "sigma": -1
+            },
+            {
+              "station": 5,
+              "sigma": -1
+            },
+            {
+              "station": 7,
+              "sigma": -1
+            },
+            {
+              "station": 11,
+              "sigma": -1
+            },
+            {
+              "station": 20,
+              "sigma": -1
+            },
+            {
+              "station": 27,
+              "sigma": -1
+            },
+            {
+              "station": 28,
+              "sigma": -1
+            },
+            {
+              "station": 32,
+              "sigma": -1
+            },
+            {
+              "station": 33,
+              "sigma": -1
+            },
+            {
+              "station": 36,
+              "sigma": -1
+            },
+            {
+              "station": 50,
+              "sigma": -1
+            }
+          ],
+          "necessary_total_interval": [
+            407,
+            527
+          ]
+        },
+        "parsed_binary64": {
+          "beta": "89421087460579479712019683015340941/10928162294447520024422778992905420800",
+          "delta": "5841333965851680649751244142805/973555660975280180349468061728768",
+          "minimizers": [
+            {
+              "station": 1,
+              "sigma": -1
+            },
+            {
+              "station": 5,
+              "sigma": -1
+            },
+            {
+              "station": 7,
+              "sigma": -1
+            },
+            {
+              "station": 11,
+              "sigma": -1
+            },
+            {
+              "station": 20,
+              "sigma": -1
+            },
+            {
+              "station": 27,
+              "sigma": -1
+            },
+            {
+              "station": 28,
+              "sigma": -1
+            },
+            {
+              "station": 32,
+              "sigma": -1
+            },
+            {
+              "station": 33,
+              "sigma": -1
+            },
+            {
+              "station": 36,
+              "sigma": -1
+            },
+            {
+              "station": 50,
+              "sigma": -1
+            }
+          ],
+          "necessary_total_interval": [
+            407,
+            527
+          ]
+        }
+      },
+      "finite_cases": 5,
+      "Optimize": 0
+    },
+    "6": {
+      "result": "PASS",
+      "basis": "G100 positive U exceeds beta; actual P-S own sealed zero now establishes optimum. G50 target existence was already known from ENS. Exact sublevel qualification is offline and unmeasured as an algorithm; inherited R61 full-fleet scope and phase A are explicit.",
+      "production_mechanism_changed": false,
+      "phase": "A"
+    },
+    "7": {
+      "result": "PASS",
+      "basis": "Actual Git-exported empty-root hash restore and all current core fields reproduce; fixed denominators/old missing comparisons/budgets are preserved. R114 intended stacked base is verified live. New PR publication is pending and is explicitly not claimed in this review.",
+      "budget_seconds": 12590.651394605637,
+      "positions": 20,
+      "qualified": 19,
+      "pairs": 30,
+      "evaluable": 27,
+      "reconstructed_files": [
+        "arms.csv",
+        "backend_conclusions.json",
+        "checkpoints.csv",
+        "chronological_covers.csv",
+        "clock_qualification.csv",
+        "cohort_reconciliation.json",
+        "compact_Starts.csv",
+        "controller_AM.csv",
+        "controller_child_bounds.csv",
+        "controller_events.csv",
+        "controller_LP_status.csv",
+        "controller_native.csv",
+        "controller_targets.csv",
+        "covers.csv",
+        "fees.csv",
+        "fleets.csv",
+        "historical_execution_ledger_G100_unstarted.csv",
+        "inherited_arms.csv",
+        "inherited_pairs.csv",
+        "native_bounds.csv",
+        "native_calls.csv",
+        "native_counts.csv",
+        "new_arms.csv",
+        "new_pairs.csv",
+        "own_UB_flow.csv",
+        "pairs.csv",
+        "progress_publication.csv",
+        "qualification_arms.csv",
+        "same_H.csv",
+        "same_H_fleets.csv",
+        "split_exposure.csv",
+        "summary.json",
+        "target_discovery.csv",
+        "time_partitions.csv"
+      ],
+      "public_commit": "fcf9aa4881a76bbbb26f5ec409a74ea384672886",
+      "new_PR_remote_verification_pending": true
+    }
+  },
+  "reviewer": "implementer-authored separate executable on restored root; no independent person or agent",
+  "independent_third_party_executor": false,
+  "reviewed_unix": 1791762484.2018993,
+  "seconds": 6.2443295000121,
+  "Optimize": 0,
+  "native_starts": 0,
+  "performance_replay": false,
+  "original_worktree_core_fallback": false,
+  "reviewer_SHA": "600b959e6033ad7b0d7bf9eb5606bb9f4e5ab01691a6852c8f4afe0b1b883c47",
+  "bound_files": {
+    "final_report.md": "9c4d75a1b8b633cc26008e73cde0348de3179970a23ace2a992b5b711e559792",
+    "research_phase_decision.md": "5d2f369b60d67d68189adc438f73bfe60d1a4fb578f25563b7b60e75d82a69a6",
+    "research_phase_decision.json": "8c2212088630fce2eb9df0ee1b93260462055478e1b10b230ef4414f3d8dee53",
+    "measurement_policy_v2.md": "534e4da51811f663bb23f2bded2ba7d93493221adb8bb8ef8e605808ca3c8636",
+    "objective_sublevel_analysis.md": "6c1f9c875fceeee4f3ed0e6c2b5aa1cf50c7e42b50d78e38bdd9cf7a51a6670d",
+    "objective_sublevel_analysis.json": "796995e27c06ba50bd039c32e077263de1cf3458e4ad438942145ef2508f7b0f",
+    "objective_sublevel_analysis_raw.json": "ef71fa922e00fab8bc83e2be02c43e2180cca6fbff79ef8c29062a193ffa2827",
+    "reports_final/summary.json": "b4ebb82eb3e76c1c75480e6b6d454e51596c6a78188f2bc116c6031cd7627120",
+    "reports_final/new_arms.csv": "30e84ef0f9aee802abe3924e56ca1007ef4620bda2be13d5a0daaf74fcdcfc45",
+    "reports_final/new_pairs.csv": "6b8c7bfe8dda633f732d6dd87c546d34bac97dc79a8563daec10cb504806cf24",
+    "reports_final/backend_conclusions.json": "f7878e6dd1bcc14fa97f04d5d8686c075262eaff1a14f603c4b47abc78ab7c8d",
+    "secondary_time_comparison.json": "ca6acd0ffce54f3fe8f834d94a8508fe960b720779e7f0f6cdbf3f38ef44c648",
+    "secondary_total_pairs.csv": "de162e5c5a13948bed0295d461ae779bd1b1377c61e23dbce11bc8f0709413aa",
+    "pr_body.md": "2405888003cf5d12c42c8e551d9fde6409f25af490c9631d04cf1a26a48d3195"
+  },
+  "actual_restore_receipt_SHA": "31f1b2dcad7089045c1197a55baf93a3591e965a84bb771273c94cfcc2519e83",
+  "actual_reconstruction_receipt_SHA": "7d258e9cddb4e661f2fa63e233b448f08940981bde6680a239c11e018326dc82",
+  "already_organized_complete_payload": true,
+  "checks_run_once": true,
+  "future_PR_verification_not_in_review": true
+}

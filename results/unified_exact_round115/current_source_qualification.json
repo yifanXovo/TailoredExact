@@ -1,0 +1,117 @@
+{
+  "calls": [
+    {
+      "arm": "P-GRB",
+      "counts": {
+        "declared": 1,
+        "actual_Optimize": 1,
+        "journal_returned": 1,
+        "independently_verified_returned": 1,
+        "explicit_not_started": 0
+      },
+      "narrow_missing_return": null,
+      "original_native_result_U": 0.03994210048354933,
+      "original_native_result_L": 8.782082104514013e-07,
+      "final_endpoint_source": "SOURCE_REDUCED_OPEN",
+      "native_proof_qualified": false
+    },
+    {
+      "arm": "ENS-C",
+      "counts": {
+        "declared": 4,
+        "actual_Optimize": 4,
+        "journal_returned": 4,
+        "independently_verified_returned": 4,
+        "explicit_not_started": 0
+      },
+      "narrow_missing_return": null,
+      "original_native_result_U": 0.005528455284552843,
+      "original_native_result_L": 2.20888241772054e-07,
+      "final_endpoint_source": "SOURCE_REDUCED_OPEN",
+      "native_proof_qualified": false
+    },
+    {
+      "arm": "P-S",
+      "counts": {
+        "declared": 1,
+        "actual_Optimize": 1,
+        "journal_returned": 0,
+        "independently_verified_returned": 1,
+        "explicit_not_started": 0
+      },
+      "narrow_missing_return": {
+        "declared": 1,
+        "actual_Optimize": 1,
+        "journal_returned": 0,
+        "independently_verified_returned": 1,
+        "explicit_not_started": 0,
+        "missing_returned_preserved": [
+          1
+        ],
+        "branch": "BOUND_WITNESS_LATCH_LAST_MIP_OWN_ZERO_NORMAL_RETURN",
+        "original_clock_still_pending": true,
+        "evidence_predicates": {
+          "prefix_continuous": true,
+          "failure_terminal": true,
+          "failure_reason": "full_bound_witness_inconsistency",
+          "damaged_call": 1,
+          "actual_call_ids": [
+            1
+          ],
+          "journal_returned_ids": [],
+          "explicit_not_started_ids": [],
+          "terminal_MIP": true,
+          "all_actual_calls_bound": true,
+          "normal_return": true,
+          "API_or_ledger_return_verified": true,
+          "logs_parameters_models_cleanup_verified": true,
+          "serialization_process_exit_verified": true,
+          "own_committed_exact_zero": true,
+          "same_domain_counterexample_verified": true,
+          "independent_floor0": true,
+          "clock_valid": true
+        }
+      },
+      "original_native_result_U": 0,
+      "original_native_result_L": 0,
+      "final_endpoint_source": "OWN_ZERO_CERTIFICATE",
+      "native_proof_qualified": false
+    },
+    {
+      "arm": "M-B",
+      "counts": {
+        "declared": 4,
+        "actual_Optimize": 4,
+        "journal_returned": 4,
+        "independently_verified_returned": 4,
+        "explicit_not_started": 0
+      },
+      "narrow_missing_return": null,
+      "original_native_result_U": 0.011434738339920947,
+      "original_native_result_L": 1.6762209248714507e-07,
+      "final_endpoint_source": "SOURCE_REDUCED_OPEN",
+      "native_proof_qualified": false
+    }
+  ],
+  "cohort_reconciliation_SHA": "5af7441b5de45bc310751c911951a5de9fd918100592ae54d28b1f5ef9937fd4",
+  "rejected_calls": [
+    {
+      "arm": "ENS-C",
+      "call": 4
+    },
+    {
+      "arm": "M-B",
+      "call": 4
+    },
+    {
+      "arm": "P-GRB",
+      "call": 1
+    },
+    {
+      "arm": "P-S",
+      "call": 1
+    }
+  ],
+  "engine_repaired": false,
+  "Optimize": 0
+}
