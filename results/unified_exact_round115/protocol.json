@@ -1,0 +1,132 @@
+{
+  "round": 115,
+  "base": "e436748521cf5aabbe84a24a5e9cf3836550563c",
+  "roles": [
+    {
+      "number": 5,
+      "id": "G100-R2",
+      "input_path": "reference/round109_geographic/G100-R2.txt",
+      "input_sha256": "b3f3a1270f062e9f3af64d5b00392f51821bb775818edc6cd383fcd62550618f",
+      "V": 100,
+      "M": 8,
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "P-S",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main",
+      "input_bytes": 5828
+    }
+  ],
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "formal_arms": 4,
+  "formal_nominal_seconds": 14400,
+  "total_start_limit": 24,
+  "total_outer_seconds_limit": 20000,
+  "qualification_start_limit": 10,
+  "qualification_outer_seconds_limit": 600,
+  "group_outer_administrative_reserve": 120,
+  "primary_benchmark": "cold P-GRB",
+  "default": "ENS-C",
+  "evidence_layer": "R112_COMPLETE12_PLUS_R113_G50_3_PLUS_R115_G100_4_MEASUREMENT_V2",
+  "pairs": [
+    [
+      "ENS-C",
+      "P-GRB"
+    ],
+    [
+      "M-B",
+      "P-GRB"
+    ],
+    [
+      "P-S",
+      "P-GRB"
+    ],
+    [
+      "ENS-C",
+      "P-S"
+    ],
+    [
+      "M-B",
+      "P-S"
+    ],
+    [
+      "M-B",
+      "ENS-C"
+    ]
+  ],
+  "comparison_policy": "unchanged materiality/severity, signed gaps; current main T_produce",
+  "startup_semantic_fields": [
+    "seed",
+    "logical steps",
+    "accepted actions",
+    "integer operations",
+    "original inventory",
+    "complete capacity-assigned fleet"
+  ],
+  "startup_metadata_exclusions": [
+    "timestamps and elapsed durations",
+    "file paths",
+    "method identity labels",
+    "witness hashes binding those labels"
+  ],
+  "cover_tolerance": 1e-07,
+  "zero_tolerance": 1e-07,
+  "no_formal_retry": true,
+  "full_goal_SHA": "87a4c30b58706933b8b6670e3688def6f1b9bb40738ce34545c696f90b1d6991",
+  "prior_round112_state": "BLOCKED",
+  "prior_partial13_not_endpoint": true,
+  "repairs": [
+    "prospective producer/verification boundary only"
+  ],
+  "qualification_driver_declared_processes": 1,
+  "qualification_driver_no_OS_children": true,
+  "qualification_CLI_wrapper_and_native_children": 5,
+  "qualification_fault_holder_in_wrapper": false,
+  "qualification_driver_outer_cap": 30,
+  "qualification_CLI_outer_cap": 540,
+  "claim_policy_SHA": "e82cc775993919ac4ab05bc7fbc55a89b86858e83c86ee2b8438498d3ea5c6ff",
+  "prior_round113_state": "BLOCKED",
+  "old_cold_G50_clock_not_reconstructed": true,
+  "qualification_post_driver_outer_cap": 30,
+  "qualification_planned_conservative_starts": 7,
+  "qualification_planned_outer_cap_total": 600,
+  "main_clock": "T_produce",
+  "measurement_policy_SHA": "534e4da51811f663bb23f2bded2ba7d93493221adb8bb8ef8e605808ca3c8636",
+  "prospective_only": true,
+  "heterogeneous_measurement_policy": true,
+  "prior_round114_state": "BLOCKED",
+  "old_R114_ENS_overcap_not_requalified": true
+}

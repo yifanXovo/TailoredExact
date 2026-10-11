@@ -1,0 +1,118 @@
+{
+  "ENS-C": {
+    "status": "MIXED",
+    "heterogeneous_measurement_policy": true,
+    "current_role_main_clock": "T_produce",
+    "eligible_count": 5,
+    "denominator": 5,
+    "five_role_vector": [
+      {
+        "id": "F2",
+        "classification": "WIN",
+        "eligible": true,
+        "reason": "QUALIFIED",
+        "reason_codes": [],
+        "severe_regression": false,
+        "origin_round": 112,
+        "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+      },
+      {
+        "id": "R98-C2",
+        "classification": "WIN",
+        "eligible": true,
+        "reason": "QUALIFIED",
+        "reason_codes": [],
+        "severe_regression": false,
+        "origin_round": 112,
+        "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+      },
+      {
+        "id": "R108-L48",
+        "classification": "LOSS",
+        "eligible": true,
+        "reason": "QUALIFIED",
+        "reason_codes": [],
+        "severe_regression": false,
+        "origin_round": 112,
+        "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+      },
+      {
+        "id": "G50-C1",
+        "classification": "WIN",
+        "eligible": true,
+        "reason": "QUALIFIED",
+        "reason_codes": [],
+        "severe_regression": false,
+        "origin_round": 113,
+        "performance_helper_identity": "303e900baf8d6dfb6f80570a9c585aded727ef66202148df2237a900eee0ba2b"
+      },
+      {
+        "id": "G100-R2",
+        "classification": "LOSS",
+        "eligible": true,
+        "origin_round": 115,
+        "reason": "QUALIFIED",
+        "source_reduced": true,
+        "severe_regression": true
+      }
+    ]
+  },
+  "M-B": {
+    "status": "MIXED",
+    "heterogeneous_measurement_policy": true,
+    "current_role_main_clock": "T_produce",
+    "eligible_count": 5,
+    "denominator": 5,
+    "five_role_vector": [
+      {
+        "id": "F2",
+        "classification": "WIN",
+        "eligible": true,
+        "reason": "QUALIFIED",
+        "reason_codes": [],
+        "severe_regression": false,
+        "origin_round": 112,
+        "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+      },
+      {
+        "id": "R98-C2",
+        "classification": "WIN",
+        "eligible": true,
+        "reason": "QUALIFIED",
+        "reason_codes": [],
+        "severe_regression": false,
+        "origin_round": 112,
+        "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+      },
+      {
+        "id": "R108-L48",
+        "classification": "LOSS",
+        "eligible": true,
+        "reason": "QUALIFIED",
+        "reason_codes": [],
+        "severe_regression": false,
+        "origin_round": 112,
+        "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+      },
+      {
+        "id": "G50-C1",
+        "classification": "TIE",
+        "eligible": true,
+        "reason": "QUALIFIED",
+        "reason_codes": [],
+        "severe_regression": false,
+        "origin_round": 113,
+        "performance_helper_identity": "303e900baf8d6dfb6f80570a9c585aded727ef66202148df2237a900eee0ba2b"
+      },
+      {
+        "id": "G100-R2",
+        "classification": "LOSS",
+        "eligible": true,
+        "origin_round": 115,
+        "reason": "QUALIFIED",
+        "source_reduced": true,
+        "severe_regression": true
+      }
+    ]
+  }
+}

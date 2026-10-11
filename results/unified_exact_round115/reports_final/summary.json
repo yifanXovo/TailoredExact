@@ -1,0 +1,177 @@
+{
+  "main_clock": "T_produce",
+  "heterogeneous_measurement_policy": true,
+  "execution_stage": "COMPLETE",
+  "execution_status": "G100_COLLECTION_COMPLETE",
+  "scientific_status": {
+    "ENS-C": {
+      "status": "MIXED",
+      "heterogeneous_measurement_policy": true,
+      "current_role_main_clock": "T_produce",
+      "eligible_count": 5,
+      "denominator": 5,
+      "five_role_vector": [
+        {
+          "id": "F2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "R98-C2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "R108-L48",
+          "classification": "LOSS",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "G50-C1",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 113,
+          "performance_helper_identity": "303e900baf8d6dfb6f80570a9c585aded727ef66202148df2237a900eee0ba2b"
+        },
+        {
+          "id": "G100-R2",
+          "classification": "LOSS",
+          "eligible": true,
+          "origin_round": 115,
+          "reason": "QUALIFIED",
+          "source_reduced": true,
+          "severe_regression": true
+        }
+      ]
+    },
+    "M-B": {
+      "status": "MIXED",
+      "heterogeneous_measurement_policy": true,
+      "current_role_main_clock": "T_produce",
+      "eligible_count": 5,
+      "denominator": 5,
+      "five_role_vector": [
+        {
+          "id": "F2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "R98-C2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "R108-L48",
+          "classification": "LOSS",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "G50-C1",
+          "classification": "TIE",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 113,
+          "performance_helper_identity": "303e900baf8d6dfb6f80570a9c585aded727ef66202148df2237a900eee0ba2b"
+        },
+        {
+          "id": "G100-R2",
+          "classification": "LOSS",
+          "eligible": true,
+          "origin_round": 115,
+          "reason": "QUALIFIED",
+          "source_reduced": true,
+          "severe_regression": true
+        }
+      ]
+    }
+  },
+  "evidence_layer": "R112_COMPLETE12_PLUS_R113_G50_3_PLUS_R115_G100_4_MEASUREMENT_V2",
+  "new_formal_positions": 4,
+  "new_qualified_measurements": 4,
+  "inherited_qualified_measurements": 15,
+  "total_qualified_measurements": 19,
+  "layered_arm_positions": 20,
+  "new_pairs": 6,
+  "pair_positions": 30,
+  "evaluable_pairs": 27,
+  "unevaluable_pairs": 3,
+  "old_G50_P_pairs_still_unqualified": 3,
+  "qualified_qualification_CLI": 4,
+  "conservative_starts": 12,
+  "outer_seconds_upper": 12590.651394605637,
+  "qualification_starts": 7,
+  "qualification_seconds": 445.7681543827057,
+  "current_reader_fee_pending": false,
+  "rejected_calls": [
+    {
+      "arm": "ENS-C",
+      "call": 4
+    },
+    {
+      "arm": "M-B",
+      "call": 4
+    },
+    {
+      "arm": "P-GRB",
+      "call": 1
+    },
+    {
+      "arm": "P-S",
+      "call": 1
+    }
+  ],
+  "source_reduced_new_arms": [
+    "P-GRB",
+    "ENS-C",
+    "P-S",
+    "M-B"
+  ],
+  "reader_SHA": "88dc5ebc738ab7a65b8f6dfc17dfd3f7e1a7b0645fb3ae1dd714bbec45b43fec",
+  "Optimize": 0,
+  "default_ENS_changed": false,
+  "primary_benchmark": "cold P-GRB",
+  "old_R113_state": "BLOCKED",
+  "no_historical_clock_recreated": true,
+  "qualification_native_Optimize": 12,
+  "formal_actual_Optimize": 10,
+  "original_admitted_reader_SHA": "88dc5ebc738ab7a65b8f6dfc17dfd3f7e1a7b0645fb3ae1dd714bbec45b43fec",
+  "offline_report_repair_disclosed": false,
+  "formal_native_children_executed": 4,
+  "whole_cap_failed_arms": []
+}
