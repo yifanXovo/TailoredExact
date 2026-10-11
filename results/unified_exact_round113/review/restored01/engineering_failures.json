@@ -1,0 +1,35 @@
+{
+  "schema": "independent-restored-review-engineering-failures-v1",
+  "scope": "Offline reviewer only; no native/qualification/compiler starts",
+  "failures": [
+    {
+      "id": "review01",
+      "reason": "Reviewer initially asserted prototype publisher SHA was frozen with all whole-goal bindings; actual publication-engineering delta needs separate disclosure",
+      "failing_assertion": "scripts/publish_round113.py",
+      "retained": true,
+      "native_starts": 0,
+      "Optimize": 0
+    },
+    {
+      "id": "review02",
+      "reason": "Reviewer audit hook initially rejected standard-library ctypes initialization of the Python runtime DLL",
+      "failing_event": "ctypes.dlopen libpython3.12.dll",
+      "reader_rebuild_started": false,
+      "retained": true,
+      "native_solver_starts": 0,
+      "Optimize": 0,
+      "exec_wall_seconds": 5.5734363
+    },
+    {
+      "id": "review03",
+      "reason": "Windows standard-library ctypes also initializes GetLastError from kernel32 at module import; reviewer hook was still too broad",
+      "failing_event": "ctypes.dlopen kernel32 within ctypes/__init__.py module frame",
+      "reader_rebuild_started": false,
+      "retained": true,
+      "native_solver_starts": 0,
+      "Optimize": 0,
+      "exec_wall_seconds": 5.333948
+    }
+  ],
+  "corrections": "Permit only explicitly reported non-runtime publisher delta and Python/Windows stdlib DLL initialization from the ctypes module import frame. Reject all child/subprocess execution, project-initiated DLL loads, original-worktree evidence reads and writes outside review."
+}

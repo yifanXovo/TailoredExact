@@ -1,0 +1,528 @@
+{
+  "schema": "round113-independent-restored-root-final-review-v1",
+  "reviewer": "/root/independent_review",
+  "signed_at_UTC": "2026-10-11T08:02:01.903980+00:00",
+  "decision": "ACCEPT_ACTUAL_PUBLIC_RESTORE_BLOCKED_SCIENTIFIC_RESULT",
+  "public_root": "F:\\ExactEBRP-round113-public01",
+  "restored_root": "F:\\ExactEBRP-round113-restored01",
+  "original_worktree_evidence_reads": 0,
+  "original_worktree_fallback": false,
+  "manifest_SHA": "e2998e98164cb80b63e3afb9e96f1775a5b03ace86831c0f365d341465a15348",
+  "archive_SHA": "990207810f40a0cdd46f40caaa1925d89e19103d82292d8fba143d4698e9bfbb",
+  "archive_bytes": 32982912,
+  "actual_parts": 0,
+  "manifest_members": 6095,
+  "archive_members": 6095,
+  "restored_members_verified": 6095,
+  "archive_uncompressed_bytes": 210208146,
+  "duplicate_or_unsafe_or_link_members": false,
+  "all_exact_manifest_SHA_and_size_checks_pass": true,
+  "PE_DLL_license_credentials_excluded": true,
+  "old_full_carriers_copied": false,
+  "limited_old_authority_files": 146,
+  "old_LP_matrices_reparsed": 0,
+  "old_original_clocks_preserved": true,
+  "production_source_bindings_verified": 206,
+  "performance_helpers_verified": 42,
+  "production_PE_and_DLL_not_present": true,
+  "production_recompiled": false,
+  "current_reader_SHA": "7aecf8ae0a8fcad16bafa96b7739b9cd63f0c5436fa382bf421cfac8c30b7cc3",
+  "admitted_reader_SHA": "4c5e9f75cfda72316c7b8a88beda4dfba7dbe8de75a1728305175843e886c83b",
+  "stdlib_restorer_SHA": "4b89a153246b5c63b5dfe26fd2f165f5e2dcdfe1807d341bd3cef7b73e099a98",
+  "pinned_stdlib_public_dependency": {
+    "path": "scripts/round110_public.py",
+    "commit": "9165e69bf41d1eb323fd52b8cb4a8230dcb4edd4",
+    "sha256": "3937ebf164e742e7a67a5ea3a87fe2364110bd0e2c093a0524f8f5ac875fe1a9",
+    "bytes": 20207
+  },
+  "all_frozen_scientific_review_bindings_match_restored_bytes": true,
+  "publisher_prototype_binding_unchanged": false,
+  "publication_engineering_delta": [
+    {
+      "path": "scripts/publish_round113.py",
+      "whole_goal_prototype_SHA": "05ef67218a484d379599d93db6a6e2327ca4fd806ae2570e43796fc3bd959acd",
+      "actual_public_restorer_SHA": "4b89a153246b5c63b5dfe26fd2f165f5e2dcdfe1807d341bd3cef7b73e099a98",
+      "outside_runtime_performance_closure": true,
+      "full_diff_verification_pending": true
+    }
+  ],
+  "exact_byte_Git_attributes": [
+    {
+      "path": "scripts/.gitattributes",
+      "SHA": "6ef2f8bed74bb58829ae5428c15c457011fcf25bb62dcd7f7609e8bfab32e7b9",
+      "text": "# Preserve the measured R113 helper and offline reader bytes.\n*round113* -text whitespace=cr-at-eol\n"
+    },
+    {
+      "path": "results/unified_exact_round113/.gitattributes",
+      "SHA": "1d3a538f135e7104302fcb4ae6d166b4d0479904f98607fce5634c3cae0a3c9d",
+      "text": "# Preserve exact signed evidence, CSV fields, clocks and carrier bytes.\n** -text whitespace=cr-at-eol\n"
+    }
+  ],
+  "parent_actual_export_receipt_SHA": "f6741d913bb8f829e116376e572f71220f4bb603987d73f5e52fc8b0d1debb7b",
+  "parent_actual_restore_receipt_SHA": "1fec76715eaec8fcedb59458e9ea4395947dc2b98068dfee6fbd5e46b2cf4333",
+  "parent_actual_comparison_receipt_SHA": "16ec73ecc9eb82d41eb957a687180c5876f9e8169d2d4ca24eb2bca14b16764b",
+  "independent_restored_reader_rebuild": true,
+  "independent_reader_rebuild_seconds": 20.93617840006482,
+  "independent_exact_CSV_fields": 63224,
+  "independent_exact_JSON_leaves": 203,
+  "compared_files": [
+    {
+      "name": "arms.csv",
+      "type": "CSV",
+      "rows": 20,
+      "fields": 1080,
+      "exact_fieldwise": true,
+      "expected_SHA": "28ea80f5e634a1098500f1fc6cc1ff280b88896873ec8fe23818bfc3b8c031da",
+      "rebuilt_SHA": "28ea80f5e634a1098500f1fc6cc1ff280b88896873ec8fe23818bfc3b8c031da"
+    },
+    {
+      "name": "backend_conclusions.json",
+      "type": "JSON",
+      "leaves": 85,
+      "exact_parsed_value": true,
+      "expected_SHA": "3d1cfa645918ef6e36943a20b51fdac9826df859c3a862a253f9bdae86384d93",
+      "rebuilt_SHA": "3d1cfa645918ef6e36943a20b51fdac9826df859c3a862a253f9bdae86384d93"
+    },
+    {
+      "name": "checkpoints.csv",
+      "type": "CSV",
+      "rows": 18,
+      "fields": 216,
+      "exact_fieldwise": true,
+      "expected_SHA": "2d9efd630d2b0e914f207b743cc26f282956681154a49f38aefdf2fc76a53f5c",
+      "rebuilt_SHA": "2d9efd630d2b0e914f207b743cc26f282956681154a49f38aefdf2fc76a53f5c"
+    },
+    {
+      "name": "chronological_covers.csv",
+      "type": "CSV",
+      "rows": 5,
+      "fields": 25,
+      "exact_fieldwise": true,
+      "expected_SHA": "16c3f11ab3333b7234a3a7af481c9516126323153e19b32a6d5388fdce93edb6",
+      "rebuilt_SHA": "16c3f11ab3333b7234a3a7af481c9516126323153e19b32a6d5388fdce93edb6"
+    },
+    {
+      "name": "compact_Starts.csv",
+      "type": "CSV",
+      "rows": 2,
+      "fields": 30,
+      "exact_fieldwise": true,
+      "expected_SHA": "cc9b257d91c462a66f08d780509d17f5e045910de2511bd7f48f815506f34045",
+      "rebuilt_SHA": "cc9b257d91c462a66f08d780509d17f5e045910de2511bd7f48f815506f34045"
+    },
+    {
+      "name": "controller_AM.csv",
+      "type": "CSV",
+      "rows": 6,
+      "fields": 186,
+      "exact_fieldwise": true,
+      "expected_SHA": "634b4cfe9d51b70876238d675ec53bb8b4ff9cecebc17086d6ccd7032c7472d7",
+      "rebuilt_SHA": "634b4cfe9d51b70876238d675ec53bb8b4ff9cecebc17086d6ccd7032c7472d7"
+    },
+    {
+      "name": "controller_child_bounds.csv",
+      "type": "CSV",
+      "rows": 6,
+      "fields": 90,
+      "exact_fieldwise": true,
+      "expected_SHA": "279e4433b4d197d569732bf81dba705e205b40fd63e1baf381de42aec44d2fc0",
+      "rebuilt_SHA": "279e4433b4d197d569732bf81dba705e205b40fd63e1baf381de42aec44d2fc0"
+    },
+    {
+      "name": "controller_events.csv",
+      "type": "CSV",
+      "rows": 11,
+      "fields": 143,
+      "exact_fieldwise": true,
+      "expected_SHA": "aa3b6c9047fb215f429eaa800f618c16f5262f250f3f504928f5c8dd3b4d6baf",
+      "rebuilt_SHA": "aa3b6c9047fb215f429eaa800f618c16f5262f250f3f504928f5c8dd3b4d6baf"
+    },
+    {
+      "name": "controller_LP_status.csv",
+      "type": "CSV",
+      "rows": 12,
+      "fields": 204,
+      "exact_fieldwise": true,
+      "expected_SHA": "8c438e30178fb8f1b090cc0770bd3351403afcbf5546c7c88ccd9263b736d1fd",
+      "rebuilt_SHA": "8c438e30178fb8f1b090cc0770bd3351403afcbf5546c7c88ccd9263b736d1fd"
+    },
+    {
+      "name": "controller_native.csv",
+      "type": "CSV",
+      "rows": 18,
+      "fields": 360,
+      "exact_fieldwise": true,
+      "expected_SHA": "eea97fe4f3925474bef41e2db2285787b7675c21e0388f01e9dcb7c43de38871",
+      "rebuilt_SHA": "eea97fe4f3925474bef41e2db2285787b7675c21e0388f01e9dcb7c43de38871"
+    },
+    {
+      "name": "controller_targets.csv",
+      "type": "CSV",
+      "rows": 2,
+      "fields": 42,
+      "exact_fieldwise": true,
+      "expected_SHA": "8df0626e54f672ce3f3fd477558f30db42dd0ae1c5647fab3b5e64cfd3a272fa",
+      "rebuilt_SHA": "8df0626e54f672ce3f3fd477558f30db42dd0ae1c5647fab3b5e64cfd3a272fa"
+    },
+    {
+      "name": "covers.csv",
+      "type": "CSV",
+      "rows": 4,
+      "fields": 56,
+      "exact_fieldwise": true,
+      "expected_SHA": "94a31f5e1c9fc6b6b41d3a55d1c7ee1d6a9c73c3d3df436c94329b13a173d766",
+      "rebuilt_SHA": "94a31f5e1c9fc6b6b41d3a55d1c7ee1d6a9c73c3d3df436c94329b13a173d766"
+    },
+    {
+      "name": "execution_failures.csv",
+      "type": "CSV",
+      "rows": 1,
+      "fields": 13,
+      "exact_fieldwise": true,
+      "expected_SHA": "6d945f433ba1f211f9926bf47f036c1b0113193affcd63cec34351dd6c60a53c",
+      "rebuilt_SHA": "6d945f433ba1f211f9926bf47f036c1b0113193affcd63cec34351dd6c60a53c"
+    },
+    {
+      "name": "fees.csv",
+      "type": "CSV",
+      "rows": 7,
+      "fields": 56,
+      "exact_fieldwise": true,
+      "expected_SHA": "6a707de5274120569ef5d87284f045b480cd64e145e16300c9df6db55e508633",
+      "rebuilt_SHA": "6a707de5274120569ef5d87284f045b480cd64e145e16300c9df6db55e508633"
+    },
+    {
+      "name": "fleets.csv",
+      "type": "CSV",
+      "rows": 7,
+      "fields": 98,
+      "exact_fieldwise": true,
+      "expected_SHA": "b320d168e6ec165bc0cb059c62889b9712a8e44db6f33c535978e18b0a526cb4",
+      "rebuilt_SHA": "b320d168e6ec165bc0cb059c62889b9712a8e44db6f33c535978e18b0a526cb4"
+    },
+    {
+      "name": "inherited_arms.csv",
+      "type": "CSV",
+      "rows": 12,
+      "fields": 612,
+      "exact_fieldwise": true,
+      "expected_SHA": "1d10ed5c9422572c0bb42174c2acf169cc9712572474aa51c069b81750bf8d0b",
+      "rebuilt_SHA": "1d10ed5c9422572c0bb42174c2acf169cc9712572474aa51c069b81750bf8d0b"
+    },
+    {
+      "name": "inherited_pairs.csv",
+      "type": "CSV",
+      "rows": 18,
+      "fields": 756,
+      "exact_fieldwise": true,
+      "expected_SHA": "89056fefbefb16f8cf4f1d981691d27bcc0463f12bc146fa891cc99befd6f638",
+      "rebuilt_SHA": "89056fefbefb16f8cf4f1d981691d27bcc0463f12bc146fa891cc99befd6f638"
+    },
+    {
+      "name": "journal_trace.csv",
+      "type": "CSV",
+      "rows": 2299,
+      "fields": 22990,
+      "exact_fieldwise": true,
+      "expected_SHA": "59098b3378899014e20e1a99ebea0914475be6f5e7aaeca75b920d5d7d704e07",
+      "rebuilt_SHA": "59098b3378899014e20e1a99ebea0914475be6f5e7aaeca75b920d5d7d704e07"
+    },
+    {
+      "name": "model_contracts.csv",
+      "type": "CSV",
+      "rows": 15,
+      "fields": 225,
+      "exact_fieldwise": true,
+      "expected_SHA": "5fcf95cfa694e8c7e6f331a3a2156fae60067a87ec0b0be724c0cbb262ab4c00",
+      "rebuilt_SHA": "5fcf95cfa694e8c7e6f331a3a2156fae60067a87ec0b0be724c0cbb262ab4c00"
+    },
+    {
+      "name": "native_bounds.csv",
+      "type": "CSV",
+      "rows": 2127,
+      "fields": 29778,
+      "exact_fieldwise": true,
+      "expected_SHA": "3affed87a8af94d4004ed5a3d1b78ae805ba4e564252b763ae2beb1ca901a957",
+      "rebuilt_SHA": "3affed87a8af94d4004ed5a3d1b78ae805ba4e564252b763ae2beb1ca901a957"
+    },
+    {
+      "name": "native_calls.csv",
+      "type": "CSV",
+      "rows": 21,
+      "fields": 546,
+      "exact_fieldwise": true,
+      "expected_SHA": "ce32c0bccbbcf107d060225c2f1b38a22f119400e39c1accfeed593809da20b8",
+      "rebuilt_SHA": "ce32c0bccbbcf107d060225c2f1b38a22f119400e39c1accfeed593809da20b8"
+    },
+    {
+      "name": "native_counts.csv",
+      "type": "CSV",
+      "rows": 7,
+      "fields": 77,
+      "exact_fieldwise": true,
+      "expected_SHA": "afeede84b9f3d352e9b2738bfe4d1ca5b6e0b11f2a6bf0e478f12c57bb07a663",
+      "rebuilt_SHA": "afeede84b9f3d352e9b2738bfe4d1ca5b6e0b11f2a6bf0e478f12c57bb07a663"
+    },
+    {
+      "name": "new_arms.csv",
+      "type": "CSV",
+      "rows": 8,
+      "fields": 416,
+      "exact_fieldwise": true,
+      "expected_SHA": "32a711a4823983455fddd044be1d62f52a0179e7f1e13f4d577086ac9993e939",
+      "rebuilt_SHA": "32a711a4823983455fddd044be1d62f52a0179e7f1e13f4d577086ac9993e939"
+    },
+    {
+      "name": "new_pairs.csv",
+      "type": "CSV",
+      "rows": 12,
+      "fields": 480,
+      "exact_fieldwise": true,
+      "expected_SHA": "6ed41261a2ea25d1bbe6ed93b469fec2bb2a9c2730012d151d9d679674c4962d",
+      "rebuilt_SHA": "6ed41261a2ea25d1bbe6ed93b469fec2bb2a9c2730012d151d9d679674c4962d"
+    },
+    {
+      "name": "own_UB_flow.csv",
+      "type": "CSV",
+      "rows": 132,
+      "fields": 2376,
+      "exact_fieldwise": true,
+      "expected_SHA": "162d1549cd484cae99aa5eef785490351839418502de81f9f29cf7ae9d9f9136",
+      "rebuilt_SHA": "162d1549cd484cae99aa5eef785490351839418502de81f9f29cf7ae9d9f9136"
+    },
+    {
+      "name": "P-S_lifecycle.csv",
+      "type": "CSV",
+      "rows": 2,
+      "fields": 28,
+      "exact_fieldwise": true,
+      "expected_SHA": "58aac6022ea6dd708f9bc8ba9218f781c3108b2d48d085cbc15b57ba64ef56a1",
+      "rebuilt_SHA": "58aac6022ea6dd708f9bc8ba9218f781c3108b2d48d085cbc15b57ba64ef56a1"
+    },
+    {
+      "name": "pairs.csv",
+      "type": "CSV",
+      "rows": 30,
+      "fields": 1350,
+      "exact_fieldwise": true,
+      "expected_SHA": "28ea70c4afe934fc33da7ba0aeb866a667fdecadbb8f0316994a2a4463db60df",
+      "rebuilt_SHA": "28ea70c4afe934fc33da7ba0aeb866a667fdecadbb8f0316994a2a4463db60df"
+    },
+    {
+      "name": "progress_publication.csv",
+      "type": "CSV",
+      "rows": 7,
+      "fields": 147,
+      "exact_fieldwise": true,
+      "expected_SHA": "396702ad9a9cb87af668386e4b1b73f8ba049277e98580abfe3019fc7061d5a4",
+      "rebuilt_SHA": "396702ad9a9cb87af668386e4b1b73f8ba049277e98580abfe3019fc7061d5a4"
+    },
+    {
+      "name": "qualification_arms.csv",
+      "type": "CSV",
+      "rows": 4,
+      "fields": 204,
+      "exact_fieldwise": true,
+      "expected_SHA": "ce4fa89cb98cda687d4ea4c45ea4f322b5b34cb94a8a067fabf8c9749214b841",
+      "rebuilt_SHA": "ce4fa89cb98cda687d4ea4c45ea4f322b5b34cb94a8a067fabf8c9749214b841"
+    },
+    {
+      "name": "returned_native_proofs.csv",
+      "type": "CSV",
+      "rows": 7,
+      "fields": 112,
+      "exact_fieldwise": true,
+      "expected_SHA": "11686c7dc6f912c6216d814ff2fa21646b3f569d3a806f85ff78cb24beae50ce",
+      "rebuilt_SHA": "11686c7dc6f912c6216d814ff2fa21646b3f569d3a806f85ff78cb24beae50ce"
+    },
+    {
+      "name": "same_H.csv",
+      "type": "CSV",
+      "rows": 2,
+      "fields": 22,
+      "exact_fieldwise": true,
+      "expected_SHA": "f63cc32176bf5a1000b111d0530cbc5d39e68cf33c070020ef124b37d66f5f46",
+      "rebuilt_SHA": "f63cc32176bf5a1000b111d0530cbc5d39e68cf33c070020ef124b37d66f5f46"
+    },
+    {
+      "name": "same_H_fleets.csv",
+      "type": "CSV",
+      "rows": 3,
+      "fields": 24,
+      "exact_fieldwise": true,
+      "expected_SHA": "54399c064cd79262aa2a90b81b71a1804ddc329b8cc7ce426d43d0191e0e5265",
+      "rebuilt_SHA": "54399c064cd79262aa2a90b81b71a1804ddc329b8cc7ce426d43d0191e0e5265"
+    },
+    {
+      "name": "scope_contracts.csv",
+      "type": "CSV",
+      "rows": 18,
+      "fields": 162,
+      "exact_fieldwise": true,
+      "expected_SHA": "4d30d74febc45bb45eb55216b30c520706b14531441a0ade1afab7cea86dbcb8",
+      "rebuilt_SHA": "4d30d74febc45bb45eb55216b30c520706b14531441a0ade1afab7cea86dbcb8"
+    },
+    {
+      "name": "split_exposure.csv",
+      "type": "CSV",
+      "rows": 3,
+      "fields": 18,
+      "exact_fieldwise": true,
+      "expected_SHA": "199d37676267bcd261f1e5e8ea3fe3bfaa7ad2231b73e043eaa2b10416b91e56",
+      "rebuilt_SHA": "199d37676267bcd261f1e5e8ea3fe3bfaa7ad2231b73e043eaa2b10416b91e56"
+    },
+    {
+      "name": "startup_fleets.csv",
+      "type": "CSV",
+      "rows": 2,
+      "fields": 28,
+      "exact_fieldwise": true,
+      "expected_SHA": "5c85cb159fcd41b4c5f6ad11084680c2072de9c0f92c55b4dfec8c0c347393e3",
+      "rebuilt_SHA": "5c85cb159fcd41b4c5f6ad11084680c2072de9c0f92c55b4dfec8c0c347393e3"
+    },
+    {
+      "name": "summary.json",
+      "type": "JSON",
+      "leaves": 118,
+      "exact_parsed_value": true,
+      "expected_SHA": "ec31b35093d7e56991ad859cd8298679b27bd36a6340c40b0beef4a110639453",
+      "rebuilt_SHA": "ec31b35093d7e56991ad859cd8298679b27bd36a6340c40b0beef4a110639453"
+    },
+    {
+      "name": "tailored_Starts.csv",
+      "type": "CSV",
+      "rows": 6,
+      "fields": 108,
+      "exact_fieldwise": true,
+      "expected_SHA": "e04a30968949616e419ad4c9f46c4bbfc96491d844d210bb7c53eb7a4601ef35",
+      "rebuilt_SHA": "e04a30968949616e419ad4c9f46c4bbfc96491d844d210bb7c53eb7a4601ef35"
+    },
+    {
+      "name": "target_discovery.csv",
+      "type": "CSV",
+      "rows": 3,
+      "fields": 39,
+      "exact_fieldwise": true,
+      "expected_SHA": "c8d5998193aa1576f83d995a9258773f5cb30630d36404dcfaacdd8e7e49fc11",
+      "rebuilt_SHA": "c8d5998193aa1576f83d995a9258773f5cb30630d36404dcfaacdd8e7e49fc11"
+    },
+    {
+      "name": "time_partitions.csv",
+      "type": "CSV",
+      "rows": 7,
+      "fields": 84,
+      "exact_fieldwise": true,
+      "expected_SHA": "59189c988e7c3f6aa49293a41bfefd2f30dc3d181426a402a45a48d94690b0ea",
+      "rebuilt_SHA": "59189c988e7c3f6aa49293a41bfefd2f30dc3d181426a402a45a48d94690b0ea"
+    },
+    {
+      "name": "unqualified_native_calls.csv",
+      "type": "CSV",
+      "rows": 1,
+      "fields": 23,
+      "exact_fieldwise": true,
+      "expected_SHA": "e5481cf69e52f16e6b8b5364b58222618061cd7cc3c685c4250d64b561164932",
+      "rebuilt_SHA": "e5481cf69e52f16e6b8b5364b58222618061cd7cc3c685c4250d64b561164932"
+    },
+    {
+      "name": "unstarted.csv",
+      "type": "CSV",
+      "rows": 4,
+      "fields": 20,
+      "exact_fieldwise": true,
+      "expected_SHA": "5e1549705751a6740bf7faebcaeaec75913e2e9ad405286e3a625f72015c8a0a",
+      "rebuilt_SHA": "5e1549705751a6740bf7faebcaeaec75913e2e9ad405286e3a625f72015c8a0a"
+    }
+  ],
+  "scientific_stage": "BLOCKED",
+  "qualified_new_arms": 3,
+  "normal_return_POSTEXIT_VALIDATION_BLOCKED": 1,
+  "fixed_unstarted_G100": 4,
+  "qualified_old_arms": 12,
+  "evaluable_pairs": 21,
+  "pair_positions": 30,
+  "new_evaluable_pairs": 3,
+  "actual_Optimize_observed": 22,
+  "unqualified_formal_Optimize": 1,
+  "cold_formal_endpoint_and_whole_are_null": true,
+  "backend_conclusions": "ENS-C and M-B both INCOMPLETE_ATTRIBUTION",
+  "single_next_priority": "branch3 finite insufficiency and STOP",
+  "total_conservative_starts": 15,
+  "total_outer_seconds_upper": 6112.501114845276,
+  "public_generated_non_authoritative_cache_files": [
+    "scripts/__pycache__/round110_public.cpython-312.pyc"
+  ],
+  "restored_generated_non_authoritative_files": [
+    "core_comparison_receipt.json",
+    "restore_receipt.json",
+    "scripts/__pycache__/analyze_round61.cpython-312.pyc",
+    "scripts/__pycache__/compare_round112_startup.cpython-312.pyc",
+    "scripts/__pycache__/generate_citibike443_regional_v1.cpython-312.pyc",
+    "scripts/__pycache__/read_round113.cpython-312.pyc",
+    "scripts/__pycache__/round100_campaign.cpython-312.pyc",
+    "scripts/__pycache__/round100_common.cpython-312.pyc",
+    "scripts/__pycache__/round100_idle.cpython-312.pyc",
+    "scripts/__pycache__/round101_common.cpython-312.pyc",
+    "scripts/__pycache__/round103_common.cpython-312.pyc",
+    "scripts/__pycache__/round107_reader.cpython-312.pyc",
+    "scripts/__pycache__/round108_decisions.cpython-312.pyc",
+    "scripts/__pycache__/round108_reader.cpython-312.pyc",
+    "scripts/__pycache__/round108_scopes.cpython-312.pyc",
+    "scripts/__pycache__/round109_common.cpython-312.pyc",
+    "scripts/__pycache__/round109_decisions.cpython-312.pyc",
+    "scripts/__pycache__/round109_interval_pairs.cpython-312.pyc",
+    "scripts/__pycache__/round109_seed_audit.cpython-312.pyc",
+    "scripts/__pycache__/round109_seed_scope.cpython-312.pyc",
+    "scripts/__pycache__/round110_common.cpython-312.pyc",
+    "scripts/__pycache__/round111_decisions.cpython-312.pyc",
+    "scripts/__pycache__/round111_seed_audit.cpython-312.pyc",
+    "scripts/__pycache__/round112_audit.cpython-312.pyc",
+    "scripts/__pycache__/round112_common.cpython-312.pyc",
+    "scripts/__pycache__/round113_audit.cpython-312.pyc",
+    "scripts/__pycache__/round113_common.cpython-312.pyc",
+    "scripts/__pycache__/round61_research.cpython-312.pyc",
+    "scripts/__pycache__/round70_affinity.cpython-312.pyc",
+    "scripts/__pycache__/round73_qualify.cpython-312.pyc",
+    "scripts/__pycache__/round73_seed_diagnostic.cpython-312.pyc",
+    "scripts/__pycache__/round75_qualify.cpython-312.pyc",
+    "scripts/__pycache__/round75_startup.cpython-312.pyc",
+    "scripts/__pycache__/round76_qualify.cpython-312.pyc",
+    "scripts/__pycache__/round76_startup.cpython-312.pyc",
+    "scripts/__pycache__/round78_audit.cpython-312.pyc",
+    "scripts/__pycache__/round83_audit_v2.cpython-312.pyc",
+    "scripts/__pycache__/round86_native_evidence.cpython-312.pyc",
+    "scripts/__pycache__/round88_a1_g3.cpython-312.pyc",
+    "scripts/__pycache__/round90_lp_g_g3.cpython-312.pyc",
+    "scripts/__pycache__/round94_lpg_contemporary.cpython-312.pyc",
+    "scripts/__pycache__/round94_lpg_formal_recovery_v3.cpython-312.pyc",
+    "scripts/__pycache__/round96_external.cpython-312.pyc",
+    "scripts/__pycache__/round96_prepare.cpython-312.pyc",
+    "scripts/__pycache__/round99_common.cpython-312.pyc",
+    "scripts/__pycache__/round99_pure_start_audit.cpython-312.pyc"
+  ],
+  "archive_contains_generated_caches": false,
+  "stdlib_python_runtime_DLL_initializers": [
+    "libpython3.12.dll",
+    "kernel32"
+  ],
+  "scientific_payload_HEAD_reported_by_parent": "8dd38b790a4584f17aa75094f9451519e07bcdbe",
+  "live_Git_or_remote_HEAD_verified_in_this_two_root_review": false,
+  "PR_remote_receipt_pending": true,
+  "no_performance_change_from_scientific_payload_or_restoration": true,
+  "native_starts": 0,
+  "Optimize": 0,
+  "compiler_starts": 0,
+  "qualification_or_fixture_starts": 0,
+  "pack_or_export_or_restore_runs": 0,
+  "review_writes_confined_to_new_review_directory": true,
+  "review_engineering_seconds": 26.568389300024137,
+  "audit_source_SHA": "76e03f58379da7b49e402bafe22c97ebb65b1f24c7fae4520c4fa7153ad03794",
+  "limitations": [
+    "Evidence-only recovery does not reproduce solver performance; PE/DLL/license excluded.",
+    "Old matrix/scope/cover authority is inherited from signed limited R112 material; no old LP matrix reparse.",
+    "Normal returned cold MIP is observed and charged but has no qualified formal endpoint or complete arm clock.",
+    "G100 zero optimum and all four actual backend outcomes remain unknown.",
+    "Scientific payload Git head is a parent-reported identity here; live PR/remote object verification remains a separate pending operation.",
+    "No future receipt or commit is validated by this signature."
+  ]
+}

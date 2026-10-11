@@ -1,0 +1,85 @@
+--- scienceA_verifier
++++ publication_receipt_verifier
+@@ -9,11 +9,22 @@
+ def command(args):return subprocess.check_output(args,cwd=ROOT)
+ def api(path):return json.loads(command(['gh','api','repos/'+REPO+'/'+path]))
+ def read(p):return json.loads(Path(p).read_text(encoding='utf-8'))
+-def file_hashes(p):
+-    size=p.stat().st_size;git=hashlib.sha1(b'blob '+str(size).encode()+b'\0');raw=hashlib.sha256()
+-    with p.open('rb') as f:
+-        while block:=f.read(1024*1024):git.update(block);raw.update(block)
+-    return size,git.hexdigest(),raw.hexdigest()
++def byte_hashes(raw):
++    size=len(raw)
++    return size,hashlib.sha1(b'blob '+str(size).encode()+b'\0'+raw).hexdigest(),hashlib.sha256(raw).hexdigest()
++def committed_blobs(local,names):
++    names=sorted(names)
++    data=command_with_input(['git','cat-file','--batch'],b''.join(local[n]['oid'].encode()+b'\n' for n in names))
++    offset=0;blobs={}
++    for name in names:
++        end=data.index(b'\n',offset);oid,kind,size=data[offset:end].split();size=int(size);offset=end+1
++        assert oid.decode()==local[name]['oid'] and kind==b'blob',name
++        blobs[name]=data[offset:offset+size];offset+=size
++        assert data[offset:offset+1]==b'\n',name
++        offset+=1
++    assert offset==len(data)
++    return blobs
++def command_with_input(args,data):return subprocess.check_output(args,cwd=ROOT,input=data)
+ def main(pr,head,destination):
+     t=time.perf_counter();p=json.loads(command(['gh','pr','view',str(pr),'--repo',REPO,'--json','number,url,state,isDraft,headRefName,headRefOid,baseRefName']))
+     assert p['state']=='OPEN' and p['isDraft'] and p['headRefOid']==head
+@@ -23,7 +34,9 @@
+     command(['git','fetch','origin',HEAD_BRANCH]);assert command(['git','rev-parse','FETCH_HEAD']).decode().strip()==head
+     changed=command(['git','diff','--name-only',BASE,head]).decode().splitlines()
+     assert all(n.startswith(('scripts/',ROUND+'/')) for n in changed)
+-    candidate=read(ROOT/ROUND/'candidate_identity.json');manifest=read(ROOT/ROUND/'compact_evidence/manifest.json')
++    candidate=json.loads(command(['git','show',head+':'+ROUND+'/candidate_identity.json']))
++    manifest=json.loads(command(['git','show',head+':'+ROUND+'/compact_evidence/manifest.json']))
++    manifest_files={v['path']:v for v in manifest['files']}
+     required=set(changed)|set(candidate['source_bindings'])|set(candidate['helpers'])
+     carrier_names=[v['path'] for v in manifest['parts']] or [manifest['archive_path']]
+     required.update(ROUND+'/compact_evidence/'+n for n in carrier_names)
+@@ -43,21 +56,35 @@
+     round_entry=next(v for v in results['tree'] if v['path']=='unified_exact_round113')
+     tree=api('git/trees/'+round_entry['sha']+'?recursive=1');assert not tree['truncated']
+     remote.update({ROUND+'/'+v['path']:v for v in tree['tree'] if v['type']=='blob'})
+-    checks=[]
++    blobs=committed_blobs(local,required);checks=[];normalized=[];tool_deltas=[]
+     for name in sorted(required):
+-        size,oid,digest=file_hashes(ROOT/name)
++        size,oid,digest=byte_hashes(blobs[name]);working=(ROOT/name).read_bytes();raw_size,raw_oid,raw_digest=byte_hashes(working)
+         assert local[name]['kind']=='blob' and local[name]['mode']=='100644'
+-        assert oid==local[name]['oid']==remote[name]['sha'] and size==remote[name]['size'],name
+-        if name in candidate['source_bindings']:assert digest==candidate['source_bindings'][name]
+-        if name in candidate['helpers']:assert digest==candidate['helpers'][name]
+-        checks.append(dict(path=name,bytes=size,Git_blob_oid=oid,local_SHA256=digest,remote_Git_object_matches=True))
++        assert oid==local[name]['oid']==remote[name]['sha'] and size==remote[name]['size'] and remote[name]['mode']=='100644',name
++        frozen=candidate['source_bindings'].get(name,candidate['helpers'].get(name))
++        relation='EXACT_WORKING_AND_COMMITTED_BYTES'
++        if frozen is not None:
++            assert raw_digest==frozen==manifest_files[name]['sha256'] and raw_size==manifest_files[name]['bytes'],name
++            if working!=blobs[name]:
++                assert working.replace(b'\r\n',b'\n')==blobs[name],name
++                relation='HISTORICAL_GIT_CRLF_TO_LF_RAW_BYTES_PRESERVED_IN_CARRIER';normalized.append(name)
++        elif working!=blobs[name]:
++            # A verifier fixed after scientific sealing is explicitly outside the observed scientific commit.
++            assert name=='scripts/verify_round113_publication.py',name
++            relation='POST_SCIENCE_PUBLICATION_VERIFIER_WORKING_DELTA';tool_deltas.append(name)
++        checks.append(dict(path=name,committed_bytes=size,Git_blob_oid=oid,committed_SHA256=digest,
++            working_bytes=raw_size,working_SHA256=raw_digest,byte_relation=relation,remote_Git_object_matches=True,
++            frozen_raw_identity_matches_manifest=frozen is not None))
+     for v in manifest['parts'] or [dict(path=manifest['archive_path'],bytes=manifest['archive_bytes'],sha256=manifest['archive_sha256'])]:
+         check=next(r for r in checks if r['path']==ROUND+'/compact_evidence/'+v['path'])
+-        assert check['bytes']==v['bytes'] and check['local_SHA256']==v['sha256']
++        assert check['committed_bytes']==check['working_bytes']==v['bytes'] and check['committed_SHA256']==check['working_SHA256']==v['sha256']
+     assert all((ROOT/ROUND/'compact_evidence'/n).stat().st_size<manifest['single_blob_limit_bytes'] for n in carrier_names)
+     receipt=dict(passed=True,observed_PR=p,observed_head=head,verified_base_commit=BASE,required_objects=checks,
+         carrier_archive_SHA=manifest['archive_sha256'],carrier_archive_bytes=manifest['archive_bytes'],actual_carrier_parts=len(manifest['parts']),
+-        remote_checks='GitHub PR/ref APIs, actual untruncated tree blob OIDs/sizes, fetched remote HEAD, local exact blob bytes linked to SHA256 manifest',
++        remote_checks='GitHub PR/ref APIs, actual untruncated tree blob OIDs/sizes, fetched remote HEAD and hashed committed blob bytes; frozen raw source/helper bytes checked separately against exact manifest members',
++        historical_Git_CRLF_to_LF_paths=normalized,post_science_verifier_working_delta=tool_deltas,
++        verifier_execution_SHA256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
++        frozen_raw_sources_checked=len(candidate['source_bindings']),frozen_raw_helpers_checked=len(candidate['helpers']),
+         receipt_not_in_observed_commit=True,no_future_commit_claim=True,engineering=True,seconds=time.perf_counter()-t,Optimize=0)
+     destination=Path(destination);destination.parent.mkdir(parents=True,exist_ok=True)
+     with destination.open('x',encoding='utf-8',newline='\n') as f:json.dump(receipt,f,indent=2,allow_nan=False);f.write('\n')
