@@ -37,7 +37,7 @@ def pack():
     files.update(ROOT/n for n in ['reference/round100_confirmation/H100.txt','reference/round109_geographic/G50-C1.txt',
         'reference/round109_geographic/G100-R2.txt','results/unified_exact_round94/preregistration.json'])
     for p in OUT.rglob('*'):
-        if not p.is_file() or d in p.parents or 'engineering' in p.relative_to(OUT).parts or p.name=='public_pack_receipt.json':continue
+        if not p.is_file() or d in p.parents or 'engineering' in p.relative_to(OUT).parts or p==OUT/'public_pack_receipt.json':continue
         files.add(p)
     files=sorted(files);manifest={p.relative_to(ROOT).as_posix():dict(SHA=sha(p),bytes=p.stat().st_size) for p in files}
     stream=Parts(d)
