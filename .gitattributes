@@ -253,3 +253,9 @@ results/unified_exact_round112/review/design01/production.diff -whitespace
 /results/unified_exact_round115/** -text whitespace=cr-at-eol
 /scripts/*round115*.py -text whitespace=cr-at-eol
 /results/unified_exact_round115/compact_evidence/evidence.tar.gz.part* -diff -merge
+
+# Preserve the one-source Round116 recipes, inputs and admitted evidence bytes.
+/results/unified_exact_round116/** -text whitespace=cr-at-eol
+/reference/round116_external/** -text
+/scripts/*round116* -text whitespace=cr-at-eol
+/results/unified_exact_round116/**/*.log -whitespace
