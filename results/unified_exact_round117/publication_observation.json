@@ -1,0 +1,65 @@
+{
+  "observed_at_utc": "2026-10-12T19:03:27.877388+00:00",
+  "local_head": "2de1f6d52dbaeb30ee7495b28eb64e2f51baaaba",
+  "PR": {
+    "readable": true,
+    "metadata": {
+      "number": 179,
+      "url": "https://github.com/yifanXovo/TailoredExact/pull/179",
+      "state": "open",
+      "draft": true,
+      "base_ref": "codex/round116-external-source-frozen-evaluation",
+      "base_sha": "d0647f3a29fa079919a5eb9430450d032a14deb6",
+      "head_ref": "codex/round117-security-v60-scope",
+      "head_sha": "2de1f6d52dbaeb30ee7495b28eb64e2f51baaaba"
+    }
+  },
+  "alert": {
+    "readable": true,
+    "metadata": {
+      "number": 1,
+      "secret_type": "google_api_key",
+      "state": "open",
+      "validity": "unknown",
+      "created_at": "2026-10-12T16:01:50Z",
+      "updated_at": "2026-10-12T16:01:50Z",
+      "resolved_at": null,
+      "resolution": null,
+      "html_url": "https://github.com/yifanXovo/TailoredExact/security/secret-scanning/1"
+    },
+    "secret_sha256": "cef6ada8ca76d2848cb108115c699be78aa68f4baa03ac532bd6d273d21f5901"
+  },
+  "remote_refs": [
+    "d0647f3a29fa079919a5eb9430450d032a14deb6\trefs/heads/codex/round116-external-source-frozen-evaluation",
+    "2de1f6d52dbaeb30ee7495b28eb64e2f51baaaba\trefs/heads/codex/round117-security-v60-scope"
+  ],
+  "verified_publication_files": {
+    "results/unified_exact_round117/safe_evidence/manifest.json": {
+      "git_blob_oid": "d2a971fa7bcd55cf2a44349d8fc33ffd87c6948a",
+      "sha256": "bd9a3284cc773060a155de1301e7f6eab6edda15b1111d87c8717fcdaca0b146"
+    },
+    "results/unified_exact_round117/redaction_manifest.json": {
+      "git_blob_oid": "42e8a3cddedfadb5a324ead25069c19242c0e2a4",
+      "sha256": "71424fe2ad7680c08f536291a254c4a78c226af8dfef631123b713316422251c"
+    },
+    "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part001": {
+      "git_blob_oid": "6ba92efe1e28a49ecd3060a68dac66e34f5b8426",
+      "sha256": "c2917a145548bfbd6b7192c62955009b02ef2df012fa5ad08976e7ec77034f80"
+    },
+    "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part002": {
+      "git_blob_oid": "1f736346001f68f4d8d9038ac1e1e8aef5808a01",
+      "sha256": "befccf0a5337852babc759329f37610a6581cafa6de2fd86f747ebfa187d6187"
+    },
+    "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part003": {
+      "git_blob_oid": "e5820be9655a7554de7124bf990f327673afa86c",
+      "sha256": "61358ad5bbc187b3b68664c3adf39dfef30f5afe0041c18005bec34cb25d6c3b"
+    },
+    "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part004": {
+      "git_blob_oid": "a839c7838e2a281d0e7ad299213d3bef55cd6b6a",
+      "sha256": "b87ab9a3ab7d53c87181b112f9d7e22416c613664e73d7b90f6122182d8e658c"
+    }
+  },
+  "alert_modified_by_task": false,
+  "history_rewritten": false,
+  "no_future_self_commit_claim": true
+}

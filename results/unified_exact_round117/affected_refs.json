@@ -34,5 +34,22 @@
   "restricted_incident_copy": "outside VCS with Administrator/SYSTEM ACL",
   "earlier_carriers": "Immutable R115 carrier rescanned; earlier Git blobs predating R116 collection cannot inherit these newly collected bytes and are outside this bounded incident scan",
   "history_cleanup": "not performed",
-  "no_remote_destructive_action": true
+  "no_remote_destructive_action": true,
+  "latest_publication_observation_utc": "2026-10-12T19:03:27.877388+00:00",
+  "latest_local_and_fetched_refs_containing_introduction": [
+    "refs/heads/codex/round116-external-source-frozen-evaluation d0647f3a29fa079919a5eb9430450d032a14deb6",
+    "refs/heads/codex/round117-security-v60-scope 2de1f6d52dbaeb30ee7495b28eb64e2f51baaaba",
+    "refs/remotes/origin/codex/round116-external-source-frozen-evaluation d0647f3a29fa079919a5eb9430450d032a14deb6",
+    "refs/remotes/origin/codex/round117-security-v60-scope 2de1f6d52dbaeb30ee7495b28eb64e2f51baaaba"
+  ],
+  "new_observed_affected_stacked_PR": {
+    "number": 179,
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/179",
+    "state": "open",
+    "draft": true,
+    "base_ref": "codex/round116-external-source-frozen-evaluation",
+    "base_sha": "d0647f3a29fa079919a5eb9430450d032a14deb6",
+    "head_ref": "codex/round117-security-v60-scope",
+    "head_sha": "2de1f6d52dbaeb30ee7495b28eb64e2f51baaaba"
+  }
 }
