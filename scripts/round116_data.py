@@ -150,6 +150,7 @@ The source response is retained solely as source material for this non-commercia
     print(json.dumps(dict(frozen=True,recipe_SHA=sha(OUT/'source_recipe.json'),native_starts=0)))
 
 def fetch_endpoint(name,url,kind):
+    raise RuntimeError('Round117 supersedes raw webpage acquisition. Use publication_security.record_research_response; this historical campaign must not acquire or generate new inputs.')
     folder=OUT/'source/requests'/name;folder.mkdir(parents=True,exist_ok=False)
     hosts=set(read(OUT/'source_recipe.json')['allow_hosts'])
     assert urllib.parse.urlsplit(url).scheme=='https' and urllib.parse.urlsplit(url).hostname in hosts
@@ -344,6 +345,7 @@ def generate():
     print(json.dumps(dict(generated_once=6,eligible_source=len(stations),Optimize=0)))
 
 if __name__=='__main__':
+    raise SystemExit('Historical Round116 data generation/acquisition is closed by AUTHOR_SCOPE_V_LE_60. Use existing safe data and Round117 offline validation; no new inputs are authorized.')
     try:{'freeze':freeze,'acquire':acquire,'generate':generate}[sys.argv[1]]()
     except BaseException as exc:
         if OUT.exists():

@@ -1,0 +1,160 @@
+{
+  "root": "E:\\codes\\ExactEBRP-round116",
+  "scope": "materialized R116 sparse publication files and its complete reassembled carrier; earlier immutable carriers excluded from this incident inheritance scope",
+  "counts": {
+    "files": 2087,
+    "archive_members": 126059,
+    "bytes_scanned": 2195693292
+  },
+  "findings": [
+    {
+      "path": "results/unified_exact_round116/source/requests/license/01.json",
+      "category": "sensitive_field",
+      "value_sha256": "411b4e32cd6c031f1010b3fccd388e51130cc0984a5150a8ab5d2082ec5160b2",
+      "line": null,
+      "field": "/headers/set-cookie"
+    },
+    {
+      "path": "results/unified_exact_round116/source/requests/license/01.response",
+      "category": "google_api_key",
+      "value_sha256": "cef6ada8ca76d2848cb108115c699be78aa68f4baa03ac532bd6d273d21f5901",
+      "line": 272,
+      "field": null
+    },
+    {
+      "path": "results/unified_exact_round116/source/requests/system_data/01.json",
+      "category": "sensitive_field",
+      "value_sha256": "1c2c215153977d207360fe7cc1c7fd8d6237038ecc1c7f8bfb294fc1d0445395",
+      "line": null,
+      "field": "/headers/set-cookie"
+    },
+    {
+      "path": "results/unified_exact_round116/source/requests/system_data/01.response",
+      "category": "google_api_key",
+      "value_sha256": "cef6ada8ca76d2848cb108115c699be78aa68f4baa03ac532bd6d273d21f5901",
+      "line": 289,
+      "field": null
+    },
+    {
+      "path": "results/unified_exact_round116/source/snapshot.json",
+      "category": "sensitive_field",
+      "value_sha256": "411b4e32cd6c031f1010b3fccd388e51130cc0984a5150a8ab5d2082ec5160b2",
+      "line": null,
+      "field": "/license_request/headers/set-cookie"
+    },
+    {
+      "path": "results/unified_exact_round116/source/snapshot.json",
+      "category": "sensitive_field",
+      "value_sha256": "1c2c215153977d207360fe7cc1c7fd8d6237038ecc1c7f8bfb294fc1d0445395",
+      "line": null,
+      "field": "/entry_request/headers/set-cookie"
+    },
+    {
+      "path": "scripts/publish_round112.py",
+      "category": "private_key",
+      "value_sha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "line": 44,
+      "field": null
+    },
+    {
+      "path": "scripts/publish_round113.py",
+      "category": "private_key",
+      "value_sha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "line": 54,
+      "field": null
+    },
+    {
+      "path": "scripts/publish_round114.py",
+      "category": "private_key",
+      "value_sha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "line": 101,
+      "field": null
+    },
+    {
+      "path": "scripts/round108_public.py",
+      "category": "private_key",
+      "value_sha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "line": 152,
+      "field": null
+    },
+    {
+      "path": "scripts/round109_public.py",
+      "category": "private_key",
+      "value_sha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "line": 158,
+      "field": null
+    },
+    {
+      "path": "scripts/round110_public.py",
+      "category": "private_key",
+      "value_sha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "line": 212,
+      "field": null
+    },
+    {
+      "path": "scripts/round111_public.py",
+      "category": "private_key",
+      "value_sha256": "3021d90eb9437b2d8f30e8363695c4418b5e5f1870801b5c317e9398ee0f572d",
+      "line": 94,
+      "field": null
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz!results/unified_exact_round116/source/requests/license/01.json",
+      "category": "sensitive_field",
+      "value_sha256": "411b4e32cd6c031f1010b3fccd388e51130cc0984a5150a8ab5d2082ec5160b2",
+      "line": null,
+      "field": "/headers/set-cookie"
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz!results/unified_exact_round116/source/requests/license/01.response",
+      "category": "google_api_key",
+      "value_sha256": "cef6ada8ca76d2848cb108115c699be78aa68f4baa03ac532bd6d273d21f5901",
+      "line": 272,
+      "field": null
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz!results/unified_exact_round116/source/requests/system_data/01.json",
+      "category": "sensitive_field",
+      "value_sha256": "1c2c215153977d207360fe7cc1c7fd8d6237038ecc1c7f8bfb294fc1d0445395",
+      "line": null,
+      "field": "/headers/set-cookie"
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz!results/unified_exact_round116/source/requests/system_data/01.response",
+      "category": "google_api_key",
+      "value_sha256": "cef6ada8ca76d2848cb108115c699be78aa68f4baa03ac532bd6d273d21f5901",
+      "line": 289,
+      "field": null
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz!results/unified_exact_round116/source/snapshot.json",
+      "category": "sensitive_field",
+      "value_sha256": "411b4e32cd6c031f1010b3fccd388e51130cc0984a5150a8ab5d2082ec5160b2",
+      "line": null,
+      "field": "/license_request/headers/set-cookie"
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz!results/unified_exact_round116/source/snapshot.json",
+      "category": "sensitive_field",
+      "value_sha256": "1c2c215153977d207360fe7cc1c7fd8d6237038ecc1c7f8bfb294fc1d0445395",
+      "line": null,
+      "field": "/entry_request/headers/set-cookie"
+    }
+  ],
+  "archives": [
+    {
+      "path": "results/unified_exact_round115/compact_evidence/evidence.tar.gz",
+      "members": 6393,
+      "bytes": 689918733
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz",
+      "members": 119649,
+      "bytes": 1438740383
+    }
+  ],
+  "scan_seconds": 36.11611649999395,
+  "native_starts": 0,
+  "Optimize": 0,
+  "raw_match_values_emitted": false
+}

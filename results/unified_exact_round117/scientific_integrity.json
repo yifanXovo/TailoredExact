@@ -1,0 +1,52 @@
+{
+  "old_carrier_members": 119649,
+  "old_members_unchanged": 119639,
+  "changed_old_members": 10,
+  "changed_old_paths": [
+    "results/unified_exact_round116/source/requests/discovery/01.json",
+    "results/unified_exact_round116/source/requests/license/01.json",
+    "results/unified_exact_round116/source/requests/license/01.response",
+    "results/unified_exact_round116/source/requests/station_information/01.json",
+    "results/unified_exact_round116/source/requests/system_data/01.json",
+    "results/unified_exact_round116/source/requests/system_data/01.response",
+    "results/unified_exact_round116/source/requests/system_information/01.json",
+    "results/unified_exact_round116/source/snapshot.json",
+    "scripts/round116_data.py",
+    "scripts/round116_delivery.py"
+  ],
+  "all_other_scientific_members_byte_equal": true,
+  "historical_V100_evidence_preserved": true,
+  "no_new_scientific_observations": true,
+  "safe_carrier_members": 119671,
+  "compressed_bytes": 130143482,
+  "parts": [
+    {
+      "path": "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part001",
+      "SHA": "c2917a145548bfbd6b7192c62955009b02ef2df012fa5ad08976e7ec77034f80",
+      "bytes": 33554432
+    },
+    {
+      "path": "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part002",
+      "SHA": "befccf0a5337852babc759329f37610a6581cafa6de2fd86f747ebfa187d6187",
+      "bytes": 33554432
+    },
+    {
+      "path": "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part003",
+      "SHA": "61358ad5bbc187b3b68664c3adf39dfef30f5afe0041c18005bec34cb25d6c3b",
+      "bytes": 33554432
+    },
+    {
+      "path": "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part004",
+      "SHA": "b87ab9a3ab7d53c87181b112f9d7e22416c613664e73d7b90f6122182d8e658c",
+      "bytes": 29480186
+    }
+  ],
+  "native_starts": 0,
+  "Optimize": 0,
+  "data_stream_not_repacked": true,
+  "gate_during_initial_stream": "Every member written passed; final test source refused because its literal NONREAL signed/key URL placeholders matched query rules",
+  "targeted_fix": "Assemble NONREAL query fixtures in memory; corrected test source stays outside scientific carrier",
+  "full_release_rescan_and_restore": "required after finalization, separate actual receipts",
+  "finalization_engineering_seconds": 7.152177599957213,
+  "initial_pack_duration": "unknown; not reported as zero"
+}

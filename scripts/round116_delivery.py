@@ -76,6 +76,9 @@ def preflight(root):
 
 def pack(root):
     tick=time.perf_counter();root,out,files=inventory(root)
+    from publication_security import scan_items
+    safety=scan_items((p.relative_to(root).as_posix(),p.read_bytes()) for p in files)
+    assert safety['passed'], 'Publication gate rejected payload; inspect fingerprint-only findings locally. Never bypass protection.'
     assert (out/'public_dependency_closure.json').is_file()
     d=out/'compact_evidence';d.mkdir(exist_ok=False)
     manifest={p.relative_to(root).as_posix():dict(SHA=core.sha(p),bytes=p.stat().st_size) for p in files}

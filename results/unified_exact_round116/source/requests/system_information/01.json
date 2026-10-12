@@ -9,25 +9,32 @@
   "response_bytes": 377,
   "response_SHA256": "a190957d3641ae80b34a5887bff0437eea9885080e2e29463bb7769ad85046d1",
   "headers": {
-    "Content-Type": "application/json",
-    "Content-Length": "377",
-    "Connection": "close",
-    "Server": "AmazonS3",
-    "Date": "Mon, 12 Oct 2026 05:32:01 GMT",
-    "Last-Modified": "Mon, 12 Oct 2026 05:31:12 GMT",
-    "ETag": "\"a89afa9bfbeb7a1edd3c5e3c105276ef\"",
-    "x-amz-server-side-encryption": "AES256",
-    "x-amz-version-id": "0kzZfhY8w1ZCdejBfSnaXQ5C_vRM7WfW",
-    "Accept-Ranges": "bytes",
-    "X-Cache": "Miss from cloudfront",
-    "Via": "1.1 37ecd3c54efa279eaef42c21b32707ae.cloudfront.net (CloudFront)",
-    "X-Amz-Cf-Pop": "IAD12-P5",
-    "X-Amz-Cf-Id": "L36bUPtUlbYeiJYLvnZpVjToh57rekt49knEb8O3VN-tBLubuuMcBw=="
+    "content-type": "application/json",
+    "content-length": "377",
+    "date": "Mon, 12 Oct 2026 05:32:01 GMT",
+    "last-modified": "Mon, 12 Oct 2026 05:31:12 GMT"
   },
   "structure_valid": true,
   "error": null,
   "kind": "system",
   "recipe_SHA": "37b14032b65b54a4ab14fdc7465873c8c237ec8aa42c4cc68e73e1ff0e5c1b33",
   "gbfs_version": "2.3",
-  "last_updated": 1791783070
+  "last_updated": 1791783070,
+  "original_response_SHA256": "a190957d3641ae80b34a5887bff0437eea9885080e2e29463bb7769ad85046d1",
+  "original_response_bytes": 377,
+  "publication_tool_version": "round117-publication-security-v1",
+  "response_headers_policy": "explicit research-safe whitelist",
+  "discarded_header_names": [
+    "accept-ranges",
+    "connection",
+    "etag",
+    "server",
+    "via",
+    "x-amz-cf-id",
+    "x-amz-cf-pop",
+    "x-amz-server-side-encryption",
+    "x-amz-version-id",
+    "x-cache"
+  ],
+  "response_form": "unchanged_static_JSON"
 }

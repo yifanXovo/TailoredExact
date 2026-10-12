@@ -1,0 +1,56 @@
+{
+  "schema": "round117-carrier-replacement-v1",
+  "tool_version": "round117-publication-security-v1",
+  "old_carriers_removed": [
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz.part001",
+      "sha256": "810418d03e225ba5cb23068260f389b96b975730d32fdc5ca44c7777f09b6a11",
+      "bytes": 33554432,
+      "current_tree_removed": true
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz.part002",
+      "sha256": "67082e84ada3534608e82bc73bc2c660b2c28544acadc93cb4704ab60ca3599f",
+      "bytes": 33554432,
+      "current_tree_removed": true
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz.part003",
+      "sha256": "cfce28473192ee9ed7d23d5cbfd27432a5871a56946a2fc9ee8f79c6a929767f",
+      "bytes": 33554432,
+      "current_tree_removed": true
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz.part004",
+      "sha256": "72867016d0574e484712a4266bbf225c82279a09c85bd18f86b65dedde8185c2",
+      "bytes": 31308475,
+      "current_tree_removed": true
+    }
+  ],
+  "new_parts": [
+    {
+      "path": "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part001",
+      "SHA": "c2917a145548bfbd6b7192c62955009b02ef2df012fa5ad08976e7ec77034f80",
+      "bytes": 33554432
+    },
+    {
+      "path": "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part002",
+      "SHA": "befccf0a5337852babc759329f37610a6581cafa6de2fd86f747ebfa187d6187",
+      "bytes": 33554432
+    },
+    {
+      "path": "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part003",
+      "SHA": "61358ad5bbc187b3b68664c3adf39dfef30f5afe0041c18005bec34cb25d6c3b",
+      "bytes": 33554432
+    },
+    {
+      "path": "results/unified_exact_round117/safe_evidence/evidence.tar.gz.part004",
+      "SHA": "b87ab9a3ab7d53c87181b112f9d7e22416c613664e73d7b90f6122182d8e658c",
+      "bytes": 29480186
+    }
+  ],
+  "safe_manifest_path": "results/unified_exact_round117/safe_evidence/manifest.json",
+  "safe_manifest_sha256": "bd9a3284cc773060a155de1301e7f6eab6edda15b1111d87c8717fcdaca0b146",
+  "history_purged": false,
+  "current_data_payload_finalized_without_recompression": true
+}
