@@ -1,0 +1,5 @@
+# Source and synthetic scope
+
+Only station coordinates and capacities change source. The official GBFS static station information belongs to the Capital Bikeshare system. Initial inventories, targets, weights, vehicles/capacities, route horizons and the artificial depot are deterministic same-family synthetic fields. One snapshot supplies all six inputs; source subsets may overlap. This tests finite cross-source transfer, not six independent cities, IID geographic replication or effectiveness on real demand schedules.
+
+The source response is retained solely as source material for this non-commercial research study under the official data-license agreement. It is not a standalone raw-data service or repository. The external operator and jurisdictions do not endorse this research; no logo is used. Only official static metadata is requested; no trips, passengers, user or bicycle trajectories are requested. The discovery, license bytes, request receipts, filtering and projection record are part of the research appendix.

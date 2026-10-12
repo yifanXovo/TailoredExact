@@ -1,0 +1,247 @@
+{
+  "all_current_core_equal": true,
+  "organized_current_core_equal": true,
+  "arithmetic_core_equal": true,
+  "source_lineage_generation_equal": true,
+  "actual_restored_reconstruction": true,
+  "original_root_fallback": false,
+  "original_root_used_only_as_equality_reference": true,
+  "restored_root": "E:\\codes\\ExactEBRP-round116-restore01",
+  "export_commit": "1185a9c06c6ac4d46d1917c12f0f28d8a6275e54",
+  "raw_comparison": {
+    "all_current_core_equal": true,
+    "files": [
+      "arms.csv",
+      "backend_conclusions.json",
+      "checkpoints.csv",
+      "chronological_covers.csv",
+      "clock_qualification.csv",
+      "cohort_reconciliation.json",
+      "compact_Starts.csv",
+      "controller_AM.csv",
+      "controller_child_bounds.csv",
+      "controller_events.csv",
+      "controller_LP_status.csv",
+      "controller_native.csv",
+      "controller_targets.csv",
+      "covers.csv",
+      "current_core.json",
+      "execution_failures.csv",
+      "fees.csv",
+      "fleets.csv",
+      "native_calls.csv",
+      "native_claims.csv",
+      "native_counts.csv",
+      "numerical_reliability.csv",
+      "own_UB_flow.csv",
+      "pairs.csv",
+      "progress_publication.csv",
+      "qualification_arms.csv",
+      "same_H.csv",
+      "same_H_fleets.csv",
+      "secondary_pairs.csv",
+      "split_exposure.csv",
+      "summary.json",
+      "target_discovery.csv",
+      "time_partitions.csv"
+    ],
+    "original_root_fallback": false,
+    "Optimize": 0
+  },
+  "formal_comparison": {
+    "all_current_core_equal": true,
+    "files": [
+      "arms.csv",
+      "backend_conclusions.json",
+      "checkpoints.csv",
+      "chronological_covers.csv",
+      "clock_qualification.csv",
+      "cohort_reconciliation.json",
+      "compact_Starts.csv",
+      "controller_AM.csv",
+      "controller_child_bounds.csv",
+      "controller_events.csv",
+      "controller_LP_status.csv",
+      "controller_native.csv",
+      "controller_targets.csv",
+      "covers.csv",
+      "current_core.json",
+      "execution_failures.csv",
+      "fees.csv",
+      "fleets.csv",
+      "group_reconciliation_costs.csv",
+      "native_calls.csv",
+      "native_claims.csv",
+      "native_coefficient_ranges.csv",
+      "native_counts.csv",
+      "numerical_reliability.csv",
+      "own_UB_flow.csv",
+      "pairs.csv",
+      "progress_publication.csv",
+      "qualification_checkpoints.csv",
+      "qualification_chronological_covers.csv",
+      "qualification_clock_qualification.csv",
+      "qualification_compact_Starts.csv",
+      "qualification_controller_AM.csv",
+      "qualification_controller_child_bounds.csv",
+      "qualification_controller_events.csv",
+      "qualification_controller_LP_status.csv",
+      "qualification_controller_native.csv",
+      "qualification_controller_targets.csv",
+      "qualification_covers.csv",
+      "qualification_fleets.csv",
+      "qualification_native_calls.csv",
+      "qualification_native_claims.csv",
+      "qualification_native_counts.csv",
+      "qualification_numerical_reliability.csv",
+      "qualification_own_UB_flow.csv",
+      "qualification_progress_publication.csv",
+      "qualification_qualification_arms.csv",
+      "qualification_same_H.csv",
+      "qualification_same_H_fleets.csv",
+      "qualification_split_exposure.csv",
+      "qualification_target_discovery.csv",
+      "qualification_time_partitions.csv",
+      "same_H.csv",
+      "same_H_fleets.csv",
+      "secondary_pairs.csv",
+      "split_exposure.csv",
+      "summary.json",
+      "target_discovery.csv",
+      "time_partitions.csv"
+    ],
+    "newly_measured_engineering_fields_excluded_only": {
+      "group_reconciliation_costs": [
+        "load_own_evidence_seconds",
+        "reconciliation_and_reverse_order_check_seconds",
+        "group_outer_engineering_seconds",
+        "actual_recheck_unix"
+      ],
+      "cohort_reconciliation": [
+        "actual_reconciliation_unix"
+      ]
+    }
+  },
+  "reader_summary": {
+    "execution_stage": "BLOCKED",
+    "formal_positions": 24,
+    "actual_formal_children": 18,
+    "qualified_formal_arms": 17,
+    "pair_positions": 36,
+    "evaluable_pairs": 24,
+    "qualified_qualification_CLI": 4,
+    "main_clock": "T_produce",
+    "proof_evidence_counts": {
+      "CLEAN_NONZERO_CERTIFICATE": 7,
+      "RELIABLE_POSITIVE_LB_OPEN": 7,
+      "INDEPENDENT_FLOOR_OPEN": 3,
+      "UNVERIFIABLE": 7
+    },
+    "budget_starts": 35,
+    "budget_seconds": 34214.90896606445,
+    "actual_native_Optimize": 55,
+    "source_snapshot_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+    "decision": {
+      "execution_stage": "BLOCKED",
+      "priority": "BLOCKED",
+      "full_panel_A_D_assessed": false
+    },
+    "independent_third_party_reproduction": false,
+    "old_comparisons_are_not_current_observations": true,
+    "reader_seconds": 63.00703249999788
+  },
+  "organized_summary": {
+    "execution_stage": "BLOCKED",
+    "formal_positions": 24,
+    "actual_formal_children": 18,
+    "qualified_formal_arms": 17,
+    "pair_positions": 36,
+    "evaluable_pairs": 24,
+    "qualified_qualification_CLI": 4,
+    "main_clock": "T_produce",
+    "proof_evidence_counts": {
+      "CLEAN_NONZERO_CERTIFICATE": 7,
+      "RELIABLE_POSITIVE_LB_OPEN": 7,
+      "INDEPENDENT_FLOOR_OPEN": 3,
+      "UNVERIFIABLE": 7
+    },
+    "budget_starts": 35,
+    "budget_seconds": 34214.90896606445,
+    "actual_native_Optimize": 55,
+    "source_snapshot_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+    "decision": {
+      "execution_stage": "BLOCKED",
+      "priority": "BLOCKED",
+      "full_panel_A_D_assessed": false
+    },
+    "independent_third_party_reproduction": false,
+    "old_comparisons_are_not_current_observations": true,
+    "actual_native_Optimize_formal": 43,
+    "actual_native_Optimize_including_H100": 55,
+    "proof_reliability_formal_denominator": 24,
+    "qualification_separate_from_stage_A": true,
+    "Optimize_count_scope": "qualified lifecycle arms only; excludes the failed pending arm",
+    "failed_pending_arm_reported_Optimize": 10
+  },
+  "math_result": {
+    "roles": 6,
+    "own_component_rows": 36,
+    "seconds": 7.147730099968612,
+    "Optimize": 0
+  },
+  "evidence_result": null,
+  "output_only_receipt_routing": [
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\engineering\\report_organization_receipt.json",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\report_organization_receipt.json"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\objective_structure_analysis.json",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\objective_structure_analysis.json"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\objective_structure.csv",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\objective_structure.csv"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\own_objective_components.csv",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\own_objective_components.csv"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\reports_final\\group_reconciliation_costs.csv",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\organized\\group_reconciliation_costs.csv"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\reports_final\\native_coefficient_ranges.csv",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\organized\\native_coefficient_ranges.csv"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\physical_completion.json",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\physical_completion.json"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\formal_compact_Start.json",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\formal_compact_Start.json"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\current_source_qualification.json",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\current_source_qualification.json"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\severe_loss_summary.json",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\severe_loss_summary.json"
+    },
+    {
+      "requested": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\engineering\\evidence_organization_receipt.json",
+      "actual": "E:\\codes\\ExactEBRP-round116-restore01\\results\\unified_exact_round116\\restore_validation01\\evidence_organization_receipt.json"
+    }
+  ],
+  "forward_PROJ_rerun": false,
+  "reader_SHA": "10ce399af2b32bfc43c256b99fc87cb8f19a7820dea5364588c22cac5453561f",
+  "validator_SHA": "cb82c11c72b1bbbdf925c8e8e067b635ec1470ab3651e2f8ec2d513a1b8a32d8",
+  "Optimize": 0,
+  "native_starts": 0,
+  "checked_unix": 1791820694.3193476,
+  "engineering_seconds": 76.94715450005606,
+  "scope": "24 fixed positions,36 fixed pairs, qualification, clocks, current native/source reconciliation, same-H, exact inventory components and source-input lineage; blocked positions preserved"
+}

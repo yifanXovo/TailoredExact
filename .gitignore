@@ -161,3 +161,18 @@ results/unified_exact_round82/campaign/active_run.lock
 /results/unified_exact_round112/qualification/reference/
 /results/unified_exact_round112/qualification/candidate01_unstarted/
 /results/unified_exact_round112/**/__pycache__/
+
+# Round116 exact raw/model evidence is in its indexed current-only carrier.
+/results/unified_exact_round116/campaign/*/raw/
+/results/unified_exact_round116/campaign/*/reference/
+/results/unified_exact_round116/qualification/cli01/raw/
+/results/unified_exact_round116/qualification/cli01/reference/
+/results/unified_exact_round116/qualification/reference/
+/results/unified_exact_round116/qualification/post01/reconstructed/
+/results/unified_exact_round116/reconstruction*/
+/results/unified_exact_round116/engineering/public_export01/
+/results/unified_exact_round116/**/__pycache__/
+# Large derived audit tables remain lossless in the same carrier.
+/results/unified_exact_round116/reports_final/cohort_reconciliation.json
+/results/unified_exact_round116/reports_final/native_claims.csv
+/results/unified_exact_round116/remote_final_observation.local.json
