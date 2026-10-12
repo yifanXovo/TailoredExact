@@ -1,0 +1,60 @@
+{
+  "layer": "AUTHOR_SCOPE_V_LE_60 / R116_V20_V50_DESCRIPTIVE_SUBSET",
+  "restored_root": "E:\\codes\\ExactEBRP-round117-safe-restore-20261013",
+  "raw_reconstructed_arms": 16,
+  "reconstructed_pairs": 24,
+  "all_original_scientific_fields_equal": true,
+  "source_check": {
+    "source_rows": 865,
+    "roles": [
+      {
+        "id": "E20-C1",
+        "input_sha256": "e323bfab7cff339f30b804df5d996d92e88b84d1671326d93dcd0c5f464ca521",
+        "bytes": 1268,
+        "station_id_capacity_coordinates_salts_inventory_target_weight_depot_equal": true
+      },
+      {
+        "id": "E20-R2",
+        "input_sha256": "b7ab93b8decfac48f93581be4c96cc2da71bd2498d39fc7c9f49dd157523680e",
+        "bytes": 1266,
+        "station_id_capacity_coordinates_salts_inventory_target_weight_depot_equal": true
+      },
+      {
+        "id": "E50-C1",
+        "input_sha256": "9de25da5486b956bad260bdb9c9ab50065eaf448ec271336e9eb75a1ba784b4f",
+        "bytes": 2946,
+        "station_id_capacity_coordinates_salts_inventory_target_weight_depot_equal": true
+      },
+      {
+        "id": "E50-R2",
+        "input_sha256": "d6db5a271111dd7bd8560781c4b26a934dae1fb0da0a24ab4fe01fc45daa1f92",
+        "bytes": 2949,
+        "station_id_capacity_coordinates_salts_inventory_target_weight_depot_equal": true
+      }
+    ],
+    "station_raw_sha256": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+    "generation_salt": "round116-capital-external-v1|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+    "raw_station_bytes_unchanged": true,
+    "forward_PROJ_rerun": false,
+    "V100_generation_or_reconstruction": false,
+    "new_input_files_written": 0
+  },
+  "historical_helper_signature_exceptions": [
+    {
+      "path": "scripts/round116_data.py",
+      "original_sha256": "b2f77cce78333e65449ba201e2e56bf565df5a25c025d6bca32cade2222b684c",
+      "safe_sha256": "40d31f708e695637fb05787b2fd14bb0b1f1239438d75da98a8bf00be002a3be",
+      "historical_qualification_not_reassigned_to_new_bytes": true
+    }
+  ],
+  "production_source_files_equal": 206,
+  "original_R116_state": "BLOCKED",
+  "new_independent_confirmation": false,
+  "original_root_fallback": false,
+  "V100_recovery": false,
+  "network_requests": 0,
+  "native_starts": 0,
+  "Optimize": 0,
+  "implementer_authored": true,
+  "engineering_seconds": 308.43655059998855
+}

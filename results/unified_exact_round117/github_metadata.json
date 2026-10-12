@@ -1,0 +1,1703 @@
+{
+  "observed_at_utc": "2026-10-12T18:11:25.648509+00:00",
+  "repository": "yifanXovo/TailoredExact",
+  "alert": {
+    "readable": true,
+    "metadata": {
+      "number": 1,
+      "secret_type": "google_api_key",
+      "secret_type_display_name": "Google API Key",
+      "state": "open",
+      "created_at": "2026-10-12T16:01:50Z",
+      "updated_at": "2026-10-12T16:01:50Z",
+      "resolved_at": null,
+      "resolution": null,
+      "validity": "unknown",
+      "publicly_leaked": true,
+      "multi_repo": false,
+      "is_base64_encoded": false,
+      "push_protection_bypassed": false,
+      "html_url": "https://github.com/yifanXovo/TailoredExact/security/secret-scanning/1"
+    },
+    "secret_sha256": "cef6ada8ca76d2848cb108115c699be78aa68f4baa03ac532bd6d273d21f5901",
+    "secret_used_for_validation": false
+  },
+  "locations": {
+    "readable": true,
+    "locations": [
+      {
+        "type": "commit",
+        "details": {
+          "path": "results/unified_exact_round116/source/requests/system_data/01.response",
+          "start_line": 289,
+          "end_line": 289,
+          "start_column": 18528,
+          "end_column": 18567,
+          "blob_sha": "5db6330590234018fda1b15c9cb0589143041df1",
+          "commit_sha": "9f3a7f58a4af9059cb5f70fafe1aae139f8015af"
+        }
+      },
+      {
+        "type": "commit",
+        "details": {
+          "path": "results/unified_exact_round116/source/requests/license/01.response",
+          "start_line": 272,
+          "end_line": 272,
+          "start_column": 19148,
+          "end_column": 19187,
+          "blob_sha": "3424f2d6eb124f2e622b5c04c30cc27d5c40a00e",
+          "commit_sha": "9f3a7f58a4af9059cb5f70fafe1aae139f8015af"
+        }
+      }
+    ],
+    "all_pages_read": true
+  },
+  "repository_access": {
+    "readable": true,
+    "metadata": {
+      "visibility": "public",
+      "default_branch": "main",
+      "forks_count": 0,
+      "archived": false,
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
+      }
+    },
+    "security_and_analysis": {
+      "secret_scanning": {
+        "status": "enabled"
+      },
+      "secret_scanning_push_protection": {
+        "status": "enabled"
+      },
+      "dependabot_security_updates": {
+        "status": "disabled"
+      },
+      "secret_scanning_non_provider_patterns": {
+        "status": "disabled"
+      },
+      "secret_scanning_validity_checks": {
+        "status": "disabled"
+      }
+    }
+  },
+  "releases": {
+    "readable": true,
+    "items": []
+  },
+  "forks": {
+    "readable": true,
+    "items": []
+  },
+  "pull_requests": {
+    "readable": true,
+    "items": [
+      {
+        "number": 178,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/178",
+        "head_ref": "codex/round116-external-source-frozen-evaluation",
+        "head_sha": "d0647f3a29fa079919a5eb9430450d032a14deb6",
+        "base_ref": "codex/round115-producer-clock-attribution-closure",
+        "base_sha": "7eef812efb1bd3046c48e76ff6ac968de276a9b0"
+      },
+      {
+        "number": 177,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/177",
+        "head_ref": "codex/round115-producer-clock-attribution-closure",
+        "head_sha": "7eef812efb1bd3046c48e76ff6ac968de276a9b0",
+        "base_ref": "codex/round114-bound-claim-isolation-g100",
+        "base_sha": "e436748521cf5aabbe84a24a5e9cf3836550563c"
+      },
+      {
+        "number": 176,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/176",
+        "head_ref": "codex/round114-bound-claim-isolation-g100",
+        "head_sha": "e436748521cf5aabbe84a24a5e9cf3836550563c",
+        "base_ref": "codex/round113-geographic-attribution-completion",
+        "base_sha": "ea9410163aafd3877cdcde80e01ccd34d893f11b"
+      },
+      {
+        "number": 175,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/175",
+        "head_ref": "codex/round113-geographic-attribution-completion",
+        "head_sha": "ea9410163aafd3877cdcde80e01ccd34d893f11b",
+        "base_ref": "codex/round112-paid-start-backend-attribution",
+        "base_sha": "9165e69bf41d1eb323fd52b8cb4a8230dcb4edd4"
+      },
+      {
+        "number": 174,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/174",
+        "head_ref": "codex/round112-paid-start-backend-attribution",
+        "head_sha": "9165e69bf41d1eb323fd52b8cb4a8230dcb4edd4",
+        "base_ref": "codex/round111-seed-block-confirmation",
+        "base_sha": "ded38c756a32a464bfa9800212da75778707d974"
+      },
+      {
+        "number": 173,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/173",
+        "head_ref": "codex/round111-seed-block-confirmation",
+        "head_sha": "ded38c756a32a464bfa9800212da75778707d974",
+        "base_ref": "codex/round110-entry-repair-frozen-panel-confirmation",
+        "base_sha": "13ed7eeb83b647f585837638ed9158b84f274d66"
+      },
+      {
+        "number": 172,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/172",
+        "head_ref": "codex/round110-entry-repair-frozen-panel-confirmation",
+        "head_sha": "13ed7eeb83b647f585837638ed9158b84f274d66",
+        "base_ref": "codex/round109-frozen-mb-geographic-evaluation",
+        "base_sha": "8977da23a0be50da0ab2fceb69ad3ee04e040855"
+      },
+      {
+        "number": 171,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/171",
+        "head_ref": "codex/round109-frozen-mb-geographic-evaluation",
+        "head_sha": "8977da23a0be50da0ab2fceb69ad3ee04e040855",
+        "base_ref": "codex/round108-frozen-mb-validation",
+        "base_sha": "d11c94d81e6a2c5dcd64dad8c54b390f3cb4a027"
+      },
+      {
+        "number": 170,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/170",
+        "head_ref": "codex/round108-frozen-mb-validation",
+        "head_sha": "d11c94d81e6a2c5dcd64dad8c54b390f3cb4a027",
+        "base_ref": "codex/round107-ens-frontier-route-events",
+        "base_sha": "b5db3f038f64215766a54498d8acc82e384de733"
+      },
+      {
+        "number": 169,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/169",
+        "head_ref": "codex/round107-ens-frontier-route-events",
+        "head_sha": "b5db3f038f64215766a54498d8acc82e384de733",
+        "base_ref": "codex/round106-structural-conflict-events",
+        "base_sha": "0350dbcc60d1c68e5c499d2e9880ecc1deaf031c"
+      },
+      {
+        "number": 168,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/168",
+        "head_ref": "codex/round106-structural-conflict-events",
+        "head_sha": "0350dbcc60d1c68e5c499d2e9880ecc1deaf031c",
+        "base_ref": "codex/round105-inventory-route-decomposition",
+        "base_sha": "8dc274eb34ee6d8a575f0b94b57ef04476efc0f1"
+      },
+      {
+        "number": 167,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/167",
+        "head_ref": "codex/round105-inventory-route-decomposition",
+        "head_sha": "8dc274eb34ee6d8a575f0b94b57ef04476efc0f1",
+        "base_ref": "codex/round104-objective-certificate-compression",
+        "base_sha": "aa1d0e5b268cf95442b3713b2af8fc505974f6c2"
+      },
+      {
+        "number": 166,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/166",
+        "head_ref": "codex/round104-objective-certificate-compression",
+        "head_sha": "aa1d0e5b268cf95442b3713b2af8fc505974f6c2",
+        "base_ref": "codex/round103-resource-hull-separation",
+        "base_sha": "7b60d3c1b07429ee96dbf371b4796e635499cb80"
+      },
+      {
+        "number": 165,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/165",
+        "head_ref": "codex/round103-resource-hull-separation",
+        "head_sha": "7b60d3c1b07429ee96dbf371b4796e635499cb80",
+        "base_ref": "codex/round102-service-space-resource-cuts",
+        "base_sha": "0b5640f0de5a29abf6545962dd776a2fab198f90"
+      },
+      {
+        "number": 164,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/164",
+        "head_ref": "codex/round102-service-space-resource-cuts",
+        "head_sha": "0b5640f0de5a29abf6545962dd776a2fab198f90",
+        "base_ref": "codex/round101-fleet-event-cuts",
+        "base_sha": "6a505855dc539f0d35a983c13ab22258480b79de"
+      },
+      {
+        "number": 163,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/163",
+        "head_ref": "codex/round101-fleet-event-cuts",
+        "head_sha": "6a505855dc539f0d35a983c13ab22258480b79de",
+        "base_ref": "codex/round100-minimal-integrality-certification",
+        "base_sha": "541c032f04b35f90d750c83e4938e02df3ebf008"
+      },
+      {
+        "number": 162,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/162",
+        "head_ref": "codex/round100-minimal-integrality-certification",
+        "head_sha": "541c032f04b35f90d750c83e4938e02df3ebf008",
+        "base_ref": "codex/round99-discrete-structure-native-search",
+        "base_sha": "a11fbcdc9bbea4f5ee716c6e49df4e0fb4755dcd"
+      },
+      {
+        "number": 161,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/161",
+        "head_ref": "codex/round99-discrete-structure-native-search",
+        "head_sha": "a11fbcdc9bbea4f5ee716c6e49df4e0fb4755dcd",
+        "base_ref": "codex/round98-state-service-reformulation",
+        "base_sha": "10d777d8ecf8d2aaa181f0fbe7445c266a968ef2"
+      },
+      {
+        "number": 160,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/160",
+        "head_ref": "codex/round98-state-service-reformulation",
+        "head_sha": "10d777d8ecf8d2aaa181f0fbe7445c266a968ef2",
+        "base_ref": "codex/round97-native-incumbent-closure",
+        "base_sha": "bd68cf1c3b33fce0b6bc67e2947e9770c01e2601"
+      },
+      {
+        "number": 159,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/159",
+        "head_ref": "codex/round97-native-incumbent-closure",
+        "head_sha": "bd68cf1c3b33fce0b6bc67e2947e9770c01e2601",
+        "base_ref": "codex/round96-external-primal",
+        "base_sha": "93a29e7290e7e92821482c7f4e2c47dfe2f1e84e"
+      },
+      {
+        "number": 158,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/158",
+        "head_ref": "codex/round96-external-primal",
+        "head_sha": "93a29e7290e7e92821482c7f4e2c47dfe2f1e84e",
+        "base_ref": "codex/round95-full-block-descent",
+        "base_sha": "bfa4c90f19e19b922f831c7ee97affe1785aff98"
+      },
+      {
+        "number": 157,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/157",
+        "head_ref": "codex/round95-full-block-descent",
+        "head_sha": "bfa4c90f19e19b922f831c7ee97affe1785aff98",
+        "base_ref": "codex/round94-lpg-contemporary-benchmark",
+        "base_sha": "1683dd13a228557a52a914bf6955f9f2177ffe41"
+      },
+      {
+        "number": 156,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/156",
+        "head_ref": "codex/round94-lpg-contemporary-benchmark",
+        "head_sha": "1683dd13a228557a52a914bf6955f9f2177ffe41",
+        "base_ref": "codex/round93-structural-descent-study",
+        "base_sha": "3a99848725e9543c9997c61a54dd2a74b665b37c"
+      },
+      {
+        "number": 155,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/155",
+        "head_ref": "codex/round93-structural-descent-study",
+        "head_sha": "3a99848725e9543c9997c61a54dd2a74b665b37c",
+        "base_ref": "codex/round92-rounded-handling-activation",
+        "base_sha": "8aca85f91ad3907582b424d720bb3331b114df86"
+      },
+      {
+        "number": 154,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/154",
+        "head_ref": "codex/round92-rounded-handling-activation",
+        "head_sha": "8aca85f91ad3907582b424d720bb3331b114df86",
+        "base_ref": "codex/round91-handling-rounding-diagnostic",
+        "base_sha": "a71bd53ca412e9b9e529e7237446687d360a94ce"
+      },
+      {
+        "number": 153,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/153",
+        "head_ref": "codex/round91-handling-rounding-diagnostic",
+        "head_sha": "a71bd53ca412e9b9e529e7237446687d360a94ce",
+        "base_ref": "codex/round90-ensc-lp-g-split",
+        "base_sha": "72fa0c998a8cdb75dfe7fb484748f3f11b25e33a"
+      },
+      {
+        "number": 152,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/152",
+        "head_ref": "codex/round90-ensc-lp-g-split",
+        "head_sha": "72fa0c998a8cdb75dfe7fb484748f3f11b25e33a",
+        "base_ref": "codex/round89-ensc-native-ot-b1",
+        "base_sha": "fe19ca9d519d5c60e4b7bf37085645b41ae44723"
+      },
+      {
+        "number": 151,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/151",
+        "head_ref": "codex/round89-ensc-native-ot-b1",
+        "head_sha": "fe19ca9d519d5c60e4b7bf37085645b41ae44723",
+        "base_ref": "codex/round88-ensc-structural-optimization",
+        "base_sha": "cce067956156b505652110f5dde6839c3af8c4e1"
+      },
+      {
+        "number": 150,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/150",
+        "head_ref": "codex/round88-ensc-structural-optimization",
+        "head_sha": "cce067956156b505652110f5dde6839c3af8c4e1",
+        "base_ref": "codex/round87-ensc-pgrb-long-convergence",
+        "base_sha": "0bf04b71268d6a39d127a8a692b6410b1b66edfb"
+      },
+      {
+        "number": 149,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/149",
+        "head_ref": "codex/round87-ensc-pgrb-long-convergence",
+        "head_sha": "0bf04b71268d6a39d127a8a692b6410b1b66edfb",
+        "base_ref": "codex/round86-ensc-varied-unadapted-confirmation",
+        "base_sha": "95f15acf33b8522870cc5e64baf03a33b131f813"
+      },
+      {
+        "number": 148,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/148",
+        "head_ref": "codex/round87-ensc-pgrb-long-convergence",
+        "head_sha": "0bf04b71268d6a39d127a8a692b6410b1b66edfb",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 147,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/147",
+        "head_ref": "codex/round86-ensc-varied-unadapted-confirmation",
+        "head_sha": "95f15acf33b8522870cc5e64baf03a33b131f813",
+        "base_ref": "codex/round85-ensc-remaining-protection-replication",
+        "base_sha": "a3a7c89cfa752fd0c029c83d43996562df0be3fd"
+      },
+      {
+        "number": 146,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/146",
+        "head_ref": "codex/round85-ensc-remaining-protection-replication",
+        "head_sha": "a3a7c89cfa752fd0c029c83d43996562df0be3fd",
+        "base_ref": "codex/round84-ensc-long-protection-replication",
+        "base_sha": "ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948"
+      },
+      {
+        "number": 145,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/145",
+        "head_ref": "codex/round84-ensc-long-protection-replication",
+        "head_sha": "ed0cd977ac2ea1cf7a7bf1236a15dd845a3ed948",
+        "base_ref": "codex/round83-equal-net-block-exchange",
+        "base_sha": "131d09280a1563243d0201e68367b26baf5079c3"
+      },
+      {
+        "number": 144,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/144",
+        "head_ref": "codex/round83-equal-net-block-exchange",
+        "head_sha": "131d09280a1563243d0201e68367b26baf5079c3",
+        "base_ref": "codex/round82-bdsc-unadapted-confirmation",
+        "base_sha": "30996a5c023adc2257cf9f4581e3672cf9a644d1"
+      },
+      {
+        "number": 143,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/143",
+        "head_ref": "codex/round82-bdsc-unadapted-confirmation",
+        "head_sha": "30996a5c023adc2257cf9f4581e3672cf9a644d1",
+        "base_ref": "codex/round81-bdsc-long-protection-replication",
+        "base_sha": "298e97f5d163a54eb9d899c664cafd9f07c8647c"
+      },
+      {
+        "number": 142,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/142",
+        "head_ref": "codex/round81-bdsc-long-protection-replication",
+        "head_sha": "298e97f5d163a54eb9d899c664cafd9f07c8647c",
+        "base_ref": "codex/round80-bdsc-primary-deficits",
+        "base_sha": "634cf03982e71849079699848ceecc3cd19ecb72"
+      },
+      {
+        "number": 141,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/141",
+        "head_ref": "codex/round80-bdsc-primary-deficits",
+        "head_sha": "634cf03982e71849079699848ceecc3cd19ecb72",
+        "base_ref": "codex/round79-bdsc-small-validation",
+        "base_sha": "c29173a6cb34c299cd818310eee59844ed36d8f6"
+      },
+      {
+        "number": 140,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/140",
+        "head_ref": "codex/round79-bdsc-small-validation",
+        "head_sha": "c29173a6cb34c299cd818310eee59844ed36d8f6",
+        "base_ref": "codex/round78-balanced-block-descent",
+        "base_sha": "d064fe38c14caf7f8bcc201212cd7654e99f52c1"
+      },
+      {
+        "number": 139,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/139",
+        "head_ref": "codex/round78-balanced-block-descent",
+        "head_sha": "d064fe38c14caf7f8bcc201212cd7654e99f52c1",
+        "base_ref": "codex/round77-jdsc-protection",
+        "base_sha": "88e963a1f10cc4ff9f1d3a17950f0a5708f68318"
+      },
+      {
+        "number": 138,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/138",
+        "head_ref": "codex/round77-jdsc-protection",
+        "head_sha": "88e963a1f10cc4ff9f1d3a17950f0a5708f68318",
+        "base_ref": "codex/round76-physical-route-closure",
+        "base_sha": "cc3bced895bc0f17c25c5bc23b3466e470d9633e"
+      },
+      {
+        "number": 137,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/137",
+        "head_ref": "codex/round76-physical-route-closure",
+        "head_sha": "cc3bced895bc0f17c25c5bc23b3466e470d9633e",
+        "base_ref": "codex/round75-physical-quantity-descent",
+        "base_sha": "692cf9f0ef8852d4ee0d62c5ed206c081658d158"
+      },
+      {
+        "number": 136,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/136",
+        "head_ref": "codex/round75-physical-quantity-descent",
+        "head_sha": "692cf9f0ef8852d4ee0d62c5ed206c081658d158",
+        "base_ref": "codex/round74-jdsx-protection",
+        "base_sha": "ac06e8a4efc3203db55fd64795ed89d1528c9322"
+      },
+      {
+        "number": 135,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/135",
+        "head_ref": "codex/round74-jdsx-protection",
+        "head_sha": "ac06e8a4efc3203db55fd64795ed89d1528c9322",
+        "base_ref": "codex/round73-joint-insertion",
+        "base_sha": "8c4129b58592d35c34f56a4beddbf18cacacbf81"
+      },
+      {
+        "number": 134,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/134",
+        "head_ref": "codex/round73-joint-insertion",
+        "head_sha": "8c4129b58592d35c34f56a4beddbf18cacacbf81",
+        "base_ref": "codex/round72-vdsx-validation",
+        "base_sha": "db7976fe94627c00d76d50c0adfed11223fbf646"
+      },
+      {
+        "number": 133,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/133",
+        "head_ref": "codex/round72-vdsx-validation",
+        "head_sha": "db7976fe94627c00d76d50c0adfed11223fbf646",
+        "base_ref": "codex/round71-interroute-descent",
+        "base_sha": "73ce04d9a3c5031c2b5a1021523502f0a9a85168"
+      },
+      {
+        "number": 132,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/132",
+        "head_ref": "codex/round71-interroute-descent",
+        "head_sha": "73ce04d9a3c5031c2b5a1021523502f0a9a85168",
+        "base_ref": "codex/round70-vds-descent",
+        "base_sha": "1cf8381206edd5925eca0b03185ac1cd7dc99d2a"
+      },
+      {
+        "number": 131,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/131",
+        "head_ref": "codex/round70-vds-descent",
+        "head_sha": "1cf8381206edd5925eca0b03185ac1cd7dc99d2a",
+        "base_ref": "codex/round69-vds-validation",
+        "base_sha": "b87850c474c8cb9ac45b65f881ebc629bb137f24"
+      },
+      {
+        "number": 130,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/130",
+        "head_ref": "codex/round69-vds-validation",
+        "head_sha": "b87850c474c8cb9ac45b65f881ebc629bb137f24",
+        "base_ref": "codex/round68-vdp-verified-start",
+        "base_sha": "07c6e899d56230920c162c14bd8b7c07a960c79f"
+      },
+      {
+        "number": 129,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/129",
+        "head_ref": "codex/round68-vdp-verified-start",
+        "head_sha": "07c6e899d56230920c162c14bd8b7c07a960c79f",
+        "base_ref": "codex/round67-log-inventory-states",
+        "base_sha": "a47e86a57a1f68ca6e515877193cb8696d1aa13e"
+      },
+      {
+        "number": 128,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/128",
+        "head_ref": "codex/round67-log-inventory-states",
+        "head_sha": "a47e86a57a1f68ca6e515877193cb8696d1aa13e",
+        "base_ref": "codex/round66-arc-load-replacement",
+        "base_sha": "7c3b18912e16c66f9927ff71563fc25a9f488ff5"
+      },
+      {
+        "number": 127,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/127",
+        "head_ref": "codex/round66-arc-load-replacement",
+        "head_sha": "7c3b18912e16c66f9927ff71563fc25a9f488ff5",
+        "base_ref": "codex/round65-budgeted-proof",
+        "base_sha": "112d6b26905848557048d52083d3709b46e15750"
+      },
+      {
+        "number": 126,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/126",
+        "head_ref": "codex/round65-budgeted-proof",
+        "head_sha": "112d6b26905848557048d52083d3709b46e15750",
+        "base_ref": "codex/round64-shared-load-time",
+        "base_sha": "8f23af309079b605f73e0e780a753d806aaf0b46"
+      },
+      {
+        "number": 125,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/125",
+        "head_ref": "codex/round64-shared-load-time",
+        "head_sha": "8f23af309079b605f73e0e780a753d806aaf0b46",
+        "base_ref": "codex/round63-cumulative-time-resource",
+        "base_sha": "f734d6781fd7125703489245cdb4dc27fb74625c"
+      },
+      {
+        "number": 124,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/124",
+        "head_ref": "codex/round63-cumulative-time-resource",
+        "head_sha": "f734d6781fd7125703489245cdb4dc27fb74625c",
+        "base_ref": "codex/round62-passive-threshold-conflicts",
+        "base_sha": "71e955acad596acba2a9e74e738173113116d9f7"
+      },
+      {
+        "number": 123,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/123",
+        "head_ref": "codex/round62-passive-threshold-conflicts",
+        "head_sha": "71e955acad596acba2a9e74e738173113116d9f7",
+        "base_ref": "codex/round61-transfer-block-native-time-oracle",
+        "base_sha": "4a9cbd0e3d43870e953b3a6678b343a9ac4fc25a"
+      },
+      {
+        "number": 122,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/122",
+        "head_ref": "codex/round61-transfer-block-native-time-oracle",
+        "head_sha": "4a9cbd0e3d43870e953b3a6678b343a9ac4fc25a",
+        "base_ref": "codex/round60-verified-candidate-native-injection",
+        "base_sha": "fe00f198a8b8620513017b02708315b5841c4daf"
+      },
+      {
+        "number": 121,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/121",
+        "head_ref": "codex/round60-verified-candidate-native-injection",
+        "head_sha": "fe00f198a8b8620513017b02708315b5841c4daf",
+        "base_ref": "codex/round59-core-attribution-native-mechanisms",
+        "base_sha": "12cec3924a6852d4b36d954acbb5e9b20000c9c5"
+      },
+      {
+        "number": 120,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/120",
+        "head_ref": "codex/round59-core-attribution-native-mechanisms",
+        "head_sha": "12cec3924a6852d4b36d954acbb5e9b20000c9c5",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 119,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/119",
+        "head_ref": "codex/round59-core-attribution-native-mechanisms",
+        "head_sha": "12cec3924a6852d4b36d954acbb5e9b20000c9c5",
+        "base_ref": "codex/round58-citibike443-k1-vs-pgrb",
+        "base_sha": "edd65fe9f5bd37616366c1c6ca48379df062cdcf"
+      },
+      {
+        "number": 118,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/118",
+        "head_ref": "codex/round58-citibike443-k1-vs-pgrb",
+        "head_sha": "edd65fe9f5bd37616366c1c6ca48379df062cdcf",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 117,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/117",
+        "head_ref": "codex/round58-citibike443-k1-vs-pgrb",
+        "head_sha": "edd65fe9f5bd37616366c1c6ca48379df062cdcf",
+        "base_ref": "codex/round56-paper-benchmark-time-horizon",
+        "base_sha": "6b721dea0dfcadbe80cc862ab3a74c25a211d784"
+      },
+      {
+        "number": 116,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/116",
+        "head_ref": "codex/round56-paper-benchmark-time-horizon",
+        "head_sha": "6b721dea0dfcadbe80cc862ab3a74c25a211d784",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 115,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/115",
+        "head_ref": "codex/round56-paper-benchmark-time-horizon",
+        "head_sha": "6b721dea0dfcadbe80cc862ab3a74c25a211d784",
+        "base_ref": "codex/round55-k1-am-sf-station-state-chain",
+        "base_sha": "06b4c0634cbb85d3440be88511c736dd3282fdc9"
+      },
+      {
+        "number": 114,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/114",
+        "head_ref": "codex/round55-k1-am-sf-station-state-chain",
+        "head_sha": "06b4c0634cbb85d3440be88511c736dd3282fdc9",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 113,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/113",
+        "head_ref": "codex/round55-k1-am-sf-station-state-chain",
+        "head_sha": "06b4c0634cbb85d3440be88511c736dd3282fdc9",
+        "base_ref": "codex/round54-k1-am-sf-inventory-route-cuts",
+        "base_sha": "324646af2e253618218812717a53e3e9e9cf1d9c"
+      },
+      {
+        "number": 112,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/112",
+        "head_ref": "codex/round54-k1-am-sf-inventory-route-cuts",
+        "head_sha": "324646af2e253618218812717a53e3e9e9cf1d9c",
+        "base_ref": "codex/round53-f0-qualification-callback-isolation",
+        "base_sha": "bbf2044ec710f5eb8bde19d2ed183caa84055dcc"
+      },
+      {
+        "number": 111,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/111",
+        "head_ref": "codex/round53-f0-qualification-callback-isolation",
+        "head_sha": "bbf2044ec710f5eb8bde19d2ed183caa84055dcc",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 110,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/110",
+        "head_ref": "codex/round53-f0-qualification-callback-isolation",
+        "head_sha": "bbf2044ec710f5eb8bde19d2ed183caa84055dcc",
+        "base_ref": "codex/round52-k1-tailored-cut-final-validation",
+        "base_sha": "44ed4057cc4d2ce67b86d623b57500e95cad5058"
+      },
+      {
+        "number": 109,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/109",
+        "head_ref": "codex/round52-k1-tailored-cut-final-validation",
+        "head_sha": "44ed4057cc4d2ce67b86d623b57500e95cad5058",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 108,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/108",
+        "head_ref": "codex/round52-k1-tailored-cut-final-validation",
+        "head_sha": "44ed4057cc4d2ce67b86d623b57500e95cad5058",
+        "base_ref": "codex/round51-tight-big-m-root-sparse-branching",
+        "base_sha": "c6d7109bf69f50bd459174e8f05242b478e57d85"
+      },
+      {
+        "number": 107,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/107",
+        "head_ref": "codex/round51-tight-big-m-root-sparse-branching",
+        "head_sha": "c6d7109bf69f50bd459174e8f05242b478e57d85",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 106,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/106",
+        "head_ref": "codex/round51-tight-big-m-root-sparse-branching",
+        "head_sha": "c6d7109bf69f50bd459174e8f05242b478e57d85",
+        "base_ref": "codex/round50-k1-interval-mip-vnext",
+        "base_sha": "eccc795c0f5b2df5b57e24da31b56648150334b9"
+      },
+      {
+        "number": 105,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/105",
+        "head_ref": "codex/round50-k1-interval-mip-vnext",
+        "head_sha": "eccc795c0f5b2df5b57e24da31b56648150334b9",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 104,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/104",
+        "head_ref": "codex/round50-k1-interval-mip-vnext",
+        "head_sha": "eccc795c0f5b2df5b57e24da31b56648150334b9",
+        "base_ref": "codex/round49-k1-lp-primal-dual-rescue",
+        "base_sha": "550e2e491a270448e0bae4dcdb07cc1e2296a329"
+      },
+      {
+        "number": 103,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/103",
+        "head_ref": "codex/round49-k1-lp-primal-dual-rescue",
+        "head_sha": "550e2e491a270448e0bae4dcdb07cc1e2296a329",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 102,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/102",
+        "head_ref": "codex/round49-k1-lp-primal-dual-rescue",
+        "head_sha": "550e2e491a270448e0bae4dcdb07cc1e2296a329",
+        "base_ref": "codex/round48-k1-amf-formulation-rescue",
+        "base_sha": "fb94950bcdaa04486a3b6e05fb515c719589b96d"
+      },
+      {
+        "number": 101,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/101",
+        "head_ref": "codex/round48-k1-amf-formulation-rescue",
+        "head_sha": "fb94950bcdaa04486a3b6e05fb515c719589b96d",
+        "base_ref": "codex/round47-c6-adaptive-mass-contraction",
+        "base_sha": "f4e7b8b1675b6816dd3f7b9c22fae275f618491b"
+      },
+      {
+        "number": 100,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/100",
+        "head_ref": "codex/round47-c6-adaptive-mass-contraction",
+        "head_sha": "f4e7b8b1675b6816dd3f7b9c22fae275f618491b",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 99,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/99",
+        "head_ref": "codex/round47-c6-adaptive-mass-contraction",
+        "head_sha": "f4e7b8b1675b6816dd3f7b9c22fae275f618491b",
+        "base_ref": "codex/round46-c6-rho-k1-k4-screen",
+        "base_sha": "4798a9905c1d4a1f4ab9d8ca7baa7cf6f7d3ce9b"
+      },
+      {
+        "number": 98,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/98",
+        "head_ref": "codex/round46-c6-rho-k1-k4-screen",
+        "head_sha": "4798a9905c1d4a1f4ab9d8ca7baa7cf6f7d3ce9b",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 97,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/97",
+        "head_ref": "codex/round46-c6-rho-k1-k4-screen",
+        "head_sha": "4798a9905c1d4a1f4ab9d8ca7baa7cf6f7d3ce9b",
+        "base_ref": "codex/round45-adaptive-timing-parametric-partition",
+        "base_sha": "1313086b8d1e1b1c163a8bf1c4011f08e8534dc8"
+      },
+      {
+        "number": 96,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/96",
+        "head_ref": "codex/round45-adaptive-timing-parametric-partition",
+        "head_sha": "1313086b8d1e1b1c163a8bf1c4011f08e8534dc8",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 95,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/95",
+        "head_ref": "codex/round45-adaptive-timing-parametric-partition",
+        "head_sha": "1313086b8d1e1b1c163a8bf1c4011f08e8534dc8",
+        "base_ref": "codex/round44-c6-envelope-tail-repair",
+        "base_sha": "7cd1ba335aada5a8438cc6c622ef6ec1e6c5061f"
+      },
+      {
+        "number": 94,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/94",
+        "head_ref": "codex/round44-c6-envelope-tail-repair",
+        "head_sha": "7cd1ba335aada5a8438cc6c622ef6ec1e6c5061f",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 93,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/93",
+        "head_ref": "codex/round44-c6-envelope-tail-repair",
+        "head_sha": "7cd1ba335aada5a8438cc6c622ef6ec1e6c5061f",
+        "base_ref": "codex/round43-k1-k4-envelope-refinement",
+        "base_sha": "3b4b50da3292a834c5731fb2c00f056a22c77cff"
+      },
+      {
+        "number": 92,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/92",
+        "head_ref": "codex/round43-k1-k4-envelope-refinement",
+        "head_sha": "3b4b50da3292a834c5731fb2c00f056a22c77cff",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 91,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/91",
+        "head_ref": "codex/round43-k1-k4-envelope-refinement",
+        "head_sha": "3b4b50da3292a834c5731fb2c00f056a22c77cff",
+        "base_ref": "codex/round42-decomposition-architecture-optimization",
+        "base_sha": "a188181a3257270eebc6d546b121a168184ae951"
+      },
+      {
+        "number": 90,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/90",
+        "head_ref": "codex/round42-decomposition-architecture-optimization",
+        "head_sha": "a188181a3257270eebc6d546b121a168184ae951",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 89,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/89",
+        "head_ref": "codex/round42-decomposition-architecture-optimization",
+        "head_sha": "a188181a3257270eebc6d546b121a168184ae951",
+        "base_ref": "codex/round41-decomposition-single-tree-feasibility",
+        "base_sha": "75fe23e591a39b54f7940eb0012a245e3a92d955"
+      },
+      {
+        "number": 88,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/88",
+        "head_ref": "codex/round41-decomposition-single-tree-feasibility",
+        "head_sha": "75fe23e591a39b54f7940eb0012a245e3a92d955",
+        "base_ref": "codex/round40-regression-adaptive",
+        "base_sha": "3db7a5efbace14dfed7557560e96636f749b84bc"
+      },
+      {
+        "number": 87,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/87",
+        "head_ref": "codex/round40-regression-adaptive",
+        "head_sha": "3db7a5efbace14dfed7557560e96636f749b84bc",
+        "base_ref": "codex/round39-small-hard-light-qualification",
+        "base_sha": "60d1f6e454e0d2b2b1c5c883c3a3d0ae9b5ffd19"
+      },
+      {
+        "number": 86,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/86",
+        "head_ref": "codex/round39-small-hard-light-qualification",
+        "head_sha": "60d1f6e454e0d2b2b1c5c883c3a3d0ae9b5ffd19",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 85,
+        "state": "open",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/85",
+        "head_ref": "codex/round38-global-frontier-lift",
+        "head_sha": "3b4942490bce0d3da73dcf9fdf27344e9ab04296",
+        "base_ref": "main",
+        "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242"
+      },
+      {
+        "number": 84,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/84",
+        "head_ref": "agent/round37-gini-geometry-mechanism",
+        "head_sha": "f312f2dc2436efb04cecbebece4ebb005f3cae67",
+        "base_ref": "main",
+        "base_sha": "414c01216bb3aa30eb1f27f390b6f23bf06cb2eb"
+      },
+      {
+        "number": 83,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/83",
+        "head_ref": "codex/round36-incumbent-decomposition-causal-study",
+        "head_sha": "4eb8e36515bbb2dd36ba49c5605c7c1b12a7ae32",
+        "base_ref": "main",
+        "base_sha": "73f03b69e33d7622f023e0a4cb5ab607ba57d712"
+      },
+      {
+        "number": 82,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/82",
+        "head_ref": "codex/round35-simple-start-full-qualification",
+        "head_sha": "9cb28e3f91dac9603b2c457f1927621c452744ad",
+        "base_ref": "main",
+        "base_sha": "722b9b50cbd2155c43af1b2b511f55d579efb59d"
+      },
+      {
+        "number": 81,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/81",
+        "head_ref": "codex/round34-c6-algorithm-documentation-hga-ablation",
+        "head_sha": "b1225b9e723516f736df69b5d79f367551ad78ff",
+        "base_ref": "main",
+        "base_sha": "afb3f1043fab73ae28dd5b1a2d71501f6f732b3c"
+      },
+      {
+        "number": 80,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/80",
+        "head_ref": "codex/round33-v10-convergence-benchmark",
+        "head_sha": "201798c6c9daa9b1f6bfae583af5bbdc53608219",
+        "base_ref": "main",
+        "base_sha": "e352055138c4ea00f308bed94523ee161dad1a6d"
+      },
+      {
+        "number": 79,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/79",
+        "head_ref": "codex/round32-c6-long-run-validation",
+        "head_sha": "2db8fe5b5c33145e1a8cd6dca86f8459885fa2bf",
+        "base_ref": "main",
+        "base_sha": "2acc29c5556ddd3b229d65fd2b3fb8982ce6b8d2"
+      },
+      {
+        "number": 78,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/78",
+        "head_ref": "codex/round31-nonblocking-gurobi-c6",
+        "head_sha": "919fd688a29a730d897db612213982ba8792a53f",
+        "base_ref": "main",
+        "base_sha": "224e9bb333d08956dc37172d12544201bc48e5f5"
+      },
+      {
+        "number": 77,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/77",
+        "head_ref": "codex/round30-c0-mechanism-transfer-c5",
+        "head_sha": "893656f85fa6394dac787fee78baad2a52cdd2d2",
+        "base_ref": "main",
+        "base_sha": "51d3d74d178383f135820243a5627f115736f72f"
+      },
+      {
+        "number": 76,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/76",
+        "head_ref": "codex/round29-gurobi-performance-recovery",
+        "head_sha": "483272b4c4630835c32014171539740bd978207e",
+        "base_ref": "main",
+        "base_sha": "1a92489cc3076aba49a6e42e54f8064076b4b887"
+      },
+      {
+        "number": 75,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/75",
+        "head_ref": "codex/round28-cplex-equivalent-gurobi-replica",
+        "head_sha": "901510b1dd39edd5d093ffe27bf9fd4bebe6a702",
+        "base_ref": "main",
+        "base_sha": "fbec14f2fc8c9f438ac5e224f5a9d060177677a5"
+      },
+      {
+        "number": 74,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/74",
+        "head_ref": "codex/round27-paper-safe-gurobi-scheduling",
+        "head_sha": "c76192a9d6641a784888a82d3098187a962f7764",
+        "base_ref": "main",
+        "base_sha": "3adffe8237101add1671ad84454d6bfde6968122"
+      },
+      {
+        "number": 73,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/73",
+        "head_ref": "codex/round26-external-gurobi-production-validation",
+        "head_sha": "372d2ad7dda5a0b80593f25b087ed7fee9b79bbc",
+        "base_ref": "main",
+        "base_sha": "4a608eeae559cc69ca5c37b6eb4abab74fd3bc3b"
+      },
+      {
+        "number": 72,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/72",
+        "head_ref": "codex/round25-longer-multiinstance-backend-validation",
+        "head_sha": "d8cba691424eb990fc22357f7a2911ec5d34f3df",
+        "base_ref": "main",
+        "base_sha": "639c3772687d4a22e6b2cf3daa4d16c03d015ecd"
+      },
+      {
+        "number": 71,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/71",
+        "head_ref": "codex/round24r-licensed-gurobi-qualification",
+        "head_sha": "d52e340ef62be2bc2f248a1c5ad93cbbb75c6920",
+        "base_ref": "main",
+        "base_sha": "5166ecc910da7cebca7e0f1c7f48172302d8b62c"
+      },
+      {
+        "number": 70,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/70",
+        "head_ref": "codex/round24-gurobi-baseline-external-tree",
+        "head_sha": "aa726494a2074adbb84ca65f31f3fe0ee0e9a31f",
+        "base_ref": "main",
+        "base_sha": "f115e9bb600f68e5368df78f06203331a800a33b"
+      },
+      {
+        "number": 69,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/69",
+        "head_ref": "codex/round23-moderate4301-correctness-unified-convergence",
+        "head_sha": "a977efe52a79877c057ce8e3421901979d16f1be",
+        "base_ref": "main",
+        "base_sha": "91ed0e314caae51ddbd8375d88cd65a5352c917f"
+      },
+      {
+        "number": 68,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/68",
+        "head_ref": "codex/round22-engineering-certificate-dense-trajectories",
+        "head_sha": "3c69cb2c04889db5ceb40e313a710d600089879d",
+        "base_ref": "main",
+        "base_sha": "f123418f9ae50c7bd5d09616757cd56d18cb3906"
+      },
+      {
+        "number": 67,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/67",
+        "head_ref": "codex/round21-strict-certificate-normalized-flow",
+        "head_sha": "9a80642d9c41d290267057f333ad107622608918",
+        "base_ref": "main",
+        "base_sha": "239d82772161acf7b86353fcfc8b7c3fc9f39e1f"
+      },
+      {
+        "number": 66,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/66",
+        "head_ref": "codex/round20-global-tree-regression-diagnosis",
+        "head_sha": "421b3cb4be0e7dbee751b9feaa65be43b7267168",
+        "base_ref": "main",
+        "base_sha": "16d810f1cf6673f4c2203d472613433a6ad674de"
+      },
+      {
+        "number": 65,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/65",
+        "head_ref": "codex/round19-global-gini-tree-feasibility",
+        "head_sha": "5c2b1efc355409ffa8336f45e2cdfb884197bdbf",
+        "base_ref": "main",
+        "base_sha": "e1666c2cfb5243469712398ed0c6672fe4e33d29"
+      },
+      {
+        "number": 64,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/64",
+        "head_ref": "codex/round18-controlling-leaf-scheduler",
+        "head_sha": "97e0be26b95e3c978a590db4606398624fc9137d",
+        "base_ref": "main",
+        "base_sha": "fcfc91188a8b4086059c10e0710fb4ccdfcc882f"
+      },
+      {
+        "number": 63,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/63",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "e4c8c8755f87e2e4416c2a0050d6f02de0274ac0",
+        "base_ref": "main",
+        "base_sha": "7d44a613c9ee5e92f60f57c88e07d4a2c01d8e14"
+      },
+      {
+        "number": 62,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/62",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "ed89e589334d7aa958d5125393789f752f4d7775",
+        "base_ref": "main",
+        "base_sha": "06a9a41e8d90fdc031576f2e84f79c5bc99871e8"
+      },
+      {
+        "number": 61,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/61",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "9c057aba2352a6b9ecaf92c6f55d30ef9652ac0b",
+        "base_ref": "main",
+        "base_sha": "b654479e056163325ebee1ff7f5b390c65c7ead4"
+      },
+      {
+        "number": 60,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/60",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "84794462fdcdb0a9f64a11224a709df541f6ab94",
+        "base_ref": "main",
+        "base_sha": "b59467d7b1e8f0fa7eb855e3c648acf5f9e8a940"
+      },
+      {
+        "number": 59,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/59",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "8e82dff3d812a51783baa1fb8ea4a163770bfafb",
+        "base_ref": "main",
+        "base_sha": "9bc673377b42779cf9d59aa942df67a4c207c9c8"
+      },
+      {
+        "number": 58,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/58",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "ff381ac9da9b56be730dc4768455e861187e5c13",
+        "base_ref": "main",
+        "base_sha": "665ee12df6c852a259acdba20107a6f6c31a0fcd"
+      },
+      {
+        "number": 57,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/57",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "d11512870b970ac761dad1a6f7470024055d54b5",
+        "base_ref": "main",
+        "base_sha": "286414ce7785105876b66535134075f2a3247c4f"
+      },
+      {
+        "number": 56,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/56",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "37f3bce2668b5c71c5ff1d061a9cfe5888e4f767",
+        "base_ref": "main",
+        "base_sha": "8c865488dfd572b517df7e35593d17a69ec76439"
+      },
+      {
+        "number": 55,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/55",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "db24fd3f91914b64cb3e510767e5da59caf67b4d",
+        "base_ref": "main",
+        "base_sha": "27c7f78de0072c9f68736aff40cf79f8ed0e2118"
+      },
+      {
+        "number": 54,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/54",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "078d67b317307f1d4ddc42d5cb9d5ce7f1b08bc1",
+        "base_ref": "main",
+        "base_sha": "40f609849528568376c035a47bacb220d35d4d9c"
+      },
+      {
+        "number": 53,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/53",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "d9852b0668983cb89218027ade97bb296323580b",
+        "base_ref": "main",
+        "base_sha": "20598ca13d564045fe6e74c3914a8c48c5e240d6"
+      },
+      {
+        "number": 52,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/52",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "3dc9cfd60d43df0a01461e156c73d2816464e3ba",
+        "base_ref": "main",
+        "base_sha": "2c68c506e6d001cb3f351e4f50ba34c93fccb027"
+      },
+      {
+        "number": 51,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/51",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "0e0006666579dc50aa7ebd757f0aa54aff7dd767",
+        "base_ref": "main",
+        "base_sha": "93dc15b05e1aaf7640ce3eed44dbe4e72ef48d44"
+      },
+      {
+        "number": 50,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/50",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "37dd1ac1036f55219042b1618f2e734b9b6ccdd0",
+        "base_ref": "main",
+        "base_sha": "dfdacaa4ada4718ba5baec16629527bff766da96"
+      },
+      {
+        "number": 49,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/49",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "d0d6c1a3b80fecc8ee1d23ebef28ed5a8769ee76",
+        "base_ref": "main",
+        "base_sha": "433eb147391ff849b00900db49d02c1650a04f8a"
+      },
+      {
+        "number": 48,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/48",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "e66470dde71794e1c87c123579b2c1d332d6ca04",
+        "base_ref": "main",
+        "base_sha": "793fa151265d1092dc4e9479decade1659605e5e"
+      },
+      {
+        "number": 47,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/47",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "0e282685c8310bb196a3b9a460518ea408ebb3b4",
+        "base_ref": "main",
+        "base_sha": "2eadbe97474a0cd651cd2eaa515e648f7f4845c9"
+      },
+      {
+        "number": 46,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/46",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "85fc9493f2699229e78b2a71e1094eca0ff73ff5",
+        "base_ref": "main",
+        "base_sha": "c16c96c1e37bf306f105d0571c6932e7e2ae3335"
+      },
+      {
+        "number": 45,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/45",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "e30b764b679ec22a6fff45c4c6a38179afaf2cbf",
+        "base_ref": "main",
+        "base_sha": "6c9ea1da6ed1b186b40d654efe2138bf74744171"
+      },
+      {
+        "number": 44,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/44",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "b73fb4e101fbc8eb40e1580200e1c1256d65ef0e",
+        "base_ref": "main",
+        "base_sha": "e0e03dcbf4b833c52cc6bf9f951d8a640e488c62"
+      },
+      {
+        "number": 43,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/43",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "fbc3a10de81520d83b91a8abc89092adc89310be",
+        "base_ref": "main",
+        "base_sha": "c6eea51a5f7e764ccbbc4311f0fafda4c9ee52c5"
+      },
+      {
+        "number": 42,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/42",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "8a13baa40eae0ce112f78bbf1e264d95c5fa8199",
+        "base_ref": "main",
+        "base_sha": "b65fb2e1cece2c70980eeb91aadfee07ac2591b8"
+      },
+      {
+        "number": 41,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/41",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "cb11b9f5f477b707511388b0196f0864c75d1fbb",
+        "base_ref": "main",
+        "base_sha": "1b5c3ecb14e2eddde618b6b5c4cf8bf143fd3015"
+      },
+      {
+        "number": 40,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/40",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "cad7e4cd9e9299c4ad9a7e11e1639186494c78fd",
+        "base_ref": "main",
+        "base_sha": "23ab5aedfd9d5731b2888c1afdf0ac585da23e25"
+      },
+      {
+        "number": 39,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/39",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "88d95060f56a24788043ad18960fb0e0465bbbce",
+        "base_ref": "main",
+        "base_sha": "1b4ce0a555c67d259935d5c66b5c32afc6380d00"
+      },
+      {
+        "number": 38,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/38",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "f08757b66dd4c0d81405c9f006bb2309f28cadbc",
+        "base_ref": "main",
+        "base_sha": "52f79410fd745e5ff290a6f03f52957e159d8979"
+      },
+      {
+        "number": 37,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/37",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "c9ada583265c569e3fefb23a9ded36afd678553d",
+        "base_ref": "main",
+        "base_sha": "0a27c4a86f9cb7274dc18a90ef4faf7030aed2cd"
+      },
+      {
+        "number": 36,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/36",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "0ee2afa01e0cd57b85a10bd7a3c2076045495607",
+        "base_ref": "main",
+        "base_sha": "03e0f5e7f4e01b01688b1f4a3119770a735f050a"
+      },
+      {
+        "number": 35,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/35",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "653da7d46096b04dd7bb7cb999f8b76c0583df2d",
+        "base_ref": "main",
+        "base_sha": "26202a4697ff29ad94212aecc07e251e3409c9a4"
+      },
+      {
+        "number": 34,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/34",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "5c238e0a09f395fdcfba769628935909c84a681f",
+        "base_ref": "main",
+        "base_sha": "8c3eaaca96a46fd26d099f1235c008e993756c06"
+      },
+      {
+        "number": 33,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/33",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "3ccf4dde477808687412fd947fa36e35779482f6",
+        "base_ref": "main",
+        "base_sha": "163eff366d55e48e97531a994fc57fca4075ad0e"
+      },
+      {
+        "number": 32,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/32",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "5a6c26bfd4a654995122795b63415e89ab909aee",
+        "base_ref": "main",
+        "base_sha": "c7a952c4b3e06a0fc37b299dd15ec088b03e5c69"
+      },
+      {
+        "number": 31,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/31",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "b7dffbdea6c7b349c156cb2416780e356863cc82",
+        "base_ref": "main",
+        "base_sha": "6caca29eb874c8933693ef355d1878ffe1f4b3f9"
+      },
+      {
+        "number": 30,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/30",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "243b30ee954cdf4b7f108960f29ce513dd5fdebc",
+        "base_ref": "main",
+        "base_sha": "8bc80fb3cbd4c0ac30a282bdd12117c225fd1724"
+      },
+      {
+        "number": 29,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/29",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "a8748ed81e5cbdde83270e510466935adea3a6da",
+        "base_ref": "main",
+        "base_sha": "4906e62a212003a627a80dd74214b56003730f60"
+      },
+      {
+        "number": 28,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/28",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "d8daf1127c0b8aa272087ea060e5757345c432a2",
+        "base_ref": "main",
+        "base_sha": "1dd2a1ba2565559cf3824a73738d521ef4f14231"
+      },
+      {
+        "number": 27,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/27",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "ff08cfc5cb738159c0999717075739863f6c7b52",
+        "base_ref": "main",
+        "base_sha": "e5fba1be845fd36ae4c981d3cca4a35ac573a598"
+      },
+      {
+        "number": 26,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/26",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "e41ba513de0acae653c44299c718c0c1bf8e2fce",
+        "base_ref": "main",
+        "base_sha": "fd255e886e87ab6ccee5e3af6328a3cefa65daab"
+      },
+      {
+        "number": 25,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/25",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "e37955f58f4b6396bec7ca441987f70adde6fa3f",
+        "base_ref": "main",
+        "base_sha": "3bac68b7b8254551ff4dda99a3c262cdc0355718"
+      },
+      {
+        "number": 24,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/24",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "4aee723e986bfe3e60e06a06fec9f8bfe26ff3b1",
+        "base_ref": "main",
+        "base_sha": "c01a015c7e1526945089d005ba09a1c785ce390c"
+      },
+      {
+        "number": 23,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/23",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "0c2627821415515973eccbc0e9b4d412d6e7167d",
+        "base_ref": "main",
+        "base_sha": "45a19e93d4a85a76e3fe8c9ea3804d2d56152ec9"
+      },
+      {
+        "number": 22,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/22",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "ef4cb62edf3081ffcfd06976d18705bf861b4edc",
+        "base_ref": "main",
+        "base_sha": "3d739cb7cb4a6a9cf50588c1a9c66857725c4aac"
+      },
+      {
+        "number": 21,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/21",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "b0b9b7cbd336d49989609f094bde4f3cdc9491ad",
+        "base_ref": "main",
+        "base_sha": "92842645408d1cd048e2490e40da768a6252d8d4"
+      },
+      {
+        "number": 20,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/20",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "bdcf5ef453cf217cb50dbea94f5be16e84dfbc35",
+        "base_ref": "main",
+        "base_sha": "6adfc98b175e44dd6692c2c4cbec0de36665cccb"
+      },
+      {
+        "number": 19,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/19",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "a729494ed9a325e2835b38888b51fdbe06d9dfb3",
+        "base_ref": "main",
+        "base_sha": "4c73e6dc9f3bd7c072a142ecfe5c56711cb30794"
+      },
+      {
+        "number": 18,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/18",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "e4bb0cb748f96dc0879b94467a165430b946eef9",
+        "base_ref": "main",
+        "base_sha": "2d92e9524726a80bd70f5f99a8d5503aea003ff1"
+      },
+      {
+        "number": 17,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/17",
+        "head_ref": "codex/longrun-round17-local-results",
+        "head_sha": "bc7b4f50007ea6d63aa4d3cb2edca4716009b372",
+        "base_ref": "main",
+        "base_sha": "52e825ec6c2f0c9108961a6c7b3b51ba6f8886e3"
+      },
+      {
+        "number": 16,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/16",
+        "head_ref": "paper-algorithm-consolidation",
+        "head_sha": "5cfa8627e501969d5373611a54b9ee9cd29ea253",
+        "base_ref": "main",
+        "base_sha": "ebd06a62d104c3a58ec459ce6d901c7816010a31"
+      },
+      {
+        "number": 15,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/15",
+        "head_ref": "projection-safe-relaxed-rmp-cg",
+        "head_sha": "4b6b4b644372f12cff7b3156748a7c75e9e2a196",
+        "base_ref": "main",
+        "base_sha": "0853c1d7a8f4dc9072da521703d0a9ecbb18bfa6"
+      },
+      {
+        "number": 14,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/14",
+        "head_ref": "two-track-relaxed-route-load-bpc",
+        "head_sha": "5c4d0aaf29b10b67c014330c6f1c5eb900fedbaf",
+        "base_ref": "main",
+        "base_sha": "951dd3e4511278ba6ca5217b5a422ee408b7dad6"
+      },
+      {
+        "number": 13,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/13",
+        "head_ref": "production-hybrid-pricing-bpc",
+        "head_sha": "9a9fc277a84258661e90d4b5716c3ee77a2fe6e8",
+        "base_ref": "main",
+        "base_sha": "c10451017eed0fc548df5b29bdddfcf7fb826626"
+      },
+      {
+        "number": 12,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/12",
+        "head_ref": "scalable-pricing-large-instance",
+        "head_sha": "78264848103004790c7cdf8bcc7761ee26608757",
+        "base_ref": "main",
+        "base_sha": "10654271c814cac07d126b115b7531122ba841ae"
+      },
+      {
+        "number": 11,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/11",
+        "head_ref": "iterative-closure-pricing-verifier",
+        "head_sha": "e9be953d56a56dc2764e70394b484f26ed028f19",
+        "base_ref": "main",
+        "base_sha": "50619c03adcf6f14f260a270395010ff82d62f39"
+      },
+      {
+        "number": 10,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/10",
+        "head_ref": "exact-cg-closure-resume",
+        "head_sha": "1a6e1d2d491c773727afa311d47b12a55271e832",
+        "base_ref": "main",
+        "base_sha": "16d7b2159777a0ebdac374f6425be14f83ad2d19"
+      },
+      {
+        "number": 9,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/9",
+        "head_ref": "inventory-branching-focus-closure",
+        "head_sha": "0fd8731791198407ea6191e5b624113a840437c6",
+        "base_ref": "main",
+        "base_sha": "89208b3babfe3888fc31769e81cf848a1fdbab23"
+      },
+      {
+        "number": 8,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/8",
+        "head_ref": "vehicle-indexed-relaxation-focus-runs",
+        "head_sha": "41c571ef6cd5cf3a03cb363017cbca6bb71e05fb",
+        "base_ref": "main",
+        "base_sha": "31a5095159ae6ddd667a4f08b3fe512b9a92772f"
+      },
+      {
+        "number": 7,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/7",
+        "head_ref": "adaptive-split-operation-budget",
+        "head_sha": "909e94b3a8db837b0319488b0fe3b864c83b491a",
+        "base_ref": "main",
+        "base_sha": "4ff38b05a1a88eae42d13ee73809c26048013707"
+      },
+      {
+        "number": 6,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/6",
+        "head_ref": "auto-incumbent-focused-intensification",
+        "head_sha": "ae40352d4b00751af87ee9eabfb4305790d00873",
+        "base_ref": "main",
+        "base_sha": "0b4a157df7ce324559dad5ab145887a4547d1c1c"
+      },
+      {
+        "number": 5,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/5",
+        "head_ref": "route-pool-compat-flow-focused-retry",
+        "head_sha": "f0845444a541839440d98f8cb5894551bdd52314",
+        "base_ref": "main",
+        "base_sha": "68fe5fb3ac0f8b2bbcffa65b962902db60f58e8a"
+      },
+      {
+        "number": 4,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/4",
+        "head_ref": "strengthen-support-cuts-incumbents",
+        "head_sha": "4b0afdabf1b38e50c0b7ae6de79f27c82be093b5",
+        "base_ref": "main",
+        "base_sha": "db20932d1690cb842bb5cabdc95f13e7bb7b81ad"
+      },
+      {
+        "number": 3,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/3",
+        "head_ref": "fix-range-incumbent-support-pruning",
+        "head_sha": "9b67470408232f36da24bbea04312a6fccc16778",
+        "base_ref": "main",
+        "base_sha": "7f2f86cf5cd9bfb55b11c1258c9e54e34240c21d"
+      },
+      {
+        "number": 2,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/2",
+        "head_ref": "fix-frontier-ledger-movement-bounds",
+        "head_sha": "8ad76dffeef83b928d811d9f2e4447b593cb9981",
+        "base_ref": "main",
+        "base_sha": "869fc9a546a9f05f23b8e7cc91dfd38f1dc31f02"
+      },
+      {
+        "number": 1,
+        "state": "closed",
+        "url": "https://github.com/yifanXovo/TailoredExact/pull/1",
+        "head_ref": "optimize-route-load-bpc-bounds",
+        "head_sha": "a270fca434ea2c50620e338a38b2a58535ace0c4",
+        "base_ref": "main",
+        "base_sha": "9c6ec4c6941e4246c93ecec8f5dd8f9b3c0c0e83"
+      }
+    ]
+  }
+}

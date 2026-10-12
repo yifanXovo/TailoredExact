@@ -260,3 +260,15 @@ results/unified_exact_round112/review/design01/production.diff -whitespace
 /scripts/*round116* -text whitespace=cr-at-eol
 /results/unified_exact_round116/**/*.log -whitespace
 /results/unified_exact_round116/engineering/reporting_reader.diff -whitespace
+
+# Preserve scientific/security publication bytes across Windows Git checkouts.
+/results/unified_exact_round117/** -text whitespace=cr-at-eol
+/results/unified_exact_round117/safe_evidence/*.part* binary
+/results/unified_exact_round116/source/** -text
+/results/unified_exact_round116/compact_evidence/** -text whitespace=cr-at-eol
+/results/unified_exact_round116/public_reproduction.md -text
+/scripts/publication_security.py -text
+/scripts/round117_*.py -text
+/scripts/round116_data.py -text
+/scripts/round116_delivery.py -text
+/tests/test_publication_security.py -text

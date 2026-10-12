@@ -1,0 +1,11 @@
+# Lightweight source/publication policy
+
+Use `publication_security.record_research_response` to store research-only static fields or visible HTML source/license text, sanitized source URLs, capture time, original response identity and the new safe-byte identity. Response headers follow `HEADER_ALLOWLIST`; request Authorization/Cookie and unrelated runtime/client configuration are never copied into a publication payload. The function does not fetch data or execute scripts. Historical R116 acquisition/generation entry points are closed; their original safe code bytes are retained solely as historical hash authorities.
+
+Before a commit, run `python scripts/publication_security.py --root . --staged --out <local-scan-receipt>`. This inspects index bytes, including all numbered parts of any staged carrier, rather than the current worktree or only src. It emits categories, paths, line/field locations and one-way fingerprints; actual credential values and reusable fragments are never emitted. Deleted historical lines are not printed for review.
+
+Before publishing a carrier, inspect its complete decompressed members. `round117_release.py pack` gates every member during its single replacement pass, and the original `round116_delivery.py pack` now gates its input inventory. A fresh-directory restore verifies the new hashes and is rescanned. Malformed, unsupported, incomplete or unsafe-path archives fail the gate; compression and splitting are not exceptions. Six finite regression tests use explicitly nonreal placeholders only.
+
+The gate targets the incident's credential/header/runtime patterns and common credential forms. It is a small local check, not an exhaustive secret-discovery or validity service. Immutable pre-R116 archives not descended from the webpage collection are outside this bounded incident's inheritance scope; this run does not attest all legacy archives or Git history as globally secret-free.
+
+Never bypass GitHub push protection or weaken repository security settings to make a push pass. A passing current-tree/index scan does not rotate a key, close an alert, purge reachable history or invalidate other people's clones. Those statuses are recorded independently. Tracked contaminated versions must be replaced or removed; .gitignore alone is insufficient.

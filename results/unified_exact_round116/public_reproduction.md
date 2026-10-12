@@ -1,46 +1,38 @@
-# Round116 current evidence restoration
+# Round116 evidence: safe publication supersedes the original carrier
 
-The scientific payload contains the frozen six inputs,24 fixed arm positions,
-36 pair positions, actual qualification and raw evidence, source/license/
-projection lineage,17 qualified formal endpoints, the one failed pending arm,
-and six unstarted positions. Its execution stage is BLOCKED. The signed carrier
-manifest lists every included byte; production executables, native DLLs,
-licenses, credentials and full historical performance carriers are excluded.
-The large cohort JSON and full native-claim CSV are carried losslessly inside
-that bundle; the smaller endpoint, reliability and pair tables are also directly
-available in the repository.
+Use `results/unified_exact_round117/safe_evidence/manifest.json` and the numbered
+parts it lists. The original R116 parts are removed from the current branch
+because they duplicate web client credentials and response cookies. Historical
+pack/export/restore receipts and original SHA256s remain historical identities;
+they do not validate the new safe bytes and are not instructions to download an
+old carrier. Git history and PR178 still require separate owner treatment.
 
-The standard-library reader works with Python3.12 without Gurobi. Join the
-indexed32MiB parts in manifest order, verify their SHA256s and extract the gzip
-tar into a new empty directory. Verify every file against the manifest. All
-saved absolute native paths are translated to that root by the existing
-portable reader. No original-worktree data fallback is allowed.
+The safe carrier preserves every scientific member of the original R116
+payload, including its V100 history, failed pending arm, original negative
+results, producer/verification clocks, routes, model records and paid fees.
+Explicit exceptions are the two HTML runtime bodies, request header metadata,
+nested snapshot receipts and publication engineering code/instructions. The
+station-information response and mathematical input data are unchanged.
+See the Round117 redaction manifest and scientific-integrity receipt.
 
-Use `scripts/read_round116_reporting.py --root <restored-root> --out <new-dir>`
-to reconstruct the current raw core. The original admitted reader is retained
-unchanged; the reporting copy only removes a duplicated `id` keyword in vector
-construction. The failed formal return audit is not patched. The exact diff
-and actual original reporting failure are in `engineering/reporting_reader.diff`
-and `engineering/reconstruction01_failure.txt`.
+From a checkout of the safe branch, run:
 
-`round116_report.py organize` separates formal and H100 qualification tables.
-`round116_analysis.py` recomputes exact inventory/objective components from
-sealed existing fleets; it neither constructs routes nor strengthens formal
-certificates. `round116_source_check.py` regenerates all six input bytes from
-the raw-mapped projected source table. Forward PROJ was exercised during source
-preparation; portable restoration checks the saved transformation contract,
-inverse checks and serialization rather than independently rerunning PROJ.
+```text
+python scripts/round117_release.py restore --root <safe-checkout> --destination <new-empty-directory> --out <receipt-path>
+python <new-empty-directory>/scripts/round117_validate.py --root <new-empty-directory> --out <validation-directory>
+python scripts/publication_security.py --root <safe-checkout> --paths results/unified_exact_round117/safe_evidence --out <scan-path>
+```
 
-The actual one-export/one-empty-root restoration uses `round116_delivery.py`.
-`round116_restore_check.py` then reconstructs and compares raw and organized
-core, exact arithmetic, existing physical/Start summaries and source lineage.
-New engineering durations/timestamps are excluded from equality explicitly;
-measured producer/verification/total clocks and paid native fees are compared
-unchanged. Original files are used only as equality references. Output-only
-receipt routing preserves the archived receipts. No native optimization runs.
+Restore verifies the new manifest and part SHA256s, rejects unsafe archive paths,
+and verifies every restored file. Validation reads only that restored root,
+reconstructs four V20/V50 roles and their existing 16 observations/24 pairs,
+and preserves their numerical qualifications. It uses no contaminated HTML,
+old carrier, network, native solver, reference exporter or original-worktree
+fallback. It neither reruns the production algorithm nor attempts full V100
+model recovery. No new input files are generated.
 
-The public payload commit precedes actual export/restoration/review receipts.
-Those receipts and remote head/base/draft/OID observations are later, separate
-commits; they never claim to verify their own future commit. This is an
-implementer-authored separate restoration and review, not a third-party native
-reproduction. No next research round is automatically started.
+The source text extraction preserves license/discovery provenance while removing
+scripts and client configuration. Response headers use an explicit whitelist.
+Original SHA256s prove historical byte identities, not recoverability of removed
+secrets. The old R116 evaluation remains BLOCKED (18 starts,17 qualified arms,
+24/36 evaluable pairs); the four-role layer is descriptive evidence already seen.
