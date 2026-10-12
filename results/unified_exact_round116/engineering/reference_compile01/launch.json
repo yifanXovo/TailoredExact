@@ -1,0 +1,21 @@
+{
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\g++.exe",
+    "-std=c++17",
+    "-DEXACT_EBRP_ENABLE_GUROBI=1",
+    "-IE:\\codes\\ExactEBRP-round116\\include",
+    "-ID:/gurobi1302/win64/include",
+    "E:\\codes\\ExactEBRP-round116\\scripts\\round116_reference_batch.cpp",
+    "E:\\codes\\ExactEBRP-round112\\build\\research\\round112-paid-v1\\libexact_ebrp_core.a",
+    "-o",
+    "E:\\codes\\ExactEBRP-round116\\build\\research\\round116-reference\\Round116ReferenceBatch.exe"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-round116",
+  "compiler_SHA": "8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1",
+  "frozen_core_archive_SHA": "06103212261bea02bee620d0bcc6193a7acbc5c1fa73c679b59cc7d421a504fd",
+  "frozen_model_source": "d0014a7163e3996fe120471420e56b089c9715ae",
+  "production_PE_SHA_before": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+  "Optimize": 0,
+  "native_starts": 0,
+  "engineering": true
+}

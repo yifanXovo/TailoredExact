@@ -1,0 +1,17 @@
+Actual offline execution: D:\msys64\ucrt64\bin\python.exe scripts/read_round116.py
+--root E:\codes\ExactEBRP-round116 --out results/unified_exact_round116/reconstruction01
+Native starts:0. Native Optimize:0. Exit code:1.
+
+The admitted reader reached the primary six-role-vector construction after
+reconstructing the qualification/current arms and fixed pairs. It failed at
+scripts/read_round116.py:196 with:
+TypeError: dict() got multiple values for keyword argument 'id'
+
+The pair dictionary already contains id. The original admitted script remains
+unchanged at scripts/read_round116.py. The offline reporting copy removes only
+the duplicated keyword; no endpoint, proof, time, pair, admission or measurement
+predicate is changed. Its docstring distinguishes this new reporting version.
+The exact unified diff is reporting_reader.diff; a separate static audit checks
+that these are the only changes. Formal ENS-C verification remains failed and
+no further native arm is authorized. Reconstruction02 and the one actual
+restored-root reconstruction use the same corrected reporting copy.

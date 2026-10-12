@@ -1,0 +1,17 @@
+--- scripts/read_round116.py
++++ scripts/read_round116_reporting.py
+@@ -1,4 +1,4 @@
+-"""Current-only manifest reconstruction using the qualified R114/R115 predicates.
++"""Offline reporting repair of the retained, unchanged admitted reader.
+ 
+ No original-root fallback, native library, Optimize, new witness or new bound.
+ Cross-arm claims are reconciled separately for each exact input/physical role.
+@@ -193,7 +193,7 @@
+                 av=dict(a,complete_seconds=a['T_total']);cv=dict(c,complete_seconds=c['T_total']);secondary.append(dict(pair(av,cv),id=role['id'],main_clock='secondary_T_total'))
+         assert len(arms)==24 and len(pairs)==36
+         for X in ['ENS-C','M-B','P-S']:
+-            vector=[dict(id=r['id'],**next(v for v in pairs if v['id']==r['id'] and v['candidate']==X and v['control']=='P-GRB')) for r in read(out/'input_manifest.json')['roles']]
++            vector=[dict(next(v for v in pairs if v['id']==r['id'] and v['candidate']==X and v['control']=='P-GRB')) for r in read(out/'input_manifest.json')['roles']]
+             conclusions[X+'/P-GRB']=dict(six_role_vector=vector,denominator=6,eligible=sum(v['evaluable'] for v in vector),severe_losses=[v['id'] for v in vector if v['severe_regression']])
+         for X in ['ENS-C','M-B']:
+             vector=[next(v for v in pairs if v['id']==r['id'] and v['candidate']==X and v['control']=='P-S') for r in read(out/'input_manifest.json')['roles']]
