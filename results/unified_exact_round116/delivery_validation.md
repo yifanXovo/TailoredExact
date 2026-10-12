@@ -46,3 +46,15 @@ including qualification10/16 starts and632.3943288326263/1800 seconds.
 See `public_export_receipt.json`, `public_restore_receipt.json`,
 `public_reconstruction_comparison.json` and
 `review/whole_goal01/signed_review.json` for actual scopes and hashes.
+
+Draft PR178 was created and attached at
+https://github.com/yifanXovo/TailoredExact/pull/178 against the verified R115
+branch. The first actual remote observation verifies OPEN/Draft, head
+7a58592d9e80e362d73d6bd048a2eebef385bae9, base
+7eef812efb1bd3046c48e76ff6ac968de276a9b0 and362 required Git blob OIDs, including
+the four carrier parts and frozen inputs/helpers. Native source trees equal the
+base. The remotely recorded OIDs are compared with prepared Git blobs; remote
+carrier bytes are not downloaded or independently rehashed. This observation
+is publication_receipt.json and covers that prior head only. The final local
+observation follows the receipt push without creating a self-covering published
+receipt or modifying the scientific payload.
