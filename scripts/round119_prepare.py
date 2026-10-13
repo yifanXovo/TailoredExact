@@ -100,7 +100,7 @@ def prepare():
         original_evidence_tolerance=1e-7,signed_gap_preserved=True,deadline_not_reset=True,default_ENS_changed=False,
         no_extra_paid_child_probe=True,confirmation_only_after_all_four_original_admission_conditions=True,
         no_formal_retry_or_performance_revision=True,all_online_algorithm_work_in_T_produce=True))
-    (OUT/'measurement_policy_v2.md').write_text((ROOT/'results/unified_exact_round118/measurement_policy_v2.md').read_text().split('Budgets are')[0]+
+    (OUT/'measurement_policy_v2.md').write_text((ROOT/'results/unified_exact_round118/measurement_policy_v2.md').read_text(encoding='utf-8').split('Budgets are')[0]+
         '\nRound119 has four fixed three-arm groups, the last conditional. Total budgets are 40 starts/48000 outer seconds; qualification 12/2400. Every pending termination, returned-event check, transaction, new model/LP/MIP/Start and serialization is paid within the same absolute producer deadline. Post-seal verification creates no optimization evidence.\n',encoding='utf-8')
     write(OUT/'prospective_helper_freeze.json',dict(helpers=helpers(),source_bindings=bindings(),argv_SHA=sha(OUT/'argv_freeze.json'),PE_SHA=sha(PE)))
     print('fixed inputs, all argv, common final PE and helpers frozen; no native start')
