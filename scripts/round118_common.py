@@ -42,7 +42,7 @@ def fee_begin(label,children,cap,qualification):
     assert b['remaining_starts']>=children+1+(5 if future else 0)
     assert b['remaining_outer_seconds']>=cap+(21720 if future else 0)
     if qualification:
-        assert b['qualification_starts']+children+1<=8 and b['qualification_seconds']+cap<=1200
+        assert b['qualification_starts']+children+1<=11 and b['qualification_seconds']+cap<=1200
     d.mkdir(parents=True)
     write(d/'launch.json',dict(command=sys.argv,cwd=str(ROOT),wrapper_pid=os.getpid(),wrapper_creation_unix=creation,
         conservative_process_starts=children+1,declared_native_children=children,qualification=qualification,

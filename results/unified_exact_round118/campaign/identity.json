@@ -19,19 +19,19 @@
     "candidate_binary": "build/research/round118-inherited/ExactEBRP.exe",
     "candidate_binary_sha256": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8"
   },
-  "prereg_sha256": "09333e9eb1a3fad9c78fad1dd62795232053b52c5d15c231934a25f4e1b44979",
+  "prereg_sha256": "9d4a4764497c75b174a85f65be9febe71a2afd9073836d8ee0b6eea6cf6dd4e1",
   "protocol_path": "results/unified_exact_round118/protocol.json",
-  "runner_sha256": "b56d6843e7ead197a37de9cfbb41ea34ef3b981f694ea1bae30a04f5adccbf89",
+  "runner_sha256": "4c94f12c9bf7ad6c889e0f6b4549b0fa725f88a9d2c4871ed430af0eac9fd651",
   "helpers": {
     "scripts/analyze_round61.py": "fad9154b399dd9eb3463510f8480dd1e8a22974729902e0a25ec78a9ae551cce",
     "scripts/compare_round112_startup.py": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2",
     "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
     "scripts/publication_security.py": "bc9c79e8e30ae3d45fe584b3c85e07504bdb4227daa71d7008186553d2c0c759",
-    "scripts/qualify_round118.py": "3cdf41042d9e67e90a1a52dabe4951fe336a3e5f20dc95393f5c8b7ba07f742e",
-    "scripts/qualify_round118_post.py": "6768e4a357538b52044dc5ca2672608c6d405cc80aa66d00ece2b54784b77c53",
+    "scripts/qualify_round118.py": "9f1bdd74ec0b52ba0b4c5c8fa8b154f3150eae7244b5c514d341305eca9d0315",
+    "scripts/qualify_round118_post.py": "538f3bb3ccbd5aa1012d477023e129b24acec7115a1d6c420fca7f7ad1826fd1",
     "scripts/read_round113.py": "84f98aadd30681080af723d4f874f007f0222431f2fb15bffbd6b7fcfc716cc2",
     "scripts/read_round116.py": "ed5865c5011d239815000f1bf15c591eee8d9e8d933edd857f3a990762230d28",
-    "scripts/read_round118.py": "caf90266e9fb4768a67dfeda71718e129aa18ac6fd8ab19d704de8e080c3493a",
+    "scripts/read_round118.py": "d9a8e887f10abfb9bdead5b765d033316c96d6134b42163aeb37acdb5b16dbc7",
     "scripts/round100_campaign.py": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
     "scripts/round100_common.py": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca",
     "scripts/round100_idle.py": "093ced41cdae00ed1eab56fb6c1e94b9f22bacfac637da803b8e41ee06821639",
@@ -68,8 +68,8 @@
     "scripts/round115_common.py": "105efd354e72f46abc7fbb30b42949a5f8d6db5d4deb01d2c73f4eac6149d841",
     "scripts/round115_verify.py": "d225751afb1dfc7b29f20d6b1f231c8baed4d6b842ebed8fc0799bdd4523a001",
     "scripts/round118_call_logs.py": "dc7b9d0e75af4eea95f5a2e776095e671a57352959356e3501b490ec4f46eb9d",
-    "scripts/round118_campaign.py": "b56d6843e7ead197a37de9cfbb41ea34ef3b981f694ea1bae30a04f5adccbf89",
-    "scripts/round118_common.py": "0799355fe59408f21d811f8035af0117ed98100db64d90ef45fbfb2b41bb73f2",
+    "scripts/round118_campaign.py": "4c94f12c9bf7ad6c889e0f6b4549b0fa725f88a9d2c4871ed430af0eac9fd651",
+    "scripts/round118_common.py": "4a71ba06f6e3ee543cdf67bbb4ec048ac3baa5b22489649ea50cbea937ed9c02",
     "scripts/round118_data.py": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
     "scripts/round118_math.py": "baf9874b3e49fa4fab9074e0cc19acee5238aa0a48f7a114b729f7a48f586e8b",
     "scripts/round118_prepare.py": "f5e882eefe30b661be60595fe5acb570e399c81fc1f38649d8de8debf4105500",
@@ -773,5 +773,6 @@
     }
   ],
   "measurement_policy_SHA": "5eed39a3a41ee04472606e39d466b2d25fb18be14b0eba82d074878dc445bfb0",
-  "original_native_window_unchanged": true
+  "original_native_window_unchanged": true,
+  "qualification_status": "FINAL_ACTUAL_CLI_PENDING"
 }

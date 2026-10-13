@@ -16,7 +16,19 @@ def item(root,l,i,recs):
     value['view']=view;return value
 
 def finalize(root,value,final,recs):
-    with logs.activate(value.get('view')):return inherited.finalize_arm(root,value,final,recs)
+    with logs.activate(value.get('view')):arm=inherited.finalize_arm(root,value,final,recs)
+    if value['complete']:
+        if value['l']['id']=='N40-R1-S':
+            data=inherited.core.evidence.instance(root,value['l']['panel'])
+            assert sum(data['b'][1:])<sum(data['D'][1:]) and not value['ind']['own_exact_zero'],'positive-input own-zero requires input/stock replay investigation'
+        offset=read(value['d']/'native_end_receipt.json')['complete_seconds_until_native_end']-read(value['d']/'completion.json')['fully_observed_end_to_end_seconds']
+        hits=[w for w in value['ind']['witnesses'] if abs(w['F']-arm['U'])<=1e-7]
+        first=min(hits,key=lambda w:w['available']) if hits else None
+        record=recs['target_discovery'][-1]
+        record.update(target_objective=arm['U'],first_verified_target_record_sequence=first.get('sequence') if first else None,
+            target_record_available_upper_seconds=first['available']+max(0.,offset) if first else None,
+            target_record_source=first['source'] if first else None,open_endpoint_target_also_reported=True)
+    return arm
 
 def disposition(arms,pairs,H,complete,final):
     if not complete:return dict(execution_stage='BLOCKED',research_disposition=None,reason='incomplete required execution/evidence; no algorithm denial')
@@ -32,9 +44,9 @@ def disposition(arms,pairs,H,complete,final):
         M_B_P=primary['classification'],M_B_P_S=control['classification'],P_S_attribution_eligible=same['attribution_eligible'],
         ENS_loss_not_hidden_veto=True,default_ENS_changed=False,automatic_next_draw_or_extension=False)
 
-def rebuild(root,destination,qualification=False):
+def rebuild(root,destination,qualification=False,campaign_name=None):
     root=Path(root).resolve();out=root/'results/unified_exact_round118';dest=Path(destination);dest.mkdir(parents=True,exist_ok=False)
-    tick=time.perf_counter();camp=out/('qualification/cli01' if qualification else 'campaign');i=read(camp/'identity.json')
+    tick=time.perf_counter();camp=out/(campaign_name or ('qualification/cli01' if qualification else 'campaign'));i=read(camp/'identity.json')
     candidate=read(out/'candidate_identity.json');production=read(out/'production_identity.json')
     assert i['candidate_binary_sha256']==candidate['production_PE_SHA']==production['production_PE_SHA']
     assert i['dll_sha256']==candidate['DLL_SHA']==production['DLL_SHA'] and i['helpers']==candidate['helpers']
@@ -62,7 +74,11 @@ def rebuild(root,destination,qualification=False):
         lookup={a['arm']:a for a in arms}
         for A,C in inherited.PAIRS:
             a,c=lookup[A],lookup[C];h=next((h for h in same if h['candidate']==A),None) if C=='P-S' else None
-            pairs.append(dict(inherited.pair(a,c),id='N40-R1-S',main_clock='T_produce',
+            comparison=inherited.pair(a,c) if a['formal_protocol_qualified'] and c['formal_protocol_qualified'] else dict(
+                candidate=A,control=C,classification='UNEVALUABLE',evaluable=False,severe_regression=None,
+                basis='required execution/qualification missing',candidate_U=a.get('U'),control_U=c.get('U'),
+                candidate_gap=a.get('gap'),control_gap=c.get('gap'),certified_time_ratio=None)
+            pairs.append(dict(comparison,id='N40-R1-S',main_clock='T_produce',
                 candidate_proof_evidence=a['proof_evidence'],control_proof_evidence=c['proof_evidence'],
                 backend_attribution_eligible=h['attribution_eligible'] if h else None,
                 backend_attribution_reason=h['attribution_reason'] if h else None))

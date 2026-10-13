@@ -25,7 +25,12 @@ def log_cases(q,cases):
         chain=audit.return_chain(ROOT,l,d,j,r,read(d/'completion.json'));claims=audit.claims_for(l,j,chain,r)
         original=read(d/'native_claims.json');assert claims==original
         proofs=core.returned_native_proofs(ROOT,j,core.evidence.controller_tables(d,r))
+        ind=audit.independent(ROOT,l,d,j,r,read(d/'completion.json'),chain)
+        contracts=audit.rejected_mandatory(ROOT,l,d,j,r,chain,ind,dict(rejections=[dict(call=1,reason='NONREAL-injected-claim')]))
+        assert len(contracts)==len(j['calls'])
     cases.append(dict(case='safe_V20_actual_single_segments_old_claim_fields_equal',calls=len(view['actual']),claims=len(claims),returned_proofs=len(proofs),passed=True))
+    cases.append(dict(case='rejected_path_actual_models_Starts_LP_and_MIP_segment_checks',passed=True,
+        synthetic_rejection_dispatch=True,no_actual_old_claim_revoked=True))
     context=models.ArmModels()
     try:
         for c in j['calls'].values():
@@ -88,8 +93,9 @@ def lifecycle_cases(q,cases):
         for key in ['routes','objective','G','P']:r[key]=own[key]
         r.update(status='startup_deadline',strict_certified_original_problem=False,lower_bound=0.,upper_bound=own['objective'],
             final_UB=own['objective'],initial_heuristic_UB=own['objective'],process_shutdown_margin_seconds=30,process_return_code=0,
-            gurobi_optimize_count=0,gurobi_solution_count=0,gurobi_solver_finalization_reached=False)
-        for key in ['gurobi_obj_bound_available','gurobi_obj_bound_c_available','native_mip_best_bound_available','native_mip_objective_available']:r[key]=False
+            gurobi_optimize_count=0,gurobi_solution_count=0,gurobi_solver_finalization_reached=False,
+            gurobi_status=0,native_mip_status_code=0,gurobi_lifecycle_valid=False)
+        for key in ['gurobi_obj_val_available','gurobi_obj_bound_available','gurobi_obj_bound_c_available','native_mip_best_bound_available','native_mip_objective_available']:r[key]=False
         events=[copy.deepcopy(sourceobs[0]['payload']),copy.deepcopy(sourceobs[1]['payload'])];times=[.8,.9]
         if branch=='mapped_not_started':
             for src in source.glob('native.log.round112.start*'):shutil.copyfile(src,d/src.name)

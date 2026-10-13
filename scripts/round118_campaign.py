@@ -87,10 +87,12 @@ def billed(name,label,qualification=False):
         assert not (camp/'summary.jsonl').exists()
         if qualification:
             from qualify_round118 import qualify_in_process
-            qualify_in_process('finite03')
+            qualify_in_process('finite05')
         if not qualification:
             gate=read(OUT/'review/performance_admission.json');assert gate['decision']=='ACCEPT'
             assert gate['candidate_identity_SHA']==sha(OUT/'candidate_identity.json') and gate['helpers']==helpers()
+            hfee=OUT/'fees'/gate['H100_fee_label'];closed=read(hfee/'receipt.json')
+            assert closed['actual_exit_observed'] and closed['exit_code']==0 and closed['actual_native_children']==2
         for n,l in enumerate(i['launches'],1):
             arm_tick=tick if n==1 else time.perf_counter();armunix=read(fee/'launch.json')['wrapper_creation_unix'] if n==1 else time.time()
             check_identity();assert not Path(l['destination']).exists() and sha(ROOT/l['panel']['input_path'])==l['panel']['input_sha256']
@@ -103,6 +105,10 @@ def billed(name,label,qualification=False):
             if qualification:assert time.perf_counter()-tick<=cap
         if qualification:write(camp/'qualification_trailer.json',dict(passed=True,normal_returns=count,production_PE_SHA=PE_SHA,
             helpers=helpers(),inside_outer_clock=True,not_performance=True))
+        if qualification:
+            from qualify_round118_post import admit_in_process
+            admit_in_process(name,label,'post02')
+            assert time.perf_counter()-tick<=cap
         code=0
     except BaseException:
         (fee/'failure.txt').write_text(traceback.format_exc(),encoding='utf-8');raise

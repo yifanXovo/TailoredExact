@@ -93,7 +93,7 @@
   "nominal_seconds": 21600,
   "maximum_starts": 20,
   "maximum_outer_seconds": 28000,
-  "qualification_maximum_starts": 8,
+  "qualification_maximum_starts": 11,
   "qualification_maximum_seconds": 1200,
   "qualification_plan": {
     "finite_replay": {
@@ -146,14 +146,10 @@
   "no_performance_retry": true,
   "no_additional_input_or_seed": true,
   "qualification_final_plan": {
-    "failed_finite_drivers": [
-      "finite01",
-      "finite02"
-    ],
-    "reference_starts": 2,
-    "final_finite_inside_H100_wrapper": true,
-    "H100_wrapper_children_starts": 3,
-    "post_admission_starts": 1,
-    "total_conservative_starts": 8
-  }
+    "already_paid_starts": 8,
+    "additional_H100_wrapper_and_children": 3,
+    "finite_post_admission_in_same_wrapper": true,
+    "final_starts": 11
+  },
+  "budget_authorization_SHA": "c3d344c5d2140ab0962d99a5ed21375922a2d07dc668523bd912b0465762a680"
 }
