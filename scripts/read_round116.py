@@ -13,6 +13,7 @@ from round114_claims import reconcile,qualify_endpoint
 from round115_common import clock_evidence as inherited_clock
 from compare_round112_startup import compare as compare_H
 from read_round113 import native_log
+import round118_call_logs as call_logs
 csv.field_size_limit(64*1024*1024)
 ROUND='results/unified_exact_round116'
 PAIRS=[('ENS-C','P-GRB'),('M-B','P-GRB'),('P-S','P-GRB'),('ENS-C','P-S'),('M-B','P-S'),('M-B','ENS-C')]
@@ -76,7 +77,7 @@ def reconstruct_arm(root,l,i,recs):
             lower_g=call['lower_g'],upper_g=call['upper_g'],cutoff=call['cutoff'],settings=call['settings'],
             journal_returned=call['call'] in j['returned_ids'],independently_verified_return=call['call'] in chain['actual'],
             explicit_not_started=call['call'] in j['not_started_ids'],
-            **(native_log(root,call['native_log_path']) if call['call'] in chain['actual'] else dict(Optimize=False,not_started=True))))
+            **(native_log(root,call['native_log_path'],call_logs.call_text(root,call,call['call'])) if call['call'] in chain['actual'] else dict(Optimize=False,not_started=True))))
     controller=core.evidence.controller_tables(d,r)
     for k,rows in controller.items():recs[k].extend(dict(label,**q) for q in rows)
     recs['split_exposure'].append(dict(label,actual_atomic_split_events=sum(q.get('event')=='atomic_split' for q in controller['controller_events']),hidden_cause='unknown'))

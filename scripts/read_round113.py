@@ -34,8 +34,8 @@ def clock(d,l,formal):
     assert c['returncode']==0 and c['stop_reason']=='normal_return' and c['within_cap']
     return t
 
-def native_log(root,path):
-    path=portable(root,path);text=path.read_text(encoding='utf-8');stats={}
+def native_log(root,path,text_override=None):
+    path=portable(root,path);text=path.read_text(encoding='utf-8') if text_override is None else text_override;stats={}
     size=re.search(r'Optimize a model with (\d+) rows, (\d+) columns',text)
     if size:stats.update(rows=int(size[1]),columns=int(size[2]))
     ending=re.findall(r'Explored (\d+) nodes \((\d+) simplex iterations\) in ([-+0-9.eE]+) seconds \(([-+0-9.eE]+) work units\)',text)

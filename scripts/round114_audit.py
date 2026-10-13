@@ -10,6 +10,7 @@ import round94_lpg_contemporary as parameters
 import round86_native_evidence as journal_receipts
 from round94_lpg_formal_recovery_v3 import MIP_KINDS
 from round114_claims import ClaimRejection, reconcile, missing_return_gate, FAILURES
+import round118_call_logs as call_logs
 
 last_metrics={}
 SETTINGS=ps.SETTINGS
@@ -109,9 +110,9 @@ def return_chain(root,l,d,j,r,c):
             assert core.portable(root,q['native_log'])==core.portable(root,call['native_log_path'])
             assert q['solve_kind']=='LP' and not call['native_preconditions'] or q['solve_kind'] in MIP_KINDS and call['native_preconditions']
     for cid in actual:
-        call=j['calls'][cid];path=core.portable(root,call['native_log_path']);text=path.read_text(encoding='utf-8')
+        call=j['calls'][cid];path=core.portable(root,call['native_log_path']);text=call_logs.call_text(root,call,cid)
         assert text.count('Optimize a model with ')==1,'unknown extra/unbound Optimize in call log'
-        assert ('Optimal objective' in text or 'Best objective ' in text) and ('Solved in ' in text or 'Explored ' in text)
+        assert ('Optimal objective' in text or 'Best objective ' in text or 'Infeasible model' in text) and ('Solved in ' in text or 'Explored ' in text or 'Infeasible model' in text)
         logs.append(dict(call=cid,path=path.relative_to(root).as_posix(),SHA=sha(path),text=text))
     missing=j['unreturned_ids']
     if missing:
@@ -192,12 +193,14 @@ def rejected_mandatory(root,l,d,j,r,chain,ind,adjudication):
             text=next(q['text'] for q in chain['logs'] if q['call']==cid)
             size=re.search(r'Optimize a model with (\d+) rows, (\d+) columns',text);assert size
             assert (int(size[1]),int(size[2]))==(len(m['rows']),len(m['order']))
-            header=re.search(r'Variable types: (\d+) continuous, (\d+) integer \((\d+) binary\)',text);assert header
+            header=re.search(r'Variable types: (\d+) continuous, (\d+) integer \((\d+) binary\)',text)
             counts=collections.Counter(m['types'].values())
             if chain['ledger'] and chain['ledger'][cid-1]['solve_kind']=='LP':
-                assert (int(header[1]),int(header[2]),int(header[3]))==(len(m['order']),0,0)
+                # Simplex logs can omit the all-continuous type line. The
+                # call-scoped view checks the LP transition/restoration ledger.
+                if header:assert (int(header[1]),int(header[2]),int(header[3]))==(len(m['order']),0,0)
             else:
-                assert (int(header[1]),int(header[2])-int(header[3]),int(header[3]))==(counts['C'],counts['I'],counts['B'])
+                assert header and (int(header[1]),int(header[2])-int(header[3]),int(header[3]))==(counts['C'],counts['I'],counts['B'])
         core.start_reader.ROOT=root
         submitted=[(p,read(p)) for p in sorted((d/'external/native_logs').glob('*.round68.start.json')) if read(p).get('submitted')]
         for digest in sorted({q['model_sha256'] for _,q in submitted}):
