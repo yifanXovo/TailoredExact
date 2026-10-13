@@ -13,7 +13,7 @@ ROUND='results/unified_exact_round118'
 FORBIDDEN={'.exe','.dll','.lic','.pyd','.a','.whl','.pyc'}
 
 def closure(root):
-    pending=['read_round118','round118_release'];names=set()
+    pending=['read_round118','round118_release','round118_finish_report'];names=set()
     while pending:
         name=pending.pop();path=root/'scripts'/(name+'.py')
         if name in names or not path.is_file():continue
@@ -47,7 +47,7 @@ def inventory(root):
     # predecessor result bundles or source web runtime material.
     r117=root/'results/unified_exact_round117'
     files.update(r117/name for name in ['final_report.md','security_incident.md','safe_restore.md',
-        'scope_contract.md','paper_scope_and_evidence.md','next_experiment_spec.md'])
+        'scope_contract.json','paper_scope_and_evidence.md','next_experiment_spec.md'])
     excluded={'compact_evidence','delivery','reports_blocked','safe_dependency_receipt.json'}
     later={'initial_publication_observation.json','public_pack_receipt.json','public_dependency_closure.json'}
     for path in out.rglob('*'):
