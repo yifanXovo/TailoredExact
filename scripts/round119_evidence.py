@@ -24,7 +24,7 @@ def extend(fn):
 def extension():
     changed=[]
     for module,names in [(audit,['return_chain','rejected_mandatory','adapter']),
-        (old_campaign,['adapter']),(core,['endpoint'])]:
+        (old_campaign,['adapter']),(core,['endpoint']),(logs,['build'])]:
         for name in names:
             original=getattr(module,name);changed.append((module,name,original));setattr(module,name,extend(original))
     old=models.ArmModels;models.ArmModels=ArmModels
@@ -115,7 +115,8 @@ def verify(l,i):
             else:fact,m=context.model_contract(ROOT,l['panel'],path,l['arm'])
             contracts.append(dict(fact,call=cid,scope=context.model_scope_contract(c,m,l['panel'])))
             if len(context.models)>2:context.models.clear()
-        context.clear();view=logs.build(ROOT,l,d,j,read(d/'result.json'))
+        context.clear()
+        with extension():view=logs.build(ROOT,l,d,j,read(d/'result.json'))
     finally:context.clear()
     write(d/'round119_model_contracts.json',dict(contracts=contracts,actual_M_B_quantity_type='C' if l['arm'] in ['M-B','MB-PC'] else None,
         independent_ENS_Q_flag=False,original_integer_tolerance_and_physical_replay=True))
