@@ -8,6 +8,8 @@
 | R114 claim/return policies + R108 model/cover reader | Healthy and rejected call checks | Explicit byte segment, immutable model and serial ledger binding; unresolved rejects |
 | R94 preregistration common fields | Legacy import-only static dependency | Current safe Git blob only; no old campaign launch |
 | Frozen R112 core archive and compiler | Read-only single-input cold exporter | 0 Optimize; main PE not compiled |
-| New finite and post/admission drivers | One batch, H100 P-S then M-B | 8 starts/1200 maximum; no V40 H pilot |
+| New finite and post/admission drivers | One batch, H100 P-S then M-B | 13 starts (explicit8→11→13 authorizations)/1200 maximum; no V40 H pilot |
 
 Historical helper SHA values remain historical code identities. Current repaired readers and the new adapter receive new identities. R117 alert1 remains open/validity unknown absent a later issuer/owner receipt. R116 positions19–24 stay canceled and position18 historical BLOCKED.
+
+Sealed H100 P-S was produced under the retained cli02 identity. Final current read-only postqualification is separately bound; cli03 starts only M-B. Both failed wrappers and unused declared child slots remain charged.

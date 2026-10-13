@@ -93,7 +93,7 @@
   "nominal_seconds": 21600,
   "maximum_starts": 20,
   "maximum_outer_seconds": 28000,
-  "qualification_maximum_starts": 11,
+  "qualification_maximum_starts": 13,
   "qualification_maximum_seconds": 1200,
   "qualification_plan": {
     "finite_replay": {
@@ -146,10 +146,14 @@
   "no_performance_retry": true,
   "no_additional_input_or_seed": true,
   "qualification_final_plan": {
-    "already_paid_starts": 8,
-    "additional_H100_wrapper_and_children": 3,
+    "already_paid_starts": 11,
+    "additional_wrapper_and_MB_child": 2,
+    "sealed_PS_readonly_reuse_explicitly_authorized": true,
     "finite_post_admission_in_same_wrapper": true,
-    "final_starts": 11
+    "final_starts": 13,
+    "additional_outer_cap_seconds": 450,
+    "original_failed_slots_not_refunded": true
   },
-  "budget_authorization_SHA": "c3d344c5d2140ab0962d99a5ed21375922a2d07dc668523bd912b0465762a680"
+  "budget_authorization_SHA": "c3d344c5d2140ab0962d99a5ed21375922a2d07dc668523bd912b0465762a680",
+  "budget_authorization_13_SHA": "c22557fc5104878ff2d736cad53b793d127a26e4c4f74e8245e046ad52e87034"
 }
