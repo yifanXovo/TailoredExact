@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round118\scripts\qualify_round118.py", line 189, in run
+    check_identity();log_cases(q,cases);lifecycle_cases(q,cases);classification_cases(cases);clock_cases(q,cases)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round118\scripts\qualify_round118.py", line 116, in lifecycle_cases
+    life=ps.ps_journal(ROOT,p,d,observations);result=ps.validate_ps_lifecycle(ROOT,l,d,life,r,comp,core.full_fleet(ROOT,p,own))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round118\scripts\round114_ps.py", line 110, in validate_ps_lifecycle
+    assert '--round112-ens-start-compact' in l['command'] and '--plain-baseline' in l['command']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

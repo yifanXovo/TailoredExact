@@ -16,13 +16,14 @@ last_metrics=None
 class ArmModels:
     def __init__(self):
         self.version=(PARSER_VERSION,core.sha(core.__file__),CONTRACT_VERSION,core.sha(__file__))
-        self.models={};self.by_id={};self.paths={};self.metrics=collections.defaultdict(float)
+        self.models=collections.OrderedDict();self.by_id={};self.paths={};self.metrics=collections.defaultdict(float)
 
     def data(self,path):
         tick=time.perf_counter();digest=core.sha(path)
         self.metrics['content_identity_check_seconds']+=time.perf_counter()-tick
         key=(digest,self.version)
         if key in self.models:
+            self.models.move_to_end(key)
             self.metrics['pure_model_cache_hits']+=1
             self.paths[id(self.models[key][0])]=(path,digest)
             return digest,self.models[key]
@@ -45,6 +46,12 @@ class ArmModels:
         self.metrics['single_column_classification_seconds']+=time.perf_counter()-tick
         data=(model,counter,quantities,quantity_suffix,states,modes)
         self.models[key]=data;self.by_id[id(model)]=data;self.paths[id(model)]=(path,digest)
+        # R118's read-only audit may encounter many distinct saved tree models.
+        # Retain two pure parses, without caching legality or weakening a check.
+        if len(self.models)>2:
+            _,evicted=self.models.popitem(last=False)
+            self.by_id.pop(id(evicted[0]),None);self.paths.pop(id(evicted[0]),None)
+            self.metrics['bounded_model_cache_evictions']+=1
         self.metrics['pure_model_cache_misses']+=1
         return digest,data
 

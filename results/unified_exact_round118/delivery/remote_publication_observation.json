@@ -1,0 +1,171 @@
+{
+  "observed_utc": "2026-10-13 13:26:35 UTC",
+  "observed_commit_only": "73a9f9163603afc86a206cbd62bb44d26a3dad8b",
+  "scientific_payload_commit": "b443aff681a894abeb1bd7b1a2ae4bfc7a3add6d",
+  "pull_request": {
+    "number": 180,
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/180",
+    "title": "Round118: confirm frozen backends on one positive-objective V40 instance",
+    "state": "OPEN",
+    "isDraft": true,
+    "headRefName": "codex/round118-v40-positive-objective-confirmation",
+    "headRefOid": "73a9f9163603afc86a206cbd62bb44d26a3dad8b",
+    "baseRefName": "codex/round117-security-v60-scope",
+    "baseRefOid": "71ccd3b75ca8d713018f4edd222cd4c5f0a0b962"
+  },
+  "base_pull_request": {
+    "headRefName": "codex/round117-security-v60-scope",
+    "headRefOid": "71ccd3b75ca8d713018f4edd222cd4c5f0a0b962",
+    "isDraft": true,
+    "number": 179,
+    "state": "OPEN",
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/179"
+  },
+  "pr_head_equals_local_HEAD": true,
+  "base_head_equals_frozen_R117": true,
+  "necessary_blob_count": 22,
+  "all_necessary_blob_OIDs_equal": true,
+  "tree_query_scope": "Initial whole-repository recursive response was truncated. Necessary paths were then resolved through complete nonrecursive root/results/scripts/reference nodes and complete Round118 subtree responses. Only the resolved complete-path observations are used.",
+  "resolved_trees": {
+    "root": {
+      "sha": "73a9f9163603afc86a206cbd62bb44d26a3dad8b",
+      "tree": [
+        {
+          "path": "reference",
+          "sha": "7a5284128ba289b414631c01056d466e6f216e8d",
+          "type": "tree"
+        },
+        {
+          "path": "results",
+          "sha": "9868ac73ae4375ae1611aa84234d80fefca94d9b",
+          "type": "tree"
+        },
+        {
+          "path": "scripts",
+          "sha": "71e3ce31a91507abcc3bed34eefb973c3ca99254",
+          "type": "tree"
+        }
+      ],
+      "truncated": false
+    },
+    "round118": "f5d5039cf4667d4b048cba44e95c483191420fb7",
+    "unique_input": "8cd43ddf9a00eee65a363b740bc0dc74b87e2c6b"
+  },
+  "necessary_blobs": [
+    {
+      "path": "reference/round118_positive/N40-R1-S.txt",
+      "sha": "33d482625d00365d409f74086b8e0a067d650f58",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/compact_evidence/evidence.tar.gz.part001",
+      "sha": "a851fe0d55c09c621e1966ed1d5ebe8ce11b4f67",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/compact_evidence/manifest.json",
+      "sha": "4bb62922247ba489039dcda41c8b21b1e59b2d18",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/delivery/independent_review.md",
+      "sha": "f0272a067773982eae9ab3f5f8aa34e683fd01d3",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/delivery/public_export_receipt.json",
+      "sha": "67e619243dce7b489e127c2aa6f9791ce5f0856e",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/delivery/public_restore_receipt.json",
+      "sha": "2898213e53c045de5befac32eadce21c443bbe7c",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/delivery/restored_check.json",
+      "sha": "5fbd07e958b818c1d2b75b2c5166f96d5f0d5591",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/final_report.md",
+      "sha": "8ab848e0e7ae83143836d032c783c8273553f326",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/generation_receipt.json",
+      "sha": "c6cdfb66f85feb731179502d03a28c2dd92081f1",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/next_experiment_spec.md",
+      "sha": "bad246c73ee20726a243593eb4b6d4073c5001cc",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/paper_algorithm_spec.md",
+      "sha": "65464b1431f8d8dc6f8418f2ea3387b261fef1f6",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/paper_claim_evidence_map.md",
+      "sha": "b454a9f41c91755dc8c8d041ea9131d1f4669c88",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/positive_objective_proof.md",
+      "sha": "a3d4c4d9055e692c10c0a9a663db06691b5f815a",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/qualification/final/identity.json",
+      "sha": "2bb4c335676d8846fe3759982cf87129e66dac7f",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/reconstruction01/current_core.json",
+      "sha": "144de64171b169ea360db69eec9d5cdad3d5cd25",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/reconstruction01/pairs.csv",
+      "sha": "6d948c6ddf9094827d139cddf84ba28ed6bd6e31",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/RESUME.md",
+      "sha": "e0ac5a26990d8cac61593cd1d1d10fcadbab083b",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/review/performance_admission.json",
+      "sha": "6e603e3aa6d8df5bc3c1aeeac96b8275d91bf228",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/scientific_closeout.json",
+      "sha": "1ddbdea2e0bda53991a790eeb8b09c3e4b5209bb",
+      "type": "blob"
+    },
+    {
+      "path": "results/unified_exact_round118/source_recipe.json",
+      "sha": "09dda1d3acb07b3369842ecf680a8b5021850f37",
+      "type": "blob"
+    },
+    {
+      "path": "scripts/round118_call_logs.py",
+      "sha": "5b6a835122d852d88409921d0d2f05b751b7413a",
+      "type": "blob"
+    },
+    {
+      "path": "scripts/round118_release.py",
+      "sha": "6cbb422fb802ef6bb48a4c0a73aa9b54f6996a45",
+      "type": "blob"
+    }
+  ],
+  "publication_method": "Normal push of the stacked branch and gh pr edit --body-file; no force push, merge, notification, alert closure or permission change.",
+  "receipt_scope": "This receipt covers only the observed earlier commit and the listed necessary blobs. It does not claim verification of its own future commit or subsequent metadata commits.",
+  "new_scientific_execution": false,
+  "native_starts": 0,
+  "Optimize": 0
+}

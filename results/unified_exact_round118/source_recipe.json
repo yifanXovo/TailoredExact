@@ -1,0 +1,68 @@
+{
+  "round": 118,
+  "frozen_UTC": "2026-10-13T04:30:21.881821+00:00",
+  "base": "71ccd3b75ca8d713018f4edd222cd4c5f0a0b962",
+  "role": {
+    "number": 1,
+    "id": "N40-R1-S",
+    "V": 40,
+    "M": 4,
+    "geometry": "regional",
+    "replicate": 1,
+    "inventory": "shortage",
+    "Q_vector": [
+      20,
+      25,
+      35,
+      40
+    ],
+    "Q_class": "X",
+    "T_seconds": 10800,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "gurobi_seed": 0,
+    "cap_seconds": 5400,
+    "method_order": [
+      "P-GRB",
+      "M-B",
+      "P-S",
+      "ENS-C"
+    ],
+    "panel_kind": "positive_confirmation"
+  },
+  "family": "round118-v40-positive-proof-v1|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "selection_id": "cabi_r118_V40_regional_r1",
+  "raw_source_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "table_SHA": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+  "adapter_SHA": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+  "generation_dependencies": {
+    "scripts/round118_data.py": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+    "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
+    "scripts/round109_data.py": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5"
+  },
+  "geographic_regimes": [
+    "compact",
+    "regional"
+  ],
+  "replicates": [
+    1,
+    2
+  ],
+  "anchor_slot": 2,
+  "selection": "four original anchors; regional/r1; 2V nearest pool; original farthest-first and ties",
+  "target_fraction": [
+    0.44,
+    0.56
+  ],
+  "stock": "max(0,sum(D)-max(V,floor(.12*sum(D)+.5)))",
+  "original_round_clip_correction_sign_repair_weights_and_centroid": true,
+  "min_ratio_is_compatibility_only": true,
+  "production_distances": "C++ Parser Euclidean/1.5 from serialized points",
+  "source_table_reprojection": false,
+  "new_network": false,
+  "generated_input_count": 0,
+  "target_total_station_set_optimum_H_LP_MIP_and_runtime_unknown_at_freeze": true,
+  "no_difficulty_filter": true,
+  "no_resampling": true
+}

@@ -1,0 +1,23 @@
+{
+  "observed_UTC": "2026-10-13T05:24:28.527410+00:00",
+  "actual_H100_PS_Optimize": 1,
+  "normal_return": true,
+  "producer_receipt_SHA": "81a0e3c600e2226eb2e0e9749e5269314f3bb6fba686612899cd0f834f861f1f",
+  "producer_within_cap": true,
+  "blocker": "new offline assertion incorrectly compared pre-Start API fingerprint with post-Start Optimize-log fingerprint",
+  "actual_pre_Start_API_Fingerprint": 768952698,
+  "Optimize_log_Fingerprint": "0xbad581a7",
+  "native_before_matrix_SHA": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+  "native_after_matrix_SHA": "1257824337126ebdb9db18b4e67cbaa431966836edba05d8a7bcf81a97ab249c",
+  "same_matrix_bytes": true,
+  "mathematical_model_changed": false,
+  "qualified_endpoint": false,
+  "M_B_actual_starts": 0,
+  "formal_actual_starts": 0,
+  "official_primary_source": "https://support.gurobi.com/hc/en-us/articles/41809886403217-Why-is-my-model-fingerprint-different",
+  "correction": "compare fingerprints only at same attribute state; retain full original matrix/column/type/bound/objective/Start checks",
+  "no_native_or_performance_retry": true,
+  "no_call_model_scope_relaxation": true,
+  "qualification_starts_paid": 11,
+  "qualification_outer_seconds_paid": 624.9858250617981
+}

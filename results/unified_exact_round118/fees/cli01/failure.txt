@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round118\scripts\round118_campaign.py", line 90, in billed
+    qualify_in_process('finite03')
+  File "E:\codes\ExactEBRP-round118\scripts\qualify_round118.py", line 189, in qualify_in_process
+    check_identity();log_cases(q,cases);lifecycle_cases(q,cases);classification_cases(cases);clock_cases(q,cases)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round118\scripts\qualify_round118.py", line 117, in lifecycle_cases
+    life=ps.ps_journal(ROOT,p,d,observations);result=ps.validate_ps_lifecycle(ROOT,l,d,life,r,comp,core.full_fleet(ROOT,p,own))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round118\scripts\round114_ps.py", line 169, in validate_ps_lifecycle
+    assert r['gurobi_status']==0 and r['native_mip_status_code']==0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

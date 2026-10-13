@@ -272,3 +272,17 @@ results/unified_exact_round112/review/design01/production.diff -whitespace
 /scripts/round116_data.py -text
 /scripts/round116_delivery.py -text
 /tests/test_publication_security.py -text
+
+# Round118 scoped bytes; inherited rules above remain unchanged.
+scripts/round118*.py text eol=lf
+scripts/qualify_round118*.py text eol=lf
+scripts/read_round118.py text eol=lf
+scripts/round118_reference.cpp text eol=lf
+reference/round118_positive/** text eol=lf
+results/unified_exact_round118/**/*.json text eol=lf
+results/unified_exact_round118/**/*.md text eol=lf
+results/unified_exact_round118/**/*.csv text eol=lf
+results/unified_exact_round118/**/*.tsv text eol=lf
+results/unified_exact_round118/compact_evidence/*.part* -text
+# Frozen native/producer outputs retain their original Windows line endings.
+results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol

@@ -11,6 +11,7 @@ import round107_reader as evidence
 import round99_pure_start_audit as start_reader
 import round108_decisions as decision
 import round108_scopes as scopes
+import round118_call_logs as call_logs
 
 read=evidence.read;sha=evidence.sha;rows=evidence.rows;write=evidence.write
 table=evidence.table;portable=evidence.portable;close=evidence.close
@@ -108,7 +109,13 @@ def returned_native_proofs(root,j,controller):
         assert portable(root,row['native_log'])==portable(root,call['native_log_path']), 'returned proof must use this call native log'
         if not call['native_preconditions']:continue
         assert row['solve_kind']!='LP'
-        path=portable(root,row['native_log']);native_text=path.read_text(encoding='utf-8')
+        path=portable(root,row['native_log']);native_text=call_logs.call_text(root,call,call_id)
+        if row['native_status']=='INFEASIBLE':
+            assert 'Infeasible model' in native_text or 'Model is infeasible' in native_text
+            proofs.append(dict(call=call_id,lo=call['lower_g'],hi=call['upper_g'],L=call['cutoff'],cutoff=call['cutoff'],
+                sequence=j['return_sequences'][call_id],source='linked_returned_infeasible_original_integer_model_cutoff',
+                native_status=row['native_status'],native_log=path.relative_to(root).as_posix(),native_log_SHA=sha(path),full_original=False))
+            continue
         printed=re.findall(r'Best objective [^,]+, best bound ([^,]+), gap',native_text)
         if row['native_status']=='OPTIMAL':assert 'Optimal solution found' in native_text and printed
         if not printed:continue
@@ -128,7 +135,7 @@ def cold_returned_bound(root,d,j,r):
     assert call['full_original'] and call['native_preconditions'] and call_id in j['returned_ids']
     path=portable(root,call['native_log_path']);assert path==(d/'native.log').resolve()
     assert call['model_sha256']==sha(d/'compact.lp')
-    native_text=path.read_text(encoding='utf-8')
+    native_text=call_logs.call_text(root,call,call_id)
     if r['gurobi_status']==2:assert 'Optimal solution found' in native_text
     elif r['gurobi_status']==9:assert 'Time limit reached' in native_text
     elif r['gurobi_status']==11:assert 'Solve interrupted' in native_text
@@ -471,12 +478,12 @@ def rebuild(root,dest,qualification_only=False):
             proof_rows=ep['controller']['controller_native']
             actual_LPs=[q for q in proof_rows if q['solve_kind']=='LP']
             assert len(actual_LPs)==len(controller['controller_LP_status'])
-            LP_status_by_log={q['native_log']:s for q,s in zip(actual_LPs,controller['controller_LP_status'])}
+            LP_status_by_call={id(q):s for q,s in zip(actual_LPs,controller['controller_LP_status'])}
             if launch['arm']=='P-GRB':
                 proof_rows=[dict(model_sha256=sha(d/'compact.lp'),solve_kind='MIP',native_status='OPTIMAL' if r['gurobi_status']==2 else 'OPEN',native_log=str(d/'native.log'))]
                 assert 'Loaded user MIP start' not in (d/'native.log').read_text(encoding='utf-8')
-            for proof in proof_rows:
-                model=typed_models[proof['model_sha256']];log=portable(root,proof['native_log']);text=log.read_text(encoding='utf-8')
+            for proof_ordinal,proof in enumerate(proof_rows):
+                model=typed_models[proof['model_sha256']];log=portable(root,proof['native_log']);text=call_logs.ledger_text(root,proof,proof_ordinal,j)
                 size=re.search(r'Optimize a model with (\d+) rows, (\d+) columns',text)
                 assert size and (int(size[1]),int(size[2]))==(len(model['rows']),len(model['order']))
                 counts=collections.Counter(model['types'].values());native_counts=None
@@ -487,7 +494,7 @@ def rebuild(root,dest,qualification_only=False):
                     if proof['native_status']=='OPTIMAL':assert 'Optimal solution found' in text
                 elif proof['native_status']=='OPTIMAL':
                     objective=re.findall(r'Optimal objective\s+([-+0-9.eE]+)',text);assert objective
-                    status=LP_status_by_log[proof['native_log']]
+                    status=LP_status_by_call[id(proof)]
                     if int(status['terminal_valid']):
                         assert int(status['optimal']) and close(float(objective[-1]),float(status['lower_bound']))
                 elif proof['solve_kind']=='LP' and proof['native_status']=='INFEASIBLE':

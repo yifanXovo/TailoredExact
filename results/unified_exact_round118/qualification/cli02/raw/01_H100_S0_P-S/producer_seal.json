@@ -1,0 +1,1440 @@
+{
+  "required_SHA": {
+    "result.json": "faca4588f50f6123a3e883171e1387169692acd9327481ed5883bca49cb9a42b",
+    "completion.json": "38f25700f89d278747df8cc76801e4650aeee0c6640c53bb4bd61898a5744f74",
+    "observations.json": "7dbbaffe28adfc89ef837731a51503dbcca9c74fc46b3e728150a5eb45842253",
+    "phases.csv": "e2ff17de27dafa4e49171270ae7e495f330b48d1f99375b0e29dd465b7d9b550",
+    "production_checks.json": "279c5ec6cc39b08cb5f3bfedbf649a323e77399fdb7c42c04fd08df4cce14dec",
+    "progress_publication_receipt.json": "db9f6c3a957ef989af116b06f8eebf73cfdddde4949a81edad703c9e9f1b1069",
+    "native_end_receipt.json": "dd3aa11a090c05b3511dfc6f5b6303bfc520b1de20c2210d278e80188dd1e806"
+  },
+  "produced_files": [
+    {
+      "path": "affinity.json",
+      "bytes": 400
+    },
+    {
+      "path": "compact.lp",
+      "bytes": 288615
+    },
+    {
+      "path": "completion.json",
+      "bytes": 561
+    },
+    {
+      "path": "hga.csv.descent.csv",
+      "bytes": 12687
+    },
+    {
+      "path": "hga.csv.exchange/actual_distances.json",
+      "bytes": 8023
+    },
+    {
+      "path": "hga.csv.exchange/closure_0.csv",
+      "bytes": 1656
+    },
+    {
+      "path": "hga.csv.exchange/closure_0.csv.final.json",
+      "bytes": 614
+    },
+    {
+      "path": "hga.csv.exchange/closure_0.csv.initial.json",
+      "bytes": 622
+    },
+    {
+      "path": "hga.csv.exchange/events.jsonl",
+      "bytes": 296
+    },
+    {
+      "path": "hga.csv.exchange/final.json",
+      "bytes": 614
+    },
+    {
+      "path": "hga.csv.exchange/initial.json",
+      "bytes": 622
+    },
+    {
+      "path": "hga.csv.exchange/result.json",
+      "bytes": 215
+    },
+    {
+      "path": "hga.csv.joint.csv",
+      "bytes": 1816
+    },
+    {
+      "path": "hga.csv.joint_seed.csv",
+      "bytes": 179
+    },
+    {
+      "path": "journal/event_1.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_1.json",
+      "bytes": 333
+    },
+    {
+      "path": "journal/event_10.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_10.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_100.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_100.json",
+      "bytes": 203
+    },
+    {
+      "path": "journal/event_101.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_101.json",
+      "bytes": 203
+    },
+    {
+      "path": "journal/event_102.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_102.json",
+      "bytes": 203
+    },
+    {
+      "path": "journal/event_103.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_103.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_104.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_104.json",
+      "bytes": 931
+    },
+    {
+      "path": "journal/event_105.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_105.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_106.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_106.json",
+      "bytes": 931
+    },
+    {
+      "path": "journal/event_107.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_107.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_108.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_108.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_109.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_109.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_11.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_11.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_110.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_110.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_111.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_111.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_112.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_112.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_113.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_113.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_114.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_114.json",
+      "bytes": 199
+    },
+    {
+      "path": "journal/event_115.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_115.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_116.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_116.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_117.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_117.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_118.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_118.json",
+      "bytes": 199
+    },
+    {
+      "path": "journal/event_119.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_119.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_12.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_12.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_120.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_120.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_121.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_121.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_122.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_122.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_123.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_123.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_124.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_124.json",
+      "bytes": 199
+    },
+    {
+      "path": "journal/event_125.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_125.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_126.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_126.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_127.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_127.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_128.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_128.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_129.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_129.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_13.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_13.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_130.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_130.json",
+      "bytes": 199
+    },
+    {
+      "path": "journal/event_131.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_131.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_132.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_132.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_133.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_133.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_134.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_134.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_135.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_135.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_136.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_136.json",
+      "bytes": 199
+    },
+    {
+      "path": "journal/event_137.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_137.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_138.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_138.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_139.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_139.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_14.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_14.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_140.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_140.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_141.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_141.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_142.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_142.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_143.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_143.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_144.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_144.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_145.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_145.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_146.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_146.json",
+      "bytes": 199
+    },
+    {
+      "path": "journal/event_147.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_147.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_148.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_148.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_149.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_149.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_15.commit",
+      "bytes": 86
+    },
+    {
+      "path": "journal/event_15.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_150.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_150.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_151.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_151.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_152.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_152.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_153.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_153.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_154.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_154.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_155.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_155.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_156.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_156.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_157.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_157.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_158.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_158.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_159.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_159.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_16.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_16.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_160.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_160.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_161.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_161.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_162.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_162.json",
+      "bytes": 71
+    },
+    {
+      "path": "journal/event_17.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_17.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_18.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_18.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_19.commit",
+      "bytes": 87
+    },
+    {
+      "path": "journal/event_19.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_2.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_2.json",
+      "bytes": 920
+    },
+    {
+      "path": "journal/event_20.commit",
+      "bytes": 86
+    },
+    {
+      "path": "journal/event_20.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_21.commit",
+      "bytes": 87
+    },
+    {
+      "path": "journal/event_21.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_22.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_22.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_23.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_23.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_24.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_24.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_25.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_25.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_26.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_26.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_27.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_27.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_28.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_28.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_29.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_29.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_3.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_3.json",
+      "bytes": 802
+    },
+    {
+      "path": "journal/event_30.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_30.json",
+      "bytes": 929
+    },
+    {
+      "path": "journal/event_31.commit",
+      "bytes": 86
+    },
+    {
+      "path": "journal/event_31.json",
+      "bytes": 892
+    },
+    {
+      "path": "journal/event_32.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_32.json",
+      "bytes": 893
+    },
+    {
+      "path": "journal/event_33.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_33.json",
+      "bytes": 855
+    },
+    {
+      "path": "journal/event_34.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_34.json",
+      "bytes": 893
+    },
+    {
+      "path": "journal/event_35.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_35.json",
+      "bytes": 893
+    },
+    {
+      "path": "journal/event_36.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_36.json",
+      "bytes": 929
+    },
+    {
+      "path": "journal/event_37.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_37.json",
+      "bytes": 928
+    },
+    {
+      "path": "journal/event_38.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_38.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_39.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_39.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_4.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_4.json",
+      "bytes": 925
+    },
+    {
+      "path": "journal/event_40.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_40.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_41.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_41.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_42.commit",
+      "bytes": 85
+    },
+    {
+      "path": "journal/event_42.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_43.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_43.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_44.commit",
+      "bytes": 87
+    },
+    {
+      "path": "journal/event_44.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_45.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_45.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_46.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_46.json",
+      "bytes": 200
+    },
+    {
+      "path": "journal/event_47.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_47.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_48.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_48.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_49.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_49.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_5.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_5.json",
+      "bytes": 163
+    },
+    {
+      "path": "journal/event_50.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_50.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_51.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_51.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_52.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_52.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_53.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_53.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_54.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_54.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_55.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_55.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_56.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_56.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_57.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_57.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_58.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_58.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_59.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_59.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_6.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_6.json",
+      "bytes": 199
+    },
+    {
+      "path": "journal/event_60.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_60.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_61.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_61.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_62.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_62.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_63.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_63.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_64.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_64.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_65.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_65.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_66.commit",
+      "bytes": 87
+    },
+    {
+      "path": "journal/event_66.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_67.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_67.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_68.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_68.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_69.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_69.json",
+      "bytes": 966
+    },
+    {
+      "path": "journal/event_7.commit",
+      "bytes": 86
+    },
+    {
+      "path": "journal/event_7.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_70.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_70.json",
+      "bytes": 196
+    },
+    {
+      "path": "journal/event_71.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_71.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_72.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_72.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_73.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_73.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_74.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_74.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_75.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_75.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_76.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_76.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_77.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_77.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_78.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_78.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_79.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_79.json",
+      "bytes": 930
+    },
+    {
+      "path": "journal/event_8.commit",
+      "bytes": 86
+    },
+    {
+      "path": "journal/event_8.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_80.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_80.json",
+      "bytes": 930
+    },
+    {
+      "path": "journal/event_81.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_81.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_82.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_82.json",
+      "bytes": 200
+    },
+    {
+      "path": "journal/event_83.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_83.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_84.commit",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_84.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_85.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_85.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_86.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_86.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_87.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_87.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_88.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_88.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_89.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_89.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_9.commit",
+      "bytes": 86
+    },
+    {
+      "path": "journal/event_9.json",
+      "bytes": 201
+    },
+    {
+      "path": "journal/event_90.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_90.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_91.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_91.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_92.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_92.json",
+      "bytes": 929
+    },
+    {
+      "path": "journal/event_93.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_93.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_94.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_94.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_95.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_95.json",
+      "bytes": 928
+    },
+    {
+      "path": "journal/event_96.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_96.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_97.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_97.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_98.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_98.json",
+      "bytes": 202
+    },
+    {
+      "path": "journal/event_99.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_99.json",
+      "bytes": 202
+    },
+    {
+      "path": "launch.json",
+      "bytes": 3562
+    },
+    {
+      "path": "native.log",
+      "bytes": 7219
+    },
+    {
+      "path": "native.log.round112.native.json",
+      "bytes": 120
+    },
+    {
+      "path": "native.log.round112.start.after.matrix.json",
+      "bytes": 270320
+    },
+    {
+      "path": "native.log.round112.start.before.matrix.json",
+      "bytes": 270320
+    },
+    {
+      "path": "native.log.round112.start.json",
+      "bytes": 310
+    },
+    {
+      "path": "native.log.round112.start.values.csv",
+      "bytes": 31640
+    },
+    {
+      "path": "native_end_receipt.json",
+      "bytes": 101
+    },
+    {
+      "path": "observations.json",
+      "bytes": 133898
+    },
+    {
+      "path": "phases.csv",
+      "bytes": 1559
+    },
+    {
+      "path": "process_start_marker.json",
+      "bytes": 160
+    },
+    {
+      "path": "production_checks.json",
+      "bytes": 3158
+    },
+    {
+      "path": "progress_publication_receipt.json",
+      "bytes": 481
+    },
+    {
+      "path": "result.json",
+      "bytes": 87014
+    },
+    {
+      "path": "result.json.round112.startup.json",
+      "bytes": 86123
+    },
+    {
+      "path": "samples.jsonl",
+      "bytes": 662
+    },
+    {
+      "path": "stderr.log",
+      "bytes": 0
+    },
+    {
+      "path": "stdout.log",
+      "bytes": 67
+    }
+  ],
+  "scope": "all native output files closed; original call/model SHA assertions deferred to verification",
+  "native_stopped_no_reentry": true,
+  "cohort_review_excluded": true
+}
