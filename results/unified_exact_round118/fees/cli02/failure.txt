@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round118\scripts\round118_campaign.py", line 100, in billed
+    supervised(l,i,arm_tick);finish_producer(l,arm_tick,armunix);verify(l,i)
+                                                                 ^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round118\scripts\round118_verify.py", line 21, in verify
+    view=logs.build(ROOT,l,d,j,read(d/'result.json'))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round118\scripts\round118_call_logs.py", line 84, in build
+    assert int(fp[1],16)==(int(r['gurobi_model_fingerprint'])&0xffffffff)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -91,8 +91,21 @@ def billed(name,label,qualification=False):
         if not qualification:
             gate=read(OUT/'review/performance_admission.json');assert gate['decision']=='ACCEPT'
             assert gate['candidate_identity_SHA']==sha(OUT/'candidate_identity.json') and gate['helpers']==helpers()
+            assert gate['campaign_identity_SHA']==sha(camp/'identity.json') and gate['fixed_manifest_SHA']==sha(OUT/'fixed_manifest.json')
             hfee=OUT/'fees'/gate['H100_fee_label'];closed=read(hfee/'receipt.json')
-            assert closed['actual_exit_observed'] and closed['exit_code']==0 and closed['actual_native_children']==2
+            assert closed['actual_exit_observed'] and closed['exit_code']==0
+            if gate.get('qualification_campaign')=='qualification/final':
+                assert closed['actual_native_children']==1 and gate['H100_fee_label']=='cli03'
+                assert gate['explicit_postverifier_identity_exception_authorization_SHA']==sha(OUT/'budget_authorization_13.json')
+                assert read(OUT/'budget_authorization_13.json')['reuse_sealed_PS_with_corrected_readonly_verifier'] is True
+                old=read(OUT/'fees/cli02/receipt.json')
+                assert old['actual_exit_observed'] and old['actual_native_children']==1 and old['exit_code']==1
+                final=read(OUT/'qualification/final/identity.json');ps=final['launches'][0]
+                assert ps['arm']=='P-S' and gate['reused_PS_producer_receipt_SHA']==sha(Path(ps['destination'])/'producer_receipt.json')
+                assert gate['original_PS_actual_launch_identity_SHA']==sha(OUT/'qualification/cli02/identity.json')
+                assert read(Path(ps['destination'])/'completion.json')['returncode']==0
+                assert gate['H100_actual_Optimize_by_arm']['P-S']==1 and gate['H100_actual_Optimize_by_arm']['M-B']>0
+            else:assert closed['actual_native_children']==2
         for n,l in enumerate(i['launches'],1):
             arm_tick=tick if n==1 else time.perf_counter();armunix=read(fee/'launch.json')['wrapper_creation_unix'] if n==1 else time.time()
             check_identity();assert not Path(l['destination']).exists() and sha(ROOT/l['panel']['input_path'])==l['panel']['input_sha256']
@@ -108,6 +121,19 @@ def billed(name,label,qualification=False):
         if qualification:
             from qualify_round118_post import admit_in_process
             admit_in_process(name,label,'post02')
+            assert time.perf_counter()-tick<=cap
+        else:
+            # All children have exited. Cross-arm revocation and the six pairs
+            # are a paid group phase, never assigned to the following method.
+            from read_round118 import rebuild
+            group_tick=time.perf_counter()
+            value=rebuild(ROOT,OUT/'reconstruction01')
+            assert value['decision']['execution_stage']=='COMPLETE'
+            assert len(value['arms'])==4 and len(value['pairs'])==6
+            write(OUT/'group_verification_receipt.json',dict(seconds=time.perf_counter()-group_tick,
+                inside_formal_wrapper_outer_clock=True,after_all_native_children_exit=True,
+                no_solution_bound_Start_or_cache_transfer=True,not_assigned_to_an_individual_arm=True,
+                current_core_SHA=sha(OUT/'reconstruction01/current_core.json'),Optimize=0,native_starts=0))
             assert time.perf_counter()-tick<=cap
         code=0
     except BaseException:

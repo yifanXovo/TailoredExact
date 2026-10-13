@@ -40,7 +40,7 @@ def build(root,l,d,j,r,model_parser=None):
     assert set(actual)==j['actual_started_ids'],'UNRESOLVED: declared call has no actual start/disposition'
     ledger=core.rows(d/'external/paper_optimize_ledger.csv') if l['arm'] in ['ENS-C','M-B'] and actual else []
     assert not ledger or len(ledger)==len(actual),'UNRESOLVED: ledger count'
-    groups=collections.defaultdict(list);models={};views={};bindings=[]
+    groups=collections.defaultdict(list);models=collections.OrderedDict();facts={};views={};bindings=[]
     for cid in j['not_started_ids']:
         c=j['calls'][cid];path=core.portable(root,c['native_log_path'])
         if path.is_file() and not any(core.portable(root,j['calls'][a]['native_log_path'])==path for a in actual):
@@ -48,8 +48,12 @@ def build(root,l,d,j,r,model_parser=None):
     for ordinal,cid in enumerate(actual):
         c=j['calls'][cid];path=core.portable(root,c['model_path'])
         assert path.is_file() and core.sha(path)==c['model_sha256'],'UNRESOLVED: immutable complete model absent'
-        if c['model_sha256'] not in models:models[c['model_sha256']]=model_parser(path)
-        core.model_scope_contract(c,models[c['model_sha256']],l['panel'])
+        model=models.pop(c['model_sha256'],None)
+        if model is None:model=model_parser(path)
+        models[c['model_sha256']]=model
+        if len(models)>2:models.popitem(last=False)
+        core.model_scope_contract(c,model,l['panel'])
+        facts[cid]=(len(model['rows']),len(model['order']),collections.Counter(model['types'].values()))
         if c['full_original']:assert c['model_sha256']==l['panel']['reference']['canonical_sha256']
         row=ledger[ordinal] if ledger else None
         if row:
@@ -60,14 +64,14 @@ def build(root,l,d,j,r,model_parser=None):
         data=path.read_bytes();spans=segments(data)
         assert len(spans)==len(items),'UNRESOLVED: duplicate/missing/unbound Optimize segment'
         for (ordinal,cid,c,row),(lo,hi) in zip(items,spans):
-            part=data[lo:hi];text=part.decode('utf-8');m=models[c['model_sha256']]
+            part=data[lo:hi];text=part.decode('utf-8');row_count,column_count,counts=facts[cid]
             size=re.search(r'Optimize a model with (\d+) rows, (\d+) columns',text)
-            assert size and (int(size[1]),int(size[2]))==(len(m['rows']),len(m['order'])),'UNRESOLVED: wrong per-call model size'
-            lp=bool(row and row['solve_kind']=='LP');counts=collections.Counter(m['types'].values())
+            assert size and (int(size[1]),int(size[2]))==(row_count,column_count),'UNRESOLVED: wrong per-call model size'
+            lp=bool(row and row['solve_kind']=='LP')
             types=re.search(r'Variable types: (\d+) continuous, (\d+) integer \((\d+) binary\)',text)
             if lp:
                 assert not c['native_preconditions'] and int(row['integer_domain_restored'])==1
-                if types:assert (int(types[1]),int(types[2]),int(types[3]))==(len(m['order']),0,0)
+                if types:assert (int(types[1]),int(types[2]),int(types[3]))==(column_count,0,0)
             else:
                 assert types and (int(types[1]),int(types[2])-int(types[3]),int(types[3]))==(counts['C'],counts['I'],counts['B'])
             params={name:float(value) for name,value in re.findall(r'(?m)^(TimeLimit|Threads|MIPGap|MIPGapAbs|Seed|Presolve|FeasibilityTol|IntFeasTol|OptimalityTol)\s+([-+0-9.eE]+)\s*$',text)}
@@ -78,6 +82,7 @@ def build(root,l,d,j,r,model_parser=None):
                     # MIP TimeLimit is set after paid Start/model work; the ledger
                     # records the earlier request boundary, not the later set call.
                     if row:assert value<=float(row['global_deadline_remaining_at_launch'])+1e-5
+                    else:assert value<=l['cap_seconds']
                 else:assert name in settings and value==settings[name],'UNRESOLVED: per-call parameter mismatch'
             fp=re.search(r'Model fingerprint: (0x[0-9a-fA-F]+)',text)
             fingerprint_contract=None
@@ -109,7 +114,7 @@ def build(root,l,d,j,r,model_parser=None):
                 solve_kind=row['solve_kind'] if row else 'MIP',ledger=row,
                 raw_log=path.relative_to(root).as_posix(),raw_log_SHA=digest(data),byte_begin=lo,byte_end=hi,
                 segment_SHA=digest(part),fingerprint=fp[1] if fp else None,fingerprint_contract=fingerprint_contract,parameters=params,
-                native_types=dict(counts) if not lp else {'C':len(m['order']),'I':0,'B':0},
+                native_types=dict(counts) if not lp else {'C':column_count,'I':0,'B':0},
                 journal_returned=returned,return_sequence=j['return_sequences'].get(cid),
                 return_available=j.get('return_available',{}).get(cid),return_code=0 if returned else None,
                 missing_return_requires_unchanged_narrow_gate=not returned)

@@ -25,11 +25,14 @@ def run():
         # This work reads the closed result/model/Start/journal only. It supplies
         # no new U/bound/Start and retains the original P-S producer timestamps.
         verify(ps,frozen)
+        mb_tick=time.perf_counter();mb_unix=time.time()
         camp=OUT/'qualification/cli03';camp.mkdir(parents=True)
         ref=camp/'reference/H100';ref.mkdir(parents=True)
         for n in ['original.lp','build.json']:shutil.copyfile(OUT/'qualification/reference/H100'/n,ref/n)
         check_identity();assert sha(ROOT/mb['panel']['input_path'])==mb['panel']['input_sha256']
-        campaign.supervised(mb,frozen,tick);campaign.finish_producer(mb,tick,read(fee/'launch.json')['wrapper_creation_unix'])
+        write(fee/'MB_before.json',dict(t0_perf=mb_tick,t0_unix=mb_unix,
+            prior_PS_review_and_finite_checks_are_group_cost=True,global_qualification_ordinal=2))
+        campaign.supervised(mb,frozen,mb_tick);campaign.finish_producer(mb,mb_tick,mb_unix)
         verify(mb,frozen)
         post=OUT/'qualification/post03';post.mkdir()
         core=reader.rebuild(ROOT,post/'reconstructed',True,'qualification/final')
@@ -44,6 +47,8 @@ def run():
             input_SHA=read(OUT/'input_manifest.json')['roles'][0]['input_sha256'],finite_replay_SHA=sha(OUT/'qualification/finite06/summary.json'),
             H100_post_SHA=sha(post/'summary.json'),H100_fee_launch_SHA=sha(fee/'launch.json'),H100_fee_label='cli03',
             H100_actual_wrapper_exit_pending=True,qualification_campaign='qualification/final',
+            H100_actual_Optimize_by_arm={'P-S':1,'M-B':read(Path(mb['destination'])/'result.json')['external_gini_tree_optimize_count']},
+            H100_closed_PS_fee_receipt_SHA=sha(OUT/'fees/cli02/receipt.json'),
             reused_PS_producer_receipt_SHA=sha(Path(ps['destination'])/'producer_receipt.json'),
             explicit_postverifier_identity_exception_authorization_SHA=sha(OUT/'budget_authorization_13.json'),
             original_PS_actual_launch_identity_SHA=sha(OUT/'qualification/cli02/identity.json'),
@@ -54,7 +59,7 @@ def run():
     except BaseException:
         (fee/'failure.txt').write_text(traceback.format_exc(),encoding='utf-8');raise
     finally:
-        actual=int((OUT/'qualification/cli03/raw/01_H100_S0_M-B/affinity.json').is_file())
+        actual=int((OUT/'qualification/cli03/raw/02_H100_S0_M-B/affinity.json').is_file())
         fee_pending(fee,tick,True,code,actual)
 
 if __name__=='__main__':run()

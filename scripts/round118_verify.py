@@ -18,6 +18,8 @@ def verify(l,i):
                 fact=dict(full_original=True,SHA=sha(path),rows=len(m['rows']),columns=len(m['order']))
             else:fact,m=context.model_contract(ROOT,l['panel'],path,l['arm'])
             contracts.append(dict(fact,call=cid,scope=context.model_scope_contract(c,m,l['panel'])))
+            if len(context.models)>2:context.models.clear()
+        context.clear()
         view=logs.build(ROOT,l,d,j,read(d/'result.json'))
     finally:context.clear()
     write(d/'round118_model_contracts.json',dict(contracts=contracts,actual_M_B_quantity_type='C' if l['arm']=='M-B' else None,

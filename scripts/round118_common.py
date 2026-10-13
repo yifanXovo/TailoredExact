@@ -35,6 +35,21 @@ def budget():
         qualification_seconds=sum(r['outer_seconds_upper'] for l,r in closed if l['qualification']),
         unclosed=[p.parent.name for p in launches if not (p.parent/'receipt.json').exists()])
 
+def qualification_limit():
+    # A prepared repair does not authorize another launch. Only the recorded
+    # direct human response can raise this limit; failed declared slots remain.
+    if (OUT/'budget_authorization_13.json').is_file():
+        authorization=read(OUT/'budget_authorization_13.json')
+        assert authorization['qualification_starts_new']==13
+        assert authorization['reuse_sealed_PS_with_corrected_readonly_verifier'] is True
+        assert authorization['qualification_outer_seconds']==1200
+        assert authorization['total_starts']==20 and authorization['total_outer_seconds']==28000
+        return 13
+    if (OUT/'budget_authorization.json').is_file():
+        assert read(OUT/'budget_authorization.json')['qualification_starts_new']==11
+        return 11
+    return 8
+
 def fee_begin(label,children,cap,qualification):
     tick,creation=process_origin();b=budget();d=OUT/'fees'/label
     assert not b['unclosed'] and not d.exists()
@@ -42,7 +57,7 @@ def fee_begin(label,children,cap,qualification):
     assert b['remaining_starts']>=children+1+(5 if future else 0)
     assert b['remaining_outer_seconds']>=cap+(21720 if future else 0)
     if qualification:
-        assert b['qualification_starts']+children+1<=11 and b['qualification_seconds']+cap<=1200
+        assert b['qualification_starts']+children+1<=qualification_limit() and b['qualification_seconds']+cap<=1200
     d.mkdir(parents=True)
     write(d/'launch.json',dict(command=sys.argv,cwd=str(ROOT),wrapper_pid=os.getpid(),wrapper_creation_unix=creation,
         conservative_process_starts=children+1,declared_native_children=children,qualification=qualification,

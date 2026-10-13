@@ -284,3 +284,5 @@ results/unified_exact_round118/**/*.md text eol=lf
 results/unified_exact_round118/**/*.csv text eol=lf
 results/unified_exact_round118/**/*.tsv text eol=lf
 results/unified_exact_round118/compact_evidence/*.part* -text
+# Frozen native/producer outputs retain their original Windows line endings.
+results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol

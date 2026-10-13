@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round118\scripts\qualify_round118.py", line 187, in run
+    check_identity();log_cases(q,cases);lifecycle_cases(q,cases);classification_cases(cases);clock_cases(q,cases)
+                     ^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round118\scripts\qualify_round118.py", line 53, in log_cases
+    for cid,c in jl['calls'].items():assert logs.call_text(ROOT,c,cid)==data[cid-1].decode()
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
