@@ -29,6 +29,8 @@ struct Instance {
 };
 
 struct SolveOptions {
+    bool round119_proof_contraction = false;
+    bool round119_qualification_empty_seed = false; // explicit nonperformance test entry
     bool round107_frontier_struct = false; // complete original ENS controller; scoped assignment events
     std::string round106_events = "off"; // off|full|core|struct; one MIPSOL/lazy master
     std::string round105_decomposition = "off"; // off|full|core; global master, no AM

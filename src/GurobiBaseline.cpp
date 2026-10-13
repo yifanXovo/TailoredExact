@@ -382,6 +382,9 @@ bool evidenceParameterReadback(GurobiApi& api,GRBenv* env,NativeEvidenceScope& s
 }
 
 struct ProgressCallbackState {
+    std::function<bool(const std::vector<RoutePlan>&, long long)> round119_terminal_event;
+    bool round119_termination_requested = false;
+    std::string round119_failure;
     std::shared_ptr<Round97NativeClosure> round97;
     Round97Model round97_model;
     std::shared_ptr<NativeEvidenceJournal> native_evidence;
@@ -1043,11 +1046,23 @@ int __stdcall progressAndBoundTargetCallback(
                     if(!std::isfinite(x[i]) || names[i].empty() || !values.emplace(names[i],x[i]).second)
                         throw std::runtime_error("MIPSOL_original_vector_identity_invalid");
                 }
-                state->native_evidence->witness(
-                    reconstructCanonicalCompactRoutes(*state->evidence_instance,values, state->evidence_integer_operations),
+                const auto routes=reconstructCanonicalCompactRoutes(
+                    *state->evidence_instance,values,state->evidence_integer_operations);
+                state->native_evidence->witness(routes,
                     "native_MIPSOL_verified_original_routes",state->evidence_call);
+                if(state->round119_terminal_event && state->native_evidence->enabled() &&
+                    state->round119_terminal_event(routes,state->evidence_call) &&
+                    !state->round119_termination_requested) {
+                    state->round119_termination_requested=true;
+                    state->api->terminate(model);
+                }
             }
-        } catch(const std::exception& e) {state->native_evidence->failure(e.what());}
+        } catch(const std::exception& e) {
+            state->native_evidence->failure(e.what());
+            if(state->round119_terminal_event) {
+                state->round119_failure=e.what();state->api->terminate(model);
+            }
+        }
           catch(...) {state->native_evidence->failure("MIPSOL_unknown_observer_exception");}
     }
     if (where==GRB_CB_MIPSOL && state->round68_start_values &&
@@ -2723,6 +2738,7 @@ public:
         }
 
         ProgressCallbackState callback;
+        callback.round119_terminal_event=request.round119_terminal_event;
         if(fleet_active||service_active) {
             out.gurobi_precrush_requested=1;
             out.gurobi_precrush_set_return_code=api_.setintparam(model_env,GRB_INT_PAR_PRECRUSH,1);
@@ -2979,6 +2995,7 @@ public:
             callback.evidence_instance=&instance_;callback.evidence_names=&native_names;
             callback.evidence_integer_operations=researchChecksPhysicalQuantities(options_);
             callback.evidence_call=request.native_evidence->beginCall(scope);
+            out.native_evidence_call=callback.evidence_call;
         }
         if (request.round68_verified_start) {
             out.round68_effective_native_deadline=std::max(0.0,
@@ -3412,6 +3429,7 @@ public:
             out.native_status_code == GRB_WORK_LIMIT ||
             out.native_status_code == GRB_MEM_LIMIT;
         out.native_bound_target_reached = callback.bound_target_reached;
+        out.round119_termination_requested=callback.round119_termination_requested;
         out.round62_external_termination_requested=callback.round62_external_termination_requested;
         out.native_bound_target_termination_requested =
             callback.bound_target_termination_requested;
@@ -3980,6 +3998,10 @@ public:
         if (native_ot_b1_active) {
             // Any candidate engineering failure, including log-parameter or
             // domain-restore errors, must invalidate trace/certificate bits.
+            invalidateRound89NativeOtB1FailedOutcome(out);
+        }
+        if(!callback.round119_failure.empty()) {
+            out.failure_reason="round119_callback_failed:"+callback.round119_failure;
             invalidateRound89NativeOtB1FailedOutcome(out);
         }
         if(fleet_active) {

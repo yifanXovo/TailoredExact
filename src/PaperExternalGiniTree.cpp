@@ -21,6 +21,7 @@
 #include "Round62Passive.hpp"
 #include "Round65Proof.hpp"
 #include "Round92HandlingActivation.hpp"
+#include "Round119ProofContraction.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -3185,6 +3186,21 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     double verified_ub = verified_seed.objective;
     long long incumbent_epoch = 0;
     std::vector<RoutePlan> best_routes = verified_seed.routes;
+    auto round119 = options.round119_proof_contraction
+        ? std::make_shared<Round119ProofContraction>(instance,options,
+            artifact_dir/"round119_events.jsonl",best_routes,scheduler.certificateTolerance())
+        : std::shared_ptr<Round119ProofContraction>{};
+    long long round119_generation=0;
+    bool round119_pending=false;
+    auto round119Ancestors = [&](const ControllingLeaf& leaf) {
+        std::vector<std::string> ids{leaf.id};
+        const ControllingLeaf* p=&leaf;
+        while(!p->parent_id.empty()) {
+            ids.push_back(p->parent_id);p=scheduler.findLeaf(p->parent_id);
+            if(!p)throw std::runtime_error("round119_missing_ancestor");
+        }
+        return ids;
+    };
     double total_model_build_seconds = 0.0;
     double last_global_lb_improvement = -1.0;
     bool first_model_build_recorded = false;
@@ -3598,6 +3614,38 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             request.global_deadline_remaining_seconds = globalDeadlineRemaining();
         }
         auto captureNative = [&](const FixedIntervalMipOutcome& out) {
+            if(round119) {
+                if(!native_evidence || !native_evidence->enabled())
+                    throw std::runtime_error("round119_evidence_observer_failed");
+                if(out.incumbent_available && out.incumbent_independently_verified)
+                    round119->observe(out.incumbent_routes,out.native_evidence_call);
+                if(request.solve_kind==FixedIntervalSolveKind::PaperLpRelaxation &&
+                    out.lp_terminal_valid && out.optimal && out.native_bound_available &&
+                    out.exact_zero_gap_roundtrip && out.model_fingerprint_matches_request &&
+                    out.feasibility_consistency_gate && out.solver_finalization_reached &&
+                    out.optimize_return_code==0 && out.failure_reason=="none") {
+                    const auto dot=request.leaf_id.find_last_of('.');
+                    const auto* p=dot==std::string::npos ? nullptr :
+                        scheduler.findLeaf(request.leaf_id.substr(0,dot));
+                    const auto side=dot==std::string::npos ? std::string{} : request.leaf_id.substr(dot+1);
+                    if(p && (side=="0" || side=="1")) {
+                        const double mid=p->gamma_L+(p->gamma_U-p->gamma_L)/2;
+                        const int index=side=="0"?0:1;
+                        if(request.gamma_L==(index==0?p->gamma_L:mid) &&
+                            request.gamma_U==(index==0?mid:p->gamma_U)) {
+                            Round119Certificate c;
+                            c.parent=p->id;c.leaf=request.leaf_id;c.depth=p->split_depth;c.side=index;
+                            c.call=out.native_evidence_call;c.epoch=incumbent_epoch;
+                            c.model=request.canonical_model_fingerprint;c.path=request.canonical_model_path.string();
+                            c.scope=request.canonical_model_scope;c.status=out.native_status;
+                            c.parent_lower=p->gamma_L;c.parent_upper=p->gamma_U;
+                            c.lower=request.gamma_L;c.upper=request.gamma_U;
+                            c.cutoff=request.verified_cutoff;c.bound=out.native_bound;
+                            c.available_seconds=processElapsedSeconds(options);round119->add(std::move(c));
+                        }
+                    }
+                }
+            }
             // Failed scoped calls contribute no new bound/terminal status,
             // but an independently verified physical UB remains global.
             if (options.round107_frontier_struct &&
@@ -3667,6 +3715,75 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             if (out.round65_proof_infeasible) {out.infeasible=true;out.optimal=false;}
         }
         return out;
+    };
+    // Validate a complete transaction on a copy. Neither a callback nor a
+    // failed split can partially replace the live cover.
+    auto commitRound119 = [&](const ControllingLeaf& old_leaf,
+                              const Round119Contraction& d) {
+        if(!round119 || !d.available)return false;
+        const auto v=verifySolution(instance,round119->routes(),options.lambda);
+        if(!v.feasible || !v.errors.empty() || v.objective!=round119->upper())
+            throw std::runtime_error("round119_handoff_physical_verification");
+        const auto& proof=round119->proof(d.proof);
+        const double U=v.objective;
+        if(!(U+scheduler.certificateTolerance()<std::min(proof.bound,proof.cutoff)))
+            throw std::runtime_error("round119_handoff_predicate_changed");
+        std::vector<ControllingLeaf> children(2);
+        const auto generation=round119_generation+1;
+        for(int side=0;side<2;++side) {
+            auto& c=children[side];c.id=old_leaf.id+".pc"+std::to_string(generation)+"."+std::to_string(side);
+            c.parent_id=old_leaf.id;c.child_index=side;c.split_depth=old_leaf.split_depth+1;
+            c.gamma_L=side==0?old_leaf.gamma_L:d.split;c.gamma_U=side==0?d.split:old_leaf.gamma_U;
+            c.cutoff=U;c.base_lower_bound=old_leaf.lower_bound;
+            c.lower_bound=std::max(old_leaf.lower_bound,side==0?d.left_bound:d.right_bound);
+            c.lower_bound_sources={"inherited_parent_valid_bound"};
+        }
+        const bool eligible_start=!d.close_both && v.G>=children[1-d.removed_side].gamma_L &&
+            v.G<=children[1-d.removed_side].gamma_U;
+        // A global own incumbent may belong to another live obligation. In
+        // that case the unchanged mapper clears/skips an out-of-scope Start;
+        // it supplies no historical fleet and does not refute this certificate.
+        ControllingLeafScheduler transaction=scheduler;
+        std::string reason;
+        if(!transaction.tightenVerifiedCutoff(U,&reason) ||
+            !transaction.splitLeafAtomically(old_leaf.id,children,&reason))
+            throw std::runtime_error("round119_atomic_proposal_failed:"+reason);
+        for(int side=0;side<2;++side) if(side==d.removed_side || d.close_both) {
+            if(!transaction.setStatus(children[side].id,ControllingLeafStatus::Fathomed,
+                    "round119_paid_bound_no_strict_improver",&reason))
+                throw std::runtime_error("round119_complement_archive_failed:"+reason);
+        }
+        if(!transaction.parentChildCoverageValid(&reason))
+            throw std::runtime_error("round119_atomic_coverage_failed:"+reason);
+        // All backend calls have returned before this point; no native tree,
+        // local cut or basis migration is claimed.
+        backend->discardLeaf(old_leaf.id);
+        scheduler=std::move(transaction);round119_generation=generation;
+        round119->consumed(d);round119_pending=false;
+        if(U<verified_ub-1e-9) {verified_ub=U;best_routes=round119->routes();++incumbent_epoch;}
+        persistCurrentWitness(verified_ub,best_routes,"round119_handoff_"+std::to_string(generation)+".json");
+        std::ostringstream fields;fields<<std::setprecision(17)<<"\"parent\":"<<std::quoted(old_leaf.id)
+            <<",\"generation\":"<<generation<<",\"epoch\":"<<incumbent_epoch
+            <<",\"old_lower\":"<<old_leaf.gamma_L<<",\"old_upper\":"<<old_leaf.gamma_U
+            <<",\"new_lower\":"<<children[1-d.removed_side].gamma_L
+            <<",\"new_upper\":"<<children[1-d.removed_side].gamma_U
+            <<",\"new_leaf\":"<<std::quoted(children[1-d.removed_side].id)
+            <<",\"removed_side\":"<<d.removed_side<<",\"close_both\":"<<d.close_both
+            <<",\"proof_call\":"<<proof.call<<",\"proof_model\":"<<std::quoted(proof.model)
+            <<",\"proof_cutoff\":"<<proof.cutoff<<",\"proof_bound\":"<<proof.bound
+            <<",\"U\":"<<U<<",\"margin\":"<<std::min(proof.bound,proof.cutoff)-U-scheduler.certificateTolerance()
+            <<",\"own_G_true\":"<<v.G<<",\"eligible_own_Start\":"<<eligible_start
+            <<",\"left_bound\":"<<d.left_bound<<",\"right_bound\":"<<d.right_bound
+            <<",\"global_L\":"<<scheduler.globalLowerBound()<<",\"depth\":"<<children[0].split_depth
+            <<",\"deadline_remaining\":"<<globalDeadlineRemaining();
+        round119->record("atomic_contraction_committed",fields.str());
+        events<<elapsedTelemetry()<<",round119_atomic_contraction,"<<old_leaf.id<<','
+            <<old_leaf.gamma_L<<','<<old_leaf.gamma_U<<",replaced,"<<scheduler.globalLowerBound()
+            <<','<<verified_ub<<",paid_child_bound_cutoff_complement\n";
+        writeGlobalTrace(processElapsedSeconds(options),elapsedTelemetry(),"round119_atomic_contraction",
+            old_leaf.id,scheduler.globalLowerBound(),otherRelevantMinimum(old_leaf.id),
+            "returned_proof_strict_subdomain_complete_archived_cover");
+        return true;
     };
     auto ensureArtifact = [&](const ControllingLeaf& leaf,
                               PaperLeafRuntime& state) -> bool {
@@ -8736,6 +8853,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             }
         }
         if (hard_failure || global_deadline_stop) break;
+        if(round119) {
+            round119->observe(best_routes,0);
+            const auto d=round119->choose(bounded,round119Ancestors(bounded));
+            if(d.available && commitRound119(bounded,d))continue;
+        }
         if (terminal_state.terminal_mip_started) {
             hard_failure = true;
             result.external_gini_tree_failure_reason =
@@ -8760,6 +8882,25 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         request.interval_mip_policy =
             options.external_gini_interval_mip_policy;
         request.solve_kind = FixedIntervalSolveKind::PaperTerminalMip;
+        if(round119) {
+            const auto ancestors=round119Ancestors(bounded);
+            request.round119_terminal_event=[&,bounded,ancestors](const std::vector<RoutePlan>& routes,long long call) {
+                round119->observe(routes,call);
+                // Deadline/resource stopping always wins. Time never admits
+                // the mathematical event or selects a new domain.
+                if(globalDeadlineRemaining()<=0 || round119_pending)return false;
+                const auto d=round119->choose(bounded,ancestors);
+                if(!d.available)return false;
+                const auto& p=round119->proof(d.proof);
+                std::ostringstream f;f<<std::setprecision(17)<<"\"call\":"<<call
+                    <<",\"leaf\":"<<std::quoted(bounded.id)<<",\"model\":"<<std::quoted(terminal_state.artifact.sha256)
+                    <<",\"old_cutoff\":"<<verified_ub<<",\"proof_call\":"<<p.call
+                    <<",\"U\":"<<round119->upper()<<",\"proof_bound\":"<<p.bound
+                    <<",\"proof_cutoff\":"<<p.cutoff<<",\"margin\":"
+                    <<std::min(p.bound,p.cutoff)-round119->upper()-scheduler.certificateTolerance();
+                round119->record("termination_requested",f.str());round119_pending=true;return true;
+            };
+        }
         request.leaf_id = bounded.id;
         request.gamma_L = bounded.gamma_L;
         request.gamma_U = bounded.gamma_U;
@@ -8914,6 +9055,43 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 "independently_verified_native_incumbent");
         }
         mergeRound97Archive(bounded.id);
+        if(round119 && outcome.round119_termination_requested) {
+            std::ostringstream f;f<<"\"call\":"<<outcome.native_evidence_call
+                <<",\"leaf\":"<<std::quoted(bounded.id)<<",\"status\":"<<std::quoted(outcome.native_status)
+                <<",\"return_code\":"<<outcome.optimize_return_code;
+            round119->record("native_returned",f.str());
+            const auto disposition=evaluateRound119Return(outcome,globalDeadlineRemaining());
+            if(disposition==Round119ReturnDisposition::Invalid)
+                throw std::runtime_error("round119_unexpected_termination_return:"+outcome.native_status);
+            if(disposition==Round119ReturnDisposition::ResourceStop) {
+                round119->record("resource_or_limit_priority_no_resume",f.str());
+                round119_pending=false;stopAtDeadline();
+                result.external_gini_tree_failure_reason="round119_resource_limit_open:"+outcome.native_status;
+                break;
+            }
+            if(round119->upper()<verified_ub-1e-9) {
+                verified_ub=round119->upper();best_routes=round119->routes();++incumbent_epoch;
+                std::string why;if(!scheduler.tightenVerifiedCutoff(verified_ub,&why))
+                    throw std::runtime_error("round119_callback_U_handoff:"+why);
+            }
+            const auto* current=scheduler.findLeaf(bounded.id);
+            if(!current)throw std::runtime_error("round119_return_missing_leaf");
+            if(current->lower_bound+scheduler.certificateTolerance()>=verified_ub || outcome.optimal || outcome.infeasible) {
+                round119->record("complete_old_scope_no_rebuild","\"leaf\":"+std::string("\"")+bounded.id+"\"");
+                std::string why;if(!scheduler.setStatus(bounded.id,
+                        outcome.infeasible?ControllingLeafStatus::Empty:ControllingLeafStatus::Fathomed,
+                        "round119_returned_old_scope_complete_certificate",&why))
+                    throw std::runtime_error("round119_old_scope_close:"+why);
+                round119_pending=false;continue;
+            }
+            const auto d=round119->choose(*current,round119Ancestors(*current));
+            if(!d.available)throw std::runtime_error("round119_returned_event_lost_predicate");
+            const auto current_copy=*current;
+            if(commitRound119(current_copy,d)) {
+                if(globalDeadlineRemaining()<=0)stopAtDeadline();
+                continue;
+            }
+        }
         if (outcome.round62_external_termination_requested) {
             round62_stopped=true;
             break;

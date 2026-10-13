@@ -86,6 +86,7 @@ struct FixedIntervalMipCapabilities {
 };
 
 struct FixedIntervalMipRequest {
+    std::function<bool(const std::vector<RoutePlan>&, long long)> round119_terminal_event;
     long long round107_request_id = 0, round107_epoch = 0;
     std::shared_ptr<Round97NativeClosure> round97_session;
     long long round97_call = 0, round97_epoch = 0;
@@ -211,6 +212,8 @@ struct FixedIntervalLpConstraintEvidence {
 };
 
 struct FixedIntervalMipOutcome {
+    long long native_evidence_call = 0;
+    bool round119_termination_requested = false;
     bool round107_scoped = false, round107_unresolved_stop = false, round107_open_stop = false;
     std::string round107_local_reason;
     double round103_preparation_seconds = 0;

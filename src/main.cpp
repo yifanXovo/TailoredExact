@@ -264,6 +264,9 @@ std::string lowerAscii(std::string value) {
 }
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
+    if (opt.round119_proof_contraction)
+        return opt.round119_qualification_empty_seed
+            ? "qualification-round119-empty-seed-mb-pc" : "research-round119-mb-proof-contraction";
     if (opt.round112_ens_start_compact)
         return "research-round112-self-paid-ens-start-original-compact";
     if (opt.round107_frontier_struct)
@@ -857,6 +860,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gurobi-presolve") opt.gurobi_presolve = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-hga-start") opt.gurobi_hga_start = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round112-ens-start-compact") opt.round112_ens_start_compact = true;
+        else if (arg == "--round119-proof-contraction") opt.round119_proof_contraction = true;
+        else if (arg == "--round119-qualification-empty-seed") opt.round119_qualification_empty_seed = true;
         else if (arg == "--gurobi-home") opt.gurobi_home = requireValue(i, argc, argv);
         else if (arg == "--gurobi-progress") opt.gurobi_progress_path = requireValue(i, argc, argv);
         else if (arg == "--gurobi-model-export") opt.gurobi_model_export_path = requireValue(i, argc, argv);
@@ -3506,6 +3511,20 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round96 route order requires isolated ENS-C Round83 gcap-frontier");
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
+    if (opt.round119_proof_contraction &&
+        (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
+         opt.method != "gcap-frontier" || opt.round98_state_service != "m-binary" ||
+         !opt.k1_am_sf_controller_enabled || opt.round100_continuous_quantities ||
+         opt.round112_ens_start_compact || opt.round107_frontier_struct ||
+         opt.round97_native_closure != "off" || opt.round90_lp_g_split ||
+         opt.round92_handling_activation || opt.round96_route_order ||
+         opt.round88_constructive_only_descent || opt.round89_native_ot_b1 ||
+         opt.round65_budget || opt.round60_candidate_mode != "off" ||
+         opt.round61_candidate_mode != "off" || opt.round62_threshold_mode != "off" ||
+         opt.native_evidence_dir.empty()))
+        throw std::runtime_error("Round119 requires isolated M-B with same-run evidence journal");
+    if (opt.round119_qualification_empty_seed && !opt.round119_proof_contraction)
+        throw std::runtime_error("Round119 empty seed is an explicit MB-PC qualification entry only");
     if (!ebrp::round98IsIsolatedENS(opt))
         throw std::runtime_error("Round98 requires isolated ENS-C with unchanged startup and VD-P");
     if ((opt.round97_native_operator != "r83" && opt.round97_native_operator != "r96") ||
@@ -4159,6 +4178,13 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round98_state_service_" + opt.round98_state_service);
         snapshot.preset_reason = "Isolated ENS-C state/service mode " + opt.round98_state_service + "; direction representation and quantity declarations follow the selected mode";
+    }
+    if(opt.round119_proof_contraction) {
+        snapshot.algorithm_preset=effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round119_paid_certificate_proof_contraction");
+        if(opt.round119_qualification_empty_seed)
+            append_explicit_research_feature("round119_nonperformance_empty_seed_test_entry");
+        snapshot.preset_reason="MB-PC: same-run returned child proof and verified own incumbent event; default off";
     }
     if (opt.round66_arc_load_replacement) append_explicit_research_feature("round66_arc_load_replaces_node_big_m");
     if (opt.round68_verified_start) append_explicit_research_feature("round68_existing_complete_witness_native_start");
@@ -8264,6 +8290,18 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
     const ebrp::SolveOptions& opt) {
     PaperPrimalHeuristicResult out;
     const auto start = std::chrono::steady_clock::now();
+    if(opt.round119_qualification_empty_seed) {
+        for(int k=0;k<instance.M;++k) {ebrp::RoutePlan r;r.vehicle=k;r.nodes={0,0};out.routes.push_back(r);}
+        out.verification=ebrp::verifySolution(instance,out.routes,opt.lambda);
+        if(!out.verification.feasible || !out.verification.errors.empty())
+            throw std::runtime_error("round119_qualification_empty_seed_not_physical");
+        out.found=true;out.hga_stop_mode="qualification_empty_seed_not_H";
+        out.candidates_tested=out.candidates_verified=1;
+        out.runtime_seconds=std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count();
+        out.notes.push_back("Explicit Round119 nonperformance fixture entry: one physical empty fleet; full H intentionally not executed");
+        ebrp::recordProcessPhase(opt,"round119_qualification_empty_seed","verified","no historical fleet or artificial proof");
+        return out;
+    }
     const std::string mode = opt.primal_heuristic;
     if (mode == "none" || mode == "off" || mode.empty()) {
         out.notes.push_back("paper primal heuristic disabled");
