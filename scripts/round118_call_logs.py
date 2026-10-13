@@ -80,8 +80,27 @@ def build(root,l,d,j,r,model_parser=None):
                     if row:assert value<=float(row['global_deadline_remaining_at_launch'])+1e-5
                 else:assert name in settings and value==settings[name],'UNRESOLVED: per-call parameter mismatch'
             fp=re.search(r'Model fingerprint: (0x[0-9a-fA-F]+)',text)
+            fingerprint_contract=None
             if c['full_original'] and fp:
-                assert int(fp[1],16)==(int(r['gurobi_model_fingerprint'])&0xffffffff)
+                before=int(r['gurobi_model_fingerprint'])&0xffffffff
+                assert before==(int(l['panel']['reference']['fingerprint'])&0xffffffff)
+                if l['arm']=='P-S':
+                    # Fingerprint includes optimization attributes such as Start.
+                    # The PE's reference API read occurs before Start submission;
+                    # the Optimize log observes the later attributed model.
+                    # Bind the complete actual matrix and all-column Start instead
+                    # of equating fingerprints from two different states.
+                    import round112_audit as start
+                    checked=start.start_audit(root,l['panel'],d)
+                    assert checked
+                    fingerprint_contract=dict(pre_Start_reference=hex(before),Optimize_log=fp[1],
+                        compared_across_different_attribute_states=False,
+                        complete_matrix_types_bounds_objective_and_Start_verified=True,
+                        evidence_source='native before/after matrix and complete Start API readback',
+                        post_Start_API_Fingerprint='not persisted by frozen PE; no fabricated equality')
+                else:
+                    assert int(fp[1],16)==before
+                    fingerprint_contract=dict(cold_reference=hex(before),Optimize_log=fp[1],same_state_equal=True)
             returned=cid in j['returned_ids']
             assert returned or cid in j['unreturned_ids'] and j.get('failure') is not None,'UNRESOLVED: actual return absent'
             binding=dict(call=cid,serial_ordinal=ordinal+1,model_SHA=c['model_sha256'],leaf=c['leaf'],
@@ -89,7 +108,7 @@ def build(root,l,d,j,r,model_parser=None):
                 epoch=c.get('epoch'),epoch_source='journal field' if 'epoch' in c else 'scope/cutoff bound; no invented epoch',
                 solve_kind=row['solve_kind'] if row else 'MIP',ledger=row,
                 raw_log=path.relative_to(root).as_posix(),raw_log_SHA=digest(data),byte_begin=lo,byte_end=hi,
-                segment_SHA=digest(part),fingerprint=fp[1] if fp else None,parameters=params,
+                segment_SHA=digest(part),fingerprint=fp[1] if fp else None,fingerprint_contract=fingerprint_contract,parameters=params,
                 native_types=dict(counts) if not lp else {'C':len(m['order']),'I':0,'B':0},
                 journal_returned=returned,return_sequence=j['return_sequences'].get(cid),
                 return_available=j.get('return_available',{}).get(cid),return_code=0 if returned else None,

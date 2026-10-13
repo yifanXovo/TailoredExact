@@ -110,6 +110,12 @@ def returned_native_proofs(root,j,controller):
         if not call['native_preconditions']:continue
         assert row['solve_kind']!='LP'
         path=portable(root,row['native_log']);native_text=call_logs.call_text(root,call,call_id)
+        if row['native_status']=='INFEASIBLE':
+            assert 'Infeasible model' in native_text or 'Model is infeasible' in native_text
+            proofs.append(dict(call=call_id,lo=call['lower_g'],hi=call['upper_g'],L=call['cutoff'],cutoff=call['cutoff'],
+                sequence=j['return_sequences'][call_id],source='linked_returned_infeasible_original_integer_model_cutoff',
+                native_status=row['native_status'],native_log=path.relative_to(root).as_posix(),native_log_SHA=sha(path),full_original=False))
+            continue
         printed=re.findall(r'Best objective [^,]+, best bound ([^,]+), gap',native_text)
         if row['native_status']=='OPTIMAL':assert 'Optimal solution found' in native_text and printed
         if not printed:continue

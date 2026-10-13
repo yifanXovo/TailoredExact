@@ -1,0 +1,25 @@
+{
+  "observed_UTC": "2026-10-13T05:31:43.795326+00:00",
+  "execution_stage": "BLOCKED_PENDING_USER_BUDGET_DECISION",
+  "budget": {
+    "paid_starts": 11,
+    "paid_outer_seconds": 624.9858250617981,
+    "remaining_starts": 9,
+    "remaining_outer_seconds": 27375.014174938202,
+    "qualification_starts": 11,
+    "qualification_seconds": 624.9858250617981,
+    "unclosed": []
+  },
+  "actual_H100_PS_native_starts": 1,
+  "actual_H100_MB_native_starts": 0,
+  "actual_formal_starts": 0,
+  "required_new_process_tree": "one wrapper + one M-B child; existing sealed P-S read-only postverification; no P-S rerun",
+  "requested_qualification_start_limit": 13,
+  "requested_verifier_identity_exception": "read-only fingerprint-state correction applied to already sealed P-S",
+  "corrected_checker_does_not_change_PE_or_mathematical_model": true,
+  "official_fingerprint_source": "https://support.gurobi.com/hc/en-us/articles/41809886403217-Why-is-my-model-fingerprint-different",
+  "original_failed_slots_preserved": true,
+  "qualification_seconds_limit": 1200,
+  "total_starts_limit": 20,
+  "total_seconds_limit": 28000
+}

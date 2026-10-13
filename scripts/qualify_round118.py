@@ -80,6 +80,13 @@ def log_cases(q,cases):
     iv=logs.build(ROOT,l,f,identical,r);assert set(iv['views'])=={1,2}
     assert iv['views'][1]['binding']['byte_end']<=iv['views'][2]['binding']['byte_begin']
     cases.append(dict(case='different_calls_identical_values_models_scopes_keep_distinct_identity',passed=True))
+    # A scoped infeasible solve proves the absence of F<=its cutoff, rather
+    # than a fabricated numeric '-' terminal bound. It is still this call.
+    inf=copy.deepcopy(ledger);inf[0]['native_status']='INFEASIBLE'
+    infchain=dict(logs=[dict(call=1,text='Infeasible model\n'),dict(call=2,text=vl['views'][2]['text'])],ledger=inf,phase=chain['phase'])
+    ic=audit.claims_for(l,jl,infchain,r)
+    assert ic[0]['value']==jl['calls'][1]['cutoff'] and ic[0]['call']==1
+    cases.append(dict(case='scoped_INFEASIBLE_cutoff_claim_bound_to_its_return_not_dash_or_sibling',passed=True,synthetic_terminal_fixture=True))
     # Restore the explicitly synthetic two-segment fixture for publication.
     target.write_bytes(b''.join(data));save_ledger(ledger)
     write(f/'provenance.json',dict(synthetic=True,no_Optimize=True,not_a_performance_observation=True,bindings=vl['bindings']))

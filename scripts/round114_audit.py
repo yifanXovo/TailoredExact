@@ -137,6 +137,10 @@ def claims_for(l,j,chain,r):
             add(cid,seq,value,'final_ObjBoundC_API_and_terminal_log',available)
         else:
             row=chain['ledger'][cid-1]
+            if row['native_status']=='INFEASIBLE':
+                assert 'Infeasible model' in log['text'] or 'Model is infeasible' in log['text']
+                add(cid,seq,j['calls'][cid]['cutoff'],'linked_returned_infeasible_model_cutoff_complement',available)
+                continue
             if row['solve_kind']=='LP':
                 printed=re.findall(r'Optimal objective\s+([-+0-9.eE]+)',log['text'])
                 if printed:add(cid,seq,float(printed[-1]),'linked_LP_terminal_log',available)
