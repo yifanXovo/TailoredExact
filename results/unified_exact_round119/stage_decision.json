@@ -1,0 +1,21 @@
+{
+  "stage": "STOP_TESTED_CONFIGURATION",
+  "reason": "All nine fixed development arms qualified and the mechanism was actually exposed in all three candidate arms. F2 has a material complete-certificate time WIN, while N40 remains an open TIE against M-B. R98-C2 has a severe regression against the primary cold P-GRB benchmark and a severe loss against M-B. The predeclared primary-risk admission condition therefore fails; all three fixed E50-C1 positions are canceled, and this default-off tested configuration is stopped without another variant or default promotion.",
+  "development_gate": {
+    "nonempty_contraction_and_subsequent_solve": true,
+    "material_WIN_or_additional_complete_certificate": true,
+    "no_severe_P_regression_and_fewer_than_two_P_LOSS": false,
+    "complete_certificate_count_preserved": true
+  },
+  "fixed_confirmation_completed": false,
+  "fixed_confirmation_canceled": true,
+  "formal_arms": 9,
+  "actual_formal_contraction_exposure": true,
+  "material_MB_PC_over_MB_WIN_roles": [
+    "F2"
+  ],
+  "V40_MB_PC_nonzero_complete_certificate": false,
+  "default_ENS_changed": false,
+  "no_automatic_further_test": true,
+  "not_independent_generalization_or_statistical_superiority": true
+}

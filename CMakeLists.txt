@@ -27,6 +27,7 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(EXACT_EBRP_LIB_SOURCES
+  src/Round119ProofContraction.cpp
   src/Round105Decomposition.cpp
   src/Round106Events.cpp
   src/Parser.cpp
@@ -323,12 +324,19 @@ add_executable(Round64ProjectionAudit src/round64_projection_audit.cpp)
 target_link_libraries(Round64ProjectionAudit PRIVATE exact_ebrp_core)
 add_executable(Round65ReferenceBuild src/round65_reference_build.cpp)
 add_executable(Round112ReferenceBatch scripts/round112_reference_batch.cpp)
+if(EXACT_EBRP_ENABLE_GUROBI AND WIN32)
+  add_executable(Round119Qualification tests/round119_qualification.cpp)
+  target_link_libraries(Round119Qualification PRIVATE exact_ebrp_core)
+endif()
 target_link_libraries(Round112ReferenceBatch PRIVATE exact_ebrp_core)
 target_link_libraries(Round65ReferenceBuild PRIVATE exact_ebrp_core)
 if(EXACT_EBRP_ENABLE_GUROBI)
   target_include_directories(Round64ProjectionAudit PRIVATE "${GUROBI_INCLUDE_DIR}")
   target_include_directories(Round65ReferenceBuild PRIVATE "${GUROBI_INCLUDE_DIR}")
   target_include_directories(Round112ReferenceBatch PRIVATE "${GUROBI_INCLUDE_DIR}")
+  if(TARGET Round119Qualification)
+    target_include_directories(Round119Qualification PRIVATE "${GUROBI_INCLUDE_DIR}")
+  endif()
 endif()
 add_executable(Round64Tests tests/round64_shared_tests.cpp)
 add_executable(Round65Tests tests/round65_proof_tests.cpp)

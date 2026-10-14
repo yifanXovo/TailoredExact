@@ -1,0 +1,16 @@
+{
+  "schema": "round119.actual_exit_upper.v1",
+  "source": "Codex recorded CommandExecution completion event",
+  "completion_UTC": "2026-10-13T21:16:33.190Z",
+  "completion_unix": 1791926193.19,
+  "tool_process_id": "51024",
+  "wrapper_pid": 84552,
+  "wrapper_creation_unix": 1791925918.9350471,
+  "status": "completed",
+  "exit_code": 0,
+  "command": "python scripts/qualify_round119.py qual02 --resume-sealed; parent shell exits with child status",
+  "meaning": "Completion of the waiting parent shell is an authoritative upper bound on child exit. Event timestamp is not claimed as exact child OS FILETIME.",
+  "pending_lower": 274.19872262573335,
+  "actual_outer_upper": 274.25495290756226,
+  "no_native_rerun": true
+}

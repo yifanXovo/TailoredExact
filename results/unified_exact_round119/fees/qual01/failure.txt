@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round119\scripts\qualify_round119.py", line 68, in billed
+    i=read(OUT/'qualification/chain/identity.json');actual+=1;source=micro(i['launches'][0],i)
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round119\scripts\qualify_round119.py", line 22, in micro
+    view=logs.build(ROOT,l,d,j,r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round119\scripts\round118_call_logs.py", line 76, in build
+    assert types and (int(types[1]),int(types[2])-int(types[3]),int(types[3]))==(counts['C'],counts['I'],counts['B'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,38 @@
+{
+  "group": {
+    "number": 4,
+    "id": "E50-C1",
+    "campaign": "campaign/group04",
+    "conditional": true,
+    "cap_seconds": 3600,
+    "methods": [
+      "P-GRB",
+      "MB-PC",
+      "M-B"
+    ],
+    "nominal_seconds": 10800,
+    "management_reserve": 120
+  },
+  "arms": [
+    {
+      "arm": "P-GRB",
+      "state": "CANCELED_NOT_ADMITTED"
+    },
+    {
+      "arm": "MB-PC",
+      "state": "CANCELED_NOT_ADMITTED"
+    },
+    {
+      "arm": "M-B",
+      "state": "CANCELED_NOT_ADMITTED"
+    }
+  ],
+  "all_three_unrun": true,
+  "reason": {
+    "nonempty_contraction_and_subsequent_solve": true,
+    "material_WIN_or_additional_complete_certificate": true,
+    "no_severe_P_regression_and_fewer_than_two_P_LOSS": false,
+    "complete_certificate_count_preserved": true
+  },
+  "not_counted_as_completed": true
+}
