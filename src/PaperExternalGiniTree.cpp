@@ -22,6 +22,7 @@
 #include "Round65Proof.hpp"
 #include "Round92HandlingActivation.hpp"
 #include "Round119ProofContraction.hpp"
+#include "Round120NativeProof.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -3186,6 +3187,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     double verified_ub = verified_seed.objective;
     long long incumbent_epoch = 0;
     std::vector<RoutePlan> best_routes = verified_seed.routes;
+    auto round120 = options.round120_native_proof != "off"
+        ? std::make_shared<Round120NativeProof>(instance,options,artifact_dir/"round120_events.jsonl",
+            root_gamma_L,root_gamma_U,best_routes)
+        : std::shared_ptr<Round120NativeProof>{};
     auto round119 = options.round119_proof_contraction
         ? std::make_shared<Round119ProofContraction>(instance,options,
             artifact_dir/"round119_events.jsonl",best_routes,scheduler.certificateTolerance())
@@ -3564,6 +3569,45 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     long long round68_start_sequence = 0;
     long long round107_request_sequence = 0;
     auto solveBudgeted = [&](FixedIntervalMipRequest& request) {
+        if(round120) {
+            round120->observe(best_routes,0);
+            if(request.solve_kind!=FixedIntervalSolveKind::PaperLpRelaxation &&
+                round120->firstInteger(request.leaf_id,request.gamma_L,request.gamma_U,globalDeadlineRemaining())) {
+                auto& state=runtime.at(request.leaf_id);
+                if(!state.artifact.round120_extended) {
+                    const auto started=PaperClock::now();
+                    const auto base=state.artifact;
+                    if(base.sha256!=request.canonical_model_fingerprint)
+                        throw std::runtime_error("round120_original_request_artifact_mismatch");
+                    // The previously paid LP keeps its immutable old artifact.
+                    // No integer search exists yet in this initial installation.
+                    backend->discardLeaf(request.leaf_id);
+                    state.artifact=extendRound120Artifact(base,round120->pair(),options.round120_native_proof=="d1",
+                        base.path.parent_path()/(base.path.stem().string()+"_round120_"+options.round120_native_proof+".lp"));
+                    if(!std::filesystem::exists(artifact_dir/"round120_root_pair.json"))
+                        round120->savePair(artifact_dir/"round120_root_pair.json");
+                    std::ostringstream fields;fields<<std::setprecision(17)<<"\"leaf\":"<<std::quoted(request.leaf_id)
+                        <<",\"base_model\":"<<std::quoted(base.sha256)<<",\"model\":"<<std::quoted(state.artifact.sha256)
+                        <<",\"path\":"<<std::quoted(state.artifact.path.string())
+                        <<",\"installation_seconds\":"<<std::chrono::duration<double>(PaperClock::now()-started).count()
+                        <<",\"mode\":"<<std::quoted(options.round120_native_proof)<<",\"new_proof_triggered_interrupts\":0";
+                    round120->record(request.leaf_id=="L0"?"root_formulation_installed":"root_formulation_carried_to_original_MIP",fields.str());
+                    if(options.round120_qualification_export_only) {
+                        const bool other=options.round120_native_proof!="d1";
+                        extendRound120Artifact(base,round120->pair(),other,artifact_dir/(other?"round120_D1.lp":"round120_D0.lp"));
+                        // Diagnostic export is explicitly separate from a method
+                        // result; all real LP returns and cleanup are retained.
+                        throw Round120ExportComplete();
+                    }
+                }
+                request.canonical_model_path=state.artifact.path;
+                request.canonical_model_fingerprint=state.artifact.sha256;
+                request.canonical_model_scope=state.artifact.model_scope;
+                request.canonical_row_signature=state.artifact.row_signature;
+                request.round120_proof=round120;
+                request.global_deadline_remaining_seconds=globalDeadlineRemaining();
+            }
+        }
         if (options.round107_frontier_struct) {
             request.round107_request_id = ++round107_request_sequence;
             request.round107_epoch = incumbent_epoch;
@@ -3614,6 +3658,33 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             request.global_deadline_remaining_seconds = globalDeadlineRemaining();
         }
         auto captureNative = [&](const FixedIntervalMipOutcome& out) {
+            if(round120) {
+                if(!native_evidence || !native_evidence->enabled() || round120->failed())
+                    throw std::runtime_error("PROOF_RELIABILITY_PRIORITY: round120_evidence_or_dependency_failed");
+                if(out.incumbent_available && out.incumbent_independently_verified)
+                    round120->observe(out.incumbent_routes,out.native_evidence_call);
+                if(request.solve_kind==FixedIntervalSolveKind::PaperLpRelaxation &&
+                    (request.leaf_id=="L0.0" || request.leaf_id=="L0.1") &&
+                    out.lp_terminal_valid && out.optimal && out.native_bound_available &&
+                    out.exact_zero_gap_roundtrip && out.model_fingerprint_matches_request &&
+                    out.feasibility_consistency_gate && out.solver_finalization_reached &&
+                    out.optimize_return_code==0 && out.failure_reason=="none") {
+                    Round119Certificate c;c.parent="L0";c.leaf=request.leaf_id;c.depth=0;
+                    c.side=request.leaf_id=="L0.0"?0:1;c.call=out.native_evidence_call;c.epoch=incumbent_epoch;
+                    c.model=request.canonical_model_fingerprint;c.path=request.canonical_model_path.string();
+                    c.scope=request.canonical_model_scope;c.status=out.native_status;
+                    c.parent_lower=root_gamma_L;c.parent_upper=root_gamma_U;c.lower=request.gamma_L;c.upper=request.gamma_U;
+                    c.cutoff=request.verified_cutoff;c.bound=out.native_bound;c.available_seconds=processElapsedSeconds(options);
+                    round120->add(c);
+                }
+                if(request.round120_proof) {
+                    std::ostringstream fields;fields<<"\"call\":"<<out.native_evidence_call<<",\"leaf\":"<<std::quoted(request.leaf_id)
+                        <<",\"model\":"<<std::quoted(request.canonical_model_fingerprint)
+                        <<",\"status\":"<<std::quoted(out.native_status)<<",\"attempted\":"<<(out.attempted?"true":"false")
+                        <<",\"return_code\":"<<out.optimize_return_code;
+                    round120->record("extended_native_returned",fields.str());
+                }
+            }
             if(round119) {
                 if(!native_evidence || !native_evidence->enabled())
                     throw std::runtime_error("round119_evidence_observer_failed");
@@ -3874,6 +3945,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 (leaf.id + "_epoch_" + std::to_string(incumbent_epoch) +
                  "_generation_" + std::to_string(state.artifact_generation) + ".lp"),
             spec);
+        if(round120 && round120->installed() && state.artifact.written) {
+            const auto base=state.artifact;
+            state.artifact=extendRound120Artifact(base,round120->pair(),options.round120_native_proof=="d1",
+                base.path.parent_path()/(base.path.stem().string()+"_round120_"+options.round120_native_proof+".lp"));
+            std::ostringstream fields;fields<<"\"leaf\":"<<std::quoted(leaf.id)<<",\"epoch\":"<<incumbent_epoch
+                <<",\"base_model\":"<<std::quoted(base.sha256)<<",\"model\":"<<std::quoted(state.artifact.sha256);
+            round120->record("extension_carried_original_artifact_generation",fields.str());
+        }
         if (options.round92_handling_activation) {
             const auto& a = state.artifact;
             round92_handling_ledger

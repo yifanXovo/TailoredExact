@@ -24,6 +24,7 @@
 #include "Round92HandlingActivation.hpp"
 #include "Round105Decomposition.hpp"
 #include "Round106Events.hpp"
+#include "Round120NativeProof.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
@@ -128,6 +129,7 @@ void usage() {
         << "[--round92-handling-activation true|false] "
         << "[--round96-route-order true|false] "
         << "[--round98-state-service off|aggregate|projected|vehicle-state|q-integer|m-binary|m-binary-linked] "
+        << "[--round120-native-proof-d0 | --round120-native-proof-d1] "
         << "[--round100-continuous-quantities] "
         << "[--round97-native-closure off|observe|shadow|feedback] "
         << "[--round97-native-operator r83|r96] "
@@ -264,6 +266,10 @@ std::string lowerAscii(std::string value) {
 }
 
 std::string effectiveAlgorithmIdentity(const ebrp::SolveOptions& opt) {
+    if (opt.round120_native_proof != "off")
+        return opt.round120_qualification_empty_seed
+            ? "qualification-round120-empty-seed-mb-"+opt.round120_native_proof
+            : "research-round120-native-proof-"+opt.round120_native_proof;
     if (opt.round119_proof_contraction)
         return opt.round119_qualification_empty_seed
             ? "qualification-round119-empty-seed-mb-pc" : "research-round119-mb-proof-contraction";
@@ -860,6 +866,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gurobi-presolve") opt.gurobi_presolve = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-hga-start") opt.gurobi_hga_start = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round112-ens-start-compact") opt.round112_ens_start_compact = true;
+        else if (arg == "--round120-native-proof-d0" || arg == "--round120-native-proof-d1") {
+            if(opt.round120_native_proof!="off") throw std::runtime_error("Round120 D0/D1 flags are mutually exclusive");
+            opt.round120_native_proof=arg=="--round120-native-proof-d1"?"d1":"d0";
+        }
+        else if (arg == "--round120-qualification-empty-seed") opt.round120_qualification_empty_seed=true;
+        else if (arg == "--round120-qualification-export-only") opt.round120_qualification_export_only=true;
         else if (arg == "--round119-proof-contraction") opt.round119_proof_contraction = true;
         else if (arg == "--round119-qualification-empty-seed") opt.round119_qualification_empty_seed = true;
         else if (arg == "--gurobi-home") opt.gurobi_home = requireValue(i, argc, argv);
@@ -3511,6 +3523,19 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round96 route order requires isolated ENS-C Round83 gcap-frontier");
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
+    if(opt.round120_native_proof!="off" &&
+        (opt.algorithm_preset!="research-round83-vds-equal-net-exchange" || opt.method!="gcap-frontier" ||
+         opt.round98_state_service!="m-binary" || !opt.k1_am_sf_controller_enabled ||
+         !opt.round68_verified_start || opt.external_gini_interval_mip_policy!="round55-vd-p" ||
+         opt.round119_proof_contraction || opt.round119_qualification_empty_seed ||
+         opt.round100_continuous_quantities || opt.round112_ens_start_compact || opt.round107_frontier_struct ||
+         opt.round97_native_closure!="off" || opt.round90_lp_g_split || opt.round92_handling_activation ||
+         opt.round96_route_order || opt.round88_constructive_only_descent || opt.round89_native_ot_b1 ||
+         opt.round65_budget || opt.round60_candidate_mode!="off" || opt.round61_candidate_mode!="off" ||
+         opt.round62_threshold_mode!="off" || opt.native_evidence_dir.empty()))
+        throw std::runtime_error("Round120 requires isolated M-B, complete own Start and same-run evidence");
+    if((opt.round120_qualification_empty_seed || opt.round120_qualification_export_only) && opt.round120_native_proof=="off")
+        throw std::runtime_error("Round120 diagnostic flags require explicit native proof mode");
     if (opt.round119_proof_contraction &&
         (opt.algorithm_preset != "research-round83-vds-equal-net-exchange" ||
          opt.method != "gcap-frontier" || opt.round98_state_service != "m-binary" ||
@@ -4178,6 +4203,13 @@ ebrp::RunConfigSnapshot buildRunConfigSnapshot(const ebrp::Instance& instance,
         snapshot.algorithm_preset = effectiveAlgorithmIdentity(opt);
         append_explicit_research_feature("round98_state_service_" + opt.round98_state_service);
         snapshot.preset_reason = "Isolated ENS-C state/service mode " + opt.round98_state_service + "; direction representation and quantity declarations follow the selected mode";
+    }
+    if(opt.round120_native_proof!="off") {
+        snapshot.algorithm_preset=effectiveAlgorithmIdentity(opt);
+        append_explicit_research_feature("round120_paid_root_native_proof_"+opt.round120_native_proof);
+        if(opt.round120_qualification_empty_seed)append_explicit_research_feature("round120_nonperformance_empty_seed");
+        if(opt.round120_qualification_export_only)append_explicit_research_feature("round120_nonperformance_paid_proof_export");
+        snapshot.preset_reason="Round120: one root selector and three pre-Optimize rows from own returned root LP pair; default off";
     }
     if(opt.round119_proof_contraction) {
         snapshot.algorithm_preset=effectiveAlgorithmIdentity(opt);
@@ -8290,7 +8322,7 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
     const ebrp::SolveOptions& opt) {
     PaperPrimalHeuristicResult out;
     const auto start = std::chrono::steady_clock::now();
-    if(opt.round119_qualification_empty_seed) {
+    if(opt.round119_qualification_empty_seed || opt.round120_qualification_empty_seed) {
         for(int k=0;k<instance.M;++k) {ebrp::RoutePlan r;r.vehicle=k;r.nodes={0,0};out.routes.push_back(r);}
         out.verification=ebrp::verifySolution(instance,out.routes,opt.lambda);
         if(!out.verification.feasible || !out.verification.errors.empty())
@@ -8298,8 +8330,10 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
         out.found=true;out.hga_stop_mode="qualification_empty_seed_not_H";
         out.candidates_tested=out.candidates_verified=1;
         out.runtime_seconds=std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count();
-        out.notes.push_back("Explicit Round119 nonperformance fixture entry: one physical empty fleet; full H intentionally not executed");
-        ebrp::recordProcessPhase(opt,"round119_qualification_empty_seed","verified","no historical fleet or artificial proof");
+        out.notes.push_back(std::string("Explicit ")+(opt.round120_qualification_empty_seed?"Round120":"Round119")+
+            " nonperformance fixture entry: one physical empty fleet; full H intentionally not executed");
+        ebrp::recordProcessPhase(opt,opt.round120_qualification_empty_seed?"round120_qualification_empty_seed":"round119_qualification_empty_seed",
+            "verified","no historical fleet or artificial proof");
         return out;
     }
     const std::string mode = opt.primal_heuristic;
@@ -20368,6 +20402,11 @@ int main(int argc, char** argv) {
         ebrp::recordProcessPhase(
             opt, "final_result_serialization_complete", "complete");
         ebrp::recordProcessPhase(opt, "process_exit", "complete", "rc=0");
+        return 0;
+    } catch (const ebrp::Round120ExportComplete& e) {
+        if(!opt.round120_qualification_export_only)throw;
+        std::cout<<e.what()<<'\n';
+        ebrp::recordProcessPhase(opt,"process_exit","diagnostic_export_complete","rc=0; no method endpoint");
         return 0;
     } catch (const std::bad_alloc& e) {
         const std::string reason = std::string("std_bad_alloc: ") + e.what();

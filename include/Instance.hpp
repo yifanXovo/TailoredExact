@@ -29,6 +29,9 @@ struct Instance {
 };
 
 struct SolveOptions {
+    std::string round120_native_proof = "off"; // off|d0|d1; explicitly mutually exclusive
+    bool round120_qualification_empty_seed = false;
+    bool round120_qualification_export_only = false;
     bool round119_proof_contraction = false;
     bool round119_qualification_empty_seed = false; // explicit nonperformance test entry
     bool round107_frontier_struct = false; // complete original ENS controller; scoped assignment events

@@ -13,6 +13,7 @@
 namespace ebrp {
 struct Round65Budget;
 class Round97NativeClosure;
+class Round120NativeProof;
 
 enum class FixedIntervalSolveKind {
     LegacyMipQuantum,
@@ -86,6 +87,7 @@ struct FixedIntervalMipCapabilities {
 };
 
 struct FixedIntervalMipRequest {
+    std::shared_ptr<Round120NativeProof> round120_proof;
     std::function<bool(const std::vector<RoutePlan>&, long long)> round119_terminal_event;
     long long round107_request_id = 0, round107_epoch = 0;
     std::shared_ptr<Round97NativeClosure> round97_session;

@@ -15,6 +15,7 @@
 #include "ServiceResourceCuts.hpp"
 #include "ServiceResourceHull.hpp"
 #include "MipStartMapping.hpp"
+#include "Round120NativeProof.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
@@ -382,6 +383,13 @@ bool evidenceParameterReadback(GurobiApi& api,GRBenv* env,NativeEvidenceScope& s
 }
 
 struct ProgressCallbackState {
+    std::shared_ptr<Round120NativeProof> round120_proof;
+    std::vector<double> round120_objective;
+    double round120_constant=0;
+    double round120_lambda=0;
+    int round120_h=-1,round120_g=-1;
+    bool round120_root_sampled=false;
+    std::string round120_failure;
     std::function<bool(const std::vector<RoutePlan>&, long long)> round119_terminal_event;
     bool round119_termination_requested = false;
     std::string round119_failure;
@@ -592,6 +600,55 @@ void writeRound68StartEvidence(const FixedIntervalMipRequest& request,
     if (!file) throw std::runtime_error("round68_start_evidence_write_failed");
 }
 
+void auditRound120Native(const GurobiApi& api,GRBmodel* model,
+    const FixedIntervalMipRequest& request,const std::vector<std::string>& names,
+    const std::vector<char>& types) {
+    if(!request.round120_proof)return;
+    auto check=[](int rc){if(rc)throw std::runtime_error("round120_native_API_"+std::to_string(rc));};
+    const int n=int(names.size());int rows=0,sense=0;double constant=0;
+    check(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&rows));
+    check(api.getintattr(model,GRB_INT_ATTR_MODELSENSE,&sense));
+    check(api.getdblattr(model,GRB_DBL_ATTR_OBJCON,&constant));
+    if(n<=0||rows<3||sense!=GRB_MINIMIZE||types.size()!=names.size())throw std::runtime_error("round120_native_shape_or_sense");
+    const auto hi=std::find(names.begin(),names.end(),"r120_h"),gi=std::find(names.begin(),names.end(),"G");
+    if(hi==names.end()||gi==names.end()||std::count(names.begin(),names.end(),"r120_h")!=1)
+        throw std::runtime_error("round120_single_selector_or_G_missing");
+    const int h=int(hi-names.begin()),g=int(gi-names.begin());
+    double lb=0,ub=0;int priority=-1;
+    check(api.getdblattrarray(model,GRB_DBL_ATTR_LB,h,1,&lb));check(api.getdblattrarray(model,GRB_DBL_ATTR_UB,h,1,&ub));
+    check(api.getintattrarray(model,GRB_INT_ATTR_BRANCHPRIORITY,h,1,&priority));
+    if(types[h]!=GRB_BINARY||lb!=0||ub!=1||priority!=0)throw std::runtime_error("round120_selector_type_bound_or_priority");
+    SolverNeutralLinearModel matrix;if(!readLinearModel(api,model,n,rows,matrix))throw std::runtime_error("round120_native_matrix_read");
+    std::vector<double> obj(n);check(api.getdblattrarray(model,GRB_DBL_ATTR_OBJ,0,n,obj.data()));
+    if(obj[h]!=0)throw std::runtime_error("round120_selector_changed_objective");
+    std::array<std::vector<double>,3> coef;
+    const std::array<const char*,3> row_names{{"r120_g_lower","r120_g_upper","r120_f_lower"}};
+    for(int k=0;k<3;++k) {
+        const int row=rows-3+k;char* name=nullptr;check(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,row,&name));
+        if(!name||std::string(name)!=row_names[k]||matrix.senses[row]!=(k==1?'<':'>'))
+            throw std::runtime_error("round120_ordinary_row_name_or_sense");
+        coef[k].assign(n,0);
+        for(int z=matrix.row_starts[row];z<matrix.row_starts[row+1];++z)coef[k][matrix.column_indices[z]]+=matrix.coefficients[z];
+        for(int j=0;j<n;++j)if(j!=h&&coef[k][j]!=(k==2?obj[j]:(j==g?1.:0.)))
+            throw std::runtime_error("round120_native_complete_objective_or_link_mismatch");
+    }
+    Round120Rows actual;actual.lower_base=matrix.rhs[rows-3];actual.lower_delta=-coef[0][h];
+    actual.upper_base=matrix.rhs[rows-2];actual.upper_delta=-coef[1][h];
+    actual.objective_base=matrix.rhs[rows-1];actual.objective_delta=-coef[2][h];actual.objective_constant=constant;
+    const bool conditional=request.canonical_model_scope.find("_round120_original_projection_d1")!=std::string::npos;
+    if(!round120Endpoints(actual,request.round120_proof->pair(),conditional))
+        throw std::runtime_error("round120_actual_native_endpoint_inward");
+    if(!conditional&&actual.objective_delta!=0)throw std::runtime_error("round120_D0_conditional_coefficient_present");
+    std::ofstream f(request.native_log_path.string()+".round120.native.json");f<<std::setprecision(17)
+        <<"{\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"rows\":"<<rows<<",\"columns\":"<<n
+        <<",\"h_type\":\"B\",\"h_LB\":0,\"h_UB\":1,\"h_BranchPriority\":0,\"objective_constant\":"<<constant
+        <<",\"lower_base\":"<<actual.lower_base<<",\"lower_delta\":"<<actual.lower_delta
+        <<",\"upper_base\":"<<actual.upper_base<<",\"upper_delta\":"<<actual.upper_delta
+        <<",\"objective_base\":"<<actual.objective_base<<",\"objective_delta\":"<<actual.objective_delta
+        <<",\"complete_objective_row_matches_native\":true,\"endpoints_conservative\":true,\"Optimize_extra\":0}\n";
+    f.close();if(!f)throw std::runtime_error("round120_native_audit_write_failed");
+}
+
 bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
                         const Instance& instance, const SolveOptions& options,
                         const FixedIntervalMipRequest& request,
@@ -636,7 +693,8 @@ bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
         }
         const auto routes=normalizeRound61Routes(instance, options.lambda, request.verified_start_routes);
         const auto mapped=mapVerifiedRoutesToCanonicalModel(instance, options, routes,
-            request.verified_start_source, request.gamma_L, request.gamma_U, request.verified_cutoff, domain);
+            request.verified_start_source, request.gamma_L, request.gamma_U, request.verified_cutoff, domain,
+            request.round120_proof?&request.round120_proof->pair():nullptr);
         out.warm_start_mapping_seconds=mapped.mapping_seconds;
         out.warm_start_mapping_complete=mapped.complete;
         out.round68_start_objective=mapped.objective;
@@ -1050,6 +1108,18 @@ int __stdcall progressAndBoundTargetCallback(
                     *state->evidence_instance,values,state->evidence_integer_operations);
                 state->native_evidence->witness(routes,
                     "native_MIPSOL_verified_original_routes",state->evidence_call);
+                if(state->round120_proof) {
+                    state->round120_proof->observe(routes,state->evidence_call);
+                    double native=0;
+                    if(state->api->cbget(cbdata,where,GRB_CB_MIPSOL_OBJ,&native))
+                        throw std::runtime_error("round120_native_incumbent_read_failed");
+                    const auto v=verifySolution(*state->evidence_instance,routes,state->round120_lambda);
+                    std::ostringstream fields;fields<<std::setprecision(17)<<"\"call\":"<<state->evidence_call
+                        <<",\"native_objective\":"<<native<<",\"physical_F\":"<<v.objective
+                        <<",\"physical_G\":"<<v.G<<",\"model_G\":"<<x.at(state->round120_g)
+                        <<",\"h\":"<<x.at(state->round120_h)<<",\"fixing_or_branching\":\"unknown\"";
+                    state->round120_proof->record("native_incumbent_observed",fields.str());
+                }
                 if(state->round119_terminal_event && state->native_evidence->enabled() &&
                     state->round119_terminal_event(routes,state->evidence_call) &&
                     !state->round119_termination_requested) {
@@ -1059,11 +1129,39 @@ int __stdcall progressAndBoundTargetCallback(
             }
         } catch(const std::exception& e) {
             state->native_evidence->failure(e.what());
+            if(state->round120_proof) {
+                state->round120_failure=e.what();
+                // Mandatory correctness failure, never a valid-proof/U crossing.
+                return 1;
+            }
             if(state->round119_terminal_event) {
                 state->round119_failure=e.what();state->api->terminate(model);
             }
         }
           catch(...) {state->native_evidence->failure("MIPSOL_unknown_observer_exception");}
+    }
+    if(where==GRB_CB_MIPNODE && state->round120_proof && !state->round120_root_sampled) {
+        try {
+            int status=0;double node=0;
+            if(state->api->cbget(cbdata,where,GRB_CB_MIPNODE_STATUS,&status)||
+               state->api->cbget(cbdata,where,GRB_CB_MIPNODE_NODCNT,&node))
+                throw std::runtime_error("round120_root_callback_status_read_failed");
+            if(status==GRB_OPTIMAL && node==0) {
+                std::vector<double> x(state->round120_objective.size());
+                if(state->api->cbget(cbdata,where,GRB_CB_MIPNODE_REL,x.data()))
+                    throw std::runtime_error("round120_root_relaxation_read_failed");
+                long double f=state->round120_constant;
+                for(std::size_t j=0;j<x.size();++j)f+=static_cast<long double>(x[j])*state->round120_objective[j];
+                const auto& p=state->round120_proof->pair();
+                const double conditional=p.beta0+(p.beta1-p.beta0)*x.at(state->round120_h);
+                std::ostringstream fields;fields<<std::setprecision(17)<<"\"call\":"<<state->evidence_call
+                    <<",\"node\":"<<node<<",\"h\":"<<x.at(state->round120_h)<<",\"model_G\":"<<x.at(state->round120_g)
+                    <<",\"native_objective_expression\":"<<double(f)<<",\"conditional_row_violation\":"<<conditional-double(f)
+                    <<",\"fixing_or_branching\":\"unknown\"";
+                state->round120_proof->record("first_optimal_native_root_relaxation",fields.str());
+                state->round120_root_sampled=true;
+            }
+        }catch(const std::exception& e){state->round120_failure=e.what();state->native_evidence->failure(e.what());return 1;}
     }
     if (where==GRB_CB_MIPSOL && state->round68_start_values &&
         state->round68_start_types && !state->round68_start_vector_observed) {
@@ -2603,6 +2701,8 @@ public:
 
         std::vector<double> round68_start_values;
         std::vector<char> round68_start_types;
+        try{auditRound120Native(api_,model,request,native_names,native_types);}
+        catch(const std::exception& e){out.failure_reason=e.what();return out;}
         if (request.round68_verified_start) {
             ++stats_.warm_start_candidate_count;
             const bool prepared=prepareRound68Start(api_,model,instance_,options_,request,out,
@@ -2739,6 +2839,17 @@ public:
 
         ProgressCallbackState callback;
         callback.round119_terminal_event=request.round119_terminal_event;
+        callback.round120_proof=request.round120_proof;
+        if(request.round120_proof) {
+            callback.round120_objective.resize(native_variables);
+            if(api_.getdblattrarray(model,GRB_DBL_ATTR_OBJ,0,native_variables,callback.round120_objective.data())||
+               api_.getdblattr(model,GRB_DBL_ATTR_OBJCON,&callback.round120_constant)) {
+                out.failure_reason="round120_native_objective_observer_setup";return out;
+            }
+            callback.round120_lambda=options_.lambda;
+            callback.round120_h=int(std::find(native_names.begin(),native_names.end(),"r120_h")-native_names.begin());
+            callback.round120_g=int(std::find(native_names.begin(),native_names.end(),"G")-native_names.begin());
+        }
         if(fleet_active||service_active) {
             out.gurobi_precrush_requested=1;
             out.gurobi_precrush_set_return_code=api_.setintparam(model_env,GRB_INT_PAR_PRECRUSH,1);
@@ -4002,6 +4113,10 @@ public:
         }
         if(!callback.round119_failure.empty()) {
             out.failure_reason="round119_callback_failed:"+callback.round119_failure;
+            invalidateRound89NativeOtB1FailedOutcome(out);
+        }
+        if(!callback.round120_failure.empty()) {
+            out.failure_reason="PROOF_RELIABILITY_PRIORITY: round120_callback_failed:"+callback.round120_failure;
             invalidateRound89NativeOtB1FailedOutcome(out);
         }
         if(fleet_active) {

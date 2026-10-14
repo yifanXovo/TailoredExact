@@ -2,6 +2,7 @@
 
 #include "Evaluator.hpp"
 #include "Round64SharedResource.hpp"
+#include "Round120NativeProof.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -50,7 +51,8 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
     double gamma_L,
     double gamma_U,
     double non_strict_cutoff,
-    const SolverNeutralModelDomain& domain) {
+    const SolverNeutralModelDomain& domain,
+    const Round120Pair* round120_pair) {
     const auto started = std::chrono::steady_clock::now();
     SolverNeutralMipStart out;
     out.source = source;
@@ -223,6 +225,14 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             value = 0.0;
         } else if (name == "G") {
             value = out.G;
+        } else if (name == "r120_h" && round120_pair) {
+            if (!round120Contains(*round120_pair, gamma_L, gamma_U))
+                return finish("round120_start_scope_not_contained");
+            // Shared exact midpoint deterministically belongs to the left.
+            value = out.G <= round120_pair->m ? 0.0 : 1.0;
+            const double beta = value == 0 ? round120_pair->beta0 : round120_pair->beta1;
+            if (out.objective + 1e-7 < beta)
+                return finish("round120_start_source_counterexample");
         } else if (name == "r_min") {
             value = ratio_min;
         } else if (name == "r_max") {

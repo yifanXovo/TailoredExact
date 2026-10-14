@@ -7,6 +7,7 @@
 #include <vector>
 
 namespace ebrp {
+struct Round120Pair;
 
 struct SolverNeutralModelDomain {
     std::vector<std::string> names;
@@ -45,6 +46,7 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
     double gamma_L,
     double gamma_U,
     double non_strict_cutoff,
-    const SolverNeutralModelDomain& domain);
+    const SolverNeutralModelDomain& domain,
+    const Round120Pair* round120_pair = nullptr);
 
 } // namespace ebrp
