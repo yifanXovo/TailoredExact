@@ -1,0 +1,10 @@
+{
+  "exit_code": 1,
+  "Optimize": 0,
+  "native_starts": 0,
+  "failure": "ensure_idle process inventory PowerShell UTF-8 stdout decoded by Python GBK; UnicodeDecodeError then TypeError",
+  "scientific_commit": "f209790ab105406b3955b5c6ed144182cf795baf",
+  "production_or_reader_bytes_changed": false,
+  "correction": "set PYTHONUTF8=1 for the separate review invocation only",
+  "engineering_seconds": "unknown"
+}

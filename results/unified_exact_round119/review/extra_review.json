@@ -1,0 +1,216 @@
+{
+  "passed": true,
+  "scientific_commit": "f209790ab105406b3955b5c6ed144182cf795baf",
+  "scientific_manifest_SHA": "1aabb8d6f1c0a431e0d00763293496d57ac81bfafbaeff990c86e71529d9fc28",
+  "reviewer": "implementation author in a separate pure Python process",
+  "independent_third_party": false,
+  "separate_execution_step": true,
+  "new_native_reproduction": false,
+  "checks": [
+    {
+      "item": 1,
+      "question": "Current-arm paid proof and own physical U only",
+      "passed": true,
+      "evidence": "frozen argv/source bindings, physical journals and paid source calls"
+    },
+    {
+      "item": 2,
+      "question": "Original embedding, cutoff complement, margin and scoped cover",
+      "passed": true,
+      "evidence": "actual native matrices/Start audit, min(bound,cutoff), original witness reconciliation and reconstructed covers"
+    },
+    {
+      "item": 3,
+      "question": "Strict shrink, all complements, finite depth and retained terminal guard",
+      "passed": true,
+      "evidence": "actual contracts, consumed-proof checks and scheduler transaction source"
+    },
+    {
+      "item": 4,
+      "question": "Real return before transaction, status/deadline/Start/true-G handling",
+      "passed": true,
+      "evidence": "native event contract plus successful micro and finite return/physical negative checks"
+    },
+    {
+      "item": 5,
+      "question": "All new work paid; same new PE controls and no free historical fleet",
+      "passed": true,
+      "evidence": "producer seals, three clocks, current own-fleet tables and fees"
+    },
+    {
+      "item": 6,
+      "question": "Nine fixed arms, conditional three positions and budget closure",
+      "passed": true,
+      "evidence": "current cores, development gate, confirmation completion/cancellation and retained failed receipts"
+    },
+    {
+      "item": 7,
+      "question": "One stage decision closes this configuration or admits finite further confirmation",
+      "passed": true,
+      "evidence": "stage_decision.json; no default/merge/automatic next grid"
+    }
+  ],
+  "exposure": [
+    {
+      "id": "N40-R1-S",
+      "arm": "MB-PC",
+      "enabled": true,
+      "paid_certificates": 4,
+      "own_updates": 11,
+      "strict_requests": 1,
+      "committed": 1,
+      "contracts": [
+        {
+          "sequence": 16,
+          "kind": "atomic_contraction_committed",
+          "process_seconds": 2629.416724,
+          "parent": "L0",
+          "generation": 1,
+          "epoch": 1,
+          "old_lower": 0,
+          "old_upper": 0.8064986407093288,
+          "new_lower": 0,
+          "new_upper": 0.4032493203546644,
+          "new_leaf": "L0.pc1.0",
+          "removed_side": 1,
+          "close_both": 0,
+          "proof_call": 3,
+          "proof_model": "42ad30aa8d36f9d343097d54f4bff9fcd35dbdd99c1143f9d17d48f52a54f705",
+          "proof_cutoff": 0.8064986407093288,
+          "proof_bound": 0.7875472936879973,
+          "U": 0.787157661443209,
+          "margin": 0.00038953224478827385,
+          "own_G_true": 0.20947124215749452,
+          "eligible_own_Start": 1,
+          "left_bound": 0.4789746697771772,
+          "right_bound": 0.7875472936879973,
+          "global_L": 0.560981726640687,
+          "depth": 1,
+          "deadline_remaining": 2740.583279,
+          "next_Optimize_calls": [
+            6,
+            9
+          ]
+        }
+      ],
+      "events_SHA": "87634350e0eae30255204c15c70cfce341ba3af86b69e6478736f6bc77b9eb45",
+      "actual_rebuilt_MIPs": 1,
+      "old_tree_migration_claim": false,
+      "all_removed_pieces_cutoff_complement_checked": true
+    },
+    {
+      "id": "F2",
+      "arm": "MB-PC",
+      "enabled": true,
+      "paid_certificates": 4,
+      "own_updates": 3,
+      "strict_requests": 1,
+      "committed": 1,
+      "contracts": [
+        {
+          "sequence": 7,
+          "kind": "atomic_contraction_committed",
+          "process_seconds": 4.9101817,
+          "parent": "L0",
+          "generation": 1,
+          "epoch": 1,
+          "old_lower": 0,
+          "old_upper": 0.885348300934578,
+          "new_lower": 0,
+          "new_upper": 0.442674150467289,
+          "new_leaf": "L0.pc1.0",
+          "removed_side": 1,
+          "close_both": 0,
+          "proof_call": 3,
+          "proof_model": "aaeadf01fa12aaec1e7a5ea7afb465c5f9f10fe526ddfae14e8d44d8e3b975c3",
+          "proof_cutoff": 0.885348300934578,
+          "proof_bound": 0.8826390859140161,
+          "U": 0.8699780578177863,
+          "margin": 0.012660928096229821,
+          "own_G_true": 0.2436333369852398,
+          "eligible_own_Start": 1,
+          "left_bound": 0.6105473608488208,
+          "right_bound": 0.8826390859140161,
+          "global_L": 0.7690075403689502,
+          "depth": 1,
+          "deadline_remaining": 1165.0898218,
+          "next_Optimize_calls": [
+            6,
+            9
+          ]
+        }
+      ],
+      "events_SHA": "f3ed3ed3b7691093b8debac2dc4b16a58657408ada8c99b3b7f78713a427fb33",
+      "actual_rebuilt_MIPs": 1,
+      "old_tree_migration_claim": false,
+      "all_removed_pieces_cutoff_complement_checked": true
+    },
+    {
+      "id": "R98-C2",
+      "arm": "MB-PC",
+      "enabled": true,
+      "paid_certificates": 4,
+      "own_updates": 25,
+      "strict_requests": 1,
+      "committed": 1,
+      "contracts": [
+        {
+          "sequence": 16,
+          "kind": "atomic_contraction_committed",
+          "process_seconds": 69.866364,
+          "parent": "L0",
+          "generation": 1,
+          "epoch": 1,
+          "old_lower": 0,
+          "old_upper": 0.39162089674952894,
+          "new_lower": 0,
+          "new_upper": 0.19581044837476447,
+          "new_leaf": "L0.pc1.0",
+          "removed_side": 1,
+          "close_both": 0,
+          "proof_call": 3,
+          "proof_model": "920341edf4a335f95d8fa5bf590276b16f98399649cd8ab3ee00f5f6b68bbd72",
+          "proof_cutoff": 0.39162089674952894,
+          "proof_bound": 0.3170161843747645,
+          "U": 0.30964697330117524,
+          "margin": 0.007369111073589232,
+          "own_G_true": 0.08503733646174919,
+          "eligible_own_Start": 1,
+          "left_bound": 0.162005482167712,
+          "right_bound": 0.3170161843747645,
+          "global_L": 0.18876504408197672,
+          "depth": 1,
+          "deadline_remaining": 1700.1336385,
+          "next_Optimize_calls": [
+            6,
+            9
+          ]
+        }
+      ],
+      "events_SHA": "7b3b39c3dfaa5cd50eb036ff08e82782fd8b24407320447b3cb85c35f17b7411",
+      "actual_rebuilt_MIPs": 1,
+      "old_tree_migration_claim": false,
+      "all_removed_pieces_cutoff_complement_checked": true
+    }
+  ],
+  "budget": {
+    "paid_starts": 25,
+    "paid_outer_seconds": 23921.00799512863,
+    "remaining_starts": 15,
+    "remaining_outer_seconds": 24078.99200487137,
+    "qualification_starts": 12,
+    "qualification_seconds": 333.054728269577,
+    "unclosed": []
+  },
+  "retained_limitations": [
+    "numerical evidence under original tolerances, not rational proof",
+    "supplementary native lifecycle tail failed a test assumption and was not rerun",
+    "all roles already exposed",
+    "current containment/restore do not attest all history or future commits"
+  ],
+  "recovery_receipt_SHA": "071fbdcc018c927ebf4a8d319bfc8cee5a0851c65315c5c64f5042c999721c69",
+  "Optimize": 0,
+  "native_starts": 0,
+  "engineering_seconds": 1.8747131999989506,
+  "receipt_does_not_attest_its_own_future_commit": true
+}
