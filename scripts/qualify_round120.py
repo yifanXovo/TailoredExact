@@ -91,8 +91,9 @@ def billed(label):
         from round100_idle import ensure_idle
         ensure_idle();identity();assert read(OUT/'prospective_helper_freeze.json')['helpers']==helpers()
         actual+=1;run_child(fee,actual,'zero_native_matrix_Start',plan['steps'][0]['command'],300)
-        finite=read(OUT/'qualification/native_contract/round120_physical_embedding.json');assert finite['passed']
-        for p in (OUT/'qualification/native_contract').glob('*.lp.round120.json'):coefficients(Path(str(p)[:-len('.round120.json')]))
+        native_contract=Path(plan['steps'][0]['command'][2])
+        finite=read(native_contract/'round120_physical_embedding.json');assert finite['passed']
+        for p in native_contract.glob('*.lp.round120.json'):coefficients(Path(str(p)[:-len('.round120.json')]))
         resolve()
         i=read(OUT/'qualification/chain/identity.json');l=i['launches'][0]
         actual+=1;start=time.perf_counter();startunix=time.time();supervised(l,i,start);finish_producer(l,start,startunix);chain=micro(l,i)

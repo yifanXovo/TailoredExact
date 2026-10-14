@@ -59,14 +59,48 @@ void type_start_lifecycle(const std::filesystem::path& path,const Native& data,
         check(getcharattrarray(model,"VType",0,n,readback.data()));require(readback==original,"all original types not restored");
         check(setintattr(model,"NumStart",1));check(setintparam(env,"StartNumber",0));check(updatemodel(model));
         std::vector<double> start(n);
+        int state=0;
         for(const auto* point:{&first,&second}) {
             check(setdblattrarray(model,"Start",0,n,const_cast<double*>(point->data())));check(updatemodel(model));
             check(getdblattrarray(model,"Start",0,n,start.data()));require(start==*point,"all-column Start readback");
+            std::ofstream vectors(dest.string()+".state"+std::to_string(state++)+".csv");
+            vectors<<std::setprecision(17)<<"variable,type,value,readback,lower,upper,objective_coefficient\n";
+            for(int j=0;j<n;++j)vectors<<data.domain.names[j]<<','<<original[j]<<','<<(*point)[j]<<','<<start[j]<<','
+                <<data.domain.lower_bounds[j]<<','<<data.domain.upper_bounds[j]<<','<<data.objective[j]<<'\n';
+            vectors.close();require(bool(vectors),"actual full Start state vector write");
         }
         require(first!=second,"same-SHA different-Start fixture not different");
         std::ofstream f(dest);f<<"{\"Optimize\":0,\"LP_to_MIP_all_types_restored\":true,\"same_SHA_two_distinct_Start_states\":true,\"all_column_readback_equal\":true}\n";
     }catch(...){if(model)freemodel(model);if(env)freeenv(env);FreeLibrary(dll);throw;}
     freemodel(model);freeenv(env);FreeLibrary(dll);
+}
+void native_constant_fixture(const std::filesystem::path& input,const Round120Pair& pair,
+    const std::filesystem::path& output) {
+    HMODULE dll=LoadLibraryW(L"gurobi130.dll");require(dll!=nullptr,"actual constant DLL");
+#define API(n) auto n=reinterpret_cast<decltype(&GRB##n)>(GetProcAddress(dll,"GRB" #n));require(n!=nullptr,"actual constant API " #n)
+    API(emptyenvinternal);API(setintparam);API(startenv);API(readmodel);API(getintattr);API(getstrattrelement);
+    API(setdblattr);API(setdblattrarray);API(chgcoeffs);API(updatemodel);API(write);API(freemodel);API(freeenv);
+#undef API
+    auto check=[](int rc){if(rc)throw std::runtime_error("actual constant native API "+std::to_string(rc));};
+    GRBenv* env=nullptr;GRBmodel* model=nullptr;
+    try {
+        check(emptyenvinternal(&env,GRB_VERSION_MAJOR,GRB_VERSION_MINOR,GRB_VERSION_TECHNICAL));
+        check(setintparam(env,"OutputFlag",0));check(startenv(env));check(readmodel(env,input.string().c_str(),&model));
+        int n=0,rows=0,h=-1;check(getintattr(model,"NumVars",&n));check(getintattr(model,"NumConstrs",&rows));
+        for(int j=0;j<n;++j){char* name=nullptr;check(getstrattrelement(model,"VarName",j,&name));if(name&&std::string(name)=="r120_h")h=j;}
+        require(h>=0,"constant fixture selector");
+        check(setdblattr(model,"ObjCon",.25));
+        const auto r=round120Rows(pair,true,.25);int last=rows-1;double rhs=r.objective_base,coefficient=-r.objective_delta;
+        check(setdblattrarray(model,"RHS",last,1,&rhs));check(chgcoeffs(model,1,&last,&h,&coefficient));
+        check(updatemodel(model));check(write(model,output.string().c_str()));
+    }catch(...){if(model)freemodel(model);if(env)freeenv(env);FreeLibrary(dll);throw;}
+    freemodel(model);freeenv(env);FreeLibrary(dll);
+    const auto actual=read_native(output);require(actual.constant==.25,"MPS actual ObjCon lost");
+    const auto r=round120Rows(pair,true,actual.constant);require(actual.linear.rhs.back()==r.objective_base,"actual constant omitted from row");
+    const int last=int(actual.linear.rhs.size())-1;
+    std::ofstream receipt(output.string()+".json");receipt<<std::setprecision(17)<<"{\"Optimize\":0,\"actual_ObjCon\":"<<actual.constant
+        <<",\"objective_row_RHS\":"<<actual.linear.rhs[last]<<",\"objective_delta\":"<<r.objective_delta
+        <<",\"MPS_full_precision_readback\":true,\"scope\":\"synthetic actual-native offset; original BRP ObjCon remains zero\"}\n";
 }
 void logic(const std::filesystem::path& dir) {
     int cases=0;
@@ -108,6 +142,7 @@ void embeddings(const std::filesystem::path& dir,const std::filesystem::path& fi
             require(native.linear.rhs.size()==std::size_t(base.rows+3)&&native.domain.names.size()==std::size_t(base.columns+1),"one selector three rows census");
             require(std::count(native.domain.names.begin(),native.domain.names.end(),"r120_h")==1,"selector duplication");
             std::vector<std::vector<double>> starts;
+            int fleet_number=0;
             for(const auto& fleet:fleets) {
                 const auto v=verifySolution(in,fleet,.15);
                 const auto independent=independent_objective(in,fleet);
@@ -117,6 +152,11 @@ void embeddings(const std::filesystem::path& dir,const std::filesystem::path& fi
                 require(start.complete&&validateCandidateLinearResidual(native.linear,start.values,1e-7).valid,"complete native physical embedding");
                 long double f=native.constant;for(std::size_t j=0;j<start.values.size();++j)f+=static_cast<long double>(native.objective[j])*start.values[j];
                 require(std::fabs(double(f)-v.objective)<=1e-7,"original objective preserving physical embedding");
+                std::ofstream point(path.string()+".fleet"+std::to_string(fleet_number++)+".csv");
+                point<<std::setprecision(17)<<"variable,type,value,lower,upper,objective_coefficient\n";
+                for(std::size_t j=0;j<start.values.size();++j)point<<native.domain.names[j]<<','<<native.domain.variable_types[j]<<','<<start.values[j]<<','
+                    <<native.domain.lower_bounds[j]<<','<<native.domain.upper_bounds[j]<<','<<native.objective[j]<<'\n';
+                point.close();require(bool(point),"complete native physical embedding vector write");
                 starts.push_back(start.values);++embedded;
             }
             type_start_lifecycle(path,native,starts[0],starts[1],dir/("type_start_"+std::to_string(models)+".json"));
@@ -144,14 +184,9 @@ void embeddings(const std::filesystem::path& dir,const std::filesystem::path& fi
     }
     // Actual native ObjCon fixture: an explicitly synthetic offset, separate
     // from original-BRP objective-preserving qualification (ObjCon=0).
-    auto synthetic=base;synthetic.path=dir/"synthetic_constant.lp";
-    std::ifstream source(base.path);std::ostringstream bytes;bytes<<source.rdbuf();auto text=bytes.str();
-    text.insert(text.find("\nSubject To\n")," + 0.25");{std::ofstream f(synthetic.path);f<<text;}
-    synthetic.sha256=fileSha256(synthetic.path);
     const auto pair=makeRound120Pair(proof_pair(.3,.65),"synthetic_offset_only");
-    const auto constant=extendRound120Artifact(synthetic,pair,true,dir/"synthetic_constant_D1.lp");
-    const auto data=read_native(constant.path);require(data.constant==.25,"actual objective constant lost");
-    const auto emission=round120Rows(pair,true,.25);require(std::fabs(data.linear.rhs.back()-emission.objective_base)<1e-16,"full objective constant omitted from lower row");
+    const auto constant=extendRound120Artifact(base,pair,true,dir/"synthetic_constant_D1.lp");
+    native_constant_fixture(constant.path,pair,dir/"synthetic_constant_actual.mps");
     std::ofstream f(dir/"round120_physical_embedding.json");f<<"{\"Optimize\":0,\"physical_fleets\":3,\"complete_native_embeddings\":"<<embedded
         <<",\"D0_D1_models\":"<<models<<",\"actual_full_matrix_midpoint_auxiliary_checks\":"<<midpoints
         <<",\"midpoint_completion_not_physical_G_equality\":true,\"original_objective_constant\":0,\"synthetic_offset_checked\":0.25,\"passed\":true}\n";

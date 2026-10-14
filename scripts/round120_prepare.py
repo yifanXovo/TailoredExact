@@ -79,7 +79,7 @@ def prepare():
     qdir=OUT/'qualification';qdir.mkdir(exist_ok=True)
     refs=[f,c,n,h,q,enum]
     (qdir/'reference.tsv').write_text(''.join('\t'.join([str(ROOT/p['input_path']),str(p['T_seconds']),'60','60','0.15',str(qdir/'reference'/p['id'])])+'\n' for p in refs),encoding='utf-8')
-    steps=[dict(kind='zero_Optimize_native_matrix_Start_reference',command=[str(EXPORTER),str(qdir/'reference.tsv'),str(qdir/'native_contract'),str(ROOT/enum['input_path'])],outer_cap=300,Optimize=0),
+    steps=[dict(kind='zero_Optimize_native_matrix_Start_reference',command=[str(EXPORTER),str(qdir/'reference.tsv'),str(qdir/'native_contract02'),str(ROOT/enum['input_path'])],outer_cap=300,Optimize=0),
         dict(kind='real_CLI_chain',plan='qualification/chain',outer_cap=300,Optimize='original_controller_actual_requests'),
         *[dict(kind='paid_proof_export',**e,outer_cap=120,Optimize='only_original_root_and_child_LPs') for e in exports],
         dict(kind='fixed_six_complete_LP_diagnostics',command=[str(DIAGNOSTIC),str(qdir/'diagnostics.tsv')],outer_cap=850,
