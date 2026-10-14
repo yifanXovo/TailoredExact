@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round119\scripts\round119_campaign.py", line 66, in billed
+    before=time.perf_counter();value=rebuild_group(number,OUT/'reconstruction'/f'group{number:02d}')
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round119\scripts\read_round119.py", line 21, in rebuild_group
+    items=[old.item(ROOT,l,i,recs) for l in i['launches']]
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round119\scripts\read_round118.py", line 15, in item
+    with logs.activate(view):value=inherited.reconstruct_arm(root,l,i,recs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round119\scripts\read_round116.py", line 66, in reconstruct_arm
+    ep=ps.paid_endpoint(root,l,i,d,oldj) if l['arm']=='P-S' else core.endpoint(root,l,i,d,oldj,False)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round119\scripts\round119_evidence.py::explicit_MB_PC_extension", line 24, in endpoint
+    for name,digest in candidate['source_bindings'].items():assert sha(root/name)==digest, name
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round119\scripts\round107_reader.py", line 13, in sha
+    with Path(p).open('rb') as f:
+         ^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\codes\\ExactEBRP-round119\\results\\unified_exact_round119\\campaign\\group01\\reference\\N40-R1-S\\original.lp'

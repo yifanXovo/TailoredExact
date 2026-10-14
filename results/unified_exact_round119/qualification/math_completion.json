@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "Optimize": 0,
+  "native_processes": 0,
+  "method": "independent finite physical mathematics plus read-only production invariants",
+  "fleets": [
+    {
+      "route": [
+        0,
+        0
+      ],
+      "Y": [
+        1,
+        0
+      ],
+      "pickup": 0,
+      "load_prefix": [
+        0,
+        0
+      ],
+      "G_true": 0.5,
+      "F": 0.65,
+      "full_seconds": 0.0
+    },
+    {
+      "route": [
+        0,
+        1,
+        0
+      ],
+      "Y": [
+        0,
+        0
+      ],
+      "pickup": 1,
+      "load_prefix": [
+        0,
+        1,
+        1
+      ],
+      "G_true": 0.0,
+      "F": 0.3,
+      "full_seconds": 122.82842712474618
+    },
+    {
+      "route": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "Y": [
+        0,
+        1
+      ],
+      "pickup": 1,
+      "load_prefix": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "G_true": 0.5,
+      "F": 0.65,
+      "full_seconds": 124.82842712474618
+    }
+  ],
+  "repeated_physical_events_deduplicated": true,
+  "same_scope_false_bound_counterexample": {
+    "scope": [
+      0,
+      0.5
+    ],
+    "cutoff": 0.9,
+    "bound": 0.4
+  },
+  "own_U_retained_does_not_restore_rejected_proof": true,
+  "supplementary_native": {
+    "exit_code": 1,
+    "state": "PARTIAL_FINITE_ONLY",
+    "completed_before_failure": [
+      "two distinct actual scheduler atomic contractions",
+      "depth inheritance",
+      "same proof not reused",
+      "finite depth/width",
+      "complete existing cover no rebuild",
+      "both halves closure"
+    ],
+    "failure": "test incorrectly expected empty fleet F=.3; actual empty F=.65 and pickup1 loaded return F=.3",
+    "corrected_source_rerun": false,
+    "later_native_physical_tests_not_claimed_passed": true
+  },
+  "existing_successful_native": {
+    "physical_embeddings_SHA": "01e48c0ac86ceb3b057f03b8b580ab84b6960241bc99fafedf1ce90b71631cb2",
+    "full_chain_admission_SHA": "4c79093420eda0a80819f45ce5f29eeb8ffec96f4bbb297adfb663e80092d778"
+  },
+  "limits": "This is finite mathematics and source review, not a new native run or universal numerical proof."
+}
