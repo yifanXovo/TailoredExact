@@ -1,0 +1,109 @@
+{
+  "round": 120,
+  "base": "e6a3b2de67e3468c095331942da05d289f4f8aa3",
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "groups": [
+    {
+      "number": 1,
+      "id": "F2",
+      "campaign": "campaign/group01",
+      "conditional": false,
+      "cap_seconds": 1200,
+      "methods": [
+        "P-GRB",
+        "M-B",
+        "MB-D0",
+        "MB-D1"
+      ],
+      "nominal_seconds": 4800,
+      "management_reserve": 120
+    },
+    {
+      "number": 2,
+      "id": "R98-C2",
+      "campaign": "campaign/group02",
+      "conditional": false,
+      "cap_seconds": 1800,
+      "methods": [
+        "MB-D1",
+        "MB-D0",
+        "M-B",
+        "P-GRB"
+      ],
+      "nominal_seconds": 7200,
+      "management_reserve": 120
+    },
+    {
+      "number": 3,
+      "id": "N40-R1-S",
+      "campaign": "campaign/group03",
+      "conditional": true,
+      "cap_seconds": 5400,
+      "methods": [
+        "M-B",
+        "MB-D1",
+        "P-GRB",
+        "MB-D0"
+      ],
+      "nominal_seconds": 21600,
+      "management_reserve": 120
+    }
+  ],
+  "pairs": [
+    [
+      "MB-D1",
+      "M-B"
+    ],
+    [
+      "MB-D1",
+      "P-GRB"
+    ],
+    [
+      "MB-D1",
+      "MB-D0"
+    ],
+    [
+      "MB-D0",
+      "M-B"
+    ],
+    [
+      "MB-D0",
+      "P-GRB"
+    ],
+    [
+      "M-B",
+      "P-GRB"
+    ]
+  ],
+  "maximum_starts": 40,
+  "maximum_outer_seconds": 48000,
+  "qualification_maximum_starts": 16,
+  "qualification_maximum_seconds": 3600,
+  "core_arms": 8,
+  "conditional_N40_arms": 4,
+  "formal_nominal_seconds": 33600,
+  "management_reserve": 360,
+  "materiality": "unchanged round108_decisions.pair, replayed on all nine R119 published pairs",
+  "original_evidence_tolerance": 1e-07,
+  "no_extra_probe": true,
+  "no_valid_proof_triggered_interrupt": true,
+  "conditional_admission": "all core qualified; actual D1 exposure; material D1/M-B gain; material D1/D0 gain and no severe D0 loss; no severe P or two P losses; D1 certificates >= M-B",
+  "no_formal_retry_revision_or_additional_role": true,
+  "default_ENS_changed": false,
+  "all_online_work_in_T_produce": true
+}
