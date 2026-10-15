@@ -1,0 +1,38 @@
+{
+  "positions": [
+    {
+      "arm": "P-GRB",
+      "seed": 1,
+      "state": "ACTUAL_CLI_SEALED",
+      "canonical_closeout_complete": true
+    },
+    {
+      "arm": "M-B",
+      "seed": 1,
+      "state": "ACTUAL_CLI_SEALED",
+      "canonical_closeout_complete": false
+    },
+    {
+      "arm": "MB-D0",
+      "seed": 1,
+      "state": "NOT_STARTED",
+      "canonical_closeout_complete": false
+    },
+    {
+      "arm": "MB-D1",
+      "seed": 1,
+      "state": "NOT_STARTED",
+      "canonical_closeout_complete": false
+    }
+  ],
+  "actual_CLI": 2,
+  "H100_four_Seed1_actual_CLI": false,
+  "actual_arms": [
+    "P-GRB",
+    "M-B"
+  ],
+  "H100_D0_Seed1_not_started": true,
+  "H100_D1_Seed1_not_started": true,
+  "MB_temporary_review_does_not_replace_failed_original_closeout": true,
+  "performance_admission": false
+}

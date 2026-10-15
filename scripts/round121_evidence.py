@@ -52,7 +52,12 @@ def qualify_seed(root,l,observations,completion,identity):
     result=read(d/'result.json');assert result['algorithm_preset']==PRESETS[l['arm']]
     j=_raw_journal(root,l,d,observations)
     assert not j['failure'] and not j['unreturned_ids']
-    view=logs.build(root,l,d,j,result)
+    scope_owner=getattr(core.model_scope_contract,'__self__',None)
+    if scope_owner is None:parser=core.lp_model
+    else:
+        assert isinstance(scope_owner,ArmModels),'unknown bound scope-check implementation'
+        parser=lambda path:scope_owner.data(path)[1][0]
+    view=logs.build(root,l,d,j,result,model_parser=parser)
     actual=[cid for cid in j['calls'] if cid not in j['not_started_ids']]
     ledger=view['ledger'];assert l['arm']=='P-GRB' or len(ledger)==len(actual)
     if l['arm']=='P-GRB':
@@ -70,7 +75,8 @@ def qualify_seed(root,l,observations,completion,identity):
     proofs=[];context=ArmModels()
     try:
         for position,cid in enumerate(actual):
-            c=j['calls'][cid];assert c['native_preconditions'] is False and cid in j['returned_ids']
+            c=j['calls'][cid]
+            assert type(c['native_preconditions']) in [bool,int] and c['native_preconditions']==0 and cid in j['returned_ids']
             row=ledger[position] if ledger else None
             if row and row['solve_kind']=='LP':
                 assert int(row['integer_domain_restored'])==1;continue

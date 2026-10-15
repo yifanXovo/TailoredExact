@@ -11,13 +11,18 @@ import ast
 import copy
 import csv
 import datetime
+import builtins
+import collections
 import hashlib
 import json
 import math
+import os
 import re
 import statistics
+import tempfile
 import time
 import types
+import traceback
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'results/unified_exact_round121'
@@ -633,6 +638,8 @@ def final_wiring_review(bindings):
     qualifier_text = (ROOT / 'scripts/qualify_round121.py').read_text(encoding='utf-8-sig')
     assert "engineering/reference_compile02/receipt.json" in qualifier_text
     return dict(helpers=frozen['helpers'], source_bindings=bindings, inspected_launches=inspected,
+                argv_SHA=sha(OUT / 'argv_freeze.json'), protocol_SHA=sha(OUT / 'protocol.json'),
+                prospective_helper_freeze_SHA=sha(OUT / 'prospective_helper_freeze.json'),
                 helper_files_independently_hashed=len(frozen['helpers']), all20_argv_Seed_role_cap_and_physical_flags_checked=True,
                 source_PE_DLL_identity_unchanged=True,
                 prequalification_reference_resolution='Three new cold reference slots deliberately unresolved until one zero-Optimize batch; old safe reference copies then assigned by resolve.',
@@ -649,8 +656,624 @@ def final_wiring_review(bindings):
                 stage_review='Pure-function in-memory fixtures executed independently; performance threshold application awaits actual 16 formal positions.')
 
 
+def qualification01_reentry_review(final_wiring, previous_review):
+    """Execute only the corrected zero/result and not-started fixture block.
+
+    The actual current fixture AST supplies the input, result and call-path
+    expressions. Complete original physical/full-fleet/event functions and
+    the call-view body are compiled separately. No full finite() call occurs.
+    """
+    fee = OUT / 'fees/qualification01'
+    if not (fee / 'receipt.json').is_file():
+        return None
+    if (OUT / 'fees/qualification02/receipt.json').is_file() and previous_review.get('qualification01_reentry'):
+        # Preserve that earlier, already executed decision as historical. The
+        # new continuation has a separate current budget and helper binding.
+        historical = copy.deepcopy(previous_review['qualification01_reentry'])
+        historical['historical_as_of_qualification01_closeout'] = True
+        return historical
+    receipt = read(fee / 'receipt.json')
+    assert receipt['exit_code'] == 1 and receipt['actual_native_children'] == 0
+    assert receipt['conservative_process_starts'] == 1 and receipt['actual_exit_observed']
+    assert not (fee / '01_reference_before.json').exists()
+    assert 'physical' in (fee / 'failure.txt').read_text(encoding='utf-8')
+    changed = {k: dict(before=previous_review['helpers'].get(k), after=v)
+               for k, v in final_wiring['helpers'].items() if previous_review['helpers'].get(k) != v}
+    assert set(changed) <= {'scripts/round121_fixtures.py'}
+    assert set(previous_review['helpers']) == set(final_wiring['helpers'])
+    assert previous_review['source_bindings'] == final_wiring['source_bindings']
+    original_fixture = previous_review.get('qualification01_reentry', {}).get('initial_review_fixture_SHA',
+                       previous_review['helpers']['scripts/round121_fixtures.py'])
+    if not changed and previous_review.get('qualification01_reentry'):
+        changed = previous_review['qualification01_reentry']['changed_helpers_from_previous_bound_review']
+    physical_scope = definitions(ROOT / 'scripts/round107_reader.py', ['close', 'instance', 'objective', 'physical', 'portable'],
+                                 dict(ast=ast, re=re, math=math, Path=Path, TOL=1e-7))
+    full_scope = definitions(ROOT / 'scripts/round108_reader.py', ['full_fleet'],
+                            dict(evidence=types.SimpleNamespace(**physical_scope), math=math))
+    event_scope = definitions(ROOT / 'scripts/round120_evidence.py', ['event_chain'],
+                             dict(NEW=['MB-D0', 'MB-D1'], core=types.SimpleNamespace(full_fleet=full_scope['full_fleet']),
+                                  read=read, json=json))
+    log_tree = ast.parse((ROOT / 'scripts/round118_call_logs.py').read_text(encoding='utf-8-sig'))
+    log_nodes = [copy.deepcopy(n) for n in log_tree.body if isinstance(n, ast.FunctionDef) and n.name in ['digest', 'segments', 'build']]
+    # Replace only build's import binding with the exact pure reader portable
+    # definition above; all other build statements and predicates are unchanged.
+    build_node = next(n for n in log_nodes if n.name == 'build')
+    assert isinstance(build_node.body[0], ast.Import)
+    assert build_node.body[0].names[0].name == 'round108_reader'
+    build_node.body = build_node.body[1:]
+    def forbidden_model_read(*args, **kwargs):
+        raise AssertionError('not_started fixture unexpectedly read a native model or ledger')
+    log_scope = dict(Path=Path, collections=__import__('collections'), re=re, hashlib=hashlib,
+                     core=types.SimpleNamespace(portable=physical_scope['portable'], lp_model=forbidden_model_read,
+                                                rows=forbidden_model_read, sha=sha))
+    exec(compile(ast.Module(body=log_nodes, type_ignores=[]), 'round118_call_logs::isolated_not_started', 'exec'), log_scope)
+    fixture_path = ROOT / 'scripts/round121_fixtures.py'
+    fixture_tree = ast.parse(fixture_path.read_text(encoding='utf-8-sig'))
+    run_node = next(n for n in fixture_tree.body if isinstance(n, ast.FunctionDef) and n.name == 'run')
+    with_node = next(copy.deepcopy(n) for n in run_node.body if isinstance(n, ast.With))
+    split = next(i for i, n in enumerate(with_node.body) if isinstance(n, ast.For))
+    zero = next(i for i, n in enumerate(with_node.body)
+                if isinstance(n, ast.Expr) and 'zero.txt' in ast.unparse(n) and 'write_text' in ast.unparse(n))
+    with_node.body = with_node.body[:split] + with_node.body[zero:]
+    result_nodes = [n for n in with_node.body if isinstance(n, ast.Expr) and "'result.json'" in ast.unparse(n)]
+    assert len(result_nodes) == 1 and 'F=0.0' in ast.unparse(result_nodes[0])
+    call_node = next(n for n in with_node.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'j' for t in n.targets))
+    assert "native_log_path='raw/missing.log'" in ast.unparse(call_node)
+    with_node.body += ast.parse("physical_replay=full_fleet(root,p,read(d/'result.json'))\nmissing_F_still_rejected=reject_missing_F(root,p)").body
+
+    class GuardedTemporaryDirectory:
+        def __init__(self, *args, **kwargs):
+            assert not kwargs.get('dir'), 'must use the actual system temp shape'
+            self.context = tempfile.TemporaryDirectory(*args, **kwargs)
+        def __enter__(self):
+            self.value = Path(self.context.__enter__()).resolve()
+            assert self.value.parent == Path(tempfile.gettempdir()).resolve()
+            assert self.value.name.startswith('r121-finite-')
+            assert 'results/' not in self.value.as_posix()
+            return str(self.value)
+        def __exit__(self, *args):
+            # Verify the absolute target before the context's recursive cleanup.
+            assert self.value.parent == Path(tempfile.gettempdir()).resolve()
+            assert self.value.name.startswith('r121-finite-')
+            return self.context.__exit__(*args)
+
+    def write_fixture(path, value):
+        path = Path(path)
+        path.write_text(json.dumps(value, allow_nan=False) + '\n', encoding='utf-8')
+
+    def reject_missing_F(root, panel):
+        try:
+            full_scope['full_fleet'](root, panel, dict(routes=[]))
+        except AssertionError:
+            return True
+        raise AssertionError('original physical reported-objective requirement was weakened')
+
+    isolate = ast.FunctionDef(name='isolated_case', args=ast.arguments(posonlyargs=[], args=[], vararg=None,
+              kwonlyargs=[], kw_defaults=[], kwarg=None, defaults=[]), decorator_list=[],
+              body=[with_node] + ast.parse("return dict(zero_event=value,physical=physical_replay,view_actual=view['actual'],view_bindings=view['bindings'],checks=checks,missing_F_still_rejected=missing_F_still_rejected,temporary_root=str(root))").body)
+    isolated_tree = ast.fix_missing_locations(ast.Module(body=[isolate], type_ignores=[]))
+    isolated_scope = dict(tempfile=types.SimpleNamespace(TemporaryDirectory=GuardedTemporaryDirectory), Path=Path,
+                          write=write_fixture, event_chain=event_scope['event_chain'], build=log_scope['build'],
+                          checks=[], full_fleet=full_scope['full_fleet'], read=read, reject_missing_F=reject_missing_F)
+    exec(compile(isolated_tree, str(fixture_path) + '::isolated_reentry_case', 'exec'), isolated_scope)
+    result = isolated_scope['isolated_case']()
+    assert result['zero_event']['not_exposed_original_verified_zero_H']
+    assert result['physical']['G'] == result['physical']['P'] == result['physical']['F'] == 0.
+    assert not result['view_actual'] and not result['view_bindings']
+    assert result['missing_F_still_rejected'] and not Path(result['temporary_root']).exists()
+    q_remaining_starts = 8 - receipt['conservative_process_starts']
+    q_remaining_seconds = 1800 - receipt['outer_seconds_upper']
+    total_remaining_seconds = 48000 - receipt['outer_seconds_upper']
+    assert q_remaining_starts >= 6 and q_remaining_seconds >= 1200
+    assert 40 - receipt['conservative_process_starts'] >= 6 + 21
+    assert total_remaining_seconds >= 1200 + 37800
+    return dict(decision='ACCEPT_REENTRY_TO_ACTUAL_QUALIFICATION_ONLY',
+                initial_review_fixture_SHA=original_fixture, current_fixture_SHA=sha(fixture_path),
+                changed_helpers_from_previous_bound_review=changed,
+                every_other_helper_and_all_production_source_bindings_unchanged=True,
+                qualification01_failure=dict(fee_SHA=sha(fee / 'receipt.json'), failure_SHA=sha(fee / 'failure.txt'),
+                    actual_native_children=0, exporter_started=False, Optimize=0,
+                    charged_starts=receipt['conservative_process_starts'], charged_outer_seconds=receipt['outer_seconds_upper'],
+                    reason='Fixture result omitted the required reported F; unchanged physical reader rejected it before native launch.'),
+                additional_caught_fixture_error=dict(reason='Absolute system-temp missing.log path violates unchanged portable evidence-path rule.',
+                    fixed_to='raw/missing.log', native_or_qualification_retry_used_for_this_diagnosis=False),
+                isolated_actual_system_temp_result=result,
+                execution_method='AST-isolated current zero and subsequent not_started statements; unchanged original physical/full_fleet/event_chain predicates, unchanged call-view body and portable rule; no full finite() run',
+                remaining_qualification_starts=q_remaining_starts, remaining_qualification_seconds=q_remaining_seconds,
+                next_qualification_obligation=dict(wrapper=1, children=5, conservative_starts=6, outer_cap_seconds=1200),
+                remaining_formal_obligation=dict(starts=21, nominal_plus_management_seconds=37800),
+                reviewer_Optimize=0, reviewer_native_starts=0, reviewer_compiles=0, reviewer_Git_commands=0,
+                limitations='Only the failed and subsequent zero/not_started fixture paths were replayed; actual returned Seed1 CLI evidence remains pending.')
+
+
+def actual_P_readonly_review(arm='P-GRB'):
+    """Replay the real sealed H100 P audit while isolating every derived write.
+
+    This optional branch imports the existing read-only audit chain. No native
+    entry point is called. The original source and evidence paths stay fixed;
+    only new audit sidecar I/O is routed to a temporary shadow directory.
+    """
+    import round121_evidence as evidence
+    import read_round118 as reader
+    import read_round116 as inherited_reader
+    tick = time.perf_counter()
+    identity_path = OUT / 'qualification/h100/identity.json'
+    identity = read(identity_path)
+    launch = next(l for l in identity['launches'] if l['arm'] == arm)
+    assert launch['arm'] == arm and launch['seed'] == 1
+    directory = Path(launch['destination']).resolve()
+    originals = {p.relative_to(directory).as_posix(): sha(p) for p in directory.rglob('*') if p.is_file()}
+    seal = read(directory / 'producer_seal.json')
+    producer = read(directory / 'producer_receipt.json')
+    assert sha(directory / 'producer_seal.json') == producer['producer_seal_SHA']
+    for name, digest in seal['required_SHA'].items():
+        assert originals[name] == digest
+    result = read(directory / 'result.json')
+    observations = read(directory / 'observations.json')
+    calls = [v['payload'] for v in observations if v['payload']['kind'] == 'call']
+    assert calls and all(type(c['native_preconditions']) is int and c['native_preconditions'] == 0 for c in calls)
+    assert all(v['payload']['global_available'] == 0 and v['payload']['global_bound'] is None
+               for v in observations if v['payload']['kind'] == 'bound')
+    proof = evidence.qualify_seed(ROOT, launch, observations, read(directory / 'completion.json'), identity)
+    parameters = evidence._parameters(result, seed=1, require_call=True, arm='P-GRB') if arm == 'P-GRB' else dict(per_call_settings=[c['settings'] for c in calls])
+    model = directory / 'compact.lp' if arm == 'P-GRB' else Path(calls[0]['model_path'])
+    reference = OUT / 'qualification/h100/reference/H100/original.lp'
+    if arm == 'P-GRB':
+        assert sha(model) == sha(reference) == launch['panel']['reference']['canonical_sha256'] == calls[0]['model_sha256']
+    else:
+        assert sha(model) == calls[0]['model_sha256']
+    # Independent direct grammar/section checks; do not call the shared parser.
+    lines = model.read_text(encoding='utf-8').splitlines()
+    marks = {name: lines.index(name) for name in ['Minimize', 'Subject To', 'Bounds', 'Generals', 'Binaries', 'End']}
+    row_count = marks['Bounds'] - marks['Subject To'] - 1
+    bounds = lines[marks['Bounds'] + 1:marks['Generals']]
+    generals = [line.strip() for line in lines[marks['Generals'] + 1:marks['Binaries']]]
+    binaries = [line.strip() for line in lines[marks['Binaries'] + 1:marks['End']]]
+    if arm == 'P-GRB':
+        assert row_count == result['gurobi_num_constrs'] == 3689
+        assert len(bounds) == result['gurobi_num_vars'] == 1591
+        assert len(generals) == result['gurobi_num_int_vars'] == 140
+        assert len(binaries) == result['gurobi_num_bin_vars'] == 1040
+        assert len(bounds) - len(generals) - len(binaries) == result['gurobi_num_cont_vars'] == 411
+    p = launch['panel']
+    v, m, qs, instance = parse_input(ROOT / p['input_path'])
+    assert (v, m, qs) == (p['V'], p['M'], p['Q_vector'])
+    quantities = [f'{prefix}_{k}_{i}' for prefix in ['p', 'd'] for k in range(m) for i in range(1, v + 1)]
+    if arm == 'P-GRB':
+        assert all(name in generals for name in quantities)
+    else:
+        assert all(name not in generals and name not in binaries for name in quantities)
+        assert all(any(re.search(r'\b' + re.escape(name) + r'\b', line) for line in bounds) for name in quantities)
+    # Independent complete physical route replay, including every prefix load.
+    inventories = instance['initial'].copy()
+    seen, vehicles, routes = set(), set(), []
+    for route in result['routes']:
+        k = route['vehicle']
+        assert k not in vehicles and 0 <= k < m
+        vehicles.add(k)
+        assert route['nodes'][0] == route['nodes'][-1] == 0
+        ops = {op['station']: (op['pickup'], op['drop']) for op in route['operations']}
+        assert len(ops) == len(route['operations']) and set(route['nodes'][1:-1]) == set(ops)
+        load, pickup, loads = 0, 0, []
+        for i in route['nodes'][1:-1]:
+            assert i not in seen and 1 <= i <= v
+            seen.add(i)
+            pick, drop = ops[i]
+            assert type(pick) is int and type(drop) is int and pick >= 0 and drop >= 0 and bool(pick) != bool(drop)
+            load += pick - drop
+            pickup += pick
+            loads.append(load)
+            assert 0 <= load <= qs[k]
+            inventories[i] += drop - pick
+            assert 0 <= inventories[i] <= instance['capacities'][i]
+        travel = math.fsum(distance(instance['points'][a], instance['points'][b]) / 1.5 for a, b in zip(route['nodes'], route['nodes'][1:]))
+        duration = travel + (p['pickup_seconds'] + p['drop_seconds']) * pickup
+        assert duration <= p['T_seconds'] + 1e-7
+        routes.append(dict(vehicle=k, prefix_loads=loads, return_load=load, cumulative_pickup=pickup,
+                           travel_seconds=travel, full_duration_seconds=duration))
+    assert sum(inventories[1:]) == sum(instance['initial'][1:]) - sum(r['return_load'] for r in routes)
+    ratio = [inventories[i] / instance['target'][i] for i in range(1, v + 1)]
+    g = math.fsum(abs(a - b) for i, a in enumerate(ratio) for b in ratio[i + 1:]) / (v * math.fsum(ratio)) if math.fsum(ratio) else 0.
+    penalty = math.fsum(instance['weights'][i] * abs(ratio[i - 1] - 1) for i in range(1, v + 1))
+    f = g + p['lambda'] * penalty
+    assert abs(f - result['upper_bound']) <= 1e-7
+    source_open, source_stat, source_mkdir, regular_open = Path.open, Path.stat, Path.mkdir, builtins.open
+    shadow_files, audit_value, endpoint, readout_error = {}, None, None, None
+    with tempfile.TemporaryDirectory(prefix='r121-actualP-readonly-') as temporary:
+        shadow = Path(temporary).resolve()
+        assert shadow.parent == Path(tempfile.gettempdir()).resolve() and shadow.name.startswith('r121-actualP-readonly-')
+        writes = []
+        def absolute(path):
+            # resolve() on Windows invokes stat(); avoid recursive interception.
+            return Path(os.path.abspath(os.fspath(path)))
+        def target(path, mode='r'):
+            if isinstance(path, int):
+                return path
+            actual = absolute(path)
+            if actual.is_relative_to(directory):
+                rel = actual.relative_to(directory)
+                replacement = shadow / rel
+                if any(ch in mode for ch in 'wxa+'):
+                    allowed_derived = {'round120_model_contracts.json', 'call_log_views.json', 'computed_seed_scope.json',
+                        'independent_evidence.json', 'native_claims.json', 'claim_rejections.json', 'audit.json',
+                        'audit_execution_metrics.json', 'postexit_audit_receipt.json', 'verification_closeout.json',
+                        'arm_total_receipt.json', 'round120_extended_verification.json'}
+                    assert rel.as_posix() not in originals or rel.as_posix() in allowed_derived, ('immutable original file write attempted', str(rel))
+                    source_mkdir(replacement.parent, parents=True, exist_ok=True)
+                    writes.append(rel.as_posix())
+                    return replacement
+                try:
+                    source_stat(replacement)
+                    return replacement
+                except FileNotFoundError:
+                    pass
+            if any(ch in mode for ch in 'wxa+'):
+                assert actual.is_relative_to(shadow), ('unexpected audit output outside shadow', str(actual))
+            return path
+        def path_open(self, mode='r', *args, **kwargs):
+            return source_open(target(self, mode), mode, *args, **kwargs)
+        def safe_open(file, mode='r', *args, **kwargs):
+            return regular_open(target(file, mode), mode, *args, **kwargs)
+        def path_stat(self, *args, **kwargs):
+            actual = absolute(self)
+            if actual.is_relative_to(directory):
+                try:
+                    return source_stat(shadow / actual.relative_to(directory), *args, **kwargs)
+                except FileNotFoundError:
+                    pass
+            return source_stat(self, *args, **kwargs)
+        def path_mkdir(self, *args, **kwargs):
+            actual = absolute(self)
+            if actual.is_relative_to(directory):
+                return None if actual == directory else source_mkdir(shadow / actual.relative_to(directory), *args, **kwargs)
+            return source_mkdir(self, *args, **kwargs)
+        Path.open, Path.stat, Path.mkdir, builtins.open = path_open, path_stat, path_mkdir, safe_open
+        try:
+            audit_value = evidence.verify(launch, identity)
+            assert audit_value['passed'] and audit_value['native_proof_qualified']
+            recs = collections.defaultdict(list)
+            with evidence.extension():
+                item = reader.item(ROOT, launch, identity, recs)
+                final = inherited_reader.reconcile(item['claims'], item['ind']['witnesses'])
+                assert not final['rejections']
+                endpoint = reader.finalize(ROOT, item, final, recs)
+            assert endpoint['formal_protocol_qualified'] and endpoint['actually_executed']
+        except BaseException:
+            readout_error = traceback.format_exc(limit=12)
+        finally:
+            Path.open, Path.stat, Path.mkdir, builtins.open = source_open, source_stat, source_mkdir, regular_open
+        for path in shadow.rglob('*'):
+            if path.is_file():
+                shadow_files[path.relative_to(shadow).as_posix()] = sha(path)
+        derived = {name: read(shadow / name) for name in ['audit.json', 'verification_closeout.json', 'arm_total_receipt.json'] if (shadow / name).exists()}
+        assert shadow.parent == Path(tempfile.gettempdir()).resolve() and shadow.name.startswith('r121-actualP-readonly-')
+    unchanged = originals == {p.relative_to(directory).as_posix(): sha(p) for p in directory.rglob('*') if p.is_file()}
+    assert unchanged, 'original P evidence directory changed during read-only review'
+    label = 'P' if arm == 'P-GRB' else 'MB'
+    record = dict(status='ACTUAL_' + label + '_FULL_SHADOW_AUDIT_AND_READOUT_OK' if not readout_error else 'ACTUAL_' + label + '_READOUT_FIX_NEEDED', arm=arm,
+                  actual_source_identity_SHA=sha(identity_path), actual_launch_SHA=sha(directory / 'launch.json'),
+                  producer_receipt_SHA=sha(directory / 'producer_receipt.json'), producer_seal_SHA=sha(directory / 'producer_seal.json'),
+                  original_T_produce=producer['T_produce'], original_raw_file_SHA=originals, original_raw_unchanged=unchanged,
+                  actual_result_status=result['gurobi_status'] if arm == 'P-GRB' else result['status'], actual_Optimize_in_historical_record=len(calls),
+                  raw_native_preconditions=dict(value=calls[0]['native_preconditions'], type=type(calls[0]['native_preconditions']).__name__),
+                  actual_parameter_readback=parameters, actual_settings=calls[0]['settings'], raw_global_flags_all_unchanged_and_unavailable=True,
+                  recovered_call_count=len(proof['recovered_calls']), actual_model_SHA=sha(model), reference_bytes_identical=True if arm == 'P-GRB' else None,
+                  independent_matrix_counts=dict(rows=row_count, columns=len(bounds), C=len(bounds)-len(generals)-len(binaries), I=len(generals), B=len(binaries), quantity_type='I' if arm == 'P-GRB' else 'C'),
+                  independent_physical=dict(G=g, P=penalty, lambda_P=p['lambda'] * penalty, F=f, Y=inventories, routes=routes),
+                  shadow_audit_summary={k: audit_value.get(k) for k in ['passed', 'native_proof_qualified', 'independent_evidence_audit_passed']} if audit_value else None,
+                  endpoint=endpoint, shadow_file_SHA=shadow_files, readout_error=readout_error,
+                  shadow_clock_values_are_review_products_not_original_arm_receipts=True,
+                  no_T_produce_backfill=True, original_identity_retained=True,
+                  later_readonly_audit_helper_SHA=sha(ROOT / 'scripts/round121_evidence.py'),
+                  scope='Existing real H100 ' + arm + ' Seed1 evidence only; original paths and all audit predicates unchanged; new derived writes isolated to deleted temp overlay; independent section/count and complete physical replay also performed.',
+                  limits='No new native execution, compilation, Git, cross-arm proof, replacement route, or new bound. Endpoint reconciliation here uses only this arm own witnesses; later full cohort adjudication remains necessary.',
+                  reviewer_native_starts=0, reviewer_Optimize=0, reviewer_compiles=0, reviewer_Git=0, seconds=time.perf_counter() - tick)
+    destination = OUT / ('review/actual_H100_' + label + '_readonly_review.json')
+    destination.write_text(json.dumps(record, indent=2, allow_nan=False, ensure_ascii=False) + '\n', encoding='utf-8')
+    print(json.dumps(dict(status=record['status'], raw_unchanged=unchanged, original_T_produce=producer['T_produce'],
+                          full_audit=record['shadow_audit_summary'], readout_error=readout_error, native_starts=0, Optimize=0)))
+    return record
+
+
+def qualification02_continuation_review(final_wiring):
+    patch_path = OUT / 'qualification/read_only_patch_identity.json'
+    if not patch_path.exists():
+        return None
+    patch = read(patch_path)
+    assert patch['final_helpers'] == final_wiring['helpers']
+    assert set(patch['changed_helpers']) == {'scripts/qualify_round121.py', 'scripts/round121_evidence.py'}
+    saved_candidate = OUT / 'qualification/candidate_identity_before_readonly_fix.json'
+    saved_freeze = OUT / 'qualification/prospective_helper_freeze_before_readonly_fix.json'
+    saved_adapter = OUT / 'qualification/Seed1_evidence_adapter_original.py'
+    assert sha(saved_candidate) == patch['original_candidate_identity_SHA']
+    assert sha(saved_freeze) == patch['original_prospective_helper_freeze_SHA']
+    assert sha(saved_adapter) == patch['old_adapter_source_SHA']
+    old_helpers = read(saved_freeze)['helpers']
+    differences = {k: dict(before=old_helpers.get(k), after=v) for k, v in final_wiring['helpers'].items() if old_helpers.get(k) != v}
+    assert differences == patch['changed_helpers']
+    assert read(saved_freeze)['argv_SHA'] == final_wiring['argv_SHA']
+    assert read(saved_freeze)['protocol_SHA'] == final_wiring['protocol_SHA']
+    old_ast = ast.parse(saved_adapter.read_text(encoding='utf-8-sig'))
+    new_ast = ast.parse((ROOT / 'scripts/round121_evidence.py').read_text(encoding='utf-8-sig'))
+    old_asserts = [n for n in ast.walk(old_ast) if isinstance(n, ast.Assert) and "c['native_preconditions'] is False" in ast.unparse(n)]
+    new_asserts = [n for n in ast.walk(new_ast) if isinstance(n, ast.Assert) and "type(c['native_preconditions'])" in ast.unparse(n)]
+    assert len(old_asserts) == len(new_asserts) == 1
+    assert ast.unparse(new_asserts[0]) == "assert type(c['native_preconditions']) in [bool, int] and c['native_preconditions'] == 0 and (cid in j['returned_ids'])"
+    new_asserts[0].test = copy.deepcopy(old_asserts[0].test)
+    assert ast.dump(old_ast, include_attributes=False) == ast.dump(new_ast, include_attributes=False), 'read-only adapter changed beyond typed raw-zero predicate'
+    hpath = OUT / 'qualification/h100/identity.json'
+    assert sha(hpath) == patch['original_H100_identity_SHA']
+    h = read(hpath)
+    assert h['helpers'] == old_helpers
+    assert [l['arm'] for l in h['launches']] == ['P-GRB', 'M-B', 'MB-D0', 'MB-D1']
+    first = Path(h['launches'][0]['destination'])
+    assert sha(first / 'producer_receipt.json') == patch['preserved_P_producer_receipt_SHA']
+    assert sha(first / 'producer_seal.json') == patch['preserved_P_producer_seal_SHA']
+    assert read(first / 'producer_receipt.json')['T_produce'] == patch['preserved_P_T_produce']
+    assert all(not Path(l['destination']).exists() for l in h['launches'][1:])
+    actual_review_path = OUT / 'review/actual_H100_P_readonly_review.json'
+    actual = read(actual_review_path)
+    assert actual['status'] == 'ACTUAL_P_FULL_SHADOW_AUDIT_AND_READOUT_OK' and actual['original_raw_unchanged']
+    assert actual['actual_source_identity_SHA'] == patch['original_H100_identity_SHA']
+    assert actual['later_readonly_audit_helper_SHA'] == sha(ROOT / 'scripts/round121_evidence.py')
+    assert actual['producer_receipt_SHA'] == patch['preserved_P_producer_receipt_SHA']
+    assert actual['producer_seal_SHA'] == patch['preserved_P_producer_seal_SHA']
+    assert actual['endpoint']['complete_seconds'] == patch['preserved_P_T_produce']
+    assert actual['endpoint']['formal_protocol_qualified'] and not actual['endpoint']['certificate']
+    for name, digest in actual['original_raw_file_SHA'].items():
+        assert sha(first / name) == digest
+    q_starts, q_seconds = 0, 0.
+    fees = []
+    for fee_name in ['qualification01', 'qualification02']:
+        d = OUT / 'fees' / fee_name
+        launch, receipt = read(d / 'launch.json'), read(d / 'receipt.json')
+        assert launch['qualification'] and receipt['actual_exit_observed']
+        assert receipt['exit_code'] == 1
+        q_starts += receipt['conservative_process_starts']
+        q_seconds += receipt['outer_seconds_upper']
+        fees.append(dict(label=fee_name, receipt_SHA=sha(d / 'receipt.json'),
+                         conservative_starts=receipt['conservative_process_starts'], outer_seconds=receipt['outer_seconds_upper']))
+    assert q_starts == 4 and 8 - q_starts == 4 and q_seconds < 1800 - 900
+    assert 40 - q_starts >= 4 + 21 and 48000 - q_seconds >= 900 + 37800
+    assert read(OUT / 'fees/qualification02/01_reference_return.json')['exit_code'] == 0
+    continue_tree = ast.parse((ROOT / 'scripts/qualify_round121.py').read_text(encoding='utf-8-sig'))
+    function = next(n for n in continue_tree.body if isinstance(n, ast.FunctionDef) and n.name == 'continue_sealed_P')
+    code = ast.unparse(function)
+    assert "fee_begin(label, 3, 900, True, dict(starts=21, seconds=37800))" in code
+    calls = [n for n in ast.walk(function) if isinstance(n, ast.Call)]
+    execute_calls = [n for n in calls if isinstance(n.func, ast.Name) and n.func.id == 'execute']
+    assert len(execute_calls) == 1 and ast.unparse(execute_calls[0]) == 'execute(l, h)'
+    assert "for l in h['launches'][1:]" in code and 'verify(first, h)' in code
+    assert 'subprocess' not in code and 'resolve()' not in code and 'finite()' not in code
+    assert "assert not Path(l['destination']).exists()" in code
+    candidate = read(OUT / 'candidate_identity.json')
+    assert candidate['helpers'] == final_wiring['helpers'] and candidate['source_bindings'] == final_wiring['source_bindings']
+    assert candidate['campaign_identities']['qualification/h100'] == patch['original_H100_identity_SHA']
+    for group in range(1, 6):
+        path = OUT / f'campaign/group{group:02d}/identity.json'
+        identity = read(path)
+        assert identity['helpers'] == final_wiring['helpers'] and identity['source_hashes'] == final_wiring['source_bindings']
+        assert candidate['campaign_identities'][f'campaign/group{group:02d}'] == sha(path)
+        assert all(not Path(l['destination']).exists() for l in identity['launches'])
+    return dict(decision='ACCEPT_CONTINUE_SEALED_P_PLUS_THREE_UNSTARTED_CLI',
+                patch_identity_SHA=sha(patch_path), actual_P_readonly_review_SHA=sha(actual_review_path),
+                helper_changes=patch['changed_helpers'], adapter_AST_only_change='raw Seed1 zero permits bool/int with value==0; every other AST node unchanged',
+                original_H100_identity_SHA=patch['original_H100_identity_SHA'], original_H100_identity_unchanged=True,
+                original_candidate_and_helper_freeze_and_adapter_source_preserved=True,
+                P_producer_receipt_SHA=patch['preserved_P_producer_receipt_SHA'], P_producer_seal_SHA=patch['preserved_P_producer_seal_SHA'],
+                preserved_P_T_produce=patch['preserved_P_T_produce'], P_existing_evidence_full_shadow_audit_and_readout_passed=True,
+                P_reconstruction=dict(U=actual['endpoint']['U'], L=actual['endpoint']['L'], gap=actual['endpoint']['gap'], certificate=False),
+                existing_exporter_and_P_launches_not_repeated=True,
+                continuation=dict(wrapper=1, unstarted_CLI=['M-B', 'MB-D0', 'MB-D1'], conservative_starts=4,
+                                  outer_cap=900, each_CLI_produce_cap=120,
+                                  original_P_verify_only=True, P_verify_clock_includes_elapsed_gap=True),
+                previous_failed_fees=fees, paid_qualification_starts=q_starts, paid_qualification_seconds=q_seconds,
+                remaining_qualification_starts=8 - q_starts, remaining_qualification_seconds=1800 - q_seconds,
+                reserved_formal_starts=21, reserved_formal_nominal_plus_management_seconds=37800,
+                actual_flags_review='Journal native_preconditions/full_original/global flags are streamed as numeric 0/1; not_started actual_Optimize is emitted as JSON false; result lifecycle/domain/Start-request flags are emitted as JSON true/false. Real P result flags and all whole-audit branches were actually exercised.',
+                limitations='Three remaining real warm CLI and cross-arm H/cohort checks remain pending. This review issued no native or performance certificate and did not alter source raw flags or original clock.')
+
+
+def minimal_qualification_scope_review():
+    """Bounded actual R120 D0 model/native/Start recheck; no native replay."""
+    import round121_evidence as evidence
+    import round99_pure_start_audit as start_audit
+    old_out = OLD / 'results/unified_exact_round120'
+    h_identity_path = old_out / 'qualification/h100/identity.json'
+    h_identity = read(h_identity_path)
+    launch = next(l for l in h_identity['launches'] if l['arm'] == 'MB-D0')
+    directory = Path(launch['destination'])
+    p = launch['panel']
+    assert launch['seed'] == 0
+    old_production = read(old_out / 'production_identity.json')
+    current_production = read(OUT / 'production_identity.json')
+    assert old_production['production_PE_SHA'] == current_production['production_PE_SHA']
+    assert old_production['DLL_SHA'] == current_production['DLL_SHA']
+    assert old_production['source_bindings'] == current_production['source_bindings']
+    audit = read(directory / 'audit.json')
+    assert audit['passed'] and audit['native_proof_qualified']
+    pair = read(directory / 'external/round120_root_pair.json')
+    event = read(directory / 'round120_extended_verification.json')['event_contract']
+    assert event['installed'] == 1 and event['actual_extended_Optimize'] == 2
+    installed = Path(event['install_events'][0]['path'])
+    context = evidence.ArmModels()
+    try:
+        fact, model = context.model_contract(OLD, p, installed, 'MB-D0')
+    finally:
+        context.clear()
+    assert fact['original_rows_types_bounds_objective_equal']
+    assert fact['rows'] == 9355 and fact['columns'] == 3533 and fact['extension']['conditional'] is False
+    assert model['types']['r120_h'] == 'B' and model['bounds']['r120_h'] == (0., 1.)
+    assert all(model['types'][name] == 'C' for name in model['types'] if name.startswith(('p_', 'd_')))
+    native_checks = []
+    for path in sorted((directory / 'external/native_logs').glob('*.round120.native.json')):
+        native = read(path)
+        assert native['model_SHA'] == sha(installed) and native['h_type'] == 'B'
+        assert native['h_LB'] == 0 and native['h_UB'] == 1 and native['h_BranchPriority'] == 0
+        assert native['objective_delta'] == 0 and native['complete_objective_row_matches_native']
+        assert q(native['lower_base']) <= q(pair['a'])
+        assert q(native['lower_base']) + q(native['lower_delta']) <= q(pair['m'])
+        assert q(native['upper_base']) >= q(pair['m'])
+        assert q(native['upper_base']) + q(native['upper_delta']) >= q(pair['b'])
+        assert q(native['objective_base']) + q(native['objective_constant']) <= min(q(pair['beta0']), q(pair['beta1']))
+        native_checks.append(dict(path=str(path), SHA=sha(path), binary64_conservative_endpoint_recomputed=True,
+                                  h_type='B', h_bounds=[0, 1], objective_delta=0, actual_ObjCon=native['objective_constant']))
+    starts = [(path, read(path)) for path in sorted((directory / 'external/native_logs').glob('*.round68.start.json'))]
+    submitted = [(path, meta) for path, meta in starts if meta['submitted'] and meta['model_sha256'] == sha(installed)]
+    assert len(submitted) == 2
+    original_root = start_audit.ROOT
+    start_audit.ROOT = OLD
+    try:
+        start_checks = start_audit.audit_model(installed, submitted, 'm-binary')
+    finally:
+        start_audit.ROOT = original_root
+    assert all(v['per_column_restored_type_checked'] and v['ordered_native_columns_checked'] for v in start_checks)
+    actual_p = read(OUT / 'review/actual_H100_P_readonly_review.json')
+    actual_mb = read(OUT / 'review/actual_H100_MB_readonly_review.json')
+    assert actual_p['status'] == 'ACTUAL_P_FULL_SHADOW_AUDIT_AND_READOUT_OK'
+    assert actual_mb['status'] == 'ACTUAL_MB_FULL_SHADOW_AUDIT_AND_READOUT_OK'
+    assert actual_mb['recovered_call_count'] == 2 and actual_mb['actual_Optimize_in_historical_record'] == 5
+    fees = []
+    for name in ['qualification01', 'qualification02', 'qualification03']:
+        path = OUT / 'fees' / name / 'receipt.json'
+        value = read(path)
+        fees.append(dict(name=name, SHA=sha(path), starts=value['conservative_process_starts'], outer_seconds=value['outer_seconds_upper']))
+    paid_starts = sum(v['starts'] for v in fees)
+    paid_seconds = sum(v['outer_seconds'] for v in fees)
+    assert paid_starts == 6 and 8 - paid_starts == 2
+    d0 = OUT / 'qualification/h100/raw/03_H100_S1_MB-D0'
+    d1 = OUT / 'qualification/h100/raw/04_H100_S1_MB-D1'
+    assert not d0.exists() and not d1.exists()
+    report = dict(decision='MINIMAL_COMPOSITION_CAN_COVER_REQUIRED_QUALIFICATION_IF_FINAL_D1_CLI_FULL_AUDIT_PASSES',
+                  execution_admission_now=False, interpretation='Goal section 6 recommends the four-H100-CLI package with the word 建议, while requiring reuse of the already-passed R120 qualification and preserving actual necessary settings/types/Start/domain/clock evidence. The formal 16 arms and 18 pairs remain mandatory and unchanged.',
+                  independent_interpretation=True, no_standard_weakened=True,
+                  old_D0_actual_evidence=dict(source=str(directory), H100_identity_SHA=sha(h_identity_path),
+                    audit_SHA=sha(directory / 'audit.json'), model_SHA=sha(installed),
+                    complete_model_rechecked=fact, actual_native_checks=native_checks, actual_complete_Start_rechecks=start_checks,
+                    original_PE_DLL_all_source_bindings_identical=True, historical_Seed=0, installed=1, actual_extended_Optimize=2),
+                  R121_actual_P=dict(review_SHA=sha(OUT / 'review/actual_H100_P_readonly_review.json'), full_audit_and_readout=True, Seed=1),
+                  R121_actual_MB=dict(review_SHA=sha(OUT / 'review/actual_H100_MB_readonly_review.json'), full_audit_and_readout=True, Seed=1,
+                                     original_T_produce=actual_mb['original_T_produce'], native_Optimize=5, LP=3, MIP=2),
+                  prospective_last_D1_requirement='Run exactly the never-started fixed H100 D1 Seed1 position and audit every naturally occurring call, actual model/type/Start/parameter/three-row/scope/return and full H semantics. If naturally unexposed, report it; no artificial proof, weak H or extra native diagnostic is permitted.',
+                  H100_D0_Seed1=dict(state='NOT_STARTED', not_replaced_with_other_Seed=True,
+                                    limitation='No direct H100 D0 Seed1 CLI observation; rely on frozen R120 D0 actual native model/Start plus shared Seed1 adapter/native setting evidence. This is an explicit qualification coverage limit.'),
+                  formal_F2_D0_Seed1_remains_mandatory=True, formal_arms=16, formal_pairs=18,
+                  forbidden_claims=['H100 four Seed1 CLI completed', 'H100 D0 Seed1 actually tested', 'old D0 Seed0 is a current Seed1 measurement'],
+                  fees=fees, paid_qualification_starts=paid_starts, paid_qualification_seconds=paid_seconds,
+                  remaining_qualification_starts=8-paid_starts, remaining_qualification_seconds=1800-paid_seconds,
+                  next_maximum_native_plan=dict(wrapper=1, child_D1=1, total_starts=2, no_other_launch_available=True),
+                  stop_rule='Any unresolved necessary identity, model, Start, scope, return, clock or native correctness gap means BLOCKED. No attempt may exceed qualification 8 starts/1800 seconds. Final D1 success is not presumed.',
+                  reviewer_Optimize=0, reviewer_native_starts=0, historical_carriers_restored=0)
+    destination = OUT / 'review/minimal_qualification_scope_review.json'
+    destination.write_text(json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False) + '\n', encoding='utf-8')
+    print(json.dumps(dict(decision=report['decision'], historical_D0_full_Start_vectors=len(start_checks),
+                         historical_D0_actual_native_endpoints=len(native_checks), paid_starts=paid_starts,
+                         paid_seconds=paid_seconds, remaining_starts=8-paid_starts, Optimize=0, native_starts=0)))
+    return report
+
+
+def bind_minimum_admission():
+    gate_path = OUT / 'review/pre_contract.json'
+    gate = read(gate_path)
+    previous_gate_SHA = sha(gate_path)
+    actual_bindings = {name: sha(ROOT / name) for name in gate['source_bindings']}
+    assert actual_bindings == gate['source_bindings']
+    wiring = final_wiring_review(actual_bindings)
+    minimum_path = OUT / 'qualification/minimum_admission_plan.json'
+    minimum = read(minimum_path)
+    assert minimum['final_helpers'] == wiring['helpers'] and minimum['source_bindings'] == actual_bindings
+    assert minimum['formal_positions_unchanged'] == 16 and minimum['formal_pairs_unchanged'] == 18
+    assert minimum['formal_argv_SHA'] == wiring['argv_SHA'] and minimum['protocol_SHA'] == wiring['protocol_SHA']
+    assert minimum['last_parent_starts'] == 2 and minimum['last_parent_cap'] == 600
+    scope_path = OUT / 'review/minimal_qualification_scope_review.json'
+    scope = read(scope_path)
+    assert scope['decision'] == 'MINIMAL_COMPOSITION_CAN_COVER_REQUIRED_QUALIFICATION_IF_FINAL_D1_CLI_FULL_AUDIT_PASSES'
+    mb_path = OUT / 'review/actual_H100_MB_readonly_review.json'
+    mb = read(mb_path)
+    assert mb['status'] == 'ACTUAL_MB_FULL_SHADOW_AUDIT_AND_READOUT_OK' and mb['original_raw_unchanged']
+    assert mb['later_readonly_audit_helper_SHA'] == sha(ROOT / 'scripts/round121_evidence.py')
+    assert mb['shadow_audit_summary']['passed'] and mb['endpoint']['formal_protocol_qualified']
+    old_source = OUT / 'qualification/Seed1_evidence_adapter_bool_fix_only.py'
+    old_ast = ast.parse(old_source.read_text(encoding='utf-8-sig'))
+    new_ast = ast.parse((ROOT / 'scripts/round121_evidence.py').read_text(encoding='utf-8-sig'))
+    fn = next(n for n in new_ast.body if isinstance(n, ast.FunctionDef) and n.name == 'qualify_seed')
+    fn.body = [n for n in fn.body if not ((isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'scope_owner' for t in n.targets))
+                                       or isinstance(n, ast.If) and ast.unparse(n.test) == 'scope_owner is None')]
+    for node in ast.walk(fn):
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and ast.unparse(node.func) == 'logs.build':
+            node.keywords = [k for k in node.keywords if k.arg != 'model_parser']
+    assert ast.dump(old_ast, include_attributes=False) == ast.dump(new_ast, include_attributes=False)
+    source = (ROOT / 'scripts/round121_evidence.py').read_text(encoding='utf-8-sig')
+    assert "assert isinstance(scope_owner,ArmModels)" in source and 'scope_owner.data(path)[1][0]' in source
+    hpath = OUT / 'qualification/h100/identity.json'
+    assert sha(hpath) == minimum['original_H100_identity_SHA']
+    h = read(hpath)
+    plain, warm, d0, d1 = h['launches']
+    assert [l['arm'] for l in h['launches']] == ['P-GRB', 'M-B', 'MB-D0', 'MB-D1']
+    for launch in [plain, warm]:
+        directory = Path(launch['destination'])
+        preserved = minimum['preserved_producers'][launch['arm']]
+        assert sha(directory / 'producer_receipt.json') == preserved['receipt_SHA']
+        assert sha(directory / 'producer_seal.json') == preserved['seal_SHA']
+        assert read(directory / 'producer_receipt.json')['T_produce'] == preserved['T_produce']
+    assert not Path(d0['destination']).exists() and not Path(d1['destination']).exists()
+    assert read(Path(plain['destination']) / 'audit.json')['passed']
+    for name, digest in mb['original_raw_file_SHA'].items():
+        assert sha(Path(warm['destination']) / name) == digest
+    tree = ast.parse((ROOT / 'scripts/qualify_round121.py').read_text(encoding='utf-8-sig'))
+    last = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'minimal_final')
+    last_text = ast.unparse(last)
+    assert 'fee_begin(label, 1, 600, True, dict(starts=21, seconds=37800))' in last_text
+    execute = [n for n in ast.walk(last) if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == 'execute']
+    assert len(execute) == 1 and ast.unparse(execute[0]) == 'execute(d1, h)'
+    assert 'verify(mb, h)' in last_text and 'subprocess' not in last_text and 'finite()' not in last_text
+    assert 'H100_four_Seed1_actual_CLI=False' in last_text and '[mb, d1]' in last_text
+    assert scope['paid_qualification_starts'] == 6 and scope['paid_qualification_seconds'] + 600 <= 1800
+    candidate = read(OUT / 'candidate_identity.json')
+    assert candidate['helpers'] == wiring['helpers'] and candidate['source_bindings'] == actual_bindings
+    assert candidate['campaign_identities']['qualification/h100'] == sha(hpath)
+    for group in range(1, 6):
+        identity_path = OUT / f'campaign/group{group:02d}/identity.json'
+        identity = read(identity_path)
+        assert identity['helpers'] == wiring['helpers'] and identity['source_hashes'] == actual_bindings
+        assert candidate['campaign_identities'][f'campaign/group{group:02d}'] == sha(identity_path)
+        assert all(not Path(l['destination']).exists() for l in identity['launches'])
+    minimum_review = dict(decision='ACCEPT_COMPOSED_MINIMUM_PENDING_ACTUAL_D1',
+        no_formal_performance_admission=True, minimum_plan_SHA=sha(minimum_path),
+        actual_MB_full_audit_and_readout_SHA=sha(mb_path), independent_old_D0_native_Start_reuse_review_SHA=sha(scope_path),
+        cache_owner_repair_AST_only=True, scope_checks_not_skipped=True,
+        actual_MB_raw_and_seal_clock_unchanged=True, actual_P_raw_and_seal_clock_unchanged=True,
+        H100_D0_Seed1='NOT_STARTED; direct Seed1 qualification absent, explicitly reuse unchanged R120 D0 native model/type/Start',
+        last_fixed_D1_CLI_required=True, last_attempt=dict(parent=1, D1_child=1, launches=2, outer_cap_seconds=600),
+        paid_qualification_starts=6, paid_qualification_seconds=scope['paid_qualification_seconds'],
+        remaining_qualification_starts=2, remaining_qualification_seconds=1800-scope['paid_qualification_seconds'],
+        full_formal_obligation_preserved=dict(arms=16, pairs=18, starts=21, nominal_plus_management_seconds=37800),
+        failure_limit='Last D1 must pass actual complete audit and H comparison; any necessary unresolved gap is BLOCKED. No additional qualification launch fits the 8-start cap.',
+        disclosure='The four-CLI design in section 6 is explicitly suggested. This composed minimum preserves necessary mathematical/native criteria and the unchanged formal plan; it does not claim H100 D0 Seed1 was run.')
+    gate.update(decision='ACCEPT', status='ACCEPT_COMPOSED_MINIMUM_PENDING_ACTUAL_D1',
+                admission_scope='One last qualification parent plus exactly the never-started H100 D1 Seed1 CLI; no formal performance admission yet.',
+                reviewer_script_SHA=sha(__file__), previous_pre_contract_SHA=previous_gate_SHA,
+                helpers=wiring['helpers'], source_bindings=actual_bindings, final_wiring=wiring,
+                independent_in_memory_fixtures=in_memory_fixtures(), minimum_admission=minimum_review)
+    gate['limitations'][0] = 'Real P and M-B Seed1 full audits/readouts pass. H100 D0 Seed1 is explicitly NOT_STARTED; frozen R120 D0 full native matrix/type/Start evidence is reused. One final real D1 Seed1 CLI plus necessary audit/H comparison is still required. No formal performance admission.'
+    for name in ['review/actual_H100_MB_readonly_review.json', 'review/minimal_qualification_scope_review.json']:
+        gate['restrictions']['allowed_outputs'].append('results/unified_exact_round121/' + name)
+    gate['minimum_admission_binding_UTC'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    gate_path.write_text(json.dumps(gate, indent=2, ensure_ascii=False, allow_nan=False) + '\n', encoding='utf-8')
+    md = OUT / 'review/pre_contract.md'
+    text = md.read_text(encoding='utf-8')
+    text += ('\nCurrent final minimum gate: **ACCEPT_COMPOSED_MINIMUM_PENDING_ACTUAL_D1**. Qualification03 sealed the real M-B Seed1 endpoint, then failed in read-only cache ownership: a newly parsed model was not registered in the active ArmModels scope path cache. The repair chooses that owner\'s pure parser and retains every scope/hash/type/Start check. An independent AST comparison found no other adapter change. The reviewer passed the full M-B inherited audit and item/reconcile/finalize in a deleted output overlay, with all original bytes and producer seal/clock unchanged. Five actual calls (3 LP, 2 MIP), p/d type C, 9352 rows and 3532 columns were audited; the complete endpoint is U=0.160589067255049, L=0.16058906725504898 at the original 89.6098965-second T_produce.\n\n'
+             'The minimum scope was checked against section 6\'s suggested four-CLI design. The reviewer rechecked R120\'s actual D0 complete installed model (9355 rows/3533 columns), both actual native h/ObjCon/three-row endpoint audits and both complete submitted/read-back Start vectors, under identical production PE/DLL/source identity. Together with real P/M-B Seed1, the last D1 Seed1 can cover the new shared Seed1 and extension wiring. **H100 D0 Seed1 is NOT_STARTED** and never counted as tested; lack of its direct Seed1 qualification is explicit. The formal F2 D0 Seed1 arm and all 16 formal arms/18 pairs remain mandatory.\n\n'
+             'All failed fees remain charged: 6 starts and 423.4524049759 seconds. Exactly 2 qualification starts and 1376.5475950241 seconds remain. The last permitted entry is 1 parent plus the fixed D1 child, 600 outer seconds, with 21 formal starts and 37800 nominal/management seconds reserved. It verifies existing MB, runs only unstarted D1, and cannot repeat P/MB/exporter or launch D0. Final D1 must pass complete actual audit and full H comparison; unresolved necessary evidence means BLOCKED. This gate does not presume success or issue formal performance admission.\n')
+    md.write_text(text, encoding='utf-8')
+    print(json.dumps(dict(decision='ACCEPT', minimum_admission=minimum_review['decision'],
+                          helpers=len(wiring['helpers']), sources=len(actual_bindings), native_starts=0, Optimize=0)))
+    return minimum_review
+
+
 def run():
     started = time.perf_counter()
+    previous_review = read(OUT / 'review/pre_contract.json') if (OUT / 'review/pre_contract.json').is_file() else None
     recipe = read(OUT / 'source_recipe.json')
     manifest = read(OUT / 'input_manifest.json')
     receipt = read(OUT / 'generation_receipt.json')
@@ -769,6 +1392,8 @@ def run():
     assert sha(Path('D:/gurobi1302/win64/bin/gurobi130.dll')) == production['DLL_SHA'] == '9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88'
     final_wiring = final_wiring_review(actual_bindings)
     finite = in_memory_fixtures()
+    reentry = qualification01_reentry_review(final_wiring, previous_review) if previous_review else None
+    continuation = qualification02_continuation_review(final_wiring)
     report = dict(review_kind='real_different_executor_pre_contract', reviewer='round121_contract_review subagent',
                   status='FINAL_PREQUALIFICATION_CONTRACT_REVIEW_COMPLETE', decision='ACCEPT',
                   reviewer_script_SHA=sha(__file__),
@@ -792,13 +1417,16 @@ def run():
                   frozen_source=dict(source_bindings_checked=len(actual_bindings), PE_SHA=production['production_PE_SHA'],
                                      DLL_SHA=production['DLL_SHA'], unchanged_source_identity=True),
                   final_wiring=final_wiring, independent_in_memory_fixtures=finite,
+                  qualification01_reentry=reentry,
+                  qualification02_continuation=continuation,
                   old_saved_h_reselection=[old_h_review(role) for role in ['F2', 'R98-C2']],
                   restrictions=dict(Optimize=0, native_starts=0, compiles=0, Git_commands=0,
                                     research_input_files_written=0, production_files_modified=0,
                                     allowed_outputs=['scripts/round121_precontract_review.py',
                                                      'results/unified_exact_round121/review/pre_contract.json',
                                                      'results/unified_exact_round121/review/pre_contract.md',
-                                                     'results/unified_exact_round121/review/h_reselection_sources/**']),
+                                                     'results/unified_exact_round121/review/h_reselection_sources/**',
+                                                     'explicitly authorized isolated system-temp zero/not_started fixture files, removed after replay']),
                   limitations=[
                       'This accepts only the final frozen prequalification contract. Actual H100 Seed1 returned settings/model/Start/domain/log evidence is not yet available; no native or performance admission is issued here.',
                       'Recorded pre-generation commit and generation chronology are cross-checked as artifacts, not independently verified with Git; this reviewer was explicitly barred from Git operations.',
@@ -833,8 +1461,13 @@ def run():
             lines.append(f"| {value['role']} | {value['original_h']:.16g} | {value['actual_link_h_interval']} | {value['selected_h']} | {value['repaired_D1_full_residual']['maximum_row_violation']:.6g} |")
         else:
             lines.append(f"| {value['role']} | unknown | unknown | unknown | unknown |")
+    if reentry:
+        lines += ['', '**Qualification01 reentry: ACCEPT for actual qualification only.** Qualification01 stopped before its exporter or any native child: the zero-fixture result omitted reported F, which the unchanged physical reader correctly requires. Its failed parent remains charged as 1 conservative start and 16.0007817745 outer seconds; no launch or cost was refunded.', '',
+                  'The independent replay then caught the subsequent not_started fixture using an absolute system-temp log path, which the unchanged portable-path rule rejects. The parent fixed only the fixture result to include F=0 and that log path to relative `raw/missing.log`. No production or reader standard was changed. Every other helper and all production source bindings match the previous review.', '',
+                  'The actual current zero/not_started statements were isolated from the fixture AST and executed in a real system temp directory, with the original complete physical/full_fleet/event predicates and call-view body. The empty fleet has G=P=F=0, duration=0, pickups=0 and return load=0; D1 is unexposed. The subsequent log view has no actual call or binding. A result without F still fails the original physical requirement. The isolated directory was removed after checking its resolved cleanup boundary.', '',
+                  f"The final gate is rebound to the corrected helper, argv and protocol. Qualification has {reentry['remaining_qualification_starts']} starts and {reentry['remaining_qualification_seconds']:.10f} seconds left, sufficient for the fixed next parent plus five children (6 starts, 1200 outer-second cap), with all 21 formal starts and 37800 nominal/management seconds still reserved. Actual Seed1 CLI qualification remains pending."]
     lines += ['', 'For public old-witness replay, run `python -B scripts/round121_precontract_review.py --h-only`. It reads the local `review/h_reselection_sources` snapshot: exactly the two original D0 witness/base-matrix files and their historical records, plus extracted actual D1 three rows and provenance. It writes nothing, needs no PE/DLL or original worktree, and performs no Optimize. The complete D1 matrix is reconstructed from the independently verified identical original rows plus those actual three rows. No other LP primal, MPS, carrier or historical restoration was added.', '',
-              'Executed by this reviewer: standard-library Python arithmetic and read-only file access; 0 Optimize, 0 native starts, 0 compilation, 0 Git commands. Writes were limited to this reviewer script, the two permitted review files, and the explicitly authorized minimal h snapshot. Snapshot source absolute paths and SHA256 values are recorded.', '', 'Limitations:', '']
+              'Executed by this reviewer: standard-library Python arithmetic and read-only file access; 0 Optimize, 0 native starts, 0 compilation, 0 Git commands. Persistent writes were limited to this reviewer script, the two permitted review files, and the explicitly authorized minimal h snapshot. The explicitly authorized isolated temp fixture files were removed. Snapshot source absolute paths and SHA256 values are recorded.', '', 'Limitations:', '']
     lines += ['- ' + limitation for limitation in report['limitations']]
     (review_dir / 'pre_contract.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
     print(json.dumps(dict(status=report['status'], inputs=len(new_evidence), pairs=pair_count,
@@ -846,9 +1479,21 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--snapshot-h-sources', action='store_true')
     parser.add_argument('--h-only', action='store_true', help='Public replay from local minimal sources; no PE/DLL, native, Git, or writes')
+    parser.add_argument('--actual-p-review', action='store_true', help='Bounded read-only real P replay with temporary derived-output shadow')
+    parser.add_argument('--actual-mb-review', action='store_true', help='Bounded read-only real M-B replay with temporary derived-output shadow')
+    parser.add_argument('--minimal-scope-review', action='store_true', help='Bounded original D0 native/Start reuse audit and explicit final-D1 minimum scope')
+    parser.add_argument('--bind-minimum', action='store_true', help='Bind the final fixed D1-only qualification entry after independent scope and real MB review')
     args = parser.parse_args()
     if args.snapshot_h_sources:
         snapshot_h_sources()
+    elif args.actual_p_review:
+        actual_P_readonly_review()
+    elif args.actual_mb_review:
+        actual_P_readonly_review('M-B')
+    elif args.minimal_scope_review:
+        minimal_qualification_scope_review()
+    elif args.bind_minimum:
+        bind_minimum_admission()
     elif args.h_only:
         print(json.dumps(dict(roles=[old_h_review(role) for role in ['F2', 'R98-C2']], Optimize=0, native_starts=0), indent=2, allow_nan=False))
     else:

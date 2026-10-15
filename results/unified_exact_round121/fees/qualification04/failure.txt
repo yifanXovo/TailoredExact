@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\qualify_round121.py", line 113, in minimal_final
+    verify(mb,h)
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_evidence.py", line 143, in verify
+    with logs.activate(view):value=verifier.verify(l,i)
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round115_verify.py", line 32, in verify
+    write(d/'audit.json',value);write(d/'audit_execution_metrics.json',namespace['last_metrics'])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round101_common.py", line 13, in write
+    with p.open('x',encoding='utf-8',newline='\n') as f:json.dump(v,f,indent=2,ensure_ascii=False,allow_nan=False);f.write('\n')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: 'C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\qualification\\h100\\raw\\02_H100_S1_M-B\\audit.json'

@@ -46,4 +46,95 @@ def billed(label):
     except BaseException:
         (fee/'failure.txt').write_text(traceback.format_exc(),encoding='utf-8');raise
     finally:fee_pending(fee,tick,True,code,actual)
-if __name__=='__main__':billed(sys.argv[1])
+def continue_sealed_P(label):
+    """One final parent plus only three never-started CLI positions.
+
+    The first P producer seal/clock and original qualification identity remain
+    immutable. Final read-only helpers requalify its existing returned data.
+    No reference exporter or P solver is run again.
+    """
+    fee,tick=fee_begin(label,3,900,True,dict(starts=21,seconds=37800));actual=0;code=1
+    try:
+        ensure_idle();identity();gate=read(OUT/'review/pre_contract.json')
+        assert gate['decision']=='ACCEPT' and gate['helpers']==helpers() and gate['source_bindings']==bindings()
+        patch=read(OUT/'qualification/read_only_patch_identity.json');assert patch['final_helpers']==helpers()
+        h=read(OUT/'qualification/h100/identity.json');first=h['launches'][0];d=Path(first['destination'])
+        assert sha(OUT/'qualification/h100/identity.json')==patch['original_H100_identity_SHA']
+        assert sha(d/'producer_seal.json')==patch['preserved_P_producer_seal_SHA']
+        assert sha(d/'producer_receipt.json')==patch['preserved_P_producer_receipt_SHA']
+        assert read(OUT/'fees/qualification02/01_reference_return.json')['exit_code']==0
+        from round121_evidence import verify
+        verify(first,h)
+        write(fee/'existing_P_readonly_requalification.json',dict(actual_new_native_children=0,Optimize=0,
+            original_producer_receipt_SHA=sha(d/'producer_receipt.json'),original_producer_seal_SHA=sha(d/'producer_seal.json'),
+            final_total_receipt_SHA=sha(d/'arm_total_receipt.json'),original_T_produce_unchanged=True,
+            verification_clock_includes_elapsed_gap_since_original_seal=True,raw_never_replaced=True,helpers=helpers()))
+        for l in h['launches'][1:]:
+            assert not Path(l['destination']).exists()
+            actual+=1;execute(l,h)
+            write(fee/f'{actual:02d}_H100_after.json',dict(arm=l['arm'],seed=l['seed'],producer_receipt_SHA=sha(Path(l['destination'])/'producer_receipt.json'),total_receipt_SHA=sha(Path(l['destination'])/'arm_total_receipt.json')))
+        H=complete_H(h['launches'][0]['panel'],{l['arm']:Path(l['destination']) for l in h['launches'] if l['arm']!='P-GRB'})
+        assert all(x['qualified'] for x in H['comparisons']);write(OUT/'qualification/full_H_comparison.json',H)
+        assert actual==3 and time.perf_counter()-tick<=900
+        write(OUT/'review/performance_admission.json',dict(decision='ACCEPT',candidate_identity_SHA=sha(OUT/'candidate_identity.json'),
+            final_PE_SHA=PE_SHA,DLL_SHA=DLL_SHA,helpers=helpers(),source_bindings=bindings(),pre_contract_SHA=sha(OUT/'review/pre_contract.json'),
+            finite_fixtures_SHA=sha(OUT/'qualification/finite_fixtures.json'),H100_four_Seed1_actual_CLI=True,full_H_equal=True,
+            original_reference_exporter_and_P_run_once=True,remaining_three_CLI_once=True,readonly_requalification_of_existing_P=True,
+            original_H100_identity_SHA=sha(OUT/'qualification/h100/identity.json'),read_only_patch_identity_SHA=sha(OUT/'qualification/read_only_patch_identity.json'),
+            actual_new_native_children=actual,wrapper=1,fee_close_required_before_formal=True,
+            scope='R120 production unchanged; R121 final read-only Seed1 bool/int handling qualified on original sealed P plus three actual CLI',not_performance_superiority=True))
+        code=0
+    except BaseException:
+        (fee/'failure.txt').write_text(traceback.format_exc(),encoding='utf-8');raise
+    finally:fee_pending(fee,tick,True,code,actual)
+def minimal_final(label):
+    """Finite composed admission: recheck saved MB, one last real D1 CLI.
+
+    Four H100 CLI were a suggested qualification design in the user contract.
+    Failed read-only wiring consumed its spare parents. D0's complete unchanged
+    R120 native qualification is reused explicitly; H100 D0 Seed1 is unrun.
+    Every one of the 16 fixed formal positions remains mandatory and unchanged.
+    """
+    fee,tick=fee_begin(label,1,600,True,dict(starts=21,seconds=37800));actual=0;code=1
+    try:
+        ensure_idle();identity();gate=read(OUT/'review/pre_contract.json')
+        assert gate['decision']=='ACCEPT' and gate['helpers']==helpers() and gate['source_bindings']==bindings()
+        minimum=read(OUT/'qualification/minimum_admission_plan.json')
+        assert minimum['final_helpers']==helpers() and minimum['formal_positions_unchanged']==16 and minimum['formal_pairs_unchanged']==18
+        assert gate['minimum_admission']['decision']=='ACCEPT_COMPOSED_MINIMUM_PENDING_ACTUAL_D1'
+        h=read(OUT/'qualification/h100/identity.json');p,mb,d0,d1=h['launches']
+        assert sha(OUT/'qualification/h100/identity.json')==minimum['original_H100_identity_SHA']
+        for l in [p,mb]:
+            d=Path(l['destination']);saved=minimum['preserved_producers'][l['arm']]
+            assert sha(d/'producer_receipt.json')==saved['receipt_SHA'] and sha(d/'producer_seal.json')==saved['seal_SHA']
+        assert (Path(p['destination'])/'arm_total_receipt.json').exists() and read(Path(p['destination'])/'audit.json')['passed']
+        assert not Path(d0['destination']).exists() and not Path(d1['destination']).exists()
+        from round121_evidence import verify
+        verify(mb,h)
+        write(fee/'existing_MB_readonly_requalification.json',dict(Optimize=0,new_native_children=0,
+            producer_receipt_SHA=sha(Path(mb['destination'])/'producer_receipt.json'),total_receipt_SHA=sha(Path(mb['destination'])/'arm_total_receipt.json'),
+            original_T_produce_unchanged=True,raw_never_replaced=True,helpers=helpers()))
+        actual+=1;execute(d1,h)
+        H=complete_H(p['panel'],{l['arm']:Path(l['destination']) for l in [mb,d1]})
+        assert all(x['qualified'] for x in H['comparisons']);write(OUT/'qualification/full_H_comparison.json',H)
+        status=[dict(arm=l['arm'],seed=1,state='NOT_STARTED_REUSED_R120_D0_NATIVE_QUALIFICATION' if l['arm']=='MB-D0' else 'ACTUAL_CLI_COMPLETE_QUALIFIED',
+            actual_CLI=(Path(l['destination'])/'launch.json').exists(),producer_receipt_SHA=sha(Path(l['destination'])/'producer_receipt.json') if l['arm']!='MB-D0' else None) for l in h['launches']]
+        write(OUT/'qualification/actual_CLI_status.json',dict(positions=status,actual_CLI=3,H100_D0_Seed1_not_started=True,
+            original_suggested_plan_retained=True,complete_R120_D0_native_contract_reused=True,no_missing_formal_position_substituted=True))
+        assert actual==1 and time.perf_counter()-tick<=600
+        write(OUT/'review/performance_admission.json',dict(decision='ACCEPT',candidate_identity_SHA=sha(OUT/'candidate_identity.json'),
+            final_PE_SHA=PE_SHA,DLL_SHA=DLL_SHA,helpers=helpers(),source_bindings=bindings(),pre_contract_SHA=sha(OUT/'review/pre_contract.json'),
+            finite_fixtures_SHA=sha(OUT/'qualification/finite_fixtures.json'),H100_four_Seed1_actual_CLI=False,
+            H100_actual_Seed1_CLI=['P-GRB','M-B','MB-D1'],H100_D0_Seed1='NOT_STARTED; unchanged R120 full native matrix/type/Start qualification reused',
+            minimum_admission_plan_SHA=sha(OUT/'qualification/minimum_admission_plan.json'),full_H_equal_for_actual_warm_CLI=True,
+            original_exporter_P_MB_run_once=True,last_D1_run_once=True,all_failed_fees_retained=True,formal_arms_unchanged=16,formal_pairs_unchanged=18,
+            actual_new_native_children=actual,wrapper=1,fee_close_required_before_formal=True,
+            scope='explicit composed minimum under user section6 suggested four-CLI plan; no production/physical/parameter/certificate/Start criterion relaxed',not_performance_superiority=True))
+        code=0
+    except BaseException:
+        (fee/'failure.txt').write_text(traceback.format_exc(),encoding='utf-8');raise
+    finally:fee_pending(fee,tick,True,code,actual)
+if __name__=='__main__':
+    if '--minimum-final-D1' in sys.argv[2:]:minimal_final(sys.argv[1])
+    elif '--continue-sealed-P' in sys.argv[2:]:continue_sealed_P(sys.argv[1])
+    else:billed(sys.argv[1])

@@ -1,16 +1,16 @@
 {
   "review_kind": "real_different_executor_pre_contract",
   "reviewer": "round121_contract_review subagent",
-  "status": "FINAL_PREQUALIFICATION_CONTRACT_REVIEW_COMPLETE",
+  "status": "ACCEPT_COMPOSED_MINIMUM_PENDING_ACTUAL_D1",
   "decision": "ACCEPT",
-  "reviewer_script_SHA": "22e68d0c4594ea80454469f78bf6af19533e70ffe9c1b3b8fd850ce8eb4c9c4f",
-  "admission_scope": "Prequalification contract only. Actual H100 Seed1 CLI qualification and formal admission remain required.",
+  "reviewer_script_SHA": "d3868a4826e3371a39f80c23f8e0a7832634812b96022534f87f208111ee3ef9",
+  "admission_scope": "One last qualification parent plus exactly the never-started H100 D1 Seed1 CLI; no formal performance admission yet.",
   "helpers": {
     "scripts/analyze_round61.py": "fad9154b399dd9eb3463510f8480dd1e8a22974729902e0a25ec78a9ae551cce",
     "scripts/compare_round112_startup.py": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2",
     "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
     "scripts/qualify_round120.py": "24e6c41494abb723d006660b08b754c0075f84dc1279e4bf8bf70a5081ac689a",
-    "scripts/qualify_round121.py": "4455bfe88634dbbd465cca50bfb5a2828454c351d86b03ead0f4dc83cc3dd09f",
+    "scripts/qualify_round121.py": "825e1b1a10b8aa674e6950cc85e0ae8280341e2b02aa6e59cd6134241a52cf79",
     "scripts/read_round113.py": "84f98aadd30681080af723d4f874f007f0222431f2fb15bffbd6b7fcfc716cc2",
     "scripts/read_round116.py": "ed5865c5011d239815000f1bf15c591eee8d9e8d933edd857f3a990762230d28",
     "scripts/read_round118.py": "d9a8e887f10abfb9bdead5b765d033316c96d6134b42163aeb37acdb5b16dbc7",
@@ -63,8 +63,8 @@
     "scripts/round121_common.py": "0e5ff0a8445d013eb1c98f730cad87f22a71d4bf08df5ee67481f27205b8818c",
     "scripts/round121_data.py": "fdc805c0528c318fd68da54195bd156fa50cd5128730de4d982c16a0a0b234a1",
     "scripts/round121_decision.py": "7a4fc5413ffda795f35b377fec454dd2bb1b0bd214a00a584c6091afa5c4a030",
-    "scripts/round121_evidence.py": "4704fb0e0de9981c8875c74815ba1e4f8b896d72aedf1a7ab9c76c7e2f9e1d53",
-    "scripts/round121_fixtures.py": "f9b0832d144a7766ceecf5bfe8389eaa38848052477ecfc9f2ef3addd7f7a9af",
+    "scripts/round121_evidence.py": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2",
+    "scripts/round121_fixtures.py": "b6b0b0cab6f088f8bd28d2eb917df4686e7679b12b0e5f8237c41e76dac65bd7",
     "scripts/round121_prepare.py": "43532ec092ed6525cc017dd0f7d796ed1e310ac5d58e3ee1ffcf05bc95a11db0",
     "scripts/round121_reference.cpp": "fac64e71a37258314f07189500ba48560c011f5c60e75cb3f697fd080ac86fc1",
     "scripts/round61_research.py": "3a288c045e58bbc7e19dad330db2bdae4257daaf63a66313ee32b89205e14955",
@@ -313,7 +313,7 @@
     "src/TailoredBCCuts.cpp": "a115454a170fce8b31a439d0ad5cfdadacac7f6b9f0d5761a39b5196a97b7705",
     "src/TailoredExact.cpp": "d7193cdda00408912c5adca4f4b8f13f3fe6f71e32ee6e5ab5c5be36cc6e7f84"
   },
-  "UTC": "2026-10-15T05:18:12.217151+00:00",
+  "UTC": "2026-10-15T05:31:20.846718+00:00",
   "method": "Independent standard-library implementation; no campaign/generator imports; full saved-matrix arithmetic; no external requests",
   "reviewed_file_SHA": {
     "scripts/round121_data.py": "fdc805c0528c318fd68da54195bd156fa50cd5128730de4d982c16a0a0b234a1",
@@ -583,7 +583,7 @@
       "scripts/compare_round112_startup.py": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2",
       "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
       "scripts/qualify_round120.py": "24e6c41494abb723d006660b08b754c0075f84dc1279e4bf8bf70a5081ac689a",
-      "scripts/qualify_round121.py": "4455bfe88634dbbd465cca50bfb5a2828454c351d86b03ead0f4dc83cc3dd09f",
+      "scripts/qualify_round121.py": "825e1b1a10b8aa674e6950cc85e0ae8280341e2b02aa6e59cd6134241a52cf79",
       "scripts/read_round113.py": "84f98aadd30681080af723d4f874f007f0222431f2fb15bffbd6b7fcfc716cc2",
       "scripts/read_round116.py": "ed5865c5011d239815000f1bf15c591eee8d9e8d933edd857f3a990762230d28",
       "scripts/read_round118.py": "d9a8e887f10abfb9bdead5b765d033316c96d6134b42163aeb37acdb5b16dbc7",
@@ -636,8 +636,8 @@
       "scripts/round121_common.py": "0e5ff0a8445d013eb1c98f730cad87f22a71d4bf08df5ee67481f27205b8818c",
       "scripts/round121_data.py": "fdc805c0528c318fd68da54195bd156fa50cd5128730de4d982c16a0a0b234a1",
       "scripts/round121_decision.py": "7a4fc5413ffda795f35b377fec454dd2bb1b0bd214a00a584c6091afa5c4a030",
-      "scripts/round121_evidence.py": "4704fb0e0de9981c8875c74815ba1e4f8b896d72aedf1a7ab9c76c7e2f9e1d53",
-      "scripts/round121_fixtures.py": "f9b0832d144a7766ceecf5bfe8389eaa38848052477ecfc9f2ef3addd7f7a9af",
+      "scripts/round121_evidence.py": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2",
+      "scripts/round121_fixtures.py": "b6b0b0cab6f088f8bd28d2eb917df4686e7679b12b0e5f8237c41e76dac65bd7",
       "scripts/round121_prepare.py": "43532ec092ed6525cc017dd0f7d796ed1e310ac5d58e3ee1ffcf05bc95a11db0",
       "scripts/round121_reference.cpp": "fac64e71a37258314f07189500ba48560c011f5c60e75cb3f697fd080ac86fc1",
       "scripts/round61_research.py": "3a288c045e58bbc7e19dad330db2bdae4257daaf63a66313ee32b89205e14955",
@@ -1028,6 +1028,9 @@
         "formal": false
       }
     ],
+    "argv_SHA": "9d43a7601a0d51831d622a27c8510927aa36736e74bb0b0ecae3afae85837b72",
+    "protocol_SHA": "d077c2e8d66eb43174211102535269f56184c9d7fd6137bdc2e366270e7af157",
+    "prospective_helper_freeze_SHA": "677b16507ea89c58927bd24bb875f2d7d2a3f4a4f5392a8005b7336057976bd7",
     "helper_files_independently_hashed": 88,
     "all20_argv_Seed_role_cap_and_physical_flags_checked": true,
     "source_PE_DLL_identity_unchanged": true,
@@ -1076,6 +1079,160 @@
     "limitations": "Raw receipt I/O is mocked only in the explicit journal branch fixture. Full real returned native settings/types/Starts/scopes remain qualification duties.",
     "Optimize": 0,
     "native_starts": 0
+  },
+  "qualification01_reentry": {
+    "decision": "ACCEPT_REENTRY_TO_ACTUAL_QUALIFICATION_ONLY",
+    "initial_review_fixture_SHA": "f9b0832d144a7766ceecf5bfe8389eaa38848052477ecfc9f2ef3addd7f7a9af",
+    "current_fixture_SHA": "b6b0b0cab6f088f8bd28d2eb917df4686e7679b12b0e5f8237c41e76dac65bd7",
+    "changed_helpers_from_previous_bound_review": {
+      "scripts/round121_fixtures.py": {
+        "before": "f9b0832d144a7766ceecf5bfe8389eaa38848052477ecfc9f2ef3addd7f7a9af",
+        "after": "b6b0b0cab6f088f8bd28d2eb917df4686e7679b12b0e5f8237c41e76dac65bd7"
+      }
+    },
+    "every_other_helper_and_all_production_source_bindings_unchanged": true,
+    "qualification01_failure": {
+      "fee_SHA": "cbfc57db6d473e6c9c10a1674f22bbc47199e1ab548cfc7f19704d1bff61c0f8",
+      "failure_SHA": "fa2f891d1614dc3eece9d85274ecdb258f86e6469dd85314d03fd3a2978d268e",
+      "actual_native_children": 0,
+      "exporter_started": false,
+      "Optimize": 0,
+      "charged_starts": 1,
+      "charged_outer_seconds": 16.000781774520874,
+      "reason": "Fixture result omitted the required reported F; unchanged physical reader rejected it before native launch."
+    },
+    "additional_caught_fixture_error": {
+      "reason": "Absolute system-temp missing.log path violates unchanged portable evidence-path rule.",
+      "fixed_to": "raw/missing.log",
+      "native_or_qualification_retry_used_for_this_diagnosis": false
+    },
+    "isolated_actual_system_temp_result": {
+      "zero_event": {
+        "enabled": true,
+        "installed": 0,
+        "not_exposed_original_verified_zero_H": true
+      },
+      "physical": {
+        "G": 0.0,
+        "P": 0.0,
+        "F": 0.0,
+        "Y": [
+          0,
+          1
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "view_actual": [],
+      "view_bindings": [],
+      "checks": [
+        "zero_certificate_without_native_exposure",
+        "not_started_log_view_has_no_actual_Optimize"
+      ],
+      "missing_F_still_rejected": true,
+      "temporary_root": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\r121-finite-vekqqswr"
+    },
+    "execution_method": "AST-isolated current zero and subsequent not_started statements; unchanged original physical/full_fleet/event_chain predicates, unchanged call-view body and portable rule; no full finite() run",
+    "remaining_qualification_starts": 7,
+    "remaining_qualification_seconds": 1783.9992182254791,
+    "next_qualification_obligation": {
+      "wrapper": 1,
+      "children": 5,
+      "conservative_starts": 6,
+      "outer_cap_seconds": 1200
+    },
+    "remaining_formal_obligation": {
+      "starts": 21,
+      "nominal_plus_management_seconds": 37800
+    },
+    "reviewer_Optimize": 0,
+    "reviewer_native_starts": 0,
+    "reviewer_compiles": 0,
+    "reviewer_Git_commands": 0,
+    "limitations": "Only the failed and subsequent zero/not_started fixture paths were replayed; actual returned Seed1 CLI evidence remains pending.",
+    "historical_as_of_qualification01_closeout": true
+  },
+  "qualification02_continuation": {
+    "decision": "ACCEPT_CONTINUE_SEALED_P_PLUS_THREE_UNSTARTED_CLI",
+    "patch_identity_SHA": "59cc162af15d78395826f6e6c64044bc06a763292564f76998ef79a29c85c4a6",
+    "actual_P_readonly_review_SHA": "01ca9fdb116bd90b1986e72c856d6b9037d14e52a49a0f9eb661456fcc5ed378",
+    "helper_changes": {
+      "scripts/qualify_round121.py": {
+        "before": "4455bfe88634dbbd465cca50bfb5a2828454c351d86b03ead0f4dc83cc3dd09f",
+        "after": "4a60dca91949ec931fb1a096eaeb8bd7a43f10ab2019948d190f413abb559a9a"
+      },
+      "scripts/round121_evidence.py": {
+        "before": "4704fb0e0de9981c8875c74815ba1e4f8b896d72aedf1a7ab9c76c7e2f9e1d53",
+        "after": "e3b53cdd437ed6a2eeab66948813ae9e19226ed381fdf68e94ba6aa2220a5cc6"
+      }
+    },
+    "adapter_AST_only_change": "raw Seed1 zero permits bool/int with value==0; every other AST node unchanged",
+    "original_H100_identity_SHA": "267795198017c57e981bb03671697793672323667c9f0276879f6ce44a977ae7",
+    "original_H100_identity_unchanged": true,
+    "original_candidate_and_helper_freeze_and_adapter_source_preserved": true,
+    "P_producer_receipt_SHA": "69818c60272277bd6f1342c7cf32350e18a2effad4c4e03180eab75efa1e2ff6",
+    "P_producer_seal_SHA": "d2294c9993401801652e202240b8a5610d0757fca0129293e6fecfb43afaa965",
+    "preserved_P_T_produce": 90.6787239999976,
+    "P_existing_evidence_full_shadow_audit_and_readout_passed": true,
+    "P_reconstruction": {
+      "U": 0.229952349996756,
+      "L": 0.10280954944032669,
+      "gap": 0.12714280055642932,
+      "certificate": false
+    },
+    "existing_exporter_and_P_launches_not_repeated": true,
+    "continuation": {
+      "wrapper": 1,
+      "unstarted_CLI": [
+        "M-B",
+        "MB-D0",
+        "MB-D1"
+      ],
+      "conservative_starts": 4,
+      "outer_cap": 900,
+      "each_CLI_produce_cap": 120,
+      "original_P_verify_only": true,
+      "P_verify_clock_includes_elapsed_gap": true
+    },
+    "previous_failed_fees": [
+      {
+        "label": "qualification01",
+        "receipt_SHA": "cbfc57db6d473e6c9c10a1674f22bbc47199e1ab548cfc7f19704d1bff61c0f8",
+        "conservative_starts": 1,
+        "outer_seconds": 16.000781774520874
+      },
+      {
+        "label": "qualification02",
+        "receipt_SHA": "220b5bebb528d7659e9104d3b932195d61a0d20b7824502a70674716c72e2050",
+        "conservative_starts": 3,
+        "outer_seconds": 117.67823243141174
+      }
+    ],
+    "paid_qualification_starts": 4,
+    "paid_qualification_seconds": 133.67901420593262,
+    "remaining_qualification_starts": 4,
+    "remaining_qualification_seconds": 1666.3209857940674,
+    "reserved_formal_starts": 21,
+    "reserved_formal_nominal_plus_management_seconds": 37800,
+    "actual_flags_review": "Journal native_preconditions/full_original/global flags are streamed as numeric 0/1; not_started actual_Optimize is emitted as JSON false; result lifecycle/domain/Start-request flags are emitted as JSON true/false. Real P result flags and all whole-audit branches were actually exercised.",
+    "limitations": "Three remaining real warm CLI and cross-arm H/cohort checks remain pending. This review issued no native or performance certificate and did not alter source raw flags or original clock."
   },
   "old_saved_h_reselection": [
     {
@@ -1374,17 +1531,54 @@
       "scripts/round121_precontract_review.py",
       "results/unified_exact_round121/review/pre_contract.json",
       "results/unified_exact_round121/review/pre_contract.md",
-      "results/unified_exact_round121/review/h_reselection_sources/**"
+      "results/unified_exact_round121/review/h_reselection_sources/**",
+      "explicitly authorized isolated system-temp zero/not_started fixture files, removed after replay",
+      "results/unified_exact_round121/review/actual_H100_P_readonly_review.json",
+      "results/unified_exact_round121/review/actual_H100_MB_readonly_review.json",
+      "results/unified_exact_round121/review/minimal_qualification_scope_review.json"
     ]
   },
   "limitations": [
-    "This accepts only the final frozen prequalification contract. Actual H100 Seed1 returned settings/model/Start/domain/log evidence is not yet available; no native or performance admission is issued here.",
+    "Real P and M-B Seed1 full audits/readouts pass. H100 D0 Seed1 is explicitly NOT_STARTED; frozen R120 D0 full native matrix/type/Start evidence is reused. One final real D1 Seed1 CLI plus necessary audit/H comparison is still required. No formal performance admission.",
     "Recorded pre-generation commit and generation chronology are cross-checked as artifacts, not independently verified with Git; this reviewer was explicitly barred from Git operations.",
     "Absence of unrecorded external prior measurements cannot be inferred from a no-filter assertion; source code/receipts and fixed hashes support the declared once-only procedure.",
     "No native model was built, solved, replayed, or altered by this reviewer. The old h analysis uses the existing complete matrices and primals only; its minimal local safe snapshot permits public --h-only replay without the original worktree.",
     "No new projection theorem, exact rational solver certificate, h branching/fixing claim, or performance conclusion follows from the two h repairs.",
     "No historical carrier restoration, website acquisition, or license endpoint access occurred."
   ],
-  "engineering_seconds": 0.6414805999957025,
-  "human_time": "unknown"
+  "engineering_seconds": 0.7196301000076346,
+  "human_time": "unknown",
+  "previous_pre_contract_SHA": "854d7ad519908c9118817897f1d48b9cb5fd572192f4d9a09c4a504fac8abfd5",
+  "minimum_admission": {
+    "decision": "ACCEPT_COMPOSED_MINIMUM_PENDING_ACTUAL_D1",
+    "no_formal_performance_admission": true,
+    "minimum_plan_SHA": "915305e5d149852fb06c7725c11a4ec1ddc7e060576e0c8fe02f85099d56f946",
+    "actual_MB_full_audit_and_readout_SHA": "66c7258e944ed3cb89259d20ef8e684c07b16d8705b70bb67d897e2f873fdda1",
+    "independent_old_D0_native_Start_reuse_review_SHA": "e989de5c85d7140d834d37295edc12a72a3db46de478353b18c6feb387107c7d",
+    "cache_owner_repair_AST_only": true,
+    "scope_checks_not_skipped": true,
+    "actual_MB_raw_and_seal_clock_unchanged": true,
+    "actual_P_raw_and_seal_clock_unchanged": true,
+    "H100_D0_Seed1": "NOT_STARTED; direct Seed1 qualification absent, explicitly reuse unchanged R120 D0 native model/type/Start",
+    "last_fixed_D1_CLI_required": true,
+    "last_attempt": {
+      "parent": 1,
+      "D1_child": 1,
+      "launches": 2,
+      "outer_cap_seconds": 600
+    },
+    "paid_qualification_starts": 6,
+    "paid_qualification_seconds": 423.4524049758911,
+    "remaining_qualification_starts": 2,
+    "remaining_qualification_seconds": 1376.547595024109,
+    "full_formal_obligation_preserved": {
+      "arms": 16,
+      "pairs": 18,
+      "starts": 21,
+      "nominal_plus_management_seconds": 37800
+    },
+    "failure_limit": "Last D1 must pass actual complete audit and H comparison; any necessary unresolved gap is BLOCKED. No additional qualification launch fits the 8-start cap.",
+    "disclosure": "The four-CLI design in section 6 is explicitly suggested. This composed minimum preserves necessary mathematical/native criteria and the unchanged formal plan; it does not claim H100 D0 Seed1 was run."
+  },
+  "minimum_admission_binding_UTC": "2026-10-15T05:42:42.790868+00:00"
 }

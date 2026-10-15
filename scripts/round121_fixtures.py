@@ -68,9 +68,9 @@ def run():
         (d/'external/round120_events.jsonl').unlink()
         (root/'zero.txt').write_text('1 1 [1]\ncapacities = [10, 2]\ninitial = [0, 1]\ntarget = [0, 1]\nweights = [0, 1]\nmin_ratio = [0, 0]\npoints = [(0, 0), (0, 0)]\n')
         p=dict(input_path='zero.txt',V=1,M=1,Q_vector=[1],T_seconds=120,pickup_seconds=60,drop_seconds=60,**{'lambda':.15})
-        write(d/'result.json',dict(routes=[]));l['panel']=p
+        write(d/'result.json',dict(routes=[],F=0.));l['panel']=p
         value=event_chain(root,l,d,dict(started=0));assert value['not_exposed_original_verified_zero_H'];checks.append('zero_certificate_without_native_exposure')
-        j=dict(calls={1:dict(native_log_path=str(d/'missing.log'))},not_started_ids={1},actual_started_ids=set())
+        j=dict(calls={1:dict(native_log_path='raw/missing.log')},not_started_ids={1},actual_started_ids=set())
         view=build(root,dict(arm='MB-D1'),d,j,{})
         assert not view['actual'] and not view['bindings'];checks.append('not_started_log_view_has_no_actual_Optimize')
     write(OUT/'qualification/finite_fixtures.json',dict(checks=checks,fixture_count=len(checks),Optimize=0,native_starts=0,

@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\qualify_round121.py", line 74, in continue_sealed_P
+    actual+=1;execute(l,h)
+              ^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_campaign.py", line 11, in execute
+    supervised(l,i,tick);finish_producer(l,tick,t0unix);verify(l,i)
+                                                        ^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_evidence.py", line 138, in verify
+    with logs.activate(view):value=verifier.verify(l,i)
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round115_verify.py", line 24, in verify
+    value=adapter(l,read(d/'observations.json'),read(d/'completion.json'),i)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round120_evidence.py::explicit_R120_evidence", line 26, in adapter
+    e=row['payload'];kind=e['kind'];assert not failure,'publication after failure latch'
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round113_audit.py", line 222, in adapter
+    value=inherited.adapter(l,observations,c,i);last_metrics=dict(inherited.last_metrics)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round112_audit.py", line 55, in adapter
+    audited=inherited.adapter(launch,observations,completion,identity)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round111_seed_audit.py", line 116, in adapter
+    try:return inherited.adapter(launch,records,completion,identity)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round109_seed_audit.py", line 66, in adapter
+    _active_proof=computed.qualify(ROOT,launch,records,completion,identity)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_evidence.py", line 55, in qualify_seed
+    view=logs.build(root,l,d,j,result)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round120_evidence.py::explicit_R120_evidence", line 20, in build
+    identity=None
+        ^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round111_seed_audit.py", line 94, in model_scope_contract
+    path,digest=self.paths[id(model)]
+                ~~~~~~~~~~^^^^^^^^^^^
+KeyError: 2097234568256

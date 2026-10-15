@@ -80,7 +80,10 @@ def finish():
     for a in arms:lines.append(f'| {"known Seed" if a["seed"] else "new input"} | {a["id"]} | {a["seed"]} | {a["arm"]} | '+' | '.join(f'{a[k]:.10g}' for k in ['U','L','gap'])+f' | {a["certificate"]} | '+' | '.join(f'{a[k]:.9g}' for k in ['T_produce','T_verify','T_total'])+' |')
     lines+=['','| Role | Seed | Pair | Class | Severe | Basis |','|---|---:|---|---|---|---|']
     for p in pairs:lines.append(f'| {p["id"]} | {p["seed"]} | {p["candidate"]}/{p["control"]} | {p["classification"]} | {p["severe_regression"]} | {p["basis"]} |')
-    lines+=['','The frozen veto and support conditions are recorded individually in stage_decision.json. Ordinary material LOSS and severe LOSS are both retained. Open caps are censored producer windows and are never reported as final certification times.',
+    lines+=['','| New input | Initial / target total | sum(w) | lambda sum(w) | Physical T | Producer cap |','|---|---:|---:|---:|---:|---:|']
+    for p in m['new_roles']:lines.append(f'| {p["id"]} | {p["total_initial"]} / {p["total_target"]} | {p["sum_weights"]:.6f} | {p["lambda_sum_weights"]:.8f} | {p["T_seconds"]} | {p["cap_seconds"]} |')
+    lines+=['','The max-normalized weight sums and lambda*sum(w) differ across V, together with geography, stock and physical conditions. Their differences are not identified as a pure size effect. These are three prospective subsets of one known city, with all old-subset overlaps retained.',
+        '', 'The frozen veto and support conditions are recorded individually in stage_decision.json. Ordinary material LOSS and severe LOSS are both retained. Open caps are censored producer windows and are never reported as final certification times.',
         '', '| Role | Seed | Method | LP/MIP | H seconds | LP seconds | MIP seconds | Actual rows/columns/nonzeros |','|---|---:|---|---:|---:|---:|---:|---|']
     for c in costs:
         t=c['time_partition'];sizes=sorted({f'{d["rows"]}/{d["columns"]}/{d["nonzeros"]}' for d in dimensions if d['id']==c['id'] and d['arm']==c['arm']})

@@ -1,6 +1,16 @@
+# R121 applicability and current evidence boundary
+
+R121 is BLOCKED before formal admission: all16 formal positions are NOT_STARTED and all18 pair slots UNEVALUABLE. The R120 production algorithm/PE/source are frozen. No performance/default decision follows. ENS-C remains default and R119 MB-PC remains stopped.
+
+Current Gurobi Seed is specified by the R121 frozen role table: F2, R98-C2 and qualification H100 use1; new Q30-C2-B, Q40-R2-S and Q50-C2-U use0. Only H100 P-GRB and M-B actually ran. H remains Seed20260626 with complete24+1 closure/exchange, independent of Gurobi Seed. All inherited Seed0 statements and concrete old stock totals below describe historical runs/examples, not current R121 observations. The R121 actual inputs and B/D totals are in input_manifest.json; none of the three new inputs has been optimized.
+
+The inherited complete problem/model/embedding/proof/Start/coverage specification follows. Its general disjunction idea and project-specific integration are separate from this round's unavailable confirmation evidence. See final_report.md and paper_claim_evidence_map.md for the precise claim boundary.
+
+---
+
 # Round121 frozen native proof disjunction
 
-Production identity remains R120 source355eefd2be3fe5651195681faf7b3a63ee4032f8 / PE5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba. The full inherited method and D1 contract follow verbatim below. R121 evaluates three predeclared new inputs from the same safe city source and two known Seed1 blocks; it defines no new algorithm. ENS-C remains default. This is prospective setup; performance and stage are pending.
+Production identity remains R120 source355eefd2be3fe5651195681faf7b3a63ee4032f8 / PE5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba. The full inherited method and D1 contract follow verbatim below. R121 evaluates three predeclared new inputs from the same safe city source and two known Seed1 blocks; it defines no new algorithm. ENS-C remains default. R121 is BLOCKED before formal admission: 0/16 formal arms and 0/18 evaluable pairs. The frozen inputs and run table remain prospective, with no new performance conclusion or default change. See final_report.md and the complete failure/fee ledger.
 
 # Round120 candidate extension on the frozen integrated method
 

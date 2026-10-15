@@ -1,0 +1,72 @@
+{
+  "paid_starts": 7,
+  "paid_outer_seconds": 445.13650035858154,
+  "remaining_starts": 33,
+  "remaining_outer_seconds": 47554.86349964142,
+  "qualification_starts": 7,
+  "qualification_seconds": 445.13650035858154,
+  "unclosed": [],
+  "total_limits": [
+    40,
+    48000
+  ],
+  "qualification_limits": [
+    8,
+    1800
+  ],
+  "formal_nominal_seconds": 37200,
+  "management_reserved_seconds": 600,
+  "formal_seconds_spent": 0,
+  "actual_qualification_parents": 4,
+  "actual_reference_exporters": 1,
+  "actual_H100_CLI": 2,
+  "fees": [
+    {
+      "name": "qualification01",
+      "receipt_SHA": "cbfc57db6d473e6c9c10a1674f22bbc47199e1ab548cfc7f19704d1bff61c0f8",
+      "starts": 1,
+      "native_children": 0,
+      "outer_seconds": 16.000781774520874,
+      "exit_code": 1,
+      "parent_pid": 26816,
+      "parent_creation_unix": 1792041536.5755615
+    },
+    {
+      "name": "qualification02",
+      "receipt_SHA": "220b5bebb528d7659e9104d3b932195d61a0d20b7824502a70674716c72e2050",
+      "starts": 3,
+      "native_children": 2,
+      "outer_seconds": 117.67823243141174,
+      "exit_code": 1,
+      "parent_pid": 23132,
+      "parent_creation_unix": 1792041748.536501
+    },
+    {
+      "name": "qualification03",
+      "receipt_SHA": "896cdad7dca5d35c35d09675d9075f65262cfcb81e989db375666a73b60711f8",
+      "starts": 2,
+      "native_children": 1,
+      "outer_seconds": 289.7733907699585,
+      "exit_code": 1,
+      "parent_pid": 8540,
+      "parent_creation_unix": 1792042317.0885677
+    },
+    {
+      "name": "qualification04",
+      "receipt_SHA": "61454cc0b6c6159d5c971d6b68a69527a45bb14b801ce36b4974ae5cd214f588",
+      "starts": 1,
+      "native_children": 0,
+      "outer_seconds": 21.68409538269043,
+      "exit_code": 1,
+      "parent_pid": 19192,
+      "parent_creation_unix": 1792042987.016199
+    }
+  ],
+  "last_reviewed_minimum_needed_starts": 2,
+  "qualification_remaining_starts": 1,
+  "all_failed_starts_charged": true,
+  "nested_native_seconds_added": false,
+  "engineering_separate": true,
+  "human_seconds": "unknown",
+  "engineering_total": "not claimed; compilation, static review, publication and recovery have scoped receipts"
+}
