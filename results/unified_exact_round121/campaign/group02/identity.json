@@ -19,14 +19,14 @@
     "candidate_binary": "build/research/round120/ExactEBRP.exe",
     "candidate_binary_sha256": "5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba"
   },
-  "prereg_sha256": "d077c2e8d66eb43174211102535269f56184c9d7fd6137bdc2e366270e7af157",
-  "runner_sha256": "075cd5cb328dbea98eb51a7585f79dde7fb4ab36e302919f21dfdc73510bd8a2",
+  "prereg_sha256": "162ad2a628411dba81cfe98bd10bdb9a8b53e09bf50aeb38f15cc89990436e81",
+  "runner_sha256": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0",
   "helpers": {
     "scripts/analyze_round61.py": "fad9154b399dd9eb3463510f8480dd1e8a22974729902e0a25ec78a9ae551cce",
     "scripts/compare_round112_startup.py": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2",
     "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
     "scripts/qualify_round120.py": "24e6c41494abb723d006660b08b754c0075f84dc1279e4bf8bf70a5081ac689a",
-    "scripts/qualify_round121.py": "825e1b1a10b8aa674e6950cc85e0ae8280341e2b02aa6e59cd6134241a52cf79",
+    "scripts/qualify_round121.py": "48fe95bea2b0d4e014c760ee4f80da00a6867ab875b23928c190644efffdad1b",
     "scripts/read_round113.py": "84f98aadd30681080af723d4f874f007f0222431f2fb15bffbd6b7fcfc716cc2",
     "scripts/read_round116.py": "ed5865c5011d239815000f1bf15c591eee8d9e8d933edd857f3a990762230d28",
     "scripts/read_round118.py": "d9a8e887f10abfb9bdead5b765d033316c96d6134b42163aeb37acdb5b16dbc7",
@@ -75,13 +75,14 @@
     "scripts/round120_history.py": "20c8ad787a833401ebdb52c7aafca1168aefc637591704fc4dd018696825bcb5",
     "scripts/round120_math_audit.py": "7334f742647aaffa4e29b41d09b43902e9ff399482ef2e83fc02a588400b1afa",
     "scripts/round120_prepare.py": "d0354d810ce2278a220e7d2f58490397b4dd080f5dc290ff1bc15ff9247d6964",
-    "scripts/round121_campaign.py": "075cd5cb328dbea98eb51a7585f79dde7fb4ab36e302919f21dfdc73510bd8a2",
-    "scripts/round121_common.py": "0e5ff0a8445d013eb1c98f730cad87f22a71d4bf08df5ee67481f27205b8818c",
+    "scripts/round121_campaign.py": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0",
+    "scripts/round121_common.py": "1a401ff0a4ffffbab0265e62d6c46d89b60bad2d2587ffd12999b5db042029f6",
     "scripts/round121_data.py": "fdc805c0528c318fd68da54195bd156fa50cd5128730de4d982c16a0a0b234a1",
     "scripts/round121_decision.py": "7a4fc5413ffda795f35b377fec454dd2bb1b0bd214a00a584c6091afa5c4a030",
     "scripts/round121_evidence.py": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2",
-    "scripts/round121_fixtures.py": "b6b0b0cab6f088f8bd28d2eb917df4686e7679b12b0e5f8237c41e76dac65bd7",
-    "scripts/round121_prepare.py": "43532ec092ed6525cc017dd0f7d796ed1e310ac5d58e3ee1ffcf05bc95a11db0",
+    "scripts/round121_fixtures.py": "d77e2cb884300c6742fb70ce1594063448cb40041c96c756f8347ffaba1e0a48",
+    "scripts/round121_prepare.py": "65d481c41c49dca386a88dd05dea9937917ce99642b4b5fe8a41a11bd356aa7a",
+    "scripts/round121_reaudit.py": "007b8a0720b1e1c3fc7cbcc1a9ecf126fe2c3b16f53fadd50cf94efb82a7172f",
     "scripts/round121_reference.cpp": "fac64e71a37258314f07189500ba48560c011f5c60e75cb3f697fd080ac86fc1",
     "scripts/round61_research.py": "3a288c045e58bbc7e19dad330db2bdae4257daaf63a66313ee32b89205e14955",
     "scripts/round69_research.py": "d7579acdaf24beea19a6724b1a6d57269b5036fb67e0d53f6e152a2db24ce272",
@@ -710,5 +711,5 @@
       ]
     }
   ],
-  "measurement_policy_SHA": "a9205e33ce44dfc60d16160507f04ff74fa0386979ba270bda4d8ef2cc0e6d6f"
+  "measurement_policy_SHA": "6f77267c76129ca4ff2a851c7233b3482329ea9822c2682d393b17c1d9b75c1a"
 }

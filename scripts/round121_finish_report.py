@@ -22,7 +22,7 @@ def finish():
     risk=any(v['adjudication']['rejections'] for v in values)
     decision=decide(values,new_identity,proof_risk=risk,blockers=blockers)
     b=budget();assert not b['unclosed'] and b['paid_starts']<=40 and b['paid_outer_seconds']<=48000
-    assert b['qualification_starts']<=8 and b['qualification_seconds']<=1800
+    assert b['qualification_starts']<=QUALIFICATION_MAXIMUM_STARTS and b['qualification_seconds']<=QUALIFICATION_MAXIMUM_SECONDS
     write(OUT/'stage_decision.json',decision);write(OUT/'all16_arms.json',arms);write(OUT/'all18_pairs.json',pairs)
     table(OUT/'all16_arms.csv',arms);table(OUT/'all18_pairs.csv',pairs)
     positions=[]
@@ -69,7 +69,7 @@ def finish():
     write(OUT/'open_endpoint_decomposition.json',decomposition)
     engineering=[]
     for p in (OUT/'engineering').glob('reference_compile*/receipt.json'):engineering.append(dict(path=p.relative_to(ROOT).as_posix(),**read(p)))
-    write(OUT/'resource_summary.json',dict(b,total_limits=[40,48000],qualification_limits=[8,1800],formal_nominal_seconds=37200,management_reserve=600,
+    write(OUT/'resource_summary.json',dict(b,total_limits=[40,48000],qualification_limits=[QUALIFICATION_MAXIMUM_STARTS,QUALIFICATION_MAXIMUM_SECONDS],formal_nominal_seconds=37200,management_reserve=600,
         failed_fees_retained=True,failed_declared_attempts_not_refunded=True,nested_native_seconds_added=False,engineering_separate=True,
         compiler_receipts=engineering,known_compile_seconds=sum(r['seconds'] for r in engineering),human_seconds='unknown',engineering_total='not claimed; scoped receipts'))
     stage=decision['stage'];lines=['# Round121 frozen D1 confirmation','',f'**{decision["execution_stage"]} — {stage}**.','',
@@ -98,7 +98,7 @@ def finish():
         '', 'For each open pair, dgap=dU−dL is checked exactly to numerical arithmetic tolerance. Objective parts G and lambda*P are listed separately in objective_parts.csv. Improved U with weaker L is a primal endpoint benefit; these arithmetic decompositions are not internal causal shares. Record availability is an observed upper time bound, not an internal first discovery.',
         '', 'Both saved R120 D0 maximum-violation points can be repaired for D1 by changing only h to zero under the actual complete matrices and ObjCon, with every original coordinate held fixed (review/pre_contract.json and minimal saved sources). The old extended-space nonredundancy and equal original-objective LP minima remain true. These two witnesses do not establish strict original-coordinate projection shrinkage or a general performance theorem. No new LP/native diagnostic was run.',
         '', 'The two Seed layers and every Seed0-to-Seed1 classification are retained in seed_stratification.json; WIN-to-LOSS transitions are labelled sensitive. No best-of-two-Seed selection, pooled exact mean time or overall independent-sample win rate is formed. R120 C2 severe direct-M-B loss remains part of the development record.',
-        '',f'Budget: {b["paid_starts"]}/40 conservative starts and {b["paid_outer_seconds"]:.6f}/48000 outer seconds; qualification {b["qualification_starts"]}/8 and {b["qualification_seconds"]:.6f}/1800. Failed preparation/compile/native declarations remain disclosed; compilation, zero-solve mathematics, publication, recovery and extra review have separate scoped receipts. Human time is unknown.',
+        '',f'Budget: {b["paid_starts"]}/40 conservative starts and {b["paid_outer_seconds"]:.6f}/48000 outer seconds; qualification {b["qualification_starts"]}/{QUALIFICATION_MAXIMUM_STARTS} and {b["qualification_seconds"]:.6f}/1800. The user increased only the cumulative qualification start ceiling from8 to12 within this same R121. All earlier failures remain charged. Compilation, zero-solve mathematics, publication, recovery and extra review have separate scoped receipts. Human time is unknown.',
         '', 'No new city, independent IID sample, default adoption, universal acceleration, rational-exact solver certificate or automated next batch is claimed. The one stage decision closes this batch. Scientific payload, actual public reconstruction, extra review and remote publication receipts have separate scopes.']
     (OUT/'final_report.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     claim=['# Paper claims and evidence','',f'Current stage: `{stage}`.','',

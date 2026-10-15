@@ -34,7 +34,7 @@ def prepare():
     write(OUT/'argv_freeze.json',dict(plans=plans,groups=groups,PE_SHA=PE_SHA,DLL_SHA=DLL_SHA,frozen_UTC=utc(),
         no_weak_H_export_diagnostic_or_cross_arm_input=True,reference_slots='new 3 from one zero-Optimize batch; existing F2/C2/H100 safe cold references'))
     write(OUT/'protocol.json',dict(round=121,base=BASE,production_source=SOURCE,common=COMMON,groups=groups,
-        maximum_starts=40,maximum_outer_seconds=48000,qualification_maximum_starts=8,qualification_maximum_seconds=1800,
+        maximum_starts=40,maximum_outer_seconds=48000,qualification_maximum_starts=QUALIFICATION_MAXIMUM_STARTS,qualification_maximum_seconds=QUALIFICATION_MAXIMUM_SECONDS,
         formal_arms=16,formal_pairs=18,new_problems=3,known_Seed1_blocks=2,formal_nominal_seconds=37200,management_reserve=600,
         qualification_plan=dict(parent=1,reference_exporter=1,H100_Seed1_children=4,outer_cap=1200,each_CLI_cap=120,exporter_cap=300),
         paired_rule='unchanged round108_decisions.pair; independent all18 R120 replay',
@@ -42,7 +42,7 @@ def prepare():
         all_online_work_in_T_produce=True,native_reserve=30,evidence_tolerance=1e-7,own_H_seed=20260626,own_H_semantics='full24+1 closure/exchange',
         stage_priority=['PROOF_RELIABILITY_PRIORITY','BLOCKED','STOP_FROZEN_D1_CONFIRMATION','ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK','RETAIN_D1_AS_DEVELOPMENT_COMPONENT']))
     policy=(ROOT/'results/unified_exact_round120/measurement_policy_v2.md').read_text(encoding='utf-8')
-    (OUT/'measurement_policy_v2.md').write_text(policy.split('R120:')[0]+'\nR121: frozen production PE; 16 unconditional positions, 5 wrappers, 18 pairs, 3 prospective same-source problems and 2 known Seed1 blocks. Total40/48000, qualification8/1800. Each own H/LP/Start and all online work paid; native reserve30 unchanged. Group verification is group outer cost; no unexecuted counterfactual subtraction.\n',encoding='utf-8')
+    (OUT/'measurement_policy_v2.md').write_text(policy.split('R120:')[0]+f'\nR121: frozen production PE; 16 unconditional positions, 5 wrappers, 18 pairs, 3 prospective same-source problems and 2 known Seed1 blocks. Total40/48000, qualification{QUALIFICATION_MAXIMUM_STARTS}/1800. Each own H/LP/Start and all online work paid; native reserve30 unchanged. Group verification is group outer cost; no unexecuted counterfactual subtraction.\n',encoding='utf-8')
     q=OUT/'qualification';q.mkdir(exist_ok=True)
     (q/'reference_batch.tsv').write_text(''.join('\t'.join(map(str,[ROOT/p['input_path'],p['T_seconds'],60,60,.15,q/'reference'/p['id']]))+'\n' for p in m['new_roles']),encoding='utf-8')
     write(OUT/'prospective_helper_freeze.json',dict(source_bindings=bindings(),helpers=helpers(),PE_SHA=PE_SHA,

@@ -103,7 +103,7 @@
   ],
   "maximum_starts": 40,
   "maximum_outer_seconds": 48000,
-  "qualification_maximum_starts": 8,
+  "qualification_maximum_starts": 12,
   "qualification_maximum_seconds": 1800,
   "formal_arms": 16,
   "formal_pairs": 18,
@@ -134,5 +134,11 @@
     "STOP_FROZEN_D1_CONFIRMATION",
     "ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK",
     "RETAIN_D1_AS_DEVELOPMENT_COMPONENT"
-  ]
+  ],
+  "qualification_start_amendment": {
+    "SHA": "02a03088ef3304f6ed3827747f3d9f8c06c7f673eb499f0f165bf3ed238a2d7f",
+    "prior_protocol_SHA": "d077c2e8d66eb43174211102535269f56184c9d7fd6137bdc2e366270e7af157",
+    "only_limit_changed": "qualification cumulative starts8→12",
+    "instruction_record_path": "results/unified_exact_round121/resumption/authorization01.json"
+  }
 }

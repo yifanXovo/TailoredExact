@@ -6,6 +6,7 @@ from round121_evidence import extension
 from round121_fixtures import run as finite
 from qualify_round120 import child_creation
 from read_round121 import complete_H
+from round121_reaudit import replay,saved_view,producer_identity
 from round100_idle import ensure_idle
 import traceback,collections,csv
 def billed(label):
@@ -134,7 +135,76 @@ def minimal_final(label):
     except BaseException:
         (fee/'failure.txt').write_text(traceback.format_exc(),encoding='utf-8');raise
     finally:fee_pending(fee,tick,True,code,actual)
+def resume_four_cli(label):
+    """Same R121: retain both producers, re-audit, then only D0 and D1."""
+    fee,tick=fee_begin(label,2,900,True,dict(starts=21,seconds=37800));actual=0;code=1
+    resume=OUT/'qualification/resume01'
+    try:
+        ensure_idle();identity();gate=read(OUT/'review/resume_precontract.json')
+        assert gate['decision']=='ACCEPT' and gate['helpers']==helpers() and gate['source_bindings']==bindings()
+        assert gate['candidate_identity_SHA']==sha(OUT/'candidate_identity.json')
+        authorization=read(OUT/'resumption/authorization01.json')
+        assert authorization['new_qualification_starts']==QUALIFICATION_MAXIMUM_STARTS==12
+        h=read(resume/'identity.json');old=read(OUT/'qualification/h100/identity.json')
+        assert h['launches']==old['launches'] and h['helpers']==helpers() and h['source_hashes']==bindings()
+        assert sha(OUT/'qualification/h100/identity.json')==authorization['original_H100_identity_SHA']
+        assert not Path(h['launches'][2]['destination']).exists() and not Path(h['launches'][3]['destination']).exists()
+        finite(resume/'finite_fixtures.json');recovered={}
+        for l in h['launches'][:2]:
+            recovered[l['arm']]=replay(l,h,resume/'recovery'/l['arm'])
+        write(resume/'recovery_index.json',dict(recovered=recovered,helpers=helpers(),source_bindings=bindings(),no_native_reexecution=True))
+        for position,l in enumerate(h['launches'][2:]):
+            remaining=(2-position)*120+120
+            elapsed=time.perf_counter()-tick;b=budget()
+            assert elapsed+remaining<=900 and b['qualification_seconds']+elapsed+remaining<=1800
+            assert b['paid_outer_seconds']+elapsed+remaining+37800<=48000
+            write(fee/f'{position+1:02d}_before.json',dict(arm=l['arm'],seed=l['seed'],command=l['command'],remaining_budget=b))
+            actual+=1;execute(l,h)
+            write(fee/f'{position+1:02d}_after.json',dict(arm=l['arm'],producer_receipt_SHA=sha(Path(l['destination'])/'producer_receipt.json'),
+                total_receipt_SHA=sha(Path(l['destination'])/'arm_total_receipt.json')))
+        import read_round118 as reader
+        import read_round116 as inherited
+        items=[];records=collections.defaultdict(list)
+        with extension():
+            for l in h['launches']:
+                if l['arm'] in recovered:
+                    with saved_view(l['destination'],resume/'recovery'/l['arm']):items.append(reader.item(ROOT,l,producer_identity(l,h),records))
+                else:items.append(reader.item(ROOT,l,h,records))
+            assert all(v['complete'] for v in items)
+            final=inherited.reconcile([q for v in items for q in v['claims']],[q for v in items for q in v['ind']['witnesses']])
+            assert not final['rejections'],'PROOF_RELIABILITY_PRIORITY: qualification same-domain proof contradiction'
+            arms=[]
+            for v in items:
+                l=v['l']
+                if l['arm'] in recovered:
+                    with saved_view(l['destination'],resume/'recovery'/l['arm']):arms.append(reader.finalize(ROOT,v,final,records))
+                else:arms.append(reader.finalize(ROOT,v,final,records))
+        assert all(a['formal_protocol_qualified'] and a['numbers_qualified'] for a in arms)
+        H=complete_H(h['launches'][0]['panel'],{l['arm']:Path(l['destination']) for l in h['launches'] if l['arm']!='P-GRB'})
+        assert all(x['qualified'] for x in H['comparisons'])
+        write(resume/'full_H_comparison.json',H)
+        write(resume/'current_core.json',dict(arms=arms,adjudication=final,full_H=H,not_formal_performance=True,
+            final_helpers=helpers(),source_bindings=bindings(),old_failed_raw_unchanged=True,recovery_index_SHA=sha(resume/'recovery_index.json')))
+        write(OUT/'qualification/actual_CLI_status.json',dict(actual_CLI=4,H100_four_Seed1_actual_CLI=True,
+            positions=[dict(arm=a['arm'],seed=1,state='ACTUAL_CLI_COMPLETE_QUALIFIED',reused_producer=a['arm'] in recovered,
+                recovery_receipt_SHA=sha(resume/'recovery'/a['arm']/'traceable_receipt.json') if a['arm'] in recovered else None) for a in arms],
+            all_failures_retained=True,all_original_P_MB_bytes_unchanged=True))
+        assert actual==2 and time.perf_counter()-tick<=900
+        write(OUT/'review/performance_admission.json',dict(decision='ACCEPT',candidate_identity_SHA=sha(OUT/'candidate_identity.json'),
+            final_PE_SHA=PE_SHA,DLL_SHA=DLL_SHA,helpers=helpers(),source_bindings=bindings(),
+            pre_contract_SHA=sha(OUT/'review/resume_precontract.json'),H100_four_Seed1_actual_CLI=True,full_H_equal=True,
+            original_P_MB_producers_reused_after_complete_final_file_reaudit=True,D0_D1_each_actual_once=True,
+            four_arm_qualification_core_SHA=sha(resume/'current_core.json'),new_recovery_receipts_preserve_old_failures=True,
+            actual_new_native_children=2,new_wrapper=1,all_old_fees_charged=True,qualification_maximum_starts=12,
+            qualification_maximum_seconds=1800,total_maximum_starts=40,total_maximum_seconds=48000,
+            formal_arms=16,formal_pairs=18,not_performance_superiority=True,fee_close_required_before_formal=True))
+        code=0
+    except BaseException:
+        (fee/'failure.txt').write_text(traceback.format_exc(),encoding='utf-8');raise
+    finally:fee_pending(fee,tick,True,code,actual)
+
 if __name__=='__main__':
-    if '--minimum-final-D1' in sys.argv[2:]:minimal_final(sys.argv[1])
+    if '--resume-four-cli' in sys.argv[2:]:resume_four_cli(sys.argv[1])
+    elif '--minimum-final-D1' in sys.argv[2:]:minimal_final(sys.argv[1])
     elif '--continue-sealed-P' in sys.argv[2:]:continue_sealed_P(sys.argv[1])
     else:billed(sys.argv[1])

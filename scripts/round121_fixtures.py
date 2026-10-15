@@ -22,7 +22,7 @@ def preflight():
     write(OUT/'preflight_R120_pair_replay.json',dict(saved_groups=history,all18_unchanged_comparisons=pairs,Optimize=0,native_starts=0,
         old_Seed0_separate=True,engineering_seconds=time.perf_counter()-tick))
     print('R120 all18 frozen comparisons replayed without native or full historical recovery')
-def run():
+def run(output=None):
     tick=time.perf_counter();checks=[]
     def life(events):return event_lifecycle([dict(payload=dict(sequence=i,**e)) for i,e in enumerate(events,1)])
     value=life([dict(kind='identity'),dict(kind='call',call=1),dict(kind='not_started',call=1,actual_Optimize=False,reason='no_remaining_original_work_window')])
@@ -73,7 +73,7 @@ def run():
         j=dict(calls={1:dict(native_log_path='raw/missing.log')},not_started_ids={1},actual_started_ids=set())
         view=build(root,dict(arm='MB-D1'),d,j,{})
         assert not view['actual'] and not view['bindings'];checks.append('not_started_log_view_has_no_actual_Optimize')
-    write(OUT/'qualification/finite_fixtures.json',dict(checks=checks,fixture_count=len(checks),Optimize=0,native_starts=0,
+    write(output or OUT/'qualification/finite_fixtures.json',dict(checks=checks,fixture_count=len(checks),Optimize=0,native_starts=0,
         source_seed0_readback_SHA=sha(source),no_artificial_proof_H_or_flag_in_formal=True,
         reused_R120_full_native_matrix_lifecycle_qualification=True,new_wiring_only=True,seconds=time.perf_counter()-tick))
     return checks

@@ -286,3 +286,8 @@ results/unified_exact_round118/**/*.tsv text eol=lf
 results/unified_exact_round118/compact_evidence/*.part* -text
 # Frozen native/producer outputs retain their original Windows line endings.
 results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
+
+# Preserve Round121 frozen metadata, runtime and input SHA byte identities.
+/results/unified_exact_round121/** -text whitespace=cr-at-eol
+/scripts/*round121* -text whitespace=cr-at-eol
+/reference/round121_confirmation/** -text whitespace=cr-at-eol

@@ -11,6 +11,8 @@ PE_SHA='5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba'
 DLL=Path('D:/gurobi1302/win64/bin/gurobi130.dll')
 DLL_SHA='9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88'
 PYTHON=Path('D:/msys64/ucrt64/bin/python.exe')
+QUALIFICATION_MAXIMUM_STARTS=12
+QUALIFICATION_MAXIMUM_SECONDS=1800
 sha=prior.sha;read=prior.read;write=prior.write;utc=prior.utc;environment=prior.environment;bindings=prior.bindings
 def helpers():
     import ast
@@ -50,7 +52,7 @@ def fee_begin(label,children,cap,qualification,reservation):
     assert b['remaining_starts']>=children+1+reservation['starts']
     assert b['remaining_outer_seconds']>=cap+reservation['seconds']
     if qualification:
-        assert b['qualification_starts']+children+1<=8 and b['qualification_seconds']+cap<=1800
+        assert b['qualification_starts']+children+1<=QUALIFICATION_MAXIMUM_STARTS and b['qualification_seconds']+cap<=QUALIFICATION_MAXIMUM_SECONDS
     d.mkdir(parents=True)
     write(d/'launch.json',dict(command=sys.argv,cwd=str(ROOT),wrapper_pid=os.getpid(),wrapper_creation_unix=creation,
         conservative_process_starts=children+1,declared_native_children=children,qualification=qualification,outer_cap=cap,

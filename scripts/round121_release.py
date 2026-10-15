@@ -42,7 +42,7 @@ def inventory(root):
         for n in names:
             p=root/f'results/unified_exact_round{rn}'/n
             if p.exists():files.add(p)
-    excluded={'compact_evidence','delivery','restored_reconstruction'}
+    excluded={'compact_evidence','delivery','restored_reconstruction','local_only_prepublication'}
     later={'public_pack_receipt.json','public_dependency_closure.json','delivery_summary.md','preexisting_main_untracked_paths.txt'}
     for p in out.rglob('*'):
         if not p.is_file() or p.suffix.lower() in FORBIDDEN:continue

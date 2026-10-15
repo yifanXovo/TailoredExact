@@ -1,3 +1,13 @@
+# CURRENT AUTHORITATIVE STATE: R121 RESUMED — QUALIFICATION PENDING
+
+The user explicitly increased cumulative qualification starts8→12 in this SAME Round121; q1800 seconds and total40/48000 are unchanged. Existing fees remain7 starts/445.13650035858154sec, all4 closed. No native process is active and no formal position started. P/MB raw/seals and old failed audit history are immutable. H100 D0/D1 Seed1 remain NOT_STARTED.
+
+Current next operation: final-file different-executor resume precontract review. Only after its ACCEPT bound to final helpers/source/candidate identity, run qualification05 with --resume-four-cli: one billed parent, persistent new P/MB re-audit receipts and only two never-started D0/D1 children (cap120 each; parent cap900). This reserves the full formal21 starts/37800sec. Do not rerun P/MB/exporter or production compilation. A new recovery closeout must be read through its own traced view; the original failed audit remains historical.
+
+After qualification05 actually exits, close its fee promptly, inspect actual four-arm core/admission, then freeze and execute original five formal groups serially. Normal LOSS/open never cancels remaining groups. All prior BLOCKED/RUNNING/8-limit entries below are chronological history superseded by this authority and resumption/authorization01.json.
+
+---
+
 # CURRENT AUTHORITATIVE STATE: BLOCKED — NO MORE NATIVE LAUNCHES
 
 All four qualification parents have exited and all fees are closed. Charged qualification/total: 7 conservative starts and 445.13650035858154 outer seconds. Only1 of8 qualification starts remains; the last reviewed parent+D1 requires2. No native process is active. H100 D0/D1 Seed1 and all16 formal positions are NOT_STARTED; all18 comparisons are UNEVALUABLE. No performance admission was issued. Do not relabel a wrapper, change the minimum, exceed the sublimit or restart any producer. M-B's temporary full review did not replace its failed canonical audit/closeout.

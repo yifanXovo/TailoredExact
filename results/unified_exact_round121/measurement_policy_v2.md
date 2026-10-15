@@ -9,3 +9,5 @@ Call-scoped immutable-model/log-byte views repair the inherited read-only eviden
 
 
 R121: frozen production PE; 16 unconditional positions, 5 wrappers, 18 pairs, 3 prospective same-source problems and 2 known Seed1 blocks. Total40/48000, qualification8/1800. Each own H/LP/Start and all online work paid; native reserve30 unchanged. Group verification is group outer cost; no unexecuted counterfactual subtraction.
+
+Current same-R121 user amendment: cumulative qualification starts8→12; qualification1800sec and total40starts/48000sec are unchanged. Earlier8/1800 line is historical. Producer/verification/total clock boundaries and all scientific parameters are unchanged. Original P/MB seals/T_produce remain; resumed re-audits include the full elapsed post-seal gap in T_verify/T_total and only their actually executed parent duration in the new outer fee. Authority: resumption/authorization01.json.

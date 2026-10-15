@@ -1,3 +1,11 @@
+# Current R121 resumption — qualification pending
+
+The user explicitly continued this same Round121 and increased only the cumulative qualification start ceiling from8 to12. Qualification1800sec and total40starts/48000sec remain unchanged. The existing7starts/445.13650035858154sec remain charged. P/MB sealed producers will be reused after final-file full audit into new traceable recovery receipts; original raw, failed audit and old receipts stay untouched. Only never-started H100 D0/D1 Seed1 CLI will be added. All16 original formal positions and18 pairs remain pending, with production algorithm/input/Seed/parameters/clocks/criteria unchanged. The earlier blocked delivery and PR183 remain history within this same round, not a new research draw.
+
+No performance admission has yet been issued for the resumed files. Current authority: resumption/authorization01.json, resumption/final_freeze01.json and RESUME.md. The text below is the retained pre-resumption report, superseded on its8-start budget barrier by the user's amendment. No previously absent scientific result has been filled in.
+
+---
+
 # R121 blocked delivery and actual recovery
 
 Scientific payload: f371d3441cd97f96004100612d4df529fa27491d. Execution/stage: BLOCKED before formal admission, with0/16 formal arms and0/18 evaluable pairs. Four failed qualification parents plus exporter/P/MB cost7 starts and445.13650035858154 outer seconds. Only1 qualification start remains versus2 required. No further native work or automatic batch is scheduled.
