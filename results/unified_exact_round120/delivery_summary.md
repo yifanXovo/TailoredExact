@@ -59,7 +59,12 @@ and runtime paths and are not an OS sandbox.
 
 Later review/recovery/remote publication receipts and this delivery note are
 outside the scientific payload they examine. They do not attest future
-commits or every historical Git object. The English PR is prepared for the
-verified R119 research branch as a Draft, with no merge or change to old
-conclusions. Actual remote/app attachment receipts are added after the
-corresponding operations.
+commits or every historical Git object. The English
+[Draft PR182](https://github.com/yifanXovo/TailoredExact/pull/182) is created
+on the verified R119 research branch and attached to the calling chat. Its
+body matches the saved English source; no merge, default promotion or old
+conclusion change occurred. `delivery/remote_pr_creation.json` observes
+head `e59f591c6616bea2e48f589122ff2781bcbe09fd` at creation and explicitly
+does not attest later receipt commits. `delivery/app_attachment.json` records
+the successful app tool result. Final remote-head verification follows the
+last metadata push in the calling chat.
