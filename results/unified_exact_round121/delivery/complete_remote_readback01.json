@@ -1,0 +1,490 @@
+{
+  "schema": "r121-actual-complete-remote-readback-v1",
+  "passed": true,
+  "observed_UTC": "2026-10-15T18:40:30.242624+00:00",
+  "repository": "yifanXovo/TailoredExact",
+  "scientific_commit": "afee0f53c932139c07a7281da4c26a19412f9257",
+  "observed_published_review_recovery_commit": "09af846c42a455d59d2f860f8d9f621accd7f9b9",
+  "observed_tree": "537b45cdbaefa956ffdf033e7d46d13081b3e4d8",
+  "PR182": {
+    "number": 182,
+    "state": "open",
+    "draft": true,
+    "head": "4872eb8421e43e57ef6e3727db4cd40e1c14f935",
+    "head_ref": "codex/round120-native-proof-disjunction",
+    "base": "e6a3b2de67e3468c095331942da05d289f4f8aa3",
+    "base_ref": "codex/round119-certificate-driven-domain-contraction",
+    "title": "Round120: encode paid root-interval proofs inside native MIP search",
+    "body_SHA256": "30a920b0419569736a337190712b634382f693d3bb8cfb21b160dc4bfdb3011d",
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/182"
+  },
+  "PR183": {
+    "number": 183,
+    "state": "open",
+    "draft": true,
+    "head": "09af846c42a455d59d2f860f8d9f621accd7f9b9",
+    "head_ref": "codex/round121-frozen-d1-confirmation",
+    "base": "4872eb8421e43e57ef6e3727db4cd40e1c14f935",
+    "base_ref": "codex/round120-native-proof-disjunction",
+    "title": "Round121: confirm frozen native proof disjunction on prospective inputs and fixed seeds",
+    "body_SHA256": "6009c5c3d073636b74d0785ec1a8b376bb7dcaaa97c2e1e648c4c4325d47f592",
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/183"
+  },
+  "before_after_PR_observations_equal": true,
+  "actual_remote_branch_refs": [
+    "4872eb8421e43e57ef6e3727db4cd40e1c14f935\trefs/heads/codex/round120-native-proof-disjunction",
+    "09af846c42a455d59d2f860f8d9f621accd7f9b9\trefs/heads/codex/round121-frozen-d1-confirmation"
+  ],
+  "content_readback_files": [
+    {
+      "path": "reference/round121_confirmation/Q30-C2-B.txt",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 1824,
+      "Git_blob_SHA1": "c963c9870fee089f3cd5b71d7f3ad1a4f8077515",
+      "SHA256": "9d9737dc36819cf8648aec820b456504bc7f26bf3cde474de351da2e0d34596c",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q30-C2-B_landscape.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 24161,
+      "Git_blob_SHA1": "23ac39db1c80ae06b8d6760c06be51f2e29ac7ba",
+      "SHA256": "395a1e667c54a4e0f681216869e8e3874fe4d34942eb91394135946edadd9a54",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q30-C2-B_parsed.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 28786,
+      "Git_blob_SHA1": "61b913f1852187ae4aa2f016df3f80732a1f9585",
+      "SHA256": "1670953d383c4cecf71a096cf5fdd7bdbd6b1a3c6402007a0e9dee9b5ae0ff6c",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q30-C2-B_selection.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 2104,
+      "Git_blob_SHA1": "02036e15968c76dc76983effa478c50cecfc9bbc",
+      "SHA256": "b99a18978303dc6903c4f7e656a8025975d10fe39d9a699f2079ba927ad10bb3",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q30-C2-B_source_mapping.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 11833,
+      "Git_blob_SHA1": "b1268e43023bf960abd36c1f2b7aa20f436c1618",
+      "SHA256": "e2aeaf34b27d6249ec597306306ed7f6efc15d2f39b662ca6648776b596d25c7",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q40-R2-S.txt",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 2388,
+      "Git_blob_SHA1": "5e670e5bc410192bae5372aaa0b4f71e33928e17",
+      "SHA256": "ca501c5b72642336ec252c78204fd9b1db25523f1f5a08027abb1ab496f10d84",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q40-R2-S_landscape.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 31236,
+      "Git_blob_SHA1": "ff6a8e0a0dc65fda6128fae485ad1addd9156903",
+      "SHA256": "1ea98a7e818416ef2784d97d21442a8f54783e10583bf64a9eca8e7af711e1ba",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q40-R2-S_parsed.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 48710,
+      "Git_blob_SHA1": "1f1c53f6002569d72698f9b62641e13598332c7c",
+      "SHA256": "e34817848a30f66dc099c3937fcee190692d4ab7ec068afaadf7b0bfb484a3bb",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q40-R2-S_selection.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 2236,
+      "Git_blob_SHA1": "bbc31cf4d8c4b92379f8545bbf5f072e99ec66d6",
+      "SHA256": "ff25cd161604756877346809c8fb619def76f9fd6c8277c97f7c0aabdcddc8e6",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q40-R2-S_source_mapping.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 15877,
+      "Git_blob_SHA1": "41455971fb253c354db7c81d9006413591a69237",
+      "SHA256": "455297ba186e4e6209ac5555f5c3710224a39eea95e9b7b0fff81d901d925bdc",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q50-C2-U.txt",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 2945,
+      "Git_blob_SHA1": "89c566c211259db922c72ae1d1348f1ca2bec30b",
+      "SHA256": "b2a1910b9f07820d0c60ba596ab5afa31f066bfe265b8535c948b67c6ddce119",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q50-C2-U_landscape.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 37923,
+      "Git_blob_SHA1": "cffe9ef70d988c9f0e1a5e97e7a67e0194890287",
+      "SHA256": "5a3a7260fe68f8ad5974cebf6efe3a53d906dc54b41b8793ffd245d695ce6f42",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q50-C2-U_parsed.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 74029,
+      "Git_blob_SHA1": "8239cf71decabe7957164a934539ff8c4b1512fe",
+      "SHA256": "1da892c10d53091e23043679e1c41b79799816618aab2c970ea1bc19c5440b1d",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q50-C2-U_selection.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 2284,
+      "Git_blob_SHA1": "4510efbd1433807fe909cd77f36ae8e44defd99f",
+      "SHA256": "b5e1f6e659fc0b387a9735a3f12258605eeee1ba1df528b18398eb3cfc78acf2",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "reference/round121_confirmation/Q50-C2-U_source_mapping.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 19884,
+      "Git_blob_SHA1": "081bbeeb72443a4bf24ccbe254eda5c5222f490d",
+      "SHA256": "d3cb66f31da56071acb14c6d8b1b3b078843926a38ea39661cfda5d8d244cebd",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/RESUME.md",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 25910,
+      "Git_blob_SHA1": "c0ce3a3a14a32aefe06f327a0d724eea1eac4b87",
+      "SHA256": "98c64769c11b5b7c17fbf20c4d49ab35dcc77caaf9b6955f11f1ffcb67ea1dea",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/all16_arms.csv",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 15357,
+      "Git_blob_SHA1": "2c7d1ca57217070896c4904efa52ab0d101af886",
+      "SHA256": "cb3f7f589feb47ec5dd80d8f141a820aeee0d98ce934c47764ad9797f0d83e65",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/all16_arms.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 39450,
+      "Git_blob_SHA1": "6c94f20c5fdc4220584013d0c0d8daf94855511c",
+      "SHA256": "41f4404ea4f1cf868237c8bf86fd82db7bf2d3589fe78a335ab0f76a79ca9795",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/all18_pairs.csv",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 8744,
+      "Git_blob_SHA1": "86ea62bcf1cf80e322349eafc3e820d4e6c8b28a",
+      "SHA256": "b26eb028ab70a7837767621583cd96108af97d0d7becb988deaf1c5e4d3f26fd",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/all18_pairs.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 22603,
+      "Git_blob_SHA1": "f24243e73e5e5396885034f507c7bd22b7962204",
+      "SHA256": "5c49b16505d86f3c50a87f74c32163c0d9b2717e590213527ed4cad8efaec03e",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/argv_freeze.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 103231,
+      "Git_blob_SHA1": "4af3554cc5627d401fee960cc008aeedc4292818",
+      "SHA256": "9d43a7601a0d51831d622a27c8510927aa36736e74bb0b0ecae3afae85837b72",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/candidate_identity.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 33308,
+      "Git_blob_SHA1": "68175e59a2b8ea3f289adf6d2e987b2bbc493e16",
+      "SHA256": "d7b9084b8ff3710fa2e39671f57dfd9bf493663d7b18734fa138fc20d8286bad",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/delivery/complete_local_delivery01.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 4065,
+      "Git_blob_SHA1": "b5ebe7b85655d3174576fab82950c654435bb6ed",
+      "SHA256": "b41aa33febc711ae51e80b57e08522c1245ea81d177f53aacb8d2016ecbb1ef7",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/delivery/public_export_receipt.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 553,
+      "Git_blob_SHA1": "dc8eab16a8e2528599223a963f42a629966e88df",
+      "SHA256": "56eadc1389890bf6390be46765678c82e9a2519f51bbfb32cebdb22379a20cfd",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/delivery/public_restore_receipt.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 406,
+      "Git_blob_SHA1": "be3e393484027f39a70613b0019826d96d6d89c3",
+      "SHA256": "4d1591805400df62074058b425609bd5708d867186d72a39adfbc2b204ed1e2f",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/delivery/restored_check_complete01_scope.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 3177,
+      "Git_blob_SHA1": "c86deb9cedbc2f5d8687aace52c12b495fb356a5",
+      "SHA256": "9625ff7cb5029dc1fbd3db5f4fdd512596bdaa07625c4381b79ce4aa23736f83",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/delivery_summary.md",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 4933,
+      "Git_blob_SHA1": "58f5dc56598effb7f94e68d8cb16464e8b2b2966",
+      "SHA256": "fe8ff3c4154393380013a84b5f60ad7c2eee492f6ba3da1ccef72fef26c54b89",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/final_report.md",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 12805,
+      "Git_blob_SHA1": "6bfae93c0b9e34ee87940a29ece3a8efc6a61fe6",
+      "SHA256": "70c5380bd65764081f93601996206cca65ffdb49f8ccabe16671278d9e7f7dfd",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/generation_receipt.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 1917,
+      "Git_blob_SHA1": "ec502072328e736a89e99cde8328381958a96da9",
+      "SHA256": "1186e67a39420b1b9d0bae5ddafdd369f54314523e7466ae758997592eb179d1",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/input_manifest.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 14737,
+      "Git_blob_SHA1": "3d32e051a42a365ebfab7f43f05910e99be28939",
+      "SHA256": "329415ee68018aab88d3d9377f3aa9998da041202571e512db3277f80da5df65",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/paper_algorithm_spec.md",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 19585,
+      "Git_blob_SHA1": "6e23906f720608df57b5980e372a7d373f7a2e1a",
+      "SHA256": "1bdd1cb63edecd8733042186feed3349440a7dea6a4a5e8a0eb13846b0b93356",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/paper_claim_evidence_map.md",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 1521,
+      "Git_blob_SHA1": "7883871e4dc13c331c558422d8c987e5a624dbc8",
+      "SHA256": "e933661240be7bcd1f6bd3bf26c6a046649c66a45e5683b35b76a8dc1792ea46",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/production_identity.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 23757,
+      "Git_blob_SHA1": "6e636c479193a39a2cc248df37bf8d5b8c13e3eb",
+      "SHA256": "71f9539dd64cd845f7a1765603753d87665d84adc2889257d0bfc0ba67403780",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/protocol.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 3970,
+      "Git_blob_SHA1": "fb98ec1810ae0384ba88bc3b62f13c80dd170d57",
+      "SHA256": "162ad2a628411dba81cfe98bd10bdb9a8b53e09bf50aeb38f15cc89990436e81",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/public_dependency_closure.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 3139,
+      "Git_blob_SHA1": "1952f8e827421668451f2c79e5d2d1a55a68abfa",
+      "SHA256": "e2bb00bc807d3aaeb6f148ccb18e5bc8110b1cd1e1ec59458af3deee362c9966",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/public_pack_receipt.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 713,
+      "Git_blob_SHA1": "4bc2e96d7a0e7cb672bf7a8309709227b8e4df65",
+      "SHA256": "4ce842f8654772f30c47f3fe391e12ac4cbb3a995f16c8c34722d72c01a35b85",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/qualification_summary.md",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 1660,
+      "Git_blob_SHA1": "ee291d368070d8da9637c980c99f0cdfba5ba92a",
+      "SHA256": "740ff295f5bb143141c8d57fe3bf0468dd2f95c59a07eade87c11c7fcb6e4fe7",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/resource_summary.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 1490,
+      "Git_blob_SHA1": "1e51ad763e31e6e0f9a7e0337b2a561415388e57",
+      "SHA256": "d97cfd77f13ca8ce45494299bddd5f0a9b8bddb8b4721c51b5694b966799e084",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/resumption/latest_execution_state.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 1112,
+      "Git_blob_SHA1": "a08c3c28cb4fa797986aa990e5f9a7096ff214cd",
+      "SHA256": "4efc9f677f3f7faa647f4387b52806fedc7243589bf6de977fc3c2c947b68af5",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/review/extra_review_complete01.md",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 3681,
+      "Git_blob_SHA1": "72410924c402b7fef068c1e96d1756844da1b089",
+      "SHA256": "f1f6f312bd3463964398224c92c578b2e54acf0ac5ae88b2dbd4fff1ff2894c1",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/review/extra_review_complete01_delivery_binding.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 56923,
+      "Git_blob_SHA1": "b08f39f0fbc5ec6459d2ad0925539e30acde97a4",
+      "SHA256": "be4475f06bd72b651f691f82abc2b66fbac76925816fbfe6aaddd09e17a92c79",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/review/extra_review_complete01_delivery_binding.md",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 1692,
+      "Git_blob_SHA1": "7a95d95d946471bbf7cdf6318abee41b74458dfa",
+      "SHA256": "4a61b51db64f029b96554793600be22e11d12faf2b8d4e29c10180c925f0b732",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/safe_restore.md",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 3230,
+      "Git_blob_SHA1": "7bd689552ffe64c1f802fae6f8f75699e91004d4",
+      "SHA256": "6c27177961738264b18a86b9f72b24c3095a32ee913cde472309fc0fa391fb5b",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/seed_sensitivity.csv",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 453,
+      "Git_blob_SHA1": "fd5f1804fa9eeca851e6cf3a092bd275fa1b2898",
+      "SHA256": "a1f7e70dc5e871f2987a2458019a4bb393213d21451e885d8fd0125cc9b968b5",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/source_recipe.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 7855,
+      "Git_blob_SHA1": "16395e3945add34839766c5ea14e41374c454c10",
+      "SHA256": "96278a7108a5f86a18f5f4723b1ceac5256d7da1260a59db1deee547637e2d5a",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/stage_decision.json",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 1036,
+      "Git_blob_SHA1": "844e1ad8d6c5f2706f05a5d62ba1a881eeefe96b",
+      "SHA256": "b739462b17596041c1f85683311c42b45fdd0ee1df5f8ad987530c0cb2db736f",
+      "exact_committed_bytes_equal": true
+    },
+    {
+      "path": "scripts/round121_extra_review_complete.py",
+      "method": "actual Contents API base64 content readback",
+      "bytes": 64915,
+      "Git_blob_SHA1": "3ec0eac82d686969694d48e41917c56463d1f718",
+      "SHA256": "76d08835a28283958f8933f6aa5383564f3c21352f20f6c8691d44dc599df27b",
+      "exact_committed_bytes_equal": true
+    }
+  ],
+  "metadata_readback_files": [
+    {
+      "path": "results/unified_exact_round121/compact_evidence/evidence.tar.gz.part001",
+      "method": "actual Git Trees API blob identity/size readback; no remote binary/body download",
+      "bytes": 33554432,
+      "remote_Git_blob_SHA1": "2074c0baba3c3f76b0b17fb8f9ef6376ee1ba149",
+      "local_committed_Git_blob_SHA1": "2074c0baba3c3f76b0b17fb8f9ef6376ee1ba149",
+      "local_committed_SHA256": "bc3fecbb586a164add72606a148fd176db0fd612f4071b9a3a4c5421c1fe494c",
+      "exact_blob_identity_size_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/compact_evidence/evidence.tar.gz.part002",
+      "method": "actual Git Trees API blob identity/size readback; no remote binary/body download",
+      "bytes": 21244925,
+      "remote_Git_blob_SHA1": "e1a71f32b9005ac172a2d766acf6170583ad1b3c",
+      "local_committed_Git_blob_SHA1": "e1a71f32b9005ac172a2d766acf6170583ad1b3c",
+      "local_committed_SHA256": "2f0e75bbd9794a919d5859ff9d47b8ab034e78bafe66f7a6eef78423dea13a32",
+      "exact_blob_identity_size_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/compact_evidence/manifest.json",
+      "method": "actual Git Trees API blob identity/size readback; no remote binary/body download",
+      "bytes": 10064840,
+      "remote_Git_blob_SHA1": "cb4d90393e38b45be52ca170a4166ca429773cb9",
+      "local_committed_Git_blob_SHA1": "cb4d90393e38b45be52ca170a4166ca429773cb9",
+      "local_committed_SHA256": "2676960a52abff3a33c276bd456ffab70106e9ec2b92cc642d23ce31ef82eb0a",
+      "exact_blob_identity_size_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/delivery/restored_check.json",
+      "method": "actual Git Trees API blob identity/size readback; no remote binary/body download",
+      "bytes": 4143027,
+      "remote_Git_blob_SHA1": "8990e8a71afd637240bd5ea1c41c0188db8fca34",
+      "local_committed_Git_blob_SHA1": "8990e8a71afd637240bd5ea1c41c0188db8fca34",
+      "local_committed_SHA256": "8d378ed209c4f5cdd588583ebf19dcccd8bc99556f83614fc229e66642ed8049",
+      "exact_blob_identity_size_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/delivery/restored_check_complete01.json",
+      "method": "actual Git Trees API blob identity/size readback; no remote binary/body download",
+      "bytes": 4143027,
+      "remote_Git_blob_SHA1": "8990e8a71afd637240bd5ea1c41c0188db8fca34",
+      "local_committed_Git_blob_SHA1": "8990e8a71afd637240bd5ea1c41c0188db8fca34",
+      "local_committed_SHA256": "8d378ed209c4f5cdd588583ebf19dcccd8bc99556f83614fc229e66642ed8049",
+      "exact_blob_identity_size_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/review/extra_review_complete01.json",
+      "method": "actual Git Trees API blob identity/size readback; no remote binary/body download",
+      "bytes": 8034176,
+      "remote_Git_blob_SHA1": "d9f28fb94d0c3321a24c522dc1f73c188ff6016c",
+      "local_committed_Git_blob_SHA1": "d9f28fb94d0c3321a24c522dc1f73c188ff6016c",
+      "local_committed_SHA256": "0de10dc61d07a1021a945af7012383b9fd9eeaef1ed726ce1a397db8a116c355",
+      "exact_blob_identity_size_equal": true
+    },
+    {
+      "path": "results/unified_exact_round121/review/extra_review_complete01_first_pass.json",
+      "method": "actual Git Trees API blob identity/size readback; no remote binary/body download",
+      "bytes": 7993350,
+      "remote_Git_blob_SHA1": "ef591115bdce383977ca3d708e188dee88590706",
+      "local_committed_Git_blob_SHA1": "ef591115bdce383977ca3d708e188dee88590706",
+      "local_committed_SHA256": "4da5876cf320cf49863655884ca28f9803755df7e7f8f6a687ad6ca81978be3b",
+      "exact_blob_identity_size_equal": true
+    }
+  ],
+  "content_readback_count": 47,
+  "metadata_readback_count": 7,
+  "carrier_manifest_SHA256": "2676960a52abff3a33c276bd456ffab70106e9ec2b92cc642d23ce31ef82eb0a",
+  "content_and_metadata_methods_distinguished": true,
+  "errors": [],
+  "scoped_readback_seconds": 25.701714700000593,
+  "no_Native_Optimize_compile": true,
+  "no_merge_forcepush_or_default_change": true,
+  "does_not_attest_own_or_future_commits": true
+}
