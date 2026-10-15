@@ -1,0 +1,301 @@
+{
+  "round": 121,
+  "base": "4872eb8421e43e57ef6e3727db4cd40e1c14f935",
+  "frozen_UTC": "2026-10-15T05:06:08.516035+00:00",
+  "family": "round121-frozen-d1-confirmation-v1|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "roles": [
+    {
+      "id": "Q30-C2-B",
+      "V": 30,
+      "M": 3,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "selection_id": "cabi_r121_V30_compact_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation"
+    },
+    {
+      "id": "Q40-R2-S",
+      "V": 40,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r121_V40_regional_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "MB-D1",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation"
+    },
+    {
+      "id": "Q50-C2-U",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r121_V50_compact_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "MB-D1"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation"
+    }
+  ],
+  "full_fixed_running_table": [
+    {
+      "id": "F2",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds": 3600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 1200,
+      "method_order": [
+        "MB-D0",
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ],
+      "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "M": 2,
+      "V": 20,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "panel_kind": "known_seed_sensitivity",
+      "gurobi_seed": 1
+    },
+    {
+      "id": "Q30-C2-B",
+      "V": 30,
+      "M": 3,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "selection_id": "cabi_r121_V30_compact_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation"
+    },
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "MB-D1"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true,
+      "panel_kind": "known_seed_sensitivity",
+      "gurobi_seed": 1
+    },
+    {
+      "id": "Q40-R2-S",
+      "V": 40,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r121_V40_regional_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "MB-D1",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation"
+    },
+    {
+      "id": "Q50-C2-U",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r121_V50_compact_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "MB-D1"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation"
+    }
+  ],
+  "qualification_role": {
+    "id": "H100",
+    "V": 20,
+    "M": 2,
+    "Q_vector": [
+      13,
+      21
+    ],
+    "T_seconds": 5100,
+    "cap_seconds": 120,
+    "method_order": [
+      "P-GRB",
+      "M-B",
+      "MB-D0",
+      "MB-D1"
+    ],
+    "input_path": "reference/round100_confirmation/H100.txt",
+    "instance_path": "reference/round100_confirmation/H100.txt",
+    "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "gurobi_seed": 1,
+    "panel_kind": "qualification",
+    "scenario_id": "H100"
+  },
+  "adapter_SHA": "fdc805c0528c318fd68da54195bd156fa50cd5128730de4d982c16a0a0b234a1",
+  "generation_dependencies": {
+    "scripts/round121_data.py": "fdc805c0528c318fd68da54195bd156fa50cd5128730de4d982c16a0a0b234a1",
+    "scripts/round118_data.py": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+    "scripts/round109_data.py": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+    "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+  },
+  "raw_source_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "table_SHA": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+  "source_rows": 865,
+  "source_loader": "R118 source_check only; no R118 configure/selection/landscape wrapper",
+  "four_original_anchors_ties_geometry_and_selection": true,
+  "target_fraction": [
+    0.44,
+    0.56
+  ],
+  "coordinates_decimals": 3,
+  "weights_decimals": 6,
+  "delta": "max(V,floor(.12*sum(D)+.5))",
+  "desired_total": {
+    "balanced": "sum(D)",
+    "shortage": "max(0,sum(D)-delta)",
+    "surplus": "min(sum(C),sum(D)+delta)"
+  },
+  "local_perturbation": {
+    "balanced": 0.18,
+    "other": 0.3
+  },
+  "original_total_correction_sign_repair_max_normalized_weights_and_centroid": true,
+  "generated_input_count": 0,
+  "actual_Dsum_optimum_H_LP_MIP_and_difficulty_unknown": true,
+  "no_network_or_reprojection": true,
+  "no_selection_by_result": true,
+  "no_resampling": true,
+  "formal_arms": 16,
+  "formal_pairs": 18,
+  "formal_nominal_seconds": 37200,
+  "management_reserve": 600,
+  "total_limit": [
+    40,
+    48000
+  ],
+  "qualification_limit": [
+    8,
+    1800
+  ],
+  "D0_only_F2_Seed1": true,
+  "V60_V100_excluded": true
+}
