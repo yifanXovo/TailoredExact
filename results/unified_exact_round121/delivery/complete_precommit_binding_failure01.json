@@ -1,0 +1,15 @@
+{
+  "schema": "r121-index-binding-validation-failure-v1",
+  "attempt": 1,
+  "failed_check": "index/worktree equality before security scan",
+  "path": "results/unified_exact_round121/delivery/carrier_scan.json",
+  "reason": "The scientific index intentionally retains the already-published blocked delivery receipt until the later actual-delivery commit; worktree now has the new complete carrier scan. Equality against current worktree was incorrectly applied to deferred historical delivery scope.",
+  "index_matches_preserved_blocked_receipt": true,
+  "index_SHA": "e1acff86900eecf2132fe90f65472a2979b73f08572b8429bd51caecb8e3fd21",
+  "current_worktree_SHA": "5949e142d2a87f872555f504514658d8d3cb2c8a093f4bcf28e3a7e9aa952397",
+  "security_scan_not_reached": true,
+  "index_unchanged": true,
+  "no_commit_performed": true,
+  "correction": "Keep full actual-index security scan unchanged; compare current scientific members to carrier, and explicitly bind deferred delivery index bytes to preserved old receipt.",
+  "observed_unix": 1792087154.2224665
+}

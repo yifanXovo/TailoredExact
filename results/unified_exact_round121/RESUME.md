@@ -1,3 +1,17 @@
+# CURRENT AUTHORITATIVE STATE: ROUND121 COMPLETE — NO MORE NATIVE
+
+Same Round121. COMPLETE: all16 fixed arms are actually executed once, qualified and sealed; all18 pairs are evaluated. The sole frozen stage is ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK. All Native/parents ended and every fee is closed. Cost31/40 starts,35578.67575955391/48000 outer seconds; qualification10/12 starts,670.1436495780945/1800 seconds, all failures charged.
+
+Actual different-executor final review: ACCEPT_FINITE_COMPLETE_REVIEW (review/extra_review_complete01.json/.md). It independently recomputed all18 pairs/full stage and checked actual physical, model/Start/proof/scope, Seed/argv/H, clocks and budgets with zero Native/Optimize/compile. The fixed scientific snapshot is commit afee0f53c932139c07a7281da4c26a19412f9257; its carrier binds the reviewed evidence.
+
+One complete-phase actual Git export/fresh empty-root reconstruction at D:/round121-public-restore-afee0f53c passed all16/all18/stage typed stored-JSON comparisons. All47681 initial members had exact hashes. Exactly5 regenerated event-contract sidecars are individually listed in delivery/restored_check_complete01_scope.json; all other compared campaign members stayed byte-identical. No PE/DLL or original evidence/helper fallback was used. This is separate from the historical blocked-phase replay.
+
+New D1/P WIN/WIN/WIN; new D1/M-B TIE/WIN/TIE. Only Q30/Q40 exposed D1 (1/2 extended calls); Q50 naturally unexposed. All3 new D1 endpoints remain open. F2 D0/M-B Seed WIN-to-LOSS sensitivity and R120 C2 severe/ordinary losses remain. ENS-C stays default, M-B retained, D0 only F2 ablation, R119 MB-PC stopped. No further Native batch, retry, Seed, input or algorithm revision follows this result.
+
+Existing stacked Draft PR183: https://github.com/yifanXovo/TailoredExact/pull/183 . Actual public observations are recorded separately in delivery/complete_remote_readback01.json; this scientific/local-recovery state does not attest a future commit or publication. delivery_summary.md and the scoped actual receipts identify publication status. All older CURRENT paragraphs below are chronological history and are not launch instructions.
+
+---
+
 # CURRENT AUTHORITATIVE STATE: FORMAL COMPLETE; REVIEW AND DELIVERY PENDING
 
 Same Round121. COMPLETE: all16 fixed positions are actually executed once, qualified and sealed; all18 pairs are evaluated. Stage ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK. All Native children and five formal parents have exited; every fee is closed. Charged total31/40 starts,35578.67575955391/48000 outer seconds; qualification10/12 starts,670.1436495780945/1800 seconds. No more Native starts are authorized by this batch. ENS-C remains default, M-B retained, D0 only F2 ablation, R119 MB-PC stopped.
