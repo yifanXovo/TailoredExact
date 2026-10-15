@@ -1,0 +1,20 @@
+{
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\g++.exe",
+    "-std=c++17",
+    "-DEXACT_EBRP_ENABLE_GUROBI=1",
+    "-IC:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\include",
+    "-ID:/gurobi1302/win64/include",
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\scripts\\round121_reference.cpp",
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\build\\research\\round120\\libexact_ebrp_core.a",
+    "-o",
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\build\\research\\round121-reference\\Round121Reference.exe"
+  ],
+  "compiler_SHA": "8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1",
+  "frozen_core_archive_SHA": "f2f7608894793b60794b91fa204c7d5e8a7ce13078e6115be32ca645804c9acd",
+  "source_commit": "355eefd2be3fe5651195681faf7b3a63ee4032f8",
+  "production_PE_SHA_before": "5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba",
+  "Optimize": 0,
+  "native_starts": 0,
+  "engineering": true
+}

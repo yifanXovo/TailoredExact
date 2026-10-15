@@ -1,0 +1,168 @@
+{
+  "schema": "r121-minimal-old-h-source-v1",
+  "role": "F2",
+  "source_D0_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\diagnostics\\F2\\D0_max_conditional_violation\\full_primal_and_original_matrix.json",
+  "source_D0_SHA": "b362728ed1bcb1baaab1ed136e216d220cd4d8ec9863a9f9cbff0be20aca2fa3",
+  "source_D1_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\diagnostics\\F2\\D1_original_objective\\full_primal_and_original_matrix.json",
+  "source_D1_SHA": "7cff9e069d0173c4073ee769e87a950b1dfb564d3b081432394cf16fdf9fe119",
+  "source_D0_record_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\diagnostics\\F2\\D0_max_conditional_violation\\record.json",
+  "source_D0_record_SHA": "e2c3d39dd19849d5aae67b990a3ea058c10d19282b7b1bb4bd0ac81728196cfd",
+  "source_D1_record": {
+    "Optimize": 1,
+    "return_code": 0,
+    "status": 2,
+    "optimal": true,
+    "primal_available": true,
+    "qualified": true,
+    "objective": 0.6105472608488204,
+    "qualified_bound": 0.6105472608488204,
+    "full_precision_primal_objective": 0.6105472608488204,
+    "actual_D1_row_violation": 0,
+    "qualified_beta_violation": 1.1102230246251565e-16,
+    "maximum_row_violation": 0,
+    "maximum_bound_violation": 0,
+    "objective_expression_error": 2.220446049250313e-16,
+    "wall_seconds": 0.2513661,
+    "Runtime": 0.25099992752075195,
+    "Work": 0.738572679705945,
+    "cap_seconds": 120,
+    "source_model_SHA": "e8f9a5b4b55563bdf6250755a2d204c3fb4a4bc0c6d78ef958c0d04bc516526d",
+    "saved_model_SHA": "08e9ec4f54d47766003270d47187f78aa681c37ceffec01da333d7510002c838",
+    "rows": 9312,
+    "columns": 3489,
+    "nonzeros": 53672
+  },
+  "source_D1_record_SHA": "d8b63971ef276cfaeeb9a51bd80a2e353eb4805ea2bdafb471157a3bdd7ef16f",
+  "all_preceding_rows_equal_independently_checked": 9309,
+  "names_bounds_and_full_objective_with_ObjCon_equal": true,
+  "rows": [
+    {
+      "index": 9309,
+      "rhs": 0,
+      "sense": ">",
+      "terms": [
+        [
+          0,
+          1
+        ],
+        [
+          3486,
+          -0.4426741504672889
+        ]
+      ]
+    },
+    {
+      "index": 9310,
+      "rhs": 0.44267415046728903,
+      "sense": "<",
+      "terms": [
+        [
+          0,
+          1
+        ],
+        [
+          3486,
+          -0.44267415046728914
+        ]
+      ]
+    },
+    {
+      "index": 9311,
+      "rhs": 0.6105472608488206,
+      "sense": ">",
+      "terms": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0.12062204999999998
+        ],
+        [
+          2,
+          0.11724704999999999
+        ],
+        [
+          3,
+          0.1056126
+        ],
+        [
+          4,
+          0.08783339999999999
+        ],
+        [
+          5,
+          0.06821115
+        ],
+        [
+          6,
+          0.14439645
+        ],
+        [
+          7,
+          0.11344755
+        ],
+        [
+          8,
+          0.1304466
+        ],
+        [
+          9,
+          0.10030005
+        ],
+        [
+          10,
+          0.043341
+        ],
+        [
+          11,
+          0.06609599999999999
+        ],
+        [
+          12,
+          0.13536255
+        ],
+        [
+          13,
+          0.12676035
+        ],
+        [
+          14,
+          0.0955542
+        ],
+        [
+          15,
+          0.08831354999999999
+        ],
+        [
+          16,
+          0.1023963
+        ],
+        [
+          17,
+          0.1297128
+        ],
+        [
+          18,
+          0.041668199999999996
+        ],
+        [
+          19,
+          0.12238815
+        ],
+        [
+          20,
+          0.07935539999999999
+        ],
+        [
+          3486,
+          -0.2720917250651952
+        ]
+      ]
+    }
+  ],
+  "no_original_variable_primal_replaced": true,
+  "native_starts": 0,
+  "Optimize": 0
+}
