@@ -1,61 +1,127 @@
-# Current R121 resumption — qualification pending
+# Round121 frozen D1 confirmation
 
-The user explicitly continued this same Round121 and increased only the cumulative qualification start ceiling from8 to12. Qualification1800sec and total40starts/48000sec remain unchanged. The existing7starts/445.13650035858154sec remain charged. P/MB sealed producers will be reused after final-file full audit into new traceable recovery receipts; original raw, failed audit and old receipts stay untouched. Only never-started H100 D0/D1 Seed1 CLI will be added. All16 original formal positions and18 pairs remain pending, with production algorithm/input/Seed/parameters/clocks/criteria unchanged. The earlier blocked delivery and PR183 remain history within this same round, not a new research draw.
+**COMPLETE — ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK**.
 
-No performance admission has yet been issued for the resumed files. Current authority: resumption/authorization01.json, resumption/final_freeze01.json and RESUME.md. The text below is the retained pre-resumption report, superseded on its8-start budget barrier by the user's amendment. No previously absent scientific result has been filled in.
+All 16 fixed positions and 18 pairs completed with the R120 production PE and pinned DLL. Cold P-GRB is the primary benchmark; M-B is the direct complete-method control. ENS-C remains default, D0 remains the single F2 Seed1 ablation, and R119 MB-PC remains stopped.
 
----
+Three once-generated inputs from the same known Capital Bikeshare source are the new-problem layer. F2 and R98-C2 Seed1 are separate known-role sensitivity checks. These are finite candidate/resource criteria, not statistical significance or a universal speed claim.
 
-# Round121 frozen D1 confirmation — blocked before formal admission
+| Layer | Role | Seed | Method | own U | qualified L | signed gap | Certificate | T_produce | T_verify | T_total |
+|---|---|---:|---|---:|---:|---:|---|---:|---:|---:|
+| known Seed | F2 | 1 | MB-D0 | 0.8659435203 | 0.8659435203 | 1.221245327e-15 | True | 638.806834 | 32.8845957 | 671.691429 |
+| known Seed | F2 | 1 | P-GRB | 0.8659435203 | 0.753029604 | 0.1129139164 | False | 1171.1642 | 4.2430669 | 1175.40727 |
+| known Seed | F2 | 1 | MB-D1 | 0.8659435203 | 0.8659435203 | 1.598721155e-14 | True | 198.761366 | 7.3642291 | 206.125596 |
+| known Seed | F2 | 1 | M-B | 0.8659435203 | 0.8659435187 | 1.596995758e-09 | True | 481.57537 | 7.9120284 | 489.487398 |
+| new input | Q30-C2-B | 0 | P-GRB | 0.2953151599 | 0.1871388195 | 0.1081763404 | False | 1772.65695 | 0.4945379 | 1773.15149 |
+| new input | Q30-C2-B | 0 | MB-D1 | 0.2621738109 | 0.1883467638 | 0.07382704708 | False | 1770.64243 | 10.6425048 | 1781.28494 |
+| new input | Q30-C2-B | 0 | M-B | 0.2621738109 | 0.192143374 | 0.07003043686 | False | 1770.54796 | 9.0678375 | 1779.6158 |
+| known Seed | R98-C2 | 1 | M-B | 0.2098317586 | 0.1906197298 | 0.01921202879 | False | 1772.38593 | 14.8019284 | 1787.18786 |
+| known Seed | R98-C2 | 1 | P-GRB | 0.2138202758 | 0.1866271306 | 0.02719314517 | False | 1770.51838 | 2.1451791 | 1772.66356 |
+| known Seed | R98-C2 | 1 | MB-D1 | 0.2010003037 | 0.1901021157 | 0.01089818799 | False | 1770.5901 | 19.9381811 | 1790.52828 |
+| new input | Q40-R2-S | 0 | MB-D1 | 1.158877348 | 0.8345914851 | 0.3242858625 | False | 3572.3711 | 18.1736184 | 3590.54471 |
+| new input | Q40-R2-S | 0 | M-B | 1.186761238 | 0.8478986659 | 0.338862572 | False | 3570.52563 | 13.755868 | 3584.28149 |
+| new input | Q40-R2-S | 0 | P-GRB | 1.224085994 | 0.4218918178 | 0.8021941763 | False | 3571.66181 | 0.9045859 | 3572.5664 |
+| new input | Q50-C2-U | 0 | M-B | 0.4020725492 | 0.373289775 | 0.02878277424 | False | 3572.53377 | 32.0408481 | 3604.57462 |
+| new input | Q50-C2-U | 0 | P-GRB | 0.5827049122 | 0 | 0.5827049122 | False | 3570.55243 | 1.2042185 | 3571.75665 |
+| new input | Q50-C2-U | 0 | MB-D1 | 0.4020725492 | 0.373289775 | 0.02878277424 | False | 3570.68677 | 32.8478196 | 3603.53459 |
 
-**Execution: BLOCKED. Decision: BLOCKED.** No formal arm was started and no performance gate was evaluated.
+| Role | Seed | Pair | Class | Severe | Basis |
+|---|---:|---|---|---|---|
+| F2 | 1 | MB-D1/M-B | WIN | False | both_complete_certificate_time |
+| F2 | 1 | MB-D1/P-GRB | WIN | False | candidate_only_complete_certificate |
+| F2 | 1 | MB-D1/MB-D0 | WIN | False | both_complete_certificate_time |
+| F2 | 1 | MB-D0/M-B | LOSS | False | both_complete_certificate_time |
+| F2 | 1 | MB-D0/P-GRB | WIN | False | candidate_only_complete_certificate |
+| F2 | 1 | M-B/P-GRB | WIN | False | candidate_only_complete_certificate |
+| Q30-C2-B | 0 | MB-D1/M-B | TIE | False | both_uncertified_absolute_materiality |
+| Q30-C2-B | 0 | MB-D1/P-GRB | WIN | False | both_uncertified_absolute_materiality |
+| Q30-C2-B | 0 | M-B/P-GRB | WIN | False | both_uncertified_absolute_materiality |
+| R98-C2 | 1 | MB-D1/M-B | WIN | False | both_uncertified_absolute_materiality |
+| R98-C2 | 1 | MB-D1/P-GRB | WIN | False | both_uncertified_absolute_materiality |
+| R98-C2 | 1 | M-B/P-GRB | WIN | False | both_uncertified_absolute_materiality |
+| Q40-R2-S | 0 | MB-D1/M-B | WIN | False | both_uncertified_absolute_materiality |
+| Q40-R2-S | 0 | MB-D1/P-GRB | WIN | False | both_uncertified_absolute_materiality |
+| Q40-R2-S | 0 | M-B/P-GRB | WIN | False | both_uncertified_absolute_materiality |
+| Q50-C2-U | 0 | MB-D1/M-B | TIE | False | both_uncertified_absolute_materiality |
+| Q50-C2-U | 0 | MB-D1/P-GRB | WIN | False | both_uncertified_absolute_materiality |
+| Q50-C2-U | 0 | M-B/P-GRB | WIN | False | both_uncertified_absolute_materiality |
 
-The R120 production source, PE and pinned DLL are unchanged. Three prospective inputs were generated exactly once after the recipe commit, without H/LP/MIP or difficulty screening. The planned 16 arms and 18 comparison positions remain visible, with every result explicitly NOT_STARTED / UNEVALUABLE. They do not count as completed evidence.
+| New role | D1/P | D1/M-B | D1 installed | Extended Optimize calls |
+|---|---|---|---:|---:|
+| Q30-C2-B | WIN | TIE | 1 | 1 |
+| Q40-R2-S | WIN | WIN | 1 | 2 |
+| Q50-C2-U | WIN | TIE | 0 | 0 |
 
-Qualification did not close. Four parent attempts, one successful zero-Optimize reference exporter and two real H100 Seed1 CLI children consumed 7 of the 8 permitted conservative starts. The last independently reviewed minimum needed a fresh supervisor plus the never-started D1 child (2 starts), while only 1 remains. The total budget has room; its qualification sublimit cannot be exceeded or bypassed by relabelling a supervisor. No further native launch is authorized by this batch.
+Q30 and Q40 supply the two actual new-input D1 exposures. Q50 has one paid root proof record, no complete paired proof and no installation or extended Optimize; its valid frozen run remains unexposed. No extra proof probe or forced installation was added.
 
-| Attempt | Actual children | Charged starts | Outer seconds | Result |
-|---|---|---:|---:|---|
-| qualification01 | none | 1 | 16.000781775 | Synthetic zero fixture omitted reported F; stopped before exporter/CLI. |
-| qualification02 | reference exporter; P-GRB | 3 | 117.678232431 | P sealed normally; read-only audit rejected Python int0 with an is-False identity test. |
-| qualification03 | M-B | 2 | 289.773390770 | P requalified; M-B sealed normally; nested model-parser cache owner caused a read-only KeyError. |
-| qualification04 | none | 1 | 21.684095383 | Read-only M-B replay encountered the existing failed audit.json and exclusive-x write; D1 never started. |
+New-input D1 complete certificates: 0/3. Known F2/R98-C2 certificates remain a separate Seed sensitivity layer; they do not count as new-input certification.
 
-The first two adapter issues were repaired only in the read-only layer, with original helper versions, raw results, seals and fees retained. A different executor replayed the full P and M-B audit/readout in a temporary output overlay and checked complete physical fleets. That overlay did not exercise the original directory exclusive-write conflict. M-B retains its failed canonical audit and incomplete original closeout; the successful temporary review is not substituted for that receipt. This engineering failure is not a solver failure, proof contradiction, scientific LOSS or evidence against D1 performance.
+| Known role | Pair | Seed0 class | Seed0 severe | Seed1 class | Seed1 severe | WIN to LOSS sensitive |
+|---|---|---|---|---|---|---|
+| F2 | MB-D1/M-B | WIN | False | WIN | False | False |
+| F2 | MB-D1/P-GRB | WIN | False | WIN | False | False |
+| F2 | MB-D1/MB-D0 | WIN | False | WIN | False | False |
+| F2 | MB-D0/M-B | WIN | False | LOSS | False | True |
+| F2 | MB-D0/P-GRB | WIN | False | WIN | False | False |
+| F2 | M-B/P-GRB | WIN | False | WIN | False | False |
+| R98-C2 | MB-D1/M-B | LOSS | True | WIN | False | False |
+| R98-C2 | MB-D1/P-GRB | LOSS | False | WIN | False | False |
+| R98-C2 | M-B/P-GRB | WIN | False | WIN | False | False |
 
-| Qualification role | Seed | Actual CLI | Producer seconds | Original closeout |
-|---|---:|---|---:|---|
-| P-GRB | 1 | ACTUAL_CLI_SEALED | 90.678724000 | True |
-| M-B | 1 | ACTUAL_CLI_SEALED | 89.609896500 | False |
-| MB-D0 | 1 | NOT_STARTED | unavailable | False |
-| MB-D1 | 1 | NOT_STARTED | unavailable | False |
+F2 D0/M-B changes from Seed0 WIN to Seed1 LOSS and is explicitly Seed sensitive. R98-C2 D1/M-B changes from a severe Seed0 LOSS to Seed1 WIN; D1/P changes from nonsevere Seed0 LOSS to Seed1 WIN. Both Seed records remain visible, without choosing a preferred Seed or treating these changes as estimated probabilities. D0 remains an ablation.
 
-H100 is V20. Its D0 and D1 Seed1 CLI positions are both NOT_STARTED. R120 D0 native model/three-row/Start evidence was independently checked for the earlier proposed composed minimum, but cannot be called a current Seed1 run. There is no new D1 physical endpoint, actual three-row installation, native h type/Start exposure or extended search to review. The prior pre-contract ACCEPT was limited to attempting qualification and has not become performance admission.
+| New input | Initial / target total | sum(w) | lambda sum(w) | Physical T | Producer cap |
+|---|---:|---:|---:|---:|---:|
+| Q30-C2-B | 211 / 211 | 12.900832 | 1.93512480 | 7200 | 1800 |
+| Q40-R2-S | 263 / 303 | 19.842984 | 2.97644760 | 10800 | 3600 |
+| Q50-C2-U | 366 / 316 | 17.355387 | 2.60330805 | 10800 | 3600 |
 
-| Group | Role | Seed | Cap | Fixed method order | Formal status |
-|---:|---|---:|---:|---|---|
-| 1 | F2 | 1 | 1200 | MB-D0 → P-GRB → MB-D1 → M-B | all NOT_STARTED |
-| 2 | Q30-C2-B | 0 | 1800 | P-GRB → MB-D1 → M-B | all NOT_STARTED |
-| 3 | R98-C2 | 1 | 1800 | M-B → P-GRB → MB-D1 | all NOT_STARTED |
-| 4 | Q40-R2-S | 0 | 3600 | MB-D1 → M-B → P-GRB | all NOT_STARTED |
-| 5 | Q50-C2-U | 0 | 3600 | M-B → P-GRB → MB-D1 | all NOT_STARTED |
+The max-normalized weight sums and lambda*sum(w) differ across V, together with geography, stock and physical conditions. Their differences are not identified as a pure size effect. These are three prospective subsets of one known city, with all old-subset overlaps retained.
 
-All 18 pair slots are UNEVALUABLE because both formal endpoints are absent. No U/L/gap, certification time, severe flag, D1-versus-M-B certificate count comparison, Seed flip, success fraction or support/veto statistic is inferred. The zero observed certificate counts in the frozen decision function are bookkeeping for an empty cohort, not a tied performance result. The priority is the unresolved qualification/resource barrier.
+The frozen veto and support conditions are recorded individually in stage_decision.json. Ordinary material LOSS and severe LOSS are both retained. Open caps are censored producer windows and are never reported as final certification times.
 
-| New input | V/M | Initial / target total | sum(w) | lambda sum(w) | Producer cap | SHA256 |
-|---|---|---:|---:|---:|---:|---|
-| Q30-C2-B | 30/3 | 211/211 | 12.900832 | 1.93512480 | 1800 | 9d9737dc36819cf8648aec820b456504bc7f26bf3cde474de351da2e0d34596c |
-| Q40-R2-S | 40/4 | 263/303 | 19.842984 | 2.97644760 | 3600 | ca501c5b72642336ec252c78204fd9b1db25523f1f5a08027abb1ab496f10d84 |
-| Q50-C2-U | 50/4 | 366/316 | 17.355387 | 2.60330805 | 3600 | b2a1910b9f07820d0c60ba596ab5afa31f066bfe265b8535c948b67c6ddce119 |
+| Role | Seed | Method | LP/MIP | H seconds | LP seconds | MIP seconds | Actual rows/columns/nonzeros |
+|---|---:|---|---:|---:|---:|---:|---|
+| F2 | 1 | MB-D0 | 3/2 | 0.2576564 | 0.529000044 | 633.948 | 9309/3488/53646, 9309/3488/54313, 9312/3489/53671 |
+| F2 | 1 | P-GRB | 0/1 | 0 | 0 | 1169.883 | 3689/1591/16490 |
+| F2 | 1 | MB-D1 | 3/2 | 0.2617934 | 0.549999952 | 195.647 | 9309/3488/53646, 9309/3488/54313, 9312/3489/53672 |
+| F2 | 1 | M-B | 3/2 | 0.2590081 | 0.536000013 | 478.606 | 9309/3488/53646, 9309/3488/54313 |
+| Q30-C2-B | 0 | P-GRB | 0/1 | 0 | 0 | 1769.706 | 10474/4140/50118 |
+| Q30-C2-B | 0 | MB-D1 | 3/1 | 0.7965808 | 0.552000046 | 1764.332 | 29689/7401/164074, 29691/7403/163689, 29694/7404/163725 |
+| Q30-C2-B | 0 | M-B | 3/1 | 0.7963834 | 0.58100009 | 1764.768 | 29689/7401/164074, 29691/7403/163689 |
+| R98-C2 | 1 | M-B | 3/2 | 3.8109027 | 3.52200007 | 1757.525 | 31141/8871/194152, 31141/8871/195278 |
+| R98-C2 | 1 | P-GRB | 0/1 | 0 | 0 | 1769.706 | 10627/4242/50577 |
+| R98-C2 | 1 | MB-D1 | 3/2 | 3.7666275 | 3.46099997 | 1756.91 | 31141/8871/194152, 31141/8871/195278, 31144/8872/194188 |
+| Q40-R2-S | 0 | MB-D1 | 3/2 | 0.9121812 | 7.44099975 | 3552.702 | 77572/16210/405828, 77572/16210/406461, 77572/16210/407388, 77575/16211/405874 |
+| Q40-R2-S | 0 | M-B | 3/2 | 0.8809622 | 7.625 | 3553.459 | 77572/16210/405828, 77572/16210/406461, 77572/16210/407388 |
+| Q40-R2-S | 0 | P-GRB | 0/1 | 0 | 0 | 3570.31 | 23176/8807/114137 |
+| Q50-C2-U | 0 | M-B | 5/2 | 2.3191326 | 6.24699998 | 3535.998 | 103094/24175/645050, 103094/24175/645673, 103095/24175/645673 |
+| Q50-C2-U | 0 | P-GRB | 0/1 | 0 | 0 | 3569.01 | 35432/13236/176284 |
+| Q50-C2-U | 0 | MB-D1 | 5/2 | 2.335362 | 6.43500042 | 3535.051 | 103094/24175/645050, 103094/24175/645673, 103095/24175/645673 |
 
-The three inputs are unmeasured prospective subsets of the same known Capital Bikeshare source, not three new cities or IID draws. All 15 overlaps with the R116/R118 subsets were independently recalculated. Lambda*sum(w), geography, stock and physical conditions vary together; no pure size effect is claimed.
+| Role | Extension | Installed | Extended calls | beta0 / beta1 | Installation seconds |
+|---|---|---:|---:|---|---:|
+| F2 | MB-D0 | 1 | 2 | 0.6105472608488195 / 0.88263898591401602 | 0.084084 |
+| F2 | MB-D1 | 1 | 2 | 0.6105472608488195 / 0.88263898591401602 | 0.0809688 |
+| Q30-C2-B | MB-D1 | 1 | 1 | 0.16039806517597832 / 0.27552018171192894 | 0.2208109 |
+| R98-C2 | MB-D1 | 1 | 2 | 0.16200754032311862 / 0.31701608437476442 | 0.2908045 |
+| Q40-R2-S | MB-D1 | 1 | 2 | 0.54176605920718468 / 0.9176657867857142 | 0.4096387 |
+| Q50-C2-U | MB-D1 | 0 | 0 | unavailable | uninstalled |
 
-The two saved R120 D0 maximum-violation witnesses both become D1-feasible by setting h=0 with all original coordinates fixed. Actual full rows, serialized coefficients, bounds and ObjCon were checked with zero Optimize. This limits the projection interpretation of those points while retaining R120 extended-space nonredundancy and equal original-objective LP optima; it does not prove strict original-variable projection shrinkage or root-LP objective improvement.
+All H, model/LP/MIP/Start, installation, online checks, callbacks, native cleanup and producer sealing are paid in T_produce. Post-seal T_verify and T_total are separate; native component times are nested and not added again. Cross-arm reconciliation is group cost. Call-scoped saved byte spans supply the dimensions above, including reused logs.
 
-R120 remains a 12-arm development result: F2 D1/D0/M-B certified in 208.144945/476.407599/774.409291 seconds; C2 D1/M-B was a severe LOSS and D1/P a nonsevere LOSS; N40 remained open with primal/gap gains and slightly weaker LB. Those observations are separate history, not substitutes for this batch. R119 MB-PC remains stopped. ENS-C remains default, M-B is retained, D0 is only the planned F2 Seed1 ablation, and no automatic next batch is scheduled.
+Installation, expanded native search, sampled h/native objective, internal h fixing/branching, and full performance are distinct. Actual model/ObjCon/types/Start/scope/source-proof and target/terminal identities are preserved in mechanism_account.json and raw-backed reconstruction. Native h fixing/branching remains unknown; no entire-tree preservation or single-Optimize complete method is claimed.
 
-Final charged budget: 7/40 conservative starts, 445.136500359/48000 outer seconds; qualification 7/8 and 445.136500359/1800. Four failures are charged without refund; child native times are nested rather than added again. Static mathematics, compilation, independent review, safe publication and empty-root reconstruction are separate engineering scopes. Human time is unknown.
+For each open pair, dgap=dU−dL is checked exactly to numerical arithmetic tolerance. Objective parts G and lambda*P are listed separately in objective_parts.csv. Improved U with weaker L is a primal endpoint benefit; these arithmetic decompositions are not internal causal shares. Record availability is an observed upper time bound, not an internal first discovery.
 
-The additional review and one public export/empty-root reconstruction concern this finite blocked current evidence only. They cannot reconstruct non-existent formal solver records or satisfy the unavailable new-D1 endpoint check. Recovery and remote receipts are separate from the scientific payload they inspect. All parent origins are persisted; exact child OS creation-time coverage is limited, with M-B precise creation time not found in a persistent receipt. The pre-launch marker is not an OS child-creation timestamp.
+Both saved R120 D0 maximum-violation points can be repaired for D1 by changing only h to zero under the actual complete matrices and ObjCon, with every original coordinate held fixed (review/pre_contract.json and minimal saved sources). The old extended-space nonredundancy and equal original-objective LP minima remain true. These two witnesses do not establish strict original-coordinate projection shrinkage or a general performance theorem. No new LP/native diagnostic was run.
 
-This round does not answer whether frozen D1 merits a broader paper benchmark. It ends without a performance decision; the frozen configuration is neither promoted nor rejected scientifically.
+The two Seed layers and every Seed0-to-Seed1 classification are retained in seed_stratification.json; WIN-to-LOSS transitions are labelled sensitive. No best-of-two-Seed selection, pooled exact mean time or overall independent-sample win rate is formed. R120 C2 severe direct-M-B loss remains part of the development record.
+
+Budget: 31/40 conservative starts and 35578.675760/48000 outer seconds; qualification 10/12 and 670.143650/1800. The user increased only the cumulative qualification start ceiling from8 to12 within this same R121. All earlier failures remain charged. Compilation, zero-solve mathematics, publication, recovery and extra review have separate scoped receipts. Human time is unknown.
+
+Qualification comprises five coupled parents, one once-only zero-Optimize three-input exporter and four actual H100 Seed1 CLI, totaling10 conservative starts. H100 is V20; no V60/V100 ran. Original P/MB files, seals and failed history stay immutable under separate traceable recovery receipts. Their original producer times and entire post-seal waiting gaps remain. The original two qualification child OS birth times were not persisted and are not backfilled; all16 new formal children have actual OS creation receipts sealed during production.
+
+The earlier blocked-phase publication/reconstruction is retained as history. Complete-current-core export, empty-root reconstruction, independent extra review and remote observations are established only by separately published receipts after those operations actually occur. This scientific payload does not attest those later operations or infer them from the earlier partial check.
+
+No new city, independent IID sample, default adoption, universal acceleration, rational-exact solver certificate or automated next batch is claimed. The one stage decision closes this batch. Scientific payload, actual public reconstruction, extra review and remote publication receipts have separate scopes.

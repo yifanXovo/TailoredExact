@@ -1,0 +1,73 @@
+{
+  "schema": "r121-blocked-publication-history-preserved-v1",
+  "same_round": 121,
+  "old_scientific_commit": "f371d3441cd97f96004100612d4df529fa27491d",
+  "old_published_head": "726b3b2cfb64da5788328a68fb2c28824e751507",
+  "old_restore_scope": "finite BLOCKED current core:0 formal arms,0 evaluable pairs,planned16/18 only; not current complete evidence",
+  "failure_history": "resumption/publication_archive_failure01.json",
+  "recovery": "shorter local export01 archive path; no system or permission change",
+  "all_observed_original_bytes_validated": true,
+  "local_archive_excluded_from_new_carrier": true,
+  "old_public_git_history_retained": true,
+  "no_native_raw_or_fees_moved_or_changed": true,
+  "records": [
+    {
+      "original": "compact_evidence",
+      "archived": "results/unified_exact_round121/local_only_prepublication/blocked_publication01/compact_evidence",
+      "files": {
+        "evidence.tar.gz.part001": "7997a0e38103752e3bd5c4dd8ab1eed1e41dd371201576ebaf30771acb63e9ea",
+        "manifest.json": "67af37586becfbcfdd5e57ea7d31206625a2902e0d3572a65be5861dac56fbbf"
+      },
+      "verified_against": "original blocked public_pack_receipt and manifest"
+    },
+    {
+      "original": "engineering/public_export01",
+      "archived": "results/unified_exact_round121/local_only_prepublication/blocked_publication01/export01",
+      "files": {
+        "public_carrier.tar": "d992391ec82371dc73959c031cc7464dd2d40d8b1c680a648f5f3c316e27c65d",
+        "carrier/results/unified_exact_round121/compact_evidence/evidence.tar.gz.part001": "7997a0e38103752e3bd5c4dd8ab1eed1e41dd371201576ebaf30771acb63e9ea",
+        "carrier/results/unified_exact_round121/compact_evidence/manifest.json": "67af37586becfbcfdd5e57ea7d31206625a2902e0d3572a65be5861dac56fbbf"
+      },
+      "verified_against": "original public_export_receipt archive_SHA and every actual Git-tar member"
+    },
+    {
+      "original": "public_pack_receipt.json",
+      "archived": "results/unified_exact_round121/local_only_prepublication/blocked_publication01/public_pack_receipt.json",
+      "SHA": "08be147f92a4e805293de68e4f72596e9058f620a501f33f1e380fc6eeaa4fb3",
+      "byte_identity_preserved": true
+    },
+    {
+      "original": "public_dependency_closure.json",
+      "archived": "results/unified_exact_round121/local_only_prepublication/blocked_publication01/public_dependency_closure.json",
+      "SHA": "02c8d573886605364d43d5778ca062a57eb0feb558e739c38ca566d487b1359e",
+      "byte_identity_preserved": true
+    },
+    {
+      "original": "delivery",
+      "archived": "results/unified_exact_round121/local_only_prepublication/blocked_publication01/delivery",
+      "files": {
+        "app_attachment_receipt.json": "e9de97a8783cce866b0d1bc47082067ebbd87009b8bfedf43e8ae53c8c64986f",
+        "carrier_scan.json": "e1acff86900eecf2132fe90f65472a2979b73f08572b8429bd51caecb8e3fd21",
+        "final_local_observation.json": "54a533d596ad03405ce537f4d36ab454dce7fc2f9e5524f8dfd059661940b282",
+        "final_remote_readback.local.json": "f841b700a095947f305a8f1ea8275585e405eedda0743571abf24172e39ab616",
+        "goal_blocked_audit.local.json": "b81dedc92ea3a7a936e2b9200d603dc662eaa10411fe58921a5621b34755ed5f",
+        "initial_remote_readback.json": "6c74df7ebecb3c8437829aa49db7dc18dac580d0c45b7e18d67bd88b634e816e",
+        "payload_scan.json": "00350c98fc597a41f8f5cd8cf8c8ddf73b5d350682e643ade601ed98115dc559",
+        "pr_body.md": "ec2c1f6b319fc518544223c3cb6e681eaa500ba7ebca0cba5e15ce07d2726f1b",
+        "publication_staged_scan.local.json": "98ec8a7cd4ebdb8265f29d3bc9c80518327e63e2c75980239cd1ed9e7542bf5f",
+        "public_export_receipt.json": "dc4ac801cfd10447f8ea5fbbf85ab2004fdea209a5ebd1fb29acab3ef0fd22e0",
+        "public_restore_receipt.json": "028566c12ab4d1a515beaf52536714de226f9a53e2fb59bd8247fa88246fe6cf",
+        "recovery_review_staged_scan.local.json": "1ef8c11fbac2704780e8f8039fb9fd957706514901581391a8962d1e71650984",
+        "restored_check.json": "7b27732410b0f3229f0a382bde888a5a609a142d4dbaf9e82255ac2c6b15db3c",
+        "restored_check_scope.json": "7206d1e178c53a925c0e870d339c5d2a672992575cf2ed4b644f3f1fd75b9022",
+        "resume_prequalification_index_scan02.local.json": "8b326b53e1281fc3cb21f54bd50162d70bff4395f088fdc91bddd38ed382aaa8",
+        "resume_prequalification_staged_scan.local.json": "00f93098993892c040bf633f8215b8c7aaa13d65a14ce86039e7e0e8764f54ff",
+        "review_and_recovery_scope.json": "7f65a7d31f05f31966b8d4499147f6ec63837abec4c7d333ddfeb947b32729fe",
+        "science_staged_scan.json": "e3d7bf88e9cb3d69bed0092d6c2c45964c4d9bf3ae64116a967c0bd097bb6ff9"
+      },
+      "byte_identity_preserved": true,
+      "copy_originals_retained": true
+    }
+  ],
+  "observed_unix": 1792086788.4940753
+}

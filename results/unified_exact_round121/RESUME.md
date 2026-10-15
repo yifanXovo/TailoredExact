@@ -1,3 +1,69 @@
+# CURRENT AUTHORITATIVE STATE: FORMAL COMPLETE; REVIEW AND DELIVERY PENDING
+
+Same Round121. COMPLETE: all16 fixed positions are actually executed once, qualified and sealed; all18 pairs are evaluated. Stage ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK. All Native children and five formal parents have exited; every fee is closed. Charged total31/40 starts,35578.67575955391/48000 outer seconds; qualification10/12 starts,670.1436495780945/1800 seconds. No more Native starts are authorized by this batch. ENS-C remains default, M-B retained, D0 only F2 ablation, R119 MB-PC stopped.
+
+New D1/P: WIN/WIN/WIN. New D1/M-B: TIE/WIN/TIE. Q30/Q40 installed and ran extensions; Q50 naturally unexposed with one returned paid root proof and no complete pair/installation. All three new D1 endpoints remain open. R120 C2 losses and F2 D0/M-B Seed0 WIN to Seed1 LOSS stay visible.
+
+Current next steps: actual different-executor independent extra review of final16/18 and gate; archive earlier blocked-phase publication without deleting it; new complete-phase safe carrier and scientific commit; one actual Git export/fresh empty-root current-core reconstruction; separate actual review/recovery receipts; normal push/update existing English stacked Draft PR183 and actual base/head/draft/public-file readback. No future operation is attested yet. All older CURRENT entries below are chronological history.
+
+---
+
+# CURRENT AUTHORITATIVE STATE: LAST FORMAL CHILD Q50-C2-U MB-D1 RUNNING
+
+Same Round121. All16 fixed positions actually started exactly once. Q50 M-B and P-GRB are sealed and single-arm audited; last MB-D1 is running under parent20104 / session50944 / fee formal05_Q50_C2_U. Actual last child birth: {"pid":980,"parent_pid":20104,"actual_creation_unix":1792082858.443327,"command":["C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\build\\research\\round120\\ExactEBRP.exe","--input","reference/round121_confirmation/Q50-C2-U.txt","--lambda","0.15","--T","10800","--pickup-time","60","--drop-time","60","--time-limit","3594","--process-wall-time-limit","3600","--process-shutdown-margin","30","--threads","1","--mip-threads","1","--gurobi-seed","0","--gurobi-presolve","-1","--method","gcap-frontier","--algorithm-preset","research-round83-vds-equal-net-exchange","--round90-lp-g-split","false","--round61-candidate-mode","off","--round65-witness-audit","true","--round65-hga-zero-stop","true","--out","C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\campaign\\group05\\raw\\03_Q50-C2-U_S0_MB-D1\\result.json","--log","C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\campaign\\group05\\raw\\03_Q50-C2-U_S0_MB-D1\\native.log","--process-phase-ledger","C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\campaign\\group05\\raw\\03_Q50-C2-U_S0_MB-D1\\phases.csv","--external-gini-artifact-dir","C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\campaign\\group05\\raw\\03_Q50-C2-U_S0_MB-D1\\external","--primal-heuristic-generation-log","C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\campaign\\group05\\raw\\03_Q50-C2-U_S0_MB-D1\\hga.csv","--progress-log","C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\campaign\\group05\\raw\\03_Q50-C2-U_S0_MB-D1\\progress.csv","--native-evidence-dir","C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\campaign\\group05\\raw\\03_Q50-C2-U_S0_MB-D1\\journal","--round98-state-service","m-binary","--round120-native-proof-d1"],"seed":0,"source_commit":"355eefd2be3fe5651195681faf7b3a63ee4032f8","PE_SHA":"5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba","creation_from_live_OS_handle":true}
+
+Observe this same child and parent. After actual parent exit promptly close formal05_Q50_C2_U, require group05 current_core with all3 qualified and no source rejection, then all16/18 final report, actual independent extra review, complete-phase safe export/empty-root reconstruction and existing Draft PR183 update/readback. No retries, new Seeds/input/round or production/runtime89 changes. No compilation/compression/heavy review while Native is active. All older CURRENT entries below are chronological history.
+
+---
+
+# CURRENT AUTHORITATIVE STATE: FINAL Q50-C2-U formal group5 RUNNING
+
+{"state": "RUNNING_FINAL_FORMAL05_Q50_C2_U", "same_round": 121, "parent_pid": 20104, "parent_creation_unix": 1792075681.5161514, "exec_session": 50944, "group": 5, "fee_label": "formal05_Q50_C2_U", "formal_qualified_complete": 13, "evaluated_pairs": 15, "Q40_result": "all3 qualified/open; D1/P WIN; D1/MB WIN via primal U gain despite weaker LB; no source rejection", "closed_costs": "27 starts/24775.88453054428 sec; q10 starts/670.1436495780945 sec", "next": "Observe same final Q50-C2-U Seed0 parent, MB -> P -> D1 cap3600 each. After actual parent exit promptly close formal05_Q50_C2_U, require all3 qualified/current_core and all16/18; then final analysis, actual different-executor extra review, current-complete safe pack/export/empty-root reconstruction and update existing Draft PR183. No Native retry, extra Seed/input/round, algorithm or runtime89 change. No compile/compression/heavy review while Native active."}
+
+Only the last3 fixed formal positions remain. No final stage until all16/18. Previous blocked-phase carrier/export is historical; final complete publication requires a new scoped receipt while preserving that history and original raw/failures. Older CURRENT paragraphs below are history.
+
+---
+
+# CURRENT AUTHORITATIVE STATE: Q40-R2-S formal group4 RUNNING
+
+{"state": "RUNNING_FORMAL04_Q40_R2_S", "same_round": 121, "parent_pid": 29024, "parent_creation_unix": 1792064865.3020325, "exec_session": 29837, "group": 4, "fee_label": "formal04_Q40_R2_S", "formal_qualified_complete": 10, "evaluated_pairs": 12, "R98_C2_Seed1_result": "all3 qualified/open; D1/MB WIN (primal gain, weaker LB); D1/P WIN; Seed0 losses retained separately", "closed_costs": "23 starts/14001.637161016464 sec; q10 starts/670.1436495780945 sec", "next": "Observe same Q40-R2-S Seed0 parent and serial D1 -> MB -> P children, cap3600 each. After actual parent exit immediately close formal04_Q40_R2_S fee; require all3 qualified/core before final Q50 group. No retry, extra Seed/input or production/helper89 change. No compilation/compression/heavy review during native."}
+
+All remaining6 formal positions and6 pairs remain mandatory. Normal LOSS/open does not cancel later methods or final Q50. Original production source216/PE/DLL/inputs/Seed/table, all89 runtime helpers and decision rules unchanged. Older CURRENT paragraphs below are history.
+
+---
+
+# CURRENT AUTHORITATIVE STATE: R98-C2 Seed1 formal group3 RUNNING
+
+{"state": "RUNNING_FORMAL03_R98_C2", "same_round": 121, "parent_pid": 13836, "parent_creation_unix": 1792059397.2964725, "exec_session": 6446, "group": 3, "fee_label": "formal03_R98_C2", "formal_qualified_complete": 7, "evaluated_pairs": 9, "Q30_result": "all3 qualified/open; D1/P WIN, D1/MB TIE, lower D1 LB and larger gap than MB retained", "closed_costs": "19 starts/8611.540763378143 sec; q10 starts/670.1436495780945 sec", "next": "Observe same serial R98-C2 Seed1 parent/child, MB -> P -> D1 cap1800 each. After actual exit close formal03_R98_C2 and require qualified current_core before group4. No retry, new Seed/input, algorithm or clock change. Runtime89 and source216 remain frozen."}
+
+Ordinary LOSS/open never cancels later Q40/Q50 groups. Actual fee receipts and current reconstruction are authoritative. Older CURRENT paragraphs below are history. No compilation/compression/heavy extra review during native.
+
+---
+
+# CURRENT AUTHORITATIVE STATE: Q30 formal group2 RUNNING
+
+{"state": "RUNNING_FORMAL02_Q30_C2_B", "same_round": 121, "parent_pid": 17908, "parent_creation_unix": 1792054001.5056305, "exec_session": 96789, "group": 2, "formal_qualified_complete": 4, "evaluated_pairs": 6, "F2_all_four_qualified": true, "F2_D1_pairs": "all3 WIN; D0/MB LOSS retained", "closed_costs": "15 starts/3265.167201757431 sec; q10 starts/670.1436495780945 sec", "next": "Observe this same group2 parent/child. After actual exit close formal02_Q30_C2_B promptly; require all3 qualified and group current_core before group3. No restart/retry/extra Seed. Runtime89, source216, PE, DLL, inputs and frozen decisions unchanged."}
+
+Normal LOSS/open never cancels remaining groups. Formal execution serial, no compilation/compression/heavy extra review during native. Older CURRENT paragraphs below are history.
+
+---
+
+# CURRENT AUTHORITATIVE STATE: F2 formal group1 RUNNING
+
+{"state": "RUNNING_FORMAL01_F2", "same_round": 121, "parent_pid": 31220, "parent_creation_unix": 1792051372.5988083, "exec_session": 76512, "group": 1, "qualification": "ACCEPT four actual Seed1 CLI; q10/12,670.1436495780945/1800 closed", "next": "Observe same serial F2 parent/child. After actual exit promptly close formal01_F2 fee and inspect current_core before group2. No completed position may be rerun. Runtime89 and production frozen at af1dc6fb769a6c4fc78c6b6245fe0d166c422e42."}
+
+All16 positions and18 pairs remain mandatory; normal LOSS/open results never stop later groups. No simultaneous compilation/compression/heavy review. All older CURRENT paragraphs are history.
+
+---
+
+# CURRENT AUTHORITATIVE STATE: qualification05 RUNNING
+
+{"state": "RUNNING_QUALIFICATION05", "same_round": 121, "parent_pid": 29188, "parent_creation_unix": 1792051097.6282043, "exec_session": 83728, "frozen_commit": "af1dc6fb769a6c4fc78c6b6245fe0d166c422e42", "next": "Observe this same parent/child, never restart. Close qualification05 fee immediately after actual parent exit; inspect full four-arm qualification and separate performance gate before formal."}
+
+No P/MB/exporter rerun. Only the never-started H100 D0/D1 Seed1 CLI are authorized in this parent. All old failures and fees remain. Qualification12/1800; total40/48000. Formal16/18 pending. Observe actual PID and creation before any continuation. All older CURRENT entries below are chronological history.
+
+---
+
 # CURRENT AUTHORITATIVE STATE: R121 RESUMED — QUALIFICATION PENDING
 
 The user explicitly increased cumulative qualification starts8→12 in this SAME Round121; q1800 seconds and total40/48000 are unchanged. Existing fees remain7 starts/445.13650035858154sec, all4 closed. No native process is active and no formal position started. P/MB raw/seals and old failed audit history are immutable. H100 D0/D1 Seed1 remain NOT_STARTED.

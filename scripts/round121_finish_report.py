@@ -80,6 +80,20 @@ def finish():
     for a in arms:lines.append(f'| {"known Seed" if a["seed"] else "new input"} | {a["id"]} | {a["seed"]} | {a["arm"]} | '+' | '.join(f'{a[k]:.10g}' for k in ['U','L','gap'])+f' | {a["certificate"]} | '+' | '.join(f'{a[k]:.9g}' for k in ['T_produce','T_verify','T_total'])+' |')
     lines+=['','| Role | Seed | Pair | Class | Severe | Basis |','|---|---:|---|---|---|---|']
     for p in pairs:lines.append(f'| {p["id"]} | {p["seed"]} | {p["candidate"]}/{p["control"]} | {p["classification"]} | {p["severe_regression"]} | {p["basis"]} |')
+    # Use the fixed group membership rather than any performance-dependent set.
+    new_d1=[a for v in values if v['group']['number'] in [2,4,5] for a in v['arms'] if a['arm']=='MB-D1']
+    lines+=['', '| New role | D1/P | D1/M-B | D1 installed | Extended Optimize calls |', '|---|---|---|---:|---:|']
+    for v in values:
+        if v['group']['number'] not in [2,4,5]:continue
+        e=next(e for e in v['mechanism'] if e['arm']=='MB-D1')
+        classes=[next(p['classification'] for p in v['pairs'] if p['candidate']=='MB-D1' and p['control']==control) for control in ['P-GRB','M-B']]
+        lines.append(f'| {v["group"]["id"]} | {classes[0]} | {classes[1]} | {e["installed"]} | {e.get("actual_extended_Optimize",0)} |')
+    lines+=['', 'Q30 and Q40 supply the two actual new-input D1 exposures. Q50 has one paid root proof record, no complete paired proof and no installation or extended Optimize; its valid frozen run remains unexposed. No extra proof probe or forced installation was added.',
+        '',f'New-input D1 complete certificates: {sum(a["certificate"] for a in new_d1)}/3. Known F2/R98-C2 certificates remain a separate Seed sensitivity layer; they do not count as new-input certification.',
+        '', '| Known role | Pair | Seed0 class | Seed0 severe | Seed1 class | Seed1 severe | WIN to LOSS sensitive |',
+        '|---|---|---|---|---|---|---|']
+    for s in sensitivity:lines.append(f'| {s["id"]} | {s["candidate"]}/{s["control"]} | {s["Seed0"]} | {s["Seed0_severe"]} | {s["Seed1"]} | {s["Seed1_severe"]} | {s["WIN_to_LOSS"]} |')
+    lines+=['', 'F2 D0/M-B changes from Seed0 WIN to Seed1 LOSS and is explicitly Seed sensitive. R98-C2 D1/M-B changes from a severe Seed0 LOSS to Seed1 WIN; D1/P changes from nonsevere Seed0 LOSS to Seed1 WIN. Both Seed records remain visible, without choosing a preferred Seed or treating these changes as estimated probabilities. D0 remains an ablation.']
     lines+=['','| New input | Initial / target total | sum(w) | lambda sum(w) | Physical T | Producer cap |','|---|---:|---:|---:|---:|---:|']
     for p in m['new_roles']:lines.append(f'| {p["id"]} | {p["total_initial"]} / {p["total_target"]} | {p["sum_weights"]:.6f} | {p["lambda_sum_weights"]:.8f} | {p["T_seconds"]} | {p["cap_seconds"]} |')
     lines+=['','The max-normalized weight sums and lambda*sum(w) differ across V, together with geography, stock and physical conditions. Their differences are not identified as a pure size effect. These are three prospective subsets of one known city, with all old-subset overlaps retained.',
@@ -99,6 +113,8 @@ def finish():
         '', 'Both saved R120 D0 maximum-violation points can be repaired for D1 by changing only h to zero under the actual complete matrices and ObjCon, with every original coordinate held fixed (review/pre_contract.json and minimal saved sources). The old extended-space nonredundancy and equal original-objective LP minima remain true. These two witnesses do not establish strict original-coordinate projection shrinkage or a general performance theorem. No new LP/native diagnostic was run.',
         '', 'The two Seed layers and every Seed0-to-Seed1 classification are retained in seed_stratification.json; WIN-to-LOSS transitions are labelled sensitive. No best-of-two-Seed selection, pooled exact mean time or overall independent-sample win rate is formed. R120 C2 severe direct-M-B loss remains part of the development record.',
         '',f'Budget: {b["paid_starts"]}/40 conservative starts and {b["paid_outer_seconds"]:.6f}/48000 outer seconds; qualification {b["qualification_starts"]}/{QUALIFICATION_MAXIMUM_STARTS} and {b["qualification_seconds"]:.6f}/1800. The user increased only the cumulative qualification start ceiling from8 to12 within this same R121. All earlier failures remain charged. Compilation, zero-solve mathematics, publication, recovery and extra review have separate scoped receipts. Human time is unknown.',
+        '', 'Qualification comprises five coupled parents, one once-only zero-Optimize three-input exporter and four actual H100 Seed1 CLI, totaling10 conservative starts. H100 is V20; no V60/V100 ran. Original P/MB files, seals and failed history stay immutable under separate traceable recovery receipts. Their original producer times and entire post-seal waiting gaps remain. The original two qualification child OS birth times were not persisted and are not backfilled; all16 new formal children have actual OS creation receipts sealed during production.',
+        '', 'The earlier blocked-phase publication/reconstruction is retained as history. Complete-current-core export, empty-root reconstruction, independent extra review and remote observations are established only by separately published receipts after those operations actually occur. This scientific payload does not attest those later operations or infer them from the earlier partial check.',
         '', 'No new city, independent IID sample, default adoption, universal acceleration, rational-exact solver certificate or automated next batch is claimed. The one stage decision closes this batch. Scientific payload, actual public reconstruction, extra review and remote publication receipts have separate scopes.']
     (OUT/'final_report.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
     claim=['# Paper claims and evidence','',f'Current stage: `{stage}`.','',
@@ -114,8 +130,19 @@ def finish():
         '| Frozen decision and risks | all18_pairs; stage_decision; full negative data | Finite candidate/resource screen; no statistical significance |']
     (OUT/'paper_claim_evidence_map.md').write_text('\n'.join(claim)+'\n',encoding='utf-8')
     spec=(OUT/'paper_algorithm_spec.md').read_text(encoding='utf-8')
-    spec=spec.replace('This is prospective setup; performance and stage are pending.',f'All 16 fixed R121 arms are complete; the finite stage is {stage}. The full result and all negative outcomes are in final_report.md. No default change follows.')
-    (OUT/'paper_algorithm_spec.md').write_text(spec,encoding='utf-8')
+    historical='# Round120 candidate extension on the frozen integrated method'
+    assert historical in spec
+    # The complete inherited algorithm text is unchanged. Old R121 blocked
+    # front matter has an exact preserved copy in resumption/before_resume01.
+    inherited_spec=spec[spec.index(historical):]
+    current_spec=['# Round121 frozen method and current evidence', '',
+        f'**{decision["execution_stage"]} — {stage}.** All 16 frozen formal positions and 18 pairs are in all16_arms, all18_pairs and final_report. The three prospective same-source inputs and two known Seed1 blocks have separate denominators. The unique finite stage closes this batch.', '',
+        f'Production source-before-native {SOURCE}; PE {PE_SHA}; Gurobi13.0.2 DLL {DLL_SHA}. R121 uses the frozen production algorithm and solver settings with the preregistered role Seeds and producer caps. The final runtime helper identity is in candidate_identity.json and performance_admission.json.', '',
+        'R121 Gurobi Seed1 applies to F2, R98-C2 and qualification H100 (a real V20 input); Seed0 applies to Q30-C2-B, Q40-R2-S and Q50-C2-U. H keeps its original Seed20260626 and complete24+1 closure/exchange. Actual current stock totals, weights, Q, horizons, windows and once-only source mappings are in input_manifest.json and argv_freeze.json.', '',
+        'The resumed qualification reuses the original sealed P/MB producers through complete traceable read-only audits and actually runs D0/D1 Seed1 once. All earlier failed fees remain charged. Original T_produce is unchanged; the waiting gap stays in T_verify. Its four CLI records are qualification evidence, separate from all16 formal records.', '',
+        'ENS-C remains default, M-B is retained, D0 is only the single F2 Seed1 ablation and R119 MB-PC remains stopped. No automatic next batch or default adoption follows. Actual flag/installation/native extension and numerical/source/Start/physical/coverage status are recorded per arm; internal h fixing/branching remains unknown.', '',
+        'The full inherited problem, H/controller, model, embedding, three-row and proof/Start/coverage specification follows verbatim. Older build identities, Seed0 narratives and concrete stock examples below are historical definitions/examples; the R121 identity and manifest above identify the current observations. General disjunction theory and this project-specific integration have separate claim scopes.', '', '---', '', inherited_spec]
+    (OUT/'paper_algorithm_spec.md').write_text('\n'.join(current_spec),encoding='utf-8')
     write(OUT/'engineering/report_receipt.json',dict(seconds=time.perf_counter()-tick,Optimize=0,native_starts=0))
     print(json.dumps(dict(stage=stage,arms=len(arms),pairs=len(pairs),budget=b)),flush=True)
 if __name__=='__main__':finish()

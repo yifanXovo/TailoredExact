@@ -1,16 +1,18 @@
-# R121 applicability and current evidence boundary
+# Round121 frozen method and current evidence
 
-R121 is BLOCKED before formal admission: all16 formal positions are NOT_STARTED and all18 pair slots UNEVALUABLE. The R120 production algorithm/PE/source are frozen. No performance/default decision follows. ENS-C remains default and R119 MB-PC remains stopped.
+**COMPLETE — ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK.** All 16 frozen formal positions and 18 pairs are in all16_arms, all18_pairs and final_report. The three prospective same-source inputs and two known Seed1 blocks have separate denominators. The unique finite stage closes this batch.
 
-Current Gurobi Seed is specified by the R121 frozen role table: F2, R98-C2 and qualification H100 use1; new Q30-C2-B, Q40-R2-S and Q50-C2-U use0. Only H100 P-GRB and M-B actually ran. H remains Seed20260626 with complete24+1 closure/exchange, independent of Gurobi Seed. All inherited Seed0 statements and concrete old stock totals below describe historical runs/examples, not current R121 observations. The R121 actual inputs and B/D totals are in input_manifest.json; none of the three new inputs has been optimized.
+Production source-before-native 355eefd2be3fe5651195681faf7b3a63ee4032f8; PE 5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba; Gurobi13.0.2 DLL 9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88. R121 uses the frozen production algorithm and solver settings with the preregistered role Seeds and producer caps. The final runtime helper identity is in candidate_identity.json and performance_admission.json.
 
-The inherited complete problem/model/embedding/proof/Start/coverage specification follows. Its general disjunction idea and project-specific integration are separate from this round's unavailable confirmation evidence. See final_report.md and paper_claim_evidence_map.md for the precise claim boundary.
+R121 Gurobi Seed1 applies to F2, R98-C2 and qualification H100 (a real V20 input); Seed0 applies to Q30-C2-B, Q40-R2-S and Q50-C2-U. H keeps its original Seed20260626 and complete24+1 closure/exchange. Actual current stock totals, weights, Q, horizons, windows and once-only source mappings are in input_manifest.json and argv_freeze.json.
+
+The resumed qualification reuses the original sealed P/MB producers through complete traceable read-only audits and actually runs D0/D1 Seed1 once. All earlier failed fees remain charged. Original T_produce is unchanged; the waiting gap stays in T_verify. Its four CLI records are qualification evidence, separate from all16 formal records.
+
+ENS-C remains default, M-B is retained, D0 is only the single F2 Seed1 ablation and R119 MB-PC remains stopped. No automatic next batch or default adoption follows. Actual flag/installation/native extension and numerical/source/Start/physical/coverage status are recorded per arm; internal h fixing/branching remains unknown.
+
+The full inherited problem, H/controller, model, embedding, three-row and proof/Start/coverage specification follows verbatim. Older build identities, Seed0 narratives and concrete stock examples below are historical definitions/examples; the R121 identity and manifest above identify the current observations. General disjunction theory and this project-specific integration have separate claim scopes.
 
 ---
-
-# Round121 frozen native proof disjunction
-
-Production identity remains R120 source355eefd2be3fe5651195681faf7b3a63ee4032f8 / PE5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba. The full inherited method and D1 contract follow verbatim below. R121 evaluates three predeclared new inputs from the same safe city source and two known Seed1 blocks; it defines no new algorithm. ENS-C remains default. R121 is BLOCKED before formal admission: 0/16 formal arms and 0/18 evaluable pairs. The frozen inputs and run table remain prospective, with no new performance conclusion or default change. See final_report.md and the complete failure/fee ledger.
 
 # Round120 candidate extension on the frozen integrated method
 

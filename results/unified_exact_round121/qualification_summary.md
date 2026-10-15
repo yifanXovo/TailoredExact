@@ -1,19 +1,11 @@
-# Current R121 resumption — qualification pending
+# Round121 resumed qualification complete
 
-The user explicitly continued this same Round121 and increased only the cumulative qualification start ceiling from8 to12. Qualification1800sec and total40starts/48000sec remain unchanged. The existing7starts/445.13650035858154sec remain charged. P/MB sealed producers will be reused after final-file full audit into new traceable recovery receipts; original raw, failed audit and old receipts stay untouched. Only never-started H100 D0/D1 Seed1 CLI will be added. All16 original formal positions and18 pairs remain pending, with production algorithm/input/Seed/parameters/clocks/criteria unchanged. The earlier blocked delivery and PR183 remain history within this same round, not a new research draw.
+ACCEPTED for the frozen 16 formal positions and 18 pairs. This is the same Round121.
 
-No performance admission has yet been issued for the resumed files. Current authority: resumption/authorization01.json, resumption/final_freeze01.json and RESUME.md. The text below is the retained pre-resumption report, superseded on its8-start budget barrier by the user's amendment. No previously absent scientific result has been filled in.
+The original once-only P-GRB and M-B Seed1 producer files/seals/failures remain byte-identical. Their complete final-file re-audits and persistent recovery closeouts are in qualification/resume01/recovery/{P-GRB,M-B}; original T_produce is unchanged and T_verify retains the entire post-seal waiting gap. The failed canonical audits remain historical; consumers of recovered results must use their traceable saved view and original producer identity.
 
----
+Both previously unstarted H100 D0 and D1 Seed1 CLI actually ran once under qualification05, returned normally, sealed actual OS PID/creation and passed full native/physical/model/type/Start/row/scope and cross-arm proof/H checks. No exporter, P-GRB or M-B producer was rerun. No production compilation, algorithm/input/Seed/parameter/clock/decision change occurred.
 
-# R121 qualification: BLOCKED
+qualification05 actually exited0 and its fee is closed. Cumulative qualification10/12 conservative starts and 670.1436495780945/1800 outer seconds; total10/40 and the same670.1436495780945/48000. All four earlier failed parents remain charged. Original16+5 formal children/wrappers and full37800 seconds remain affordable and mandatory absent a real obstacle. The qualification outcomes are not formal performance evidence.
 
-Actual Seed1 CLI: H100 P-GRB and M-B only; both producers sealed normally. H100 D0 and D1 were NOT_STARTED. No formal arm started and no performance admission exists.
-
-Four failed qualification parents plus one zero-Optimize reference exporter and two CLI children cost 7 conservative starts / 445.13650035858154 outer seconds. The remaining one qualification start cannot cover the final reviewed parent+D1 minimum of two starts. Total surplus cannot raise the 8-start sublimit.
-
-P-GRB canonical closeout completed. M-B retains a failed canonical audit and incomplete closeout. The final read-only predicates passed a different executor's temporary full audit/readout, but that overlay did not cover the original exclusive-write collision; it does not replace original closeout. Production PE/source, sealed required bytes and producer clocks remain unchanged. Exact child OS creation-time coverage is limited: M-B precise creation time was not found in a persistent receipt.
-
-Failures: missing F in artificial zero fixture; int0 versus is-False readout; nested parser cache owner mismatch; existing audit.json exclusive-x write. All fees, prior helper source versions and failed artifacts are retained. These are engineering/qualification failures, not solver failures, proof contradictions or scientific losses.
-
-See final_report.md, qualification/actual_CLI_status.json, all four fees, review/qualification_blocked_review.json and blocked_current_core.json. No new D1 physical endpoint, three-row installation, native h/Start exposure or formal performance comparison exists.
+See review/resume_precontract.json (real different executor), review/performance_admission.json, qualification/resume01/current_core.json, recovery_index.json, full_H_comparison.json, actual_CLI_status.json and every fee. Formal execution and scientific stage remain pending.

@@ -1,41 +1,33 @@
 {
-  "execution_stage": "BLOCKED",
-  "stage": "BLOCKED",
+  "execution_stage": "COMPLETE",
+  "stage": "ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK",
   "conditions": {
-    "three_once_only_postfreeze_new_inputs": false,
-    "all_three_new_primary_evaluable": false,
-    "new_primary_at_least_two_WIN_at_most_one_LOSS": false,
-    "at_least_two_new_D1_native_exposures": false,
-    "exposed_new_material_M_B_gain_or_new_certificate": false,
-    "all_five_primary_evaluable": false,
+    "three_once_only_postfreeze_new_inputs": true,
+    "all_three_new_primary_evaluable": true,
+    "new_primary_at_least_two_WIN_at_most_one_LOSS": true,
+    "at_least_two_new_D1_native_exposures": true,
+    "exposed_new_material_M_B_gain_or_new_certificate": true,
+    "all_five_primary_evaluable": true,
     "no_severe_primary_risk": true,
     "D1_certificate_count_preserved": true,
-    "both_fixed_Seed1_blocks_complete": false
+    "both_fixed_Seed1_blocks_complete": true
   },
   "veto": {
     "any_of_five_severe_D1_P": false,
     "two_or_more_new_D1_P_LOSS": false,
     "D1_fewer_certificates_than_M_B": false
   },
-  "formal_arms": 0,
-  "formal_pairs": 0,
+  "formal_arms": 16,
+  "formal_pairs": 18,
   "certificate_counts": {
-    "D1": 0,
-    "M_B": 0
+    "D1": 1,
+    "M_B": 1
   },
   "new_problem_denominator": 3,
   "known_role_Seed1_blocks": 2,
-  "blockers": [
-    "Same Round121 resumed by user at qualification ceiling12; final-file recovered P/MB audit and actual H100 D0/D1 Seed1 qualification are pending."
-  ],
+  "blockers": [],
   "default_ENS_changed": false,
   "D0_not_promoted": true,
   "no_automatic_further_batch": true,
-  "statistical_significance_claim": false,
-  "performance_gate_evaluated": false,
-  "formal_positions_planned": 16,
-  "pair_positions_planned": 18,
-  "all_support_and_veto_counts_unobserved": true,
-  "resumption_authorization_SHA": "02a03088ef3304f6ed3827747f3d9f8c06c7f673eb499f0f165bf3ed238a2d7f",
-  "qualification_pending": true
+  "statistical_significance_claim": false
 }

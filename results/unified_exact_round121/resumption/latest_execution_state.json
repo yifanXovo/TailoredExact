@@ -1,31 +1,18 @@
 {
-  "UTC": "2026-10-15T07:33:02.812729+00:00",
+  "state": "COMPLETE_FORMAL_ANALYSIS_PENDING_REVIEW_AND_DELIVERY",
   "same_round": 121,
-  "phase": "RESUMED_FINAL_FILE_QUALIFICATION_REVIEW",
-  "budget": {
-    "paid_starts": 7,
-    "paid_outer_seconds": 445.13650035858154,
-    "remaining_starts": 33,
-    "remaining_outer_seconds": 47554.86349964142,
-    "qualification_starts": 7,
-    "qualification_seconds": 445.13650035858154,
-    "unclosed": []
-  },
-  "qualification_limit": [
-    12,
-    1800
-  ],
-  "total_limit": [
-    40,
-    48000
-  ],
-  "formal_arms_completed": 0,
-  "formal_pairs_evaluable": 0,
-  "qualification_P_MB_recovery_pending": true,
-  "D0_D1_not_started": true,
-  "native_idle": true,
-  "original_production_unchanged": true,
-  "original_H100_identity_preserved": true,
-  "new_qualification_parent_cap": 900,
-  "new_qualification_starts": 3
+  "parent_pid": 20104,
+  "parent_creation_unix": 1792075681.5161514,
+  "exec_session": 50944,
+  "group": 5,
+  "fee_label": "formal05_Q50_C2_U",
+  "formal_qualified_complete": 16,
+  "evaluated_pairs": 18,
+  "Q40_result": "all3 qualified/open; D1/P WIN; D1/MB WIN via primal U gain despite weaker LB; no source rejection",
+  "closed_costs": "27 starts/24775.88453054428 sec; q10 starts/670.1436495780945 sec",
+  "next": "Actual independent final extra review, complete-phase safe carrier/Git export/empty-root reconstruction, update existing Draft PR183 and actual remote readback. No more Native starts.",
+  "stage": "ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK",
+  "all_native_ended": true,
+  "all_fees_closed": true,
+  "observed_unix": 1792086579.9320014
 }

@@ -1,24 +1,24 @@
-# Finite R121 safe export and reconstruction recipe
+# Finite R121 complete-current-core export and reconstruction
 
-Scope: the blocked current evidence only, not nonexistent formal endpoints. The carrier contains current safe source/data/logs, two saved old h witnesses, and finite named historical authorities. No old carrier/campaign restoration, executable, DLL, license, credentials or HTML is needed. The local untracked-path inventory is excluded.
+Scope: the current 16 qualified formal arms, 18 pairs and unique frozen decision, plus necessary current source/data/logs and finite named historical authorities. The earlier blocked-phase carrier/export and its limited replay remain historical evidence. The complete phase requires its own actual export and reconstruction receipts. No old whole campaign/carrier restoration is required. No PE, DLL, license, credentials or HTML is shipped; the original-main untracked inventory and local publication quarantine are excluded.
 
-Use Python3.12 standard library. No solver import, native process, compile, network input acquisition or original-worktree fallback is permitted. The replay checks all216 production source bindings and88 frozen helpers, sealed P/MB required bytes, actual Seed/settings and complete saved models/scopes/physical fleets, all16/18 unrun slots, old h reselection and fees. M-B canonical closeout remains incomplete. No new D1 endpoint or installed rows can be reconstructed.
+The final candidate pins 216 production source bindings and 89 runtime helpers. The carrier also supplies post-analysis/release code and the current report/specification. Qualification recovery retains original P/MB raw/seals, the failed canonical audit and new traced receipts; original producer times and post-seal waiting gaps are unchanged. Actual original qualification P/MB OS creation times were not persisted and are not backfilled. All16 formal child birth receipts were obtained from the live OS and sealed during their production.
 
-Publication order: security preflight, one carrier pack, scientific commit, one Git archive export of just that carrier, fresh empty-root unpack, one blocked current-core replay, then later actual receipts/review/remote metadata. A receipt identifies only an already observed commit; it cannot attest its own future publication.
+Publication order for this complete phase: actual content preflight, bounded carrier and full decompressed-member scan; scientific commit; one Git archive export of that committed carrier; fresh empty-root unpack with member hashes; current-core replay; separately published actual review/recovery/remote receipts. This recipe does not assert these later operations succeeded and no commit attests its own future publication.
 
-In the original worktree run:
+In the measured worktree, using Python3.12 standard library:
 
     python -B scripts/round121_release.py preflight --root .
     python -B scripts/round121_release.py pack --root .
 
-After committing the scientific payload, run exactly once, replacing SCIENCE_COMMIT and EMPTY_ROOT with the actual committed SHA and a fresh non-existent directory outside the worktree:
+After the scientific payload is committed, substitute its actual SHA and a fresh nonexistent destination outside the worktree:
 
     python -B scripts/round121_release.py restore --root . --commit SCIENCE_COMMIT --destination EMPTY_ROOT
 
-Then from EMPTY_ROOT run:
+Then use the copied script from inside EMPTY_ROOT:
 
     python -B scripts/round121_release.py restored-check --root EMPTY_ROOT
 
-Typed equality compares stored JSON arrays/types, including signed zero; only whole measured/restored root path prefixes are normalized. The blocked replay is read-only over expanded qualification members and has no regenerated derived sidecars. Initial unpack hash equality and later reconstruction equality are separate checks. Python open/module checks allow only the empty root and standard-library runtime prefix; this is an instrumented Python boundary, not an OS sandbox.
+The complete replay rebuilds all five formal groups and compares every stored JSON field and type, including arrays and signed zero, then recomputes the frozen stage. Only complete measured/restored root path component prefixes are normalized; no numerical rounding or field removal is allowed. The receipt enumerates each regenerated derived round120_event_contract.json sidecar with unpacked and reconstructed hashes and checks its normalized content against the immutable mechanism in the expected core. Initial unpack member-hash equality and subsequent derived reconstruction are distinct checks; reconstruction does not claim all expanded bytes remain identical.
 
-The actual export, restore and reconstructed-check receipts belong in delivery/. This recipe alone does not assert those steps succeeded. A current safe scan makes no claim that historical security alerts were resolved. No issuer contact, history rewrite or alert closure occurs.
+No solver execution, compile, network input acquisition or original-evidence/helper fallback is used. Python open/module checks permit the fresh root and standard-library runtime prefix; this is an instrumented boundary, not an OS sandbox. The actual delivery receipts define measured coverage and limitations. Current safe scans do not resolve historical alerts; no issuer contact, history rewrite or alert closure is performed.
