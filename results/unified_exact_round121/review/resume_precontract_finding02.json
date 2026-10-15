@@ -1,0 +1,14 @@
+{
+  "kind": "actual_read_only_provenance_boundary_counterexample",
+  "UTC": "2026-10-15T07:42:53.697792+00:00",
+  "decision": "CORRECTION_REQUIRED_NO_ADMISSION",
+  "actual_method": "Called current producer_identity on a deep copy of canonical resume identity with only prereg_sha256 replaced by INCORRECT_CURRENT_AUDITOR_PROTOCOL; it returned the old producer identity without rejecting",
+  "reaudit_source_SHA": "9dd20ef1d02e24ec352be9d17b114998e2c79b4d1d66cf27c3a2c205470e74fb",
+  "candidate_SHA": "e4b1add998f1934690243cead9609fd9686b3558f2664dac0d7424cf61f36c7a",
+  "required_fix": "Bind current auditor identity object to the exact canonical resumed identity and its actual protocol/authorization/original-producer SHA links; retain original producer identity and core.endpoint assertion unchanged",
+  "reviewer_native_starts": 0,
+  "reviewer_Optimize": 0,
+  "reviewer_compiles": 0,
+  "reviewer_Git": 0,
+  "filesystem_writes_during_counterexample": false
+}

@@ -1,0 +1,23 @@
+{
+  "tool_version": "round117-publication-security-v1",
+  "passed": false,
+  "files": 72,
+  "archive_members": 0,
+  "bytes_scanned": 1568978,
+  "archives": [],
+  "findings": [
+    {
+      "path": "results/unified_exact_round121/protocol.json",
+      "category": "sensitive_field",
+      "value_sha256": "a77887d7c63836583496003ad1645021016c87cadec697fc7cedd610c971b3bb",
+      "line": null,
+      "field": "/qualification_start_amendment/authorization"
+    }
+  ],
+  "errors": [],
+  "raw_values_emitted": false,
+  "network_requests": 0,
+  "native_starts": 0,
+  "Optimize": 0,
+  "engineering_seconds": 4.289067499994417
+}

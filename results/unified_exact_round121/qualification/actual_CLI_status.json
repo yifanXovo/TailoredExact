@@ -1,0 +1,36 @@
+{
+  "actual_CLI": 4,
+  "H100_four_Seed1_actual_CLI": true,
+  "positions": [
+    {
+      "arm": "P-GRB",
+      "seed": 1,
+      "state": "ACTUAL_CLI_COMPLETE_QUALIFIED",
+      "reused_producer": true,
+      "recovery_receipt_SHA": "978822573e1680e631be395580363b01b636ddf3cf16037d5bf593cb94acabb3"
+    },
+    {
+      "arm": "M-B",
+      "seed": 1,
+      "state": "ACTUAL_CLI_COMPLETE_QUALIFIED",
+      "reused_producer": true,
+      "recovery_receipt_SHA": "cc149a8dbfdf45cb7ca013e0ce17d9bba2ea4e64e6f7bc561354b025ba1e7723"
+    },
+    {
+      "arm": "MB-D0",
+      "seed": 1,
+      "state": "ACTUAL_CLI_COMPLETE_QUALIFIED",
+      "reused_producer": false,
+      "recovery_receipt_SHA": null
+    },
+    {
+      "arm": "MB-D1",
+      "seed": 1,
+      "state": "ACTUAL_CLI_COMPLETE_QUALIFIED",
+      "reused_producer": false,
+      "recovery_receipt_SHA": null
+    }
+  ],
+  "all_failures_retained": true,
+  "all_original_P_MB_bytes_unchanged": true
+}

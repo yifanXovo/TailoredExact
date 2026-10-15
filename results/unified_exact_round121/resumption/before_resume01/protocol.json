@@ -1,0 +1,138 @@
+{
+  "round": 121,
+  "base": "4872eb8421e43e57ef6e3727db4cd40e1c14f935",
+  "production_source": "355eefd2be3fe5651195681faf7b3a63ee4032f8",
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": "per-role frozen 0/1",
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "groups": [
+    {
+      "number": 1,
+      "id": "F2",
+      "seed": 1,
+      "campaign": "campaign/group01",
+      "methods": [
+        "MB-D0",
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ],
+      "cap_seconds": 1200,
+      "nominal_seconds": 4800,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "known_seed_sensitivity"
+    },
+    {
+      "number": 2,
+      "id": "Q30-C2-B",
+      "seed": 0,
+      "campaign": "campaign/group02",
+      "methods": [
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ],
+      "cap_seconds": 1800,
+      "nominal_seconds": 5400,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "prospective_confirmation"
+    },
+    {
+      "number": 3,
+      "id": "R98-C2",
+      "seed": 1,
+      "campaign": "campaign/group03",
+      "methods": [
+        "M-B",
+        "P-GRB",
+        "MB-D1"
+      ],
+      "cap_seconds": 1800,
+      "nominal_seconds": 5400,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "known_seed_sensitivity"
+    },
+    {
+      "number": 4,
+      "id": "Q40-R2-S",
+      "seed": 0,
+      "campaign": "campaign/group04",
+      "methods": [
+        "MB-D1",
+        "M-B",
+        "P-GRB"
+      ],
+      "cap_seconds": 3600,
+      "nominal_seconds": 10800,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "prospective_confirmation"
+    },
+    {
+      "number": 5,
+      "id": "Q50-C2-U",
+      "seed": 0,
+      "campaign": "campaign/group05",
+      "methods": [
+        "M-B",
+        "P-GRB",
+        "MB-D1"
+      ],
+      "cap_seconds": 3600,
+      "nominal_seconds": 10800,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "prospective_confirmation"
+    }
+  ],
+  "maximum_starts": 40,
+  "maximum_outer_seconds": 48000,
+  "qualification_maximum_starts": 8,
+  "qualification_maximum_seconds": 1800,
+  "formal_arms": 16,
+  "formal_pairs": 18,
+  "new_problems": 3,
+  "known_Seed1_blocks": 2,
+  "formal_nominal_seconds": 37200,
+  "management_reserve": 600,
+  "qualification_plan": {
+    "parent": 1,
+    "reference_exporter": 1,
+    "H100_Seed1_children": 4,
+    "outer_cap": 1200,
+    "each_CLI_cap": 120,
+    "exporter_cap": 300
+  },
+  "paired_rule": "unchanged round108_decisions.pair; independent all18 R120 replay",
+  "no_formal_retry_revision_additional_role_Seed_or_window": true,
+  "default_ENS_changed": false,
+  "D0_only_F2_Seed1": true,
+  "all_online_work_in_T_produce": true,
+  "native_reserve": 30,
+  "evidence_tolerance": 1e-07,
+  "own_H_seed": 20260626,
+  "own_H_semantics": "full24+1 closure/exchange",
+  "stage_priority": [
+    "PROOF_RELIABILITY_PRIORITY",
+    "BLOCKED",
+    "STOP_FROZEN_D1_CONFIRMATION",
+    "ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK",
+    "RETAIN_D1_AS_DEVELOPMENT_COMPONENT"
+  ]
+}

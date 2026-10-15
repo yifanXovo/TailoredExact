@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "existing_failed_audit_exclusive_rewrite_is_new_file",
+    "new_sidecar_exists_and_is_file",
+    "glob_and_iterdir_see_new_sidecar",
+    "read_and_SHA_share_new_view",
+    "native_or_sealed_output_write_rejected",
+    "bindings_restored_after_view",
+    "all_original_failed_and_native_bytes_retained",
+    "new_closeout_does_not_replace_original_history"
+  ],
+  "Optimize": 0,
+  "native_starts": 0
+}

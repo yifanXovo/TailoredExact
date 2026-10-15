@@ -1,0 +1,104 @@
+{
+  "schema": "r121-complete-local-delivery-v1",
+  "passed": true,
+  "scientific_commit": "afee0f53c932139c07a7281da4c26a19412f9257",
+  "stage": {
+    "execution_stage": "COMPLETE",
+    "stage": "ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK",
+    "conditions": {
+      "three_once_only_postfreeze_new_inputs": true,
+      "all_three_new_primary_evaluable": true,
+      "new_primary_at_least_two_WIN_at_most_one_LOSS": true,
+      "at_least_two_new_D1_native_exposures": true,
+      "exposed_new_material_M_B_gain_or_new_certificate": true,
+      "all_five_primary_evaluable": true,
+      "no_severe_primary_risk": true,
+      "D1_certificate_count_preserved": true,
+      "both_fixed_Seed1_blocks_complete": true
+    },
+    "veto": {
+      "any_of_five_severe_D1_P": false,
+      "two_or_more_new_D1_P_LOSS": false,
+      "D1_fewer_certificates_than_M_B": false
+    },
+    "formal_arms": 16,
+    "formal_pairs": 18,
+    "certificate_counts": {
+      "D1": 1,
+      "M_B": 1
+    },
+    "new_problem_denominator": 3,
+    "known_role_Seed1_blocks": 2,
+    "blockers": [],
+    "default_ENS_changed": false,
+    "D0_not_promoted": true,
+    "no_automatic_further_batch": true,
+    "statistical_significance_claim": false
+  },
+  "resource": {
+    "paid_starts": 31,
+    "paid_outer_seconds": 35578.67575955391,
+    "remaining_starts": 9,
+    "remaining_outer_seconds": 12421.32424044609,
+    "qualification_starts": 10,
+    "qualification_seconds": 670.1436495780945,
+    "unclosed": [],
+    "total_limits": [
+      40,
+      48000
+    ],
+    "qualification_limits": [
+      12,
+      1800
+    ],
+    "formal_nominal_seconds": 37200,
+    "management_reserve": 600,
+    "failed_fees_retained": true,
+    "failed_declared_attempts_not_refunded": true,
+    "nested_native_seconds_added": false,
+    "engineering_separate": true,
+    "compiler_receipts": [
+      {
+        "path": "results/unified_exact_round121/engineering/reference_compile01/receipt.json",
+        "exit_code": 1,
+        "seconds": 4.767992299995967,
+        "Optimize": 0,
+        "native_starts": 0,
+        "production_PE_SHA_after": "5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba",
+        "exporter_SHA": null
+      },
+      {
+        "path": "results/unified_exact_round121/engineering/reference_compile02/receipt.json",
+        "exit_code": 0,
+        "seconds": 2.954601699995692,
+        "Optimize": 0,
+        "native_starts": 0,
+        "production_PE_SHA_after": "5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba",
+        "exporter_SHA": "80af0af46b8df801e5d9a4be15bb09121e00495683f813ffb4d61f490f40f442"
+      }
+    ],
+    "known_compile_seconds": 7.722593999991659,
+    "human_seconds": "unknown",
+    "engineering_total": "not claimed; scoped receipts"
+  },
+  "actual_independent_review_SHA": "0de10dc61d07a1021a945af7012383b9fd9eeaef1ed726ce1a397db8a116c355",
+  "actual_independent_review_source_SHA": "76d08835a28283958f8933f6aa5383564f3c21352f20f6c8691d44dc599df27b",
+  "actual_restored_check_SHA": "8d378ed209c4f5cdd588583ebf19dcccd8bc99556f83614fc229e66642ed8049",
+  "actual_restore_scope_SHA": "9625ff7cb5029dc1fbd3db5f4fdd512596bdaa07625c4381b79ce4aa23736f83",
+  "publication_only_scientific_snapshot_document_updates": {
+    "RESUME.md": {
+      "scientific_snapshot_SHA": "9f12bc344e0fcf2a58d6f17a1fa25bde78c2820b66dfc44c2ef38c2625311721",
+      "current_SHA": "98c64769c11b5b7c17fbf20c4d49ab35dcc77caaf9b6955f11f1ffcb67ea1dea"
+    },
+    "resumption/latest_execution_state.json": {
+      "scientific_snapshot_SHA": "c1981b634357324920cd216a797dfd1798a853d16c918ec53bc15bd905bb3454",
+      "current_SHA": "4efc9f677f3f7faa647f4387b52806fedc7243589bf6de977fc3c2c947b68af5"
+    }
+  },
+  "delivery_summary_SHA": "fe8ff3c4154393380013a84b5f60ad7c2eee492f6ba3da1ccef72fef26c54b89",
+  "remote_status_not_yet_attested": true,
+  "receipt_does_not_attest_future_commits": true,
+  "Optimize": 0,
+  "native_starts": 0,
+  "observed_unix": 1792088835.4005778
+}

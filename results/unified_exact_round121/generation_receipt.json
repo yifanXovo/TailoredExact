@@ -1,0 +1,63 @@
+{
+  "generated_UTC": "2026-10-15T05:07:49.525160+00:00",
+  "inputs": [
+    {
+      "id": "Q30-C2-B",
+      "input_sha256": "9d9737dc36819cf8648aec820b456504bc7f26bf3cde474de351da2e0d34596c",
+      "total_initial": 211,
+      "total_target": 211,
+      "sum_weights": 12.900832,
+      "lambda_sum_weights": 1.9351247999999999,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.18954093443827516,
+        "P": 4.462812060822511,
+        "lambda_P": 0.6694218091233767,
+        "F": 0.8589627435616518,
+        "duration": 0,
+        "all_loads": 0
+      }
+    },
+    {
+      "id": "Q40-R2-S",
+      "input_sha256": "ca501c5b72642336ec252c78204fd9b1db25523f1f5a08027abb1ab496f10d84",
+      "total_initial": 263,
+      "total_target": 303,
+      "sum_weights": 19.842984,
+      "lambda_sum_weights": 2.9764476,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.3925552394489895,
+        "P": 12.504137666089466,
+        "lambda_P": 1.8756206499134198,
+        "F": 2.2681758893624093,
+        "duration": 0,
+        "all_loads": 0
+      }
+    },
+    {
+      "id": "Q50-C2-U",
+      "input_sha256": "b2a1910b9f07820d0c60ba596ab5afa31f066bfe265b8535c948b67c6ddce119",
+      "total_initial": 366,
+      "total_target": 316,
+      "sum_weights": 17.355387,
+      "lambda_sum_weights": 2.60330805,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.28851380548187333,
+        "P": 10.42976182994228,
+        "lambda_P": 1.564464274491342,
+        "F": 1.8529780799732154,
+        "duration": 0,
+        "all_loads": 0
+      }
+    }
+  ],
+  "recipe_commit": "4a205b322a1ca94940479b53b2f87d4c79778318",
+  "unique_new_input_files_written": 3,
+  "no_H_LP_MIP_or_difficulty_filter": true,
+  "no_redraw": true,
+  "Optimize": 0,
+  "native_starts": 0,
+  "engineering_seconds": 0.1994840999977896
+}

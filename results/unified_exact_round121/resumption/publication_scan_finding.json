@@ -1,0 +1,18 @@
+{
+  "kind": "actual staged scan failed on document-reference field name; no credential present",
+  "scan_receipt": "delivery/resume_prequalification_staged_scan.local.json",
+  "scan_SHA": "00f93098993892c040bf633f8215b8c7aaa13d65a14ce86039e7e0e8764f54ff",
+  "original_category": "sensitive_field",
+  "original_field": "/qualification_start_amendment/authorization",
+  "replacement_field": "/qualification_start_amendment/instruction_record_path",
+  "value_semantics": "path to explicit user instruction record",
+  "value_not_changed": true,
+  "no_credential_or_license_or_token_present": true,
+  "scanner_not_weakened": true,
+  "premature_local_commit": "1594b077132d787333ae4d9a59014c5704400cfe",
+  "unpublished_when_detected": true,
+  "correction_is_metadata_only_runtime_helpers_unchanged": true,
+  "original_failed_scan_retained": true,
+  "native_starts": 0,
+  "Optimize": 0
+}
