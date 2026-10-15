@@ -1,0 +1,76 @@
+{
+  "paid_starts": 31,
+  "paid_outer_seconds": 32358.098361730576,
+  "remaining_starts": 9,
+  "remaining_outer_seconds": 15641.901638269424,
+  "qualification_starts": 16,
+  "qualification_seconds": 817.8110692501068,
+  "unclosed": [],
+  "maximum_starts": 40,
+  "maximum_outer_seconds": 48000,
+  "qualification_maximum_starts": 16,
+  "qualification_maximum_outer_seconds": 3600,
+  "failed_fees_retained": true,
+  "never_started_positions_not_charged_as_process_launches": true,
+  "all_actual_or_uncertain_child_starts_charged": true,
+  "outer_upper_includes_exit_observation_delay": true,
+  "nested_native_seconds_added": false,
+  "engineering_separate": true,
+  "compilation_receipts": [
+    {
+      "path": "results/unified_exact_round120/engineering/build01_receipt.json",
+      "SHA": "1e2c73d41ce6a1fc7ab9b0de647b7430b05860cf8e1d9f589a04b0cad919e7d1",
+      "seconds": 47.0928263,
+      "Optimize": 0,
+      "exit_code": 1
+    },
+    {
+      "path": "results/unified_exact_round120/engineering/build02_receipt.json",
+      "SHA": "d01f8cd9a48c74ea27ae144e5e40877dbc3e651ff5a294884f2ad973a44ee74e",
+      "seconds": 77.9385607,
+      "Optimize": 0,
+      "exit_code": 1
+    },
+    {
+      "path": "results/unified_exact_round120/engineering/build03_receipt.json",
+      "SHA": "7cc8393999c68931e4ac9b011be840e5a2e5f70be08c54c89643cd1a10068e3d",
+      "seconds": 7.5898805,
+      "Optimize": 0,
+      "exit_code": 0
+    },
+    {
+      "path": "results/unified_exact_round120/engineering/build04_receipt.json",
+      "SHA": "154cf6a422acb714709dcaa24d2cf72fa5c5019748ae92bbe0e7e72f4d480037",
+      "Optimize": 0,
+      "seconds": 17.0501691,
+      "exit_code": 0
+    },
+    {
+      "path": "results/unified_exact_round120/engineering/configure01_receipt.json",
+      "SHA": "f025850a9b537a4a6ce8156931215742ea37dd2e27b4ef4c89abf81e2c0eed5a",
+      "seconds": 2.5648276,
+      "Optimize": 0,
+      "exit_code": 0
+    },
+    {
+      "path": "results/unified_exact_round120/engineering/old_tail_build_receipt.json",
+      "SHA": "520e0b93d23425117cc6340348c189ba76a6e4403843853b4c447b9f9e5aaed9",
+      "Optimize": 0,
+      "linked_existing_original_core": true,
+      "seconds": 3.6727641,
+      "exit_code": 0
+    },
+    {
+      "path": "results/unified_exact_round120/engineering/qualification_constant_build05_receipt.json",
+      "SHA": "9f0c485409f189fd1fcfb82dd63537f8705bd001a86b7ecf541c231f8e586be7",
+      "Optimize": 0,
+      "production_PE_relinked": false,
+      "exit_code": 0,
+      "seconds": 3.2946724
+    }
+  ],
+  "recorded_compile_configure_seconds": 159.20370069999998,
+  "later_packing_recovery_review_and_remote_receipts_separate": true,
+  "engineering_total_seconds": "not claimed; separately scoped receipts",
+  "human_seconds": "unknown"
+}

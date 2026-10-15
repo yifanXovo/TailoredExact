@@ -27,6 +27,7 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(EXACT_EBRP_LIB_SOURCES
+  src/Round120NativeProof.cpp
   src/Round119ProofContraction.cpp
   src/Round105Decomposition.cpp
   src/Round106Events.cpp
@@ -327,6 +328,12 @@ add_executable(Round112ReferenceBatch scripts/round112_reference_batch.cpp)
 if(EXACT_EBRP_ENABLE_GUROBI AND WIN32)
   add_executable(Round119Qualification tests/round119_qualification.cpp)
   target_link_libraries(Round119Qualification PRIVATE exact_ebrp_core)
+  add_executable(Round120Qualification tests/round120_qualification.cpp)
+  target_link_libraries(Round120Qualification PRIVATE exact_ebrp_core)
+  target_include_directories(Round120Qualification PRIVATE "${GUROBI_INCLUDE_DIR}")
+  add_executable(Round120LpDiagnostics tests/round120_lp_diagnostics.cpp)
+  target_link_libraries(Round120LpDiagnostics PRIVATE exact_ebrp_core)
+  target_include_directories(Round120LpDiagnostics PRIVATE "${GUROBI_INCLUDE_DIR}")
 endif()
 target_link_libraries(Round112ReferenceBatch PRIVATE exact_ebrp_core)
 target_link_libraries(Round65ReferenceBuild PRIVATE exact_ebrp_core)

@@ -1,0 +1,347 @@
+{
+  "executor": "/root/round120_extra_review",
+  "kind": "light follow-up source/receipt and finite saved-JSON comparison; not reconstruction/native reproduction",
+  "started_UTC": "2026-10-15T02:43:55.403284+00:00",
+  "scientific_commit": "75c4839f3b85f67f8eeb6c4700e0452d5204dd51",
+  "Optimize": 0,
+  "new_native_starts": 0,
+  "compilation": 0,
+  "Git_calls": 0,
+  "package_operations": 0,
+  "reader_rebuilds_executed_in_this_review": 0,
+  "scope": "read executed recipe, unchanged original runner/readers/normalizer/fleet_key, export/restore/attempt/completion receipts and docs; compare complete stored JSON and finite derived sidecars; no full math/model audit rerun",
+  "independent_comparison_method": "new recursive typed comparison of every dict key, array element, scalar and value; only complete root path component prefixes and their slash separators normalized; no keys/fields removed or numeric rounding",
+  "complete_stored_JSON_comparisons": [
+    {
+      "field_differences": 0,
+      "counts": {
+        "objects": 77144,
+        "scalar_values": 810782,
+        "arrays": 40758,
+        "root_path_string_changes": 4
+      },
+      "root_normalized_path_examples": [
+        "/mechanism/2/native_audits/0/path",
+        "/mechanism/2/native_audits/1/path",
+        "/mechanism/3/native_audits/0/path",
+        "/mechanism/3/native_audits/1/path"
+      ],
+      "difference_examples": [],
+      "group": 1,
+      "arms": 4,
+      "pairs": 6,
+      "rebuilt_SHA": "ce02510a7f78950047dcd670b445a694590afd42826f3a7be40cfdbd33c818d3",
+      "expected_SHA": "81ac462bfd324ab7381f23c25d0628d59e413faf4fbe7ff231d4555d3fb65fb1"
+    },
+    {
+      "field_differences": 0,
+      "counts": {
+        "objects": 2378,
+        "scalar_values": 30716,
+        "arrays": 1542,
+        "root_path_string_changes": 4
+      },
+      "root_normalized_path_examples": [
+        "/mechanism/0/native_audits/0/path",
+        "/mechanism/0/native_audits/1/path",
+        "/mechanism/1/native_audits/0/path",
+        "/mechanism/1/native_audits/1/path"
+      ],
+      "difference_examples": [],
+      "group": 2,
+      "arms": 4,
+      "pairs": 6,
+      "rebuilt_SHA": "972beaa7609a6512e77de5579e63a98b97ab6379945d4f7d5c9128341b1e3945",
+      "expected_SHA": "9e1af354e91399be04b5df9f799113e705d0c6696e56774f7cf1a58c7d0cf80d"
+    },
+    {
+      "field_differences": 0,
+      "counts": {
+        "objects": 3494,
+        "scalar_values": 43968,
+        "arrays": 2164,
+        "root_path_string_changes": 4
+      },
+      "root_normalized_path_examples": [
+        "/mechanism/1/native_audits/0/path",
+        "/mechanism/1/native_audits/1/path",
+        "/mechanism/3/native_audits/0/path",
+        "/mechanism/3/native_audits/1/path"
+      ],
+      "difference_examples": [],
+      "group": 3,
+      "arms": 4,
+      "pairs": 6,
+      "rebuilt_SHA": "21eeb6a808c5a6d14c8bcbd1ca9cdfa81fc8900d903b45adde152aaebe6904b6",
+      "expected_SHA": "b1c2096b413d7b5f34182176bdffda55f849041c7187de0a967847d793dd5867"
+    }
+  ],
+  "tuple_list_probe": {
+    "memory_equal": false,
+    "stored_JSON_equal": true,
+    "operation_memory_type": "tuple",
+    "operation_stored_type": "list",
+    "method": "executed only the unchanged fleet_key function AST with json; no reader/import/reconstruction executed"
+  },
+  "admission_conditions_independently_recomputed_from_rebuilt_JSON": {
+    "all_core_arms_qualified": true,
+    "actual_D1_registered_installed_completed_native_search": true,
+    "D1_MB_material_complete_gain_or_new_certificate": true,
+    "D1_D0_material_WIN_or_new_certificate": true,
+    "no_severe_D0_regression": true,
+    "no_severe_P_and_fewer_than_two_P_LOSS": true,
+    "D1_complete_certificate_count_preserved": true
+  },
+  "group01_reuse_continuity": "first attempt group01 SHA equals successful reused group01 SHA; no second rebuild of group01 required",
+  "later_recipe_dependency": {
+    "path": "scripts/round120_recovery_completion.py",
+    "SHA": "356ecbe8adfe74af8e2551db19d8f4b287d52c05f37ecdf0166f3892e7db5f94",
+    "in_scientific_carrier": false,
+    "measured_and_restored_source_equal": true,
+    "disclosed_in_safe_restore_and_delivery_summary": true
+  },
+  "checked_unchanged_carrier_helper_sources": [
+    "scripts/analyze_round61.py",
+    "scripts/compare_round112_startup.py",
+    "scripts/generate_citibike443_regional_v1.py",
+    "scripts/qualify_round120.py",
+    "scripts/read_round113.py",
+    "scripts/read_round116.py",
+    "scripts/read_round118.py",
+    "scripts/read_round120.py",
+    "scripts/round100_campaign.py",
+    "scripts/round100_common.py",
+    "scripts/round100_idle.py",
+    "scripts/round101_common.py",
+    "scripts/round103_common.py",
+    "scripts/round107_reader.py",
+    "scripts/round108_decisions.py",
+    "scripts/round108_reader.py",
+    "scripts/round108_scopes.py",
+    "scripts/round109_campaign.py",
+    "scripts/round109_common.py",
+    "scripts/round109_data.py",
+    "scripts/round109_decisions.py",
+    "scripts/round109_interval_pairs.py",
+    "scripts/round109_prepare.py",
+    "scripts/round109_seed_audit.py",
+    "scripts/round109_seed_scope.py",
+    "scripts/round110_common.py",
+    "scripts/round111_decisions.py",
+    "scripts/round111_seed_audit.py",
+    "scripts/round112_audit.py",
+    "scripts/round112_campaign.py",
+    "scripts/round112_common.py",
+    "scripts/round113_audit.py",
+    "scripts/round113_campaign.py",
+    "scripts/round113_common.py",
+    "scripts/round113_progress.py",
+    "scripts/round114_audit.py",
+    "scripts/round114_campaign.py",
+    "scripts/round114_claims.py",
+    "scripts/round114_common.py",
+    "scripts/round114_ps.py",
+    "scripts/round115_campaign.py",
+    "scripts/round115_common.py",
+    "scripts/round115_verify.py",
+    "scripts/round118_call_logs.py",
+    "scripts/round118_data.py",
+    "scripts/round120_campaign.py",
+    "scripts/round120_common.py",
+    "scripts/round120_evidence.py",
+    "scripts/round120_history.py",
+    "scripts/round120_math_audit.py",
+    "scripts/round120_prepare.py",
+    "scripts/round120_release.py",
+    "scripts/round61_research.py",
+    "scripts/round69_research.py",
+    "scripts/round69_topology.py",
+    "scripts/round70_affinity.py",
+    "scripts/round73_qualify.py",
+    "scripts/round73_seed_diagnostic.py",
+    "scripts/round75_qualify.py",
+    "scripts/round75_startup.py",
+    "scripts/round76_qualify.py",
+    "scripts/round76_startup.py",
+    "scripts/round78_audit.py",
+    "scripts/round83_audit_v2.py",
+    "scripts/round86_native_evidence.py",
+    "scripts/round88_a1_g3.py",
+    "scripts/round90_lp_g_g3.py",
+    "scripts/round94_lpg_contemporary.py",
+    "scripts/round94_lpg_formal_recovery_v3.py",
+    "scripts/round96_external.py",
+    "scripts/round96_prepare.py",
+    "scripts/round99_common.py",
+    "scripts/round99_pure_start_audit.py",
+    "src/round65_reference_build.cpp",
+    "tests/round119_lifecycle_qualification.cpp",
+    "tests/round119_qualification.cpp",
+    "tests/round120_lp_diagnostics.cpp",
+    "tests/round120_qualification.cpp",
+    "tests/round120_qualification_support.hpp"
+  ],
+  "finite_unchanged_sidecar_count": 132,
+  "all_12_call_log_views_byte_identical": true,
+  "changed_restored_derived_files": [
+    {
+      "path": "results/unified_exact_round120/campaign/group01/raw/03_F2_S0_MB-D0/round120_event_contract.json",
+      "carrier_and_measured_SHA": "645975c21be78efee03cd881eadf7d0be4ad9ec5ab55e0df2063992643166239",
+      "restored_after_rebuild_SHA": "aba0330411d0f2aa12a579b824367afaec6dadad577febb95742b055ca7909cc",
+      "comparison": {
+        "field_differences": 0,
+        "counts": {
+          "objects": 27,
+          "scalar_values": 245,
+          "arrays": 8,
+          "root_path_string_changes": 2
+        },
+        "root_normalized_path_examples": [
+          "/native_audits/0/path",
+          "/native_audits/1/path"
+        ],
+        "difference_examples": []
+      }
+    },
+    {
+      "path": "results/unified_exact_round120/campaign/group01/raw/04_F2_S0_MB-D1/round120_event_contract.json",
+      "carrier_and_measured_SHA": "d0c081fc7cbe232cb924d6ab3ad4927f66f4375b9911a4c3046032d3a68237ad",
+      "restored_after_rebuild_SHA": "8bbd276abac524e0d15955759ce356b660d16e6c92eaad3aa2030e2bd0ad1312",
+      "comparison": {
+        "field_differences": 0,
+        "counts": {
+          "objects": 30,
+          "scalar_values": 275,
+          "arrays": 8,
+          "root_path_string_changes": 2
+        },
+        "root_normalized_path_examples": [
+          "/native_audits/0/path",
+          "/native_audits/1/path"
+        ],
+        "difference_examples": []
+      }
+    },
+    {
+      "path": "results/unified_exact_round120/campaign/group02/raw/01_R98-C2_S0_MB-D1/round120_event_contract.json",
+      "carrier_and_measured_SHA": "46f211e7da2bf80e587fe3eed8af9e13ecb0e351a3164de256632f696aaf1d9e",
+      "restored_after_rebuild_SHA": "39dfa9a46877f1f114820b451c35b043d7ad06f1b0d5a961c819ffd55c94a8c0",
+      "comparison": {
+        "field_differences": 0,
+        "counts": {
+          "objects": 63,
+          "scalar_values": 605,
+          "arrays": 8,
+          "root_path_string_changes": 2
+        },
+        "root_normalized_path_examples": [
+          "/native_audits/0/path",
+          "/native_audits/1/path"
+        ],
+        "difference_examples": []
+      }
+    },
+    {
+      "path": "results/unified_exact_round120/campaign/group02/raw/02_R98-C2_S0_MB-D0/round120_event_contract.json",
+      "carrier_and_measured_SHA": "050f9c29886634ea3345efefc70b3ca0b575cc073277f9e0bfa78183c5f871a9",
+      "restored_after_rebuild_SHA": "540e1b6cee6ba63423ec9fd71cd1a07c71597dee0384395859d2f3335f8d0aaf",
+      "comparison": {
+        "field_differences": 0,
+        "counts": {
+          "objects": 62,
+          "scalar_values": 595,
+          "arrays": 8,
+          "root_path_string_changes": 2
+        },
+        "root_normalized_path_examples": [
+          "/native_audits/0/path",
+          "/native_audits/1/path"
+        ],
+        "difference_examples": []
+      }
+    },
+    {
+      "path": "results/unified_exact_round120/campaign/group03/raw/02_N40-R1-S_S0_MB-D1/round120_event_contract.json",
+      "carrier_and_measured_SHA": "d9a74c3253dd0d9f1b3b7f56f02b5ebc861d7a539515b5f2911234fa5bbf68ef",
+      "restored_after_rebuild_SHA": "242431248cff635e4d0ee8841356e700e3d9efb7bc77f73998aec03ef97171bf",
+      "comparison": {
+        "field_differences": 0,
+        "counts": {
+          "objects": 35,
+          "scalar_values": 325,
+          "arrays": 8,
+          "root_path_string_changes": 2
+        },
+        "root_normalized_path_examples": [
+          "/native_audits/0/path",
+          "/native_audits/1/path"
+        ],
+        "difference_examples": []
+      }
+    },
+    {
+      "path": "results/unified_exact_round120/campaign/group03/raw/04_N40-R1-S_S0_MB-D0/round120_event_contract.json",
+      "carrier_and_measured_SHA": "4d51f4733e061c9788b183d82b7e04739c1cb7b54841662810961ee1ab0f5e80",
+      "restored_after_rebuild_SHA": "85f207413dbe93500676f1bcae4ae1721917c15b92e45631bc58ecda7ee7e0f4",
+      "comparison": {
+        "field_differences": 0,
+        "counts": {
+          "objects": 29,
+          "scalar_values": 265,
+          "arrays": 8,
+          "root_path_string_changes": 2
+        },
+        "root_normalized_path_examples": [
+          "/native_audits/0/path",
+          "/native_audits/1/path"
+        ],
+        "difference_examples": []
+      }
+    }
+  ],
+  "core_admission_rewrite_byte_identical": true,
+  "exact_reached_write_sites": [
+    {
+      "path": "scripts/round120_evidence.py",
+      "line": 110,
+      "behavior": "event_chain writes derived candidate round120_event_contract.json during mechanism reconstruction; six restored files change only root-prefix paths"
+    },
+    {
+      "path": "scripts/read_round120.py",
+      "line": 35,
+      "behavior": "writes new restored_reconstruction/groupXX/current_core.json"
+    },
+    {
+      "path": "scripts/read_round120.py",
+      "line": 39,
+      "behavior": "writes new reconstruction CSV tables in destination directory"
+    },
+    {
+      "path": "scripts/read_round120.py",
+      "line": 58,
+      "behavior": "admission writes core_admission.json; actual resulting bytes equal carrier"
+    },
+    {
+      "path": "scripts/round120_evidence.py",
+      "line": 126,
+      "behavior": "verify() can write call_log_views.json but is not called by this rebuild path; all twelve actual call_log_views remain byte-identical"
+    }
+  ],
+  "evidence_fallback_assessment": "No original-worktree evidence fallback found: portable() remaps supported absolute evidence strings into passed root; executed recipe installs open-path audit before importing readers and checks module origins. Receipts show 3558 root paths and 62 root modules. Group01 raw rebuild belonged to the preserved original attempt; continuation only rereads its completed JSON/identity.",
+  "boundary_limit": "Python open-path audit and module-origin validation are not an OS sandbox or universal external-I/O monitor. The allowed runtime prefix is broader than a formal stdlib-only sandbox. Source/receipt review found no external evidence input; this review did not re-execute reconstruction.",
+  "export_assessment": "One public_export01 and matching fixed-commit export/restore receipts are recorded; completion recipe has no Git/export operation. No second recorded export or evidence of one found. This is not proof about unrecorded external activity or future commits.",
+  "findings": [
+    {
+      "severity": "scope clarification required; no numerical/recovery failure",
+      "claim": "frozen_reader_source_helpers_and_evidence_unchanged",
+      "actual": "Frozen sources, sealed primary evidence and immutable scientific carrier can remain unchanged, but the original unchanged reader overwrites six expanded derived event_contract files with restored-root path strings. Therefore the generated boolean cannot mean every restored carrier member stays byte-identical after reconstruction.",
+      "remedy": "Retain executed receipt and recipe SHA; append explicit clarification distinguishing initial unpack hash equality, immutable carrier/source/primary evidence, and regenerated derived audit sidecars. Do not silently rewrite the executed receipt."
+    }
+  ],
+  "blocking_recovery_correctness_findings": [],
+  "conclusion": "All 12 arms, 18 pairs and all seven admission conditions are preserved by a complete typed stored-JSON comparison. The tuple/list comparison failure is reproduced from unchanged fleet_key and resolves through the documented JSON representation comparison. The later recipe is a necessary disclosed post-carrier metadata dependency. Only the broad byte-unchanged interpretation requires qualification.",
+  "engineering_seconds": 1.7268966999981785,
+  "pre_computation_source_inspection_seconds": "unmeasured",
+  "human_seconds": "unknown",
+  "completed_UTC": "2026-10-15T02:43:57.129576+00:00"
+}

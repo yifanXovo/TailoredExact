@@ -59,6 +59,8 @@ struct CanonicalCompactModelSpec {
 };
 
 struct CanonicalCompactModelArtifact {
+    bool round120_extended = false, round120_conditional = false;
+    std::string round120_base_sha;
     bool written = false;
     std::filesystem::path path;
     std::string sha256;

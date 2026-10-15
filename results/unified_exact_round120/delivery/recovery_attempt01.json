@@ -1,0 +1,29 @@
+{
+  "scientific_commit": "75c4839f3b85f67f8eeb6c4700e0452d5204dd51",
+  "first_attempt_passed": false,
+  "first_attempt_exit_code": 1,
+  "original_runner": "scripts/round120_release.py restored-check --root .",
+  "failure": "AssertionError: ('restored current core mismatch', 1)",
+  "full_group01_raw_rebuild_completed": true,
+  "group01_JSON_SHA": "ce02510a7f78950047dcd670b445a694590afd42826f3a7be40cfdbd33c818d3",
+  "independent_full_stored_JSON_field_differences_after_only_root_prefix_normalization": 0,
+  "confirmed_cause": "full_H arms fleet operations are Python tuples in memory and JSON arrays on disk",
+  "isolated_probe": {
+    "memory_equal": false,
+    "stored_JSON_equal": true,
+    "memory_operation_type": "tuple",
+    "stored_operation_type": "list"
+  },
+  "raw_reader_and_frozen_helpers_unchanged": true,
+  "one_Git_export_and_same_empty_root_retained": true,
+  "correction": "later separately published receipt recipe compares actual stored JSON artifacts and resumes groups2/3; no data fields discarded",
+  "native_starts": 0,
+  "Optimize": 0,
+  "exact_engineering_seconds": "unmeasured because the first runner did not seal an error receipt",
+  "observed_elapsed_upper_seconds_including_delay_until_record": 517.409947,
+  "process_start_snapshot_UTC": "2026-10-15T02:27:44+00:00",
+  "recorded_UTC": "2026-10-15T02:36:20.409947+00:00",
+  "group01_output_last_write_UTC": "2026-10-15T02:31:43.926489+00:00",
+  "human_seconds": "unknown",
+  "original_failure_preserved": true
+}
