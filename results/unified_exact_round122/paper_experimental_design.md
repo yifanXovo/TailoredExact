@@ -37,34 +37,85 @@ total weights must not be described as a pure scale effect.
 
 The first six groups use Seed0 and four complete methods each: cold
 P-GRB, ENS-C, M-B and MB-D1. The last two repeat PB-B35-B and PB-C50-S
-with fixed Seed1 and all four methods. Method order is exactly the
-source_recipe/argv_freeze schedule; every arm independently pays H,
-models, proofs and Starts. The panel has 32 mandatory positions, 79200
-nominal producer seconds and 48 comparisons (six per group). Its primary
+with fixed Seed1 and all four methods. In the schedule below, P denotes
+cold P-GRB, ENS denotes ENS-C, MB denotes M-B and D1 denotes MB-D1.
+
+| Group | Problem | Gurobi Seed | Serial method order | Cap per arm | Nominal group seconds |
+|---:|---|---:|---|---:|---:|
+| 1 | PB-C20-B | 0 | P → ENS → MB → D1 | 900 | 3600 |
+| 2 | PB-B20-S | 0 | ENS → MB → D1 → P | 900 | 3600 |
+| 3 | PB-C35-U | 0 | MB → D1 → P → ENS | 2400 | 9600 |
+| 4 | PB-B35-B | 0 | D1 → P → ENS → MB | 2400 | 9600 |
+| 5 | PB-C50-S | 0 | D1 → MB → ENS → P | 3600 | 14400 |
+| 6 | PB-B50-U | 0 | P → D1 → MB → ENS | 3600 | 14400 |
+| 7 | PB-B35-B | 1 | ENS → P → D1 → MB | 2400 | 9600 |
+| 8 | PB-C50-S | 1 | MB → ENS → P → D1 | 3600 | 14400 |
+
+Every arm independently pays for its own applicable H, models, proofs and
+Starts. Each group has the same six directed comparisons: D1/P, MB/P,
+ENS/P, D1/MB, D1/ENS and MB/ENS. The panel therefore contains 32 mandatory
+positions, 79200 nominal producer seconds and 48 comparisons. Its primary
 new-problem layer is six Seed0 roles; its two Seed1 blocks are sensitivity
-evidence on the same inputs. No best-of-Seed, substituted Seed0 winner,
-pooled independent-sample win rate or automatic extra batch is formed.
+evidence on the same inputs. All eight groups remain required after an
+unfavorable observation. No best-of-Seed, substituted Seed0 winner, pooled
+independent-sample win rate or automatic extra batch is formed.
 
 Pair decisions reuse the unchanged R108/R120 certificate-first rules.
 For two open methods, own U and qualified L give signed gap=U-L;
 a_U=max(.001,.01*abs(U_control)) and
-a_gap=max(.001,.10*abs(gap_control)). Opposing material endpoint changes
-remain MIXED. Severe open regression requires both the original five
-percent U threshold and original gap threshold. For two certificates,
-a_t=max(30,.10*time_control); only actual certified times are divided.
-Necessary missing evidence is UNEVALUABLE, without shrinking denominators.
+a_gap=max(.001,.10*abs(gap_control)). A material decrease in either U or
+gap with no material increase is WIN; the reverse is LOSS; opposing
+material changes are MIXED; otherwise the comparison is TIE. Severe open
+regression requires both
+U_candidate-U_control >= max(.001,.05*abs(U_control)) and
+gap_candidate-gap_control >= max(.005,.25*abs(gap_control)).
 
-The single stage decision first prioritizes proven bad source/pruning,
-then necessary execution/identity/physical/clock/storage/recovery blockers,
-then the fixed severe/ordinary-loss vetoes. Positive candidate selection
-requires all the finite support/exposure/certificate/Seed criteria in the
-goal and round122_decision.py. Pure performance loss, all-open results or
-unexposed D1 are valid observations. Even a positive decision does not
-replace ENS-C default or establish universal acceleration/statistical
-significance. New V35/V50 nonzero certificates are counted separately.
+A candidate-only qualified certificate is WIN. A control-only qualified
+certificate is LOSS and severe. With two certificates, the production
+time threshold is a_t=max(30,.10*time_control): a saving or excess at least
+a_t gives WIN or LOSS, respectively; smaller changes give TIE. A certified
+time regression is severe only if time_candidate >= 2*time_control and
+time_candidate-time_control >= 120 seconds. Only actual certified times
+are divided. Tiny signed gaps are retained; a negative signed gap is not
+used in a percentage-gap ratio. Missing necessary evidence remains
+UNEVALUABLE, without shrinking denominators.
 
-The outer resource ceiling is100000 seconds. Qualification/necessary native
-diagnosis has a3000-second soft plan and6000-second authorized ceiling,
+The single stage decision uses the following priority order. Proven
+invalid proof sources or pruning take PROOF_RELIABILITY_PRIORITY.
+Necessary execution, input/production identity, physical, clock, storage
+or recovery evidence that cannot be established within authorized
+resources takes BLOCKED. Once all 32 positions are valid, any severe D1/P
+regression among the eight groups, or at least two D1/P LOSS observations
+among the six new Seed0 roles, takes DO_NOT_SELECT_D1_AS_PAPER_PRIMARY.
+
+Without those vetoes, FREEZE_D1_AS_PAPER_BENCHMARK_CANDIDATE requires all
+of these finite conditions:
+
+- All six new Seed0 D1/P comparisons are evaluable, with at least four
+  WIN and at most one LOSS.
+- At least three new roles actually execute an installed D1 extension,
+  including at least one V35 or V50 role. At least two exposed new roles
+  have a material D1/M-B WIN or a certificate that M-B does not obtain.
+- D1 obtains at least as many certificates as M-B across the six new
+  roles. Individual exchanges are allowed; there is no separate ENS-C
+  dominance gate.
+- Both fixed Seed1 D1/P comparisons are evaluable, non-LOSS and nonsevere,
+  and remain displayed beside their corresponding Seed0 observations.
+- No proof reliability risk remains unresolved.
+
+All other complete panels take BENCHMARK_MIXED_NO_NEW_PRIMARY_SELECTION.
+Pure performance loss, all-open results or unexposed D1 remain valid
+observations. Every outcome ends this batch without automatic further
+sampling. A positive decision freezes a paper candidate while retaining
+ENS-C as default; it does not establish universal acceleration or
+statistical significance. A nonpositive decision retains an existing
+complete method as the paper reference, chosen from the actual tradeoffs
+and stated explicitly in the final report. New V35/V50 nonzero numerical
+certificates are counted separately from zero certificates and open
+quality improvements.
+
+The outer resource ceiling is 100000 seconds. Qualification/necessary native
+diagnosis has a 3000-second soft plan and 6000-second authorized ceiling,
 with no hard process-count gate. Full actual and uncertain starts,
 failed attempts, nested native timers and engineering/review/publication
 scopes are retained. Storage/path measures support reproducible execution;

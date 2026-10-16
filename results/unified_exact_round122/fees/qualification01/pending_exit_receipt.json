@@ -1,0 +1,48 @@
+{
+  "exit_code": 0,
+  "outer_seconds_lower": 431.64274764823494,
+  "qualification": true,
+  "actual_native_children": 5,
+  "uncertain_native_children": 0,
+  "child_states": [
+    {
+      "id": "H100",
+      "arm": "P-GRB",
+      "seed": 1,
+      "state": "actual_started",
+      "PID_receipt_SHA": "cec2578f0eb9dc8476cd028c5342812e9a0e9a792fee2a9400fe333d5c7707fa"
+    },
+    {
+      "id": "H100",
+      "arm": "ENS-C",
+      "seed": 1,
+      "state": "actual_started",
+      "PID_receipt_SHA": "e37b7fbbaacd41c4ea072455180dafbfe23a2cc80562bf62ec294636acbe8da0"
+    },
+    {
+      "id": "H100",
+      "arm": "M-B",
+      "seed": 1,
+      "state": "actual_started",
+      "PID_receipt_SHA": "76239b5e37a24453debec73325b0364e8ab0de99bd6142c6acf6281664abd029"
+    },
+    {
+      "id": "H100",
+      "arm": "MB-D1",
+      "seed": 1,
+      "state": "actual_started",
+      "PID_receipt_SHA": "47c80c19e37417cdb7cbce7a2b2ac7a462d8f4e8bbecdafcc934d4520b506091"
+    },
+    {
+      "id": "H100",
+      "arm": "MB-D1",
+      "seed": 0,
+      "state": "actual_started",
+      "PID_receipt_SHA": "f81dcdd7e257d3aa41ddc6dfd637783f122c47994193e194496e4614cba206be"
+    }
+  ],
+  "wrapper_pid": 31392,
+  "conservative_process_starts": 6,
+  "necessary_trailer_complete": true,
+  "nested_native_seconds_added": false
+}

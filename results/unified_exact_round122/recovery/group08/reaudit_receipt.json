@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "UTC": "2026-10-16T17:00:21.356540+00:00",
+  "prerecord_SHA": "e2231994800df5c10791eee6c28bb478643b7d07668cb8688522f26695d1cb27",
+  "script_SHA": "a4b94e891fba441df4ae9f14300add80388e8d4af4f1a4bbc37a99414cf2c644",
+  "evidence": {
+    "equivalence": {
+      "changed_assertions": 1,
+      "all_other_AST_identical": true,
+      "original_finalizer_file_SHA": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+      "original_assertion": "assert audited['UB'] + 1e-07 >= upper",
+      "replacement_assertion": "assert _r122_history_guard(root, panel, arm, audited, records, result, upper)",
+      "final_U_L_certificate_assignment_AST_unchanged": true,
+      "all_source_scope_and_bound_checks_retained": true
+    },
+    "semantic_guard_checks": [
+      {
+        "history_U": 0.391713327901773,
+        "final_U": 0.39178055857928196,
+        "final_L": 0.34945085964584033,
+        "witnesses": 156,
+        "bounds": 64,
+        "all_physical_and_bound_inequalities_verified": true,
+        "final_endpoint_unchanged": true,
+        "no_new_solution_bound_or_observation": true
+      }
+    ],
+    "sidecar_names": [
+      "arm_total_receipt.json",
+      "audit.json",
+      "audit_execution_metrics.json",
+      "call_log_views.json",
+      "claim_rejections.json",
+      "computed_seed_scope.json",
+      "independent_evidence.json",
+      "native_claims.json",
+      "postexit_audit_receipt.json",
+      "round120_event_contract.json",
+      "round120_extended_verification.json",
+      "round120_model_contracts.json",
+      "verification_closeout.json"
+    ]
+  },
+  "original_all_P_file_hashes_unchanged": true,
+  "original_failed_fee_and_audit_unchanged": true,
+  "derived_recovery_sidecars": {
+    "postexit_audit_receipt.json": "9c0c17a3c016a01ba18d6fc901dea35955e9804cfdbedd9a12ae02fb05c9f262",
+    "arm_total_receipt.json": "e429ed370b4a10d67c59d1d8c0c3ca90e146f690bb4192e9b84f56a98afd19b9",
+    "computed_seed_scope.json": "32934428710ad1ad7539c2a21a7e3bb21185d329f0f66745193f616b0c6a7e67",
+    "verification_closeout.json": "79c42230d97626fd07caf4b9f57ee4401417becd8671306db1e9f9f2c63e0be6",
+    "round120_extended_verification.json": "9d94fdc061420d9c67d25b493bbfd6ef1a7c43c27ea344a1425d7312338c51b2",
+    "audit_execution_metrics.json": "4f39f83943349a1cc352d36499e14a8c1eaae83c766b707a5e7fd6b17f1e5ecc",
+    "independent_evidence.json": "91c6ea88566b8c7dbe409558f6dbf6b178b255c1d89c5af8df5b185ac0e46d13",
+    "claim_rejections.json": "e7b75e9dea998800a901cdffb50a41d06a8140d7673d7d8ae15ee11d91cb8fd0",
+    "audit.json": "1735794d64fc52524a54efbbbe1878d1daaf4665340b3dfe92004dd7b2e70dc8",
+    "call_log_views.json": "863027996adfe6a0696242f6caa06ea7ee073142fcb521defb8a00ed80a28df8",
+    "native_claims.json": "eb4714eedb6f9663fcab37525bc91363635c4cfc7d46e6ac4a190ba25a3ff261",
+    "round120_model_contracts.json": "e50ead34ef98c03e5e14de5b422a49e9bbec81c259e3120d40d9ed07d0465f81"
+  },
+  "final_U": 0.39178055857928196,
+  "final_L": 0.34945085964584033,
+  "certificate": false,
+  "T_produce": 3570.6722909999953,
+  "T_verify": 930.1450991000165,
+  "T_total": 4500.817390100012,
+  "waiting_gap_retained": true,
+  "Optimize": 0,
+  "native_starts": 0
+}

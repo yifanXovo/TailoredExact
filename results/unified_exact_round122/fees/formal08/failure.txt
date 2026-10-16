@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round122_campaign.py", line 28, in billed
+    execute(l,i,arm_tick,arm_unix)
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round122_campaign.py", line 11, in execute
+    supervised(l,i,tick);finish_producer(l,tick,t0unix);verify(l,i)
+                                                        ^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round122_evidence.py", line 147, in verify
+    with logs.activate(view):value=verifier.verify(l,i)
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round115_verify.py", line 24, in verify
+    value=adapter(l,read(d/'observations.json'),read(d/'completion.json'),i)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round120_evidence.py::explicit_R120_evidence", line 26, in adapter
+    e=row['payload'];kind=e['kind'];assert not failure,'publication after failure latch'
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round113_audit.py", line 222, in adapter
+    value=inherited.adapter(l,observations,c,i);last_metrics=dict(inherited.last_metrics)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round112_audit.py", line 55, in adapter
+    audited=inherited.adapter(launch,observations,completion,identity)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round111_seed_audit.py", line 116, in adapter
+    try:return inherited.adapter(launch,records,completion,identity)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round109_seed_audit.py", line 69, in adapter
+    try:return original.adapter(launch,records,completion,identity)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round120_evidence.py::explicit_R120_evidence", line 20, in adapter
+    identity=None
+  File "E:\codes\ExactEBRP-work\worktrees\round122\scripts\round86_native_evidence.py", line 182, in finalize_endpoint
+    assert audited['UB']+1e-7 >= upper
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

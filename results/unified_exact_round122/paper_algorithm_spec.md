@@ -8,9 +8,11 @@ and Gurobi 13.0.2 DLL SHA256
 All 216 production-source bindings are retained in production_identity.json.
 The original executable is reused without compilation or algorithm changes.
 Cold P-GRB is the primary benchmark. ENS-C remains the project default;
-M-B is a supported complete-method reference; MB-D1 is the frozen candidate
-being evaluated. Its final paper selection is determined only after the
-whole preregistered panel. No method dispatch depends on instance identity,
+M-B is the retained existing complete-method paper reference; MB-D1 is the
+frozen tested candidate. The completed panel gives
+BENCHMARK_MIXED_NO_NEW_PRIMARY_SELECTION because only one exposed new role
+provides a material D1/M-B gain, below the required two. The complete
+interpretation and reference rationale are in paper_result_interpretation.md. No method dispatch depends on instance identity,
 V, inventory regime, time, Work, observed progress or stagnation.
 
 ## Physical problem and objective

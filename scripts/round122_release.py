@@ -1,8 +1,9 @@
 """One bounded safe carrier, committed export and independent empty-root replay."""
 from round122_common import ROOT,OUT,WORK,TEMP,read,write,sha
 from pathlib import Path
-import argparse,ast,csv,gzip,hashlib,io,json,subprocess,sys,tarfile,time
+import argparse,ast,csv,gzip,hashlib,io,json,subprocess,sys,tarfile,time,urllib.parse,urllib.request
 import publication_security as security
+import round122_group08_recovery as recovery
 from round117_release import Parts
 from round121_release import normalize,typed_equal
 ROUND='results/unified_exact_round122'
@@ -72,7 +73,7 @@ def pack(root):
     write(target/'manifest.json',dict(schema='round122-current-safe-evidence-v1',files=entries,parts=parts,
         current_raw_and_finite_safe_authorities_only=True,no_prior_campaign_or_carrier=True,
         runtime_binaries_license_credentials_HTML_excluded=True,original_root_fallback=False,later_receipts_outside_payload=True,Optimize=0))
-    scan=security.scan_items(security.file_items(root,[target.relative_to(root).as_posix()]))
+    scan=scan_carrier(root,target,parts)
     write(out/'delivery/carrier_scan.json',scan);assert scan['passed'] and scan['archive_members']>=len(entries)
     write(out/'public_pack_receipt.json',dict(files=len(entries),raw_bytes=sum(v['bytes'] for v in entries.values()),parts=parts,
         manifest_SHA=sha(target/'manifest.json'),complete_decompressed_member_scan=True,Optimize=0,native_starts=0,engineering_seconds=time.perf_counter()-tick))
@@ -93,6 +94,62 @@ class Joined:
             else:self.stream.close();self.stream=None
         return b''.join(out)
 
+def scan_carrier(root,target,parts):
+    """Use the existing member/content checks without joining all compressed parts."""
+    tick=time.perf_counter();scanner=security.Scanner();scanner.files=len(parts)+1
+    class LocalParts:
+        def extractfile(self,name):return (root/name).open('rb')
+    manifest_path=target/'manifest.json';label=(target/'evidence.tar.gz').relative_to(root).as_posix()
+    try:
+        scanner.payload(manifest_path.read_bytes(),manifest_path.relative_to(root).as_posix())
+        scanner.tar(Joined(LocalParts(),[p['path'] for p in parts]),label,1)
+    except Exception as exc:
+        scanner.errors.append(dict(path=label,error_class=type(exc).__name__))
+    return dict(tool_version=security.VERSION,passed=not scanner.findings and not scanner.errors,files=scanner.files,
+        archive_members=scanner.members,bytes_scanned=scanner.bytes,archives=scanner.archives,findings=scanner.findings,errors=scanner.errors,
+        carrier_traversal='streamed persisted parts with unchanged Scanner member/recursive payload checks',
+        raw_values_emitted=False,network_requests=0,native_starts=0,Optimize=0,engineering_seconds=time.perf_counter()-tick)
+
+def public_carrier_export(commit,expected_manifest,archive):
+    """Fetch only the pinned public manifest/parts, streaming parts into one tar."""
+    assert len(commit)==40 and all(c in '0123456789abcdef' for c in commit)
+    manifest=json.loads(expected_manifest);assert manifest['schema']=='round122-current-safe-evidence-v1'
+    manifest_name=ROUND+'/compact_evidence/manifest.json';prefix=ROUND+'/compact_evidence/'
+    names=[manifest_name]+[p['path'] for p in manifest['parts']]
+    assert manifest['parts'] and len(names)==len(set(names))
+    for part in manifest['parts']:
+        security.Scanner.member_name(part['path']);assert part['path'].startswith(prefix)
+        assert type(part['bytes']) is int and 0<part['bytes']<=32*1024*1024
+        assert len(part['SHA'])==64 and all(c in '0123456789abcdef' for c in part['SHA'])
+    archive=Path(archive).resolve();assert archive.is_relative_to(TEMP.resolve()) and not archive.exists()
+    for p in [archive.parent,*archive.parents]:assert not p.is_symlink() and not p.is_junction()
+    base='https://raw.githubusercontent.com/yifanXovo/TailoredExact/'+commit+'/'
+    def request(name):
+        url=base+urllib.parse.quote(name,safe='/')
+        return url,urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'TailoredExact-Round122-public-restore'}),timeout=45)
+    url,response=request(manifest_name)
+    with response:actual_manifest=response.read(len(expected_manifest)+1)
+    assert actual_manifest==expected_manifest,'public committed manifest differs from frozen local metadata'
+    fetched=[dict(path=manifest_name,url=url,bytes=len(actual_manifest),SHA=security.sha(actual_manifest))]
+    class Hashed:
+        def __init__(self,source):self.source=source;self.count=0;self.hash=hashlib.sha256()
+        def read(self,n=-1):
+            data=self.source.read(n);self.count+=len(data);self.hash.update(data);return data
+    with archive.open('xb') as target,tarfile.open(fileobj=target,mode='w') as published:
+        member=tarfile.TarInfo(manifest_name);member.size=len(actual_manifest);member.mode=0o644;member.mtime=0
+        published.addfile(member,io.BytesIO(actual_manifest))
+        for part in manifest['parts']:
+            url,response=request(part['path'])
+            with response:
+                stream=Hashed(response);member=tarfile.TarInfo(part['path']);member.size=part['bytes'];member.mode=0o644;member.mtime=0
+                published.addfile(member,stream)
+                assert stream.count==part['bytes'] and stream.hash.hexdigest()==part['SHA'],'public part hash/size mismatch'
+                assert response.read(1)==b'','public part has unexpected trailing bytes'
+            fetched.append(dict(part,url=url))
+    return dict(source='actual public HTTPS export of pinned committed safe carrier members',scientific_commit=commit,
+        fetched=fetched,application_credentials_supplied=False,local_git_archive_used=False,
+        no_local_part_or_original_raw_fallback=True,streamed_parts=True)
+
 def restore(root,commit,destination):
     tick=time.perf_counter();root=Path(root).resolve();out=root/ROUND;dest=Path(destination).resolve()
     assert not dest.exists() and dest.is_relative_to((WORK/'restore').resolve()) and not dest.is_relative_to(root)
@@ -101,7 +158,12 @@ def restore(root,commit,destination):
     export=TEMP/'public-export';export.mkdir(parents=True,exist_ok=False)
     manifest=read(out/'compact_evidence/manifest.json');names=[ROUND+'/compact_evidence/manifest.json']+[p['path'] for p in manifest['parts']]
     archive=export/'public_carrier.tar'
-    subprocess.run(['git','archive','--format=tar','--output='+str(archive),commit,'--',*names],cwd=root,check=True)
+    try:public=public_carrier_export(commit,(out/'compact_evidence/manifest.json').read_bytes(),archive)
+    except Exception as exc:
+        write(out/'delivery/public_export_failure_receipt.json',dict(scientific_commit=commit,archive=str(archive),
+            error_class=type(exc).__name__,actual_public_export_complete=False,partial_evidence_retained=True,
+            no_local_part_or_original_raw_fallback=True,Optimize=0,native_starts=0))
+        raise
     restored=set()
     with tarfile.open(archive) as published:
         raw_manifest=published.extractfile(names[0]).read();actual=json.loads(raw_manifest);assert actual==manifest
@@ -122,8 +184,8 @@ def restore(root,commit,destination):
                 restored.add(member.name)
     assert restored==set(manifest['files'])
     write(dest/'public_restore_origin.json',dict(scientific_commit=commit,published_manifest_SHA=security.sha(raw_manifest),
-        manifest=manifest,fresh_empty_root=str(dest),all_member_hashes_equal=True,source='actual committed safe carrier export',no_original_raw_fallback=True))
-    write(out/'delivery/public_export_restore_receipt.json',dict(scientific_commit=commit,one_actual_git_archive=True,archive=str(archive),archive_SHA=sha(archive),
+        manifest=manifest,fresh_empty_root=str(dest),all_member_hashes_equal=True,source=public['source'],public_HTTP_export=public,no_original_raw_fallback=True))
+    write(out/'delivery/public_export_restore_receipt.json',dict(scientific_commit=commit,one_actual_public_carrier_export=True,public_HTTP_export=public,archive=str(archive),archive_SHA=sha(archive),
         fresh_empty_root=str(dest),members=len(restored),all_member_hashes_equal=True,no_original_raw_fallback=True,
         Optimize=0,native_starts=0,engineering_seconds=time.perf_counter()-tick,does_not_attest_future_replay=True))
     print(json.dumps(dict(members=len(restored),empty_root=str(dest))),flush=True)
@@ -141,18 +203,19 @@ def restored_check(root):
     sys.addaudithook(boundary);csv.field_size_limit(64*1024*1024)
     import read_round122 as reader
     from round122_decision import decide
+    from round122_finish_report import paper_arm
     assert reader.ROOT==root
     values=[]
-    for n in range(1,9):
-        dest=out/'restored_reconstruction'/f'group{n:02d}';reader.rebuild_group(n,dest)
-        actual=read(dest/'current_core.json');expected=read(out/f'reconstruction/group{n:02d}/current_core.json')
-        typed_equal(normalize(actual,[root,measured]),normalize(expected,[root,measured]));values.append(actual)
+    with recovery.evidence_view(root):
+        for n in range(1,9):
+            dest=out/'restored_reconstruction'/f'group{n:02d}';reader.rebuild_group(n,dest)
+            actual=read(dest/'current_core.json');expected=read(out/f'reconstruction/group{n:02d}/current_core.json')
+            typed_equal(normalize(actual,[root,measured]),normalize(expected,[root,measured]));values.append(actual)
     stage=decide(values,True,proof_risk=any(v['adjudication']['rejections'] for v in values))
     typed_equal(stage,read(out/'stage_decision.json'))
     pairs=[p for v in values for p in v['pairs']];typed_equal(pairs,read(out/'all48_pairs.json'))
     # Check every stored arm with the explicit, purely editorial legacy-panel annotation.
-    arms=[dict(a,legacy_panel_formal_flag=a.get('formal_performance'),formal_performance=True,seed=v['group']['seed'],
-        group_number=v['group']['number'],source=v['group']['source'],panel_kind=v['group']['panel_kind']) for v in values for a in v['arms']]
+    arms=[paper_arm(a,v['group']) for v in values for a in v['arms']]
     typed_equal(normalize(arms,[root,measured]),normalize(read(out/'all32_arms.json'),[root,measured]))
     changes=[]
     for name,entry in manifest['files'].items():

@@ -1,0 +1,513 @@
+{
+  "decision": "ACCEPT",
+  "scope": "Corroboration of sealed five-CLI qualification evidence after the independently pre-reviewed formal campaign began.",
+  "UTC": "2026-10-15T21:04:32.654717+00:00",
+  "reviewer": "independent executor /root/contract_review",
+  "script_SHA": "7c1b0aa9a330ad7a2e8620899735c045d376d08d3bef632297481beb67fa8062",
+  "candidate_identity_SHA": "60e14fea938cd37bbcd408c6f01ec66aad5a8298b40cb67660048f7d5ffe110b",
+  "pre_contract_SHA": "fceef4ec6a153a396a578e9ecf18146bc97e41e2c7f3eb867b3ec315f0613041",
+  "performance_admission_SHA": "c457962ef477ec85016494a6b280d54d1a106ed4e87f7f3927e5f9807f4b0e98",
+  "helper_binding_unchanged": true,
+  "source_binding_unchanged": true,
+  "helper_files": 92,
+  "source_files": 216,
+  "qualification_core_SHA": "3dccaa3b5dbcaca31ad509c7f323741fb10fbcb08e540d765550ce6bb26b4379",
+  "full_H_comparison_SHA": "70af00dee56d2b4d515efa5fc51b02541a1686207683c116691600ce52feeccc",
+  "five_actual_CLI": [
+    {
+      "arm": "P-GRB",
+      "seed": 1,
+      "PID": 30452,
+      "producer_receipt_SHA": "c741e8653fa6e6a0d5d931796233aa801d44885694d392a68fb7db3ae72c6b64",
+      "seal_SHA": "70f4702417c53fc0af508c23d99e414317cffd71648fe4396618095a294c1c3b",
+      "audit_SHA": "04d11ed8155fc4fe45a0fbaa0f552bc590ae4dbe724612b17773909cc177b5d5",
+      "T_produce": 90.5249688999902,
+      "T_verify": 1.0119386999867857,
+      "T_total": 91.53690759997698,
+      "U": 0.229952349996756,
+      "L": 0.10288343789159975,
+      "signed_gap": 0.12706891210515625,
+      "certificate": false,
+      "independent_physical_F": 0.229952349996756,
+      "calls": [
+        {
+          "call": 1,
+          "leaf": "",
+          "solve_kind": "MIP",
+          "model_SHA": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+          "lower_g": 0,
+          "upper_g": 0.95,
+          "cutoff": 0,
+          "raw_native_preconditions": 0
+        }
+      ],
+      "Starts": [],
+      "D1_installed": 0,
+      "D1_extended_Optimize": 0,
+      "legacy_formal_performance": false,
+      "validity_field": "formal_protocol_qualified"
+    },
+    {
+      "arm": "ENS-C",
+      "seed": 1,
+      "PID": 13904,
+      "producer_receipt_SHA": "2a82f5a4be1ae7ae2001349a53f3c7d560cb791fe6f38ce945fdbd57cc52dc2a",
+      "seal_SHA": "4f868354a23458ad037895511ce400d779f9d5c84ecdeeb77a436c341751b20d",
+      "audit_SHA": "4b63075c4a88d40842f8212fa4de5ffd64950b01cc49384dcafb944c1e2d8e9f",
+      "T_produce": 85.56441700001596,
+      "T_verify": 4.738335200003348,
+      "T_total": 90.30275220001931,
+      "U": 0.160589067255049,
+      "L": 0.16058906725504915,
+      "signed_gap": -1.3877787807814457e-16,
+      "certificate": true,
+      "independent_physical_F": 0.160589067255049,
+      "calls": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "solve_kind": "LP",
+          "model_SHA": "b971967a288114623726e41bab642bb91131b34b87ebb0a9b81aaf3d37246563",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "solve_kind": "LP",
+          "model_SHA": "bbafa5e713e61aab719263c6972f2f35e9011d13316167074572b8bf7ec4299b",
+          "lower_g": 0,
+          "upper_g": 0.12726435448603574,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "solve_kind": "LP",
+          "model_SHA": "a1a3fae0c7872acc6b2ec82289181f0bbc3be198f21e7af15887b1473c7abbba",
+          "lower_g": 0.12726435448603574,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "solve_kind": "CHILD_BOUND_TARGET_MIP",
+          "model_SHA": "b971967a288114623726e41bab642bb91131b34b87ebb0a9b81aaf3d37246563",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 5,
+          "leaf": "L0",
+          "solve_kind": "MIP",
+          "model_SHA": "b971967a288114623726e41bab642bb91131b34b87ebb0a9b81aaf3d37246563",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        }
+      ],
+      "Starts": [
+        {
+          "source": "round68_existing_0",
+          "columns": 3532,
+          "maximum_row_violation": 1.1102230246251565e-16,
+          "objective": 0.25452870897207147,
+          "submitted": true,
+          "API_readback_equal": true,
+          "status": "accepted_by_native_log",
+          "new_native_incumbent_observed": true,
+          "h_type": null,
+          "h_value": null,
+          "physical_F": 0.25452870897207136
+        },
+        {
+          "source": "round68_existing_1",
+          "columns": 3532,
+          "maximum_row_violation": 1.1102230246251565e-16,
+          "objective": 0.25452870897207147,
+          "submitted": true,
+          "API_readback_equal": true,
+          "status": "accepted_by_native_log",
+          "new_native_incumbent_observed": true,
+          "h_type": null,
+          "h_value": null,
+          "physical_F": 0.25452870897207136
+        }
+      ],
+      "D1_installed": 0,
+      "D1_extended_Optimize": 0,
+      "legacy_formal_performance": false,
+      "validity_field": "formal_protocol_qualified"
+    },
+    {
+      "arm": "M-B",
+      "seed": 1,
+      "PID": 19868,
+      "producer_receipt_SHA": "9b6e778bd7645536196270a62b3d84a212ee7e3fea4a7a4f7bd8c27d9df5e686",
+      "seal_SHA": "6dfd536f3fce8949c627b22e992fd47d013710e4786e1b566b6e44cd244107f5",
+      "audit_SHA": "dcbf78940f6cf8be860feab733bf330ad041bcfb74b8e1ec5b49acc303f9fc5c",
+      "T_produce": 81.00655310001457,
+      "T_verify": 4.822961799975019,
+      "T_total": 85.82951489998959,
+      "U": 0.160589067255049,
+      "L": 0.16058906725504898,
+      "signed_gap": 2.7755575615628914e-17,
+      "certificate": true,
+      "independent_physical_F": 0.160589067255049,
+      "calls": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "solve_kind": "LP",
+          "model_SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "solve_kind": "LP",
+          "model_SHA": "04f01f2f4dee4555d889cd3b76955e04710f0171e4d50c03aa711a9ad20cb9a5",
+          "lower_g": 0,
+          "upper_g": 0.12726435448603574,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "solve_kind": "LP",
+          "model_SHA": "85e125c47f9d0aaa5c95fbb7ac16031438636c5a6206ac207581963b66bd00e6",
+          "lower_g": 0.12726435448603574,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "solve_kind": "CHILD_BOUND_TARGET_MIP",
+          "model_SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 5,
+          "leaf": "L0",
+          "solve_kind": "MIP",
+          "model_SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        }
+      ],
+      "Starts": [
+        {
+          "source": "round68_existing_0",
+          "columns": 3532,
+          "maximum_row_violation": 1.1102230246251565e-16,
+          "objective": 0.25452870897207147,
+          "submitted": true,
+          "API_readback_equal": true,
+          "status": "accepted_by_native_log",
+          "new_native_incumbent_observed": true,
+          "h_type": null,
+          "h_value": null,
+          "physical_F": 0.25452870897207136
+        },
+        {
+          "source": "round68_existing_1",
+          "columns": 3532,
+          "maximum_row_violation": 1.1102230246251565e-16,
+          "objective": 0.25452870897207147,
+          "submitted": true,
+          "API_readback_equal": true,
+          "status": "accepted_by_native_log",
+          "new_native_incumbent_observed": true,
+          "h_type": null,
+          "h_value": null,
+          "physical_F": 0.25452870897207136
+        }
+      ],
+      "D1_installed": 0,
+      "D1_extended_Optimize": 0,
+      "legacy_formal_performance": false,
+      "validity_field": "formal_protocol_qualified"
+    },
+    {
+      "arm": "MB-D1",
+      "seed": 1,
+      "PID": 15216,
+      "producer_receipt_SHA": "1c5517c25241ad0d9796d5fad4b07607b2fe8aaf7d5dc5c88cc6ea87025c6358",
+      "seal_SHA": "0b19e7f7c87e7d2eb0e05634bf8bcf1901c1b2a0de06db6df436291090b9d73d",
+      "audit_SHA": "2c25662d4cf57fa24ff9bc3760b544b26998904a9752837b7205e157f6e28ac3",
+      "T_produce": 70.64620429999195,
+      "T_verify": 6.441710500017507,
+      "T_total": 77.08791480000946,
+      "U": 0.160589067255049,
+      "L": 0.16058906725504896,
+      "signed_gap": 5.551115123125783e-17,
+      "certificate": true,
+      "independent_physical_F": 0.160589067255049,
+      "calls": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "solve_kind": "LP",
+          "model_SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "solve_kind": "LP",
+          "model_SHA": "04f01f2f4dee4555d889cd3b76955e04710f0171e4d50c03aa711a9ad20cb9a5",
+          "lower_g": 0,
+          "upper_g": 0.12726435448603574,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "solve_kind": "LP",
+          "model_SHA": "85e125c47f9d0aaa5c95fbb7ac16031438636c5a6206ac207581963b66bd00e6",
+          "lower_g": 0.12726435448603574,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "solve_kind": "CHILD_BOUND_TARGET_MIP",
+          "model_SHA": "63bb57aa410275a38a38953fe228cccf03ad09b208f52f3ea82b6d90cc34407a",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 5,
+          "leaf": "L0",
+          "solve_kind": "MIP",
+          "model_SHA": "63bb57aa410275a38a38953fe228cccf03ad09b208f52f3ea82b6d90cc34407a",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        }
+      ],
+      "Starts": [
+        {
+          "source": "round68_existing_0",
+          "columns": 3533,
+          "maximum_row_violation": 1.1102230246251565e-16,
+          "objective": 0.25452870897207147,
+          "submitted": true,
+          "API_readback_equal": true,
+          "status": "accepted_by_native_log",
+          "new_native_incumbent_observed": true,
+          "h_type": "B",
+          "h_value": 0.0,
+          "physical_F": 0.25452870897207136
+        },
+        {
+          "source": "round68_existing_1",
+          "columns": 3533,
+          "maximum_row_violation": 1.1102230246251565e-16,
+          "objective": 0.25452870897207147,
+          "submitted": true,
+          "API_readback_equal": true,
+          "status": "accepted_by_native_log",
+          "new_native_incumbent_observed": true,
+          "h_type": "B",
+          "h_value": 0.0,
+          "physical_F": 0.25452870897207136
+        }
+      ],
+      "D1_installed": 1,
+      "D1_extended_Optimize": 2,
+      "legacy_formal_performance": false,
+      "validity_field": "formal_protocol_qualified"
+    },
+    {
+      "arm": "MB-D1",
+      "seed": 0,
+      "PID": 31124,
+      "producer_receipt_SHA": "d3e8140dd901b8f42166ea7faa611b4ce0d67ac148491a6b6c15b25064edbad7",
+      "seal_SHA": "bff9fc0b2592164c0d7a216e8fa9df0f6c96675647cc3a32d9b99a66f89ae13a",
+      "audit_SHA": "a76a852d03e8322d045de758ea0271cfc9560b4ae47391553bc679d44e380eeb",
+      "T_produce": 64.56813510000939,
+      "T_verify": 2.884887299995171,
+      "T_total": 67.45302240000456,
+      "U": 0.160589067255049,
+      "L": 0.16058906725504793,
+      "signed_gap": 1.0824674490095276e-15,
+      "certificate": true,
+      "independent_physical_F": 0.160589067255049,
+      "calls": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "solve_kind": "LP",
+          "model_SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "solve_kind": "LP",
+          "model_SHA": "04f01f2f4dee4555d889cd3b76955e04710f0171e4d50c03aa711a9ad20cb9a5",
+          "lower_g": 0,
+          "upper_g": 0.12726435448603574,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "solve_kind": "LP",
+          "model_SHA": "85e125c47f9d0aaa5c95fbb7ac16031438636c5a6206ac207581963b66bd00e6",
+          "lower_g": 0.12726435448603574,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "solve_kind": "CHILD_BOUND_TARGET_MIP",
+          "model_SHA": "1d3d3f676589f3fd18d45184302bb6fd02fd247e23989e144ed7b26b8f4fc7c0",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 1
+        },
+        {
+          "call": 5,
+          "leaf": "L0",
+          "solve_kind": "MIP",
+          "model_SHA": "1d3d3f676589f3fd18d45184302bb6fd02fd247e23989e144ed7b26b8f4fc7c0",
+          "lower_g": 0,
+          "upper_g": 0.25452870897207147,
+          "cutoff": 0.25452870897207147,
+          "raw_native_preconditions": 1
+        }
+      ],
+      "Starts": [
+        {
+          "source": "round68_existing_0",
+          "columns": 3533,
+          "maximum_row_violation": 1.1102230246251565e-16,
+          "objective": 0.25452870897207147,
+          "submitted": true,
+          "API_readback_equal": true,
+          "status": "accepted_by_native_log",
+          "new_native_incumbent_observed": true,
+          "h_type": "B",
+          "h_value": 0.0,
+          "physical_F": 0.25452870897207136
+        },
+        {
+          "source": "round68_existing_1",
+          "columns": 3533,
+          "maximum_row_violation": 1.1102230246251565e-16,
+          "objective": 0.25452870897207147,
+          "submitted": true,
+          "API_readback_equal": true,
+          "status": "accepted_by_native_log",
+          "new_native_incumbent_observed": true,
+          "h_type": "B",
+          "h_value": 0.0,
+          "physical_F": 0.25452870897207136
+        }
+      ],
+      "D1_installed": 1,
+      "D1_extended_Optimize": 2,
+      "legacy_formal_performance": false,
+      "validity_field": "formal_protocol_qualified"
+    }
+  ],
+  "full_H_independently_replayed": true,
+  "full_H_trace_SHA": "052464d854fed5da9b9e9ea8a5c46a703288a9bb5f7c97d5026d81f00d48c855",
+  "H_seed_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25
+  ],
+  "H_Seed0_equal_to_Seed1": true,
+  "outer_seconds": 448.3212315000128,
+  "fee_level_starts": 8,
+  "additional_distinct_controllers": 2,
+  "all_observed_launches": 10,
+  "uncertain_qualification_children": 0,
+  "failed_qualification_native_producers": 0,
+  "concurrent_formal_positions_observed": [
+    {
+      "group": 1,
+      "arm": "P-GRB",
+      "launch_record_exists": true,
+      "actual_OS_birth_record_exists": true,
+      "producer_receipt_exists": false
+    }
+  ],
+  "concurrent_formal_fees_observed": [
+    "formal01"
+  ],
+  "formal_full_design_positions": 32,
+  "formal_full_design_obligation_seconds": 80160,
+  "only_closed_qualification_fees_summed_here": true,
+  "sequence": "Independent pre_contract ACCEPT preceded qualification and formal. All five CLI and qualification01 fee closed before formal01. This corroborating review completed after formal01 started; it is not a new admission prerequisite.",
+  "verified_necessary_evidence_files": 228,
+  "necessary_evidence_unchanged_during_review": true,
+  "no_native_launches_or_solver_Optimize": true,
+  "no_measured_helpers_or_raw_modified": true,
+  "signed_gap_policy": "Original signed gaps retained, including ENS-C tiny negative gap within 1e-7.",
+  "legacy_field_policy": "formal_performance is preserved legacy R108 metadata; qualification validity is formal_protocol_qualified. H100 is not current formal performance evidence.",
+  "limitations": [
+    "This closeout checks actual five known-fixture producers and necessary scope/Start/type/physical/clock evidence; it does not replace the required post-formal 32-arm/48-pair review or public restore."
+  ],
+  "seconds": 4.463125600013882
+}

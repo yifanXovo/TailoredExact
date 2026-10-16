@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "fixture_only": true,
+  "scientific_exports": 0,
+  "scientific_restores": 0,
+  "unchanged_scan_semantics_keys": [
+    "passed",
+    "files",
+    "archive_members",
+    "bytes_scanned",
+    "findings",
+    "errors"
+  ],
+  "streamed_result": {
+    "tool_version": "round117-publication-security-v1",
+    "passed": true,
+    "files": 10,
+    "archive_members": 1,
+    "bytes_scanned": 1587,
+    "archives": [
+      {
+        "path": "carrier/evidence.tar.gz",
+        "members": 1
+      }
+    ],
+    "findings": [],
+    "errors": [],
+    "carrier_traversal": "streamed persisted parts with unchanged Scanner member/recursive payload checks",
+    "raw_values_emitted": false,
+    "network_requests": 0,
+    "native_starts": 0,
+    "Optimize": 0,
+    "engineering_seconds": 0.023561599984532222
+  },
+  "baseline_result": {
+    "tool_version": "round117-publication-security-v1",
+    "passed": true,
+    "files": 10,
+    "archive_members": 1,
+    "bytes_scanned": 1587,
+    "archives": [
+      {
+        "path": "carrier/evidence.tar.gz",
+        "members": 1
+      }
+    ],
+    "findings": [],
+    "errors": [],
+    "raw_values_emitted": false,
+    "network_requests": 0,
+    "native_starts": 0,
+    "Optimize": 0,
+    "engineering_seconds": 0.0025545999815221876
+  },
+  "part_bytes": 17,
+  "temporary_root": "E:\\codes\\ExactEBRP-work\\temp\\round122\\r122-scanner-fixture-otcx8mno",
+  "temporary_files_removed": [
+    "carrier/evidence.tar.gz.part001",
+    "carrier/evidence.tar.gz.part002",
+    "carrier/evidence.tar.gz.part003",
+    "carrier/evidence.tar.gz.part004",
+    "carrier/evidence.tar.gz.part005",
+    "carrier/evidence.tar.gz.part006",
+    "carrier/evidence.tar.gz.part007",
+    "carrier/evidence.tar.gz.part008",
+    "carrier/evidence.tar.gz.part009",
+    "carrier/manifest.json"
+  ],
+  "removed_logical_bytes": 1693,
+  "free_before": 217840893952,
+  "free_after": 217840893952,
+  "free_change_not_attributed_solely_to_fixture": true,
+  "native_starts": 0,
+  "Optimize": 0,
+  "release_SHA": "98284d2cb98f392f8a87bacd7f294545b91382ab891d50a1fc877488ffc146b6",
+  "code_SHA": "817d74a8b7d6baac345260d27c9b61cc4fd7bd94e162a22190670f6c9603cd19",
+  "engineering_seconds": 0.03247700000065379
+}

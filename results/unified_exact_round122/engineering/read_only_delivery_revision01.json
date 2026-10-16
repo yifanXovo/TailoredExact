@@ -1,0 +1,116 @@
+{
+  "UTC": "2026-10-15T21:09:59.326993+00:00",
+  "scope": "post-seal reporting and independent recovery only",
+  "before_committed_Git_blob_SHA256": {
+    "scripts/round122_finish_report.py": "a13b123601c76889cd03ec9568d01ed7e27e15f3dea726f846988f1dd10f80d5",
+    "scripts/round122_release.py": "66c2d40e9db5c93dc162dc4d34fa50fa7b2e0a64972890cc1ac94b3c83a9987c"
+  },
+  "before_identity_scope": "Git blob bytes; original worktree newline normalization is not presumed",
+  "after_worktree_SHA256": {
+    "scripts/round122_finish_report.py": "8c7da312fda6e79fdcca8c59c2b9068c00a017b6ff8bffc59ffec5b6c37e4d7d",
+    "scripts/round122_release.py": "86094816e9a586713f848daf0d7e0f476561ca870d9aa9296d8d86d52997bc94"
+  },
+  "reason": "independent static review: explicit paid proof pair vs installed pair, actual split source, streamed carrier safety scan",
+  "measured_helpers_unchanged": true,
+  "production_source_bindings_unchanged": true,
+  "finite_recovery_check": {
+    "passed": true,
+    "checks": [
+      "streamed part boundary",
+      "complete root path component",
+      "JSON type",
+      "array length",
+      "signed zero"
+    ],
+    "fixture_only": true,
+    "scientific_carrier_exports": 0,
+    "scientific_restores": 0,
+    "native_starts": 0,
+    "Optimize": 0,
+    "code_SHA": "4e8f5e43b2595d61269de9077cfa2589df7aa82b44b85ebc513c4c38541977ca",
+    "release_SHA": "86094816e9a586713f848daf0d7e0f476561ca870d9aa9296d8d86d52997bc94",
+    "engineering_seconds": 0.0015753000043332577
+  },
+  "finite_scanner_check": {
+    "passed": true,
+    "fixture_only": true,
+    "scientific_exports": 0,
+    "scientific_restores": 0,
+    "unchanged_scan_semantics_keys": [
+      "passed",
+      "files",
+      "archive_members",
+      "bytes_scanned",
+      "findings",
+      "errors"
+    ],
+    "streamed_result": {
+      "tool_version": "round117-publication-security-v1",
+      "passed": true,
+      "files": 10,
+      "archive_members": 1,
+      "bytes_scanned": 1587,
+      "archives": [
+        {
+          "path": "carrier/evidence.tar.gz",
+          "members": 1
+        }
+      ],
+      "findings": [],
+      "errors": [],
+      "carrier_traversal": "streamed persisted parts with unchanged Scanner member/recursive payload checks",
+      "raw_values_emitted": false,
+      "network_requests": 0,
+      "native_starts": 0,
+      "Optimize": 0,
+      "engineering_seconds": 0.036106100014876574
+    },
+    "baseline_result": {
+      "tool_version": "round117-publication-security-v1",
+      "passed": true,
+      "files": 10,
+      "archive_members": 1,
+      "bytes_scanned": 1587,
+      "archives": [
+        {
+          "path": "carrier/evidence.tar.gz",
+          "members": 1
+        }
+      ],
+      "findings": [],
+      "errors": [],
+      "raw_values_emitted": false,
+      "network_requests": 0,
+      "native_starts": 0,
+      "Optimize": 0,
+      "engineering_seconds": 0.0028065999795217067
+    },
+    "part_bytes": 17,
+    "temporary_root": "E:\\codes\\ExactEBRP-work\\temp\\round122\\r122-scanner-fixture-5iexariv",
+    "temporary_files_removed": [
+      "carrier/evidence.tar.gz.part001",
+      "carrier/evidence.tar.gz.part002",
+      "carrier/evidence.tar.gz.part003",
+      "carrier/evidence.tar.gz.part004",
+      "carrier/evidence.tar.gz.part005",
+      "carrier/evidence.tar.gz.part006",
+      "carrier/evidence.tar.gz.part007",
+      "carrier/evidence.tar.gz.part008",
+      "carrier/evidence.tar.gz.part009",
+      "carrier/manifest.json"
+    ],
+    "removed_logical_bytes": 1693,
+    "free_before": 217898274816,
+    "free_after": 217898274816,
+    "free_change_not_attributed_solely_to_fixture": true,
+    "native_starts": 0,
+    "Optimize": 0,
+    "release_SHA": "86094816e9a586713f848daf0d7e0f476561ca870d9aa9296d8d86d52997bc94",
+    "code_SHA": "817d74a8b7d6baac345260d27c9b61cc4fd7bd94e162a22190670f6c9603cd19",
+    "engineering_seconds": 0.04604129999643192
+  },
+  "formal_controller_pid": 3704,
+  "no_producer_feedback_or_native_execution": true,
+  "scientific_exports": 0,
+  "scientific_restores": 0
+}

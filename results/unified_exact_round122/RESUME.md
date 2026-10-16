@@ -1,48 +1,11 @@
-# Round122 execution state
+# Round122 current state
 
-Fixed main entry: `E:\codes\ExactEBRP`; all new research assets use
-`E:\codes\ExactEBRP-work`. Mandatory safe screening/cleanup follows PR
-delivery. Preserve the main's three tracked dirty files, old raw and trees.
+Main entry: E:\codes\ExactEBRP. All new research assets: E:\codes\ExactEBRP-work. Preserve the main user changes, old worktrees/raw and verified PE/DLL. Mandatory safe screening/cleanup follows delivery.
 
-Current tree: `E:\codes\ExactEBRP-work\worktrees\round122`, branch
-`codex/round122-paper-benchmark`, based on verified R121 `65c5aaa…` / PR183.
-Read `goal.md` for the authoritative v3 protocol. Goal remains active until
-32 arms/48 pairs, paper interpretation, actual extra review, one safe
-public-carrier recovery, stacked English Draft PR and cleanup are handled.
+The fixed scientific panel is COMPLETE: six new Seed0 inputs, two fixed Seed1 repeats,32 once-only arms and48 evaluable directed pairs. All eight group cores and full report outputs exist. Stage: BENCHMARK_MIXED_NO_NEW_PRIMARY_SELECTION. D1/P is5 WIN/1 MIXED on the six new roles; only one new exposed role has an incremental D1/M-B WIN, below the preregistered requirement of two. ENS default unchanged, no new algorithm or automatic additional batch.
 
-Completed: bounded workspace inventory/plan/capacity; frozen original PE and
-DLL verified; six source-specific recipes and complete fixed table committed
-before one generation; six inputs generated; original zero-Optimize compact
-references exported in reference01 (16.6585274 outer seconds, two fee-level
-starts plus one explicitly recorded controller). Subsequently all five
-planned H100 CLI passed, the full H comparison passed, and both fees
-closed at448.3212315 seconds. Final helper identity is unchanged. The
-independent pre-contract review accepted; its qualification closeout
-review is being saved. No formal position has started yet.
+All original and continuation native/wrapper/controller processes exited. Do not restart all-formal or any producer. Original group08 P returned normally but a legacy final-vs-history feasible-U ordering assertion failed. All original P/failure/formal08 exit1 fee bytes remain intact. Separate recovery sidecars passed full re-audit and independent admission, retaining final U/L/certificate/T_produce and the complete T_verify waiting interval. Only original never-started ordinal4 MB-D1 Seed1 continued under exact frozen argv, with wrapper birth/import charged to its own T_produce. Continuation exit0 and group_closeout bind the full fee chain. All216 source/92 measured helper files remain frozen.
 
-Next: inspect `review/pre_contract.json` and reviewer findings. If accepted,
-run with process TEMP/TMP under the fixed root:
+Paid outer fees:75202.98446220002/100000 seconds; qualification448.3212315000128/6000 seconds. Fee-level starts50 plus5 distinct controllers=55. No unclosed fee. Group08 cohort verification175.4091487999831 seconds is group cost, not last-arm T_verify.
 
-    D:/msys64/ucrt64/bin/python.exe -B scripts/round122_runner.py cli qualification01
-
-Resolve engineering failures on the original sealed producer, preserving
-all attempts and charges; do not rerun a valid method for performance.
-Only after five H100 CLI and full audit/H checks qualify, freeze/push helper
-and input commit, then run the eight unconditional groups in the exact
-orders using `scripts/round122_runner.py all-formal`. The runner persists
-OS-exit fees and stops on a failure. Observe status without heavy scans or
-compression during solver work. No extra roles, variants, seeds or probes.
-
-All current measured helper hashes are in candidate_identity.json and each
-campaign identity. Any pre-formal read-only helper repair must be explicitly
-recorded and qualified; formal production source/PE/model/parameters/clock
-definitions remain frozen. No extra executor/agent may alter measured files.
-
-After all groups: rebuild/aggregate all32/all48, independently recompute all
-pairs/stage, audit V50 complete fleet and actual D1 model/Start/scope plus all
-major negative results, write paper specification/design/results/limitations.
-Then one safe carrier with source/identity/raw and finite authorities, staged
-and full decompressed-member scans; scientific commit A; one committed
-carrier export and empty E-root rebuild; actual review/recovery receipts B;
-push/read final stacked Draft PR; conditional safe cleanup and receipt in
-`E:\codes\ExactEBRP-work\evidence\round122`. Do not mark goal complete early.
+Goal remains ACTIVE. Actual independent all32/all48/stage/V50 fleet/D1 model/Start/scope/major-negative review is ACCEPT, and final all8-group prose claims review is ACCEPT. Frozen M-B is the explicit existing paper reference; ENS default remains unchanged. Required remaining work: safe payload and one canonical carrier with full scans; scientific commitA push/public readback; one actual public HTTPS carrier export and fresh E-root typed32/48/stage replay; later receiptsB; English stacked Draft PR on verified R121, remote base/head/Draft/file readback; actual bounded safe cleanup and main protection audit. Do not declare completion until these occur. See authoritative goal.md and external evidence/round122/current_checkpoint.json.

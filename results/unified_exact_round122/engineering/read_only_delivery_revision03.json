@@ -1,0 +1,112 @@
+{
+  "UTC": "2026-10-15T21:55:34.387077+00:00",
+  "scope": "Read-only report tier alignment; large nonzero certificate count reuses the existing clean nonzero column",
+  "path": "scripts/round122_finish_report.py",
+  "before_SHA": "86ad01631e0b493b949bd150cb245bd7d012a0e5986d9e2fe09e044bddb9f622",
+  "after_SHA": "ca7058e870af0ce80e1ed8d8313b1b7514575288f38dc5f0f06916f632e29546",
+  "production_or_measured_helpers_changed": false,
+  "candidate_identity_SHA": "60e14fea938cd37bbcd408c6f01ec66aad5a8298b40cb67660048f7d5ffe110b",
+  "finite_tier_cases": [
+    {
+      "input": {
+        "certificate": true,
+        "own_exact_zero": false,
+        "source_reduced": false,
+        "native_proof_qualified": true,
+        "numbers_qualified": true
+      },
+      "expected_nonzero": true,
+      "actual_nonzero": true
+    },
+    {
+      "input": {
+        "certificate": true,
+        "own_exact_zero": true,
+        "source_reduced": false,
+        "native_proof_qualified": true,
+        "numbers_qualified": true
+      },
+      "expected_nonzero": false,
+      "actual_nonzero": false
+    },
+    {
+      "input": {
+        "certificate": true,
+        "own_exact_zero": false,
+        "source_reduced": true,
+        "native_proof_qualified": true,
+        "numbers_qualified": true
+      },
+      "expected_nonzero": false,
+      "actual_nonzero": false
+    },
+    {
+      "input": {
+        "certificate": true,
+        "own_exact_zero": false,
+        "source_reduced": false,
+        "native_proof_qualified": false,
+        "numbers_qualified": true
+      },
+      "expected_nonzero": false,
+      "actual_nonzero": false
+    },
+    {
+      "input": {
+        "certificate": false,
+        "own_exact_zero": false,
+        "source_reduced": false,
+        "native_proof_qualified": true,
+        "numbers_qualified": true
+      },
+      "expected_nonzero": false,
+      "actual_nonzero": false
+    }
+  ],
+  "sealed_formal_annotations": [
+    {
+      "group": 1,
+      "arm": "P-GRB",
+      "nonzero_numerical_certificate": false
+    },
+    {
+      "group": 1,
+      "arm": "ENS-C",
+      "nonzero_numerical_certificate": true
+    },
+    {
+      "group": 1,
+      "arm": "M-B",
+      "nonzero_numerical_certificate": true
+    },
+    {
+      "group": 1,
+      "arm": "MB-D1",
+      "nonzero_numerical_certificate": true
+    },
+    {
+      "group": 2,
+      "arm": "ENS-C",
+      "nonzero_numerical_certificate": true
+    },
+    {
+      "group": 2,
+      "arm": "M-B",
+      "nonzero_numerical_certificate": true
+    },
+    {
+      "group": 2,
+      "arm": "MB-D1",
+      "nonzero_numerical_certificate": true
+    },
+    {
+      "group": 2,
+      "arm": "P-GRB",
+      "nonzero_numerical_certificate": true
+    }
+  ],
+  "all_eight_existing_annotations_unchanged": true,
+  "actual_full_panel_report": "PENDING_ALL_EIGHT_GROUPS",
+  "Optimize": 0,
+  "native_starts": 0
+}

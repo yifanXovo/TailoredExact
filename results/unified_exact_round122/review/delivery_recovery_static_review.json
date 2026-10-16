@@ -1,0 +1,26 @@
+{
+  "decision": "PENDING",
+  "scope": "Actual bounded static reconstruction of unmeasured report/replay recovery-path changes; no final formal review or restore executed.",
+  "reviewer": "independent executor /root/contract_review",
+  "UTC": "2026-10-16T17:13:50.463363+00:00",
+  "review_script_SHA": "b9c8667d284ce6fc2692aeb17d9357792ef033cfd191a229bb45c1ff25da0170",
+  "parent_revision_receipt_SHA": "06e280e81093093007b80e7484d462ad5f9ee2298585b3e7539a8b7a0b2edf5f",
+  "current_sources": {
+    "scripts/round122_finish_report.py": "0203e1c55da255212f4a9b62faff43aa6cc7ce2bad2851a64273fdbad714c9af",
+    "scripts/round122_release.py": "8820e82b948fb321bfed45b7f6e9cdd883fb1b3f5016e5634b0599e07963552c"
+  },
+  "independently_recovered_exact_prior_bytes_SHA": {
+    "scripts/round122_finish_report.py": "ca7058e870af0ce80e1ed8d8313b1b7514575288f38dc5f0f06916f632e29546",
+    "scripts/round122_release.py": "9bc6c8ac8ff1a9b9498e6044b7c751b4911285b1fe71d5bcb9113561b0356d14"
+  },
+  "original_report_body_exactly_unchanged": true,
+  "original_replay_validation_exactly_unchanged": true,
+  "change": "Only import the unmeasured recovery adapter and apply its read view around the unchanged report body / eight-group reconstruction loop.",
+  "public_export_and_empty_root_restore": "PENDING_ACTUAL_EXECUTION_AFTER_ALL32_AND_SCIENCE_PUSH",
+  "actual_post_formal_review": "PENDING_ALL_EIGHT_SEALED_GROUPS_AND_REPORTS",
+  "evolving_formal_raw_read": false,
+  "native_starts": 0,
+  "Optimize": 0,
+  "production_or_measured_helper_edits": 0,
+  "seconds": 0.007794200006173924
+}

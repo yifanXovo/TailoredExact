@@ -1,0 +1,50 @@
+{
+  "exit_code": 0,
+  "outer_seconds_lower": 14461.178920894657,
+  "qualification": false,
+  "actual_native_children": 4,
+  "uncertain_native_children": 0,
+  "child_states": [
+    {
+      "id": "PB-C50-S",
+      "arm": "MB-D1",
+      "seed": 0,
+      "state": "actual_started",
+      "PID_receipt_SHA": "2ca9405e1f973edaad910d08b2e90e7a67e016a25d8d484f72f42d9c81344f39"
+    },
+    {
+      "id": "PB-C50-S",
+      "arm": "M-B",
+      "seed": 0,
+      "state": "actual_started",
+      "PID_receipt_SHA": "d5f04bbee66509131fc913b0b2a2fff8b2a7774585e35ed5b1d6f95eb8b160a1"
+    },
+    {
+      "id": "PB-C50-S",
+      "arm": "ENS-C",
+      "seed": 0,
+      "state": "actual_started",
+      "PID_receipt_SHA": "1704e0288f71ffcc8dd1b692d674084b8710890bdbcb3eef9681f056553f9401"
+    },
+    {
+      "id": "PB-C50-S",
+      "arm": "P-GRB",
+      "seed": 0,
+      "state": "actual_started",
+      "PID_receipt_SHA": "d0b99ba9b32372f6cf971341b8e8c33a06aca0e4350dccd125109dd01297ec6c"
+    }
+  ],
+  "wrapper_pid": 12584,
+  "conservative_process_starts": 5,
+  "necessary_trailer_complete": true,
+  "nested_native_seconds_added": false,
+  "outer_seconds_upper": 14461.198183700006,
+  "actual_exit_observed": true,
+  "exit_observed_unix": 1792134239.1204867,
+  "process_creation_unix": 1792119777.9246292,
+  "actual_exit_code": 0,
+  "controller_elapsed": 14461.198183700006,
+  "wrapper_import_creation_trailer_and_exit_included": true,
+  "controller_process_count": 1,
+  "controller_wait_is_nested_not_added_again": true
+}
