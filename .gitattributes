@@ -291,3 +291,18 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round121/** -text whitespace=cr-at-eol
 /scripts/*round121* -text whitespace=cr-at-eol
 /reference/round121_confirmation/** -text whitespace=cr-at-eol
+
+# Preserve the exact late Round122 delivery-tool bytes recorded by review/execution receipts.
+/scripts/round122_release.py -text whitespace=cr-at-eol
+/scripts/round122_public_https.py -text whitespace=cr-at-eol
+/results/unified_exact_round122/engineering/public_https_transport_v1.py -text whitespace=cr-at-eol
+/results/unified_exact_round122/engineering/release_before_manifest_newline_fix.py -text whitespace=cr-at-eol
+/results/unified_exact_round122/engineering/cleanup_round122.ps1 -text whitespace=cr-at-eol
+/results/unified_exact_round122/engineering/cleanup_round122_plan_v1.ps1 -text whitespace=cr-at-eol
+
+# Keep actual late receipt/reviewer digests exact; scientific carrier files retain scienceA bytes.
+/results/unified_exact_round122/delivery/** -text whitespace=cr-at-eol
+/results/unified_exact_round122/review/post_formal_* -text whitespace=cr-at-eol
+
+# Preserve the authoritative actual post-PR cleanup receipt bytes.
+/results/unified_exact_round122/cleanup_summary.json -text whitespace=cr-at-eol

@@ -1,0 +1,247 @@
+{
+  "round": 122,
+  "base": "65c5aaa56583bcddf9baeae7392bd94baaed9396",
+  "production_source": "355eefd2be3fe5651195681faf7b3a63ee4032f8",
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": "per-group frozen 0/1",
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "groups": [
+    {
+      "number": 1,
+      "id": "PB-C20-B",
+      "source": "CITI",
+      "V": 20,
+      "seed": 0,
+      "campaign": "campaign/group01",
+      "methods": [
+        "P-GRB",
+        "ENS-C",
+        "M-B",
+        "MB-D1"
+      ],
+      "cap_seconds": 900,
+      "nominal_seconds": 3600,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "number": 2,
+      "id": "PB-B20-S",
+      "source": "CABI",
+      "V": 20,
+      "seed": 0,
+      "campaign": "campaign/group02",
+      "methods": [
+        "ENS-C",
+        "M-B",
+        "MB-D1",
+        "P-GRB"
+      ],
+      "cap_seconds": 900,
+      "nominal_seconds": 3600,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "number": 3,
+      "id": "PB-C35-U",
+      "source": "CITI",
+      "V": 35,
+      "seed": 0,
+      "campaign": "campaign/group03",
+      "methods": [
+        "M-B",
+        "MB-D1",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "cap_seconds": 2400,
+      "nominal_seconds": 9600,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "number": 4,
+      "id": "PB-B35-B",
+      "source": "CABI",
+      "V": 35,
+      "seed": 0,
+      "campaign": "campaign/group04",
+      "methods": [
+        "MB-D1",
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ],
+      "cap_seconds": 2400,
+      "nominal_seconds": 9600,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "number": 5,
+      "id": "PB-C50-S",
+      "source": "CITI",
+      "V": 50,
+      "seed": 0,
+      "campaign": "campaign/group05",
+      "methods": [
+        "MB-D1",
+        "M-B",
+        "ENS-C",
+        "P-GRB"
+      ],
+      "cap_seconds": 3600,
+      "nominal_seconds": 14400,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "number": 6,
+      "id": "PB-B50-U",
+      "source": "CABI",
+      "V": 50,
+      "seed": 0,
+      "campaign": "campaign/group06",
+      "methods": [
+        "P-GRB",
+        "MB-D1",
+        "M-B",
+        "ENS-C"
+      ],
+      "cap_seconds": 3600,
+      "nominal_seconds": 14400,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "number": 7,
+      "id": "PB-B35-B",
+      "source": "CABI",
+      "V": 35,
+      "seed": 1,
+      "campaign": "campaign/group07",
+      "methods": [
+        "ENS-C",
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ],
+      "cap_seconds": 2400,
+      "nominal_seconds": 9600,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "fixed_input_Seed1_sensitivity"
+    },
+    {
+      "number": 8,
+      "id": "PB-C50-S",
+      "source": "CITI",
+      "V": 50,
+      "seed": 1,
+      "campaign": "campaign/group08",
+      "methods": [
+        "M-B",
+        "ENS-C",
+        "P-GRB",
+        "MB-D1"
+      ],
+      "cap_seconds": 3600,
+      "nominal_seconds": 14400,
+      "management_reserve": 120,
+      "fixed_unconditional": true,
+      "panel_kind": "fixed_input_Seed1_sensitivity"
+    }
+  ],
+  "pairs": [
+    [
+      "MB-D1",
+      "P-GRB"
+    ],
+    [
+      "M-B",
+      "P-GRB"
+    ],
+    [
+      "ENS-C",
+      "P-GRB"
+    ],
+    [
+      "MB-D1",
+      "M-B"
+    ],
+    [
+      "MB-D1",
+      "ENS-C"
+    ],
+    [
+      "M-B",
+      "ENS-C"
+    ]
+  ],
+  "maximum_outer_seconds": 100000,
+  "qualification_soft_seconds": 3000,
+  "qualification_authorized_seconds": 6000,
+  "qualification_start_count_is_not_a_hard_gate": true,
+  "formal_arms": 32,
+  "formal_pairs": 48,
+  "new_problems": 6,
+  "fixed_Seed1_blocks": 2,
+  "formal_nominal_seconds": 79200,
+  "management_reference": 960,
+  "qualification_plan": {
+    "children": 6,
+    "wrapper": 1,
+    "reference_Optimize": 0,
+    "real_known_fixture_CLI": {
+      "Seed1": [
+        "P-GRB",
+        "ENS-C",
+        "M-B",
+        "MB-D1"
+      ],
+      "Seed0": [
+        "MB-D1"
+      ]
+    },
+    "each_CLI_cap": 120,
+    "outer_cap": 1800
+  },
+  "paired_rule": "unchanged round108_decisions.pair; independently recompute all48",
+  "native_reserve": 30,
+  "evidence_tolerance": 1e-07,
+  "own_H_seed": 20260626,
+  "own_H_semantics": "full24+1 closure/exchange",
+  "all_online_work_in_T_produce": true,
+  "clock": "T_verify closes after added model/event/Start audits and all required serialization; group reconciliation separately charged",
+  "no_extra_role_variant_or_valid_performance_retry": true,
+  "default_ENS_changed": false,
+  "D0_ablation_only_not_run": true,
+  "MB_PC_stopped": true,
+  "stage_priority": [
+    "PROOF_RELIABILITY_PRIORITY",
+    "BLOCKED",
+    "DO_NOT_SELECT_D1_AS_PAPER_PRIMARY",
+    "FREEZE_D1_AS_PAPER_BENCHMARK_CANDIDATE",
+    "BENCHMARK_MIXED_NO_NEW_PRIMARY_SELECTION"
+  ]
+}

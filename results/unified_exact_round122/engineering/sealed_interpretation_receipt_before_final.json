@@ -1,0 +1,164 @@
+{
+  "UTC": "2026-10-16T13:50:43.550625+00:00",
+  "scope": "Read-only prose of sealed groups01-07: six new Seed0 roles and the PB-B35-B fixed Seed1 repeat; group08/full stage/reference rewrite required",
+  "document": "results/unified_exact_round122/paper_result_interpretation.md",
+  "document_SHA": "4c31221192f06c449c5ee460acce6fd6241a1cf67b4f16e4331520c8ffcacf9e",
+  "before_document_SHA": "041bdfb48ed0ff94c6f333840bf02d4666111cdd79176fbcbb732b8ac88d5efc",
+  "previous_receipt_SHA": "77d20e28462789e3f7450187df2a94e2fb92833fe60a72347f9820c64a7e27b7",
+  "previous_receipt": {
+    "UTC": "2026-10-16T11:15:11.118694+00:00",
+    "scope": "Read-only prose interpretation of all six new Seed0 groups01-06 only; both Seed1 groups and full-panel stage rewrite required",
+    "document": "results/unified_exact_round122/paper_result_interpretation.md",
+    "document_SHA": "041bdfb48ed0ff94c6f333840bf02d4666111cdd79176fbcbb732b8ac88d5efc",
+    "before_document_SHA": "57c74fa574a46ed3db5127ce5d7c1093375f1554267c2c38314b8da7153f5ce0",
+    "previous_receipt_SHA": "b1aa3e40779a40d918af0c7ea491f1a701fa2022bc94d96bb5657653b2eab358",
+    "previous_receipt": {
+      "UTC": "2026-10-16T07:11:11.294870+00:00",
+      "scope": "Read-only prose interpretation of sealed groups01-05 only; full panel and Seed1 rewrite required",
+      "document": "results/unified_exact_round122/paper_result_interpretation.md",
+      "document_SHA": "57c74fa574a46ed3db5127ce5d7c1093375f1554267c2c38314b8da7153f5ce0",
+      "before_document_SHA": "cd757ba11ed8020ff0faa95c0190b6b672f8c068a0b5c9b713cf6d84378b1a47",
+      "previous_receipt_SHA": "b8e5d8d3f71399444b60f182a6dd2d1af4868302438c47e0eb7d1b7942fa2d50",
+      "core_SHA": {
+        "1": "d2e3a9cc5844110d0432091883d58d0a15fc9a42bd0fe8cdb0fa3037bc580844",
+        "2": "9ec0ab6cf4b5ba0dbae62df10c86bf04e520ef28c12ab7ade64610638e289492",
+        "3": "a4a9e2cb3f30211749a4b3a171283c9c636ccfa334cf32a8959b482d8d4ae166",
+        "4": "e3e3324dbc3122e152459f3e557c505e6941f218deb52269884c9fef8284836d",
+        "5": "e2c4d1f084bda465b15aa41a8953020dfbc9d2a8d57479656910f112dd189907"
+      },
+      "full_precision_objective_and_signed_endpoint_tables_verified": true,
+      "certified_ratios_and_pair_classes_verified": true,
+      "group04_independent_zero_floor_explicit": true,
+      "group03_group04_group05_call_and_cost_partitions_verified": true,
+      "group05_actual_AM_splits_and_two_infeasible_right_LPs_verified": true,
+      "group05_unexposed_D1_retained": true,
+      "formal_arms_in_scope": 20,
+      "pairs_in_scope": 30,
+      "production_or_measured_helpers_changed": false,
+      "Optimize": 0,
+      "native_starts": 0
+    },
+    "core_SHA": {
+      "1": "d2e3a9cc5844110d0432091883d58d0a15fc9a42bd0fe8cdb0fa3037bc580844",
+      "2": "9ec0ab6cf4b5ba0dbae62df10c86bf04e520ef28c12ab7ade64610638e289492",
+      "3": "a4a9e2cb3f30211749a4b3a171283c9c636ccfa334cf32a8959b482d8d4ae166",
+      "4": "e3e3324dbc3122e152459f3e557c505e6941f218deb52269884c9fef8284836d",
+      "5": "e2c4d1f084bda465b15aa41a8953020dfbc9d2a8d57479656910f112dd189907",
+      "6": "bcd9399694787c814a59c5f64d6c5a30a87eade1af28a4957688a5653c085cf4"
+    },
+    "full_precision_objective_and_signed_endpoint_tables_verified": true,
+    "displayed_table_rows_checked": 28,
+    "pair_counts": {
+      "MB-D1/P-GRB": {
+        "WIN": 5,
+        "MIXED": 1
+      },
+      "M-B/P-GRB": {
+        "WIN": 6
+      },
+      "ENS-C/P-GRB": {
+        "WIN": 6
+      },
+      "MB-D1/M-B": {
+        "LOSS": 2,
+        "TIE": 2,
+        "MIXED": 1,
+        "WIN": 1
+      },
+      "MB-D1/ENS-C": {
+        "LOSS": 2,
+        "TIE": 2,
+        "MIXED": 1,
+        "WIN": 1
+      },
+      "M-B/ENS-C": {
+        "TIE": 4,
+        "LOSS": 1,
+        "WIN": 1
+      }
+    },
+    "clean_nonzero_certificate_counts": {
+      "ENS-C": 2,
+      "M-B": 2,
+      "MB-D1": 2,
+      "P-GRB": 1
+    },
+    "D1_exposed_new_groups": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "group06_actual_AM_no_split_and_exact_close_verified": true,
+    "group06_D1_paid_pair_native_h_and_own_U_threshold_verified": true,
+    "group06_complete_V50_fleets_and_cost_partitions_verified": true,
+    "formal_arms_in_scope": 24,
+    "pairs_in_scope": 36,
+    "production_source_files_rechecked": 216,
+    "measured_helpers_rechecked": 92,
+    "production_or_measured_helpers_changed": false,
+    "Optimize": 0,
+    "native_starts": 0
+  },
+  "core_SHA": {
+    "1": "d2e3a9cc5844110d0432091883d58d0a15fc9a42bd0fe8cdb0fa3037bc580844",
+    "2": "9ec0ab6cf4b5ba0dbae62df10c86bf04e520ef28c12ab7ade64610638e289492",
+    "3": "a4a9e2cb3f30211749a4b3a171283c9c636ccfa334cf32a8959b482d8d4ae166",
+    "4": "e3e3324dbc3122e152459f3e557c505e6941f218deb52269884c9fef8284836d",
+    "5": "e2c4d1f084bda465b15aa41a8953020dfbc9d2a8d57479656910f112dd189907",
+    "6": "bcd9399694787c814a59c5f64d6c5a30a87eade1af28a4957688a5653c085cf4",
+    "7": "ecb555574da6664ca72d8abfaff9613cef6e61f290eee46e72bc1ae6fc8e36ee"
+  },
+  "full_precision_objective_and_signed_endpoint_tables_verified": true,
+  "displayed_table_rows_checked": 36,
+  "primary_Seed0_pair_counts": {
+    "MB-D1/P-GRB": {
+      "WIN": 5,
+      "MIXED": 1
+    },
+    "M-B/P-GRB": {
+      "WIN": 6
+    },
+    "ENS-C/P-GRB": {
+      "WIN": 6
+    },
+    "MB-D1/M-B": {
+      "LOSS": 2,
+      "TIE": 2,
+      "MIXED": 1,
+      "WIN": 1
+    },
+    "MB-D1/ENS-C": {
+      "LOSS": 2,
+      "TIE": 2,
+      "MIXED": 1,
+      "WIN": 1
+    },
+    "M-B/ENS-C": {
+      "TIE": 4,
+      "LOSS": 1,
+      "WIN": 1
+    }
+  },
+  "group07_Seed1_pair_classes": {
+    "MB-D1/P-GRB": "WIN",
+    "M-B/P-GRB": "WIN",
+    "ENS-C/P-GRB": "WIN",
+    "MB-D1/M-B": "WIN",
+    "MB-D1/ENS-C": "WIN",
+    "M-B/ENS-C": "LOSS"
+  },
+  "group07_M_B_ENS_loss_joint_severe_threshold_checked": true,
+  "group07_tiny_positive_native_bound_separate_from_Seed0_independent_floor": true,
+  "group07_AM_no_split_D1_paid_pair_and_own_U_threshold_checked": true,
+  "group07_complete_fleets_native_counts_and_clock_partitions_checked": true,
+  "Seed1_not_counted_as_new_role_or_best_Seed_replacement": true,
+  "formal_arms_in_scope": 28,
+  "pairs_in_scope": 42,
+  "production_source_files_rechecked": 216,
+  "measured_helpers_rechecked": 92,
+  "production_or_measured_helpers_changed": false,
+  "Optimize": 0,
+  "native_starts": 0
+}

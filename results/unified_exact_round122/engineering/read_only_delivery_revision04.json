@@ -1,0 +1,44 @@
+{
+  "UTC": "2026-10-16T14:01:51.685455+00:00",
+  "scope": "Unmeasured read-only public export transport/source and provenance tightening only",
+  "reason": "The final empty-root restore must use actually public committed carrier bytes. Replace local git archive with bounded public HTTPS requests for exactly the pinned manifest and parts.",
+  "before_release_SHA": "98284d2cb98f392f8a87bacd7f294545b91382ab891d50a1fc877488ffc146b6",
+  "after_release_SHA": "9bc6c8ac8ff1a9b9498e6044b7c751b4911285b1fe71d5bcb9113561b0356d14",
+  "before_identity_exactly_recovered_in_memory": true,
+  "unchanged_functions_and_classes": [
+    "closure",
+    "inventory",
+    "preflight",
+    "pack",
+    "Joined",
+    "scan_carrier",
+    "restored_check",
+    "os_decode"
+  ],
+  "changed_existing_functions": [
+    "restore"
+  ],
+  "new_functions": [
+    "public_carrier_export"
+  ],
+  "existing_restore_member_validation_and_extraction_AST_equal": true,
+  "packing_payload_closure_scanner_and_typed_replay_unchanged": true,
+  "finite_check_path": "results/unified_exact_round122/engineering/public_transport_finite_check.json",
+  "finite_check_SHA": "aaebe8570567dac447bc4281f3fac73bff2ec3a598376a1c38ebb1dcb122c8dc",
+  "finite_cases": 13,
+  "simulated_HTTP_requests": 19,
+  "actual_public_network_requests": 0,
+  "scientific_carrier_exports": 0,
+  "scientific_restores": 0,
+  "full_public_export_and_empty_root_restore": "PENDING_AFTER_SCIENCE_A_PUSH_AND_PUBLIC_READBACK",
+  "production_identity_SHA": "b71e4947e611ec1d03560cdd614f700fe4690d11bf9794ca07c01c6a8f0f2782",
+  "candidate_identity_SHA": "60e14fea938cd37bbcd408c6f01ec66aad5a8298b40cb67660048f7d5ffe110b",
+  "production_source_files_rechecked": 216,
+  "measured_helpers_rechecked": 92,
+  "production_and_measured_helpers_unchanged": true,
+  "production_semantics_model_settings_clocks_and_fixed_panel_unchanged": true,
+  "prior_readonly_revision": "engineering/read_only_delivery_revision03.json",
+  "prior_readonly_revision_SHA": "aa4d773374efa51fce2848f7f8f3cb668d02d0dc4ddda2b27060619d3dc35749",
+  "native_starts": 0,
+  "Optimize": 0
+}

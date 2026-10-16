@@ -1,0 +1,74 @@
+{
+  "decision": "REQUIRES_OWNED_CHILD_CLEANUP_HARDENING",
+  "scope": "Actual independent source and finite mock review of adapter v1 only. Healthy ongoing export is not interrupted; actual export outcome requires its completed receipts.",
+  "reviewer": "independent executor /root/contract_review",
+  "UTC": "2026-10-16T18:49:13.320340+00:00",
+  "script_SHA": "1916691438c43218a4afbfdea190754101c9939baf6c8b676bdc55c5e9bed4d3",
+  "review_script_SHA": "ebfcb5e4aaccfdb3ec7e649f751c17355792ddf69d26bedee59c34c1ffdca2ad",
+  "release_helper_SHA": "451331633e340155a49149a0a218eb3cf421bb9974e91b54d122a6c3b6090d12",
+  "scienceA": "9ed88cf9da87c3ceb7aebc43694f865eacbc86a7",
+  "ordinary_TLS_and_hostname_checks_not_disabled": true,
+  "system_Schannel_intent_and_absolute_installed_curl_path": true,
+  "curlrc_disabled_before_other_options": true,
+  "no_application_credentials_in_command_or_request": true,
+  "strict_release_public_manifest_part_SHA_size_path_checks_unchanged": true,
+  "arguments_and_normal_lifecycle_finite_cases": [
+    "strict_public_https_argument_manifest.json",
+    "strict_public_https_argument_evidence.tar.gz.part001",
+    "strict_public_https_argument_evidence.tar.gz.part006",
+    "unscoped_argument_rejected_0",
+    "unscoped_argument_rejected_1",
+    "unscoped_argument_rejected_2",
+    "unscoped_argument_rejected_3",
+    "unscoped_argument_rejected_4",
+    "unscoped_argument_rejected_5",
+    "unscoped_argument_rejected_6",
+    "unscoped_argument_rejected_7",
+    "normal_body_stream_hash_birth_exit_record",
+    "ordinary_body_exception_terminates_waits",
+    "ordinary_wait_timeout_kills_waits_rejects"
+  ],
+  "constructor_failure_actual_mock": {
+    "injected": "child_creation raises after Popen",
+    "owned_child_wait_calls": 0,
+    "owned_child_kill_or_terminate": false,
+    "transfer_receipt_missing": true
+  },
+  "teardown_failure_actual_mocks": [
+    {
+      "injected": "stdout_close raises before wait",
+      "owned_child_wait_calls": 0,
+      "finished_flag": true,
+      "owned_exit_not_observed": true
+    },
+    {
+      "injected": "terminate raises before wait",
+      "owned_child_wait_calls": 0,
+      "finished_flag": true,
+      "owned_exit_not_observed": true
+    }
+  ],
+  "required_change": "Protect all post-Popen constructor setup and guarantee owned process kill/wait even when close/poll/terminate/setup fails; preserve original source and actual-run identity.",
+  "actual_healthy_run": "Do not interrupt or modify its loaded source. The actual seven observed births/exits/byte hashes may separately substantiate that execution; do not perform another export solely for this static repair.",
+  "auxiliary_process_note": "run also executes one local curl --version check; transfer_utility_processes counts transfers only, so later total utility-start accounting should retain that version process separately.",
+  "preserved_TLS_failure_receipt_SHA": "fbfd5e36ef75bd42823ec1899db4b784bc8dfb1697221b2f5b7c79354c985391",
+  "TLS_failure_metadata": {
+    "scientific_commit": "9ed88cf9da87c3ceb7aebc43694f865eacbc86a7",
+    "archive": "E:\\codes\\ExactEBRP-work\\temp\\round122\\public-export\\public_carrier.tar",
+    "error_class": "URLError",
+    "actual_public_export_complete": false,
+    "partial_evidence_retained": true,
+    "no_local_part_or_original_raw_fallback": true,
+    "Optimize": 0,
+    "native_starts": 0
+  },
+  "native_starts": 0,
+  "Optimize": 0,
+  "network_requests": 0,
+  "Git_commands": 0,
+  "real_subprocesses_launched_by_review": 0,
+  "scientific_exports": 0,
+  "scientific_restores": 0,
+  "existing_payload_or_helper_edits": 0,
+  "seconds": 0.012789400003384799
+}

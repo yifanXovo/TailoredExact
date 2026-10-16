@@ -1,0 +1,85 @@
+{
+  "decision": "ACCEPT",
+  "scope": "Independent bounded v2 cleanup mock review plus completed actual v1 HTTPS transfer/export/extraction receipt corroboration. Restored scientific checker scope remains pending its completed receipt.",
+  "reviewer": "independent executor /root/contract_review",
+  "UTC": "2026-10-16T18:52:16.287182+00:00",
+  "review_script_SHA": "28bb874e49290245b7e259313c42b2ca690bcb673725fc19ae1520bf9fd76f30",
+  "current_hardened_adapter_SHA": "58e71cbad072f88ae34040520355e48c6b33c95b262de2a28dc7d968cee10efe",
+  "actual_executed_v1_preserved_SHA": "1916691438c43218a4afbfdea190754101c9939baf6c8b676bdc55c5e9bed4d3",
+  "original_gap_review_SHA": "fe4c8e5f42ec386586e6139bfd7fcd3969de5559b32880d344c54be9f690838f",
+  "actual_transport_receipt_SHA": "5369901fc4100e0f698d911f5de08f70506cf27183e0d9914966754e56fb9922",
+  "actual_public_export_restore_receipt_SHA": "f6e88db005782cd57caf388f4a94c7c516d4674e87df4c54403b506254f7c467",
+  "scienceA": "9ed88cf9da87c3ceb7aebc43694f865eacbc86a7",
+  "arguments_TLS_URL_scope_AST_unchanged": true,
+  "byte_stream_read_AST_unchanged": true,
+  "strict_release_helper_unchanged": true,
+  "constructor_birth_and_registration_cleanup_verified": true,
+  "per_operation_close_terminate_wait_kill_retry_guards_verified": true,
+  "unreaped_permanent_failure_explicit_and_rejected": true,
+  "finite_cleanup_cases": [
+    "normal_stream_unchanged_complete_exit_hash",
+    "constructor_birth_error_terminates_waits_records",
+    "constructor_registration_error_terminates_waits",
+    "close_error_still_reaped_and_not_false_success",
+    "terminate_error_still_reaped_and_not_false_success",
+    "wait_error_still_reaped_and_not_false_success",
+    "kill_then_retry_error_still_reaped_and_not_false_success",
+    "stderr_read_error_still_reaped_and_not_false_success",
+    "stderr_close_error_still_reaped_and_not_false_success",
+    "combined_close_terminate_wait_error_still_reaped_and_not_false_success",
+    "bounded_permanent_failure_explicitly_unreaped_rejected"
+  ],
+  "actual_completed_transfers": 7,
+  "actual_unique_live_birth_exit_identities": [
+    [
+      10300,
+      1792176431.973856
+    ],
+    [
+      24480,
+      1792176434.2958183
+    ],
+    [
+      16976,
+      1792176438.5080147
+    ],
+    [
+      9356,
+      1792176441.9877129
+    ],
+    [
+      15056,
+      1792176444.7852345
+    ],
+    [
+      18232,
+      1792176448.4213848
+    ],
+    [
+      11520,
+      1792176451.6570911
+    ]
+  ],
+  "downloaded_bytes": 189999156,
+  "each_actual_transfer_digest_size_and_URL_equal_to_published_manifest": true,
+  "all_seven_actual_exit_codes_zero_and_reaped": true,
+  "actual_version": "V1 ran and completed; V2 cleanup repair was reviewed with mocks only, without a second export",
+  "actual_export_extraction_members": 62310,
+  "actual_export_extraction_hash_checks_receipt_passed": true,
+  "original_TLS_failure_retained_SHA": "fbfd5e36ef75bd42823ec1899db4b784bc8dfb1697221b2f5b7c79354c985391",
+  "utility_process_note": "Seven actual transfer curl processes plus one local curl --version check; V2 now explicitly records that additional version utility.",
+  "no_second_export": true,
+  "restored_scientific_checker": "PENDING_PARENT_COMPLETED_RECEIPT",
+  "limits": [
+    "This bounded review checked source equivalence, original actual seven stream receipts and their manifest hashes; it did not rehash the 190MB transport archive, decompress parts or rescan all extracted members.",
+    "V1 constructor/teardown gaps remain documented; every actual V1 transfer successfully reached its recorded birth/exit0 path. No claim that unexecuted V2 produced those actual receipts."
+  ],
+  "network_requests": 0,
+  "real_subprocesses_launched_by_review": 0,
+  "exports_or_restores_by_review": 0,
+  "full_scans": 0,
+  "native_starts": 0,
+  "Optimize": 0,
+  "existing_source_or_payload_member_edits": 0,
+  "seconds": 0.30860310001298785
+}
