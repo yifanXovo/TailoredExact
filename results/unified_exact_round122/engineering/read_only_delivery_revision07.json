@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-10-16T18:40:14.110034+00:00",
+  "before_SHA": "8820e82b948fb321bfed45b7f6e9cdd883fb1b3f5016e5634b0599e07963552c",
+  "after_SHA": "451331633e340155a49149a0a218eb3cf421bb9974e91b54d122a6c3b6090d12",
+  "reason": "Actual Git storage normalizes the manifest formatting newlines. Strict public byte comparison must bind the LF public blob, without metadata value or scientific member changes.",
+  "scienceA": "9ed88cf9da87c3ceb7aebc43694f865eacbc86a7",
+  "canonical_carrier_unchanged": true,
+  "actual_public_export_attempts": 0,
+  "all_other_functions_AST_identical": [
+    "closure",
+    "inventory",
+    "preflight",
+    "pack",
+    "Joined",
+    "scan_carrier",
+    "public_carrier_export",
+    "restored_check",
+    "os_decode"
+  ],
+  "public_carrier_export_strict_checks_AST_unchanged": true,
+  "restored_check_typed32_48_stage_boundary_AST_unchanged": true,
+  "original_local_manifest_SHA": "310eecc102b6076d301e914aa17008adffa4bbffab710dc8b20ed86bad063e7b",
+  "expected_public_manifest_SHA": "0bc5561235ce9419452a647c7c8d1e50c735a59e956a41f344638438ea777746",
+  "actual_committed_manifest_byte_equal_after_only_CRLF_to_LF": true,
+  "all_six_parts_byte_equal_proven_in": "committed_manifest_newline_diagnostic.json",
+  "finite_fixtures": [
+    "LF identity",
+    "CRLF to exact LF",
+    "escaped string newline retained",
+    "signed zero/int/float/array types retained",
+    "standalone CR rejected",
+    "invalid JSON rejected"
+  ],
+  "source_files_unchanged": 216,
+  "measured_helpers_unchanged": 92,
+  "Optimize": 0,
+  "native_starts": 0
+}

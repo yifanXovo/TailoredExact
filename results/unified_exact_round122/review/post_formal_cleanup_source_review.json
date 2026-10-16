@@ -1,0 +1,28 @@
+{
+  "decision": "REQUIRES_GATE_BINDING_AND_FINAL_STATUS_HARDENING",
+  "scope": "Actual bounded read-only source/PowerShell-AST review of planned cleanup v1 only; not cleanup execution admission.",
+  "reviewer": "independent executor /root/contract_review",
+  "UTC": "2026-10-16T18:56:42.410006+00:00",
+  "source_SHA": "c79f625c074338088964a5b5bd46aa5123ada8d4998479de34d902bc57bb6786",
+  "review_script_SHA": "e91aa345147440e40a317562f24eb152142daee0379ef15ce081681416f81db1",
+  "PowerShell_parser_errors": 0,
+  "native_PS_delete_command": "Remove-Item -LiteralPath $taskChecked -Recurse -Force",
+  "delete_command_count": 1,
+  "containment_findings": "Four literal E-work targets; absolute normalization and exact whitelist; all ancestor/internal reparse entries rejected; native literal-path deletion; write-ahead and per-target external receipts.",
+  "asset_findings": "Current raw/carrier/main/old trees and frozen PE/DLL/core lie outside all four targets; necessary assets and protected main dirty bytes are explicitly rehashed.",
+  "required_changes": [
+    "Bind replay/public-export receipt scientific_commit to scienceA9ed88... and fresh_empty_root to exact taskRestore; require the intended typed32/48 stage and boundary success, rather than generic counts/pass flags.",
+    "Hash-bind normalized manifest to the completed public-export metadata and exact6 parts. Validate each retained part path remains in the canonical directory and outside deletion targets; preserve size/SHA checks. Current empty parts would vacuously pass while receipt claims six verified parts.",
+    "Actually read cleanup_candidates.json, verify its exact normalized four-target set and bind its SHA into the pre-delete external receipt.",
+    "Persist explicit cleanup_passed based on no failed removals/all four absent plus carrier/runtime/main postchecks; return failure or require caller to inspect that field, rather than ordinary exit0 despite a nonempty failed list.",
+    "Recheck protected main HEAD after deletion if claiming all main-state protection after cleanup."
+  ],
+  "no_delete_or_target_enumeration": true,
+  "restored_checker_untouched": true,
+  "native_starts": 0,
+  "Optimize": 0,
+  "network_requests": 0,
+  "Git_commands": 0,
+  "existing_source_or_payload_member_edits": 0,
+  "seconds": 0.002201499999500811
+}

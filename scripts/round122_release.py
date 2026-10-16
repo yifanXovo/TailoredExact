@@ -150,6 +150,13 @@ def public_carrier_export(commit,expected_manifest,archive):
         fetched=fetched,application_credentials_supplied=False,local_git_archive_used=False,
         no_local_part_or_original_raw_fallback=True,streamed_parts=True)
 
+def public_manifest_bytes(raw):
+    """Bind Git's LF text blob without reserializing any manifest value."""
+    normalized=raw.replace(b'\r\n',b'\n')
+    assert b'\r' not in normalized,'unsupported standalone CR in manifest'
+    typed_equal(json.loads(raw),json.loads(normalized))
+    return normalized
+
 def restore(root,commit,destination):
     tick=time.perf_counter();root=Path(root).resolve();out=root/ROUND;dest=Path(destination).resolve()
     assert not dest.exists() and dest.is_relative_to((WORK/'restore').resolve()) and not dest.is_relative_to(root)
@@ -158,12 +165,17 @@ def restore(root,commit,destination):
     export=TEMP/'public-export';export.mkdir(parents=True,exist_ok=False)
     manifest=read(out/'compact_evidence/manifest.json');names=[ROUND+'/compact_evidence/manifest.json']+[p['path'] for p in manifest['parts']]
     archive=export/'public_carrier.tar'
-    try:public=public_carrier_export(commit,(out/'compact_evidence/manifest.json').read_bytes(),archive)
+    local_manifest=(out/'compact_evidence/manifest.json').read_bytes()
+    expected_public_manifest=public_manifest_bytes(local_manifest)
+    try:public=public_carrier_export(commit,expected_public_manifest,archive)
     except Exception as exc:
         write(out/'delivery/public_export_failure_receipt.json',dict(scientific_commit=commit,archive=str(archive),
             error_class=type(exc).__name__,actual_public_export_complete=False,partial_evidence_retained=True,
             no_local_part_or_original_raw_fallback=True,Optimize=0,native_starts=0))
         raise
+    public.update(local_manifest_SHA=hashlib.sha256(local_manifest).hexdigest(),
+        expected_public_manifest_SHA=hashlib.sha256(expected_public_manifest).hexdigest(),
+        manifest_transport_normalization='Only CRLF formatting whitespace to Git LF; all typed fields/values retained')
     restored=set()
     with tarfile.open(archive) as published:
         raw_manifest=published.extractfile(names[0]).read();actual=json.loads(raw_manifest);assert actual==manifest

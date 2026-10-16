@@ -1,0 +1,30 @@
+{
+  "base_gitattributes_SHA256": "18298a742c72d9fd41b5f47a6482d7bb18269293a68dd46ecdb3ab95a0d963fd",
+  "base_bytes_preserved_as_prefix": true,
+  "files": {
+    "scripts/round122_release.py": "451331633e340155a49149a0a218eb3cf421bb9974e91b54d122a6c3b6090d12",
+    "scripts/round122_public_https.py": "58e71cbad072f88ae34040520355e48c6b33c95b262de2a28dc7d968cee10efe",
+    "results/unified_exact_round122/engineering/public_https_transport_v1.py": "1916691438c43218a4afbfdea190754101c9939baf6c8b676bdc55c5e9bed4d3",
+    "results/unified_exact_round122/engineering/release_before_manifest_newline_fix.py": "8820e82b948fb321bfed45b7f6e9cdd883fb1b3f5016e5634b0599e07963552c",
+    "results/unified_exact_round122/engineering/cleanup_round122.ps1": "0a5b406de88ec23f0efa66944a7c133c3c2ff0048ba499a06941e21cc10e4e6f",
+    "results/unified_exact_round122/engineering/cleanup_round122_plan_v1.ps1": "c79f625c074338088964a5b5bd46aa5123ada8d4998479de34d902bc57bb6786"
+  },
+  "canonical_scienceA_manifest_or_parts_unchanged": true,
+  "all_scientific_frozen_bindings_unchanged": true,
+  "reason": "Keep actual pre/post unmeasured transport and cleanup source SHA identities exact in public Git; no global config change",
+  "Optimize": 0,
+  "native_starts": 0,
+  "unmeasured_delivery_tool_paths": [
+    "scripts/round122_release.py",
+    "scripts/round122_public_https.py",
+    "results/unified_exact_round122/engineering/public_https_transport_v1.py",
+    "results/unified_exact_round122/engineering/release_before_manifest_newline_fix.py",
+    "results/unified_exact_round122/engineering/cleanup_round122.ps1",
+    "results/unified_exact_round122/engineering/cleanup_round122_plan_v1.ps1"
+  ],
+  "additional_late_receipt_rules": [
+    "/results/unified_exact_round122/delivery/** -text whitespace=cr-at-eol",
+    "/results/unified_exact_round122/review/post_formal_* -text whitespace=cr-at-eol"
+  ],
+  "canonical_manifest_and_scienceA_parts_not_matched_by_new_rules": true
+}
