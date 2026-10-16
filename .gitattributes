@@ -303,3 +303,6 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 # Keep actual late receipt/reviewer digests exact; scientific carrier files retain scienceA bytes.
 /results/unified_exact_round122/delivery/** -text whitespace=cr-at-eol
 /results/unified_exact_round122/review/post_formal_* -text whitespace=cr-at-eol
+
+# Preserve the authoritative actual post-PR cleanup receipt bytes.
+/results/unified_exact_round122/cleanup_summary.json -text whitespace=cr-at-eol
