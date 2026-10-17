@@ -1,7 +1,7 @@
 {
-  "observed_UTC": "2026-10-17T23:02:45.987175+00:00",
+  "observed_UTC": "2026-10-17T23:06:12.277157+00:00",
   "first_read_UTC": "2026-10-17T22:38:49+00:00",
-  "elapsed_session_wall_seconds": 1436.987175,
+  "elapsed_session_wall_seconds": 1643.277157,
   "formal_performance_arms": 0,
   "solver_process_starts": 0,
   "LP_MIP_CP_DP_optimization_calls": 0,
@@ -13,9 +13,14 @@
   "actual_public_export_and_rebuild_seconds": 38.89760219998425,
   "public_rebuild_subprocess_seconds": 0.09652620000997558,
   "public_transfer_bytes": 822135,
-  "public_curl_processes": 38,
   "network_wait_and_interactive_review": "included in actual overall wall interval; not separately fully metered; not zero",
   "human_effort_seconds": null,
   "network_or_service_fees_currency": null,
-  "accounting_scope": "named measured intervals are nested/partial observations, not a sum claiming full CPU accounting; automatic Git maintenance is separate unexpected engineering work"
+  "accounting_scope": "named measured intervals are nested/partial observations, not a sum claiming full CPU accounting; automatic Git maintenance is separate unexpected engineering work",
+  "public_reconstruction_curl_processes": 38,
+  "public_B_readback_curl_processes": 9,
+  "public_B_readback_seconds": 10.78349459997844,
+  "safe_owned_cleanup_seconds": 0.3790111,
+  "deleted_logical_bytes": 826111,
+  "observed_E_free_delta": 909312
 }
