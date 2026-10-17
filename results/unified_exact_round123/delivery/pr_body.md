@@ -1,0 +1,30 @@
+This closes the frozen M-B paper reference and tests one finite proof question: what can cold P-GRB, M-B and ENS-C certify on the known, strictly positive PB-C50-S role with independently paid 18,000-second production windows? All three qualified producers completed and remain open: **COMPLETE / FINITE_LONG_WINDOW_PROOF_LIMIT_RECORDED**. This adds zero independent benchmark problems and does not reopen D1 selection.
+
+| Method | Final physical U | Qualified L | Signed gap | Nonzero certificate |
+|---|---:|---:|---:|---|
+| P-GRB | 0.37764170855020796 | 0.35037793304081627 | 0.027263775509391686 | No |
+| M-B | 0.3723417754990474 | 0.3580114855518426 | 0.01433028994720481 | No |
+| ENS-C | 0.3723417754990474 | 0.35894366616771595 | 0.013398109331331454 | No |
+
+The fixed same-window comparisons are **M-B/P WIN, ENS-C/P WIN, M-B/ENS-C TIE**, with no severe comparison. Both integrated methods retain two unresolved low-G cover units; a single strong child bound or terminal status does not close the original problem. No proof-time ratio or convergence forecast is reported. Physical T=10,800 seconds is distinct from compute cap=18,000 seconds; the original 30-second native reserve, model, heuristic, AM, seed and numerical policy were frozen.
+
+The English paper deliverables are:
+
+- [Methods, lemmas, proofs and complete algorithm](https://github.com/yifanXovo/TailoredExact/blob/4591de6834e8324ef0df9dfdd50e9fed88be1d45/results/unified_exact_round123/paper_methods_draft.md)
+- [Computational results with all R122 32 arms / 48 pairs and nine adverse or mixed comparisons](https://github.com/yifanXovo/TailoredExact/blob/4591de6834e8324ef0df9dfdd50e9fed88be1d45/results/unified_exact_round123/paper_computational_results_draft.md)
+- [Claim matrix and explicit limitations](https://github.com/yifanXovo/TailoredExact/blob/4591de6834e8324ef0df9dfdd50e9fed88be1d45/results/unified_exact_round123/paper_claim_matrix.md)
+- [Finite V50 proof obligations and limits](https://github.com/yifanXovo/TailoredExact/blob/4591de6834e8324ef0df9dfdd50e9fed88be1d45/results/unified_exact_round123/proof_limit_report.md)
+
+M-B remains the existing paper reference and ENS-C remains the project default. R122 remains COMPLETE / BENCHMARK_MIXED_NO_NEW_PRIMARY_SELECTION; D1 did not meet its fixed two-new-role promotion condition. Exact rational checks establish PB-C50-S positivity and the whole-continuous-extension conditional-row redundancy for the two actual saved V35 models, including actual binary64 endpoint checks. These are offline clarification, with no new LP/MIP calls or production-bound injection. They do not erase earlier D1 benefits or establish a universal runtime claim.
+
+Validation binds 216 production source files and 96 frozen helpers to the reused PE/DLL, with actual loaded paths and per-process birth identities. Three real H100 CLI qualifications preceded exactly one formal three-arm group. A second implementation replays all three final physical fleets, all 200 observed witnesses, 302 bound events, cover/call scope, checkpoints and pairs. This is self-review with a separate implementation, not third-party native replication. Numerical certification remains the inherited 1e-7 evidence policy, not a rational exact certificate.
+
+ENS-C failed the fixed one-second observation-clock alignment rule (1.5845544376352336-second origin spread). Its four pre-end checkpoints remain unknown. Original records/raw times are retained, and its sealed endpoint and independently measured producer/verify clocks qualify. No final bound is backfilled into earlier checkpoints and no clock guard is widened.
+
+Actual fee-wrapper cost was 54,279.212850400014 seconds, including 264.5967261000187 seconds for qualification. Full producer/verify/total clocks and native Optimize counts are recorded. The public recovery receipt observes 57,292.13073730469 seconds of inclusive round wall against the 70,000-second ceiling; overlapping/nested times are not added twice and human effort remains unknown.
+
+Scientific commit A is `4591de6834e8324ef0df9dfdd50e9fed88be1d45`. One safe two-part carrier contains 6357 current/finite-evidence members (49,249,659 compressed bytes), excluding old campaigns/carriers and runtime binaries, licenses, HTML and credentials. Payload, decompressed carrier and actual staged bytes passed the current publication scanner; this does not resolve historical alerts.
+
+One actual anonymous pinned public export and one fresh-root reconstruction succeeded. The first reader completed but its post-check incorrectly compared an internal tuple with a saved JSON array. The failure and saved outputs are retained. The delivery-only fix compares both saved JSON objects strictly. An explicitly new checker executed inside the same restored root with the unchanged A reader, passed all typed fields/arrays/values/signed zeros and the portable history regression, and confirmed every original manifest member unchanged. There was no second export, carrier repack, native rerun or original-root fallback. The core SHA is `a084548b318eb112294375c57d28304adf4baaf20ea968383bf9e60fba5fb19f`.
+
+All new research work is under `E:/codes/ExactEBRP-work`, with the main entry at `E:/codes/ExactEBRP`. Unique raw, failures, identities, user modifications, all old worktrees and required PE/DLL are retained. After remote review/readback, only the exact owned public-export intermediate and successful restore expansion will be removed, with an external receipt and compact public summary. No merge, forced push, history rewrite, default change or additional experiment is part of this PR.

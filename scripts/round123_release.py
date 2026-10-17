@@ -168,7 +168,8 @@ def restored_check(root):
         if path.is_relative_to(root):opened.add(path.relative_to(root).as_posix())
     sys.addaudithook(boundary)
     import read_round123 as reader
-    dest=out/'restored_reconstruction';actual=reader.rebuild(root,dest);expected=c.read(out/'reconstruction/final/current_core.json')
+    dest=out/'restored_reconstruction';reader.rebuild(root,dest)
+    actual=c.read(dest/'current_core.json');expected=c.read(out/'reconstruction/final/current_core.json')
     typed_equal(normalize(actual,[root,measured]),normalize(expected,[root,measured]))
     import round123_history_fixture as history
     history_replay=history.check(root,write_receipt=False)
