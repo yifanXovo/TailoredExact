@@ -1,0 +1,18 @@
+# One safe current payload and actual current-core recovery
+
+The payload is one canonical split gzip tar under `compact_evidence`, with a complete per-member and per-part manifest. It contains the current three formal producers, finite H100 qualification, necessary code/contracts and finite read-only mathematical evidence. It excludes prior full campaigns/carriers, executable/DLL/runtime binaries, licenses, HTML and credentials. Large historical review indexes are omitted unless an actual current-reader dependency requires them. The actual local dependency trace records attempted optional missing cache paths separately from required existing files.
+
+Science commit A fixes the payload bytes. `round123_public_https.py` retrieves the manifest and every part anonymously from exact A-pinned public URLs using system curl/Schannel with ordinary certificate and hostname checks and no curlrc/application credentials. It verifies all lengths/hashes, then expands once into a fresh empty directory under E:/codes/ExactEBRP-work/restore. There is no local Git archive, local-part or original-raw fallback.
+
+The actual commands use A's full 40-hex identity, recorded in later delivery receipts:
+
+```powershell
+D:/msys64/ucrt64/bin/python.exe -B scripts/round123_public_https.py --commit <A40> --destination E:/codes/ExactEBRP-work/restore/round123-<A12>
+D:/msys64/ucrt64/bin/python.exe -B E:/codes/ExactEBRP-work/restore/round123-<A12>/scripts/round123_release.py restored-check --root E:/codes/ExactEBRP-work/restore/round123-<A12>
+```
+
+The restored checker executes the real current reader and compares every typed JSON field, array, type, value and signed zero. Only complete measured/restored root path prefixes are normalized. Its Python file/process/network/library audit permits the restored root and installed standard runtime, rejects original helper/raw fallback and solver loading, and verifies imported module locations. This is an actual Python audit boundary, not an OS sandbox. It also replays the finite history/final-U regression from the restored files without loading an old campaign.
+
+Initial unpack hash equality is distinct from derived reconstruction. The receipt lists any changed derived sidecars and the new reconstruction directory; it does not claim that every expanded and newly generated file is byte identical. The scientific carrier remains immutable. Later transfer/recovery/remote/cleanup receipts stay outside it, avoiding repacking for closeout receipts.
+
+After the science/review is pushed, necessary remote files are read, recovery passes and related processes exit, only the exact owned public-export intermediate and successful restore expansion may be removed. Preserve the unique raw/current worktree, failures, source/method identities, existing PE/DLL, user files and every old worktree. The authoritative cleanup receipt is outside those candidates at E:/codes/ExactEBRP-work/evidence/round123. Logical deleted bytes and observed free-space change are separate measures. No merge, history rewrite, forced worktree removal or further experiment is authorized by this delivery.

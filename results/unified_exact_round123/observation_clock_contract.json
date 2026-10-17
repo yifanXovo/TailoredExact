@@ -1,0 +1,51 @@
+{
+  "UTC": "2026-10-16T21:06:10.207544+00:00",
+  "runtime_clocks": {
+    "monotonic": {
+      "implementation": "GetTickCount64()",
+      "monotonic": true,
+      "adjustable": false,
+      "resolution": 0.015625
+    },
+    "perf_counter": {
+      "implementation": "QueryPerformanceCounter()",
+      "monotonic": true,
+      "adjustable": false,
+      "resolution": 1e-07
+    },
+    "time": {
+      "implementation": "GetSystemTimeAsFileTime()",
+      "monotonic": false,
+      "adjustable": true,
+      "resolution": 0.015625
+    }
+  },
+  "Python_SHA": "abf7f61b2f9106470d2fe1f3407084b3ab2ff26bb20d7c41abbfb104a8f6fd48",
+  "fixed_guard_seconds": 1.0,
+  "scope": "Post-seal offline availability only; original exact produce/verify/total clocks, math1e-7, native deadlines/callback frequency unchanged",
+  "formula": "max(native-end minus wrapper-wall, source wall-origin pairs)+fixed1s; cap only time upper by actual producer seal",
+  "if_alignment_not_qualified": "prefix checkpoint values unknown; never backfill final API values",
+  "example_qualification_alignment": {
+    "valid": true,
+    "offset_upper_seconds": 2.478367805480957,
+    "fixed_presentation_guard_seconds": 1.0,
+    "observed_origin_range_seconds": [
+      1.4667981681704987,
+      1.478367805480957
+    ],
+    "observed_origin_spread_seconds": 0.011569637310458347,
+    "wall_vs_producer_QPC_difference_seconds": -0.005217618134338409,
+    "process_marker_SHA_source": "process_start_marker.json",
+    "source_clock": "supervisor GetTickCount64 elapsed seconds",
+    "destination_clock": "arm producer QPC elapsed seconds",
+    "calibration_samples": 2,
+    "conversion": "max(native-end minus wrapper-wall, source wall-origin pairs)+fixed1s; cap only time upper by actual producer seal",
+    "numerical_solver_tolerances_and_T_produce_T_verify_unchanged": true,
+    "no_claim_of_exact_internal_discovery_time_or_unobserved_clock_drift": true
+  },
+  "original_legacy_offset": 1.2753116061503533,
+  "correct_marker_origin_before_guard": 1.478311606158968,
+  "removed_double_prelaunch_subtraction": 0.20300000000861473,
+  "declared_while_first_formal_arm_still_before_3600_checkpoint": true,
+  "original_R122_endpoints_and_clocks_unchanged": true
+}

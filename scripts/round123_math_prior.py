@@ -3,6 +3,7 @@ from round123_common import *
 from fractions import Fraction as F
 import ast, collections, copy, csv, math, re
 import round108_reader as core
+import round123_observation_clock as clock
 
 OLD=WORK/'worktrees/round122'
 PRIOR=OLD/'results/unified_exact_round122'
@@ -67,27 +68,46 @@ def redundant():
             for line in text.splitlines() if line.strip().startswith(('r120_g_lower:','r120_g_upper:','r120_f_lower:'))}
         assert len(named)==3
         A,D,B,E=[F(meta[k]) for k in ['lower_base','lower_delta','objective_base','objective_delta']]
+        U,V=[F(meta[k]) for k in ['upper_base','upper_delta']]
+        aa,mm,bb=[F.from_float(float(pair[k])) for k in ['a','m','b']]
+        assert model['bounds']['G']==(pair['a'],pair['b']) and model['types']['r120_h']=='B'
         assert named['r120_g_lower']==f'G - {meta["lower_delta"]} r120_h >= {meta["lower_base"]}'
+        assert named['r120_g_upper']==f'G - {meta["upper_delta"]} r120_h <= {meta["upper_base"]}'
+        link_slacks=[aa-A,mm-A-D,U-mm,U+V-bb];assert min(link_slacks)>=0
+        gb=re.search(r'(?m)^\s*(\S+) <= G <= (\S+)\s*$',text);assert gb
+        text_a,text_b=F(gb[1]),F(gb[2])
+        decimal_cover_slacks=[text_a-A,U+V-text_b,U-A-D];assert min(decimal_cover_slacks)>=0
+        assert B<=F.from_float(float(pair['beta0'])) and B+E<=F.from_float(float(pair['beta1']))
         # Verify complete added f row against the entire saved objective, independently.
         fr=next(r for r in model['rows'] if dict(r[0]).get('r120_h')==-float(meta['objective_delta']) and 'e_1' in dict(r[0]) and r[1]=='>=')
         terms=dict(fr[0]); assert terms.pop('r120_h')==-float(meta['objective_delta'])
         assert terms==dict(objective) and fr[2]==float(meta['objective_base'])
         decimal_slacks=[A-B,A+D-B-E]; assert min(decimal_slacks)>=0
         nA,nD,nB,nE=[F.from_float(native[k]) for k in ['lower_base','lower_delta','objective_base','objective_delta']]
+        nU,nV=[F.from_float(native[k]) for k in ['upper_base','upper_delta']]
+        native_link_slacks=[aa-nA,mm-nA-nD,nU-mm,nU+nV-bb];assert min(native_link_slacks)>=0
+        native_cover_slacks=[aa-nA,nU+nV-bb,nU-nA-nD];assert min(native_cover_slacks)>=0
+        assert nB<=F.from_float(float(pair['beta0'])) and nB+nE<=F.from_float(float(pair['beta1']))
         binary_slacks=[nA-nB,nA+nD-nB-nE]; assert min(binary_slacks)>=0
         assert pair['beta0']<=pair['a'] and pair['beta1']<=pair['m']
         samples=[]
         for h in map(F,[0,F(1,10),F(1,3),F(1,2),F(9,10),1]):
             assert A+D*h>=B+E*h and nA+nD*h>=nB+nE*h
             samples.append(dict(h=str(h),decimal_slack=str(A+D*h-B-E*h)))
-        target=OUT/'mathematics/d1_saved_models'/role; target.mkdir(parents=True,exist_ok=False)
+        target=OUT/'mathematics/d1_saved_models'/role; target.mkdir(parents=True,exist_ok=True)
         for src in [p,Path(str(p)+'.round120.json'),nr[0],d/'external/round120_root_pair.json']:
-            shutil.copyfile(src,target/src.name)
+            if (target/src.name).exists():assert sha(src)==sha(target/src.name)
+            else:shutil.copyfile(src,target/src.name)
         findings.append(dict(role=role,model_SHA=sha(p),rows=len(model['rows']),columns=len(model['order']),
             source_paths=[str(p),str(nr[0])],actual_ObjCon=constant,full_objective_nonnegative_penalty_verified=True,
             e_nonnegative_bound_count=len(obj),a=pair['a'],m=pair['m'],b=pair['b'],beta0=pair['beta0'],beta1=pair['beta1'],
             actual_decimal=dict(A=str(A),D=str(D),B=str(B),E=str(E),endpoint_slacks=list(map(str,decimal_slacks))),
             saved_native_binary64=dict(A=str(nA),D=str(nD),B=str(nB),E=str(nE),endpoint_slacks=list(map(str,binary_slacks))),
+            actual_decimal_projection_link_outward_slacks=list(map(str,link_slacks)),
+            actual_native_binary64_projection_link_outward_slacks=list(map(str,native_link_slacks)),
+            raw_decimal_G_bounds=list(map(str,[text_a,text_b])),
+            actual_decimal_two_branch_union_coverage_slacks=list(map(str,decimal_cover_slacks)),
+            actual_native_two_branch_union_coverage_slacks=list(map(str,native_cover_slacks)),
             samples=samples,original_variable_projection_equal=True,conditional_row_redundant_over_entire_D0_continuous_extension=True,
             support_level='Full saved LP bytes parsed now and exact arithmetic on original production API readback; no new native load/LP Optimize.',
             no_internal_search_or_time_invariance_claim=True))
@@ -115,12 +135,14 @@ def obligations():
         i=read(PRIOR/f'campaign/group{group:02d}/identity.json')
         for l in i['launches']:
             d=Path(l['destination']); obs=read(d/'observations.json'); r=read(d/'result.json')
+            producer=read(d/'producer_receipt.json');align=clock.alignment(d)
             p=l['panel']; fleet=core.full_fleet(OLD,p,r)
             witnesses=[]
             for row in obs:
                 if row['payload']['kind']=='witness':
                     w=core.full_fleet(OLD,p,row['payload'])
-                    witnesses.append(dict(sequence=row['sequence'],available_seconds=row['effective_available_seconds'],
+                    witnesses.append(dict(sequence=row['sequence'],available_seconds=clock.upper(row['effective_available_seconds'],align,producer['T_produce']),
+                        raw_process_available_seconds=row['effective_available_seconds'],
                         data_close_seconds=row['data_close_seconds'],F=w['F'],G=w['G'],source=row['payload']['source']))
             first=min(witnesses,key=lambda x:x['available_seconds']) if witnesses else None
             events=rows(d/'external/paper_tree_events.csv') if l['arm']!='P-GRB' else []
@@ -136,11 +158,12 @@ def obligations():
                 exact_g_embedding_interval_compatible=row['payload']['lower_g']-1e-7<=fleet['G']<=row['payload']['upper_g']+1e-7,
                 cutoff_compatible=fleet['F']<=row['payload']['cutoff']+1e-7 if not row['payload']['full_original'] else True)
                 for row in calls]
-            files=['result.json','observations.json','producer_receipt.json']
+            files=['result.json','observations.json','producer_receipt.json','native_end_receipt.json','completion.json','process_start_marker.json']
             if events: files+=['external/paper_tree_events.csv','external/paper_leaf_ledger.csv','external/global_bound_trace.csv','external/paper_optimize_ledger.csv']
             for fn in files:sources[(d/fn).relative_to(OLD).as_posix()]=sha(d/fn)
             records.append(dict(group=group,seed=l['seed'],arm=l['arm'],U=fleet['F'],G=fleet['G'],L=r['lower_bound'],
                 first_available_witness=first,best_observed=min(witnesses,key=lambda x:x['F']) if witnesses else None,
+                observation_clock_alignment=align,
                 actual_later_strict_witness_improvements=[v for k,v in enumerate(witnesses) if k and v['F']<min(w['F'] for w in witnesses[:k])-1e-12],
                 atomic_splits=[v for v in events if v['event']=='atomic_split'],leaves=leaves,active_cover=active,
                 controlling_leaf=controlling,complete_call_interval_compatibility=compat,
@@ -148,7 +171,7 @@ def obligations():
     write(OUT/'prior_proof_obligations.json',dict(source_commit=BASE,source_files_SHA=sources,records=records,
         source_reconstruction_not_a_new_R122_native_reproduction=True,Optimize=0))
     lines=['# Prior PB-C50-S proof obligations (finite read-only reconstruction)','',
-        'The R122 Seed0 and Seed1 runs remain separate. Available journal times below are upper bounds on when an observation was usable, not an invented internal discovery time. The known own F=0.3723417754990474 is feasible; its optimality is unknown. No prior route, cutoff, bound, basis, tree or cache is an input to Round123.','',
+        'The R122 Seed0 and Seed1 runs remain separate. Times below are conservative arm-origin availability upper bounds, retaining the original process-observation times and calibration in the JSON. The fixed1-second offline envelope aligns distinct Windows observation/production clocks; failed alignment uses only the actual producer seal. These are not internal first-discovery times. Original R122 endpoints, production/verification clocks and recovery waits are unchanged. The known own F=0.3723417754990474 is feasible; its optimality is unknown. No prior route, cutoff, bound, basis, tree or cache is an input to Round123.','',
         '| Seed | Method | First available F / G / time | Final U | Final L | Final controlling leaf |','|---:|---|---|---:|---:|---|']
     for q in records:
         f=q['first_available_witness']; first=f'{f["F"]:.15g} / {f["G"]:.15g} / {f["available_seconds"]:.9f}s' if f else 'unknown'

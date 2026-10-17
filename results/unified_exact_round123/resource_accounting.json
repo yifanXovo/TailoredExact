@@ -1,0 +1,135 @@
+{
+  "fee_wrappers": {
+    "paid_outer_seconds": 54279.212850400014,
+    "remaining_outer_seconds": 15720.787149599986,
+    "qualification_seconds": 264.5967261000187,
+    "paid_starts": 8,
+    "additional_controllers": 2,
+    "unclosed": [],
+    "start_count_is_observed_not_a_hard_gate": true,
+    "native_seconds_not_added_twice": true
+  },
+  "additional_measured_science_seconds": 102.58382460003486,
+  "earlier_conservative_qualification_support_surcharge": 9.0134794,
+  "accounted_outer_seconds_lower_for_later_delivery": 54390.810154400046,
+  "observed_whole_round_wall_seconds_at_science_close": 55700.360934734344,
+  "conservative_overall_elapsed_not_double_counted": 55700.360934734344,
+  "remaining_of_70000_before_later_publication": 14299.639065265656,
+  "measured_post_group_components": [
+    {
+      "path": "reconstruction/attempt01_dependency_finalization/reconstruction_receipt.json",
+      "seconds": 38.118950800038874,
+      "classification": "additional post-group read-only science work"
+    },
+    {
+      "path": "reconstruction/final/reconstruction_receipt.json",
+      "seconds": 55.13241910003126,
+      "classification": "additional post-group read-only science work"
+    },
+    {
+      "path": "review/independent_post.json",
+      "seconds": 9.267108500003815,
+      "classification": "additional post-group read-only science work"
+    },
+    {
+      "path": "proof_limit_details.json",
+      "seconds": 0.04259420000016689,
+      "classification": "additional post-group read-only science work"
+    },
+    {
+      "path": "paper_table_sources.json",
+      "seconds": 0.022751999960746616,
+      "classification": "additional post-group read-only science work"
+    }
+  ],
+  "native_processes": [
+    {
+      "phase": "qualification/h100_seed0",
+      "arm": "P-GRB",
+      "pid": 27084,
+      "creation_receipt_SHA": "a8f680fbbc85990ff242a2e90a8a1151206bd773d5f586ec37800994b5c3bf12"
+    },
+    {
+      "phase": "qualification/h100_seed0",
+      "arm": "M-B",
+      "pid": 10204,
+      "creation_receipt_SHA": "3a2d65b35f1f828ce864a34eca55d32eafb9e742fc2b8bdbfc3dc6f147c816a4"
+    },
+    {
+      "phase": "qualification/h100_seed0",
+      "arm": "ENS-C",
+      "pid": 25236,
+      "creation_receipt_SHA": "127947114191d7ad0891bdae06ea4376edcb1905aacd0a75376c3f91718b91d3"
+    },
+    {
+      "phase": "campaign/group01",
+      "arm": "P-GRB",
+      "pid": 24548,
+      "creation_receipt_SHA": "01e86c79a4bcdef2ba6e8ff6b14e58abf957945f7399b352653eabf2dff1d123"
+    },
+    {
+      "phase": "campaign/group01",
+      "arm": "M-B",
+      "pid": 5512,
+      "creation_receipt_SHA": "db41d643ead4b14fcf8b8ecacb108f746aa20deae661645e3737dccc044dfc44"
+    },
+    {
+      "phase": "campaign/group01",
+      "arm": "ENS-C",
+      "pid": 14732,
+      "creation_receipt_SHA": "2db8e2d39af8af12bfc6c750ccd51eb09acf3ab99522d8902fc77c5f4db2de07"
+    }
+  ],
+  "native_Optimize_calls": [
+    {
+      "phase": "qualification/h100_seed0",
+      "arm": "P-GRB",
+      "total": 1,
+      "LP": 0,
+      "MIP": 1
+    },
+    {
+      "phase": "qualification/h100_seed0",
+      "arm": "M-B",
+      "total": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "phase": "qualification/h100_seed0",
+      "arm": "ENS-C",
+      "total": 5,
+      "LP": 3,
+      "MIP": 2
+    },
+    {
+      "phase": "campaign/group01",
+      "arm": "P-GRB",
+      "total": 1,
+      "LP": 0,
+      "MIP": 1
+    },
+    {
+      "phase": "campaign/group01",
+      "arm": "M-B",
+      "total": 8,
+      "LP": 7,
+      "MIP": 1
+    },
+    {
+      "phase": "campaign/group01",
+      "arm": "ENS-C",
+      "total": 12,
+      "LP": 9,
+      "MIP": 3
+    }
+  ],
+  "fee_level_process_starts": 8,
+  "distinct_fee_controllers": 2,
+  "read_only_observer": "Separate launch/exit receipts; zero native starts, overlaps formal wall",
+  "nonnative_math_engineering_and_overlapping_review": "Individual measured receipts, never infer zero for unknown effort; overlapping formal wall not added twice",
+  "human_effort_seconds": "unknown",
+  "native_Runtime_nested_not_added_again": true,
+  "startup_count_not_a_new_gate": true,
+  "publication_recovery_cleanup_costs": "separate later receipts"
+}

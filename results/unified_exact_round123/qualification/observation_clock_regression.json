@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "actual_three_H100_sources": [
+    {
+      "role": "01_H100_S0_P-GRB",
+      "raw_process_seconds": 0.34400000001187436,
+      "arm_available_upper": 2.8223678054928314,
+      "test_boundary": 1.5831839027523529,
+      "naive_raw_clock_would_include_but_correct_upper_excludes": true,
+      "source_clock_alignment": {
+        "valid": true,
+        "offset_upper_seconds": 2.478367805480957,
+        "fixed_presentation_guard_seconds": 1.0,
+        "observed_origin_range_seconds": [
+          1.4667981681704987,
+          1.478367805480957
+        ],
+        "observed_origin_spread_seconds": 0.011569637310458347,
+        "wall_vs_producer_QPC_difference_seconds": -0.005217618134338409,
+        "process_marker_SHA_source": "process_start_marker.json",
+        "source_clock": "supervisor GetTickCount64 elapsed seconds",
+        "process_marker_SHA": "e440583b4c3c1e3214d12a8539e572e19cb572fb31f511b7681e7976dcf582cf",
+        "destination_clock": "arm producer QPC elapsed seconds",
+        "calibration_samples": 2,
+        "conversion": "max(native-end minus wrapper-wall, source wall-origin pairs)+fixed1s; cap only time upper by actual producer seal",
+        "numerical_solver_tolerances_and_T_produce_T_verify_unchanged": true,
+        "no_claim_of_exact_internal_discovery_time_or_unobserved_clock_drift": true
+      }
+    },
+    {
+      "role": "02_H100_S0_M-B",
+      "raw_process_seconds": 0.8120000000053551,
+      "arm_available_upper": 2.052338100009365,
+      "test_boundary": 1.43216905000736,
+      "naive_raw_clock_would_include_but_correct_upper_excludes": true,
+      "source_clock_alignment": {
+        "valid": true,
+        "offset_upper_seconds": 1.24033810000401,
+        "fixed_presentation_guard_seconds": 1.0,
+        "observed_origin_range_seconds": [
+          0.20840427017537877,
+          0.2403381000040099
+        ],
+        "observed_origin_spread_seconds": 0.03193382982863113,
+        "wall_vs_producer_QPC_difference_seconds": -0.006784729281207547,
+        "process_marker_SHA_source": "process_start_marker.json",
+        "source_clock": "supervisor GetTickCount64 elapsed seconds",
+        "process_marker_SHA": "2ae17f7500b0fdbe890ce89e3fe0514255a5cc285f58dc6f59b2f9e1d83abefb",
+        "destination_clock": "arm producer QPC elapsed seconds",
+        "calibration_samples": 2,
+        "conversion": "max(native-end minus wrapper-wall, source wall-origin pairs)+fixed1s; cap only time upper by actual producer seal",
+        "numerical_solver_tolerances_and_T_produce_T_verify_unchanged": true,
+        "no_claim_of_exact_internal_discovery_time_or_unobserved_clock_drift": true
+      }
+    },
+    {
+      "role": "03_H100_S0_ENS-C",
+      "raw_process_seconds": 0.8129999999946449,
+      "arm_available_upper": 2.0434568999917246,
+      "test_boundary": 1.4282284499931848,
+      "naive_raw_clock_would_include_but_correct_upper_excludes": true,
+      "source_clock_alignment": {
+        "valid": true,
+        "offset_upper_seconds": 1.2304568999970797,
+        "fixed_presentation_guard_seconds": 1.0,
+        "observed_origin_range_seconds": [
+          0.19865482137538493,
+          0.23045689999707974
+        ],
+        "observed_origin_spread_seconds": 0.03180207862169482,
+        "wall_vs_producer_QPC_difference_seconds": 0.0008291366684716195,
+        "process_marker_SHA_source": "process_start_marker.json",
+        "source_clock": "supervisor GetTickCount64 elapsed seconds",
+        "process_marker_SHA": "3080868d36fe9a556ada061ba7f1e298a5abe6f5b19f61d8fa3879354263d84f",
+        "destination_clock": "arm producer QPC elapsed seconds",
+        "calibration_samples": 2,
+        "conversion": "max(native-end minus wrapper-wall, source wall-origin pairs)+fixed1s; cap only time upper by actual producer seal",
+        "numerical_solver_tolerances_and_T_produce_T_verify_unchanged": true,
+        "no_claim_of_exact_internal_discovery_time_or_unobserved_clock_drift": true
+      }
+    }
+  ],
+  "independent_formula_matches": true,
+  "producer_clocks_and_all_R122_originals_unchanged": true,
+  "Optimize": 0,
+  "native_starts": 0
+}

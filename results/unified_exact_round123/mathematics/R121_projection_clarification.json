@@ -1,0 +1,160 @@
+{
+  "pinned_parent": "f3363d9ddede2725496e4a3e0466bbf4d1cec089",
+  "path": "results/unified_exact_round121/review/pre_contract.json",
+  "source_Git_blob_SHA256": "4ffc8624a21b6b5217121503b9be248cce7666dc85406854e2838d3a02f46a0c",
+  "two_previously_reviewed_saved_points": [
+    {
+      "role": "F2",
+      "result": "SAVED_POINT_EXTENDS_TO_D1_BY_H_RESELECTION",
+      "original_h": 0.38106808408052395,
+      "selected_h": 0.0,
+      "original_g": 0.16868899039054336,
+      "full_objective_with_ObjCon": 0.6105472608488206,
+      "actual_ObjCon": 0.0,
+      "objective_slack_at_selected_h": 1.1681904754846827e-17,
+      "original_D1_full_residual": {
+        "maximum_row_violation": 0.10368547236475867,
+        "worst_row": 9311,
+        "maximum_bound_violation": 0.0
+      },
+      "repaired_D1_full_residual": {
+        "maximum_row_violation": 2.7284841053187847e-12,
+        "worst_row": 4731,
+        "maximum_bound_violation": 0.0
+      },
+      "all_original_coordinates_other_than_h_unchanged": true,
+      "actual_three_rows": [
+        {
+          "row_zero_based": 9309,
+          "sense": ">",
+          "rhs": 0,
+          "coefficients_by_name": {
+            "G": 1,
+            "r120_h": -0.4426741504672889
+          }
+        },
+        {
+          "row_zero_based": 9310,
+          "sense": "<",
+          "rhs": 0.44267415046728903,
+          "coefficients_by_name": {
+            "G": 1,
+            "r120_h": -0.44267415046728914
+          }
+        },
+        {
+          "row_zero_based": 9311,
+          "sense": ">",
+          "rhs": 0.6105472608488206,
+          "coefficients_by_name": {
+            "G": 1,
+            "e_1": 0.12062204999999998,
+            "e_2": 0.11724704999999999,
+            "e_3": 0.1056126,
+            "e_4": 0.08783339999999999,
+            "e_5": 0.06821115,
+            "e_6": 0.14439645,
+            "e_7": 0.11344755,
+            "e_8": 0.1304466,
+            "e_9": 0.10030005,
+            "e_10": 0.043341,
+            "e_11": 0.06609599999999999,
+            "e_12": 0.13536255,
+            "e_13": 0.12676035,
+            "e_14": 0.0955542,
+            "e_15": 0.08831354999999999,
+            "e_16": 0.1023963,
+            "e_17": 0.1297128,
+            "e_18": 0.041668199999999996,
+            "e_19": 0.12238815,
+            "e_20": 0.07935539999999999,
+            "r120_h": -0.2720917250651952
+          }
+        }
+      ]
+    },
+    {
+      "role": "R98-C2",
+      "result": "SAVED_POINT_EXTENDS_TO_D1_BY_H_RESELECTION",
+      "original_h": 0.21073270314457934,
+      "selected_h": 0.0,
+      "original_g": 0.04126366508996621,
+      "full_objective_with_ObjCon": 0.16290937653597193,
+      "actual_ObjCon": 0.0,
+      "objective_slack_at_selected_h": 0.0009039943682599919,
+      "original_D1_full_residual": {
+        "maximum_row_violation": 0.03176182992417159,
+        "worst_row": 31143,
+        "maximum_bound_violation": 0.0
+      },
+      "repaired_D1_full_residual": {
+        "maximum_row_violation": 9.094947017729282e-13,
+        "worst_row": 12219,
+        "maximum_bound_violation": 0.0
+      },
+      "all_original_coordinates_other_than_h_unchanged": true,
+      "actual_three_rows": [
+        {
+          "row_zero_based": 31141,
+          "sense": ">",
+          "rhs": 0,
+          "coefficients_by_name": {
+            "G": 1,
+            "r120_h": -0.19581044837476444
+          }
+        },
+        {
+          "row_zero_based": 31142,
+          "sense": "<",
+          "rhs": 0.1958104483747645,
+          "coefficients_by_name": {
+            "G": 1,
+            "r120_h": -0.19581044837476455
+          }
+        },
+        {
+          "row_zero_based": 31143,
+          "sense": ">",
+          "rhs": 0.16200538216771193,
+          "coefficients_by_name": {
+            "G": 1,
+            "e_1": 0.14816655,
+            "e_2": 0.0714069,
+            "e_3": 0.05200245,
+            "e_4": 0.03778425,
+            "e_5": 0.11383244999999999,
+            "e_6": 0.1278147,
+            "e_7": 0.1092315,
+            "e_8": 0.1050831,
+            "e_9": 0.08981399999999999,
+            "e_10": 0.13582139999999998,
+            "e_11": 0.07947375,
+            "e_12": 0.10741185,
+            "e_13": 0.10877429999999999,
+            "e_14": 0.1371414,
+            "e_15": 0.0790233,
+            "e_16": 0.08339774999999999,
+            "e_17": 0.14753655,
+            "e_18": 0.10419854999999999,
+            "e_19": 0.09999615,
+            "e_20": 0.0816378,
+            "e_21": 0.1366104,
+            "e_22": 0.1422327,
+            "e_23": 0.06671295,
+            "e_24": 0.14515755,
+            "e_25": 0.0985398,
+            "e_26": 0.11214734999999999,
+            "e_27": 0.11504804999999999,
+            "e_28": 0.060027,
+            "e_29": 0.09302189999999999,
+            "e_30": 0.1153374,
+            "r120_h": -0.15501070220705246
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "Exact source extraction of prior h-reselection review, not a new LP/native replay or general projected-space theorem",
+  "Optimize": 0,
+  "new_native_starts": 0
+}
