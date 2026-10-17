@@ -1,0 +1,13 @@
+# Search and support boundary
+
+Search date: 18 October 2026, Asia/Shanghai. Nine core works and one standard mathematical reference are recorded. Searches used exact titles/DOIs, “static bike sharing rebalancing Gini inventory target exact”, and 2024–2026 fairness/rebalancing terms. Publisher, institutional repository and author sources alone support the manuscript. This is a finite positioning exercise, not an exhaustive systematic review or proof of firstness.
+
+The closest detailed formulation checks are Erdoğan et al. (2014), Schuijbroek et al. (2017), and Ikonen et al. (2025). Their relevant full-text model sections, initial-load conventions, service restrictions and certificate scopes were inspected. Erdoğan et al. (2015), Matl et al. and the early Raviv preprint were also examined beyond their abstracts. Raviv's August 2011 preprint and final 2013 article metadata are distinguished. Chemla's publisher abstract supports only the high-level statements actually used. Recent Qiao and Caggiani papers have abstract/excerpt support: their unread detailed constraints are deliberately unknown.
+
+The DOI ending “024” for Ikonen is not its publication year: publisher metadata gives online 25 February 2025 and volume 26, pp. 1781–1813. Matl uses volume year 2018 (52(2):239–260), with first-online date 15 September 2017 retained. No access date is inferred from a search engine's “published/crawled” label.
+
+An attempted CIRRELT-2012-09 PDF proved to be *Balancing a Dynamic Public Bike-Sharing System*, not Chemla's 2013 static paper. It was rejected as a source for that entry. Two direct publisher/repository requests returned fetch errors; accessible author/institutional alternatives were used where available. No paywall was bypassed and no PDF or web-response HTML is redistributed here.
+
+Outstanding access is optional for the present bounded claims: final Raviv full article, Chemla full article, and full Qiao/Caggiani formulations. They would be required before asserting detailed equivalence, different constraint behavior or a matched performance comparison. The present manuscript makes none of those assertions and no “first Gini/fairness rebalancing” claim. Failure to find an identical model is not a novelty proof.
+
+Each literature paragraph in the manuscript uses short paraphrases. The separate comparison table limits claims to supported model attributes; unknowns are informative. Standard products, McCormick envelopes, starts and bound pruning are attributed as known tools, while the contribution being evaluated is the specific integrated method on the stated physical model.
