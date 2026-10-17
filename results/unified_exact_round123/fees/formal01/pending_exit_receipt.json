@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "outer_seconds_lower": 54014.58539152972,
+  "actual_native_children": 3,
+  "uncertain_native_children": 0,
+  "child_states": [
+    {
+      "id": "PB-C50-S",
+      "arm": "P-GRB",
+      "state": "actual_started",
+      "child_birth_SHA": "01e86c79a4bcdef2ba6e8ff6b14e58abf957945f7399b352653eabf2dff1d123"
+    },
+    {
+      "id": "PB-C50-S",
+      "arm": "M-B",
+      "state": "actual_started",
+      "child_birth_SHA": "db41d643ead4b14fcf8b8ecacb108f746aa20deae661645e3737dccc044dfc44"
+    },
+    {
+      "id": "PB-C50-S",
+      "arm": "ENS-C",
+      "state": "actual_started",
+      "child_birth_SHA": "2db8e2d39af8af12bfc6c750ccd51eb09acf3ab99522d8902fc77c5f4db2de07"
+    }
+  ],
+  "conservative_process_starts": 4,
+  "wrapper_pid": 10804,
+  "necessary_trailer_complete": true
+}

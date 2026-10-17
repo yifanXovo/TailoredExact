@@ -1,0 +1,5 @@
+Science A public export and fresh empty-root extraction succeeded (6357 members).
+The A reader completed the full three-arm current-core reconstruction in38.08582520001801 seconds, yielding FINITE_LONG_WINDOW_PROOF_LIMIT_RECORDED.
+The subsequent A post-check failed with:
+AssertionError: ('typed JSON mismatch', '/full_H/arms/M-B/fleet/0/operations/0', 'tuple', 'list')
+The checker incorrectly compared an internal Python return object to stored JSON. The reconstructed current_core.json already uses JSON arrays. Fix only the delivery comparison to read the saved JSON and retain strict type/array/value/signed-zero equality. Preserve this failure, the A payload, and the first generated core. No producer, endpoint, clock, tolerance or native invocation changes; no second carrier/public export is needed.

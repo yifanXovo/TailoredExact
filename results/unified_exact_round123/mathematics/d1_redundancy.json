@@ -1,0 +1,198 @@
+{
+  "roles": [
+    {
+      "role": "PB-C35-U",
+      "model_SHA": "bfabe100b99fa09fe8109de661642a9e37ad083f2bccacf16cd45411d80d7da1",
+      "rows": 44392,
+      "columns": 11150,
+      "source_paths": [
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round122\\results\\unified_exact_round122\\campaign\\group03\\raw\\02_PB-C35-U_S0_MB-D1\\external\\models\\L0_epoch_0_generation_1_round120_d1.lp",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round122\\results\\unified_exact_round122\\campaign\\group03\\raw\\02_PB-C35-U_S0_MB-D1\\external\\native_logs\\L0_terminal_mip.gurobi.log.round120.native.json"
+      ],
+      "actual_ObjCon": 0.0,
+      "full_objective_nonnegative_penalty_verified": true,
+      "e_nonnegative_bound_count": 35,
+      "a": 0,
+      "m": 0.11583831248139859,
+      "b": 0.23167662496279717,
+      "beta0": 0,
+      "beta1": 0.11583821248139857,
+      "actual_decimal": {
+        "A": "0",
+        "D": "11583831248139857/100000000000000000",
+        "B": "0",
+        "E": "723988828008741/6250000000000000",
+        "endpoint_slacks": [
+          "0",
+          "10000000001/100000000000000000"
+        ]
+      },
+      "saved_native_binary64": {
+        "A": "0",
+        "D": "8347030094823259/72057594037927936",
+        "B": "0",
+        "E": "4173511444531927/36028797018963968",
+        "endpoint_slacks": [
+          "0",
+          "7205759405/72057594037927936"
+        ]
+      },
+      "actual_decimal_projection_link_outward_slacks": [
+        "0",
+        "226710688371/13743895347200000000000000000",
+        "37121234409/2748779069440000000000000000",
+        "391764602253/6871947673600000000000000000"
+      ],
+      "actual_native_binary64_projection_link_outward_slacks": [
+        "0",
+        "1/72057594037927936",
+        "1/72057594037927936",
+        "1/18014398509481984"
+      ],
+      "raw_decimal_G_bounds": [
+        "0",
+        "23167662496279717/100000000000000000"
+      ],
+      "actual_decimal_two_branch_union_coverage_slacks": [
+        "0",
+        "3/50000000000000000",
+        "3/100000000000000000"
+      ],
+      "actual_native_two_branch_union_coverage_slacks": [
+        "0",
+        "1/18014398509481984",
+        "1/36028797018963968"
+      ],
+      "samples": [
+        {
+          "h": "0",
+          "decimal_slack": "0"
+        },
+        {
+          "h": "1/10",
+          "decimal_slack": "10000000001/1000000000000000000"
+        },
+        {
+          "h": "1/3",
+          "decimal_slack": "10000000001/300000000000000000"
+        },
+        {
+          "h": "1/2",
+          "decimal_slack": "10000000001/200000000000000000"
+        },
+        {
+          "h": "9/10",
+          "decimal_slack": "90000000009/1000000000000000000"
+        },
+        {
+          "h": "1",
+          "decimal_slack": "10000000001/100000000000000000"
+        }
+      ],
+      "original_variable_projection_equal": true,
+      "conditional_row_redundant_over_entire_D0_continuous_extension": true,
+      "support_level": "Full saved LP bytes parsed now and exact arithmetic on original production API readback; no new native load/LP Optimize.",
+      "no_internal_search_or_time_invariance_claim": true
+    },
+    {
+      "role": "PB-B35-B",
+      "model_SHA": "19b44abd77451a2881070f7ef368eeaacfe6e148640624def66fb2d7c649209e",
+      "rows": 43138,
+      "columns": 9894,
+      "source_paths": [
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round122\\results\\unified_exact_round122\\campaign\\group04\\raw\\01_PB-B35-B_S0_MB-D1\\external\\models\\L0_epoch_0_generation_1_round120_d1.lp",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round122\\results\\unified_exact_round122\\campaign\\group04\\raw\\01_PB-B35-B_S0_MB-D1\\external\\native_logs\\L0_terminal_mip.gurobi.log.round120.native.json"
+      ],
+      "actual_ObjCon": 0.0,
+      "full_objective_nonnegative_penalty_verified": true,
+      "e_nonnegative_bound_count": 35,
+      "a": 0,
+      "m": 0.12352673424571595,
+      "b": 0.2470534684914319,
+      "beta0": 0,
+      "beta1": 0.12352663424571593,
+      "actual_decimal": {
+        "A": "0",
+        "D": "12352673424571593/100000000000000000",
+        "B": "0",
+        "E": "1544082928071449/12500000000000000",
+        "endpoint_slacks": [
+          "0",
+          "10000000001/100000000000000000"
+        ]
+      },
+      "saved_native_binary64": {
+        "A": "0",
+        "D": "8901039269108809/72057594037927936",
+        "B": "0",
+        "E": "2225258015837351/18014398509481984",
+        "endpoint_slacks": [
+          "0",
+          "7205759405/72057594037927936"
+        ]
+      },
+      "actual_decimal_projection_link_outward_slacks": [
+        "0",
+        "460039923833/27487790694400000000000000000",
+        "364593796999/27487790694400000000000000000",
+        "155382131483/2748779069440000000000000000"
+      ],
+      "actual_native_binary64_projection_link_outward_slacks": [
+        "0",
+        "1/72057594037927936",
+        "1/72057594037927936",
+        "1/18014398509481984"
+      ],
+      "raw_decimal_G_bounds": [
+        "0",
+        "24705346849143189/100000000000000000"
+      ],
+      "actual_decimal_two_branch_union_coverage_slacks": [
+        "0",
+        "3/50000000000000000",
+        "3/100000000000000000"
+      ],
+      "actual_native_two_branch_union_coverage_slacks": [
+        "0",
+        "1/18014398509481984",
+        "1/36028797018963968"
+      ],
+      "samples": [
+        {
+          "h": "0",
+          "decimal_slack": "0"
+        },
+        {
+          "h": "1/10",
+          "decimal_slack": "10000000001/1000000000000000000"
+        },
+        {
+          "h": "1/3",
+          "decimal_slack": "10000000001/300000000000000000"
+        },
+        {
+          "h": "1/2",
+          "decimal_slack": "10000000001/200000000000000000"
+        },
+        {
+          "h": "9/10",
+          "decimal_slack": "90000000009/1000000000000000000"
+        },
+        {
+          "h": "1",
+          "decimal_slack": "10000000001/100000000000000000"
+        }
+      ],
+      "original_variable_projection_equal": true,
+      "conditional_row_redundant_over_entire_D0_continuous_extension": true,
+      "support_level": "Full saved LP bytes parsed now and exact arithmetic on original production API readback; no new native load/LP Optimize.",
+      "no_internal_search_or_time_invariance_claim": true
+    }
+  ],
+  "exact_finite_extension_cases": 60,
+  "Optimize": 0,
+  "new_native_starts": 0,
+  "universal_proof_in_paper": "Affine endpoint nonnegativity on h in [0,1], f>=g from nonnegative e/objective coefficients.",
+  "R120_original_extended_space_nonredundancy_not_revoked": true,
+  "no_new_D1_candidate": true
+}

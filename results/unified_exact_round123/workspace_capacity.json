@@ -1,0 +1,53 @@
+{
+  "prior_same_role_raw": [
+    {
+      "group": "group05",
+      "arm": "M-B",
+      "files": 184,
+      "logical_bytes": 118813369
+    },
+    {
+      "group": "group05",
+      "arm": "ENS-C",
+      "files": 198,
+      "logical_bytes": 118722523
+    },
+    {
+      "group": "group05",
+      "arm": "P-GRB",
+      "files": 459,
+      "logical_bytes": 5874692
+    },
+    {
+      "group": "group08",
+      "arm": "M-B",
+      "files": 177,
+      "logical_bytes": 118798338
+    },
+    {
+      "group": "group08",
+      "arm": "ENS-C",
+      "files": 247,
+      "logical_bytes": 118894766
+    },
+    {
+      "group": "group08",
+      "arm": "P-GRB",
+      "files": 469,
+      "logical_bytes": 4614310
+    }
+  ],
+  "actual_free_bytes": 216066551808,
+  "incremental_allowance_bytes": 50465865728,
+  "breakdown_GiB": {
+    "running_raw": 8,
+    "carrier": 8,
+    "one_restore": 8,
+    "packaging_intermediates": 2,
+    "code_and_reference": 1,
+    "safety": 20
+  },
+  "minimum_group_start_free_bytes": 42949672960,
+  "no_whole_disk_scan": true,
+  "no_heavy_scans_during_formal": true
+}
