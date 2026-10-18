@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "science_commit": "31fdaff705a8edf2a9ef49239a44f0d870505b60",
+  "anonymous": true,
+  "transport": "public raw HTTPS, no credentials",
+  "manifest_sha256": "f391b9fa8f058f9f29e5d0499d45d980ea197689e8d6e152dc3f7bb209c26305",
+  "files_downloaded": 38,
+  "payload_bytes": 683789,
+  "manifest_bytes": 6436,
+  "destination": "E:\\codes\\ExactEBRP-work\\restore\\round125-public-A",
+  "started_utc": "2026-10-18T09:12:26.196985+00:00",
+  "elapsed_seconds": 6.358785899996292,
+  "typed_JSON_comparison": "equal after excluding only elapsed_seconds",
+  "commands": [
+    {
+      "script": "finite_checks.py",
+      "returncode": 0,
+      "stdout": "{\"arithmetic_groups\": 17, \"matrix_templates\": 64, \"missing\": [], \"saved_H_replay\": \"passed\", \"optimizer_calls\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "script": "package_checks.py",
+      "returncode": 0,
+      "stdout": "{\"status\": \"PASS\", \"local_links_checked\": 26, \"bib_entries\": 13, \"table_denominators\": [32, 48, 3, 3], \"scanned_text_bytes\": 690225, \"scope\": \"new small artifacts only; historical security findings are not cleared; no semantic proof from syntax checks\"}\n",
+      "stderr": ""
+    }
+  ],
+  "retrieval_failures_retried": [],
+  "solver_processes": 0,
+  "optimization_calls": 0,
+  "production_compilations": 0,
+  "scope": "current lightweight package only; no historical campaign reconstruction"
+}
