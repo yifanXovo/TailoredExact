@@ -1,0 +1,15 @@
+{
+  "source_sha256": {
+    "PaperExternalGiniTree.cpp": "911f95e06f568317306a897f6e90eba9e43e52db1ec7ffec9c9a1426ade5e433",
+    "ControllingLeafScheduler.cpp": "6bbc7e773355bac11e2fb60d9ec4641d57eedd7baf29c38de6eba3cde3674303",
+    "ExternalGiniTree.cpp": "4e51bc6e3b0e9993b317c6c4aa0fb659f5cd88a71d19fe78608fa80c85e1bfae",
+    "IntervalRowFactory.cpp": "11d739171c660fd3c2761f575a72639da6d8fa57189da0ea5d3afbe3a319fa46",
+    "CplexBaseline.cpp": "9a230e48f9c6f5179d5760c216fd39774579e268c762aea4fe089efd076ea65c",
+    "HgaTgbcRunner.cpp": "418fa40968a22196c72eb48879e7bc4a72bb8f7a570faba99b77814248e5d8a5",
+    "Round83BlockExchange.cpp": "5a70c158a75f447c40fbff995703339cb5b59c551cba1be193283947724644a5",
+    "hga_tgbc/HgaTgbcGreedy.cpp": "871b3f3e024e273bbc8ee55d60dfc29f11d5282891eae1ed1419da02119821cd"
+  },
+  "epoch_invalidation_excerpt": " {\n            if (!std::filesystem::exists(state.artifact.path) ||\n                fileSha256(state.artifact.path) != state.artifact.sha256) {\n                ++result.external_gini_tree_canonical_artifact_invalidation_count;\n                result.external_gini_tree_failure_reason =\n                    \"paper_immutable_artifact_changed:\" + leaf.id;\n                return false;\n            }\n            // The canonical model contains the verified-incumbent row. A\n            // tighter independently verified incumbent therefore starts a\n            // new model epoch: retained native state and LP evidence from the\n            // old cutoff must not be reused.\n            backend->discardLeaf(leaf.id);\n            ++result.external_gini_tree_canonical_artifact_invalidation_count;\n            state.artifact_ready = false;\n            state.artifact = CanonicalCompactModelArtifact{};\n            state.artifact_incumbent_epoch = -1;\n            state.lp_complete = false;\n            state.lp = PaperLpResult{};\n            state.lp_incumbent_epoch = -1;\n            state.lp_artifact_sha256.clear();\n            state.terminal_mip_started = false;\n            state.terminal_ready = false;\n            state.c6_children_ready = false;\n            state.c6_cached_children.clear();\n            state.round43_lp_g_available = false;\n            state.round43_lp_objective_available = false;\n            state.round43_lp_work = 0.0;\n        }\n        ",
+  "neutral_admission_excerpt": "||!checked.errors.empty()||!checked.original_objective_recomputed||\n            checked.final_inventory!=result.verification.final_inventory||checked.objective!=result.verification.objective||\n            round78DurationPotential(checked)!=move.duration_potential||\n            !(move.duration_potential<round78DurationPotential(result.verification))) {result.verification_failed=true;break;}\n        ",
+  "scope": "Only two compact reviewed source excerpts; complete source identity recorded separately."
+}

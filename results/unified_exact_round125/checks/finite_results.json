@@ -1,0 +1,172 @@
+{
+  "arithmetic": [
+    {
+      "name": "rational Gini spread to variable and fixed centering",
+      "passed": true,
+      "detail": {
+        "vectors": 336,
+        "includes_S0": true
+      }
+    },
+    {
+      "name": "SP four products and zero boundary",
+      "passed": true,
+      "detail": "9 fixed rectangle points; exact Fraction arithmetic"
+    },
+    {
+      "name": "cutoff budget and scalar/lifted estimator",
+      "passed": true,
+      "detail": "specified rational feasible objective, no route search"
+    },
+    {
+      "name": "S0 cross multiplication loses penalty",
+      "passed": true,
+      "detail": "S=A=W=0,P=10,lambda=1/5,c=1: lifted passes, original cutoff fails"
+    },
+    {
+      "name": "support integer lower bound",
+      "passed": true,
+      "detail": "declared aggregate service scenarios; total pickup, not support pickup"
+    },
+    {
+      "name": "support Big-M inactive cases",
+      "passed": true,
+      "detail": "zero h/stock; empty route; tau>T; fixed algebra points"
+    },
+    {
+      "name": "implicit integrality and A/B",
+      "passed": true,
+      "detail": "four declared states; missing initial selector forces visit"
+    },
+    {
+      "name": "counterexample without unique service",
+      "passed": true,
+      "detail": "two serving vehicles pickup 1/2 each give integer net1"
+    },
+    {
+      "name": "counterexample without direction",
+      "passed": true,
+      "detail": "p=3/2,d=1/2; integer net does not imply either integer"
+    },
+    {
+      "name": "counterexample without integer inventory",
+      "passed": true,
+      "detail": "single one-way pickup1/2 leaves Y=3/2"
+    },
+    {
+      "name": "counterexample to support-local pickup lower bound",
+      "passed": true,
+      "detail": "declared route outside source +2, then W deliveries -1,-1"
+    },
+    {
+      "name": "counterexample without integer nonzero service",
+      "passed": true,
+      "detail": "two served stops pickup=drop=1/5 have total pickup below ceil(2/2)"
+    },
+    {
+      "name": "counterexample to cumulative pickup<=Q",
+      "passed": true,
+      "detail": "fixed operations +2,-2,+2, Q2, return2, cumulative4"
+    },
+    {
+      "name": "counterexample without empty departure",
+      "passed": true,
+      "detail": "preload1 and deliver1, no pickup; transfer upper bound0 fails"
+    },
+    {
+      "name": "heterogeneous capacity relabelling boundary",
+      "passed": true,
+      "detail": "route +2,-2 feasible for Q2, cannot relabel to Q1"
+    },
+    {
+      "name": "inflated native H not physical completion",
+      "passed": true,
+      "detail": "r=(1,1),g=.5,H=1: original epigraph permits it; true-G0 cap excludes it"
+    },
+    {
+      "name": "numerical penalty closure counterexample",
+      "passed": true,
+      "detail": "F=c-5e-10 meets nonstrict cutoff but >=c-1e-9 closure guard"
+    }
+  ],
+  "matrix": {
+    "matched_templates": 64,
+    "missing": [],
+    "scope": "one sample per algebra template where present; source generation map is broader; no full-matrix reproduction",
+    "source_sha256": "086c6ba3c5890b993449ef8b10aa9807e125c49b77e1dc39e637fdeb8959c564"
+  },
+  "decisions": {
+    "teaching": [
+      {
+        "action": "CHILD",
+        "target": 0.21,
+        "score": 0.000859374999999998,
+        "score_tolerance": 1.2500000710542735e-07
+      },
+      {
+        "action": "TERMINAL",
+        "target": 0.2,
+        "score": 0.0,
+        "score_tolerance": 1.2500000710542735e-07
+      },
+      {
+        "action": "SPLIT",
+        "target": 0.5,
+        "score": 0.16406249999999994,
+        "score_tolerance": 1.2500000710542735e-07
+      }
+    ],
+    "R123_actual_AM": {
+      "action": "SPLIT",
+      "target": 0.3411238085451107,
+      "score": 0.08077252489598688,
+      "score_tolerance": 2.5887181797865216e-06
+    },
+    "atomic_union_minimum": 0.25,
+    "nonproof_returns_preserve_parent": true,
+    "bounded_transition_adapter": true,
+    "scope": "finite independent rule computations plus source review; no execution/compilation of production decision code or native solve"
+  },
+  "H_saved_trace": {
+    "declared_joint_moves": [
+      {
+        "step": "1",
+        "objective_replayed": 2.1351667851718283,
+        "feasible": true
+      },
+      {
+        "step": "2",
+        "objective_replayed": 2.050944225716145,
+        "feasible": true
+      },
+      {
+        "step": "3",
+        "objective_replayed": 1.9472712610030454,
+        "feasible": true
+      }
+    ],
+    "neutral_relocation": {
+      "same_inventory": true,
+      "exact_rational_objective_unchanged": true,
+      "duration_tuple_before": [
+        10796.062690664652,
+        10726.97618071021,
+        9501.85984121825,
+        0.0
+      ],
+      "duration_tuple_after": [
+        10726.97618071021,
+        9501.85984121825,
+        9494.604001071071,
+        1775.059350418405
+      ]
+    },
+    "descent_first3_acceptance": true,
+    "first_exhaustion_pass": "18",
+    "scope": "replayed three saved insertion choices and one saved neutral choice; inspected saved acceptance/exhaustion fields; no neighbor search or new H solution"
+  },
+  "optimizer_calls": 0,
+  "solver_launches": 0,
+  "production_compilations": 0,
+  "elapsed_seconds": 0.03502689994638786
+}

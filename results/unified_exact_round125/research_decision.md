@@ -1,0 +1,19 @@
+# Round125 method completion and one remaining research decision
+
+The historical R124 COMPLETE / READY_FOR_ADVISOR_REVIEW assessment remains unchanged in its original record. Round125 applies a stricter standalone-method standard; its content decision is recorded after the independent two-stage review in final_report.md. No advisor communication is performed.
+
+**Priority: obtain substantive advisor feedback on this complete bounded manuscript.**
+
+The manuscript supports a specific contribution: a source-faithful formulation and integrated exact method for the stated inventory-to-target ratio objective, with explicit embedding/coverage proofs and complete finite-window comparisons against the cold original compact model. Standard products, envelopes, Starts and native Gurobi functions are not presented as new general theory. Nine core papers have traceable primary sources and declared reading levels; recent fairness work prevents a broad firstness claim. Lack of a matched comparison against every published algorithm is an explicit claim boundary, not disguised evidence of state-of-the-art superiority.
+
+The empirical case is complete within its denominator. R122 has six new Seed0 problems and two fixed Seed1 blocks, 32 arms and 48 pairs. M-B and ENS-C each have six new-role wins against cold P; their mutual losses remain. Seven nonzero certified arms occur at V20, with all V35/V50 outcomes open. R123 adds one known-input three-arm long study, zero independent problems, and three qualified open endpoints. Its two remaining integrated-method improvement obligations are described, rather than automatically granted more time.
+
+No additional experiment is necessary to make the current bounded claims true. The priority is therefore for the user to submit the complete draft to an advisor and ask whether this problem-specific integration and empirical scope constitute a useful contribution. Useful feedback would distinguish acceptance of the bounded narrative from a demand for one essential additional question. Completing a draft is neither submission nor an acceptance prediction.
+
+**No follow-up experiment is authorized or scheduled here.** If an advisor identifies a missing comparison or parameter question that materially changes the intended claim, that later task should preregister one minimum falsifiable study, its stopping outcome and its common cost contract. It must retain the unified method, P-GRB as primary benchmark, V≤50, and the admitted local tradeoffs; V60 would need separate prior authorization. This is a contingency on actual feedback, not a second research priority or a standing plan to run more instances.
+
+For any later low-G proposal, first distinguish inventory/ratio attainability from feasibility of a complete ordered fleet. The existing model already retains inventory balance, empty departure, one-way nonzero service, capacity prefixes/return, route time and connectivity. An incumbent whose true Gini lies outside I0 does not furnish an exact-g Start for I0, but that alone establishes neither a missing interface nor a primal cause of all proof difficulty.
+
+The D1 selection is closed at BENCHMARK_MIXED_NO_NEW_PRIMARY_SELECTION. It retains research and ablation value; D0 is not a reserve and MB-PC remains stopped. M-B is the frozen paper reference, ENS-C remains default. There is no default change, conditional D1 rule, new component, Seed, instance, parameter revision or automatic extension.
+
+Readiness is assessed separately in final_report.md after actual extra review. Optional unread full texts are listed in literature_scope.md; no core claim depends on their unknown detailed constraints. No advisor communication, email or submission is performed. The authorized lightweight materials are published only through this stacked Draft PR.

@@ -1,0 +1,107 @@
+{
+  "reviewer_role": "independent_methods_review",
+  "review_type": "separate delegated two-stage content/source review within the same workflow; not external peer review",
+  "closed_at_utc": "2026-10-18T09:12:10.594016+00:00",
+  "content_status": "METHODS_READY_FOR_SUBSTANTIVE_REVIEW",
+  "execution_status": "COMPLETE",
+  "stage1_sealed_before_matrix_or_source_access": true,
+  "stage1_report_sha256": "0b432768e281d66847597b214ff2e38f551c353ae0e4112ef686c8bd0e12f7c4",
+  "frozen_production_commit": "355eefd2be3fe5651195681faf7b3a63ee4032f8",
+  "production_src_include_readonly_diff": "no differences found against frozen commit",
+  "final_reread": "Substantive repairs, final math typography, B.7 route-count/quantity notation, source-only ledger and reproducibility fallback wording checked.",
+  "blocking_definition_or_proof_scope_gaps": [],
+  "new_foundational_contradictions_found": [],
+  "acceptance_criteria": [
+    {
+      "criterion": "1",
+      "status": "SATISFIED_WITH_DECLARED_SCOPE",
+      "assessment": "Enabled formulas, quantifiers, coefficient derivations, generation rules and scope are explicit; 64 sampled templates and seven honest source-only conditional mappings."
+    },
+    {
+      "criterion": "2",
+      "status": "SATISFIED_WITH_DECLARED_SCOPE",
+      "assessment": "NEXT/AM, current cutoff, cache epochs, raw bounds, return handling and cover transactions are defined; milestone persistence checked against active source."
+    },
+    {
+      "criterion": "3",
+      "status": "SATISFIED_WITH_DECLARED_SCOPE",
+      "assessment": "Actual H encoding, construction, active decoder, neighborhoods, heap predicates, exact neutral acceptance, cache and exits are reconstructible within the disclosed library tie limitation."
+    },
+    {
+      "criterion": "4",
+      "status": "SATISFIED_WITH_DECLARED_SCOPE",
+      "assessment": "Physical point, tight native completion, own U, raw and mathematical L, and native versus post-seal numerical gates are distinguished."
+    },
+    {
+      "criterion": "5",
+      "status": "SATISFIED_WITH_DECLARED_SCOPE",
+      "assessment": "Active static rows, native Gurobi behavior and dormant research routines are separated using actual preset/call-site evidence."
+    },
+    {
+      "criterion": "6",
+      "status": "SATISFIED_WITH_DECLARED_SCOPE",
+      "assessment": "The main paper contains substantive mathematics and complete algorithms, with detailed adjacent appendices rather than source-map substitutes."
+    },
+    {
+      "criterion": "7",
+      "status": "SATISFIED_WITH_DECLARED_SCOPE",
+      "assessment": "No new solver run, H search, production compilation, witness injection, method substitution, historical endpoint rewrite or performance expansion occurred in this review."
+    }
+  ],
+  "independent_executions": [
+    {
+      "cases": 11,
+      "passed": 11,
+      "source_mode": "current frozen source read",
+      "receipt": "review/independent_finite_results.json"
+    },
+    {
+      "cases": 11,
+      "passed": 11,
+      "source_mode": "compact saved source excerpts; no source revalidation",
+      "receipt": "E:\\codes\\ExactEBRP-work\\evidence\\round125\\review\\independent_finite_results.json",
+      "receipt_sha256": "20ba040c4baf13f8fde6ee9d90df69be560fde5ddd1af18ed724cccb1128c036"
+    }
+  ],
+  "main_executor_receipts_inspected": {
+    "rational_groups": 17,
+    "selected_saved_matrix_templates": 64,
+    "missing_expected": [],
+    "conditional_source_only_templates": 7,
+    "bounded_controller_adapter": true,
+    "saved_H_moves_only": true
+  },
+  "forbidden_operations": {
+    "optimizer_calls": 0,
+    "native_solver_calls": 0,
+    "production_compilations": 0,
+    "H_searches": 0,
+    "new_campaigns": 0,
+    "production_edits": 0,
+    "commits": 0,
+    "pushes": 0
+  },
+  "limits": [
+    "Finite review is not proof of every implementation path.",
+    "The disclosed numerical closure guard is not rational infeasibility, and no global accumulation theorem was established.",
+    "Objective-only equivalent heap/sort keys do not guarantee cross-platform bitwise H paths.",
+    "Saved source excerpts enable bounded replay, not full-source revalidation.",
+    "No full historical campaign or full-matrix reconstruction was repeated; historical endpoints and claims retain their prior scope."
+  ],
+  "sha256": {
+    "manuscript.md": "906ff1d079425cd717fd33f852610b81714865d7f207e5ba2d5d58ff01dcb20a",
+    "model_appendix.md": "5a54d0170b190e2f4181718c0fe7cfeff735a3349ef7b260954228e4b28b09db",
+    "algorithm_appendix.md": "2ebfc0cd2e5e9a99dd442ef6efe38e9f985b8d18d6700b62978ab2f7dd33f43f",
+    "method_spec_matrix.csv": "ec5b846ada65d0b56a62814c00c5829bc149b0cf54c879bb5965376e6bf52b7c",
+    "checks/finite_checks.py": "38e988e5df5bb9a616ba56e1b1b102235ec1d77e706be2f1ef1415dba421d236",
+    "checks/finite_results.json": "63a98f969ae76fcb40cba52ad1c4984b29b35fdab329ea7253cd2832dfa23c09",
+    "checks/template_coverage.csv": "b9311c5bde5c9c66eb0be94c239fb37ced0c986e161f95b6f827ca45429406cb",
+    "reproducibility.md": "39c60f644462f5b8ca277cdfe84c5ad508ffc25b6eb9c6af1b52c87d48546dc7",
+    "review_actions.md": "be30c285d2724a11ddc3ff0adec8fa17de825ce7dff5563c2fa22bbea2c0ad53",
+    "review/independent_stage1.md": "0b432768e281d66847597b214ff2e38f551c353ae0e4112ef686c8bd0e12f7c4",
+    "review/independent_stage2.md": "4e2504b2a6be6ee8851d02d31cc1f4e91a14d8dd4cac73f7f99f120893fa703e",
+    "review/independent_finite_checks.py": "b250c8fbc622c065c3a44bfbd85ec4c0d22e326c0a677d984f6b6f1db706350a",
+    "review/independent_finite_results.json": "38c28fc30751c0325c9463cfe3f68b9bb93243b1e7e054e77ec87a0093fd1ce6",
+    "review/independent_source_excerpts.json": "edbd09758320d062859df692c0a931fc5802b9e7ba979386f4dda0efc4b620af"
+  }
+}
