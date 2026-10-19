@@ -1,0 +1,23 @@
+{
+  "UTC": "2026-10-19T07:15:58.708692+00:00",
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "-B",
+    "scripts/round126_data.py",
+    "freeze"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round126",
+  "kind": "engineering",
+  "outer_limit": 60.0,
+  "reserved_remaining_seconds": 12360.0,
+  "budget_before": {
+    "paid_outer_seconds_upper": 120,
+    "remaining_outer_seconds": 17880,
+    "unclosed": [],
+    "qualification_seconds": 0,
+    "actual_native_starts": 0,
+    "preledger_setup_charge_upper_seconds": 120,
+    "nested_native_seconds_added": false
+  },
+  "controller_pid": 41236
+}

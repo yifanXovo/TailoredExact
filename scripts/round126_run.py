@@ -33,7 +33,7 @@ def run(label,kind,limit,reserve,args):
             if p.exists():native.append(read(p))
     if kind=='qualification':
         p=OUT/'qualification/reference_receipt.json'
-        if p.exists():native=read(p).get('native_processes',[])
+        if p.exists():native=[x for x in read(p).get('native_processes',[]) if start<=x['creation_unix']<=ended]
     write(d/'receipt.json',dict(exit_code=rc,actual_exit_observed=True,outer_seconds_upper=observed,
         child_creation_unix=birth,exit_observed_unix=ended,actual_native_starts=len(native),
         native_process_identities=native,nested_native_seconds_added=False,
