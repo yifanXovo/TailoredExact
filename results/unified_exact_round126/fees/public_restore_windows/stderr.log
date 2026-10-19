@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\round126\scripts\round126_public_restore.py", line 130, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round126\scripts\round126_public_restore.py", line 58, in main
+    with ThreadPoolExecutor(max_workers=4) as pool:sizes=list(pool.map(fetch,manifest['files']))
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\concurrent\futures\_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\concurrent\futures\_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\msys64\ucrt64\lib\python3.12\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round126\scripts\round126_public_restore.py", line 45, in fetch
+    p=dest/str(rel);assert p.resolve().is_relative_to(dest)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

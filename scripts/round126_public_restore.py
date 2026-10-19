@@ -9,7 +9,8 @@ def write(p,v):Path(p).parent.mkdir(parents=True,exist_ok=True);Path(p).write_te
 
 def main():
     a=argparse.ArgumentParser();a.add_argument('--commit',required=True);a.add_argument('--destination',required=True)
-    a.add_argument('--receipt',required=True);a.add_argument('--resume',action='store_true');a.add_argument('--compile-pdf',action='store_true');args=a.parse_args()
+    a.add_argument('--receipt',required=True);a.add_argument('--resume',action='store_true');a.add_argument('--compile-pdf',action='store_true')
+    a.add_argument('--transport',choices=['urllib','windows-curl'],default='urllib');args=a.parse_args()
     assert re.fullmatch('[0-9a-f]{40}',args.commit)
     dest=Path(args.destination).resolve();allowed=Path('E:/codes/ExactEBRP-work/restore').resolve()
     assert dest.is_relative_to(allowed) and dest!=allowed
@@ -23,6 +24,14 @@ def main():
     def get(name):
         for attempt in range(3):
             try:
+                remaining=1500-(time.perf_counter()-tick)
+                assert remaining>1,'finite retrieval wall budget exhausted; preserve and resume the same root'
+                if args.transport=='windows-curl':
+                    curl=Path(os.environ['WINDIR'])/'System32/curl.exe'
+                    command=[str(curl),'--fail','--location','--silent','--show-error','--max-time',str(min(90,remaining)),base+name]
+                    r=subprocess.run(command,capture_output=True,timeout=min(90,remaining)+3)
+                    assert r.returncode==0,('verified Windows HTTPS transport',r.returncode,r.stderr.decode('utf-8',errors='replace'))
+                    return r.stdout
                 with urllib.request.urlopen(base+name,timeout=45) as response:return response.read()
             except Exception as exc:
                 failures.append(dict(path=name,attempt=attempt+1,error=repr(exc)))
@@ -33,7 +42,14 @@ def main():
         path=dest/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(blob)
         def fetch(row):
             rel=PurePosixPath(row['path']);assert not rel.is_absolute() and '..' not in rel.parts
-            p=dest/str(rel);assert p.resolve().is_relative_to(dest)
+            assert all(':' not in part and '\\' not in part for part in rel.parts)
+            p=dest.joinpath(*rel.parts)
+            # Validate existing, stable parents rather than resolving a missing
+            # leaf concurrently with other workers materializing its parents.
+            p.parent.mkdir(parents=True,exist_ok=True)
+            for parent in [p.parent,*p.parent.parents]:assert not parent.is_junction() and not parent.is_symlink()
+            assert p.parent.resolve().is_relative_to(dest),('resolved parent outside owned root',row['path'],str(p.parent.resolve()))
+            assert not p.is_symlink() and not p.is_junction()
             if p.is_file() and p.stat().st_size==row['bytes'] and digest(p.read_bytes())==row['SHA256']:return row['bytes']
             assert not p.exists(),('existing recovery bytes do not match; preserve them',row['path'])
             raw=get(row['path']);data=raw;mode='exact'
@@ -102,7 +118,9 @@ def main():
                 subprocess.run(['pdftoppm','-f',str(page),'-l',str(page),'-scale-to','1600','-png',str(dest/'compiled/manuscript.pdf'),str(dest/'compiled'/f'check_page{page:03d}')],check=True,capture_output=True)
             pdf=dict(compiled=True,text_equal=True,binary_timestamp_equality_not_required=True,rendered_pages=sorted(set(selected)),
                 actual_visual_reread_pending=True,PDF=str(dest/'compiled/manuscript.pdf'))
-        result=dict(status='PASS',commit=args.commit,destination=str(dest),anonymous=True,transport='Public raw HTTPS, no credentials',
+        result=dict(status='PASS',commit=args.commit,destination=str(dest),anonymous=True,
+            transport='Public raw HTTPS via '+args.transport+'; certificate verification enabled, no credentials',
+            executed_restore_script_SHA256=digest(Path(__file__).read_bytes()),
             manifest_SHA=digest(blob),files=len(sizes),transport_bytes=sum(sizes),retrieval_wall_seconds=retrieval,
             serialization_materializations=transformations,archives=extracted,extraction_wall_seconds=extraction,
             portable_check=read(dest/'portable_check_receipt.json'),PDF=pdf,commands=commands,

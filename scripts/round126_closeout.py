@@ -91,6 +91,19 @@ Public science-A empty-root recovery: {'PASS' if public_done else 'pending; B wi
 The single next priority is: {priority}
 '''
     (OUT/'final_report.md').write_text(text,encoding='utf-8')
+    if public_done:
+        recovery=read(public)
+        note=f'''\nActual public recovery of A `{science_commit}` passed: {recovery['files']} anonymous public files, seven full raw carriers, six identical regenerated inputs, twelve producer seals/endpoints/clocks and six paired outcomes. The full recompiled PDF text equals the published PDF. The root actually viewed restored pages 12,18,39,41,48,50. The first TLS and concurrent missing-path failures are retained, and the same owned root was resumed; there was exactly one empty-root creation. Windows system curl kept HTTPS certificate verification enabled. See [the actual receipt](review/public_restore_A.json) and [equivalence notes](review/public_restore_equivalence_notes.json). Native starts, Optimize calls and production compilations in recovery were all zero.\n'''
+        with (OUT/'final_report.md').open('a',encoding='utf-8') as f:f.write(note)
+        with (OUT/'reproducibility.md').open('a',encoding='utf-8') as f:
+            f.write(f'''\nThe verified Windows invocation used `--transport windows-curl --compile-pdf` and A `{science_commit}`. The two repair continuations used `--resume` on the same owned root. The B fetcher hashes itself in its actual receipt and adds only verified HTTPS transport and deterministic existing-parent path checks; the bound A copy remains preserved. Exact hashes and declared line-ending materializations are the gates, never a relaxed scientific comparison. The completed check is not an instruction to create another recovery root.\n''')
+    cleanup=OUT/'review/safe_cleanup.json'
+    if cleanup.is_file():
+        c=read(cleanup);assert all(x['removed'] for x in c['removed'])
+        accounting.update(safe_cleanup_status=c['status'],logical_removed_bytes=c['logical_removed_bytes'],volume_gain_not_measured=True)
+        write(OUT/'resource_accounting.json',accounting)
+        with (OUT/'final_report.md').open('a',encoding='utf-8') as f:
+            f.write(f'''\n[Safe cleanup](review/safe_cleanup.json) removed {c['logical_removed_bytes']} logical bytes of duplicate complete ZIPs, the verified restore copy and rerenderable page copies. Retained PDFs/source/logs reproduce page copies; six actual public reread images and receipts are retained outside the deleted roots. Unique raw, public carriers, failed records, current worktree, user changes, old worktrees and Git objects remain. No volume-space gain is claimed.\n''')
     print(json.dumps(dict(experiment=s['experiment_execution'],manuscript=doc,judgment=s['scientific_judgment'],budget=b)))
 
 if __name__=='__main__':report()
