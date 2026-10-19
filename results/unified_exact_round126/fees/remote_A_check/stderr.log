@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "E:/codes/ExactEBRP-work/temp/round126/remote_A_check.py", line 9, in <module>
+    new=pr(188);old=pr(187)
+        ^^^^^^^
+  File "E:/codes/ExactEBRP-work/temp/round126/remote_A_check.py", line 7, in pr
+    r=json.loads(subprocess.check_output(['gh','api',f'repos/yifanXovo/TailoredExact/pulls/{n}'],text=True))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\subprocess.py", line 1196, in communicate
+    stdout = self.stdout.read()
+             ^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x9c in position 3905: illegal multibyte sequence

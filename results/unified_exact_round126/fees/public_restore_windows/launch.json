@@ -1,0 +1,32 @@
+{
+  "UTC": "2026-10-19T09:47:37.480203+00:00",
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "-B",
+    "scripts/round126_public_restore.py",
+    "--commit",
+    "1ca177b9f0624eb0a806b96c87c1151b172d198e",
+    "--destination",
+    "E:/codes/ExactEBRP-work/restore/round126-public-A",
+    "--receipt",
+    "E:/codes/ExactEBRP-work/worktrees/round126/results/unified_exact_round126/review/public_restore_A.json",
+    "--compile-pdf",
+    "--resume",
+    "--transport",
+    "windows-curl"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round126",
+  "kind": "engineering",
+  "outer_limit": 1800.0,
+  "reserved_remaining_seconds": 3600.0,
+  "budget_before": {
+    "paid_outer_seconds_upper": 7444.54334069998,
+    "remaining_outer_seconds": 10555.45665930002,
+    "unclosed": [],
+    "qualification_seconds": 35.51227329997346,
+    "actual_native_starts": 14,
+    "preledger_setup_charge_upper_seconds": 120,
+    "nested_native_seconds_added": false
+  },
+  "controller_pid": 16068
+}

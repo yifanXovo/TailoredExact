@@ -1,0 +1,145 @@
+{
+  "round": 126,
+  "base": "eeae1a009f809a272dcb4b659f5758ded9304155",
+  "source": "355eefd2be3fe5651195681faf7b3a63ee4032f8",
+  "sole_proposed_method": "M-B",
+  "main_control": "cold P-GRB",
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "groups": [
+    {
+      "number": 1,
+      "id": "SC-C15-S",
+      "campaign": "campaign/group01",
+      "methods": [
+        "P-GRB",
+        "M-B"
+      ],
+      "cap_seconds": 600,
+      "nominal_seconds": 1200,
+      "management_reserve": 60,
+      "seed": 0,
+      "source": "CITI",
+      "V": 15,
+      "unconditional": true
+    },
+    {
+      "number": 2,
+      "id": "SC-B15-S",
+      "campaign": "campaign/group02",
+      "methods": [
+        "M-B",
+        "P-GRB"
+      ],
+      "cap_seconds": 600,
+      "nominal_seconds": 1200,
+      "management_reserve": 60,
+      "seed": 0,
+      "source": "CABI",
+      "V": 15,
+      "unconditional": true
+    },
+    {
+      "number": 3,
+      "id": "SC-C15-B",
+      "campaign": "campaign/group03",
+      "methods": [
+        "P-GRB",
+        "M-B"
+      ],
+      "cap_seconds": 600,
+      "nominal_seconds": 1200,
+      "management_reserve": 60,
+      "seed": 0,
+      "source": "CITI",
+      "V": 15,
+      "unconditional": true
+    },
+    {
+      "number": 4,
+      "id": "SC-B20-S",
+      "campaign": "campaign/group04",
+      "methods": [
+        "M-B",
+        "P-GRB"
+      ],
+      "cap_seconds": 1200,
+      "nominal_seconds": 2400,
+      "management_reserve": 60,
+      "seed": 0,
+      "source": "CABI",
+      "V": 20,
+      "unconditional": true
+    },
+    {
+      "number": 5,
+      "id": "SC-C20-S",
+      "campaign": "campaign/group05",
+      "methods": [
+        "P-GRB",
+        "M-B"
+      ],
+      "cap_seconds": 1200,
+      "nominal_seconds": 2400,
+      "management_reserve": 60,
+      "seed": 0,
+      "source": "CITI",
+      "V": 20,
+      "unconditional": true
+    },
+    {
+      "number": 6,
+      "id": "SC-B20-U",
+      "campaign": "campaign/group06",
+      "methods": [
+        "M-B",
+        "P-GRB"
+      ],
+      "cap_seconds": 1200,
+      "nominal_seconds": 2400,
+      "management_reserve": 60,
+      "seed": 0,
+      "source": "CABI",
+      "V": 20,
+      "unconditional": true
+    }
+  ],
+  "formal_arms": 12,
+  "formal_pairs": 6,
+  "new_problems": 6,
+  "formal_nominal_seconds": 10800,
+  "maximum_outer_seconds": 18000,
+  "qualification_soft_seconds": 600,
+  "qualification_authorized_seconds": 1200,
+  "no_formal_retries": true,
+  "certificate_tolerance": 1e-07,
+  "clean_own_zero_tolerance": 1e-12,
+  "own_H_seed": 20260626,
+  "five_main_categories": [
+    "BOTH_CERTIFIED",
+    "MB_ONLY_CERTIFIED",
+    "P_ONLY_CERTIFIED",
+    "BOTH_OPEN",
+    "UNEVALUABLE"
+  ],
+  "no_open_endpoint_WIN_in_primary": true,
+  "time_materiality": "max(30 seconds,0.10*T_cert(P))",
+  "speedup": "T_cert(P)/T_cert(M-B) only if both certified",
+  "default_ENS_changed": false,
+  "no_variant_dispatch_switching_or_new_algorithm": true,
+  "no_cross_arm_warm_information": true
+}

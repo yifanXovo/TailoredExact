@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\round126\scripts\round126_prepare.py", line 131, in <module>
+    if __name__=='__main__':{'references':references,'prepare':prepare,'qualify':qualify}[sys.argv[1]]()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round126\scripts\round126_prepare.py", line 112, in qualify
+    assert all(h==oldi['helpers'][n] for n,h in shared.items())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

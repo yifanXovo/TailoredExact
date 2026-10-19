@@ -1,0 +1,36 @@
+{
+  "UTC": "2026-10-19T07:19:53.059238+00:00",
+  "native_processes": [
+    {
+      "pid": 28804,
+      "parent_pid": 34248,
+      "creation_unix": 1792394392.3512936,
+      "command": [
+        "C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\build\\research\\round121-reference\\Round121Reference.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\qualification\\reference_batch1.tsv"
+      ],
+      "Optimize": 0,
+      "exporter_SHA": "80af0af46b8df801e5d9a4be15bb09121e00495683f813ffb4d61f490f40f442"
+    },
+    {
+      "pid": 33364,
+      "parent_pid": 34248,
+      "creation_unix": 1792394392.7070236,
+      "command": [
+        "C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\build\\research\\round121-reference\\Round121Reference.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\qualification\\reference_batch2.tsv"
+      ],
+      "Optimize": 0,
+      "exporter_SHA": "80af0af46b8df801e5d9a4be15bb09121e00495683f813ffb4d61f490f40f442"
+    }
+  ],
+  "Optimize": 0,
+  "inputs": 6,
+  "seconds": 0.8823184999637306,
+  "helper_reused_in_place": "C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\build\\research\\round121-reference\\Round121Reference.exe",
+  "helper_SHA": "80af0af46b8df801e5d9a4be15bb09121e00495683f813ffb4d61f490f40f442",
+  "helper_source_SHA": "fac64e71a37258314f07189500ba48560c011f5c60e75cb3f697fd080ac86fc1",
+  "reason": "R122 exporter was safely cleaned; two exact three-row batches reuse the existing qualified same-source R121 read-only writer.",
+  "production_compilations": 0,
+  "no_primal_bound_basis_or_Start_export": true
+}

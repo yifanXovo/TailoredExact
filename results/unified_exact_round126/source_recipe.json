@@ -1,0 +1,215 @@
+{
+  "round": 126,
+  "UTC": "2026-10-19T07:15:58.983077+00:00",
+  "base": "eeae1a009f809a272dcb4b659f5758ded9304155",
+  "adapter_version": "round126-thin-offline-adapter-v1",
+  "sources": {
+    "CITI": {
+      "identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "table_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "rows": 443,
+      "qualified": 442
+    },
+    "CABI": {
+      "identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "table_SHA": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+      "rows": 865,
+      "qualified": 865
+    }
+  },
+  "families": {
+    "CITI": "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "CABI": "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8"
+  },
+  "full_fixed_running_table": [
+    {
+      "group_number": 1,
+      "id": "SC-C15-S",
+      "source": "CITI",
+      "V": 15,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 600,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C15-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "group_number": 2,
+      "id": "SC-B15-S",
+      "source": "CABI",
+      "V": 15,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 600,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B15-S_regional_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "group_number": 3,
+      "id": "SC-C15-B",
+      "source": "CITI",
+      "V": 15,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 600,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C15-B_regional_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "group_number": 4,
+      "id": "SC-B20-S",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 1200,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B20-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "group_number": 5,
+      "id": "SC-C20-S",
+      "source": "CITI",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C20-S_regional_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "group_number": 6,
+      "id": "SC-B20-U",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B20-U_compact_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    }
+  ],
+  "generation_dependencies": {
+    "scripts/round126_data.py": "2ece33430653f63f456d74125c809ae63f32f8eb392b6f706823df01dee96345",
+    "scripts/round122_data.py": "b7997dcd173ee301be7f34949c99cb5f791bf22b84f548d1adceb8d11054d6b9",
+    "scripts/round118_data.py": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+    "scripts/round109_data.py": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+    "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+  },
+  "selection": "Original four anchors, compact/regional geometry and original source-row ties. The family enters anchor hash; the exact selection_id enters target and inventory hashes.",
+  "target_fraction": [
+    0.44,
+    0.56
+  ],
+  "coordinate_decimals": 3,
+  "weight_decimals": 6,
+  "delta": "max(V,floor(.12*sum(D)+.5))",
+  "local_perturbation": {
+    "balanced": 0.18,
+    "other": 0.3
+  },
+  "total_correction_and_sign_repair": "unchanged",
+  "weights": "original square-target rule, maximum normalization, six decimals",
+  "depot": "original serialized-coordinate centroid",
+  "distance": "original Euclidean/1.5; no projection rerun",
+  "input_header": "explicit listed Q_vector",
+  "formal_arms": 12,
+  "formal_pairs": 6,
+  "formal_nominal_seconds": 10800,
+  "outer_limit_seconds": 18000,
+  "generated_input_count": 0,
+  "Optimize": 0,
+  "no_H_LP_MIP_filter": true,
+  "no_redraw": true,
+  "no_network": true
+}

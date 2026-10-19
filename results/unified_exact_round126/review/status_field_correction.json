@@ -1,0 +1,53 @@
+{
+  "reason": "An interim commentary incorrectly read inherited audit top-level observational fields as the sealed endpoint; promptly corrected using endpoint/raw-final-return/full reconstructed evidence. Scientific files and timing were never changed.",
+  "records": [
+    {
+      "arm": "P-GRB",
+      "audit_top_certificate": false,
+      "audit_top_LB": 0.46280441076526524,
+      "audit_endpoint": {
+        "U": 0.4628064085383383,
+        "L": 0.46280640853833827,
+        "gap": 5.551115123125783e-17,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "raw_result_U": 0.4628064085383383,
+      "raw_result_L": 0.46280640853833827,
+      "raw_result_certificate": true,
+      "reconstructed": {
+        "U": 0.4628064085383384,
+        "L": 0.46280640853833827,
+        "gap": 1.1102230246251565e-16,
+        "certificate": true,
+        "certificate_qualified": true,
+        "formal_protocol_qualified": true
+      }
+    },
+    {
+      "arm": "M-B",
+      "audit_top_certificate": false,
+      "audit_top_LB": 0.4621209155047611,
+      "audit_endpoint": {
+        "U": 0.4628064085383383,
+        "L": 0.4628064085383383,
+        "gap": 0.0,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "raw_result_U": 0.4628064085383383,
+      "raw_result_L": 0.4628064085383383,
+      "raw_result_certificate": true,
+      "reconstructed": {
+        "U": 0.4628064085383384,
+        "L": 0.4628064085383383,
+        "gap": 5.551115123125783e-17,
+        "certificate": true,
+        "certificate_qualified": true,
+        "formal_protocol_qualified": true
+      }
+    }
+  ]
+}

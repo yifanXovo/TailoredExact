@@ -1,0 +1,1211 @@
+{
+  "arms": [
+    {
+      "id": "SC-C15-S",
+      "arm": "P-GRB",
+      "input_SHA": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+      "raw_root": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB/result.json",
+          "SHA256": "1be6cecd9ae56b8031eb8702087c76e6baf11e541fe4da16a25e5c5e0510a8c9"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB/producer_seal.json",
+          "SHA256": "ae6f7986ea17c1332f3dc338575800cf5830d7631d0c5f20c4bbd74e0de69748"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB/producer_receipt.json",
+          "SHA256": "59263289da886998b6638845b6ad56188c954e451cd07351f9e29853d23ece20"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB/verification_closeout.json",
+          "SHA256": "ef961bd1c37ea80a3fe60d19a9dadf2b119d83d602846a1914c3cfd056deca85"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB/arm_total_receipt.json",
+          "SHA256": "74521f98bc09a976baac5aebf896c7b369276cd20755c27b89fa57068502ad1b"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB/independent_evidence.json",
+          "SHA256": "cc769a58424781a1ca6fbf147987b815ebbcf8cb99c3e0b996f37be06891a559"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB/native_claims.json",
+          "SHA256": "6c11bef28365a7ac1fda82c73a5a7d2ba6fbe070f9f76b4e6813451b5989fa75"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB/claim_rejections.json",
+          "SHA256": "bf92b77035752f0746fb63636f6afe80c475681f033998f44dabbd01c8d4ab8e"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/01_SC-C15-S_S0_P-GRB/audit.json",
+          "SHA256": "8ef6cecbd99b78b2abd2f8c799f37a03606cd4b6f34793456185759473e44a6d"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group01\\raw\\01_SC-C15-S_S0_P-GRB\\compact.lp",
+          "model_sha256": "954fb39dfd26497ea9bf294a99b9f6b7732b6385f815304b7add2bf12dfe1b32",
+          "full_original": 1,
+          "lower_g": 0,
+          "upper_g": 0.9333333333333333,
+          "cutoff": 0,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-C15-S",
+      "arm": "M-B",
+      "input_SHA": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+      "raw_root": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B/result.json",
+          "SHA256": "ddaf670a86ce8712d0919495775efdfb3831c220afced6136aaef271da589cb0"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B/producer_seal.json",
+          "SHA256": "2138ec5de509e26dc895be83f51bc3abc7259f9eea10f0c383f021f7ff163c71"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B/producer_receipt.json",
+          "SHA256": "6dafa5e20ba26acd289f3a4c410de3f1f6d83fff8a7195446bb301018356bd40"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B/verification_closeout.json",
+          "SHA256": "2a11fecd7db0f1b3c5856b8324f8c9c6c216934b461ed9a7d438e01aa135719e"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B/arm_total_receipt.json",
+          "SHA256": "80eb44be02df1a71f7fb76bf6c1265a0247ad696025b5594b46e957a2af1c350"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B/independent_evidence.json",
+          "SHA256": "aa811cf69dc303db4e2b7641387d1db7627e656f94fbd6772ab9849be610cf4d"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B/native_claims.json",
+          "SHA256": "3daec81deeb30cf2b2663cf2cb7b0ca71ab934b359ecbfbf3d58fef54873c706"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B/claim_rejections.json",
+          "SHA256": "ddc4c8bff2e88dca55e9788f9793ee4ed2098c17dd1cb6b608cd90e279efd487"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group01/raw/02_SC-C15-S_S0_M-B/audit.json",
+          "SHA256": "9e9486d696769890108ea40644a9ea85b3f6a45b0f40d989d9fb43e75c9c44f1"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group01\\raw\\02_SC-C15-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "f5eb565e62369104017af87ad255aac727f8e6a34ca5b4f90021f8738b5692a2",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.5627184431151906,
+          "cutoff": 0.5627184431151906,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 2,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group01\\raw\\02_SC-C15-S_S0_M-B\\external\\models\\L0.0_epoch_0_generation_2.lp",
+          "model_sha256": "0891f127dde4ac8b683411d38a03f40bdbcfd7380c6bac0734ecc2335a9888b9",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.2813592215575953,
+          "cutoff": 0.5627184431151906,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 3,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group01\\raw\\02_SC-C15-S_S0_M-B\\external\\models\\L0.1_epoch_0_generation_3.lp",
+          "model_sha256": "b0a138597306abfdd37bc0b4d055ee83a10bbd4d15f8a39895d61a10956f6237",
+          "full_original": 0,
+          "lower_g": 0.2813592215575953,
+          "upper_g": 0.5627184431151906,
+          "cutoff": 0.5627184431151906,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 4,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group01\\raw\\02_SC-C15-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "f5eb565e62369104017af87ad255aac727f8e6a34ca5b4f90021f8738b5692a2",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.5627184431151906,
+          "cutoff": 0.5627184431151906,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 5,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group01\\raw\\02_SC-C15-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "f5eb565e62369104017af87ad255aac727f8e6a34ca5b4f90021f8738b5692a2",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.5627184431151906,
+          "cutoff": 0.5627184431151906,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-B15-S",
+      "arm": "M-B",
+      "input_SHA": "b87de1a37e60cc2e7cbbf7885bac1155ac4c0b14356de7c5af92e402555474de",
+      "raw_root": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B/result.json",
+          "SHA256": "8540971d5e40a73ebc01ebc75d802dd7e157e8478282a104405518efbe312991"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B/producer_seal.json",
+          "SHA256": "c3c0052c01d7f0be2cc25b078287ef9a0799f371ab382b7508cc35d73c877c0d"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B/producer_receipt.json",
+          "SHA256": "5f23fb44ecdbaba7aed0cd1a45061dee93966c2ab513e2722035a2d48d0f6ab8"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B/verification_closeout.json",
+          "SHA256": "fa77131b726fa47101d199a1e700730d0748917129ac75407ac00f70fb9a1da7"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B/arm_total_receipt.json",
+          "SHA256": "239bd6033376975f4febeca63e4b9c729c4166b6ae60fa2cfe0433e1c57425eb"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B/independent_evidence.json",
+          "SHA256": "7a9033498af2b3bfa9bfec687adae133d1b84707ebcc88da90192702acb471b8"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B/native_claims.json",
+          "SHA256": "5063cc6f2752cfd8436a2f4ea5a3f782bfbd98149febdff92fc9c36f25cbdee0"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B/claim_rejections.json",
+          "SHA256": "398cf4d02aed839ed2c8ec609e4575caf1420ff9fca6c841c0f031a5639bed73"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/01_SC-B15-S_S0_M-B/audit.json",
+          "SHA256": "11a18fc1f4673ab9abbac4f8901b9e215a5016e8468b90590d1a29af5c7e0f76"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group02\\raw\\01_SC-B15-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "153d76d9b644cec4b85f3bad2774617d017da100df03e48bb05a7f30df6360f0",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.9333333333333333,
+          "cutoff": 1.0056327593736354,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 2,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group02\\raw\\01_SC-B15-S_S0_M-B\\external\\models\\L0.0_epoch_0_generation_2.lp",
+          "model_sha256": "52ee5a3fa71c21cb9d31bb4493a688206f9933728e95e6e86c67a5f636264243",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.4666666666666667,
+          "cutoff": 1.0056327593736354,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 3,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group02\\raw\\01_SC-B15-S_S0_M-B\\external\\models\\L0.1_epoch_0_generation_3.lp",
+          "model_sha256": "15975e148562e5add4eda9cf8e044dd34e82a35662279716ab44568be58da376",
+          "full_original": 0,
+          "lower_g": 0.4666666666666667,
+          "upper_g": 0.9333333333333333,
+          "cutoff": 1.0056327593736354,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 4,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group02\\raw\\01_SC-B15-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "153d76d9b644cec4b85f3bad2774617d017da100df03e48bb05a7f30df6360f0",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.9333333333333333,
+          "cutoff": 1.0056327593736354,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 5,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group02\\raw\\01_SC-B15-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "153d76d9b644cec4b85f3bad2774617d017da100df03e48bb05a7f30df6360f0",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.9333333333333333,
+          "cutoff": 1.0056327593736354,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-B15-S",
+      "arm": "P-GRB",
+      "input_SHA": "b87de1a37e60cc2e7cbbf7885bac1155ac4c0b14356de7c5af92e402555474de",
+      "raw_root": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB/result.json",
+          "SHA256": "409e46cce6e6a232153b6cd02fbd45df9afa9cad481faa3d9eb2a753b5c6a0f4"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB/producer_seal.json",
+          "SHA256": "7df70b820a8531dc8b90bbf5a5f55669e0c014f7f714b42953066086833d2146"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB/producer_receipt.json",
+          "SHA256": "0da896a5733fe713a267971fec72c675764850207288ec940de302581b08f50c"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB/verification_closeout.json",
+          "SHA256": "54eb466007d169e412296e8abcb2518c0a1c565df6aa0cba617f98a450ab9526"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB/arm_total_receipt.json",
+          "SHA256": "728543a11ea3e4c5b59594cf302e3121b60bd770395327bb33e3b5b082e51ff0"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB/independent_evidence.json",
+          "SHA256": "3c3964ce3c925141a68ab4520cc942be166857e5ab32b811227e2970a2fd467f"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB/native_claims.json",
+          "SHA256": "499cccd8fca7fb379751a39ac25df6642ee4b4b6be358e793d9ad1665b7c8386"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB/claim_rejections.json",
+          "SHA256": "36e451dfd0972949546c3ff16d56cbc8361a8636375c461002009599884652c9"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group02/raw/02_SC-B15-S_S0_P-GRB/audit.json",
+          "SHA256": "504e0c51734dd2a410a582fff22480bb378d57aed4f81ed11e06dcbd87ee0a82"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group02\\raw\\02_SC-B15-S_S0_P-GRB\\compact.lp",
+          "model_sha256": "ae7e0f30c0f3328c7cbd4d67e89190ba05b449d4a393d5e087293839ff073358",
+          "full_original": 1,
+          "lower_g": 0,
+          "upper_g": 0.9333333333333333,
+          "cutoff": 0,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-C15-B",
+      "arm": "P-GRB",
+      "input_SHA": "c0d5fc4eee62e1e454b8acde8b721640e410bf496593b14d4cbdb1ccf36f14ea",
+      "raw_root": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB/result.json",
+          "SHA256": "01482773d9cf5e2632e5b8ad1388e4c1e6e38fac4fb8b31d9a92db21f52a76f6"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB/producer_seal.json",
+          "SHA256": "8bf046c5695ce5de6be0f1991d99b2209a4f48963774a5a792e31958344ad91a"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB/producer_receipt.json",
+          "SHA256": "ef73df2c87ba6cc1341704aa86d8382e3e04b89ef2cb2abbb06a12b4b3fa1ce1"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB/verification_closeout.json",
+          "SHA256": "3b66265baf096572e14f9e478929b8ac7d658907e0d52538a45d8f94a4f9db87"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB/arm_total_receipt.json",
+          "SHA256": "b0a12310194dd13abe7a200d2f8eca57f12b2edd7c02b1df5c66d8b605aa788c"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB/independent_evidence.json",
+          "SHA256": "4d27dfbc44d6f8c82f1c3b692cbf1f99e9492b3d40c4b3c4eebc6597bbe06e6a"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB/native_claims.json",
+          "SHA256": "d0ec8c06b92daeb5cd3e6fe47b4cc2461a91113f9dbcfcc34cda4dff0861fa47"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB/claim_rejections.json",
+          "SHA256": "b385f34ccb2aed1532bea1f5801a53f0d8cdb8f7aea3a49fc198267a724eddd1"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/01_SC-C15-B_S0_P-GRB/audit.json",
+          "SHA256": "be273aec972e61990cfaa094381fed4d43d2ed887b813ede0c204e40bd5db922"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group03\\raw\\01_SC-C15-B_S0_P-GRB\\compact.lp",
+          "model_sha256": "bbec91c8fcd895cfe902f73c4d06f3339a4b50c4dad9f9cb91c13e7b3352c780",
+          "full_original": 1,
+          "lower_g": 0,
+          "upper_g": 0.9333333333333333,
+          "cutoff": 0,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-C15-B",
+      "arm": "M-B",
+      "input_SHA": "c0d5fc4eee62e1e454b8acde8b721640e410bf496593b14d4cbdb1ccf36f14ea",
+      "raw_root": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B/result.json",
+          "SHA256": "3d25fde7a772702b7b672f4a627bcec13031ba9e175882d9658c8d9088241baa"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B/producer_seal.json",
+          "SHA256": "2cd87a08a79d2a2c5ca1e2ab45bd544ba8d3f79c695a286e5d3a5db650bb152b"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B/producer_receipt.json",
+          "SHA256": "deba30c3ff649edd0e89bce0fbb813c5e35c91917107b18607000a10945cb935"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B/verification_closeout.json",
+          "SHA256": "b5d68e701b802b9ee0487eabfc18a04c2dfa17c61cddf4e44a9675780c811bde"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B/arm_total_receipt.json",
+          "SHA256": "66858d7efd222e5c79829bd2f8e76a2af9ac3e10d2cc5ce68cf4a4256aa7a8ed"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B/independent_evidence.json",
+          "SHA256": "9fd9439679f74c499f25bfa9a4ab93fd1599ddcdbddc33e7459f44166620e918"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B/native_claims.json",
+          "SHA256": "bf03fe4363bf2bf1b2d95cb83788bb79fba0b4ecd616e96f23879acd2619d96a"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B/claim_rejections.json",
+          "SHA256": "826b87c189a7dddab9bc8926aca884b9614c33a70660d33b8e3769d212f93009"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group03/raw/02_SC-C15-B_S0_M-B/audit.json",
+          "SHA256": "1b0b8d5cf2dbc0fff647f18323e06f5e36d8a4d905e988ad9517bb4735c64d72"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group03\\raw\\02_SC-C15-B_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "7d8ebddec226e1ffe1f24efad191103cac55286e880fc129ba4cad38bafdeb09",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.10754932266430162,
+          "cutoff": 0.10754932266430162,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 2,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group03\\raw\\02_SC-C15-B_S0_M-B\\external\\models\\L0.0_epoch_0_generation_2.lp",
+          "model_sha256": "dea5db87531128129275bc1f0342d27811f96d261a73b10f000b11e37db3344e",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.05377466133215081,
+          "cutoff": 0.10754932266430162,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 3,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group03\\raw\\02_SC-C15-B_S0_M-B\\external\\models\\L0.1_epoch_0_generation_3.lp",
+          "model_sha256": "b56b07b128f1b04b2d13d4f045bd7dde738916b6b7ab0c9bde09693a4fc909bb",
+          "full_original": 0,
+          "lower_g": 0.05377466133215081,
+          "upper_g": 0.10754932266430162,
+          "cutoff": 0.10754932266430162,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 4,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group03\\raw\\02_SC-C15-B_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "7d8ebddec226e1ffe1f24efad191103cac55286e880fc129ba4cad38bafdeb09",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.10754932266430162,
+          "cutoff": 0.10754932266430162,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-B20-S",
+      "arm": "M-B",
+      "input_SHA": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+      "raw_root": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B/result.json",
+          "SHA256": "51c058f99e7ae442f6109dc055c9c624fd3fe033acd70ffa59304967192e97b5"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B/producer_seal.json",
+          "SHA256": "02683b22d81e304071f41d033965445620c94d8d2da5afe7314f6dc5af0ed992"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B/producer_receipt.json",
+          "SHA256": "50d1d36d2046b82532ad4b45ab60f332e9b9120f617df612694164068afa1c68"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B/verification_closeout.json",
+          "SHA256": "0e4ffa489ed181d3e1265d40eff2570b86d0c1ab7fb6f7212379231b10218d58"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B/arm_total_receipt.json",
+          "SHA256": "b991dcb0f7efcc557debf441698b865e94b68972a812bfb66f19d9118a2d949e"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B/independent_evidence.json",
+          "SHA256": "18a41aa9de46bb965b68ed43ce7928ff0ca23b477a19a58634d8c5da0a372746"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B/native_claims.json",
+          "SHA256": "f505c93df6838a85bf908268ad2261e7dc70199ca5f39d00d741006840d6ad30"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B/claim_rejections.json",
+          "SHA256": "7598d200985237d4e2c5d11dbe525a63d584c8d1b919cea18630559e84b16f66"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/01_SC-B20-S_S0_M-B/audit.json",
+          "SHA256": "da54d952c929b8c00b8b78391b0ae2f50654c450ca7fd72e15ff91511f9b7cbd"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group04\\raw\\01_SC-B20-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "c84eb99911a5ebb9ef50a9f94a3b36e4af87b3b45f39e81321f40d43896f8e75",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.3570597679280949,
+          "cutoff": 0.3570597679280949,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 2,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group04\\raw\\01_SC-B20-S_S0_M-B\\external\\models\\L0.0_epoch_0_generation_2.lp",
+          "model_sha256": "34ac1e2364fc98db28e946eb0773b03fb41fb80eed8bb43fff3abf1066b33649",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.17852988396404745,
+          "cutoff": 0.3570597679280949,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 3,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group04\\raw\\01_SC-B20-S_S0_M-B\\external\\models\\L0.1_epoch_0_generation_3.lp",
+          "model_sha256": "6b3d5b203a9ef4ae5c169081e9c8233324cdd751c94309bb19a6c730e2ee538a",
+          "full_original": 0,
+          "lower_g": 0.17852988396404745,
+          "upper_g": 0.3570597679280949,
+          "cutoff": 0.3570597679280949,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 4,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group04\\raw\\01_SC-B20-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "c84eb99911a5ebb9ef50a9f94a3b36e4af87b3b45f39e81321f40d43896f8e75",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.3570597679280949,
+          "cutoff": 0.3570597679280949,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-B20-S",
+      "arm": "P-GRB",
+      "input_SHA": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+      "raw_root": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB/result.json",
+          "SHA256": "8f5b27ebf4aa338fa1ae74692fcc9b33f2b42cc148823f3334e4b1e7c324d4cc"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB/producer_seal.json",
+          "SHA256": "bf015b36c1b365566811b4d1849ee18e0ed711bb5c0fa887c4ddd4b2dac4c162"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB/producer_receipt.json",
+          "SHA256": "37b6bde3c5087195785e1ab997d46980d58a1e767ff3e8e0a4571880ef409738"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB/verification_closeout.json",
+          "SHA256": "917403a214f110d0335a933b8a188fce350346924ebbb91fa302ab55735077bf"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB/arm_total_receipt.json",
+          "SHA256": "250c859ffcbc4a0b06efee0239ca29a59996fb0879cac4cd7da54cd9ff5cfb42"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB/independent_evidence.json",
+          "SHA256": "a558bbcdbc5e9242ebf0134dccec7da76658853ef5c6543bf320026fb53f6fcd"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB/native_claims.json",
+          "SHA256": "8c0fb6c8ecf7ae7bc8347840be14034582aab97e39b8add0a0cce6f72499a922"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB/claim_rejections.json",
+          "SHA256": "c5390ddebe5d4560d15b49cbf11e692dfd413c2d9312f5fedc8b174954791b0f"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group04/raw/02_SC-B20-S_S0_P-GRB/audit.json",
+          "SHA256": "bac61801d52c36d930f2cebbf116b601f5e44f75ae4b2a13fb98c11ddae44ce0"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group04\\raw\\02_SC-B20-S_S0_P-GRB\\compact.lp",
+          "model_sha256": "9457599aee813d567215e2abe4dad9d2aadc86503a4802578bf174113e9e125b",
+          "full_original": 1,
+          "lower_g": 0,
+          "upper_g": 0.95,
+          "cutoff": 0,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-C20-S",
+      "arm": "P-GRB",
+      "input_SHA": "5729b59070d5451750e8e0b2446b08381e5c001e96d3c3f247e57801f6dcde11",
+      "raw_root": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB/result.json",
+          "SHA256": "5b9d60969c6e8ac035532faa51c5df1aae67d1c4d30f13bbe6fa96100546c6f7"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB/producer_seal.json",
+          "SHA256": "7e9e29b79f1e21f0b12dfca238e6bc6792c87c642c93c8da99eb32c675cbb19b"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB/producer_receipt.json",
+          "SHA256": "f4ddb220f1d8c8cb966193c231c39cae9cc9678f1e41f3545df5df664c68326d"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB/verification_closeout.json",
+          "SHA256": "d073f5f934b6764d339dce9aef4078bc70d6a8fdf2408247497efdd2774df99c"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB/arm_total_receipt.json",
+          "SHA256": "3952742b106ca2973e4b4439353c676dabe0e0927e5e406460904f585a7c3f89"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB/independent_evidence.json",
+          "SHA256": "4af8959c2125e832e3ab1583f9d265889b2770d145dd29d9e376f1e77edcfe12"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB/native_claims.json",
+          "SHA256": "4d33fbc27d621e2ff253631d3063836dd01d50218a4dbbdfd378d196ab0b523b"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB/claim_rejections.json",
+          "SHA256": "8c06a6880c67bb1a021e06a479f343dcd8abe9c5bebfc91edc70f5f6755e91ee"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/01_SC-C20-S_S0_P-GRB/audit.json",
+          "SHA256": "1baf02d58d708e6a30a99123342add34f4e9f00bb125aa0f470c3c66fffa9f5f"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group05\\raw\\01_SC-C20-S_S0_P-GRB\\compact.lp",
+          "model_sha256": "60f3107a0b28d72adad5aae30976c8d8fd5bedaa97dcaed8473357afa8e38784",
+          "full_original": 1,
+          "lower_g": 0,
+          "upper_g": 0.95,
+          "cutoff": 0,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-C20-S",
+      "arm": "M-B",
+      "input_SHA": "5729b59070d5451750e8e0b2446b08381e5c001e96d3c3f247e57801f6dcde11",
+      "raw_root": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B/result.json",
+          "SHA256": "3b73ecb6e423469e24c92c0aa8c1b4d15929969caf7fc6a07c39b2a018622de7"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B/producer_seal.json",
+          "SHA256": "40daf11cab7def04ba82db08ca965463b7536fd936cdd51149338cab926516a5"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B/producer_receipt.json",
+          "SHA256": "fb00ab6d26c9df4bd59377a6d7ee1a3d22290410f8909f87ac6c44054479ecbb"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B/verification_closeout.json",
+          "SHA256": "25de7693c40bf9f411d529f31130e2e5fb25660d4fdc76f6033f6f2c46a21914"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B/arm_total_receipt.json",
+          "SHA256": "ecd4b1b265f1cb4abb406bb597f1d910cdaf08bc245c278d5af326395107aa61"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B/independent_evidence.json",
+          "SHA256": "92f3f899ee0e61c3f9273cfed117f6d79e6447e3d08df13b18f3d96102888361"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B/native_claims.json",
+          "SHA256": "ab864d9d0fbf73f316a29802ce713e2f78d018c0b1c86d094067bd55323da9ba"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B/claim_rejections.json",
+          "SHA256": "6810b7f83ac98c891ad6123719e67cab1c4b3da7a06fa1dd5672b14510f863e7"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group05/raw/02_SC-C20-S_S0_M-B/audit.json",
+          "SHA256": "ac8dec2906d7a201c68d9d5b8254115a3e03141ab84c81fb67c9e2041bde9b4a"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group05\\raw\\02_SC-C20-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "e7165f05b1ea197deb22fdc02ce1e6df4ae82fc6314eacbdaf7e3eafae88ef3c",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.3324723546160061,
+          "cutoff": 0.3324723546160061,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 2,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group05\\raw\\02_SC-C20-S_S0_M-B\\external\\models\\L0.0_epoch_0_generation_2.lp",
+          "model_sha256": "25a83f27d6bb526d1c3a5e56eb44105189b27b9b3a40b346899930a24ee8eae3",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.16623617730800305,
+          "cutoff": 0.3324723546160061,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 3,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group05\\raw\\02_SC-C20-S_S0_M-B\\external\\models\\L0.1_epoch_0_generation_3.lp",
+          "model_sha256": "8b2b127e5011e286e4046d9d13f6748c64ad1aab3d02ac085413da6df308a64d",
+          "full_original": 0,
+          "lower_g": 0.16623617730800305,
+          "upper_g": 0.3324723546160061,
+          "cutoff": 0.3324723546160061,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 4,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group05\\raw\\02_SC-C20-S_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "e7165f05b1ea197deb22fdc02ce1e6df4ae82fc6314eacbdaf7e3eafae88ef3c",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.3324723546160061,
+          "cutoff": 0.3324723546160061,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-B20-U",
+      "arm": "M-B",
+      "input_SHA": "c688de15fc31612b83885efe2e86e60f50ba57a5c5119f7e7801bf240a096bab",
+      "raw_root": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B/result.json",
+          "SHA256": "114f97206b471ce8638df2d134f34a8ea80d9cfa90218706feb495b416603e41"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B/producer_seal.json",
+          "SHA256": "ca3c37262b2d6959fc9cccc388bf5f99f4bf2f5b7598ecbf3cc2ebb9a90add64"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B/producer_receipt.json",
+          "SHA256": "efec44d64f66690adf194b81a222c55767da6c3b61f57b3f9072d40baa0f1d59"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B/verification_closeout.json",
+          "SHA256": "575675f5911c860d772546260c24855ffc3e626aeec5e1073c7ed3786d6ed6b4"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B/arm_total_receipt.json",
+          "SHA256": "ad40d169d606a1c65fb64ec8a6d51bb3457a9115626f15d84c1b763875c0b5b1"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B/independent_evidence.json",
+          "SHA256": "443090ef4a15c3edc7f3f61d7213d6d0c707f3a9161bf61ca506667d2d05216b"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B/native_claims.json",
+          "SHA256": "d69881f0cf8a092a364b7b2807483edb08ac298c2f635af81c44f0765f9aed2f"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B/claim_rejections.json",
+          "SHA256": "3b0ef991f86cd0beec9d3341bc8afd66f40b683acedf03ea1371afd1bd0eb33d"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/01_SC-B20-U_S0_M-B/audit.json",
+          "SHA256": "87bf0b678a7c1efba5d432553ab663c02e7a8c0f74efde6073e9f04e0e560fe0"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group06\\raw\\01_SC-B20-U_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "07b1fe87f610d30ce5eaf99642e42dad71a9d3ec8c4e96972c267f6bdd4102b2",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.26311061980295575,
+          "cutoff": 0.26311061980295575,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 2,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group06\\raw\\01_SC-B20-U_S0_M-B\\external\\models\\L0.0_epoch_0_generation_2.lp",
+          "model_sha256": "64ddd3c05e5a15e6736146c2813ed0151adfc1e79287f84b317919f741e08946",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.13155530990147787,
+          "cutoff": 0.26311061980295575,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 3,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group06\\raw\\01_SC-B20-U_S0_M-B\\external\\models\\L0.1_epoch_0_generation_3.lp",
+          "model_sha256": "cfd781a1f00862b81a9fbcb5db47e9dba14589923ba47c231e49663efe1e62a3",
+          "full_original": 0,
+          "lower_g": 0.13155530990147787,
+          "upper_g": 0.26311061980295575,
+          "cutoff": 0.26311061980295575,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        },
+        {
+          "call": 4,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group06\\raw\\01_SC-B20-U_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "model_sha256": "07b1fe87f610d30ce5eaf99642e42dad71a9d3ec8c4e96972c267f6bdd4102b2",
+          "full_original": 0,
+          "lower_g": 0,
+          "upper_g": 0.26311061980295575,
+          "cutoff": 0.26311061980295575,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    },
+    {
+      "id": "SC-B20-U",
+      "arm": "P-GRB",
+      "input_SHA": "c688de15fc31612b83885efe2e86e60f50ba57a5c5119f7e7801bf240a096bab",
+      "raw_root": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB",
+      "files": {
+        "result.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB/result.json",
+          "SHA256": "8c0ad101a8703b436e132090b01077c352aa230df841ed62ec1906b18a54741c"
+        },
+        "producer_seal.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB/producer_seal.json",
+          "SHA256": "11bc24721ac5a9adc747e4bb9d74c6a92dc82604bf593b9a552b369173dd0c16"
+        },
+        "producer_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB/producer_receipt.json",
+          "SHA256": "102c066e06a164f6f7dcf8dcd17465885eb9e76beed748c5968df3c18e379cc8"
+        },
+        "verification_closeout.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB/verification_closeout.json",
+          "SHA256": "6213d5d24158cb5aeb805eb31b17e87811d9285af1011783a7c7846ee5a820ee"
+        },
+        "arm_total_receipt.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB/arm_total_receipt.json",
+          "SHA256": "19711ff9033fb73d95b263dfb42e82badb4d5affe1a25a8f174010582cfc264c"
+        },
+        "independent_evidence.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB/independent_evidence.json",
+          "SHA256": "d8c7171e2a38d45cfde343767cd62f873811c44d978b7dec43923f63c2d4dd14"
+        },
+        "native_claims.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB/native_claims.json",
+          "SHA256": "19feabcf8234f91c122bc916341d932eeaa4cc4717bcb51fd7c5919ee195c402"
+        },
+        "claim_rejections.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB/claim_rejections.json",
+          "SHA256": "9a549ccbbda5cd6837d37dda2c0e423e87ce1674fdfadbe5ad03114cf8967f15"
+        },
+        "audit.json": {
+          "path": "results/unified_exact_round126/campaign/group06/raw/02_SC-B20-U_S0_P-GRB/audit.json",
+          "SHA256": "90f43b63fc05e56360ccb35bc7f949214be6d36b646dc57fbf2a661ab678c570"
+        }
+      },
+      "native_models": [
+        {
+          "call": 1,
+          "model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round126\\results\\unified_exact_round126\\campaign\\group06\\raw\\02_SC-B20-U_S0_P-GRB\\compact.lp",
+          "model_sha256": "b3297ebc6d1b8d9bfdec4db9fb1b42fdff097c9bbd35d024e796d0a3c7d1c789",
+          "full_original": 1,
+          "lower_g": 0,
+          "upper_g": 0.95,
+          "cutoff": 0,
+          "settings": {
+            "read_return_code": 0,
+            "Threads": 1,
+            "Seed": 0,
+            "Presolve": -1,
+            "MIPGap": 0,
+            "MIPGapAbs": 0,
+            "FeasibilityTol": 1e-06,
+            "IntFeasTol": 1e-05,
+            "OptimalityTol": 1e-06
+          }
+        }
+      ],
+      "Start_and_fleet_sources": "Complete result/own physical replay, native request/Start ledgers and journal payloads inside the same arm carrier."
+    }
+  ],
+  "source_commit": "355eefd2be3fe5651195681faf7b3a63ee4032f8",
+  "PE_SHA": "5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+}

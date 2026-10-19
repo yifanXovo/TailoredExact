@@ -1,0 +1,791 @@
+{
+  "roles": [
+    {
+      "group_number": 1,
+      "id": "SC-C15-S",
+      "source": "CITI",
+      "V": 15,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 600,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C15-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-C15-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-C15-S.txt",
+      "input_sha256": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+      "input_bytes": 1007,
+      "selection_path": "results/unified_exact_round126/inputs/SC-C15-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-C15-S_landscape.json",
+      "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "total_initial": 157,
+      "total_target": 178,
+      "total_capacity": 372,
+      "sum_weights": 9.599999,
+      "lambda_sum_weights": 1.43999985,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.2940486363360608,
+        "G": 0.3807154116507461,
+        "P": 6.088888164568765,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 2,
+      "id": "SC-B15-S",
+      "source": "CABI",
+      "V": 15,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 600,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B15-S_regional_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-B15-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-B15-S.txt",
+      "input_sha256": "b87de1a37e60cc2e7cbbf7885bac1155ac4c0b14356de7c5af92e402555474de",
+      "input_bytes": 995,
+      "selection_path": "results/unified_exact_round126/inputs/SC-B15-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-B15-S_landscape.json",
+      "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 99,
+      "total_target": 114,
+      "total_capacity": 229,
+      "sum_weights": 8.98,
+      "lambda_sum_weights": 1.347,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.241839762285571,
+        "G": 0.41833976228557096,
+        "P": 5.49,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 3,
+      "id": "SC-C15-B",
+      "source": "CITI",
+      "V": 15,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 600,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C15-B_regional_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-C15-B.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-C15-B.txt",
+      "input_sha256": "c0d5fc4eee62e1e454b8acde8b721640e410bf496593b14d4cbdb1ccf36f14ea",
+      "input_bytes": 1012,
+      "selection_path": "results/unified_exact_round126/inputs/SC-C15-B_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-C15-B_landscape.json",
+      "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "total_initial": 276,
+      "total_target": 276,
+      "total_capacity": 540,
+      "sum_weights": 6.844233,
+      "lambda_sum_weights": 1.02663495,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 0.5643112395069061,
+        "G": 0.20313407583871224,
+        "P": 2.4078477577879593,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 4,
+      "id": "SC-B20-S",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 1200,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B20-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-B20-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-B20-S.txt",
+      "input_sha256": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+      "input_bytes": 1282,
+      "selection_path": "results/unified_exact_round126/inputs/SC-B20-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-B20-S_landscape.json",
+      "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 191,
+      "total_target": 217,
+      "total_capacity": 434,
+      "sum_weights": 6.988919999999999,
+      "lambda_sum_weights": 1.0483379999999998,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.0210835916162502,
+        "G": 0.387427018120739,
+        "P": 4.224377156636741,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 5,
+      "id": "SC-C20-S",
+      "source": "CITI",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C20-S_regional_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-C20-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-C20-S.txt",
+      "input_sha256": "5729b59070d5451750e8e0b2446b08381e5c001e96d3c3f247e57801f6dcde11",
+      "input_bytes": 1288,
+      "selection_path": "results/unified_exact_round126/inputs/SC-C20-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-C20-S_landscape.json",
+      "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "total_initial": 231,
+      "total_target": 263,
+      "total_capacity": 529,
+      "sum_weights": 7.721076,
+      "lambda_sum_weights": 1.1581614,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.088017680410938,
+        "G": 0.40588944027685636,
+        "P": 4.5475216008938775,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 6,
+      "id": "SC-B20-U",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B20-U_compact_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-B20-U.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-B20-U.txt",
+      "input_sha256": "c688de15fc31612b83885efe2e86e60f50ba57a5c5119f7e7801bf240a096bab",
+      "input_bytes": 1270,
+      "selection_path": "results/unified_exact_round126/inputs/SC-B20-U_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-B20-U_landscape.json",
+      "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 149,
+      "total_target": 129,
+      "total_capacity": 263,
+      "sum_weights": 6.2708319999999995,
+      "lambda_sum_weights": 0.9406247999999999,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 0.8620743405531466,
+        "G": 0.28082444626743236,
+        "P": 3.874999295238095,
+        "not_supplied_to_formal_arms": true
+      }
+    }
+  ],
+  "new_roles": [
+    {
+      "group_number": 1,
+      "id": "SC-C15-S",
+      "source": "CITI",
+      "V": 15,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 600,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C15-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-C15-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-C15-S.txt",
+      "input_sha256": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+      "input_bytes": 1007,
+      "selection_path": "results/unified_exact_round126/inputs/SC-C15-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-C15-S_landscape.json",
+      "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "total_initial": 157,
+      "total_target": 178,
+      "total_capacity": 372,
+      "sum_weights": 9.599999,
+      "lambda_sum_weights": 1.43999985,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.2940486363360608,
+        "G": 0.3807154116507461,
+        "P": 6.088888164568765,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 2,
+      "id": "SC-B15-S",
+      "source": "CABI",
+      "V": 15,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 600,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B15-S_regional_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-B15-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-B15-S.txt",
+      "input_sha256": "b87de1a37e60cc2e7cbbf7885bac1155ac4c0b14356de7c5af92e402555474de",
+      "input_bytes": 995,
+      "selection_path": "results/unified_exact_round126/inputs/SC-B15-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-B15-S_landscape.json",
+      "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 99,
+      "total_target": 114,
+      "total_capacity": 229,
+      "sum_weights": 8.98,
+      "lambda_sum_weights": 1.347,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.241839762285571,
+        "G": 0.41833976228557096,
+        "P": 5.49,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 3,
+      "id": "SC-C15-B",
+      "source": "CITI",
+      "V": 15,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 600,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C15-B_regional_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-C15-B.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-C15-B.txt",
+      "input_sha256": "c0d5fc4eee62e1e454b8acde8b721640e410bf496593b14d4cbdb1ccf36f14ea",
+      "input_bytes": 1012,
+      "selection_path": "results/unified_exact_round126/inputs/SC-C15-B_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-C15-B_landscape.json",
+      "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "total_initial": 276,
+      "total_target": 276,
+      "total_capacity": 540,
+      "sum_weights": 6.844233,
+      "lambda_sum_weights": 1.02663495,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 0.5643112395069061,
+        "G": 0.20313407583871224,
+        "P": 2.4078477577879593,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 4,
+      "id": "SC-B20-S",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 1200,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B20-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-B20-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-B20-S.txt",
+      "input_sha256": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+      "input_bytes": 1282,
+      "selection_path": "results/unified_exact_round126/inputs/SC-B20-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-B20-S_landscape.json",
+      "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 191,
+      "total_target": 217,
+      "total_capacity": 434,
+      "sum_weights": 6.988919999999999,
+      "lambda_sum_weights": 1.0483379999999998,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.0210835916162502,
+        "G": 0.387427018120739,
+        "P": 4.224377156636741,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 5,
+      "id": "SC-C20-S",
+      "source": "CITI",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C20-S_regional_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-C20-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-C20-S.txt",
+      "input_sha256": "5729b59070d5451750e8e0b2446b08381e5c001e96d3c3f247e57801f6dcde11",
+      "input_bytes": 1288,
+      "selection_path": "results/unified_exact_round126/inputs/SC-C20-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-C20-S_landscape.json",
+      "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "total_initial": 231,
+      "total_target": 263,
+      "total_capacity": 529,
+      "sum_weights": 7.721076,
+      "lambda_sum_weights": 1.1581614,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.088017680410938,
+        "G": 0.40588944027685636,
+        "P": 4.5475216008938775,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 6,
+      "id": "SC-B20-U",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B20-U_compact_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "input_path": "results/unified_exact_round126/inputs/SC-B20-U.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-B20-U.txt",
+      "input_sha256": "c688de15fc31612b83885efe2e86e60f50ba57a5c5119f7e7801bf240a096bab",
+      "input_bytes": 1270,
+      "selection_path": "results/unified_exact_round126/inputs/SC-B20-U_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-B20-U_landscape.json",
+      "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 149,
+      "total_target": 129,
+      "total_capacity": 263,
+      "sum_weights": 6.2708319999999995,
+      "lambda_sum_weights": 0.9406247999999999,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 0.8620743405531466,
+        "G": 0.28082444626743236,
+        "P": 3.874999295238095,
+        "not_supplied_to_formal_arms": true
+      }
+    }
+  ],
+  "sources": {
+    "CITI": {
+      "identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "table_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "rows": 443,
+      "qualified": 442
+    },
+    "CABI": {
+      "identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "table_SHA": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+      "rows": 865,
+      "qualified": 865
+    }
+  },
+  "families": {
+    "CITI": "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "CABI": "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8"
+  },
+  "adapter_version": "round126-thin-offline-adapter-v1",
+  "source_recipe_SHA": "49a74ee3f266f805fbadc21552ad2d809ccf92e15d8a5dceba2acd02af750574",
+  "recipe_commit_before_generation": "cb61412b4c66aec152cdd1171759aec8eb6c71f9",
+  "generated_once": true,
+  "new_problem_denominator": 6,
+  "formal_arm_denominator": 12,
+  "formal_pair_denominator": 6,
+  "overlaps": [
+    {
+      "id": "SC-C15-S",
+      "previous_id": "PB-C20-B",
+      "previous_round": 122,
+      "source": "CITI",
+      "overlap": 0,
+      "new_V": 15,
+      "previous_V": 20
+    },
+    {
+      "id": "SC-C15-S",
+      "previous_id": "PB-C35-U",
+      "previous_round": 122,
+      "source": "CITI",
+      "overlap": 0,
+      "new_V": 15,
+      "previous_V": 35
+    },
+    {
+      "id": "SC-C15-S",
+      "previous_id": "PB-C50-S",
+      "previous_round": 122,
+      "source": "CITI",
+      "overlap": 14,
+      "new_V": 15,
+      "previous_V": 50
+    },
+    {
+      "id": "SC-B15-S",
+      "previous_id": "PB-B20-S",
+      "previous_round": 122,
+      "source": "CABI",
+      "overlap": 2,
+      "new_V": 15,
+      "previous_V": 20
+    },
+    {
+      "id": "SC-B15-S",
+      "previous_id": "PB-B35-B",
+      "previous_round": 122,
+      "source": "CABI",
+      "overlap": 0,
+      "new_V": 15,
+      "previous_V": 35
+    },
+    {
+      "id": "SC-B15-S",
+      "previous_id": "PB-B50-U",
+      "previous_round": 122,
+      "source": "CABI",
+      "overlap": 14,
+      "new_V": 15,
+      "previous_V": 50
+    },
+    {
+      "id": "SC-C15-B",
+      "previous_id": "PB-C20-B",
+      "previous_round": 122,
+      "source": "CITI",
+      "overlap": 3,
+      "new_V": 15,
+      "previous_V": 20
+    },
+    {
+      "id": "SC-C15-B",
+      "previous_id": "PB-C35-U",
+      "previous_round": 122,
+      "source": "CITI",
+      "overlap": 11,
+      "new_V": 15,
+      "previous_V": 35
+    },
+    {
+      "id": "SC-C15-B",
+      "previous_id": "PB-C50-S",
+      "previous_round": 122,
+      "source": "CITI",
+      "overlap": 0,
+      "new_V": 15,
+      "previous_V": 50
+    },
+    {
+      "id": "SC-C15-B",
+      "previous_id": "SC-C15-S",
+      "previous_round": 126,
+      "source": "CITI",
+      "overlap": 0,
+      "new_V": 15,
+      "previous_V": 15
+    },
+    {
+      "id": "SC-B20-S",
+      "previous_id": "PB-B20-S",
+      "previous_round": 122,
+      "source": "CABI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 20
+    },
+    {
+      "id": "SC-B20-S",
+      "previous_id": "PB-B35-B",
+      "previous_round": 122,
+      "source": "CABI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 35
+    },
+    {
+      "id": "SC-B20-S",
+      "previous_id": "PB-B50-U",
+      "previous_round": 122,
+      "source": "CABI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 50
+    },
+    {
+      "id": "SC-B20-S",
+      "previous_id": "SC-B15-S",
+      "previous_round": 126,
+      "source": "CABI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 15
+    },
+    {
+      "id": "SC-C20-S",
+      "previous_id": "PB-C20-B",
+      "previous_round": 122,
+      "source": "CITI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 20
+    },
+    {
+      "id": "SC-C20-S",
+      "previous_id": "PB-C35-U",
+      "previous_round": 122,
+      "source": "CITI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 35
+    },
+    {
+      "id": "SC-C20-S",
+      "previous_id": "PB-C50-S",
+      "previous_round": 122,
+      "source": "CITI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 50
+    },
+    {
+      "id": "SC-C20-S",
+      "previous_id": "SC-C15-S",
+      "previous_round": 126,
+      "source": "CITI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 15
+    },
+    {
+      "id": "SC-C20-S",
+      "previous_id": "SC-C15-B",
+      "previous_round": 126,
+      "source": "CITI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 15
+    },
+    {
+      "id": "SC-B20-U",
+      "previous_id": "PB-B20-S",
+      "previous_round": 122,
+      "source": "CABI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 20
+    },
+    {
+      "id": "SC-B20-U",
+      "previous_id": "PB-B35-B",
+      "previous_round": 122,
+      "source": "CABI",
+      "overlap": 20,
+      "new_V": 20,
+      "previous_V": 35
+    },
+    {
+      "id": "SC-B20-U",
+      "previous_id": "PB-B50-U",
+      "previous_round": 122,
+      "source": "CABI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 50
+    },
+    {
+      "id": "SC-B20-U",
+      "previous_id": "SC-B15-S",
+      "previous_round": 126,
+      "source": "CABI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 15
+    },
+    {
+      "id": "SC-B20-U",
+      "previous_id": "SC-B20-S",
+      "previous_round": 126,
+      "source": "CABI",
+      "overlap": 0,
+      "new_V": 20,
+      "previous_V": 20
+    }
+  ],
+  "historical_overlap_scope": "Six R122 small manifests/selections already available; no full historical recovery.",
+  "nonfactorial_nonIID_not_six_cities": true
+}
