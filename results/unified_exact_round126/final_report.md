@@ -1,0 +1,19 @@
+# Round126 final assessment
+
+Experiment execution: **COMPLETE**. Manuscript package: **READY**. Scientific judgment: **LIMITED_DIRECT_CERTIFICATION_SUPPORT**.
+
+This scope replaces the earlier Round126 zero-new-solves/document-only request. The six fixed new V15/V20 problems received exactly 12 own cold-P/M-B arms, Seed0, per-method caps 600/1200s, with the frozen production executable/DLL. There was no default change, candidate development, data-dependent dispatch, time extension, redraw or new Seed.
+
+The fixed denominator remains six problems, with five categories: {"BOTH_CERTIFIED": 3, "BOTH_OPEN": 1, "MB_ONLY_CERTIFIED": 2, "P_ONLY_CERTIFIED": 0, "UNEVALUABLE": 0}. M-B certifies 5/6 (5 nonzero, 0 zero, 0 startup-zero); P certifies 3/6 (3 nonzero, 0 zero). The main categories are recorded independently of supplementary U/L/gap improvements. One problem certified by both is still one problem. Certified physical numerical values are in the summary and arm table.
+
+Supporting nonzero roles (w=4): SC-C15-S, SC-C15-B, SC-B20-S, SC-B20-U. Material opposite roles (l=0): none. All actual P-faster ratios, including below-materiality cases, are retained: []. Both-certified intersection: SC-C15-S, SC-B15-S, SC-C15-B, n=3, median P/M-B=5.533472204306217, geometric mean=4.892005267127446. This is conditional on both certification, not an entire-panel mean; open times are null, not cap-filled. T_total remains an explicit secondary view. On the both-open SC-C20-S, M-B production ends 2.524297 seconds earlier but its total including verification is 1.126600 seconds longer; neither ordering yields a certification-time inference.
+
+All three clocks include the original reserve and complete-work policy. Measured closed-task wall is 7283.168128s; the separately labelled conservative setup/bookkeeping allowance is 120s; charged upper total is 7403.168128s, below 18000s. Formal six-group outer wall is 6807.065463s; the 10800s formal figure is a nominal cap sum, not an actual bill. Actual formal native processes: 12; read-only reference exporter processes: 2 with Optimize 0; new qualification solver CLI: 0. Actual formal Optimize calls: 32. Every failed metered attempt remains charged.
+
+The full English reading manuscript preserves the R125 model, all enabled strengthening derivations, complete H/controller algorithms, numerical boundaries, references and two appendices. The new direct certification section is separate from the unchanged R122 32-arm/48-pair and known R123 V50 endpoint layer. Mathematical validity is not a runtime theorem; this comparison is complete M-B versus cold P, not separate component causality or universal dominance. The four shortage positive-objective cases and any zero subset remain visible.
+
+Actual review, repair rereading and its limits are recorded in [review_actions.md](review_actions.md). The saved-reader first attempt failed only a four-file LF/CRLF identity comparison; exact text equivalence was established and the first attempt/fees kept. An intermediate commentary misread observational audit top-level fields as final; the final endpoint/return/source reconstruction was promptly checked and the communication corrected. No scientific output was altered to create a certificate.
+
+Public science-A empty-root recovery: pending; B will contain the actual receipt, not a prediction. Scope: current necessary R126 carriers and dependencies, exact input regeneration, all sealed clocks/endpoints and six pair arithmetic, plus conditional manuscript compile/affected-page reread; no native re-solving or full historical campaign restoration. Later verification/cleanup receipts do not recursively prove future receipts.
+
+The single next priority is: Submit this accurately limited complete draft to the user for substantive academic review; no additional solving is recommended within this round.

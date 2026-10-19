@@ -1,0 +1,605 @@
+{
+  "review_id": "round126-independent-manuscript-review",
+  "reviewer_role": "Separate executor /root/independent_manuscript_review",
+  "reviewed_at_utc": "2026-10-19T09:31:30.6542800Z",
+  "status": "COMPLETE_NO_REQUIRED_CHANGES",
+  "task_scope": "Read the complete current English manuscript and both appendices, compare every Round126 certification result and boundary statement with the actual CSV/JSON data, check retention against R125, then visually review the final rendered PDF. No solving or production changes.",
+  "source_reads": [
+    {
+      "file": "goal.md",
+      "lines": 207,
+      "sha256": "e4474b6681f1f1731971429b00a073d6d7532ece1640c5cf1b393eb017b7215d",
+      "read_range": "lines 152-190, Sections 7 and 8",
+      "read_mode": "full text reading"
+    },
+    {
+      "file": "manuscript.md",
+      "lines": 658,
+      "sha256": "365fe0df329a76a165821005b9dbaebc9cb322eb9f43f47ae9904ec5c6c463d8",
+      "read_range": "all lines 1-658",
+      "read_mode": "full text reading"
+    },
+    {
+      "file": "model_appendix.md",
+      "lines": 450,
+      "sha256": "5a54d0170b190e2f4181718c0fe7cfeff735a3349ef7b260954228e4b28b09db",
+      "read_range": "all lines 1-450",
+      "read_mode": "full text reading"
+    },
+    {
+      "file": "algorithm_appendix.md",
+      "lines": 224,
+      "sha256": "d195e6c9077fbeea53b134c0898cd48345cdade24e0895f410550d504b1699b6",
+      "read_range": "all lines 1-224",
+      "read_mode": "full text reading"
+    },
+    {
+      "file": "references.bib",
+      "lines": 96,
+      "sha256": "0d1fe40741d66f501892c3185a927191d030c96177dcda56f5467c03fd1ff7a4",
+      "read_range": "all lines 1-96",
+      "read_mode": "full text reading"
+    },
+    {
+      "file": "tables/historical_display.md",
+      "lines": 174,
+      "sha256": "803e01455bfd4e589a4900ccdfc6c4a42cf3d0099add97ede462a40def05f7dd",
+      "read_range": "all lines 1-174",
+      "read_mode": "full text reading"
+    },
+    {
+      "file": "arms.csv",
+      "lines": 13,
+      "sha256": "dcee7225bb708d0bc6ed888b21f86d65273321afa55ba59ec08f351c1dd74286",
+      "read_range": "all lines 1-13",
+      "read_mode": "raw full-file reading and independent parsed arithmetic"
+    },
+    {
+      "file": "certification_pairs.csv",
+      "lines": 7,
+      "sha256": "1575772e4875869037b457d9c6940f2d081b33e9e228b1006ede79ee3417ce21",
+      "read_range": "all lines 1-7",
+      "read_mode": "raw full-file reading and independent parsed arithmetic"
+    },
+    {
+      "file": "certification_summary.json",
+      "lines": 96,
+      "sha256": "6b352b14c4db0c3468199f921fb7fd4a4ea3305cf136348e59558f4358b1c89b",
+      "read_range": "all lines 1-96",
+      "read_mode": "full text reading"
+    }
+  ],
+  "observations": [
+    {
+      "id": "S1",
+      "location": "manuscript.md:7,19-29,340,652-654",
+      "result": "Only frozen M-B is proposed. ENS-C is explicitly historical/default; D1/D0 and fusion/instance-wise selection are closed. No invented author, affiliation or funding block is present."
+    },
+    {
+      "id": "S2",
+      "location": "manuscript.md:332-334; model_appendix.md:425-433; algorithm_appendix.md:105-117",
+      "result": "Ideal embedding/validity/cover proofs are separate from binary64 numerical certification. The non-strict cutoff closure guard and absence of a global accumulated-error theorem are explicit; native one-sided admission is separated from the sealed signed-gap policy."
+    },
+    {
+      "id": "S3",
+      "location": "manuscript.md:398-449 and actual arms.csv/certification_pairs.csv/certification_summary.json",
+      "result": "All 12 own endpoints and all six pairs are visible. Independently recomputed distribution is 3 BOTH_CERTIFIED, 2 MB_ONLY_CERTIFIED, 0 P_ONLY_CERTIFIED, 1 BOTH_OPEN, 0 UNEVALUABLE. Counts are M-B 5/6, P-GRB 3/6, all certified objectives nonzero. No six-WIN conversion was found."
+    },
+    {
+      "id": "S4",
+      "location": "manuscript.md:419-441",
+      "result": "SC-B15-S retains the observed certification ratio 1.8939644177583965 and P-minus-M-B duration 6.126028586819302 s while being TIME_CLOSE under the 30 s threshold. Open arm certification times are empty/null in CSV and unknown in display. Single-sided/open pair ratios are not imputed from caps."
+    },
+    {
+      "id": "S5",
+      "location": "manuscript.md:443-449",
+      "result": "Both-certified intersection is exactly SC-C15-S, SC-B15-S, SC-C15-B. Recomputed median 5.533472204306217 and geometric mean 4.892005267127446 match; they are labelled conditional. w=4/l=0 supports only LIMITED_DIRECT_CERTIFICATION_SUPPORT."
+    },
+    {
+      "id": "S6",
+      "location": "manuscript.md:453-624,632-644,654; tables/historical_display.md:1-174",
+      "result": "R122 six historical M-B/P endpoint WINs and the single known R123 V50 all-open long window retain separate denominators and meanings. R123 adds zero independent problems. No pooled whole-panel certification speedup or extrapolated remaining proof time was found."
+    },
+    {
+      "id": "S7",
+      "location": "manuscript.md:64-334; model_appendix.md:1-450; algorithm_appendix.md:1-224",
+      "result": "Complete physical model, empty/loaded return semantics, F and S=0, VD-P and A/B/implicit service integrality, all active nontrivial strengthening derivations, H, NEXT/child target/AM, return cases and full cover are present. All unique equation labels A1-A35 and all three main algorithms are present."
+    },
+    {
+      "id": "S8",
+      "location": "references.bib:1-96; manuscript.md:31-62,658",
+      "result": "All 13 bibliography keys are cited, with no unresolved or unused key. Literature access levels remain bounded in prose. No new external-literature retrieval or full-paper revalidation was performed by this reviewer."
+    }
+  ],
+  "independent_pair_recalculation": [
+    {
+      "id": "SC-C15-S",
+      "category": "BOTH_CERTIFIED",
+      "MB_T_cert": 41.562463900016155,
+      "P_T_cert": 464.2933731068624,
+      "speedup": 11.170978078291503,
+      "P_minus_MB_seconds": 422.73090920684626,
+      "materiality_seconds": 46.42933731068624,
+      "time_description": "MB_FASTER",
+      "objectives_compatible": true
+    },
+    {
+      "id": "SC-B15-S",
+      "category": "BOTH_CERTIFIED",
+      "MB_T_cert": 6.852653713198379,
+      "P_T_cert": 12.978682300017681,
+      "speedup": 1.8939644177583965,
+      "P_minus_MB_seconds": 6.126028586819302,
+      "materiality_seconds": 30,
+      "time_description": "TIME_CLOSE",
+      "objectives_compatible": true
+    },
+    {
+      "id": "SC-C15-B",
+      "category": "BOTH_CERTIFIED",
+      "MB_T_cert": 44.08152509998763,
+      "P_T_cert": 243.92389386420837,
+      "speedup": 5.533472204306217,
+      "P_minus_MB_seconds": 199.84236876422074,
+      "materiality_seconds": 30,
+      "time_description": "MB_FASTER",
+      "objectives_compatible": true
+    },
+    {
+      "id": "SC-B20-S",
+      "category": "MB_ONLY_CERTIFIED",
+      "MB_T_cert": 1069.0017134691589,
+      "P_T_cert": null,
+      "speedup": null
+    },
+    {
+      "id": "SC-C20-S",
+      "category": "BOTH_OPEN",
+      "MB_T_cert": null,
+      "P_T_cert": null,
+      "speedup": null
+    },
+    {
+      "id": "SC-B20-U",
+      "category": "MB_ONLY_CERTIFIED",
+      "MB_T_cert": 18.873570056573953,
+      "P_T_cert": null,
+      "speedup": null
+    }
+  ],
+  "secondary_arithmetic": {
+    "all_12_T_total_equal_T_produce_plus_T_verify": true,
+    "open_arms_with_nonnull_T_cert": 0,
+    "SC_C15_B_P_signed_gap_retained": -1.734723475976807e-17,
+    "SC_B20_S_MB_signed_gap": 1.4868352549157748e-8,
+    "both_certified_speedup_median": 5.533472204306217,
+    "both_certified_speedup_geometric_mean": 4.892005267127446,
+    "SC_C20_S_cost_ordering": "M-B T_produce lower; P-GRB T_total lower; no certification ordering"
+  },
+  "retention_against_R125": {
+    "model_appendix": "Initial review source was byte-identical to R125. The final source differs only by aligned layout of A20/A21/A27; the full diff and actual affected source were read. All mathematical definitions and derivations remain.",
+    "manuscript_sections_3_through_5": "All content retained. Diff is inline LaTeX delimiters around numerical tolerances in Section 5.4.",
+    "algorithm_appendix": "All prior method definitions retained. Round126 scope/CLI template is added; inline math delimiters are repaired; final B2 and sigma edits are formatting only.",
+    "references": "Text identical after CRLF/LF normalization.",
+    "six_historical_authorities": [
+      {
+        "file": "tables/complete_results.md",
+        "sha256": "75cfed88be69c119ae2d424258d1079793d31dbd06bd886a63201ea480548fb2",
+        "byte_identical": true
+      },
+      {
+        "file": "tables/r122_arms.csv",
+        "sha256": "acc000aaf86dec2301180105f56c20449c5e5d9e9d986dc86719b75a84bafa29",
+        "byte_identical": true
+      },
+      {
+        "file": "tables/r122_pairs.csv",
+        "sha256": "cd112fc128d249057462f94a9c57d75bdcd45459f583503684dbd9ce15cc72ab",
+        "byte_identical": true
+      },
+      {
+        "file": "tables/r123_arms.csv",
+        "sha256": "040523c5e98fe60fc7fb11ba90431d9767728ab8aa8abf05b26d50af2a6c1438",
+        "byte_identical": true
+      },
+      {
+        "file": "tables/r123_checkpoints.csv",
+        "sha256": "0abbb5f1d2060bb93ee2e30395fb2a114351464f1b056a030c73fb55be9f3aa9",
+        "byte_identical": true
+      },
+      {
+        "file": "tables/r123_pairs.csv",
+        "sha256": "9cc3927cf3297e871226eb8031efa6250122568db7dc481c4bd56ebd204da0b7",
+        "byte_identical": true
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "V1",
+      "scope": "Initial PDF af9eb319d7d6",
+      "severity": "layout-required",
+      "status": "RESOLVED_VISUALLY_VERIFIED_IN_FINAL_PDF",
+      "pages": [
+        17,
+        20,
+        52,
+        66
+      ],
+      "description": "Long family/source/evidence identifiers overflow their columns or prose right margin. The SC3 evidence strings and B.4.1 plain-text underscore source chain need line-breaking; final output must be reread."
+    },
+    {
+      "id": "V2",
+      "scope": "Initial PDF af9eb319d7d6",
+      "severity": "layout-required",
+      "status": "RESOLVED_VISUALLY_VERIFIED_IN_FINAL_PDF",
+      "pages": [
+        41,
+        43
+      ],
+      "description": "A20/A21/A27 extend past the text width; split/align the existing equations without semantic changes and inspect all symbols/tags again."
+    },
+    {
+      "id": "V3",
+      "scope": "Initial PDF af9eb319d7d6",
+      "severity": "layout-required",
+      "status": "RESOLVED_VISUALLY_VERIFIED_IN_FINAL_PDF",
+      "pages": [
+        54
+      ],
+      "description": "The plain-text membership symbol in B.9 is not reliably rendered; root identified a missing-glyph warning and is replacing it with explicit math syntax."
+    },
+    {
+      "id": "V4",
+      "scope": "Initial PDF af9eb319d7d6",
+      "severity": "readability",
+      "status": "RESOLVED_VISUALLY_VERIFIED_IN_FINAL_PDF",
+      "pages": [
+        11,
+        12,
+        13
+      ],
+      "description": "Algorithm 1 begins with about five lines at the bottom of p11 and continues on p12; Algorithm 3 spans p12/p13 without a continuation label. Keep each finite block intact or clearly identify continuation."
+    },
+    {
+      "id": "V5",
+      "scope": "Initial PDF af9eb319d7d6",
+      "severity": "optional layout",
+      "status": "CLOSED_NONBLOCKING_LAYOUT_CHOICE",
+      "pages": [
+        15,
+        16,
+        18,
+        27,
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "description": "Narrow short tables are forced onto sparse landscape pages, while S2 requires a second page. Portrait placement where it fits would improve reading. No missing table rows were observed.",
+      "final_note": "Narrow short tables are now portrait. S2 remains a legible two-page landscape table with its repeated column header; no row is lost. Some wide-table pages retain whitespace."
+    },
+    {
+      "id": "V6",
+      "scope": "Initial PDF af9eb319d7d6",
+      "severity": "optional layout",
+      "status": "CLOSED_NONBLOCKING_LAYOUT_CHOICE",
+      "pages": [
+        50
+      ],
+      "description": "B1/B2 are visually intact but their tags move below full-width single lines; explicit aligned breaks would improve legibility.",
+      "final_note": "B2 is aligned and readable; B1 remains fully visible with its number on the following line. This does not obscure any formula."
+    },
+    {
+      "id": "V7",
+      "scope": "Final PDF and final manuscript lines 620-629",
+      "severity": "layout",
+      "status": "RESOLVED_VISUALLY_VERIFIED_IN_FINAL_PDF",
+      "description": "Root separated the historical I0/I1 bounds into an aligned display; actual source was reread and page 31 viewed at original detail. Both endpoints and all surrounding unresolved-proof statements are preserved."
+    }
+  ],
+  "pdf_review": {
+    "status": "PASS",
+    "versions": [
+      {
+        "sha256": "af9eb319d7d61c29284e8bef92b78fc155fcea9c355f0ac92796780d29ade7df",
+        "pages": 66,
+        "render_root": "E:/codes/ExactEBRP-work/temp/round126/pdf_review/af9eb319d7d6",
+        "viewed_contact_sheets": [
+          "contact_01.jpg",
+          "contact_02.jpg",
+          "contact_03.jpg",
+          "contact_04.jpg",
+          "contact_05.jpg",
+          "contact_06.jpg",
+          "contact_07.jpg",
+          "contact_08.jpg",
+          "contact_09.jpg",
+          "contact_10.jpg",
+          "contact_11.jpg",
+          "contact_12.jpg",
+          "contact_13.jpg",
+          "contact_14.jpg",
+          "contact_15.jpg",
+          "contact_16.jpg",
+          "contact_17.jpg"
+        ],
+        "overview_pages_inspected": "1-66, all pages",
+        "individual_PNGs_viewed_at_original_detail": [
+          9,
+          50,
+          52
+        ],
+        "result": "Layout defects observed; no final readiness claim. Root is repairing and will re-render."
+      },
+      {
+        "sha256": "30a7d1a450a2c257758d3ea4e0a85360c68d45ff45e67be0e944409369542e70",
+        "pages": 62,
+        "overview_pages_inspected": "Not claimed as a full overview review",
+        "individual_PNGs_viewed_at_original_detail": [
+          12,
+          13,
+          39,
+          41,
+          48,
+          50,
+          52
+        ],
+        "result": "Targeted intermediate repair review; algorithm integrity, A20/A21/A27, B2, source-chain wrapping and sigma glyph confirmed."
+      },
+      {
+        "sha256": "236f706a37be1524ddf248aa681ececfab1d9fd85f3533f68cf8ece892a5011c",
+        "pages": 62,
+        "render_root": "E:/codes/ExactEBRP-work/temp/round126/pdf_review/236f706a37be",
+        "viewed_contact_sheets": [
+          "contact_01.jpg",
+          "contact_02.jpg",
+          "contact_03.jpg",
+          "contact_04.jpg",
+          "contact_05.jpg",
+          "contact_06.jpg",
+          "contact_07.jpg",
+          "contact_08.jpg",
+          "contact_09.jpg",
+          "contact_10.jpg",
+          "contact_11.jpg",
+          "contact_12.jpg",
+          "contact_13.jpg",
+          "contact_14.jpg",
+          "contact_15.jpg",
+          "contact_16.jpg"
+        ],
+        "overview_pages_inspected": "1-62, every final page",
+        "individual_PNGs_viewed_at_original_detail": [
+          12,
+          13,
+          18,
+          19,
+          20,
+          31,
+          33,
+          34,
+          36,
+          37,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          48,
+          50,
+          52,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62
+        ],
+        "result": "Final complete visual review: no missing equations, table rows, references, method definitions, clipped content or overlaps observed. Required initial layout findings resolved."
+      }
+    ],
+    "final_sha256": "236f706a37be1524ddf248aa681ececfab1d9fd85f3533f68cf8ece892a5011c",
+    "final_pages": 62,
+    "final_render_root": "E:/codes/ExactEBRP-work/temp/round126/pdf_review/236f706a37be",
+    "final_checks": {
+      "all_62_pages_visually_reviewed": true,
+      "algorithms_1_2_complete_on_page_12": true,
+      "algorithm_3_complete_on_page_13": true,
+      "A1_A35_all_visually_checked_at_original_detail": true,
+      "A_formula_pages": [
+        36,
+        37,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "SC3_SC4_SC5_pages": [
+        18,
+        19,
+        20
+      ],
+      "TIME_CLOSE_ratio_1_89396442_visible": true,
+      "open_and_one_sided_unknown_fields_preserved": true,
+      "I0_I1_full_display_on_page_31": true,
+      "references_all_13_entries_visible_on_pages": [
+        33,
+        34
+      ],
+      "complete_historical_tables_pages": [
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "historical_S2_rows": "40 on page 59 plus 8 on page 60, repeated header; all 48 preserved",
+      "historical_S5_rows": "12 on page 61 plus 3 on page 62, repeated header; all 15 preserved",
+      "appendices": "Both appendices present and complete; all appendix pages included in full-page overview.",
+      "new_required_findings": 0
+    }
+  },
+  "limitations": [
+    "This is an independent manuscript/data-alignment and visual-document review, not a fresh native replication, complete production-source audit, full saved-matrix revalidation, or external literature re-search.",
+    "The other executor owns the experiment/evidence qualification review; the arithmetic here uses the actual qualified endpoint tables and does not requalify each native proof chain."
+  ],
+  "prohibited_actions_performed": {
+    "new_input_generation": false,
+    "H_or_route_search": false,
+    "LP_or_MIP": false,
+    "native_optimize": false,
+    "production_source_or_science_edits": false,
+    "new_user_chat": false
+  },
+  "open_requirements": [],
+  "display_alignment_check": {
+    "counts": {
+      "## Table S1a.": 32,
+      "## Table S1b.": 32,
+      "## Table S2.": 48,
+      "## Table S3a.": 3,
+      "## Table S3b.": 3,
+      "## Table S4.": 3,
+      "Table S5": 15,
+      "**Table SC3.": 12,
+      "**Table SC4.": 12,
+      "**Table SC5.": 6
+    },
+    "compared_cells": 1055,
+    "issues": [],
+    "numeric_equivalent_checkpoint_text_normalization": "Compare end times as numeric values; historical display retains original extra decimal digit."
+  },
+  "completed_at_utc": "2026-10-19 09:42:39 UTC",
+  "observation_location_basis": "Initial full-source reading SHA bindings are retained in source_reads. Final source bindings, precise changed-range rereads and final PDF pages are recorded below.",
+  "final_source_bindings": {
+    "read_at_utc": "2026-10-19T09:39:51.9070625Z",
+    "files": [
+      {
+        "file": "goal.md",
+        "lines": 207,
+        "sha256": "e4474b6681f1f1731971429b00a073d6d7532ece1640c5cf1b393eb017b7215d"
+      },
+      {
+        "file": "manuscript.md",
+        "lines": 667,
+        "sha256": "af3723bfa5810cd01dc56b6e3153905a634e1df1a085b29dec9e8cb64e59430e"
+      },
+      {
+        "file": "model_appendix.md",
+        "lines": 455,
+        "sha256": "2ecb18d5d22872ff0bc8a7a8ddfda06cb4d1110e53fd8aceebbc908218d942e5"
+      },
+      {
+        "file": "algorithm_appendix.md",
+        "lines": 226,
+        "sha256": "c75e7ad603e7a126d9bfb99aee4fac0c29a779c458911a4407c0f0e700d24c72"
+      },
+      {
+        "file": "references.bib",
+        "lines": 96,
+        "sha256": "0d1fe40741d66f501892c3185a927191d030c96177dcda56f5467c03fd1ff7a4"
+      },
+      {
+        "file": "tables/historical_display.md",
+        "lines": 174,
+        "sha256": "803e01455bfd4e589a4900ccdfc6c4a42cf3d0099add97ede462a40def05f7dd"
+      },
+      {
+        "file": "arms.csv",
+        "lines": 13,
+        "sha256": "dcee7225bb708d0bc6ed888b21f86d65273321afa55ba59ec08f351c1dd74286"
+      },
+      {
+        "file": "certification_pairs.csv",
+        "lines": 7,
+        "sha256": "1575772e4875869037b457d9c6940f2d081b33e9e228b1006ede79ee3417ce21"
+      },
+      {
+        "file": "certification_summary.json",
+        "lines": 95,
+        "sha256": "daae14ad25d14efc1f1395894be11e485aff55151588979da90dcdcc89e61f48",
+        "final_full_reread": "All 95 lines after fees-only metadata update"
+      }
+    ]
+  },
+  "post_revision_rereads": [
+    {
+      "file": "manuscript.md",
+      "sha256": "af3723bfa5810cd01dc56b6e3153905a634e1df1a085b29dec9e8cb64e59430e",
+      "ranges": [
+        "233-313 (Algorithms 1-3)",
+        "398-450 (SC3/4/5 and paired claims)",
+        "613-633 (covers, I0/I1 display and surrounding scope)"
+      ],
+      "result": "Actual final source reread. A whole-file incremental comparison with the initially read manuscript finds only initial line 620 expanded to final lines 620-629. The three algorithm blocks and SC3-SC5 source are text-identical."
+    },
+    {
+      "file": "model_appendix.md",
+      "sha256": "2ecb18d5d22872ff0bc8a7a8ddfda06cb4d1110e53fd8aceebbc908218d942e5",
+      "ranges": [
+        "203-235 (A20/A21)",
+        "293-307 (A27)",
+        "complete final diff against R125"
+      ],
+      "result": "Actual changed formulas and their surrounding premises reread. Only aligned environments, equation line breaks and alignment marks change; every original term, condition, coefficient and proof remains."
+    },
+    {
+      "file": "algorithm_appendix.md",
+      "sha256": "c75e7ad603e7a126d9bfb99aee4fac0c29a779c458911a4407c0f0e700d24c72",
+      "ranges": [
+        "65-84 (B1/B2 and decision)",
+        "180-186 (decoder budget and sigma membership)"
+      ],
+      "result": "Actual final source reread; B2 is split into three aligned lines and sigma/q use explicit math syntax. No decision or decoder rule changes."
+    }
+  ],
+  "final_incremental_manuscript_check": {
+    "initial_changed_line_range": [
+      620,
+      620
+    ],
+    "final_changed_line_range": [
+      620,
+      629
+    ],
+    "old_lines": [
+      "The low interval \\(I_0=[0,.046542721937380925]\\) and adjacent \\(I_1=[.046542721937380925,.09308544387476185]\\) remain unresolved. The final own \\(G_{\\rm true}=.050119584194518604\\) lies in \\(I_1\\), so that fleet cannot provide an exact-g Start for \\(I_0\\). M-B makes seven LP and one MIP request; its \\(I_0\\) NEXT request uses about 17808.127 seconds. ENS-C makes nine LP and three MIP requests, including both interval targets and a subsequent low-interval terminal request. Child LP count and committed split count are different; counts do not establish retained native search trees or an internal cause of difficulty."
+    ],
+    "new_lines": [
+      "The low interval and its adjacent interval are",
+      "",
+      "\\[",
+      "\\begin{aligned}",
+      "I_0&=[0,.046542721937380925],\\\\",
+      "I_1&=[.046542721937380925,.09308544387476185].",
+      "\\end{aligned}",
+      "\\]",
+      "",
+      "Both remain unresolved. The final own \\(G_{\\rm true}=.050119584194518604\\) lies in \\(I_1\\), so that fleet cannot provide an exact-g Start for \\(I_0\\). M-B makes seven LP and one MIP request; its \\(I_0\\) NEXT request uses about 17808.127 seconds. ENS-C makes nine LP and three MIP requests, including both interval targets and a subsequent low-interval terminal request. Child LP count and committed split count are different; counts do not establish retained native search trees or an internal cause of difficulty."
+    ],
+    "algorithm_blocks_byte_text_equal": true,
+    "SC3_through_SC5_source_identical": true
+  },
+  "unresolved_required_findings": 0,
+  "post_review_metadata_update": {
+    "file": "certification_summary.json",
+    "initial_full_read_sha256": "6b352b14c4db0c3468199f921fb7fd4a4ea3305cf136348e59558f4358b1c89b",
+    "final_sha256": "daae14ad25d14efc1f1395894be11e485aff55151588979da90dcdcc89e61f48",
+    "final_lines": 95,
+    "actual_read_range": "all lines 1-95",
+    "declared_changed_fields": [
+      "fees"
+    ],
+    "declaration_file": "review/summary_fee_snapshot.json",
+    "declaration_sha256": "e721d19213e4718a2222e87d2b9b25a038a76e2c562c512db55c1ebb832c63e0",
+    "independent_check": "All non-fee fields were compared with a fresh independent expected summary reconstructed from the actual 12 arms and six pairs, including categories, method counts, supporting IDs, conditional ratios and every certified physical objective; exact parsed-value equality holds.",
+    "nonfee_science_equal": true,
+    "final_PDF_sha256_unchanged": "236f706a37be1524ddf248aa681ececfab1d9fd85f3533f68cf8ece892a5011c"
+  }
+}

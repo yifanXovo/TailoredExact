@@ -1,0 +1,13 @@
+{
+  "phase": "before recipe freeze and before input generation",
+  "failed_command": "python -B scripts/round126_run.py data_freeze ...",
+  "error": "FileNotFoundError: results/unified_exact_round94/preregistration.json during transitive historical helper import",
+  "observed_tool_wall_seconds": 0.7277057,
+  "billing": "included in the explicitly conservative unmetered setup allowance; not refunded",
+  "actual_native_starts": 0,
+  "Optimize": 0,
+  "new_problem_inputs_existed": false,
+  "repair": "The standalone meter now obtains OS child creation time directly, avoiding a qualification import. The existing tracked R94 configuration blob needed by the inherited runtime import graph was materialized from the same HEAD, without restoring its campaign or changing its contents.",
+  "production_or_generation_mathematics_changed": false,
+  "no_failed_formal_observation_retried": true
+}
