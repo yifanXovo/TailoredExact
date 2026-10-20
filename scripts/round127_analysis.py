@@ -33,6 +33,9 @@ def load_stage(stage):
     out=[]
     for path in sorted((OUT/stage).glob('*/reconstructed.json')):
         out.extend(read(path)['arms'])
+    for a in out:
+        a['signed_gap']=a['U']-a['L'];a['absolute_gap']=abs(a['signed_gap'])
+        a['gap_policy']='signed raw qualified U-L and its absolute magnitude; no bound clipping'
     return out
 def statistics_pairs(rows):
     independent=[r for r in rows if r['independent_comparison']]
@@ -102,7 +105,9 @@ def mechanism():
                     elif fam=='ordered_supply':families[fam]+=1
             h=hs.get(method);ind=read(d/'independent_evidence.json')
             best=[w for w in ind.get('witnesses',[]) if abs(w['F']-a['U'])<=1e-7 and 'available' in w]
-            LP=sum(float(q['solver_runtime']) for q in ledger if q['solve_kind']=='LP');MIP=sum(float(q['solver_runtime']) for q in ledger if q['solve_kind']!='LP')
+            LP=sum(float(q['solver_runtime']) for q in ledger if q['solve_kind']=='LP')
+            MIP=sum(float(q['solver_runtime']) for q in ledger if q['solve_kind']!='LP') if ledger else r.get('gurobi_runtime') if method in ['P','PT'] else 0 if a['native_Optimize']==0 else None
+            Hcost=r.get('process_elapsed_at_exact_phase_start_seconds') if h else 0
             rows.append(dict(id=p['id'],method=method,binary_layer='E1',H_complete=h['complete'] if h else None,
                 initial_own_U=h['physical']['F'] if h else None,
                 initial_fleet_SHA=hashlib.sha256(json.dumps(h['fleet'],sort_keys=True).encode()).hexdigest() if h else None,
@@ -111,7 +116,11 @@ def mechanism():
                 target_row_families=dict(families),root_LP_bound=float(root_status['lower_bound']) if root_status and root_status['bound_available']=='1' else None,
                 root_LP_native_seconds=float(ledger[0]['solver_runtime']) if ledger and ledger[0]['solve_kind']=='LP' else None,
                 actual_native_calls=a['native_Optimize'],native_nodes=sum(float(q['nodes']) for q in ledger) if ledger else r.get('gurobi_node_count'),
-                LP_native_seconds=LP,MIP_native_seconds=MIP,H_plus_admission_seconds=r.get('process_elapsed_at_exact_phase_start_seconds') if h else 0,
+                LP_native_seconds=LP,MIP_native_seconds=MIP,H_plus_admission_seconds=Hcost,
+                T_produce=a['T_produce'],T_verify=a['T_verify'],T_total=a['T_total'],
+                other_production_seconds=a['T_produce']-Hcost-LP-MIP if Hcost is not None and MIP is not None else None,
+                partition_note='observed clock remainder includes modeling/Start/output/wrapper work and clock differences; native Runtime is not complete certification time',
+                native_time_source='actual original optimize ledger' if ledger else 'cold compact actual gurobi_runtime' if method in ['P','PT'] else 'no original native call' if a['native_Optimize']==0 else 'unknown',
                 split_count=r.get('external_gini_tree_split_count'),partial_target_calls=r.get('external_gini_tree_partial_mip_optimize_count'),
                 target_reached_events=r.get('external_gini_tree_partial_mip_target_reached_count'),
                 best_own_witness_first_logged_available=min(w['available'] for w in best) if best else None,

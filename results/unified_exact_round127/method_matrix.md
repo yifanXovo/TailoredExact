@@ -14,14 +14,14 @@ The sole paper method is the frozen **M-B**, described as a tailored branch-and-
 | MG | Same H and representation as MB | R+C_R; omit C_G, retaining the original derived domains | Original controller | E1 |
 | MS2 | Same H and representation as MB | Same as MB, omit triple support only | Original controller | E1 |
 
-R retains the exact inventory/Gini representation, routing/connectivity, prefix load and complete duration, unique nonzero one-direction service, state products, A/B, global handling, singleton reachability, other transfer rows, non-strict own cutoff, true-G cap/floor, penalty-LB closure and movement requirements. Vehicles depart empty and may return loaded. Sum pickup may exceed capacity; each prefix may not. Duration is travel plus `(pickup_time+drop_time)*sum pickup`, excluding depot service. The objective is true Gini plus lambda-weighted target deviation; travel is not an additional objective. Zero-denominator semantics are inherited.
+R retains the exact inventory/Gini representation, routing/connectivity, prefix load and complete duration, unique nonzero one-direction service, state products, A/B, global handling, singleton reachability, other transfer rows, the original non-strict own cutoff row, true-G cap/floor, the separately documented no-strict-improver penalty-LB closure and movement requirements. Vehicles depart empty and may return loaded. Sum pickup may exceed capacity; each prefix may not. Duration is travel plus `(pickup_time+drop_time)*sum pickup`, excluding depot service. The objective is true Gini plus lambda-weighted target deviation; travel is not an additional objective. Zero-denominator semantics are inherited.
 
 ## Exact finite packs
 
 | Pack/family | Formula or scope | Dedicated columns | Active emission sites |
 |---|---|---|---|
-| C_R ordered supply | `d_kj <= sum_{i != j: dist(0,i)+dist(i,j)+dist(j,0)+cunit <= T} p_ki` | None | CplexBaseline ordered compatibility block; factory registry only |
-| C_R pair/triple cover | `sum_{i in A} z_ki <= |A|-1` when cycle LB plus `cunit*ceil(|A|/2)>T` | None | CplexBaseline pair/triple support block |
+| C_R ordered supply | `d_kj <= sum_{i != j: dist(0,i)+dist(i,j)+dist(j,0)+cunit <= T+1e-9} p_ki` | None | CplexBaseline ordered compatibility block; factory registry only |
+| C_R pair/triple cover | `sum_{i in A} z_ki <= |A|-1` when cycle LB plus `cunit*ceil(|A|/2)>T+1e-9` | None | CplexBaseline pair/triple support block |
 | C_R conditional handling | `cunit*sum_A p_ki + B_A*sum_A z_ki <= T-cycleLB+B_A*|A|` otherwise | None | Same block |
 | C_G H spread | `(n-1)h_ij <= n*gU*sum r` | None | IntervalRowFactory and direct writer fallback |
 | C_G fixed centering | Both directed `r_i-r_j <= n*gU*S_U/(n-1)` | r_min/r_max in legacy extended writer; unused in shared projection | Same two emission paths |
@@ -29,13 +29,17 @@ R retains the exact inventory/Gini representation, routing/connectivity, prefix 
 | C_G linear estimator | `sum h + n*S_U*lambda*sum omega*e <= n*S_U*U` | None | Shared factory and fallback |
 | C_G product estimator | Four McCormick rows for `W_SP=S*P` and `sum h+n*lambda*W_SP <= n*U*sum r` | W_SP and its bounds | Shared factory and fallback; column creation in writer |
 
+Here `cunit=pickup_time+drop_time=120`, `P=sum omega_i*e_i`, and `S=sum r_i`. For a support A, `cycleLB` is the minimum depot cycle over its two or six orders, and `B_A=T+cycleLB+cunit*max(1,sum_{i in A} min(b_i,Q_k))`, exactly as in Appendix A.5.4. On the unchanged rectangle `[S_L,S_U] x [P_L,P_U]`, the four product rows are `W>=S_L*P+P_L*S-S_L*P_L`, `W>=S_U*P+P_U*S-S_U*P_U`, `W<=S_U*P+P_L*S-S_U*P_L`, and `W<=S_L*P+P_U*S-S_L*P_U`; the actual serialized W bounds are retained in each original model. The factory projects the legacy extrema to directed pair rows, so r_min/r_max are unused dedicated columns in the active shared path; MG omits them along with W_SP.
+
+The active entry points are `writeCompactLp` in CplexBaseline and `buildRound18StaticIntervalRows` in IntervalRowFactory. Ordered supply depends on the original strengthened compatibility flag; support depends on the original strengthened duration flag, max size and shared subset cap. H-spread/centering retain the original low-Gini/direct-row prerequisites; linear and SP estimators retain their original option, cutoff and rectangle prerequisites. The MB preset activates these fixed choices. The masks alter emission after those prerequisites; they do not enable another preset or a new domain calculation.
+
 The masks act on **row emission**, not on domain-generating options. In particular MG retains low-Gini-derived Y bounds, denominator/penalty domains, direct true-G cap/floor, g×state hulls, penalty closure and deviation upper bounds. Deleting C_G does not delete all fairness structure. Gurobi's generic Cuts parameter remains Auto in all M-B diagnostics; project-row deletion is not `Cuts=0`. Start mapping and independent evaluation iterate actual columns; absent W_SP/r_min/r_max are not fabricated, and every remaining row is checked.
 
 The shared factory and fallback writer are masked together. Family registry metadata follows the emission mask, while the inherited domain option remains configured. Actual differences use duplicate-preserving row Counters, full objective, all types and all retained bounds. Support exposure reports cover/conditional and pair/triple separately from actual rows; old pair/triple counters combine both branch types.
 
 ## MD intended completeness obligation — not qualified
 
-After its own unchanged H supplies U0, MD preserves the original startup-zero certificate. Otherwise its only relevant domain is `[0,min(U0,(n-1)/n)]` with `F_model<=U0` (the n=1 convention is inherited). For every physical solution with F<=U0, true G<=F and true G<=(n-1)/n, so it embeds in this root. F>U0 cannot improve the same-run witness. Native scoped bounds combine with this cutoff complement; raw native bounds and signed gaps remain in evidence.
+After its own unchanged H supplies U0, MD preserves the original startup-zero certificate. Otherwise its intended relevant domain is `[0,min(U0,(n-1)/n)]` with `F_model<=U0` (the n=1 convention is inherited). For every physical solution with F<=U0, true G<=F and true G<=(n-1)/n, so its Gini lies in that interval. Embedding it in all retained root rows is a separate mandatory obligation; that obligation fails at the equality closure below. F>U0 cannot improve the same-run witness. Native scoped bounds combine with this cutoff complement; raw native bounds and signed gaps remain in evidence.
 
 MD validates the complete singleton root, executes the original LP, restores original VTypes and performs one terminal root MIP without a native target. NEXT, adaptive child LPs, splitting and cutoff-epoch rebuilding are disabled. LP optimality or a bound target alone is never used as MD's final problem certificate. Own U0 Start is injected by the unchanged shared backend. Root LP/MIP infeasibility is a consistency fault. An improved native physical incumbent can update own U after the call, with no second model or tree.
 

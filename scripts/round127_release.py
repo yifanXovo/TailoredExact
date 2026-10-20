@@ -5,7 +5,10 @@ Pack only after performance work is idle. Raw remains authoritative in place.
 from round127_common import *
 import ast,re,zipfile
 
-BAD=[rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----',rb'gh[pousr]_[A-Za-z0-9]{30,}',rb'github_pat_[A-Za-z0-9_]{35,}',rb'(?i)(?:cookie|authorization)\s*:\s*(?:bearer\s+)?[A-Za-z0-9+/=_-]{24,}']
+BAD=[rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----',rb'gh[pousr]_[A-Za-z0-9]{30,}',rb'github_pat_[A-Za-z0-9_]{35,}',rb'(?i)(?:cookie|authorization)\s*:\s*(?:bearer\s+)?[A-Za-z0-9+/=_-]{24,}',
+     rb'sk-[A-Za-z0-9_-]{24,}',rb'AIza[0-9A-Za-z_-]{35}',rb'ya29\.[0-9A-Za-z_-]{24,}',
+     rb'(?i)(?:WLSSecret|WLSAccessID|CloudSecretKey|CSAPISecret)\s*(?:=|:|to value)\s*[\"\x27]?[A-Za-z0-9_-]{16,}',
+     rb'(?m)^KEY=[0-9a-fA-F]{20,}']
 FORBIDDEN={'.exe','.dll','.lic','.key','.pem','.pfx','.p12','.ttf','.otf','.woff','.woff2','.html'}
 def scan(p):
     assert p.suffix.lower() not in FORBIDDEN,('forbidden published artifact',str(p))
@@ -74,11 +77,15 @@ def manifest():
         if relative.parts[0] in excluded or p.name in mutable:continue
         names.add(p.relative_to(ROOT).as_posix())
     names.update(script_closure([p.relative_to(ROOT).as_posix() for p in (ROOT/'scripts').glob('*round127*.py')]))
+    names.update(read(OUT/'tiny_recipe.json')['dependencies'])
     names.add('scripts/round127_export.cpp')
     names.update(read(OUT/'E1_frozen.json')['source_bindings'])
     im=read(OUT/'input_manifest.json')
     names.update(p['input_path'] for p in im['main_roles']+im['training_roles']+im['core_roles'])
-    names.update(['results/unified_exact_round94/preregistration.json','results/unified_exact_round126/arms.csv','results/unified_exact_round126/certification_summary.json'])
+    names.update(['results/unified_exact_round94/preregistration.json','results/unified_exact_round108/input_manifest.json','results/unified_exact_round122/input_manifest.json',
+        'results/unified_exact_round126/paper_method_config.json','results/unified_exact_round126/production_identity.json','results/unified_exact_round126/input_manifest.json',
+        'results/unified_exact_round126/protocol.json','results/unified_exact_round126/measurement_policy_v2.json','results/unified_exact_round126/argv_freeze.json',
+        'results/unified_exact_round126/arms.csv','results/unified_exact_round126/certification_summary.json'])
     names.update(p.relative_to(ROOT).as_posix() for p in (ROOT/'results/unified_exact_round126/inputs').glob('*') if p.is_file())
     names.update(['results/data_generation_citibike_round57/source_station_table.csv','results/unified_exact_round116/projection_contract.json','results/unified_exact_round116/source/snapshot.json','results/unified_exact_round116/source/source_station_table.csv','results/unified_exact_round116/source/row_decisions.json','results/unified_exact_round116/source/requests/station_information/01.response'])
     files=[];scanned=0
