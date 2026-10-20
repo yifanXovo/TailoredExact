@@ -76,6 +76,10 @@ def explanatory_point(base,deleted,point):
                 W_status='NO_EXTENSION_AT_SAVED_POINT' if separation>tolerance else 'NUMERICALLY_UNCERTAIN' if separation>0 else 'EXTENSION_INTERVAL_NONEMPTY_AT_SAVED_POINT',
                 W_note='Existence checked by eliminating only W with its actual bounds/rows; no arbitrary W assignment. A nonempty interval does not imply global redundancy.')
         return result
+def detailed_deleted_family(row):
+    family=row_family(row)
+    if family=='explicit_centering':return 'fixed_centering' if len(row[0])==2 else 'variable_S_centering'
+    return family
 def mechanism():
     rows=[];diagnostics=[]
     for path in sorted((OUT/'core').glob('*/identity.json')):
@@ -115,6 +119,7 @@ def mechanism():
                 root_cutoff=c['cutoff'] if c else None,certificate=a['certificate'],T_cert=a['T_cert'],
                 point_status=read(d/'external/round127_root_lp_status.json') if (d/'external/round127_root_lp_status.json').exists() else 'unknown/no optimal root LP point',
                 root_LP_bound_source='actual L0 LP status/optimize ledger; no extra diagnostic solve' if root_status else 'unknown/no original root LP'))
+        cg_rows=None
         for method in ['MR','MG','MS2']:
             if method not in launches:continue
             d=core.portable(ROOT,launches[method]['destination']);status=d/'external/round127_root_lp_status.json';point_path=d/'external/round127_root_lp.csv'
@@ -123,6 +128,11 @@ def mechanism():
                 scope='explanatory actual saved root point only; not a certification/performance proof')
             if matched:
                 check=model_deletion_check(core.portable(ROOT,calls['MB']['model_path']),core.portable(ROOT,calls[method]['model_path']),method.lower(),p['V'],p['M'])
+                difference=collections.Counter(models['MB']['rows'])-collections.Counter(models[method]['rows'])
+                detailed=collections.Counter()
+                for row,count in difference.items():detailed[detailed_deleted_family(row)]+=count
+                check['detailed_families']=dict(detailed)
+                if method=='MG':cg_rows=difference
                 record['actual_formal_root_deletion_check']=check
                 for item in rows:
                     if item['id']==p['id'] and item['method']==method:item['removed_target_families_vs_MB']=check['families']
@@ -139,6 +149,16 @@ def mechanism():
             with point_path.open(newline='') as f:point={r['name']:float(r['value']) for r in csv.DictReader(f)}
             assert set(point)==set(models[method]['order'])
             diagnostics.append(dict(record,**explanatory_point(models['MB'],models[method],point)))
+        if cg_rows is not None:
+            detailed=collections.Counter()
+            for row,count in cg_rows.items():detailed[detailed_deleted_family(row)]+=count
+            for item in rows:
+                if item['id']!=p['id'] or item['method'] in ['P','PT']:continue
+                method=item['method']
+                if method=='MG':item['C_G_actual_explicit_family_counts']={k:0 for k in detailed}
+                elif models.get(method) is not None:
+                    assert not cg_rows-collections.Counter(models[method]['rows']),('retained C_G signature missing',p['id'],method)
+                    item['C_G_actual_explicit_family_counts']=dict(detailed)
     table(OUT/'mechanism_costs.csv',rows);write(OUT/'root_LP_deleted_row_explanations.json',diagnostics)
     return rows,diagnostics
 def analyze():

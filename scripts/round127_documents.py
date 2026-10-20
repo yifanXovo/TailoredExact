@@ -3,7 +3,7 @@ from round127_common import *
 import csv,collections
 def csvrows(name):
     with (OUT/(name+'.csv')).open(newline='',encoding='utf-8-sig') as f:return list(csv.DictReader(f))
-def fmt(value):return 'open' if value in [None,''] else f'{float(value):.3f}'
+def fmt(value,missing='open'):return missing if value in [None,''] else f'{float(value):.3f}'
 def mdtable(head,values):return '| '+' | '.join(head)+' |\n| '+' | '.join(['---']*len(head))+' |\n'+'\n'.join('| '+' | '.join(map(str,r))+' |' for r in values)+'\n'
 def counts(p):return ', '.join(f'{k}: {v}' for k,v in p['classes'].items())
 def documents():
@@ -30,7 +30,7 @@ Two once-generated geographic cases, SM-C8-S (V8/M1, shortage, Q=20, T=2400) and
 
 '''
     tiny_section+='**Table R127-T. All tiny observations.** Delta is MB minus P, only when both certify.\n\n'
-    tiny_section+=mdtable(['Problem','Seed / repeat','Status','MB cert s','P cert s','Delta s','Delta >=10 s'],[[r['id'],r['seed']+'/'+r['repeat'],r['classification'],fmt(r['left_T_cert']),fmt(r['right_T_cert']),fmt(r['left_minus_right_seconds']),r['dt_ge_10_warning'] or 'unknown'] for r in tiny])
+    tiny_section+=mdtable(['Problem','Seed / repeat','Status','MB cert s','P cert s','Delta s','Delta >=10 s'],[[r['id'],r['seed']+'/'+r['repeat'],r['classification'],fmt(r['left_T_cert']),fmt(r['right_T_cert']),fmt(r['left_minus_right_seconds'],'N/A'),r['dt_ge_10_warning'] or 'unknown'] for r in tiny])
     for t in summary['tiny_risks']:
         tiny_section+=f"\n{t['id']}: {t['both_certified_pairs']}/6 both-certified, {t['P_only_count']} P-only, {t['dt_ge10_count']} observed delays at least 10 seconds. Median delta {fmt(t['median_dt'])} seconds ({t['median_scope']}); repeated warning={t['repeated_ge10']}, all-six median warning={t['typical_median_ge10']}. Per-Seed paired differences are {t['by_seed']}. No cap is substituted for a missing certification time.\n"
     core_section='''### 6.6 Grouped mechanism diagnostics on three known roles
@@ -41,9 +41,9 @@ The required MD specification did not pass mathematical qualification. The retai
 
 '''
     core_section+='**Table R127-C. All predeclared core comparisons.** Left is the evaluated method; ratios use the both-certified intersection only. PT aliases, when applicable, are marked and not counted independently.\n\n'
-    core_section+=mdtable(['Role','Left / right','Status','Direction','Left cert s','Right cert s','Right / left'],[[r['id'],r['left']+'/'+r['right']+(' (alias)' if r['alias']=='True' else ''),r['classification'],r['direction'],fmt(r['left_T_cert']),fmt(r['right_T_cert']),fmt(r['right_over_left_certification_ratio'])] for r in core])
+    core_section+=mdtable(['Role','Left / right','Status','Direction','Left cert s','Right cert s','Right / left'],[[r['id'],r['left']+'/'+r['right']+(' (alias)' if r['alias']=='True' else ''),r['classification'],r['direction'],fmt(r['left_T_cert']),fmt(r['right_T_cert'],'not run' if r['right']=='MD' else 'open'),fmt(r['right_over_left_certification_ratio'],'N/A')] for r in core])
     core_section+='\n**Table R127-M. Original root exposure and cost.** Native seconds are diagnostics within the complete production clock. Unknown means unavailable from the original run; no extra Optimize was used.\n\n'
-    core_section+=mdtable(['Role / mode','H complete','Root rows / cols','Root LP L','LP native s','MIP native s','Splits / target hits'],[[r['id']+'/'+r['method'],r['H_complete'] or 'N/A',r['root_rows']+'/'+r['root_columns'],fmt(r['root_LP_bound']),fmt(r['LP_native_seconds']),fmt(r['MIP_native_seconds']),(r['split_count'] or 'N/A')+'/'+(r['target_reached_events'] or 'N/A')] for r in mechanisms])
+    core_section+=mdtable(['Role / mode','H complete','Root rows / cols','Root LP L','LP native s','MIP native s','Splits / target hits'],[[r['id']+'/'+r['method'],r['H_complete'] or 'N/A',r['root_rows']+'/'+r['root_columns'],fmt(r['root_LP_bound'],'unknown'),fmt(r['LP_native_seconds'],'unknown'),fmt(r['MIP_native_seconds'],'unknown'),(r['split_count'] or 'N/A')+'/'+(r['target_reached_events'] or 'N/A')] for r in mechanisms])
     core_section+='\nActual family counts, nonzeros, H/fleet identities, native calls/nodes and first logged own-witness availability are in mechanism_costs.csv. Saved original root-LP points are tested against actual deleted rows without a new solve. For MG, W is eliminated using its serialized bounds and every W-containing inequality; an empty interval identifies only non-extendibility of that saved point. A nonempty interval or equal LP objective does not establish global redundancy. These root diagnostics do not establish certification-time causality. Full H/scope matching and actual row/column differences are recorded per role. Pair/triple totals 1120,2660,21420 are below the shared 50000 cap, so MS2 does not redistribute a binding truncation budget.\n\n'
     tuning='''### 6.7 A bounded, separately trained compact baseline
 
@@ -57,7 +57,8 @@ The six fixed configurations vary only MIPFocus (0/1/2/3) and native Cuts (-1/2)
     manuscript=(old/'manuscript.md').read_text(encoding='utf-8-sig')
     manuscript=manuscript.replace('Round126 complete certification-focused reading draft, 19 October 2026.','Round127 v3 complete integrated-diagnostics reading draft, 21 October 2026. R126 results below retain their historical scope.')
     manuscript=manuscript.replace('## 7. Extended endpoint evidence',seed_section+tiny_section+'\n'+core_section+tuning+'## 7. Extended endpoint evidence',1)
-    abstract_add=f" Round127 v3 adds six Seed1 confirmations, twelve tiny matched repeats and {summary['core_observed']} core arms from the same E1 build, plus 36 separately trained compact runs selecting {q['id']}. The three mandatory MD arms remain blocked by the inclusive-root/equality-closure incompatibility; the diagnostic study is partial. All unfavorable and open results are retained in Sections 6.4-6.7."
+    cert=summary['per_layer_certifications'];tiny_warn=sum(t['dt_ge10_count'] for t in summary['tiny_risks']);tiny_both=sum(t['both_certified_pairs'] for t in summary['tiny_risks']);tiny_ponly=sum(t['P_only_count'] for t in summary['tiny_risks'])
+    abstract_add=f" Round127 v3 adds six Seed1 confirmations: MB certifies {cert['E0_main']['MB']}/6 and P {cert['E0_main']['P']}/6. Its twelve tiny matched repeats give {tiny_both} both-certified pairs, {tiny_ponly} P-only pairs and {tiny_warn} observed MB delays of at least 10 seconds. The same E1 build supplies {summary['core_observed']} core arms and 36 separately trained compact runs selecting {q['id']}; on the three known core roles, MB certifies {cert['E1_core']['MB']}/3 and P {cert['E1_core']['P']}/3. The three mandatory MD arms remain blocked by the inclusive-root/equality-closure incompatibility; the diagnostic study is partial. All unfavorable and open results are retained in Sections 6.4-6.7."
     manuscript=manuscript.replace('**Keywords:**',abstract_add.strip()+'\n\n**Keywords:**',1)
     manuscript=manuscript.replace('We evaluate a complete tailored exact method, denoted M-B,','We evaluate a complete tailored exact method, a tailored branch-and-cut framework with Gini-interval decomposition (GI-TBC), whose frozen implementation identity is M-B,',1)
     manuscript=manuscript.replace('## 9. Conclusion','The Round127 diagnostic cohort comprises nine distinct evaluation inputs and three separate training inputs. E0/E1 layers and shared-arm comparisons remain distinct. Its execution status is PARTIAL because MD failed its mandatory inclusive-root qualification. The four evidence axes are reported separately; the remaining specification decision must not be hidden by wins elsewhere. The unchanged mathematical appendices retain the complete R125 derivations and declared numerical-closure distinction.\n\n## 9. Conclusion',1)

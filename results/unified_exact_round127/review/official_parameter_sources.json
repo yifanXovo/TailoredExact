@@ -1,0 +1,26 @@
+{
+  "checked_date": "2026-10-21 Asia/Shanghai",
+  "sources": [
+    {
+      "title": "Gurobi Parameter Reference",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/current/reference/parameters.html",
+      "access": "read successfully",
+      "scope": "MIPFocus 0/1/2/3 and Cuts -1/2 domains and semantics; no other tuned parameter admitted"
+    },
+    {
+      "title": "Gurobi Parameter Guidelines",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/current/concepts/parameters/guidelines.html",
+      "access": "read successfully",
+      "scope": "Native parameter roles; this study keeps its own preregistered certification-first selection rule"
+    },
+    {
+      "title": "Gurobi 13.0 Parameter Tuning Tool",
+      "url": "https://docs.gurobi.com/projects/optimizer/en/13.0/features/tuning.html",
+      "access": "read successfully after current-version URL returned HTTP429",
+      "scope": "Automated tuning and its limitations; no grbtune run was substituted for the fixed six-configuration table"
+    }
+  ],
+  "actual_local_version": "13.0.2",
+  "actual_set_get_and_zero_Start_evidence": "qualification/smoke_PT and every E1 cold-P parameter readback",
+  "full_web_pages_or_response_headers_archived": false
+}
