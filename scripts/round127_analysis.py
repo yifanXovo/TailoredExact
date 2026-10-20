@@ -4,7 +4,7 @@ import collections,csv,copy,math,statistics
 from decimal import Decimal,localcontext
 from round127_pipeline import table
 import round108_reader as core
-from round127_qualify import row_family
+from round127_qualify import row_family,compare as model_deletion_check
 from compare_round112_startup import reconstruct as H,fleet_key
 
 def qualified(a):return a is not None and all(a.get(k) for k in ['formal_protocol_qualified','numbers_qualified','certificate_qualified']) and not a.get('source_reduced')
@@ -81,7 +81,7 @@ def mechanism():
     for path in sorted((OUT/'core').glob('*/identity.json')):
         i=read(path);launches={l['method']:l for l in i['launches']};p=i['launches'][0]['panel'];hs={};models={};calls={}
         for method,l in launches.items():
-            d=Path(l['destination']);r=read(d/'result.json');a=next(a for a in read(path.parent/'reconstructed.json')['arms'] if a['method']==method)
+            d=core.portable(ROOT,l['destination']);r=read(d/'result.json');a=next(a for a in read(path.parent/'reconstructed.json')['arms'] if a['method']==method)
             ledger=core.rows(d/'external/paper_optimize_ledger.csv') if (d/'external/paper_optimize_ledger.csv').exists() else []
             lp_status=core.rows(d/'external/lp_status_ledger.csv') if (d/'external/lp_status_ledger.csv').exists() else []
             root_status=next((q for q in lp_status if q['leaf_id']=='L0'),None)
@@ -96,7 +96,8 @@ def mechanism():
                         terms=dict(rr[0]);vehicles={n.split('_')[1] for n in terms if n.startswith(('p_','z_'))}
                         if len(vehicles)==1:families[fam]+=1
                     elif fam=='ordered_supply':families[fam]+=1
-            h=hs.get(method)
+            h=hs.get(method);ind=read(d/'independent_evidence.json')
+            best=[w for w in ind.get('witnesses',[]) if abs(w['F']-a['U'])<=1e-7 and 'available' in w]
             LP=sum(float(q['solver_runtime']) for q in ledger if q['solve_kind']=='LP');MIP=sum(float(q['solver_runtime']) for q in ledger if q['solve_kind']!='LP')
             rows.append(dict(id=p['id'],method=method,binary_layer='E1',H_complete=h['complete'] if h else None,
                 initial_own_U=h['physical']['F'] if h else None,
@@ -108,15 +109,31 @@ def mechanism():
                 actual_native_calls=a['native_Optimize'],native_nodes=sum(float(q['nodes']) for q in ledger) if ledger else r.get('gurobi_node_count'),
                 LP_native_seconds=LP,MIP_native_seconds=MIP,H_plus_admission_seconds=r.get('process_elapsed_at_exact_phase_start_seconds') if h else 0,
                 split_count=r.get('external_gini_tree_split_count'),partial_target_calls=r.get('external_gini_tree_partial_mip_optimize_count'),
+                target_reached_events=r.get('external_gini_tree_partial_mip_target_reached_count'),
+                best_own_witness_first_logged_available=min(w['available'] for w in best) if best else None,
+                witness_time_scope='first retained physical witness matching final own U; logged availability, not exact native discovery time',
                 root_cutoff=c['cutoff'] if c else None,certificate=a['certificate'],T_cert=a['T_cert'],
                 point_status=read(d/'external/round127_root_lp_status.json') if (d/'external/round127_root_lp_status.json').exists() else 'unknown/no optimal root LP point',
                 root_LP_bound_source='actual L0 LP status/optimize ledger; no extra diagnostic solve' if root_status else 'unknown/no original root LP'))
         for method in ['MR','MG','MS2']:
             if method not in launches:continue
-            d=Path(launches[method]['destination']);status=d/'external/round127_root_lp_status.json';point_path=d/'external/round127_root_lp.csv'
+            d=core.portable(ROOT,launches[method]['destination']);status=d/'external/round127_root_lp_status.json';point_path=d/'external/round127_root_lp.csv'
             matched=hs['MB']['complete'] and hs[method]['complete'] and hs['MB']['fleet']==hs[method]['fleet'] and calls['MB'] and calls[method] and all(calls['MB'][k]==calls[method][k] for k in ['cutoff','lower_g','upper_g'])
             record=dict(id=p['id'],method=method,matched_complete_H_and_scope=bool(matched),extra_Optimize=0,
                 scope='explanatory actual saved root point only; not a certification/performance proof')
+            if matched:
+                check=model_deletion_check(core.portable(ROOT,calls['MB']['model_path']),core.portable(ROOT,calls[method]['model_path']),method.lower(),p['V'],p['M'])
+                record['actual_formal_root_deletion_check']=check
+                for item in rows:
+                    if item['id']==p['id'] and item['method']==method:item['removed_target_families_vs_MB']=check['families']
+                if method=='MG':
+                    for item in rows:
+                        if item['id']==p['id'] and item['method']=='MB':item['target_row_families'].update(check['families'])
+                mb=next(q for q in rows if q['id']==p['id'] and q['method']=='MB');weak=next(q for q in rows if q['id']==p['id'] and q['method']==method)
+                if mb['root_LP_bound'] is not None and weak['root_LP_bound'] is not None:
+                    record['deleted_minus_full_root_LP_bound']=weak['root_LP_bound']-mb['root_LP_bound']
+                    record['LP_deletion_monotonic_within_1e6']=weak['root_LP_bound']<=mb['root_LP_bound']+1e-6
+                    assert record['LP_deletion_monotonic_within_1e6'],('investigate LP/domain discrepancy',record)
             if not matched or not status.exists() or not read(status).get('complete'):
                 diagnostics.append(dict(record,status='UNKNOWN_MISSING_POINT_OR_INCONSISTENT_DOMAIN'));continue
             with point_path.open(newline='') as f:point={r['name']:float(r['value']) for r in csv.DictReader(f)}
@@ -175,5 +192,12 @@ def analyze():
         per_layer_certifications={stage:{m:sum(bool(a.get('certificate')) for a in arms if a['method']==m) for m in dict.fromkeys(a['method'] for a in arms)} for stage,arms in [('E0_main',main),('E0_tiny',tiny),('E1_core',corearms)]},
         all_observed_arms_qualified=all(qualified(a) for a in main+tiny+corearms),fees=budget(),
         next_priority='Resolve the single MD equality-closure versus inclusive-root specification issue with substantive user review; execute no new algorithm or experiment')
+    expected_core=18-(3 if sel['selected']['id']=='q0' else 0)
+    assert (len(main),len(tiny),len(corearms))==(12,24,expected_core),'fixed formal positions incomplete; do not write final report yet'
+    summary['mechanism_axis']={}
+    for comparison in ['MB/MD','MB/MR','MB/MG','MB/MS2']:
+        pp=summary['core_by_comparison'][comparison];directions=pp['directions']
+        label='BLOCKED_BEFORE_FORMAL' if comparison=='MB/MD' else 'MIXED_OBSERVED_DIRECTIONS' if directions.get('Win') and directions.get('Lose') else 'REVERSE_CERTIFICATION_OBSERVATIONS' if directions.get('Lose') else 'DIRECT_CERTIFICATION_INCREMENT_IN_THIS_PANEL' if directions.get('Win') else 'ONLY_OPEN_OR_UNEXPOSED_INFORMATION'
+        summary['mechanism_axis'][comparison]=dict(label=label,classes=pp['classes'],directions=directions,scope='three known roles, one Seed, shared MB arms; no universal necessity or MIP monotonicity claim')
     write(OUT/'stratified_summary.json',summary);return summary
 if __name__=='__main__':print(json.dumps(analyze()))
