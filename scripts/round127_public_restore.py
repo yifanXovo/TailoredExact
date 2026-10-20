@@ -4,6 +4,11 @@ from concurrent.futures import ThreadPoolExecutor
 import argparse,datetime,hashlib,json,os,re,shutil,subprocess,sys,time,urllib.request,zipfile,zlib
 
 def digest(data):return hashlib.sha256(data).hexdigest()
+def file_digest(path):
+    h=hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for block in iter(lambda:stream.read(1024*1024),b''):h.update(block)
+    return h.hexdigest()
 def read(p):return json.loads(Path(p).read_text(encoding='utf-8-sig'))
 def write(p,v):Path(p).parent.mkdir(parents=True,exist_ok=True);Path(p).write_text(json.dumps(v,indent=2)+'\n',encoding='utf-8')
 
@@ -76,6 +81,9 @@ def main():
             with zipfile.ZipFile(joined) as z:
                 infos=z.infolist();assert len(infos)==archive['file_count']
                 assert sum(i.file_size for i in infos)==archive['uncompressed_bytes']
+                expected={m['path']:m for m in archive['members']}
+                assert len(expected)==len(archive['members'])==len(infos)
+                assert len({i.filename for i in infos})==len(infos) and set(expected)=={i.filename for i in infos}
                 for info in infos:
                     rel=PurePosixPath(info.filename)
                     assert not rel.is_absolute() and '..' not in rel.parts and all(':' not in s and '\\' not in s for s in rel.parts)
@@ -86,7 +94,11 @@ def main():
                     target.parent.mkdir(parents=True,exist_ok=True)
                     with z.open(info) as source,target.open('xb') as stream:shutil.copyfileobj(source,stream)
                     assert target.stat().st_size==info.file_size
-            extracted.append(dict(name=archive['name'],files=len(infos),bytes=archive['uncompressed_bytes'],SHA256=archive['SHA256']))
+            for name,member in expected.items():
+                target=dest/name
+                assert target.is_file() and not target.is_symlink() and not target.is_junction()
+                assert target.stat().st_size==member['bytes'] and file_digest(target)==member['SHA256'],('extracted member SHA256',name)
+            extracted.append(dict(name=archive['name'],files=len(infos),bytes=archive['uncompressed_bytes'],SHA256=archive['SHA256'],members_SHA256_verified=len(expected)))
         extraction=time.perf_counter()-extraction_start;state=read(state_path)
         commands=[]
         if not state.get('portable_receipt_SHA'):

@@ -11,6 +11,45 @@ import round114_audit as audit
 import round108_reader as core
 import round109_seed_scope as computed
 import round109_seed_audit as seed_audit
+import round100_campaign as old_campaign
+
+def handoff_adapter(fn):
+    """Compare only the physical omission of explicit unused vehicles.
+
+    The old hash remains unchanged everywhere else. All nonempty routes retain
+    their vehicle labels, node order and operations; this creates no witness.
+    """
+    def adapted(l,observations,completion,identity):
+        api=fn.__globals__['r90'];events=[];vehicles=l['panel']['M']
+        def handoff_hash(witness):
+            kept=[];omitted=[];seen=set()
+            for route in witness['routes']:
+                k=route['vehicle']
+                assert type(k) is int and 0<=k<vehicles and k not in seen,'invalid/duplicate handoff vehicle'
+                seen.add(k)
+                if route['nodes']==[0,0] and route['operations']==[]:omitted.append(k)
+                else:kept.append(route)
+            canonical=dict(witness,routes=kept)
+            value=api.route_hash(canonical)
+            events.append(dict(original_hash=api.route_hash(witness),physical_omission_hash=value,
+                omitted_explicit_unused_vehicle_ids=omitted,nonempty_routes_unchanged=True))
+            return value
+        proxy=types.SimpleNamespace(**dict(vars(api),route_hash=handoff_hash))
+        call=types.FunctionType(fn.__code__,dict(fn.__globals__,r90=proxy),fn.__name__,fn.__defaults__,fn.__closure__)
+        value=call(l,observations,completion,identity)
+        if any(e['omitted_explicit_unused_vehicle_ids'] for e in events):
+            d=Path(l['destination'])
+            write(d/'round127_empty_route_handoff.json',dict(schema='round127-unused-vehicle-handoff-v1',
+                scope='Only the inherited H-to-startup route-hash comparison; explicit [0,0] with no operations equals an omitted unused vehicle',
+                events=events,M=vehicles,integral_in_range_unique_vehicle_ids_checked=True,
+                nonempty_route_vehicle_labels_nodes_operations_preserved=True,
+                original_route_hash_function_unchanged=True,legacy_handoff_adapter_returned=True,
+                observations_SHA=sha(d/'observations.json'),producer_receipt_SHA=sha(d/'producer_receipt.json'),
+                H_initial_SHA=sha(d/'hga.csv.exchange/initial.json'),H_final_SHA=sha(d/'hga.csv.exchange/final.json'),
+                final_admission_source='audit.json, verification_closeout.json and arm_total_receipt.json',
+                no_new_physical_solution_Start_bound_or_Optimize=True))
+        return value
+    return adapted
 
 def source_path(root,l,identity,name):
     # Public recovery must never borrow an old checkout. Unchanged measured
@@ -48,10 +87,14 @@ def legacy_journal(root,p,d):
 def extension():
     with inherited.extension():
         old=(audit.journal,computed.qualify,core.evidence.journal,computed.expected,seed_audit.expected)
+        old_handoff=old_campaign.adapter
         audit.journal=journal;computed.qualify=qualify_seed;core.evidence.journal=legacy_journal
         computed.expected=expected;seed_audit.expected=expected
+        old_campaign.adapter=handoff_adapter(old_handoff)
         try:yield
-        finally:audit.journal,computed.qualify,core.evidence.journal,computed.expected,seed_audit.expected=old
+        finally:
+            old_campaign.adapter=old_handoff
+            audit.journal,computed.qualify,core.evidence.journal,computed.expected,seed_audit.expected=old
 def verify(l,i):
     if l['binary_layer']=='E1' and l['arm']=='P-GRB':
         p=read(Path(l['destination'])/'round127_parameters.json');wanted=l.get('configuration',dict(MIPFocus=0,Cuts=-1))

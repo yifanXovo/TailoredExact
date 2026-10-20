@@ -4,6 +4,8 @@ The active reading source is `manuscript.md` with `model_appendix.md`, `algorith
 
 Use the immutable **science A commit** identified in the PR and the later `public_restore_receipt.json`. The export manifest intentionally does not hash itself or claim to prove later receipts. The science package and the later delivery/cleanup receipt are separate points in the commit history.
 
+The later `resource_accounting.json` snapshot retains the actual launch and outer-receipt bodies for every closed fee, including packaging and recovery fees created after the science carrier was written. Its measured costs, parent-loop interval complements and explicit conservative administrative allowances remain separate. This closes the finite accounting record without recursively rebuilding science A to include future B receipts.
+
 From the Round127 checkout, using the recorded compatible Windows Python runtime:
 
 ```powershell

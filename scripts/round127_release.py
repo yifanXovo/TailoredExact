@@ -93,7 +93,7 @@ def manifest():
         p=ROOT/name;assert p.is_file(),name
         if 'artifacts' not in p.parts:scanned+=scan(p)
         files.append(dict(path=name,bytes=p.stat().st_size,SHA256=sha(p),serialization='exact bytes; only exact-SHA-matching LF/CRLF materialization permitted' if p.suffix in ['.py','.cpp','.hpp','.h','.inc','.md','.json','.txt','.csv','.bib'] else 'exact bytes'))
-    write(OUT/'export_manifest.json',dict(schema='round127-single-science-A-public-manifest-v1',files=files,raw_manifest_SHA=sha(OUT/'raw_archive_manifest.json'),no_historical_carrier_or_native_software=True,future_B_receipts_excluded=True,manifest_does_not_hash_itself=True,restore_checks='All sealed endpoints/clocks/model hashes, all36 selection arithmetic and all typed comparisons/aliases/tiny thresholds; no Optimize'))
+    write(OUT/'export_manifest.json',dict(schema='round127-single-science-A-public-manifest-v1',files=files,raw_manifest_SHA=sha(OUT/'raw_archive_manifest.json'),no_historical_carrier_or_native_software=True,future_B_receipts_excluded=True,manifest_does_not_hash_itself=True,restore_checks='Every finite carrier member SHA256; all sealed endpoints/clocks/model hashes, all36 selection arithmetic and all typed comparisons/aliases/tiny thresholds; no Optimize'))
     write(OUT/'review/content_A_scan.json',dict(status='PASS',manifest_files=len(files),actual_loose_bytes_scanned=scanned,carriers_scanned_before_compression='review/publication_scan.json',future_receipts_excluded=True))
     print(json.dumps(dict(files=len(files),bytes=sum(r['bytes'] for r in files))))
 if __name__=='__main__':{'pack':pack,'manifest':manifest}[sys.argv[1]]()

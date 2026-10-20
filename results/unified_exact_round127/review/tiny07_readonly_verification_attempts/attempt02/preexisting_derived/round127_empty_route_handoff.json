@@ -1,0 +1,38 @@
+{
+  "schema": "round127-unused-vehicle-handoff-v1",
+  "scope": "Only the inherited H-to-startup route-hash comparison; explicit [0,0] with no operations equals an omitted unused vehicle",
+  "events": [
+    {
+      "original_hash": "4e55f14112dfa6116db5bd7bca253cb6ede22f87455fc6500883ff48758625ab",
+      "physical_omission_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "omitted_explicit_unused_vehicle_ids": [
+        0,
+        1
+      ],
+      "nonempty_routes_unchanged": true
+    },
+    {
+      "original_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_omission_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "omitted_explicit_unused_vehicle_ids": [],
+      "nonempty_routes_unchanged": true
+    },
+    {
+      "original_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_omission_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "omitted_explicit_unused_vehicle_ids": [],
+      "nonempty_routes_unchanged": true
+    }
+  ],
+  "M": 2,
+  "integral_in_range_unique_vehicle_ids_checked": true,
+  "nonempty_route_vehicle_labels_nodes_operations_preserved": true,
+  "original_route_hash_function_unchanged": true,
+  "legacy_handoff_adapter_returned": true,
+  "observations_SHA": "054fbb6cf2cfb90b84d9ce50d30aa26e919553a773a4a3df9c3bbfecc2eb2b9a",
+  "producer_receipt_SHA": "ebc281d070e094a1f58a76b46a10139666554b6290e73d4ba87ff17da3726131",
+  "H_initial_SHA": "22f032fc685c36e0abe11667ef230772868ae0e7799669688e62803af1e860b2",
+  "H_final_SHA": "22f032fc685c36e0abe11667ef230772868ae0e7799669688e62803af1e860b2",
+  "final_admission_source": "audit.json, verification_closeout.json and arm_total_receipt.json",
+  "no_new_physical_solution_Start_bound_or_Optimize": true
+}
