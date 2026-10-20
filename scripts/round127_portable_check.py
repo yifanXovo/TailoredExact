@@ -113,7 +113,7 @@ def check():
             assert actual[:2]==(row['classification'],row['direction']),(row,actual)
             for key,value in zip(['left_minus_right_seconds','right_over_left_certification_ratio'],actual[2:]):
                 assert (float(row[key]) if row[key] else None)==value
-            assert (row['independent_comparison']=='True')==(not alias)
+            assert (row['nonalias_entry']=='True')==(not alias)
             if stage=='tiny':
                 warning=actual[2]>=10 if actual[0]=='BOTH_CERTIFIED' else None
                 assert row['dt_ge_10_warning']==('' if warning is None else str(warning))
@@ -134,10 +134,13 @@ def check():
     assert summary['observed_formal_arms']==sum(len(allarms[s]) for s in ['main','tiny','core'])
     assert len({a['input_SHA'] for s in ['main','tiny','core'] for a in allarms[s]})==9
     def summary_check(published,reported):
-        independent=[r for r in published if r['independent_comparison']=='True'];both=[r for r in independent if r['classification']=='BOTH_CERTIFIED']
-        assert reported['rows']==len(published) and reported['independent_typed_comparisons']==len(independent)
-        assert reported['classes']==dict(collections.Counter(r['classification'] for r in independent))
-        assert reported['directions']==dict(collections.Counter(r['direction'] for r in independent))
+        nonalias=[r for r in published if r['nonalias_entry']=='True'];both=[r for r in nonalias if r['classification']=='BOTH_CERTIFIED']
+        assert reported['rows']==len(published) and reported['nonalias_typed_entries']==len(nonalias)
+        assert reported['evaluable_nonalias_entries']==sum(r['classification']!='UNEVALUABLE' for r in nonalias)
+        assert reported['unevaluable_nonalias_entries']==sum(r['classification']=='UNEVALUABLE' for r in nonalias)
+        assert reported['alias_entries']==len(published)-len(nonalias)
+        assert reported['classes']==dict(collections.Counter(r['classification'] for r in nonalias))
+        assert reported['directions']==dict(collections.Counter(r['direction'] for r in nonalias))
         assert reported['both_certified_intersection_n']==len(both) and reported['both_certified_ids']==[r['id'] for r in both]
         gm=math.exp(statistics.fmean(math.log(float(r['right_over_left_certification_ratio'])) for r in both)) if both else None
         assert reported['conditional_geometric_mean']==gm

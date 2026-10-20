@@ -15,7 +15,7 @@ def pair(id,left,right,*,kind,seed=1,repeat=None,alias=False):
         left_T_cert=a.get('T_cert') if a else None,right_T_cert=b.get('T_cert') if b else None,
         left_T_produce=a.get('T_produce') if a else None,right_T_produce=b.get('T_produce') if b else None,
         right_over_left_certification_ratio=None,left_minus_right_seconds=None,legacy_materiality=None,
-        alias=alias,independent_comparison=not alias,binary_layer=a.get('binary_layer') if a else b.get('binary_layer') if b else None)
+        alias=alias,nonalias_entry=not alias,binary_layer=a.get('binary_layer') if a else b.get('binary_layer') if b else None)
     if not qualified(a) or not qualified(b):return dict(out,basis='missing, blocked, or unqualified evidence; not ordinary censoring')
     assert a['PE_SHA']==b['PE_SHA'] and a['DLL_SHA']==b['DLL_SHA'] and a['input_SHA']==b['input_SHA'] and a['seed']==b['seed']
     ac,bc=bool(a['certificate']),bool(b['certificate'])
@@ -38,10 +38,12 @@ def load_stage(stage):
         a['gap_policy']='signed raw qualified U-L and its absolute magnitude; no bound clipping'
     return out
 def statistics_pairs(rows):
-    independent=[r for r in rows if r['independent_comparison']]
-    both=[r for r in independent if r['classification']=='BOTH_CERTIFIED'];ratios=[r['right_over_left_certification_ratio'] for r in both]
-    return dict(rows=len(rows),independent_typed_comparisons=len(independent),classes=dict(collections.Counter(r['classification'] for r in independent)),
-        directions=dict(collections.Counter(r['direction'] for r in independent)),
+    nonalias=[r for r in rows if r['nonalias_entry']]
+    both=[r for r in nonalias if r['classification']=='BOTH_CERTIFIED'];ratios=[r['right_over_left_certification_ratio'] for r in both]
+    return dict(rows=len(rows),nonalias_typed_entries=len(nonalias),evaluable_nonalias_entries=sum(r['classification']!='UNEVALUABLE' for r in nonalias),
+        unevaluable_nonalias_entries=sum(r['classification']=='UNEVALUABLE' for r in nonalias),alias_entries=len(rows)-len(nonalias),
+        classes=dict(collections.Counter(r['classification'] for r in nonalias)),
+        directions=dict(collections.Counter(r['direction'] for r in nonalias)),
         both_certified_intersection_n=len(both),both_certified_ids=[r['id'] for r in both],
         conditional_geometric_mean=math.exp(statistics.fmean(math.log(x) for x in ratios)) if ratios else None,
         denominator_warning='shared arms and builds; no independence, population, or open-run time-to-certification inference')
@@ -132,8 +134,10 @@ def mechanism():
         for method in ['MR','MG','MS2']:
             if method not in launches:continue
             d=core.portable(ROOT,launches[method]['destination']);status=d/'external/round127_root_lp_status.json';point_path=d/'external/round127_root_lp.csv'
-            matched=hs['MB']['complete'] and hs[method]['complete'] and hs['MB']['fleet']==hs[method]['fleet'] and calls['MB'] and calls[method] and all(calls['MB'][k]==calls[method][k] for k in ['cutoff','lower_g','upper_g'])
+            actions_equal=hs['MB']['semantic_traces']==hs[method]['semantic_traces']
+            matched=hs['MB']['complete'] and hs[method]['complete'] and actions_equal and hs['MB']['fleet']==hs[method]['fleet'] and calls['MB'] and calls[method] and all(calls['MB'][k]==calls[method][k] for k in ['cutoff','lower_g','upper_g'])
             record=dict(id=p['id'],method=method,matched_complete_H_and_scope=bool(matched),extra_Optimize=0,
+                H_action_traces_equal=actions_equal,
                 scope='explanatory actual saved root point only; not a certification/performance proof')
             if matched:
                 check=model_deletion_check(core.portable(ROOT,calls['MB']['model_path']),core.portable(ROOT,calls[method]['model_path']),method.lower(),p['V'],p['M'])
@@ -165,9 +169,10 @@ def mechanism():
                 if item['id']!=p['id'] or item['method'] in ['P','PT']:continue
                 method=item['method']
                 if method=='MG':item['C_G_actual_explicit_family_counts']={k:0 for k in detailed}
-                elif models.get(method) is not None:
+                elif models.get(method) is not None and hs[method]['complete'] and hs[method]['semantic_traces']==hs['MB']['semantic_traces'] and calls.get(method) and all(calls['MB'][k]==calls[method][k] for k in ['cutoff','lower_g','upper_g']):
                     assert not cg_rows-collections.Counter(models[method]['rows']),('retained C_G signature missing',p['id'],method)
                     item['C_G_actual_explicit_family_counts']=dict(detailed)
+                else:item['C_G_actual_explicit_family_counts']='UNKNOWN_H_OR_DOMAIN_MISMATCH'
     table(OUT/'mechanism_costs.csv',rows);write(OUT/'root_LP_deleted_row_explanations.json',diagnostics)
     return rows,diagnostics
 def analyze():
@@ -226,7 +231,12 @@ def analyze():
     summary['mechanism_axis']={}
     for comparison in ['MB/MD','MB/MR','MB/MG','MB/MS2']:
         pp=summary['core_by_comparison'][comparison];directions=pp['directions']
-        label='BLOCKED_BEFORE_FORMAL' if comparison=='MB/MD' else 'MIXED_OBSERVED_DIRECTIONS' if directions.get('Win') and directions.get('Lose') else 'REVERSE_CERTIFICATION_OBSERVATIONS' if directions.get('Lose') else 'DIRECT_CERTIFICATION_INCREMENT_IN_THIS_PANEL' if directions.get('Win') else 'ONLY_OPEN_OR_UNEXPOSED_INFORMATION'
-        summary['mechanism_axis'][comparison]=dict(label=label,classes=pp['classes'],directions=directions,scope='three known roles, one Seed, shared MB arms; no universal necessity or MIP monotonicity claim')
+        mode=comparison.split('/')[1]
+        exposed=[e['id'] for e in explanations if e['method']==mode and e['matched_complete_H_and_scope'] and e.get('actual_formal_root_deletion_check',{}).get('removed_rows',0)>0]
+        exposed_pairs=[r for r in cp if r['left']=='MB' and r['right']==mode and r['id'] in exposed]
+        component_directions=dict(collections.Counter(r['direction'] for r in exposed_pairs))
+        label='BLOCKED_BEFORE_FORMAL' if comparison=='MB/MD' else 'MIXED_OBSERVED_DIRECTIONS' if component_directions.get('Win') and component_directions.get('Lose') else 'REVERSE_CERTIFICATION_OBSERVATIONS' if component_directions.get('Lose') else 'DIRECT_CERTIFICATION_INCREMENT_IN_THIS_PANEL' if component_directions.get('Win') else 'CERTIFIED_TIME_TIES_WITHOUT_DIRECTIONAL_INCREMENT' if component_directions.get('Tie') else 'ONLY_OPEN_OR_UNEXPOSED_INFORMATION'
+        summary['mechanism_axis'][comparison]=dict(label=label,classes=pp['classes'],all_pair_directions=directions,component_eligible_roles=exposed,component_eligible_directions=component_directions,
+            scope='only complete identical H actions/fleet, matched root domain and actual deleted rows support component attribution; three known roles, one Seed, shared MB arms; no universal necessity or MIP monotonicity claim')
     write(OUT/'stratified_summary.json',summary);return summary
 if __name__=='__main__':print(json.dumps(analyze()))

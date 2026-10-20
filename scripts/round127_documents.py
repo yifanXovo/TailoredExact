@@ -80,7 +80,7 @@ The sole paper algorithm remains frozen M-B / GI-TBC. E0 main/tiny and E1 traini
 4. Bounded compact tuning: selected {q['id']}, Focus={q['MIPFocus']}, Cuts={q['Cuts']}, from all 36 predeclared training positions, before E1 evaluation. {'q0 makes PT a P alias, not a stronger independent baseline.' if q['id']=='q0' else 'One unchanged selected file was applied to all three known held-out roles.'} Open training penalties are not times to certification.
 
 '''
-    report+=mdtable(['Comparison','Actual independent classes','Directions'],[[k,counts(v),str(v['directions'])] for k,v in summary['core_by_comparison'].items()])
+    report+=mdtable(['Comparison','Nonalias typed statuses','Evaluable / unevaluable / alias','Directions'],[[k,counts(v),f"{v['evaluable_nonalias_entries']} / {v['unevaluable_nonalias_entries']} / {v['alias_entries']}",str(v['directions'])] for k,v in summary['core_by_comparison'].items()])
     report+='\nMechanism dispositions: '+str(summary['mechanism_axis'])+'\n'
     report+=f'''
 ## Evidence and denominator limits

@@ -14,7 +14,7 @@ The predeclared six-configuration screen selected **{q['id']}**, MIPFocus={q['MI
 
 Seed1: {s['main']['classes']}; tiny: {s['tiny']['classes']}. All time directions use unrounded complete production cost. Ratios use only both-certified intersections; both-open stays undetermined and blocked/invalid evidence stays unevaluable.
 
-| Core comparison | Actual independent classes | Directions |
+| Core comparison | Nonalias typed statuses (including blocked entries) | Directions |
 | --- | --- | --- |
 {values}
 
