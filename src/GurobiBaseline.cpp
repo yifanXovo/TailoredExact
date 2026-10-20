@@ -3609,6 +3609,7 @@ public:
             // This is observational: no extra Optimize, Start or bound enters
             // the algorithm, and missing points remain unknown in analysis.
             if (round127Mb() && request.leaf_id=="L0") {
+              try {
                 const auto path=request.native_log_path.parent_path().parent_path()/"round127_root_lp.csv";
                 if (!std::filesystem::exists(path)) {
                     int count=0;
@@ -3616,15 +3617,21 @@ public:
                     std::vector<double> point(count_ok?count:0);
                     if(count_ok && api_.getdblattrarray(model,GRB_DBL_ATTR_X,0,count,point.data())==0) {
                         std::ofstream saved(path);saved<<std::setprecision(17)<<"name,value\n";
-                        for(int j=0;j<count;++j) {
+                        bool complete=bool(saved);
+                        for(int j=0;complete && j<count;++j) {
                             char* name=nullptr;
-                            if(api_.getstrattrelement(model,GRB_STR_ATTR_VARNAME,j,&name)!=0 || !name)
-                                throw std::runtime_error("round127_root_point_name_unavailable");
-                            saved<<name<<','<<point[j]<<'\n';
+                            complete=api_.getstrattrelement(model,GRB_STR_ATTR_VARNAME,j,&name)==0 && name;
+                            if(complete)saved<<name<<','<<point[j]<<'\n';
                         }
-                        if(!saved)throw std::runtime_error("round127_root_point_write_failed");
+                        saved.close();complete=complete && bool(saved);
+                        std::ofstream status(path.parent_path()/"round127_root_lp_status.json");
+                        status<<"{\"complete\":"<<(complete?"true":"false")<<",\"columns\":"<<count<<",\"extra_Optimize\":0}\n";
                     }
                 }
+              } catch(const std::exception&) {
+                // Optional explanatory point only. Analysis reports unknown;
+                // diagnostic I/O must not invalidate the native solve.
+              }
             }
             if (request.capture_lp_primal_dual_evidence &&
                 !out.lp_primal_dual_variable_evidence.empty()) {

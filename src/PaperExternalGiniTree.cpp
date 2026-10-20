@@ -3868,6 +3868,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     };
     auto ensureArtifact = [&](const ControllingLeaf& leaf,
                               PaperLeafRuntime& state) -> bool {
+        if (round127Md() && state.artifact_ready &&
+            state.artifact_incumbent_epoch != incumbent_epoch) {
+            result.external_gini_tree_failure_reason="round127_md_static_root_epoch_change_forbidden";
+            return false;
+        }
         if (state.artifact_ready &&
             state.artifact_incumbent_epoch != incumbent_epoch) {
             if (!std::filesystem::exists(state.artifact.path) ||
