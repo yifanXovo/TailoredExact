@@ -1,6 +1,6 @@
 """Finite, solver-free recovery checks. Never imports a native solver API.
 
-Checks every sealed endpoint/clock and independently recomputes the bounded
+Checks every training/evaluation sealed endpoint/clock and recomputes the bounded
 selection and typed comparisons. Representative physical/model audits remain
 separately identified; this is not an exact rational audit of every matrix.
 """
@@ -169,6 +169,6 @@ def check():
         training_positions=36,selection_recomputed=selected,pair_classes=pair_counts,tiny_threshold_flags=warnings,source_bindings_verified=dict(E0=len(e0_sources),E1=len(e1_sources)),
         formal_arms=summary['observed_formal_arms'],blocked_MD=3,aliases=len(aliases),cold_model_groups_with_identical_bytes=len(cold_models),
         native_starts=0,Optimize=0,production_compilations=0,seconds=time.perf_counter()-tick,
-        scope='Every sealed endpoint/clock, actual model bytes, independent finite selection/pair/alias arithmetic. Physical and matrix qualification are separately documented finite checks; no new optimization or universal rational proof.')
+        scope='Every training/evaluation sealed endpoint/clock, actual model bytes, independent finite selection/pair/alias arithmetic. Physical and matrix qualification are separately documented finite checks; no new optimization or universal rational proof.')
 if __name__=='__main__':
     receipt=check();(ROOT/'portable_check_receipt.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8');print(json.dumps(receipt))
