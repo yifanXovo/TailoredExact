@@ -1,4 +1,5 @@
 #include "IntervalRowFactory.hpp"
+#include "Round127Research.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -609,7 +610,7 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
         noteFamily(out, "interval_tight_mccormick_G_bit");
     }
 
-    if (options.gini_spread_cuts && V > 1) {
+    if (round127EmitCG() && options.gini_spread_cuts && V > 1) {
         for (int i = 1; i <= V; ++i) {
             for (int j = i + 1; j <= V; ++j) {
                 std::map<std::string, double> row;
@@ -650,7 +651,7 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
         noteFamily(out, "required_station_movement");
     }
 
-    const bool low_centering = options.low_gini_ratio_band_tightening &&
+    const bool low_centering = round127EmitCG() && options.low_gini_ratio_band_tightening &&
         options.compact_bc_direct_gini_rows && V > 1;
     if (low_centering) {
         const double spread_upper = static_cast<double>(V) * request.gamma_U *
@@ -716,7 +717,7 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
         noteFamily(out, "verified_incumbent_objective_row");
     }
 
-    if (options.compact_bc_objective_estimator_cutoff &&
+    if (round127EmitCG() && options.compact_bc_objective_estimator_cutoff &&
         request.add_incumbent_row && cutoff_active &&
         out.domain.s_upper > 1e-12) {
         std::map<std::string, double> estimator;
@@ -765,7 +766,7 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
         noteFamily(out, "penalty_deviation_upper_bound");
     }
 
-    const bool sp_estimator = request.add_incumbent_row && cutoff_active &&
+    const bool sp_estimator = round127EmitCG() && request.add_incumbent_row && cutoff_active &&
         options.compact_bc_sp_product_estimator != "off" &&
         out.domain.s_upper >= out.domain.s_lower - 1e-12 &&
         out.domain.penalty_upper >= out.domain.penalty_lower - 1e-12;
