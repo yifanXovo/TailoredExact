@@ -1,6 +1,7 @@
 """Fixed serial table, complete bounded selection, and resumable formal stages."""
 from round127_common import *
 from round127_campaign import prepare_group,execute,reconstruct
+from round127_clocks import training_clock
 import copy,csv,math
 
 def fixed_remaining_nominal():
@@ -51,10 +52,12 @@ def select():
     for pos in manifest['E1_training']:
         p=pos['role'];name=f'training/{pos["position"]:02d}_{p["id"]}_S{pos["seed"]}_{pos["configuration"]["id"]}'
         arms=result(name);assert len(arms)==1;a=arms[0]
-        good=all(a.get(k) for k in ['formal_protocol_qualified','numbers_qualified','certificate_qualified']) and not a.get('source_reduced')
+        clock=training_clock(name,a)
+        good=clock['all_gates_qualified']
         rows.append(dict(position=pos['position'],id=p['id'],seed=pos['seed'],configuration=pos['configuration']['id'],
-            qualified=good,certificate=bool(a.get('certificate')),T_cert=a['T_cert'],T_produce=a['T_produce'],cap_seconds=p['cap_seconds'],
-            U=a['U'],L=a['L'],signed_gap=a['U']-a['L'],q_score=a['T_cert']/p['cap_seconds'] if good and a.get('certificate') else 1 if good else None,
+            qualified=good,certificate=bool(a.get('certificate')),T_cert=clock['T_cert'],T_produce=clock['T_produce'],T_verify=clock['T_verify'],T_total=clock['T_total'],
+            raw_receipt_T_produce=a['T_produce'],raw_receipt_T_cert=a['T_cert'],admission_prefix_seconds=clock['admission_prefix_seconds'],
+            cap_seconds=p['cap_seconds'],U=a['U'],L=a['L'],signed_gap=a['U']-a['L'],q_score=clock['T_cert']/p['cap_seconds'] if good and a.get('certificate') else 1 if good else None,
             identity_SHA=sha(OUT/name/'identity.json'),result_SHA=sha(OUT/name/'reconstructed.json'),destination=a['destination']))
     assert len(rows)==36
     for c in manifest['configurations']:

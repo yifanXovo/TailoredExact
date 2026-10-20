@@ -12,14 +12,23 @@ import round108_reader as core
 import round109_seed_scope as computed
 import round109_seed_audit as seed_audit
 
-E0_SOURCE=WORK/'worktrees/round126'
+def source_path(root,l,identity,name):
+    # Public recovery must never borrow an old checkout. Unchanged measured
+    # files use the current root; only five replaced E0 translation units need
+    # their explicitly published original-byte source snapshots.
+    path=root/name
+    if sha(path)==identity['source_hashes'][name]:return path
+    assert l['binary_layer']=='E0',('E1 source drift',name)
+    path=root/'results/unified_exact_round127/source_E0'/name
+    assert sha(path)==identity['source_hashes'][name]
+    return path
 def expected(seed):
     assert type(seed) is int and seed in [0,1,2,3]
     return dict(computed.SETTINGS,Seed=seed)
 _qualify_source=inspect.getsource(inherited.qualify_seed).replace(
     "for n,h in identity['source_hashes'].items():assert sha(root/n)==h",
-    "for n,h in identity['source_hashes'].items():assert sha((E0_SOURCE if l['binary_layer']=='E0' else root)/n)==h")
-_qualify_namespace=dict(vars(inherited),E0_SOURCE=E0_SOURCE)
+    "for n,h in identity['source_hashes'].items():assert sha(source_path(root,l,identity,n))==h")
+_qualify_namespace=dict(vars(inherited),source_path=source_path)
 exec(compile(_qualify_source,__file__+'::actual_Seed_source_tree','exec'),_qualify_namespace)
 qualify_seed=_qualify_namespace['qualify_seed']
 def journal(root,l,d,observations):

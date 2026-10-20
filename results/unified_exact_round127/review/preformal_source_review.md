@@ -59,3 +59,15 @@ Reviewed corrected source SHA256 identities:
 | `scripts/round127_evidence.py` | `94f961eed9d0397c370ee8c44a8162abf861388cf2a5a1eb1237b0c4296ab4c8` |
 
 Current disposition: **source review passed; native/full-reader qualification pending**. No performance inference, third-party replication claim, or rational proof of every native matrix is made.
+
+## Finite gate evidence review
+
+The separate reviewer subsequently read `qualification/admission_summary.json`, `qualification/zero_optimize.json`, all 52 compact boundary-vector records, `review/performance_admission.json`, the E0/E1/PT smoke qualification fields, the actual PT parameter receipt, and the S12 MD two-call ledger. No new native call was requested or run by this reviewer.
+
+The evidence supports **qualified methods P, PT, MB, MR, MG, MS2; blocked method MD**. Exact duplicate-preserving deletion checks cover S12 root/left/right and C2 root, with further C2 MG child checks. The actual same-H S12 root differences have the prescribed families and preserve remaining objective/types/bounds/rows. Complete H actions, final inventory, and fleet agree with the retained E0 control in the finite replay. All nine E0/E1/PT smoke arms have successful complete-reader qualification and no source reduction. PT's Seed2 q4 receipt reads MIPFocus=2, Cuts=2, NumStart=0 from the model environment. MD's functional S12 ledger is exactly root LP then root MIP on the same L0 model SHA with original VTypes restored; this does not override its mathematical block.
+
+There are 48 clean boundary records and four preserved violations, all on the expected T60 equal-cutoff impossible row; the longer S=0, shared midpoint, loaded-return, homogeneous/heterogeneous, and cumulative-pickup examples are clean. The expected closure exception remains disclosed and production/closure are unchanged.
+
+Artifact identities checked at this gate: admission summary `08b4b81982a72a9b9d7761ec8e246a6dba8200983f72917e64b765e7ef716eb3`, zero-Optimize summary `aaf052b8279d0b300804bcdceac37fb14bd19ca50e99239e8edda7ddcab6665b`, and boundary vectors `e97faadc8760ce4d414f221b23c3ee497f1d3851e73d60dfec4d7a61244b3e92`. The actual E1 PE hashes to `d668236e9396b2e12f02bb65d9819b98762d2a35aad1b186d352d234dae756c9`; the DLL matches the original frozen identity.
+
+The revised reconstruction source correctly reconciles each physical representation-labelled M-B arm's own call IDs against the saved witnesses separately; cross-arm witnesses can refute a claim but supply no free bound or solution. Aggregate claim labels are changed to actual methods only for reporting. At this read, the cached `smoke_E1/reconstructed.json` still used the older aggregate labels and needed read-only regeneration, and the frozen manifest still inherited `final_qualification_pending=true`. These are metadata closeouts, with no new native run or model change required. Refresh the review/frozen/admission digest chain after this note is saved. No qualification runtime is a formal performance result.

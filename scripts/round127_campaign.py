@@ -6,6 +6,7 @@ import round90_lp_g_g3 as supervisor
 import round115_campaign as producer
 from round121_campaign import finish_producer
 from round126_run import child_creation
+from round115_common import process_origin
 from round113_progress import OptionalPublisher
 from round127_evidence import verify,extension
 import read_round118 as reader
@@ -78,15 +79,18 @@ def reconstruct(camp):
         if rows and not path.exists():core.table(path,rows)
     return arms
 def execute(name):
+    wrapper_tick,wrapper_creation=process_origin()
     camp=OUT/name;i=read(camp/'identity.json')
     if (camp/'reconstructed.json').exists():return read(camp/'reconstructed.json')['arms']
     for l in i['launches']:
         d=Path(l['destination'])
         if (d/'arm_total_receipt.json').exists():continue
         if not d.exists():
+            tick=wrapper_tick if l['number']==1 else time.perf_counter()
+            unix=wrapper_creation if l['number']==1 else time.time()
             assert sha(ROOT/l['panel']['input_path'])==l['panel']['input_sha256']
             assert sha(l['command'][0])==i['candidate_binary_sha256'] and sha(DLL)==i['dll_sha256']
-            tick=time.perf_counter();unix=time.time();supervised(l,i,tick);finish_producer(l,tick,unix)
+            supervised(l,i,tick);finish_producer(l,tick,unix)
         else:
             # Recovery only reads a complete sealed producer; no Optimize retry.
             assert (d/'producer_receipt.json').exists() and (d/'producer_seal.json').exists(),'unsealed production needs explicit engineering decision'
