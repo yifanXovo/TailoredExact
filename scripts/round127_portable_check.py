@@ -45,7 +45,7 @@ def check():
         if sha(p)!=h:p=OUT/'source_E0'/n
         assert sha(p)==h
     for n,binding in read(OUT/'manuscript_lineage.json')['appendices'].items():assert sha(OUT/n)==binding['parent_SHA']==binding['active_SHA']
-    allarms={};seals=0;model_hashes=0;selection=read(OUT/'tuning_selection.json');training=[];training_keys=[]
+    allarms={};seals=0;model_hashes=0;selection=read(OUT/'tuning_selection.json');training=[];training_keys=[];cold_models={}
     for stage in ['training','main','tiny','core']:
         allarms[stage]=[]
         for path in sorted((OUT/stage).glob('*/identity.json')):
@@ -67,6 +67,12 @@ def check():
                 assert a['PE_SHA']==identity['candidate_binary_sha256'] and a['DLL_SHA']==manifest['DLL_SHA']
                 assert a['binary_layer']==('E0' if stage in ['main','tiny'] else 'E1')
                 if stage!='training':assert a['T_produce']<=l['cap_seconds']
+                if a['binary_layer']=='E1' and l['method'] in ['P','PT']:
+                    parameters=read(d/'round127_parameters.json');wanted=l['configuration']
+                    assert (parameters['MIPFocus'],parameters['Cuts'],parameters['NumStart_before_optimize'])==(wanted['MIPFocus'],wanted['Cuts'],0)
+                    assert parameters['loaded_after_presets'] and parameters['authoritative_model_environment']
+                    cold_models.setdefault((stage,a['input_SHA']),set()).add(sha(d/'compact.lp'))
+                    if l['method']=='PT':assert wanted['id']==selection['selected']['id']
                 for observation in read(d/'observations.json'):
                     call=observation['payload']
                     if call['kind']=='call':assert sha(portable(call['model_path']))==call['model_sha256'];model_hashes+=1
@@ -96,6 +102,8 @@ def check():
     eligible=[q for q in scores[1:] if q['complete_qualified'] and q['N']>=q0['N'] and q['N_min']>=q0['N_min'] and (q['N']>q0['N'] or q['N']==q0['N']>0 and q['S_q']<q0['S_q'] and q['S_q']<=.9*q0['S_q'])]
     selected=min(eligible,key=lambda q:(-q['N'],-q['N_min'],q['S_q'],q['nondefault_parameters'],int(q['id'][1:]))) if eligible else q0
     assert selected==selection['selected'] and sha(OUT/'selected_P.prm')==selection['selected_prm_SHA']
+    assert sha(OUT/'tuning_manifest'/(selected['id']+'.prm'))==selection['selected_prm_SHA']
+    assert all(len(values)==1 for values in cold_models.values()),'cold configurations changed actual compact model bytes'
     assert selection['evaluation_results_consulted']==0
     pair_counts={};warnings={};pair_records={}
     for stage in ['main','tiny','core']:
@@ -159,7 +167,7 @@ def check():
         assert item['by_seed']=={str(s):[float(r['left_minus_right_seconds']) if r['left_minus_right_seconds'] else None for r in rr if int(r['seed'])==s] for s in range(3)}
     return dict(status='PASS',producer_seals_verified=seals,actual_call_model_hashes_verified=model_hashes,
         training_positions=36,selection_recomputed=selected,pair_classes=pair_counts,tiny_threshold_flags=warnings,source_bindings_verified=dict(E0=len(e0_sources),E1=len(e1_sources)),
-        formal_arms=summary['observed_formal_arms'],blocked_MD=3,aliases=len(aliases),
+        formal_arms=summary['observed_formal_arms'],blocked_MD=3,aliases=len(aliases),cold_model_groups_with_identical_bytes=len(cold_models),
         native_starts=0,Optimize=0,production_compilations=0,seconds=time.perf_counter()-tick,
         scope='Every sealed endpoint/clock, actual model bytes, independent finite selection/pair/alias arithmetic. Physical and matrix qualification are separately documented finite checks; no new optimization or universal rational proof.')
 if __name__=='__main__':
