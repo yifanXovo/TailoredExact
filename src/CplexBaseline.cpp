@@ -1,4 +1,5 @@
 #include "CplexBaseline.hpp"
+#include "Round127Research.hpp"
 #include "Round62Thresholds.hpp"
 #include "Round63TimeResource.hpp"
 #include "Round64SharedResource.hpp"
@@ -926,7 +927,7 @@ void writeCompactLp(const Instance& instance,
             static_cast<double>(instance.capacity[i]) / instance.target[i]);
     }
     const bool add_low_gini_centering =
-        strengthened && cutoff != nullptr && cutoff->enabled &&
+        round127EmitCG() && strengthened && cutoff != nullptr && cutoff->enabled &&
         options.low_gini_ratio_band_tightening && options.compact_bc_direct_gini_rows &&
         V > 1;
     if (add_low_gini_centering) {
@@ -995,7 +996,7 @@ void writeCompactLp(const Instance& instance,
         (options.tailored_bc_disaggregated_sp_mode == "static" ||
          options.tailored_bc_disaggregated_sp_mode == "both");
     const bool add_sp_product_estimator =
-        strengthened && cutoff != nullptr && cutoff->enabled &&
+        round127EmitCG() && strengthened && cutoff != nullptr && cutoff->enabled &&
         cutoff->add_objective_cutoff &&
         options.compact_bc_sp_product_estimator != "off" &&
         s_upper_domain > s_lower_domain - 1e-12 &&
@@ -1725,7 +1726,7 @@ void writeCompactLp(const Instance& instance,
             }
         }
     }
-    if (strengthened && options.compact_bc_pairwise_transfer_compatibility) {
+    if (round127EmitCR() && strengthened && options.compact_bc_pairwise_transfer_compatibility) {
         if (stats != nullptr) {
             stats->enabled_families.push_back("pairwise_transfer_compatibility");
         }
@@ -2046,7 +2047,7 @@ void writeCompactLp(const Instance& instance,
         }
     }
 
-    if (strengthened && options.compact_bc_support_duration_cuts &&
+    if (round127EmitCR() && strengthened && options.compact_bc_support_duration_cuts &&
         options.compact_bc_support_cut_max_size >= 2) {
         if (stats != nullptr) {
             stats->enabled_families.push_back("pair_triple_route_duration_support");
@@ -2095,7 +2096,7 @@ void writeCompactLp(const Instance& instance,
                     addSupportCut(k, {a, b}, pairCycleLowerBound(instance, a, b));
                 }
             }
-            if (options.compact_bc_support_cut_max_size >= 3) {
+            if (round127EmitTriple() && options.compact_bc_support_cut_max_size >= 3) {
                 for (int a = 1; a <= V; ++a) {
                     for (int b = a + 1; b <= V; ++b) {
                         for (int c = b + 1; c <= V; ++c) {
@@ -2924,7 +2925,7 @@ void writeCompactLp(const Instance& instance,
         }
     }
     if (!use_shared_interval_rows && strengthened && cutoff != nullptr && cutoff->enabled &&
-        options.gini_spread_cuts && cutoff->gamma_U >= -1e-12 && V > 1) {
+        round127EmitCG() && options.gini_spread_cuts && cutoff->gamma_U >= -1e-12 && V > 1) {
         if (stats != nullptr) stats->enabled_families.push_back("gini_pairwise_spread");
         for (int i = 1; i <= V; ++i) {
             for (int j = i + 1; j <= V; ++j) {
@@ -3269,7 +3270,7 @@ void writeCompactLp(const Instance& instance,
                 if (stats != nullptr) ++stats->disagg_sp_estimator_rows_added;
             }
         }
-        if (!use_shared_interval_rows && strengthened && options.compact_bc_objective_estimator_cutoff &&
+        if (round127EmitCG() && !use_shared_interval_rows && strengthened && options.compact_bc_objective_estimator_cutoff &&
             cutoff->add_objective_cutoff && std::isfinite(s_upper) && s_upper > 1e-12) {
             if (stats != nullptr) {
                 stats->enabled_families.push_back("objective_lower_estimator_cutoff");

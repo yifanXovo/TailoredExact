@@ -1,0 +1,42 @@
+{
+  "schema": "round127-final-independent-finite-audit-v1",
+  "status": "FAIL",
+  "UTC_started": "2026-10-21T03:51:56.530099+00:00",
+  "reviewer": "qualification_reviewer, separate executor; not third-party replication",
+  "execution_authority": "Parent explicitly confirmed formal processes idle before this invocation",
+  "verification_fee_label": "final_independent_review_01",
+  "script_SHA": "a4159a14c5c481e85eebb8dd6e0607cd11a39420e6427eedb870359eaf89d54d",
+  "no_Optimize": true,
+  "no_build": true,
+  "no_native_rerun": true,
+  "sections": {},
+  "errors": [
+    {
+      "type": "ValueError",
+      "message": "selection-era bytes changed: experiment_manifest.json"
+    }
+  ],
+  "bounds": {
+    "max_chain_calls": 512,
+    "max_chain_model_bytes": 536870912,
+    "max_chain_observation_bytes": 134217728,
+    "final_fleets_at_most": 10,
+    "matrix_scope": "S12 qualification root/left/right MR/MG/MS2, S12 MD functional root, at most one matched exposed formal role per MR/MG/MS2"
+  },
+  "exclusions": [
+    "no fresh native solve/LP",
+    "no all-journal-file sweep for all arms",
+    "no all-matrix rational proof",
+    "no training reselection",
+    "no manuscript/PDF review before generation"
+  ],
+  "UTC_completed": "2026-10-21T03:51:56.711663+00:00",
+  "seconds": 0.18234460009261966,
+  "inspected_file_SHA": {
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\results\\unified_exact_round127\\review\\final_independent_audit.py": "a4159a14c5c481e85eebb8dd6e0607cd11a39420e6427eedb870359eaf89d54d",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\results\\unified_exact_round127\\tuning_selection.json": "e38b7a128708d2d9f07e33769979d0eefb2f3c17a9ae1728d2786e4861ee231e",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\results\\unified_exact_round127\\selected_P.prm": "e7cc6a9d9567f5f1b8d7c8887e5dfdf18f6632b8e97051583f2a2080c22e1f6f",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\results\\unified_exact_round127\\experiment_manifest.json": "4d9b4851d152eacf64f2241c9099049e29961f0c645d5e4fb1dba3536b9efd3d"
+  },
+  "scope": "All current formal endpoint/seal/clock and typed arithmetic evidence; bounded independent physical, serialized-model and one complete actual nonzero MB proof/cover replay. Existing full native reader qualification is retained. Shared arms and repeated Seeds are not independent trials. The MD qualification block is preserved; this review does not claim universal exact arithmetic or blanket invalidity of MB."
+}

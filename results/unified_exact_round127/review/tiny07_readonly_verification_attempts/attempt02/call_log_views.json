@@ -1,0 +1,65 @@
+{
+  "schema": "round118-call-log-views-v1",
+  "bindings": [
+    {
+      "call": 1,
+      "serial_ordinal": 1,
+      "model_SHA": "8f771487cc1f6b96452cecabeda426eb194e788187240cbe1db7946325a13b07",
+      "leaf": "L0",
+      "true_G_interval": [
+        0,
+        0.5358910752996684
+      ],
+      "cutoff": 0.5358910752996684,
+      "epoch": null,
+      "epoch_source": "scope/cutoff bound; no invented epoch",
+      "solve_kind": "LP",
+      "ledger": {
+        "leaf_id": "L0",
+        "solve_kind": "LP",
+        "native_status": "OPTIMAL",
+        "optimize_return_code": "0",
+        "global_deadline_remaining_at_launch": "59.921876499999996",
+        "solver_runtime": "0.0020000934600830078",
+        "work": "0.0017796538095851159",
+        "nodes": "0",
+        "simplex_iterations": "15",
+        "barrier_iterations": "0",
+        "memory_gb": "0.0042785619999999996",
+        "model_sha256": "8f771487cc1f6b96452cecabeda426eb194e788187240cbe1db7946325a13b07",
+        "in_memory_model_reused": "0",
+        "integer_domain_restored": "1",
+        "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+        "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\results\\unified_exact_round127\\tiny\\07_SM-B10-B_S0_R1\\raw\\01_SM-B10-B_S0_R1_MB\\external\\native_logs\\L0_lp.gurobi.log"
+      },
+      "raw_log": "results/unified_exact_round127/tiny/07_SM-B10-B_S0_R1/raw/01_SM-B10-B_S0_R1_MB/external/native_logs/L0_lp.gurobi.log",
+      "raw_log_SHA": "42ad3b7161fd35acfdc2aa6b9f25e6585072000cc9526ec79f66d84bbcfd7a07",
+      "byte_begin": 0,
+      "byte_end": 1405,
+      "segment_SHA": "42ad3b7161fd35acfdc2aa6b9f25e6585072000cc9526ec79f66d84bbcfd7a07",
+      "fingerprint": "0x2d4591d6",
+      "fingerprint_contract": null,
+      "parameters": {
+        "TimeLimit": 59.921876499999996,
+        "MIPGap": 0.0,
+        "MIPGapAbs": 0.0,
+        "Threads": 1.0
+      },
+      "native_types": {
+        "C": 691,
+        "I": 0,
+        "B": 0
+      },
+      "journal_returned": true,
+      "return_sequence": 4,
+      "return_available": 0.15700000000651926,
+      "return_code": 0,
+      "missing_return_requires_unchanged_narrow_gate": false
+    }
+  ],
+  "producer_receipt_SHA": "ebc281d070e094a1f58a76b46a10139666554b6290e73d4ba87ff17da3726131",
+  "raw_bytes_unchanged": true,
+  "generated_after_seal": true,
+  "actual_Optimize": 1,
+  "not_started": []
+}

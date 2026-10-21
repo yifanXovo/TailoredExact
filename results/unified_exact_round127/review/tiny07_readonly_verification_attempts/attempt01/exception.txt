@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\round127\results\unified_exact_round127\review\tiny07_readonly_verify.py", line 33, in <module>
+    result=verify(launch,identity)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round127\scripts\round127_evidence.py", line 104, in verify
+    return fn(l,i)
+           ^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round127\scripts\round122_evidence.py", line 147, in verify
+    with logs.activate(view):value=verifier.verify(l,i)
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round127\scripts\round115_verify.py", line 32, in verify
+    write(d/'audit.json',value);write(d/'audit_execution_metrics.json',namespace['last_metrics'])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round127\scripts\round101_common.py", line 13, in write
+    with p.open('x',encoding='utf-8',newline='\n') as f:json.dump(v,f,indent=2,ensure_ascii=False,allow_nan=False);f.write('\n')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: 'E:\\codes\\ExactEBRP-work\\worktrees\\round127\\results\\unified_exact_round127\\tiny\\07_SM-B10-B_S0_R1\\raw\\01_SM-B10-B_S0_R1_MB\\audit.json'

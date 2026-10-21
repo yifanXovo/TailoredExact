@@ -1,4 +1,14 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
+# Round127 frozen runtime/input bytes; two old benchmark blobs retain original LF.
+/scripts/round127* -text
+/include/Round127Research.hpp -text
+/src/main.cpp -text
+/src/CplexBaseline.cpp -text
+/src/IntervalRowFactory.cpp -text
+/src/PaperExternalGiniTree.cpp -text
+/src/GurobiBaseline.cpp -text
+/reference/round122_paper_benchmark/*.txt -text
+
 results/gf_gurobi_performance_recovery_round29/** -text
 
 # Preserve byte-exact Round 31 evidence and its recorded SHA-256 values.

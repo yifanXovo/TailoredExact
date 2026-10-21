@@ -1,0 +1,230 @@
+{
+  "UTC": "2026-10-20T19:57:57.528542+00:00",
+  "Optimize": 0,
+  "comparisons": [
+    {
+      "id": "S12",
+      "scope": "root",
+      "mode": "mr",
+      "removed_rows": 596,
+      "removed_columns": [],
+      "families": {
+        "ordered_supply": 24,
+        "conditional_2": 132,
+        "conditional_3": 440
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "S12",
+      "scope": "root",
+      "mode": "mg",
+      "removed_rows": 336,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 66,
+        "explicit_centering": 264,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "S12",
+      "scope": "root",
+      "mode": "ms2",
+      "removed_rows": 440,
+      "removed_columns": [],
+      "families": {
+        "conditional_3": 440
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "S12",
+      "scope": "left",
+      "mode": "mr",
+      "removed_rows": 596,
+      "removed_columns": [],
+      "families": {
+        "ordered_supply": 24,
+        "conditional_2": 132,
+        "conditional_3": 440
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "S12",
+      "scope": "left",
+      "mode": "mg",
+      "removed_rows": 336,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 66,
+        "explicit_centering": 264,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "S12",
+      "scope": "left",
+      "mode": "ms2",
+      "removed_rows": 440,
+      "removed_columns": [],
+      "families": {
+        "conditional_3": 440
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "S12",
+      "scope": "right",
+      "mode": "mr",
+      "removed_rows": 596,
+      "removed_columns": [],
+      "families": {
+        "ordered_supply": 24,
+        "conditional_2": 132,
+        "conditional_3": 440
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "S12",
+      "scope": "right",
+      "mode": "mg",
+      "removed_rows": 336,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 66,
+        "explicit_centering": 264,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "S12",
+      "scope": "right",
+      "mode": "ms2",
+      "removed_rows": 440,
+      "removed_columns": [],
+      "families": {
+        "conditional_3": 440
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "R98-C2",
+      "scope": "root",
+      "mode": "mr",
+      "removed_rows": 13575,
+      "removed_columns": [],
+      "families": {
+        "ordered_supply": 90,
+        "conditional_2": 1305,
+        "conditional_3": 12180
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "R98-C2",
+      "scope": "root",
+      "mode": "mg",
+      "removed_rows": 2181,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 435,
+        "explicit_centering": 1740,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "R98-C2",
+      "scope": "root",
+      "mode": "ms2",
+      "removed_rows": 12180,
+      "removed_columns": [],
+      "families": {
+        "conditional_3": 12180
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "R98-C2",
+      "scope": "left",
+      "mode": "mg",
+      "removed_rows": 2181,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 435,
+        "explicit_centering": 1740,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "id": "R98-C2",
+      "scope": "right",
+      "mode": "mg",
+      "removed_rows": 2181,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 435,
+        "explicit_centering": 1740,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    }
+  ],
+  "E0_E1_MB_P_full_native_columns_objective_types_bounds_and_rows_equal": true,
+  "path_rename_checks": [
+    "S12",
+    "R98-C2"
+  ],
+  "V50_M4_support_candidate_count": 83300,
+  "budget": 50000,
+  "by_vehicle_before_cap": [
+    20825,
+    20825,
+    8350,
+    0
+  ],
+  "core_candidates": [
+    1120,
+    2660,
+    21420
+  ],
+  "no_V50_solve": true,
+  "no_four_station_generation": true
+}

@@ -1,0 +1,193 @@
+{
+  "schema": "round115-postproduction-independent-evidence-v2",
+  "arm": "M-B",
+  "input_SHA": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f",
+  "own_U": 0.5358910752996684,
+  "own_exact_zero": false,
+  "own_physical_verified": true,
+  "independent_floor0": true,
+  "independent_floor_source": "original_G>=0_lambda>=0_weights>=0_absolute_penalty",
+  "physical": {
+    "G": 0.21948482529966845,
+    "P": 2.109375,
+    "F": 0.5358910752996684,
+    "Y": [
+      50000,
+      2,
+      3,
+      11,
+      8,
+      11,
+      3,
+      3,
+      3,
+      7,
+      9
+    ],
+    "maximum_duration": 0.0,
+    "pickups": [
+      0,
+      0
+    ],
+    "return_loads": [
+      0,
+      0
+    ],
+    "routes": [
+      {
+        "vehicle": 0,
+        "nodes": [
+          0,
+          0
+        ],
+        "operations": []
+      },
+      {
+        "vehicle": 1,
+        "nodes": [
+          0,
+          0
+        ],
+        "operations": []
+      }
+    ],
+    "complete_fleet_vehicles": 2,
+    "empty_vehicles_added": 0
+  },
+  "witnesses": [
+    {
+      "G": 0.21948482529966845,
+      "P": 2.109375,
+      "F": 0.5358910752996684,
+      "Y": [
+        50000,
+        2,
+        3,
+        11,
+        8,
+        11,
+        3,
+        3,
+        3,
+        7,
+        9
+      ],
+      "maximum_duration": 0.0,
+      "pickups": [
+        0,
+        0
+      ],
+      "return_loads": [
+        0,
+        0
+      ],
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            0
+          ],
+          "operations": []
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            0
+          ],
+          "operations": []
+        }
+      ],
+      "complete_fleet_vehicles": 2,
+      "empty_vehicles_added": 0,
+      "arm": "M-B",
+      "call": 0,
+      "sequence": 2,
+      "source": "same_run_verified_startup",
+      "input_SHA": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f",
+      "physical_verified": true,
+      "available": 0.0940000000409782
+    },
+    {
+      "G": 0.21948482529966845,
+      "P": 2.109375,
+      "F": 0.5358910752996684,
+      "Y": [
+        50000,
+        2,
+        3,
+        11,
+        8,
+        11,
+        3,
+        3,
+        3,
+        7,
+        9
+      ],
+      "maximum_duration": 0.0,
+      "pickups": [
+        0,
+        0
+      ],
+      "return_loads": [
+        0,
+        0
+      ],
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            0
+          ],
+          "operations": []
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            0
+          ],
+          "operations": []
+        }
+      ],
+      "complete_fleet_vehicles": 2,
+      "empty_vehicles_added": 0,
+      "arm": "M-B",
+      "source": "own_normal_return_result",
+      "input_SHA": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f",
+      "available": 0.40700000000651926,
+      "physical_verified": true
+    }
+  ],
+  "identity_verified": true,
+  "input_verified": true,
+  "model_domain_verified": true,
+  "journal_verified": true,
+  "return_verified": true,
+  "files_verified": true,
+  "clock_valid": false,
+  "necessary_closeout_complete": false,
+  "inside_own_whole": false,
+  "clock_pending_until_actual_whole": false,
+  "result_SHA": "25e8b99cd2701516142d151eff36dc2b495fe5f522c72d59b876f4209756ab7f",
+  "observations_SHA": "054fbb6cf2cfb90b84d9ce50d30aa26e919553a773a4a3df9c3bbfecc2eb2b9a",
+  "completion_SHA": "0fb8e498f506f15af1370eb6d454c86a798fed0e5302965837dae3d07609ed04",
+  "counts": {
+    "declared": 1,
+    "actual_Optimize": 1,
+    "journal_returned": 1,
+    "independently_verified_returned": 1,
+    "explicit_not_started": 0
+  },
+  "model_SHAs": [
+    "8f771487cc1f6b96452cecabeda426eb194e788187240cbe1db7946325a13b07"
+  ],
+  "raw_native_claims_preserved": true,
+  "created_after_producer_seal": true,
+  "qualification_pending": true,
+  "own_source": "sealed_producer_result_and_committed_own_witnesses",
+  "extra_after_production_solution_or_bound": false
+}

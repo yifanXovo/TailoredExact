@@ -1,0 +1,337 @@
+{
+  "status": "PASS",
+  "own_normalizer_probe_scope": "isolated actual handoff wrapper with original hash grammar; production verifier not invoked",
+  "positive_proxy_cases": 2,
+  "rejecting_invalid_or_changed_nonempty_cases": 8,
+  "original_producer_unchanged": true,
+  "original_failed_evidence_preserved": true,
+  "original_T_produce": 0.8141223039710894,
+  "parameter_native_PID_and_raw_outputs_unchanged": true,
+  "patched_evidence_source_SHA": "d776d0dc999e6199cd376e693885abbd5a3f86616e8238b37645f4c80c96626a",
+  "own_helper_source_SHA": "09ed96733a39e422b617767923976aeea0f09264f23082f52010863bd65de7ac",
+  "legacy_source_byte_and_program_bindings": {
+    "round100_campaign.py": {
+      "actual_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\scripts\\round100_campaign.py",
+      "actual_SHA": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "selection_commit_blob_SHA": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "R126_blob_SHA": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "canonical_LF_SHA": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "raw_bytes_equal": true,
+      "worktree_CRLF": 0,
+      "commit_CRLF": 0,
+      "program_text_equal_with_only_CRLF_to_LF": true,
+      "source_files_rewritten": false
+    },
+    "round73_seed_diagnostic.py": {
+      "actual_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\scripts\\round73_seed_diagnostic.py",
+      "actual_SHA": "3263595bf7ddda4472d6c519b136faec7b3f9d4ab4e3009bb5bf108d9cc0e3c8",
+      "selection_commit_blob_SHA": "08b23e80febe63627f8ae79d22df115d4c127d809de411f21e87a3e305a1dca0",
+      "R126_blob_SHA": "08b23e80febe63627f8ae79d22df115d4c127d809de411f21e87a3e305a1dca0",
+      "canonical_LF_SHA": "08b23e80febe63627f8ae79d22df115d4c127d809de411f21e87a3e305a1dca0",
+      "raw_bytes_equal": false,
+      "worktree_CRLF": 168,
+      "commit_CRLF": 0,
+      "program_text_equal_with_only_CRLF_to_LF": true,
+      "source_files_rewritten": false
+    },
+    "round75_startup.py": {
+      "actual_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\scripts\\round75_startup.py",
+      "actual_SHA": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "selection_commit_blob_SHA": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "R126_blob_SHA": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "canonical_LF_SHA": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "raw_bytes_equal": true,
+      "worktree_CRLF": 0,
+      "commit_CRLF": 0,
+      "program_text_equal_with_only_CRLF_to_LF": true,
+      "source_files_rewritten": false
+    },
+    "round108_reader.py": {
+      "actual_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\scripts\\round108_reader.py",
+      "actual_SHA": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "selection_commit_blob_SHA": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "R126_blob_SHA": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "canonical_LF_SHA": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "raw_bytes_equal": true,
+      "worktree_CRLF": 0,
+      "commit_CRLF": 0,
+      "program_text_equal_with_only_CRLF_to_LF": true,
+      "source_files_rewritten": false
+    },
+    "round120_evidence.py": {
+      "actual_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\scripts\\round120_evidence.py",
+      "actual_SHA": "db89c758b238bfe2836001c4cf5e270a84d2b2834aa5a552589cb1863a4d9be5",
+      "selection_commit_blob_SHA": "2cfd75746ae7a61c628647bc56217ae6b80f474999ec3215fe4cd5cc49f6b653",
+      "R126_blob_SHA": "2cfd75746ae7a61c628647bc56217ae6b80f474999ec3215fe4cd5cc49f6b653",
+      "canonical_LF_SHA": "2cfd75746ae7a61c628647bc56217ae6b80f474999ec3215fe4cd5cc49f6b653",
+      "raw_bytes_equal": false,
+      "worktree_CRLF": 131,
+      "commit_CRLF": 0,
+      "program_text_equal_with_only_CRLF_to_LF": true,
+      "source_files_rewritten": false
+    },
+    "round122_evidence.py": {
+      "actual_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\scripts\\round122_evidence.py",
+      "actual_SHA": "bb3e1e711f4ae1f48c7ef1a1b2092d75627e1104711653fd98aa605fe7a74ea4",
+      "selection_commit_blob_SHA": "c37bb09e82a8f3fa0ceaa1d79cd276813a56a228099701096fa1f640e2ec4f9d",
+      "R126_blob_SHA": "c37bb09e82a8f3fa0ceaa1d79cd276813a56a228099701096fa1f640e2ec4f9d",
+      "canonical_LF_SHA": "c37bb09e82a8f3fa0ceaa1d79cd276813a56a228099701096fa1f640e2ec4f9d",
+      "raw_bytes_equal": false,
+      "worktree_CRLF": 148,
+      "commit_CRLF": 0,
+      "program_text_equal_with_only_CRLF_to_LF": true,
+      "source_files_rewritten": false
+    }
+  },
+  "empty_fleet_replays": [
+    {
+      "F": 0.5358910752996684,
+      "G": 0.21948482529966845,
+      "P": 2.109375,
+      "Y": [
+        50000,
+        2,
+        3,
+        11,
+        8,
+        11,
+        3,
+        3,
+        3,
+        7,
+        9
+      ],
+      "full_fleet_vehicles": 2,
+      "routes": [
+        {
+          "vehicle": 0,
+          "Q": 15,
+          "pickups": 0,
+          "return_load": 0,
+          "prefix_loads": [],
+          "travel_seconds": 0,
+          "duration_seconds": 0,
+          "implicit_empty": true
+        },
+        {
+          "vehicle": 1,
+          "Q": 25,
+          "pickups": 0,
+          "return_load": 0,
+          "prefix_loads": [],
+          "travel_seconds": 0,
+          "duration_seconds": 0,
+          "implicit_empty": true
+        }
+      ],
+      "legacy_weights_normalized": false,
+      "source_input_SHA": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f"
+    },
+    {
+      "F": 0.5358910752996684,
+      "G": 0.21948482529966845,
+      "P": 2.109375,
+      "Y": [
+        50000,
+        2,
+        3,
+        11,
+        8,
+        11,
+        3,
+        3,
+        3,
+        7,
+        9
+      ],
+      "full_fleet_vehicles": 2,
+      "routes": [
+        {
+          "vehicle": 0,
+          "Q": 15,
+          "pickups": 0,
+          "return_load": 0,
+          "prefix_loads": [],
+          "travel_seconds": 0,
+          "duration_seconds": 0,
+          "implicit_empty": true
+        },
+        {
+          "vehicle": 1,
+          "Q": 25,
+          "pickups": 0,
+          "return_load": 0,
+          "prefix_loads": [],
+          "travel_seconds": 0,
+          "duration_seconds": 0,
+          "implicit_empty": true
+        }
+      ],
+      "legacy_weights_normalized": false,
+      "source_input_SHA": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f"
+    },
+    {
+      "F": 0.5358910752996684,
+      "G": 0.21948482529966845,
+      "P": 2.109375,
+      "Y": [
+        50000,
+        2,
+        3,
+        11,
+        8,
+        11,
+        3,
+        3,
+        3,
+        7,
+        9
+      ],
+      "full_fleet_vehicles": 2,
+      "routes": [
+        {
+          "vehicle": 0,
+          "Q": 15,
+          "pickups": 0,
+          "return_load": 0,
+          "prefix_loads": [],
+          "travel_seconds": 0.0,
+          "duration_seconds": 0.0
+        },
+        {
+          "vehicle": 1,
+          "Q": 25,
+          "pickups": 0,
+          "return_load": 0,
+          "prefix_loads": [],
+          "travel_seconds": 0.0,
+          "duration_seconds": 0.0
+        }
+      ],
+      "legacy_weights_normalized": false,
+      "source_input_SHA": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f"
+    }
+  ],
+  "complete_root_LP_cover_proof": {
+    "group": "tiny/07_SM-B10-B_S0_R1",
+    "method": "MB",
+    "U": 0.5358910752996684,
+    "raw_L": 0.5358910752996684,
+    "signed_gap": 0.0,
+    "nonzero": true,
+    "native_calls": 1,
+    "returned_original_model_proofs": 1,
+    "native_records": [
+      {
+        "call": 1,
+        "leaf": "L0",
+        "solve_kind": "LP",
+        "model_SHA": "8f771487cc1f6b96452cecabeda426eb194e788187240cbe1db7946325a13b07",
+        "actual_model_rows": 1929,
+        "actual_model_columns": 691,
+        "return_sequence": 4,
+        "native_log_SHA": "42ad3b7161fd35acfdc2aa6b9f25e6585072000cc9526ec79f66d84bbcfd7a07",
+        "native_segment_SHA": "42ad3b7161fd35acfdc2aa6b9f25e6585072000cc9526ec79f66d84bbcfd7a07",
+        "proof": {
+          "call": 1,
+          "lo": 0,
+          "hi": 0.5358910752996684,
+          "cutoff": 0.5358910752996684,
+          "value": 0.5358910752996684,
+          "sequence": 4,
+          "source": "linked_complete_optimal_LP",
+          "model_SHA": "8f771487cc1f6b96452cecabeda426eb194e788187240cbe1db7946325a13b07",
+          "raw_native_preconditions": 0
+        }
+      }
+    ],
+    "unique_models": 1,
+    "unique_model_bytes": 153655,
+    "chronological_saved_call_covers": [
+      {
+        "call": 1,
+        "sequence": 3,
+        "leaves": [
+          {
+            "id": "L0",
+            "reported": 0,
+            "cutoff": 0.5358910752996684,
+            "supported": 0
+          }
+        ],
+        "future_evidence_used": false
+      }
+    ],
+    "callback_local_bound_records": 0,
+    "covered_G_upper": 0.5358910752996684,
+    "live_leaves": [
+      {
+        "id": "L0",
+        "lo": 0.0,
+        "hi": 0.5358910752996684,
+        "raw_lower": 0.5358910752996684,
+        "independent_support": 0.5358910752996684,
+        "status": "fathomed",
+        "lower_bound_sources": "objective_nonnegative_penalty_G_floor;optimal_complete_lp_relaxation",
+        "closure_source": "complete_lp_bound_cannot_improve_verified_incumbent"
+      }
+    ],
+    "physical_endpoint": {
+      "F": 0.5358910752996684,
+      "G": 0.21948482529966845,
+      "P": 2.109375,
+      "Y": [
+        50000,
+        2,
+        3,
+        11,
+        8,
+        11,
+        3,
+        3,
+        3,
+        7,
+        9
+      ],
+      "full_fleet_vehicles": 2,
+      "routes": [
+        {
+          "vehicle": 0,
+          "Q": 15,
+          "pickups": 0,
+          "return_load": 0,
+          "prefix_loads": [],
+          "travel_seconds": 0.0,
+          "duration_seconds": 0.0
+        },
+        {
+          "vehicle": 1,
+          "Q": 25,
+          "pickups": 0,
+          "return_load": 0,
+          "prefix_loads": [],
+          "travel_seconds": 0.0,
+          "duration_seconds": 0.0
+        }
+      ],
+      "legacy_weights_normalized": false,
+      "source_input_SHA": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f"
+    },
+    "raw_leaf_ledger_SHA": "08257716b9ec18e4250b96026fde343033046d36928b909d694f7897b8ccb38c",
+    "global_trace_SHA": "ebcf611fc7a48d6ef5492c7d6f351609aeb1c2c6ebfc3a0433d0585433e1b32f",
+    "raw_online_flags_unchanged": true,
+    "cutoff_complement_rule": "min(local bound, own cutoff); retained tolerance policy, not inclusive-root/U0-Start preservation",
+    "scope": "One complete actual interval/returned-call proof chain independently checked at serialized numerical precision; no universal rational certificate or new optimization."
+  },
+  "full_reader_recovered": true,
+  "final_qualification_pending": false,
+  "no_new_Optimize": true,
+  "no_build": true,
+  "no_new_native_process": true,
+  "no_raw_rewrite": true,
+  "scope": "One fixed sealed tiny07 arm, exact unused-route representation and complete actual root-LP provenance only; no outcome-based model/parameter change",
+  "UTC": "2026-10-20T23:44:10.259169+00:00",
+  "verification_fee_label": "tiny07_empty_route_independent_02",
+  "script_SHA": "5213f1ab23539c8b62986e65792ebd4c7c1fede6096f56e86ac1cc4dc9186ec1",
+  "independent_helper_only": true
+}

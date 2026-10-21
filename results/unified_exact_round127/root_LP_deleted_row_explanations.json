@@ -1,0 +1,302 @@
+[
+  {
+    "id": "SC-C15-S",
+    "method": "MR",
+    "matched_complete_H_and_scope": true,
+    "extra_Optimize": 0,
+    "H_action_traces_equal": true,
+    "scope": "explanatory actual saved root point only; not a certification/performance proof",
+    "actual_formal_root_deletion_check": {
+      "mode": "mr",
+      "removed_rows": 1150,
+      "removed_columns": [],
+      "families": {
+        "ordered_supply": 30,
+        "conditional_2": 210,
+        "conditional_3": 910
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true,
+      "detailed_families": {
+        "ordered_supply": 30,
+        "conditional_2": 210,
+        "conditional_3": 910
+      }
+    },
+    "deleted_minus_full_root_LP_bound": -1.1102230246251565e-16,
+    "LP_deletion_monotonic_within_1e6": true,
+    "removed_rows": 1150,
+    "ordinary_rows_max_residual": 0.0,
+    "ordinary_violated_rows": 0,
+    "ordinary_status": "NO_VIOLATION_AT_SAVED_POINT"
+  },
+  {
+    "id": "SC-C15-S",
+    "method": "MG",
+    "matched_complete_H_and_scope": true,
+    "extra_Optimize": 0,
+    "H_action_traces_equal": true,
+    "scope": "explanatory actual saved root point only; not a certification/performance proof",
+    "actual_formal_root_deletion_check": {
+      "mode": "mg",
+      "removed_rows": 531,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 105,
+        "explicit_centering": 420,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true,
+      "detailed_families": {
+        "H_spread": 105,
+        "fixed_centering": 210,
+        "variable_S_centering": 210,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      }
+    },
+    "deleted_minus_full_root_LP_bound": -1.1102230246251565e-16,
+    "LP_deletion_monotonic_within_1e6": true,
+    "removed_rows": 531,
+    "ordinary_rows_max_residual": 0.0,
+    "ordinary_violated_rows": 0,
+    "ordinary_status": "NO_VIOLATION_AT_SAVED_POINT",
+    "W_lower": "0",
+    "W_upper": "32.260902461738027435645113776756294053643571591296527014455092219336052039579952",
+    "W_empty_exact_serialized_intersection": false,
+    "W_status": "EXTENSION_INTERVAL_NONEMPTY_AT_SAVED_POINT",
+    "W_note": "Existence checked by eliminating only W with its actual bounds/rows; no arbitrary W assignment. A nonempty interval does not imply global redundancy."
+  },
+  {
+    "id": "SC-C15-S",
+    "method": "MS2",
+    "matched_complete_H_and_scope": true,
+    "extra_Optimize": 0,
+    "H_action_traces_equal": true,
+    "scope": "explanatory actual saved root point only; not a certification/performance proof",
+    "actual_formal_root_deletion_check": {
+      "mode": "ms2",
+      "removed_rows": 910,
+      "removed_columns": [],
+      "families": {
+        "conditional_3": 910
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true,
+      "detailed_families": {
+        "conditional_3": 910
+      }
+    },
+    "deleted_minus_full_root_LP_bound": -2.7755575615628914e-17,
+    "LP_deletion_monotonic_within_1e6": true,
+    "removed_rows": 910,
+    "ordinary_rows_max_residual": 0.0,
+    "ordinary_violated_rows": 0,
+    "ordinary_status": "NO_VIOLATION_AT_SAVED_POINT"
+  },
+  {
+    "id": "SC-B20-S",
+    "method": "MR",
+    "matched_complete_H_and_scope": true,
+    "extra_Optimize": 0,
+    "H_action_traces_equal": true,
+    "scope": "explanatory actual saved root point only; not a certification/performance proof",
+    "actual_formal_root_deletion_check": {
+      "mode": "mr",
+      "removed_rows": 2700,
+      "removed_columns": [],
+      "families": {
+        "ordered_supply": 40,
+        "conditional_2": 380,
+        "conditional_3": 2280
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true,
+      "detailed_families": {
+        "ordered_supply": 40,
+        "conditional_2": 380,
+        "conditional_3": 2280
+      }
+    },
+    "deleted_minus_full_root_LP_bound": 1.3877787807814457e-17,
+    "LP_deletion_monotonic_within_1e6": true,
+    "removed_rows": 2700,
+    "ordinary_rows_max_residual": 0.0,
+    "ordinary_violated_rows": 0,
+    "ordinary_status": "NO_VIOLATION_AT_SAVED_POINT"
+  },
+  {
+    "id": "SC-B20-S",
+    "method": "MG",
+    "matched_complete_H_and_scope": true,
+    "extra_Optimize": 0,
+    "H_action_traces_equal": true,
+    "scope": "explanatory actual saved root point only; not a certification/performance proof",
+    "actual_formal_root_deletion_check": {
+      "mode": "mg",
+      "removed_rows": 956,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 190,
+        "explicit_centering": 760,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true,
+      "detailed_families": {
+        "H_spread": 190,
+        "fixed_centering": 380,
+        "variable_S_centering": 380,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      }
+    },
+    "deleted_minus_full_root_LP_bound": 2.7755575615628914e-17,
+    "LP_deletion_monotonic_within_1e6": true,
+    "removed_rows": 956,
+    "ordinary_rows_max_residual": 0.0,
+    "ordinary_violated_rows": 0,
+    "ordinary_status": "NO_VIOLATION_AT_SAVED_POINT",
+    "W_lower": "0",
+    "W_upper": "28.667850023693012505511985169246149980129076314032780371411223037381166278692034",
+    "W_empty_exact_serialized_intersection": false,
+    "W_status": "EXTENSION_INTERVAL_NONEMPTY_AT_SAVED_POINT",
+    "W_note": "Existence checked by eliminating only W with its actual bounds/rows; no arbitrary W assignment. A nonempty interval does not imply global redundancy."
+  },
+  {
+    "id": "SC-B20-S",
+    "method": "MS2",
+    "matched_complete_H_and_scope": true,
+    "extra_Optimize": 0,
+    "H_action_traces_equal": true,
+    "scope": "explanatory actual saved root point only; not a certification/performance proof",
+    "actual_formal_root_deletion_check": {
+      "mode": "ms2",
+      "removed_rows": 2280,
+      "removed_columns": [],
+      "families": {
+        "conditional_3": 2280
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true,
+      "detailed_families": {
+        "conditional_3": 2280
+      }
+    },
+    "deleted_minus_full_root_LP_bound": 8.326672684688674e-17,
+    "LP_deletion_monotonic_within_1e6": true,
+    "removed_rows": 2280,
+    "ordinary_rows_max_residual": 0.0,
+    "ordinary_violated_rows": 0,
+    "ordinary_status": "NO_VIOLATION_AT_SAVED_POINT"
+  },
+  {
+    "id": "PB-B35-B",
+    "method": "MR",
+    "matched_complete_H_and_scope": true,
+    "extra_Optimize": 0,
+    "H_action_traces_equal": true,
+    "scope": "explanatory actual saved root point only; not a certification/performance proof",
+    "actual_formal_root_deletion_check": {
+      "mode": "mr",
+      "removed_rows": 21525,
+      "removed_columns": [],
+      "families": {
+        "ordered_supply": 105,
+        "conditional_2": 1533,
+        "cover_2": 252,
+        "conditional_3": 12729,
+        "cover_3": 6906
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true,
+      "detailed_families": {
+        "ordered_supply": 105,
+        "conditional_2": 1533,
+        "cover_2": 252,
+        "conditional_3": 12729,
+        "cover_3": 6906
+      }
+    },
+    "deleted_minus_full_root_LP_bound": 0.0,
+    "LP_deletion_monotonic_within_1e6": true,
+    "removed_rows": 21525,
+    "ordinary_rows_max_residual": 0.0,
+    "ordinary_violated_rows": 0,
+    "ordinary_status": "NO_VIOLATION_AT_SAVED_POINT"
+  },
+  {
+    "id": "PB-B35-B",
+    "method": "MG",
+    "matched_complete_H_and_scope": true,
+    "extra_Optimize": 0,
+    "H_action_traces_equal": true,
+    "scope": "explanatory actual saved root point only; not a certification/performance proof",
+    "actual_formal_root_deletion_check": {
+      "mode": "mg",
+      "removed_rows": 2981,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 595,
+        "explicit_centering": 2380,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true,
+      "detailed_families": {
+        "H_spread": 595,
+        "fixed_centering": 1190,
+        "variable_S_centering": 1190,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      }
+    },
+    "deleted_minus_full_root_LP_bound": 0.0,
+    "LP_deletion_monotonic_within_1e6": true,
+    "removed_rows": 2981,
+    "ordinary_rows_max_residual": 0.0,
+    "ordinary_violated_rows": 0,
+    "ordinary_status": "NO_VIOLATION_AT_SAVED_POINT",
+    "W_lower": "0",
+    "W_upper": "-0E-48",
+    "W_empty_exact_serialized_intersection": false,
+    "W_status": "EXTENSION_INTERVAL_NONEMPTY_AT_SAVED_POINT",
+    "W_note": "Existence checked by eliminating only W with its actual bounds/rows; no arbitrary W assignment. A nonempty interval does not imply global redundancy."
+  },
+  {
+    "id": "PB-B35-B",
+    "method": "MS2",
+    "matched_complete_H_and_scope": true,
+    "extra_Optimize": 0,
+    "H_action_traces_equal": true,
+    "scope": "explanatory actual saved root point only; not a certification/performance proof",
+    "actual_formal_root_deletion_check": {
+      "mode": "ms2",
+      "removed_rows": 19635,
+      "removed_columns": [],
+      "families": {
+        "conditional_3": 12729,
+        "cover_3": 6906
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true,
+      "detailed_families": {
+        "conditional_3": 12729,
+        "cover_3": 6906
+      }
+    },
+    "deleted_minus_full_root_LP_bound": 0.0,
+    "LP_deletion_monotonic_within_1e6": true,
+    "removed_rows": 19635,
+    "ordinary_rows_max_residual": 0.0,
+    "ordinary_violated_rows": 0,
+    "ordinary_status": "NO_VIOLATION_AT_SAVED_POINT"
+  }
+]

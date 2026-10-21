@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "producer_seals_verified": 90,
+  "actual_call_model_hashes_verified": 168,
+  "training_positions": 36,
+  "selection_recomputed": {
+    "id": "q2",
+    "MIPFocus": 2,
+    "Cuts": -1,
+    "nondefault_parameters": 1,
+    "complete_qualified": true,
+    "N": 4,
+    "N_by_seed": {
+      "2": 2,
+      "3": 2
+    },
+    "N_min": 2,
+    "S_q": 0.6568870237580052
+  },
+  "pair_classes": {
+    "main": {
+      "BOTH_CERTIFIED": 2,
+      "LEFT_ONLY_CERTIFIED": 3,
+      "BOTH_OPEN": 1
+    },
+    "tiny": {
+      "BOTH_CERTIFIED": 12
+    },
+    "core": {
+      "BOTH_CERTIFIED": 6,
+      "LEFT_ONLY_CERTIFIED": 4,
+      "UNEVALUABLE": 3,
+      "RIGHT_ONLY_CERTIFIED": 1,
+      "BOTH_OPEN": 7
+    }
+  },
+  "tiny_threshold_flags": {
+    "SM-C8-S": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "SM-B10-B": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "source_bindings_verified": {
+    "E0": 216,
+    "E1": 217
+  },
+  "formal_arms": 54,
+  "blocked_MD": 3,
+  "aliases": 0,
+  "cold_model_groups_with_identical_bytes": 6,
+  "native_starts": 0,
+  "Optimize": 0,
+  "production_compilations": 0,
+  "seconds": 11.005934300017543,
+  "scope": "Every training/evaluation sealed endpoint/clock, actual model bytes, independent finite selection/pair/alias arithmetic. Physical and matrix qualification are separately documented finite checks; no new optimization or universal rational proof."
+}

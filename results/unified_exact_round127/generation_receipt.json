@@ -1,0 +1,27 @@
+{
+  "UTC": "2026-10-20T19:55:16.602902+00:00",
+  "recipe_commit": "ea5491743",
+  "input_SHA": {
+    "SM-C8-S": "cd0c04a81c0096147d1c365eb4da02ad85397bbef2987d0b13be00628a6b3be0",
+    "SM-B10-B": "32496a729183c1fa6c9837bb6a18455f8e60ea96fc8a8b803a2ddc5ae15aca8f"
+  },
+  "original_attempt": "fees/tiny_generate",
+  "generation_completed_before_reference_hash_failure": true,
+  "read_only_recovery_of_tiny": true,
+  "redraws": 0,
+  "Optimize": 0,
+  "inherited_checkout_repairs": [
+    {
+      "path": "reference/round122_paper_benchmark/PB-B20-S.txt",
+      "checkout_SHA_before": "3aa535245e6475f791d50d8be26e8165c6f83371d9dbebac76728b9cc36eebbc",
+      "restored_blob_SHA": "3aa535245e6475f791d50d8be26e8165c6f83371d9dbebac76728b9cc36eebbc",
+      "source_commit": "473594a56ae9f1730899111375b3210f437adec2"
+    },
+    {
+      "path": "reference/round122_paper_benchmark/PB-B35-B.txt",
+      "checkout_SHA_before": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+      "restored_blob_SHA": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+      "source_commit": "473594a56ae9f1730899111375b3210f437adec2"
+    }
+  ]
+}

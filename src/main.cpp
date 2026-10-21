@@ -25,6 +25,7 @@
 #include "Round105Decomposition.hpp"
 #include "Round106Events.hpp"
 #include "Round120NativeProof.hpp"
+#include "Round127Research.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
@@ -863,6 +864,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--global-gini-tree-mip-start-audit") opt.global_gini_tree_mip_start_audit_path = requireValue(i, argc, argv);
         else if (arg == "--gurobi-threads") opt.gurobi_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round127-mode") ebrp::round127().mode = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round127-p-parameters") ebrp::round127().parameter_file = requireValue(i, argc, argv);
         else if (arg == "--gurobi-presolve") opt.gurobi_presolve = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-hga-start") opt.gurobi_hga_start = parseBoolValue(requireValue(i, argc, argv));
         else if (arg == "--round112-ens-start-compact") opt.round112_ens_start_compact = true;
@@ -3523,6 +3526,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round96 route order requires isolated ENS-C Round83 gcap-frontier");
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
+    ebrp::round127Validate(opt);
     if(opt.round120_native_proof!="off" &&
         (opt.algorithm_preset!="research-round83-vds-equal-net-exchange" || opt.method!="gcap-frontier" ||
          opt.round98_state_service!="m-binary" || !opt.k1_am_sf_controller_enabled ||

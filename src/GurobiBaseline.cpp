@@ -1,4 +1,5 @@
 #include "GurobiBaseline.hpp"
+#include "Round127Research.hpp"
 
 #include "CanonicalCompactModel.hpp"
 #include "ControllingLeafScheduler.hpp"
@@ -3604,6 +3605,34 @@ public:
                 out.lp_objective_value = lp_objective;
                 out.lp_objective_value_available = true;
             }
+            // Save the actual first root LP point under one uniform E1 rule.
+            // This is observational: no extra Optimize, Start or bound enters
+            // the algorithm, and missing points remain unknown in analysis.
+            if (round127Mb() && request.leaf_id=="L0") {
+              try {
+                const auto path=request.native_log_path.parent_path().parent_path()/"round127_root_lp.csv";
+                if (!std::filesystem::exists(path)) {
+                    int count=0;
+                    const bool count_ok=api_.getintattr(model,GRB_INT_ATTR_NUMVARS,&count)==0 && count>0;
+                    std::vector<double> point(count_ok?count:0);
+                    if(count_ok && api_.getdblattrarray(model,GRB_DBL_ATTR_X,0,count,point.data())==0) {
+                        std::ofstream saved(path);saved<<std::setprecision(17)<<"name,value\n";
+                        bool complete=bool(saved);
+                        for(int j=0;complete && j<count;++j) {
+                            char* name=nullptr;
+                            complete=api_.getstrattrelement(model,GRB_STR_ATTR_VARNAME,j,&name)==0 && name;
+                            if(complete)saved<<name<<','<<point[j]<<'\n';
+                        }
+                        saved.close();complete=complete && bool(saved);
+                        std::ofstream status(path.parent_path()/"round127_root_lp_status.json");
+                        status<<"{\"complete\":"<<(complete?"true":"false")<<",\"columns\":"<<count<<",\"extra_Optimize\":0}\n";
+                    }
+                }
+              } catch(const std::exception&) {
+                // Optional explanatory point only. Analysis reports unknown;
+                // diagnostic I/O must not invalidate the native solve.
+              }
+            }
             if (request.capture_lp_primal_dual_evidence &&
                 !out.lp_primal_dual_variable_evidence.empty()) {
                 const int evidence_count = static_cast<int>(
@@ -4702,6 +4731,11 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             api.setdblparam(env, GRB_DBL_PAR_MIPGAP, 0.0);
         result.gurobi_mip_gap_abs_set_return_code =
             api.setdblparam(env, GRB_DBL_PAR_MIPGAPABS, 0.0);
+        if (round127().mode=="p" && !round127().parameter_file.empty()) {
+            if(api.setintparam(env,"MIPFocus",round127().mip_focus)!=0 ||
+               api.setintparam(env,"Cuts",round127().cuts)!=0)
+                throw std::runtime_error("round127_parameter_set_failed");
+        }
         int time_limit_rc = api.setdblparam(
             env, GRB_DBL_PAR_TIMELIMIT,
             std::max(0.001, options.solve_time_limit));
@@ -4757,6 +4791,18 @@ SolveResult solveGurobiBaseline(const Instance& instance,
                                 &result.gurobi_mip_gap_abs_effective);
         }
 
+        if(round127().mode=="p") {
+            int focus=0,cuts=-1,starts=0;
+            if(!model_env || api.getintparam(model_env,"MIPFocus",&focus)!=0 ||
+               api.getintparam(model_env,"Cuts",&cuts)!=0 ||
+               api.getintattr(model,"NumStart",&starts)!=0 ||
+               focus!=round127().mip_focus || cuts!=round127().cuts || starts!=0)
+                throw std::runtime_error("round127_parameter_or_cold_Start_readback_failed");
+            std::ofstream receipt(std::filesystem::path(options.out_path).parent_path()/"round127_parameters.json");
+            receipt<<"{\"MIPFocus\":"<<focus<<",\"Cuts\":"<<cuts<<",\"NumStart_before_optimize\":"<<starts
+                <<",\"loaded_after_presets\":true,\"authoritative_model_environment\":true}\n";
+            if(!receipt)throw std::runtime_error("round127_parameter_receipt_write_failed");
+        }
         auto getInt = [&](const char* attr, int& target) {
             return api.getintattr(model, attr, &target) == 0;
         };
