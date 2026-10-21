@@ -35,6 +35,9 @@ def account():
     value=dict(UTC=utc(),total_outer_limit=TOTAL_LIMIT,paid_outer_seconds=b['paid_outer_seconds'],remaining_outer_seconds=b['remaining_outer_seconds'],
         by_kind=b['by_kind'],preledger_upper_seconds=read(OUT/'initialization.json')['preledger_outer_upper_seconds'],
         actual_closed_child_lifetimes_and_separately_labelled_allowances=True,fees=records,post_archive_fee_facts=late,open_fees=[],
+        final_small_Git_and_PR_metadata_closure=dict(accounting='Covered within the existing 180-second conservative administrative allowance; not added a second time',
+            scope='Normal metadata commit/push, remote head and Draft/base readback, small receipt/PR-body writes; no solver, build, compression or recovery',
+            actual_final_Git_receipt_retained_outside_self_referential_commit=True),
         formal_nominal_seconds=15600,qualification_soft=1200,qualification_limit=3000,maximum_plan=19200,
         qualification_build_actual_seconds=b['by_kind'].get('build',0)+b['by_kind'].get('qualification',0),
         H_LP_MIP_seconds_are_nested_not_added_again=True,no_formal_outcome_retry=True)
@@ -58,6 +61,13 @@ def pr_body():
     if recovery.exists() and read(recovery)['status']=='PASS':
         r=read(recovery);lines.append('One anonymous empty-root recovery passed from science commit `'+r['science_commit']+'`, with '+str(r['files'])+' declared files and zero Optimize/native starts/compilation. Its exact finite scope and retained failures are in `public_restore_receipt.json`.')
     else:lines.append('The single anonymous empty-root recovery is performed only after this science commit is remotely readable; the actual receipt will be added as closeout metadata without rerunning the panel.')
+    cleanup=OUT/'cleanup_receipt.json'
+    if cleanup.exists() and read(cleanup)['status']=='PASS':
+        lines.append('Owned duplicate cleanup passed after preserving two cleanup-adapter failures (an unavailable PowerShell hash cmdlet and an empty-action receipt aggregation error). Only the owned duplicate ZIPs, successful restore expansion, reconstructible page images and byte-identical final-PDF temp copy were removed. Distinct earlier document exports and all authoritative raw/models, failed producers, native assets, old worktrees and user files remain. Earlier deletion passes have no saved volume delta, so no reclaimed-space amount is claimed. Final protection checks retained all 185805 indexed raw members at their recorded sizes, verified the six public carrier hashes, source/adapter seals and E0/E1/E2/DLL identities, and matched the original main HEAD and tracked dirty-status snapshot; no initial dirty-file content-hash baseline exists.')
+    accounting=OUT/'resource_accounting.json'
+    if accounting.exists():
+        a=read(accounting)
+        lines.append('Closed outer accounting is '+format(a['paid_outer_seconds'],'.3f')+' / '+str(a['total_outer_limit'])+' seconds, including separately labelled conservative setup/administrative allowances. Qualification plus build is '+format(a['qualification_build_actual_seconds'],'.3f')+' / 3000 seconds. H/LP/MIP times are nested and are not added again. The existing administrative allowance covers the final small normal Git/PR-metadata closure; it is not presented as a CPU measurement.')
     lines.append('Evidence entry point: `results/unified_exact_round128/final_report.md`; complete arms/pairs, support two-Seed table, component costs/differences, source seal, review actions and maintained reading PDF are beside it.')
     if (OUT/'review/final_independent_review.md').is_file():
         lines.append('A separate final executor recomputed all 17 directions and denominators from original receipts and checked the actual MD-R root/own Start, boundary sentinel difference, MS2 deletion, nonempty physical fleet, matched H/root scope and observed controller exposure. The exact finite scope and limitations are retained in `review/final_independent_review.md`; no full rational-matrix proof or external replication is claimed.')

@@ -1,0 +1,38 @@
+﻿{
+    "status":  "PASS",
+    "UTC":  "2026-10-21T18:21:21.5670167Z",
+    "actions":  [
+
+                ],
+    "failures_retained":  [
+
+                          ],
+    "distinct_prior_export_evidence_retained":  [
+                                                    {
+                                                        "path":  "E:\\codes\\ExactEBRP-work\\temp\\round128\\pdf\\attempt01\\reading.pdf",
+                                                        "reason":  "Distinct prior document-export evidence; retained with its source and logs"
+                                                    },
+                                                    {
+                                                        "path":  "E:\\codes\\ExactEBRP-work\\temp\\round128\\pdf\\attempt02\\reading.pdf",
+                                                        "reason":  "Distinct prior document-export evidence; retained with its source and logs"
+                                                    },
+                                                    {
+                                                        "path":  "E:\\codes\\ExactEBRP-work\\temp\\round128\\pdf\\attempt03\\reading.pdf",
+                                                        "reason":  "Distinct prior document-export evidence; retained with its source and logs"
+                                                    }
+                                                ],
+    "removed_logical_bytes":  0,
+    "E_free_before_bytes":  208266145792,
+    "E_free_after_bytes":  208266145792,
+    "observed_volume_free_delta_bytes":  0,
+    "volume_delta_is_observed_not_inferred_or_fully_attributed":  true,
+    "volume_values_apply_only_to_this_pass":  true,
+    "prior_failed_passes":  [
+                                "review/cleanup_attempt01.json",
+                                "review/cleanup_attempt02.json"
+                            ],
+    "prior_pass_deletions_have_no_saved_volume_delta_and_no_reclaimed_space_claim":  true,
+    "authoritative_raw_models_tables_failures_final_PE_original_E0_E1_DLL_retained":  true,
+    "old_worktrees_and_user_files_untouched":  true,
+    "git_gc_prune_repack_or_force_push":  false
+}

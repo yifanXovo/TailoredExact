@@ -28,7 +28,11 @@ The maintained manuscript/PDF retains the R125 model/cuts derivations and all R1
 
 All formal arms use E2 PE SHA256 `ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa` and unchanged Gurobi 13.0.2 DLL SHA256 `9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88`. No executable, DLL, license, credential, font file or external full paper is published. Current-round finite raw carriers, failed evidence, full source bindings and the recovery manifest are included.
 
-The single anonymous empty-root recovery is performed only after this science commit is remotely readable; the actual receipt will be added as closeout metadata without rerunning the panel.
+One anonymous empty-root recovery passed from science commit `58b0b2b6f6264e8c1bc08a61aed36e72f1769b7c`, with 394 declared files and zero Optimize/native starts/compilation. Its exact finite scope and retained failures are in `public_restore_receipt.json`.
+
+Owned duplicate cleanup passed after preserving two cleanup-adapter failures (an unavailable PowerShell hash cmdlet and an empty-action receipt aggregation error). Only the owned duplicate ZIPs, successful restore expansion, reconstructible page images and byte-identical final-PDF temp copy were removed. Distinct earlier document exports and all authoritative raw/models, failed producers, native assets, old worktrees and user files remain. Earlier deletion passes have no saved volume delta, so no reclaimed-space amount is claimed. Final protection checks retained all 185805 indexed raw members at their recorded sizes, verified the six public carrier hashes, source/adapter seals and E0/E1/E2/DLL identities, and matched the original main HEAD and tracked dirty-status snapshot; no initial dirty-file content-hash baseline exists.
+
+Closed outer accounting is 14139.892 / 25200 seconds, including separately labelled conservative setup/administrative allowances. Qualification plus build is 785.805 / 3000 seconds. H/LP/MIP times are nested and are not added again. The existing administrative allowance covers the final small normal Git/PR-metadata closure; it is not presented as a CPU measurement.
 
 Evidence entry point: `results/unified_exact_round128/final_report.md`; complete arms/pairs, support two-Seed table, component costs/differences, source seal, review actions and maintained reading PDF are beside it.
 

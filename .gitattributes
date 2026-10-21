@@ -2,6 +2,8 @@
 # Round128 protocol, driver and evidence identities preserve actual bytes.
 /scripts/round128* -text whitespace=cr-at-eol
 /results/unified_exact_round128/** -text whitespace=cr-at-eol
+# Preserve the failed cleanup child's stderr verbatim, including its blank error lines.
+/results/unified_exact_round128/review/cleanup_attempts/attempt01/stderr.txt -text -whitespace
 # Round127 frozen runtime/input bytes; two old benchmark blobs retain original LF.
 /scripts/round127* -text
 /include/Round127Research.hpp -text

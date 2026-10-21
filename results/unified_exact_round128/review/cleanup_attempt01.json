@@ -1,0 +1,23 @@
+{
+  "status": "FAILED_HASH_CMDLET_UNAVAILABLE_BEFORE_FINAL_RECEIPT",
+  "exit_code": 1,
+  "actual_outer_seconds": 20.78570080001373,
+  "launch_SHA": "68aa5db755d9410ef47b30e523f251a405a84ff7dcc5dc6b067b73c783918e4f",
+  "receipt_SHA": "f9b1783e48eaec611c2cadc9e902e29d57808218c712e4fdc1af44a2a992bd71",
+  "stderr_SHA": "368a216d2078603ef8c8cd670194cee568bda457af25619b9b42b44634c8dbbe",
+  "original_script_SHA": "8543b04801c5dee127c57d3cddce4f95e1baecaac4b2a780db861df10a48ca15",
+  "original_script_science_commit": "58b0b2b6f6264e8c1bc08a61aed36e72f1769b7c",
+  "retained_original_script": "E:\\codes\\ExactEBRP-work\\evidence\\round128\\cleanup_script_attempt01.ps1",
+  "owned_restore_exists_after": false,
+  "observed_restore_path": "E:\\codes\\ExactEBRP-work\\restore\\round128-public-58b0b2b6",
+  "all_six_complete_temp_ZIPs_still_present": true,
+  "rendered_images_still_present": 54,
+  "rendered_images_recorded": 54,
+  "final_PDF_retained": true,
+  "final_cleanup_receipt_written": false,
+  "deduction": "The owned restore path is absent after the guarded restore-deletion block. Other planned files remain because Get-FileHash was unavailable; the later unhandled PDF hash call ended the process. No before/after volume values were saved, so no reclaimed-space amount is claimed for this first pass.",
+  "no_new_recovery_or_solver": true,
+  "public_retained_producer": "review/cleanup_attempts/attempt01/producer.ps1",
+  "public_stdout": "review/cleanup_attempts/attempt01/stdout.txt",
+  "public_stderr": "review/cleanup_attempts/attempt01/stderr.txt"
+}
