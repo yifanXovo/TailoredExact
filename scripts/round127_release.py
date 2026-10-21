@@ -6,7 +6,7 @@ from round127_common import *
 import ast,re,zipfile
 
 BAD=[rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----',rb'gh[pousr]_[A-Za-z0-9]{30,}',rb'github_pat_[A-Za-z0-9_]{35,}',rb'(?i)(?:cookie|authorization)\s*:\s*(?:bearer\s+)?[A-Za-z0-9+/=_-]{24,}',
-     rb'sk-[A-Za-z0-9_-]{24,}',rb'AIza[0-9A-Za-z_-]{35}',rb'ya29\.[0-9A-Za-z_-]{24,}',
+     rb'(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{24,}',rb'AIza[0-9A-Za-z_-]{35}',rb'ya29\.[0-9A-Za-z_-]{24,}',
      rb'(?i)(?:WLSSecret|WLSAccessID|CloudSecretKey|CSAPISecret)\s*(?:=|:|to value)\s*[\"\x27]?[A-Za-z0-9_-]{16,}',
      rb'(?m)^KEY=[0-9a-fA-F]{20,}']
 FORBIDDEN={'.exe','.dll','.lic','.key','.pem','.pfx','.p12','.ttf','.otf','.woff','.woff2','.html'}
@@ -27,6 +27,27 @@ def pack():
     idle();target=OUT/'artifacts';target.mkdir(exist_ok=True);temporary=TEMP/'archives';temporary.mkdir(parents=True,exist_ok=True)
     assert all((OUT/stage).is_dir() for stage in ['training','main','tiny','core'])
     assert not (OUT/'raw_archive_manifest.json').exists(),'preserve existing packed evidence; inspect before any new packing'
+    stage_inputs={stage:[p for p in (OUT/stage).rglob('*') if p.is_file()]
+        for stage in ['training','main','tiny','core']}
+    support=[p for p in (OUT/'qualification').rglob('*') if p.is_file()]
+    support.extend(p for folder in (OUT/'fees').iterdir() if folder.is_dir() and (folder/'receipt.json').exists()
+        for p in folder.rglob('*') if p.is_file())
+    support.extend(p for p in (OUT/'source_E0').rglob('*') if p.is_file())
+    planned=set(support).union(*(set(files) for files in stage_inputs.values()))
+    raw_bytes=sum(p.stat().st_size for p in planned)
+    archive_upper=raw_bytes+2048*len(planned)+1024**3
+    # Allow full ZIPs, public pieces, Git materialization, one downloaded and
+    # joined recovery copy, the expanded raw tree and a separate loose margin.
+    additional_upper=6*archive_upper+raw_bytes+2*1024**3
+    free=shutil.disk_usage(WORK).free
+    write(OUT/'review/packing_space_check.json',dict(status='PASS' if free>=additional_upper else 'INSUFFICIENT_SPACE',
+        UTC=utc(),free_bytes_before_pack=free,planned_member_count=len(planned),
+        logical_raw_member_bytes=raw_bytes,conservative_archive_bytes=archive_upper,
+        conservative_additional_materialization_upper_bytes=additional_upper,
+        original_preliminary_peak_allowance_bytes=read(OUT/'initialization.json')['peak_increment_allowance_bytes'],
+        planning_only_not_a_measured_peak_or_volume_reclamation=True,
+        scope='Current finite carriers and one recovery campaign only; all authoritative raw remains in place.'))
+    assert free>=additional_upper,('insufficient prepack/recovery capacity',free,additional_upper)
     groups=[];scanned=0;index=[];tick=time.perf_counter()
     def create(name,files):
         nonlocal scanned
@@ -44,14 +65,11 @@ def pack():
                 pieces.append(dict(path=dst.relative_to(ROOT).as_posix(),bytes=len(data),SHA256=sha(dst)));n+=1
         return dict(name=complete.name,SHA256=sha(complete),compressed_bytes=complete.stat().st_size,uncompressed_bytes=raw,file_count=len(members),pieces=pieces,members=members,temporary_complete_archive=str(complete))
     for stage in ['training','main','tiny','core']:
-        groups.append(create(stage,[p for p in (OUT/stage).rglob('*') if p.is_file()]))
+        groups.append(create(stage,stage_inputs[stage]))
         for path in sorted((OUT/stage).glob('*/identity.json')):
             identity=read(path)
             for l in identity['launches']:
                 d=Path(l['destination']);index.append(dict(stage=stage,id=l['id'],method=l['method'],seed=l['seed'],repeat=l['repeat'],binary_layer=l['binary_layer'],raw_root=d.relative_to(ROOT).as_posix(),identity_SHA=sha(path),producer_receipt_SHA=sha(d/'producer_receipt.json'),result_SHA=sha(d/'result.json'),model_journal_SHA=sha(d/'observations.json')))
-    support=[p for p in (OUT/'qualification').rglob('*') if p.is_file()]
-    support.extend(p for folder in (OUT/'fees').iterdir() if folder.is_dir() and (folder/'receipt.json').exists() for p in folder.rglob('*') if p.is_file())
-    support.extend(p for p in (OUT/'source_E0').rglob('*') if p.is_file())
     groups.append(create('qualification_closed_fees_original_sources',support))
     write(OUT/'raw_archive_manifest.json',dict(schema='round127-finite-carriers-v1',archives=groups,raw_remains_in_place=True,no_PE_DLL_license_or_historical_carrier=True,live_pack_fee_and_future_receipts_excluded=True,seconds=time.perf_counter()-tick))
     write(OUT/'evidence/arm_index.json',dict(arms=index,formal_arms=sum(x['stage']!='training' for x in index),training_arms=sum(x['stage']=='training' for x in index)))
@@ -70,7 +88,7 @@ def script_closure(start):
     return seen
 def manifest():
     names=set();excluded={'training','main','tiny','core','qualification','fees','source_E0'}
-    mutable={'export_manifest.json','resource_accounting.json','RESUME.md','runtime_status.json','public_restore_receipt.json','cleanup_receipt.json','content_A_scan.json'}
+    mutable={'export_manifest.json','resource_accounting.json','RESUME.md','runtime_status.json','public_restore_receipt.json','public_restore_receipt_failure.json','cleanup_receipt.json','delivery_receipt.json','completion_audit.json','completion_audit.md','content_A_scan.json'}
     for p in OUT.rglob('*'):
         if not p.is_file():continue
         relative=p.relative_to(OUT)

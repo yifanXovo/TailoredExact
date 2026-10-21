@@ -1,7 +1,7 @@
 """One anonymous science-A recovery into a new E-root; never invokes a solver."""
 from pathlib import Path,PurePosixPath
 from concurrent.futures import ThreadPoolExecutor
-import argparse,datetime,hashlib,json,os,re,shutil,subprocess,sys,time,urllib.request,zipfile,zlib
+import argparse,datetime,gzip,hashlib,json,os,re,shutil,subprocess,sys,time,urllib.request,zipfile,zlib
 
 def digest(data):return hashlib.sha256(data).hexdigest()
 def file_digest(path):
@@ -33,7 +33,8 @@ def main():
                 assert remaining>1,'finite retrieval wall budget exhausted; preserve and resume the same root'
                 if args.transport=='windows-curl':
                     curl=Path(os.environ['WINDIR'])/'System32/curl.exe'
-                    command=[str(curl),'--fail','--location','--silent','--show-error','--max-time',str(min(90,remaining)),base+name]
+                    command=[str(curl),'--disable','--proto','=https','--proto-redir','=https',
+                        '--fail','--location','--silent','--show-error','--max-time',str(min(90,remaining)),base+name]
                     r=subprocess.run(command,capture_output=True,timeout=min(90,remaining)+3)
                     assert r.returncode==0,('verified Windows HTTPS transport',r.returncode,r.stderr.decode('utf-8',errors='replace'))
                     return r.stdout
@@ -70,6 +71,11 @@ def main():
         with ThreadPoolExecutor(max_workers=4) as pool:sizes=list(pool.map(fetch,manifest['files']))
         retrieval=time.perf_counter()-start;out=dest/'results/unified_exact_round127';raw_manifest=read(out/'raw_archive_manifest.json')
         extraction_start=time.perf_counter();extracted=[]
+        declared_files={row['path']:row for row in manifest['files']}
+        assert len(declared_files)==len(manifest['files'])
+        expected_archive_names={'training.zip','main.zip','tiny.zip','core.zip','qualification_closed_fees_original_sources.zip'}
+        assert len(raw_manifest['archives'])==len(expected_archive_names)
+        assert {archive['name'] for archive in raw_manifest['archives']}==expected_archive_names
         for archive in raw_manifest['archives']:
             joined=dest/'archive_transport'/archive['name'];joined.parent.mkdir(exist_ok=True)
             if not joined.exists():
@@ -81,8 +87,25 @@ def main():
             with zipfile.ZipFile(joined) as z:
                 infos=z.infolist();assert len(infos)==archive['file_count']
                 assert sum(i.file_size for i in infos)==archive['uncompressed_bytes']
-                expected={m['path']:m for m in archive['members']}
-                assert len(expected)==len(archive['members'])==len(infos)
+                if 'member_index' in archive:
+                    index=archive['member_index'];assert index['format']=='gzip-json-utf8-list-v1'
+                    expected_index_path='results/unified_exact_round127/artifacts/member_hashes/'+archive['name']+'.members.json.gz'
+                    assert index['path']==expected_index_path,'noncanonical or wrong-archive member-index path'
+                    declared=declared_files[expected_index_path]
+                    assert (declared['bytes'],declared['SHA256'])==(index['bytes'],index['SHA256'])
+                    index_rel=PurePosixPath(index['path'])
+                    assert not index_rel.is_absolute() and '..' not in index_rel.parts
+                    assert all(':' not in part and '\\' not in part for part in index_rel.parts)
+                    index_path=dest.joinpath(*index_rel.parts)
+                    assert index_path.resolve().is_relative_to(dest)
+                    payload=index_path.read_bytes()
+                    assert len(payload)==index['bytes'] and digest(payload)==index['SHA256']
+                    decoded=gzip.decompress(payload)
+                    assert len(decoded)==index['decoded_bytes'] and digest(decoded)==index['decoded_SHA256']
+                    members=json.loads(decoded);assert len(members)==index['members']
+                else:members=archive['members']
+                expected={m['path']:m for m in members}
+                assert len(expected)==len(members)==len(infos)
                 assert len({i.filename for i in infos})==len(infos) and set(expected)=={i.filename for i in infos}
                 for info in infos:
                     rel=PurePosixPath(info.filename)

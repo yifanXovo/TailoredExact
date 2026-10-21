@@ -1,0 +1,146 @@
+{
+  "schema": "round127-finite-carriers-compact-member-index-v2",
+  "archives": [
+    {
+      "name": "training.zip",
+      "SHA256": "c537cc98606617309d108b360560d25fba0be3ca93a28ec9ac807c1086688a33",
+      "compressed_bytes": 89679510,
+      "uncompressed_bytes": 777633955,
+      "file_count": 168998,
+      "pieces": [
+        {
+          "path": "results/unified_exact_round127/artifacts/training.zip.part01",
+          "bytes": 50331648,
+          "SHA256": "80ee6abfa7d4be1504d2809b1a14955d477d33365fefdeebc899e4ffad2f3676"
+        },
+        {
+          "path": "results/unified_exact_round127/artifacts/training.zip.part02",
+          "bytes": 39347862,
+          "SHA256": "aa6adc1e889f14a1f768c6b0d265ab8620b489d3a0fc4f43383d1afbfcb5b8ac"
+        }
+      ],
+      "temporary_complete_archive": "E:\\codes\\ExactEBRP-work\\temp\\round127\\archives\\training.zip",
+      "member_index": {
+        "path": "results/unified_exact_round127/artifacts/member_hashes/training.zip.members.json.gz",
+        "format": "gzip-json-utf8-list-v1",
+        "bytes": 7523026,
+        "SHA256": "117a2170662a1c2108add3b3c4fccf395393fdb105183e61bfe7e1c05fe7b296",
+        "decoded_bytes": 33844241,
+        "decoded_SHA256": "d6968bec17b6496fa68b56afe3944b65cc47864b266c61b32c68d4dd457ca1a9",
+        "members": 168998
+      }
+    },
+    {
+      "name": "main.zip",
+      "SHA256": "95311472996025d016a3e428575a6395d80a264c121ec5e283932f24be8bd7ec",
+      "compressed_bytes": 69591470,
+      "uncompressed_bytes": 671935496,
+      "file_count": 133818,
+      "pieces": [
+        {
+          "path": "results/unified_exact_round127/artifacts/main.zip.part01",
+          "bytes": 50331648,
+          "SHA256": "e0c33182fe0c9a7d0ed854afc170acd34d80a4f084d90cb8d3790ec41c517ed6"
+        },
+        {
+          "path": "results/unified_exact_round127/artifacts/main.zip.part02",
+          "bytes": 19259822,
+          "SHA256": "12e814437eba0493d63b9982967d36de604c82c947e08a67401afa5d120accf3"
+        }
+      ],
+      "temporary_complete_archive": "E:\\codes\\ExactEBRP-work\\temp\\round127\\archives\\main.zip",
+      "member_index": {
+        "path": "results/unified_exact_round127/artifacts/member_hashes/main.zip.members.json.gz",
+        "format": "gzip-json-utf8-list-v1",
+        "bytes": 5937990,
+        "SHA256": "a7fe9ab99d2c925f2372757444ecf38a2572d795755bb64ac9849613e8925890",
+        "decoded_bytes": 26220585,
+        "decoded_SHA256": "5ad6069c43ff474d3cb4b2155f66e5b519fff41ec878f9a4a4efdcf14ad6dc8e",
+        "members": 133818
+      }
+    },
+    {
+      "name": "tiny.zip",
+      "SHA256": "3d6313400f7d81a3962d699c0ea0208436f8851e9ab1c446c4c174cf1e4ebb87",
+      "compressed_bytes": 9198091,
+      "uncompressed_bytes": 73351641,
+      "file_count": 15296,
+      "pieces": [
+        {
+          "path": "results/unified_exact_round127/artifacts/tiny.zip",
+          "bytes": 9198091,
+          "SHA256": "3d6313400f7d81a3962d699c0ea0208436f8851e9ab1c446c4c174cf1e4ebb87"
+        }
+      ],
+      "temporary_complete_archive": "E:\\codes\\ExactEBRP-work\\temp\\round127\\archives\\tiny.zip",
+      "member_index": {
+        "path": "results/unified_exact_round127/artifacts/member_hashes/tiny.zip.members.json.gz",
+        "format": "gzip-json-utf8-list-v1",
+        "bytes": 694870,
+        "SHA256": "a707594f471003be8fe8309a192e134660a1a4f5bd0cafbed4ee05a6325f9520",
+        "decoded_bytes": 3037377,
+        "decoded_SHA256": "32d0912056883d383fd40421cc9803fed1363fa776559344ab23efdcae6f6e1c",
+        "members": 15296
+      }
+    },
+    {
+      "name": "core.zip",
+      "SHA256": "4a282cf616e181743c7ae8d73990b2b36f16b68e37dca0bd8fe43351150ff3a7",
+      "compressed_bytes": 98698419,
+      "uncompressed_bytes": 954326512,
+      "file_count": 174369,
+      "pieces": [
+        {
+          "path": "results/unified_exact_round127/artifacts/core.zip.part01",
+          "bytes": 50331648,
+          "SHA256": "70481de7fab2bc226a507a2a8be8830025c4f8918e3e55dd3715ca27d028a357"
+        },
+        {
+          "path": "results/unified_exact_round127/artifacts/core.zip.part02",
+          "bytes": 48366771,
+          "SHA256": "232532257638ad34657deb0c645dca20f21a9be886e2e2a64498947cfad7caab"
+        }
+      ],
+      "temporary_complete_archive": "E:\\codes\\ExactEBRP-work\\temp\\round127\\archives\\core.zip",
+      "member_index": {
+        "path": "results/unified_exact_round127/artifacts/member_hashes/core.zip.members.json.gz",
+        "format": "gzip-json-utf8-list-v1",
+        "bytes": 7740380,
+        "SHA256": "773e66d7a386bc7dbb9595a73e0179cdcd1b2bb3e010aec479fe0f1c4cc7c7ed",
+        "decoded_bytes": 34245000,
+        "decoded_SHA256": "5e4eaff2cd4ee5fec42d3b58768afdd8385824463cb4fdb608b74f540c27f66d",
+        "members": 174369
+      }
+    },
+    {
+      "name": "qualification_closed_fees_original_sources.zip",
+      "SHA256": "355090fec7bb4d9d645c224c6b2a89f156704f7dedf3cf406e4d9c52a6c12428",
+      "compressed_bytes": 25184479,
+      "uncompressed_bytes": 171717043,
+      "file_count": 27133,
+      "pieces": [
+        {
+          "path": "results/unified_exact_round127/artifacts/qualification_closed_fees_original_sources.zip",
+          "bytes": 25184479,
+          "SHA256": "355090fec7bb4d9d645c224c6b2a89f156704f7dedf3cf406e4d9c52a6c12428"
+        }
+      ],
+      "temporary_complete_archive": "E:\\codes\\ExactEBRP-work\\temp\\round127\\archives\\recovery01\\qualification_closed_fees_original_sources.zip",
+      "member_index": {
+        "path": "results/unified_exact_round127/artifacts/member_hashes/qualification_closed_fees_original_sources.zip.members.json.gz",
+        "format": "gzip-json-utf8-list-v1",
+        "bytes": 1202096,
+        "SHA256": "42a188dd9825ff6e2a77e0358fad4a6ef04639ce3e7935b9815d52e138ba55a8",
+        "decoded_bytes": 5306536,
+        "decoded_SHA256": "24128ce98887b68af3bc2070b1f0c0140e0c435e999ec4f4cd7fa8cf235c0a57",
+        "members": 27133
+      }
+    }
+  ],
+  "raw_remains_in_place": true,
+  "no_PE_DLL_license_or_historical_carrier": true,
+  "live_pack_fee_and_future_receipts_excluded": true,
+  "seconds": 125.49511130002793,
+  "recovery_of_failed_pack": "review/packaging_scanner_finding.json",
+  "member_index_note": "All original member paths, sizes and SHA256 values retained exactly; compressed index files are independently SHA-bound. Carrier ZIP bytes are unchanged."
+}

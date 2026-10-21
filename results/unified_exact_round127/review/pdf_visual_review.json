@@ -1,0 +1,878 @@
+{
+  "status": "PASS",
+  "UTC": "2026-10-21T04:06:36.025297+00:00",
+  "reviewer": "primary executor visual inspection; separate finite independent review recorded separately",
+  "PDF_SHA256": "005ccfb1133bf8655469c7908cd9cfcf7d230cdb92520b981a120c6edd8c25ff",
+  "manuscript_SHA256": "85207417e2b278292bfa0bf4c2d017e5716bb07ac6f2ccb5b8b17c8b841b5ad1",
+  "pages": 71,
+  "new_final_pages_actually_viewed": [
+    1,
+    2,
+    21,
+    24,
+    29,
+    30,
+    40,
+    41,
+    42,
+    44,
+    55
+  ],
+  "current_rendered_pages_pixel_identical_to_previously_viewed_pages": [
+    3,
+    4,
+    22,
+    23,
+    25,
+    26,
+    27,
+    28
+  ],
+  "previous_visual_receipt": "review/pdf_visual_review_attempt01.json",
+  "page_map": {
+    "attempt": "attempt04",
+    "PDF_SHA256": "005ccfb1133bf8655469c7908cd9cfcf7d230cdb92520b981a120c6edd8c25ff",
+    "PDF_bytes": 392901,
+    "pdfinfo_encoding": "cp936 Windows locale",
+    "pdftotext": "C:\\Users\\Administrator\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdftotext.EXE",
+    "pages": 71,
+    "text_SHA256": "328a9eff9d2bf7163a7aad60c7a96d554eef07dce51d4e3c21319edf2ff0ae12",
+    "page_map": [
+      {
+        "page": 1,
+        "first_lines": [
+          "A tailored exact method for static bicycle redistribution with",
+          "inventory-ratio dispersion"
+        ],
+        "labels": [
+          "1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .    3",
+          "2. Related work and contribution position . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      4",
+          "3. Problem definition and objective interpretation . . . . . . . . . . . . . . . . . . . . . . . . . . . .     7",
+          "4. Formulations and problem-specific strengthening . . . . . . . . . . . . . . . . . . . . . . . . . . .       8",
+          "5. Complete M-B algorithm and certificate logic . . . . . . . . . . . . . . . . . . . . . . . . . . . . .      11",
+          "6. Direct certification evidence on six fixed small problems . . . . . . . . . . . . . . . . . . . . . . .     14",
+          "7. Extended endpoint evidence and the known long-window proof boundary . . . . . . . . . . . . . .             29",
+          "8. Discussion, limitations and reproducibility . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .     40",
+          "9. Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .    41",
+          "Appendix A. Complete model, scoped strengthening and proof obligations                                            44",
+          "A.1 Sets, data and variables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   44"
+        ]
+      },
+      {
+        "page": 2,
+        "first_lines": [
+          "Appendix B. Executable method specification                                                                        55",
+          "B.1 Active entry and parameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .       55"
+        ],
+        "labels": [
+          "Appendix B. Executable method specification                                                                        55",
+          "Abstract"
+        ]
+      },
+      {
+        "page": 3,
+        "first_lines": [
+          "speedups. The results concern this fixed problem set and complete-method budget, without a universal runtime",
+          "or component-causality claim."
+        ],
+        "labels": [
+          "1. Introduction"
+        ]
+      },
+      {
+        "page": 4,
+        "first_lines": [
+          "complete production budgets, and reduce full certification cost where both certify? The fixed small-instance panel",
+          "provides the direct evaluation. Earlier endpoint experiments supply an extended-range comparison. A separate"
+        ],
+        "labels": [
+          "1. It gives a complete, source-faithful formulation and a problem-specific derivation of the inventory-",
+          "2. It organizes the complete integrated algorithm and its proof contract. Objective-preserving embeddings,",
+          "3. It reports a preregistered six-problem, twelve-arm small-instance optimality-certification comparison",
+          "Appendix A makes the formulation and mathematical premises explicit. Sections 3-5 describe the problem,",
+          "2. Related work and contribution position"
+        ]
+      },
+      {
+        "page": 5,
+        "first_lines": [
+          "Schuijbroek, Hampshire and van Hoeve (Schuijbroek et al. 2017) connect service-level inventory intervals with",
+          "multi-vehicle routing. Their routing objective is makespan, with given initial vehicle inventories and an artifi-"
+        ],
+        "labels": []
+      },
+      {
+        "page": 6,
+        "first_lines": [
+          "Table 1. Closest model distinctions. “Unknown” means not established by the accessed source. The three middle detailed comparisons were checked",
+          "against their full model sections. Table entries do not assert interchangeable feasible sets."
+        ],
+        "labels": []
+      },
+      {
+        "page": 7,
+        "first_lines": [
+          "The relevant standard mathematics is also explicit. Bilinear envelopes are attributed to the established global-",
+          "relaxation literature (McCormick 1976); their four inequalities are derived in Appendix A. An exact product with"
+        ],
+        "labels": [
+          "3. Problem definition and objective interpretation"
+        ]
+      },
+      {
+        "page": 8,
+        "first_lines": [
+          "ordered operations and complete durations. The parameter T is physical route time; the computational cap is a",
+          "separate resource."
+        ],
+        "labels": [
+          "4. Formulations and problem-specific strengthening"
+        ]
+      },
+      {
+        "page": 9,
+        "first_lines": [
+          "At integer selectors one state y=Y_i is active; all other q are zero and the active q equals g, proving Zi = gYi . This",
+          "is an application of discrete product disaggregation, not a new general product theorem. Its LP relaxation differs"
+        ],
+        "labels": [
+          "Appendix A.5.4 proves both branches and gives the exact shared 50000-support enumeration. Capacity limits"
+        ]
+      },
+      {
+        "page": 10,
+        "first_lines": [
+          "∑",
+          "dkj ≤                              pki .                          (M3)"
+        ],
+        "labels": [
+          "Appendix A.5.7 gives every coefficient, bound and derivation. The original objective cutoff is retained: at S=0"
+        ]
+      },
+      {
+        "page": 11,
+        "first_lines": [
+          "5. Complete M-B algorithm and certificate logic",
+          "5.1 Startup and maintained information"
+        ],
+        "labels": [
+          "5. Complete M-B algorithm and certificate logic"
+        ]
+      },
+      {
+        "page": 12,
+        "first_lines": [
+          "Algorithm 1 FrozenMB",
+          "Input: instance and physical parameters; frozen method settings; one process deadline"
+        ],
+        "labels": []
+      },
+      {
+        "page": 13,
+        "first_lines": [
+          "Algorithm 3 FinalizeAndUpdateCover",
+          "Input: ProcessLeaf outcome, current cover, own witness/epoch/runtime caches"
+        ],
+        "labels": []
+      },
+      {
+        "page": 14,
+        "first_lines": [
+          "is 10−7 . The implemented penalty closure test α + λP ≥ c − 10−9 can close a non-strict cutoff containing",
+          "a mathematical point at or just below c. It is a numerical closure, not proof of strict rational infeasibility. A"
+        ],
+        "labels": [
+          "6. Direct certification evidence on six fixed small problems"
+        ]
+      },
+      {
+        "page": 15,
+        "first_lines": [
+          "Table SC1. The entire fixed Seed0 panel. Pickup/drop are 60/60 seconds and lambda is .15 in every row. P denotes cold P-GRB. Each method occupies",
+          "the first position three times."
+        ],
+        "labels": []
+      },
+      {
+        "page": 16,
+        "first_lines": [
+          "Table SC1b. All six station-stock and weight totals. Depot placeholders are excluded. Weights are maximum-",
+          "normalized, not sum-normalized."
+        ],
+        "labels": []
+      },
+      {
+        "page": 17,
+        "first_lines": [
+          "are inherited; preparation is not moved outside the clock. A larger cap can change a path and is not treated as a",
+          "freely reusable prefix."
+        ],
+        "labels": []
+      },
+      {
+        "page": 18,
+        "first_lines": [
+          "Table SC3. Complete own endpoints. All signed gaps are retained. Full-precision CSV and source/call/model/fleet indices are part of the package.",
+          "Problem                  Method                   Own U                    Qualified L              Raw signed U-L           Certificate / evidence"
+        ],
+        "labels": []
+      },
+      {
+        "page": 19,
+        "first_lines": [
+          "Table SC4. All three clocks and certification costs (seconds). Unknown certification time is shown as unknown, never replaced by the cap.",
+          "Problem              Method               Cap                   T_produce            T_verify              T_total              T_cert"
+        ],
+        "labels": []
+      },
+      {
+        "page": 20,
+        "first_lines": [
+          "Table SC5. All six fixed paired outcomes. Positive P-minus-M-B means less M-B production time. Single-sided categories are qualitative censored",
+          "observations; failures are UNEVALUABLE rather than ordinary censoring."
+        ],
+        "labels": []
+      },
+      {
+        "page": 21,
+        "first_lines": [
+          "The fixed denominator is six problems and twelve arms. The pairs comprise 3 both-certified, 2 M-B-only, 0",
+          "P-only, 1 both-open and 0 unevaluable observations. M-B certifies 5/6 problems, including 5 nonzero and 0 zero"
+        ],
+        "labels": [
+          "6.4 Seed confirmation with the original executable",
+          "labels in Section 6.3 remain historical; Table R127-S reports the additional symmetric direction.",
+          "Table R127-S. E0 Seed1 certification and transition from the same six Seed0 problems. Times are complete"
+        ]
+      },
+      {
+        "page": 22,
+        "first_lines": [
+          "6.5 Tiny cases, repeated Seeds and absolute delay risk",
+          "Two once-generated geographic cases, SM-C8-S (V8/M1, shortage, Q=20, T=2400) and SM-B10-B (V10/M2,"
+        ],
+        "labels": [
+          "6.5 Tiny cases, repeated Seeds and absolute delay risk"
+        ]
+      },
+      {
+        "page": 23,
+        "first_lines": [
+          "Table R127-T. All tiny observations. Delta is MB minus P, only when both certify. Displayed values are rounded; directions and the >=10-second test",
+          "use original unrounded times."
+        ],
+        "labels": [
+          "Table R127-T. All tiny observations. Delta is MB minus P, only when both certify. Displayed values are rounded; directions and the >=10-second test"
+        ]
+      },
+      {
+        "page": 24,
+        "first_lines": [
+          "SM-C8-S: 6/6 both-certified, 0 P-only, 0 observed delays at least 10 seconds. Median delta -1.626 seconds (all",
+          "six pairs); repeated warning=no, all-six median warning=no. Per-Seed paired differences in seconds (repeat1,"
+        ],
+        "labels": [
+          "6.6 Grouped mechanism diagnostics on three known roles"
+        ]
+      },
+      {
+        "page": 25,
+        "first_lines": [
+          "Table R127-C. All predeclared core comparisons. Left is the evaluated method; ratios use the both-certified intersection only. PT aliases, when",
+          "applicable, are marked and not counted independently."
+        ],
+        "labels": [
+          "Table R127-C. All predeclared core comparisons. Left is the evaluated method; ratios use the both-certified intersection only. PT aliases, when"
+        ]
+      },
+      {
+        "page": 26,
+        "first_lines": [
+          "Table R127-M. Original root exposure and cost. Native seconds are diagnostics within the complete production clock. Unknown means unavailable",
+          "from the original run; no extra Optimize was used."
+        ],
+        "labels": [
+          "Table R127-M. Original root exposure and cost. Native seconds are diagnostics within the complete production clock. Unknown means unavailable"
+        ]
+      },
+      {
+        "page": 27,
+        "first_lines": [
+          "Actual family counts, nonzeros, H/fleet identities, native calls/nodes and first logged own-witness availability",
+          "are in mechanism_costs.csv. Saved original root-LP points are tested against actual deleted rows without a new"
+        ],
+        "labels": [
+          "Table R127-D. Component interpretation after checking actual exposure. Eligible roles require complete"
+        ]
+      },
+      {
+        "page": 28,
+        "first_lines": [
+          "Table R127-E. Checks at the saved original root-LP points. Delta L is deleted-model minus full-model root LP bound. Missing points remain unknown.",
+          "The W result fixes every surviving original variable and checks the actual serialized W block."
+        ],
+        "labels": [
+          "Table R127-E. Checks at the saved original root-LP points. Delta L is deleted-model minus full-model root LP bound. Missing points remain unknown."
+        ]
+      },
+      {
+        "page": 29,
+        "first_lines": [
+          "At these nine saved points, the deleted ordinary rows have no detected violation, all three MG W-extension",
+          "intervals are nonempty, and the root LP values agree within the recorded numerical tolerance. These observations"
+        ],
+        "labels": [
+          "6.7 A bounded, separately trained compact baseline",
+          "Table R127-Q. All six predeclared configurations. Each denominator is six training positions; the two per-Seed",
+          "roles. The per-role outcomes, including any reverse direction or valid open endpoint, remain in Table R127-C.",
+          "roles. The per-role outcomes, including any reverse direction or valid open endpoint, remain in Table R127-C.",
+          "7. Extended endpoint evidence and the known long-window proof boundary"
+        ]
+      },
+      {
+        "page": 30,
+        "first_lines": [
+          "865 stations. Source identities, station selections and overlap records remain in the input manifest. The sources",
+          "provide geographic station information; inventory landscapes and targets are constructed by the declared recipe."
+        ],
+        "labels": []
+      },
+      {
+        "page": 31,
+        "first_lines": [
+          "Table 2. Six new Seed0 problems. Stock labels describe the construction. Lambda is .15 and pickup/drop are 60/60 throughout.",
+          "Geometry /                                                                       lambda sum"
+        ],
+        "labels": []
+      },
+      {
+        "page": 32,
+        "first_lines": [
+          "Each new problem has four complete arms: cold P-GRB, ENS-C, M-B and MB-D1. Two additional fixed blocks",
+          "repeat PB-B35-B and PB-C50-S with solver Seed1. Thus there are six new problems, eight method/Seed blocks,"
+        ],
+        "labels": []
+      },
+      {
+        "page": 33,
+        "first_lines": [
+          "Table 3. All 32 published R122 arms. N denotes a nonzero numerical certificate and O a reliable open result, including the stated independent floor. U/L",
+          "and signed gap are role-specific; caps are production windows. Supplement S1 retains full precision and Tverify , Ttotal for every row. The displayed tiny"
+        ],
+        "labels": []
+      },
+      {
+        "page": 34,
+        "first_lines": [
+          "Table 4. Directed-pair classifications by denominator. All 48 individual records, including the nine LOSS/MIXED observations, are in Supplement S2.",
+          "Seed   Denominator       Pair          WIN   LOSS   MIXED   TIE   UNEVALUABLE"
+        ],
+        "labels": []
+      },
+      {
+        "page": 35,
+        "first_lines": [
+          "M-B/P and ENS-C/P each produce six WIN on the six new roles. These are the historical complete-endpoint rule",
+          "results, which combine certification and open-endpoint comparisons. They do not mean that all six problems"
+        ],
+        "labels": []
+      },
+      {
+        "page": 36,
+        "first_lines": [
+          "7.4 One known positive-objective long-window problem",
+          "The separate long-window study (TailoredExact project 2026a) concerns PB-C50-S only, with 50 stations, four"
+        ],
+        "labels": []
+      },
+      {
+        "page": 37,
+        "first_lines": [
+          "Table 5. One known-problem long-window study. All three endpoints are reliable and open. No row is a time to optimality.",
+          "Method          Cap s           U                L                Signed gap        Certified     T_produce        T_verify        T_total"
+        ],
+        "labels": []
+      },
+      {
+        "page": 38,
+        "first_lines": [
+          "Under the same fixed rule, M-B/P and ENS-C/P are WIN, and M-B/ENS-C is TIE. M-B improves U",
+          "over cold P by .005299933051160555 and raises L by .00763355251102632; the signed gap decreases by"
+        ],
+        "labels": []
+      },
+      {
+        "page": 39,
+        "first_lines": [
+          "Table 6. Actual final integrated-method covers. “Empty” excludes improvement under the applicable cutoff; it does not assert unrestricted physical",
+          "infeasibility."
+        ],
+        "labels": []
+      },
+      {
+        "page": 40,
+        "first_lines": [
+          "The low interval and its adjacent interval are",
+          "I0 = [0, .046542721937380925],"
+        ],
+        "labels": [
+          "8. Discussion, limitations and reproducibility"
+        ]
+      },
+      {
+        "page": 41,
+        "first_lines": [
+          "optimization operation. The available evidence reveals no new same-domain counterexample, but the policy",
+          "supplies no global accumulation theorem merely from the relative sizes of two tolerances."
+        ],
+        "labels": [
+          "9. Conclusion"
+        ]
+      },
+      {
+        "page": 42,
+        "first_lines": [
+          "M-B is the paper’s single proposed method. On the historical Round126 Seed0 V15/V20 panel it certifies 5/6",
+          "problems against cold P-GRB’s 3/6; all six paired outcomes and complete certification times are reported, includ-"
+        ],
+        "labels": [
+          "Appendix A. Supplement S is inherited unchanged from R124’s published arithmetic derivation; the present",
+          "References"
+        ]
+      },
+      {
+        "page": 43,
+        "first_lines": [
+          "Ikonen, Teemu J., Keijo Heljanko, and Iiro Harjunkoski. 2025. “A Generalized Disjunctive Programming Model",
+          "for the Static Bike Sharing Rebalancing Problem with Demand Intervals.” Optimization and Engineering 26:"
+        ],
+        "labels": []
+      },
+      {
+        "page": 44,
+        "first_lines": [
+          "Appendix A. Complete model, scoped strengthening and proof obligations",
+          "This appendix is the single maintained model specification for the manuscript. It transcribes the frozen"
+        ],
+        "labels": [
+          "Appendix A. Complete model, scoped strengthening and proof obligations",
+          "A.1 Sets, data and variables"
+        ]
+      },
+      {
+        "page": 45,
+        "first_lines": [
+          "A.2 Routing, service and physical resources",
+          "The complete routing core is"
+        ],
+        "labels": []
+      },
+      {
+        "page": 46,
+        "first_lines": [
+          "∑            drop  ∑",
+          "In (A8), let Pk =      i pki and Dk    = i dki . Since Rk = Pk − Dkdrop , original handling time is"
+        ],
+        "labels": []
+      },
+      {
+        "page": 47,
+        "first_lines": [
+          "A.4 Integrality, embedding and fairness propositions",
+          "Lemma A1 (implicit service integrality). With integer bi , Yi , (A2), (A5), and binary assignments/directions,"
+        ],
+        "labels": []
+      },
+      {
+        "page": 48,
+        "first_lines": [
+          "li ← max{li , ⌈Di (1 − max(0, B/ωi )) − 10−9 ⌉},                          ui ← min{ui , ⌊Di (1 + max(0, B/ωi )) + 10−9 ⌋}. (A19)",
+          "This is followed by one intersection with physical movement reachability. Write ti = τ0i + τi0 and"
+        ],
+        "labels": []
+      },
+      {
+        "page": 49,
+        "first_lines": [
+          "A.5.2 Physical conservation and activation (P1-P4)",
+          "The following rows hold on the full physical domain, independently of (I,c):"
+        ],
+        "labels": []
+      },
+      {
+        "page": 50,
+        "first_lines": [
+          "τ0π1 + τπ1 π2 + τπ2 π3 + τπ3 0 ,              π a permutation of (a, b, c).           (A25)",
+          "These are explicit finite formulas, not new shortest-route optimization calls. Metric shortcutting of a complete"
+        ],
+        "labels": []
+      },
+      {
+        "page": 51,
+        "first_lines": [
+          "nαS ≤ HΣ ≤ nβS;                 (n − 1)Hij ≤ nβS       (i < j).                   (A29)",
+          "This proves existence of an objective-preserving completion. It does not prove that an arbitrary inflated native"
+        ],
+        "labels": []
+      },
+      {
+        "page": 52,
+        "first_lines": [
+          "A + nλSP ≤ ncS.                                              (A33)",
+          "Since A ≥ 0, S̄ ≥ S gives A/(nS̄) ≤ A/(nS), so A + nS̄λP ≤ nS̄c when S̄ > 0. Equivalently A33 implies"
+        ],
+        "labels": []
+      },
+      {
+        "page": 53,
+        "first_lines": [
+          "receiver-source covers, Benders, pricing, D1, exhaustive subset duration, dynamic resource cuts, custom branch",
+          "priorities, S buckets, GS, AMF/RC, and old timed quanta are not part of this specification. Monitoring/target"
+        ],
+        "labels": []
+      },
+      {
+        "page": 54,
+        "first_lines": [
+          "In particular, the implemented guard α + λP ≥ c − 10−9 can serialize 0 ≤ −1 while a mathematical point",
+          "satisfies c − 10−9 ≤ F < c. Therefore it is numerical closure, not strict infeasibility of every arbitrarily small"
+        ],
+        "labels": [
+          "Appendix group                                              Frozen source authority / mapping"
+        ]
+      },
+      {
+        "page": 55,
+        "first_lines": [
+          "Appendix B. Executable method specification",
+          "This supplement defines the frozen M-B controller and its finite feasible startup H. Algorithm 1 and its two com-"
+        ],
+        "labels": [
+          "Appendix B. Executable method specification"
+        ]
+      },
+      {
+        "page": 56,
+        "first_lines": [
+          "INPUT, OUT, physical T, producer B and B_MINUS_6 take exactly their fixed table values. The existing super-",
+          "visor starts the complete production clock before admission, invokes this vector, and seals normal output; direct"
+        ],
+        "labels": []
+      },
+      {
+        "page": 57,
+        "first_lines": [
+          "parent bound) and their cutoff is refreshed. AM still reads the raw LP bound fields, not those inherited max-",
+          "ima. Missing/incomplete cache falls back to constructing and solving both children; it is never interpreted as"
+        ],
+        "labels": []
+      },
+      {
+        "page": 58,
+        "first_lines": [
+          "is created. Native bound callbacks can request termination when the qualified target is reached. Such a request",
+          "is not the native return itself."
+        ],
+        "labels": []
+      },
+      {
+        "page": 59,
+        "first_lines": [
+          "B.4.1 Certificate admission: native function and sealed evidence",
+          "The native certificate function requires valid complete coverage, all relevant leaves closed, all used bounds cer-"
+        ],
+        "labels": []
+      },
+      {
+        "page": 60,
+        "first_lines": [
+          "B.6 H encoding and top-level procedure",
+          "Physical routes are labelled lists 0, i1 , . . . , iq , 0 with one signed integer operation ai = pi − di ̸= 0 per sta-"
+        ],
+        "labels": []
+      },
+      {
+        "page": 61,
+        "first_lines": [
+          "for drop only (that drop replaces return unloading). The time test uses T+10−7 . For each amount, retain the",
+          "cheapest feasible travel placement, ties (vehicle,a,b), by a suffix scan of placement amount limits. Evaluate all"
+        ],
+        "labels": []
+      },
+      {
+        "page": 62,
+        "first_lines": [
+          "largest feasible q by these segments, then evaluates every positive integer up to it. The feasible amount sublevel",
+          "contains q=0 and is an interval, so no integer hole is skipped. Objective arithmetic updates the changed ratios,"
+        ],
+        "labels": []
+      },
+      {
+        "page": 63,
+        "first_lines": [
+          "B.10 Guided order descent and ties",
+          "For each route compute the travel-only executable prefix as above. Within it record first negative-operation"
+        ],
+        "labels": []
+      },
+      {
+        "page": 64,
+        "first_lines": [
+          "which must strictly improve the prior one. Failed admission retains the prior fleet. After an accepted neutral move,",
+          "run strict closure again. Stop on exact verified objective zero, common deadline, failed verification, or closure"
+        ],
+        "labels": []
+      },
+      {
+        "page": 65,
+        "first_lines": [
+          "Complete historical-result display supplement",
+          "This display is generated one way from the six unchanged R125 table authorities. Numeric display uses twelve"
+        ],
+        "labels": []
+      },
+      {
+        "page": 66,
+        "first_lines": [
+          "Table S1a. All 32 R122 physical/bound endpoints",
+          "Role              Seed              Method        U                L                   Signed gap           Tier"
+        ],
+        "labels": []
+      },
+      {
+        "page": 67,
+        "first_lines": [
+          "Table S1b. All 32 R122 complete clocks",
+          "Role              Seed              Method   Cap    T_produce       T_verify         T_total"
+        ],
+        "labels": []
+      },
+      {
+        "page": 68,
+        "first_lines": [
+          "Table S2. All 48 R122 directed comparisons",
+          "Role       Seed   Candidate   Control   Class   Severe"
+        ],
+        "labels": []
+      },
+      {
+        "page": 69,
+        "first_lines": [
+          "Role       Seed   Candidate   Control   Class   Severe",
+          "PB-B35-B   1      MB-D1       ENS-C     WIN     False"
+        ],
+        "labels": []
+      },
+      {
+        "page": 70,
+        "first_lines": [
+          "Table S3a. All three known R123 endpoints",
+          "Method    U                   L                      Signed gap         Tier"
+        ],
+        "labels": []
+      },
+      {
+        "page": 71,
+        "first_lines": [
+          "Method   Time (s)             U/last witness   L                Source",
+          "ENS-C    10800                unknown          unknown          last_prior_existing_"
+        ],
+        "labels": []
+      }
+    ],
+    "export_receipt": {
+      "exported": true,
+      "maintained_source": "manuscript.md + model_appendix.md + algorithm_appendix.md + references.bib; six immutable historical tables",
+      "intermediate_root": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf\\attempt02",
+      "PDF": "E:\\codes\\ExactEBRP-work\\worktrees\\round127\\results\\unified_exact_round127\\manuscript.pdf",
+      "bytes": 392901,
+      "passes": [
+        {
+          "pass_number": 1,
+          "exit_code": 0,
+          "seconds": 1.997510000015609
+        },
+        {
+          "pass_number": 2,
+          "exit_code": 0,
+          "seconds": 1.9751355999615043
+        },
+        {
+          "pass_number": 3,
+          "exit_code": 0,
+          "seconds": 2.022984700044617
+        }
+      ],
+      "warnings": [
+        "Package hyperref Warning: Option `colorlinks' has already been used,",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 388--404",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 404--406",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 406--428",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 1209--1225",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 1225--1227",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 1227--1252",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 1271--1289",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 1289--1291",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 1291--1315",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 1334--1350",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 1350--1352",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 1352--1365",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 1630--1648",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 1648--1650",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 1650--1673",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 1692--1710",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 1710--1712",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 1712--1732",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 1810--1826",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 1826--1828",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 1828--1847",
+        "Overfull \\hbox (1.50372pt too wide) in paragraph at lines 2357--2357",
+        "Overfull \\hbox (1.50372pt too wide) in paragraph at lines 2359--2359",
+        "Overfull \\hbox (1.50372pt too wide) in paragraph at lines 2361--2361",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 2403--2419",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 2419--2421",
+        "Overfull \\hbox (0.13023pt too wide) in alignment at lines 2421--2435",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 4392--4410",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 4410--4412",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 4412--4476",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 4494--4512",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 4512--4514",
+        "Overfull \\hbox (0.17322pt too wide) in alignment at lines 4514--4567"
+      ],
+      "seconds": 6.742735899984837,
+      "visual_review_pending": true,
+      "no_author_affiliation_or_funding_invented": true
+    },
+    "visual_inspection_completed": false
+  },
+  "render_receipt": {
+    "attempt": "attempt04",
+    "PDF_SHA256": "005ccfb1133bf8655469c7908cd9cfcf7d230cdb92520b981a120c6edd8c25ff",
+    "rendered": [
+      {
+        "page": 1,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page001.png",
+        "SHA256": "f7210fa29ba1df11bb79e445a142a82bd869f91cd58f03c34a5b715f8dc25427",
+        "bytes": 189822
+      },
+      {
+        "page": 2,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page002.png",
+        "SHA256": "cad82f3e44f283a62f456738a6f9b428e5e6096211cf537269844b2797963b59",
+        "bytes": 373166
+      },
+      {
+        "page": 3,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page003.png",
+        "SHA256": "768a67c4e4d0db5d91d5d0b9c47e7bdadd0230cdc934aaf2f938a6d6479e9ca9",
+        "bytes": 523817
+      },
+      {
+        "page": 4,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page004.png",
+        "SHA256": "490c49a4bcb914000d661016bde9fc5a696122ca3568a8da9d947c8166459718",
+        "bytes": 504271
+      },
+      {
+        "page": 21,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page021.png",
+        "SHA256": "e7bf5a0fa00520b8b057390364f4c90d610631df32e080b69cb46da29f495018",
+        "bytes": 489749
+      },
+      {
+        "page": 22,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page022.png",
+        "SHA256": "181bf6cf702ef817dd9d82f9cf5966707a5e8128072c2003f3bb2dff110bfc3e",
+        "bytes": 90185
+      },
+      {
+        "page": 23,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page023.png",
+        "SHA256": "772249463d51d5261dc1baed331bfa243d047cfcb5004024350c4d03d73502a7",
+        "bytes": 140219
+      },
+      {
+        "page": 24,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page024.png",
+        "SHA256": "16cb595e9467f8203cd0e5f844f8014cd112d3b122ea314e47754d8f0169db69",
+        "bytes": 516476
+      },
+      {
+        "page": 25,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page025.png",
+        "SHA256": "f359f65c3507738f539e03c7efbccfc8f5b337cf9c4cd00ed3a8182ce8a9b89a",
+        "bytes": 219990
+      },
+      {
+        "page": 26,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page026.png",
+        "SHA256": "6110b52f7d6c2583556351fe6cf77fbd539b4129802a2e968bfabd224a6e8ebf",
+        "bytes": 187487
+      },
+      {
+        "page": 27,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page027.png",
+        "SHA256": "861024272ffd9a3acd38f7fa02508051b3ab9de87bb50063def24d376cc0ed2f",
+        "bytes": 291126
+      },
+      {
+        "page": 28,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page028.png",
+        "SHA256": "faf9c2b177cede38a62bd24f618ca4fce490dc1d89f86d049a90a06c15d6ec05",
+        "bytes": 163648
+      },
+      {
+        "page": 29,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page029.png",
+        "SHA256": "161c3a1b4e84f7abe104ada3431059589147c7073c3eabe030d3a3b115f7ae5c",
+        "bytes": 457815
+      },
+      {
+        "page": 30,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page030.png",
+        "SHA256": "12e2e0f60c8e3a046babff497fa1d0fcda039b570abf966401f39804fc9e7ba6",
+        "bytes": 89381
+      },
+      {
+        "page": 40,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page040.png",
+        "SHA256": "4220f7936d30132ce938a747e24a9e7e7aef3a84ae040be85d640d6625899507",
+        "bytes": 498802
+      },
+      {
+        "page": 41,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page041.png",
+        "SHA256": "c40c50055285cd97f248ff0e1464a257ec721f62ed51c6e76e7e0418280ef796",
+        "bytes": 510126
+      },
+      {
+        "page": 42,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page042.png",
+        "SHA256": "db0efcf19717c48d8c4ec461e7d85e3c0dad8f4d85a1c5e166df2b563b197d56",
+        "bytes": 481546
+      },
+      {
+        "page": 44,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page044.png",
+        "SHA256": "b7d4d0909e5bb7e3477228bc3a1db78185327f244eeafde8703021fa23a88f69",
+        "bytes": 436022
+      },
+      {
+        "page": 55,
+        "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\pdf_review\\attempt04\\page055.png",
+        "SHA256": "0a48ec9a6c25dbc96eebfe42492fe2640d8b8885df3b986781160cfce23c0b68",
+        "bytes": 439271
+      }
+    ],
+    "visual_inspection_completed": false,
+    "judgment": "Rendering is not a visual PASS; inspect the returned page images and record actual observations."
+  },
+  "observations": [
+    "Latest title/contents, historical classification scope, signed tiny deltas, MD formula, compact Q table, discussion/conclusion and appendix starts are legible with complete margins and page numbers.",
+    "Final new result tables on pages23,25-28 are PNG-byte-identical to the actually inspected first export; adverse directions, open/blocked NAs and scientific-notation LP deltas are retained.",
+    "No observed actual clipping, overlap, broken table, missing glyph or unresolved reference on the changed/affected finite page set.",
+    "Landscape transitions intentionally isolate wide complete tables; unchanged mathematical derivations were not re-audited page by page."
+  ],
+  "scope": "Changed and affected pages only, not a fresh all-71-page mathematical proof audit",
+  "PDF_artifact_marker": "edit marker succeeded once immediately before first manuscript authoring"
+}

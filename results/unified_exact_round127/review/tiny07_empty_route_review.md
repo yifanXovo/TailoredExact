@@ -1,6 +1,6 @@
 # Independent tiny07 empty-route handoff and root-LP review
 
-Status: source/mathematical review ACCEPTED. The full original-producer reader has passed according to the parent's recovery receipt. The first metered bounded independent attempt stopped in this reviewer's legacy-source byte-baseline guard before the physical/proof check; the corrected next attempt remains pending. Final independent signoff requires its PASS.
+Status: RESOLVED / PASS. The original-producer full reader passed, and the metered bounded independent `empty02` receipt independently reports PASS, `full_reader_recovered=true`, and `final_qualification_pending=false`. The failed source-baseline attempt remains preserved.
 
 The fixed arm is E0 MB, `tiny/07_SM-B10-B_S0_R1`, M=2 with Q=[15,25]. Its sealed producer reports T_produce=0.8141223039710894 seconds. H exchange initial/final contain `routes=[]`; the own call0 startup and final result contain vehicle 0 and vehicle 1, each `nodes=[0,0], operations=[]`. Omitting these unused vehicles and retaining them explicitly describe the same empty vehicle-assigned fleet: no station service or travel, no load or stock change, and the same physical F/G/P and final inventory. The legacy route hash encodes explicit route entries, so its old comparison rejects these equivalent serializations.
 
@@ -14,16 +14,24 @@ This disposition preserves the existing distinction: the numerical cutoff-comple
 
 Prepared implementation: `review/tiny07_empty_route_check.py`. It loads only the reviewer's own standard-library model/physical/proof helpers, independently replays initial/final/startup fleets, reproduces the original hash mismatch, probes the actual isolated proxy with positive and invalid/changed-nonempty cases, binds the preserved failure and original production, and checks the complete actual root-LP proof. It does not invoke the production verifier or Optimize. It writes a new unique attempt directory and preserves failed attempts.
 
-The parent should meter this complete command as verification after its existing-producer full verification finishes:
+The parent metered the corrected complete command as verification after its existing-producer full verification finished:
 
 ```
 python -B results/unified_exact_round127/review/tiny07_empty_route_check.py --attempt empty02 --fee-label tiny07_empty_route_independent_02 --require-full-reader
 ```
 
-The corrected command is prepared and has not been run. The all-54 final audit remains pending completion of the formal panel; manuscript/PDF review remains separate.
+The corrected command passed with outer verification fee 0.7000437000533566 seconds. Its receipt is `tiny07_empty_route_attempts/empty02/receipt.json`, SHA256 `d9c8eba45ef70fd5318c57b262f16bfdc39390762c21094adcda53434fe1e90c`. The all-54 final audit remains pending completion of the formal panel; manuscript/PDF review remains separate.
 
 ## Reviewer baseline-guard closeout
 
 The preserved metered `empty01` receipt reports `legacy helper changed: round73_seed_diagnostic.py` and fee 0.2061415 seconds. This was this reviewer's incorrect assumption that every working-tree helper byte string equals its committed Git blob. Source/metadata inspection shows no source diff between the actual R126 base `473594a56ae9f1730899111375b3210f437adec2`, selection commit `44ffd46367478dd784cc6a9595bfd3df174be8a7`, and the current working tree. Git reports `i/lf w/crlf` for round73_seed_diagnostic.py, round120_evidence.py and round122_evidence.py; these files have unspecified text/eol/filter attributes, whereas round100_campaign.py is explicitly `-text` and remained byte-identical. The three CRLF files have respectively 168, 131 and 148 CRLF pairs. Their bytes are exactly equal to the respective committed LF blobs after replacing only those CRLF pairs with LF. There is no R126/version/path mismatch and no statement or other byte change.
 
 The corrected guard first requires the selection and actual R126 Git blobs to be byte-identical. It then records each actual absolute path and raw SHA, both committed-blob SHAs, CRLF counts and canonical-LF SHA, and permits only exact CRLF-to-LF equality with no remaining carriage returns. It does not normalize other whitespace, skip a helper, edit source, or rewrite any scientific raw file. This matches Python's source newline handling while preserving every actual byte identity in the next receipt. The first failed script SHA, attempt and fee remain unchanged and available.
+
+## Completed focused evidence and recovery clocks
+
+The inspected compact `empty02` receipt records two accepting proxy cases and eight rejecting cases for invalid/duplicate vehicle labels or changed nonempty routes/quantities. Its independent physical replays find the same F/G/P/Y for the initial, final and explicit-startup empty fleets. The actual proof chain contains exactly one successful complete optimal LP, no MIP, one returned original-model proof, and one L0 leaf covering `[0,0.5358910752996684]`. That leaf's independently supported lower bound and physical U are both 0.5358910752996684; its provenance is the original nonnegative floor plus the complete LP relaxation, with `complete_lp_bound_cannot_improve_verified_incumbent` closure. The receipt confirms original producer/seal, native PID, H and all required raw outputs are unchanged, and preserves actual raw plus canonical source identities.
+
+The original-reader recovery reports T_verify=650.1793865000363 seconds and T_total=650.9935088040074 seconds, honestly retaining the failed-verification/recovery delay. The independent bounded check validates their actual monotonic split arithmetic against the sealed producer. Once qualified, certification uses the unchanged complete T_produce=0.8141223039710894 seconds; no recovery time is removed from T_total and no cap is substituted for certification time.
+
+The original failed audit is retained in `tiny07_failure_snapshot`. The first read-only recovery's exclusive-create conflict is retained under `tiny07_readonly_verification_attempts/attempt01` with fee 0.4338344 seconds; only known post-seal derived JSON was preserved/moved before the successful original-producer reader recovery `tiny07_readonly_verify_02` (0.4355065 seconds). The independent `empty01` line-ending baseline failure and its 0.2061415-second fee remain under `tiny07_empty_route_attempts/empty01`. These engineering attempts do not represent native reruns or scientific method changes. Formal continuation may admit only positions that have not started; the focused correction supplies no new model, parameter, Start or native solution.

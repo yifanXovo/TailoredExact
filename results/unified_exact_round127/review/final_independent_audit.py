@@ -115,10 +115,30 @@ def selection_bindings():
              "review/selection_independent_review.md", "review/selection_independent_receipt.json",
              "review/selection_independent_audit.py"]
     bindings = {}
+    manifest_EOL_binding = None
     for name in names:
         relative = "results/unified_exact_round127/" + name
         committed = git("show", SELECTION_COMMIT + ":" + relative)
-        require(digest(committed) == sha(OUT / name), "selection-era bytes changed: " + name)
+        if digest(committed) != sha(OUT / name):
+            # This one pre-existing manifest was committed with LF, while its
+            # original admitted working bytes are CRLF. Do not rewrite it or
+            # relax exact binding for the selected file/PRM/other evidence.
+            require(name == "experiment_manifest.json", "selection-era bytes changed: " + name)
+            actual = (OUT / name).read_bytes()
+            canonical, baseline = actual.replace(b"\r\n", b"\n"), committed.replace(b"\r\n", b"\n")
+            require(b"\r" not in canonical and b"\r" not in baseline and canonical == baseline
+                    and json.loads(actual) == json.loads(committed), "selection-era manifest differs beyond CRLF/LF")
+            first_identity_path = OUT / "training/01_S12_S2_q0/identity.json"
+            committed_selection = json.loads(git("show", SELECTION_COMMIT + ":results/unified_exact_round127/tuning_selection.json"))
+            require(sha(first_identity_path) == committed_selection["all_rows"][0]["identity_SHA"]
+                    and read(first_identity_path)["prereg_sha256"] == sha(OUT / name),
+                    "actual manifest bytes not anchored by preselection training identity")
+            manifest_EOL_binding = dict(actual_SHA=sha(OUT / name), selection_commit_blob_SHA=digest(committed),
+                canonical_LF_SHA=digest(canonical), worktree_CRLF=actual.count(b"\r\n"), commit_CRLF=committed.count(b"\r\n"),
+                canonical_text_and_JSON_equal=True, actual_manifest_bytes_unchanged_since_preselection=True,
+                training_identity_SHA=sha(first_identity_path),
+                training_identity_anchor="first training identity SHA in byte-exact committed tuning_selection.json; its prereg_sha256 binds actual CRLF manifest",
+                source_or_evidence_rewritten=False, other_selection_files_still_byte_exact=True)
         bindings[name] = sha(OUT / name)
     earlier = read(OUT / "review/selection_independent_receipt.json")
     selected = read(OUT / "tuning_selection.json")
@@ -133,7 +153,7 @@ def selection_bindings():
         require(read(OUT / "experiment_manifest.json")[name] == expected, "layer identity: " + name)
     epoch = int(git("show", "-s", "--format=%ct", SELECTION_COMMIT).decode().strip())
     require(git("merge-base", "--is-ancestor", SELECTION_COMMIT, "HEAD") == b"", "selection commit ancestry")
-    return dict(commit=SELECTION_COMMIT, commit_unix=epoch, bindings=bindings,
+    return dict(commit=SELECTION_COMMIT, commit_unix=epoch, bindings=bindings, manifest_git_EOL_binding=manifest_EOL_binding,
                 independent_all36_review_reused=True, training_rerun=False, selected="q2", selected_prm_SHA=SELECTED_PRM_SHA)
 
 
@@ -275,7 +295,93 @@ def read_arm(group, launch, arm, identity, selection):
         absolute_gap=abs(arm["U"] - arm["L"]))
 
 
+def closed_producing_fees(group, selection):
+    """Exact registered wrapper fees, not an any-time/any-PID recovery fallback.
+
+    Only the documented tiny07 resume has two producing wrapper candidates.
+    A fee is a logical parent-admission marker, never an invented wrapper birth.
+    All original/failed receipts remain separately bound and are not rewritten.
+    """
+    prefix = group["name"].replace("/", "_")
+    labels = [prefix]
+    if group["name"] == "tiny/07_SM-B10-B_S0_R1":
+        labels.append(prefix + "_read_recovery01")
+    require({p.name for p in (OUT / "fees").glob(prefix + "*") if p.is_dir()} == set(labels),
+            "unexpected/missing producing-wrapper fee attempt: " + group["name"])
+    expected_kind = {"main": "formal_E0_main", "tiny": "formal_E0_tiny", "core": "formal_E1_core"}[group["stage"]]
+    fees = []
+    for label in labels:
+        d = OUT / "fees" / label
+        require(all((d / n).is_file() for n in ["launch.json", "PID.json", "receipt.json"]), "producing-wrapper fee is not closed: " + label)
+        launch, pid, end = (read(d / n) for n in ["launch.json", "PID.json", "receipt.json"])
+        command = launch["command"]
+        require(launch["kind"] == expected_kind and command == pid["command"]
+                and len(command) == 4 and command[1:] == ["-B", "scripts/round127_campaign.py", group["name"]]
+                and Path(command[0]).resolve() == Path("D:/msys64/ucrt64/bin/python.exe").resolve()
+                and Path(launch["cwd"]).resolve() == ROOT.resolve(), "exact campaign wrapper fee command: " + label)
+        require(type(pid["pid"]) is int and type(pid["parent_pid"]) is int
+                and pid["launched_unix"] == end["start_unix"]
+                and selection["commit_unix"] < pid["launched_unix"] < end["end_unix"]
+                and end["exit_observed"] is True and end["nested_seconds_added"] is False
+                and abs(end["end_unix"] - end["start_unix"] - end["outer_seconds"]) < .05,
+                "actual closed parent-admission/exit interval: " + label)
+        expected_exit = 1 if group["name"] == "tiny/07_SM-B10-B_S0_R1" and label == prefix else 0
+        require(end["exit_code"] == expected_exit, "unregistered producing-wrapper failure/recovery: " + label)
+        fees.append(dict(label=label, wrapper_pid=pid["pid"], parent_pid=pid["parent_pid"],
+            parent_admission_unix=pid["launched_unix"], end_unix=end["end_unix"], exit_code=end["exit_code"],
+            launch_SHA=sha(d / "launch.json"), PID_SHA=sha(d / "PID.json"), receipt_SHA=sha(d / "receipt.json"),
+            failed_fee_retained=end["exit_code"] != 0))
+    require(all(a["end_unix"] <= b["parent_admission_unix"] for a, b in zip(fees, fees[1:])), "nonoverlapping registered producing-wrapper attempts")
+    return fees
+
+
+def bind_producing_fee(group, launch, arm, fees):
+    producer, native = arm["_producer"], arm["_origin"]
+    matches = [f for f in fees if f["wrapper_pid"] == native["parent_pid"]
+        and f["parent_admission_unix"] <= producer["t0_unix"] <= native["actual_creation_unix"]
+        <= producer["t_produce_unix"] <= f["end_unix"]]
+    require(len(matches) == 1, "native-parent PID and sealed production interval do not identify exactly one registered wrapper")
+    fee = matches[0]
+    first = launch["number"] == 1
+    require(producer["first_arm_includes_wrapper_creation_and_import"] is first,
+            "first-arm wrapper creation/import clock flag or later-arm admission flag changed")
+    # Frozen campaign source maps logical arm 1 back to OS wrapper birth through
+    # process_origin(), thereby including imports; later arms tick before input/
+    # PE admission checks. The parent fee start remains a separate marker.
+    require(producer["t0_unix"] < native["actual_creation_unix"], "producer clock must begin before native process creation")
+    recovery = group["name"] == "tiny/07_SM-B10-B_S0_R1"
+    if recovery:
+        expected = group["name"].replace("/", "_") + ("" if launch["method"] == "MB" else "_read_recovery01")
+        require(fee["label"] == expected, "tiny07 MB/P must bind original/resumed actual wrappers respectively")
+    verify_after_original_exit = arm["_total"]["t_verified_unix"] > fee["end_unix"]
+    if verify_after_original_exit:
+        require(recovery and launch["method"] == "MB" and fee["failed_fee_retained"],
+                "verification extends beyond its producing wrapper without the registered tiny07 recovery")
+        focused = read(OUT / "review/tiny07_empty_route_attempts/empty02/receipt.json")
+        saved = read(OUT / "review/tiny07_failure_snapshot/preservation.json")
+        require(sha(OUT / "review/tiny07_empty_route_attempts/empty02/receipt.json")
+                == "d9c8eba45ef70fd5318c57b262f16bfdc39390762c21094adcda53434fe1e90c"
+                and focused["status"] == "PASS" and focused["full_reader_recovered"] is True
+                and focused["final_qualification_pending"] is False
+                and focused["original_T_produce"] == producer["T_produce"]
+                and saved["producer_receipt_SHA"] == sha(Path(arm["_path"]) / "producer_receipt.json")
+                and saved["producer_seal_SHA"] == sha(Path(arm["_path"]) / "producer_seal.json")
+                and saved["original_native_creation"] == native
+                and saved["failed_fee_receipt"] == read(OUT / "fees" / fee["label"] / "receipt.json"),
+                "focused recovered-producer identity/qualification and retained original failed fee")
+    return dict(group=group["name"], method=launch["method"], number=launch["number"], **fee,
+        native_pid=native["pid"], native_actual_creation_unix=native["actual_creation_unix"],
+        producer_start_unix=producer["t0_unix"], producer_seal_unix=producer["t_produce_unix"],
+        first_arm_clock_scope="OS wrapper birth with imports per frozen process_origin source" if first else "logical later-arm admission before input/PE checks",
+        original_T_produce=producer["T_produce"], original_T_verify=arm["T_verify"], original_T_total=arm["T_total"],
+        verification_extends_beyond_original_producing_fee=verify_after_original_exit,
+        clocks_or_cap_changed=False, fee_parent_prefix_added_to_production=False)
+
+
 def collect(groups, selection):
+    fee_bindings, retained_fees = [], []
+    frozen_runner_SHA = digest(git("show", SELECTION_COMMIT + ":scripts/round127_campaign.py"))
+    require(sha(ROOT / "scripts/round127_campaign.py") == frozen_runner_SHA, "formal runner/process_origin/admission clock source changed")
     for stage in ["main", "tiny", "core"]:
         expected = {g["name"].split("/", 1)[1] for g in groups if g["stage"] == stage}
         actual = {p.name for p in (OUT / stage).iterdir() if p.is_dir()}
@@ -289,16 +395,13 @@ def collect(groups, selection):
                 and len(arms) == len(launches), "actual frozen group method order/count")
         require(len({a["method"] for a in arms}) == len(arms), "duplicate actual arm")
         by = {a["method"]: a for a in arms}
-        fee = OUT / "fees" / group["name"].replace("/", "_")
-        launch_fee, marker, fee_end = (read(fee / x) for x in ["launch.json", "PID.json", "receipt.json"])
-        require(launch_fee["command"] == marker["command"] and marker["command"][-1] == group["name"]
-                and marker["launched_unix"] == fee_end["start_unix"]
-                and selection["commit_unix"] < marker["launched_unix"], "original fee/selection chronology")
+        require(identity["runner_sha256"] == frozen_runner_SHA, "actual group runner/import/admission timing source binding")
+        fees = closed_producing_fees(group, selection)
+        retained_fees.extend(fees)
         previous = None
         for l in launches:
             a = read_arm(group, l, by[l["method"]], identity, selection)
-            require(marker["launched_unix"] <= a["_producer"]["t0_unix"]
-                    and a["_producer"]["t_produce_unix"] <= fee_end["end_unix"], "actual group clock enclosure")
+            fee_bindings.append(bind_producing_fee(group, l, a, fees))
             if previous:
                 require(previous["_total"]["t_verified_perf"] <= a["_producer"]["t0_perf"], "serial complete arms")
             previous = a
@@ -313,6 +416,8 @@ def collect(groups, selection):
     require(all(len(v) == 1 for v in cold.values()), "same-input P/PT cold model identity")
     return dict(actual_arms=54, per_stage={"main": 12, "tiny": 24, "core": 18},
         unique_native_creations=54, same_input_cold_groups=len(cold), all_54_split_clocks_caps_qualified=True,
+        actual_producing_fee_bindings=fee_bindings, registered_wrapper_fees=retained_fees,
+        failed_original_group_fee_retained=True, broad_wrapper_or_clock_fallback=False,
         E1_direct_NumStart0_readbacks=6,
         E0_cold_scope="fresh model/single Optimize, no requested/submitted/loaded Start; old PE does not serialize a direct NumStart attribute")
 

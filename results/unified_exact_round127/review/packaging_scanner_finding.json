@@ -1,0 +1,25 @@
+{
+  "status": "CONFIRMED_PUBLIC_CLI_SUBSTRING_FALSE_POSITIVE",
+  "UTC": "2026-10-21T05:03:33.422210+00:00",
+  "source": "results/unified_exact_round127/source_E0/src/main.cpp",
+  "source_SHA256": "38aa9744ded25d494748a6dbb371db3d266b42081f173ef6f5bb723e1f758b5d",
+  "public_option": "--route-mask-support-duration-pruning",
+  "legacy_match_offsets": [
+    7034,
+    64771
+  ],
+  "legacy_match_SHA256": "b2eeb1715c36296231973c7a8bb40b418b440d96a790badeec98c5c18fecf612",
+  "scanner_correction": "Negative lookbehind excludes a match embedded in an ASCII identifier or CLI option; independently delimited sk-prefixed tokens remain detected.",
+  "synthetic_delimiter_positive_checks": 6,
+  "public_option_negative_checks": 1,
+  "old_attempt": "fees/finite_carrier_pack_01",
+  "old_fee": {
+    "exit_code": 1,
+    "outer_seconds": 2617.5073867999017,
+    "start_unix": 1792555792.4441395,
+    "end_unix": 1792558409.9511786,
+    "exit_observed": true,
+    "nested_seconds_added": false
+  },
+  "no_source_or_scientific_evidence_changed": true
+}
