@@ -1,0 +1,3533 @@
+{
+  "status": "PASS",
+  "science_commit": "58b0b2b6f6264e8c1bc08a61aed36e72f1769b7c",
+  "destination": "E:\\codes\\ExactEBRP-work\\restore\\round128-public-58b0b2b6",
+  "export_manifest_SHA": "5b0366a844e411be24ebc8f44565f5225d09f19b0d97832541ad1a6665450cb5",
+  "files": 394,
+  "archives": [
+    {
+      "name": "formal_group01.zip",
+      "members": 43959,
+      "SHA256": "ca81de6aa2fd634b856eb61ed70859c9db5cc1e1ced28cb987902200178fe4e3"
+    },
+    {
+      "name": "formal_group02.zip",
+      "members": 76204,
+      "SHA256": "129af6db7187939e6057e60d1e38230bd79951df43f544afdd9f914479cebe27"
+    },
+    {
+      "name": "formal_group03.zip",
+      "members": 1128,
+      "SHA256": "8e2a61410f3a91ac2956bd50cdf6bdfcecee53147c7bc2d6d29a319897b56c5d"
+    },
+    {
+      "name": "formal_group04.zip",
+      "members": 2313,
+      "SHA256": "a3dd22adf1235546755707bb80ac94bb1379d08b4031cec56971d266e41665d6"
+    },
+    {
+      "name": "formal_group05.zip",
+      "members": 37192,
+      "SHA256": "b3eb4a5bf073c9017a26fc7831841e43b4548ff5198a2e53a57d41c693a79da5"
+    },
+    {
+      "name": "qualification_closed_fees_parent_sources.zip",
+      "members": 25009,
+      "SHA256": "b7f8187431ed2545cc5877b0093dc9c37091dc6a5d5eb6437a543150e2d0d53f"
+    }
+  ],
+  "portable_check": {
+    "status": "PASS",
+    "actual_producer_seals": 16,
+    "actual_call_model_hashes": 53,
+    "comparisons": 17,
+    "distinct_inputs": 3,
+    "all_17_directions_independently_recomputed": true,
+    "all_actual_final_fleets_physically_replayed": true,
+    "representative_MD_R_Start_and_own_fleet": [
+      {
+        "method": "MD-R",
+        "group": 1,
+        "complete_actual_Start_audit": [
+          {
+            "start_path": "results/unified_exact_round128/campaign/01_SC-C15-S_S0/raw/03_SC-C15-S_S0_R1_MD-R/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+            "start_sha256": "204a9cd73a0ae0172f9c55405b5b6d68dfffe58985c43477324d256ce3a3fe90",
+            "vector_sha256": "a6b472d449ab299bec7ba56a50ea6fbfd4ca59029fceb7ef9c8d7a3b8eb306e0",
+            "model_sha256": "f5eb565e62369104017af87ad255aac727f8e6a34ca5b4f90021f8738b5692a2",
+            "maximum_absolute_residual": 1.1102230246251565e-16,
+            "mode": "m-binary",
+            "rows": 5054,
+            "columns": 2083,
+            "objective": 0.5627184431151906,
+            "actual_quantity_type": "C",
+            "direction_columns": 30,
+            "per_column_restored_type_checked": true,
+            "ordered_native_columns_checked": true,
+            "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+          }
+        ],
+        "own_H_physical": {
+          "G": 0.2127185490242815,
+          "P": 2.333332627272727,
+          "F": 0.5627184431151906,
+          "Y": [
+            50000,
+            11,
+            13,
+            12,
+            10,
+            10,
+            8,
+            12,
+            7,
+            9,
+            8,
+            8,
+            14,
+            16,
+            1,
+            18
+          ],
+          "maximum_duration": 3580.6253394237324,
+          "pickups": [
+            19,
+            15
+          ],
+          "return_loads": [
+            0,
+            0
+          ],
+          "routes": [
+            {
+              "vehicle": 0,
+              "duration": 3580.625339423732,
+              "nodes": [
+                0,
+                1,
+                5,
+                2,
+                12,
+                10,
+                4,
+                0
+              ],
+              "operations": [
+                [
+                  2,
+                  7,
+                  0
+                ],
+                [
+                  4,
+                  0,
+                  7
+                ],
+                [
+                  12,
+                  7,
+                  0
+                ],
+                [
+                  10,
+                  0,
+                  7
+                ],
+                [
+                  1,
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  0,
+                  5
+                ]
+              ]
+            },
+            {
+              "vehicle": 1,
+              "duration": 3569.3363164626358,
+              "nodes": [
+                0,
+                7,
+                8,
+                3,
+                6,
+                9,
+                11,
+                0
+              ],
+              "operations": [
+                [
+                  3,
+                  6,
+                  0
+                ],
+                [
+                  6,
+                  0,
+                  5
+                ],
+                [
+                  7,
+                  5,
+                  0
+                ],
+                [
+                  8,
+                  0,
+                  5
+                ],
+                [
+                  9,
+                  4,
+                  0
+                ],
+                [
+                  11,
+                  0,
+                  5
+                ]
+              ]
+            }
+          ],
+          "complete_fleet_vehicles": 2,
+          "empty_vehicles_added": 0
+        },
+        "Optimize": 0
+      }
+    ],
+    "representative_MS2_actual_deletion": {
+      "mode": "ms2",
+      "removed_rows": 910,
+      "removed_columns": [],
+      "families": {
+        "conditional_3": 910
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+    "R127_MD_unstarted_unchanged": 3,
+    "Optimize": 0,
+    "native_starts": 0,
+    "compilation": 0,
+    "finite_scope_not_full_rational_matrix_proof": true,
+    "seconds": 4.206180299981497
+  },
+  "seconds": 1055.8673044000752,
+  "failures_preserved": [],
+  "Git_text_materializations": [
+    {
+      "path": "scripts/analyze_round61.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861"
+    },
+    {
+      "path": "scripts/generate_citibike443_regional_v1.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1"
+    },
+    {
+      "path": "scripts/qualify_round120.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "c7586285f9dcfe04f874e0d1b3bb9ad0b93dfab45f7f733c7ac80ec087145a14"
+    },
+    {
+      "path": "scripts/read_round120.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "d1bc2284c457740387ef7b0904f1ebcb797a430f087c258b166ecafdd04c77d2"
+    },
+    {
+      "path": "scripts/round111_decisions.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "64feb5d4e98157eb0c5759703b16096f74b807c18bc41a9d0825fc49ebe332ec"
+    },
+    {
+      "path": "scripts/round111_seed_audit.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "528ab1b02b90c5d4d82113c15e617278114dcf72f1cb79f15dc4be42a92ac667"
+    },
+    {
+      "path": "scripts/round114_audit.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "38b9275afd045e9d5b72cb901a3fbe9f939f474811b0b47d3a34275cb02df9d4"
+    },
+    {
+      "path": "scripts/round114_campaign.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "6b40ca1f7f1a133478eaf3a89d8f8c7eba13ffe3b6f80bae0358f86d787716c7"
+    },
+    {
+      "path": "scripts/round114_claims.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "5b166b07da359e50b663c4655a29ce6789aaaec04ef1b8b8230b8b69cfef06fd"
+    },
+    {
+      "path": "scripts/round114_common.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "25ee8c762fc230f956905c00835eb70e2ad97e8758bcff9b2c8813d1686deaa6"
+    },
+    {
+      "path": "scripts/round114_ps.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "9ed84c968781d7dcd0dc0764377fe9df8d91266e9ae40d74f09b3a35671f867d"
+    },
+    {
+      "path": "scripts/round120_common.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "f6a04a22cb1dcc7660bf3b9efb61543c5947b56de9874d41ac6f87a25ab479fe"
+    },
+    {
+      "path": "scripts/round120_campaign.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "6874f524b6d6387d4492656c39c1e1068bd5c9238b31823df18f5c02c322b9e6"
+    },
+    {
+      "path": "scripts/round120_evidence.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "2cfd75746ae7a61c628647bc56217ae6b80f474999ec3215fe4cd5cc49f6b653"
+    },
+    {
+      "path": "scripts/round120_math_audit.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "f341106a8ef4286caef70493c3660bba18ea62aea609f7b29134a912a9b07b36"
+    },
+    {
+      "path": "scripts/round120_prepare.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "992656c509780565b7a1624465a3350cf73d0c688a8d6a8479cfe6d1ee6f42bb"
+    },
+    {
+      "path": "scripts/round122_common.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "5bfe6890df669a43c11cee2724c99c535ec05f61adce2a42cda4be85070040ec"
+    },
+    {
+      "path": "scripts/round122_data.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "273efa690ade7097e4a3278b2d06837b86e5f19bf705286f152dc4ffced6645b"
+    },
+    {
+      "path": "scripts/round122_evidence.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "c37bb09e82a8f3fa0ceaa1d79cd276813a56a228099701096fa1f640e2ec4f9d"
+    },
+    {
+      "path": "scripts/round122_prepare.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "38442f900e16c5a7485ec26afec7629c260f69775e5658a4b6f65af7c9062c9d"
+    },
+    {
+      "path": "scripts/round126_common.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "0a8252da3c37c2e50c8f24acad67bba57f8f073dd900b1faf275c3fdc3f4d5ac"
+    },
+    {
+      "path": "scripts/round126_data.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "2ece33430653f63f456d74125c809ae63f32f8eb392b6f706823df01dee96345"
+    },
+    {
+      "path": "scripts/round126_export.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "352ddf3c8e560e4d9c21c40666871573fa52ec9dc209c51bc024bf16ad6a2b0a"
+    },
+    {
+      "path": "scripts/round126_run.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "d3f7bdf51d40100f6bcc57a76c543fe6946364b60dfcb6cc501b90ce85eb3cc3"
+    },
+    {
+      "path": "scripts/round61_research.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "088b5a4c4626b528658e403e163958074676f4ea8b58ed8548a54f4727c18571"
+    },
+    {
+      "path": "scripts/round73_qualify.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "ad6062138d6dce6ab049cb6bc5986ba68fdecbda4588dbeda14a51b00de978c0"
+    },
+    {
+      "path": "scripts/round73_seed_diagnostic.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "08b23e80febe63627f8ae79d22df115d4c127d809de411f21e87a3e305a1dca0"
+    },
+    {
+      "path": "scripts/round99_common.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "760bf112a9c9c0cd1388c842aaa71b715b2958b44fb37541a5a3a2194c024ee0"
+    },
+    {
+      "path": "scripts/round99_pure_start_audit.py",
+      "materialization": "CRLF",
+      "transport_SHA256": "4157be5495f22b91e2ee0ac5e8680d0ce33768bba3f55b66027315d5cf02dad9"
+    }
+  ],
+  "transfers": [
+    {
+      "path": "results/unified_exact_round128/export_manifest.json",
+      "bytes": 114651,
+      "SHA256": "5b0366a844e411be24ebc8f44565f5225d09f19b0d97832541ad1a6665450cb5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Branching.hpp",
+      "bytes": 518,
+      "SHA256": "275bb0019aed3138f652271f561a6d50de20394b27211aaec6b347255ce8cb0b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "CMakeLists.txt",
+      "bytes": 30843,
+      "SHA256": "31586cafdc97110c005da1fdde56e35d1228a454179a085d90a2b60b11fbf073",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/CanonicalCompactModel.hpp",
+      "bytes": 6609,
+      "SHA256": "efc670847eb1b0c2f4056c79a64aba0d51f6e96cd9f860d8ad70941801205b39",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Bounds.hpp",
+      "bytes": 9851,
+      "SHA256": "133e136da94126a5ad91281c9e502552f4484cba62a3193cc46772c9237ae2f4",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ColumnGeneration.hpp",
+      "bytes": 43310,
+      "SHA256": "b56213b9c03cc3e72fcb1f16fde544fd30445e9fe4c94dce152d7bf3276c8a49",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Column.hpp",
+      "bytes": 858,
+      "SHA256": "f235e7d75fef263ab343acef6ad30075b975e76be2a6320287d4cebb4f3ebbe5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ColumnPool.hpp",
+      "bytes": 1719,
+      "SHA256": "154c3e54000b65b5fe448106935c6572cc997c8aaaa4e125b9dec95a331fc05c",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ConnectivityFlow.hpp",
+      "bytes": 3774,
+      "SHA256": "4ad49231d642cae8536b546a5569f5092f8986969070e54bb3b6044e66a238ed",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/CplexBaseline.hpp",
+      "bytes": 578,
+      "SHA256": "8be5e2e67ac908820f4fe04775bac315f271eab9a12e6a022bfb9ae9f2c9cd78",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ControllingLeafScheduler.hpp",
+      "bytes": 9009,
+      "SHA256": "87e37afa415f36756b2d263f5ed9ce15a4b20caa9c8e1a1406c78bc2bd16825e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Cuts.hpp",
+      "bytes": 937,
+      "SHA256": "e98a30e9451e917b54d25610d007eac00d8f3756b8856118172e88bd00f20cf0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/DenseProgress.hpp",
+      "bytes": 6935,
+      "SHA256": "10d9f92bacb6484f696f97a226b175a1a71f7f8d5549ec825e0181e39a309fb2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Evaluator.hpp",
+      "bytes": 303,
+      "SHA256": "df5a98b1a9456fbaff142369eb919f78459f703a5af4e9a872c1137fb5c598ec",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/DeterministicDinic.hpp",
+      "bytes": 4382,
+      "SHA256": "0035affeaf0906b7ef2c2f6ad33efd569a5a5d41218f29e79d3a585995a7e572",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/FileSha256.hpp",
+      "bytes": 200,
+      "SHA256": "9ce848d6c6c282292a927ca470ee4555e59b5cfa3d8ac9a050b7290c3674b9d4",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ExternalGiniTree.hpp",
+      "bytes": 2913,
+      "SHA256": "244bdc2d09d9993ca2a818cd4e4a73b496ba2e194a810a86eea1162ae0f8b40e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/FixedIntervalMipBackend.hpp",
+      "bytes": 24280,
+      "SHA256": "8cb49d1e9b6123017208553e136e9ee8c57ce76e378b4098e45846adbae34473",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/FleetEventCuts.hpp",
+      "bytes": 2149,
+      "SHA256": "10a7ee1ab0a80c3c91eb8d260a425727803383d82489f372cfa30b231a087d70",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/GiniAdaptiveParametric.hpp",
+      "bytes": 4246,
+      "SHA256": "ba5de1f66dd0d84d3463a2ebb3aa3ce981105bee902badc033194e4463e908f8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/GiniBranching.hpp",
+      "bytes": 429,
+      "SHA256": "f6e4cc383e8f3b302033b374fe10f5572845a796dc07785fa963ea984bc7280b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/GiniEnvelopeTailRepair.hpp",
+      "bytes": 5232,
+      "SHA256": "f2d413e82a28414ffab9a451e7a3bd0719074e2b9b82b7dde21bd0359e6ad72e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/GiniEnvelopeRefinement.hpp",
+      "bytes": 4085,
+      "SHA256": "e882817323837b41d80367a66bcf7ac50e553a86f59c4b7b69d22576db881fb2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/GiniFrontierGeometry.hpp",
+      "bytes": 8785,
+      "SHA256": "c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/GurobiBaseline.hpp",
+      "bytes": 795,
+      "SHA256": "49b5bc60484b5391a07343ba48441ef40b72ea06354ea2b44d8de1d7667da770",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/GurobiCertificate.hpp",
+      "bytes": 2378,
+      "SHA256": "914279764d62946b35b9d3f175cafad3766f79f702e2ebc9212fd3671858239c",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/GurobiProgress.hpp",
+      "bytes": 1054,
+      "SHA256": "018c4a88aa769df8f997f61fdfd20fe7f8eef7f35216d7716c34387a1cd1d907",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/hga_tgbc/AVLCalculator.h",
+      "bytes": 7918,
+      "SHA256": "324aa71018554d66620a56922a8829ac1aca85a140c91c3a1c9c8c10b12b92bc",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/hga_tgbc/GreedyExtensions.h",
+      "bytes": 3102,
+      "SHA256": "d6c500d2bb990e39278127022b7cd9adc5f92570e69f1b995a0851d294b2a31d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/hga_tgbc/GreedyMethods.h",
+      "bytes": 3873,
+      "SHA256": "568f527bdaf6d088489dbf3fff551dfd8304582684cf972671308293b8a1c92c",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/hga_tgbc/HybridGA.h",
+      "bytes": 66925,
+      "SHA256": "2ac2233743ffa883fb517c7df70c5b29bbb420123f8a57d474434c2a6820dc62",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/hga_tgbc/InstanceData.h",
+      "bytes": 1324,
+      "SHA256": "c695f84324a72302c91a21f4d1aa17d2c155239d1baa3b3821acf127ae0756f0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/hga_tgbc/Solvers.h",
+      "bytes": 2274,
+      "SHA256": "1382d476927207de909143a124a8075ea065a2e74e17177d7a8c43cc644d3fe9",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Instance.hpp",
+      "bytes": 39287,
+      "SHA256": "e9e396495d431fbb00f412df00929470f9332d5ab57c5561ca0c98b0a456026e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/HgaTgbcRunner.hpp",
+      "bytes": 3561,
+      "SHA256": "01a0a95fcd6a5d1b23206503c8cc4814b10cdea243249970f0aa6ecaed222ae8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/IntervalRowFactory.hpp",
+      "bytes": 5025,
+      "SHA256": "1fbf17a169fc8f65d4bb267b0594720e6e9a3d4c73fd65ccbcf47df2b23df4d8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/InventoryRouteCuts.hpp",
+      "bytes": 2476,
+      "SHA256": "434ecff4b7241016782f7a88da2a7c3305603259cd7c14cf52cd3596dfc0749a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Logger.hpp",
+      "bytes": 327,
+      "SHA256": "43528e60e97f4b56e2639d9adcfc61a5e2ca7fcd889073e732ebaa7d070ca334",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Master.hpp",
+      "bytes": 741,
+      "SHA256": "ba8512c5741d80bb573a63907840ff1ea6623453a598fd03be0e26ddc6863d12",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/InventoryRouteRootClosure.hpp",
+      "bytes": 2416,
+      "SHA256": "e05262dc208e60a7e38cf67c1777da5eed1636fe5a3874479cdec902ce709ec2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/MipStartMapping.hpp",
+      "bytes": 1460,
+      "SHA256": "c5375a6a2ae28c599d4b73cce172a9575c8f7490d14a6dcbab0410e58d6554cf",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/NativeEvidenceJournal.hpp",
+      "bytes": 2772,
+      "SHA256": "3e45f12f9329babd8ffc01e95a6e6c689dffd790ed100dfe18ed7631fca8e141",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/NativeOtB1.hpp",
+      "bytes": 2219,
+      "SHA256": "bd64c92a83d109c602dbb31bd10bbba524db857bb357fee6ba26c7d8da3df0eb",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ModelCorrectness.hpp",
+      "bytes": 2009,
+      "SHA256": "f8f0632084823a2433a5403d3154a391910ee487c45e79e528d6c9efd9dc2c04",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ObjectiveResourceCompression.hpp",
+      "bytes": 945,
+      "SHA256": "c99acd5281780fa72f42f7ffdda2c4fba66acdb9947a9b83dec762ca95c804c7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/PaperK1AmSf.hpp",
+      "bytes": 944,
+      "SHA256": "fee8662d26f863ab9e75022ba70d6d400cccef4b5f3c92470bcce0df368c757c",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/PaperExternalGiniTree.hpp",
+      "bytes": 4799,
+      "SHA256": "ec6b23bc70b2baf8e7083b1cc836d3ed0c80f9384f87a4ad161a5ae5f93415bd",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Parser.hpp",
+      "bytes": 417,
+      "SHA256": "6f7f49f621ac858769b5144a1d5675bbb80ebdcb92ee6f216340d363ef0370c0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/PenaltyCoverSeparation.hpp",
+      "bytes": 2045,
+      "SHA256": "877c3e8c290b088e7aabdead0771516e8ce45091a5047f42d7d9ff8e6a8d7913",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/PhysicalDurationTolerance.hpp",
+      "bytes": 264,
+      "SHA256": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/PhysicalWitnessValidation.hpp",
+      "bytes": 614,
+      "SHA256": "b26e544483a3297259aa77a2f4f420878e7f42eb5f469bfd6beee64cd7585010",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Pricing.hpp",
+      "bytes": 9666,
+      "SHA256": "9b5f6b429db2311cad54e8657d3840cd4836c7bbf74025eb551238d010de77da",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ProcessPhaseLedger.hpp",
+      "bytes": 927,
+      "SHA256": "90537efecc29d752c47fb088d16bff16baddbe36af858e33f3315efbca65b1b0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ReplicaExternalGiniTree.hpp",
+      "bytes": 730,
+      "SHA256": "094bae61508ea9af2d54f51dcffbd1dc832e40624e123fb73ced05bb57b4ccfb",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Result.hpp",
+      "bytes": 102235,
+      "SHA256": "3c18b79e6690e7156be912748b3f5cb1b7910c1aa3befa1f58f15ebd66d67c1a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round105Decomposition.hpp",
+      "bytes": 1763,
+      "SHA256": "eccca5f2ff4a8b0c8d6de114c251a3b1225fa13ef7a3c4d0d81e5e1f00e3f46a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round106Events.hpp",
+      "bytes": 1439,
+      "SHA256": "8f7ec442881798652877694129cda936993e6f81dead7d422d8b15dcfb9e3e5a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round106Research.hpp",
+      "bytes": 704,
+      "SHA256": "c33bee11181eb029026b5010a9c89240416fad3be02c665dfc49295a7299f9f9",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round107LpMetadata.hpp",
+      "bytes": 4581,
+      "SHA256": "5b57f944f69f16fa79c109ba49be646fe3625f7f38f6be91b0396a2685fc6007",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round107Research.hpp",
+      "bytes": 296,
+      "SHA256": "207577fef6a37fd23514b9d97836f8e1a6e1450fe7f7a5d8a9dd5cf762b8cf3f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round107Scope.hpp",
+      "bytes": 2345,
+      "SHA256": "59f61ced9654b1b5c78aeb8a2fd53333a6337c870c87135506ade41d65b7e14c",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round119ProofContraction.hpp",
+      "bytes": 2529,
+      "SHA256": "0c5891ff61e4264b08b4d2d36667d6a05c95bc8440822c3d3c63056b700fe76f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round120NativeProof.hpp",
+      "bytes": 2280,
+      "SHA256": "5abc168af8ebf9d3bd7681bde8a5b643bdbe9e65365ed68bde446b522944c61a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round127Research.hpp",
+      "bytes": 3467,
+      "SHA256": "310240c5f36b8e06931ff119d213d65b5247a77e874170ad0d14a83b5dbebe70",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round48K1AMF.hpp",
+      "bytes": 2937,
+      "SHA256": "b878f176a8c7a888bd83f41e9928c29da9cc49544bc9c511e817fe5829d432c0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round49K1RC.hpp",
+      "bytes": 3152,
+      "SHA256": "2343513138418e6f98b87e0939c276b2b15b7013a4bd77abddedb9e6b07730be",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round50IntervalMip.hpp",
+      "bytes": 3056,
+      "SHA256": "0a8f8f45f7deed6b04be377c410c6a39603f4271e9b14ff8fc56b2a8e7908208",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round51IntervalMip.hpp",
+      "bytes": 3468,
+      "SHA256": "eece149db3fd19471c9ac7ee54b27d523449ffa7647e71290018c25ef32bc510",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round52GurobiCutAdapter.hpp",
+      "bytes": 1270,
+      "SHA256": "4ebd434fb2a3b1f63652f7bd89bd04992bd1efee07896497d295c8e3d6d29a4f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round52TailoredCuts.hpp",
+      "bytes": 5005,
+      "SHA256": "48f98021d28b9ff604d5b17060477427552614abc16588a08981b8c21b0baf71",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round58Benchmark.hpp",
+      "bytes": 1517,
+      "SHA256": "98bb286eb654d3ab3d93dfc6a0432bb7e771f7219c1a8b6e3efb66c4f8417882",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round53CallbackIsolation.hpp",
+      "bytes": 477,
+      "SHA256": "ac988f08d12bd8e2952268b99267ea53ec5c4c5f094579b4e299f76121ca00c1",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round59Research.hpp",
+      "bytes": 2299,
+      "SHA256": "839aa0f949abd89788e45cd23228fc8bc009a57cdd9396e077e6d261d6c434b3",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round60Candidates.hpp",
+      "bytes": 3411,
+      "SHA256": "ab47bb15291bcfcaa5f35fc8b1fe9667997198a1bf6dddff84ac278676427ffa",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round61Candidates.hpp",
+      "bytes": 2747,
+      "SHA256": "a8da3b153aac709f0bd3d113266fe5bcf4d714103abcc86061fbe8727a39133d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round61TimeOracle.hpp",
+      "bytes": 1515,
+      "SHA256": "1b054e31f7f1825d6e7d56bf114adc030fe65364404a3d352c95c79734c5aaef",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round62Passive.hpp",
+      "bytes": 944,
+      "SHA256": "985daaa5614398e76d5e46cda838dc63b96fbf5a0a2ea0c0df2d851e5eed356d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round62Thresholds.hpp",
+      "bytes": 2025,
+      "SHA256": "9bad4401fde82b7632a9bd6c4eec0b0ea1482c17d8f9b94455ac83d771f592bf",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round63TimeResource.hpp",
+      "bytes": 1731,
+      "SHA256": "5bb455029bb018118d21f2dbdeaa3bb47539eb8547560a981fb5b616ac48345e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round64SharedResource.hpp",
+      "bytes": 721,
+      "SHA256": "1a541cc39bd4a58715fa7ca309cb4918f271790f7cf40c26e16f6de084893207",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round65Projection.hpp",
+      "bytes": 1882,
+      "SHA256": "e0a5d77eea89dba483f47c410f171454a8b08e0a05b6cdd80e6b5eef4335d531",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round65Proof.hpp",
+      "bytes": 1956,
+      "SHA256": "89d3c68c218ebadac3c447c1b0067b93e8220527a402d413aafec6d7e1e0e8f1",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round73JointInsertion.hpp",
+      "bytes": 1651,
+      "SHA256": "06049ff4974c008833f3d5d6f2eecde5ffb7d61e3633c10ef7d865385ca560e7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round75QuantityDescent.hpp",
+      "bytes": 1739,
+      "SHA256": "d0e7f32055f81b8821f833cfe726dcb2efd0c325eda7b1eddf2395b4c8f11956",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round76PhysicalClosure.hpp",
+      "bytes": 1196,
+      "SHA256": "fa3234cbe0a05fd187dacf3ca2f79b13b7a3cc5db8de97da0c33ea28f7149421",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round78BalancedRelocation.hpp",
+      "bytes": 1563,
+      "SHA256": "4e5a46ae98eb67190947f614763ac67785724538b9d568673b62e8d57a9cd991",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round83BlockExchange.hpp",
+      "bytes": 1150,
+      "SHA256": "c967be51e18e35814fca4284d57d439f56a40b5b9c343b6d388d9b6ad71feba3",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round92HandlingActivation.hpp",
+      "bytes": 4172,
+      "SHA256": "5bad5b1e023ea07fd753bd33993cbe604c7b2a6d05576523ae0d757019668f2d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round93CoQuantityDescent.hpp",
+      "bytes": 2923,
+      "SHA256": "92656c6a27dda13b794965fdf6d49bcc38007d16b6780f0ba822f62134253ee2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round95FullBlockDescent.hpp",
+      "bytes": 3465,
+      "SHA256": "20150387b81db8287d44a959e9716274dff2f18586fd0014398b5bf200470573",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round96MultiQuantity.hpp",
+      "bytes": 762,
+      "SHA256": "bf8a3651655b44cced20a8948e6b4fadb56721979637badfdb9e713978112b37",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round96RouteOrder.hpp",
+      "bytes": 1034,
+      "SHA256": "ffb21848c6cc21ee106e9131ad1bb1a9fc2cf214ecb6a6e85e88ea8c05f11d91",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round97NativeClosure.hpp",
+      "bytes": 2540,
+      "SHA256": "0147433cef8256914dead30c166c14f562086cab7bb59a76904bf6c85217f14b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/Round98StateService.hpp",
+      "bytes": 2098,
+      "SHA256": "5b202a5db205941cde679ab967508546a171e5846de79dbc8454591a76f126e7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ServiceResourceCuts.hpp",
+      "bytes": 1938,
+      "SHA256": "a901db79764a9f3f6a893b74ebc7980bb7cc72402b36268b68d41cffdd48818f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/ServiceResourceHull.hpp",
+      "bytes": 1285,
+      "SHA256": "37f035446b3f80f3e461a03c1d1262f8afb1b208615cc56a09899fad19789154",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/StaticSegmentedGini.hpp",
+      "bytes": 4094,
+      "SHA256": "798d1301b22a73440955e190bca697013e7f1132b8a4bf0bf025b48a6c0f8408",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/StationSet.hpp",
+      "bytes": 4265,
+      "SHA256": "e3cbaa6a7b0ffce271d4603a018b20bdf197ddf1dc0c65477beaa7860a80b8ff",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/StrictCertificate.hpp",
+      "bytes": 3906,
+      "SHA256": "c1ea9bbebb3d6f8944aed9c44f30624c26f25c8342bc29fbfc4278b3c0cde706",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/TailoredBC.hpp",
+      "bytes": 623,
+      "SHA256": "56caf466d7fd66fadd1cc9a71b0ea2b2dff27a1a94c1afc1dfb54199ac14a6fa",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/TailoredBCCallbacks.hpp",
+      "bytes": 131,
+      "SHA256": "324b68b779bafb5e4e266d591f699339f773555a27615df16140cd3faa05aa5b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/TailoredBCCplexApi.hpp",
+      "bytes": 19917,
+      "SHA256": "44a0d3f82745310c8eea42931187512e4e58ad556522c2389f138a4a478808ff",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/TailoredBCCuts.hpp",
+      "bytes": 615,
+      "SHA256": "96e3d012cddc58f460a71acba244991f34a228b2f67c1a3a56d71628a726eb8d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "include/TailoredExact.hpp",
+      "bytes": 187,
+      "SHA256": "d8f0a5da11527353efe3359c9d32359e907fc369c778b70d749680cd894ddfde",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "reference/round122_paper_benchmark/PB-B35-B.txt",
+      "bytes": 2096,
+      "SHA256": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "reference/round106_confirmation/S12.txt",
+      "bytes": 842,
+      "SHA256": "475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "reference/round98_confirmation/C2.txt",
+      "bytes": 1867,
+      "SHA256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round126/inputs/SC-B20-S.txt",
+      "bytes": 1282,
+      "SHA256": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round126/inputs/SC-C15-S.txt",
+      "bytes": 1007,
+      "SHA256": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/.gitignore",
+      "bytes": 70,
+      "SHA256": "3c055d626ebcee45a1a15a3ef42c6054e6f46ef321b2455684eabae5fe7d4665",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/actual_method_differences.json",
+      "bytes": 5712,
+      "SHA256": "2c23a2904bb01bd819d957a27b9b7ed91e86b07014c17af0f5d98dc02b9aeb61",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/algorithm_appendix.md",
+      "bytes": 39220,
+      "SHA256": "7add63c084c9044b4f7d3811d7753dd8c45cc2bec1ce108558e02a61ecb08863",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/arms.csv",
+      "bytes": 18277,
+      "SHA256": "c3f5e4bf75f8719444fb29c132eec209ef10fc31a6308839ad31d9531a74199a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/artifacts/formal_group04.zip",
+      "bytes": 1906443,
+      "SHA256": "a3dd22adf1235546755707bb80ac94bb1379d08b4031cec56971d266e41665d6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/artifacts/formal_group03.zip",
+      "bytes": 5837844,
+      "SHA256": "8e2a61410f3a91ac2956bd50cdf6bdfcecee53147c7bc2d6d29a319897b56c5d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/artifacts/formal_group01.zip",
+      "bytes": 22588909,
+      "SHA256": "ca81de6aa2fd634b856eb61ed70859c9db5cc1e1ced28cb987902200178fe4e3",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/E0_identity.json",
+      "bytes": 23925,
+      "SHA256": "b954c37e77f65eef4200e8ca5f51b877a06dba076254a9731a9a2af94b080fa7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/artifacts/formal_group05.zip",
+      "bytes": 21032720,
+      "SHA256": "b3eb4a5bf073c9017a26fc7831841e43b4548ff5198a2e53a57d41c693a79da5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/artifacts/formal_group02.zip",
+      "bytes": 43070905,
+      "SHA256": "129af6db7187939e6057e60d1e38230bd79951df43f544afdd9f914479cebe27",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/E2_build.json",
+      "bytes": 24552,
+      "SHA256": "70b782dd2980b22ea7d9c344d72e303ef15ca9baa0ff080811e99ace6277c2d4",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/E2_build_initial_prequalification.json",
+      "bytes": 24552,
+      "SHA256": "2ea174f93ebe211e23109c4a14a1befc7387ff2659dd7e268ecabc73f0ced236",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/E2_frozen.json",
+      "bytes": 25168,
+      "SHA256": "f3265c0e3a07854e5dfb65be5c74e3b43d92d6f90fbe37bc5a1aa5ee0f02ce6a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/evidence/formal_group01.members.json.gz",
+      "bytes": 1926568,
+      "SHA256": "8397a0b4bbe38eb6d2bf8acc1e3afb9ea78fc24ac04d9773c648dbb562c582d0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/artifacts/qualification_closed_fees_parent_sources.zip",
+      "bytes": 32284312,
+      "SHA256": "b7f8187431ed2545cc5877b0093dc9c37091dc6a5d5eb6437a543150e2d0d53f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/evidence/formal_group02.members.json.gz",
+      "bytes": 3336008,
+      "SHA256": "b37fbe94695c17e2426dffbfb721271dc76c41d801d3b9dc7cfd26d8304bd7d6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/evidence/formal_group03.members.json.gz",
+      "bytes": 52517,
+      "SHA256": "9ddaba27780765998cee906d21b2cf84e509583dbec07a32ff23ee0c65d606af",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/evidence/formal_group04.members.json.gz",
+      "bytes": 103686,
+      "SHA256": "5cb46571720c206ff0fafb69906d06c0d9866868f72bde4680d240e5178b1e9b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/evidence/formal_group05.members.json.gz",
+      "bytes": 1627151,
+      "SHA256": "85c1fc00e7c1e996591d784928b859d5fb58f9c9b85fdf57c86b308df13dd9f5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/evidence/qualification_closed_fees_parent_sources.members.json.gz",
+      "bytes": 1097158,
+      "SHA256": "4677c661f433c4ec5cccdd1bc07dcbc2a090d493b03fb15c9f9fb78b27c831a2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/execution_binding.json",
+      "bytes": 1290,
+      "SHA256": "0c036650e97f32235bb4ddbadc4a7e46d4716af83dc2a18f2eb874de88483365",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/experiment_manifest.json",
+      "bytes": 10093,
+      "SHA256": "87cb28a48a5171e06211cbfc692e6581a22907271476b71df999b5fd107d5264",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/exporter_identity.json",
+      "bytes": 389,
+      "SHA256": "32787fd4bfd477b5b1fd54c7c923f7498dc83660cc7ea2945666f2a957ad7226",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/final_report.md",
+      "bytes": 9723,
+      "SHA256": "875276413e8d10ea6bf62fa3eac93e2a4e11aa7ea05388182ab21b65d79552a8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/goal.md",
+      "bytes": 23363,
+      "SHA256": "3fdf8f91d4a546d55cd3fb0c4b32e1fa679ba755833e27c1e91690d0537f935e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/initialization.json",
+      "bytes": 1479,
+      "SHA256": "8c5d929c33b9e60849fde7dcb80448eac8bb9e9112956a7b8ae13926d4845ad2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/input_manifest.json",
+      "bytes": 3703,
+      "SHA256": "f67dd9e04ecd935d2bdcfe07d0fd0d4888daabe44b72663e478c0286f1dea04d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/manuscript.md",
+      "bytes": 111981,
+      "SHA256": "f475f4f0756328c10a2849de0d22f5eb6cd3617a0ff9ecfb3d59c70280f8dc64",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/manuscript.pdf",
+      "bytes": 405835,
+      "SHA256": "bbd1aa1fca362ba7f2ff74f1994ef27d5a90f821fde3b0f956c3c15b0109592a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/manuscript_lineage.json",
+      "bytes": 622,
+      "SHA256": "41475f44a21466c12c9200c9ecfa7c56fbc2bc2d78c10176ca76cc33f82a54c5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/md_root_contract.md",
+      "bytes": 5264,
+      "SHA256": "1cb26bb6e3d48932a79be0671d64b671c1c507c3c1ac1bb269a5f2d22f72762f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/mechanism_costs.csv",
+      "bytes": 12269,
+      "SHA256": "8d3938b7bfd8b7afde8c9e1e839aee3bdfe2bc15cb015f257c0a935481fab057",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/method_matrix.md",
+      "bytes": 4525,
+      "SHA256": "ff79cffb788abc7e6775ab822e385ddd815a6fb28a050d0db6d793119b3e5cfb",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/model_appendix.md",
+      "bytes": 38377,
+      "SHA256": "e003f1481d0fe8750b967c31991fd24b36918be250d8ea2ceb7943def847430a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/pairs.csv",
+      "bytes": 4577,
+      "SHA256": "c228cf397bd1dcb3dcd3326459b38b0873dd2c87b2b006441c73fcdd49929c15",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/pdf_export.json",
+      "bytes": 3629,
+      "SHA256": "b0c84126c81526fd48df68b549df95aac23f6f8e6abbcc507f52a737293cfd5d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/pr_body.md",
+      "bytes": 7076,
+      "SHA256": "29baed20b1dd279074b7462988e188af81d5aa35eb12bc69f6d98e55051858ed",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/raw_archive_manifest.json",
+      "bytes": 6590,
+      "SHA256": "dcef65896953103c23628a1394c193526b319c5bf5eafdabb35953fd623f3b17",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/references.bib",
+      "bytes": 6376,
+      "SHA256": "0d1fe40741d66f501892c3185a927191d030c96177dcda56f5467c03fd1ff7a4",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/resource_accounting.json",
+      "bytes": 46798,
+      "SHA256": "18e610f4750f34378a2798ca97c704044fef62e5596bd1b5ead765a9db0bf917",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/RESUME.md",
+      "bytes": 545,
+      "SHA256": "a21108395728f86def3ea872ed10c643040c4fcd4acf53c298117e49f36b0c38",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review/final_independent_evidence.json",
+      "bytes": 33336,
+      "SHA256": "d20236fe1b0b9ef25f11896ab5e775e2452755297638f7e1557d7ec064e131f0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review/final_independent_review.md",
+      "bytes": 7920,
+      "SHA256": "e320c8b4dda52519685ee2e9708d6a16fb098ea3e93dc0d4810c54a601e148ae",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review/local_portable_check.json",
+      "bytes": 4397,
+      "SHA256": "1e18ef6698cf7f18d4e499639a2af1aeec5a2555754da8ec9354796d09062976",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review/packing_space_check.json",
+      "bytes": 243,
+      "SHA256": "44d2dd5e147d7ed04ea9b5aac1ae1452e5a0a6ccdec915628959fd8adb1574dc",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review/parent_remote_readback.json",
+      "bytes": 468,
+      "SHA256": "4e4f73c046305d15ede28ce568e7736f91f318e2fa84aea36acf9dd3ac63ac43",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review/pdf_visual_review.json",
+      "bytes": 6068,
+      "SHA256": "67c6cbd41aff1f97cac61a4066ef95dac71b4a0416c78a1fcc6026b7f090ad74",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review/performance_admission.json",
+      "bytes": 398,
+      "SHA256": "949a8f501b89f5af19f7108774a805281f6e6fcd4d893c8a60fe440285e69937",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review/preformal_source_review.md",
+      "bytes": 24438,
+      "SHA256": "bcf98c6f639218bbc3b798722632a114e024331cd1d74416f8b9fc44b87e8cf5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review/publication_scan.json",
+      "bytes": 231,
+      "SHA256": "d498902d6c8c3474cb29aa458008c58cc8715af22507b4ab337fd26e84df457e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/review_actions.md",
+      "bytes": 6533,
+      "SHA256": "ea5ca726abb9b18769c4ffcd3607a42d1bce5977c1f514a7fb33cf07754724a7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/runtime_status.json",
+      "bytes": 346,
+      "SHA256": "ab299cf9ad4dc1bed05c40994497ec9e392562c24e440542141636de026b766f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/scientific_decision.json",
+      "bytes": 2111,
+      "SHA256": "9c740e6c01ed6b308ab279ed2cb1313d676e009fab449a766cb16b22a28a51cf",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/source_E1_manifest.json",
+      "bytes": 1728,
+      "SHA256": "d742041daf0ab724b57eb2995773b247785102da0fcb6a488cc61aada01681df",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/stratified_summary.json",
+      "bytes": 4585,
+      "SHA256": "b7b9ed6a199a53791edc64379dce72f864eedf806301f91014944b6a2e14fbfe",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/support_two_seeds.csv",
+      "bytes": 1897,
+      "SHA256": "5e943c20e0cb4134c6a49f8d6fd6cc016f75c5ba1d26f798779ad4cfc24e2251",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round128/tables/historical_display.md",
+      "bytes": 10600,
+      "SHA256": "803e01455bfd4e589a4900ccdfc6c4a42cf3d0099add97ede462a40def05f7dd",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "results/unified_exact_round94/preregistration.json",
+      "bytes": 5832,
+      "SHA256": "767b8abe628bb5e84c8c44ddf2b65869f44212e17bea362fc0284b4afb445774",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/analyze_round61.py",
+      "bytes": 21597,
+      "SHA256": "2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/compare_round112_startup.py",
+      "bytes": 4703,
+      "SHA256": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/generate_citibike443_regional_v1.py",
+      "bytes": 125151,
+      "SHA256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/qualify_round120.py",
+      "bytes": 9663,
+      "SHA256": "c7586285f9dcfe04f874e0d1b3bb9ad0b93dfab45f7f733c7ac80ec087145a14",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/read_round113.py",
+      "bytes": 29114,
+      "SHA256": "84f98aadd30681080af723d4f874f007f0222431f2fb15bffbd6b7fcfc716cc2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/read_round116.py",
+      "bytes": 22710,
+      "SHA256": "ed5865c5011d239815000f1bf15c591eee8d9e8d933edd857f3a990762230d28",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/read_round118.py",
+      "bytes": 7451,
+      "SHA256": "d9a8e887f10abfb9bdead5b765d033316c96d6134b42163aeb37acdb5b16dbc7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/read_round120.py",
+      "bytes": 5364,
+      "SHA256": "d1bc2284c457740387ef7b0904f1ebcb797a430f087c258b166ecafdd04c77d2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/read_round121.py",
+      "bytes": 3176,
+      "SHA256": "f7e0b68a903095509bc248b0f47480dd5e1867ccb5924690edf9cd5fadff9e0b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round100_campaign.py",
+      "bytes": 11142,
+      "SHA256": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round100_common.py",
+      "bytes": 2347,
+      "SHA256": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round100_idle.py",
+      "bytes": 1069,
+      "SHA256": "093ced41cdae00ed1eab56fb6c1e94b9f22bacfac637da803b8e41ee06821639",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round103_common.py",
+      "bytes": 2099,
+      "SHA256": "67fc725b0a440bf8c557a93da3f9a2c02decfc2b2ffebbbcc7d0d8571bf247d0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round101_common.py",
+      "bytes": 2270,
+      "SHA256": "6ea42060b3804c125888ffff76facea0519a5219a5110ba8524bf1e9e75d7ce1",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round107_reader.py",
+      "bytes": 48416,
+      "SHA256": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round108_decisions.py",
+      "bytes": 7997,
+      "SHA256": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round108_reader.py",
+      "bytes": 48982,
+      "SHA256": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round108_scopes.py",
+      "bytes": 4248,
+      "SHA256": "4a9b9570d1142265fdc96b56df4a91021521732b521a649fe0609ac72de0c733",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round109_campaign.py",
+      "bytes": 17169,
+      "SHA256": "881c8a4d818f7c94a08e72a1714c1713cf823ab908406dd0425f2c16ae9db693",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round109_common.py",
+      "bytes": 3257,
+      "SHA256": "4804f3db87ad5b6e6770f300691b125dac9ab122df48c4b2c7a77fb53fc0dcdf",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round109_decisions.py",
+      "bytes": 3446,
+      "SHA256": "47483e89f7184762541276b7f5200c3611ca800866708e9ae5c2bb7aa98bae3d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round109_data.py",
+      "bytes": 6442,
+      "SHA256": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round109_interval_pairs.py",
+      "bytes": 2976,
+      "SHA256": "61f4f3e8ef00c5bd0ca5bbe9571532772fb1450f1c2fa6ef573e273a4935e279",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round109_prepare.py",
+      "bytes": 10013,
+      "SHA256": "e8684188f2b015d68702d0400570415ec6ef1f15d1f6b46ad5e8b4bb7913342a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round109_seed_audit.py",
+      "bytes": 3632,
+      "SHA256": "e0e2a076096ba8979ba3a59f376cc0293cb4b5da2a3bb90bfe0311f6085a570e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round109_seed_scope.py",
+      "bytes": 8695,
+      "SHA256": "08bc7c282a29815b26efac54efa9880d660674328f12a5c83aeef7441044368b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round110_common.py",
+      "bytes": 3967,
+      "SHA256": "5816ba204c8be606d6dfee36b0823fcd95fb6cc2e4ce90eb46b5a812e91da120",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round111_decisions.py",
+      "bytes": 4551,
+      "SHA256": "64feb5d4e98157eb0c5759703b16096f74b807c18bc41a9d0825fc49ebe332ec",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round111_seed_audit.py",
+      "bytes": 7179,
+      "SHA256": "528ab1b02b90c5d4d82113c15e617278114dcf72f1cb79f15dc4be42a92ac667",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round112_audit.py",
+      "bytes": 6424,
+      "SHA256": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round112_campaign.py",
+      "bytes": 11408,
+      "SHA256": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round112_common.py",
+      "bytes": 2687,
+      "SHA256": "de18376ad23be0789a726c4f7bc8bbc09f074571c1afdbefdf7092a068d6d2a8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round113_audit.py",
+      "bytes": 15512,
+      "SHA256": "02af4e0de90b425b51889e1df860597236fc7ca32c567363e0de982834dfdfe7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round113_campaign.py",
+      "bytes": 10378,
+      "SHA256": "b76c63ad8a09683e43b737721d55523bd7c1c6ab2aadb5070aa5c6e8b29fd447",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round113_common.py",
+      "bytes": 3088,
+      "SHA256": "f100749161fad2487d652991da0fa6086cce75aad0e037a43d8823a0abf95c1b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round113_progress.py",
+      "bytes": 2821,
+      "SHA256": "51a0969ded9e0896b85d264fbe30af3cd30813d579136c3c822c845da384b45a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round114_audit.py",
+      "bytes": 20480,
+      "SHA256": "38b9275afd045e9d5b72cb901a3fbe9f939f474811b0b47d3a34275cb02df9d4",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round114_campaign.py",
+      "bytes": 13132,
+      "SHA256": "6b40ca1f7f1a133478eaf3a89d8f8c7eba13ffe3b6f80bae0358f86d787716c7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round114_claims.py",
+      "bytes": 5032,
+      "SHA256": "5b166b07da359e50b663c4655a29ce6789aaaec04ef1b8b8230b8b69cfef06fd",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round114_common.py",
+      "bytes": 2753,
+      "SHA256": "25ee8c762fc230f956905c00835eb70e2ad97e8758bcff9b2c8813d1686deaa6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round115_campaign.py",
+      "bytes": 11334,
+      "SHA256": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round114_ps.py",
+      "bytes": 15679,
+      "SHA256": "9ed84c968781d7dcd0dc0764377fe9df8d91266e9ae40d74f09b3a35671f867d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round115_common.py",
+      "bytes": 4606,
+      "SHA256": "105efd354e72f46abc7fbb30b42949a5f8d6db5d4deb01d2c73f4eac6149d841",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round115_verify.py",
+      "bytes": 3478,
+      "SHA256": "d225751afb1dfc7b29f20d6b1f231c8baed4d6b842ebed8fc0799bdd4523a001",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round118_call_logs.py",
+      "bytes": 9760,
+      "SHA256": "0c719ad386ed7ad3c793ce93bab7bc4f190cd2a2317aeccdccff6279c7b3dca4",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round118_data.py",
+      "bytes": 10434,
+      "SHA256": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round120_common.py",
+      "bytes": 6459,
+      "SHA256": "f6a04a22cb1dcc7660bf3b9efb61543c5947b56de9874d41ac6f87a25ab479fe",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round120_campaign.py",
+      "bytes": 5165,
+      "SHA256": "6874f524b6d6387d4492656c39c1e1068bd5c9238b31823df18f5c02c322b9e6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round120_evidence.py",
+      "bytes": 9047,
+      "SHA256": "2cfd75746ae7a61c628647bc56217ae6b80f474999ec3215fe4cd5cc49f6b653",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round120_math_audit.py",
+      "bytes": 6599,
+      "SHA256": "f341106a8ef4286caef70493c3660bba18ea62aea609f7b29134a912a9b07b36",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round121_campaign.py",
+      "bytes": 5533,
+      "SHA256": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round120_prepare.py",
+      "bytes": 11575,
+      "SHA256": "992656c509780565b7a1624465a3350cf73d0c688a8d6a8479cfe6d1ee6f42bb",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round121_common.py",
+      "bytes": 6181,
+      "SHA256": "1a401ff0a4ffffbab0265e62d6c46d89b60bad2d2587ffd12999b5db042029f6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round121_evidence.py",
+      "bytes": 10292,
+      "SHA256": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round122_common.py",
+      "bytes": 7396,
+      "SHA256": "5bfe6890df669a43c11cee2724c99c535ec05f61adce2a42cda4be85070040ec",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round122_data.py",
+      "bytes": 10959,
+      "SHA256": "273efa690ade7097e4a3278b2d06837b86e5f19bf705286f152dc4ffced6645b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round122_evidence.py",
+      "bytes": 10551,
+      "SHA256": "c37bb09e82a8f3fa0ceaa1d79cd276813a56a228099701096fa1f640e2ec4f9d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round122_prepare.py",
+      "bytes": 10513,
+      "SHA256": "38442f900e16c5a7485ec26afec7629c260f69775e5658a4b6f65af7c9062c9d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round126_common.py",
+      "bytes": 5574,
+      "SHA256": "0a8252da3c37c2e50c8f24acad67bba57f8f073dd900b1faf275c3fdc3f4d5ac",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round126_data.py",
+      "bytes": 9774,
+      "SHA256": "2ece33430653f63f456d74125c809ae63f32f8eb392b6f706823df01dee96345",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round126_export.py",
+      "bytes": 8164,
+      "SHA256": "352ddf3c8e560e4d9c21c40666871573fa52ec9dc209c51bc024bf16ad6a2b0a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round126_run.py",
+      "bytes": 3424,
+      "SHA256": "d3f7bdf51d40100f6bcc57a76c543fe6946364b60dfcb6cc501b90ce85eb3cc3",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_admission.py",
+      "bytes": 5271,
+      "SHA256": "34f673e6e4e43e5aeb9b77b08ab083fe7e2a798869de82a13c18bfba506d8132",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_analysis.py",
+      "bytes": 22631,
+      "SHA256": "18582a4b98fef8595a557adc7edc318f18b90d5d6dcef00a0fc9353676eb5e83",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_boundaries.py",
+      "bytes": 5652,
+      "SHA256": "7591d401104cf095f0a47e3dc785521918e26f5a21085a9808137210b2c82d5d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_campaign.py",
+      "bytes": 7752,
+      "SHA256": "287d33761e3a1d003e35e44eec467697e6218d3b98383daf293e2e1d245b293f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_clocks.py",
+      "bytes": 2497,
+      "SHA256": "55f550d153aadf13a2c0dfd52dbef661830567cba5fbb4ca955a425787d34427",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_common.py",
+      "bytes": 6113,
+      "SHA256": "ba0e4a93a6ad90d17784f1ee2a5ef8fcf8905aef0f1b44346a9221eb9ea90e37",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_data.py",
+      "bytes": 8698,
+      "SHA256": "de063492c429bc545e87a1fbdb4f7e00c3ad4cb5cff2b2feaada5a3f74aae275",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_evidence.py",
+      "bytes": 5972,
+      "SHA256": "d776d0dc999e6199cd376e693885abbd5a3f86616e8238b37645f4c80c96626a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_pdf_review.py",
+      "bytes": 3389,
+      "SHA256": "2691b5ee0e0967a8d4a25e5fa10c2e9a7fcfc2a02ac486b9a48cc641403f7876",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_qualify.py",
+      "bytes": 5972,
+      "SHA256": "ab5c0c12783e7b852dd42642afdc1a276e775b7cc643817959200826518106b6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_pipeline.py",
+      "bytes": 9394,
+      "SHA256": "8a621c714d6f04ef046b16745ce8493fccdf023ae05c120b680075d72433edf6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round127_release.py",
+      "bytes": 10573,
+      "SHA256": "7b0cf7b2dea9bace1147f3b4cf33ef4599011de023773f8923fa7e441d36c15c",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_admit.py",
+      "bytes": 6549,
+      "SHA256": "f01a6c25f2279f813a7cd91ffd0039c3c01357ec63f0daaad2a621f831b25218",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_build.py",
+      "bytes": 2224,
+      "SHA256": "40cc18dcf857cbcbc4fd55e46e5125752cd481eae0077502b8a5ba0f540a33ca",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_analysis.py",
+      "bytes": 9824,
+      "SHA256": "950082c2cebaa72487576f89760a0a151d2f78444b871d0dd1a23ccb8ce56af5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_campaign.py",
+      "bytes": 7315,
+      "SHA256": "cff25325ae4d436556be0615447bee3f71054ad5086e5d0303d5bab5212f8e4b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_closeout.py",
+      "bytes": 8750,
+      "SHA256": "81a89c8bc4cbe25eda5579cfbf1e7ee58ce54690b3c38287c8bc84509910dc59",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_documents.py",
+      "bytes": 20426,
+      "SHA256": "7c70f76bd20b5d2522552011573658d86e844b289a1889e9cdb9cb10831580be",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_cleanup.ps1",
+      "bytes": 6981,
+      "SHA256": "8543b04801c5dee127c57d3cddce4f95e1baecaac4b2a780db861df10a48ca15",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_common.py",
+      "bytes": 4508,
+      "SHA256": "719bc515fcc6fe530fd8baa645162702c18618dadbc8d0537ba9bf97bf0777f1",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_evidence.py",
+      "bytes": 2758,
+      "SHA256": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_export.cpp",
+      "bytes": 4641,
+      "SHA256": "a0ea0671a8934c10452e0eb1e250aac092ae605c7aa6310ee479f1c94d653780",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_final_independent_review.py",
+      "bytes": 31167,
+      "SHA256": "34224450473cfdae5617d4964d80a02c317d79cfd412a45317898cc83e9a4838",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_formal.py",
+      "bytes": 2464,
+      "SHA256": "da9706f0d7b45eee719d62994a8f895a3eb898248e8071a879e62b1569153446",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_pdf_review.py",
+      "bytes": 1320,
+      "SHA256": "7fe5e1ca6d29491bfb57fd0ef652465e1c27a7e3b34e88207039694c0337ca26",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_native.py",
+      "bytes": 3595,
+      "SHA256": "52eb47e91bb2da71f48bf56be70f113eb091669702f1a531db324a5eca4a91f6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_portable_check.py",
+      "bytes": 7601,
+      "SHA256": "ee469ac49890af9145a10fc0152b32c65e457c666a733371a356bd00e58094c8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_prepare.py",
+      "bytes": 6226,
+      "SHA256": "ba0fd419d8446c51920c222101fdf307b4b7908c7b18a9d7510d2831f12ec833",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_public_restore.py",
+      "bytes": 8126,
+      "SHA256": "5446f6cd2bc312b96b8f27efc56bce916e760772fdf19436ed2a1147edb47f28",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_qualify.py",
+      "bytes": 10001,
+      "SHA256": "e0a49281b80fa06e3b87a935f7fdb378b2b7c9f36cc6b5338e1f6ec2977cf189",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round61_research.py",
+      "bytes": 13473,
+      "SHA256": "088b5a4c4626b528658e403e163958074676f4ea8b58ed8548a54f4727c18571",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round128_release.py",
+      "bytes": 6465,
+      "SHA256": "2fe629fded105e6f6664087fb96b59cb3cc4bf1007e4fb5b5fcff2d33d3572c8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round69_research.py",
+      "bytes": 9887,
+      "SHA256": "d7579acdaf24beea19a6724b1a6d57269b5036fb67e0d53f6e152a2db24ce272",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round69_topology.py",
+      "bytes": 2219,
+      "SHA256": "80254cd7cdaf8cdadc7d31fddc1c196f55fd6754d56da18cb2e4010223864212",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round70_affinity.py",
+      "bytes": 4509,
+      "SHA256": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round73_qualify.py",
+      "bytes": 3500,
+      "SHA256": "ad6062138d6dce6ab049cb6bc5986ba68fdecbda4588dbeda14a51b00de978c0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round73_seed_diagnostic.py",
+      "bytes": 12559,
+      "SHA256": "08b23e80febe63627f8ae79d22df115d4c127d809de411f21e87a3e305a1dca0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round75_qualify.py",
+      "bytes": 5227,
+      "SHA256": "c82f757cde7e0915f097749925e54e19cf9e9d0c483ada6d9654439ce580232f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round75_startup.py",
+      "bytes": 12402,
+      "SHA256": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round76_qualify.py",
+      "bytes": 5321,
+      "SHA256": "c56ab8d49cd664d1433d5dfa0fbe2670ccc390a05ea3a2abd60e479ba26dca72",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round76_startup.py",
+      "bytes": 14239,
+      "SHA256": "993c448dd466d5288ed61003ac339c63002452c86737c9d7ee46457b56e6f929",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round78_audit.py",
+      "bytes": 7346,
+      "SHA256": "57f4aa7ba6d1b0c20d95779c08d27fd4f1d25164cbbe26ca2a0ae7c090fa58ea",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round83_audit_v2.py",
+      "bytes": 7547,
+      "SHA256": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round86_native_evidence.py",
+      "bytes": 11468,
+      "SHA256": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round88_a1_g3.py",
+      "bytes": 35352,
+      "SHA256": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round90_lp_g_g3.py",
+      "bytes": 51527,
+      "SHA256": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round94_lpg_contemporary.py",
+      "bytes": 55473,
+      "SHA256": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round94_lpg_formal_recovery_v3.py",
+      "bytes": 25366,
+      "SHA256": "7d54f6bfd2a0fec302b7cdf5d0291809254ea1ffdbc864face54ecc704b7ce01",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round96_external.py",
+      "bytes": 7554,
+      "SHA256": "4d8f917ce46aa0945319d69e8001006a7cb039ff4a274844e53c6774eeb5d57e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round96_prepare.py",
+      "bytes": 8730,
+      "SHA256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round99_common.py",
+      "bytes": 2345,
+      "SHA256": "760bf112a9c9c0cd1388c842aaa71b715b2958b44fb37541a5a3a2194c024ee0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "scripts/round99_pure_start_audit.py",
+      "bytes": 7880,
+      "SHA256": "4157be5495f22b91e2ee0ac5e8680d0ce33768bba3f55b66027315d5cf02dad9",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Bounds.cpp",
+      "bytes": 136634,
+      "SHA256": "05c6e795b4c22c27ae55dbca07a99901006259cc56fb3e3ae0fc259bace561ed",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Branching.cpp",
+      "bytes": 1772,
+      "SHA256": "86bec005e02bf4410ea74119abcd669bc102bf78b7b911a73c53a22e9e3f83bb",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ColumnGeneration.cpp",
+      "bytes": 215247,
+      "SHA256": "9a8cae6d1fcd7f80e52d44eeb63e85cc7c2fb9cf587c56dc57f8c8bc17325eb3",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ColumnPool.cpp",
+      "bytes": 11156,
+      "SHA256": "64469057f76da3ccc16832091f791024fda67dd99cfe67e30138b4062cb88325",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ConnectivityFlow.cpp",
+      "bytes": 10991,
+      "SHA256": "14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ControllingLeafScheduler.cpp",
+      "bytes": 46072,
+      "SHA256": "6bbc7e773355bac11e2fb60d9ec4641d57eedd7baf29c38de6eba3cde3674303",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/compare_main.cpp",
+      "bytes": 56923,
+      "SHA256": "901a8ad8a32f72ea931fb173ef97ae0e0b9d143a3effde9a56e9bf17928d6930",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/CplexBaseline.cpp",
+      "bytes": 391228,
+      "SHA256": "8e93eec1403d26b629c851746c90c2c2ec1ffc2c683b959c1f37f06d4be6cc72",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Cuts.cpp",
+      "bytes": 4584,
+      "SHA256": "08065ae482dd559403579810bcb5f74abe4b8ca685d33d2ff967dd9aceda8fb0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/DenseProgress.cpp",
+      "bytes": 20110,
+      "SHA256": "6fa297312cedc09d58011bd7e7514fb332d8fd6a22bfe4be8fc49b06c9b878d6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/DispersionChildBound.cpp",
+      "bytes": 6869,
+      "SHA256": "753d447cf19d2b77fff1ad715236af12f7ea2e1fceef7bf4ac4e171a156f3cc3",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Evaluator.cpp",
+      "bytes": 6239,
+      "SHA256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/FileSha256.cpp",
+      "bytes": 3709,
+      "SHA256": "f53636fafb00848a9cdff7c03c70dcf506f4080b1711869694608776789ac45a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ExternalGiniTree.cpp",
+      "bytes": 71577,
+      "SHA256": "4e51bc6e3b0e9993b317c6c4aa0fb659f5cd88a71d19fe78608fa80c85e1bfae",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/FleetEventCuts.cpp",
+      "bytes": 27072,
+      "SHA256": "ba093f046223191e0feea5c80d79a32ca35d2a9183495e3e388b3dd59a83ba5d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/GiniAdaptiveParametric.cpp",
+      "bytes": 20421,
+      "SHA256": "dff46ddba14238ebf8ff18633cc02169c15272437850da321198e5a6ee35f44b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/GiniBranching.cpp",
+      "bytes": 1616,
+      "SHA256": "33e1ec3fee27fd4d1302da9b4671bc547bddfbb8c6ae074f3f80b410cd7da149",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/GiniEnvelopeRefinement.cpp",
+      "bytes": 25904,
+      "SHA256": "dd60cf05867aee9de7f07ee519a09797315595c93755506566e1dd2e802c7659",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/GiniEnvelopeTailRepair.cpp",
+      "bytes": 19448,
+      "SHA256": "97ae5837ba352215e35e613d919e09356fac600ecada5aa5922110b44c071465",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/GiniFrontierGeometry.cpp",
+      "bytes": 24213,
+      "SHA256": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/GurobiBaselineStub.cpp",
+      "bytes": 3452,
+      "SHA256": "2d112d5919f7b9a3b197ae75076f70c9a00f6da0d5a66192f7aea36094904033",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/GurobiBaseline.cpp",
+      "bytes": 295695,
+      "SHA256": "da64cd65881aca91ac7eca2932f2cd489306380334c8c3bfa8d592887c0b625c",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/GurobiCertificate.cpp",
+      "bytes": 5706,
+      "SHA256": "1c47526e0139d264917e5a8ab71fb873277f7353ce0c7ec47e02487fef7f01bd",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/GurobiProgress.cpp",
+      "bytes": 1999,
+      "SHA256": "9cccfb4ecdf359cbd98a63174357d0b9e263ba9278b06d884c3c970b65deaea7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/hga_tgbc/HgaTgbcGreedy.cpp",
+      "bytes": 100387,
+      "SHA256": "871b3f3e024e273bbc8ee55d60dfc29f11d5282891eae1ed1419da02119821cd",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/HgaTgbcRunner.cpp",
+      "bytes": 27569,
+      "SHA256": "418fa40968a22196c72eb48879e7bc4a72bb8f7a570faba99b77814248e5d8a5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/IntervalRowFactory.cpp",
+      "bytes": 40343,
+      "SHA256": "e2fa0d2a7f28da39b34f09c03060f1c7a004d3f37884651c66e2519313394655",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/InventoryRouteCuts.cpp",
+      "bytes": 14074,
+      "SHA256": "f76e9dcf44339358b21cd2c2c508e32165d95ce43801160cd62329119ecee8fc",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/InventoryRouteRootClosure.cpp",
+      "bytes": 13514,
+      "SHA256": "543545f781a57d693434cc2b22902f45c84ae46c6615ff25a68d833004d94845",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Logger.cpp",
+      "bytes": 566,
+      "SHA256": "3cbab7e975f5c97ee5bbe98984716fc44c245f48604f329ad9d41d144d415b63",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Master.cpp",
+      "bytes": 5470,
+      "SHA256": "c18046da62482e8de2cbfc3df09bb4053e631cde830b6925d5e5921d44c2d1f0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 1127772,
+      "SHA256": "c1508b72562ad67107c3ba8874487e1468883c0fca343811b5b5ef1e0d442479",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/MipStartMapping.cpp",
+      "bytes": 15693,
+      "SHA256": "0273526e80f452bd074b912bec2d14fe0e960c36208c0d586ebfc19db281fe13",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ModelCorrectness.cpp",
+      "bytes": 5342,
+      "SHA256": "112499f70aee6865855532cfceb253d164433368626bf4c8fed3539b40c6e3ec",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/NativeOtB1.cpp",
+      "bytes": 23390,
+      "SHA256": "e4722c675c6470d85f369a80304adace4403b61c579d95c6ff62594b8576ef0b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/NativeEvidenceJournal.cpp",
+      "bytes": 13423,
+      "SHA256": "446d39aec3a0d45471d4172281b2d94c680104acc297db2ca1b814d18b0b6af7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ObjectiveResourceCompression.cpp",
+      "bytes": 5115,
+      "SHA256": "60dc25830ee0e50a7770553adef178eb595337aa3eeabd8ef6710dd645b6e81d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "bytes": 534570,
+      "SHA256": "c92ee7e79edf71dbd793b10d0644a5a2878b229d3c2598b38e0513382bd13570",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Parser.cpp",
+      "bytes": 8480,
+      "SHA256": "acc0897e687dde82355f2153272e2fb1c68c1ec5507a549894109dd51b4b4ccc",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/PaperK1AmSf.cpp",
+      "bytes": 8632,
+      "SHA256": "a46dc43c2b0cba21b427d1c38884114e6b68f3e52f6c13493b609aecde702440",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/PenaltyCoverSeparation.cpp",
+      "bytes": 11451,
+      "SHA256": "6d1e696bc893390e03019fd2f116449a0830cde2f0c347081a79a9ed4cdc0d49",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/PhysicalWitnessValidation.cpp",
+      "bytes": 4881,
+      "SHA256": "0004bd96cad2cf70ad1bf56826ed632b2e6927209e4d172c6526889d610ad678",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ProcessPhaseLedger.cpp",
+      "bytes": 3200,
+      "SHA256": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Pricing.cpp",
+      "bytes": 104029,
+      "SHA256": "061ac766fee8bf0bc7ed206130e9e2ab2de74e78924ee7f077c7a4a35c1e6083",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round100_model_export.cpp",
+      "bytes": 1718,
+      "SHA256": "2ad6f259661bb717ad9d073814dfeb652e930a88a22a38796e88b0783240242c",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round101_fleet_diagnostic.cpp",
+      "bytes": 2146,
+      "SHA256": "a0a499fe8d557ab8be1910f84debc01aea91f90b5ca410cfd97cbf6c9e6791f0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ReplicaExternalGiniTree.cpp",
+      "bytes": 56998,
+      "SHA256": "697640629d71bd75414bfd0b8203f6fccd9c8faf99fddabfcdfc2e83bd1bd003",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Result.cpp",
+      "bytes": 250280,
+      "SHA256": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round103_hull_oracle.cpp",
+      "bytes": 2544,
+      "SHA256": "fa6c78610a767ca6d73d95f1a94e43654a2e1ffaa71f670211501a8872584df2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round102_service_diagnostic.cpp",
+      "bytes": 2403,
+      "SHA256": "3ee62d0885c387b092fa2d7ee7098ac733899fa4170aa7a70e2b3f167c6150c6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round103GurobiHull.inc",
+      "bytes": 20303,
+      "SHA256": "3a7013e5225d239f6c169b6f9df172258ef3ba1308572e86e915ff7ed3045761",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round104_compress_main.cpp",
+      "bytes": 1762,
+      "SHA256": "7a421040cfc9d23ae4249a156b9cde324247047af0e89f989355af511b5b0160",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round104GurobiObjective.inc",
+      "bytes": 27457,
+      "SHA256": "3f302ad895de1f449fa157b0e79e465f057b7f40839fa0db9ba279a1bb1a58ed",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round105_oracle_main.cpp",
+      "bytes": 1596,
+      "SHA256": "4b57b2c09a19a0a0acb752ba77413ab9728b9ee5ed801f2e226cbd9b4443fee8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round105Decomposition.cpp",
+      "bytes": 6918,
+      "SHA256": "14539f42283d74e88bad7b7b5a69a78718cae69ae751d37f4a5df22d10bb6ae6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round105GurobiDecomposition.inc",
+      "bytes": 32656,
+      "SHA256": "92f31755e43820d24564bf27c44e1c3869e181752a5516d20bee742979c91ab6",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round106_research_main.cpp",
+      "bytes": 1920,
+      "SHA256": "e8b0702249b21ddfbc9fd81d1c212e72eec9f7169732317eb655f83b1396baeb",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round106Events.cpp",
+      "bytes": 9894,
+      "SHA256": "c8ad10f87de50557c60ffade40eeba5827f5c67d821cc7159f92b127e4f56fe0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round106GurobiEvents.inc",
+      "bytes": 34131,
+      "SHA256": "94bc21f018e0b66a795dab81ade0746a11980a634d5039ff00c03a0c8c96d7b1",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round106GurobiResearch.inc",
+      "bytes": 14031,
+      "SHA256": "e9123e34a40129b6358a8981777a89190ea102c327ebb4aa120a9a2caa3d4e6f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round112CompactStart.inc",
+      "bytes": 7117,
+      "SHA256": "eac79743634dd5b7a5c8b4721831ed5967a35bab62d2009ceb542f7ff739419d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round107GurobiFrontier.inc",
+      "bytes": 63118,
+      "SHA256": "248a9fdd263c8ee8db882d68875366589d22b09c948373a253a1e3687c4e461a",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round119ProofContraction.cpp",
+      "bytes": 8381,
+      "SHA256": "ccb0eb0e6108cf59c3c69748366c023de0b652b2c4c210932e0e72eb4ad3a78f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round120NativeProof.cpp",
+      "bytes": 13709,
+      "SHA256": "40c72a1f78da2e005e7e0ecf2c9a1d2efa2a0aa1cb413837cba9a82277cca9ce",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round48K1AMF.cpp",
+      "bytes": 13732,
+      "SHA256": "305e00e21e7ab23f5b3bb0d3919b4fb6d9edbd9c147b5ebe832056c531a8640f",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round49K1RC.cpp",
+      "bytes": 18118,
+      "SHA256": "5b2f7dc45b6403ad940ea3be1156ae941c68b15c984c04344d2f404433051bcb",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round49_rc_extract_main.cpp",
+      "bytes": 5408,
+      "SHA256": "1c72138b30fb5cc04a8db9b5584276ae375c96e4adc6f2e9ce376e974452fa8e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round50_interval_mip_main.cpp",
+      "bytes": 87700,
+      "SHA256": "0b19b941e8e116b84af79c55c393b2fa66f7a7a88aea1e32188274138d6e7514",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round51IntervalMip.cpp",
+      "bytes": 9669,
+      "SHA256": "b0133b20bf47e45405d1167232f547f655a567d3fdfaff04df3f5401cf3824d0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round50IntervalMip.cpp",
+      "bytes": 17237,
+      "SHA256": "627d22610210ac1b748f363dbfd3b6e02f655b5b561655be59723627f13ebba7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round52GurobiCutAdapter.cpp",
+      "bytes": 2841,
+      "SHA256": "6ee0f1ba27c5243e421feb5c8d7bdc60aae7e99d11f2d3b3f23c7050a7d4f3a0",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round52TailoredCuts.cpp",
+      "bytes": 16967,
+      "SHA256": "90c64a6be953cf0c274805923bb364cd4bbb0238ccc2bf3b13f4b06dea267e41",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round53CallbackIsolation.cpp",
+      "bytes": 1533,
+      "SHA256": "28583d0f4d42d6a3ed5d3f707aefccde681bb7e41286a657e3b1796324e3df91",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round54_inventory_route_main.cpp",
+      "bytes": 26970,
+      "SHA256": "c859ba94550e1d33adf535e21fb6bdb0f44763d7d8d6765370f65968692c8986",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round58Benchmark.cpp",
+      "bytes": 6023,
+      "SHA256": "f81e84821c892de3b99f7a79beb3317c3f9b37c4b51051f7192d0aaf812dabdd",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round60Candidates.cpp",
+      "bytes": 16609,
+      "SHA256": "63bef04086c0cf9a3d9c94a430550d5b33e120c662e4b07940bd841662b0d333",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round61_candidate_main.cpp",
+      "bytes": 7255,
+      "SHA256": "d0e1916a7327f851515a28d6665bb24ab97441b737156dacc960518290a665a8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round61_time_main.cpp",
+      "bytes": 2410,
+      "SHA256": "7930aac4126b4ea8e5e96a84d9ab4deeadd7d67cb722f146d49cf8f7db80fa50",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round61Candidates.cpp",
+      "bytes": 19999,
+      "SHA256": "c22fd9723df604fc3be20f47ca0cf674b5fec475bff6a5f8091bd68879d14501",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round61TimeOracle.cpp",
+      "bytes": 18640,
+      "SHA256": "b5876fb8ea2174a67f64bea4d52cbfc4a4c3a49803ee2965358b3aaa784b4576",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round62_native_micro.cpp",
+      "bytes": 4953,
+      "SHA256": "4699beecac1cc1e1c53c65928d53d63ab4890c008203992c1fc806bb567d29b9",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round62_projection_audit.cpp",
+      "bytes": 12107,
+      "SHA256": "95b9eb7390a22b1d2a487f70aba5818b618ce7a16f9035300d591f54de4f6e3d",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round62_threshold_main.cpp",
+      "bytes": 2093,
+      "SHA256": "a6e52bcb7cac428f207d955c2e796026bee57b998247eb34f34e44e166a2bec5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round62Passive.cpp",
+      "bytes": 3531,
+      "SHA256": "da73ae99af2d0069f5d453abf69673cb771b9d973eed4405d30d85595e1ce4d4",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round62Thresholds.cpp",
+      "bytes": 19778,
+      "SHA256": "474c49d10d710785fb063a4f538391cd6618b456cf256da4f6a6686cd4923256",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round63_resource_probe.cpp",
+      "bytes": 15567,
+      "SHA256": "7336c2171f89b042235ae64d1ca5379e30fcc4eb0dfc428e46a924eb958c0759",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round63TimeResource.cpp",
+      "bytes": 11533,
+      "SHA256": "599f1223413718b9b1ac2d185175626ea98b14ba82b4537abcb1e43a4a38a9a2",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round64_projection_audit.cpp",
+      "bytes": 12156,
+      "SHA256": "2d53c7dea4e2bd272910193cf3f38000c236316610fdd2eb066893adf93ec732",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round64_resource_probe.cpp",
+      "bytes": 9206,
+      "SHA256": "3af5b4f053208723d5411d2f3181b26c96a2176d2b8fcf5e5b9d56f172cb7100",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round64SharedResource.cpp",
+      "bytes": 5508,
+      "SHA256": "60ee4ebbeb1f3d9b7211267a42087dd0a1254617cac1551187bb5699976fb625",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round65_reference_build.cpp",
+      "bytes": 2711,
+      "SHA256": "2a0dbd56af5158baf86b7397cf7d384e194fbe10172df41f683188ba6215c417",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round65Projection.cpp",
+      "bytes": 14130,
+      "SHA256": "2461d281782026f8982bd334de3b1ae9fa1486f390642724842629b741cdbad9",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round73JointInsertion.cpp",
+      "bytes": 14626,
+      "SHA256": "e624fb74f575cce78ede760d7b52c3778d933621fc057a9f65d5a45f93716034",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round75QuantityDescent.cpp",
+      "bytes": 16645,
+      "SHA256": "f904a7f7355e897df1aff3d07757d8c2ac5b8dff134235c061637d46a87c0075",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round76PhysicalClosure.cpp",
+      "bytes": 4689,
+      "SHA256": "d39f05d34532e666c4e0ebcc08a311f2383a3d33a46d520f2cdd58981c4b675e",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round78BalancedRelocation.cpp",
+      "bytes": 15936,
+      "SHA256": "d082472fbb77d103345a9e77c6a17a815feb46b281c2491a13c8b8ded5eb4393",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round92HandlingActivation.cpp",
+      "bytes": 20049,
+      "SHA256": "d638d09f4cf1e474da620444f10d0b30a28d2dd8b235993cb88a49d76ff363e5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round83BlockExchange.cpp",
+      "bytes": 12512,
+      "SHA256": "5a70c158a75f447c40fbff995703339cb5b59c551cba1be193283947724644a5",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round93CoQuantityDescent.cpp",
+      "bytes": 14863,
+      "SHA256": "cf3ea08852f56a10bceeb59c169ff92de4d9d8aad0914a7233985ce7da4f2012",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round95FullBlockDescent.cpp",
+      "bytes": 15061,
+      "SHA256": "10b390f6b47a77ff25812e8c990e17f1ba956d4121d1eced910a72aab479dcfb",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round96RouteOrder.cpp",
+      "bytes": 7334,
+      "SHA256": "b8e354f80ca57d97a5ac712df03c6313c6d013f5edb618e8dfb0b023e56303a8",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round96MultiQuantity.cpp",
+      "bytes": 5830,
+      "SHA256": "0fdc37a2ebdaf08dc63fe161a64c423b513fd56593ccec8c351e73fd49d16238",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/Round97NativeClosure.cpp",
+      "bytes": 21491,
+      "SHA256": "39f7d168a288a6fece32d7985160dd7a2d8a1756c918465ad588e6c81fb19731",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round98_model_export.cpp",
+      "bytes": 1681,
+      "SHA256": "ea7080903574ee0b11b56311add6e929d31f50f20f3a06a1227f01590e65ce28",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/round99_model_export.cpp",
+      "bytes": 1708,
+      "SHA256": "f01cd1b44cc2706d68492a875dbfdc393dc780ede63ab712227006e5fc8e26cf",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ServiceResourceCuts.cpp",
+      "bytes": 16211,
+      "SHA256": "f1f0e97b47dbc9e6038f797892fa33764e843253ccca2cc0b49ac4c632a452fc",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/ServiceResourceHull.cpp",
+      "bytes": 9414,
+      "SHA256": "d567e9f9e270e65a98a357830214af19b527c44f9891589cdaa452b29164d10b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/StaticSegmentedGini.cpp",
+      "bytes": 16389,
+      "SHA256": "7c717ddd668a1ce54320fd0dff98010a5f16270fae5727c0641657a8911f90ed",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/StrictCertificate.cpp",
+      "bytes": 12134,
+      "SHA256": "a1858bb0945e64fc709bd3534b4e02f07d7d5481cca075d3a8ebc07916372ef9",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/TailoredBC.cpp",
+      "bytes": 5222,
+      "SHA256": "b350b2d94aec9ad507f256d281dd7a2deb9f08b05ddfb777cfcadcedad44ee15",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/TailoredBCCallbacks.cpp",
+      "bytes": 2243,
+      "SHA256": "33a4bc26911359f523b3ff5cb0af0a2193386f0ceabaf1b90250ccc54890736b",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/TailoredBCCplexApi.cpp",
+      "bytes": 351106,
+      "SHA256": "931084a6b586966196b38a7e324b6a73e4d0a494c28273b540c19e7e0bae67e7",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/TailoredBCCuts.cpp",
+      "bytes": 177,
+      "SHA256": "a115454a170fce8b31a439d0ad5cfdadacac7f6b9f0d5761a39b5196a97b7705",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    },
+    {
+      "path": "src/TailoredExact.cpp",
+      "bytes": 57558,
+      "SHA256": "d7193cdda00408912c5adca4f4b8f13f3fe6f71e32ee6e5ab5c5be36cc6e7f84",
+      "ordinary_HTTPS_validation": true,
+      "application_credentials_supplied": false,
+      "curlrc_disabled": true
+    }
+  ],
+  "anonymous_public_HTTPS": true,
+  "local_raw_or_old_checkout_fallback": false,
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0
+}

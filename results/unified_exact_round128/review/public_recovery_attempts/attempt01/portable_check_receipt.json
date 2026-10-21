@@ -1,0 +1,178 @@
+{
+  "status": "PASS",
+  "actual_producer_seals": 16,
+  "actual_call_model_hashes": 53,
+  "comparisons": 17,
+  "distinct_inputs": 3,
+  "all_17_directions_independently_recomputed": true,
+  "all_actual_final_fleets_physically_replayed": true,
+  "representative_MD_R_Start_and_own_fleet": [
+    {
+      "method": "MD-R",
+      "group": 1,
+      "complete_actual_Start_audit": [
+        {
+          "start_path": "results/unified_exact_round128/campaign/01_SC-C15-S_S0/raw/03_SC-C15-S_S0_R1_MD-R/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "start_sha256": "204a9cd73a0ae0172f9c55405b5b6d68dfffe58985c43477324d256ce3a3fe90",
+          "vector_sha256": "a6b472d449ab299bec7ba56a50ea6fbfd4ca59029fceb7ef9c8d7a3b8eb306e0",
+          "model_sha256": "f5eb565e62369104017af87ad255aac727f8e6a34ca5b4f90021f8738b5692a2",
+          "maximum_absolute_residual": 1.1102230246251565e-16,
+          "mode": "m-binary",
+          "rows": 5054,
+          "columns": 2083,
+          "objective": 0.5627184431151906,
+          "actual_quantity_type": "C",
+          "direction_columns": 30,
+          "per_column_restored_type_checked": true,
+          "ordered_native_columns_checked": true,
+          "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+        }
+      ],
+      "own_H_physical": {
+        "G": 0.2127185490242815,
+        "P": 2.333332627272727,
+        "F": 0.5627184431151906,
+        "Y": [
+          50000,
+          11,
+          13,
+          12,
+          10,
+          10,
+          8,
+          12,
+          7,
+          9,
+          8,
+          8,
+          14,
+          16,
+          1,
+          18
+        ],
+        "maximum_duration": 3580.6253394237324,
+        "pickups": [
+          19,
+          15
+        ],
+        "return_loads": [
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "duration": 3580.625339423732,
+            "nodes": [
+              0,
+              1,
+              5,
+              2,
+              12,
+              10,
+              4,
+              0
+            ],
+            "operations": [
+              [
+                2,
+                7,
+                0
+              ],
+              [
+                4,
+                0,
+                7
+              ],
+              [
+                12,
+                7,
+                0
+              ],
+              [
+                10,
+                0,
+                7
+              ],
+              [
+                1,
+                5,
+                0
+              ],
+              [
+                5,
+                0,
+                5
+              ]
+            ]
+          },
+          {
+            "vehicle": 1,
+            "duration": 3569.3363164626358,
+            "nodes": [
+              0,
+              7,
+              8,
+              3,
+              6,
+              9,
+              11,
+              0
+            ],
+            "operations": [
+              [
+                3,
+                6,
+                0
+              ],
+              [
+                6,
+                0,
+                5
+              ],
+              [
+                7,
+                5,
+                0
+              ],
+              [
+                8,
+                0,
+                5
+              ],
+              [
+                9,
+                4,
+                0
+              ],
+              [
+                11,
+                0,
+                5
+              ]
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 2,
+        "empty_vehicles_added": 0
+      },
+      "Optimize": 0
+    }
+  ],
+  "representative_MS2_actual_deletion": {
+    "mode": "ms2",
+    "removed_rows": 910,
+    "removed_columns": [],
+    "families": {
+      "conditional_3": 910
+    },
+    "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+  },
+  "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+  "R127_MD_unstarted_unchanged": 3,
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0,
+  "finite_scope_not_full_rational_matrix_proof": true,
+  "seconds": 4.206180299981497
+}

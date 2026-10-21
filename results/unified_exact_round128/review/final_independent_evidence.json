@@ -1,0 +1,1134 @@
+{
+  "status": "PASS",
+  "review_date": "2026-10-22 Asia/Shanghai",
+  "actual_Optimize_or_Start_or_builds_by_reviewer": 0,
+  "script_SHA": "34224450473cfdae5617d4964d80a02c317d79cfd412a45317898cc83e9a4838",
+  "preformal_SHA_preserved": "bcf98c6f639218bbc3b798722632a114e024331cd1d74416f8b9fc44b87e8cf5",
+  "protected_artifact_hashes": {
+    "results\\unified_exact_round128\\arms.csv": "c3f5e4bf75f8719444fb29c132eec209ef10fc31a6308839ad31d9531a74199a",
+    "results\\unified_exact_round128\\pairs.csv": "c228cf397bd1dcb3dcd3326459b38b0873dd2c87b2b006441c73fcdd49929c15",
+    "results\\unified_exact_round128\\mechanism_costs.csv": "8d3938b7bfd8b7afde8c9e1e839aee3bdfe2bc15cb015f257c0a935481fab057",
+    "results\\unified_exact_round128\\support_two_seeds.csv": "5e943c20e0cb4134c6a49f8d6fd6cc016f75c5ba1d26f798779ad4cfc24e2251",
+    "results\\unified_exact_round128\\actual_method_differences.json": "2c23a2904bb01bd819d957a27b9b7ed91e86b07014c17af0f5d98dc02b9aeb61",
+    "results\\unified_exact_round128\\stratified_summary.json": "b7b9ed6a199a53791edc64379dce72f864eedf806301f91014944b6a2e14fbfe",
+    "results\\unified_exact_round128\\E2_frozen.json": "f3265c0e3a07854e5dfb65be5c74e3b43d92d6f90fbe37bc5a1aa5ee0f02ce6a",
+    "scripts\\round128_common.py": "719bc515fcc6fe530fd8baa645162702c18618dadbc8d0537ba9bf97bf0777f1",
+    "scripts\\round128_campaign.py": "cff25325ae4d436556be0615447bee3f71054ad5086e5d0303d5bab5212f8e4b",
+    "scripts\\round128_evidence.py": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+    "results\\unified_exact_round128\\review\\preformal_source_review.md": "bcf98c6f639218bbc3b798722632a114e024331cd1d74416f8b9fc44b87e8cf5",
+    "results\\unified_exact_round128\\campaign\\01_SC-C15-S_S0\\identity.json": "73f25a08737f4d5c1e291c2750632bcb1f3d1917cc0c809b2fd659e9062cda7f",
+    "results\\unified_exact_round128\\campaign\\01_SC-C15-S_S0\\reconstructed.json": "cfc614948ac88df2a1ac15c42467de44807b3f0b635b01b051f9ccb4facb7a74",
+    "results\\unified_exact_round128\\campaign\\02_SC-B20-S_S0\\identity.json": "1392d2e8b719c27c7e0291bf61659fd34a004747e18d16c5bddabd0cb9d18a24",
+    "results\\unified_exact_round128\\campaign\\02_SC-B20-S_S0\\reconstructed.json": "8b6ca18e645c9ecc0e2bbc3450ef48aba07ae95f50020cbd8c44e0c98f562a09",
+    "results\\unified_exact_round128\\campaign\\03_PB-B35-B_S0\\identity.json": "f67a06598d5d44d13e6360bb13dfe0bf99dee509f6ee27cc319023d314469543",
+    "results\\unified_exact_round128\\campaign\\03_PB-B35-B_S0\\reconstructed.json": "5b83459b6d204c7460b1850665fafbf27487f4fdfe15ed4e80998614bf5c7b94",
+    "results\\unified_exact_round128\\campaign\\04_SC-C15-S_S1\\identity.json": "9fd1c08c2334df9fb34d1cb1168f1f0226e1d3045cd86bd77eaea436f7aff2f8",
+    "results\\unified_exact_round128\\campaign\\04_SC-C15-S_S1\\reconstructed.json": "dfd7088b1d2e6d2c8e0b70d1fb945784e84fae2a7748859f7b57c26ab125723b",
+    "results\\unified_exact_round128\\campaign\\05_SC-B20-S_S1\\identity.json": "d25c7836f30236cb6038351416030eb7c488092493ce8340cc359bbe22a8730b",
+    "results\\unified_exact_round128\\campaign\\05_SC-B20-S_S1\\reconstructed.json": "060e8d7a061b338e036c52a0d4065c33e03217bae2ad3af9d69466086b8ed620"
+  },
+  "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "formal_arms": 16,
+  "known_inputs": 3,
+  "typed_comparisons": 17,
+  "certified_arms": 11,
+  "open_arms": 5,
+  "all_clock_receipts_and_qualifications_checked": true,
+  "native_productions_serial": true,
+  "comparison_arithmetic": "Decimal.from_float of own producer receipts; pair() never called",
+  "comparisons": [
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "left": "MB",
+      "right": "P",
+      "classification": "BOTH_CERTIFIED",
+      "direction": "Win",
+      "left_T_cert": 41.55379600008018,
+      "right_T_cert": 464.9669843809679,
+      "left_minus_right_seconds": -423.41318838088773,
+      "right_over_left_certification_ratio": 11.189518868025216
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "left": "MB",
+      "right": "MD-R",
+      "classification": "BOTH_CERTIFIED",
+      "direction": "Lose",
+      "left_T_cert": 41.55379600008018,
+      "right_T_cert": 40.67040329996962,
+      "left_minus_right_seconds": 0.8833927001105621,
+      "right_over_left_certification_ratio": 0.9787409867414073
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "left": "MB",
+      "right": "MS2",
+      "classification": "BOTH_CERTIFIED",
+      "direction": "Lose",
+      "left_T_cert": 41.55379600008018,
+      "right_T_cert": 33.426503199967556,
+      "left_minus_right_seconds": 8.127292800112627,
+      "right_over_left_certification_ratio": 0.8044151537901147
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "left": "MD-R",
+      "right": "P",
+      "classification": "BOTH_CERTIFIED",
+      "direction": "Win",
+      "left_T_cert": 40.67040329996962,
+      "right_T_cert": 464.9669843809679,
+      "left_minus_right_seconds": -424.2965810809983,
+      "right_over_left_certification_ratio": 11.432563895458475
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "left": "MS2",
+      "right": "P",
+      "classification": "BOTH_CERTIFIED",
+      "direction": "Win",
+      "left_T_cert": 33.426503199967556,
+      "right_T_cert": 464.9669843809679,
+      "left_minus_right_seconds": -431.54048118100036,
+      "right_over_left_certification_ratio": 13.910129384440644
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "left": "MB",
+      "right": "P",
+      "classification": "LEFT_ONLY_CERTIFIED",
+      "direction": "Win",
+      "left_T_cert": 1066.7808306734078,
+      "right_T_cert": null,
+      "left_minus_right_seconds": null,
+      "right_over_left_certification_ratio": null
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "left": "MB",
+      "right": "MD-R",
+      "classification": "BOTH_CERTIFIED",
+      "direction": "Win",
+      "left_T_cert": 1066.7808306734078,
+      "right_T_cert": 1067.336756200064,
+      "left_minus_right_seconds": -0.5559255266562104,
+      "right_over_left_certification_ratio": 1.000521124405943
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "left": "MB",
+      "right": "MS2",
+      "classification": "BOTH_CERTIFIED",
+      "direction": "Lose",
+      "left_T_cert": 1066.7808306734078,
+      "right_T_cert": 991.4220449000131,
+      "left_minus_right_seconds": 75.35878577339463,
+      "right_over_left_certification_ratio": 0.9293586989880347
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "left": "MD-R",
+      "right": "P",
+      "classification": "LEFT_ONLY_CERTIFIED",
+      "direction": "Win",
+      "left_T_cert": 1067.336756200064,
+      "right_T_cert": null,
+      "left_minus_right_seconds": null,
+      "right_over_left_certification_ratio": null
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "left": "MS2",
+      "right": "P",
+      "classification": "LEFT_ONLY_CERTIFIED",
+      "direction": "Win",
+      "left_T_cert": 991.4220449000131,
+      "right_T_cert": null,
+      "left_minus_right_seconds": null,
+      "right_over_left_certification_ratio": null
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "left": "MB",
+      "right": "P",
+      "classification": "BOTH_OPEN",
+      "direction": "UNDETERMINED",
+      "left_T_cert": null,
+      "right_T_cert": null,
+      "left_minus_right_seconds": null,
+      "right_over_left_certification_ratio": null
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "left": "MB",
+      "right": "MD-R",
+      "classification": "BOTH_OPEN",
+      "direction": "UNDETERMINED",
+      "left_T_cert": null,
+      "right_T_cert": null,
+      "left_minus_right_seconds": null,
+      "right_over_left_certification_ratio": null
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "left": "MB",
+      "right": "MS2",
+      "classification": "BOTH_OPEN",
+      "direction": "UNDETERMINED",
+      "left_T_cert": null,
+      "right_T_cert": null,
+      "left_minus_right_seconds": null,
+      "right_over_left_certification_ratio": null
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "left": "MD-R",
+      "right": "P",
+      "classification": "BOTH_OPEN",
+      "direction": "UNDETERMINED",
+      "left_T_cert": null,
+      "right_T_cert": null,
+      "left_minus_right_seconds": null,
+      "right_over_left_certification_ratio": null
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "left": "MS2",
+      "right": "P",
+      "classification": "BOTH_OPEN",
+      "direction": "UNDETERMINED",
+      "left_T_cert": null,
+      "right_T_cert": null,
+      "left_minus_right_seconds": null,
+      "right_over_left_certification_ratio": null
+    },
+    {
+      "group": 4,
+      "id": "SC-C15-S",
+      "seed": 1,
+      "left": "MB",
+      "right": "MS2",
+      "classification": "BOTH_CERTIFIED",
+      "direction": "Win",
+      "left_T_cert": 35.4967336000409,
+      "right_T_cert": 35.73745698784478,
+      "left_minus_right_seconds": -0.24072338780388236,
+      "right_over_left_certification_ratio": 1.0067815644818543
+    },
+    {
+      "group": 5,
+      "id": "SC-B20-S",
+      "seed": 1,
+      "left": "MB",
+      "right": "MS2",
+      "classification": "BOTH_CERTIFIED",
+      "direction": "Lose",
+      "left_T_cert": 965.8492734816391,
+      "right_T_cert": 680.0086097000167,
+      "left_minus_right_seconds": 285.8406637816224,
+      "right_over_left_certification_ratio": 0.7040525145800026
+    }
+  ],
+  "denominators": {
+    "MB/P": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 1,
+        "LEFT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Win": 2,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 1,
+      "both_certified_ids": [
+        "SC-C15-S"
+      ],
+      "conditional_geometric_mean": 11.189518868025216
+    },
+    "MB/MD-R": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 2,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Lose": 1,
+        "Win": 1,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 2,
+      "both_certified_ids": [
+        "SC-C15-S",
+        "SC-B20-S"
+      ],
+      "conditional_geometric_mean": 0.9895711356727696
+    },
+    "MB/MS2": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 2,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Lose": 2,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 2,
+      "both_certified_ids": [
+        "SC-C15-S",
+        "SC-B20-S"
+      ],
+      "conditional_geometric_mean": 0.8646329977352477
+    },
+    "MD-R/P": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 1,
+        "LEFT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Win": 2,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 1,
+      "both_certified_ids": [
+        "SC-C15-S"
+      ],
+      "conditional_geometric_mean": 11.432563895458475
+    },
+    "MS2/P": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 1,
+        "LEFT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Win": 2,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 1,
+      "both_certified_ids": [
+        "SC-C15-S"
+      ],
+      "conditional_geometric_mean": 13.910129384440644
+    },
+    "additional_support_Seed1": {
+      "rows": 2,
+      "nonalias_typed_entries": 2,
+      "evaluable_nonalias_entries": 2,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "both_certified_intersection_n": 2,
+      "both_certified_ids": [
+        "SC-C15-S",
+        "SC-B20-S"
+      ],
+      "conditional_geometric_mean": 0.8419186968503779
+    }
+  },
+  "clocks": [
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "method": "P",
+      "certificate": true,
+      "T_produce": 464.9669843809679,
+      "T_verify": 6.078946999972686,
+      "T_total": 471.0459313809406,
+      "T_cert": 464.9669843809679,
+      "producer_receipt_SHA": "034e0f0a11dfbe5917a382b7b58eb649c0c3ef5de4eaf70b2425afbc3786834c"
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "method": "MB",
+      "certificate": true,
+      "T_produce": 41.55379600008018,
+      "T_verify": 1.174674200010486,
+      "T_total": 42.72847020009067,
+      "T_cert": 41.55379600008018,
+      "producer_receipt_SHA": "84644d41eb014cf4249bcb9b7c0e36dcf1057edece14ac7c7c16b9d5f6c3f9ee"
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "method": "MD-R",
+      "certificate": true,
+      "T_produce": 40.67040329996962,
+      "T_verify": 0.5092848000349477,
+      "T_total": 41.17968810000457,
+      "T_cert": 40.67040329996962,
+      "producer_receipt_SHA": "55ef5893da8f82f1fb31409deed6c97d14ad45b337a68594bd5689eb441aede9"
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "method": "MS2",
+      "certificate": true,
+      "T_produce": 33.426503199967556,
+      "T_verify": 1.0267634999472648,
+      "T_total": 34.45326669991482,
+      "T_cert": 33.426503199967556,
+      "producer_receipt_SHA": "a99ac10d6bca186bb485d9c432986eae63f61b61e7802124939c1ad345b9b509"
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "method": "MB",
+      "certificate": true,
+      "T_produce": 1066.7808306734078,
+      "T_verify": 5.154881599941291,
+      "T_total": 1071.935712273349,
+      "T_cert": 1066.7808306734078,
+      "producer_receipt_SHA": "f8ccd6a488fcd4f8ea1c96a200663ef44a0375da58904c8dd57e47c843f1c6a7"
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "method": "MD-R",
+      "certificate": true,
+      "T_produce": 1067.336756200064,
+      "T_verify": 3.940908999997191,
+      "T_total": 1071.2776652000612,
+      "T_cert": 1067.336756200064,
+      "producer_receipt_SHA": "97c2b064646561f769823e4ef4590417d41372488d5a73e3ad8ecde45b822c11"
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "method": "MS2",
+      "certificate": true,
+      "T_produce": 991.4220449000131,
+      "T_verify": 5.4419395000441,
+      "T_total": 996.8639844000572,
+      "T_cert": 991.4220449000131,
+      "producer_receipt_SHA": "2417f0ce7ca048ef335f0550dc5d3636ec14f7ded2c6251e8102e31453caa708"
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "method": "P",
+      "certificate": false,
+      "T_produce": 1170.6283445999725,
+      "T_verify": 1.565825399942696,
+      "T_total": 1172.1941699999152,
+      "T_cert": null,
+      "producer_receipt_SHA": "3a9c337aa4c770830ac9f815a174a31cfb21472ba40c05af1dc94d267ca830cf"
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "method": "MD-R",
+      "certificate": false,
+      "T_produce": 1170.9192745361943,
+      "T_verify": 2.169889999902807,
+      "T_total": 1173.089164536097,
+      "T_cert": null,
+      "producer_receipt_SHA": "b7f7d8b2111404e16405b19110cf0fa690653586450c7526053fd1f76120b94a"
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "method": "MS2",
+      "certificate": false,
+      "T_produce": 1170.4276049999753,
+      "T_verify": 5.158623900031671,
+      "T_total": 1175.586228900007,
+      "T_cert": null,
+      "producer_receipt_SHA": "009d379acc3ca524ae9bd1a4866396d468ff61ccadf340d8485131f821e95584"
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "method": "P",
+      "certificate": false,
+      "T_produce": 1170.4897283000173,
+      "T_verify": 0.5226418999955058,
+      "T_total": 1171.0123702000128,
+      "T_cert": null,
+      "producer_receipt_SHA": "689f5309103f20ae59459f51454219998359b2bbfd768f564a944e20a9bddb36"
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "method": "MB",
+      "certificate": false,
+      "T_produce": 1170.4757905000588,
+      "T_verify": 8.198055599932559,
+      "T_total": 1178.6738460999914,
+      "T_cert": null,
+      "producer_receipt_SHA": "183c11faada6f813da7290cc47d85e0eee250d336f5c9160b3052169f45d6b05"
+    },
+    {
+      "group": 4,
+      "id": "SC-C15-S",
+      "seed": 1,
+      "method": "MS2",
+      "certificate": true,
+      "T_produce": 35.73745698784478,
+      "T_verify": 2.707407800015062,
+      "T_total": 38.44486478785984,
+      "T_cert": 35.73745698784478,
+      "producer_receipt_SHA": "85ed57cf1a534f4a68e85b0c2021679322beede31967dd78c9c0eaf1897270f6"
+    },
+    {
+      "group": 4,
+      "id": "SC-C15-S",
+      "seed": 1,
+      "method": "MB",
+      "certificate": true,
+      "T_produce": 35.4967336000409,
+      "T_verify": 2.797778100008145,
+      "T_total": 38.29451170004904,
+      "T_cert": 35.4967336000409,
+      "producer_receipt_SHA": "6ad31e232e4598ccc1ee9524d4ce05db301cc7aa6b095309a1e2028761b7e334"
+    },
+    {
+      "group": 5,
+      "id": "SC-B20-S",
+      "seed": 1,
+      "method": "MB",
+      "certificate": true,
+      "T_produce": 965.8492734816391,
+      "T_verify": 10.754026800044812,
+      "T_total": 976.6033002816839,
+      "T_cert": 965.8492734816391,
+      "producer_receipt_SHA": "f1b9cbb4a2da6786b59841adcef78c8c8a29882cfaa8658c975d564e828c6537"
+    },
+    {
+      "group": 5,
+      "id": "SC-B20-S",
+      "seed": 1,
+      "method": "MS2",
+      "certificate": true,
+      "T_produce": 680.0086097000167,
+      "T_verify": 8.893609500024468,
+      "T_total": 688.9022192000411,
+      "T_cert": 680.0086097000167,
+      "producer_receipt_SHA": "971975d6e6b246e86d9e4c7fa03ccf9dc58c94f5d8e8bfdd2b93cce07de4cae2"
+    }
+  ],
+  "support_two_seeds": [
+    {
+      "id": "SC-C15-S",
+      "seed": 0,
+      "both_certified": true,
+      "MS2_saving_seconds": 8.127292800112627,
+      "MS2_saving_percent": 19.558484620988526,
+      "MB_U": 0.4628064085383384,
+      "MB_L": 0.4628064085383383,
+      "MS2_U": 0.4628064085383384,
+      "MS2_L": 0.46280640779659926
+    },
+    {
+      "id": "SC-B20-S",
+      "seed": 0,
+      "both_certified": true,
+      "MS2_saving_seconds": 75.35878577339463,
+      "MS2_saving_percent": 7.064130101196534,
+      "MB_U": 0.31538912105343897,
+      "MB_L": 0.3153891061850864,
+      "MS2_U": 0.31538912105343897,
+      "MS2_L": 0.31538912105343914
+    },
+    {
+      "id": "PB-B35-B",
+      "seed": 0,
+      "both_certified": false,
+      "MS2_saving_seconds": null,
+      "MS2_saving_percent": null,
+      "MB_U": 0.24650447041292495,
+      "MB_L": 0.06428775058476346,
+      "MS2_U": 0.24650447041292495,
+      "MS2_L": 0.07378200360843691
+    },
+    {
+      "id": "SC-C15-S",
+      "seed": 1,
+      "both_certified": true,
+      "MS2_saving_seconds": -0.24072338780388236,
+      "MS2_saving_percent": -0.6781564481854325,
+      "MB_U": 0.4628064085383384,
+      "MB_L": 0.46280640853833893,
+      "MS2_U": 0.4628064085383384,
+      "MS2_L": 0.46280640853833827
+    },
+    {
+      "id": "SC-B20-S",
+      "seed": 1,
+      "both_certified": true,
+      "MS2_saving_seconds": 285.8406637816224,
+      "MS2_saving_percent": 29.594748541999735,
+      "MB_U": 0.31538912105343897,
+      "MB_L": 0.3153891157899489,
+      "MS2_U": 0.31538912105343897,
+      "MS2_L": 0.31538912080670484
+    }
+  ],
+  "H_root_eligibility": [
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "comparison": "MB/MD-R",
+      "H_actions_fleet_match": true,
+      "root_scope_U_settings_match": true,
+      "MB_sentinel_rows": 0,
+      "MB_splits": 0,
+      "component_eligible": true
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "comparison": "MB/MS2",
+      "H_actions_fleet_match": true,
+      "root_scope_U_settings_match": true,
+      "MB_sentinel_rows": 0,
+      "MB_splits": 0,
+      "component_eligible": true
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "comparison": "MB/MD-R",
+      "H_actions_fleet_match": true,
+      "root_scope_U_settings_match": true,
+      "MB_sentinel_rows": 0,
+      "MB_splits": 0,
+      "component_eligible": true
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "comparison": "MB/MS2",
+      "H_actions_fleet_match": true,
+      "root_scope_U_settings_match": true,
+      "MB_sentinel_rows": 0,
+      "MB_splits": 0,
+      "component_eligible": true
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "comparison": "MB/MD-R",
+      "H_actions_fleet_match": true,
+      "root_scope_U_settings_match": true,
+      "MB_sentinel_rows": 0,
+      "MB_splits": 0,
+      "component_eligible": true
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "comparison": "MB/MS2",
+      "H_actions_fleet_match": true,
+      "root_scope_U_settings_match": true,
+      "MB_sentinel_rows": 0,
+      "MB_splits": 0,
+      "component_eligible": true
+    },
+    {
+      "group": 4,
+      "id": "SC-C15-S",
+      "comparison": "MB/MS2",
+      "H_actions_fleet_match": true,
+      "root_scope_U_settings_match": true,
+      "MB_sentinel_rows": 0,
+      "MB_splits": 0,
+      "component_eligible": true
+    },
+    {
+      "group": 5,
+      "id": "SC-B20-S",
+      "comparison": "MB/MS2",
+      "H_actions_fleet_match": true,
+      "root_scope_U_settings_match": true,
+      "MB_sentinel_rows": 0,
+      "MB_splits": 0,
+      "component_eligible": true
+    }
+  ],
+  "controller_exposure": [
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "method": "MB",
+      "H_complete": true,
+      "own_U0": 0.5627184431151906,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "INTERRUPTED",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 5,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 1,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 1,
+      "split_count": 0
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "method": "MD-R",
+      "H_complete": true,
+      "own_U0": 0.5627184431151906,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 2,
+      "root_LP_calls": 1,
+      "child_LP_calls": 0,
+      "terminal_calls": 1,
+      "partial_target_calls": 0,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 0,
+      "split_count": 0
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "method": "MS2",
+      "H_complete": true,
+      "own_U0": 0.5627184431151906,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "INTERRUPTED",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 5,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 1,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 1,
+      "split_count": 0
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "method": "MB",
+      "H_complete": true,
+      "own_U0": 0.3570597679280949,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 4,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 0,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 0,
+      "split_count": 0
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "method": "MD-R",
+      "H_complete": true,
+      "own_U0": 0.3570597679280949,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 2,
+      "root_LP_calls": 1,
+      "child_LP_calls": 0,
+      "terminal_calls": 1,
+      "partial_target_calls": 0,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 0,
+      "split_count": 0
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "method": "MS2",
+      "H_complete": true,
+      "own_U0": 0.3570597679280949,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 4,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 0,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 0,
+      "split_count": 0
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "method": "MD-R",
+      "H_complete": true,
+      "own_U0": 0.2470534684914319,
+      "native_statuses": [
+        "OPTIMAL",
+        "TIME_LIMIT"
+      ],
+      "actual_native_calls": 2,
+      "root_LP_calls": 1,
+      "child_LP_calls": 0,
+      "terminal_calls": 1,
+      "partial_target_calls": 0,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 0,
+      "split_count": 0
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "method": "MS2",
+      "H_complete": true,
+      "own_U0": 0.2470534684914319,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "TIME_LIMIT"
+      ],
+      "actual_native_calls": 4,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 0,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 0,
+      "split_count": 0
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "method": "MB",
+      "H_complete": true,
+      "own_U0": 0.2470534684914319,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "TIME_LIMIT"
+      ],
+      "actual_native_calls": 4,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 0,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 0,
+      "split_count": 0
+    },
+    {
+      "group": 4,
+      "id": "SC-C15-S",
+      "seed": 1,
+      "method": "MS2",
+      "H_complete": true,
+      "own_U0": 0.5627184431151906,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "INTERRUPTED",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 5,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 1,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 1,
+      "split_count": 0
+    },
+    {
+      "group": 4,
+      "id": "SC-C15-S",
+      "seed": 1,
+      "method": "MB",
+      "H_complete": true,
+      "own_U0": 0.5627184431151906,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "INTERRUPTED",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 5,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 1,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 1,
+      "split_count": 0
+    },
+    {
+      "group": 5,
+      "id": "SC-B20-S",
+      "seed": 1,
+      "method": "MB",
+      "H_complete": true,
+      "own_U0": 0.3570597679280949,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 4,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 0,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 0,
+      "split_count": 0
+    },
+    {
+      "group": 5,
+      "id": "SC-B20-S",
+      "seed": 1,
+      "method": "MS2",
+      "H_complete": true,
+      "own_U0": 0.3570597679280949,
+      "native_statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ],
+      "actual_native_calls": 4,
+      "root_LP_calls": 1,
+      "child_LP_calls": 2,
+      "terminal_calls": 1,
+      "partial_target_calls": 0,
+      "NEXT_target_calls": 0,
+      "child_bound_target_calls": 0,
+      "split_count": 0
+    }
+  ],
+  "formal_MD_R_deep_check": {
+    "path": "results\\unified_exact_round128\\campaign\\01_SC-C15-S_S0\\raw\\03_SC-C15-S_S0_R1_MD-R",
+    "root_SHA": "f5eb565e62369104017af87ad255aac727f8e6a34ca5b4f90021f8738b5692a2",
+    "columns": 2083,
+    "rows": 5054,
+    "maximum_row_residual": 1.1102230246251565e-16,
+    "all_types_bounds_integer_domains_checked": true,
+    "pre_LP_and_full_submitted_readback_equal": true,
+    "pre_LP_before_native_call": true,
+    "mapped_original_objective": 0.5627184431151906,
+    "own_fleet": {
+      "F": 0.5627184431151906,
+      "G": 0.2127185490242815,
+      "P": 2.333332627272727,
+      "Y": [
+        50000,
+        11,
+        13,
+        12,
+        10,
+        10,
+        8,
+        12,
+        7,
+        9,
+        8,
+        8,
+        14,
+        16,
+        1,
+        18
+      ],
+      "maximum_duration": 3580.6253394237324,
+      "return_loads": [
+        0,
+        0
+      ],
+      "pickups": [
+        19,
+        15
+      ],
+      "vehicles_replayed": 2,
+      "implicit_empty_vehicles": 0
+    },
+    "final_fleet": {
+      "F": 0.4628064085383384,
+      "G": 0.19747315430756912,
+      "P": 1.7688883615384616,
+      "Y": [
+        50000,
+        11,
+        13,
+        12,
+        13,
+        15,
+        12,
+        17,
+        2,
+        10,
+        11,
+        3,
+        14,
+        11,
+        1,
+        12
+      ],
+      "maximum_duration": 3558.3611856352823,
+      "return_loads": [
+        0,
+        0
+      ],
+      "pickups": [
+        19,
+        20
+      ],
+      "vehicles_replayed": 2,
+      "implicit_empty_vehicles": 0
+    },
+    "closure_source": "native_terminal_mip_optimal"
+  },
+  "actual_MS2_full_deletion": {
+    "group": 3,
+    "id": "PB-B35-B",
+    "removed_rows": 19635,
+    "families": {
+      "conditional_3": 12729,
+      "cover_3": 6906
+    },
+    "removed_columns": [],
+    "every_other_duplicate_preserving_row_type_bound_objective_equal": true
+  },
+  "boundary_differences": [
+    {
+      "case": "La_equal_c/shared",
+      "removed_semantic_sentinels": 1,
+      "all_other_semantics_equal": true,
+      "penalty_lower_bound_retained": true
+    },
+    {
+      "case": "La_equal_c/fallback",
+      "removed_semantic_sentinels": 1,
+      "all_other_semantics_equal": true,
+      "penalty_lower_bound_retained": true
+    },
+    {
+      "case": "T3600_no_old_sentinel/shared",
+      "removed_semantic_sentinels": 0,
+      "all_other_semantics_equal": true,
+      "penalty_lower_bound_retained": true
+    },
+    {
+      "case": "T3600_no_old_sentinel/fallback",
+      "removed_semantic_sentinels": 0,
+      "all_other_semantics_equal": true,
+      "penalty_lower_bound_retained": true
+    }
+  ],
+  "limits": [
+    "Three known inputs; two Seeds only on two roles; shared arms are not independent observations.",
+    "Detailed row/type/bound/Start replay covers one formal MD-R; full explicit MS2 deletion covers one formal PB-B35 pair.",
+    "Reuses established LP grammar and complete-H trace reader; comparisons and representative physical replay are independently implemented.",
+    "No rational proof of all generated matrices or global floating-point error bound; no extra optimization.",
+    "Legacy formal_performance field is retained and not used as the present qualification authority."
+  ]
+}

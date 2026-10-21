@@ -865,6 +865,12 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gurobi-threads") opt.gurobi_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round127-mode") ebrp::round127().mode = lowerAscii(requireValue(i, argc, argv));
+        else if (arg == "--round128-mode") {
+            const auto mode=lowerAscii(requireValue(i, argc, argv));
+            if(mode!="off" && mode!="md-r")
+                throw std::runtime_error("Round128 mode must be off or md-r");
+            ebrp::round127().mode=mode;
+        }
         else if (arg == "--round127-p-parameters") ebrp::round127().parameter_file = requireValue(i, argc, argv);
         else if (arg == "--gurobi-presolve") opt.gurobi_presolve = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-hga-start") opt.gurobi_hga_start = parseBoolValue(requireValue(i, argc, argv));

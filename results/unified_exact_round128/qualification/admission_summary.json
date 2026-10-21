@@ -1,0 +1,126 @@
+{
+  "UTC": "2026-10-21T14:18:06.278819+00:00",
+  "status": "PASS",
+  "bridges": [
+    {
+      "role": "S12",
+      "method": "MB",
+      "actual_full_H_equal": true,
+      "P_H_absent": false,
+      "actual_initial_root_and_native_settings_equal": true,
+      "E1_PE_SHA": "d668236e9396b2e12f02bb65d9819b98762d2a35aad1b186d352d234dae756c9",
+      "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa"
+    },
+    {
+      "role": "S12",
+      "method": "P",
+      "actual_full_H_equal": false,
+      "P_H_absent": true,
+      "actual_initial_root_and_native_settings_equal": true,
+      "E1_PE_SHA": "d668236e9396b2e12f02bb65d9819b98762d2a35aad1b186d352d234dae756c9",
+      "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa"
+    },
+    {
+      "role": "S12",
+      "method": "MS2",
+      "actual_full_H_equal": true,
+      "P_H_absent": false,
+      "actual_initial_root_and_native_settings_equal": true,
+      "E1_PE_SHA": "d668236e9396b2e12f02bb65d9819b98762d2a35aad1b186d352d234dae756c9",
+      "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa"
+    },
+    {
+      "role": "R98-C2",
+      "method": "MB",
+      "actual_full_H_equal": true,
+      "P_H_absent": false,
+      "actual_initial_root_and_native_settings_equal": true,
+      "E1_PE_SHA": "d668236e9396b2e12f02bb65d9819b98762d2a35aad1b186d352d234dae756c9",
+      "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa"
+    },
+    {
+      "role": "R98-C2",
+      "method": "P",
+      "actual_full_H_equal": false,
+      "P_H_absent": true,
+      "actual_initial_root_and_native_settings_equal": true,
+      "E1_PE_SHA": "d668236e9396b2e12f02bb65d9819b98762d2a35aad1b186d352d234dae756c9",
+      "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa"
+    },
+    {
+      "role": "R98-C2",
+      "method": "MS2",
+      "actual_full_H_equal": true,
+      "P_H_absent": false,
+      "actual_initial_root_and_native_settings_equal": true,
+      "E1_PE_SHA": "d668236e9396b2e12f02bb65d9819b98762d2a35aad1b186d352d234dae756c9",
+      "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa"
+    }
+  ],
+  "MD_R_native_chains": [
+    {
+      "group": "native_S12_E2_final",
+      "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+      "calls": 2,
+      "only_root": true,
+      "pre_LP_own_Start_checked": true,
+      "submitted_Start_count": 1,
+      "U": 0.22524870597274982,
+      "L": 0.22524870597274932,
+      "signed_gap": 4.996003610813204e-16
+    },
+    {
+      "group": "native_zero_S_duration60",
+      "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+      "calls": 2,
+      "only_root": true,
+      "pre_LP_own_Start_checked": true,
+      "submitted_Start_count": 1,
+      "U": 0.3,
+      "L": 0.3,
+      "signed_gap": 0.0
+    },
+    {
+      "group": "native_zero_S_duration3600",
+      "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+      "calls": 2,
+      "only_root": true,
+      "pre_LP_own_Start_checked": true,
+      "submitted_Start_count": 1,
+      "U": 0.3,
+      "L": 0.3,
+      "signed_gap": 0.0
+    },
+    {
+      "group": "native_tiny_positive_U",
+      "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+      "calls": 2,
+      "only_root": true,
+      "pre_LP_own_Start_checked": true,
+      "submitted_Start_count": 1,
+      "U": 3e-09,
+      "L": 0.0,
+      "signed_gap": 3e-09
+    }
+  ],
+  "boundary_checks": 16,
+  "formal_root_differences_SHA": "fdc353e602dde858ce1d6f50be777eaa771116004955f160009c3d8b77a16107",
+  "actual_Gurobi_version": "13.0.2",
+  "qualified_methods": [
+    "P",
+    "MB",
+    "MD-R",
+    "MS2"
+  ],
+  "second_executor_review_SHA": "bcf98c6f639218bbc3b798722632a114e024331cd1d74416f8b9fc44b87e8cf5",
+  "extra_medium_MD_R_return": {
+    "status": "TIME_LIMIT",
+    "certificate": false,
+    "T_cert": null,
+    "actual_full_root_calls": 2,
+    "all_physical_model_Start_source_return_coverage_gates_qualified": true
+  },
+  "qualifications_are_finite_not_universal_rational_matrix_proof": true,
+  "no_formal_performance_used": true,
+  "prior_failed_prequalification": "native_S12_E2: actual complete Start/LP/MIP, erroneous unpopulated result counter gate; preserved, not relabelled successful"
+}

@@ -1,0 +1,148 @@
+{
+  "execution": "COMPLETE",
+  "actual_formal_arms": 16,
+  "typed_pairs": 17,
+  "distinct_inputs": 3,
+  "same_build_E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+  "core_by_comparison": {
+    "MB/P": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 1,
+        "LEFT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Win": 2,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 1,
+      "both_certified_ids": [
+        "SC-C15-S"
+      ],
+      "conditional_geometric_mean": 11.189518868025214,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    },
+    "MB/MD-R": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 2,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Lose": 1,
+        "Win": 1,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 2,
+      "both_certified_ids": [
+        "SC-C15-S",
+        "SC-B20-S"
+      ],
+      "conditional_geometric_mean": 0.9895711356727697,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    },
+    "MB/MS2": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 2,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Lose": 2,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 2,
+      "both_certified_ids": [
+        "SC-C15-S",
+        "SC-B20-S"
+      ],
+      "conditional_geometric_mean": 0.8646329977352477,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    },
+    "MD-R/P": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 1,
+        "LEFT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Win": 2,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 1,
+      "both_certified_ids": [
+        "SC-C15-S"
+      ],
+      "conditional_geometric_mean": 11.432563895458475,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    },
+    "MS2/P": {
+      "rows": 3,
+      "nonalias_typed_entries": 3,
+      "evaluable_nonalias_entries": 3,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 1,
+        "LEFT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 1
+      },
+      "directions": {
+        "Win": 2,
+        "UNDETERMINED": 1
+      },
+      "both_certified_intersection_n": 1,
+      "both_certified_ids": [
+        "SC-C15-S"
+      ],
+      "conditional_geometric_mean": 13.910129384440642,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    }
+  },
+  "additional_support_Seed1": {
+    "rows": 2,
+    "nonalias_typed_entries": 2,
+    "evaluable_nonalias_entries": 2,
+    "unevaluable_nonalias_entries": 0,
+    "alias_entries": 0,
+    "classes": {
+      "BOTH_CERTIFIED": 2
+    },
+    "directions": {
+      "Win": 1,
+      "Lose": 1
+    },
+    "both_certified_intersection_n": 2,
+    "both_certified_ids": [
+      "SC-C15-S",
+      "SC-B20-S"
+    ],
+    "conditional_geometric_mean": 0.8419186968503779,
+    "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+  },
+  "all_observed_arms_qualified": true,
+  "unique_problem_count_not_increased_by_Seed_repeats": true,
+  "support_comparisons": 5,
+  "core_comparisons": 15,
+  "support_additional_Seed_comparisons": 2,
+  "final_fee_authority": "resource_accounting.json; closed meters and labelled allowances, including later delivery work",
+  "R127_unchanged_partial_MD_unstarted": 3
+}

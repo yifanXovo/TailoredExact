@@ -1,0 +1,1628 @@
+{
+  "UTC": "2026-10-21T18:24:25.329181+00:00",
+  "total_outer_limit": 25200,
+  "paid_outer_seconds": 14139.892131399596,
+  "remaining_outer_seconds": 11060.107868600404,
+  "by_kind": {
+    "administrative_allowance": 180,
+    "analysis": 19.331687499885447,
+    "build": 87.27932449989021,
+    "cleanup": 36.89054979989305,
+    "documentation": 59.76908009999897,
+    "formal": 11500.257257299963,
+    "publication": 321.825996199972,
+    "qualification": 698.5254376999801,
+    "recovery": 1056.012798300013
+  },
+  "preledger_upper_seconds": 180,
+  "actual_closed_child_lifetimes_and_separately_labelled_allowances": true,
+  "fees": [
+    {
+      "label": "build_CplexBaseline_01",
+      "kind": "build",
+      "outer_seconds": 7.2294657999882475,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "24258c9608b789bf91a37d7791f163fa1d26399da7b92b551ada0ef46830db28",
+      "receipt_SHA": "b572ee5602eefa294dd7c26e15bea216faa5305acbd25db99011e622e2ba8bbf"
+    },
+    {
+      "label": "build_exporter",
+      "kind": "build",
+      "outer_seconds": 2.3500823999056593,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "04a9a4167d1e7a11aeb38babd911b65da787b0dae66a4aed50a032763ae597a4",
+      "receipt_SHA": "706b821eaf0409c4ae208fec91e344f294324b7632f98b45bcaae30dbbdfd71c"
+    },
+    {
+      "label": "build_exporter_02",
+      "kind": "build",
+      "outer_seconds": 2.332243000040762,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "62bfcb91fa70ecbd66ffc2aa2b5d0ae026cb8bf8be52bdc8b1d7884ecf244827",
+      "receipt_SHA": "f247252b108289ea52963bba5bb16252a799672d60c3e976b24cf2ca04255bbd"
+    },
+    {
+      "label": "build_exporter_03",
+      "kind": "build",
+      "outer_seconds": 2.2990080999443308,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "00cb739f7d604611c0068c77f700726005987cb0d3cb496d1a64248fd58cb48e",
+      "receipt_SHA": "c562c1f0b2f79dfaea043e6cf9f32c17902150ed1081f742e77cf78bf37b45d1"
+    },
+    {
+      "label": "build_exporter_04",
+      "kind": "build",
+      "outer_seconds": 2.2783730999799445,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "bb70c809d06f810b6afd0b76dd8625c9fa9b524d5245501b396e29de936dd0de",
+      "receipt_SHA": "4980df8f56aab74fb77a310f31705f9d93d16433cc0959605e3fd8df934ec59a"
+    },
+    {
+      "label": "build_exporter_05",
+      "kind": "build",
+      "outer_seconds": 2.312186500057578,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "64755a7e0f3161400731fcfb2f6935a8aadda02e483f0f8d5037e5afa2088a61",
+      "receipt_SHA": "9a8bafe59007ac3b63f6deefa08b6114026bea3a0f9f449e472a7592742a8b09"
+    },
+    {
+      "label": "build_exporter_06",
+      "kind": "build",
+      "outer_seconds": 2.271691199974157,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "ed674af7317a13f8a7d5a93e6a332f4e80817c8089a164ac4cbff921ae536a3c",
+      "receipt_SHA": "0b5eaddfd1fa846a60eaaddf5535fcbc1e62c0f2f58217ebd089824f48a71b42"
+    },
+    {
+      "label": "build_GurobiBaseline_01",
+      "kind": "build",
+      "outer_seconds": 11.998688200023025,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "b5828ae139080af6fbab3eb59d6484aeca869b76e2c7d44cf34ed93a41c78a9e",
+      "receipt_SHA": "de866f80fd5c2583513066ed00c55505641a531210b8b65d77d27b4718e297cf"
+    },
+    {
+      "label": "build_GurobiBaseline_02",
+      "kind": "build",
+      "outer_seconds": 10.733191099949181,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "929d1a3d6e720efaedfe2e77573ce57cc748fae54e9d77588d59bfb57b9b35bc",
+      "receipt_SHA": "e2613a2955b2db11ecb5d67665c39a78bb1feaa2e40a01778612cebc6fe9462c"
+    },
+    {
+      "label": "build_GurobiBaseline_03",
+      "kind": "build",
+      "outer_seconds": 10.617464500013739,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "d6ceaed129d26f21ea9e7d7c03ce4089c972858f9fe8e6e87fff16c91e16c84c",
+      "receipt_SHA": "9b1d4b1c1b5a8c65bd18271eace9c8977e4c7716eaa2b5f01c1e2fe07128b2f2"
+    },
+    {
+      "label": "build_IntervalRowFactory_01",
+      "kind": "build",
+      "outer_seconds": 1.3606647999258712,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "101578c3daffc1d1f2c8098f5396c9264ce59180422cbf3a18f6d7cae39f2f5b",
+      "receipt_SHA": "0becff3640c5a39a0bb90b3f9fa44fd2d22da49c89562e9bad52fafce2b36381"
+    },
+    {
+      "label": "build_link_01",
+      "kind": "build",
+      "outer_seconds": 1.1967943999916315,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "ef6042b403416cb76b4ba81a491c1f4d39426e19707cbc2fd8cdc31c8f53ac00",
+      "receipt_SHA": "355174a26b333cd2ec9a2066a570cc67040ea6d75b4d30d50683322aeb5da9c7"
+    },
+    {
+      "label": "build_link_02",
+      "kind": "build",
+      "outer_seconds": 0.9493403000524268,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "ad6a24ed05a3dc784ce86c4389fb2c25cd3b3756baba80795f67966310030e76",
+      "receipt_SHA": "c5ffd8296e7ec5e722218b79b5d493781dff714631bda6cc120331d3adb404fc"
+    },
+    {
+      "label": "build_link_03",
+      "kind": "build",
+      "outer_seconds": 0.9687504000030458,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "fe099d05925ce8861ff16e1719bdc604b647eba30c36ae1fd9b29cb7719e0932",
+      "receipt_SHA": "615720f3462372bc0a904a0719b4e8600b3d8fa523d816d342ab555a952e0ba5"
+    },
+    {
+      "label": "build_link_04",
+      "kind": "build",
+      "outer_seconds": 0.9420615999260917,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "59d3c6795e7d8590c4415d299f288b0fb23b79de16964448894c51b2b6f31e81",
+      "receipt_SHA": "cabd3dad25f48fc3ba80bed52faa0085c330245b5f448dfbfe434fde76effd3d"
+    },
+    {
+      "label": "build_link_05",
+      "kind": "build",
+      "outer_seconds": 0.9482836000388488,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "d277bdc21e04f78bbbf3506d999dbf838b9398950354cfd4db9ecbc1e13493f0",
+      "receipt_SHA": "21b99e4848058abc5fb602475b3fb146f3002e6451f3dfbefa2e5c7aff4a3c43"
+    },
+    {
+      "label": "build_main_01",
+      "kind": "build",
+      "outer_seconds": 7.801454000058584,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "c45cdc32ceb0021ef3090439670efafda54164ce16094db6091d7d58f612d138",
+      "receipt_SHA": "356bdbb983985e456a2567605cddc2d23a82607a2f918c41a161dd712e5a715b"
+    },
+    {
+      "label": "build_PaperExternalGiniTree_01",
+      "kind": "build",
+      "outer_seconds": 4.724365000030957,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "53706a0571f64ccd89d31655541ebd47d5f774467fa1e7bb435649e7f8450868",
+      "receipt_SHA": "cfb558f5480d4ac2a9910a36b5e7e8ae6d32fabd2f4ea89075b9a548efe752a6"
+    },
+    {
+      "label": "build_PaperExternalGiniTree_02",
+      "kind": "build",
+      "outer_seconds": 4.6741517999907956,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "50aaa1aa1da12b41cfaaa9b6c573579557133b2d0951262b9a4ae1b0f8fcba5b",
+      "receipt_SHA": "7dbb4d431fb273ad2669bad4a95ca4d591113daa756e97a6d608d5cc73c090ef"
+    },
+    {
+      "label": "build_PaperExternalGiniTree_03",
+      "kind": "build",
+      "outer_seconds": 4.664398599998094,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "87e4d46eb1bd8d9e5fa14d0d9b49d7b6d4ee607c32a1792acae1e97cae57a70a",
+      "receipt_SHA": "2c6e380e65be53757a9859891ab54c9a890850afb65545afb9db5d6ed58235cd"
+    },
+    {
+      "label": "build_PaperExternalGiniTree_04",
+      "kind": "build",
+      "outer_seconds": 4.626666099997237,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "1490d92c701659baa53a8d51c411f52d48d8d89b9dbcefa8371a13525d989132",
+      "receipt_SHA": "0bd5a35a0897a9d8853f5c88c28ac95b950f32272b5e293fb77b4b10dcc7a0e3"
+    },
+    {
+      "label": "campaign_01_SC-C15-S_S0_01",
+      "kind": "formal",
+      "outer_seconds": 626.6181692000246,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "2e12d07f46b946fb7d64221846c801737c0f63c4c8e819c2d331237ddad8c9f1",
+      "receipt_SHA": "d06033ce60bca36cdbb41a5c37c00d8a050dff8e648a886ad74e74b895a8e073"
+    },
+    {
+      "label": "campaign_02_SC-B20-S_S0_01",
+      "kind": "formal",
+      "outer_seconds": 4383.853892599931,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "76fd6bf3cab65784b5f7a6ab2363bf6a02296bdeb6fd3d9e8d93bd477eb5c27f",
+      "receipt_SHA": "def185e799ba388553e8dafe4df3ece82b8dc48338f64cf91793e66694077bcc"
+    },
+    {
+      "label": "campaign_03_PB-B35-B_S0_01",
+      "kind": "formal",
+      "outer_seconds": 4704.401830399991,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "0ddf4428e47cc42ddcce08b1fd079d8cb0bd7e90d307308b87ae09eb9e4c1ba6",
+      "receipt_SHA": "316d8a59900ccacf887fdee950ab2d07e54a834a7368ac9eb2565f8977761148"
+    },
+    {
+      "label": "campaign_04_SC-C15-S_S1_01",
+      "kind": "formal",
+      "outer_seconds": 81.81421850004699,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "0f8f9bb1ed0713bde95bfd480d0924724bcb4cef4aaae8f13d076e9b6bf83a81",
+      "receipt_SHA": "ac621521fdb47f43f90029bad021f553c5402566b4c6c56ac7069503e528b84a"
+    },
+    {
+      "label": "campaign_05_SC-B20-S_S1_01",
+      "kind": "formal",
+      "outer_seconds": 1703.5691465999698,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "60d2083983b48b724fbf0bb37bb05077ac910b987b2202c3ea260472afa9228b",
+      "receipt_SHA": "bcbc5b726663391ff97cb480cbfcd9a8f00d836840d20736adc493ade8169915"
+    },
+    {
+      "label": "current_carriers_01",
+      "kind": "publication",
+      "outer_seconds": 261.25445949996356,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "91da869c40a153b85180628e621cb086e85e3a3b709a61f17a4f024e997e22d8",
+      "receipt_SHA": "a941b48eadefaa3b521e932f1e399f5ba607baf7c18b863851cf55810c00b6bd"
+    },
+    {
+      "label": "export_manifest_01",
+      "kind": "publication",
+      "outer_seconds": 7.557010699994862,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "1a180a7b3c9e21ceffaf867fd437ba711854361389592c1ae3e117df940fcefb",
+      "receipt_SHA": "a7328dd2fae1d436cf629df5cec87af406b9a109cf6810da261269b22f7563ee"
+    },
+    {
+      "label": "final_admission",
+      "kind": "qualification",
+      "outer_seconds": 2.9221081000287086,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "53fdf26b95e481f307a47b17a042b18d169ff8b07bfce3eee637a097b49e4b34",
+      "receipt_SHA": "0f8f856d75b7f6660411022008ec55ac0ed6401c5671b6a3ba3272f78ac522a4"
+    },
+    {
+      "label": "final_analysis_01",
+      "kind": "analysis",
+      "outer_seconds": 10.962625799933448,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "33fb9a3f010314cbcd030d34febdc3af92a85bb777fb3802271efd77ceda32ad",
+      "receipt_SHA": "42ef819161ddf7886cd7b6f7449c89e85e00254b8b019055790aa10117189116"
+    },
+    {
+      "label": "final_documents_01",
+      "kind": "documentation",
+      "outer_seconds": 2.4695832000579685,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "287e40a394d93c9a62ccabecb0f9b248ee7a514f90c271ab13235ffdfe6ce49e",
+      "receipt_SHA": "96f27fde910680be12868e49e7cd7ae7ca59c7816e08c315dff888c993a2579b"
+    },
+    {
+      "label": "final_documents_02",
+      "kind": "documentation",
+      "outer_seconds": 2.4573718999745324,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "8985e63689fe66aad65b412b66f333daac42d3ae5f04970048c180dcbe100ac3",
+      "receipt_SHA": "6228f3b3cdd648137dd389e8111f1f09e90cf5e7666afbf432d90d712cb56e8d"
+    },
+    {
+      "label": "final_documents_03",
+      "kind": "documentation",
+      "outer_seconds": 2.504614199977368,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "e97478d3aa1837c6fe2817f4398b3fb56823216b116d9d519ceaa110965e3310",
+      "receipt_SHA": "8e9d5f342c14155e23fa1eba06d1b85aaee740d6a8963cb537dcc6d68b18b5fc"
+    },
+    {
+      "label": "final_documents_04",
+      "kind": "documentation",
+      "outer_seconds": 2.5008094999939203,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "ea6d35a1d07a9a51dacb54109235b55af3615358c4acd5464f921f21ee2c5fbb",
+      "receipt_SHA": "db9ce6e92927e0ef119d275e8a675f5591f7408ff34042c2a47eabc106128aae"
+    },
+    {
+      "label": "final_independent_review_01",
+      "kind": "analysis",
+      "outer_seconds": 4.980762799968943,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "21eada27188d9e85ed1045ce1c60243e65eb5c0a32fb958edc23435d68882387",
+      "receipt_SHA": "9e42d72cf4f5fa0375cff4a9d1ab2610f67851b6ea6aa3f5c1f1a4feaa530a4f"
+    },
+    {
+      "label": "final_protection_check",
+      "kind": "cleanup",
+      "outer_seconds": 13.55212330003269,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "37d76771e4f87c3e1137f6f72d13874b992d59075ff9e8f3754ac9ddce7cb34a",
+      "receipt_SHA": "695b748e4b68db187844acbbae384dd4a961164c16cd5876d5aed855ee816ebc"
+    },
+    {
+      "label": "local_portable_check_01",
+      "kind": "analysis",
+      "outer_seconds": 3.388298899983056,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "d69b10e7f838da4ccaac6cb8f3096760dd4dc2fb1e677284f3aefc8849c88461",
+      "receipt_SHA": "8992b1f933d4cc5a28b479be75060004ba2093630cef62a3121e45a525d2f234"
+    },
+    {
+      "label": "maintained_pdf_01",
+      "kind": "documentation",
+      "outer_seconds": 7.5335601000115275,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "ad165a35b397ffb8f1d92963820fe794491d8fcc135a9e4f3ae343dc8ba8a9c9",
+      "receipt_SHA": "4ef82d1f56b4f61ac20ce27d85bd13363ee62cdbf4efae6803be44919a955581"
+    },
+    {
+      "label": "maintained_pdf_02",
+      "kind": "documentation",
+      "outer_seconds": 6.977783099981025,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "bf2b1ba7217ec7c0f6b4a3f6a66507314aa42bfdb0714861d59a242e952a5211",
+      "receipt_SHA": "676c12b7d7209e959d78f1e591ac53fc02b1c38640e73fe571e1da94a424b258"
+    },
+    {
+      "label": "maintained_pdf_03",
+      "kind": "documentation",
+      "outer_seconds": 7.068269000039436,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "12f40314e9573b26547c3235ba3d02a275b50ba6f1ef589112403d10c89caf33",
+      "receipt_SHA": "be07006e04e0c86d16a91a4da08f2e0c481683b922dc51befc9dbc87d3b832e1"
+    },
+    {
+      "label": "maintained_pdf_04",
+      "kind": "documentation",
+      "outer_seconds": 7.091477100038901,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "75e36027a7ac8685b6d9eda7324f10985fda2cad35ab0855e07b19ccd5619a48",
+      "receipt_SHA": "de05ede2882e635c95001beeb82612adb3bacfffdf0fdd1534927619befffbba"
+    },
+    {
+      "label": "owned_cleanup_01",
+      "kind": "cleanup",
+      "outer_seconds": 20.78570080001373,
+      "exit_code": 1,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "68aa5db755d9410ef47b30e523f251a405a84ff7dcc5dc6b067b73c783918e4f",
+      "receipt_SHA": "f9b1783e48eaec611c2cadc9e902e29d57808218c712e4fdc1af44a2a992bd71"
+    },
+    {
+      "label": "owned_cleanup_02",
+      "kind": "cleanup",
+      "outer_seconds": 1.3586281999014318,
+      "exit_code": 1,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "1e178293754cb099c60b1e78e40399311c6acb1bbede93632f7dc1d5eb9a607a",
+      "receipt_SHA": "1fb0b85e3dae83aa6ec20916f84aae5082cad6f0b1b0bb7d33baee30294f92df"
+    },
+    {
+      "label": "owned_cleanup_03",
+      "kind": "cleanup",
+      "outer_seconds": 1.194097499945201,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "0e63a0e667abfb99615c8628a465b42979815338de31c2231ca047c1a8626f32",
+      "receipt_SHA": "5efbb50b48c494835d6bdb1428891a3c3803dd84b5633bbc2b760e02fa964c38"
+    },
+    {
+      "label": "pdf_page_map_01",
+      "kind": "documentation",
+      "outer_seconds": 0.864246999961324,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "7cef9eaed0e6e01a84761333bdc916c5a2eb3108466ee89c33231cfc6b2a4e47",
+      "receipt_SHA": "ccdd3ad4ef11dea16903ae70cc3f3930e3daffa15bd55cb81124461158d64d91"
+    },
+    {
+      "label": "pdf_page_map_02",
+      "kind": "documentation",
+      "outer_seconds": 0.7325704999966547,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "c0113ba6751014369b340d74b6e2e5c64baaff1e567d283228f542023c1664d7",
+      "receipt_SHA": "19c3d2ec8614faf66e67fa6e104c4c0d268c1187bc94b6b638c1602f2c92f57e"
+    },
+    {
+      "label": "pdf_page_map_03",
+      "kind": "documentation",
+      "outer_seconds": 0.7353856000117958,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "d82e6830654c4b7b3ac08df96ca53af2cf0f94cbe47fdc2e646cf8f4fe10145a",
+      "receipt_SHA": "a92d682981000968e699c61d9be70e8fb7830d34e5894bc402f5f5390f0fbaa8"
+    },
+    {
+      "label": "pdf_page_map_04",
+      "kind": "documentation",
+      "outer_seconds": 0.7332348000491038,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "b9fe25c37ddccb194cc10665774ff87a753df1a01dcbd1f0d3c86682f922188c",
+      "receipt_SHA": "392c75950f6b26239532bd3a1c2bff56da62bcf26bcc77b25b3c0597fdc4b2e9"
+    },
+    {
+      "label": "pdf_render_changed_02",
+      "kind": "documentation",
+      "outer_seconds": 6.1845331999938935,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "d84bca7fdb0dc79b549411e59bbef1910d798ecc1d317e358ec2bd6f5898dcbd",
+      "receipt_SHA": "aec06361b3d72fb9cc6067224ee54123473c52bed5f2ded10ed8d820d3bfaa70"
+    },
+    {
+      "label": "pdf_render_changed_03",
+      "kind": "documentation",
+      "outer_seconds": 5.923442599945702,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "fd40e3821b02f006ee0e7915df639dacebfd14d43065690956acf8996793034f",
+      "receipt_SHA": "973e9c92a59443e3998e0e529b23856d0a68ce75eac4f5f178f95068ff496bcf"
+    },
+    {
+      "label": "pdf_render_changed_04",
+      "kind": "documentation",
+      "outer_seconds": 5.992198299965821,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "6fc6106eee2afd0834ff579994ade02f8940f8fb5753e44e02c4f5527ea075ea",
+      "receipt_SHA": "f3758e6c80fa66bd2a9afa2b671593000333f280f3cc14e4db70b05fa4040a05"
+    },
+    {
+      "label": "public_empty_root_01",
+      "kind": "recovery",
+      "outer_seconds": 1056.012798300013,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "490cd203dbbc667e186d96d7d64985c86048de652648da93ae70a08ee0cf78f0",
+      "receipt_SHA": "994895ce9d4d5ba7d03bfe9622dcf16004e32f883f1cabc8fcbbfef7b501ab2b"
+    },
+    {
+      "label": "qualification_native_R98-C2_E1_01",
+      "kind": "qualification",
+      "outer_seconds": 198.899305799976,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "e28af56387300e3c8b8178aba5df2f7b1d34a1ab19a22f0d94e1dc5cbd29acdb",
+      "receipt_SHA": "3da7dceab4010f06961d00766d7525db224717e963e0b42f616f96a6bc6a4a46"
+    },
+    {
+      "label": "qualification_native_R98-C2_E2_final_01",
+      "kind": "qualification",
+      "outer_seconds": 197.51895489997696,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "2fb4a03ca5e0077877ffc85754968f303455111d5fd4b015d664eb5761488244",
+      "receipt_SHA": "33c7876dd724a49e45110f36e380e85dce5d4d4bf9f699b243ca7a1340482e99"
+    },
+    {
+      "label": "qualification_native_R98-C2_MD_R_open_final_01",
+      "kind": "qualification",
+      "outer_seconds": 63.7387713000644,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "53b2a8a9b4a825a9ac8ad1cb53dc128d283e4c30422d7460caf94328709cb0b8",
+      "receipt_SHA": "e14f3618192567fef25f0da14d16f17d884752ccff5630c4bd4507b0d7945ea2"
+    },
+    {
+      "label": "qualification_native_S12_E1_01",
+      "kind": "qualification",
+      "outer_seconds": 65.14522579999175,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "ad7776112b8f3d46b2fb2698a7e2017b7203a1e3db1e642aabc2bea472853af8",
+      "receipt_SHA": "89b7dba2fce0aa2ed36e556e7a62b14f1984e8409650b6b711c91b3da3d43280"
+    },
+    {
+      "label": "qualification_native_S12_E2_01",
+      "kind": "qualification",
+      "outer_seconds": 69.63398109993432,
+      "exit_code": 1,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "18525ce1bd615d016d209a6891e2290692e6d576f73ccf78ded412deb58826fa",
+      "receipt_SHA": "309a0bbc4d885e2dab3f2695fe8c8f1aaadcca3a396ffb7b8d80ab2ee4c4012a"
+    },
+    {
+      "label": "qualification_native_S12_E2_final_01",
+      "kind": "qualification",
+      "outer_seconds": 75.32410420000087,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "378ef8e6183f5cce4d595f19e70783b6656dbce69e8effffb9731731f58076dd",
+      "receipt_SHA": "c2f8a4c0843bac60c69e016931f82479473b865c5c858592ca619889b0d05fea"
+    },
+    {
+      "label": "qualification_native_tiny_positive_U_01",
+      "kind": "qualification",
+      "outer_seconds": 0.9590353999519721,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "2f26d8e2453a4acf48641e5cf39df123914361ab60f547d706348775ca0a2586",
+      "receipt_SHA": "f16e24515cc28cf1725fd412c1b4ba69b4447d4aa4c5e9b6eb49f0e95d079922"
+    },
+    {
+      "label": "qualification_native_zero_S_duration3600_01",
+      "kind": "qualification",
+      "outer_seconds": 0.9820957999909297,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "5b87e3a011b25b26e30bef9a5c98a22930e056f715bc9695c2387561b0c03851",
+      "receipt_SHA": "0d7c06448ad08f846fcdb7c5652e97bc61eaa356a8e71f1920b014abacd0fd7d"
+    },
+    {
+      "label": "qualification_native_zero_S_duration60_01",
+      "kind": "qualification",
+      "outer_seconds": 0.989922699984163,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "e16eb9bb0ce85ceaed3513832aba6a6cb3a874e7c59c27af309f750ae832b0bb",
+      "receipt_SHA": "3f0b31d576db9aab2f21bdb6584a4f6da187e4595c30bd676c174c6d3d3fc844"
+    },
+    {
+      "label": "R127_impact",
+      "kind": "qualification",
+      "outer_seconds": 2.7857545000733808,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "8c497b8fed35011764eb9615722f611040e99c9e4466e1aaf0852fe1945859d6",
+      "receipt_SHA": "2981454d62c8c584459e4ad1135825c8a4413e7e83353ab5dbc56142122f0880"
+    },
+    {
+      "label": "read_only_administrative_allowance",
+      "kind": "administrative_allowance",
+      "outer_seconds": 180,
+      "exit_code": 0,
+      "conservative_upper_allowance": true,
+      "launch_SHA": "6ff67bd005ab02195e1f87bfea70c4fa2fd5fd4fef7629562055e25cdfb7327b",
+      "receipt_SHA": "b3ecb997596dfdaeee89ab73b6102408cb475ebbcc3e92b07567b6763be46cbf"
+    },
+    {
+      "label": "reference_PB-B35-B",
+      "kind": "qualification",
+      "outer_seconds": 0.4075307999737561,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "e9c2c00917f7128def24c317cdb1d96371d45d5d520a9137967ead032024f995",
+      "receipt_SHA": "1b472066af162c7fd7dcba246d5557ff5016d03b808c2dcd1c1ae5e234b0b4e3"
+    },
+    {
+      "label": "reference_R98-C2",
+      "kind": "qualification",
+      "outer_seconds": 0.32151479995809495,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "88c0c5b91d5dd6ef8e1ab164e7d0243f216f5c465130bf14616f2cca4a3d086f",
+      "receipt_SHA": "0243045a59ca2ff0ef8ae63ebe5b6f8db4cf208ef071d2df8d49d54ebe5fa66a"
+    },
+    {
+      "label": "reference_S12",
+      "kind": "qualification",
+      "outer_seconds": 0.48239680007100105,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "307ef4b19ee7e9a9c931874a24f9f09a03e21baab4768fe8f0167ab018fc892c",
+      "receipt_SHA": "1bc048826dc47c6348a269dfd70d2eba8720bfc9eeed02bd8f053b73bb7d8909"
+    },
+    {
+      "label": "reference_SC-B20-S",
+      "kind": "qualification",
+      "outer_seconds": 0.14717060001567006,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "a0cd583997a9eae24012bf7575c7d8b7c45c0e5ac3798eab782fc5b29c3af32c",
+      "receipt_SHA": "aa402cbe9d3fd28c66a719c1bf2b00a60df02aaa098ee2a9ffc68a5877211bc5"
+    },
+    {
+      "label": "reference_SC-C15-S",
+      "kind": "qualification",
+      "outer_seconds": 0.10974430001806468,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "229e3f05089ebf8626633ef2656d86fb3852cf1e41ad29dc791907b25d802e10",
+      "receipt_SHA": "488d4f9ac1fdd23197f20b6054f684bb2ebf63d676a9f6470a3c2aecb03c5918"
+    },
+    {
+      "label": "reference_tiny_positive_U",
+      "kind": "qualification",
+      "outer_seconds": 0.055018499959260225,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "07ec6aeb3b5b4050c13717340922d8db895fe4c6e6a37dfd93ebefc3f3535b72",
+      "receipt_SHA": "b1679652b112883c9863497201dc1e3de4107982767671d025d28fe9663b8902"
+    },
+    {
+      "label": "reference_zero_S_duration3600",
+      "kind": "qualification",
+      "outer_seconds": 0.05583550001028925,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "a02f81e65f8eb632a33cdd0ed2621859e05bb53f6ace8761f744904f5ad1f64f",
+      "receipt_SHA": "24c480f180b3d5542119ad34d4ac1978f158a30e9893a3f3d6a9371c7c8e7e11"
+    },
+    {
+      "label": "reference_zero_S_duration60",
+      "kind": "qualification",
+      "outer_seconds": 0.05780240008607507,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "602f7edb119a3e1ccb5c0934a544dd046cc0643b8caf297bb8b4ad1585241206",
+      "receipt_SHA": "26fd763f5b8018bf66987b1cf230ed613bace4dee8094283924933d97a1776e3"
+    },
+    {
+      "label": "science_commit_01",
+      "kind": "publication",
+      "outer_seconds": 0.7458028999390081,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "db153eac77119a74f04c74af99d284a6666a7192e1c438b00c7c72b744e0cb54",
+      "receipt_SHA": "71d34760bffc0a7492a59de5ce099ddab499b5607e50bac43e917c79d738574b"
+    },
+    {
+      "label": "science_push_01",
+      "kind": "publication",
+      "outer_seconds": 36.53677680005785,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "bc4029aab0bb4a278adeefec833297bbaece1f8210a1ea9da4417c3958f8bdbf",
+      "receipt_SHA": "496c5433dd253a0298be4b8d696b173606f267acb837cc66a632ac74e1931e2c"
+    },
+    {
+      "label": "stage_science_01",
+      "kind": "publication",
+      "outer_seconds": 2.060924799996428,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "635e22b8172b517cede6befa6baf1ba5fe1d40ca27ba918e2747dd1bd1aaa43d",
+      "receipt_SHA": "8de53a696584582c0975f6b685b0f6cc4a268b68c0487a9cda004d069582d8c1"
+    },
+    {
+      "label": "staged_transport_01",
+      "kind": "publication",
+      "outer_seconds": 13.671021500020288,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "a1b4002ddddff849a9c3962b0724be0ce5cd5aa457e1a7d83fa012fb7375564d",
+      "receipt_SHA": "e8468d354e6820d017ed6118a08d6f324b1888fe0c3188a660db2f0c3bc69ec1"
+    },
+    {
+      "label": "zero_boundaries_inventory_root_shared_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.05800179997459054,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "889fafe28b033683895f1b8ebe0116af27ba38f38dabc8f08f8eb5bcb104769c",
+      "receipt_SHA": "dd0ca080eb3cba9c68918bd369bff03f66b1f222d6eb9bfd745f847b04b115f1"
+    },
+    {
+      "label": "zero_boundaries_inventory_root_shared_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.05251579999458045,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "5073244ff74b32118c40307bb937d5e8b22de54d8d12156e90ffb9862740fa3a",
+      "receipt_SHA": "4ff5ae987857a416debebe54b466cf2b4714369ef50c0cc034802232127fd48b"
+    },
+    {
+      "label": "zero_boundaries_La_equal_c_fallback_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.43950580002274364,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "5578d982647afaa9664d770909e0606c5730b339f2e7aeaf71344d2e96b21785",
+      "receipt_SHA": "91c1b0931811ea91164982c113f5e6bb77e838ec8f04e2ac8a80b78071a702e8"
+    },
+    {
+      "label": "zero_boundaries_La_equal_c_fallback_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.05288280011154711,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "4988cb9954c1332e7747edc0eb8bda8da4444c2ec58fc05bc332fa1348983d3a",
+      "receipt_SHA": "3f1487722ba379b3d58d71d15102cf5589d1bd2a4fbe5089c332e62735156939"
+    },
+    {
+      "label": "zero_boundaries_La_equal_c_shared_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.4991846999619156,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "93ca51a9da870b174d33f61bbac7fd6ed72ea2f06a1396f64a6740f150d017f1",
+      "receipt_SHA": "717b62b4a16cb537b32eee7f00ff1dd9a7e1fb6d594d4af5379936b0918cb2dd"
+    },
+    {
+      "label": "zero_boundaries_La_equal_c_shared_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.06072509998921305,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "054dbd222a991bbba07836b5d1259fa1db4766fb746bc71830287c9cd25b908f",
+      "receipt_SHA": "28f2b0feba87ae3530e8ab9b71c2cdf32d1c95208a78067150a6e6efbfe22e1c"
+    },
+    {
+      "label": "zero_boundaries_La_greater_c_illegal_Start_shared_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.06110589997842908,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "0924d9ec86de527e35e1bed5b210e50c3a6f4699bf39d6997bbb314a5d7b84a5",
+      "receipt_SHA": "d9359750751ef63ba32a03ee50b109d2e55134f5ba87b4dc5216cd6e55fde642"
+    },
+    {
+      "label": "zero_boundaries_La_greater_c_illegal_Start_shared_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.05801609996706247,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "9b3002fe94226e204855989bd34bf041376dc290b9eb2668ad514509857f3830",
+      "receipt_SHA": "cdc448f2e6b48f136826059de9e817bea89359d1320190735a43d394cbb46691"
+    },
+    {
+      "label": "zero_boundaries_La_less_c_shared_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.059622200089506805,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "178e5f01b5c042a74fed8638cc78e6bb8c5ec067a3b2c50bb02b79ef0d8843a6",
+      "receipt_SHA": "fa786ce6f18eba14b1e5fbb3f350372d2d9a61c33ace95de33de388c92c5d820"
+    },
+    {
+      "label": "zero_boundaries_La_less_c_shared_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.05287240003235638,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "5268ce7a5d407909c72f8ff63bc18742c2ebe45434772ce7449eaa84854e5457",
+      "receipt_SHA": "a71fa5c6c117a26b0f6b26f9b34961e4a87bcedeaec3c5d9abad32d395ecded0"
+    },
+    {
+      "label": "zero_boundaries_shared_left_shared_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.058390800026245415,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "a24c46434a807d7f7ecba3230697560ad0a1138bd1e845cad0aeec658a30c4bf",
+      "receipt_SHA": "cb05e5185b3200c294111f4372018fc58a404ad160ed0bce146d7e2483d922a7"
+    },
+    {
+      "label": "zero_boundaries_shared_left_shared_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.053793500061146915,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "48d0c2b55e7c184f00b83ec8a555ea606fbaef50c597731d33141da4041340ef",
+      "receipt_SHA": "1b9d239476ef70994beca354f8845cf506d1894e34cabaf130e70a7901960949"
+    },
+    {
+      "label": "zero_boundaries_shared_right_shared_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.05929779994767159,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "ddc7d366db7ed72fe01d1bc415bd7b7232c336fb20437945c3aa3210118a009c",
+      "receipt_SHA": "97dc007f3030646cdd84f82692072940cd49a58907f6bb6f61be605fdd195ecf"
+    },
+    {
+      "label": "zero_boundaries_shared_right_shared_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.0530332000926137,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "50212feb5f1803bff3241c72eef7e75802e5a7fb01a43c0aae05d94aa073ff61",
+      "receipt_SHA": "2bd8496656b288162c8db4a989766d04b1d2906af51685c54d0d38cd604ab038"
+    },
+    {
+      "label": "zero_boundaries_T3600_no_old_sentinel_fallback_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.05273609992582351,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "6f8c76ec628a695139c05c5c63c077b355a4f53f6fe81ef5103c66cc0b6944f6",
+      "receipt_SHA": "1dafdc6bc0a6907d0517080342113ba3ddb7d4d97764f10b11b32aeafa8c36ad"
+    },
+    {
+      "label": "zero_boundaries_T3600_no_old_sentinel_fallback_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.05256600002758205,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "2adba282e677feb9a20679b18d6d6d2461d7f9b7a674432773d1dcf700bd7774",
+      "receipt_SHA": "4278de23b02ac87ae9f17689e3b797b9d231b4d6ef318e9390d01839a7115924"
+    },
+    {
+      "label": "zero_boundaries_T3600_no_old_sentinel_shared_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.05755389994010329,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "fb168c315041b040a0e957a1c5532c4539bc989c8a9fa6775e296ee8926adabb",
+      "receipt_SHA": "d9e41721fa5550c17015a0c77a7b5221e002b6f8bd29923055a619b076850ab5"
+    },
+    {
+      "label": "zero_boundaries_T3600_no_old_sentinel_shared_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.05238180002197623,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "39c679184cee60a6c8764a8f47ec9f040774e8c7fca45f01ae0b1162780cbbde",
+      "receipt_SHA": "cf8224fd5c2932c209e1b75a7e4de15f228bf593148e9ef1cec41245c01d9919"
+    },
+    {
+      "label": "zero_boundaries_within_1e9_from_below_shared_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.05900329991709441,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "c01a73b17228896ad8d7f376f991ce721fc3b3398fb80c57998b3e47995b5f42",
+      "receipt_SHA": "37298eb41e7e738637e504ddd5fc5bd35d667f47ffc2aa9ca89a38a2203a5396"
+    },
+    {
+      "label": "zero_boundaries_within_1e9_from_below_shared_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.057667699991725385,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "5370171f88b4cc4e4f0533c57341ede2e3793f3cbe86813ad10a4cf33b41838a",
+      "receipt_SHA": "9e0defee550dfcda8cf2d888095efe6efb950e3b2b4706492399a6d175ad918f"
+    },
+    {
+      "label": "zero_bridge_R98-C2_mb_E1",
+      "kind": "qualification",
+      "outer_seconds": 1.2842217999277636,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "e97757c809a5e0f294a067658e31d65a892db370666ddcfe171e6a99532549aa",
+      "receipt_SHA": "7388ae7f978524eb4c392f95413ba90b8f765e312cfe237386d1892805089aa0"
+    },
+    {
+      "label": "zero_bridge_R98-C2_mb_E2",
+      "kind": "qualification",
+      "outer_seconds": 1.2630556999938563,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "82e7069339561357b4cc125bd371ca3f9de1498f3ec48d3ed43be4399bb72ee5",
+      "receipt_SHA": "9d1d8cc4623f6d1e5a4f4e3391ff08a892a2b2393ba51e39d0caea3e61160f31"
+    },
+    {
+      "label": "zero_bridge_R98-C2_ms2_E1",
+      "kind": "qualification",
+      "outer_seconds": 0.7226248999359086,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "87dd0c11d8669acd8365948222bc5de57b1ba36cd4ce4b9de7b356ee8a3b7a9d",
+      "receipt_SHA": "f18e919e64cd2766d54be27c63c30e23684b7eee10a508bcfdd38bfe0d574cbb"
+    },
+    {
+      "label": "zero_bridge_R98-C2_ms2_E2",
+      "kind": "qualification",
+      "outer_seconds": 0.7343078999547288,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "e728d8bdfcdd349018a05045e657147db32710d4dd8406261611149a30a2d1ef",
+      "receipt_SHA": "cf95011bacfa6f3e78c0301ffb0b9c749ad07dd3460555c6860630147b800723"
+    },
+    {
+      "label": "zero_bridge_R98-C2_p_E1",
+      "kind": "qualification",
+      "outer_seconds": 0.3270988999865949,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "3cbc7bab5cb91ee21a868ee27a6f3ddac8f5e0e3524290e1b15075006e547e8d",
+      "receipt_SHA": "61e95f89b3366255c4e107454ab396613c4ec0a2486682d305a59fe3be72bfef"
+    },
+    {
+      "label": "zero_bridge_R98-C2_p_E2",
+      "kind": "qualification",
+      "outer_seconds": 0.3215096000349149,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "b812e3c70d19218792642bfe896c3a1b51ae044643de18b5b991f0fe6cd9a3f1",
+      "receipt_SHA": "db7f9a00fd4f159d216698027ee64fe2965fd9e782da44a728592d8aeecec988"
+    },
+    {
+      "label": "zero_bridge_S12_mb_E1",
+      "kind": "qualification",
+      "outer_seconds": 0.5569800999946892,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "f0513c4da39b81e4b60baf6867cc0f7272e1287f2c3e8bc5c4915716b926e34e",
+      "receipt_SHA": "015aaa72deb0e36d95b17b1e3baa3a09134ebf385ee12854bb75aaee28507690"
+    },
+    {
+      "label": "zero_bridge_S12_mb_E2",
+      "kind": "qualification",
+      "outer_seconds": 0.17042229999788105,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "232dd3edd1e1e7ecc49b7f99c85641f01770484c48b9b6155f80846310176bd9",
+      "receipt_SHA": "4095417441a2d942cc8e0c7bbf502a3ca9cedd2f29cd06bbc043f957382e7d05"
+    },
+    {
+      "label": "zero_bridge_S12_ms2_E1",
+      "kind": "qualification",
+      "outer_seconds": 0.1478596000233665,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "b3ec482a5374298b4b0cefedeeb06ee70e59494ba25c3de975823a6456bf5901",
+      "receipt_SHA": "d016af7bb2d3fbfb1e345c2cc4b59eb993d571ba7efba87e0866a67d40bfa9b3"
+    },
+    {
+      "label": "zero_bridge_S12_ms2_E2",
+      "kind": "qualification",
+      "outer_seconds": 0.14763469994068146,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "d542c36506cb5857b3e7b7f83f260a921862583c2d01e17f7d8f9bc529ade2f1",
+      "receipt_SHA": "5d01dfd3e986d8e3db6982f13b6b78c205168f428d6eddba4f77415a900429bf"
+    },
+    {
+      "label": "zero_bridge_S12_p_E1",
+      "kind": "qualification",
+      "outer_seconds": 0.0932562000816688,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "0b00c3264123b5db0ef48973af38d901381ceaefd983b64d480e44cd8ceda0cf",
+      "receipt_SHA": "7c2bedd74fecde737738d921444db4d7102ced0a66b7a23887f6ce4e2b929f37"
+    },
+    {
+      "label": "zero_bridge_S12_p_E2",
+      "kind": "qualification",
+      "outer_seconds": 0.09254309989046305,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "e826aa2cdb236118179ddcd0b7728a1b749949ceba9a40651923082b510ad511",
+      "receipt_SHA": "1a9bec1c1623e57a44e8a4aaac5b77cee7a0388f696bae097e19a63fb6e0049b"
+    },
+    {
+      "label": "zero_final_bridge_R98-C2_mb",
+      "kind": "qualification",
+      "outer_seconds": 1.2573293999303132,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "77bbcc8e1fa59d0478a12861037c266e9359381a38fe39dc2545a4b08fa11536",
+      "receipt_SHA": "1da9e6c5f279d504f035dabbe1af511677fb3f5c8e62d13b04fe4d54b46485d0"
+    },
+    {
+      "label": "zero_final_bridge_R98-C2_ms2",
+      "kind": "qualification",
+      "outer_seconds": 0.7249332000501454,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "34a6b941f971a38698165d49c89f5e3ffc50a61e5bf33853beab8ac5d3b94403",
+      "receipt_SHA": "2ccff983e454917e5645a14dfce8cf8b623a43cb8cd5c2625ef3f917007eee58"
+    },
+    {
+      "label": "zero_final_bridge_R98-C2_p",
+      "kind": "qualification",
+      "outer_seconds": 0.3324233000166714,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "dab5e4d0e285f8ed9ed332a8b7f0d36f52b071cdfa580aee79c200db351c731f",
+      "receipt_SHA": "2472b74b9a0c351a2bb51845d6e5a3a5d4d66343a9787f67f4fa90fa6459f1c2"
+    },
+    {
+      "label": "zero_final_bridge_S12_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.16896160005126148,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "77c942aac6a8cde7021ad1a3dd198428543d053a9d7883f6eb90f160cfa3daf0",
+      "receipt_SHA": "f10b55c8f774d8d20ff7dda7d0fea93ad722166e93753a0b5119c7b3baad4e81"
+    },
+    {
+      "label": "zero_final_bridge_S12_ms2",
+      "kind": "qualification",
+      "outer_seconds": 0.1496896999888122,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "ebd0c0119fb8b24e84c7012f443b1f8111aab0717e5cdc5091f3c98dca9b3064",
+      "receipt_SHA": "3c5e111e79684ed83fe22d438fface9ce2962e418f62a11b9f2a4edfa602a9a2"
+    },
+    {
+      "label": "zero_final_bridge_S12_p",
+      "kind": "qualification",
+      "outer_seconds": 0.09949699998833239,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "316eebe35a128d2bcdd3ae28a2bf16bf6bd35d28c7244668d0edfdf023783f12",
+      "receipt_SHA": "fc3e65486a419f7a0a9faf364dde49c5d0a840f516bb8d7734a03b416f5948c5"
+    },
+    {
+      "label": "zero_formal_role_roots_PB-B35-B_mb",
+      "kind": "qualification",
+      "outer_seconds": 1.8525854999898002,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "1c0ddacef1ffeaee90e040ec45fa2f8a60506c6b9e214e80bb69bb63aad72a2e",
+      "receipt_SHA": "375bb4c35884d14b9b7a7d4d75565f3ce7b715bd4e5e27c55a40dd6ca2743fde"
+    },
+    {
+      "label": "zero_formal_role_roots_PB-B35-B_md-r",
+      "kind": "qualification",
+      "outer_seconds": 1.8586748000234365,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "7255f689f0b7d7c77d0201aaf1e37098e939619284ccbcc8af6b6538ab361c36",
+      "receipt_SHA": "1f73f26bc374ad15f9b489f32f55000564db8019812af0ac12ad82943d6d2cb2"
+    },
+    {
+      "label": "zero_formal_role_roots_PB-B35-B_ms2",
+      "kind": "qualification",
+      "outer_seconds": 1.2238718000007793,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "f9cd72af2a7f7eecacbaf6e27e67a4e8da239a9656ab4ceb12528f4752fda813",
+      "receipt_SHA": "435303e6d2002f648c5638c012fc069513d74124375ac2245529cab74194659c"
+    },
+    {
+      "label": "zero_formal_role_roots_SC-B20-S_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.42289919999893755,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "e7097bebf0cbd6ec38fc38505839c9889efe42dafe45fc96c87f76a945e5b03a",
+      "receipt_SHA": "d4386565634f600454176b8d9a4b9287e36694b64eba5e1c3d0edc0c3b3eff6f"
+    },
+    {
+      "label": "zero_formal_role_roots_SC-B20-S_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.4231395000824705,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "1f148f9e0db31b718ecd5e60712f3a74968fd545c0f90e40178b3e85f4118aa4",
+      "receipt_SHA": "2372a0df4efbb9ef21ee7f9abb9157bbe7e5d4ccf24699327d88ce6438176e11"
+    },
+    {
+      "label": "zero_formal_role_roots_SC-B20-S_ms2",
+      "kind": "qualification",
+      "outer_seconds": 0.3279292000224814,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "b48bfc4c74d8d29fce3461b406b87da7e527d636dca1fd71181f9f1f32fc2d9c",
+      "receipt_SHA": "c20e66c8e8c0e4acf4570ac58d5aab2a8193d5825bdd9eab7061521ba17c64f0"
+    },
+    {
+      "label": "zero_formal_role_roots_SC-C15-S_mb",
+      "kind": "qualification",
+      "outer_seconds": 0.6338978999992833,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "db72bac08952a9485f4ee6157407e9feba6f23f8d16af3ffcade59602a7493b6",
+      "receipt_SHA": "d95eddcad2f718f79ec24965161408b7e18e92e1cca5668d312a313ca1290124"
+    },
+    {
+      "label": "zero_formal_role_roots_SC-C15-S_md-r",
+      "kind": "qualification",
+      "outer_seconds": 0.24478389997966588,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "71f92faf5d2bd643b2bfdf235c236821ca42e210019e7e2817423e68e00cedbe",
+      "receipt_SHA": "15d25252180e682182d7d5985dd311f4f801e3de4da8f190da92ffca0e22ceb8"
+    },
+    {
+      "label": "zero_formal_role_roots_SC-C15-S_ms2",
+      "kind": "qualification",
+      "outer_seconds": 0.24317019991576672,
+      "exit_code": 0,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "7a79f9156b89015efc38d6de8ec15e539249875fc0e73746a9833dd25defd7b1",
+      "receipt_SHA": "532dc71d912c6f1175d3063d992559091c058d4c534e1e70ae5631bb0177b7ff"
+    },
+    {
+      "label": "zero_qualification",
+      "kind": "qualification",
+      "outer_seconds": 0.21300670003984123,
+      "exit_code": 1,
+      "conservative_upper_allowance": false,
+      "launch_SHA": "71a5fcd9f89f0f40e38a5afedae406682e9f950741eed8d22d1edd6f8b9bd2aa",
+      "receipt_SHA": "75a53c1a6f67941d0cc41277c48cdae1ff56c8cf1ecc26f63f04142ba302f4f9"
+    }
+  ],
+  "post_archive_fee_facts": [
+    {
+      "label": "current_carriers_01",
+      "launch": {
+        "UTC": "2026-10-21T17:47:49.943039+00:00",
+        "kind": "publication",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "scripts/round128_release.py",
+          "pack"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 12721.774488199735,
+          "remaining_outer_seconds": 12478.225511800265,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 15.943388599902391,
+            "build": 87.27932449989021,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "qualification": 698.5254376999801
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 261.25445949996356,
+        "start_unix": 1792604869.943039,
+        "end_unix": 1792605131.1936467,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "export_manifest_01",
+      "launch": {
+        "UTC": "2026-10-21T17:52:40.834470+00:00",
+        "kind": "publication",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "scripts/round128_release.py",
+          "manifest"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 12986.417246599682,
+          "remaining_outer_seconds": 12213.582753400318,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 261.25445949996356,
+            "qualification": 698.5254376999801
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 7.557010699994862,
+        "start_unix": 1792605160.8344705,
+        "end_unix": 1792605168.391972,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "final_protection_check",
+      "launch": {
+        "UTC": "2026-10-21T18:22:52.282984+00:00",
+        "kind": "cleanup",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\temp\\round128\\final_protection_check.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 14126.340008099563,
+          "remaining_outer_seconds": 11073.659991900437,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "cleanup": 23.33842649986036,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 321.825996199972,
+            "qualification": 698.5254376999801,
+            "recovery": 1056.012798300013
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 13.55212330003269,
+        "start_unix": 1792606972.2829845,
+        "end_unix": 1792606985.8485384,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "local_portable_check_01",
+      "launch": {
+        "UTC": "2026-10-21T17:52:36.813867+00:00",
+        "kind": "analysis",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "scripts/round128_portable_check.py",
+          "--receipt",
+          "results/unified_exact_round128/review/local_portable_check.json"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 12983.028947699699,
+          "remaining_outer_seconds": 12216.971052300301,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 15.943388599902391,
+            "build": 87.27932449989021,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 261.25445949996356,
+            "qualification": 698.5254376999801
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.388298899983056,
+        "start_unix": 1792605156.8138678,
+        "end_unix": 1792605160.1912081,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "owned_cleanup_01",
+      "launch": {
+        "UTC": "2026-10-21T18:15:25.126065+00:00",
+        "kind": "cleanup",
+        "command": [
+          "powershell.exe",
+          "-NoProfile",
+          "-File",
+          "scripts/round128_cleanup.ps1"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 14103.001581599703,
+          "remaining_outer_seconds": 11096.998418400297,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 321.825996199972,
+            "qualification": 698.5254376999801,
+            "recovery": 1056.012798300013
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 20.78570080001373,
+        "start_unix": 1792606525.1260655,
+        "end_unix": 1792606545.9118063,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "owned_cleanup_02",
+      "launch": {
+        "UTC": "2026-10-21T18:17:58.445679+00:00",
+        "kind": "cleanup",
+        "command": [
+          "powershell.exe",
+          "-NoProfile",
+          "-File",
+          "scripts/round128_cleanup.ps1"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 14123.787282399717,
+          "remaining_outer_seconds": 11076.212717600283,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "cleanup": 20.78570080001373,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 321.825996199972,
+            "qualification": 698.5254376999801,
+            "recovery": 1056.012798300013
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 1.3586281999014318,
+        "start_unix": 1792606678.4456797,
+        "end_unix": 1792606679.7899492,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "owned_cleanup_03",
+      "launch": {
+        "UTC": "2026-10-21T18:21:20.426658+00:00",
+        "kind": "cleanup",
+        "command": [
+          "powershell.exe",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "scripts/round128_cleanup.ps1"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 14125.145910599618,
+          "remaining_outer_seconds": 11074.854089400382,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "cleanup": 22.14432899991516,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 321.825996199972,
+            "qualification": 698.5254376999801,
+            "recovery": 1056.012798300013
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.194097499945201,
+        "start_unix": 1792606880.4266582,
+        "end_unix": 1792606881.6210048,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "public_empty_root_01",
+      "launch": {
+        "UTC": "2026-10-21T17:57:31.219746+00:00",
+        "kind": "recovery",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "scripts/round128_public_restore.py",
+          "--commit",
+          "58b0b2b6f6264e8c1bc08a61aed36e72f1769b7c",
+          "--destination",
+          "E:\\codes\\ExactEBRP-work\\restore\\round128-public-58b0b2b6",
+          "--receipt",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round128\\results\\unified_exact_round128\\public_restore_receipt.json"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 13046.98878329969,
+          "remaining_outer_seconds": 12153.01121670031,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 321.825996199972,
+            "qualification": 698.5254376999801
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1056.012798300013,
+        "start_unix": 1792605451.2197468,
+        "end_unix": 1792606507.2324588,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "science_commit_01",
+      "launch": {
+        "UTC": "2026-10-21T17:55:29.126303+00:00",
+        "kind": "publication",
+        "command": [
+          "git",
+          "-c",
+          "maintenance.auto=false",
+          "-c",
+          "gc.auto=0",
+          "commit",
+          "-m",
+          "Round128: report fixed inclusive-root and two-Seed support evidence"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 13009.706203599693,
+          "remaining_outer_seconds": 12190.293796400307,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 284.54341649997514,
+            "qualification": 698.5254376999801
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.7458028999390081,
+        "start_unix": 1792605329.126303,
+        "end_unix": 1792605329.871665,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "science_push_01",
+      "launch": {
+        "UTC": "2026-10-21T17:55:30.114324+00:00",
+        "kind": "publication",
+        "command": [
+          "git",
+          "-c",
+          "maintenance.auto=false",
+          "-c",
+          "gc.auto=0",
+          "push",
+          "-u",
+          "origin",
+          "codex/round128-inclusive-root-ablation"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 13010.452006499632,
+          "remaining_outer_seconds": 12189.547993500368,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 285.28921939991415,
+            "qualification": 698.5254376999801
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 36.53677680005785,
+        "start_unix": 1792605330.1143243,
+        "end_unix": 1792605366.6512284,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "stage_science_01",
+      "launch": {
+        "UTC": "2026-10-21T17:54:24.854878+00:00",
+        "kind": "publication",
+        "command": [
+          "git",
+          "-c",
+          "maintenance.auto=false",
+          "-c",
+          "gc.auto=0",
+          "add",
+          "--",
+          ".gitattributes",
+          "scripts/round128_*.py",
+          "scripts/round128_export.cpp",
+          "scripts/round128_cleanup.ps1",
+          "results/unified_exact_round128"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 12993.974257299677,
+          "remaining_outer_seconds": 12206.025742700323,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 268.8114701999584,
+            "qualification": 698.5254376999801
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.060924799996428,
+        "start_unix": 1792605264.854879,
+        "end_unix": 1792605266.9160795,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "staged_transport_01",
+      "launch": {
+        "UTC": "2026-10-21T17:54:27.045690+00:00",
+        "kind": "publication",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\temp\\round128\\staged_transport_check.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round128",
+        "budget_before": {
+          "paid_outer_seconds": 12996.035182099673,
+          "remaining_outer_seconds": 12203.964817900327,
+          "unclosed": [],
+          "by_kind": {
+            "administrative_allowance": 180,
+            "analysis": 19.331687499885447,
+            "build": 87.27932449989021,
+            "documentation": 59.76908009999897,
+            "formal": 11500.257257299963,
+            "publication": 270.87239499995485,
+            "qualification": 698.5254376999801
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 13.671021500020288,
+        "start_unix": 1792605267.0456908,
+        "end_unix": 1792605280.716265,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    }
+  ],
+  "open_fees": [],
+  "final_small_Git_and_PR_metadata_closure": {
+    "accounting": "Covered within the existing 180-second conservative administrative allowance; not added a second time",
+    "scope": "Normal metadata commit/push, remote head and Draft/base readback, small receipt/PR-body writes; no solver, build, compression or recovery",
+    "actual_final_Git_receipt_retained_outside_self_referential_commit": true
+  },
+  "formal_nominal_seconds": 15600,
+  "qualification_soft": 1200,
+  "qualification_limit": 3000,
+  "maximum_plan": 19200,
+  "qualification_build_actual_seconds": 785.8047621998703,
+  "H_LP_MIP_seconds_are_nested_not_added_again": true,
+  "no_formal_outcome_retry": true
+}

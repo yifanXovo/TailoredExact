@@ -1,0 +1,27 @@
+{
+  "UTC": "2026-10-21T14:18:07.928322+00:00",
+  "protocol_SHA": "87cb28a48a5171e06211cbfc692e6581a22907271476b71df999b5fd107d5264",
+  "E2_frozen_SHA": "f3265c0e3a07854e5dfb65be5c74e3b43d92d6f90fbe37bc5a1aa5ee0f02ce6a",
+  "groups": {
+    "campaign/01_SC-C15-S_S0": "73f25a08737f4d5c1e291c2750632bcb1f3d1917cc0c809b2fd659e9062cda7f",
+    "campaign/02_SC-B20-S_S0": "1392d2e8b719c27c7e0291bf61659fd34a004747e18d16c5bddabd0cb9d18a24",
+    "campaign/03_PB-B35-B_S0": "f67a06598d5d44d13e6360bb13dfe0bf99dee509f6ee27cc319023d314469543",
+    "campaign/04_SC-C15-S_S1": "9fd1c08c2334df9fb34d1cb1168f1f0226e1d3045cd86bd77eaea436f7aff2f8",
+    "campaign/05_SC-B20-S_S1": "d25c7836f30236cb6038351416030eb7c488092493ce8340cc359bbe22a8730b"
+  },
+  "adapters": {
+    "scripts/round128_campaign.py": "cff25325ae4d436556be0615447bee3f71054ad5086e5d0303d5bab5212f8e4b",
+    "scripts/round128_evidence.py": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+    "scripts/round128_formal.py": "da9706f0d7b45eee719d62994a8f895a3eb898248e8071a879e62b1569153446"
+  },
+  "formal_methods": [
+    "P",
+    "MB",
+    "MD-R",
+    "MS2"
+  ],
+  "formal_arms": 16,
+  "formal_pairs": 17,
+  "serial": true,
+  "sealed_source_commit": "c4f1ad650c31870570da9ae4223c94f4da25a0f1"
+}

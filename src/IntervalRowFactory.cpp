@@ -743,7 +743,8 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
                out.domain.penalty_lower, true, false,
                "absolute_deviation_local_inventory_domain");
         noteFamily(out, "penalty_lower_bound_closure");
-        if (request.add_incumbent_row && cutoff_active &&
+        if (round128EmitIntervalNoImproverDomainClosure() &&
+            request.add_incumbent_row && cutoff_active &&
             request.gamma_L + options.lambda * out.domain.penalty_lower >=
                 cutoff_value - 1e-9) {
             addRow(out, "penalty_lower_bound_closure", {}, 'L', -1.0,
