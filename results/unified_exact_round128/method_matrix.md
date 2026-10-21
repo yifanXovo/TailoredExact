@@ -17,6 +17,8 @@ All formal arms use lambda=.15, pickup=drop=60 seconds, H_seed=20260626, Threads
 
 Only the predeclared 16 arms and 17 typed comparisons are formal. The three known inputs are not unseen confirmation samples. Seed repeats add matched observations rather than new problems; shared arms are not independent replications. R127 E1 Seed1 appears only as historical context, including all unfavorable tiny, C_R and PT results. No R127 P time is used to evaluate a Round128 Seed1 MS2.
 
+Evidence-field note: the inherited `formal_performance` field refers to the older Round108 whole-arm clock that included post-exit audit. Round128 retains that historical reader field without relabelling it. Current qualification uses `formal_protocol_qualified`, `numbers_qualified`, `certificate_qualified` and the independently sealed production/verification/total clocks; only a qualified certificate receives `T_cert=T_produce`.
+
 The full mapped own fleet, actual returned model, Start readback, call-scoped return/coverage and raw signed-gap gates remain mandatory. The inherited startup-zero policy remains explicit and records D as unexposed. MD-R requires a complete native optimal root return for a nonzero certificate; a TIME_LIMIT/INTERRUPTED return may supply qualified scoped bounds and a valid open result, never native optimality. These finite checks do not claim a rational proof of every generated matrix or a global floating-point error bound.
 
 Publication and recovery retain original raw outputs and failed qualification records. R127's three MD entries remain unstarted; this revised control does not rewrite their status or select another main algorithm.

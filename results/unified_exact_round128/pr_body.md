@@ -1,0 +1,35 @@
+Round128 replaces the blocked inclusive-root research specification with **MD-R v1**, a legal own-U0 root control. The old no-improver shortcut can exclude an equal-cutoff physical witness; MD-R omits only that semantically marked pseudo-infeasibility row, retaining valid domains and strengthening. Frozen M-B / GI-TBC remains the sole proposed algorithm. Ordinary MB, MS2 and cold P retain their original implementation paths.
+
+This Draft PR is stacked on `codex/round127-integrated-diagnostics` at measured parent `d0b96fe43f463994d11ee392eeaa2092916838a2`. R127 remains **PARTIAL**, with all three original MD arms unstarted. No historical result is rewritten as a completed MD observation.
+
+**Execution: COMPLETE. Scientific judgment: `BOUNDED_SIMPLIFICATION_SIGNAL`.** Certification risk remains unresolved on K3: all four core methods are qualified open there, so neither a certification loss nor uniform simplification safety is established. K1 is mixed across Seeds: MS2 saves 8.127 seconds at Seed0 but is 0.241 seconds slower at Seed1. Against that retained mixed evidence, K2 supplies the bounded repeated signal: both methods certify at each Seed, and MS2 saves 75.359 seconds at Seed0 (7.1%) and 285.841 seconds at Seed1 (29.6%). Those are two matched observations on one known role, not population evidence. MD-R establishes a legal control, not a performance victory: it is 0.883 seconds faster than MB on K1, 0.556 seconds slower on K2, and both are open on K3; no MB split occurs. Current MB/P remains two Wins and one BOTH_OPEN comparison, with no claimed advantage over the strongest possible tuned compact baseline. The K2 support signal warrants only a single future uniform confirmation design, while the frozen full M-B remains the sole paper method.
+
+The fixed same-E2 panel contains **16 arms, 17 typed shared-arm comparisons and three distinct known inputs**: Seed0 P/MB/MD-R/MS2 on all three roles, plus only MB/MS2 at Seed1 on K1/K2. Every MB-type arm independently pays complete H; P is independently paid original cold compact, without H/Start/cutoff. Full production clocks, separate verification/total clocks, null uncertified T_cert, raw signed gaps and all open/adverse outcomes are retained. There is no tuning, additional evaluation input, expanded Seed panel, cap extension or performance-driven retry. Artificial boundary fixtures remain separately identified qualification work.
+
+| Core Seed0 comparison | Typed statuses | Directions |
+| --- | --- | --- |
+| MB/P | {'BOTH_CERTIFIED': 1, 'LEFT_ONLY_CERTIFIED': 1, 'BOTH_OPEN': 1} | {'Win': 2, 'UNDETERMINED': 1} |
+| MB/MD-R | {'BOTH_CERTIFIED': 2, 'BOTH_OPEN': 1} | {'Lose': 1, 'Win': 1, 'UNDETERMINED': 1} |
+| MB/MS2 | {'BOTH_CERTIFIED': 2, 'BOTH_OPEN': 1} | {'Lose': 2, 'UNDETERMINED': 1} |
+| MD-R/P | {'BOTH_CERTIFIED': 1, 'LEFT_ONLY_CERTIFIED': 1, 'BOTH_OPEN': 1} | {'Win': 2, 'UNDETERMINED': 1} |
+| MS2/P | {'BOTH_CERTIFIED': 1, 'LEFT_ONLY_CERTIFIED': 1, 'BOTH_OPEN': 1} | {'Win': 2, 'UNDETERMINED': 1} |
+
+
+
+The two additional Seed1 support comparisons remain a separate layer: {'BOTH_CERTIFIED': 2}; directions {'Win': 1, 'Lose': 1}. Each Seed has one matched observation per role; shared arms and repeated inputs are not independent trials.
+
+MD-R uses its own fixed inclusive root, full actual own-Start validation before LP, one complete LP and one complete root MIP, with no child/target/rebuild. Numerical relevance cannot waive that paid chain, and a TIME_LIMIT/INTERRUPTED return cannot become native optimality. The valid regional floor is min(L_a,c) by actual-domain/cutoff-complement coverage, not a clamp hiding a contradictory witness. Equality and the 1e-9 numerical band are stated separately.
+
+Qualification includes shared/fallback sentinel-only differences, an equal-cutoff physical fleet, shared endpoints and loaded return, actual tiny-positive-U0 calls, a real time-limited open root, full small/medium E1/E2 model/VType/bound/objective/settings/H bridges, and an independent source/Start/physical/return review. A preliminary qualification Start-counter serialization failure and its full paid producer remain rejected and preserved. None of the nine saved R127 core MB matrices contains the sentinel; this is a finite impact check, not universal historical revalidation.
+
+MS2 deletes only triple support rows, retaining pairs, ordered supply, enumeration order and the original shared cap. Actual same-H/root differences and controller exposure are checked after formal execution. Absence of actual splits restricts any D interpretation to probing, target handoff and scheduling. All certification risk and K3 endpoints remain visible; no per-instance winner is adopted.
+
+The maintained manuscript/PDF retains the R125 model/cuts derivations and all R127 Seed/tiny/PT findings, including PT 0/3 versus default P 1/3 on its separate held-out E1 roles. This round does not demonstrate superiority to the strongest possible Gurobi tuning. The sole next priority is substantive review of one unexecuted uniform simplification confirmation design: fix a single candidate that removes triple support for every evaluated case while retaining the frozen H, representation, pair support, ordered supply, C_G, controller, numerical policy and default parameters. Any later authorization should freeze its matched certification-first panel before execution, retain every open or adverse result, independently pay complete methods, and forbid role-specific switching or retuning. No such confirmation, adoption, additional Seed/input or longer window is executed in Round128. Until that decision, retain frozen M-B / GI-TBC, P-GRB as the primary benchmark and the historical ENS-C default; restrict the D claim to the actual probing/target/scheduling exposure and do not claim multi-leaf speedup.
+
+All formal arms use E2 PE SHA256 `ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa` and unchanged Gurobi 13.0.2 DLL SHA256 `9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88`. No executable, DLL, license, credential, font file or external full paper is published. Current-round finite raw carriers, failed evidence, full source bindings and the recovery manifest are included.
+
+The single anonymous empty-root recovery is performed only after this science commit is remotely readable; the actual receipt will be added as closeout metadata without rerunning the panel.
+
+Evidence entry point: `results/unified_exact_round128/final_report.md`; complete arms/pairs, support two-Seed table, component costs/differences, source seal, review actions and maintained reading PDF are beside it.
+
+A separate final executor recomputed all 17 directions and denominators from original receipts and checked the actual MD-R root/own Start, boundary sentinel difference, MS2 deletion, nonempty physical fleet, matched H/root scope and observed controller exposure. The exact finite scope and limitations are retained in `review/final_independent_review.md`; no full rational-matrix proof or external replication is claimed.

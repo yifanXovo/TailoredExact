@@ -1,0 +1,168 @@
+{
+  "records": [
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "comparison": "MB/MD-R",
+      "complete_H_actions_fleet_equal": true,
+      "initial_root_scope_U_equal": true,
+      "actual_initial_native_settings_equal": true,
+      "MB_sentinel_rows": 0,
+      "MB_actual_splits": 0,
+      "actual_root_difference": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true
+      },
+      "component_interpretation_eligible": true,
+      "interpretation": "exposed preprobe/target/scheduling package, with no observed multi-leaf split"
+    },
+    {
+      "group": 1,
+      "id": "SC-C15-S",
+      "seed": 0,
+      "comparison": "MB/MS2",
+      "complete_H_actions_fleet_equal": true,
+      "initial_root_scope_U_equal": true,
+      "actual_initial_native_settings_equal": true,
+      "MB_sentinel_rows": 0,
+      "MB_actual_splits": 0,
+      "actual_root_difference": {
+        "mode": "ms2",
+        "removed_rows": 910,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 910
+        },
+        "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+      },
+      "component_interpretation_eligible": true,
+      "interpretation": "only actual declared triple-support deletion"
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "comparison": "MB/MD-R",
+      "complete_H_actions_fleet_equal": true,
+      "initial_root_scope_U_equal": true,
+      "actual_initial_native_settings_equal": true,
+      "MB_sentinel_rows": 0,
+      "MB_actual_splits": 0,
+      "actual_root_difference": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true
+      },
+      "component_interpretation_eligible": true,
+      "interpretation": "exposed preprobe/target/scheduling package, with no observed multi-leaf split"
+    },
+    {
+      "group": 2,
+      "id": "SC-B20-S",
+      "seed": 0,
+      "comparison": "MB/MS2",
+      "complete_H_actions_fleet_equal": true,
+      "initial_root_scope_U_equal": true,
+      "actual_initial_native_settings_equal": true,
+      "MB_sentinel_rows": 0,
+      "MB_actual_splits": 0,
+      "actual_root_difference": {
+        "mode": "ms2",
+        "removed_rows": 2280,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 2280
+        },
+        "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+      },
+      "component_interpretation_eligible": true,
+      "interpretation": "only actual declared triple-support deletion"
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "comparison": "MB/MD-R",
+      "complete_H_actions_fleet_equal": true,
+      "initial_root_scope_U_equal": true,
+      "actual_initial_native_settings_equal": true,
+      "MB_sentinel_rows": 0,
+      "MB_actual_splits": 0,
+      "actual_root_difference": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true
+      },
+      "component_interpretation_eligible": true,
+      "interpretation": "exposed preprobe/target/scheduling package, with no observed multi-leaf split"
+    },
+    {
+      "group": 3,
+      "id": "PB-B35-B",
+      "seed": 0,
+      "comparison": "MB/MS2",
+      "complete_H_actions_fleet_equal": true,
+      "initial_root_scope_U_equal": true,
+      "actual_initial_native_settings_equal": true,
+      "MB_sentinel_rows": 0,
+      "MB_actual_splits": 0,
+      "actual_root_difference": {
+        "mode": "ms2",
+        "removed_rows": 19635,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 12729,
+          "cover_3": 6906
+        },
+        "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+      },
+      "component_interpretation_eligible": true,
+      "interpretation": "only actual declared triple-support deletion"
+    },
+    {
+      "group": 4,
+      "id": "SC-C15-S",
+      "seed": 1,
+      "comparison": "MB/MS2",
+      "complete_H_actions_fleet_equal": true,
+      "initial_root_scope_U_equal": true,
+      "actual_initial_native_settings_equal": true,
+      "MB_sentinel_rows": 0,
+      "MB_actual_splits": 0,
+      "actual_root_difference": {
+        "mode": "ms2",
+        "removed_rows": 910,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 910
+        },
+        "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+      },
+      "component_interpretation_eligible": true,
+      "interpretation": "only actual declared triple-support deletion"
+    },
+    {
+      "group": 5,
+      "id": "SC-B20-S",
+      "seed": 1,
+      "comparison": "MB/MS2",
+      "complete_H_actions_fleet_equal": true,
+      "initial_root_scope_U_equal": true,
+      "actual_initial_native_settings_equal": true,
+      "MB_sentinel_rows": 0,
+      "MB_actual_splits": 0,
+      "actual_root_difference": {
+        "mode": "ms2",
+        "removed_rows": 2280,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 2280
+        },
+        "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+      },
+      "component_interpretation_eligible": true,
+      "interpretation": "only actual declared triple-support deletion"
+    }
+  ],
+  "extra_Optimize": 0,
+  "source": "actual own-H initial root for every formal group"
+}

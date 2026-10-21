@@ -1,5 +1,1 @@
-Round128 active.
-
-Last sealed: `E:\codes\ExactEBRP-work\worktrees\round128\results\unified_exact_round128\qualification\native_R98-C2_MD_R_open_final\raw\01_R98-C2_S0_R1_MD-R`.
-Next position in `qualification/native_R98-C2_MD_R_open_final`: 2.
-Check fees/PID and native processes before resuming. Never overwrite a sealed arm.
+Round128 scientific work COMPLETE: all16 fixed arms and17 typed comparisons qualified; no further experiment authorized. All native processes ended. Source/PE/DLL and three sealed adapters remain frozen. Separate final review and the maintained PDF changed-page review passed. Publication, one anonymous science-commit empty-root recovery and safe owned duplicate cleanup remain; inspect their receipts and live PID/birth identity before any recovery. Never restart a sealed arm. R127 remains PARTIAL with its three original MD arms unstarted.

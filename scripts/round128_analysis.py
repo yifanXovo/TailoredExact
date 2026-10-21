@@ -19,10 +19,18 @@ def analyze():
             assert a['T_cert']==(a['T_produce'] if qualified(a) and a['certificate'] else None)
             arms.append(a);d=Path(l['destination']);r=read(d/'result.json');p=l['panel']
             ledger=core.rows(d/'external/paper_optimize_ledger.csv') if a['method']!='P' else []
+            lp_rows=core.rows(d/'external/lp_status_ledger.csv') if ledger else []
+            root_lp=next((x for x in lp_rows if x['leaf_id']=='L0'),None)
             if a['method']!='P':
                 hs[a['method']]=H(ROOT,p,d);m,c=root(d);models[a['method']]=m;calls[a['method']]=c
             else:m,c=core.lp_model(d/'compact.lp'),None
-            families=collections.Counter(row_family(row) for row in m['rows'])
+            families=collections.Counter()
+            for row in m['rows']:
+                family=row_family(row)
+                if family.startswith(('cover_','conditional_')):
+                    vehicles={n.split('_')[1] for n,_ in row[0] if n.startswith(('p_','z_'))}
+                    if len(vehicles)!=1:continue
+                families[family]+=1
             LPS=sum(float(x['solver_runtime']) for x in ledger if x['solve_kind']=='LP')
             MIPS=sum(float(x['solver_runtime']) for x in ledger if x['solve_kind']!='LP') if ledger else r.get('gurobi_runtime',0.)
             starts=[read(s) for s in (d/'external/native_logs').glob('*.round68.start.json')] if ledger else []
@@ -35,14 +43,22 @@ def analyze():
                 root_cutoff=c['cutoff'] if c else None,root_scope=[c['lower_g'],c['upper_g']] if c else None,
                 root_sentinel_rows=sum(1 for t,s,b in m['rows'] if not t and s=='<=' and b==-1),
                 actual_native_calls=a['native_Optimize'],root_LP_calls=sum(x['solve_kind']=='LP' and x['leaf_id']=='L0' for x in ledger),
+                root_LP_bound=float(root_lp['lower_bound']) if root_lp and root_lp['bound_available']=='1' else None,
                 child_LP_calls=sum(x['solve_kind']=='LP' and x['leaf_id']!='L0' for x in ledger),
-                terminal_calls=sum(x['solve_kind']=='MIP' for x in ledger),partial_target_calls=r.get('external_gini_tree_partial_mip_optimize_count',0),
+                terminal_calls=sum(x['solve_kind']=='MIP' for x in ledger),cold_compact_MIP_calls=a['native_Optimize'] if a['method']=='P' else 0,
+                partial_target_calls=r.get('external_gini_tree_partial_mip_optimize_count',0),
+                NEXT_target_calls=sum('NEXT' in x['solve_kind'] for x in ledger),child_bound_target_calls=sum('CHILD' in x['solve_kind'] for x in ledger),
+                actual_solve_kinds=dict(collections.Counter(x['solve_kind'] for x in ledger)) if ledger else {'complete_original_compact_milp':a['native_Optimize']},
                 target_reached_events=r.get('external_gini_tree_partial_mip_target_reached_count',0),split_count=r.get('external_gini_tree_split_count',0),
-                LP_native_seconds=LPS,MIP_native_seconds=MIPS,native_nodes=sum(float(x['nodes']) for x in ledger) if ledger else r.get('gurobi_node_count'),
-                H_plus_admission_seconds=Hcost,Start_precheck_submission_seconds=sum(s['mapping_validation_submission_seconds'] for s in starts),
+                LP_native_seconds=LPS,MIP_native_seconds=MIPS,LP_native_work=sum(float(x['work']) for x in ledger if x['solve_kind']=='LP'),
+                MIP_native_work=sum(float(x['work']) for x in ledger if x['solve_kind']!='LP') if ledger else r.get('gurobi_work'),
+                native_nodes=sum(float(x['nodes']) for x in ledger) if ledger else r.get('gurobi_node_count'),
+                H_plus_admission_seconds=Hcost,model_generation_seconds=r.get('external_gini_tree_model_build_seconds') if ledger else r.get('gurobi_model_build_seconds'),
+                native_model_read_seconds=r.get('external_gini_tree_model_read_seconds') if ledger else r.get('gurobi_model_read_seconds'),
+                Start_precheck_submission_seconds=sum(s['mapping_validation_submission_seconds'] for s in starts),
                 actual_submitted_Starts=sum(bool(s['submitted']) for s in starts),
                 other_production_seconds=a['T_produce']-Hcost-LPS-MIPS,T_produce=a['T_produce'],T_verify=a['T_verify'],T_total=a['T_total'],
-                certificate=a['certificate'],T_cert=a['T_cert'],native_statuses=[x['native_status'] for x in ledger] if ledger else [r.get('gurobi_status')],
+                certificate=a['certificate'],T_cert=a['T_cert'],native_statuses=[x['native_status'] for x in ledger] if ledger else [r.get('gurobi_status_text')],
                 support_pair_rows=families['cover_2']+families['conditional_2'],support_triple_rows=families['cover_3']+families['conditional_3'],
                 ordered_supply_rows=families['ordered_supply'],
                 final_own_U_first_logged_available=min(w['available'] for w in ws) if ws else None,
@@ -59,26 +75,29 @@ def analyze():
             h0,h1=hs['MB'],hs[method];c0,c1=calls['MB'],calls[method]
             sameH=h0['complete'] and h1['complete'] and h0['fleet']==h1['fleet'] and h0['semantic_traces']==h1['semantic_traces']
             sameScope=all(c0[k]==c1[k] for k in ['lower_g','upper_g','cutoff'])
+            sameParameters=c0['settings']==c1['settings']
             record=dict(group=g['number'],id=g['role']['id'],seed=g['seed'],comparison='MB/'+method,
-                complete_H_actions_fleet_equal=bool(sameH),initial_root_scope_U_equal=sameScope,
+                complete_H_actions_fleet_equal=bool(sameH),initial_root_scope_U_equal=sameScope,actual_initial_native_settings_equal=sameParameters,
                 MB_sentinel_rows=local_costs['MB']['root_sentinel_rows'],MB_actual_splits=local_costs['MB']['split_count'])
             if sameH and sameScope:
                 pa,pb=core.portable(ROOT,c0['model_path']),core.portable(ROOT,c1['model_path'])
                 record['actual_root_difference']=root_diff(pa,pb) if method=='MD-R' else compare(pa,pb,'ms2',g['role']['V'],g['role']['M'])
-                record['component_interpretation_eligible']=method=='MS2' or record['MB_sentinel_rows']==0
+                record['component_interpretation_eligible']=sameParameters and (method=='MS2' or record['MB_sentinel_rows']==0)
             else:record['component_interpretation_eligible']=False
-            record['interpretation']='exposed preprobe/target/scheduling package, with no observed multi-leaf split' if method=='MD-R' and not local_costs['MB']['split_count'] else 'only actual declared triple-support deletion' if method=='MS2' else 'actual exposed outer control'
+            record['interpretation']='complete-method comparison only: unmatched H/scope/settings or explicit MB shortcut preprocessing difference' if not record['component_interpretation_eligible'] else 'exposed preprobe/target/scheduling package, with no observed multi-leaf split' if method=='MD-R' and not local_costs['MB']['split_count'] else 'only actual declared triple-support deletion' if method=='MS2' else 'actual exposed outer control'
             differences.append(record)
     assert len(arms)==16 and len(pairs)==17 and len({a['input_SHA'] for a in arms})==3
     for name,rr in [('arms',arms),('pairs',pairs),('mechanism_costs',costs),('support_two_seeds',support)]:core.table(OUT/(name+'.csv'),rr)
     write(OUT/'actual_method_differences.json',dict(records=differences,extra_Optimize=0,source='actual own-H initial root for every formal group'))
     summary=dict(execution='COMPLETE' if all(qualified(a) for a in arms) else 'PARTIAL',actual_formal_arms=16,typed_pairs=17,distinct_inputs=3,
         same_build_E2_PE_SHA=read(OUT/'E2_frozen.json')['PE_SHA'],
-        comparisons={f'{a}/{b}':statistics_pairs([p for p in pairs if p['left']==a and p['right']==b]) for a,b in manifest['groups'][0]['pairs']},
+        core_by_comparison={f'{a}/{b}':statistics_pairs([p for p in pairs if p['group']<=3 and p['left']==a and p['right']==b]) for a,b in manifest['groups'][0]['pairs']},
+        additional_support_Seed1=statistics_pairs([p for p in pairs if p['group']>3]),
         all_observed_arms_qualified=all(qualified(a) for a in arms),
         unique_problem_count_not_increased_by_Seed_repeats=True,
         support_comparisons=5,core_comparisons=15,support_additional_Seed_comparisons=2,
-        fees=budget(),R127_unchanged_partial_MD_unstarted=3)
+        final_fee_authority='resource_accounting.json; closed meters and labelled allowances, including later delivery work',
+        R127_unchanged_partial_MD_unstarted=3)
     write(OUT/'stratified_summary.json',summary)
     print(json.dumps(summary))
 
