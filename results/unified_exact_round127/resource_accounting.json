@@ -1,10 +1,10 @@
 {
   "schema": "round127-closed-outer-fee-snapshot-v1",
-  "UTC": "2026-10-21T05:10:29.377261+00:00",
-  "phase": "prepublication",
+  "UTC": "2026-10-21T06:02:10.421670+00:00",
+  "phase": "post_recovery",
   "machine_outer_limit_seconds": 54000,
-  "paid_outer_seconds": 29296.14481529186,
-  "remaining_outer_seconds": 24703.85518470814,
+  "paid_outer_seconds": 31981.7824970918,
+  "remaining_outer_seconds": 22018.2175029082,
   "unclosed": [],
   "by_kind": {
     "build": 65.65392140008043,
@@ -12,16 +12,17 @@
     "formal_E0_main": 7041.433463599882,
     "formal_E0_tiny": 92.71951050008647,
     "formal_E1_core": 14472.922387199942,
-    "management": 201.15573859214783,
+    "management": 331.8269062922336,
     "packaging": 2791.3254069999093,
     "preparation": 0.9791683999355882,
     "qualification": 286.222225800273,
+    "recovery": 2552.7214343999512,
     "training": 4055.7556405998766,
-    "verification": 138.36169649998192
+    "verification": 140.60677619988564
   },
   "nested_H_LP_MIP_seconds_added": false,
-  "closed_fee_count": 183,
-  "measured_child_outer_seconds": 28914.989076699712,
+  "closed_fee_count": 189,
+  "measured_child_outer_seconds": 31600.626758499653,
   "measured_parent_management_gap_seconds": 21.155738592147827,
   "conservative_upper_allowance_seconds": 360,
   "preledger_allowance": {
@@ -147,6 +148,7 @@
     "independent_selection_review_01",
     "pdf_page_map_01",
     "pdf_page_map_02",
+    "science_A_staging_01",
     "smoke_E0",
     "tiny07_empty_route_independent_01",
     "tiny07_readonly_verify_01",
@@ -2014,6 +2016,56 @@
       "measurement": "explicit conservative upper allowance; actual direct-call lifetime not instrumented"
     },
     {
+      "label": "completion_audit_01",
+      "kind": "verification",
+      "outer_seconds": 2.2450796999037266,
+      "exit_code": 0,
+      "launch_SHA256": "ab15bab916606f9969a7cd615477c2ae70fc753a67eb376ab85264e00f58effc",
+      "receipt_SHA256": "fcfdd0fc4cf5a38d441dca7f07d3e019905f4f691d7e7f6d03edea843cf5384c",
+      "launch_record": {
+        "UTC": "2026-10-21T06:01:16.431779+00:00",
+        "kind": "verification",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\temp\\round127\\completion_audit.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round127",
+        "budget_before": {
+          "paid_outer_seconds": 31979.537417391897,
+          "remaining_outer_seconds": 22020.462582608103,
+          "unclosed": [],
+          "by_kind": {
+            "build": 65.65392140008043,
+            "documents": 29.61565569974482,
+            "formal_E0_main": 7041.433463599882,
+            "formal_E0_tiny": 92.71951050008647,
+            "formal_E1_core": 14472.922387199942,
+            "management": 331.8269062922336,
+            "packaging": 2791.3254069999093,
+            "preparation": 0.9791683999355882,
+            "qualification": 286.222225800273,
+            "recovery": 2552.7214343999512,
+            "training": 4055.7556405998766,
+            "verification": 138.36169649998192
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "outer_receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.2450796999037266,
+        "start_unix": 1792562476.4317791,
+        "end_unix": 1792562478.6759799,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      },
+      "measurement": "observed complete child outer duration",
+      "start_unix": 1792562476.4317791,
+      "end_unix": 1792562478.6759799
+    },
+    {
       "label": "core_01_SC-C15-S",
       "kind": "formal_E1_core",
       "outer_seconds": 1306.616138799931,
@@ -3827,6 +3879,57 @@
       "end_unix": 1792559155.67192
     },
     {
+      "label": "owned_duplicate_cleanup_01",
+      "kind": "management",
+      "outer_seconds": 37.46869540004991,
+      "exit_code": 0,
+      "launch_SHA256": "bcb1dffdc1d5ce36d77d6887e15f3cfacd554db2e3d386351034f6e2be7cf54f",
+      "receipt_SHA256": "0f7168f821762a815e317d6a7f2705b1c6a9411dd00ac60dbf5878d8446da9ae",
+      "launch_record": {
+        "UTC": "2026-10-21T05:59:41.148029+00:00",
+        "kind": "management",
+        "command": [
+          "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "-NoProfile",
+          "-File",
+          "E:\\codes\\ExactEBRP-work\\temp\\round127\\cleanup_owned_duplicates.ps1"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round127",
+        "budget_before": {
+          "paid_outer_seconds": 31942.068721991847,
+          "remaining_outer_seconds": 22057.931278008153,
+          "unclosed": [],
+          "by_kind": {
+            "build": 65.65392140008043,
+            "documents": 29.61565569974482,
+            "formal_E0_main": 7041.433463599882,
+            "formal_E0_tiny": 92.71951050008647,
+            "formal_E1_core": 14472.922387199942,
+            "management": 294.3582108921837,
+            "packaging": 2791.3254069999093,
+            "preparation": 0.9791683999355882,
+            "qualification": 286.222225800273,
+            "recovery": 2552.7214343999512,
+            "training": 4055.7556405998766,
+            "verification": 138.36169649998192
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "outer_receipt": {
+        "exit_code": 0,
+        "outer_seconds": 37.46869540004991,
+        "start_unix": 1792562381.1480293,
+        "end_unix": 1792562418.616765,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      },
+      "measurement": "observed complete child outer duration",
+      "start_unix": 1792562381.1480293,
+      "end_unix": 1792562418.616765
+    },
+    {
       "label": "pdf_page_map_01",
       "kind": "documents",
       "outer_seconds": 0.5337047999491915,
@@ -4230,6 +4333,63 @@
       "measurement": "observed complete child outer duration",
       "start_unix": 1792554432.5185893,
       "end_unix": 1792554473.7446733
+    },
+    {
+      "label": "public_recovery_01",
+      "kind": "recovery",
+      "outer_seconds": 2552.7214343999512,
+      "exit_code": 0,
+      "launch_SHA256": "ee5b089d861a9df976710ca83bb56d530030bd51a884ae22dd5a4239349ddcd5",
+      "receipt_SHA256": "4f5ba67aeb873c11d57285c02c2158330e49ba79b1397eb7c563270fed30cb3f",
+      "launch_record": {
+        "UTC": "2026-10-21T05:16:40.825594+00:00",
+        "kind": "recovery",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "scripts/round127_public_restore.py",
+          "--commit",
+          "6b4f2e662b709590479732cfca2c6c3c5ff3dd20",
+          "--destination",
+          "E:/codes/ExactEBRP-work/restore/round127-public-A",
+          "--receipt",
+          "E:/codes/ExactEBRP-work/worktrees/round127/results/unified_exact_round127/public_restore_receipt.json",
+          "--transport",
+          "windows-curl"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round127",
+        "budget_before": {
+          "paid_outer_seconds": 29389.347287591896,
+          "remaining_outer_seconds": 24610.652712408104,
+          "unclosed": [],
+          "by_kind": {
+            "build": 65.65392140008043,
+            "documents": 29.61565569974482,
+            "formal_E0_main": 7041.433463599882,
+            "formal_E0_tiny": 92.71951050008647,
+            "formal_E1_core": 14472.922387199942,
+            "management": 294.3582108921837,
+            "packaging": 2791.3254069999093,
+            "preparation": 0.9791683999355882,
+            "qualification": 286.222225800273,
+            "training": 4055.7556405998766,
+            "verification": 138.36169649998192
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "outer_receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2552.7214343999512,
+        "start_unix": 1792559800.8255947,
+        "end_unix": 1792562353.5439956,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      },
+      "measurement": "observed complete child outer duration",
+      "start_unix": 1792559800.8255947,
+      "end_unix": 1792562353.5439956
     },
     {
       "label": "reference_PB-B20-S",
@@ -4824,6 +4984,153 @@
       "measurement": "observed complete child outer duration",
       "start_unix": 1792538994.1444082,
       "end_unix": 1792538994.2040792
+    },
+    {
+      "label": "science_A_commit_push_01",
+      "kind": "management",
+      "outer_seconds": 80.84621820005123,
+      "exit_code": 0,
+      "launch_SHA256": "d68bdba6ce09876925e9a81e44f025e5cc6ee4323ea98e12d7e9745a5845f2cd",
+      "receipt_SHA256": "1a84721be5cbebdc2c4383a4a85129d05422035f9b2a91844b1195a80af9f272",
+      "launch_record": {
+        "UTC": "2026-10-21T05:13:26.429230+00:00",
+        "kind": "management",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\temp\\round127\\publish_science_A.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round127",
+        "budget_before": {
+          "paid_outer_seconds": 29308.501069391845,
+          "remaining_outer_seconds": 24691.498930608155,
+          "unclosed": [],
+          "by_kind": {
+            "build": 65.65392140008043,
+            "documents": 29.61565569974482,
+            "formal_E0_main": 7041.433463599882,
+            "formal_E0_tiny": 92.71951050008647,
+            "formal_E1_core": 14472.922387199942,
+            "management": 213.51199269213248,
+            "packaging": 2791.3254069999093,
+            "preparation": 0.9791683999355882,
+            "qualification": 286.222225800273,
+            "training": 4055.7556405998766,
+            "verification": 138.36169649998192
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "outer_receipt": {
+        "exit_code": 0,
+        "outer_seconds": 80.84621820005123,
+        "start_unix": 1792559606.4292307,
+        "end_unix": 1792559687.2745686,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      },
+      "measurement": "observed complete child outer duration",
+      "start_unix": 1792559606.4292307,
+      "end_unix": 1792559687.2745686
+    },
+    {
+      "label": "science_A_staging_01",
+      "kind": "management",
+      "outer_seconds": 8.114756700000726,
+      "exit_code": 1,
+      "launch_SHA256": "65ec64565795c6c96ff321bb1f53914cf3f252334b8849931ec037d46aeec093",
+      "receipt_SHA256": "f3ff92587c3a3378200c8ec9e28025dbf305d02fd9a51c4c2c692ce1b3cbb0df",
+      "launch_record": {
+        "UTC": "2026-10-21T05:10:40.633059+00:00",
+        "kind": "management",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\temp\\round127\\stage_science_A.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round127",
+        "budget_before": {
+          "paid_outer_seconds": 29296.14481529186,
+          "remaining_outer_seconds": 24703.85518470814,
+          "unclosed": [],
+          "by_kind": {
+            "build": 65.65392140008043,
+            "documents": 29.61565569974482,
+            "formal_E0_main": 7041.433463599882,
+            "formal_E0_tiny": 92.71951050008647,
+            "formal_E1_core": 14472.922387199942,
+            "management": 201.15573859214783,
+            "packaging": 2791.3254069999093,
+            "preparation": 0.9791683999355882,
+            "qualification": 286.222225800273,
+            "training": 4055.7556405998766,
+            "verification": 138.36169649998192
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "outer_receipt": {
+        "exit_code": 1,
+        "outer_seconds": 8.114756700000726,
+        "start_unix": 1792559440.633059,
+        "end_unix": 1792559448.748618,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      },
+      "measurement": "observed complete child outer duration",
+      "start_unix": 1792559440.633059,
+      "end_unix": 1792559448.748618
+    },
+    {
+      "label": "science_A_staging_02",
+      "kind": "management",
+      "outer_seconds": 4.241497399983928,
+      "exit_code": 0,
+      "launch_SHA256": "f44e07da605834486a3d225be56157f7307208944e7b83c71dd1eaf2943f4ce3",
+      "receipt_SHA256": "837b4bb9af92e2f6485b400565753a71127d08fe6563ec3185caa2a3e1ee06a2",
+      "launch_record": {
+        "UTC": "2026-10-21T05:11:53.195650+00:00",
+        "kind": "management",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\temp\\round127\\stage_science_A_attempt02.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round127",
+        "budget_before": {
+          "paid_outer_seconds": 29304.25957199186,
+          "remaining_outer_seconds": 24695.74042800814,
+          "unclosed": [],
+          "by_kind": {
+            "build": 65.65392140008043,
+            "documents": 29.61565569974482,
+            "formal_E0_main": 7041.433463599882,
+            "formal_E0_tiny": 92.71951050008647,
+            "formal_E1_core": 14472.922387199942,
+            "management": 209.27049529214855,
+            "packaging": 2791.3254069999093,
+            "preparation": 0.9791683999355882,
+            "qualification": 286.222225800273,
+            "training": 4055.7556405998766,
+            "verification": 138.36169649998192
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "outer_receipt": {
+        "exit_code": 0,
+        "outer_seconds": 4.241497399983928,
+        "start_unix": 1792559513.1956508,
+        "end_unix": 1792559517.4367974,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      },
+      "measurement": "observed complete child outer duration",
+      "start_unix": 1792559513.1956508,
+      "end_unix": 1792559517.4367974
     },
     {
       "label": "smoke_E0",
@@ -9280,7 +9587,7 @@
       "end_unix": 1792526199.0699165
     }
   ],
-  "public_recovery_commit": null,
+  "public_recovery_commit": "6b4f2e662b709590479732cfca2c6c3c5ff3dd20",
   "snapshot_boundary": "Closed actual fees plus explicitly labeled conservative upper administrative allowances at this UTC; no claim that science A proves future B or future receipts.",
   "light_command_accounting": "Brief direct bookkeeping commands are covered by the declared administrative allowance; substantial build/solve/review/document/archive/recovery child tasks retain their own outer receipts."
 }

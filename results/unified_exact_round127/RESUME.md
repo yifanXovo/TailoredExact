@@ -1,13 +1,18 @@
-Round127 v3: scientific execution and manuscript review finished.
+Round127 v3: authorized workflow, manuscript, independent finite review, public recovery and owned cleanup complete.
 
-Study execution PARTIAL: all54 admitted formal arms and all36 training runs sealed; three MD positions unstarted and blocked before formal. q2 remains immutable. No solver/build active, no outcome-driven retry permitted.
+Draft PR: https://github.com/yifanXovo/TailoredExact/pull/189
+Fixed science A: 6b4f2e662b709590479732cfca2c6c3c5ff3dd20. Actual R126 base: 473594a56ae9f1730899111375b3210f437adec2.
 
-Independent final02 numerical/physical/matrix/proof review PASS; actual manuscript and finite final PDF review PASS. Final PDF SHA005ccfb1133bf8655469c7908cd9cfcf7d230cdb92520b981a120c6edd8c25ff. Local portable check PASS90 seals/168 call-model hashes.
+Scientific execution PARTIAL: all54 admitted formal arms and all36 training positions sealed; three MD positions blocked before formal and unstarted.
+Scientific judgment FOUNDATIONAL_ISSUE_REQUIRES_DECISION only for the MD inclusive-root/retained-closure specification. Other component/tuned evidence is mixed.
 
-Next authorized steps only: actual finite-carrier packing/scan, export manifest, science A commit and non-force push, English stacked Draft PR based on actual R126, one anonymous public A recovery, closed accounting and owned duplicate cleanup. Do not repeat experiments, public recovery campaigns or PDF generation without an actual new defect.
+Public recovery PASS from one anonymous science-A campaign: 540 declared files, 519614 members, 90 producer seals and168 actual call-model hashes. Optimize/native starts/compilation=0.
+Cleanup PASS: 3706636152 logical bytes removed through the exact published gated source. No volume capacity gain measured.
+Authoritative raw/models/tables, failed records, frozen original assets, original DLL, user dirty and old worktrees remain.
 
-Publication checkpoint: finite_carrier_pack_01 exited 1 after 2617.5073867999017 paid outer seconds. Four stage ZIPs and their public pieces completed; the original partial support ZIP is retained. The credential scanner matched a public CLI option substring in unchanged E0 main.cpp; exact-source and independent checks confirmed the false positive. The corrected detector requires a token boundary and retains independent token detection. Recover through round127_pack_recovery.py only: reuse stage ZIPs/pieces, copy the support partial to a fresh recovery01 path, append missing support files, and stream final members for CRC/SHA/scan and complete metadata. Do not rerun the original pack or overwrite completed carriers.
+Final closed outer accounting: 31981.782497/54000 seconds, including 360 conservative allowance seconds; no open fee or overlap.
 
-Actual recovery passed in 127.74832519993652 seconds: five archives, 519614 complete members, 2648964647 plaintext bytes scanned; only seven missing support files appended. Member-index compaction passed in 3.115792299970053 seconds with every complete original list round-tripped exactly. The 6508-byte v2 manifest binds compressed and decoded indexes. Five-source carrier verification passed in 0.24371339997742325 seconds; only the five old source index entries were removed, and local physical files remain ignored. All actual receipts are in review/ with closed outer fees in fees/.
+Metadata B contains actual receipts and final accounting. Its remote head/content is read back after committing these files and recorded at E:\codes\ExactEBRP-work\evidence\round127\final_git_readback.json.
+No further public recovery is required for B. Do not repeat experiments, packing, PDF generation or recovery without an actual new task/defect.
 
-Next: finish the actual finite export scan and index verification, science-A commit/non-force push, English stacked Draft PR, one anonymous A recovery, safe owned cleanup and final closed accounting. Public recovery has not begun; no PR has been created. No native/build job is active.
+The sole next research priority is substantive review of the MD equality-closure versus inclusive-root specification. No follow-up algorithm or expanded experiment was executed.
