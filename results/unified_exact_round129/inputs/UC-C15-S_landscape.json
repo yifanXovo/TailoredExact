@@ -1,0 +1,367 @@
+{
+  "schema": "round129-station-landscape-v1",
+  "dataset_family": "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+  "classification": "generated_untested_paper_candidate",
+  "generator_version": "round129-thin-offline-adapter-v1",
+  "landscape_id": "r129_UC-C15-S_compact_r1_shortage",
+  "selection_id": "r129_UC-C15-S_compact_r1",
+  "V": 15,
+  "geographic_regime": "compact",
+  "replicate": 1,
+  "inventory_regime": "shortage",
+  "local_imbalance_level": "high",
+  "seed": 435158719,
+  "seed_derivation_material": "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage",
+  "source_station_row_indices": [
+    187,
+    174,
+    206,
+    193,
+    162,
+    178,
+    223,
+    194,
+    144,
+    230,
+    165,
+    205,
+    229,
+    145,
+    127
+  ],
+  "source_hashes": {
+    "identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "table_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "rows": 443,
+    "qualified": 442
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      586758.837,
+      4504481.698
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    36,
+    26,
+    23,
+    31,
+    62,
+    25,
+    24,
+    51,
+    33,
+    56,
+    75,
+    23,
+    28,
+    29,
+    25
+  ],
+  "initial": [
+    2,
+    16,
+    14,
+    20,
+    48,
+    0,
+    14,
+    9,
+    1,
+    38,
+    55,
+    1,
+    0,
+    3,
+    15
+  ],
+  "target": [
+    17,
+    12,
+    11,
+    15,
+    34,
+    12,
+    11,
+    28,
+    15,
+    25,
+    36,
+    12,
+    13,
+    16,
+    11
+  ],
+  "weights": [
+    0.222994,
+    0.111111,
+    0.1,
+    0.173611,
+    0.891975,
+    0.111111,
+    0.1,
+    0.604938,
+    0.173611,
+    0.482253,
+    1.0,
+    0.111111,
+    0.130401,
+    0.197531,
+    0.1
+  ],
+  "min_ratio": [
+    0.2889,
+    0.2846,
+    0.2913,
+    0.2935,
+    0.3194,
+    0.292,
+    0.2833,
+    0.3196,
+    0.2818,
+    0.2786,
+    0.292,
+    0.3087,
+    0.2857,
+    0.3207,
+    0.276
+  ],
+  "points_utm18n_meters": [
+    [
+      586471.881,
+      4504515.761
+    ],
+    [
+      586671.276,
+      4504339.715
+    ],
+    [
+      586584.708,
+      4504813.267
+    ],
+    [
+      586809.007,
+      4504578.73
+    ],
+    [
+      586503.566,
+      4504163.497
+    ],
+    [
+      586911.089,
+      4504404.837
+    ],
+    [
+      586712.403,
+      4505049.247
+    ],
+    [
+      587059.219,
+      4504593.959
+    ],
+    [
+      586562.218,
+      4503844.293
+    ],
+    [
+      586430.902,
+      4505211.151
+    ],
+    [
+      587103.161,
+      4504207.302
+    ],
+    [
+      587127.432,
+      4504790.449
+    ],
+    [
+      586874.698,
+      4505195.502
+    ],
+    [
+      586956.292,
+      4503852.158
+    ],
+    [
+      586604.709,
+      4503665.598
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 1555.2951324607416,
+    "mean_pairwise_station_distance_m": 684.790726803064,
+    "maximum_pairwise_station_distance_m": 1555.2951324607416,
+    "mean_depot_distance_m": 467.30130122785243,
+    "maximum_depot_distance_m": 830.5267306856534,
+    "bounding_box_width_m": 696.5300000000279,
+    "bounding_box_height_m": 1545.5529999993742,
+    "capacity_minimum": 23,
+    "capacity_maximum": 75,
+    "capacity_mean": 36.46666666666667,
+    "capacity_median": 29,
+    "total_capacity": 547,
+    "total_initial_inventory": 236,
+    "total_target_inventory": 268,
+    "station_inventory_minus_target": -32,
+    "absolute_total_shortage_or_surplus": 32,
+    "local_l1_imbalance": 162,
+    "maximum_local_absolute_imbalance": 19,
+    "surplus_station_count": 8,
+    "deficit_station_count": 7,
+    "balanced_station_count": 0,
+    "weight_minimum": 0.1,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.30070979999999997,
+    "min_ratio_minimum": 0.276,
+    "min_ratio_maximum": 0.3207
+  },
+  "generation_trace": {
+    "initial_before_total_correction": [
+      6,
+      20,
+      18,
+      24,
+      53,
+      4,
+      18,
+      13,
+      5,
+      42,
+      59,
+      5,
+      5,
+      7,
+      19
+    ],
+    "initial_after_total_correction": [
+      2,
+      16,
+      14,
+      20,
+      48,
+      0,
+      14,
+      9,
+      1,
+      38,
+      55,
+      1,
+      0,
+      3,
+      15
+    ],
+    "initial_after_sign_repair": [
+      2,
+      16,
+      14,
+      20,
+      48,
+      0,
+      14,
+      9,
+      1,
+      38,
+      55,
+      1,
+      0,
+      3,
+      15
+    ],
+    "desired_total": 236,
+    "delta_amount": 32,
+    "local_scale": 0.3,
+    "inventory_hash_order": [
+      4,
+      12,
+      9,
+      7,
+      2,
+      8,
+      14,
+      5,
+      1,
+      0,
+      6,
+      11,
+      3,
+      13,
+      10
+    ],
+    "sign_repair_hash_order": [
+      1,
+      14,
+      6,
+      8,
+      4,
+      13,
+      7,
+      2,
+      0,
+      12,
+      10,
+      3,
+      5,
+      9,
+      11
+    ],
+    "anchor_material": "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|geographic-anchor-set|V=15",
+    "selection_material": "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|selection|V=15|geography=compact|replicate=1",
+    "inventory_material": "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage",
+    "target_materials": [
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=187",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=174",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=206",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=193",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=162",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=178",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=223",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=194",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=144",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=230",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=165",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=205",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=229",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=145",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r129_UC-C15-S_compact_r1|row=127"
+    ],
+    "inventory_order_materials": [
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|0",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|1",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|2",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|3",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|4",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|5",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|6",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|7",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|8",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|9",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|10",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|11",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|12",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|13",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|14"
+    ],
+    "sign_repair_order_materials": [
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|0",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|1",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|2",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|3",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|4",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|5",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|6",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|7",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|8",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|9",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|10",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|11",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|12",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|13",
+      "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r129_UC-C15-S_compact_r1|shortage|sign-repair|14"
+    ]
+  }
+}

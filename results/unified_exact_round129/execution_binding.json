@@ -1,0 +1,34 @@
+{
+  "UTC": "2026-10-21T20:43:26.241735+00:00",
+  "protocol_SHA": "b1908e98e2334a52a8c67642fbc5024a7fcbd4cd2da926d7d5bd552654bdac73",
+  "input_manifest_SHA": "e01a1a6205ef043d41fd60cc80681744802f5356c634b29563bee9a844966c37",
+  "E2_identity_SHA": "7ebcda3dce5bf7d429fc0ba08ff1e058e3f63f80bbd7bec6d50f4d61b9293368",
+  "groups": {
+    "campaign/group01": "ef02a64ca3927df898ee3066ac76b4359d690f410462b6783091567cd1ac1d69",
+    "campaign/group02": "5752bcf6b395740d39413b4401f7926b25dfcb53c91e72272fd131eda467b131",
+    "campaign/group03": "056eedb47a252c94a8bb2db37fae3e4f0bd8b51692a40cdd4b4242a05bbda1cb",
+    "campaign/group04": "f1dddd78d89801573fca24bbc0d641ecb424b03a514cb3e4cc2b90566735e8ba",
+    "campaign/group05": "f5f4568d1440494058ebce792f60f6e943073bc2071c44594a994d14c15bda1a",
+    "campaign/group06": "d275e675d945d03cc4f1757b067ddfc61e79deea6af8c88ecf8dbea3a902a087",
+    "campaign/group07": "9f8e4e7a0bb330dd875ef31b28317d2b85326ef6290af308b1e1594b514aa138",
+    "campaign/group08": "0bc5a659502a7a02a3bd9b131f9939588e50b3cc799635d1fa13f8ec1bc9d82d",
+    "campaign/group09": "62a80b734d359509a43babc6c4c9ed81dfee70f64299946411053da34a40a7ff",
+    "campaign/group10": "4ee71f3bbcf7df2a9b8d1b881e09e02e73d0cdfac68edfda85a52cdb3516ed7f"
+  },
+  "adapters": {
+    "scripts/round129_campaign.py": "469bb1449aee973e97768e9dbd414f89cf697dee37bd60e36288302716a59b21",
+    "scripts/round129_common.py": "85620b7359824fb6872c1138b5c282ecaf29a89c1e1228f4363628de434cb835",
+    "scripts/round129_formal.py": "cfa5476bd8309ca325788fd53caa4d447028e83db5b8d0e73ae6dc0f97e0bcff",
+    "scripts/round128_evidence.py": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+    "scripts/round127_evidence.py": "d776d0dc999e6199cd376e693885abbd5a3f86616e8238b37645f4c80c96626a",
+    "scripts/round122_evidence.py": "bb3e1e711f4ae1f48c7ef1a1b2092d75627e1104711653fd98aa605fe7a74ea4"
+  },
+  "formal_methods": [
+    "P",
+    "MB",
+    "MS2"
+  ],
+  "formal_arms": 30,
+  "formal_pairs": 30,
+  "serial": true
+}

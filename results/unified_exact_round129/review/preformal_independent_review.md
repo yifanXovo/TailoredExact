@@ -1,0 +1,44 @@
+# Round129 independent pre-formal review
+
+Decision: **ACCEPT the frozen thirty-arm performance campaign**. This is permission to execute the already authorized finite panel, not a scientific recommendation to promote MS2. No unresolved pre-formal blocker was found after the P identity-declaration correction described below.
+
+Reviewer: separate delegated executor `/root/preformal_review`, 2026-10-22 Asia/Shanghai. Reviewed the user contract in `goal.md`, the frozen recipe and manifest, the thin adapter and inherited mathematics, the campaign/producer command construction, the saved incremental exports, all thirty final command arrays, and the execution binding. This executor did not call Optimize/H, generate or redraw an evaluation input, compile, start a formal producer, edit production sources/recipe, create a chat/PR, or inspect/re-hash the historical raw campaign. The only file written by this executor is this review record.
+
+## Frozen panel and decision rule
+
+- The four new roles exactly match the contract: UC-C15-S/CITI/V15/M2/compact/r1/shortage/Q[30,30]/T3600/cap600; UC-B20-B/CABI/V20/M2/regional/r2/balanced/Q[20,40]/T7200/cap1200; UC-C20-U/CITI/V20/M2/regional/r1/surplus/Q[30,30]/T7200/cap1200; UC-B30-S/CABI/V30/M3/compact/r2/shortage/Q[25,25,25]/T7200/cap1200.
+- PB-C20-B remains the existing protected role, with the prescribed `b04a721313ebc18c4a3bc4cd4b9f6b69b74e3fce53897fce9a6cc8c32fc7babd` input hash, Q[30,30], T3600, and cap900. It is excluded from the four-new-problem signal denominator.
+- Independently counted 10 groups, 30 arms, and 30 typed MS2/P, MS2/MB, MB/P comparisons; 24 new-input arms and 6 protected arms. Each issue's Seed1 order reverses Seed0, with the exact contract order in every position. Nominal total is 30,600 seconds.
+- All five candidate-selection conditions are present with the contract's per-Seed risk counts, both-Seed problem counts, protected-certificate retention and two-Seed substantial regression clause, genuinely new both-Seed exposed triple-deletion/material-gain signal, and a both-Seed direct MS2/P certificate Win. The material gain threshold is max(10 seconds, 10% of MB); the protected two-Seed regression threshold is max(30 seconds, 25% of MB). Decision priority, open/unevaluable outcomes, no extra experiment/retry, and retained full-MB paper identity are preserved. This pre-formal check cannot evaluate those outcome conditions.
+
+## Data and inheritance
+
+Recipe, complete run table, and adapter were committed as `c3758eeeaa00fa6b75ccc35c54c058499b23530f` before generation; committed bytes were read back and checked. Independently re-hashed all 12 small generation dependency/source-asset bindings. All four saved new-input hashes and the protected input hash match their manifest. No complete duplicate or DATA_BLOCKED receipt is present; the explicit overlap report retains lawful overlaps within its R122/R126/R127/R128 small-selection scope.
+
+`round129_data.py` delegates selection, target, inventory perturbation, correction/sign repair, weights, depot, and serialization to the inherited R126/R122/R109/R57 code. The exact prescribed family/selection_id strings are used without an alternate salt. Only the first input header is replaced by the fixed heterogeneous Q vector, as in R126. Saved parsed arrays, service-station counts, depot exclusion, positive weights, normalized squared-target weights, inventory/capacity legality, and serialized capacities were independently checked. The saved old SC-C15-S fixture receipt records byte-for-byte regeneration; this executor did not regenerate the four formal inputs.
+
+The shortage arithmetic independently gives UC-C15-S sum b=236, sum D=268 and decimal necessary floor 12/275; UC-B30-S sum b=156, sum D=186 and floor 464877/2500000. The two other roles retain balanced/surplus totals. These are service-station-only arithmetic bounds, not a supplied model LB or a performance prediction. Decimal and parsed binary64 values remain separately recorded.
+
+The unchanged production-source diff from R128 head `cc70757304a2019d95f0f934aa5520d0caa946c6` is empty for CMakeLists/src/include. Actual E2, DLL, and exporter bytes were independently hashed and match the inherited seals: PE `ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa`, DLL `9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88`, exporter `cc90b84bab79636098819e803c658efcc23ead0392bd2c641e4a9dd158b31277`.
+
+## Final commands and incremental qualification
+
+All thirty frozen command arrays and their campaign identity hashes were checked against the execution binding. They use E2 with exactly one `--round127-mode p|mb|ms2` and have no `--round128-mode`, P parameter file, MD-R, native-D1, warm-P, or extra experiment. Seed0/1, one thread per level, PresolveAuto, shutdown reserve30, native cap-minus6, hard-stop cap-minus2, lambda .15, pickup/drop60, physical T, and complete per-arm cap agree with the frozen table. P is the cold `--method gurobi --plain-baseline` command without the M-B preset, H-start flag, or M-B state-service option. MB/MS2 normalized command arrays differ only in their explicit mode after replacing their own output-directory paths; they keep the same full M-B preset and state service.
+
+The inherited source predicates give MB/MS2 identical CR/CG and no-improver-closure behavior; only MS2 disables triple support emission. The shared support budget remains 50,000. Candidate counts 1,120/2,660/2,660/13,485/2,660 are below it, with expected triple counts 910/2,280/2,280/12,180/2,280.
+
+Saved S12 and R98-C2 MB/MS2 exports were independently parsed without Optimize. Duplicate-preserving complete row multisets, objective, variable order/types/bounds, and native columns agree after removing exactly 440 and 12,180 conditional three-station rows respectively; MS2 adds no row. The five P structural references have matching saved model hashes and Optimize=0. These are finite saved-model checks and inherited qualifications, not a repeat of the full historical boundary proof. Every actual formal MB/MS2 root and row difference still requires its own post-production audit, especially when its own H or root domain differs or no triple rows are exposed.
+
+One review issue was corrected before any formal process: the inherited P command helper placed E0 hashes into both `--round24-executable-sha256` and `--round24-manifest-executable-sha256` although cmd[0] was E2. Both final strings now equal the actual E2 hash in all ten P arms. `src/GurobiBaseline.cpp:5281-5284` uses these equal, nonempty strings only for a certificate identity-admission comparison; correcting both preserves its truth value and changes no solve configuration. `review/argv_identity_correction.json` retains the original full argv/binding and their hashes. The initial preparation failure from the missing sparse R94 preregistration, its stderr, and its 0.2410020000534132-second fee also remain; it occurred during import, before a formal native process.
+
+Final reviewed argv SHA256: `73e3f7cea3cf7d31a985ba76253fe3c9763da3938e5aee66d800dabbe934f861`.
+
+Final reviewed execution-binding SHA256: `c6a17b8fa3c539276ab549f9d8b9baeecb5c39e72df712a28b2a5aa04dec1dde`.
+
+## Budget, admission, and limits
+
+At the final ledger snapshot, recorded paid outer time including the explicitly conservative 900-second setup allowance is 908.662350800354 seconds; remaining is 38,691.337649199646 seconds, leaving 8,091.337649199646 after all 30,600 nominal formal seconds. Recorded incremental qualification is 3.856901600258425 seconds with no open fee entry and no new Optimize. Qualification soft900/limit1800, maximum planned33,000, and total outer39,600 remain the contract values. No nested H/LP/MIP times are added. This is a ledger snapshot, not a claim of exactly measured interactive review CPU or future campaign elapsed time.
+
+The formal launcher requires this binding's positive admission gate, verifies adapter/input/protocol/group hashes before execution, preserves all ten serial groups, reserves remaining nominal obligations plus 2,400 seconds before each group, and prevents an automatic second formal attempt. The sole permitted external-failure recovery remains a separately recorded complete three-method group under sufficient remaining budget; ordinary timeout/Lose/no-exposure never authorizes retry.
+
+At the final OS snapshot no ExactEBRP, gurobi_cl, compiler, or 7z process was returned; E: free bytes were 208,140,935,168. No formal raw destination existed at command inspection. Runtime admission and process identity/seal checks must still execute immediately before and during production. No final certificate, speed claim, candidate promotion, formal-root attribution, manuscript/PDF, recovery, or final pair/decision recomputation has yet been reviewed. Those remain the finite post-campaign obligations in the user contract.

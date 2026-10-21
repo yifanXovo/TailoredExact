@@ -28,6 +28,11 @@ def prepare_group(name,layer,p,methods,seed,repeat=1,config=None):
         arm='P-GRB' if method in ['P','PT'] else 'M-B';d=camp/'raw'/f'{position:02d}_{p["id"]}_S{seed}_R{repeat}_{method}'
         arm_config=config if config is not None and (method=='PT' or name.startswith('training/')) else None
         cmd=original_command(p,arm,d);cmd[0]=str(pe)
+        if method=='P':
+            # The inherited helper carries E0 declarations. These two strings
+            # only feed an equality admission check; identify the actual E2.
+            for flag in ['--round24-executable-sha256','--round24-manifest-executable-sha256']:
+                cmd[cmd.index(flag)+1]=pe_sha
         if layer in ['E1','E2']:
             cmd += ['--round128-mode','md-r'] if method=='MD-R' else ['--round127-mode','p' if arm=='P-GRB' else method.lower()]
             if arm_config is not None:cmd+=['--round127-p-parameters',str(OUT/'tuning_manifest'/(arm_config['id']+'.prm'))]

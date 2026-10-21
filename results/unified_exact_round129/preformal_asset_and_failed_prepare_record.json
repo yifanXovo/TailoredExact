@@ -1,0 +1,108 @@
+{
+  "UTC": "2026-10-21T20:45:11.456041+00:00",
+  "zero_Optimize_qualification": {
+    "UTC": "2026-10-21T20:42:07.102150+00:00",
+    "assets": {
+      "PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round128\\ExactEBRP.exe",
+      "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+      "DLL": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+      "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "exporter": "E:\\codes\\ExactEBRP-work\\build-cache\\round128\\Round128ExportE2.exe",
+      "exporter_SHA": "cc90b84bab79636098819e803c658efcc23ead0392bd2c641e4a9dd158b31277",
+      "production_compilations": 0
+    },
+    "Optimize": 0,
+    "fixture_exports": [
+      {
+        "id": "S12",
+        "scope": [
+          0,
+          0.7797215574158546
+        ],
+        "fixture_U": 0.7797215574158546,
+        "removed_rows": 440,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 440
+        },
+        "pair_cover_before": 0,
+        "pair_conditional_before": 132,
+        "triple_cover_before": 0,
+        "triple_conditional_before": 440,
+        "pair_cover_after": 0,
+        "pair_conditional_after": 132,
+        "triple_cover_after": 0,
+        "triple_conditional_after": 0,
+        "ordered_supply": 24,
+        "remaining_objective_columns_order_types_bounds_and_duplicate_preserving_rows_identical": true,
+        "MB_model_SHA": "120b7a321b7d4bbcc85e32aab88ea1d52cf652ba70a411aa25a8e0b119f9eeec",
+        "MS2_model_SHA": "84ebd617eea838b79575e1fbae9948606f8f71dfed56b914d0096f94e14453dc",
+        "triple_deletion_exposed": true
+      },
+      {
+        "id": "R98-C2",
+        "scope": [
+          0,
+          0.9666666666666667
+        ],
+        "fixture_U": 1.6753644649632968,
+        "removed_rows": 12180,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 12180
+        },
+        "pair_cover_before": 0,
+        "pair_conditional_before": 1305,
+        "triple_cover_before": 0,
+        "triple_conditional_before": 12180,
+        "pair_cover_after": 0,
+        "pair_conditional_after": 1305,
+        "triple_cover_after": 0,
+        "triple_conditional_after": 0,
+        "ordered_supply": 90,
+        "remaining_objective_columns_order_types_bounds_and_duplicate_preserving_rows_identical": true,
+        "MB_model_SHA": "bff1b1a588ed3a78ad96c53d368d3f8d3f540277a3a5848d22a841c37de31504",
+        "MS2_model_SHA": "7c5052c43cc42c627c4cb30d82c42118598537d4419564440c3802f57861913d",
+        "triple_deletion_exposed": true
+      }
+    ],
+    "new_input_performance_screening": false,
+    "qualification_smoke_native_Optimize": 0,
+    "original_model_Seed_reader_and_full_domain_mask_reused": true,
+    "identity_changed": false,
+    "no_boundary_or_MD_R_repeat": true,
+    "no_production_or_exporter_compile": true,
+    "all_formal_own_H_roots_must_be_rechecked": true,
+    "budget": {
+      "paid_outer_seconds": 903.8569016002584,
+      "remaining_outer_seconds": 38696.14309839974,
+      "unclosed": [],
+      "by_kind": {
+        "qualification": 3.856901600258425
+      },
+      "nested_H_LP_MIP_seconds_added": false
+    }
+  },
+  "adapter_fixture": {
+    "id": "SC-C15-S",
+    "input_SHA": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+    "regenerated_same_bytes": true,
+    "Optimize": 0,
+    "H_calls": 0,
+    "scope": "one original R126 small fixture, original family; no formal input screened"
+  },
+  "failed_prepare": "fees/prepare_argv",
+  "failed_prepare_native_starts": 0,
+  "formal_recovery_allowance_used": false,
+  "first_actual_formal_arm_not_started": true,
+  "budget": {
+    "paid_outer_seconds": 908.662350800354,
+    "remaining_outer_seconds": 38691.337649199646,
+    "unclosed": [],
+    "by_kind": {
+      "management": 4.805449200095609,
+      "qualification": 3.856901600258425
+    },
+    "nested_H_LP_MIP_seconds_added": false
+  }
+}
