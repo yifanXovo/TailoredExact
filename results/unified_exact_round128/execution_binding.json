@@ -1,0 +1,26 @@
+{
+  "UTC": "2026-10-21T14:18:07.928322+00:00",
+  "protocol_SHA": "87cb28a48a5171e06211cbfc692e6581a22907271476b71df999b5fd107d5264",
+  "E2_frozen_SHA": "f3265c0e3a07854e5dfb65be5c74e3b43d92d6f90fbe37bc5a1aa5ee0f02ce6a",
+  "groups": {
+    "campaign/01_SC-C15-S_S0": "add84f06dcb9c5b1af1ec77c2335503d6d6cb1489c6782761f55cd3107d58880",
+    "campaign/02_SC-B20-S_S0": "d55d030dc6a7604be5a31e55b2327d8d20d52b2c0e3f2401c3a1e0aa4e519907",
+    "campaign/03_PB-B35-B_S0": "11a3dd575f80c648475fcd81be6f255b875f80aef60d5adc617ff12139f3bd7a",
+    "campaign/04_SC-C15-S_S1": "fe5f163237d468b1b769c4b67232dccedfb122e60027622b6ea63b0111d4c229",
+    "campaign/05_SC-B20-S_S1": "b7593194dc3ad4b83fa6bf3526088b5da6e736ba638606cde72aa3126a026482"
+  },
+  "adapters": {
+    "scripts/round128_campaign.py": "cff25325ae4d436556be0615447bee3f71054ad5086e5d0303d5bab5212f8e4b",
+    "scripts/round128_evidence.py": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+    "scripts/round128_formal.py": "da9706f0d7b45eee719d62994a8f895a3eb898248e8071a879e62b1569153446"
+  },
+  "formal_methods": [
+    "P",
+    "MB",
+    "MD-R",
+    "MS2"
+  ],
+  "formal_arms": 16,
+  "formal_pairs": 17,
+  "serial": true
+}

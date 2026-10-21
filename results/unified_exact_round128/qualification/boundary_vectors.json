@@ -1,0 +1,1834 @@
+{
+  "UTC": "2026-10-21T13:56:44.704819+00:00",
+  "Optimize": 0,
+  "records": [
+    {
+      "case": "La_equal_c",
+      "fallback": false,
+      "witness": "empty",
+      "physical": {
+        "G": 0,
+        "P": 2.0,
+        "F": 0.3,
+        "Y": [
+          500,
+          0,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.0,
+        0.3
+      ],
+      "cutoff": 0.3,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [
+          {
+            "row": 10,
+            "terms": [],
+            "sense": "<=",
+            "rhs": -1.0,
+            "lhs": 0.0,
+            "residual": 1.0
+          }
+        ],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 103
+      },
+      "new": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 102
+      },
+      "removed_semantic_sentinel_rows": 1,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "611de8a5ea8c490c84dc82fc7018e00be6bae7d4b7469726c01b59476d741f3f"
+    },
+    {
+      "case": "La_equal_c",
+      "fallback": true,
+      "witness": "empty",
+      "physical": {
+        "G": 0,
+        "P": 2.0,
+        "F": 0.3,
+        "Y": [
+          500,
+          0,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.0,
+        0.3
+      ],
+      "cutoff": 0.3,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [
+          {
+            "row": 10,
+            "terms": [],
+            "sense": "<=",
+            "rhs": -1.0,
+            "lhs": 0.0,
+            "residual": 1.0
+          }
+        ],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 103
+      },
+      "new": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 102
+      },
+      "removed_semantic_sentinel_rows": 1,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "611de8a5ea8c490c84dc82fc7018e00be6bae7d4b7469726c01b59476d741f3f"
+    },
+    {
+      "case": "La_less_c",
+      "fallback": false,
+      "witness": "empty",
+      "physical": {
+        "G": 0,
+        "P": 2.0,
+        "F": 0.3,
+        "Y": [
+          500,
+          0,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.0,
+        0.31
+      ],
+      "cutoff": 0.31,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 102
+      },
+      "new": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 102
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "95a4e1b0ef1c17a73928ed9403eb56066bfe8280e2e55631db0db5152419e139"
+    },
+    {
+      "case": "La_greater_c_illegal_Start",
+      "fallback": false,
+      "witness": "empty",
+      "physical": {
+        "G": 0,
+        "P": 2.0,
+        "F": 0.3,
+        "Y": [
+          500,
+          0,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.0,
+        0.29
+      ],
+      "cutoff": 0.29,
+      "expected_Start_accepted": false,
+      "old": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [
+          {
+            "row": 8,
+            "terms": [
+              [
+                "G",
+                1.0
+              ],
+              [
+                "e_1",
+                0.15
+              ],
+              [
+                "e_2",
+                0.15
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.29,
+            "lhs": 0.3,
+            "residual": 0.010000000000000009
+          },
+          {
+            "row": 10,
+            "terms": [],
+            "sense": "<=",
+            "rhs": -1.0,
+            "lhs": 0.0,
+            "residual": 1.0
+          }
+        ],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 103
+      },
+      "new": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [
+          {
+            "row": 8,
+            "terms": [
+              [
+                "G",
+                1.0
+              ],
+              [
+                "e_1",
+                0.15
+              ],
+              [
+                "e_2",
+                0.15
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.29,
+            "lhs": 0.3,
+            "residual": 0.010000000000000009
+          }
+        ],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 102
+      },
+      "removed_semantic_sentinel_rows": 1,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "ff72ce6827a891e72a3d214aa3c9b9303f1ff66e2680c5bc9d76b68adb7d1ce2"
+    },
+    {
+      "case": "within_1e9_from_below",
+      "fallback": false,
+      "witness": "empty",
+      "physical": {
+        "G": 0,
+        "P": 2.0,
+        "F": 0.3,
+        "Y": [
+          500,
+          0,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.0,
+        0.3000000005
+      ],
+      "cutoff": 0.3000000005,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [
+          {
+            "row": 10,
+            "terms": [],
+            "sense": "<=",
+            "rhs": -1.0,
+            "lhs": 0.0,
+            "residual": 1.0
+          }
+        ],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 103
+      },
+      "new": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 41,
+        "all_remaining_rows_checked": 102
+      },
+      "removed_semantic_sentinel_rows": 1,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "d1a552e36afaa6f2a8e646bc4962c90edd7363a5328efe06966cef3696ed29ed"
+    },
+    {
+      "case": "T3600_no_old_sentinel",
+      "fallback": false,
+      "witness": "empty",
+      "physical": {
+        "G": 0,
+        "P": 2.0,
+        "F": 0.3,
+        "Y": [
+          500,
+          0,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.0,
+        0.3
+      ],
+      "cutoff": 0.3,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "3160916e91e48b9b7957ef309c5310aec3d7b37e119d72c4e70ed907714b300c"
+    },
+    {
+      "case": "T3600_no_old_sentinel",
+      "fallback": true,
+      "witness": "empty",
+      "physical": {
+        "G": 0,
+        "P": 2.0,
+        "F": 0.3,
+        "Y": [
+          500,
+          0,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.0,
+        0.3
+      ],
+      "cutoff": 0.3,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0,
+          "P": 2.0,
+          "F": 0.3,
+          "Y": [
+            500,
+            0,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "3160916e91e48b9b7957ef309c5310aec3d7b37e119d72c4e70ed907714b300c"
+    },
+    {
+      "case": "inventory_root",
+      "fallback": false,
+      "witness": "empty",
+      "physical": {
+        "G": 0.5,
+        "P": 2.0,
+        "F": 0.8,
+        "Y": [
+          500,
+          4,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.0,
+        0.5
+      ],
+      "cutoff": 0.8,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0.5,
+          "P": 2.0,
+          "F": 0.8,
+          "Y": [
+            500,
+            4,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0.5,
+          "P": 2.0,
+          "F": 0.8,
+          "Y": [
+            500,
+            4,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "4bcda0bae3c65bdb000bc55b9989f072088bb889a7c83e57ff17680c5c3b8284"
+    },
+    {
+      "case": "inventory_root",
+      "fallback": false,
+      "witness": "loaded_return",
+      "physical": {
+        "G": 0.5,
+        "P": 1.5,
+        "F": 0.725,
+        "Y": [
+          500,
+          3,
+          0
+        ],
+        "maximum_duration": 120.0,
+        "pickups": [
+          1
+        ],
+        "return_loads": [
+          1
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 1,
+                "pickup": 1,
+                "drop": 0
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 0
+      },
+      "scope": [
+        0.0,
+        0.5
+      ],
+      "cutoff": 0.8,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0.5,
+          "P": 1.5,
+          "F": 0.725,
+          "Y": [
+            500,
+            3,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0.5,
+          "P": 1.5,
+          "F": 0.725,
+          "Y": [
+            500,
+            3,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "4bcda0bae3c65bdb000bc55b9989f072088bb889a7c83e57ff17680c5c3b8284"
+    },
+    {
+      "case": "inventory_root",
+      "fallback": false,
+      "witness": "shared_endpoint",
+      "physical": {
+        "G": 0.25,
+        "P": 1.0,
+        "F": 0.4,
+        "Y": [
+          500,
+          3,
+          1
+        ],
+        "maximum_duration": 120.0,
+        "pickups": [
+          1
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              2,
+              0
+            ],
+            "operations": [
+              {
+                "station": 1,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 0
+      },
+      "scope": [
+        0.0,
+        0.5
+      ],
+      "cutoff": 0.8,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0.25,
+          "P": 1.0,
+          "F": 0.4,
+          "Y": [
+            500,
+            3,
+            1
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0.25,
+          "P": 1.0,
+          "F": 0.4,
+          "Y": [
+            500,
+            3,
+            1
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "4bcda0bae3c65bdb000bc55b9989f072088bb889a7c83e57ff17680c5c3b8284"
+    },
+    {
+      "case": "shared_left",
+      "fallback": false,
+      "witness": "empty",
+      "physical": {
+        "G": 0.5,
+        "P": 2.0,
+        "F": 0.8,
+        "Y": [
+          500,
+          4,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.0,
+        0.25
+      ],
+      "cutoff": 0.8,
+      "expected_Start_accepted": false,
+      "old": {
+        "objective": {
+          "G": 0.5,
+          "P": 2.0,
+          "F": 0.8,
+          "Y": [
+            500,
+            4,
+            0
+          ]
+        },
+        "violations": [
+          {
+            "row": 1,
+            "terms": [
+              [
+                "h_1_2",
+                1.0
+              ],
+              [
+                "r_1",
+                -0.5
+              ],
+              [
+                "r_2",
+                -0.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 1.0,
+            "residual": 1.0
+          },
+          {
+            "row": 3,
+            "terms": [
+              [
+                "h_1_2",
+                1.0
+              ],
+              [
+                "r_1",
+                -0.5
+              ],
+              [
+                "r_2",
+                -0.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 1.0,
+            "residual": 1.0
+          },
+          {
+            "row": 4,
+            "terms": [
+              [
+                "r_1",
+                1.0
+              ],
+              [
+                "r_2",
+                -1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 1.25,
+            "lhs": 2.0,
+            "residual": 0.75
+          },
+          {
+            "row": 6,
+            "terms": [
+              [
+                "r_1",
+                0.5
+              ],
+              [
+                "r_2",
+                -1.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 1.0,
+            "residual": 1.0
+          },
+          {
+            "row": 88,
+            "terms": [
+              [
+                "state_1_4",
+                -0.25
+              ],
+              [
+                "state_g_1_4",
+                1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.25,
+            "residual": 0.25
+          },
+          {
+            "row": 96,
+            "terms": [
+              [
+                "state_2_0",
+                -0.25
+              ],
+              [
+                "state_g_2_0",
+                1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.25,
+            "residual": 0.25
+          },
+          {
+            "column": "G",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          },
+          {
+            "column": "state_g_1_4",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          },
+          {
+            "column": "state_g_2_0",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          }
+        ],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0.5,
+          "P": 2.0,
+          "F": 0.8,
+          "Y": [
+            500,
+            4,
+            0
+          ]
+        },
+        "violations": [
+          {
+            "row": 1,
+            "terms": [
+              [
+                "h_1_2",
+                1.0
+              ],
+              [
+                "r_1",
+                -0.5
+              ],
+              [
+                "r_2",
+                -0.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 1.0,
+            "residual": 1.0
+          },
+          {
+            "row": 3,
+            "terms": [
+              [
+                "h_1_2",
+                1.0
+              ],
+              [
+                "r_1",
+                -0.5
+              ],
+              [
+                "r_2",
+                -0.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 1.0,
+            "residual": 1.0
+          },
+          {
+            "row": 4,
+            "terms": [
+              [
+                "r_1",
+                1.0
+              ],
+              [
+                "r_2",
+                -1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 1.25,
+            "lhs": 2.0,
+            "residual": 0.75
+          },
+          {
+            "row": 6,
+            "terms": [
+              [
+                "r_1",
+                0.5
+              ],
+              [
+                "r_2",
+                -1.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 1.0,
+            "residual": 1.0
+          },
+          {
+            "row": 88,
+            "terms": [
+              [
+                "state_1_4",
+                -0.25
+              ],
+              [
+                "state_g_1_4",
+                1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.25,
+            "residual": 0.25
+          },
+          {
+            "row": 96,
+            "terms": [
+              [
+                "state_2_0",
+                -0.25
+              ],
+              [
+                "state_g_2_0",
+                1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.25,
+            "residual": 0.25
+          },
+          {
+            "column": "G",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          },
+          {
+            "column": "state_g_1_4",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          },
+          {
+            "column": "state_g_2_0",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          }
+        ],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "1949d145d8ded93852e69b37193f07c2cbe98ba8e410915e5d7d95b691624617"
+    },
+    {
+      "case": "shared_left",
+      "fallback": false,
+      "witness": "loaded_return",
+      "physical": {
+        "G": 0.5,
+        "P": 1.5,
+        "F": 0.725,
+        "Y": [
+          500,
+          3,
+          0
+        ],
+        "maximum_duration": 120.0,
+        "pickups": [
+          1
+        ],
+        "return_loads": [
+          1
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 1,
+                "pickup": 1,
+                "drop": 0
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 0
+      },
+      "scope": [
+        0.0,
+        0.25
+      ],
+      "cutoff": 0.8,
+      "expected_Start_accepted": false,
+      "old": {
+        "objective": {
+          "G": 0.5,
+          "P": 1.5,
+          "F": 0.725,
+          "Y": [
+            500,
+            3,
+            0
+          ]
+        },
+        "violations": [
+          {
+            "row": 1,
+            "terms": [
+              [
+                "h_1_2",
+                1.0
+              ],
+              [
+                "r_1",
+                -0.5
+              ],
+              [
+                "r_2",
+                -0.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.75,
+            "residual": 0.75
+          },
+          {
+            "row": 3,
+            "terms": [
+              [
+                "h_1_2",
+                1.0
+              ],
+              [
+                "r_1",
+                -0.5
+              ],
+              [
+                "r_2",
+                -0.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.75,
+            "residual": 0.75
+          },
+          {
+            "row": 4,
+            "terms": [
+              [
+                "r_1",
+                1.0
+              ],
+              [
+                "r_2",
+                -1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 1.25,
+            "lhs": 1.5,
+            "residual": 0.25
+          },
+          {
+            "row": 6,
+            "terms": [
+              [
+                "r_1",
+                0.5
+              ],
+              [
+                "r_2",
+                -1.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.75,
+            "residual": 0.75
+          },
+          {
+            "row": 86,
+            "terms": [
+              [
+                "state_1_3",
+                -0.25
+              ],
+              [
+                "state_g_1_3",
+                1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.25,
+            "residual": 0.25
+          },
+          {
+            "row": 96,
+            "terms": [
+              [
+                "state_2_0",
+                -0.25
+              ],
+              [
+                "state_g_2_0",
+                1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.25,
+            "residual": 0.25
+          },
+          {
+            "column": "G",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          },
+          {
+            "column": "state_g_1_3",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          },
+          {
+            "column": "state_g_2_0",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          }
+        ],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0.5,
+          "P": 1.5,
+          "F": 0.725,
+          "Y": [
+            500,
+            3,
+            0
+          ]
+        },
+        "violations": [
+          {
+            "row": 1,
+            "terms": [
+              [
+                "h_1_2",
+                1.0
+              ],
+              [
+                "r_1",
+                -0.5
+              ],
+              [
+                "r_2",
+                -0.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.75,
+            "residual": 0.75
+          },
+          {
+            "row": 3,
+            "terms": [
+              [
+                "h_1_2",
+                1.0
+              ],
+              [
+                "r_1",
+                -0.5
+              ],
+              [
+                "r_2",
+                -0.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.75,
+            "residual": 0.75
+          },
+          {
+            "row": 4,
+            "terms": [
+              [
+                "r_1",
+                1.0
+              ],
+              [
+                "r_2",
+                -1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 1.25,
+            "lhs": 1.5,
+            "residual": 0.25
+          },
+          {
+            "row": 6,
+            "terms": [
+              [
+                "r_1",
+                0.5
+              ],
+              [
+                "r_2",
+                -1.5
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.75,
+            "residual": 0.75
+          },
+          {
+            "row": 86,
+            "terms": [
+              [
+                "state_1_3",
+                -0.25
+              ],
+              [
+                "state_g_1_3",
+                1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.25,
+            "residual": 0.25
+          },
+          {
+            "row": 96,
+            "terms": [
+              [
+                "state_2_0",
+                -0.25
+              ],
+              [
+                "state_g_2_0",
+                1.0
+              ]
+            ],
+            "sense": "<=",
+            "rhs": 0.0,
+            "lhs": 0.25,
+            "residual": 0.25
+          },
+          {
+            "column": "G",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          },
+          {
+            "column": "state_g_1_3",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          },
+          {
+            "column": "state_g_2_0",
+            "value": 0.5,
+            "lower": 0.0,
+            "upper": 0.25
+          }
+        ],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "1949d145d8ded93852e69b37193f07c2cbe98ba8e410915e5d7d95b691624617"
+    },
+    {
+      "case": "shared_left",
+      "fallback": false,
+      "witness": "shared_endpoint",
+      "physical": {
+        "G": 0.25,
+        "P": 1.0,
+        "F": 0.4,
+        "Y": [
+          500,
+          3,
+          1
+        ],
+        "maximum_duration": 120.0,
+        "pickups": [
+          1
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              2,
+              0
+            ],
+            "operations": [
+              {
+                "station": 1,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 0
+      },
+      "scope": [
+        0.0,
+        0.25
+      ],
+      "cutoff": 0.8,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0.25,
+          "P": 1.0,
+          "F": 0.4,
+          "Y": [
+            500,
+            3,
+            1
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0.25,
+          "P": 1.0,
+          "F": 0.4,
+          "Y": [
+            500,
+            3,
+            1
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "1949d145d8ded93852e69b37193f07c2cbe98ba8e410915e5d7d95b691624617"
+    },
+    {
+      "case": "shared_right",
+      "fallback": false,
+      "witness": "empty",
+      "physical": {
+        "G": 0.5,
+        "P": 2.0,
+        "F": 0.8,
+        "Y": [
+          500,
+          4,
+          0
+        ],
+        "maximum_duration": 0.0,
+        "pickups": [
+          0
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              0
+            ],
+            "operations": []
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 1
+      },
+      "scope": [
+        0.25,
+        0.5
+      ],
+      "cutoff": 0.8,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0.5,
+          "P": 2.0,
+          "F": 0.8,
+          "Y": [
+            500,
+            4,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0.5,
+          "P": 2.0,
+          "F": 0.8,
+          "Y": [
+            500,
+            4,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "56690dec2951b6397ae2c1d42d51db582856db5ac68d469e52494541a294fcec"
+    },
+    {
+      "case": "shared_right",
+      "fallback": false,
+      "witness": "loaded_return",
+      "physical": {
+        "G": 0.5,
+        "P": 1.5,
+        "F": 0.725,
+        "Y": [
+          500,
+          3,
+          0
+        ],
+        "maximum_duration": 120.0,
+        "pickups": [
+          1
+        ],
+        "return_loads": [
+          1
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              0
+            ],
+            "operations": [
+              {
+                "station": 1,
+                "pickup": 1,
+                "drop": 0
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 0
+      },
+      "scope": [
+        0.25,
+        0.5
+      ],
+      "cutoff": 0.8,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0.5,
+          "P": 1.5,
+          "F": 0.725,
+          "Y": [
+            500,
+            3,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0.5,
+          "P": 1.5,
+          "F": 0.725,
+          "Y": [
+            500,
+            3,
+            0
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "56690dec2951b6397ae2c1d42d51db582856db5ac68d469e52494541a294fcec"
+    },
+    {
+      "case": "shared_right",
+      "fallback": false,
+      "witness": "shared_endpoint",
+      "physical": {
+        "G": 0.25,
+        "P": 1.0,
+        "F": 0.4,
+        "Y": [
+          500,
+          3,
+          1
+        ],
+        "maximum_duration": 120.0,
+        "pickups": [
+          1
+        ],
+        "return_loads": [
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              1,
+              2,
+              0
+            ],
+            "operations": [
+              {
+                "station": 1,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 2,
+                "pickup": 0,
+                "drop": 1
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 1,
+        "empty_vehicles_added": 0
+      },
+      "scope": [
+        0.25,
+        0.5
+      ],
+      "cutoff": 0.8,
+      "expected_Start_accepted": true,
+      "old": {
+        "objective": {
+          "G": 0.25,
+          "P": 1.0,
+          "F": 0.4,
+          "Y": [
+            500,
+            3,
+            1
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "new": {
+        "objective": {
+          "G": 0.25,
+          "P": 1.0,
+          "F": 0.4,
+          "Y": [
+            500,
+            3,
+            1
+          ]
+        },
+        "violations": [],
+        "actual_columns_checked": 45,
+        "all_remaining_rows_checked": 105
+      },
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true,
+      "model_SHA": "56690dec2951b6397ae2c1d42d51db582856db5ac68d469e52494541a294fcec"
+    }
+  ],
+  "decimal_boundary": "3/10 exact in the physical toy; binary64 U and lambda*2 are represented by the same 0.29999999999999999 value",
+  "theory": "B_I=min(a+lambda*P_lower,c) by actual-domain/cutoff-complement coverage; equality rules out strict improvement, not inclusive feasibility",
+  "near_equality": "For c-1e-9<=La<c the supported raw lower bound is La; no new exact-c certificate is inferred",
+  "no_rational_global_error_bound": true,
+  "no_analytic_bound_injected": true
+}

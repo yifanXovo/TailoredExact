@@ -743,6 +743,14 @@ void copyPaperBackendStats(SolveResult& result,
         stats.explicit_leaf_model_discard_count;
     result.external_gini_tree_integer_domain_restore_count =
         stats.integer_domain_restore_count;
+    if (round128InclusiveRoot()) {
+        result.external_gini_tree_warm_start_candidate_count = stats.warm_start_candidate_count;
+        result.external_gini_tree_warm_start_complete_count = stats.warm_start_complete_count;
+        result.external_gini_tree_warm_start_submitted_count = stats.warm_start_submitted_count;
+        result.external_gini_tree_warm_start_accepted_count = stats.warm_start_accepted_count;
+        result.external_gini_tree_warm_start_rejected_count = stats.warm_start_rejected_count;
+        result.external_gini_tree_warm_start_unknown_count = stats.warm_start_unknown_count;
+    }
     result.external_gini_tree_basis_available_count =
         stats.basis_available_count;
     result.external_gini_tree_basis_mapped_count = stats.basis_mapped_count;
@@ -1852,6 +1860,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     const double adaptive_rho_m = options.round44_rho_m;
     const double adaptive_rho_h = options.round44_rho_h;
     const double proof_incumbent_launch = verified_seed.objective;
+    const bool round128_requires_chain = round128InclusiveRoot() &&
+        proof_incumbent_launch > 1e-12; // retain the inherited startup-zero range
     if (round127Md()) {
         const double required_upper = std::min(proof_incumbent_launch,
             instance.V>0 ? double(instance.V-1)/instance.V : 1.0);
@@ -3655,6 +3665,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             s.cover=nativeEvidenceCover(scheduler.leaves());
             native_evidence->witness(best_routes,"same_run_outer_before_call");
         }
+        if (round128InclusiveRoot() &&
+            request.solve_kind == FixedIntervalSolveKind::PaperLpRelaxation) {
+            request.verified_start_routes = best_routes;
+            request.verified_start_source = "round128_own_U0_pre_lp";
+        }
         if (options.round68_verified_start &&
             request.solve_kind != FixedIntervalSolveKind::PaperLpRelaxation) {
             request.round68_verified_start = true;
@@ -4679,8 +4694,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         }
     }
 
+    if (round128_requires_chain) runtime.try_emplace("L0");
     while (!hard_failure && !global_deadline_stop &&
-           !scheduler.everyRelevantLeafClosed()) {
+           (!scheduler.everyRelevantLeafClosed() ||
+            (round128_requires_chain && !runtime.at("L0").terminal_mip_started))) {
         if (round62_passive) {
             const auto d=evaluateRound62Passive(round62_snapshot("",""));
             if (round62_stopped || (round62_cert && d.certified)) {
@@ -4699,8 +4716,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             break;
         }
         const double global_before = scheduler.globalLowerBound();
-        const ControllingLeafSelection selection =
+        ControllingLeafSelection selection =
             scheduler.selectNextByBoundOnly();
+        if (round128_requires_chain && !selection.available &&
+            !runtime.at("L0").terminal_mip_started) {
+            // A numerical relevance threshold cannot waive MD-R's paid chain.
+            selection.available = true;
+            selection.selected_leaf_id = "L0";
+        }
         if (!selection.available) {
             // A terminal-ready leaf is deliberately removed from the normal
             // C6 queue while its exact sibling progresses.  If no selectable
@@ -9314,6 +9337,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         scheduler.parentChildCoverageValid(&coverage_reason);
     result.external_gini_tree_all_relevant_leaves_closed =
         scheduler.everyRelevantLeafClosed();
+    if (round128_requires_chain) {
+        const auto* root = scheduler.findLeaf("L0");
+        result.external_gini_tree_all_relevant_leaves_closed =
+            result.external_gini_tree_all_relevant_leaves_closed && root &&
+            root->status == ControllingLeafStatus::Closed &&
+            root->closure_source == "native_terminal_mip_optimal";
+    }
     result.external_gini_tree_all_leaf_bounds_valid = all_bounds_valid;
     result.external_gini_tree_leaf_bounds_monotone =
         scheduler.leafBoundsMonotone();
@@ -9403,6 +9433,16 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             : result.external_gini_tree_fresh_restart_count == 0) &&
         result.external_gini_tree_child_restart_count == 0 &&
         result.external_gini_tree_reset_call_count == 0;
+    if (round128_requires_chain) {
+        result.external_gini_tree_lifecycle_complete =
+            result.external_gini_tree_lifecycle_complete &&
+            result.external_gini_tree_optimize_count == 2 &&
+            result.external_gini_tree_lp_optimize_count == 1 &&
+            result.external_gini_tree_terminal_mip_optimize_count == 1 &&
+            result.external_gini_tree_partial_mip_optimize_count == 0 &&
+            result.external_gini_tree_canonical_artifact_invalidation_count == 0 &&
+            result.external_gini_tree_warm_start_submitted_count == 1;
+    }
 
     ExternalGiniTreeCertificateInput certificate_input;
     certificate_input.complete_root_coverage =

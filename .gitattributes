@@ -1,4 +1,7 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
+# Round128 protocol, driver and evidence identities preserve actual bytes.
+/scripts/round128* -text whitespace=cr-at-eol
+/results/unified_exact_round128/** -text whitespace=cr-at-eol
 # Round127 frozen runtime/input bytes; two old benchmark blobs retain original LF.
 /scripts/round127* -text
 /include/Round127Research.hpp -text

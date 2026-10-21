@@ -1,0 +1,84 @@
+{
+  "UTC": "2026-10-21T14:15:02.506535+00:00",
+  "Optimize": 0,
+  "records": [
+    {
+      "id": "SC-C15-S",
+      "archived_H_scope_only_not_a_formal_UB": true,
+      "initial_U": 0.5627184431151906,
+      "scope": [
+        0,
+        0.5627184431151906
+      ],
+      "MB_sentinel_rows": 0,
+      "MD_R": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true
+      },
+      "MS2": {
+        "mode": "ms2",
+        "removed_rows": 910,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 910
+        },
+        "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+      }
+    },
+    {
+      "id": "SC-B20-S",
+      "archived_H_scope_only_not_a_formal_UB": true,
+      "initial_U": 0.3570597679280949,
+      "scope": [
+        0,
+        0.3570597679280949
+      ],
+      "MB_sentinel_rows": 0,
+      "MD_R": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true
+      },
+      "MS2": {
+        "mode": "ms2",
+        "removed_rows": 2280,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 2280
+        },
+        "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+      }
+    },
+    {
+      "id": "PB-B35-B",
+      "archived_H_scope_only_not_a_formal_UB": true,
+      "initial_U": 0.2470534684914319,
+      "scope": [
+        0,
+        0.2470534684914319
+      ],
+      "MB_sentinel_rows": 0,
+      "MD_R": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_duplicate_preserving_rows_columns_types_bounds_objective_identical": true
+      },
+      "MS2": {
+        "mode": "ms2",
+        "removed_rows": 19635,
+        "removed_columns": [],
+        "families": {
+          "conditional_3": 12729,
+          "cover_3": 6906
+        },
+        "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+      }
+    }
+  ],
+  "final_E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+  "final_exporter_SHA": "cc90b84bab79636098819e803c658efcc23ead0392bd2c641e4a9dd158b31277",
+  "E1_final_E2_MB_P_MS2_full_native_bridge": [
+    "S12",
+    "R98-C2"
+  ],
+  "actual_Gurobi_version": "13.0.2",
+  "formal_same_H_scope_checked_again_after_execution": true
+}

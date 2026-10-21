@@ -3340,7 +3340,8 @@ void writeCompactLp(const Instance& instance,
             }
             writeConstraint(out, cid, p_lb, ">=", penalty_lb);
             if (stats != nullptr) ++stats->penalty_lb_rows_added;
-            if (cutoff->add_objective_cutoff &&
+            if (round128EmitIntervalNoImproverDomainClosure() &&
+                cutoff->add_objective_cutoff &&
                 cutoff->gamma_L + options.lambda * penalty_lb >= cutoff_value - 1e-9) {
                 Expr impossible;
                 writeConstraint(out, cid, impossible, "<=", -1);

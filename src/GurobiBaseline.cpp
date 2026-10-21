@@ -655,7 +655,8 @@ bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
                         const FixedIntervalMipRequest& request,
                         FixedIntervalMipOutcome& out,
                         std::vector<double>& submitted_values,
-                        std::vector<char>& submitted_types) {
+                        std::vector<char>& submitted_types,
+                        bool validation_only = false) {
     const auto started = Clock::now();
     auto checked = [](int code) {
         if (code != 0) throw std::runtime_error("native_api_code_" + std::to_string(code));
@@ -667,13 +668,15 @@ bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
     out.warm_start_candidate_available = true;
     try {
         if (!options.round68_verified_start || options.plain_baseline ||
-            options.round65_budget || out.lp_relaxation ||
+            options.round65_budget || (out.lp_relaxation && !validation_only) ||
             request.interval_mip_policy != "round55-vd-p")
             throw std::runtime_error("requires_isolated_vdp_mip");
         // An obsolete explicit Start must not silently survive an ineligible
         // replacement. Native reuse of a previous solution is separate.
-        checked(api.setintattr(model, GRB_INT_ATTR_NUMSTART, 0));
-        checked(api.updatemodel(model));
+        if (!validation_only) {
+            checked(api.setintattr(model, GRB_INT_ATTR_NUMSTART, 0));
+            checked(api.updatemodel(model));
+        }
         int variables=0, rows=0, general=0, quadratic=0;
         checked(api.getintattr(model, GRB_INT_ATTR_NUMVARS, &variables));
         checked(api.getintattr(model, GRB_INT_ATTR_NUMCONSTRS, &rows));
@@ -700,6 +703,8 @@ bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
         out.warm_start_mapping_complete=mapped.complete;
         out.round68_start_objective=mapped.objective;
         if (!mapped.complete) {
+            if (round128InclusiveRoot())
+                throw std::runtime_error("round128_own_Start_rejected:"+mapped.failure_reason);
             if (mapped.failure_reason=="verified_start_outside_static_gini_interval" ||
                 mapped.failure_reason=="verified_start_violates_non_strict_cutoff") {
                 out.warm_start_status="ineligible:"+mapped.failure_reason;
@@ -727,6 +732,18 @@ bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
         out.round68_start_objective_valid=sense==GRB_MINIMIZE && quadratic_nonzeros==0 &&
             std::isfinite(native_objective) && std::fabs(native_objective-mapped.objective)<=1e-7;
         if (!out.round68_start_objective_valid) throw std::runtime_error("eligible_objective_mismatch");
+        if (validation_only) {
+            std::ofstream values(request.native_log_path.string()+".round128.pre_lp.values.csv");
+            values<<std::setprecision(17)<<"variable,type,mapped_value\n";
+            for(int i=0;i<variables;++i)
+                values<<domain.names[i]<<','<<domain.variable_types[i]<<','<<mapped.values[i]<<'\n';
+            values.close();
+            if(!values)throw std::runtime_error("round128_pre_lp_evidence_write_failed");
+            out.warm_start_status="round128_pre_lp_validated_without_Start_submission";
+            recordProcessPhase(options,"round128_own_Start_pre_lp","complete",
+                "all_actual_columns_types_bounds_rows_and_objective_checked");
+            finish();return true;
+        }
         checked(api.setintattr(model,GRB_INT_ATTR_NUMSTART,1));
         checked(api.setintparam(api.getenv(model),GRB_INT_PAR_STARTNUMBER,0));
         checked(api.updatemodel(model));
@@ -2552,6 +2569,12 @@ public:
                     out.lp_objective_sense = objective_sense;
                 }
             }
+            if (round128InclusiveRoot()) {
+                std::vector<double> checked_values;
+                std::vector<char> checked_types;
+                if (!prepareRound68Start(api_,model,instance_,options_,request,out,
+                        checked_values,checked_types,true)) return out;
+            }
             std::vector<char> continuous(
                 static_cast<std::size_t>(variable_count), GRB_CONTINUOUS);
             const int type_rc = api_.setcharattrarray(
@@ -3109,7 +3132,8 @@ public:
             callback.evidence_call=request.native_evidence->beginCall(scope);
             out.native_evidence_call=callback.evidence_call;
         }
-        if (request.round68_verified_start) {
+        if (request.round68_verified_start ||
+            (round128InclusiveRoot() && out.lp_relaxation)) {
             out.round68_effective_native_deadline=std::max(0.0,
                 request.global_deadline_remaining_seconds-
                 std::chrono::duration<double>(Clock::now()-round65_started).count());
