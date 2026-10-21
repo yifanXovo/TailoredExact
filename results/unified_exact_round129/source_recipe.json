@@ -1,0 +1,628 @@
+{
+  "round": 129,
+  "UTC": "2026-10-21T20:40:56.684514+00:00",
+  "base": "cc70757304a2019d95f0f934aa5520d0caa946c6",
+  "adapter_version": "round129-thin-offline-adapter-v1",
+  "sources": {
+    "CITI": {
+      "identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "table_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "rows": 443,
+      "qualified": 442
+    },
+    "CABI": {
+      "identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "table_SHA": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+      "rows": 865,
+      "qualified": 865
+    }
+  },
+  "families": {
+    "CITI": "round129-uniform-pair-support-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "CABI": "round129-uniform-pair-support-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8"
+  },
+  "roles": [
+    {
+      "j": 0,
+      "id": "UC-C15-S",
+      "source": "CITI",
+      "V": 15,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 600,
+      "selection_id": "r129_UC-C15-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "new_prospective_input"
+    },
+    {
+      "j": 1,
+      "id": "UC-B20-B",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "selection_id": "r129_UC-B20-B_regional_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "new_prospective_input"
+    },
+    {
+      "j": 2,
+      "id": "UC-C20-U",
+      "source": "CITI",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "surplus",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "selection_id": "r129_UC-C20-U_regional_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "new_prospective_input"
+    },
+    {
+      "j": 3,
+      "id": "UC-B30-S",
+      "source": "CABI",
+      "V": 30,
+      "M": 3,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_vector": [
+        25,
+        25,
+        25
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "selection_id": "r129_UC-B30-S_compact_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "new_prospective_input"
+    }
+  ],
+  "protection_role": {
+    "j": 4,
+    "id": "PB-C20-B",
+    "source": "CITI",
+    "V": 20,
+    "M": 2,
+    "geometry": "compact",
+    "replicate": 1,
+    "inventory": "balanced",
+    "Q_vector": [
+      30,
+      30
+    ],
+    "T_seconds": 3600,
+    "cap_seconds": 900,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "input_path": "reference/round122_paper_benchmark/PB-C20-B.txt",
+    "input_sha256": "b04a721313ebc18c4a3bc4cd4b9f6b69b74e3fce53897fce9a6cc8c32fc7babd",
+    "panel_kind": "existing_certified_protection_not_new_problem"
+  },
+  "generation_dependencies": {
+    "scripts/round129_data.py": "5e37e3fa0febdf373b1a92131c43566e2a0baf80d6fa408fcfd15673385c8674",
+    "scripts/round126_data.py": "5a1f8078f76a74a7d7c862abc1ee489b327c145a695c74e6f982163ebcd7ed21",
+    "scripts/round122_data.py": "b7997dcd173ee301be7f34949c99cb5f791bf22b84f548d1adceb8d11054d6b9",
+    "scripts/round118_data.py": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+    "scripts/round109_data.py": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+    "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+  },
+  "source_asset_bindings": {
+    "results/data_generation_citibike_round57/source_station_table.csv": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "results/unified_exact_round116/source/source_station_table.csv": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+    "results/unified_exact_round116/source/snapshot.json": "89e4e89d6e6641b6aea3c073adb8b2e1643f28f99809e769cf41822e38dde1d1",
+    "results/unified_exact_round116/source/row_decisions.json": "da1f975f71ac1f6df09311f948442b0a4539f1ac0d00c3ace38c662d10b69b0f",
+    "results/unified_exact_round116/source/requests/station_information/01.response": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+    "results/unified_exact_round116/projection_contract.json": "15554a7fe01602de7a6ec45e61fe54830076cf7355188e91b73081093f939f3a"
+  },
+  "selection": "Unchanged four original anchors, source-row tie rules and hash order",
+  "target_fraction": [
+    0.44,
+    0.56
+  ],
+  "coordinate_decimals": 3,
+  "weight_decimals": 6,
+  "delta": "max(V,floor(.12*sum(D)+.5))",
+  "local_perturbation": {
+    "balanced": 0.18,
+    "other": 0.3
+  },
+  "total_correction_and_sign_repair": "unchanged R126/R122",
+  "weights": "original squared target / maximum, six decimals",
+  "depot": "original serialized-coordinate centroid",
+  "distance": "Euclidean/1.5; no projection rerun",
+  "input_header": "explicit fixed Q_vector",
+  "generated_input_count": 0,
+  "Optimize": 0,
+  "H_calls": 0,
+  "no_difficulty_or_reachability_filter": true,
+  "no_redraw": true,
+  "no_network": true,
+  "full_fixed_running_table": [
+    {
+      "number": 1,
+      "name": "campaign/group01",
+      "role": {
+        "j": 0,
+        "id": "UC-C15-S",
+        "source": "CITI",
+        "V": 15,
+        "M": 2,
+        "geometry": "compact",
+        "replicate": 1,
+        "inventory": "shortage",
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 3600,
+        "cap_seconds": 600,
+        "selection_id": "r129_UC-C15-S_compact_r1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "new_prospective_input"
+      },
+      "seed": 0,
+      "methods": [
+        "P",
+        "MB",
+        "MS2"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 2,
+      "name": "campaign/group02",
+      "role": {
+        "j": 0,
+        "id": "UC-C15-S",
+        "source": "CITI",
+        "V": 15,
+        "M": 2,
+        "geometry": "compact",
+        "replicate": 1,
+        "inventory": "shortage",
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 3600,
+        "cap_seconds": 600,
+        "selection_id": "r129_UC-C15-S_compact_r1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "new_prospective_input"
+      },
+      "seed": 1,
+      "methods": [
+        "MS2",
+        "MB",
+        "P"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 3,
+      "name": "campaign/group03",
+      "role": {
+        "j": 1,
+        "id": "UC-B20-B",
+        "source": "CABI",
+        "V": 20,
+        "M": 2,
+        "geometry": "regional",
+        "replicate": 2,
+        "inventory": "balanced",
+        "Q_vector": [
+          20,
+          40
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-B20-B_regional_r2",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "new_prospective_input"
+      },
+      "seed": 0,
+      "methods": [
+        "MB",
+        "MS2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 4,
+      "name": "campaign/group04",
+      "role": {
+        "j": 1,
+        "id": "UC-B20-B",
+        "source": "CABI",
+        "V": 20,
+        "M": 2,
+        "geometry": "regional",
+        "replicate": 2,
+        "inventory": "balanced",
+        "Q_vector": [
+          20,
+          40
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-B20-B_regional_r2",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "new_prospective_input"
+      },
+      "seed": 1,
+      "methods": [
+        "P",
+        "MS2",
+        "MB"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 5,
+      "name": "campaign/group05",
+      "role": {
+        "j": 2,
+        "id": "UC-C20-U",
+        "source": "CITI",
+        "V": 20,
+        "M": 2,
+        "geometry": "regional",
+        "replicate": 1,
+        "inventory": "surplus",
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-C20-U_regional_r1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "new_prospective_input"
+      },
+      "seed": 0,
+      "methods": [
+        "MS2",
+        "P",
+        "MB"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 6,
+      "name": "campaign/group06",
+      "role": {
+        "j": 2,
+        "id": "UC-C20-U",
+        "source": "CITI",
+        "V": 20,
+        "M": 2,
+        "geometry": "regional",
+        "replicate": 1,
+        "inventory": "surplus",
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-C20-U_regional_r1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "new_prospective_input"
+      },
+      "seed": 1,
+      "methods": [
+        "MB",
+        "P",
+        "MS2"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 7,
+      "name": "campaign/group07",
+      "role": {
+        "j": 3,
+        "id": "UC-B30-S",
+        "source": "CABI",
+        "V": 30,
+        "M": 3,
+        "geometry": "compact",
+        "replicate": 2,
+        "inventory": "shortage",
+        "Q_vector": [
+          25,
+          25,
+          25
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-B30-S_compact_r2",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "new_prospective_input"
+      },
+      "seed": 0,
+      "methods": [
+        "P",
+        "MB",
+        "MS2"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 8,
+      "name": "campaign/group08",
+      "role": {
+        "j": 3,
+        "id": "UC-B30-S",
+        "source": "CABI",
+        "V": 30,
+        "M": 3,
+        "geometry": "compact",
+        "replicate": 2,
+        "inventory": "shortage",
+        "Q_vector": [
+          25,
+          25,
+          25
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-B30-S_compact_r2",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "new_prospective_input"
+      },
+      "seed": 1,
+      "methods": [
+        "MS2",
+        "MB",
+        "P"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 9,
+      "name": "campaign/group09",
+      "role": {
+        "j": 4,
+        "id": "PB-C20-B",
+        "source": "CITI",
+        "V": 20,
+        "M": 2,
+        "geometry": "compact",
+        "replicate": 1,
+        "inventory": "balanced",
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 3600,
+        "cap_seconds": 900,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "input_path": "reference/round122_paper_benchmark/PB-C20-B.txt",
+        "input_sha256": "b04a721313ebc18c4a3bc4cd4b9f6b69b74e3fce53897fce9a6cc8c32fc7babd",
+        "panel_kind": "existing_certified_protection_not_new_problem"
+      },
+      "seed": 0,
+      "methods": [
+        "MB",
+        "MS2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 10,
+      "name": "campaign/group10",
+      "role": {
+        "j": 4,
+        "id": "PB-C20-B",
+        "source": "CITI",
+        "V": 20,
+        "M": 2,
+        "geometry": "compact",
+        "replicate": 1,
+        "inventory": "balanced",
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 3600,
+        "cap_seconds": 900,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "input_path": "reference/round122_paper_benchmark/PB-C20-B.txt",
+        "input_sha256": "b04a721313ebc18c4a3bc4cd4b9f6b69b74e3fce53897fce9a6cc8c32fc7babd",
+        "panel_kind": "existing_certified_protection_not_new_problem"
+      },
+      "seed": 1,
+      "methods": [
+        "P",
+        "MS2",
+        "MB"
+      ],
+      "pairs": [
+        [
+          "MS2",
+          "P"
+        ],
+        [
+          "MS2",
+          "MB"
+        ],
+        [
+          "MB",
+          "P"
+        ]
+      ]
+    }
+  ]
+}
