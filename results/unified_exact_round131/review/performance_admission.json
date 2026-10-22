@@ -1,0 +1,66 @@
+{
+  "status": "ACCEPT",
+  "review_stage": "separate_executor_preformal",
+  "fixed_arms": 52,
+  "matched_comparisons": 26,
+  "distinct_inputs": 10,
+  "nominal_seconds_by_layer": {
+    "A": 21600,
+    "B": 2160,
+    "C": 9600
+  },
+  "nominal_formal_seconds": 33360,
+  "parent_recorded": "c302bae0ec128f0d4c651fb29d04cb41b491f721",
+  "expected_R130_parent": "c302bae0ec128f0d4c651fb29d04cb41b491f721",
+  "source_bindings": 217,
+  "fixed_input_SHA_checked": 10,
+  "full_argv_checked": 52,
+  "same_seed_repeat_in_unique_key": true,
+  "actual_mode_and_native_parameters_after_run_pending": true,
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0,
+  "evidence_reader_modules_imported": false,
+  "models_or_H_or_native_logs_read": false,
+  "decision": "ACCEPT",
+  "execution_binding_SHA": "40905b31def053a768f03d9ec1c44ed4ea5009aa5743a37bddcb7125819e426f",
+  "actual_readonly_Seed2_dispatch": {
+    "journal": "round127_evidence.journal",
+    "expected_seed2": {
+      "read_return_code": 0,
+      "Threads": 1,
+      "Seed": 2,
+      "Presolve": -1,
+      "MIPGap": 0,
+      "MIPGapAbs": 0,
+      "FeasibilityTol": 1e-06,
+      "IntFeasTol": 1e-05,
+      "OptimalityTol": 1e-06
+    },
+    "nonzero_seed_dispatch": true,
+    "full_extension": "R130 -> R128 -> R127 -> R122",
+    "PS_dispatch_not_used": true
+  },
+  "actual_imported_adapters_SHA_checked": 84,
+  "actual_PE_DLL_exporter_hashes_checked": true,
+  "inherited_qualification_and_support_correction_bound": true,
+  "original_compact_reference_count": 10,
+  "actual_mode_native_return_readbacks_pending": true,
+  "current_root_function_rebinding_checked": true,
+  "zero_formal_arms_started_at_review": true,
+  "E_drive_free_bytes": 197609488384,
+  "budget": {
+    "paid_outer_seconds": 908.5138443998294,
+    "remaining_outer_seconds": 42291.48615560017,
+    "unclosed": [],
+    "by_kind": {
+      "preparation": 5.454804999870248,
+      "qualification": 3.059039399959147
+    },
+    "nested_H_LP_MIP_seconds_added": false
+  },
+  "parent_BASE_matches_contract": true,
+  "no_formal_models_fleets_H_traces_native_logs_read": true,
+  "preformal_review_seconds": 0.39993249997496605,
+  "UTC": "2026-10-22T19:29:07.899220+00:00"
+}

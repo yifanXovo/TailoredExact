@@ -1,0 +1,54 @@
+{
+  "schema": "round127-tiny-selection-v1",
+  "dataset_family": "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "generator_version": "round127-thin-v1",
+  "selection_id": "r127_SM-B10-B_regional_r2",
+  "V": 10,
+  "geographic_regime": "regional",
+  "replicate": 2,
+  "seed": 1732428964,
+  "seed_derivation_material": "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|selection|V=10|geography=regional|replicate=2",
+  "anchor_source_station_row_index": 612,
+  "anchor_coordinate_utm18n_meters": [
+    319766.593,
+    4286750.134
+  ],
+  "selection_mechanism": "farthest-first coverage inside the 2V nearest eligible stations around the anchor",
+  "tie_breaking": "ascending zero-based source_station_row_index",
+  "eligible_station_rule": "0 < source capacity < 100",
+  "eligible_station_count": 865,
+  "candidate_pool_size": 20,
+  "selected_source_station_row_indices": [
+    612,
+    496,
+    675,
+    593,
+    748,
+    592,
+    613,
+    559,
+    557,
+    614
+  ],
+  "selection_order_is_local_station_order": true,
+  "depot_rule": "artificial arithmetic centroid of serialized service-station coordinates, rounded to three decimals",
+  "depot_coordinate_utm18n_meters": [
+    320090.078,
+    4292589.628
+  ],
+  "source_capacity_summary": {
+    "minimum": 11,
+    "maximum": 15,
+    "mean": 12.3,
+    "median": 11.0
+  },
+  "geographic_statistics": {
+    "geographic_diameter_m": 12302.493311724613,
+    "mean_pairwise_station_distance_m": 6344.602899196153,
+    "maximum_pairwise_station_distance_m": 12302.493311724613,
+    "mean_depot_distance_m": 4470.682639581055,
+    "maximum_depot_distance_m": 7475.022380151744,
+    "bounding_box_width_m": 12189.75,
+    "bounding_box_height_m": 9571.408999999985
+  }
+}

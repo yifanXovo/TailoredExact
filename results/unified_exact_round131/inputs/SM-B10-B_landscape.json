@@ -1,0 +1,274 @@
+{
+  "schema": "citibike443-station-landscape-v1",
+  "dataset_family": "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "classification": "generated_untested_paper_candidate",
+  "generator_version": "citibike443-regional-v1.0.0",
+  "landscape_id": "r127_SM-B10-B_regional_r2_balanced",
+  "selection_id": "r127_SM-B10-B_regional_r2",
+  "V": 10,
+  "geographic_regime": "regional",
+  "replicate": 2,
+  "inventory_regime": "balanced",
+  "local_imbalance_level": "moderate",
+  "seed": 946812687,
+  "seed_derivation_material": "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced",
+  "source_station_row_indices": [
+    612,
+    496,
+    675,
+    593,
+    748,
+    592,
+    613,
+    559,
+    557,
+    614
+  ],
+  "source_hashes": {
+    "public_table_sha256": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8"
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      320090.078,
+      4292589.628
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    11,
+    12,
+    15,
+    11,
+    15,
+    11,
+    11,
+    11,
+    11,
+    15
+  ],
+  "initial": [
+    2,
+    3,
+    11,
+    8,
+    11,
+    3,
+    3,
+    3,
+    7,
+    9
+  ],
+  "target": [
+    5,
+    5,
+    8,
+    6,
+    8,
+    5,
+    5,
+    5,
+    6,
+    7
+  ],
+  "weights": [
+    0.390625,
+    0.390625,
+    1.0,
+    0.5625,
+    1.0,
+    0.390625,
+    0.390625,
+    0.390625,
+    0.5625,
+    0.765625
+  ],
+  "min_ratio": [
+    0.2818,
+    0.2667,
+    0.3133,
+    0.3182,
+    0.3133,
+    0.2818,
+    0.2818,
+    0.2818,
+    0.3182,
+    0.2867
+  ],
+  "points_utm18n_meters": [
+    [
+      319766.593,
+      4286750.134
+    ],
+    [
+      312647.738,
+      4293287.865
+    ],
+    [
+      324837.488,
+      4294949.592
+    ],
+    [
+      319296.109,
+      4295237.553
+    ],
+    [
+      322011.733,
+      4295807.981
+    ],
+    [
+      321282.926,
+      4293594.151
+    ],
+    [
+      321758.68,
+      4287354.436
+    ],
+    [
+      320792.718,
+      4295555.892
+    ],
+    [
+      319806.287,
+      4296321.543
+    ],
+    [
+      318700.508,
+      4287037.133
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 12302.493311724613,
+    "mean_pairwise_station_distance_m": 6344.602899196153,
+    "maximum_pairwise_station_distance_m": 12302.493311724613,
+    "mean_depot_distance_m": 4470.682639581055,
+    "maximum_depot_distance_m": 7475.022380151744,
+    "bounding_box_width_m": 12189.75,
+    "bounding_box_height_m": 9571.408999999985,
+    "capacity_minimum": 11,
+    "capacity_maximum": 15,
+    "capacity_mean": 12.3,
+    "capacity_median": 11.0,
+    "total_capacity": 123,
+    "total_initial_inventory": 60,
+    "total_target_inventory": 60,
+    "station_inventory_minus_target": 0,
+    "absolute_total_shortage_or_surplus": 0,
+    "local_l1_imbalance": 22,
+    "maximum_local_absolute_imbalance": 3,
+    "surplus_station_count": 5,
+    "deficit_station_count": 5,
+    "balanced_station_count": 0,
+    "weight_minimum": 0.390625,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.584375,
+    "min_ratio_minimum": 0.2667,
+    "min_ratio_maximum": 0.3182
+  },
+  "generation_trace": {
+    "initial_before_total_correction": [
+      3,
+      3,
+      11,
+      8,
+      11,
+      3,
+      3,
+      3,
+      8,
+      10
+    ],
+    "initial_after_total_correction": [
+      2,
+      3,
+      11,
+      8,
+      11,
+      3,
+      3,
+      3,
+      7,
+      9
+    ],
+    "initial_after_sign_repair": [
+      2,
+      3,
+      11,
+      8,
+      11,
+      3,
+      3,
+      3,
+      7,
+      9
+    ],
+    "desired_total": 60,
+    "delta_amount": 10,
+    "local_scale": 0.18,
+    "inventory_hash_order": [
+      9,
+      0,
+      8,
+      1,
+      4,
+      5,
+      3,
+      6,
+      2,
+      7
+    ],
+    "sign_repair_hash_order": [
+      3,
+      5,
+      7,
+      0,
+      2,
+      9,
+      6,
+      1,
+      4,
+      8
+    ],
+    "anchor_material": "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|geographic-anchor-set|V=10",
+    "selection_material": "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|selection|V=10|geography=regional|replicate=2",
+    "inventory_material": "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced",
+    "target_materials": [
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=612",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=496",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=675",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=593",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=748",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=592",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=613",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=559",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=557",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r127_SM-B10-B_regional_r2|row=614"
+    ],
+    "inventory_order_materials": [
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|0",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|1",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|2",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|3",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|4",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|5",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|6",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|7",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|8",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|9"
+    ],
+    "sign_repair_order_materials": [
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|0",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|1",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|2",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|3",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|4",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|5",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|6",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|7",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|8",
+      "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r127_SM-B10-B_regional_r2|balanced|sign-repair|9"
+    ]
+  }
+}

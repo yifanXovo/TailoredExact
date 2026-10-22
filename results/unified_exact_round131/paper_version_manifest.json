@@ -1,0 +1,63 @@
+{
+  "version": "Round131",
+  "sole_proposed_method": "GI-TBC (uniform pair-support implementation, MS2)",
+  "table_short_name": "S2",
+  "algorithm_identity": "original E2 --round127-mode ms2",
+  "predecessor_full_MB": "original E2 --round127-mode mb",
+  "repository_default": "ENS-C (unchanged)",
+  "paper_reproduction_entry": [
+    "--method",
+    "gcap-frontier",
+    "--algorithm-preset",
+    "research-round83-vds-equal-net-exchange",
+    "--round98-state-service",
+    "m-binary",
+    "--round90-lp-g-split",
+    "false",
+    "--round127-mode",
+    "ms2"
+  ],
+  "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+  "E3_PE_SHA": "2df9e0e160ecbcbd35c4e83eb434344893f9a59beb59667f3681772b4ff66d6c",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "E3_is_not_E2_binary": true,
+  "support": "pair cover and conditional rows only; no triple support on any input",
+  "unchanged": [
+    "complete H",
+    "representation",
+    "support enumeration and budget",
+    "ordered supply",
+    "C_G",
+    "A/B",
+    "Gini interval controller",
+    "AM thresholds",
+    "numeric tolerances",
+    "native defaults"
+  ],
+  "current_main_benchmark": "cold P-GRB",
+  "controls": {
+    "PS": "own paid H -> original compact full Start",
+    "S2R": "pair-only inclusive fixed root LP + MIP; outer control disabled"
+  },
+  "inherited_verified_zero_startup_scope_preserved": true,
+  "zero_backend_exposure_rule": "A qualified original startup-zero branch has no native backend exposure; no new shortcut or free backend attribution",
+  "evidence_layers": {
+    "R127_R128_MS2": "development / known roles",
+    "R129_new_four": "prospective at selection time",
+    "R129_protection": "separate known protection input",
+    "R130": "three already-known attribution roles; not independent new validation",
+    "R131_A": "six known SC final-version main benchmark, both Seeds",
+    "R131_B": "two known tiny overhead roles, three Seeds by two repeats",
+    "R131_C": "two known V35 roles, Seed0 only, 2400-second scope boundary"
+  },
+  "manuscript_performance_policy": "Only qualified actual MS2 observations directly support current main-method performance. Older full-MB/ENS observations retain their names and serve predecessor/background evidence.",
+  "larger_roles": "Final S2 scope measured only up to V35 in R131; no final-version V50/V60 validation",
+  "negative_results_preserved": [
+    "R112-R115 paid-start mixed outcomes",
+    "R127 q2 P-tuned holdout 0/3 versus default P1/3",
+    "R128 timing reversal and no-split roles",
+    "R129 C15/B30 open at both Seeds and B30 endpoint reversal"
+  ],
+  "selection_is_settled": "All five R129 conditions passed; the user adopts MS2. This round is not another candidate selection.",
+  "formal_results_pending": true
+}
