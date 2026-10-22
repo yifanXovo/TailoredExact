@@ -1,0 +1,41 @@
+{
+  "scope": "All24 qualified endpoint signed gaps; detailed raw native return/call gaps remain in each sealed journal",
+  "original_nonzero_certificate_window": [
+    -1e-07,
+    1e-07
+  ],
+  "negative_endpoints": [
+    {
+      "id": "UC-C20-U",
+      "seed": 1,
+      "method": "S2",
+      "U": 0.3835535885117132,
+      "L": 0.38355358851171467,
+      "signed_U_minus_L": -1.4988010832439613e-15,
+      "tiny_negative_gap_within_original_tolerance": true,
+      "raw_claimed_U": 0.3835535885117132,
+      "raw_claimed_L": 0.38355358851171467,
+      "raw_claimed_strict_certificate": true,
+      "certificate": true,
+      "certificate_qualified": true
+    },
+    {
+      "id": "UC-C20-U",
+      "seed": 1,
+      "method": "S2R",
+      "U": 0.3835535885117132,
+      "L": 0.38355358851171467,
+      "signed_U_minus_L": -1.4988010832439613e-15,
+      "tiny_negative_gap_within_original_tolerance": true,
+      "raw_claimed_U": 0.3835535885117132,
+      "raw_claimed_L": 0.38355358851171467,
+      "raw_claimed_strict_certificate": true,
+      "certificate": true,
+      "certificate_qualified": true
+    }
+  ],
+  "L_clipped": false,
+  "new_tolerance_introduced": false,
+  "same_input_physical_bound_consistency": "PASS",
+  "no_global_rational_or_accumulated_rounding_error_claim": true
+}

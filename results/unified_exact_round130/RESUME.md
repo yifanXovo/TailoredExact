@@ -1,5 +1,1 @@
-Round130 active.
-
-Last sealed: `E:\codes\ExactEBRP-work\worktrees\round130\results\unified_exact_round130\qualification\native_S12_S1\raw\02_S12_S1_R1_S2R`.
-Next position in `qualification/native_S12_S1`: 3.
-Check fees/PID and native processes before resuming. Never overwrite a sealed arm.
+Round130 science COMPLETE: all24 fixed formal arms and30 typed comparisons; independent preformal and final evidence reviews PASS; full S2/MS2 manuscript and81-page PDF with29 affected pages reviewed. Scientific label SELECTED_MS2_WITH_SCOPED_OR_MIXED_ATTRIBUTION. No extra experiment authorized. Current next steps are finite carrier publication, an English stacked Draft PR on the unchanged R129 branch, one science-commit anonymous empty-root recovery, guarded owned cleanup and actual accounting/delivery receipts. Public recovery and cleanup are still pending at this science snapshot.

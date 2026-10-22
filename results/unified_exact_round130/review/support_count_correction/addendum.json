@@ -1,0 +1,141 @@
+{
+  "UTC": "2026-10-22T13:16:52.513424+00:00",
+  "status": "POSTPROCESS_COUNT_CORRECTED",
+  "discovery": "Independent final review 01 failed on author support-family count metadata, not full-model identity or native evidence.",
+  "cause": "Row-shape-only cover_2 classification aliased cross-vehicle unique-service rows when M=2.",
+  "correction": "Use the inherited R129 single-vehicle support-family classifier in post-formal summaries.",
+  "before_summary_SHAs": {
+    "actual_method_differences.json": "25d128b81d0702f7a88a8f5ecc8e745c283653ceb4b370611d7535d5d92f31d7",
+    "observations.json": "9fcc65a52127954f7ff71d9703e17299affd3e4e96cbaf6624afd67aa5839a9c",
+    "stratified_summary.json": "81af4ea47f72f7ee3ced97f2ae86c90c29ad9a9f66b88d36882a0899f4bba3c3",
+    "arms.csv": "98a6e0fa61ea65c84d680ceb7a83bf8d34f40aa2afe42b016f769adde39aa4d1",
+    "pairs.csv": "b29c4e961709654eb022032431120a0f591e1102569fdd2613be0beb55d5a317",
+    "mechanism_costs.csv": "8c9e18f99d5536248cc22ae87cab6956dd8aafe133c4a19e7d90566d74113163",
+    "same_H.csv": "b57113da2b511f7de352f263b5b8621adfd59845eaa97b94b962542fe3ec18e8",
+    "closure_sources.csv": "523b6f5ea16a6054477a5757bb7cbe80f097ede8b4bcff9709b9f224fe43dad8",
+    "cross_arm_bound_consistency.json": "21c3a59d8a95c788b44a0de2b46f1127f61951f58071bd38e5aaf5b8733f6e8a",
+    "scientific_decision.json": "ad66bf4e5691f521a78e1de09710598cd0e9c65ebdf5de97b71a618711a6420c",
+    "claim_decision.md": "b4222df30c84ca54609c8404efe6f99633c449b2f46a96f2f700bdb716cb501a"
+  },
+  "historical_zero_qualification_SHA_unchanged": "3bc192a365aebcf3717a7850afba036724303a85e8217aa981d3fb663ee36454",
+  "qualification_descriptive_count_addendum": [
+    {
+      "fixture": "pair_root/S12",
+      "historical_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 12,
+        "pair_conditional": 132,
+        "ordered_supply": 24,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "corrected_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 0,
+        "pair_conditional": 132,
+        "ordered_supply": 24,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "changed": true
+    },
+    {
+      "fixture": "pair_root/R98-C2",
+      "historical_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 0,
+        "pair_conditional": 1305,
+        "ordered_supply": 90,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "corrected_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 0,
+        "pair_conditional": 1305,
+        "ordered_supply": 90,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "changed": false
+    },
+    {
+      "fixture": "equal_cutoff/shared",
+      "historical_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 1,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 1,
+        "pair_conditional": 0,
+        "ordered_supply": 2,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "corrected_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 1,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 1,
+        "pair_conditional": 0,
+        "ordered_supply": 2,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "changed": false
+    },
+    {
+      "fixture": "equal_cutoff/fallback",
+      "historical_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 1,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 1,
+        "pair_conditional": 0,
+        "ordered_supply": 2,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "corrected_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 1,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 1,
+        "pair_conditional": 0,
+        "ordered_supply": 2,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "changed": false
+    },
+    {
+      "fixture": "pair_root_fallback/S12",
+      "historical_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 12,
+        "pair_conditional": 132,
+        "ordered_supply": 24,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "corrected_descriptive_counts": {
+        "removed_semantic_sentinel_rows": 0,
+        "all_other_rows_columns_types_bounds_objective_identical": true,
+        "pair_cover": 0,
+        "pair_conditional": 132,
+        "ordered_supply": 24,
+        "triple_rows": 0,
+        "other_root_rows_retained": true
+      },
+      "changed": true
+    }
+  ],
+  "native_raw_source_algorithm_parameters_clocks_and_frozen_qualification_reports_changed": false,
+  "matrix_objective_order_types_bounds_and_duplicate_preserving_row_equality_unchanged": true,
+  "previous_failed_review_retained": true,
+  "Optimize": 0,
+  "H": 0,
+  "compile": 0,
+  "formal_retries": 0,
+  "scientific_tag": "SELECTED_MS2_WITH_SCOPED_OR_MIXED_ATTRIBUTION"
+}
