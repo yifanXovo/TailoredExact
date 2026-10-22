@@ -1,0 +1,30 @@
+Round129 completes the preregistered finite test of **one uniform MS2 candidate**: omit triple-support cover/conditional rows on every input and retain all other frozen M-B behavior. **Execution: COMPLETE. Recommendation: `RECOMMEND_UNIFORM_MS2_AS_PAPER_CANDIDATE`.** All five fixed conditions pass. This recommends a candidate for the next paper revision; repository defaults, the current full-M-B paper identity and historical tables remain unchanged.
+
+Stacked on R128/PR190, `codex/round128-inclusive-root-ablation`, at measured parent `cc70757304a2019d95f0f934aa5520d0caa946c6` (still open Draft and unmerged). No production source, H, controller, model generator or parameter policy changes, and no production compilation. All arms reuse original E2 PE `ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa` and Gurobi 13.0.2 DLL `9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88`.
+
+Four fixed new inputs (UC-C15-S, UC-B20-B, UC-C20-U, UC-B30-S) and one known protection input (PB-C20-B) yield **30 independently paid complete arms, 10 serial matched groups and 30 typed shared-data comparisons**: MS2/P, MS2/MB, MB/P. The new layer is 24 arms/eight groups/24 comparisons; protection is six/two/six. Two Seeds do not create two new problems. Recipes and all method orders were committed before once-only offline generation. No tuning, redraw, role switching, extra input/Seed, cap extension, healthy formal retry, MD-R or PT run was performed.
+
+All complete-method observations are below. C is qualified certification time `T_cert=T_produce`; O is qualified open with observed production seconds and null `T_cert`. Verification and total clocks remain separate in `arms.csv`.
+
+| Input | Seed | P | MB | MS2 |
+| --- | --- | --- | --- | --- |
+| UC-C15-S | 0 | O 571.153 | O 570.623 | O 570.589 |
+| UC-C15-S | 1 | O 570.546 | O 570.698 | O 570.797 |
+| UC-B20-B | 0 | C 316.976 | C 4.018 | C 3.631 |
+| UC-B20-B | 1 | C 317.545 | C 3.778 | C 3.594 |
+| UC-C20-U | 0 | O 1170.625 | C 701.525 | C 554.378 |
+| UC-C20-U | 1 | O 1170.568 | C 632.520 | C 481.105 |
+| UC-B30-S | 0 | O 1171.634 | O 1170.425 | O 1170.476 |
+| UC-B30-S | 1 | O 1170.482 | O 1170.431 | O 1170.723 |
+| PB-C20-B, protection | 0 | O 870.586 | C 393.721 | C 369.589 |
+| PB-C20-B, protection | 1 | O 870.721 | C 413.767 | C 294.156 |
+
+At each Seed, P/MB/MS2 certify **1/2/2 of the four new problems**; both-Seed problem counts are also 1/2/2. Neither MB nor MS2 is open where P certifies. Every current protection MB certificate is retained by MS2. UC-C20-U supplies the required newly exposed two-Seed material MS2/MB signal: savings **147.147 and 151.415 seconds**, exceeding the prespecified max(10 seconds,10% MB) thresholds. UC-B20-B and UC-C20-U each supply direct MS2/P certification Wins at both Seeds. B20's subsecond MS2/MB savings do not satisfy the material-gain condition; protection and known R128 K2 cannot supply new-input gains.
+
+Across the 30 shared comparisons there are 18 Wins and 12 UNDETERMINED observations, with no final certification Lose/Tie. **C15 and B30 remain open at both Seeds for all methods.** B30 has an open-endpoint reversal: MS2 has better U at Seed0 but worse U at Seed1; C15 Seed1 also has slightly worse MS2 U than MB. Open gaps are not certification Wins and receive no ratio or cap-filled certification time. New MS2/MB's ratio geometric mean 1.179515 uses only four both-certified observations on two problems; new MS2/P's 87.827903 uses only B20 at two Seeds, not the full panel. Protection stays separate.
+
+All ten actual MB/MS2 roots have identical complete H actions/fleets, initial U/root scope/settings and exactly equal remaining matrices, columns, types, bounds and objective after the declared triple deletion. Actual removed cover/conditional rows per Seed are C15 0/910, B20 2204/76, C20 0/2280, B30 3969/8211 and protection 0/2280; the original shared 50000 cap is nonbinding. B20 naturally produces three splits in each MB/MS2 arm; other arms have zero. Without a new D control, this does not establish net multi-leaf speedup. C20 savings accompany lower MIP time/work despite more MS2 nodes at both Seeds. Finite root-LP agreement does not prove global redundancy or a deletion-speed theorem.
+
+The separate final executor independently recomputed all 30 typed comparisons and all five conditions, replayed all final fleets, and checked representative nonempty-fleet, actual full triple-difference and optimal-certificate source/return/cover evidence. Its finite internal review passes; this is not external replication, a full rational proof, IID sampling or V50/V60 validation. Three tiny negative signed gaps and all fifteen Seed1 raw top-level LB0/certificate=false records remain intact; qualified final endpoints retain the original numerical policy and source chain. R127 PT's adverse 0/3 versus P1/3, R128 K1 reversal, K3 openness and historical no-split facts remain in the maintained manuscript.
+
+The maintained manuscript adds Section 6.9 and Appendix B.13, all ten P/MB/MS2 rows, explicit candidate mapping (`--round127-mode mb` to `--round127-mode ms2`) and the table migration scope if adopted. All affected PDF pages pass actual visual review. Evidence entry point: `results/unified_exact_round129/final_report.md`, with `candidate_decision.md`, complete arms/pairs, mechanism costs/differences, original identities/argv, separate review, finite current carriers and export manifest beside it. PE/DLL/license/credentials/fonts and external full papers are excluded. One science-commit anonymous empty-root recovery and guarded owned duplicate cleanup will be appended only after their actual receipts; no further experiment is authorized.

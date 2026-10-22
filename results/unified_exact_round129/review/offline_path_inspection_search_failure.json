@@ -1,0 +1,18 @@
+{
+  "UTC": "2026-10-22T00:28:02.6246968Z",
+  "Phase": "Static source inspection during campaign_group08_01",
+  "Attempt": "rg inspection used a nonexistent round94_common.py and literal wildcard filename arguments under PowerShell",
+  "ObservedErrors": [
+    "round94_common.py: file not found (os error 2)",
+    "round107*, round104*, round108*, round10*: invalid filename syntax (os error 123)"
+  ],
+  "CorrectedRead": "Explicit existing round107_reader.py and round108_reader.py paths",
+  "Finding": "Inherited portable(root,value) maps recorded results/reference/scripts/src/include paths directly under the supplied root and has no old-checkout existence fallback; complete-H physical input reads root/input_path",
+  "FilesModifiedBeforeCorrection": 0,
+  "FormalDriverChanged": false,
+  "FormalRetries": 0,
+  "Optimize": 0,
+  "NativeStarts": 0,
+  "FeeScope": "Concurrent with current formal group outer clock; no extra overlapping wall time added",
+  "All30EvidenceAuditExecuted": false
+}

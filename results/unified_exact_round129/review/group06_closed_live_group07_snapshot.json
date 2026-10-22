@@ -1,0 +1,77 @@
+{
+  "UTC": "2026-10-22T07:28:39.822618+08:00",
+  "SnapshotOnlyNotExecutionReceipt": true,
+  "LastCompleteGroup": 6,
+  "SealedArms": 18,
+  "Current": [
+    {
+      "group": 7,
+      "id": "UC-B30-S",
+      "seed": 0,
+      "method": "P",
+      "origin": {
+        "pid": 49816,
+        "parent_pid": 47036,
+        "actual_creation_unix": 1792624586.9499397,
+        "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa"
+      },
+      "progress": [],
+      "native_log_tail": [
+        "  8841  7053    0.25433   42  623    0.46538    0.23404  49.7%   323  725s",
+        "  8908  7101    0.23404   31  708    0.46538    0.23404  49.7%   323  730s"
+      ],
+      "producer_sealed": false,
+      "producer_receipt": false
+    }
+  ],
+  "PendingMeter": [
+    {
+      "label": "campaign_group07_01",
+      "elapsed_since_launch_seconds": 733.3427805900574
+    }
+  ],
+  "Live": [
+    {
+      "ProcessId": 47312,
+      "ParentProcessId": 36296,
+      "Name": "python.exe",
+      "CreationDate": "2026-10-22T04:45:23.613686+08:00",
+      "CommandLine": "\"D:\\msys64\\ucrt64\\bin\\python.exe\" scripts/round129_formal.py run"
+    },
+    {
+      "ProcessId": 47036,
+      "ParentProcessId": 47312,
+      "Name": "python.exe",
+      "CreationDate": "2026-10-22T07:16:26.480862+08:00",
+      "CommandLine": "D:\\msys64\\ucrt64\\bin\\python.exe E:\\codes\\ExactEBRP-work\\worktrees\\round129\\scripts\\round129_campaign.py campaign/group07"
+    },
+    {
+      "ProcessId": 49816,
+      "ParentProcessId": 47036,
+      "Name": "ExactEBRP.exe",
+      "CreationDate": "2026-10-22T07:16:26.949938+08:00",
+      "CommandLine": "E:\\codes\\ExactEBRP-work\\build-cache\\round128\\ExactEBRP.exe --input results/unified_exact_round129/inputs/UC-B30-S.txt --lambda 0.15 --T 7200 --pickup-time 60 --drop-time 60 --time-limit 1194 --process-wall-time-limit 1200 --process-shutdown-margin 30 --threads 1 --mip-threads 1 --gurobi-seed 0 --gurobi-presolve -1 --method gurobi --round61-candidate-mode off --out E:\\codes\\ExactEBRP-work\\worktrees\\round129\\results\\unified_exact_round129\\campaign\\group07\\raw\\01_UC-B30-S_S0_R1_P\\result.json --log E:\\codes\\ExactEBRP-work\\worktrees\\round129\\results\\unified_exact_round129\\campaign\\group07\\raw\\01_UC-B30-S_S0_R1_P\\native.log --process-phase-ledger E:\\codes\\ExactEBRP-work\\worktrees\\round129\\results\\unified_exact_round129\\campaign\\group07\\raw\\01_UC-B30-S_S0_R1_P\\phases.csv --external-gini-artifact-dir E:\\codes\\ExactEBRP-work\\worktrees\\round129\\results\\unified_exact_round129\\campaign\\group07\\raw\\01_UC-B30-S_S0_R1_P\\external --primal-heuristic-generation-log E:\\codes\\ExactEBRP-work\\worktrees\\round129\\results\\unified_exact_round129\\campaign\\group07\\raw\\01_UC-B30-S_S0_R1_P\\hga.csv --progress-log E:\\codes\\ExactEBRP-work\\worktrees\\round129\\results\\unified_exact_round129\\campaign\\group07\\raw\\01_UC-B30-S_S0_R1_P\\progress.csv --native-evidence-dir E:\\codes\\ExactEBRP-work\\worktrees\\round129\\results\\unified_exact_round129\\campaign\\group07\\raw\\01_UC-B30-S_S0_R1_P\\journal --plain-baseline --gurobi-model-export E:\\codes\\ExactEBRP-work\\worktrees\\round129\\results\\unified_exact_round129\\campaign\\group07\\raw\\01_UC-B30-S_S0_R1_P\\compact.lp --round24-expected-gurobi-model-fingerprint 2051495169 --round24-executable-sha256 ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa --round24-manifest-executable-sha256 ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa --round127-mode p"
+    }
+  ],
+  "ClosedBudgetAtGroup07Admission": {
+    "paid_outer_seconds": 9971.064001600258,
+    "remaining_outer_seconds": 29628.935998399742,
+    "unclosed": [],
+    "by_kind": {
+      "formal": 9062.401650799904,
+      "management": 4.805449200095609,
+      "qualification": 3.856901600258425
+    },
+    "nested_H_LP_MIP_seconds_added": false
+  },
+  "OriginalExecSession": 99796,
+  "FormalRecoveryUsed": 0,
+  "All30AnalysisExecuted": false,
+  "FinalIndependentReviewExecuted": false,
+  "PDFExportExecuted": false,
+  "PublicationExecuted": false,
+  "PublicRecoveryExecuted": false,
+  "CleanupExecuted": false,
+  "ResumeRule": "Recheck actual PID, birth, argv and seals; do not restart a healthy driver",
+  "StaticAuthorChanges": "Named candidate conditions and per-Seed condition4 reasons; source_reduced proof tag priority; truthful partial wording; full closed fee launch/receipt objects. AST checks only. Formal driver, argv, data and production source unchanged."
+}

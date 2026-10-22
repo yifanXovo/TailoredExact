@@ -1,1 +1,1 @@
-Recipe and complete 30-arm table frozen. Commit before once-only generation. No formal producer started.
+Round129 science COMPLETE; all30 formal arms, separate final review and affected-page PDF QA PASS. All five conditions recommend uniform MS2 as next-paper candidate; current defaults stay full-MB. All11 finite carriers and actual content scan PASS; original raw remains. Science publication is next, followed by exactly one anonymous empty-root recovery, owned duplicate cleanup and final metadata closure. No additional experiment is authorized.

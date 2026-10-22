@@ -1,0 +1,22 @@
+{
+  "UTC": "2026-10-21T21:35:13.5671083+00:00",
+  "status": "PASS",
+  "source_SHA": "b0c22b96e5dbbe82117a6e100d954496ff3fdef3167983bff7cf60b8e45356c9",
+  "accepted_child": "E:\\codes\\ExactEBRP-work\\temp\\round129\\future_read_only_probe",
+  "rejected_paths": [
+    "E:\\codes\\ExactEBRP",
+    "E:\\codes\\ExactEBRP-work\\temp\\round128\\x",
+    "E:\\codes\\ExactEBRP-work\\temp\\round129\\..\\round128\\x",
+    "E:\\codes\\ExactEBRP-work\\temp\\round129evil\\x",
+    "E:\\codes\\ExactEBRP-work\\temp\\round129"
+  ],
+  "loaded_helpers_only": [
+    "Get-TaskHash",
+    "Assert-TaskContained",
+    "Assert-TaskPlainTree"
+  ],
+  "main_cleanup_script_executed": false,
+  "Remove_Item_calls": 0,
+  "Optimize": 0,
+  "scope": "Read-only helper qualification; no cleanup plan or removal executed"
+}
