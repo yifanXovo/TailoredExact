@@ -1,0 +1,74 @@
+{
+  "UTC": "2026-10-22T08:03:12.579949+00:00",
+  "passed": true,
+  "records": [
+    {
+      "method": "P",
+      "seed": 0,
+      "qualified": true,
+      "native_Optimize": 1,
+      "certificate": true,
+      "status": "optimal",
+      "T_produce": 39.35638110525906,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\native_S12_S0\\raw\\01_S12_S0_R1_P"
+    },
+    {
+      "method": "PS",
+      "seed": 0,
+      "qualified": true,
+      "native_Optimize": 1,
+      "certificate": false,
+      "status": "time_limit",
+      "T_produce": 60.48277000000235,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\native_S12_S0\\raw\\02_S12_S0_R1_PS"
+    },
+    {
+      "method": "S2",
+      "seed": 0,
+      "qualified": true,
+      "native_Optimize": 5,
+      "certificate": true,
+      "status": "optimal",
+      "T_produce": 8.179549299995415,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\native_S12_S0\\raw\\03_S12_S0_R1_S2"
+    },
+    {
+      "method": "S2R",
+      "seed": 0,
+      "qualified": true,
+      "native_Optimize": 2,
+      "certificate": true,
+      "status": "optimal",
+      "T_produce": 7.724730900023133,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\native_S12_S0\\raw\\04_S12_S0_R1_S2R"
+    },
+    {
+      "method": "PS",
+      "seed": 1,
+      "qualified": true,
+      "native_Optimize": 1,
+      "certificate": true,
+      "status": "optimal",
+      "T_produce": 51.67020092473831,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\native_S12_S1\\raw\\01_S12_S1_R1_PS"
+    },
+    {
+      "method": "S2R",
+      "seed": 1,
+      "qualified": true,
+      "native_Optimize": 2,
+      "certificate": true,
+      "status": "optimal",
+      "T_produce": 8.13532210001722,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\native_S12_S1\\raw\\02_S12_S1_R1_S2R"
+    }
+  ],
+  "actual_paid_complete_H_fleet_and_semantic_actions_equal": true,
+  "S2R_nonzero_two_call_chain": true,
+  "PS_original_compact_full_Start_mapping_submission_readback_and_own_MIP": true,
+  "unequal_vehicle_capacities": [
+    8,
+    12
+  ],
+  "no_formal_role_screened": true
+}

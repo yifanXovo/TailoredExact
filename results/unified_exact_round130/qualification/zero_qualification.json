@@ -1,0 +1,106 @@
+{
+  "UTC": "2026-10-22T07:54:04.044431+00:00",
+  "passed": true,
+  "Optimize": 0,
+  "checks": [
+    {
+      "id": "S12",
+      "mode": "p",
+      "E2_E3_full_semantics_and_actual_columns_equal": true,
+      "E2_SHA": "bd4be724112a4a2a71753909206875dad69e6ac688e5e0a863e101e599dac209",
+      "E3_SHA": "bd4be724112a4a2a71753909206875dad69e6ac688e5e0a863e101e599dac209",
+      "different_output_path": true
+    },
+    {
+      "id": "S12",
+      "mode": "ms2",
+      "E2_E3_full_semantics_and_actual_columns_equal": true,
+      "E2_SHA": "84ebd617eea838b79575e1fbae9948606f8f71dfed56b914d0096f94e14453dc",
+      "E3_SHA": "84ebd617eea838b79575e1fbae9948606f8f71dfed56b914d0096f94e14453dc",
+      "different_output_path": true
+    },
+    {
+      "id": "S12",
+      "emitter": "shared",
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_rows_columns_types_bounds_objective_identical": true,
+      "pair_cover": 12,
+      "pair_conditional": 132,
+      "ordered_supply": 24,
+      "triple_rows": 0,
+      "other_root_rows_retained": true
+    },
+    {
+      "id": "R98-C2",
+      "mode": "p",
+      "E2_E3_full_semantics_and_actual_columns_equal": true,
+      "E2_SHA": "8205222d51e7a74bec2b66c6540acf45cd52b5ae6eaa9bdc5f1e8aac7db3c1b3",
+      "E3_SHA": "8205222d51e7a74bec2b66c6540acf45cd52b5ae6eaa9bdc5f1e8aac7db3c1b3",
+      "different_output_path": true
+    },
+    {
+      "id": "R98-C2",
+      "mode": "ms2",
+      "E2_E3_full_semantics_and_actual_columns_equal": true,
+      "E2_SHA": "7c5052c43cc42c627c4cb30d82c42118598537d4419564440c3802f57861913d",
+      "E3_SHA": "7c5052c43cc42c627c4cb30d82c42118598537d4419564440c3802f57861913d",
+      "different_output_path": true
+    },
+    {
+      "id": "R98-C2",
+      "emitter": "shared",
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_rows_columns_types_bounds_objective_identical": true,
+      "pair_cover": 0,
+      "pair_conditional": 1305,
+      "ordered_supply": 90,
+      "triple_rows": 0,
+      "other_root_rows_retained": true
+    },
+    {
+      "id": "R128_equal_cutoff",
+      "emitter": "shared",
+      "removed_semantic_sentinel_rows": 1,
+      "all_other_rows_columns_types_bounds_objective_identical": true,
+      "pair_cover": 1,
+      "pair_conditional": 0,
+      "ordered_supply": 2,
+      "triple_rows": 0,
+      "other_root_rows_retained": true
+    },
+    {
+      "id": "R128_equal_cutoff",
+      "emitter": "fallback",
+      "removed_semantic_sentinel_rows": 1,
+      "all_other_rows_columns_types_bounds_objective_identical": true,
+      "pair_cover": 1,
+      "pair_conditional": 0,
+      "ordered_supply": 2,
+      "triple_rows": 0,
+      "other_root_rows_retained": true
+    },
+    {
+      "id": "S12",
+      "emitter": "fallback",
+      "removed_semantic_sentinel_rows": 0,
+      "all_other_rows_columns_types_bounds_objective_identical": true,
+      "pair_cover": 12,
+      "pair_conditional": 132,
+      "ordered_supply": 24,
+      "triple_rows": 0,
+      "other_root_rows_retained": true
+    }
+  ],
+  "E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+  "E3_PE_SHA": "2df9e0e160ecbcbd35c4e83eb434344893f9a59beb59667f3681772b4ff66d6c",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "source_changes": [
+    "include/Round127Research.hpp",
+    "src/GurobiBaseline.cpp"
+  ],
+  "H_options_H_implementation_and_native_default_parameter_code_unchanged": true,
+  "P_PS_full_matrix_and_Start_rechecked_on_actual_native_smoke": true,
+  "inherited_boundary_contract": "R128 equal cutoff, S=0, tiny-positive-U0 and open-return reports retained; only new pair-root combination checked here",
+  "P_PS_full_matrix_and_Start_requirement": "separate closed native_qualification.json",
+  "filename_identity_addendum_SHA": "76c74ae2cc6fee31f666718eb748dfcec582fb4a4ef08bd58b5e07c00dc6937d"
+}

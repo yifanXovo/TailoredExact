@@ -1,0 +1,11 @@
+{
+  "status": "FAILED_REVIEW_PRESERVE_EVIDENCE",
+  "error": "AssertionError(('same-root/representation mismatch', 1, 'actual_root_difference'))",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_portable_check.py\", line 754, in main\n    result, code = check(args.root)\n                   ^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_portable_check.py\", line 669, in check\n    assert other[key] == mechanism[key], ('same-root/representation mismatch', mechanism['group'], key)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('same-root/representation mismatch', 1, 'actual_root_difference')\n",
+  "seconds": 162.03254719998222,
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0,
+  "no_performance_retry_authorized": true,
+  "UTC": "2026-10-22T13:09:01.074681+00:00"
+}

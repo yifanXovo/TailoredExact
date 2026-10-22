@@ -1,0 +1,8 @@
+{
+  "stage": "sparse_checkout",
+  "cause": "Missing new-worktree info directory before copying sparse patterns; read-tree interrupted and own stale index.lock removed after all Git children exited",
+  "user_or_previous_worktree_modified": false,
+  "scientific_output_lost": false,
+  "formal_or_native_started": false,
+  "repair": "Create info directory; copy existing sparse pattern; read-tree completes; preserve any partial own checkout pending bounded cleanup"
+}

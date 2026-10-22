@@ -1,0 +1,10 @@
+{
+  "UTC": "2026-10-22T09:28:50.809833+00:00",
+  "event": "Read-only tool-output formatter failed on absent native_log_tail between group03 and group04",
+  "error": "TypeError: Cannot read properties of undefined (reading slice)",
+  "correction": "Treat an absent native log tail as an empty list during the next not-yet-started arm",
+  "formal_process_interrupted": false,
+  "formal_retry": false,
+  "sealed_data_changed": false,
+  "scope": "Display-only tool code; no formal adapter/source/argv change"
+}

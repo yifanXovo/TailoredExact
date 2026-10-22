@@ -1,0 +1,98 @@
+{
+  "UTC": "2026-10-22T14:01:19.304486+00:00",
+  "status": "PASS",
+  "indexed_raw_members_retained_at_recorded_sizes": 178887,
+  "indexed_raw_logical_bytes": 991214888,
+  "raw_rehash_not_repeated_after_packing": true,
+  "all_retained_public_carrier_hashes_verified": [
+    {
+      "name": "formal_group01.zip",
+      "SHA256": "1fa14731155f3829edfe195867a3006e32ce9cee403de5a7b1dc62785977aed3",
+      "pieces": [
+        "results/unified_exact_round130/artifacts/formal_group01.zip"
+      ]
+    },
+    {
+      "name": "formal_group02.zip",
+      "SHA256": "d047c026b0b955493582c7580bcffd91102facce4a426be079654c554f7cf97d",
+      "pieces": [
+        "results/unified_exact_round130/artifacts/formal_group02.zip"
+      ]
+    },
+    {
+      "name": "formal_group03.zip",
+      "SHA256": "d9a64aecfbd69816c7eb64fd192042734641bce7194db8c6d270e91915e5002e",
+      "pieces": [
+        "results/unified_exact_round130/artifacts/formal_group03.zip"
+      ]
+    },
+    {
+      "name": "formal_group04.zip",
+      "SHA256": "cba138be1cc66f12da63d3c36aef689ca2071ac788eace265c024b494dcc3c8d",
+      "pieces": [
+        "results/unified_exact_round130/artifacts/formal_group04.zip"
+      ]
+    },
+    {
+      "name": "formal_group05.zip",
+      "SHA256": "90d7b71fe740d8ee5ca460a9b5127af956f5f2565172da25adc5ebceafcc93a9",
+      "pieces": [
+        "results/unified_exact_round130/artifacts/formal_group05.zip"
+      ]
+    },
+    {
+      "name": "formal_group06.zip",
+      "SHA256": "b9421d97914bfb044d861408808b4888aa17be3f0045adfaaba5b3ceb6a07818",
+      "pieces": [
+        "results/unified_exact_round130/artifacts/formal_group06.zip"
+      ]
+    },
+    {
+      "name": "qualification_closed_fees.zip",
+      "SHA256": "fb2f9778bf74613162ca2e67fc2b0f9274101d72942252d9229346c976c121e1",
+      "pieces": [
+        "results/unified_exact_round130/artifacts/qualification_closed_fees.zip"
+      ]
+    },
+    {
+      "name": "R129_single_B20_coverage_reference.zip",
+      "SHA256": "65376cf1224ff2b40f01840a178ea805fb166e3ff7b92b3f54b3cd355ca57762",
+      "pieces": [
+        "results/unified_exact_round130/artifacts/R129_single_B20_coverage_reference.zip"
+      ]
+    }
+  ],
+  "E2_E3_DLL_and_source_identity": {
+    "PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\ExactEBRP.exe",
+    "PE_SHA": "2df9e0e160ecbcbd35c4e83eb434344893f9a59beb59667f3681772b4ff66d6c",
+    "DLL": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "predecessor_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+    "exporter": "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+    "exporter_SHA": "9808c4284eeb6e7e2e2c273250438959aef54fa907f58523d3a2f7497edbe70e"
+  },
+  "main_head": "8dc274eb34ee6d8a575f0b94b57ef04476efc0f1",
+  "main_head_matches_initial": true,
+  "main_tracked_status": " M results/gf_compact_bc_round/handling_convention_test/handling_convention.json\n M results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv\n M results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json\n",
+  "late_user_dirty_snapshot_SHA": "6f71a209c5a8c17b0613f328ed0a07d6780176b4bbb07461216ff8c5650c72c5",
+  "late_user_dirty_hashes_still_match": true,
+  "current_guarded_user_files": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": {
+      "bytes": 53767,
+      "SHA256": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b"
+    },
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": {
+      "bytes": 6792,
+      "SHA256": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb"
+    },
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": {
+      "bytes": 73034,
+      "SHA256": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+    }
+  },
+  "initial_dirty_file_hashes_recorded": false,
+  "user_dirty_claim_scope": "Initial paths/status and HEAD were recorded; byte hashes were first taken at the explicitly dated late snapshot. No claim of initial-byte equality is made.",
+  "all_research_content_writes_and_cleanup_targets_exclude_main": true,
+  "authorized_shared_linked_worktree_Git_metadata_exception": true,
+  "old_worktrees_binaries_unique_raw_failures_and_user_files_not_cleanup_targets": true
+}

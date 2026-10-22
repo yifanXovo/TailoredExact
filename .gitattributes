@@ -1,4 +1,8 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
+# Round130 current protocol, original-byte input copies and scoped evidence.
+/scripts/round130* -text whitespace=cr-at-eol
+/results/unified_exact_round130/** -text whitespace=cr-at-eol
+/results/unified_exact_round130/qualification/inherited/*.diff -whitespace
 # Round128 protocol, driver and evidence identities preserve actual bytes.
 /scripts/round128* -text whitespace=cr-at-eol
 /results/unified_exact_round128/** -text whitespace=cr-at-eol
