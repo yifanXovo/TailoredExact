@@ -1,0 +1,142 @@
+{
+  "execution": "COMPLETE",
+  "actual_formal_arms": 30,
+  "typed_pairs": 30,
+  "distinct_inputs": 5,
+  "new_problems": 4,
+  "protection_inputs": 1,
+  "same_build_E2_PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+  "all_observed_arms_qualified": true,
+  "new_by_comparison": {
+    "MS2/P": {
+      "rows": 8,
+      "nonalias_typed_entries": 8,
+      "evaluable_nonalias_entries": 8,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_OPEN": 4,
+        "BOTH_CERTIFIED": 2,
+        "LEFT_ONLY_CERTIFIED": 2
+      },
+      "directions": {
+        "UNDETERMINED": 4,
+        "Win": 4
+      },
+      "both_certified_intersection_n": 2,
+      "both_certified_ids": [
+        "UC-B20-B",
+        "UC-B20-B"
+      ],
+      "conditional_geometric_mean": 87.82790332653587,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    },
+    "MS2/MB": {
+      "rows": 8,
+      "nonalias_typed_entries": 8,
+      "evaluable_nonalias_entries": 8,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_OPEN": 4,
+        "BOTH_CERTIFIED": 4
+      },
+      "directions": {
+        "UNDETERMINED": 4,
+        "Win": 4
+      },
+      "both_certified_intersection_n": 4,
+      "both_certified_ids": [
+        "UC-B20-B",
+        "UC-B20-B",
+        "UC-C20-U",
+        "UC-C20-U"
+      ],
+      "conditional_geometric_mean": 1.179514750036067,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    },
+    "MB/P": {
+      "rows": 8,
+      "nonalias_typed_entries": 8,
+      "evaluable_nonalias_entries": 8,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_OPEN": 4,
+        "BOTH_CERTIFIED": 2,
+        "LEFT_ONLY_CERTIFIED": 2
+      },
+      "directions": {
+        "UNDETERMINED": 4,
+        "Win": 4
+      },
+      "both_certified_intersection_n": 2,
+      "both_certified_ids": [
+        "UC-B20-B",
+        "UC-B20-B"
+      ],
+      "conditional_geometric_mean": 81.42570926110585,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    }
+  },
+  "protection_by_comparison": {
+    "MS2/P": {
+      "rows": 2,
+      "nonalias_typed_entries": 2,
+      "evaluable_nonalias_entries": 2,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 2
+      },
+      "directions": {
+        "Win": 2
+      },
+      "both_certified_intersection_n": 0,
+      "both_certified_ids": [],
+      "conditional_geometric_mean": null,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    },
+    "MS2/MB": {
+      "rows": 2,
+      "nonalias_typed_entries": 2,
+      "evaluable_nonalias_entries": 2,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "directions": {
+        "Win": 2
+      },
+      "both_certified_intersection_n": 2,
+      "both_certified_ids": [
+        "PB-C20-B",
+        "PB-C20-B"
+      ],
+      "conditional_geometric_mean": 1.224121407925533,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    },
+    "MB/P": {
+      "rows": 2,
+      "nonalias_typed_entries": 2,
+      "evaluable_nonalias_entries": 2,
+      "unevaluable_nonalias_entries": 0,
+      "alias_entries": 0,
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 2
+      },
+      "directions": {
+        "Win": 2
+      },
+      "both_certified_intersection_n": 0,
+      "both_certified_ids": [],
+      "conditional_geometric_mean": null,
+      "denominator_warning": "shared arms and builds; no independence, population, or open-run time-to-certification inference"
+    }
+  },
+  "unique_problem_count_not_increased_by_Seed_repeats": true,
+  "actual_D_control_runs": 0,
+  "no_population_or_best_Seed_claim": true,
+  "conditional_ratios_use_both_certified_intersection_only": true
+}

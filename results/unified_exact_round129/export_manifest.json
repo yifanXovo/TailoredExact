@@ -1,0 +1,2789 @@
+{
+  "schema": "round129-current-only-export-v1",
+  "base_commit": "cc70757304a2019d95f0f934aa5520d0caa946c6",
+  "files": [
+    {
+      "path": "CMakeLists.txt",
+      "SHA256": "31586cafdc97110c005da1fdde56e35d1228a454179a085d90a2b60b11fbf073",
+      "bytes": 30843,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Bounds.hpp",
+      "SHA256": "133e136da94126a5ad91281c9e502552f4484cba62a3193cc46772c9237ae2f4",
+      "bytes": 9851,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Branching.hpp",
+      "SHA256": "275bb0019aed3138f652271f561a6d50de20394b27211aaec6b347255ce8cb0b",
+      "bytes": 518,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/CanonicalCompactModel.hpp",
+      "SHA256": "efc670847eb1b0c2f4056c79a64aba0d51f6e96cd9f860d8ad70941801205b39",
+      "bytes": 6609,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Column.hpp",
+      "SHA256": "f235e7d75fef263ab343acef6ad30075b975e76be2a6320287d4cebb4f3ebbe5",
+      "bytes": 858,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ColumnGeneration.hpp",
+      "SHA256": "b56213b9c03cc3e72fcb1f16fde544fd30445e9fe4c94dce152d7bf3276c8a49",
+      "bytes": 43310,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ColumnPool.hpp",
+      "SHA256": "154c3e54000b65b5fe448106935c6572cc997c8aaaa4e125b9dec95a331fc05c",
+      "bytes": 1719,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ConnectivityFlow.hpp",
+      "SHA256": "4ad49231d642cae8536b546a5569f5092f8986969070e54bb3b6044e66a238ed",
+      "bytes": 3774,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ControllingLeafScheduler.hpp",
+      "SHA256": "87e37afa415f36756b2d263f5ed9ce15a4b20caa9c8e1a1406c78bc2bd16825e",
+      "bytes": 9009,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/CplexBaseline.hpp",
+      "SHA256": "8be5e2e67ac908820f4fe04775bac315f271eab9a12e6a022bfb9ae9f2c9cd78",
+      "bytes": 578,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Cuts.hpp",
+      "SHA256": "e98a30e9451e917b54d25610d007eac00d8f3756b8856118172e88bd00f20cf0",
+      "bytes": 937,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/DenseProgress.hpp",
+      "SHA256": "10d9f92bacb6484f696f97a226b175a1a71f7f8d5549ec825e0181e39a309fb2",
+      "bytes": 6935,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/DeterministicDinic.hpp",
+      "SHA256": "0035affeaf0906b7ef2c2f6ad33efd569a5a5d41218f29e79d3a585995a7e572",
+      "bytes": 4382,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Evaluator.hpp",
+      "SHA256": "df5a98b1a9456fbaff142369eb919f78459f703a5af4e9a872c1137fb5c598ec",
+      "bytes": 303,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ExternalGiniTree.hpp",
+      "SHA256": "244bdc2d09d9993ca2a818cd4e4a73b496ba2e194a810a86eea1162ae0f8b40e",
+      "bytes": 2913,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/FileSha256.hpp",
+      "SHA256": "9ce848d6c6c282292a927ca470ee4555e59b5cfa3d8ac9a050b7290c3674b9d4",
+      "bytes": 200,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/FixedIntervalMipBackend.hpp",
+      "SHA256": "8cb49d1e9b6123017208553e136e9ee8c57ce76e378b4098e45846adbae34473",
+      "bytes": 24280,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/FleetEventCuts.hpp",
+      "SHA256": "10a7ee1ab0a80c3c91eb8d260a425727803383d82489f372cfa30b231a087d70",
+      "bytes": 2149,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/GiniAdaptiveParametric.hpp",
+      "SHA256": "ba5de1f66dd0d84d3463a2ebb3aa3ce981105bee902badc033194e4463e908f8",
+      "bytes": 4246,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/GiniBranching.hpp",
+      "SHA256": "f6e4cc383e8f3b302033b374fe10f5572845a796dc07785fa963ea984bc7280b",
+      "bytes": 429,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/GiniEnvelopeRefinement.hpp",
+      "SHA256": "e882817323837b41d80367a66bcf7ac50e553a86f59c4b7b69d22576db881fb2",
+      "bytes": 4085,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/GiniEnvelopeTailRepair.hpp",
+      "SHA256": "f2d413e82a28414ffab9a451e7a3bd0719074e2b9b82b7dde21bd0359e6ad72e",
+      "bytes": 5232,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/GiniFrontierGeometry.hpp",
+      "SHA256": "c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305",
+      "bytes": 8785,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/GurobiBaseline.hpp",
+      "SHA256": "49b5bc60484b5391a07343ba48441ef40b72ea06354ea2b44d8de1d7667da770",
+      "bytes": 795,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/GurobiCertificate.hpp",
+      "SHA256": "914279764d62946b35b9d3f175cafad3766f79f702e2ebc9212fd3671858239c",
+      "bytes": 2378,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/GurobiProgress.hpp",
+      "SHA256": "018c4a88aa769df8f997f61fdfd20fe7f8eef7f35216d7716c34387a1cd1d907",
+      "bytes": 1054,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/hga_tgbc/AVLCalculator.h",
+      "SHA256": "324aa71018554d66620a56922a8829ac1aca85a140c91c3a1c9c8c10b12b92bc",
+      "bytes": 7918,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/hga_tgbc/GreedyExtensions.h",
+      "SHA256": "d6c500d2bb990e39278127022b7cd9adc5f92570e69f1b995a0851d294b2a31d",
+      "bytes": 3102,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/hga_tgbc/GreedyMethods.h",
+      "SHA256": "568f527bdaf6d088489dbf3fff551dfd8304582684cf972671308293b8a1c92c",
+      "bytes": 3873,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/hga_tgbc/HybridGA.h",
+      "SHA256": "2ac2233743ffa883fb517c7df70c5b29bbb420123f8a57d474434c2a6820dc62",
+      "bytes": 66925,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/hga_tgbc/InstanceData.h",
+      "SHA256": "c695f84324a72302c91a21f4d1aa17d2c155239d1baa3b3821acf127ae0756f0",
+      "bytes": 1324,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/hga_tgbc/Solvers.h",
+      "SHA256": "1382d476927207de909143a124a8075ea065a2e74e17177d7a8c43cc644d3fe9",
+      "bytes": 2274,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/HgaTgbcRunner.hpp",
+      "SHA256": "01a0a95fcd6a5d1b23206503c8cc4814b10cdea243249970f0aa6ecaed222ae8",
+      "bytes": 3561,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Instance.hpp",
+      "SHA256": "e9e396495d431fbb00f412df00929470f9332d5ab57c5561ca0c98b0a456026e",
+      "bytes": 39287,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/IntervalRowFactory.hpp",
+      "SHA256": "1fbf17a169fc8f65d4bb267b0594720e6e9a3d4c73fd65ccbcf47df2b23df4d8",
+      "bytes": 5025,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/InventoryRouteCuts.hpp",
+      "SHA256": "434ecff4b7241016782f7a88da2a7c3305603259cd7c14cf52cd3596dfc0749a",
+      "bytes": 2476,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/InventoryRouteRootClosure.hpp",
+      "SHA256": "e05262dc208e60a7e38cf67c1777da5eed1636fe5a3874479cdec902ce709ec2",
+      "bytes": 2416,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Logger.hpp",
+      "SHA256": "43528e60e97f4b56e2639d9adcfc61a5e2ca7fcd889073e732ebaa7d070ca334",
+      "bytes": 327,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Master.hpp",
+      "SHA256": "ba8512c5741d80bb573a63907840ff1ea6623453a598fd03be0e26ddc6863d12",
+      "bytes": 741,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/MipStartMapping.hpp",
+      "SHA256": "c5375a6a2ae28c599d4b73cce172a9575c8f7490d14a6dcbab0410e58d6554cf",
+      "bytes": 1460,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ModelCorrectness.hpp",
+      "SHA256": "f8f0632084823a2433a5403d3154a391910ee487c45e79e528d6c9efd9dc2c04",
+      "bytes": 2009,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/NativeEvidenceJournal.hpp",
+      "SHA256": "3e45f12f9329babd8ffc01e95a6e6c689dffd790ed100dfe18ed7631fca8e141",
+      "bytes": 2772,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/NativeOtB1.hpp",
+      "SHA256": "bd64c92a83d109c602dbb31bd10bbba524db857bb357fee6ba26c7d8da3df0eb",
+      "bytes": 2219,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ObjectiveResourceCompression.hpp",
+      "SHA256": "c99acd5281780fa72f42f7ffdda2c4fba66acdb9947a9b83dec762ca95c804c7",
+      "bytes": 945,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/PaperExternalGiniTree.hpp",
+      "SHA256": "ec6b23bc70b2baf8e7083b1cc836d3ed0c80f9384f87a4ad161a5ae5f93415bd",
+      "bytes": 4799,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/PaperK1AmSf.hpp",
+      "SHA256": "fee8662d26f863ab9e75022ba70d6d400cccef4b5f3c92470bcce0df368c757c",
+      "bytes": 944,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Parser.hpp",
+      "SHA256": "6f7f49f621ac858769b5144a1d5675bbb80ebdcb92ee6f216340d363ef0370c0",
+      "bytes": 417,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/PenaltyCoverSeparation.hpp",
+      "SHA256": "877c3e8c290b088e7aabdead0771516e8ce45091a5047f42d7d9ff8e6a8d7913",
+      "bytes": 2045,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/PhysicalDurationTolerance.hpp",
+      "SHA256": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+      "bytes": 264,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/PhysicalWitnessValidation.hpp",
+      "SHA256": "b26e544483a3297259aa77a2f4f420878e7f42eb5f469bfd6beee64cd7585010",
+      "bytes": 614,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Pricing.hpp",
+      "SHA256": "9b5f6b429db2311cad54e8657d3840cd4836c7bbf74025eb551238d010de77da",
+      "bytes": 9666,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ProcessPhaseLedger.hpp",
+      "SHA256": "90537efecc29d752c47fb088d16bff16baddbe36af858e33f3315efbca65b1b0",
+      "bytes": 927,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ReplicaExternalGiniTree.hpp",
+      "SHA256": "094bae61508ea9af2d54f51dcffbd1dc832e40624e123fb73ced05bb57b4ccfb",
+      "bytes": 730,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Result.hpp",
+      "SHA256": "3c18b79e6690e7156be912748b3f5cb1b7910c1aa3befa1f58f15ebd66d67c1a",
+      "bytes": 102235,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round105Decomposition.hpp",
+      "SHA256": "eccca5f2ff4a8b0c8d6de114c251a3b1225fa13ef7a3c4d0d81e5e1f00e3f46a",
+      "bytes": 1763,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round106Events.hpp",
+      "SHA256": "8f7ec442881798652877694129cda936993e6f81dead7d422d8b15dcfb9e3e5a",
+      "bytes": 1439,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round106Research.hpp",
+      "SHA256": "c33bee11181eb029026b5010a9c89240416fad3be02c665dfc49295a7299f9f9",
+      "bytes": 704,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round107LpMetadata.hpp",
+      "SHA256": "5b57f944f69f16fa79c109ba49be646fe3625f7f38f6be91b0396a2685fc6007",
+      "bytes": 4581,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round107Research.hpp",
+      "SHA256": "207577fef6a37fd23514b9d97836f8e1a6e1450fe7f7a5d8a9dd5cf762b8cf3f",
+      "bytes": 296,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round107Scope.hpp",
+      "SHA256": "59f61ced9654b1b5c78aeb8a2fd53333a6337c870c87135506ade41d65b7e14c",
+      "bytes": 2345,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round119ProofContraction.hpp",
+      "SHA256": "0c5891ff61e4264b08b4d2d36667d6a05c95bc8440822c3d3c63056b700fe76f",
+      "bytes": 2529,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round120NativeProof.hpp",
+      "SHA256": "5abc168af8ebf9d3bd7681bde8a5b643bdbe9e65365ed68bde446b522944c61a",
+      "bytes": 2280,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round127Research.hpp",
+      "SHA256": "310240c5f36b8e06931ff119d213d65b5247a77e874170ad0d14a83b5dbebe70",
+      "bytes": 3467,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round48K1AMF.hpp",
+      "SHA256": "b878f176a8c7a888bd83f41e9928c29da9cc49544bc9c511e817fe5829d432c0",
+      "bytes": 2937,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round49K1RC.hpp",
+      "SHA256": "2343513138418e6f98b87e0939c276b2b15b7013a4bd77abddedb9e6b07730be",
+      "bytes": 3152,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round50IntervalMip.hpp",
+      "SHA256": "0a8f8f45f7deed6b04be377c410c6a39603f4271e9b14ff8fc56b2a8e7908208",
+      "bytes": 3056,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round51IntervalMip.hpp",
+      "SHA256": "eece149db3fd19471c9ac7ee54b27d523449ffa7647e71290018c25ef32bc510",
+      "bytes": 3468,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round52GurobiCutAdapter.hpp",
+      "SHA256": "4ebd434fb2a3b1f63652f7bd89bd04992bd1efee07896497d295c8e3d6d29a4f",
+      "bytes": 1270,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round52TailoredCuts.hpp",
+      "SHA256": "48f98021d28b9ff604d5b17060477427552614abc16588a08981b8c21b0baf71",
+      "bytes": 5005,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round53CallbackIsolation.hpp",
+      "SHA256": "ac988f08d12bd8e2952268b99267ea53ec5c4c5f094579b4e299f76121ca00c1",
+      "bytes": 477,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round58Benchmark.hpp",
+      "SHA256": "98bb286eb654d3ab3d93dfc6a0432bb7e771f7219c1a8b6e3efb66c4f8417882",
+      "bytes": 1517,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round59Research.hpp",
+      "SHA256": "839aa0f949abd89788e45cd23228fc8bc009a57cdd9396e077e6d261d6c434b3",
+      "bytes": 2299,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round60Candidates.hpp",
+      "SHA256": "ab47bb15291bcfcaa5f35fc8b1fe9667997198a1bf6dddff84ac278676427ffa",
+      "bytes": 3411,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round61Candidates.hpp",
+      "SHA256": "a8da3b153aac709f0bd3d113266fe5bcf4d714103abcc86061fbe8727a39133d",
+      "bytes": 2747,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round61TimeOracle.hpp",
+      "SHA256": "1b054e31f7f1825d6e7d56bf114adc030fe65364404a3d352c95c79734c5aaef",
+      "bytes": 1515,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round62Passive.hpp",
+      "SHA256": "985daaa5614398e76d5e46cda838dc63b96fbf5a0a2ea0c0df2d851e5eed356d",
+      "bytes": 944,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round62Thresholds.hpp",
+      "SHA256": "9bad4401fde82b7632a9bd6c4eec0b0ea1482c17d8f9b94455ac83d771f592bf",
+      "bytes": 2025,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round63TimeResource.hpp",
+      "SHA256": "5bb455029bb018118d21f2dbdeaa3bb47539eb8547560a981fb5b616ac48345e",
+      "bytes": 1731,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round64SharedResource.hpp",
+      "SHA256": "1a541cc39bd4a58715fa7ca309cb4918f271790f7cf40c26e16f6de084893207",
+      "bytes": 721,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round65Projection.hpp",
+      "SHA256": "e0a5d77eea89dba483f47c410f171454a8b08e0a05b6cdd80e6b5eef4335d531",
+      "bytes": 1882,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round65Proof.hpp",
+      "SHA256": "89d3c68c218ebadac3c447c1b0067b93e8220527a402d413aafec6d7e1e0e8f1",
+      "bytes": 1956,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round73JointInsertion.hpp",
+      "SHA256": "06049ff4974c008833f3d5d6f2eecde5ffb7d61e3633c10ef7d865385ca560e7",
+      "bytes": 1651,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round75QuantityDescent.hpp",
+      "SHA256": "d0e7f32055f81b8821f833cfe726dcb2efd0c325eda7b1eddf2395b4c8f11956",
+      "bytes": 1739,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round76PhysicalClosure.hpp",
+      "SHA256": "fa3234cbe0a05fd187dacf3ca2f79b13b7a3cc5db8de97da0c33ea28f7149421",
+      "bytes": 1196,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round78BalancedRelocation.hpp",
+      "SHA256": "4e5a46ae98eb67190947f614763ac67785724538b9d568673b62e8d57a9cd991",
+      "bytes": 1563,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round83BlockExchange.hpp",
+      "SHA256": "c967be51e18e35814fca4284d57d439f56a40b5b9c343b6d388d9b6ad71feba3",
+      "bytes": 1150,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round92HandlingActivation.hpp",
+      "SHA256": "5bad5b1e023ea07fd753bd33993cbe604c7b2a6d05576523ae0d757019668f2d",
+      "bytes": 4172,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round93CoQuantityDescent.hpp",
+      "SHA256": "92656c6a27dda13b794965fdf6d49bcc38007d16b6780f0ba822f62134253ee2",
+      "bytes": 2923,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round95FullBlockDescent.hpp",
+      "SHA256": "20150387b81db8287d44a959e9716274dff2f18586fd0014398b5bf200470573",
+      "bytes": 3465,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round96MultiQuantity.hpp",
+      "SHA256": "bf8a3651655b44cced20a8948e6b4fadb56721979637badfdb9e713978112b37",
+      "bytes": 762,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round96RouteOrder.hpp",
+      "SHA256": "ffb21848c6cc21ee106e9131ad1bb1a9fc2cf214ecb6a6e85e88ea8c05f11d91",
+      "bytes": 1034,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round97NativeClosure.hpp",
+      "SHA256": "0147433cef8256914dead30c166c14f562086cab7bb59a76904bf6c85217f14b",
+      "bytes": 2540,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/Round98StateService.hpp",
+      "SHA256": "5b202a5db205941cde679ab967508546a171e5846de79dbc8454591a76f126e7",
+      "bytes": 2098,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ServiceResourceCuts.hpp",
+      "SHA256": "a901db79764a9f3f6a893b74ebc7980bb7cc72402b36268b68d41cffdd48818f",
+      "bytes": 1938,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/ServiceResourceHull.hpp",
+      "SHA256": "37f035446b3f80f3e461a03c1d1262f8afb1b208615cc56a09899fad19789154",
+      "bytes": 1285,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/StaticSegmentedGini.hpp",
+      "SHA256": "798d1301b22a73440955e190bca697013e7f1132b8a4bf0bf025b48a6c0f8408",
+      "bytes": 4094,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/StationSet.hpp",
+      "SHA256": "e3cbaa6a7b0ffce271d4603a018b20bdf197ddf1dc0c65477beaa7860a80b8ff",
+      "bytes": 4265,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/StrictCertificate.hpp",
+      "SHA256": "c1ea9bbebb3d6f8944aed9c44f30624c26f25c8342bc29fbfc4278b3c0cde706",
+      "bytes": 3906,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/TailoredBC.hpp",
+      "SHA256": "56caf466d7fd66fadd1cc9a71b0ea2b2dff27a1a94c1afc1dfb54199ac14a6fa",
+      "bytes": 623,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/TailoredBCCallbacks.hpp",
+      "SHA256": "324b68b779bafb5e4e266d591f699339f773555a27615df16140cd3faa05aa5b",
+      "bytes": 131,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/TailoredBCCplexApi.hpp",
+      "SHA256": "44a0d3f82745310c8eea42931187512e4e58ad556522c2389f138a4a478808ff",
+      "bytes": 19917,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/TailoredBCCuts.hpp",
+      "SHA256": "96e3d012cddc58f460a71acba244991f34a228b2f67c1a3a56d71628a726eb8d",
+      "bytes": 615,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "include/TailoredExact.hpp",
+      "SHA256": "d8f0a5da11527353efe3359c9d32359e907fc369c778b70d749680cd894ddfde",
+      "bytes": 187,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "reference/round106_confirmation/S12.txt",
+      "SHA256": "475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f",
+      "bytes": 842,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "reference/round122_paper_benchmark/PB-C20-B.txt",
+      "SHA256": "b04a721313ebc18c4a3bc4cd4b9f6b69b74e3fce53897fce9a6cc8c32fc7babd",
+      "bytes": 1293,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "reference/round98_confirmation/C2.txt",
+      "SHA256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "bytes": 1867,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/data_generation_citibike_round57/source_station_table.csv",
+      "SHA256": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "bytes": 69678,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round116/projection_contract.json",
+      "SHA256": "15554a7fe01602de7a6ec45e61fe54830076cf7355188e91b73081093f939f3a",
+      "bytes": 3892,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round116/source/requests/station_information/01.response",
+      "SHA256": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "bytes": 277085,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round116/source/row_decisions.json",
+      "SHA256": "da1f975f71ac1f6df09311f948442b0a4539f1ac0d00c3ace38c662d10b69b0f",
+      "bytes": 503939,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round116/source/snapshot.json",
+      "SHA256": "89e4e89d6e6641b6aea3c073adb8b2e1643f28f99809e769cf41822e38dde1d1",
+      "bytes": 9688,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round116/source/source_station_table.csv",
+      "SHA256": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+      "bytes": 192293,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round127/E1_frozen.json",
+      "SHA256": "f2d6aa41fdb53878e430faba657cc08b7a4f323fc948daa095f79ef8dbbdfdd9",
+      "bytes": 25180,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round127/method_matrix.md",
+      "SHA256": "baa84ae67faab767fc74ff7ec5cfbf92c62244154bb6501ab4045a323f282d4b",
+      "bytes": 11666,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round128/arms.csv",
+      "SHA256": "c3f5e4bf75f8719444fb29c132eec209ef10fc31a6308839ad31d9531a74199a",
+      "bytes": 18277,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round128/E2_frozen.json",
+      "SHA256": "f3265c0e3a07854e5dfb65be5c74e3b43d92d6f90fbe37bc5a1aa5ee0f02ce6a",
+      "bytes": 25168,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round128/final_report.md",
+      "SHA256": "949770d1a2006f115e94f94cd960350ed7ce63bc951377a1c194f2a9545af291",
+      "bytes": 12031,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round128/goal.md",
+      "SHA256": "3fdf8f91d4a546d55cd3fb0c4b32e1fa679ba755833e27c1e91690d0537f935e",
+      "bytes": 23363,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round128/md_root_contract.md",
+      "SHA256": "1cb26bb6e3d48932a79be0671d64b671c1c507c3c1ac1bb269a5f2d22f72762f",
+      "bytes": 5264,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round128/method_matrix.md",
+      "SHA256": "ff79cffb788abc7e6775ab822e385ddd815a6fb28a050d0db6d793119b3e5cfb",
+      "bytes": 4525,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round128/pairs.csv",
+      "SHA256": "c228cf397bd1dcb3dcd3326459b38b0873dd2c87b2b006441c73fcdd49929c15",
+      "bytes": 4577,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/.gitignore",
+      "SHA256": "f64bc4bc4ba3111b77a614d1b86d67c3bcef0aae99bf32c65f3161562b0674ce",
+      "bytes": 37,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/actual_method_differences.json",
+      "SHA256": "49e4ea318f1b5a14ad56f6c83733f63cfd97d8f4ed77ed53de46c7c45d5b3f68",
+      "bytes": 19342,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/algorithm_appendix.md",
+      "SHA256": "270335d79e164322fe48927f0daa18fa8265b22a870c1491b717731ea693c799",
+      "bytes": 39903,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/argv_freeze.json",
+      "SHA256": "73e3f7cea3cf7d31a985ba76253fe3c9763da3938e5aee66d800dabbe934f861",
+      "bytes": 399441,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/arms.csv",
+      "SHA256": "a190a6bb828bfa99e7483ed78a5f56c092dfdd7923c5b0195d6a8c6911e56aa9",
+      "bytes": 33359,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group01.zip",
+      "SHA256": "723d46a4462ffa572f8a9b8d02a5f0de43b683af3d84fcd748f4d72d1c58c1c2",
+      "bytes": 20503419,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group02.zip",
+      "SHA256": "2dc22d0eaa360261ff79c9ac68f77fbce6e4cdd11b16c0c20971417561d7f1f7",
+      "bytes": 21406647,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group03.zip",
+      "SHA256": "1ed9210f556bf7fda1181c672c09ed8738b26e9279df26230d03c2d41857302c",
+      "bytes": 7346171,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group04.zip",
+      "SHA256": "45b22a40479a0af6a3c0887656f4b8c4d6b102ab1c2a1bd416169a52cecc9e6f",
+      "bytes": 8435636,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group05.zip",
+      "SHA256": "a2085914bcc970b16cd0eabcf9c89165ce861e4728bf57e0e416ddf19452ab9e",
+      "bytes": 27974400,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group06.zip",
+      "SHA256": "d3a9621e3425871776325d86c7da9fe152f3bf4133e9a5bf5554e8fc33cda16e",
+      "bytes": 23429641,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group07.zip",
+      "SHA256": "d4befeb23b913508b811b1dbe7978be4dcb61365114b28c4d7188e0871dc4d42",
+      "bytes": 3666235,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group08.zip",
+      "SHA256": "b0e96f63ec7f562d456ab1ff0d72952fd85cb55a4ba6277db351404a1b16cebe",
+      "bytes": 3639791,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group09.zip",
+      "SHA256": "3350eed25254332c612594161e2ff15151d7d1131eee4e03c4ab34626a8fb578",
+      "bytes": 14918774,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/formal_group10.zip",
+      "SHA256": "4eee9efdccfb7b8820716b599ffdb104790b3f0b9e55dcd3a0507f67b0a28b53",
+      "bytes": 13764601,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/artifacts/qualification_closed_fees.zip",
+      "SHA256": "00f0329bbf8f1ccbfc790ed41de96e8d0016658c94b506770a23fe7eb8714265",
+      "bytes": 1967234,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/candidate_decision.md",
+      "SHA256": "b05f63231e7248477ed53688a8dbaf88e09313f16258c201bc504d6c2a621d56",
+      "bytes": 3039,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/driver_resume_snapshot.json",
+      "SHA256": "f4ee7a95bd05dded1c52bec4ca84839fb3442eedd18a21cb850d541dc89270d5",
+      "bytes": 2400,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/E2_identity.json",
+      "SHA256": "7ebcda3dce5bf7d429fc0ba08ff1e058e3f63f80bbd7bec6d50f4d61b9293368",
+      "bytes": 23452,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group01.members.json.gz",
+      "SHA256": "43d891a83f244d8b9c5d4a7647caef4aefb3a8dc7107a5cbfdf82df470431369",
+      "bytes": 1650060,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group02.members.json.gz",
+      "SHA256": "905b5b299e04a0735d682213408e980a29a3ea8d500e2beac7e9df63891f095b",
+      "bytes": 1742160,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group03.members.json.gz",
+      "SHA256": "25dca142323d695387dc236b2f7788867310b6c0c32dd2965bbb98d203945570",
+      "bytes": 500876,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group04.members.json.gz",
+      "SHA256": "d00425a2a6225fd6e273edf9544c60d66c06f81dec7e8c1ccccbb10f41d71da9",
+      "bytes": 601546,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group05.members.json.gz",
+      "SHA256": "d77dd8c4d67b02d237ecaa6e02b7b28eaf4cb358f3d817d421160bb0d701f12a",
+      "bytes": 2230655,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group06.members.json.gz",
+      "SHA256": "c9c6ee2d54b946dc80228353a83109c5c331380f4c01454ff4f68f66d7eca709",
+      "bytes": 1881275,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group07.members.json.gz",
+      "SHA256": "41d1d4ce86ef687eda857e2fcf546c2a256b11a03211b4dfda2a114bac1171f7",
+      "bytes": 52252,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group08.members.json.gz",
+      "SHA256": "25c0a896ff4439bedc8ddc47ca0dadb4fcaf4afa00fb095d789b9428bbe02fb0",
+      "bytes": 49580,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group09.members.json.gz",
+      "SHA256": "9840549c2b9df84a3730997f869dfecfa3109d3ffd84eca51d32b507d4412507",
+      "bytes": 1149238,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/formal_group10.members.json.gz",
+      "SHA256": "def04640defd33e8ac0723044783c785d1a699362e6f6dd65a875fb4972c2c79",
+      "bytes": 1069675,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/historical_selection_snapshots.json",
+      "SHA256": "2f05d057fa75303a34a6e872e45fadfe1edb2e9e91c4d8398d332828ddef2869",
+      "bytes": 68166,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/evidence/qualification_closed_fees.members.json.gz",
+      "SHA256": "842431309bf30d313a34614b756e0dcf45b46057b07f2ebac189aec701b2ebe2",
+      "bytes": 9137,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/execution_binding.json",
+      "SHA256": "c6a17b8fa3c539276ab549f9d8b9baeecb5c39e72df712a28b2a5aa04dec1dde",
+      "bytes": 2044,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/experiment_manifest.json",
+      "SHA256": "b1908e98e2334a52a8c67642fbc5024a7fcbd4cd2da926d7d5bd552654bdac73",
+      "bytes": 12023,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/final_report.md",
+      "SHA256": "51eb181ccf0d3c4685d7f4f23a3d049e652bf7a6f1672ef04253f4f62948d909",
+      "bytes": 13960,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/formal_start_metadata.json",
+      "SHA256": "cb7b573ce24e1e0f7e9e674754ba43b8c2e1bbe2691abd8eb4443968ce43b1da",
+      "bytes": 696,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/generation_receipt.json",
+      "SHA256": "6b546c629581e84ba02ea4795175a3d58d3ccdd4c0eb4b6f47a51fb90ec57a8e",
+      "bytes": 295,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/goal.md",
+      "SHA256": "13df928667537083d1ad7b812990608d13f82a611c15bd77c4bbe8dd464636b6",
+      "bytes": 22654,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/historical_attribution.md",
+      "SHA256": "dec35e8ddc51438b31d2e78f77676c012ee43ef17093fcf23cf95ddf944064b6",
+      "bytes": 3507,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/initialization.json",
+      "SHA256": "6206339f1fb4e4daf96e5253dd8df0514ca6b7fa88b4698407517ba52533add8",
+      "bytes": 2030,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/input_manifest.json",
+      "SHA256": "e01a1a6205ef043d41fd60cc80681744802f5356c634b29563bee9a844966c37",
+      "bytes": 11818,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B20-B.txt",
+      "SHA256": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "bytes": 1271,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B20-B_landscape.json",
+      "SHA256": "d711df97a12dc7b4ba9ed78c4592b3be7ed00d1168434973a500dd5851d5df58",
+      "bytes": 17946,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B20-B_parsed.json",
+      "SHA256": "7cd6c0d21a6489dbcdbde37fb6733909c41f1b215e69ae175511a06f3b383c76",
+      "bytes": 13883,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B20-B_selection.json",
+      "SHA256": "cae0d1cd99d0b16c01c3160ddb0b3b5c78f6e9e8e27b8a1f4c17344a9f860eaa",
+      "bytes": 2049,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B20-B_source_mapping.json",
+      "SHA256": "3f22daca386d00607d7bc769c3a95a0d2b3960d629878e482d9cc39615de11d0",
+      "bytes": 8461,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B30-S.txt",
+      "SHA256": "e8ed0a8859b6704ee167e356e740dddd5804112167209403734bb032d5b7e1b0",
+      "bytes": 1821,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B30-S_landscape.json",
+      "SHA256": "11f213a982e02ce6dfa8ff2af070d7e2f122d2874f3f5d50674e47f2c32bd758",
+      "bytes": 25178,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B30-S_parsed.json",
+      "SHA256": "97247e05edac18fe06837a4b8e4b4355d32bba9efb9d81705ebe302b94a03c8c",
+      "bytes": 28893,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B30-S_selection.json",
+      "SHA256": "badb640603af5ff96799f208fe0e72e03e4f4df5e56cf6665cf7c453560724e3",
+      "bytes": 2098,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-B30-S_source_mapping.json",
+      "SHA256": "d4be2d162f4ffe415fca068254b0c4939418246b2a501905b897a17cf8ac2651",
+      "bytes": 12658,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C15-S.txt",
+      "SHA256": "426136b712e008670775c879b7fe149eb4569eba5c3ab5e12cbc0856dc176695",
+      "bytes": 1009,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C15-S_landscape.json",
+      "SHA256": "5e14b868c5117b01b1d55b7b1e187e0bebb2a3e661b567698c692ebd4a9ef7b8",
+      "bytes": 14358,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C15-S_parsed.json",
+      "SHA256": "ef0bcfd4d54202091ed4def2d6376ffdfd3af92947901dbf81f7087eed839e42",
+      "bytes": 8630,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C15-S_selection.json",
+      "SHA256": "3ef40c087681dfc609a518535b8cd13f666d2f0385950fb07b4b9770290521d2",
+      "bytes": 1967,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C15-S_source_mapping.json",
+      "SHA256": "f2f35f97994bbb1afa7980951d6e98c09f4c499b7c6c6630758d20c8efd6d2df",
+      "bytes": 7690,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C20-U.txt",
+      "SHA256": "e4de3620f2eba0c9c91a18fddbc5db26700914c280e614c37d3c159417f61df5",
+      "bytes": 1297,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C20-U_landscape.json",
+      "SHA256": "97a6975e7f9db90a65196a76ffec51a5756c3a0ee68113bc1a61f05ee84f7fb1",
+      "bytes": 18008,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C20-U_parsed.json",
+      "SHA256": "cdd0584008780168086d8b3070b93d04182e5281a28f86ca2752b3c6a1c9eeaa",
+      "bytes": 14057,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C20-U_selection.json",
+      "SHA256": "e075e4e91ef69b19191d4c1ff7c92a56113fdae14c00a61affe4762af7413aa8",
+      "bytes": 2050,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/inputs/UC-C20-U_source_mapping.json",
+      "SHA256": "ea1639f4ee83297f5c82e2f68e456e16ffbb94071bcb640ffa8dadf9a39b5271",
+      "bytes": 10247,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/literature_evidence.csv",
+      "SHA256": "c8385ebfd4717250cdba3a40fd07f62de21a02e94acefedb9c20d5426cba8079",
+      "bytes": 7121,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/literature_scope.md",
+      "SHA256": "5571c29ef18720ddac762d797bb13d6e39e3f9daa7178a2266d95359ee604996",
+      "bytes": 2792,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/manuscript.md",
+      "SHA256": "ac3529602bdac794fc6eecec48e67e8557a8339df6966e59e7080a9ca9c5e4cd",
+      "bytes": 123660,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/manuscript.pdf",
+      "SHA256": "7c46a76dcb9608bd014f2fa0fcc8457e6e16dc95c3d562acb0df52c0dcb7c169",
+      "bytes": 418395,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/manuscript_lineage.json",
+      "SHA256": "e96b21209a491248980bcbc5e07c5789b1c5db7b854df52c960049b6cfb46e87",
+      "bytes": 2041,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/mechanism_costs.csv",
+      "SHA256": "60b5f9dd510b5eb3a4677e62b327632797d8cc868052ea1ebb0119a00d88e412",
+      "bytes": 22320,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/method_matrix.md",
+      "SHA256": "7af4cb22de21aa005dc659fc7f1c23e8608e99ab117f78aedd26faeed2f9a603",
+      "bytes": 4642,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/method_spec_matrix.csv",
+      "SHA256": "ec5b846ada65d0b56a62814c00c5829bc149b0cf54c879bb5965376e6bf52b7c",
+      "bytes": 13896,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/model_appendix.md",
+      "SHA256": "e003f1481d0fe8750b967c31991fd24b36918be250d8ea2ceb7943def847430a",
+      "bytes": 38377,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/observations.json",
+      "SHA256": "a6f477db31ad56cbc1cffee15a8bd88bfe1cf4087e2471ead48a2fc5fc3632fd",
+      "bytes": 212845,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/pairs.csv",
+      "SHA256": "8cf144b34c3bc522887196878d9cbf0c9269b33cf45f458092f77a7a209e104b",
+      "bytes": 7682,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/paper_method_config.json",
+      "SHA256": "69cbca09114864de32378fa6c2c4648183aaabf433fe52f94a1c89bfb4dee945",
+      "bytes": 15562,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/parsed_binary64_shortage_audit.json",
+      "SHA256": "4277fda011f99a15610824ffd59caeab1b3eb6aa44cd8609daba196bb5099ae0",
+      "bytes": 8343,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/pdf_export.json",
+      "SHA256": "0e24b1480c85163de14883b74d4edcbe09a8141f34f314bad2f9ada1bae12d3a",
+      "bytes": 3544,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/PR_BODY.md",
+      "SHA256": "7110a41810a75dd6bfdeb6116ee406bf611da2e7c4ea43981b5de9815d319864",
+      "bytes": 5706,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/preformal_asset_and_failed_prepare_record.json",
+      "SHA256": "9bf92e4eac02ab74e366a8d5353c19af4acfd8f46b6b1d813da6a262033c36a6",
+      "bytes": 4036,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/raw_archive_manifest.json",
+      "SHA256": "6e48cb99c028f4ed2ba2c14eeeb2c79a1d7e27f9786fe207554d5dc803655888",
+      "bytes": 11734,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/references.bib",
+      "SHA256": "0d1fe40741d66f501892c3185a927191d030c96177dcda56f5467c03fd1ff7a4",
+      "bytes": 6376,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/reproducibility.md",
+      "SHA256": "5b41bb88af6deecc3da7e96777809b503db58556f3940101c4bef4a8b3626700",
+      "bytes": 584,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/resource_accounting.json",
+      "SHA256": "7eb1eb4445d7ded8fef6baaf801837e9522a745e0c7812e7fa32c9c7d4917fa4",
+      "bytes": 56232,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/RESUME.md",
+      "SHA256": "aece5833a37e9ca059bbfe84f9ad264dc7e3174a307764d70b0760c812a2bafa",
+      "bytes": 448,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/argv_identity_correction.json",
+      "SHA256": "700740e4997e5737fd0368c7e7e9acb0f2991f24fa587948cc7d7c28a4f350cc",
+      "bytes": 414698,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/cleanup_guard_qualification.json",
+      "SHA256": "bebf3188d1b510670912ed910a755292e1429efc269664cbf349250bf2ba9e6a",
+      "bytes": 814,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/final_independent_evidence.json",
+      "SHA256": "54dd0788e282059c55542267c26eee8a3ea378f9d578fae1c441112592ba7722",
+      "bytes": 243458,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/final_independent_review.md",
+      "SHA256": "b98a579b132203941e42c1e134249a563a5e60aff36fb86b0233f5df8dabdecd",
+      "bytes": 9997,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/group06_closed_live_group07_snapshot.json",
+      "SHA256": "3cda87f42727ed2c115c5eab3f1890386e38bafcb0b62240409feedd378dff2a",
+      "bytes": 4584,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/offline_path_inspection_search_failure.json",
+      "SHA256": "257225c2441f3276582023c8dca4b040b972b42357010bc7504114b9f259113a",
+      "bytes": 1010,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/offline_utf8_prepare_failure.json",
+      "SHA256": "12af091c89aa7fd5ac761d7c628173d7a145c0d9358d6029f9de3a0fbaa1fe1b",
+      "bytes": 728,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/packing_space_check.json",
+      "SHA256": "bcdcb8c2fd85a2be9cef04198835bac17c306924eb40119eb29ad44e7b12c569",
+      "bytes": 243,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/parent_PR190_at_publication.json",
+      "SHA256": "c79570bc73815d1777a8a24e84614f81d0e2df26143c4d700af1fa84974280fa",
+      "bytes": 9847,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/parent_PR190_prepublication.json",
+      "SHA256": "2ef44f05d4c2a74362d14ff0d6f1f17720988a3268ec92f6e725b0350d4a7a8d",
+      "bytes": 620,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/parent_PR190_readback.json",
+      "SHA256": "a1e95a2968f199a56805143b79fecae80472d79a49f495832d40715619877def",
+      "bytes": 804,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/pdf_first_export_failure.json",
+      "SHA256": "7736bab8b2dfe889094c5a683c39ce16ee1321b5217028c6f4c58706d170e68e",
+      "bytes": 817,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/pdf_prior_visual_review.json",
+      "SHA256": "f918d73fbd058da25ae1437f48c49b77a7e92061c13c5d533cd0d32623fcfd28",
+      "bytes": 2822,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/pdf_render_manifest.json",
+      "SHA256": "e4ce98177fff130bfefa479e9a7057160ab2a8395976984b8f5122263867dba4",
+      "bytes": 2335,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/pdf_visual_review.json",
+      "SHA256": "09f794c8c1fe07eb14026c89042fdc6032af86631f741066e197752333244dd2",
+      "bytes": 3241,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/performance_admission.json",
+      "SHA256": "2c092a459fd0b57113d1c7e3c9bffa9e64cc1d5751d262be3256f7fc7225cd3d",
+      "bytes": 663,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/preformal_independent_review.md",
+      "SHA256": "aaccdebcd88b725e2f4891150aa2668bca6ff1d8d0224ff8be42f518d6da6a33",
+      "bytes": 8883,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review/publication_scan.json",
+      "SHA256": "bfe811bed0f9ce605e7dbced9ec56a550caa75242c0679fd6f3d49d49743ecc5",
+      "bytes": 232,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/review_actions.md",
+      "SHA256": "65e2aba68b3bc0e8f548ed5ed18b9462ec01948190cb64fdfeff51d51e51e3aa",
+      "bytes": 1414,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/runtime_status.json",
+      "SHA256": "4d9096df06157738826fdfe905f884b9ebd9575f73b527316368d30545468d23",
+      "bytes": 251,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/scientific_decision.json",
+      "SHA256": "6d6f5a000d48ed50daaf70fa6866dc8973ec29b7841d75d9466fb28a99611bdc",
+      "bytes": 8256,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/shortage_positive_objective.json",
+      "SHA256": "1fcec5fa6a196693695c9a2de97e07d1164952890356d299136c60033f775baf",
+      "bytes": 5692,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/source_recipe.json",
+      "SHA256": "73b89351ed5ee48c6818ab0eeee173e5be249cfe056c522ad579071c4819227e",
+      "bytes": 15039,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/space_plan.json",
+      "SHA256": "cab030c2945caa23de34944e9954754f08e8ab8d96bf2ddac86318171f0e6bd7",
+      "bytes": 327,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/station_overlap.csv",
+      "SHA256": "da16249ee6851ae0b3235c370d7f32d3369b82dcca018258640a25077e6bf219",
+      "bytes": 4620,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/station_overlap_scope.json",
+      "SHA256": "2ce97e49e03f4f22fced5e8729786cb802b01f9416bb800e927076dd2fd0c1f5",
+      "bytes": 1073,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/station_overlap_tiny_addendum.csv",
+      "SHA256": "2328b186067c95f5d47818628309510bf34746fff45a9459360f219ff6386ce6",
+      "bytes": 543,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/station_overlap_tiny_addendum.json",
+      "SHA256": "cdb0c12a07474cef7dbbd21a43e7698eddd69a68d2cd4a716690e79abcf471d0",
+      "bytes": 1117,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/stratified_summary.json",
+      "SHA256": "adb7759317819aaa855bbb84e055dca3e25e553e6f69898af085453203e61cfa",
+      "bytes": 4368,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/support_two_seeds.csv",
+      "SHA256": "ebeac1bf51b6b5ae64156b833b652da2f53ef68f7a75d42f434176b49904311b",
+      "bytes": 3449,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/tables/complete_results.md",
+      "SHA256": "1482d54fdac4e6921056afcad62d463771e773fd6719b8e57904b00bdde1fd1b",
+      "bytes": 15842,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round129/tables/historical_display.md",
+      "SHA256": "803e01455bfd4e589a4900ccdfc6c4a42cf3d0099add97ede462a40def05f7dd",
+      "bytes": 10600,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "results/unified_exact_round94/preregistration.json",
+      "SHA256": "767b8abe628bb5e84c8c44ddf2b65869f44212e17bea362fc0284b4afb445774",
+      "bytes": 5832,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/analyze_round61.py",
+      "SHA256": "fad9154b399dd9eb3463510f8480dd1e8a22974729902e0a25ec78a9ae551cce",
+      "bytes": 21878,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/compare_round112_startup.py",
+      "SHA256": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2",
+      "bytes": 4703,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/generate_citibike443_regional_v1.py",
+      "SHA256": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
+      "bytes": 127494,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/qualify_round120.py",
+      "SHA256": "24e6c41494abb723d006660b08b754c0075f84dc1279e4bf8bf70a5081ac689a",
+      "bytes": 9792,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/read_round113.py",
+      "SHA256": "84f98aadd30681080af723d4f874f007f0222431f2fb15bffbd6b7fcfc716cc2",
+      "bytes": 29114,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/read_round116.py",
+      "SHA256": "ed5865c5011d239815000f1bf15c591eee8d9e8d933edd857f3a990762230d28",
+      "bytes": 22710,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/read_round118.py",
+      "SHA256": "d9a8e887f10abfb9bdead5b765d033316c96d6134b42163aeb37acdb5b16dbc7",
+      "bytes": 7451,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/read_round120.py",
+      "SHA256": "b7e0e1e81735ae9cc4fe8651f1835688ff404a0d6b78077bec19feddd62735e1",
+      "bytes": 5429,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/read_round121.py",
+      "SHA256": "f7e0b68a903095509bc248b0f47480dd5e1867ccb5924690edf9cd5fadff9e0b",
+      "bytes": 3176,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round100_campaign.py",
+      "SHA256": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "bytes": 11142,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round100_common.py",
+      "SHA256": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca",
+      "bytes": 2347,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round100_idle.py",
+      "SHA256": "093ced41cdae00ed1eab56fb6c1e94b9f22bacfac637da803b8e41ee06821639",
+      "bytes": 1069,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round101_common.py",
+      "SHA256": "6ea42060b3804c125888ffff76facea0519a5219a5110ba8524bf1e9e75d7ce1",
+      "bytes": 2270,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round103_common.py",
+      "SHA256": "67fc725b0a440bf8c557a93da3f9a2c02decfc2b2ffebbbcc7d0d8571bf247d0",
+      "bytes": 2099,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round107_reader.py",
+      "SHA256": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2",
+      "bytes": 48416,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round108_decisions.py",
+      "SHA256": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46",
+      "bytes": 7997,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round108_reader.py",
+      "SHA256": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "bytes": 48982,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round108_scopes.py",
+      "SHA256": "4a9b9570d1142265fdc96b56df4a91021521732b521a649fe0609ac72de0c733",
+      "bytes": 4248,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round109_campaign.py",
+      "SHA256": "881c8a4d818f7c94a08e72a1714c1713cf823ab908406dd0425f2c16ae9db693",
+      "bytes": 17169,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round109_common.py",
+      "SHA256": "4804f3db87ad5b6e6770f300691b125dac9ab122df48c4b2c7a77fb53fc0dcdf",
+      "bytes": 3257,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round109_data.py",
+      "SHA256": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+      "bytes": 6442,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round109_decisions.py",
+      "SHA256": "47483e89f7184762541276b7f5200c3611ca800866708e9ae5c2bb7aa98bae3d",
+      "bytes": 3446,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round109_interval_pairs.py",
+      "SHA256": "61f4f3e8ef00c5bd0ca5bbe9571532772fb1450f1c2fa6ef573e273a4935e279",
+      "bytes": 2976,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round109_prepare.py",
+      "SHA256": "e8684188f2b015d68702d0400570415ec6ef1f15d1f6b46ad5e8b4bb7913342a",
+      "bytes": 10013,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round109_seed_audit.py",
+      "SHA256": "e0e2a076096ba8979ba3a59f376cc0293cb4b5da2a3bb90bfe0311f6085a570e",
+      "bytes": 3632,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round109_seed_scope.py",
+      "SHA256": "08bc7c282a29815b26efac54efa9880d660674328f12a5c83aeef7441044368b",
+      "bytes": 8695,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round110_common.py",
+      "SHA256": "5816ba204c8be606d6dfee36b0823fcd95fb6cc2e4ce90eb46b5a812e91da120",
+      "bytes": 3967,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round111_decisions.py",
+      "SHA256": "bb9a27d5e15cbe52175b228a52f1c8c6c394bdbef5ea227fa9d54924c44a6f63",
+      "bytes": 4603,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round111_seed_audit.py",
+      "SHA256": "da70eb1a01cdcf988fcfe0963ef39692d513cc5ae20ecae18835832bed45e2c5",
+      "bytes": 7300,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round112_audit.py",
+      "SHA256": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+      "bytes": 6424,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round112_campaign.py",
+      "SHA256": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85",
+      "bytes": 11408,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round112_common.py",
+      "SHA256": "de18376ad23be0789a726c4f7bc8bbc09f074571c1afdbefdf7092a068d6d2a8",
+      "bytes": 2687,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round113_audit.py",
+      "SHA256": "02af4e0de90b425b51889e1df860597236fc7ca32c567363e0de982834dfdfe7",
+      "bytes": 15512,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round113_campaign.py",
+      "SHA256": "b76c63ad8a09683e43b737721d55523bd7c1c6ab2aadb5070aa5c6e8b29fd447",
+      "bytes": 10378,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round113_common.py",
+      "SHA256": "f100749161fad2487d652991da0fa6086cce75aad0e037a43d8823a0abf95c1b",
+      "bytes": 3088,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round113_progress.py",
+      "SHA256": "51a0969ded9e0896b85d264fbe30af3cd30813d579136c3c822c845da384b45a",
+      "bytes": 2821,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round114_audit.py",
+      "SHA256": "a8c55a0bcd3d5a7083d1109850fa728f35378c4dafb5a4cc185089c6c530b758",
+      "bytes": 20750,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round114_campaign.py",
+      "SHA256": "abdc9f5fa08965696e17982b0092cae95425e3fb4cad86368b57592893a8b8ab",
+      "bytes": 13305,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round114_claims.py",
+      "SHA256": "d0fc9e2ea15cf37a463c895adf8cfd784762706fd73744c2a99720eebd010149",
+      "bytes": 5103,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round114_common.py",
+      "SHA256": "5fc5e753a51a655d7526ee08177da16df5699495a02eadf55575ed88dca30d9e",
+      "bytes": 2803,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round114_ps.py",
+      "SHA256": "6bf8d31541bce73d33b5fc2d861cacb85da9fe18ecdcf574cfcbff24f4499a3c",
+      "bytes": 15917,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round115_campaign.py",
+      "SHA256": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03",
+      "bytes": 11334,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round115_common.py",
+      "SHA256": "105efd354e72f46abc7fbb30b42949a5f8d6db5d4deb01d2c73f4eac6149d841",
+      "bytes": 4606,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round115_verify.py",
+      "SHA256": "d225751afb1dfc7b29f20d6b1f231c8baed4d6b842ebed8fc0799bdd4523a001",
+      "bytes": 3478,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round118_call_logs.py",
+      "SHA256": "0c719ad386ed7ad3c793ce93bab7bc4f190cd2a2317aeccdccff6279c7b3dca4",
+      "bytes": 9760,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round118_data.py",
+      "SHA256": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+      "bytes": 10434,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round120_campaign.py",
+      "SHA256": "561bd20a09fc1347a8188831979646603bc08e0ce7c98377c30f176945c6d5f0",
+      "bytes": 5229,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round120_common.py",
+      "SHA256": "a1302c682e146294e48e5f78e086a1c0af713775358f64875756b1a222256077",
+      "bytes": 6559,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round120_evidence.py",
+      "SHA256": "db89c758b238bfe2836001c4cf5e270a84d2b2834aa5a552589cb1863a4d9be5",
+      "bytes": 9178,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round120_math_audit.py",
+      "SHA256": "7334f742647aaffa4e29b41d09b43902e9ff399482ef2e83fc02a588400b1afa",
+      "bytes": 6678,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round120_prepare.py",
+      "SHA256": "d0354d810ce2278a220e7d2f58490397b4dd080f5dc290ff1bc15ff9247d6964",
+      "bytes": 11703,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round121_campaign.py",
+      "SHA256": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0",
+      "bytes": 5533,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round121_common.py",
+      "SHA256": "1a401ff0a4ffffbab0265e62d6c46d89b60bad2d2587ffd12999b5db042029f6",
+      "bytes": 6181,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round121_evidence.py",
+      "SHA256": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2",
+      "bytes": 10292,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round122_common.py",
+      "SHA256": "1afde640f299d64fe810506aaedc0d59a2cf3c0b7129b87dc9d84688830e587e",
+      "bytes": 7515,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round122_data.py",
+      "SHA256": "b7997dcd173ee301be7f34949c99cb5f791bf22b84f548d1adceb8d11054d6b9",
+      "bytes": 11091,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round122_evidence.py",
+      "SHA256": "bb3e1e711f4ae1f48c7ef1a1b2092d75627e1104711653fd98aa605fe7a74ea4",
+      "bytes": 10699,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round122_prepare.py",
+      "SHA256": "dbd8544440a9e7a37310984141af86f2d9f9ad8929d41ba181e209cd2c6484ce",
+      "bytes": 10625,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round126_common.py",
+      "SHA256": "beb4c87e81d7a745d3d7f3d94d4e146e4826df4289f6482e45230cb6a8a025b7",
+      "bytes": 5668,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round126_data.py",
+      "SHA256": "5a1f8078f76a74a7d7c862abc1ee489b327c145a695c74e6f982163ebcd7ed21",
+      "bytes": 9892,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round126_export.py",
+      "SHA256": "297a1524ee17c8d25c56b48c5e1405ecee769fc9088eb3835850d4ec4dc8463a",
+      "bytes": 8284,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round126_run.py",
+      "SHA256": "d121a5414c1919bbc1893fff25e2a51ca18a259772bc4a04850f87a2a3f0d939",
+      "bytes": 3481,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round127_analysis.py",
+      "SHA256": "18582a4b98fef8595a557adc7edc318f18b90d5d6dcef00a0fc9353676eb5e83",
+      "bytes": 22631,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round127_campaign.py",
+      "SHA256": "287d33761e3a1d003e35e44eec467697e6218d3b98383daf293e2e1d245b293f",
+      "bytes": 7752,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round127_clocks.py",
+      "SHA256": "55f550d153aadf13a2c0dfd52dbef661830567cba5fbb4ca955a425787d34427",
+      "bytes": 2497,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round127_common.py",
+      "SHA256": "ba0e4a93a6ad90d17784f1ee2a5ef8fcf8905aef0f1b44346a9221eb9ea90e37",
+      "bytes": 6113,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round127_data.py",
+      "SHA256": "de063492c429bc545e87a1fbdb4f7e00c3ad4cb5cff2b2feaada5a3f74aae275",
+      "bytes": 8698,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round127_evidence.py",
+      "SHA256": "d776d0dc999e6199cd376e693885abbd5a3f86616e8238b37645f4c80c96626a",
+      "bytes": 5972,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round127_pipeline.py",
+      "SHA256": "8a621c714d6f04ef046b16745ce8493fccdf023ae05c120b680075d72433edf6",
+      "bytes": 9394,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round127_qualify.py",
+      "SHA256": "ab5c0c12783e7b852dd42642afdc1a276e775b7cc643817959200826518106b6",
+      "bytes": 5972,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round127_release.py",
+      "SHA256": "7b0cf7b2dea9bace1147f3b4cf33ef4599011de023773f8923fa7e441d36c15c",
+      "bytes": 10573,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round128_common.py",
+      "SHA256": "719bc515fcc6fe530fd8baa645162702c18618dadbc8d0537ba9bf97bf0777f1",
+      "bytes": 4508,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round128_documents.py",
+      "SHA256": "7c70f76bd20b5d2522552011573658d86e844b289a1889e9cdb9cb10831580be",
+      "bytes": 20426,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round128_evidence.py",
+      "SHA256": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+      "bytes": 2758,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round128_export.cpp",
+      "SHA256": "a0ea0671a8934c10452e0eb1e250aac092ae605c7aa6310ee479f1c94d653780",
+      "bytes": 4641,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_analysis.py",
+      "SHA256": "3d1c303e272094c4451f34d29eb2423189f05b7f7e1c7c797ac3e174b752054a",
+      "bytes": 11454,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_campaign.py",
+      "SHA256": "469bb1449aee973e97768e9dbd414f89cf697dee37bd60e36288302716a59b21",
+      "bytes": 7516,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_cleanup.ps1",
+      "SHA256": "b0c22b96e5dbbe82117a6e100d954496ff3fdef3167983bff7cf60b8e45356c9",
+      "bytes": 6851,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_closeout.py",
+      "SHA256": "764077e9212d941c8fabf23f02019d69ccced05d723d8fec3b11f8ebc289b628",
+      "bytes": 7111,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_common.py",
+      "SHA256": "85620b7359824fb6872c1138b5c282ecaf29a89c1e1228f4363628de434cb835",
+      "bytes": 5137,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_data.py",
+      "SHA256": "5e37e3fa0febdf373b1a92131c43566e2a0baf80d6fa408fcfd15673385c8674",
+      "bytes": 15284,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_data_audit.py",
+      "SHA256": "4c19656ca58f76218b3685732c0d440082b7f71adf451fa1c3ac0be7b0100a93",
+      "bytes": 4690,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_decision.py",
+      "SHA256": "1ef0f93a07b79115dd917136f032bfb9a7e2dbbbef01910cb38738d55bb09eb5",
+      "bytes": 10494,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_delivery.py",
+      "SHA256": "1aee34ffad64f4fd99427548824e3ee9297ecbc3a0dc424772dc49506223c1e8",
+      "bytes": 10909,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_documents.py",
+      "SHA256": "220705c2da197d8f7dcb5c82f674e082c81a14fadc88fbc3385259a5541df397",
+      "bytes": 23926,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_formal.py",
+      "SHA256": "cfa5476bd8309ca325788fd53caa4d447028e83db5b8d0e73ae6dc0f97e0bcff",
+      "bytes": 3858,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_overlap_addendum.py",
+      "SHA256": "c41b66c47e5ce8e73330b70a7d392561ceeff96a5f4b5f62d131d634310ed33c",
+      "bytes": 1900,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_pdf_review.py",
+      "SHA256": "76021374ff99c42780f9316817b2ade1f584627e7ba7f747087307b0fb7f26c6",
+      "bytes": 2457,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_portable_check.py",
+      "SHA256": "f6f444cf9417395b804dfe18e5e88e8c938dc2813e4dc83fd11abde5b1c5fedd",
+      "bytes": 38629,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_public_restore.py",
+      "SHA256": "74a01993a496121ded6efa6745035e5c4fb55a4b74a257c64c6b73829510007e",
+      "bytes": 8605,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_qualify.py",
+      "SHA256": "a975dcb071fd59f80b8f12430678dbb6fc211d9aabc39a55a5690e500c72c21d",
+      "bytes": 4039,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_release.py",
+      "SHA256": "3d002d0c5005ea8227f367a8510875e3a7a950d229a9e4b2f325e7b8ad302838",
+      "bytes": 6076,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round129_status.py",
+      "SHA256": "092694e809fe950720832957a6f7c41fb43fadb256b00476703fc157fd581315",
+      "bytes": 2209,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round61_research.py",
+      "SHA256": "3a288c045e58bbc7e19dad330db2bdae4257daaf63a66313ee32b89205e14955",
+      "bytes": 13710,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round69_research.py",
+      "SHA256": "d7579acdaf24beea19a6724b1a6d57269b5036fb67e0d53f6e152a2db24ce272",
+      "bytes": 9887,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round69_topology.py",
+      "SHA256": "80254cd7cdaf8cdadc7d31fddc1c196f55fd6754d56da18cb2e4010223864212",
+      "bytes": 2219,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round70_affinity.py",
+      "SHA256": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+      "bytes": 4509,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round73_qualify.py",
+      "SHA256": "b4428f5a42b2e58d8ca6c84fbb5d28ae1c678f8f41e9bdbba4f6954c01e88efd",
+      "bytes": 3559,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round73_seed_diagnostic.py",
+      "SHA256": "3263595bf7ddda4472d6c519b136faec7b3f9d4ab4e3009bb5bf108d9cc0e3c8",
+      "bytes": 12727,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round75_qualify.py",
+      "SHA256": "c82f757cde7e0915f097749925e54e19cf9e9d0c483ada6d9654439ce580232f",
+      "bytes": 5227,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round75_startup.py",
+      "SHA256": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "bytes": 12402,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round76_qualify.py",
+      "SHA256": "c56ab8d49cd664d1433d5dfa0fbe2670ccc390a05ea3a2abd60e479ba26dca72",
+      "bytes": 5321,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round76_startup.py",
+      "SHA256": "993c448dd466d5288ed61003ac339c63002452c86737c9d7ee46457b56e6f929",
+      "bytes": 14239,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round78_audit.py",
+      "SHA256": "57f4aa7ba6d1b0c20d95779c08d27fd4f1d25164cbbe26ca2a0ae7c090fa58ea",
+      "bytes": 7346,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round83_audit_v2.py",
+      "SHA256": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+      "bytes": 7547,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round86_native_evidence.py",
+      "SHA256": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+      "bytes": 11468,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round88_a1_g3.py",
+      "SHA256": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+      "bytes": 35352,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round90_lp_g_g3.py",
+      "SHA256": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996",
+      "bytes": 51527,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round94_lpg_contemporary.py",
+      "SHA256": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a",
+      "bytes": 55473,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round94_lpg_formal_recovery_v3.py",
+      "SHA256": "7d54f6bfd2a0fec302b7cdf5d0291809254ea1ffdbc864face54ecc704b7ce01",
+      "bytes": 25366,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round96_external.py",
+      "SHA256": "4d8f917ce46aa0945319d69e8001006a7cb039ff4a274844e53c6774eeb5d57e",
+      "bytes": 7554,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round96_prepare.py",
+      "SHA256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+      "bytes": 8730,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round99_common.py",
+      "SHA256": "bd1ecd710fa4e52093e6027a247ce77c4ddaa00b56ee0ef499cd45ccd41f8208",
+      "bytes": 2378,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "scripts/round99_pure_start_audit.py",
+      "SHA256": "c769dbdc978025ba84cbb8f566d493018f912f35c74346047434e2e21af4f882",
+      "bytes": 8007,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Bounds.cpp",
+      "SHA256": "05c6e795b4c22c27ae55dbca07a99901006259cc56fb3e3ae0fc259bace561ed",
+      "bytes": 136634,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Branching.cpp",
+      "SHA256": "86bec005e02bf4410ea74119abcd669bc102bf78b7b911a73c53a22e9e3f83bb",
+      "bytes": 1772,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ColumnGeneration.cpp",
+      "SHA256": "9a8cae6d1fcd7f80e52d44eeb63e85cc7c2fb9cf587c56dc57f8c8bc17325eb3",
+      "bytes": 215247,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ColumnPool.cpp",
+      "SHA256": "64469057f76da3ccc16832091f791024fda67dd99cfe67e30138b4062cb88325",
+      "bytes": 11156,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/compare_main.cpp",
+      "SHA256": "901a8ad8a32f72ea931fb173ef97ae0e0b9d143a3effde9a56e9bf17928d6930",
+      "bytes": 56923,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ConnectivityFlow.cpp",
+      "SHA256": "14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46",
+      "bytes": 10991,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ControllingLeafScheduler.cpp",
+      "SHA256": "6bbc7e773355bac11e2fb60d9ec4641d57eedd7baf29c38de6eba3cde3674303",
+      "bytes": 46072,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/CplexBaseline.cpp",
+      "SHA256": "8e93eec1403d26b629c851746c90c2c2ec1ffc2c683b959c1f37f06d4be6cc72",
+      "bytes": 391228,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Cuts.cpp",
+      "SHA256": "08065ae482dd559403579810bcb5f74abe4b8ca685d33d2ff967dd9aceda8fb0",
+      "bytes": 4584,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/DenseProgress.cpp",
+      "SHA256": "6fa297312cedc09d58011bd7e7514fb332d8fd6a22bfe4be8fc49b06c9b878d6",
+      "bytes": 20110,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/DispersionChildBound.cpp",
+      "SHA256": "753d447cf19d2b77fff1ad715236af12f7ea2e1fceef7bf4ac4e171a156f3cc3",
+      "bytes": 6869,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Evaluator.cpp",
+      "SHA256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+      "bytes": 6239,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ExternalGiniTree.cpp",
+      "SHA256": "4e51bc6e3b0e9993b317c6c4aa0fb659f5cd88a71d19fe78608fa80c85e1bfae",
+      "bytes": 71577,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/FileSha256.cpp",
+      "SHA256": "f53636fafb00848a9cdff7c03c70dcf506f4080b1711869694608776789ac45a",
+      "bytes": 3709,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/FleetEventCuts.cpp",
+      "SHA256": "ba093f046223191e0feea5c80d79a32ca35d2a9183495e3e388b3dd59a83ba5d",
+      "bytes": 27072,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/GiniAdaptiveParametric.cpp",
+      "SHA256": "dff46ddba14238ebf8ff18633cc02169c15272437850da321198e5a6ee35f44b",
+      "bytes": 20421,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/GiniBranching.cpp",
+      "SHA256": "33e1ec3fee27fd4d1302da9b4671bc547bddfbb8c6ae074f3f80b410cd7da149",
+      "bytes": 1616,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/GiniEnvelopeRefinement.cpp",
+      "SHA256": "dd60cf05867aee9de7f07ee519a09797315595c93755506566e1dd2e802c7659",
+      "bytes": 25904,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/GiniEnvelopeTailRepair.cpp",
+      "SHA256": "97ae5837ba352215e35e613d919e09356fac600ecada5aa5922110b44c071465",
+      "bytes": 19448,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/GiniFrontierGeometry.cpp",
+      "SHA256": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f",
+      "bytes": 24213,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/GurobiBaseline.cpp",
+      "SHA256": "da64cd65881aca91ac7eca2932f2cd489306380334c8c3bfa8d592887c0b625c",
+      "bytes": 295695,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/GurobiBaselineStub.cpp",
+      "SHA256": "2d112d5919f7b9a3b197ae75076f70c9a00f6da0d5a66192f7aea36094904033",
+      "bytes": 3452,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/GurobiCertificate.cpp",
+      "SHA256": "1c47526e0139d264917e5a8ab71fb873277f7353ce0c7ec47e02487fef7f01bd",
+      "bytes": 5706,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/GurobiProgress.cpp",
+      "SHA256": "9cccfb4ecdf359cbd98a63174357d0b9e263ba9278b06d884c3c970b65deaea7",
+      "bytes": 1999,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/hga_tgbc/HgaTgbcGreedy.cpp",
+      "SHA256": "871b3f3e024e273bbc8ee55d60dfc29f11d5282891eae1ed1419da02119821cd",
+      "bytes": 100387,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/HgaTgbcRunner.cpp",
+      "SHA256": "418fa40968a22196c72eb48879e7bc4a72bb8f7a570faba99b77814248e5d8a5",
+      "bytes": 27569,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/IntervalRowFactory.cpp",
+      "SHA256": "e2fa0d2a7f28da39b34f09c03060f1c7a004d3f37884651c66e2519313394655",
+      "bytes": 40343,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/InventoryRouteCuts.cpp",
+      "SHA256": "f76e9dcf44339358b21cd2c2c508e32165d95ce43801160cd62329119ecee8fc",
+      "bytes": 14074,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/InventoryRouteRootClosure.cpp",
+      "SHA256": "543545f781a57d693434cc2b22902f45c84ae46c6615ff25a68d833004d94845",
+      "bytes": 13514,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Logger.cpp",
+      "SHA256": "3cbab7e975f5c97ee5bbe98984716fc44c245f48604f329ad9d41d144d415b63",
+      "bytes": 566,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/main.cpp",
+      "SHA256": "c1508b72562ad67107c3ba8874487e1468883c0fca343811b5b5ef1e0d442479",
+      "bytes": 1127772,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Master.cpp",
+      "SHA256": "c18046da62482e8de2cbfc3df09bb4053e631cde830b6925d5e5921d44c2d1f0",
+      "bytes": 5470,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/MipStartMapping.cpp",
+      "SHA256": "0273526e80f452bd074b912bec2d14fe0e960c36208c0d586ebfc19db281fe13",
+      "bytes": 15693,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ModelCorrectness.cpp",
+      "SHA256": "112499f70aee6865855532cfceb253d164433368626bf4c8fed3539b40c6e3ec",
+      "bytes": 5342,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/NativeEvidenceJournal.cpp",
+      "SHA256": "446d39aec3a0d45471d4172281b2d94c680104acc297db2ca1b814d18b0b6af7",
+      "bytes": 13423,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/NativeOtB1.cpp",
+      "SHA256": "e4722c675c6470d85f369a80304adace4403b61c579d95c6ff62594b8576ef0b",
+      "bytes": 23390,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ObjectiveResourceCompression.cpp",
+      "SHA256": "60dc25830ee0e50a7770553adef178eb595337aa3eeabd8ef6710dd645b6e81d",
+      "bytes": 5115,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "SHA256": "c92ee7e79edf71dbd793b10d0644a5a2878b229d3c2598b38e0513382bd13570",
+      "bytes": 534570,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/PaperK1AmSf.cpp",
+      "SHA256": "a46dc43c2b0cba21b427d1c38884114e6b68f3e52f6c13493b609aecde702440",
+      "bytes": 8632,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Parser.cpp",
+      "SHA256": "acc0897e687dde82355f2153272e2fb1c68c1ec5507a549894109dd51b4b4ccc",
+      "bytes": 8480,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/PenaltyCoverSeparation.cpp",
+      "SHA256": "6d1e696bc893390e03019fd2f116449a0830cde2f0c347081a79a9ed4cdc0d49",
+      "bytes": 11451,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/PhysicalWitnessValidation.cpp",
+      "SHA256": "0004bd96cad2cf70ad1bf56826ed632b2e6927209e4d172c6526889d610ad678",
+      "bytes": 4881,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Pricing.cpp",
+      "SHA256": "061ac766fee8bf0bc7ed206130e9e2ab2de74e78924ee7f077c7a4a35c1e6083",
+      "bytes": 104029,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ProcessPhaseLedger.cpp",
+      "SHA256": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+      "bytes": 3200,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ReplicaExternalGiniTree.cpp",
+      "SHA256": "697640629d71bd75414bfd0b8203f6fccd9c8faf99fddabfcdfc2e83bd1bd003",
+      "bytes": 56998,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Result.cpp",
+      "SHA256": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+      "bytes": 250280,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round100_model_export.cpp",
+      "SHA256": "2ad6f259661bb717ad9d073814dfeb652e930a88a22a38796e88b0783240242c",
+      "bytes": 1718,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round101_fleet_diagnostic.cpp",
+      "SHA256": "a0a499fe8d557ab8be1910f84debc01aea91f90b5ca410cfd97cbf6c9e6791f0",
+      "bytes": 2146,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round102_service_diagnostic.cpp",
+      "SHA256": "3ee62d0885c387b092fa2d7ee7098ac733899fa4170aa7a70e2b3f167c6150c6",
+      "bytes": 2403,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round103_hull_oracle.cpp",
+      "SHA256": "fa6c78610a767ca6d73d95f1a94e43654a2e1ffaa71f670211501a8872584df2",
+      "bytes": 2544,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round103GurobiHull.inc",
+      "SHA256": "3a7013e5225d239f6c169b6f9df172258ef3ba1308572e86e915ff7ed3045761",
+      "bytes": 20303,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round104_compress_main.cpp",
+      "SHA256": "7a421040cfc9d23ae4249a156b9cde324247047af0e89f989355af511b5b0160",
+      "bytes": 1762,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round104GurobiObjective.inc",
+      "SHA256": "3f302ad895de1f449fa157b0e79e465f057b7f40839fa0db9ba279a1bb1a58ed",
+      "bytes": 27457,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round105_oracle_main.cpp",
+      "SHA256": "4b57b2c09a19a0a0acb752ba77413ab9728b9ee5ed801f2e226cbd9b4443fee8",
+      "bytes": 1596,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round105Decomposition.cpp",
+      "SHA256": "14539f42283d74e88bad7b7b5a69a78718cae69ae751d37f4a5df22d10bb6ae6",
+      "bytes": 6918,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round105GurobiDecomposition.inc",
+      "SHA256": "92f31755e43820d24564bf27c44e1c3869e181752a5516d20bee742979c91ab6",
+      "bytes": 32656,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round106_research_main.cpp",
+      "SHA256": "e8b0702249b21ddfbc9fd81d1c212e72eec9f7169732317eb655f83b1396baeb",
+      "bytes": 1920,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round106Events.cpp",
+      "SHA256": "c8ad10f87de50557c60ffade40eeba5827f5c67d821cc7159f92b127e4f56fe0",
+      "bytes": 9894,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round106GurobiEvents.inc",
+      "SHA256": "94bc21f018e0b66a795dab81ade0746a11980a634d5039ff00c03a0c8c96d7b1",
+      "bytes": 34131,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round106GurobiResearch.inc",
+      "SHA256": "e9123e34a40129b6358a8981777a89190ea102c327ebb4aa120a9a2caa3d4e6f",
+      "bytes": 14031,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round107GurobiFrontier.inc",
+      "SHA256": "248a9fdd263c8ee8db882d68875366589d22b09c948373a253a1e3687c4e461a",
+      "bytes": 63118,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round112CompactStart.inc",
+      "SHA256": "eac79743634dd5b7a5c8b4721831ed5967a35bab62d2009ceb542f7ff739419d",
+      "bytes": 7117,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round119ProofContraction.cpp",
+      "SHA256": "ccb0eb0e6108cf59c3c69748366c023de0b652b2c4c210932e0e72eb4ad3a78f",
+      "bytes": 8381,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round120NativeProof.cpp",
+      "SHA256": "40c72a1f78da2e005e7e0ecf2c9a1d2efa2a0aa1cb413837cba9a82277cca9ce",
+      "bytes": 13709,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round48K1AMF.cpp",
+      "SHA256": "305e00e21e7ab23f5b3bb0d3919b4fb6d9edbd9c147b5ebe832056c531a8640f",
+      "bytes": 13732,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round49_rc_extract_main.cpp",
+      "SHA256": "1c72138b30fb5cc04a8db9b5584276ae375c96e4adc6f2e9ce376e974452fa8e",
+      "bytes": 5408,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round49K1RC.cpp",
+      "SHA256": "5b2f7dc45b6403ad940ea3be1156ae941c68b15c984c04344d2f404433051bcb",
+      "bytes": 18118,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round50_interval_mip_main.cpp",
+      "SHA256": "0b19b941e8e116b84af79c55c393b2fa66f7a7a88aea1e32188274138d6e7514",
+      "bytes": 87700,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round50IntervalMip.cpp",
+      "SHA256": "627d22610210ac1b748f363dbfd3b6e02f655b5b561655be59723627f13ebba7",
+      "bytes": 17237,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round51IntervalMip.cpp",
+      "SHA256": "b0133b20bf47e45405d1167232f547f655a567d3fdfaff04df3f5401cf3824d0",
+      "bytes": 9669,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round52GurobiCutAdapter.cpp",
+      "SHA256": "6ee0f1ba27c5243e421feb5c8d7bdc60aae7e99d11f2d3b3f23c7050a7d4f3a0",
+      "bytes": 2841,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round52TailoredCuts.cpp",
+      "SHA256": "90c64a6be953cf0c274805923bb364cd4bbb0238ccc2bf3b13f4b06dea267e41",
+      "bytes": 16967,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round53CallbackIsolation.cpp",
+      "SHA256": "28583d0f4d42d6a3ed5d3f707aefccde681bb7e41286a657e3b1796324e3df91",
+      "bytes": 1533,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round54_inventory_route_main.cpp",
+      "SHA256": "c859ba94550e1d33adf535e21fb6bdb0f44763d7d8d6765370f65968692c8986",
+      "bytes": 26970,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round58Benchmark.cpp",
+      "SHA256": "f81e84821c892de3b99f7a79beb3317c3f9b37c4b51051f7192d0aaf812dabdd",
+      "bytes": 6023,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round60Candidates.cpp",
+      "SHA256": "63bef04086c0cf9a3d9c94a430550d5b33e120c662e4b07940bd841662b0d333",
+      "bytes": 16609,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round61_candidate_main.cpp",
+      "SHA256": "d0e1916a7327f851515a28d6665bb24ab97441b737156dacc960518290a665a8",
+      "bytes": 7255,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round61_time_main.cpp",
+      "SHA256": "7930aac4126b4ea8e5e96a84d9ab4deeadd7d67cb722f146d49cf8f7db80fa50",
+      "bytes": 2410,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round61Candidates.cpp",
+      "SHA256": "c22fd9723df604fc3be20f47ca0cf674b5fec475bff6a5f8091bd68879d14501",
+      "bytes": 19999,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round61TimeOracle.cpp",
+      "SHA256": "b5876fb8ea2174a67f64bea4d52cbfc4a4c3a49803ee2965358b3aaa784b4576",
+      "bytes": 18640,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round62_native_micro.cpp",
+      "SHA256": "4699beecac1cc1e1c53c65928d53d63ab4890c008203992c1fc806bb567d29b9",
+      "bytes": 4953,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round62_projection_audit.cpp",
+      "SHA256": "95b9eb7390a22b1d2a487f70aba5818b618ce7a16f9035300d591f54de4f6e3d",
+      "bytes": 12107,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round62_threshold_main.cpp",
+      "SHA256": "a6e52bcb7cac428f207d955c2e796026bee57b998247eb34f34e44e166a2bec5",
+      "bytes": 2093,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round62Passive.cpp",
+      "SHA256": "da73ae99af2d0069f5d453abf69673cb771b9d973eed4405d30d85595e1ce4d4",
+      "bytes": 3531,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round62Thresholds.cpp",
+      "SHA256": "474c49d10d710785fb063a4f538391cd6618b456cf256da4f6a6686cd4923256",
+      "bytes": 19778,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round63_resource_probe.cpp",
+      "SHA256": "7336c2171f89b042235ae64d1ca5379e30fcc4eb0dfc428e46a924eb958c0759",
+      "bytes": 15567,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round63TimeResource.cpp",
+      "SHA256": "599f1223413718b9b1ac2d185175626ea98b14ba82b4537abcb1e43a4a38a9a2",
+      "bytes": 11533,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round64_projection_audit.cpp",
+      "SHA256": "2d53c7dea4e2bd272910193cf3f38000c236316610fdd2eb066893adf93ec732",
+      "bytes": 12156,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round64_resource_probe.cpp",
+      "SHA256": "3af5b4f053208723d5411d2f3181b26c96a2176d2b8fcf5e5b9d56f172cb7100",
+      "bytes": 9206,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round64SharedResource.cpp",
+      "SHA256": "60ee4ebbeb1f3d9b7211267a42087dd0a1254617cac1551187bb5699976fb625",
+      "bytes": 5508,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round65_reference_build.cpp",
+      "SHA256": "2a0dbd56af5158baf86b7397cf7d384e194fbe10172df41f683188ba6215c417",
+      "bytes": 2711,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round65Projection.cpp",
+      "SHA256": "2461d281782026f8982bd334de3b1ae9fa1486f390642724842629b741cdbad9",
+      "bytes": 14130,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round73JointInsertion.cpp",
+      "SHA256": "e624fb74f575cce78ede760d7b52c3778d933621fc057a9f65d5a45f93716034",
+      "bytes": 14626,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round75QuantityDescent.cpp",
+      "SHA256": "f904a7f7355e897df1aff3d07757d8c2ac5b8dff134235c061637d46a87c0075",
+      "bytes": 16645,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round76PhysicalClosure.cpp",
+      "SHA256": "d39f05d34532e666c4e0ebcc08a311f2383a3d33a46d520f2cdd58981c4b675e",
+      "bytes": 4689,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round78BalancedRelocation.cpp",
+      "SHA256": "d082472fbb77d103345a9e77c6a17a815feb46b281c2491a13c8b8ded5eb4393",
+      "bytes": 15936,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round83BlockExchange.cpp",
+      "SHA256": "5a70c158a75f447c40fbff995703339cb5b59c551cba1be193283947724644a5",
+      "bytes": 12512,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round92HandlingActivation.cpp",
+      "SHA256": "d638d09f4cf1e474da620444f10d0b30a28d2dd8b235993cb88a49d76ff363e5",
+      "bytes": 20049,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round93CoQuantityDescent.cpp",
+      "SHA256": "cf3ea08852f56a10bceeb59c169ff92de4d9d8aad0914a7233985ce7da4f2012",
+      "bytes": 14863,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round95FullBlockDescent.cpp",
+      "SHA256": "10b390f6b47a77ff25812e8c990e17f1ba956d4121d1eced910a72aab479dcfb",
+      "bytes": 15061,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round96MultiQuantity.cpp",
+      "SHA256": "0fdc37a2ebdaf08dc63fe161a64c423b513fd56593ccec8c351e73fd49d16238",
+      "bytes": 5830,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round96RouteOrder.cpp",
+      "SHA256": "b8e354f80ca57d97a5ac712df03c6313c6d013f5edb618e8dfb0b023e56303a8",
+      "bytes": 7334,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/Round97NativeClosure.cpp",
+      "SHA256": "39f7d168a288a6fece32d7985160dd7a2d8a1756c918465ad588e6c81fb19731",
+      "bytes": 21491,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round98_model_export.cpp",
+      "SHA256": "ea7080903574ee0b11b56311add6e929d31f50f20f3a06a1227f01590e65ce28",
+      "bytes": 1681,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/round99_model_export.cpp",
+      "SHA256": "f01cd1b44cc2706d68492a875dbfdc393dc780ede63ab712227006e5fc8e26cf",
+      "bytes": 1708,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ServiceResourceCuts.cpp",
+      "SHA256": "f1f0e97b47dbc9e6038f797892fa33764e843253ccca2cc0b49ac4c632a452fc",
+      "bytes": 16211,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/ServiceResourceHull.cpp",
+      "SHA256": "d567e9f9e270e65a98a357830214af19b527c44f9891589cdaa452b29164d10b",
+      "bytes": 9414,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/StaticSegmentedGini.cpp",
+      "SHA256": "7c717ddd668a1ce54320fd0dff98010a5f16270fae5727c0641657a8911f90ed",
+      "bytes": 16389,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/StrictCertificate.cpp",
+      "SHA256": "a1858bb0945e64fc709bd3534b4e02f07d7d5481cca075d3a8ebc07916372ef9",
+      "bytes": 12134,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/TailoredBC.cpp",
+      "SHA256": "b350b2d94aec9ad507f256d281dd7a2deb9f08b05ddfb777cfcadcedad44ee15",
+      "bytes": 5222,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/TailoredBCCallbacks.cpp",
+      "SHA256": "33a4bc26911359f523b3ff5cb0af0a2193386f0ceabaf1b90250ccc54890736b",
+      "bytes": 2243,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/TailoredBCCplexApi.cpp",
+      "SHA256": "931084a6b586966196b38a7e324b6a73e4d0a494c28273b540c19e7e0bae67e7",
+      "bytes": 351106,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/TailoredBCCuts.cpp",
+      "SHA256": "a115454a170fce8b31a439d0ad5cfdadacac7f6b9f0d5761a39b5196a97b7705",
+      "bytes": 177,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    },
+    {
+      "path": "src/TailoredExact.cpp",
+      "SHA256": "d7193cdda00408912c5adca4f4b8f13f3fe6f71e32ee6e5ab5c5be36cc6e7f84",
+      "bytes": 57558,
+      "serialization": "exact bytes; inherited Git text transport may require hash-checked LF/CRLF materialization"
+    }
+  ],
+  "file_count": 463,
+  "archive_manifest": "results/unified_exact_round129/raw_archive_manifest.json",
+  "no_native_software_licenses_fonts_or_external_full_papers": true,
+  "one_empty_root_recovery_only": true,
+  "no_historical_raw_carrier_recovered": true
+}

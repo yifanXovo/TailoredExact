@@ -1,0 +1,250 @@
+{
+  "UTC": "2026-10-22T02:10:58.336085+00:00",
+  "execution": "COMPLETE",
+  "tag": "RECOMMEND_UNIFORM_MS2_AS_PAPER_CANDIDATE",
+  "conditions": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true
+  },
+  "condition_descriptions": {
+    "1": "Retain per-Seed and both-Seed new-problem certification counts relative to MB",
+    "2": "Add no per-Seed P-certified/method-open risk relative to MB",
+    "3": "Retain every protected MB certificate and avoid a large slowdown at both Seeds",
+    "4": "One new input has eligible triple deletion and material MS2/MB support at both Seeds",
+    "5": "One new input gives direct MS2/P certification Wins at both Seeds"
+  },
+  "proof_or_identity_issue_observations": [],
+  "new_certificate_counts_by_Seed": {
+    "0": {
+      "P": 1,
+      "MB": 2,
+      "MS2": 2
+    },
+    "1": {
+      "P": 1,
+      "MB": 2,
+      "MS2": 2
+    }
+  },
+  "new_both_Seed_certified_problem_counts": {
+    "P": 1,
+    "MB": 2,
+    "MS2": 2
+  },
+  "new_P_certified_method_open_by_Seed": {
+    "0": {
+      "MB": 0,
+      "MS2": 0
+    },
+    "1": {
+      "MB": 0,
+      "MS2": 0
+    }
+  },
+  "protection": [
+    {
+      "seed": 0,
+      "MB_certified": true,
+      "MS2_certified": true,
+      "certificate_retained": true,
+      "MB_T_cert": 393.72116255841684,
+      "MS2_T_cert": 369.5885372000048,
+      "MS2_minus_MB_seconds": -24.132625358412042,
+      "slow_at_least_max30_or25pct": false
+    },
+    {
+      "seed": 1,
+      "MB_certified": true,
+      "MS2_certified": true,
+      "certificate_retained": true,
+      "MB_T_cert": 413.76707609998994,
+      "MS2_T_cert": 294.1556603999343,
+      "MS2_minus_MB_seconds": -119.61141570005566,
+      "slow_at_least_max30_or25pct": false
+    }
+  ],
+  "new_input_evidence": [
+    {
+      "id": "UC-C15-S",
+      "seeds": [
+        {
+          "seed": 0,
+          "MS2_MB_class": "BOTH_OPEN",
+          "MS2_MB_direction": "UNDETERMINED",
+          "MS2_P_class": "BOTH_OPEN",
+          "MS2_P_direction": "UNDETERMINED",
+          "triple_deletion_exposed": true,
+          "component_interpretation_eligible": true,
+          "zero_or_no_backend": false,
+          "MS2_saving_seconds": null,
+          "material_gain_threshold": null,
+          "both_certified_material_gain": false,
+          "MS2_only_certified": false,
+          "rule4_seed_signal": false,
+          "rule5_seed_win": false
+        },
+        {
+          "seed": 1,
+          "MS2_MB_class": "BOTH_OPEN",
+          "MS2_MB_direction": "UNDETERMINED",
+          "MS2_P_class": "BOTH_OPEN",
+          "MS2_P_direction": "UNDETERMINED",
+          "triple_deletion_exposed": true,
+          "component_interpretation_eligible": true,
+          "zero_or_no_backend": false,
+          "MS2_saving_seconds": null,
+          "material_gain_threshold": null,
+          "both_certified_material_gain": false,
+          "MS2_only_certified": false,
+          "rule4_seed_signal": false,
+          "rule5_seed_win": false
+        }
+      ],
+      "rule4_both_Seeds": false,
+      "rule5_both_Seeds": false
+    },
+    {
+      "id": "UC-B20-B",
+      "seeds": [
+        {
+          "seed": 0,
+          "MS2_MB_class": "BOTH_CERTIFIED",
+          "MS2_MB_direction": "Win",
+          "MS2_P_class": "BOTH_CERTIFIED",
+          "MS2_P_direction": "Win",
+          "triple_deletion_exposed": true,
+          "component_interpretation_eligible": true,
+          "zero_or_no_backend": false,
+          "MS2_saving_seconds": 0.3870731645729393,
+          "material_gain_threshold": 10,
+          "both_certified_material_gain": false,
+          "MS2_only_certified": false,
+          "rule4_seed_signal": false,
+          "rule5_seed_win": true
+        },
+        {
+          "seed": 1,
+          "MS2_MB_class": "BOTH_CERTIFIED",
+          "MS2_MB_direction": "Win",
+          "MS2_P_class": "BOTH_CERTIFIED",
+          "MS2_P_direction": "Win",
+          "triple_deletion_exposed": true,
+          "component_interpretation_eligible": true,
+          "zero_or_no_backend": false,
+          "MS2_saving_seconds": 0.18455209990497679,
+          "material_gain_threshold": 10,
+          "both_certified_material_gain": false,
+          "MS2_only_certified": false,
+          "rule4_seed_signal": false,
+          "rule5_seed_win": true
+        }
+      ],
+      "rule4_both_Seeds": false,
+      "rule5_both_Seeds": true
+    },
+    {
+      "id": "UC-C20-U",
+      "seeds": [
+        {
+          "seed": 0,
+          "MS2_MB_class": "BOTH_CERTIFIED",
+          "MS2_MB_direction": "Win",
+          "MS2_P_class": "LEFT_ONLY_CERTIFIED",
+          "MS2_P_direction": "Win",
+          "triple_deletion_exposed": true,
+          "component_interpretation_eligible": true,
+          "zero_or_no_backend": false,
+          "MS2_saving_seconds": 147.14697017136496,
+          "material_gain_threshold": 70.15250405999832,
+          "both_certified_material_gain": true,
+          "MS2_only_certified": false,
+          "rule4_seed_signal": true,
+          "rule5_seed_win": true
+        },
+        {
+          "seed": 1,
+          "MS2_MB_class": "BOTH_CERTIFIED",
+          "MS2_MB_direction": "Win",
+          "MS2_P_class": "LEFT_ONLY_CERTIFIED",
+          "MS2_P_direction": "Win",
+          "triple_deletion_exposed": true,
+          "component_interpretation_eligible": true,
+          "zero_or_no_backend": false,
+          "MS2_saving_seconds": 151.4149586869171,
+          "material_gain_threshold": 63.25196057870053,
+          "both_certified_material_gain": true,
+          "MS2_only_certified": false,
+          "rule4_seed_signal": true,
+          "rule5_seed_win": true
+        }
+      ],
+      "rule4_both_Seeds": true,
+      "rule5_both_Seeds": true
+    },
+    {
+      "id": "UC-B30-S",
+      "seeds": [
+        {
+          "seed": 0,
+          "MS2_MB_class": "BOTH_OPEN",
+          "MS2_MB_direction": "UNDETERMINED",
+          "MS2_P_class": "BOTH_OPEN",
+          "MS2_P_direction": "UNDETERMINED",
+          "triple_deletion_exposed": true,
+          "component_interpretation_eligible": true,
+          "zero_or_no_backend": false,
+          "MS2_saving_seconds": null,
+          "material_gain_threshold": null,
+          "both_certified_material_gain": false,
+          "MS2_only_certified": false,
+          "rule4_seed_signal": false,
+          "rule5_seed_win": false
+        },
+        {
+          "seed": 1,
+          "MS2_MB_class": "BOTH_OPEN",
+          "MS2_MB_direction": "UNDETERMINED",
+          "MS2_P_class": "BOTH_OPEN",
+          "MS2_P_direction": "UNDETERMINED",
+          "triple_deletion_exposed": true,
+          "component_interpretation_eligible": true,
+          "zero_or_no_backend": false,
+          "MS2_saving_seconds": null,
+          "material_gain_threshold": null,
+          "both_certified_material_gain": false,
+          "MS2_only_certified": false,
+          "rule4_seed_signal": false,
+          "rule5_seed_win": false
+        }
+      ],
+      "rule4_both_Seeds": false,
+      "rule5_both_Seeds": false
+    }
+  ],
+  "rule4_supporting_new_inputs": [
+    "UC-C20-U"
+  ],
+  "rule5_supporting_new_inputs": [
+    "UC-B20-B",
+    "UC-C20-U"
+  ],
+  "candidate_mapping": {
+    "binary": "original E2",
+    "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+    "full_MB_mode": "--round127-mode mb",
+    "uniform_MS2_mode": "--round127-mode ms2",
+    "difference": "omit only all triple support cover/conditional rows for every input; retain full frozen remainder"
+  },
+  "current_paper_identity_and_defaults_changed": false,
+  "old_MB_tables_relabelled": false,
+  "all_fixed_results_retained": true,
+  "extra_experiments_to_get_favorable_result": 0,
+  "decision_scope": "finite research recommendation, not statistical significance, population dominance or V50/V60 final validation",
+  "authorities": {
+    "observations_SHA": "a6f477db31ad56cbc1cffee15a8bd88bfe1cf4087e2471ead48a2fc5fc3632fd",
+    "protocol_SHA": "b1908e98e2334a52a8c67642fbc5024a7fcbd4cd2da926d7d5bd552654bdac73"
+  }
+}

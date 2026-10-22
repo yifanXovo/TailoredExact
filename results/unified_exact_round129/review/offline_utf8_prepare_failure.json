@@ -1,0 +1,14 @@
+{
+  "UTC": "2026-10-21T21:41:06.196900+00:00",
+  "kind": "offline_text_preparation_failure",
+  "failed_command": "s=Path('scripts/round129_documents.py').read_text()",
+  "error": "UnicodeDecodeError: 'gbk' codec can't decode byte 0xa8 in position 11284: illegal multibyte sequence",
+  "source_SHA_before": "599c15303fa65d5bc4c2a9423ce88b3c8ae29e772d88da31d7ded68c837137d0",
+  "failed_before_any_write": true,
+  "repair": "Explicit UTF-8 read; original producer/seals/native process untouched",
+  "Optimize": 0,
+  "H_calls": 0,
+  "native_starts": 0,
+  "formal_recovery_allowance_used": false,
+  "fee_scope": "0.2690218 seconds observed tool command within the already running formal group meter; not added again"
+}
