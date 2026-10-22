@@ -1,0 +1,13 @@
+{"case":"actual_heterogeneous_H","passed":true,"rejected":false,"submission_API_calls":1,"native_Optimize_calls":0,"fault_injected":false,"physical_valid_before_fault":true,"reason":""}
+{"case":"empty_vehicle_0","passed":true,"rejected":false,"submission_API_calls":1,"native_Optimize_calls":0,"fault_injected":false,"physical_valid_before_fault":true,"reason":""}
+{"case":"loaded_return","passed":true,"rejected":false,"submission_API_calls":1,"native_Optimize_calls":0,"fault_injected":false,"physical_valid_before_fault":true,"reason":""}
+{"case":"unsupported_column","passed":true,"rejected":true,"submission_API_calls":0,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":true,"reason":"round112_mapping_unsupported_complete_start_column:unsupported_round112_column"}
+{"case":"bound_violation","passed":true,"rejected":true,"submission_API_calls":0,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":true,"reason":"round112_mapping_start_bound_violation:G"}
+{"case":"type_violation","passed":true,"rejected":true,"submission_API_calls":0,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":true,"reason":"round112_mapping_start_integrality_violation:G"}
+{"case":"row_violation","passed":true,"rejected":true,"submission_API_calls":0,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":true,"reason":"round112_rows_linear_constraint_violation"}
+{"case":"objective_mismatch","passed":true,"rejected":true,"submission_API_calls":0,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":true,"reason":"round112_objective_mismatch"}
+{"case":"invalid_physical","passed":true,"rejected":true,"submission_API_calls":0,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":false,"reason":"normalization requires verified complete routes"}
+{"case":"submit_api_failure","passed":true,"rejected":true,"submission_API_calls":1,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":true,"reason":"round112_start_api_777"}
+{"case":"readback_api_failure","passed":true,"rejected":true,"submission_API_calls":1,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":true,"reason":"round112_start_api_778"}
+{"case":"nonfinite_readback","passed":true,"rejected":true,"submission_API_calls":1,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":true,"reason":"round112_start_readback_mismatch"}
+{"case":"readback_mismatch","passed":true,"rejected":true,"submission_API_calls":1,"native_Optimize_calls":0,"fault_injected":true,"physical_valid_before_fault":true,"reason":"round112_start_readback_mismatch"}

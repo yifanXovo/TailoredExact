@@ -4988,6 +4988,16 @@ SolveResult solveGurobiBaseline(const Instance& instance,
                 recordProcessPhase(options,"round112_compact_start","start");
                 round112Submit(api,model,instance,options,*paid_ens_start,
                     log_path.string()+".round112.start",paid_start_values,paid_start_types);
+                int focus=0,cuts=-1,starts=0;
+                if(!model_env || api.getintparam(model_env,"MIPFocus",&focus)!=0 ||
+                   api.getintparam(model_env,"Cuts",&cuts)!=0 ||
+                   api.getintattr(model,"NumStart",&starts)!=0 ||
+                   focus!=0 || cuts!=-1 || starts!=1)
+                    throw std::runtime_error("round130_paid_compact_parameter_or_Start_readback_failed");
+                std::ofstream receipt(std::filesystem::path(options.out_path).parent_path()/"round130_parameters.json");
+                receipt<<"{\"MIPFocus\":"<<focus<<",\"Cuts\":"<<cuts<<",\"NumStart_before_optimize\":"<<starts
+                    <<",\"loaded_after_presets\":true,\"authoritative_model_environment\":true}\n";
+                if(!receipt)throw std::runtime_error("round130_paid_compact_parameter_receipt_write_failed");
                 recordProcessPhase(options,"round112_compact_start","complete");
             } catch(...) {cleanup();throw;}
         }

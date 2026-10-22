@@ -1,0 +1,461 @@
+{
+  "round": 130,
+  "base": "ce70acd2fb3fa6b7d0033f0cbc74c2aab3113d73",
+  "groups": [
+    {
+      "name": "campaign/group01",
+      "role": {
+        "j": 1,
+        "id": "UC-B20-B",
+        "source": "CABI",
+        "V": 20,
+        "M": 2,
+        "geometry": "regional",
+        "replicate": 2,
+        "inventory": "balanced",
+        "Q_vector": [
+          20,
+          40
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-B20-B_regional_r2",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "known_role_attribution_diagnostic",
+        "input_path": "results/unified_exact_round130/inputs/UC-B20-B.txt",
+        "instance_path": "results/unified_exact_round129/inputs/UC-B20-B.txt",
+        "input_sha256": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+        "input_bytes": 1271,
+        "selection_path": "results/unified_exact_round129/inputs/UC-B20-B_selection.json",
+        "landscape_path": "results/unified_exact_round129/inputs/UC-B20-B_landscape.json",
+        "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+        "total_initial": 151,
+        "total_target": 151,
+        "total_capacity": 304,
+        "sum_weights": 11.83,
+        "source_input_path": "results/unified_exact_round129/inputs/UC-B20-B.txt",
+        "prospective_new_validation": false
+      },
+      "seed": 0,
+      "methods": [
+        "P",
+        "PS",
+        "S2",
+        "S2R"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "PS",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "S2",
+          "S2R"
+        ],
+        [
+          "S2R",
+          "PS"
+        ]
+      ]
+    },
+    {
+      "name": "campaign/group02",
+      "role": {
+        "j": 1,
+        "id": "UC-B20-B",
+        "source": "CABI",
+        "V": 20,
+        "M": 2,
+        "geometry": "regional",
+        "replicate": 2,
+        "inventory": "balanced",
+        "Q_vector": [
+          20,
+          40
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-B20-B_regional_r2",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "known_role_attribution_diagnostic",
+        "input_path": "results/unified_exact_round130/inputs/UC-B20-B.txt",
+        "instance_path": "results/unified_exact_round129/inputs/UC-B20-B.txt",
+        "input_sha256": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+        "input_bytes": 1271,
+        "selection_path": "results/unified_exact_round129/inputs/UC-B20-B_selection.json",
+        "landscape_path": "results/unified_exact_round129/inputs/UC-B20-B_landscape.json",
+        "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+        "total_initial": 151,
+        "total_target": 151,
+        "total_capacity": 304,
+        "sum_weights": 11.83,
+        "source_input_path": "results/unified_exact_round129/inputs/UC-B20-B.txt",
+        "prospective_new_validation": false
+      },
+      "seed": 1,
+      "methods": [
+        "S2R",
+        "S2",
+        "PS",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "PS",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "S2",
+          "S2R"
+        ],
+        [
+          "S2R",
+          "PS"
+        ]
+      ]
+    },
+    {
+      "name": "campaign/group03",
+      "role": {
+        "j": 2,
+        "id": "UC-C20-U",
+        "source": "CITI",
+        "V": 20,
+        "M": 2,
+        "geometry": "regional",
+        "replicate": 1,
+        "inventory": "surplus",
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-C20-U_regional_r1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "known_role_attribution_diagnostic",
+        "input_path": "results/unified_exact_round130/inputs/UC-C20-U.txt",
+        "instance_path": "results/unified_exact_round129/inputs/UC-C20-U.txt",
+        "input_sha256": "e4de3620f2eba0c9c91a18fddbc5db26700914c280e614c37d3c159417f61df5",
+        "input_bytes": 1297,
+        "selection_path": "results/unified_exact_round129/inputs/UC-C20-U_selection.json",
+        "landscape_path": "results/unified_exact_round129/inputs/UC-C20-U_landscape.json",
+        "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+        "total_initial": 416,
+        "total_target": 371,
+        "total_capacity": 731,
+        "sum_weights": 8.816664,
+        "source_input_path": "results/unified_exact_round129/inputs/UC-C20-U.txt",
+        "prospective_new_validation": false
+      },
+      "seed": 0,
+      "methods": [
+        "PS",
+        "S2R",
+        "P",
+        "S2"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "PS",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "S2",
+          "S2R"
+        ],
+        [
+          "S2R",
+          "PS"
+        ]
+      ]
+    },
+    {
+      "name": "campaign/group04",
+      "role": {
+        "j": 2,
+        "id": "UC-C20-U",
+        "source": "CITI",
+        "V": 20,
+        "M": 2,
+        "geometry": "regional",
+        "replicate": 1,
+        "inventory": "surplus",
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-C20-U_regional_r1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "known_role_attribution_diagnostic",
+        "input_path": "results/unified_exact_round130/inputs/UC-C20-U.txt",
+        "instance_path": "results/unified_exact_round129/inputs/UC-C20-U.txt",
+        "input_sha256": "e4de3620f2eba0c9c91a18fddbc5db26700914c280e614c37d3c159417f61df5",
+        "input_bytes": 1297,
+        "selection_path": "results/unified_exact_round129/inputs/UC-C20-U_selection.json",
+        "landscape_path": "results/unified_exact_round129/inputs/UC-C20-U_landscape.json",
+        "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+        "total_initial": 416,
+        "total_target": 371,
+        "total_capacity": 731,
+        "sum_weights": 8.816664,
+        "source_input_path": "results/unified_exact_round129/inputs/UC-C20-U.txt",
+        "prospective_new_validation": false
+      },
+      "seed": 1,
+      "methods": [
+        "S2",
+        "P",
+        "S2R",
+        "PS"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "PS",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "S2",
+          "S2R"
+        ],
+        [
+          "S2R",
+          "PS"
+        ]
+      ]
+    },
+    {
+      "name": "campaign/group05",
+      "role": {
+        "j": 3,
+        "id": "UC-B30-S",
+        "source": "CABI",
+        "V": 30,
+        "M": 3,
+        "geometry": "compact",
+        "replicate": 2,
+        "inventory": "shortage",
+        "Q_vector": [
+          25,
+          25,
+          25
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-B30-S_compact_r2",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "known_role_attribution_diagnostic",
+        "input_path": "results/unified_exact_round130/inputs/UC-B30-S.txt",
+        "instance_path": "results/unified_exact_round129/inputs/UC-B30-S.txt",
+        "input_sha256": "e8ed0a8859b6704ee167e356e740dddd5804112167209403734bb032d5b7e1b0",
+        "input_bytes": 1821,
+        "selection_path": "results/unified_exact_round129/inputs/UC-B30-S_selection.json",
+        "landscape_path": "results/unified_exact_round129/inputs/UC-B30-S_landscape.json",
+        "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+        "total_initial": 156,
+        "total_target": 186,
+        "total_capacity": 381,
+        "sum_weights": 10.148769999999999,
+        "source_input_path": "results/unified_exact_round129/inputs/UC-B30-S.txt",
+        "prospective_new_validation": false
+      },
+      "seed": 0,
+      "methods": [
+        "S2",
+        "P",
+        "S2R",
+        "PS"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "PS",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "S2",
+          "S2R"
+        ],
+        [
+          "S2R",
+          "PS"
+        ]
+      ]
+    },
+    {
+      "name": "campaign/group06",
+      "role": {
+        "j": 3,
+        "id": "UC-B30-S",
+        "source": "CABI",
+        "V": 30,
+        "M": 3,
+        "geometry": "compact",
+        "replicate": 2,
+        "inventory": "shortage",
+        "Q_vector": [
+          25,
+          25,
+          25
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "selection_id": "r129_UC-B30-S_compact_r2",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "panel_kind": "known_role_attribution_diagnostic",
+        "input_path": "results/unified_exact_round130/inputs/UC-B30-S.txt",
+        "instance_path": "results/unified_exact_round129/inputs/UC-B30-S.txt",
+        "input_sha256": "e8ed0a8859b6704ee167e356e740dddd5804112167209403734bb032d5b7e1b0",
+        "input_bytes": 1821,
+        "selection_path": "results/unified_exact_round129/inputs/UC-B30-S_selection.json",
+        "landscape_path": "results/unified_exact_round129/inputs/UC-B30-S_landscape.json",
+        "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+        "total_initial": 156,
+        "total_target": 186,
+        "total_capacity": 381,
+        "sum_weights": 10.148769999999999,
+        "source_input_path": "results/unified_exact_round129/inputs/UC-B30-S.txt",
+        "prospective_new_validation": false
+      },
+      "seed": 1,
+      "methods": [
+        "PS",
+        "S2R",
+        "P",
+        "S2"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "PS",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "S2",
+          "S2R"
+        ],
+        [
+          "S2R",
+          "PS"
+        ]
+      ]
+    }
+  ],
+  "pairs": [
+    [
+      "S2",
+      "P"
+    ],
+    [
+      "PS",
+      "P"
+    ],
+    [
+      "S2",
+      "PS"
+    ],
+    [
+      "S2",
+      "S2R"
+    ],
+    [
+      "S2R",
+      "PS"
+    ]
+  ],
+  "sole_paper_method": "GI-TBC (uniform pair-support implementation, MS2)",
+  "method_short_name": "S2",
+  "formal_arms": 24,
+  "typed_shared_comparisons": 30,
+  "nominal_formal_seconds": 28800,
+  "total_outer_limit": 39600,
+  "build_qualification_limit": 3600,
+  "management_reference": 720,
+  "own_H_seed": 20260626,
+  "Threads": 1,
+  "MIPThreads": 1,
+  "affinity_mask": 4,
+  "shutdown_reserve": 30,
+  "native_offset": 6,
+  "hard_stop_offset": 2,
+  "MIPGap": 0,
+  "MIPGapAbs": 0,
+  "FeasibilityTol": 1e-06,
+  "IntFeasTol": 1e-05,
+  "OptimalityTol": 1e-06,
+  "Presolve": -1,
+  "MIPFocus": 0,
+  "Cuts": -1,
+  "max_external_failure_whole_group_recoveries": 1,
+  "normal_results_retry": false,
+  "extra_experiments_authorized": false,
+  "selected_MS2_is_fixed": true,
+  "repository_default_changed": false,
+  "material_difference": "slower-faster >= max(10,0.10*faster)",
+  "methods": {
+    "P": "cold original compact",
+    "PS": "independently paid complete H and full original-compact Start",
+    "S2": "E2 ms2 unchanged",
+    "S2R": "s2-root inclusive pair-support root LP + MIP"
+  }
+}

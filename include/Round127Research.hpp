@@ -11,7 +11,7 @@ namespace ebrp {
 // the frozen production archive can be linked with replaced translation units.
 // Nothing chooses a mode from an instance, filename, size, Seed or elapsed time.
 struct Round127Controls {
-    std::string mode = "off"; // off|p|mb|md|mr|mg|ms2|md-r
+    std::string mode = "off"; // off|p|mb|md|mr|mg|ms2|md-r|s2-root
     std::string parameter_file;
     int mip_focus = 0;
     int cuts = -1;
@@ -19,9 +19,11 @@ struct Round127Controls {
 inline Round127Controls& round127() { static Round127Controls c; return c; }
 inline bool round127Mb() {
     const auto& m=round127().mode;
-    return m=="mb" || m=="md" || m=="mr" || m=="mg" || m=="ms2" || m=="md-r";
+    return m=="mb" || m=="md" || m=="mr" || m=="mg" || m=="ms2" || m=="md-r" || m=="s2-root";
 }
-inline bool round128InclusiveRoot() { return round127().mode=="md-r"; }
+inline bool round128InclusiveRoot() {
+    return round127().mode=="md-r" || round127().mode=="s2-root";
+}
 inline bool round127Md() { return round127().mode=="md" || round128InclusiveRoot(); }
 // This named proof shortcut is not an inequality valid for the inclusive
 // F<=U0 physical set. Preserve the penalty bound and all genuine domain rows.
@@ -31,7 +33,9 @@ inline bool round128EmitIntervalNoImproverDomainClosure() {
 }
 inline bool round127EmitCR() { return round127().mode!="mr"; }
 inline bool round127EmitCG() { return round127().mode!="mg"; }
-inline bool round127EmitTriple() { return round127().mode!="ms2"; }
+inline bool round127EmitTriple() {
+    return round127().mode!="ms2" && round127().mode!="s2-root";
+}
 inline void round127Validate(const SolveOptions& opt) {
     auto& c=round127();
     if(c.mode!="off" && c.mode!="p" && !round127Mb())
