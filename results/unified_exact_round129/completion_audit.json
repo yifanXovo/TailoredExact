@@ -1,0 +1,96 @@
+{
+  "UTC": "2026-10-22T03:12:53.486998+00:00",
+  "status": "COMPLETE_SCIENCE_AND_DELIVERY_FINAL_METADATA_PUSH_PENDING",
+  "decision": "RECOMMEND_UNIFORM_MS2_AS_PAPER_CANDIDATE",
+  "actual_requirements": [
+    {
+      "requirement": "Precommit recipe / once-only unscreened generation",
+      "evidence": "source_recipe.json; preregistration commits; input_manifest.json; independent evidence",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "Same E2 / DLL / frozen argv and production source",
+      "evidence": "E2_identity.json; argv_freeze.json; independent review",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "All30 fixed arms /10 groups; no tuning or retry",
+      "evidence": "experiment_manifest.json; reconstructed group receipts",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "All30 typed comparisons / null open clocks",
+      "evidence": "arms.csv; pairs.csv; independent evidence",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "All five candidate rules and protection",
+      "evidence": "scientific_decision.json; candidate_decision.md",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "Actual H/root/difference and cost attribution",
+      "evidence": "actual_method_differences.json; mechanism_costs.csv",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "Open / reverse / signed-gap / inherited negative evidence retained",
+      "evidence": "final_report.md; manuscript.md; independent review",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "Separate final executor / physical / matrix / certificate chain",
+      "evidence": "review/final_independent_review.md",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "Maintained manuscript / PDF and affected-page QA",
+      "evidence": "manuscript_lineage.json; review/pdf_visual_review.json",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "Current finite publication content scan",
+      "evidence": "review/publication_scan.json; export_manifest.json",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "One anonymous science-commit empty-root recovery",
+      "evidence": "public_restore_receipt.json",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "Owned cleanup / raw and user protection",
+      "evidence": "cleanup_receipt.json; review/final_protection_check.json",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "Closed outer accounting under39600, no double counting",
+      "evidence": "resource_accounting.json",
+      "completed": true,
+      "scope": "actual finite evidence"
+    },
+    {
+      "requirement": "One stacked open Draft PR / normal pushes",
+      "evidence": "review/created_PR_readback.json; final local post-push readback",
+      "completed": true,
+      "scope": "actual finite evidence; final normal metadata push/readback remains"
+    }
+  ],
+  "scientific_and_delivery_obligations_completed": true,
+  "final_short_metadata_push_readback_pending": true,
+  "no_extra_experiment_or_second_recovery_authorized": true,
+  "snapshot_precedes_own_metadata_commit": true,
+  "final_live_remote_readback_storage": "review/final_remote_observation.local.json"
+}
