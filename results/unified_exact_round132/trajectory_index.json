@@ -485,6 +485,208 @@
       ],
       "no_interpolation": true,
       "scope": "Actual own-run trajectories and bound/cover sources; native call bounds are not automatically full-domain bounds. No endpoint backfill or common-time gap comparison is manufactured."
+    },
+    {
+      "line": "D",
+      "id": "K-20-S",
+      "seed": 0,
+      "method": "P",
+      "sources": [
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/01_K-20-S_S0_R1_P/samples.jsonl",
+          "bytes": 7088,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/01_K-20-S_S0_R1_P/observations.json",
+          "bytes": 3167827,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/01_K-20-S_S0_R1_P/native_claims.json",
+          "bytes": 7528550,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/01_K-20-S_S0_R1_P/independent_evidence.json",
+          "bytes": 211463,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/01_K-20-S_S0_R1_P/native.log",
+          "bytes": 31528,
+          "SHA": null
+        },
+        {
+          "path": "results/gurobi_work/K-20-S_plain_814475193/gurobi.progress.csv",
+          "bytes": 1453614,
+          "SHA": null,
+          "scope": "actual compact native callback trajectory outside the arm directory; current-only carrier member"
+        }
+      ],
+      "no_interpolation": true,
+      "scope": "Actual own-run trajectories and bound/cover sources; native call bounds are not automatically full-domain bounds. No endpoint backfill or common-time gap comparison is manufactured."
+    },
+    {
+      "line": "D",
+      "id": "K-20-S",
+      "seed": 0,
+      "method": "S2",
+      "sources": [
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/progress.csv",
+          "bytes": 720,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/samples.jsonl",
+          "bytes": 7070,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/observations.json",
+          "bytes": 23188207,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/native_claims.json",
+          "bytes": 76079526,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/independent_evidence.json",
+          "bytes": 88494,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/native.log",
+          "bytes": 1732,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/external/paper_optimize_ledger.csv",
+          "bytes": 2178,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/external/lp_status_ledger.csv",
+          "bytes": 482,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/external/paper_tree_events.csv",
+          "bytes": 519,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group05/raw/02_K-20-S_S0_R1_S2/external/split_decision_ledger.csv",
+          "bytes": 566,
+          "SHA": null
+        }
+      ],
+      "no_interpolation": true,
+      "scope": "Actual own-run trajectories and bound/cover sources; native call bounds are not automatically full-domain bounds. No endpoint backfill or common-time gap comparison is manufactured."
+    },
+    {
+      "line": "D",
+      "id": "K-20-S",
+      "seed": 1,
+      "method": "S2",
+      "sources": [
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/progress.csv",
+          "bytes": 720,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/samples.jsonl",
+          "bytes": 6722,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/observations.json",
+          "bytes": 16485340,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/native_claims.json",
+          "bytes": 57350366,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/independent_evidence.json",
+          "bytes": 92065,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/native.log",
+          "bytes": 1732,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/external/paper_optimize_ledger.csv",
+          "bytes": 2187,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/external/lp_status_ledger.csv",
+          "bytes": 491,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/external/paper_tree_events.csv",
+          "bytes": 538,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/01_K-20-S_S1_R1_S2/external/split_decision_ledger.csv",
+          "bytes": 566,
+          "SHA": null
+        }
+      ],
+      "no_interpolation": true,
+      "scope": "Actual own-run trajectories and bound/cover sources; native call bounds are not automatically full-domain bounds. No endpoint backfill or common-time gap comparison is manufactured."
+    },
+    {
+      "line": "D",
+      "id": "K-20-S",
+      "seed": 1,
+      "method": "P",
+      "sources": [
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/02_K-20-S_S1_R1_P/samples.jsonl",
+          "bytes": 6792,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/02_K-20-S_S1_R1_P/observations.json",
+          "bytes": 3699821,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/02_K-20-S_S1_R1_P/native_claims.json",
+          "bytes": 9606369,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/02_K-20-S_S1_R1_P/independent_evidence.json",
+          "bytes": 171161,
+          "SHA": null
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group06/raw/02_K-20-S_S1_R1_P/native.log",
+          "bytes": 28559,
+          "SHA": null
+        },
+        {
+          "path": "results/gurobi_work/K-20-S_plain_818183361/gurobi.progress.csv",
+          "bytes": 1539990,
+          "SHA": null,
+          "scope": "actual compact native callback trajectory outside the arm directory; current-only carrier member"
+        }
+      ],
+      "no_interpolation": true,
+      "scope": "Actual own-run trajectories and bound/cover sources; native call bounds are not automatically full-domain bounds. No endpoint backfill or common-time gap comparison is manufactured."
     }
   ],
   "common_time_comparisons": "not claimed; retained actual trajectories only"

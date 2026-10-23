@@ -19,14 +19,16 @@
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
     "D:K:S2/P": {
-      "problems": 2,
-      "repeated_comparisons": 4,
+      "problems": 3,
+      "repeated_comparisons": 6,
       "directions": {
-        "Win": 4
+        "Win": 4,
+        "UNDETERMINED": 2
       },
       "classes": {
         "LEFT_ONLY_CERTIFIED": 2,
-        "BOTH_CERTIFIED": 2
+        "BOTH_CERTIFIED": 2,
+        "BOTH_OPEN": 2
       },
       "certificates": {
         "P": 2,
@@ -183,6 +185,24 @@
       "conditional_geometric_mean_right_over_left": null,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
+    "D:S2/P:id=K-20-S": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
     "D:S2/P:V=15": {
       "problems": 2,
       "repeated_comparisons": 4,
@@ -211,15 +231,35 @@
       "conditional_geometric_mean_right_over_left": 14.490866691998752,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
-    "D:S2/P:objective_class=positive": {
-      "problems": 2,
-      "repeated_comparisons": 4,
+    "D:S2/P:V=20": {
+      "problems": 1,
+      "repeated_comparisons": 2,
       "directions": {
-        "Win": 4
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:objective_class=positive": {
+      "problems": 3,
+      "repeated_comparisons": 6,
+      "directions": {
+        "Win": 4,
+        "UNDETERMINED": 2
       },
       "classes": {
         "LEFT_ONLY_CERTIFIED": 2,
-        "BOTH_CERTIFIED": 2
+        "BOTH_CERTIFIED": 2,
+        "BOTH_OPEN": 2
       },
       "certificates": {
         "P": 2,
@@ -265,6 +305,24 @@
         }
       ],
       "conditional_geometric_mean_right_over_left": 14.490866691998752,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:K:S2/P:V=20": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
     "D:S2/PS:id=K-15-S": {
@@ -340,9 +398,9 @@
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     }
   },
-  "D_arms": 10,
+  "D_arms": 14,
   "C_arms": 0,
-  "manuscript_D_statement": "The full new-input campaign has 10/60 sealed independently paid observations. In K, S2/P qualified certificate counts are 4/2 across 4 repeated comparisons on 2 problems; strict directions are {'Win': 4}. These are finite within-mechanism and geography-transfer observations; same-problem Seeds are repeats, and both-open times remain censored. PS attribution is confined to its prospectively selected six-problem subset.",
+  "manuscript_D_statement": "The full new-input campaign has 14/60 sealed independently paid observations. In K, S2/P qualified certificate counts are 4/2 across 6 repeated comparisons on 3 problems; strict directions are {'Win': 4, 'UNDETERMINED': 2}. These are finite within-mechanism and geography-transfer observations; same-problem Seeds are repeats, and both-open times remain censored. PS attribution is confined to its prospectively selected six-problem subset.",
   "manuscript_C_statement": "The cost panel has 0/24 sealed same-build workflows. Any native-process or cost change is not an ideal relaxation-strength increase; unexposed root/node fields remain unknown.",
   "seed_repeats_not_independent": true,
   "full_raw_signed_gaps_preserved": true

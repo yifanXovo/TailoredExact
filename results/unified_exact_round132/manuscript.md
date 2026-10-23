@@ -163,13 +163,24 @@ The separate tiny layer has two inputs, three Seeds and two opposite-order repea
 
 Both original 35-station roles remain open for both methods at their 2400-second caps and original Seed 0. Their final certification-time ordering is unknown. Earlier results at 50/60 stations retain their historical M-B/ENS identity and do not extend final-S2 validation. The complete signed endpoints and all three clocks are in the supporting tables.
 
+**Table 3. Every original known 35-station boundary observation (Seed 0; seconds).**
+
+| Known role / method | U / L | Signed U-L | T_produce | T_verify | T_total | T_cert |
+| --- | --- | --- | --- | --- | --- | --- |
+| PB-C35-U / P | 0.17477189 / 0.05970290 | 0.115069 | 2370.823 | 1.107 | 2371.930 | null |
+| PB-C35-U / S2 | 0.18370156 / 0.08472828 | 0.0989733 | 2370.592 | 5.475 | 2376.067 | null |
+| PB-B35-B / P | 0.30555578 / 0.00000000 | 0.305556 | 2370.555 | 0.546 | 2371.101 | null |
+| PB-B35-B / S2 | 0.24650447 / 0.12194212 | 0.124562 | 2370.807 | 5.246 | 2376.053 | null |
+
+P retains the lower physical U on PB-C35-U, while S2 retains the lower U on PB-B35-B. These endpoint directions do not rank the unobserved certification times. All four T_cert entries remain null; T_total includes the separate independent verification.
+
 ### 5.3 Prospective known-source and geography-transfer validation
 
 The new study fixes six K and six X inputs before H or optimization. K uses the existing CITI/CABI source snapshots and generator; X uses an official Chicago Divvy station snapshot with UTM16N conversion and the same synthetic target, inventory and weight rules. This changes geography, not the demand-generation mechanism and not real operational validation. The source snapshots, field provenance, missing/duplicate handling, IDs, coordinates, transformations and one-time seeds are retained. No difficulty-based filter or redraw is applied.
 
 The six roles per layer cover shortage, balanced and surplus scenarios and compact/regional geometry at 15, 20 and 35 stations. New sets from the same source are disjoint, rather than nested enlargements. Five K roles have no overlap with the recorded historical small selections. K-35-B follows the preregistered next exposure tier and has partial historical overlap, so its stations are not all unseen. Shortage is guaranteed structurally by total initial stock below total target and positive weights/lambda; balanced or surplus zero objectives remain legitimate outcomes.
 
-**Table 3. Fixed new-input design, physical/computational limits and effective weights.**
+**Table 4. Fixed new-input design, physical/computational limits and effective weights.**
 
 | Input | Source / inventory / geography | n / Q | Physical T / cap (s) | Omega / rho |
 | --- | --- | --- | --- | --- |
@@ -188,9 +199,9 @@ The six roles per layer cover shortage, balanced and surplus scenarios and compa
 
 All twelve inputs have independently paid P and S2 at both Seeds: 48 arms. The preselected 15-S, 20-U and 35-B role in each layer also has PS at both Seeds: 12 additional arms. The PS subset is fixed without reference to which method wins. K/X, sizes and positive/zero outcomes are reported separately; shared controls and Seed repeats are not independent new problems.
 
-The prospective layer currently has 10 of 60 sealed formal observations. Results are pending until the fixed complete table and its final evidence review are available; no provisional trend is used for method selection.
+The prospective layer currently has 14 of 60 sealed formal observations. Results are pending until the fixed complete table and its final evidence review are available; no provisional trend is used for method selection.
 
-**Table 4. Every fixed new-input method position (seconds).**
+**Table 5. Every fixed new-input method position (seconds).**
 
 | New input / Seed | P | S2 | PS (preselected subset) |
 | --- | --- | --- | --- |
@@ -198,8 +209,8 @@ The prospective layer currently has 10 of 60 sealed formal observations. Results
 | K-15-S / 1 | O @ 570.746 | C 114.759 | O @ 571.207 |
 | K-15-B / 0 | C 478.447 | C 29.201 | not selected |
 | K-15-B / 1 | C 465.514 | C 36.323 | not selected |
-| K-20-S / 0 | pending | pending | not selected |
-| K-20-S / 1 | pending | pending | not selected |
+| K-20-S / 0 | O @ 1171.019 | O @ 1171.416 | not selected |
+| K-20-S / 1 | O @ 1170.687 | O @ 1171.715 | not selected |
 | K-20-U / 0 | pending | pending | pending |
 | K-20-U / 1 | pending | pending | pending |
 | K-35-B / 0 | pending | pending | pending |
@@ -241,7 +252,7 @@ The known-role cost panel contains four problems, two Seeds and three expression
 
 Both research expressions passed their actual-matrix, default-off, behavioral and physical Start qualification. The fixed cost panel is awaiting serial execution; this qualification is not a performance result.
 
-**Table 5. Every fixed same-build expression workflow (seconds).**
+**Table 6. Every fixed same-build expression workflow (seconds).**
 
 
 ### 6.3 What a new joint quantity structure would have to add
@@ -252,11 +263,24 @@ The existing independent-support/unique-access bound cannot separate points alre
 
 The finite complete four-station joint-structure comparison is preregistered. Its required computation remains pending; later full-source diagnostics and any production algorithm are conditional on a valid incremental structure and a complete outside-station interface.
 
+The complete tiny universes have four stations with capacity 2, target 1 and weight 1; all station and depot coordinates coincide. Both pickup and drop take 60 seconds per bicycle, including return unloading, and lambda is 0.15. J2/J3 cover shortage under two handling budgets; J1 is a balanced control and J4 is the physical startup-zero control. The current canonical continuous reference uses the same complete car plans on both sides, together with theta, exact same-domain threshold ranks and all 30 inventory-route subset rows. The original micro objective is reoptimized after adding every joint column. An artificial canonical model for J4 is reported separately from production backend exposure.
+
+**Table 7. Complete tiny domains and their actual joint-structure outcomes.**
+
+| Case / initial inventory | Q / physical T | Car plans / joint pairs | Reference / joint objective | Full-reference witness |
+| --- | --- | --- | --- | --- |
+| J1 / [2, 0, 1, 1] | [1, 2] / 240 | pending | pending | pending |
+| J2 / [2, 1, 0, 0] | [1, 2] / 240 | pending | pending | pending |
+| J3 / [2, 1, 0, 0] | [1, 2] / 360 | pending | pending | pending |
+| J4 / [1, 1, 1, 1] | [1, 1] / 240 | pending | pending | pending |
+
+An exact strict entry denotes a rational extension in the entire saved reference matrix and an exact complete-universe support RHS. A numerical-only entry lacks that strict extension. No separated tested normal means only that the fixed finite directions did not separate; it is not a hull-equivalence conclusion. Original-objective values remain qualified native floating-point observations rather than exact rational optimality proofs. The supporting joint note retains controls, coefficients, witnesses or explicit obstacles and measured costs.
+
 ## 7. Operational meaning, limitations and next step
 
 Reported fleets are interpreted through physical Gini, P_avg, final inventories, serviced stations, pickups/deliveries, loaded return and route travel/handling/prefix resources. A smaller ratio dispersion can coexist with target shortages; the penalty and actual service outcomes must be read together. Omega/rho varies because the original weights are not sum-normalized. No policy or sensitivity conclusion is inferred for an untested weight range.
 
-**Table 6. Operational outcomes of existing and new legal S2 fleets.**
+**Table 8. Operational outcomes of existing and new legal S2 fleets.**
 
 The complete operational table is pending the sealed workflows; no synthetic service outcome is invented.
 

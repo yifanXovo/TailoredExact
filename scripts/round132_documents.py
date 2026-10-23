@@ -16,6 +16,11 @@ def draft():
     known=['SC-C15-S','SC-B15-S','SC-C15-B','SC-B20-S','SC-C20-S','SC-B20-U']
     known_table=table(['Known problem / Seed','P','S2'],[[f'{id} / {s}',cell(pby[id,s,1,'P']),cell(pby[id,s,1,'S2'])] for id in known for s in [0,1]])
     tiny=table(['Tiny problem / Seed / repeat','P','S2'],[[f'{id} / {s} / {r}',cell(pby[id,s,r,'P']),cell(pby[id,s,r,'S2'])] for id in ['SM-C8-S','SM-B10-B'] for s in [0,1,2] for r in [1,2]])
+    boundary=table(['Known role / method','U / L','Signed U-L','T_produce','T_verify','T_total','T_cert'],[
+        [f'{id} / {method}',f"{pby[id,0,1,method]['U']:.8f} / {pby[id,0,1,method]['L']:.8f}",
+         f"{pby[id,0,1,method]['U']-pby[id,0,1,method]['L']:.6g}",
+         *[fmt(pby[id,0,1,method][k]) for k in ['T_produce','T_verify','T_total','T_cert']]]
+        for id in ['PB-C35-U','PB-B35-B'] for method in ['P','S2']])
     roles=read(OUT/'input_manifest.json')['roles']
     design=table(['Input','Source / inventory / geography','n / Q','Physical T / cap (s)','Omega / rho'],[
         [p['id'],f"{p['source']} / {p['inventory']} / {p['geometry']}",f"{p['V']} / {p['Q_vector']}",f"{p['T_seconds']} / {p['cap_seconds']}",f"{p['Omega']:.6f} / {p['rho']:.6f}"] for p in roles])
@@ -37,6 +42,15 @@ def draft():
     etext='The finite complete four-station joint-structure comparison is preregistered. Its required computation remains pending; later full-source diagnostics and any production algorithm are conditional on a valid incremental structure and a complete outside-station interface.'
     if (OUT/'joint_structure_note.md').exists():
         etext=(OUT/'joint_structure_note.md').read_text(encoding='utf-8').split('<!-- manuscript-summary -->')[1].split('<!-- /manuscript-summary -->')[0]
+    ej=read(OUT/'joint_results.json') if (OUT/'joint_results.json').exists() else dict(cases=[])
+    ecase={x['id']:x for x in ej['cases']};erows=[]
+    for x in read(OUT/'E_experiment_plan.json')['cases']:
+        y=ecase.get(x['id'])
+        erows.append([x['id']+' / '+str(x['b']),str(x['Q'])+' / '+str(x['T']),
+            str(y['single_plans'])+' / '+str(y['joint_pairs']) if y else 'pending',
+            fmt(y['full_current_micro_objective_reference'],6)+' / '+fmt(y['full_current_micro_objective_joint'],6) if y else 'pending',
+            'exact strict' if y and y['best_strict'] else 'numerical only' if y and y['best_numeric'] else 'no separated tested normal' if y else 'pending'])
+    etable=table(['Case / initial inventory','Q / physical T','Car plans / joint pairs','Reference / joint objective','Full-reference witness'],erows)
     operational='The complete operational table is pending the sealed workflows; no synthetic service outcome is invented.'
     if completeD==60 and (OUT/'historical_physical_outcomes.json').exists():
         with (OUT/'physical_outcomes.csv').open(encoding='utf-8',newline='') as f:physical=list(csv.DictReader(f))
@@ -189,20 +203,25 @@ The separate tiny layer has two inputs, three Seeds and two opposite-order repea
 '''+tiny+r'''
 Both original 35-station roles remain open for both methods at their 2400-second caps and original Seed 0. Their final certification-time ordering is unknown. Earlier results at 50/60 stations retain their historical M-B/ENS identity and do not extend final-S2 validation. The complete signed endpoints and all three clocks are in the supporting tables.
 
+**Table 3. Every original known 35-station boundary observation (Seed 0; seconds).**
+
+'''+boundary+r'''
+P retains the lower physical U on PB-C35-U, while S2 retains the lower U on PB-B35-B. These endpoint directions do not rank the unobserved certification times. All four T_cert entries remain null; T_total includes the separate independent verification.
+
 ### 5.3 Prospective known-source and geography-transfer validation
 
 The new study fixes six K and six X inputs before H or optimization. K uses the existing CITI/CABI source snapshots and generator; X uses an official Chicago Divvy station snapshot with UTM16N conversion and the same synthetic target, inventory and weight rules. This changes geography, not the demand-generation mechanism and not real operational validation. The source snapshots, field provenance, missing/duplicate handling, IDs, coordinates, transformations and one-time seeds are retained. No difficulty-based filter or redraw is applied.
 
 The six roles per layer cover shortage, balanced and surplus scenarios and compact/regional geometry at 15, 20 and 35 stations. New sets from the same source are disjoint, rather than nested enlargements. Five K roles have no overlap with the recorded historical small selections. K-35-B follows the preregistered next exposure tier and has partial historical overlap, so its stations are not all unseen. Shortage is guaranteed structurally by total initial stock below total target and positive weights/lambda; balanced or surplus zero objectives remain legitimate outcomes.
 
-**Table 3. Fixed new-input design, physical/computational limits and effective weights.**
+**Table 4. Fixed new-input design, physical/computational limits and effective weights.**
 
 '''+design+r'''
 All twelve inputs have independently paid P and S2 at both Seeds: 48 arms. The preselected 15-S, 20-U and 35-B role in each layer also has PS at both Seeds: 12 additional arms. The PS subset is fixed without reference to which method wins. K/X, sizes and positive/zero outcomes are reported separately; shared controls and Seed repeats are not independent new problems.
 
 '''+results_text+r'''
 
-**Table 4. Every fixed new-input method position (seconds).**
+**Table 5. Every fixed new-input method position (seconds).**
 
 '''+new_table+r'''
 ## 6. Expression mechanisms and joint-structure limits
@@ -225,7 +244,7 @@ These are ideal algebraic projection results. Serialized H bounds and projected 
 
 The known-role cost panel contains four problems, two Seeds and three expressions: same-build S2R, deletion of exactly the three geometry families, and full W projection. It has 24 independently paid workflow arms and eight shared baseline observations. Each candidate has eight repeated baseline comparisons; their sixteen typed comparisons are not independent trials. No combined candidate or input-specific expression is run.
 
-'''+ctext+'\n\n**Table 5. Every fixed same-build expression workflow (seconds).**\n\n'+ctable+r'''
+'''+ctext+'\n\n**Table 6. Every fixed same-build expression workflow (seconds).**\n\n'+ctable+r'''
 ### 6.3 What a new joint quantity structure would have to add
 
 Let R_k be a complete finite necessary service domain and v_k its pickup, delivery and assignment vector. Convexifying each vehicle independently and then imposing unique service gives P_sep. Convexifying jointly unique integer selections gives H_joint, which is contained in P_sep. That elementary inclusion is not itself a new result. A useful increment must survive the current canonical model, single-station theta, event rank and relevant inventory-route structure, with exactly the same R_k on both sides.
@@ -234,11 +253,18 @@ The existing independent-support/unique-access bound cannot separate points alre
 
 '''+etext+r'''
 
+The complete tiny universes have four stations with capacity 2, target 1 and weight 1; all station and depot coordinates coincide. Both pickup and drop take 60 seconds per bicycle, including return unloading, and lambda is 0.15. J2/J3 cover shortage under two handling budgets; J1 is a balanced control and J4 is the physical startup-zero control. The current canonical continuous reference uses the same complete car plans on both sides, together with theta, exact same-domain threshold ranks and all 30 inventory-route subset rows. The original micro objective is reoptimized after adding every joint column. An artificial canonical model for J4 is reported separately from production backend exposure.
+
+**Table 7. Complete tiny domains and their actual joint-structure outcomes.**
+
+'''+etable+r'''
+An exact strict entry denotes a rational extension in the entire saved reference matrix and an exact complete-universe support RHS. A numerical-only entry lacks that strict extension. No separated tested normal means only that the fixed finite directions did not separate; it is not a hull-equivalence conclusion. Original-objective values remain qualified native floating-point observations rather than exact rational optimality proofs. The supporting joint note retains controls, coefficients, witnesses or explicit obstacles and measured costs.
+
 ## 7. Operational meaning, limitations and next step
 
 Reported fleets are interpreted through physical Gini, P_avg, final inventories, serviced stations, pickups/deliveries, loaded return and route travel/handling/prefix resources. A smaller ratio dispersion can coexist with target shortages; the penalty and actual service outcomes must be read together. Omega/rho varies because the original weights are not sum-normalized. No policy or sensitivity conclusion is inferred for an untested weight range.
 
-**Table 6. Operational outcomes of existing and new legal S2 fleets.**
+**Table 8. Operational outcomes of existing and new legal S2 fleets.**
 
 '''+operational+r'''
 
