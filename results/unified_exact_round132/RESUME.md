@@ -1,0 +1,1 @@
+Round132 initialized on frozen R131. No H/LP/MIP started. Freeze source recipe and full D run table, then independent admission. All active PID/creation/argv and sealed arms must be checked before resume.

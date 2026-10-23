@@ -1,0 +1,1308 @@
+{
+  "UTC": "2026-10-23T14:54:18.296154+00:00",
+  "version": "round132-frozen-s2-prospective-v2",
+  "roles": [
+    {
+      "id": "K-15-S",
+      "layer": "K",
+      "source": "CITI",
+      "V": 15,
+      "M": 2,
+      "inventory": "shortage",
+      "geometry": "compact",
+      "replicate": 1,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_K_15-S_CITI",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "K-15-B",
+      "layer": "K",
+      "source": "CABI",
+      "V": 15,
+      "M": 2,
+      "inventory": "balanced",
+      "geometry": "regional",
+      "replicate": 2,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_K_15-B_CABI",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "K-20-S",
+      "layer": "K",
+      "source": "CITI",
+      "V": 20,
+      "M": 2,
+      "inventory": "shortage",
+      "geometry": "compact",
+      "replicate": 1,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 1200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_K_20-S_CITI",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "K-20-U",
+      "layer": "K",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "inventory": "surplus",
+      "geometry": "compact",
+      "replicate": 2,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_K_20-U_CABI",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "K-35-B",
+      "layer": "K",
+      "source": "CITI",
+      "V": 35,
+      "M": 3,
+      "inventory": "balanced",
+      "geometry": "compact",
+      "replicate": 1,
+      "Q_vector": [
+        25,
+        25,
+        25
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 2400,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_K_35-B_CITI",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "K-35-U",
+      "layer": "K",
+      "source": "CABI",
+      "V": 35,
+      "M": 3,
+      "inventory": "surplus",
+      "geometry": "regional",
+      "replicate": 2,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 2400,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_K_35-U_CABI",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "X-15-S",
+      "layer": "X",
+      "source": "DIVVY",
+      "V": 15,
+      "M": 2,
+      "inventory": "shortage",
+      "geometry": "compact",
+      "replicate": 1,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_X_15-S_DIVVY",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "X-15-B",
+      "layer": "X",
+      "source": "DIVVY",
+      "V": 15,
+      "M": 2,
+      "inventory": "balanced",
+      "geometry": "regional",
+      "replicate": 2,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_X_15-B_DIVVY",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "X-20-S",
+      "layer": "X",
+      "source": "DIVVY",
+      "V": 20,
+      "M": 2,
+      "inventory": "shortage",
+      "geometry": "compact",
+      "replicate": 1,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 1200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_X_20-S_DIVVY",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "X-20-U",
+      "layer": "X",
+      "source": "DIVVY",
+      "V": 20,
+      "M": 2,
+      "inventory": "surplus",
+      "geometry": "compact",
+      "replicate": 2,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_X_20-U_DIVVY",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "X-35-B",
+      "layer": "X",
+      "source": "DIVVY",
+      "V": 35,
+      "M": 3,
+      "inventory": "balanced",
+      "geometry": "compact",
+      "replicate": 1,
+      "Q_vector": [
+        25,
+        25,
+        25
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 2400,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_X_35-B_DIVVY",
+      "panel_kind": "prospective_frozen_S2_validation"
+    },
+    {
+      "id": "X-35-U",
+      "layer": "X",
+      "source": "DIVVY",
+      "V": 35,
+      "M": 3,
+      "inventory": "surplus",
+      "geometry": "regional",
+      "replicate": 2,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 2400,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "selection_id": "r132_X_35-U_DIVVY",
+      "panel_kind": "prospective_frozen_S2_validation"
+    }
+  ],
+  "source_assignment": "fixed alternating K:CITI/CABI by table row; X:DIVVY Chicago",
+  "source_urls": {
+    "DIVVY": "https://gbfs.divvybikes.com/gbfs/2.3/gbfs.json",
+    "official_reference": "https://divvybikes.com/system-data",
+    "license": "https://divvybikes.com/data-license-agreement"
+  },
+  "acquisition": "one official GBFS discovery and station_information snapshot; 60s each, <=3 same-endpoint transport retries; no performance-dependent source replacement",
+  "source_failure": "If acquisition/qualification cannot succeed, freeze a declared constructed-source replacement before any H/LP/MIP; no silent substitution",
+  "source_qualification": "unique UTF-8 station ID; finite valid lat/lon; integer 0<capacity<100; nonvirtual; duplicate IDs with identical records deduplicate, conflicting records exclude",
+  "projection": {
+    "K": "original serialized UTM18N metres",
+    "X": "EPSG:4326 to EPSG:32616 (UTM16N), always_xy=True, forward/inverse residual <=1e-8 degrees; round metres to 3 decimals"
+  },
+  "missing_fields": "exclude missing/nonfinite ID/coordinate/capacity; never impute public capacity",
+  "selection": "Process roles in fixed table order. Exclude stations used by earlier new roles of the same source. Prefer stations absent from every accessible tracked historical small selection. If fewer than required candidate pool, include whole exposure-count tiers in ascending order until at least min(remaining, 2V) for regional or V for compact. Apply unchanged R57 4-anchor/compact-nearest/regional-farthest-first and source-row tie rules within that pool.",
+  "historical_scope": "BASE tracked *_selection.json small records; source identified from dataset_family/selection_id and exact CITI/CABI identities; no raw campaign recovery. Report unresolved identities.",
+  "seed": "SHA256-derived original stable_seed; material round132-frozen-s2-prospective-v2|source=<source>|source_sha256=<snapshot SHA>; fixed role selection_id",
+  "inventory": "Unchanged R109/R122 target .44+.12*hash; delta=max(V,floor(.12*sumD+.5)); local .18 balanced/.30 otherwise; unchanged total correction and sign repair",
+  "weights": "original squared target / maximum with .1 floor, six decimals; not sum-normalized",
+  "fields": {
+    "capacity": "public source snapshot",
+    "coordinates": "public source transformed/rounded",
+    "target": "synthetic",
+    "initial": "synthetic",
+    "weights": "synthetic",
+    "depot": "synthetic centroid"
+  },
+  "lambda_value": 0.15,
+  "handling_seconds": [
+    60,
+    60
+  ],
+  "H_seed": 20260626,
+  "Threads": 1,
+  "MIPThreads": 1,
+  "distance": "Euclidean serialized metre coordinates /1.5 m/s, unchanged parser",
+  "full_run_table": [
+    {
+      "number": 1,
+      "name": "campaign/D_group01",
+      "role": {
+        "id": "K-15-S",
+        "layer": "K",
+        "source": "CITI",
+        "V": 15,
+        "M": 2,
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 3600,
+        "cap_seconds": 600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_15-S_CITI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2",
+        "PS"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 2,
+      "name": "campaign/D_group02",
+      "role": {
+        "id": "K-15-S",
+        "layer": "K",
+        "source": "CITI",
+        "V": 15,
+        "M": 2,
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 3600,
+        "cap_seconds": 600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_15-S_CITI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "PS",
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 3,
+      "name": "campaign/D_group03",
+      "role": {
+        "id": "K-15-B",
+        "layer": "K",
+        "source": "CABI",
+        "V": 15,
+        "M": 2,
+        "inventory": "balanced",
+        "geometry": "regional",
+        "replicate": 2,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 5400,
+        "cap_seconds": 600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_15-B_CABI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 4,
+      "name": "campaign/D_group04",
+      "role": {
+        "id": "K-15-B",
+        "layer": "K",
+        "source": "CABI",
+        "V": 15,
+        "M": 2,
+        "inventory": "balanced",
+        "geometry": "regional",
+        "replicate": 2,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 5400,
+        "cap_seconds": 600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_15-B_CABI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 5,
+      "name": "campaign/D_group05",
+      "role": {
+        "id": "K-20-S",
+        "layer": "K",
+        "source": "CITI",
+        "V": 20,
+        "M": 2,
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 5400,
+        "cap_seconds": 1200,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_20-S_CITI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 6,
+      "name": "campaign/D_group06",
+      "role": {
+        "id": "K-20-S",
+        "layer": "K",
+        "source": "CITI",
+        "V": 20,
+        "M": 2,
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 5400,
+        "cap_seconds": 1200,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_20-S_CITI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 7,
+      "name": "campaign/D_group07",
+      "role": {
+        "id": "K-20-U",
+        "layer": "K",
+        "source": "CABI",
+        "V": 20,
+        "M": 2,
+        "inventory": "surplus",
+        "geometry": "compact",
+        "replicate": 2,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_20-U_CABI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "PS",
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 8,
+      "name": "campaign/D_group08",
+      "role": {
+        "id": "K-20-U",
+        "layer": "K",
+        "source": "CABI",
+        "V": 20,
+        "M": 2,
+        "inventory": "surplus",
+        "geometry": "compact",
+        "replicate": 2,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_20-U_CABI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2",
+        "PS"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 9,
+      "name": "campaign/D_group09",
+      "role": {
+        "id": "K-35-B",
+        "layer": "K",
+        "source": "CITI",
+        "V": 35,
+        "M": 3,
+        "inventory": "balanced",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          25,
+          25,
+          25
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 2400,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_35-B_CITI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2",
+        "PS"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 10,
+      "name": "campaign/D_group10",
+      "role": {
+        "id": "K-35-B",
+        "layer": "K",
+        "source": "CITI",
+        "V": 35,
+        "M": 3,
+        "inventory": "balanced",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          25,
+          25,
+          25
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 2400,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_35-B_CITI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "PS",
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 11,
+      "name": "campaign/D_group11",
+      "role": {
+        "id": "K-35-U",
+        "layer": "K",
+        "source": "CABI",
+        "V": 35,
+        "M": 3,
+        "inventory": "surplus",
+        "geometry": "regional",
+        "replicate": 2,
+        "Q_vector": [
+          20,
+          25,
+          30
+        ],
+        "T_seconds": 10800,
+        "cap_seconds": 2400,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_35-U_CABI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 12,
+      "name": "campaign/D_group12",
+      "role": {
+        "id": "K-35-U",
+        "layer": "K",
+        "source": "CABI",
+        "V": 35,
+        "M": 3,
+        "inventory": "surplus",
+        "geometry": "regional",
+        "replicate": 2,
+        "Q_vector": [
+          20,
+          25,
+          30
+        ],
+        "T_seconds": 10800,
+        "cap_seconds": 2400,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_K_35-U_CABI",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 13,
+      "name": "campaign/D_group13",
+      "role": {
+        "id": "X-15-S",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 15,
+        "M": 2,
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 3600,
+        "cap_seconds": 600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_15-S_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2",
+        "PS"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 14,
+      "name": "campaign/D_group14",
+      "role": {
+        "id": "X-15-S",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 15,
+        "M": 2,
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 3600,
+        "cap_seconds": 600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_15-S_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "PS",
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 15,
+      "name": "campaign/D_group15",
+      "role": {
+        "id": "X-15-B",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 15,
+        "M": 2,
+        "inventory": "balanced",
+        "geometry": "regional",
+        "replicate": 2,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 5400,
+        "cap_seconds": 600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_15-B_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 16,
+      "name": "campaign/D_group16",
+      "role": {
+        "id": "X-15-B",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 15,
+        "M": 2,
+        "inventory": "balanced",
+        "geometry": "regional",
+        "replicate": 2,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 5400,
+        "cap_seconds": 600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_15-B_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 17,
+      "name": "campaign/D_group17",
+      "role": {
+        "id": "X-20-S",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 20,
+        "M": 2,
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 5400,
+        "cap_seconds": 1200,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_20-S_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 18,
+      "name": "campaign/D_group18",
+      "role": {
+        "id": "X-20-S",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 20,
+        "M": 2,
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 5400,
+        "cap_seconds": 1200,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_20-S_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 19,
+      "name": "campaign/D_group19",
+      "role": {
+        "id": "X-20-U",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 20,
+        "M": 2,
+        "inventory": "surplus",
+        "geometry": "compact",
+        "replicate": 2,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_20-U_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "PS",
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 20,
+      "name": "campaign/D_group20",
+      "role": {
+        "id": "X-20-U",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 20,
+        "M": 2,
+        "inventory": "surplus",
+        "geometry": "compact",
+        "replicate": 2,
+        "Q_vector": [
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 1200,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_20-U_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2",
+        "PS"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 21,
+      "name": "campaign/D_group21",
+      "role": {
+        "id": "X-35-B",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 35,
+        "M": 3,
+        "inventory": "balanced",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          25,
+          25,
+          25
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 2400,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_35-B_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2",
+        "PS"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 22,
+      "name": "campaign/D_group22",
+      "role": {
+        "id": "X-35-B",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 35,
+        "M": 3,
+        "inventory": "balanced",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          25,
+          25,
+          25
+        ],
+        "T_seconds": 7200,
+        "cap_seconds": 2400,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_35-B_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "PS",
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ],
+        [
+          "S2",
+          "PS"
+        ],
+        [
+          "PS",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 23,
+      "name": "campaign/D_group23",
+      "role": {
+        "id": "X-35-U",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 35,
+        "M": 3,
+        "inventory": "surplus",
+        "geometry": "regional",
+        "replicate": 2,
+        "Q_vector": [
+          20,
+          25,
+          30
+        ],
+        "T_seconds": 10800,
+        "cap_seconds": 2400,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_35-U_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 0,
+      "repeat": 1,
+      "methods": [
+        "S2",
+        "P"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    },
+    {
+      "number": 24,
+      "name": "campaign/D_group24",
+      "role": {
+        "id": "X-35-U",
+        "layer": "X",
+        "source": "DIVVY",
+        "V": 35,
+        "M": 3,
+        "inventory": "surplus",
+        "geometry": "regional",
+        "replicate": 2,
+        "Q_vector": [
+          20,
+          25,
+          30
+        ],
+        "T_seconds": 10800,
+        "cap_seconds": 2400,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "selection_id": "r132_X_35-U_DIVVY",
+        "panel_kind": "prospective_frozen_S2_validation"
+      },
+      "seed": 1,
+      "repeat": 1,
+      "methods": [
+        "P",
+        "S2"
+      ],
+      "pairs": [
+        [
+          "S2",
+          "P"
+        ]
+      ]
+    }
+  ],
+  "Optimize": 0,
+  "H": 0,
+  "no_redraw": true,
+  "no_difficulty_filter": true
+}
