@@ -1,1 +1,1 @@
-Round132 initialized on frozen R131. No H/LP/MIP started. Freeze source recipe and full D run table, then independent admission. All active PID/creation/argv and sealed arms must be checked before resume.
+Round132 D active. Last sealed `E:\codes\ExactEBRP-work\worktrees\round132\results\unified_exact_round132\campaign\D_group02\raw\02_K-15-S_S1_R1_S2`. Inspect current fees PID/creation/argv before any resume. Own frozen E3 only. C/E never supply information to D.

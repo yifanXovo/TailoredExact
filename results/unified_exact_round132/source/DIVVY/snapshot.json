@@ -1,0 +1,14 @@
+{
+  "UTC": "2026-10-23T14:54:37.432979+00:00",
+  "source": "DIVVY Chicago",
+  "response_SHA": "abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324",
+  "response_path": "results/unified_exact_round132/source/DIVVY/station_information.json",
+  "raw_rows": 2076,
+  "qualified": 2062,
+  "projection": "EPSG:4326 -> EPSG:32616 always_xy; metre precision .001",
+  "pyproj_version": "3.8.0",
+  "pipeline": "proj=pipeline step proj=unitconvert xy_in=deg xy_out=rad step proj=utm zone=16 ellps=WGS84",
+  "license_url": "https://divvybikes.com/data-license-agreement",
+  "publication": "source material within this noncommercial research study; not a standalone dataset",
+  "system_name_used_only_for_data_attribution": true
+}

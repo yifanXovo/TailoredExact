@@ -1,0 +1,214 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "id": "S12",
+      "interval": [
+        0.0,
+        0.7797215574158546
+      ],
+      "cutoff": 0.7797215574158546,
+      "default_off_E3_same_bytes": true,
+      "actual_matrix_differences": {
+        "geom": {
+          "removed_rows": 330,
+          "added_rows": 0,
+          "other_columns_bounds_types_objective_identical": true
+        },
+        "sp": {
+          "removed_W_rows": 5,
+          "removed_W_columns": 1,
+          "complete_projection_rows": 12,
+          "max_coefficient_serialization_residual_bound": 2.1064217153975742e-14,
+          "exact_native_binary64_rational_projection_proved": true,
+          "emitted_binary64_rows_only_numerically_consistent": true,
+          "P_domain_implications_retained": true
+        }
+      },
+      "canonical_all_continuous_LP": {
+        "off": {
+          "value": 0.06400710613714654,
+          "Runtime": 0.03699994087219238,
+          "Work": 0.07442841565393328,
+          "rows": 2752,
+          "columns": 1388
+        },
+        "geom": {
+          "value": 0.06400710613714664,
+          "Runtime": 0.03800010681152344,
+          "Work": 0.07369538214406798,
+          "rows": 2422,
+          "columns": 1388
+        },
+        "sp": {
+          "value": 0.06400710613714662,
+          "Runtime": 0.03500008583068848,
+          "Work": 0.07627512394384445,
+          "rows": 2759,
+          "columns": 1387
+        }
+      }
+    },
+    {
+      "id": "S12",
+      "interval": [
+        0.23391646722475637,
+        0.7797215574158546
+      ],
+      "cutoff": 0.7797215574158546,
+      "default_off_E3_same_bytes": true,
+      "actual_matrix_differences": {
+        "geom": {
+          "removed_rows": 330,
+          "added_rows": 0,
+          "other_columns_bounds_types_objective_identical": true
+        },
+        "sp": {
+          "removed_W_rows": 5,
+          "removed_W_columns": 1,
+          "complete_projection_rows": 12,
+          "max_coefficient_serialization_residual_bound": 2.1064217153975742e-14,
+          "exact_native_binary64_rational_projection_proved": true,
+          "emitted_binary64_rows_only_numerically_consistent": true,
+          "P_domain_implications_retained": true
+        }
+      },
+      "canonical_all_continuous_LP": {
+        "off": {
+          "value": 0.26697384490305986,
+          "Runtime": 0.029000043869018555,
+          "Work": 0.05506495136844831,
+          "rows": 2752,
+          "columns": 1388
+        },
+        "geom": {
+          "value": 0.26697384490305986,
+          "Runtime": 0.026999950408935547,
+          "Work": 0.05371334962440051,
+          "rows": 2422,
+          "columns": 1388
+        },
+        "sp": {
+          "value": 0.2669738449030598,
+          "Runtime": 0.02500009536743164,
+          "Work": 0.05454762918110128,
+          "rows": 2759,
+          "columns": 1387
+        }
+      }
+    },
+    {
+      "id": "R98-C2",
+      "interval": [
+        0.0,
+        0.9666666666666667
+      ],
+      "cutoff": 1.6753644649632968,
+      "default_off_E3_same_bytes": true,
+      "actual_matrix_differences": {
+        "geom": {
+          "removed_rows": 2175,
+          "added_rows": 0,
+          "other_columns_bounds_types_objective_identical": true
+        },
+        "sp": {
+          "removed_W_rows": 5,
+          "removed_W_columns": 1,
+          "complete_projection_rows": 12,
+          "max_coefficient_serialization_residual_bound": 4.183533441835392e-13,
+          "exact_native_binary64_rational_projection_proved": true,
+          "emitted_binary64_rows_only_numerically_consistent": true,
+          "P_domain_implications_retained": true
+        }
+      },
+      "canonical_all_continuous_LP": {
+        "off": {
+          "value": 0.16103255933842825,
+          "Runtime": 0.37000012397766113,
+          "Work": 1.0281915738555667,
+          "rows": 18961,
+          "columns": 8871
+        },
+        "geom": {
+          "value": 0.1610325593384278,
+          "Runtime": 0.38000011444091797,
+          "Work": 1.0618319019596512,
+          "rows": 16786,
+          "columns": 8871
+        },
+        "sp": {
+          "value": 0.16103255933842778,
+          "Runtime": 0.3810000419616699,
+          "Work": 1.040915085460576,
+          "rows": 18968,
+          "columns": 8870
+        }
+      }
+    },
+    {
+      "id": "R98-C2",
+      "interval": [
+        0.29,
+        0.9666666666666667
+      ],
+      "cutoff": 1.6753644649632968,
+      "default_off_E3_same_bytes": true,
+      "actual_matrix_differences": {
+        "geom": {
+          "removed_rows": 2175,
+          "added_rows": 0,
+          "other_columns_bounds_types_objective_identical": true
+        },
+        "sp": {
+          "removed_W_rows": 5,
+          "removed_W_columns": 1,
+          "complete_projection_rows": 12,
+          "max_coefficient_serialization_residual_bound": 4.183533441835392e-13,
+          "exact_native_binary64_rational_projection_proved": true,
+          "emitted_binary64_rows_only_numerically_consistent": true,
+          "P_domain_implications_retained": true
+        }
+      },
+      "canonical_all_continuous_LP": {
+        "off": {
+          "value": 0.411205736,
+          "Runtime": 0.2760000228881836,
+          "Work": 0.7677761028061627,
+          "rows": 18961,
+          "columns": 8871
+        },
+        "geom": {
+          "value": 0.411205736,
+          "Runtime": 0.42100000381469727,
+          "Work": 1.1696634371726962,
+          "rows": 16786,
+          "columns": 8871
+        },
+        "sp": {
+          "value": 0.411205736,
+          "Runtime": 0.35500001907348633,
+          "Work": 1.0567624170343513,
+          "rows": 18968,
+          "columns": 8870
+        }
+      }
+    }
+  ],
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "numerical_contract": 1e-07,
+  "exact_rational_vs_binary64_distinguished": true,
+  "LP_calls": 12,
+  "H_calls": 0,
+  "production_compile": 0,
+  "research_PE_SHA": "eac4e778cacb316c61928d4a6f1e4c90c8397cc94e0dc528695773703e98cce2",
+  "research_exporter_SHA": "2f3f6850d4921e698ca1e5ff93f785f37af73aeadd0d975f1c740cbac7721b28",
+  "no_formal_role_performance_observed": true,
+  "remaining": "actual CLI default-off behavioral bridge and own physical Start mapping for each expression"
+}

@@ -127,6 +127,7 @@ def historical():
         if not n.endswith('_selection.json'):continue
         try:q=json.loads(git('show',BASE+':'+n))
         except (ValueError,subprocess.CalledProcessError):continue
+        if not isinstance(q,dict):continue
         ids=q.get('selected_source_station_row_indices')
         if not ids:continue
         text=(q.get('dataset_family','')+' '+q.get('selection_id','')).upper()
@@ -142,6 +143,11 @@ def generate():
     frozen_identity();assert not (OUT/'input_manifest.json').exists()
     recipe=read(OUT/'source_recipe.json');assert git('show','HEAD:results/unified_exact_round132/source_recipe.json').replace(b'\r\n',b'\n')==(OUT/'source_recipe.json').read_bytes().replace(b'\r\n',b'\n')
     station_sets=source.load_sources()
+    with (ROOT/'results/data_generation_citibike_round57/source_station_table.csv').open(encoding='utf-8',newline='') as fh:
+        annotations={int(q['source_station_row_index']):q for q in csv.DictReader(fh)}
+    station_sets['CITI']=[dataclasses.replace(q,station_id=annotations[q.source_row_index]['station_id'],
+        name=annotations[q.source_row_index]['station_name'],latitude=float(annotations[q.source_row_index]['latitude']),
+        longitude=float(annotations[q.source_row_index]['longitude'])) for q in station_sets['CITI']]
     station_sets['DIVVY']=[source.cabi.Station(q['source_row_index'],q['station_id'],q['capacity'],q['x'],q['y'],q['latitude'],q['longitude'],tuple(q['original_row_indices'])) for q in read(OUT/'source/DIVVY/qualified_stations.json')]
     hashes={s:v['identity_SHA'] for s,v in source.SOURCES.items()};hashes['DIVVY']=sha(OUT/'source/DIVVY/station_information.json')
     exposure,history=historical();used=collections.defaultdict(set);rr=[];overlap=[]

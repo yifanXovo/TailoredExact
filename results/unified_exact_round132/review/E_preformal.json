@@ -1,0 +1,64 @@
+{
+  "decision": "ACCEPT_FINITE_EXECUTION_SCOPE",
+  "UTC": "2026-10-23T15:37:55.181331+00:00",
+  "scope": "Static independent internal pre-execution review only; no enumeration, native model build, Optimize, H or compilation",
+  "runner_SHA_at_review": "856e95e2753f2229ecbf9054dc0334093e612ba6c78ba5e7f576827cbf2812d5",
+  "plan_SHA_at_review": "db2bc424d315ad770099d25d525b2736cfa0476569120006d7003cb49e6bb6d1",
+  "findings": [
+    {
+      "id": "E-F1",
+      "status": "resolved",
+      "finding": "Event controls now have PASS/UNKNOWN/CONTRADICTION and stop on excessive retained-rank contradiction."
+    },
+    {
+      "id": "E-F2",
+      "status": "resolved",
+      "finding": "Separate best_numeric and best_strict preserve strict-candidate opportunities among the same fixed64 directions."
+    },
+    {
+      "id": "E-F3",
+      "status": "resolved",
+      "finding": "Queries/cases/stages are incrementally sealed; partial-budget and rational-basis exits preserve explicit obstacles."
+    },
+    {
+      "id": "E-F4",
+      "status": "resolved",
+      "finding": "Exact actual B_ref binary64 row/bound snapshot and complete enumeration SHAs are bound to rational support witnesses."
+    },
+    {
+      "id": "E-F5",
+      "status": "resolved_scope",
+      "finding": "J4 zero-cutoff/startup-zero case records actual cutoff/W state and is not production backend exposure."
+    },
+    {
+      "id": "E-F6",
+      "status": "identity_closure_requested",
+      "blocking_mathematics": false,
+      "finding": "Capture verified original asset identity and plan/runner SHA at execution start, rather than only final result hashes."
+    },
+    {
+      "id": "E-F7",
+      "status": "interpretation",
+      "finding": "Native infeasible reference requires investigation against known empty-fleet embedding; finite no-separation/zero delta does not prove hull equality."
+    }
+  ],
+  "mathematical_scope": {
+    "universe": "complete co-located4-station2-vehicle service-vector domain, inventories0/1/2",
+    "single_car_raw_vector_upper_bound": 81,
+    "raw_fleet_pair_upper_bound": 6561,
+    "rank_event_combination_upper_bound": 80,
+    "mixed_IR_rows": 30,
+    "normal_queries_per_case": 64,
+    "event_controls_per_case": 8,
+    "reference_rank_not_identical_to_R101": true,
+    "real_role_extension_admitted": false
+  },
+  "review_note": "review/E_preformal.md",
+  "execution_evidence_pending": true,
+  "review_enumeration": 0,
+  "review_Optimize": 0,
+  "review_H": 0,
+  "review_compile": 0,
+  "external_reproduction": false,
+  "finite_no_separation_means_equivalence": false
+}

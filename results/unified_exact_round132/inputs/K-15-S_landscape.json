@@ -1,0 +1,366 @@
+{
+  "schema": "citibike443-station-landscape-v1",
+  "dataset_family": "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+  "classification": "generated_untested_paper_candidate",
+  "generator_version": "citibike443-regional-v1.0.0",
+  "landscape_id": "r132_K_15-S_CITI_shortage",
+  "selection_id": "r132_K_15-S_CITI",
+  "V": 15,
+  "geographic_regime": "compact",
+  "replicate": 1,
+  "inventory_regime": "shortage",
+  "local_imbalance_level": "high",
+  "seed": 781911316,
+  "seed_derivation_material": "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage",
+  "source_station_row_indices": [
+    285,
+    297,
+    289,
+    262,
+    276,
+    307,
+    302,
+    314,
+    246,
+    353,
+    359,
+    383,
+    220,
+    203,
+    222
+  ],
+  "source_hashes": {
+    "public_table_sha256": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0"
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      592849.535,
+      4505994.704
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    23,
+    27,
+    23,
+    19,
+    19,
+    19,
+    19,
+    21,
+    19,
+    19,
+    21,
+    24,
+    21,
+    22,
+    18
+  ],
+  "initial": [
+    3,
+    19,
+    1,
+    13,
+    12,
+    13,
+    1,
+    1,
+    15,
+    4,
+    4,
+    19,
+    17,
+    2,
+    11
+  ],
+  "target": [
+    11,
+    13,
+    10,
+    8,
+    8,
+    9,
+    9,
+    9,
+    10,
+    11,
+    11,
+    13,
+    12,
+    11,
+    8
+  ],
+  "weights": [
+    0.715976,
+    1.0,
+    0.591716,
+    0.378698,
+    0.378698,
+    0.47929,
+    0.47929,
+    0.47929,
+    0.591716,
+    0.715976,
+    0.715976,
+    1.0,
+    0.852071,
+    0.715976,
+    0.378698
+  ],
+  "min_ratio": [
+    0.2913,
+    0.2926,
+    0.2739,
+    0.2684,
+    0.2684,
+    0.2895,
+    0.2895,
+    0.2714,
+    0.3105,
+    0.3316,
+    0.3095,
+    0.3167,
+    0.3286,
+    0.3,
+    0.2778
+  ],
+  "points_utm18n_meters": [
+    [
+      593105.016,
+      4505952.427
+    ],
+    [
+      593008.376,
+      4506112.201
+    ],
+    [
+      592745.303,
+      4506000.105
+    ],
+    [
+      592888.122,
+      4505661.047
+    ],
+    [
+      592704.393,
+      4505825.286
+    ],
+    [
+      593529.411,
+      4506270.852
+    ],
+    [
+      593740.145,
+      4506176.919
+    ],
+    [
+      593787.927,
+      4506340.729
+    ],
+    [
+      592377.972,
+      4505438.184
+    ],
+    [
+      593300.47,
+      4506939.668
+    ],
+    [
+      592764.681,
+      4507018.439
+    ],
+    [
+      593422.985,
+      4507408.623
+    ],
+    [
+      591945.974,
+      4504975.403
+    ],
+    [
+      591909.812,
+      4504756.239
+    ],
+    [
+      591512.438,
+      4505044.433
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 3053.6590201564413,
+    "mean_pairwise_station_distance_m": 1256.764529949236,
+    "maximum_pairwise_station_distance_m": 3053.6590201564413,
+    "mean_depot_distance_m": 843.3038824422705,
+    "maximum_depot_distance_m": 1640.3790296299333,
+    "bounding_box_width_m": 2275.4890000000596,
+    "bounding_box_height_m": 2652.3839999996126,
+    "capacity_minimum": 18,
+    "capacity_maximum": 27,
+    "capacity_mean": 20.933333333333334,
+    "capacity_median": 21,
+    "total_capacity": 314,
+    "total_initial_inventory": 135,
+    "total_target_inventory": 153,
+    "station_inventory_minus_target": -18,
+    "absolute_total_shortage_or_surplus": 18,
+    "local_l1_imbalance": 94,
+    "maximum_local_absolute_imbalance": 9,
+    "surplus_station_count": 8,
+    "deficit_station_count": 7,
+    "balanced_station_count": 0,
+    "weight_minimum": 0.378698,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.6315580666666667,
+    "min_ratio_minimum": 0.2684,
+    "min_ratio_maximum": 0.3316
+  },
+  "generation_trace": {
+    "initial_before_total_correction": [
+      4,
+      21,
+      3,
+      14,
+      14,
+      15,
+      3,
+      3,
+      16,
+      5,
+      5,
+      20,
+      18,
+      4,
+      13
+    ],
+    "initial_after_total_correction": [
+      3,
+      19,
+      1,
+      13,
+      12,
+      13,
+      1,
+      1,
+      15,
+      4,
+      4,
+      19,
+      17,
+      2,
+      11
+    ],
+    "initial_after_sign_repair": [
+      3,
+      19,
+      1,
+      13,
+      12,
+      13,
+      1,
+      1,
+      15,
+      4,
+      4,
+      19,
+      17,
+      2,
+      11
+    ],
+    "desired_total": 135,
+    "delta_amount": 18,
+    "local_scale": 0.3,
+    "inventory_hash_order": [
+      14,
+      13,
+      1,
+      2,
+      4,
+      7,
+      5,
+      6,
+      8,
+      9,
+      3,
+      0,
+      12,
+      10,
+      11
+    ],
+    "sign_repair_hash_order": [
+      10,
+      11,
+      6,
+      9,
+      5,
+      13,
+      12,
+      7,
+      8,
+      1,
+      2,
+      14,
+      4,
+      0,
+      3
+    ],
+    "anchor_material": "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|geographic-anchor-set|V=15",
+    "selection_material": "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|selection|V=15|geography=compact|replicate=1",
+    "inventory_material": "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage",
+    "target_materials": [
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=285",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=297",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=289",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=262",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=276",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=307",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=302",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=314",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=246",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=353",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=359",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=383",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=220",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=203",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r132_K_15-S_CITI|row=222"
+    ],
+    "inventory_order_materials": [
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|0",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|1",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|2",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|3",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|4",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|5",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|6",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|7",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|8",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|9",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|10",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|11",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|12",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|13",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|14"
+    ],
+    "sign_repair_order_materials": [
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|0",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|1",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|2",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|3",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|4",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|5",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|6",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|7",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|8",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|9",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|10",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|11",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|12",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|13",
+      "round132-frozen-s2-prospective-v2|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r132_K_15-S_CITI|shortage|sign-repair|14"
+    ]
+  },
+  "coordinate_CRS": "EPSG:32618",
+  "source": "CITI"
+}
