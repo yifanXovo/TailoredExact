@@ -1,0 +1,788 @@
+{
+  "total_outer_limit": 43200,
+  "closed_child_outer_seconds": 24063.332383599598,
+  "preledger_setup_allowance_seconds": 900,
+  "final_small_metadata_allowance_seconds": 120,
+  "charged_upper_seconds": 25083.332383599598,
+  "remaining_upper_seconds": 18116.667616400402,
+  "by_kind": {
+    "documents": 26.309243299881928,
+    "formal": 22912.06342049979,
+    "postprocess": 36.89124020002782,
+    "preparation": 5.454804999870248,
+    "qualification": 3.059039399959147,
+    "review": 1079.5546352000674
+  },
+  "receipts": [
+    {
+      "label": "analysis_01",
+      "kind": "postprocess",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_analysis.py"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 15.396848700009286,
+      "start_unix": 1792720374.0602815,
+      "end_unix": 1792720389.4566338,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "documents_01",
+      "kind": "postprocess",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_documents.py",
+        "documents"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 0.8953241999261081,
+      "start_unix": 1792720423.935628,
+      "end_unix": 1792720424.831658,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "final_independent_01",
+      "kind": "review",
+      "command": [
+        "D:/msys64/ucrt64/bin/python.exe",
+        "-I",
+        "-B",
+        "scripts/round131_portable_check.py",
+        "--receipt",
+        "E:/codes/ExactEBRP-work/worktrees/round131/results/unified_exact_round131/review/final_independent_evidence.json"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 1079.5546352000674,
+      "start_unix": 1792720450.4803486,
+      "end_unix": 1792721530.0347524,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group01_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group01"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 536.0640068999492,
+      "start_unix": 1792697387.8949847,
+      "end_unix": 1792697923.9641407,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group02_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group02"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 568.920428799931,
+      "start_unix": 1792697923.9798355,
+      "end_unix": 1792698492.8999364,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group03_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group03"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 18.322392500005662,
+      "start_unix": 1792698492.9175155,
+      "end_unix": 1792698511.2404315,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group04_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group04"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 25.4280072998954,
+      "start_unix": 1792698511.2574072,
+      "end_unix": 1792698536.685142,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group05_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group05"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 302.30433879990596,
+      "start_unix": 1792698536.7046478,
+      "end_unix": 1792698839.009363,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group06_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group06"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 610.9565599999623,
+      "start_unix": 1792698839.0273948,
+      "end_unix": 1792699449.9841902,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group07_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group07"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 2189.523380400031,
+      "start_unix": 1792699450.003031,
+      "end_unix": 1792701639.5263186,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group08_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group08"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 1888.538314000005,
+      "start_unix": 1792701639.5479395,
+      "end_unix": 1792703528.0860324,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group09_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group09"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 2371.3083767000353,
+      "start_unix": 1792703528.1082494,
+      "end_unix": 1792705899.4162006,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group10_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group10"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 2382.353992599994,
+      "start_unix": 1792705899.4390128,
+      "end_unix": 1792708281.7933712,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group11_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group11"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 1208.277675200021,
+      "start_unix": 1792708281.813523,
+      "end_unix": 1792709490.0910516,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group12_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group12"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 1217.2779075999279,
+      "start_unix": 1792709490.1120586,
+      "end_unix": 1792710707.3903377,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group13_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group13"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 10.745691700023599,
+      "start_unix": 1792710707.411483,
+      "end_unix": 1792710718.1576157,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group14_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group14"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 10.537395299994387,
+      "start_unix": 1792710718.1809099,
+      "end_unix": 1792710728.7174306,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group15_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group15"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 12.052928899996914,
+      "start_unix": 1792710728.7415707,
+      "end_unix": 1792710740.7948818,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group16_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group16"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 11.899564199964516,
+      "start_unix": 1792710740.8178267,
+      "end_unix": 1792710752.7170227,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group17_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group17"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 13.035108100040816,
+      "start_unix": 1792710752.740271,
+      "end_unix": 1792710765.775167,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group18_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group18"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 13.16609780001454,
+      "start_unix": 1792710765.8001838,
+      "end_unix": 1792710778.966055,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group19_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group19"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 2.1327202999964356,
+      "start_unix": 1792710778.9901822,
+      "end_unix": 1792710781.1198997,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group20_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group20"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 2.1461374000646174,
+      "start_unix": 1792710781.1513035,
+      "end_unix": 1792710783.296701,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group21_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group21"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 4.046852000057697,
+      "start_unix": 1792710783.322645,
+      "end_unix": 1792710787.369879,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group22_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group22"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 3.9891366999363527,
+      "start_unix": 1792710787.3895392,
+      "end_unix": 1792710791.3842835,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group23_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group23"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 4.10619580000639,
+      "start_unix": 1792710791.411058,
+      "end_unix": 1792710795.5172467,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group24_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group24"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 4.128510400070809,
+      "start_unix": 1792710795.546086,
+      "end_unix": 1792710799.6745293,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group25_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group25"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 4751.190258299932,
+      "start_unix": 1792710799.7017686,
+      "end_unix": 1792715550.8830714,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "formal_group26_01",
+      "kind": "formal",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\scripts\\round131_benchmark.py",
+        "group",
+        "campaign/group26"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 4749.611442800029,
+      "start_unix": 1792715550.9187415,
+      "end_unix": 1792720300.5304573,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_export_01",
+      "kind": "documents",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_documents.py",
+        "pdf"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 11.07183609995991,
+      "start_unix": 1792721693.0641344,
+      "end_unix": 1792721704.1362839,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_export_02",
+      "kind": "documents",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_documents.py",
+        "pdf"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 7.66646569990553,
+      "start_unix": 1792721827.6856732,
+      "end_unix": 1792721835.3479393,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_export_03",
+      "kind": "documents",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_documents.py",
+        "pdf"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 7.570941500016488,
+      "start_unix": 1792721951.977185,
+      "end_unix": 1792721959.5486386,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_locate_01",
+      "kind": "postprocess",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\temp\\round131\\pdf_inspect.py",
+        "locate"
+      ],
+      "exit_code": 1,
+      "outer_seconds": 1.308403000002727,
+      "start_unix": 1792721715.0149999,
+      "end_unix": 1792721716.3234456,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_locate_02",
+      "kind": "postprocess",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\temp\\round131\\pdf_inspect.py",
+        "locate"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 0.9734856000868604,
+      "start_unix": 1792721751.2310798,
+      "end_unix": 1792721752.2044952,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_locate_03",
+      "kind": "postprocess",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\temp\\round131\\pdf_inspect.py",
+        "locate"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 0.9666963999625295,
+      "start_unix": 1792721850.9988549,
+      "end_unix": 1792721851.9652598,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_locate_04",
+      "kind": "postprocess",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\temp\\round131\\pdf_inspect.py",
+        "locate"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 0.9581227999879047,
+      "start_unix": 1792721976.242664,
+      "end_unix": 1792721977.2014194,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_render_01",
+      "kind": "postprocess",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\temp\\round131\\pdf_inspect.py",
+        "render",
+        "1",
+        "2",
+        "3",
+        "4",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "57",
+        "58",
+        "59",
+        "90",
+        "91",
+        "92",
+        "93"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 5.413655800046399,
+      "start_unix": 1792721770.053611,
+      "end_unix": 1792721775.455305,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_render_02",
+      "kind": "postprocess",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\temp\\round131\\pdf_inspect.py",
+        "render",
+        "1",
+        "2",
+        "3",
+        "4",
+        "14",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "57",
+        "58",
+        "59",
+        "90",
+        "91",
+        "92",
+        "93"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 5.447771099978127,
+      "start_unix": 1792721860.0760865,
+      "end_unix": 1792721865.524506,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pdf_render_03",
+      "kind": "postprocess",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\temp\\round131\\pdf_inspect.py",
+        "render",
+        "1",
+        "2",
+        "3",
+        "4",
+        "14",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "57",
+        "58",
+        "59",
+        "90",
+        "91",
+        "92",
+        "93"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 5.530932600027882,
+      "start_unix": 1792721977.679426,
+      "end_unix": 1792721983.210396,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "prepare_01",
+      "kind": "preparation",
+      "command": [
+        "D:/msys64/ucrt64/bin/python.exe",
+        "-B",
+        "scripts/round131_benchmark.py",
+        "prepare"
+      ],
+      "exit_code": 1,
+      "outer_seconds": 0.3688500999705866,
+      "start_unix": 1792697100.7952523,
+      "end_unix": 1792697101.168772,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "prepare_02",
+      "kind": "preparation",
+      "command": [
+        "D:/msys64/ucrt64/bin/python.exe",
+        "-B",
+        "scripts/round131_benchmark.py",
+        "prepare"
+      ],
+      "exit_code": 1,
+      "outer_seconds": 0.8098792999517173,
+      "start_unix": 1792697125.7636,
+      "end_unix": 1792697126.5623484,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "prepare_03",
+      "kind": "preparation",
+      "command": [
+        "D:/msys64/ucrt64/bin/python.exe",
+        "-B",
+        "scripts/round131_benchmark.py",
+        "prepare"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 4.276075599947944,
+      "start_unix": 1792697136.8866835,
+      "end_unix": 1792697141.1735468,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "qualification_01",
+      "kind": "qualification",
+      "command": [
+        "D:/msys64/ucrt64/bin/python.exe",
+        "-B",
+        "scripts/round131_benchmark.py",
+        "qualify"
+      ],
+      "exit_code": 1,
+      "outer_seconds": 0.5380031999666244,
+      "start_unix": 1792697099.8734348,
+      "end_unix": 1792697100.4088483,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "qualification_02",
+      "kind": "qualification",
+      "command": [
+        "D:/msys64/ucrt64/bin/python.exe",
+        "-B",
+        "scripts/round131_benchmark.py",
+        "qualify"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 2.5210361999925226,
+      "start_unix": 1792697122.8080177,
+      "end_unix": 1792697125.334844,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    }
+  ],
+  "qualification_limit": 1800,
+  "production_compilations": 0,
+  "formal_nominal_seconds": 33360,
+  "management_reference_seconds": 720,
+  "management_reference_added_again": false,
+  "nested_H_LP_MIP_Work_added": false,
+  "allowances_are_not_exact_CPU_measurements": true,
+  "concurrent_author_preparation_not_added_to_formal_outer_intervals": true,
+  "future_recovery_or_metadata_not_claimed_measured": true
+}
