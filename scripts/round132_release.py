@@ -83,11 +83,13 @@ def manifest():
     files={p for p in OUT.iterdir() if p.is_file() and p.name not in mutable and p.suffix!='.log'}
     files.update(p for folder in ['review','tables','evidence','inputs','source','cost_segments']
         for p in (OUT/folder).rglob('*') if p.is_file())
+    files.update(p for receipt in (OUT/'delivery_costs').glob('*/receipt.json')
+        for p in receipt.parent.rglob('*') if p.is_file())
     files.update(ROOT/n for n in read(OUT/'E3_binding.json')['source_bindings'])
     files.update(ROOT/n for n in read(OUT/'D_execution_binding.json')['adapters'])
     starts=[p.relative_to(ROOT).as_posix() for p in (ROOT/'scripts').glob('round132*.py')]
     files.update(ROOT/n for n in script_closure(starts))
-    files.update(ROOT/n for n in ['.gitattributes','WORKSPACE_POLICY.md','scripts/Round132Expression.hpp',
+    files.update(ROOT/n for n in ['.gitattributes','WORKSPACE_POLICY.md','scripts/Round132Expression.hpp','scripts/round132_cleanup.ps1',
         'scripts/round130_export.cpp','reference/round106_confirmation/S12.txt',
         'reference/round98_confirmation/C2.txt','results/unified_exact_round94/preregistration.json'])
     for a in read(OUT/'raw_archive_manifest.json')['archives']:files.update(ROOT/p['path'] for p in a['pieces'])

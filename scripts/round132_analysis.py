@@ -155,6 +155,32 @@ def historical_physical():
     write(OUT/'historical_physical_outcomes.json',dict(rows=rows,exact_small_dependency_only=True,
         no_historical_raw_carrier_restored=True,no_Optimize=True))
 
+def same_H_and_scope():
+    rows=[]
+    for line,groups in [('D',read(OUT/'experiment_plan.json')['D']),('C',read(OUT/'C_experiment_plan.json')['groups'])]:
+        for g in groups:
+            if line=='D' and 'PS' not in g['methods']:continue
+            camp=OUT/g['name'];launches=read(camp/'identity.json')['launches'];hs={};meta={};aa=read(camp/'reconstructed.json')['arms']
+            native={l.get('comparison_method',l['method']):a['native_Optimize'] for a,l in zip(aa,launches)}
+            for l in launches:
+                method=l.get('comparison_method',l['method'])
+                if method=='P':continue
+                d=core.portable(ROOT,l['destination']);hs[method]=H(ROOT,l['panel'],d)
+                calls=[x['payload'] for x in read(d/'observations.json') if x['payload']['kind']=='call' and x['payload'].get('leaf')=='L0']
+                meta[method]=calls[0] if calls else None
+            wanted=[['S2','PS']] if line=='D' else [['S2R-GEOM','S2R'],['S2R-SP','S2R']]
+            for left,right in wanted:
+                a,b=hs[left],hs[right];same=bool(a['complete'] and b['complete'] and a['fleet']==b['fleet'] and a['semantic_traces']==b['semantic_traces'])
+                c,d=meta[left],meta[right];scope=bool(c and d and all(c[k]==d[k] for k in ['lower_g','upper_g','cutoff'])) if line=='C' else None
+                rows.append(dict(line=line,id=g['role']['id'],seed=g['seed'],left=left,right=right,
+                    complete_own_H_equal=same,left_complete_H=a['complete'],right_complete_H=b['complete'],
+                    left_own_start_U=a['physical']['F'],right_own_start_U=b['physical']['F'],
+                    C_actual_root_interval_cutoff_equal=scope,
+                    both_native_backends_exposed=bool(native[left] and native[right]),
+                    paid_H_backend_attribution_eligible=same and bool(native[left] and native[right]) and (line=='D' or scope),
+                    interpretation='D is complete S2 package versus independently paid-H compact; C changes only the admitted expression on the same inclusive root. Equal Start rules alone never imply identical realized H.'))
+    write(OUT/'same_H_and_scope.json',dict(records=rows,no_Optimize=True,no_cross_arm_information=True))
+
 def run(partial=False,heavy=True):
     arms=[];pairs=[];cc=[];physical_rows=[];missing=[];trajectories=[];inputs=[];issues=[]
     sets=[('D',read(OUT/'experiment_plan.json')['D'])]
@@ -171,13 +197,15 @@ def run(partial=False,heavy=True):
             inputs.extend(dict(path=p.relative_to(ROOT).as_posix(),SHA=sha(p)) for p in [ip,rp])
             i=read(ip);aa=copy.deepcopy(read(rp)['arms']);assert len(aa)==len(i['launches'])
             for a,l in zip(aa,i['launches']):
+                legacy_formal=a.pop('formal_performance',None)
                 for key,expected in [('id',l['id']),('input_SHA',l['panel']['input_sha256']),('seed',l['seed']),('repeat',l['repeat']),('method',l['method'])]:
                     assert a[key]==expected,('sealed arm identity mismatch',line,g['name'],key,a.get(key),expected)
                 assert core.portable(ROOT,a['destination'])==core.portable(ROOT,l['destination'])
                 assert sha(ROOT/l['panel']['input_path'])==a['input_SHA']
                 a.update(line=line,layer=l['panel'].get('layer') if line=='D' else 'C',group=g['number'],
                     method=l.get('comparison_method',l['method']),underlying_reader_method=l['method'],
-                    formal_plan_member=True,nominal_source=p_source(l),
+                    formal_plan_member=True,raw_inherited_formal_performance_flag=legacy_formal,
+                    formal_performance_evidence_eligible=qualified(a),nominal_source=p_source(l),
                     signed_gap=a['U']-a['L'] if a.get('U') is not None and a.get('L') is not None else None,
                     observed_horizon=a['T_produce'],censored=not a['certificate'])
                 assert a['T_cert']==(a['T_produce'] if qualified(a) and a['certificate'] else None)
@@ -191,6 +219,7 @@ def run(partial=False,heavy=True):
                 except (AssertionError,ValueError,KeyError,FileNotFoundError) as error:
                     issue=dict(line=line,group=g['number'],id=a['id'],seed=a['seed'],method=a['method'],error=repr(error))
                     issues.append(issue);a.update(derived_analysis_issue=issue,formal_protocol_qualified=False,objective_class='unevaluable',
+                        formal_performance_evidence_eligible=False,
                         raw_reconstructed_T_cert=a.get('T_cert'),raw_reconstructed_certificate=a.get('certificate'),T_cert=None,certificate=False)
                     arms.append(a);continue
                 a['objective_class']='zero' if f['G_true']==0 and f['P_true']==0 else 'positive'
@@ -270,7 +299,8 @@ def run(partial=False,heavy=True):
     if not partial:assert not issues,issues
     if not partial:assert not budget()['unclosed'] and budget()['G1_seconds']<=144000,budget()
     if not partial:assert all(budget()['by_category'][k]<=limit for k,limit in LIMITS.items()),budget()
-    if not partial:historical_physical()
+    if not partial:
+        historical_physical();same_H_and_scope()
     write(OUT/'resource_accounting.json',dict(UTC=utc(),**budget(),active_not_yet_closed_excluded=True,
         delivery_plan=read(OUT/'delivery_cost_plan.json'),no_nested_cost_double_count=True))
     print(json.dumps(dict(D_arms=Dcount,C_arms=Ccount,pairs=len(pairs),missing=len(missing),heavy=heavy)))

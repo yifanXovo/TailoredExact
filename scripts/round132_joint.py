@@ -9,8 +9,8 @@ import collections,copy,itertools,math
 from fractions import Fraction as F
 
 CASES=[dict(id='J1',b=[2,0,1,1],Q=[1,2],T=240),
-       dict(id='J2',b=[2,2,0,0],Q=[1,2],T=240),
-       dict(id='J3',b=[2,1,1,0],Q=[1,2],T=360),
+       dict(id='J2',b=[2,1,0,0],Q=[1,2],T=240),
+       dict(id='J3',b=[2,1,0,0],Q=[1,2],T=360),
        dict(id='J4',b=[1,1,1,1],Q=[1,1],T=240)]
 
 def freeze():
@@ -24,6 +24,9 @@ def freeze():
         normal_seed='SHA256 round132-joint-v2|case|direction|coordinate mapped to{-2,-1,0,1,2}',
         limits=dict(total_seconds=10800,per_LP_seconds=60,per_car_plans=4096,joint_pairs=65536,exact_basis_free_columns=90,exact_basis_seconds=45),
         strict_witness='exact joint integer support RHS plus rational full-reference extension, each car mixing certificate, theta/rank/IR checks; otherwise NUMERICAL_CANDIDATE_ONLY with exact obstacle',
+        zero_cutoff='J4 has own physical U=0; production S2 would terminate at startup zero. Record actual canonical cutoff/SP presence; this artificial canonical comparison is not backend exposure.',
+        proof_binding='Save exact rational snapshot of actual B_ref binary64 rows and bounds plus SHA; strict witnesses bind that snapshot and complete enumeration.',
+        control_policy='Event controls must be OPTIMAL within inherited tolerance or UNKNOWN; a rank or monotonicity contradiction is investigated, never a new structural result.',
         subsequent_gate='No real-role model use unless a valid joint support upper bound includes all outside donors/receivers and the exact same full R_k; tiny cuts do not transfer by deleting other stations',
         native_calls_serial=True,no_D_C_information_transfer=True,Optimize=0))
     print('E tiny universe, directions, reference structures and exit bounds fixed; no enumeration/Optimize.')

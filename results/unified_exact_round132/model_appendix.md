@@ -3,7 +3,7 @@
 **Current frozen method.** The sole method is S2/MS2. All R125 equations, physical embeddings and valid-cut derivations below are retained. Only two-station support is active in S2; the general three-station proof describes the historical full-M-B option and is not an active-row claim. Numerical proof-shortcut and inclusive-root qualifications retain their stated domains.
 
 
-This appendix is the single maintained model specification for the manuscript. It transcribes the frozen writer, including constraints sometimes redundant for integer solutions. It does not replace the implemented model by a different vehicle-routing formulation. Equations are mathematical real-arithmetic expressions; A.7 states the separate numerical implementation boundary. Source locations refer to production snapshot 355eefd2be3fe5651195681faf7b3a63ee4032f8 [@frozenImplementation].
+This appendix is the single maintained model specification for the manuscript. It transcribes the frozen writer, including constraints sometimes redundant for integer solutions. It does not replace the implemented model by a different vehicle-routing formulation. Equations are mathematical real-arithmetic expressions; A.7 states the separate numerical implementation boundary. Historical source-line pointers retained in this derivation refer to snapshot 355eefd2be3fe5651195681faf7b3a63ee4032f8. The current frozen E3 production source base is 7564a5415331b380e24d1ec06936dcfd56557e67 [@frozenImplementation]; E3_binding.json supplies its exact current source identities. The active state/service, H-use, uniform pair-only and legal inclusive-root conditions are checked against that current source, rather than inferred from historical line numbers.
 
 ## A.1 Sets, data and variables
 

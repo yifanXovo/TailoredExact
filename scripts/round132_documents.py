@@ -173,30 +173,32 @@ Threads and MIPThreads are one, H seed is fixed, and native Seeds 0/1 are repeat
 
 For each comparison distinguish both certified, only left certified, only right certified, both open and unevaluable evidence. Both-certified time directions use unrounded complete certification time; one-sided certificates determine the corresponding direction. Both open is UNDETERMINED. Time ratios are confined to explicit both-certified intersections. No cap is substituted for an unknown certification time, and endpoint gaps do not predict final certification speed. Near-zero objectives are reported separately.
 
+For magnitude only, a both-certified delay is material when slower minus faster is at least max(10 seconds, 0.10 times faster); this threshold never changes a strict Win/Lose direction. Displayed seconds are rounded to three decimals. All directions, signed differences and ratios use the unrounded supporting records, so equal-looking printed times need not be a Tie.
+
 ### 5.2 Current S2 on the known main, tiny and size-boundary panels
 
-The main final-version evidence measures six known SC inputs at two Seeds, with 600-second caps at15 stations and1200 at20. These twelve observations are not unseen validation. S2 and P certify10 and5 observations; strict directions are10 Win and2 UNDETERMINED. No predecessor M-B or ENS time is relabelled as final S2. C denotes qualified T_cert; O @ gives actual open T_produce with null T_cert.
+The main final-version evidence measures six known SC inputs at two Seeds, with 600-second caps at 15 stations and 1200 at 20. These twelve observations are not unseen validation. S2 and P certify 10 and 5 observations; strict directions are 10 Win and 2 UNDETERMINED. No predecessor M-B or ENS time is relabelled as final S2. C denotes qualified T_cert; O @ gives actual open T_produce with null T_cert.
 
 **Table 1. Every known-main final-version observation (seconds).**
 
 '''+known_table+r'''
-The separate tiny layer has two inputs, three Seeds and two opposite-order repeats per Seed. It gives9 Win and3 Lose; the three strict reverse differences are subsecond, while no >=10-second delay and no P-only certificate is observed. This finite absolute-overhead result is not a population noise bound.
+The separate tiny layer has two inputs, three Seeds and two opposite-order repeats per Seed. It gives 9 Win and 3 Lose; the three strict reverse differences are subsecond, while no >=10-second delay and no P-only certificate is observed. This finite absolute-overhead result is not a population noise bound.
 
 **Table 2. Every repeated tiny final-version observation (seconds).**
 
 '''+tiny+r'''
-Both original35-station roles remain open for both methods at their2400-second caps and original Seed0. Their final certification-time ordering is unknown. Earlier results at50/60 stations retain their historical M-B/ENS identity and do not extend final-S2 validation. The complete signed endpoints and all three clocks are in the supporting tables.
+Both original 35-station roles remain open for both methods at their 2400-second caps and original Seed 0. Their final certification-time ordering is unknown. Earlier results at 50/60 stations retain their historical M-B/ENS identity and do not extend final-S2 validation. The complete signed endpoints and all three clocks are in the supporting tables.
 
 ### 5.3 Prospective known-source and geography-transfer validation
 
 The new study fixes six K and six X inputs before H or optimization. K uses the existing CITI/CABI source snapshots and generator; X uses an official Chicago Divvy station snapshot with UTM16N conversion and the same synthetic target, inventory and weight rules. This changes geography, not the demand-generation mechanism and not real operational validation. The source snapshots, field provenance, missing/duplicate handling, IDs, coordinates, transformations and one-time seeds are retained. No difficulty-based filter or redraw is applied.
 
-The six roles per layer cover shortage, balanced and surplus scenarios and compact/regional geometry at15,20 and35 stations. New sets from the same source are disjoint, rather than nested enlargements. Five K roles have no overlap with the recorded historical small selections. K-35-B follows the preregistered next exposure tier and has partial historical overlap, so its stations are not all unseen. Shortage is guaranteed structurally by total initial stock below total target and positive weights/lambda; balanced or surplus zero objectives remain legitimate outcomes.
+The six roles per layer cover shortage, balanced and surplus scenarios and compact/regional geometry at 15, 20 and 35 stations. New sets from the same source are disjoint, rather than nested enlargements. Five K roles have no overlap with the recorded historical small selections. K-35-B follows the preregistered next exposure tier and has partial historical overlap, so its stations are not all unseen. Shortage is guaranteed structurally by total initial stock below total target and positive weights/lambda; balanced or surplus zero objectives remain legitimate outcomes.
 
 **Table 3. Fixed new-input design, physical/computational limits and effective weights.**
 
 '''+design+r'''
-All twelve inputs have independently paid P and S2 at both Seeds:48 arms. The preselected15-S,20-U and35-B role in each layer also has PS at both Seeds:12 additional arms. The PS subset is fixed without reference to which method wins. K/X, sizes and positive/zero outcomes are reported separately; shared controls and Seed repeats are not independent new problems.
+All twelve inputs have independently paid P and S2 at both Seeds: 48 arms. The preselected 15-S, 20-U and 35-B role in each layer also has PS at both Seeds: 12 additional arms. The PS subset is fixed without reference to which method wins. K/X, sizes and positive/zero outcomes are reported separately; shared controls and Seed repeats are not independent new problems.
 
 '''+results_text+r'''
 
@@ -207,7 +209,9 @@ All twelve inputs have independently paid P and S2 at both Seeds:48 arms. The pr
 
 ### 6.1 What existing paid-start and root controls establish
 
-Known paid-H controls provide scoped backend evidence: repeated S2/PS time gains on one role and S2-only certificates on another, with every method open on the shortage boundary role. The outer-package comparison is mixed/time-close; a splitting role has a faster S2R control. A zero split count also does not mean no child LP was probed. Accordingly we do not attribute all speed to decomposition or disaggregate a bundle's effect among its individual rows. Earlier reverse/open outcomes and the selected tuned-P holdout's adverse0/3 versus cold-P1/3 certificate result remain in the historical supplement.
+Known paid-H controls provide scoped backend evidence. On UC-B20-B, S2 saves 233.716 and 123.613 seconds against independently paid PS at the two Seeds. On UC-C20-U, S2 certifies at both Seeds while PS remains open. Every method stays open on the UC-B30-S shortage boundary. These three known problems are attribution evidence, not new-input validation.
+
+The outer-package comparison is mixed/time-close. UC-B20-B exposes three natural splits at each Seed, yet S2R certifies in 1.398 and 1.586 seconds versus S2 in 3.559 and 3.504. Across the four both-certified S2/S2R observations, strict directions are three Lose and one Win; all are time-close under the declared absolute/relative materiality rule. A zero split count also does not mean no child LP was probed. Accordingly we do not attribute all speed to decomposition or disaggregate a bundle's effect among its individual rows. Earlier reverse/open outcomes and the selected tuned-P holdout's adverse 0/3 versus cold-P 1/3 certificate result remain in the historical supplement.
 
 ### 6.2 Two equivalent-expression propositions
 
@@ -219,9 +223,9 @@ Second, eliminate continuous zero-cost W_SP from its actual MC rows, SP cutoff a
 
 These are ideal algebraic projection results. Serialized H bounds and projected coefficients have rounding effects, separately audited against the original numerical policy. Finite LP agreement and residual checks are implementation evidence, not a theorem of exact rational equality for every binary64 matrix. Equivalent projections can still differ in size, presolve, native cuts, root processing and branching.
 
-The known-role cost panel contains four problems, two Seeds and three expressions: same-build S2R, deletion of exactly the three geometry families, and full W projection. It has24 independent paid workflow arms and eight shared baseline observations. Each candidate has eight repeated baseline comparisons; their sixteen typed comparisons are not independent trials. No combined candidate or input-specific expression is run.
+The known-role cost panel contains four problems, two Seeds and three expressions: same-build S2R, deletion of exactly the three geometry families, and full W projection. It has 24 independently paid workflow arms and eight shared baseline observations. Each candidate has eight repeated baseline comparisons; their sixteen typed comparisons are not independent trials. No combined candidate or input-specific expression is run.
 
-'''+ctext+'\n\n'+ctable+r'''
+'''+ctext+'\n\n**Table 5. Every fixed same-build expression workflow (seconds).**\n\n'+ctable+r'''
 ### 6.3 What a new joint quantity structure would have to add
 
 Let R_k be a complete finite necessary service domain and v_k its pickup, delivery and assignment vector. Convexifying each vehicle independently and then imposing unique service gives P_sep. Convexifying jointly unique integer selections gives H_joint, which is contained in P_sep. That elementary inclusion is not itself a new result. A useful increment must survive the current canonical model, single-station theta, event rank and relevant inventory-route structure, with exactly the same R_k on both sides.
@@ -234,9 +238,11 @@ The existing independent-support/unique-access bound cannot separate points alre
 
 Reported fleets are interpreted through physical Gini, P_avg, final inventories, serviced stations, pickups/deliveries, loaded return and route travel/handling/prefix resources. A smaller ratio dispersion can coexist with target shortages; the penalty and actual service outcomes must be read together. Omega/rho varies because the original weights are not sum-normalized. No policy or sensitivity conclusion is inferred for an untested weight range.
 
-**Operational outcomes of existing and new legal S2 fleets.**
+**Table 6. Operational outcomes of existing and new legal S2 fleets.**
 
 '''+operational+r'''
+
+An existing valid 35-station S2 fleet illustrates why these definitions matter. Its first vehicle picks up 58 bicycles over its route with Q=20 and a maximum prefix load of 20. Across the fleet, 38 bicycles return to the depot, reducing station stock from 660 to 622. This legal loaded return and repeated use of vehicle capacity would be excluded by the incorrect bound \(\sum_i p_{ki}\le Q_k\) or a fixed station-stock equality. The example remains an open historical timing observation; its physical validity does not certify optimality.
 
 The finite inputs, synthetic inventory mechanism, Euclidean distance convention, current parser/physical semantics and single backend limit performance generalization. Finite manageable inventory states, nonnegative inventories, positive targets and unique one-way service are explicit mathematical premises. A constructible formulation in another problem does not imply measured cross-problem performance. Timeouts, reversals and lack of objective increments constrain the claims.
 
@@ -254,6 +260,8 @@ The final research recommendation is tied to the completed new-input and structu
 '''
     model=(prior/'model_appendix.md').read_text(encoding='utf-8-sig')
     model=model.replace('**Current-version map (Round130).**','**Current frozen method.**')
+    model=model.replace('Source locations refer to production snapshot 355eefd2be3fe5651195681faf7b3a63ee4032f8 [@frozenImplementation].',
+        'Historical source-line pointers retained in this derivation refer to snapshot 355eefd2be3fe5651195681faf7b3a63ee4032f8. The current frozen E3 production source base is 7564a5415331b380e24d1ec06936dcfd56557e67 [@frozenImplementation]; E3_binding.json supplies its exact current source identities. The active state/service, H-use, uniform pair-only and legal inclusive-root conditions are checked against that current source, rather than inferred from historical line numbers.')
     algorithm=(prior/'algorithm_appendix.md').read_text(encoding='utf-8-sig')
     algorithm=algorithm.replace('**Current-version map (Round130).**','**Current frozen method.**')
     subprocedures='\n\n## B.0 Complete leaf and cover subprocedures\n\n'

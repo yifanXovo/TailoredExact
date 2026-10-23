@@ -10,6 +10,8 @@ D uses the original R130-qualified E3 PE and original Gurobi13.0.2 DLL. Their SH
 
 The current results are `observations.json`, `arms.csv`, `pairs.csv`, `stratified_summary.json`, `mechanism_costs.csv`, `physical_outcomes.csv` and `trajectory_index.json`. Open `T_cert` is null. The64 typed comparisons reuse controls:48 D comparisons from60 arms and16 C comparisons from24 arms. Seed0/1 are repeated observations of the same problem. K/X and known diagnostic roles remain separate. Signed gaps are not clipped, and actual native field nonexposure is not filled with zero. The small inherited operational fleet dependency keeps its R131 identity and is not a new timing observation.
 
+An inherited helper recognizes only its older directory names in the `formal_performance` annotation. Current derived tables retain that original annotation as `raw_inherited_formal_performance_flag`, while explicit frozen-plan membership and the full physical/source/return/cover qualification determine `formal_performance_evidence_eligible`. The sealed raw reconstruction is not rewritten. This is a reporting adaptation, not a new production algorithm or a retry.
+
 `mathematical_analysis.md` contains the ideal projection arguments and actual floating-matrix conditions. `joint_structure_note.md` distinguishes exact full-reference witnesses, numerical candidates, full-objective reoptimization and conditional steps not admitted. The complete paper authority is `manuscript.md`; its model, algorithm and expression-proof appendices are part of that source. `model_appendix.md` and `algorithm_appendix.md` are source-extracted supporting views. Only the authoritative source plus `references.bib` feed the PDF.
 
 ## One public empty-root read-only recovery
