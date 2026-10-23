@@ -1,10 +1,10 @@
 {
-  "UTC": "2026-10-23T18:57:25.345171+00:00",
-  "G1_seconds": 12974.349585400312,
-  "remaining_G1_seconds": 131025.65041459969,
+  "UTC": "2026-10-23T20:54:10.418682+00:00",
+  "G1_seconds": 20086.32223560044,
+  "remaining_G1_seconds": 123913.67776439956,
   "by_category": {
     "C": 0.0,
-    "D": 12901.313702199841,
+    "D": 20013.28635239997,
     "qualification": 73.03588320047129,
     "E": 0.0,
     "C3": 0.0,
@@ -18,9 +18,9 @@
     "C3": 4800,
     "repair": 8400
   },
-  "separately_reported_seconds": 705.6319653001847,
+  "separately_reported_seconds": 720.2722714000847,
   "unclosed": [
-    "formal_D09_01"
+    "formal_D10_01"
   ],
   "active_not_yet_closed_excluded": true,
   "delivery_plan": {
@@ -36,5 +36,8 @@
     "no_formal_window_changes": true,
     "writing_and_manual_reading": "wall elapsed estimate reported separately; not exact CPU"
   },
-  "no_nested_cost_double_count": true
+  "no_nested_cost_double_count": true,
+  "full_table_decode_deferred_until_sequence_completion": true,
+  "separate_management_CPU_seconds_at_snapshot": 2588.96875,
+  "management_CPU_scope": "Original waiter cumulative process CPU at snapshot; not native slowdown or another G1 wall charge"
 }
