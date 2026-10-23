@@ -1,0 +1,40 @@
+{
+  "UTC": "2026-10-23T16:12:02.688780+00:00",
+  "G1_seconds": 3593.6976002003066,
+  "remaining_G1_seconds": 140406.3023997997,
+  "by_category": {
+    "C": 0.0,
+    "D": 3520.6617169998353,
+    "qualification": 73.03588320047129,
+    "E": 0.0,
+    "C3": 0.0,
+    "repair": 0.0
+  },
+  "limits": {
+    "C": 32400,
+    "D": 84000,
+    "qualification": 3600,
+    "E": 10800,
+    "C3": 4800,
+    "repair": 8400
+  },
+  "separately_reported_seconds": 209.5939407000551,
+  "unclosed": [
+    "formal_D05_01"
+  ],
+  "active_not_yet_closed_excluded": true,
+  "delivery_plan": {
+    "UTC": "2026-10-23T15:40:51.543226+00:00",
+    "non_native_postverify": "measured disjoint segments inside group supervisors",
+    "remaining_plan": {
+      "read_only_current_table_replay_soft_seconds": 2400,
+      "PDF_export_soft_seconds": 900,
+      "packing_soft_seconds": 2400,
+      "public_recovery_soft_seconds": 3600
+    },
+    "soft_estimates_not_G1_limits": true,
+    "no_formal_window_changes": true,
+    "writing_and_manual_reading": "wall elapsed estimate reported separately; not exact CPU"
+  },
+  "no_nested_cost_double_count": true
+}

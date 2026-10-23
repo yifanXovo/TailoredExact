@@ -1,4 +1,9 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
+# Round132 frozen plans, current source snapshots and read-only delivery bytes.
+/scripts/round132* -text whitespace=cr-at-eol
+/scripts/Round132Expression.hpp -text whitespace=cr-at-eol
+/results/unified_exact_round132/** -text whitespace=cr-at-eol
+/results/unified_exact_round132/**/*.log -whitespace
 # Round131 frozen protocol, original-byte inputs, adapters and evidence.
 /scripts/round131* -text whitespace=cr-at-eol
 /results/unified_exact_round131/** -text whitespace=cr-at-eol

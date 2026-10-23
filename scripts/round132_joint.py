@@ -116,6 +116,25 @@ def exact_matrix(model,path):
     write(path,dict(rows=rows,bounds={v.VarName:[str(F.from_float(v.LB)),str(F.from_float(v.UB))] for v in model.getVars()},
         coefficient_contract='exact rationals of actual loaded binary64 coefficients; all types relaxed to continuous'))
 
+def objective_receipt(model,objective_terms,constant):
+    """Retain the existing LP return; no extra solve or evidence promotion."""
+    fact=dict(native_status=model.Status,Runtime=model.Runtime,Work=model.Work,model_sense=model.ModelSense,
+        objective_coefficients={n:str(F.from_float(a)) for n,a in objective_terms.items()},
+        objective_constant=str(F.from_float(constant)),
+        numeric_policy=dict(FeasibilityTol=model.Params.FeasibilityTol,OptimalityTol=model.Params.OptimalityTol),
+        no_extra_Optimize=True,strict_rational_optimality_not_claimed=True)
+    if model.Status==2:
+        fact.update(objective=model.ObjVal,
+            values={v.VarName:str(F.from_float(v.X)) for v in model.getVars() if v.X},
+            reduced_costs={v.VarName:str(F.from_float(v.RC)) for v in model.getVars() if v.RC},
+            row_duals_by_index={str(j):str(F.from_float(c.Pi)) for j,c in enumerate(model.getConstrs()) if c.Pi})
+        quality={}
+        for name in ['ConstrVio','ConstrResidual','BoundVio','DualVio','DualResidual','ComplVio']:
+            try:quality[name]=model.getAttr(name)
+            except Exception:quality[name]=None
+        fact['native_quality']=quality
+    return fact
+
 def add_reference(m,case,cars,joint,gp):
     original={v.VarName:v for v in m.getVars()};lam=[]
     for k,ps in enumerate(cars):
@@ -179,7 +198,7 @@ def run():
             with gp.read(str(d/'canonical/original.lp'),env=env) as m:
                 m.Params.Threads=1;m.Params.Seed=0;m.Params.TimeLimit=60
                 for v in m.getVars():v.VType=gp.GRB.CONTINUOUS
-                m.update();objective=m.getObjective()
+                m.update();objective=m.getObjective();objective_constant=objective.getConstant()
                 objective_terms={objective.getVar(t).VarName:objective.getCoeff(t) for t in range(objective.size())}
                 cutoff_present=False
                 for con in m.getConstrs():
@@ -240,6 +259,8 @@ def run():
                         write(d/'best_separation.json',dict(best_numeric=best_numeric,best_strict=best_strict))
                     write(d/'support_queries.json',dict(records=records,controls=controls))
                 m.setObjective(objective,gp.GRB.MINIMIZE);m.optimize();before=m.ObjVal if m.Status==gp.GRB.OPTIMAL else None
+                before_receipt=objective_receipt(m,objective_terms,objective_constant)
+                write(d/'original_objective_reference.json',before_receipt)
                 if m.Status==gp.GRB.INFEASIBLE:
                     write(d/'reference_infeasibility_contradiction.json',dict(stage='original objective',known_empty_fleet=True))
                     raise RuntimeError('Full reference excludes its known feasible empty fleet')
@@ -247,6 +268,9 @@ def run():
                 vectors=[vector(pair) for pair in joint]
                 for t,n in enumerate(names):m.addConstr(original[n]==gp.quicksum(vectors[j][t]*ll[j] for j in range(len(joint))))
                 m.optimize();after=m.ObjVal if m.Status==gp.GRB.OPTIMAL else None;m.write(str(d/'B_joint.lp'))
+                after_receipt=objective_receipt(m,objective_terms,objective_constant)
+                write(d/'original_objective_joint.json',after_receipt)
+                exact_matrix(m,d/'B_joint_exact_matrix.json')
                 if m.Status==gp.GRB.INFEASIBLE:
                     write(d/'joint_infeasibility_contradiction.json',dict(known_empty_fleet=True))
                     raise RuntimeError('Full joint model excludes its known feasible empty fleet')
@@ -260,6 +284,9 @@ def run():
                     queried_directions=len(records),positive_numeric_gaps=sum(q.get('gap',0)>1e-7 for q in records),
                     best_numeric=best_numeric,best_strict=best_strict,event_controls=controls,budget_exit=budget_exit,
                     canonical_scope=canonical_scope,
+                    canonical_SHA=sha(d/'canonical/original.lp'),reference_exact_matrix_SHA=sha(d/'B_ref_exact_matrix.json'),
+                    joint_exact_matrix_SHA=sha(d/'B_joint_exact_matrix.json'),
+                    original_objective_receipt_SHAs={n:sha(d/n) for n in ['original_objective_reference.json','original_objective_joint.json']},
                     full_current_micro_objective_reference=before,full_current_micro_objective_joint=after,
                     current_objective_increment=None if before is None or after is None else after-before))
                 write(d/'case_result.json',summaries[-1])

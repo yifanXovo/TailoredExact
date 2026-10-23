@@ -1,6 +1,6 @@
 """One research-question manuscript source, derived from retained full methods."""
 from round132_common import *
-import re,copy,collections,types,inspect
+import re,copy,collections,types,inspect,csv
 
 def table(head,rows):
     return '| '+' | '.join(head)+' |\n| '+' | '.join(['---']*len(head))+' |\n'+'\n'.join('| '+' | '.join(str(c) for c in row)+' |' for row in rows)+'\n'
@@ -37,6 +37,21 @@ def draft():
     etext='The finite complete four-station joint-structure comparison is preregistered. Its required computation remains pending; later full-source diagnostics and any production algorithm are conditional on a valid incremental structure and a complete outside-station interface.'
     if (OUT/'joint_structure_note.md').exists():
         etext=(OUT/'joint_structure_note.md').read_text(encoding='utf-8').split('<!-- manuscript-summary -->')[1].split('<!-- /manuscript-summary -->')[0]
+    operational='The complete operational table is pending the sealed workflows; no synthetic service outcome is invented.'
+    if completeD==60 and (OUT/'historical_physical_outcomes.json').exists():
+        with (OUT/'physical_outcomes.csv').open(encoding='utf-8',newline='') as f:physical=list(csv.DictReader(f))
+        display=[]
+        for a in physical:
+            if a['line']!='D' or a['method']!='S2' or int(a['seed'])!=0:continue
+            display.append(dict(a,pickups=json.loads(a['pickups']),drops=json.loads(a['drops']),return_loads=json.loads(a['return_loads']),route_resources=json.loads(a['route_resources'])))
+        display=read(OUT/'historical_physical_outcomes.json')['rows']+display
+        operational=table(['Role / evidence','G / P_avg','Omega / rho','Initial / final stock','Pickup / delivery / return','Max route use'],[
+            [a['id']+(' (known)' if a['line'].startswith('R131') else ' (new)'),
+             f"{float(a['G_true']):.5f} / {float(a['P_avg']):.5f}",f"{float(a['Omega']):.4f} / {float(a['rho']):.4f}",
+             f"{a['total_initial_inventory']} / {a['total_final_inventory']}",
+             f"{sum(a['pickups'])} / {sum(a['drops'])} / {sum(a['return_loads'])}",
+             f"{max(q['total_seconds']/q['T'] for q in a['route_resources']):.3f} T"] for a in display])
+        operational+='\nThe display fixes S2 at Seed0 for every new input, plus two existing final-version fleets with their historical identities. It is descriptive, not another performance panel. Full per-arm inventories, station counts, per-vehicle quantities, route travel/handling and prefix peaks are in the physical outcome tables.\n'
     main=r'''# A tailored exact method for static bicycle redistribution with inventory-ratio dispersion
 
 ## Abstract
@@ -218,6 +233,10 @@ The existing independent-support/unique-access bound cannot separate points alre
 ## 7. Operational meaning, limitations and next step
 
 Reported fleets are interpreted through physical Gini, P_avg, final inventories, serviced stations, pickups/deliveries, loaded return and route travel/handling/prefix resources. A smaller ratio dispersion can coexist with target shortages; the penalty and actual service outcomes must be read together. Omega/rho varies because the original weights are not sum-normalized. No policy or sensitivity conclusion is inferred for an untested weight range.
+
+**Operational outcomes of existing and new legal S2 fleets.**
+
+'''+operational+r'''
 
 The finite inputs, synthetic inventory mechanism, Euclidean distance convention, current parser/physical semantics and single backend limit performance generalization. Finite manageable inventory states, nonnegative inventories, positive targets and unique one-way service are explicit mathematical premises. A constructible formulation in another problem does not imply measured cross-problem performance. Timeouts, reversals and lack of objective increments constrain the claims.
 
