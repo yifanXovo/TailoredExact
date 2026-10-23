@@ -1,0 +1,7 @@
+# Round131 reproducibility scope
+
+Run scripts/round131_portable_check.py from the supplied recovered root after restoring the current finite carriers. The checker performs read-only fixed-input/argv/physical/model/Start/source-return-cover and arithmetic checks; it never starts Optimize, compiles or falls back to an old checkout. Native PE/DLL and licenses are excluded. Re-running performance requires separately available exact E3/DLL bytes; this round does not rebuild them. The full exact commands are in argv_freeze.json and paper_method_config.json.
+
+The raw signed gaps, Seed0-only historical flags, actual returned settings, producer seals and qualified endpoints stay separate. T_cert is null unless own complete evidence qualifies. No cap is substituted. Empty departure, loaded return, unique nonzero service, inventories/load prefixes and travel plus 120 times cumulative pickup determine physical validity. Objective uses original true Gini and weighted relative deviation, excluding depot. The original numerical policy is unchanged. Zero certificates and absence of backend exposure are reported explicitly.
+
+The primary finite panel is A. B and C have separate roles and denominators. All inputs were exposed before this round; no generator is called. evidence_registry.csv preserves the original round/build/clock/cap/Seed/repeat and role of each cited measurement, without choosing a cross-round best time. Original R130 full attribution and adverse/open predecessor observations remain authoritative in their original files.

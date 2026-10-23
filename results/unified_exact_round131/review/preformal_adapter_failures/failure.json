@@ -1,0 +1,12 @@
+{
+  "native_Optimize": 0,
+  "cause": "Classifier test incorrectly supplied pickup variables rather than binary service z variables; prepare then found missing prerequisite qualification receipt.",
+  "production_source_changed": false,
+  "formal_arms_started": 0,
+  "stage": "No-Optimize preflight",
+  "repair": "Correct the synthetic classifier row to cross-vehicle z variables; retain failed logs and script.",
+  "failed_fees": [
+    "qualification_01",
+    "prepare_01"
+  ]
+}

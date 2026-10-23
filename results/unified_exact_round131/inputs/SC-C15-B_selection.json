@@ -1,0 +1,59 @@
+{
+  "schema": "round126-geographic-selection-v1",
+  "dataset_family": "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+  "generator_version": "round126-thin-offline-adapter-v1",
+  "selection_id": "r126_SC-C15-B_regional_r2",
+  "V": 15,
+  "geographic_regime": "regional",
+  "replicate": 2,
+  "seed": 1941697843,
+  "seed_derivation_material": "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|selection|V=15|geography=regional|replicate=2",
+  "anchor_source_station_row_index": 411,
+  "anchor_coordinate_utm18n_meters": [
+    587710.757,
+    4508014.905
+  ],
+  "selection_mechanism": "farthest-first coverage inside the 2V nearest eligible stations around the anchor",
+  "tie_breaking": "ascending zero-based source_station_row_index",
+  "eligible_station_rule": "0 < source capacity < 100",
+  "eligible_station_count": 442,
+  "candidate_pool_size": 30,
+  "selected_source_station_row_indices": [
+    411,
+    425,
+    352,
+    375,
+    378,
+    424,
+    399,
+    358,
+    380,
+    403,
+    398,
+    434,
+    407,
+    382,
+    396
+  ],
+  "selection_order_is_local_station_order": true,
+  "depot_rule": "artificial arithmetic centroid of serialized service-station coordinates, rounded to three decimals",
+  "depot_coordinate_utm18n_meters": [
+    588101.765,
+    4507701.368
+  ],
+  "source_capacity_summary": {
+    "minimum": 18,
+    "maximum": 56,
+    "mean": 36.0,
+    "median": 37
+  },
+  "geographic_statistics": {
+    "geographic_diameter_m": 1908.829421257698,
+    "mean_pairwise_station_distance_m": 871.1657010566146,
+    "maximum_pairwise_station_distance_m": 1908.829421257698,
+    "mean_depot_distance_m": 603.6346763885233,
+    "maximum_depot_distance_m": 984.7727309015647,
+    "bounding_box_width_m": 1464.4440000000177,
+    "bounding_box_height_m": 1631.109999999404
+  }
+}

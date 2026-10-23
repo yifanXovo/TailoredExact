@@ -1,0 +1,232 @@
+{
+  "execution": "COMPLETE",
+  "stage_exit": "FINAL_VERSION_BENCHMARK_COMPLETE",
+  "actual_formal_arms": 52,
+  "matched_groups": 26,
+  "distinct_inputs": 10,
+  "new_inputs": 0,
+  "layers": {
+    "A": {
+      "arms": 24,
+      "matched_groups": 12,
+      "distinct_inputs": 6,
+      "classes": {
+        "BOTH_CERTIFIED": 5,
+        "S2_ONLY_CERTIFIED": 5,
+        "BOTH_OPEN": 2
+      },
+      "directions": {
+        "Win": 10,
+        "UNDETERMINED": 2
+      },
+      "certification_counts": {
+        "P": 5,
+        "S2": 10
+      },
+      "nonzero_certification_counts": {
+        "P": 5,
+        "S2": 10
+      },
+      "zero_certification_counts": {
+        "P": 0,
+        "S2": 0
+      },
+      "no_backend_exposure": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_intersection_n": 5,
+      "both_certified_intersection": [
+        {
+          "group": 1,
+          "id": "SC-C15-S",
+          "seed": 0,
+          "repeat": 1
+        },
+        {
+          "group": 2,
+          "id": "SC-C15-S",
+          "seed": 1,
+          "repeat": 1
+        },
+        {
+          "group": 3,
+          "id": "SC-B15-S",
+          "seed": 0,
+          "repeat": 1
+        },
+        {
+          "group": 4,
+          "id": "SC-B15-S",
+          "seed": 1,
+          "repeat": 1
+        },
+        {
+          "group": 5,
+          "id": "SC-C15-B",
+          "seed": 0,
+          "repeat": 1
+        }
+      ],
+      "conditional_geometric_mean_P_over_S2": 7.577698983876585,
+      "total_production_seconds_including_open": {
+        "P": 8796.812173956889,
+        "S2": 4208.424472860759
+      },
+      "total_production_is_not_total_certification_time": true,
+      "open_T_cert_imputed": false,
+      "scope": "conditional ratios describe only the listed both-certified intersection, not the whole panel; no independence or significance claim"
+    },
+    "B": {
+      "arms": 24,
+      "matched_groups": 12,
+      "distinct_inputs": 2,
+      "classes": {
+        "BOTH_CERTIFIED": 12
+      },
+      "directions": {
+        "Win": 9,
+        "Lose": 3
+      },
+      "certification_counts": {
+        "P": 12,
+        "S2": 12
+      },
+      "nonzero_certification_counts": {
+        "P": 12,
+        "S2": 12
+      },
+      "zero_certification_counts": {
+        "P": 0,
+        "S2": 0
+      },
+      "no_backend_exposure": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_intersection_n": 12,
+      "both_certified_intersection": [
+        {
+          "group": 13,
+          "id": "SM-C8-S",
+          "seed": 0,
+          "repeat": 1
+        },
+        {
+          "group": 14,
+          "id": "SM-C8-S",
+          "seed": 0,
+          "repeat": 2
+        },
+        {
+          "group": 15,
+          "id": "SM-C8-S",
+          "seed": 1,
+          "repeat": 1
+        },
+        {
+          "group": 16,
+          "id": "SM-C8-S",
+          "seed": 1,
+          "repeat": 2
+        },
+        {
+          "group": 17,
+          "id": "SM-C8-S",
+          "seed": 2,
+          "repeat": 1
+        },
+        {
+          "group": 18,
+          "id": "SM-C8-S",
+          "seed": 2,
+          "repeat": 2
+        },
+        {
+          "group": 19,
+          "id": "SM-B10-B",
+          "seed": 0,
+          "repeat": 1
+        },
+        {
+          "group": 20,
+          "id": "SM-B10-B",
+          "seed": 0,
+          "repeat": 2
+        },
+        {
+          "group": 21,
+          "id": "SM-B10-B",
+          "seed": 1,
+          "repeat": 1
+        },
+        {
+          "group": 22,
+          "id": "SM-B10-B",
+          "seed": 1,
+          "repeat": 2
+        },
+        {
+          "group": 23,
+          "id": "SM-B10-B",
+          "seed": 2,
+          "repeat": 1
+        },
+        {
+          "group": 24,
+          "id": "SM-B10-B",
+          "seed": 2,
+          "repeat": 2
+        }
+      ],
+      "conditional_geometric_mean_P_over_S2": 1.4575705935995755,
+      "total_production_seconds_including_open": {
+        "P": 33.328827233286574,
+        "S2": 23.31600912520662
+      },
+      "total_production_is_not_total_certification_time": true,
+      "open_T_cert_imputed": false,
+      "scope": "conditional ratios describe only the listed both-certified intersection, not the whole panel; no independence or significance claim"
+    },
+    "C": {
+      "arms": 4,
+      "matched_groups": 2,
+      "distinct_inputs": 2,
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "certification_counts": {
+        "P": 0,
+        "S2": 0
+      },
+      "nonzero_certification_counts": {
+        "P": 0,
+        "S2": 0
+      },
+      "zero_certification_counts": {
+        "P": 0,
+        "S2": 0
+      },
+      "no_backend_exposure": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_intersection_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_P_over_S2": null,
+      "total_production_seconds_including_open": {
+        "P": 4741.377640807303,
+        "S2": 4741.398812771891
+      },
+      "total_production_is_not_total_certification_time": true,
+      "open_T_cert_imputed": false,
+      "scope": "conditional ratios describe only the listed both-certified intersection, not the whole panel; no independence or significance claim"
+    }
+  },
+  "no_pooled_success_rate_or_geomean": true,
+  "no_cap_or_unknown_time_imputation": true,
+  "issues": []
+}
