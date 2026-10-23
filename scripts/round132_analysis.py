@@ -182,7 +182,12 @@ def same_H_and_scope():
     write(OUT/'same_H_and_scope.json',dict(records=rows,no_Optimize=True,no_cross_arm_information=True))
 
 def run(partial=False,heavy=True):
+    assert (OUT/'sequence_completion.json').exists(),'Defer complete raw-table decoding until the native sequence has finished'
+    assert not budget()['unclosed'],'Defer complete raw-table decoding until native/qualification child receipts close'
     arms=[];pairs=[];cc=[];physical_rows=[];missing=[];trajectories=[];inputs=[];issues=[]
+    environment_path=OUT/'timing_environment_amendment.json'
+    environment=read(environment_path)
+    inputs.append(dict(path=environment_path.relative_to(ROOT).as_posix(),SHA=sha(environment_path)))
     sets=[('D',read(OUT/'experiment_plan.json')['D'])]
     if (OUT/'C_experiment_plan.json').exists():sets.append(('C',read(OUT/'C_experiment_plan.json')['groups']))
     for line,groups in sets:
@@ -215,6 +220,20 @@ def run(partial=False,heavy=True):
                 try:
                     assert qualified(a),'Existing independent evidence is unqualified'
                     assert all(isinstance(a.get(k),(int,float)) and math.isfinite(a[k]) for k in ['U','L'])
+                    producer=d/'producer_receipt.json'
+                    assert sha(producer)==a['producer_receipt_SHA']
+                    clock=read(producer);begin=clock['t0_unix'];end=clock['t_produce_unix']
+                    assert begin<=end
+                    overlap=lambda stop:max(0.,min(end,stop)-max(begin,environment['old_waiter_creation_unix']))
+                    lo=overlap(environment['old_waiter_stop_unix_lower']);hi=overlap(environment['old_waiter_stop_unix_upper'])
+                    a.update(stage_waiter_lifetime_overlap_lower_seconds=lo,
+                        stage_waiter_lifetime_overlap_upper_seconds=hi,
+                        stage_waiter_lifetime_overlap=hi>0,
+                        timing_environment_scope='possible boundary overlap with original waiter lifetime' if lo==0<hi else
+                            'conservative overlap with original waiter lifetime; not parsing/CPU-contention/slowdown seconds' if lo>0 else
+                            'no original-waiter lifetime overlap; ambient load not ruled out',
+                        counterfactual_clean_machine_T_cert=None)
+                    inputs.append(dict(path=producer.relative_to(ROOT).as_posix(),SHA=sha(producer)))
                     f=physical(l['panel'],d,a)
                 except (AssertionError,ValueError,KeyError,FileNotFoundError) as error:
                     issue=dict(line=line,group=g['number'],id=a['id'],seed=a['seed'],method=a['method'],error=repr(error))
@@ -233,7 +252,9 @@ def run(partial=False,heavy=True):
             for left,right in wanted:
                 q=inherited_pair(g['role']['id'],by[left],by[right],kind=f'R132_{line}',seed=g['seed'])
                 q.pop('legacy_materiality',None);q.update(line=line,layer=g['role'].get('layer') if line=='D' else 'C',group=g['number'],
-                    V=g['role']['V'],objective_class=by[left]['objective_class'] if by[left]['objective_class']==by[right]['objective_class'] else 'mixed_attained_endpoints')
+                    V=g['role']['V'],objective_class=by[left]['objective_class'] if by[left]['objective_class']==by[right]['objective_class'] else 'mixed_attained_endpoints',
+                    left_stage_waiter_lifetime_overlap=by[left].get('stage_waiter_lifetime_overlap'),
+                    right_stage_waiter_lifetime_overlap=by[right].get('stage_waiter_lifetime_overlap'))
                 if q['classification']=='BOTH_CERTIFIED':
                     dt=q['left_minus_right_seconds'];threshold=max(10.,.1*min(by[left]['T_cert'],by[right]['T_cert']))
                     q.update(material_threshold_seconds=threshold,materiality='LEFT_MATERIALLY_FASTER' if -dt>=threshold else 'RIGHT_MATERIALLY_FASTER' if dt>=threshold else 'TIME_CLOSE')
@@ -292,6 +313,11 @@ def run(partial=False,heavy=True):
     write(OUT/'observations.json',result);write(OUT/'stratified_summary.json',dict(strata=strat,problem_size_objective_strata=grouped,D_arms=Dcount,C_arms=Ccount,
         manuscript_D_statement=dtext,manuscript_C_statement=ctext,seed_repeats_not_independent=True,full_raw_signed_gaps_preserved=True))
     csv_table(OUT/'arms.csv',arms);csv_table(OUT/'pairs.csv',pairs);csv_table(OUT/'mechanism_costs.csv',cc);csv_table(OUT/'physical_outcomes.csv',physical_rows)
+    if not partial:csv_table(OUT/'timing_environment_exposure.csv',[
+        {k:a.get(k) for k in ['line','id','seed','method','group','producer_receipt_SHA',
+            'stage_waiter_lifetime_overlap_lower_seconds','stage_waiter_lifetime_overlap_upper_seconds',
+            'stage_waiter_lifetime_overlap','timing_environment_scope','counterfactual_clean_machine_T_cert']}
+        for a in arms])
     write(OUT/'trajectory_index.json',dict(arms=trajectories,common_time_comparisons='not claimed; retained actual trajectories only'))
     write(OUT/'analysis_inputs.json',dict(inputs=inputs,runner_SHA=sha(__file__),issues=issues,no_Optimize=True,
         immutable_group_arm_input_Seed_and_destination_identity_checked=True))
