@@ -199,7 +199,7 @@ The six roles per layer cover shortage, balanced and surplus scenarios and compa
 
 All twelve inputs have independently paid P and S2 at both Seeds: 48 arms. The preselected 15-S, 20-U and 35-B role in each layer also has PS at both Seeds: 12 additional arms. The PS subset is fixed without reference to which method wins. K/X, sizes and positive/zero outcomes are reported separately; shared controls and Seed repeats are not independent new problems.
 
-The prospective layer currently has 17 of 60 sealed formal observations. Results are pending until the fixed complete table and its final evidence review are available; no provisional trend is used for method selection.
+The prospective layer currently has 20 of 60 sealed formal observations. Results are pending until the fixed complete table and its final evidence review are available; no provisional trend is used for method selection.
 
 **Table 5. Every fixed new-input method position (seconds).**
 
@@ -212,7 +212,7 @@ The prospective layer currently has 17 of 60 sealed formal observations. Results
 | K-20-S / 0 | O @ 1171.019 | O @ 1171.416 | not selected |
 | K-20-S / 1 | O @ 1170.687 | O @ 1171.715 | not selected |
 | K-20-U / 0 | O @ 1170.818 | C 5.800 | O @ 1171.322 |
-| K-20-U / 1 | pending | pending | pending |
+| K-20-U / 1 | O @ 1171.688 | C 5.158 | O @ 1170.895 |
 | K-35-B / 0 | pending | pending | pending |
 | K-35-B / 1 | pending | pending | pending |
 | K-35-U / 0 | pending | pending | not selected |
