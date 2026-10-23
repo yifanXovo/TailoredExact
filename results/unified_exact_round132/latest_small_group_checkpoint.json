@@ -1,61 +1,63 @@
 {
-  "UTC": "2026-10-23T20:53:12.396195+00:00",
-  "group": "campaign/D_group09",
-  "reconstructed_SHA": "6fb274f9ae6192d5ac37570b9a2832e3d6ff23bb711dd00d0c8780f173a9e559",
-  "read_bytes": 52556,
+  "UTC": "2026-10-23T22:52:39.127867+00:00",
+  "group": "campaign/D_group10",
+  "reconstructed_SHA": "ab0c5455c14f1e1e1f27013d52760ecdf4e512f8ee309139d0e3f6c7f5a22305",
+  "file_bytes": 50320,
+  "read_bytes": 50320,
+  "status": "SMALL_SEALED_GROUP_CHECKED",
   "arms": [
     {
       "id": "K-35-B",
-      "method": "P",
-      "seed": 0,
-      "U": 0.17752781977934984,
-      "L": 6.58522719219441e-21,
-      "gap": 0.17752781977934984,
+      "method": "PS",
+      "seed": 1,
+      "U": 0.10200549923995827,
+      "L": 0.0,
+      "gap": 0.10200549923995827,
       "certificate": false,
       "formal_protocol_qualified": true,
-      "T_produce": 2370.959283974138,
-      "T_verify": 0.8998988999519497,
-      "T_total": 2371.85918287409,
+      "T_produce": 2370.91335264151,
+      "T_verify": 6.5435799999395385,
+      "T_total": 2377.4569326414494,
       "T_cert": null
     },
     {
       "id": "K-35-B",
       "method": "S2",
-      "seed": 0,
-      "U": 0.10938792363431224,
-      "L": 7.674577640059836e-18,
-      "gap": 0.10938792363431223,
+      "seed": 1,
+      "U": 0.10924988738870536,
+      "L": 5.967902950173731e-18,
+      "gap": 0.10924988738870536,
       "certificate": false,
       "formal_protocol_qualified": true,
-      "T_produce": 2370.5523023999995,
-      "T_verify": 5.207299600006081,
-      "T_total": 2375.7596020000055,
+      "T_produce": 2370.3680211999454,
+      "T_verify": 11.894213699968532,
+      "T_total": 2382.262234899914,
       "T_cert": null
     },
     {
       "id": "K-35-B",
-      "method": "PS",
-      "seed": 0,
-      "U": 0.0939300087787982,
+      "method": "P",
+      "seed": 1,
+      "U": 0.22477785720503826,
       "L": 0.0,
-      "gap": 0.0939300087787982,
+      "gap": 0.22477785720503826,
       "certificate": false,
       "formal_protocol_qualified": true,
-      "T_produce": 2370.4256881999318,
-      "T_verify": 3.950480700004846,
-      "T_total": 2374.3761688999366,
+      "T_produce": 2370.4823260999983,
+      "T_verify": 2.3392965000821277,
+      "T_total": 2372.8216226000804,
       "T_cert": null
     }
   ],
-  "closed_group_production_positions": 23,
+  "closed_group_production_positions": 26,
   "derived_full_table_positions": 20,
   "full_table_decode_deferred_until_sequence_completion": true,
   "budget": {
-    "G1_seconds": 20086.32223560044,
-    "remaining_G1_seconds": 123913.67776439956,
+    "G1_seconds": 27198.12122930051,
+    "remaining_G1_seconds": 116801.87877069949,
     "by_category": {
       "C": 0.0,
-      "D": 20013.28635239997,
+      "D": 27125.085346100037,
       "qualification": 73.03588320047129,
       "E": 0.0,
       "C3": 0.0,
@@ -69,10 +71,10 @@
       "C3": 4800,
       "repair": 8400
     },
-    "separately_reported_seconds": 720.2722714000847,
+    "separately_reported_seconds": 756.5165349999443,
     "unclosed": [
-      "formal_D10_01"
+      "formal_D11_01"
     ]
   },
-  "remaining": "D37, C24, boundedE, full analysis/review/manuscript/PDF/publication/recovery/cleanup"
+  "remaining": "D34, C24, boundedE, full analysis/review/manuscript/PDF/publication/recovery/cleanup"
 }
