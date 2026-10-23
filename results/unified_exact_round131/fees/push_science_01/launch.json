@@ -1,0 +1,33 @@
+{
+  "UTC": "2026-10-23T06:40:18.191847+00:00",
+  "kind": "release",
+  "command": [
+    "git",
+    "-c",
+    "gc.auto=0",
+    "-c",
+    "maintenance.auto=false",
+    "push",
+    "-u",
+    "origin",
+    "codex/round131-final-s2-benchmark"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round131",
+  "budget_before": {
+    "paid_outer_seconds": 25491.98461929965,
+    "remaining_outer_seconds": 17708.01538070035,
+    "unclosed": [],
+    "by_kind": {
+      "archive": 527.0019980000798,
+      "documents": 26.309243299881928,
+      "formal": 22912.06342049979,
+      "postprocess": 37.3092428999953,
+      "preparation": 5.454804999870248,
+      "qualification": 3.059039399959147,
+      "release": 1.2322350000031292,
+      "review": 1079.5546352000674
+    },
+    "nested_H_LP_MIP_seconds_added": false
+  },
+  "reservation": 0
+}

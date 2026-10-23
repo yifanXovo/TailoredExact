@@ -1,16 +1,20 @@
 {
   "total_outer_limit": 43200,
-  "closed_child_outer_seconds": 24063.332383599598,
+  "closed_child_outer_seconds": 26443.801124199643,
   "preledger_setup_allowance_seconds": 900,
   "final_small_metadata_allowance_seconds": 120,
-  "charged_upper_seconds": 25083.332383599598,
-  "remaining_upper_seconds": 18116.667616400402,
+  "charged_upper_seconds": 27463.801124199643,
+  "remaining_upper_seconds": 15736.198875800357,
   "by_kind": {
+    "archive": 527.0019980000798,
+    "cleanup": 49.22492269997019,
     "documents": 26.309243299881928,
     "formal": 22912.06342049979,
-    "postprocess": 36.89124020002782,
+    "postprocess": 37.3092428999953,
     "preparation": 5.454804999870248,
     "qualification": 3.059039399959147,
+    "recovery": 1759.5588747999864,
+    "release": 44.264942400041036,
     "review": 1079.5546352000674
   },
   "receipts": [
@@ -26,6 +30,24 @@
       "outer_seconds": 15.396848700009286,
       "start_unix": 1792720374.0602815,
       "end_unix": 1792720389.4566338,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "cleanup_01",
+      "kind": "cleanup",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "scripts/round131_cleanup.ps1"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 49.22492269997019,
+      "start_unix": 1792739596.2264016,
+      "end_unix": 1792739645.4439237,
       "exit_observed": true,
       "nested_seconds_added": false
     },
@@ -60,6 +82,22 @@
       "outer_seconds": 1079.5546352000674,
       "start_unix": 1792720450.4803486,
       "end_unix": 1792721530.0347524,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "final_report_01",
+      "kind": "postprocess",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_closeout.py",
+        "report"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 0.41800269996747375,
+      "start_unix": 1792722038.7094746,
+      "end_unix": 1792722039.1275566,
       "exit_observed": true,
       "nested_seconds_added": false
     },
@@ -480,6 +518,54 @@
       "nested_seconds_added": false
     },
     {
+      "label": "manifest_01",
+      "kind": "archive",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_release.py",
+        "manifest"
+      ],
+      "exit_code": 1,
+      "outer_seconds": 1.9581656999653205,
+      "start_unix": 1792737299.4540856,
+      "end_unix": 1792737301.4148207,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "manifest_02",
+      "kind": "archive",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_release.py",
+        "manifest"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 9.310504700057209,
+      "start_unix": 1792737356.0325313,
+      "end_unix": 1792737365.342401,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "pack_01",
+      "kind": "archive",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_release.py",
+        "pack"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 515.7333276000572,
+      "start_unix": 1792722039.4765718,
+      "end_unix": 1792722555.2004042,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
       "label": "pdf_export_01",
       "kind": "documents",
       "command": [
@@ -740,6 +826,64 @@
       "outer_seconds": 4.276075599947944,
       "start_unix": 1792697136.8866835,
       "end_unix": 1792697141.1735468,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "public_restore_01",
+      "kind": "recovery",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "scripts/round131_release.py",
+        "restore",
+        "--commit",
+        "91c380f92cf5c66f65507b6ea6783e883a5a023d",
+        "--destination",
+        "E:\\codes\\ExactEBRP-work\\restore\\round131_science",
+        "--receipt",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\round131\\results\\unified_exact_round131\\public_restore_receipt.json"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 1759.5588747999864,
+      "start_unix": 1792737764.6031072,
+      "end_unix": 1792739524.1538775,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "publication_checks_01",
+      "kind": "release",
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\temp\\round131\\publication_checks.py"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 1.2322350000031292,
+      "start_unix": 1792737452.85815,
+      "end_unix": 1792737454.0936255,
+      "exit_observed": true,
+      "nested_seconds_added": false
+    },
+    {
+      "label": "push_science_01",
+      "kind": "release",
+      "command": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "push",
+        "-u",
+        "origin",
+        "codex/round131-final-s2-benchmark"
+      ],
+      "exit_code": 0,
+      "outer_seconds": 43.03270740003791,
+      "start_unix": 1792737618.191847,
+      "end_unix": 1792737661.2257583,
       "exit_observed": true,
       "nested_seconds_added": false
     },
