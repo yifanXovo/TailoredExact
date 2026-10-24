@@ -101,3 +101,14 @@ Closed G1 now51423.81053900067s, remaining92576.18946099933s; separately measure
 `final_report.md` now contains the provisional two-line acceptance table and all five required scientific answers, with C/E/final-analysis/review/PDF/public-delivery items explicitly pending. It is not a completion receipt. The report preserves D adverse results, zero35 scope, own-H attribution limits and background-load limitations.
 
 The same independent reviewer has now extended its portable checker for problem-level objective classes/witnesses/fine strata and producer-bound waiter-lifetime annotations/84-row CSV/85 source bindings. New checker SHA is `0e7d939c4e3a99561172170489733a83f524dc9d25f876da03c1977ffdbfc452`; `review/portable_checker_reporting_preflight.json` accepted the small plan and synthetic reporting contracts in0.48323490004986525s, with zero Optimize/native starts/compilation and no raw/reconstructed replay. Old checker identity is retained by Git and handoff. This is preparation only; the single heavy final evidence review must still wait for all84 C/D observations, E and G1 fees/sequence completion.
+
+
+### Closed C04 / halfway C checkpoint
+
+Recorded UTC: 2026-10-24T06:26:33.651441+00:00.
+
+C has12/24 closed qualified observations. C04/SC-B20-S Seed1 has own certificates for off/geom/sp in675.0859902321827/776.5733161000535/821.2243648000294s, all with U0.31538912105343897. Retain the candidate slowdowns and C03 GEOM open result; no normal result is retried. The small checkpoint now binds all four closed group summaries; final complete raw tables remain deferred.
+
+The original sequence PID31680/session83618 and C supervisor49716 continue. C05/UC-C20-U Seed0 began14:24:12 local with off native PID38052, born2026-10-24T14:24:12.632378+08:00, parent13936. Check actual process/arm identities, since normal serial transitions change children. E has not started. The same reviewer is idle after the new static checker/preflight acceptance; call it for final heavy review only when all required native work/fees/sequence close.
+
+Closed G1 at C04 close is53696.72852070071s (C4941.523846799973, D48682.16879070026, qualification73.03588320047129), remaining90303.27147929929s. Separate disjoint verification/reconstruction is1403.0252140999073s. C05 is not included until its receipt closes. The provisional final_report.md has been updated to this checkpoint, not marked accepted. All outstanding PDF/PR/recovery/cleanup obligations remain.

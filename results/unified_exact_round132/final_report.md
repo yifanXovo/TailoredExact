@@ -1,13 +1,13 @@
 # Round132 final report — provisional execution checkpoint
 
-This source is being completed during the serial experiment sequence. It is not a final acceptance receipt. Last closed checkpoint: 2026-10-24, C group03. Every pending item below must be replaced by actual final evidence before publication.
+This source is being completed during the serial experiment sequence. It is not a final acceptance receipt. Last closed checkpoint: 2026-10-24, C group04. Every pending item below must be replaced by actual final evidence before publication.
 
 ## Separate acceptance of the two work lines
 
 | Line | Execution status | Scientific result available now | Remaining obligations |
 |---|---|---|---|
 | Complete the adopted S2 work | IN_PROGRESS | Frozen identity and physical/certificate contracts qualified; all60 new D observations closed and qualified by their producer summaries | Final raw analysis and independent replay, final paper/PDF visual review, public delivery and recovery |
-| Bounded subsequent research | IN_PROGRESS | Ideal geometric and W projections proved under explicit conditions; numerical implementation bridge admitted; C has9/24 closed qualified observations | Remaining15 C observations; mandatory bounded E; actual conditional decisions and final independent interpretation |
+| Bounded subsequent research | IN_PROGRESS | Ideal geometric and W projections proved under explicit conditions; numerical implementation bridge admitted; C has12/24 closed qualified observations | Remaining12 C observations; mandatory bounded E; actual conditional decisions and final independent interpretation |
 | Overall | IN_PROGRESS | No scientific success is required to finish the admitted finite work | All applicable obligations must close; no claim of COMPLETE yet |
 
 Healthy native work continues in the original serial sequence. Normal open returns are completed observations, not invalid runs. No normal timeout, loss, open endpoint or zero increment authorizes a retry or a larger panel.
@@ -40,7 +40,7 @@ The three geometric families can be removed with the proved H extension under th
 
 It adds distinct input identities under a frozen production algorithm and a prospectively fixed PS subset, with K and X reported separately. Important adverse results already retained are: both positive-objective K35 roles remain open at both Seeds; PS attains better U than S2 on K-35-B; K-35-U has different primal/dual endpoint directions; X15-B has a strict small timing reversal; X20-U has a PS/P reversal; and PS is faster than S2 on the zero-optimum X35-B observations. X35-U is also zero-optimum, including an open positive P endpoint at Seed0. A positive attained endpoint on a problem with a qualified legal zero is not a positive-optimum test. Zero35 observations do not extend the positive-objective35 proof boundary.
 
-C currently preserves timing reversals on SC-C15-B. At SC-B20-S Seed0, SP and off certify in730.3500169890467/981.1175647999626s; GEOM has qualified evidence but no own certificate (U0.31538912105343897, L0.31538869722423574, T_cert null). This normal open return is retained without retry. The final C result is pending the remaining admitted positions and complete replay; no candidate is promoted from this partial diagnostic.
+C currently preserves timing reversals on SC-C15-B. At SC-B20-S Seed0, SP and off certify in730.3500169890467/981.1175647999626s; GEOM has qualified evidence but no own certificate (U0.31538912105343897, L0.31538869722423574, T_cert null). This normal open return is retained without retry. At SC-B20-S Seed1 all three certify: off675.0859902321827s, GEOM776.5733161000535s and SP821.2243648000294s; both candidates are slower than their same-build control. The final C result is pending the remaining admitted positions and complete replay; no candidate is promoted from this partial diagnostic.
 
 ### 4. What does the joint study add beyond existing mechanisms, and does it improve the current objective?
 
@@ -54,7 +54,7 @@ The adopted S2 remains frozen throughout this round. The current evidence suppor
 
 ## Costs, timing environment and retained failures
 
-At this checkpoint, closed G1 wall cost is51423.81053900067s of144000s; D48682.16879070026, C2668.605865099933, qualification73.03588320047129. Active C04 is excluded until its receipt closes. Separately measured disjoint verification/reconstruction is1326.3589985999279s. E/C3/repair have no closed native charge at this checkpoint. Final totals, all category limits and separate delivery wall costs are PENDING. H/LP/MIP/Work and verifier subcomponents are not added again to their metered outer parent.
+At this checkpoint, closed G1 wall cost is53696.72852070071s of144000s; D48682.16879070026, C4941.523846799973, qualification73.03588320047129. Active C05 is excluded until its receipt closes. Separately measured disjoint verification/reconstruction is1403.0252140999073s. E/C3/repair have no closed native charge at this checkpoint. Final totals, all category limits and separate delivery wall costs are PENDING. H/LP/MIP/Work and verifier subcomponents are not added again to their metered outer parent.
 
 The initial stage waiter repeatedly decoded already sealed large reconstructed files. Only its verified childless supervisor was replaced; no native D arm was interrupted or retried. Original/intermediate failures and the accepted repaired gate remain preserved. The snapshot2588.96875 process CPU seconds is management work, not measured native slowdown and not another G1 wall charge. Final reporting uses conservative producer-receipt-bound overlap with the old waiter's lifetime. This is not parsing time, contention time or a counterfactual clean time; no-overlap does not establish a quiet machine. Actual measured clocks remain with this limitation. Earlier brief partial-table reads are also disclosed. There is no quiescent-machine causal speed claim or inferred geography-only attribution.
 
