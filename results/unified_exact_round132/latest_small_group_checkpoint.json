@@ -1,20 +1,44 @@
 {
-  "UTC": "2026-10-24T00:11:16.583757+00:00",
-  "group": "campaign/D_group11",
-  "file_bytes": 3872092,
-  "read_bytes": 0,
-  "status": "CLOSED_PRODUCER_SMALL_SUMMARY_CHECKED_LARGE_RAW_DEFERRED",
-  "arms": [],
-  "closed_arm_verification_receipts": 2,
-  "closed_group_production_positions": 28,
+  "UTC": "2026-10-24T01:52:29.978791+00:00",
+  "group": "campaign/D_group13",
+  "summary_rows": [
+    {
+      "method": "P",
+      "qualified": true,
+      "certificate": false,
+      "U": 0.43773757907565164,
+      "L": 0.3774942864354234,
+      "T_cert": null
+    },
+    {
+      "method": "S2",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.43773757907565164,
+      "L": 0.43773757799493995,
+      "T_cert": 95.03876019991003
+    },
+    {
+      "method": "PS",
+      "qualified": true,
+      "certificate": false,
+      "U": 0.49229039484126985,
+      "L": 0.392507635332691,
+      "T_cert": null
+    }
+  ],
+  "summary_source": "fees/formal_D13_01/stdout.log",
+  "summary_source_SHA": "fd5827f89c14263e195c4d4b45911c16d795c6d159968244dc691e8999c2c6fe",
+  "summary_source_bytes": 2844,
+  "closed_group_production_positions": 33,
   "derived_full_table_positions": 20,
   "full_table_decode_deferred_until_sequence_completion": true,
   "budget": {
-    "G1_seconds": 31939.582899600733,
-    "remaining_G1_seconds": 112060.41710039927,
+    "G1_seconds": 37918.120125100715,
+    "remaining_G1_seconds": 106081.87987489928,
     "by_category": {
       "C": 0.0,
-      "D": 31866.54701640026,
+      "D": 37845.084241900244,
       "qualification": 73.03588320047129,
       "E": 0.0,
       "C3": 0.0,
@@ -28,31 +52,10 @@
       "C3": 4800,
       "repair": 8400
     },
-    "separately_reported_seconds": 765.9183587997686,
+    "separately_reported_seconds": 855.7376821998041,
     "unclosed": [
-      "formal_D12_01"
+      "formal_D14_01"
     ]
   },
-  "remaining": "D32, C24, boundedE, full analysis/review/manuscript/PDF/publication/recovery/cleanup",
-  "summary_rows": [
-    {
-      "method": "S2",
-      "qualified": true,
-      "certificate": false,
-      "U": 0.6928543586313136,
-      "L": 0.564819849419899,
-      "T_cert": null
-    },
-    {
-      "method": "P",
-      "qualified": true,
-      "certificate": false,
-      "U": 0.6647466018182986,
-      "L": 0.3355162442386066,
-      "T_cert": null
-    }
-  ],
-  "summary_source": "fees/formal_D11_01/stdout.log",
-  "summary_source_SHA": "4989bbfd3b022d1bdb16d11356dd71eca726f3b118083b41f8d7738c2e39db4e",
-  "summary_source_bytes": 1888
+  "scope": "Closed producer summary only; no raw content decoding or final independent acceptance"
 }
