@@ -1,1 +1,1 @@
-Round132 D active. Last sealed `E:\codes\ExactEBRP-work\worktrees\round132\results\unified_exact_round132\campaign\D_group18\raw\02_X-20-S_S1_R1_P`. Inspect current fees PID/creation/argv before any resume. Own frozen E3 only. C/E never supply information to D.
+Round132 D active. Last sealed `E:\codes\ExactEBRP-work\worktrees\round132\results\unified_exact_round132\campaign\D_group20\raw\03_X-20-U_S1_R1_PS`. Inspect current fees PID/creation/argv before any resume. Own frozen E3 only. C/E never supply information to D.

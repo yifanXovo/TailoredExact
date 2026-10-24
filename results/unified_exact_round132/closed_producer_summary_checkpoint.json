@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-24T03:11:04.852876+00:00",
+  "UTC": "2026-10-24T03:30:42.954560+00:00",
   "scope": "Small closed-producer summaries only; no raw/table re-decode or final independent acceptance",
   "plan_SHA": "f73f89ff1cc5ec2e2772a30e63b7c5d9b23d6a34362879d5cac1067c0e3f63ee",
   "rows": [
@@ -530,6 +530,78 @@
       "U": 0.43325546538862625,
       "L": 0.3410502028552557,
       "T_cert": null
+    },
+    {
+      "id": "X-20-U",
+      "seed": 0,
+      "group": 19,
+      "layer": "X",
+      "method": "PS",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.23669579293259557,
+      "L": 0.23669579293259563,
+      "T_cert": 152.63341943488922
+    },
+    {
+      "id": "X-20-U",
+      "seed": 0,
+      "group": 19,
+      "layer": "X",
+      "method": "S2",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.23669579293259557,
+      "L": 0.23669579268627572,
+      "T_cert": 22.32661290001124
+    },
+    {
+      "id": "X-20-U",
+      "seed": 0,
+      "group": 19,
+      "layer": "X",
+      "method": "P",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.23669579293259557,
+      "L": 0.23669579293259554,
+      "T_cert": 163.04024400003254
+    },
+    {
+      "id": "X-20-U",
+      "seed": 1,
+      "group": 20,
+      "layer": "X",
+      "method": "P",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.23669579293259557,
+      "L": 0.2366957929325956,
+      "T_cert": 149.77366534934845
+    },
+    {
+      "id": "X-20-U",
+      "seed": 1,
+      "group": 20,
+      "layer": "X",
+      "method": "S2",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.23669579293259557,
+      "L": 0.2366957929325954,
+      "T_cert": 9.240537800011225
+    },
+    {
+      "id": "X-20-U",
+      "seed": 1,
+      "group": 20,
+      "layer": "X",
+      "method": "PS",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.23669579293259557,
+      "L": 0.23669579244286418,
+      "T_cert": 585.7774953999324
     }
   ],
   "sources": [
@@ -640,9 +712,21 @@
       "SHA": "5ce7c66c13d729f7ae84fa5e305656e4d1b2c160d04a869ad0e5a49b4ae6b179",
       "bytes": 1912,
       "receipt_SHA": "73ea90edfc3b504d86ca22fae0f2d1f81fbe31130052fcbf14a2fe44050487f3"
+    },
+    {
+      "stdout": "fees/formal_D19_01/stdout.log",
+      "SHA": "8cf491c5c81e78e656dc238d7c744c83b163517f3da7673a0fa6b193f36a8496",
+      "bytes": 2871,
+      "receipt_SHA": "49ef0a7ae3e1f353558b9f700832f413c72483d23dc3df5ca520e81a94b7222d"
+    },
+    {
+      "stdout": "fees/formal_D20_01/stdout.log",
+      "SHA": "f0e30506768d7b03c699c45f4877dc7cdcedb8c4753be1f69b3a4301e558b296",
+      "bytes": 2889,
+      "receipt_SHA": "93d967f6a6ca73412101d596ad1779b8596213cd04a062563640681c8ae2db39"
     }
   ],
-  "total_stdout_bytes": 41662,
+  "total_stdout_bytes": 47422,
   "summary": {
     "K": {
       "P": {
@@ -660,20 +744,20 @@
     },
     "X": {
       "P": {
-        "arms": 6,
-        "certified": 2
+        "arms": 8,
+        "certified": 4
       },
       "S2": {
-        "arms": 6,
-        "certified": 6
+        "arms": 8,
+        "certified": 8
       },
       "PS": {
-        "arms": 2,
-        "certified": 0
+        "arms": 4,
+        "certified": 2
       }
     }
   },
-  "D_closed_positions": 44,
+  "D_closed_positions": 50,
   "seed_repeats_not_independent": true,
   "full_table_snapshot_positions": 20
 }

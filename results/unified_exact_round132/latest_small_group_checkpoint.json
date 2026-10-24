@@ -1,36 +1,44 @@
 {
-  "UTC": "2026-10-24T02:42:56.100896+00:00",
-  "group": "campaign/D_group17",
+  "UTC": "2026-10-24T03:17:12.605460+00:00",
+  "group": "campaign/D_group19",
   "summary_rows": [
     {
-      "method": "P",
+      "method": "PS",
       "qualified": true,
-      "certificate": false,
-      "U": 0.44670989207569056,
-      "L": 0.34415280832826245,
-      "T_cert": null
+      "certificate": true,
+      "U": 0.23669579293259557,
+      "L": 0.23669579293259563,
+      "T_cert": 152.63341943488922
     },
     {
       "method": "S2",
       "qualified": true,
       "certificate": true,
-      "U": 0.43010343097605375,
-      "L": 0.43010342791005834,
-      "T_cert": 489.6688426999608
+      "U": 0.23669579293259557,
+      "L": 0.23669579268627572,
+      "T_cert": 22.32661290001124
+    },
+    {
+      "method": "P",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.23669579293259557,
+      "L": 0.23669579293259554,
+      "T_cert": 163.04024400003254
     }
   ],
-  "summary_source": "fees/formal_D17_01/stdout.log",
-  "summary_source_SHA": "80a5a8e8223117f428572be6f33cd09dcce85ac906bfc97dca359e98ffbf12f2",
-  "summary_source_bytes": 1868,
-  "closed_group_production_positions": 42,
+  "summary_source": "fees/formal_D19_01/stdout.log",
+  "summary_source_SHA": "8cf491c5c81e78e656dc238d7c744c83b163517f3da7673a0fa6b193f36a8496",
+  "summary_source_bytes": 2871,
+  "closed_group_production_positions": 47,
   "derived_full_table_positions": 20,
   "full_table_decode_deferred_until_sequence_completion": true,
   "budget": {
-    "G1_seconds": 40769.75732410059,
-    "remaining_G1_seconds": 103230.24267589941,
+    "G1_seconds": 42738.94959330035,
+    "remaining_G1_seconds": 101261.05040669965,
     "by_category": {
       "C": 0.0,
-      "D": 40696.72144090012,
+      "D": 42665.91371009988,
       "qualification": 73.03588320047129,
       "E": 0.0,
       "C3": 0.0,
@@ -44,9 +52,9 @@
       "C3": 4800,
       "repair": 8400
     },
-    "separately_reported_seconds": 1037.6862501997966,
+    "separately_reported_seconds": 1109.640999599942,
     "unclosed": [
-      "formal_D18_01"
+      "formal_D20_01"
     ]
   },
   "scope": "Closed producer summary only; no raw content decoding or final independent acceptance"
