@@ -322,7 +322,7 @@ def pdf():
     idle()
     import hashlib
     import round126_export as old
-    paths=[OUT/'manuscript.md',OUT/'references.bib',Path(__file__),Path(old.__file__)]
+    paths=[p.resolve() for p in [OUT/'manuscript.md',OUT/'references.bib',Path(__file__),Path(old.__file__)]]
     bindings=[dict(path=p.relative_to(ROOT).as_posix(),SHA=sha(p)) for p in paths]
     source=inspect.getsource(old.export)
     replacements=[
