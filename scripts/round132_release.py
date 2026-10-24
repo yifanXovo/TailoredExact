@@ -134,9 +134,12 @@ def restore():
     expected="assert len(archives)==8 and {a['name'] for a in archives}=={f'formal_group{n:02d}.zip' for n in range(1,7)}|{'qualification_closed_fees.zip','R129_single_B20_coverage_reference.zip'}"
     assert expected in code
     code=code.replace(expected,"assert len(archives)==34 and {a['name'] for a in archives}=={f'campaign_D_group{n:02d}.zip' for n in range(1,25)}|{f'campaign_C_group{n:02d}.zip' for n in range(1,9)}|{'qualification_closed_fees_research_sources.zip','complete_tiny_joint_study.zip'}")
-    # 84 arms plus exact tiny witnesses are larger than the old24-arm check.
-    # A separate finite delivery timeout never alters native formal windows.
-    assert code.count('timeout=600')==1;code=code.replace('timeout=600','timeout=3600')
+    # Actual current evidence has over one million members (5.44GB), rather
+    # than the inherited264k-member recovery. The current first replay is
+    # healthy beyond the initial2400s soft estimate. Register a finite3h
+    # isolated replay allowance before the single public recovery, separate
+    # from transport/extraction and all unchanged native formal windows.
+    assert code.count('timeout=600')==1;code=code.replace('timeout=600','timeout=10800')
     ns=dict(vars(old));exec(compile(code,__file__+'::one_public_recovery','exec'),ns);ns['main']()
 
 if __name__=='__main__':

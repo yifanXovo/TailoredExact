@@ -16,3 +16,10 @@ Check the manuscript's distinction between the new zero-optimum 35-station X obs
 
 Created UTC: 2026-10-24T05:26:42.583747+00:00
 Author analysis SHA at handoff: `8effc848e56d48ded58f5bead024ab623ac9299d252c22d5f8b73ef42730631f`.
+
+
+## Closed native evidence and conservative source-loss reporting
+
+All60 D and24 C positions plus bounded E4 are now terminal. The complete author tables retain83 performance-eligible observations and one source-reduced independent own-zero observation; the planned64 typed positions include S2/P16 Win,1 Lose,6 UNDETERMINED,1 UNEVALUABLE. Source_loss_dispositions.json explains the whole-call rejection and original raw clock versus null formal-performance T_cert. Frozen R127 eligibility is unchanged, and raw U/L/certificate/clock values remain under explicit raw fields. Independently verify own-zero physical validity, own same-domain rejection, closed receipt identities and faithful inclusion of all84 physical/cost/trajectory/timing rows. Do not rehabilitate rejected native proof or require a favorable retry to make a table complete. All other unexplained evidence remains a blocker.
+
+The exact J2 witness normal and service point are now readable in joint_structure_note.md and mathematical_analysis.md, with the full rational extension still authoritative in joint/J2. The manuscript includes all actual D/C/E results, PS reversals, C mechanism costs/unknown root fields, source reliability and bounded full-universe limits. Final heavy evidence review is requested from the same independent executor only after these actual sources are present.

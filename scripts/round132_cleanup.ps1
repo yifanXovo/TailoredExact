@@ -118,6 +118,21 @@ if (Test-Path -LiteralPath $taskRenderManifest) {
                 } else { $taskRetained.Add([pscustomobject]@{path=$taskResolved;reason='page image differs from inspected manifest'}) }
             }
         }
+        foreach ($taskPriorSet in $taskRenders.reconstructible_prior_render_sets) {
+            $taskRetainedPDF = Assert-TaskOwned $taskPriorSet.retained_different_PDF $taskTemp
+            if ((Get-TaskHash $taskRetainedPDF) -ne $taskPriorSet.PDF_SHA -or $taskPriorSet.PDF_SHA -eq $taskPDFHash) { throw 'Prior page images require the retained distinct PDF' }
+            foreach ($taskPage in $taskPriorSet.images) {
+                if (Test-Path -LiteralPath $taskPage.path) {
+                    $taskResolved = Assert-TaskOwned $taskPage.path $taskTemp
+                    if ([IO.Path]::GetExtension($taskResolved) -ne '.png') { throw 'Prior render cleanup is limited to PNG images' }
+                    if ((Get-TaskHash $taskResolved) -eq $taskPage.SHA256) {
+                        $taskBytes = (Get-Item -LiteralPath $taskResolved).Length
+                        Remove-Item -LiteralPath $taskResolved -Force
+                        $taskActions.Add([pscustomobject]@{path=$taskResolved;kind='reconstructible prior page image; distinct PDF retained';bytes=$taskBytes;recursive=$false;retained_PDF=$taskRetainedPDF})
+                    } else { $taskRetained.Add([pscustomobject]@{path=$taskResolved;reason='prior render image hash changed; retained'}) }
+                }
+            }
+        }
     }
 }
 $taskPDFRoot = Join-Path $taskTemp 'pdf'

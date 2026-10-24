@@ -60,13 +60,13 @@
       "R129 C15/B30 open at both Seeds and B30 endpoint reversal"
     ],
     "selection_is_settled": "All five R129 conditions passed; the user adopts MS2. This round is not another candidate selection.",
-    "formal_results_pending": true,
+    "formal_results_pending": false,
     "production_method_unchanged": true,
     "D_frozen_PE": "2df9e0e160ecbcbd35c4e83eb434344893f9a59beb59667f3681772b4ff66d6c",
     "research_default": "off",
     "inherited_algorithm_identity_text": "original E2 --round127-mode ms2",
     "inherited_R131_formal_results_pending": false,
-    "formal_results_scope": "Round132 current D/C/E; inherited R131 tables keep their original version and are already complete"
+    "formal_results_scope": "All60 D and24 C positions sealed; formal performance eligibility83/84 with one disclosed source-reduced ownzero excluded from timing; bounded E complete. Final reporting/review/publication acceptance is separate."
   },
   "D": {
     "PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\ExactEBRP.exe",
@@ -310,5 +310,15 @@
     "source_identity_explanation": "Inherited measured_source_commit denotes original production source base; generated source/header/generator and research PE in research_build.json bind the actual C implementation"
   },
   "repository_default": "ENS-C",
-  "paper_method": "GI-TBC uniform pair-support S2 / MS2"
+  "paper_method": "GI-TBC uniform pair-support S2 / MS2",
+  "formal_results": {
+    "D_positions": 60,
+    "C_positions": 24,
+    "E_tiny_cases": 4,
+    "performance_eligible_arms": 83,
+    "source_reduced_own_zero_arms": 1,
+    "derived_tables": "observations.json",
+    "source_loss_disposition": "source_loss_dispositions.json",
+    "no_production_change": true
+  }
 }

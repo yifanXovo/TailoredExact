@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-24T09:19:40.585038+00:00",
+  "UTC": "2026-10-24T11:18:46.037672+00:00",
   "scope": "Closed small C summaries with immutable comparison-method mapping; no raw/table decode or final independent acceptance",
   "plan_SHA": "91040549bf094368483faad90ebdf5eb2825202795fe14b241100b9a6b169fa5",
   "binding_SHA": "3248070303dd4157ea0df766b859108b354dffffa7ee9909abe98352f9480135",
@@ -276,6 +276,45 @@
       "group": 7,
       "underlying_reader_method": "S2R",
       "expression": "off"
+    },
+    {
+      "method": "S2R",
+      "qualified": true,
+      "certificate": false,
+      "U": 0.18026765619352014,
+      "L": 0.08370043172581312,
+      "T_cert": null,
+      "id": "PB-C35-U",
+      "seed": 1,
+      "group": 8,
+      "underlying_reader_method": "S2R",
+      "expression": "off"
+    },
+    {
+      "method": "S2R-GEOM",
+      "qualified": true,
+      "certificate": false,
+      "U": 0.16747142094227702,
+      "L": 0.08559747004730209,
+      "T_cert": null,
+      "id": "PB-C35-U",
+      "seed": 1,
+      "group": 8,
+      "underlying_reader_method": "S2R",
+      "expression": "geom"
+    },
+    {
+      "method": "S2R-SP",
+      "qualified": true,
+      "certificate": false,
+      "U": 0.18714523568930694,
+      "L": 0.08576976512615972,
+      "T_cert": null,
+      "id": "PB-C35-U",
+      "seed": 1,
+      "group": 8,
+      "underlying_reader_method": "S2R",
+      "expression": "sp"
     }
   ],
   "sources": [
@@ -327,9 +366,16 @@
       "bytes": 2884,
       "receipt_SHA": "dd95fc00542eeb1dbe7303c4d4a212176944c83a13890bfc68fe872ededb2216",
       "identity_SHA": "d11d04f394af67b9fdc05065cc2542d5a2522dcc3441ac67d66f4004dfee3985"
+    },
+    {
+      "stdout": "fees/formal_C08_01/stdout.log",
+      "SHA": "a28ad112cd3f43fd9a0c888888f97ec23299f30142af258deea0ff3ac6e94287",
+      "bytes": 2844,
+      "receipt_SHA": "0176a40c42cfc042ebf110861777147bf0857a0e05cb1c51f316d05f7050048c",
+      "identity_SHA": "3f72efd6d97eeda490d374b92521a5a7df75754e92a48b3274ea02662d2f876e"
     }
   ],
-  "C_closed_positions": 21,
+  "C_closed_positions": 24,
   "candidate_baseline_controls_shared": true,
   "seed_repeats_not_independent": true
 }

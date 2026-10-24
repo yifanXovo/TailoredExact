@@ -24,6 +24,7 @@ import itertools
 import gzip
 import json
 import math
+import os
 import statistics
 import sys
 import time
@@ -61,6 +62,10 @@ REPORTING_PREDECESSOR = dict(
     checker_SHA='a6939dae51f8f29870d6ad48934fd344afd55907af87be769e5537317afa3033',
     Git_commit='0456358c8dff158ee874036cf9d2fd10d4fba633',
     Git_blob='e9e08c4dbb1ad1e7e728881dac2f47307c77574d')
+SOURCE_LOSS_PREDECESSOR = dict(
+    checker_SHA='0e7d939c4e3a99561172170489733a83f524dc9d25f876da03c1977ffdbfc452',
+    retained_bytes='results/unified_exact_round132/review/portable_checker_before_source_loss.py')
+SOURCE_LOSS_DISPOSITION = 'UNEVALUABLE formal performance; independent own-zero proof retained; not ordinary open'
 WITNESS_FIELDS = ('id','seed','method','producer_receipt_SHA','G_true','P_true','U','L')
 LIFETIME_FIELDS = ('stage_waiter_lifetime_overlap_lower_seconds',
     'stage_waiter_lifetime_overlap_upper_seconds','stage_waiter_lifetime_overlap',
@@ -140,6 +145,136 @@ def equal(expected, actual, label):
 
 def eligible(a):
     return all(a.get(k) is True for k in ('formal_protocol_qualified','numbers_qualified','certificate_qualified')) and not a.get('source_reduced',False)
+
+
+def writable_open_flags(flags):
+    # Windows O_NOINHERIT is 128; POSIX O_EXCL is often 128. Numeric masks
+    # cannot cross that platform boundary. Access/create/truncate/append/excl
+    # are denied using the interpreter's actual platform constants.
+    mask=os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND|os.O_EXCL
+    return bool(flags and flags & mask)
+
+
+def readonly_flags_preflight():
+    read_flags=os.O_RDONLY|getattr(os,'O_BINARY',0)|getattr(os,'O_NOINHERIT',0)|getattr(os,'O_CLOEXEC',0)
+    assert not writable_open_flags(read_flags)
+    for flag in (os.O_WRONLY,os.O_RDWR,os.O_CREAT,os.O_TRUNC,os.O_APPEND,os.O_EXCL):
+        assert writable_open_flags(read_flags|flag)
+    return dict(status='PASS',platform_native_os_constants=True,read_flags_checked=read_flags,
+        read_only_binary_noinherit_cloexec_not_misclassified=True,all_write_create_truncate_append_excl_flags_denied=True)
+
+
+def initialize_standard_runtime():
+    """Initialize Python's Windows ctypes plumbing before denying new dlopen.
+
+    Historical common modules import ctypes only to define unused producer/
+    process helpers. Standard Windows ctypes initializes kernel32 on import.
+    This ordinary Python runtime setup is not a solver/evidence DLL load. All
+    later dlopen, process creation, solver imports and binary reads stay denied.
+    """
+    import ctypes
+    source=Path(ctypes.__file__).resolve()
+    assert source.is_relative_to(Path(sys.base_prefix).resolve()),'foreign ctypes module'
+    return dict(stdlib_ctypes_source=str(source),
+        stdlib_ctypes_source_SHA=hashlib.sha256(source.read_bytes()).hexdigest(),
+        ordinary_Python_Windows_kernel32_initialization_before_audit=True,
+        solver_or_evidence_asset_library_loaded=False,subsequent_dlopen_or_producer_process_helpers_permitted=False)
+
+
+def source_loss_endpoint_contract(arm,original,physical,panel,data,own,local,finding,launch):
+    """A reporting disposition, never an exception to frozen eligibility.
+
+    The caller independently replays the full fleet, journal, call domains,
+    model/source/return predicates and seals before accepting this result.
+    A cohort/P counterexample alone is insufficient: the local arm must have
+    rejected the same damaged calls using its own verified exact-zero fleet.
+    """
+    assert not eligible(arm) and arm.get('source_reduced') is True
+    assert arm.get('native_proof_qualified') is False
+    assert all(arm.get(k) is True for k in ('formal_protocol_qualified','numbers_qualified','certificate_qualified'))
+    assert arm.get('certificate') is True and arm.get('own_exact_zero') is True
+    assert arm.get('proof_evidence')==arm.get('certificate_source')=='OWN_ZERO_CERTIFICATE'
+    assert arm['U']==arm['L']==arm['gap']==physical['G']==physical['P']==physical['F']==0
+    assert original['T_cert']==arm['T_produce'] and original['certificate'] is True
+    assert own['own_U']==0 and own['own_exact_zero'] is True
+    assert own['own_physical_verified'] is True and own['independent_floor0'] is True
+    assert physical['Y'][1:]==data['D'][1:] and all(d>0 for d in data['D'][1:])
+    assert panel['lambda']>=0 and all(math.isfinite(w) and w>=0 for w in data['w'][1:])
+    # Equal integer inventories and positive targets give exact ratio one,
+    # independently of the floating reported G/P or a native bound.
+    assert all(F(y)/F(d)==1 for y,d in zip(physical['Y'][1:],data['D'][1:]))
+    zeros=[w for w in own['witnesses'] if w.get('arm')==launch['arm'] and
+        w.get('physical_verified') is True and w['G']==w['P']==w['F']==0 and
+        w['input_SHA']==launch['panel']['input_sha256']]
+    assert zeros, 'no own saved physical zero witness'
+    damaged={(q['arm'],q['call']) for q in local['damaged_calls']}
+    final_damaged={(q['arm'],q['call']) for q in finding['damaged_calls'] if q['arm']==launch['arm']}
+    assert damaged and damaged==final_damaged, 'source loss must be independently supported within this arm'
+    assert all(a==launch['arm'] for a,c in damaged)
+    assert local['rejections'] and {(q['arm'],q['call']) for q in local['rejections']}==damaged
+    for q in local['rejections']:
+        assert q['call_rejected_as_a_whole'] is True and q['domain_verified'] is True
+        assert q['model_SHA'] and q['model_SHA']==q['scope']['model_sha256']
+        assert q['arm']==launch['arm'] and q['reason'] in ('full_bound_witness_inconsistency','local_bound_witness_inconsistency')
+        counter=q['counterexample']
+        assert counter['arm']==launch['arm'] and counter['F']==counter['G']==0
+        assert counter['physical_verified'] is True and counter['input_SHA']==launch['panel']['input_sha256']
+        matches=[w for w in zeros if w['source']==counter['source'] and w['available']==counter['available']]
+        assert matches, 'rejection depends on a different or unverified counterexample'
+        scope=q['scope']
+        assert scope['full_original'] or any(scope['lower_g']-1e-7<=w['G']<=scope['upper_g']+1e-7 and
+            w['F']<=scope['cutoff']+1e-7 for w in matches)
+        assert math.isfinite(q['value']) and q['value']>counter['F']+1e-7
+    return dict(damaged_calls=local['damaged_calls'],
+        rejected_bound_values=[q['value'] for q in local['rejections']],
+        own_zero_witness_sequences=sorted({w['sequence'] for w in zeros if w.get('sequence') is not None}))
+
+
+def source_loss_record(core,item,finding,arm,original,physical,launch,line,method):
+    """Read only the existing own rejection and own zero, no native repair."""
+    dest=portable(launch['destination']);local=read(dest/'claim_rejections.json')
+    data=core.evidence.instance(ROOT,launch['panel'])
+    support=source_loss_endpoint_contract(arm,original,physical,launch['panel'],data,item['ind'],local,finding,launch)
+    assert read(dest/'verification_closeout.json')['native_proof_qualified'] is False
+    return dict(line=line,id=launch['id'],seed=launch['seed'],method=method,
+        own_physical_zero_certificate_retained=True,native_proof_qualified=False,
+        source_reduced=True,formal_performance_evidence_eligible=False,
+        raw_reconstructed_T_cert=original['T_cert'],formal_performance_T_cert=None,
+        T_produce=arm['T_produce'],T_verify=arm['T_verify'],T_total=arm['T_total'],
+        disposition=SOURCE_LOSS_DISPOSITION,**support,
+        native_source_reliability_unresolved=True,no_native_retry=True,
+        sources=[dict(path=rel(p),SHA=sha(p)) for p in
+            (dest/'independent_evidence.json',dest/'claim_rejections.json',dest/'producer_receipt.json')])
+
+
+def reporting_disposition_summary(arms,pairs,losses):
+    """All positions stay; only fully substantiated own-zero losses can close."""
+    key=lambda a:(a['line'],a['id'],a['seed'],a['method'])
+    by={key(a):a for a in arms};allowed={key(a) for a in losses}
+    assert len(by)==len(arms) and len(allowed)==len(losses)
+    unqualified={key(a) for a in arms if not eligible(a)}
+    assert allowed<=unqualified, 'source loss cannot grant performance eligibility'
+    unresolved=sorted(unqualified-allowed)
+    unresolved_pairs=[]
+    for q in pairs:
+        if q['classification']!='UNEVALUABLE':continue
+        keys=[(q['line'],q['id'],q['seed'],m) for m in (q['left'],q['right'])]
+        if q.get('obstacle') or not any(k in allowed for k in keys) or any(not eligible(by[k]) and k not in allowed for k in keys):
+            unresolved_pairs.append(dict(line=q['line'],group=q['group'],left=q['left'],right=q['right']))
+        else:
+            assert q['direction']=='UNEVALUABLE' and q['right_over_left_certification_ratio'] is None
+            assert q['left_minus_right_seconds'] is None
+            for k,side in zip(keys,('left','right')):
+                if k in allowed:assert by[k]['T_cert'] is None and by[k]['censored'] is None and q[side+'_T_cert'] is None
+    return dict(required_positions=len(arms),typed_positions=len(pairs),
+        performance_qualified_observations=len(arms)-len(unqualified),
+        disclosed_source_loss_observations=len(losses),
+        native_source_qualified_observations=sum(a.get('native_proof_qualified') is True and not a.get('source_reduced') for a in arms),
+        performance_unevaluable_comparisons=sum(q['classification']=='UNEVALUABLE' for q in pairs),
+        unresolved_unqualified_observations=unresolved,unresolved_unevaluable_comparisons=unresolved_pairs,
+        all_required_positions_performance_qualified=not unqualified,
+        rejected_native_proof_reliability_restored=False,
+        raw_own_zero_not_treated_as_open_or_time_win=True)
 
 
 def options(command):
@@ -302,7 +437,8 @@ def readiness(out,rows,own_fee=None):
     for name in ('observations.json','stratified_summary.json','resource_accounting.json','joint_results.json',
                  'physical_outcomes.csv','mechanism_costs.csv','trajectory_index.json','analysis_inputs.json',
                  'native_progress_index.json','historical_physical_outcomes.json','research_source_publication.json','sequence_completion.json',
-                 'problem_objective_classification.json','timing_environment_exposure.csv','timing_environment_amendment.json'):
+                 'problem_objective_classification.json','timing_environment_exposure.csv','timing_environment_amendment.json',
+                 'source_loss_dispositions.json'):
         if not (out/name).is_file(): missing.append(rel(out/name))
     for path in sorted((out/'fees').glob('*/launch.json')):
         if not (path.parent/'receipt.json').is_file():
@@ -450,6 +586,65 @@ def reporting_logic_preflight():
         own_endpoints_and_clocks_unchanged=True,lifetime_boundaries_and_counterfactual_null_checked=True)
 
 
+def source_loss_logic_preflight():
+    """Tiny invented fixtures; no raw files, readers, native code or solver."""
+    arm=dict(formal_protocol_qualified=True,numbers_qualified=True,certificate_qualified=True,
+        source_reduced=True,native_proof_qualified=False,certificate=True,own_exact_zero=True,
+        proof_evidence='OWN_ZERO_CERTIFICATE',certificate_source='OWN_ZERO_CERTIFICATE',
+        U=0.,L=0.,gap=0.,T_produce=3.)
+    original=dict(T_cert=3.,certificate=True)
+    physical=dict(G=0.,P=0.,F=0.,Y=[0,1])
+    panel=dict(input_sha256='a'*64)
+    panel['lambda']=.15
+    data=dict(D=[0,1],w=[0.,1.])
+    launch=dict(arm='A',panel=panel)
+    witness=dict(arm='A',physical_verified=True,G=0.,P=0.,F=0.,input_SHA='a'*64,
+        source='own committed routes',available=2.,sequence=5)
+    own=dict(own_U=0.,own_exact_zero=True,own_physical_verified=True,independent_floor0=True,witnesses=[witness])
+    scope=dict(full_original=False,lower_g=0.,upper_g=.2,cutoff=.2,model_sha256='b'*64)
+    rejection=dict(arm='A',call=1,call_rejected_as_a_whole=True,domain_verified=True,
+        model_SHA='b'*64,scope=scope,reason='local_bound_witness_inconsistency',value=2e-7,
+        counterexample={k:witness[k] for k in ('arm','physical_verified','G','F','input_SHA','source','available')})
+    local=dict(damaged_calls=[dict(arm='A',call=1)],rejections=[rejection])
+    args=[arm,original,physical,panel,data,own,local,copy.deepcopy(local),launch]
+    protected=copy.deepcopy(args)
+    support=source_loss_endpoint_contract(*args)
+    assert support['own_zero_witness_sequences']==[5] and args==protected and not eligible(arm)
+    mutations=[(0,'native_proof_qualified',True),(0,'formal_protocol_qualified',False),
+        (0,'own_exact_zero',False),(1,'T_cert',2.),(2,'G',1e-12),(5,'independent_floor0',False)]
+    for index,key,value in mutations:
+        altered=copy.deepcopy(args);altered[index][key]=value
+        try:source_loss_endpoint_contract(*altered)
+        except AssertionError:pass
+        else:raise AssertionError(('unsubstantiated source loss accepted',index,key))
+    for mutate in ('foreign_counterexample','small_bound','out_of_scope','no_own_witness','no_local_rejection','extra_cohort_damage'):
+        altered=copy.deepcopy(args)
+        if mutate=='foreign_counterexample':altered[6]['rejections'][0]['counterexample']['arm']='other'
+        elif mutate=='small_bound':altered[6]['rejections'][0]['value']=1e-8
+        elif mutate=='out_of_scope':altered[6]['rejections'][0]['scope']['lower_g']=.1
+        elif mutate=='no_own_witness':altered[5]['witnesses']=[]
+        elif mutate=='no_local_rejection':altered[6]['rejections']=[]
+        else:altered[7]['damaged_calls'].append(dict(arm='A',call=2))
+        try:source_loss_endpoint_contract(*altered)
+        except AssertionError:pass
+        else:raise AssertionError(('insufficient own source-loss proof accepted',mutate))
+    shared=dict(line='D',id='synthetic',seed=0,repeat=1,PE_SHA='p',DLL_SHA='d',input_SHA='a',
+        objective_class='zero',native_proof_qualified=True)
+    left=dict(shared,**arm,method='A',T_cert=None,censored=None)
+    right=dict(left,method='B',source_reduced=False,native_proof_qualified=True,T_cert=4.,T_produce=4.,censored=False)
+    group=dict(number=1,seed=0,role=dict(id='synthetic',V=1,layer='K'))
+    q=independent_pair(left,right,'D',group)
+    ss=reporting_disposition_summary([left,right],[q],[left])
+    assert q['direction']==q['classification']=='UNEVALUABLE' and ss['performance_qualified_observations']==1
+    assert not ss['unresolved_unqualified_observations'] and not ss['unresolved_unevaluable_comparisons']
+    unresolved=reporting_disposition_summary([left,right],[q],[])
+    assert unresolved['unresolved_unqualified_observations'] and unresolved['unresolved_unevaluable_comparisons']
+    return dict(status='PASS',scope='synthetic own-zero/source-loss reporting contract only',
+        frozen_performance_eligibility_unchanged=True,raw_own_zero_and_clock_not_mutated=True,
+        foreign_witness_and_missing_own_rejection_blocked=True,nonzero_or_unclosed_evidence_not_waived=True,
+        source_loss_position_retained_as_UNEVALUABLE=True,unexplained_unqualified_evidence_blocks=True)
+
+
 def summarized(aa,pp):
     both=[q for q in pp if q['classification']=='BOTH_CERTIFIED']
     ratios=[q['right_over_left_certification_ratio'] for q in both]
@@ -536,7 +731,7 @@ def readonly_boundary():
             path=Path(args[0]).resolve();mode=args[1] if len(args)>1 else None
             flags=args[2] if len(args)>2 else 0
             assert not (isinstance(mode,str) and any(c in mode for c in 'wax+')),('reader write attempt',path)
-            assert not (flags and flags & (1|2|64|128|256|512|1024)),('reader write flags',path,flags)
+            assert not writable_open_flags(flags),('reader write flags',path,flags)
             assert path.is_relative_to(ROOT) or path.is_relative_to(runtime),('read outside supplied root',path)
             assert path.suffix.lower() not in ('.exe','.dll'),('binary bytes are not evidence-reader input',path)
     sys.addaudithook(hook)
@@ -663,7 +858,7 @@ def formal_evidence(out,rows):
         assert sha(portable(name))==digest,('original production source changed',name)
     environment_path=out/'timing_environment_amendment.json';environment=read(environment_path)
     reporting_inputs=[dict(path=rel(environment_path),SHA=sha(environment_path))]
-    arms=[];pairs=[];artifacts=[];inputs=[];physical_rows=[];errors=[];mechanisms=[];notes=[]
+    arms=[];pairs=[];artifacts=[];inputs=[];physical_rows=[];errors=[];mechanisms=[];notes=[];losses=[]
     for line,g,plan in rows:
         camp=out/g['name'];saved=read(camp/'reconstructed.json')['arms'];assert len(saved)==len(plan['launches'])
         inputs.append(dict(line=line,group=g['number'],identity=rel(camp/'identity.json'),identity_SHA=sha(camp/'identity.json'),
@@ -694,12 +889,21 @@ def formal_evidence(out,rows):
                     same(arm['gap'],arm['U']-arm['L'],1e-14)
                     for key in ('certificate','formal_protocol_qualified','numbers_qualified','certificate_qualified','source_reduced'):
                         assert original.get(key,False)==arm.get(key,False),(line,g['number'],method,key)
+                    for key in ('native_proof_qualified','own_exact_zero','certificate_source','proof_evidence','rejected_calls'):
+                        assert original.get(key)==arm.get(key),(line,g['number'],method,key)
                     for key in ('T_produce','T_verify','T_total'): same(arm[key],clocks[key])
+                    raw_tcert=arm['T_produce'] if arm.get('formal_protocol_qualified') and arm['certificate'] else None
+                    equal(raw_tcert,original['T_cert'],'unaltered producer reconstruction certificate clock')
+                    loss=None
+                    if arm.get('source_reduced'):
+                        loss=source_loss_record(core,item,finding,arm,original,physical,launch,line,method)
                     tcert=arm['T_produce'] if eligible(arm) and arm['certificate'] else None
-                    equal(tcert,original['T_cert'],'own certification clock')
                     resource=fleet_resources(core,p,physical)
                     arm.update(line=line,group=g['number'],method=method,seed=g['seed'],repeat=1,
                         underlying_reader_method=launch['method'],binary_layer=launch['binary_layer'],T_cert=tcert,
+                        raw_reconstructed_T_cert=original['T_cert'],raw_reconstructed_certificate=original['certificate'],
+                        formal_performance_evidence_eligible=eligible(arm),censored=not arm['certificate'] if eligible(arm) else None,
+                        performance_qualification_disposition=SOURCE_LOSS_DISPOSITION if loss else 'QUALIFIED' if eligible(arm) else 'UNQUALIFIED_UNRESOLVED',
                         signed_gap=arm['U']-arm['L'],layer=p['layer'] if line=='D' else 'C',
                         objective_class='zero' if physical['G']==0 and physical['P']==0 else 'positive',
                         near_zero_positive_U=0<arm['U']<=1e-7)
@@ -746,9 +950,12 @@ def formal_evidence(out,rows):
                         root_cutoff=root_call.get('cutoff') if external_ledger and root_call else None)
                     artifacts.append(dict(line=line,group=g['number'],id=arm['id'],seed=arm['seed'],method=method,
                         final_fleet=physical,qualified=eligible(arm),certificate=arm['certificate'],native_Optimize=arm['native_Optimize'],
+                        native_proof_qualified=arm.get('native_proof_qualified'),source_reduced=arm.get('source_reduced',False),
+                        own_physical_zero_certificate_retained=bool(loss),raw_reconstructed_T_cert=original['T_cert'],
                         source_return_cover_rebuilt=True,actual_returned_calls=item['chain']['actual'],
                         actual_models=facts,root_attributes=root_attributes,domain_Start_or_cover=detail,
                         own_H_complete=hs[method]['complete'] if method in hs else None,**clocks))
+                    if loss:losses.append(loss)
                 except Exception as error:
                     errors.append(dict(line=line,group=g['number'],method=method,stage='arm_qualification',error=repr(error)))
                     arm=dict(line=line,group=g['number'],id=launch['id'],seed=g['seed'],repeat=1,method=method,
@@ -783,6 +990,7 @@ def formal_evidence(out,rows):
         pairs.extend(independent_pair(local[left],local[right],line,g) for left,right in wanted)
     assert len(arms)==len({(a['line'],a['id'],a['seed'],a['method']) for a in arms})==84
     assert len(pairs)==64 and sum(q['line']=='D' for q in pairs)==48 and sum(q['line']=='C' for q in pairs)==16
+    dispositions=reporting_disposition_summary(arms,pairs,losses)
     conflicts=[]
     for key in sorted({(a['line'],a['input_SHA']) for a in arms}):
         aa=[a for a in arms if (a['line'],a['input_SHA'])==key and a['U'] is not None]
@@ -801,6 +1009,7 @@ def formal_evidence(out,rows):
     return dict(arms=arms,pairs=pairs,arm_evidence=artifacts,physical_rows=physical_rows,
         strata=broad,problem_size_objective_strata=fine,C_and_PS_mechanisms=mechanisms,errors=errors,
         problem_objective_classification=problem_records,reporting_input_identities=reporting_inputs,
+        source_loss_dispositions=losses,reporting_dispositions=dispositions,
         cross_arm_contradictions=conflicts,input_identities=inputs,empty_route_handoff_read_only_diagnostics=notes,
         original_root_fallback=False,incumbents_bounds_or_certificates_transferred=False)
 
@@ -1318,6 +1527,31 @@ def compare_timing_exposure(out,arms):
         clean_machine_counterfactuals_invented=False)
 
 
+def compare_source_loss_dispositions(out,facts,author,bound_inputs):
+    saved=read(out/'source_loss_dispositions.json')
+    assert saved['raw_reconstructed_files_unchanged'] is True and saved['no_Optimize'] is True
+    key=lambda a:(a['line'],a['id'],a['seed'],a['method'])
+    actual={key(r):r for r in saved['records']}
+    expected={key(r):r for r in facts['source_loss_dispositions']}
+    assert len(actual)==len(saved['records']) and set(actual)==set(expected)
+    for k,record in expected.items():
+        equal(record,actual[k],('independently supported source-loss disposition',k))
+        for binding in record['sources']:
+            assert bound_inputs.get(binding['path'])==binding['SHA'],('missing own source-loss input binding',k,binding['path'])
+    ss=facts['reporting_dispositions']
+    assert author['performance_qualified_observations']==ss['performance_qualified_observations']
+    assert author['disclosed_source_loss_observations']==ss['disclosed_source_loss_observations']
+    assert author['raw_reconstructed_files_unchanged'] is True
+    assert not author['missing'] and not author['analysis_issues']
+    assert len(facts['physical_rows'])==len(facts['arm_evidence'])==84
+    return dict(disclosed_own_zero_source_losses_checked=len(expected),
+        performance_qualified_observations=ss['performance_qualified_observations'],
+        performance_unevaluable_comparisons=ss['performance_unevaluable_comparisons'],
+        raw_own_zero_and_original_clocks_preserved=True,formal_T_cert_and_censoring_null_for_source_loss=True,
+        all_required_positions_and_all84_physical_cost_timing_trajectory_rows_required=True,
+        native_source_reliability_unresolved=bool(expected),performance_eligibility_not_relaxed=True)
+
+
 def author_comparison(out,facts):
     author=read(out/'observations.json');assert author['execution']=='ALL_C_D_ARMS_SEALED'
     aa={(a['line'],a['id'],a['seed'],a['method']):a for a in author['arms']}
@@ -1327,6 +1561,9 @@ def author_comparison(out,facts):
         saved=aa[arm['line'],arm['id'],arm['seed'],arm['method']]
         for key in ('U','L','gap','signed_gap','T_produce','T_verify','T_total','T_cert','certificate',
             'formal_protocol_qualified','numbers_qualified','certificate_qualified','PE_SHA','DLL_SHA','input_SHA',
+            'source_reduced','native_proof_qualified','own_exact_zero','certificate_source','proof_evidence',
+            'raw_reconstructed_T_cert','raw_reconstructed_certificate','formal_performance_evidence_eligible',
+            'performance_qualification_disposition','censored',
             'objective_class','problem_objective_class','near_zero_positive_U','G_true','P_true','native_Optimize',
             'producer_receipt_SHA',*LIFETIME_FIELDS):
             equal(arm.get(key),saved.get(key),('author arm',arm['line'],arm['id'],arm['seed'],arm['method'],key))
@@ -1358,11 +1595,13 @@ def author_comparison(out,facts):
     for record in facts['reporting_input_identities']:
         assert bound_inputs.get(record['path'])==record['SHA'],('missing amendment/producer binding',record['path'])
     assert index['runner_SHA']==sha(ROOT/'scripts/round132_analysis.py')
+    losses=compare_source_loss_dispositions(out,facts,author,bound_inputs)
     problem=compare_problem_classification(out,facts['problem_objective_classification'])
     timing=compare_timing_exposure(out,facts['arms'])
     return dict(arms=84,typed_pairs=64,strata_and_all_conditioned_intersections_match=True,
         resource_rows=len(physical),signed_gaps_not_clipped=True,open_time_not_imputed=True,
         problem_classification=problem,timing_exposure=timing,producer_and_amendment_input_SHA_bindings_checked=85,
+        source_loss_reporting=losses,
         author_analysis_not_imported_or_executed=True)
 
 
@@ -1379,11 +1618,14 @@ def check(root,preflight=False,own_fee=None):
     reporting_sources=[dict(path=rel(p),SHA=sha(p)) for p in (
         ROOT/'scripts/round132_analysis.py',out/'timing_environment_amendment.json',out/'review/final_reporting_addendum.md')]
     identity=dict(checker_SHA=sha(Path(__file__)),accepted_bindings=PINNED,
-        reporting_predecessor=REPORTING_PREDECESSOR,reporting_coverage_source_identities=reporting_sources,
+        reporting_predecessor=REPORTING_PREDECESSOR,source_loss_predecessor=SOURCE_LOSS_PREDECESSOR,
+        reporting_coverage_source_identities=reporting_sources,
         small_plan_input_hashes=[dict(path=rel(p),SHA=h) for p,h in HASHES.items()],**contract)
     if preflight:
         return dict(status='ACCEPT',review_stage='small_plan_preflight_only',**identity,
             reporting_logic_selfcheck=reporting_logic_preflight(),
+            source_loss_logic_selfcheck=source_loss_logic_preflight(),
+            readonly_flags_selfcheck=readonly_flags_preflight(),
             evidence_reader_modules_imported=False,models_fleets_H_or_native_logs_read=False,
             Optimize=0,native_starts=0,compilation=0,final_result_acceptance=False),0
     missing=readiness(out,rows,own_fee=own_fee)
@@ -1393,12 +1635,13 @@ def check(root,preflight=False,own_fee=None):
             Optimize=0,native_starts=0,compilation=0,final_result_acceptance=False),2
     sequence=read(out/'sequence_completion.json')
     assert sequence['D_arms']==60 and sequence['C_arms']==24 and not sequence['budget']['unclosed']
+    identity['standard_runtime_initialization']=initialize_standard_runtime()
     with readonly_boundary():
         facts=formal_evidence(out,rows)
         if facts['errors'] or facts['cross_arm_contradictions']:
             return dict(status='REVIEW_BLOCKED_INVALID_OR_CONTRADICTORY_EVIDENCE',**identity,**facts,
                 Optimize=0,native_starts=0,compilation=0,no_performance_retry_authorized=True),1
-        if not all(eligible(a) for a in facts['arms']) or any(p['classification']=='UNEVALUABLE' for p in facts['pairs']):
+        if facts['reporting_dispositions']['unresolved_unqualified_observations'] or facts['reporting_dispositions']['unresolved_unevaluable_comparisons']:
             return dict(status='REVIEW_BLOCKED_UNQUALIFIED_FORMAL_OBSERVATIONS',**identity,**facts,
                 Optimize=0,native_starts=0,compilation=0,scientific_algorithm_rejection=False,no_performance_retry_authorized=True),1
         author=author_comparison(out,facts)
@@ -1409,6 +1652,8 @@ def check(root,preflight=False,own_fee=None):
         mechanism_costs=mechanism,E=joint,cost_accounting=costs,
         trajectories_and_scoped_history=progress,all_final_complete_fleets_physically_replayed=True,
         full_source_return_Start_cover_reader_reused=True,finite_evidence_review_not_external_replication=True,
+        PASS_scope='Faithful finite evidence/reporting, including disclosed UNEVALUABLE own-zero source losses; rejected native proof reliability is not restored.',
+        all_required_formal_positions_closed=True,
         serialized_numerical_equivalence_not_claimed=True,Optimize=0,native_starts=0,compilation=0),0
 
 

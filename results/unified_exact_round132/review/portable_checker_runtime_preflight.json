@@ -1,0 +1,700 @@
+{
+  "status": "ACCEPT",
+  "review_stage": "small_plan_preflight_only",
+  "checker_SHA": "07ecaba1e51988863652f0b88df28f745ce6d9116245dc3d6b90cab1640f2f5b",
+  "accepted_bindings": {
+    "D_execution_binding.json": "569fce35242e2e54a52aa63a145d5ffa3db7c5eabfacd5d9d2786198eeb4098c",
+    "C_execution_binding.json": "3248070303dd4157ea0df766b859108b354dffffa7ee9909abe98352f9480135",
+    "source_recipe.json": "f1419a3f87a5e6d4438109b1d583d55f50f7bef82b8ccdd3fbb57b74f464cf03",
+    "E_experiment_plan.json": "d8de4cba395f475c83b8f22e8fc0abd31c887ffe0fdb6c289ce0af626adad7dd"
+  },
+  "reporting_predecessor": {
+    "checker_SHA": "a6939dae51f8f29870d6ad48934fd344afd55907af87be769e5537317afa3033",
+    "Git_commit": "0456358c8dff158ee874036cf9d2fd10d4fba633",
+    "Git_blob": "e9e08c4dbb1ad1e7e728881dac2f47307c77574d"
+  },
+  "source_loss_predecessor": {
+    "checker_SHA": "0e7d939c4e3a99561172170489733a83f524dc9d25f876da03c1977ffdbfc452",
+    "retained_bytes": "results/unified_exact_round132/review/portable_checker_before_source_loss.py"
+  },
+  "reporting_coverage_source_identities": [
+    {
+      "path": "scripts/round132_analysis.py",
+      "SHA": "4eb5eb4d37945bc07e8bdc417f19a055e4758ebebdb279a76f6d530cad244ff2"
+    },
+    {
+      "path": "results/unified_exact_round132/timing_environment_amendment.json",
+      "SHA": "d84186d2a2521fab0cdfdbfb4a22ff8a1d6df3cba352ae4d4629146c53b1f1f6"
+    },
+    {
+      "path": "results/unified_exact_round132/review/final_reporting_addendum.md",
+      "SHA": "28c0884297db71c36cdf195cf9441fbcd1b17acd416b8f49bd5b4f1ca2b5eb11"
+    }
+  ],
+  "small_plan_input_hashes": [
+    {
+      "path": "results/unified_exact_round132/D_execution_binding.json",
+      "SHA": "569fce35242e2e54a52aa63a145d5ffa3db7c5eabfacd5d9d2786198eeb4098c"
+    },
+    {
+      "path": "results/unified_exact_round132/C_execution_binding.json",
+      "SHA": "3248070303dd4157ea0df766b859108b354dffffa7ee9909abe98352f9480135"
+    },
+    {
+      "path": "results/unified_exact_round132/source_recipe.json",
+      "SHA": "f1419a3f87a5e6d4438109b1d583d55f50f7bef82b8ccdd3fbb57b74f464cf03"
+    },
+    {
+      "path": "results/unified_exact_round132/E_experiment_plan.json",
+      "SHA": "d8de4cba395f475c83b8f22e8fc0abd31c887ffe0fdb6c289ce0af626adad7dd"
+    },
+    {
+      "path": "results/unified_exact_round132/experiment_plan.json",
+      "SHA": "f73f89ff1cc5ec2e2772a30e63b7c5d9b23d6a34362879d5cac1067c0e3f63ee"
+    },
+    {
+      "path": "results/unified_exact_round132/input_manifest.json",
+      "SHA": "1faa0972b7844abec62ce325ada49a9fa1253941a245ec98f8a92dff580b53ed"
+    },
+    {
+      "path": "results/unified_exact_round132/D_argv_freeze.json",
+      "SHA": "eb39546a998fb497975c3980095fcb2d671d5dd26e6002a6a2459d5522aa84a4"
+    },
+    {
+      "path": "results/unified_exact_round132/C_experiment_plan.json",
+      "SHA": "91040549bf094368483faad90ebdf5eb2825202795fe14b241100b9a6b169fa5"
+    },
+    {
+      "path": "results/unified_exact_round132/C_argv_freeze.json",
+      "SHA": "c724a1a567e85af91a29fd1e1462f615c2943b07e99c36f0f905b489904892e7"
+    },
+    {
+      "path": "results/unified_exact_round132/research_build.json",
+      "SHA": "e7b67e1209080f9fec2cf19fdf743715204db3116bbaf43e6186b78686356de4"
+    },
+    {
+      "path": "scripts/round132_build.py",
+      "SHA": "a45955b02dde48916bbc48c0999c7c671be27ee69d70aa4a91eb6ce59f9f807b"
+    },
+    {
+      "path": "scripts/Round132Expression.hpp",
+      "SHA": "1652c3ca3dcb5749aaebff90264904ae823aae282d4c99b7f62c46ec2f6e0242"
+    },
+    {
+      "path": "scripts/round132_C.py",
+      "SHA": "2cb66403ecd14261057d8f874bf740348871b71346f0011e107cc0cc09751f8a"
+    },
+    {
+      "path": "scripts/analyze_round61.py",
+      "SHA": "fad9154b399dd9eb3463510f8480dd1e8a22974729902e0a25ec78a9ae551cce"
+    },
+    {
+      "path": "scripts/compare_round112_startup.py",
+      "SHA": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2"
+    },
+    {
+      "path": "scripts/generate_citibike443_regional_v1.py",
+      "SHA": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+    },
+    {
+      "path": "scripts/qualify_round120.py",
+      "SHA": "24e6c41494abb723d006660b08b754c0075f84dc1279e4bf8bf70a5081ac689a"
+    },
+    {
+      "path": "scripts/read_round113.py",
+      "SHA": "84f98aadd30681080af723d4f874f007f0222431f2fb15bffbd6b7fcfc716cc2"
+    },
+    {
+      "path": "scripts/read_round116.py",
+      "SHA": "ed5865c5011d239815000f1bf15c591eee8d9e8d933edd857f3a990762230d28"
+    },
+    {
+      "path": "scripts/read_round118.py",
+      "SHA": "d9a8e887f10abfb9bdead5b765d033316c96d6134b42163aeb37acdb5b16dbc7"
+    },
+    {
+      "path": "scripts/round100_campaign.py",
+      "SHA": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66"
+    },
+    {
+      "path": "scripts/round100_common.py",
+      "SHA": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca"
+    },
+    {
+      "path": "scripts/round100_idle.py",
+      "SHA": "093ced41cdae00ed1eab56fb6c1e94b9f22bacfac637da803b8e41ee06821639"
+    },
+    {
+      "path": "scripts/round101_common.py",
+      "SHA": "6ea42060b3804c125888ffff76facea0519a5219a5110ba8524bf1e9e75d7ce1"
+    },
+    {
+      "path": "scripts/round103_common.py",
+      "SHA": "67fc725b0a440bf8c557a93da3f9a2c02decfc2b2ffebbbcc7d0d8571bf247d0"
+    },
+    {
+      "path": "scripts/round107_reader.py",
+      "SHA": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2"
+    },
+    {
+      "path": "scripts/round108_decisions.py",
+      "SHA": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46"
+    },
+    {
+      "path": "scripts/round108_reader.py",
+      "SHA": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd"
+    },
+    {
+      "path": "scripts/round108_scopes.py",
+      "SHA": "4a9b9570d1142265fdc96b56df4a91021521732b521a649fe0609ac72de0c733"
+    },
+    {
+      "path": "scripts/round109_campaign.py",
+      "SHA": "881c8a4d818f7c94a08e72a1714c1713cf823ab908406dd0425f2c16ae9db693"
+    },
+    {
+      "path": "scripts/round109_common.py",
+      "SHA": "4804f3db87ad5b6e6770f300691b125dac9ab122df48c4b2c7a77fb53fc0dcdf"
+    },
+    {
+      "path": "scripts/round109_data.py",
+      "SHA": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5"
+    },
+    {
+      "path": "scripts/round109_decisions.py",
+      "SHA": "47483e89f7184762541276b7f5200c3611ca800866708e9ae5c2bb7aa98bae3d"
+    },
+    {
+      "path": "scripts/round109_interval_pairs.py",
+      "SHA": "61f4f3e8ef00c5bd0ca5bbe9571532772fb1450f1c2fa6ef573e273a4935e279"
+    },
+    {
+      "path": "scripts/round109_prepare.py",
+      "SHA": "e8684188f2b015d68702d0400570415ec6ef1f15d1f6b46ad5e8b4bb7913342a"
+    },
+    {
+      "path": "scripts/round109_seed_audit.py",
+      "SHA": "e0e2a076096ba8979ba3a59f376cc0293cb4b5da2a3bb90bfe0311f6085a570e"
+    },
+    {
+      "path": "scripts/round109_seed_scope.py",
+      "SHA": "08bc7c282a29815b26efac54efa9880d660674328f12a5c83aeef7441044368b"
+    },
+    {
+      "path": "scripts/round110_common.py",
+      "SHA": "5816ba204c8be606d6dfee36b0823fcd95fb6cc2e4ce90eb46b5a812e91da120"
+    },
+    {
+      "path": "scripts/round111_decisions.py",
+      "SHA": "bb9a27d5e15cbe52175b228a52f1c8c6c394bdbef5ea227fa9d54924c44a6f63"
+    },
+    {
+      "path": "scripts/round111_seed_audit.py",
+      "SHA": "da70eb1a01cdcf988fcfe0963ef39692d513cc5ae20ecae18835832bed45e2c5"
+    },
+    {
+      "path": "scripts/round112_audit.py",
+      "SHA": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6"
+    },
+    {
+      "path": "scripts/round112_campaign.py",
+      "SHA": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85"
+    },
+    {
+      "path": "scripts/round112_common.py",
+      "SHA": "de18376ad23be0789a726c4f7bc8bbc09f074571c1afdbefdf7092a068d6d2a8"
+    },
+    {
+      "path": "scripts/round113_audit.py",
+      "SHA": "02af4e0de90b425b51889e1df860597236fc7ca32c567363e0de982834dfdfe7"
+    },
+    {
+      "path": "scripts/round113_campaign.py",
+      "SHA": "b76c63ad8a09683e43b737721d55523bd7c1c6ab2aadb5070aa5c6e8b29fd447"
+    },
+    {
+      "path": "scripts/round113_common.py",
+      "SHA": "f100749161fad2487d652991da0fa6086cce75aad0e037a43d8823a0abf95c1b"
+    },
+    {
+      "path": "scripts/round113_progress.py",
+      "SHA": "51a0969ded9e0896b85d264fbe30af3cd30813d579136c3c822c845da384b45a"
+    },
+    {
+      "path": "scripts/round114_audit.py",
+      "SHA": "a8c55a0bcd3d5a7083d1109850fa728f35378c4dafb5a4cc185089c6c530b758"
+    },
+    {
+      "path": "scripts/round114_campaign.py",
+      "SHA": "abdc9f5fa08965696e17982b0092cae95425e3fb4cad86368b57592893a8b8ab"
+    },
+    {
+      "path": "scripts/round114_claims.py",
+      "SHA": "d0fc9e2ea15cf37a463c895adf8cfd784762706fd73744c2a99720eebd010149"
+    },
+    {
+      "path": "scripts/round114_common.py",
+      "SHA": "5fc5e753a51a655d7526ee08177da16df5699495a02eadf55575ed88dca30d9e"
+    },
+    {
+      "path": "scripts/round114_ps.py",
+      "SHA": "6bf8d31541bce73d33b5fc2d861cacb85da9fe18ecdcf574cfcbff24f4499a3c"
+    },
+    {
+      "path": "scripts/round115_campaign.py",
+      "SHA": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03"
+    },
+    {
+      "path": "scripts/round115_common.py",
+      "SHA": "105efd354e72f46abc7fbb30b42949a5f8d6db5d4deb01d2c73f4eac6149d841"
+    },
+    {
+      "path": "scripts/round115_verify.py",
+      "SHA": "d225751afb1dfc7b29f20d6b1f231c8baed4d6b842ebed8fc0799bdd4523a001"
+    },
+    {
+      "path": "scripts/round118_call_logs.py",
+      "SHA": "0c719ad386ed7ad3c793ce93bab7bc4f190cd2a2317aeccdccff6279c7b3dca4"
+    },
+    {
+      "path": "scripts/round118_data.py",
+      "SHA": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699"
+    },
+    {
+      "path": "scripts/round120_campaign.py",
+      "SHA": "561bd20a09fc1347a8188831979646603bc08e0ce7c98377c30f176945c6d5f0"
+    },
+    {
+      "path": "scripts/round120_common.py",
+      "SHA": "a1302c682e146294e48e5f78e086a1c0af713775358f64875756b1a222256077"
+    },
+    {
+      "path": "scripts/round120_evidence.py",
+      "SHA": "db89c758b238bfe2836001c4cf5e270a84d2b2834aa5a552589cb1863a4d9be5"
+    },
+    {
+      "path": "scripts/round120_math_audit.py",
+      "SHA": "7334f742647aaffa4e29b41d09b43902e9ff399482ef2e83fc02a588400b1afa"
+    },
+    {
+      "path": "scripts/round120_prepare.py",
+      "SHA": "d0354d810ce2278a220e7d2f58490397b4dd080f5dc290ff1bc15ff9247d6964"
+    },
+    {
+      "path": "scripts/round121_campaign.py",
+      "SHA": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0"
+    },
+    {
+      "path": "scripts/round121_common.py",
+      "SHA": "1a401ff0a4ffffbab0265e62d6c46d89b60bad2d2587ffd12999b5db042029f6"
+    },
+    {
+      "path": "scripts/round121_evidence.py",
+      "SHA": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2"
+    },
+    {
+      "path": "scripts/round122_common.py",
+      "SHA": "1afde640f299d64fe810506aaedc0d59a2cf3c0b7129b87dc9d84688830e587e"
+    },
+    {
+      "path": "scripts/round122_evidence.py",
+      "SHA": "bb3e1e711f4ae1f48c7ef1a1b2092d75627e1104711653fd98aa605fe7a74ea4"
+    },
+    {
+      "path": "scripts/round122_prepare.py",
+      "SHA": "dbd8544440a9e7a37310984141af86f2d9f9ad8929d41ba181e209cd2c6484ce"
+    },
+    {
+      "path": "scripts/round126_common.py",
+      "SHA": "beb4c87e81d7a745d3d7f3d94d4e146e4826df4289f6482e45230cb6a8a025b7"
+    },
+    {
+      "path": "scripts/round126_run.py",
+      "SHA": "d121a5414c1919bbc1893fff25e2a51ca18a259772bc4a04850f87a2a3f0d939"
+    },
+    {
+      "path": "scripts/round127_common.py",
+      "SHA": "ba0e4a93a6ad90d17784f1ee2a5ef8fcf8905aef0f1b44346a9221eb9ea90e37"
+    },
+    {
+      "path": "scripts/round127_evidence.py",
+      "SHA": "d776d0dc999e6199cd376e693885abbd5a3f86616e8238b37645f4c80c96626a"
+    },
+    {
+      "path": "scripts/round128_common.py",
+      "SHA": "719bc515fcc6fe530fd8baa645162702c18618dadbc8d0537ba9bf97bf0777f1"
+    },
+    {
+      "path": "scripts/round128_evidence.py",
+      "SHA": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022"
+    },
+    {
+      "path": "scripts/round130_campaign.py",
+      "SHA": "eed2b7e00face643768fd37111bfd035c7ebce54a34d14279a95522ea7b25c95"
+    },
+    {
+      "path": "scripts/round130_common.py",
+      "SHA": "1750849e9c9e0442a96d74f106319a16d75c2a469e538e5c07ca35a3fbb69150"
+    },
+    {
+      "path": "scripts/round130_evidence.py",
+      "SHA": "bfb6eb014b5f8e95c696a845a5a7df22bef073188c4b097d28a8e4e85d25b5c3"
+    },
+    {
+      "path": "scripts/round132_campaign.py",
+      "SHA": "2bc775c0555a74af826a991535327a3c4f7153e335f707c3f377e8fce7ad0639"
+    },
+    {
+      "path": "scripts/round132_common.py",
+      "SHA": "b918b5c7e236e4763c082ed250258b4f6e9d0e6255e2d29fa82c45a2f629a311"
+    },
+    {
+      "path": "scripts/round61_research.py",
+      "SHA": "3a288c045e58bbc7e19dad330db2bdae4257daaf63a66313ee32b89205e14955"
+    },
+    {
+      "path": "scripts/round70_affinity.py",
+      "SHA": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445"
+    },
+    {
+      "path": "scripts/round73_qualify.py",
+      "SHA": "b4428f5a42b2e58d8ca6c84fbb5d28ae1c678f8f41e9bdbba4f6954c01e88efd"
+    },
+    {
+      "path": "scripts/round73_seed_diagnostic.py",
+      "SHA": "3263595bf7ddda4472d6c519b136faec7b3f9d4ab4e3009bb5bf108d9cc0e3c8"
+    },
+    {
+      "path": "scripts/round75_qualify.py",
+      "SHA": "c82f757cde7e0915f097749925e54e19cf9e9d0c483ada6d9654439ce580232f"
+    },
+    {
+      "path": "scripts/round75_startup.py",
+      "SHA": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6"
+    },
+    {
+      "path": "scripts/round76_qualify.py",
+      "SHA": "c56ab8d49cd664d1433d5dfa0fbe2670ccc390a05ea3a2abd60e479ba26dca72"
+    },
+    {
+      "path": "scripts/round76_startup.py",
+      "SHA": "993c448dd466d5288ed61003ac339c63002452c86737c9d7ee46457b56e6f929"
+    },
+    {
+      "path": "scripts/round78_audit.py",
+      "SHA": "57f4aa7ba6d1b0c20d95779c08d27fd4f1d25164cbbe26ca2a0ae7c090fa58ea"
+    },
+    {
+      "path": "scripts/round83_audit_v2.py",
+      "SHA": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55"
+    },
+    {
+      "path": "scripts/round86_native_evidence.py",
+      "SHA": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58"
+    },
+    {
+      "path": "scripts/round88_a1_g3.py",
+      "SHA": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd"
+    },
+    {
+      "path": "scripts/round90_lp_g_g3.py",
+      "SHA": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996"
+    },
+    {
+      "path": "scripts/round94_lpg_contemporary.py",
+      "SHA": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a"
+    },
+    {
+      "path": "scripts/round94_lpg_formal_recovery_v3.py",
+      "SHA": "7d54f6bfd2a0fec302b7cdf5d0291809254ea1ffdbc864face54ecc704b7ce01"
+    },
+    {
+      "path": "scripts/round96_external.py",
+      "SHA": "4d8f917ce46aa0945319d69e8001006a7cb039ff4a274844e53c6774eeb5d57e"
+    },
+    {
+      "path": "scripts/round96_prepare.py",
+      "SHA": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe"
+    },
+    {
+      "path": "scripts/round99_common.py",
+      "SHA": "bd1ecd710fa4e52093e6027a247ce77c4ddaa00b56ee0ef499cd45ccd41f8208"
+    },
+    {
+      "path": "scripts/round99_pure_start_audit.py",
+      "SHA": "c769dbdc978025ba84cbb8f566d493018f912f35c74346047434e2e21af4f882"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-15-S.txt",
+      "SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-15-B.txt",
+      "SHA": "274cd13f7f1140a8fcf6515e05b4bbf4093d1561a13e5a43450f97e6fc5db954"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-20-S.txt",
+      "SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-20-U.txt",
+      "SHA": "f1757e81671889f1dbcaa83f0780a049ef321dff6855a80f0ea4eb80514f3ea7"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-35-B.txt",
+      "SHA": "f208424eb05eb54cb60e85db6969443b07c1e80763a964c50980dd6b80bcd52b"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/K-35-U.txt",
+      "SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-15-S.txt",
+      "SHA": "bdc3eadb559b5e97f601f0cdc1c62150b5a53aafa0e76dad74b6ef9c9d295999"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-15-B.txt",
+      "SHA": "c62fdf9dba207a161add1579cd8274d9a66988c4c50db151751eef80435c142c"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-20-S.txt",
+      "SHA": "ed520ce851838681ff94ab1a4b982d67f49a16cc9e063435984c3f8c2d43d77f"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-20-U.txt",
+      "SHA": "eb9a8a2947ae45b7634acfd4ae2528e6a7d16c13204ff563eb8d827ca036bb0c"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-35-B.txt",
+      "SHA": "2e66f0e144f3950633aa8d9e4b490ef7fc3f838e4cdc477f1daf9dc4df1f27a1"
+    },
+    {
+      "path": "results/unified_exact_round132/inputs/X-35-U.txt",
+      "SHA": "6a040c2d36b40f833cf083eab2aac3bde37185e85d7e66c415a98e2cbf59fe68"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group01/identity.json",
+      "SHA": "0a4f92e2d6585776de04b61985a4580440f65c146e5107c9b8009c1af345a1dc"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group02/identity.json",
+      "SHA": "effcd41f6ae8f751563e01e06021c04abb6d564c4216a37769b97d7d2613d8eb"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group03/identity.json",
+      "SHA": "b289ffaa42a5f534104ddaa15271a2a442678824c6d0f755456c093bda834f18"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group04/identity.json",
+      "SHA": "dd1e7714d3029bfe2a1256ec5809eac4fbe0b2c6a9acaae8c57ee5d389510793"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group05/identity.json",
+      "SHA": "4f3ba6fa905e9355e90c8c3e84d4f9a9302c6b197d4dc46e08c7dae57dd0e7c4"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group06/identity.json",
+      "SHA": "0efa4991b5c2a5d8ba9ffde7c1abb744d14f9068997807fc56d304e8ffa0b28d"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group07/identity.json",
+      "SHA": "99783b70eada2c25c35588fb8f820577abe71f0bb5f9b3f838d92e8cf9d1c1e9"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group08/identity.json",
+      "SHA": "8d1e1dd43fc6b47a9d3c778a26145c2f4dcc849d4b555acb6cd50788a25525dc"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group09/identity.json",
+      "SHA": "52c35fbb2b4a74785053f2783f6584533f0c8e5ef4eef5fc9266585571b1db99"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group10/identity.json",
+      "SHA": "064e3af2e2c9ecabb6726036398fbcbe0d3f4ab28bbca164a0d41efdd98b9750"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group11/identity.json",
+      "SHA": "72c77a5b2b9363a0c07e5c8ee75361d75d368be7c1e3796b0aafd91094352af5"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group12/identity.json",
+      "SHA": "18a5e6d3eba7d42e420b3cc5a36ba8bc20e74addfe4e5bbeaf53e428626b1ba2"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group13/identity.json",
+      "SHA": "5e521ae9f0bf41b4c905ce99d616b3ef3c808c289c91db704085fa0ee2685ea7"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group14/identity.json",
+      "SHA": "dac392388b4d6947afc2207d764688e8be24820f1117872f3eb64a58f5bfa9f9"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group15/identity.json",
+      "SHA": "0f3d4a5d1f01202ade91dcb030f6fd16433b62fe0f9e8bff55b2f0a46fba4166"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group16/identity.json",
+      "SHA": "4645ea35588fbb65c1ac536bccede0dc310864c26faaac678794bb2c0605525a"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group17/identity.json",
+      "SHA": "c529c864420466c1bade60f50bfd5fd324e36287d8d4e45faa799f0d58c3c8ef"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group18/identity.json",
+      "SHA": "57f4f8d7091f9a1a82c59d13fc80039cb131dfd9e3c743294726493a89b5e6af"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group19/identity.json",
+      "SHA": "23567f1f1c73c8dd399fd1b5877c35bdb0baab2340d8cd98e54d991bee6651f7"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group20/identity.json",
+      "SHA": "54df04a0bb7350080d20986be943d49b502b356e21f9b2c08ba30819f7fc9103"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group21/identity.json",
+      "SHA": "47efde04ddefe179f8cc6ca40b25b1421af1d436167e13da9fc653ab73d58def"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group22/identity.json",
+      "SHA": "51ec76e541ed50e1d552d754eb6d9b0fc99e9a7a23b94c4d2504bfcd991a5e05"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group23/identity.json",
+      "SHA": "1a26f3731cd87a301ebe068be8b55a70ab53de76cf415d2d12e0b1a5b73fe262"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/D_group24/identity.json",
+      "SHA": "843f9c0de9b49b797d9d9e1e75a2a005d91bbd5aab9790e91951809f4ad2e954"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/C_group01/identity.json",
+      "SHA": "e9f1adecc81c991759ae9d1c3e6585e063b6053ebe5b9b69dff3be9d1fafc630"
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SC-C15-B.txt",
+      "SHA": "c0d5fc4eee62e1e454b8acde8b721640e410bf496593b14d4cbdb1ccf36f14ea"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/C_group02/identity.json",
+      "SHA": "a850e506646918a9a4adbba907d6fdce8fbdfa122520c13573c066dd6c0ef8fa"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/C_group03/identity.json",
+      "SHA": "f258df33da31252507319d5014dfb821d0d6c3db5b780734a524b303c724e09e"
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/SC-B20-S.txt",
+      "SHA": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/C_group04/identity.json",
+      "SHA": "b6b64efad9f96d00558525823f405575d41944b0d70608f3a20304cba65896b3"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/C_group05/identity.json",
+      "SHA": "a28480b5821d8078367e799cf1aaed74a518b8b63f6f8cacc953b602be8081b5"
+    },
+    {
+      "path": "results/unified_exact_round130/inputs/UC-C20-U.txt",
+      "SHA": "e4de3620f2eba0c9c91a18fddbc5db26700914c280e614c37d3c159417f61df5"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/C_group06/identity.json",
+      "SHA": "f2e754bbdd2d3dcfcd8120af6d0b099b6800b81ad262880299208840f0070a9b"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/C_group07/identity.json",
+      "SHA": "d11d04f394af67b9fdc05065cc2542d5a2522dcc3441ac67d66f4004dfee3985"
+    },
+    {
+      "path": "results/unified_exact_round131/inputs/PB-C35-U.txt",
+      "SHA": "67fa5712962980350c0b7be00abbcc4866af0fe376d0395b565ec082d36842e5"
+    },
+    {
+      "path": "results/unified_exact_round132/campaign/C_group08/identity.json",
+      "SHA": "3f72efd6d97eeda490d374b92521a5a7df75754e92a48b3274ea02662d2f876e"
+    },
+    {
+      "path": "scripts/round132_joint.py",
+      "SHA": "8d0d723a32a8f11dcd240778e44d6f172c44f02fe5c65e05c706d13b9ceafdf6"
+    },
+    {
+      "path": "results/unified_exact_round132/engineering/E_shortage_coverage_amendment/E_experiment_plan.json",
+      "SHA": "db2bc424d315ad770099d25d525b2736cfa0476569120006d7003cb49e6bb6d1"
+    },
+    {
+      "path": "results/unified_exact_round132/engineering/E_shortage_coverage_amendment/round132_joint.py",
+      "SHA": "3e6150f961d65eb14b36f3ee96ae1ea32a819b3d458626ec09aeade07859c08a"
+    },
+    {
+      "path": "scripts/round132_analysis.py",
+      "SHA": "4eb5eb4d37945bc07e8bdc417f19a055e4758ebebdb279a76f6d530cad244ff2"
+    },
+    {
+      "path": "results/unified_exact_round132/timing_environment_amendment.json",
+      "SHA": "d84186d2a2521fab0cdfdbfb4a22ff8a1d6df3cba352ae4d4629146c53b1f1f6"
+    },
+    {
+      "path": "results/unified_exact_round132/review/final_reporting_addendum.md",
+      "SHA": "28c0884297db71c36cdf195cf9441fbcd1b17acd416b8f49bd5b4f1ca2b5eb11"
+    },
+    {
+      "path": "scripts/round132_portable_check.py",
+      "SHA": "07ecaba1e51988863652f0b88df28f745ce6d9116245dc3d6b90cab1640f2f5b"
+    }
+  ],
+  "formal_arms": {
+    "D": 60,
+    "C": 24
+  },
+  "nominal_caps": {
+    "D": 84000,
+    "C": 32400
+  },
+  "typed_comparisons": 64,
+  "D_primary_problems": 12,
+  "D_primary_repeated_comparisons": 24,
+  "PS_problems": 6,
+  "PS_repeated_comparisons_per_direction": 12,
+  "C_problems": 4,
+  "C_repeated_comparisons_per_candidate": 8,
+  "C_shared_baselines": 8,
+  "original_and_research_binary_declarations_checked": true,
+  "binary_bytes_required_or_loaded": false,
+  "reporting_logic_selfcheck": {
+    "status": "PASS",
+    "scope": "synthetic reporting contract only; no campaign data",
+    "physical_zero_priority_near_zero_unknown_and_qualified_bound_checked": true,
+    "same_input_other_line_separation_checked": true,
+    "contradictions_rejected_before_classification": true,
+    "own_endpoints_and_clocks_unchanged": true,
+    "lifetime_boundaries_and_counterfactual_null_checked": true
+  },
+  "source_loss_logic_selfcheck": {
+    "status": "PASS",
+    "scope": "synthetic own-zero/source-loss reporting contract only",
+    "frozen_performance_eligibility_unchanged": true,
+    "raw_own_zero_and_clock_not_mutated": true,
+    "foreign_witness_and_missing_own_rejection_blocked": true,
+    "nonzero_or_unclosed_evidence_not_waived": true,
+    "source_loss_position_retained_as_UNEVALUABLE": true,
+    "unexplained_unqualified_evidence_blocks": true
+  },
+  "readonly_flags_selfcheck": {
+    "status": "PASS",
+    "platform_native_os_constants": true,
+    "read_flags_checked": 32896,
+    "read_only_binary_noinherit_cloexec_not_misclassified": true,
+    "all_write_create_truncate_append_excl_flags_denied": true
+  },
+  "evidence_reader_modules_imported": false,
+  "models_fleets_H_or_native_logs_read": false,
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0,
+  "final_result_acceptance": false,
+  "seconds": 0.246152599924244,
+  "UTC": "2026-10-24T11:53:16.710507+00:00"
+}

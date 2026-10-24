@@ -13,6 +13,31 @@ def csv_table(path,rows):
         w=csv.DictWriter(f,keys);w.writeheader()
         for r in rows:w.writerow({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list,tuple)) else v for k,v in r.items()})
 
+def disclosed_source_loss(a,l):
+    """Keep an own-zero proof without relaxing frozen performance eligibility."""
+    assert a.get('source_reduced') is True and a.get('native_proof_qualified') is False
+    assert all(a.get(k) is True for k in ['formal_protocol_qualified','numbers_qualified','certificate_qualified'])
+    assert a.get('own_exact_zero') is True and a.get('certificate') is True
+    assert a.get('proof_evidence')==a.get('certificate_source')=='OWN_ZERO_CERTIFICATE'
+    assert a['U']==a['L']==a['gap']==0 and a['raw_reconstructed_T_cert']==a['T_produce']
+    d=core.portable(ROOT,l['destination']);ind=read(d/'independent_evidence.json');rejected=read(d/'claim_rejections.json')
+    assert ind['own_U']==0 and ind['own_exact_zero'] and ind['own_physical_verified'] and ind['independent_floor0']
+    zeros=[w for w in ind['witnesses'] if w['arm']==l['arm'] and w['physical_verified'] and w['G']==w['P']==w['F']==0]
+    assert zeros and rejected['damaged_calls'] and rejected['rejections']
+    assert all(r['call_rejected_as_a_whole'] and r['counterexample']['arm']==l['arm'] and
+        r['counterexample']['F']==r['counterexample']['G']==0 for r in rejected['rejections'])
+    return dict(line=a['line'],id=a['id'],seed=a['seed'],method=a['method'],
+        own_physical_zero_certificate_retained=True,native_proof_qualified=False,
+        source_reduced=True,formal_performance_evidence_eligible=False,
+        raw_reconstructed_T_cert=a['raw_reconstructed_T_cert'],formal_performance_T_cert=None,
+        T_produce=a['T_produce'],T_verify=a['T_verify'],T_total=a['T_total'],
+        disposition='UNEVALUABLE formal performance; independent own-zero proof retained; not ordinary open',
+        damaged_calls=rejected['damaged_calls'],rejected_bound_values=[r['value'] for r in rejected['rejections']],
+        own_zero_witness_sequences=sorted({w.get('sequence') for w in zeros if w.get('sequence') is not None}),
+        native_source_reliability_unresolved=True,no_native_retry=True,
+        sources=[dict(path=p.relative_to(ROOT).as_posix(),SHA=sha(p)) for p in
+            [d/'independent_evidence.json',d/'claim_rejections.json',d/'producer_receipt.json']])
+
 def physical(p,d,a,witness=None):
     r=read(d/'result.json') if witness is None else witness
     fleet=core.full_fleet(ROOT,p,r);instance=core.evidence.instance(ROOT,p)
@@ -184,7 +209,7 @@ def same_H_and_scope():
 def run(partial=False,heavy=True):
     assert (OUT/'sequence_completion.json').exists(),'Defer complete raw-table decoding until the native sequence has finished'
     assert not budget()['unclosed'],'Defer complete raw-table decoding until native/qualification child receipts close'
-    arms=[];pairs=[];cc=[];physical_rows=[];missing=[];trajectories=[];inputs=[];issues=[]
+    arms=[];pairs=[];cc=[];physical_rows=[];missing=[];trajectories=[];inputs=[];issues=[];source_losses=[]
     environment_path=OUT/'timing_environment_amendment.json'
     environment=read(environment_path)
     inputs.append(dict(path=environment_path.relative_to(ROOT).as_posix(),SHA=sha(environment_path)))
@@ -212,13 +237,21 @@ def run(partial=False,heavy=True):
                     formal_plan_member=True,raw_inherited_formal_performance_flag=legacy_formal,
                     formal_performance_evidence_eligible=qualified(a),nominal_source=p_source(l),
                     signed_gap=a['U']-a['L'] if a.get('U') is not None and a.get('L') is not None else None,
-                    observed_horizon=a['T_produce'],censored=not a['certificate'])
+                    observed_horizon=a['T_produce'],censored=not a['certificate'] if qualified(a) else None,
+                    raw_reconstructed_T_cert=a.get('T_cert'),raw_reconstructed_certificate=a.get('certificate'))
+                loss=None
+                if not qualified(a) and a.get('source_reduced'):
+                    loss=disclosed_source_loss(a,l);source_losses.append(loss)
+                    a.update(T_cert=None,performance_qualification_disposition=loss['disposition'])
+                    inputs.extend(loss['sources'])
+                else:
+                    a['performance_qualification_disposition']='QUALIFIED' if qualified(a) else 'UNQUALIFIED_UNRESOLVED'
                 assert a['T_cert']==(a['T_produce'] if qualified(a) and a['certificate'] else None)
                 if line=='D':assert a['PE_SHA']==PE_SHA
                 else:assert a['PE_SHA']==read(OUT/'research_build.json')['PE_SHA']
                 d=Path(l['destination'])
                 try:
-                    assert qualified(a),'Existing independent evidence is unqualified'
+                    assert qualified(a) or loss is not None,'Existing independent evidence is unqualified and unresolved'
                     assert all(isinstance(a.get(k),(int,float)) and math.isfinite(a[k]) for k in ['U','L'])
                     producer=d/'producer_receipt.json'
                     assert sha(producer)==a['producer_receipt_SHA']
@@ -235,6 +268,7 @@ def run(partial=False,heavy=True):
                         counterfactual_clean_machine_T_cert=None)
                     inputs.append(dict(path=producer.relative_to(ROOT).as_posix(),SHA=sha(producer)))
                     f=physical(l['panel'],d,a)
+                    if loss is not None:assert f['G_true']==f['P_true']==0
                 except (AssertionError,ValueError,KeyError,FileNotFoundError) as error:
                     issue=dict(line=line,group=g['number'],id=a['id'],seed=a['seed'],method=a['method'],error=repr(error))
                     issues.append(issue);a.update(derived_analysis_issue=issue,formal_protocol_qualified=False,objective_class='unevaluable',
@@ -319,12 +353,19 @@ def run(partial=False,heavy=True):
         if key in strat:
             s=strat[key];dtext+=f"In {layer}, S2/P qualified certificate counts are {s['certificates'].get('S2',0)}/{s['certificates'].get('P',0)} across {s['repeated_comparisons']} repeated comparisons on {s['problems']} problems; strict directions are {s['directions']}. "
     dtext+='These are finite within-mechanism and geography-transfer observations; same-problem Seeds are repeats, and both-open times remain censored. PS attribution is confined to its prospectively selected six-problem subset. Problem-level zero/positive/unknown status is distinguished from each arm\'s attained endpoint; a zero observation at35 stations does not establish positive-objective35 proof performance.'
+    if source_losses:
+        dtext+=f' There are {len(source_losses)} disclosed source-reduced own-zero observations: their legal own physical zero proofs and raw production clocks remain, but frozen performance eligibility excludes them, formal T_cert is null and affected comparisons are UNEVALUABLE. They are neither ordinary open results nor time Wins; the rejected native sources are not rehabilitated.'
     ctext=f'The cost panel has {Ccount}/24 sealed same-build workflows. '
     for method in ['S2R-GEOM','S2R-SP']:
         key=f'C:C:{method}/S2R'
         if key in strat:ctext+=f"{method} / S2R gives {strat[key]['directions']} across {strat[key]['repeated_comparisons']} repeated comparisons. "
     ctext+='Any native-process or cost change is not an ideal relaxation-strength increase; unexposed root/node fields remain unknown.'
+    write(OUT/'source_loss_dispositions.json',dict(records=source_losses,
+        policy='Frozen R127 source_reduced exclusion unchanged; R130 raw own-zero reconstruction retained separately',
+        policy_scope='Reporting/clock reconciliation only; no eligibility relaxation, source repair, certificate transfer or production change',
+        raw_reconstructed_files_unchanged=True,no_Optimize=True))
     result=dict(UTC=utc(),execution='PARTIAL' if missing else 'EVIDENCE_ISSUE_REQUIRES_INVESTIGATION' if issues else 'ALL_C_D_ARMS_SEALED',arms=arms,pairs=pairs,missing=missing,analysis_issues=issues,
+        performance_qualified_observations=sum(qualified(a) for a in arms),disclosed_source_loss_observations=len(source_losses),
         raw_reconstructed_files_unchanged=True,heavy_static_analysis=heavy,no_Optimize=True)
     write(OUT/'observations.json',result);write(OUT/'stratified_summary.json',dict(strata=strat,problem_size_objective_strata=grouped,D_arms=Dcount,C_arms=Ccount,
         manuscript_D_statement=dtext,manuscript_C_statement=ctext,seed_repeats_not_independent=True,full_raw_signed_gaps_preserved=True))

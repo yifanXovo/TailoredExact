@@ -7,6 +7,7 @@ def table(head,rows):
 def fmt(x,digits=3):return 'null' if x is None else f'{x:.{digits}f}'
 def cell(a):
     if a is None:return 'pending'
+    if a.get('formal_performance_evidence_eligible') is False:return 'E (own zero)' if a.get('own_exact_zero') else 'unevaluable'
     if not a.get('formal_protocol_qualified'):return 'unevaluable'
     return 'C '+fmt(a['T_cert']) if a['certificate'] else 'O @ '+fmt(a['T_produce'])
 
@@ -32,16 +33,42 @@ def draft():
     completeD=sum(a.get('line')=='D' for a in current['arms'])
     results_text=f'The prospective layer currently has {completeD} of 60 sealed formal observations. Results are pending until the fixed complete table and its final evidence review are available; no provisional trend is used for method selection.'
     if completeD==60 and (OUT/'stratified_summary.json').exists():
-        sm=read(OUT/'stratified_summary.json');results_text=sm['manuscript_D_statement']
+        sm=read(OUT/'stratified_summary.json')
+        results_text='All 60 fixed D positions are sealed. Across the full 24 S2/P positions the directions are 16 Win, 1 Lose, 6 UNDETERMINED and 1 UNEVALUABLE. Performance-eligible certificates are 17/24 for S2 and 9/24 for P; one further own-zero S2 proof is excluded from formal timing after native source loss. '
+        results_text+='In K, S2/P certificates are 6/2 on 12 repeated comparisons over six problems, with 6 Win and 6 both-open. In X they are 11/7 on 12 comparisons over six problems, with 10 Win, 1 Lose and 1 UNEVALUABLE. These are finite within-mechanism and geography-transfer observations. Seeds are repeats and shared controls do not create independent trials. PS attribution is limited to the preselected six-problem subset. Problem-level zero/positive/unknown status remains distinct from each attained endpoint; zero-optimum 35 cases do not establish positive-objective35 proof performance.'
     ctext='Both research expressions passed their actual-matrix, default-off, behavioral and physical Start qualification. The fixed cost panel is awaiting serial execution; this qualification is not a performance result.'
     ctable=''
     if any(a.get('line')=='C' for a in current['arms']):
         ids=['SC-C15-B','SC-B20-S','UC-C20-U','PB-C35-U']
         ctable=table(['Known role / Seed','S2R','Delete geometry','Project W'],[[f'{id} / {s}',*[cell(by.get((id,s,m))) for m in ['S2R','S2R-GEOM','S2R-SP']]] for id in ids for s in [0,1]])
-        if (OUT/'stratified_summary.json').exists():ctext=read(OUT/'stratified_summary.json')['manuscript_C_statement']
+        if (OUT/'stratified_summary.json').exists():
+            ctext='All 24 same-build cost workflows are sealed. Against S2R, geometry deletion records 2 Win, 4 Lose and 2 UNDETERMINED; full W projection records 3 Win, 3 Lose and 2 UNDETERMINED. Each candidate has eight repeated comparisons across four known problems. These mixed cost effects do not establish a stronger ideal relaxation. Unrecorded root/node fields remain unknown.'
+    cmechanism=''
+    if sum(a.get('line')=='C' for a in current['arms'])==24:
+        with (OUT/'mechanism_costs.csv').open(encoding='utf-8',newline='') as f:mr=list(csv.DictReader(f))
+        mb={(r['id'],int(r['seed']),r['method']):r for r in mr if r['line']=='C'}
+        display=[]
+        for id in ['SC-C15-B','SC-B20-S','UC-C20-U','PB-C35-U']:
+            for method in ['S2R','S2R-GEOM','S2R-SP']:
+                a,b=[mb[id,s,method] for s in [0,1]]
+                assert (a['root_rows'],a['root_columns'])==(b['root_rows'],b['root_columns'])
+                both=lambda k,d=2:' / '.join(fmt(float(r[k]),d) if r[k] else 'unknown' for r in [a,b])
+                display.append([id+' / '+method.replace('S2R','root'),a['root_rows']+' / '+a['root_columns'],
+                    both('canonical_continuous_LP_bound',6),both('H_plus_admission_seconds',3),
+                    both('MIP_Work'),both('nodes',0)])
+        cmechanism='\n\n**Table 6a. Actual expression size and costs. Paired values are Seed0 / Seed1; nodes and Work refer to MIP calls.**\n\n'
+        cmechanism+=table(['Role / expression','Root rows / columns','Continuous LP bound','H + admission (s)','MIP Work','MIP nodes'],display)
+        cmechanism+='\nAll16 candidate/baseline comparisons have identical complete realized H fleets/traces and matching actual root intervals/cutoffs; all expose their own native backend. Every workflow submits one restored-integer Start and retains its native-log acceptance evidence. Thus these comparisons control the paid startup and root domain. H + admission includes the recorded pre-exact boundary rather than an inferred pure-H CPU cost.\n\n'
+        cmechanism+='Deleting geometry reduces rows without changing the audited ideal projection. On SC-C15-B at Seed0 it reduces MIP Work from 93.23 to 43.86 and complete time from 57.898 to 26.059 seconds, but Seed1 reverses the cost direction (Work 54.61 to 73.04; time 32.462 to 42.838). On SC-B20-S Seed0 GEOM returns open with U 0.31538912105343897 and L 0.31538869722423574, despite a shorter observed process than the certified baseline; that return is not a time Win. W projection is also mixed. None of these observations identifies a unique presolve/cut/branching cause.\n\n'
+        endpoint=[]
+        for seed in [0,1]:
+            endpoint.append([seed,*[f"{by['PB-C35-U',seed,m]['U']:.8f} / {by['PB-C35-U',seed,m]['L']:.8f}" for m in ['S2R','S2R-GEOM','S2R-SP']]])
+        cmechanism+='**Table 6b. All open PB-C35-U diagnostic endpoints, U / L.**\n\n'+table(['Seed','S2R','Delete geometry','Project W'],endpoint)
+        cmechanism+='\nAt Seed0 SP has the best attained U while GEOM has the best L; at Seed1 GEOM has the best U while SP has the best L and a worse U than baseline. All six remain open, so no certification-time ranking follows. Canonical continuous LP bounds, actual MIP initial-root observations and terminal search bounds are separate fields. Unrecorded presolve/root-end Work or post-cut bounds remain unknown; a last zero-node callback is not declared the exact end of root processing. Full per-call logs, all24 cost rows, production/verification/total clocks and trajectories accompany the paper.\n'
     etext='The finite complete four-station joint-structure comparison is preregistered. Its required computation remains pending; later full-source diagnostics and any production algorithm are conditional on a valid incremental structure and a complete outside-station interface.'
     if (OUT/'joint_structure_note.md').exists():
         etext=(OUT/'joint_structure_note.md').read_text(encoding='utf-8').split('<!-- manuscript-summary -->')[1].split('<!-- /manuscript-summary -->')[0]
+        etext='The four-case complete tiny study is finished. J2 retains an exact full-reference service-coordinate witness with weighted value 15/2 above the complete joint support maximum 7. Its full rational extension satisfies every saved reference row and bound. Reoptimizing the original complete micro objective after adding all joint columns gives no qualified increment in any case. This is a strict projection difference on that finite loaded reference, rather than a theorem for all inventory-routing instances. Finite failure to separate other tested normals does not establish hull equality. No full-size production cut is admitted: the tiny support maxima do not include outside donors and receivers.'
     ej=read(OUT/'joint_results.json') if (OUT/'joint_results.json').exists() else dict(cases=[])
     ecase={x['id']:x for x in ej['cases']};erows=[]
     for x in read(OUT/'E_experiment_plan.json')['cases']:
@@ -72,7 +99,7 @@ def draft():
 
 Static bicycle redistribution couples final station inventories with time- and capacity-feasible vehicle routes. We minimize the Gini dispersion of inventory-to-target ratios plus weighted relative target deviation, under empty departure and unique nonzero one-way service. GI-TBC in its uniform pair-support implementation, S2, combines a paid finite feasible startup, shared inventory-state/service reconstruction, valid physical and objective-domain rows, and a complete Gini-interval controller around native LP/MIP calls. Standard product linearizations are distinguished from problem-specific linking and scoped proof coverage.
 
-On six known final-version problems at two solver Seeds, S2 and cold compact P certify ten and five observations; two comparisons remain open. A separate repeated tiny layer contains nine strict time Wins and three strict Losses. Both final-version V35 boundary observations remain open. We add a fixed twelve-input validation across known sources and a third geography, together with equivalent-expression cost diagnostics and a bounded joint-structure study. Their complete results are reported by evidence layer without treating Seed repeats as new problems. All certificates follow an explicit floating-point qualification policy. Neither universal speedup, matched performance on different BRP variants, nor a stronger relaxation from an equivalent expression is presumed.
+On six known final-version problems at two solver Seeds, S2 and cold compact P certify ten and five observations. A fixed twelve-input validation gives seventeen performance-eligible S2 certificates versus nine for P, with sixteen strict time/certificate Wins, one Loss, six both-open comparisons and one UNEVALUABLE source-loss comparison. The excluded S2 arm retains its own physical zero proof but no qualified native proof or formal comparison time. Zero-optimum 35-station observations do not resolve the positive-objective boundary. Same-build equivalent-expression diagnostics have mixed cost effects. A complete tiny joint-structure study supplies one exact reference-projection witness, but no original-objective increment. Evidence layers remain separate, with solver Seeds treated as repeats. All numerical certificates have explicit qualification; no universal speed or exact serialized-projection equivalence is claimed.
 
 ## 1. Motivation and research questions
 
@@ -226,6 +253,10 @@ All twelve inputs have independently paid P and S2 at both Seeds: 48 arms. The p
 **Table 5. Every fixed new-input method position (seconds).**
 
 '''+new_table+r'''
+E denotes the disclosed source-reduced own-zero proof, excluded from formal timing; C denotes a performance-eligible certificate and O an ordinary open result. On X-35-U Seed1, S2's own exact-zero fleet refutes three call4 local bounds above zero by more than1e-7. The whole call's dependent native claims are rejected. Its raw 448.483-second production clock and own physical zero remain, but derived formal T_cert is null and the comparison is UNEVALUABLE. No favorable Win is recovered from that arm, and native source reliability remains an unresolved limitation. The separate source-loss note retains the exact values and complete receipt chain.
+
+The finite new-input results do not show uniform dominance. K-20-S and both K35 roles remain open at both Seeds; better endpoints do not order their final certification times. X-15-B Seed1 is a strict small reversal (P 2.524 versus S2 2.633 seconds). In the preselected PS subset S2/PS gives 8 Win, 2 Lose and 2 UNDETERMINED; PS/P gives 3 Win, 1 Lose and 8 UNDETERMINED. Both X-35-B Seeds are physically zero and PS certifies in 6.850/7.537 seconds versus S2 17.198/17.994. On X-20-U Seed1, however, PS takes 585.777 versus P 149.774 seconds. All 12 S2/PS comparisons have equal complete realized H and actual native exposure, supporting a scoped complete-backend comparison rather than attribution from equal startup rules alone. Neither those reversals nor geography-transfer successes erase the positive K35 proof boundary or the numerical source loss.
+
 ## 6. Expression mechanisms and joint-structure limits
 
 ### 6.1 What existing paid-start and root controls establish
@@ -246,7 +277,7 @@ These are ideal algebraic projection results. Serialized H bounds and projected 
 
 The known-role cost panel contains four problems, two Seeds and three expressions: same-build S2R, deletion of exactly the three geometry families, and full W projection. It has 24 independently paid workflow arms and eight shared baseline observations. Each candidate has eight repeated baseline comparisons; their sixteen typed comparisons are not independent trials. No combined candidate or input-specific expression is run.
 
-'''+ctext+'\n\n**Table 6. Every fixed same-build expression workflow (seconds).**\n\n'+ctable+r'''
+'''+ctext+'\n\n**Table 6. Every fixed same-build expression workflow (seconds).**\n\n'+ctable+cmechanism+r'''
 ### 6.3 What a new joint quantity structure would have to add
 
 Let R_k be a complete finite necessary service domain and v_k its pickup, delivery and assignment vector. Convexifying each vehicle independently and then imposing unique service gives P_sep. Convexifying jointly unique integer selections gives H_joint, which is contained in P_sep. That elementary inclusion is not itself a new result. A useful increment must survive the current canonical model, single-station theta, event rank and relevant inventory-route structure, with exactly the same R_k on both sides.
@@ -283,20 +314,41 @@ F=\frac{A(r)+n\lambda S P_{true}}{nS},\qquad
 
 is the corresponding parameter subproblem. Its numerator is not simply linear because S P_true remains. Existing MILFP work is relevant background [@yue2013], but applying it here requires an exact treatment and globally qualified subproblem bounds plus the separate S=0 branch. We do not infer that general methods are mathematically unusable from an old toy comparison, nor report an unimplemented method as a weak benchmark.
 
-The final research recommendation is tied to the completed new-input and structural evidence. The frozen S2 paper does not wait for a new candidate to win. A negative or mixed bounded study can support freezing the current method and preparing a scoped submission, while a proved and computationally meaningful increment can motivate one separately frozen next study. No universal speed or target-journal guarantee is part of this conclusion.
+The evidence supports freezing the adopted method for scoped manuscript and submission preparation. The positive-objective 35 boundary, the disclosed unreliable native source and the paid-start reversals remain explicit limitations. Equivalent-expression costs are mixed, so neither candidate replaces S2. J2's exact joint witness is a useful structural lead, but zero original-objective gain and the missing full-universe support interface do not justify a production separator or a larger matrix now. A future study would first need to repair and qualify source reliability where relevant, and prove objective-relevant full-domain structure at an affordable cost. No universal speed or target-journal guarantee follows.
 
 '''
     model=(prior/'model_appendix.md').read_text(encoding='utf-8-sig')
     model=model.replace('**Current-version map (Round130).**','**Current frozen method.**')
     model=model.replace('Source locations refer to production snapshot 355eefd2be3fe5651195681faf7b3a63ee4032f8 [@frozenImplementation].',
         'Historical source-line pointers retained in this derivation refer to snapshot 355eefd2be3fe5651195681faf7b3a63ee4032f8. The current frozen E3 production source base is 7564a5415331b380e24d1ec06936dcfd56557e67 [@frozenImplementation]; E3_binding.json supplies its exact current source identities. The active state/service, H-use, uniform pair-only and legal inclusive-root conditions are checked against that current source, rather than inferred from historical line numbers.')
+    model=model.replace('No new contradiction with the stated numerical evidence policy was found; claims of error-free rational certification are excluded.',
+        'Claims of error-free rational certification are excluded. Round132 retains a same-domain rejected native source on X-35-U Seed1: its own physical zero proof remains valid, while formal performance is excluded as described in Section 5.3 and source_loss_dispositions.json. This disclosure does not restore the rejected bound, pruning or dependent proof.')
+    model=model.replace('The finite production_identity authority records all 216 bindings.',
+        'That historical source map is distinct from the current frozen byte identities in E3_binding.json and D_execution_binding.json.')
     algorithm=(prior/'algorithm_appendix.md').read_text(encoding='utf-8-sig')
     algorithm=algorithm.replace('**Current-version map (Round130).**','**Current frozen method.**')
+    algorithm=algorithm.replace('Algorithm 1 and its two complete subprocedures are in manuscript Section 5;',
+        'Algorithm 1 appears in Section 4; its two complete subprocedures are given below in B.0;')
+    algorithm=algorithm.replace('Round126 executes only the fixed complete M-B and cold P-GRB entries on the declared new panel; it changes no algorithm.',
+        'The historical Round126 panel used the fixed full-M-B predecessor and cold P-GRB; it is retained under its own identity in historical_evidence.md.')
+    old_entry='The unique paper entry is fully resolved in [paper_method_config.json](paper_method_config.json); [argv_freeze.json](argv_freeze.json) contains the exact six current S2 argument vectors, six independent cold controls and twelve diagnostic control vectors.'
+    assert algorithm.count(old_entry)==1,'The inherited command-identity paragraph changed; inspect its actual Markdown'
+    algorithm=algorithm.replace(old_entry,
+        'The frozen paper entry is resolved by [current_method_manifest.json](current_method_manifest.json) together with the [inherited R130 configuration](../unified_exact_round130/paper_method_config.json). Round132 [D_argv_freeze.json](D_argv_freeze.json) fixes all 60 P/S2/preselected-PS positions; [C_argv_freeze.json](C_argv_freeze.json) separately fixes 24 same-build research-root positions. The displayed S2 command is a template, not the complete list of actual launches.')
+    assert 'six current S2 argument vectors' not in algorithm
+    algorithm=algorithm.replace('Section 6.8 and the root contract define',
+        'Historical supplement historical_evidence.md Section 6.8 and the root contract define')
+    algorithm=algorithm.replace('are in Section 6.9.',
+        'are in historical_evidence.md Section 6.9.')
+    algorithm=algorithm.replace('R130 now adopts S2/MS2 as the sole paper method.',
+        'R130 adopted S2/MS2 as the sole paper method, unchanged through Round132.')
+    algorithm=algorithm.replace('Section 6.10 states the paid workflows,',
+        'Historical supplement historical_evidence.md Section 6.10 states the paid workflows,')
     subprocedures='\n\n## B.0 Complete leaf and cover subprocedures\n\n'
     for number in [2,3]:
         pattern=rf'~~~text\nAlgorithm {number} .*?\n~~~'
         match=re.search(pattern,old,re.S);assert match
-        subprocedures+=match.group(0)+'\n\n'
+        subprocedures+=match.group(0).replace('Otherwise compute (8), (B2),','Otherwise compute score (B2) in B.3,')+'\n\n'
     algorithm=algorithm.replace('## B.1 Active entry and parameters',subprocedures+'## B.1 Active entry and parameters')
     math=(OUT/'mathematical_analysis.md').read_text(encoding='utf-8')
     math=math[math.index('## 3. Projection'):math.index('## 6. Joint structure:')]
@@ -312,7 +364,7 @@ The final research recommendation is tied to the completed new-input and structu
         base_source_SHA=sha(prior/'manuscript.md'),full_model_and_H_controller_derivations_retained=True,
         chronological_evidence_moved_to='historical_evidence.md',body='research questions; physics; representation; one main algorithm; current final-version evidence; equivalent expressions; joint structure; operations and limits',
         current_D_sealed=completeD,provisional=completeD<60 or not (OUT/'joint_results.json').exists()))
-    print('SUBSTANTIVELY_REORGANIZED_MANUSCRIPT_SOURCE_WRITTEN; PDF compilation deferred during formal native work.')
+    print('SUBSTANTIVELY_REORGANIZED_MANUSCRIPT_SOURCE_WRITTEN; PDF export is a separate checked delivery step.')
 
 def pdf():
     # Keep the standalone entry under the same all-stages idle gate as its
@@ -328,14 +380,20 @@ def pdf():
     replacements=[
         ("for name in ['model_appendix.md','algorithm_appendix.md','tables/historical_display.md']:","for name in []:"),
         ("Path(os.environ.get('ROUND126_PDF_DEST',str(OUT/'manuscript.pdf')))","OUT/'manuscript.pdf'"),
-        ("Path(os.environ.get('ROUND126_PDF_RECEIPT',str(OUT/'pdf_export.json')))","OUT/'pdf_export.json'")]
+        ("Path(os.environ.get('ROUND126_PDF_RECEIPT',str(OUT/'pdf_export.json')))","OUT/'pdf_export.json'"),
+        ('text=landscape_tables(text)','text=caption_breaks(landscape_tables(text))'),
+        (r'\usepackage{etoolbox}',r'\usepackage{etoolbox}'+'\n'+r'\usepackage{needspace}')]
     for before,after in replacements:
         assert source.count(before)==1,('export adaptation no longer matches',before)
         source=source.replace(before,after)
     local_date=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).strftime('%d %B %Y')
     assert source.count('date=19 October 2026')==1
     source=source.replace('date=19 October 2026','date='+local_date)
-    ns=dict(vars(old),OUT=OUT,TEMP_PARENT=TEMP/'pdf')
+    def caption_breaks(text):
+        prefix='\n```{=latex}\n\\Needspace{8\\baselineskip}\n```\n\n'
+        text=re.sub(r'^\*\*Table[^\n]*\*\*$',lambda m:prefix+m.group(0),text,flags=re.M)
+        return re.sub(r'^For two finite optimal LPs[^\n]*$',lambda m:prefix+m.group(0),text,flags=re.M)
+    ns=dict(vars(old),OUT=OUT,TEMP_PARENT=TEMP/'pdf',caption_breaks=caption_breaks)
     exec(compile(source,__file__+'::single_authority_export','exec'),ns);ns['export']()
     for row in bindings:
         assert sha(ROOT/row['path'])==row['SHA'],('PDF source changed during export',row['path'])

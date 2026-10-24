@@ -4,7 +4,7 @@
 
 Static bicycle redistribution couples final station inventories with time- and capacity-feasible vehicle routes. We minimize the Gini dispersion of inventory-to-target ratios plus weighted relative target deviation, under empty departure and unique nonzero one-way service. GI-TBC in its uniform pair-support implementation, S2, combines a paid finite feasible startup, shared inventory-state/service reconstruction, valid physical and objective-domain rows, and a complete Gini-interval controller around native LP/MIP calls. Standard product linearizations are distinguished from problem-specific linking and scoped proof coverage.
 
-On six known final-version problems at two solver Seeds, S2 and cold compact P certify ten and five observations; two comparisons remain open. A separate repeated tiny layer contains nine strict time Wins and three strict Losses. Both final-version V35 boundary observations remain open. We add a fixed twelve-input validation across known sources and a third geography, together with equivalent-expression cost diagnostics and a bounded joint-structure study. Their complete results are reported by evidence layer without treating Seed repeats as new problems. All certificates follow an explicit floating-point qualification policy. Neither universal speedup, matched performance on different BRP variants, nor a stronger relaxation from an equivalent expression is presumed.
+On six known final-version problems at two solver Seeds, S2 and cold compact P certify ten and five observations. A fixed twelve-input validation gives seventeen performance-eligible S2 certificates versus nine for P, with sixteen strict time/certificate Wins, one Loss, six both-open comparisons and one UNEVALUABLE source-loss comparison. The excluded S2 arm retains its own physical zero proof but no qualified native proof or formal comparison time. Zero-optimum 35-station observations do not resolve the positive-objective boundary. Same-build equivalent-expression diagnostics have mixed cost effects. A complete tiny joint-structure study supplies one exact reference-projection witness, but no original-objective increment. Evidence layers remain separate, with solver Seeds treated as repeats. All numerical certificates have explicit qualification; no universal speed or exact serialized-projection equivalence is claimed.
 
 ## 1. Motivation and research questions
 
@@ -201,7 +201,7 @@ The six roles per layer cover shortage, balanced and surplus scenarios and compa
 
 All twelve inputs have independently paid P and S2 at both Seeds: 48 arms. The preselected 15-S, 20-U and 35-B role in each layer also has PS at both Seeds: 12 additional arms. The PS subset is fixed without reference to which method wins. K/X, sizes and positive/zero outcomes are reported separately; shared controls and Seed repeats are not independent new problems.
 
-The prospective layer currently has 20 of 60 sealed formal observations. Results are pending until the fixed complete table and its final evidence review are available; no provisional trend is used for method selection.
+All 60 fixed D positions are sealed. Across the full 24 S2/P positions the directions are 16 Win, 1 Lose, 6 UNDETERMINED and 1 UNEVALUABLE. Performance-eligible certificates are 17/24 for S2 and 9/24 for P; one further own-zero S2 proof is excluded from formal timing after native source loss. In K, S2/P certificates are 6/2 on 12 repeated comparisons over six problems, with 6 Win and 6 both-open. In X they are 11/7 on 12 comparisons over six problems, with 10 Win, 1 Lose and 1 UNEVALUABLE. These are finite within-mechanism and geography-transfer observations. Seeds are repeats and shared controls do not create independent trials. PS attribution is limited to the preselected six-problem subset. Problem-level zero/positive/unknown status remains distinct from each attained endpoint; zero-optimum 35 cases do not establish positive-objective35 proof performance.
 
 **Table 5. Every fixed new-input method position (seconds).**
 
@@ -215,22 +215,26 @@ The prospective layer currently has 20 of 60 sealed formal observations. Results
 | K-20-S / 1 | O @ 1170.687 | O @ 1171.715 | not selected |
 | K-20-U / 0 | O @ 1170.818 | C 5.800 | O @ 1171.322 |
 | K-20-U / 1 | O @ 1171.688 | C 5.158 | O @ 1170.895 |
-| K-35-B / 0 | pending | pending | pending |
-| K-35-B / 1 | pending | pending | pending |
-| K-35-U / 0 | pending | pending | not selected |
-| K-35-U / 1 | pending | pending | not selected |
-| X-15-S / 0 | pending | pending | pending |
-| X-15-S / 1 | pending | pending | pending |
-| X-15-B / 0 | pending | pending | not selected |
-| X-15-B / 1 | pending | pending | not selected |
-| X-20-S / 0 | pending | pending | not selected |
-| X-20-S / 1 | pending | pending | not selected |
-| X-20-U / 0 | pending | pending | pending |
-| X-20-U / 1 | pending | pending | pending |
-| X-35-B / 0 | pending | pending | pending |
-| X-35-B / 1 | pending | pending | pending |
-| X-35-U / 0 | pending | pending | not selected |
-| X-35-U / 1 | pending | pending | not selected |
+| K-35-B / 0 | O @ 2370.959 | O @ 2370.552 | O @ 2370.426 |
+| K-35-B / 1 | O @ 2370.482 | O @ 2370.368 | O @ 2370.913 |
+| K-35-U / 0 | O @ 2370.545 | O @ 2370.889 | not selected |
+| K-35-U / 1 | O @ 2370.981 | O @ 2370.515 | not selected |
+| X-15-S / 0 | O @ 571.160 | C 95.039 | O @ 570.777 |
+| X-15-S / 1 | O @ 570.660 | C 33.016 | O @ 571.272 |
+| X-15-B / 0 | C 6.357 | C 4.294 | not selected |
+| X-15-B / 1 | C 2.524 | C 2.633 | not selected |
+| X-20-S / 0 | O @ 1171.067 | C 489.669 | not selected |
+| X-20-S / 1 | O @ 1170.565 | C 460.549 | not selected |
+| X-20-U / 0 | C 163.040 | C 22.327 | C 152.633 |
+| X-20-U / 1 | C 149.774 | C 9.241 | C 585.777 |
+| X-35-B / 0 | C 159.661 | C 17.198 | C 6.850 |
+| X-35-B / 1 | C 50.073 | C 17.994 | C 7.537 |
+| X-35-U / 0 | O @ 2370.438 | C 120.829 | not selected |
+| X-35-U / 1 | C 2072.220 | E (own zero) | not selected |
+
+E denotes the disclosed source-reduced own-zero proof, excluded from formal timing; C denotes a performance-eligible certificate and O an ordinary open result. On X-35-U Seed1, S2's own exact-zero fleet refutes three call4 local bounds above zero by more than1e-7. The whole call's dependent native claims are rejected. Its raw 448.483-second production clock and own physical zero remain, but derived formal T_cert is null and the comparison is UNEVALUABLE. No favorable Win is recovered from that arm, and native source reliability remains an unresolved limitation. The separate source-loss note retains the exact values and complete receipt chain.
+
+The finite new-input results do not show uniform dominance. K-20-S and both K35 roles remain open at both Seeds; better endpoints do not order their final certification times. X-15-B Seed1 is a strict small reversal (P 2.524 versus S2 2.633 seconds). In the preselected PS subset S2/PS gives 8 Win, 2 Lose and 2 UNDETERMINED; PS/P gives 3 Win, 1 Lose and 8 UNDETERMINED. Both X-35-B Seeds are physically zero and PS certifies in 6.850/7.537 seconds versus S2 17.198/17.994. On X-20-U Seed1, however, PS takes 585.777 versus P 149.774 seconds. All 12 S2/PS comparisons have equal complete realized H and actual native exposure, supporting a scoped complete-backend comparison rather than attribution from equal startup rules alone. Neither those reversals nor geography-transfer successes erase the positive K35 proof boundary or the numerical source loss.
 
 ## 6. Expression mechanisms and joint-structure limits
 
@@ -252,10 +256,51 @@ These are ideal algebraic projection results. Serialized H bounds and projected 
 
 The known-role cost panel contains four problems, two Seeds and three expressions: same-build S2R, deletion of exactly the three geometry families, and full W projection. It has 24 independently paid workflow arms and eight shared baseline observations. Each candidate has eight repeated baseline comparisons; their sixteen typed comparisons are not independent trials. No combined candidate or input-specific expression is run.
 
-Both research expressions passed their actual-matrix, default-off, behavioral and physical Start qualification. The fixed cost panel is awaiting serial execution; this qualification is not a performance result.
+All 24 same-build cost workflows are sealed. Against S2R, geometry deletion records 2 Win, 4 Lose and 2 UNDETERMINED; full W projection records 3 Win, 3 Lose and 2 UNDETERMINED. Each candidate has eight repeated comparisons across four known problems. These mixed cost effects do not establish a stronger ideal relaxation. Unrecorded root/node fields remain unknown.
 
 **Table 6. Every fixed same-build expression workflow (seconds).**
 
+| Known role / Seed | S2R | Delete geometry | Project W |
+| --- | --- | --- | --- |
+| SC-C15-B / 0 | C 57.898 | C 26.059 | C 41.745 |
+| SC-C15-B / 1 | C 32.462 | C 42.838 | C 48.594 |
+| SC-B20-S / 0 | C 981.118 | O @ 707.443 | C 730.350 |
+| SC-B20-S / 1 | C 675.086 | C 776.573 | C 821.224 |
+| UC-C20-U / 0 | C 552.603 | C 513.698 | C 540.917 |
+| UC-C20-U / 1 | C 476.819 | C 611.265 | C 497.246 |
+| PB-C35-U / 0 | O @ 2370.810 | O @ 2370.559 | O @ 2372.429 |
+| PB-C35-U / 1 | O @ 2373.483 | O @ 2381.417 | O @ 2370.426 |
+
+
+**Table 6a. Actual expression size and costs. Paired values are Seed0 / Seed1; nodes and Work refer to MIP calls.**
+
+| Role / expression | Root rows / columns | Continuous LP bound | H + admission (s) | MIP Work | MIP nodes |
+| --- | --- | --- | --- | --- | --- |
+| SC-C15-B / root | 4382 / 2321 | 0.000000 / 0.000000 | 0.619 / 0.617 | 93.23 / 54.61 | 5264 / 2144 |
+| SC-C15-B / root-GEOM | 3857 / 2321 | 0.000000 / 0.000000 | 0.626 / 0.620 | 43.86 / 73.04 | 1592 / 3306 |
+| SC-C15-B / root-SP | 4389 / 2320 | 0.000000 / 0.000000 | 0.620 / 0.619 | 67.81 / 86.49 | 3374 / 3351 |
+| SC-B20-S / root | 6643 / 3102 | 0.117214 / 0.117214 | 1.024 / 1.010 | 1952.27 / 1320.99 | 70275 / 51800 |
+| SC-B20-S / root-GEOM | 5693 / 3102 | 0.117214 / 0.117214 | 1.012 / 1.018 | 1383.68 / 1528.87 | 53604 / 52642 |
+| SC-B20-S / root-SP | 6650 / 3101 | 0.117214 / 0.117214 | 1.015 / 1.015 | 1492.88 / 1681.78 | 58399 / 56807 |
+| UC-C20-U / root | 7043 / 3502 | 0.122973 / 0.122973 | 0.968 / 0.963 | 1058.79 / 911.26 | 54557 / 45006 |
+| UC-C20-U / root-GEOM | 6093 / 3502 | 0.122973 / 0.122973 | 0.979 / 0.963 | 975.72 / 1180.51 | 50213 / 59103 |
+| UC-C20-U / root-SP | 7050 / 3501 | 0.122973 / 0.122973 | 0.989 / 0.979 | 1028.63 / 950.73 | 57467 / 49276 |
+| PB-C35-U / root | 24754 / 11149 | 0.000000 / 0.000000 | 6.620 / 6.603 | 5581.54 / 5567.66 | 8607 / 9470 |
+| PB-C35-U / root-GEOM | 21779 / 11149 | 0.000000 / 0.000000 | 6.597 / 6.604 | 5335.20 / 5429.23 | 10202 / 10216 |
+| PB-C35-U / root-SP | 24761 / 11148 | 0.000000 / 0.000000 | 6.602 / 6.643 | 5529.99 / 5526.63 | 10202 / 9398 |
+
+All16 candidate/baseline comparisons have identical complete realized H fleets/traces and matching actual root intervals/cutoffs; all expose their own native backend. Every workflow submits one restored-integer Start and retains its native-log acceptance evidence. Thus these comparisons control the paid startup and root domain. H + admission includes the recorded pre-exact boundary rather than an inferred pure-H CPU cost.
+
+Deleting geometry reduces rows without changing the audited ideal projection. On SC-C15-B at Seed0 it reduces MIP Work from 93.23 to 43.86 and complete time from 57.898 to 26.059 seconds, but Seed1 reverses the cost direction (Work 54.61 to 73.04; time 32.462 to 42.838). On SC-B20-S Seed0 GEOM returns open with U 0.31538912105343897 and L 0.31538869722423574, despite a shorter observed process than the certified baseline; that return is not a time Win. W projection is also mixed. None of these observations identifies a unique presolve/cut/branching cause.
+
+**Table 6b. All open PB-C35-U diagnostic endpoints, U / L.**
+
+| Seed | S2R | Delete geometry | Project W |
+| --- | --- | --- | --- |
+| 0 | 0.18370156 / 0.08472828 | 0.17413854 / 0.08596586 | 0.16237905 / 0.08472217 |
+| 1 | 0.18026766 / 0.08370043 | 0.16747142 / 0.08559747 | 0.18714524 / 0.08576977 |
+
+At Seed0 SP has the best attained U while GEOM has the best L; at Seed1 GEOM has the best U while SP has the best L and a worse U than baseline. All six remain open, so no certification-time ranking follows. Canonical continuous LP bounds, actual MIP initial-root observations and terminal search bounds are separate fields. Unrecorded presolve/root-end Work or post-cut bounds remain unknown; a last zero-node callback is not declared the exact end of root processing. Full per-call logs, all24 cost rows, production/verification/total clocks and trajectories accompany the paper.
 
 ### 6.3 What a new joint quantity structure would have to add
 
@@ -263,7 +308,7 @@ Let R_k be a complete finite necessary service domain and v_k its pickup, delive
 
 The existing independent-support/unique-access bound cannot separate points already in the product of those vehicle hulls with unique service. A genuinely joint weighted support maximum is a possible stronger object. Its exact maximum or a reliable upper bound is required as a valid cut RHS; a feasible solution or a restricted column maximum supplies only a lower bound. Quantity-weighted supports must be distinguished from event-count ranks that already exist.
 
-The finite complete four-station joint-structure comparison is preregistered. Its required computation remains pending; later full-source diagnostics and any production algorithm are conditional on a valid incremental structure and a complete outside-station interface.
+The four-case complete tiny study is finished. J2 retains an exact full-reference service-coordinate witness with weighted value 15/2 above the complete joint support maximum 7. Its full rational extension satisfies every saved reference row and bound. Reoptimizing the original complete micro objective after adding all joint columns gives no qualified increment in any case. This is a strict projection difference on that finite loaded reference, rather than a theorem for all inventory-routing instances. Finite failure to separate other tested normals does not establish hull equality. No full-size production cut is admitted: the tiny support maxima do not include outside donors and receivers.
 
 The complete tiny universes have four stations with capacity 2, target 1 and weight 1; all station and depot coordinates coincide. Both pickup and drop take 60 seconds per bicycle, including return unloading, and lambda is 0.15. J2/J3 cover shortage under two handling budgets; J1 is a balanced control and J4 is the physical startup-zero control. The current canonical continuous reference uses the same complete car plans on both sides, together with theta, exact same-domain threshold ranks and all 30 inventory-route subset rows. The original micro objective is reoptimized after adding every joint column. An artificial canonical model for J4 is reported separately from production backend exposure.
 
@@ -271,10 +316,10 @@ The complete tiny universes have four stations with capacity 2, target 1 and wei
 
 | Case / initial inventory | Q / physical T | Car plans / joint pairs | Reference / joint objective | Full-reference witness |
 | --- | --- | --- | --- | --- |
-| J1 / [2, 0, 1, 1] | [1, 2] / 240 | pending | pending | pending |
-| J2 / [2, 1, 0, 0] | [1, 2] / 240 | pending | pending | pending |
-| J3 / [2, 1, 0, 0] | [1, 2] / 360 | pending | pending | pending |
-| J4 / [1, 1, 1, 1] | [1, 1] / 240 | pending | pending | pending |
+| J1 / [2, 0, 1, 1] | [1, 2] / 240 | [18, 32] / 119 | 0.000000 / 0.000000 | no separated tested normal |
+| J2 / [2, 1, 0, 0] | [1, 2] / 240 | [11, 23] / 59 | 0.150000 / 0.150000 | exact strict |
+| J3 / [2, 1, 0, 0] | [1, 2] / 360 | [11, 30] / 66 | 0.150000 / 0.150000 | no separated tested normal |
+| J4 / [1, 1, 1, 1] | [1, 1] / 240 | [35, 35] / 177 | 0.000000 / 0.000000 | no separated tested normal |
 
 An exact strict entry denotes a rational extension in the entire saved reference matrix and an exact complete-universe support RHS. A numerical-only entry lacks that strict extension. No separated tested normal means only that the fixed finite directions did not separate; it is not a hull-equivalence conclusion. Original-objective values remain qualified native floating-point observations rather than exact rational optimality proofs. The supporting joint note retains controls, coefficients, witnesses or explicit obstacles and measured costs.
 
@@ -284,7 +329,25 @@ Reported fleets are interpreted through physical Gini, P_avg, final inventories,
 
 **Table 8. Operational outcomes of existing and new legal S2 fleets.**
 
-The complete operational table is pending the sealed workflows; no synthetic service outcome is invented.
+| Role / evidence | G / P_avg | Omega / rho | Initial / final stock | Pickup / delivery / return | Max route use |
+| --- | --- | --- | --- | --- | --- |
+| SC-C15-B (known) | 0.00284 / 0.00382 | 6.8442 / 1.0266 | 276 / 275 | 49 / 48 / 1 | 0.989 T |
+| PB-C35-U (known) | 0.08058 / 0.05932 | 11.5901 / 1.7385 | 660 / 622 | 174 / 136 / 38 | 0.996 T |
+| K-15-S (new) | 0.22215 / 0.26046 | 9.4734 / 1.4210 | 135 / 135 | 28 / 28 / 0 | 0.998 T |
+| K-15-B (new) | 0.11765 / 0.12723 | 3.3128 / 0.4969 | 144 / 143 | 16 / 15 / 1 | 0.987 T |
+| K-20-S (new) | 0.20411 / 0.30214 | 11.3125 / 1.6969 | 208 / 208 | 40 / 40 / 0 | 0.989 T |
+| K-20-U (new) | 0.28241 / 0.37872 | 10.5620 / 1.5843 | 176 / 163 | 23 / 10 / 13 | 0.999 T |
+| K-35-B (new) | 0.03790 / 0.02850 | 16.7227 / 2.5084 | 381 / 380 | 62 / 61 / 1 | 0.984 T |
+| K-35-U (new) | 0.18694 / 0.22477 | 15.0053 / 2.2508 | 326 / 308 | 66 / 48 / 18 | 0.999 T |
+| X-15-S (new) | 0.21733 / 0.28777 | 5.1061 / 0.7659 | 30 / 30 | 10 / 10 / 0 | 0.987 T |
+| X-15-B (new) | 0.00000 / 0.00000 | 3.6781 / 0.5517 | 37 / 37 | 8 / 8 / 0 | 0.998 T |
+| X-20-S (new) | 0.17404 / 0.25922 | 6.5853 / 0.9878 | 247 / 246 | 54 / 53 / 1 | 0.993 T |
+| X-20-U (new) | 0.07744 / 0.13440 | 7.9000 / 1.1850 | 106 / 96 | 26 / 16 / 10 | 0.956 T |
+| X-35-B (new) | 0.00000 / 0.00000 | 9.8844 / 1.4827 | 109 / 109 | 23 / 23 / 0 | 0.958 T |
+| X-35-U (new) | 0.00000 / 0.00000 | 9.6219 / 1.4433 | 134 / 99 | 48 / 13 / 35 | 0.992 T |
+
+The display fixes S2 at Seed0 for every new input, plus two existing final-version fleets with their historical identities. It is descriptive, not another performance panel. Full per-arm inventories, station counts, per-vehicle quantities, route travel/handling and prefix peaks are in the physical outcome tables.
+
 
 An existing valid 35-station S2 fleet illustrates why these definitions matter. Its first vehicle picks up 58 bicycles over its route with Q=20 and a maximum prefix load of 20. Across the fleet, 38 bicycles return to the depot, reducing station stock from 660 to 622. This legal loaded return and repeated use of vehicle capacity would be excluded by the incorrect bound \(\sum_i p_{ki}\le Q_k\) or a fixed station-stock equality. The example remains an open historical timing observation; its physical validity does not certify optimality.
 
@@ -299,7 +362,7 @@ F=\frac{A(r)+n\lambda S P_{true}}{nS},\qquad
 
 is the corresponding parameter subproblem. Its numerator is not simply linear because S P_true remains. Existing MILFP work is relevant background [@yue2013], but applying it here requires an exact treatment and globally qualified subproblem bounds plus the separate S=0 branch. We do not infer that general methods are mathematically unusable from an old toy comparison, nor report an unimplemented method as a weak benchmark.
 
-The final research recommendation is tied to the completed new-input and structural evidence. The frozen S2 paper does not wait for a new candidate to win. A negative or mixed bounded study can support freezing the current method and preparing a scoped submission, while a proved and computationally meaningful increment can motivate one separately frozen next study. No universal speed or target-journal guarantee is part of this conclusion.
+The evidence supports freezing the adopted method for scoped manuscript and submission preparation. The positive-objective 35 boundary, the disclosed unreliable native source and the paid-start reversals remain explicit limitations. Equivalent-expression costs are mixed, so neither candidate replaces S2. J2's exact joint witness is a useful structural lead, but zero original-objective gain and the missing full-universe support interface do not justify a production separator or a larger matrix now. A future study would first need to repair and qualify source reliability where relevant, and prove objective-relevant full-domain structure at an affordable cost. No universal speed or target-journal guarantee follows.
 
 
 
@@ -743,7 +806,7 @@ For a compatible own fleet, the mapped complete Start includes unused vehicles a
 
 Lemmas A1–A4 concern ideal exact arithmetic and valid mathematical domains. Stored matrices use binary64 arithmetic and Gurobi 13.0.2. Native FeasibilityTol and OptimalityTol are \(10^{-6}\), IntFeasTol \(10^{-5}\), requested MIPGap/MIPGapAbs zero; retained evidence closure uses \(10^{-7}\). A qualified result is a numerical certificate under this policy, not a rational exact proof.
 
-In particular, the implemented guard \(\alpha+\lambda\underline P\ge c-10^{-9}\) can serialize \(0\le-1\) while a mathematical point satisfies \(c-10^{-9}\le F<c\). Therefore it is numerical closure, not strict infeasibility of every arbitrarily small improver. Its local cutoff discrepancy does not supply a bound on accumulation of all native arithmetic errors; \(10^{-9}<10^{-7}\) alone proves no such global guarantee. This manuscript changes neither guard nor tolerance. No new contradiction with the stated numerical evidence policy was found; claims of error-free rational certification are excluded.
+In particular, the implemented guard \(\alpha+\lambda\underline P\ge c-10^{-9}\) can serialize \(0\le-1\) while a mathematical point satisfies \(c-10^{-9}\le F<c\). Therefore it is numerical closure, not strict infeasibility of every arbitrarily small improver. Its local cutoff discrepancy does not supply a bound on accumulation of all native arithmetic errors; \(10^{-9}<10^{-7}\) alone proves no such global guarantee. This manuscript changes neither guard nor tolerance. Claims of error-free rational certification are excluded. Round132 retains a same-domain rejected native source on X-35-U Seed1: its own physical zero proof remains valid, while formal performance is excluded as described in Section 5.3 and source_loss_dispositions.json. This disclosure does not restore the rejected bound, pruning or dependent proof.
 
 Every numerical original-problem certificate additionally requires a physically verified own U, qualified complete source/return chains and cover, normal lifecycle completion, and the post-seal signed-gap test −1e−7≤U−L≤1e−7. Appendix B.4.1 fully distinguishes that policy, the one-sided native function and the own-zero/source-reduced branches. Tiny signed gaps are reported unchanged. A same-domain counterexample revokes its source and dependent pruning; an independent fleet can remain valid, but floor zero or a good U cannot repair invalid proof dependencies. Source-reduced results are separately labelled and get no dependent nonzero certificate credit.
 
@@ -764,7 +827,7 @@ The single total process deadline guarantees finite execution of this implementa
 | M-B mode isolation | include/Round98StateService.hpp; no projected direction, linked direction, ENS-Q or other opt-in mode |
 | AM, targets, cover and lifecycle | PaperExternalGiniTree.cpp; GurobiBaseline.cpp; ProcessPhaseLedger.cpp; MipStartMapping.cpp |
 
-The source is public at the fixed [implementation snapshot](https://github.com/yifanXovo/TailoredExact/tree/355eefd2be3fe5651195681faf7b3a63ee4032f8). The finite production_identity authority records all 216 bindings. Line locations aid review; they do not replace derivations. This appendix supplies constraint groups and validity premises without claiming every engineering identifier as a mathematical contribution.
+The source is public at the fixed [implementation snapshot](https://github.com/yifanXovo/TailoredExact/tree/355eefd2be3fe5651195681faf7b3a63ee4032f8). That historical source map is distinct from the current frozen byte identities in E3_binding.json and D_execution_binding.json. Line locations aid review; they do not replace derivations. This appendix supplies constraint groups and validity premises without claiming every engineering identifier as a mathematical contribution.
 
 
 \clearpage
@@ -774,7 +837,7 @@ The source is public at the fixed [implementation snapshot](https://github.com/y
 **Current frozen method.** S2/MS2 uses the unchanged H and controller specified below with uniform pair-only support. Historical full-M-B traces and development variants retain their named identity. S2R is a diagnostic deletion control, not a second proposed method.
 
 
-This supplement defines the controller and finite feasible startup H shared by the adopted S2/MS2 method and its full-M-B predecessor. The current S2 row policy is uniformly pair-only; the underlying H and controller definitions are unchanged. Algorithm 1 and its two complete subprocedures are in manuscript Section 5; this appendix supplies their data, numerical decisions, decoding and return semantics. Mathematical symbols refer to Appendix A. Historical names are source-map aliases, not additional algorithm variants. The definitions and proofs are retained from R125. Round126 executes only the fixed complete M-B and cold P-GRB entries on the declared new panel; it changes no algorithm.
+This supplement defines the controller and finite feasible startup H shared by the adopted S2/MS2 method and its full-M-B predecessor. The current S2 row policy is uniformly pair-only; the underlying H and controller definitions are unchanged. Algorithm 1 appears in Section 4; its two complete subprocedures are given below in B.0; this appendix supplies their data, numerical decisions, decoding and return semantics. Mathematical symbols refer to Appendix A. Historical names are source-map aliases, not additional algorithm variants. The definitions and proofs are retained from R125. The historical Round126 panel used the fixed full-M-B predecessor and cold P-GRB; it is retained under its own identity in historical_evidence.md.
 
 
 
@@ -801,7 +864,7 @@ Precondition: selected unit is still represented; no pending native call.
        but retain raw child LP fields for AM. Children are not active leaves.
    On either incomplete/invalid result return OPEN_STOP/ERROR; keep parent.
 5  If either child is qualified infeasible: return SPLIT(children,empty flags).
-   Otherwise compute (8), (B2), b+=min(raw child bounds):
+   Otherwise compute score (B2) in B.3, b+=min(raw child bounds):
        b+<=b+epsilon -> Native(complete parent MIP,no target);
        score+score_tolerance>=.08 -> return SPLIT(both children);
        otherwise -> Native(parent MIP,target b+,kind CHILD).
@@ -860,7 +923,7 @@ The inherited settings below originate in the saved R123 full-M-B command. The c
 
 The “interval-mip-core-no-exhaustive-subset-duration” policy is overridden by the VD-P preset to `round55-vd-p`, still excluding exhaustive subset duration. Compiler identity is the frozen MSYS2 UCRT64 g++ binary SHA256 `8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1`. Library shuffle and equivalent-key sort order are implementation-version details; the paper does not invent a canonical cross-library tie rule absent in the source.
 
-The unique paper entry is fully resolved in [paper_method_config.json](paper_method_config.json); [argv_freeze.json](argv_freeze.json) contains the exact six current S2 argument vectors, six independent cold controls and twelve diagnostic control vectors. PE and DLL SHA256 bind every preset/default value that has no separate CLI option. H seed 20260626 and all native settings are explicit configuration values, not instance-dependent choices. The template below is one token vector (line breaks are presentation only); INPUT, OUT, physical T, producer B and B_MINUS_6 and SEED take exactly their fixed group-table values. The existing supervisor starts the complete production clock before admission, invokes this vector, and seals normal output; direct native Runtime alone is not T_cert.
+The frozen paper entry is resolved by [current_method_manifest.json](current_method_manifest.json) together with the [inherited R130 configuration](../unified_exact_round130/paper_method_config.json). Round132 [D_argv_freeze.json](D_argv_freeze.json) fixes all 60 P/S2/preselected-PS positions; [C_argv_freeze.json](C_argv_freeze.json) separately fixes 24 same-build research-root positions. The displayed S2 command is a template, not the complete list of actual launches. PE and DLL SHA256 bind every preset/default value that has no separate CLI option. H seed 20260626 and all native settings are explicit configuration values, not instance-dependent choices. The template below is one token vector (line breaks are presentation only); INPUT, OUT, physical T, producer B and B_MINUS_6 and SEED take exactly their fixed group-table values. The existing supervisor starts the complete production clock before admission, invokes this vector, and seals normal output; direct native Runtime alone is not T_cert.
 
 ~~~text
 PE --input INPUT --lambda 0.15 --T T
@@ -1064,16 +1127,16 @@ In ideal arithmetic, after the finite construction the accepted physical phases 
 
 ## B.12 Separately identified inclusive-root research control (Round128)
 
-MD-R version 1 is a research ablation, not another proposed algorithm. Section 6.8 and the root contract define its same-H inclusive domain, semantic shortcut omission, mandatory actual own-Start pre-LP check, one LP plus one integer MIP, fixed cutoff and complete native optimal-root return obligation. It retains the physical and signed numerical evidence policy. TIME_LIMIT/INTERRUPTED may yield a qualified open endpoint with null T_cert; a near-equal bound alone cannot satisfy its missing optimal-return obligation. Its extra checks and complete costs are paid. These control-specific guards leave the frozen ordinary procedure and the historical evidence in this appendix unchanged.
+MD-R version 1 is a research ablation, not another proposed algorithm. Historical supplement historical_evidence.md Section 6.8 and the root contract define its same-H inclusive domain, semantic shortcut omission, mandatory actual own-Start pre-LP check, one LP plus one integer MIP, fixed cutoff and complete native optimal-root return obligation. It retains the physical and signed numerical evidence policy. TIME_LIMIT/INTERRUPTED may yield a qualified open endpoint with null T_cert; a near-equal bound alone cannot satisfy its missing optimal-return obligation. Its extra checks and complete costs are paid. These control-specific guards leave the frozen ordinary procedure and the historical evidence in this appendix unchanged.
 
 
 ## B.13 Uniform support candidate confirmation (Round129)
 
-Round129 changes no production source, H, model generator, numerical policy or controller. It reuses original E2 modes mb/ms2/p. The sole candidate MS2 suppresses triple support for every input while retaining pairs, ordered supply and the shared enumeration order/cap. The five fixed candidate rules and thirty complete paid observations are in Section 6.9. At the R129 selection stage, MS2 was the proposed candidate and full M-B was the then-current frozen method. That historical distinction and all tables remain; R130 now adopts S2/MS2 as the sole paper method. The independent finite review and public recovery are evidence checks, not new native solves or rational proofs of all matrices.
+Round129 changes no production source, H, model generator, numerical policy or controller. It reuses original E2 modes mb/ms2/p. The sole candidate MS2 suppresses triple support for every input while retaining pairs, ordered supply and the shared enumeration order/cap. The five fixed candidate rules and thirty complete paid observations are in historical_evidence.md Section 6.9. At the R129 selection stage, MS2 was the proposed candidate and full M-B was the then-current frozen method. That historical distinction and all tables remain; R130 adopted S2/MS2 as the sole paper method, unchanged through Round132. The independent finite review and public recovery are evidence checks, not new native solves or rational proofs of all matrices.
 
 ## B.14 Current pair-support version and fixed attribution controls
 
-The sole paper method is original E2 `ms2`, called S2. E3 retains its source behavior and adds the off-by-default unique `s2-root` identity plus PS parameter evidence readback. E2 is retained unchanged. PS reuses the full original-compact mapper/validator; S2R reuses R128 inclusive-root semantics with triple emission disabled. Section 6.10 states the paid workflows, exact cutoff complement, nonzero LP/MIP obligations, source/return/coverage requirements, actual exposure and attribution limits. No individual cut, H, threshold or native parameter is optimized here. The passed R129 candidate selection is not rerun.
+The sole paper method is original E2 `ms2`, called S2. E3 retains its source behavior and adds the off-by-default unique `s2-root` identity plus PS parameter evidence readback. E2 is retained unchanged. PS reuses the full original-compact mapper/validator; S2R reuses R128 inclusive-root semantics with triple emission disabled. Historical supplement historical_evidence.md Section 6.10 states the paid workflows, exact cutoff complement, nonzero LP/MIP obligations, source/return/coverage requirements, actual exposure and attribution limits. No individual cut, H, threshold or native parameter is optimized here. The passed R129 candidate selection is not rerun.
 
 
 \clearpage
@@ -1082,50 +1145,57 @@ The sole paper method is original E2 `ms2`, called S2. E3 retains its source beh
 
 ## C.3. Projection of the three geometry row families
 
-Delete only H-spread, variable-S centering and fixed-S centering. Keep all H absolute-value lower bounds, individual bounds, total cap/floor, original Gini epigraph, scalar/SP estimators, cutoff, real domains and domain-generation rules. For n>=2 the ideal three families are
+Delete only H-spread, variable-\(S\) centering and fixed-\(S\) centering. Keep all \(H\) absolute-value lower bounds, individual bounds, total cap/floor, original Gini epigraph, scalar/SP estimators, cutoff, real domains and domain-generation rules. For \(n\ge2\) the ideal three families are
 
 \[
 (n-1)H_{ij}\le n\beta S,\quad
 \pm(n-1)(r_i-r_j)\le n\beta S,\quad
-\pm(r_i-r_j)\le n\beta\bar S/(n-1).
+\pm(r_i-r_j)\le \frac{n\beta\bar S}{n-1}.
 \]
 
-Let H_sum=sum H_ij. The retained original epigraph is H_sum<=n sum_i Z_i/D_i. Nonnegative states and q_iy<=beta s_iy give Z_i<=beta Y_i, hence H_sum<=n beta S. Triangle inequalities give A>=(n-1)|r_i-r_j|: for each third station t, |r_i-r_t|+|r_t-r_j|>=|r_i-r_j|, together with the pair itself; unused pair distances are nonnegative. Thus both centering families follow from the retained inequalities and S<=Sbar.
+Let \(H_\Sigma=\sum_{i<j}H_{ij}\). The retained original epigraph is \(H_\Sigma\le n\sum_i Z_i/D_i\). Nonnegative states and \(q_{iy}\le\beta s_{iy}\) give \(Z_i\le\beta Y_i\), hence \(H_\Sigma\le n\beta S\). Triangle inequalities give \(A\ge(n-1)|r_i-r_j|\): for each third station \(t\), \(|r_i-r_t|+|r_t-r_j|\ge|r_i-r_j|\), together with the pair itself; unused pair distances are nonnegative. Thus both centering families follow from the retained inequalities and \(S\le\bar S\).
 
 ### Root interval
 
-When alpha=0, replace every H_ij by |r_i-r_j|. This decreases the sum, respects its upper bounds and all individual upper bounds under the audited conditions, and the floor reduces to nonnegativity. The new H satisfies H-spread and leaves all non-H variables and the objective unchanged. Reverse inclusion follows by adding constraints. Thus projecting away all H gives equal LP sets and equal ideal LP objective values. Because H is continuous, the same extension preserves any remaining integer restrictions.
+When \(\alpha=0\), replace every \(H_{ij}\) by \(|r_i-r_j|\). This decreases the sum, respects its upper bounds and all individual upper bounds under the audited conditions, and the floor reduces to nonnegativity. The new \(H\) satisfies H-spread and leaves all non-\(H\) variables and the objective unchanged. Reverse inclusion follows by adding constraints. Thus projecting away all \(H\) gives equal LP sets and equal ideal LP objective values. Because \(H\) is continuous, the same extension preserves any remaining integer restrictions.
 
 ### Positive lower endpoint
 
-Assume 0<=alpha<=beta, r_i>=0, S<=Sbar; individual H upper bounds U_ij=c_i+c_j with c_i>=0 and r_i<=c_i; and outside the deleted families H appears only in absolute lower bounds, individual bounds, a total floor/cap and other uniform total upper bounds. H has zero objective coefficient and no additional individual positive lower bounds or nonuniform linear uses.
+Assume \(0\le\alpha\le\beta\), \(r_i\ge0\), \(S\le\bar S\); individual \(H\) upper bounds \(U_{ij}=c_i+c_j\) with \(c_i\ge0\) and \(r_i\le c_i\); and outside the deleted families \(H\) appears only in absolute lower bounds, individual bounds, a total floor/cap and other uniform total upper bounds. It has zero objective coefficient and no additional individual positive lower bounds or nonuniform linear uses.
 
-Fix every non-H variable in a feasible point of the deletion model. Put d_ij=|r_i-r_j|, A=sum d_ij, L=n alpha S and t=n beta S/(n-1). Let B be the smallest retained total upper bound, including the implied n beta S. Feasibility gives
-
-\[
-T^*=\max(A,L)\le\min(B,\sum U_{ij}).
-\]
-
-The triangle argument gives d_ij<=t. Let U'_ij=min(c_i+c_j,t). With C=sum c_i>0, f(c)=sum_{i<j}min(c_i+c_j,t) is concave on the nonnegative simplex of sum C. Express c=sum_i(c_i/C)Ce_i. Concavity then gives
+Fix every non-\(H\) variable in a feasible point of the deletion model. Put \(d_{ij}=|r_i-r_j|\), \(A=\sum_{i<j}d_{ij}\), \(L=n\alpha S\) and \(t=n\beta S/(n-1)\). Let \(B\) be the smallest retained total upper bound, including the implied \(n\beta S\). Feasibility gives
 
 \[
-\sum U'_{ij}=f(c)\ge(n-1)\min(C,t)
-=\min(\sum U_{ij},n\beta S)\ge T^*.
+T^*=\max(A,L)\le\min\left(B,\sum_{i<j}U_{ij}\right).
 \]
 
-If sum U'>A, set theta=(T*-A)/(sum U'-A) and H'_ij=d_ij+theta(U'_ij-d_ij). Then 0<=theta<=1; every individual bound and spread bound holds, sum H'=T*<=B, and the floor holds. The centering rows already follow without H. All non-H variables and their objective remain unchanged. If the denominator vanishes, T*=A and H'=d suffices. If C=0, all c,r,S,A,L vanish and H'=0. If S=0, nonnegative ratios vanish and H'=0. For n=1 none of these three families is generated. This proves both projected inclusions, including the nonzero-floor case in which setting H=d alone can fail.
+The triangle argument gives \(d_{ij}\le t\). Set \(U'_{ij}=\min(c_i+c_j,t)\). For \(C=\sum_i c_i>0\), the function \(f(\mathbf c)=\sum_{i<j}\min(c_i+c_j,t)\) is concave on the nonnegative simplex of sum \(C\). With \(e_i^{\rm unit}\) denoting the standard unit vector, write \(\mathbf c=\sum_i(c_i/C)C e_i^{\rm unit}\). Concavity gives
+
+\[
+\sum_{i<j}U'_{ij}=f(\mathbf c)\ge(n-1)\min(C,t)
+=\min\left(\sum_{i<j}U_{ij},n\beta S\right)\ge T^*.
+\]
+
+If \(\sum_{i<j}U'_{ij}>A\), set
+
+\[
+\theta=\frac{T^*-A}{\sum_{i<j}U'_{ij}-A},\qquad
+H'_{ij}=d_{ij}+\theta(U'_{ij}-d_{ij}).
+\]
+
+Then \(0\le\theta\le1\); every individual bound and spread bound holds, \(\sum_{i<j}H'_{ij}=T^*\le B\), and the floor holds. The centering rows already follow without \(H\). All non-\(H\) variables and their objective remain unchanged. If the denominator vanishes, \(T^*=A\) and \(H'=d\) suffices. If \(C=0\), all \(c,r,S,A,L\) vanish and \(H'=0\). If \(S=0\), nonnegative ratios vanish and \(H'=0\). For \(n=1\) none of these three families is generated. This proves both projected inclusions, including the nonzero-floor case in which setting \(H=d\) alone can fail.
 
 ### Actual-model application and numerical boundary
 
-The current shared canonical factory generates the named three families, and the frozen paper profile disables local/subset nonuniform H uses. The Cplex writer sets H upper bounds to fl(C_i/D_i+C_j/D_j), with zero H objective coefficients. The independent reviewer inspected an actual saved S12 S2R matrix: 66 H bounds, five uniform full-H rows and 198 individual-H rows. W appears in five rows, as required below. This is a canonical-model result, not a theorem about arbitrary native node cuts.
+The current shared canonical factory generates the named three families, and the frozen paper profile disables local/subset nonuniform \(H\) uses. The Cplex writer sets \(H\) upper bounds to \(\operatorname{fl}(C_i/D_i+C_j/D_j)\), with zero objective coefficients. The independent reviewer inspected an actual saved S12 S2R matrix: 66 \(H\) bounds, five uniform full-\(H\) rows and 198 individual-\(H\) rows. \(W\) appears in five rows, as required below. This is a canonical-model result, not a theorem about arbitrary native node cuts.
 
-The exact additive upper-bound hypothesis concerns real algebra. In the saved S12 matrix, 41 of 66 serialized H bounds differ from the exact rational sum of the two serialized r upper bounds at roughly 1e-16. Therefore the ideal theorem is not asserted as strict rational equality for every serialized floating matrix. Necessary actual coefficient/domain checks and extension residuals accompany the research comparisons. The production S2 bytes are unchanged; no hidden outward correction is applied. Equal projections do not imply identical presolve, native cuts, search paths or elapsed time, and do not make the entire C_G package redundant.
+The exact additive upper-bound hypothesis concerns real algebra. In the saved S12 matrix, 41 of 66 serialized \(H\) bounds differ from the exact rational sum of the two serialized \(r\) upper bounds at roughly \(10^{-16}\). Therefore the ideal theorem is not asserted as strict rational equality for every serialized floating matrix. Necessary actual coefficient/domain checks and extension residuals accompany the research comparisons. The production S2 bytes are unchanged; no hidden outward correction is applied. Equal projections do not imply identical presolve, native cuts, search paths or elapsed time, and do not make the entire \(C_G\) package redundant.
 
-## C.4. Exact elimination of W_SP, including its real bounds
+## C.4. Exact elimination of W, including its real bounds
 
-In the active shared model W is continuous, has zero objective coefficient and is used by four MC rows, one SP cutoff and its own box. No other use is present in the qualified canonical scope. Preserve all W-free original rows, variable types and bounds, particularly g+lambda P<=c, which a cross-multiplied row cannot replace at S=0.
+In the active shared model \(W=W_{\rm SP}\) is continuous, has zero objective coefficient and is used by four MC rows, one SP cutoff and its own box. No other use is present in the qualified canonical scope. Preserve all \(W\)-free original rows, variable types and bounds, particularly \(g+\lambda P\le c\), which a cross-multiplied row cannot replace at \(S=0\).
 
-For actual W bounds w_l,w_u and MC parameters s_l,s_u,p_l,p_u define
+For actual \(W\) bounds \(w_l,w_u\) and MC parameters \(s_l,s_u,p_l,p_u\), define
 
 \[
 L_0=w_l,\quad L_1=s_lP+p_lS-s_lp_l,\quad
@@ -1136,23 +1206,23 @@ U_0=w_u,\quad U_1=s_uP+p_lS-s_up_l,\quad
 U_2=s_lP+p_uS-s_lp_u.
 \]
 
-The original system is L_j<=W<=U_k and H_sum+n lambda W<=ncS. For lambda>0 its complete projection is all nine compatibility rows L_j<=U_k and all three lower-cutoff rows H_sum+n lambda L_j<=ncS. Necessity is immediate. Conversely, W=max_j L_j satisfies every upper bound and the SP cutoff, proving sufficiency. This is standard one-variable Fourier-Motzkin elimination applied to this formulation, not a new linearization theorem or an exact continuous product identity.
+The original system is \(L_j\le W\le U_k\) and \(H_\Sigma+n\lambda W\le ncS\). For \(\lambda>0\), its complete projection is all nine compatibility rows \(L_j\le U_k\) and all three lower-cutoff rows \(H_\Sigma+n\lambda L_j\le ncS\). Necessity is immediate. Conversely, \(W=\max_jL_j\) satisfies every upper bound and the SP cutoff, proving sufficiency. This is standard one-variable Fourier-Motzkin elimination applied to this formulation, not a new linearization theorem or an exact continuous product identity.
 
-Only after proving the same explicit nonnegative rectangle s_l<=S<=s_u, p_l<=P<=p_u, and that the actual W box is no tighter than the product box, may compatibility and W-box rows be removed. The true SP is then an extension for MC feasibility. Since L_1-s_lp_l=s_l(P-p_l)+p_l(S-s_l)>=0, the constant lower plane is dominated. The two lower-plane cutoffs then suffice, with W=max(L_1,L_2). Current inflated e can violate the tight physical P upper estimate; that estimate cannot simply be assumed to bound the whole epigraph.
+Only after proving the same explicit nonnegative rectangle \(0\le s_l\le S\le s_u\), \(0\le p_l\le P\le p_u\), and that the actual \(W\) box is no tighter than the product box, may compatibility and box rows be removed. The true product \(SP\) is then an extension for MC feasibility. Since \(L_1-s_lp_l=s_l(P-p_l)+p_l(S-s_l)\ge0\) and \(w_l\le s_lp_l\), the constant lower plane is dominated. The two lower-plane cutoffs then suffice, with \(W=\max(L_1,L_2)\). Current inflated \(e\) can violate the tight physical \(P\) upper estimate; that estimate cannot simply be assumed to bound the whole epigraph.
 
-For positive width s_u>s_l, MC lower/upper pairings imply P>=p_l and P<=p_u after cancellation. These consequences must survive projection. Example: s_l=1,s_u=2,p_l=0,p_u=1,S=1,P=2,H_sum=0 and sufficiently large c satisfies both lower-plane cutoffs but L_2=3>U_2=2, so no original W exists. Two cutoffs alone would incorrectly enlarge the domain.
+For positive width \(s_u>s_l\), MC lower/upper pairings imply \(P\ge p_l\) and \(P\le p_u\) after cancellation. These consequences must survive projection. For example, \(s_l=1,s_u=2,p_l=0,p_u=1,S=1,P=2,H_\Sigma=0\) and sufficiently large \(c\) satisfy both lower-plane cutoffs, but \(L_2=3>U_2=2\), so no original \(W\) exists. Two cutoffs alone would incorrectly enlarge the domain.
 
-When S is fixed, derive compatibility directly rather than dividing by its width. At S=0, W=0 need not imply P<=p_u. The full pair system handles that case without adding an unauthorized P bound. When lambda=0, retain H_sum<=ncS and every W-feasibility compatibility row; removing the whole block would again change its projection. Zero-width P and simultaneous degeneracy are also covered by the pair construction.
+When \(S\) is fixed, derive compatibility directly rather than dividing by its width. At \(S=0\), \(W=0\) need not imply \(P\le p_u\). The full pair system handles that case without adding an unauthorized \(P\) bound. When \(\lambda=0\), retain \(H_\Sigma\le ncS\) and every \(W\)-feasibility compatibility row; removing the whole block would again change its projection. Zero-width \(P\) and simultaneous degeneracy are also covered by the pair construction.
 
 ### Implemented research expression
 
-The research writer reads the actual shared canonical row coefficients, normalizes their senses, includes the exact actual W box, and combines every lower/upper pair. There are three lower rows and four upper rows including the SP row: 12 projected rows. It retains even constant or duplicate compatibility rows. All remaining original rows, objective, bounds and integer types stay intact; only the W column and its rows are replaced. Its physical Start is mapped to the remaining actual columns and validated before use.
+The research writer reads the actual shared canonical row coefficients, normalizes their senses, includes the exact actual \(W\) box, and combines every lower/upper pair. There are three lower rows and four upper rows including the SP row: 12 projected rows. It retains even constant or duplicate compatibility rows. All remaining original rows, objective, bounds and integer types stay intact; only the \(W\) column and its rows are replaced. Its physical Start is mapped to the remaining actual columns and validated before use.
 
-The independent checker reconstructs these combinations with exact rational arithmetic on source binary64 coefficients. It separately bounds the output coefficient-serialization residual over actual remaining-variable bounds. The candidate binary64 output is qualified as numerically consistent, not asserted to equal the exact rational projected matrix. `C_matrix_wording_addendum.json` makes this distinction explicit. Four saved interval/input configurations have equal canonical all-continuous LP objectives within the inherited 1e-7 policy. These finite observations check implementation and numerical behavior; they do not replace the general projection proof.
+The independent checker reconstructs these combinations with exact rational arithmetic on source binary64 coefficients. It separately bounds the output coefficient-serialization residual over actual remaining-variable bounds. The candidate binary64 output is qualified as numerically consistent, not asserted to equal the exact rational projected matrix. `C_matrix_wording_addendum.json` makes this distinction explicit. Four saved interval/input configurations have equal canonical all-continuous LP objectives within the inherited \(10^{-7}\) policy. These finite observations check implementation and numerical behavior; they do not replace the general projection proof.
 
 ## C.5. Qualification and relation to costs
 
 The research default-off writer and original E3 produce identical complete canonical LP bytes on the qualified small and medium fixtures, at a root interval and a positive lower endpoint. Actual S12 CLI runs bridge original E3 to research default-off, and validate independent H and full Start submission for both candidates. Each uses the legal inclusive-root LP then restored-integer MIP workflow. Default-off equivalence is a semantic/matrix bridge; the two executable byte strings are different and are never described as identical.
 
-C cost diagnostics remain required after these qualifications. Their known-role panel, two Seeds and three same-build expressions are frozen separately. D remains the original frozen algorithm, and its measurements do not come from this research build. Native process differences can be reported without claiming a stronger ideal LP relaxation.
+All 24 admitted C workflows are now sealed. Geometry deletion gives 2 Win, 4 Lose and 2 UNDETERMINED; full W projection gives 3 Win, 3 Lose and 2 UNDETERMINED against the same-build inclusive-root baseline. All 16 candidate/baseline comparisons have identical complete realized H, matching root intervals/cutoffs and actual native exposure. The continuous root objectives agree within the original numerical policy, while Work/nodes and complete costs vary in both directions. This supports mixed expression costs, not a stronger ideal relaxation or automatic production replacement. D remains the original frozen algorithm and its measurements do not come from this research build.
 

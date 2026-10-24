@@ -1,13 +1,13 @@
 {
   "strata": {
     "D:K:PS/P": {
-      "problems": 2,
-      "repeated_comparisons": 4,
+      "problems": 3,
+      "repeated_comparisons": 6,
       "directions": {
-        "UNDETERMINED": 4
+        "UNDETERMINED": 6
       },
       "classes": {
-        "BOTH_OPEN": 4
+        "BOTH_OPEN": 6
       },
       "certificates": {
         "P": 0,
@@ -18,17 +18,55 @@
       "conditional_geometric_mean_right_over_left": null,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
+    "D:X:PS/P": {
+      "problems": 3,
+      "repeated_comparisons": 6,
+      "directions": {
+        "UNDETERMINED": 2,
+        "Win": 3,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_OPEN": 2,
+        "BOTH_CERTIFIED": 4
+      },
+      "certificates": {
+        "P": 4,
+        "PS": 4
+      },
+      "both_certified_n": 4,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        },
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 2.5501904271389444,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
     "D:K:S2/P": {
-      "problems": 4,
-      "repeated_comparisons": 8,
+      "problems": 6,
+      "repeated_comparisons": 12,
       "directions": {
         "Win": 6,
-        "UNDETERMINED": 2
+        "UNDETERMINED": 6
       },
       "classes": {
         "LEFT_ONLY_CERTIFIED": 4,
         "BOTH_CERTIFIED": 2,
-        "BOTH_OPEN": 2
+        "BOTH_OPEN": 6
       },
       "certificates": {
         "P": 2,
@@ -48,14 +86,63 @@
       "conditional_geometric_mean_right_over_left": 14.490866691998752,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
-    "D:K:S2/PS": {
-      "problems": 2,
-      "repeated_comparisons": 4,
+    "D:X:S2/P": {
+      "problems": 6,
+      "repeated_comparisons": 12,
       "directions": {
-        "Win": 4
+        "Win": 10,
+        "Lose": 1,
+        "UNEVALUABLE": 1
       },
       "classes": {
-        "LEFT_ONLY_CERTIFIED": 4
+        "LEFT_ONLY_CERTIFIED": 5,
+        "BOTH_CERTIFIED": 6,
+        "UNEVALUABLE": 1
+      },
+      "certificates": {
+        "P": 7,
+        "S2": 11
+      },
+      "both_certified_n": 6,
+      "both_certified_intersection": [
+        {
+          "id": "X-15-B",
+          "seed": 0
+        },
+        {
+          "id": "X-15-B",
+          "seed": 1
+        },
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        },
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 4.038512833947875,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:K:S2/PS": {
+      "problems": 3,
+      "repeated_comparisons": 6,
+      "directions": {
+        "Win": 4,
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 4,
+        "BOTH_OPEN": 2
       },
       "certificates": {
         "PS": 0,
@@ -64,6 +151,132 @@
       "both_certified_n": 0,
       "both_certified_intersection": [],
       "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:S2/PS": {
+      "problems": 3,
+      "repeated_comparisons": 6,
+      "directions": {
+        "Win": 4,
+        "Lose": 2
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 2,
+        "BOTH_CERTIFIED": 4
+      },
+      "certificates": {
+        "PS": 4,
+        "S2": 6
+      },
+      "both_certified_n": 4,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        },
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 2.9159390528393554,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:C:S2R-GEOM/S2R": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "Win": 2,
+        "Lose": 4,
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 5,
+        "RIGHT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 6,
+        "S2R-GEOM": 5
+      },
+      "both_certified_n": 5,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.0419578187639102,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:C:S2R-SP/S2R": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "Win": 3,
+        "Lose": 3,
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 6,
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 6,
+        "S2R-SP": 6
+      },
+      "both_certified_n": 6,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 0
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.00038305486241,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     }
   },
@@ -104,43 +317,98 @@
       "conditional_geometric_mean_right_over_left": null,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
+    "D:PS/P:id=K-35-B": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "PS": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:id=X-15-S": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "PS": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:id=X-20-U": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.5226055037467311,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:id=X-35-B": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 12.44432209007671,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
     "D:PS/P:V=15": {
-      "problems": 1,
-      "repeated_comparisons": 2,
-      "directions": {
-        "UNDETERMINED": 2
-      },
-      "classes": {
-        "BOTH_OPEN": 2
-      },
-      "certificates": {
-        "P": 0,
-        "PS": 0
-      },
-      "both_certified_n": 0,
-      "both_certified_intersection": [],
-      "conditional_geometric_mean_right_over_left": null,
-      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
-    },
-    "D:PS/P:V=20": {
-      "problems": 1,
-      "repeated_comparisons": 2,
-      "directions": {
-        "UNDETERMINED": 2
-      },
-      "classes": {
-        "BOTH_OPEN": 2
-      },
-      "certificates": {
-        "P": 0,
-        "PS": 0
-      },
-      "both_certified_n": 0,
-      "both_certified_intersection": [],
-      "conditional_geometric_mean_right_over_left": null,
-      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
-    },
-    "D:PS/P:objective_class=positive": {
       "problems": 2,
       "repeated_comparisons": 4,
       "directions": {
@@ -156,6 +424,197 @@
       "both_certified_n": 0,
       "both_certified_intersection": [],
       "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:V=20": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "UNDETERMINED": 2,
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_OPEN": 2,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.5226055037467311,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:V=35": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "UNDETERMINED": 2,
+        "Win": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 12.44432209007671,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:objective_class=positive": {
+      "problems": 5,
+      "repeated_comparisons": 10,
+      "directions": {
+        "UNDETERMINED": 8,
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_OPEN": 8,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.5226055037467311,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:objective_class=zero": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 12.44432209007671,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:problem_objective_class=positive_under_qualified_lower_bound": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "UNDETERMINED": 6,
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_OPEN": 6,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.5226055037467311,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:problem_objective_class=unknown_optimum_class": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "PS": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:PS/P:problem_objective_class=zero_proved_by_qualified_physical_zero": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 12.44432209007671,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
     "D:K:PS/P:V=15": {
@@ -192,6 +651,97 @@
       "both_certified_n": 0,
       "both_certified_intersection": [],
       "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:K:PS/P:V=35": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "PS": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:PS/P:V=15": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "PS": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:PS/P:V=20": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.5226055037467311,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:PS/P:V=35": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "PS": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 12.44432209007671,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
     "D:S2/P:id=K-15-B": {
@@ -275,43 +825,77 @@
       "conditional_geometric_mean_right_over_left": null,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
-    "D:S2/P:V=15": {
-      "problems": 2,
-      "repeated_comparisons": 4,
+    "D:S2/P:id=K-35-B": {
+      "problems": 1,
+      "repeated_comparisons": 2,
       "directions": {
-        "Win": 4
+        "UNDETERMINED": 2
       },
       "classes": {
-        "LEFT_ONLY_CERTIFIED": 2,
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:id=K-35-U": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:id=X-15-B": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
         "BOTH_CERTIFIED": 2
       },
       "certificates": {
         "P": 2,
-        "S2": 4
+        "S2": 2
       },
       "both_certified_n": 2,
       "both_certified_intersection": [
         {
-          "id": "K-15-B",
+          "id": "X-15-B",
           "seed": 0
         },
         {
-          "id": "K-15-B",
+          "id": "X-15-B",
           "seed": 1
         }
       ],
-      "conditional_geometric_mean_right_over_left": 14.490866691998752,
+      "conditional_geometric_mean_right_over_left": 1.191138590042861,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
-    "D:S2/P:V=20": {
-      "problems": 2,
-      "repeated_comparisons": 4,
+    "D:S2/P:id=X-15-S": {
+      "problems": 1,
+      "repeated_comparisons": 2,
       "directions": {
-        "UNDETERMINED": 2,
         "Win": 2
       },
       "classes": {
-        "BOTH_OPEN": 2,
         "LEFT_ONLY_CERTIFIED": 2
       },
       "certificates": {
@@ -323,23 +907,114 @@
       "conditional_geometric_mean_right_over_left": null,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
-    "D:S2/P:objective_class=positive": {
-      "problems": 4,
-      "repeated_comparisons": 8,
+    "D:S2/P:id=X-20-S": {
+      "problems": 1,
+      "repeated_comparisons": 2,
       "directions": {
-        "Win": 6,
-        "UNDETERMINED": 2
+        "Win": 2
       },
       "classes": {
-        "LEFT_ONLY_CERTIFIED": 4,
-        "BOTH_CERTIFIED": 2,
-        "BOTH_OPEN": 2
+        "LEFT_ONLY_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 0,
+        "S2": 2
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:id=X-20-U": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
       },
       "certificates": {
         "P": 2,
-        "S2": 6
+        "S2": 2
       },
       "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 10.87940369517021,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:id=X-35-B": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "S2": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 5.082729705365645,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:id=X-35-U": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "UNEVALUABLE": 1
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 1,
+        "UNEVALUABLE": 1
+      },
+      "certificates": {
+        "P": 1,
+        "S2": 1
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:V=15": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "Win": 7,
+        "Lose": 1
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 4,
+        "BOTH_CERTIFIED": 4
+      },
+      "certificates": {
+        "P": 4,
+        "S2": 8
+      },
+      "both_certified_n": 4,
       "both_certified_intersection": [
         {
           "id": "K-15-B",
@@ -348,9 +1023,268 @@
         {
           "id": "K-15-B",
           "seed": 1
+        },
+        {
+          "id": "X-15-B",
+          "seed": 0
+        },
+        {
+          "id": "X-15-B",
+          "seed": 1
         }
       ],
-      "conditional_geometric_mean_right_over_left": 14.490866691998752,
+      "conditional_geometric_mean_right_over_left": 4.154591498571966,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:V=20": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "UNDETERMINED": 2,
+        "Win": 6
+      },
+      "classes": {
+        "BOTH_OPEN": 2,
+        "LEFT_ONLY_CERTIFIED": 4,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "S2": 6
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 10.87940369517021,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:V=35": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "UNDETERMINED": 4,
+        "Win": 3,
+        "UNEVALUABLE": 1
+      },
+      "classes": {
+        "BOTH_OPEN": 4,
+        "BOTH_CERTIFIED": 2,
+        "LEFT_ONLY_CERTIFIED": 1,
+        "UNEVALUABLE": 1
+      },
+      "certificates": {
+        "P": 3,
+        "S2": 3
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 5.082729705365645,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:objective_class=mixed_attained_endpoints": {
+      "problems": 1,
+      "repeated_comparisons": 1,
+      "directions": {
+        "Win": 1
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 1
+      },
+      "certificates": {
+        "P": 0,
+        "S2": 1
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:objective_class=positive": {
+      "problems": 9,
+      "repeated_comparisons": 18,
+      "directions": {
+        "Win": 12,
+        "UNDETERMINED": 6
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 8,
+        "BOTH_CERTIFIED": 4,
+        "BOTH_OPEN": 6
+      },
+      "certificates": {
+        "P": 4,
+        "S2": 12
+      },
+      "both_certified_n": 4,
+      "both_certified_intersection": [
+        {
+          "id": "K-15-B",
+          "seed": 0
+        },
+        {
+          "id": "K-15-B",
+          "seed": 1
+        },
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 12.555954310013643,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:objective_class=zero": {
+      "problems": 3,
+      "repeated_comparisons": 5,
+      "directions": {
+        "Win": 3,
+        "Lose": 1,
+        "UNEVALUABLE": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 4,
+        "UNEVALUABLE": 1
+      },
+      "certificates": {
+        "P": 5,
+        "S2": 4
+      },
+      "both_certified_n": 4,
+      "both_certified_intersection": [
+        {
+          "id": "X-15-B",
+          "seed": 0
+        },
+        {
+          "id": "X-15-B",
+          "seed": 1
+        },
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 2.4605356113696466,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:problem_objective_class=positive_under_qualified_lower_bound": {
+      "problems": 8,
+      "repeated_comparisons": 16,
+      "directions": {
+        "Win": 12,
+        "UNDETERMINED": 4
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 8,
+        "BOTH_CERTIFIED": 4,
+        "BOTH_OPEN": 4
+      },
+      "certificates": {
+        "P": 4,
+        "S2": 12
+      },
+      "both_certified_n": 4,
+      "both_certified_intersection": [
+        {
+          "id": "K-15-B",
+          "seed": 0
+        },
+        {
+          "id": "K-15-B",
+          "seed": 1
+        },
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 12.555954310013643,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:problem_objective_class=unknown_optimum_class": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/P:problem_objective_class=zero_proved_by_qualified_physical_zero": {
+      "problems": 3,
+      "repeated_comparisons": 6,
+      "directions": {
+        "Win": 4,
+        "Lose": 1,
+        "UNEVALUABLE": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 4,
+        "LEFT_ONLY_CERTIFIED": 1,
+        "UNEVALUABLE": 1
+      },
+      "certificates": {
+        "P": 5,
+        "S2": 5
+      },
+      "both_certified_n": 4,
+      "both_certified_intersection": [
+        {
+          "id": "X-15-B",
+          "seed": 0
+        },
+        {
+          "id": "X-15-B",
+          "seed": 1
+        },
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 2.4605356113696466,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
     "D:K:S2/P:V=15": {
@@ -401,6 +1335,111 @@
       "conditional_geometric_mean_right_over_left": null,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
+    "D:K:S2/P:V=35": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "UNDETERMINED": 4
+      },
+      "classes": {
+        "BOTH_OPEN": 4
+      },
+      "certificates": {
+        "P": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:S2/P:V=15": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "Win": 3,
+        "Lose": 1
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 2,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "S2": 4
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-15-B",
+          "seed": 0
+        },
+        {
+          "id": "X-15-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.191138590042861,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:S2/P:V=20": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "Win": 4
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 2,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "P": 2,
+        "S2": 4
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 10.87940369517021,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:S2/P:V=35": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "Win": 3,
+        "UNEVALUABLE": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2,
+        "LEFT_ONLY_CERTIFIED": 1,
+        "UNEVALUABLE": 1
+      },
+      "certificates": {
+        "P": 3,
+        "S2": 3
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 5.082729705365645,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
     "D:S2/PS:id=K-15-S": {
       "problems": 1,
       "repeated_comparisons": 2,
@@ -437,43 +1476,97 @@
       "conditional_geometric_mean_right_over_left": null,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
+    "D:S2/PS:id=K-35-B": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "PS": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:id=X-15-S": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 0,
+        "S2": 2
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:id=X-20-U": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 20.817621737949906,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:id=X-35-B": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Lose": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.4084376528166762,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
     "D:S2/PS:V=15": {
-      "problems": 1,
-      "repeated_comparisons": 2,
-      "directions": {
-        "Win": 2
-      },
-      "classes": {
-        "LEFT_ONLY_CERTIFIED": 2
-      },
-      "certificates": {
-        "PS": 0,
-        "S2": 2
-      },
-      "both_certified_n": 0,
-      "both_certified_intersection": [],
-      "conditional_geometric_mean_right_over_left": null,
-      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
-    },
-    "D:S2/PS:V=20": {
-      "problems": 1,
-      "repeated_comparisons": 2,
-      "directions": {
-        "Win": 2
-      },
-      "classes": {
-        "LEFT_ONLY_CERTIFIED": 2
-      },
-      "certificates": {
-        "PS": 0,
-        "S2": 2
-      },
-      "both_certified_n": 0,
-      "both_certified_intersection": [],
-      "conditional_geometric_mean_right_over_left": null,
-      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
-    },
-    "D:S2/PS:objective_class=positive": {
       "problems": 2,
       "repeated_comparisons": 4,
       "directions": {
@@ -489,6 +1582,193 @@
       "both_certified_n": 0,
       "both_certified_intersection": [],
       "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:V=20": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "Win": 4
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 2,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 4
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 20.817621737949906,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:V=35": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "UNDETERMINED": 2,
+        "Lose": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.4084376528166762,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:objective_class=positive": {
+      "problems": 5,
+      "repeated_comparisons": 10,
+      "directions": {
+        "Win": 8,
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 6,
+        "BOTH_OPEN": 2,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 8
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 20.817621737949906,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:objective_class=zero": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Lose": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.4084376528166762,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:problem_objective_class=positive_under_qualified_lower_bound": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "Win": 8
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 6,
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 8
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 20.817621737949906,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:problem_objective_class=unknown_optimum_class": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "PS": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:S2/PS:problem_objective_class=zero_proved_by_qualified_physical_zero": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Lose": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.4084376528166762,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     },
     "D:K:S2/PS:V=15": {
@@ -526,12 +1806,641 @@
       "both_certified_intersection": [],
       "conditional_geometric_mean_right_over_left": null,
       "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:K:S2/PS:V=35": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "PS": 0,
+        "S2": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:S2/PS:V=15": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "LEFT_ONLY_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 0,
+        "S2": 2
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:S2/PS:V=20": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-20-U",
+          "seed": 0
+        },
+        {
+          "id": "X-20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 20.817621737949906,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "D:X:S2/PS:V=35": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Lose": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "PS": 2,
+        "S2": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "X-35-B",
+          "seed": 0
+        },
+        {
+          "id": "X-35-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.4084376528166762,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-GEOM/S2R:id=PB-C35-U": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 0,
+        "S2R-GEOM": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-GEOM/S2R:id=SC-B20-S": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Lose": 2
+      },
+      "classes": {
+        "RIGHT_ONLY_CERTIFIED": 1,
+        "BOTH_CERTIFIED": 1
+      },
+      "certificates": {
+        "S2R": 2,
+        "S2R-GEOM": 1
+      },
+      "both_certified_n": 1,
+      "both_certified_intersection": [
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.8693139156808277,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-GEOM/S2R:id=SC-C15-B": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "S2R": 2,
+        "S2R-GEOM": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.2975443257615993,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-GEOM/S2R:id=UC-C20-U": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "S2R": 2,
+        "S2R-GEOM": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.9160408184644545,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-GEOM/S2R:V=15": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "S2R": 2,
+        "S2R-GEOM": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.2975443257615993,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-GEOM/S2R:V=20": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "Lose": 3,
+        "Win": 1
+      },
+      "classes": {
+        "RIGHT_ONLY_CERTIFIED": 1,
+        "BOTH_CERTIFIED": 3
+      },
+      "certificates": {
+        "S2R": 4,
+        "S2R-GEOM": 3
+      },
+      "both_certified_n": 3,
+      "both_certified_intersection": [
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.9001925781646114,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-GEOM/S2R:V=35": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 0,
+        "S2R-GEOM": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-GEOM/S2R:objective_class=positive": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "Win": 2,
+        "Lose": 4,
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 5,
+        "RIGHT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 6,
+        "S2R-GEOM": 5
+      },
+      "both_certified_n": 5,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.0419578187639102,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-GEOM/S2R:problem_objective_class=positive_under_qualified_lower_bound": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "Win": 2,
+        "Lose": 4,
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 5,
+        "RIGHT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 6,
+        "S2R-GEOM": 5
+      },
+      "both_certified_n": 5,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.0419578187639102,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-SP/S2R:id=PB-C35-U": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 0,
+        "S2R-SP": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-SP/S2R:id=SC-B20-S": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "S2R": 2,
+        "S2R-SP": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "SC-B20-S",
+          "seed": 0
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.050857040654013,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-SP/S2R:id=SC-C15-B": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "S2R": 2,
+        "S2R-SP": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.9625487819830181,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-SP/S2R:id=UC-C20-U": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "S2R": 2,
+        "S2R-SP": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.9897661416057836,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-SP/S2R:V=15": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "Win": 1,
+        "Lose": 1
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 2
+      },
+      "certificates": {
+        "S2R": 2,
+        "S2R-SP": 2
+      },
+      "both_certified_n": 2,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 0.9625487819830181,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-SP/S2R:V=20": {
+      "problems": 2,
+      "repeated_comparisons": 4,
+      "directions": {
+        "Win": 2,
+        "Lose": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 4
+      },
+      "certificates": {
+        "S2R": 4,
+        "S2R-SP": 4
+      },
+      "both_certified_n": 4,
+      "both_certified_intersection": [
+        {
+          "id": "SC-B20-S",
+          "seed": 0
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.0198542633667786,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-SP/S2R:V=35": {
+      "problems": 1,
+      "repeated_comparisons": 2,
+      "directions": {
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 0,
+        "S2R-SP": 0
+      },
+      "both_certified_n": 0,
+      "both_certified_intersection": [],
+      "conditional_geometric_mean_right_over_left": null,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-SP/S2R:objective_class=positive": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "Win": 3,
+        "Lose": 3,
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 6,
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 6,
+        "S2R-SP": 6
+      },
+      "both_certified_n": 6,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 0
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.00038305486241,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
+    },
+    "C:S2R-SP/S2R:problem_objective_class=positive_under_qualified_lower_bound": {
+      "problems": 4,
+      "repeated_comparisons": 8,
+      "directions": {
+        "Win": 3,
+        "Lose": 3,
+        "UNDETERMINED": 2
+      },
+      "classes": {
+        "BOTH_CERTIFIED": 6,
+        "BOTH_OPEN": 2
+      },
+      "certificates": {
+        "S2R": 6,
+        "S2R-SP": 6
+      },
+      "both_certified_n": 6,
+      "both_certified_intersection": [
+        {
+          "id": "SC-C15-B",
+          "seed": 0
+        },
+        {
+          "id": "SC-C15-B",
+          "seed": 1
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 0
+        },
+        {
+          "id": "SC-B20-S",
+          "seed": 1
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 0
+        },
+        {
+          "id": "UC-C20-U",
+          "seed": 1
+        }
+      ],
+      "conditional_geometric_mean_right_over_left": 1.00038305486241,
+      "denominator_warning": "Shared controls and repeated Seeds; no independence, population Win-rate or cap-imputed certification ratio"
     }
   },
-  "D_arms": 20,
-  "C_arms": 0,
-  "manuscript_D_statement": "The full new-input campaign has 20/60 sealed independently paid observations. In K, S2/P qualified certificate counts are 6/2 across 8 repeated comparisons on 4 problems; strict directions are {'Win': 6, 'UNDETERMINED': 2}. These are finite within-mechanism and geography-transfer observations; same-problem Seeds are repeats, and both-open times remain censored. PS attribution is confined to its prospectively selected six-problem subset.",
-  "manuscript_C_statement": "The cost panel has 0/24 sealed same-build workflows. Any native-process or cost change is not an ideal relaxation-strength increase; unexposed root/node fields remain unknown.",
+  "D_arms": 60,
+  "C_arms": 24,
+  "manuscript_D_statement": "The full new-input campaign has 60/60 sealed independently paid observations. In K, S2/P qualified certificate counts are 6/2 across 12 repeated comparisons on 6 problems; strict directions are {'Win': 6, 'UNDETERMINED': 6}. In X, S2/P qualified certificate counts are 11/7 across 12 repeated comparisons on 6 problems; strict directions are {'Win': 10, 'Lose': 1, 'UNEVALUABLE': 1}. These are finite within-mechanism and geography-transfer observations; same-problem Seeds are repeats, and both-open times remain censored. PS attribution is confined to its prospectively selected six-problem subset. Problem-level zero/positive/unknown status is distinguished from each arm's attained endpoint; a zero observation at35 stations does not establish positive-objective35 proof performance. There are 1 disclosed source-reduced own-zero observations: their legal own physical zero proofs and raw production clocks remain, but frozen performance eligibility excludes them, formal T_cert is null and affected comparisons are UNEVALUABLE. They are neither ordinary open results nor time Wins; the rejected native sources are not rehabilitated.",
+  "manuscript_C_statement": "The cost panel has 24/24 sealed same-build workflows. S2R-GEOM / S2R gives {'Win': 2, 'Lose': 4, 'UNDETERMINED': 2} across 8 repeated comparisons. S2R-SP / S2R gives {'Win': 3, 'Lose': 3, 'UNDETERMINED': 2} across 8 repeated comparisons. Any native-process or cost change is not an ideal relaxation-strength increase; unexposed root/node fields remain unknown.",
   "seed_repeats_not_independent": true,
   "full_raw_signed_gaps_preserved": true
 }

@@ -1,12 +1,12 @@
 {
-  "UTC": "2026-10-24T05:03:47.982681+00:00",
-  "G1_seconds": 49004.86621930066,
-  "remaining_G1_seconds": 94995.13378069934,
+  "UTC": "2026-10-24T11:43:09.514104+00:00",
+  "G1_seconds": 71131.19380520075,
+  "remaining_G1_seconds": 72868.80619479925,
   "by_category": {
-    "C": 249.66154539992567,
+    "C": 22373.336211999995,
     "D": 48682.16879070026,
     "qualification": 73.03588320047129,
-    "E": 0.0,
+    "E": 2.652919300016947,
     "C3": 0.0,
     "repair": 0.0
   },
@@ -18,11 +18,128 @@
     "C3": 4800,
     "repair": 8400
   },
-  "separately_reported_seconds": 1258.710473199957,
-  "unclosed": [
-    "formal_C03_01"
+  "separately_reported_seconds": 1603.8254403998144,
+  "unclosed": [],
+  "delivery_process_receipts": [
+    {
+      "label": "clock_diagnostic01",
+      "UTC": "2026-10-24T11:25:46.906368+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 10.165005899965763,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 10.165005899965763,
+      "exit_observed": true,
+      "start_unix": 1792841136.7411594,
+      "end_unix": 1792841146.9063685,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "clock_diagnostic_all01",
+      "UTC": "2026-10-24T11:33:58.803820+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 14.170911499997601,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 14.170911499997601,
+      "exit_observed": true,
+      "start_unix": 1792841624.633338,
+      "end_unix": 1792841638.8038204,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "final_tables01",
+      "UTC": "2026-10-24T11:21:49.890593+00:00",
+      "exit_code": 1,
+      "error": null,
+      "seconds": 25.078041800064966,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 25.078041800064966,
+      "exit_observed": true,
+      "start_unix": 1792840884.8022435,
+      "end_unix": 1792840909.8905933,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "final_tables02",
+      "UTC": "2026-10-24T11:38:38.706926+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 44.900559399975464,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 44.900559399975464,
+      "exit_observed": true,
+      "start_unix": 1792841873.8065777,
+      "end_unix": 1792841918.7069268,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "joint_note01",
+      "UTC": "2026-10-24T11:32:19.747299+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 0.07518839999102056,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 0.07518839999102056,
+      "exit_observed": true,
+      "start_unix": 1792841539.6721652,
+      "end_unix": 1792841539.747299,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "joint_note02",
+      "UTC": "2026-10-24T11:40:50.790879+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 0.077393600018695,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 0.077393600018695,
+      "exit_observed": true,
+      "start_unix": 1792842050.712738,
+      "end_unix": 1792842050.7908792,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "manuscript_final01",
+      "UTC": "2026-10-24T11:42:36.689469+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 0.15843029995448887,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 0.15843029995448887,
+      "exit_observed": true,
+      "start_unix": 1792842156.5308492,
+      "end_unix": 1792842156.6894698,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "publish_sources01",
+      "UTC": "2026-10-24T11:21:06.502154+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 1.2070512999780476,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 1.2070512999780476,
+      "exit_observed": true,
+      "start_unix": 1792840865.295159,
+      "end_unix": 1792840866.5021546,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    }
   ],
-  "active_not_yet_closed_excluded": true,
+  "active_delivery_receipts": [],
+  "separate_postverify_from_G1_receipts": 1603.8254403998144,
+  "separate_delivery_process_seconds": 95.83258219994605,
+  "separate_measured_total_seconds": 1699.6580225997604,
+  "writing_static_manual_wall_cost": "Estimate only: overlapping wall time from initialization to current delivery; not exact CPU, and not added to measured serial subprocess costs",
+  "no_nested_H_LP_MIP_or_child_delivery_cost_added": true,
   "delivery_plan": {
     "UTC": "2026-10-23T15:40:51.543226+00:00",
     "non_native_postverify": "measured disjoint segments inside group supervisors",
@@ -35,9 +152,5 @@
     "soft_estimates_not_G1_limits": true,
     "no_formal_window_changes": true,
     "writing_and_manual_reading": "wall elapsed estimate reported separately; not exact CPU"
-  },
-  "no_nested_cost_double_count": true,
-  "full_table_decode_deferred_until_sequence_completion": true,
-  "separate_management_CPU_seconds_at_snapshot": 2588.96875,
-  "management_CPU_scope": "Original waiter cumulative process CPU at snapshot; not native slowdown or another G1 wall charge"
+  }
 }

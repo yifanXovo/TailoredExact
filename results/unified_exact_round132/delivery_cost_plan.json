@@ -2,12 +2,30 @@
   "UTC": "2026-10-23T15:40:51.543226+00:00",
   "non_native_postverify": "measured disjoint segments inside group supervisors",
   "remaining_plan": {
-    "read_only_current_table_replay_soft_seconds": 2400,
+    "read_only_current_table_replay_soft_seconds": 7200,
     "PDF_export_soft_seconds": 900,
-    "packing_soft_seconds": 2400,
-    "public_recovery_soft_seconds": 3600
+    "packing_soft_seconds": 7200,
+    "public_recovery_soft_seconds": 18000
   },
   "soft_estimates_not_G1_limits": true,
   "no_formal_window_changes": true,
-  "writing_and_manual_reading": "wall elapsed estimate reported separately; not exact CPU"
+  "writing_and_manual_reading": "wall elapsed estimate reported separately; not exact CPU",
+  "scale_revision_UTC": "2026-10-24T12:34:18.127545+00:00",
+  "finite_tool_timeouts_seconds": {
+    "current_independent_replay_existing_launch": 7200,
+    "packing": 10800,
+    "public_recovery_outer": 21600,
+    "public_recovery_inner_isolated_checker": 10800,
+    "public_transport_existing_global_window": 1800,
+    "cleanup": 10800
+  },
+  "actual_scale_basis": {
+    "current_campaign_files": 1040559,
+    "current_campaign_logical_bytes": 5440301663,
+    "additional_current_progress_bytes": 47609257,
+    "source": "engineering/carrier_file_inventory.json; prepublication size stat",
+    "inherited_R131_archive_members": 264452,
+    "reason": "Current healthy independent replay exceeded initial2400s soft estimate; over one million required current journal files. Finite delivery allowances are registered before pack and one public recovery. No experimental cap, Seed, input, candidate or formal clock changes."
+  },
+  "cost_boundaries": "Full process wall receipts count each delivery outer once; nested children are not added. G1 unchanged."
 }
