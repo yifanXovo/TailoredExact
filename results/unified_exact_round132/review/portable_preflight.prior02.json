@@ -1,0 +1,12 @@
+{
+  "status": "FAILED_REVIEW_PRESERVE_EVIDENCE",
+  "error": "AssertionError()",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round132\\scripts\\round132_portable_check.py\", line 1184, in main\n    try: result,code=check(args.root,preflight=args.preflight,own_fee=args.own_fee)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round132\\scripts\\round132_portable_check.py\", line 1136, in check\n    rows,contract=frozen_contract(out)\n                  ^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round132\\scripts\\round132_portable_check.py\", line 259, in frozen_contract\n    assert {k:v for k,v in old_plan.items() if k not in ('UTC','cases')}=={k:v for k,v in new_plan.items() if k not in ('UTC','cases')}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0,
+  "no_performance_retry_authorized": true,
+  "seconds": 0.30138900002930313,
+  "previous_receipt_retained": "results/unified_exact_round132/review/portable_preflight.prior01.json",
+  "UTC": "2026-10-23T16:20:53.586620+00:00"
+}

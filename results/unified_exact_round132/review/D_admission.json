@@ -1,0 +1,43 @@
+{
+  "decision": "ACCEPT",
+  "D_execution_binding_SHA": "569fce35242e2e54a52aa63a145d5ffa3db7c5eabfacd5d9d2786198eeb4098c",
+  "UTC": "2026-10-23T15:05:42.843418+00:00",
+  "scope": "Separate internal preformal D review: committed source rules, actual public source/UTM16N mappings, byte reconstruction of all 12 inputs, nonnested station sets/historical overlap, all 60 complete frozen commands and order, original E3/DLL/source identities, zero-Optimize references, static G1 versus postproduction accounting",
+  "findings": [
+    {
+      "id": "D-F1",
+      "severity": "scope_qualification",
+      "blocking": false,
+      "finding": "K-35-B follows preregistered exposure tier1 and overlaps up to10 stations with historical selections; five other K roles have zero recorded overlap. Do not describe every K station as unseen."
+    },
+    {
+      "id": "D-F2",
+      "severity": "interpretation",
+      "blocking": false,
+      "finding": "X actual coordinates are EPSG:32616; inherited *_utm18n_meters keys are legacy writer names. Targets, initial stocks, weights and depot remain synthetic."
+    },
+    {
+      "id": "D-F3",
+      "severity": "accounting",
+      "blocking": false,
+      "finding": "Disjoint measured non-native verification/reconstruction segments are separated once from G1 outer time. Producer/native windows are unchanged; later actual budget/qualification still required."
+    }
+  ],
+  "counts": {
+    "inputs": 12,
+    "groups": 24,
+    "arms": 60,
+    "P": 24,
+    "S2": 24,
+    "PS": 12,
+    "cap_seconds": 84000
+  },
+  "evidence": "review/D_admission_checks.json",
+  "review_note": "review/D_admission.md",
+  "all_formal_positions_unexposed_at_review": true,
+  "Optimize": 0,
+  "H": 0,
+  "compile": 0,
+  "external_reproduction": false,
+  "strict_rational_model_equivalence_proved": false
+}

@@ -1,0 +1,217 @@
+# Durable Round132 checkpoint
+
+Worktree: `E:/codes/ExactEBRP-work/worktrees/round132`.
+Branch: `codex/round132-frozen-s2-expression-joint-study`.
+Research base: R131 / PR193 / `b97418ecc0b9f739232af484f999770c130ceb76`.
+Task: `goal.md` is the copied authoritative v2 user request. The thread goal is active.
+
+## Active serial work
+
+The D supervisor PID47868/tool session **90740** has completed all60 positions and exited normally with code0 (`D_SERIAL_RUN_RETURNED`). Do not restart or repoll that terminal session. `stage_transition_D_to_C.json` records the observed transition and the sequence's full D qualification/closed-fee barrier. D's original frozen E3, DLL and raw results remain unchanged. Formal C is now active under the continuing sequence; exact producer/child command and birth records remain in fees and arm directories. Never overwrite a seal or retry an ordinary timeout/Lose.
+
+The current same-task stage continuation is tool session **83618**, PID31680. `sequence_PID.json` binds it. The independently reviewed waiter repair and original/intermediate records remain in `engineering/sequence_waiter_repair01/`; no D native arm was interrupted or retried. The final waiter has passed its failed-receipt, closed-fee and60-qualified-D gate, and started `round132_C.py run` (PID49716, born2026-10-24T12:59:16.769639+08:00). C uses the admitted research PE `build-cache/round132/Round132Research.exe` SHAeac4e778cacb316c61928d4a6f1e4c90c8397cc94e0dc528695773703e98cce2 and original DLL, never D's performance. All24 C arms must qualify and close before the frozen bounded E script. The original dependency deadline is retained. Check actual identities before any recovery action. Native optimization stays serial; no compile/PDF/packing/heavy replay while formal timing runs. Complete-table decoding requires `sequence_completion.json`; even `--light` decodes the large group files.
+
+D uses original frozen E3 and original DLL. Its `D_execution_binding.json` and all imported adapter bytes have independent ACCEPT admission. Do not modify D-bound adapters or frozen plans during production. C uses separately qualified generated research translation units and a separate PE. `C_execution_binding.json` has independent ACCEPT admission. Every C arm retains underlying legal `S2R` for inherited source/cover verification; `expression` and `comparison_method` identify off/geom/sp in its immutable launch. Final tables must use `comparison_method`, not collapse these three arms into one S2R record.
+
+E's `E_experiment_plan.json` is finite and preregistered. `round132_joint.py` has no import-time optimization; `run` seals original asset/plan/runner identity before enumeration. The independent preformal scope is accepted. It saves all car plans, all disjoint pairs, actual current canonical/reference matrices, exact-rational reference rows, controls, support queries and strict/numerical witness classes. Full physical routes are not all enumerated in the output: each service vector retains the first legal route order. J4 is startup-zero in production and its artificial canonical model has explicitly recorded actual cutoff/W presence. Do not transfer tiny cuts to large inputs after deleting outside supply/receiver stations.
+
+## Completed work
+
+- A baseline, directed user-dirty hashes, source recipe and all 60 D commands/input identities; 12 original compact zero-Optimize references.
+- Actual K/X input reconstruction and D admission by the independent internal reviewer. Five K roles have zero recorded history overlap; K-35-B has partial overlap. X is Divvy Chicago, UTM16N, with the original synthetic stock/target/weight mechanism.
+- B ideal H projection/root/positive-lower proofs and general W projection/degenerate cases; actual source and matrix conditions audited. Serialized H UB additivity and W coefficient rounding are qualified numerically, not declared exact rational output equality.
+- C independent research build; default-off exact LP bytes vs E3; 12 canonical continuous LP checks; four real S12 CLI/own-H/Start workflows; C formal admission. All failures were preformal tools/checker issues, retained with fees; no normal performance result retried.
+- History-to-claim table (27 rows), scientific paper outline, complete mathematical analysis and a substantively reorganized manuscript source with full model/controller appendices. `manuscript.md` alone is the authoritative PDF text; companion appendix files are extracted supporting views.
+- Targeted literature: five original relevant full texts read; Yue publisher abstract/author metadata only after full-text access failures. Claims narrowed accordingly. Six new references plus ten inherited ones. No foreign full PDF is published.
+
+## Remaining required delivery
+
+1. Inspect the actual final D/C/E outcomes and repair only concrete defects if any, keeping failed records and original budget categories. Healthy open outcomes are complete. Do not add new inputs/Seeds or extend caps. C3 is at most one optional, justified mechanism and is not automatically triggered.
+2. Build read-only `observations.json`, complete arms/pairs and per-source/size/positive-zero summaries. Reuse R130/R131 physical/source-return-cover readers. Preserve signed gaps, open null T_cert, actual horizons, unrounded strict directions, shared controls and Seed-repeat denominators. Add native cost/Work/nodes, actual field exposure and physical G/P_avg/rho/routes. Unknown root/node fields remain unknown.
+3. Write `joint_structure_note.md`, distinguish exact strict full-reference witnesses from numerical candidates/finite no-separation, reoptimized micro objective effects and the outside-station barrier to any large-role claim. Do not call finite no-increment hull equality.
+4. Update manuscript using `round132_documents.py draft` with final current tables and explicit scoped scientific conclusion. Update remaining old stage strings in the final method summary without changing frozen evidence records.
+5. Obtain the same independent reviewer's final read-only review of all outcomes, pair directions, important witnesses, mathematics and paper claims. It is an internal independent executor, not external replication. Reuse collaboration agent `independent_review`.
+6. Export the final PDF with the established Pandoc/XeLaTeX pipeline only while no formal native work is running. Follow the pdf skill's required `mark_artifact_operation_started.mjs` once immediately before first PDF-authoring command. Render and inspect all changed/reorganized pages, formulas, tables, references and pagination. Retain failed/different drafts and report final visual QA.
+7. Scan actual publication carriers/loose text, excluding credentials, license files, native binaries, standalone proprietary fonts and foreign full papers. Archive only current necessary raw/qualification/failure/E records and exact small dependencies; retain originals until recovery passes.
+8. Commit normally, push, create English **stacked Draft PR on the R131 research branch**, read actual remote base/head/Draft/open/unmerged and key tables, attach PR to this chat. Do not merge, force push, alter defaults or contact others.
+9. Perform exactly one current-scope anonymous public empty-root read-only recovery in the E work root, pinned to the science commit. No old-checkout fallback, Optimize or compilation; replay all current rows and necessary witnesses. Reuse finite R130/R131 export/restore tools with narrow adaptations rather than recovering all historical raw.
+10. After remote readability and successful recovery, guarded cleanup only of this round's reconstructible duplicate/intermediate objects; retain unique raw/certificates/failures/different drafts/native assets/user changes/old worktrees. Record file bytes and observed E-free delta separately.
+11. `final_report.md` must separately accept current-work and research lines, answer all five H questions, report actual G1 versus separate delivery costs, legitimate unentered steps and material limitations. Overall COMPLETE only when every applicable obligation is satisfied. Close goal only then.
+
+## Accounting
+
+`round132_common.py budget` reads closed disjoint fee receipts. Live child cost is not yet charged until its receipt closes. G1 categories: D84000, C32400, qualification3600, E10800, optional C34800, concrete repairs8400; total144000 seconds. Group outer cost subtracts separately measured non-native postproduction verification and reconstruction segments. Do not sum nested H/LP/MIP again. Writing/static review/export/packing/recovery are separately reported; their timing estimates must be labelled where not exact.
+
+At the first sealed D group: P open571.093s; S2 certified112.642s; PS open570.602s, all qualified. This one Seed0 input is not an overall conclusion. First closed G1 total1327.406s plus current live D; separately measured56.986s. No scientific outcome authorizes algorithm tuning or redraw.
+
+## Delivery preparation update (2026-10-24 local)
+
+D has reached ten sealed arms (both Seeds of K-15-S and K-15-B); the original D supervisor and serial continuation remain healthy. The authoritative live status is still the actual process records and current seals, not this historical checkpoint paragraph.
+
+`round132_analysis.py` now checks arm/group/plan identities and source SHAs, keeps failed derived evidence unevaluable, adds per-problem/size/attained-zero strata and cross-arm consistency without transferring witnesses, indexes the actual compact native callback files outside arm directories, and includes target-MIP costs. A derived prefix-load error was fixed to follow `route.nodes`, because operations are station-sorted. The original independent physical verifier already used route order; production and physical evidence were unaffected. Corrections are in `engineering/derived_analysis_corrections.json`. Its full mode must run only after all84 arms, receipts and budget checks close. It also replays two existing R131 S2 fleets from one small inherited review JSON, with explicit historical labels, for operational interpretation.
+
+`round132_release.py` narrowly adapts the passed R129/R130 ZIP/index/anonymous restore machinery. `sources`, `pack`, `manifest` run after the serial sequence only. There are32 current group archives plus one qualification/closed-fee/generated-source archive and one E archive, total34. Actual `result.gurobi_progress_path` files under this worktree's `results/gurobi_work` are included only when bound to a current launch; never traverse old native progress. Generated pack source has passed static Python compilation; packing has not run. Future transport/read-only timeouts are separate from G1.
+
+`round132_notes.py joint` writes the joint note and scoped conditional decisions from actual sealed E. Inspect those decisions before treating them as final: no new full-role interface is implied by a tiny strict point. `reproducibility.md` is a prepared entry, not a claim that recovery has already passed. `round132_documents.py draft` is wired to include every new S2 Seed0 fleet plus two historically labelled existing fleets after final analysis. Do not export the provisional paper.
+
+Before E execution, `round132_joint.py` additionally retains original-objective before/after native LP returns, primal/RC/Pi (by row index), numerical quality, and exact actual B_joint matrix; their SHAs enter each case. This adds no Optimize, normals or enumeration. The reviewer requested and is reviewing this evidence-only increment. E's plan and its domain remain unchanged.
+
+The same independent reviewer is preparing `scripts/round132_portable_check.py`; do not overwrite its in-progress file. It will gate on all84 closeouts before raw review, rebuild all64 pairs independently, audit actual C differences/H/domains, and purely replay E evidence within the supplied root. No heavy review has started. Final check execution must await explicit readiness after formal stages.
+
+PDF skill was read and announced, but its exactly-once marker has NOT run and no PDF was authored. The marker is `C:/Users/Administrator/.codex/plugins/cache/openai-primary-runtime/pdf/26.1017.22136/skills/pdf/container_tools/mark_artifact_operation_started.mjs`; run the installed Node command successfully once immediately before the first PDF-authoring command. Use E temp/TMP throughout, render and inspect every reorganized page, preserve different drafts and logs. No native timing competition.
+
+### Static preparation handoff after midnight
+
+Independent prepared checker `scripts/round132_portable_check.py` SHA `a6939dae51f8f29870d6ad48934fd344afd55907af87be769e5537317afa3033` passed its small-plan-only preflight in0.336s. See `review/portable_checker_handoff.md` and `review/analysis_static_resolution.json`. The reviewer is idle and must receive a final `followup_task` only after formal readiness; do not spawn another agent or duplicate the heavy review.
+
+E had one justified **pre-execution coverage amendment**: original four cases were all balanced. J1/J4 are unchanged; J2/J3 now use b=[2,1,0,0], Q=[1,2], T240/360, covering shortage and two cumulative-pickup budgets. No E enumeration, H, LP or directions were exposed before amendment; D/C feedback was not used. All original noncase/nonUTC plan fields are identical and all caps/counts remain unchanged. Original plan/runner and the failed intermediate plan serialization (which omitted three inherited textual contracts) are preserved in `engineering/E_shortage_coverage_amendment/`. Final independent ACCEPT is `review/E_coverage_capture_addendum.json`, plan SHA `d8de4cba395f475c83b8f22e8fc0abd31c887ffe0fdb6c289ce0af626adad7dd`, runner SHA `8d0d723a32a8f11dcd240778e44d6f172c44f02fe5c65e05c706d13b9ceafdf6`. Do not edit admitted E further without a concrete need and explicit identity update.
+
+`round132_delivery.py` meters final **separate** delivery children under `OUT/delivery_costs/`, leaving the strict G1 `fees/` unclosed gate empty. Syntax: `python -B scripts/round132_delivery.py run <unique-label> <timeout-seconds> <executable> <args...>`. It refuses before sequence completion. Use for final analysis/review/PDF/packing/recovery; no `--own-fee` exemption is needed. `account` refreshes measured outer delivery plus the disjoint postverification seconds; never add child checker/LP times again. Keep writing/manual/static work separately labelled as an estimate.
+
+`scripts/round132_cleanup.ps1` is narrowly derived from R131's passed guarded routine and parsed successfully; it has NOT run. It requires actual remote open Draft/unmerged readback (`remote_readback.json` schema: status PASS, science_commit, pr.state/draft/merged), passed same-root recovery, no active native/build/archive process, exact manifest/hash ownership and preserved recovery receipts. Only matching temporary full ZIPs, matching successful recovery expansion, inspected page PNGs and byte-identical temp PDFs are eligible. It retains differing content, all unique raw/certificates/failures/native assets and old/user work. Our dirty baseline is an object with `.paths` and `.SHA`, already adapted. Do not remove the worktree.
+
+The two historical operational fleets were actually replayed from the small pinned R131 review JSON (no old raw carrier). One valid35-station fleet has cumulative pickup58 with Q20/prefix peak20, fleet return38 and stock660→622; the manuscript uses this as an explicitly historical open fleet example. The current paper bibliography now identifies production source7564 while inherited model line pointers remain explicitly historical355. The pending manuscript needs its final actual D/C/E abstract, conclusions, result strata and joint note after all native work. All84 results and budget/delivery receipts, final independent acceptance, PDF visual QA, release/recovery and final report/PR remain required.
+
+## Latest verified checkpoint: 2026-10-24 after the stage-waiter resource repair
+
+The prior checkpoint counts above are historical. D has all60 qualified sealed positions, all receipts closed and its supervisor exited0. `closed_producer_summary_checkpoint.json` now joins all24 small closed producer stdout summaries to the frozen plan/launches. K certificate observations are S2 6/12, P2/12, PS0/6; X is S2 12/12, P7/12, PS4/6. Seeds remain repeats. `C_closed_producer_summary_checkpoint.json` records the first6 qualified C positions from two closed groups, with immutable expression/comparison-method mapping; the inherited underlying reader label is S2R for all three and must not collapse them in tables. E has not started. These small status reads do not replace final raw replay or independent acceptance. The full-table snapshot remains20D/16typed pairs until all D/C/E native work exits. No result changes the frozen method, plan, input/Seed or cap.
+
+D's important negatives remain: both K35 roles are open at both Seeds; PS has better attained U than S2 on K-35-B, and K-35-U has different primal/dual directions by Seed. X15-B has a small strict timing reversal, X20-U a PS/P timing reversal, and zero X35-B is faster under PS than S2 at both Seeds. X35-U is also a zero-optimum problem: Seed0 S2 certifies120.82926776667591s while P remains open; Seed1 P/S2 both certify in2072.2195326345973/448.4828956000274s. Preserve all signed gaps and defer actual backend/H attribution to full replay. Zero35 results do not establish positive-objective35 proof performance.
+
+C group01/02 SC-C15-B is qualified certified for all six workflows with the same physical U0.006760777159896834. Seed0 off/geom/sp T_cert57.898493139538914/26.05919850000646/41.74538850004319s; Seed1 off/geom/sp32.46162590000313/42.838284399942495/48.59409794793464s. Retain the candidate timing reversals; equivalent projection is not stronger LP. Current C group03 SC-B20-S Seed0 is in sp/geom/off order. Its group PID41876 was born2026-10-24T13:03:35.627037+08:00; native Round132Research PID36116 was born13:03:36.339599+08:00 with `--round127-mode s2-root --round132-expression sp`. Sequence PID31680/session83618 and C supervisor49716 are healthy. Always recheck because children change naturally. Do not launch a second C/E sequence.
+
+For final analysis, `round132_analysis.py` now adds a separate `problem_objective_class` (qualified physical zero, positive qualified lower bound beyond1e-7, otherwise unknown) and `problem_objective_classification.json`. This corrects the interpretation of an open P positive endpoint on a problem where S2 already found a legal zero. Own attained-endpoint classes, U/L, certificates and times stay unchanged; no information is supplied to production. The source and authoritative manuscript explain the two classifications. Only syntax was checked during native work; final full replay and the same independent reviewer must verify these new strata and the waiter-lifetime annotations after all D/C/E exits.
+
+`timing_environment_amendment.json` records the initial waiters background-load defect, conservative exposure interval and preserved native identities. `round132_analysis.py` now derives explicit producer-receipt-bound waiter-lifetime overlap annotations for final-only tables, after sequence completion. These are not measured parsing, CPU-contention or slowdown seconds; no-overlap does not establish quiescence. Existing observations are retained with this timing limitation. `review/sequence_waiter_interim_review.json` accepts the local repair and finite claim scope without campaign/raw decoding; final heavy review remains pending all experiments. The original amendment is a creation-time receipt for the first replacement; `engineering/sequence_waiter_repair01/deployment.json` and `resolution.json` identify the final replacement.
+
+Closed G1 is49004.86621930066s (D48682.16879070026, C249.66154539992567, qualification73.03588320047129); remaining94995.13378069934s. Separately measured disjoint postverification/reconstruction is1258.710473199957s. Current live formal_C03_01 is not yet included. Original waiter2588.96875 process CPU seconds at its snapshot are separate management work, not native slowdown or another G1 wall charge. E free space was190841548800bytes at the latest check. All native assets and existing user work remain in place. No PDF export, packing, heavy final review or recovery has run. All remaining obligations in this file still apply; neither scientific line nor overall delivery has been declared complete.
+
+
+### Latest closed C checkpoint: 2026-10-24 13:46 local
+
+C now has9/24 closed qualified observations across three groups. SC-B20-S Seed0 was executed in sp/geom/off order. SP and off certify in730.3500169890467/981.1175647999626s; GEOM has qualified evidence but no own certificate (U0.31538912105343897, L0.31538869722423574, T_cert null). This normal return is an open observation, not an invalid execution, and will not be retried. Off retains its small negative signed gap unchanged. Interpretation remains provisional until final raw replay and independent review.
+
+The original serial sequence PID31680/session83618 and C supervisor49716 continue. C group04/SC-B20-S Seed1 started normally at13:45:02; its first off native was PID55740, born2026-10-24T13:45:02.985827+08:00, parent34532. Check actual live identity before any recovery; children change naturally. E has not started. No PDF/heavy review/packing/recovery has run. `review/final_reporting_addendum.md` documents the extra final independent checker coverage required for problem-level objective classes and conservative waiter-lifetime exposure annotations; it does not authorize an early heavy review.
+
+Closed G1 now51423.81053900067s, remaining92576.18946099933s; separately measured disjoint verification/reconstruction1326.3589985999279s. Active C04 is excluded until its receipt closes. E free bytes at the last process check:190394474496. Full derived tables remain the old provisional snapshot until the entire native sequence ends.
+
+
+### Final reporting preparation update after C03
+
+`final_report.md` now contains the provisional two-line acceptance table and all five required scientific answers, with C/E/final-analysis/review/PDF/public-delivery items explicitly pending. It is not a completion receipt. The report preserves D adverse results, zero35 scope, own-H attribution limits and background-load limitations.
+
+The same independent reviewer has now extended its portable checker for problem-level objective classes/witnesses/fine strata and producer-bound waiter-lifetime annotations/84-row CSV/85 source bindings. New checker SHA is `0e7d939c4e3a99561172170489733a83f524dc9d25f876da03c1977ffdbfc452`; `review/portable_checker_reporting_preflight.json` accepted the small plan and synthetic reporting contracts in0.48323490004986525s, with zero Optimize/native starts/compilation and no raw/reconstructed replay. Old checker identity is retained by Git and handoff. This is preparation only; the single heavy final evidence review must still wait for all84 C/D observations, E and G1 fees/sequence completion.
+
+
+### Closed C04 / halfway C checkpoint
+
+Recorded UTC: 2026-10-24T06:26:33.651441+00:00.
+
+C has12/24 closed qualified observations. C04/SC-B20-S Seed1 has own certificates for off/geom/sp in675.0859902321827/776.5733161000535/821.2243648000294s, all with U0.31538912105343897. Retain the candidate slowdowns and C03 GEOM open result; no normal result is retried. The small checkpoint now binds all four closed group summaries; final complete raw tables remain deferred.
+
+The original sequence PID31680/session83618 and C supervisor49716 continue. C05/UC-C20-U Seed0 began14:24:12 local with off native PID38052, born2026-10-24T14:24:12.632378+08:00, parent13936. Check actual process/arm identities, since normal serial transitions change children. E has not started. The same reviewer is idle after the new static checker/preflight acceptance; call it for final heavy review only when all required native work/fees/sequence close.
+
+Closed G1 at C04 close is53696.72852070071s (C4941.523846799973, D48682.16879070026, qualification73.03588320047129), remaining90303.27147929929s. Separate disjoint verification/reconstruction is1403.0252140999073s. C05 is not included until its receipt closes. The provisional final_report.md has been updated to this checkpoint, not marked accepted. All outstanding PDF/PR/recovery/cleanup obligations remain.
+
+
+### Closed C05 checkpoint
+
+Recorded UTC: 2026-10-24T06:54:34.505559+00:00.
+
+C has15/24 closed qualified observations. UC-C20-U Seed0 has own certificates for off/geom/sp in552.6025591740618/513.6979249999858/540.9169985998888s with the same U0.3835535885117132. Magnitudes and exact strict directions remain separate; do not infer uniform improvement from this one repeated observation. Complete final raw replay is still pending.
+
+C06/UC-C20-U Seed1 began normally in sp/geom/off order. Its first native PID56216 was born2026-10-24T14:52:17.902619+08:00, parent10468. Sequence PID31680/session83618 and C supervisor49716 remain the continuing original handles. Native children change at normal serial transitions. E, heavy final review, PDF export, packing and public recovery have not run.
+
+Closed G1 at C05 close:55303.98019110062s, remaining88696.01980889938s. C6548.775517199887, D48682.16879070026, qualification73.03588320047129; E/C3/repair0. Separate disjoint verification/reconstruction1480.983389699948s; live C06 excluded until close. E free at C06 start189506437120bytes. The current .gitattributes already preserves Round132 scripts and all current output bytes as -text. A lightweight file-name search found no standalone LICENSE/NOTICE/COPYING file in the current sparse checkout; no file was removed or relabelled.
+
+
+### Closed C06 / three known roles complete
+
+Recorded UTC: 2026-10-24T07:24:19.984619+00:00.
+
+C has18/24 closed qualified observations, with17 own certificates. UC-C20-U Seed1 certifies off/geom/sp in476.8194262998877/611.2647741000401/497.2456777810585s, same U0.3835535885117132; retain candidate slowdowns and original tiny negative signed gaps. C03 GEOM remains the single open observation among these18, never retried. Candidate timing directions remain mixed. The complete derived tables are still the old provisional20D/0C snapshot, pending the end of the whole native sequence; do not confuse that snapshot with these small closed producer summaries.
+
+C07/PB-C35-U Seed0 has started in sp/geom/off order at15:20:12 local. Its first SP native PID49296 was born2026-10-24T15:20:12.628261+08:00, parent39872. Actual argv binds PB-C35-U, Seed0, --T10800, --time-limit2394, --process-wall-time-limit2400, --process-shutdown-margin30, threads1, legal s2-root and expression sp. Sequence PID31680/session83618 and C supervisor49716 remain the original live handles. C08 is Seed1 off/geom/sp; all six remaining arms keep their registered2400s caps. Check current process identity before any recovery; no second C/E runner.
+
+Closed G1 at C06 close is56889.34601810074s (C8134.141344200005, D48682.16879070026, qualification73.03588320047129); remaining87110.65398189926s. Separate disjoint verification/reconstruction1570.308241599938s. Live C07 is excluded until closed. E free at C07 start189024735232bytes. E is not started; final heavy analysis/review/PDF/pack/restore/cleanup all remain required. The PDF skill marker has never run. The latest portable checker is0e7d939c4e3a99561172170489733a83f524dc9d25f876da03c1977ffdbfc452; same independent reviewer is idle, waiting for explicit all-stages readiness.
+
+Lightweight release-source inspection confirmed the inherited restore entry maps current names and uses the current portable checker,34 expected current carriers, anonymous curlrc-disabled transport and one owned E restore root. No recovery or archive was started. The base root has no LICENSE/NOTICE/COPYING entry; the case-insensitive sparse checkout name search matched only three old licensed-runner Python filenames, not standalone license files. Existing inline source notices stay in the published source bytes. The .gitattributes already preserves current Round132 script/output bytes; no normalization change was needed.
+
+
+### Light manuscript copyedit during C07
+
+The main text and raw-string generator now use mathematical notation for inventory, capacity, weights and effective penalty, state nonnegative lambda explicitly, and say that the exact selected product holds at a one-hot inventory selector. The inherited current appendix explicitly lists those selectors as binary. The background-load paragraph now has the intended space in new 35-station and the possessive waiter wording. No experimental result, plan, C/D/E source, PE/DLL or deadline changed; the generator was not executed and no PDF marker/export ran. The generator retains its original LF line-ending style.
+
+After the full post-native analysis, the final C interpretation must use the actual canonical LP, native Work/nodes/costs and same-H/domain exposure from mechanism_costs.csv and same_H_and_scope.json, with a concise readable mechanism table/paragraph where supported. Unknown root/presolve fields must remain unknown; a last zero-node callback is not an exact root end. Final source still needs all actual D/C/E statements and all remaining gates in this checkpoint.
+
+
+### C07 first production seal; GEOM continuing
+
+The C07 Seed0 SP production arm sealed normally and the same group continued to GEOM. C remains18/24 closed qualified observations until the whole group and its fee close; no partial group is mixed into C_closed_producer_summary_checkpoint.json. The new native PID30116 was born2026-10-24T15:59:44.832694+08:00, parent39872; exact observed argv has PB-C35-U, Seed0, legal s2-root, expression geom, physicalT10800, processcap2400/time-limit2394/shutdownmargin30, one thread. Sequence PID31680/session83618 and C supervisor49716 are still the original live handles. Check actual children before recovery; SP PID49296 ended normally and must not be restarted.
+
+The manuscript/generator copyedit is committed (latest2cd46c4e2). Both keep the same logical text, canonical binary-selector premise and original LF generator style; only prose/math notation changed. No source plan/PE/DLL/native algorithm changed. All final analysis/independent review/PDF/publication/recovery/cleanup obligations still wait for the required native stages. No PDF marker or public restore has run.
+
+
+### C07 final baseline arm
+
+C07 SP and GEOM production arms have sealed and the same supervisor has started the final off baseline. Current baseline native PID55960 was born2026-10-24T16:39:17.532314+08:00, parent39872. Actual argv remains PB-C35-U, Seed0, legal s2-root, expression off, T10800, processcap2400/time-limit2394/shutdownmargin30, threads1. The sequence PID31680/session83618 and C supervisor49716 are unchanged. Do not restart terminal SP49296 or GEOM30116. Closed qualified C remains18/24 until formal_C07_01 closes; its live cost is not yet in the closed G1 total56889.34601810074s.
+
+
+### Closed C07; last registered C group active
+
+Recorded UTC: 2026-10-24T09:21:17.156019+00:00.
+
+C has21/24 closed qualified observations,17 own certificates. C07/PB-C35-U Seed0 is open under all three expressions: SP U/L0.16237905057683977/0.0847221716426949; GEOM0.17413853672442434/0.08596586236621835; off0.1837015568695711/0.0847282772541659. All T_cert remain null. Keep the better candidate primal endpoints and GEOM dual endpoint, but all candidate/baseline certification-time directions for this Seed are UNDETERMINED. No normal open result is retried. Small source-bound C checkpoint now covers all seven closed groups; full raw-derived tables remain deferred.
+
+C08/PB-C35-U Seed1 began in off/geom/sp order. Its first off native PID36492 was born2026-10-24T17:18:56.877096+08:00, parent31440. Exact observed argv keeps legal s2-root, expression off, Seed1, T10800, processcap2400/time-limit2394/shutdownmargin30 and one thread. Original sequence PID31680/session83618 and C supervisor49716 continue. C07 SP49296, GEOM30116 and off55960 are terminal normal runs; never restart them. All three remaining registered C positions must close before the sequence starts the frozen bounded E runner. No second C/E supervisor.
+
+Closed G1 at C07 close is64003.1795804007s (C15247.974906499963, D48682.16879070026, qualification73.03588320047129); remaining79996.8204195993s. Separate disjoint verification/reconstruction1579.1474978999468s. C08 live cost is excluded until close. E free at C08 start189023379456bytes. E has not started. Final read-only all84 analysis, full independent review, PDF/visual QA,34-carrier publication, English stacked Draft PR, one anonymous public recovery and guarded owned cleanup all remain outstanding. The PDF marker has never run; no PDF, packing or public recovery exists.
+
+
+### PDF entry readiness refinement during C08
+
+The PDF skill was reread in a read-only preparation step. Its create marker must still run successfully exactly once immediately before the first actual PDF authoring command. No marker/export/compile/render has run. Existing Pandoc, MiKTeX XeLaTeX and bundled Poppler commands are present. The actual inherited entry is scripts/round126_export.py; an initial wrong filename lookup and a GBK stdout encoding failure were only static reads, created no artifact and incurred no native experiment. UTF-8 output reread the actual source successfully.
+
+R132 documents.pdf now enforces the current release.idle gate itself before creating temporary sources, so it recognizes Round132Research and requires the whole sequence plus closed G1 fees, including E. It fixes PDF/receipt outputs to this round instead of honoring old ROUND126 destination environment variables. Exact inherited source-replacement sites are asserted. The export receipt will bind current manuscript, bibliography, generator and inherited exporter hashes, the assembled export function, generated reading MD/TeX and PDF SHA; it also verifies source bytes stayed unchanged during export. AST/static adaptation checks passed; the PDF entry was not called. This delivery-only change does not alter any D/C/E producer, plan, asset or cap.
+
+
+### C08 baseline production sealed; GEOM active
+
+C08 Seed1 off baseline production has sealed and the same supervisor continued to GEOM. Current native PID14936 was born2026-10-24T17:58:32.269871+08:00, parent31440. Observed argv retains PB-C35-U, Seed1, legal s2-root, expression geom, T10800, processcap2400/time-limit2394/shutdownmargin30 and one thread. Off PID36492 ended normally and must not be restarted. Sequence PID31680/session83618 and C supervisor49716 continue. Closed qualified C remains21/24 until formal_C08_01 closes. E still waits for all24 qualified C positions and closed fees; no second producer.
+
+The PDF source-binding paths additionally resolve before root-relative recording, retaining portability for both imported and script entry forms. This is a delivery-only source refinement. The PDF marker/export and all heavy final operations remain unrun.
+
+
+### Last registered C production arm active
+
+C08 Seed1 GEOM production has sealed and the last registered C arm, SP, is active. Native PID36220 was born2026-10-24T18:38:17.259112+08:00, parent31440. Exact observed argv is PB-C35-U, Seed1, legal s2-root, expression sp, T10800, processcap2400/time-limit2394/shutdownmargin30, threads1. Terminal off36492 and GEOM14936 must not be restarted. Original sequence PID31680/session83618 and C supervisor49716 continue. C remains21/24 closed qualified positions until formal_C08_01 closes. The sequence then checks all24 C qualifications and closed G1 fees before the frozen bounded E script; do not independently start E. No full-table replay/PDF/pack/recovery before the whole sequence closes.
+
+
+### All required native work closed; final reporting investigation
+
+D60/60, C24/24 and the frozen four-case bounded E step have all returned and all G1 fees are closed. The original sequence session83618/PID31680 and its Native children are TERMINAL; do not poll or restart them. sequence_completion.json is the producer completion authority. C08 PB-C35-U Seed1 remains open under all three expressions: off U/L0.18026765619352014/0.08370043172581312, GEOM0.16747142094227702/0.08559747004730209, SP0.18714523568930694/0.08576976512615972. T_cert is null for all three, and certification-time ordering is UNDETERMINED. C has17 own certificates among24 produced arms.
+
+E completed all four complete tiny universes,64 normals and8 event controls each. J2 retains an exact full-reference strict quantity/ownership witness with lhs15/2 > complete joint support7, but the original objective stays0.15 on both sides. All four cases have no qualified objective increment. Full-real-role steps are not admitted because a same-full-universe support upper bound/interface with outside donors/receivers is absent. These are finite results, not a general new cut or hull-equivalence theorem.
+
+Closed G1 is71131.19380520075s (D48682.16879070026, C22373.336211999995, qualification73.03588320047129, E2.652919300016947); remaining72868.80619479925s. Separate disjoint postproduction verification/reconstruction1603.8254403998144s. publish_sources01 succeeded, joint_note01 succeeded. No PDF marker/export, packing, push/PR, public recovery or cleanup has run.
+
+The first full author analysis final_tables01 stopped at its certification-clock assertion, preserving its25.078041800064966s failed receipt. clock_diagnostic01 then completed read-only in10.165005899965763s. It found one real source-reduction case: D_group24/X-35-U/Seed1/S2, with own physical F=0 and independent objective floor0, original own T_cert448.4828956000274, but source_reduced=true/native_proof_qualified=false after rejecting call4 native bounds above a verified zero. The old R127 blanket performance qualifier excludes any source reduction while R130's sealed reconstruction retains an own-zero certificate. Raw, source rejection and producer clocks are unchanged. Do not erase the contradiction or quietly loosen the performance gate. The same independent reviewer is investigating the narrow reporting disposition before final full replay. Full source-bound outputs still contain the old provisional20D/0C snapshot until this is resolved; never cite them as complete.
+
+Next: resolve and document this one reporting/clock mismatch conservatively; regenerate complete all84/64-pair analysis; finalize actual E/math/history/paper, then same-reviewer full check, PDF/ALL-page visual QA,34-carrier scan and English stacked Draft PR, one pinned anonymous public recovery, guarded cleanup and actual final remote readback. No new Native performance trial is authorized by this reporting issue.
+
+
+### Complete scientific sources ready for independent final replay
+
+final_tables02 succeeded in44.900559399975464s with all84 arm rows/64 planned pairs,83 performance-eligible observations and one disclosed source-reduced own-zero proof. The raw clock/certificate are retained separately; formal-performance T_cert/censoring are null and the comparison remains UNEVALUABLE. S2/P is16 Win,1 Lose,6 UNDETERMINED,1 UNEVALUABLE; eligible S2/P/PS certificates17/9/4 plus one excluded own-zero S2 proof. Every physical/cost/trajectory/timing row remains. This preserves frozen R127 eligibility and does not repair native source reliability or authorize a retry. The narrow independent own-route/source/seal review supports the explicit disposition.
+
+Actual joint note, mathematical analysis, history ledger, method manifest, complete manuscript and scientific final report are now written. C geometry2/4/2 and W3/3/2 mixed directions, all actual same-H/domain exposures, PB35 open endpoints, PS reversals and J2 strict/no-objective-increment are explicit. Original manuscript/model/algorithm authority is unchanged. The independent checker was separately extended by the same reviewer for faithful source-loss reporting; old checker bytes are preserved under review. The reviewer has been instructed to run final_independent01 exactly once with its own-fee exemption and then check math/paper/report claims. Inspect actual receipt/process before any continuation, never start a duplicate checker. No PDF marker/export, pack, push/PR, public recovery or cleanup yet. Overall delivery remains pending.
+
+
+### Final PDF accepted; one current independent replay remains active
+
+All45 PDF pages are visually accepted under review/pdf_visual_qa.json, bound PDF SHA f9d1a80db93e8264261008133ab0f587c4ee749bcf0bcd707bfad6623ed9b28d. The single marker was run before pdf_export01 and must not repeat. Four distinct PDF drafts are retained; only reproducible PNGs and the byte-identical final temporary PDF may later be cleaned. All earlier scientific-source/cost dispositions above remain. Independent review final_independent01_resume03/PID40532, born2026-10-24T19:53:21+08, is active under its existing7200s finite timeout and is managed by the same reviewer/session79040. Earlier attempts failed before evidence loading, not Native experiments. Final claim review found no new static scientific blocker and awaits this terminal replay. No duplicate replay, Native rerun or expanded research. The actual1,040,559 current campaign members/5.44GB require finite delivery allowances recorded in delivery_cost_plan.json before packing and one public recovery; G1 is unchanged. No pack, push, PR, public recovery or deletion has yet run.
+
+
+### Independent full replay PASS; finite raw packing active
+
+Round132 D60/C24/E4 are terminal; all G1 fees are closed71131.19380520075s. Do not restart any Native arm or the old sequence. Independent final replay final_independent01_resume03/session79040/PID40532 is now TERMINAL PASS (outer5541.306450600037s). Actual84 arms/64 comparisons,83 performance-eligible,one disclosed source-loss UNEVALUABLE,no unresolved evidence contradictions,Optimize/native/build0. Final45-page PDF SHA f9d1a80db93e8264261008133ab0f587c4ee749bcf0bcd707bfad6623ed9b28d has complete visual QA. The same independent reviewer is finishing the final written review/handoff. Active delivery: pack01, tool session13507, childPID41172,parent49044,start_unix1792848408.622475, command Python -B scripts/round132_release.py pack,finite10800s. Last actual session poll was running with no error; inspect this same handle/owned PID and receipt before any continuation. No duplicate pack. Peak guard passed:188901437440 free versus60154083729 conservative additional bytes; raw5535765415 logical bytes. Remaining: review text closure, completed34 current carriers, resource accounting/final scientific report, exact export manifest/staging, normal push and English stacked Draft PR, actual remote readback, one pinned anonymous public empty-root recovery, guarded owned cleanup and final metadata readback. No push/PR/public recovery/deletion has run. Keep all new work under E:/codes/ExactEBRP-work. Final native windows and input/Seed/candidate counts unchanged.

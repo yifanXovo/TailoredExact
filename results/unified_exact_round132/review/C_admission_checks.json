@@ -1,0 +1,57 @@
+{
+  "scope": "lightweight separate internal C review of saved qualification and frozen formal positions",
+  "C_execution_binding_SHA": "3248070303dd4157ea0df766b859108b354dffffa7ee9909abe98352f9480135",
+  "checks_passed": 908,
+  "formal_arms": 24,
+  "groups": 8,
+  "cap_seconds": 32400,
+  "actual_S12_geometry_rows": {
+    "spread": 66,
+    "fixed": 132,
+    "variable": 132
+  },
+  "actual_S12_projected_rows": 12,
+  "actual_S12_FM_max_rounding_residual_bound": 2.2106544245719703e-14,
+  "reported_all_fixture_FM_max_bound": 4.183533441835392e-13,
+  "actual_Start_receipts": [
+    {
+      "name": "qualification/C_native_E3",
+      "matrix_SHA": "c10d3aef0eac8d501b32be9a349cd9c7a45483debd545f2a6405ff9d42fae7f2",
+      "checked_rows": 2752,
+      "maximum_row_violation": 0,
+      "Start_objective": 0.29907089418635313,
+      "status": "accepted_by_native_log"
+    },
+    {
+      "name": "qualification/C_native_off",
+      "matrix_SHA": "c10d3aef0eac8d501b32be9a349cd9c7a45483debd545f2a6405ff9d42fae7f2",
+      "checked_rows": 2752,
+      "maximum_row_violation": 0,
+      "Start_objective": 0.29907089418635313,
+      "status": "accepted_by_native_log"
+    },
+    {
+      "name": "qualification/C_native_geom",
+      "matrix_SHA": "d9078e99b61cbcd05a58281e821e72dd12542f05d3db4e570318765e324bdf52",
+      "checked_rows": 2422,
+      "maximum_row_violation": 0,
+      "Start_objective": 0.29907089418635313,
+      "status": "accepted_by_native_log"
+    },
+    {
+      "name": "qualification/C_native_sp",
+      "matrix_SHA": "a554c6da85981e78a2b4e80a7dd092c5e4c66e2078f1000982d1261d43ca7743",
+      "checked_rows": 2759,
+      "maximum_row_violation": 0,
+      "Start_objective": 0.29907089418635313,
+      "status": "accepted_by_native_log"
+    }
+  ],
+  "all_formal_positions_unexposed": true,
+  "review_Optimize": 0,
+  "review_H": 0,
+  "review_compile": 0,
+  "elapsed_readonly_seconds": 0.23868029995355755,
+  "strict_rational_serialized_matrix_equivalence_proved": false,
+  "external_reproduction": false
+}

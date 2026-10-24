@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-10-23T19:44:15.777900+00:00",
+  "kind": "stage_waiter_resource_management_repair",
+  "old_waiter_pid": 54160,
+  "old_waiter_creation_unix": 1792769141.3441067,
+  "old_waiter_stop_unix_lower": 1792784414.777127,
+  "old_waiter_stop_unix_upper": 1792784495.186774,
+  "old_waiter_process_CPU_seconds_at_snapshot": 2588.96875,
+  "closed_group_bytes_at_snapshot": 1018035363,
+  "replacement_waiter": {
+    "pid": 44368,
+    "actual_creation_unix": 1792784513.9469376,
+    "command": [
+      "scripts/round132_sequence.py"
+    ],
+    "UTC": "2026-10-23T19:41:54.028963+00:00",
+    "action": "wait for all60D + closed receipts, then admitted24C, then preregistered boundedE; never restart failed D"
+  },
+  "replacement_tool_session": 1146,
+  "old_tool_session": 44391,
+  "old_tool_session_exit_code": 1,
+  "original_native_supervisor_unchanged": true,
+  "current_native_PID_at_repair": 50580,
+  "native_retry": false,
+  "formal_caps_order_Seeds_builds_and_G1_unchanged": true,
+  "measured_clocks_and_physical_qualifications_preserved": true,
+  "management_CPU_not_added_to_native_G1_wall_cost": true,
+  "counterfactual_clean_machine_times": "UNKNOWN",
+  "further_complete_table_decoding": "after native sequence exits",
+  "limitation": "Earlier overlapping D arms include the original readiness waiters background parsing; this is not a quiescent-machine causal speed experiment. Occasional partial-table refreshes are also disclosed.",
+  "evidence": [
+    "engineering/sequence_waiter_repair01/before.json",
+    "engineering/sequence_waiter_repair01/preflight.json",
+    "engineering/sequence_waiter_repair01/README.md",
+    "engineering/sequence_waiter_repair01/round132_sequence_before.py",
+    "engineering/sequence_waiter_repair01/sequence_PID_before.json"
+  ]
+}

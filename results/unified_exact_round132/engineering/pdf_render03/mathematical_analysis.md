@@ -1,0 +1,178 @@
+# Mathematical analysis of the frozen model and research expressions
+
+## 1. Physical semantics and comparison space
+
+Only service stations enter inventory, target deviation and Gini sums. A vehicle starts empty, follows a depot-closed route and can return loaded. Each station receives at most one nonzero, one-direction service. Inventory, vehicle assignment and the original integer route/load structure retain their parser/writer/Evaluator meanings. Prefix loads and each individual operation obey Q; cumulative pickup need not be at most Q. Physical T and computational caps are different quantities.
+
+For every physical fleet,
+
+\[
+Y_i=b_i+\sum_k(d_{ki}-p_{ki}),\quad
+R_k=\sum_i(p_{ki}-d_{ki})\in[0,Q_k],\quad
+\sum_iY_i=\sum_i b_i-\sum_kR_k.
+\]
+
+Returning bicycles are unloaded and counted in handling. Consequently
+
+\[
+t_p\sum_i p_{ki}+t_d(\sum_i d_{ki}+R_k)
+=(t_p+t_d)\sum_i p_{ki}.
+\]
+
+Replacing the last pickup sum by Q, fixing total final inventory to its initial value, supplying bicycles externally at the depot, or allowing split station service would change the model.
+
+Write r_i=Y_i/D_i, S=sum_i r_i, A=sum_{i<j}|r_i-r_j| and
+
+\[
+P_{true}=\sum_i\omega_i|r_i-1|,\qquad
+G_{true}=\begin{cases}A/(nS)&S>0,\\0&S=0,\end{cases}
+\qquad F=G_{true}+\lambda P_{true}.
+\]
+
+The native epigraph variables satisfy e_i>=|r_i-1|, P=sum_i omega_i e_i, and g is also an epigraph variable. Arbitrary native points can inflate P and g. Tight physical completion gives their original objective; that embedding, interval coverage and cutoff complement are essential to a global bound.
+
+Fix the same input, actual variable domains, G interval, cutoff c, objective and retained structure. For a stated common coordinate vector xi, A dominates B if proj_xi(P_A) is a subset of proj_xi(P_B). Strictness requires a strict projected witness. Equivalence requires both inclusions, normally by auxiliary reoptimization. A difference with old auxiliaries fixed is not a physical/target-objective projection difference. Four questions remain distinct: preservation of physical solutions; projection strength; the current objective LP optimum; complete solve cost.
+
+## 2. Local inventory products and service linking
+
+Let the finite allowed inventory set have minimum L and maximum U. The convex hull of (g,y,gy), g in [alpha,beta], y in that set, equals the McCormick hull over [alpha,beta] x [L,U]. Every state line lies in the rectangle hull, while the four corner graph points belong to the state union. The rectangle hull is their convex hull, proving both inclusions. This standard isolated-block statement includes no service, penalty or routing links; it does not establish whole-model equality or VD-P dominance over a correct four-plane aggregate MC block.
+
+VD-P uses sum_y s_iy=1, Y_i=sum_y y s_iy, alpha s_iy<=q_iy<=beta s_iy, sum_y q_iy=g and Z_i=sum_y y q_iy. Its retained A/B and inventory rows imply
+
+\[
+\sum_kp_{ki}=\sum_y(b_i-y)^+s_{iy},\quad
+\sum_kd_{ki}=\sum_y(y-b_i)^+s_{iy},\quad
+\sum_kz_{ki}=\sum_{y\ne b_i}s_{iy}.
+\]
+
+These shared state weights tie expected movement and assignment to inventory. They do not describe the full BRP hull. With binary assignment and direction, unique service and integer Y, p and d are implicitly integer directly: at an unserved station both vanish; at the unique served vehicle only one direction can be positive and the inventory equation sets it to the integer absolute change. A/B is therefore not necessary for this particular integer-solution argument. Deleting binary direction would require a different theorem.
+
+## 3. Projection of the three geometry row families
+
+Delete only H-spread, variable-\(S\) centering and fixed-\(S\) centering. Keep all \(H\) absolute-value lower bounds, individual bounds, total cap/floor, original Gini epigraph, scalar/SP estimators, cutoff, real domains and domain-generation rules. For \(n\ge2\) the ideal three families are
+
+\[
+(n-1)H_{ij}\le n\beta S,\quad
+\pm(n-1)(r_i-r_j)\le n\beta S,\quad
+\pm(r_i-r_j)\le \frac{n\beta\bar S}{n-1}.
+\]
+
+Let \(H_\Sigma=\sum_{i<j}H_{ij}\). The retained original epigraph is \(H_\Sigma\le n\sum_i Z_i/D_i\). Nonnegative states and \(q_{iy}\le\beta s_{iy}\) give \(Z_i\le\beta Y_i\), hence \(H_\Sigma\le n\beta S\). Triangle inequalities give \(A\ge(n-1)|r_i-r_j|\): for each third station \(t\), \(|r_i-r_t|+|r_t-r_j|\ge|r_i-r_j|\), together with the pair itself; unused pair distances are nonnegative. Thus both centering families follow from the retained inequalities and \(S\le\bar S\).
+
+### Root interval
+
+When \(\alpha=0\), replace every \(H_{ij}\) by \(|r_i-r_j|\). This decreases the sum, respects its upper bounds and all individual upper bounds under the audited conditions, and the floor reduces to nonnegativity. The new \(H\) satisfies H-spread and leaves all non-\(H\) variables and the objective unchanged. Reverse inclusion follows by adding constraints. Thus projecting away all \(H\) gives equal LP sets and equal ideal LP objective values. Because \(H\) is continuous, the same extension preserves any remaining integer restrictions.
+
+### Positive lower endpoint
+
+Assume \(0\le\alpha\le\beta\), \(r_i\ge0\), \(S\le\bar S\); individual \(H\) upper bounds \(U_{ij}=c_i+c_j\) with \(c_i\ge0\) and \(r_i\le c_i\); and outside the deleted families \(H\) appears only in absolute lower bounds, individual bounds, a total floor/cap and other uniform total upper bounds. It has zero objective coefficient and no additional individual positive lower bounds or nonuniform linear uses.
+
+Fix every non-\(H\) variable in a feasible point of the deletion model. Put \(d_{ij}=|r_i-r_j|\), \(A=\sum_{i<j}d_{ij}\), \(L=n\alpha S\) and \(t=n\beta S/(n-1)\). Let \(B\) be the smallest retained total upper bound, including the implied \(n\beta S\). Feasibility gives
+
+\[
+T^*=\max(A,L)\le\min\left(B,\sum_{i<j}U_{ij}\right).
+\]
+
+The triangle argument gives \(d_{ij}\le t\). Set \(U'_{ij}=\min(c_i+c_j,t)\). For \(C=\sum_i c_i>0\), the function \(f(\mathbf c)=\sum_{i<j}\min(c_i+c_j,t)\) is concave on the nonnegative simplex of sum \(C\). With \(e_i^{\rm unit}\) denoting the standard unit vector, write \(\mathbf c=\sum_i(c_i/C)C e_i^{\rm unit}\). Concavity gives
+
+\[
+\sum_{i<j}U'_{ij}=f(\mathbf c)\ge(n-1)\min(C,t)
+=\min\left(\sum_{i<j}U_{ij},n\beta S\right)\ge T^*.
+\]
+
+If \(\sum_{i<j}U'_{ij}>A\), set
+
+\[
+\theta=\frac{T^*-A}{\sum_{i<j}U'_{ij}-A},\qquad
+H'_{ij}=d_{ij}+\theta(U'_{ij}-d_{ij}).
+\]
+
+Then \(0\le\theta\le1\); every individual bound and spread bound holds, \(\sum_{i<j}H'_{ij}=T^*\le B\), and the floor holds. The centering rows already follow without \(H\). All non-\(H\) variables and their objective remain unchanged. If the denominator vanishes, \(T^*=A\) and \(H'=d\) suffices. If \(C=0\), all \(c,r,S,A,L\) vanish and \(H'=0\). If \(S=0\), nonnegative ratios vanish and \(H'=0\). For \(n=1\) none of these three families is generated. This proves both projected inclusions, including the nonzero-floor case in which setting \(H=d\) alone can fail.
+
+### Actual-model application and numerical boundary
+
+The current shared canonical factory generates the named three families, and the frozen paper profile disables local/subset nonuniform \(H\) uses. The Cplex writer sets \(H\) upper bounds to \(\operatorname{fl}(C_i/D_i+C_j/D_j)\), with zero objective coefficients. The independent reviewer inspected an actual saved S12 S2R matrix: 66 \(H\) bounds, five uniform full-\(H\) rows and 198 individual-\(H\) rows. \(W\) appears in five rows, as required below. This is a canonical-model result, not a theorem about arbitrary native node cuts.
+
+The exact additive upper-bound hypothesis concerns real algebra. In the saved S12 matrix, 41 of 66 serialized \(H\) bounds differ from the exact rational sum of the two serialized \(r\) upper bounds at roughly \(10^{-16}\). Therefore the ideal theorem is not asserted as strict rational equality for every serialized floating matrix. Necessary actual coefficient/domain checks and extension residuals accompany the research comparisons. The production S2 bytes are unchanged; no hidden outward correction is applied. Equal projections do not imply identical presolve, native cuts, search paths or elapsed time, and do not make the entire \(C_G\) package redundant.
+
+## 4. Exact elimination of W, including its real bounds
+
+In the active shared model \(W=W_{\rm SP}\) is continuous, has zero objective coefficient and is used by four MC rows, one SP cutoff and its own box. No other use is present in the qualified canonical scope. Preserve all \(W\)-free original rows, variable types and bounds, particularly \(g+\lambda P\le c\), which a cross-multiplied row cannot replace at \(S=0\).
+
+For actual \(W\) bounds \(w_l,w_u\) and MC parameters \(s_l,s_u,p_l,p_u\), define
+
+\[
+L_0=w_l,\quad L_1=s_lP+p_lS-s_lp_l,\quad
+L_2=s_uP+p_uS-s_up_u,
+\]
+\[
+U_0=w_u,\quad U_1=s_uP+p_lS-s_up_l,\quad
+U_2=s_lP+p_uS-s_lp_u.
+\]
+
+The original system is \(L_j\le W\le U_k\) and \(H_\Sigma+n\lambda W\le ncS\). For \(\lambda>0\), its complete projection is all nine compatibility rows \(L_j\le U_k\) and all three lower-cutoff rows \(H_\Sigma+n\lambda L_j\le ncS\). Necessity is immediate. Conversely, \(W=\max_jL_j\) satisfies every upper bound and the SP cutoff, proving sufficiency. This is standard one-variable Fourier-Motzkin elimination applied to this formulation, not a new linearization theorem or an exact continuous product identity.
+
+Only after proving the same explicit nonnegative rectangle \(0\le s_l\le S\le s_u\), \(0\le p_l\le P\le p_u\), and that the actual \(W\) box is no tighter than the product box, may compatibility and box rows be removed. The true product \(SP\) is then an extension for MC feasibility. Since \(L_1-s_lp_l=s_l(P-p_l)+p_l(S-s_l)\ge0\) and \(w_l\le s_lp_l\), the constant lower plane is dominated. The two lower-plane cutoffs then suffice, with \(W=\max(L_1,L_2)\). Current inflated \(e\) can violate the tight physical \(P\) upper estimate; that estimate cannot simply be assumed to bound the whole epigraph.
+
+For positive width \(s_u>s_l\), MC lower/upper pairings imply \(P\ge p_l\) and \(P\le p_u\) after cancellation. These consequences must survive projection. For example, \(s_l=1,s_u=2,p_l=0,p_u=1,S=1,P=2,H_\Sigma=0\) and sufficiently large \(c\) satisfy both lower-plane cutoffs, but \(L_2=3>U_2=2\), so no original \(W\) exists. Two cutoffs alone would incorrectly enlarge the domain.
+
+When \(S\) is fixed, derive compatibility directly rather than dividing by its width. At \(S=0\), \(W=0\) need not imply \(P\le p_u\). The full pair system handles that case without adding an unauthorized \(P\) bound. When \(\lambda=0\), retain \(H_\Sigma\le ncS\) and every \(W\)-feasibility compatibility row; removing the whole block would again change its projection. Zero-width \(P\) and simultaneous degeneracy are also covered by the pair construction.
+
+### Implemented research expression
+
+The research writer reads the actual shared canonical row coefficients, normalizes their senses, includes the exact actual \(W\) box, and combines every lower/upper pair. There are three lower rows and four upper rows including the SP row: 12 projected rows. It retains even constant or duplicate compatibility rows. All remaining original rows, objective, bounds and integer types stay intact; only the \(W\) column and its rows are replaced. Its physical Start is mapped to the remaining actual columns and validated before use.
+
+The independent checker reconstructs these combinations with exact rational arithmetic on source binary64 coefficients. It separately bounds the output coefficient-serialization residual over actual remaining-variable bounds. The candidate binary64 output is qualified as numerically consistent, not asserted to equal the exact rational projected matrix. `C_matrix_wording_addendum.json` makes this distinction explicit. Four saved interval/input configurations have equal canonical all-continuous LP objectives within the inherited \(10^{-7}\) policy. These finite observations check implementation and numerical behavior; they do not replace the general projection proof.
+
+## 5. Qualification and relation to costs
+
+The research default-off writer and original E3 produce identical complete canonical LP bytes on the qualified small and medium fixtures, at a root interval and a positive lower endpoint. Actual S12 CLI runs bridge original E3 to research default-off, and validate independent H and full Start submission for both candidates. Each uses the legal inclusive-root LP then restored-integer MIP workflow. Default-off equivalence is a semantic/matrix bridge; the two executable byte strings are different and are never described as identical.
+
+All 24 admitted C workflows are now sealed. Geometry deletion gives 2 Win, 4 Lose and 2 UNDETERMINED; full W projection gives 3 Win, 3 Lose and 2 UNDETERMINED against the same-build inclusive-root baseline. All 16 candidate/baseline comparisons have identical complete realized H, matching root intervals/cutoffs and actual native exposure. The continuous root objectives agree within the original numerical policy, while Work/nodes and complete costs vary in both directions. This supports mixed expression costs, not a stronger ideal relaxation or automatic production replacement. D remains the original frozen algorithm and its measurements do not come from this research build.
+
+## 6. Joint structure: definitions and unresolved obligations
+
+For finite complete necessary service sets R_k in v_k=(p_ki,d_ki,z_ki), let P_sep=(product_k conv R_k) intersect unique service and let H_joint be the convex hull of jointly unique integer selections of one plan per vehicle. Every joint integer selection belongs to the separated product and unique-service rows; convexity proves H_joint subset P_sep. This elementary inclusion alone is not new and proves neither strictness after current theta/rank/routing constraints nor an objective increment.
+
+On a common lifted space define B_ref as the actual current S2 continuous model plus those same single-vehicle hulls and the explicitly chosen historical theta/rank structures. Define B_joint=B_ref intersect H_joint. Any strict physical/objective claim must permit all other auxiliaries to reoptimize and provide a full B_ref extension. Distinct single-vehicle travel/resource domains cannot silently be exchanged across the comparison.
+
+For H_k=conv R_k, h_k(a)=max_{v in R_k} a'v, and E_k v=z_k, every point of P_sep satisfies
+
+\[
+\sum_k w_k'v_k\le\sum_i\mu_i+\sum_k h_k(w_k-E_k'\mu),\qquad\mu\ge0.
+\]
+
+Indeed, bound each (w_k-E_k'mu)'v_k by its support value, sum, and apply sum_k z_ki<=1. Recombining the same single-vehicle support functions and linear unique-service rows cannot separate such a point. A genuinely joint support value Psi(w)=max{sum w_k'v_k: v_k in R_k, unique service} can do so only if its valid upper bound is below the separated value. Feasible plans and restricted column subsets provide lower bounds on this maximization, unsuitable as cut right-hand sides. Necessary service hulls remain distinct from complete physical route hulls.
+
+The bounded step completed four complete four-station universes, two vehicles,64 quantity/ownership normals per case and8 event controls per case. Every reference includes the actual continuous S2 matrix, the same complete car-plan hulls on both sides, R98 theta,80 exact same-domain event-threshold ranks, and all30 IR-IN/OUT subset rows. J1/J2/J3/J4 enumerate119/59/66/177 disjoint joint pairs, respectively. Each complete maximum is valid only for its whole tiny universe.
+
+J2 has initial stock(2,1,0,0), targets all1, capacities all2, vehicle capacities(1,2), zero travel, and physicalT240 with pickup/drop60 each. Its direction61 uses the following station-wise (pickup,delivery,assignment) weights for vehicles0 and1:
+
+\[
+ w_0=((1,-1,2),(2,0,-2),(-1,2,2),(1,-2,-1)),
+\]
+\[
+ w_1=((-1,0,2),(-2,2,1),(-2,-1,-2),(1,1,-1)).
+\]
+
+The reference witness has service vectors
+
+\[
+ v_0=((1/2,0,1/2),(1/2,0,1/2),(0,1,1),(0,0,0)),
+\]
+\[
+ v_1=((1/2,0,1/2),(0,1/2,1/2),(0,0,0),(0,0,0)).
+\]
+
+It yields w'v=15/2, while exact maximization over all59 integer joint pairs gives Psi(w)=7. The saved rational extension, including free route/state/product variables, car mixtures and theta, satisfies all783 reference rows and bounds. The exact matrix interprets loaded binary64 coefficients as rationals; this is a strict projection witness for that actual reference, rather than a theorem of equality with an unrounded ideal matrix. The complete values, normal, enumeration and matrix SHA bindings are in joint/J2/best_separation.json and its companion files.
+
+All32 event controls pass. Reoptimizing the original complete micro objective before/after joint mixing gives J1:0/0, J2:0.15/0.15, J3:0.15/0.15, J4:0/0 under the inherited numerical policy; there is no qualified objective increment. J1/J3/J4 have no separated normal in their fixed finite queries, which does not prove hull equality. The strict J2 witness does not by itself show a stronger original-objective bound. J4's artificial canonical zero domain has no production backend exposure.
+
+The charged outer E process is2.652919300016947s; its nested1.211743799969554s runner clock is not added again. No full-real-role step is admitted: a support upper bound over the same full station universe and a valid interface for outside donors/receivers are missing. Dropping those stations would invalidate a transplanted tiny inequality. No new separator, native production cut or performance replacement is claimed. joint_structure_note.md supplies the finite interpretation and conditional_step_decisions.json records this concrete stop.
+
+## 7. Disclosed numerical source loss and performance eligibility
+
+D_group24/X-35-U/Seed1/S2 has an independently verified own physical G=P=F=0 and the analytic original-objective floor0. Its own sequence21 fleet contradicts three call4 native bounds,2.2155204177669103e-7,2.3794866331140976e-7 and2.889725344877011e-7, beyond the inherited1e-7 check. The entire native call's dependent proof claims are rejected; the raw audit failure and source_reduced=true/native_proof_qualified=false remain. The independent own-zero proof uses neither another arm's certificate nor the rejected native lower bound.
+
+The original R130 reconstruction retained a raw own-zero T_cert448.4828956000274s, whereas the frozen R127 performance qualifier excludes all source-reduced arms. The derived reporting resolves this mismatch conservatively: all raw data and full T_produce/T_verify/T_total remain, but formal performance T_cert is null and this S2/P comparison is UNEVALUABLE. It is not an ordinary open observation or a favorable time Win. Thus17/24 S2 certificates are performance-eligible, with one additional retained own-zero proof, and the full S2/P denominator remains24 positions (16 Win,1 Lose,6 UNDETERMINED,1 UNEVALUABLE). This reporting repair does not repair the native source or license a performance rerun. The source reliability limitation remains explicit in the manuscript and final report.
+

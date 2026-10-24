@@ -1,0 +1,64 @@
+{
+  "status": "PREPARED_PREFLIGHT_ACCEPTED_HEAVY_PENDING",
+  "checker": "scripts/round132_portable_check.py",
+  "checker_SHA": "d02cd20c7c4cf79e3d58b1db78567faecfcd9d1d15cbc968ed9e9327dd4bcd7f",
+  "preflight_receipt": "review/portable_checker_source_loss_preflight.json",
+  "preflight_status": "ACCEPT",
+  "preflight_seconds": 0.3006333999801427,
+  "previous_checker": {
+    "checker_SHA": "a6939dae51f8f29870d6ad48934fd344afd55907af87be769e5537317afa3033",
+    "Git_commit": "0456358c8dff158ee874036cf9d2fd10d4fba633",
+    "Git_blob": "e9e08c4dbb1ad1e7e728881dac2f47307c77574d",
+    "original_preflight_receipt": "review/portable_preflight.json"
+  },
+  "formal_arms_expected": {
+    "D": 60,
+    "C": 24
+  },
+  "typed_comparisons_expected": 64,
+  "D_execution_binding_SHA": "569fce35242e2e54a52aa63a145d5ffa3db7c5eabfacd5d9d2786198eeb4098c",
+  "C_execution_binding_SHA": "3248070303dd4157ea0df766b859108b354dffffa7ee9909abe98352f9480135",
+  "E_plan_SHA": "d8de4cba395f475c83b8f22e8fc0abd31c887ffe0fdb6c289ce0af626adad7dd",
+  "E_runner_SHA": "8d0d723a32a8f11dcd240778e44d6f172c44f02fe5c65e05c706d13b9ceafdf6",
+  "analysis_SHA_statically_reviewed": "4eb5eb4d37945bc07e8bdc417f19a055e4758ebebdb279a76f6d530cad244ff2",
+  "reporting_handoff_SHA": "38fd4806698348c7fccc5ac8291124a64e4f7278c601fdd77e5863f938dc76a3",
+  "reporting_coverage": {
+    "independent_problem_objective_class_and_witnesses": true,
+    "qualified_zero_positive_bound_unknown_distinguished": true,
+    "near_zero_positive_not_physical_zero": true,
+    "new_problem_objective_class_fine_strata": true,
+    "own_U_L_certificate_and_clock_mutation_prohibited": true,
+    "own_producer_waiter_lifetime_exposure_and_pair_flags": true,
+    "timing_exposure_CSV_rows_expected": 84,
+    "amendment_and_producer_input_SHA_bindings_expected": 85,
+    "author_analysis_imported_or_executed": false,
+    "synthetic_reporting_contract_preflight": "PASS",
+    "raw_reporting_fields_replayed": false
+  },
+  "delivery_meter_SHA_statically_reviewed": "b012febc91c789480f872302261aad8afb5b45cbfda531eb6748893a09fd9955",
+  "same_entry_internal_and_public": true,
+  "frozen_D_C_scripts_modified": false,
+  "heavy_raw_execution": false,
+  "Optimize": 0,
+  "H": 0,
+  "native_starts": 0,
+  "compilation": 0,
+  "external_reproduction": false,
+  "final_result_acceptance": false,
+  "source_loss_predecessor": {
+    "checker_SHA": "0e7d939c4e3a99561172170489733a83f524dc9d25f876da03c1977ffdbfc452",
+    "retained": "review/portable_checker_before_source_loss.py"
+  },
+  "source_loss_reporting_coverage": {
+    "frozen_qualified_predicate_unchanged": true,
+    "raw_vs_performance_clock_distinguished": true,
+    "independent_own_zero_and_own_local_call_rejections_required": true,
+    "other_unqualified_evidence_still_blocks": true,
+    "source_loss_UNEVALUABLE_retained_in_all_denominators": true,
+    "native_reliability_not_restored": true,
+    "counts_independently_derived_without_expected_win_count": true,
+    "small_author_disposition_rechecked": "review/source_loss_reporting_narrow.json",
+    "synthetic_preflight": "PASS",
+    "full_campaign_replay": false
+  }
+}

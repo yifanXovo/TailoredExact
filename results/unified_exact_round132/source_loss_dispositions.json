@@ -1,0 +1,54 @@
+{
+  "records": [
+    {
+      "line": "D",
+      "id": "X-35-U",
+      "seed": 1,
+      "method": "S2",
+      "own_physical_zero_certificate_retained": true,
+      "native_proof_qualified": false,
+      "source_reduced": true,
+      "formal_performance_evidence_eligible": false,
+      "raw_reconstructed_T_cert": 448.4828956000274,
+      "formal_performance_T_cert": null,
+      "T_produce": 448.4828956000274,
+      "T_verify": 9.949797699926421,
+      "T_total": 458.4326932999538,
+      "disposition": "UNEVALUABLE formal performance; independent own-zero proof retained; not ordinary open",
+      "damaged_calls": [
+        {
+          "arm": "M-B",
+          "call": 4
+        }
+      ],
+      "rejected_bound_values": [
+        2.2155204177669103e-07,
+        2.3794866331140976e-07,
+        2.889725344877011e-07
+      ],
+      "own_zero_witness_sequences": [
+        21
+      ],
+      "native_source_reliability_unresolved": true,
+      "no_native_retry": true,
+      "sources": [
+        {
+          "path": "results/unified_exact_round132/campaign/D_group24/raw/02_X-35-U_S1_R1_S2/independent_evidence.json",
+          "SHA": "fa5909bd7bf378778deacc0f550846fda4a3fe546fc372577f3975674912a159"
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group24/raw/02_X-35-U_S1_R1_S2/claim_rejections.json",
+          "SHA": "15b3f1800e58b0c454bfae0ff030ce814f5b825c2ac9df2a3df58e4f3f84a349"
+        },
+        {
+          "path": "results/unified_exact_round132/campaign/D_group24/raw/02_X-35-U_S1_R1_S2/producer_receipt.json",
+          "SHA": "253cd8106304a829f878878ad7dbd508645f6fde5cf37a0ea8a2232604924d98"
+        }
+      ]
+    }
+  ],
+  "policy": "Frozen R127 source_reduced exclusion unchanged; R130 raw own-zero reconstruction retained separately",
+  "policy_scope": "Reporting/clock reconciliation only; no eligibility relaxation, source repair, certificate transfer or production change",
+  "raw_reconstructed_files_unchanged": true,
+  "no_Optimize": true
+}

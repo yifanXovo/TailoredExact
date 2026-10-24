@@ -1,0 +1,36 @@
+{
+  "UTC": "2026-10-23T19:54:33.3029697Z",
+  "final_waiter": {
+    "ProcessId": 31680,
+    "ParentProcessId": 53540,
+    "CreationDate": "2026-10-24T03:53:27.755054+08:00",
+    "CommandLine": "\"D:\\msys64\\ucrt64\\bin\\python.exe\" -B scripts/round132_sequence.py"
+  },
+  "final_waiter_tool_session": 83618,
+  "prior_intermediate_waiter_pid": 44368,
+  "prior_intermediate_tool_session": 1146,
+  "prior_intermediate_tool_exit": 1,
+  "reason": "Install independently accepted final gate ordering while waiter had no children",
+  "original_D_supervisor_pid": 47868,
+  "process_metrics": [
+    {
+      "Id": 50580,
+      "StartTime": "2026-10-24T03:32:58.1767841+08:00",
+      "CPU": 1277.609375
+    },
+    {
+      "Id": 31680,
+      "StartTime": "2026-10-24T03:53:27.7550546+08:00",
+      "CPU": 0.109375
+    },
+    {
+      "Id": 47868,
+      "StartTime": "2026-10-23T23:06:40.4697194+08:00",
+      "CPU": 0.546875
+    }
+  ],
+  "native_rerun": false,
+  "formal_caps_Seeds_order_assets_and_G1_unchanged": true,
+  "metadata_attempt_error": "Before-stop metadata command used False instead of PowerShell $false; metadata construction failed; targeted stop and native-preservation checks then completed as shown in tool output",
+  "metadata_error_did_not_change_native_control": true
+}

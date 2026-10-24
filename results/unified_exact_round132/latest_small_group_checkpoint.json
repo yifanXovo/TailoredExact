@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-24T04:17:27.823448+00:00",
+  "group": "campaign/D_group23",
+  "summary_rows": [
+    {
+      "method": "S2",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.0,
+      "L": 0.0,
+      "T_cert": 120.82926776667591
+    },
+    {
+      "method": "P",
+      "qualified": true,
+      "certificate": false,
+      "U": 0.01626456433637285,
+      "L": 6.938893903907228e-18,
+      "T_cert": null
+    }
+  ],
+  "summary_source": "fees/formal_D23_01/stdout.log",
+  "summary_source_SHA": "f794f044310ea743557d9be82d465aecf2c7605d7974cc8b9f80d4c3b8454565",
+  "summary_source_bytes": 1896,
+  "closed_group_production_positions": 58,
+  "derived_full_table_positions": 20,
+  "full_table_decode_deferred_until_sequence_completion": true,
+  "budget": {
+    "G1_seconds": 46234.472397100646,
+    "remaining_G1_seconds": 97765.52760289935,
+    "by_category": {
+      "C": 0.0,
+      "D": 46161.436513900175,
+      "qualification": 73.03588320047129,
+      "E": 0.0,
+      "C3": 0.0,
+      "repair": 0.0
+    },
+    "limits": {
+      "C": 32400,
+      "D": 84000,
+      "qualification": 3600,
+      "E": 10800,
+      "C3": 4800,
+      "repair": 8400
+    },
+    "separately_reported_seconds": 1228.0182849998819,
+    "unclosed": [
+      "formal_D24_01"
+    ]
+  },
+  "scope": "Closed producer summary only; no raw content decoding or final independent acceptance"
+}

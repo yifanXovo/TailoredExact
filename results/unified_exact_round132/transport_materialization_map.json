@@ -1,0 +1,32 @@
+{
+  "schema": "round132-science-exact-newline-materialization-v1",
+  "science_commit": "52b02252ba47e8228b73e071d6ed692385a4f816",
+  "science_export_manifest_SHA256": "7484980d2f13509a3dea0f213030522c483d82bcee8e3868484c8f2a7cceab8c",
+  "reason": "Genuine first public recovery failure: pre-existing mixed line endings were normalized in Git before -text transport was frozen. Only newline serialization is reconstructed, with both transport and final bytes hash-checked.",
+  "files": [
+    {
+      "path": "results/unified_exact_round132/literature_evidence.csv",
+      "expected_bytes": 10613,
+      "expected_SHA256": "8902cc5bcf6ae49473b350753da9bdcc9d9835032d3874030a8e98b9d5d31345",
+      "transport_bytes": 10607,
+      "transport_SHA256": "a9e361cae3b7457bc450d69ba005832fa25271176f4e467db439aeecb8e3489c",
+      "normalized_LF_SHA256": "a9e361cae3b7457bc450d69ba005832fa25271176f4e467db439aeecb8e3489c",
+      "newline_count": 17,
+      "CRLF_newline_ordinals_zero_based": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ]
+    }
+  ],
+  "scope": "Same single owned recovery root; no local raw/checkouts or native assets are used by the actual public materializer. The scientific manifest and commit remain immutable.",
+  "standard_uniform_materializations_handled_by_existing_restorer": 132,
+  "inventory_summary": {
+    "exact_git_blobs": 798,
+    "uniform_newline_materializations": 132,
+    "mixed_newline_materializations": 1
+  }
+}

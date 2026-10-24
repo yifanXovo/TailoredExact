@@ -1,0 +1,366 @@
+{
+  "schema": "citibike443-station-landscape-v1",
+  "dataset_family": "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "classification": "generated_untested_paper_candidate",
+  "generator_version": "citibike443-regional-v1.0.0",
+  "landscape_id": "r132_K_15-B_CABI_balanced",
+  "selection_id": "r132_K_15-B_CABI",
+  "V": 15,
+  "geographic_regime": "regional",
+  "replicate": 2,
+  "inventory_regime": "balanced",
+  "local_imbalance_level": "moderate",
+  "seed": 366619048,
+  "seed_derivation_material": "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced",
+  "source_station_row_indices": [
+    464,
+    114,
+    280,
+    507,
+    387,
+    293,
+    676,
+    68,
+    119,
+    462,
+    42,
+    827,
+    370,
+    94,
+    461
+  ],
+  "source_hashes": {
+    "public_table_sha256": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8"
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      320132.661,
+      4310932.012
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    19,
+    39,
+    20,
+    15,
+    25,
+    15,
+    19,
+    15,
+    15,
+    15,
+    11,
+    17,
+    19,
+    15,
+    19
+  ],
+  "initial": [
+    7,
+    29,
+    13,
+    11,
+    6,
+    10,
+    12,
+    5,
+    11,
+    4,
+    2,
+    11,
+    12,
+    5,
+    6
+  ],
+  "target": [
+    10,
+    22,
+    10,
+    8,
+    12,
+    8,
+    10,
+    8,
+    8,
+    8,
+    5,
+    9,
+    9,
+    8,
+    9
+  ],
+  "weights": [
+    0.206612,
+    1.0,
+    0.206612,
+    0.132231,
+    0.297521,
+    0.132231,
+    0.206612,
+    0.132231,
+    0.132231,
+    0.132231,
+    0.1,
+    0.167355,
+    0.167355,
+    0.132231,
+    0.167355
+  ],
+  "min_ratio": [
+    0.3105,
+    0.3256,
+    0.3,
+    0.3133,
+    0.292,
+    0.3133,
+    0.3105,
+    0.3133,
+    0.3133,
+    0.3133,
+    0.2818,
+    0.3118,
+    0.2895,
+    0.3133,
+    0.2895
+  ],
+  "points_utm18n_meters": [
+    [
+      319948.329,
+      4311209.799
+    ],
+    [
+      320370.49,
+      4308589.362
+    ],
+    [
+      322284.064,
+      4310294.565
+    ],
+    [
+      317645.227,
+      4310812.341
+    ],
+    [
+      319734.789,
+      4313264.972
+    ],
+    [
+      321293.749,
+      4312266.367
+    ],
+    [
+      318723.177,
+      4309589.04
+    ],
+    [
+      319103.958,
+      4312049.369
+    ],
+    [
+      320522.635,
+      4310223.111
+    ],
+    [
+      320042.741,
+      4312369.046
+    ],
+    [
+      321660.377,
+      4311423.845
+    ],
+    [
+      319162.376,
+      4308823.87
+    ],
+    [
+      321036.918,
+      4312940.307
+    ],
+    [
+      320692.191,
+      4309537.575
+    ],
+    [
+      319768.887,
+      4310586.609
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 4718.627409904721,
+    "mean_pairwise_station_distance_m": 2459.664548897403,
+    "maximum_pairwise_station_distance_m": 4718.627409904721,
+    "mean_depot_distance_m": 1693.6341879867932,
+    "maximum_depot_distance_m": 2490.311035312068,
+    "bounding_box_width_m": 4638.8369999999995,
+    "bounding_box_height_m": 4675.610000000335,
+    "capacity_minimum": 11,
+    "capacity_maximum": 39,
+    "capacity_mean": 18.533333333333335,
+    "capacity_median": 17,
+    "total_capacity": 278,
+    "total_initial_inventory": 144,
+    "total_target_inventory": 144,
+    "station_inventory_minus_target": 0,
+    "absolute_total_shortage_or_surplus": 0,
+    "local_l1_imbalance": 50,
+    "maximum_local_absolute_imbalance": 7,
+    "surplus_station_count": 8,
+    "deficit_station_count": 7,
+    "balanced_station_count": 0,
+    "weight_minimum": 0.1,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.22085386666666668,
+    "min_ratio_minimum": 0.2818,
+    "min_ratio_maximum": 0.3256
+  },
+  "generation_trace": {
+    "initial_before_total_correction": [
+      7,
+      29,
+      14,
+      11,
+      7,
+      11,
+      13,
+      5,
+      11,
+      5,
+      3,
+      12,
+      12,
+      5,
+      6
+    ],
+    "initial_after_total_correction": [
+      7,
+      29,
+      13,
+      11,
+      6,
+      10,
+      12,
+      5,
+      11,
+      4,
+      2,
+      11,
+      12,
+      5,
+      6
+    ],
+    "initial_after_sign_repair": [
+      7,
+      29,
+      13,
+      11,
+      6,
+      10,
+      12,
+      5,
+      11,
+      4,
+      2,
+      11,
+      12,
+      5,
+      6
+    ],
+    "desired_total": 144,
+    "delta_amount": 17,
+    "local_scale": 0.18,
+    "inventory_hash_order": [
+      2,
+      4,
+      11,
+      10,
+      6,
+      9,
+      5,
+      0,
+      3,
+      14,
+      1,
+      7,
+      8,
+      13,
+      12
+    ],
+    "sign_repair_hash_order": [
+      9,
+      12,
+      10,
+      5,
+      14,
+      3,
+      2,
+      13,
+      0,
+      1,
+      7,
+      4,
+      11,
+      6,
+      8
+    ],
+    "anchor_material": "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|geographic-anchor-set|V=15",
+    "selection_material": "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|selection|V=15|geography=regional|replicate=2",
+    "inventory_material": "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced",
+    "target_materials": [
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=464",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=114",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=280",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=507",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=387",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=293",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=676",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=68",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=119",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=462",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=42",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=827",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=370",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=94",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r132_K_15-B_CABI|row=461"
+    ],
+    "inventory_order_materials": [
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|0",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|1",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|2",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|3",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|4",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|5",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|6",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|7",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|8",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|9",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|10",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|11",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|12",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|13",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|14"
+    ],
+    "sign_repair_order_materials": [
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|0",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|1",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|2",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|3",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|4",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|5",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|6",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|7",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|8",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|9",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|10",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|11",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|12",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|13",
+      "round132-frozen-s2-prospective-v2|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r132_K_15-B_CABI|balanced|sign-repair|14"
+    ]
+  },
+  "coordinate_CRS": "EPSG:32618",
+  "source": "CABI"
+}
