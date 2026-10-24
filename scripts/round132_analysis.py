@@ -261,14 +261,30 @@ def run(partial=False,heavy=True):
                 pairs.append(q)
     if not partial:assert not missing,missing
     assert len(arms)==len({(a['line'],a['id'],a['seed'],a['method']) for a in arms})
-    conflicts=[]
+    conflicts=[];problem_classes={};problem_class_records=[]
     for key in sorted({(a['line'],a['input_SHA']) for a in arms}):
         sub=[a for a in arms if (a['line'],a['input_SHA'])==key and qualified(a)];best_U=min((a['U'] for a in sub),default=None)
         for a in sub:
             if qualified(a) and a['L']>best_U+1e-7:conflicts.append(dict(line=a['line'],id=a['id'],seed=a['seed'],method=a['method'],own_L=a['L'],other_own_legal_U=best_U))
+        zero=[a for a in sub if a.get('G_true')==0 and a.get('P_true')==0]
+        positive=[a for a in sub if a['L']>1e-7]
+        status='zero_proved_by_qualified_physical_zero' if zero else 'positive_under_qualified_lower_bound' if positive else 'unknown_optimum_class'
+        problem_classes[key]=status
+        witnesses=zero if zero else positive
+        problem_class_records.append(dict(line=key[0],input_SHA=key[1],ids=sorted({a['id'] for a in sub}),
+            problem_objective_class=status,evidence=[{k:a.get(k) for k in ['id','seed','method','producer_receipt_SHA','G_true','P_true','U','L']} for a in witnesses]))
     write(OUT/'cross_arm_consistency.json',dict(status='CONTRADICTION_REQUIRES_INVESTIGATION' if conflicts else 'PASS',conflicts=conflicts,
         no_incumbent_bound_or_certificate_transferred=True,scope='Read-only consistency only; every reported certificate remains based on its own physical fleet and qualified proof.'))
     assert not conflicts,conflicts
+    for a in arms:a['problem_objective_class']=problem_classes[a['line'],a['input_SHA']]
+    for q in pairs:
+        statuses={a['problem_objective_class'] for a in arms if a['line']==q['line'] and a['id']==q['id']}
+        assert len(statuses)==1
+        q['problem_objective_class']=statuses.pop()
+    write(OUT/'problem_objective_classification.json',dict(records=problem_class_records,
+        scope='Descriptive problem-level status from already sealed qualified physical zeros or positive bounds under the numerical policy. Own attained-endpoint classes remain separate.',
+        unknown_is_not_positive=True,near_zero_positive_is_not_zero=True,
+        no_arm_U_L_T_cert_or_certificate_changed=True,no_information_supplied_to_production=True))
     strat={}
     for line in ['D','C']:
         aa=[a for a in arms if a['line']==line];pp=[p for p in pairs if p['line']==line]
@@ -282,7 +298,7 @@ def run(partial=False,heavy=True):
         pp=[p for p in pairs if p['line']==line]
         for left,right in sorted({(q['left'],q['right']) for q in pp}):
             selected=[q for q in pp if (q['left'],q['right'])==(left,right)]
-            dimensions=['id','V','objective_class']
+            dimensions=['id','V','objective_class','problem_objective_class']
             for dimension in dimensions:
                 for value in sorted({str(q[dimension]) for q in selected}):
                     qq=[q for q in selected if str(q[dimension])==value]
@@ -302,7 +318,7 @@ def run(partial=False,heavy=True):
         key=f'D:{layer}:S2/P'
         if key in strat:
             s=strat[key];dtext+=f"In {layer}, S2/P qualified certificate counts are {s['certificates'].get('S2',0)}/{s['certificates'].get('P',0)} across {s['repeated_comparisons']} repeated comparisons on {s['problems']} problems; strict directions are {s['directions']}. "
-    dtext+='These are finite within-mechanism and geography-transfer observations; same-problem Seeds are repeats, and both-open times remain censored. PS attribution is confined to its prospectively selected six-problem subset.'
+    dtext+='These are finite within-mechanism and geography-transfer observations; same-problem Seeds are repeats, and both-open times remain censored. PS attribution is confined to its prospectively selected six-problem subset. Problem-level zero/positive/unknown status is distinguished from each arm\'s attained endpoint; a zero observation at35 stations does not establish positive-objective35 proof performance.'
     ctext=f'The cost panel has {Ccount}/24 sealed same-build workflows. '
     for method in ['S2R-GEOM','S2R-SP']:
         key=f'C:C:{method}/S2R'
