@@ -94,3 +94,10 @@ C now has9/24 closed qualified observations across three groups. SC-B20-S Seed0 
 The original serial sequence PID31680/session83618 and C supervisor49716 continue. C group04/SC-B20-S Seed1 started normally at13:45:02; its first off native was PID55740, born2026-10-24T13:45:02.985827+08:00, parent34532. Check actual live identity before any recovery; children change naturally. E has not started. No PDF/heavy review/packing/recovery has run. `review/final_reporting_addendum.md` documents the extra final independent checker coverage required for problem-level objective classes and conservative waiter-lifetime exposure annotations; it does not authorize an early heavy review.
 
 Closed G1 now51423.81053900067s, remaining92576.18946099933s; separately measured disjoint verification/reconstruction1326.3589985999279s. Active C04 is excluded until its receipt closes. E free bytes at the last process check:190394474496. Full derived tables remain the old provisional snapshot until the entire native sequence ends.
+
+
+### Final reporting preparation update after C03
+
+`final_report.md` now contains the provisional two-line acceptance table and all five required scientific answers, with C/E/final-analysis/review/PDF/public-delivery items explicitly pending. It is not a completion receipt. The report preserves D adverse results, zero35 scope, own-H attribution limits and background-load limitations.
+
+The same independent reviewer has now extended its portable checker for problem-level objective classes/witnesses/fine strata and producer-bound waiter-lifetime annotations/84-row CSV/85 source bindings. New checker SHA is `0e7d939c4e3a99561172170489733a83f524dc9d25f876da03c1977ffdbfc452`; `review/portable_checker_reporting_preflight.json` accepted the small plan and synthetic reporting contracts in0.48323490004986525s, with zero Optimize/native starts/compilation and no raw/reconstructed replay. Old checker identity is retained by Git and handoff. This is preparation only; the single heavy final evidence review must still wait for all84 C/D observations, E and G1 fees/sequence completion.

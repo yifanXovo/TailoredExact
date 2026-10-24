@@ -57,6 +57,14 @@ CASES = (
     dict(id='J4', b=[1,1,1,1], Q=[1,1], T=240),
 )
 HASHES = {}
+REPORTING_PREDECESSOR = dict(
+    checker_SHA='a6939dae51f8f29870d6ad48934fd344afd55907af87be769e5537317afa3033',
+    Git_commit='0456358c8dff158ee874036cf9d2fd10d4fba633',
+    Git_blob='e9e08c4dbb1ad1e7e728881dac2f47307c77574d')
+WITNESS_FIELDS = ('id','seed','method','producer_receipt_SHA','G_true','P_true','U','L')
+LIFETIME_FIELDS = ('stage_waiter_lifetime_overlap_lower_seconds',
+    'stage_waiter_lifetime_overlap_upper_seconds','stage_waiter_lifetime_overlap',
+    'timing_environment_scope','counterfactual_clean_machine_T_cert')
 
 
 def read(path):
@@ -293,7 +301,8 @@ def readiness(out,rows,own_fee=None):
         else: assert read(rp)['exit_observed'],('formal outer process not observed closed',label)
     for name in ('observations.json','stratified_summary.json','resource_accounting.json','joint_results.json',
                  'physical_outcomes.csv','mechanism_costs.csv','trajectory_index.json','analysis_inputs.json',
-                 'native_progress_index.json','historical_physical_outcomes.json','research_source_publication.json','sequence_completion.json'):
+                 'native_progress_index.json','historical_physical_outcomes.json','research_source_publication.json','sequence_completion.json',
+                 'problem_objective_classification.json','timing_environment_exposure.csv','timing_environment_amendment.json'):
         if not (out/name).is_file(): missing.append(rel(out/name))
     for path in sorted((out/'fees').glob('*/launch.json')):
         if not (path.parent/'receipt.json').is_file():
@@ -322,7 +331,9 @@ def independent_pair(left,right,line,g):
         layer=g['role']['layer'] if line=='D' else 'C',V=g['role']['V'],classification='UNEVALUABLE',direction='UNEVALUABLE',
         left_T_cert=left.get('T_cert'),right_T_cert=right.get('T_cert'),left_minus_right_seconds=None,
         right_over_left_certification_ratio=None,
-        objective_class=left['objective_class'] if left['objective_class']==right['objective_class'] else 'mixed_attained_endpoints')
+        objective_class=left['objective_class'] if left['objective_class']==right['objective_class'] else 'mixed_attained_endpoints',
+        left_stage_waiter_lifetime_overlap=left.get('stage_waiter_lifetime_overlap'),
+        right_stage_waiter_lifetime_overlap=right.get('stage_waiter_lifetime_overlap'))
     if not eligible(left) or not eligible(right): return q
     for k in ('PE_SHA','DLL_SHA','input_SHA','seed','repeat'):
         assert left[k]==right[k],('matched pair identity',k)
@@ -339,6 +350,104 @@ def independent_pair(left,right,line,g):
     elif b: q.update(classification='RIGHT_ONLY_CERTIFIED',direction='Lose')
     else: q.update(classification='BOTH_OPEN',direction='UNDETERMINED')
     return q
+
+
+def independent_problem_classes(arms):
+    """Classify same-line/input problems from independently verified evidence.
+
+    Attained positive U does not prove a positive optimum. Physical exact zero
+    proves zero; otherwise only a qualified L>1e-7 gives the numerical-policy
+    positive class. This function supplies no endpoint or certificate to an arm.
+    """
+    buckets=collections.defaultdict(list)
+    for arm in arms:
+        buckets[arm['line'],arm['input_SHA']].append(arm)
+    classified={};records=[]
+    for key in sorted(buckets):
+        candidates=[a for a in buckets[key] if eligible(a)]
+        zeros=[a for a in candidates if a.get('G_true')==0 and a.get('P_true')==0]
+        positive=[a for a in candidates if a['L']>1e-7]
+        assert not (zeros and positive),('qualified physical zero contradicts positive bound',key)
+        if zeros:
+            label='zero_proved_by_qualified_physical_zero';support=zeros
+        elif positive:
+            label='positive_under_qualified_lower_bound';support=positive
+        else:
+            label='unknown_optimum_class';support=[]
+        classified[key]=label
+        records.append(dict(line=key[0],input_SHA=key[1],ids=sorted({a['id'] for a in candidates}),
+            problem_objective_class=label,evidence=[{k:a.get(k) for k in WITNESS_FIELDS} for a in support]))
+    return classified,records
+
+
+def assign_problem_classes(arms,pairs):
+    # The caller first rejects cross-arm lower/upper contradictions. Preserve
+    # every own endpoint/certificate/clock while adding only descriptive fields.
+    protected=('U','L','certificate','T_cert','T_produce','T_verify','T_total')
+    before=[tuple(a.get(k) for k in protected) for a in arms]
+    classified,records=independent_problem_classes(arms)
+    by_problem=collections.defaultdict(set)
+    for a in arms:
+        a['problem_objective_class']=classified[a['line'],a['input_SHA']]
+        by_problem[a['line'],a['id']].add(a['problem_objective_class'])
+    for p in pairs:
+        labels=by_problem[p['line'],p['id']]
+        assert len(labels)==1,('ambiguous problem identity in pair',p['line'],p['id'])
+        p['problem_objective_class']=next(iter(labels))
+    assert before==[tuple(a.get(k) for k in protected) for a in arms]
+    return records
+
+
+def independent_waiter_exposure(begin,end,environment):
+    birth=environment['old_waiter_creation_unix']
+    lower_stop=environment['old_waiter_stop_unix_lower'];upper_stop=environment['old_waiter_stop_unix_upper']
+    assert all(math.isfinite(v) for v in (begin,end,birth,lower_stop,upper_stop))
+    assert begin<=end and birth<=lower_stop<=upper_stop
+    start=max(begin,birth)
+    lower=max(0.,min(end,lower_stop)-start)
+    upper=max(0.,min(end,upper_stop)-start)
+    assert 0<=lower<=upper<=end-begin
+    if lower>0:
+        scope='conservative overlap with original waiter lifetime; not parsing/CPU-contention/slowdown seconds'
+    elif upper>0:
+        scope='possible boundary overlap with original waiter lifetime'
+    else:
+        scope='no original-waiter lifetime overlap; ambient load not ruled out'
+    return dict(stage_waiter_lifetime_overlap_lower_seconds=lower,
+        stage_waiter_lifetime_overlap_upper_seconds=upper,stage_waiter_lifetime_overlap=upper>0,
+        timing_environment_scope=scope,counterfactual_clean_machine_T_cert=None)
+
+
+def reporting_logic_preflight():
+    """Tiny synthetic contract cases only; not campaign evidence or a solve."""
+    def arm(name,input_sha,U,L,G,P,qualified=True,line='D'):
+        return dict(id=name,line=line,input_SHA=input_sha,seed=0,method=name,producer_receipt_SHA='0'*64,
+            U=U,L=L,G_true=G,P_true=P,certificate=False,T_cert=None,T_produce=3.,T_verify=1.,T_total=4.,
+            formal_protocol_qualified=qualified,numbers_qualified=qualified,certificate_qualified=qualified,source_reduced=False)
+    aa=[arm('positive_attainment','a',.5,0.,.2,2.),arm('physical_zero','a',0.,0.,0.,0.),
+        arm('near_zero_positive','b',1e-10,0.,0.,1e-9),arm('positive_bound','c',.5,2e-7,.2,2.),
+        arm('unqualified_zero','d',0.,0.,0.,0.,qualified=False),arm('separate_line','a',.5,0.,.2,2.,line='C')]
+    pairs=[dict(line='D',id='positive_attainment')]
+    before=copy.deepcopy(aa);records=assign_problem_classes(aa,pairs)
+    classes={(r['line'],r['input_SHA']):r['problem_objective_class'] for r in records}
+    assert classes['D','a']=='zero_proved_by_qualified_physical_zero'
+    assert classes['D','b']==classes['D','d']==classes['C','a']=='unknown_optimum_class'
+    assert classes['D','c']=='positive_under_qualified_lower_bound'
+    assert pairs[0]['problem_objective_class']==classes['D','a']
+    assert all({k:v for k,v in after.items() if k!='problem_objective_class'}==old for old,after in zip(before,aa))
+    try: independent_problem_classes([arm('zero','x',0.,0.,0.,0.),arm('bound','x',1.,2e-7,.5,2.)])
+    except AssertionError: pass
+    else: raise AssertionError('zero/bound contradiction was not rejected before classification')
+    environment=dict(old_waiter_creation_unix=10.,old_waiter_stop_unix_lower=20.,old_waiter_stop_unix_upper=22.)
+    for begin,end,expected in ((0.,9.,(0.,0.,False)),(8.,12.,(2.,2.,True)),
+        (19.,21.,(1.,2.,True)),(20.,21.,(0.,1.,True)),(22.,24.,(0.,0.,False))):
+        actual=independent_waiter_exposure(begin,end,environment)
+        assert tuple(actual[k] for k in LIFETIME_FIELDS[:3])==expected
+        assert actual['counterfactual_clean_machine_T_cert'] is None
+    return dict(status='PASS',scope='synthetic reporting contract only; no campaign data',
+        physical_zero_priority_near_zero_unknown_and_qualified_bound_checked=True,
+        same_input_other_line_separation_checked=True,contradictions_rejected_before_classification=True,
+        own_endpoints_and_clocks_unchanged=True,lifetime_boundaries_and_counterfactual_null_checked=True)
 
 
 def summarized(aa,pp):
@@ -363,7 +472,7 @@ def strata(arms,pairs):
                 return summarized(aa,qq)
             for layer in sorted({q['layer'] for q in selected}):
                 broad[f'{line}:{layer}:{left}/{right}']=summary_of([q for q in selected if q['layer']==layer])
-            for dimension in ('id','V','objective_class'):
+            for dimension in ('id','V','objective_class','problem_objective_class'):
                 for value in sorted({str(q[dimension]) for q in selected}):
                     fine[f'{line}:{left}/{right}:{dimension}={value}']=summary_of([q for q in selected if str(q[dimension])==value])
             if line=='D':
@@ -479,6 +588,7 @@ def validate_seal(dest,launch,plan):
     assert 0<produced<=launch['cap_seconds'] and verified>=0
     assert completion['returncode']==0 and completion['stop_reason']=='normal_return' and completion['within_cap']
     return dict(T_produce=produced,T_verify=verified,T_total=produced+verified,
+        producer_interval_unix=[producer['t0_unix'],producer['t_produce_unix']],
         producer_seal_SHA=sha(dest/'producer_seal.json'),producer_receipt_SHA=sha(dest/'producer_receipt.json'),
         verification_closeout_SHA=sha(dest/'verification_closeout.json'))
 
@@ -551,6 +661,8 @@ def formal_evidence(out,rows):
     assets=read(out/'E3_binding.json')
     for name,digest in assets['source_bindings'].items():
         assert sha(portable(name))==digest,('original production source changed',name)
+    environment_path=out/'timing_environment_amendment.json';environment=read(environment_path)
+    reporting_inputs=[dict(path=rel(environment_path),SHA=sha(environment_path))]
     arms=[];pairs=[];artifacts=[];inputs=[];physical_rows=[];errors=[];mechanisms=[];notes=[]
     for line,g,plan in rows:
         camp=out/g['name'];saved=read(camp/'reconstructed.json')['arms'];assert len(saved)==len(plan['launches'])
@@ -574,6 +686,8 @@ def formal_evidence(out,rows):
                     finding=source_reader.reconcile(item.get('claims',[]),witnesses)
                     arm=reconstruction.finalize(ROOT,item,finding,recs)
                     clocks=validate_seal(dest,launch,plan);result=read(dest/'result.json')
+                    assert arm['producer_receipt_SHA']==original['producer_receipt_SHA']==clocks['producer_receipt_SHA']
+                    reporting_inputs.append(dict(path=rel(dest/'producer_receipt.json'),SHA=clocks['producer_receipt_SHA']))
                     physical=core.full_fleet(ROOT,p,result);same(physical['F'],arm['U'],1e-7)
                     for key in ('U','L','gap','T_produce','T_verify','T_total'):
                         same(arm[key],original[key])
@@ -587,8 +701,10 @@ def formal_evidence(out,rows):
                     arm.update(line=line,group=g['number'],method=method,seed=g['seed'],repeat=1,
                         underlying_reader_method=launch['method'],binary_layer=launch['binary_layer'],T_cert=tcert,
                         signed_gap=arm['U']-arm['L'],layer=p['layer'] if line=='D' else 'C',
-                        objective_class='zero' if physical['G']==0 and physical['P']==0 else 'positive')
+                        objective_class='zero' if physical['G']==0 and physical['P']==0 else 'positive',
+                        near_zero_positive_U=0<arm['U']<=1e-7)
                     arm.update({k:resource[k] for k in ('G_true','P_true','P_avg','Omega','rho')})
+                    arm.update(independent_waiter_exposure(*clocks['producer_interval_unix'],environment))
                     physical_rows.append(dict(line=line,id=arm['id'],seed=arm['seed'],method=method,**resource))
                     calls=[q['payload'] for q in read(dest/'observations.json') if q['payload']['kind']=='call']
                     assert len({q['call'] for q in calls})==len(calls)
@@ -674,9 +790,17 @@ def formal_evidence(out,rows):
         for a in aa:
             if eligible(a) and a['L']>best+1e-7:
                 conflicts.append(dict(line=a['line'],id=a['id'],seed=a['seed'],method=a['method'],own_L=a['L'],other_verified_U=best))
-    broad,fine=strata(arms,pairs)
+    problem_records=[]
+    if conflicts or errors:
+        # A contradiction must be reported before a problem is labelled zero
+        # or positive. No normal reporting table is qualified on this branch.
+        broad,fine={},{}
+    else:
+        problem_records=assign_problem_classes(arms,pairs)
+        broad,fine=strata(arms,pairs)
     return dict(arms=arms,pairs=pairs,arm_evidence=artifacts,physical_rows=physical_rows,
         strata=broad,problem_size_objective_strata=fine,C_and_PS_mechanisms=mechanisms,errors=errors,
+        problem_objective_classification=problem_records,reporting_input_identities=reporting_inputs,
         cross_arm_contradictions=conflicts,input_identities=inputs,empty_route_handoff_read_only_diagnostics=notes,
         original_root_fallback=False,incumbents_bounds_or_certificates_transferred=False)
 
@@ -1141,6 +1265,59 @@ def progress_and_history(out,rows,core):
         old_raw_carriers_required_or_read=False)
 
 
+def compare_problem_classification(out,expected):
+    saved=read(out/'problem_objective_classification.json')
+    for flag in ('unknown_is_not_positive','near_zero_positive_is_not_zero',
+        'no_arm_U_L_T_cert_or_certificate_changed','no_information_supplied_to_production'):
+        assert saved[flag] is True,('problem classification scope flag',flag)
+    records={(r['line'],r['input_SHA']):r for r in saved['records']}
+    assert len(records)==len(saved['records'])==len(expected)
+    assert set(records)=={(r['line'],r['input_SHA']) for r in expected}
+    witnesses_checked=0
+    def witness_key(w):
+        return w['id'],w['seed'],w['method'],w['producer_receipt_SHA']
+    for record in expected:
+        actual=records[record['line'],record['input_SHA']]
+        assert actual['problem_objective_class']==record['problem_objective_class']
+        assert actual['ids']==record['ids']
+        ww={witness_key(w):w for w in actual['evidence']}
+        assert len(ww)==len(actual['evidence'])==len(record['evidence'])
+        assert set(ww)=={witness_key(w) for w in record['evidence']}
+        for witness in record['evidence']:
+            reported=ww[witness_key(witness)]
+            assert set(reported)==set(WITNESS_FIELDS)
+            equal(witness,reported,('problem class evidence',record['line'],record['input_SHA'],witness_key(witness)))
+            if record['problem_objective_class']=='zero_proved_by_qualified_physical_zero':
+                assert reported['G_true']==reported['P_true']==0, 'near-zero positive is not a physical zero'
+            else:
+                assert record['problem_objective_class']=='positive_under_qualified_lower_bound' and reported['L']>1e-7
+            witnesses_checked+=1
+        if record['problem_objective_class']=='unknown_optimum_class': assert not actual['evidence']
+    return dict(problem_records=len(records),qualified_classification_witnesses_checked=witnesses_checked,
+        physical_zero_distinguished_from_near_zero_positive=True,unknown_not_relabelled_positive=True,
+        own_U_L_certificates_and_clocks_not_transferred_or_changed=True)
+
+
+def compare_timing_exposure(out,arms):
+    rows=csv_rows(out/'timing_environment_exposure.csv')
+    by={(r['line'],r['id'],int(r['seed']),r['method']):r for r in rows}
+    assert len(rows)==len(by)==len(arms)==84
+    assert set(by)=={(a['line'],a['id'],a['seed'],a['method']) for a in arms}
+    fields={'line','id','seed','method','group','producer_receipt_SHA',*LIFETIME_FIELDS}
+    for a in arms:
+        key=(a['line'],a['id'],a['seed'],a['method']);r=by[key]
+        assert set(r)==fields and int(r['group'])==a['group']
+        assert r['producer_receipt_SHA']==a['producer_receipt_SHA']
+        for name in LIFETIME_FIELDS[:2]: same(float(r[name]),a[name],0.)
+        assert r['stage_waiter_lifetime_overlap'] in ('True','False')
+        assert (r['stage_waiter_lifetime_overlap']=='True') is a['stage_waiter_lifetime_overlap']
+        assert r['timing_environment_scope']==a['timing_environment_scope']
+        assert r['counterfactual_clean_machine_T_cert']=='', 'counterfactual time must remain null'
+    return dict(own_producer_intervals_independently_recomputed=84,exposure_CSV_rows_checked=84,
+        lifetime_overlap_not_parsing_CPU_contention_or_slowdown=True,no_overlap_not_quiescence=True,
+        clean_machine_counterfactuals_invented=False)
+
+
 def author_comparison(out,facts):
     author=read(out/'observations.json');assert author['execution']=='ALL_C_D_ARMS_SEALED'
     aa={(a['line'],a['id'],a['seed'],a['method']):a for a in author['arms']}
@@ -1149,8 +1326,12 @@ def author_comparison(out,facts):
     for arm in facts['arms']:
         saved=aa[arm['line'],arm['id'],arm['seed'],arm['method']]
         for key in ('U','L','gap','signed_gap','T_produce','T_verify','T_total','T_cert','certificate',
-            'formal_protocol_qualified','numbers_qualified','certificate_qualified','PE_SHA','DLL_SHA','input_SHA','objective_class','native_Optimize'):
+            'formal_protocol_qualified','numbers_qualified','certificate_qualified','PE_SHA','DLL_SHA','input_SHA',
+            'objective_class','problem_objective_class','near_zero_positive_U','G_true','P_true','native_Optimize',
+            'producer_receipt_SHA',*LIFETIME_FIELDS):
             equal(arm.get(key),saved.get(key),('author arm',arm['line'],arm['id'],arm['seed'],arm['method'],key))
+        if arm['objective_class']=='zero':
+            assert saved['G_true']==saved['P_true']==0
     for pair in facts['pairs']:
         equal(pair,pp[pair['line'],pair['group'],pair['left'],pair['right']],('author pair',pair['line'],pair['group']))
     summary=read(out/'stratified_summary.json')
@@ -1166,10 +1347,22 @@ def author_comparison(out,facts):
             elif isinstance(v,(list,dict)): equal(v,json.loads(source[k]),('physical resource',k))
             else: equal(v,float(source[k]),('physical scalar',k))
     index=read(out/'analysis_inputs.json');assert index['immutable_group_arm_input_Seed_and_destination_identity_checked'] and not index['issues']
-    for record in index['inputs']: assert sha(portable(record['path']))==record['SHA']
+    bound_inputs={}
+    for record in index['inputs']:
+        path=portable(record['path']);assert sha(path)==record['SHA']
+        name=rel(path)
+        assert name not in bound_inputs or bound_inputs[name]==record['SHA']
+        bound_inputs[name]=record['SHA']
+    assert len(facts['reporting_input_identities'])==85
+    assert len({r['path'] for r in facts['reporting_input_identities']})==85
+    for record in facts['reporting_input_identities']:
+        assert bound_inputs.get(record['path'])==record['SHA'],('missing amendment/producer binding',record['path'])
     assert index['runner_SHA']==sha(ROOT/'scripts/round132_analysis.py')
+    problem=compare_problem_classification(out,facts['problem_objective_classification'])
+    timing=compare_timing_exposure(out,facts['arms'])
     return dict(arms=84,typed_pairs=64,strata_and_all_conditioned_intersections_match=True,
         resource_rows=len(physical),signed_gaps_not_clipped=True,open_time_not_imputed=True,
+        problem_classification=problem,timing_exposure=timing,producer_and_amendment_input_SHA_bindings_checked=85,
         author_analysis_not_imported_or_executed=True)
 
 
@@ -1183,10 +1376,14 @@ def check(root,preflight=False,own_fee=None):
     assert ROOT.is_dir() and (ROOT/'scripts/round132_portable_check.py').is_file()
     assert Path(__file__).resolve()==ROOT/'scripts/round132_portable_check.py','execute the checker in the supplied root, never another checkout'
     rows,contract=frozen_contract(out)
+    reporting_sources=[dict(path=rel(p),SHA=sha(p)) for p in (
+        ROOT/'scripts/round132_analysis.py',out/'timing_environment_amendment.json',out/'review/final_reporting_addendum.md')]
     identity=dict(checker_SHA=sha(Path(__file__)),accepted_bindings=PINNED,
+        reporting_predecessor=REPORTING_PREDECESSOR,reporting_coverage_source_identities=reporting_sources,
         small_plan_input_hashes=[dict(path=rel(p),SHA=h) for p,h in HASHES.items()],**contract)
     if preflight:
         return dict(status='ACCEPT',review_stage='small_plan_preflight_only',**identity,
+            reporting_logic_selfcheck=reporting_logic_preflight(),
             evidence_reader_modules_imported=False,models_fleets_H_or_native_logs_read=False,
             Optimize=0,native_starts=0,compilation=0,final_result_acceptance=False),0
     missing=readiness(out,rows,own_fee=own_fee)
