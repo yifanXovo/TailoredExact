@@ -1,0 +1,66 @@
+{
+  "science_commit": "52b02252ba47e8228b73e071d6ed692385a4f816",
+  "repair_metadata_commit": "d1e3ba8009d99fa52e053f5ab454fbaf2e689545",
+  "destination": "E:\\codes\\ExactEBRP-work\\restore\\round132-public",
+  "same_existing_owned_root": true,
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0,
+  "local_raw_or_old_checkout_fallback": false,
+  "status": "PASS",
+  "map_SHA256": "f7eefea418d9ec6a178dfb9be63bb4866e333d1a82a860b6f6c83b1f68f35e66",
+  "manifest_SHA256": "7484980d2f13509a3dea0f213030522c483d82bcee8e3868484c8f2a7cceab8c",
+  "published_tool_SHA256": "8c0e7c2967baaaf482e66c53bb9efc01549acc7f735dd2d04e890e135d040645",
+  "materialized": [
+    {
+      "path": "results/unified_exact_round132/literature_evidence.csv",
+      "bytes": 10613,
+      "SHA256": "8902cc5bcf6ae49473b350753da9bdcc9d9835032d3874030a8e98b9d5d31345",
+      "CRLF_ordinals": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "only_newline_serialization_changed": true
+    }
+  ],
+  "transfers": [
+    {
+      "ref": "d1e3ba8009d99fa52e053f5ab454fbaf2e689545",
+      "path": "scripts/round132_transport_materialize.py",
+      "bytes": 6042,
+      "SHA256": "8c0e7c2967baaaf482e66c53bb9efc01549acc7f735dd2d04e890e135d040645",
+      "curlrc_disabled": true,
+      "application_credentials_supplied": false
+    },
+    {
+      "ref": "52b02252ba47e8228b73e071d6ed692385a4f816",
+      "path": "results/unified_exact_round132/export_manifest.json",
+      "bytes": 289184,
+      "SHA256": "7484980d2f13509a3dea0f213030522c483d82bcee8e3868484c8f2a7cceab8c",
+      "curlrc_disabled": true,
+      "application_credentials_supplied": false
+    },
+    {
+      "ref": "d1e3ba8009d99fa52e053f5ab454fbaf2e689545",
+      "path": "results/unified_exact_round132/transport_materialization_map.json",
+      "bytes": 1507,
+      "SHA256": "f7eefea418d9ec6a178dfb9be63bb4866e333d1a82a860b6f6c83b1f68f35e66",
+      "curlrc_disabled": true,
+      "application_credentials_supplied": false
+    },
+    {
+      "ref": "52b02252ba47e8228b73e071d6ed692385a4f816",
+      "path": "results/unified_exact_round132/literature_evidence.csv",
+      "bytes": 10607,
+      "SHA256": "a9e361cae3b7457bc450d69ba005832fa25271176f4e467db439aeecb8e3489c",
+      "curlrc_disabled": true,
+      "application_credentials_supplied": false
+    }
+  ],
+  "UTC": "2026-10-24T16:00:18.964580+00:00",
+  "seconds": 4.982733299955726
+}

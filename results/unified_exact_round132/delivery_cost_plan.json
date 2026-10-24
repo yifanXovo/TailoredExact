@@ -7,7 +7,9 @@
     "packing_soft_seconds": 7200,
     "public_recovery_soft_seconds": 18000,
     "postpack_carrier_membership_check_soft_seconds": 300,
-    "initial_science_push_soft_seconds": 1200
+    "initial_science_push_soft_seconds": 1200,
+    "cleanup_soft_seconds": 7200,
+    "final_metadata_push_soft_seconds": 300
   },
   "soft_estimates_not_G1_limits": true,
   "no_formal_window_changes": true,
@@ -21,7 +23,8 @@
     "public_transport_existing_global_window": 1800,
     "cleanup": 10800,
     "postpack_carrier_membership_check": 900,
-    "initial_science_push": 3600
+    "initial_science_push": 3600,
+    "final_metadata_push": 1200
   },
   "actual_scale_basis": {
     "current_campaign_files": 1040559,
@@ -58,6 +61,27 @@
     "materialization_timeout_seconds": 600,
     "normal_repair_metadata_push_timeout_seconds": 1200,
     "no_new_native_or_checker_replay_started": true,
-    "repair_scope": "Public metadata of line-ending ordinals only; actual anonymous reconstruction must hash-match the fixed science manifest. Inspect all931 Git blobs once to discover the complete affected set before the same-root resume."
-  }
+    "repair_scope": "Public metadata of line-ending ordinals only; actual anonymous reconstruction must hash-match the fixed science manifest. Inspect all931 Git blobs once to discover the complete affected set before the same-root resume.",
+    "actual_materialization_receipt": "review/public_transport_materialization01.json",
+    "repair_metadata_commit": "d1e3ba8009d99fa52e053f5ab454fbaf2e689545",
+    "same_root_resume_outer_timeout_seconds": 21300,
+    "resume_timeout_basis": "Within original21600s recovery envelope after262.8757298s failed attempt and5.0666438s public materialization; isolated checker remains10800s. No formal cap changes.",
+    "documentation_checkpoint_push": {
+      "registered_UTC": "2026-10-24T16:27:12.519525+00:00",
+      "soft_seconds": 300,
+      "timeout_seconds": 1200,
+      "scope": "Small completed reproduction-entry and sole-reviewer narrow repair reports; no science/carrier/manifest rewrite or recursive recovery."
+    }
+  },
+  "cleanup_actual_scale_basis": {
+    "registered_UTC": "2026-10-24T19:27:18.224990+00:00",
+    "members": 1042789,
+    "logical_member_bytes": 5535765415,
+    "passed_public_reader_outer_seconds": 12080.056826799992,
+    "passed_nested_reader_seconds": 5920.247893400025,
+    "cleanup_soft_seconds": 7200,
+    "existing_cleanup_hard_seconds": 10800,
+    "reason": "One owned million-member restoration inventory/hash sweep and native PowerShell removal,34 byte-identical temporary ZIPs,and272 reconstructible images. The full public read-only replay actually passed; no Native clock/cap changes. Logical bytes and observed volume delta will be distinct."
+  },
+  "final_metadata_scope": "Receipt/status/report updates only, under5MiB expected. One normal push; actual post-push receipt/readback is retained outside this fixed science snapshot without recursive publication."
 }

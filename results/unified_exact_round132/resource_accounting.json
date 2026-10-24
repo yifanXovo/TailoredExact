@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-24T15:14:51.958211+00:00",
+  "UTC": "2026-10-24T20:33:11.087449+00:00",
   "G1_seconds": 71131.19380520075,
   "remaining_G1_seconds": 72868.80619479925,
   "by_category": {
@@ -36,6 +36,20 @@
       "outer_process_counted_once": true
     },
     {
+      "label": "cleanup01",
+      "UTC": "2026-10-24T20:30:42.589054+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 3752.282357500051,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 3752.282357500051,
+      "exit_observed": true,
+      "start_unix": 1792870090.308779,
+      "end_unix": 1792873842.589055,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
       "label": "clock_diagnostic01",
       "UTC": "2026-10-24T11:25:46.906368+00:00",
       "exit_code": 0,
@@ -60,6 +74,20 @@
       "exit_observed": true,
       "start_unix": 1792841624.633338,
       "end_unix": 1792841638.8038204,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "export_manifest01",
+      "UTC": "2026-10-24T15:15:35.667583+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 43.02602130000014,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 43.02602130000014,
+      "exit_observed": true,
+      "start_unix": 1792854892.6415045,
+      "end_unix": 1792854935.6675832,
       "no_formal_window_changed": true,
       "outer_process_counted_once": true
     },
@@ -358,6 +386,48 @@
       "outer_process_counted_once": true
     },
     {
+      "label": "public_restore01",
+      "UTC": "2026-10-24T15:53:00.670960+00:00",
+      "exit_code": 1,
+      "error": null,
+      "seconds": 262.8757297999691,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 262.8757297999691,
+      "exit_observed": true,
+      "start_unix": 1792856917.7944028,
+      "end_unix": 1792857180.6709604,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "public_restore_resume01",
+      "UTC": "2026-10-24T19:22:01.936355+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 12080.056826799992,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 12080.056826799992,
+      "exit_observed": true,
+      "start_unix": 1792857641.878165,
+      "end_unix": 1792869721.9363554,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "public_transport_materialize01",
+      "UTC": "2026-10-24T16:00:18.971380+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 5.066643800004385,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 5.066643800004385,
+      "exit_observed": true,
+      "start_unix": 1792857613.9048574,
+      "end_unix": 1792857618.97138,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
       "label": "publish_sources01",
       "UTC": "2026-10-24T11:21:06.502154+00:00",
       "exit_code": 0,
@@ -370,19 +440,89 @@
       "end_unix": 1792840866.5021546,
       "no_formal_window_changed": true,
       "outer_process_counted_once": true
+    },
+    {
+      "label": "push_repair_documentation01",
+      "UTC": "2026-10-24T16:27:37.160146+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 12.039110400015488,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 12.039110400015488,
+      "exit_observed": true,
+      "start_unix": 1792859245.12128,
+      "end_unix": 1792859257.1601465,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "push_science01",
+      "UTC": "2026-10-24T15:23:03.696762+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 145.45259450003505,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 145.45259450003505,
+      "exit_observed": true,
+      "start_unix": 1792855238.2436745,
+      "end_unix": 1792855383.6972718,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "push_transport_repair01",
+      "UTC": "2026-10-24T15:59:53.387962+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 8.578449900029227,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 8.578449900029227,
+      "exit_observed": true,
+      "start_unix": 1792857584.8089213,
+      "end_unix": 1792857593.387962,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "science_transport_inventory01",
+      "UTC": "2026-10-24T15:56:49.872204+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 3.277519499999471,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 3.277519499999471,
+      "exit_observed": true,
+      "start_unix": 1792857406.5950053,
+      "end_unix": 1792857409.8722043,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
+      "label": "stage_export01",
+      "UTC": "2026-10-24T15:18:44.059031+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 9.180129699991085,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 9.180129699991085,
+      "exit_observed": true,
+      "start_unix": 1792855114.878622,
+      "end_unix": 1792855124.0590312,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
     }
   ],
   "active_delivery_receipts": [],
   "separate_postverify_from_G1_receipts": 1603.8254403998144,
-  "separate_delivery_process_seconds": 12012.276430400321,
-  "separate_measured_total_seconds": 13616.101870800136,
+  "separate_delivery_process_seconds": 28334.111813600408,
+  "separate_measured_total_seconds": 29937.937254000222,
   "delivery_total_is_sum_of_distinct_outer_process_wall_times_not_session_elapsed": true,
   "independent_delivery_intervals_may_overlap": true,
   "writing_static_manual_wall_cost": "Estimate only: overlapping wall time from initialization to current delivery; not exact CPU, and not added to measured serial subprocess costs",
   "writing_static_manual_wall_envelope_estimate": {
     "start_UTC": "2026-10-23T14:51:26.405461+00:00",
-    "end_UTC": "2026-10-24T15:14:51.958211+00:00",
-    "elapsed_upper_bound_seconds": 87805.55275,
+    "end_UTC": "2026-10-24T20:33:11.087449+00:00",
+    "elapsed_upper_bound_seconds": 106904.681988,
     "includes_native_wait_and_other_work_so_not_an_active_writing_time_estimate": true,
     "includes_unmetered_quick_direct_static_and_metadata_glue": true,
     "not_isolated_CPU_and_not_an_additive_charge": true
@@ -397,7 +537,9 @@
       "packing_soft_seconds": 7200,
       "public_recovery_soft_seconds": 18000,
       "postpack_carrier_membership_check_soft_seconds": 300,
-      "initial_science_push_soft_seconds": 1200
+      "initial_science_push_soft_seconds": 1200,
+      "cleanup_soft_seconds": 7200,
+      "final_metadata_push_soft_seconds": 300
     },
     "soft_estimates_not_G1_limits": true,
     "no_formal_window_changes": true,
@@ -411,7 +553,8 @@
       "public_transport_existing_global_window": 1800,
       "cleanup": 10800,
       "postpack_carrier_membership_check": 900,
-      "initial_science_push": 3600
+      "initial_science_push": 3600,
+      "final_metadata_push": 1200
     },
     "actual_scale_basis": {
       "current_campaign_files": 1040559,
@@ -436,6 +579,40 @@
     },
     "cost_boundaries": "Full process wall receipts count each delivery outer once; nested children are not added. G1 unchanged.",
     "postpack_carrier_membership_scope": "One author publication check reuses the existing independent progress_and_history reader after pack01 closes; validates36 actual extra compact progress files in current member indexes and two existing small historical fleets. Roughly one million compressed index records, not a new full formal replay, solver call, or research enumeration.",
-    "initial_science_push_basis": "One normal push of34 finite ZIPs totalling574011070bytes plus exact small source/metadata dependencies; no force push or history rewrite."
+    "initial_science_push_basis": "One normal push of34 finite ZIPs totalling574011070bytes plus exact small source/metadata dependencies; no force push or history rewrite.",
+    "genuine_public_transport_repair": {
+      "registered_UTC": "2026-10-24T15:55:55.506012+00:00",
+      "failure": "Mixed LF/CRLF in literature_evidence.csv was stored as all-LF in the science Git blob; uniform LF/CRLF restoration cannot reproduce the exact manifest bytes.",
+      "same_owned_root_only": true,
+      "science_commit_unchanged": "52b02252ba47e8228b73e071d6ed692385a4f816",
+      "finite_science_blob_inventory_soft_seconds": 120,
+      "finite_science_blob_inventory_timeout_seconds": 600,
+      "materialization_soft_seconds": 120,
+      "materialization_timeout_seconds": 600,
+      "normal_repair_metadata_push_timeout_seconds": 1200,
+      "no_new_native_or_checker_replay_started": true,
+      "repair_scope": "Public metadata of line-ending ordinals only; actual anonymous reconstruction must hash-match the fixed science manifest. Inspect all931 Git blobs once to discover the complete affected set before the same-root resume.",
+      "actual_materialization_receipt": "review/public_transport_materialization01.json",
+      "repair_metadata_commit": "d1e3ba8009d99fa52e053f5ab454fbaf2e689545",
+      "same_root_resume_outer_timeout_seconds": 21300,
+      "resume_timeout_basis": "Within original21600s recovery envelope after262.8757298s failed attempt and5.0666438s public materialization; isolated checker remains10800s. No formal cap changes.",
+      "documentation_checkpoint_push": {
+        "registered_UTC": "2026-10-24T16:27:12.519525+00:00",
+        "soft_seconds": 300,
+        "timeout_seconds": 1200,
+        "scope": "Small completed reproduction-entry and sole-reviewer narrow repair reports; no science/carrier/manifest rewrite or recursive recovery."
+      }
+    },
+    "cleanup_actual_scale_basis": {
+      "registered_UTC": "2026-10-24T19:27:18.224990+00:00",
+      "members": 1042789,
+      "logical_member_bytes": 5535765415,
+      "passed_public_reader_outer_seconds": 12080.056826799992,
+      "passed_nested_reader_seconds": 5920.247893400025,
+      "cleanup_soft_seconds": 7200,
+      "existing_cleanup_hard_seconds": 10800,
+      "reason": "One owned million-member restoration inventory/hash sweep and native PowerShell removal,34 byte-identical temporary ZIPs,and272 reconstructible images. The full public read-only replay actually passed; no Native clock/cap changes. Logical bytes and observed volume delta will be distinct."
+    },
+    "final_metadata_scope": "Receipt/status/report updates only, under5MiB expected. One normal push; actual post-push receipt/readback is retained outside this fixed science snapshot without recursive publication."
   }
 }

@@ -1,0 +1,281 @@
+{
+  "schema": "round132-directed-completion-audit-v1",
+  "status": "PASS_APPLICABLE_A_TO_H_LOCAL_DELIVERY_FINAL_REMOTE_ATTESTATION_EXTERNAL",
+  "UTC": "2026-10-24T20:33:11.101449+00:00",
+  "source_task_SHA256": "19cb9155899e27cec743f66c4f1c79186f70440b5693beabb7a86e08507c4fc3",
+  "science_commit": "52b02252ba47e8228b73e071d6ed692385a4f816",
+  "pr_url": "https://github.com/yifanXovo/TailoredExact/pull/194",
+  "stages": [
+    {
+      "stage": "A",
+      "status": "PASS",
+      "conclusion": "Verified R131 base, sparse linked worktree, frozen E3/DLL/source, exact physical semantics and historical claim corrections",
+      "evidence": [
+        "initialization.json",
+        "baseline_summary.md",
+        "history_to_claim.csv",
+        "paper_outline.md",
+        "E3_binding.json"
+      ]
+    },
+    {
+      "stage": "B",
+      "status": "PASS_WITH_STATED_PREMISES",
+      "conclusion": "Audited ideal projection proofs, all12 W-elimination combinations, degeneracies and actual serialized numerical differences",
+      "evidence": [
+        "mathematical_analysis.md",
+        "review/preformal_mathematics_review.md",
+        "qualification/C_matrix_qualification.json"
+      ]
+    },
+    {
+      "stage": "C",
+      "status": "COMPLETE_MIXED_NO_PROMOTION",
+      "conclusion": "All24 admitted positions completed; optional C3 not entered; numerically matching LPs and mixed native costs do not establish a stronger bound",
+      "evidence": [
+        "C_experiment_plan.json",
+        "C_execution_binding.json",
+        "arms.csv",
+        "pairs.csv",
+        "mechanism_costs.csv",
+        "conditional_step_decisions.json"
+      ]
+    },
+    {
+      "stage": "D",
+      "status": "COMPLETE_WITH_DISCLOSED_UNEVALUABLE",
+      "conclusion": "All60 frozen positions produced;59 qualified, one own-zero source-reduced observation retained with a null derived T_cert and UNEVALUABLE pair; native reliability remains unrepaired",
+      "evidence": [
+        "experiment_plan.json",
+        "source_recipe.json",
+        "input_manifest.json",
+        "D_execution_binding.json",
+        "source_loss_dispositions.json",
+        "stratified_summary.json"
+      ]
+    },
+    {
+      "stage": "E",
+      "status": "COMPLETE_BOUNDED_WITH_LEGAL_NON_ENTRY",
+      "conclusion": "Four complete tiny universes; J2 exact strict witness and no observed original-objective gain; real steps2-4 not admitted for missing valid full-universe interface/bound",
+      "evidence": [
+        "E_experiment_plan.json",
+        "joint_results.json",
+        "joint_structure_note.md",
+        "conditional_step_decisions.json"
+      ]
+    },
+    {
+      "stage": "F",
+      "status": "COMPLETE",
+      "conclusion": "One authoritative complete manuscript, full model/algorithms/proofs, finite primary-source literature and operational interpretation; all45 PDF pages visually accepted",
+      "evidence": [
+        "manuscript.md",
+        "manuscript.pdf",
+        "references.bib",
+        "literature_evidence.csv",
+        "physical_outcomes.csv",
+        "review/pdf_visual_qa.json"
+      ]
+    },
+    {
+      "stage": "G",
+      "status": "COMPLETE_WITH_DISCLOSED_LIMITATIONS",
+      "conclusion": "G1 closed below all limits, separate costs, one independent internal finite review, no Native retry/extra Seeds or candidates; source reliability and timing exposure remain disclosed",
+      "evidence": [
+        "resource_accounting.json",
+        "timing_environment_exposure.csv",
+        "review/final_independent_evidence.json",
+        "independent_review.md"
+      ]
+    },
+    {
+      "stage": "H",
+      "status": "COMPLETE",
+      "conclusion": "English stacked Draft PR/readback, actual scans, one science-pinned anonymous empty-root recovery with documented same-root newline repair, and guarded cleanup all passed",
+      "evidence": [
+        "remote_readback.json",
+        "public_restore_receipt.json",
+        "cleanup_receipt.json",
+        "review/public_transport_materialization01.json",
+        "review/public_transport_repair_review.json",
+        "review/loose_publication_scan.json",
+        "review/publication_scan.json"
+      ]
+    }
+  ],
+  "required_deliverable_bindings": [
+    {
+      "path": "final_report.md",
+      "bytes": 21059,
+      "SHA256": "73a9b90524382d1ad755e7cf38e415a5374cd4e5ee4827abf9a175e71c8c912d"
+    },
+    {
+      "path": "history_to_claim.csv",
+      "bytes": 14321,
+      "SHA256": "55ca95eaaf3fd90b97df71c7daac3e5c73356f15ccbfbd4b6e249ae7a24b2b40"
+    },
+    {
+      "path": "mathematical_analysis.md",
+      "bytes": 19068,
+      "SHA256": "d8171152d1677e0bfa7ca1fe830231ccdf229c047e121d78663b798a0ac882a6"
+    },
+    {
+      "path": "experiment_plan.json",
+      "bytes": 39871,
+      "SHA256": "f73f89ff1cc5ec2e2772a30e63b7c5d9b23d6a34362879d5cac1067c0e3f63ee"
+    },
+    {
+      "path": "current_method_manifest.json",
+      "bytes": 28117,
+      "SHA256": "0a09f92469829b0a06ffa8c4e7bb99a2032d8f515774c9102623566a0e11a1a8"
+    },
+    {
+      "path": "arms.csv",
+      "bytes": 121040,
+      "SHA256": "a900a2e4b143dcd93e01319451bea2d7bbf6d65ae1836d07997705bd027df626"
+    },
+    {
+      "path": "pairs.csv",
+      "bytes": 20563,
+      "SHA256": "1d1582aff7d0e0f4f94aaf144197a8aeafaa3203e92ae984a9bd62d34a0664a3"
+    },
+    {
+      "path": "mechanism_costs.csv",
+      "bytes": 264809,
+      "SHA256": "5b69fae0bc9da713e37ae48f158446447a79398db1ba43fb3052b92a3cc7bb55"
+    },
+    {
+      "path": "physical_outcomes.csv",
+      "bytes": 78241,
+      "SHA256": "6a1b7aa06de4fe55230ca730d5a08533511b79324a371c52af94fc688057ef6d"
+    },
+    {
+      "path": "trajectory_index.json",
+      "bytes": 209180,
+      "SHA256": "814d2b2d21732b7d0b179203839933f230add77bf9de9e39377fffc433d68b62"
+    },
+    {
+      "path": "joint_structure_note.md",
+      "bytes": 8264,
+      "SHA256": "a1197d288c18860c9b8096d6501f994daf9b0bc6eff4f5b2b4f54e14bfcd5395"
+    },
+    {
+      "path": "manuscript.md",
+      "bytes": 136849,
+      "SHA256": "ca97e894b5d69b3b704f27b78c2ed5da18614eb9186d0257ca4b6eab4669030e"
+    },
+    {
+      "path": "manuscript.pdf",
+      "bytes": 335667,
+      "SHA256": "f9d1a80db93e8264261008133ab0f587c4ee749bcf0bcd707bfad6623ed9b28d"
+    },
+    {
+      "path": "references.bib",
+      "bytes": 9624,
+      "SHA256": "92c5f9e8497d776aecbd47df7aca4f745f69e3585bf52d643a81057889d667a4"
+    },
+    {
+      "path": "literature_evidence.csv",
+      "bytes": 10613,
+      "SHA256": "8902cc5bcf6ae49473b350753da9bdcc9d9835032d3874030a8e98b9d5d31345"
+    },
+    {
+      "path": "reproducibility.md",
+      "bytes": 11436,
+      "SHA256": "ba317eadaeeee12d0d946dcf7bfbbd1364f1e2e95f1cf63c9c663f7cba16a3dd"
+    },
+    {
+      "path": "independent_review.md",
+      "bytes": 15975,
+      "SHA256": "bbe03897512d7b0bed23003375ac0dae485749df2e2ce6a27ad0c3d7d55d0070"
+    },
+    {
+      "path": "baseline_summary.md",
+      "bytes": 4099,
+      "SHA256": "8f67e1bc7e6b2f8e0c3a14719ea108539ad89b9a397d03b859543c8ee87b2189"
+    },
+    {
+      "path": "paper_outline.md",
+      "bytes": 2465,
+      "SHA256": "b29b206fd298104e900d528935d9e7b1abdbeca28a58be0a41fd8812c291f886"
+    },
+    {
+      "path": "conditional_step_decisions.json",
+      "bytes": 481,
+      "SHA256": "4c92f046cd84dcf232a91ce248bc01e6204bee6bd8200e8f270fb2ec8f5c64ed"
+    }
+  ],
+  "formal_positions": {
+    "D": 60,
+    "C": 24,
+    "E": 4,
+    "typed_pairs": 64,
+    "performance_eligible": 83,
+    "source_reduced_own_zero": 1
+  },
+  "G1": {
+    "G1_seconds": 71131.19380520075,
+    "remaining_G1_seconds": 72868.80619479925,
+    "by_category": {
+      "C": 22373.336211999995,
+      "D": 48682.16879070026,
+      "qualification": 73.03588320047129,
+      "E": 2.652919300016947,
+      "C3": 0.0,
+      "repair": 0.0
+    }
+  },
+  "production_source_unchanged": true,
+  "frozen_asset_hashes_checked": true,
+  "directed_preexisting_dirty_hash_checks": [
+    {
+      "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+      "SHA": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+      "unchanged": true
+    },
+    {
+      "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+      "SHA": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+      "unchanged": true
+    },
+    {
+      "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+      "SHA": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202",
+      "unchanged": true
+    }
+  ],
+  "no_whole_user_directory_integrity_claim": true,
+  "no_second_raw_replay_or_scientific_rerun_from_this_audit": true,
+  "genuine_public_transport_repair": {
+    "science_commit": "52b02252ba47e8228b73e071d6ed692385a4f816",
+    "repair_metadata_commit": "d1e3ba8009d99fa52e053f5ab454fbaf2e689545",
+    "materialization": "PASS",
+    "narrow_independent_static_review": "ACCEPT",
+    "review_receipt_SHA256": "1b35aa2213b23b210357b3a34fd7825da2752f360b126f8a69010582a071a490",
+    "root_unchanged": true,
+    "overall_recovery": "PASS_SAME_SINGLE_ROOT"
+  },
+  "author_directed_completion_audit": true,
+  "not_an_additional_independent_raw_replay": true,
+  "actual_H_receipt_bindings": [
+    {
+      "path": "public_restore_receipt.json",
+      "SHA256": "721aa0ac08b0be2b621fbdd27e5f4a749344ad2e09e198489bcdc2d53a3f6b30"
+    },
+    {
+      "path": "cleanup_receipt.json",
+      "SHA256": "e48b004d526f9884fc6ba38da99b143b7edc7d5ae37afd57cac475657335a6c9"
+    },
+    {
+      "path": "review/public_transport_materialization01.json",
+      "SHA256": "214808f606e3738bbb4219da96fef3f6acfaa8b3bc49ae466425bf36726437af"
+    },
+    {
+      "path": "review/public_transport_repair_review.json",
+      "SHA256": "1b35aa2213b23b210357b3a34fd7825da2752f360b126f8a69010582a071a490"
+    }
+  ],
+  "final_post_push_attestation": "E:/codes/ExactEBRP-work/temp/round132/final_remote_readback.json; must pass before update_goal complete",
+  "final_delivery_text_spacing_only_after_preparation": true
+}
