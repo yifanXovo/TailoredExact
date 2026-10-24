@@ -1,10 +1,10 @@
 {
-  "status": "PREPARED_PREFLIGHT_ACCEPTED_HEAVY_PENDING",
+  "status": "FULL_INTERNAL_EVIDENCE_REPLAY_AND_FINITE_CLAIM_REVIEW_PASS",
   "checker": "scripts/round132_portable_check.py",
-  "checker_SHA": "d02cd20c7c4cf79e3d58b1db78567faecfcd9d1d15cbc968ed9e9327dd4bcd7f",
-  "preflight_receipt": "review/portable_checker_source_loss_preflight.json",
+  "checker_SHA": "07ecaba1e51988863652f0b88df28f745ce6d9116245dc3d6b90cab1640f2f5b",
+  "preflight_receipt": "review/portable_checker_runtime_preflight.json",
   "preflight_status": "ACCEPT",
-  "preflight_seconds": 0.3006333999801427,
+  "preflight_seconds": 0.246152599924244,
   "previous_checker": {
     "checker_SHA": "a6939dae51f8f29870d6ad48934fd344afd55907af87be769e5537317afa3033",
     "Git_commit": "0456358c8dff158ee874036cf9d2fd10d4fba633",
@@ -21,7 +21,7 @@
   "E_plan_SHA": "d8de4cba395f475c83b8f22e8fc0abd31c887ffe0fdb6c289ce0af626adad7dd",
   "E_runner_SHA": "8d0d723a32a8f11dcd240778e44d6f172c44f02fe5c65e05c706d13b9ceafdf6",
   "analysis_SHA_statically_reviewed": "4eb5eb4d37945bc07e8bdc417f19a055e4758ebebdb279a76f6d530cad244ff2",
-  "reporting_handoff_SHA": "38fd4806698348c7fccc5ac8291124a64e4f7278c601fdd77e5863f938dc76a3",
+  "reporting_handoff_SHA": "28c0884297db71c36cdf195cf9441fbcd1b17acd416b8f49bd5b4f1ca2b5eb11",
   "reporting_coverage": {
     "independent_problem_objective_class_and_witnesses": true,
     "qualified_zero_positive_bound_unknown_distinguished": true,
@@ -33,18 +33,18 @@
     "amendment_and_producer_input_SHA_bindings_expected": 85,
     "author_analysis_imported_or_executed": false,
     "synthetic_reporting_contract_preflight": "PASS",
-    "raw_reporting_fields_replayed": false
+    "raw_reporting_fields_replayed": true
   },
   "delivery_meter_SHA_statically_reviewed": "b012febc91c789480f872302261aad8afb5b45cbfda531eb6748893a09fd9955",
   "same_entry_internal_and_public": true,
   "frozen_D_C_scripts_modified": false,
-  "heavy_raw_execution": false,
+  "heavy_raw_execution": true,
   "Optimize": 0,
   "H": 0,
   "native_starts": 0,
   "compilation": 0,
   "external_reproduction": false,
-  "final_result_acceptance": false,
+  "final_result_acceptance": true,
   "source_loss_predecessor": {
     "checker_SHA": "0e7d939c4e3a99561172170489733a83f524dc9d25f876da03c1977ffdbfc452",
     "retained": "review/portable_checker_before_source_loss.py"
@@ -59,6 +59,42 @@
     "counts_independently_derived_without_expected_win_count": true,
     "small_author_disposition_rechecked": "review/source_loss_reporting_narrow.json",
     "synthetic_preflight": "PASS",
-    "full_campaign_replay": false
+    "full_campaign_replay": true
+  },
+  "full_evidence_receipt": "review/final_independent_evidence.json",
+  "full_evidence_receipt_SHA": "da1760f4c0628e488a4c94f86a3e892ad781bf9ee847c6d76be83202f5914f4e",
+  "full_replay_outer_seconds": 5541.306450600037,
+  "full_replay_inner_seconds_not_added": 5541.14574930002,
+  "public_empty_root_execution_completed": false,
+  "claim_review_receipt": "review/final_claim_review.json",
+  "independent_report": "review/independent_review.md",
+  "overall_task_COMPLETE": false,
+  "reporting_dispositions": {
+    "required_positions": 84,
+    "typed_positions": 64,
+    "performance_qualified_observations": 83,
+    "disclosed_source_loss_observations": 1,
+    "native_source_qualified_observations": 83,
+    "performance_unevaluable_comparisons": 1,
+    "unresolved_unqualified_observations": [],
+    "unresolved_unevaluable_comparisons": [],
+    "all_required_positions_performance_qualified": false,
+    "rejected_native_proof_reliability_restored": false,
+    "raw_own_zero_not_treated_as_open_or_time_win": true
+  },
+  "platform_entry_repairs": {
+    "predecessor_d02_retained": "review/portable_checker_before_windows_open_flags.py",
+    "Windows_open_flags": "Use actual interpreter os.O_* constants; O_NOINHERIT128 must not be confused with POSIX O_EXCL128.",
+    "stdlib_runtime_initialization": {
+      "stdlib_ctypes_source": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\ctypes\\__init__.py",
+      "stdlib_ctypes_source_SHA": "e0db1242e78267cba0124ee9fe5963b72d1c8a1832bb51a88abcf012a9cbce76",
+      "ordinary_Python_Windows_kernel32_initialization_before_audit": true,
+      "solver_or_evidence_asset_library_loaded": false,
+      "subsequent_dlopen_or_producer_process_helpers_permitted": false
+    },
+    "inert_ctypes_attempt_retained_but_not_full_run": "review/portable_checker_disabled_ffi_attempt.py",
+    "three_entry_failures_before_campaign_replay_retained": true,
+    "early_entry_failures_seconds": 1.2628308000275865,
+    "final_frozen_D_C_source_models_caps_orders_Seeds_unchanged": true
   }
 }

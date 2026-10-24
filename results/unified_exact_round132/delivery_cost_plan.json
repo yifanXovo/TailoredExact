@@ -25,7 +25,11 @@
     "additional_current_progress_bytes": 47609257,
     "source": "engineering/carrier_file_inventory.json; prepublication size stat",
     "inherited_R131_archive_members": 264452,
-    "reason": "Current healthy independent replay exceeded initial2400s soft estimate; over one million required current journal files. Finite delivery allowances are registered before pack and one public recovery. No experimental cap, Seed, input, candidate or formal clock changes."
+    "reason": "Current healthy independent replay exceeded initial2400s soft estimate; over one million required current journal files. Finite delivery allowances are registered before pack and one public recovery. No experimental cap, Seed, input, candidate or formal clock changes.",
+    "completed_independent_replay_outer_seconds": 5541.306450600037,
+    "completed_independent_replay_receipt_SHA": "f09b0d85e27d035cd3491b12a507fa572b11460fda5ce58e144fec31b4f91a42",
+    "completed_independent_check_receipt_SHA": "da1760f4c0628e488a4c94f86a3e892ad781bf9ee847c6d76be83202f5914f4e",
+    "public_inner_timeout_basis": "10800s was registered before packing; completed first replay5541.3064506s confirms the initial2400s soft estimate was insufficient. Public recovery keeps the same finite10800s isolated-check allowance and21600s outer allowance; no native cap changes."
   },
   "cost_boundaries": "Full process wall receipts count each delivery outer once; nested children are not added. G1 unchanged."
 }

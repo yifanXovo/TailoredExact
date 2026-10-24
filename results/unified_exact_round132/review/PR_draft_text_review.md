@@ -1,0 +1,7 @@
+# Narrow PR draft text review
+
+Accepted for the finite scientific text scope. Draft SHA256: `289d194edc45e16c8d19019d03f7c67c4057d466826c72edbaff0cdd5b8fcb12`. The60 D/24 C positions,64 typed comparisons,83 performance-eligible observations and one disclosed source loss match the existing terminal receipt and independent report. Certificate/direction counts,mixed C outcomes,J2 strict15/2>7 with783 checks versus no original-objective gain,G1 and separate costs,and timing limits are faithful. The OUT independent_review.md entry is byte-identical to the review-owned report.
+
+One wording precision is recommended: change “Equal canonical LP values” to “Numerically matching canonical LP values under the inherited policy.” This aligns the PR with the numerical bridge and avoids an exact serialized-LP equality implication. In the reviewed bytes this is: precision edit already present in reviewed bytes. No substantive scientific count or scope correction was found.
+
+The four private placeholders are intentional. Prospective PR status,scans/carrier publication,public recovery and guarded cleanup statements remain conditional on actual later receipts; this review does not assert those deliveries happened. Only the known draft,small report copies and existing terminal receipt were read. No campaign raw,reconstructed table,new replay,Native,Optimize,compile or metered delivery was used.

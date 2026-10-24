@@ -1,6 +1,7 @@
 """Disjoint non-native delivery meters; never a formal experimental runner."""
 from round132_common import *
 from round132_release import idle
+import datetime
 
 def run(label,command,timeout):
     idle();d=OUT/'delivery_costs'/label;d.mkdir(parents=True,exist_ok=False)
@@ -30,11 +31,20 @@ def account():
         r=p.parent/'receipt.json'
         if not r.exists():active.append(p.parent.name);continue
         v=read(r);closed.append(dict(label=p.parent.name,**v))
-    base=budget();value=dict(UTC=utc(),**base,delivery_process_receipts=closed,active_delivery_receipts=active,
+    snapshot=utc();initial=read(OUT/'initialization.json')['UTC']
+    envelope=(datetime.datetime.fromisoformat(snapshot)-datetime.datetime.fromisoformat(initial)).total_seconds()
+    base=budget();value=dict(UTC=snapshot,**base,delivery_process_receipts=closed,active_delivery_receipts=active,
         separate_postverify_from_G1_receipts=base['separately_reported_seconds'],
         separate_delivery_process_seconds=sum(r['seconds'] for r in closed),
         separate_measured_total_seconds=base['separately_reported_seconds']+sum(r['seconds'] for r in closed),
+        delivery_total_is_sum_of_distinct_outer_process_wall_times_not_session_elapsed=True,
+        independent_delivery_intervals_may_overlap=True,
         writing_static_manual_wall_cost='Estimate only: overlapping wall time from initialization to current delivery; not exact CPU, and not added to measured serial subprocess costs',
+        writing_static_manual_wall_envelope_estimate=dict(start_UTC=initial,end_UTC=snapshot,
+            elapsed_upper_bound_seconds=envelope,
+            includes_native_wait_and_other_work_so_not_an_active_writing_time_estimate=True,
+            includes_unmetered_quick_direct_static_and_metadata_glue=True,
+            not_isolated_CPU_and_not_an_additive_charge=True),
         no_nested_H_LP_MIP_or_child_delivery_cost_added=True,
         delivery_plan=read(OUT/'delivery_cost_plan.json'))
     write(OUT/'resource_accounting.json',value);return value
