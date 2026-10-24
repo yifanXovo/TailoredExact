@@ -150,3 +150,19 @@ After the full post-native analysis, the final C interpretation must use the act
 The C07 Seed0 SP production arm sealed normally and the same group continued to GEOM. C remains18/24 closed qualified observations until the whole group and its fee close; no partial group is mixed into C_closed_producer_summary_checkpoint.json. The new native PID30116 was born2026-10-24T15:59:44.832694+08:00, parent39872; exact observed argv has PB-C35-U, Seed0, legal s2-root, expression geom, physicalT10800, processcap2400/time-limit2394/shutdownmargin30, one thread. Sequence PID31680/session83618 and C supervisor49716 are still the original live handles. Check actual children before recovery; SP PID49296 ended normally and must not be restarted.
 
 The manuscript/generator copyedit is committed (latest2cd46c4e2). Both keep the same logical text, canonical binary-selector premise and original LF generator style; only prose/math notation changed. No source plan/PE/DLL/native algorithm changed. All final analysis/independent review/PDF/publication/recovery/cleanup obligations still wait for the required native stages. No PDF marker or public restore has run.
+
+
+### C07 final baseline arm
+
+C07 SP and GEOM production arms have sealed and the same supervisor has started the final off baseline. Current baseline native PID55960 was born2026-10-24T16:39:17.532314+08:00, parent39872. Actual argv remains PB-C35-U, Seed0, legal s2-root, expression off, T10800, processcap2400/time-limit2394/shutdownmargin30, threads1. The sequence PID31680/session83618 and C supervisor49716 are unchanged. Do not restart terminal SP49296 or GEOM30116. Closed qualified C remains18/24 until formal_C07_01 closes; its live cost is not yet in the closed G1 total56889.34601810074s.
+
+
+### Closed C07; last registered C group active
+
+Recorded UTC: 2026-10-24T09:21:17.156019+00:00.
+
+C has21/24 closed qualified observations,17 own certificates. C07/PB-C35-U Seed0 is open under all three expressions: SP U/L0.16237905057683977/0.0847221716426949; GEOM0.17413853672442434/0.08596586236621835; off0.1837015568695711/0.0847282772541659. All T_cert remain null. Keep the better candidate primal endpoints and GEOM dual endpoint, but all candidate/baseline certification-time directions for this Seed are UNDETERMINED. No normal open result is retried. Small source-bound C checkpoint now covers all seven closed groups; full raw-derived tables remain deferred.
+
+C08/PB-C35-U Seed1 began in off/geom/sp order. Its first off native PID36492 was born2026-10-24T17:18:56.877096+08:00, parent31440. Exact observed argv keeps legal s2-root, expression off, Seed1, T10800, processcap2400/time-limit2394/shutdownmargin30 and one thread. Original sequence PID31680/session83618 and C supervisor49716 continue. C07 SP49296, GEOM30116 and off55960 are terminal normal runs; never restart them. All three remaining registered C positions must close before the sequence starts the frozen bounded E runner. No second C/E supervisor.
+
+Closed G1 at C07 close is64003.1795804007s (C15247.974906499963, D48682.16879070026, qualification73.03588320047129); remaining79996.8204195993s. Separate disjoint verification/reconstruction1579.1474978999468s. C08 live cost is excluded until close. E free at C08 start189023379456bytes. E has not started. Final read-only all84 analysis, full independent review, PDF/visual QA,34-carrier publication, English stacked Draft PR, one anonymous public recovery and guarded owned cleanup all remain outstanding. The PDF marker has never run; no PDF, packing or public recovery exists.
