@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-24T03:30:42.954560+00:00",
+  "UTC": "2026-10-24T03:36:37.670389+00:00",
   "scope": "Small closed-producer summaries only; no raw/table re-decode or final independent acceptance",
   "plan_SHA": "f73f89ff1cc5ec2e2772a30e63b7c5d9b23d6a34362879d5cac1067c0e3f63ee",
   "rows": [
@@ -602,6 +602,78 @@
       "U": 0.23669579293259557,
       "L": 0.23669579244286418,
       "T_cert": 585.7774953999324
+    },
+    {
+      "id": "X-35-B",
+      "seed": 0,
+      "group": 21,
+      "layer": "X",
+      "method": "P",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.0,
+      "L": 5.551115123125783e-17,
+      "T_cert": 159.66096509585623
+    },
+    {
+      "id": "X-35-B",
+      "seed": 0,
+      "group": 21,
+      "layer": "X",
+      "method": "S2",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.0,
+      "L": 0.0,
+      "T_cert": 17.197842200053856
+    },
+    {
+      "id": "X-35-B",
+      "seed": 0,
+      "group": 21,
+      "layer": "X",
+      "method": "PS",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.0,
+      "L": 5.551115123125783e-17,
+      "T_cert": 6.849734600051306
+    },
+    {
+      "id": "X-35-B",
+      "seed": 1,
+      "group": 22,
+      "layer": "X",
+      "method": "PS",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.0,
+      "L": 5.551115123125783e-17,
+      "T_cert": 7.536828727344982
+    },
+    {
+      "id": "X-35-B",
+      "seed": 1,
+      "group": 22,
+      "layer": "X",
+      "method": "S2",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.0,
+      "L": 0.0,
+      "T_cert": 17.994380000047386
+    },
+    {
+      "id": "X-35-B",
+      "seed": 1,
+      "group": 22,
+      "layer": "X",
+      "method": "P",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.0,
+      "L": 5.551115123125783e-17,
+      "T_cert": 50.07329000008758
     }
   ],
   "sources": [
@@ -724,9 +796,21 @@
       "SHA": "f0e30506768d7b03c699c45f4877dc7cdcedb8c4753be1f69b3a4301e558b296",
       "bytes": 2889,
       "receipt_SHA": "93d967f6a6ca73412101d596ad1779b8596213cd04a062563640681c8ae2db39"
+    },
+    {
+      "stdout": "fees/formal_D21_01/stdout.log",
+      "SHA": "a3c4eecea1a4681bc28d417eb2ad9c6d078982f768f91b8b3384e29f0441f142",
+      "bytes": 2834,
+      "receipt_SHA": "903f481888b46ef59ccb4e67671f3e3dd40ce6b7a1ecf50aa6b293f3b34d2e05"
+    },
+    {
+      "stdout": "fees/formal_D22_01/stdout.log",
+      "SHA": "4ddec56e3072fb80ac4bcb947d61ba1eea2955e9958798d2582948a7c587e373",
+      "bytes": 2803,
+      "receipt_SHA": "d04e06d5af2f187dbdf0b3549b392e5f060161c4bd3fbab20e6f9cc291a23e25"
     }
   ],
-  "total_stdout_bytes": 47422,
+  "total_stdout_bytes": 53059,
   "summary": {
     "K": {
       "P": {
@@ -744,20 +828,20 @@
     },
     "X": {
       "P": {
-        "arms": 8,
-        "certified": 4
+        "arms": 10,
+        "certified": 6
       },
       "S2": {
-        "arms": 8,
-        "certified": 8
+        "arms": 10,
+        "certified": 10
       },
       "PS": {
-        "arms": 4,
-        "certified": 2
+        "arms": 6,
+        "certified": 4
       }
     }
   },
-  "D_closed_positions": 50,
+  "D_closed_positions": 56,
   "seed_repeats_not_independent": true,
   "full_table_snapshot_positions": 20
 }
