@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-24T13:30:04.186977+00:00",
+  "UTC": "2026-10-24T15:14:51.958211+00:00",
   "G1_seconds": 71131.19380520075,
   "remaining_G1_seconds": 72868.80619479925,
   "by_category": {
@@ -21,6 +21,20 @@
   "separately_reported_seconds": 1603.8254403998144,
   "unclosed": [],
   "delivery_process_receipts": [
+    {
+      "label": "carrier_progress01",
+      "UTC": "2026-10-24T15:12:38.659021+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 3.895663099945523,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 3.895663099945523,
+      "exit_observed": true,
+      "start_unix": 1792854754.7635639,
+      "end_unix": 1792854758.6590219,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
     {
       "label": "clock_diagnostic01",
       "UTC": "2026-10-24T11:25:46.906368+00:00",
@@ -218,6 +232,20 @@
       "outer_process_counted_once": true
     },
     {
+      "label": "pack01",
+      "UTC": "2026-10-24T15:11:51.836677+00:00",
+      "exit_code": 0,
+      "error": null,
+      "seconds": 6303.212861899985,
+      "G1_seconds": 0,
+      "separately_reported_seconds": 6303.212861899985,
+      "exit_observed": true,
+      "start_unix": 1792848408.622475,
+      "end_unix": 1792854711.8366778,
+      "no_formal_window_changed": true,
+      "outer_process_counted_once": true
+    },
+    {
       "label": "pdf_export01",
       "UTC": "2026-10-24T11:57:16.441085+00:00",
       "exit_code": 0,
@@ -344,19 +372,17 @@
       "outer_process_counted_once": true
     }
   ],
-  "active_delivery_receipts": [
-    "pack01"
-  ],
+  "active_delivery_receipts": [],
   "separate_postverify_from_G1_receipts": 1603.8254403998144,
-  "separate_delivery_process_seconds": 5705.167905400391,
-  "separate_measured_total_seconds": 7308.993345800205,
+  "separate_delivery_process_seconds": 12012.276430400321,
+  "separate_measured_total_seconds": 13616.101870800136,
   "delivery_total_is_sum_of_distinct_outer_process_wall_times_not_session_elapsed": true,
   "independent_delivery_intervals_may_overlap": true,
   "writing_static_manual_wall_cost": "Estimate only: overlapping wall time from initialization to current delivery; not exact CPU, and not added to measured serial subprocess costs",
   "writing_static_manual_wall_envelope_estimate": {
     "start_UTC": "2026-10-23T14:51:26.405461+00:00",
-    "end_UTC": "2026-10-24T13:30:04.186977+00:00",
-    "elapsed_upper_bound_seconds": 81517.781516,
+    "end_UTC": "2026-10-24T15:14:51.958211+00:00",
+    "elapsed_upper_bound_seconds": 87805.55275,
     "includes_native_wait_and_other_work_so_not_an_active_writing_time_estimate": true,
     "includes_unmetered_quick_direct_static_and_metadata_glue": true,
     "not_isolated_CPU_and_not_an_additive_charge": true
@@ -369,7 +395,9 @@
       "read_only_current_table_replay_soft_seconds": 7200,
       "PDF_export_soft_seconds": 900,
       "packing_soft_seconds": 7200,
-      "public_recovery_soft_seconds": 18000
+      "public_recovery_soft_seconds": 18000,
+      "postpack_carrier_membership_check_soft_seconds": 300,
+      "initial_science_push_soft_seconds": 1200
     },
     "soft_estimates_not_G1_limits": true,
     "no_formal_window_changes": true,
@@ -381,7 +409,9 @@
       "public_recovery_outer": 21600,
       "public_recovery_inner_isolated_checker": 10800,
       "public_transport_existing_global_window": 1800,
-      "cleanup": 10800
+      "cleanup": 10800,
+      "postpack_carrier_membership_check": 900,
+      "initial_science_push": 3600
     },
     "actual_scale_basis": {
       "current_campaign_files": 1040559,
@@ -393,8 +423,19 @@
       "completed_independent_replay_outer_seconds": 5541.306450600037,
       "completed_independent_replay_receipt_SHA": "f09b0d85e27d035cd3491b12a507fa572b11460fda5ce58e144fec31b4f91a42",
       "completed_independent_check_receipt_SHA": "da1760f4c0628e488a4c94f86a3e892ad781bf9ee847c6d76be83202f5914f4e",
-      "public_inner_timeout_basis": "10800s was registered before packing; completed first replay5541.3064506s confirms the initial2400s soft estimate was insufficient. Public recovery keeps the same finite10800s isolated-check allowance and21600s outer allowance; no native cap changes."
+      "public_inner_timeout_basis": "10800s was registered before packing; completed first replay5541.3064506s confirms the initial2400s soft estimate was insufficient. Public recovery keeps the same finite10800s isolated-check allowance and21600s outer allowance; no native cap changes.",
+      "completed_current_carriers": {
+        "archives": 34,
+        "members": 1042789,
+        "compressed_bytes": 574011070,
+        "uncompressed_bytes": 5535765415,
+        "pieces": 34,
+        "pack_outer_seconds": 6303.212861899985,
+        "carrier_progress_check_outer_seconds": 3.895663099945523
+      }
     },
-    "cost_boundaries": "Full process wall receipts count each delivery outer once; nested children are not added. G1 unchanged."
+    "cost_boundaries": "Full process wall receipts count each delivery outer once; nested children are not added. G1 unchanged.",
+    "postpack_carrier_membership_scope": "One author publication check reuses the existing independent progress_and_history reader after pack01 closes; validates36 actual extra compact progress files in current member indexes and two existing small historical fleets. Roughly one million compressed index records, not a new full formal replay, solver call, or research enumeration.",
+    "initial_science_push_basis": "One normal push of34 finite ZIPs totalling574011070bytes plus exact small source/metadata dependencies; no force push or history rewrite."
   }
 }
