@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-24T02:14:48.833411+00:00",
+  "UTC": "2026-10-24T03:11:04.852876+00:00",
   "scope": "Small closed-producer summaries only; no raw/table re-decode or final independent acceptance",
   "plan_SHA": "f73f89ff1cc5ec2e2772a30e63b7c5d9b23d6a34362879d5cac1067c0e3f63ee",
   "rows": [
@@ -482,6 +482,54 @@
       "U": 0.0,
       "L": 0.0,
       "T_cert": 2.6334270999068394
+    },
+    {
+      "id": "X-20-S",
+      "seed": 0,
+      "group": 17,
+      "layer": "X",
+      "method": "P",
+      "qualified": true,
+      "certificate": false,
+      "U": 0.44670989207569056,
+      "L": 0.34415280832826245,
+      "T_cert": null
+    },
+    {
+      "id": "X-20-S",
+      "seed": 0,
+      "group": 17,
+      "layer": "X",
+      "method": "S2",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.43010343097605375,
+      "L": 0.43010342791005834,
+      "T_cert": 489.6688426999608
+    },
+    {
+      "id": "X-20-S",
+      "seed": 1,
+      "group": 18,
+      "layer": "X",
+      "method": "S2",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.43010343097605375,
+      "L": 0.43010343097605386,
+      "T_cert": 460.5494715832174
+    },
+    {
+      "id": "X-20-S",
+      "seed": 1,
+      "group": 18,
+      "layer": "X",
+      "method": "P",
+      "qualified": true,
+      "certificate": false,
+      "U": 0.43325546538862625,
+      "L": 0.3410502028552557,
+      "T_cert": null
     }
   ],
   "sources": [
@@ -580,9 +628,21 @@
       "SHA": "37fd0b1f9c865bcb8a3f3c7694979698212e297da30487ee18efa8801fd04db2",
       "bytes": 1865,
       "receipt_SHA": "f817d2efa081e0846c488630531034345d6985eb2e8b80f9d8c0a665fee5dc30"
+    },
+    {
+      "stdout": "fees/formal_D17_01/stdout.log",
+      "SHA": "80a5a8e8223117f428572be6f33cd09dcce85ac906bfc97dca359e98ffbf12f2",
+      "bytes": 1868,
+      "receipt_SHA": "936aa7c0199e2ce40574ec3fe92c572e40f12e1fe063573af750fa19d470b999"
+    },
+    {
+      "stdout": "fees/formal_D18_01/stdout.log",
+      "SHA": "5ce7c66c13d729f7ae84fa5e305656e4d1b2c160d04a869ad0e5a49b4ae6b179",
+      "bytes": 1912,
+      "receipt_SHA": "73ea90edfc3b504d86ca22fae0f2d1f81fbe31130052fcbf14a2fe44050487f3"
     }
   ],
-  "total_stdout_bytes": 37882,
+  "total_stdout_bytes": 41662,
   "summary": {
     "K": {
       "P": {
@@ -600,12 +660,12 @@
     },
     "X": {
       "P": {
-        "arms": 4,
+        "arms": 6,
         "certified": 2
       },
       "S2": {
-        "arms": 4,
-        "certified": 4
+        "arms": 6,
+        "certified": 6
       },
       "PS": {
         "arms": 2,
@@ -613,7 +673,7 @@
       }
     }
   },
-  "D_closed_positions": 40,
+  "D_closed_positions": 44,
   "seed_repeats_not_independent": true,
   "full_table_snapshot_positions": 20
 }
