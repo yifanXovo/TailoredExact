@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-24T06:52:48.805849+00:00",
+  "UTC": "2026-10-24T07:20:48.610180+00:00",
   "scope": "Closed small C summaries with immutable comparison-method mapping; no raw/table decode or final independent acceptance",
   "plan_SHA": "91040549bf094368483faad90ebdf5eb2825202795fe14b241100b9a6b169fa5",
   "binding_SHA": "3248070303dd4157ea0df766b859108b354dffffa7ee9909abe98352f9480135",
@@ -198,6 +198,45 @@
       "group": 5,
       "underlying_reader_method": "S2R",
       "expression": "sp"
+    },
+    {
+      "method": "S2R-SP",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.3835535885117132,
+      "L": 0.38355358851171306,
+      "T_cert": 497.2456777810585,
+      "id": "UC-C20-U",
+      "seed": 1,
+      "group": 6,
+      "underlying_reader_method": "S2R",
+      "expression": "sp"
+    },
+    {
+      "method": "S2R-GEOM",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.3835535885117132,
+      "L": 0.3835535885117137,
+      "T_cert": 611.2647741000401,
+      "id": "UC-C20-U",
+      "seed": 1,
+      "group": 6,
+      "underlying_reader_method": "S2R",
+      "expression": "geom"
+    },
+    {
+      "method": "S2R",
+      "qualified": true,
+      "certificate": true,
+      "U": 0.3835535885117132,
+      "L": 0.38355358851171467,
+      "T_cert": 476.8194262998877,
+      "id": "UC-C20-U",
+      "seed": 1,
+      "group": 6,
+      "underlying_reader_method": "S2R",
+      "expression": "off"
     }
   ],
   "sources": [
@@ -235,9 +274,16 @@
       "bytes": 2837,
       "receipt_SHA": "29c1af7202b478491dff110f99912e248bfa865d94f4139008bff8958a9fcf4b",
       "identity_SHA": "a28480b5821d8078367e799cf1aaed74a518b8b63f6f8cacc953b602be8081b5"
+    },
+    {
+      "stdout": "fees/formal_C06_01/stdout.log",
+      "SHA": "f313bb7f7dca2bee5e851b81ff015169240993e91044ea0d63cb940a61b4fe0c",
+      "bytes": 2861,
+      "receipt_SHA": "c0f2aa6fa962c6467eec786fe3ad394b396bfac68fb1ee875a8d51f6a860a715",
+      "identity_SHA": "f2e754bbdd2d3dcfcd8120af6d0b099b6800b81ad262880299208840f0070a9b"
     }
   ],
-  "C_closed_positions": 15,
+  "C_closed_positions": 18,
   "candidate_baseline_controls_shared": true,
   "seed_repeats_not_independent": true
 }
