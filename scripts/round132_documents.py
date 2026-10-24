@@ -86,9 +86,9 @@ Related work must be compared by semantics as well as size. Gupte et al. study b
 
 ## 2. Physical decisions and objective
 
-Let N be the n service stations and 0 the depot. Each station has integer initial inventory b_i and capacity C_i, positive target D_i and nonnegative weight omega_i. Vehicle k has capacity Q_k and physical route-duration limit T. Routes leave empty and return to the same depot; loaded return is allowed and its unloading is charged. A station has at most one nonzero service by one vehicle in one direction. Inventory, assignment, route arcs and prefix load retain their original integer logic. The validated distance convention is Euclidean travel seconds from serialized metre coordinates at 1.5 m/s.
+Let \(N\) be the set of \(n\) service stations and \(0\) the depot. Each station has integer initial inventory \(b_i\) and capacity \(C_i\), integer target \(0<D_i\le C_i\), and nonnegative weight \(\omega_i\). Vehicle \(k\) has capacity \(Q_k\) and physical route-duration limit \(T\). Routes leave empty and return to the same depot; loaded return is allowed and its unloading is charged. A station has at most one nonzero service by one vehicle in one direction. Inventory, assignment, route arcs and prefix load retain their original integer logic. The validated distance convention is Euclidean travel seconds from serialized metre coordinates at 1.5 m/s.
 
-With pickup p_ki and delivery d_ki,
+With pickup \(p_{ki}\) and delivery \(d_{ki}\),
 
 \[
 Y_i=b_i+\sum_k(d_{ki}-p_{ki}),\qquad
@@ -96,14 +96,14 @@ R_k=\sum_i(p_{ki}-d_{ki})\in[0,Q_k],\qquad
 \sum_iY_i=\sum_i b_i-\sum_kR_k.
 \]
 
-The depot enters none of the inventory, target-penalty or Gini sums. Total final station inventory need not equal its initial total. No external depot supply or split service is assumed. Q bounds instantaneous loads and individual operations, not cumulative pickup. Route travel plus handling is bounded by T, where
+The depot enters none of the inventory, target-penalty or Gini sums. Total final station inventory need not equal its initial total. No external depot supply or split service is assumed. \(Q_k\) bounds instantaneous loads and individual operations, not cumulative pickup. Route travel plus handling is bounded by \(T\), where
 
 \[
 t_p\sum_i p_{ki}+t_d(\sum_i d_{ki}+R_k)
 =(t_p+t_d)\sum_i p_{ki}.
 \]
 
-Define
+For \(\lambda\ge0\), define
 
 \[
 r_i=Y_i/D_i,\quad S=\sum_i r_i,\quad
@@ -115,15 +115,15 @@ G_{true}=\begin{cases}A(r)/(nS)&S>0,\\0&S=0,\end{cases}
 \qquad F=G_{true}+\lambda P_{true}.
 \]
 
-The zero-denominator branch is explicit. G measures station ratio dispersion, not distance to targets. The second term discourages uniformly low inventory ratios that could otherwise have zero dispersion. These quantities do not by themselves establish population, income or demand fairness.
+The zero-denominator branch is explicit. \(G_{\mathrm{true}}\) measures station ratio dispersion, not distance to targets. The second term discourages uniformly low inventory ratios that could otherwise have zero dispersion. These quantities do not by themselves establish population, income or demand fairness.
 
-For Omega=sum_i omega_i>0, define P_avg=P_true/Omega and rho=lambda Omega. Then F=G_true+rho P_avg. The generator normalizes weights by their maximum, not their sum. Fixed lambda=.15 therefore gives different rho across inputs and sizes. We retain those objectives and report Omega/rho; no cross-rho sensitivity claim is made without a corresponding experiment.
+For \(\Omega=\sum_i\omega_i>0\), define \(P_{\mathrm{avg}}=P_{\mathrm{true}}/\Omega\) and \(\rho=\lambda\Omega\). Then \(F=G_{\mathrm{true}}+\rho P_{\mathrm{avg}}\). The generator normalizes weights by their maximum, not their sum. Fixed \(\lambda=.15\) therefore gives different \(\rho\) across inputs and sizes. We retain those objectives and report \(\Omega,\rho\); no sensitivity claim across \(\rho\) is made without a corresponding experiment.
 
-Appendix A gives the complete canonical model, actual bounds, physical embedding, strengthening formulas and numerical qualification. Its e_i>=|r_i-1|, P=sum_i omega_i e_i and epigraph g need not be tight at arbitrary relaxation points. A claim about physical objective equality refers to tight completion, not to every native feasible point.
+Appendix A gives the complete canonical model, actual bounds, physical embedding, strengthening formulas and numerical qualification. Its \(e_i\ge|r_i-1|\), \(P=\sum_i\omega_i e_i\) and epigraph \(g\) need not be tight at arbitrary relaxation points. A claim about physical objective equality refers to tight completion, not to every native feasible point.
 
 ## 3. Shared station states, service and valid strengthening
 
-For the finite inventory domain Yset_i, S2 represents inventory and gY products by
+For the finite inventory domain \(\mathcal Y_i\), S2 uses binary selectors \(s_{iy}\) and continuous \(q_{iy}\) to represent inventory and \(gY_i\) products by
 
 \[
 \sum_y s_{iy}=1,\quad Y_i=\sum_y ys_{iy},\quad
@@ -131,7 +131,7 @@ For the finite inventory domain Yset_i, S2 represents inventory and gY products 
 \sum_yq_{iy}=g,\quad Z_i=\sum_y yq_{iy}.
 \]
 
-At an integer inventory state the selected product equals gY. The retained common-state service relations are
+At a one-hot inventory selector, these equations give \(Z_i=gY_i\). The retained common-state service relations are
 
 \[
 \sum_kp_{ki}=\sum_y(b_i-y)^+s_{iy},\quad
@@ -139,7 +139,7 @@ At an integer inventory state the selected product equals gY. The retained commo
 \sum_kz_{ki}=\sum_{y\ne b_i}s_{iy}.
 \]
 
-They share the inventory mixture with movement and unique service. This is useful in a problem in which route resources constrain exactly those movements. It is not a claim that a local state hull is the full routing hull. With integer Y and binary unique assignment/direction, the single nonzero operation is already the integer inventory difference; continuous p/d therefore preserves the stated integer physical solutions. The A/B linking rows strengthen and organize the relaxation but are not a necessary premise for that direct integrality argument.
+They share the inventory mixture with movement and unique service. This is useful in a problem in which route resources constrain exactly those movements. It is not a claim that a local state hull is the full routing hull. With integer \(Y_i\) and binary unique assignment/direction, the single nonzero operation is already the integer inventory difference; continuous \(p_{ki},d_{ki}\) therefore preserves the stated integer physical solutions. The A/B linking rows strengthen and organize the relaxation but are not a necessary premise for that direct integrality argument.
 
 For an isolated product, the convex hull over finite y equals the rectangle McCormick hull with the same extreme inventory bounds. The four graph corners give one inclusion and each allowed state line lies in that hull, giving the reverse. Thus the mere VD-P label does not establish strict dominance over a correct aggregate MC block. Shared service/cost links, actual domains and the native expression must be examined separately.
 
@@ -185,7 +185,7 @@ P is the primary cold original compact benchmark. PS pays the same complete H in
 
 Threads and MIPThreads are one, H seed is fixed, and native Seeds 0/1 are repeated observations of the same problem. Native defaults and requested zero gaps are fixed. Method order is counterbalanced prospectively. Native optimization is serial and does not compete with compilation or PDF export. No arm receives another arm's incumbent, Start, bound, parameter, basis, tree or cache.
 
-The timing environment has a recorded limitation: an initial dependency waiter repeatedly parsed completed evidence files in the background until it was repaired partway through the first new35-station group. Immutable producer intervals determine conservative overlap with the original waiters lifetime in the supporting timing-environment table. These durations are not measured parsing, CPU-contention or slowdown seconds; absence of that overlap also does not prove a quiescent machine. Earlier partial table refreshes also involved brief decoding work. The repair changed neither production code nor native caps and did not restart an arm. We retain the observed clocks and certificate qualifications without estimating counterfactual clean-machine times. Timing directions describe these observations; they do not isolate a causal algorithm effect under a quiescent machine, and differences between source layers cannot be attributed solely to geography.
+The timing environment has a recorded limitation: an initial dependency waiter repeatedly parsed completed evidence files in the background until it was repaired partway through the first new 35-station group. Immutable producer intervals determine conservative overlap with the original waiter's lifetime in the supporting timing-environment table. These durations are not measured parsing, CPU-contention or slowdown seconds; absence of that overlap also does not prove a quiescent machine. Earlier partial table refreshes also involved brief decoding work. The repair changed neither production code nor native caps and did not restart an arm. We retain the observed clocks and certificate qualifications without estimating counterfactual clean-machine times. Timing directions describe these observations; they do not isolate a causal algorithm effect under a quiescent machine, and differences between source layers cannot be attributed solely to geography.
 
 For each comparison distinguish both certified, only left certified, only right certified, both open and unevaluable evidence. Both-certified time directions use unrounded complete certification time; one-sided certificates determine the corresponding direction. Both open is UNDETERMINED. Time ratios are confined to explicit both-certified intersections. No cap is substituted for an unknown certification time, and endpoint gaps do not predict final certification speed. Near-zero objectives are reported separately. Each arm's attained endpoint is distinct from the problem-level zero/positive/unknown stratum. A qualified legal zero establishes a zero optimum for that problem; a positive qualified lower bound establishes positivity under the numerical policy. Otherwise the optimum class remains unknown. This descriptive classification changes no other arm's U, L, certificate or time and supplies no information to production.
 
