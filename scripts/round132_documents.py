@@ -315,12 +315,40 @@ The final research recommendation is tied to the completed new-input and structu
     print('SUBSTANTIVELY_REORGANIZED_MANUSCRIPT_SOURCE_WRITTEN; PDF compilation deferred during formal native work.')
 
 def pdf():
+    # Keep the standalone entry under the same all-stages idle gate as its
+    # separately metered delivery caller. No temporary PDF source is created
+    # while a current research/native stage or G1 receipt remains active.
+    from round132_release import idle
+    idle()
+    import hashlib
     import round126_export as old
+    paths=[OUT/'manuscript.md',OUT/'references.bib',Path(__file__),Path(old.__file__)]
+    bindings=[dict(path=p.relative_to(ROOT).as_posix(),SHA=sha(p)) for p in paths]
     source=inspect.getsource(old.export)
-    source=source.replace("for name in ['model_appendix.md','algorithm_appendix.md','tables/historical_display.md']:","for name in []:")
+    replacements=[
+        ("for name in ['model_appendix.md','algorithm_appendix.md','tables/historical_display.md']:","for name in []:"),
+        ("Path(os.environ.get('ROUND126_PDF_DEST',str(OUT/'manuscript.pdf')))","OUT/'manuscript.pdf'"),
+        ("Path(os.environ.get('ROUND126_PDF_RECEIPT',str(OUT/'pdf_export.json')))","OUT/'pdf_export.json'")]
+    for before,after in replacements:
+        assert source.count(before)==1,('export adaptation no longer matches',before)
+        source=source.replace(before,after)
     local_date=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=8))).strftime('%d %B %Y')
+    assert source.count('date=19 October 2026')==1
     source=source.replace('date=19 October 2026','date='+local_date)
     ns=dict(vars(old),OUT=OUT,TEMP_PARENT=TEMP/'pdf')
     exec(compile(source,__file__+'::single_authority_export','exec'),ns);ns['export']()
-    p=OUT/'pdf_export.json';v=read(p);v['maintained_source']='manuscript.md (including complete appendices) + references.bib';write(p,v)
+    for row in bindings:
+        assert sha(ROOT/row['path'])==row['SHA'],('PDF source changed during export',row['path'])
+    receipt=OUT/'pdf_export.json';v=read(receipt);pdf=OUT/'manuscript.pdf'
+    assert Path(v['PDF']).resolve()==pdf.resolve() and pdf.is_file()
+    intermediate=Path(v['intermediate_root'])
+    assert intermediate.resolve().is_relative_to((TEMP/'pdf').resolve())
+    v.update(maintained_source='manuscript.md (including complete appendices) + references.bib',
+        source_bindings=bindings,PDF_SHA=sha(pdf),
+        reading_md_SHA=sha(intermediate/'reading.md'),reading_tex_SHA=sha(intermediate/'reading.tex'),
+        export_function_assembly_SHA=hashlib.sha256(source.encode('utf-8')).hexdigest(),
+        external_appendix_concatenation=False,output_paths_fixed_to_current_round=True,
+        source_bytes_unchanged_during_export=True,
+        current_native_and_closed_G1_stage_gate=True)
+    write(receipt,v)
 if __name__=='__main__':{'draft':draft,'pdf':pdf}[sys.argv[1]]()
