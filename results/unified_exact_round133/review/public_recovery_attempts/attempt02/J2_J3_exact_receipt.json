@@ -1,0 +1,933 @@
+{
+  "schema": "round133-exact-joint-replay-v1",
+  "UTC": "2026-10-25T13:31:24.912912+00:00",
+  "pin": "52b02252ba47e8228b73e071d6ed692385a4f816",
+  "carrier_path": "results/unified_exact_round132/artifacts/complete_tiny_joint_study.zip",
+  "carrier_SHA256": "d2e55d7ae5fcaf5bb0c9d39a489b589006f3a29eb350b167fd790ad399a0aac1",
+  "carrier_bytes": 213859,
+  "source_SHA256": "892fac7d3396f1a27f3c18c051ad054f1a273ddd8e84e6cd55b97faee26381db",
+  "Optimize": 0,
+  "solver_modules_loaded": false,
+  "cases": {
+    "J2": {
+      "case": {
+        "id": "J2",
+        "b": [
+          2,
+          1,
+          0,
+          0
+        ],
+        "Q": [
+          1,
+          2
+        ],
+        "T": 240
+      },
+      "single_car_counts": [
+        11,
+        23
+      ],
+      "joint_fleets": 59,
+      "complete_enumeration_matches": true,
+      "simple_conflict": {
+        "form": "d_0,3 + d_1,2 <= 1; zero-based cars, one-based stations",
+        "exact_integer_max": 1
+      },
+      "saved_joint_primal_check": {
+        "status": "EXACT_FEASIBLE",
+        "rows": 583,
+        "bounds": 284,
+        "equality_nonzero": 0,
+        "max_equality_residual": "0",
+        "max_inequality_violation": "0",
+        "failures": []
+      },
+      "exact_loaded_lower_bound_derivation": {
+        "rows": [
+          "c119",
+          "c306",
+          "c308",
+          "c310",
+          "c312",
+          "c314",
+          "c316",
+          "c318",
+          "c320"
+        ],
+        "G_lower": "0",
+        "sum_Y_upper": "3",
+        "sum_e_lower": "1",
+        "coefficients_checked_exactly": true
+      },
+      "objective_coefficient": "5404319552844595/36028797018963968",
+      "exact_primal_objective": "5404319552844595/36028797018963968",
+      "analytic_LP_lower_bound": "5404319552844595/36028797018963968",
+      "exact_IP_optimum": "14411518807585587/36028797018963968",
+      "exact_gap": "1/4",
+      "loaded_primal_nonzero_values": {
+        "e_1": "1/4",
+        "e_2": "1/4",
+        "e_3": "1/4",
+        "e_4": "1/4",
+        "r_1": "3/4",
+        "r_2": "3/4",
+        "r_3": "3/4",
+        "r_4": "3/4",
+        "x_0_0_2": "1/2",
+        "x_0_0_4": "1/4",
+        "x_0_4_0": "3/4",
+        "x_0_2_1": "1/4",
+        "z_0_1": "1/4",
+        "x_0_1_4": "1/4",
+        "z_0_2": "1/2",
+        "x_0_2_4": "1/4",
+        "z_0_4": "3/4",
+        "x_1_0_2": "1/4",
+        "x_1_0_3": "1/2",
+        "x_1_1_0": "1/2",
+        "x_1_3_0": "1/4",
+        "x_1_2_1": "1/4",
+        "x_1_3_1": "1/4",
+        "z_1_1": "1/2",
+        "z_1_2": "1/4",
+        "z_1_3": "1/2",
+        "conn_0_0_2": "3/2",
+        "conn_0_2_1": "1/4",
+        "conn_0_2_4": "3/4",
+        "conn_1_0_2": "1/4",
+        "conn_1_0_3": "1",
+        "conn_1_3_1": "1/2",
+        "Y_1": "3/4",
+        "Y_2": "3/4",
+        "Y_3": "3/4",
+        "Y_4": "3/4",
+        "p_0_2": "1/2",
+        "p_0_1": "1/4",
+        "d_0_4": "3/4",
+        "d_1_2": "1/4",
+        "p_1_1": "1",
+        "d_1_3": "3/4",
+        "ord_0_1": "1/4",
+        "ord_0_2": "1/2",
+        "ord_0_4": "3",
+        "ord_1_1": "1/2",
+        "ord_1_2": "1/4",
+        "ord_1_3": "1/2",
+        "mode_0_1": "1/4",
+        "mode_0_2": "1/2",
+        "mode_1_1": "1/2",
+        "load_1_1": "1",
+        "state_1_0": "1/2",
+        "state_1_1": "1/4",
+        "state_1_2": "1/4",
+        "state_2_0": "1/2",
+        "state_2_1": "1/4",
+        "state_2_2": "1/4",
+        "state_3_0": "1/2",
+        "state_3_1": "1/4",
+        "state_3_2": "1/4",
+        "state_4_0": "1/4",
+        "state_4_1": "3/4",
+        "mix0[0]": "1/4",
+        "mix0[2]": "1/2",
+        "mix0[5]": "1/4",
+        "mix1[0]": "1/2",
+        "mix1[19]": "1/4",
+        "mix1[22]": "1/4",
+        "theta0_0_1": "1/4",
+        "theta1_0_0": "1/2",
+        "theta0_1_0": "1/2",
+        "theta1_1_2": "1/4",
+        "theta1_2_1": "1/4",
+        "theta1_2_2": "1/4",
+        "theta0_3_1": "3/4",
+        "joint_mix[22]": "1/4",
+        "joint_mix[33]": "1/4",
+        "joint_mix[38]": "1/4",
+        "joint_mix[49]": "1/4"
+      },
+      "joint_mixture": [
+        {
+          "Y": [
+            0,
+            2,
+            1,
+            0
+          ],
+          "tau": 3,
+          "G": "7/12",
+          "P": 3,
+          "F": "111689270758788299/108086391056891904",
+          "pair_index": 22,
+          "vehicle_plan_indices": [
+            0,
+            22
+          ],
+          "weight": "1/4",
+          "routes_zero_based": [
+            [],
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "service": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                2,
+                0,
+                1
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "Y": [
+            2,
+            0,
+            0,
+            1
+          ],
+          "tau": 3,
+          "G": "7/12",
+          "P": 3,
+          "F": "111689270758788299/108086391056891904",
+          "pair_index": 33,
+          "vehicle_plan_indices": [
+            2,
+            0
+          ],
+          "weight": "1/4",
+          "routes_zero_based": [
+            [
+              1,
+              3
+            ],
+            []
+          ],
+          "service": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "Y": [
+            0,
+            0,
+            2,
+            1
+          ],
+          "tau": 3,
+          "G": "7/12",
+          "P": 3,
+          "F": "111689270758788299/108086391056891904",
+          "pair_index": 38,
+          "vehicle_plan_indices": [
+            2,
+            19
+          ],
+          "weight": "1/4",
+          "routes_zero_based": [
+            [
+              1,
+              3
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "service": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            [
+              [
+                2,
+                0,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "Y": [
+            1,
+            1,
+            0,
+            1
+          ],
+          "tau": 3,
+          "G": "1/4",
+          "P": 1,
+          "F": "14411518807585587/36028797018963968",
+          "pair_index": 49,
+          "vehicle_plan_indices": [
+            5,
+            0
+          ],
+          "weight": "1/4",
+          "routes_zero_based": [
+            [
+              0,
+              3
+            ],
+            []
+          ],
+          "service": [
+            [
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ]
+        }
+      ],
+      "proof_status": "EXACT_LP_AND_IP",
+      "strict_reference": {
+        "check": {
+          "status": "EXACT_FEASIBLE",
+          "rows": 558,
+          "bounds": 225,
+          "equality_nonzero": 0,
+          "max_equality_residual": "0",
+          "max_inequality_violation": "0",
+          "failures": []
+        },
+        "simple_lhs": "3/2",
+        "original_direction_lhs": "15/2",
+        "original_direction_max": "7",
+        "inventory": [
+          "1",
+          "1",
+          "1",
+          "0"
+        ],
+        "per_car_mixture": {
+          "mix0[3]": "1/2",
+          "mix0[6]": "1/2",
+          "mix1[0]": "1/2",
+          "mix1[13]": "1/2"
+        }
+      }
+    },
+    "J3": {
+      "case": {
+        "id": "J3",
+        "b": [
+          2,
+          1,
+          0,
+          0
+        ],
+        "Q": [
+          1,
+          2
+        ],
+        "T": 360
+      },
+      "single_car_counts": [
+        11,
+        30
+      ],
+      "joint_fleets": 66,
+      "complete_enumeration_matches": true,
+      "simple_conflict": {
+        "form": "d_0,3 + d_1,2 <= 1; zero-based cars, one-based stations",
+        "exact_integer_max": 1
+      },
+      "saved_joint_primal_check": {
+        "status": "EXACT_FEASIBLE",
+        "rows": 583,
+        "bounds": 298,
+        "equality_nonzero": 0,
+        "max_equality_residual": "0",
+        "max_inequality_violation": "0",
+        "failures": []
+      },
+      "exact_loaded_lower_bound_derivation": {
+        "rows": [
+          "c119",
+          "c306",
+          "c308",
+          "c310",
+          "c312",
+          "c314",
+          "c316",
+          "c318",
+          "c320"
+        ],
+        "G_lower": "0",
+        "sum_Y_upper": "3",
+        "sum_e_lower": "1",
+        "coefficients_checked_exactly": true
+      },
+      "objective_coefficient": "5404319552844595/36028797018963968",
+      "exact_primal_objective": "5404319552844595/36028797018963968",
+      "analytic_LP_lower_bound": "5404319552844595/36028797018963968",
+      "exact_IP_optimum": "14411518807585587/36028797018963968",
+      "exact_gap": "1/4",
+      "loaded_primal_nonzero_values": {
+        "e_1": "1/4",
+        "e_2": "1/4",
+        "e_3": "1/4",
+        "e_4": "1/4",
+        "r_1": "3/4",
+        "r_2": "3/4",
+        "r_3": "3/4",
+        "r_4": "3/4",
+        "x_1_0_1": "5/8",
+        "x_1_0_3": "3/8",
+        "x_1_1_0": "3/8",
+        "x_1_2_0": "1/4",
+        "x_1_4_0": "3/8",
+        "x_1_2_1": "3/8",
+        "z_1_1": "1",
+        "x_1_1_2": "5/8",
+        "x_1_3_2": "1/4",
+        "x_1_4_2": "1/8",
+        "z_1_2": "1",
+        "x_1_2_4": "3/8",
+        "z_1_3": "3/8",
+        "x_1_3_4": "1/8",
+        "z_1_4": "1/2",
+        "conn_1_0_1": "3/2",
+        "conn_1_0_3": "11/8",
+        "conn_1_1_2": "1/2",
+        "conn_1_2_4": "1/2",
+        "conn_1_3_2": "1",
+        "Y_1": "3/4",
+        "Y_2": "3/4",
+        "Y_3": "3/4",
+        "Y_4": "3/4",
+        "p_1_2": "5/8",
+        "d_1_2": "3/8",
+        "p_1_1": "5/4",
+        "d_1_3": "3/4",
+        "d_1_4": "3/4",
+        "ord_1_1": "1",
+        "ord_1_2": "1",
+        "ord_1_3": "3/2",
+        "ord_1_4": "2",
+        "mode_1_1": "1",
+        "load_1_1": "1/2",
+        "mode_1_2": "5/8",
+        "state_1_0": "1/4",
+        "state_1_1": "3/4",
+        "state_2_0": "5/8",
+        "state_2_2": "3/8",
+        "state_3_0": "5/8",
+        "state_3_2": "3/8",
+        "state_4_0": "1/2",
+        "state_4_1": "1/4",
+        "state_4_2": "1/4",
+        "mix0[0]": "1",
+        "mix1[9]": "1/4",
+        "mix1[12]": "1/8",
+        "mix1[13]": "3/8",
+        "mix1[26]": "1/4",
+        "theta1_0_0": "1/4",
+        "theta1_0_1": "3/4",
+        "theta1_1_0": "5/8",
+        "theta1_1_2": "3/8",
+        "theta1_2_2": "3/8",
+        "theta1_3_1": "1/4",
+        "theta1_3_2": "1/4",
+        "joint_mix[9]": "1/4",
+        "joint_mix[12]": "1/8",
+        "joint_mix[13]": "3/8",
+        "joint_mix[26]": "1/4"
+      },
+      "joint_mixture": [
+        {
+          "Y": [
+            1,
+            0,
+            0,
+            2
+          ],
+          "tau": 3,
+          "G": "7/12",
+          "P": 3,
+          "F": "111689270758788299/108086391056891904",
+          "pair_index": 9,
+          "vehicle_plan_indices": [
+            0,
+            9
+          ],
+          "weight": "1/4",
+          "routes_zero_based": [
+            [],
+            [
+              0,
+              1,
+              3
+            ]
+          ],
+          "service": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                1
+              ]
+            ]
+          ]
+        },
+        {
+          "Y": [
+            1,
+            0,
+            2,
+            0
+          ],
+          "tau": 3,
+          "G": "7/12",
+          "P": 3,
+          "F": "111689270758788299/108086391056891904",
+          "pair_index": 12,
+          "vehicle_plan_indices": [
+            0,
+            12
+          ],
+          "weight": "1/8",
+          "routes_zero_based": [
+            [],
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "service": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                0,
+                2,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "Y": [
+            1,
+            2,
+            0,
+            0
+          ],
+          "tau": 3,
+          "G": "7/12",
+          "P": 3,
+          "F": "111689270758788299/108086391056891904",
+          "pair_index": 13,
+          "vehicle_plan_indices": [
+            0,
+            13
+          ],
+          "weight": "3/8",
+          "routes_zero_based": [
+            [],
+            [
+              0,
+              1
+            ]
+          ],
+          "service": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        {
+          "Y": [
+            0,
+            0,
+            2,
+            1
+          ],
+          "tau": 3,
+          "G": "7/12",
+          "P": 3,
+          "F": "111689270758788299/108086391056891904",
+          "pair_index": 26,
+          "vehicle_plan_indices": [
+            0,
+            26
+          ],
+          "weight": "1/4",
+          "routes_zero_based": [
+            [],
+            [
+              0,
+              2,
+              1,
+              3
+            ]
+          ],
+          "service": [
+            [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                2,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                0,
+                2,
+                1
+              ],
+              [
+                0,
+                1,
+                1
+              ]
+            ]
+          ]
+        }
+      ],
+      "proof_status": "EXACT_LP_AND_IP"
+    }
+  },
+  "dependencies": [
+    {
+      "member": "results/unified_exact_round132/joint/J2/enumeration.json",
+      "SHA256": "c3bb1ef4d4ca7c2f7c5b59024b7f30c94e4b9041e2c8c673b6727696754a17dc",
+      "bytes": 18277
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J2/B_joint_exact_matrix.json",
+      "SHA256": "20be7033fb6918aa3ca3a1a9f5a0cd017fa64010738afcaafa5f0b9eed040254",
+      "bytes": 151456
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J2/original_objective_joint.json",
+      "SHA256": "6efdd3ae46bacdec563c0db4195ec7f4456b52d8d1e723a0cb1a093f04ec7b82",
+      "bytes": 3277
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J2/best_separation.json",
+      "SHA256": "aeae545803e65102f9e57f8191b8bb668225a0e4d7e520f7feb37d7cedc28767",
+      "bytes": 5072
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J2/B_ref_exact_matrix.json",
+      "SHA256": "cb7f13289cb6bae58bae5e3bedde8c7b0ff8df9fc711ff190595f7c720a3b310",
+      "bytes": 133127
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J3/enumeration.json",
+      "SHA256": "920db364bf928988728f8b564d5539879e330d60e25eb447333390e63af0c030",
+      "bytes": 21945
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J3/B_joint_exact_matrix.json",
+      "SHA256": "522835121dc9bd3f45efc32631bffddf13709877dca86ccf8536352cc99a2a0e",
+      "bytes": 155430
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J3/original_objective_joint.json",
+      "SHA256": "45814de8ae102b02fd6be9c4ea4e2bed147212ebc2acfbddf12c514380d688a0",
+      "bytes": 2977
+    }
+  ],
+  "seconds": 0.07033630006480962,
+  "budget_category": "E; this outer process only; limit1800s",
+  "status": "PASS"
+}

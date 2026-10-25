@@ -15,7 +15,7 @@ def main():
     names=set()
     for name in ('RESUME.md','public_restore_receipt.json','cleanup_receipt.json','delivery_receipt.json',
             'completion_audit.json','resource_accounting.json','remote_readback.json',
-            'final_report.md','readiness.md','independent_review.md'):
+            'final_report.md','readiness.md','independent_review.md','reproducibility.md'):
         path=OUT/name
         if path.is_file():names.add(path)
     for path in (OUT/'review').rglob('*'):

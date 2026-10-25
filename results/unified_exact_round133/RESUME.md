@@ -1,33 +1,28 @@
-Round133 original public recovery EXIT1 at transport wall cap; SAME ROOT preserved.
-PR195 open Draft unmerged; sciencee4c6f82316f8697c6dfcf59d3a0807619b7bcae8,
-base1ae14721e800d7c601adc1e7e42d5dfa89e48fbb/R132 branch.
-All Native is finished. D1all14/D3all8sealed. G1 fixed11824.854547899857/39600.
-PDF FINAL50pages/actualvisualQA PASS,marker alreadyran exactlyONCE; NEVERrepeat.
+Round133 local science, public recovery and owned cleanup all PASS. All processes exited.
+PR195 https://github.com/yifanXovo/TailoredExact/pull/195 openDraft/unmerged.
+Science e4c6f82316f8697c6dfcf59d3a0807619b7bcae8; currentmetadata c86044ddc67fb3dca199089497478f578b6a4bcf.
+BaseR132branch1ae14721e800d7c601adc1e7e42d5dfa89e48fbb; production4507c355 frozen.
 
-Original exec49952/fee delivery_public_restore01 fullyclosed:exit1,outer1800.2186159,
-G1zero,exit_observedtrue. Erroronly finite public recovery limit exhausted/transport;
-no hash/CRC/science failure; semantic0. Root/receipt FAILED_PRESERVE_SAME_ROOT.
-SINGLEroot E:/codes/ExactEBRP-work/restore/round133-public-e4c6f823, initiallyempty,
-owner/state/failedreceipt and originalattempt01 allpreserved. No secondroot allowed.
-No healthy process remains fromoriginalouter; inspect commonbudget ifresuming.
+NO ACTIVE Native/recovery/cleanup process. Former exec24627/fee delivery_public_restore02
+EXIT0/outer1443.7407628; firstpublic01 EXIT1 onlytransportcap1800.2186159 remainspreserved.
+Single ownedroot public-e4c6 restoredall436files/24archives321003members, source/H/model/clock23,
+J2J3 exact/D24fullpoint ALLPASS,0Optimize/compile/vendorDLL. Same-root reviewed budget-only
+resume fromc860, cumulative3243.5022484s includesprior1800, noNative rerun/newroot.
+Post-public independentgate d994cd...ACCEPT; cleanupPASS outer164.4763807,
+321659 restoredcopies+206dupsremoved,logical1254522218B vsfreeEchange1328017408B separate.
+Independent actual_cleanup_review PASS; directed3dirty+5old/newPE/DLL actualhash unchanged.
+Unique raw/failures/alloldtrees/currenttree/distinctPDFdrafts/24publishedcarriers retained.
+Recoveredroot was verified and removed; do not recreate/recover it or rerun a PASS.
 
-Next: independent reviewer is checking final wrapper+actualclosedfee/failedreceipt/state
-for review/public_resume_budget_admission.json. Entry scripts/round133_public_resume_budget.py
-loads the original public b806bootstrap unchanged and changes ONLY finite wall limits to
-cumulative total7200/transport6000/semantic3600. Original~1800 remainscharged, notextra6000.
-No sciencepolicy/data/6024checker/Native/compile change; all3requiredchecksremain.
-Must normalmetadata commit/push source+gate+actualfailure, anonymouslyfetch finalwrapper
-andgate atTHATfixedmetadata commit, exactSHA before metered delivery_public_restore02.
-Call sameSCI and samefailedroot --resume; originalSCI scientific payload remains e4c6.
-Do not startwrapper beforeactualreviewgate andpublishedidentity. 1800publicbootstraporiginal
-is E:/codes/ExactEBRP-work/temp/round133/public_bootstrap.py SHAb8062780c069e252df5306d79fc5b1c22038d1adf4f0ec229cdaddc1cbca5aa8.
+G1fixed11824.854547899857/39600,14D1+8D3 sealed; finiteimplementationhandlingPASS,
+originalnativeinternalcausesUNKNOWN andoldD24REJECTED. NoextraSeeds/cases/tuning.
+PDF FINAL50pages SHA0c43fd125d75fe36e7fae0bc62b714b807a827bf4135cdb6afa6102864aef4cc,
+actualall-pageQA19fontsPASS; manuscript76d176...andbibunchanged.
+Artifactmarker alreadyran exactlyONCE; do not rerunmarker/PDF/science/pack/restore.
 
-AfteractualpublicPASS: independent post_public_delivery_review gate; guarded cleanup.py
-ONLYverifiedowned recovery/completeZIP/PNG/finalPDFduplicates; retainunique raw/failures,
-original+candidatePE/DLL/distinctPDFdrafts/usercontent/currenttree/alloldtrees. Thenfinalreview,
-actualstatus/report/readiness andnormalmetadata push/readback. No recursivepack/recovery.
-Localfull23PASS399.616091s,32contractsPASS; scientificsource4507c355 frozen;
-portable6024c92660aed5d78a6fade0f371cac4621bc822d74008296a5539319b93a37d,
-PDF0c43fd125d75fe36e7fae0bc62b714b807a827bf4135cdb6afa6102864aef4cc.
-24sciencecarriers/321003members/658672410rawB, compressed165140245B;
-436loosefiles total190914960B; old34carriersunchanged.12remoteSCIfilesactualblobmatch.
+Currentremaining obligations ONLY: final_delivery_review (reviewerreading4phase-onlydocs),
+normalmetadataA commit/push andactualPR/base/head/keyfilesreadback; then actualCOMPLETE status
+metadataB andlastnormalpush/readback. Rootresource_accounting nowgenerated (closed-fees snapshot),
+completion_audit haslocalPASS/finalmetaPENDING. Finalsource/prosebindings willbe inreviewer receipt.
+Use scripts/round133_delivery_metadata.py tostageboundedlate receipts; no recursivepack/recovery.
+Lastself-publishingtransport/remoteattestation staysoutsidefixedpayload, no audit loop.

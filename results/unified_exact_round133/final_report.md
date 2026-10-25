@@ -1,18 +1,18 @@
 # Round133: native-bound reliability and the joint-objective gap
 
-**Scientific-results report; delivery acceptance remains pending.** All fixed C/D/E computations and the eight-position D3 bridge are complete. D1 independently passes scoped implementation/failure handling 14/14, with 13/14 native sources, 8 certificates, 5 qualified-open and 1 naturally rejected safe-open. D3 has 8/8 qualified certificates and 2 Win / 2 Lose, all time-close. The native internal numerical causes remain UNKNOWN and the original D24 call remains REJECTED. Final scientific review, PDF, publication, public restoration and cleanup are not claimed complete. Overall status is **IN_PROGRESS pending remaining delivery obligations**.
+**Current local scientific/delivery evidence: PASS; final independent delivery review and final metadata publication/readback are pending.** The fixed scientific commit is `e4c6f82316f8697c6dfcf59d3a0807619b7bcae8`. All numerical/mathematical findings and the frozen manuscript/PDF remain unchanged. Public recovery, actual PDF checks, guarded cleanup and directed protection have now passed with their real failure/repair costs retained. Overall closeout is still **IN_PROGRESS pending the final metadata and independent delivery gate**.
 
 ## Status axes and authoritative entries
 
 | Axis | Scientific result | Remaining requirement |
 | --- | --- | --- |
-| Localization/finite numerical study | COMPLETE within declared finite scope | Final claim review; native internal causes remain unknown |
-| Confirmed defects | Frozen parameter/source/consumer/trace and inclusive-embedding repairs; focused and fixed D1 tests pass | Final science review of exact delivered bytes |
+| Localization/finite numerical study | COMPLETE within declared finite scope and reviewed | Native internal causes remain UNKNOWN |
+| Confirmed defects | Frozen repairs and focused/fixed D1 checks independently pass | Preserve exact published identities and remaining numeric limits |
 | Original native numerical causes | D24 UNKNOWN internally; GEOM UNKNOWN internally; failed sources retained | No hidden-tree repair or universal reliability claim |
-| Implementation qualification | Independent D1 PASS 14/14 handling; source 13/14; D3 outputs 8/8 qualified certificates | Pre-release scientific/artifact reconciliation |
-| Tiny mathematics | Exact rational/primal/integer-gap evidence and separate internal review complete | Final artifact binding/claim check |
-| Manuscript and evidence delivery | Scientific source updated; actual PDF/publication/recovery/cleanup pending | Complete each actual delivery receipt |
-| Submission readiness | Scoped manuscript preparation supported; final readiness decision pending | Science/PDF/delivery review; broader claims require a separate plan |
+| Implementation qualification | Independent D1 and D3 finite qualification PASS, with rejected sources preserved | Existing limits remain; no universal native-tree claim |
+| Tiny mathematics | Exact proofs/internal review and public replay PASS | Equal-target/weight and complete-universe limits retained |
+| Manuscript and local evidence delivery | Fixed science/PDF/public recovery/actual cleanup/protection PASS | Final independent delivery closeout and final metadata push/readback |
+| Submission readiness | Bounded manuscript/submission preparation supported by reviewed science and artifacts | No automatic submission, higher-journal threshold or broad-performance claim |
 
 Detailed contracts are in native_reliability_analysis.md, exact proofs/history in joint_objective_gap_note.md, and old evidence distinctions in historical_impact.md/.json. Fixed numeric authorities are reports/D1 and reports/D3 arms/pairs. independent_review.md maps actual reviewer decisions; it does not invent final acceptance.
 
@@ -184,18 +184,31 @@ All formal compute outers are closed. The measured total is **11824.854547899857
 
 Only disjoint outer processes are charged; nested H/LP/MIP/native Runtime/Work are not added. Postverification, this metered prose assembly, PDF, publication and restoration are separately reported. First-arm 1743.506-second verification/disposition delay is retained in its clock and not silently counted again as native G1. Actual failed compile/test/runtime/readout attempts remain. Later delivery receipts may update separate totals without changing these fixed compute results.
 
-## Scientific freeze and later metadata
+## Current delivery evidence after the fixed scientific checkpoint
 
-Scientific claims, numeric authorities and final manuscript/PDF will be pinned once final scientific review and actual PDF QA finish. The production source pin is distinct from the future scientific commit. The exact science file/dependency manifest will bind failures, raw/source distinctions and bounded checks. Later actual publication, transport, public-restoration and cleanup receipts are post-snapshot metadata, not anticipated scientific outcomes or reasons to rewrite tables with their own future commit SHA.
+**Local scientific and delivery evidence: PASS. Final independent delivery review and final metadata publication/readback remain pending.** The immutable scientific commit is `e4c6f82316f8697c6dfcf59d3a0807619b7bcae8`. Its copies of this report and supporting documents correctly described some delivery actions as PENDING at that freeze time. Those checkpoint statements are historical, not a claim that the subsequently completed local actions remain unexecuted. The scientific manuscript, 50-page PDF, bibliography, metrics and sealed observations are unchanged; this is a phase-only metadata closeout.
 
-One planned public empty-root restoration must cover only that fixed science snapshot and declared small old dependencies, with zero Optimize and zero recompilation. Its actual receipt remains pending; any real failure and finite same-root repair will be retained. Metadata is not recursively repackaged/restored to contain its own receipt. A scientific correction needs an explicitly corrected version and affected review. Original 34 carriers retain their bytes; no full old 84-arm re-expansion is needed.
+The final PDF has 50 pages and 19 embedded fonts. Its actual all-page and affected full-size visual checks pass; the scientific manuscript SHA remains `76d176cb883a88b64d27b43f1994d66f5dd337f9bcc579540b91b707324c93ff`, and PDF SHA is `0c43fd125d75fe36e7fae0bc62b714b807a827bf4135cdb6afa6102864aef4cc`. [Pre-release scientific review](review/pre_release_science_review.json) accepts the scientific claims/tables within their stated limits. It does not promise journal acceptance.
 
-| Remaining delivery obligation | Present status |
+The one public initially empty owned root was `E:/codes/ExactEBRP-work/restore/round133-public-e4c6f823`. Public verification passes 436 loose files, 24 archives and 321,003 members, all 22 formal positions plus the separate unit, exact J2/J3 checks and the complete D24 point check (22,996 rows, 9,391 variables, 601 equalities). Optimize, native starts, compilation and vendor-DLL loads are all zero. No local raw or old-worktree fallback, new root or native rerun is used.
+
+The first public attempt exits 1 on the original cumulative 1800-second transport/materialization cap, with outer cost 1800.2186158999102 seconds. Its failed receipt/root state/logs/fee remain. The semantic phase had not started, and no SHA/CRC/scientific failure was reported. After independent admission, wrapper `c86044ddc67fb3dca199089497478f578b6a4bcf:scripts/round133_public_resume_budget.py` (SHA `2357ead1c1a31d4b4be0ccb2055ba3db9fc7ff381e62bac0a1e416f704cd59b0`) and gate SHA `c2ea3d1d8ad4b07a9ae2cc3c5dd9e4d01ff7aec9be206918d78b5cba54f0e00d` are anonymously fetched and hash-checked. Only cumulative caps are total 7200/transport 6000/semantic 3600; both phases remain limited by remaining total 7200. The original bootstrap `b8062780c069e252df5306d79fc5b1c22038d1adf4f0ec229cdaddc1cbca5aa8`, portable checker `6024c92660aed5d78a6fade0f371cac4621bc822d74008296a5539319b93a37d` and fixed science bytes are unchanged.
+
+Resume02 uses that same failed root, exits 0 and costs 1443.7407627999783 outer seconds. The two separately paid outer costs total 3243.9593786998885 seconds. The public receipt's internal cumulative fields are total 3243.502248400124, transport 2833.5253835001495 and semantics 409.9768669999903 seconds. Internal stage clocks are descriptive and are not added again to the outer fees. No prior elapsed second is discarded or replaced by a clean counterfactual.
+
+[Post-public independent review](review/post_public_delivery_review.json), SHA `d994cdace2fb61309fc7e625c6b8ccb00727e4b4b9579c3601053dc8883e7719`, accepts public recovery and guarded-cleanup predicates after checking all 23 replayed clock/scientific comparisons, exact math, the actual PDF and 12 fixed-science remote file identities. Its earlier actual-cleanup PENDING field describes the point before deletion. The subsequent [actual cleanup review](review/actual_cleanup_review.json) independently passes the actual deletion/protection evidence. Cleanup01 exits 0 with outer cost 164.47638070001267 seconds; its internal deletion-operation timing is not an extra fee. It removes 321,659 verified recovery files and 206 reconstructible duplicate files. Logical deletion is 1,254,522,218 bytes; observed E free-space change is 1,328,017,408 bytes and is not wholly attributed to cleanup.
+
+[Directed protection after cleanup](review/protected_final.json) passes the three pre-existing dirty-byte checks and five declared old/new PE/DLL checks. Unique raw/failures, source/receipts, published carriers, old and current worktrees, user content and distinct PDF drafts remain. This is a directed protection check, not an all-disk byte guarantee. The completed recovery expansion has been removed only after verification; its external attempts and receipts remain.
+
+The last actual remote check sees [Draft PR195](https://github.com/yifanXovo/TailoredExact/pull/195) open, Draft and unmerged, stacked on PR194, at metadata head `c86044ddc67fb3dca199089497478f578b6a4bcf`, with the twelve fixed-science files readable. The forthcoming support-metadata commit(s), their push and actual final head/key-file readback are not yet claimed complete. The final reviewer still must accept this affected support-document closeout; no future final-delivery PASS is invented here. No second recovery or recursive science repack is needed.
+
+## Remaining actual final steps
+
+| Obligation | Current status |
 | --- | --- |
-| D1/D3 completion reviews | PASS, recorded independently; pre-release prose/artifact gate pending |
-| Final PDF and actual affected-page formula/table/citation/cross-page inspection | PENDING; parent owns execution |
-| Finite new-carrier/dependency manifest and public empty-root recovery | PENDING; zero Optimize/recompilation |
-| Normal push, English stacked Draft PR and actual remote base/head/key-file readback | PENDING |
-| Owned safe cleanup and final delivery/readiness decision | PENDING verified delivery/recovery |
+| Scientific claims/tables, actual PDF QA, local public recovery, actual cleanup/protection | PASS within documented scope |
+| Final independent review of affected support closeout and actual later receipts | PENDING |
+| Normal final metadata commit/push and actual remote base/head/key-file readback | PENDING |
+| Overall goal/delivery completion declaration | Reserved until the preceding actual final steps pass |
 
-The scientific evidence supports continued preparation of a transparently scoped manuscript using the corrected implementation. Finite safe rejection with an independent own-zero does not restore a rejected native tree; qualification does not require disguising normal open as success. Final overall COMPLETE is reserved for all applicable scientific and actual delivery obligations, not file completeness. No automatic merge, force-push, default change, submission or outside contact follows. Publication excludes credentials, licenses, PE/DLL, unlicensed full literature and independent fonts, while retaining unique science and failures.
+The scientific G1 cost remains 11824.854547899857/39600 seconds. Delivery, recovery and this prose revision are separately metered; no nested semantic/native work is counted twice. Unspent compute budget does not authorize more experiments. Supporting metadata does not revise the fixed scientific record, original 17/24 plus own-zero history, source REJECTED state, native UNKNOWN causes or bridge's untested changed-marker domain. Current evidence supports bounded submission preparation, not automatic submission or a claim to a higher journal threshold. No force-push, merge, default change or outside contact follows.

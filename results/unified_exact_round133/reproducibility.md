@@ -1,51 +1,37 @@
-# Finite Round133 reproduction
+# Finite Round133 reproduction and actual public recovery
 
-The fixed science commit is recorded by the later `delivery_receipt.json`.
-Pass that full 40-character commit to the recovery entry. It is separate from
-the later metadata head, which records the actual recovery, cleanup and remote
-readback. The science payload does not claim those future actions have passed.
+**Current local scientific/public-recovery/cleanup evidence: PASS. Final independent delivery closeout and final metadata publication/readback remain pending.** The fixed scientific commit is `e4c6f82316f8697c6dfcf59d3a0807619b7bcae8`. Later support metadata records what actually happened after that science freeze; it does not rewrite the scientific payload or recursively package its own receipt. The checkpoint's original PENDING publication/recovery wording describes the earlier freeze time.
 
-The entry is `scripts/round133_public_restore.py`. Obtain that script from the
-same public fixed science commit and check its published SHA. Run it with an
-existing Python 3.12+ standard-library runtime and curl:
+## Fixed entries and byte identities
 
-```text
-python -I -B round133_public_restore.py --commit SCIENCE_COMMIT --destination E:/codes/ExactEBRP-work/restore/round133-public --receipt E:/codes/ExactEBRP-work/worktrees/round133/results/unified_exact_round133/public_restore_receipt.json
-```
+The original general recovery entry is [round133_public_restore.py](https://github.com/yifanXovo/TailoredExact/blob/e4c6f82316f8697c6dfcf59d3a0807619b7bcae8/scripts/round133_public_restore.py), SHA256 `b8062780c069e252df5306d79fc5b1c22038d1adf4f0ec229cdaddc1cbca5aa8`. Obtain it from that full public commit, check its SHA and use an existing Python 3.12+ standard-library runtime and curl. It accepts `--commit`, one owned initially empty `--destination` and an external `--receipt`. A real failure can preserve and resume the same root with `--resume`; completed roots cannot be rerun. This documentation is not an instruction to create another recovery for this completed task.
 
-The destination must be one owned, initially empty directory under the declared
-restore parent. A completed root cannot be rerun. A real failed attempt preserves
-its cause and can resume in that same root with `--resume`; do not start another
-empty root to discard a failure. Transport uses anonymous fixed-commit HTTPS,
-with no HEAD/branch resolution, Git checkout, local historical raw fallback,
-native assets, solver invocation or compilation.
+The portable scientific checker remains SHA256 `6024c92660aed5d78a6fade0f371cac4621bc822d74008296a5539319b93a37d`. The original bootstrap uses anonymous fixed-commit HTTPS, not HEAD/branch resolution, Git checkout, local historical raw, native assets or another checkout fallback. The science manifests preserve exact loose/carrier/member and source-materialization identities. Old 34 carriers retain original bytes; only declared small historical snippets and the one tiny inherited carrier are used. PE/DLL/object/library identities are historical execution attestations, deliberately not distributed or reloaded by recovery.
 
-`export_manifest.json` names each exact loose file and the one small inherited
-tiny carrier. `raw_archive_manifest.json` and its compressed member indices bind
-the new carriers to all current raw, failures and closed process receipts. The
-old 34 carriers are unchanged. Only the explicitly indexed historical snippets
-in `dependencies/historical_snippets.json` are reused. Execution source bytes,
-the two reused main-source/binding pairs and the old bridge source dependencies
-are separately published through `source_publication.json`. PE/DLL/object/library
-identities remain historical execution attestations; recovery does not remeasure
-assets that are deliberately absent.
+Recovery must verify SHA/CRC/member/path identity and exact source materialization, then run all three unchanged pure-Python hooks:
 
-After SHA/CRC/member verification and exact source materialization, recovery
-must pass all three independent pure-Python checks:
+1. `round133_portable_check.py`: all 22 formal positions plus the separate nonperformance correctness unit; original reader plus explicit accepted-H adapter; full physical/model/H/Start/source/return/cover and every actual clock/endpoint comparison.
+2. `round133_joint_check.py`: exact J2/J3 complete-universe service/objective arguments from the single declared inherited tiny carrier.
+3. `round133_d24_point_check.py`: all 22,996 rows/9,391 variables/601 equalities of the complete D24 extension, original physical fleet, three refuted observations and loaded signed-zero comparison. This does not qualify the rejected source or hidden MIP tree.
 
-1. `round133_portable_check.py`: all 22 fixed formal positions and the separate
-   nonperformance correctness unit; actual frozen reader plus explicit effective
-   post-seal H adapter, complete physical/model/H/Start/source/return/cover audits,
-   original producer and verification clocks, and derived endpoint consistency.
-2. `round133_joint_check.py`: exact J2/J3 full-universe service and objective
-   arguments from the one declared inherited tiny carrier, without a new study.
-3. `round133_d24_point_check.py`: all 22,996 serialized rows and 9,391 variables
-   for the D24 own-zero extension, physical fleet, three refuted observations and
-   saved loaded-coefficient comparison. This does not qualify the rejected source
-   or validate the hidden native tree.
+## Actual wall-budget failure and fixed same-root resume
 
-Derived replay writes remain in memory or external attempt receipts. The restored
-scientific bytes and original measured clocks are not overwritten. Recovery
-reports its own actual cost separately, with zero Optimize and zero compilation.
-The finite delivery plan and space check record the bounded scope. Later delivery
-receipts are appended without recursively repacking or recovering the science.
+The original public01 attempt used cumulative total 7200/transport1800/semantics3600 seconds. It genuinely failed before semantic verification on the 1800-second transport/materialization cap, exiting1 at outer 1800.2186158999102 seconds. The failed receipt/state/logs/fee remain. The failure was not a SHA, CRC, source-path or scientific result failure, and semantic elapsed time was zero.
+
+The conditional recorded resume entry is [round133_public_resume_budget.py](https://github.com/yifanXovo/TailoredExact/blob/c86044ddc67fb3dca199089497478f578b6a4bcf/scripts/round133_public_resume_budget.py), fixed metadata commit `c86044ddc67fb3dca199089497478f578b6a4bcf`, SHA256 `2357ead1c1a31d4b4be0ccb2055ba3db9fc7ff381e62bac0a1e416f704cd59b0`. Its [independent execution admission](https://github.com/yifanXovo/TailoredExact/blob/c86044ddc67fb3dca199089497478f578b6a4bcf/results/unified_exact_round133/review/public_resume_budget_admission.json) has SHA256 `c2ea3d1d8ad4b07a9ae2cc3c5dd9e4d01ff7aec9be206918d78b5cba54f0e00d`. Both were anonymously downloaded from the fixed metadata commit and verified before execution. This final wrapper is distinct from its earlier conditional-source-review draft.
+
+The wrapper requires `--bootstrap`, `--admission`, `--commit`, `--destination`, `--receipt` and `--resume`. The gate binds the original failed public receipt SHA, prior restore_state SHA, owner/destination and fixed science commit. In this run the destination was `E:/codes/ExactEBRP-work/restore/round133-public-e4c6f823`. The wrapper cannot be applied as a generic new-empty-root override, or after the completed expansion's verified cleanup. Its actual execution is bound in review/public_budget_resume_execution.json and review/public_resume_transport_binding.json.
+
+Only the imported original bootstrap's cumulative BUDGETS change to total 7200/transport 6000/semantic 3600; the original b806 entry, portable 6024 entry, scientific hooks, source/CRC/SHA/owner/PASS-rerun checks and science bytes remain unchanged. These are cumulative caps, not additional per-attempt allowances: prior elapsed transport stays charged and each phase also obeys the remaining total 7200 cap. No check is removed and no new recovery root or Native solve is created.
+
+Resume02 runs in that same failed owned root and exits 0 at outer 1443.7407627999783 seconds. Both outer attempts together cost 3243.9593786998885 seconds. The internal cumulative receipt records total 3243.502248400124, transport 2833.5253835001495 and semantic 409.9768669999903 seconds. These internal observations are not added again to outer costs.
+
+## Actual recovered evidence and retained records
+
+The [public receipt](public_restore_receipt.json), SHA256 `02245307f18d91d950eda3203591563e61d6060a5320455f08b27ffa989e77e1`, reports PASS for 436 loose files, 24 archives/321,003 members, all 22 formal plus one separate unit, exact J2/J3 and the full D24 extension. Optimize/native starts/compilation/vendor-DLL loads are all zero; there is one original initially empty root and external preserved attempt receipts. No original or new native performance result is rerun. Scientific bytes and measured producer/verification clocks stay unchanged.
+
+The [post-public independent review](review/post_public_delivery_review.json), SHA256 `d994cdace2fb61309fc7e625c6b8ccb00727e4b4b9579c3601053dc8883e7719`, checks all 23 scientific/clock comparisons, exact math, actual 50-page/19-font PDF and 12 fixed-science remote identities. It accepts public recovery and guarded-cleanup predicates. The later [actual cleanup review](review/actual_cleanup_review.json) passes actual deletion/protection. Cleanup01 outer cost 164.47638070001267 seconds includes its checks; the internal deletion timing is not a second fee. It removes 321,659 verified restored files and 206 duplicates, logical 1,254,522,218 bytes. E free-space change 1,328,017,408 bytes is observed separately and not wholly attributed to deletion.
+
+The completed expansion is now absent by verified cleanup; unique raw/failures, published carrier pieces, source/receipts, original/new native assets, current/old worktrees, user content and distinct PDF drafts remain. Directed protection passes three dirty-byte and five PE/DLL identities, not a whole-disk guarantee. The external attempts and public/cleanup receipts preserve the actual same-root history; no new root or recursive recovery is needed to close metadata.
+
+The scientific G1 cost remains 11824.854547899857/39600 seconds; public recovery/cleanup/document/delivery costs are separate. [Draft PR195](https://github.com/yifanXovo/TailoredExact/pull/195) was actually checked open, Draft and unmerged at head `c86044ddc67fb3dca199089497478f578b6a4bcf`, with twelve fixed-science files readable. Final support-metadata publication/readback and final independent delivery acceptance remain pending. No automatic merge or submission is performed.
