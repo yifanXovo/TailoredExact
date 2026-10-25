@@ -1,5 +1,11 @@
 # Independent review map and outstanding acceptance
 
+**Final review map, author compiled: COMPLETE.** The independent reviewer issued ACCEPT_DELIVERY_EVIDENCE_FOR_FINAL_PUBLICATION in review/final_delivery_review.json (SHA256 38a653df399861b12fa9fae627a058d1d1ff0c27c1246e93bb0ee01b73b57c29). After that review, the publisher actually read back metadataA eb5ea773cd19c35b5bb595793f95b430d8fde5ec and all 16 late key files with the correct open/Draft/unmerged PR and R132 base; remote_readback.json records the API evidence. Actual scientific recovery and guarded cleanup pass. This remains internal independent evidence review rather than third-party Native replication. The final self-publishing status transport is checked separately afterward.
+
+## Reviewed evidence checkpoint before the final remote readback
+
+The following accepted checkpoint preserves its then-pending phase wording; the effective completion state is recorded above. Scientific answers, counts, limitations and proofs are unchanged.
+
 **Author-compiled current review map; final independent delivery acceptance PENDING.** This file summarizes actual internal review evidence from an agent other than the primary implementer. It is not an invented reviewer signature, external replication or final PASS. The reviewer retains their own findings and receipts under `review/`; D1/D3 admissions, the explicit reader amendment and both fixed completion reviews pass, while final support-closeout review and final metadata publication/readback remain pending. Actual scientific, PDF, public-recovery and cleanup/protection reviews have passed as mapped below.
 
 The primary implementer is the root agent. The reliability reviewer is the separate `reliability_review` agent. Mathematical evidence was prepared by `joint_math` and checked separately by the reliability reviewer. The manuscript/history author compiled this map without launching native work. These roles distinguish implementation from review, while remaining an internal team rather than third-party experimental reproduction.

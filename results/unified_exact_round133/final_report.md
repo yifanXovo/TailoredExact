@@ -1,5 +1,11 @@
 # Round133: native-bound reliability and the joint-objective gap
 
+**Final status: COMPLETE.** All applicable Round133 scientific and delivery obligations have passed. The final independent review accepts the evidence; actual metadataA `eb5ea773cd19c35b5bb595793f95b430d8fde5ec` and all 16 late key files have been read back from the open, Draft, unmerged PR #195, with the verified R132 base. The fixed science pin remains `e4c6f82316f8697c6dfcf59d3a0807619b7bcae8`. Native internal causes remain UNKNOWN and the old D24 source remains REJECTED; finite implementation/failure handling passes. Complete receipts are in completion_audit.json, delivery_receipt.json, remote_readback.json and review/final_delivery_review.json. The last status-publication transport is checked separately afterward; no additional science packing or recovery is performed.
+
+## Reviewed evidence checkpoint before the final remote readback
+
+The following accepted checkpoint preserves its then-pending phase wording; the effective completion state is recorded above. Scientific answers, counts, limitations and proofs are unchanged.
+
 **Current local scientific/delivery evidence: PASS; final independent delivery review and final metadata publication/readback are pending.** The fixed scientific commit is `e4c6f82316f8697c6dfcf59d3a0807619b7bcae8`. All numerical/mathematical findings and the frozen manuscript/PDF remain unchanged. Public recovery, actual PDF checks, guarded cleanup and directed protection have now passed with their real failure/repair costs retained. Overall closeout is still **IN_PROGRESS pending the final metadata and independent delivery gate**.
 
 ## Status axes and authoritative entries

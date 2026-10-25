@@ -1,5 +1,11 @@
 # Readiness of the scoped corrected-version manuscript
 
+**Final bounded-task status: COMPLETE.** Scientific qualification, actual 50-page PDF QA, the one public same-root recovery, independent review, guarded cleanup and actual metadataA/base/head/16-key-file readback have passed. This supports preparation of the explicitly scoped manuscript. Broader performance claims and natural NEXT/changed-marker-domain stability still require a separate future plan; submission and journal suitability remain separate human decisions. The native internal causes remain UNKNOWN and the old D24 source remains REJECTED.
+
+## Reviewed evidence checkpoint before the final remote readback
+
+The following accepted checkpoint preserves its then-pending phase wording; the effective completion state is recorded above. Scientific answers, counts, limitations and proofs are unchanged.
+
 All finite C/D/E computations and the full D3 bridge are complete. Independent D1 review passes14/14 implementation/failure handling, 13/14 native sources, 8 certificates, 5 qualified-open and 1 naturally rejected safe-open. D3 yields 8/8 qualified certificates,2 Win / 2 Lose and four time-close pairs. The reviewed science and actual PDF/public recovery/cleanup/protection now support bounded manuscript and submission preparation. Final independent delivery closeout and final metadata publication/readback remain pending; they are not inferred from file completeness.
 
 The original R132 benchmark remains S2 17/24, P 9/24, PS 4/12 plus separate independent own-zero/source loss, on 84 arms/64 comparisons. It is not retroactively a measurement of the new version. The original D24 call stays REJECTED. Complete rational initial-model embedding and the fresh same-DLL signed-zero transfer do not reconstruct its historical hidden state or tree. Both original native numerical causes remain UNKNOWN. C-R2 reproduces GEOM's OPTIMAL/physical gap; the different cold C-R3 TIME_LIMIT replay does not, and the original g/e vector is missing. Those limitations remain publishable disclosures, not claims of commercial internal repair.

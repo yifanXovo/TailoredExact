@@ -1,5 +1,5 @@
 {
-  "overall_status": "DELIVERY_EVIDENCE_ACCEPTED_PENDING_FINAL_METADATA_READBACK",
+  "overall_status": "COMPLETE",
   "science_commit": "e4c6f82316f8697c6dfcf59d3a0807619b7bcae8",
   "production_source_commit": "4507c3554c6544048d307168779c8757f53cc5ae",
   "resume_metadata_commit": "c86044ddc67fb3dca199089497478f578b6a4bcf",
@@ -7,31 +7,133 @@
   "G3_axes": {
     "localization_and_finite_study": "COMPLETE_SCOPED",
     "confirmed_parameter_source_consumer_trace_and_inclusive_defects": "PASS_SCOPED_FIX_AND_TESTS",
-    "original_native_numerical_causes": {"D24":"UNKNOWN","GEOM":"UNKNOWN","old_D24_source":"REJECTED"},
+    "original_native_numerical_causes": {
+      "D24": "UNKNOWN",
+      "GEOM": "UNKNOWN",
+      "old_D24_source": "REJECTED"
+    },
     "implementation_qualification_and_failure_handling": "PASS_FINITE_FIXED_D1_AND_CONTROLLED_D2",
-    "manuscript_and_scientific_recovery": "PASS_FINAL_INDEPENDENT_EVIDENCE_ACCEPTED_PENDING_REMOTE_METADATA",
+    "manuscript_and_scientific_recovery": "PASS_ACTUAL_PUBLIC_RECOVERY_QA_CLEANUP_INDEPENDENT_REVIEW_AND_REMOTE_READBACK",
     "submission_preparation": "SUPPORTED_FOR_DISCLOSED_SCOPED_CLAIMS; broader claims require a separate plan; no automatic submission or journal guarantee"
   },
   "finite_positions": {
-    "D1": {"expected":14,"sealed":14,"implementation_handling_qualified":14,"native_sources_qualified":13,"certificates":8,"qualified_open":5,"source_rejected_safe_open":1},
-    "D3": {"expected":8,"sealed":8,"qualified_certificates":8,"pairs":4,"Win":2,"Lose":2,"all_TIME_CLOSE":true,"not_holdout":true,"changed_marker_domain_not_exercised":true},
-    "unit": {"separate_nonperformance":true,"exact_optimum":"3/2"},
+    "D1": {
+      "expected": 14,
+      "sealed": 14,
+      "implementation_handling_qualified": 14,
+      "native_sources_qualified": 13,
+      "certificates": 8,
+      "qualified_open": 5,
+      "source_rejected_safe_open": 1
+    },
+    "D3": {
+      "expected": 8,
+      "sealed": 8,
+      "qualified_certificates": 8,
+      "pairs": 4,
+      "Win": 2,
+      "Lose": 2,
+      "all_TIME_CLOSE": true,
+      "not_holdout": true,
+      "changed_marker_domain_not_exercised": true
+    },
+    "unit": {
+      "separate_nonperformance": true,
+      "exact_optimum": "3/2"
+    },
     "NEXT": "Controlled/static correctness coverage; natural NEXT performance not observed",
     "historical_R132": "Original S2 17/24 plus separate own-zero/source loss; no relabelling as the candidate"
   },
-  "mathematics": {"J2":"strict labelled-service conflict; inventory witness attainable","J2_J3_LP":"lambda_hat","J2_J3_IP":"1/4+lambda_hat for the stated loaded coefficient and equal-target/weight premises","exact_gap":"1/4","new_Optimize":0,"new_real_role_cuts":0},
-  "conditional_work": {
-    "C_R1_native_rerun":"NOT_NEEDED after complete actual-model rational point proof",
-    "D3":"TRIGGERED_AND_ALL_EIGHT_COMPLETED",
-    "full_size_joint_separator":"NOT_ADMITTED; full-domain support/interface proof gates unmet",
-    "additional_inputs_Seeds_parameter_or_lambda_grid":"OUT_OF_SCOPE_NOT_RUN"
+  "mathematics": {
+    "J2": "strict labelled-service conflict; inventory witness attainable",
+    "J2_J3_LP": "lambda_hat",
+    "J2_J3_IP": "1/4+lambda_hat for the stated loaded coefficient and equal-target/weight premises",
+    "exact_gap": "1/4",
+    "new_Optimize": 0,
+    "new_real_role_cuts": 0
   },
-  "resources": {"G1_seconds":11824.854547899857,"G1_limit_seconds":39600,"C":711.0482404999202,"D":6433.36667340016,"E":2.2934773000308515,"D3":3508.809842899791,"repair":1169.336313799955,"nested_H_LP_MIP_Work_not_added":true,"postverification_delivery_separate":true},
-  "actual_public_recovery": {"status":"PASS","one_owned_root":true,"science_commit":"e4c6f82316f8697c6dfcf59d3a0807619b7bcae8","files":436,"archives":24,"members":321003,"formal_positions":22,"separate_unit_positions":1,"J2_J3":"PASS_EXACT_LP_AND_IP","D24":"PASS_ALL_22996_ROWS_9391_VARIABLES","Optimize":0,"compilation":0,"vendor_DLL_load":0,"standard_Python_runtime_separately_recorded":true,"first_transport_cap_failure_preserved":true,"budget_only_same_root_resume_reviewed_and_publicly_pinned":true,"internal_cumulative_seconds":3243.502248400124},
-  "actual_PDF": {"pages":50,"SHA":"0c43fd125d75fe36e7fae0bc62b714b807a827bf4135cdb6afa6102864aef4cc","all_page_actual_visual_QA":"PASS","fonts_embedded":19,"missing_or_outside_characters":0,"marker_successful_invocations":1},
-  "actual_cleanup": {"status":"PASS","restored_copy_files_removed":321659,"other_verified_duplicates_removed":206,"logical_deleted_file_bytes":1254522218,"observed_E_free_change_bytes":1328017408,"free_space_change_separately_reported":true,"directed_dirty_hashes_preserved":3,"native_assets_preserved":5,"no_whole_disk_integrity_claim":true,"unique_raw_failures_and_old_trees_retained":true},
-  "independent_reviews": {"design":"PASS","frozen_admission":"ACCEPT","D1":"PASS","D3":"PASS","tiny_math":"PASS","pre_release_science":"ACCEPT","delivery_tools_and_actual_local23":"ACCEPT","actual_public":"ACCEPT","actual_cleanup":"PASS","final_publication_review":"ACCEPT_DELIVERY_EVIDENCE_FOR_FINAL_PUBLICATION"},
-  "remote": {"PR":"https://github.com/yifanXovo/TailoredExact/pull/195","state":"open","Draft":true,"merged":false,"base":"codex/round132-frozen-s2-expression-joint-study","base_SHA":"1ae14721e800d7c601adc1e7e42d5dfa89e48fbb","science_key_files_actual_blob_checks":12,"final_metadata_readback":"PENDING"},
+  "conditional_work": {
+    "C_R1_native_rerun": "NOT_NEEDED after complete actual-model rational point proof",
+    "D3": "TRIGGERED_AND_ALL_EIGHT_COMPLETED",
+    "full_size_joint_separator": "NOT_ADMITTED; full-domain support/interface proof gates unmet",
+    "additional_inputs_Seeds_parameter_or_lambda_grid": "OUT_OF_SCOPE_NOT_RUN"
+  },
+  "resources": {
+    "G1_seconds": 11824.854547899857,
+    "G1_limit_seconds": 39600,
+    "C": 711.0482404999202,
+    "D": 6433.36667340016,
+    "E": 2.2934773000308515,
+    "D3": 3508.809842899791,
+    "repair": 1169.336313799955,
+    "nested_H_LP_MIP_Work_not_added": true,
+    "postverification_delivery_separate": true
+  },
+  "actual_public_recovery": {
+    "status": "PASS",
+    "one_owned_root": true,
+    "science_commit": "e4c6f82316f8697c6dfcf59d3a0807619b7bcae8",
+    "files": 436,
+    "archives": 24,
+    "members": 321003,
+    "formal_positions": 22,
+    "separate_unit_positions": 1,
+    "J2_J3": "PASS_EXACT_LP_AND_IP",
+    "D24": "PASS_ALL_22996_ROWS_9391_VARIABLES",
+    "Optimize": 0,
+    "compilation": 0,
+    "vendor_DLL_load": 0,
+    "standard_Python_runtime_separately_recorded": true,
+    "first_transport_cap_failure_preserved": true,
+    "budget_only_same_root_resume_reviewed_and_publicly_pinned": true,
+    "internal_cumulative_seconds": 3243.502248400124
+  },
+  "actual_PDF": {
+    "pages": 50,
+    "SHA": "0c43fd125d75fe36e7fae0bc62b714b807a827bf4135cdb6afa6102864aef4cc",
+    "all_page_actual_visual_QA": "PASS",
+    "fonts_embedded": 19,
+    "missing_or_outside_characters": 0,
+    "marker_successful_invocations": 1
+  },
+  "actual_cleanup": {
+    "status": "PASS",
+    "restored_copy_files_removed": 321659,
+    "other_verified_duplicates_removed": 206,
+    "logical_deleted_file_bytes": 1254522218,
+    "observed_E_free_change_bytes": 1328017408,
+    "free_space_change_separately_reported": true,
+    "directed_dirty_hashes_preserved": 3,
+    "native_assets_preserved": 5,
+    "no_whole_disk_integrity_claim": true,
+    "unique_raw_failures_and_old_trees_retained": true
+  },
+  "independent_reviews": {
+    "design": "PASS",
+    "frozen_admission": "ACCEPT",
+    "D1": "PASS",
+    "D3": "PASS",
+    "tiny_math": "PASS",
+    "pre_release_science": "ACCEPT",
+    "delivery_tools_and_actual_local23": "ACCEPT",
+    "actual_public": "ACCEPT",
+    "actual_cleanup": "PASS",
+    "final_publication_review": "ACCEPT_DELIVERY_EVIDENCE_FOR_FINAL_PUBLICATION"
+  },
+  "remote": {
+    "PR": "https://github.com/yifanXovo/TailoredExact/pull/195",
+    "state": "open",
+    "Draft": true,
+    "merged": false,
+    "base": "codex/round132-frozen-s2-expression-joint-study",
+    "base_SHA": "1ae14721e800d7c601adc1e7e42d5dfa89e48fbb",
+    "science_key_files_actual_blob_checks": 12,
+    "final_metadata_readback": "PASS_METADATA_A; last status publication checked separately after writing this record",
+    "accepted_metadata_head": "eb5ea773cd19c35b5bb595793f95b430d8fde5ec",
+    "actual_late_keyfiles_passed": 16
+  },
   "no_force_push_merge_default_change_global_settings_license_change_or_outside_contact": true,
-  "late_receipts_not_recursively_repacked_or_recovered": true
+  "late_receipts_not_recursively_repacked_or_recovered": true,
+  "completed_after_actual_metadataA_readback_UTC": "2026-10-25T14:09:28.084607+00:00",
+  "final_self_publication": "This COMPLETE record is based on already observed metadataA delivery. Its own final normal transport/readback is recorded externally afterward, without recursive repacking or recovery."
 }

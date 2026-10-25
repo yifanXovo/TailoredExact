@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-25T14:00:06.035636+00:00",
+  "UTC": "2026-10-25T14:09:28.597757+00:00",
   "snapshot_not_recursive_final_transport": true,
   "budget": {
     "G1_seconds": 11824.854547899857,
@@ -25,7 +25,7 @@
       "D3": 3691.190157100209,
       "repair": 4230.663686200045
     },
-    "separately_reported_seconds": 4584.373800100409,
+    "separately_reported_seconds": 4598.4266628002515,
     "unclosed": [],
     "nested_H_LP_MIP_Work_not_added": true
   },
@@ -36,7 +36,7 @@
     "repair": 1169.336313799955,
     "D3": 3575.5755897999043,
     "postverification": 1.6597877000458539,
-    "delivery": 4047.133220400312
+    "delivery": 4061.186083100154
   },
   "closed_fees": [
     {
@@ -706,6 +706,15 @@
       "receipt_SHA": "f07ac125ed2e27e483d83ffd2229acbaf1dbcf3333451b89ca0796dd30ab9b43"
     },
     {
+      "label": "delivery_commit_metadataA01",
+      "kind": "delivery",
+      "outer_seconds": 2.3392463999334723,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 2.3392463999334723,
+      "exit_code": 0,
+      "receipt_SHA": "68c97f3e6a8e74c1bd092570a248db322895afd084138b9664b6d6bf4b169a22"
+    },
+    {
       "label": "delivery_D24_point_replay_01",
       "kind": "postverify",
       "outer_seconds": 0.16326900001149625,
@@ -877,6 +886,15 @@
       "receipt_SHA": "2798405d4ed8ef97bec833f7b0358d973195daacbc58ace5f7c9feb765935222"
     },
     {
+      "label": "delivery_push_metadataA01",
+      "kind": "delivery",
+      "outer_seconds": 10.35495109995827,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 10.35495109995827,
+      "exit_code": 0,
+      "receipt_SHA": "cf2ba805031e197f8d19c2132e4bd49a9f166048fd391cfd0f28effd8ff2030a"
+    },
+    {
       "label": "delivery_push_resume_metadata01",
       "kind": "delivery",
       "outer_seconds": 7.810682000010274,
@@ -983,6 +1001,15 @@
       "separately_reported_seconds": 9.088030699989758,
       "exit_code": 0,
       "receipt_SHA": "123bdbca2d94b6d78e7367f500a9387e26b6df0f7bf05244ff62bdc3b059ff8c"
+    },
+    {
+      "label": "delivery_stage_final_metadataA01",
+      "kind": "delivery",
+      "outer_seconds": 1.3586651999503374,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 1.3586651999503374,
+      "exit_code": 0,
+      "receipt_SHA": "7f3d2b58f3911506c3a17251ec9f74adbe7096cf693ce3eac3ceec5bed08077c"
     },
     {
       "label": "delivery_stage_old_fragments_01",
