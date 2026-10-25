@@ -1,0 +1,269 @@
+{
+  "UTC": "2026-10-25T07:59:09.637250+00:00",
+  "PASS": true,
+  "records": [
+    {
+      "fixture": "normal_callbacks_and_postreturn_finalization",
+      "expected": "ACCEPT",
+      "outcome": "ACCEPT",
+      "reason": null,
+      "require_complete": true,
+      "payload_SHA": "2c4911c1a2ca39742bfce59a63986ef95360ca3f48efc0eed400606723ccb2bb"
+    },
+    {
+      "fixture": "interrupted_before_Optimize_return",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "missing_Optimize_disposition",
+      "require_complete": true,
+      "payload_SHA": "be662478dc043afb60d83e99041907f24902416bf7f0b74e7b0b744115379e3d"
+    },
+    {
+      "fixture": "missing_quality_tail_after_native_return",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "missing_postreturn_quality_tail",
+      "require_complete": true,
+      "payload_SHA": "759f77d68ac3d513aef448e0989ce406a330dac6bdc3a76d31d7c103bbb4344d"
+    },
+    {
+      "fixture": "partial_prefix_observation_does_not_claim_complete",
+      "expected": "ACCEPT",
+      "outcome": "ACCEPT",
+      "reason": null,
+      "require_complete": false,
+      "payload_SHA": "be662478dc043afb60d83e99041907f24902416bf7f0b74e7b0b744115379e3d"
+    },
+    {
+      "fixture": "postreturn_bound_before_quality",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "postreturn_bound_before_quality_or_after_later_call",
+      "require_complete": true,
+      "payload_SHA": "6f80a665f2271f44cef83865965dba020122a5a81e618c4553f9e5909e246635"
+    },
+    {
+      "fixture": "quality_before_native_return",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "quality_order_or_duplicate",
+      "require_complete": true,
+      "payload_SHA": "1d6817ede55dd1337a8990e81623fd7e14f98cfbc0db00f1e94b1d37959661de"
+    },
+    {
+      "fixture": "callback_witness_after_return",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "callback_witness_after_Optimize_return",
+      "require_complete": true,
+      "payload_SHA": "466076333bad7f8a59650de91e11cb333c17a5c37f1e1e77324ae55a0119f863"
+    },
+    {
+      "fixture": "final_witness_before_return",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "final_witness_before_Optimize_return_or_after_later_call",
+      "require_complete": true,
+      "payload_SHA": "05d56b4ce9fc2d1e37d75744a326e952526e5664725f63e18138d1919a61ec96"
+    },
+    {
+      "fixture": "unknown_native_return",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "duplicate_or_unknown_native_return",
+      "require_complete": true,
+      "payload_SHA": "bdf0154d7f8e4404a945ceaf3e7cde436774aac2b2408981879718df6f713d47"
+    },
+    {
+      "fixture": "duplicate_native_return",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "duplicate_or_unknown_native_return",
+      "require_complete": true,
+      "payload_SHA": "6bfba8df3ec5d54fa749ee959c791030840a03da924302be967c3673579500a5"
+    },
+    {
+      "fixture": "duplicate_quality",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "quality_order_or_duplicate",
+      "require_complete": true,
+      "payload_SHA": "514d157c7298a7c628d5caa21fda02008fdac5a87131d9541708d10d32267e03"
+    },
+    {
+      "fixture": "overlapping_call",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "overlapping_or_unreturned_previous_call",
+      "require_complete": true,
+      "payload_SHA": "d97bba9fde395d4d459f78b5121d1c87f5e1d678af350a5f354eba40dee709bf"
+    },
+    {
+      "fixture": "new_call_before_previous_quality",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "missing_postreturn_quality_before_next_call",
+      "require_complete": true,
+      "payload_SHA": "d35b5b9cac0eefc8597dd16c4190af1d91a719c19361d12a4a5be5fa3e5eb89a"
+    },
+    {
+      "fixture": "late_source_revocation_retains_return",
+      "expected": "ACCEPT",
+      "outcome": "ACCEPT",
+      "reason": null,
+      "require_complete": true,
+      "payload_SHA": "d3355c28d4e44a9d44b86a18dee47a9c14128a4e87e0ecc1e24bb975be6987d9"
+    },
+    {
+      "fixture": "native_call_after_source_revocation",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "new_native_call_after_source_revocation",
+      "require_complete": true,
+      "payload_SHA": "9f1b269816752b140d2397ef6f609bc3561a4aacbb03b04e57fbd6f94b64d64c"
+    },
+    {
+      "fixture": "not_started_without_fake_Optimize",
+      "expected": "ACCEPT",
+      "outcome": "ACCEPT",
+      "reason": null,
+      "require_complete": true,
+      "payload_SHA": "fae50ad9015e0869b146a41b099fc740b007efde3713086fa65ae760604b50c4"
+    },
+    {
+      "fixture": "unsupported_event",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "('unknown_event_kind', 'unregistered_new_event')",
+      "require_complete": true,
+      "payload_SHA": "eb8ab26b3e83a9df69d65383f247183b95d00dbee3cde67bb27b1f6bf9ea0649"
+    },
+    {
+      "fixture": "missing_event_sequence",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "payload_SHA": "80bdc68afa2b607295d8254ee8ce2bd4695c84cfd02d54b1315f75f631578be2"
+    },
+    {
+      "fixture": "duplicate_event_sequence",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "payload_SHA": "5d9755d9b2612581ae8b405cd97c459384de6d2cc25a60c726fd466ab420b313"
+    },
+    {
+      "fixture": "valid_closed_receipt",
+      "expected": "ACCEPT",
+      "outcome": "ACCEPT",
+      "reason": null,
+      "data_SHA": "58b812bb556644255c083653f5f9332949b1699b2e83a99b61c58c89ed36c0c9",
+      "receipt_SHA": "893ac5e4bb8c7373944d5f94863ce7fdf23d56da6312328037a5f6116427a4d3"
+    },
+    {
+      "fixture": "incomplete_receipt",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "incomplete_receipt",
+      "data_SHA": "58b812bb556644255c083653f5f9332949b1699b2e83a99b61c58c89ed36c0c9",
+      "receipt_SHA": "18aafd7f4bdf458da7037e928a2fbad7efdde0c509830c272cce9dd5ca5443b7"
+    },
+    {
+      "fixture": "content_identity_mismatch",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "data_hash_or_length_mismatch",
+      "data_SHA": "19c52cc6587cdaf8ff879a416e41a88d3035c5248c504deede5631f1e1cc3832",
+      "receipt_SHA": "893ac5e4bb8c7373944d5f94863ce7fdf23d56da6312328037a5f6116427a4d3"
+    },
+    {
+      "fixture": "length_mismatch",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "data_hash_or_length_mismatch",
+      "data_SHA": "0519e9967bfa3a0ded7749a292b3281e740d23e3dc045952da6b4b48b191eb8f",
+      "receipt_SHA": "893ac5e4bb8c7373944d5f94863ce7fdf23d56da6312328037a5f6116427a4d3"
+    },
+    {
+      "fixture": "late_first_observation",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "outside_cutoff",
+      "data_SHA": "58b812bb556644255c083653f5f9332949b1699b2e83a99b61c58c89ed36c0c9",
+      "receipt_SHA": "893ac5e4bb8c7373944d5f94863ce7fdf23d56da6312328037a5f6116427a4d3"
+    },
+    {
+      "fixture": "missing_data_tail",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "data_hash_or_length_mismatch",
+      "data_SHA": "fda23e668a45fc6cadad003724bcd8d04a460de71c5b35291719276c28693898",
+      "receipt_SHA": "893ac5e4bb8c7373944d5f94863ce7fdf23d56da6312328037a5f6116427a4d3"
+    },
+    {
+      "fixture": "near_boundary_outside_witness_does_not_refute_cover_piece",
+      "outcome": "ACCEPT"
+    },
+    {
+      "fixture": "raw_restricted_claim_refuted_before_cutoff_complement",
+      "outcome": "REJECT"
+    },
+    {
+      "fixture": "tiny_actual_cover_gap_not_filled_by_tolerance",
+      "outcome": "REJECT"
+    },
+    {
+      "fixture": "quality_residuals_LP_MIP_unknown_and_objective_gap_are_distinct",
+      "outcome": "ACCEPT"
+    },
+    {
+      "fixture": "late_infeasibility_contradiction_and_G_F_domain_isolation",
+      "outcome": "ACCEPT"
+    },
+    {
+      "fixture": "complete_abandoned_state",
+      "expected": "ACCEPT",
+      "outcome": "ACCEPT",
+      "reason": null,
+      "SHA": "45f39a9df82051886728b28ad7d74abfe1358083eca5fc69bc0d57d704827c89"
+    },
+    {
+      "fixture": "header_only_abandoned_state",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "abandoned_control_state_has_no_old_leaf",
+      "SHA": "fe8f4808f356a1c91ae12d98cb09858d513bc2e90256ef7c5fe3e578bf3ef296"
+    },
+    {
+      "fixture": "truncated_abandoned_state",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "abandoned_control_state_evidence_truncated",
+      "SHA": "909bf39c314d6208c231ecf66078ae771b12b82bd1342f56b9ce2d8dced363bb"
+    },
+    {
+      "fixture": "duplicate_abandoned_leaf",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "abandoned_control_state_leaf_identity",
+      "SHA": "5f4133cd0bfafabb479f9b96a71ff8dc1f8d93f5831277fca31bbc2472c89c12"
+    },
+    {
+      "fixture": "foreign_abandoned_source",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "abandoned_control_state_source_reason_mismatch",
+      "SHA": "7b1a2ad6a7d82fb97cafdf301aea276df34ad76c983ea9bca6820e603578e8d1"
+    },
+    {
+      "fixture": "out_of_domain_abandoned_leaf",
+      "expected": "REJECT",
+      "outcome": "REJECT",
+      "reason": "abandoned_control_state_original_domain",
+      "SHA": "e0927348588fda9f6fa56336a104d75fce8746dcebfddc59fa5b4725d5e5a5a2"
+    }
+  ],
+  "script_SHA": "a3a5496f1e5c0a21f81c2b2ba1beef72af862ea29a3755753cb2cec58663cc75",
+  "reader_SHA": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+  "Optimize": 0,
+  "native_imports": 0,
+  "scope": "Controlled lifecycle/transport/source/quality faults only; not a natural performance run"
+}

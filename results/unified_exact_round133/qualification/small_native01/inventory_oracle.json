@@ -1,0 +1,84 @@
+{
+  "schema": "round133-D2-two-station-independent-inventory-oracle-v1",
+  "initial": [
+    1,
+    0
+  ],
+  "targets": [
+    1,
+    1
+  ],
+  "capacities": [
+    2,
+    2
+  ],
+  "weights": [
+    1,
+    1
+  ],
+  "Q": [
+    1
+  ],
+  "lambda_value": "1",
+  "original_integer_inventories": [
+    {
+      "Y": [
+        0,
+        0
+      ],
+      "tau": 0,
+      "G": "0",
+      "P": 2,
+      "F": "2"
+    },
+    {
+      "Y": [
+        0,
+        1
+      ],
+      "tau": 1,
+      "G": "1/2",
+      "P": 1,
+      "F": "3/2"
+    },
+    {
+      "Y": [
+        1,
+        0
+      ],
+      "tau": 1,
+      "G": "1/2",
+      "P": 1,
+      "F": "3/2"
+    }
+  ],
+  "possible_total_inventory": [
+    0,
+    1
+  ],
+  "exact_original_optimum": "3/2",
+  "attaining_no_op_inventory": [
+    1,
+    0
+  ],
+  "no_op_route_duration_seconds": 0,
+  "loaded_return_inventory": [
+    0,
+    0
+  ],
+  "loaded_return_route_duration_seconds": 120,
+  "loaded_return_objective": "2",
+  "physical_horizon_seconds": 240,
+  "positive_min_ratio_imposed": false,
+  "root_relaxation_inventory": [
+    "1/2",
+    "1/2"
+  ],
+  "root_relaxation_objective_candidate": "1",
+  "independent_no_op_upper_and_inventory_lower_match": true,
+  "Optimize": 0,
+  "enumerated_inventory_vectors": 3,
+  "new_performance_inputs": 0,
+  "not_lambda_sensitivity": true,
+  "not_supplied_as_Start_incumbent_cutoff_bound_or_cache": true
+}

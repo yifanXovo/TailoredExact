@@ -1,0 +1,39 @@
+{
+  "schema": "round133-C-helper-identity-amendment-v1",
+  "UTC": "2026-10-25T06:03:29.541337+00:00",
+  "original_plan_path": "results\\unified_exact_round133\\plans\\C_diagnostics.json",
+  "original_plan_SHA256": "e37841cc874ae8cbf9dd1dc818e53fc6123f614454f670353b4e42322b538017",
+  "original_plan_unchanged": true,
+  "diagnostic_script_SHA256": "a3dd2108c27a5de47d375f0ba4d5fd6bc9acb92ee225ce7e977c657c9112d2d0",
+  "helpers": {
+    "scripts/round133_common.py": {
+      "SHA256": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+      "bytes": 12788
+    },
+    "scripts/round99_gurobi_runtime.py": {
+      "SHA256": "4a7eb1b811bc326d8f6870946966ad8b88dcbfe040997b2101d11d08ff1cfb08",
+      "bytes": 2018
+    }
+  },
+  "scope": "Prospective explicit helper binding for C-R3 before its native launch; no extra native work",
+  "C_R2": {
+    "state": "HEALTHY_ACTIVE_AS_REPORTED_BY_PRIMARY_AGENT",
+    "started_local": "2026-10-25 13:53 Asia/Shanghai",
+    "fee": "C_R2_original_GEOM_01",
+    "original_PE_argv_and_plan_unchanged": true,
+    "limitation": "R2 helper files were not individually SHA-frozen in the original C preregistration. The primary agent reports that the only intervening common-helper change repaired CLI parsing; the direct metered function and native argv were unchanged. This amendment does not assert an unrecorded original helper SHA.",
+    "no_restart_or_replacement_authorized": true
+  },
+  "C_R3": {
+    "state": "NOT_STARTED_AS_REPORTED_BY_PRIMARY_AGENT",
+    "helper_bindings_frozen_for_future_launch": true,
+    "Python_package_version": "UNKNOWN: original setup does not record gp.__version__",
+    "Python_package_path": "UNKNOWN: original setup does not record gp.__file__",
+    "engine_identity": "same Gurobi DLL path/hash and unique loaded module verified by run-r3 binding()",
+    "package_metadata_not_inferred_from_engine": true
+  },
+  "no_Optimize": true,
+  "no_native_import": true,
+  "no_changed_parameters": true,
+  "no_diagnostic_source_edits": true
+}
