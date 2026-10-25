@@ -1,0 +1,34 @@
+{
+  "schema": "round134-independent-b-early-review-v1",
+  "UTC": "2026-10-25T19:01:54.1253303Z",
+  "reviewer": "independent_review; separate from primary implementer",
+  "decision": "ACCEPT_STATIC_SCOPE",
+  "source_hashes": {
+    "include/IndependentObjectiveProof.hpp": "1ef00600437eb4a4ab4a17617736acb8c7adcb4f191d945ee1735ea00f173bde",
+    "src/GurobiBaseline.cpp": "49db7c07cddd17e1904e6b41ea2f69dfc492b80225dfd4be7c71bc0ee1d8fecf",
+    "src/PaperExternalGiniTree.cpp": "44156056b5ef5b4eeca2d273cc0fef183764a40df606734dafff3d5c1f1bd179",
+    "tests/round134_independent_zero_tests.cpp": "638a4efe7924054d9dfa6e01199d55f9fdd25144a5205ded35659e6f7c43144d"
+  },
+  "Optimize": 0,
+  "compilation": 0,
+  "production_sources_modified_by_reviewer": false,
+  "checks": [
+    "Exact inventory cross products establish ratio equality without a near-zero floating comparison; int32 nonnegative products fit signed int64.",
+    "Nonnegative objective floor validates positive targets, finite nonnegative lambda and weights, including S=0; lambda0 retains recomputed physical P.",
+    "Final selected own fleet is revalidated with complete per-vehicle physical witness checker; invalid/missing/duplicate fleet cannot gain new independent certificate.",
+    "Native failure fields, journal status, abandoned source state and lifecycle remain unrepaired. Independent outer final certificate has its own class and floor0.",
+    "P and PS call shared helper after retainOwnStartup; S2 ms2 calls it after final physical recomputation and backend release, plus startup zero path.",
+    "Near-zero positive PS/S2 paths retain epsilon class and floor0; ordinary positive terminal/controller rules are otherwise unchanged.",
+    "Reviewed new fixture source covers exact zero with rejected source, missing/duplicate fleet, near-zero positives at all three lambda values, lambda0 penalty preservation and S0. Tests have not been executed by this reviewer."
+  ],
+  "conditions": [
+    "Primary executor must run the declared necessary checks, freeze source/PE/DLL and bind production reader to the new independent class.",
+    "Final reader must report final independent qualification separately from retained native/source failure and any pre-finalization raw controller/completion marker.",
+    "Overall experiment, math, manuscript and recovery acceptance remain pending final integration review."
+  ],
+  "findings": [],
+  "not_claimed": [
+    "No new native Optimize, matrix exactness or natural whole-arm performance verified by this static review.",
+    "This scoped acceptance is not final goal acceptance."
+  ]
+}

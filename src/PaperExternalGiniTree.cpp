@@ -1,4 +1,5 @@
 #include "PaperExternalGiniTree.hpp"
+#include "IndependentObjectiveProof.hpp"
 #include "Round127Research.hpp"
 #include "Round98StateService.hpp"
 
@@ -2370,6 +2371,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
               "incumbent meets the global nonnegative objective lower bound."
             : "Round 43 structural atlas is vacuous because the verified "
               "strict-improver range has zero width.";
+        if (round127().mode=="ms2") {
+            if (!applyIndependentZeroCertificate(instance, options.lambda, result, true)) {
+                result.lower_bound = result.external_gini_tree_global_lower_bound = 0.0;
+                result.strict_certificate_class = result.external_gini_tree_certificate_class =
+                    "epsilon_nonnegative_floor";
+            }
+        }
         result.runtime_seconds = elapsedTelemetry();
         result.wall_time_seconds = result.runtime_seconds;
         result.actual_runtime_seconds = result.runtime_seconds;
@@ -9864,6 +9872,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     if (result.external_gini_tree_failure_reason.empty()) {
         result.external_gini_tree_failure_reason = "none";
     }
+    result.runtime_seconds = elapsedTelemetry();
+    result.wall_time_seconds = result.runtime_seconds;
+    result.actual_runtime_seconds = result.runtime_seconds;
+    // This independent proof remains valid after the complete conservative
+    // source revocation above. No native status, bound or closed leaf is repaired.
+    if (round127().mode=="ms2")
+        applyIndependentZeroCertificate(instance, options.lambda, result, true);
     result.runtime_seconds = elapsedTelemetry();
     result.wall_time_seconds = result.runtime_seconds;
     result.actual_runtime_seconds = result.runtime_seconds;

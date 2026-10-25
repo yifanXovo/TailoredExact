@@ -1,4 +1,5 @@
 #include "GurobiBaseline.hpp"
+#include "IndependentObjectiveProof.hpp"
 #include "Round127Research.hpp"
 
 #include "CanonicalCompactModel.hpp"
@@ -4690,6 +4691,8 @@ SolveResult solveGurobiBaseline(const Instance& instance,
                 result.strict_certificate_class=zero?"startup_zero_nonnegative_floor":"certificate_rejected";
                 result.strict_certificate_rejection_reason=zero?"none":"no_remaining_work_window";
                 result.certificate=zero?"own physical zero witness and full-domain F>=0":"own startup UB and independent F>=0";
+                if (!applyIndependentZeroCertificate(instance, options.lambda, result) && zero)
+                    result.strict_certificate_class="epsilon_nonnegative_floor";
                 result.runtime_seconds=std::chrono::duration<double>(Clock::now()-start).count();
                 result.wall_time_seconds=result.runtime_seconds;return result;
             }
@@ -5525,9 +5528,10 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             "gurobi_exception:" + std::string(ex.what());
         result.certificate = "not_certified";
     }
+    retainOwnStartup();
+    applyIndependentZeroCertificate(instance, options.lambda, result);
     result.runtime_seconds =
         std::chrono::duration<double>(Clock::now() - start).count();
-    retainOwnStartup();
     result.wall_time_seconds = result.runtime_seconds;
     result.actual_runtime_seconds = result.runtime_seconds;
     return result;
