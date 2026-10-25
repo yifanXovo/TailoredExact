@@ -1,0 +1,243 @@
+{
+  "schema": "round133-final-science-prose-check-v1",
+  "UTC": "2026-10-25T11:43:48.817006+00:00",
+  "scope": "prose and small sealed numeric authorities only; no old large replay",
+  "input_tables": {
+    "results\\unified_exact_round133\\reports\\D1\\arms.json": "7066cb24b5071dcd6e70190c4664339319e19d8e60d5fcaefe762fa766889217",
+    "results\\unified_exact_round133\\reports\\D1\\pairs.json": "3b6b7d5ac4939747566052b29ab8fd636a7282d1b85995b0f7b66753da11f3c0",
+    "results\\unified_exact_round133\\reports\\D3\\arms.json": "cdeebb16c8bc5b13d9aa9929218dda3fa7940e62f2e23754348864f8745401ee",
+    "results\\unified_exact_round133\\reports\\D3\\pairs.json": "40fc76a37a2f5fc776a32726f229258928e7af0dc978660fb4ac65f529ad1358",
+    "results\\unified_exact_round133\\review\\D1_completion_review.json": "4bf1979f82250c388d97c23a555c89f247443f0fddb6f076f46af7e315987cb0"
+  },
+  "D3_sealed_endpoint_bindings": [
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\campaign\\D3_01\\raw\\01_SC-C15-B_S0_S2_original_E3\\round133_endpoint.json",
+      "SHA256": "78c38b707dcbefcdd405c8523292468bbd24766aaea572c8fd67fb93f6af5573",
+      "ledger_SHA256": "65550cd6f1b316220371549c137585f824c821b133df0f70bad6f6db59d9d87b"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\campaign\\D3_02\\raw\\02_SC-C15-B_S0_S2_candidate\\round133_endpoint.json",
+      "SHA256": "30feed6c8d88e27446fa10868cd3adc1030ba80eb36b4db673082495c1de8b41",
+      "ledger_SHA256": "9cadafde9bb2a44382be43d696faa40f735302db21c958d186c43d33a1561c7b"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\campaign\\D3_03\\raw\\03_SC-C15-B_S1_S2_candidate\\round133_endpoint.json",
+      "SHA256": "f119e2a1ad51c418306cf645418acc7f438f2c4d3786e6985277432c73bc6abc",
+      "ledger_SHA256": "afcdce9f6db33dcf3cadb557063a9c2440a79877decd0f5e3b90fe7d3f2e2e93"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\campaign\\D3_04\\raw\\04_SC-C15-B_S1_S2_original_E3\\round133_endpoint.json",
+      "SHA256": "145eeba53c53b3a4947cff715a79e4a7727f61a55b0a8d3f4828703cedbefbf6",
+      "ledger_SHA256": "90de281eb193f3c4cd927ae03c7cdcd3c69a7e1fb80c49a4fd91524bacfcae54"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\campaign\\D3_05\\raw\\05_SC-B20-S_S0_S2_candidate\\round133_endpoint.json",
+      "SHA256": "4dfa3fe61edf49845fb1ab1efe4208f691d0f8e2e832f05d569c856ae8fde468",
+      "ledger_SHA256": "42c2ed6fc3e2aa602f5b23bcd130e0a4e7971422533fb786a4d0ae4c2f12ae8b"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\campaign\\D3_06\\raw\\06_SC-B20-S_S0_S2_original_E3\\round133_endpoint.json",
+      "SHA256": "c7784333830869650fcd55bb0ddd570d209b52a3af0987a4a6732b024291bcae",
+      "ledger_SHA256": "45f0a04de9b24728082a93a8b91b15382f809e6adb508b30d5d0c326b729b84f"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\campaign\\D3_07\\raw\\07_SC-B20-S_S1_S2_original_E3\\round133_endpoint.json",
+      "SHA256": "01446d7f7c3d91359f5b4a1569b3e3a714107e607c3d1adac01a3f8f4bf0f566",
+      "ledger_SHA256": "0e2f1383799b1fae3887523387f378a28330b01b549e48ec3c03d09fb838d9dc"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\campaign\\D3_08\\raw\\08_SC-B20-S_S1_S2_candidate\\round133_endpoint.json",
+      "SHA256": "d28b2d9335890273cce993c07188b0563580c06caddff952c9f29bf05ee8358a",
+      "ledger_SHA256": "4a1a007dfca4f26575e6de7ec7b6472dd71c727c43d1a3f0c24bdcb63903c821"
+    }
+  ],
+  "D3_actual_small_ledger_paths": [
+    {
+      "position": 1,
+      "counts": {
+        "LP": 3,
+        "MIP": 1
+      },
+      "statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ]
+    },
+    {
+      "position": 2,
+      "counts": {
+        "LP": 3,
+        "MIP": 1
+      },
+      "statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ]
+    },
+    {
+      "position": 3,
+      "counts": {
+        "LP": 3,
+        "MIP": 1
+      },
+      "statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ]
+    },
+    {
+      "position": 4,
+      "counts": {
+        "LP": 3,
+        "MIP": 1
+      },
+      "statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ]
+    },
+    {
+      "position": 5,
+      "counts": {
+        "LP": 3,
+        "MIP": 1
+      },
+      "statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ]
+    },
+    {
+      "position": 6,
+      "counts": {
+        "LP": 3,
+        "MIP": 1
+      },
+      "statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ]
+    },
+    {
+      "position": 7,
+      "counts": {
+        "LP": 3,
+        "MIP": 1
+      },
+      "statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ]
+    },
+    {
+      "position": 8,
+      "counts": {
+        "LP": 3,
+        "MIP": 1
+      },
+      "statuses": [
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL",
+        "OPTIMAL"
+      ]
+    }
+  ],
+  "D1_counts": {
+    "implementation": 14,
+    "source": 13,
+    "certificates": 8,
+    "qualified_open": 5,
+    "rejected_safe_open": 1
+  },
+  "D3_counts": {
+    "arms": 8,
+    "pairs": 4,
+    "certificates": 8,
+    "Win": 2,
+    "Lose": 2,
+    "time_close": 4
+  },
+  "fixed_compute_budget": {
+    "G1_seconds": 11824.854547899857,
+    "remaining_G1_seconds": 27775.145452100143,
+    "by_category": {
+      "C": 711.0482404999202,
+      "D": 6433.36667340016,
+      "E": 2.2934773000308515,
+      "D3": 3508.809842899791,
+      "repair": 1169.336313799955
+    },
+    "limits": {
+      "C": 7200.0,
+      "D": 18000.0,
+      "E": 1800.0,
+      "D3": 7200.0,
+      "repair": 5400.0
+    },
+    "category_remaining": {
+      "C": 6488.95175950008,
+      "D": 11566.63332659984,
+      "E": 1797.7065226999691,
+      "D3": 3691.190157100209,
+      "repair": 4230.663686200045
+    },
+    "separately_reported_seconds": 135.73666830000002,
+    "unclosed": [
+      {
+        "label": "science_prose_final_01",
+        "kind": "postverification",
+        "reservation": 180.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\fees\\science_prose_final_01\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "outputs": {
+    "manuscript.md": {
+      "SHA256": "cf1aa389075e4bfc29ca712df8ece3d2e4373b2f155b22befedfbec6660d0108",
+      "bytes": 160832
+    },
+    "final_report.md": {
+      "SHA256": "11743415ada177b8d92c19e12d1c8037918988c98509476b164ed3bae29892fb",
+      "bytes": 28151
+    },
+    "readiness.md": {
+      "SHA256": "f4ed09299eb88f7c537af508101b9223e45a2f26bf5cc27cea41c6895e51c667",
+      "bytes": 4757
+    },
+    "independent_review.md": {
+      "SHA256": "b26584203efa50f72403de1adba85f8945d1926adf111e75dd2f0fca5dac0781",
+      "bytes": 15875
+    },
+    "native_reliability_analysis.md": {
+      "SHA256": "12aab78106a4a313372d8578a4549541ef9ac1712d7d2127b8139e687abc0e55",
+      "bytes": 20342
+    }
+  },
+  "bibliography_unresolved": [],
+  "appendices_retained": true,
+  "internal_native_causes": "UNKNOWN",
+  "historical_R132_counts_preserved": true,
+  "PDF_public_restore_final_release_claimed_complete": false,
+  "Optimize": 0,
+  "compilation": 0,
+  "PDF": 0,
+  "packaging": 0,
+  "outer_work_seconds": 0.1077788999537006,
+  "cost_kind": "postverification; G1 zero; parent meter is authoritative"
+}

@@ -1,0 +1,13 @@
+{
+  "status": "FAILED_REVIEW_METADATA_SCHEMA_ASSUMPTION",
+  "reviewer": "/root/reliability_review",
+  "script": "round133_delivery_tools_review.py",
+  "error": "KeyError T_produce: arm_total_receipt has T_verify/T_total; T_produce belongs to the linked producer_receipt",
+  "correction": "Read T_produce from actual SHA-linked producer_receipt; retain exact equality for all three measured clocks",
+  "outer_seconds": 0.2133617,
+  "candidate_or_evidence_changes": false,
+  "full_23_replay_repeated": false,
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0
+}

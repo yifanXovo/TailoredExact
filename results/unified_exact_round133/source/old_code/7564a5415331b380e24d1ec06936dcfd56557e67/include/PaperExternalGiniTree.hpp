@@ -1,0 +1,151 @@
+#pragma once
+
+#include "ExternalGiniTree.hpp"
+
+#include <string>
+#include <vector>
+
+namespace ebrp {
+
+struct PaperLpResult {
+    bool terminal_valid = false;
+    bool optimal = false;
+    bool infeasible = false;
+    bool bound_available = false;
+    double lower_bound = 0.0;
+    bool primal_values_available = false;
+    bool reduced_costs_available = false;
+    bool basis_status_available = false;
+    bool primal_dual_evidence_available = false;
+    int objective_sense = 0;
+    double verified_cutoff = 0.0;
+    std::string model_fingerprint;
+    std::vector<FixedIntervalLpVariableEvidence> primal_dual_variables;
+};
+
+struct PaperLpSplitDecision {
+    bool valid = false;
+    bool should_split = false;
+    bool child_infeasibility_trigger = false;
+    bool strict_bound_improvement_trigger = false;
+    double post_split_lower_bound = 0.0;
+    std::string reason = "not_evaluated";
+};
+
+PaperLpSplitDecision evaluatePaperLpSplitDecision(
+    double parent_lower_bound,
+    const PaperLpResult& left,
+    const PaperLpResult& right,
+    double certificate_tolerance);
+
+struct C5BoundTargetSplitDecision {
+    bool valid = false;
+    bool split_immediately = false;
+    bool run_parent_bound_target_phase = false;
+    bool decline_split_and_solve_parent = false;
+    bool child_infeasibility_trigger = false;
+    double post_split_lower_bound = 0.0;
+    double normalized_disjunction_gain = 0.0;
+    double parent_native_bound_target = 0.0;
+    std::string reason = "not_evaluated";
+};
+
+C5BoundTargetSplitDecision evaluateC5BoundTargetSplitDecision(
+    double parent_lower_bound,
+    double verified_upper_bound,
+    const PaperLpResult& left,
+    const PaperLpResult& right,
+    double normalized_split_threshold,
+    double certificate_tolerance);
+
+struct C6FrontierDecision {
+    bool valid = false;
+    bool requeue_without_native = false;
+    bool run_native_target = false;
+    bool allow_child_lookahead = false;
+    double native_bound_target = 0.0;
+    std::string reason = "not_evaluated";
+};
+
+C6FrontierDecision evaluateC6FrontierDecision(
+    double current_leaf_bound,
+    const std::vector<double>& other_relevant_leaf_bounds,
+    double certificate_tolerance,
+    bool frontier_milestone_already_reached = false);
+
+struct C6CurrentSplitDecision {
+    bool valid = false;
+    bool split_immediately = false;
+    bool run_child_bound_target = false;
+    bool launch_exact_closure = false;
+    bool child_infeasibility_trigger = false;
+    double post_split_lower_bound = 0.0;
+    double normalized_disjunction_gain = 0.0;
+    double b_plus = 0.0;
+    double eta_proof = 0.0;
+    double eta_anchor = 0.0;
+    double normalization_upper_bound = 0.0;
+    std::string normalization_source = "proof";
+    double child_bound_target = 0.0;
+    std::string reason = "not_evaluated";
+    bool adaptive_mass_enabled = false;
+    bool contraction_enabled = false;
+    bool contract_single_child = false;
+    bool close_parent_infeasible = false;
+    int feasible_child_index = -1;
+    int infeasible_child_index = -1;
+    double g_left_raw = 0.0;
+    double g_right_raw = 0.0;
+    double g_left = 0.0;
+    double g_right = 0.0;
+    double adaptive_eta = 0.0;
+    double adaptive_mu = 0.0;
+    double adaptive_mass_score = 0.0;
+    double adaptive_rho = 1.0;
+    double adaptive_score_tolerance = 0.0;
+};
+
+C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
+    double current_parent_bound,
+    double verified_upper_bound,
+    const PaperLpResult& left,
+    const PaperLpResult& right,
+    double normalized_split_threshold,
+    double certificate_tolerance);
+
+C6CurrentSplitDecision evaluateC6AdaptiveMassSplitDecision(
+    double current_parent_bound,
+    double verified_upper_bound,
+    const PaperLpResult& left,
+    const PaperLpResult& right,
+    double tau,
+    double certificate_tolerance,
+    bool contraction_enabled);
+
+C6CurrentSplitDecision evaluateC6CurrentSplitDecision(
+    double current_parent_bound,
+    double proof_upper_bound,
+    double anchor_upper_bound,
+    const std::string& normalization_source,
+    const PaperLpResult& left,
+    const PaperLpResult& right,
+    double normalized_split_threshold,
+    double certificate_tolerance);
+
+struct PaperTerminalMipDecision {
+    bool valid = false;
+    bool close_leaf = false;
+    bool leave_open_and_stop = false;
+    std::string reason = "not_evaluated";
+};
+
+PaperTerminalMipDecision evaluatePaperTerminalMipDecision(
+    const FixedIntervalMipOutcome& outcome);
+
+SolveResult solvePaperExternalGiniTree(const Instance& instance,
+                                       const SolveOptions& options,
+                                       const SolveResult& verified_seed,
+                                       double root_gamma_L,
+                                       double root_gamma_U);
+
+} // namespace ebrp

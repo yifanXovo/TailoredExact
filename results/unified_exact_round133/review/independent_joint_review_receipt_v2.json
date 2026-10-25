@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "scope": "independent direct fleet enumeration, all-row loaded primal replay and metric recomputation",
+  "parent": "Round133 G4 internal independent review; not third-party replication",
+  "cases": {
+    "J2": {
+      "fleet_count": 59,
+      "max_simple_conflict": 1,
+      "IP_optimum": "14411518807585587/36028797018963968",
+      "loaded_primal_objective": "5404319552844595/36028797018963968",
+      "exact_gap": "1/4",
+      "all_loaded_rows": 583,
+      "all_bounds": 284
+    },
+    "J3": {
+      "fleet_count": 66,
+      "max_simple_conflict": 1,
+      "IP_optimum": "14411518807585587/36028797018963968",
+      "loaded_primal_objective": "5404319552844595/36028797018963968",
+      "exact_gap": "1/4",
+      "all_loaded_rows": 583,
+      "all_bounds": 298
+    }
+  },
+  "dependencies": [
+    {
+      "member": "results/unified_exact_round132/joint/J2/B_joint_exact_matrix.json",
+      "SHA256": "20be7033fb6918aa3ca3a1a9f5a0cd017fa64010738afcaafa5f0b9eed040254"
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J2/original_objective_joint.json",
+      "SHA256": "6efdd3ae46bacdec563c0db4195ec7f4456b52d8d1e723a0cb1a093f04ec7b82"
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J3/B_joint_exact_matrix.json",
+      "SHA256": "522835121dc9bd3f45efc32631bffddf13709877dca86ccf8536352cc99a2a0e"
+    },
+    {
+      "member": "results/unified_exact_round132/joint/J3/original_objective_joint.json",
+      "SHA256": "45814de8ae102b02fd6be9c4ea4e2bed147212ebc2acfbddf12c514380d688a0"
+    }
+  ],
+  "Optimize": 0,
+  "native_modules": 0,
+  "source_SHA256": "d634e995e89e084ef4b57d472c8457af584b05dfc6bc2d6cb8b2e63a67c79bba",
+  "outer_seconds": 0.07835900003556162,
+  "budget_category": "E independent arithmetic; outer once"
+}

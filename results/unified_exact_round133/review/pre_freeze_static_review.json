@@ -1,0 +1,71 @@
+{
+  "schema": "round133-independent-pre-freeze-static-review-v1",
+  "UTC": "2026-10-25T06:14:25.395762+00:00",
+  "reviewer": "/root/reliability_review",
+  "primary_implementer": "/root",
+  "decision": "NO_ADDITIONAL_ACTIVE_S2_STATIC_BLOCKER",
+  "admission": "NOT_GRANTED_FINAL_BUILD_TESTS_AND_HASH_FREEZE_PENDING",
+  "source_hashes": {
+    "include/NativeEvidenceJournal.hpp": "432d66cdf829ed7feb13b6766507db3e295b3884fd1899f647f049e708ff54b7",
+    "include/FixedIntervalMipBackend.hpp": "70ba48e86a51e56570453ab333b61081f720368d11499c031c1f2498e55637b1",
+    "include/ControllingLeafScheduler.hpp": "404f118272cc526d280f6a8a6ec6a6945bac6c8106dea952e5ac0fba45196d61",
+    "src/NativeEvidenceJournal.cpp": "e67f8285a6c2b2737876dad2ccb4e1854951f7e951e555918d51c8d690383586",
+    "src/ControllingLeafScheduler.cpp": "b2bc0b1e38570544016259ce67aa4f3c531b3c987ae6cb216e6a9686236b5f03",
+    "src/GurobiBaseline.cpp": "c0858ec6921481809615996a34780e47d7dde86589b26175825972123fd84da3",
+    "src/PaperExternalGiniTree.cpp": "2bbedb8ecb5ecb3138e69ce9c00fa3bef556194b8c95d6cf4f7640ba9eeb22cd",
+    "scripts/round133_common.py": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+    "scripts/round133_campaign.py": "9bb688934b8445885534699edd9cecc7f1e143dd9b8cabfc0a41ca21536f8546",
+    "scripts/round133_read.py": "f43bd4da466264b2b686ef48887f832b8e1a675df91c13755df731b115a695be"
+  },
+  "independently_read_ABI": {
+    "previous": {
+      "scope": 256,
+      "request": 1048,
+      "outcome": 1928,
+      "native_scope_offset": 112,
+      "gamma_L_offset": 432
+    },
+    "candidate": {
+      "scope": 256,
+      "request": 1048,
+      "outcome": 1928,
+      "native_scope_offset": 112,
+      "gamma_L_offset": 432
+    }
+  },
+  "ABI_receipt_SHA256": "6c2121229d71842fa68a6069ce8a56f49c534ee3363e0c1a430a096e8b0a6bd1",
+  "checked_consumers": [
+    "MIP callback target",
+    "parent/child LP return",
+    "terminal and C6 target return",
+    "scheduler merge/close",
+    "late bound and infeasibility source revocation",
+    "full-domain abandonment and final certificate",
+    "retrospective qualified trace",
+    "cold and paid compact source/certificate"
+  ],
+  "checked_contracts": [
+    "raw counterexample before cutoff complement",
+    "strict physical witness membership",
+    "local qualification independent of complete global cover",
+    "qualified bound excludes native infinity sentinel",
+    "solution-count failure remains unknown and rejects numerical quality",
+    "raw observations survive semantic source rejection",
+    "normal qualified sources still have a close path"
+  ],
+  "scope_limits": [
+    "closed C5/coalescing/R119 modes not promoted by this finite review",
+    "invisible native internal pruning UNKNOWN",
+    "finite floating-point qualification is not a universal exact arithmetic proof",
+    "C3 diagnostic is currently active as reported by primary agent; no reviewer Optimize/compilation/heavy parsing"
+  ],
+  "remaining": [
+    "final production/research build and actual immutable source/PE/DLL identity",
+    "D2 pure source/quality/lifecycle/reader fault tests",
+    "independent D1 and conditional D3 admission",
+    "postproduction final metrics/evidence/manuscript/recovery review"
+  ],
+  "no_Optimize": true,
+  "no_compilation": true,
+  "no_large_evidence_replay": true
+}

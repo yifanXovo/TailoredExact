@@ -1,0 +1,29 @@
+{
+  "reviewer_role": "independent of primary implementer and native launcher",
+  "decision": "PASS_EXACT_RATIONAL_MODEL_TRANSFER",
+  "original_model_SHA256": "a630251059be795777416ea1d63e6d8881c17baf1b75ccba776b5004a7294bc1",
+  "frozen_plan_SHA256": "cf7afdae3281c4787de927f54e7a46f3531ce993f97beabcfd39a02ec4231fb3",
+  "frozen_script_SHA256": "a2b7deb8c68c4aabbdea5f6fe434dc3c1c44b2359601cdb2f278eb803f5e9937",
+  "prior_complete_Fraction_receipt_SHA256": "c116ecf7792a13fd294864312e0c31540e0b1a4f8ebfb28fe743e1867dfa98be",
+  "comparison_SHA256": "50b723b9a1e9b8ee76bdafed17b0818353991cc4ee687896926a3ddcabcac6ad",
+  "loaded_snapshot_SHA256": "078c0d0cc1fb576851b1921e08f77bf9f0aca4a839d6729d900a42110e4f621c",
+  "deltas_SHA256": "b64006faf27bd0655efd67ffb96cdef7079d8ca8df87890e560de1620a74d4e4",
+  "verified_comparisons": 269462,
+  "signed_zero_RHS_differences": ["c3016", "c3018", "c3019"],
+  "other_numeric_or_structural_differences": 0,
+  "all_raw_bits_identical": false,
+  "exact_rational_linear_model_identical": true,
+  "prior_point_proof_transfers": true,
+  "prior_point_SHA256": "6fde8c357fa6c1736d4e7a514ef0a72941483e4768f3eeb72a856e357ed01d2f",
+  "exact_point_objective": "295153098392673137459/324518553658426726783156020576256",
+  "review_did_not_repeat_point_calculation": true,
+  "native_Optimize_in_loaded_comparison": 0,
+  "native_Start_in_loaded_comparison": 0,
+  "native_Optimize_by_reviewer": 0,
+  "scope": "fresh same-DLL engine-loaded initial matrix",
+  "not_established": [
+    "historical retained-model state identity",
+    "identity of invisible presolved or cut matrices",
+    "native tree pruning or counterfactual search behavior"
+  ]
+}
