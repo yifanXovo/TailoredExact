@@ -1,0 +1,102 @@
+{
+  "schema": "round133-independent-same-root-public-budget-resume-admission-v1",
+  "reviewer": "/root/reliability_review",
+  "primary_implementer_and_unique_resume_launcher": "/root",
+  "decision": "ACCEPT_SAME_ROOT_BUDGET_EXTENSION_AFTER_REAL_LIMIT_FAILURE",
+  "science_commit": "e4c6f82316f8697c6dfcf59d3a0807619b7bcae8",
+  "wrapper_SHA": "2357ead1c1a31d4b4be0ccb2055ba3db9fc7ff381e62bac0a1e416f704cd59b0",
+  "bootstrap_SHA": "b8062780c069e252df5306d79fc5b1c22038d1adf4f0ec229cdaddc1cbca5aa8",
+  "prior_public_receipt_SHA": "0eb655d2250b93984ea6a23c9628f1dde2109f7bf6929da1bd63457b2469a82f",
+  "prior_restore_state_SHA": "6e260ea6b344c89b482d04202f949ee4f10a8d99e7492a2ca49ccef24182557d",
+  "destination": "E:\\codes\\ExactEBRP-work\\restore\\round133-public-e4c6f823",
+  "new_limits_seconds": {
+    "total": 7200.0,
+    "transport": 6000.0,
+    "semantic": 3600.0
+  },
+  "original_limits_seconds": {
+    "total": 7200.0,
+    "transport": 1800.0,
+    "semantic": 3600.0
+  },
+  "prior_cumulative_state_seconds": {
+    "total": 1800.006750700064,
+    "transport": 1800.0067514000693,
+    "semantic": 0.0
+  },
+  "limits_are_cumulative_not_new_allowances": true,
+  "both_phase_limits_also_limited_by_remaining_total_7200": true,
+  "source_review": {
+    "path": "review/public_resume_budget_source_review.json",
+    "SHA": "26f8f8ef43ce41e763418d5057138d1732859657d594d341d0fad17d5f49212f",
+    "previously_reviewed_wrapper_SHA": "3c61537baaefff1ba26f6c59fb9b80c37b5bf16837b2dc5686efcb77aceb56fe",
+    "only_later_source_change": "Added assertion binding the admission prior_restore_state_SHA to the actual same-root state bytes",
+    "byte_identical_after_removing_that_one_assertion": true,
+    "original_bootstrap_unchanged_and_actual_TEMP_copy_SHA_verified": true
+  },
+  "closed_fee": {
+    "name": "delivery_public_restore01",
+    "receipt_SHA": "1a45970e7a061a56deaf992a18397dbf9cf4e7f322496bf33658649394c7bae1",
+    "launch_SHA": "0a1eabfdb9c0defc6d24f3fde6fa464a96889d1f56dbde87a766b2d40df75c20",
+    "PID_SHA": "0218b2b59f3739088785bb9f55d7b324464536e70fb213618300a78445ead31b",
+    "stderr_SHA": "d17f1aa376110168181adf5edd3ee41bbcf1fc82424fac2845edc9240dedf658",
+    "outer_seconds": 1800.2186158999102,
+    "G1_seconds": 0.0,
+    "budget_category": "delivery",
+    "exit_code": 1,
+    "exit_observed": true,
+    "timeout": false,
+    "supervisor_failure": null,
+    "start_unix": 1792931309.1921563,
+    "end_unix": 1792933109.4233174
+  },
+  "process_birth_and_exit_review": {
+    "recovery_pid": 62220,
+    "recovery_creation_filetime": 134374049092085320,
+    "recovery_creation_unix": 1792931309.2085304,
+    "supervisor_pid": 35608,
+    "supervisor_creation_filetime": 134374049090789484,
+    "supervisor_creation_unix": 1792931309.078949,
+    "PID_command_matches_original_launch": true,
+    "both_recorded_pids_absent_on_independent_Get_Process_check": true,
+    "fee_exit_observed_true_and_end_after_both_births": true,
+    "fees_with_launch_but_no_closed_receipt": []
+  },
+  "actual_failure": {
+    "receipt_and_root_state_status": "FAILED_PRESERVE_SAME_ROOT",
+    "error": "AssertionError(('finite public recovery limit exhausted', 'transport', {'total': 1800.0036431000335, 'transport': 1800.0036434000358, 'semantic': 0.0}))",
+    "location": "Original bootstrap install_stream entry, called while extracting a current carrier; before semantic phase",
+    "transport_failures": [],
+    "no_reported_SHA_CRC_source_path_or_scientific_failure": true,
+    "semantic_phase_seconds": 0.0,
+    "state_closed_UTC": "2026-10-25T12:58:29.313358+00:00",
+    "external_attempt": "review/public_recovery_attempts/attempt01",
+    "external_attempt_receipt_matches_original_failed_receipt_SHA": true,
+    "external_attempt_state_matches_final_failed_root_state_SHA": true
+  },
+  "owner": {
+    "path": "review/round133_owned_public_recovery_root.json",
+    "SHA": "2be0db922516d5b0ad5a99f2962e5b8efd02c43a0673b015baae7b5e38fd6bcf",
+    "root_owner": "Round133 single fixed-science-commit public recovery",
+    "initially_empty": true,
+    "created_UTC": "2026-10-25T12:28:29.291235+00:00",
+    "one_owned_root": true,
+    "same_commit_and_destination_in_owner_receipt_state_and_original_argv": true
+  },
+  "execution_scope": [
+    "Parent alone may resume this one failed owned root using the unchanged bootstrap and exact admitted wrapper.",
+    "First publish this wrapper/admission/failure metadata normally, then anonymously download fixed metadata-commit wrapper and gate bytes and verify exact SHA before execution.",
+    "Pass original fixed science commit and same destination/receipt with --resume. No fresh root, healthy-run replay or new Native run is admitted.",
+    "Original completed materializations are revalidated by unchanged source/CRC/SHA policy. Previous attempt, failure, state and fees remain outside the scientific root.",
+    "All original full22+unit1, pinned 6024 policy, exact J2/J3 and exact D24/saved-loaded-bits hooks remain mandatory.",
+    "Record actual resumed wall separately and retain all cumulative seconds; no clock subtraction or reduced scientific validation."
+  ],
+  "public_recovery_state": "FAILED_TRANSPORT_CAP_SAME_ROOT_RESUME_ADMITTED_NOT_YET_EXECUTED",
+  "cleanup_state": "NOT_ADMITTED_PENDING_ACTUAL_PUBLIC_PASS_AND_SEPARATE_POST_PUBLIC_REVIEW",
+  "final_delivery_state": "PENDING",
+  "recovery_started_by_reviewer": false,
+  "tests_or_scientific_replay_run_by_reviewer": false,
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0
+}
