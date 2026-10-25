@@ -1,4 +1,17 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
+# Round133 executed sources, protocols and evidence retain their actual bytes.
+/scripts/round133* -text whitespace=cr-at-eol
+/results/unified_exact_round133/** -text whitespace=cr-at-eol
+/results/unified_exact_round133/**/*.log -whitespace
+/tests/round133* -text whitespace=cr-at-eol
+/tests/native_evidence_journal_tests.cpp -text whitespace=cr-at-eol
+/include/ControllingLeafScheduler.hpp -text whitespace=cr-at-eol
+/include/FixedIntervalMipBackend.hpp -text whitespace=cr-at-eol
+/include/NativeEvidenceJournal.hpp -text whitespace=cr-at-eol
+/src/ControllingLeafScheduler.cpp -text whitespace=cr-at-eol
+/src/NativeEvidenceJournal.cpp -text whitespace=cr-at-eol
+/src/Round105GurobiDecomposition.inc -text whitespace=cr-at-eol
+/src/Round107GurobiFrontier.inc -text whitespace=cr-at-eol
 # Round132 frozen plans, current source snapshots and read-only delivery bytes.
 /scripts/round132* -text whitespace=cr-at-eol
 /scripts/Round132Expression.hpp -text whitespace=cr-at-eol

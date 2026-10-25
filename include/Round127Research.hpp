@@ -27,7 +27,8 @@ inline bool round128InclusiveRoot() {
 inline bool round127Md() { return round127().mode=="md" || round128InclusiveRoot(); }
 // This named proof shortcut is not an inequality valid for the inclusive
 // F<=U0 physical set. Preserve the penalty bound and all genuine domain rows.
-// Both shared and fallback emitters use this semantic scope, never row indices.
+// Historical predicate retained for source compatibility. Since R133 neither
+// shared nor fallback emitter inserts this artificial infeasibility marker.
 inline bool round128EmitIntervalNoImproverDomainClosure() {
     return !round128InclusiveRoot();
 }

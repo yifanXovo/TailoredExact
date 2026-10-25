@@ -3340,13 +3340,9 @@ void writeCompactLp(const Instance& instance,
             }
             writeConstraint(out, cid, p_lb, ">=", penalty_lb);
             if (stats != nullptr) ++stats->penalty_lb_rows_added;
-            if (round128EmitIntervalNoImproverDomainClosure() &&
-                cutoff->add_objective_cutoff &&
-                cutoff->gamma_L + options.lambda * penalty_lb >= cutoff_value - 1e-9) {
-                Expr impossible;
-                writeConstraint(out, cid, impossible, "<=", -1);
-                if (stats != nullptr) ++stats->penalty_lb_rows_added;
-            }
+            // R133: the inclusive cutoff model preserves physical boundary
+            // points. Do not turn an approximate no-improver test into an
+            // artificial native infeasibility; retain the valid floor above.
         }
 
         if (!use_shared_interval_rows &&

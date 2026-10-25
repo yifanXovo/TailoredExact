@@ -1137,6 +1137,10 @@ PaperTerminalMipDecision evaluatePaperTerminalMipDecision(
         decision.reason = "optimal_terminal_mip_missing_native_bound";
         return decision;
     }
+    if(nativeOptimalPhysicalGapOpen(outcome)) {
+        decision.valid=true;decision.leave_open_and_stop=true;
+        decision.reason="native_optimal_physical_gap_open";return decision;
+    }
     if (outcome.optimal || outcome.infeasible) {
         decision.valid = true;
         decision.close_leaf = true;
@@ -2292,7 +2296,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         options.algorithm_preset.rfind("research-round65-",0)==0;
     long long round65_native_witness_count=0;
     std::shared_ptr<NativeEvidenceJournal> native_evidence;
-    if (!options.native_evidence_dir.empty()) {
+    {
         native_evidence=std::make_shared<NativeEvidenceJournal>(instance,options);
         native_evidence->witness(verified_seed.routes,"same_run_verified_startup");
     }
@@ -3495,6 +3499,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                 double active_bound,
                                 double other_bound,
                                 const std::string& source) {
+        // Callback observations are qualified only after native return.
+        // Their original clocks and raw values stay in native progress/journal.
+        const bool retrospective=source=="gurobi_cb_mip_objbnd_valid_native_bound";
+        if(retrospective) {
+            process_seconds=processElapsedSeconds(options);
+            exact_seconds=elapsedTelemetry();
+        }
         double global_bound = std::min(active_bound, other_bound);
         if (!std::isfinite(global_bound)) {
             global_bound = scheduler.globalLowerBound();
@@ -3510,14 +3521,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         global_bound = std::min(global_bound, verified_ub);
         const auto counts = relevantCounts();
         global_trace << std::setprecision(17) << process_seconds << ','
-                     << exact_seconds << ',' << csvField(event_type) << ','
+                     << exact_seconds << ',' << csvField(retrospective?"retrospective_"+event_type:event_type) << ','
                      << csvField(active_leaf) << ',';
         if (std::isfinite(active_bound)) global_trace << active_bound;
         global_trace << ',';
         if (std::isfinite(other_bound)) global_trace << other_bound;
         global_trace << ',' << global_bound << ',' << verified_ub << ','
                      << counts.first << ',' << counts.second << ','
-                     << csvField(source) << '\n';
+                     << csvField(retrospective?"qualified_local_after_native_return":source) << '\n';
         global_trace.flush();
         if (std::isfinite(global_bound)) {
             last_trace_global_bound =
@@ -3759,6 +3770,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     "native_"+std::to_string(round65_native_witness_count++)+"_witness.json");
         };
         auto admitNative = [&](FixedIntervalMipOutcome& out) {
+            if(native_evidence && !native_evidence->proofUsable() &&
+               native_evidence->bestObjective()<verified_ub) {
+                verified_ub=native_evidence->bestObjective();
+                best_routes=native_evidence->bestRoutes();++incumbent_epoch;
+            }
             if (!options.round92_handling_activation) return;
             round92RequireProofEnvironment();
             if (out.incumbent_independently_verified) {
@@ -4493,6 +4509,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 "independently_verified_c6_partial_mip_incumbent");
         }
         mergeRound97Archive(bounded.id);
+        if(nativeOptimalPhysicalGapOpen(outcome,scheduler.certificateTolerance())) {
+            result.notes.push_back("native_optimal_physical_gap_open");
+            native_targets<<phase_index<<','<<bounded.id<<','<<target_kind<<','
+                <<bounded.lower_bound<<','<<target<<','<<other_bound<<','<<verified_ub
+                <<",qualified_physical_gap_open,"<<csvField(outcome.native_status)<<','
+                <<outcome.native_bound<<",0,0,0,"<<outcome.solver_runtime_seconds<<','
+                <<outcome.work<<','<<outcome.nodes<<','<<csvField(event_source)<<'\n';
+            return C6TargetDisposition::Deadline; // Whole algorithm open, no deadline claim.
+        }
         if (outcome.optimal || outcome.infeasible) {
             std::string reason;
             const ControllingLeafStatus close_status =
@@ -9232,7 +9257,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     : bounded.lower_bound,
                 otherRelevantMinimum(bounded.id),
                 terminal.reason);
-            if (outcome.round107_open_stop) stopScopedOpen(outcome); else stopAtDeadline();
+            if(terminal.reason=="native_optimal_physical_gap_open")result.notes.push_back(terminal.reason);
+            else if (outcome.round107_open_stop) stopScopedOpen(outcome); else stopAtDeadline();
             break;
         }
         std::string close_reason;
@@ -9263,6 +9289,33 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         }
     }
 
+    const bool source_state_abandoned=native_evidence && !native_evidence->proofUsable();
+    if(source_state_abandoned) {
+        // Do not retain a monotone max, closed leaf or contracted half that
+        // may depend on a revoked source. Preserve the abandoned state, then
+        // establish a NEW full-domain open state using only F >= 0 and own U.
+        std::ofstream abandoned(artifact_dir/"round133_abandoned_control_state.csv");
+        abandoned<<"leaf_id,gamma_L,gamma_U,claimed_lower,status,reason\n";
+        for(const auto& old:scheduler.leaves())
+            abandoned<<std::setprecision(17)<<csvField(old.id)<<','<<old.gamma_L<<','<<old.gamma_U<<','
+                <<old.lower_bound<<','<<controllingLeafStatusName(old.status)<<','
+                <<csvField(native_evidence->proofFailureReason())<<'\n';
+        abandoned.flush();abandoned.close();
+        const bool abandonment_recorded=bool(abandoned);
+        std::string why;
+        if(!scheduler.abandonNativeSources(gini_max_possible,verified_ub,&why))
+            throw std::runtime_error("source_rejection_fallback:"+why);
+        runtime.clear();last_trace_global_bound=0;hard_failure=true;
+        result.external_gini_tree_failure_reason="native_source_rejected_full_domain_open:"+
+            native_evidence->proofFailureReason();
+        if(!abandonment_recorded) {
+            result.notes.push_back("abandoned_control_state_evidence_missing_or_incomplete");
+            result.external_gini_tree_failure_reason+=";abandoned_control_state_evidence_missing_or_incomplete";
+        }
+        events<<elapsedTelemetry()<<",source_revocation_full_domain_open,R133_FULL_DOMAIN_OPEN,0,"
+            <<gini_max_possible<<",OPEN,0,"<<verified_ub<<','
+            <<csvField(native_evidence->proofFailureReason())<<'\n';
+    }
     std::ofstream leaves(leaf_path);
     leaves << "leaf_id,parent_id,depth,child_index,gamma_L,gamma_U,"
               "base_lower_bound,lower_bound,status,lp_complete,lp_optimal,"
@@ -9336,7 +9389,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.external_gini_tree_parent_child_coverage_valid =
         scheduler.parentChildCoverageValid(&coverage_reason);
     result.external_gini_tree_all_relevant_leaves_closed =
-        scheduler.everyRelevantLeafClosed();
+        !source_state_abandoned && scheduler.everyRelevantLeafClosed();
     if (round128_requires_chain) {
         const auto* root = scheduler.findLeaf("L0");
         result.external_gini_tree_all_relevant_leaves_closed =

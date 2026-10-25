@@ -54,7 +54,7 @@ public:
                 << ",\"dll_sha256\":" << std::quoted(fileSha256(library))
                 << ",\"runtime\":" << std::quoted(versionString(api)) << ",\"parameters\":";
             NativeEvidenceScope parameters;
-            if(!evidenceParameterReadback(api,env,parameters))
+            if(!evidenceParameterReadback(api,env,parameters,SolveOptions{}))
                 throw std::runtime_error("round105_native_parameter_contract_failed");
             identity << parameters.settings_json << "}\n";
         } catch (...) {
@@ -93,7 +93,7 @@ public:
         const double rem=remaining();if (rem<=0) return GRB_TIME_LIMIT;
         auto* menv=api.getenv(model);
         NativeEvidenceScope parameters;
-        if(!evidenceParameterReadback(api,menv,parameters))throw std::runtime_error("round105_model_parameter_contract");
+        if(!evidenceParameterReadback(api,menv,parameters,SolveOptions{}))throw std::runtime_error("round105_model_parameter_contract");
         check(api.setdblparam(menv,"TimeLimit",rem));
         check(api.setstrparam(menv,"LogFile",(path.string()+".log").c_str()));
         const long long id=++sequence;

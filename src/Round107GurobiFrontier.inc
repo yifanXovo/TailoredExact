@@ -615,7 +615,7 @@ public:
             out.warm_start_candidate_available=true;out.warm_start_status=start_reason;
             session.check(api.setintparam(api.getenv(model.value),"LazyConstraints",1));int lazy=0;
             session.check(api.getintparam(api.getenv(model.value),"LazyConstraints",&lazy));if(lazy!=1)throw std::runtime_error("round107_LazyConstraints_readback");
-            NativeEvidenceScope params;if(!evidenceParameterReadback(api,api.getenv(model.value),params))throw std::runtime_error("round107_parameters_readback");
+            NativeEvidenceScope params;if(!evidenceParameterReadback(api,api.getenv(model.value),params,SolveOptions{}))throw std::runtime_error("round107_parameters_readback");
             out.exact_zero_gap_roundtrip=true;
             const auto path=dir/"master.lp";session.check(api.write(model.value,path.string().c_str()));
             std::filesystem::copy_file(q.canonical_model_path,dir/"original.lp");

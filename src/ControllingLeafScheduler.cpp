@@ -16,6 +16,18 @@
 #endif
 
 namespace ebrp {
+bool ControllingLeafScheduler::abandonNativeSources(double gmax,double cutoff,
+    std::string* reason) {
+    if(!std::isfinite(gmax)||gmax<0||gmax>=1||!std::isfinite(cutoff)||cutoff<0) {
+        if(reason)*reason="invalid_rejection_fallback_domain";return false;
+    }
+    ControllingLeafScheduler replacement(certificateTolerance());
+    ControllingLeaf unresolved;unresolved.id="R133_FULL_DOMAIN_OPEN";
+    unresolved.gamma_U=gmax;unresolved.cutoff=cutoff;
+    unresolved.lower_bound_sources={"independent_nonnegative_objective_floor"};
+    if(!replacement.addLeaf(unresolved,reason))return false;
+    *this=std::move(replacement);return true;
+}
 namespace {
 
 bool finite(double value) {

@@ -103,6 +103,10 @@ struct DeadlineLaunchDecision {
 class ControllingLeafScheduler {
 public:
     explicit ControllingLeafScheduler(double certificate_tolerance = 1e-7);
+    // New proof epoch after a revoked native source. No old bound/closure or
+    // contracted half survives; the complete physical domain remains open.
+    bool abandonNativeSources(double gmax, double verified_cutoff,
+                              std::string* reason = nullptr);
 
     bool addLeaf(const ControllingLeaf& leaf, std::string* reason = nullptr);
     bool splitLeafAtomically(const std::string& parent_id,

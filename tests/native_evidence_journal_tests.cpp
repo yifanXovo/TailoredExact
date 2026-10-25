@@ -73,6 +73,7 @@ int main(){try{
     opt.lambda=.15;opt.native_evidence_dir=(root/"journal").string();
     NativeEvidenceJournal journal(in,opt);
     NativeEvidenceScope full;full.full_original=full.native_preconditions=true;full.gmax=.5;
+    full.model_sha256=std::string(64,'b');
     const auto call=journal.beginCall(full);journal.witness(empty,"verified_fixture");journal.nativeBound(call,.2);
     std::string payload,why;const auto receipt=root/"journal/event_4.commit";
     require(readNativeEvidenceReceipt(receipt,1,2,payload,why)&&payload.find("\"global_bound\":0.2")!=std::string::npos,
@@ -92,11 +93,70 @@ int main(){try{
     require(readNativeEvidenceReceipt(root/"journal/event_5.commit",1,2,payload,why)&&
         payload.find("\"improving\":0")!=std::string::npos,"first non-improving native witness is persisted");
     journal.witness({{0,{0,1,2,0},{{1,1,0},{2,0,1}}}},"new_better_physical_witness");
-    require(!journal.enabled(),"later witness also rejects previously stored contradictory bound");
+    require(journal.enabled() && !journal.proofUsable(),"revocation rejects proof while raw observation stays enabled");
     require(readNativeEvidenceReceipt(root/"journal/event_6.commit",1,2,payload,why)&&
         payload.find("new_better_physical_witness")!=std::string::npos,"contradicting physical evidence retained");
     require(readNativeEvidenceReceipt(root/"journal/event_7.commit",1,2,payload,why)&&
-        payload.find("\"kind\":\"failure\"")!=std::string::npos,"inconsistency evidence retained");
+        payload.find("\"kind\":\"source_rejected\"")!=std::string::npos,"source revocation evidence retained");
+    journal.returned(call,0);
+    require(std::filesystem::exists(root/"journal/event_8.commit"),"normal return still recorded after source revocation");
+    require(!journal.localBound(call,0).available,"later bound zero cannot reinstate rejected native tree");
+
+    for(int seed:{0,1,42,2000000000}) {
+        NativeParameterSettings expected,actual;expected.seed=actual.seed=seed;
+        require(nativeParameterMismatch(expected,actual,0).empty(),"requested supported Seed qualifies");
+        actual.seed=seed==0?1:0;
+        require(nativeParameterMismatch(expected,actual,0)=="parameter_configuration_mismatch:Seed","wrong actual Seed rejects accurately");
+    }
+    NativeParameterSettings expected,actual;
+    require(nativeParameterMismatch(expected,actual,1)=="parameter_readback_unavailable","read failure distinct from scope");
+    require(nativeEvidenceStatusQualified(2,0) && nativeEvidenceStatusQualified(3,0) &&
+        nativeEvidenceStatusQualified(9,0) && nativeEvidenceStatusQualified(11,0),"normal native proofs and resource stops remain supported");
+    require(!nativeEvidenceStatusQualified(12,0) && !nativeEvidenceStatusQualified(13,0) &&
+        !nativeEvidenceStatusQualified(2,10001),"numeric/suboptimal/unknown status cannot promote a raw bound");
+    actual.feasibility=1e-5;
+    require(nativeParameterMismatch(expected,actual,0)=="parameter_configuration_mismatch:FeasibilityTol","fixed tolerance policy not learned from readback");
+    s.cover.clear();s.lower_g=0;s.upper_g=.3;s.cutoff=.3;s.native_preconditions=true;
+    require(evaluateNativeLocalBound(s,0,{better}).available,"local qualification independent of absent global cover");
+    require(!evaluateNativeEvidenceBound(s,0,{better}).available,"absent cover cannot issue global bound");
+    require(evaluateNativeLocalBound(s,2e-7,{better}).inconsistent,"same-domain zero refutes positive claim before complement");
+    s.lower_g=.1;
+    require(evaluateNativeLocalBound(s,.1,{better}).available,"outside-domain zero cannot refute local claim");
+    s.lower_g=0;s.cutoff=.3;
+    require(evaluateNativeLocalInfeasibility(s,{better}).inconsistent,"infeasible source rejected by actual domain witness");
+    s.lower_g=.1;
+    require(evaluateNativeLocalInfeasibility(s,{better}).available,"out-of-domain witness cannot refute infeasibility");
+    auto loaded=verifySolution(in,{{0,{0,1,0},{{1,2,0}}}},.15);
+    require(loaded.original_solution_feasible && loaded.G==0 && loaded.final_inventory[1]==0 &&
+        loaded.final_inventory[2]==0,"loaded return and S=0 obey original physical semantics");
+    s.lower_g=0;s.cutoff=.1;
+    require(evaluateNativeLocalBound(s,.3,{loaded}).available,
+        "same-G witness above frozen cutoff cannot refute unrelated restricted claim");
+    require(evaluateNativeLocalBound(s,.3,{loaded}).value==.1,
+        "qualified restricted bound includes the mathematical cutoff complement");
+    require(!evaluateNativeLocalBound(s,1e100,{}).available,
+        "finite Gurobi infinity sentinel is not a native bound before cutoff complement");
+    opt.native_evidence_dir.clear();auto memory_instance=in;memory_instance.path.clear();
+    NativeEvidenceJournal late(memory_instance,opt);
+    NativeEvidenceScope first=full;first.native_preconditions=true;
+    const auto old_call=late.beginCall(first);late.nativeInfeasible(old_call);
+    require(late.localInfeasibility(old_call).available,"unrefuted qualified infeasibility remains supported");
+    auto second=first;second.model_sha256=std::string(64,'c');
+    const auto new_call=late.beginCall(second);
+    late.witness({{0,{0,1,2,0},{{1,1,0},{2,0,1}}}},"later_call_own_witness",new_call);
+    require(late.sourceRejected() && !late.proofUsable(),
+        "late physical witness revokes old infeasibility despite different model identity");
+    full.native_preconditions=false;setNativeEvidencePreconditionReason(full,"parameter_configuration_mismatch:Seed");
+    require(evaluateNativeLocalBound(full,.1,{}).reason==nativeEvidencePreconditionReason(full),"parameter failure not mislabeled scope");
+    ControllingLeafScheduler controller;ControllingLeaf closed;
+    closed.id="dependent";closed.gamma_U=.5;closed.cutoff=.65;closed.lower_bound=.4;
+    require(controller.addLeaf(closed),"fixture controller starts valid");
+    require(controller.setStatus("dependent",ControllingLeafStatus::Closed,"revoked_native"),"fixture has dependent closure");
+    require(controller.abandonNativeSources(.5,0),"source rejection establishes new full-domain state");
+    require(controller.leaves().size()==1 && controller.leaves()[0].gamma_L==0 &&
+        controller.leaves()[0].gamma_U==.5 && controller.globalLowerBound()==0 &&
+        controller.leaves()[0].status==ControllingLeafStatus::Open,
+        "no old max or close survives; full original domain open");
     std::cout << checks << " scope, coverage, physical contradiction and receipt checks passed; zero Optimize calls\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

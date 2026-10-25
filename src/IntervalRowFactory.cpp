@@ -743,13 +743,9 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
                out.domain.penalty_lower, true, false,
                "absolute_deviation_local_inventory_domain");
         noteFamily(out, "penalty_lower_bound_closure");
-        if (round128EmitIntervalNoImproverDomainClosure() &&
-            request.add_incumbent_row && cutoff_active &&
-            request.gamma_L + options.lambda * out.domain.penalty_lower >=
-                cutoff_value - 1e-9) {
-            addRow(out, "penalty_lower_bound_closure", {}, 'L', -1.0,
-                   true, false, "interval_no_improver_domain_closure");
-        }
+        // R133: retain the valid penalty floor, but keep F<=cutoff inclusive.
+        // The former tolerance-based 0<=-1 marker excluded legal boundary
+        // completions. Ordinary qualified bounds handle outer gap closure.
     }
 
     if ((options.interval_oracle_penalty_domain_tightening ||

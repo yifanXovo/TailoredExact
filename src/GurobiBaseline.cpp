@@ -363,12 +363,14 @@ struct Round63NativeState {
     }
 };
 
-bool evidenceParameterReadback(GurobiApi& api,GRBenv* env,NativeEvidenceScope& s) {
-    int threads=-1,seed=-1,presolve=-2;
+bool evidenceParameterReadback(GurobiApi& api,GRBenv* env,NativeEvidenceScope& s,
+    const SolveOptions& options) {
+    int threads=-1,seed=-1,presolve=-2,focus=-1,cuts=-2;
     double gap=-1,absgap=-1,feas=-1,intfeas=-1,optimality=-1;
     const int rc=api.getintparam(env,GRB_INT_PAR_THREADS,&threads) |
         api.getintparam(env,GRB_INT_PAR_SEED,&seed) |
         api.getintparam(env,GRB_INT_PAR_PRESOLVE,&presolve) |
+        api.getintparam(env,"MIPFocus",&focus) | api.getintparam(env,"Cuts",&cuts) |
         api.getdblparam(env,GRB_DBL_PAR_MIPGAP,&gap) |
         api.getdblparam(env,GRB_DBL_PAR_MIPGAPABS,&absgap) |
         api.getdblparam(env,GRB_DBL_PAR_FEASIBILITYTOL,&feas) |
@@ -376,11 +378,25 @@ bool evidenceParameterReadback(GurobiApi& api,GRBenv* env,NativeEvidenceScope& s
         api.getdblparam(env,GRB_DBL_PAR_OPTIMALITYTOL,&optimality);
     std::ostringstream o;o << std::setprecision(17) << "{\"read_return_code\":" << rc
       << ",\"Threads\":" << threads << ",\"Seed\":" << seed << ",\"Presolve\":" << presolve
+      << ",\"MIPFocus\":"<<focus<<",\"Cuts\":"<<cuts
       << ",\"MIPGap\":" << gap << ",\"MIPGapAbs\":" << absgap << ",\"FeasibilityTol\":" << feas
       << ",\"IntFeasTol\":" << intfeas << ",\"OptimalityTol\":" << optimality << '}';
-    s.settings_json=o.str();
-    return rc==0 && threads==1 && seed==0 && presolve==-1 && gap==0 && absgap==0 &&
-        feas==1e-6 && intfeas==1e-5 && optimality==1e-6;
+    NativeParameterSettings expected;
+    expected.seed=options.gurobi_seed;expected.presolve=options.gurobi_presolve;
+    expected.mip_focus=round127().mip_focus;expected.cuts=round127().cuts;
+    NativeParameterSettings actual;
+    actual.threads=threads;actual.seed=seed;actual.presolve=presolve;
+    actual.mip_focus=focus;actual.cuts=cuts;
+    actual.gap=gap;actual.absolute_gap=absgap;actual.feasibility=feas;
+    actual.integrality=intfeas;actual.optimality=optimality;
+    const auto mismatch=nativeParameterMismatch(expected,actual,rc);
+    auto settings=o.str();settings.pop_back();
+    s.settings_json=settings+",\"expected\":{\"Threads\":1,\"Seed\":"+
+        std::to_string(expected.seed)+",\"Presolve\":"+std::to_string(expected.presolve)+
+        ",\"MIPFocus\":"+std::to_string(expected.mip_focus)+",\"Cuts\":"+std::to_string(expected.cuts)+
+        ",\"MIPGap\":0,\"MIPGapAbs\":0,\"FeasibilityTol\":1e-6,\"IntFeasTol\":1e-5,\"OptimalityTol\":1e-6}}";
+    setNativeEvidencePreconditionReason(s,mismatch);
+    return mismatch.empty();
 }
 
 struct ProgressCallbackState {
@@ -1158,6 +1174,13 @@ int __stdcall progressAndBoundTargetCallback(
         }
           catch(...) {state->native_evidence->failure("MIPSOL_unknown_observer_exception");}
     }
+    if(state->native_evidence && !state->native_evidence->proofUsable()) {
+        // Revocation terminates with failure/open; it is never a proof.
+        if(model && state->api->terminate) {
+            state->progress.read_only_contract=false;state->api->terminate(model);
+        }
+        return 0;
+    }
     if(where==GRB_CB_MIPNODE && state->round120_proof && !state->round120_root_sampled) {
         try {
             int status=0;double node=0;
@@ -1593,6 +1616,15 @@ int __stdcall progressAndBoundTargetCallback(
         catch(const std::exception& e) {state->native_evidence->failure(e.what());}
         catch(...) {state->native_evidence->failure("MIP_bound_observer_exception");}
     }
+    const bool qualified_bound=event.best_bound_available &&
+        (!state->native_evidence || state->native_evidence->localBound(
+            state->evidence_call,event.best_bound).available);
+    const double qualified_bound_value=qualified_bound && state->native_evidence
+        ? state->native_evidence->localBound(state->evidence_call,event.best_bound).value:event.best_bound;
+    if(state->native_evidence && !state->native_evidence->proofUsable() &&
+       model && state->api->terminate) {
+        state->progress.read_only_contract=false;state->api->terminate(model);
+    }
     if (event.incumbent_available &&
         state->progress.first_incumbent_time < 0.0) {
         state->progress.first_incumbent_time = event.elapsed_runtime_seconds;
@@ -1625,17 +1657,17 @@ int __stdcall progressAndBoundTargetCallback(
             ++state->progress.dropped_records;
         }
     }
-    if (state->round62_external_stop && event.best_bound_available &&
+    if (state->round62_external_stop && qualified_bound &&
         !state->round62_external_termination_requested) {
         try {
-            if (state->round62_external_stop(event.best_bound) && model && state->api->terminate) {
+            if (state->round62_external_stop(qualified_bound_value) && model && state->api->terminate) {
                 state->round62_external_termination_requested=true;
                 state->api->terminate(model);
             }
         } catch (...) { state->round62_external_stop={}; }
     }
-    if (state->bound_target_enabled && event.best_bound_available &&
-        event.best_bound + state->bound_target_tolerance >=
+    if (state->bound_target_enabled && qualified_bound &&
+        qualified_bound_value + state->bound_target_tolerance >=
             state->bound_target) {
         state->bound_target_reached = true;
         if (!state->bound_target_termination_requested && model &&
@@ -3121,11 +3153,14 @@ public:
         }
         if(request.native_evidence) {
             auto scope=request.native_evidence_scope;
-            scope.native_preconditions=evidenceParameterReadback(api_,model_env,scope) &&
-                out.exact_zero_gap_roundtrip && out.model_fingerprint_matches_request && !out.lp_relaxation &&
+            scope.native_preconditions=evidenceParameterReadback(api_,model_env,scope,options_) &&
+                out.exact_zero_gap_roundtrip && out.model_fingerprint_matches_request &&
                 request.variable_bound_overrides.empty() && request.round60_fixed_inventory.empty() &&
                 request.additional_linear_rows.empty() && options_.round63_time_mode=="off" &&
                 options_.round65_projection=="off" && !options_.round65_budget;
+            if(!out.model_fingerprint_matches_request)setNativeEvidencePreconditionReason(scope,"native_model_identity_mismatch");
+            else if(!scope.native_preconditions && nativeEvidencePreconditionReason(scope).empty())
+                setNativeEvidencePreconditionReason(scope,"native_model_mapping_or_numerical_policy_not_qualified");
             callback.native_evidence=request.native_evidence;
             callback.evidence_instance=&instance_;callback.evidence_names=&native_names;
             callback.evidence_integer_operations=researchChecksPhysicalQuantities(options_);
@@ -3549,8 +3584,8 @@ public:
             return api_.getdblattr(model, attr, &target) == 0 &&
                 std::isfinite(target);
         };
-        const bool round89_status_read_ok =
-            getInt(GRB_INT_ATTR_STATUS, out.native_status_code);
+        const int native_status_read_rc=api_.getintattr(model,GRB_INT_ATTR_STATUS,&out.native_status_code);
+        const bool round89_status_read_ok=native_status_read_rc==0;
         out.native_status = gurobiStatusName(out.native_status_code);
         out.optimal = out.native_status_code == GRB_OPTIMAL;
         out.native_exact_optimal = out.optimal;
@@ -3587,8 +3622,9 @@ public:
                     event.elapsed_runtime_seconds;
                 copied.work = event.work;
                 copied.native_bound = event.best_bound;
-                copied.native_bound_available =
-                    event.best_bound_available;
+                copied.native_bound_available = event.best_bound_available &&
+                    (!callback.native_evidence || callback.native_evidence->localBound(
+                        callback.evidence_call,event.best_bound).available);
                 copied.native_incumbent = event.incumbent;
                 copied.native_incumbent_available =
                     event.incumbent_available;
@@ -3621,9 +3657,10 @@ public:
         }
         out.native_bound_available = getDouble(
             GRB_DBL_ATTR_OBJBOUNDC, out.native_bound);
+        out.native_bound_available=out.native_bound_available && finiteNative(out.native_bound);
         if (out.lp_relaxation && out.optimal) {
             double lp_objective = 0.0;
-            if (getDouble(GRB_DBL_ATTR_OBJVAL, lp_objective)) {
+            if (getDouble(GRB_DBL_ATTR_OBJVAL, lp_objective) && finiteNative(lp_objective)) {
                 out.native_bound = lp_objective;
                 out.native_bound_available = true;
                 out.lp_objective_value = lp_objective;
@@ -3928,7 +3965,8 @@ public:
         stats_.peak_memory_gb = std::max(stats_.peak_memory_gb, out.memory_gb);
 
         int solution_count = 0;
-        getInt(GRB_INT_ATTR_SOLCOUNT, solution_count);
+        const int solution_count_read_rc=api_.getintattr(model,GRB_INT_ATTR_SOLCOUNT,&solution_count);
+        const bool solution_count_known=solution_count_read_rc==0;
         const GurobiNativeLogEvidence log_evidence =
             inspectGurobiNativeLog(request.native_log_path);
         if (request.round62_external_stop) {
@@ -4181,6 +4219,60 @@ public:
         if (out.lp_relaxation && round63_root_source_==request.native_log_path.string() &&
             (!out.lp_terminal_valid||!out.model_fingerprint_matches_request)) {
             round63_root_rows_.clear();round63_root_failure_="invalid_source_lp_lifecycle";
+        }
+        if(callback.native_evidence) {
+            std::ostringstream quality;quality<<std::setprecision(17)<<"\"native_status\":";
+            if(round89_status_read_ok)quality<<out.native_status_code;else quality<<"null";
+            quality<<",\"native_status_read_return_code\":"<<native_status_read_rc
+                <<",\"optimize_return_code\":"<<out.optimize_return_code
+                <<",\"solution_count_read_return_code\":"<<solution_count_read_rc<<",\"solution_count\":";
+            if(solution_count_known)quality<<solution_count;else quality<<"null";
+            bool sufficient=solution_count_known;
+            std::string bad_quality=solution_count_known?"":"solution_count_unknown;";
+            if(!nativeEvidenceStatusQualified(out.native_status_code,native_status_read_rc)) {
+                sufficient=false;bad_quality+=round89_status_read_ok?"native_status_unqualified;":"native_status_unknown;";
+            }
+            if(out.optimize_return_code!=0){sufficient=false;bad_quality+="optimize_return_unqualified;";}
+            for(const char* attr:{"ObjVal","ObjBoundC","ConstrVio","BoundVio","IntVio","DualVio"}) {
+                double value=0;const bool known=getDouble(attr,value);
+                quality<<",\""<<attr<<"\":";
+                if(known)quality<<value;else quality<<"null";
+                if(known && solution_count>0) {
+                    const std::string name=attr;
+                    const double limit=name=="IntVio"?1e-5:1e-6;
+                    if((name=="ConstrVio"||name=="BoundVio"||name=="IntVio"||
+                        (out.lp_relaxation && name=="DualVio")) && value>limit) {
+                        sufficient=false;bad_quality+=name+";";
+                    }
+                }
+            }
+            callback.native_evidence->nativeQuality(callback.evidence_call,quality.str(),sufficient,bad_quality);
+            if(out.incumbent_independently_verified)
+                callback.native_evidence->witness(out.incumbent_routes,
+                    "native_final_verified_original_routes",callback.evidence_call);
+            if(out.native_bound_available)
+                callback.native_evidence->nativeBound(callback.evidence_call,out.native_bound);
+            if(out.infeasible)callback.native_evidence->nativeInfeasible(callback.evidence_call);
+            const auto local=out.infeasible
+                ? callback.native_evidence->localInfeasibility(callback.evidence_call)
+                : (out.native_bound_available
+                    ? callback.native_evidence->localBound(callback.evidence_call,out.native_bound)
+                    : callback.native_evidence->localScope(callback.evidence_call));
+            if(!local.available) {
+                out.native_bound_available=false;out.lp_terminal_valid=false;
+                out.available=false;out.optimal=false;out.infeasible=false;
+                out.native_exact_optimal=false;out.native_bound_target_reached=false;
+                out.failure_reason="native_source_unqualified:"+local.reason;
+            } else if(out.native_bound_available)out.native_bound=local.value;
+            // Raw observations stay in progress/journal. Retrospective
+            // qualified events must also pass the final source state.
+            for(auto& event:out.native_bound_events) {
+                const auto qualified=callback.native_evidence->localBound(callback.evidence_call,event.native_bound);
+                event.native_bound_available=event.native_bound_available && qualified.available;
+                if(event.native_bound_available)event.native_bound=qualified.value;
+                event.target_reached=event.native_bound_available && callback.bound_target_enabled &&
+                    event.native_bound+callback.bound_target_tolerance>=callback.bound_target;
+            }
         }
         if (paper_solve && !request.retain_model_after_solve) {
             out.retained_state_classification =
@@ -5022,14 +5114,16 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             return result;
         }
 
-        if(!options.native_evidence_dir.empty()) {
+        {
             callback.native_evidence=paid_journal?paid_journal:std::make_shared<NativeEvidenceJournal>(instance,options);
             NativeEvidenceScope scope;scope.full_original=true;
             scope.model_sha256=canonical.sha256;scope.model_path=canonical.path.string();
             scope.model_scope=canonical.model_scope;scope.native_log_path=log_path.string();
             scope.gmax=static_cast<double>(instance.V-1)/instance.V;scope.upper_g=scope.gmax;
-            scope.native_preconditions=evidenceParameterReadback(api,model_env,scope) &&
+            scope.native_preconditions=evidenceParameterReadback(api,model_env,scope,options) &&
                 result.gurobi_native_domain_audit_passed && time_limit_rc==0;
+            if(!scope.native_preconditions && nativeEvidencePreconditionReason(scope).empty())
+                setNativeEvidencePreconditionReason(scope,"native_model_mapping_or_time_policy_not_qualified");
             callback.evidence_instance=&instance;callback.evidence_names=&native_names;
             callback.evidence_integer_operations=researchChecksPhysicalQuantities(options);
             callback.evidence_call=callback.native_evidence->beginCall(scope);
@@ -5069,9 +5163,11 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             round112Save(log_path.string()+".round112.native.json",evidence.str());
         }
         result.gurobi_solver_finalization_reached = true;
-        getInt(GRB_INT_ATTR_STATUS, result.gurobi_status);
+        const int plain_status_read_rc=api.getintattr(model,GRB_INT_ATTR_STATUS,&result.gurobi_status);
+        const bool plain_status_known=plain_status_read_rc==0;
         result.gurobi_status_text = gurobiStatusName(result.gurobi_status);
-        getInt(GRB_INT_ATTR_SOLCOUNT, result.gurobi_solution_count);
+        const int plain_solution_count_read_rc=api.getintattr(model,GRB_INT_ATTR_SOLCOUNT,&result.gurobi_solution_count);
+        const bool plain_solution_count_known=plain_solution_count_read_rc==0;
         result.gurobi_obj_bound_available =
             getDouble(GRB_DBL_ATTR_OBJBOUND, result.gurobi_obj_bound);
         result.gurobi_obj_bound_c_available =
@@ -5147,9 +5243,51 @@ SolveResult solveGurobiBaseline(const Instance& instance,
                 }
             }
         }
-        if (result.gurobi_obj_bound_c_available) {
-            result.lower_bound = result.gurobi_obj_bound_c;
+        if(verified_original_feasible && objective_recomputed)
+            callback.native_evidence->witness(result.routes,"native_final_verified_original_routes",callback.evidence_call);
+        {
+            std::ostringstream quality;quality<<std::setprecision(17)<<"\"native_status\":";
+            if(plain_status_known)quality<<result.gurobi_status;else quality<<"null";
+            quality<<",\"native_status_read_return_code\":"<<plain_status_read_rc
+                <<",\"optimize_return_code\":"<<result.gurobi_optimize_return_code
+                <<",\"solution_count_read_return_code\":"<<plain_solution_count_read_rc<<",\"solution_count\":";
+            if(plain_solution_count_known)quality<<result.gurobi_solution_count;else quality<<"null";
+            bool sufficient=plain_solution_count_known;
+            std::string bad=plain_solution_count_known?"":"solution_count_unknown;";
+            if(!nativeEvidenceStatusQualified(result.gurobi_status,plain_status_read_rc)) {
+                sufficient=false;bad+=plain_status_known?"native_status_unqualified;":"native_status_unknown;";
+            }
+            if(result.gurobi_optimize_return_code!=0){sufficient=false;bad+="optimize_return_unqualified;";}
+            for(const char* attr:{"ObjVal","ObjBoundC","ConstrVio","BoundVio","IntVio","DualVio"}) {
+                double value=0;const bool known=getDouble(attr,value);quality<<",\""<<attr<<"\":";
+                if(known)quality<<value;else quality<<"null";
+                const std::string name=attr;
+                if(known && result.gurobi_solution_count>0 &&
+                    (name=="ConstrVio"||name=="BoundVio"||name=="IntVio") &&
+                    value>(name=="IntVio"?1e-5:1e-6)) {sufficient=false;bad+=name+";";}
+            }
+            callback.native_evidence->nativeQuality(callback.evidence_call,quality.str(),sufficient,bad);
         }
+        if(result.gurobi_obj_bound_c_available)
+            callback.native_evidence->nativeBound(callback.evidence_call,result.gurobi_obj_bound_c);
+        if(result.gurobi_status==kGurobiStatusInfeasible)
+            callback.native_evidence->nativeInfeasible(callback.evidence_call);
+        const auto local_source=result.gurobi_status==kGurobiStatusInfeasible
+            ? callback.native_evidence->localInfeasibility(callback.evidence_call)
+            : (result.gurobi_obj_bound_c_available
+                ? callback.native_evidence->localBound(callback.evidence_call,result.gurobi_obj_bound_c)
+                : callback.native_evidence->localScope(callback.evidence_call));
+        if(!callback.native_evidence->proofUsable() &&
+            callback.native_evidence->bestObjective()<result.upper_bound) {
+            result.routes=callback.native_evidence->bestRoutes();
+            result.verification=verifySolution(instance,result.routes,options.lambda);
+            result.objective=result.upper_bound=result.verification.objective;
+            result.G=result.verification.G;result.P=result.verification.P;
+            result.final_inventory=result.verification.final_inventory;
+        }
+        if (result.gurobi_obj_bound_c_available && local_source.available) {
+            result.lower_bound = local_source.value;
+        } else result.lower_bound=0;
         if (result.upper_bound > 0.0 &&
             result.gurobi_obj_bound_c_available) {
             result.gap = std::max(
@@ -5197,14 +5335,14 @@ SolveResult solveGurobiBaseline(const Instance& instance,
         result.native_mip_status_text = result.gurobi_status_text;
         result.native_mip_status_class =
             gurobiStatusClass(result.gurobi_status);
-        result.native_mip_status_code_text_consistent = true;
+        result.native_mip_status_code_text_consistent = plain_status_known;
         result.native_mip_objective_available =
             result.gurobi_obj_val_available;
         result.native_mip_objective = result.gurobi_obj_val;
         result.native_mip_best_bound_available =
             result.gurobi_obj_bound_c_available;
         result.native_mip_best_bound = result.gurobi_obj_bound_c;
-        result.native_mip_solution_count_available = true;
+        result.native_mip_solution_count_available = plain_solution_count_known;
         result.native_mip_solution_count = result.gurobi_solution_count;
         result.native_mip_node_count_available = true;
         result.native_mip_node_count = static_cast<long long>(
@@ -5286,7 +5424,7 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             result.gurobi_solver_finalization_reached;
         certificate_input.complete_original_model_scope =
             result.gurobi_native_domain_audit_passed;
-        certificate_input.model_configuration_valid = configuration_valid;
+        certificate_input.model_configuration_valid = configuration_valid && local_source.available;
         certificate_input.lifecycle_valid = result.gurobi_lifecycle_valid;
         certificate_input.executable_fingerprint_matches_manifest =
             !options.round24_executable_sha256.empty() &&
@@ -5313,8 +5451,20 @@ SolveResult solveGurobiBaseline(const Instance& instance,
         certificate_input.objective_recomputed = objective_recomputed;
         certificate_input.verified_feasible_witness_available =
             verified_original_feasible;
-        const GurobiCertificateDecision decision =
+        GurobiCertificateDecision decision =
             evaluateGurobiEngineeringExactCertificate(certificate_input);
+        if(!local_source.available) {
+            decision.strict_certified_original_problem=false;
+            decision.original_problem_infeasible_certified=false;
+            decision.certificate_class="certificate_rejected";
+            decision.rejection_reason="native_source_unqualified:"+local_source.reason;
+        } else if(decision.strict_certified_original_problem &&
+            (!result.gurobi_obj_bound_c_available ||
+             std::fabs(result.objective-result.lower_bound)>1e-7)) {
+            decision.strict_certified_original_problem=false;
+            decision.certificate_class="certificate_rejected";
+            decision.rejection_reason="native_optimal_physical_gap_open";
+        }
         result.strict_certificate_policy_version = decision.policy_version;
         result.strict_certificate_class = decision.certificate_class;
         result.strict_certificate_rejection_reason = decision.rejection_reason;
@@ -5324,8 +5474,8 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             decision.feasibility_consistency_gate_passed;
         result.strict_certified_original_problem =
             decision.strict_certified_original_problem;
-        result.strict_lower_bound_source = result.gurobi_obj_bound_c_available
-            ? "Gurobi_ObjBoundC" : "unavailable";
+        result.strict_lower_bound_source = local_source.available && result.gurobi_obj_bound_c_available
+            ? "qualified_Gurobi_ObjBoundC" : "independent_full_domain_nonnegative_floor";
 
         if (decision.strict_certified_original_problem) {
             result.status = "optimal";
@@ -5340,6 +5490,10 @@ SolveResult solveGurobiBaseline(const Instance& instance,
             result.certificate =
                 "Round 24 Gurobi engineering-exact original-problem "
                 "infeasibility certificate.";
+        } else if(!local_source.available) {
+            result.status="native_source_rejected_open";
+            result.gurobi_failure_reason="native_source_unqualified:"+local_source.reason;
+            result.certificate="not_certified; full original domain open with independent F>=0 and verified own U";
         } else if (result.gurobi_status == kGurobiStatusTimeLimit) {
             result.status = "time_limit";
             result.certificate =

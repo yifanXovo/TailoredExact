@@ -448,6 +448,13 @@ struct FixedIntervalMipOutcome {
     std::vector<FixedIntervalCandidateEvent> round60_candidate_events;
 };
 
+inline bool nativeOptimalPhysicalGapOpen(const FixedIntervalMipOutcome& outcome,
+    double tolerance=1e-7) {
+    return outcome.optimal && outcome.incumbent_independently_verified &&
+        outcome.native_bound_available &&
+        outcome.incumbent_objective>outcome.native_bound+tolerance;
+}
+
 // Only the opt-in Round89 candidate calls this after its external gate has
 // assigned failure_reason. Keep native diagnostics while removing every
 // certificate/trace eligibility bit on an engineering failure.

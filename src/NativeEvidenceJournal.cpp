@@ -28,6 +28,7 @@ bool verified(const Verification& v) {
 std::string scopeJson(const NativeEvidenceScope& s) {
     std::ostringstream o; o << std::setprecision(17);
     o << "\"full_original\":" << s.full_original << ",\"native_preconditions\":" << s.native_preconditions
+      << ",\"precondition_reason\":" << quoted(nativeEvidencePreconditionReason(s))
       << ",\"leaf\":" << quoted(s.leaf) << ",\"model_sha256\":" << quoted(s.model_sha256)
       << ",\"model_path\":" << quoted(s.model_path) << ",\"model_scope\":" << quoted(s.model_scope)
       << ",\"native_log_path\":" << quoted(s.native_log_path)
@@ -68,6 +69,102 @@ std::vector<NativeEvidencePiece> nativeEvidenceCover(const std::vector<Controlli
     return out;
 }
 
+std::string nativeEvidencePreconditionReason(const NativeEvidenceScope& s) {
+    const std::string key="\"qualification_reason\":\"";
+    const auto start=s.settings_json.find(key);
+    if(start==std::string::npos)return "";
+    const auto value=start+key.size(),end=s.settings_json.find('"',value);
+    return end==std::string::npos?"parameter_qualification_reason_malformed":s.settings_json.substr(value,end-value);
+}
+void setNativeEvidencePreconditionReason(NativeEvidenceScope& s,const std::string& reason) {
+    if(reason.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_,:;-")!=std::string::npos)
+        throw std::invalid_argument("invalid_internal_qualification_reason");
+    const std::string key="\"qualification_reason\":\"";
+    const auto start=s.settings_json.find(key);
+    if(start!=std::string::npos) {
+        const auto value=start+key.size(),end=s.settings_json.find('"',value);
+        if(end==std::string::npos)throw std::invalid_argument("malformed_internal_settings");
+        s.settings_json.replace(value,end-value,reason);return;
+    }
+    if(s.settings_json.empty()||s.settings_json.back()!='}')throw std::invalid_argument("malformed_internal_settings");
+    s.settings_json.pop_back();
+    if(s.settings_json!="{")s.settings_json+=',';
+    s.settings_json+=key+reason+"\"}";
+}
+
+std::string nativeParameterMismatch(const NativeParameterSettings& e,
+    const NativeParameterSettings& a, int rc) {
+    if(rc) return "parameter_readback_unavailable";
+    if(e.seed<0 || e.seed>2000000000 || e.presolve < -1 || e.presolve>2)
+        return "parameter_request_outside_declared_support";
+    std::string mismatch;
+    auto add=[&](bool ok,const char* name){if(!ok){if(!mismatch.empty())mismatch+=",";mismatch+=name;}};
+    add(a.threads==e.threads,"Threads");add(a.seed==e.seed,"Seed");
+    add(a.presolve==e.presolve,"Presolve");add(a.gap==e.gap,"MIPGap");
+    add(a.mip_focus==e.mip_focus,"MIPFocus");add(a.cuts==e.cuts,"Cuts");
+    add(a.absolute_gap==e.absolute_gap,"MIPGapAbs");
+    add(a.feasibility==e.feasibility,"FeasibilityTol");
+    add(a.integrality==e.integrality,"IntFeasTol");
+    add(a.optimality==e.optimality,"OptimalityTol");
+    return mismatch.empty()?"":"parameter_configuration_mismatch:"+mismatch;
+}
+
+NativeEvidenceBound evaluateNativeLocalBound(const NativeEvidenceScope& s,
+    double b,const std::vector<Verification>& witnesses,double tol) {
+    NativeEvidenceBound out;
+    auto reject=[&](const std::string& reason,bool inconsistent=false) {
+        out.reason=reason;out.inconsistent=inconsistent;return out;
+    };
+    if(!std::isfinite(tol)||tol<0||!std::isfinite(s.gmax)||s.gmax<0||s.gmax>=1 ||
+       (!s.full_original && (!std::isfinite(s.lower_g)||!std::isfinite(s.upper_g)||
+        s.lower_g<0||s.upper_g<s.lower_g||!std::isfinite(s.cutoff)||s.cutoff<0)))
+        return reject("invalid_physical_domain");
+    if(!std::isfinite(b)||std::fabs(b)>=1e100)return reject("native_bound_unavailable");
+    // Do not expand the witness domain by tolerance. Only the objective
+    // comparison uses tol; a nearby out-of-domain point cannot refute a call.
+    for(const auto& v:witnesses) if(verified(v) &&
+        (s.full_original || (v.G>=s.lower_g && v.G<=s.upper_g && v.objective<=s.cutoff)) &&
+        b>v.objective+tol)
+        return reject("source_bound_witness_contradiction",true);
+    if(!s.native_preconditions)
+        return reject(nativeEvidencePreconditionReason(s).empty()?"native_model_mapping_not_qualified":nativeEvidencePreconditionReason(s));
+    if(s.model_sha256.empty())return reject("native_model_identity_unavailable");
+    // The raw restricted claim was checked above. Its objective-cutoff
+    // complement has floor c, so the unconditional regional floor is min(b,c).
+    out.available=true;out.value=s.full_original?b:std::min(b,s.cutoff);
+    out.reason="qualified_local_native_bound";return out;
+}
+bool nativeEvidenceStatusQualified(int status,int read_return_code) {
+    if(read_return_code)return false;
+    // Gurobi13 policy: optimal/infeasible and supported resource/user stops.
+    // NUMERIC, SUBOPTIMAL and ambiguous/unbounded returns do not qualify.
+    return status==2||status==3||(status>=7&&status<=11)||(status>=15&&status<=17);
+}
+NativeEvidenceBound evaluateNativeLocalScope(const NativeEvidenceScope& s) {
+    // No synthetic native bound is introduced by a scope-only check.
+    NativeEvidenceBound out;
+    if(!std::isfinite(s.gmax)||s.gmax<0||s.gmax>=1 ||
+       (!s.full_original && (!std::isfinite(s.lower_g)||!std::isfinite(s.upper_g)||
+        s.lower_g<0||s.upper_g<s.lower_g||!std::isfinite(s.cutoff)||s.cutoff<0)))
+        out.reason="invalid_physical_domain";
+    else if(!s.native_preconditions)
+        out.reason=nativeEvidencePreconditionReason(s).empty()?"native_model_mapping_not_qualified":nativeEvidencePreconditionReason(s);
+    else if(s.model_sha256.empty())out.reason="native_model_identity_unavailable";
+    else {out.available=true;out.reason="qualified_local_native_scope";}
+    return out;
+}
+NativeEvidenceBound evaluateNativeLocalInfeasibility(const NativeEvidenceScope& s,
+    const std::vector<Verification>& witnesses) {
+    for(const auto& v:witnesses)if(verified(v) && (s.full_original ||
+        (v.G>=s.lower_g && v.G<=s.upper_g && v.objective<=s.cutoff))) {
+        NativeEvidenceBound out;out.inconsistent=true;
+        out.reason="source_infeasibility_witness_contradiction";return out;
+    }
+    auto out=evaluateNativeLocalScope(s);
+    if(out.available)out.reason="qualified_local_native_infeasibility";
+    return out;
+}
+
 NativeEvidenceBound evaluateNativeEvidenceBound(const NativeEvidenceScope& s,double b,
     const std::vector<Verification>& witnesses,double tol) {
     NativeEvidenceBound out;
@@ -79,6 +176,10 @@ NativeEvidenceBound evaluateNativeEvidenceBound(const NativeEvidenceScope& s,dou
     double ub=std::numeric_limits<double>::infinity();
     for(const auto& v:witnesses) if(verified(v)) ub=std::min(ub,v.objective);
     const bool has_native=std::isfinite(b);
+    if(has_native) {
+        const auto local=evaluateNativeLocalBound(s,b,witnesses,tol);
+        if(!local.available)return local;
+    }
     if(s.full_original) {
         if(!s.native_preconditions || !has_native) return reject("full_native_preconditions_unavailable");
         if(b>ub+tol) return reject("full_bound_witness_inconsistency",true);
@@ -101,7 +202,7 @@ NativeEvidenceBound evaluateNativeEvidenceBound(const NativeEvidenceScope& s,dou
         // Check the restricted numerical claim BEFORE adding its cutoff
         // complement. Otherwise min(cutoff,bound) could hide a contradiction.
         for(const auto& v:witnesses) if(verified(v) &&
-            v.G>=p.lower_g-tol && v.G<=p.upper_g+tol && v.objective<=p.cutoff+tol &&
+            v.G>=p.lower_g && v.G<=p.upper_g && v.objective<=p.cutoff &&
             p.lower>v.objective+tol) return reject("local_bound_witness_inconsistency",true);
     }
     if(has_native && !active) return reject("native_scope_not_matching_frozen_live_leaf");
@@ -124,24 +225,26 @@ NativeEvidenceBound evaluateNativeEvidenceBound(const NativeEvidenceScope& s,dou
 
 NativeEvidenceJournal::NativeEvidenceJournal(const Instance& in,const SolveOptions& options)
     :instance_(in),options_(options),directory_(options.native_evidence_dir) {
-    if(directory_.empty() || !options.process_start_time_valid) throw std::runtime_error("journal requires path and process clock");
+    if(!directory_.empty() && !options.process_start_time_valid) throw std::runtime_error("journal requires process clock");
     if(!std::isfinite(options.lambda) || options.lambda<0 || in.V<1)
         throw std::runtime_error("journal nonnegative objective precondition");
     for(int i=1;i<=in.V;++i) if(in.weights.at(i)<0 || !std::isfinite(in.weights.at(i)))
         throw std::runtime_error("journal negative weight");
-    if(!std::filesystem::create_directory(directory_)) throw std::runtime_error("journal directory must be new");
+    if(directory_.empty())return; // In-memory same-instance qualification needs no file identity carrier.
+    if(!directory_.empty() && !std::filesystem::create_directory(directory_)) throw std::runtime_error("journal directory must be new");
     std::ostringstream o; o << std::setprecision(17)
       << "\"input_sha256\":" << quoted(fileSha256(in.path))
       << ",\"preset\":" << quoted(options.algorithm_preset) << ",\"method\":" << quoted(options.method)
       << ",\"lambda\":" << options.lambda << ",\"V\":" << in.V << ",\"M\":" << in.M
       << ",\"T\":" << in.total_time_limit << ",\"pickup_seconds\":" << in.pickup_time
       << ",\"drop_seconds\":" << in.drop_time << ",\"analytical_full_domain_lower_bound\":0"
-      << ",\"certificate\":\"none_read_only_observation\"";
+      << ",\"certificate\":\"none_source_qualification_round133\"";
     publish("identity",o.str());
 }
 void NativeEvidenceJournal::publish(const std::string& kind,const std::string& fields) {
     if(failed_) return;
     const auto seq=++sequence_;
+    if(directory_.empty())return;
     const std::string stem="event_"+std::to_string(seq);
     const std::string data="{\"schema\":1,\"sequence\":"+std::to_string(seq)+",\"kind\":"+quoted(kind)+","+fields+"}\n";
     closedWrite(directory_/(stem+".json"),data);
@@ -152,7 +255,7 @@ void NativeEvidenceJournal::publish(const std::string& kind,const std::string& f
 }
 long long NativeEvidenceJournal::beginCall(const NativeEvidenceScope& scope) {
     calls_.push_back(scope);last_bounds_.push_back(-std::numeric_limits<double>::infinity());
-    first_native_witness_.push_back(false);
+    first_native_witness_.push_back(false);native_infeasible_.push_back(false);
     const auto call=static_cast<long long>(calls_.size());
     publish("call", "\"call\":"+std::to_string(call)+","+scopeJson(scope));
     return call;
@@ -164,16 +267,20 @@ void NativeEvidenceJournal::witness(const std::vector<RoutePlan>& routes,const s
         publish("witness_rejected","\"call\":"+std::to_string(call)+",\"source\":"+quoted(source));return;
     }
     // Even non-improving MIPSOL vectors may expose a contradictory local bound.
-    std::string contradiction;
+    std::vector<std::pair<long long,std::string>> contradictions;
     for(std::size_t i=0;i<calls_.size();++i) {
         auto all=witnesses_;all.push_back(v);
-        const auto check=evaluateNativeEvidenceBound(calls_[i],last_bounds_[i],all);
-        if(check.inconsistent) contradiction=check.reason;
+        const auto check=evaluateNativeLocalBound(calls_[i],last_bounds_[i],all);
+        if(check.inconsistent) contradictions.push_back({static_cast<long long>(i+1),check.reason});
+        if(native_infeasible_[i]) {
+            const auto infeasible=evaluateNativeLocalInfeasibility(calls_[i],all);
+            if(infeasible.inconsistent)contradictions.push_back({static_cast<long long>(i+1),infeasible.reason});
+        }
     }
     const bool first_native=call>0 && source=="native_MIPSOL_verified_original_routes" &&
         !first_native_witness_.at(static_cast<std::size_t>(call-1));
     const bool improving=v.objective<best_;
-    if(!improving && !first_native && contradiction.empty())return;
+    if(!improving && !first_native && contradictions.empty())return;
     std::ostringstream o; o << std::setprecision(17) << "\"call\":" << call
       << ",\"source\":" << quoted(source) << ",\"improving\":" << improving << ",\"objective\":" << v.objective
       << ",\"G\":" << v.G << ",\"P\":" << v.P << ",\"routes\":[";
@@ -186,9 +293,11 @@ void NativeEvidenceJournal::witness(const std::vector<RoutePlan>& routes,const s
           o << "{\"station\":" << op.station << ",\"pickup\":" << op.pickup << ",\"drop\":" << op.drop << '}';}
         o << "]}";
     }
-    o << ']';publish("witness",o.str());best_=std::min(best_,v.objective);witnesses_.push_back(std::move(v));
+    o << ']';publish("witness",o.str());
+    if(v.objective<best_) {best_=v.objective;best_routes_=routes;}
+    witnesses_.push_back(std::move(v));
     if(first_native)first_native_witness_[static_cast<std::size_t>(call-1)]=true;
-    if(!contradiction.empty())failure(contradiction);
+    for(const auto& c:contradictions)rejectSource(c.first,c.second);
 }
 void NativeEvidenceJournal::nativeBound(long long call,double bound) {
     if(failed_ || !std::isfinite(bound))return;
@@ -196,12 +305,52 @@ void NativeEvidenceJournal::nativeBound(long long call,double bound) {
     if(bound<=last_bounds_.at(i))return;
     last_bounds_[i]=bound;
     const auto d=evaluateNativeEvidenceBound(calls_.at(i),bound,witnesses_);
+    const auto local=evaluateNativeLocalBound(calls_.at(i),bound,witnesses_);
     std::ostringstream o;o << std::setprecision(17) << "\"call\":" << call << ",\"native_bound\":" << bound
-      << ",\"global_available\":" << d.available << ",\"inconsistent\":" << d.inconsistent
-      << ",\"reason\":" << quoted(d.reason) << ",\"global_bound\":";
-    if(d.available)o << d.value;else o << "null";
+      << ",\"global_available\":" << (d.available && proofUsable() && !local.inconsistent) << ",\"inconsistent\":" << d.inconsistent
+      << ",\"reason\":" << quoted(proofUsable()?d.reason:proof_failure_reason_) << ",\"global_bound\":";
+    if(d.available && proofUsable() && !local.inconsistent)o << d.value;else o << "null";
+    o << ",\"local_available\":" << (local.available && proofUsable())
+      << ",\"local_reason\":" << quoted(proofUsable()?local.reason:proof_failure_reason_)
+      << ",\"local_bound\":";
+    if(local.available && proofUsable())o<<local.value;else o<<"null";
+    o << ",\"retrospective\":false";
     publish("bound",o.str());
-    if(d.inconsistent)failure(d.reason);
+    if(local.inconsistent)rejectSource(call,local.reason);
+}
+NativeEvidenceBound NativeEvidenceJournal::localBound(long long call,double bound) const {
+    NativeEvidenceBound out;
+    if(!proofUsable()) {out.reason=proof_failure_reason_;out.inconsistent=source_rejected_;return out;}
+    if(call<1 || static_cast<std::size_t>(call)>calls_.size()) {out.reason="native_call_identity_unavailable";return out;}
+    return evaluateNativeLocalBound(calls_[static_cast<std::size_t>(call-1)],bound,witnesses_);
+}
+NativeEvidenceBound NativeEvidenceJournal::localScope(long long call) const {
+    NativeEvidenceBound out;
+    if(!proofUsable()) {out.reason=proof_failure_reason_;out.inconsistent=source_rejected_;return out;}
+    if(call<1 || static_cast<std::size_t>(call)>calls_.size()){out.reason="native_call_identity_unavailable";return out;}
+    return evaluateNativeLocalScope(calls_[static_cast<std::size_t>(call-1)]);
+}
+NativeEvidenceBound NativeEvidenceJournal::localInfeasibility(long long call) const {
+    const auto scope=localScope(call);if(!scope.available)return scope;
+    return evaluateNativeLocalInfeasibility(calls_[static_cast<std::size_t>(call-1)],witnesses_);
+}
+void NativeEvidenceJournal::nativeInfeasible(long long call) {
+    native_infeasible_.at(static_cast<std::size_t>(call-1))=true;
+    const auto check=localInfeasibility(call);
+    publish("native_infeasible","\"call\":"+std::to_string(call)+",\"qualified\":"+
+        std::to_string(check.available)+",\"reason\":"+quoted(check.reason));
+    if(check.inconsistent)rejectSource(call,check.reason);
+}
+void NativeEvidenceJournal::rejectSource(long long call,const std::string& reason) {
+    publish("source_rejected","\"call\":"+std::to_string(call)+",\"reason\":"+quoted(reason)+
+        ",\"dependent_control_state_requires_abandonment\":true");
+    source_rejected_=true;
+    if(proof_failure_reason_.empty())proof_failure_reason_=reason;
+}
+void NativeEvidenceJournal::nativeQuality(long long call,const std::string& fields,
+    bool sufficient,const std::string& reason) {
+    publish("native_quality","\"call\":"+std::to_string(call)+","+fields);
+    if(!sufficient)rejectSource(call,"native_quality_insufficient:"+reason);
 }
 void NativeEvidenceJournal::returned(long long call,int rc) {
     publish("returned","\"call\":"+std::to_string(call)+",\"return_code\":"+std::to_string(rc));
@@ -212,6 +361,7 @@ void NativeEvidenceJournal::notStarted(long long call,const std::string& reason)
 void NativeEvidenceJournal::failure(const std::string& reason) noexcept {
     try {publish("failure","\"reason\":"+quoted(reason));} catch(...) {}
     failed_=true;
+    if(proof_failure_reason_.empty())proof_failure_reason_="native_evidence_failure:"+reason;
 }
 bool readNativeEvidenceReceipt(const std::filesystem::path& receipt,double observed,double cutoff,
     std::string& payload,std::string& reason) {
