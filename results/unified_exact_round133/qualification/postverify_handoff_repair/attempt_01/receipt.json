@@ -1,0 +1,234 @@
+{
+  "schema": "round133-accepted-H-postverify-controlled-fixtures-v1",
+  "UTC": "2026-10-25T08:29:56.565883+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "name": "all_original_frozen_helpers_have_exact_original_SHA",
+      "passed": true
+    },
+    {
+      "name": "only_endpoint_initialization_changes_in_reconstruct_clone",
+      "passed": true
+    },
+    {
+      "name": "frozen_verify_code_itself_is_unchanged",
+      "passed": true
+    },
+    {
+      "name": "PS_lifecycle_uses_the_same_compact_Start_audit_module",
+      "passed": true
+    },
+    {
+      "name": "tie_stays_with_initial",
+      "passed": true
+    },
+    {
+      "name": "strict_improvement_selects_final",
+      "passed": true
+    },
+    {
+      "name": "subthreshold_improvement_stays_with_initial",
+      "passed": true
+    },
+    {
+      "name": "exact_binary64_subtraction_boundary_is_not_strict",
+      "passed": true
+    },
+    {
+      "name": "next_binary64_below_boundary_is_strict",
+      "passed": true
+    },
+    {
+      "name": "nonfinite_initial_rejected",
+      "passed": true
+    },
+    {
+      "name": "nonfinite_final_rejected",
+      "passed": true
+    },
+    {
+      "name": "cold_P_never_reads_nonexistent_H_artifacts",
+      "passed": true
+    },
+    {
+      "name": "cold_P_has_explicit_null_H_and_exchange_receipt_fields",
+      "passed": true
+    },
+    {
+      "name": "physical_tie_different_capacity_fleets_are_not_interchangeable",
+      "passed": true
+    },
+    {
+      "name": "physical_tie_selects_exact_initial_fleet",
+      "passed": true
+    },
+    {
+      "name": "complete_25_seed_predicate_preserved",
+      "passed": true
+    },
+    {
+      "name": "accepted_fleet_and_distinct_real_exchange_final_are_both_retained",
+      "passed": true
+    },
+    {
+      "name": "semantic_trace_retains_actual_final_snapshot",
+      "passed": true
+    },
+    {
+      "name": "PS_actual_accepted_initial_handoff_passes",
+      "passed": true
+    },
+    {
+      "name": "PS_unaccepted_neutral_final_handoff_rejected",
+      "passed": true
+    },
+    {
+      "name": "PS_third_same_objective_fleet_rejected",
+      "passed": true
+    },
+    {
+      "name": "reconstruct_PS_startup_must_also_match_accepted_fleet",
+      "passed": true
+    },
+    {
+      "name": "missing_H_seed_still_incomplete",
+      "passed": true
+    },
+    {
+      "name": "physical_strict_final_handoff_passes",
+      "passed": true
+    },
+    {
+      "name": "PS_strict_improvement_cannot_keep_prior_initial",
+      "passed": true
+    },
+    {
+      "name": "deferred_entry_does_not_patch_producer_H_or_PS",
+      "passed": true
+    },
+    {
+      "name": "deferred_entry_restores_original_verify",
+      "passed": true
+    },
+    {
+      "name": "unsealed_postverification_context_rejected",
+      "passed": true
+    },
+    {
+      "name": "H_and_PS_install_only_inside_linked_stopped_postseal_context",
+      "passed": true
+    },
+    {
+      "name": "failure_redirect_preserves_original_failure_bytes",
+      "passed": true
+    },
+    {
+      "name": "postseal_context_restores_all_pure_functions",
+      "passed": true
+    },
+    {
+      "name": "closeout_without_success_cannot_skip_or_aggregate",
+      "passed": true
+    },
+    {
+      "name": "complete_bound_management_receipt_accepts_only_its_exact_outputs",
+      "passed": true
+    },
+    {
+      "name": "changed_endpoint_after_success_cannot_skip_or_aggregate",
+      "passed": true
+    },
+    {
+      "name": "run_skip_and_rebuild_both_invoke_the_effective_policy_gate",
+      "passed": true
+    },
+    {
+      "name": "actual_D1_01_has_one_initial_journal_witness",
+      "passed": true
+    },
+    {
+      "name": "actual_D1_01_journal_matches_only_accepted_initial",
+      "passed": true
+    },
+    {
+      "name": "actual_D1_01_full_H_stays_complete",
+      "passed": true
+    },
+    {
+      "name": "actual_D1_01_trace_contains_unmodified_exchange_final",
+      "passed": true
+    },
+    {
+      "name": "actual_failed_arm_all_read_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "all_frozen_helpers_still_unchanged",
+      "passed": true
+    }
+  ],
+  "check_count": 41,
+  "bindings": {
+    "frozen_helpers": {
+      "scripts/round133_common.py": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+      "scripts/round133_campaign.py": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+      "scripts/round133_read.py": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+      "scripts/round133_small_native.py": "1f0a8bd4026614182a60d5bf4a99f98ea44de8d462d0f8603e5a01ed797d59b1",
+      "scripts/compare_round112_startup.py": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2"
+    },
+    "adapter_SHA": "8feae1d544d92fba843f4836f0c685c2cf38151f20386cd2538396ac34af6640",
+    "fixture_driver_SHA": "9cff594ba9aa6a6fbfb8cb6adddf35f9a2211c7efcddb4c924d02ab86ed96e21",
+    "candidate_build_SHA": "84067f2e1b99e6420bbf2090aa4f2c89b40cb89759e43afcb7225dd1017ebede",
+    "main_roles": {
+      "production": {
+        "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\src\\main.cpp",
+        "SHA": "c1508b72562ad67107c3ba8874487e1468883c0fca343811b5b5ef1e0d442479",
+        "fragments": {
+          "strict_acceptance": "if (!out.found || v.objective < out.verification.objective - 1e-10) {",
+          "accepted_routes_assignment": "out.routes = routes;",
+          "exchange_input": "const auto balanced = ebrp::runRound83ExchangeDescent(instance, opt, out.routes, trace_directory);",
+          "exchange_consider": "consider(balanced.routes, \"round83_equal_net_exchange_physical_descent\");"
+        },
+        "acceptance": "F_final < F_initial - 1e-10 using the serialized verified binary64 objectives",
+        "object_path": "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\main.o",
+        "object_SHA": "1d199740da86931e679bc2c5b1500fb671d624882899a83a763e40c325429016",
+        "existing_main_binding": "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\main_binding.json",
+        "existing_main_binding_SHA": "22aa1a0e26a5d2a86b1b0b1471504ab7b05bae1f29c8485b5262669f1d76b202"
+      },
+      "research": {
+        "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round132\\main.cpp",
+        "SHA": "3c5c9ba6f87f74c43ca95290b0b5cf7ad5cc50b31741bd01507f3818d1e23bc5",
+        "fragments": {
+          "strict_acceptance": "if (!out.found || v.objective < out.verification.objective - 1e-10) {",
+          "accepted_routes_assignment": "out.routes = routes;",
+          "exchange_input": "const auto balanced = ebrp::runRound83ExchangeDescent(instance, opt, out.routes, trace_directory);",
+          "exchange_consider": "consider(balanced.routes, \"round83_equal_net_exchange_physical_descent\");"
+        },
+        "acceptance": "F_final < F_initial - 1e-10 using the serialized verified binary64 objectives",
+        "object_path": "E:\\codes\\ExactEBRP-work\\build-cache\\round132\\main.o",
+        "object_SHA": "5ea1af74b6b7bdb9eb0c9b17e78693012fc79cc93167de44b28c7177ee396fa3",
+        "existing_main_binding": "E:\\codes\\ExactEBRP-work\\build-cache\\round132\\main_binding.json",
+        "existing_main_binding_SHA": "e4a6d24814686ab3833b4148122c5593e579ae696ecd87f2315af9967f9fcfad"
+      }
+    },
+    "compact_start_audit_SHA": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+    "witness_writer_SHA": "c22fd9723df604fc3be20f47ca0cf674b5fec475bff6a5f8091bd68879d14501",
+    "exchange_source_SHA": "5a70c158a75f447c40fbff995703339cb5b59c551cba1be193283947724644a5"
+  },
+  "driver_SHA": "9cff594ba9aa6a6fbfb8cb6adddf35f9a2211c7efcddb4c924d02ab86ed96e21",
+  "original_verify_invoked": false,
+  "real_arm_read_only": true,
+  "real_raw_SHA": {
+    "producer_seal.json": "fdcd72f2cff627e3afda06d0b3529f452b051a790c3f4a5820ee0efa333e41c2",
+    "producer_receipt.json": "40b67f1ede9fcb60a136888bcc097dfd2e127890733079e39f9a267016d69962",
+    "observations.json": "91a0fe11e56fc3db162eb22d830abff7980afc661f20a7b80a806dad9805c124",
+    "round133_verification_failure.json": "3609542b8d9e3f9a381ca1483f89a13929f22c94fefe604d2fc5f52ee6652352",
+    "hga.csv.exchange/initial.json": "a97a5a5645281b7bde2a9f2a8d1137e11515fe51ca1e2cbbaa738b4c44729a9f",
+    "hga.csv.exchange/final.json": "baea64b64c3d2b1c81d7340c15ca4f7146d3c669f4a5a10d5ce25fba9e4826b4"
+  },
+  "synthetic_folders_are_not_producer_or_performance_evidence": true,
+  "Optimize": 0,
+  "native_starts": 0,
+  "seconds": 0.3902325000381097
+}

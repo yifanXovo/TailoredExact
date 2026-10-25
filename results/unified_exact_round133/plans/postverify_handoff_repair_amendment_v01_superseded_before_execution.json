@@ -1,0 +1,128 @@
+{
+  "schema": "round133-prospective-postverification-handoff-repair-amendment-v1",
+  "UTC": "2026-10-25T08:21:43.942560+00:00",
+  "policy": "ACTUAL_STRICT_CONSIDER_ACCEPTED_H_POSTSEAL_ONLY_V1",
+  "trigger": "D1_01 completed native normally and independently reached own zero; the first frozen postverifier incorrectly equated exchange-final fleet with the accepted H startup when only neutral equal-objective routes changed.",
+  "scope": "Pure post-seal reconstruction/Start-handoff predicates and explicit verifier child entry point only.",
+  "stages": [
+    "D1",
+    "D3"
+  ],
+  "bindings": {
+    "frozen_helpers": {
+      "scripts/round133_common.py": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+      "scripts/round133_campaign.py": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+      "scripts/round133_read.py": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+      "scripts/round133_small_native.py": "1f0a8bd4026614182a60d5bf4a99f98ea44de8d462d0f8603e5a01ed797d59b1",
+      "scripts/compare_round112_startup.py": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2"
+    },
+    "adapter_SHA": "32ce8fd535155cece6c2ca13e7260ecec70537dfa10c08a9b92153acc384e46e",
+    "fixture_driver_SHA": "ad17a87b1030ccdd84e6dbf614198f858c7d1bbf87867571f4dc494a81f6def0",
+    "candidate_build_SHA": "84067f2e1b99e6420bbf2090aa4f2c89b40cb89759e43afcb7225dd1017ebede",
+    "main_roles": {
+      "production": {
+        "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\src\\main.cpp",
+        "SHA": "c1508b72562ad67107c3ba8874487e1468883c0fca343811b5b5ef1e0d442479",
+        "fragments": {
+          "strict_acceptance": "if (!out.found || v.objective < out.verification.objective - 1e-10) {",
+          "accepted_routes_assignment": "out.routes = routes;",
+          "exchange_input": "const auto balanced = ebrp::runRound83ExchangeDescent(instance, opt, out.routes, trace_directory);",
+          "exchange_consider": "consider(balanced.routes, \"round83_equal_net_exchange_physical_descent\");"
+        },
+        "acceptance": "F_final < F_initial - 1e-10 using the serialized verified binary64 objectives",
+        "object_path": "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\main.o",
+        "object_SHA": "1d199740da86931e679bc2c5b1500fb671d624882899a83a763e40c325429016",
+        "existing_main_binding": "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\main_binding.json",
+        "existing_main_binding_SHA": "22aa1a0e26a5d2a86b1b0b1471504ab7b05bae1f29c8485b5262669f1d76b202"
+      },
+      "research": {
+        "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round132\\main.cpp",
+        "SHA": "3c5c9ba6f87f74c43ca95290b0b5cf7ad5cc50b31741bd01507f3818d1e23bc5",
+        "fragments": {
+          "strict_acceptance": "if (!out.found || v.objective < out.verification.objective - 1e-10) {",
+          "accepted_routes_assignment": "out.routes = routes;",
+          "exchange_input": "const auto balanced = ebrp::runRound83ExchangeDescent(instance, opt, out.routes, trace_directory);",
+          "exchange_consider": "consider(balanced.routes, \"round83_equal_net_exchange_physical_descent\");"
+        },
+        "acceptance": "F_final < F_initial - 1e-10 using the serialized verified binary64 objectives",
+        "object_path": "E:\\codes\\ExactEBRP-work\\build-cache\\round132\\main.o",
+        "object_SHA": "5ea1af74b6b7bdb9eb0c9b17e78693012fc79cc93167de44b28c7177ee396fa3",
+        "existing_main_binding": "E:\\codes\\ExactEBRP-work\\build-cache\\round132\\main_binding.json",
+        "existing_main_binding_SHA": "e4a6d24814686ab3833b4148122c5593e579ae696ecd87f2315af9967f9fcfad"
+      }
+    },
+    "compact_start_audit_SHA": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+    "witness_writer_SHA": "c22fd9723df604fc3be20f47ca0cf674b5fec475bff6a5f8091bd68879d14501",
+    "exchange_source_SHA": "5a70c158a75f447c40fbff995703339cb5b59c551cba1be193283947724644a5"
+  },
+  "candidate_manifest_SHA": "101e8f75d2675d1f728ddd8aa4010d0b57821218e730a7b06207239af6a997b2",
+  "matrix_SHA": {
+    "D1": "9e638fddd2f5e99b6cadafc933c38d093ec77eb47339345b78895b2ee4070afe",
+    "D3": "1f1839df95a8d2d62280aa4e4417177cd6d2829ec7618c2acdf3273893f88182"
+  },
+  "original_failure": {
+    "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\campaign\\D1_01\\raw\\01_X-35-U_S0_S2_candidate\\round133_verification_failure.json",
+    "SHA": "3609542b8d9e3f9a381ca1483f89a13929f22c94fefe604d2fc5f52ee6652352",
+    "original_fee_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\fees\\D1_01_01\\receipt.json",
+    "original_fee_SHA": "6dd499243c30da3a200b5f8c565b9f22a2b7b1f6caebaea3933143069be56f62",
+    "exit_code": 1,
+    "native_T_produce": 120.17624272953253,
+    "producer_receipt_SHA": "40b67f1ede9fcb60a136888bcc097dfd2e127890733079e39f9a267016d69962",
+    "producer_seal_SHA": "fdcd72f2cff627e3afda06d0b3529f452b051a790c3f4a5820ee0efa333e41c2",
+    "normal_native_return": true,
+    "no_native_retry": true
+  },
+  "source_line_binding": {
+    "frozen_reader": "scripts/round133_read.py:691-698 unchanged; original verify code is invoked in full",
+    "frozen_startup": "scripts/compare_round112_startup.py:39 endpoint initialization only is cloned; its complete semantic trace/H/closure/PS checks remain",
+    "production_acceptance": "src/main.cpp:8408 strict F_new < F_old - 1e-10; 8582-8583 exchange result considered under the same rule",
+    "native_initial": "src/PaperExternalGiniTree.cpp:2301 records verified_seed.routes",
+    "PS_original_start_audit": "scripts/round112_audit.py:12-49 unchanged; all native columns/rows/readback/domain/integrality/objective checks execute before added exact accepted-H startup binding"
+  },
+  "original_reconstruct_source_SHA": "c2193da204a6b652ef3173a16dd584ed0c02bb1a9cb25d7eb36365cefe24ffde",
+  "corrected_reconstruct_source_SHA": "358a3e25c5e12d5a5352d2bde569d15191abbf47f0daa38bdcb9bc64f037fbaf",
+  "registered_behavior": [
+    "Use the exact saved verified binary64 F values and the production strict subtraction comparison; do not accept arbitrary same-objective fleets.",
+    "Expose actual accepted H physical/fleet; independently retain real exchange-final physical/fleet/selection in repair receipt, and retain the complete actual final.json in semantic traces.",
+    "Defer all H/PS function replacement until verify confirms a linked sealed producer stopped; restore functions in finally.",
+    "Invoke the frozen original verifier unchanged, including full exchange replay, all 25 seeds, physical checks, Start mappings, source/quality predicates, lifecycle and complete clock checks.",
+    "Redirect any new postverify failure to a unique repair attempt file; preserve original failure bytes and failed fee.",
+    "Read-only reverify the existing D1_01 sealed native evidence exactly once after admission; no Native/Optimize rerun or clock backdating.",
+    "Future explicit driver arm subprocesses call the original campaign.execute_arm, supervisor, finish_producer and native argv/caps. Only their pure verifier is deferred.",
+    "All 22 frozen arm positions/caps, source/PE/DLL/parameters, source/model qualification and pair denominators remain fixed."
+  ],
+  "fixtures": {
+    "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\scripts\\round133_postverify_repair_tests.py",
+    "SHA": "ad17a87b1030ccdd84e6dbf614198f858c7d1bbf87867571f4dc494a81f6def0",
+    "not_run_yet": true,
+    "native_starts": 0,
+    "scope": "Finite selector/reconstruction/context fixtures plus read-only inspection of real first arm; synthetic helper folders cannot qualify a scientific arm."
+  },
+  "execution": {
+    "status": "PENDING_INDEPENDENT_REVIEW_AND_MAIN_AGENT_METER",
+    "review_gate": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\review\\postverify_handoff_repair_admission.json",
+    "suggested_commands": [
+      [
+        "python",
+        "scripts/round133_postverify_repair_tests.py"
+      ],
+      [
+        "python",
+        "scripts/round133_postverify_repair.py",
+        "repair",
+        "D1",
+        "1",
+        "D1_01_postverify_repair_01"
+      ],
+      [
+        "python",
+        "scripts/round133_postverify_repair.py",
+        "run",
+        "D1"
+      ]
+    ]
+  },
+  "Optimize": 0,
+  "native_starts": 0,
+  "performance_input_or_algorithm_change": false
+}
