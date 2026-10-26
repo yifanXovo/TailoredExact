@@ -1,0 +1,137 @@
+{
+  "schema": "round134-actual-final-pdf-visual-QA-v1",
+  "status": "PASS",
+  "UTC": "2026-10-26T00:33:57.147294+00:00",
+  "PDF_SHA": "6a3400388ad8efa83581532e492008b3e95ebbbe49b579a013b1c3a37bafb680",
+  "manuscript_SHA": "bcfb4af87db83c8b83097fd7e47a2a7f71c4361a08529664344df6f78b04ca0a",
+  "page_count": 43,
+  "render_receipt_SHA": "13f5c619a74157fe1febe1dddaf404ed563a577b10ae69c0f9ededd9ce921e37",
+  "actual_contact_sheets_inspected": [
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round134\\pdf\\visual_QA_6a3400388ad8\\contact-01.png",
+      "SHA256": "278dbeb1dec89c7856e6b1e43e8600d3d54287fd2e35edd1116de546752e07dd",
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round134\\pdf\\visual_QA_6a3400388ad8\\contact-02.png",
+      "SHA256": "8aa3bfac5404bc9def82c4245ffcacda57a014494a49607183e784ea18962883",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round134\\pdf\\visual_QA_6a3400388ad8\\contact-03.png",
+      "SHA256": "24c10c7078fe882d062379a59e17f14a713ccacba2171564aa9ccb5db5cbe3d7",
+      "pages": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round134\\pdf\\visual_QA_6a3400388ad8\\contact-04.png",
+      "SHA256": "e8073c25e09ae4298122fc8d3e668ac4a164027c00b9db1fa9e045acecd98ce1",
+      "pages": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round134\\pdf\\visual_QA_6a3400388ad8\\contact-05.png",
+      "SHA256": "1b6f324a9d0b2b74972e85d2005e8cd5e5e9ac10ac19a39758e0d406657c8106",
+      "pages": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round134\\pdf\\visual_QA_6a3400388ad8\\contact-06.png",
+      "SHA256": "6e5a1b989209b76129b9bca27bc52adf90edffb13f7c112e57e78d8f0b94a392",
+      "pages": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round134\\pdf\\visual_QA_6a3400388ad8\\contact-07.png",
+      "SHA256": "fa19d213a8ee5ab4980615b2268701233e707b79728c6eddd77467052f6884ad",
+      "pages": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ]
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round134\\pdf\\visual_QA_6a3400388ad8\\contact-08.png",
+      "SHA256": "5b155a76706666280ace501a332dd44ba4989695398d341d892ee68425e364a8",
+      "pages": [
+        43
+      ]
+    }
+  ],
+  "all_pages_visually_inspected_via_contact_sheets": true,
+  "primary_full_size_pages_inspected": [
+    8,
+    9,
+    11,
+    26
+  ],
+  "independent_full_size_pages_inspected": [
+    8,
+    9,
+    10,
+    12,
+    13,
+    25,
+    32,
+    43
+  ],
+  "inspection_method": "Actual rendered PNGs viewed by primary; reviewer independently viewed selected full pages. Text extraction used only as a supplementary bounds/glyph check.",
+  "outside_page_characters": 0,
+  "replacement_characters": 0,
+  "all_reported_fonts_embedded": true,
+  "resolved_layout_findings": [
+    "All14 Table1 groups kept on one portrait page",
+    "Six-row weight table and two-row root table fit portrait",
+    "Proposition heading kept with formula",
+    "A8 heading kept with table",
+    "LemmaA4 statement no longer has a single-line continuation",
+    "Bibliography entries kept together; no one-line DOI-only continuation"
+  ],
+  "remaining_layout_findings": [],
+  "compiler_warnings_assessed": "Six 0.12086pt longtable alignment warnings and duplicate hyperref colorlinks option have no visible clipping, overlap or damaged glyphs in the actual final pages.",
+  "prior_attempt_preserved": "review/pdf_export_attempt01.json and review/pdf_render_e333d4889a26.json; actual prior PDF remains in its separate temporary attempt folder",
+  "Optimize": 0,
+  "production_compile": 0,
+  "marker_successful_invocations": 1
+}

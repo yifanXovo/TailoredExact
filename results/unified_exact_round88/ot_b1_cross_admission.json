@@ -1,0 +1,19 @@
+{
+  "schema": "round88-b1-cross-admission-v1",
+  "authorized_by": "Astra",
+  "status": "authorized_once",
+  "script_sha256": "356c46b05d527f7b594633e65adc9031ed5da73653b839628dd8d00df0a1c006",
+  "tests_sha256": "53fb170a7da65126f28c117277168d30b1b35d43329331e8d5caec21a3337b63",
+  "manifest": "results/unified_exact_round88/ot_b1_cross_preparation_v4/manifest.json",
+  "manifest_sha256": "d1270dc11f1ed99c011028f0287f70b5bcccbbf4c56c6a8f602787f0ad311755",
+  "row_bank_sha256": "f35f924ea413fcc16a1b38b3be95d07ae9faeb430d801cded811c42358b7b9e7",
+  "output_directory": "results/unified_exact_round88/ot_b1_cross_diagnostic_001",
+  "whole_process_limit_seconds": 120,
+  "maximum_optimize_calls": 6,
+  "qualification": "Sol xhigh independent review passed, root read the core script and reran 9/9 micro-tests; final v4 changes preparation receipt only, frozen script/tests/bank unchanged",
+  "worker": "/root/r88_startup_review",
+  "worker_model": "gpt-6-sol/high",
+  "resource_policy": "Exclusive solver slot for this single diagnosis. After all processes exit, send explicit release directly to r88_evidence_review, which then owns the already-admitted A1 run-rest stage. No concurrent compression, build or heavy audit.",
+  "failure_policy": "Preserve unknown/partial/failed outputs and costs, no retry or deadline extension. A1 may start after resource release since it does not depend on this diagnostic outcome, unless a shared binary/source integrity problem is discovered.",
+  "interpretation": "Only B1 rows transfer across these identical supports. Compare row sets within each actual LP. Full parent/child formulation nesting and pure G-domain attribution are not established. This is not a complete-method timing result."
+}

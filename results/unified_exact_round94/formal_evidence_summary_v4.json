@@ -1,0 +1,508 @@
+{
+  "schema": "round94-formal-evidence-summary-v4",
+  "status": "runner_audits_passed_pending_independent_review_and_archive",
+  "binary_sha256": "bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2",
+  "runner_sha256": "b1f8519e74e107030ac4a9ed515ddf6cdcea31b52bc8547044f85df1a2b9d1f5",
+  "preregistration_sha256": "767b8abe628bb5e84c8c44ddf2b65869f44212e17bea362fc0284b4afb445774",
+  "v4_identity_sha256": "5f860b6d68a81e1257db3b817e81da58b53a2568b0e12e6b61f8ebd2662e562a",
+  "v4_lease_sha256": "8d04fd2ed24b452ad80f3e9b7860275a9b21cbb6ffb8500eb928f593fbe7f9df",
+  "original_outer_sha256": "b189940f50ea212089f11188ec147813e12b6c9206a4a156e4e5de7512d2ef58",
+  "v4_outer_sha256": "5371c80203627e2bbed0caeda3444eff7e27a7f3eb3fd3389f799e85481d85cc",
+  "formal_completion_sha256": "58d5fa1a984b6c09c9680e73b39b6ea8abbea283db538219a4528b4a7664fc21",
+  "summary_jsonl_sha256": "d1e1aa5bed0b961694f89b8d799f9698740953aed72ccaf3309e6a326e757513",
+  "inputs": [
+    {
+      "id": "F2",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "path": "reference/round86_unadapted_confirmation/F2.txt",
+      "sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e"
+    },
+    {
+      "id": "C20",
+      "scenario_id": "cb443_V20_compact_r2_shortage_M02_Q20_T10800",
+      "path": "reference/citibike443-regional-v1/instances/V20/cb443_V20_compact_r2_shortage_M02_Q20.txt",
+      "sha256": "9c61e0bd65053af1a260ff599bc438db7db0284f219b94492ac2eadec085855d"
+    },
+    {
+      "id": "B50",
+      "scenario_id": "cb443_V50_regional_r1_balanced_M04_Q30_T01800",
+      "path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_balanced_M04_Q30.txt",
+      "sha256": "79ca3506aac00f52268199bd88596f7a512161f5dc19b75315a4bb576d41ceb2"
+    },
+    {
+      "id": "U6",
+      "scenario_id": "round82-unadapted-confirmation-v1_U6",
+      "path": "reference/round82_unadapted_confirmation/U6.txt",
+      "sha256": "1556e893376349de92f9213642d7be0005dcb44e47e037d34f77040711787e3f"
+    }
+  ],
+  "rows": [
+    {
+      "number": 1,
+      "role": "F2",
+      "arm": "P-GRB",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/01_F2_P-GRB",
+      "completion_sha256": "a3dbe14ab4ca46204f8a616853f40f035a2d9b1785b64480493a4df82eef250c",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal_recovery_v4/offline_p_audit.json",
+      "audit_sha256": "f7820605ecb1f289b7a03ec0cac90a361f2ad5a44c7b98189c003001014615a7",
+      "process_cap_seconds": 900,
+      "process_wall_seconds": 897.1720000002533,
+      "end_to_end_seconds": 897.4070000001229,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.8659435203229894,
+        "L": 0.7577452455123087,
+        "gap": 0.10819827481068067,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      }
+    },
+    {
+      "number": 2,
+      "role": "F2",
+      "arm": "ENS-C",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/02_F2_ENS-C",
+      "completion_sha256": "f3a56a73283e71d1c9e120ad3035159aacd54d15ea745ee27f6fc9c75537ba6a",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal_recovery_v4/offline_ens_audit.json",
+      "audit_sha256": "dfd34bb3fb73e2f6f4d8672986a07ef4c53778a5be085c2be21c730767f59baa",
+      "process_cap_seconds": 900,
+      "process_wall_seconds": 544.2650000001304,
+      "end_to_end_seconds": 544.530999999959,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.8659435203229894,
+        "L": 0.865943520322989,
+        "gap": 3.3306690738754696e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      }
+    },
+    {
+      "number": 3,
+      "role": "F2",
+      "arm": "LP-G",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/03_F2_LP-G",
+      "completion_sha256": "3d70ef35678a651d7e635bf53af4a31cb1eb180744844e39444d4d6edfc4d482",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/03_F2_LP-G/audit.json",
+      "audit_sha256": "39f775117a8aada0c54546604b84c68773b2e3c4f8fe44925766ce8e604f67d6",
+      "process_cap_seconds": 900,
+      "process_wall_seconds": 292.25,
+      "end_to_end_seconds": 292.4839999997057,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.8659435203229894,
+        "L": 0.8659435169327837,
+        "gap": 3.3902056717494133e-09,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "split": {
+        "eligible_proposals": 4,
+        "lp_g_point_exposures": 1,
+        "midpoint_fallbacks": 3,
+        "realized_transactions": 2,
+        "realized_two_child_splits": 2,
+        "incomplete_or_unknown_child_pairs": 0,
+        "ledger_sha256": "d9c6fa198403ad3de4617a45a9eac07d7b401d13a9c83f3e87733406acb408c5",
+        "choices": [
+          {
+            "point_source": "current_optimal_parent_lp_g",
+            "last_status": "atomic_two_child_split",
+            "phase_state": "accounted"
+          },
+          {
+            "point_source": "legacy_midpoint_fallback",
+            "last_status": "atomic_two_child_split",
+            "phase_state": "accounted"
+          },
+          {
+            "point_source": "legacy_midpoint_fallback",
+            "last_status": "parent_requeued_no_split",
+            "phase_state": "accounted"
+          },
+          {
+            "point_source": "legacy_midpoint_fallback",
+            "last_status": "proposed_exact_parent_closure",
+            "phase_state": "accounted"
+          }
+        ]
+      }
+    },
+    {
+      "number": 4,
+      "role": "C20",
+      "arm": "LP-G",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/04_C20_LP-G",
+      "completion_sha256": "0767de58afa4967c2da4336e31cd4481f48aa4e026cf73a475278c2cb85dbf26",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/04_C20_LP-G/audit.json",
+      "audit_sha256": "df5dcce78c62c9a1feaa4e561bf52184845c16bd44a8a85c3b4d6b60ae662db7",
+      "process_cap_seconds": 600,
+      "process_wall_seconds": 356.030999999959,
+      "end_to_end_seconds": 356.280999999959,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.2256218305640562,
+        "L": 0.22562183056405635,
+        "gap": -1.3877787807814457e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "split": {
+        "eligible_proposals": 2,
+        "lp_g_point_exposures": 2,
+        "midpoint_fallbacks": 0,
+        "realized_transactions": 0,
+        "realized_two_child_splits": 0,
+        "incomplete_or_unknown_child_pairs": 0,
+        "ledger_sha256": "d5923ed35ae84ed5ee264c6ef727bd310e45a6c292bd8e2565d6239bfad40b5b",
+        "choices": [
+          {
+            "point_source": "current_optimal_parent_lp_g",
+            "last_status": "parent_requeued_no_split",
+            "phase_state": "accounted"
+          },
+          {
+            "point_source": "current_optimal_parent_lp_g",
+            "last_status": "proposed_exact_parent_closure",
+            "phase_state": "accounted"
+          }
+        ]
+      }
+    },
+    {
+      "number": 5,
+      "role": "C20",
+      "arm": "ENS-C",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/05_C20_ENS-C",
+      "completion_sha256": "2ad2847d289db64f91d130984d7c8caba0f4b961c18959df508022841eb81cba",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/05_C20_ENS-C/audit.json",
+      "audit_sha256": "f397c55dfb3a0d46ed34e228d58c2fb184e84510c92ed11406278392851c7c34",
+      "process_cap_seconds": 600,
+      "process_wall_seconds": 314.90700000012293,
+      "end_to_end_seconds": 315.2039999999106,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.2256218305640562,
+        "L": 0.22562182710259354,
+        "gap": 3.46146267204972e-09,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      }
+    },
+    {
+      "number": 6,
+      "role": "C20",
+      "arm": "P-GRB",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/06_C20_P-GRB",
+      "completion_sha256": "f4a32d280e081adbc82f4ca797198248079271d7a79d1f8a3cd76c7e17cf4982",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/06_C20_P-GRB/audit.json",
+      "audit_sha256": "89ee82d4be0686b355bf4a3295099355fd3158771a25a60b9dac43754d44baae",
+      "process_cap_seconds": 600,
+      "process_wall_seconds": 597.219000000041,
+      "end_to_end_seconds": 597.4840000001714,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.22562183056405624,
+        "L": 0.2216550496338246,
+        "gap": 0.003966780930231645,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      }
+    },
+    {
+      "number": 7,
+      "role": "B50",
+      "arm": "ENS-C",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/07_B50_ENS-C",
+      "completion_sha256": "4fb75c92218e0a23ed1517debbf73bd5cc7e55e0306c60f6d234aaa42e6d1420",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/07_B50_ENS-C/audit.json",
+      "audit_sha256": "4929720913318a8374671d411e51f66610c722292e943e45a3cbf50745e8133d",
+      "process_cap_seconds": 1800,
+      "process_wall_seconds": 1069.2660000002943,
+      "end_to_end_seconds": 1069.563000000082,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.7448589816653801,
+        "L": 0.7448589816653798,
+        "gap": 3.3306690738754696e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      }
+    },
+    {
+      "number": 8,
+      "role": "B50",
+      "arm": "P-GRB",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/08_B50_P-GRB",
+      "completion_sha256": "66ec6007b6796cb78099ba98297d635ca4e2117ad582c0b4b0e186c70e41bb4c",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/08_B50_P-GRB/audit.json",
+      "audit_sha256": "be4fdb285d48e1e34492f09907027e0e446576e1bcbe49d681790d6a9e59a224",
+      "process_cap_seconds": 1800,
+      "process_wall_seconds": 1797.155999999959,
+      "end_to_end_seconds": 1797.436999999918,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.7622538180217396,
+        "L": 0.5652817886737678,
+        "gap": 0.19697202934797187,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      }
+    },
+    {
+      "number": 9,
+      "role": "B50",
+      "arm": "LP-G",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/09_B50_LP-G",
+      "completion_sha256": "63cf8a6688d3b841fd0a3d813e8e2f5bdd458384b7767f21af7a29e72380d294",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/09_B50_LP-G/audit.json",
+      "audit_sha256": "03ff3c38bef5b6ff12fb4ca956b2d1afbb54d954825dc8917f4463193869cfb8",
+      "process_cap_seconds": 1800,
+      "process_wall_seconds": 715.155999999959,
+      "end_to_end_seconds": 715.436999999918,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.7448589816653801,
+        "L": 0.7448589811296324,
+        "gap": 5.357476684508811e-10,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "split": {
+        "eligible_proposals": 5,
+        "lp_g_point_exposures": 1,
+        "midpoint_fallbacks": 4,
+        "realized_transactions": 3,
+        "realized_two_child_splits": 3,
+        "incomplete_or_unknown_child_pairs": 0,
+        "ledger_sha256": "127a70904a2b2028cbf774b50097bce8e6fde4476c0731e2dd0ea71f73e5d0d8",
+        "choices": [
+          {
+            "point_source": "current_optimal_parent_lp_g",
+            "last_status": "atomic_two_child_split",
+            "phase_state": "accounted"
+          },
+          {
+            "point_source": "legacy_midpoint_fallback",
+            "last_status": "atomic_two_child_split",
+            "phase_state": "accounted"
+          },
+          {
+            "point_source": "legacy_midpoint_fallback",
+            "last_status": "atomic_two_child_split",
+            "phase_state": "accounted"
+          },
+          {
+            "point_source": "legacy_midpoint_fallback",
+            "last_status": "parent_requeued_no_split",
+            "phase_state": "accounted"
+          },
+          {
+            "point_source": "legacy_midpoint_fallback",
+            "last_status": "proposed_exact_parent_closure",
+            "phase_state": "accounted"
+          }
+        ]
+      }
+    },
+    {
+      "number": 10,
+      "role": "U6",
+      "arm": "LP-G",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/10_U6_LP-G",
+      "completion_sha256": "dec94e16eb728f0ac42c36d46d7d04c980ccb42fa9b85c5dec382b7076216b3a",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/10_U6_LP-G/audit.json",
+      "audit_sha256": "df11fa58959a9bb58843ff52ce6c915887b44231a881c60d185d7633694e76dc",
+      "process_cap_seconds": 1200,
+      "process_wall_seconds": 1197.1409999998286,
+      "end_to_end_seconds": 1197.438000000082,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.153936747638459,
+        "L": 0.12892489626165785,
+        "gap": 0.025011851376801147,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "split": {
+        "eligible_proposals": 2,
+        "lp_g_point_exposures": 2,
+        "midpoint_fallbacks": 0,
+        "realized_transactions": 0,
+        "realized_two_child_splits": 0,
+        "incomplete_or_unknown_child_pairs": 0,
+        "ledger_sha256": "2299c034cd8a8ba97aa543bb634bd76b95342c786ab8df97656eed256d35f668",
+        "choices": [
+          {
+            "point_source": "current_optimal_parent_lp_g",
+            "last_status": "parent_requeued_no_split",
+            "phase_state": "accounted"
+          },
+          {
+            "point_source": "current_optimal_parent_lp_g",
+            "last_status": "proposed_exact_parent_closure",
+            "phase_state": "accounted"
+          }
+        ]
+      }
+    },
+    {
+      "number": 11,
+      "role": "U6",
+      "arm": "P-GRB",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/11_U6_P-GRB",
+      "completion_sha256": "943abf4a5ca1d91d57fcf466fb575105b73c449f914ce5210655ad266ea50e95",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/11_U6_P-GRB/audit.json",
+      "audit_sha256": "ade45dea86fa95a364bfb57845192cd5a1eab2519ac7b3403470969615048956",
+      "process_cap_seconds": 1200,
+      "process_wall_seconds": 1197.125,
+      "end_to_end_seconds": 1197.530999999959,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.21407703935595196,
+        "L": 0.12514525983992003,
+        "gap": 0.08893177951603193,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      }
+    },
+    {
+      "number": 12,
+      "role": "U6",
+      "arm": "ENS-C",
+      "destination": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/12_U6_ENS-C",
+      "completion_sha256": "3296a78baafcc897ca5556a0110658ce18943ba3ad3ebd39619dce2adbcda561",
+      "audit_path": "results/unified_exact_round94/runner_lpg_contemporary/formal/raw/12_U6_ENS-C/audit.json",
+      "audit_sha256": "42f6f58f8bb5859097d796aa31dc43c0b7eda76ad3cc9e978c1bd33a8442db06",
+      "process_cap_seconds": 1200,
+      "process_wall_seconds": 1197.1719999997877,
+      "end_to_end_seconds": 1197.469000000041,
+      "returncode": 0,
+      "stop_reason": "normal_return",
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.1514209239173934,
+        "L": 0.12905844168500294,
+        "gap": 0.022362482232390457,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      }
+    }
+  ],
+  "cross_arm_receipts": [
+    {
+      "path": "results/unified_exact_round94/runner_lpg_contemporary/formal_recovery_v4/cross_arm_B50_2.json",
+      "sha256": "5bed1e4d735ef625366bc4a5c9300a4978b2007a9401090ef8bd72d7fe7d77c7",
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round94/runner_lpg_contemporary/formal_recovery_v4/cross_arm_B50_3.json",
+      "sha256": "64a86e184127ece84897849b8d68944b0f3f352f8965c1d21fde4dc33ca62dca",
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round94/runner_lpg_contemporary/formal_recovery_v4/cross_arm_C20_2.json",
+      "sha256": "1cb88bd864f136e918318969e683cfccaca6533f7095b8f471a74b88db260d83",
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round94/runner_lpg_contemporary/formal_recovery_v4/cross_arm_C20_3.json",
+      "sha256": "c84062a2ef927310b0c182885ef40380cceb917764efed18547b5613e5c0abdd",
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round94/runner_lpg_contemporary/formal_recovery_v4/cross_arm_F2_3.json",
+      "sha256": "8b0b02e0f6f3cbd7e81d487eeccfe7595814e25443b0419c84917c6f6cab3530",
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round94/runner_lpg_contemporary/formal_recovery_v4/cross_arm_U6_2.json",
+      "sha256": "bae29d8274a659df9993c08814add5aae6a463f97e8ab582825453af49606c45",
+      "passed": true
+    },
+    {
+      "path": "results/unified_exact_round94/runner_lpg_contemporary/formal_recovery_v4/cross_arm_U6_3.json",
+      "sha256": "079905bd3733378f66bba6c9f1fbc13a49141369410198741afc221892148af6",
+      "passed": true
+    }
+  ],
+  "role_comparisons": [
+    {
+      "role": "F2",
+      "LP_G_over_ENS_C_time_ratio_if_both_certified": 0.5369626928057656,
+      "LP_G_minus_ENS_C_seconds": -252.01500000013039,
+      "LP_G_minus_ENS_C_U": 0.0,
+      "LP_G_minus_ENS_C_gap": 3.390205338682506e-09,
+      "LP_G_minus_P_GRB_U": 0.0
+    },
+    {
+      "role": "C20",
+      "LP_G_over_ENS_C_time_ratio_if_both_certified": 1.1305909363711193,
+      "LP_G_minus_ENS_C_seconds": 41.12399999983609,
+      "LP_G_minus_ENS_C_U": 0.0,
+      "LP_G_minus_ENS_C_gap": -3.461462810827598e-09,
+      "LP_G_minus_P_GRB_U": -2.7755575615628914e-17
+    },
+    {
+      "role": "B50",
+      "LP_G_over_ENS_C_time_ratio_if_both_certified": 0.6688288975799869,
+      "LP_G_minus_ENS_C_seconds": -354.1100000003353,
+      "LP_G_minus_ENS_C_U": 0.0,
+      "LP_G_minus_ENS_C_gap": 5.357473353839737e-10,
+      "LP_G_minus_P_GRB_U": -0.017394836356359522
+    },
+    {
+      "role": "U6",
+      "LP_G_over_ENS_C_time_ratio_if_both_certified": null,
+      "LP_G_minus_ENS_C_seconds": -0.030999999959021807,
+      "LP_G_minus_ENS_C_U": 0.0025158237210655965,
+      "LP_G_minus_ENS_C_gap": 0.0026493691444106904,
+      "LP_G_minus_P_GRB_U": -0.060140291717492966
+    }
+  ],
+  "formal_cost": {
+    "original_outer_seconds": 1442.5685015,
+    "continuation_outer_seconds": 8747.7039135,
+    "combined_outer_seconds": 10190.272415,
+    "original_process_seconds": 1441.4370000003837,
+    "continuation_process_seconds": 8733.422999999952,
+    "all_twelve_process_seconds": 10174.860000000335
+  },
+  "preserved_paid_prefix_processes": 2,
+  "new_native_processes": 10,
+  "not_run": []
+}

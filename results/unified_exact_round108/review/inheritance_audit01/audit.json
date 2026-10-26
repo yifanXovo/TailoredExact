@@ -1,0 +1,612 @@
+{
+  "reviewer": "/root/independent_admission",
+  "layer": "INDEPENDENT_ZERO_SOLVER_INHERITANCE_AUDIT",
+  "R100_frozen_production_commit": "b5d6d83bb8fc74682de6f1f6862c2e687712f4cf",
+  "R107_delivery_commit": "b5db3f038f64215766a54498d8acc82e384de733",
+  "source_comparisons": {
+    "src/CplexBaseline.cpp": {
+      "R100_commit_sha256": "9a230e48f9c6f5179d5760c216fd39774579e268c762aea4fe089efd076ea65c",
+      "R107_commit_sha256": "9a230e48f9c6f5179d5760c216fd39774579e268c762aea4fe089efd076ea65c",
+      "current_worktree_sha256": "9a230e48f9c6f5179d5760c216fd39774579e268c762aea4fe089efd076ea65c",
+      "R100_R107_exact_blob_equal": true
+    },
+    "include/CplexBaseline.hpp": {
+      "R100_commit_sha256": "8be5e2e67ac908820f4fe04775bac315f271eab9a12e6a022bfb9ae9f2c9cd78",
+      "R107_commit_sha256": "8be5e2e67ac908820f4fe04775bac315f271eab9a12e6a022bfb9ae9f2c9cd78",
+      "current_worktree_sha256": "8be5e2e67ac908820f4fe04775bac315f271eab9a12e6a022bfb9ae9f2c9cd78",
+      "R100_R107_exact_blob_equal": true
+    },
+    "include/Round98StateService.hpp": {
+      "R100_commit_sha256": "5b202a5db205941cde679ab967508546a171e5846de79dbc8454591a76f126e7",
+      "R107_commit_sha256": "5b202a5db205941cde679ab967508546a171e5846de79dbc8454591a76f126e7",
+      "current_worktree_sha256": "5b202a5db205941cde679ab967508546a171e5846de79dbc8454591a76f126e7",
+      "R100_R107_exact_blob_equal": true
+    },
+    "src/MipStartMapping.cpp": {
+      "R100_commit_sha256": "f8e7d7412613a390d821145fb7f7c54f4d98bf201c84c76d2dfbf5737ba90873",
+      "R107_commit_sha256": "f8e7d7412613a390d821145fb7f7c54f4d98bf201c84c76d2dfbf5737ba90873",
+      "current_worktree_sha256": "f8e7d7412613a390d821145fb7f7c54f4d98bf201c84c76d2dfbf5737ba90873",
+      "R100_R107_exact_blob_equal": true
+    },
+    "src/Evaluator.cpp": {
+      "R100_commit_sha256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+      "R107_commit_sha256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+      "current_worktree_sha256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+      "R100_R107_exact_blob_equal": true
+    },
+    "src/ControllingLeafScheduler.cpp": {
+      "R100_commit_sha256": "6bbc7e773355bac11e2fb60d9ec4641d57eedd7baf29c38de6eba3cde3674303",
+      "R107_commit_sha256": "6bbc7e773355bac11e2fb60d9ec4641d57eedd7baf29c38de6eba3cde3674303",
+      "current_worktree_sha256": "6bbc7e773355bac11e2fb60d9ec4641d57eedd7baf29c38de6eba3cde3674303",
+      "R100_R107_exact_blob_equal": true
+    },
+    "src/PaperK1AmSf.cpp": {
+      "R100_commit_sha256": "a46dc43c2b0cba21b427d1c38884114e6b68f3e52f6c13493b609aecde702440",
+      "R107_commit_sha256": "a46dc43c2b0cba21b427d1c38884114e6b68f3e52f6c13493b609aecde702440",
+      "current_worktree_sha256": "a46dc43c2b0cba21b427d1c38884114e6b68f3e52f6c13493b609aecde702440",
+      "R100_R107_exact_blob_equal": true
+    },
+    "src/IntervalRowFactory.cpp": {
+      "R100_commit_sha256": "11d739171c660fd3c2761f575a72639da6d8fa57189da0ea5d3afbe3a319fa46",
+      "R107_commit_sha256": "11d739171c660fd3c2761f575a72639da6d8fa57189da0ea5d3afbe3a319fa46",
+      "current_worktree_sha256": "11d739171c660fd3c2761f575a72639da6d8fa57189da0ea5d3afbe3a319fa46",
+      "R100_R107_exact_blob_equal": true
+    },
+    "include/CanonicalCompactModel.hpp": {
+      "R100_commit_sha256": "626b4f7319022e79873c9e5607586fc97c1a7a8a6ee887e92a0973ff82358bfd",
+      "R107_commit_sha256": "626b4f7319022e79873c9e5607586fc97c1a7a8a6ee887e92a0973ff82358bfd",
+      "current_worktree_sha256": "626b4f7319022e79873c9e5607586fc97c1a7a8a6ee887e92a0973ff82358bfd",
+      "R100_R107_exact_blob_equal": true
+    },
+    "include/PhysicalWitnessValidation.hpp": {
+      "R100_commit_sha256": "b26e544483a3297259aa77a2f4f420878e7f42eb5f469bfd6beee64cd7585010",
+      "R107_commit_sha256": "b26e544483a3297259aa77a2f4f420878e7f42eb5f469bfd6beee64cd7585010",
+      "current_worktree_sha256": "b26e544483a3297259aa77a2f4f420878e7f42eb5f469bfd6beee64cd7585010",
+      "R100_R107_exact_blob_equal": true
+    },
+    "src/PhysicalWitnessValidation.cpp": {
+      "R100_commit_sha256": "0004bd96cad2cf70ad1bf56826ed632b2e6927209e4d172c6526889d610ad678",
+      "R107_commit_sha256": "0004bd96cad2cf70ad1bf56826ed632b2e6927209e4d172c6526889d610ad678",
+      "current_worktree_sha256": "0004bd96cad2cf70ad1bf56826ed632b2e6927209e4d172c6526889d610ad678",
+      "R100_R107_exact_blob_equal": true
+    },
+    "src/main.cpp": {
+      "R100_commit_sha256": "185f2578b3718bfe4cf44377c845b9c622cdfa48dbd2e69134f11768d198c378",
+      "R107_commit_sha256": "66024988f458207920e71ab847dde539d65b9afc9f20ab10812a6a16760dedc4",
+      "current_worktree_sha256": "66024988f458207920e71ab847dde539d65b9afc9f20ab10812a6a16760dedc4",
+      "R100_R107_exact_blob_equal": false
+    },
+    "include/Instance.hpp": {
+      "R100_commit_sha256": "762a860bdfcb87e1b0bb0468d8f8a51443befd272d51e39aac96744a09d0edf0",
+      "R107_commit_sha256": "307d87e7475d1b099f8a9789688c4849e8f72fa87d1ff50807b44b4421ffc08b",
+      "current_worktree_sha256": "307d87e7475d1b099f8a9789688c4849e8f72fa87d1ff50807b44b4421ffc08b",
+      "R100_R107_exact_blob_equal": false
+    },
+    "src/GurobiBaseline.cpp": {
+      "R100_commit_sha256": "605718d91281a386b6672308377e6332b2acff84e99729aabaa7c28d8b507c72",
+      "R107_commit_sha256": "a124605525f7e2310771e9bb73b381c6fa72d89f2b61c221b604ab076add8d39",
+      "current_worktree_sha256": "a124605525f7e2310771e9bb73b381c6fa72d89f2b61c221b604ab076add8d39",
+      "R100_R107_exact_blob_equal": false
+    },
+    "src/PaperExternalGiniTree.cpp": {
+      "R100_commit_sha256": "e2e9bb4f640fa0c84690abbb93206a96b4225d6407f8b5026691386bc02f2d10",
+      "R107_commit_sha256": "55f8fb4107f89c7d6bcfbe2371f671d2c4ce59326f353536ff3781dcbc2ea302",
+      "current_worktree_sha256": "55f8fb4107f89c7d6bcfbe2371f671d2c4ce59326f353536ff3781dcbc2ea302",
+      "R100_R107_exact_blob_equal": false
+    },
+    "include/FixedIntervalMipBackend.hpp": {
+      "R100_commit_sha256": "a7c4690698209b31a900c48c1bacb188d36d2aa34602aef6a1795dc48c757e02",
+      "R107_commit_sha256": "a25338266b31805aae5e822ec0c525ad0e0045f92f8ae3fdd0061adf15298166",
+      "current_worktree_sha256": "a25338266b31805aae5e822ec0c525ad0e0045f92f8ae3fdd0061adf15298166",
+      "R100_R107_exact_blob_equal": false
+    }
+  },
+  "complete_read_files": {
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round100\\final_report.md": {
+      "sha256": "2eb5ea9d92887b04ebb0b87877804b0eaaa7ed9862771b98f448766ec8856fab",
+      "bytes": 13882
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round100\\mathematical_algorithm.md": {
+      "sha256": "c89c8fb345767732bf83362b114ca6d94d7782c465fffeb01a258d901cdd2441",
+      "bytes": 5502
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round100\\candidate_freeze.json": {
+      "sha256": "b34702d12d69d1e6dd59b8a7b39d8ea82d8eb596d0511ee1440857e5212342cc",
+      "bytes": 22107
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round100\\independent_review.md": {
+      "sha256": "a83272281d031e5e0593486813741177394059303ebac18d90ee974ef726ac22",
+      "bytes": 4981
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round100\\complete_results_final\\runs.csv": {
+      "sha256": "fff605a2887869c105192402a935851006db043cd9538a90d38a3d65668ffdb1",
+      "bytes": 13898
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round100\\complete_results_final\\pairs.csv": {
+      "sha256": "67fa0e76ad55009a29f5822bf21067c553b2a0f120889887d63f2cc477aa78ca",
+      "bytes": 8777
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round100\\complete_results_final\\cost_failures.csv": {
+      "sha256": "f37a30219af74952c7629e3a18afb03a29ca25a5e03797c6eeea424f5d4d6596",
+      "bytes": 2967
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round100\\complete_results_final\\summary.json": {
+      "sha256": "905209ce4d67177427b331a606bd55736367db78356deb7af21ab0627314a60d",
+      "bytes": 535
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\scripts\\round100_common.py": {
+      "sha256": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca",
+      "bytes": 2347
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\scripts\\round100_campaign.py": {
+      "sha256": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "bytes": 11142
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\scripts\\round100_run_batch.py": {
+      "sha256": "07b2fae71879b942b7aee01902453db8b0622eb3699755d997736c11c6251144",
+      "bytes": 332
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round106\\confirmation_protocol.json": {
+      "sha256": "0a4a4017ab5cdc68454fb967be66a858161db45d2280580a739b7016a1048150",
+      "bytes": 2710
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round106\\confirmation_generation_recipe.json": {
+      "sha256": "4b98cf8e5649b6ed2cd3e137abd4d244b41fc4d332ec3ff9449590434cfd2b19",
+      "bytes": 1236
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round106\\admission_decision.json": {
+      "sha256": "7baa826e9148b0933e5cc4f1295159b58dc96c6816cbd901f9303c5c8f516af4",
+      "bytes": 3146
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round106\\final_report.md": {
+      "sha256": "acc3029ffd69f10ed09601a6768706d5fee6af4ecb9266a3ec3874cd7e644de5",
+      "bytes": 21107
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\final_report.md": {
+      "sha256": "3e0297a63f505f3a0793ea63ff15e34e2387516dc9406e7e5ceca3584215fd84",
+      "bytes": 12912
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\final_implementation_performance_review.md": {
+      "sha256": "5268b0894d15a2ff09110013def261553095e42dc6879ac3878011e3c498544e",
+      "bytes": 20945
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\delivery_review.md": {
+      "sha256": "277cd62e34e06c18ba80f75862242f8c67146703f78ecbd454400d3753d021d6",
+      "bytes": 2600
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\confirmation_protocol.json": {
+      "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+      "bytes": 3588
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\admission_decision.json": {
+      "sha256": "23c052e9865888a6b5a5dfe6296ac099345c440032f0451762c60e0024ff0754",
+      "bytes": 4955
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\confirmation_cancellation.json": {
+      "sha256": "eb4831dbec34c17fb57a5f2e53a759393b4e6a77072d4a48f3c49021892c2c48",
+      "bytes": 3088
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\reports05\\arm_results.csv": {
+      "sha256": "bcc98ee2af9ecde277858a19fa083ab718cad6dcb193f504f81e23b1fdaa83a9",
+      "bytes": 7536
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\reports05\\controller_AM.csv": {
+      "sha256": "d8f2eecd5bb2808e329541a33d627df7cda14006a22e90c42a5e47719bdbc94c",
+      "bytes": 4847
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\reports05\\requests.csv": {
+      "sha256": "d495fb50e4d69e60f312c3947003fb6399fa660f1ef9105702d4c26a375aeafd",
+      "bytes": 8736
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\reports05\\leaf_obligations.csv": {
+      "sha256": "a870e9790042e1aef80ca33500549da0180dc6ec2795b09a0d60c274fc3a670a",
+      "bytes": 1896
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\reports05\\fees.csv": {
+      "sha256": "fd209f622c8261614844c457a286dd0dd3d1cacca5cf0f4951f8e96c3dd39ed4",
+      "bytes": 1397
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\source_repair_cli03\\confirmation_protocol.json": {
+      "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+      "bytes": 3588
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\source_repair_cli02\\confirmation_protocol.json": {
+      "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+      "bytes": 3588
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\source_final17\\results\\unified_exact_round107\\confirmation_protocol.json": {
+      "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+      "bytes": 3588
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\independent_final17.json": {
+      "sha256": "e81774d7043f7b12d7ba33b670370dc9be824880bd328aef248078cc6864b435",
+      "bytes": 229249
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\final_reports_crosscheck02.json": {
+      "sha256": "87145a2d2e38d1892ad8c51050bd46532e5b73d7735fdd50f529db7273016b30",
+      "bytes": 773990
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\final_reports_crosscheck01.json": {
+      "sha256": "a9970b713e02318bf5d45842ae839ce0859d33b8c1cfe4a911f9d1f444c7d3c8",
+      "bytes": 773990
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\engineering_final17_04\\failure.json": {
+      "sha256": "f4e1129bee6f9d6244d598f6adcf5ca391d18a6d4d122502e0c9e888436ab705",
+      "bytes": 86668
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\engineering_final17_03\\failure.json": {
+      "sha256": "a5ae650c19f6c2c19468a6f414761645f97b91f4a08a5055649bf27e0ded3bdd",
+      "bytes": 85688
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\review\\engineering_final17_02\\failure.json": {
+      "sha256": "acfff3d417906a91504b983b355ebfd0d05ac030733f84c037ebffb91419a14c",
+      "bytes": 66692
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\report_versions\\reports03_finalization01\\confirmation_cancellation.json": {
+      "sha256": "eb4831dbec34c17fb57a5f2e53a759393b4e6a77072d4a48f3c49021892c2c48",
+      "bytes": 3088
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\report_versions\\reports03_finalization01\\admission_decision.json": {
+      "sha256": "cd8db50b830a174b8724bfcb41c86a363c380420fc32be94b40902f4f0673508",
+      "bytes": 4955
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\protocol_history\\preflight01\\confirmation_protocol.json": {
+      "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+      "bytes": 3588
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round107\\compact_evidence\\manifest.json": {
+      "sha256": "208627a0419d2a690d15a2ca70741b2a39c3ca78fa49547dcc0537b0492c2884",
+      "bytes": 16643270
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round106\\compact_evidence\\manifest.json": {
+      "sha256": "8391081b0db0188e108fe4d84a190e518fca541f1b3ed9bcff3c3cf444bcb87e",
+      "bytes": 10566788
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round106\\confirmation_protocol.json": {
+      "sha256": "0a4a4017ab5cdc68454fb967be66a858161db45d2280580a739b7016a1048150",
+      "bytes": 2710
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round106\\compact_evidence\\manifest.json": {
+      "sha256": "8391081b0db0188e108fe4d84a190e518fca541f1b3ed9bcff3c3cf444bcb87e",
+      "bytes": 10566788
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round106\\restoration\\manifest_whole_archive01.json": {
+      "sha256": "8391081b0db0188e108fe4d84a190e518fca541f1b3ed9bcff3c3cf444bcb87e",
+      "bytes": 10566788
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round88\\runner_a1_g3\\identity.json": {
+      "sha256": "82468c3375c06217116bde222158bb647f5571f111ac34f8ab709d7634862d38",
+      "bytes": 77745
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round89\\runner_native_b1_g3\\identity.json": {
+      "sha256": "8c78b54488c9a78a3ffebc0f46954c8c6cfca46383ef4deef5351bf7ae263b87",
+      "bytes": 53605
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round90\\runner_lp_g_g3\\identity.json": {
+      "sha256": "119fc81c0868b6069e229571a01ad9b2c89112ed36bf1938caf376ad6c7c4976",
+      "bytes": 52165
+    },
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round92\\runner_handling_g3\\identity.json": {
+      "sha256": "576c88fa38f08201ec7cfa6be8dc720341f87f9a4a620ab423aa38687929035a",
+      "bytes": 57421
+    }
+  },
+  "sealed_inputs": {
+    "S12": {
+      "path": "reference/round106_confirmation/S12.txt",
+      "sha256": "475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f",
+      "bytes": 842,
+      "first_line": "12 2 [8, 12]"
+    },
+    "N36": {
+      "path": "reference/round106_confirmation/N36.txt",
+      "sha256": "52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea",
+      "bytes": 2212,
+      "first_line": "36 3 [24, 30, 36]"
+    }
+  },
+  "historical_text_scans": [
+    {
+      "root": "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP",
+      "exit_code": 0,
+      "matches": [
+        {
+          "relative_path": "results/unified_exact_round107/review/source_repair_cli03/confirmation_protocol.json",
+          "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+          "bytes": 3588,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/review/source_repair_cli02/confirmation_protocol.json",
+          "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+          "bytes": 3588,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/review/source_final17/results/unified_exact_round107/confirmation_protocol.json",
+          "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+          "bytes": 3588,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/review/independent_final17.json",
+          "sha256": "e81774d7043f7b12d7ba33b670370dc9be824880bd328aef248078cc6864b435",
+          "bytes": 229249,
+          "matching_lines": [
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\N36.txt\": {",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\S12.txt\": {",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/review/final_reports_crosscheck02.json",
+          "sha256": "87145a2d2e38d1892ad8c51050bd46532e5b73d7735fdd50f529db7273016b30",
+          "bytes": 773990,
+          "matching_lines": [
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\N36.txt\": {",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\S12.txt\": {",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/review/final_reports_crosscheck01.json",
+          "sha256": "a9970b713e02318bf5d45842ae839ce0859d33b8c1cfe4a911f9d1f444c7d3c8",
+          "bytes": 773990,
+          "matching_lines": [
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\N36.txt\": {",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\S12.txt\": {",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/review/engineering_final17_04/failure.json",
+          "sha256": "f4e1129bee6f9d6244d598f6adcf5ca391d18a6d4d122502e0c9e888436ab705",
+          "bytes": 86668,
+          "matching_lines": [
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\N36.txt\": {",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\S12.txt\": {",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/review/engineering_final17_03/failure.json",
+          "sha256": "a5ae650c19f6c2c19468a6f414761645f97b91f4a08a5055649bf27e0ded3bdd",
+          "bytes": 85688,
+          "matching_lines": [
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\N36.txt\": {",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\S12.txt\": {",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/review/engineering_final17_02/failure.json",
+          "sha256": "acfff3d417906a91504b983b355ebfd0d05ac030733f84c037ebffb91419a14c",
+          "bytes": 66692,
+          "matching_lines": [
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\N36.txt\": {",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "    \"C:\\\\Users\\\\Administrator\\\\.codex\\\\worktrees\\\\round107-ens-frontier-route-events\\\\ExactEBRP\\\\reference\\\\round106_confirmation\\\\S12.txt\": {",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/report_versions/reports03_finalization01/confirmation_cancellation.json",
+          "sha256": "eb4831dbec34c17fb57a5f2e53a759393b4e6a77072d4a48f3c49021892c2c48",
+          "bytes": 3088,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/report_versions/reports03_finalization01/admission_decision.json",
+          "sha256": "cd8db50b830a174b8724bfcb41c86a363c380420fc32be94b40902f4f0673508",
+          "bytes": 4955,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/protocol_history/preflight01/confirmation_protocol.json",
+          "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+          "bytes": 3588,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/confirmation_protocol.json",
+          "sha256": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+          "bytes": 3588,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/confirmation_cancellation.json",
+          "sha256": "eb4831dbec34c17fb57a5f2e53a759393b4e6a77072d4a48f3c49021892c2c48",
+          "bytes": 3088,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/compact_evidence/manifest.json",
+          "sha256": "208627a0419d2a690d15a2ca70741b2a39c3ca78fa49547dcc0537b0492c2884",
+          "bytes": 16643270,
+          "matching_lines": [
+            "      \"path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\"",
+            "      \"path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\""
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round107/admission_decision.json",
+          "sha256": "23c052e9865888a6b5a5dfe6296ac099345c440032f0451762c60e0024ff0754",
+          "bytes": 4955,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round106/confirmation_protocol.json",
+          "sha256": "0a4a4017ab5cdc68454fb967be66a858161db45d2280580a739b7016a1048150",
+          "bytes": 2710,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round106/compact_evidence/manifest.json",
+          "sha256": "8391081b0db0188e108fe4d84a190e518fca541f1b3ed9bcff3c3cf444bcb87e",
+          "bytes": 10566788,
+          "matching_lines": [
+            "      \"path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\"",
+            "      \"path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\""
+          ]
+        }
+      ]
+    },
+    {
+      "root": "C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP",
+      "exit_code": 0,
+      "matches": [
+        {
+          "relative_path": "results/unified_exact_round106/confirmation_protocol.json",
+          "sha256": "0a4a4017ab5cdc68454fb967be66a858161db45d2280580a739b7016a1048150",
+          "bytes": 2710,
+          "matching_lines": [
+            "      \"input_path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"input_sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\",",
+            "      \"input_path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"input_sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\","
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round106/compact_evidence/manifest.json",
+          "sha256": "8391081b0db0188e108fe4d84a190e518fca541f1b3ed9bcff3c3cf444bcb87e",
+          "bytes": 10566788,
+          "matching_lines": [
+            "      \"path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\"",
+            "      \"path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\""
+          ]
+        },
+        {
+          "relative_path": "results/unified_exact_round106/restoration/manifest_whole_archive01.json",
+          "sha256": "8391081b0db0188e108fe4d84a190e518fca541f1b3ed9bcff3c3cf444bcb87e",
+          "bytes": 10566788,
+          "matching_lines": [
+            "      \"path\": \"reference/round106_confirmation/N36.txt\",",
+            "      \"sha256\": \"52d7e43a1cc3717cfe7183b302212c7ef0a4e81f3e62642c4fe8f83c546e6fea\"",
+            "      \"path\": \"reference/round106_confirmation/S12.txt\",",
+            "      \"sha256\": \"475763e70a2dc3b9d28a88028378e76946cbebf33aa7b7e5b033e018dd13369f\""
+          ]
+        }
+      ]
+    },
+    {
+      "root": "E:\\codes\\ExactEBRP",
+      "exit_code": 1,
+      "matches": []
+    }
+  ],
+  "different_old_S12_aliases": [
+    {
+      "round": "88",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round88\\runner_a1_g3\\identity.json",
+      "S12_launch_count": 3,
+      "input_identities": [
+        [
+          "reference/citibike443-regional-v1/instances/V12/cb443_V12_regional_r1_surplus_M01_Q30.txt",
+          "060ee6366b2277c8427675e1a1484de7db10d2ef82a64d4e2ffa6e4695b7b626"
+        ]
+      ]
+    },
+    {
+      "round": "89",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round89\\runner_native_b1_g3\\identity.json",
+      "S12_launch_count": 2,
+      "input_identities": [
+        [
+          "reference/citibike443-regional-v1/instances/V12/cb443_V12_regional_r1_surplus_M01_Q30.txt",
+          "060ee6366b2277c8427675e1a1484de7db10d2ef82a64d4e2ffa6e4695b7b626"
+        ]
+      ]
+    },
+    {
+      "round": "90",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round90\\runner_lp_g_g3\\identity.json",
+      "S12_launch_count": 2,
+      "input_identities": [
+        [
+          "reference/citibike443-regional-v1/instances/V12/cb443_V12_regional_r1_surplus_M01_Q30.txt",
+          "060ee6366b2277c8427675e1a1484de7db10d2ef82a64d4e2ffa6e4695b7b626"
+        ]
+      ]
+    },
+    {
+      "round": "92",
+      "path": "C:\\Users\\Administrator\\.codex\\worktrees\\round107-ens-frontier-route-events\\ExactEBRP\\results\\unified_exact_round92\\runner_handling_g3\\identity.json",
+      "S12_launch_count": 2,
+      "input_identities": [
+        [
+          "reference/citibike443-regional-v1/instances/V12/cb443_V12_regional_r1_surplus_M01_Q30.txt",
+          "060ee6366b2277c8427675e1a1484de7db10d2ef82a64d4e2ffa6e4695b7b626"
+        ]
+      ]
+    }
+  ],
+  "input_commit_history": [
+    "8a2af86155fa2ef206d8d5156a9efc14d0acb102 Implement uniform structural conflicts at single-master integer candidate events"
+  ],
+  "R106_confirmation_actual_formal_arms": 0,
+  "R107_confirmation_actual_native_processes": 0,
+  "R107_confirmation_actual_Optimize": 0,
+  "current_PE_performance_admission": "PENDING_ACTUAL_PE_CLI_QUALIFICATION_AND_PROTOCOL",
+  "limits": "Exact SHA/path historical text scans plus full retained records; archives are indexed through public manifests and no public-only restore or engine rerun is claimed here."
+}

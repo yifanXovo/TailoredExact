@@ -1,0 +1,41 @@
+{
+  "batch_sha256": "517e6d79827cdbb75b94ec98dcf5b4c0c724fc738cfa1bc7448c8b4c67d57550",
+  "queue_sha256": "4e9ade17d85a7130d8e6697dd8e6598ae12d649e9ebb422511b0add5d59d3166",
+  "acknowledgement_sha256": "b098d498a65f5c287cbc4557637f97adf6fdfd8c1c3aaf918465320c30c9b69b",
+  "helper_hashes": {
+    "scripts/analyze_round61.py": "2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861",
+    "scripts/generate_citibike443_regional_v1.py": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+    "scripts/round61_research.py": "088b5a4c4626b528658e403e163958074676f4ea8b58ed8548a54f4727c18571",
+    "scripts/round70_affinity.py": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+    "scripts/round73_qualify.py": "b4428f5a42b2e58d8ca6c84fbb5d28ae1c678f8f41e9bdbba4f6954c01e88efd",
+    "scripts/round73_seed_diagnostic.py": "3263595bf7ddda4472d6c519b136faec7b3f9d4ab4e3009bb5bf108d9cc0e3c8",
+    "scripts/round75_qualify.py": "c82f757cde7e0915f097749925e54e19cf9e9d0c483ada6d9654439ce580232f",
+    "scripts/round75_startup.py": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+    "scripts/round76_qualify.py": "c56ab8d49cd664d1433d5dfa0fbe2670ccc390a05ea3a2abd60e479ba26dca72",
+    "scripts/round76_startup.py": "993c448dd466d5288ed61003ac339c63002452c86737c9d7ee46457b56e6f929",
+    "scripts/round78_audit.py": "57f4aa7ba6d1b0c20d95779c08d27fd4f1d25164cbbe26ca2a0ae7c090fa58ea",
+    "scripts/round83_audit_v2.py": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+    "scripts/round86_native_evidence.py": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+    "scripts/round88_a1_g3.py": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+    "scripts/round90_lp_g_g3.py": "da04cf7481dd6f1841383a9390059297a0db51c4ce509a449d5c71725e38b1fe",
+    "scripts/round94_lpg_contemporary.py": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a",
+    "scripts/round94_lpg_formal_recovery_v3.py": "7d54f6bfd2a0fec302b7cdf5d0291809254ea1ffdbc864face54ecc704b7ce01",
+    "scripts/round96_external.py": "4d8f917ce46aa0945319d69e8001006a7cb039ff4a274844e53c6774eeb5d57e",
+    "scripts/round96_prepare.py": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+    "scripts/round97_build.py": "6bd89266b7e8ab43811c07121d0bfdb5535ed147bd49408891b1ce589ed2501c",
+    "scripts/round97_campaign_v2.py": "e1623526f8824715454e209178d172310665e87f061153d2fc439ef4917e1086",
+    "scripts/round97_continue_development02.py": "4e9ade17d85a7130d8e6697dd8e6598ae12d649e9ebb422511b0add5d59d3166",
+    "scripts/round97_development_v2.py": "2f2360ad25b4d7e7a974fe8c000c9de8c62c8b0151ecd878d41c675727724138",
+    "scripts/round97_vector_audit.py": "ff505629a85dea69b9f2eb4eb590a42ab23ec492a75a728071b6123dca65a575"
+  },
+  "vector_checker_sha256": "ff505629a85dea69b9f2eb4eb590a42ab23ec492a75a728071b6123dca65a575",
+  "completed_prefix": 7,
+  "new_launch_numbers": [
+    8,
+    9,
+    10
+  ],
+  "maximum_new_starts": 3,
+  "maximum_new_process_seconds": 5400,
+  "policy": "Preserve acknowledged interrupted arm5 without rerun; only original registered unstarted arms. Stop on any further failure or interruption."
+}

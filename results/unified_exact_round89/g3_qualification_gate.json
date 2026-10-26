@@ -1,0 +1,64 @@
+{
+  "schema": "round89-native-b1-g3-qualification-gate-v1",
+  "authorized_by": "root",
+  "qualified": true,
+  "allow_prepare": true,
+  "allow_optimize": true,
+  "prereg_sha256": "e9e3acf8f901d4d6b355f39fadb17ecd869907aee357ac872d6048c52ccf99bf",
+  "runner_sha256": "c13162f93ce3c616cc3e97379bef0012093d4be08fec649fde2d14f9bd3473c8",
+  "source_commit": "946cec5e61643964b9aa8122700e041615e67b56",
+  "candidate_binary_sha256": "8d5f0ad4a3cf588875a6a3b8ac67c5bdbb2b2df54a5fd49bea56de2034a17e8d",
+  "qualification_receipt_path": "results/unified_exact_round89/qualification_003/native_toy_receipt.json",
+  "qualification_receipt_sha256": "8b55f0d2d67026b935798802615c981f12a0ae84928962232912b312986f7280",
+  "independent_review_path": "results/unified_exact_round89/qualification_003_independent_review.md",
+  "independent_review_sha256": "e84f1a3a5d4fd9a4ed8d57cfc2df5d78a4b7d096a0a4d28bfc0b25ce562118b7",
+  "source_hashes": [
+    {
+      "path": "include/NativeOtB1.hpp",
+      "sha256": "bd64c92a83d109c602dbb31bd10bbba524db857bb357fee6ba26c7d8da3df0eb"
+    },
+    {
+      "path": "src/NativeOtB1.cpp",
+      "sha256": "e4722c675c6470d85f369a80304adace4403b61c579d95c6ff62594b8576ef0b"
+    },
+    {
+      "path": "src/GurobiBaseline.cpp",
+      "sha256": "b12aa28adae1792b3ba7d3f75cedfec3ffc926410fe9a0f6daa0784b192a0eab"
+    },
+    {
+      "path": "include/Instance.hpp",
+      "sha256": "fd081f82b114fe2bc5c9a23d08f50c50977c148ef7406b2c536f88757f4bd720"
+    },
+    {
+      "path": "include/FixedIntervalMipBackend.hpp",
+      "sha256": "7c0f5e30752c64893cacfdb710930a72f477bef0928d5c89fb3ed0246d77756c"
+    },
+    {
+      "path": "src/main.cpp",
+      "sha256": "bde69286c291d74abb719e9f266cb994133319fdfa3b5d5c71478d9ef92c7e20"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "eda744ecf2bdacfd596a2e1f6686209ab1288bcd632dc9a815e8b7b743020fb7"
+    },
+    {
+      "path": "tests/round89_native_ot_b1_micro.cpp",
+      "sha256": "7669dd38992d238737b5a6d0e5f8a042e0458b5036d8bab070ca1dc29fbcd279"
+    },
+    {
+      "path": "tests/round89_native_ot_b1_fraction_oracle.py",
+      "sha256": "c772ea7a25f43f5027298e14f42a7ff32681ae17a71291a894b1ac8bb4926caf"
+    }
+  ],
+  "harness_hashes": {
+    "affinity": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+    "audited_runner_utilities": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+    "exchange_reader": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+    "input_identity_audit": "133e5f159385c21f8bc130e24f8ea3acd31f3643b3abbe5182edda4cd30a6ff6",
+    "native_evidence_reader": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+    "normalizer": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+    "physical_reader": "2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861",
+    "runner": "c13162f93ce3c616cc3e97379bef0012093d4be08fec649fde2d14f9bd3473c8"
+  },
+  "scope": "Toy API and actual backend integration passed; stage-specific bounded-screen leases required; no promotion or broad long campaign."
+}

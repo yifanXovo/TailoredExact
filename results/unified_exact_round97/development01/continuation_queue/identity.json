@@ -1,0 +1,13 @@
+{
+  "watched_launcher_pid": 45428,
+  "inherited_batch_sha256": "8d819b6d94147736e3f1f5fc7e98d79922eb17a8d1e237c782b7fe048a14653d",
+  "queue_sha256": "c30cdeb1714dc2ae13fd31c0ab3016fd5d9df9fb6a2b9c785a278e025e37fcca",
+  "vector_checker_sha256": "ff505629a85dea69b9f2eb4eb590a42ab23ec492a75a728071b6123dca65a575",
+  "new_launch_numbers": [
+    3,
+    4
+  ],
+  "maximum_new_starts": 2,
+  "maximum_new_process_seconds": 7200,
+  "policy": "Wait for exact live arm2 launcher; require successful full prefix; audit retained vectors only while idle; run only registered arms3/4; stop on any failure; no restart or extension."
+}

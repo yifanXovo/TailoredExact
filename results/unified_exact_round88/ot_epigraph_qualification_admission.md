@@ -1,0 +1,15 @@
+# Sparse OT epigraph: executable qualification admission
+
+Root has read the final independent static review and independently matched script SHA256 `5d49c3fc12cc806a8008e43d756bf9c46810b21e7efc2b64c2383da4624bd7da` and test SHA256 `2be3e3e51333e29fcfa3b52c17f90ce4603603dd2032979191fb96a1624913ab`. The completed OT archive owner explicitly released the computation slot, and root's package verification and Git upload have also ended. The evidence/model worker now exclusively owns qualification computation; no competing tests, solver, build or compression may run.
+
+Authorize once, with all original logs and complete outside launch-to-exit receipts in a new `ot_epigraph_qualification` directory:
+
+1. The entire current pure microtest suite, including the malformed-child-receipt and B2 full-prefix additions. No real-source Optimize.
+2. A separately recorded actual Gurobi API/count/residual toy for B1 and B2, two Optimize calls total. Use two stations with support {0,1}, selectors (1/2,1/2), G=1/2, and opposite perspective masses q_1=(0,1/2), q_2=(1/2,0), with a=0,b=1 and h minimized. Direct CDF calculation independently gives B1 minimum 0 and B2 minimum 1. Keep original toy variables, zero-objective auxiliaries, exact predicted/actual new row-column-NZ counts, both LP files, logs, primal and residual evidence. This is a hand-computable algebra/API check, not an original ENS instance.
+3. One actual Windows child/grandchild deadline-cleanup check of the production Job/wait boundary, preserving its receipt. It must perform no solver work. Reuse already-qualified unchanged primitives, without a new production timeout strategy.
+4. The three frozen real source LP/input/support/domain/structure audits with zero Optimize calls, comparing their actual identities and model dimensions to the qualified original manifests. Record real-source Optimize count explicitly as zero.
+5. One separately timed `prepare-supervise` invocation for the proposed six-arm manifest, recording the full external command cost as well as its nested preparation cost. Do not add these nested times twice.
+
+The qualification driver or toy can be added as an explicitly named new evidence helper; preserve it with the commands and results. No changes to frozen production, historical diagnostic or current admitted epigraph sources are authorized silently. A test/API/identity/residual/cleanup failure stops qualification, retains the failed attempt and reports its cause before a new frozen qualification decision. Do not repeat successful unchanged checks without a concrete reason.
+
+After qualification, request independent xhigh review of the actual receipts with `followup_task`, report final hashes, full costs and counts, verify no descendants remain and explicitly release the computation slot. Root alone commits. This admission permits exactly two isolated toy Optimize calls and **zero real-source Optimize calls**. The six actual epigraph arms require a later root decision and distinct signed lease.

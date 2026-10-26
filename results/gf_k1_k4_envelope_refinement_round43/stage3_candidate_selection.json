@@ -1,0 +1,32 @@
+{
+  "all_rows_same_frozen_executable": true,
+  "executable_sha256": "52fa775e9be5d3b37686d95aaffc3d965d107ae7a3692dd1a9521df3d5877fe1",
+  "holdout_opened": false,
+  "mechanism_row_count": 24,
+  "round_id": 43,
+  "schema": "round43-stage3-candidate-selection-v1",
+  "selected_K1": {
+    "K0": 1,
+    "d": 2,
+    "envelope": "single",
+    "rho": 0.1,
+    "score": "d"
+  },
+  "selected_K4": {
+    "K0": 4,
+    "d": 2,
+    "envelope": "single",
+    "rho": 0.1,
+    "score": "d"
+  },
+  "selection_order": [
+    "correctness",
+    "certificate count and final gap",
+    "major severe-regression witness",
+    "strongest K4 control",
+    "worst mechanism Work",
+    "aggregate Work",
+    "aggregate time"
+  ],
+  "validation_opened": false
+}

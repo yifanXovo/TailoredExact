@@ -1,0 +1,9 @@
+# Primary sources and scope
+
+[Erdoğan, Battarra and Wolfler Calvo (2015), author institution record](https://researchportal.bath.ac.uk/en/publications/an-exact-algorithm-for-the-static-rebalancing-problem-arising-in-/) concerns exact static bicycle rebalancing with repeated visits and temporary storage. This project's single nonzero service and variable inventory/Gini semantics differ. R102 does not replace its engine with that route algorithm or claim a new branch-and-cut framework.
+
+[Galli and Letchford (2024), On upper bounds for the multiple knapsack assignment problem](https://www.lancaster.ac.uk/people/letchfoa/articles/mkap-bounds.pdf) discusses continuous, surrogate and DP upper bounds for class-assigned knapsacks. Its item-class/knapsack choices differ from this BRP's quantity/direction/visit choices. Exact DP and resource relaxations are familiar bounding tools; a larger necessary set must supply a maximum upper bound, never merely a feasible allocation profit.
+
+[Gurobi C callbacks](https://docs.gurobi.com/projects/optimizer/en/current/reference/c/callback.html), [callback codes](https://docs.gurobi.com/projects/optimizer/en/current/reference/numericcodes/callbacks.html) and [global validity requirement](https://support.gurobi.com/hc/en-us/articles/360013197472-Can-I-add-locally-valid-constraints-in-Gurobi-MIP) define optimal-node relaxation access, GRBcbcut and original-column translation/PreCrush requirements. Locally valid constraints cannot be callback user cuts. API success and mathematical validity remain distinct from retention and net solving value.
+
+These sources were consulted during this round. Historical repository proofs, particularly R62's service projection and R101's imported-model guards, remain the direct implementation references. No generalized novelty or domination claim follows from citing these sources.

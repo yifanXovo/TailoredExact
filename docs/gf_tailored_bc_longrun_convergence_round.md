@@ -30,3 +30,5 @@ Moderate low-Gini leaf 2 closes at the 1200s paced callback setting. Moderate lo
 The additional hard leaves `high_imbalance_seed3201_hard`, `tight_T_seed3102_hard`, and `moderate_seed3302_hard` close in the short fixed-interval tests; they do not expose the same long-run bottleneck as `moderate_seed3301_low_gini_1`.
 
 Control rows in this package are diagnostic 60s reruns. They are not claimed as replacement certificates because the worker cap produced wrapper checkpoint rows rather than audited full-frontier final certificates.
+> Historical round record. Its paper-facing designation is superseded by
+> K1-AM-SF (`paper-k1-am-sf`).

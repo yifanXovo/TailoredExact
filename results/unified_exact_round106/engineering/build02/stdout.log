@@ -1,0 +1,364 @@
+[0/1] Re-running CMake...
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/build/research/round106-events-v1
+[1/8] Building CXX object CMakeFiles/Round106Tests.dir/tests/round106_tests.cpp.obj
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/tests/round106_tests.cpp: In function 'double shortestLegal(const ebrp::Instance&, const ebrp::Round105Pattern&)':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/tests/round106_tests.cpp:27:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   27 |             if(load<0||load>in.Q[p.vehicle])valid=false;t+=in.dist[last][s];last=s;}
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/tests/round106_tests.cpp:27:57: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   27 |             if(load<0||load>in.Q[p.vehicle])valid=false;t+=in.dist[last][s];last=s;}
+      |                                                         ^
+[2/8] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/GurobiBaseline.cpp.obj
+In file included from C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:1827:
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round103GurobiHull.inc: In member function 'virtual void ebrp::{anonymous}::GurobiFixedIntervalBackend::prepareResourceHull(ebrp::FixedIntervalMipRequest&)':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round103GurobiHull.inc:69:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   69 |             if(!name)throw std::runtime_error("round103_column_name");identity.names[j]=name;}
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round103GurobiHull.inc:69:71: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   69 |             if(!name)throw std::runtime_error("round103_column_name");identity.names[j]=name;}
+      |                                                                       ^~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round103GurobiHull.inc: In lambda function:
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round103GurobiHull.inc:130:21: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  130 |                     if(!m.optimal)return m;m.lambda.resize(added);m.direction.resize(n,{0,0,0});std::vector<double> dual(constraints);
+      |                     ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round103GurobiHull.inc:130:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  130 |                     if(!m.optimal)return m;m.lambda.resize(added);m.direction.resize(n,{0,0,0});std::vector<double> dual(constraints);
+      |                                            ^
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round103GurobiHull.inc:133:21: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+  133 |                     for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(widths[i][t])m.direction[i][t]=(dual[lower[i][t]]+dual[upper[i][t]])/widths[i][t];return m;
+      |                     ^~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round103GurobiHull.inc:133:154: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+  133 |                     for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(widths[i][t])m.direction[i][t]=(dual[lower[i][t]]+dual[upper[i][t]])/widths[i][t];return m;
+      |                                                                                                                                                          ^~~~~~
+In file included from C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:1828:
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc: In member function 'virtual void ebrp::{anonymous}::GurobiFixedIntervalBackend::prepareObjectiveResources(ebrp::FixedIntervalMipRequest&)':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc:69:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   69 |             if(!name)throw std::runtime_error("round104_column_name");identity.names[j]=name;}
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc:69:71: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   69 |             if(!name)throw std::runtime_error("round104_column_name");identity.names[j]=name;}
+      |                                                                       ^~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc: In lambda function:
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc:139:21: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  139 |                     if(!m.optimal)return m;m.lambda.resize(added);m.direction.resize(n,{0,0,0});std::vector<double> dual(constraints);
+      |                     ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc:139:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  139 |                     if(!m.optimal)return m;m.lambda.resize(added);m.direction.resize(n,{0,0,0});std::vector<double> dual(constraints);
+      |                                            ^
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc:142:21: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+  142 |                     for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(widths[i][t])m.direction[i][t]=(dual[lower[i][t]]+dual[upper[i][t]])/widths[i][t];return m;
+      |                     ^~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc:142:154: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+  142 |                     for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(widths[i][t])m.direction[i][t]=(dual[lower[i][t]]+dual[upper[i][t]])/widths[i][t];return m;
+      |                                                                                                                                                          ^~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc: In member function 'virtual void ebrp::{anonymous}::GurobiFixedIntervalBackend::prepareObjectiveResources(ebrp::FixedIntervalMipRequest&)':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc:193:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  193 |                 if(pi[j]>0)++positive_pi;if(pi[j]<0)active.push_back(pool_rows[j]);}
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round104GurobiObjective.inc:193:42: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  193 |                 if(pi[j]>0)++positive_pi;if(pi[j]<0)active.push_back(pool_rows[j]);}
+      |                                          ^~
+In file included from C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:4196:
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc: In member function 'ebrp::SolverNeutralModelDomain ebrp::{anonymous}::R105Session::domain(GRBmodel*)':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:72:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   72 |             if (!name) throw std::runtime_error("round105_missing_column");d.names[i]=name; }
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:72:76: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   72 |             if (!name) throw std::runtime_error("round105_missing_column");d.names[i]=name; }
+      |                                                                            ^
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc: In member function 'int ebrp::{anonymous}::R105Session::optimize(GRBmodel*, const std::string&, const std::filesystem::__cxx11::path&)':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:106:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  106 |         if(b) calls<<bound;calls<<',';if(o)calls<<objective;
+      |         ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:106:28: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  106 |         if(b) calls<<bound;calls<<',';if(o)calls<<objective;
+      |                            ^~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc: In member function 'ebrp::Round105OracleResult ebrp::{anonymous}::R105Session::oracle(const ebrp::Round105Pattern&, const std::filesystem::__cxx11::path&, bool)':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:150:21: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  150 |                     if(next!=-1)throw std::runtime_error("round105_oracle_ambiguous_arc");next=j;
+      |                     ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:150:91: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  150 |                     if(next!=-1)throw std::runtime_error("round105_oracle_ambiguous_arc");next=j;
+      |                                                                                           ^~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:153:21: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+  153 |                     else throw std::runtime_error("round105_oracle_open_route");break; }
+      |                     ^~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:153:81: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+  153 |                     else throw std::runtime_error("round105_oracle_open_route");break; }
+      |                                                                                 ^~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:205:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  205 |                 if(i<1 || i>in.V)throw std::runtime_error("round105_iis_bad_station");groups.insert(i);
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:205:87: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  205 |                 if(i<1 || i>in.V)throw std::runtime_error("round105_iis_bad_station");groups.insert(i);
+      |                                                                                       ^~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc: In function 'ebrp::SolveResult ebrp::{anonymous}::r105Solve(const ebrp::Instance&, const ebrp::SolveOptions&, const ebrp::SolveResult&, ebrp::SolveResult&)':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:347:32: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  347 |                 if(z){++served;if(pick!=std::max(0,in.initial[i]-inventory[i]) || drop!=std::max(0,inventory[i]-in.initial[i]))
+      |                                ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:348:87: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  348 |                     throw std::runtime_error("round105_inventory_operation_mismatch");p[k].operation[i]=pick-drop;}
+      |                                                                                       ^
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:381:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  381 |             if(!cuts)throw std::runtime_error("round105_conflict_persist_failed");cut=true;
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round105GurobiDecomposition.inc:381:83: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  381 |             if(!cuts)throw std::runtime_error("round105_conflict_persist_failed");cut=true;
+      |                                                                                   ^~~
+In file included from C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:4197:
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round106GurobiEvents.inc: In member function 'void ebrp::{anonymous}::R106State::candidate(GRBmodel*, void*)':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round106GurobiEvents.inc:163:32: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  163 |                 if(z){++served;if(p!=std::max(0,in.initial[i]-inventory[i])||d!=std::max(0,inventory[i]-in.initial[i]))
+      |                                ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round106GurobiEvents.inc:164:86: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  164 |                     throw std::runtime_error("round106_inventory_operation_mapping");cars[k].operation[i]=p-d;}
+      |                                                                                      ^~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round106GurobiEvents.inc:223:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  223 |                 if(cuts.empty())throw std::runtime_error("round106_proved_mode_without_raw_violated_lazy");break;
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round106GurobiEvents.inc:223:108: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  223 |                 if(cuts.empty())throw std::runtime_error("round106_proved_mode_without_raw_violated_lazy");break;
+      |                                                                                                            ^~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round106GurobiEvents.inc:238:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  238 |             if(!lazy)throw std::runtime_error("round106_lazy_ledger_persist_failed");++rejected;
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round106GurobiEvents.inc:238:86: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  238 |             if(!lazy)throw std::runtime_error("round106_lazy_ledger_persist_failed");++rejected;
+      |                                                                                      ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round106GurobiEvents.inc:240:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  240 |             if(expired())cancel(master,"global_deadline_after_valid_rejection");return;
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/Round106GurobiEvents.inc:240:81: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  240 |             if(expired())cancel(master,"global_deadline_after_valid_rejection");return;
+      |                                                                                 ^~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv**, const char*, int, int, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:216:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv**, const char*, int, int, int)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv**, int, int, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:217:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv**, int, int, int)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:218:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = void (*)(_GRBenv*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:219:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(_GRBenv*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = const char* (*)(_GRBenv*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:220:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'const char* (*)(_GRBenv*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = void (*)(int*, int*, int*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:221:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(int*, int*, int*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, _GRBmodel**); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:222:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, _GRBmodel**)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, _GRBmodel**, const char*, int, double*, double*, double*, char*, char**); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:223:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, _GRBmodel**, const char*, int, double*, double*, double*, char*, char**)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int, int*, double*, double, double, double, char, const char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:224:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int, int*, double*, double, double, double, char, const char*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:225:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = _GRBenv* (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:226:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to '_GRBenv* (*)(_GRBmodel*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:227:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, int)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, double); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:228:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, double)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, const char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:229:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, const char*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, int*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:230:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, int*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, double*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:231:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, double*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int (*)(_GRBmodel*, void*, int, void*), void*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:232:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int (*)(_GRBmodel*, void*, int, void*), void*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(void*, int, int, void*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:233:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, int, int, void*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(void*, const double*, double*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:234:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, const double*, double*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(void*, int, const int*, const double*, char, double); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:235:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, int, const int*, const double*, char, double)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = void (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:237:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(_GRBmodel*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:239:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:240:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, double*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:241:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, double*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, int, int*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:242:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, int, int*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, char**); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:243:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, char**)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, int, double*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:244:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, int, double*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, int, char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:245:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, int, char*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int, int*, double*, char, double, const char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:249:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int, int*, double*, char, double, const char*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:251:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int*, int*, int*, double*, int, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:252:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int*, int*, int*, double*, int, int)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = _GRBmodel* (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:253:5:   required from here
+  210 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round106-structural-conflict-events/ExactEBRP/src/GurobiBaseline.cpp:113:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to '_GRBmodel* (*)(_GRBmodel*)' [-Wcast-function-type]
+  113 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[3/8] Linking CXX static library libexact_ebrp_core.a
+[4/8] Linking CXX executable Round65ReferenceBuild.exe
+[5/8] Linking CXX executable Round105Tests.exe
+[6/8] Linking CXX executable Round106Tests.exe
+[7/8] Linking CXX executable ExactEBRP.exe

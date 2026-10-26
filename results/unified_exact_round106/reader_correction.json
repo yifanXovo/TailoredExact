@@ -1,0 +1,20 @@
+{
+  "layer": "ZERO_SOLVER_READER_ONLY",
+  "withdrawn_publication": "reports/summary.json and reports/native_calls.csv",
+  "original_execution": "engineering/full_reader01",
+  "finding": "The broad OUT rglob included two inherited R105 master ledgers in the preserved failed inherited_restore01 copy. These were old calls, not new R106 calls. Original reader completed but its current-native scope was overbroad.",
+  "excluded_paths": [
+    "results/unified_exact_round106/inherited_restore01/results/unified_exact_round105/control01/raw/02_F2_IR-FULL/external/round105/calls.csv",
+    "results/unified_exact_round106/inherited_restore01/results/unified_exact_round105/control01/raw/03_F2_IR-CORE/external/round105/calls.csv"
+  ],
+  "correction": "Current native enumeration is confined to declared qualification, fixed-Y and identity/launch campaign roots. Inherited ledgers are counted only by the separate inherited reader. Failed recovery receipts remain in the package; copied inherited content remains local and is omitted as redundant.",
+  "corrected_Optimize_starts": 5634,
+  "IIS_starts": 156,
+  "corrected_native_ledger_started_and_returned": 5778,
+  "missing_after": 0,
+  "replacement_publication": "reports02/",
+  "production_source_PE_DLL_and_measurement_change": false,
+  "research_fee_or_process_start_change": false,
+  "Optimize_calls_for_this_correction": 0,
+  "IIS_calls_for_this_correction": 0
+}

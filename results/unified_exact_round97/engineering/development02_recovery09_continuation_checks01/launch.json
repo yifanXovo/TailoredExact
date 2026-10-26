@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-c",
+    "import sys;sys.path.insert(0,'scripts');import round97_continue_after_v1_recovery as c;c.ext.ensure_idle();i=c.read(c.CAMP/'identity.json');c.identity_check(i);c.prefix(i,9);assert all(not c.Path(r['destination']).exists() for r in i['launches'][9:]);print('Exact failed prefix preserved; registered arms10-13 unstarted; source/build/helpers/gates and all prior vector receipts verified; Optimize=0')"
+  ],
+  "optimizer_calls": 0
+}

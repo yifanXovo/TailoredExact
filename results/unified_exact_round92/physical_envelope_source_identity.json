@@ -1,0 +1,98 @@
+{
+  "schema": "round92-physical-envelope-source-identity-v2",
+  "source_commit": "ea190d909bbc8fbb0caaaada78c928f71be18bc1",
+  "source_git_bytes_verified": true,
+  "source_files": [
+    {
+      "path": "CMakeLists.txt",
+      "bytes": 23240,
+      "sha256": "3ed76c71f6c4844b621df13eb6d9f29bfc60fb352869e834593a37218be05e33",
+      "git_blob_oid": "af4edcb4a965df2928588079d5e2c57b341dd341"
+    },
+    {
+      "path": "include/Instance.hpp",
+      "bytes": 37301,
+      "sha256": "cce079054948a09ce083c830fad5ee7cb35165728b9d692f1df272c8a7b6ccbc",
+      "git_blob_oid": "173396daaa337ab0c84155ad085f721100458853"
+    },
+    {
+      "path": "include/CanonicalCompactModel.hpp",
+      "bytes": 6461,
+      "sha256": "f454470edd4b793be73175ee6b92934f81f3b7e955b8b46b678dec1da0f4ad35",
+      "git_blob_oid": "57a186b66564b80c5a462b407cb4fa3ce53b6bdf"
+    },
+    {
+      "path": "include/PhysicalDurationTolerance.hpp",
+      "bytes": 264,
+      "sha256": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+      "git_blob_oid": "271ceb17f00cb3c67979e144c72de88ca5c35b0f"
+    },
+    {
+      "path": "include/Round92HandlingActivation.hpp",
+      "bytes": 4172,
+      "sha256": "5bad5b1e023ea07fd753bd33993cbe604c7b2a6d05576523ae0d757019668f2d",
+      "git_blob_oid": "75f1793e275a086f766a8419e2dc4b76d962d1ef"
+    },
+    {
+      "path": "src/Round92HandlingActivation.cpp",
+      "bytes": 20049,
+      "sha256": "d638d09f4cf1e474da620444f10d0b30a28d2dd8b235993cb88a49d76ff363e5",
+      "git_blob_oid": "2b00f4c6390d642ec30d31d47d30ec3b399fdfb6"
+    },
+    {
+      "path": "src/CplexBaseline.cpp",
+      "bytes": 383887,
+      "sha256": "3e59c3a0f2bb8ba402175ca3eff3c43e87af403459be9fe7e3ca799cb25642ae",
+      "git_blob_oid": "c6439e2671b89d799a0b38ebcaea43591a2e6838"
+    },
+    {
+      "path": "src/Evaluator.cpp",
+      "bytes": 6239,
+      "sha256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+      "git_blob_oid": "e9d9e5f08bf8877ffb6e826824f5cba2733c66c1"
+    },
+    {
+      "path": "src/GurobiBaseline.cpp",
+      "bytes": 248516,
+      "sha256": "ce8800e189fcbf0e43a9a768fd55df7092fb82e1b465e263508362a6d9f95b31",
+      "git_blob_oid": "fbe42c5e8f479ec697842093d8e934fac0ce4f54"
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "bytes": 503142,
+      "sha256": "14a5f5a5e51072d755b713ebc8ced9dc7c4e3061641eb4976daa3bfbf0e0a0ec",
+      "git_blob_oid": "c45f08606e6d2e4924ef6e1ad8129d201afd05c2"
+    },
+    {
+      "path": "src/main.cpp",
+      "bytes": 1096203,
+      "sha256": "9a97f287f27a0ddf09255a7b9e120cd3fe954771cb2e234533d1fc5a482a37b5",
+      "git_blob_oid": "9f3cecedf2c2f437e6ae65b17b44a77292b18335"
+    },
+    {
+      "path": "tests/round92_handling_activation_tests.cpp",
+      "bytes": 15276,
+      "sha256": "0431328e31157f3f1da041ecbc09a096fd2bf454affda8e422d86513af9cc9c1",
+      "git_blob_oid": "f24fe2df236bf4df139aa12301c844092ca9fcd3"
+    },
+    {
+      "path": "tests/round92_handling_integration_tests.cpp",
+      "bytes": 9232,
+      "sha256": "bfd5ea3c6263c742e6438cc04440d5e3d1580ed4bf27fc6062eb947e0df50f77",
+      "git_blob_oid": "f7cac4aa0f71b2949607398eed294a9cfe9cb511"
+    },
+    {
+      "path": "tests/round92_handling_lp_readback.py",
+      "bytes": 5708,
+      "sha256": "c0c73af4e0909ff3a584324b51694eed8b3814fabb31250a9cd81e973686df26",
+      "git_blob_oid": "bb4d7b6767db7166d653bc9ec387b2e23ff2336a"
+    },
+    {
+      "path": "tests/round92_handling_activation_cli_test.cmake",
+      "bytes": 2668,
+      "sha256": "b8af40bb4be0c6dd66471a1e4656aecb600bfe0505a2225816c4236184389b4e",
+      "git_blob_oid": "5a6b3d0cec3ab452042d61511c28ae5562aeb221"
+    }
+  ],
+  "scope": "Explicit relevant source and qualification files; no build, test, solver or binary hashing performed."
+}

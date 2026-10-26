@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-c",
+    "import gzip,sys;sys.path.insert(0,'scripts');from round97_campaign_v2 import ROOT,OUT,read,write,sha,ext;ext.ensure_idle();c=OUT/'development02';i=read(c/'identity.json');rows=[]\nfor l in i['launches'][10:13]:\n p=__import__('pathlib').Path(l['destination'])/'observations.json';q=c/'compact_evidence'/('F2_'+str(l['number'])+'_observations.json.gz');assert not q.exists();b=p.read_bytes();q.write_bytes(gzip.compress(b,mtime=0));assert gzip.decompress(q.read_bytes())==b;rows.append(dict(source=p.relative_to(ROOT).as_posix(),source_sha256=sha(p),archive=q.relative_to(ROOT).as_posix(),archive_sha256=sha(q),bytes=q.stat().st_size))\nwrite(c/'evidence_f2_observations.json',dict(passed=True,optimizer_calls=0,archives=rows));print('Three observation archives byte-verified; Optimize=0')"
+  ],
+  "optimizer_calls": 0
+}

@@ -1,0 +1,51 @@
+# Round105 repair gate review
+
+Reviewer/signature: `/root/math_history_review`, 2026-10-06, Asia/Shanghai.
+
+**Static verdict: ACCEPT for limited, frozen real-structure diagnostics; formal performance remains NOT ADMITTED.** No route-model or conflict-validity blocker remains in the inspected repairs. This admits collecting the preregistered diagnostic modes, proofs, costs and failure/UNKNOWN outcomes, with the existing exclusive supervisor and unchanged paid ENS startup. It does not establish useful real-instance increment, acceptable checker/core costs, a performance win, or rational exactness. `gate_review.md` remains the immutable initial HOLD evidence.
+
+## Identity and independent scope
+
+I read source and existing receipts only. I executed no native Optimize/IIS, DP, benchmark, build, qualification program or review script. Current inspected SHA256:
+
+| File | SHA256 |
+|---|---|
+| include/Round105Decomposition.hpp | eccca5f2ff4a8b0c8d6de114c251a3b1225fa13ef7a3c4d0d81e5e1f00e3f46a |
+| src/Round105Decomposition.cpp | 14539f42283d74e88bad7b7b5a69a78718cae69ae751d37f4a5df22d10bb6ae6 |
+| src/Round105GurobiDecomposition.inc | d741621a901182585134ff30366afa5d61410b2d774d402b0fad709e8001c24c |
+| src/GurobiBaseline.cpp | 4f5f11f7ec532732f343ef058c58eae90b0077f35c60f9539673715f08ef03c8 |
+| src/main.cpp | 93eaabcaa0f5e15cbe20fd0bcbef0541c9273a76c357e23c570d47651e499ccb |
+| tests/round105_tests.cpp | 7301355edaaaa0056657f76fee1f338dea16cbd6b5bb89caf7e80a4955683270 |
+| scripts/round105_campaign.py | 3104b0925fd5df2b7eb5762dd4ee1f316ae4ebcdc3be48dd0f530ef42f3c71e1 |
+
+The read `engineering/build04/receipt.json` reports normal return, exit 0 and 11.386398900009226 seconds; I did not build it. Native03 and prepared diagnostic01 bind the prior inc hash b4b880b175278cfc74e2c83703684cbfe03fef3e9eee128da2326449176709c6 and main hash 477508437cb391039f1b469d0f0a0509ed569b3c5c6081fcce48a23d1cb66d83. Therefore neither is silently relabeled as executed evidence for final persistence/startup hardening. Diagnostic01 contains prepared zero-Optimize references and no run directories at inspection; root says it will be abandoned. A new diagnostic02 must bind the final matching source/build/binary/runtime and preserve all prior paid receipts. Tests are outside inherited `bindings()`; record their explicit hash when reporting qualification identity.
+
+## Initial blockers and landed repairs
+
+1. **Numerical/status admission repaired statically.** `R105Session::optimize` checks the inherited per-model parameter contract before each Optimize, charges only the remaining process deadline, requires a native log and screens numerical-trouble/unscaled-violation phrases. Every returned incumbent has a complete native X/matrix audit and ConstrVio/BoundVio/IntVio checks at the original tolerances 1e-6/1e-5/1e-6. Quality is flushed and persisted. Master bound promotion is now explicitly limited to OPTIMAL, TIME_LIMIT and INTERRUPTED after this gate, with finite ObjBoundC. An infeasible oracle/core can become proof only through native INFEASIBLE after that Optimize gate. INF_OR_UNBD/limits without a witness remain UNKNOWN. No tolerance tuning was introduced. Physical validation remains independent of route-objective optimality.
+
+2. **Startup isolation repaired for the frozen path.** Main rejects automatic archives, CPLEX seeding, explicit imports and other research arms. It compares heuristic mode/stop/population/seed/no-improvement contract, C6 variant, inherited route-pool policy, BPC seed mode and local redecode activation with a fresh original R83 preset clone. Main dispatch remains after original startup and before AM. `round90.command_for(...,'ENS-C',...)` is reused and only the R105 arm flag is appended; it supplies no startup alteration/import overrides. This supports unchanged, self-paid startup for the inspected frozen commands. It is not a claim that the CLI compares every possible future SolveOptions field; arbitrary override combinations are outside this admission.
+
+3. **Retained error state substantially repaired.** The solver receives the result by reference; the inner loop catches contract/API/persistence failures, clears certification, preserves the strongest already accepted LB and the paid verified UB, writes an error record, witness and summary. The public wrapper also returns the mutated result on earlier or finalization exceptions, classified as error, with an initialization_error record. It does not switch to ENS or convert failure into infeasibility. Signed gap is preserved instead of clipped. Variables, embedding, patterns, conflicts, proposal, witness, quality and summary now flush/check writes. A missing native log throws before proof/bound promotion.
+
+4. **Actual conflict/reoptimization qualification now observed.** Native03's loop summary reports U0=1.1428571428571428, two master calls/iterations, one proved conflict, two oracle calls, one IIS call, no confirmation call for that full conflict, and LB=UB=0.11818181818181819 with certification. `patterns.csv` shows first operations (+2,+2,-3,0), then (+2,+2,-2,0). `conflicts.csv` records three served groups and the absent helper group, including coefficient -1 on z_0_4. `calls.csv` records the distinct master model hashes and second optimization. Thus the former trivial-zero test gap is repaired by actual execution evidence, not merely a source assertion. This is a tiny qualification, not real-instance contribution.
+
+5. **Sparse/full witness boundary repaired statically.** Sparse seed records are padded to exactly one record per vehicle before strict physical verification; bad/duplicate vehicle IDs are rejected. The complete list remains the returned physical seed/UB. Only a separately normalized sparse representation is passed to the canonical mapper. Every original master row is audited before Start insertion. Duplicate stations and operations remain covered by the strict wrapper. Native03's loop has M=1; it does not independently execute the omitted-unused-vehicle branch.
+
+## Mathematical contract after repairs
+
+The retained-type/readback, nonstrict U0 root, Gini epigraph/one-hot product, all-order universal oracle, absent-inclusive conflict, IIS whole-group interpretation and independent all-other-stations-free confirmation proofs in `gate_review.md` still apply. The physical/oracle writer and conflict algebra hashes are unchanged. Metric/nonnegative-objective qualification is now explicitly enforced at the decomposition boundary; a general-travel oracle does not widen the canonical master domain.
+
+The actual declarations preserve integer Y/p/d and binary state/z/mode; only explicitly indexed x and load are relaxed, with unchanged bounds/names/type readback. Full Start embedding uses the paid U0 and every actual row. Candidate original F is recomputed and compared before any route exclusion or UB claim. The all-station oracle's M=2Q two-sided prefix recurrence and V+1 MTZ remain exact for binary route/operations; loaded return and cumulative pickup above Q remain allowed. Conflict Delta includes local absence and does not fix another car's global inventory. A shortened IIS proposal cannot be used without independent native infeasibility of the rebuilt universal template. Finite integer modes and permanent current-mode exclusion give finite mathematical progress; deadline/unknown outcomes still carry no exclusion or invented certificate.
+
+Native03 `qualification.csv` contains 21 oracle/order-enumeration agreements and a three-group independently re-proved shorter core in case 13. Its loop master quality records all 281 rows checked, native ConstrVio about 1.11e-16, BoundVio=0 and IntVio=0 with original parameter readback. I inspected these outputs but did not reproduce them. The inherited residual helper reports maximum violation only for rows exceeding its scaled tolerance; `max_row_violation=0` is therefore a passed-tolerance result, not a claim that every raw floating residual is exactly zero.
+
+## Diagnostic admission limits and next gate
+
+The inspected reuse runner freezes source/binary/DLL/input/protocol/helper hashes, preserves serial never-started prefix order, reuses original ENS and P commands, independently checks physical seed/final/result, verifies root embedding/type counts, reconciles before/after native call counts and accepted master bounds, and rejects error endpoints. It does not turn cancelled R104 groups into evidence. The provided protocol explicitly says performance_claim=false; its F2/C2/F5 roles can collect informative outcomes without prior speed claims.
+
+Run admission requires a newly frozen identity matching the final build; old diagnostic01 cannot execute under changed hashes. Missing/unclosed calls, error records, missing quality/log/witness evidence, parameter/model mismatches or inverted bounds must remain failed/unfinished observations and stop progression. Public initialization/finalization errors may lack the normal summary; they are retained error states, not auditable normal endpoints. Constructor runtime/error streams and after-call ledger writes are not exhaustively failure-injected, and sparse padding/deadline/numerical/API failure cases have no independent execution evidence from this reviewer. These limitations do not block limited diagnostics under the fail-closed runner, but must not be hidden by claims of complete robustness.
+
+Formal performance admission still requires actual nonempty real master modes and checker feasibility/proved failure or core evidence, proof that learned rows exclude current real modes while preserving known legal alternatives, measured master/checker/IIS/core construction and verification costs, and incremental nonredundancy beyond inherited necessary rows. No tiny counterexample, static equivalence proof or loop certificate establishes those costs. After that gate, contemporary principal P-GRB and protected unchanged ENS-C comparisons, predefined roles/order and all paid/censored processes remain required. Broad speedup, retained native search trees, minimum-cardinality IIS, rational infeasibility proof and independent native reproduction are not asserted.
+
+Signed: `/root/math_history_review` — limited static real-structure diagnostic admission only.

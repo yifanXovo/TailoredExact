@@ -1,0 +1,302 @@
+{
+  "binary_sha256": "f1c071135b6dd7cc84d92a71efec17aec33187747ad1829d53a1058576871c1d",
+  "committed_events": 175,
+  "native_calls_started": 5,
+  "native_calls_returned": 5,
+  "physical_witnesses": 8,
+  "native_physical_witnesses": 7,
+  "scoped_bound_events": 156,
+  "global_native_bound_events": 156,
+  "UB": 0.8659435203229896,
+  "LB": 0.8070175793355346,
+  "gap": 0.05892594098745496,
+  "physical_upper_available": true,
+  "lower_bound_source": "complete_domain_native_evidence",
+  "certificate": false,
+  "solver_finalization_certificate": false,
+  "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+  "witnesses": [
+    {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true,
+      "source": "same_run_verified_startup",
+      "call": 0,
+      "sequence": 2,
+      "available": 0.7650000000139698
+    },
+    {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 4,
+      "sequence": 10,
+      "available": 2.5460000000020955
+    },
+    {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 15,
+      "available": 2.9059999999881256
+    },
+    {
+      "F": 0.8804798756127854,
+      "G": 0.24199393300201694,
+      "P": 4.256572950738456,
+      "stations": 7,
+      "pickup": 29,
+      "drop": 29,
+      "maximum_duration": 3595.0133423750403,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 46,
+      "available": 36.530999999988126
+    },
+    {
+      "F": 0.8776503915640483,
+      "G": 0.24841216471547428,
+      "P": 4.194921512323828,
+      "stations": 6,
+      "pickup": 30,
+      "drop": 30,
+      "maximum_duration": 3536.1036438205597,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 47,
+      "available": 40.60899999999674
+    },
+    {
+      "F": 0.8747743869104383,
+      "G": 0.2489884970618642,
+      "P": 4.171905932323828,
+      "stations": 6,
+      "pickup": 30,
+      "drop": 30,
+      "maximum_duration": 3536.1036438205597,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 48,
+      "available": 40.687000000005355
+    },
+    {
+      "F": 0.8739458005274744,
+      "G": 0.24895574575795165,
+      "P": 4.166600365130152,
+      "stations": 6,
+      "pickup": 31,
+      "drop": 31,
+      "maximum_duration": 3536.1036438205597,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 49,
+      "available": 40.76500000001397
+    },
+    {
+      "F": 0.8659435203229896,
+      "G": 0.24756565483918117,
+      "P": 4.12251910322539,
+      "stations": 6,
+      "pickup": 32,
+      "drop": 32,
+      "maximum_duration": 3595.0133423750403,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 5,
+      "sequence": 50,
+      "available": 40.828000000008615
+    }
+  ],
+  "normal_result_certificate": false,
+  "final_only_physical_witness": false,
+  "final_physical_verification": {
+    "F": 0.8659435203229896,
+    "G": 0.24756565483918117,
+    "P": 4.12251910322539,
+    "stations": 6,
+    "pickup": 32,
+    "drop": 32,
+    "maximum_duration": 3595.0133423750403,
+    "original_T_feasible": true
+  },
+  "endpoint": {
+    "U": 0.8659435203229894,
+    "L": 0.8070175793355346,
+    "gap": 0.05892594098745474,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "round31_c6_external_gini_tree_time_limit"
+  },
+  "neutral_exchange": {
+    "passed": true,
+    "initial": {
+      "F": 0.8872477316348517,
+      "G": 0.2402793186734339,
+      "P": 4.313122753076119,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true
+    },
+    "final": {
+      "F": 0.8853483009345781,
+      "G": 0.2403477276095238,
+      "P": 4.300003822167028,
+      "stations": 8,
+      "pickup": 28,
+      "drop": 28,
+      "maximum_duration": 3563.1915890902783,
+      "original_T_feasible": true
+    },
+    "result": {
+      "F": 0.885348300934578,
+      "neutral": 0,
+      "relocations": 0,
+      "exchanges": 0,
+      "equal_net_pairs": 4,
+      "insertions": 0,
+      "quantities": 2,
+      "exhausted": true,
+      "deadline": false,
+      "zero": false,
+      "verification_failed": false,
+      "optimizer_calls": 0
+    },
+    "transitions": [
+      {
+        "iteration": 0,
+        "closure": {
+          "initial_UB": 0.8872477316348519,
+          "final_UB": 0.885348300934578,
+          "accepted": 2,
+          "counts": {
+            "insertions": 0,
+            "quantities": 2,
+            "singles": 0,
+            "pairs": 2,
+            "cross_vehicle": 0,
+            "sign_flips": 0,
+            "removed_stops": 0
+          },
+          "independently_checked_physical_witnesses": 4,
+          "returned_to_outer": true,
+          "insertion_placements": 12600,
+          "insertion_quantities": 0,
+          "quantity_feasible": 341,
+          "terminal_status": "joint_neighborhood_exhausted",
+          "trace_interval_seconds": 0.0011645000000000127,
+          "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+        },
+        "neutral_oracle": {
+          "balanced_blocks": 2,
+          "placements": 10,
+          "feasible": 0,
+          "improving": 0,
+          "exchange_pairs": 4,
+          "exchange_feasible": 1,
+          "exchange_improving": 0,
+          "best_key": null,
+          "best_potential": null,
+          "current_potential": [
+            3563.1915890902783,
+            3535.36690305553
+          ]
+        }
+      }
+    ],
+    "neutral_states": 0,
+    "strict_moves": 2,
+    "unique_recorded_route_states": 2,
+    "offline_seconds": 0.004474299988942221,
+    "optimizer_calls": 0,
+    "scope": "Fixed-witness diagnosis; no complete performance claim"
+  },
+  "parameter_readback": {
+    "threads": {
+      "requested": 1,
+      "effective": 1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "seed": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "presolve": {
+      "requested": -1,
+      "effective": -1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap_abs": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    }
+  },
+  "native_scope_adapter": {
+    "schema": "round94-native-scope-adapter-v3",
+    "arm": "J-SHADOW",
+    "native_calls": 5,
+    "lp_calls": [
+      1,
+      2,
+      3
+    ],
+    "mip_calls": [
+      4,
+      5
+    ],
+    "global_bound_call_ids": [
+      4,
+      5
+    ],
+    "ledger_sha256": "25cd4fbd50cf4f9b810ace37f6e9b927e6e8c1a4d5f59035d8b7496b8214803b",
+    "settings": {
+      "read_return_code": 0,
+      "Threads": 1,
+      "Seed": 0,
+      "Presolve": -1,
+      "MIPGap": 0,
+      "MIPGapAbs": 0,
+      "FeasibilityTol": 1e-06,
+      "IntFeasTol": 1e-05,
+      "OptimalityTol": 1e-06
+    },
+    "all_flags_strictly_decoded": true
+  },
+  "passed": true,
+  "offline_audit_seconds": 0.018676200008485466
+}

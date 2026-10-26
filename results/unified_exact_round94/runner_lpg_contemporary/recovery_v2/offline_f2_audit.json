@@ -1,0 +1,55 @@
+{
+  "schema": "round94-offline-f2-requalification-v2",
+  "role": "F2",
+  "passed": true,
+  "original_qualification_processes_started": 1,
+  "new_processes_started": 0,
+  "original_native_optimize_calls_verified": 1,
+  "new_native_optimize_calls": 0,
+  "search_result_excluded": true,
+  "preserved_result_sha256": "314b4b7d0426fdedc31a201a10da0d0c948c5fbe4288028fd4222ce5908e9e95",
+  "compact_sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+  "native_fingerprint": 788240696,
+  "native_domain_passed": true,
+  "native_parameters": {
+    "threads": {
+      "requested": 1,
+      "effective": 1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "seed": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "presolve": {
+      "requested": -1,
+      "effective": -1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap_abs": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    }
+  },
+  "native_journal": {
+    "committed_events": 3,
+    "native_calls_started": 1,
+    "native_calls_returned": 1,
+    "original_scope": true,
+    "physical_witnesses": 0,
+    "global_bound_events": 0
+  },
+  "original_whole_process_wall_seconds": 0.2920158999040723
+}

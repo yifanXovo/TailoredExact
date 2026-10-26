@@ -1,0 +1,57 @@
+{
+  "source": "full_algorithm_final",
+  "source_result_path": "results\\gf_transfer_block_native_time_round61\\local_raw\\confirmation600\\C2\\submit\\result.json",
+  "source_result_sha256": "01785fb487e4523fad761e4c174de9ee526d438e697d88c4002f09e1d6a5b50d",
+  "input_sha256": "1bb4898eef8e5b2535a6d1d609637528875581fa81acf120636941f285f23b60",
+  "F": 0.8299634131717752,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        1,
+        3,
+        9,
+        0
+      ],
+      "operations": [
+        {
+          "station": 1,
+          "pickup": 1,
+          "drop": 0
+        },
+        {
+          "station": 3,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 0,
+          "drop": 9
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        5,
+        6,
+        0
+      ],
+      "operations": [
+        {
+          "station": 5,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 6,
+          "pickup": 0,
+          "drop": 8
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "round134-independent-delivery-static-review-v1",
+  "UTC": "2026-10-25T20:42:05.660859+00:00",
+  "reviewer": "independent_review; separate from primary implementer",
+  "decision": "ACCEPT_STATIC_BOUNDARIES_WITH_RECOMMENDATIONS",
+  "Optimize": 0,
+  "compile": 0,
+  "archive_or_PDF_execution": 0,
+  "full_raw_scan": 0,
+  "source_files_modified": false,
+  "actual_source_hashes": {
+    "scripts/round134_portable_check.py": "95701848430172578fa387f70991d18614debf024b4d68df847a38aae50e013d",
+    "scripts/round134_release.py": "c123f0ac1066d806bdd9991b300ae6b11c0114bb55b0ba1e5d5df89d7455bd5a",
+    "scripts/round134_public_restore.py": "225e6dc3b7c63043c64181b27b02056bcab89c7734bbf8a54571a72ac9540496"
+  },
+  "small_static_check_seconds": 0.014605400036089122,
+  "static_checks": {
+    "AST": {
+      "scripts/round134_portable_check.py": {
+        "AST_parse": true,
+        "native_optimize_calls": 0
+      },
+      "scripts/round134_release.py": {
+        "AST_parse": true,
+        "native_optimize_calls": 0
+      },
+      "scripts/round134_public_restore.py": {
+        "AST_parse": true,
+        "native_optimize_calls": 0
+      }
+    },
+    "fixed_stage_counts": {
+      "C": 32,
+      "D": 4
+    },
+    "current_reader_matches_execution_binding": "51d0416fa64a7530277dc4cc3c49c6e59e8c5d0adf8022c8d2576d25d64a483e",
+    "closed_root_runtime_guards": "R133 closed_helpers blocks subprocess/os process entry points, ctypes DLL loaders, solver imports and sockets; exact published helper bytes execute under named overlay writes.",
+    "same_reader_and_accepted_H": "round134_read imports R133 accepted-H adapter; source capsule collects current pure import graph; portable checker checks reader hash against exact-byte capsule.",
+    "math_dependencies": "fixed R132 tiny carrier pin and SHA; only current tiny arithmetic and six root LP records replayed; no old full campaigns.",
+    "native_assets": "PE/DLL are historical digest attestations; no native files distributed or loaded by semantic checker.",
+    "read_only_raw": "derived JSON recreated in memory and compared semantically with original clocks; restored raw has no writable path.",
+    "publication_scope": "source and pack require COMPLETE_C_D_E_NATIVE; campaign36, current progress and current math/failures/fees only; source capsule excludes native binaries, objects, licenses and fonts.",
+    "transport": "one owned initially empty root under explicit restore directory; anonymous fixed-commit HTTPS; SHA/size/member identities; same-root resume retained after failure.",
+    "partial_preflight": "--through still enumerates all result files in source_publication, so it is only usable after all producer result files exist."
+  },
+  "blocking_findings": [],
+  "recommendations": [
+    {
+      "id": "REC1",
+      "text": "In replay_math, verify OPTIMAL Status==2 and enforce recorded ConstrVio/BoundVio/DualVio<=the declared 1e-6 limits, rather than checking only finiteness. No native call needed."
+    },
+    {
+      "id": "REC2",
+      "text": "In replay_math, explicitly check support station set=1..V and B=panel total_initial, matching the already independently checked producer premises."
+    },
+    {
+      "id": "REC3",
+      "text": "Describe archived/current root matrix identity as a prior export/independent-review attestation: public replay carries current matrix and scope record, and does not reopen the old root matrix."
+    }
+  ],
+  "limitations": [
+    "This is pre-execution static review, not acceptance of future source capsule, packed archives, full36 replay, public downloads or final PDF.",
+    "A necessary local pure preflight should run after packaging; one actual public current-only recovery remains required.",
+    "No frozen reader/production change is recommended by this static review."
+  ]
+}

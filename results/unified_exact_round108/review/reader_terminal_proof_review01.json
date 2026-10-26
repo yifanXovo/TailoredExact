@@ -1,0 +1,30 @@
+{
+  "decision": "ACCEPT",
+  "scope": "25 synthetic finite cases on current pure reader; actual correctly linked logs independently checked for all 33 calls",
+  "reader_source_SHA": "61e5acec734139d82c984a457f620a991664500f45d5ac6078cad7e96642e5d9",
+  "reviewer_script_SHA": "d70bcaa5532141a1456b4f8e0a871195d6492aae68d2e6b4c62c1f331e819ea5",
+  "actual_command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "results/unified_exact_round108/review/reader_terminal_proof_finite_audit01.py",
+    "--root",
+    "E:/codes/ExactEBRP-round108",
+    "--out",
+    "E:/codes/ExactEBRP-round108/results/unified_exact_round108/review/reader_terminal_proof_finite_audit02"
+  ],
+  "explicit_read_root": "E:\\codes\\ExactEBRP-round108",
+  "exit_code": 0,
+  "elapsed_seconds": 0.0206134999752976,
+  "checks_SHA": "b46bec1a4eacb1015cc088ef54444428822482924e67b82722047d06b6984dda",
+  "receipt_SHA": "478ec6901495deae6cd33baf2aedc8fcacfbb702769d8d54578a7ba863d42986",
+  "cases": 25,
+  "terminal_native_log_final_bound_qualified_only_at_return": true,
+  "correct_call_model_leaf_log_return_link_required": true,
+  "wrong_log_path_rejected_even_identical_bytes": true,
+  "future_terminal_proof_rejected": true,
+  "valid_original_bounds_only_G_domain_accepted": true,
+  "widened_G_cutoff_trueG_rows_rejected": true,
+  "conditional_min_bound_cutoff_preserves_raw_published_L": true,
+  "no_actual_performance_evidence_rewritten": true,
+  "zero_solver_calls": true,
+  "prior_synthetic_scope_assumption_superseded": "Explicit redundant G>=lo/G<=hi rows are optional when shared original interval rows are used; exact Bounds plus shared true-G cap/floor and cutoff remain mandatory"
+}

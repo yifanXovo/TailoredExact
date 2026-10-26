@@ -1,0 +1,19 @@
+{
+  "authorized_by": "root",
+  "command": [
+    "E:/codes/ExactEBRP/build/research/round88-ot/venv/Scripts/python.exe",
+    "scripts/round91_handling_rounding_diagnostic.py",
+    "supervise",
+    "--manifest", "results/unified_exact_round91/qualification_001/export/export_manifest.json",
+    "--admission", "results/unified_exact_round91/diagnostic_admission_001.json",
+    "--out", "results/unified_exact_round91/diagnostic_001"
+  ],
+  "working_directory": "E:/codes/ExactEBRP",
+  "maximum_launch_to_exit_seconds": 300,
+  "whole_process_tree_watchdog": true,
+  "on_deadline": "End the entire item, preserve all evidence, report unknown. No later arm or retry.",
+  "attempts": 1,
+  "planned_optimize_calls": 3,
+  "algorithm_policy": "Independent diagnostic only. No production selection or candidate change.",
+  "receipt": "Record exact process/arguments/start/exit/returncode/outer wall/timeout and stdout/stderr. Report work after process exit separately."
+}

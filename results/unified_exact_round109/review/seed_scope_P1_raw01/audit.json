@@ -1,0 +1,239 @@
+{
+  "decision": "ACCEPT",
+  "arms": [
+    {
+      "decision": "ACCEPT",
+      "id": "H100",
+      "arm": "P-GRB",
+      "seed": 1,
+      "proofs": [
+        {
+          "call": 1,
+          "solve_kind": "MIP",
+          "facts": {
+            "actual_settings": {
+              "read_return_code": 0,
+              "Threads": 1,
+              "Seed": 1,
+              "Presolve": -1,
+              "MIPGap": 0,
+              "MIPGapAbs": 0,
+              "FeasibilityTol": 1e-06,
+              "IntFeasTol": 1e-05,
+              "OptimalityTol": 1e-06
+            },
+            "actual_model_SHA": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+            "call_model_SHA": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+            "native_rows_columns": [
+              3689,
+              1591
+            ],
+            "saved_rows_columns": [
+              3689,
+              1591
+            ],
+            "native_types": {
+              "C": 411,
+              "I": 140,
+              "B": 1040
+            },
+            "saved_types": {
+              "C": 411,
+              "I": 140,
+              "B": 1040
+            },
+            "return_code": 0,
+            "committed_return": true,
+            "source_identity_bound": true,
+            "unchanged_metadata_seed0_guard": true,
+            "original_domain_contract": true,
+            "original_scope_contract": true,
+            "no_extra_overrides_fixed_inventory_rows_or_modes": true,
+            "zero_gap_actual_readback": true,
+            "backend_finalization_gate": true,
+            "raw_native_preconditions": 0
+          },
+          "computed_native_scope_qualified": true,
+          "raw_native_preconditions": 0,
+          "actual_native_final_log_L": 0.1029333262613,
+          "model_path": "results\\unified_exact_round109\\qualification\\cli01\\raw\\04_H100_S1_P-GRB\\compact.lp",
+          "model_SHA": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+          "native_log_SHA": "a271493dc98902f14b80c93369db59dc85c38f9aafcf7a7740635f63f3968f01",
+          "source_SHA": "a124605525f7e2310771e9bb73b381c6fa72d89f2b61c221b604ab076add8d39",
+          "domain": {
+            "columns": 1591,
+            "rows": 3689,
+            "native_types": {
+              "C": 411,
+              "I": 140,
+              "B": 1040
+            },
+            "quantity_columns": 80,
+            "AB_exact_rows": 0
+          }
+        }
+      ],
+      "own_physical": {
+        "U": 0.229952349996756,
+        "G": 0.09533718012729485,
+        "P": 0.897434465796408,
+        "S": 18.707655502392345,
+        "H": 35.67070244781915,
+        "final_inventories": [
+          50000,
+          17,
+          22,
+          23,
+          31,
+          23,
+          15,
+          19,
+          23,
+          17,
+          19,
+          18,
+          25,
+          19,
+          27,
+          20,
+          21,
+          21,
+          15,
+          15,
+          18
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "travel_seconds": 1914.8068356579176,
+            "handling_seconds": 3120,
+            "duration_seconds": 5034.806835657918,
+            "prefix_loads": [
+              0,
+              1,
+              6,
+              13,
+              8,
+              1,
+              4,
+              10,
+              3,
+              7,
+              0
+            ],
+            "return_load": 0,
+            "total_pickup": 26,
+            "total_station_drop": 26
+          },
+          {
+            "vehicle": 1,
+            "travel_seconds": 2170.7674521890003,
+            "handling_seconds": 2880,
+            "duration_seconds": 5050.767452189,
+            "prefix_loads": [
+              0,
+              7,
+              15,
+              7,
+              1,
+              10,
+              0
+            ],
+            "return_load": 0,
+            "total_pickup": 24,
+            "total_station_drop": 24
+          }
+        ]
+      },
+      "raw_native_preconditions_preserved": true,
+      "raw_unavailable_global_callback_count": 163,
+      "raw_global_flags_and_values_unchanged": true,
+      "computed_scoped_callback_provenance_is_offline_mathematics": true,
+      "new_early_global_checkpoint_values_generated": false,
+      "source_bindings": {
+        "src/GurobiBaseline.cpp": "a124605525f7e2310771e9bb73b381c6fa72d89f2b61c221b604ab076add8d39",
+        "src/PaperExternalGiniTree.cpp": "55f8fb4107f89c7d6bcfbe2371f671d2c4ce59326f353536ff3781dcbc2ea302",
+        "include/FixedIntervalMipBackend.hpp": "a25338266b31805aae5e822ec0c525ad0e0045f92f8ae3fdd0061adf15298166"
+      },
+      "actual_full_argv": [
+        "E:\\codes\\ExactEBRP-round109\\build\\research\\round109-inherited-mb-v1\\ExactEBRP.exe",
+        "--input",
+        "reference/round100_confirmation/H100.txt",
+        "--lambda",
+        "0.15",
+        "--T",
+        "5100",
+        "--pickup-time",
+        "60",
+        "--drop-time",
+        "60",
+        "--time-limit",
+        "114",
+        "--process-wall-time-limit",
+        "120",
+        "--process-shutdown-margin",
+        "30",
+        "--threads",
+        "1",
+        "--mip-threads",
+        "1",
+        "--gurobi-seed",
+        "1",
+        "--gurobi-presolve",
+        "-1",
+        "--method",
+        "gurobi",
+        "--round61-candidate-mode",
+        "off",
+        "--out",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\qualification\\cli01\\raw\\04_H100_S1_P-GRB\\result.json",
+        "--log",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\qualification\\cli01\\raw\\04_H100_S1_P-GRB\\native.log",
+        "--process-phase-ledger",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\qualification\\cli01\\raw\\04_H100_S1_P-GRB\\phases.csv",
+        "--external-gini-artifact-dir",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\qualification\\cli01\\raw\\04_H100_S1_P-GRB\\external",
+        "--primal-heuristic-generation-log",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\qualification\\cli01\\raw\\04_H100_S1_P-GRB\\hga.csv",
+        "--progress-log",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\qualification\\cli01\\raw\\04_H100_S1_P-GRB\\progress.csv",
+        "--native-evidence-dir",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\qualification\\cli01\\raw\\04_H100_S1_P-GRB\\journal",
+        "--plain-baseline",
+        "--gurobi-model-export",
+        "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\qualification\\cli01\\raw\\04_H100_S1_P-GRB\\compact.lp",
+        "--round24-expected-gurobi-model-fingerprint",
+        "768952698",
+        "--round24-executable-sha256",
+        "4647ee9f146a010ae4bc48f191ec12d4b9113e167b8eeccf0e43a3764e0a8ee0",
+        "--round24-manifest-executable-sha256",
+        "4647ee9f146a010ae4bc48f191ec12d4b9113e167b8eeccf0e43a3764e0a8ee0"
+      ],
+      "final_bound_available_only_at_return": true,
+      "Optimize": 0,
+      "native_environment": 0
+    }
+  ],
+  "pending_Seed1_arms": [
+    "M-B"
+  ],
+  "full_Seed1_qualification_complete": false,
+  "finite_checks": [
+    "real Seed1P facts accepted from original false flag with full mathematical scope",
+    "damaged actual_settings correctly rejected",
+    "damaged actual_settings correctly rejected",
+    "damaged call_model_SHA correctly rejected",
+    "damaged native_rows_columns correctly rejected",
+    "damaged native_types correctly rejected",
+    "damaged return_code correctly rejected",
+    "damaged backend_finalization_gate correctly rejected",
+    "damaged original_scope_contract correctly rejected",
+    "damaged no_extra_overrides_fixed_inventory_rows_or_modes correctly rejected"
+  ],
+  "source_SHA": "4cd14b95e4659361f772336cd98543ccd5abb9d3dacca101ecc54bc0fa486bdf",
+  "elapsed_engineering_seconds": 0.09196540003176779,
+  "scope": "computed native scope qualification only; full own Start/coverage/final stage needs independent raw audit",
+  "Optimize": 0,
+  "native_environment": 0,
+  "production_edits": 0
+}

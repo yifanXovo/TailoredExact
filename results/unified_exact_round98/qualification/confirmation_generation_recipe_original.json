@@ -1,0 +1,73 @@
+{
+  "version": "round98-state-service-confirmation-v1",
+  "roles": [
+    {
+      "id": "C1",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        12,
+        18
+      ],
+      "geometry": "three_clusters",
+      "inventory": "surplus",
+      "T_seconds": 4800,
+      "cap_seconds": 900
+    },
+    {
+      "id": "C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800
+    },
+    {
+      "id": "C3",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        20,
+        25,
+        30,
+        35
+      ],
+      "geometry": "separated_islands",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 3600
+    }
+  ],
+  "orders": [
+    [
+      "P-GRB",
+      "R2",
+      "ENS-C"
+    ],
+    [
+      "ENS-C",
+      "P-GRB",
+      "R2"
+    ],
+    [
+      "R2",
+      "ENS-C",
+      "P-GRB"
+    ]
+  ],
+  "source_sha256": "f4a22f8b6dd367a9113bd3a938692c988a2fdbca7ca4187317bbda4d0017917f",
+  "landscape_source_sha256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+  "writer_sha256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+  "seed": "SHA256(version|id|field), first8 bytes /2^64",
+  "optimizer_calls": 0,
+  "retention": "All generated roles retained, including zero, difficult and negative outcomes; no reseed or T adjustment",
+  "isolation": "No Round98 design solves or optimizer-informed data selection; new geography/inventory/fleet combinations",
+  "maximum_starts": 9,
+  "maximum_process_seconds": 18900
+}

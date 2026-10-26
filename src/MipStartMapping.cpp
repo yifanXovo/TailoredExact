@@ -1,10 +1,13 @@
 #include "MipStartMapping.hpp"
 
 #include "Evaluator.hpp"
+#include "Round64SharedResource.hpp"
+#include "Round120NativeProof.hpp"
 
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <cstdlib>
 #include <limits>
 #include <numeric>
 #include <set>
@@ -48,7 +51,8 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
     double gamma_L,
     double gamma_U,
     double non_strict_cutoff,
-    const SolverNeutralModelDomain& domain) {
+    const SolverNeutralModelDomain& domain,
+    const Round120Pair* round120_pair) {
     const auto started = std::chrono::steady_clock::now();
     SolverNeutralMipStart out;
     out.source = source;
@@ -99,16 +103,19 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
     std::unordered_map<std::string, double> route_values;
     std::vector<int> final_inventory = instance.initial;
     std::set<int> used_vehicles;
+    std::set<int> route_vehicles;
     std::set<int> used_stations;
     for (const RoutePlan& route : routes) {
         if (route.vehicle < 0 || route.vehicle >= instance.M ||
-            !used_vehicles.insert(route.vehicle).second) {
+            !route_vehicles.insert(route.vehicle).second) {
             return finish("invalid_or_duplicate_route_vehicle");
         }
         if (route.nodes.size() < 2 || route.nodes.front() != 0 ||
             route.nodes.back() != 0) {
             return finish("route_not_depot_closed");
         }
+        if (route.nodes == std::vector<int>{0,0} && route.operations.empty()) continue;
+        used_vehicles.insert(route.vehicle);
         for (std::size_t position = 1; position < route.nodes.size(); ++position) {
             const int from = route.nodes[position - 1];
             const int to = route.nodes[position];
@@ -171,6 +178,15 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
         }
     }
     out.vehicle_symmetry_canonicalization_valid = true;
+    // Build resources only when the actual model contains these columns.
+    // Both physical coefficients in f=h+c*q come from the same preparation.
+    const bool resource_columns=std::any_of(domain.names.begin(),domain.names.end(),[](const std::string& name) {
+        return name.rfind("r64q_",0)==0||name.rfind("r63f_",0)==0||name.rfind("r64h_",0)==0;
+    });
+    if(resource_columns) {
+        const auto resources=round64RouteResourceValues(instance,routes);
+        route_values.insert(resources.begin(),resources.end());
+    }
 
     std::vector<double> ratio(static_cast<std::size_t>(instance.V + 1), 0.0);
     std::vector<double> deviation(
@@ -193,7 +209,10 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             parseIndexedName(name, "d_", 2, indices) ||
             parseIndexedName(name, "load_", 2, indices) ||
             parseIndexedName(name, "ord_", 2, indices) ||
-            parseIndexedName(name, "conn_", 3, indices);
+            parseIndexedName(name, "conn_", 3, indices) ||
+            parseIndexedName(name, "r64q_", 3, indices) ||
+            parseIndexedName(name, "r63f_", 3, indices) ||
+            parseIndexedName(name, "r64h_", 3, indices);
     };
     out.values.assign(n, 0.0);
     for (std::size_t column = 0; column < n; ++column) {
@@ -206,12 +225,43 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             value = 0.0;
         } else if (name == "G") {
             value = out.G;
+        } else if (name == "r120_h" && round120_pair) {
+            if (!round120Contains(*round120_pair, gamma_L, gamma_U))
+                return finish("round120_start_scope_not_contained");
+            // Shared exact midpoint deterministically belongs to the left.
+            value = out.G <= round120_pair->m ? 0.0 : 1.0;
+            const double beta = value == 0 ? round120_pair->beta0 : round120_pair->beta1;
+            if (out.objective + 1e-7 < beta)
+                return finish("round120_start_source_counterexample");
         } else if (name == "r_min") {
             value = ratio_min;
         } else if (name == "r_max") {
             value = ratio_max;
         } else if (name == "W_SP") {
             value = objective_parts.S * objective_parts.P;
+        } else if (options.round98_state_service == "vehicle-state" &&
+                   parseIndexedName(name, "theta_", 3, indices) &&
+                   indices[0] >= 0 && indices[0] < instance.M &&
+                   indices[1] >= 1 && indices[1] <= instance.V &&
+                   indices[2] >= 0 && indices[2] <= instance.capacity[indices[1]] &&
+                   indices[2] != instance.initial[indices[1]] &&
+                   std::llabs(static_cast<long long>(indices[2]) - instance.initial[indices[1]])
+                       <= instance.Q[indices[0]]) {
+            const auto served = route_values.find("z_" + std::to_string(indices[0]) +
+                                                   "_" + std::to_string(indices[1]));
+            value = served != route_values.end() && served->second == 1.0 &&
+                final_inventory[indices[1]] == indices[2] ? 1.0 : 0.0;
+        } else if (parseIndexedName(name, "state_", 2, indices) &&
+                   indices[0] >= 1 && indices[0] <= instance.V) {
+            value = final_inventory[indices[0]] == indices[1] ? 1.0 : 0.0;
+        } else if (parseIndexedName(name, "state_g_", 2, indices) &&
+                   indices[0] >= 1 && indices[0] <= instance.V) {
+            value = final_inventory[indices[0]] == indices[1] ? out.G : 0.0;
+        } else if ((parseIndexedName(name,"r62lo_",2,indices) || parseIndexedName(name,"r62hi_",2,indices)) &&
+                   indices[0]>=1 && indices[0]<=instance.V && indices[1]>0) {
+            value=name.rfind("r62lo_",0)==0
+                ? (final_inventory[indices[0]]<=instance.initial[indices[0]]-indices[1]?1:0)
+                : (final_inventory[indices[0]]>=instance.initial[indices[0]]+indices[1]?1:0);
         } else if (parseIndexedName(name, "Y_", 1, indices) &&
                    indices[0] >= 1 && indices[0] <= instance.V) {
             value = final_inventory[indices[0]];

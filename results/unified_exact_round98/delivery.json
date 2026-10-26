@@ -1,0 +1,58 @@
+{
+  "pr_url": "https://github.com/yifanXovo/TailoredExact/pull/160",
+  "draft": true,
+  "state": "open",
+  "base_branch": "codex/round97-native-incumbent-closure",
+  "verified_base_sha": "bd68cf1c3b33fce0b6bc67e2947e9770c01e2601",
+  "head_branch": "codex/round98-state-service-reformulation",
+  "reviewed_research_commit_sha": "3c40b6a39616145f6aa62e122584fd08143c6686",
+  "commit_scope": "This record is a subsequent metadata commit; resolve the final PR head from GitHub or origin, not a self-referential SHA.",
+  "final_head_command": "gh pr view 160 --repo yifanXovo/TailoredExact --json headRefOid",
+  "stage_complete": true,
+  "candidate_adopted": false,
+  "protected_default": "ENS-C",
+  "stable_eventual_superiority_to_P_demonstrated": false,
+  "all_formal_runs_complete": 30,
+  "costs": {
+    "actual_starts": 75,
+    "actual_optimizer_calls": 194,
+    "missing_optimize_count": [],
+    "outer_solver_seconds": 52110.667779600226,
+    "failed_started_processes": [
+      "development01/F2/R2",
+      "development02/14/R97-C3/R1",
+      "lp_F5",
+      "integer01",
+      "integer03",
+      "ctest01",
+      "start_F2_R2",
+      "start_F2_R2_v2",
+      "start_revision_R2_R3",
+      "start_revision_wrapper_syntax_failure"
+    ],
+    "no_double_count_internal_calls": true,
+    "campaigns": [
+      "development02",
+      "revision01",
+      "confirmation01"
+    ],
+    "source_sha256": "6f749ed0371a82fac807ed40c181c128fca01689c6702ca1976fdd0846b275eb"
+  },
+  "independent_review_sha256": "003e32a7f4db1064261eec216d550eda1bb26f6dfdb39584bf8495ca653edcd2",
+  "final_report_sha256": "ca27b127695d17d28a35d5e2d9f8f13dc0a4bb88257a807a374ed938aba6360b",
+  "reproduce_sha256": "6388fd539aba41aa8f644dc7052a259afe2731f11051e546c563391edb8fc8c8",
+  "independent_review_scope": "source/math/30 results/75 receipts/10 physical routes/two selected full Start matrix text replays; no Gurobi or full performance rerun",
+  "compact_verification_passed": true,
+  "user_file_preservation": {
+    "files": {
+      "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+      "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+      "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+    },
+    "scope": "three user files identified before Round98; never modified by this research",
+    "optimizer_calls": 0
+  },
+  "no_solver_running": true,
+  "no_background_work_promised": true,
+  "merged": false
+}

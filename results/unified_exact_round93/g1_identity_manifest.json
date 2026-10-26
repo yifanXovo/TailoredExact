@@ -1,0 +1,76 @@
+{
+  "schema": "round93-coquantity-g1-identity-v1",
+  "status": "isolated_build_and_G1_passed_no_G2",
+  "workspace": "E:/codes/ExactEBRP",
+  "git_branch_at_receipt": "codex/round93-structural-descent-study",
+  "git_head_at_receipt": "654ea24d3d3a84936ac728d6718d797650a63db4",
+  "working_tree_note": "Round93 CMake/source/test files are uncommitted; hashes below, not HEAD alone, identify the build input.",
+  "toolchain": {
+    "generator": "Ninja 1.12.1",
+    "cmake": "3.30.5-msvc23",
+    "cxx": "D:/msys64/ucrt64/bin/g++.exe; MSYS2 UCRT64 GCC 14.2.0 Rev2",
+    "build_type": "",
+    "gurobi_enabled": true,
+    "gurobi_root": "D:/gurobi1302/win64",
+    "gurobi_header_version": "13.0.2",
+    "cmake_cache_sha256": "4609325db75f3c8c68e4b069ab7d6848b6b619a83f1bf40415b09becc3582c55"
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "81314778f2a24a5e504bca2cb8e8caece917c4139be795b3fa2ea2e59866c087",
+    "include/Round93CoQuantityDescent.hpp": "92656c6a27dda13b794965fdf6d49bcc38007d16b6780f0ba822f62134253ee2",
+    "src/Round93CoQuantityDescent.cpp": "cf3ea08852f56a10bceeb59c169ff92de4d9d8aad0914a7233985ce7da4f2012",
+    "tests/round93_co_quantity_tests.cpp": "b8008945cea3244978b9ff1fd40bb732d54835469c8dce430865ac8894f9edb9",
+    "tests/round93_co_quantity_diagnostic.cpp": "8e339616123818b7f8fbf7b2f6b69502f8ec4663efb7ad0c29b4e5126466ce8a",
+    "src/Evaluator.cpp": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+    "src/Result.cpp": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+    "src/Parser.cpp": "9402d2744b4b2a7a83c3152d90d6d6438ca9c3e417d1a57da14dd8101c3b2911",
+    "src/ProcessPhaseLedger.cpp": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+    "include/PhysicalDurationTolerance.hpp": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+    "src/Round75QuantityDescent.cpp": "f904a7f7355e897df1aff3d07757d8c2ac5b8dff134235c061637d46a87c0075",
+    "src/Round76PhysicalClosure.cpp": "a9a43c9db00096fc81168cf30a5b2805cacf42b0de9b42b723094f4007db8ce8",
+    "src/Round83BlockExchange.cpp": "7402242968c8fa5db9957089b132b0afde893110f302a841b5a8ca76d115faf9"
+  },
+  "binary_sha256": {
+    "build/research/round93-coquantity/Round93CoQuantityTests.exe": "001d28106ecc91a18c0a7a97b0325c07f7b6a460b5b4d6afd88a18a73aedff0c",
+    "build/research/round93-coquantity/Round93CoQuantityDiagnostic.exe": "fa67457fcb80a6b385b147bd6fda96c83593c106f8da75b471243d4bd2331c8c",
+    "build/research/round93-coquantity/libround93_co_quantity.a": "2dcf283ea5cc03b26df15decb209c3fd9dd56eec72b792ea796834ed1ba57254",
+    "build/research/round93-coquantity/libexact_ebrp_core.a": "29cb167a388e1a76bd544131bf59684be3950f92f13ecdb755525644f596de12"
+  },
+  "command_receipts": [
+    {
+      "stage": "configure",
+      "attempt": 1,
+      "command": "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe -S . -B build/research/round93-coquantity -G Ninja -DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe -DCMAKE_MAKE_PROGRAM=D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -DEXACT_EBRP_ENABLE_GUROBI=ON -DGUROBI_ROOT=D:/gurobi1302/win64 -DCMAKE_BUILD_TYPE=",
+      "exit_code": 0,
+      "outer_tool_wall_seconds": 2.9311226,
+      "log": "results/unified_exact_round93/g1_configure.log",
+      "log_sha256": "0deb929b01203898a2cdf0fd7f4f43fcc5e8efa66bf6f486b3375b4efc8a6a4f"
+    },
+    {
+      "stage": "build",
+      "attempt": 1,
+      "command": "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe --build build/research/round93-coquantity --target Round93CoQuantityTests Round93CoQuantityDiagnostic --parallel 4",
+      "exit_code": 0,
+      "initial_exec_wait_seconds": 30.0070009,
+      "initial_exec_returned_session_id": 65908,
+      "completion_poll_wait_seconds": 0.0000077,
+      "full_launch_to_exit_wall_seconds": null,
+      "timing_note": "Initial exec yielded a live session at its 30-second wait limit; the next poll returned exit 0 immediately. Exact launch-to-exit wall was not captured. The first wait is a paid prefix, not a complete build time.",
+      "log": "results/unified_exact_round93/g1_build_001.log",
+      "log_sha256": "0cad43409aa05b8bae77db6e34285e7e60d6a28b791e9119ec38848f1efefea6"
+    },
+    {
+      "stage": "G1_test",
+      "attempt": 1,
+      "command": "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe --test-dir build/research/round93-coquantity -R ^Round93CoQuantityTests$ --output-on-failure",
+      "exit_code": 0,
+      "outer_tool_wall_seconds": 0.6530438,
+      "result": "1/1 passed; ctest internal real time 0.20 seconds",
+      "log": "results/unified_exact_round93/g1_tests_001.log",
+      "log_sha256": "02ed64736bb119fc9e42716706b529dc148a04dc04a1e91f1830c4672daa7768"
+    }
+  ],
+  "optimize_calls": 0,
+  "real_fixed_witness_diagnostics": 0,
+  "production_algorithm_connected": false
+}

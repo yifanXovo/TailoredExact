@@ -1,0 +1,9 @@
+# Qualification01 retained administrative interruption
+
+Source `5769d63dd` registered F2 feedback240 / F5 shadow300 / F5 feedback300. Only the first process ran: 76.109 seconds solver-launch-to-exit, 76.344 seconds including admission. The owned child was administratively stopped after observing a no-op submission confound; wrapper truthfully recorded abnormal_process_exit/audit failure. `administrative_stop.json` records the reason and exact owned PID/command. The remaining two launches were not executed, not billed and must never be resumed against revised source.
+
+At actual later F2 node920, the callback decoded a complete non-Start state F=.86997805781778625. Prior callbacks had also re-submitted the unchanged startup and unmodified native states because MIPSOL OBJBST had not yet registered the current point. API success and later vector observations were real, but did not demonstrate physical improvement. No certificate/performance inference is made from this interrupted arm; all raw events and costs remain local for indexed archival.
+
+Revision: require candidate true F strictly lower than the triggering state's independently recomputed true F (by existing1e-9 publication tolerance) before current-model feedback. Still never require the input itself to improve global U. Equal global cutoff remains admissible when the improved candidate fills a missing/worse native incumbent. This removes duplicate Start/no-op feedback, not an instance-specific rule or resource trigger. SHADOW applies the same strict candidate rule. The physical cache and archive/model distinction remain unchanged.
+
+Qualification02 prospectively re-registers F5 shadow300, F5 feedback300, F2 feedback240 with the revised common build. This is an interface/attribution repair, not the evidence-led substantive operator revision or a final negative result required later in the research stage.

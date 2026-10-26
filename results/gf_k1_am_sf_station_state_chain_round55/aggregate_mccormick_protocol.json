@@ -1,0 +1,18 @@
+{
+  "schema": "round55-aggregate-mccormick-protocol-v1",
+  "candidate": "MC4",
+  "new_parameters": [],
+  "methods": [
+    "symbolic implication",
+    "root-LP violation census",
+    "exact LP violation maximization if needed"
+  ],
+  "outcomes": [
+    "exactly implied",
+    "numerically implied",
+    "strictly strengthening",
+    "implementation inconsistency"
+  ],
+  "live_if_exactly_implied": false,
+  "live_name_if_strict": "SF-MC4"
+}

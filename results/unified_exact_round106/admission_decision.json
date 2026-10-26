@@ -1,0 +1,27 @@
+{
+  "stage_decision": "RETAIN_COMPONENT_ONLY",
+  "development": "COMPLETE_EIGHT_ARMS_ALL_AUDITS_PASSED",
+  "production_revision": "round106-events-v1",
+  "production_PE_SHA": "1ad7b9128288ff06eed64ac91154c1863963827c5399083b1b233a24ee2d09b4",
+  "retained": ["qualified dynamic support MST certificate A", "qualified balanced-three-stop exact and threshold certificate B", "qualified single-MIPSOL event/cache/lazy/physical-UB/deadline contracts"],
+  "whole_candidate_admitted": false,
+  "evidence": {
+    "F2": {"ENS_certified": true, "ENS_process_seconds": 577.0939999999828, "STRUCT_certified": false, "STRUCT_process_seconds": 1170.1560000000172, "STRUCT_U": 0.8699780578177863, "P_U": 0.8659435203229894, "B_lazy_submissions": 32},
+    "C2": {"all_five_arms_censored": true, "P_U": 0.1983028485838244, "ENS_U": 0.21679306527176728, "FULL_U": 0.39122358434224824, "CORE_U": 0.39162089674952894, "STRUCT_U": 0.37505640729178574, "A_lazy_submissions": 71, "CORE_IIS_seconds": 1455.2076362000005}
+  },
+  "basis": "A/B have natural native exposure and independent mathematical/physical qualification. STRUCT improves its own UB and slightly outperforms FULL/CORE on C2 own UB, but supplies no original-problem certificate, loses the protected F2 ENS certification role, and remains far worse than P and ENS in C2 feasible-route quality. More candidates/cuts or relaxed bounds do not compensate. All C2 arms are time-censored: no final proof-time ranking or gap extrapolation is claimed.",
+  "one_substantive_revision": "NOT_USED: completed data show weak conversion of the assignment-master frontier into competitive routes and an expensive CORE IIS path; separator time is negligible. No evidence warrants another broad mode-rejection tuning cycle within this prototype.",
+  "confirmation": {
+    "admitted": false,
+    "status": "CANCELLED_ALL_UNSTARTED_GROUPS",
+    "roles": ["F5", "N36", "S12"],
+    "generated_inputs_retained": true,
+    "formal_arms_started": 0,
+    "nominal_seconds_not_spent": 35100,
+    "scope": "The pre-development recipe/protocol and all three sealed inputs remain unchanged. Cancellation is untested scope, not a confirmation result; no feedback-based replacement/redraw occurred.",
+    "reason": "The frozen admission rule requires at least one original-problem certificate with a credible cost tradeoff and protection/compensation for important ENS advantages. The complete eight-arm candidate evidence fails that rule."
+  },
+  "fixed_Y": "UNKNOWN: exact repeated historical C2 Y remains unresolved; no Y exclusion, production handoff or denial of inventory-based decomposition follows.",
+  "sole_next_research_question": "Can a uniformly valid strengthening of the retained assignment master reduce unrealizable inventory/ownership candidates enough to reach P's feasible-route frontier, while protecting ENS's certification role? No new configuration is started in this round.",
+  "negative_scope": "This frozen default-off assignment-master/single-MIPSOL FULL/CORE/STRUCT configuration on F2 and R98-C2 at the registered caps; no assertion that tailored exact algorithms or all decomposition interfaces fail."
+}

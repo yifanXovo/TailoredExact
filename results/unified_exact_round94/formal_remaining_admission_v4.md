@@ -1,0 +1,9 @@
+# Root admission: only the original ten never-started arms
+
+The independent v3 scope review and v4 timing-field review passed. Root has checked the final v4 script, preregistration, identity and recovered-prefix hashes against the ready report and issued one remaining-formal lease. It authorizes only original launch numbers 3–12, in the original order, with unchanged commands, frozen R90 binary, cases, seed, parameters and whole-process deadlines. The cap sum for these remaining processes is 11,700 seconds; no paid arm or qualification is repeated.
+
+The original P and ENS evidence and failed v2 audit remain immutable. The sole v3 prepare cost 7.597303 seconds and exposed an exact-comparison error on a freshly measured offline duration. V4 excludes only that named duration from semantic equality, validates its finite nonnegative value, and retains every substantive audit field and original byte anchor. V4 prepare and its read-only self-check cost 7.6757639 and 7.56911 seconds. These engineering/offline costs are reported separately from, and not refunded against, the original formal outer cost of 1442.5685015 seconds. Independent review costs remain in their own reports.
+
+The recovered F2 ENS-C physical certificate is valid (544.265 s). P-GRB remains open (897.172 s); its elapsed time is censored and must not become a completed solve-time ratio. The continuation still stops on the frozen severe-risk/promotion-blocking conditions or a real evidence/engineering failure. This is research supervision of separate experiments, not an internal algorithm scheduling rule.
+
+One Sol high worker owns native execution and routine monitoring. All R95 native work is finished; no other build or solver may overlap. The worker will report a material failure or the completed finite batch and preserve true launch-to-exit cost. No promotion, extra seed, new case, longer cap or fourth research round follows automatically.

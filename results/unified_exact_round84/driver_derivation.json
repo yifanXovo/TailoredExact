@@ -1,0 +1,107 @@
+{
+  "template": "scripts\\round83_research.py",
+  "template_sha256": "e7e6c7f3d00473169149f1e4eb71dc18281bef910ef142597a9d5121e6334fe9",
+  "replacements": [
+    {
+      "old": "Round83 frozen same-build complete-method exchange screen.",
+      "new": "Round84 frozen ENS-C long protection and finite same-build repetition.",
+      "count": 1
+    },
+    {
+      "old": "STAGE=ROOT/'results/unified_exact_round83'",
+      "new": "STAGE=ROOT/'results/unified_exact_round84'",
+      "count": 1
+    },
+    {
+      "old": "ROLE_IDS=['E8','N12','D4','U6']",
+      "new": "ROLE_IDS=['D6','D7','U6']",
+      "count": 1
+    },
+    {
+      "old": "CAPS=dict(E8=120,N12=120,D4=300,U6=3600)",
+      "new": "CAPS={i:3600 for i in ROLE_IDS}",
+      "count": 1
+    },
+    {
+      "old": ";ARMS['U6']=['P-GRB','BDS-C','ENS-C','K1-R']",
+      "new": "",
+      "count": 1
+    },
+    {
+      "old": "codex/round83-equal-net-block-exchange",
+      "new": "codex/round84-ensc-long-protection-replication",
+      "count": 1
+    },
+    {
+      "old": "'scripts/round83_research.py'",
+      "new": "'scripts/round84_research.py'",
+      "count": 1
+    },
+    {
+      "old": "'results/unified_exact_round83/full_screen_plan.md'",
+      "new": "'results/unified_exact_round84/plan.md'",
+      "count": 1
+    },
+    {
+      "old": "'results/unified_exact_round83/protocol.json'",
+      "new": "'results/unified_exact_round84/protocol.json'",
+      "count": 1
+    },
+    {
+      "old": "STAGE/'startup/completion_summary.json'",
+      "new": "ROUND83/'startup/completion_summary.json'",
+      "count": 2
+    },
+    {
+      "old": "30996a5c023adc2257cf9f4581e3672cf9a644d1",
+      "new": "131d09280a1563243d0201e68367b26baf5079c3",
+      "count": 1
+    },
+    {
+      "old": "len(roles)==13",
+      "new": "len(roles)==9",
+      "count": 1
+    },
+    {
+      "old": "16020",
+      "new": "32400",
+      "count": 2
+    },
+    {
+      "old": "STAGE/'full_screen_plan.md'",
+      "new": "STAGE/'plan.md'",
+      "count": 2
+    },
+    {
+      "old": "prior_bindings={},",
+      "new": "prior_bindings=read(STAGE/'protocol.json')['prior_bindings'],",
+      "count": 1
+    },
+    {
+      "old": "reference_builds=4",
+      "new": "reference_builds=3",
+      "count": 1
+    },
+    {
+      "old": "planned=13",
+      "new": "planned=9",
+      "count": 2
+    },
+    {
+      "old": "len(records)==13",
+      "new": "len(records)==9",
+      "count": 1
+    },
+    {
+      "old": "assert not (ROUND83/'startup/active_run.lock').exists()",
+      "new": "assert not (ROUND83/'startup/active_run.lock').exists()\n    assert read(ROUND83/'campaign/driver_completion.json')['all_valid']\n    assert read(ROUND83/'campaign/audit.json')['all_checks_passed']\n    assert read(ROUND83/'campaign/mechanism_audit.json')['all_checks_passed']\n    assert not (ROUND83/'campaign/active_run.lock').exists()",
+      "count": 1
+    }
+  ],
+  "optimizer_calls": 0,
+  "initial_copy_sha256": "16c2c071c6cc7e8c77601a0b657a7c4f898ffc00d0202569cc662d5fff7ab62d",
+  "final_driver_sha256": "4e4dbbc7b919d2a7572b15d88f11ed76a73292f18875b08572a62d8a81246175",
+  "additional_prelaunch_changes": [
+    "Bind unchanged Round65ReferenceBuild.exe to the prior qualified R83 reference launch and record its hash."
+  ]
+}

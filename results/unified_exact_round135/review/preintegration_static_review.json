@@ -1,0 +1,93 @@
+{
+  "schema": "round135-independent-preintegration-static-review-v1",
+  "UTC": "2026-10-26T09:09:37.486483+00:00",
+  "reviewer": "/root/independent_review",
+  "scope": "Finite static source/manuscript/metadata review during an active serial native arm; not the final G3 integration review.",
+  "disposition": "PASS_AFTER_TWO_LOCAL_DERIVED_OR_PROSE_FIXES",
+  "blocking_findings": [],
+  "resolved_findings": [
+    {
+      "id": "PRE01",
+      "issue": "Appendix B.1 retained R134 P/PS and weight-C/D descriptions while pointing to current R135 matrices.",
+      "resolution": "R134 candidate/confirmation/weight commands now link to the fixed R134 commit; R135 manifests explicitly contain S2/AP only at lambda .15. Appendix opening distinguishes the reference and recompilation.",
+      "verified_current_text": true
+    },
+    {
+      "id": "PRE02",
+      "issue": "Inherited gather wrote completion certification counts before S2/AP variant relabeling, so AP certificates were counted as S2.",
+      "resolution": "New gather rewrites completion.json after applying the frozen variant, with variant_from_frozen_launch=true. Current C completion has S2=2 and AP=2.",
+      "verified_current_source_and_small_metadata": true
+    }
+  ],
+  "frozen_design": {
+    "stage1_arms": 10,
+    "stage1_cap_sum_seconds": 8760,
+    "stage2_arms": 22,
+    "stage2_cap_sum_seconds": 14760,
+    "registered_arms": 32,
+    "matched_pairs": 16,
+    "cap_sum_seconds": 23520,
+    "compute_limit_seconds": 28800,
+    "remaining_for_BC_and_repair_seconds": 5280,
+    "all_pairs_same_argv_after_output_path_normalization_except_AP_flag": true,
+    "all_lambda_point15": true,
+    "serial_threads1": true,
+    "opposite_micro_repeat_orders": true,
+    "D13_present_both_seeds": true,
+    "conditional_second_stage_kept": true
+  },
+  "delivery_static_review": {
+    "only_entered_positions_packed_and_replayed": true,
+    "registered_denominator_retained": true,
+    "two_AP_roots_plus_only_saved_dependencies": true,
+    "source_capsule_preserves_exact_source_and_helper_bytes": true,
+    "helpers_replayed_under_existing_closed_root_guards": true,
+    "original_production_and_verification_clocks_preserved_by_whitelisted_replay_substitutions": true,
+    "restored_derived_writes_memory_only": true,
+    "vendor_assets_attested_never_published_or_loaded": true,
+    "anonymous_recovery_uses_pinned_HTTPS": true,
+    "old_campaign_restoration_not_requested_by_code": true,
+    "actual_local_preflight_and_public_recovery_still_required": true
+  },
+  "manuscript_static_review": {
+    "B2_identity_and_AP_projection_conditions_accurate": true,
+    "R55_live_history_and_subinterval_vs_whole_method_distinction_correct": true,
+    "ideal_vs_binary64_scope_correct": true,
+    "main_math_promoted_with_implicit_integrality_and_ordered_supply_proofs": true,
+    "version_counts_and_denominators_kept_separate": true,
+    "HGA_title_and_same_problem_antecedent_explicit": true,
+    "HGA_authors_publication_status_not_invented": true,
+    "source_coordinates_and_generated_operating_fields_separated": true,
+    "AP_result_and_conclusion_placeholders_expected_until_formal_results": true,
+    "historical_control_supplement_to_be_retained_in_final_assembly": true
+  },
+  "pending_final_items": [
+    "All entered arms and stage decision must be complete and retain every open/adverse result.",
+    "Final candidate decision and AP manuscript placeholders must be filled from actual evidence.",
+    "Inspect assembled manuscript and actual PDF layout/QA.",
+    "Inspect actual source capsule/carriers, local preflight, public restoration and cost/protection receipts.",
+    "Verify concrete bibliography author/status answers if user supplies them; otherwise retain narrow named missing facts."
+  ],
+  "reviewer_actions": {
+    "checker_executions": 0,
+    "Optimize": 0,
+    "compilation": 0,
+    "vendor_DLL_loads": 0,
+    "heavy_raw_or_archive_read": false,
+    "native_process_interference": false,
+    "writes_only_this_review": true
+  },
+  "reviewed_file_SHA256": {
+    "scripts/round135_campaign.py": "694f3f8c562650ac4e8ebad22c05e0cabde69fa1d2eca2654943388dede37203",
+    "scripts/round135_analyze.py": "16eb0c32551969b43a7eb26914f9f4ffd95f28e926b9ba9b1ca411b5bb8bdfa9",
+    "scripts/round135_release.py": "07bf0729f7a97533c4096127381c034d77a38622a9d8ac9f69624e7ce6faff65",
+    "scripts/round135_portable_check.py": "168f9b3d5c6ead66d2f28f6448abf3cc09ab593724e814e63d8844b9803658ee",
+    "scripts/round135_public_restore.py": "55b105acfa7c2886096c150f86be520e009b6d48873e7cdefe2ce6f7cc6d7c1d",
+    "scripts/round135_common.py": "1c70cb856b2368381ab92e3e00f00cffa9ffd9b998fb5847a43090fc0750aa5e",
+    "results/unified_exact_round135/paper_body.md": "67c92f404fe48068044783ea6c4b222e688d8738814d208d28e053f6c4c83c24",
+    "results/unified_exact_round135/model_and_algorithm_appendices.md": "54e594a9d9f17c1c809b0967ca802bc4a01bd14ed3a6b4b4b9c52fef4eccc30e",
+    "results/unified_exact_round135/ap_math_and_history.md": "591665d2c98c9fa51b71676953f6eebf5fae9f1a2cdefdb4eaa9167ea52112e0",
+    "results/unified_exact_round135/data_provenance.md": "14eb633fa6b65bfe2156055c1a84b2f889cb9eb55eea153f1c6732e8060fd550",
+    "results/unified_exact_round135/literature_scope.md": "14f53b5ca3a7b9e9f11bba2b1c5630afe5a6975adf19c81cbf2851d42bdb77b9"
+  }
+}

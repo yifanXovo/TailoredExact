@@ -1,0 +1,34 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Sep 26 21:33:05 2026
+
+Set parameter OutputFlag to value 1
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+MIPGap  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 105910 rows, 25943 columns and 793802 nonzeros (Min)
+Model fingerprint: 0x9f847c8b
+Model has 51 linear objective coefficients
+Coefficient statistics:
+  Matrix range     [1e-03, 3e+04]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [3e-01, 1e+03]
+  RHS range        [3e-01, 1e+05]
+
+Presolve removed 54435 rows and 256 columns
+Presolve time: 0.28s
+Presolved: 51475 rows, 25688 columns, 491072 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   1.425858e+03   0.000000e+00      0s
+   17587    1.6703782e-01   6.135840e+03   0.000000e+00      5s
+   24027    1.8829967e-01   0.000000e+00   0.000000e+00      7s
+
+Solved in 24027 iterations and 7.30 seconds (24.57 work units)
+Optimal objective  1.882996742e-01

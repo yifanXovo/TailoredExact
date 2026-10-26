@@ -1,0 +1,73 @@
+# Round127 independent final numerical and finite evidence review
+
+Disposition: **PASS within the declared finite review scope**. Execution of the study remains **PARTIAL** and its scoped overall judgment remains **FOUNDATIONAL_ISSUE_REQUIRES_DECISION**, because the three MD positions failed the mandatory inclusive-root/equal-U0-Start qualification. This is not a finding of blanket invalidity of frozen MB. All 54 actually executed formal arms passed the retained protocol/evidence gates; “qualified” does not mean that an open arm has certified optimality.
+
+This is the requested separate executor's recomputation, not third-party replication. The standard-library implementation was prepared before formal completion and did not call the primary selection, analysis, portable-checker, fleet, matrix or proof-reader functions. The parent explicitly confirmed formal/native/build processes idle before metering the final audit. No Optimize, build, native rerun, new LP, reselection or experimental change occurred in this review.
+
+## Executed evidence and preserved attempts
+
+The successful machine evidence is `review/final_independent_attempts/final02/receipt.json`, SHA256 `ecc9bf590846460915c07679d99da4f729028087c5cc2bebd6e1aea0c632ef70`, status PASS, errors empty. It binds audit source SHA256 `29f45ab15299cd848181bbe94e97a272858826fe55f29e0077e27dbb2f20e5a6`. The closed `final_independent_review_02` verification fee records exit 0 and **15.516931800055318 seconds** outer time; its internal script interval was 15.395058499998413 seconds. Nested solver times were not added again. This report reads the saved receipt and compact published summaries; it does not execute the audit again.
+
+The preceding `final01` failure is retained with its original receipt, error and **0.30100159998983145 seconds** outer fee. It stopped at the initial manifest-byte guard before any endpoint, physical, matrix or proof-chain stage. Its precise source was reconstructed by reversing only the reader correction and saved as `final01/audit_source.py` only after SHA256 equaled **a4159a14c5c481e85eebb8dd6e0607cd11a39420e6427eedb870359eaf89d54d**. No approximate reconstruction is labeled as the failed source.
+
+The failure was an audit-reader line-ending assumption. The raw preselection working manifest is CRLF, SHA256 `4d9b4851d152eacf64f2241c9099049e29961f0c645d5e4fb1dba3536b9efd3d`; the selection commit's LF blob is `74c0b57b37a62bd1141fa03d5ebb3a30d9906e8295ef14906a0dd6626c8af7f9`. Replacing only CRLF with LF gives exact bytes, no residual CR and identical JSON. Separately, the unchanged first training identity, SHA256 `7a2627b7d74a84d04030e742637b8d61a40524e92632467f917376a3d6994963`, is bound by the byte-exact committed selection file and itself binds the raw CRLF manifest SHA. Both raw-object continuity and committed-text equality therefore hold. Only this explicit manifest exception is admitted; the selected PRM, selection, input manifest and earlier independent review/script/receipt retain exact raw-byte equality. No evidence was normalized or rewritten.
+
+## Frozen selection, identities and clocks
+
+The completed independent all-36 training review remains the training recomputation; it was not rerun. Final02 checks its exact selection-commit bindings, selection-before-formal-launch chronology and E1 ancestry at commit `44ffd46367478dd784cc6a9595bfd3df174be8a7`. It retains every training position and the adverse/open positions. The selected file remains q2, MIPFocus=2 and Cuts=-1, SHA256 `e7cc6a9d9567f5f1b8d7c8887e5dfdf18f6632b8e97051583f2a2080c22e1f6f`. The prior independent result is N=4, per-Seed counts 2/2, N_min=2 and S_q=0.6568870237580052; q0 is N=3, N_min=1. Open-run score penalties are not certification times. No formal-role performance was used to change this choice.
+
+Final02 binds the unchanged frozen source layers (216 E0 source files, 217 E1 source files) and binary identities. E0 PE is `5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba`; E1 PE is `d668236e9396b2e12f02bb65d9819b98762d2a35aad1b186d352d234dae756c9`; DLL is `9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88`. Same-named E0 and E1 runs remain separate paid observations.
+
+All 54 actual arms have the prescribed keys, normal producer/verification/total closeouts, finite required-output seal bindings, actual process identities, qualification flags, unchanged own endpoints and signed gaps, complete producer-cap checks and split-clock arithmetic. There are 54 distinct native process creations, 12 main arms, 24 tiny arms and 18 core arms. All 54 published arm rows agree with the unrounded endpoint/time evidence; source-reduced rows=0. P/PT compact identities and native parameter readbacks are checked. The six E1 core P/PT runs directly serialize NumStart=0. The frozen older E0 PE does not serialize that direct attribute, so its cold scope is the actual fresh-model/single-Optimize/no requested, submitted or loaded Start evidence. The earlier independent training review covers its 36 cold readbacks.
+
+Every arm is bound to its actual closed producing-wrapper fee through native parent PID and the complete sealed production interval. First logical arms retain OS wrapper-birth/import timing; later logical arms retain admission before their input/PE checks. Parent fee admission is neither invented as wrapper birth nor added to production clocks. Only the explicitly documented tiny07 split is admitted: original MB native PID46400 belongs to wrapper46804 and the retained exit-1 fee; previously unstarted P native PID41784 belongs to resumed wrapper37280 and its exit-0 fee. There is no broad fee or clock fallback.
+
+For tiny07 MB, unchanged T_produce=0.8141223039710894, T_verify=650.1793865000363 and T_total=650.9935088040074 are retained. The long verification wall span includes the failed reader/recovery waiting; actual machine fees separately retain the failed and successful processes and parent segments. The focused `empty02` PASS and original producer/seal/H/PID bindings are required for this exception. Original failed handoff, exclusive-writer recovery and reviewer `empty01` attempts remain retained. No native solve was repeated and no recovery wait was substituted for certification production cost.
+
+## Independently recomputed paired results
+
+All predeclared pair keys, classifications, unrounded directions, time differences, both-certified-only ratios and explicit conditional geometric-mean denominators agree with the published tables. There are **39 typed nonalias entries: 36 evaluable, 3 MD UNEVALUABLE, 0 aliases**. The denominator is nine distinct evaluation inputs versus three disjoint training inputs. Repeated Seeds/repeats, same-named E0/E1 inputs and shared core MB/P arms are not independent trials.
+
+| Comparison | Typed entries | Certification classes | Direction | Conditional right/left geometric mean |
+| --- | ---: | --- | --- | --- |
+| E0 Seed1 MB/P | 6 | 2 both, 3 MB-only, 1 both-open | 5 Win, 1 undetermined | 8.581877389679837, n=2 |
+| E0 tiny MB/P | 12 | 12 both | 10 Win, 2 Lose | 1.5144179360582215, n=12 |
+| E1 MB/P | 3 | 1 both, 1 MB-only, 1 both-open | 2 Win, 1 undetermined | 13.32527630700094, n=1 |
+| E1 MB/PT | 3 | 2 MB-only, 1 both-open | 2 Win, 1 undetermined | unavailable, n=0 |
+| E1 PT/P | 3 | 1 P-only, 2 both-open | 1 Lose, 2 undetermined | unavailable, n=0 |
+| E1 MB/MR | 3 | 2 both, 1 both-open | 2 Lose, 1 undetermined | 0.8731618831237902, n=2 |
+| E1 MB/MG | 3 | 1 both, 1 MB-only, 1 both-open | 2 Win, 1 undetermined | 1.1438452400812806, n=1 |
+| E1 MB/MS2 | 3 | 2 both, 1 both-open | 2 Lose, 1 undetermined | 0.8350699988058697, n=2 |
+| E1 MB/MD | 3 | 3 UNEVALUABLE | no D-effect direction | unavailable, n=0 |
+
+An exact direction is separate from the retained materiality label and the tiny 10-second warning. For example SC-B15-S Seed1 remains an exact MB Win while its legacy materiality is TIME_CLOSE. No valid open time is filled with its cap or used in a ratio. E0 main certifications are MB5/P2; E1 core certifications are MB2/P1/PT0/MR2/MG1/MS2=2. Thus selected q2's training improvement does not establish a held-out strengthening of default P. MR/MS2's faster observations remain adverse to the full MB timing comparison and do not authorize changing MB.
+
+Both tiny inputs retain all six observations (Seeds0/1/2, two repeats each), all both-certified. SM-C8-S median MB-P is **-1.6258125416352414 s** and its per-Seed medians are -1.8804130908683874, -1.4027900836081244 and -1.7018344079260714 s. SM-B10-B median is **-0.2951786854537204 s**, with per-Seed medians -0.3719662016374059, -0.22614782920572907 and -0.29292566230287775 s. These are all-six medians, not a hidden certified subset. SM-B10-B Seed1/repeat2 is a Lose of +0.0832909164018929 s and Seed2/repeat1 a Lose of +0.07677628705278039 s. Each problem has zero P-only, zero unrounded delta>=10, no repeated warning and no median warning. This finite observation does not establish absence of regression elsewhere or statistical stability.
+
+## Finite actual model and physical checks
+
+The own serialized-decimal Fraction/Counter parser independently verifies nine retained S12 qualification differences: MR/MG/MS2 at root, left child and right child. Each full model has 3192 rows/1388 columns. MR removes exactly 596 rows (24 ordered supply, 132 conditional pairs, 440 conditional triples); MG removes 336 rows (66 spread, 132 fixed and 132 variable-S centering, one objective estimator, five W_SP rows) and only W_SP/r_max/r_min columns; MS2 removes only 440 triple rows. Retained duplicate row multiplicities, objective, bounds and types are identical in every comparison. The S12 MD functional model equals the full 3192/1388 root, but this is explicitly not general mathematical admission.
+
+The fixed first exposed formal role is K1 SC-C15-S for each deletion mode. All three samples have complete identical H action traces/fleet and root [0,0.5627184431151906] with own cutoff 0.5627184431151906. Full root is 5054 rows/2083 columns. MR removes exactly 1150 rows (30 ordered, 210 pair, 910 triple) and no columns; MG removes 531 rows (105 spread, 210 fixed plus 210 variable centering, one estimator, five W_SP) and exactly the three dedicated columns; MS2 removes only 910 triples. All surviving rows/objective/types/bounds match exactly. H/scope mismatches=0. These are three actual-root samples plus the nine retained qualification differences, not independently checked matrices for all formal calls or every role. The primary nine saved-point diagnostic table was read separately as a compact result; its no ordinary violation/nonempty W intervals are not promoted to a global redundancy theorem.
+
+The prechosen physical sample contains exactly nine final fleets: first main MB (SC-C15-S), each tiny input's Seed0/repeat1 MB, and K1 P/PT/MB/MR/MG/MS2. Own arithmetic checks vehicle identity and Q, ordered prefix loads from empty departure, unique integer one-way nonzero service, inventory and loaded-return conservation, complete Euclidean travel/handling duration, depot exclusion and physical G/P/F from the bound input. It did not call the inherited fleet replay. The main and all six core K1 fleets reproduce F=0.4628064085383384, G=0.19747315430756912 and P=1.7688883615384616; two Q30 vehicles have durations 3558.3611856352823/3458.779448031005 s and feasible prefix loads. Tiny SM-C8-S reproduces F=0.5160772555581564 and duration2361.965978995957 s. Tiny07 reproduces F=0.5358910752996684, G=0.21948482529966845 and P=2.109375 from two explicitly empty Q15/Q25 vehicles; the empty-route comparison correction does not change their inventories or objective. No sampled input required legacy weight renormalization. This is representative finite physical replay, not a fresh native replication or universal witness/matrix proof.
+
+## One complete nonzero native MB cover chain
+
+The prespecified first nonzero certified MB arm with actual native calls is **main/01_SC-C15-S MB**, not a sample chosen for favorable speed. It has five linked calls and five returned-original-model proofs, three unique serialized models totaling **1,808,075 bytes**, and **461** callback local-bound records. Original A/B constraints, restored types, actual Seed/native settings, true-G scope/cutoff and native log byte intervals are linked to each actual call/return. The complete call sequence is:
+
+| Call | Actual domain | Kind | Returned usable bound |
+| --- | --- | --- | ---: |
+| 1 | [0,0.5627184431151906] | complete optimal LP | 0.18563300757913834 |
+| 2 | [0,0.2813592215575953] | complete optimal LP | 0.18589325598085416 |
+| 3 | [0.2813592215575953,0.5627184431151906] | complete optimal LP | 0.4139817072485462 |
+| 4 | full original root | child-bound-target MIP return | 0.1874553345933 |
+| 5 | full original root | terminal MIP return | 0.4628064085383 |
+
+All five saved pre-call covers are supported by evidence available at their own sequence; future_evidence_used=false throughout. Final actual live cover is the closed root L0 on [0,0.5627184431151906], with native-terminal-MIP-optimal closure and independently linked support. The own physical endpoint is U=0.4628064085383384. The raw reported L=0.46280640853833893 and signed U-L=-5.551115123125783e-16 remain unchanged rather than rounded or clipped. The local returned bound supports the qualified endpoint under the inherited numerical tolerance.
+
+Coverage uses the F>=G floor and local cutoff-complement support min(local bound, own cutoff), not a target hit alone or a boolean closure flag. Raw native_preconditions/global flags stay unchanged (the five sampled raw native_preconditions are zero); actual returned-model prerequisites are checked offline at the saved scope. This gives one complete finite numerical provenance/cover reconstruction, not a universal rational certificate. It does not imply the inclusive-root/equal-U0-Start property that fails for MD.
+
+## Scientific disposition
+
+No new qualification blocker was found within this finite final audit. The remaining foundational decision is exactly the documented MD specification conflict with retained equality closure. Do not infer a D effect from three unstarted MD entries, infer universal necessity from C_G's bounded support, hide MR/MS2 reverse times, call q2 an improved held-out baseline, or pool the 39 typed comparisons into independent trials. The numerical/physical/model/cover review is complete at its stated scope. Actual generated manuscript and rendered PDF claims/layout are reviewed separately and do not retroactively enlarge this evidence scope.

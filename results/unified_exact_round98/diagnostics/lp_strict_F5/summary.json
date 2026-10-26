@@ -1,0 +1,1196 @@
+{
+  "role": "F5",
+  "passed": true,
+  "optimizer_calls": 4,
+  "maximum_calls": 4,
+  "outer_seconds": 19.140999999828637,
+  "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+  "fixed_state": {
+    "id": "F5",
+    "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+    "family": "synthetic",
+    "geography": "perturbed_grid",
+    "inventory": "paired_shortage",
+    "V": 50,
+    "M": 4,
+    "Q": 30,
+    "complete_Q_vector": [
+      30,
+      30,
+      30,
+      30
+    ],
+    "T_seconds": 7200,
+    "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+    "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+    "source_manifest": "results/unified_exact_round86/protocol.json",
+    "method_order": [
+      "ENS-C",
+      "P-GRB",
+      "ORDER-ON"
+    ],
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "cap_seconds": 3600,
+    "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+    "reference": {
+      "optimizer_calls": 0,
+      "fingerprint": -1011005748,
+      "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+      "columns": 13410,
+      "rows": 35693
+    },
+    "Q_vector": [
+      30,
+      30,
+      30,
+      30
+    ],
+    "historical_initial_witness": "results/unified_exact_round97/development02/raw/03_F5_OFF/external/initial_witness.json",
+    "historical_initial_witness_sha256": "16698da7b0c4ea43f1b8608aa9162b6788fed436c943c7065823a23328754b8d",
+    "diagnostic_cutoff": 0.38430409168754603,
+    "diagnostic_gamma_L": 0,
+    "diagnostic_gamma_U": 0.38430409168754603
+  },
+  "records": [
+    {
+      "mode": "off",
+      "status": 2,
+      "objective": 0.244169448027537,
+      "original": {
+        "rows": 105416,
+        "columns": 26633,
+        "nonzeros": 727372,
+        "binary": 12402,
+        "integer": 13052
+      },
+      "presolved": {
+        "rows": 86019,
+        "columns": 26594,
+        "nonzeros": 748125,
+        "binary": 12402,
+        "integer": 13063
+      },
+      "model_sha256": "813d3f1b8e0cb890daf11432695dd01474b0acd383ae43581b21b707281472b7",
+      "feasibility_tolerance": 1e-08,
+      "optimality_tolerance": 1e-09,
+      "primal_violation": 0.0,
+      "dual_violation": 1.734723475976807e-18,
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": -1.25,
+          "visit_residual": -0.6521739130434783,
+          "movement": 8.0,
+          "expected_movement": 9.25
+        },
+        {
+          "station": 2,
+          "movement_residual": -10.6284844070107,
+          "visit_residual": -0.7272727272727273,
+          "movement": 6.0,
+          "expected_movement": 16.6284844070107
+        },
+        {
+          "station": 3,
+          "movement_residual": -9.166666666666668,
+          "visit_residual": -0.8571428571428572,
+          "movement": 3.0,
+          "expected_movement": 12.166666666666668
+        },
+        {
+          "station": 4,
+          "movement_residual": -9.10709341307426,
+          "visit_residual": -0.7037037037037037,
+          "movement": 8.0,
+          "expected_movement": 17.10709341307426
+        },
+        {
+          "station": 5,
+          "movement_residual": -3.553981929928252,
+          "visit_residual": -0.7666666666666666,
+          "movement": 7.0,
+          "expected_movement": 10.553981929928252
+        },
+        {
+          "station": 6,
+          "movement_residual": -12.035605508763371,
+          "visit_residual": -0.8181818181818181,
+          "movement": 4.0,
+          "expected_movement": 16.03560550876337
+        },
+        {
+          "station": 7,
+          "movement_residual": -10.437326945759908,
+          "visit_residual": -0.84,
+          "movement": 4.0,
+          "expected_movement": 14.437326945759908
+        },
+        {
+          "station": 8,
+          "movement_residual": -5.478260869565219,
+          "visit_residual": -0.6956521739130435,
+          "movement": 7.0,
+          "expected_movement": 12.478260869565219
+        },
+        {
+          "station": 9,
+          "movement_residual": -8.67488924528634,
+          "visit_residual": -0.6538461538461539,
+          "movement": 9.0,
+          "expected_movement": 17.67488924528634
+        },
+        {
+          "station": 10,
+          "movement_residual": -8.501776814353367,
+          "visit_residual": -0.6189017949448549,
+          "movement": 8.0,
+          "expected_movement": 16.501776814353367
+        },
+        {
+          "station": 11,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 17.0,
+          "expected_movement": 17.0
+        },
+        {
+          "station": 12,
+          "movement_residual": -8.049032475382706,
+          "visit_residual": -0.5898716489179459,
+          "movement": 10.099066111211062,
+          "expected_movement": 18.14809858659377
+        },
+        {
+          "station": 13,
+          "movement_residual": -7.310688574798613,
+          "visit_residual": -0.6191748087880762,
+          "movement": 7.0,
+          "expected_movement": 14.310688574798613
+        },
+        {
+          "station": 14,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 12.000000000000002,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 15,
+          "movement_residual": -8.321799401943046,
+          "visit_residual": -0.5660135181611676,
+          "movement": 9.113716118615478,
+          "expected_movement": 17.435515520558525
+        },
+        {
+          "station": 16,
+          "movement_residual": -11.407121101752674,
+          "visit_residual": -0.8097291396291713,
+          "movement": 4.0,
+          "expected_movement": 15.407121101752674
+        },
+        {
+          "station": 17,
+          "movement_residual": -6.25,
+          "visit_residual": -0.7407407407407407,
+          "movement": 7.0,
+          "expected_movement": 13.25
+        },
+        {
+          "station": 18,
+          "movement_residual": -8.75,
+          "visit_residual": -0.42253638042573305,
+          "movement": 8.0,
+          "expected_movement": 16.75
+        },
+        {
+          "station": 19,
+          "movement_residual": -5.384615384615384,
+          "visit_residual": -0.5019732650850615,
+          "movement": 7.000000000000001,
+          "expected_movement": 12.384615384615385
+        },
+        {
+          "station": 20,
+          "movement_residual": -9.28564011961139,
+          "visit_residual": -0.8,
+          "movement": 5.0,
+          "expected_movement": 14.28564011961139
+        },
+        {
+          "station": 21,
+          "movement_residual": -8.935619353102581,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 17.93561935310258
+        },
+        {
+          "station": 22,
+          "movement_residual": -6.3499169339647565,
+          "visit_residual": -0.8214285714285714,
+          "movement": 5.0,
+          "expected_movement": 11.349916933964757
+        },
+        {
+          "station": 23,
+          "movement_residual": -4.799335471718059,
+          "visit_residual": -0.23738716044662955,
+          "movement": 10.886283881384522,
+          "expected_movement": 15.685619353102581
+        },
+        {
+          "station": 24,
+          "movement_residual": -8.40353286219792,
+          "visit_residual": -0.5909090909090909,
+          "movement": 9.0,
+          "expected_movement": 17.40353286219792
+        },
+        {
+          "station": 25,
+          "movement_residual": 0.0,
+          "visit_residual": -0.096673020773826,
+          "movement": 10.0,
+          "expected_movement": 10.0
+        },
+        {
+          "station": 26,
+          "movement_residual": -11.699833867929513,
+          "visit_residual": -0.875,
+          "movement": 3.0,
+          "expected_movement": 14.699833867929513
+        },
+        {
+          "station": 27,
+          "movement_residual": -12.892837365229704,
+          "visit_residual": -0.85,
+          "movement": 3.0,
+          "expected_movement": 15.892837365229704
+        },
+        {
+          "station": 28,
+          "movement_residual": -8.501776814353367,
+          "visit_residual": -0.61456658583579,
+          "movement": 8.0,
+          "expected_movement": 16.501776814353367
+        },
+        {
+          "station": 29,
+          "movement_residual": -9.171404838275645,
+          "visit_residual": -0.6363636363636364,
+          "movement": 8.0,
+          "expected_movement": 17.171404838275645
+        },
+        {
+          "station": 30,
+          "movement_residual": -8.228571428571428,
+          "visit_residual": 0.0,
+          "movement": 11.0,
+          "expected_movement": 19.228571428571428
+        },
+        {
+          "station": 31,
+          "movement_residual": -8.849813101420702,
+          "visit_residual": -0.8888888888888888,
+          "movement": 3.0,
+          "expected_movement": 11.849813101420702
+        },
+        {
+          "station": 32,
+          "movement_residual": -11.74278891004248,
+          "visit_residual": -0.8695652173913043,
+          "movement": 3.0,
+          "expected_movement": 14.74278891004248
+        },
+        {
+          "station": 33,
+          "movement_residual": -8.03564011961139,
+          "visit_residual": -0.5909090909090908,
+          "movement": 9.0,
+          "expected_movement": 17.03564011961139
+        },
+        {
+          "station": 34,
+          "movement_residual": -2.25,
+          "visit_residual": -0.5513231820419227,
+          "movement": 12.0,
+          "expected_movement": 14.25
+        },
+        {
+          "station": 35,
+          "movement_residual": -10.517733532685652,
+          "visit_residual": -0.88,
+          "movement": 3.0,
+          "expected_movement": 13.517733532685652
+        },
+        {
+          "station": 36,
+          "movement_residual": -10.551724137931036,
+          "visit_residual": -0.6384959454781585,
+          "movement": 3.0,
+          "expected_movement": 13.551724137931036
+        },
+        {
+          "station": 37,
+          "movement_residual": -11.871238706205157,
+          "visit_residual": 0.0,
+          "movement": 3.0,
+          "expected_movement": 14.871238706205157
+        },
+        {
+          "station": 38,
+          "movement_residual": -9.658536585365855,
+          "visit_residual": -0.6,
+          "movement": 12.0,
+          "expected_movement": 21.658536585365855
+        },
+        {
+          "station": 39,
+          "movement_residual": -11.678512095689111,
+          "visit_residual": -0.0963749807780665,
+          "movement": 5.0,
+          "expected_movement": 16.67851209568911
+        },
+        {
+          "station": 40,
+          "movement_residual": 0.0,
+          "visit_residual": -0.6190476190476191,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 41,
+          "movement_residual": -2.086956521739131,
+          "visit_residual": -0.5714285714285714,
+          "movement": 9.0,
+          "expected_movement": 11.08695652173913
+        },
+        {
+          "station": 42,
+          "movement_residual": -10.799958466982378,
+          "visit_residual": -0.7142857142857143,
+          "movement": 6.0,
+          "expected_movement": 16.79995846698238
+        },
+        {
+          "station": 43,
+          "movement_residual": -8.41064011961139,
+          "visit_residual": -0.72,
+          "movement": 7.0,
+          "expected_movement": 15.41064011961139
+        },
+        {
+          "station": 44,
+          "movement_residual": -10.45352594002832,
+          "visit_residual": -0.6097410435744444,
+          "movement": 5.0,
+          "expected_movement": 15.45352594002832
+        },
+        {
+          "station": 45,
+          "movement_residual": -7.5997784905726835,
+          "visit_residual": -0.8571428571428572,
+          "movement": 4.0,
+          "expected_movement": 11.599778490572684
+        },
+        {
+          "station": 46,
+          "movement_residual": -6.75,
+          "visit_residual": -0.6923076923076923,
+          "movement": 8.0,
+          "expected_movement": 14.75
+        },
+        {
+          "station": 47,
+          "movement_residual": -9.1928304430601,
+          "visit_residual": -0.7307692307692308,
+          "movement": 7.0,
+          "expected_movement": 16.1928304430601
+        },
+        {
+          "station": 48,
+          "movement_residual": -5.392991083273721,
+          "visit_residual": -0.5531272905921765,
+          "movement": 9.35700891672628,
+          "expected_movement": 14.75
+        },
+        {
+          "station": 49,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 17.0,
+          "expected_movement": 17.0
+        },
+        {
+          "station": 50,
+          "movement_residual": -12.105263157894736,
+          "visit_residual": -0.8214285714285714,
+          "movement": 5.0,
+          "expected_movement": 17.105263157894736
+        }
+      ],
+      "values_sha256": "39f0ffbd004f7d2032f28809827fe676211a422efbeb9647ec451af548e49fd3"
+    },
+    {
+      "mode": "aggregate",
+      "status": 2,
+      "objective": 0.24416944802753618,
+      "original": {
+        "rows": 105516,
+        "columns": 26633,
+        "nonzeros": 729774,
+        "binary": 12402,
+        "integer": 13052
+      },
+      "presolved": {
+        "rows": 86069,
+        "columns": 26594,
+        "nonzeros": 750025,
+        "binary": 12402,
+        "integer": 13063
+      },
+      "model_sha256": "d217eb56aa856378df7d8495030f5798d8e3acbe95e2e0a9de65443ef9554f4a",
+      "feasibility_tolerance": 1e-08,
+      "optimality_tolerance": 1e-09,
+      "primal_violation": 0.0,
+      "dual_violation": 1.5719237435145306e-17,
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 2,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 9.19955698114536,
+          "expected_movement": 9.199556981145362
+        },
+        {
+          "station": 3,
+          "movement_residual": -2.6645352591003757e-15,
+          "visit_residual": 0.0,
+          "movement": 5.285397843675261,
+          "expected_movement": 5.2853978436752636
+        },
+        {
+          "station": 4,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.000000000000002
+        },
+        {
+          "station": 5,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.513937628042786,
+          "expected_movement": 9.513937628042786
+        },
+        {
+          "station": 6,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 7.428096765512883,
+          "expected_movement": 7.428096765512885
+        },
+        {
+          "station": 7,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 7.19955698114536,
+          "expected_movement": 7.199556981145362
+        },
+        {
+          "station": 8,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.59977849057268,
+          "expected_movement": 8.59977849057268
+        },
+        {
+          "station": 9,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 8.999999999999998
+        },
+        {
+          "station": 10,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 11,
+          "movement_residual": 3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 17.000000000000004,
+          "expected_movement": 17.0
+        },
+        {
+          "station": 12,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 10.0,
+          "expected_movement": 9.999999999999998
+        },
+        {
+          "station": 13,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.59977849057268,
+          "expected_movement": 8.59977849057268
+        },
+        {
+          "station": 14,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 12.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 15,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-15,
+          "movement": 11.856193531025529,
+          "expected_movement": 11.856193531025529
+        },
+        {
+          "station": 16,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 6.513937628042783,
+          "expected_movement": 6.513937628042783
+        },
+        {
+          "station": 17,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 8.14269892183763,
+          "expected_movement": 8.142698921837628
+        },
+        {
+          "station": 18,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 7.999999999999999,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 19,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 8.142698921837626,
+          "expected_movement": 8.14269892183763
+        },
+        {
+          "station": 20,
+          "movement_residual": 0.0,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 7.285397843675259,
+          "expected_movement": 7.285397843675259
+        },
+        {
+          "station": 21,
+          "movement_residual": 3.552713678800501e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 9.0,
+          "expected_movement": 8.999999999999996
+        },
+        {
+          "station": 22,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 6.59977849057268,
+          "expected_movement": 6.599778490572679
+        },
+        {
+          "station": 23,
+          "movement_residual": 3.552713678800501e-15,
+          "visit_residual": 2.220446049250313e-16,
+          "movement": 15.685619353102586,
+          "expected_movement": 15.685619353102583
+        },
+        {
+          "station": 24,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 25,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.0,
+          "expected_movement": 10.0
+        },
+        {
+          "station": 26,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 6.428096765512883,
+          "expected_movement": 6.428096765512887
+        },
+        {
+          "station": 27,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 5.971017196777833,
+          "expected_movement": 5.971017196777834
+        },
+        {
+          "station": 28,
+          "movement_residual": 0.0,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 29,
+          "movement_residual": 0.0,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 30,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 11.0,
+          "expected_movement": 10.999999999999998
+        },
+        {
+          "station": 31,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 5.7424774124103095,
+          "expected_movement": 5.742477412410311
+        },
+        {
+          "station": 32,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 5.742477412410308,
+          "expected_movement": 5.742477412410311
+        },
+        {
+          "station": 33,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.000000000000002
+        },
+        {
+          "station": 34,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 12.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 35,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 5.742477412410308,
+          "expected_movement": 5.7424774124103095
+        },
+        {
+          "station": 36,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 5.056858059307732,
+          "expected_movement": 5.05685805930773
+        },
+        {
+          "station": 37,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 6.656636549880411,
+          "expected_movement": 6.656636549880413
+        },
+        {
+          "station": 38,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 12.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 39,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 4.999999999999997,
+          "expected_movement": 4.999999999999999
+        },
+        {
+          "station": 40,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 8.000000000000002,
+          "expected_movement": 8.000000000000004
+        },
+        {
+          "station": 41,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 42,
+          "movement_residual": 0.0,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 6.0,
+          "expected_movement": 6.0
+        },
+        {
+          "station": 43,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 9.285397843675257,
+          "expected_movement": 9.285397843675259
+        },
+        {
+          "station": 44,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.5139376280427825,
+          "expected_movement": 7.5139376280427825
+        },
+        {
+          "station": 45,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 6.742477412410308,
+          "expected_movement": 6.7424774124103095
+        },
+        {
+          "station": 46,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 8.000000000000002,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 47,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 7.000000000000001,
+          "expected_movement": 7.0
+        },
+        {
+          "station": 48,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 9.371238706205155,
+          "expected_movement": 9.371238706205158
+        },
+        {
+          "station": 49,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 17.0,
+          "expected_movement": 17.0
+        },
+        {
+          "station": 50,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 7.285397843675259,
+          "expected_movement": 7.28539784367526
+        }
+      ],
+      "values_sha256": "7b19a881f9ae08c323e192742d86ace0f50bead7896856b88e01aa718894c942"
+    },
+    {
+      "mode": "projected",
+      "status": 2,
+      "objective": 0.2441694480275385,
+      "original": {
+        "rows": 105116,
+        "columns": 26433,
+        "nonzeros": 728974,
+        "binary": 12202,
+        "integer": 12452
+      },
+      "presolved": {
+        "rows": 85680,
+        "columns": 26394,
+        "nonzeros": 749300,
+        "binary": 12202,
+        "integer": 12463
+      },
+      "model_sha256": "fe8a160c728836c298d083961136a324d24d5aa558640240f0c3339e647c908e",
+      "feasibility_tolerance": 1e-08,
+      "optimality_tolerance": 1e-09,
+      "primal_violation": 1.049160758270773e-14,
+      "dual_violation": 2.989429824636962e-12,
+      "linkage_residuals": [
+        {
+          "station": 1,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 2,
+          "movement_residual": -7.105427357601002e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 9.199556981145374,
+          "expected_movement": 9.199556981145381
+        },
+        {
+          "station": 3,
+          "movement_residual": -2.6645352591003757e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 5.285397843675276,
+          "expected_movement": 5.285397843675279
+        },
+        {
+          "station": 4,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 5,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.513937628042804,
+          "expected_movement": 9.513937628042804
+        },
+        {
+          "station": 6,
+          "movement_residual": -2.6645352591003757e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 7.428096765512916,
+          "expected_movement": 7.428096765512919
+        },
+        {
+          "station": 7,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 7.1995569811453874,
+          "expected_movement": 7.199556981145387
+        },
+        {
+          "station": 8,
+          "movement_residual": 3.552713678800501e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 8.599778490572692,
+          "expected_movement": 8.599778490572689
+        },
+        {
+          "station": 9,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.000000000000002
+        },
+        {
+          "station": 10,
+          "movement_residual": -7.460698725481052e-14,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.000000000000075
+        },
+        {
+          "station": 11,
+          "movement_residual": -2.4868995751603507e-14,
+          "visit_residual": -1.4432899320127035e-15,
+          "movement": 16.999999999999975,
+          "expected_movement": 17.0
+        },
+        {
+          "station": 12,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 10.0,
+          "expected_movement": 10.000000000000002
+        },
+        {
+          "station": 13,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.599778490572692,
+          "expected_movement": 8.599778490572692
+        },
+        {
+          "station": 14,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 12.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 15,
+          "movement_residual": 0.0,
+          "visit_residual": -5.551115123125783e-17,
+          "movement": 11.856193531026312,
+          "expected_movement": 11.856193531026312
+        },
+        {
+          "station": 16,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 6.513937628042805,
+          "expected_movement": 6.513937628042804
+        },
+        {
+          "station": 17,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 8.14269892183764,
+          "expected_movement": 8.142698921837638
+        },
+        {
+          "station": 18,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 19,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 8.142698921837638,
+          "expected_movement": 8.142698921837638
+        },
+        {
+          "station": 20,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.285397843675277,
+          "expected_movement": 7.285397843675277
+        },
+        {
+          "station": 21,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 22,
+          "movement_residual": 4.440892098500626e-15,
+          "visit_residual": 2.220446049250313e-16,
+          "movement": 6.599778490572694,
+          "expected_movement": 6.59977849057269
+        },
+        {
+          "station": 23,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 15.685619353102583,
+          "expected_movement": 15.685619353102583
+        },
+        {
+          "station": 24,
+          "movement_residual": 1.2434497875801753e-14,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 8.999999999999988
+        },
+        {
+          "station": 25,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 10.0,
+          "expected_movement": 10.0
+        },
+        {
+          "station": 26,
+          "movement_residual": 2.6645352591003757e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 6.428096765512915,
+          "expected_movement": 6.428096765512913
+        },
+        {
+          "station": 27,
+          "movement_residual": -2.6645352591003757e-15,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 5.97101719677786,
+          "expected_movement": 5.971017196777862
+        },
+        {
+          "station": 28,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 7.999999999999999,
+          "expected_movement": 8.0
+        },
+        {
+          "station": 29,
+          "movement_residual": 3.2862601528904634e-14,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 8.0,
+          "expected_movement": 7.999999999999967
+        },
+        {
+          "station": 30,
+          "movement_residual": -3.552713678800501e-15,
+          "visit_residual": 0.0,
+          "movement": 11.0,
+          "expected_movement": 11.000000000000004
+        },
+        {
+          "station": 31,
+          "movement_residual": -8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 5.742477412410332,
+          "expected_movement": 5.742477412410333
+        },
+        {
+          "station": 32,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 5.742477412410333,
+          "expected_movement": 5.742477412410333
+        },
+        {
+          "station": 33,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 34,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 12.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 35,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 5.742477412410333,
+          "expected_movement": 5.742477412410333
+        },
+        {
+          "station": 36,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 5.05685805930775,
+          "expected_movement": 5.056858059307748
+        },
+        {
+          "station": 37,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.656636549880444,
+          "expected_movement": 6.656636549880444
+        },
+        {
+          "station": 38,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 12.0,
+          "expected_movement": 12.0
+        },
+        {
+          "station": 39,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 5.0,
+          "expected_movement": 5.0
+        },
+        {
+          "station": 40,
+          "movement_residual": -2.6645352591003757e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 7.9999999999999964,
+          "expected_movement": 7.999999999999999
+        },
+        {
+          "station": 41,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 9.0,
+          "expected_movement": 9.0
+        },
+        {
+          "station": 42,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.0,
+          "expected_movement": 6.0
+        },
+        {
+          "station": 43,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 9.285397843675277,
+          "expected_movement": 9.285397843675279
+        },
+        {
+          "station": 44,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 7.513937628042806,
+          "expected_movement": 7.513937628042806
+        },
+        {
+          "station": 45,
+          "movement_residual": 0.0,
+          "visit_residual": 0.0,
+          "movement": 6.742477412410332,
+          "expected_movement": 6.742477412410332
+        },
+        {
+          "station": 46,
+          "movement_residual": 8.881784197001252e-16,
+          "visit_residual": 0.0,
+          "movement": 8.0,
+          "expected_movement": 7.999999999999999
+        },
+        {
+          "station": 47,
+          "movement_residual": -7.993605777301127e-15,
+          "visit_residual": 0.0,
+          "movement": 7.0,
+          "expected_movement": 7.000000000000008
+        },
+        {
+          "station": 48,
+          "movement_residual": 1.7763568394002505e-15,
+          "visit_residual": 1.1102230246251565e-16,
+          "movement": 9.371238706205167,
+          "expected_movement": 9.371238706205165
+        },
+        {
+          "station": 49,
+          "movement_residual": 0.0,
+          "visit_residual": -1.1102230246251565e-16,
+          "movement": 17.0,
+          "expected_movement": 17.0
+        },
+        {
+          "station": 50,
+          "movement_residual": -1.7763568394002505e-15,
+          "visit_residual": 0.0,
+          "movement": 7.285397843675277,
+          "expected_movement": 7.285397843675279
+        }
+      ],
+      "values_sha256": "b6e88b45a3732d728497b1504322e701099f694dcae62eb4a9c99b9222db8148"
+    }
+  ],
+  "completion": {
+    "status": 3,
+    "feasible": false,
+    "proved_no_extension": true,
+    "scope": "R1 known feasible; old common coordinates fixed, selectors/q/m free. This is NOT interval infeasibility."
+  },
+  "script_sha256": "6fb1d3c44ea7bcb562146acbfe615d4acb7cba09b2d20af116426d6c0b347cb9"
+}

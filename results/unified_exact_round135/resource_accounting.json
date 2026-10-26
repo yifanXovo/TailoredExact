@@ -1,0 +1,84 @@
+{
+  "UTC": "2026-10-26T15:26:59.813567+00:00",
+  "new_computation": {
+    "G1_seconds": 17148.624478299604,
+    "remaining_G1_seconds": 11651.375521700396,
+    "by_category": {
+      "B": 36.76280710019637,
+      "C": 10.063681199997724,
+      "D": 17101.79798999941,
+      "E": 0.0,
+      "repair": 0.0
+    },
+    "limits": {
+      "B": 28800.0,
+      "C": 28800.0,
+      "D": 28800.0,
+      "E": 28800.0,
+      "repair": 28800.0
+    },
+    "category_remaining": {
+      "B": 28763.237192899804,
+      "C": 28789.936318800002,
+      "D": 11698.20201000059,
+      "E": 28800.0,
+      "repair": 28800.0
+    },
+    "separately_reported_seconds": 266.83043630060274,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "conservative_computation_plus_metered_postverification_seconds": 17415.454914600206,
+  "conservative_total_also_below_28800": true,
+  "complete_method_clocks": {
+    "S2": {
+      "arms": 16,
+      "T_production_sum": 8500.127139680204,
+      "T_postverification_sum": 124.89572440006305,
+      "T_total_sum": 8625.022864080267
+    },
+    "AP": {
+      "arms": 16,
+      "T_production_sum": 8600.402960009524,
+      "T_postverification_sum": 140.33985080034472,
+      "T_total_sum": 8740.742810809868
+    }
+  },
+  "document_and_delivery": {
+    "pdf_export.json": {
+      "seconds": 6.912495499942452,
+      "cumulative_seconds": 36.54596409969963
+    },
+    "review/pdf_render_receipt.json": {
+      "separate_document_seconds": 8.08705070009455,
+      "cumulative_seconds": 41.00185210001655
+    },
+    "delivery_archive_receipt.json": {
+      "seconds": 92.75679239979945
+    },
+    "public_bootstrap.json": {
+      "seconds": 0.9676402001641691
+    },
+    "public_restore_receipt.json": {
+      "cumulative_seconds": 2979.9374551998917
+    },
+    "review/local_preflight.json": {
+      "seconds": 655.6367304001469
+    }
+  },
+  "production_build_and_LP_outers_charged_once": true,
+  "nested_H_LP_MIP_Work_never_added": true,
+  "explicit_offline_verification_segments_reported_separately": true,
+  "authoring_window_start": "2026-10-26T08:48:35.410144+00:00",
+  "authoring_window_end": "2026-10-26T15:26:59.818418+00:00",
+  "authoring_window_overlaps_native_wait_not_exclusive_CPU_time": true,
+  "journal_submission_or_external_messaging": 0,
+  "publication_and_delivery_window": {
+    "start_UTC": "2026-10-26T14:26:59.041860+00:00",
+    "end_UTC": "2026-10-26T15:26:59.836578+00:00",
+    "elapsed_wall_seconds": 3600.794718,
+    "scope": "Normal Git push, anonymous public recovery, GitHub creation/readback and final review waits; this window is not exclusive CPU time and is not added to G1."
+  },
+  "separate_Git_blob_verification_seconds": 7.679391199955717,
+  "public_semantic_seconds_nested_inside_public_cumulative": 2635.9295538000297
+}

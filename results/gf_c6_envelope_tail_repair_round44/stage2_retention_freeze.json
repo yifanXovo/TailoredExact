@@ -1,0 +1,26 @@
+{
+  "best_pilot_noadaptive_tag": "na-frontier-all",
+  "best_pilot_overlay_tag": "overlay-d1-all-parent",
+  "executable_sha256": "c6cd3f8c3d0220da87f96c891dc2cbbe493f6cc6e2d7b64b31210b7993e1e7fd",
+  "frozen_before_mechanism_extension": true,
+  "holdout_observed": false,
+  "mechanism_results_observed": false,
+  "pilot_rows": 16,
+  "retained_tags": [
+    "na-frontier-all",
+    "overlay-d1-all-parent"
+  ],
+  "retained_variant_count": 2,
+  "retention_order": [
+    "correctness",
+    "major/P-GRB repair",
+    "no severe P-GRB regression",
+    "C6-advantage retention",
+    "worst shifted P-GRB ratio",
+    "shifted Work geometric mean",
+    "shifted time geometric mean",
+    "simplicity"
+  ],
+  "schema": "round44-stage2-retention-freeze-v1",
+  "validation_observed": false
+}

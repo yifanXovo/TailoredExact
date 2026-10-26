@@ -1,0 +1,118 @@
+{
+  "input_path": "reference/round100_confirmation/H100.txt",
+  "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+  "F": 0.16058906725504907,
+  "U": 0.16058906725504907,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        3,
+        13,
+        10,
+        16,
+        9,
+        12,
+        14,
+        0
+      ],
+      "operations": [
+        {
+          "station": 3,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 13,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 10,
+          "pickup": 0,
+          "drop": 10
+        },
+        {
+          "station": 16,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 0,
+          "drop": 11
+        },
+        {
+          "station": 12,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 14,
+          "pickup": 0,
+          "drop": 7
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        5,
+        17,
+        15,
+        7,
+        4,
+        11,
+        2,
+        20,
+        0
+      ],
+      "operations": [
+        {
+          "station": 5,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 17,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 15,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 4,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 11,
+          "pickup": 0,
+          "drop": 11
+        },
+        {
+          "station": 2,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 20,
+          "pickup": 0,
+          "drop": 10
+        }
+      ]
+    }
+  ],
+  "source_result": "results/unified_exact_round100/holdout01/raw/03_H100_ENS-C/result.json",
+  "source_sha256": "1bcf6413889bcd8a778dbb754b7b67d7bbe7772d940dec60c64c2357ac6c9aa1"
+}

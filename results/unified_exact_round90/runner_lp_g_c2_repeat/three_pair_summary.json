@@ -1,0 +1,30 @@
+{
+  "schema": "round90-lp-g-c2-repeat-three-pair-summary-v1",
+  "pairs_by_seed": {
+    "0": {
+      "status": "both_certified",
+      "ens_c_seconds": 123.81300000008196,
+      "lp_g_seconds": 112.14099999982864,
+      "lp_g_over_ens_c_ratio": 0.9057288006893817,
+      "direction": "LP-G faster"
+    },
+    "1": {
+      "status": "both_certified",
+      "ens_c_seconds": 141.60999999986961,
+      "lp_g_seconds": 99.8589999997057,
+      "lp_g_over_ens_c_ratio": 0.7051691264726901,
+      "direction": "LP-G faster"
+    },
+    "2": {
+      "status": "both_certified",
+      "ens_c_seconds": 136.46900000004098,
+      "lp_g_seconds": 151.70300000021234,
+      "lp_g_over_ens_c_ratio": 1.111629747416386,
+      "direction": "ENS-C faster"
+    }
+  },
+  "certified_pairs": 3,
+  "median_certified_lp_g_over_ens_c_ratio": 0.9057288006893817,
+  "censored_seeds": [],
+  "interpretation": "Development fluctuation check only; no significance or promotion. D6/F2/other protection remains open."
+}

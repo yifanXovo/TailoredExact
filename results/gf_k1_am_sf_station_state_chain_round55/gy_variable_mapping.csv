@@ -1,0 +1,10 @@
+semantic_object,implementation_name,type_or_domain,exact_relation,scaling,principal_use
+global_gini,G,"continuous [gamma_L,gamma_U]",G=G,unscaled,objective and Gini rows
+final_inventory_i,Y_i,"integer [L_i,U_i] after propagation",Y_i=sum_b 2^b bit_i_b,inventory units,routing/inventory and fairness
+ratio_i,r_i,"continuous [0,capacity_i/D_i]",r_i=Y_i/D_i,target denominator D_i,Gini and penalty
+penalty_i,e_i,continuous nonnegative,"e_i>=r_i-1; e_i>=1-r_i",ratio units,"objective coefficient lambda*w_i"
+aggregate_product_i,zprod_i,"continuous [0,capacity_i]",zprod_i=G*Y_i,unscaled inventory times G,direct Gini linearization
+inventory_bit_i_b,bit_i_b,binary,"Y_i=sum_b 2^b bit_i_b",weight 2^b,F0 product representation
+g_times_bit_i_b,prod_i_b,"continuous [0,gamma_U]",prod_i_b=G*bit_i_b,weight 2^b,"zprod_i=sum_b 2^b prod_i_b"
+state_selector_i_y,state_i_y,binary,"sum_y state_i_y=1; Y_i=sum_y y*state_i_y",inventory value y,VD-P and VD-J
+state_g_i_y,state_g_i_y,"continuous [0,gamma_U]","gamma_L*state_i_y<=state_g_i_y<=gamma_U*state_i_y; sum_y state_g_i_y=G",inventory value y,"zprod_i=sum_y y*state_g_i_y"

@@ -1,0 +1,22 @@
+{
+  "schema": "round90-compile-attempt-v1",
+  "stage": "build",
+  "executable": "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+  "argv": [
+    "--build",
+    "build/research/round90-lp-g-split",
+    "--target",
+    "ExactEBRP",
+    "Round90LpGSplitTests",
+    "GlobalGiniTreeTests",
+    "Round47AdaptiveMassTests",
+    "Round83ExchangeDiagnostic",
+    "--parallel",
+    "4"
+  ],
+  "start_utc": "2026-09-26T22:27:06.9122860+00:00",
+  "finish_utc": "2026-09-26T22:27:39.1353404+00:00",
+  "external_wall_seconds": 32.2208135,
+  "exit_code": 0,
+  "log_path": "results/unified_exact_round90/compile_build_001.log"
+}

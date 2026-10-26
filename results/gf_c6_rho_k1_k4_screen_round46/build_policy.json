@@ -1,0 +1,17 @@
+{
+  "build_products_committed": false,
+  "development_build": "build/dev-gurobi-release",
+  "development_configuration": "Release",
+  "development_generator": "MinGW Makefiles",
+  "development_targets": [
+    "ExactEBRP",
+    "Round31C6Tests",
+    "Round40CoarseStartTests",
+    "Round46C6RhoTests"
+  ],
+  "official_build_template": "build/official-round46-<short-head-sha>",
+  "official_clean_build_count": 1,
+  "one_official_executable_for_all_rows": true,
+  "schema": "round46-build-policy-v1",
+  "source_change_invalidates_all_official_rows": true
+}

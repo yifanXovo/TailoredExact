@@ -1,0 +1,77 @@
+{
+  "decision": "ACCEPT_CORRECTED_WAITER_AND_TIMING_DISCLOSURE_FINITE_INTERIM_SCOPE",
+  "scope": "Same independent internal reviewer; lightweight source and small repair/timing metadata only while formal D continues. No final D/C/E result acceptance.",
+  "prior_interim_receipt_retained": "review/sequence_waiter_interim_review.prior01.json",
+  "inputs": {
+    "scripts/round132_sequence.py": "913aacefd456149c1d348a143e50b294305c42e0a27266eefa3012b30c1c027a",
+    "results/unified_exact_round132/engineering/sequence_waiter_repair01/README.md": "e587759a60a22e250f6c413d9362fb88dc3d661a3d39e94098470abcdf768cb9",
+    "results/unified_exact_round132/engineering/sequence_waiter_repair01/round132_sequence_before.py": "fb86ef8c5326990f7c1ae7892987dd9268114f6f20ed550b7b9cd9dfa7da6b41",
+    "results/unified_exact_round132/engineering/sequence_waiter_repair01/before.json": "66e5affc7d6959a68ed8548595efc57c8514541a2640119bd3af2e0a6be0c655",
+    "results/unified_exact_round132/engineering/sequence_waiter_repair01/preflight.json": "8a8d136e84924a6219430aa1773fbcf38f9b5eb78cd3fa2b75cb6925f201a800",
+    "results/unified_exact_round132/timing_environment_amendment.json": "d84186d2a2521fab0cdfdbfb4a22ff8a1d6df3cba352ae4d4629146c53b1f1f6",
+    "results/unified_exact_round132/sequence_dependency_deadline.json": "e3428193cfeeaef9f8221e5505623e68228aca8b403c39891f37c34c33f22af9",
+    "scripts/round132_analysis.py": "e073546be2e10098d631840225328c41e9f91d163007632dd96b5eef4b6b6964",
+    "scripts/round132_documents.py": "0a7c705f6be2d1cb50d26c163cd1143647a29f1da69d091399b112aaaeda5b5f",
+    "results/unified_exact_round132/manuscript.md": "1604ea63a4771023e227f9430a56c09f469b643cc311f3ff73af328d38aca786",
+    "results/unified_exact_round132/reproducibility.md": "cecbabce7e7adf6775e6c1287ae54f33ddf67e8e52886218a1f31248997e18c2"
+  },
+  "waiter_findings": [
+    {"id": "W1", "status": "resolved_static", "finding": "Before all planned D reconstructed paths exist, sealed() returns after existence checks without decoding completed evidence."},
+    {"id": "W2", "status": "resolved_static", "finding": "Corrected loop checks every closed formal_D nonzero exit before success; it gates the one full readiness parse on no unclosed fees. This avoids the final-writer read race and last-failed-receipt bypass in the first intermediate repair."},
+    {"id": "W3", "status": "preserved_static", "finding": "60 qualified D arms and closed fees precede admitted C; 24 qualified C arms and closed fees precede fresh finite E with its existing reservation. No native retry path was added."},
+    {"id": "W4", "status": "preserved_static", "finding": "Persisted dependency deadline remains anchored to original waiter creation plus151200seconds, so replacing the waiter does not restart its42hour allowance. Formal caps/Seeds/order/build/G1 are unaffected by the waiting-script change."}
+  ],
+  "preflight_interpretation": {
+    "recorded_initial_fast_path_seconds": 0.00031320005655288696,
+    "recorded_heavy_reader_called": false,
+    "receipt_new_runner_SHA": "51d4283b47e0b0fa9e62567ca7cd46d15b056b73e8498a8360b53269bb044ba4",
+    "corrected913aacef_ordering_review": "Static only in this review; the retained preflight describes the earlier existence/cache repair, not a new execution of corrected code."
+  },
+  "recorded_process_lifecycle": {
+    "old_waiter": 54160,
+    "first_replacement_waiter": 44368,
+    "native_supervisor_preserved": 47868,
+    "current_native_preserved": 50580,
+    "reviewer_performed_process_actions": false,
+    "scope": "Lifecycle preservation is read from the provided guarded repair record and parent statement; no fresh OS process audit was performed. The corrected on-disk source still requires the parent's targeted waiting-only replacement."
+  },
+  "small_metadata_arithmetic_checked": {
+    "recorded_eight_group_bytes": 1018035363,
+    "original_dependency_seconds": 151200,
+    "current_native_snapshot_wall_seconds": 436.6003438,
+    "current_native_snapshot_CPU_seconds": 430.859375,
+    "old_waiter_CPU_seconds_at_snapshot": 2588.96875,
+    "CPU_is_not_an_additional_native_G1_wall_charge": true
+  },
+  "timing_assessment": {
+    "retain_measured_clocks": true,
+    "retain_physical_and_certificate_qualifications_subject_to_final_evidence_review": true,
+    "annotate_earlier_producer_intervals": true,
+    "waiter_stop_bounds_unix": [1792784414.777127, 1792784495.186774],
+    "overlap_formula_correct_static": "max(0,min(producer_end,stop_bound)-max(producer_start,waiter_creation)) for lower and upper stop bounds",
+    "producer_and_amendment_SHA_binding_present": true,
+    "final_exposure_field_prefix": "stage_waiter_lifetime_overlap",
+    "exposure_CSV_final_mode_only": true,
+    "overlap_semantics": "Conservative overlap with waiter lifetime, not observed parsing-active seconds, CPU scheduling or native slowdown.",
+    "clean_machine_counterfactual": "UNKNOWN; no adjustment, subtraction or inferred slowdown factor is justified",
+    "snapshot_limit": "The current430.86CPU/436.60wall snapshot cannot establish absence of interference in that arm or reconstruct scheduling of earlier arms.",
+    "partial_table_refreshes": "Previously disclosed occasional7–8second decodes are additional known background work; no zero-contention claim follows from absence of original-waiter lifetime overlap.",
+    "allowed_claim": "Finite measured timing directions under the disclosed environment; no quiescent-machine causal speed claim or isolated geography attribution."
+  },
+  "small_source_clarifications": [
+    {"id": "A-W1", "status": "resolved_static", "finding": "Analysis now requires sequence_completion before complete raw-table decoding and separately rejects unclosed receipts. Timing exposure CSV is written only in final mode."},
+    {"id": "A-W2", "status": "resolved_static", "finding": "Fields explicitly name waiter lifetime. Lower=0<upper is labelled possible boundary overlap; positive lower is conservative lifetime overlap rather than parsing/CPU-contention/slowdown seconds; no overlap does not rule out ambient load. Generator and authoritative manuscript disclose the same distinction."}
+  ],
+  "remaining_required_local_source_corrections": [],
+  "source_syntax_check": "AST parse passed for sequence, analysis and documents sources only; no evidence-reader imports or source execution",
+  "final_portable_overlap_replay": "Deferred until all D/C/E closes and the parent requests final evidence review; not run here.",
+  "reviewed_campaign_reconstructed_content": false,
+  "reviewed_campaign_raw_content": false,
+  "heavy_portable_checker_run": false,
+  "enumeration": 0,
+  "H": 0,
+  "Optimize": 0,
+  "compilation": 0,
+  "PDF_export": 0,
+  "final_performance_acceptance": false
+}

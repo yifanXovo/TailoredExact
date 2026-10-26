@@ -1,0 +1,71 @@
+{
+  "roles": [
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "FLEET-ROOT"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true
+    },
+    {
+      "id": "R99-N2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        16,
+        22,
+        28
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "shortage",
+      "T_seconds": 6600,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "FLEET-ROOT",
+        "P-GRB"
+      ],
+      "input_path": "reference/round99_confirmation/N2.txt",
+      "instance_path": "reference/round99_confirmation/N2.txt",
+      "input_sha256": "370cb51b4d2351b3881cd74ab93406d76834efcf856430f742b8f243a9060a27",
+      "scenario_id": "round99-discrete-structure-confirmation-v1-N2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 601,
+      "total_target": 647,
+      "zero_excluded_by_stock_shortage": true
+    }
+  ],
+  "phase": "fleet development",
+  "reference_billing": "one_finite_batch",
+  "maximum_optimize_calls_per_arm": 2048,
+  "planning_call_envelope_not_production_gate": true,
+  "fleet_arm": "FLEET-ROOT",
+  "selection_evidence_sha256": "e8b303caa2c1a61dca2bf36f6d1ab399824e8769dad0db02171a09f7c9dc1ddf",
+  "question": "Uniform execution candidate on actual ENS-vs-P weakness and heterogeneous primal/proof tradeoff. No per-case best-arm dispatch or historical/cross-arm inputs.",
+  "maximum_formal_starts": 6,
+  "maximum_formal_seconds": 10800
+}

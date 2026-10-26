@@ -1,0 +1,36 @@
+{
+  "observed_UTC": "2026-10-13T06:55:49.144562+00:00",
+  "direct_user_response": "批准到 13 次并复核已封存 P-S，继续研究",
+  "qualification_starts_old": 11,
+  "qualification_starts_new": 13,
+  "qualification_outer_seconds": 1200,
+  "total_starts": 20,
+  "total_outer_seconds": 28000,
+  "reuse_sealed_PS_with_corrected_readonly_verifier": true,
+  "additional_process_tree": "one wrapper + still-unstarted M-B child; finite/post/admission inside wrapper",
+  "new_PS_native_starts": 0,
+  "formal_arms_once_each": true,
+  "formal_order": [
+    "P-GRB",
+    "M-B",
+    "P-S",
+    "ENS-C"
+  ],
+  "formal_caps": [
+    5400,
+    5400,
+    5400,
+    5400
+  ],
+  "input_unchanged": true,
+  "failed_slots_nonrefundable": true,
+  "budget_at_authorization": {
+    "paid_starts": 11,
+    "paid_outer_seconds": 624.9858250617981,
+    "remaining_starts": 9,
+    "remaining_outer_seconds": 27375.014174938202,
+    "qualification_starts": 11,
+    "qualification_seconds": 624.9858250617981,
+    "unclosed": []
+  }
+}

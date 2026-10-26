@@ -1,0 +1,127 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "base",
+      "accepted": true,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "state_leading_zero_not_station_one",
+      "accepted": true,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "quantity_suffix_leading_zero_preserved",
+      "accepted": true,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "duplicate_A_B_legal_Counter_ge_one",
+      "accepted": true,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "missing_A",
+      "accepted": false,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "missing_B",
+      "accepted": false,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "type_Y_1",
+      "accepted": false,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "type_state_1_0",
+      "accepted": false,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "type_mode_0_1",
+      "accepted": false,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "type_p_0_1",
+      "accepted": false,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "wrong_lower_g",
+      "accepted": false,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "wrong_upper_g",
+      "accepted": false,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "wrong_cutoff",
+      "accepted": false,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "legal_positive_G_changed_cutoff",
+      "accepted": true,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "same_model_legal_changed_call_epoch",
+      "accepted": true,
+      "old_new_exact_equal": true
+    },
+    {
+      "name": "same_path_changed_bytes_reparse_and_stale_scope_reject",
+      "passed": true
+    },
+    {
+      "name": "actual_call_Seed",
+      "rejected": true
+    },
+    {
+      "name": "actual_call_Threads",
+      "rejected": true
+    },
+    {
+      "name": "actual_call_Presolve",
+      "rejected": true
+    },
+    {
+      "name": "actual_call_MIPGap",
+      "rejected": true
+    },
+    {
+      "name": "actual_call_MIPGapAbs",
+      "rejected": true
+    },
+    {
+      "name": "actual_call_FeasibilityTol",
+      "rejected": true
+    },
+    {
+      "name": "actual_call_OptimalityTol",
+      "rejected": true
+    },
+    {
+      "name": "actual_call_IntFeasTol",
+      "rejected": true
+    },
+    {
+      "name": "actual_call_read_return_code",
+      "rejected": true
+    }
+  ],
+  "Optimize": 0,
+  "native_processes": 0,
+  "helper_SHA": "c114c6ea651dd27c192603b1c23de98bcf6b6a04fa1e2d69b5543ccaffbe818d",
+  "old_reader_SHA": "52cadcf5ff7ce5fcfb1f828efd1a81a1c4d14d5e31d9b6b72963f7348e8408c1",
+  "raw_flags_unchanged": true,
+  "scope_changes_not_blanket_rejected": true,
+  "call_legality_never_cached": true
+}

@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "UTC": "2026-10-24T19:27:17.786Z",
+  "science_commit": "52b02252ba47e8228b73e071d6ed692385a4f816",
+  "pr": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/194",
+    "number": 194,
+    "title": "Round132: frozen-S2 validation, equivalent-formulation diagnostics and joint-structure study",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round131-final-s2-benchmark",
+    "base_sha": "b97418ecc0b9f739232af484f999770c130ceb76",
+    "head": "codex/round132-frozen-s2-expression-joint-study",
+    "head_sha": "458e3eb7431344c8dacee38b07292559750de8ad"
+  },
+  "key_file_readbacks": [
+    {
+      "path": "results/unified_exact_round132/current_method_manifest.json",
+      "git_blob_SHA1": "7dab23192ac9a69ecc197b36fd25b3ef5e596ec4",
+      "science_bytes_SHA256": "0a09f92469829b0a06ffa8c4e7bb99a2032d8f515774c9102623566a0e11a1a8",
+      "API_content_bytes": 28117,
+      "text_content_equal_after_only_CRLF_normalization": true
+    },
+    {
+      "path": "results/unified_exact_round132/arms.csv",
+      "git_blob_SHA1": "0149f893463897ea153f74684765cad7b43cfed9",
+      "science_bytes_SHA256": "a900a2e4b143dcd93e01319451bea2d7bbf6d65ae1836d07997705bd027df626",
+      "API_content_bytes": 121040,
+      "text_content_equal_after_only_CRLF_normalization": true
+    },
+    {
+      "path": "results/unified_exact_round132/pairs.csv",
+      "git_blob_SHA1": "3cf0250796ef3eaadba9fc66629591f545d7b7b7",
+      "science_bytes_SHA256": "1d1582aff7d0e0f4f94aaf144197a8aeafaa3203e92ae984a9bd62d34a0664a3",
+      "API_content_bytes": 20563,
+      "text_content_equal_after_only_CRLF_normalization": true
+    },
+    {
+      "path": "results/unified_exact_round132/reproducibility.md",
+      "git_blob_SHA1": "bf6200cb867f2368d7d6dadbd30ad161ea9fe789",
+      "science_bytes_SHA256": "20e6bc86f4b7fb54a0bb0545e25053e6217e8e738d1b17f25d1dfce9999ade49",
+      "API_content_bytes": 8911,
+      "text_content_equal_after_only_CRLF_normalization": true
+    },
+    {
+      "path": "results/unified_exact_round132/export_manifest.json",
+      "git_blob_SHA1": "ef9f2474c314275e054f152619a03987509979a0",
+      "science_bytes_SHA256": "7484980d2f13509a3dea0f213030522c483d82bcee8e3868484c8f2a7cceab8c",
+      "API_content_bytes": 289184,
+      "text_content_equal_after_only_CRLF_normalization": true
+    },
+    {
+      "path": "results/unified_exact_round132/final_report.md",
+      "git_blob_SHA1": "44fa7f472647c1ff7f695e6bb2f18e84df754ca1",
+      "science_bytes_SHA256": "f21a484ceec1322fbfb8247ad9512bb39ca16fd906069f20ee2b9e1967c7147a",
+      "API_content_bytes": 19884,
+      "text_content_equal_after_only_CRLF_normalization": true
+    }
+  ],
+  "arms": 84,
+  "pairs": 64,
+  "export_files": 931,
+  "actual_API_payload_retained_outside_publication": "E:\\codes\\ExactEBRP-work\\temp\\round132\\remote_readback_payload_initial.json",
+  "scope": "Fresh actual open Draft unmerged PR at metadata head458e3eb7, six already-read scienceA key-file bindings, and completed isolated anonymous scienceA recovery. Final metadata publication/head readback is a later separate attestation.",
+  "initial_science_pr_snapshot": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/194",
+    "number": 194,
+    "state": "open",
+    "merged": false,
+    "mergeable": true,
+    "draft": true,
+    "body": "The adopted S2 paper method needed complete source-faithful exposition and validation beyond its known panel. This round freezes S2, completes the prospectively fixed validation and expression diagnostics, and closes a finite joint-structure study. It does not select a replacement method.\n\nBase: PR #193, `codex/round131-final-s2-benchmark`, verified commit `b97418ecc0b9f739232af484f999770c130ceb76`. Head: `codex/round132-frozen-s2-expression-joint-study`. Science snapshot: `52b02252ba47e8228b73e071d6ed692385a4f816`; subsequent commits contain delivery receipts and status updates. The PR remains open, Draft and unmerged.\n\n### Scientific results and limits\n\n- **Frozen validation D:** all 60 registered positions completed on 12 inputs with two repeated solver Seeds, with cold P/S2 everywhere and independently paid PS on the preselected six-input subset. Formal eligible certificates are S2 17/24, P 9/24 and PS 4/12. S2/P has 16 Win, 1 Lose, 6 UNDETERMINED and 1 UNEVALUABLE on the full24-position denominator. Seeds are repeated observations, not24 independent inputs. K/X sources and historical versions remain separate. Positive-objective K35 roles remain open; zero-objective X35 success does not establish positive35 proof performance. PS has material reversals in both directions.\n- **Source loss is retained:** X-35-U/Seed1/S2 independently reaches physical objective0, but its own fleet rejects three local native bounds beyond the inherited tolerance. Rejected dependent native proof claims stay unqualified. The original own-zero certificate, producer clock and all physical/cost/trajectory records remain; frozen performance eligibility excludes this source-reduced arm, derived certification time is null and the planned pair is UNEVALUABLE. No favorable retry or source-qualification relaxation was made. There are 83 performance-eligible observations among 84 produced D/C positions; native source reliability is not repaired by this reporting disposition.\n- **Expression diagnostics C:** all 24 workflows completed on four known roles, two Seeds and three expressions, using a separate qualified research build and legal inclusive-root S2R. Geometry deletion gives 2 Win / 4 Lose / 2 UNDETERMINED; full W projection gives 3/3/2. Every actual comparison has the same realized complete H and root interval/cutoff with native exposure. Numerically matching canonical LP values under the inherited policy coexist with mixed Work, node and total-cost changes. The paper proves ideal projection equivalence under explicit audited H-use/bound and W-box premises, retains all 12 Fourier-Motzkin combinations and S=0/degenerate handling, and does not assert exact rational equality of all independently rounded matrices. Optional C3 was not entered; no candidate is promoted.\n- **Joint study E:** four complete tiny universes, 64 normals and 8 controls per case completed; all 32 controls pass. J2 supplies an exact strict service-coordinate witness over its full loaded reference: lhs 15/2 exceeds the exact full-joint support 7, with a rational extension satisfying all 783 actual rows/bounds. This is exact for rational values of loaded binary64 coefficients. The complete original objective has no observed increment in any case (0/0,0.15/0.15,0.15/0.15,0/0). Finite nonseparation does not prove hull equality. Real-role steps2–4 were not admitted because a valid same-full-universe support bound and outside-donor/receiver interface are missing; tiny cuts are not transplanted by deleting those stations.\n\nThe source and model distinguish stock returned to depot, prefix capacity versus cumulative pickup, native epigraph variables versus physical objectives, and local versus globally qualified bounds. History-to-claim and primary-source literature tables retain latest corrections and reading-access limits. Synthetic targets/initial stock/weights are not observed demand, and fixed lambda is reported with its actual Omega/rho. The decision is to freeze S2 for scoped manuscript/submission preparation; there is no population-speedup, SOTA, new general separator or journal guarantee claim.\n\n### Identity, validation and resource accounting\n\nD uses the original qualified E3 (`2df9e0e1…`) and original DLL (`9b5fccef…`), with complete argv/input/Seed/source and numerical/clock bindings. C uses its separately sealed default-off research PE (`eac4e778…`) for baseline and candidates. No C/E incumbent, bound, cut, parameter or cache enters D. Production `src/` and `include/`, S2 formal caps and repository default ENS-C are unchanged.\n\nG1 experimental and related process cost is 71131.19380520075s of 144000s: D 48682.16879070026, C 22373.336211999995, qualification 73.03588320047129 and E 2.652919300016947; C3/repair 0. Disjoint non-native postverification is 1603.8254403998144s. Delivery costs are separately receipt-metered: 12012.276430400 seconds of closed delivery outer processes at the science checkpoint, separately from1603.8254403998144 seconds of postverification; later manifest/staging/push/recovery/cleanup receipts are updated on the metadata head. Nested H/LP/MIP/native Work or E child times are not added again. Manual reading/writing has only an explicitly overlapping wall-time estimate, not exact CPU. The original dependency waiter's unnecessary decoding overlapped some native production; its defect/repair and conservative exposure intervals remain disclosed. No clean-machine counterfactual timing is inferred.\n\nOne independent reviewer checked admission, mathematical premises, identities and final claims; final evidence replay status is **PASS (84 positions,64 typed comparisons,83 performance-eligible plus one disclosed UNEVALUABLE)**. The pure reader replays all 84 physical/model/Start/source/return/coverage paths and recomputes 64 typed comparisons/denominators, including the disclosed exclusion. This is finite internal evidence review, not third-party experimental replication or a repair of rejected native bounds. All 45 PDF pages have actual, hash-bound visual QA, with 19 fonts embedded and no missing-page-text/replacement-glyph issue.\n\n### Review and finite reproduction\n\n- [Current report](https://github.com/yifanXovo/TailoredExact/blob/codex/round132-frozen-s2-expression-joint-study/results/unified_exact_round132/final_report.md), [science checkpoint report](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/final_report.md), [complete manuscript source](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/manuscript.md), [45-page PDF](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/manuscript.pdf).\n- [Independent review](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/independent_review.md), [arm table](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/arms.csv), [all planned pairs](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/pairs.csv), [math](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/mathematical_analysis.md), [joint-structure note](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/joint_structure_note.md).\n- [Reproduction entry](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/reproducibility.md), [exact loose-file manifest](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/export_manifest.json), [current raw carriers](https://github.com/yifanXovo/TailoredExact/blob/52b02252ba47e8228b73e071d6ed692385a4f816/results/unified_exact_round132/raw_archive_manifest.json).\n\nPublication scans cover actual current carrier members and selected loose bytes. The 34 carriers contain this round's necessary evidence/failures and small dependencies, including actual current P/PS native progress; no previous campaign, PE/DLL, commercial license, standalone font or foreign full paper is distributed. Local unique raw remains authoritative.\n\nDelivery acceptance: Scientific/internal/PDF/member-scan acceptance has passed. The34 carriers contain1,042,789 members and574,011,070 compressed bytes; the science export specifies931 exact loose files and small dependencies. Public recovery and guarded cleanup are pending; actual remote PR/content readback follows creation. The single public recovery is pinned to the science snapshot, uses anonymous HTTPS into an initially empty owned root and an isolated pure checker, with zero Optimize/native starts/compilation and no old-checkout/raw fallback. Any genuine repair stays in that root; later metadata is not recursively repacked/recovered. Guarded cleanup removes only verified own duplicates/reconstructible images and the successful recovery expansion; distinct drafts, failures, required native assets, user changes and old worktrees are retained. Logical deleted bytes and observed volume-space change are reported separately.\n",
+    "title": "Round132: frozen-S2 validation, equivalent-formulation diagnostics and joint-structure study",
+    "base": "codex/round131-final-s2-benchmark",
+    "base_sha": "b97418ecc0b9f739232af484f999770c130ceb76",
+    "head": "codex/round132-frozen-s2-expression-joint-study",
+    "head_sha": "52b02252ba47e8228b73e071d6ed692385a4f816",
+    "head_repo_id": 1274661812,
+    "head_repo_full_name": "yifanXovo/TailoredExact",
+    "merge_commit_sha": "895cddabe499bdb7c4055081773badfd57f55d36",
+    "user": {
+      "login": "yifanXovo",
+      "name": "yifanXovo",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/171729629?v=4",
+      "id": 171729629
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-24T15:26:04Z",
+    "updated_at": "2026-10-24T15:26:04Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 34,
+    "changed_files": 610,
+    "additions": 263854,
+    "deletions": 0,
+    "display_url": "https://github.com/yifanXovo/TailoredExact/pull/194",
+    "display_title": "Round132: frozen-S2 validation, equivalent-formulation diagnostics and joint-structure study"
+  },
+  "latest_actual_PR_readback_payload": "E:\\codes\\ExactEBRP-work\\temp\\round132\\pre_cleanup_PR_readback.json",
+  "latest_documentation_remote_readback": "E:/codes/ExactEBRP-work/temp/round132/repair_documentation_readback_check.json"
+}

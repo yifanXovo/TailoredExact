@@ -1,0 +1,20 @@
+{
+  "command": [
+    "D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+    "-S",
+    ".",
+    "-B",
+    "build/research/round112-paid-v1",
+    "-G",
+    "Ninja",
+    "-DCMAKE_MAKE_PROGRAM=D:/Program Files/Microsoft Visual Studio/2022/Professional/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe",
+    "-DCMAKE_CXX_COMPILER=D:/msys64/ucrt64/bin/g++.exe",
+    "-DEXACT_EBRP_ENABLE_GUROBI=ON",
+    "-DGUROBI_ROOT=D:/gurobi1302/win64"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-round112",
+  "engineering": true,
+  "native_starts": 0,
+  "Optimize": 0,
+  "started_unix": 1791638545.6010957
+}

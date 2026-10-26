@@ -1,0 +1,66 @@
+{
+  "records": [
+    {
+      "case": "status",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "fleet_status_read"
+    },
+    {
+      "case": "cut",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "fleet_GRBcbcut:10003"
+    },
+    {
+      "case": "certificate",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "fleet_certificate_write"
+    },
+    {
+      "case": "unknown",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "fleet_unknown_callback_exception"
+    },
+    {
+      "case": "summary",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "fleet_summary_write_failed"
+    },
+    {
+      "case": "service_status",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "service_status_read"
+    },
+    {
+      "case": "service_cut",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "service_GRBcbcut:10003"
+    },
+    {
+      "case": "service_certificate",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "service_certificate_write"
+    },
+    {
+      "case": "service_unknown",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "service_unknown_callback_exception"
+    },
+    {
+      "case": "service_summary",
+      "prior_LB": 0.1,
+      "rejected": "journal_failure",
+      "failure": "service_summary_write_failed"
+    }
+  ],
+  "Optimize_calls": 0,
+  "limitations": "fake API callback-control test, no native B&B or complete storage-loss qualification"
+}

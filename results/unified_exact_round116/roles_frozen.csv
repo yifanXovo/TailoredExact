@@ -1,0 +1,7 @@
+number,id,V,M,geometry,replicate,inventory,Q_vector,Q_class,T_seconds,cap_seconds,method_order,pickup_seconds,drop_seconds,lambda,gurobi_seed,panel_kind
+1,E20-C1,20,2,compact,1,shortage,"[30, 30]",H,3600,900,"[""P-GRB"", ""P-S"", ""ENS-C"", ""M-B""]",60,60,0.15,0,external
+2,E20-R2,20,2,regional,2,balanced,"[20, 40]",X,7200,900,"[""P-S"", ""M-B"", ""P-GRB"", ""ENS-C""]",60,60,0.15,0,external
+3,E50-C1,50,4,compact,1,balanced,"[30, 30, 30, 30]",H,7200,1800,"[""ENS-C"", ""P-GRB"", ""M-B"", ""P-S""]",60,60,0.15,0,external
+4,E50-R2,50,4,regional,2,surplus,"[20, 25, 35, 40]",X,18000,1800,"[""M-B"", ""ENS-C"", ""P-S"", ""P-GRB""]",60,60,0.15,0,external
+5,E100-C1,100,8,compact,1,shortage,"[20, 20, 25, 25, 35, 35, 40, 40]",X,18000,3600,"[""P-GRB"", ""ENS-C"", ""P-S"", ""M-B""]",60,60,0.15,0,external
+6,E100-R2,100,8,regional,2,surplus,"[30, 30, 30, 30, 30, 30, 30, 30]",H,18000,3600,"[""P-S"", ""P-GRB"", ""M-B"", ""ENS-C""]",60,60,0.15,0,external

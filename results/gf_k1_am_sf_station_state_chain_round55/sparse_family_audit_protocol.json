@@ -1,0 +1,34 @@
+{
+  "schema": "round55-sparse-family-audit-protocol-v1",
+  "active_family_count": 17,
+  "panels": [
+    "D1-D14",
+    "C1-C9",
+    "selected V20/V50"
+  ],
+  "measurements": [
+    "rows",
+    "columns",
+    "nonzeros",
+    "root activity",
+    "dual nonzero rate",
+    "slack",
+    "root contribution",
+    "LP Work",
+    "presolve elimination",
+    "build cost",
+    "one-family-removal effect"
+  ],
+  "maximum_single_family_removals": 2,
+  "candidate_names": [
+    "SF-R1",
+    "SF-R2"
+  ],
+  "removal_gate": [
+    "exactness proved",
+    "negligible contribution across roles",
+    "material matrix cost",
+    "uniform",
+    "no dispatch"
+  ]
+}

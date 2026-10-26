@@ -1,0 +1,22 @@
+{
+  "schema": "round55-controlled-innovation-policy-v1",
+  "maximum_revisions": 3,
+  "one_mechanism_per_revision": true,
+  "hash_before_testing": true,
+  "complete_panel_required": true,
+  "allowed": [
+    "equivalent station-state implementation",
+    "one valid cut-management change",
+    "exact DP/separation",
+    "exact lifecycle/reuse",
+    "conditionally one split mechanism"
+  ],
+  "forbidden": [
+    "instance/seed/panel/size/difficulty dispatch",
+    "time/Work/node/memory dispatch",
+    "post-confirmation tuning",
+    "combined unqualified mechanisms",
+    "witness lookup",
+    "fitted score"
+  ]
+}

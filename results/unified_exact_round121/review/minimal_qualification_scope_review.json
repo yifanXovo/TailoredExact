@@ -1,0 +1,181 @@
+{
+  "decision": "MINIMAL_COMPOSITION_CAN_COVER_REQUIRED_QUALIFICATION_IF_FINAL_D1_CLI_FULL_AUDIT_PASSES",
+  "execution_admission_now": false,
+  "interpretation": "Goal section 6 recommends the four-H100-CLI package with the word 建议, while requiring reuse of the already-passed R120 qualification and preserving actual necessary settings/types/Start/domain/clock evidence. The formal 16 arms and 18 pairs remain mandatory and unchanged.",
+  "independent_interpretation": true,
+  "no_standard_weakened": true,
+  "old_D0_actual_evidence": {
+    "source": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\h100\\raw\\05_H100_S0_MB-D0",
+    "H100_identity_SHA": "3337a62367aa5a8b318474d3bd3ef19c3c19482f7836a3afc67e3bd04a8d8ba4",
+    "audit_SHA": "5bb59c52138e90e1821a9c78976568b2d9ad2e6cb0c590082cac0e417eb4895d",
+    "model_SHA": "be27c0d86a76bd7945a2eba7e3d3a0844b88353d62f556971fe06ab7c56f80d4",
+    "complete_model_rechecked": {
+      "path": "results/unified_exact_round120/qualification/h100/raw/05_H100_S0_MB-D0/external/models/L0_epoch_0_generation_1_round120_d0.lp",
+      "SHA": "be27c0d86a76bd7945a2eba7e3d3a0844b88353d62f556971fe06ab7c56f80d4",
+      "rows": 9355,
+      "columns": 3533,
+      "quantity_columns": 80,
+      "quantity_type": "C",
+      "direction_columns": 40,
+      "frozen_A_B_rows_checked": 40,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true,
+      "original_rows_types_bounds_objective_equal": true,
+      "base_SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+      "root_proof_pair_SHA": "a78a551608344a15ae1d4b7a8d9e4fe8009e20dcd36d9de38e2ffd50d7d07a52",
+      "extension": {
+        "path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\h100\\raw\\05_H100_S0_MB-D0\\external\\models\\L0_epoch_0_generation_1_round120_d0.lp",
+        "SHA": "be27c0d86a76bd7945a2eba7e3d3a0844b88353d62f556971fe06ab7c56f80d4",
+        "passed": true,
+        "exact_rational_endpoint_slacks": [
+          "0",
+          "352342717113/13743895347200000000000000000",
+          "334852050247/13743895347200000000000000000",
+          "747168910663/6871947673600000000000000000",
+          "934868771589/68719476736000000000000000000",
+          "934868771589/68719476736000000000000000000"
+        ],
+        "theoretical_a": 0.0,
+        "theoretical_m": 0.12726435448603574,
+        "theoretical_b": 0.25452870897207147,
+        "actual_decimal_endpoints": [
+          "0",
+          "12726435448603571/100000000000000000",
+          "1590804431075447/12500000000000000",
+          "12726435448603579/50000000000000000"
+        ],
+        "source_is_numerical_not_rational_certificate": true,
+        "objective_constant": 0.0,
+        "conditional": false
+      },
+      "added_columns": 1,
+      "added_rows": 3
+    },
+    "actual_native_checks": [
+      {
+        "path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\h100\\raw\\05_H100_S0_MB-D0\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round120.native.json",
+        "SHA": "e71b049e6c85f87539567a1a7dbc1cc4e5a5638975c34e4ed6e7b32da98130ce",
+        "binary64_conservative_endpoint_recomputed": true,
+        "h_type": "B",
+        "h_bounds": [
+          0,
+          1
+        ],
+        "objective_delta": 0,
+        "actual_ObjCon": 0
+      },
+      {
+        "path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\h100\\raw\\05_H100_S0_MB-D0\\external\\native_logs\\L0_terminal_mip.gurobi.log.round120.native.json",
+        "SHA": "e71b049e6c85f87539567a1a7dbc1cc4e5a5638975c34e4ed6e7b32da98130ce",
+        "binary64_conservative_endpoint_recomputed": true,
+        "h_type": "B",
+        "h_bounds": [
+          0,
+          1
+        ],
+        "objective_delta": 0,
+        "actual_ObjCon": 0
+      }
+    ],
+    "actual_complete_Start_rechecks": [
+      {
+        "start_path": "results/unified_exact_round120/qualification/h100/raw/05_H100_S0_MB-D0/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+        "start_sha256": "f6045b25b5f47880996e98657f900526fbfc19954894c138bbf9d4838c227436",
+        "vector_sha256": "fb6a1d7489bb977edfc70b6d04862e1e6df3fac8f99b5f1b3fdf923a23dd63a9",
+        "model_sha256": "be27c0d86a76bd7945a2eba7e3d3a0844b88353d62f556971fe06ab7c56f80d4",
+        "maximum_absolute_residual": 1.1102230246251565e-16,
+        "mode": "m-binary",
+        "rows": 9355,
+        "columns": 3533,
+        "objective": 0.25452870897207147,
+        "actual_quantity_type": "C",
+        "direction_columns": 40,
+        "per_column_restored_type_checked": true,
+        "ordered_native_columns_checked": true,
+        "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+      },
+      {
+        "start_path": "results/unified_exact_round120/qualification/h100/raw/05_H100_S0_MB-D0/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+        "start_sha256": "52a02992fc75b0c04cbd91a485040ad3489049b55a7403423de439ea68522676",
+        "vector_sha256": "fb6a1d7489bb977edfc70b6d04862e1e6df3fac8f99b5f1b3fdf923a23dd63a9",
+        "model_sha256": "be27c0d86a76bd7945a2eba7e3d3a0844b88353d62f556971fe06ab7c56f80d4",
+        "maximum_absolute_residual": 1.1102230246251565e-16,
+        "mode": "m-binary",
+        "rows": 9355,
+        "columns": 3533,
+        "objective": 0.25452870897207147,
+        "actual_quantity_type": "C",
+        "direction_columns": 40,
+        "per_column_restored_type_checked": true,
+        "ordered_native_columns_checked": true,
+        "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+      }
+    ],
+    "original_PE_DLL_all_source_bindings_identical": true,
+    "historical_Seed": 0,
+    "installed": 1,
+    "actual_extended_Optimize": 2
+  },
+  "R121_actual_P": {
+    "review_SHA": "01ca9fdb116bd90b1986e72c856d6b9037d14e52a49a0f9eb661456fcc5ed378",
+    "full_audit_and_readout": true,
+    "Seed": 1
+  },
+  "R121_actual_MB": {
+    "review_SHA": "66c7258e944ed3cb89259d20ef8e684c07b16d8705b70bb67d897e2f873fdda1",
+    "full_audit_and_readout": true,
+    "Seed": 1,
+    "original_T_produce": 89.60989649999829,
+    "native_Optimize": 5,
+    "LP": 3,
+    "MIP": 2
+  },
+  "prospective_last_D1_requirement": "Run exactly the never-started fixed H100 D1 Seed1 position and audit every naturally occurring call, actual model/type/Start/parameter/three-row/scope/return and full H semantics. If naturally unexposed, report it; no artificial proof, weak H or extra native diagnostic is permitted.",
+  "H100_D0_Seed1": {
+    "state": "NOT_STARTED",
+    "not_replaced_with_other_Seed": true,
+    "limitation": "No direct H100 D0 Seed1 CLI observation; rely on frozen R120 D0 actual native model/Start plus shared Seed1 adapter/native setting evidence. This is an explicit qualification coverage limit."
+  },
+  "formal_F2_D0_Seed1_remains_mandatory": true,
+  "formal_arms": 16,
+  "formal_pairs": 18,
+  "forbidden_claims": [
+    "H100 four Seed1 CLI completed",
+    "H100 D0 Seed1 actually tested",
+    "old D0 Seed0 is a current Seed1 measurement"
+  ],
+  "fees": [
+    {
+      "name": "qualification01",
+      "SHA": "cbfc57db6d473e6c9c10a1674f22bbc47199e1ab548cfc7f19704d1bff61c0f8",
+      "starts": 1,
+      "outer_seconds": 16.000781774520874
+    },
+    {
+      "name": "qualification02",
+      "SHA": "220b5bebb528d7659e9104d3b932195d61a0d20b7824502a70674716c72e2050",
+      "starts": 3,
+      "outer_seconds": 117.67823243141174
+    },
+    {
+      "name": "qualification03",
+      "SHA": "896cdad7dca5d35c35d09675d9075f65262cfcb81e989db375666a73b60711f8",
+      "starts": 2,
+      "outer_seconds": 289.7733907699585
+    }
+  ],
+  "paid_qualification_starts": 6,
+  "paid_qualification_seconds": 423.4524049758911,
+  "remaining_qualification_starts": 2,
+  "remaining_qualification_seconds": 1376.547595024109,
+  "next_maximum_native_plan": {
+    "wrapper": 1,
+    "child_D1": 1,
+    "total_starts": 2,
+    "no_other_launch_available": true
+  },
+  "stop_rule": "Any unresolved necessary identity, model, Start, scope, return, clock or native correctness gap means BLOCKED. No attempt may exceed qualification 8 starts/1800 seconds. Final D1 success is not presumed.",
+  "reviewer_Optimize": 0,
+  "reviewer_native_starts": 0,
+  "historical_carriers_restored": 0
+}

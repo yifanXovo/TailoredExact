@@ -1,0 +1,1709 @@
+{
+  "schema": "round121-blocked-current-evidence-v1",
+  "stage": {
+    "execution_stage": "BLOCKED",
+    "stage": "BLOCKED",
+    "conditions": {
+      "three_once_only_postfreeze_new_inputs": false,
+      "all_three_new_primary_evaluable": false,
+      "new_primary_at_least_two_WIN_at_most_one_LOSS": false,
+      "at_least_two_new_D1_native_exposures": false,
+      "exposed_new_material_M_B_gain_or_new_certificate": false,
+      "all_five_primary_evaluable": false,
+      "no_severe_primary_risk": true,
+      "D1_certificate_count_preserved": true,
+      "both_fixed_Seed1_blocks_complete": false
+    },
+    "veto": {
+      "any_of_five_severe_D1_P": false,
+      "two_or_more_new_D1_P_LOSS": false,
+      "D1_fewer_certificates_than_M_B": false
+    },
+    "formal_arms": 0,
+    "formal_pairs": 0,
+    "certificate_counts": {
+      "D1": 0,
+      "M_B": 0
+    },
+    "new_problem_denominator": 3,
+    "known_role_Seed1_blocks": 2,
+    "blockers": [
+      "Qualification minimum not completed: H100 MB-D1 Seed1 requires one supervisor parent and one actual child (2 starts); only 1 of 8 qualification starts remains after four failed parents. H100 M-B original closeout is also incomplete; its full temporary read-only review passed without replacing that failed closeout."
+    ],
+    "default_ENS_changed": false,
+    "D0_not_promoted": true,
+    "no_automatic_further_batch": true,
+    "statistical_significance_claim": false,
+    "performance_gate_evaluated": false,
+    "formal_positions_planned": 16,
+    "pair_positions_planned": 18,
+    "all_support_and_veto_counts_unobserved": true,
+    "observed_zero_certificate_counts_are_not_a_performance_tie": true,
+    "proof_contradiction_observed": false,
+    "blocker_is_qualification_resource_and_closeout": true
+  },
+  "formal_slots": [
+    {
+      "group": 1,
+      "id": "F2",
+      "arm": "MB-D0",
+      "seed": 1,
+      "cap_seconds": 1200,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 1,
+      "id": "F2",
+      "arm": "P-GRB",
+      "seed": 1,
+      "cap_seconds": 1200,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 1,
+      "id": "F2",
+      "arm": "MB-D1",
+      "seed": 1,
+      "cap_seconds": 1200,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 1,
+      "id": "F2",
+      "arm": "M-B",
+      "seed": 1,
+      "cap_seconds": 1200,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 2,
+      "id": "Q30-C2-B",
+      "arm": "P-GRB",
+      "seed": 0,
+      "cap_seconds": 1800,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 2,
+      "id": "Q30-C2-B",
+      "arm": "MB-D1",
+      "seed": 0,
+      "cap_seconds": 1800,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 2,
+      "id": "Q30-C2-B",
+      "arm": "M-B",
+      "seed": 0,
+      "cap_seconds": 1800,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 3,
+      "id": "R98-C2",
+      "arm": "M-B",
+      "seed": 1,
+      "cap_seconds": 1800,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 3,
+      "id": "R98-C2",
+      "arm": "P-GRB",
+      "seed": 1,
+      "cap_seconds": 1800,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 3,
+      "id": "R98-C2",
+      "arm": "MB-D1",
+      "seed": 1,
+      "cap_seconds": 1800,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 4,
+      "id": "Q40-R2-S",
+      "arm": "MB-D1",
+      "seed": 0,
+      "cap_seconds": 3600,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 4,
+      "id": "Q40-R2-S",
+      "arm": "M-B",
+      "seed": 0,
+      "cap_seconds": 3600,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 4,
+      "id": "Q40-R2-S",
+      "arm": "P-GRB",
+      "seed": 0,
+      "cap_seconds": 3600,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 5,
+      "id": "Q50-C2-U",
+      "arm": "M-B",
+      "seed": 0,
+      "cap_seconds": 3600,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 5,
+      "id": "Q50-C2-U",
+      "arm": "P-GRB",
+      "seed": 0,
+      "cap_seconds": 3600,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    },
+    {
+      "group": 5,
+      "id": "Q50-C2-U",
+      "arm": "MB-D1",
+      "seed": 0,
+      "cap_seconds": 3600,
+      "state": "NOT_STARTED_QUALIFICATION_BLOCKED",
+      "actually_executed": false,
+      "formal_protocol_qualified": false,
+      "U": null,
+      "L": null,
+      "gap": null,
+      "certificate": null,
+      "T_produce": null,
+      "T_verify": null,
+      "T_total": null
+    }
+  ],
+  "pair_slots": [
+    {
+      "group": 1,
+      "id": "F2",
+      "seed": 1,
+      "candidate": "MB-D1",
+      "control": "M-B",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 1,
+      "id": "F2",
+      "seed": 1,
+      "candidate": "MB-D1",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 1,
+      "id": "F2",
+      "seed": 1,
+      "candidate": "MB-D1",
+      "control": "MB-D0",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 1,
+      "id": "F2",
+      "seed": 1,
+      "candidate": "MB-D0",
+      "control": "M-B",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 1,
+      "id": "F2",
+      "seed": 1,
+      "candidate": "MB-D0",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 1,
+      "id": "F2",
+      "seed": 1,
+      "candidate": "M-B",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 2,
+      "id": "Q30-C2-B",
+      "seed": 0,
+      "candidate": "MB-D1",
+      "control": "M-B",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 2,
+      "id": "Q30-C2-B",
+      "seed": 0,
+      "candidate": "MB-D1",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 2,
+      "id": "Q30-C2-B",
+      "seed": 0,
+      "candidate": "M-B",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 3,
+      "id": "R98-C2",
+      "seed": 1,
+      "candidate": "MB-D1",
+      "control": "M-B",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 3,
+      "id": "R98-C2",
+      "seed": 1,
+      "candidate": "MB-D1",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 3,
+      "id": "R98-C2",
+      "seed": 1,
+      "candidate": "M-B",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 4,
+      "id": "Q40-R2-S",
+      "seed": 0,
+      "candidate": "MB-D1",
+      "control": "M-B",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 4,
+      "id": "Q40-R2-S",
+      "seed": 0,
+      "candidate": "MB-D1",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 4,
+      "id": "Q40-R2-S",
+      "seed": 0,
+      "candidate": "M-B",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 5,
+      "id": "Q50-C2-U",
+      "seed": 0,
+      "candidate": "MB-D1",
+      "control": "M-B",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 5,
+      "id": "Q50-C2-U",
+      "seed": 0,
+      "candidate": "MB-D1",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    },
+    {
+      "group": 5,
+      "id": "Q50-C2-U",
+      "seed": 0,
+      "candidate": "M-B",
+      "control": "P-GRB",
+      "classification": "UNEVALUABLE",
+      "evaluable": false,
+      "severe_regression": null,
+      "basis": "neither fixed formal position was started; no endpoint or certificate comparison"
+    }
+  ],
+  "actual_formal_arms": [],
+  "actual_formal_pairs": [],
+  "inputs": [
+    {
+      "id": "F2",
+      "input_SHA": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "V": 20,
+      "M": 2,
+      "Q": [
+        30,
+        30
+      ],
+      "total_initial": 445,
+      "total_target": 485,
+      "sum_weights": 13.460436,
+      "performance_measured": false
+    },
+    {
+      "id": "Q30-C2-B",
+      "input_SHA": "9d9737dc36819cf8648aec820b456504bc7f26bf3cde474de351da2e0d34596c",
+      "V": 30,
+      "M": 3,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "total_initial": 211,
+      "total_target": 211,
+      "sum_weights": 12.900832,
+      "performance_measured": false
+    },
+    {
+      "id": "R98-C2",
+      "input_SHA": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "V": 30,
+      "M": 3,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "total_initial": 554,
+      "total_target": 600,
+      "sum_weights": 20.695892,
+      "performance_measured": false
+    },
+    {
+      "id": "Q40-R2-S",
+      "input_SHA": "ca501c5b72642336ec252c78204fd9b1db25523f1f5a08027abb1ab496f10d84",
+      "V": 40,
+      "M": 4,
+      "Q": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "total_initial": 263,
+      "total_target": 303,
+      "sum_weights": 19.842984,
+      "performance_measured": false
+    },
+    {
+      "id": "Q50-C2-U",
+      "input_SHA": "b2a1910b9f07820d0c60ba596ab5afa31f066bfe265b8535c948b67c6ddce119",
+      "V": 50,
+      "M": 4,
+      "Q": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "total_initial": 366,
+      "total_target": 316,
+      "sum_weights": 17.355387,
+      "performance_measured": false
+    }
+  ],
+  "qualification": [
+    {
+      "arm": "P-GRB",
+      "seed": 1,
+      "state": "ACTUAL_CLI_SEALED",
+      "producer_receipt_SHA": "69818c60272277bd6f1342c7cf32350e18a2effad4c4e03180eab75efa1e2ff6",
+      "producer_seal_SHA": "d2294c9993401801652e202240b8a5610d0757fca0129293e6fecfb43afaa965",
+      "all_sealed_required_bytes_unchanged": true,
+      "T_produce": 90.6787239999976,
+      "native_calls": 1,
+      "computed_seed_scope": {
+        "schema": "round121-computed-seed-scope-v1",
+        "actual_seed": 1,
+        "recovered_calls": [
+          {
+            "call": 1,
+            "raw_native_preconditions": false,
+            "computed_native_prerequisites": true,
+            "model": {
+              "SHA": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+              "rows": 3689,
+              "columns": 1591,
+              "full_original": true
+            },
+            "scope": {
+              "full_original_reference_already_checked": true
+            },
+            "call_scoped_log_binding": {
+              "call": 1,
+              "serial_ordinal": 1,
+              "model_SHA": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+              "leaf": "",
+              "true_G_interval": [
+                0,
+                0.95
+              ],
+              "cutoff": 0,
+              "epoch": null,
+              "epoch_source": "scope/cutoff bound; no invented epoch",
+              "solve_kind": "MIP",
+              "ledger": null,
+              "raw_log": "results/unified_exact_round121/qualification/h100/raw/01_H100_S1_P-GRB/native.log",
+              "raw_log_SHA": "6d8dcd2c36bf7ccc8715f538b17257c267d620cc0b43971408cd49c927fe74ca",
+              "byte_begin": 0,
+              "byte_end": 13497,
+              "segment_SHA": "6d8dcd2c36bf7ccc8715f538b17257c267d620cc0b43971408cd49c927fe74ca",
+              "fingerprint": "0x2dd5497a",
+              "fingerprint_contract": {
+                "cold_reference": "0x2dd5497a",
+                "Optimize_log": "0x2dd5497a",
+                "same_state_equal": true
+              },
+              "parameters": {
+                "TimeLimit": 89.876402,
+                "MIPGap": 0.0,
+                "MIPGapAbs": 0.0,
+                "Seed": 1.0,
+                "Threads": 1.0
+              },
+              "native_types": {
+                "C": 411,
+                "B": 1040,
+                "I": 140
+              },
+              "journal_returned": true,
+              "return_sequence": 225,
+              "return_available": 90.26600000000326,
+              "return_code": 0,
+              "missing_return_requires_unchanged_narrow_gate": false
+            },
+            "successful_return": true,
+            "actual_settings": {
+              "read_return_code": 0,
+              "Threads": 1,
+              "Seed": 1,
+              "Presolve": -1,
+              "MIPGap": 0,
+              "MIPGapAbs": 0,
+              "FeasibilityTol": 1e-06,
+              "IntFeasTol": 1e-05,
+              "OptimalityTol": 1e-06
+            },
+            "qualification_role": "offline returned original-model scope proof; no callback/global flag promotion"
+          }
+        ],
+        "observations_SHA": "ff06a0babc44ac90b79dba678dcd8f7e1396f20f9590152694cef57dc5e0026b",
+        "completion_SHA": "11e6d0c75d1800ad41acecf4f7bbca28b7db4810e14e55b7b8f28c80c773d022",
+        "result_SHA": "34a9f4341162971b23f39889a760416f3daa9b37ac34c1cd5e83b84f52c01a81",
+        "producer_source_SHA": "df87778a893c72cc4b62550f04886b94c3ee1688bcbbce3b0e5ffed74a5c8aa9",
+        "raw_flags_preserved": true,
+        "raw_global_available_and_global_bound_unchanged": true,
+        "production_or_search_changed": false
+      },
+      "actual_models": [
+        {
+          "call": 1,
+          "model": {
+            "full_original": true,
+            "SHA": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+            "rows": 3689,
+            "columns": 1591
+          },
+          "scope": {
+            "full_original_reference_already_checked": true
+          }
+        }
+      ],
+      "own_physical": {
+        "G": 0.09533718012729485,
+        "P": 0.897434465796408,
+        "F": 0.229952349996756,
+        "Y": [
+          50000,
+          17,
+          22,
+          23,
+          31,
+          23,
+          15,
+          19,
+          23,
+          17,
+          19,
+          18,
+          25,
+          19,
+          27,
+          20,
+          21,
+          21,
+          15,
+          15,
+          18
+        ],
+        "maximum_duration": 5050.767452189,
+        "pickups": [
+          26,
+          24
+        ],
+        "return_loads": [
+          0,
+          0
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              8,
+              13,
+              12,
+              18,
+              14,
+              5,
+              15,
+              7,
+              2,
+              11,
+              0
+            ],
+            "operations": [
+              {
+                "station": 8,
+                "pickup": 1,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 12,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 18,
+                "pickup": 0,
+                "drop": 5
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 5,
+                "pickup": 3,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 2,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 0,
+                "drop": 7
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              17,
+              3,
+              9,
+              10,
+              16,
+              20,
+              0
+            ],
+            "operations": [
+              {
+                "station": 17,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 3,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 8
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 6
+              },
+              {
+                "station": 16,
+                "pickup": 9,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 10
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 2,
+        "empty_vehicles_added": 0
+      },
+      "canonical_audit_passed": true,
+      "canonical_closeout_complete": true,
+      "failed_canonical_audit": null,
+      "separate_temporary_review_passed": true,
+      "temporary_review_is_not_original_closeout": true,
+      "formal_performance_evidence": false
+    },
+    {
+      "arm": "M-B",
+      "seed": 1,
+      "state": "ACTUAL_CLI_SEALED",
+      "producer_receipt_SHA": "cefc7386866ca2b02ac8101acac65695f9f410896bc2c89fb4fd93dd494c529d",
+      "producer_seal_SHA": "da479aac6e24a302da91be8de0372798f81c6c8fae43d34064cff721b3bff894",
+      "all_sealed_required_bytes_unchanged": true,
+      "T_produce": 89.60989649999829,
+      "native_calls": 5,
+      "computed_seed_scope": {
+        "schema": "round121-computed-seed-scope-v1",
+        "actual_seed": 1,
+        "recovered_calls": [
+          {
+            "call": 4,
+            "raw_native_preconditions": false,
+            "computed_native_prerequisites": true,
+            "model": {
+              "path": "results/unified_exact_round121/qualification/h100/raw/02_H100_S1_M-B/external/models/L0_epoch_0_generation_1.lp",
+              "SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+              "rows": 9352,
+              "columns": 3532,
+              "quantity_columns": 80,
+              "quantity_type": "C",
+              "direction_columns": 40,
+              "frozen_A_B_rows_checked": 40,
+              "route_load_Y_integer": true,
+              "state_assignment_direction_binary": true
+            },
+            "scope": {
+              "saved_G_lower": 0,
+              "saved_G_upper": 0.25452870897207147,
+              "saved_objective_cutoff": 0.25452870897207147,
+              "true_G_cap_floor_checked": true,
+              "metadata_scope_is_actual_model_scope": true
+            },
+            "call_scoped_log_binding": {
+              "call": 4,
+              "serial_ordinal": 4,
+              "model_SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+              "leaf": "L0",
+              "true_G_interval": [
+                0,
+                0.25452870897207147
+              ],
+              "cutoff": 0.25452870897207147,
+              "epoch": null,
+              "epoch_source": "scope/cutoff bound; no invented epoch",
+              "solve_kind": "CHILD_BOUND_TARGET_MIP",
+              "ledger": {
+                "leaf_id": "L0",
+                "solve_kind": "CHILD_BOUND_TARGET_MIP",
+                "native_status": "INTERRUPTED",
+                "optimize_return_code": "0",
+                "global_deadline_remaining_at_launch": "87.017748999999995",
+                "solver_runtime": "1.4950001239776611",
+                "work": "2.4938757847705837",
+                "nodes": "1",
+                "simplex_iterations": "8211",
+                "barrier_iterations": "0",
+                "memory_gb": "0.051761374999999998",
+                "model_sha256": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+                "in_memory_model_reused": "1",
+                "integer_domain_restored": "0",
+                "basis_reuse_status": "not_requested",
+                "native_log": "C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\qualification\\h100\\raw\\02_H100_S1_M-B\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log"
+              },
+              "raw_log": "results/unified_exact_round121/qualification/h100/raw/02_H100_S1_M-B/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+              "raw_log_SHA": "d61ba9258e5b37e7d8b1ee93629537c73fa794dd35efd05af6f4bd3fa77b5c07",
+              "byte_begin": 0,
+              "byte_end": 2294,
+              "segment_SHA": "d61ba9258e5b37e7d8b1ee93629537c73fa794dd35efd05af6f4bd3fa77b5c07",
+              "fingerprint": "0x5b5d9523",
+              "fingerprint_contract": null,
+              "parameters": {
+                "TimeLimit": 86.9740808,
+                "MIPGap": 0.0,
+                "MIPGapAbs": 0.0,
+                "Seed": 1.0,
+                "Threads": 1.0
+              },
+              "native_types": {
+                "C": 1883,
+                "B": 1589,
+                "I": 60
+              },
+              "journal_returned": true,
+              "return_sequence": 15,
+              "return_available": 4.60899999999674,
+              "return_code": 0,
+              "missing_return_requires_unchanged_narrow_gate": false
+            },
+            "successful_return": true,
+            "actual_settings": {
+              "read_return_code": 0,
+              "Threads": 1,
+              "Seed": 1,
+              "Presolve": -1,
+              "MIPGap": 0,
+              "MIPGapAbs": 0,
+              "FeasibilityTol": 1e-06,
+              "IntFeasTol": 1e-05,
+              "OptimalityTol": 1e-06
+            },
+            "qualification_role": "offline returned original-model scope proof; no callback/global flag promotion"
+          },
+          {
+            "call": 5,
+            "raw_native_preconditions": false,
+            "computed_native_prerequisites": true,
+            "model": {
+              "path": "results/unified_exact_round121/qualification/h100/raw/02_H100_S1_M-B/external/models/L0_epoch_0_generation_1.lp",
+              "SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+              "rows": 9352,
+              "columns": 3532,
+              "quantity_columns": 80,
+              "quantity_type": "C",
+              "direction_columns": 40,
+              "frozen_A_B_rows_checked": 40,
+              "route_load_Y_integer": true,
+              "state_assignment_direction_binary": true
+            },
+            "scope": {
+              "saved_G_lower": 0,
+              "saved_G_upper": 0.25452870897207147,
+              "saved_objective_cutoff": 0.25452870897207147,
+              "true_G_cap_floor_checked": true,
+              "metadata_scope_is_actual_model_scope": true
+            },
+            "call_scoped_log_binding": {
+              "call": 5,
+              "serial_ordinal": 5,
+              "model_SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+              "leaf": "L0",
+              "true_G_interval": [
+                0,
+                0.25452870897207147
+              ],
+              "cutoff": 0.25452870897207147,
+              "epoch": null,
+              "epoch_source": "scope/cutoff bound; no invented epoch",
+              "solve_kind": "MIP",
+              "ledger": {
+                "leaf_id": "L0",
+                "solve_kind": "MIP",
+                "native_status": "OPTIMAL",
+                "optimize_return_code": "0",
+                "global_deadline_remaining_at_launch": "85.468750499999999",
+                "solver_runtime": "84.545000076293945",
+                "work": "139.16045692715639",
+                "nodes": "5666",
+                "simplex_iterations": "550790",
+                "barrier_iterations": "0",
+                "memory_gb": "0.11478664500000001",
+                "model_sha256": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+                "in_memory_model_reused": "1",
+                "integer_domain_restored": "0",
+                "basis_reuse_status": "not_requested",
+                "native_log": "C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP\\results\\unified_exact_round121\\qualification\\h100\\raw\\02_H100_S1_M-B\\external\\native_logs\\L0_terminal_mip.gurobi.log"
+              },
+              "raw_log": "results/unified_exact_round121/qualification/h100/raw/02_H100_S1_M-B/external/native_logs/L0_terminal_mip.gurobi.log",
+              "raw_log_SHA": "25417e40e8d461cbef4a87e1213914f9e4ce5794f7b2e340c0940baf15f8386f",
+              "byte_begin": 0,
+              "byte_end": 7324,
+              "segment_SHA": "25417e40e8d461cbef4a87e1213914f9e4ce5794f7b2e340c0940baf15f8386f",
+              "fingerprint": "0x5b5d9523",
+              "fingerprint_contract": null,
+              "parameters": {
+                "TimeLimit": 85.4230625,
+                "MIPGap": 0.0,
+                "MIPGapAbs": 0.0,
+                "Seed": 1.0,
+                "Threads": 1.0
+              },
+              "native_types": {
+                "C": 1883,
+                "B": 1589,
+                "I": 60
+              },
+              "journal_returned": true,
+              "return_sequence": 1033,
+              "return_available": 89.20299999999406,
+              "return_code": 0,
+              "missing_return_requires_unchanged_narrow_gate": false
+            },
+            "successful_return": true,
+            "actual_settings": {
+              "read_return_code": 0,
+              "Threads": 1,
+              "Seed": 1,
+              "Presolve": -1,
+              "MIPGap": 0,
+              "MIPGapAbs": 0,
+              "FeasibilityTol": 1e-06,
+              "IntFeasTol": 1e-05,
+              "OptimalityTol": 1e-06
+            },
+            "qualification_role": "offline returned original-model scope proof; no callback/global flag promotion"
+          }
+        ],
+        "observations_SHA": "a36a9424686163ce204293821b37892ce266a0356851d0036e938f1937f476ac",
+        "completion_SHA": "dd47164311e715f19322ce6930892ecfff084f8e27294fefcc70cf092a7b38a1",
+        "result_SHA": "86d1f096f87d408a56974b336be313f3cbc223463142bdaabafb1860327c1122",
+        "producer_source_SHA": "df87778a893c72cc4b62550f04886b94c3ee1688bcbbce3b0e5ffed74a5c8aa9",
+        "raw_flags_preserved": true,
+        "raw_global_available_and_global_bound_unchanged": true,
+        "production_or_search_changed": false
+      },
+      "actual_models": [
+        {
+          "call": 1,
+          "model": {
+            "path": "results/unified_exact_round121/qualification/h100/raw/02_H100_S1_M-B/external/models/L0_epoch_0_generation_1.lp",
+            "SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+            "rows": 9352,
+            "columns": 3532,
+            "quantity_columns": 80,
+            "quantity_type": "C",
+            "direction_columns": 40,
+            "frozen_A_B_rows_checked": 40,
+            "route_load_Y_integer": true,
+            "state_assignment_direction_binary": true
+          },
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.25452870897207147,
+            "saved_objective_cutoff": 0.25452870897207147,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          }
+        },
+        {
+          "call": 2,
+          "model": {
+            "path": "results/unified_exact_round121/qualification/h100/raw/02_H100_S1_M-B/external/models/L0.0_epoch_0_generation_2.lp",
+            "SHA": "04f01f2f4dee4555d889cd3b76955e04710f0171e4d50c03aa711a9ad20cb9a5",
+            "rows": 9352,
+            "columns": 3532,
+            "quantity_columns": 80,
+            "quantity_type": "C",
+            "direction_columns": 40,
+            "frozen_A_B_rows_checked": 40,
+            "route_load_Y_integer": true,
+            "state_assignment_direction_binary": true
+          },
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.12726435448603574,
+            "saved_objective_cutoff": 0.25452870897207147,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          }
+        },
+        {
+          "call": 3,
+          "model": {
+            "path": "results/unified_exact_round121/qualification/h100/raw/02_H100_S1_M-B/external/models/L0.1_epoch_0_generation_3.lp",
+            "SHA": "85e125c47f9d0aaa5c95fbb7ac16031438636c5a6206ac207581963b66bd00e6",
+            "rows": 9352,
+            "columns": 3532,
+            "quantity_columns": 80,
+            "quantity_type": "C",
+            "direction_columns": 40,
+            "frozen_A_B_rows_checked": 40,
+            "route_load_Y_integer": true,
+            "state_assignment_direction_binary": true
+          },
+          "scope": {
+            "saved_G_lower": 0.12726435448603574,
+            "saved_G_upper": 0.25452870897207147,
+            "saved_objective_cutoff": 0.25452870897207147,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          }
+        },
+        {
+          "call": 4,
+          "model": {
+            "path": "results/unified_exact_round121/qualification/h100/raw/02_H100_S1_M-B/external/models/L0_epoch_0_generation_1.lp",
+            "SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+            "rows": 9352,
+            "columns": 3532,
+            "quantity_columns": 80,
+            "quantity_type": "C",
+            "direction_columns": 40,
+            "frozen_A_B_rows_checked": 40,
+            "route_load_Y_integer": true,
+            "state_assignment_direction_binary": true
+          },
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.25452870897207147,
+            "saved_objective_cutoff": 0.25452870897207147,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          }
+        },
+        {
+          "call": 5,
+          "model": {
+            "path": "results/unified_exact_round121/qualification/h100/raw/02_H100_S1_M-B/external/models/L0_epoch_0_generation_1.lp",
+            "SHA": "a6caf072b91a2be233186961026600cf5178cdc6ad7a06fb18f6caaa95802ba6",
+            "rows": 9352,
+            "columns": 3532,
+            "quantity_columns": 80,
+            "quantity_type": "C",
+            "direction_columns": 40,
+            "frozen_A_B_rows_checked": 40,
+            "route_load_Y_integer": true,
+            "state_assignment_direction_binary": true
+          },
+          "scope": {
+            "saved_G_lower": 0,
+            "saved_G_upper": 0.25452870897207147,
+            "saved_objective_cutoff": 0.25452870897207147,
+            "true_G_cap_floor_checked": true,
+            "metadata_scope_is_actual_model_scope": true
+          }
+        }
+      ],
+      "own_physical": {
+        "G": 0.07794890728937398,
+        "P": 0.550934399771167,
+        "F": 0.160589067255049,
+        "Y": [
+          50000,
+          17,
+          22,
+          23,
+          23,
+          22,
+          15,
+          19,
+          24,
+          20,
+          23,
+          22,
+          25,
+          19,
+          27,
+          20,
+          22,
+          21,
+          10,
+          15,
+          18
+        ],
+        "maximum_duration": 5060.221523810995,
+        "pickups": [
+          28,
+          29
+        ],
+        "return_loads": [
+          0,
+          1
+        ],
+        "routes": [
+          {
+            "vehicle": 0,
+            "nodes": [
+              0,
+              3,
+              13,
+              10,
+              16,
+              9,
+              12,
+              14,
+              0
+            ],
+            "operations": [
+              {
+                "station": 3,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 13,
+                "pickup": 5,
+                "drop": 0
+              },
+              {
+                "station": 10,
+                "pickup": 0,
+                "drop": 10
+              },
+              {
+                "station": 16,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 9,
+                "pickup": 0,
+                "drop": 11
+              },
+              {
+                "station": 12,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 14,
+                "pickup": 0,
+                "drop": 7
+              }
+            ]
+          },
+          {
+            "vehicle": 1,
+            "nodes": [
+              0,
+              5,
+              17,
+              15,
+              7,
+              4,
+              11,
+              2,
+              20,
+              0
+            ],
+            "operations": [
+              {
+                "station": 5,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 17,
+                "pickup": 7,
+                "drop": 0
+              },
+              {
+                "station": 15,
+                "pickup": 6,
+                "drop": 0
+              },
+              {
+                "station": 7,
+                "pickup": 0,
+                "drop": 7
+              },
+              {
+                "station": 4,
+                "pickup": 8,
+                "drop": 0
+              },
+              {
+                "station": 11,
+                "pickup": 0,
+                "drop": 11
+              },
+              {
+                "station": 2,
+                "pickup": 4,
+                "drop": 0
+              },
+              {
+                "station": 20,
+                "pickup": 0,
+                "drop": 10
+              }
+            ]
+          }
+        ],
+        "complete_fleet_vehicles": 2,
+        "empty_vehicles_added": 0
+      },
+      "canonical_audit_passed": false,
+      "canonical_closeout_complete": false,
+      "failed_canonical_audit": {
+        "passed": false,
+        "error": "KeyError(2097234568256)",
+        "verification_failed": true,
+        "endpoint": null
+      },
+      "separate_temporary_review_passed": true,
+      "temporary_review_is_not_original_closeout": true,
+      "formal_performance_evidence": false
+    },
+    {
+      "arm": "MB-D0",
+      "seed": 1,
+      "state": "NOT_STARTED",
+      "native_calls": 0
+    },
+    {
+      "arm": "MB-D1",
+      "seed": 1,
+      "state": "NOT_STARTED",
+      "native_calls": 0
+    }
+  ],
+  "resource": {
+    "paid_starts": 7,
+    "paid_outer_seconds": 445.13650035858154,
+    "remaining_starts": 33,
+    "remaining_outer_seconds": 47554.86349964142,
+    "qualification_starts": 7,
+    "qualification_seconds": 445.13650035858154,
+    "unclosed": []
+  },
+  "fees": [
+    {
+      "name": "qualification01",
+      "receipt_SHA": "cbfc57db6d473e6c9c10a1674f22bbc47199e1ab548cfc7f19704d1bff61c0f8",
+      "starts": 1,
+      "native_children": 0,
+      "outer_seconds": 16.000781774520874,
+      "exit_code": 1,
+      "parent_pid": 26816,
+      "parent_creation_unix": 1792041536.5755615
+    },
+    {
+      "name": "qualification02",
+      "receipt_SHA": "220b5bebb528d7659e9104d3b932195d61a0d20b7824502a70674716c72e2050",
+      "starts": 3,
+      "native_children": 2,
+      "outer_seconds": 117.67823243141174,
+      "exit_code": 1,
+      "parent_pid": 23132,
+      "parent_creation_unix": 1792041748.536501
+    },
+    {
+      "name": "qualification03",
+      "receipt_SHA": "896cdad7dca5d35c35d09675d9075f65262cfcb81e989db375666a73b60711f8",
+      "starts": 2,
+      "native_children": 1,
+      "outer_seconds": 289.7733907699585,
+      "exit_code": 1,
+      "parent_pid": 8540,
+      "parent_creation_unix": 1792042317.0885677
+    },
+    {
+      "name": "qualification04",
+      "receipt_SHA": "61454cc0b6c6159d5c971d6b68a69527a45bb14b801ce36b4974ae5cd214f588",
+      "starts": 1,
+      "native_children": 0,
+      "outer_seconds": 21.68409538269043,
+      "exit_code": 1,
+      "parent_pid": 19192,
+      "parent_creation_unix": 1792042987.016199
+    }
+  ],
+  "h_reselection": [
+    {
+      "role": "F2",
+      "result": "SAVED_POINT_EXTENDS_TO_D1_BY_H_RESELECTION",
+      "saved_source_provenance": {
+        "mode": "local_minimal_safe_snapshot",
+        "witness_path": "results/unified_exact_round121/review/h_reselection_sources/F2/saved_D0_witness_and_matrix.json",
+        "actual_D1_rows_path": "results/unified_exact_round121/review/h_reselection_sources/F2/actual_D1_three_rows_and_provenance.json",
+        "witness_SHA": "b362728ed1bcb1baaab1ed136e216d220cd4d8ec9863a9f9cbff0be20aca2fa3",
+        "actual_D1_rows_SHA": "541c1194275f3fcf028f18249b40af0eaa3ed7b2144a5d3f4c5f0d5c9ac49611",
+        "original_paths_and_hashes": {
+          "source_D0_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\diagnostics\\F2\\D0_max_conditional_violation\\full_primal_and_original_matrix.json",
+          "source_D0_SHA": "b362728ed1bcb1baaab1ed136e216d220cd4d8ec9863a9f9cbff0be20aca2fa3",
+          "source_D1_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\diagnostics\\F2\\D1_original_objective\\full_primal_and_original_matrix.json",
+          "source_D1_SHA": "7cff9e069d0173c4073ee769e87a950b1dfb564d3b081432394cf16fdf9fe119",
+          "source_D0_record_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\diagnostics\\F2\\D0_max_conditional_violation\\record.json",
+          "source_D0_record_SHA": "e2c3d39dd19849d5aae67b990a3ea058c10d19282b7b1bb4bd0ac81728196cfd",
+          "source_D1_record": {
+            "Optimize": 1,
+            "return_code": 0,
+            "status": 2,
+            "optimal": true,
+            "primal_available": true,
+            "qualified": true,
+            "objective": 0.6105472608488204,
+            "qualified_bound": 0.6105472608488204,
+            "full_precision_primal_objective": 0.6105472608488204,
+            "actual_D1_row_violation": 0,
+            "qualified_beta_violation": 1.1102230246251565e-16,
+            "maximum_row_violation": 0,
+            "maximum_bound_violation": 0,
+            "objective_expression_error": 2.220446049250313e-16,
+            "wall_seconds": 0.2513661,
+            "Runtime": 0.25099992752075195,
+            "Work": 0.738572679705945,
+            "cap_seconds": 120,
+            "source_model_SHA": "e8f9a5b4b55563bdf6250755a2d204c3fb4a4bc0c6d78ef958c0d04bc516526d",
+            "saved_model_SHA": "08e9ec4f54d47766003270d47187f78aa681c37ceffec01da333d7510002c838",
+            "rows": 9312,
+            "columns": 3489,
+            "nonzeros": 53672
+          },
+          "source_D1_record_SHA": "d8b63971ef276cfaeeb9a51bd80a2e353eb4805ea2bdafb471157a3bdd7ef16f"
+        },
+        "full_D1_reconstruction": "unchanged complete D0 original rows and actual extracted final three rows"
+      },
+      "original_columns": 3489,
+      "original_rows": 9312,
+      "original_D0_nonzeros": 53671,
+      "original_D1_nonzeros": 53672,
+      "unchanged_rows_before_selector": 9309,
+      "rows_containing_h": [
+        9309,
+        9310,
+        9311
+      ],
+      "actual_three_rows": [
+        {
+          "row_zero_based": 9309,
+          "sense": ">",
+          "rhs": 0,
+          "coefficients_by_name": {
+            "G": 1,
+            "r120_h": -0.4426741504672889
+          }
+        },
+        {
+          "row_zero_based": 9310,
+          "sense": "<",
+          "rhs": 0.44267415046728903,
+          "coefficients_by_name": {
+            "G": 1,
+            "r120_h": -0.44267415046728914
+          }
+        },
+        {
+          "row_zero_based": 9311,
+          "sense": ">",
+          "rhs": 0.6105472608488206,
+          "coefficients_by_name": {
+            "G": 1,
+            "e_1": 0.12062204999999998,
+            "e_2": 0.11724704999999999,
+            "e_3": 0.1056126,
+            "e_4": 0.08783339999999999,
+            "e_5": 0.06821115,
+            "e_6": 0.14439645,
+            "e_7": 0.11344755,
+            "e_8": 0.1304466,
+            "e_9": 0.10030005,
+            "e_10": 0.043341,
+            "e_11": 0.06609599999999999,
+            "e_12": 0.13536255,
+            "e_13": 0.12676035,
+            "e_14": 0.0955542,
+            "e_15": 0.08831354999999999,
+            "e_16": 0.1023963,
+            "e_17": 0.1297128,
+            "e_18": 0.041668199999999996,
+            "e_19": 0.12238815,
+            "e_20": 0.07935539999999999,
+            "r120_h": -0.2720917250651952
+          }
+        }
+      ],
+      "original_h": 0.38106808408052395,
+      "original_g": 0.16868899039054336,
+      "full_objective_with_ObjCon": 0.6105472608488206,
+      "actual_ObjCon": 0.0,
+      "actual_link_h_interval": [
+        0.0,
+        0.38106808408052395
+      ],
+      "selected_h": 0.0,
+      "actual_minimum_required_objective": 0.6105472608488206,
+      "objective_slack_at_selected_h": 1.1681904754846827e-17,
+      "original_D0_full_residual": {
+        "maximum_row_violation": 2.7284841053187847e-12,
+        "worst_row": 4731,
+        "maximum_bound_violation": 0.0
+      },
+      "original_D1_full_residual": {
+        "maximum_row_violation": 0.10368547236475867,
+        "worst_row": 9311,
+        "maximum_bound_violation": 0.0
+      },
+      "repaired_D1_full_residual": {
+        "maximum_row_violation": 2.7284841053187847e-12,
+        "worst_row": 4731,
+        "maximum_bound_violation": 0.0
+      },
+      "evidence_tolerance": 1e-07,
+      "all_original_coordinates_other_than_h_unchanged": true,
+      "calculation": "exact Fraction arithmetic on saved binary64 coefficients for interval/ObjCon; independent fsum full-row and bound residuals",
+      "scope": "Two saved fractional complete-LP witness points only. This neither proves strict original-variable projection shrinkage nor cancels R120 extended-space nonredundancy or performance evidence.",
+      "Optimize": 0,
+      "native_starts": 0
+    },
+    {
+      "role": "R98-C2",
+      "result": "SAVED_POINT_EXTENDS_TO_D1_BY_H_RESELECTION",
+      "saved_source_provenance": {
+        "mode": "local_minimal_safe_snapshot",
+        "witness_path": "results/unified_exact_round121/review/h_reselection_sources/R98-C2/saved_D0_witness_and_matrix.json",
+        "actual_D1_rows_path": "results/unified_exact_round121/review/h_reselection_sources/R98-C2/actual_D1_three_rows_and_provenance.json",
+        "witness_SHA": "01de6158c3f7e582acaf91b83674e0a9358b473e588feb07f9967b54cf6c6c68",
+        "actual_D1_rows_SHA": "51a653761f521e6a5447ec060e7d9b38d1cdd45c39ac6d22ccec1e09448e350e",
+        "original_paths_and_hashes": {
+          "source_D0_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\diagnostics\\R98-C2\\D0_max_conditional_violation\\full_primal_and_original_matrix.json",
+          "source_D0_SHA": "01de6158c3f7e582acaf91b83674e0a9358b473e588feb07f9967b54cf6c6c68",
+          "source_D1_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\diagnostics\\R98-C2\\D1_original_objective\\full_primal_and_original_matrix.json",
+          "source_D1_SHA": "b76d7e2cd451f9b974d7e465c9375e7cb7f56912e6faa217d2c5a015e8c199fb",
+          "source_D0_record_path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\results\\unified_exact_round120\\qualification\\diagnostics\\R98-C2\\D0_max_conditional_violation\\record.json",
+          "source_D0_record_SHA": "5132b554b3e2d0c15bac9664833b87cd4f74c92ed844cef93e864e1b7b76c4d5",
+          "source_D1_record": {
+            "Optimize": 1,
+            "return_code": 0,
+            "status": 2,
+            "optimal": true,
+            "primal_available": true,
+            "qualified": true,
+            "objective": 0.1620053821677119,
+            "qualified_bound": 0.1620053821677119,
+            "full_precision_primal_objective": 0.1620053821677119,
+            "actual_D1_row_violation": 2.7755575615628914e-17,
+            "qualified_beta_violation": 5.551115123125783e-17,
+            "maximum_row_violation": 0,
+            "maximum_bound_violation": 0,
+            "objective_expression_error": 0,
+            "wall_seconds": 1.1681942,
+            "Runtime": 1.1680002212524414,
+            "Work": 3.510611283355,
+            "cap_seconds": 120,
+            "source_model_SHA": "3b2890517554eee306dd381959a2e6f5c381eb1a1d998294af5da6e36601306f",
+            "saved_model_SHA": "b16f5a55607b7e0838ef9e15c6a4c6e2899d9bc5777b89a9da07f0f842af78cf",
+            "rows": 31144,
+            "columns": 8872,
+            "nonzeros": 194188
+          },
+          "source_D1_record_SHA": "26fdbc513a81068ea31640be34419f87878c344f5e6c40d929cc90caaa7ca01c"
+        },
+        "full_D1_reconstruction": "unchanged complete D0 original rows and actual extracted final three rows"
+      },
+      "original_columns": 8872,
+      "original_rows": 31144,
+      "original_D0_nonzeros": 194187,
+      "original_D1_nonzeros": 194188,
+      "unchanged_rows_before_selector": 31141,
+      "rows_containing_h": [
+        31141,
+        31142,
+        31143
+      ],
+      "actual_three_rows": [
+        {
+          "row_zero_based": 31141,
+          "sense": ">",
+          "rhs": 0,
+          "coefficients_by_name": {
+            "G": 1,
+            "r120_h": -0.19581044837476444
+          }
+        },
+        {
+          "row_zero_based": 31142,
+          "sense": "<",
+          "rhs": 0.1958104483747645,
+          "coefficients_by_name": {
+            "G": 1,
+            "r120_h": -0.19581044837476455
+          }
+        },
+        {
+          "row_zero_based": 31143,
+          "sense": ">",
+          "rhs": 0.16200538216771193,
+          "coefficients_by_name": {
+            "G": 1,
+            "e_1": 0.14816655,
+            "e_2": 0.0714069,
+            "e_3": 0.05200245,
+            "e_4": 0.03778425,
+            "e_5": 0.11383244999999999,
+            "e_6": 0.1278147,
+            "e_7": 0.1092315,
+            "e_8": 0.1050831,
+            "e_9": 0.08981399999999999,
+            "e_10": 0.13582139999999998,
+            "e_11": 0.07947375,
+            "e_12": 0.10741185,
+            "e_13": 0.10877429999999999,
+            "e_14": 0.1371414,
+            "e_15": 0.0790233,
+            "e_16": 0.08339774999999999,
+            "e_17": 0.14753655,
+            "e_18": 0.10419854999999999,
+            "e_19": 0.09999615,
+            "e_20": 0.0816378,
+            "e_21": 0.1366104,
+            "e_22": 0.1422327,
+            "e_23": 0.06671295,
+            "e_24": 0.14515755,
+            "e_25": 0.0985398,
+            "e_26": 0.11214734999999999,
+            "e_27": 0.11504804999999999,
+            "e_28": 0.060027,
+            "e_29": 0.09302189999999999,
+            "e_30": 0.1153374,
+            "r120_h": -0.15501070220705246
+          }
+        }
+      ],
+      "original_h": 0.21073270314457934,
+      "original_g": 0.04126366508996621,
+      "full_objective_with_ObjCon": 0.16290937653597193,
+      "actual_ObjCon": 0.0,
+      "actual_link_h_interval": [
+        0.0,
+        0.21073270314457934
+      ],
+      "selected_h": 0.0,
+      "actual_minimum_required_objective": 0.16200538216771193,
+      "objective_slack_at_selected_h": 0.0009039943682599919,
+      "original_D0_full_residual": {
+        "maximum_row_violation": 9.094947017729282e-13,
+        "worst_row": 12219,
+        "maximum_bound_violation": 0.0
+      },
+      "original_D1_full_residual": {
+        "maximum_row_violation": 0.03176182992417159,
+        "worst_row": 31143,
+        "maximum_bound_violation": 0.0
+      },
+      "repaired_D1_full_residual": {
+        "maximum_row_violation": 9.094947017729282e-13,
+        "worst_row": 12219,
+        "maximum_bound_violation": 0.0
+      },
+      "evidence_tolerance": 1e-07,
+      "all_original_coordinates_other_than_h_unchanged": true,
+      "calculation": "exact Fraction arithmetic on saved binary64 coefficients for interval/ObjCon; independent fsum full-row and bound residuals",
+      "scope": "Two saved fractional complete-LP witness points only. This neither proves strict original-variable projection shrinkage nor cancels R120 extended-space nonredundancy or performance evidence.",
+      "Optimize": 0,
+      "native_starts": 0
+    }
+  ],
+  "production_source_bindings_equal": true,
+  "source_files": 216,
+  "helpers_equal": true,
+  "helper_files": 88,
+  "production_PE_DLL_only_historical_hashes_in_public_replay": true,
+  "no_native_reentry": true,
+  "Optimize": 0,
+  "new_D1_physical_endpoint_and_three_row_check": "UNAVAILABLE: no new D1 native execution",
+  "default_ENS_changed": false,
+  "no_automatic_further_batch": true
+}

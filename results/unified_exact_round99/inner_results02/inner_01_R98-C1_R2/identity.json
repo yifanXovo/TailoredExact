@@ -1,0 +1,90 @@
+{
+  "arm": {
+    "number": 1,
+    "role": {
+      "id": "R98-C1",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        12,
+        18
+      ],
+      "geometry": "three_clusters",
+      "inventory": "surplus",
+      "T_seconds": 4800,
+      "cap_seconds": 600,
+      "method_order": [
+        "M-B",
+        "R2",
+        "ENS-C",
+        "Q-I",
+        "R1",
+        "P-GRB"
+      ],
+      "input_path": "reference/round98_confirmation/C1.txt",
+      "instance_path": "reference/round98_confirmation/C1.txt",
+      "input_sha256": "149100d4f0b532787ac0d0f4f5d88da3667b70d92b3256c24ab8601926da40e7",
+      "scenario_id": "round98-state-service-confirmation-v1-C1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 426,
+      "total_target": 398,
+      "zero_excluded_by_stock_shortage": false,
+      "historical_initial_witness": "results/unified_exact_round98/confirmation01/raw/03_C1_ENS-C/external/initial_witness.json",
+      "historical_initial_witness_sha256": "17853e8d54cf79148ea4a57eab0bd66c90d80eae090505d3ca78c9a4acf49c06",
+      "diagnostic_cutoff": 0.3778461674562581,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.3778461674562581,
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": 586536225,
+        "canonical_sha256": "ae805fc3f12693812879c98b99c14d4303a334c5e9d00ceeab2bda013734927f",
+        "columns": 1583,
+        "rows": 3677
+      }
+    },
+    "arm": "R2",
+    "cap_seconds": 600,
+    "source_destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round99\\factorial01\\raw\\08_R98-C1_R2",
+    "model_sha256": "7d5834b29f3cacd289527ffc6b4f5087c9865aa3ffe86c946714a05a96066383",
+    "initial_witness_sha256": "17853e8d54cf79148ea4a57eab0bd66c90d80eae090505d3ca78c9a4acf49c06",
+    "start_vector_sha256": "71b6f38bd6f83a663106e23b7c2318aa671f3309ed1332ee6582b04853d59dcb",
+    "source_completion_sha256": "8922000090f1fda015543db7f70044339018eecec217f11d071cf7fe506c14ff",
+    "acquisition_process_seconds": 295.7960000000894,
+    "acquisition_cost_scope": "full prior self-paid factorial process; startup availability in factorial_results01/startup.csv"
+  },
+  "protocol_sha256": "3b1b8a9778c48a29b64b2c48f6eb2d0900924491568ab2bed18e49b2f0666fc5",
+  "script_sha256": "3e4fcabfa194b5373afa11160e07f3573e7041a925a89aa005816d3c324c3d54",
+  "model_sha256": "7d5834b29f3cacd289527ffc6b4f5087c9865aa3ffe86c946714a05a96066383",
+  "source_start_sha256": "8ed75cded821809d5a52e8f8216ae097ff94457ac714d95504e943e8c610e034",
+  "start_vector_sha256": "71b6f38bd6f83a663106e23b7c2318aa671f3309ed1332ee6582b04853d59dcb",
+  "affinity": {
+    "launcher_pid": 32412,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "actual_types_checked": true,
+  "all_start_rows": {
+    "objective": 0.3778461674562581,
+    "maximum_absolute_residual": 2.220446049250313e-16,
+    "violations_over_native_feasibility_tol": []
+  },
+  "scope": "full initial improve domain; replayed self-paid factorial startup; acquisition cost excluded from diagnostic timing only"
+}

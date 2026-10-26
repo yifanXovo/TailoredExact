@@ -1,0 +1,199 @@
+{
+  "input_path": "reference/round98_confirmation/C2.txt",
+  "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+  "F": 0.2045518337818567,
+  "U": 0.2045518337818567,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        26,
+        1,
+        9,
+        14,
+        24,
+        3,
+        13,
+        28,
+        18,
+        0
+      ],
+      "operations": [
+        {
+          "station": 26,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 14,
+          "pickup": 0,
+          "drop": 10
+        },
+        {
+          "station": 24,
+          "pickup": 0,
+          "drop": 10
+        },
+        {
+          "station": 3,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 13,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 28,
+          "pickup": 0,
+          "drop": 5
+        },
+        {
+          "station": 18,
+          "pickup": 0,
+          "drop": 12
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        7,
+        22,
+        12,
+        17,
+        2,
+        21,
+        15,
+        5,
+        10,
+        0
+      ],
+      "operations": [
+        {
+          "station": 7,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 22,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 12,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 17,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 2,
+          "pickup": 0,
+          "drop": 10
+        },
+        {
+          "station": 21,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 15,
+          "pickup": 0,
+          "drop": 10
+        },
+        {
+          "station": 5,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 10,
+          "pickup": 0,
+          "drop": 12
+        }
+      ]
+    },
+    {
+      "vehicle": 2,
+      "nodes": [
+        0,
+        27,
+        23,
+        16,
+        11,
+        6,
+        25,
+        30,
+        19,
+        8,
+        0
+      ],
+      "operations": [
+        {
+          "station": 27,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 23,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 16,
+          "pickup": 11,
+          "drop": 0
+        },
+        {
+          "station": 11,
+          "pickup": 0,
+          "drop": 8
+        },
+        {
+          "station": 6,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 25,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 30,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 19,
+          "pickup": 0,
+          "drop": 11
+        },
+        {
+          "station": 8,
+          "pickup": 0,
+          "drop": 9
+        }
+      ]
+    }
+  ],
+  "source_result": "results/unified_exact_round100/development01/raw/10_R98-C2_ENS-Q/result.json",
+  "source_sha256": "9733c4b97f43cebd52865c478c11d16dbbb7978cc3c3513fa4283c157c8a80c0"
+}

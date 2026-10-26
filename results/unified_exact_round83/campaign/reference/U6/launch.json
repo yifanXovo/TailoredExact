@@ -1,0 +1,34 @@
+{
+  "command": [
+    "E:\\codes\\ExactEBRP-round66\\build\\round83\\v1\\Round65ReferenceBuild.exe",
+    "reference/round82_unadapted_confirmation/U6.txt",
+    "18000",
+    "60",
+    "60",
+    "0.15",
+    "E:\\codes\\ExactEBRP-round66\\results\\unified_exact_round83\\campaign\\reference\\U6"
+  ],
+  "binary_sha256": "f9456c99759c9e9e62dcf19cc13300ce55f6d30d616d0547e75026a1d68fa3c3",
+  "input": {
+    "id": "U6",
+    "family": "citibike",
+    "V": 50,
+    "M": 4,
+    "Q": 30,
+    "geography": "compact",
+    "inventory": "shortage",
+    "T_seconds": 18000,
+    "cap": 3600,
+    "instance_path": "reference/round82_unadapted_confirmation/U6.txt",
+    "input_sha256": "1556e893376349de92f9213642d7be0005dcb44e47e037d34f77040711787e3f",
+    "scenario_id": "round82-unadapted-confirmation-v1_U6",
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "stage": "exposed_development",
+    "role": "R83 fixed complete-method role; see full_screen_plan.md",
+    "lambda": 0.15
+  },
+  "cap": 30,
+  "expected_optimize_calls": 0,
+  "plan_sha256": "8653c5ebc07a3e4f2408fac45296189975f12449dfa71f94f3bffb8a5e1a1b50"
+}

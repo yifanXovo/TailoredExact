@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round110\scripts\round110_remote_verify.py", line 54, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "E:\codes\ExactEBRP-round110\scripts\round110_remote_verify.py", line 42, in main
+    assert code==0,(name,error.decode(errors='replace'))
+           ^^^^^^^
+AssertionError: ('results/unified_exact_round110/compact_evidence/evidence.tar.gz.part001', 'transform: short source buffer\n')

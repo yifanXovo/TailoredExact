@@ -1,0 +1,34 @@
+[
+  {
+    "commit": "1ca177b9f0624eb0a806b96c87c1151b172d198e",
+    "destination": "E:\\codes\\ExactEBRP-work\\restore\\round126-public-A",
+    "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))",
+    "retrieval_failures": [
+      {
+        "path": "results/unified_exact_round126/export_manifest.json",
+        "attempt": 1,
+        "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))"
+      },
+      {
+        "path": "results/unified_exact_round126/export_manifest.json",
+        "attempt": 2,
+        "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))"
+      },
+      {
+        "path": "results/unified_exact_round126/export_manifest.json",
+        "attempt": 3,
+        "error": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))"
+      }
+    ],
+    "seconds": 3.9603248999919742,
+    "preserved_partial_root": true
+  },
+  {
+    "commit": "1ca177b9f0624eb0a806b96c87c1151b172d198e",
+    "destination": "E:\\codes\\ExactEBRP-work\\restore\\round126-public-A",
+    "error": "AssertionError()",
+    "retrieval_failures": [],
+    "seconds": 2.929563000041526,
+    "preserved_partial_root": true
+  }
+]

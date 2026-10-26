@@ -1,0 +1,367 @@
+{
+  "schema": "round126-station-landscape-v1",
+  "dataset_family": "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+  "classification": "generated_untested_paper_candidate",
+  "generator_version": "round126-thin-offline-adapter-v1",
+  "landscape_id": "r126_SC-C15-S_compact_r1_shortage",
+  "selection_id": "r126_SC-C15-S_compact_r1",
+  "V": 15,
+  "geographic_regime": "compact",
+  "replicate": 1,
+  "inventory_regime": "shortage",
+  "local_imbalance_level": "high",
+  "seed": 1215562081,
+  "seed_derivation_material": "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage",
+  "source_station_row_indices": [
+    282,
+    261,
+    306,
+    273,
+    278,
+    311,
+    290,
+    303,
+    300,
+    259,
+    254,
+    247,
+    317,
+    299,
+    240
+  ],
+  "source_hashes": {
+    "identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "table_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "rows": 443,
+    "qualified": 442
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      590910.047,
+      4505903.132
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    23,
+    25,
+    27,
+    27,
+    30,
+    27,
+    23,
+    26,
+    21,
+    25,
+    25,
+    29,
+    22,
+    17,
+    25
+  ],
+  "initial": [
+    16,
+    20,
+    18,
+    3,
+    5,
+    3,
+    17,
+    2,
+    13,
+    1,
+    3,
+    21,
+    16,
+    1,
+    18
+  ],
+  "target": [
+    11,
+    13,
+    12,
+    13,
+    15,
+    13,
+    12,
+    12,
+    9,
+    11,
+    13,
+    14,
+    10,
+    8,
+    12
+  ],
+  "weights": [
+    0.537778,
+    0.751111,
+    0.64,
+    0.751111,
+    1.0,
+    0.751111,
+    0.64,
+    0.64,
+    0.36,
+    0.537778,
+    0.751111,
+    0.871111,
+    0.444444,
+    0.284444,
+    0.64
+  ],
+  "min_ratio": [
+    0.2913,
+    0.308,
+    0.2778,
+    0.2926,
+    0.3,
+    0.2926,
+    0.3087,
+    0.2846,
+    0.2714,
+    0.276,
+    0.308,
+    0.2931,
+    0.2818,
+    0.2882,
+    0.292
+  ],
+  "points_utm18n_meters": [
+    [
+      590984.835,
+      4505935.46
+    ],
+    [
+      590990.325,
+      4505653.084
+    ],
+    [
+      590919.9,
+      4506235.427
+    ],
+    [
+      590716.721,
+      4505769.862
+    ],
+    [
+      591337.889,
+      4505858.083
+    ],
+    [
+      591157.116,
+      4506314.61
+    ],
+    [
+      590536.457,
+      4506007.583
+    ],
+    [
+      590601.799,
+      4506192.345
+    ],
+    [
+      591416.997,
+      4506137.948
+    ],
+    [
+      590563.728,
+      4505642.316
+    ],
+    [
+      591281.089,
+      4505508.993
+    ],
+    [
+      590550.808,
+      4505454.529
+    ],
+    [
+      591424.186,
+      4506411.71
+    ],
+    [
+      590361.755,
+      4506129.466
+    ],
+    [
+      590807.106,
+      4505295.566
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 1295.7563805147897,
+    "mean_pairwise_station_distance_m": 639.3734858680034,
+    "maximum_pairwise_station_distance_m": 1295.7563805147897,
+    "mean_depot_distance_m": 444.86324397191026,
+    "maximum_depot_distance_m": 723.1808165353309,
+    "bounding_box_width_m": 1062.4309999999823,
+    "bounding_box_height_m": 1116.1440000003204,
+    "capacity_minimum": 17,
+    "capacity_maximum": 30,
+    "capacity_mean": 24.8,
+    "capacity_median": 25,
+    "total_capacity": 372,
+    "total_initial_inventory": 157,
+    "total_target_inventory": 178,
+    "station_inventory_minus_target": -21,
+    "absolute_total_shortage_or_surplus": 21,
+    "local_l1_imbalance": 113,
+    "maximum_local_absolute_imbalance": 10,
+    "surplus_station_count": 8,
+    "deficit_station_count": 7,
+    "balanced_station_count": 0,
+    "weight_minimum": 0.284444,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.6399999333333334,
+    "min_ratio_minimum": 0.2714,
+    "min_ratio_maximum": 0.3087
+  },
+  "generation_trace": {
+    "initial_before_total_correction": [
+      18,
+      21,
+      20,
+      5,
+      6,
+      5,
+      19,
+      4,
+      15,
+      3,
+      5,
+      23,
+      17,
+      3,
+      20
+    ],
+    "initial_after_total_correction": [
+      16,
+      20,
+      18,
+      3,
+      5,
+      3,
+      17,
+      2,
+      13,
+      1,
+      3,
+      21,
+      16,
+      1,
+      18
+    ],
+    "initial_after_sign_repair": [
+      16,
+      20,
+      18,
+      3,
+      5,
+      3,
+      17,
+      2,
+      13,
+      1,
+      3,
+      21,
+      16,
+      1,
+      18
+    ],
+    "desired_total": 157,
+    "delta_amount": 21,
+    "local_scale": 0.3,
+    "inventory_hash_order": [
+      8,
+      10,
+      2,
+      5,
+      11,
+      13,
+      0,
+      3,
+      14,
+      7,
+      6,
+      9,
+      12,
+      4,
+      1
+    ],
+    "sign_repair_hash_order": [
+      12,
+      10,
+      4,
+      9,
+      14,
+      8,
+      0,
+      11,
+      1,
+      3,
+      2,
+      13,
+      7,
+      5,
+      6
+    ],
+    "anchor_material": "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|geographic-anchor-set|V=15",
+    "selection_material": "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|selection|V=15|geography=compact|replicate=1",
+    "inventory_material": "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage",
+    "target_materials": [
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=282",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=261",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=306",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=273",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=278",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=311",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=290",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=303",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=300",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=259",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=254",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=247",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=317",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=299",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|target-profile|r126_SC-C15-S_compact_r1|row=240"
+    ],
+    "inventory_order_materials": [
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|0",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|1",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|2",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|3",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|4",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|5",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|6",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|7",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|8",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|9",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|10",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|11",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|12",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|13",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|14"
+    ],
+    "sign_repair_order_materials": [
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|0",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|1",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|2",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|3",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|4",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|5",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|6",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|7",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|8",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|9",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|10",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|11",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|12",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|13",
+      "round126-small-certification-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0|inventory|r126_SC-C15-S_compact_r1|shortage|sign-repair|14"
+    ]
+  }
+}

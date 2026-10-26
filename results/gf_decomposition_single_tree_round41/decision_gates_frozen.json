@@ -1,0 +1,58 @@
+{
+  "default": "C6-HGA-FULL K=4 rho=0.01 remains unchanged",
+  "forbidden_dispatch_inputs": [
+    "instance name",
+    "seed",
+    "V/M/Q",
+    "scenario label",
+    "elapsed time",
+    "Work",
+    "node count",
+    "hardware"
+  ],
+  "frozen_before_confirmation_runs": true,
+  "gate_a": {
+    "requirements": [
+      "one static model and one native integer optimize",
+      "strict original-problem certificate on solved sentinels",
+      "independent verifier passes",
+      "zero false certificates",
+      "all post default-off equivalence pairs pass"
+    ]
+  },
+  "gate_b": {
+    "core_minimum_external_k2_strength_capture": 0.1,
+    "core_model_variable_ratio_max_vs_i": 2.5,
+    "extended_minimum_external_k2_strength_capture": 0.25,
+    "meaningful_root_bound_absolute_gain": 1e-06
+  },
+  "gate_c": {
+    "both_witnesses_required": true,
+    "capped_noncertificates_never_count_as_gate_passes": true,
+    "coarse_weakness_instance": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+    "coarse_weakness_requirements": {
+      "comparison_requires_matching_strict_certificates": true,
+      "maximum_time_ratio_vs_external_k1": 0.7,
+      "maximum_time_ratio_vs_external_k4": 1.25,
+      "maximum_work_ratio_vs_external_k1": 0.7,
+      "maximum_work_ratio_vs_external_k4": 1.25
+    },
+    "fragmentation_instance": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+    "fragmentation_requirements": {
+      "comparison_requires_matching_strict_certificates": true,
+      "integer_proof_jobs": 1,
+      "maximum_time_ratio_vs_external_k4": 0.8,
+      "maximum_work_ratio_vs_external_k4": 0.8
+    }
+  },
+  "gate_d": {
+    "st_k4_implemented_if_gate_c_fails": false,
+    "st_k4_requires_gates_a_b_c": true
+  },
+  "gate_e": {
+    "held_out_requires_gates_a_b_c": true
+  },
+  "official_process_cap_upper_bound_seconds": 1800,
+  "schema": "round41-decision-gates-v1",
+  "source_head": "3db7a5efbace14dfed7557560e96636f749b84bc"
+}

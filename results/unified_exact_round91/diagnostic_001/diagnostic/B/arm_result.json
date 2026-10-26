@@ -1,0 +1,69 @@
+{
+  "G": 0.013333333333333322,
+  "added_rows": 2,
+  "arm": "B",
+  "arm_complete_wall_seconds": 0.04697499983012676,
+  "gurobi_iteration_count": 68.0,
+  "gurobi_runtime_seconds": 0.002000093460083008,
+  "gurobi_work": 0.002309693598678382,
+  "optimize_seconds": 0.001511099748313427,
+  "original_F": 0.2833333333333333,
+  "original_F_reconstruction_residual": 0.0,
+  "original_columns": 244,
+  "original_lp_sha256": "9872d149c970c99f2b0175929221fb42692c6915a68a4e57e94dd1492fb79a29",
+  "original_matrix_signature": "0c24196fc843aac754799659b122213a2b0e4074b3a548e0a92dc9ce748d9abe",
+  "original_objective_coefficients": {
+    "G": 1.0,
+    "e_1": 0.15,
+    "e_2": 0.15,
+    "e_3": 0.15,
+    "e_4": 0.15,
+    "e_5": 0.15
+  },
+  "original_rows": 555,
+  "parameters": {
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "Presolve": -1,
+    "Seed": 0,
+    "Threads": 1,
+    "TimeLimit": 299.5849113999866
+  },
+  "primal_receipt": {
+    "added_rows": 2,
+    "all_within_numerical_allowance": true,
+    "bound_residuals_sha256": "7d035cf62877785fd337e12cbaec6d4075daef5b38f974f2ebb46c5ef3876ea0",
+    "maximum_violations": {
+      "added_rows": 0.0,
+      "bounds": 0.0,
+      "original_rows": 1.3322676295501878e-15
+    },
+    "original_rows": 555,
+    "primal_sha256": "1bbde7ed9a0c59d0550719b5fd57aaa2e798d83f52caad5b38a6d6b01c67db5c",
+    "row_residuals_sha256": "37ff4697cad567ec1b7df51e8b13e902dd628e4a5b93028774bddeb6f4ba21aa",
+    "rows": 557,
+    "variables": 244
+  },
+  "primal_save_seconds": 0.026753699872642756,
+  "process_peak_working_set_bytes": 35008512,
+  "read_relax_seconds": 0.013609100133180618,
+  "research_objective_residual": 0.0,
+  "research_objective_value": 4.0,
+  "solution_count": 1,
+  "solver_status": "OPTIMAL",
+  "solver_status_code": 2,
+  "state_i_1_sum": 4.0,
+  "state_one_values": {
+    "1": 0.7999999999999998,
+    "2": 0.8,
+    "3": 0.8,
+    "4": 0.8,
+    "5": 0.7999999999999998
+  },
+  "status": "certified_optimal_primal",
+  "vehicle_pickup_sums": {
+    "0": 2.0,
+    "1": 2.0
+  },
+  "weighted_penalty_P": 1.8
+}

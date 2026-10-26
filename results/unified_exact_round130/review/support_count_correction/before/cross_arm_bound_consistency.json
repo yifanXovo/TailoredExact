@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "id": "UC-B20-B",
+      "qualified_own_observations": 8,
+      "minimum_verified_physical_U_for_contradiction_only": 0.5773330699702928,
+      "violations": [],
+      "own_U_values_or_bounds_or_certificates_transferred": false
+    },
+    {
+      "id": "UC-C20-U",
+      "qualified_own_observations": 8,
+      "minimum_verified_physical_U_for_contradiction_only": 0.3835535885117132,
+      "violations": [],
+      "own_U_values_or_bounds_or_certificates_transferred": false
+    },
+    {
+      "id": "UC-B30-S",
+      "qualified_own_observations": 8,
+      "minimum_verified_physical_U_for_contradiction_only": 0.38125104520476627,
+      "violations": [],
+      "own_U_values_or_bounds_or_certificates_transferred": false
+    }
+  ],
+  "comparison_tolerance": 1e-07,
+  "scope": "Same-input physical witnesses can revoke a contradictory global bound only; no arm is given another arm's U, solution or certificate",
+  "Optimize": 0
+}

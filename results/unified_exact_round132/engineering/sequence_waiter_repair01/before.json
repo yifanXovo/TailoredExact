@@ -1,0 +1,75 @@
+{
+  "UTC": "2026-10-23T19:40:14.7771279Z",
+  "cause": "Waiting supervisor reparses every existing large reconstructed JSON every20s. Resource-management defect; no native optimization failure or rerun.",
+  "waiter": {
+    "ProcessId": 54160,
+    "ParentProcessId": 32572,
+    "Name": "python.exe",
+    "CreationDate": "2026-10-23T23:25:41.344106+08:00",
+    "CommandLine": "\"D:\\msys64\\ucrt64\\bin\\python.exe\" -B scripts/round132_sequence.py"
+  },
+  "process_metrics": [
+    {
+      "Id": 50580,
+      "ProcessName": "ExactEBRP",
+      "CPU": 430.859375,
+      "WorkingSet64": 199458816,
+      "StartTime": "2026-10-24T03:32:58.1767841+08:00",
+      "PriorityClass": 32,
+      "ProcessorAffinity": 4
+    },
+    {
+      "Id": 47868,
+      "ProcessName": "python",
+      "CPU": 0.546875,
+      "WorkingSet64": 29253632,
+      "StartTime": "2026-10-23T23:06:40.4697194+08:00",
+      "PriorityClass": 32,
+      "ProcessorAffinity": 1048575
+    },
+    {
+      "Id": 54160,
+      "ProcessName": "python",
+      "CPU": 2588.96875,
+      "WorkingSet64": 103772160,
+      "StartTime": "2026-10-23T23:25:41.3441064+08:00",
+      "PriorityClass": 32,
+      "ProcessorAffinity": 1048575
+    }
+  ],
+  "reconstructed_files": [
+    {
+      "FullName": "E:\\codes\\ExactEBRP-work\\worktrees\\round132\\results\\unified_exact_round132\\campaign\\D_group01\\reconstructed.json",
+      "Length": 108378533
+    },
+    {
+      "FullName": "E:\\codes\\ExactEBRP-work\\worktrees\\round132\\results\\unified_exact_round132\\campaign\\D_group02\\reconstructed.json",
+      "Length": 144308499
+    },
+    {
+      "FullName": "E:\\codes\\ExactEBRP-work\\worktrees\\round132\\results\\unified_exact_round132\\campaign\\D_group03\\reconstructed.json",
+      "Length": 47153711
+    },
+    {
+      "FullName": "E:\\codes\\ExactEBRP-work\\worktrees\\round132\\results\\unified_exact_round132\\campaign\\D_group04\\reconstructed.json",
+      "Length": 54204502
+    },
+    {
+      "FullName": "E:\\codes\\ExactEBRP-work\\worktrees\\round132\\results\\unified_exact_round132\\campaign\\D_group05\\reconstructed.json",
+      "Length": 198942261
+    },
+    {
+      "FullName": "E:\\codes\\ExactEBRP-work\\worktrees\\round132\\results\\unified_exact_round132\\campaign\\D_group06\\reconstructed.json",
+      "Length": 159178235
+    },
+    {
+      "FullName": "E:\\codes\\ExactEBRP-work\\worktrees\\round132\\results\\unified_exact_round132\\campaign\\D_group07\\reconstructed.json",
+      "Length": 141255318
+    },
+    {
+      "FullName": "E:\\codes\\ExactEBRP-work\\worktrees\\round132\\results\\unified_exact_round132\\campaign\\D_group08\\reconstructed.json",
+      "Length": 164614304
+    }
+  ],
+  "action": "Stop only verified childless waiter54160; preserve D supervisor47868 and current native50580; repair readiness polling before replacement"
+}

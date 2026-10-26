@@ -1,0 +1,17 @@
+{
+  "schema": "round93-coquantity-g2-outer-start-v1",
+  "utc": "2026-09-28T05:36:42.9294230Z",
+  "cwd": "E:\\codes\\ExactEBRP",
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-B",
+    "scripts/round93_coquantity_diagnostic.py",
+    "run",
+    "--qualification-gate",
+    "results/unified_exact_round93/COQUANTITY_G1_GATE.json",
+    "--out-dir",
+    "results/unified_exact_round93/runner_coquantity_g2"
+  ],
+  "gate_sha256": "d07d1e2870bc600156784464631bf4458d5d6b4e38e40024c87a6852472d5bad",
+  "harness_sha256": "79a1440e6690e0299211149457cf112cfcaae9c79d5985133dd37f5b8000cd09"
+}

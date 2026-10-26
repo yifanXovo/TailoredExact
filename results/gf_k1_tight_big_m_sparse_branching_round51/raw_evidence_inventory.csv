@@ -1,0 +1,11 @@
+stage,raw_directory,run_directory_count,state_count,policies,file_count,total_bytes,compact_committed_evidence,raw_available_locally
+stage0_reproduction,results/gf_k1_tight_big_m_sparse_branching_round51/baseline_reproduction_runs,4,4,interval-mip-v0,72,5564494,baseline_reproduction_raw.csv,true
+m1_small_exact,results/gf_k1_tight_big_m_sparse_branching_round51/big_m_small_exact_runs,4,4,m1-tight-big-m-v0,72,7307869,big_m_small_exact_raw.csv,true
+m1_core,results/gf_k1_tight_big_m_sparse_branching_round51/m1_core_runs,18,9,interval-mip-v0|m1-tight-big-m-v0,324,38867080,m1_core_v0_raw.csv|m1_core_m1_raw.csv,true
+symmetry_core,results/gf_k1_tight_big_m_sparse_branching_round51/symmetry_core_runs,18,9,m1-s1-route-start-order|m1-s1r-used-first-route-start-order,324,43014874,symmetry_core_s1_raw.csv|symmetry_core_s1r_raw.csv,true
+symmetry_development,results/gf_k1_tight_big_m_sparse_branching_round51/symmetry_development_runs,42,14,m1-s1-route-start-order|m1-s1r-used-first-route-start-order|m1-tight-big-m-v0,756,100278946,symmetry_development_m1_raw.csv|symmetry_development_s1_raw.csv|symmetry_development_s1r_raw.csv,true
+a1_core,results/gf_k1_tight_big_m_sparse_branching_round51/a1_core_runs,18,9,a1-root-sparse-2x2|m1-tight-big-m-v0,432,43174060,a1_core_m1_raw.csv|a1_core_a1_raw.csv,true
+a1r_core,results/gf_k1_tight_big_m_sparse_branching_round51/a1r_core_runs,18,9,a1r-root-sparse-top1|m1-tight-big-m-v0,432,43193997,a1r_core_m1_raw.csv|a1r_core_a1r_raw.csv,true
+all_state_m1_model_audit,results/gf_k1_tight_big_m_sparse_branching_round51/model_audit_runs,92,23,interval-mip-v0|m1-s1-route-start-order|m1-s1r-used-first-route-start-order|m1-tight-big-m-v0,1472,169550215,big_m_model_delta_audit.csv,true
+all_state_a1_model_audit,results/gf_k1_tight_big_m_sparse_branching_round51/model_audit_runs_a1,46,23,a1-root-sparse-2x2|m1-tight-big-m-v0,736,89026955,adaptive_branching_model_correctness.csv,true
+all_state_a1r_model_audit,results/gf_k1_tight_big_m_sparse_branching_round51/model_audit_runs_a1r,69,23,a1-root-sparse-2x2|a1r-root-sparse-top1|m1-tight-big-m-v0,1104,133540696,adaptive_branching_revision_model_correctness.csv,true

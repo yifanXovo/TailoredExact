@@ -1,0 +1,6 @@
+{
+  "decision": "HOLD",
+  "error": "Traceback (most recent call last):\n  File \"E:\\codes\\ExactEBRP-round111\\results\\unified_exact_round111\\review\\round111_independent_review.py\", line 518, in main\n    audit = run(a,args.mode,args.pe,args.dll,args.fixture_root or root)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-round111\\results\\unified_exact_round111\\review\\round111_independent_review.py\", line 444, in run\n    value['final_wrapper_closure'] = wrapper_closure(a,campaign,qualification,previous)\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-round111\\results\\unified_exact_round111\\review\\round111_independent_review.py\", line 358, in wrapper_closure\n    a.require(comparisons[name]['diff_SHA'] == closure['diff_SHA'][name],'exact independently reconstructed textual wrapper diff')\n  File \"E:\\codes\\ExactEBRP-round111\\results\\unified_exact_round111\\review\\round111_independent_core.py\", line 48, in require\n    raise AssertionError(message)\nAssertionError: exact independently reconstructed textual wrapper diff\n",
+  "Optimize": 0,
+  "native_environment": 0
+}

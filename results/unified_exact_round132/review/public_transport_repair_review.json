@@ -1,0 +1,73 @@
+{
+  "status": "ACCEPT_NARROW_STATIC_TRANSPORT_REPAIR_SCOPE",
+  "UTC": "2026-10-24T16:06:28.003169+00:00",
+  "reviewer": "same sole independent Round132 internal reviewer",
+  "science_commit_A": "52b02252ba47e8228b73e071d6ed692385a4f816",
+  "repair_metadata_commit_B": "d1e3ba8009d99fa52e053f5ab454fbaf2e689545",
+  "inputs_SHA256": {
+    "scripts/round132_transport_materialize.py": "8c0e7c2967baaaf482e66c53bb9efc01549acc7f735dd2d04e890e135d040645",
+    "results/unified_exact_round132/transport_materialization_map.json": "f7eefea418d9ec6a178dfb9be63bb4866e333d1a82a860b6f6c83b1f68f35e66",
+    "results/unified_exact_round132/review/science_transport_inventory.json": "2ca9eba30955136453a4c966a8a9a965092d0ca2de4a1119d92bd70e65b599cd",
+    "results/unified_exact_round132/review/public_transport_materialization01.json": "214808f606e3738bbb4219da96fef3f6acfaa8b3bc49ae466425bf36726437af",
+    "results/unified_exact_round132/delivery_costs/public_restore01/receipt.json": "092002ca12cf074b6a8ed543f1c7c0035bb47163c433bdb3f2edd0403faa9664"
+  },
+  "findings": [],
+  "required_local_corrections": [],
+  "checks": {
+    "script_equals_recorded_public_B_script_SHA": true,
+    "A_manifest_pinned_to_7484980d2f13509a3dea0f213030522c483d82bcee8e3868484c8f2a7cceab8c": true,
+    "B_map_SHA_matches_script_inventory_and_materialization": true,
+    "single_allowed_file_literature_evidence_CSV": true,
+    "transport_and_final_size_and_SHA_both_checked": true,
+    "only_LF_CRLF_serialization_operation": true,
+    "transport_bytes": 10607,
+    "final_bytes": 10613,
+    "LF_positions": 17,
+    "CR_insertions_before_existing_LF_zero_based": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "non_newline_bytes_not_transformed": true,
+    "four_recorded_HTTPS_transfers_use_only_A_or_B_refs": true,
+    "system_curl_disable_curlrc_no_application_auth_cookie_or_credential_flags": true,
+    "no_local_raw_or_old_checkout_fallback_in_materializer": true,
+    "fixed_existing_destination": "E:/codes/ExactEBRP-work/restore/round132-public",
+    "ownership_state_science_commit_initially_empty_checks_required": true,
+    "symlink_junction_checks_and_exclusive_new_target_write": true,
+    "unexpected_existing_content_or_existing_receipt_preserved": true,
+    "materialization_record_status": "PASS",
+    "full_recovery_status_claimed_PASS": false,
+    "first_public_restore_failed_exit": 1,
+    "first_public_restore_outer_seconds_retained": 262.8757297999691,
+    "first_failure_G1_seconds": 0,
+    "materializer_reported_seconds_not_added_to_an_outer_fee_by_this_review": 4.982733299955726
+  },
+  "inventory_scope": {
+    "recorded_files": 931,
+    "recorded_exact": 798,
+    "recorded_uniform_newline": 132,
+    "recorded_mixed_newline": 1,
+    "independent_metadata_count_and_selected_dual_hash_consistency_checked": true,
+    "all931_Git_blobs_redownloaded_or_retraversed_by_reviewer": false,
+    "uniform132_byte_transformations_reexecuted_by_reviewer": false
+  },
+  "limits": [
+    "Static code/map and recorded transfer/materialization/failure-receipt review only. No new anonymous HTTP retrieval or end-to-end recovery was performed by this reviewer.",
+    "The existing materialization PASS establishes the narrowly recorded file repair; the running same-root public_restore_resume01 has not been declared PASS here.",
+    "No extension of the prior scientific review,raw evidence replay,Native,Optimize,compilation,new restoration,metered delivery or process intervention.",
+    "Prior independent reports and scientific sources were not modified.",
+    "Root-provided publication/PR/current process status is context,not a fresh remote/process audit by this review."
+  ],
+  "fresh_raw_replay": false,
+  "Native": 0,
+  "Optimize": 0,
+  "compilation": 0,
+  "restoration_started": false,
+  "active_resume_touched": false,
+  "old_reports_modified": false,
+  "external_reproduction_claimed": false
+}

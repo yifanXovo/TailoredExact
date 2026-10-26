@@ -1,0 +1,13 @@
+{
+  "schema": "round92-g3-smoke-postflight-transcribed-observation-v1",
+  "provenance": "Transcribed from this task's postflight PowerShell tool output after the one smoke invocation; no separate contemporaneous file receipt was written by that shell command. This is not an independently replayed hash audit.",
+  "source_hash_comparison": {
+    "method": "For each of the 15 source_hashes in g3_qualification_gate.json, Get-FileHash SHA256 was compared with the gate entry; the shell would throw on any mismatch.",
+    "matching_count_observed": 15,
+    "failure_observed": false
+  },
+  "candidate_binary_sha256_observed": "767d2cbfa50f332a8b9cd6fa3f01888509509b11c2444100d7cafd63bc204b9b",
+  "candidate_core_sha256_observed": "29cb167a388e1a76bd544131bf59684be3950f92f13ecdb755525644f596de12",
+  "process_check": "A separate Get-CimInstance Win32_Process check returned no solver/build/preparation child process. The only match was the PowerShell check process itself.",
+  "limitations": "The original shell output is retained in the task transcript, not as an independently timestamped raw file; this JSON preserves the observed values and disclosure without rehashing or rerunning."
+}

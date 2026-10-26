@@ -1,0 +1,12 @@
+{
+  "schema": "round92-g1-repair-exec-command-outer-cost-v1",
+  "measurement": "exec_command wall_time_seconds for each complete PowerShell launch-to-exit invocation, including step receipt creation",
+  "stages": [
+    {"stage": "preserve", "outer_wall_seconds": 0.5720356},
+    {"stage": "build", "outer_wall_seconds": 2.4022058},
+    {"stage": "export", "outer_wall_seconds": 1.5200397},
+    {"stage": "readback", "outer_wall_seconds": 1.4123546}
+  ],
+  "outer_invocation_wall_sum_seconds": 5.9066357,
+  "optimizer_calls": 0
+}

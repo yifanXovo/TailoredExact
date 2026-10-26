@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round114\scripts\read_round114.py", line 259, in <module>
+    value=rebuild(a.root,a.out,a.qualification_only)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round114\scripts\read_round114.py", line 93, in rebuild
+    t=clock(d,l,formal);whole=read(d/'whole_arm_receipt.json');ind=read(d/'independent_evidence.json')
+      ^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round114\scripts\read_round113.py", line 29, in clock
+    assert 0<n['complete_seconds_until_native_end']<=a['complete_seconds_until_audit_end']<=t<=l['cap_seconds']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

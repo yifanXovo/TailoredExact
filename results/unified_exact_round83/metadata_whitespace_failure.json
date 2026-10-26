@@ -1,0 +1,8 @@
+{
+  "returncode": 2,
+  "diagnostic_lines": 10452,
+  "diagnostic_sha256": "eb3f0f92b39921f616f41a78ee31c06f13437b7ec5eda48b4dff309328068f26",
+  "compressed_file": "metadata_whitespace_failure.txt.gz",
+  "scope": "Git interpreted retained CRLF bytes as trailing whitespace under -text; no solver/source/evidence mutation.",
+  "resolution": "Keep all evidence bytes; set cr-at-eol whitespace handling on the R83 evidence path, leaving the existing exact SVG waiver intact."
+}

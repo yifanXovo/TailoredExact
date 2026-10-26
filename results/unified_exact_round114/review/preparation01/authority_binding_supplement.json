@@ -1,0 +1,72 @@
+{
+  "schema": "round114-preparation-authority-binding-supplement-v1",
+  "reviewer": "/root/independent_admission",
+  "decision": "PREPARATION_ONLY_NOT_ADMISSION",
+  "checks": [
+    {
+      "number": 15,
+      "retained_raw_SHA_matches_signed": 178,
+      "signed_audit_SHA": "cf61c8b28105574d2e78069d9a6f0b0e0bada1d9236f44beabe5a2f4a33cca3b",
+      "signed_model_SHA": "3c4385055008239f0b26af749792e95eeb7ef22403ef58035a51b5e75eb16b8c",
+      "vector_SHA_bound_only": "6d386a8d731cfc2547071dd79c4eb32dd29f47211d400556e2b617e6f93eafe9",
+      "missing_returned": false,
+      "independent_normal_return": true,
+      "exact_original_whole": null,
+      "original_outward_interval": [
+        1770.4377317999022,
+        1771.3234165931356
+      ],
+      "no_matrices_reparsed": true
+    },
+    {
+      "number": 17,
+      "retained_raw_SHA_matches_signed": 297,
+      "signed_audit_SHA": "bcb18e57e767844e0cd3a8ebcf1c589723ff690f31dc88ba2bd155bb0c7120c6",
+      "signed_model_SHA": "5d0ec4d4d06f54996243c3c7997f0fa05ab716e9ca639350ca00fb425169d0e7",
+      "vector_SHA_bound_only": "b6e645c2df798c9ab65fcd2dca032674fe0a9461b14923725e12c7907181563b",
+      "missing_returned": true,
+      "independent_normal_return": true,
+      "exact_original_whole": null,
+      "original_outward_interval": [
+        643.59993320005,
+        644.5207961242414
+      ],
+      "no_matrices_reparsed": true
+    },
+    {
+      "number": 25,
+      "retained_raw_SHA_matches_signed": 69,
+      "signed_audit_SHA": "09e2b8e9616cbe0848516ec1bf1e84d4ba9b2c17e99bd8580abbccf111673314",
+      "signed_model_SHA": "4102fb95032098399a5473ff1ca17fdea7801ff584b7c9f5c74f1d9a22f2a9e9",
+      "vector_SHA_bound_only": "81ae0c9e2261725fd89237bce963dc4f5ccac32c1242ce66066b58340a9500e1",
+      "missing_returned": true,
+      "independent_normal_return": true,
+      "exact_original_whole": null,
+      "original_outward_interval": [
+        2325.8637184998947,
+        2326.2628009853656
+      ],
+      "no_matrices_reparsed": true
+    },
+    {
+      "number": 26,
+      "retained_raw_SHA_matches_signed": 174,
+      "signed_audit_SHA": "f8272de10d561bbda93debdd6064265267a11aa66c1a759ee3ccdac552283c52",
+      "signed_model_SHA": "864c5093e937fc10f3205920b1eea1f5e2520eae801a647996b6d1a1c25ed490",
+      "vector_SHA_bound_only": "6a6cf5b0614b49442c2825283003887ec7032431a2c3438794052a8a999ea041",
+      "missing_returned": false,
+      "independent_normal_return": true,
+      "exact_original_whole": null,
+      "original_outward_interval": [
+        3574.4382823999035,
+        3574.776744435658
+      ],
+      "no_matrices_reparsed": true
+    }
+  ],
+  "discrepancies": [],
+  "engineering_seconds": 2.5348513,
+  "native_starts": 0,
+  "Optimize": 0,
+  "qualification_driver_starts": 0
+}

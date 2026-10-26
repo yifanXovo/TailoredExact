@@ -1,0 +1,29 @@
+{
+  "name": "final_actual_start01",
+  "registered_before_launch": true,
+  "experimental_starts": 1,
+  "optimizer_calls": 0,
+  "finite_model_scopes": 22,
+  "cap_outer_seconds": 300,
+  "launch_only_after_all_recovery_performance_ends": true,
+  "engine": "sole loaded production gurobi130.dll, SHA 9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "scopes": [
+    {"campaign": "repeat01", "numbers": [1, 2, 3, 4]},
+    {"campaign": "linked01", "numbers": [1, 2, 3, 5, 7, 8, 9, 10, 12]},
+    {"campaign": "long01", "numbers": [1, 2]},
+    {"campaign": "confirmation01", "numbers": [2, 3, 4, 6, 7]},
+    {"campaign": "confirmation_recovery01", "numbers": [1, 2]}
+  ],
+  "qualification": [
+    "every retained submitted Start in each declared scope",
+    "model SHA and ordered column identity",
+    "actual restored native CSV VType equals canonical typed LP",
+    "all rows, bounds, objective, finite readback",
+    "physical integer p/d including unvisited columns regardless of VType",
+    "m-binary-linked has m=B and p/d=C",
+    "interrupted original confirmation07 checks actual Starts only, not completed search"
+  ],
+  "previous_scope": "factorial01 15 non-P arms independently passed start_audit01; not relaunched",
+  "billing": "one finite batch, all Env/model reads included in outer receipt; no Optimize; no further native repair reserve",
+  "forbidden": "no build, model export, optimization, source/controller change, performance repeat or broad native tests"
+}

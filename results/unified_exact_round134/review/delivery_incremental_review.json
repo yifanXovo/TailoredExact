@@ -1,0 +1,169 @@
+{
+  "schema": "round134-incremental-independent-delivery-review-v1",
+  "UTC": "2026-10-26T00:50:01.821619+00:00",
+  "reviewer": "same G3 independent reviewer",
+  "passed": true,
+  "status": "PASS_SCOPED_ACTUAL_PUBLIC_RECOVERY_AND_DRAFT_PR_AT_RECORDED_METADATA_HEAD",
+  "science_commit": "29adc14cf2089442298b409ba2bc06963e77bc14",
+  "scientific_full_review_repeated": false,
+  "new_Optimize": 0,
+  "new_compile": 0,
+  "new_archive_or_PDF": 0,
+  "new_full_raw_scan_or_restore": 0,
+  "local_preflight": {
+    "passed": true,
+    "formal_positions": 36,
+    "math": "tiny plus six root records",
+    "seconds": 265.9578682000283,
+    "all36_recorded_endpoint_and_clock_values_equal_scientific_tables": true,
+    "original_policy_predicates_unchanged": true,
+    "receipt_SHA256": "84a632b93139aeb61e88d424a389d5319d7776aa9df6d6429227ec261681b52f"
+  },
+  "payload": {
+    "archives": 38,
+    "members": 189372,
+    "compressed_bytes": 108491611,
+    "completed_carriers_verified_and_reused": 36,
+    "archive_failure_and_affected_resume_preserved": true,
+    "archive_receipts": [
+      {
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round134_release.py",
+          "pack"
+        ],
+        "exit_code": 1,
+        "seconds": 47.8526828000322,
+        "kind": "delivery_archive",
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "compile": 0,
+        "unique_raw_preserved": true
+      },
+      {
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round134_release.py",
+          "pack"
+        ],
+        "exit_code": 0,
+        "seconds": 84.39404050004669,
+        "kind": "delivery_archive",
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "compile": 0,
+        "unique_raw_preserved": true
+      }
+    ],
+    "old_carriers_rewritten": 0
+  },
+  "publication": {
+    "191_current_manifest_Git_blob_byte_check": "PASS_RECEIPT",
+    "inherited9_dependencies": "PASS_RECEIPT",
+    "normal_push": "PASS_RECEIPT",
+    "byte_only_index_normalization_retains_working_scientific_bytes": true,
+    "protected_directed_assets_and_source": "PASS_RECEIPT",
+    "anonymous_bootstrap_SHA256": "225e6dc3b7c63043c64181b27b02056bcab89c7734bbf8a54571a72ac9540496",
+    "bootstrap_checked_before_execution": true,
+    "same_reader_and_accepted_H_policy_capsule": true
+  },
+  "static_recommendations_closed": [
+    "REC1 actualOPTIMAL status/residual thresholds checked by current portable code",
+    "REC2 all-station support/B premise checked",
+    "REC3 historical matrix equality explicitly attested, not re-solved or old-matrix reread"
+  ],
+  "delivery": {
+    "actual_public_recovery": "PASS_ATTEMPT1_ONE_OWNED_ROOT",
+    "public_receipt_not_yet_accepted": false,
+    "new_PR_status_and_base_head_readback": "PASS_ACTUAL_PR196_AT_cd2d6a4fd6ec",
+    "no_future_success_inferred": true,
+    "app_attachment": "PASS_ACTUAL_CURRENT_CHAT",
+    "last_self_publishing_metadata_commit_and_readback": "PENDING_PRIMARY_EXECUTOR_EXTERNAL_RECEIPT",
+    "goal_complete_before_last_actual_readback": false
+  },
+  "science_and_PDF_unchanged": true,
+  "findings": [],
+  "new_check_seconds": 0.004779099952429533,
+  "receipt_bindings": {
+    "results\\unified_exact_round134\\delivery\\local_preflight.json": "84a632b93139aeb61e88d424a389d5319d7776aa9df6d6429227ec261681b52f",
+    "results\\unified_exact_round134\\raw_archive_manifest.json": "aab6ad7f105303dc815e8d0f04831e8344cb4c494cc21d3139c838b4378950e4",
+    "results\\unified_exact_round134\\source_publication.json": "4a8cca354cdef9b61a441c828941a21821ed83a9c5958e69b9ac41b3d5ee888e",
+    "results\\unified_exact_round134\\review\\final_integrated_review.json": "b6e4a4f8e89c729f9be4d4f5752f350713005c7962e2239343cbb3e46bc6b97e",
+    "results\\unified_exact_round134\\public_restore_receipt.json": "ee0b7d596c4530b3225ebbefaac377b07f8f0505c39fdb1ba7feafeddc43f91d",
+    "results\\unified_exact_round134\\delivery\\public_restore_semantic.json": "ffcae656632b7a045a04f12fe9dc87da74fb0e85185818ef1047033036403d08",
+    "results\\unified_exact_round134\\publication_receipt.json": "b0ffba8a8f27c18e04c5cca6e1ea747afba4c4aa3f961fb398c5b2cb0870ff6b",
+    "results\\unified_exact_round134\\resource_accounting.json": "62bc153aa330955e7ce8548a109f7a6e5c760f0f5fcdbde8b5e9d4387eec1ad2",
+    "results\\unified_exact_round134\\protection_final.json": "c6eaa93a85cb77f175e36e0980bcf466ef2f514924ca381d8fdda0f7ae04abdf",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round134\\results\\unified_exact_round134\\remote_readback.json": "76d30f7e74a336600c4561d54f5a94a8afb78b86b89c913392b4f84300927a08",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round134\\results\\unified_exact_round134\\delivery\\pr_creation.json": "0836d4d0c270ccaebc594aba030ae4098416230924d3dc26ef5b8ea93cef9098",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round134\\results\\unified_exact_round134\\delivery\\app_attachment.json": "a7c92961e30cf53bd58cb08988dc8e4705aaf88bb45ec31a62aa28c7b20bfe4f",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round134\\results\\unified_exact_round134\\completion_audit.json": "3b1af1affe987ffacffefec19441654c94bc9b2cf24e136978ceebf508e9b225",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round134\\results\\unified_exact_round134\\publication_receipt.json": "cb7ea7f081551507e3d24327703911fe393df7c2418c54ec6a65a14c3d69848f",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round134\\results\\unified_exact_round134\\protection_final.json": "1a48d70d0b42008d707d0f6ea8f808fa92633dceeca11fdb0e411a6f23fd8996"
+  },
+  "public_verified_UTC": "2026-10-26T01:09:49.154259+00:00",
+  "actual_public_recovery": {
+    "science_commit": "29adc14cf2089442298b409ba2bc06963e77bc14",
+    "files": 200,
+    "archives": 38,
+    "members": 189372,
+    "attempt": 1,
+    "one_owned_initially_empty_root": true,
+    "anonymous_fixed_commit_HTTPS": true,
+    "local_fallback": false,
+    "Optimize": 0,
+    "compile": 0,
+    "vendor_DLL_loads": 0,
+    "all36_endpoint_certificate_clock_fields_equal_local_preflight": true,
+    "all36_seven_normalized_derived_semantics_equal_local_preflight": true,
+    "tiny_and_current_root_math_records_equal_local_preflight": true,
+    "original_external_public_and_semantic_bytes_equal_published_copies": true,
+    "public_receipt_SHA256": "ee0b7d596c4530b3225ebbefaac377b07f8f0505c39fdb1ba7feafeddc43f91d",
+    "semantic_receipt_SHA256": "ffcae656632b7a045a04f12fe9dc87da74fb0e85185818ef1047033036403d08",
+    "manifest_SHA256": "41390b612990ae877c2a9cf8a6b3e71c9d8394b18d0f0b19bc0fa550aa141602",
+    "outer_seconds": 1233.7390010999516,
+    "semantic_child_seconds": 1032.6745226000203,
+    "child_not_added_again": true
+  },
+  "incremental_resource_and_protection_check": {
+    "G1_unchanged": 18194.18499070048,
+    "explicit_separate_process_intervals_recomputed": 1799.0213439001,
+    "separate_intervals_not_claimed_total_elapsed_wall": true,
+    "directed_protection_matches_science_commit_receipt": true,
+    "scope": "three original dirty files, four original native assets, original HEAD and frozen current source/PE/DLL; no whole-disk guarantee"
+  },
+  "new_public_incremental_check_seconds": 0.010396700003184378,
+  "finalized_UTC": "2026-10-26T01:18:44.754593+00:00",
+  "actual_PR_checks": {
+    "PR": {
+      "url": "https://github.com/yifanXovo/TailoredExact/pull/196",
+      "number": 196,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "title": "Round134: paper-ready S2 certificates, final-version evidence and inventory-count bounds",
+      "base": "codex/round133-native-reliability-and-objective-gap",
+      "base_sha": "39043b15b3cceae2cab14a3fbaec39e2b16339ce",
+      "head": "codex/round134-paper-ready-s2-and-count-bound",
+      "head_sha": "cd2d6a4fd6ec8e35d103c8da86bc8dc434fc16d3"
+    },
+    "English_body_receipt_matches": true,
+    "app_attachment_receipt_matches": true,
+    "independent_live_API_status_base_head_check": true,
+    "remote_key_files": 12,
+    "independent_local_Git_blob_ID_check_at_recorded_head": true,
+    "new_metadata_not_yet_pushed_or_read_back": true,
+    "last_self_readback_path": "E:/codes/ExactEBRP-work/temp/round134/final_self_publishing_readback.json",
+    "main_executor_must_observe_actual_PASS_before_goal_complete": true
+  },
+  "final_claims_check": {
+    "science_and_43_page_PDF_hashes_unchanged": true,
+    "updated_report_answers_scientific_numbers_and_boundaries_unchanged": true,
+    "public_and_PR_claims_supported_by_actual_receipts": true,
+    "directed_protection_passed": true,
+    "no_merge_force_default_branch_email_or_submission_claimed": true,
+    "scope": "Final science/public/DraftPR acceptance at the explicitly recorded cd2 head. One last ordinary metadata push and actual self-readback remain a primary executor gate, not a claimed future success or a new research review."
+  },
+  "new_final_metadata_check_seconds": 0.04727019998244941,
+  "new_final_metadata_check_subprocesses": "one bounded read-only git cat-file batch of12 existing blob IDs; no native/compile/recovery/PDF action"
+}

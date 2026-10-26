@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "--fail",
+    "--silent",
+    "--show-error",
+    "--location",
+    "--connect-timeout",
+    "30",
+    "--max-time",
+    "300",
+    "https://raw.githubusercontent.com/yifanXovo/TailoredExact/4d85c66a28321a37ca83354ee7849eef5a3fcae3/scripts/round107_restore.py"
+  ],
+  "path": "scripts/round107_restore.py",
+  "expected_SHA": "fe54baa02d699971b4d3d77d36ff0efb31a0bf78832a7075c8daba05490d14e6",
+  "expected_bytes": 5602
+}

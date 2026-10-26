@@ -1,0 +1,11 @@
+campaign,id,arm,number,seed,panel_kind,telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail
+qualification/cli01,H100,M-B,2,1,qualification,0.74089079999999996,lp_complete,L0,0,0.25452870897207147,optimal,0.089234901800339106,0.25452870897207147,complete_lp_relaxation
+qualification/cli01,H100,M-B,2,1,qualification,3.4166826000000001,native_bound_target_reached,L0,0,0.25452870897207147,open,0.10297056173052554,0.25452870897207147,c6_child_bound_reached_parent_requeued_no_forced_split
+qualification/cli01,H100,M-B,2,1,qualification,3.4167356999999998,child_lp_reuse,L0,0,0.25452870897207147,open,0.10297056173052554,0.25452870897207147,c6_cached_complete_child_lp_pair_reused
+qualification/cli01,H100,M-B,2,1,qualification,80.073955499999997,terminal_mip_complete,L0,0,0.25452870897207147,OPTIMAL,0.16058906725504898,0.16058906725504907,native_terminal_mip_optimal
+campaign,G20-C2,M-B,2,1,seed,0.44009470000000001,lp_complete,L0,0,0.013075430267295598,optimal,0,0.013075430267295598,complete_lp_relaxation
+campaign,G20-C2,M-B,2,1,seed,1.7676592,terminal_mip_complete,L0,0,0.013075430267295598,OPTIMAL,0,0,native_terminal_mip_optimal
+campaign,G50-R1,M-B,3,1,seed,10.4114624,lp_complete,L0,0,0.89220380768691843,optimal,0.37524337047074552,0.89220380768691843,complete_lp_relaxation
+campaign,G50-R1,M-B,3,1,seed,81.671275300000005,native_bound_target_reached,L0,0,0.89220380768691843,open,0.43252263474209823,0.86031987383062458,c6_child_bound_reached_parent_requeued_no_forced_split
+campaign,G50-R1,M-B,3,1,seed,91.832960200000002,lp_complete,L0,0,0.89220380768691843,optimal,0.43252263474209823,0.86031987383062458,complete_lp_relaxation
+campaign,G100-R2,M-B,6,1,seed,93.119304499999998,lp_complete,L0,0,0.1584580742872275,optimal,0,0.1584580742872275,complete_lp_relaxation

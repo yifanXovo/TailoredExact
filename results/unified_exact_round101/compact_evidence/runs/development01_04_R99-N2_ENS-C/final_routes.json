@@ -1,0 +1,198 @@
+{
+  "input_sha256": "370cb51b4d2351b3881cd74ab93406d76834efcf856430f742b8f243a9060a27",
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        2,
+        16,
+        30,
+        13,
+        15,
+        9,
+        14,
+        22,
+        1,
+        12,
+        0
+      ],
+      "operations": [
+        {
+          "station": 2,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 16,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 30,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 13,
+          "pickup": 0,
+          "drop": 10
+        },
+        {
+          "station": 15,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 14,
+          "pickup": 0,
+          "drop": 13
+        },
+        {
+          "station": 22,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 6,
+          "drop": 0
+        },
+        {
+          "station": 12,
+          "pickup": 0,
+          "drop": 13
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        28,
+        6,
+        26,
+        18,
+        7,
+        21,
+        11,
+        19,
+        0
+      ],
+      "operations": [
+        {
+          "station": 28,
+          "pickup": 14,
+          "drop": 0
+        },
+        {
+          "station": 6,
+          "pickup": 0,
+          "drop": 9
+        },
+        {
+          "station": 26,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 18,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 2
+        },
+        {
+          "station": 21,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 11,
+          "pickup": 0,
+          "drop": 12
+        },
+        {
+          "station": 19,
+          "pickup": 0,
+          "drop": 9
+        }
+      ]
+    },
+    {
+      "vehicle": 2,
+      "nodes": [
+        0,
+        29,
+        8,
+        10,
+        24,
+        27,
+        4,
+        5,
+        23,
+        20,
+        0
+      ],
+      "operations": [
+        {
+          "station": 29,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 0,
+          "drop": 6
+        },
+        {
+          "station": 10,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 24,
+          "pickup": 0,
+          "drop": 9
+        },
+        {
+          "station": 27,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 4,
+          "pickup": 0,
+          "drop": 10
+        },
+        {
+          "station": 5,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 23,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 20,
+          "pickup": 0,
+          "drop": 1
+        }
+      ]
+    }
+  ],
+  "F": 0.19951607509452013,
+  "result_path": "results\\unified_exact_round101\\development01\\raw\\04_R99-N2_ENS-C\\result.json",
+  "result_sha256": "224723cbae24ffe71d1cc06d5b5ee2b0804845eb1b9180ff76e960ea645378a0",
+  "scope": "Audited same-run final physical routes, not a new primal input"
+}

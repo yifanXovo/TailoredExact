@@ -1,0 +1,78 @@
+{
+  "completed_prefix": 9,
+  "total_paid_seconds": 11787.766000001691,
+  "calls": 35,
+  "returns": 35,
+  "all_per_run_valid": true,
+  "F5": [
+    {
+      "id": "F5",
+      "arm": "P-GRB",
+      "stop_reason": "normal_return",
+      "U": 0.43423583676402355,
+      "L": 0.2682505969243228,
+      "gap": 0.16598523983970076,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "time_limit",
+      "paid_completion_seconds": 3597.125,
+      "relative_gap": 0.38224675576443035
+    },
+    {
+      "id": "F5",
+      "arm": "ENS-C",
+      "stop_reason": "normal_return",
+      "U": 0.32932369464104827,
+      "L": 0.2814538063444285,
+      "gap": 0.047869888296619756,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "round31_c6_external_gini_tree_time_limit",
+      "paid_completion_seconds": 3597.1720000002533,
+      "relative_gap": 0.1453581660706082
+    },
+    {
+      "id": "F5",
+      "arm": "K1-R",
+      "stop_reason": "normal_return",
+      "U": 0.3161333675751888,
+      "L": 0.2761470520275795,
+      "gap": 0.039986315547609286,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "round31_c6_external_gini_tree_time_limit",
+      "paid_completion_seconds": 3597.2030000002123,
+      "relative_gap": 0.12648559009861238
+    }
+  ],
+  "F5_pairs": [
+    {
+      "pair": "ENS-C/P-GRB",
+      "U_delta": -0.10491214212297528,
+      "L_delta": 0.013203209420105722,
+      "gap_delta": -0.118115351543081,
+      "gap_change_percent": -71.16015355169543,
+      "classification": "material_improvement"
+    },
+    {
+      "pair": "ENS-C/K1-R",
+      "U_delta": 0.013190327065859486,
+      "L_delta": 0.005306754316849016,
+      "gap_delta": 0.00788357274901047,
+      "gap_change_percent": 19.71567682854895,
+      "classification": "material_regression"
+    },
+    {
+      "pair": "K1-R/P-GRB",
+      "U_delta": -0.11810246918883477,
+      "L_delta": 0.007896455103256705,
+      "gap_delta": -0.12599892429209147,
+      "gap_change_percent": -75.90971607702839,
+      "classification": "material_improvement"
+    }
+  ],
+  "raw_summary_sha256_at_read": "de13375128145515387257889ad3d3672eb65f2d1612737a0b01d853009b20b8",
+  "recorded_unix": 1789695295.4655666,
+  "scope": "Immutable first-nine original per-run-checked prefix. All F6 arms pending. Full campaign, mechanism and confirmation audits pending; no overall-goal completion claim.",
+  "F5_K1_P_advantage_retained": 0.9374314281387457
+}

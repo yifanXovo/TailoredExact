@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round99_native_followup.py", line 42, in <module>
+    if __name__=='__main__':run(sys.argv[1])
+                            ^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round99_native_followup.py", line 22, in run
+    assert dll['sha256']==dll['production_dll_sha256'],'different native engines cannot be paired as the same version'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: different native engines cannot be paired as the same version

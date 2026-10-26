@@ -1,0 +1,25 @@
+{
+  "schema": "round46-final-decision-v1",
+  "complete": true,
+  "k4_classification": "k4_rho_001_retained",
+  "k1_classification": "k1_not_competitive",
+  "combined_classification": "rho_threshold_does_not_replace_gamma_information",
+  "scale_qualification": "v20_mixed",
+  "best_k4_rho": 0.01,
+  "best_k1_rho": 0.15,
+  "common_rho_supported": false,
+  "rho_015_supported": "supported_for_K1_major_repair_only",
+  "pure_c6_rho_replaces_gamma_veto": false,
+  "paper_preset_changed": false,
+  "official_executable_sha256": "d574b38b2f44ae2aacf92bf685f439354b5a08dbe257b6c399045b98a157871b",
+  "row_counts": {
+    "stage3_candidate": 100,
+    "stage3_pgrb": 10,
+    "stage4_candidate": 60,
+    "stage4_pgrb": 10,
+    "stage5_candidate": 39,
+    "stage5_pgrb": 13
+  },
+  "missing_rows": [],
+  "reason": "K4-r012 won the frozen Stage 4 rank narrowly but regressed against K4-r001 on Stage 5 major, tight, and moderate development work. K1-r015 repaired the major witness but retained the severe strong-control loss and lost material V20 work."
+}

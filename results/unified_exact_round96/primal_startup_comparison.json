@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "role": "F5",
+      "off_handoff_equals_on_first_original_closure": true,
+      "off_startup_F": 0.38430409168754603,
+      "on_startup_F": 0.33941715781048964,
+      "delta_startup_F": -0.04488693387705639,
+      "order_moves": 5,
+      "physical_snapshots": 40,
+      "startup_end_seconds": {
+        "ON": 12.8044379,
+        "OFF": 12.3897572
+      },
+      "post_seed_closure_and_publication_seconds": {
+        "ON": 0.3160802999999994,
+        "OFF": 0.07721139999999949
+      },
+      "difference_full_startup_seconds": 0.4146806999999999,
+      "off_handoff_sha256": "16698da7b0c4ea43f1b8608aa9162b6788fed436c943c7065823a23328754b8d",
+      "on_first_closure_sha256": "8448b1c6f10dae593feb97a42d4300b494f6e89a1153e1a22556497ae2637182"
+    },
+    {
+      "role": "F2",
+      "off_handoff_equals_on_first_original_closure": true,
+      "off_startup_F": 0.885348300934578,
+      "on_startup_F": 0.885348300934578,
+      "delta_startup_F": 0.0,
+      "order_moves": 0,
+      "physical_snapshots": 6,
+      "startup_end_seconds": {
+        "ON": 0.2594015,
+        "OFF": 0.2858178
+      },
+      "post_seed_closure_and_publication_seconds": {
+        "ON": 0.00681130000000002,
+        "OFF": 0.003931400000000029
+      },
+      "difference_full_startup_seconds": -0.026416300000000004,
+      "off_handoff_sha256": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02",
+      "on_first_closure_sha256": "f2cf4176d3185e37aeecb5967f0435fe37568071a57e8343eb3452d17efbde18"
+    },
+    {
+      "role": "V1",
+      "off_handoff_equals_on_first_original_closure": true,
+      "off_startup_F": 0.28404156412463055,
+      "on_startup_F": 0.211098684577082,
+      "delta_startup_F": -0.07294287954754855,
+      "order_moves": 12,
+      "physical_snapshots": 93,
+      "startup_end_seconds": {
+        "ON": 3.3344445,
+        "OFF": 3.2581191
+      },
+      "post_seed_closure_and_publication_seconds": {
+        "ON": 0.1802608000000001,
+        "OFF": 0.047807399999999944
+      },
+      "difference_full_startup_seconds": 0.07632539999999999,
+      "off_handoff_sha256": "db9e1c26f72df273eb3caad00eaea40593314178d8e1add68a188edc6914699f",
+      "on_first_closure_sha256": "dff10d71791e137450a58c3ab290d3e9f97033ac986c4ea2bd9d2c99ffca5e20"
+    },
+    {
+      "role": "V2",
+      "off_handoff_equals_on_first_original_closure": true,
+      "off_startup_F": 0.02578090601599397,
+      "on_startup_F": 0.008309416101261508,
+      "delta_startup_F": -0.017471489914732463,
+      "order_moves": 12,
+      "physical_snapshots": 105,
+      "startup_end_seconds": {
+        "ON": 14.3349123,
+        "OFF": 13.943042
+      },
+      "post_seed_closure_and_publication_seconds": {
+        "ON": 0.6463316999999993,
+        "OFF": 0.1966789999999996
+      },
+      "difference_full_startup_seconds": 0.391870299999999,
+      "off_handoff_sha256": "14c7eb992a34cf4db075838a7182b1d84b88531dae6cfc86fcac7575f4781a1b",
+      "on_first_closure_sha256": "cf9d261e433ed9fa12c89527f88706c5f035d859d6fb05d800b79ffadb63d0e5"
+    }
+  ],
+  "optimizer_calls": 0,
+  "source_sha256": "de019aca3204dfe7c7ed9239f74264e90eac4869780a816e9690ed7b44a2780e",
+  "summary_sha256": "b11a91778d5bb8cbe8a627ff1b26a0eccbcd0804fcb7fd707e461edb30e20748",
+  "timing_scope": "Observed phases include original/new closure, validation, snapshots and range publication. Differences are measured startup costs, not isolated pure reorder CPU or repeatable causal timing estimates. Full costs remain in the parent process and are not added twice."
+}

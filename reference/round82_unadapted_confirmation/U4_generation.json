@@ -1,0 +1,371 @@
+{
+  "schema": "citibike443-station-landscape-v1",
+  "dataset_family": "citibike443-round82-unadapted-confirmation-v1-298e97f5d163a54eb9d899c664cafd9f07c8647c",
+  "classification": "prospectively_generated_unadapted_confirmation",
+  "generator_version": "citibike443-regional-v1.0.0",
+  "landscape_id": "round82_cb443_V30_regional_r1_balanced",
+  "selection_id": "round82_cb443_V30_regional_r1",
+  "V": 30,
+  "geographic_regime": "regional",
+  "replicate": 1,
+  "inventory_regime": "balanced",
+  "local_imbalance_level": "moderate",
+  "seed": 2101184159,
+  "seed_derivation_material": "citibike443-round82-unadapted-confirmation-v1-298e97f5d163a54eb9d899c664cafd9f07c8647c|inventory|round82_cb443_V30_regional_r1|balanced",
+  "source_station_row_indices": [
+    380,
+    420,
+    267,
+    279,
+    354,
+    422,
+    344,
+    256,
+    389,
+    436,
+    318,
+    396,
+    387,
+    355,
+    352,
+    316,
+    284,
+    369,
+    419,
+    403,
+    401,
+    411,
+    398,
+    425,
+    382,
+    333,
+    370,
+    343,
+    358,
+    375
+  ],
+  "source_hashes": {
+    "capacity_sha256": "92ca9b05e66d1425bbc801be2dd9c0776b1a9707e62a60b821d941aa98625ae1",
+    "coordinate_sha256": "c5fd892cc82e07332d4796edb0527182d9c60883acc9b87a5410dab569f990d1"
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      588108.973,
+      4507195.929
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    37,
+    26,
+    33,
+    25,
+    36,
+    47,
+    33,
+    55,
+    30,
+    36,
+    29,
+    54,
+    24,
+    33,
+    23,
+    19,
+    22,
+    41,
+    39,
+    53,
+    22,
+    39,
+    56,
+    18,
+    31,
+    23,
+    35,
+    61,
+    21,
+    25
+  ],
+  "initial": [
+    12,
+    19,
+    11,
+    6,
+    24,
+    32,
+    23,
+    19,
+    12,
+    22,
+    10,
+    34,
+    15,
+    10,
+    16,
+    12,
+    8,
+    25,
+    14,
+    38,
+    14,
+    26,
+    37,
+    4,
+    9,
+    16,
+    11,
+    22,
+    6,
+    9
+  ],
+  "target": [
+    19,
+    14,
+    17,
+    12,
+    18,
+    24,
+    17,
+    29,
+    17,
+    16,
+    15,
+    24,
+    11,
+    16,
+    12,
+    10,
+    12,
+    18,
+    21,
+    28,
+    10,
+    19,
+    27,
+    8,
+    15,
+    13,
+    17,
+    33,
+    10,
+    14
+  ],
+  "weights": [
+    0.331497,
+    0.179982,
+    0.265381,
+    0.132231,
+    0.297521,
+    0.528926,
+    0.265381,
+    0.772268,
+    0.265381,
+    0.235078,
+    0.206612,
+    0.528926,
+    0.111111,
+    0.235078,
+    0.132231,
+    0.1,
+    0.132231,
+    0.297521,
+    0.404959,
+    0.719927,
+    0.1,
+    0.331497,
+    0.669421,
+    0.1,
+    0.206612,
+    0.155188,
+    0.265381,
+    1.0,
+    0.1,
+    0.179982
+  ],
+  "min_ratio": [
+    0.3054,
+    0.3154,
+    0.3061,
+    0.292,
+    0.3,
+    0.3043,
+    0.3061,
+    0.3109,
+    0.3267,
+    0.2778,
+    0.3069,
+    0.2778,
+    0.2833,
+    0.2939,
+    0.3087,
+    0.3105,
+    0.3182,
+    0.2756,
+    0.3154,
+    0.3113,
+    0.2818,
+    0.2949,
+    0.2929,
+    0.2778,
+    0.2935,
+    0.3261,
+    0.2943,
+    0.3164,
+    0.2905,
+    0.324
+  ],
+  "points_utm18n_meters": [
+    [
+      587346.195,
+      4507396.636
+    ],
+    [
+      589102.916,
+      4508131.864
+    ],
+    [
+      586459.418,
+      4505728.378
+    ],
+    [
+      588432.159,
+      4505901.943
+    ],
+    [
+      589128.971,
+      4506956.52
+    ],
+    [
+      588081.531,
+      4508226.245
+    ],
+    [
+      588024.055,
+      4506763.843
+    ],
+    [
+      587232.282,
+      4505534.946
+    ],
+    [
+      588489.81,
+      4507551.658
+    ],
+    [
+      588687.953,
+      4508644.676
+    ],
+    [
+      588854.325,
+      4506444.102
+    ],
+    [
+      587821.16,
+      4507678.62
+    ],
+    [
+      589027.575,
+      4507491.356
+    ],
+    [
+      588614.435,
+      4506957.813
+    ],
+    [
+      587505.027,
+      4506917.99
+    ],
+    [
+      588340.93,
+      4506389.466
+    ],
+    [
+      586897.936,
+      4505947.105
+    ],
+    [
+      587870.941,
+      4507164.15
+    ],
+    [
+      588476.617,
+      4508118.481
+    ],
+    [
+      588144.48,
+      4507862.173
+    ],
+    [
+      588835.752,
+      4507805.284
+    ],
+    [
+      587710.757,
+      4508014.905
+    ],
+    [
+      587475.273,
+      4507719.137
+    ],
+    [
+      588810.639,
+      4508300.11
+    ],
+    [
+      588099.781,
+      4507406.609
+    ],
+    [
+      587579.396,
+      4506612.808
+    ],
+    [
+      587143.841,
+      4507175.447
+    ],
+    [
+      588322.781,
+      4506740.195
+    ],
+    [
+      588180.557,
+      4507015.833
+    ],
+    [
+      588571.686,
+      4507279.564
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 3670.3081983713,
+    "mean_pairwise_station_distance_m": 1323.9849238634006,
+    "maximum_pairwise_station_distance_m": 3670.3081983713,
+    "mean_depot_distance_m": 919.4210126391026,
+    "maximum_depot_distance_m": 2207.8808019515236,
+    "bounding_box_width_m": 2669.5530000000726,
+    "bounding_box_height_m": 3109.7299999995157,
+    "capacity_minimum": 18,
+    "capacity_maximum": 61,
+    "capacity_mean": 34.2,
+    "capacity_median": 33.0,
+    "total_capacity": 1026,
+    "total_initial_inventory": 516,
+    "total_target_inventory": 516,
+    "station_inventory_minus_target": 0,
+    "absolute_total_shortage_or_surplus": 0,
+    "local_l1_imbalance": 184,
+    "maximum_local_absolute_imbalance": 11,
+    "surplus_station_count": 15,
+    "deficit_station_count": 15,
+    "balanced_station_count": 0,
+    "weight_minimum": 0.1,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.3083441,
+    "min_ratio_minimum": 0.2756,
+    "min_ratio_maximum": 0.3267
+  }
+}

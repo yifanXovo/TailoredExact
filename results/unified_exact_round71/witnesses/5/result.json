@@ -1,0 +1,50 @@
+{
+  "objective": 0.20833333333333331,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        1,
+        0
+      ],
+      "operations": [
+        {
+          "station": 1,
+          "pickup": 1,
+          "drop": 0
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      2
+    ],
+    "route_operation_time": [
+      0
+    ],
+    "route_duration": [
+      2
+    ],
+    "final_inventories": [
+      50,
+      2,
+      1,
+      2
+    ],
+    "G": 0.13333333333333333,
+    "P": 0.5,
+    "objective": 0.20833333333333331,
+    "errors": []
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "target": "b5951a3dc44ea4e7276090c73ac3a2b00125cbe4",
+  "branch": "codex/round81-bdsc-long-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round81-bdsc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5202764002606273,
+      "stderr": "",
+      "returned_sha": "2dd0ea993dba9fb25e1172f22c039a7fd329097c"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/733dc4adc17080ea14df7af1a37af9a6daec64a4",
+      "returncode": 1,
+      "wall_seconds": 0.5186441000550985,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/2c34875e0ebbe7f6064d0b9fc8495b8c4aa7bbbf",
+      "returncode": 1,
+      "wall_seconds": 0.6607152996584773,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/c0e9251a30bae8c69dca73f91b991061744f1391",
+      "returncode": 1,
+      "wall_seconds": 0.6988597000017762,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/6a408d5ce5e7e0dae2aeb0d01a26a1b8a7d3ccd9",
+      "returncode": 1,
+      "wall_seconds": 0.5973902000114322,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.004351600073278,
+      "stderr": "",
+      "returned_sha": "7be33ffc66cee08fb649eea776aaf3c1484655d7"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.2665121001191437,
+      "stderr": "",
+      "returned_sha": "6a408d5ce5e7e0dae2aeb0d01a26a1b8a7d3ccd9"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.7230604998767376,
+      "stderr": "",
+      "returned_sha": "737ee7b5bc61d502c63735a43589d917ab895d23"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 0.8508187998086214,
+      "stderr": "",
+      "returned_sha": "c0e9251a30bae8c69dca73f91b991061744f1391"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 1,
+      "wall_seconds": 8.637815800029784,
+      "stderr": "gh: Sorry, your request timed out.  It's likely that your input was too large to process.  Consider building the tree incrementally, or building the commits you need in a local clone of the repository and then pushing them to GitHub. (HTTP 422)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/2c34875e0ebbe7f6064d0b9fc8495b8c4aa7bbbf",
+      "returncode": 1,
+      "wall_seconds": 0.5829896000213921,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "70610eed4a0f9f419eb47fcbd27479ff398ddab763b2573e6f3ec02bc29ace84",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 16.582868500147015,
+  "initial_remote_head": "2dd0ea993dba9fb25e1172f22c039a7fd329097c",
+  "original_commits": [
+    "bf9346053fcad441d0440ab41541271805724329",
+    "b47e95fd9626062145d643f575529ee055fb5282",
+    "b5951a3dc44ea4e7276090c73ac3a2b00125cbe4"
+  ],
+  "verified_exact_trees": [
+    "6a408d5ce5e7e0dae2aeb0d01a26a1b8a7d3ccd9",
+    "c0e9251a30bae8c69dca73f91b991061744f1391"
+  ],
+  "passed": false,
+  "error": "RuntimeError('GitHub API request failed; see ledger')"
+}

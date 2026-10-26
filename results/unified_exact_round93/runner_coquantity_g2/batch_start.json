@@ -1,0 +1,30 @@
+{
+  "schema": "round93-coquantity-batch-start-v1",
+  "case_order": [
+    "D6",
+    "E8",
+    "S12"
+  ],
+  "prereg_sha256": "d853322f29f91b12027f3d82229bc94afae654e90b4a63f6158b4042419106bb",
+  "gate_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round93\\COQUANTITY_G1_GATE.json",
+  "gate_sha256": "d07d1e2870bc600156784464631bf4458d5d6b4e38e40024c87a6852472d5bad",
+  "binary_path": "E:\\codes\\ExactEBRP\\build\\research\\round93-coquantity\\Round93CoQuantityDiagnostic.exe",
+  "binary_sha256": "fa67457fcb80a6b385b147bd6fda96c83593c106f8da75b471243d4bd2331c8c",
+  "source_sha256": {
+    "CMakeLists.txt": "81314778f2a24a5e504bca2cb8e8caece917c4139be795b3fa2ea2e59866c087",
+    "include/Round93CoQuantityDescent.hpp": "92656c6a27dda13b794965fdf6d49bcc38007d16b6780f0ba822f62134253ee2",
+    "src/Round93CoQuantityDescent.cpp": "cf3ea08852f56a10bceeb59c169ff92de4d9d8aad0914a7233985ce7da4f2012",
+    "tests/round93_co_quantity_tests.cpp": "b8008945cea3244978b9ff1fd40bb732d54835469c8dce430865ac8894f9edb9",
+    "tests/round93_co_quantity_diagnostic.cpp": "8e339616123818b7f8fbf7b2f6b69502f8ec4663efb7ad0c29b4e5126466ce8a",
+    "src/Evaluator.cpp": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+    "src/Result.cpp": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+    "src/Parser.cpp": "9402d2744b4b2a7a83c3152d90d6d6438ca9c3e417d1a57da14dd8101c3b2911",
+    "src/ProcessPhaseLedger.cpp": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+    "include/PhysicalDurationTolerance.hpp": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+    "src/Round75QuantityDescent.cpp": "f904a7f7355e897df1aff3d07757d8c2ac5b8dff134235c061637d46a87c0075",
+    "src/Round76PhysicalClosure.cpp": "a9a43c9db00096fc81168cf30a5b2805cacf42b0de9b42b723094f4007db8ce8",
+    "src/Round83BlockExchange.cpp": "7402242968c8fa5db9957089b132b0afde893110f302a841b5a8ca76d115faf9",
+    "scripts/round93_coquantity_diagnostic.py": "79a1440e6690e0299211149457cf112cfcaae9c79d5985133dd37f5b8000cd09"
+  },
+  "total_deadline_seconds": 360.0
+}

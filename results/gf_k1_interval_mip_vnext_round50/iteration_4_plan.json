@@ -1,0 +1,13 @@
+{
+  "candidate_cap": 1,
+  "candidate_family": "exact in-memory LP-to-MIP promotion",
+  "development_revision_cap": 1,
+  "entry_gate": "algorithmic branching, cut/formulation, symmetry, and numerical policies frozen",
+  "iteration": 4,
+  "mechanism": "model_and_basis_reuse",
+  "planned_candidate": "R1",
+  "pre_run_status": "frozen",
+  "screening_decision": "audit first; open R1 only if the fixed-state execution chain already builds and solves a corresponding LP before its MIP",
+  "schema": "round50-iteration-plan-v1",
+  "source_policy": "no mathematical-model change and no interval-local state leakage"
+}

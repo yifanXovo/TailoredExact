@@ -1,0 +1,26 @@
+In file included from C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_reference.cpp:3:
+C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round118_reference.cpp:3:9: warning: "main" redefined
+    3 | #define main inherited_cold_reference_main
+      |         ^~~~
+C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_reference.cpp:2:9: note: this is the location of the previous definition
+    2 | #define main inherited_round118_reference_main
+      |         ^~~~
+In file included from C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round118_reference.cpp:4:
+C:/Users/Administrator/.codex/worktrees/round121-frozen-d1-confirmation/ExactEBRP/src/round65_reference_build.cpp:9:9: warning: "NOMINMAX" redefined
+    9 | #define NOMINMAX
+      |         ^~~~~~~~
+In file included from D:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h:680,
+                 from D:/msys64/ucrt64/include/c++/14.2.0/bits/requires_hosted.h:31,
+                 from D:/msys64/ucrt64/include/c++/14.2.0/chrono:35,
+                 from C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\include/Instance.hpp:3,
+                 from C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\include/CanonicalCompactModel.hpp:3,
+                 from C:/Users/Administrator/.codex/worktrees/round121-frozen-d1-confirmation/ExactEBRP/src/round65_reference_build.cpp:3:
+D:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/os_defines.h:45:9: note: this is the location of the previous definition
+   45 | #define NOMINMAX 1
+      |         ^~~~~~~~
+C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_reference.cpp:5:5: error: redefinition of 'int main(int, char**)'
+    5 | int main(int argc,char** argv) {try {
+      |     ^~~~
+C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round118_reference.cpp:41:5: note: 'int main(int, char**)' previously defined here
+   41 | int main(int argc,char** argv) {try {
+      |     ^~~~

@@ -1,0 +1,559 @@
+{
+  "archive_bytes": 11659777,
+  "archive_count": 11,
+  "archive_limit_bytes": 47185920,
+  "build_wall_seconds_before_index_write": 11.96571939997375,
+  "final_free_disk_bytes": 105656270848,
+  "groups": [
+    {
+      "archive": "ot_epigraph_raw_archives/01_F2-root_B1.tar.gz",
+      "archive_hash_wall_seconds": 0.005154500249773264,
+      "archive_sha256": "a797c7330c271abd93aaaf3e4d17487ac94a31d96328266c74b540d6b01179fd",
+      "archive_size": 606093,
+      "archive_verify_wall_seconds": 0.01977729983627796,
+      "compression_wall_seconds": 0.4327130997553468,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/diagnostic/all_row_residuals.jsonl",
+          "sha256": "2f679ffb55b6f8ba03795937a83bc4d984498047a0a70ff005a453f60a0e6510",
+          "size": 4339800
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/diagnostic/inflight.json",
+          "sha256": "b34ca479040eda37e408e2998ddefc98d24e93641adeabcb9c6f7846aef15880",
+          "size": 86
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/diagnostic/new_columns.json",
+          "sha256": "a3ba1ec8a32d7ed5a7af2d261be32137ce0e16b8bd4bb096107624d660deac30",
+          "size": 258137
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/diagnostic/new_rows_exact.jsonl",
+          "sha256": "a995df7d8a45321558b3ee75c0690afadc558d66c590cced53ea23c085c5d741",
+          "size": 3253230
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/diagnostic/optimizer.log",
+          "sha256": "741b913d3ec034aa483ee6ec7474eeddabe025a5340ff4984c2efdfc0b369403",
+          "size": 1400
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/diagnostic/primal.json",
+          "sha256": "337389c7f8bee537a99295934d1a7d2a011b4536a7256af0648822ce8ae39f74",
+          "size": 536678
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/diagnostic/provenance.json",
+          "sha256": "5cb8b4daaeace553d7c8c2d3b0a09f97f24c9aaaa0732f76012a2c252c806bb7",
+          "size": 13276
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/diagnostic/residuals.json",
+          "sha256": "8e82ab811cbe2f5d78963e03feb31d98f14d41b772c1fd60f30c3daf8e94b2df",
+          "size": 100
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/diagnostic/result.json",
+          "sha256": "be155b70cc9fdbb04a55adfe58a943a7c8b8db565f2e94e3795849b1a7574c78",
+          "size": 1043
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/supervision.json",
+          "sha256": "b01c07a63aaf4a41adb0d0f889e373b50230a990c65aa5dbf9cf3224fcc92652",
+          "size": 1093
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/01_F2-root_B1/supervisor_ready.flag",
+          "sha256": "9ec2c4b010afca8583d4fa204c73899dcfac98a8b75012bb132ca6815a874e31",
+          "size": 10
+        }
+      ],
+      "free_disk_after_bytes": 105667354624,
+      "part_count": 1,
+      "part_number": 1,
+      "source_bytes": 8404853,
+      "source_file_count": 13,
+      "source_group": "01_F2-root_B1",
+      "source_hash_wall_seconds": 0.010207999963313341,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 8404853,
+      "verified_file_count": 13
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/02_F2-root_B2.tar.gz",
+      "archive_hash_wall_seconds": 0.004884300287812948,
+      "archive_sha256": "8fa8bf8ab1dd1f42a823aa7463f9492ebcfd7b01c0a3d182a6a0fa8c7e3317c5",
+      "archive_size": 1091594,
+      "archive_verify_wall_seconds": 0.04101970000192523,
+      "compression_wall_seconds": 0.9329651002772152,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/diagnostic/all_row_residuals.jsonl",
+          "sha256": "6214c472489f021ae6f825a684800a8a8ecb6fe708034e8cba73f4420ffc3767",
+          "size": 7357191
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/diagnostic/inflight.json",
+          "sha256": "f87500bd3affd778de9499de712f445a8c9b4ed17327567d70a63a47b7864cbb",
+          "size": 88
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/diagnostic/new_columns.json",
+          "sha256": "88a5e874aa8ae9d4acf1bbaab7044fe5e0fd70b56a779776a26547ad37405345",
+          "size": 516269
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/diagnostic/new_rows_exact.jsonl",
+          "sha256": "59fcdfab983dfe44fdfd6fca692f98289e471c678359341d2eb018d03517d557",
+          "size": 8560162
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/diagnostic/optimizer.log",
+          "sha256": "82b26367e1fa55d15085d43fb85970cf55f00d6b8cbefb1a84f988f765b9dd2a",
+          "size": 1420
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/diagnostic/primal.json",
+          "sha256": "fa18017cd6f1fdf6780c8796a3b6a7a2f7a0602561f6c543ee4212e9f58ec89c",
+          "size": 867743
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/diagnostic/provenance.json",
+          "sha256": "f724a10baadca570521fa970c28411baf272f9584c1b1ef239bbbc84ed104a57",
+          "size": 13274
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/diagnostic/residuals.json",
+          "sha256": "24db8b1a96a7e3bafffe64ad138dfe77065e1529c5265688fd4cf1c39ffa8149",
+          "size": 99
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/diagnostic/result.json",
+          "sha256": "2fc5fe71ee7fa9286514e2f24a758e5a7a39ec12c9dafe0bc472322a0037babc",
+          "size": 1041
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/supervision.json",
+          "sha256": "eda500f9617fcca54178805880de0043779c5e5b6148aaf84414cf355e55d5c4",
+          "size": 1094
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/02_F2-root_B2/supervisor_ready.flag",
+          "sha256": "9ec2c4b010afca8583d4fa204c73899dcfac98a8b75012bb132ca6815a874e31",
+          "size": 10
+        }
+      ],
+      "free_disk_after_bytes": 105666260992,
+      "part_count": 1,
+      "part_number": 1,
+      "source_bytes": 17318391,
+      "source_file_count": 13,
+      "source_group": "02_F2-root_B2",
+      "source_hash_wall_seconds": 0.01670769974589348,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 17318391,
+      "verified_file_count": 13
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/03_D7-root_B1.tar.gz",
+      "archive_hash_wall_seconds": 0.016637700144201517,
+      "archive_sha256": "8c1653e8609d0acc460e3f2dd89fb47a6678e3bcecd784de322a554fd55e41f9",
+      "archive_size": 1529568,
+      "archive_verify_wall_seconds": 0.055775499902665615,
+      "compression_wall_seconds": 1.3665930000133812,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/03_D7-root_B1/diagnostic/inflight.json",
+          "sha256": "a0b3e5aa9f03edb98bd7f85e43a93f3ecbfef462205d93ff6dfe3e93dc9b659e",
+          "size": 269
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/03_D7-root_B1/diagnostic/new_columns.json",
+          "sha256": "71c0add10501e6a632ca96dbcd83e06770f8c5e6c0f4c94eb636210db518cbe5",
+          "size": 1470528
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/03_D7-root_B1/diagnostic/new_rows_exact.jsonl",
+          "sha256": "d9794c13d4540f2f010896dea023809194a7c744cbff479b2d39c034712cd1d0",
+          "size": 19112650
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/03_D7-root_B1/diagnostic/optimizer.log",
+          "sha256": "7db874ba7f886cfad1363c53750567672ff477c0abf7cf0e1506c8f03072415a",
+          "size": 4831
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/03_D7-root_B1/diagnostic/provenance.json",
+          "sha256": "f3dc0ade9f48f07ccd12c2b87f480959cd1345af9f1b02ee1308167e46571b19",
+          "size": 40841
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/03_D7-root_B1/stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/03_D7-root_B1/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/03_D7-root_B1/supervision.json",
+          "sha256": "c220c255a1fa879f0882a96ad5676f3e5ce59c28fa70bfb84530a831e6e645a3",
+          "size": 1074
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/03_D7-root_B1/supervisor_ready.flag",
+          "sha256": "9ec2c4b010afca8583d4fa204c73899dcfac98a8b75012bb132ca6815a874e31",
+          "size": 10
+        }
+      ],
+      "free_disk_after_bytes": 105664724992,
+      "part_count": 1,
+      "part_number": 1,
+      "source_bytes": 20630203,
+      "source_file_count": 9,
+      "source_group": "03_D7-root_B1",
+      "source_hash_wall_seconds": 0.01838799985125661,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 20630203,
+      "verified_file_count": 9
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/04_D7-root_B2.part01-of-03.tar.gz",
+      "archive_hash_wall_seconds": 0.006262300070375204,
+      "archive_sha256": "59141558ae0fec4bc2401c4e5f040f07bdd3bbf56dd3c344906aab22f3a6b330",
+      "archive_size": 318440,
+      "archive_verify_wall_seconds": 0.007636799942702055,
+      "compression_wall_seconds": 0.23776500020176172,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/04_D7-root_B2/diagnostic/inflight.json",
+          "sha256": "ed8418a79168802bfc0587ddd37bce75c37e1d89f61483bb0c030caf05aabce9",
+          "size": 272
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/04_D7-root_B2/diagnostic/new_columns.json",
+          "sha256": "157787cd278fc3df9cf7fec59a5194b4a90cc8dd284ccb2c7710ed9a951f43ee",
+          "size": 2941051
+        }
+      ],
+      "free_disk_after_bytes": 105664405504,
+      "part_count": 3,
+      "part_number": 1,
+      "source_bytes": 2941323,
+      "source_file_count": 2,
+      "source_group": "04_D7-root_B2",
+      "source_hash_wall_seconds": 0.003177500329911709,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 2941323,
+      "verified_file_count": 2
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/04_D7-root_B2.part02-of-03.tar.gz",
+      "archive_hash_wall_seconds": 0.007455199956893921,
+      "archive_sha256": "7013372113e70e6c2742986528f95d0d73b984d6d497daa48dc66fe8e2a61a34",
+      "archive_size": 3123332,
+      "archive_verify_wall_seconds": 0.10571879986673594,
+      "compression_wall_seconds": 3.4001432000659406,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/04_D7-root_B2/diagnostic/new_rows_exact.jsonl",
+          "sha256": "09efa02451523b508d8064b8e725aa7d081953049fb2c81eba98c24dea22bcba",
+          "size": 50856735
+        }
+      ],
+      "free_disk_after_bytes": 105661280256,
+      "part_count": 3,
+      "part_number": 2,
+      "source_bytes": 50856735,
+      "source_file_count": 1,
+      "source_group": "04_D7-root_B2",
+      "source_hash_wall_seconds": 0.03717970009893179,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 50856735,
+      "verified_file_count": 1
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/04_D7-root_B2.part03-of-03.tar.gz",
+      "archive_hash_wall_seconds": 0.0059472001157701015,
+      "archive_sha256": "53be4ed7499248f3494b88b2c0c33a78cc190a5b9357e030409c11545a0780c5",
+      "archive_size": 8840,
+      "archive_verify_wall_seconds": 0.0006713001057505608,
+      "compression_wall_seconds": 0.0049576000310480595,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/04_D7-root_B2/diagnostic/optimizer.log",
+          "sha256": "ff493f5b0d631f507751e6d1607b4986905dbd7092f0100efa65d9bf653ec6fd",
+          "size": 4769
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/04_D7-root_B2/diagnostic/provenance.json",
+          "sha256": "7dc752ad02e7fa8a91f215671c1d0b62995508831b9ab96273995da23a74a998",
+          "size": 40842
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/04_D7-root_B2/stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/04_D7-root_B2/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/04_D7-root_B2/supervision.json",
+          "sha256": "7d31cc11a7824707d0d1fb6708542e0bd6f926ff9ca368206d5448e7d7c8d69a",
+          "size": 1075
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/04_D7-root_B2/supervisor_ready.flag",
+          "sha256": "9ec2c4b010afca8583d4fa204c73899dcfac98a8b75012bb132ca6815a874e31",
+          "size": 10
+        }
+      ],
+      "free_disk_after_bytes": 105661263872,
+      "part_count": 3,
+      "part_number": 3,
+      "source_bytes": 46696,
+      "source_file_count": 6,
+      "source_group": "04_D7-root_B2",
+      "source_hash_wall_seconds": 0.004113700240850449,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 46696,
+      "verified_file_count": 6
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/05_D7-child_B1.tar.gz",
+      "archive_hash_wall_seconds": 0.006609700154513121,
+      "archive_sha256": "90d16d0dfc7e17d673b74745b8eaa6fe7c46fefb719d7d0488db85e3aa8a6c5a",
+      "archive_size": 1529611,
+      "archive_verify_wall_seconds": 0.0649927998892963,
+      "compression_wall_seconds": 1.288204099982977,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/05_D7-child_B1/diagnostic/inflight.json",
+          "sha256": "5a0513a3330baee4cd13bc87fd472f76d164f92a376cf5c3807a715ff46c9202",
+          "size": 269
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/05_D7-child_B1/diagnostic/new_columns.json",
+          "sha256": "71c0add10501e6a632ca96dbcd83e06770f8c5e6c0f4c94eb636210db518cbe5",
+          "size": 1470528
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/05_D7-child_B1/diagnostic/new_rows_exact.jsonl",
+          "sha256": "d9794c13d4540f2f010896dea023809194a7c744cbff479b2d39c034712cd1d0",
+          "size": 19112650
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/05_D7-child_B1/diagnostic/optimizer.log",
+          "sha256": "8c10d6d8b5e3e73818a8301b59b28b4ea2955bee75cdb37aebf86fdb9230d2ba",
+          "size": 4831
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/05_D7-child_B1/diagnostic/provenance.json",
+          "sha256": "c6848b61ee6dbd076d5f82877e41baad676a6b2deceefbc120863c08230cc404",
+          "size": 40844
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/05_D7-child_B1/stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/05_D7-child_B1/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/05_D7-child_B1/supervision.json",
+          "sha256": "13b7d59d7566c88469f9ef72687a671b2eed2a4d3cb591763c3cd1ed33039c89",
+          "size": 1077
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/05_D7-child_B1/supervisor_ready.flag",
+          "sha256": "9ec2c4b010afca8583d4fa204c73899dcfac98a8b75012bb132ca6815a874e31",
+          "size": 10
+        }
+      ],
+      "free_disk_after_bytes": 105659731968,
+      "part_count": 1,
+      "part_number": 1,
+      "source_bytes": 20630209,
+      "source_file_count": 9,
+      "source_group": "05_D7-child_B1",
+      "source_hash_wall_seconds": 0.017520599998533726,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 20630209,
+      "verified_file_count": 9
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/06_D7-child_B2.part01-of-03.tar.gz",
+      "archive_hash_wall_seconds": 0.004760799929499626,
+      "archive_sha256": "d92b4d9badd36d393144c1f190015eac5cc14574af38bb6ec3cd808b499e0d3e",
+      "archive_size": 318443,
+      "archive_verify_wall_seconds": 0.006804899778217077,
+      "compression_wall_seconds": 0.23746450012549758,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/06_D7-child_B2/diagnostic/inflight.json",
+          "sha256": "afb6602915b287ea18c23d5fa307de3b44658206f9d43676d75d0b3638d05af4",
+          "size": 272
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/06_D7-child_B2/diagnostic/new_columns.json",
+          "sha256": "157787cd278fc3df9cf7fec59a5194b4a90cc8dd284ccb2c7710ed9a951f43ee",
+          "size": 2941051
+        }
+      ],
+      "free_disk_after_bytes": 105659412480,
+      "part_count": 3,
+      "part_number": 1,
+      "source_bytes": 2941323,
+      "source_file_count": 2,
+      "source_group": "06_D7-child_B2",
+      "source_hash_wall_seconds": 0.0029556998051702976,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 2941323,
+      "verified_file_count": 2
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/06_D7-child_B2.part02-of-03.tar.gz",
+      "archive_hash_wall_seconds": 0.0069867996498942375,
+      "archive_sha256": "c50e9295a6081cbc46b503a8dcfeb052cd7544816e9d1e2f50cdd8962e73d32f",
+      "archive_size": 3121449,
+      "archive_verify_wall_seconds": 0.10580699983984232,
+      "compression_wall_seconds": 3.421922199893743,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/06_D7-child_B2/diagnostic/new_rows_exact.jsonl",
+          "sha256": "f1c6fe6e0f153909d4a6e63a53687145fe017e17002ea847d58489100fad6e2d",
+          "size": 51112506
+        }
+      ],
+      "free_disk_after_bytes": 105656287232,
+      "part_count": 3,
+      "part_number": 2,
+      "source_bytes": 51112506,
+      "source_file_count": 1,
+      "source_group": "06_D7-child_B2",
+      "source_hash_wall_seconds": 0.038192200008779764,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 51112506,
+      "verified_file_count": 1
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/06_D7-child_B2.part03-of-03.tar.gz",
+      "archive_hash_wall_seconds": 0.005050699692219496,
+      "archive_sha256": "3af3c5504507eb79d08aee21c20eb04ad81d46ec9cb705b15a1434aabc4eedce",
+      "archive_size": 8860,
+      "archive_verify_wall_seconds": 0.0007148999720811844,
+      "compression_wall_seconds": 0.004130799788981676,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/06_D7-child_B2/diagnostic/optimizer.log",
+          "sha256": "3afb9a1f3fd6f1805f227aa175a3ea4701d74fc046eaba42fa3a5eb7d02a8611",
+          "size": 4769
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/06_D7-child_B2/diagnostic/provenance.json",
+          "sha256": "8c1ec9b25a7bf596efef3b5bccfd424e88984a5baa4448f419efbd9bb6193f94",
+          "size": 40848
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/06_D7-child_B2/stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/06_D7-child_B2/stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size": 0
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/06_D7-child_B2/supervision.json",
+          "sha256": "3b17ac7a3085d00e2fcd625348ac1af565f3b819762646797a358f3e08c0250a",
+          "size": 1078
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/06_D7-child_B2/supervisor_ready.flag",
+          "sha256": "9ec2c4b010afca8583d4fa204c73899dcfac98a8b75012bb132ca6815a874e31",
+          "size": 10
+        }
+      ],
+      "free_disk_after_bytes": 105656274944,
+      "part_count": 3,
+      "part_number": 3,
+      "source_bytes": 46705,
+      "source_file_count": 6,
+      "source_group": "06_D7-child_B2",
+      "source_hash_wall_seconds": 0.002083300147205591,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 46705,
+      "verified_file_count": 6
+    },
+    {
+      "archive": "ot_epigraph_raw_archives/batch_ledger.tar.gz",
+      "archive_hash_wall_seconds": 0.004846000112593174,
+      "archive_sha256": "934a2e2540a1a34bb080e3d237fea67f55108a1752306662b3a270ad6bc56285",
+      "archive_size": 3547,
+      "archive_verify_wall_seconds": 0.00040400028228759766,
+      "compression_wall_seconds": 0.0007613999769091606,
+      "files": [
+        {
+          "path": "ot_epigraph_diagnostic_001/batch_summary.json",
+          "sha256": "e88cce21a43712f57a7353f047e543a0b6ff59db7a0b9b793714cabb4f0ec968",
+          "size": 1954
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/outside_batch_command_receipt.json",
+          "sha256": "6e81c8779e1658a8e7824ce976a828fb36698af565d9d657b3843e487708873f",
+          "size": 556
+        },
+        {
+          "path": "ot_epigraph_diagnostic_001/raw_file_index.json",
+          "sha256": "39b2336e9d3913afedff237e54bd26829f758b2b59fa38e956f5c337f8eeb74b",
+          "size": 11651
+        }
+      ],
+      "free_disk_after_bytes": 105656270848,
+      "part_count": 1,
+      "part_number": 1,
+      "source_bytes": 14161,
+      "source_file_count": 3,
+      "source_group": "batch_ledger",
+      "source_hash_wall_seconds": 0.0011125002056360245,
+      "stream_verification": "all_member_sha256_size_equal_source",
+      "verified_bytes": 14161,
+      "verified_file_count": 3
+    }
+  ],
+  "initial_free_disk_bytes": 105667981312,
+  "kind": "ot_epigraph",
+  "member_root": "results/unified_exact_round88",
+  "source_bytes": 174943105,
+  "source_file_count": 65
+}

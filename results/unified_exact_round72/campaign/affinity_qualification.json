@@ -1,0 +1,32 @@
+{
+  "binding": {
+    "launcher_pid": 44728,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "child_readback_from_parent": {
+    "process_mask": 4,
+    "system_mask": 1048575
+  },
+  "child_self_readback": {
+    "process_mask": 4,
+    "system_mask": 1048575
+  },
+  "restored": {
+    "process_mask": 1048575,
+    "system_mask": 1048575
+  },
+  "wall_seconds": 0.06562939984723926,
+  "optimizer_calls": 0,
+  "changed_unrelated_processes": false,
+  "algorithm_parameters_changed": false,
+  "scope": "One owned Python parent and inherited child, no BRP solver or performance run"
+}

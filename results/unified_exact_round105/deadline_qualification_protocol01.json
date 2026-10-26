@@ -1,0 +1,33 @@
+{
+  "phase": "targeted correctness qualification of global deadline inside IIS; not a performance comparison",
+  "process_shutdown_margin_seconds": 30,
+  "no_per_car_production_caps": true,
+  "candidate_policy": "unchanged IR-CORE production path; own paid startup; no imported modes/proofs/UB",
+  "roles": [
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "T_seconds": 7200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 400,
+      "method_order": [
+        "IR-CORE"
+      ]
+    }
+  ],
+  "target": "Based on observed first master completion near342 process seconds and IIS around32 seconds, work deadline370 should interrupt IIS. Verify actual phase/status; do not assume the trigger or hide a missed trigger.",
+  "required_if_triggered": "Previously proved full mode remains valid; no unconfirmed shorter core; preserve strongest LB and own physical UB; exit on the same global clock.",
+  "before_execution": true,
+  "trigger_is_not_assumed": true
+}

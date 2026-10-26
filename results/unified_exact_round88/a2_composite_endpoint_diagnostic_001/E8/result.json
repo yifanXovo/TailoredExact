@@ -1,0 +1,698 @@
+{
+  "binary_sha256": "23d4fd53602d46f599f3f58e33c3ec96c4eec01b972e22ee0d4815cc42a54693",
+  "case": "E8",
+  "composite_sha256": "dccbf59fa462a25308419f49a719f59d0d9ef514f917ab377b9215ffdcdcd898",
+  "cpp_calls": 10,
+  "diagnosis_wall_seconds": 0.5321841998957098,
+  "final_cpp_G": "2492558284330841/144115188075855872",
+  "final_cpp_P": "4803839602528529/144115188075855872",
+  "final_cpp_objective": "6426268449420241/288230376151711744",
+  "final_inventory": [
+    17,
+    14,
+    21,
+    24,
+    31,
+    16,
+    11,
+    10,
+    12,
+    16,
+    16,
+    14
+  ],
+  "final_receipt_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\a2_composite_endpoint_diagnostic_001\\E8\\candidates\\candidate_00000_result.json",
+  "final_route_duration": [
+    "3506681548376433/1099511627776",
+    "0",
+    "0"
+  ],
+  "final_route_travel": [
+    "5582476892186051/4398046511104",
+    "0",
+    "0"
+  ],
+  "flow_sha256": "fdbe04bdc7b933397aac3ec4fa9d9f0b5adf99c8550c98d14e96ce89db43328d",
+  "input_path": "E:\\codes\\ExactEBRP\\reference\\qualification_round39\\small-easy\\round39_small_easy_V12_M3_Q30_slot08_seed1167625600.txt",
+  "input_sha256": "587737b9d000c1712220232a0fe957073f1f03ac649a63a4775abd9166603acd",
+  "internal_rejected_points": 0,
+  "method": "round88-a2-composite-penalty-offline",
+  "old_probe_sha256": "6a06a03212dc5da954be57e7c81b5a0f67c77bea592720955dc9c2b8e3c9c77c",
+  "original_cpp_G": "2492558284330841/144115188075855872",
+  "original_cpp_P": "4803839602528529/144115188075855872",
+  "original_cpp_objective": "6426268449420241/288230376151711744",
+  "original_inventory": [
+    17,
+    14,
+    21,
+    24,
+    31,
+    16,
+    11,
+    10,
+    12,
+    16,
+    16,
+    14
+  ],
+  "original_route_duration": [
+    "3506681548376433/1099511627776",
+    "0",
+    "0"
+  ],
+  "original_route_travel": [
+    "5582476892186051/4398046511104",
+    "0",
+    "0"
+  ],
+  "original_routes": [
+    {
+      "nodes": [
+        0,
+        10,
+        5,
+        3,
+        7,
+        1,
+        9,
+        0
+      ],
+      "operations": [
+        {
+          "drop": 0,
+          "pickup": 6,
+          "station": 10
+        },
+        {
+          "drop": 0,
+          "pickup": 4,
+          "station": 5
+        },
+        {
+          "drop": 0,
+          "pickup": 6,
+          "station": 3
+        },
+        {
+          "drop": 6,
+          "pickup": 0,
+          "station": 7
+        },
+        {
+          "drop": 4,
+          "pickup": 0,
+          "station": 1
+        },
+        {
+          "drop": 6,
+          "pickup": 0,
+          "station": 9
+        }
+      ],
+      "vehicle": 0
+    },
+    {
+      "nodes": [
+        0,
+        0
+      ],
+      "operations": [],
+      "vehicle": 1
+    },
+    {
+      "nodes": [
+        0,
+        0
+      ],
+      "operations": [],
+      "vehicle": 2
+    }
+  ],
+  "rounds": [
+    {
+      "accepted_inventory": null,
+      "best_cpp_objective": "6426268449420241/288230376151711744",
+      "budgets": [
+        19,
+        0,
+        0
+      ],
+      "certificate": {
+        "gini_gradient": [
+          "63/191012",
+          "9/22472",
+          "-33/11236",
+          "21/89888",
+          "63/348316",
+          "63/179776",
+          "63/123596",
+          "63/112360",
+          "21/44944",
+          "63/179776",
+          "63/179776",
+          "9/22472"
+        ],
+        "marginal_arcs": [
+          {
+            "arc_id": 1,
+            "direction": "pickup",
+            "first_unit": 1,
+            "rational_cost": "-749811507720317645429/103633808206100260978688",
+            "station": 9,
+            "units": 6
+          },
+          {
+            "arc_id": 2,
+            "direction": "pickup",
+            "first_unit": 7,
+            "rational_cost": "677177452930086285941/103633808206100260978688",
+            "station": 9,
+            "units": 16
+          },
+          {
+            "arc_id": 3,
+            "direction": "drop",
+            "first_unit": 1,
+            "rational_cost": "749811507720317645429/103633808206100260978688",
+            "station": 9,
+            "units": 14
+          },
+          {
+            "arc_id": 5,
+            "direction": "pickup",
+            "first_unit": 1,
+            "rational_cost": "-26557860354520167320493772388916451/14129375567011070470775221557879898112",
+            "station": 4,
+            "units": 4
+          },
+          {
+            "arc_id": 6,
+            "direction": "pickup",
+            "first_unit": 5,
+            "rational_cost": "21446693134399946373659065064840419/14129375567011070470775221557879898112",
+            "station": 4,
+            "units": 31
+          },
+          {
+            "arc_id": 7,
+            "direction": "drop",
+            "first_unit": 1,
+            "rational_cost": "26557860354520167320493772388916451/14129375567011070470775221557879898112",
+            "station": 4,
+            "units": 15
+          },
+          {
+            "arc_id": 9,
+            "direction": "pickup",
+            "first_unit": 1,
+            "rational_cost": "371187566860045068289548238319140321/98449842660464232957659608274259935232",
+            "station": 2,
+            "units": 27
+          },
+          {
+            "arc_id": 10,
+            "direction": "drop",
+            "first_unit": 1,
+            "rational_cost": "-207104495759271358838035790347747871/98449842660464232957659608274259935232",
+            "station": 2,
+            "units": 19
+          },
+          {
+            "arc_id": 12,
+            "direction": "pickup",
+            "first_unit": 1,
+            "rational_cost": "14613280070891784859/1113253799088967647232",
+            "station": 6,
+            "units": 5
+          },
+          {
+            "arc_id": 13,
+            "direction": "drop",
+            "first_unit": 1,
+            "rational_cost": "-14613280070891784859/1113253799088967647232",
+            "station": 6,
+            "units": 6
+          },
+          {
+            "arc_id": 14,
+            "direction": "drop",
+            "first_unit": 7,
+            "rational_cost": "15748187176989149851/1113253799088967647232",
+            "station": 6,
+            "units": 16
+          },
+          {
+            "arc_id": 16,
+            "direction": "pickup",
+            "first_unit": 1,
+            "rational_cost": "4095984762097874274569431506325043/968545905803178217754753090661122048",
+            "station": 0,
+            "units": 13
+          },
+          {
+            "arc_id": 17,
+            "direction": "drop",
+            "first_unit": 1,
+            "rational_cost": "-4095984762097874274569431506325043/968545905803178217754753090661122048",
+            "station": 0,
+            "units": 4
+          },
+          {
+            "arc_id": 18,
+            "direction": "drop",
+            "first_unit": 5,
+            "rational_cost": "4734880664612901892923769921834547/968545905803178217754753090661122048",
+            "station": 0,
+            "units": 15
+          },
+          {
+            "arc_id": 20,
+            "direction": "pickup",
+            "first_unit": 1,
+            "rational_cost": "40646437294818983356090818865029211/3646290468906082702135541047194812416",
+            "station": 8,
+            "units": 6
+          },
+          {
+            "arc_id": 21,
+            "direction": "drop",
+            "first_unit": 1,
+            "rational_cost": "-40646437294818983356090818865029211/3646290468906082702135541047194812416",
+            "station": 8,
+            "units": 6
+          },
+          {
+            "arc_id": 22,
+            "direction": "drop",
+            "first_unit": 7,
+            "rational_cost": "44053882108232463987313957081079899/3646290468906082702135541047194812416",
+            "station": 8,
+            "units": 8
+          }
+        ],
+        "network": {
+          "arc_flows": [
+            [
+              0,
+              2,
+              19,
+              0,
+              19
+            ],
+            [
+              2,
+              5,
+              6,
+              -4129229019959344448222390538906875461632,
+              6
+            ],
+            [
+              2,
+              5,
+              16,
+              3729231628896346017033579761078347235328,
+              0
+            ],
+            [
+              5,
+              1,
+              14,
+              4129229019959344448222390538906875461632,
+              0
+            ],
+            [
+              5,
+              6,
+              30,
+              0,
+              6
+            ],
+            [
+              2,
+              6,
+              4,
+              -1072725095439778598409384454333113288792,
+              4
+            ],
+            [
+              2,
+              6,
+              31,
+              866274829084682633924836956099034204248,
+              9
+            ],
+            [
+              6,
+              1,
+              15,
+              1072725095439778598409384454333113288792,
+              0
+            ],
+            [
+              6,
+              7,
+              30,
+              0,
+              19
+            ],
+            [
+              2,
+              7,
+              27,
+              2151774325087681260874511137536056440837,
+              0
+            ],
+            [
+              7,
+              1,
+              19,
+              -1200584761916496067184093476645894408187,
+              3
+            ],
+            [
+              7,
+              8,
+              30,
+              0,
+              16
+            ],
+            [
+              2,
+              8,
+              5,
+              7491552868809334831884069518624579125248,
+              0
+            ],
+            [
+              8,
+              1,
+              6,
+              -7491552868809334831884069518624579125248,
+              6
+            ],
+            [
+              8,
+              1,
+              16,
+              8073367255810059822704157922738801999872,
+              0
+            ],
+            [
+              8,
+              9,
+              30,
+              0,
+              10
+            ],
+            [
+              2,
+              9,
+              13,
+              2413550829096648220541488376239018937664,
+              0
+            ],
+            [
+              9,
+              1,
+              4,
+              -2413550829096648220541488376239018937664,
+              4
+            ],
+            [
+              9,
+              1,
+              15,
+              2790018961861823214601545578901163150656,
+              0
+            ],
+            [
+              9,
+              10,
+              30,
+              0,
+              6
+            ],
+            [
+              2,
+              10,
+              6,
+              6361939718947772455911978877935507076509,
+              0
+            ],
+            [
+              10,
+              1,
+              6,
+              -6361939718947772455911978877935507076509,
+              6
+            ],
+            [
+              10,
+              1,
+              8,
+              6895269573698437030830393248373544711581,
+              0
+            ],
+            [
+              10,
+              1,
+              30,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              4,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              108,
+              0,
+              19
+            ]
+          ],
+          "integer_cost_scale": 570713737902711158455552749165884844539904,
+          "integer_flow_cost": -117646714168431762188142872760136674272487,
+          "negative_cycle_augmentations": 5,
+          "positive_residual_edges": 33,
+          "potentials": [
+            -1200584761916496067184093476645894408187,
+            -1200584761916496067184093476645894408187,
+            -866274829084682633924836956099034204248,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "projections": [
+          {
+            "canceled": 0,
+            "canonical_drop": 4,
+            "canonical_pickup": 0,
+            "final_inventory": 17,
+            "projected_cost_from_initial": "-4095984762097874274569431506325043/242136476450794554438688272665280512",
+            "raw_cost_from_initial": "-4095984762097874274569431506325043/242136476450794554438688272665280512",
+            "raw_drop": 4,
+            "raw_pickup": 0,
+            "station": 0
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 0,
+            "canonical_pickup": 0,
+            "final_inventory": 14,
+            "projected_cost_from_initial": "0",
+            "raw_cost_from_initial": "0",
+            "raw_drop": 0,
+            "raw_pickup": 0,
+            "station": 1
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 3,
+            "canonical_pickup": 0,
+            "final_inventory": 30,
+            "projected_cost_from_initial": "-207104495759271358838035790347747871/32816614220154744319219869424753311744",
+            "raw_cost_from_initial": "-207104495759271358838035790347747871/32816614220154744319219869424753311744",
+            "raw_drop": 3,
+            "raw_pickup": 0,
+            "station": 2
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 0,
+            "canonical_pickup": 0,
+            "final_inventory": 24,
+            "projected_cost_from_initial": "0",
+            "raw_cost_from_initial": "0",
+            "raw_drop": 0,
+            "raw_pickup": 0,
+            "station": 3
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 0,
+            "canonical_pickup": 13,
+            "final_inventory": 22,
+            "projected_cost_from_initial": "86788796791518848080956496027897967/14129375567011070470775221557879898112",
+            "raw_cost_from_initial": "86788796791518848080956496027897967/14129375567011070470775221557879898112",
+            "raw_drop": 0,
+            "raw_pickup": 13,
+            "station": 4
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 0,
+            "canonical_pickup": 0,
+            "final_inventory": 16,
+            "projected_cost_from_initial": "0",
+            "raw_cost_from_initial": "0",
+            "raw_drop": 0,
+            "raw_pickup": 0,
+            "station": 5
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 6,
+            "canonical_pickup": 0,
+            "final_inventory": 11,
+            "projected_cost_from_initial": "-43839840212675354577/556626899544483823616",
+            "raw_cost_from_initial": "-43839840212675354577/556626899544483823616",
+            "raw_drop": 6,
+            "raw_pickup": 0,
+            "station": 6
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 0,
+            "canonical_pickup": 0,
+            "final_inventory": 10,
+            "projected_cost_from_initial": "0",
+            "raw_cost_from_initial": "0",
+            "raw_drop": 0,
+            "raw_pickup": 0,
+            "station": 7
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 6,
+            "canonical_pickup": 0,
+            "final_inventory": 12,
+            "projected_cost_from_initial": "-121939311884456950068272456595087633/1823145234453041351067770523597406208",
+            "raw_cost_from_initial": "-121939311884456950068272456595087633/1823145234453041351067770523597406208",
+            "raw_drop": 6,
+            "raw_pickup": 0,
+            "station": 8
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 0,
+            "canonical_pickup": 6,
+            "final_inventory": 16,
+            "projected_cost_from_initial": "-2249434523160952936287/51816904103050130489344",
+            "raw_cost_from_initial": "-2249434523160952936287/51816904103050130489344",
+            "raw_drop": 0,
+            "raw_pickup": 6,
+            "station": 9
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 0,
+            "canonical_pickup": 0,
+            "final_inventory": 16,
+            "projected_cost_from_initial": "0",
+            "raw_cost_from_initial": "0",
+            "raw_drop": 0,
+            "raw_pickup": 0,
+            "station": 10
+          },
+          {
+            "canceled": 0,
+            "canonical_drop": 0,
+            "canonical_pickup": 0,
+            "final_inventory": 14,
+            "projected_cost_from_initial": "0",
+            "raw_cost_from_initial": "0",
+            "raw_drop": 0,
+            "raw_pickup": 0,
+            "station": 11
+          }
+        ],
+        "proxy_cost_from_initial": "-39215571389477254062714290920045558090829/190237912634237052818517583055294948179968",
+        "raw_flow_cost_from_initial": "-39215571389477254062714290920045558090829/190237912634237052818517583055294948179968"
+      },
+      "cpp_verified_line_points": 9,
+      "current_cpp_objective": "6426268449420241/288230376151711744",
+      "current_inventory": [
+        17,
+        14,
+        21,
+        24,
+        31,
+        16,
+        11,
+        10,
+        12,
+        16,
+        16,
+        14
+      ],
+      "gini_gradient": [
+        "63/191012",
+        "9/22472",
+        "-33/11236",
+        "21/89888",
+        "63/348316",
+        "63/179776",
+        "63/123596",
+        "63/112360",
+        "21/44944",
+        "63/179776",
+        "63/179776",
+        "9/22472"
+      ],
+      "index": 0,
+      "internal_rejected_points": 0,
+      "oracle_seconds": 0.0065481998026371,
+      "primitive_steps": 9,
+      "proposal_inventory": [
+        17,
+        14,
+        30,
+        24,
+        22,
+        16,
+        11,
+        10,
+        12,
+        16,
+        16,
+        14
+      ],
+      "proxy_delta_from_current": "-15536411362769041107800026114550292391/1017315040824797073895815952167352664064",
+      "round_wall_seconds": 0.4628476998768747,
+      "status": "no_verified_improvement"
+    }
+  ],
+  "start_wall_time": 1790451136.7389436,
+  "status": "completed_composite_endpoint",
+  "stop_reason": "no_verified_improvement",
+  "witness_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\runner_a1_g3\\raw\\02_E8_ENS-C\\external\\initial_witness.json",
+  "witness_sha256": "70534fd162bff80ad50210ad94a02a2e0e7f6c6efafd67e58a3dea32ac1faea3"
+}

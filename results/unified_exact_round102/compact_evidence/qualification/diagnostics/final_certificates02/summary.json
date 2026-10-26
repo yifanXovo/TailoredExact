@@ -1,0 +1,92 @@
+{
+  "passed": true,
+  "Optimize": 0,
+  "certificates": 41,
+  "distinct_supports": 22,
+  "physical_row_witness_checks": 4756,
+  "unique_physical_witnesses": {
+    "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e": 26,
+    "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76": 147,
+    "370cb51b4d2351b3881cd74ab93406d76834efcf856430f742b8f243a9060a27": 139,
+    "defa0feb33841eca3d1079d9e7a6908a84b8ddecf5ffb308fdadf0037d491ec3": 176,
+    "ad91afda9588e4adbfd104d8a54c89a2800b91dda6fd10a21e079f072c41763f": 198,
+    "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a": 184
+  },
+  "records": [
+    {
+      "path": "results/unified_exact_round102/confirmation01/raw/03_R98-C3_J-SUBMIT/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "0f1951bee4dab9a18f5d1ba0f6e806d77bc511cd051d38eedce817368b0fcf8c",
+      "rows": 2,
+      "API0": 2
+    },
+    {
+      "path": "results/unified_exact_round102/confirmation01/raw/03_R98-C3_J-SUBMIT/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "2159bc4fde764c5069d2f09e9b588401cfe4319651725b9883e89be4204f0ab5",
+      "rows": 15,
+      "API0": 15
+    },
+    {
+      "path": "results/unified_exact_round102/confirmation_long01/raw/01_R99-N3_J-SUBMIT/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "891e9346883653ff479d385e3d765b97a6d98a2e5e61317a7b747f954bec4e34",
+      "rows": 2,
+      "API0": 2
+    },
+    {
+      "path": "results/unified_exact_round102/confirmation_long01/raw/01_R99-N3_J-SUBMIT/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "891e9346883653ff479d385e3d765b97a6d98a2e5e61317a7b747f954bec4e34",
+      "rows": 2,
+      "API0": 2
+    },
+    {
+      "path": "results/unified_exact_round102/development01/raw/04_R99-N2_J-SUBMIT/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "8ddfe1766ab9bc06c5d700500fbcb28035b1ff4320e0328310ba09c35d156a50",
+      "rows": 1,
+      "API0": 1
+    },
+    {
+      "path": "results/unified_exact_round102/development01/raw/04_R99-N2_J-SUBMIT/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "8ddfe1766ab9bc06c5d700500fbcb28035b1ff4320e0328310ba09c35d156a50",
+      "rows": 1,
+      "API0": 1
+    },
+    {
+      "path": "results/unified_exact_round102/isolation03/raw/01_F2_J-SHADOW/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "b92dc1201719699b6044ff87b237c1cc865a289dea4a1d87d7a466d44a3734ea",
+      "rows": 4,
+      "API0": 0
+    },
+    {
+      "path": "results/unified_exact_round102/isolation04/raw/01_R99-N2_J-SHADOW/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "8287e1b6a511a14bcfe475be182c35b0470602e63f4107f5d0b8e576da51c09a",
+      "rows": 1,
+      "API0": 0
+    },
+    {
+      "path": "results/unified_exact_round102/isolation04/raw/01_R99-N2_J-SHADOW/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "8287e1b6a511a14bcfe475be182c35b0470602e63f4107f5d0b8e576da51c09a",
+      "rows": 1,
+      "API0": 0
+    },
+    {
+      "path": "results/unified_exact_round102/native02/raw/01_F2_J-SHADOW/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "b92dc1201719699b6044ff87b237c1cc865a289dea4a1d87d7a466d44a3734ea",
+      "rows": 4,
+      "API0": 0
+    },
+    {
+      "path": "results/unified_exact_round102/native02/raw/02_F2_J-SUBMIT/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "7d47dfd709feddd5d912bc2c314540f3d90a7b474f9df0be589c1f97d4168b37",
+      "rows": 4,
+      "API0": 4
+    },
+    {
+      "path": "results/unified_exact_round102/protection01/raw/02_F2_J-SUBMIT/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "7d47dfd709feddd5d912bc2c314540f3d90a7b474f9df0be589c1f97d4168b37",
+      "rows": 4,
+      "API0": 4
+    }
+  ],
+  "seconds": 2.3732318000111263,
+  "script_sha256": "ba0c1587d2c663bcad21fb9a63f6315ec987ec16c678265f304337c8d6d55b76",
+  "scope": "Actual signed dyadic rows, global lower-contract containment, complete integer support upper replay, original physical routes; no independent native search or later full vector reconstruction"
+}

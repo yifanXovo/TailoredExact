@@ -1,0 +1,63 @@
+{
+  "all_checks_passed": true,
+  "preregistration_commit": "2d770ba0163329794edc918a8ccad1735ed50b12",
+  "base": "a3a7c89cfa752fd0c029c83d43996562df0be3fd",
+  "roles": [
+    {
+      "id": "F1",
+      "input_sha256": "93d04694c4003e0e868885a2da5671c953c7544270bd8977205293faff3fb318",
+      "cap": 120,
+      "zero_analytically_excluded": false,
+      "input_only_penalty_bound": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      }
+    },
+    {
+      "id": "F2",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "cap": 300,
+      "zero_analytically_excluded": true,
+      "input_only_penalty_bound": {
+        "numerator": 69447,
+        "denominator": 1000000,
+        "value": 0.069447
+      }
+    },
+    {
+      "id": "F5",
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "cap": 3600,
+      "zero_analytically_excluded": true,
+      "input_only_penalty_bound": {
+        "numerator": 1004697,
+        "denominator": 5500000,
+        "value": 0.18267218181818182
+      }
+    },
+    {
+      "id": "F6",
+      "input_sha256": "aeda223c50294226f6447e2cd2a6fe023fbf22e84a67e2bfa1f61d3dba919925",
+      "cap": 3600,
+      "zero_analytically_excluded": true,
+      "input_only_penalty_bound": {
+        "numerator": 4,
+        "denominator": 25,
+        "value": 0.16
+      }
+    }
+  ],
+  "generated_roles_retained": 4,
+  "unallocated_proposal_roles": [
+    "F3",
+    "F4"
+  ],
+  "matched_full_runs": 12,
+  "original_parameters_unchanged": true,
+  "optimizer_calls": 0,
+  "script_sha256": "719d47424ef90f57a54694250eaf7c3f77d24e45189d980902ac5864abe18d31",
+  "generation_sha256": "a6b3d857ff391004d371417c8eddf022a46dbf1d0ad49dac83d3bdf146e0a48b",
+  "wall_seconds": 0.3190837996080518,
+  "scope": "Prospective identity and structural audit, not a performance acceptance or a proof of statistical independence. Related CitiBike geography and artificial synthetic structures remain explicit; input-only bounds are not algorithm information."
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "capacity_F5_01",
+  "status": "NUMERICALLY_QUALIFIED_HULL_UPPER_WITNESS",
+  "hull_objective_upper": 0.24416944802753704,
+  "Optimize_calls": 1,
+  "DP_calls": 0,
+  "outer_seconds": 9.259709000005387,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "affinity": {
+    "launcher_pid": 27564,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "original_matrix_residual": {
+    "objective": 0.24416944802753704,
+    "maximum_absolute_residual": 1.4551915228366852e-11,
+    "violations_over_native_feasibility_tol": []
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "schema": "round108-independent-reader-correction-review-v1",
+  "decision": "ACCEPT",
+  "scope": "Only pure signed-gap percentage metadata/path qualification correction. Does not alter production/performance admission or select candidate.",
+  "reviewed_utc": "2026-10-08T05:01:08Z",
+  "original_reader_SHA": "c110f7aab57e966c44158208ce1a5cd0d6169186db7f37c57ef1928bd33d421a",
+  "corrected_reader_SHA": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46",
+  "candidate_identity_SHA": "826b60b902e646799f2ec189a40addff4ac00274a3e4e3763b98fbeb5ab5b537",
+  "performance_admission_SHA": "79f346beb90b665a9ec0df8a32ee7087fd9406abedb626b049b90cf3c9439a62",
+  "development_protocol_SHA": "ba502bb4dbdc54068d399fac0cf8860bfc5e499f433fe55cd60f66799ab3d59f",
+  "confirmation_protocol_SHA": "af19bb366fb9883cff9ea847620f69004ee376b4e455cbb3d6af0eda744659f4",
+  "before_record_SHA": "ba7b4b56318cabf281f2cb5120a4b2cf227890ca9ad3e7a2376575ad8c068a1d",
+  "after_record_SHA": "edfda3d85d8a536ebbc37ab8a3c7438baf5db8b3c6794aead5a394a775ca5113",
+  "finite_counterexample_source_SHA": "66845b658ab188566843c30f5b60348e6ee75821fc4d3f015bafc500c5b99502",
+  "producer_17_case_record_SHA": "a166c373fe4d33f23869439449c3124ca755a00f05384e5870095b23cf233609",
+  "independently_rerun_17_cases": {
+    "passed": true,
+    "cases": [
+      {
+        "name": "single candidate certificate has priority over missing control bounds",
+        "passed": true
+      },
+      {
+        "name": "single control certificate priority is severe LOSS",
+        "passed": true
+      },
+      {
+        "name": "two uncertified with missing bounds are UNEVALUABLE",
+        "passed": true
+      },
+      {
+        "name": "two certificates ignore UB last bits and use complete time",
+        "passed": true
+      },
+      {
+        "name": "opposed material UB and gap effects stay MIXED",
+        "passed": true
+      },
+      {
+        "name": "sub-threshold differences remain TIE",
+        "passed": true
+      },
+      {
+        "name": "zero objective has null relative gap",
+        "passed": true
+      },
+      {
+        "name": "tiny negative signed gap retained and relative signed",
+        "passed": true
+      },
+      {
+        "name": "negative signed gap never produces a gap percentage",
+        "passed": true
+      },
+      {
+        "name": "contradictory bounds never clipped",
+        "passed": true,
+        "rejected": true
+      },
+      {
+        "name": "unresolved certificate qualification cannot be classified",
+        "passed": true,
+        "rejected": true
+      },
+      {
+        "name": "cross-PE bridge cannot pass",
+        "passed": true,
+        "rejected": true
+      },
+      {
+        "name": "uncertified near-zero reference gap cannot use bridge percentage",
+        "passed": true
+      },
+      {
+        "name": "complete eligible frozen seven-role example SELECTS",
+        "passed": true
+      },
+      {
+        "name": "seen input cannot be relabeled unseen to SELECT",
+        "passed": true
+      },
+      {
+        "name": "any confirmation cancellation prohibits SELECT",
+        "passed": true
+      },
+      {
+        "name": "severe P regression makes positive selection unreachable",
+        "passed": true
+      }
+    ],
+    "Optimize": 0,
+    "solver_processes": 0,
+    "IIS": 0,
+    "performance_arms_added": 0
+  },
+  "additional_independent_cases": [
+    {
+      "name": "negative candidate gap has only percentage metadata difference in pair",
+      "passed": true,
+      "detail": {
+        "original_gap_ratio": -9.992007221626409e-15,
+        "corrected_gap_ratio": null,
+        "signed_gap": -9.992007221626409e-16,
+        "classification": "WIN"
+      }
+    },
+    {
+      "name": "signed relative U normalization unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "F2 tiny negative candidate cannot use bridge percentage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "C2 tiny negative candidate cannot use bridge percentage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "absolute/certificate branch unchanged with signed negative False",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "absolute/certificate branch unchanged with signed negative True",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ordinary or reference-negative case preserves classification",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ordinary or reference-negative case preserves classification",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ordinary or reference-negative case preserves classification",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "unchanged_functions_ast": [
+    "finite",
+    "qualified_numbers",
+    "relative",
+    "selection",
+    "early_impossible"
+  ],
+  "pair_all_other_ast_unchanged": true,
+  "bridge_all_other_ast_unchanged": true,
+  "signed_absolute_gap_not_clipped": true,
+  "signed_relative_gap_unchanged": true,
+  "thresholds_and_absolute_materiality_certificate_time_branches_unchanged": true,
+  "user_requirement": "Section 8: tolerance-sized negative signed gap is retained separately with no percentage division; qualified finite U/L relative gap remains (U-L)/abs(U). Section 7: only independently qualified complete certificate branches can bypass unavailable percentage path.",
+  "diff": "--- E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\engineering\\signed_gap_reader_correction01\\round108_decisions.py\n+++ E:\\codes\\ExactEBRP-round108\\scripts\\round108_decisions.py\n@@ -32,8 +32,10 @@\n         value.update(UB_improvement=p['U']-c['U'],gap_improvement=p['gap']-c['gap'],LB_change=c['L']-p['L'],\n             a_U=max(.001,.01*abs(p['U'])),a_gap=max(.001,.10*abs(p['gap'])))\n         if abs(p['U'])>ZERO_TOL:value['UB_ratio']=c['U']/p['U']\n-        if p['gap']>CLOSURE_TOL:\n+        if p['gap']>CLOSURE_TOL and c['gap']>=0:\n             value['gap_ratio']=c['gap']/p['gap'];value['percentage_gap_path_applicable']=True\n+        elif c['gap']<0 or p['gap']<0:\n+            value['gap_ratio_null_reason']='tiny_negative_signed_gap_retained_no_percentage_division'\n     if cc and not pc:\n         value['classification']='WIN';value['basis']='candidate_only_complete_certificate'\n     elif pc and not cc:\n@@ -65,7 +67,7 @@\n     gates={}\n     for role in ['F2','C2']:\n         c,p=data[role,'M-B'],data[role,'P-GRB'];cmp=pair(c,p)\n-        percentage=qualified_numbers(c) and qualified_numbers(p) and p['gap']>CLOSURE_TOL\n+        percentage=qualified_numbers(c) and qualified_numbers(p) and p['gap']>CLOSURE_TOL and c['gap']>=0\n         both_open=not c['certificate'] and not p['certificate']\n         if role=='F2':\n             passed=(c['certificate'] or both_open and percentage and c['U']<=1.01*p['U'] and c['gap']<=1.05*p['gap']) and not cmp['severe_regression']\n",
+  "reviewer_script_SHA": "f9f62d2cbd78e087ce53a3c810b07c4bc628053176b248298a290f6fb51cad73",
+  "reviewer_calls": {
+    "Optimize": 0,
+    "LP_solve": 0,
+    "IIS": 0,
+    "native_environment": 0,
+    "compiler": 0,
+    "full_reader": 0,
+    "raw_archive_scan": 0
+  },
+  "elapsed_seconds": 0.02347020001616329
+}

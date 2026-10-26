@@ -1,0 +1,262 @@
+{
+  "schema": "round55-fixed-interval-confirmation-freeze-v1",
+  "maximum_leaders": 2,
+  "C1_C9": {
+    "source": "results/gf_k1_f0_callback_isolation_round53/fixed_interval_confirmation_freeze.json",
+    "source_sha256": "3e3f2e3c1adef6f17a308c85d76fc7e37a67efa2f3eae003117bd7a3b8ef6bb7",
+    "states": [
+      {
+        "state_id": "C1",
+        "instance": "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+        "interval_id": "L0.0",
+        "state_kind": "child",
+        "role": "numerical-endpoint midpoint left child",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q20_slot07_seed621538683.txt",
+        "input_sha256": "963a8887d9c69a19824a0c250de4099a68b8c0e17288196b25cc46d74eb890b1"
+      },
+      {
+        "state_id": "C2",
+        "instance": "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+        "interval_id": "L0.1",
+        "state_kind": "child",
+        "role": "numerical-endpoint midpoint right child",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q20_slot07_seed621538683.txt",
+        "input_sha256": "963a8887d9c69a19824a0c250de4099a68b8c0e17288196b25cc46d74eb890b1"
+      },
+      {
+        "state_id": "C3",
+        "instance": "tight_T_seed3101",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "tight3101 highest-Work K1-AM fixed interval",
+        "input_path": "reference/hard_stress/V20_M3/tight_T_seed3101.txt",
+        "input_sha256": "30aea92f1d6ce551ef8fffe15acdd3422a94b06e60ddd13ad5166149653d4ef3"
+      },
+      {
+        "state_id": "C4",
+        "instance": "high_imbalance_seed3202",
+        "interval_id": "L0.1.0",
+        "state_kind": "child",
+        "role": "high3202 highest-Work K1-AM fixed interval",
+        "input_path": "reference/hard_stress/V20_M3/high_imbalance_seed3202.txt",
+        "input_sha256": "902f4c46fa076f3e24b537737c5d58ffe833e6de21e900a42bb8846d3f76db50"
+      },
+      {
+        "state_id": "C5",
+        "instance": "moderate_seed3302",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "moderate3302 highest-Work K1-AM fixed interval",
+        "input_path": "reference/hard_stress/V20_M3/moderate_seed3302.txt",
+        "input_sha256": "0b329df7711155131b33dfd14cfee8e85a17f60cc003863dbe004eb085c5f77e"
+      },
+      {
+        "state_id": "C6",
+        "instance": "round39_small_hard_V10_M1_Q30_slot02_seed1721447042",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "additional confirmation K1 root V10 M1 Q30",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V10_M1_Q30_slot02_seed1721447042.txt",
+        "input_sha256": "065d0f472f63fb8fe2f6e82c0834e9622db12c64af879f96bd576660c39272c9"
+      },
+      {
+        "state_id": "C7",
+        "instance": "round39_small_hard_V12_M1_Q20_slot05_seed180890838",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "additional confirmation K1 root V12 M1 Q20",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M1_Q20_slot05_seed180890838.txt",
+        "input_sha256": "397a0b3d7ac964f3f24356e64ba9b75b4cfa04febcbd869a1195bc26166f5feb"
+      },
+      {
+        "state_id": "C8",
+        "instance": "round39_small_medium_V10_M1_Q20_slot04_seed1035775879",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "additional confirmation K1 root V10 M1 Q20",
+        "input_path": "reference/qualification_round39/small-medium/round39_small_medium_V10_M1_Q20_slot04_seed1035775879.txt",
+        "input_sha256": "57b3218f569c53d905efec2feada1bbfa870d7a689cf65c728ece40d8a99c898"
+      },
+      {
+        "state_id": "C9",
+        "instance": "round39_small_medium_V8_M3_Q30_slot03_seed1177285734",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "additional confirmation K1 root V8 M3 Q30",
+        "input_path": "reference/qualification_round39/small-medium/round39_small_medium_V8_M3_Q30_slot03_seed1177285734.txt",
+        "input_sha256": "fcbe294480dcacf0303cc2dc12c948335d8d8c8f4f875de2feb58ae21ed83bbb"
+      }
+    ],
+    "cap_seconds": 1200
+  },
+  "extension": {
+    "states": [
+      {
+        "state_id": "D1",
+        "instance": "round39_small_medium_V12_M3_Q30_slot08_seed1343324363",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "retain historically preferable; severe fragmentation guard",
+        "input_path": "reference/qualification_round39/small-medium/round39_small_medium_V12_M3_Q30_slot08_seed1343324363.txt",
+        "input_sha256": "29e0ca2c95ec2e061aa1cc524aaf6a41bf6c4a34355dca86df6966aa8a29b6b4"
+      },
+      {
+        "state_id": "D2",
+        "instance": "round39_small_hard_V10_M3_Q20_slot04_seed1145042375",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "complete parent is already easy; harmful-split negative control",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V10_M3_Q20_slot04_seed1145042375.txt",
+        "input_sha256": "7c4b46a1932e53e6ae193d01085bcc226236ffdc01c03a27bdbb6ebb483455a8"
+      },
+      {
+        "state_id": "D3",
+        "instance": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "strong-control difficult parent",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+        "input_sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823"
+      },
+      {
+        "state_id": "D4",
+        "instance": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+        "interval_id": "L0.0",
+        "state_kind": "child",
+        "role": "strong-control exact midpoint left child",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+        "input_sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823"
+      },
+      {
+        "state_id": "D5",
+        "instance": "round39_small_hard_V12_M3_Q30_slot08_seed1288546114",
+        "interval_id": "L0.1",
+        "state_kind": "child",
+        "role": "strong-control exact midpoint right child",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q30_slot08_seed1288546114.txt",
+        "input_sha256": "7ee8a95ca3043f83b2e8c6b3663f8aa212678043d0c98b0153efbeb834d48823"
+      },
+      {
+        "state_id": "D6",
+        "instance": "round39_small_hard_V12_M2_Q20_slot06_seed258908503",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "V12 M2 historically expensive parent",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M2_Q20_slot06_seed258908503.txt",
+        "input_sha256": "efb62df9be5433dfb5d2def59ee52399bfe10fb2bcc652954892def33e38b2fd"
+      },
+      {
+        "state_id": "D7",
+        "instance": "round39_small_hard_V12_M2_Q20_slot06_seed258908503",
+        "interval_id": "L0.0",
+        "state_kind": "child",
+        "role": "V12 M2 exact midpoint left child",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M2_Q20_slot06_seed258908503.txt",
+        "input_sha256": "efb62df9be5433dfb5d2def59ee52399bfe10fb2bcc652954892def33e38b2fd"
+      },
+      {
+        "state_id": "D8",
+        "instance": "round39_small_hard_V12_M2_Q20_slot06_seed258908503",
+        "interval_id": "L0.1",
+        "state_kind": "child",
+        "role": "V12 M2 exact midpoint right child",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M2_Q20_slot06_seed258908503.txt",
+        "input_sha256": "efb62df9be5433dfb5d2def59ee52399bfe10fb2bcc652954892def33e38b2fd"
+      },
+      {
+        "state_id": "D9",
+        "instance": "tight_T_seed3102",
+        "interval_id": "L0.0",
+        "state_kind": "parent",
+        "role": "tight3102 matched difficult parent",
+        "input_path": "reference/hard_stress/V20_M3/tight_T_seed3102.txt",
+        "input_sha256": "40689df814199ae10f66c5bbfe492fcafdbbabc1a221c6724e939d02758a9f14"
+      },
+      {
+        "state_id": "D10",
+        "instance": "tight_T_seed3102",
+        "interval_id": "L0.0.0",
+        "state_kind": "child",
+        "role": "tight3102 exact midpoint left child",
+        "input_path": "reference/hard_stress/V20_M3/tight_T_seed3102.txt",
+        "input_sha256": "40689df814199ae10f66c5bbfe492fcafdbbabc1a221c6724e939d02758a9f14"
+      },
+      {
+        "state_id": "D11",
+        "instance": "tight_T_seed3102",
+        "interval_id": "L0.0.1",
+        "state_kind": "child",
+        "role": "tight3102 exact midpoint right child",
+        "input_path": "reference/hard_stress/V20_M3/tight_T_seed3102.txt",
+        "input_sha256": "40689df814199ae10f66c5bbfe492fcafdbbabc1a221c6724e939d02758a9f14"
+      },
+      {
+        "state_id": "D12",
+        "instance": "round39_small_hard_V12_M3_Q20_slot07_seed621538683",
+        "interval_id": "L0",
+        "state_kind": "parent",
+        "role": "numerical-endpoint parent",
+        "input_path": "reference/qualification_round39/small-hard/round39_small_hard_V12_M3_Q20_slot07_seed621538683.txt",
+        "input_sha256": "963a8887d9c69a19824a0c250de4099a68b8c0e17288196b25cc46d74eb890b1"
+      },
+      {
+        "state_id": "D13",
+        "instance": "high_imbalance_seed3201",
+        "interval_id": "L0.1.0",
+        "state_kind": "child",
+        "role": "high-imbalance difficult K1 interval",
+        "input_path": "reference/hard_stress/V20_M3/high_imbalance_seed3201.txt",
+        "input_sha256": "ce60fd4e74ad23174be2d4a08ca6e52c0043cee22f3c9b17153b9e8bbcfdbe42"
+      },
+      {
+        "state_id": "D14",
+        "instance": "moderate_seed3301",
+        "interval_id": "L0.0",
+        "state_kind": "child",
+        "role": "moderate3301 difficult K1 interval",
+        "input_path": "reference/hard_stress/V20_M3/moderate_seed3301.txt",
+        "input_sha256": "83daeb902d8d68a0e08a84d190b43647183b146daf81c31e99be07c10fc6242a"
+      },
+      {
+        "instance_id": "round54_generalization_high_imbalance_3600_V20_M2_Q20_seed1146056210",
+        "role": "V20 extension",
+        "input_path": "reference/round54_generalization/V20_M2_Q20/round54_generalization_high_imbalance_3600_V20_M2_Q20_seed1146056210.txt",
+        "input_sha256": "1306685eac808af3c96e7121f5c547a186d285f68e4637cbad42965b726e9f49",
+        "process_cap_seconds": 1800
+      },
+      {
+        "instance_id": "round54_generalization_moderate_3600_V20_M2_Q30_seed1642261739",
+        "role": "V20 extension",
+        "input_path": "reference/round54_generalization/V20_M2_Q30/round54_generalization_moderate_3600_V20_M2_Q30_seed1642261739.txt",
+        "input_sha256": "404a33c7b72f452c9e17cb69474ee1faad31c5df45969baf64b4693a2ac669b4",
+        "process_cap_seconds": 1800
+      },
+      {
+        "instance_id": "round54_generalization_moderate_3600_V50_M2_Q20_seed1123418787",
+        "role": "V50 extension",
+        "input_path": "reference/round54_generalization/V50_M2_Q20/round54_generalization_moderate_3600_V50_M2_Q20_seed1123418787.txt",
+        "input_sha256": "a973bc08313af2792bc3a8d8e2f40c9e162fda44a931e98344768f7bd1e70f7e",
+        "process_cap_seconds": 1800
+      },
+      {
+        "instance_id": "round54_generalization_tight_T_2400_V50_M2_Q30_seed554739910",
+        "role": "V50 extension",
+        "input_path": "reference/round54_generalization/V50_M2_Q30/round54_generalization_tight_T_2400_V50_M2_Q30_seed554739910.txt",
+        "input_sha256": "45102146e7c2d3e5c9022f3c8aa899a04b9b7a9799a73d7c3ffbd98c91f86879",
+        "process_cap_seconds": 1800
+      }
+    ],
+    "cap_seconds": 1800
+  },
+  "source_or_policy_change_after_opening": false,
+  "advancement_gate": [
+    "zero false certificates",
+    "no lost F0 certificate",
+    "zero severe",
+    "exact-row shifted Work GM<=0.95 or certificate gain with nonworse Work/GI",
+    "capped GI nonworse",
+    "two roles",
+    "acceptable V20/V50 size/memory",
+    "no post-development change"
+  ]
+}

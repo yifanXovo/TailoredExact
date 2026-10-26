@@ -1,0 +1,48 @@
+{
+  "roles": [
+    {
+      "id": "R98-C3",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        20,
+        25,
+        30,
+        35
+      ],
+      "geometry": "separated_islands",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "J-SUBMIT"
+      ],
+      "input_path": "reference/round98_confirmation/C3.txt",
+      "instance_path": "reference/round98_confirmation/C3.txt",
+      "input_sha256": "defa0feb33841eca3d1079d9e7a6908a84b8ddecf5ffb308fdadf0037d491ec3",
+      "scenario_id": "round98-state-service-confirmation-v1-C3",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 941,
+      "total_target": 1012,
+      "zero_excluded_by_stock_shortage": true,
+      "design_isolated_in_R102": true,
+      "historical_role_not_globally_unseen": true,
+      "selection": "The two retained larger roles C3/N3 in the prereferenced old input families; no outcomes/LPs inspected or reseed.",
+      "metadata_source": "results/unified_exact_round98/confirmation_protocol01.json",
+      "metadata_sha256": "a689b6c5cbb4acd0bfc47ce3cb315d4cd8beaef9b4089131dcbdb4228ef143aa",
+      "question": "Does the unchanged uniform original-service component generalize across new geography/heterogeneous capacities while preserving the P benchmark and certificate capability?"
+    }
+  ],
+  "phase": "service confirmation",
+  "reference_billing": "one_finite_batch",
+  "maximum_optimize_calls_per_arm": 32,
+  "planned_once": true,
+  "uniform_candidate": "exact same frozen root two-direction single-car/fleet catalog, max2 selected, no parameter changes",
+  "questions": "Does the unchanged uniform original-service component generalize across new geography/heterogeneous capacities while preserving the P benchmark and certificate capability?",
+  "stage_admission": "Qualified full-development/isolation increment, complete actual-row validation and independent mathematical admission",
+  "no_fresh_extension_or_checkpoint_stitching": true
+}

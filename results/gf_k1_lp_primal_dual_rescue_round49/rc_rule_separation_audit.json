@@ -1,0 +1,152 @@
+{
+  "all_mandatory_profiles_valid": true,
+  "attempted_rules": [
+    {
+      "H3_secondary_retain": false,
+      "actions": {
+        "B1": "retain",
+        "B2": "retain",
+        "B3": "split",
+        "B4": "split",
+        "H1": "split",
+        "H2": "retain",
+        "H3": "split",
+        "T1": "split",
+        "U1": "retain"
+      },
+      "checks": {
+        "B1_split": false,
+        "B2_or_U1_split": false,
+        "B3_split_preserved": true,
+        "B4_split_preserved": true,
+        "H1_retain": false,
+        "H2_retain": true,
+        "T1_split": true,
+        "all_mandatory_profiles_valid": true,
+        "no_new_adjustable_parameter": true
+      },
+      "exact_separation_enabled": false,
+      "mandatory_beneficial_errors": 2,
+      "mandatory_harmful_errors": 1,
+      "minimum_rescue_exact_domain_count_margin": 2.5,
+      "primary_gate_passed": false,
+      "rescue_count": 3,
+      "rule": "D-RCD",
+      "summary": "D"
+    },
+    {
+      "H3_secondary_retain": false,
+      "actions": {
+        "B1": "retain",
+        "B2": "retain",
+        "B3": "split",
+        "B4": "split",
+        "H1": "split",
+        "H2": "retain",
+        "H3": "split",
+        "T1": "split",
+        "U1": "retain"
+      },
+      "checks": {
+        "B1_split": false,
+        "B2_or_U1_split": false,
+        "B3_split_preserved": true,
+        "B4_split_preserved": true,
+        "H1_retain": false,
+        "H2_retain": true,
+        "T1_split": true,
+        "all_mandatory_profiles_valid": true,
+        "no_new_adjustable_parameter": true
+      },
+      "exact_separation_enabled": true,
+      "mandatory_beneficial_errors": 2,
+      "mandatory_harmful_errors": 1,
+      "minimum_rescue_exact_domain_count_margin": 2.5,
+      "primary_gate_passed": false,
+      "rescue_count": 3,
+      "rule": "D-RCDS",
+      "summary": "D"
+    },
+    {
+      "H3_secondary_retain": false,
+      "actions": {
+        "B1": "retain",
+        "B2": "retain",
+        "B3": "split",
+        "B4": "split",
+        "H1": "split",
+        "H2": "retain",
+        "H3": "split",
+        "T1": "split",
+        "U1": "retain"
+      },
+      "checks": {
+        "B1_split": false,
+        "B2_or_U1_split": false,
+        "B3_split_preserved": true,
+        "B4_split_preserved": true,
+        "H1_retain": false,
+        "H2_retain": true,
+        "T1_split": true,
+        "all_mandatory_profiles_valid": true,
+        "no_new_adjustable_parameter": true
+      },
+      "exact_separation_enabled": false,
+      "mandatory_beneficial_errors": 2,
+      "mandatory_harmful_errors": 1,
+      "minimum_rescue_exact_domain_count_margin": 2.5,
+      "primary_gate_passed": false,
+      "rescue_count": 3,
+      "rule": "H-RCD",
+      "summary": "H"
+    },
+    {
+      "H3_secondary_retain": false,
+      "actions": {
+        "B1": "retain",
+        "B2": "retain",
+        "B3": "split",
+        "B4": "split",
+        "H1": "split",
+        "H2": "retain",
+        "H3": "split",
+        "T1": "split",
+        "U1": "retain"
+      },
+      "checks": {
+        "B1_split": false,
+        "B2_or_U1_split": false,
+        "B3_split_preserved": true,
+        "B4_split_preserved": true,
+        "H1_retain": false,
+        "H2_retain": true,
+        "T1_split": true,
+        "all_mandatory_profiles_valid": true,
+        "no_new_adjustable_parameter": true
+      },
+      "exact_separation_enabled": true,
+      "mandatory_beneficial_errors": 2,
+      "mandatory_harmful_errors": 1,
+      "minimum_rescue_exact_domain_count_margin": 2.5,
+      "primary_gate_passed": false,
+      "rescue_count": 3,
+      "rule": "H-RCDS",
+      "summary": "H"
+    }
+  ],
+  "new_adjustable_parameter_count": 0,
+  "offline_iterations_used": 2,
+  "passing_rules": [],
+  "primary_offline_gate_passed": false,
+  "ranked_rules": [
+    "D-RCD",
+    "H-RCD",
+    "D-RCDS",
+    "H-RCDS"
+  ],
+  "schema": "round49-rc-rule-separation-audit-v1",
+  "selected_rules": [
+    "D-RCD"
+  ],
+  "structural_classification": "rc_domain_partial_separation"
+}

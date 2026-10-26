@@ -1,0 +1,42 @@
+{
+  "decision": "ACCEPT_ADAPTER_FINITE_ONLY",
+  "checks": [
+    "historical P15/P17 tuple adapters have no current authority",
+    "new resource ceilings reserve exact57/88200 without early-stop credit",
+    "reject excess qualification starts",
+    "reject excess qualification seconds",
+    "reject excess total starts",
+    "reject excess total seconds",
+    "original exact certified time materiality unchanged",
+    "bounded times preserve null exact clocks and invariant entire rectangle",
+    "interval crossing material threshold stays UNEVALUABLE"
+  ],
+  "reserve": {
+    "paid_starts": 13,
+    "paid_outer_seconds": 650.0,
+    "qualification_starts": 13,
+    "qualification_outer_seconds": 650.0,
+    "remaining_formal_starts": 57,
+    "remaining_nominal_seconds": 88200,
+    "remaining_overhead_seconds": 1800.0,
+    "max_starts": 96,
+    "max_outer_seconds": 110000,
+    "unknown_early_stop_savings_credited": false,
+    "nested_native_seconds_added": false
+  },
+  "inherited_module_bindings": {
+    "results/unified_exact_round109/review/round109_independent_parser.py": "ecfb894faa24bc8c5889a0466051f5cc709cfa2969c3ca6529ab826c237acb3a",
+    "results/unified_exact_round109/review/round109_independent_kernel.py": "3bb8f84f4949ca59cc8720a4acd04d568a41f9eac1382f26138066d5c49f6287",
+    "results/unified_exact_round109/review/round109_independent_decision.py": "b518597b8ccaf100607e4e6738688be9032957039396e5bb23a3f0ebe817a926",
+    "results/unified_exact_round109/review/round109_independent_seed_scope.py": "847092a0354fb69ad6151dbe45e9d4c175ea39687c597a1fab8bae6ed5adf8b9"
+  },
+  "read_bindings": {
+    "results/unified_exact_round109/review/round109_independent_parser.py": "ecfb894faa24bc8c5889a0466051f5cc709cfa2969c3ca6529ab826c237acb3a",
+    "results/unified_exact_round109/review/round109_independent_kernel.py": "3bb8f84f4949ca59cc8720a4acd04d568a41f9eac1382f26138066d5c49f6287",
+    "results/unified_exact_round109/review/round109_independent_decision.py": "b518597b8ccaf100607e4e6738688be9032957039396e5bb23a3f0ebe817a926",
+    "results/unified_exact_round109/review/round109_independent_seed_scope.py": "847092a0354fb69ad6151dbe45e9d4c175ea39687c597a1fab8bae6ed5adf8b9"
+  },
+  "independent_performance_admission_signed": false,
+  "Optimize": 0,
+  "native_environment": 0
+}

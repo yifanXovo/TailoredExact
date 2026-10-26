@@ -1,0 +1,13 @@
+{
+  "branch": "codex/round84-ensc-long-protection-replication",
+  "target_commit_short": "8f7ed3eee",
+  "command": "git -c http.version=HTTP/1.1 push -u origin codex/round84-ensc-long-protection-replication",
+  "exec_session_id": 80994,
+  "exit_code": 1,
+  "reported_connection_timeout_ms": 21069,
+  "complete_wall_seconds": null,
+  "complete_wall_scope": "Not independently timed; the reported connection duration is not substituted for full process cost.",
+  "output": "error: RPC failed; curl 28 Failed to connect to github.com port 443 after 21069 ms: Could not connect to server\nsend-pack: unexpected disconnect while reading sideband packet\nfatal: the remote end hung up unexpectedly\nEverything up-to-date\n",
+  "native_experiments_repeated": 0,
+  "scope": "Preliminary branch preservation only; stage remains running and no R84 draft PR exists yet. Remote ref requires independent verification."
+}

@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-10-23T07:13:16.226401+00:00",
+  "kind": "cleanup",
+  "command": [
+    "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+    "-NoLogo",
+    "-NoProfile",
+    "-NonInteractive",
+    "-File",
+    "scripts/round131_cleanup.ps1"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round131",
+  "budget_before": {
+    "paid_outer_seconds": 27294.576201499673,
+    "remaining_outer_seconds": 15905.423798500327,
+    "unclosed": [],
+    "by_kind": {
+      "archive": 527.0019980000798,
+      "documents": 26.309243299881928,
+      "formal": 22912.06342049979,
+      "postprocess": 37.3092428999953,
+      "preparation": 5.454804999870248,
+      "qualification": 3.059039399959147,
+      "recovery": 1759.5588747999864,
+      "release": 44.264942400041036,
+      "review": 1079.5546352000674
+    },
+    "nested_H_LP_MIP_seconds_added": false
+  },
+  "reservation": 0
+}

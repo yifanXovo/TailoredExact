@@ -1,0 +1,15 @@
+{
+  "inherited_batch_sha256": "8d819b6d94147736e3f1f5fc7e98d79922eb17a8d1e237c782b7fe048a14653d",
+  "queue_sha256": "e2138315d5df0aec16d1f5df5f49eb6003965f763339be71e82cb611e9497f02",
+  "vector_checker_sha256": "ff505629a85dea69b9f2eb4eb590a42ab23ec492a75a728071b6123dca65a575",
+  "previous_queue_identity_sha256": "625e3e41115db423043af89d43e69c2c259ddf3e49712769361137890141f008",
+  "previous_queue_events_sha256": "fdb399fec41006903e7f4f0c62342d79492df99723740e454e4d6b9df52f82dc",
+  "completed_prefix": 2,
+  "new_launch_numbers": [
+    3,
+    4
+  ],
+  "maximum_new_starts": 2,
+  "maximum_new_process_seconds": 7200,
+  "policy": "Status I/O repair only. Audit completed arm2; run only original never-started arms3/4 serially; stop on failure, no retry/extension."
+}

@@ -1,0 +1,27 @@
+{
+  "baseline_v0_algorithm_changed": false,
+  "branching_candidate_evidence_invalidated": true,
+  "candidate_menu_changed": false,
+  "canonical_model_fingerprint_changed": false,
+  "corrected_audit_path": "results/gf_k1_interval_mip_vnext_round50/fixed_interval_semantic_registry_audit.csv",
+  "corrected_audit_sha256": "492b587a784d2b40e078487a56093cdf051ccd70c516ef0902c405f5ebe7f248",
+  "corrected_state_count": 23,
+  "cutoff_changed": false,
+  "defect": "canonical final-inventory variables use Y_* but the Round 50 classifier recognized only y_*",
+  "invalidated_files": {
+    "results/gf_k1_interval_mip_vnext_round50/branching_candidate_results.csv": "8c2f54dc2b0f0756008b3381686b88dfc1ce3fe2b62bc78ed369c04652cbb447",
+    "results/gf_k1_interval_mip_vnext_round50/branching_iteration_decision.json": "5592dd2e956e826359e90029e4ac894fedf98cf71b482982b8a46fa51bfc3fb5",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_core_b1_120s.csv": "ec23ec60af0f9bc219eec2aff1dd4a202db74394f5c4f26e5f355e01c2da168c",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_core_b2_120s.csv": "5315e6f897733ee61e7bffc3c88e764b4689d2d63405b1753372899e4c271a74",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_core_b3_120s.csv": "5c8723bb9561128432fbb02e7415b8f77caa6cfaf9a58a2558a094a80dd166ad",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_core_v0_120s.csv": "40d5b5b5c997011760e47703c73da33dc81fb9c47e7db3aef7d7299e89fbf9b1",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_qualification_b1_300s.csv": "d8126266775707f367156f594644ebb3158e4b8516027a25b259e4903839c064",
+    "results/gf_k1_interval_mip_vnext_round50/iteration1_qualification_v0_300s.csv": "c174f1a3f0a031b6c94e9c7b2e5165140a75137a146dad9cb2063b44e7042b51"
+  },
+  "mathematical_model_changed": false,
+  "rerun_required": true,
+  "schema": "round50-semantic-registry-correction-v1",
+  "scope": "branch-priority tier assignment and semantic mapping labels only",
+  "state_identity_changed": false,
+  "substitution_performed": false
+}

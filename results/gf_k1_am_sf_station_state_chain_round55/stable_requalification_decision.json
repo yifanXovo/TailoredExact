@@ -1,0 +1,18 @@
+{
+  "schema": "round55-stable-requalification-decision-v1",
+  "decision": "pass_corrected_baseline",
+  "baseline_changed": true,
+  "reason": "The stale incumbent-epoch semantic implementation defect can change solver trajectory; all mandatory baseline rows were rerun from the corrected official executable.",
+  "semantic_sentinels": 11,
+  "semantic_sentinels_passed": 11,
+  "D1_D14_rows": 14,
+  "D1_D14_engineering_valid": 14,
+  "D1_D14_certificates": 10,
+  "false_certificates": 0,
+  "first_class_controller_equivalent": true,
+  "legacy_round_c6_fields_control_paper_preset": false,
+  "historical_pre_fix_performance_evidence_valid_for_comparison": false,
+  "next_stage_open": true,
+  "exact_ebrp_sha256": "8abb8e0a149ff04712cbc9d0031c068ffa9550dd68af987184f4a73110ae2c8e",
+  "fixed_interval_driver_sha256": "23df13014018d9dd83260c2f4a0a08fa1bf8d7763a9c692938b97ac381fb2a90"
+}

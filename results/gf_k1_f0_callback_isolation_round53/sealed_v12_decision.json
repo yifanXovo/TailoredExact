@@ -1,0 +1,34 @@
+{
+  "aggregate_gi_ratio_candidate_over_v0": 0.336209667886502,
+  "benefiting_MQ_configurations": [
+    "M2-Q20",
+    "M2-Q30",
+    "M3-Q20",
+    "M3-Q30"
+  ],
+  "candidate_certificate_gains": 1,
+  "candidate_certificate_losses": 0,
+  "classification": "sealed_v12_supports_candidate",
+  "gate_pass": true,
+  "gates": {
+    "aggregate_gi_nonworse": true,
+    "benefit_spans_at_least_two_MQ_configurations": true,
+    "candidate_certificate_count_at_least_v0": true,
+    "major_historical_repair_preserved": true,
+    "performance_gate": true,
+    "zero_candidate_certificate_losses": true,
+    "zero_correctness_failures": true,
+    "zero_false_certificates": true,
+    "zero_severe_regressions_vs_pgrb": true,
+    "zero_severe_regressions_vs_v0": true
+  },
+  "k1_candidate_certificates": 12,
+  "k1_v0_certificates": 11,
+  "pgrb_certificates": 0,
+  "physical_rows_3600": 36,
+  "physical_rows_7200_extension": 0,
+  "schema": "round53-sealed-v12-decision-v1",
+  "severe_regressions_vs_pgrb": 0,
+  "severe_regressions_vs_v0": 0,
+  "shifted_work_geometric_mean_ratio_candidate_over_v0": 0.26284227983744607
+}

@@ -1,0 +1,26 @@
+{
+  "decision": "ACCEPT",
+  "checks": [
+    "exact Seed1 actual native settings independently read from adapter AST",
+    "projection uses deepcopy and preserves original committed Seed1 bytes/objects",
+    "only Seed metadata changes; every other field identical",
+    "incorrect actual Seed rejected before legacy projection",
+    "incorrect actual Threads rejected before legacy projection",
+    "incorrect actual MIPGap rejected before legacy projection",
+    "incorrect actual FeasibilityTol rejected before legacy projection",
+    "actual Seed1 requested/effective/read return codes remain exposed and original result unchanged",
+    "incorrect actual gurobi_seed_effective rejected before old parameter validator",
+    "incorrect actual gurobi_seed_requested rejected before old parameter validator",
+    "incorrect actual gurobi_seed_get_return_code rejected before old parameter validator",
+    "selected projection/readback functions contain no write API"
+  ],
+  "error": null,
+  "adapter_SHA": "9b397fbb47085d44b4f7f8057f71775416754a478441fdc080dcd02f5a33d358",
+  "source_SHA": "a6ef3eba88b2d9ef6adfb7c01ed8190987e8121c4df518e47d0ac8a9d7cae5fb",
+  "elapsed_engineering_seconds": 0.0026835999451577663,
+  "Optimize": 0,
+  "LP_solve": 0,
+  "native_environment": 0,
+  "production_edits": 0,
+  "scope": "pure metadata projection only; actual CLI Seed settings are separately raw audited"
+}

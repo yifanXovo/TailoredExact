@@ -1,0 +1,174 @@
+{
+  "core_roles": [
+    {
+      "id": "F2",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds": 3600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 1200,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "MB-D0",
+        "MB-D1"
+      ],
+      "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "M": 2,
+      "V": 20,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "panel_kind": "core",
+      "gurobi_seed": 0
+    },
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "MB-D1",
+        "MB-D0",
+        "M-B",
+        "P-GRB"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true,
+      "panel_kind": "core",
+      "gurobi_seed": 0
+    }
+  ],
+  "conditional_role": {
+    "number": 1,
+    "id": "N40-R1-S",
+    "V": 40,
+    "M": 4,
+    "geometry": "regional",
+    "replicate": 1,
+    "inventory": "shortage",
+    "Q_vector": [
+      20,
+      25,
+      35,
+      40
+    ],
+    "Q_class": "X",
+    "T_seconds": 10800,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "gurobi_seed": 0,
+    "cap_seconds": 5400,
+    "method_order": [
+      "M-B",
+      "MB-D1",
+      "P-GRB",
+      "MB-D0"
+    ],
+    "panel_kind": "conditional_followup",
+    "input_path": "reference/round118_positive/N40-R1-S.txt",
+    "instance_path": "reference/round118_positive/N40-R1-S.txt",
+    "input_sha256": "cdbbadbb6fd4e1742cb063001003686e55ba2b5045f584b84d2fd238ba616c7a",
+    "input_bytes": 2384,
+    "selection_path": "reference/round118_positive/N40-R1-S_selection.json",
+    "landscape_path": "reference/round118_positive/N40-R1-S_landscape.json",
+    "source_response_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+    "source_recipe_SHA": "efcc443d5786e27da1b70a664f7413b3dbe3bd4f33e8dd7fb5f7f0a19f84a067",
+    "total_initial": 239,
+    "total_target": 279,
+    "role_identity": "unmeasured_after_once_only_generation",
+    "scenario_id": "N40-R1-S"
+  },
+  "qualification_roles": [
+    {
+      "id": "H100",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        13,
+        21
+      ],
+      "T_seconds": 5100,
+      "cap_seconds": 120,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B",
+        "P-S",
+        "MB-D0",
+        "MB-D1"
+      ],
+      "input_path": "reference/round100_confirmation/H100.txt",
+      "instance_path": "reference/round100_confirmation/H100.txt",
+      "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "qualification",
+      "scenario_id": "H100"
+    },
+    {
+      "id": "MICRO-CHAIN",
+      "scenario_id": "round120-explicit-legal-empty-start",
+      "V": 8,
+      "M": 1,
+      "Q_vector": [
+        2
+      ],
+      "T_seconds": 1000,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "input_path": "reference/round119_qualification/micro_chain.txt",
+      "instance_path": "reference/round119_qualification/micro_chain.txt",
+      "input_sha256": "2cef25f4607999108084dac7462576f2d7999e8d86c3904de759584edb15c2ee",
+      "cap_seconds": 300,
+      "method_order": [
+        "MB-D1"
+      ],
+      "panel_kind": "qualification"
+    }
+  ],
+  "enum_fixture": {
+    "input_path": "reference/round119_qualification/micro_enumeration.txt",
+    "input_SHA": "a4678eba39b3f18fb13f97511492b745edcca5b8f0991bc2e94cd10c7229df3f",
+    "V": 2,
+    "M": 1,
+    "Q_vector": [
+      1
+    ],
+    "T_seconds": 1000,
+    "id": "MICRO-ENUM",
+    "input_sha256": "a4678eba39b3f18fb13f97511492b745edcca5b8f0991bc2e94cd10c7229df3f",
+    "instance_path": "reference/round119_qualification/micro_enumeration.txt",
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15
+  },
+  "historical_fleets_cutoffs_bounds_removed": true,
+  "E50_not_authorized": true,
+  "independent_generalization_claim": false
+}

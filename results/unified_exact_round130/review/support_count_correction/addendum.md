@@ -1,0 +1,5 @@
+# Support-family count correction
+
+Independent final review 01 found that the frozen qualification helper's descriptive row-shape classifier counted cross-vehicle unique-service rows as two-station cover rows when there are two vehicles. The full duplicate-preserving model, objective, column order, types and bounds comparisons were already correct. No native arm, mathematical model, source algorithm, parameter, clock or certificate changes.
+
+The post-formal summary now uses the existing R129 classifier, which requires support variables to belong to one vehicle. The original qualification report and its hash are retained; the JSON addendum gives both original and corrected descriptive counts for its five pair-root fixtures. S12 shared/fallback pair-cover counts change from 12 to 0 (conditional counts stay 132). All formal B20/C20 pair-cover summaries lose 20 aliased unique-service rows; actual pair totals are 380. B30 totals remain 1305. The first failed review and author summaries are preserved here; a new independent review must recheck all 24 arms and 30 comparisons. The scoped/mixed scientific decision is unchanged.

@@ -1,0 +1,1022 @@
+{
+  "schema": "round98-compact-original-evidence-v1",
+  "campaign": "development02",
+  "number": 16,
+  "role": "D6",
+  "arm": "R2",
+  "panel": {
+    "id": "D6",
+    "scenario_id": "cb443_V30_compact_r1_shortage_M03_Q30_T18000",
+    "input_path": "reference/citibike443-regional-v1/instances/V30/cb443_V30_compact_r1_shortage_M03_Q30.txt",
+    "input_sha256": "070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+    "T_seconds": 18000,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "cap_seconds": 1800,
+    "method_order": [
+      "P-GRB",
+      "R2",
+      "ENS-C"
+    ],
+    "instance_path": "reference/citibike443-regional-v1/instances/V30/cb443_V30_compact_r1_shortage_M03_Q30.txt",
+    "V": 30,
+    "M": 3,
+    "Q_vector": [
+      30,
+      30,
+      30
+    ],
+    "historical_initial_witness": "results/unified_exact_round90/runner_lp_g_d6_tail/D6/raw/01_D6_ENS-C/external/initial_witness.json",
+    "historical_initial_witness_sha256": "a7c27db1ce4dd148a60703bab1749494d63b45a331ea4f407238a0afd7a39b36",
+    "diagnostic_cutoff": 0.15750980361456174,
+    "diagnostic_gamma_L": 0,
+    "diagnostic_gamma_U": 0.15750980361456174,
+    "reference": {
+      "optimizer_calls": 0,
+      "fingerprint": 974605734,
+      "canonical_sha256": "f3623b3c9991f707fa9739f498e0f01e379edfda287a135e0f5b62a57bb35941",
+      "columns": 4198,
+      "rows": 10561
+    }
+  },
+  "binary_sha256": "362afcd3273aedbd5ea38a5a1cde06b6381d48e5e129b291e142b73defdc547d",
+  "original_source_hashes": {
+    "launch.json": "b026ace8e4fad71375f1f1c0d59f2a5a445fc87e741b032eb85f770179257435",
+    "result.json": "d7d7bd0f39d973f1be32e83287f0f291870d25dc85b4bf5f6fcc3b74f950baf2",
+    "audit.json": "9758e2555d7adf34c7c15656539c48dd428ad7f26ede5ba50e9caabed2482c01",
+    "completion.json": "74169c38287a11d442f702ec79bdd88c3b37b726933393b7127b7776d21e63bf",
+    "observations.json": "1286890c1aad7e6865731529c3088f4c33a6de3e7276a38f3fcb79be0aec22a6"
+  },
+  "original_summary": {
+    "number": 16,
+    "id": "D6",
+    "arm": "R2",
+    "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2",
+    "completion": {
+      "schema": "round90-lp-g-g3-completion-v1",
+      "number": 16,
+      "id": "D6",
+      "arm": "R2",
+      "returncode": 0,
+      "process_wall_seconds": 1797.125,
+      "prelaunch_seconds": 0.23400000017136335,
+      "end_to_end_seconds": 1797.3590000001714,
+      "wrapper_wall_seconds": 1797.125,
+      "fully_observed_end_to_end_seconds": 1797.3590000001714,
+      "postexit_drain_and_restore_seconds": 0.0,
+      "process_cap_seconds": 1800,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "committed_events": 945,
+      "ended_unix": 1790807467.4000845
+    },
+    "audit_passed": true,
+    "endpoint": {
+      "U": 0.15750980361456174,
+      "L": 0.15367845268469776,
+      "gap": 0.0038313509298639747,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "round31_c6_external_gini_tree_time_limit"
+    },
+    "split_evidence": null,
+    "audit_error": null
+  },
+  "original_audit": {
+    "binary_sha256": "362afcd3273aedbd5ea38a5a1cde06b6381d48e5e129b291e142b73defdc547d",
+    "committed_events": 945,
+    "native_calls_started": 6,
+    "native_calls_returned": 6,
+    "physical_witnesses": 2,
+    "native_physical_witnesses": 1,
+    "scoped_bound_events": 930,
+    "global_native_bound_events": 930,
+    "UB": 0.15750980361456166,
+    "LB": 0.15367845268469776,
+    "gap": 0.0038313509298638915,
+    "physical_upper_available": true,
+    "lower_bound_source": "complete_domain_native_evidence",
+    "certificate": false,
+    "solver_finalization_certificate": false,
+    "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+    "witnesses": [
+      {
+        "F": 0.15750980361456166,
+        "G": 0.025799421037054054,
+        "P": 0.878069217183384,
+        "stations": 30,
+        "pickup": 121,
+        "drop": 121,
+        "maximum_duration": 9583.412941038197,
+        "original_T_feasible": true,
+        "source": "same_run_verified_startup",
+        "call": 0,
+        "sequence": 2,
+        "available": 29.125
+      },
+      {
+        "F": 0.15750980361456166,
+        "G": 0.025799421037054054,
+        "P": 0.878069217183384,
+        "stations": 30,
+        "pickup": 121,
+        "drop": 121,
+        "maximum_duration": 9583.412941038197,
+        "original_T_feasible": true,
+        "source": "native_MIPSOL_verified_original_routes",
+        "call": 6,
+        "sequence": 14,
+        "available": 41.76599999982864
+      }
+    ],
+    "normal_result_certificate": false,
+    "final_only_physical_witness": false,
+    "final_physical_verification": {
+      "F": 0.15750980361456166,
+      "G": 0.025799421037054054,
+      "P": 0.878069217183384,
+      "stations": 30,
+      "pickup": 121,
+      "drop": 121,
+      "maximum_duration": 9583.412941038197,
+      "original_T_feasible": true
+    },
+    "endpoint": {
+      "U": 0.15750980361456174,
+      "L": 0.15367845268469776,
+      "gap": 0.0038313509298639747,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "round31_c6_external_gini_tree_time_limit"
+    },
+    "neutral_exchange": {
+      "passed": true,
+      "initial": {
+        "F": 0.1600272806044027,
+        "G": 0.02687658257234963,
+        "P": 0.8876713202136872,
+        "stations": 30,
+        "pickup": 119,
+        "drop": 119,
+        "maximum_duration": 17989.946434173762,
+        "original_T_feasible": true
+      },
+      "final": {
+        "F": 0.15750980361456166,
+        "G": 0.025799421037054054,
+        "P": 0.878069217183384,
+        "stations": 30,
+        "pickup": 121,
+        "drop": 121,
+        "maximum_duration": 9583.412941038197,
+        "original_T_feasible": true
+      },
+      "result": {
+        "F": 0.15750980361456174,
+        "neutral": 4,
+        "relocations": 0,
+        "exchanges": 4,
+        "equal_net_pairs": 1161,
+        "insertions": 0,
+        "quantities": 4,
+        "exhausted": true,
+        "deadline": false,
+        "zero": false,
+        "verification_failed": false,
+        "optimizer_calls": 0
+      },
+      "transitions": [
+        {
+          "iteration": 0,
+          "closure": {
+            "initial_UB": 0.16002728060440277,
+            "final_UB": 0.16002728060440277,
+            "accepted": 0,
+            "counts": {
+              "insertions": 0,
+              "quantities": 0,
+              "singles": 0,
+              "pairs": 0,
+              "cross_vehicle": 0,
+              "sign_flips": 0,
+              "removed_stops": 0
+            },
+            "independently_checked_physical_witnesses": 2,
+            "returned_to_outer": true,
+            "insertion_placements": 0,
+            "insertion_quantities": 0,
+            "quantity_feasible": 2321,
+            "terminal_status": "joint_neighborhood_exhausted",
+            "trace_interval_seconds": 0.0032422000000025264,
+            "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+          },
+          "neutral_oracle": {
+            "balanced_blocks": 9,
+            "placements": 158,
+            "feasible": 36,
+            "improving": 22,
+            "exchange_pairs": 282,
+            "exchange_feasible": 88,
+            "exchange_improving": 85,
+            "best_key": [
+              1,
+              0,
+              1,
+              2,
+              2,
+              9,
+              17
+            ],
+            "best_potential": [
+              10782.74063647307,
+              10279.981185432775,
+              9278.75293335866
+            ],
+            "current_potential": [
+              17989.946434173762,
+              10279.981185432775,
+              2727.9672498475356
+            ]
+          }
+        },
+        {
+          "iteration": 1,
+          "closure": {
+            "initial_UB": 0.16002728060440277,
+            "final_UB": 0.15825090011289727,
+            "accepted": 3,
+            "counts": {
+              "insertions": 0,
+              "quantities": 3,
+              "singles": 0,
+              "pairs": 3,
+              "cross_vehicle": 0,
+              "sign_flips": 0,
+              "removed_stops": 0
+            },
+            "independently_checked_physical_witnesses": 5,
+            "returned_to_outer": true,
+            "insertion_placements": 0,
+            "insertion_quantities": 0,
+            "quantity_feasible": 9666,
+            "terminal_status": "joint_neighborhood_exhausted",
+            "trace_interval_seconds": 0.012938899999998199,
+            "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+          },
+          "neutral_oracle": {
+            "balanced_blocks": 4,
+            "placements": 88,
+            "feasible": 14,
+            "improving": 0,
+            "exchange_pairs": 227,
+            "exchange_feasible": 154,
+            "exchange_improving": 20,
+            "best_key": [
+              1,
+              0,
+              2,
+              4,
+              2,
+              5,
+              7
+            ],
+            "best_potential": [
+              10279.981185432775,
+              9583.412941038197,
+              9583.081486760264
+            ],
+            "current_potential": [
+              10902.74063647307,
+              10279.981185432775,
+              9518.75293335866
+            ]
+          }
+        },
+        {
+          "iteration": 2,
+          "closure": {
+            "initial_UB": 0.15825090011289727,
+            "final_UB": 0.15825090011289727,
+            "accepted": 0,
+            "counts": {
+              "insertions": 0,
+              "quantities": 0,
+              "singles": 0,
+              "pairs": 0,
+              "cross_vehicle": 0,
+              "sign_flips": 0,
+              "removed_stops": 0
+            },
+            "independently_checked_physical_witnesses": 2,
+            "returned_to_outer": true,
+            "insertion_placements": 0,
+            "insertion_quantities": 0,
+            "quantity_feasible": 2326,
+            "terminal_status": "joint_neighborhood_exhausted",
+            "trace_interval_seconds": 0.0031303999999998666,
+            "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+          },
+          "neutral_oracle": {
+            "balanced_blocks": 5,
+            "placements": 109,
+            "feasible": 32,
+            "improving": 0,
+            "exchange_pairs": 221,
+            "exchange_feasible": 145,
+            "exchange_improving": 11,
+            "best_key": [
+              1,
+              1,
+              6,
+              7,
+              2,
+              8,
+              9
+            ],
+            "best_potential": [
+              9583.412941038197,
+              9480.258351724604,
+              9475.473914046335
+            ],
+            "current_potential": [
+              10279.981185432775,
+              9583.412941038197,
+              9583.081486760264
+            ]
+          }
+        },
+        {
+          "iteration": 3,
+          "closure": {
+            "initial_UB": 0.15825090011289727,
+            "final_UB": 0.15750980361456174,
+            "accepted": 1,
+            "counts": {
+              "insertions": 0,
+              "quantities": 1,
+              "singles": 0,
+              "pairs": 1,
+              "cross_vehicle": 0,
+              "sign_flips": 0,
+              "removed_stops": 0
+            },
+            "independently_checked_physical_witnesses": 3,
+            "returned_to_outer": true,
+            "insertion_placements": 0,
+            "insertion_quantities": 0,
+            "quantity_feasible": 4674,
+            "terminal_status": "joint_neighborhood_exhausted",
+            "trace_interval_seconds": 0.006317400000000362,
+            "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+          },
+          "neutral_oracle": {
+            "balanced_blocks": 5,
+            "placements": 109,
+            "feasible": 24,
+            "improving": 0,
+            "exchange_pairs": 214,
+            "exchange_feasible": 144,
+            "exchange_improving": 4,
+            "best_key": [
+              1,
+              1,
+              4,
+              9,
+              2,
+              4,
+              10
+            ],
+            "best_potential": [
+              9583.412941038197,
+              9072.953239482094,
+              9053.078018255546
+            ],
+            "current_potential": [
+              9583.412941038197,
+              9475.473914046335,
+              9360.258351724604
+            ]
+          }
+        },
+        {
+          "iteration": 4,
+          "closure": {
+            "initial_UB": 0.15750980361456174,
+            "final_UB": 0.15750980361456174,
+            "accepted": 0,
+            "counts": {
+              "insertions": 0,
+              "quantities": 0,
+              "singles": 0,
+              "pairs": 0,
+              "cross_vehicle": 0,
+              "sign_flips": 0,
+              "removed_stops": 0
+            },
+            "independently_checked_physical_witnesses": 2,
+            "returned_to_outer": true,
+            "insertion_placements": 0,
+            "insertion_quantities": 0,
+            "quantity_feasible": 2337,
+            "terminal_status": "joint_neighborhood_exhausted",
+            "trace_interval_seconds": 0.003147099999999625,
+            "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+          },
+          "neutral_oracle": {
+            "balanced_blocks": 4,
+            "placements": 88,
+            "feasible": 7,
+            "improving": 0,
+            "exchange_pairs": 217,
+            "exchange_feasible": 143,
+            "exchange_improving": 0,
+            "best_key": null,
+            "best_potential": null,
+            "current_potential": [
+              9583.412941038197,
+              9072.953239482094,
+              9053.078018255546
+            ]
+          }
+        }
+      ],
+      "neutral_states": 4,
+      "strict_moves": 4,
+      "unique_recorded_route_states": 7,
+      "offline_seconds": 0.065285699442029,
+      "optimizer_calls": 0,
+      "scope": "Fixed-witness diagnosis; no complete performance claim"
+    },
+    "parameter_readback": {
+      "threads": {
+        "requested": 1,
+        "effective": 1,
+        "set_return_code": 0,
+        "get_return_code": 0
+      },
+      "seed": {
+        "requested": 0,
+        "effective": 0,
+        "set_return_code": 0,
+        "get_return_code": 0
+      },
+      "presolve": {
+        "requested": -1,
+        "effective": -1,
+        "set_return_code": 0,
+        "get_return_code": 0
+      },
+      "mip_gap": {
+        "requested": 0,
+        "effective": 0,
+        "set_return_code": 0,
+        "get_return_code": 0
+      },
+      "mip_gap_abs": {
+        "requested": 0,
+        "effective": 0,
+        "set_return_code": 0,
+        "get_return_code": 0
+      }
+    },
+    "native_scope_adapter": {
+      "schema": "round94-native-scope-adapter-v3",
+      "arm": "R2",
+      "native_calls": 6,
+      "lp_calls": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "mip_calls": [
+        6
+      ],
+      "global_bound_call_ids": [
+        6
+      ],
+      "ledger_sha256": "79f9664ac8165a1e57875870ede8d72460eaa358a2950a53c9f4610e94712c8d",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "all_flags_strictly_decoded": true
+    },
+    "passed": true,
+    "offline_audit_seconds": 0.10195720009505749
+  },
+  "exact_recovery": null,
+  "qualified_endpoint": {
+    "U": 0.15750980361456174,
+    "L": 0.15367845268469776,
+    "gap": 0.0038313509298639747,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "round31_c6_external_gini_tree_time_limit"
+  },
+  "models": [
+    {
+      "call": 1,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\models\\L0.lp",
+      "sha256": "b65747808307f69db570b142c7e1038b416d412c259e8df96638315c8400a9cd",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0,
+      "upper_g": 0.15750980361456174,
+      "cutoff": 0.15750980361456174,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 2,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\models\\L0.0.lp",
+      "sha256": "4eec24cc12f67da3261380b73aa4aa013cc1284cd4f9333176b844d81cc36662",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0,
+      "upper_g": 0.07875490180728087,
+      "cutoff": 0.15750980361456174,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 3,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\models\\L0.1.lp",
+      "sha256": "3fcf8b7acf2f83d4c9b71ca339b52e807b850efdc0c07cc5b3c646e236f13130",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0.07875490180728087,
+      "upper_g": 0.15750980361456174,
+      "cutoff": 0.15750980361456174,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 4,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\models\\L0.0.0.lp",
+      "sha256": "464e49c26374f0371d3df138b41340efae0d7382736ff0e7436b22641d906663",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0,
+      "upper_g": 0.039377450903640435,
+      "cutoff": 0.15750980361456174,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 5,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\models\\L0.0.1.lp",
+      "sha256": "4a0c8fc15ba7abbd8cc54f30f2628299bf723a546770d054340216bc68a3b802",
+      "full_original": 0,
+      "native_preconditions": 0,
+      "lower_g": 0.039377450903640435,
+      "upper_g": 0.07875490180728087,
+      "cutoff": 0.15750980361456174,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    },
+    {
+      "call": 6,
+      "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\models\\L0.0.lp",
+      "sha256": "4eec24cc12f67da3261380b73aa4aa013cc1284cd4f9333176b844d81cc36662",
+      "full_original": 0,
+      "native_preconditions": 1,
+      "lower_g": 0,
+      "upper_g": 0.07875490180728087,
+      "cutoff": 0.15750980361456174,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      }
+    }
+  ],
+  "optimizer_ledger": [
+    {
+      "leaf_id": "L0",
+      "solve_kind": "LP",
+      "native_status": "OPTIMAL",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "1766.6663991",
+      "solver_runtime": "0.42400002479553223",
+      "work": "1.2917738224467759",
+      "nodes": "0",
+      "simplex_iterations": "5259",
+      "barrier_iterations": "0",
+      "memory_gb": "0.071040490999999997",
+      "model_sha256": "b65747808307f69db570b142c7e1038b416d412c259e8df96638315c8400a9cd",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\native_logs\\L0_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.0",
+      "solve_kind": "LP",
+      "native_status": "OPTIMAL",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "1764.7760235999999",
+      "solver_runtime": "0.49799990653991699",
+      "work": "1.4202650451546395",
+      "nodes": "0",
+      "simplex_iterations": "5614",
+      "barrier_iterations": "0",
+      "memory_gb": "0.075991899000000002",
+      "model_sha256": "4eec24cc12f67da3261380b73aa4aa013cc1284cd4f9333176b844d81cc36662",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\native_logs\\L0.0_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.1",
+      "solve_kind": "LP",
+      "native_status": "INFEASIBLE",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "1762.7004245999999",
+      "solver_runtime": "1.320000171661377",
+      "work": "2.5500173638386681",
+      "nodes": "0",
+      "simplex_iterations": "4753",
+      "barrier_iterations": "0",
+      "memory_gb": "0.075991899000000002",
+      "model_sha256": "3fcf8b7acf2f83d4c9b71ca339b52e807b850efdc0c07cc5b3c646e236f13130",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\native_logs\\L0.1_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.0.0",
+      "solve_kind": "LP",
+      "native_status": "OPTIMAL",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "1759.8363448",
+      "solver_runtime": "1.0179998874664307",
+      "work": "2.8475168404430926",
+      "nodes": "0",
+      "simplex_iterations": "9890",
+      "barrier_iterations": "0",
+      "memory_gb": "0.075991901000000001",
+      "model_sha256": "464e49c26374f0371d3df138b41340efae0d7382736ff0e7436b22641d906663",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\native_logs\\L0.0.0_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.0.1",
+      "solve_kind": "LP",
+      "native_status": "OPTIMAL",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "1757.1930335",
+      "solver_runtime": "1.4309999942779541",
+      "work": "4.1632058705470012",
+      "nodes": "0",
+      "simplex_iterations": "13330",
+      "barrier_iterations": "0",
+      "memory_gb": "0.080981695000000006",
+      "model_sha256": "4a0c8fc15ba7abbd8cc54f30f2628299bf723a546770d054340216bc68a3b802",
+      "in_memory_model_reused": "0",
+      "integer_domain_restored": "1",
+      "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\native_logs\\L0.0.1_lp.gurobi.log"
+    },
+    {
+      "leaf_id": "L0.0",
+      "solve_kind": "MIP",
+      "native_status": "TIME_LIMIT",
+      "optimize_return_code": "0",
+      "global_deadline_remaining_at_launch": "1755.5341079",
+      "solver_runtime": "1755.3680000305176",
+      "work": "3909.2632731450203",
+      "nodes": "13594",
+      "simplex_iterations": "7667240",
+      "barrier_iterations": "0",
+      "memory_gb": "0.37199128999999997",
+      "model_sha256": "4eec24cc12f67da3261380b73aa4aa013cc1284cd4f9333176b844d81cc36662",
+      "in_memory_model_reused": "1",
+      "integer_domain_restored": "0",
+      "basis_reuse_status": "not_requested",
+      "native_log": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\16_D6_R2\\external\\native_logs\\L0.0_terminal_mip.gurobi.log"
+    }
+  ],
+  "physical_witness": {
+    "F": 0.15750980361456174,
+    "routes": [
+      {
+        "vehicle": 0,
+        "nodes": [
+          0,
+          16,
+          4,
+          15,
+          21,
+          28,
+          20,
+          11,
+          9,
+          23,
+          0
+        ],
+        "operations": [
+          {
+            "station": 16,
+            "pickup": 9,
+            "drop": 0
+          },
+          {
+            "station": 4,
+            "pickup": 9,
+            "drop": 0
+          },
+          {
+            "station": 15,
+            "pickup": 8,
+            "drop": 0
+          },
+          {
+            "station": 21,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 28,
+            "pickup": 5,
+            "drop": 0
+          },
+          {
+            "station": 20,
+            "pickup": 0,
+            "drop": 18
+          },
+          {
+            "station": 11,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 9,
+            "pickup": 11,
+            "drop": 0
+          },
+          {
+            "station": 23,
+            "pickup": 0,
+            "drop": 12
+          }
+        ]
+      },
+      {
+        "vehicle": 1,
+        "nodes": [
+          0,
+          18,
+          22,
+          7,
+          24,
+          6,
+          12,
+          3,
+          2,
+          17,
+          30,
+          13,
+          0
+        ],
+        "operations": [
+          {
+            "station": 18,
+            "pickup": 11,
+            "drop": 0
+          },
+          {
+            "station": 22,
+            "pickup": 0,
+            "drop": 5
+          },
+          {
+            "station": 7,
+            "pickup": 6,
+            "drop": 0
+          },
+          {
+            "station": 24,
+            "pickup": 8,
+            "drop": 0
+          },
+          {
+            "station": 6,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 12,
+            "pickup": 0,
+            "drop": 5
+          },
+          {
+            "station": 3,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 2,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 17,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 30,
+            "pickup": 0,
+            "drop": 9
+          },
+          {
+            "station": 13,
+            "pickup": 0,
+            "drop": 8
+          }
+        ]
+      },
+      {
+        "vehicle": 2,
+        "nodes": [
+          0,
+          10,
+          27,
+          14,
+          5,
+          1,
+          25,
+          19,
+          29,
+          26,
+          8,
+          0
+        ],
+        "operations": [
+          {
+            "station": 10,
+            "pickup": 10,
+            "drop": 0
+          },
+          {
+            "station": 27,
+            "pickup": 9,
+            "drop": 0
+          },
+          {
+            "station": 14,
+            "pickup": 6,
+            "drop": 0
+          },
+          {
+            "station": 5,
+            "pickup": 0,
+            "drop": 5
+          },
+          {
+            "station": 1,
+            "pickup": 0,
+            "drop": 6
+          },
+          {
+            "station": 25,
+            "pickup": 0,
+            "drop": 10
+          },
+          {
+            "station": 19,
+            "pickup": 8,
+            "drop": 0
+          },
+          {
+            "station": 29,
+            "pickup": 7,
+            "drop": 0
+          },
+          {
+            "station": 26,
+            "pickup": 0,
+            "drop": 11
+          },
+          {
+            "station": 8,
+            "pickup": 0,
+            "drop": 8
+          }
+        ]
+      }
+    ],
+    "inventory": [
+      50000,
+      9,
+      11,
+      9,
+      10,
+      7,
+      9,
+      8,
+      10,
+      15,
+      14,
+      9,
+      9,
+      13,
+      9,
+      10,
+      11,
+      9,
+      13,
+      11,
+      27,
+      9,
+      10,
+      21,
+      10,
+      17,
+      18,
+      10,
+      9,
+      8,
+      18
+    ],
+    "G": 0.025799421037054054,
+    "P": 0.878069217183384
+  },
+  "executor_physical_recheck": {
+    "F": 0.15750980361456166,
+    "G": 0.025799421037054054,
+    "P": 0.878069217183384,
+    "stations": 30,
+    "pickup": 121,
+    "drop": 121,
+    "maximum_duration": 9583.412941038197,
+    "original_T_feasible": true
+  },
+  "scope": "Original complete-run endpoint and original physical routes; no fresh Optimize, no rational certificate."
+}

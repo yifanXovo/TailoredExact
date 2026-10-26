@@ -1,0 +1,42 @@
+{
+  "max_billed_starts": 72,
+  "max_outer_seconds": 80000,
+  "materiality": {
+    "time_absolute": 30,
+    "time_relative": 0.1,
+    "UB_absolute": 0.001,
+    "UB_relative": 0.01,
+    "gap_absolute": 0.001,
+    "gap_relative": 0.1,
+    "severe_time_absolute": 120,
+    "severe_time_relative": 0.25
+  },
+  "budgets": {
+    "qualification": 6000,
+    "isolation": 14000,
+    "development": 20000,
+    "confirmation_and_long": 34000,
+    "reserve": 6000
+  },
+  "production": "original ENS-C; no internal time/Work/restarts; original P no Start; dynamic user cuts only",
+  "hypotheses": [
+    "fleet subset/resource rank beyond pair cliques",
+    "scalable eligibility/cardinality rank for long supports"
+  ],
+  "planned_confirmation": "After freeze, 2-3 unused design roles including nonzero V30/V50. No rejection/redraw.",
+  "continuation": "Worthwhile qualified candidate: two groups of common 3600-7200 P/ENS/candidate long comparisons, one existing tail and one design-isolated medium/large.",
+  "stop": "Only correctness failure or sufficiently supported finite-family negative result may preclude long-window admission; initial short negative does not suffice.",
+  "native": {
+    "version": "13.0.2",
+    "Threads": 1,
+    "Seed": 0,
+    "Presolve": -1,
+    "MIPGap": 0,
+    "MIPGapAbs": 0,
+    "FeasibilityTol": 1e-06,
+    "IntFeasTol": 1e-05,
+    "OptimalityTol": 1e-06
+  },
+  "no_cross_arm_answers": true,
+  "serial_single_thread": true
+}

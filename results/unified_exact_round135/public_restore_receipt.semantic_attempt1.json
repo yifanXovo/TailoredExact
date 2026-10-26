@@ -1,0 +1,3246 @@
+{
+  "schema": "round135-current-only-public-policy-replay-v1",
+  "passed": true,
+  "local_preflight": false,
+  "formal_positions": 32,
+  "registered_positions": 32,
+  "not_entered_positions": 0,
+  "records": [
+    {
+      "arm_id": "C01_SM-B10-B_S0_R1_S2",
+      "method": "S2",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "original_T_produce": 1.1886323710205033,
+      "original_T_cert": 1.1886323710205033,
+      "original_T_verify": 0.23790239996742457,
+      "original_T_total": 1.426534770987928,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "538e6b72c9b0bac3a4de040acdf62f150208de0913e2e54621597dc41660246b",
+          "virtual_replay_SHA": "f7cc2b70f7cf4ce0e3b798ed5bc6224123a2140970c176d7803f8323607f1344",
+          "normalized_semantics_SHA": "b0e82909b6316016b8d5998d7af8064184c3e9924a71295534939791f3c8bc52"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "236fa631ff8b9b821042f7615e2aae59170c31d738e57d845be0244b0ae8900b",
+          "virtual_replay_SHA": "236fa631ff8b9b821042f7615e2aae59170c31d738e57d845be0244b0ae8900b",
+          "normalized_semantics_SHA": "d31af680086ae167afdfb4b5af39219d3f13693533711b9f3282380fa507d711"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "49c72ba4ada3e682edace8979040a3f444358f78bf42ddf1e2c8eb4b986a90d5",
+          "virtual_replay_SHA": "49c72ba4ada3e682edace8979040a3f444358f78bf42ddf1e2c8eb4b986a90d5",
+          "normalized_semantics_SHA": "97cac010c76b28a8091573692ba9bded3f1cb164616c82862e468e9d782fe0b8"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "6ae290e10f340522fbbc7c1bae450e484bf2f959f90b9893918d17da62ad96ad",
+          "virtual_replay_SHA": "88a8e7b4a03653839e4764905868773fd36b3a7a2821e4e3ee4b1cf222609998",
+          "normalized_semantics_SHA": "0984604551b3c1f96a35928c9d4778f5511a5fd0b6acedf7c10a8216df062753"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "95d291d443fcdd2bfd57c2b28398c3eb856ac57b1e2c81bebc15b8160a060cae",
+          "virtual_replay_SHA": "a8528f882833ed55a27c608b14485a4c19c67f9f8023037d94191d1a6943a33c",
+          "normalized_semantics_SHA": "ba7740cd4a046fe54db01f93ba2563b1d76a5c473ca921c17f8c0ccaced9e0ad"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "adac1eb8289f5443fb09da5f18e4f0c371bb3e818946214630dcff452f7e3808",
+          "virtual_replay_SHA": "32ad24416989c60da1676f870955c7c06ab7fe41f0485647a992b954c06cf6bb",
+          "normalized_semantics_SHA": "97d2bbf15d630d76f91a82dc7ee2a4440e889f1747bf6544ac5646815b3e06de"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 0.4471399998292327
+    },
+    {
+      "arm_id": "C02_SM-B10-B_S0_R1_AP",
+      "method": "AP",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "original_T_produce": 0.812206125818193,
+      "original_T_cert": 0.812206125818193,
+      "original_T_verify": 0.22853970003779978,
+      "original_T_total": 1.0407458258559927,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "0b499de088bab4d669f844279b9bf5c99d8bb61cbaede58e11c04bb9dd4478b1",
+          "virtual_replay_SHA": "48b622fc5ce13ac26d4c94e0fe1b7ec54cf1a8fe3d3d5a5a8477c6222cf184e9",
+          "normalized_semantics_SHA": "c6f1dff1028c8698fa1b399052ef6e49a188e06da0f8fe24984ef8d4b7835335"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "5478cb4eb3c5e4808be44cdc8d5e7f6e7b4ca5dc539f530e7cb9357e449ee33e",
+          "virtual_replay_SHA": "5478cb4eb3c5e4808be44cdc8d5e7f6e7b4ca5dc539f530e7cb9357e449ee33e",
+          "normalized_semantics_SHA": "116919dbc1e01e0b7602fd20aba79dd8566b9b1c272edaf6e440744a199076da"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "8771b5fea5fa398f967fdbbd13b10325ef29d3ec1c148576cfa2461d7ac08221",
+          "virtual_replay_SHA": "8771b5fea5fa398f967fdbbd13b10325ef29d3ec1c148576cfa2461d7ac08221",
+          "normalized_semantics_SHA": "828539a53a86bedce4bcae9bffdb54dd3144d54a3eb7f120dc7be67db6238ab0"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "43bd52b1d5fc8a44c660673919f1c5e897b481365896ade94826a121b69eda75",
+          "virtual_replay_SHA": "257027d260ef751378dcec95caf71700de3f02b3b513e41455d9ab59fe0c0e20",
+          "normalized_semantics_SHA": "366dc0184a2820db8c83ccede43610c063c3730b5d72858d47264aeb1014a366"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "2f5e6b38df25b341a6f3fce5ea23bf4318d230b3375040182bd90514f11bf11d",
+          "virtual_replay_SHA": "6c30280f85fa301292b13ce80e553e5d10b48925d8ea140f96e476fcc2a0f762",
+          "normalized_semantics_SHA": "f2565508f184a495f95b733c45660b33b774cae6e817760e238af8728ca6455a"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "11fcff364915a2f275774e40c50bd0f5d409a056f9704d6ba8a343de4b11ce05",
+          "virtual_replay_SHA": "6a5b469e4d3a1ba3a9962e938caec2b4cfe864be585ecbafa27076fb3e6fb71b",
+          "normalized_semantics_SHA": "1e82c93572af1f4f8ada7a496678f8ac8025d338dc399c55982c2b426982ad9d"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 0.36828120006248355
+    },
+    {
+      "arm_id": "C03_SM-B10-B_S0_R2_AP",
+      "method": "AP",
+      "seed": 0,
+      "repeat": 2,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "original_T_produce": 0.8224662566790357,
+      "original_T_cert": 0.8224662566790357,
+      "original_T_verify": 0.2378315000096336,
+      "original_T_total": 1.0602977566886693,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "c77851bcdca6020cc95d9a9702c4414a1622654e4ac11fd9cf26d5c9f1b5a3ed",
+          "virtual_replay_SHA": "b1dcd738e16bf96ad796ee3efef0bbc0d7ab6ba083e2691f52329cfd8f28f16e",
+          "normalized_semantics_SHA": "5a5bf97c368bc3f051df471342df08ea96afaef1b86c88f070150fa238fc5e79"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "924a3a85e6437c06493c4f97c99c9a35c9423a1c44f8ff01e6bda62f313c4e86",
+          "virtual_replay_SHA": "924a3a85e6437c06493c4f97c99c9a35c9423a1c44f8ff01e6bda62f313c4e86",
+          "normalized_semantics_SHA": "32423a6d5278e8dbeb7778c26c11485064194e8ae9a5821bbbb9b93b976eafc7"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "30359b5368babac6a021d5a51bcd142c386358618a21ce035881a46adc56fe4f",
+          "virtual_replay_SHA": "30359b5368babac6a021d5a51bcd142c386358618a21ce035881a46adc56fe4f",
+          "normalized_semantics_SHA": "0316ca0f1d109207f7b91a34495b6ccb22e665453b6296267f3df7fa8c3bd737"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "eb87155930b38f3ecc9fdc46a2b3e15f3bfb36d22da4419a045f56489821a365",
+          "virtual_replay_SHA": "2afcba49b3375ebdc0d57e70810495f107ad35e7161faf7e29e0774903c05371",
+          "normalized_semantics_SHA": "5819cd0f62fbd20f513083bc96d2d07c37821980512af3e12cce77e51e29f035"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "e3eaf3a1876d35d79e50018868c1a613646025443fb1a869b91bcc6c2a6e6e29",
+          "virtual_replay_SHA": "2e1135f907d6579473f460dbe1f074a13aa183ec35c555e7324ce544fce9bdaa",
+          "normalized_semantics_SHA": "36ea91ab3a70363530f0e4561c9b9c218059dc6f1458eddf6d45c766a8659f22"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "758b5f567a4b1beba61def2e6db071b1e7577a6fc916122cd8edad48d3cd9b3b",
+          "virtual_replay_SHA": "ebea10aad12f923befd171bf0bea2ba779c5728de1cde2b206bc4d39a90cf9a6",
+          "normalized_semantics_SHA": "f00ab5fbf37b7b095d96437cab2786397f4444fe3d0761a6cea1c1c6707ec75e"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 0.3641421999782324
+    },
+    {
+      "arm_id": "C04_SM-B10-B_S0_R2_S2",
+      "method": "S2",
+      "seed": 0,
+      "repeat": 2,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "original_T_produce": 0.8634327283361927,
+      "original_T_cert": 0.8634327283361927,
+      "original_T_verify": 0.22937770001590252,
+      "original_T_total": 1.0928104283520952,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "29a4d076be203bd72b1d63669ecb985280f2adff52e08ac9caebf5dc35fce36b",
+          "virtual_replay_SHA": "f1e282dcfb38328a39398b1e566ccec4fe330888bd416517916624c43f37b4f5",
+          "normalized_semantics_SHA": "fb32adc20a5a393bbde46715464952dbc761b28a975f9f1d9aa7701443b7bfea"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "82aa826d7322bd61ac70b56d7996ea97337c74c29c4fd5402c242ba3af7200d9",
+          "virtual_replay_SHA": "82aa826d7322bd61ac70b56d7996ea97337c74c29c4fd5402c242ba3af7200d9",
+          "normalized_semantics_SHA": "a7edc79ed818ca2363941f66acf8a5844b072762bec5d76a7c9442e5bd76da0d"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "35e89897a6b8487c1a16377a9a03f23e7b3895e18163ce2ce88fe6e321926e83",
+          "virtual_replay_SHA": "35e89897a6b8487c1a16377a9a03f23e7b3895e18163ce2ce88fe6e321926e83",
+          "normalized_semantics_SHA": "dc8214be0a98f39e34b5030796851ebd442c5c8bf0124792efa9084d4d7b4a54"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "5fbea1dce83ab0bcf5251f6c1abf677ff43f8e6cc41979067a635f92fc1a8bb3",
+          "virtual_replay_SHA": "a2e656dd4e103d3d923ed806af76e5dd2e33427d66896ae42cc075969260d1aa",
+          "normalized_semantics_SHA": "ac22f187587caa2ee7e37c4d43ae62a2f89656ad87cf973daa14c1674fe3f5b0"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "9c887b75571f4c2069553ede0bce80e5538d0bfa0a25aeebc52523445e5879f8",
+          "virtual_replay_SHA": "a134ebf4f6a5ef35f6a42a04cafda50af2636e50202b7e419ef4b6b11c088306",
+          "normalized_semantics_SHA": "7e30321e37eb4fad98a972e7859e3a1ba5f82f71e4531d4676a12f5faaf94c03"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "2cc874c12b495f2d530533b7378a5ab6b39461d55f17d5bf41b3d22a89ae94c2",
+          "virtual_replay_SHA": "e7f9479dfdbefe61a3e1c60574bfb3c1812a08387e2be871e1ee8579108d9d68",
+          "normalized_semantics_SHA": "c7cf950734eb2d5796e99b92865a0abd8b2af9e5152d3ef6d9f8040d39001876"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 0.38793730014003813
+    },
+    {
+      "arm_id": "C05_K-20-S_S0_R1_S2",
+      "method": "S2",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 0.7168065462777502,
+      "L": 0.705325956010697,
+      "original_T_produce": 1171.980271683191,
+      "original_T_cert": null,
+      "original_T_verify": 60.423933499958366,
+      "original_T_total": 1232.4042051831493,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "e44e49a807818673f0e555be102ba4e1d7db89708647da1a7fb4bb631e93d8e1",
+          "virtual_replay_SHA": "7bee9738e01ce512f9428160b915d655c76d83c837ab9ec2d8fcecdcdd42dcbb",
+          "normalized_semantics_SHA": "8509ad2bcd37bc2e5a17cb5b5139c9ce8bb1120bc6e745fff0eedadcac8c89b7"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "b91beb2fa4d9583441922e2d49ae32edad23f0d08e88eb2d5ea380d8239de199",
+          "virtual_replay_SHA": "b91beb2fa4d9583441922e2d49ae32edad23f0d08e88eb2d5ea380d8239de199",
+          "normalized_semantics_SHA": "ee2d359f2086814d955dceb651e56114af3598c8f40ff4b4fb57dc22aa48dc24"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "bddf0c2553f1a67c550d1cc1b3a8847c36207f7d6100bc35842e9287638a0d53",
+          "virtual_replay_SHA": "bddf0c2553f1a67c550d1cc1b3a8847c36207f7d6100bc35842e9287638a0d53",
+          "normalized_semantics_SHA": "e262da1e21c797296bd0e6c60c168ecb801bc435d9e7c51ef43c5afc7c40cb7d"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "835bedbb714232a4eae31f6d4b2f1a1f56a6e6f5a5eb4bf6b7d061f2eb67d94d",
+          "virtual_replay_SHA": "abe6da319063413b26fa2f713c8696a6641799fd345ab820fabc9d9b4bb1f89c",
+          "normalized_semantics_SHA": "0a83322bad5db97dddf53ce1423c87b40e7370f0c6389ec8965c4635aba855af"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "0d28b409d556e8dd6b7cc7612219d360528ad1c6d23c75279cc6e52a30da8a02",
+          "virtual_replay_SHA": "824606ebcefc996c2a071e72730d54c19db4ed7a6d2416df9c729c7f3c26d465",
+          "normalized_semantics_SHA": "0db04260421116a4148c6707e80a57a3cdccc155ca25533567f48fe4d2e2aa6a"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "3abaadba13f8b12cc63309ff33ff430852044433ddd0518a05a657522a229947",
+          "virtual_replay_SHA": "4ef28e7458622d9759c5309f91762572cc9c7ea8ee76baa7f688fbda8cd582c0",
+          "normalized_semantics_SHA": "ad78799773bc33cb20894dd48834ce67a0faa9df51d3d7a47dff513dfd58dcaf"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 529.802214599913
+    },
+    {
+      "arm_id": "C06_K-20-S_S0_R1_AP",
+      "method": "AP",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 0.7168065462777502,
+      "L": 0.7061352160754392,
+      "original_T_produce": 1172.0158158859704,
+      "original_T_cert": null,
+      "original_T_verify": 56.829639199888334,
+      "original_T_total": 1228.8454550858587,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "796a3a26ea480d45dcc7ada983662b2d301dfe0a86bfadf2dc18152818b79b2e",
+          "virtual_replay_SHA": "8686ef7ac341478d3550cfc83c74997a1084ae7f99c3e26bba69ebd0b9f9d525",
+          "normalized_semantics_SHA": "83c8a5ee607b5fd1d82b339c2c3dccaf0e260a6c2c5119252c7a1cdad7ffa013"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "2f6dc5dd4eff7d664d146e17be279199c4bdfd492ef9aa9d1fcb246fd9ec1b8f",
+          "virtual_replay_SHA": "2f6dc5dd4eff7d664d146e17be279199c4bdfd492ef9aa9d1fcb246fd9ec1b8f",
+          "normalized_semantics_SHA": "708494e53e862a0a715777052193763f79349e16fdddee55284b94171faaae27"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "a311c59de8490b3f8286b4d7f609161e67bac3f9dc8a27476a3047a5729690d8",
+          "virtual_replay_SHA": "a311c59de8490b3f8286b4d7f609161e67bac3f9dc8a27476a3047a5729690d8",
+          "normalized_semantics_SHA": "00dc06ddf3eb52cb4d11d6aeb72ae9c7156cc5a9d5771b82dfccce64097c393e"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "b456112093c0f4d2389bb50eda57427c667a359ea642167cb81982e8f1cb79d3",
+          "virtual_replay_SHA": "abc3bf86ac8fac65dd2d79393759d24643fd97c6d6d0703f44fc37a6c39c383f",
+          "normalized_semantics_SHA": "05c1c12fdfca7adb1abfe7d1b4e613bcfba5b76217d66cc11d6f24a50d67e592"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "97bb97a4a30eeaad3aec59a8f7cfa220aecfa61d0f54a76d8adeef350b0bad99",
+          "virtual_replay_SHA": "3429dd7631b7c723aa4df82b8f51628556e86e7d391edb0d7885ceb991636ad0",
+          "normalized_semantics_SHA": "c5d1fae4066c7c5a35259308f06892286af87e72f258f8715973b2d6279eea3d"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "c617c52418a92605427b4185f917bfc16603bcd4117077ad8df070e47764c394",
+          "virtual_replay_SHA": "5b4c099df07d225a68f19e2e39888ed2136516415296a8fa27a57f40d469e25f",
+          "normalized_semantics_SHA": "0c025a1f237a79608b18be1b5aabe40ea351793a8755e647897178a00f1e779a"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 610.3653998998925
+    },
+    {
+      "arm_id": "C07_K-35-U_S0_R1_AP",
+      "method": "AP",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 0.653671245662228,
+      "L": 0.5589106026495589,
+      "original_T_produce": 2370.8042844543234,
+      "original_T_cert": null,
+      "original_T_verify": 3.8639760999940336,
+      "original_T_total": 2374.6682605543174,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "d6e2058215bb806aa514ea57abd2c43020970469848e70ebd79930fae2e48c07",
+          "virtual_replay_SHA": "71c850dc9ee5b53807cb1442f4d7137d3b203179437e9a08f9d50ed59fc25d5d",
+          "normalized_semantics_SHA": "9b51b730b5137376964ab10f0fd133c9b6c12a632bd8af5a24b6e161ead39b8f"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "8eba34e471ac2cd8777fff6d18889733f899896b1a7ebb6327b1cb824e913aa6",
+          "virtual_replay_SHA": "8eba34e471ac2cd8777fff6d18889733f899896b1a7ebb6327b1cb824e913aa6",
+          "normalized_semantics_SHA": "44d7c7913de94d3678896324af131dc2a9837ff44572e55fd7fa34f3285e9fe3"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "3f0348a1404f84c3899300f1a89e8946d73051077bcd09ae899af380e56d1a60",
+          "virtual_replay_SHA": "3f0348a1404f84c3899300f1a89e8946d73051077bcd09ae899af380e56d1a60",
+          "normalized_semantics_SHA": "4bb3f1f8b40c687f670638848e6ee579136357bb19646686575e4d85294791de"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "e900cfdb70779e3d3da0f7977e24900e6476ebe225e99a072b041bb4616197dc",
+          "virtual_replay_SHA": "7bd7da243c0d1aa6222710b5b342f1764a9f4b3fc7603a9a50b843040945e11f",
+          "normalized_semantics_SHA": "ee46d33322a169e66768518110ef820b68da643db8bdabb924c1e47dfa1252f4"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "dde779f8911e416a8b4569325ba6ec802ea583579c82591c9fe092399486ec12",
+          "virtual_replay_SHA": "e48edeccfa5a1e94341845884936343d05731707476824a4bed8dbb83893bfa7",
+          "normalized_semantics_SHA": "db8bd205c5f7b85ddf7d06d0f0cbb4d19369f797878ef0b3425d34763e36892d"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "8fd1cbecb820dc7ee92150f3e0987303bb203c8bd382645be0a54c63664c3a1c",
+          "virtual_replay_SHA": "109901e30024bf9900c2b7bca3b1f07f04801b220c7c1c7bcc063e6a812c610c",
+          "normalized_semantics_SHA": "83f5ff9ff822438b740a1e63a638e520fd6b20bbde1de6fcdf7fe4373caad9ac"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 14.660697199869901
+    },
+    {
+      "arm_id": "C08_K-35-U_S0_R1_S2",
+      "method": "S2",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 0.6928543586313136,
+      "L": 0.5659761419652581,
+      "original_T_produce": 2370.7419885438867,
+      "original_T_cert": null,
+      "original_T_verify": 3.7957102998625487,
+      "original_T_total": 2374.5376988437492,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "68a4b3fad1a07ab193df9aed70d054d0a8e7fc89612170a5197b265965a8a682",
+          "virtual_replay_SHA": "d7019531ebef9b439ab0f2945a76f93486aefd2f106d4339a1fd8518ae721cb7",
+          "normalized_semantics_SHA": "c913a41e0a3d70344494afcc20763501e1cc2b2f23e808bd242f2d349ba8a625"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "d56550ef1a7b20df12e404d9658a4de957d056768835188291d08dcf9fc32bfd",
+          "virtual_replay_SHA": "d56550ef1a7b20df12e404d9658a4de957d056768835188291d08dcf9fc32bfd",
+          "normalized_semantics_SHA": "1dcf202c999976f6ffd469edcf1eb215991f4de12bcebedbf169fb9791a82c5d"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "20679c65314d103b65792f2c25c3294d125e5273b96de270a02ecff5d6b2fbfe",
+          "virtual_replay_SHA": "20679c65314d103b65792f2c25c3294d125e5273b96de270a02ecff5d6b2fbfe",
+          "normalized_semantics_SHA": "3c84858abbe6416e34e13b649e2155c3bda168e2bf16788530e61a5b6a608682"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "8278df4c6a5736112c14e38b226ca29982463c9c955df54fa07e6ca1ca8df420",
+          "virtual_replay_SHA": "4688be16c6a22a28c9538625b6bc0dc14d929ef0795983acfcc33c3df3d9ca84",
+          "normalized_semantics_SHA": "c534c2107bd115bf103de768292b4791aa4b346ae893b22617f1ed236b0c1674"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "7028639b96fb1279eb499e10387764df0ede292d84e62cc605fe539b97ebef8e",
+          "virtual_replay_SHA": "4aa7b80107024fd77358fb7fd48de9b170e6de9eca8c268d25c1a15e6fb22da2",
+          "normalized_semantics_SHA": "e5c8d7a71621b960fafcae53471b0b2f23bb1fb6b38507aa74ccce8b40fb1b65"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "ddb3360ee8e1b176e965bad5d834a73ac2eb2b1edc3b0ddcf549b5d79dfad9ab",
+          "virtual_replay_SHA": "07300e052c837c2326b550f8d1bf6bbc1100191aa563bb8ac9a99406658befba",
+          "normalized_semantics_SHA": "4f6e529600e28ee4429a9cfb1180531072158f8ee1c68bddb0410cd5c38d3bab"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 13.631426399806514
+    },
+    {
+      "arm_id": "C09_R55-D13_S0_R1_S2",
+      "method": "S2",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 2.443403191943199,
+      "L": 2.392828654813692,
+      "original_T_produce": 570.9142633264419,
+      "original_T_cert": null,
+      "original_T_verify": 1.4910454999189824,
+      "original_T_total": 572.4053088263609,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "d789f17c59195a2d6358c10496f936e06551fac3a205abec83fc1d583237450c",
+          "virtual_replay_SHA": "fd560a3e2a69e9479d17f40aa78ed18b72b9bcfa0438488d0b7b4558d5b7fa3f",
+          "normalized_semantics_SHA": "7cbe3f45047783ff14946de04f7a2975a36a0cbdc33d8c697c3c84b084286820"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "213070d7615f16b66c64635f7e43712a3073c92df773d030fba3e2cde486a7f6",
+          "virtual_replay_SHA": "213070d7615f16b66c64635f7e43712a3073c92df773d030fba3e2cde486a7f6",
+          "normalized_semantics_SHA": "3a8bf513a058d5de56e35dcd84ea113899fcc13c77580a12ab7f915661798d38"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "93fa544340a28c1da43478f65bfee2523e78c5db679d71f9fbca4acfadaa7b84",
+          "virtual_replay_SHA": "93fa544340a28c1da43478f65bfee2523e78c5db679d71f9fbca4acfadaa7b84",
+          "normalized_semantics_SHA": "fd1f4206cedb810ddc23442d9d8b8691706430f764191321603d0742a948b9ab"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "72edc64cf1cd9f73ba6675f011bdb1fcb2ccb33ca9e822ffb2611e5301a5e1e4",
+          "virtual_replay_SHA": "29a740af38a8bdae8026d99e6406ab93dc20541fd8c81cb6187e4f636d0bd638",
+          "normalized_semantics_SHA": "7846b691ccc7d9f49adaf0fde4baef1decfebfa5670c02cd37ee312473efc92c"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "b6dfd1933918b15b5fbeb68c9cbf2cc710ff2f9158c2caf710386b85f2a6f4c1",
+          "virtual_replay_SHA": "2f1c031006282b0d8517c1a12659ad0548dfe280ebb3ebd841f34e15fc3d13af",
+          "normalized_semantics_SHA": "84a977c8b20fa2db19cd86dc0b030cd70d54c7edf75274e829d33546797b63c5"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "b83dbfdfd6d567311b98146e7716ff44fe412cb725a6da59cacf9049649f961c",
+          "virtual_replay_SHA": "1466f939909899431e5ea7b121f4bf7ac583ad01b7a49b149cb47d8e7464bb1b",
+          "normalized_semantics_SHA": "ab2c0a8b8aadfa58d64da79efbac2bc22e9f1d4c3ba60ff301459e4c2a91d32f"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 10.902633800171316
+    },
+    {
+      "arm_id": "C10_R55-D13_S0_R1_AP",
+      "method": "AP",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 2.443403191943199,
+      "L": 2.3932844224266034,
+      "original_T_produce": 570.7732874150388,
+      "original_T_cert": null,
+      "original_T_verify": 2.786274200072512,
+      "original_T_total": 573.5595616151113,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "6f3c1a9c7981ac94c506a9e82c29ea82200bf0b79623260baf1226f077719114",
+          "virtual_replay_SHA": "2e1d310c611a12711896998252977f9699e331593210b2ed266ab052219f7741",
+          "normalized_semantics_SHA": "587b5d23f375afa6d089291cf8267a36c8e89678f2db7036b05d97740420211a"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "12356d1e2e58222e4a350de5b8198bd8aa33e9b9b59d99f8d68c91a1ee0006f5",
+          "virtual_replay_SHA": "12356d1e2e58222e4a350de5b8198bd8aa33e9b9b59d99f8d68c91a1ee0006f5",
+          "normalized_semantics_SHA": "41d4efad5589d9516fd7047898543c2a41a5c794e9c7c4a47a7a888aa2b1666e"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "736772d6698ad007c4e772ff98f5561c8d93b5db8a24ab1992ce2e6a942cb1a6",
+          "virtual_replay_SHA": "736772d6698ad007c4e772ff98f5561c8d93b5db8a24ab1992ce2e6a942cb1a6",
+          "normalized_semantics_SHA": "ff6113ef2f322d7129cba862c08020834a6a480e8a536f3ef57982ad01669572"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "208e9e5a1ec3e3665ee23128c2b294d5af2511abf5a220f812c08a74ce6e505d",
+          "virtual_replay_SHA": "9847db08dd439edfb74f574fa264f28b7d6cbb06380c46828131ff1ae6ebe43a",
+          "normalized_semantics_SHA": "4aa29634820dc79d002cb064dfcafd28d400d129d4d58c302c0ae9df74aff13c"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "b52b1bf1a33a3ecb492e5b33ac31444c8c599bc044747b43c105152f066a249a",
+          "virtual_replay_SHA": "99b2be472bcf54bcd22a0ba9f34a6372ec0f3cf561fe7e58043fd140b1c1cd19",
+          "normalized_semantics_SHA": "e68be91eaed15f09b746e0c5d90db89a6f037a779d5ecf89d24fc1897f9875ab"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "d519c951980436436839df4474365268a1eb17b42c0c955bc82b26d0a99e1ccb",
+          "virtual_replay_SHA": "8fd9cb7fde09e5ae5d352552284a32bc7f1b3e16cfbe2f6f94d5ac0a9063cdf3",
+          "normalized_semantics_SHA": "bbabdd63ceb2ec72b596334b66495964fafbe4d7287368689c6089fc15cfc863"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 12.603281400166452
+    },
+    {
+      "arm_id": "D01_K-20-S_S1_R1_AP",
+      "method": "AP",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 0.7168065462777502,
+      "L": 0.7062272021338274,
+      "original_T_produce": 1171.9176525182556,
+      "original_T_cert": null,
+      "original_T_verify": 49.690950999967754,
+      "original_T_total": 1221.6086035182234,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "0b478c383c79a6ef5454c5759bff432d9449a1b8e08d7f6cb065cc8dc684a838",
+          "virtual_replay_SHA": "70b9f71bbc76d2db19becd723352ba9b172b94bcbdc233a738da5c06c9ffa32b",
+          "normalized_semantics_SHA": "c747b2629d0db8d3a270540043b41354c90a7d7ea24105ac40d47a083b2078ed"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "936d2166d4aad789572bcb930ec8d97151888b17f0904129b5599bca68a754df",
+          "virtual_replay_SHA": "936d2166d4aad789572bcb930ec8d97151888b17f0904129b5599bca68a754df",
+          "normalized_semantics_SHA": "4190bf7c7161e84d719a60dfb397a238ec3196d0d92b9b8c707b1c6d687f80a2"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "4d369defcf34eeb344ceda57ee0e984cfd630412306b8844f12b43d1f586e5a9",
+          "virtual_replay_SHA": "4d369defcf34eeb344ceda57ee0e984cfd630412306b8844f12b43d1f586e5a9",
+          "normalized_semantics_SHA": "eb365a765ea793644ea35ebac4d80632524b9f260a55c57188ac74af50c37579"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "7d84756e0b32d13372a89e564c52c448264d58e1755a9167cb6177e33a551392",
+          "virtual_replay_SHA": "bbadf037aa1e92b6e4e6d4f3d73de92697e5e01acb8560a35cb41ae4961ec039",
+          "normalized_semantics_SHA": "4ea54fb642e55172c2e710903bf75b413b33bc9c2ce48911711d9c1f0244d7d1"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "c0424298f0d85113de5c057d28a640b1d29a2dbd45bf890ad0bf0c0849d2c469",
+          "virtual_replay_SHA": "dde716a8b53c6741721a0c8b2203434079ab62a0f77d8e0e73670614a5633d31",
+          "normalized_semantics_SHA": "3736ea8a5be8afa8f16ad29f9c740be306b62778d6af1f0eeb5da80a0895ef34"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "ae469a42f8eb9f79862c42ee9bbe3e98541d7a5a76503a23c6d540a4b05f8169",
+          "virtual_replay_SHA": "6f5bef50a819add9c9ad047edc7d2383adeea2170163b7fd9981694f91acf2b9",
+          "normalized_semantics_SHA": "2752927276a128a02a57b575ab6304e4596f09aca3fce6bd015aeecc1877f7c0"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 512.6441513998434
+    },
+    {
+      "arm_id": "D02_K-20-S_S1_R1_S2",
+      "method": "S2",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 0.7168065462777502,
+      "L": 0.7016354846717233,
+      "original_T_produce": 1171.7550542864483,
+      "original_T_cert": null,
+      "original_T_verify": 33.35353709990159,
+      "original_T_total": 1205.1085913863499,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "7ae7fd82b5531a462b26e4194398a7c4246ba3b1af547b37c4afb9211ac07bc3",
+          "virtual_replay_SHA": "d6ccb34ab3fa01e247b8b39bd75d110de1b334752544578462de0996f5cced82",
+          "normalized_semantics_SHA": "8cd7528c0375dd2698e8ff70cae4ef6da621d9031655024bc0c1a8afe7b46f6a"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "6ab5be2fe7cc8af4143d1cce05880e16aeace479e79a8a3b48f53bfb6c3bee61",
+          "virtual_replay_SHA": "6ab5be2fe7cc8af4143d1cce05880e16aeace479e79a8a3b48f53bfb6c3bee61",
+          "normalized_semantics_SHA": "52aebcba7c0dcd8e10484b2569cbbdb11570f8a89a62befdb2652b4a84d006ba"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "c97278974caa8de23f27f5a7581466868e6411e780cea2bcb9975dd70aa78711",
+          "virtual_replay_SHA": "c97278974caa8de23f27f5a7581466868e6411e780cea2bcb9975dd70aa78711",
+          "normalized_semantics_SHA": "c6168c40429a0ac1b82547d5e1ddda259f88842c5133fa289c4f3e82b0038165"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "7936ba2eaa0d555cc761271f4e33aa08259907001527e5081d4271c4847f7c90",
+          "virtual_replay_SHA": "1eca068bb04e59825215ae02aa32bc0a4b1190fe3b7d97767b58096adf0fc846",
+          "normalized_semantics_SHA": "b4dd493f3fce9021408d828f754573fcb03a230a2789f13e59870aac18965a7b"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "2863c6201ef8c27aec1fdac005f1d8c1e8d2a0e0db73895f0da38f188824a02e",
+          "virtual_replay_SHA": "ca8e1ae1a3f6ee42cc7771a8cea5eb7abc36c77b08de44e1f3e570dce0830a29",
+          "normalized_semantics_SHA": "c7f7cfa4da273b0a8ee94f2ff6995de3e805d10b86eac588e36989be436fa827"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "33302d387fbed2ba816af350365029859699b1e2e6420e532e2281b7601b1f3d",
+          "virtual_replay_SHA": "f926bf8b76989cf53994e03fcd3d96fbf98042e8f8f68a89e44697d155aefbe2",
+          "normalized_semantics_SHA": "39a31d6966f8a38d9c95b417daa8e6c6a52fed627cbdd6479e320fb7f49429fd"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 306.1110969998408
+    },
+    {
+      "arm_id": "D03_K-35-U_S1_R1_S2",
+      "method": "S2",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 0.6683582547445452,
+      "L": 0.5547997340930715,
+      "original_T_produce": 2370.841661013197,
+      "original_T_cert": null,
+      "original_T_verify": 3.740973599953577,
+      "original_T_total": 2374.5826346131507,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "909a3bce9413af58797a87deea5e86452d73af6875b9e043c6cd0b32ea10fb18",
+          "virtual_replay_SHA": "32f71de4994df14594ac93f15949fec755f02e534335ec99665d2d15aa8a23d1",
+          "normalized_semantics_SHA": "c90018e2a57667b72820f3a4b20e6af496c503b1fbcc53303b53b73a1e986bc6"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "2eab90e6bc3b870b7af3be57048b5aabfc5849edb130704a84b3de3e20bc53b8",
+          "virtual_replay_SHA": "2eab90e6bc3b870b7af3be57048b5aabfc5849edb130704a84b3de3e20bc53b8",
+          "normalized_semantics_SHA": "02b052c85082d608c76603c63071680eacc15f03c4a62a3cad66abbb42998000"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "905edbd96d633365de361eadebc4c852cfcfb39673ff120261b5a562157754b0",
+          "virtual_replay_SHA": "905edbd96d633365de361eadebc4c852cfcfb39673ff120261b5a562157754b0",
+          "normalized_semantics_SHA": "42e15e27f849d8a03f73c09e391ec8a8756807ccfb90119fef2628922f1e8a61"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "aecc4884a5980adc2644343b0bec8438f03cd441d031878ad768cda7fd1f1ffa",
+          "virtual_replay_SHA": "50ea52b7b9254f9a6b450dbb18b61638beb3d5e7c469883acef6b3d29ba10a38",
+          "normalized_semantics_SHA": "a22700423a56d8a0bff9bb02b64086db8a2aec664889b35e03452f606d02b90d"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "1498bc514825b2751fc245394c68fa63eadec6870ba16057c9c20d9d3fa8d18e",
+          "virtual_replay_SHA": "c4bdd442d91250b9056c98723de6b9cb1c40ba9c87b3ead07a944cf10998b16e",
+          "normalized_semantics_SHA": "b334f337e4cebfa8b0618f0f886a5d0645f3bdc71fb9cbd236edf71732c1e51f"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "ec29d14eef317d6eeb18ffcce664b357e8176b46f33256b15f1034c72351703e",
+          "virtual_replay_SHA": "a4e48475e38c0f2cdcda6d6b3905fc6728fab851a1e559b2ad38e943599d2ad0",
+          "normalized_semantics_SHA": "97a2a336e5f007313626a68b83fe458ef3c8d2e8dab44d78374e195ed9054352"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 8.571572199929506
+    },
+    {
+      "arm_id": "D04_K-35-U_S1_R1_AP",
+      "method": "AP",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 0.6508356082935073,
+      "L": 0.5403998599380946,
+      "original_T_produce": 2370.9208790343255,
+      "original_T_cert": null,
+      "original_T_verify": 3.857093800092116,
+      "original_T_total": 2374.7779728344176,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "1493afd62567a0f83e22018bc6ba073795275b86ca5e747129016e2e30542859",
+          "virtual_replay_SHA": "b0662086eda84fcec3a069c4f4533d62756756e25e2ea6ed0a692db37bc45500",
+          "normalized_semantics_SHA": "0656cddb122b2b2c83a481a517b78fc3946b4fba55f04faa0fcf8f059e10c0f3"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "89b9a4dd3da69b1a3fcd0c25b68574cc530e16d506e2cae7d617d61dd99ef48e",
+          "virtual_replay_SHA": "89b9a4dd3da69b1a3fcd0c25b68574cc530e16d506e2cae7d617d61dd99ef48e",
+          "normalized_semantics_SHA": "bacbabd12a7932b535ed9096a942a7bca61dc36784bbd34cd3290a99eb83cc27"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "cad3325145509a6b4442e7f4d98a6e866b5590c61d04a1344d4f847619663717",
+          "virtual_replay_SHA": "cad3325145509a6b4442e7f4d98a6e866b5590c61d04a1344d4f847619663717",
+          "normalized_semantics_SHA": "25d85e270ff73453f067ee9886b3cbf9c4b843635b3198561b4e94baef75dbd2"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "bf884937a8bd74665295b16cd20007ee3c9603ec405611e315cba3bc3ca2db90",
+          "virtual_replay_SHA": "7ae0a2467d38436d83b30e4c41fdb2da974fe9223fb0a6ddcb94e7ff6e6e9b3c",
+          "normalized_semantics_SHA": "7a07cfa770a9673b81faa5997a009d0699326897ab224590d1a95954a4ff0a2c"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "7fdc72c49866c66fdb02af325d7538fe65f0e69888c19bf0ff79db894522c821",
+          "virtual_replay_SHA": "7119cc5d1edb53a01b4afa2736f11de2964467fe5193872d4928d91b819593fe",
+          "normalized_semantics_SHA": "8f1824fd6170288512b0585440f4914db19e475383aaa25ef09609c9fa7f795b"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "de0381409653c67f5bc78be7a5a67d8bffd2751e4e81e2aa6998214990fd95a9",
+          "virtual_replay_SHA": "84e7dc622dd3a9e86fcefd776e6485dbf004bd4663f5e2c04bd0186fdda3d422",
+          "normalized_semantics_SHA": "fbb007a0ab25bdf51fff440e4456d5dc32a6f0d2e62fca0dde9abcdc8cc27b9d"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 8.205026200041175
+    },
+    {
+      "arm_id": "D05_R55-D13_S1_R1_AP",
+      "method": "AP",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 2.443403191943199,
+      "L": 2.391341920950791,
+      "original_T_produce": 570.7870325229596,
+      "original_T_cert": null,
+      "original_T_verify": 1.5338510000146925,
+      "original_T_total": 572.3208835229743,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "be6a1e33d15bec45638cfcd3da0d241fefe3c533a45a0205c780a8d1fe6f067f",
+          "virtual_replay_SHA": "3a91cb42b77878493abe243aa9bdf5a6bd6eb246a7b05de4b5bbb5aa764337c4",
+          "normalized_semantics_SHA": "ffd54a047a59f59411975ccf5cc1df8e3a1b47136c36de272a91f085ea37f9d6"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "a6c3af51cd70805c15f926b0d54f012ca882d97354852d41f1eed35180fa7ec2",
+          "virtual_replay_SHA": "a6c3af51cd70805c15f926b0d54f012ca882d97354852d41f1eed35180fa7ec2",
+          "normalized_semantics_SHA": "be27cd6d5b1a8a87142a868995c300b50a529b645cd8a7feb950019953e3c67b"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "ebe3d3d7619b0f4b2c2fd3082c49ca773addfd1b29064968da52be0bda20c301",
+          "virtual_replay_SHA": "ebe3d3d7619b0f4b2c2fd3082c49ca773addfd1b29064968da52be0bda20c301",
+          "normalized_semantics_SHA": "33f2603a90d7971116ceef8f66e34fa6741d39f75c031ec77bd2b350b25ec028"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "7a340dcdabc4330485628b70141804611f16c4cdc2c30346fef38f9733707ee4",
+          "virtual_replay_SHA": "750f79f7a14f335b9db0c981ffdc6bcaae867d5899fa12780cc819801adc953a",
+          "normalized_semantics_SHA": "0cb7a69c9aef02373088c096c6932f982d0e877f9a623b35d3db51302f545c00"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "bfab8c49cfdde8dcfb88addfda6b87b48e43a3c0cdd883c37d4f71a26924420f",
+          "virtual_replay_SHA": "33a2407a37acbbfb754e0a20c3200f534d3d8685934b9801c2772ad85ef14bea",
+          "normalized_semantics_SHA": "df92d6beb6c220b9728c12ed1554491448638f2df663f85b85165c23190c6f80"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "489634b7b7290fbf7cf7004960c4a386f6c4540e6535789be488d1a02df8a1e2",
+          "virtual_replay_SHA": "5e64cae1db0b7c1dee5598f9034a2e7b85791c781277efc621666c4e4a4b3306",
+          "normalized_semantics_SHA": "44a0cf1d5c39000ef54c1834d5cc29fe99318b4d21d067cc41b259b58e8880a6"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 7.8961294000037014
+    },
+    {
+      "arm_id": "D06_R55-D13_S1_R1_S2",
+      "method": "S2",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open",
+      "U": 2.443403191943199,
+      "L": 2.3976671263450426,
+      "original_T_produce": 570.7295342124999,
+      "original_T_cert": null,
+      "original_T_verify": 1.4879322000779212,
+      "original_T_total": 572.2174664125778,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "b0de5057c129c382a9e8e8aeda9387c7ba297c6733c9fd7f03067ce4afeb2039",
+          "virtual_replay_SHA": "43d1a93ec0373e7b2e09870386af68443c6ee910e80bad52295163d21c8bca0f",
+          "normalized_semantics_SHA": "eafaf3acbbfc8a755414b5ae47ed092cd6ab8b6773558b69dee541bf47cbf92b"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "2fdfd68da6a82f0a4a8ebdab6939f1380a93b05acff7e13a02d5a93b203432bb",
+          "virtual_replay_SHA": "2fdfd68da6a82f0a4a8ebdab6939f1380a93b05acff7e13a02d5a93b203432bb",
+          "normalized_semantics_SHA": "d905893cd972b3cb1fdc496752196bd5854b7098c8465b18a83036cb678e62a1"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "5d36881b438f0aba0abca6a5f5899fd642a9665aac0d3dc862c7b47a1eca8a01",
+          "virtual_replay_SHA": "5d36881b438f0aba0abca6a5f5899fd642a9665aac0d3dc862c7b47a1eca8a01",
+          "normalized_semantics_SHA": "228c0d6b356bd45aab95527196e0a3966767bd69cf76f9b04d90271f84d983eb"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "9f09c95bc81864538ecc7638eddea26ae60412410d39fdc8023e8a195e57d70e",
+          "virtual_replay_SHA": "a8cef2d970d28c5d7f278f5e4ce0494feb9ba8888f038ba15ddf812457c91c4e",
+          "normalized_semantics_SHA": "8b2c72df195ff7b75a6867e70b2bd8bbe3a609820e1749521d4192a5603c4e66"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "570d06cda27e44ef9f998ea971878fa0cceab71ff112aa1ad5e95376011be4e6",
+          "virtual_replay_SHA": "df4fbf6add350566ce15e239ca4a5c3bf5bbc1d5824d88d63f2d319d4dbbfc6f",
+          "normalized_semantics_SHA": "6dc2d928b7bfbf635bbb7772d713911154145064f68fc88d1b929e088ce82f6c"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "1a297ebf14c9bc785df5121c348463409d665e6d8a8d943d9514dfaec00a5c0d",
+          "virtual_replay_SHA": "05a930a6275788ad3a294fcf9a01bc3890370a7643d8f4457ec1ffd618429e56",
+          "normalized_semantics_SHA": "d3214ade139ffd8fbfc7f6da0fc1108d2f748c7d8fb4f9cd8f009cee27393c2b"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 7.352578500052914
+    },
+    {
+      "arm_id": "D07_K-15-S_S0_R1_S2",
+      "method": "S2",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5922648822560825,
+      "L": 0.5922648792385111,
+      "original_T_produce": 112.11311539378949,
+      "original_T_cert": 112.11311539378949,
+      "original_T_verify": 3.7371036999393255,
+      "original_T_total": 115.85021909372881,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "85f6b7025015838bf80f8a3dc553c72044db6b7a77804451d5442ba542cbf4df",
+          "virtual_replay_SHA": "e55036c97f138c90b50e3eafefd6d484e2a3802282bbf4ba433b3ef34a135d8c",
+          "normalized_semantics_SHA": "967081e25177ac158f5e51cff85612c04201625c9e955de12380e080e9c0c737"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "3e957e4be779304bb11c8eca4e520beaf4fb852082404c6c7982431202eb3c14",
+          "virtual_replay_SHA": "3e957e4be779304bb11c8eca4e520beaf4fb852082404c6c7982431202eb3c14",
+          "normalized_semantics_SHA": "0e96801ba1412529944065d798f690ddb2da17c362d0de03f06827c21c994c0d"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "05728dcd897b170753d950bcafbcf3dd30366c2113371bb1d580a330d4d0326a",
+          "virtual_replay_SHA": "05728dcd897b170753d950bcafbcf3dd30366c2113371bb1d580a330d4d0326a",
+          "normalized_semantics_SHA": "cf5a89c48923054d5da15192c8442e1cb6537a82d472ce815a186617f4aa5216"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "880bbcd315580e240eb2f708059635ecaa1e3253f2758da190a8f7fc34572382",
+          "virtual_replay_SHA": "34f728b6b31857124e22bec577fb208de72d56fea9b11b582ed1f06ce7831674",
+          "normalized_semantics_SHA": "5853fd5ad7179fa71c1abcbb56f40180063850070fd01bc9aaff6e4a2fd97d54"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "328b861eb1368865a1ed7eeadb2d26c5d7bd3f068c3b83cf07c301e6b5db65f4",
+          "virtual_replay_SHA": "393e9d13737c2f3e4eafd8cd938d1cc872c7f6f506b9a5ac33596567a36b75f0",
+          "normalized_semantics_SHA": "1c0a73da8797ca8f78e4e1eb23376d35820a19f23ad4e60e177646b4baacc94c"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "95a03e02f139e45825369acc274a913864e88c4e177192934e22b87d23800854",
+          "virtual_replay_SHA": "ca36ae07177a47772bbac381f4770f7dee1e4ed99521006f881c09bd47d92b26",
+          "normalized_semantics_SHA": "7fb7bc1101946d5eb87863eb387badee2cefc5548383fd82abdb34d0ccc0edc5"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 71.08391030016355
+    },
+    {
+      "arm_id": "D08_K-15-S_S0_R1_AP",
+      "method": "AP",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560818,
+      "original_T_produce": 149.3096360997297,
+      "original_T_cert": 149.3096360997297,
+      "original_T_verify": 5.286434199893847,
+      "original_T_total": 154.59607029962353,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "b259adcf8b3b3449147b4cc4292b72e1f36c691335aa2184e7b3761cb639c21d",
+          "virtual_replay_SHA": "2c5ed2663822dd7f74408e1a514e665b8740191c58a2238ccdf810100e7fea02",
+          "normalized_semantics_SHA": "e1e880f128641f86269b3652e41a4868fb4a5c9d6f00fa4f52ea77e9ce50b627"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "5d177966f130aca8a84fb7927c19be4d1166417529d3feac48fe19214551b835",
+          "virtual_replay_SHA": "5d177966f130aca8a84fb7927c19be4d1166417529d3feac48fe19214551b835",
+          "normalized_semantics_SHA": "7543dfdd645c5d34b8f6be345aa20f5aca07dafb389d576533b88b8d00b4f788"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "0d88de1cb501cb7bfd9bd31db0b8a2839eac5d2ba9673794830a7618a95fe096",
+          "virtual_replay_SHA": "0d88de1cb501cb7bfd9bd31db0b8a2839eac5d2ba9673794830a7618a95fe096",
+          "normalized_semantics_SHA": "23ce147187d7efff62bbacfcf27d81457aec76c9fc397be24154b1403d00cfec"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "33f343805e3e4acd0ab9d68127866f9468f2ced743b936620e4f06b417a76f8a",
+          "virtual_replay_SHA": "4597c987f8ecb3b3c5e0e72d5b9b97a84d6f12db83d14f9182695a078f1df074",
+          "normalized_semantics_SHA": "5da02c3b6459fee8478881ffa26c7826501b879fede63f3a211ef359bdc6e248"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "8f11b256b73b063997a2f4ce4e11029447d858536c6ee9002f8b05f276c4ee35",
+          "virtual_replay_SHA": "d2f958c5f6960f01b91ac9c3bf0e4d406d25f532c7064047a9c77064233228e2",
+          "normalized_semantics_SHA": "b80130811e9f3f037286b4931ada6a0d118d2fcfa87922c8fd358746d7903994"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "ad9069a7a90a2a6cc53254a469b94257f7205d9ff949c7f420470e88aff1fec3",
+          "virtual_replay_SHA": "ce1b058af9d8656b3eb858a93d4fbedee54384047b743bf3a859794535b77fcd",
+          "normalized_semantics_SHA": "4acabc09e573d53040d77320df73d809b78a5a1dc4ba135af2e61b5f2de76cdd"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 103.82660709996708
+    },
+    {
+      "arm_id": "D09_K-15-S_S1_R1_AP",
+      "method": "AP",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5922648822560825,
+      "L": 0.5922648817120082,
+      "original_T_produce": 115.3093625260517,
+      "original_T_cert": 115.3093625260517,
+      "original_T_verify": 3.8546991001348943,
+      "original_T_total": 119.1640616261866,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "b2f6b66f9d8a63da1daafa5316ddc5d036d3c1c30727a8000947594bd264cd04",
+          "virtual_replay_SHA": "bb97c58f913f5b49643906f3554a097059cfc57171d49a82e94b69306ca33c67",
+          "normalized_semantics_SHA": "97155693fbcc105cc9186ced976f81fa1dda5dbf1fb2adc4ad6a616cba4e5800"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "a141cd0e619ae14a8aaaa43bcb3e121ebc08a477fd0667f229fcc0e4abf7417b",
+          "virtual_replay_SHA": "a141cd0e619ae14a8aaaa43bcb3e121ebc08a477fd0667f229fcc0e4abf7417b",
+          "normalized_semantics_SHA": "954f14d3d0a3edb89517ce8a92e1a71f5ce1bc2ea4d68b6609f857caab7670ff"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "1b7a783ebec8a0f11ba0431e4b831e4b3f826ad909c5910de58f2f93a519f650",
+          "virtual_replay_SHA": "1b7a783ebec8a0f11ba0431e4b831e4b3f826ad909c5910de58f2f93a519f650",
+          "normalized_semantics_SHA": "dc2c7fc4e829ace744bedd3840a14bf85ad5ec718e9bb160094891b4b3c94bb3"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "8b6389439980344e58555e7f7b66db12dbc365d2217df67bd9328a7a044d72b2",
+          "virtual_replay_SHA": "51c65403382c12251e4580e3bdf59e3f8d110832e007d1bf9e6b7a4c3db4b478",
+          "normalized_semantics_SHA": "e18001fdaf03836ef86f9ff661d1ed3d7f98889f030b65fac931fb0890c69dff"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "1dc49f6a291f7b3fd4467c8d8056b1cb16dc097ff988e6c2c7adfcb931a9c330",
+          "virtual_replay_SHA": "2f988b74caa3bd24ac85a20db7d0435d8e8172877c0e8c0b75d4952b5d858a9d",
+          "normalized_semantics_SHA": "7eae67f0329fa66ab9ae5896b463a38ec4c4b0b497843eeec573fa7f9afe47f8"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "c1cd8c6e53e558f0a786bc1d2cc3262c739dc687e64f3692b8a2f75640b03124",
+          "virtual_replay_SHA": "0b5c9a50839f9edaeb0e3e550560b4691fb9173cdcbed78baabebe84c1ad506f",
+          "normalized_semantics_SHA": "7d9c09ec639c65d73f233194bc04a84e5200c1d1e2d68fedd3141b1612bb6650"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 98.76966220000759
+    },
+    {
+      "arm_id": "D10_K-15-S_S1_R1_S2",
+      "method": "S2",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560558,
+      "original_T_produce": 113.8502923392225,
+      "original_T_cert": 113.8502923392225,
+      "original_T_verify": 4.1318171001039445,
+      "original_T_total": 117.98210943932645,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "0e304a1236d607769461670b9dd28f8ce3a76f605ceacd80f1741c85e5e082de",
+          "virtual_replay_SHA": "31c5c9be90157b45739514e721eefe4f84d3784bae43c7fe6e918680ad1a4ff3",
+          "normalized_semantics_SHA": "273cf00cce7cf25124b3de1b1d3d76eac786e0f179b70183254445e1f68bbd72"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "1d4d1ede36af3ddc7b07b33a2ff97e670b22dc3d7e0a92c9b3ebac02d23291f3",
+          "virtual_replay_SHA": "1d4d1ede36af3ddc7b07b33a2ff97e670b22dc3d7e0a92c9b3ebac02d23291f3",
+          "normalized_semantics_SHA": "aad17c5e21df087fdb746809ca35c5242aaffddf05f1bfb7c255b07d5b0b3d86"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "9ad00b6188287f5e105a5225f0d3158b412f682e4c40dadda2489144d22fe615",
+          "virtual_replay_SHA": "9ad00b6188287f5e105a5225f0d3158b412f682e4c40dadda2489144d22fe615",
+          "normalized_semantics_SHA": "47699e159d2ae8a92e6ef5b95ff06119482438c5bcb0289af7efe5f004499f31"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "68624f2b8c9a28288c38f6cc1971e745dccd823cef900358772ee71b3d7a7068",
+          "virtual_replay_SHA": "f65694c6bffb8296767dba6afa3c7126dd081e191b116caef1f145d9e6181af7",
+          "normalized_semantics_SHA": "64774c2b7b357076f68cfbd457100326c219b4ab940dcb2c4af907cbd346ebee"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "f7afe55cd99283fc1a5ab49134f4738996f808cee94e6419606849bc3a437682",
+          "virtual_replay_SHA": "68b180e46242857f8fb5b13792fbc4ad218596780c16fa24f7ab99d7a0111300",
+          "normalized_semantics_SHA": "c2a22ef632447ec0aa3bfca31198289cc321b919b1313b4d59d2828368b7d931"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "6584a71bc856c3817117128e6a72ea8e08cabf37e1938f613514ec254bf9cb28",
+          "virtual_replay_SHA": "e45ee7af10e129b5449fde621b1448bae278ddc28b6058893603b425272c676d",
+          "normalized_semantics_SHA": "fa5e800b8e37830f3b0d8d03af7696d871743ce92c7755b545e69dc5a6fd9f76"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 107.71952580008656
+    },
+    {
+      "arm_id": "D11_UC-B20-B_S0_R1_AP",
+      "method": "AP",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5773330699702928,
+      "L": 0.5773330699702925,
+      "original_T_produce": 4.205200212076306,
+      "original_T_cert": 4.205200212076306,
+      "original_T_verify": 2.2673618998378515,
+      "original_T_total": 6.472562111914158,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "b0bbbfe739af23e23f17d059e744f46e9aca07f51f9926efdfa2e59d0ef5ff1c",
+          "virtual_replay_SHA": "84f234907efd9743effe6788e93784b9907e34e952acc24be3428a21d69c7b10",
+          "normalized_semantics_SHA": "c160cf8025b50488c513badff9c73436b3aff13baf70822ca8e3d9f7ac533177"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "be9d1ffb856b1efece4f57572c1850c93f08abbd2fcc8b612548826e30a31edd",
+          "virtual_replay_SHA": "be9d1ffb856b1efece4f57572c1850c93f08abbd2fcc8b612548826e30a31edd",
+          "normalized_semantics_SHA": "a3de1e614509594f7531a1b993d6f5650c791e1b14b90463c006e053ccc95f74"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "00a1723524442a83ac139ee3a464cf20fccdb04e0d2ec2a56d0efd7589d5111c",
+          "virtual_replay_SHA": "00a1723524442a83ac139ee3a464cf20fccdb04e0d2ec2a56d0efd7589d5111c",
+          "normalized_semantics_SHA": "9c958f70d0bb727f7de335617815b6ab9d6505f6612a7958672b24056571177d"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "e8b9fa2a39b8baeedbc11681a824c4e83cf57121712aa946aceda2512b87e445",
+          "virtual_replay_SHA": "daa919efb307d431663a3b3c54b3a3152db1bde6c04f24d239417c269b749747",
+          "normalized_semantics_SHA": "a51f3899b90cfc58c766a82500d820b408246b22a7f6c994dc02fa5676708b36"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "692adee8db5f750baa0f25491aa108c71b40fb65a68fc8fd2b52a77b1a03a391",
+          "virtual_replay_SHA": "49d7636c19110c953750100f408f0b5a6d012d40d879579cf7cd0dab44fe2c53",
+          "normalized_semantics_SHA": "0c7f2cf0429ecdd9b7a0fffa07b9bacb861fd63acacd7b5026a1298851d36a97"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "bebc8c82e1f92cef9eebd25d5fd981338acbdbf1e44e4e6a1b9934f1277cbd1b",
+          "virtual_replay_SHA": "a9891133fd24201f78e010d89d5877db5ab5ca4746b07222bdf0267a3a441185",
+          "normalized_semantics_SHA": "7d34146a94641607e9d919fffe28e76809316767c997437aecc2ca1a857c58b8"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 4.446355100022629
+    },
+    {
+      "arm_id": "D12_UC-B20-B_S0_R1_S2",
+      "method": "S2",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5773330699702928,
+      "L": 0.5773330699702925,
+      "original_T_produce": 3.9309600652195513,
+      "original_T_cert": 3.9309600652195513,
+      "original_T_verify": 2.2735852000769228,
+      "original_T_total": 6.204545265296474,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "90f03bbc9697ecc8cd3dce15d639231bcd4b6bbdec8eec268505c40586b53df1",
+          "virtual_replay_SHA": "65a1ccd32f4afe10d153a0d42f7afeff566f62896e6e6b0da615b367590707a0",
+          "normalized_semantics_SHA": "9dfdfbcb2f924aca9e128f69e1f18ac532c1579370f8487523cc461ca1e46588"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "a4b8fa7ccf2c912e3a0568383cc214a7005e358e70dd378856bfa08594d989cf",
+          "virtual_replay_SHA": "a4b8fa7ccf2c912e3a0568383cc214a7005e358e70dd378856bfa08594d989cf",
+          "normalized_semantics_SHA": "e5781ec4b64dffc2027ee5cad8b9efee9fbd395ce5b0597a1b91cdc37c5571d2"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "b98746da0fd822d9837802bc2a2356b6bf18efdca401ba3575a965fff0b3150f",
+          "virtual_replay_SHA": "b98746da0fd822d9837802bc2a2356b6bf18efdca401ba3575a965fff0b3150f",
+          "normalized_semantics_SHA": "fa3a219c2c51450ef4166206c92f459d5d99c973ac264a0e1bfe18caa5fc6c3f"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "b43f6519ea00ca92578146a199ad8c61d3711c6118bcaf7f33cc548df0c258ca",
+          "virtual_replay_SHA": "d50b9176e374602cf0d2286b730ee0b2d94fc9d45d21798e8de147f0ee004560",
+          "normalized_semantics_SHA": "c5bd27caea6dcd5d08c33e93e0ee870435da8af660110dbc0f787711914a9af2"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "f931c9f81d1e33b95b0f664c95f397bf37c2a9a82543b81510368ca6d5683aa6",
+          "virtual_replay_SHA": "39a9c573d321f29445b6a0a5663634784c85955eb729002b34dbb6ec7b93671e",
+          "normalized_semantics_SHA": "25f4f7dbb0e7b30afaf53be5c20089bfc96facbe76b1b2953b39e5753819441c"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "dd6a367abb1f9795ccaa21d6c650b99e926e13d77f58103453198ef3962d0181",
+          "virtual_replay_SHA": "c8ad2009e0e6f510323f1542d5ba26d0e16ced4e9b522a0a027556540ba75906",
+          "normalized_semantics_SHA": "b5ed5b322affe7cab4bdad3c056f2325024166f9fa7d08fb341909d998245042"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 4.385774999856949
+    },
+    {
+      "arm_id": "D13_UC-B20-B_S1_R1_S2",
+      "method": "S2",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5773330699702928,
+      "L": 0.5773330699702925,
+      "original_T_produce": 3.8680739323608577,
+      "original_T_cert": 3.8680739323608577,
+      "original_T_verify": 2.2916634001303464,
+      "original_T_total": 6.159737332491204,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "82e438fb839575d2e1f9d39696fad5079c147e16f84f5b38acbb055fb6d0168d",
+          "virtual_replay_SHA": "9b1700f6a1904b6005a4d12a81646f0fd4a5d6e45a6405a65099960a96b39110",
+          "normalized_semantics_SHA": "f55202d338f185ceb498a00b0d6a1ef1f446ff822f9ec324bc9e0b8f5fea6378"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "a385f220b1b2c7177ff244e57ab00f7e0da4dd427ad600ccf4bd4d437e0ba9a0",
+          "virtual_replay_SHA": "a385f220b1b2c7177ff244e57ab00f7e0da4dd427ad600ccf4bd4d437e0ba9a0",
+          "normalized_semantics_SHA": "a4ef058512028cd935473bb7ca85f8376082c19033d4d5cd0e9990b32dac905d"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "123c7282305934055b94e627ad59e91c766d6e56ff8da66eca0d7580f690c48a",
+          "virtual_replay_SHA": "123c7282305934055b94e627ad59e91c766d6e56ff8da66eca0d7580f690c48a",
+          "normalized_semantics_SHA": "36109263aa65dced187610aff9cd1fcaf268b4f94ec3a6c6b7f0c3eff5360ddc"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "85e2f5ef3c46984444e98154ef613aa6b178f0a8bbcdd51adca5ea36106e9e29",
+          "virtual_replay_SHA": "c5167cc1354c83709e59fb8f0d29886b6eddfc1310b1cfb94c614b83d217bb7e",
+          "normalized_semantics_SHA": "87c2703bc30a4ff5637dd4f9bf4d450af28eae60ed68142f391742e708cce60b"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "6380034dffabfd8a9d7675a400c4ca691b40f390ceb4c131d4f8963005350d30",
+          "virtual_replay_SHA": "dabbce06c729448e2c0468bae089492d7cd8b20bbcc9a5a692972c85741a6108",
+          "normalized_semantics_SHA": "70eae5b14513b83f0309ada3207681284112d7c6b54f7b74228aeb2bcffadfcd"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "5f3afce0ac7b9eee9be09e0ba6fc64482c095199127700242545918541e613aa",
+          "virtual_replay_SHA": "280776ede51ac4d9a3d35f00b5bc2ea86b66fe835740be23c3a94695b07216db",
+          "normalized_semantics_SHA": "b3558fb0e7924dc8717b6768fffd07fbe81746d5f0fe8fb646a0f05ec7275de2"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 4.26528190006502
+    },
+    {
+      "arm_id": "D14_UC-B20-B_S1_R1_AP",
+      "method": "AP",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5773330699702928,
+      "L": 0.5773330699702925,
+      "original_T_produce": 3.7955262111499906,
+      "original_T_cert": 3.7955262111499906,
+      "original_T_verify": 2.2529705001506954,
+      "original_T_total": 6.048496711300686,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "f85dad8ca3c9bdc1bdbeb071ddbb532e358ee19daaf120395b27ff127ca7bf70",
+          "virtual_replay_SHA": "43ae7e1c629d3db18b46798dac675fca6818d646a75759793670e3306ef8e626",
+          "normalized_semantics_SHA": "2778397c34a58805833619bf7bccef32ce144837f4f4817468c56e2fab4341ab"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "227200753668ff3862273f95daebb7419ad4f634d3c5877a272dc792597478f8",
+          "virtual_replay_SHA": "227200753668ff3862273f95daebb7419ad4f634d3c5877a272dc792597478f8",
+          "normalized_semantics_SHA": "cc13a1ae254b592d1291b7ac3c38829b86984acdc36012bbbedf4146bdc9fdd9"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "a6149c031b613ff8588dc1253f2fc164f90a53c8f02bb680dc82ba3f02c473d3",
+          "virtual_replay_SHA": "a6149c031b613ff8588dc1253f2fc164f90a53c8f02bb680dc82ba3f02c473d3",
+          "normalized_semantics_SHA": "c97d1337cd716321ba8fa17550a211b361dcd47c90717db18e2169c45d35d428"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "c3faa94e4f145d06243c4aa1b146af02e2f2a992a04bc1cc088e49e4324fcc4c",
+          "virtual_replay_SHA": "883056e65bc4987d11a2e7051f734d1368c3347299ba2a353bb0db18041d893e",
+          "normalized_semantics_SHA": "d1fe73e141ae81d55b9f8c25a00bc33213a355d7d618b2134edc73664cf4def9"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "310bcbb9da9894c5a356dd71959a91d226c7e2236894ab04d5467a51b93243f1",
+          "virtual_replay_SHA": "4adcca1367d25da6bc8eb5e57783f193b4e874aeeca09c7c61e27356dd3cc7d6",
+          "normalized_semantics_SHA": "6c937a79454772c46adb7792963f15cad0c9674c284f98a87e7526027e56ebea"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "fc152c5cd4c617e1d508770bec3bc82fa3a82e9080c47eb65c45255937e8c8d5",
+          "virtual_replay_SHA": "5180292d3d3bffe3da16175eec62cdcac24b64e6d65ee61f7790fb183158771d",
+          "normalized_semantics_SHA": "8139e680205ddc38a1c54be85d2295f2da96f5d5900060e2741b2e8410374d43"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 4.290316199883819
+    },
+    {
+      "arm_id": "D15_X-35-B_S0_R1_S2",
+      "method": "S2",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR",
+      "U": 0.0,
+      "L": 0.0,
+      "original_T_produce": 17.58870143815875,
+      "original_T_cert": 17.58870143815875,
+      "original_T_verify": 3.6484022999648005,
+      "original_T_total": 21.23710373812355,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "d57a97a06b2fcf027ff0e0e69f9b4dbffcf0936fbbc95e8db7e831ef0d40ed65",
+          "virtual_replay_SHA": "ab69beeee9eafc4e7fcf0e679afd29e851aaf5acc7629c446c89158bf84a2a91",
+          "normalized_semantics_SHA": "ac21c1880bf962983d514d1e1e360f95fef99e7c13122b58285e0b0fdd23a17d"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "f87a4397c639cd2b240b6aad2c31f93f0499242e1d3d29151d3cf7368c1ae3ed",
+          "virtual_replay_SHA": "f87a4397c639cd2b240b6aad2c31f93f0499242e1d3d29151d3cf7368c1ae3ed",
+          "normalized_semantics_SHA": "697630252c0bb09f116ef63788b53e30d5324796966319fcf03e6e7457e00ca8"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "b08f102c9f80a17709df358dea2976af2f39370ecdfb9edd6cad2a066c577068",
+          "virtual_replay_SHA": "b08f102c9f80a17709df358dea2976af2f39370ecdfb9edd6cad2a066c577068",
+          "normalized_semantics_SHA": "1e8af77b4be3e022a481d436d8ceef517f9386edc72ae3fec90494ec792bbfc7"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "60ff65b6f2110e9be5313cbce9f10f074dadfe58a871c5b52f71807f283095be",
+          "virtual_replay_SHA": "d52cfdb01311cab384d9367f92c037f497cbe8d28e3651f3e5a1a154a10b031f",
+          "normalized_semantics_SHA": "e5a422652ace4f6167d6d2eb86d874a453051734056ae81458ab09feedab768e"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "d238a1abf52cdb3474b10ccbee81304f84d6d989268b355e4444222c3f5653d5",
+          "virtual_replay_SHA": "dfc3cb89b4f16ebfb64563da79fb99952b8eeebba28023519687e92a1b576038",
+          "normalized_semantics_SHA": "6eb4ea8076428044fb32fdcac5c1421836aa9bae5f4ee2584b9c37e7dfe682aa"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "a765b6f97076b09b0a80d2896f00ab349b2c65790425dd4437d3e99726e8e7f1",
+          "virtual_replay_SHA": "c20c6293db3ab8399fbb5a6d2b90cdc7ef4e46fa8c5dbcfc4392a647b3bd03c1",
+          "normalized_semantics_SHA": "cb9294da877208db0604ca5aaaa0ecd989c35a12c02b5836bec1f11727bfae35"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 5.83424809994176
+    },
+    {
+      "arm_id": "D16_X-35-B_S0_R1_AP",
+      "method": "AP",
+      "seed": 0,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR",
+      "U": 0.0,
+      "L": 0.0,
+      "original_T_produce": 79.973826370202,
+      "original_T_cert": 79.973826370202,
+      "original_T_verify": 3.6017611999996006,
+      "original_T_total": 83.5755875702016,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "c215279f9ed32cfc3dfbffb17bbe22842f49a90aa5a0850d29e149f0c9f297e5",
+          "virtual_replay_SHA": "539152112b6e2f2ec3f8db2183d59c53b4918048330354ac40ba5add547df291",
+          "normalized_semantics_SHA": "95859e3835853eb0dcc5d1c04da63e87c587e5d9d603b8fea4e07c0cbbd2772d"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "0c0255bbb9bb93fbd8bd71c0b9ab808b204f2534643d60433373108cb41f2ba0",
+          "virtual_replay_SHA": "0c0255bbb9bb93fbd8bd71c0b9ab808b204f2534643d60433373108cb41f2ba0",
+          "normalized_semantics_SHA": "e374a777f802430a3df3b251997ac265e0c8e8a22b8b71f63397f96b5f23875e"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "6271f0fd5777ac3474e6dc67435b479a1950268d61944fbb32e6a0cf34524428",
+          "virtual_replay_SHA": "6271f0fd5777ac3474e6dc67435b479a1950268d61944fbb32e6a0cf34524428",
+          "normalized_semantics_SHA": "139d9aa0a46f0a517bf77988ed85b3126cdf8eb9de3430cf9fb1205f60833028"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "437edce4a0db26dbc844a5483d54891298df370f7ae6d9eec572bdb74322d842",
+          "virtual_replay_SHA": "ecf271470ac61bc70f105a83b9d3e50ea4081ce66672374277b6d1f54a7b658a",
+          "normalized_semantics_SHA": "1adc339b6fd6bc6a82f9894d05ada876c7aee3d900d3c2a920e802e4418bb6b1"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "5ca15e0b04ef8a5b868be86503c8cc1d650135f57e07bd2509375b2e676bb583",
+          "virtual_replay_SHA": "61e70779d7cd7e7ec73a7cd42f25040e86cda30d09d90dd20c8a46107145451b",
+          "normalized_semantics_SHA": "c4eec0ab2dc8f6e9ac14adadcfb6f6e9e559d6df4e1595df077b4999c5de2bb0"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "1ae06a7e191c899fc351293d0300499042ec7f08df2fbc27c0f681c68cd6bf70",
+          "virtual_replay_SHA": "de8c88f89743770d0ecbd24db2b465e2ed8200a0f5cdcfc0277cb8c9b420eb2b",
+          "normalized_semantics_SHA": "1b1e107a804f20a0bf1fc8964828c0483b2186db12f16321d1d87cd9fb734272"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 5.6378842000849545
+    },
+    {
+      "arm_id": "D17_X-35-B_S1_R1_AP",
+      "method": "AP",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR",
+      "U": 0.0,
+      "L": 0.0,
+      "original_T_produce": 17.462860916741192,
+      "original_T_cert": 17.462860916741192,
+      "original_T_verify": 3.5902072000317276,
+      "original_T_total": 21.05306811677292,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "d700fc6d3aa3e6d5051f96b5f79b6f4dbe00e17a67c63c4dbe1a489d3c14fd47",
+          "virtual_replay_SHA": "b529cc2b0eec9ac0dcbb9c091ff5e6bbb6457afdac8c4a40c4e4d1b60bf2cfdd",
+          "normalized_semantics_SHA": "5559239720fd974f208ab752be219724173cb7c5943d79143f45cef5eb4d6c1a"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "3b3832dd6f86f864ae2c876f37f09d88324e894f026b3d355c3566cd302d0772",
+          "virtual_replay_SHA": "3b3832dd6f86f864ae2c876f37f09d88324e894f026b3d355c3566cd302d0772",
+          "normalized_semantics_SHA": "7a0f20e9db6296e7a7217a0f1300f010b9037a7eb785df9143db3a093e2fad4b"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "b0965a0fb37bb38b0101a3dcc3223047eed54c1e37b1f2aaadf4b36abd0eb248",
+          "virtual_replay_SHA": "b0965a0fb37bb38b0101a3dcc3223047eed54c1e37b1f2aaadf4b36abd0eb248",
+          "normalized_semantics_SHA": "385295c42715407e8f7ed1147cda0be875b6a79e3960b579d70ec461a226145a"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "2fc6d41b7aac06cce18712003479195fb5b2c2223ead0bc5fbf27c43028476e1",
+          "virtual_replay_SHA": "2ce5dfc5cf21aff1bfbdcef7b633497d42488f4a9be9e2cb6b21bac3c812b636",
+          "normalized_semantics_SHA": "d3d3066b7ecbacc4b024923e60427852f4fe5a02e9b895657582ceda1f51a828"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "57e69851bbdfbe665d6e5c1edf80154f94add0448a03ca7086e58bf671ba3147",
+          "virtual_replay_SHA": "23cf04414cfb3a2446b8db3a62b74c085d17a70c1b92b5b309730df4bf0d4d13",
+          "normalized_semantics_SHA": "5f6db446d94b4388deae72163b0146f54c95147df01fb2b5cba4dac88c139aab"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "239dde05229475503d8d9856e22dbd6c34e14fa049b1990a02dc25b7343e6caf",
+          "virtual_replay_SHA": "4829083766783de828874b618ea1d4354e47cfbfc009c6b879db97f2eac12df5",
+          "normalized_semantics_SHA": "c1526f797245654ccf5b60795ffb6579b909b35365c512564ccd3fe3ce962d31"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 5.623991600004956
+    },
+    {
+      "arm_id": "D18_X-35-B_S1_R1_S2",
+      "method": "S2",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR",
+      "U": 0.0,
+      "L": 0.0,
+      "original_T_produce": 18.17769737704657,
+      "original_T_cert": 18.17769737704657,
+      "original_T_verify": 3.5936797000467777,
+      "original_T_total": 21.771377077093348,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "be376cf72e1405132356f3faba2f1d30e7ed9a94c1ed95cf66e50af6dbd02913",
+          "virtual_replay_SHA": "308d54e472bc15a7d06864764573aa470a930b7c0f5b8c502f45e62ee0b4712c",
+          "normalized_semantics_SHA": "96300affd491b237b6a653a6d062825d698fee1f9493349a51a57e1d9086e751"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "f3c26756ae1671315882db8269ec9043c244261cac3dea7c1c0b7280a50e4d90",
+          "virtual_replay_SHA": "f3c26756ae1671315882db8269ec9043c244261cac3dea7c1c0b7280a50e4d90",
+          "normalized_semantics_SHA": "40265782e6bd4bd1a04eab64870aa2865262e8e27d1f2489edd1e561d45416f1"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "d1989e67890896d7d5d603e8728a824457e0745bb2d8c674516a61e160f84b35",
+          "virtual_replay_SHA": "d1989e67890896d7d5d603e8728a824457e0745bb2d8c674516a61e160f84b35",
+          "normalized_semantics_SHA": "74274095a69b574b5b522ba3e33986fd8ba40cd7c5c81ed146ec8ed245a59aac"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "76831e63192aca32f897fdfad8938727cd73d33f9d70f15523720bb58b196dc1",
+          "virtual_replay_SHA": "c2127608a91cb262780aeaecaba9557817cb4e9ffa4296f91b6bbbea1a1e2bb4",
+          "normalized_semantics_SHA": "ea4145326b81ea73627695413f9c18544a3d8c201d4769df166a20f0c7aacf24"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "605ed7464030b7bd4d7141c34659ae6760bd94cd6c956bad0868d437b5af10fc",
+          "virtual_replay_SHA": "ca75a9e7a8d9b76ff9326223ce739f93546776aa84c85cc7f0c194a0714533fb",
+          "normalized_semantics_SHA": "679e2ee130042fb098020b646a4f5503aa9d17d35f71c062093e2b53dc65e66d"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "e13fcb20952015e71ddbf6e5116f0d2fc8b061dae080565fffd410e11cc8141b",
+          "virtual_replay_SHA": "c5d8cd2dad6442516d3d0a20f8156a89b41467456694bfd0b726343e71cd3fea",
+          "normalized_semantics_SHA": "e47c38df2a677f681d2abe022dceddec45834982aed4b9fbb6eca903f6066f57"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 5.499141599982977
+    },
+    {
+      "arm_id": "D19_SM-B10-B_S1_R1_AP",
+      "method": "AP",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "original_T_produce": 0.7549883939791471,
+      "original_T_cert": 0.7549883939791471,
+      "original_T_verify": 0.22548640007153153,
+      "original_T_total": 0.9804747940506786,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "8e04f9a4f4084e0f1a3c2abb2f56ef11fc4988a2f84daf3cdabd7b9d06436596",
+          "virtual_replay_SHA": "9174529f06e1c0f304612a20c278350f26b54565abcef14a433622f9e863db00",
+          "normalized_semantics_SHA": "e971c7cfb92ea06b8e3c49b0733faefb444640e66ecd9731e51e4ac38e8eb063"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "52eb747bce8c9badc8c5afa71b7c7e5f82f7429e435cdf6c05716699031863fd",
+          "virtual_replay_SHA": "52eb747bce8c9badc8c5afa71b7c7e5f82f7429e435cdf6c05716699031863fd",
+          "normalized_semantics_SHA": "7b9868acb509dcdf3b66d32b415ed5facccd4d693d7b297d7f776884f3b001b5"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "c3929371ee6c2b7ea25b707c8dfd4ea49ffc6aef334000e637a0932f5a736dd9",
+          "virtual_replay_SHA": "c3929371ee6c2b7ea25b707c8dfd4ea49ffc6aef334000e637a0932f5a736dd9",
+          "normalized_semantics_SHA": "eaabdcd69379a9fd839fa9fe06a4d951546a690cfefffc5de421754a930b6443"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "9c9b613c0f39fa7210c4d9b1e36fc8ca93b5d0c0ab00bae4f25d04dc1d83d758",
+          "virtual_replay_SHA": "3108971cdce6c189503455c0bc03cfaa5c9f21e948be2018e9db21e4b1ca3e40",
+          "normalized_semantics_SHA": "10b21dca383bc493853ca92e4cf68c5f860f5ba5dbee02404e0675084c93843a"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "cd12bec85200d83c7d6d2f88bc5215e3a3c662c170ea56065e5f883caa07eabd",
+          "virtual_replay_SHA": "d0fac0e8fae7c33cdd7967236a81bef516fdb7973248a2b352a13bc5a09e0a32",
+          "normalized_semantics_SHA": "a9e860a3f54f2933bb8795b954bfa80236be7251620ba25ab9b8cf06af761982"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "51a27df3ba6bc50ebfc558e6e5763787c0fc96b9af587e2078b9c21fabfba2d8",
+          "virtual_replay_SHA": "b5685c058c7dc741701ac967ec830e7a5b9afb6855445bb279cdd9cdc870208a",
+          "normalized_semantics_SHA": "f99408615781817602504b08add19e2bee8f832e1b6f3da40e7a7b9772d4df09"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 0.6036670999601483
+    },
+    {
+      "arm_id": "D20_SM-B10-B_S1_R1_S2",
+      "method": "S2",
+      "seed": 1,
+      "repeat": 1,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "original_T_produce": 0.7838148365262896,
+      "original_T_cert": 0.7838148365262896,
+      "original_T_verify": 0.22919840016402304,
+      "original_T_total": 1.0130132366903126,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "16e4ee597f0ff2358b2399e076bf1bd31d98ebbde3458e77c61940b3efe7a2d7",
+          "virtual_replay_SHA": "0c540af6faeb80735c2201415b281868e8f55fa25dcd5f0c8f754a91b8ddee45",
+          "normalized_semantics_SHA": "bc45b0fda0696ea58c11ffef2006da2f9d3c58ea52165625ba115dea1e4ce070"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "2de3000b453d53f77973ae62739c913bfb3923bccb2adb5ebbf07b9947b5eaff",
+          "virtual_replay_SHA": "2de3000b453d53f77973ae62739c913bfb3923bccb2adb5ebbf07b9947b5eaff",
+          "normalized_semantics_SHA": "010d8c1f450da3769ca61911be9e81f5393ffd6d3b72f5260260877df3e65583"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "497bb5ced084e3c7f160e41e115658bc2652e9ed31b8af2012b55f7a93d92b51",
+          "virtual_replay_SHA": "497bb5ced084e3c7f160e41e115658bc2652e9ed31b8af2012b55f7a93d92b51",
+          "normalized_semantics_SHA": "44f5ac92ec70c9d72e255a176b280d661f123cb4e36b6a9b3afe38fff653652a"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "bcd0f82fa6c693dd49d3981a7940dd79e2c2262a5578f7ffb727616bd6ab869b",
+          "virtual_replay_SHA": "ea48f6605ca813fbf400fa93dba209edd3fde4f85ff47b7b1e8893f3fcf4ab97",
+          "normalized_semantics_SHA": "1da478c617dfaf8c577f0fa5a92b26df198fcb2b97d1308b3f73ae216e1fe98a"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "aed6f8806866f1df67dca9d2a8e0f5f6781bf8aff323a46d0ec9acf6e46e01f1",
+          "virtual_replay_SHA": "14bad002918b6525a64cce74af7fbbaae5bb8f7e258a305aea3aee4b119cc438",
+          "normalized_semantics_SHA": "1f7cb68282988b12417c16b512d12d76984c03d5db152da9e6547ba4f5b0b4da"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "8903496548401f875d753eb82e98c6d77d86a4eacca58f27dd7930bcaed4b5f5",
+          "virtual_replay_SHA": "bd595950ae0c266d26e072aeef1f62bdf9df84928dce654f3889466622b3e5f9",
+          "normalized_semantics_SHA": "5d41feb800ea8b48d6bed2a2c2af39dacbca585fc92fb8552ec3046238ad1237"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 0.5250282001215965
+    },
+    {
+      "arm_id": "D21_SM-B10-B_S1_R2_S2",
+      "method": "S2",
+      "seed": 1,
+      "repeat": 2,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "original_T_produce": 0.7996461328584701,
+      "original_T_cert": 0.7996461328584701,
+      "original_T_verify": 0.2298622999805957,
+      "original_T_total": 1.0295084328390658,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "822468c05ff18b8c75b4798f559b1f0710f1cb798426ef23f0e16424d282069b",
+          "virtual_replay_SHA": "82f6d27bfdd9633d8df82be819f483d8354b315c9790334996b687b504616358",
+          "normalized_semantics_SHA": "61aee6deba520adf5ab4d86ed60755c0f535740d19b59cbfb4b022a9fdc24ade"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "525dfbf1688af3f2b47b7d7e41378fd32a9e65ef33f6008ea602a9805b9835d7",
+          "virtual_replay_SHA": "525dfbf1688af3f2b47b7d7e41378fd32a9e65ef33f6008ea602a9805b9835d7",
+          "normalized_semantics_SHA": "68118ff071c48d9d257b9d512419174fcfbb1cec6275151aef8b19fab18dba02"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "4fa43ee089c53bbc9329de5e3bb743bdd7cf0caa72eca3ad2418a209b49d1bcd",
+          "virtual_replay_SHA": "4fa43ee089c53bbc9329de5e3bb743bdd7cf0caa72eca3ad2418a209b49d1bcd",
+          "normalized_semantics_SHA": "f0b4f2c4a7a6341eaed9c7e0cd1e2dbbf5d59d373833172e0be1a4efe30c8197"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "6fc395acebaa5ece5369f6dd099e6ad64b1a85df5a6c4c7f97a88b09d00ce098",
+          "virtual_replay_SHA": "8ab3d4f9bcf74bc2f58abe5fcd8db8a7e77a828a957b569a76e1a5d98ac533df",
+          "normalized_semantics_SHA": "d66417ec87c167855343066b920ef420736f4ec36fe82710a7f899738331077c"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "63a9dd89082247d444b1aa1da703ec690b0bef8860c8bdefc04cc97e3dec31c5",
+          "virtual_replay_SHA": "bc20c65ce75dfbc4519ad50b37bd6df17936e525f406c208a975ee47207f37b5",
+          "normalized_semantics_SHA": "eb5b3bebf273e0c132dc814052dd255eb9bc41ab9c95833e1a2486f141f4bded"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "d535bf2b7e9e0ee71d9867c639e5922b205e627c0c616922581f95a50d9db84b",
+          "virtual_replay_SHA": "b83103814f018fee136cba62be77e5a323011674c5dab9af5c16a448514e94f0",
+          "normalized_semantics_SHA": "81afd60c462de5c6fc4fe0fce50979e80a9507519a2f0a7b3804c5a6d7b6a340"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 0.5233314998913556
+    },
+    {
+      "arm_id": "D22_SM-B10-B_S1_R2_AP",
+      "method": "AP",
+      "seed": 1,
+      "repeat": 2,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed",
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "original_T_produce": 0.7379350662231445,
+      "original_T_cert": 0.7379350662231445,
+      "original_T_verify": 0.23277380014769733,
+      "original_T_total": 0.9707088663708419,
+      "compared_derived": [
+        {
+          "name": "audit.json",
+          "stored_SHA": "e9f3519bb5d44639db853bbfbc965cc4644cb306e7dc70b6c55c7e42a71a5976",
+          "virtual_replay_SHA": "60f9dcc3f2d9d90ce51ea4eeef98d7f1903dffd37edb097f221d248f21d4e03c",
+          "normalized_semantics_SHA": "4798fa4218105af333180d371b3a2c75bd96bf65d649d58e0afba5b8fd243177"
+        },
+        {
+          "name": "native_claims.json",
+          "stored_SHA": "672df669ae36e80f1b5a8cf99aa6a646101be1ea67fc7d03c6f0e1d4f38442ee",
+          "virtual_replay_SHA": "672df669ae36e80f1b5a8cf99aa6a646101be1ea67fc7d03c6f0e1d4f38442ee",
+          "normalized_semantics_SHA": "8a8e0e0958023a32a37d9efaa60ff2d6a214f05cf478529fc13cce14a0e24bef"
+        },
+        {
+          "name": "claim_rejections.json",
+          "stored_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "virtual_replay_SHA": "373783a3feb217ad1f0a4878012438cbe016ccc6d42476d960e90f025bdfedf2",
+          "normalized_semantics_SHA": "9e8eee89da37bc32f08aa8d1ee848b063807f0c9c091ed9d7bcb3efdc0cb09b5"
+        },
+        {
+          "name": "independent_evidence.json",
+          "stored_SHA": "f0600a0f2210f982d9bf3d2a8c86046b68a512f7c5248b103ee7274267aa2c09",
+          "virtual_replay_SHA": "f0600a0f2210f982d9bf3d2a8c86046b68a512f7c5248b103ee7274267aa2c09",
+          "normalized_semantics_SHA": "277a2ae76e4401374a7c031d1ce58ccf5a338055005161788ae6280d1a89df41"
+        },
+        {
+          "name": "verification_closeout.json",
+          "stored_SHA": "6a6ec88e290a840ff7b6b01e9c7b11afc113ea178f0d50248709502a31886a8e",
+          "virtual_replay_SHA": "63defa0d986c4ecf8a13d7b202314259889c6e4e046cf2621b4d051d75c1bcdd",
+          "normalized_semantics_SHA": "f4be24c808681a89262ffa8fbd48aa16f2759363dc3926c7cba12a8b4a34b83c"
+        },
+        {
+          "name": "arm_total_receipt.json",
+          "stored_SHA": "989b517ac20935478fd7d5967b70e8c1521a19a1554f428057eac878957ac19a",
+          "virtual_replay_SHA": "b7df533e7cb5bbd22a891852db7a89cb3daa6de2620437da834bc3f184f838bb",
+          "normalized_semantics_SHA": "5c02c3b0ae00faa0ed48d96746ff70d32181dbef9af96c6b2a63a92e59b2d5c9"
+        },
+        {
+          "name": "round135_endpoint.json",
+          "stored_SHA": "2cd7047ff5d106af72c3808e6375dc0222efd867ef356535ef2ffe087805f944",
+          "virtual_replay_SHA": "aefffb53cbb9ed9f7fe84deda51c375ccd2d19169ce4ec5957321e86e6f80bea",
+          "normalized_semantics_SHA": "0ab4f10d87f81da0aa150b9123e554787528de4038a2cf29eabfa31e29b4ed43"
+        }
+      ],
+      "transport": {
+        "original_source_SHA": "fc77d2dee05a65f3111898dd753552ae30fb321f43f83ed2db933bdb71237220",
+        "cloned_source_SHA": "b6c295de0629497f8f206b91996602cea9811901a992eabd3d64bdabbdbe8bf3",
+        "exhaustive_substitution_whitelist": [
+          {
+            "before": "tick=time.perf_counter();d=Path(launch['destination']);p=launch['panel']",
+            "after": "tick=portable_stored_total['t_verified_perf'];d=Path(launch['destination']);p=launch['panel']",
+            "count": 1
+          },
+          {
+            "before": "assert not (d/'verification_closeout.json').exists(),'closed verification is immutable; rebuild only aggregates it'",
+            "after": "assert (d/'verification_closeout.json').is_file(),'portable replay requires the immutable measured closeout'",
+            "count": 1
+          },
+          {
+            "before": "verified=time.perf_counter()",
+            "after": "verified=portable_stored_total['t_verified_perf']",
+            "count": 1
+          },
+          {
+            "before": "t_verified_unix=time.time()",
+            "after": "t_verified_unix=portable_stored_total['t_verified_unix']",
+            "count": 1
+          },
+          {
+            "before": "seconds=time.perf_counter()-tick",
+            "after": "seconds=portable_replay_elapsed()",
+            "count": 1
+          }
+        ],
+        "source_physical_model_H_Start_return_cover_source_predicates_changed": false,
+        "execution_environment_substitutions": [
+          "strict recorded-root path transport",
+          "published pinned source map instead of Git",
+          "historical native asset execution attestations instead of unavailable local asset remeasurement",
+          "named in-memory derived JSON writes; original restored bytes retained"
+        ]
+      },
+      "pure_replay_seconds": 0.5153196000028402
+    }
+  ],
+  "mathematical_replay": {
+    "roots": [
+      {
+        "role": "K-20-S",
+        "AP_contract": {
+          "enabled": true,
+          "AP_rows": 1,
+          "state_coefficients_checked": 451,
+          "actual_loaded_ratio_and_support": true,
+          "exact_downward_coefficient_check": true,
+          "added_columns": 0,
+          "coefficients": 451
+        },
+        "off_contract": {
+          "enabled": false,
+          "AP_rows": 0,
+          "state_coefficients_checked": 451,
+          "actual_loaded_ratio_and_support": true,
+          "exact_downward_coefficient_check": true,
+          "added_columns": 0,
+          "coefficients": 0
+        },
+        "max_row_violation": 2.7284841053187847e-12,
+        "max_bound_violation": 0.0,
+        "objective": 0.3187585426155805,
+        "recorded_quality": {
+          "ConstrVio": 0.0,
+          "BoundVio": 0.0,
+          "DualVio": 4.579669976578771e-16,
+          "ConstrResidual": 7.275957614183426e-12,
+          "DualResidual": 4.510281037539698e-16,
+          "ComplVio": 0.0
+        },
+        "original_and_IND_reused": true,
+        "new_LP_Optimize_not_repeated": true,
+        "numerical_optimality_not_reproved": true
+      },
+      {
+        "role": "K-35-U",
+        "AP_contract": {
+          "enabled": true,
+          "AP_rows": 1,
+          "state_coefficients_checked": 539,
+          "actual_loaded_ratio_and_support": true,
+          "exact_downward_coefficient_check": true,
+          "added_columns": 0,
+          "coefficients": 543
+        },
+        "off_contract": {
+          "enabled": false,
+          "AP_rows": 0,
+          "state_coefficients_checked": 539,
+          "actual_loaded_ratio_and_support": true,
+          "exact_downward_coefficient_check": true,
+          "added_columns": 0,
+          "coefficients": 0
+        },
+        "max_row_violation": 2.8754776337791554e-13,
+        "max_bound_violation": 0.0,
+        "objective": 0.27385768132726473,
+        "recorded_quality": {
+          "ConstrVio": 0.0,
+          "BoundVio": 0.0,
+          "DualVio": 2.0781125155552253e-07,
+          "ConstrResidual": 1.4551915228366852e-11,
+          "DualResidual": 4.2327252813834093e-16,
+          "ComplVio": 0.0
+        },
+        "original_and_IND_reused": true,
+        "new_LP_Optimize_not_repeated": true,
+        "numerical_optimality_not_reproved": true
+      }
+    ],
+    "AP_exact_coefficients_and_saved_residuals_checked": true,
+    "new_Optimize": 0
+  },
+  "recomputed_budget": {
+    "G1_seconds": 17148.624478299604,
+    "remaining_G1_seconds": 11651.375521700396,
+    "by_category": {
+      "B": 36.76280710019637,
+      "C": 10.063681199997724,
+      "D": 17101.79798999941,
+      "E": 0.0,
+      "repair": 0.0
+    },
+    "limits": {
+      "B": 28800.0,
+      "C": 28800.0,
+      "D": 28800.0,
+      "E": 28800.0,
+      "repair": 28800.0
+    },
+    "category_remaining": {
+      "B": 28763.237192899804,
+      "C": 28789.936318800002,
+      "D": 11698.20201000059,
+      "E": 28800.0,
+      "repair": 28800.0
+    },
+    "separately_reported_seconds": 266.83043630060274,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "Optimize": 0,
+  "compile": 0,
+  "vendor_DLL_loads": 0,
+  "Git_calls": 0,
+  "subprocess_calls": 0,
+  "original_measured_clocks_preserved": true,
+  "restored_raw_read_only": true,
+  "attestations_used": [
+    {
+      "recorded_path": "E:\\codes\\ExactEBRP-work\\build-cache\\round135\\ExactEBRP.exe",
+      "SHA": "652335fbc004eb4799c01d074dd43c31a883ae40fc353ed37eaa82e98b53a3ed",
+      "kind": "frozen production PE; never opened",
+      "verification": "historical execution attestation only; no local native asset opened or remeasured"
+    },
+    {
+      "recorded_path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+      "SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "kind": "qualified native DLL; never opened",
+      "verification": "historical execution attestation only; no local native asset opened or remeasured"
+    }
+  ],
+  "source_publication_SHA": "ccfeecf9d31e6c9d21e8bc6770bdfc32fc65349183a2a25c94916c3e7c39a377",
+  "aggregate_variant_certificates_recomputed": {
+    "S2": 10,
+    "AP": 10
+  },
+  "historical_whole_campaigns_replayed": 0,
+  "seconds": 2635.3383790000807
+}

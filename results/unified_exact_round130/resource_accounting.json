@@ -1,0 +1,2729 @@
+{
+  "UTC": "2026-10-22T14:03:46.035552+00:00",
+  "outer_limit_seconds": 39600,
+  "paid_outer_seconds": 20626.27874680003,
+  "remaining_outer_seconds": 18973.72125319997,
+  "unclosed": [],
+  "by_kind": {
+    "analysis": 16.3358075999422,
+    "build": 37.4683596000541,
+    "cleanup": 17.8934089000104,
+    "documentation": 33.03990749991499,
+    "formal": 17380.178572000004,
+    "postanalysis": 30.800158300087787,
+    "qualification": 218.6124634000007,
+    "recovery": 1239.6753751999931,
+    "release": 371.2117757999804,
+    "review": 321.06291850004345
+  },
+  "nested_H_LP_MIP_seconds_added": false,
+  "closed_meters": [
+    {
+      "label": "analysis_01",
+      "kind": "postanalysis",
+      "exit_code": 0,
+      "outer_seconds": 14.224054799997248,
+      "launch_SHA": "460c567e05215ad3a57f0e3e2199dab2bf721b06285dbbb85d07dfa32b4d483d",
+      "receipt_SHA": "e51958d048cfd9099977f23a75f43cd532f5475f7ef6a04bfa6f6c9b43bc1982",
+      "launch": {
+        "UTC": "2026-10-22T13:02:24.072128+00:00",
+        "kind": "postanalysis",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_analysis.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18536.25939500006,
+          "remaining_outer_seconds": 21063.74060499994,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "formal": 17380.178572000004,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 14.224054799997248,
+        "start_unix": 1792674144.0721285,
+        "end_unix": 1792674158.2963526,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "build_CplexBaseline_01",
+      "kind": "build",
+      "exit_code": 0,
+      "outer_seconds": 7.380854199989699,
+      "launch_SHA": "f4e4829229e54ba494554bc4220dc1735ad70f02e6d05587a739400f1d130a15",
+      "receipt_SHA": "5219bde07c5ba655d65de1687d2acee57efc3d877dc73ca8ffd9fb50ac333121",
+      "launch": {
+        "UTC": "2026-10-22T07:50:33.274400+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round130\\include",
+          "-ID:/gurobi1302/win64/include",
+          "-c",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\src\\CplexBaseline.cpp",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\CplexBaseline.o"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 900,
+          "remaining_outer_seconds": 38700,
+          "unclosed": [],
+          "by_kind": {},
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 7.380854199989699,
+        "start_unix": 1792655433.2744005,
+        "end_unix": 1792655440.655599,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "build_exporter_01",
+      "kind": "build",
+      "exit_code": 0,
+      "outer_seconds": 2.3566518001025543,
+      "launch_SHA": "8bd09698704fb6275a059ac7a34651785c96128228f864a7250ba5a504778a08",
+      "receipt_SHA": "479aa28c2a2ef6f55aa5e090620b945269b9b2ae257f5bacbbcc51f02bba3bb7",
+      "launch": {
+        "UTC": "2026-10-22T07:53:52.366359+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round130\\include",
+          "-ID:/gurobi1302/win64/include",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_export.cpp",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\CplexBaseline.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\IntervalRowFactory.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\PaperExternalGiniTree.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\GurobiBaseline.o",
+          "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\build\\research\\round120\\libexact_ebrp_core.a",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 935.1117077999515,
+          "remaining_outer_seconds": 38664.88829220005,
+          "unclosed": [],
+          "by_kind": {
+            "build": 35.111707799951546
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.3566518001025543,
+        "start_unix": 1792655632.3663592,
+        "end_unix": 1792655634.723713,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "build_GurobiBaseline_01",
+      "kind": "build",
+      "exit_code": 0,
+      "outer_seconds": 12.239863299997523,
+      "launch_SHA": "9b0867d8b121feac8d15cb54a1faab7e3bb0c315fce43e02791e49d7a32955d4",
+      "receipt_SHA": "abbeaab8dc93420cedd07d5da20ff0126624cc1567951943f044405cda4a33e7",
+      "launch": {
+        "UTC": "2026-10-22T07:50:47.105993+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round130\\include",
+          "-ID:/gurobi1302/win64/include",
+          "-c",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\src\\GurobiBaseline.cpp",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\GurobiBaseline.o"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 913.6539570000023,
+          "remaining_outer_seconds": 38686.346043,
+          "unclosed": [],
+          "by_kind": {
+            "build": 13.653957000002265
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 12.239863299997523,
+        "start_unix": 1792655447.1059933,
+        "end_unix": 1792655459.344875,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "build_IntervalRowFactory_01",
+      "kind": "build",
+      "exit_code": 0,
+      "outer_seconds": 1.4163573000114411,
+      "launch_SHA": "41d693e08b7e0f8eaef41d0dc5d593460ecaa874fc767b29dc1ac590367abea6",
+      "receipt_SHA": "93553cc8926070ac8afc2da9947abb7a2ba72a84b0353bc8a4d9ce3541a71e13",
+      "launch": {
+        "UTC": "2026-10-22T07:50:40.701288+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round130\\include",
+          "-ID:/gurobi1302/win64/include",
+          "-c",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\src\\IntervalRowFactory.cpp",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\IntervalRowFactory.o"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 907.3808541999897,
+          "remaining_outer_seconds": 38692.61914580001,
+          "unclosed": [],
+          "by_kind": {
+            "build": 7.380854199989699
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.4163573000114411,
+        "start_unix": 1792655440.7012882,
+        "end_unix": 1792655442.1317558,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "build_link_01",
+      "kind": "build",
+      "exit_code": 0,
+      "outer_seconds": 1.2229517999803647,
+      "launch_SHA": "c4e2fa6db540d031754512a76b9063703ad0d3818257415720fae1a5a7388787",
+      "receipt_SHA": "5938fb6e3ca06a418087dfe59115a7ba95690ba3a5b8c2e9f351064f08ef6994",
+      "launch": {
+        "UTC": "2026-10-22T07:51:07.409567+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\main.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\CplexBaseline.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\IntervalRowFactory.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\PaperExternalGiniTree.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\GurobiBaseline.o",
+          "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\build\\research\\round120\\libexact_ebrp_core.a",
+          "-lkernel32",
+          "-luser32",
+          "-lgdi32",
+          "-lwinspool",
+          "-lshell32",
+          "-lole32",
+          "-loleaut32",
+          "-luuid",
+          "-lcomdlg32",
+          "-ladvapi32",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\ExactEBRP.exe"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 933.8887559999712,
+          "remaining_outer_seconds": 38666.11124400003,
+          "unclosed": [],
+          "by_kind": {
+            "build": 33.88875599997118
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.2229517999803647,
+        "start_unix": 1792655467.4095676,
+        "end_unix": 1792655468.631488,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "build_main_01",
+      "kind": "build",
+      "exit_code": 0,
+      "outer_seconds": 7.994935699971393,
+      "launch_SHA": "0aa409648bb35540680cb43f9c773079a49a5801df447809e907177e9e735355",
+      "receipt_SHA": "fe3b8e25c9b6ed6984d87f36d905d83babfd7349f9ec143e0ba3c7559c35e10f",
+      "launch": {
+        "UTC": "2026-10-22T07:50:59.401507+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round130\\include",
+          "-ID:/gurobi1302/win64/include",
+          "-c",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\src\\main.cpp",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\main.o"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 925.8938202999998,
+          "remaining_outer_seconds": 38674.1061797,
+          "unclosed": [],
+          "by_kind": {
+            "build": 25.89382029999979
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 7.994935699971393,
+        "start_unix": 1792655459.4015076,
+        "end_unix": 1792655467.382821,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "build_PaperExternalGiniTree_01",
+      "kind": "build",
+      "exit_code": 0,
+      "outer_seconds": 4.856745500001125,
+      "launch_SHA": "984032eb128c01578562d5805489d7022ca51d5f19f56890785a385f059229a9",
+      "receipt_SHA": "e516ef3b913462ac70e628d3aa18e1c464a8e604cbdfe51b2995e1c89b79e5ce",
+      "launch": {
+        "UTC": "2026-10-22T07:50:42.193871+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round130\\include",
+          "-ID:/gurobi1302/win64/include",
+          "-c",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\src\\PaperExternalGiniTree.cpp",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\PaperExternalGiniTree.o"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 908.7972115000011,
+          "remaining_outer_seconds": 38691.2027885,
+          "unclosed": [],
+          "by_kind": {
+            "build": 8.79721150000114
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 4.856745500001125,
+        "start_unix": 1792655442.193872,
+        "end_unix": 1792655447.044156,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "campaign_group01_01",
+      "kind": "formal",
+      "exit_code": 0,
+      "outer_seconds": 581.9729633000679,
+      "launch_SHA": "6080e70b2e5d283653030f2afc757b5d0d9c65cddc55349621ca829d37ac9aa4",
+      "receipt_SHA": "6c8a5915d375e91bf37012a71cd4b50732d2ca0390df07258a4913da48f5dc54",
+      "launch": {
+        "UTC": "2026-10-22T08:12:32.293813+00:00",
+        "kind": "formal",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "campaign/group01"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 1156.0808230000548,
+          "remaining_outer_seconds": 38443.919176999945,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 31200
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 581.9729633000679,
+        "start_unix": 1792656752.2938137,
+        "end_unix": 1792657334.2663352,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "campaign_group02_01",
+      "kind": "formal",
+      "exit_code": 0,
+      "outer_seconds": 487.56977259996347,
+      "launch_SHA": "d431644a8cab980a0f6fe463535adb86543234a0849878f1a68550aa7effd885",
+      "receipt_SHA": "6334c51162510e3bd0c0a132064df1c2ee1fb4c0362f5a97a2cb1bd2440b6783",
+      "launch": {
+        "UTC": "2026-10-22T08:22:14.298427+00:00",
+        "kind": "formal",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "campaign/group02"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 1738.0537863001227,
+          "remaining_outer_seconds": 37861.94621369988,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "formal": 581.9729633000679,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 26400
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 487.56977259996347,
+        "start_unix": 1792657334.298427,
+        "end_unix": 1792657821.868275,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "campaign_group03_01",
+      "kind": "formal",
+      "exit_code": 0,
+      "outer_seconds": 3518.992433300009,
+      "launch_SHA": "73ab961448b8dc36245a87d6b6c0325345472e6821ed76674de20b0cf1d9370b",
+      "receipt_SHA": "1263b3f9c1f3173f4b86bc13a4cfe354d74a40289bdc118e54809905322d6b23",
+      "launch": {
+        "UTC": "2026-10-22T08:30:21.905204+00:00",
+        "kind": "formal",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "campaign/group03"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 2225.623558900086,
+          "remaining_outer_seconds": 37374.376441099914,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "formal": 1069.5427359000314,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 21600
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3518.992433300009,
+        "start_unix": 1792657821.9052045,
+        "end_unix": 1792661340.8983614,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "campaign_group04_01",
+      "kind": "formal",
+      "exit_code": 0,
+      "outer_seconds": 3379.8469084999524,
+      "launch_SHA": "3f915c270516ba583527a057e5e4735ede28d119bac6933e3f3ca2fd8a70aaa4",
+      "receipt_SHA": "a8202fb60396543dcf192dfdbb2bb25f02a1d72f80d3d3217cd7aa6df2eb5153",
+      "launch": {
+        "UTC": "2026-10-22T09:29:00.936106+00:00",
+        "kind": "formal",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "campaign/group04"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 5744.615992200095,
+          "remaining_outer_seconds": 33855.384007799905,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "formal": 4588.53516920004,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 16800
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3379.8469084999524,
+        "start_unix": 1792661340.9356015,
+        "end_unix": 1792664720.7820373,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "campaign_group05_01",
+      "kind": "formal",
+      "exit_code": 0,
+      "outer_seconds": 4695.673147300025,
+      "launch_SHA": "8fd9c478a29a6e3c9827d68ddc55a7158178180bf741fb9b2a0ab48e9355dff9",
+      "receipt_SHA": "ff1dcadf41b05a66de98e1d42963e3b7f3b46bff5972621150f4b056ff26ce77",
+      "launch": {
+        "UTC": "2026-10-22T10:25:20.817023+00:00",
+        "kind": "formal",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "campaign/group05"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 9124.462900700048,
+          "remaining_outer_seconds": 30475.537099299952,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "formal": 7968.382077699993,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 12000
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 4695.673147300025,
+        "start_unix": 1792664720.8170238,
+        "end_unix": 1792669416.490834,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "campaign_group06_01",
+      "kind": "formal",
+      "exit_code": 0,
+      "outer_seconds": 4716.123346999986,
+      "launch_SHA": "8e00463b8d2ab38df5a7247c31f345353e2a706c1f6c7c244e4fbfa7360de2f8",
+      "receipt_SHA": "392555439e1b9216a8d624817fa0f00431c3656176033aef7274b216671ffc1d",
+      "launch": {
+        "UTC": "2026-10-22T11:43:36.523149+00:00",
+        "kind": "formal",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "campaign/group06"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 13820.136048000073,
+          "remaining_outer_seconds": 25779.863951999927,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "formal": 12664.055225000018,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 7200
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 4716.123346999986,
+        "start_unix": 1792669416.5231493,
+        "end_unix": 1792674132.6469254,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "claim_01",
+      "kind": "postanalysis",
+      "exit_code": 0,
+      "outer_seconds": 0.0854419000679627,
+      "launch_SHA": "08bee496c395a5708fe29bb6c05966d196aee9eb5f796799ebeb1f8de7ffb8e8",
+      "receipt_SHA": "76fb7624e722f40b7aca3b9aa7b1a93c8092f5c326a7d1e344daca6597069b66",
+      "launch": {
+        "UTC": "2026-10-22T13:04:32.495590+00:00",
+        "kind": "postanalysis",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_decision.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18550.483449800056,
+          "remaining_outer_seconds": 21049.516550199944,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "formal": 17380.178572000004,
+            "postanalysis": 14.224054799997248,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.0854419000679627,
+        "start_unix": 1792674272.4955902,
+        "end_unix": 1792674272.5805933,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "cleanup_plan_01",
+      "kind": "cleanup",
+      "exit_code": 0,
+      "outer_seconds": 7.644327000016347,
+      "launch_SHA": "9c9f5256699c18c8fcfc2401802cf1960e03c449c2d3368496cc0fb0f55ab3d8",
+      "receipt_SHA": "f343d3c1e3fb713b92671e191ef5f3c6f10457085fadca637bda6595eafb7a40",
+      "launch": {
+        "UTC": "2026-10-22T14:01:11.799925+00:00",
+        "kind": "cleanup",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_closeout.py",
+          "plan-cleanup"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 20548.38533790002,
+          "remaining_outer_seconds": 19051.61466209998,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 33.03990749991499,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "recovery": 1239.6753751999931,
+            "release": 371.2117757999804,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 7.644327000016347,
+        "start_unix": 1792677671.7999256,
+        "end_unix": 1792677679.4445026,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "export_manifest_01",
+      "kind": "release",
+      "exit_code": 0,
+      "outer_seconds": 7.847552499966696,
+      "launch_SHA": "436f7bc8b3142e14114e19b60feb1f10e0c8fbb955f2a3e15a2b24fbd6ed1d5f",
+      "receipt_SHA": "abff1bc0df594ecc76f879f0b8612800e853229d8fef59c7109c45599e19c660",
+      "launch": {
+        "UTC": "2026-10-22T13:35:40.522227+00:00",
+        "kind": "release",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_release.py",
+          "manifest"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 19260.557759100106,
+          "remaining_outer_seconds": 20339.442240899894,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 33.03990749991499,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "release": 323.059572200058,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 7.847552499966696,
+        "start_unix": 1792676140.5222273,
+        "end_unix": 1792676148.3697898,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "final_independent_01",
+      "kind": "review",
+      "exit_code": 1,
+      "outer_seconds": 162.15818799997214,
+      "launch_SHA": "d58318de0e2355a00e7fb5cce1b181e1ba97b8eb014a74b0c10be941d0b312dc",
+      "receipt_SHA": "90fe33ca566260e856392f73e98814f009f90266365c03aa9deda6a2ffa35783",
+      "launch": {
+        "UTC": "2026-10-22T13:06:18.939476+00:00",
+        "kind": "review",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts\\round130_portable_check.py",
+          "--receipt",
+          "results\\unified_exact_round130\\review\\final_independent_evidence.json"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18551.180483500124,
+          "remaining_outer_seconds": 21048.819516499876,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "documentation": 0.6115917999995872,
+            "formal": 17380.178572000004,
+            "postanalysis": 14.30949670006521,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 162.15818799997214,
+        "start_unix": 1792674378.9394763,
+        "end_unix": 1792674541.0975022,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "final_independent_02",
+      "kind": "review",
+      "exit_code": 0,
+      "outer_seconds": 158.9047305000713,
+      "launch_SHA": "bd53f7a058922ac24dede3d0d7a05fa8c304a16acff5ebf45d3334a0373b9da2",
+      "receipt_SHA": "522295643de51e0f97de7545f49bbec929a64d71f9f5b7f36fae56be267d4753",
+      "launch": {
+        "UTC": "2026-10-22T13:17:27.801117+00:00",
+        "kind": "review",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts\\round130_portable_check.py",
+          "--receipt",
+          "results\\unified_exact_round130\\review\\final_independent_evidence.json"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18746.16514070006,
+          "remaining_outer_seconds": 20853.83485929994,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 0.6115917999995872,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 162.15818799997214
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 158.9047305000713,
+        "start_unix": 1792675047.8011172,
+        "end_unix": 1792675206.7151985,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "final_report_01",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 0.08953900006599724,
+      "launch_SHA": "d6d109544a46b4435c3e58f24066572f035b1bb3518a3f9fefcb9c1688f5912b",
+      "receipt_SHA": "4dd4b8a2bfbd3678ad4b6a9dcb0f11d30b05280714b6cc7ee36c17c5df3f3efc",
+      "launch": {
+        "UTC": "2026-10-22T13:28:41.419913+00:00",
+        "kind": "documentation",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_report.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18937.40864789998,
+          "remaining_outer_seconds": 20662.59135210002,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 32.95036849984899,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.08953900006599724,
+        "start_unix": 1792675721.4199138,
+        "end_unix": 1792675721.5095024,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "manuscript_source_01",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 0.5016033999854699,
+      "launch_SHA": "b5b5ca87c30257f76ab0e9462b9aeac485ebb9c67fb2d44f39d11f05b579a5fa",
+      "receipt_SHA": "c591922a0d2bf352b569122a16dc4c21fed92a0e38291144feae04f16eea4f70",
+      "launch": {
+        "UTC": "2026-10-22T13:23:35.475670+00:00",
+        "kind": "documentation",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_documents.py",
+          "documents"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18905.069871200132,
+          "remaining_outer_seconds": 20694.930128799868,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 0.6115917999995872,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.5016033999854699,
+        "start_unix": 1792675415.4756706,
+        "end_unix": 1792675415.976827,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "manuscript_source_02",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 0.46725320001132786,
+      "launch_SHA": "6110049cf1cdc11ea6d22ae52a503ad0164c47b9539605303a505ce49023a5f2",
+      "receipt_SHA": "f88d073506667c5f100a4c8ac3da1a35d0bc1dcc5db83c0f9650eb3883c55419",
+      "launch": {
+        "UTC": "2026-10-22T13:24:20.171067+00:00",
+        "kind": "documentation",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_documents.py",
+          "documents"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18905.571474600118,
+          "remaining_outer_seconds": 20694.428525399882,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 1.1131951999850571,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.46725320001132786,
+        "start_unix": 1792675460.1710672,
+        "end_unix": 1792675460.6375253,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "manuscript_source_03",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 0.46796529996208847,
+      "launch_SHA": "a0159d0fd800399009bb8729ccd754ab3944beaff10d2d1d6012c81857b1f380",
+      "receipt_SHA": "52d0a3f83f71451e39afa388d75c95ba98fb7cc2fa0c9cb33b3a38b570795a0a",
+      "launch": {
+        "UTC": "2026-10-22T13:27:26.029727+00:00",
+        "kind": "documentation",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_documents.py",
+          "documents"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18922.40343100007,
+          "remaining_outer_seconds": 20677.59656899993,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 17.94515159993898,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.46796529996208847,
+        "start_unix": 1792675646.0297272,
+        "end_unix": 1792675646.497124,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "owned_cleanup_01",
+      "kind": "cleanup",
+      "exit_code": 0,
+      "outer_seconds": 10.249081899994053,
+      "launch_SHA": "d7d379508c5bac7e7dbd26035cd4770978091ec7a61d59093992fbf467d95d60",
+      "receipt_SHA": "1a80e17937fc7f9bfb9ebf1aaafa76e855e19012468d92a301ee08b2c5cb034d",
+      "launch": {
+        "UTC": "2026-10-22T14:01:36.916204+00:00",
+        "kind": "cleanup",
+        "command": [
+          "powershell.exe",
+          "-NoProfile",
+          "-File",
+          "scripts/round130_cleanup.ps1",
+          "-PlanPath",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\review\\cleanup_plan.json",
+          "-ReceiptPath",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\cleanup_receipt.json"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 20556.029664900037,
+          "remaining_outer_seconds": 19043.970335099963,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "cleanup": 7.644327000016347,
+            "documentation": 33.03990749991499,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "recovery": 1239.6753751999931,
+            "release": 371.2117757999804,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 10.249081899994053,
+        "start_unix": 1792677696.9162047,
+        "end_unix": 1792677707.1653538,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "pdf_export_01",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 9.096703099901788,
+      "launch_SHA": "2f1f291c8728e35cedbcb0b132ce0c9e1d8180f2158e2aaf0bf82c4dfa9b1624",
+      "receipt_SHA": "9bff979951422e2a4b66a7084db322e57481d79b570de9028ad152ff7ea8c0e5",
+      "launch": {
+        "UTC": "2026-10-22T13:24:21.015597+00:00",
+        "kind": "documentation",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_documents.py",
+          "pdf"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18906.03872780013,
+          "remaining_outer_seconds": 20693.96127219987,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 1.580448399996385,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 9.096703099901788,
+        "start_unix": 1792675461.0155976,
+        "end_unix": 1792675470.1122491,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "pdf_export_02",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 7.218056799960323,
+      "launch_SHA": "7c57376f7a69337953d9545e5ef27d0d49bde5ebb7ad5f1ca3bd31b7afde9f6d",
+      "receipt_SHA": "b096f41de2787f24f0562755371bc8a206dfde8172fb2d162730de29e304fec3",
+      "launch": {
+        "UTC": "2026-10-22T13:27:26.875801+00:00",
+        "kind": "documentation",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_documents.py",
+          "pdf"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18922.871396300034,
+          "remaining_outer_seconds": 20677.128603699966,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 18.41311689990107,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 7.218056799960323,
+        "start_unix": 1792675646.8758018,
+        "end_unix": 1792675654.093839,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "pdf_render_01",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 7.268000100040808,
+      "launch_SHA": "51d3788694e32e521db88781a19e0de40fe80df88d442ef661912aa481015a4a",
+      "receipt_SHA": "e6e9a56211618061d17425c345b883a4b6d046f4a5a4d3ad38f2d3dcf4aab9f8",
+      "launch": {
+        "UTC": "2026-10-22T13:24:38.885276+00:00",
+        "kind": "documentation",
+        "command": [
+          "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "scripts/round130_pdf_review.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18915.13543090003,
+          "remaining_outer_seconds": 20684.86456909997,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 10.677151499898173,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 7.268000100040808,
+        "start_unix": 1792675478.8852758,
+        "end_unix": 1792675486.153044,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "pdf_render_02",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 7.220420300029218,
+      "launch_SHA": "cc00b017aa71c7572fdb4536f9988c1cfd492c31a8c806b1999ba69241460514",
+      "receipt_SHA": "9d795466beb1afc80442bb623e1995cd2c7c398ccf5953134be217109dcffa05",
+      "launch": {
+        "UTC": "2026-10-22T13:27:34.450174+00:00",
+        "kind": "documentation",
+        "command": [
+          "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "scripts/round130_pdf_review.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18930.089453099994,
+          "remaining_outer_seconds": 20669.910546900006,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 25.631173699861392,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 7.220420300029218,
+        "start_unix": 1792675654.4501739,
+        "end_unix": 1792675661.6701438,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "pdf_visual_closeout_01",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 0.09877449995838106,
+      "launch_SHA": "e0a8a3caf1571737e5792d67f24796a9436071cff1c098ad84b5bb9d64323e3e",
+      "receipt_SHA": "7d907b9193610ea91923f4d2087066f259ece5e8cc55ac271b963418356ec2f4",
+      "launch": {
+        "UTC": "2026-10-22T13:28:40.966009+00:00",
+        "kind": "documentation",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_pdf_accept.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18937.309873400023,
+          "remaining_outer_seconds": 20662.690126599977,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 32.85159399989061,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.09877449995838106,
+        "start_unix": 1792675720.9660099,
+        "end_unix": 1792675721.0651999,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "public_recovery_01",
+      "kind": "recovery",
+      "exit_code": 0,
+      "outer_seconds": 1239.6753751999931,
+      "launch_SHA": "2682cfc08da4d7699659e83e16255ecf09df20f49c519bd9dccbb90dbdf741e4",
+      "receipt_SHA": "bc4c06ca2e2a71794a4755e305cd055a137b82929e202377225c1cafda2e62f3",
+      "launch": {
+        "UTC": "2026-10-22T13:40:08.186784+00:00",
+        "kind": "recovery",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_public_restore.py",
+          "--commit",
+          "dc2cbece4294d16dfab603c2429dee8676f3dd0b",
+          "--destination",
+          "E:\\codes\\ExactEBRP-work\\restore\\round130",
+          "--receipt",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\public_restore_receipt.json"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 19308.709962700028,
+          "remaining_outer_seconds": 20291.290037299972,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 33.03990749991499,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "release": 371.2117757999804,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1239.6753751999931,
+        "start_unix": 1792676408.1867843,
+        "end_unix": 1792677647.8619385,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "qualification_native_S12_S0_01",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 127.70773000002373,
+      "launch_SHA": "973a6600f6601a3b59df8875d603a6a92805f2b0924b3d6b9e2d45ec3d0f77ec",
+      "receipt_SHA": "8702234d31537f5837d69d71bee9b99eb3c67b6cf106303bfa5351a0911b46d1",
+      "launch": {
+        "UTC": "2026-10-22T07:57:30.605546+00:00",
+        "kind": "qualification",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "qualification/native_S12_S0"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 943.8980899000308,
+          "remaining_outer_seconds": 38656.10191009997,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 6.429730299976654
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 31200
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 127.70773000002373,
+        "start_unix": 1792655850.605546,
+        "end_unix": 1792655978.3134189,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "qualification_native_S12_S1_01",
+      "kind": "qualification",
+      "exit_code": 1,
+      "outer_seconds": 56.01983080001082,
+      "launch_SHA": "2d277d8559a3fca1c74b0cc5967015839d1ae0e41825bd41a7e050f1c5712795",
+      "receipt_SHA": "3f6eccc437dd66b0807ac4dfa5bcec823b783fc0054668bab57860670006f7fe",
+      "launch": {
+        "UTC": "2026-10-22T07:59:38.333918+00:00",
+        "kind": "qualification",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "qualification/native_S12_S1"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 1071.6058199000545,
+          "remaining_outer_seconds": 38528.394180099946,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 134.13746030000038
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 31200
+      },
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 56.01983080001082,
+        "start_unix": 1792655978.333918,
+        "end_unix": 1792656034.353562,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "qualification_native_S12_S1_02",
+      "kind": "qualification",
+      "exit_code": 1,
+      "outer_seconds": 4.816087600076571,
+      "launch_SHA": "5eaa01d781e003d816a0eedb952850d02dba11e49f7617cbcc497a2341b128d0",
+      "receipt_SHA": "557281cc58a51bddccba04d1567fa6a518d931fff067dd8e85b01ce68a32a88f",
+      "launch": {
+        "UTC": "2026-10-22T08:01:44.435898+00:00",
+        "kind": "qualification",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "qualification/native_S12_S1"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 1127.6256507000653,
+          "remaining_outer_seconds": 38472.374349299935,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 190.1572911000112
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 31200
+      },
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 4.816087600076571,
+        "start_unix": 1792656104.4358983,
+        "end_unix": 1792656109.2525754,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "qualification_native_S12_S1_03",
+      "kind": "qualification",
+      "exit_code": 1,
+      "outer_seconds": 4.457360900007188,
+      "launch_SHA": "03d211b8592d1951a8c6e8edfaf551031273cb6261819ed1cee15ad8dcc45d25",
+      "receipt_SHA": "f5d2200d1ea313a39766f8be3c88553f1efd0fa3f078a341091825fcda54b59a",
+      "launch": {
+        "UTC": "2026-10-22T08:02:19.343291+00:00",
+        "kind": "qualification",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "qualification/native_S12_S1"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 1132.4417383001419,
+          "remaining_outer_seconds": 38467.55826169986,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 194.97337870008778
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 31200
+      },
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 4.457360900007188,
+        "start_unix": 1792656139.3432913,
+        "end_unix": 1792656143.7998948,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "qualification_native_S12_S1_04",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 19.030034699942917,
+      "launch_SHA": "ff23d4c436d62626df057f448ef8e860ca2769cc990e7a6d89fac5904c037982",
+      "receipt_SHA": "8224225487bef727162f962d5ab6c839f2dfbca4026d6bc5d6c2fcdf94bdfba9",
+      "launch": {
+        "UTC": "2026-10-22T08:02:53.168632+00:00",
+        "kind": "qualification",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\scripts\\round130_campaign.py",
+          "qualification/native_S12_S1"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 1136.899099200149,
+          "remaining_outer_seconds": 38463.10090079985,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 199.43073960009497
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 31200
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 19.030034699942917,
+        "start_unix": 1792656173.1686327,
+        "end_unix": 1792656192.198623,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "reference_S12",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.0944815999828279,
+      "launch_SHA": "778e7ad193ee4324590d141098423c749e433fceee50eb16c215aa8d8da3546c",
+      "receipt_SHA": "4a59804bedce7323684e0924183b2b5a43703d9fade475fb3d8eb485b41c5d3d",
+      "launch": {
+        "UTC": "2026-10-22T07:57:30.001306+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round106_confirmation\\S12.txt",
+          "3600",
+          "0",
+          "0",
+          "0",
+          "p",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\references\\S12"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 943.8036083000479,
+          "remaining_outer_seconds": 38656.19639169995,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 6.3352486999938264
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.0944815999828279,
+        "start_unix": 1792655850.0013065,
+        "end_unix": 1792655850.094657,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "release_pack_01",
+      "kind": "release",
+      "exit_code": 0,
+      "outer_seconds": 323.059572200058,
+      "launch_SHA": "e4a21254912d3c0a3bb37c0afca0d1ed5ee1188e9721feef60634c03bda7c887",
+      "receipt_SHA": "6db1286e1315397db767e5a04ee8e91896c79027934f8181b4c624c43435da74",
+      "launch": {
+        "UTC": "2026-10-22T13:29:16.439123+00:00",
+        "kind": "release",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_release.py",
+          "pack"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18937.498186900048,
+          "remaining_outer_seconds": 20662.501813099952,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 33.03990749991499,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 323.059572200058,
+        "start_unix": 1792675756.439123,
+        "end_unix": 1792676079.4988122,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "science_commit_01",
+      "kind": "release",
+      "exit_code": 0,
+      "outer_seconds": 5.057807600009255,
+      "launch_SHA": "8e246362c6647e636a24d4a626f77e3bdb056e603dc3ff21f179858b3092d060",
+      "receipt_SHA": "8fe4f641e61c0b4c7daeee20e31a7ba5b466996f6e58524faaae9cfb02842416",
+      "launch": {
+        "UTC": "2026-10-22T13:36:40.253093+00:00",
+        "kind": "release",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_delivery.py",
+          "science"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 19268.405311600072,
+          "remaining_outer_seconds": 20331.594688399928,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 33.03990749991499,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "release": 330.9071247000247,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 5.057807600009255,
+        "start_unix": 1792676200.2530937,
+        "end_unix": 1792676205.3145387,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "science_push_01",
+      "kind": "release",
+      "exit_code": 0,
+      "outer_seconds": 35.24684349994641,
+      "launch_SHA": "00c667b1299ba7a51fcf845c202b904b03a1281294a770af35b80045312deb03",
+      "receipt_SHA": "9b82f7bfb930000fd1e36da21878fc47769dc403985d6aad83bc5dc08f5a516f",
+      "launch": {
+        "UTC": "2026-10-22T13:37:33.284303+00:00",
+        "kind": "release",
+        "command": [
+          "git",
+          "-c",
+          "maintenance.auto=false",
+          "-c",
+          "gc.auto=0",
+          "-c",
+          "core.fsmonitor=false",
+          "push",
+          "--set-upstream",
+          "origin",
+          "codex/round130-ms2-paper-attribution"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 19273.46311920008,
+          "remaining_outer_seconds": 20326.53688079992,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 33.03990749991499,
+            "formal": 17380.178572000004,
+            "postanalysis": 30.800158300087787,
+            "qualification": 218.6124634000007,
+            "release": 335.964932300034,
+            "review": 321.06291850004345
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 35.24684349994641,
+        "start_unix": 1792676253.2843037,
+        "end_unix": 1792676288.53159,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "support_count_correction_01",
+      "kind": "analysis",
+      "exit_code": 1,
+      "outer_seconds": 16.3358075999422,
+      "launch_SHA": "6a93c7d07d348d8a59f09c8357efd193a700cd656eb325c6905281d9006ac7aa",
+      "receipt_SHA": "6cb38e7b6b042dbe89632c5c548d384649111bbdd9567d5e4b4aadf2e51db8cb",
+      "launch": {
+        "UTC": "2026-10-22T13:15:41.247602+00:00",
+        "kind": "analysis",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_count_correction.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18713.338671500096,
+          "remaining_outer_seconds": 20886.661328499904,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "documentation": 0.6115917999995872,
+            "formal": 17380.178572000004,
+            "postanalysis": 14.30949670006521,
+            "qualification": 218.6124634000007,
+            "review": 162.15818799997214
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 16.3358075999422,
+        "start_unix": 1792674941.247602,
+        "end_unix": 1792674957.5836897,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "support_count_correction_02",
+      "kind": "postanalysis",
+      "exit_code": 0,
+      "outer_seconds": 16.490661600022577,
+      "launch_SHA": "724c7b7e2dc196a9b31d5ffafb5e5e366842772123f0ec74198fc85ab23788b3",
+      "receipt_SHA": "26dc9b6e896b1cf6e66fe924ff5538c0c127781439f7932002855d696cc45301",
+      "launch": {
+        "UTC": "2026-10-22T13:16:36.042927+00:00",
+        "kind": "postanalysis",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_count_correction.py",
+          "resume"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18729.67447910004,
+          "remaining_outer_seconds": 20870.32552089996,
+          "unclosed": [],
+          "by_kind": {
+            "analysis": 16.3358075999422,
+            "build": 37.4683596000541,
+            "documentation": 0.6115917999995872,
+            "formal": 17380.178572000004,
+            "postanalysis": 14.30949670006521,
+            "qualification": 218.6124634000007,
+            "review": 162.15818799997214
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 16.490661600022577,
+        "start_unix": 1792674996.042927,
+        "end_unix": 1792675012.5343273,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "version_01",
+      "kind": "documentation",
+      "exit_code": 0,
+      "outer_seconds": 0.6115917999995872,
+      "launch_SHA": "102095c10f8c67327492f8b84c002909bc566d313d4a770f6e016f997c5c45fb",
+      "receipt_SHA": "9563bdde16f3e4ee3b39568d6cbb8fb4b94d877065c66302b7617a2091fc774e",
+      "launch": {
+        "UTC": "2026-10-22T13:04:32.929277+00:00",
+        "kind": "documentation",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round130_version.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 18550.568891700124,
+          "remaining_outer_seconds": 21049.431108299876,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "formal": 17380.178572000004,
+            "postanalysis": 14.30949670006521,
+            "qualification": 218.6124634000007
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6115917999995872,
+        "start_unix": 1792674272.9292772,
+        "end_unix": 1792674273.5403836,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_bridge_R98-C2_ms2_E2",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.7229819999774918,
+      "launch_SHA": "c55ba747dbe11eea4a72cff9ca884b101fe4975acf89b5dec03fbba2f2d2d180",
+      "receipt_SHA": "43dc7e4120dc6f96f06689bd0b328e70718d6c54c61000d1f4476a271ee28d87",
+      "launch": {
+        "UTC": "2026-10-22T07:53:58.186846+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round128\\Round128ExportE2.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round98_confirmation\\C2.txt",
+          "7200",
+          "0",
+          "0.9666666666666667",
+          "1.6753644649632968",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\bridge\\R98-C2\\ms2\\E2"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 939.7318259999156,
+          "remaining_outer_seconds": 38660.268174000084,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 2.2634663998614997
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.7229819999774918,
+        "start_unix": 1792655638.1868467,
+        "end_unix": 1792655638.9092023,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_bridge_R98-C2_ms2_E3",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.7352784000104293,
+      "launch_SHA": "571dee25762f1ab9997a64e15c3411581e03a9c12a3399cb23fda081c4c47615",
+      "receipt_SHA": "945fd15867fb8fc89a279b211060a96888a8caded015eb868b4eff33a290989d",
+      "launch": {
+        "UTC": "2026-10-22T07:53:58.926877+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round98_confirmation\\C2.txt",
+          "7200",
+          "0",
+          "0.9666666666666667",
+          "1.6753644649632968",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\bridge\\R98-C2\\ms2\\E3"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 940.4548079998931,
+          "remaining_outer_seconds": 38659.54519200011,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 2.9864483998389915
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.7352784000104293,
+        "start_unix": 1792655638.926878,
+        "end_unix": 1792655639.6508005,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_bridge_R98-C2_p_E2",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.32475719996728003,
+      "launch_SHA": "d1babd92815789e7ce636ec209151660fd8b180992cc473932b0f8917becf497",
+      "receipt_SHA": "62ee8600d8008038db3c014f530f7f12d4ef3a205a5917613506ed3de5206f0a",
+      "launch": {
+        "UTC": "2026-10-22T07:53:57.225224+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round128\\Round128ExportE2.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round98_confirmation\\C2.txt",
+          "7200",
+          "0",
+          "0.9666666666666667",
+          "1.6753644649632968",
+          "p",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\bridge\\R98-C2\\p\\E2"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 939.0877382999752,
+          "remaining_outer_seconds": 38660.912261700025,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 1.6193786999210715
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.32475719996728003,
+        "start_unix": 1792655637.2252245,
+        "end_unix": 1792655637.5498714,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_bridge_R98-C2_p_E3",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.3193304999731481,
+      "launch_SHA": "76db7685e99f64c04940400aae60aff9f19840cc4fab68e957664bf6625f6b3c",
+      "receipt_SHA": "6b64b44d4298d7764c64586456387009ba44b61a0acbe49f1e0dd7f5d689e482",
+      "launch": {
+        "UTC": "2026-10-22T07:53:57.571935+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round98_confirmation\\C2.txt",
+          "7200",
+          "0",
+          "0.9666666666666667",
+          "1.6753644649632968",
+          "p",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\bridge\\R98-C2\\p\\E3"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 939.4124954999425,
+          "remaining_outer_seconds": 38660.58750450006,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 1.9441358998883516
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.3193304999731481,
+        "start_unix": 1792655637.5719354,
+        "end_unix": 1792655637.8905044,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_bridge_S12_ms2_E2",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.15170489996671677,
+      "launch_SHA": "475e165561455883789e27fe22f3d2f895cd30d64312d07f5956debcb10c1888",
+      "receipt_SHA": "41fbabf1eab2bdc52fc2c3838488038be4129f5afb7a765ceb80c3b2a83a21fd",
+      "launch": {
+        "UTC": "2026-10-22T07:53:56.393389+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round128\\Round128ExportE2.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round106_confirmation\\S12.txt",
+          "3600",
+          "0",
+          "0.7797215574158546",
+          "0.7797215574158546",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\bridge\\S12\\ms2\\E2"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 938.4800961000146,
+          "remaining_outer_seconds": 38661.519903899985,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 1.0117364999605343
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.15170489996671677,
+        "start_unix": 1792655636.39339,
+        "end_unix": 1792655636.5456402,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_bridge_S12_ms2_E3",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.15133210003841668,
+      "launch_SHA": "bfb5f5d88b8eb4bf2f166403ea6240a8dea546ef404d2dbdb967fb134fa1a36c",
+      "receipt_SHA": "f8725c55d1f73452e0a60f3b87fd475dde896f94d9a0ff2a2893b0aefbcc6055",
+      "launch": {
+        "UTC": "2026-10-22T07:53:56.547649+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round106_confirmation\\S12.txt",
+          "3600",
+          "0",
+          "0.7797215574158546",
+          "0.7797215574158546",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\bridge\\S12\\ms2\\E3"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 938.6318009999814,
+          "remaining_outer_seconds": 38661.36819900002,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 1.163441399927251
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.15133210003841668,
+        "start_unix": 1792655636.5476496,
+        "end_unix": 1792655636.710463,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_bridge_S12_p_E2",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.4894589999457821,
+      "launch_SHA": "8bdaba2efa64ff90915196e5ef2feb9e20a75b8a0636c86fdeae47607713ec38",
+      "receipt_SHA": "b6abb3bd2cfb30043804a61ed31eec2d66672681b7f1951366e9e66d59c43334",
+      "launch": {
+        "UTC": "2026-10-22T07:53:55.312330+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round128\\Round128ExportE2.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round106_confirmation\\S12.txt",
+          "3600",
+          "0",
+          "0.7797215574158546",
+          "0.7797215574158546",
+          "p",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\bridge\\S12\\p\\E2"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 937.4683596000541,
+          "remaining_outer_seconds": 38662.531640399946,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.4894589999457821,
+        "start_unix": 1792655635.3123307,
+        "end_unix": 1792655635.8076,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_bridge_S12_p_E3",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.5222775000147521,
+      "launch_SHA": "5f28026a2f554dac6c9b791784dd407dec5e14f5a5d143d10b282e32412e0517",
+      "receipt_SHA": "27af2fbe70aeb6ce71ed0562b70ab1d263874dd082d00e71bb8da56c8cbef126",
+      "launch": {
+        "UTC": "2026-10-22T07:53:55.818597+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round106_confirmation\\S12.txt",
+          "3600",
+          "0",
+          "0.7797215574158546",
+          "0.7797215574158546",
+          "p",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\bridge\\S12\\p\\E3"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 937.9578185999999,
+          "remaining_outer_seconds": 38662.0421814,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 0.4894589999457821
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.5222775000147521,
+        "start_unix": 1792655635.8185978,
+        "end_unix": 1792655636.3285487,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_equal_cutoff_fallback_ms2",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.051671799970790744,
+      "launch_SHA": "515ac4b03223f1dea426318eb4f5393a7a35b26e339f6d903f6e4a7f32dd42c8",
+      "receipt_SHA": "4a400a80747e7f5e000a71900a9b101892b704e44f9db8943529c2de58c4ae6a",
+      "launch": {
+        "UTC": "2026-10-22T07:54:02.707781+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\equal_cutoff\\input.txt",
+          "60",
+          "0",
+          "0.3",
+          "0.3",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\equal_cutoff\\fallback\\ms2",
+          "fallback"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 942.7795659999829,
+          "remaining_outer_seconds": 38657.22043400002,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 5.311206399928778
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.051671799970790744,
+        "start_unix": 1792655642.707781,
+        "end_unix": 1792655642.755583,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_equal_cutoff_fallback_s2-root",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.051461199996992946,
+      "launch_SHA": "6c177366449bf27805a6eaa7a73dd06a8481a7654582ba7cebb4f994c6297f7c",
+      "receipt_SHA": "8c8ca2301a20325caad4800297297531dea7bd15bc74178c4a354f231b781178",
+      "launch": {
+        "UTC": "2026-10-22T07:54:02.769731+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\equal_cutoff\\input.txt",
+          "60",
+          "0",
+          "0.3",
+          "0.3",
+          "s2-root",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\equal_cutoff\\fallback\\s2-root",
+          "fallback"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 942.8312377999537,
+          "remaining_outer_seconds": 38657.168762200046,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 5.362878199899569
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.051461199996992946,
+        "start_unix": 1792655642.769731,
+        "end_unix": 1792655642.8166807,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_equal_cutoff_shared_ms2",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.06009779998566955,
+      "launch_SHA": "81b2cf8b028550dc70b05cdc77669ea9281843793489eb2f0b6e11fc308f308d",
+      "receipt_SHA": "47d7530b51f0c8521f479ee17c863b8ac36ebbc03b9946a8555e165093668a04",
+      "launch": {
+        "UTC": "2026-10-22T07:54:02.554665+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\equal_cutoff\\input.txt",
+          "60",
+          "0",
+          "0.3",
+          "0.3",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\equal_cutoff\\shared\\ms2"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 942.663078899961,
+          "remaining_outer_seconds": 38657.33692110004,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 5.194719299906865
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.06009779998566955,
+        "start_unix": 1792655642.5546653,
+        "end_unix": 1792655642.6150165,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_equal_cutoff_shared_s2-root",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.056389300036244094,
+      "launch_SHA": "9343540b85467ddea7a938d9532deb8ee6d36a863877a9085c52726de65bf6bb",
+      "receipt_SHA": "ba77b8fecd6f97b9b293274bd57216fae8c265720f51ab6b11d51d8b379282d9",
+      "launch": {
+        "UTC": "2026-10-22T07:54:02.631084+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\equal_cutoff\\input.txt",
+          "60",
+          "0",
+          "0.3",
+          "0.3",
+          "s2-root",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\equal_cutoff\\shared\\s2-root"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 942.7231766999466,
+          "remaining_outer_seconds": 38657.27682330005,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 5.254817099892534
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.056389300036244094,
+        "start_unix": 1792655642.631084,
+        "end_unix": 1792655642.6841328,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_pair_root_fallback_S12_ms2",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.1508196999784559,
+      "launch_SHA": "127e919601a40ab253a2c221ed2ee6b2f6c7d76873a5d34539b15f1787a3e88c",
+      "receipt_SHA": "cfe285fdc465fa8a5aa7f2d958f3985a5fa5e383fafb9c7bc93b4b6aab53f6c4",
+      "launch": {
+        "UTC": "2026-10-22T07:54:02.846908+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round106_confirmation\\S12.txt",
+          "3600",
+          "0",
+          "0.7797215574158546",
+          "0.7797215574158546",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\pair_root_fallback\\S12\\ms2",
+          "fallback"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 942.8826989999507,
+          "remaining_outer_seconds": 38657.11730100005,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 5.414339399896562
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.1508196999784559,
+        "start_unix": 1792655642.846909,
+        "end_unix": 1792655642.9915028,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_pair_root_fallback_S12_s2-root",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.148308000061661,
+      "launch_SHA": "b012ee9223139cd3e6d047f015249e494dd4ac64c93b48dc1ebc69092147d53a",
+      "receipt_SHA": "49dd5fd7a38893c90f1ac9432803c7b34569400faba6d5fb6025d0769d613e67",
+      "launch": {
+        "UTC": "2026-10-22T07:54:03.007126+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round106_confirmation\\S12.txt",
+          "3600",
+          "0",
+          "0.7797215574158546",
+          "0.7797215574158546",
+          "s2-root",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\pair_root_fallback\\S12\\s2-root",
+          "fallback"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 943.0335186999291,
+          "remaining_outer_seconds": 38656.96648130007,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 5.565159099875018
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.148308000061661,
+        "start_unix": 1792655643.0071266,
+        "end_unix": 1792655643.1634126,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_pair_root_R98-C2_ms2",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.736453999998048,
+      "launch_SHA": "623958983402f63ce262f42534a718e531ce55bf7b156d9058589bf6bec04697",
+      "receipt_SHA": "dfc3356d766b4fff2930a198065f102ad595939d1b7a9dc6ee194723120bb054",
+      "launch": {
+        "UTC": "2026-10-22T07:54:00.271321+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round98_confirmation\\C2.txt",
+          "7200",
+          "0",
+          "0.9666666666666667",
+          "1.6753644649632968",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\pair_root\\R98-C2\\ms2"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 941.1900863999035,
+          "remaining_outer_seconds": 38658.8099136001,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 3.721726799849421
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.736453999998048,
+        "start_unix": 1792655640.271321,
+        "end_unix": 1792655641.0171607,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_pair_root_R98-C2_s2-root",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.736538500059396,
+      "launch_SHA": "29c901a6583c2471cd62f03888daa1df708dd5dbfa3930c9a10f5014cd31db47",
+      "receipt_SHA": "55a15eeaa35643f2fabdaee738ba3302f04c1ee1675451dceac9f8758a358927",
+      "launch": {
+        "UTC": "2026-10-22T07:54:01.031855+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round98_confirmation\\C2.txt",
+          "7200",
+          "0",
+          "0.9666666666666667",
+          "1.6753644649632968",
+          "s2-root",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\pair_root\\R98-C2\\s2-root"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 941.9265403999016,
+          "remaining_outer_seconds": 38658.0734596001,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 4.458180799847469
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.736538500059396,
+        "start_unix": 1792655641.0318558,
+        "end_unix": 1792655641.7634783,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_pair_root_S12_ms2",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.1559690999565646,
+      "launch_SHA": "8db80f8de83d7f35d98e359d0fbf161a09ad977dccf4cf75268b37f74be1b1de",
+      "receipt_SHA": "519193da5fa567dcde8e4fe6ab65b64b265ffe45e1f2497534e482b71c25bc74",
+      "launch": {
+        "UTC": "2026-10-22T07:53:56.793590+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round106_confirmation\\S12.txt",
+          "3600",
+          "0",
+          "0.7797215574158546",
+          "0.7797215574158546",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\pair_root\\S12\\ms2"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 938.7831331000198,
+          "remaining_outer_seconds": 38661.21686689998,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 1.3147734999656677
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.1559690999565646,
+        "start_unix": 1792655636.79359,
+        "end_unix": 1792655636.9531262,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_pair_root_S12_s2-root",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.1486360999988392,
+      "launch_SHA": "a4745307e00f16a2fdbd249c9cd63054ff0de7b480ad97660e98e43d4e88ff1b",
+      "receipt_SHA": "9a7df698bc02e6cadc103a42a539975d9536e83787270cf1a7bea80e012b10d6",
+      "launch": {
+        "UTC": "2026-10-22T07:53:56.959217+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\reference\\round106_confirmation\\S12.txt",
+          "3600",
+          "0",
+          "0.7797215574158546",
+          "0.7797215574158546",
+          "s2-root",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\pair_root\\S12\\s2-root"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 938.9391021999763,
+          "remaining_outer_seconds": 38661.060897800024,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 1.4707425999222323
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.1486360999988392,
+        "start_unix": 1792655636.9592173,
+        "end_unix": 1792655637.1103034,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_references_UC-B20-B",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.15104010002687573,
+      "launch_SHA": "1f8c18fa002e8ce46455be254ecab9b765fd99860c8fb47244001f852a135c87",
+      "receipt_SHA": "8db5047523f6851e5eae8738aba2860153dd8d0a5861f0f5755575433b5e7fce",
+      "launch": {
+        "UTC": "2026-10-22T07:54:03.277176+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\inputs\\UC-B20-B.txt",
+          "7200",
+          "0",
+          "0",
+          "0",
+          "p",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\references\\UC-B20-B"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 943.1818266999908,
+          "remaining_outer_seconds": 38656.81817330001,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 5.713467099936679
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.15104010002687573,
+        "start_unix": 1792655643.2771766,
+        "end_unix": 1792655643.4309886,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_references_UC-B30-S",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.3184252999490127,
+      "launch_SHA": "bee947faac4ad6fdb8aa7911635a5b186d1d19018a242630f1d866cba6392519",
+      "receipt_SHA": "55ce790a317f56d9cd1dfedd4632e31b2a7daa00f23b95fcad6cfd526e005c80",
+      "launch": {
+        "UTC": "2026-10-22T07:54:03.623166+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\inputs\\UC-B30-S.txt",
+          "7200",
+          "0",
+          "0",
+          "0",
+          "p",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\references\\UC-B30-S"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 943.4851830000989,
+          "remaining_outer_seconds": 38656.5148169999,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 6.016823400044814
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.3184252999490127,
+        "start_unix": 1792655643.6231663,
+        "end_unix": 1792655643.9378862,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_references_UC-C20-U",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.152316200081259,
+      "launch_SHA": "431469492ed41f496739e1f351f749ff7719a76ec02323e38cc1483086bd0c2d",
+      "receipt_SHA": "cf7719af64c425ddd1d1a53f2176edea5e9294aa5169d41480f08550fe4455fd",
+      "launch": {
+        "UTC": "2026-10-22T07:54:03.448967+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\inputs\\UC-C20-U.txt",
+          "7200",
+          "0",
+          "0",
+          "0",
+          "p",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\references\\UC-C20-U"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 943.3328668000177,
+          "remaining_outer_seconds": 38656.66713319998,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 5.864507199963555
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.152316200081259,
+        "start_unix": 1792655643.448967,
+        "end_unix": 1792655643.6023014,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    },
+    {
+      "label": "zero_renamed_export",
+      "kind": "qualification",
+      "exit_code": 0,
+      "outer_seconds": 0.1516890999628231,
+      "launch_SHA": "a7c4b54a12e9f9ea2d84a440f227fbb114f475e4e60be78c7596c86dcb8ad8c2",
+      "receipt_SHA": "7a774bb44eee0ac1e556ba44ad7bec185e7ca3ed373ce653b640d61bf8ea7bb6",
+      "launch": {
+        "UTC": "2026-10-22T08:03:52.192356+00:00",
+        "kind": "qualification",
+        "command": [
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round130\\Round130ExportE3.exe",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\renamed\\unchanged_mathematics.txt",
+          "3600",
+          "0",
+          "0.7797215574158546",
+          "0.7797215574158546",
+          "ms2",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round130\\results\\unified_exact_round130\\qualification\\renamed\\export"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round130",
+        "budget_before": {
+          "paid_outer_seconds": 1155.929133900092,
+          "remaining_outer_seconds": 38444.07086609991,
+          "unclosed": [],
+          "by_kind": {
+            "build": 37.4683596000541,
+            "qualification": 218.46077430003788
+          },
+          "nested_H_LP_MIP_seconds_added": false
+        },
+        "reservation": 0
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.1516890999628231,
+        "start_unix": 1792656232.1923566,
+        "end_unix": 1792656232.3436093,
+        "exit_observed": true,
+        "nested_seconds_added": false
+      }
+    }
+  ],
+  "setup_allowance_seconds": 900,
+  "setup_allowance_scope": "Conservative nonoverlapping setup/read/remote/sparse-initialization machine allowance, including failed own sparse initialization; subsequent substantial children separately metered.",
+  "exact_subprocess_outer_seconds": 19666.27874680003,
+  "final_metadata_allowance_seconds": 60,
+  "final_metadata_allowance_scope": "Conservative allowance for standalone accounting and short final Git/PR receipt actions outside child meters; not measured CPU",
+  "closed_receipts_included_without_recursive_repacking": true,
+  "no_overlapping_child_outer_intervals": true,
+  "native_H_LP_MIP_seconds_nested_not_added": true,
+  "lightweight_concurrent_author_preparation_not_added_as_separate_wall_time": true,
+  "interactive_wait_not_claimed_as_measured_CPU": true,
+  "formal_arms": 24,
+  "formal_nominal_seconds": 28800,
+  "qualification_soft_seconds": 1800,
+  "qualification_limit_seconds": 3600,
+  "qualification_plus_build_seconds": 256.0808230000548,
+  "one_preformal_E3_build": true,
+  "compilation_during_formal_performance": false,
+  "formal_retry_or_recovery_count": 0,
+  "actual_six_formal_meter_labels": [
+    "campaign_group01_01",
+    "campaign_group02_01",
+    "campaign_group03_01",
+    "campaign_group04_01",
+    "campaign_group05_01",
+    "campaign_group06_01"
+  ],
+  "closed_under_outer_limit": true,
+  "closure_pending": false
+}

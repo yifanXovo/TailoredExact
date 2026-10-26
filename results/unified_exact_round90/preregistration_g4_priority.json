@@ -1,0 +1,67 @@
+{
+  "schema": "round90-lp-g-g4-priority-preregistration-v1",
+  "status": "source_only_pending_independent_review_and_root_gates",
+  "purpose": "Finite priority-protection ordering of the existing 19-role G4; F2 then D6, without waiving other roles",
+  "runtime_root": "results/unified_exact_round90/runner_lp_g_g4_priority",
+  "prepare_gate_path": "results/unified_exact_round90/g4_priority_prepare_gate.json",
+  "run_lease_name": "runner_priority_lease.json",
+  "planning_manifest": "research_plans/ensc_optimization_instances_2026-09-26.json",
+  "input_identity_audit": "results/unified_exact_round88/input_identity_audit.json",
+  "frozen_g3_runner": "scripts/round90_lp_g_g3.py",
+  "frozen_g3_runner_sha256": "da04cf7481dd6f1841383a9390059297a0db51c4ce509a449d5c71725e38b1fe",
+  "frozen_g3_preregistration": "results/unified_exact_round90/preregistration_g3.json",
+  "frozen_g3_preregistration_sha256": "dbc1543d2d5b112a127151736ac54d13fe168723a9327561f65aaa81bbaf745b",
+  "frozen_g3_qualification_gate": "results/unified_exact_round90/g3_qualification_gate.json",
+  "frozen_g3_qualification_gate_sha256": "764350f3b32bbfb45bd1881ac8712c9fb20ea8cd00f3eda50324b07b65e86938",
+  "source_commit": "76458ff8b952e98cede34b261cd916d26db58215",
+  "candidate_binary": "build/research/round90-lp-g-split/ExactEBRP.exe",
+  "candidate_binary_sha256": "bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2",
+  "source_hashes": [
+    {"path":"CMakeLists.txt","sha256":"4d1ad96639e1ef8a4093174636a1ef8e4563519485fc7d0ee82af68696057de0"},
+    {"path":"include/GiniFrontierGeometry.hpp","sha256":"c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305"},
+    {"path":"include/Instance.hpp","sha256":"386ffd2a778d0fa8648f3eb2ef091d9742c7e25e0b947cf31aa7e1db99efcb3f"},
+    {"path":"src/GiniFrontierGeometry.cpp","sha256":"a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f"},
+    {"path":"src/main.cpp","sha256":"efe8b0598483c2c3d2b3afb611fd2352f2005c53fe4cb9de95ebeab553c61570"},
+    {"path":"src/PaperExternalGiniTree.cpp","sha256":"3de879702ca6dd964a1273558fc5152eaa26fad9001860c0e298270bdb7975a9"},
+    {"path":"tests/round90_lp_g_split_tests.cpp","sha256":"2dd4582bb757624228fb610a2c9b3cc55fec0b84dca892601ecc1bec83a58d4d"}
+  ],
+  "harness_hashes": {
+    "runner":"da04cf7481dd6f1841383a9390059297a0db51c4ce509a449d5c71725e38b1fe",
+    "native_evidence_reader":"d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+    "physical_reader":"2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861",
+    "exchange_reader":"e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+    "affinity":"c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+    "normalizer":"772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+    "audited_runner_utilities":"178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+    "input_identity_audit":"133e5f159385c21f8bc130e24f8ea3acd31f3643b3abbe5182edda4cd30a6ff6"
+  },
+  "common": {
+    "threads":1,"mip_threads":1,"gurobi_seed":0,"gurobi_presolve":-1,"affinity_mask":4,
+    "native_limit_offset_seconds":6,"hard_stop_offset_seconds":2,"shutdown_margin_seconds":3,
+    "requested_mip_gap":0,"requested_mip_gap_abs":0
+  },
+  "roles": [
+    {
+      "id":"F2","scenario_id":"round86-unadapted-varied-structures-v1_F2",
+      "input_path":"reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256":"ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds":3600,"pickup_seconds":60,"drop_seconds":60,"lambda":0.15,
+      "cap_seconds":600,"method_order":["ENS-C","LP-G"]
+    },
+    {
+      "id":"D6","scenario_id":"cb443_V30_compact_r1_shortage_M03_Q30_T18000",
+      "input_path":"reference/citibike443-regional-v1/instances/V30/cb443_V30_compact_r1_shortage_M03_Q30.txt",
+      "input_sha256":"070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+      "T_seconds":18000,"pickup_seconds":60,"drop_seconds":60,"lambda":0.15,
+      "cap_seconds":3600,"method_order":["LP-G","ENS-C"]
+    }
+  ],
+  "execution_order":["F2/ENS-C","F2/LP-G","D6/LP-G","D6/ENS-C"],
+  "planned_runs":4,
+  "sum_process_caps_seconds":8400,
+  "no_component_time_or_work_slices":true,
+  "prepare_does_not_authorize_optimize":true,
+  "run_requires_separate_root_lease":true,
+  "historical_p_timing":"R87 P-GRB observations for F2 and D6 are historical unpaired context, not new R90 timed arms or same-binary controls.",
+  "stop_policy":"Stop before the next arm on first identity, physical, coverage, point, cross-arm, process, resource or severe paired signal. Preserve started prefixes and all cost; no retry, resume, overwrite, extra role or seed."
+}

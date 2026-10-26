@@ -1,0 +1,98 @@
+{
+  "roles": [
+    {
+      "id": "PB-C50-S",
+      "source": "CITI",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 18000,
+      "selection_id": "citi_r122_V50_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "known_instance_predeclared_long_window",
+      "input_path": "reference/round122_paper_benchmark/PB-C50-S.txt",
+      "instance_path": "reference/round122_paper_benchmark/PB-C50-S.txt",
+      "input_sha256": "3e17bd07ae0abbfebfd8264540e6f5bd737a0d4506c4b6e96950936153db9992",
+      "input_bytes": 2981,
+      "selection_path": "reference/round122_paper_benchmark/PB-C50-S_selection.json",
+      "landscape_path": "reference/round122_paper_benchmark/PB-C50-S_landscape.json",
+      "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "total_initial": 495,
+      "total_target": 562,
+      "total_capacity": 1123,
+      "sum_weights": 20.216045,
+      "lambda_sum_weights": 3.0324067500000003,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.37077320309851924,
+        "P": 12.237651792701742,
+        "lambda_P": 1.8356477689052613,
+        "F": 2.2064209720037806,
+        "duration": 0,
+        "all_loads": 0
+      },
+      "group_number": 5,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": -557968935,
+        "canonical_sha256": "1d48acabbe4f611e7f3edbae8f954dc0ca1a58d5b94ca4bc7c9175c5c307caa8",
+        "columns": 13328,
+        "rows": 35570
+      }
+    }
+  ],
+  "qualification_roles": [
+    {
+      "id": "H100",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        13,
+        21
+      ],
+      "T_seconds": 5100,
+      "cap_seconds": 120,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "input_path": "reference/round100_confirmation/H100.txt",
+      "instance_path": "reference/round100_confirmation/H100.txt",
+      "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "qualification",
+      "scenario_id": "H100",
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": 768952698,
+        "canonical_sha256": "21e2189cd07ae9508777cbf51b337a3706e50583d25d511d592c8ce087c595d6",
+        "columns": 1591,
+        "rows": 3689
+      }
+    }
+  ],
+  "prior_known_role": true,
+  "new_independent_problems": 0,
+  "source_ref": "f3363d9ddede2725496e4a3e0466bbf4d1cec089"
+}

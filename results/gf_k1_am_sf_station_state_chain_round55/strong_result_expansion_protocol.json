@@ -1,0 +1,28 @@
+{
+  "schema": "round55-strong-result-expansion-protocol-v1",
+  "manifest": "results/gf_k1_am_sf_station_state_chain_round55/expansion_panel_manifest.json",
+  "manifest_sha256": "684e2ea5804d832895536db39043549f0dce1a00dc912e802a6127ab6972a073",
+  "opening_gate": [
+    "zero severe vs stable",
+    "no certificate loss",
+    "shifted Work GM<=0.80",
+    "GI ratio<=0.80 or at least two additional certificates",
+    "improvement in two size groups"
+  ],
+  "arms": [
+    "P-GRB",
+    "K1-AM-SF",
+    "K1-AM-SF-CANDIDATE"
+  ],
+  "cap_seconds": 7200,
+  "extension": {
+    "sizes": [
+      50,
+      70
+    ],
+    "cap_seconds": 14400,
+    "trigger": "none of the three arms certifies that input by 7200",
+    "all_arms": true
+  },
+  "V70_claim": "diagnostic unless sufficient exact certificates"
+}

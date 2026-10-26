@@ -1,0 +1,224 @@
+[1/14] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Round92HandlingActivation.cpp.obj
+[2/14] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/Evaluator.cpp.obj
+[3/14] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/ExternalGiniTree.cpp.obj
+[4/14] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/ReplicaExternalGiniTree.cpp.obj
+[5/14] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/PaperExternalGiniTree.cpp.obj
+[6/14] Building CXX object CMakeFiles/Round92HandlingActivationTests.dir/tests/round92_handling_activation_tests.cpp.obj
+[7/14] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/CplexBaseline.cpp.obj
+[8/14] Building CXX object CMakeFiles/Round92HandlingIntegrationTests.dir/tests/round92_handling_integration_tests.cpp.obj
+[9/14] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/GurobiBaseline.cpp.obj
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv**, const char*, int, int, int); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:205:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv**, const char*, int, int, int)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv**, int, int, int); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:206:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv**, int, int, int)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:207:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = void (*)(_GRBenv*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:208:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(_GRBenv*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = const char* (*)(_GRBenv*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:209:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'const char* (*)(_GRBenv*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = void (*)(int*, int*, int*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:210:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(int*, int*, int*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, _GRBmodel**); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:211:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, _GRBmodel**)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:212:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = _GRBenv* (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:213:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to '_GRBenv* (*)(_GRBmodel*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, int); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:214:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, int)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, double); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:215:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, double)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, const char*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:216:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, const char*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, int*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:217:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, int*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, double*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:218:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, double*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int (*)(_GRBmodel*, void*, int, void*), void*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:219:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int (*)(_GRBmodel*, void*, int, void*), void*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(void*, int, int, void*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:220:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, int, int, void*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(void*, const double*, double*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:221:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, const double*, double*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(void*, int, const int*, const double*, char, double); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:222:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, int, const int*, const double*, char, double)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = void (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:224:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(_GRBmodel*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:226:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:227:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, double*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:228:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, double*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, int, int*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:229:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, int, int*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, char**); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:230:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, char**)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, int, double*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:231:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, int, double*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, int, char*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:232:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, int, char*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int, int*, double*, char, double, const char*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:236:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int, int*, double*, char, double, const char*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:238:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int*, int*, int*, double*, int, int); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:239:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int*, int*, int*, double*, int, int)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = _GRBmodel* (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:240:5:   required from here
+  199 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/GurobiBaseline.cpp:102:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to '_GRBmodel* (*)(_GRBmodel*)' [-Wcast-function-type]
+  102 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[10/14] Linking CXX static library libexact_ebrp_core.a
+[11/14] Linking CXX executable Round92HandlingActivationTests.exe
+[12/14] Building CXX object CMakeFiles/ExactEBRP.dir/src/main.cpp.obj
+[13/14] Linking CXX executable Round92HandlingIntegrationTests.exe
+[14/14] Linking CXX executable ExactEBRP.exe

@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "source_matrix_sha256": "008bb361ba17f76d9e47520fdd3c9b515232dd45e32db4d948c0ff82eccb554b",
+  "diagnostic_binary_sha256": "dbb349d0e9a2be9246e5eff3edcc857b9a52180db4bb2b38ba4c89bef48f6297",
+  "cases": [
+    {
+      "name": "nonintegral_inventory_rejected",
+      "expected_valid": false,
+      "observed_valid": false,
+      "reason": "column_contract:Y_1",
+      "returncode": 2,
+      "outer_child_seconds": 0.1772558999946341,
+      "matrix_sha256": "80e115b12c6b7b094d8392366783e589e1ac8b8e3add363f9802a5ca7136789b",
+      "output_sha256": "14e07330616a65b1cb45ee0d9a65ac567e8d166d168de89866858a90a344973c"
+    },
+    {
+      "name": "broken_onehot_rejected",
+      "expected_valid": false,
+      "observed_valid": false,
+      "reason": "required_row_missing",
+      "returncode": 2,
+      "outer_child_seconds": 0.1792243999952916,
+      "matrix_sha256": "ada9058b4e9e7bc2245817a8a1b05d23976052702b6e487dd430d0fcff8c1e53",
+      "output_sha256": "84c9ae6c5db978c72141f4087e885dde4010817b17a2504327e8697aca85f26d"
+    },
+    {
+      "name": "nonnegative_return_premise_rejected",
+      "expected_valid": false,
+      "observed_valid": false,
+      "reason": "required_row_missing",
+      "returncode": 2,
+      "outer_child_seconds": 0.19573210000817198,
+      "matrix_sha256": "1600e5811dce80e1e4012e19b8c1f77ee5e588c30ac0ddf808d8844b3892193f",
+      "output_sha256": "39eeb92d277eddc452db1e43d1244eafae0d33bc906b2984f53ee3c6785a9082"
+    },
+    {
+      "name": "smaller_imported_handling_relaxes_contract",
+      "expected_valid": true,
+      "observed_valid": true,
+      "reason": "audited_original_integer_model",
+      "returncode": 0,
+      "outer_child_seconds": 0.24669990000256803,
+      "matrix_sha256": "75e9afe0930fed1d34223e46813936e65bad9186736e3a13bf4673e04dae5cbc",
+      "output_sha256": "1a0b6381e6bb82f206f7fb05e69ade29dc987f97239a29c17846675c6ce4739f"
+    },
+    {
+      "name": "larger_imported_rhs_relaxes_contract",
+      "expected_valid": true,
+      "observed_valid": true,
+      "reason": "audited_original_integer_model",
+      "returncode": 0,
+      "outer_child_seconds": 0.22200490000250284,
+      "matrix_sha256": "d6f9e4241c6035eef435bdc44a88fefe3436260a13584559bffd01f8b32543b3",
+      "output_sha256": "6302a4e3b5ce54846d6e279a3ef2c163c4613e0a0b1328fcbc978a07cb73da11"
+    },
+    {
+      "name": "ambiguous_duration_rejected",
+      "expected_valid": false,
+      "observed_valid": false,
+      "reason": "ambiguous_duration_row",
+      "returncode": 2,
+      "outer_child_seconds": 0.1802771000075154,
+      "matrix_sha256": "84a73e37f4938a4b0ac4e36981d9df5d48a23d25a16c8ca3b3abab2133457f3e",
+      "output_sha256": "f21d91d072b201821e899196c676e6df4efff43ff1a20ff9216f4c7c7aa3878d"
+    }
+  ],
+  "scope": "Typed actual-matrix audit and safe coefficient/RHS relaxation; no native search or callback API rejection injection"
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "round54-paper-mainline-command-v1",
+  "command": [
+    "build/official-round54-b6784e930/ExactEBRP.exe",
+    "--method",
+    "gcap-frontier",
+    "--algorithm-preset",
+    "paper-k1-am-sf",
+    "--input",
+    "<instance>",
+    "--lambda",
+    "0.15",
+    "--T",
+    "3600",
+    "--time-limit",
+    "<seconds>",
+    "--threads",
+    "1",
+    "--mip-threads",
+    "1",
+    "--out",
+    "<result.json>"
+  ],
+  "official_executable_sha256": "a08ae3a92483a255593ec22ad6ab6b493db0c598f867c8c0e7d186e1b34a75fc",
+  "preset_supplies_frozen_controller_backend_and_solver_settings": true
+}

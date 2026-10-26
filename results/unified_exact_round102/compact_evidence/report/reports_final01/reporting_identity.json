@@ -1,0 +1,22 @@
+{
+  "Optimize": 0,
+  "reader_sha256": "a2727c01b9c8ad3ed86970fa0f0adf694c35f615100c4afe8e400aa9cf9d6381",
+  "clock_sha256": "69cea39056a5c36c172daf9fdb6869cfcf29aebebcde6044282b08f7764214b5",
+  "wrapper_sha256": "32219922c8769e680c4bfa1a746c798a906a37a458d3fa76b1844dd329cc88d1",
+  "no_R101_recovery_overlay": true,
+  "additional_shared_whole_second_checkpoints": [
+    117,
+    117,
+    521,
+    550,
+    1797,
+    1797,
+    1797,
+    1797,
+    3597,
+    3597
+  ],
+  "fee_scope": "fee_reconciliation includes every Round102 billed batch; core cost table covers only listed full campaigns, not added together",
+  "reliable_count": "Before catalog truncation; not selected/submitted/API count",
+  "API_success_is_not_retention": true
+}

@@ -1,0 +1,387 @@
+{
+  "binary_sha256": "bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2",
+  "committed_events": 720,
+  "native_calls_started": 8,
+  "native_calls_returned": 8,
+  "physical_witnesses": 4,
+  "native_physical_witnesses": 3,
+  "scoped_bound_events": 699,
+  "global_native_bound_events": 0,
+  "UB": 0.8299634131717751,
+  "LB": 0,
+  "gap": 0.8299634131717751,
+  "physical_upper_available": true,
+  "lower_bound_source": "analytical_nonnegative_objective_only",
+  "certificate": false,
+  "solver_finalization_certificate": false,
+  "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+  "witnesses": [
+    {
+      "F": 0.8370914675547019,
+      "G": 0.2708414675547019,
+      "P": 3.775,
+      "stations": 4,
+      "pickup": 17,
+      "drop": 16,
+      "maximum_duration": 1777.013632206718,
+      "original_T_feasible": true,
+      "source": "same_run_verified_startup",
+      "call": 0,
+      "sequence": 2,
+      "available": 0.26599999982863665
+    },
+    {
+      "F": 0.8370914675547019,
+      "G": 0.2708414675547019,
+      "P": 3.775,
+      "stations": 4,
+      "pickup": 17,
+      "drop": 16,
+      "maximum_duration": 1777.013632206718,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 8,
+      "sequence": 18,
+      "available": 4.20299999974668
+    },
+    {
+      "F": 0.8302484864888535,
+      "G": 0.2673734864888535,
+      "P": 3.7525,
+      "stations": 4,
+      "pickup": 17,
+      "drop": 17,
+      "maximum_duration": 1785.7310100703473,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 8,
+      "sequence": 37,
+      "available": 6.936999999918044
+    },
+    {
+      "F": 0.8299634131717751,
+      "G": 0.26521341317177516,
+      "P": 3.7649999999999997,
+      "stations": 5,
+      "pickup": 17,
+      "drop": 17,
+      "maximum_duration": 1785.7310100703473,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 8,
+      "sequence": 49,
+      "available": 10.796999999787658
+    }
+  ],
+  "normal_result_certificate": true,
+  "final_only_physical_witness": false,
+  "final_physical_verification": {
+    "F": 0.8299634131717751,
+    "G": 0.26521341317177516,
+    "P": 3.7649999999999997,
+    "stations": 5,
+    "pickup": 17,
+    "drop": 17,
+    "maximum_duration": 1785.7310100703473,
+    "original_T_feasible": true
+  },
+  "endpoint": {
+    "U": 0.8299634131717752,
+    "L": 0.8299634131717748,
+    "gap": 4.440892098500626e-16,
+    "certificate": true,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "optimal"
+  },
+  "lp_g_split_evidence": {
+    "status": "normal_return_lp_g_point_observed",
+    "eligible_proposals": 3,
+    "lp_g_point_exposures": 1,
+    "midpoint_fallbacks": 2,
+    "incomplete_or_unknown_child_pairs": 0,
+    "realized_transactions": 2,
+    "realized_two_child_splits": 2,
+    "ledger": "E:\\codes\\ExactEBRP\\results\\unified_exact_round90\\runner_lp_g_c2_repeat\\seed_1\\raw\\02_C2_LP-G\\external\\round90_lp_g_split_choice.csv",
+    "ledger_sha256": "9bbf503e333fc558ae08f31053d3d0328282fa1402cd7df12da199527accbb93",
+    "optimize_ledger_sha256": "0b0612ba3211ba7b41f55ac519335573e29f94a27092bb604958172a3de09c6d",
+    "lp_status_ledger_sha256": "cd708c7a0ac947316963d7186f2cb0e72dccd65377a9de5cafbd628e620559bd",
+    "am_ledger_sha256": "a43208357024fa8d72a3e479d414874644ffe632bcdf6a8d6755be26a3bbbcba",
+    "c6_decision_ledger_sha256": "1557e265135c5572903b21f725ea152c519073959efed9a46b27d9219006018f",
+    "native_target_ledger_sha256": "c28dddda41f5ad1d8f117d429ea2d14de8b3bfa98ef9e87fa1ba41aa924471db",
+    "tree_events_sha256": "1f94406be5117bd6f8fd9af2e789294d6aa49a24a14d8a2182257734be2d6764",
+    "precision": "C++ setprecision(17); binary float roundtrip endpoints",
+    "complete_historical_lp_byte_archives": false,
+    "choices": [
+      {
+        "parent": "L0",
+        "parent_interval": [
+          0.0,
+          0.837091467554702
+        ],
+        "point": 0.14727294010742756,
+        "point_source": "current_optimal_parent_lp_g",
+        "epoch": "0",
+        "proposal_row": 2,
+        "phases": [
+          "proposal",
+          "child_lp_status",
+          "am_decision",
+          "realized"
+        ],
+        "child_status": "complete_pair",
+        "parent_lp_receipt": {
+          "optimize_rows": [
+            2
+          ],
+          "canonical_sha256_at_audit": "791125ba71b7859d343599d809e15090e684b6500c4accb67ff77e940ba4a877",
+          "later_optimize_rows_for_final_sha": [],
+          "model_bytes_status": "current_canonical_bytes_sha256_verified"
+        },
+        "child_lp_receipts": {
+          "left": {
+            "optimize_rows": [
+              3
+            ],
+            "canonical_sha256_at_audit": "8f59067caf92d215f0986204b4b25cf7bc0b20150f4df99460f82a108c25ca7b",
+            "later_optimize_rows_for_final_sha": [],
+            "model_bytes_status": "current_canonical_bytes_sha256_verified",
+            "lp_status_rows": [
+              3
+            ]
+          },
+          "right": {
+            "optimize_rows": [
+              4
+            ],
+            "canonical_sha256_at_audit": "ccac7ddc444f906db00a3c1deff4eba61a671c78c411a349578a94ba731cbec4",
+            "later_optimize_rows_for_final_sha": [],
+            "model_bytes_status": "current_canonical_bytes_sha256_verified",
+            "lp_status_rows": [
+              4
+            ]
+          }
+        },
+        "am_ledger_rows": [],
+        "c6_decision_rows": [
+          2
+        ],
+        "transaction_event_rows": [
+          3
+        ],
+        "native_target_rows": [],
+        "last_status": "atomic_two_child_split",
+        "phase_state": "accounted"
+      },
+      {
+        "parent": "L0.1",
+        "parent_interval": [
+          0.14727294010742756,
+          0.837091467554702
+        ],
+        "point": 0.4921822038310648,
+        "point_source": "legacy_midpoint_fallback",
+        "epoch": "0",
+        "proposal_row": 6,
+        "phases": [
+          "proposal",
+          "child_lp_status",
+          "am_decision",
+          "realized"
+        ],
+        "child_status": "complete_pair",
+        "parent_lp_receipt": {
+          "optimize_rows": [
+            4
+          ],
+          "canonical_sha256_at_audit": "ccac7ddc444f906db00a3c1deff4eba61a671c78c411a349578a94ba731cbec4",
+          "later_optimize_rows_for_final_sha": [],
+          "model_bytes_status": "current_canonical_bytes_sha256_verified"
+        },
+        "child_lp_receipts": {
+          "left": {
+            "optimize_rows": [
+              5
+            ],
+            "canonical_sha256_at_audit": "5768be75811e37f62522320c96fdf4bfd407d5f35b7ded105f66c32959f46924",
+            "later_optimize_rows_for_final_sha": [],
+            "model_bytes_status": "current_canonical_bytes_sha256_verified",
+            "lp_status_rows": [
+              5
+            ]
+          },
+          "right": {
+            "optimize_rows": [
+              6
+            ],
+            "canonical_sha256_at_audit": "0d5c63cdc0b529b4979b12b205b0dcb7e88194a099b8dc5ecfa5872fedeb0b01",
+            "later_optimize_rows_for_final_sha": [],
+            "model_bytes_status": "current_canonical_bytes_sha256_verified",
+            "lp_status_rows": [
+              6
+            ]
+          }
+        },
+        "am_ledger_rows": [],
+        "c6_decision_rows": [
+          3
+        ],
+        "transaction_event_rows": [
+          4
+        ],
+        "native_target_rows": [],
+        "last_status": "atomic_two_child_split",
+        "phase_state": "accounted"
+      },
+      {
+        "parent": "L0.1.0",
+        "parent_interval": [
+          0.14727294010742756,
+          0.4921822038310648
+        ],
+        "point": 0.31972757196924617,
+        "point_source": "legacy_midpoint_fallback",
+        "epoch": "0",
+        "proposal_row": 10,
+        "phases": [
+          "proposal",
+          "child_lp_status",
+          "am_decision"
+        ],
+        "child_status": "complete_pair",
+        "parent_lp_receipt": {
+          "optimize_rows": [
+            5
+          ],
+          "canonical_sha256_at_audit": "5768be75811e37f62522320c96fdf4bfd407d5f35b7ded105f66c32959f46924",
+          "later_optimize_rows_for_final_sha": [],
+          "model_bytes_status": "current_canonical_bytes_sha256_verified"
+        },
+        "child_lp_receipts": {
+          "left": {
+            "optimize_rows": [
+              7
+            ],
+            "canonical_sha256_at_audit": "2d42f4c86db3c2c0013f299318318368beae6c304f89a21b618ce840cfe90121",
+            "later_optimize_rows_for_final_sha": [],
+            "model_bytes_status": "current_canonical_bytes_sha256_verified",
+            "lp_status_rows": [
+              7
+            ]
+          },
+          "right": {
+            "optimize_rows": [
+              8
+            ],
+            "canonical_sha256_at_audit": "c10f65c884b802e9309755b29155019d6984b021d3529ff79f9fac82ca9d2748",
+            "later_optimize_rows_for_final_sha": [],
+            "model_bytes_status": "current_canonical_bytes_sha256_verified",
+            "lp_status_rows": [
+              8
+            ]
+          }
+        },
+        "am_ledger_rows": [
+          2
+        ],
+        "c6_decision_rows": [
+          4
+        ],
+        "transaction_event_rows": [],
+        "native_target_rows": [],
+        "last_status": "proposed_exact_parent_closure",
+        "phase_state": "accounted"
+      }
+    ]
+  },
+  "neutral_exchange": {
+    "passed": true,
+    "initial": {
+      "F": 0.8370914675547019,
+      "G": 0.2708414675547019,
+      "P": 3.775,
+      "stations": 4,
+      "pickup": 17,
+      "drop": 16,
+      "maximum_duration": 1777.013632206718,
+      "original_T_feasible": true
+    },
+    "final": {
+      "F": 0.8370914675547019,
+      "G": 0.2708414675547019,
+      "P": 3.775,
+      "stations": 4,
+      "pickup": 17,
+      "drop": 16,
+      "maximum_duration": 1777.013632206718,
+      "original_T_feasible": true
+    },
+    "result": {
+      "F": 0.837091467554702,
+      "neutral": 0,
+      "relocations": 0,
+      "exchanges": 0,
+      "equal_net_pairs": 0,
+      "insertions": 0,
+      "quantities": 0,
+      "exhausted": true,
+      "deadline": false,
+      "zero": false,
+      "verification_failed": false,
+      "optimizer_calls": 0
+    },
+    "transitions": [
+      {
+        "iteration": 0,
+        "closure": {
+          "initial_UB": 0.837091467554702,
+          "final_UB": 0.837091467554702,
+          "accepted": 0,
+          "counts": {
+            "insertions": 0,
+            "quantities": 0,
+            "singles": 0,
+            "pairs": 0,
+            "cross_vehicle": 0,
+            "sign_flips": 0,
+            "removed_stops": 0
+          },
+          "independently_checked_physical_witnesses": 2,
+          "returned_to_outer": true,
+          "insertion_placements": 2700,
+          "insertion_quantities": 1,
+          "quantity_feasible": 37,
+          "terminal_status": "joint_neighborhood_exhausted",
+          "trace_interval_seconds": 0.0002839999999999787,
+          "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+        },
+        "neutral_oracle": {
+          "balanced_blocks": 1,
+          "placements": 3,
+          "feasible": 0,
+          "improving": 0,
+          "exchange_pairs": 0,
+          "exchange_feasible": 0,
+          "exchange_improving": 0,
+          "best_key": null,
+          "best_potential": null,
+          "current_potential": [
+            1777.0136322067183,
+            1718.3103195125
+          ]
+        }
+      }
+    ],
+    "neutral_states": 0,
+    "strict_moves": 0,
+    "unique_recorded_route_states": 1,
+    "offline_seconds": 0.003379399888217449,
+    "optimizer_calls": 0,
+    "scope": "Fixed-witness diagnosis; no complete performance claim"
+  },
+  "outer_handoff": {
+    "initial_match": true,
+    "final_match": true
+  },
+  "passed": true,
+  "offline_audit_seconds": 0.02978220023214817
+}

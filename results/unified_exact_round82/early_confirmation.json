@@ -1,0 +1,111 @@
+{
+  "completed": 9,
+  "normal_returns": 9,
+  "per_run_audits_passed": true,
+  "paid_process_seconds": 515.0150000001304,
+  "offline_replay_seconds": 0.1497311992570758,
+  "native_calls_started": 47,
+  "native_calls_returned": 47,
+  "endpoints": [
+    {
+      "id": "U1",
+      "arm": "P-GRB",
+      "wall": 3.6409999998286366,
+      "U": 1.6880625264979252,
+      "L": 1.6880625264979239,
+      "gap": 1.3322676295501878e-15,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal"
+    },
+    {
+      "id": "U1",
+      "arm": "BDS-C",
+      "wall": 0.875,
+      "U": 1.6880625264979252,
+      "L": 1.6880625264979245,
+      "gap": 6.661338147750939e-16,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal"
+    },
+    {
+      "id": "U1",
+      "arm": "K1-R",
+      "wall": 2.0630000000819564,
+      "U": 1.6880625264979252,
+      "L": 1.6880625264979252,
+      "gap": 0.0,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal"
+    },
+    {
+      "id": "U2",
+      "arm": "P-GRB",
+      "wall": 36.265000000130385,
+      "U": 0.1172749121246281,
+      "L": 0.11727491212462801,
+      "gap": 8.326672684688674e-17,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal"
+    },
+    {
+      "id": "U2",
+      "arm": "BDS-C",
+      "wall": 11.969000000040978,
+      "U": 0.1172749121246281,
+      "L": 0.11727491212462922,
+      "gap": -1.124100812432971e-15,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal"
+    },
+    {
+      "id": "U2",
+      "arm": "K1-R",
+      "wall": 20.04700000025332,
+      "U": 0.1172749121246281,
+      "L": 0.117274912124629,
+      "gap": -9.020562075079397e-16,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal"
+    },
+    {
+      "id": "U3",
+      "arm": "P-GRB",
+      "wall": 297.06199999991804,
+      "U": 1.5758641772499655,
+      "L": 1.260257484700661,
+      "gap": 0.3156066925493046,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "time_limit"
+    },
+    {
+      "id": "U3",
+      "arm": "BDS-C",
+      "wall": 61.936999999918044,
+      "U": 1.5754388779918367,
+      "L": 1.5754388779918336,
+      "gap": 3.1086244689504383e-15,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal"
+    },
+    {
+      "id": "U3",
+      "arm": "K1-R",
+      "wall": 81.15599999995902,
+      "U": 1.5754388779918367,
+      "L": 1.5754388779918367,
+      "gap": 0.0,
+      "certificate": true,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "optimal"
+    }
+  ],
+  "scope": "Preliminary completed-arm summary; final joint evidence/mechanism audits pending. No additional Optimize calls."
+}

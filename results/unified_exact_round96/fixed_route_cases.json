@@ -1,0 +1,340 @@
+{
+  "cases": [
+    {
+      "id": "D7_at3600",
+      "role": "D7",
+      "panel": {
+        "id": "D7",
+        "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "family": "citibike443-regional-v1",
+        "geography": "regional",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15
+      },
+      "witness_path": "results/unified_exact_round96/witnesses/D7_at3600.json",
+      "witness_sha256": "f9b9e0dd20f0e917e902ffc6f374a0b82877252102e2ef9719fd2c382267beed",
+      "source": "E:\\codes\\ExactEBRP-round87-runtime\\campaign\\local_raw\\03_D7_ENS-C\\journal\\event_149.commit",
+      "source_commit_sha256": "76b62c4c75654a89037135ee21ea5c035518269ab3b9b8fbb14630b09d666132",
+      "source_payload_sha256": "07a5d561afb9ee3d26dea5f2fc207f67d26693d2f2861c6b2619cd649260b1f3",
+      "sequence": 149,
+      "observed_seconds": 3443.186999999918,
+      "source_time": 3443.1472723,
+      "verified": {
+        "F": 0.22515085005563787,
+        "G": 0.05208619889175534,
+        "P": 1.1537643410925502,
+        "stations": 50,
+        "pickup": 229,
+        "drop": 229,
+        "maximum_duration": 17979.284250742632,
+        "original_T_feasible": true
+      },
+      "cap_seconds": 300
+    },
+    {
+      "id": "D7_final",
+      "role": "D7",
+      "panel": {
+        "id": "D7",
+        "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "family": "citibike443-regional-v1",
+        "geography": "regional",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15
+      },
+      "witness_path": "results/unified_exact_round96/witnesses/D7_final.json",
+      "witness_sha256": "1533230f19bff18e668c873262f55b097c92d31fa87fb8b44e4d2a087c396133",
+      "source": "E:\\codes\\ExactEBRP-round87-runtime\\campaign\\local_raw\\03_D7_ENS-C\\journal\\event_374.commit",
+      "source_commit_sha256": "45cd2be8a0756e9a1db7e2348d0957ad002ce182068624a2e7c0e098f54625da",
+      "source_payload_sha256": "5ac4b4b90d8629baa9d247b3c2fe07dd19021901c00dd54c3e27d5df189af3d0",
+      "sequence": 374,
+      "observed_seconds": 42588.06199999992,
+      "source_time": 42587.9938316,
+      "verified": {
+        "F": 0.2235315457737181,
+        "G": 0.04702337072837567,
+        "P": 1.1767211669689495,
+        "stations": 50,
+        "pickup": 229,
+        "drop": 229,
+        "maximum_duration": 17748.747709258223,
+        "original_T_feasible": true
+      },
+      "cap_seconds": 300
+    },
+    {
+      "id": "U6_at3600",
+      "role": "U6",
+      "panel": {
+        "id": "U6",
+        "scenario_id": "round82-unadapted-confirmation-v1_U6",
+        "family": "citibike",
+        "geography": "compact",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/round82_unadapted_confirmation/U6.txt",
+        "input_sha256": "1556e893376349de92f9213642d7be0005dcb44e47e037d34f77040711787e3f",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "P-GRB",
+          "ENS-C"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15
+      },
+      "witness_path": "results/unified_exact_round96/witnesses/U6_at3600.json",
+      "witness_sha256": "f0a94a50e64d9d0c3ece6513743286f02ba47f9fb5a90da219dad9f86c05f935",
+      "source": "E:\\codes\\ExactEBRP-round87-runtime\\campaign\\local_raw\\06_U6_ENS-C\\journal\\event_97.commit",
+      "source_commit_sha256": "171afc1ae1d1bfd13da30b9b1ce85014492155ab35f9d4bcbe49f34bc5e2e03b",
+      "source_payload_sha256": "c9965b89808582ab04d3ad2659da0c035448fff3bb11d1e07b58c476fad00d7a",
+      "sequence": 97,
+      "observed_seconds": 1829.280999999959,
+      "source_time": 1829.004195,
+      "verified": {
+        "F": 0.1499054758990599,
+        "G": 0.025946713224558163,
+        "P": 0.8263917511633448,
+        "stations": 50,
+        "pickup": 196,
+        "drop": 196,
+        "maximum_duration": 15408.051170628494,
+        "original_T_feasible": true
+      },
+      "cap_seconds": 300
+    },
+    {
+      "id": "U6_final",
+      "role": "U6",
+      "panel": {
+        "id": "U6",
+        "scenario_id": "round82-unadapted-confirmation-v1_U6",
+        "family": "citibike",
+        "geography": "compact",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/round82_unadapted_confirmation/U6.txt",
+        "input_sha256": "1556e893376349de92f9213642d7be0005dcb44e47e037d34f77040711787e3f",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "P-GRB",
+          "ENS-C"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15
+      },
+      "witness_path": "results/unified_exact_round96/witnesses/U6_final.json",
+      "witness_sha256": "dbb9df0d01d6a13bdee66c6ed5f31bbe5e66ff6d3f80ec8f42d6e6475eb21fe9",
+      "source": "E:\\codes\\ExactEBRP-round87-runtime\\campaign\\local_raw\\06_U6_ENS-C\\journal\\event_220.commit",
+      "source_commit_sha256": "b068de951ee8a2dd083751260fc76d65f353eb3c38e91d0823e0ff113cddedae",
+      "source_payload_sha256": "27531594e7184f6702f087e9e50a0b390080574e6aa3ecf5d18ea0f9f4eb5074",
+      "sequence": 220,
+      "observed_seconds": 38211.56199999992,
+      "source_time": 38211.2813708,
+      "verified": {
+        "F": 0.14528773805499362,
+        "G": 0.028612031975857335,
+        "P": 0.7778380405275752,
+        "stations": 50,
+        "pickup": 196,
+        "drop": 196,
+        "maximum_duration": 17988.297119282848,
+        "original_T_feasible": true
+      },
+      "cap_seconds": 300
+    },
+    {
+      "id": "F5_at3600",
+      "role": "F5",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "P-GRB",
+          "ENS-C"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15
+      },
+      "witness_path": "results/unified_exact_round96/witnesses/F5_at3600.json",
+      "witness_sha256": "665ee9ad22537c2b678f6adbefde00fa1eceaa996adeca36cf93bb0f3c99311e",
+      "source": "E:\\codes\\ExactEBRP-round87-runtime\\campaign\\local_raw\\10_F5_ENS-C\\journal\\event_64.commit",
+      "source_commit_sha256": "f91f948878407dbab50e84567c48eee19c2986cb8821e525650e2e6676048854",
+      "source_payload_sha256": "6cbfb182488448ba8038da7ed6007adededde70d34293fb6cbaa37901c1c10c2",
+      "sequence": 64,
+      "observed_seconds": 3542.813000000082,
+      "source_time": 3542.5475035,
+      "verified": {
+        "F": 0.3293236946410483,
+        "G": 0.07668690146793523,
+        "P": 1.6842452878207541,
+        "stations": 47,
+        "pickup": 141,
+        "drop": 140,
+        "maximum_duration": 7194.703130699065,
+        "original_T_feasible": true
+      },
+      "cap_seconds": 300
+    },
+    {
+      "id": "F5_final",
+      "role": "F5",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "P-GRB",
+          "ENS-C"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15
+      },
+      "witness_path": "results/unified_exact_round96/witnesses/F5_final.json",
+      "witness_sha256": "6a162f107adf4c26c657ede92f928ff01690cf3684b0228565d65eb1e9152c48",
+      "source": "E:\\codes\\ExactEBRP-round87-runtime\\campaign\\local_raw\\10_F5_ENS-C\\journal\\event_114.commit",
+      "source_commit_sha256": "deeeb1d20813c6275916cd0e32476e04b86411972aa6a7d960808b0f7e186bee",
+      "source_payload_sha256": "6e281c719ecd7e8ff046e1979c2df9d6ba0b6f9196c236ed0b657daab9e37dfb",
+      "sequence": 114,
+      "observed_seconds": 44799.641000000294,
+      "source_time": 44799.3876099,
+      "verified": {
+        "F": 0.30244301421400704,
+        "G": 0.07920438111950247,
+        "P": 1.488257553963364,
+        "stations": 47,
+        "pickup": 153,
+        "drop": 152,
+        "maximum_duration": 7182.0993939501695,
+        "original_T_feasible": true
+      },
+      "cap_seconds": 300
+    }
+  ],
+  "offline_references": [
+    {
+      "role": "D7",
+      "U_ref": 0.21646672611586926,
+      "ENS_final": 0.2235315457737181,
+      "provable_incumbent_suboptimality_at_least": 0.007064819657848831,
+      "witness_path": "results/unified_exact_round96/witnesses/D7_reference_P.json",
+      "witness_sha256": "566f746a1659bc11ef3fa9df33ac6310a496906a755a60a9b6b14d63494bc4a9",
+      "source": "E:\\codes\\ExactEBRP-round87-runtime\\campaign\\local_raw\\04_D7_P-GRB\\journal\\event_639.commit",
+      "scope": "offline comparison only, never formal Start or combined certificate"
+    },
+    {
+      "role": "U6",
+      "U_ref": 0.14527298125514035,
+      "ENS_final": 0.14528773805499362,
+      "provable_incumbent_suboptimality_at_least": 1.4756799853271607e-05,
+      "witness_path": "results/unified_exact_round96/witnesses/U6_reference_P.json",
+      "witness_sha256": "26d6bd20b1616eae3fdf6d5bca34a31d85b3c1a668a5429b5a3ae5c0d598d7aa",
+      "source": "E:\\codes\\ExactEBRP-round87-runtime\\campaign\\local_raw\\05_U6_P-GRB\\journal\\event_559.commit",
+      "scope": "offline comparison only, never formal Start or combined certificate"
+    },
+    {
+      "role": "F5",
+      "U_ref": 0.2999915384940973,
+      "ENS_final": 0.30244301421400704,
+      "provable_incumbent_suboptimality_at_least": 0.0024514757199097237,
+      "witness_path": "results/unified_exact_round96/witnesses/F5_reference_P.json",
+      "witness_sha256": "57a383fe7c18c4f63a66f52c53c875a29e9280db3194b52f389f5d6f827674ba",
+      "source": "E:\\codes\\ExactEBRP-round87-runtime\\campaign\\local_raw\\09_F5_P-GRB\\journal\\event_729.commit",
+      "scope": "offline comparison only, never formal Start or combined certificate"
+    }
+  ],
+  "optimizer_calls": 0,
+  "diagnostic_starts": 6,
+  "maximum_diagnostic_seconds": 1800,
+  "elapsed_before_write": 0.13471510028466582
+}

@@ -1,0 +1,1617 @@
+{
+  "schema": "round114-independent-postformal-review-v1",
+  "decision": "ACCEPT_BLOCKED_DELIVERY",
+  "reviewer": "/root/independent_admission",
+  "signed_utc": "2026-10-11T16:13:23.906Z",
+  "scope": "Actual stopped once-only formal group, finite raw evidence, unchanged performance closure, fee exit closeout, prospective source contract, and disclosed pure offline report repair; no completed four-arm G100 attribution or future delivery verification.",
+  "execution_status": "BLOCKED",
+  "scientific_status": {
+    "ENS-C": "INCOMPLETE_ATTRIBUTION",
+    "M-B": "INCOMPLETE_ATTRIBUTION"
+  },
+  "candidate_identity_SHA": "8c5a5bc25ef289f30a1d4fb1a8ee60723c41ca8a3238b00c0669605f7cd50175",
+  "campaign_identity_SHA": "0abcdcb192cc7efa5b5a04eb9958e9cb92f1bd6592edfe466d75dde75f660923",
+  "admission_SHA": "0279c84162d44eb9d81b56d8ddb5adb65e6c3be06c938e8028b760755f0fd69b",
+  "production_identity_SHA": "d7b2b20b221feae9cc23152e00be3c4d8b7c79f40e1dcf39fbab60f97f2ba785",
+  "production_PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "source_files": 206,
+  "source_discrepancies": [],
+  "frozen_performance_helpers": {
+    "scripts/analyze_round61.py": "fad9154b399dd9eb3463510f8480dd1e8a22974729902e0a25ec78a9ae551cce",
+    "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
+    "scripts/round100_campaign.py": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+    "scripts/round100_common.py": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca",
+    "scripts/round100_idle.py": "093ced41cdae00ed1eab56fb6c1e94b9f22bacfac637da803b8e41ee06821639",
+    "scripts/round101_common.py": "6ea42060b3804c125888ffff76facea0519a5219a5110ba8524bf1e9e75d7ce1",
+    "scripts/round103_common.py": "67fc725b0a440bf8c557a93da3f9a2c02decfc2b2ffebbbcc7d0d8571bf247d0",
+    "scripts/round107_reader.py": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2",
+    "scripts/round108_decisions.py": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46",
+    "scripts/round108_reader.py": "52cadcf5ff7ce5fcfb1f828efd1a81a1c4d14d5e31d9b6b72963f7348e8408c1",
+    "scripts/round108_scopes.py": "4a9b9570d1142265fdc96b56df4a91021521732b521a649fe0609ac72de0c733",
+    "scripts/round109_campaign.py": "881c8a4d818f7c94a08e72a1714c1713cf823ab908406dd0425f2c16ae9db693",
+    "scripts/round109_common.py": "4804f3db87ad5b6e6770f300691b125dac9ab122df48c4b2c7a77fb53fc0dcdf",
+    "scripts/round109_data.py": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+    "scripts/round109_prepare.py": "e8684188f2b015d68702d0400570415ec6ef1f15d1f6b46ad5e8b4bb7913342a",
+    "scripts/round109_reference_batch.cpp": "9f714301d9ce6831ef7415eec730c47804986a3f06b7ba427e0ffd8e07a987bd",
+    "scripts/round109_seed_audit.py": "e0e2a076096ba8979ba3a59f376cc0293cb4b5da2a3bb90bfe0311f6085a570e",
+    "scripts/round109_seed_recovery.py": "8233643184c37bb46982959d547f5854c62b1812f1de51539245a4d7b4f68403",
+    "scripts/round109_seed_scope.py": "08bc7c282a29815b26efac54efa9880d660674328f12a5c83aeef7441044368b",
+    "scripts/round110_common.py": "5816ba204c8be606d6dfee36b0823fcd95fb6cc2e4ce90eb46b5a812e91da120",
+    "scripts/round111_common.py": "10d24a85b290697c22c6ce16293e9bc170ad89fa327486b754c4596d8bb91793",
+    "scripts/round111_seed_audit.py": "211bcfd350e6de3f0fd24dd1fad58f8b57061f8f482db1eabb1b863d9620932d",
+    "scripts/round112_audit.py": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+    "scripts/round112_campaign.py": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85",
+    "scripts/round112_common.py": "de18376ad23be0789a726c4f7bc8bbc09f074571c1afdbefdf7092a068d6d2a8",
+    "scripts/round112_initialize.py": "3722018560d68af4732f9d76f470ffd02c6308c87938defccdce8e80c6e0e061",
+    "scripts/round112_reference_batch.cpp": "4b78f53f7540ce284102c8a946ae60988b3800ddb87a0ce16ad38eaea615533c",
+    "scripts/round113_audit.py": "02af4e0de90b425b51889e1df860597236fc7ca32c567363e0de982834dfdfe7",
+    "scripts/round113_campaign.py": "b76c63ad8a09683e43b737721d55523bd7c1c6ab2aadb5070aa5c6e8b29fd447",
+    "scripts/round113_common.py": "f100749161fad2487d652991da0fa6086cce75aad0e037a43d8823a0abf95c1b",
+    "scripts/round113_progress.py": "51a0969ded9e0896b85d264fbe30af3cd30813d579136c3c822c845da384b45a",
+    "scripts/round114_audit.py": "5b9f8f4819c95312d4d3842660ad286f3b1e6e13186b6dda0dea8cd21d9f54cc",
+    "scripts/round114_campaign.py": "6b40ca1f7f1a133478eaf3a89d8f8c7eba13ffe3b6f80bae0358f86d787716c7",
+    "scripts/round114_claims.py": "5b166b07da359e50b663c4655a29ce6789aaaec04ef1b8b8230b8b69cfef06fd",
+    "scripts/round114_common.py": "25ee8c762fc230f956905c00835eb70e2ad97e8758bcff9b2c8813d1686deaa6",
+    "scripts/round114_ps.py": "9ed84c968781d7dcd0dc0764377fe9df8d91266e9ae40d74f09b3a35671f867d",
+    "scripts/round70_affinity.py": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+    "scripts/round75_startup.py": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+    "scripts/round83_audit_v2.py": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+    "scripts/round86_native_evidence.py": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+    "scripts/round88_a1_g3.py": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+    "scripts/round90_lp_g_g3.py": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996",
+    "scripts/round94_lpg_contemporary.py": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a",
+    "scripts/round94_lpg_formal_recovery_v3.py": "7d54f6bfd2a0fec302b7cdf5d0291809254ea1ffdbc864face54ecc704b7ce01",
+    "scripts/round96_external.py": "4d8f917ce46aa0945319d69e8001006a7cb039ff4a274844e53c6774eeb5d57e",
+    "scripts/round96_prepare.py": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+    "scripts/round99_pure_start_audit.py": "c769dbdc978025ba84cbb8f566d493018f912f35c74346047434e2e21af4f882"
+  },
+  "frozen_helper_count": 47,
+  "performance_helper_discrepancies": [],
+  "original_admitted_reader_SHA": "825a493416f8380df4fd28cd657153d33531092d394d79291e623449321e48d6",
+  "final_offline_reader_SHA": "625692f6091a93c49bb08fbcd78ea4c9a74924da705cfafae22def74a0369ef1",
+  "no_admission_or_original_identity_rewritten": true,
+  "actual_formal_children": 2,
+  "formal_committed_events": 167,
+  "formal_actual_Optimize": 5,
+  "formal_journal_returned": 5,
+  "formal_independently_verified_returned": 5,
+  "formal_explicit_not_started_events": 0,
+  "never_started_fixed_arms": [
+    "P-S",
+    "M-B"
+  ],
+  "declared_wrapper_and_child_slots_paid": 5,
+  "own_physical_floor_and_necessary_evidence_original_clock_verified": true,
+  "original_whole_preserved": true,
+  "over_cap_cannot_be_recovered_by_source_reduction": true,
+  "clock_failed_arm": "ENS-C",
+  "actual_finish_arm_assert_stop_verified": true,
+  "no_formal_retry": true,
+  "current_claim_rejections": [],
+  "current_source_reduced_arms": [],
+  "native_unique_internal_cause": "unknown",
+  "old_qualified_measurements": 15,
+  "new_qualified_measurements": 1,
+  "total_qualified_measurements": 16,
+  "fixed_arm_positions": 20,
+  "old_evaluable_pairs": 21,
+  "new_evaluable_pairs": 0,
+  "new_unevaluable_pairs": 6,
+  "total_pair_positions": 30,
+  "total_unevaluable_pairs": 9,
+  "all_new_deltas_null": true,
+  "old_R113_state": "BLOCKED",
+  "old_G50_cold_without_original_whole_still_unqualified": true,
+  "original_historical_endpoint_identity_gap_certificate_and_clock_semantics_preserved": true,
+  "historical_field_comparison_exceptions": [
+    "evidence_layer",
+    "relocated original_clock_path",
+    "CSV numeric format normalized without numeric-value change"
+  ],
+  "current_full_25_seed_same_H_qualified": false,
+  "current_missing_backend_exposure": [
+    "P-S",
+    "M-B"
+  ],
+  "status_and_default_policy": {
+    "ENS_C_roles": [
+      "WIN",
+      "WIN",
+      "LOSS",
+      "WIN",
+      "UNEVALUABLE"
+    ],
+    "M_B_roles": [
+      "WIN",
+      "WIN",
+      "LOSS",
+      "TIE",
+      "UNEVALUABLE"
+    ],
+    "eligible_count_each": 4,
+    "role_denominator": 5,
+    "default_ENS_unchanged": true,
+    "primary_benchmark": "cold P-GRB",
+    "uniform_M_B": "research candidate only",
+    "only_next_priority": 3,
+    "no_automatic_next_cycle": true
+  },
+  "qualifications_as_performance_measurements": 0,
+  "conservative_starts_total": 11,
+  "outer_seconds_upper_total": 7368.394686511601,
+  "qualification_starts": 6,
+  "qualification_outer_seconds_upper": 189.472980260849,
+  "formal_starts": 5,
+  "formal_outer_seconds_upper": 7178.921706250752,
+  "all_five_fee_receipts_actually_closed": true,
+  "unclosed_fees": [],
+  "unused_starts": 5,
+  "unused_outer_seconds": 9631.605313488399,
+  "unused_budget_is_not_retry_authorization": true,
+  "independent_validation": {
+    "passed": true,
+    "source_files": 206,
+    "helpers": 47,
+    "formal_committed_events": 167,
+    "formal_arms": [
+      {
+        "arm": "P-GRB",
+        "events": 144,
+        "calls": [
+          {
+            "call": 1,
+            "model_SHA": "c090f8eaa69e23343dddd24fc4d7a9dee1ab8b1885e26493c908099bfd1f6c2d",
+            "model_bytes": 23990890,
+            "native_log_SHA": "ba7ae8dab24cfa3b2d966217c7ecd313b80f4f252bea712bfa46192c20414902",
+            "native_integer_columns": 85409,
+            "LP_header_absent": false,
+            "journal_returned": true
+          }
+        ],
+        "normal_return": true,
+        "original_whole": 3573.223369550775,
+        "within_cap": true,
+        "over_cap_seconds": 0,
+        "audit_metrics_inclusive_seconds": 0.6974408000241965,
+        "whole_minus_process_seconds": 1.8643695507198572,
+        "own_exact_Y_equals_D": false,
+        "integer_differences": [
+          {
+            "station": 22,
+            "Y": 6,
+            "D": 12,
+            "difference": -6
+          },
+          {
+            "station": 55,
+            "Y": 18,
+            "D": 10,
+            "difference": 8
+          }
+        ],
+        "total_absolute_difference": 14,
+        "maximum_route_duration": 17920.573658299618,
+        "own_G": 0.012831505483549352,
+        "own_P": 0.1807373,
+        "own_F": 0.039942100483549355,
+        "global_nonnegative_floor": true,
+        "original_clock_closeout_SHA_chain": true,
+        "best_committed_sequence": 143,
+        "best_available_upper_seconds": 2732.372561250697,
+        "native_true_first_discovery": "unknown",
+        "return_loads": [
+          4,
+          27,
+          20,
+          21,
+          30,
+          22,
+          16,
+          9
+        ]
+      },
+      {
+        "arm": "ENS-C",
+        "events": 23,
+        "calls": [
+          {
+            "call": 1,
+            "model_SHA": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+            "model_bytes": 78838891,
+            "native_log_SHA": "d26ed9b96a7b9490331a4d94184b417ab59ec451b5116f889eb4bfa2a9e35213",
+            "native_integer_columns": null,
+            "LP_header_absent": true,
+            "journal_returned": true
+          },
+          {
+            "call": 2,
+            "model_SHA": "050547757b40e52d4dd79872cb74a8da06e5fce490ee53a1f0f46dae0e32caa7",
+            "model_bytes": 80324317,
+            "native_log_SHA": "eb04b47f4b6baa2e0e13bad2fe492f5b150132ca64026cd04e1d5eea0a76e054",
+            "native_integer_columns": null,
+            "LP_header_absent": true,
+            "journal_returned": true
+          },
+          {
+            "call": 3,
+            "model_SHA": "f1e11cb216b26d7477b107d87e041f42a50dcf3ab3a17b806b572966eb6d9e82",
+            "model_bytes": 78921234,
+            "native_log_SHA": "570e5b1e51340b670e0a8be924cc9329cb9dfc2ea1718d31f55e7051f7314385",
+            "native_integer_columns": null,
+            "LP_header_absent": true,
+            "journal_returned": true
+          },
+          {
+            "call": 4,
+            "model_SHA": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+            "model_bytes": 78838891,
+            "native_log_SHA": "59f96722af9c5990196860712715b2cd5f53d5fa31e2f1a9a3df613ac0ad6d6b",
+            "native_integer_columns": 87456,
+            "LP_header_absent": false,
+            "journal_returned": true
+          }
+        ],
+        "normal_return": true,
+        "original_whole": 3605.688342700014,
+        "within_cap": false,
+        "over_cap_seconds": 5.688342700013891,
+        "audit_metrics_inclusive_seconds": 34.928690399974585,
+        "whole_minus_process_seconds": 35.32834270002786,
+        "own_exact_Y_equals_D": false,
+        "integer_differences": [
+          {
+            "station": 19,
+            "Y": 11,
+            "D": 9,
+            "difference": 2
+          }
+        ],
+        "total_absolute_difference": 2,
+        "maximum_route_duration": 17824.6158647965,
+        "own_G": 0.0021951219512195124,
+        "own_P": 0.022222222222222223,
+        "own_F": 0.0055284552845528455,
+        "global_nonnegative_floor": true,
+        "original_clock_closeout_SHA_chain": true,
+        "best_committed_sequence": 22,
+        "best_available_upper_seconds": 3323.963134400081,
+        "native_true_first_discovery": "unknown",
+        "return_loads": [
+          30,
+          11,
+          19,
+          24,
+          11,
+          12,
+          28,
+          14
+        ]
+      }
+    ],
+    "historical_original_fields_equal_except_layer_and_relocated_clock_path": true,
+    "historical_comparison_normalizes_CSV_numbers_only": true,
+    "historical_qualified": 15,
+    "historical_evaluable_pairs": 21,
+    "new_pairs_all_null": true,
+    "fees": [
+      {
+        "label": "cli01",
+        "starts": 3,
+        "seconds": 178.05349802970886,
+        "qualification": true,
+        "actual_children": 2,
+        "exit_code": 0
+      },
+      {
+        "label": "finite01",
+        "starts": 1,
+        "seconds": 4.630215883255005,
+        "qualification": true,
+        "actual_children": 0,
+        "exit_code": 1
+      },
+      {
+        "label": "finite02",
+        "starts": 1,
+        "seconds": 4.916163206100464,
+        "qualification": true,
+        "actual_children": 0,
+        "exit_code": 0
+      },
+      {
+        "label": "formal01",
+        "starts": 5,
+        "seconds": 7178.921706250752,
+        "qualification": false,
+        "actual_children": 2,
+        "exit_code": 1
+      },
+      {
+        "label": "post01",
+        "starts": 1,
+        "seconds": 1.873103141784668,
+        "qualification": true,
+        "actual_children": 0,
+        "exit_code": 0
+      }
+    ],
+    "total_starts": 11,
+    "total_outer_seconds": 7368.394686511601,
+    "engineering_seconds": 0.5602053999900818,
+    "Optimize": 0,
+    "native_children": 0
+  },
+  "current_Start_replay": {
+    "scope": "current ENS-C actual terminal Start and canonical original integer model; no historical LP",
+    "passed": true,
+    "records": [
+      {
+        "start_path": "results/unified_exact_round114/campaign/raw/02_G100-R2_S0_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+        "start_sha256": "302dae11752ee21beefc51d5288e9a35f15fc9416b33381a550dd75f24d55976",
+        "vector_sha256": "e46f0165e5f8b754d4c158c8a6e5af9c810fb774ea53c6319060ff754c2df5aa",
+        "model_sha256": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+        "maximum_absolute_residual": 1.779909553079051e-12,
+        "mode": "off",
+        "rows": 421423,
+        "columns": 176866,
+        "objective": 0.15845807428722752,
+        "actual_quantity_type": "I",
+        "direction_columns": 800,
+        "per_column_restored_type_checked": true,
+        "ordered_native_columns_checked": true,
+        "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+      }
+    ],
+    "engineering_seconds": 7.287771500064991,
+    "Optimize": 0,
+    "native_children": 0
+  },
+  "offline_metadata_delta_validation": {
+    "passed": true,
+    "metadata_only_deltas": [
+      {
+        "file": "arms.csv",
+        "row": 0,
+        "arm": "P-GRB",
+        "id": "F2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 1,
+        "arm": "P-S",
+        "id": "F2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 2,
+        "arm": "ENS-C",
+        "id": "F2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 3,
+        "arm": "M-B",
+        "id": "F2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 4,
+        "arm": "P-S",
+        "id": "R98-C2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 5,
+        "arm": "M-B",
+        "id": "R98-C2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 6,
+        "arm": "P-GRB",
+        "id": "R98-C2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 7,
+        "arm": "ENS-C",
+        "id": "R98-C2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 8,
+        "arm": "ENS-C",
+        "id": "R108-L48",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 9,
+        "arm": "P-GRB",
+        "id": "R108-L48",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 10,
+        "arm": "M-B",
+        "id": "R108-L48",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 11,
+        "arm": "P-S",
+        "id": "R108-L48",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 12,
+        "arm": "M-B",
+        "id": "G50-C1",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 13,
+        "arm": "ENS-C",
+        "id": "G50-C1",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 14,
+        "arm": "P-S",
+        "id": "G50-C1",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 15,
+        "arm": "P-GRB",
+        "id": "G50-C1",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 16,
+        "arm": "P-S",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "False"
+          },
+          "formal_performance": {
+            "before": "",
+            "after": "False"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 17,
+        "arm": "M-B",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "False"
+          },
+          "formal_performance": {
+            "before": "",
+            "after": "False"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 18,
+        "arm": "P-GRB",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "True"
+          },
+          "formal_performance": {
+            "before": "False",
+            "after": "True"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      },
+      {
+        "file": "arms.csv",
+        "row": 19,
+        "arm": "ENS-C",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "True"
+          },
+          "formal_performance": {
+            "before": "",
+            "after": "False"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      },
+      {
+        "file": "execution_failures.csv",
+        "row": 0,
+        "arm": "P-S",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "False"
+          },
+          "formal_performance": {
+            "before": null,
+            "after": "False"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      },
+      {
+        "file": "execution_failures.csv",
+        "row": 1,
+        "arm": "M-B",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "False"
+          },
+          "formal_performance": {
+            "before": null,
+            "after": "False"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      },
+      {
+        "file": "execution_failures.csv",
+        "row": 2,
+        "arm": "ENS-C",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": ""
+          },
+          "formal_performance": {
+            "before": null,
+            "after": ""
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": ""
+          }
+        }
+      },
+      {
+        "file": "new_arms.csv",
+        "row": 0,
+        "arm": "P-S",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "False"
+          },
+          "formal_performance": {
+            "before": "",
+            "after": "False"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      },
+      {
+        "file": "new_arms.csv",
+        "row": 1,
+        "arm": "M-B",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "False"
+          },
+          "formal_performance": {
+            "before": "",
+            "after": "False"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      },
+      {
+        "file": "new_arms.csv",
+        "row": 2,
+        "arm": "P-GRB",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "True"
+          },
+          "formal_performance": {
+            "before": "False",
+            "after": "True"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      },
+      {
+        "file": "new_arms.csv",
+        "row": 3,
+        "arm": "ENS-C",
+        "id": "G100-R2",
+        "changes": {
+          "actually_executed": {
+            "before": null,
+            "after": "True"
+          },
+          "formal_performance": {
+            "before": "",
+            "after": "False"
+          },
+          "planned_formal_position": {
+            "before": null,
+            "after": "True"
+          }
+        }
+      }
+    ],
+    "qualification_raw_matches_admission": true,
+    "historical_dependency_SHA_passed": true,
+    "current_cover": [
+      {
+        "arm": "ENS-C",
+        "complete_coverage": true,
+        "covered_gini_upper": 0.1584580742872275,
+        "L": 2.20888241772054e-7,
+        "live_leaves": 1,
+        "open_leaves": 1,
+        "all_relevant_closed": false,
+        "scoped_proofs": 5,
+        "timeline": 11
+      }
+    ],
+    "actual_atomic_splits": 0,
+    "no_claim_rejections": true,
+    "reader_SHA": "625692f6091a93c49bb08fbcd78ea4c9a74924da705cfafae22def74a0369ef1",
+    "engineering_seconds": 0.08936740003991872,
+    "Optimize": 0,
+    "native_children": 0
+  },
+  "reconstruction_receipts": [
+    {
+      "engineering": "independent_postformal_offline_reader",
+      "exit_code": 0,
+      "actual_seconds": 3.398772,
+      "native_children": 0,
+      "Optimize": 0,
+      "root": "E:\\codes\\ExactEBRP-round114",
+      "report_output": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\review\\postformal01\\reconstructed",
+      "reader_SHA": "508563024fc04b1c0463d116da0c6fcb3d14be538b68fc3fe7e4e9ff0681eaba",
+      "core_comparison": {
+        "all_fields_equal": true,
+        "files": [
+          "arms.csv",
+          "backend_conclusions.json",
+          "checkpoints.csv",
+          "chronological_covers.csv",
+          "clock_qualification.csv",
+          "cohort_reconciliation.json",
+          "controller_AM.csv",
+          "controller_child_bounds.csv",
+          "controller_events.csv",
+          "controller_LP_status.csv",
+          "controller_native.csv",
+          "controller_targets.csv",
+          "covers.csv",
+          "execution_failures.csv",
+          "fees.csv",
+          "fleets.csv",
+          "historical_execution_ledger_G100_unstarted.csv",
+          "inherited_arms.csv",
+          "inherited_pairs.csv",
+          "native_bounds.csv",
+          "native_calls.csv",
+          "native_counts.csv",
+          "new_arms.csv",
+          "new_pairs.csv",
+          "own_UB_flow.csv",
+          "pairs.csv",
+          "progress_publication.csv",
+          "qualification_arms.csv",
+          "same_H_missing.csv",
+          "split_exposure.csv",
+          "summary.json",
+          "target_discovery.csv",
+          "time_partitions.csv"
+        ],
+        "CSV_field_limit": 67108864,
+        "original_worktree_fallback": false
+      },
+      "superseded_by_metadata_only_reader": true
+    },
+    {
+      "engineering": "independent_postformal_final_offline_reader",
+      "exit_code": 0,
+      "actual_seconds": 3.423341,
+      "native_children": 0,
+      "Optimize": 0,
+      "root": "E:\\codes\\ExactEBRP-round114",
+      "report_output": "E:\\codes\\ExactEBRP-round114\\results\\unified_exact_round114\\review\\postformal01\\reconstructed_final02",
+      "reader_SHA": "625692f6091a93c49bb08fbcd78ea4c9a74924da705cfafae22def74a0369ef1",
+      "core_comparison": {
+        "all_fields_equal": true,
+        "files": [
+          "arms.csv",
+          "backend_conclusions.json",
+          "checkpoints.csv",
+          "chronological_covers.csv",
+          "clock_qualification.csv",
+          "cohort_reconciliation.json",
+          "controller_AM.csv",
+          "controller_child_bounds.csv",
+          "controller_events.csv",
+          "controller_LP_status.csv",
+          "controller_native.csv",
+          "controller_targets.csv",
+          "covers.csv",
+          "execution_failures.csv",
+          "fees.csv",
+          "fleets.csv",
+          "historical_execution_ledger_G100_unstarted.csv",
+          "inherited_arms.csv",
+          "inherited_pairs.csv",
+          "native_bounds.csv",
+          "native_calls.csv",
+          "native_counts.csv",
+          "new_arms.csv",
+          "new_pairs.csv",
+          "own_UB_flow.csv",
+          "pairs.csv",
+          "progress_publication.csv",
+          "qualification_arms.csv",
+          "same_H_missing.csv",
+          "split_exposure.csv",
+          "summary.json",
+          "target_discovery.csv",
+          "time_partitions.csv"
+        ],
+        "CSV_field_limit": 67108864,
+        "original_worktree_fallback": false
+      },
+      "final": true
+    }
+  ],
+  "actual_final_core_comparison": {
+    "all_fields_equal": true,
+    "files": [
+      "arms.csv",
+      "backend_conclusions.json",
+      "checkpoints.csv",
+      "chronological_covers.csv",
+      "clock_qualification.csv",
+      "cohort_reconciliation.json",
+      "controller_AM.csv",
+      "controller_child_bounds.csv",
+      "controller_events.csv",
+      "controller_LP_status.csv",
+      "controller_native.csv",
+      "controller_targets.csv",
+      "covers.csv",
+      "execution_failures.csv",
+      "fees.csv",
+      "fleets.csv",
+      "historical_execution_ledger_G100_unstarted.csv",
+      "inherited_arms.csv",
+      "inherited_pairs.csv",
+      "native_bounds.csv",
+      "native_calls.csv",
+      "native_counts.csv",
+      "new_arms.csv",
+      "new_pairs.csv",
+      "own_UB_flow.csv",
+      "pairs.csv",
+      "progress_publication.csv",
+      "qualification_arms.csv",
+      "same_H_missing.csv",
+      "split_exposure.csv",
+      "summary.json",
+      "target_discovery.csv",
+      "time_partitions.csv"
+    ],
+    "CSV_field_limit": 67108864,
+    "original_worktree_fallback": false
+  },
+  "final_core_reports_SHA": {
+    "arms.csv": "632bc70a665a0971f9720ecfa3e266d97b7e1e32aec08322d115a2d54ef6b97e",
+    "backend_conclusions.json": "ef9d1e6d3329cee97e82c0f92c150a7bee87aea6a21258fb091db2826afbb964",
+    "checkpoints.csv": "7687674cecd40a65766ae5d190c4448e1ecb1dabd4c4d26a69c4320a395d5758",
+    "chronological_covers.csv": "f8c9c3d204b3dfb2f307d5af798e5463be0590c37f3cccb8bae52b3cab424c0f",
+    "clock_qualification.csv": "5cb6cfe2f6b777614e2167601a377c941906bffc93d9165a4cdd1baeb88264ee",
+    "cohort_reconciliation.json": "53643b336ab901133d6ccc4266f223b3a31fc4fd1ba65d7ab59361d442702eb3",
+    "controller_AM.csv": "8175608b25f7ed90c73aa519cb4e7208e13aca71c856beb846b1e674f9e64511",
+    "controller_child_bounds.csv": "6b7fc00a9f88b7aff8cfff25a81f3e78d5c1e99efed70cab1870e1bd0d163168",
+    "controller_events.csv": "928c8f4ec04d0afc66a253a0027e943b04cfe924d6ae5e7d90cd2597549197f4",
+    "controller_LP_status.csv": "05dc5d49194f4a158d68cd546dd00b86494f9003f768021835080250fb04982f",
+    "controller_native.csv": "9206531c4e2a5650beb5c36346f2bd118bfd5b793122dc8fea44fa7d3c1c4c2d",
+    "controller_targets.csv": "d30158ec85338c2544b80d5d9968462b23d5768a8918487df1c04dfcebb9f9f2",
+    "covers.csv": "3da7940f4a17c08c375e8c6f4a0840877446e8173efaa3a3d11eeaf323f67fb8",
+    "execution_failures.csv": "a423141e5292f4d4e18752caaa4e3f826bf021008985ef19d6f192df6c3e280b",
+    "fees.csv": "1c3bb04951277ce23661b3ec0295a0f4373d3b800125d2c0340468165e68ccb5",
+    "fleets.csv": "d683a5713929071bc5bd7f596dc82d16114b52b82adb3c6ceeb7f0d9da25ff02",
+    "historical_execution_ledger_G100_unstarted.csv": "70f9b7c882f6851b2de52e0bed0ee2a37df1caa924902a81a145a300722741ee",
+    "inherited_arms.csv": "4be336576ef4684bfb67171b0d0489b717813cf52fbd3a761bf8620fcc2b48db",
+    "inherited_pairs.csv": "366392b90e61a289ba165a601e513b1ebaa9ad1697f32f10729c1b1190371f31",
+    "native_bounds.csv": "e5e219b69bfaa943168bf5c38505fdbd6c6fb57ccd1e93567f280327f5c9520e",
+    "native_calls.csv": "d2e8782fd55cf0c048d0894fb5ae540484fbb961946786b22c6d2c25bd6fd9fe",
+    "native_counts.csv": "db9aaccfa753afbe12538a23d00097d1427161c6846c1e141c084351f80a67ea",
+    "new_arms.csv": "e7ee06a92effa19102ae058d9ed062984e0f3e21f081ab73b208b2936cb45f77",
+    "new_pairs.csv": "fa5d857703224b99ec54019582c0595da9e8b1b6caec34862d4e740ac394bd07",
+    "own_UB_flow.csv": "917b3a5f727b7fa4020569fdbee62f1c763d4754821ec7b868733821779e286c",
+    "pairs.csv": "cd98ad98225d01b8619982078d69db5f0a9355daf784cf002b0e4fd3dea43862",
+    "progress_publication.csv": "65e2b9b8f08e0b93025514da88db64c812356e66cc697c62b4c81cb12d1a0734",
+    "qualification_arms.csv": "25d6189b339f22a2932b4328f37cfdfdccf53c6c08afd05be5ed4bffa2fae000",
+    "same_H_missing.csv": "541f8157a5b306203dd922a550f77b9bddc11c1a4565c3e81239100dce3a349a",
+    "split_exposure.csv": "60a1cd5805916448ff595c1f46611e58323400218721ad676fc19bbab1c272a8",
+    "summary.json": "cab24375cf81a055365e25cff42427f659b83fc1387e4092dc3748d2abc5097e",
+    "target_discovery.csv": "7444cf73cfa0a33d7158071b48910490a55e03bbcbda0d935c17d00907c9f254",
+    "time_partitions.csv": "af3efe79536a77874d529ced907a07f408099e944c28cbac212bfbf84e3a536f"
+  },
+  "independently_reconstructed_final_core_SHA": {
+    "arms.csv": "632bc70a665a0971f9720ecfa3e266d97b7e1e32aec08322d115a2d54ef6b97e",
+    "backend_conclusions.json": "ef9d1e6d3329cee97e82c0f92c150a7bee87aea6a21258fb091db2826afbb964",
+    "checkpoints.csv": "7687674cecd40a65766ae5d190c4448e1ecb1dabd4c4d26a69c4320a395d5758",
+    "chronological_covers.csv": "f8c9c3d204b3dfb2f307d5af798e5463be0590c37f3cccb8bae52b3cab424c0f",
+    "clock_qualification.csv": "5cb6cfe2f6b777614e2167601a377c941906bffc93d9165a4cdd1baeb88264ee",
+    "cohort_reconciliation.json": "53643b336ab901133d6ccc4266f223b3a31fc4fd1ba65d7ab59361d442702eb3",
+    "controller_AM.csv": "8175608b25f7ed90c73aa519cb4e7208e13aca71c856beb846b1e674f9e64511",
+    "controller_child_bounds.csv": "6b7fc00a9f88b7aff8cfff25a81f3e78d5c1e99efed70cab1870e1bd0d163168",
+    "controller_events.csv": "928c8f4ec04d0afc66a253a0027e943b04cfe924d6ae5e7d90cd2597549197f4",
+    "controller_LP_status.csv": "05dc5d49194f4a158d68cd546dd00b86494f9003f768021835080250fb04982f",
+    "controller_native.csv": "9206531c4e2a5650beb5c36346f2bd118bfd5b793122dc8fea44fa7d3c1c4c2d",
+    "controller_targets.csv": "d30158ec85338c2544b80d5d9968462b23d5768a8918487df1c04dfcebb9f9f2",
+    "covers.csv": "3da7940f4a17c08c375e8c6f4a0840877446e8173efaa3a3d11eeaf323f67fb8",
+    "execution_failures.csv": "a423141e5292f4d4e18752caaa4e3f826bf021008985ef19d6f192df6c3e280b",
+    "fees.csv": "1c3bb04951277ce23661b3ec0295a0f4373d3b800125d2c0340468165e68ccb5",
+    "fleets.csv": "d683a5713929071bc5bd7f596dc82d16114b52b82adb3c6ceeb7f0d9da25ff02",
+    "historical_execution_ledger_G100_unstarted.csv": "70f9b7c882f6851b2de52e0bed0ee2a37df1caa924902a81a145a300722741ee",
+    "inherited_arms.csv": "4be336576ef4684bfb67171b0d0489b717813cf52fbd3a761bf8620fcc2b48db",
+    "inherited_pairs.csv": "366392b90e61a289ba165a601e513b1ebaa9ad1697f32f10729c1b1190371f31",
+    "native_bounds.csv": "e5e219b69bfaa943168bf5c38505fdbd6c6fb57ccd1e93567f280327f5c9520e",
+    "native_calls.csv": "d2e8782fd55cf0c048d0894fb5ae540484fbb961946786b22c6d2c25bd6fd9fe",
+    "native_counts.csv": "db9aaccfa753afbe12538a23d00097d1427161c6846c1e141c084351f80a67ea",
+    "new_arms.csv": "e7ee06a92effa19102ae058d9ed062984e0f3e21f081ab73b208b2936cb45f77",
+    "new_pairs.csv": "fa5d857703224b99ec54019582c0595da9e8b1b6caec34862d4e740ac394bd07",
+    "own_UB_flow.csv": "917b3a5f727b7fa4020569fdbee62f1c763d4754821ec7b868733821779e286c",
+    "pairs.csv": "cd98ad98225d01b8619982078d69db5f0a9355daf784cf002b0e4fd3dea43862",
+    "progress_publication.csv": "65e2b9b8f08e0b93025514da88db64c812356e66cc697c62b4c81cb12d1a0734",
+    "qualification_arms.csv": "25d6189b339f22a2932b4328f37cfdfdccf53c6c08afd05be5ed4bffa2fae000",
+    "same_H_missing.csv": "541f8157a5b306203dd922a550f77b9bddc11c1a4565c3e81239100dce3a349a",
+    "split_exposure.csv": "60a1cd5805916448ff595c1f46611e58323400218721ad676fc19bbab1c272a8",
+    "summary.json": "cab24375cf81a055365e25cff42427f659b83fc1387e4092dc3748d2abc5097e",
+    "target_discovery.csv": "7444cf73cfa0a33d7158071b48910490a55e03bbcbda0d935c17d00907c9f254",
+    "time_partitions.csv": "af3efe79536a77874d529ced907a07f408099e944c28cbac212bfbf84e3a536f"
+  },
+  "final_core_byte_equal": true,
+  "independently_reconstructed_directories_optional_duplicate_outputs": true,
+  "no_original_worktree_fallback": true,
+  "pure_engineering_failures_retained": [
+    {
+      "scope": "reviewer inline check compile only",
+      "exit_code": 1,
+      "tool_observed_wall_seconds": 0.2067327,
+      "diagnostic": "File \"<stdin>\", line 74\r\n    assert (q['solve_kind']=='LP')==not bool(call['native_preconditions'])\r\n                                    ^^^\r\nSyntaxError: invalid syntax",
+      "Optimize": 0,
+      "native_children": 0
+    },
+    {
+      "scope": "reviewer native-header assumption rejected; actual LP logs have no Variable types header; corrected to require the actual simplex terminal/LP ledger and preserve absent header as unknown",
+      "exit_code": 1,
+      "tool_observed_wall_seconds": 0.7383874,
+      "diagnostic": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 66, in <module>\r\nAssertionError",
+      "Optimize": 0,
+      "native_children": 0
+    },
+    {
+      "scope": "reviewer CSV byte-string comparison rejected harmless 1800 vs 1800.0; corrected to normalize only enumerated numeric fields and retain exact equality for all original identities/texts",
+      "exit_code": 1,
+      "tool_observed_wall_seconds": 0.7530336,
+      "diagnostic": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 113, in <module>\r\nAssertionError: ('historical field', 'G50-C1', 'M-B', 'cap_seconds', '1800', '1800.0')",
+      "Optimize": 0,
+      "native_children": 0
+    },
+    {
+      "scope": "signature command process creation rejected before execution; corrected using short read-only snapshot and apply_patch",
+      "exit_code": null,
+      "process_created": false,
+      "tool_observed_wall_seconds": 0,
+      "diagnostic": "Windows CreateProcess rejected overly long command: 文件名或扩展名太长。 (os error 206)",
+      "Optimize": 0,
+      "native_children": 0,
+      "files_mutated": 0
+    }
+  ],
+  "actual_review_instrumented_sections_only": true,
+  "actual_binding_snapshot_tool_wall_seconds": 0.6136819,
+  "reviewer_total_orchestration_wall_seconds": "unknown",
+  "engineering_durations_not_solver_or_qualification_nominal": true,
+  "reviewers_native_children": 0,
+  "reviewer_Optimize": 0,
+  "reviewer_qualification_driver_starts": 0,
+  "reviewer_builds": 0,
+  "reviewer_performance_helper_mutations": 0,
+  "reviewer_raw_clock_identity_mutations": 0,
+  "historical_LP_reparses": 0,
+  "current_Start_shared_parser_limitation": "Actual stdlib strict grammar parser reused from the frozen reviewed helper; independently operated reviewer and separate integer/rational fleet implementation, not a second independently authored LP parser.",
+  "scope_limits": [
+    "No complete G100 four-method comparison",
+    "No new qualified ENS/P-S or M-B/P-S pair or full same-H attribution",
+    "No G100 own strict zero or zero optimum proved",
+    "Native true first discovery and unique internal cause unknown",
+    "No future archive/empty-root/remote object receipt verified by this review"
+  ],
+  "report_SHA": "61162ef3f7b8b47a3a762818089cab5541b9315447e1cb04b0d1409fbb634e5a",
+  "critical_evidence_binding_root": "results/unified_exact_round114",
+  "critical_evidence_bindings": {
+    "candidate_identity.json": "8c5a5bc25ef289f30a1d4fb1a8ee60723c41ca8a3238b00c0669605f7cd50175",
+    "production_identity.json": "d7b2b20b221feae9cc23152e00be3c4d8b7c79f40e1dcf39fbab60f97f2ba785",
+    "protocol.json": "66a989d01c16c9b0f6804be06057064a8604edcb5796d7d8e005a4866bf0bca0",
+    "claim_policy.md": "e82cc775993919ac4ab05bc7fbc55a89b86858e83c86ee2b8438498d3ea5c6ff",
+    "fixed_manifest.json": "0abcdcb192cc7efa5b5a04eb9958e9cb92f1bd6592edfe466d75dde75f660923",
+    "campaign/identity.json": "0abcdcb192cc7efa5b5a04eb9958e9cb92f1bd6592edfe466d75dde75f660923",
+    "campaign/summary.jsonl": "3485715e3ce4f33b671588e890b5b7d6ade59a33b1e5f5830ecf8de7314ecd07",
+    "campaign/processes.jsonl": "0d8b3a45e99eaec8c0b0f620068f4345608a1809c8659170e945d38b3f1c8836",
+    "qualification/cli01/identity.json": "743da8e5f366598a3da9742a0c9f467114226484e3e21a2a6f44ef8b9a244b3b",
+    "review/performance_admission.json": "0279c84162d44eb9d81b56d8ddb5adb65e6c3be06c938e8028b760755f0fd69b",
+    "final_report.md": "d7bd36b8d57350271a88c5e58454c02702e19fe78f4f9d8dc39392dfc794381b",
+    "next_research_decision.md": "a53b64b3b429cc0b748d8638c92b94177cf43844b147bae22993e286a2efa3b8",
+    "blocking_incident.md": "5f8d484829e300adc8ba8abe548f32ecdcbaa59af147da62cd3392a5ae047fb7",
+    "physical_completion.json": "021be8b715bc75c0e4c58decb72822c8c440020507a388232ab3ca1acc44d3fd",
+    "reader_delta.md": "1b262b5dca66b43d93b6ff0fd699e0611efd46fff6f5d3f31d2f7362ae87cec1",
+    "engineering/offline_reader_repair01/original_reader.py": "825a493416f8380df4fd28cd657153d33531092d394d79291e623449321e48d6",
+    "engineering/offline_reader_repair01/reader.diff": "69008f56c539350ee366c9b7105da08ef1fcec12a8006cf26fe21d3bc6ffda2a",
+    "engineering/offline_reader_repair01/failure_receipt.json": "dcba20f9c8671a91a9d38c6cf294f159b985f1cf21cdc3dac4990cf093a8d68d",
+    "engineering/offline_reader_repair01/failure.txt": "b8481f55f9665a7d2c75d0696b83b8ab3e5d469aa95464f9790e08c9cccad66c",
+    "engineering/offline_reader_repair01/rebuild_receipt.json": "9a37f48052545310eacaa2b3ef382521525c1ef677c6f186e41d28b23ac3b589",
+    "engineering/offline_reader_repair01/targeted_checks.json": "5e2f82d735f50138d8800fd065c1fa601f67ad725264a577d60bc90a4bbd6a98",
+    "engineering/offline_reader_repair02/previous_reader.py": "508563024fc04b1c0463d116da0c6fcb3d14be538b68fc3fe7e4e9ff0681eaba",
+    "engineering/offline_reader_repair02/full_reader.diff": "f9a2544186a5dfdb5cda90371e3262f9116d2022b3b6304a00ea372c6525f926",
+    "engineering/offline_reader_repair02/metadata_reader.diff": "1af67d3009eb5fa528b3dd4eb476c52e9129e34b17a3ed7b087db7c0420ae5e7",
+    "engineering/offline_reader_repair02/check_failure01.json": "a3700826700c05bcd31a9f1fc6a8b7ecbe011c67a8dd75334a13a39674e1db67",
+    "engineering/offline_reader_repair02/rebuild_receipt.json": "e9311a9c095fcf4d20d3f8183f333ffa8bda93eb2b2a7608b1ee466c9f271133",
+    "engineering/offline_reader_repair02/targeted_checks.json": "6b5a48b9c87c391827e3f143b7d4e9c36f22d831f3e13c27587e4823c83ec139",
+    "inherited_r113/dependency_manifest.json": "caf6bd701d91aaaf3964b5dd6f4e9f7729d79a288af8dbd608b62191e78a5977",
+    "inherited_r113/review_dependency_manifest.json": "d14474972400fa8a189ab4513313ee78464e6c3f2953767ac11a22a97b8529e7",
+    "inherited_return_authority/dependency_manifest.json": "fb360b3d3dde8208af2f8b78053ab9bb915ada2e6a8395318de8e722ffc5283b",
+    "review/preparation01/finite_evidence_review.json": "e94ca665d040e7145531dcf08b386d06153c118dc4a4fa185a0e0398bb271b82"
+  },
+  "current_formal_raw_and_journal_binding_root": "results/unified_exact_round114",
+  "current_formal_raw_and_journal_bindings": {
+    "campaign/raw/01_G100-R2_S0_P-GRB/affinity.json": "fe1f92e2ef9265cd2fef2437281fda571d788dec5328382d4a37880a71fa1802",
+    "campaign/raw/01_G100-R2_S0_P-GRB/audit_execution_metrics.json": "a7c8d90ad3869d3a32a70a9baf050c90c0b7c928e0fe442e40872314d433bda6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/audit.json": "3fd96fd517564ed9459597706883e9334ad0b409995c88915d74919643774049",
+    "campaign/raw/01_G100-R2_S0_P-GRB/claim_rejections.json": "ff1d71c79dd591bd7cce4db93fcc6469ef8533c31e2b214bedea3291285d6e9d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/cohort_check.json": "d00e0ccbffe1b4910908a057fc7fe830a10eee8b33dea4c2bf164c41d3aebb04",
+    "campaign/raw/01_G100-R2_S0_P-GRB/compact.lp": "c090f8eaa69e23343dddd24fc4d7a9dee1ab8b1885e26493c908099bfd1f6c2d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/completion.json": "a01b253beaa230121e5dbdf046ffe12816eee3a4dfed9fc019f336f91952cd75",
+    "campaign/raw/01_G100-R2_S0_P-GRB/independent_endpoint_closeout.json": "c55d3a2cfbb6dc87f5fcca940df2e4d08d869f6758a7bf8d5c0bd8df653a4c20",
+    "campaign/raw/01_G100-R2_S0_P-GRB/independent_evidence.json": "913895aeac71a327a356840fc5345824387246e518f5713e53f4bb5a4c3a9084",
+    "campaign/raw/01_G100-R2_S0_P-GRB/launch.json": "7504cb4cac1f6cfffa5c2cdde02d642b076d88d6a138dc0c893f5d30ae40dc50",
+    "campaign/raw/01_G100-R2_S0_P-GRB/native_claims.json": "c9764f80782c74d467be64eb325bc97c7b44691850adc32933e643b702e845f2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/native_end_receipt.json": "1f4b3d6232ceb75663c65468188068e1c7da4c0131e3aa535a4dc4cfb8a3663c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/native.log": "ba7ae8dab24cfa3b2d966217c7ecd313b80f4f252bea712bfa46192c20414902",
+    "campaign/raw/01_G100-R2_S0_P-GRB/observations.json": "cdbe537748b5080899cf049af5a3d89afbcf9ba1c4a732662076ca08f755e27a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/phases.csv": "76f08fa212ae20bfc9c64e2d43f57808d7fd94dbc7533791e2549129d230fd8d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/postexit_audit_receipt.json": "8b24c2c93539a6443e3ea78bddde54aeca40d617aa2af63ba0161146d511449a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/process_start_marker.json": "57a1f010be5f1e95d12d543bb550adb9cd79d77f874ddbcc3d251ccf048c0732",
+    "campaign/raw/01_G100-R2_S0_P-GRB/progress_publication_receipt.json": "59b3ec72ec6491ffd56c0dd20d5c9dcf788cbfdd56bf2b2aa8f5e9fadffd4a93",
+    "campaign/raw/01_G100-R2_S0_P-GRB/result.json": "da1da09f5780c3ba4a44f6890ab6f24187f1681e16292701bca0d1b456594c2a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/samples.jsonl": "68c401a44dd7e2de6db89c0024f1f174f2de460842f0ceb0771eae9305ed6c52",
+    "campaign/raw/01_G100-R2_S0_P-GRB/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "campaign/raw/01_G100-R2_S0_P-GRB/stdout.log": "a2de130fa0d5d24dc955d600d5fccf592bf45cd42f2e51d7184dc0f69a45efbc",
+    "campaign/raw/01_G100-R2_S0_P-GRB/whole_arm_receipt.json": "341a9f59bd8d73db73b95b6e29e16c698dd567fdca05bf0e994075f8ccf21c43",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_1.commit": "dbec90e79bdc38aa3029e11d9c99e0565e72b4e0c216af1e15b60ab81404a356",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_1.json": "480fbf490f6f6578e3c57b8d94021b7f3cb99d03f0029c75dbb7f29b072505c6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_10.commit": "3b5addc49ad1612e8e4c6756399d18e5af05220d7a79c9037b3d40b7af3a5c7b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_10.json": "62e3912373e679aa491df72c19fee55730fa89cc535867b1d874ceda13f8ff99",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_100.commit": "da7ba8fb4f70b1a6c97193cd2540a1681976a7ccf53c95d85b0f18eaa2593cf0",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_100.json": "95d476c0977c5bc47ca3ec8c82c9ebb85b71f6b77b94fa77e703a6e241f29ef1",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_101.commit": "e502ca635b24caa5df489d28773c4311aac57643eca0df7d0c7f1f016d1c153c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_101.json": "e97e690a9751c1b409185fd27decde3d96abe7f988815b6230de358bf23f9102",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_102.commit": "e55ab57e1c3c66a64818416e42aee97f6dbfcecd7fb27ab386ac5cc1761adc82",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_102.json": "e7866f5dd1a099ee1adcf71663cc032526981eca66b71e6bcdfaf980fda59a23",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_103.commit": "691e3488ed6e93372e5afc9b79272d440d89c3150f3c2f3dc0ac7d72949c715b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_103.json": "5c408fdeddb72fccc57988c2328a7db00f9444de8aac95373823bbe26904e3e2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_104.commit": "32f88b50c58baaeee20c6ba85c800020bf412e55d21519f77cc124fcafede25f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_104.json": "6d1df0967d8bbd4b292c6208ad675291561df5474648ea619060ca106f025517",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_105.commit": "a5146b080bf56ac9fddf327a0cbbe0473455c56da88a959386219d87087ecbef",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_105.json": "414ff2afb3ef4bbf8f7e96ea44b0bec573916a7c923b817fe046b719e05b7343",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_106.commit": "3b572efdf45bb8c84f735f16b0a67078642be874315b58fb0747399d97207079",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_106.json": "ac3505f7bc54a541f45ec8893ba8f481043915b3115272f5f03b0fe46397ddba",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_107.commit": "8f3f6a8976e09e67904043d890b3bb4d359ea6f197194885e198485da524862b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_107.json": "9cc310d3e9140c395e6e19959e5854f0645da126043ab874c6bdf81cc622efa2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_108.commit": "519b6bb326d3abc2433aef1bb9f4d44735e397a779d1f1cdfb53d676b55429a6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_108.json": "035d9242e46ccbde32d198ebb1f377629d5653c675e1db27ac0bf39946cd0a87",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_109.commit": "790d2db76d3c4452e7c5fa2b4135748d0bc6d6a9c45c20a92dc1e78ac4202e59",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_109.json": "b91e08679f7f95587f88eb693dceae1fbfd93a87e0d5670fa6bc20322de22bff",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_11.commit": "d062cb822ece22078f71877a2bebd3338a8557e497a08529fc2efef743fdadbf",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_11.json": "8e8b081daca2f4bc1acecb956d0d2fa5f9348285e4414fae1cafe200ebe2bf24",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_110.commit": "d72156d4e2f891d8632fbdf5934d36d8a815f9392eb5db40613b74ab7aa2ac86",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_110.json": "0ffeac0db979b1859c278cc65fd7c56e8b240bee63606a4b14da052bd625b688",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_111.commit": "c1aec19c9a3738afe7af9d8da0ef3caf276fde581a95e10119d5f56911dd1b95",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_111.json": "176ccaad0a722fa90533012477d004c8a910c116c20159e4b97c9627f7485b4f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_112.commit": "1ce3ca4151a25e3eade7a4c811a1d68f0b71ea00e0bf6cde63553baf5361563d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_112.json": "bdaa5a03f3bd10c2f634dfe04a328a458e3c6d5500284ab4f208bdf4d1b0b03b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_113.commit": "8453d9fd39e1604122cb6221fbd427c22581c33955288939b041241ae40f43d5",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_113.json": "37ea968c6ae5b027dc869452edbca03e5dffc09c5efa9d06c3b654a4726d557e",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_114.commit": "9a8b60be4535c7cb5746a537395e8f466dada6528c00a64e1e2f7d7968f24dd6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_114.json": "c53baae5a3acb77845f1b978f6679cd3ff142c2acaaa0beadc4d289478966369",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_115.commit": "683886b696baa940ed564672c3dc50e19ef53c3b1d48b741329e0333659f4578",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_115.json": "359fcf789d554de6f5d347d46419dc1b51717cfc641e7adf7d137b8cb99ae230",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_116.commit": "3fa102f54467425206826ccc97eecbbfdb325826deadfce82907d4cd0f64c48a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_116.json": "af075279f59731e6b0348d9caf449f11526c59be120a2e405e880d0f1cf5d6c7",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_117.commit": "4b7dc4d6685272c392117e46f15434b841400c5b212da48d027524154209532d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_117.json": "8a02961d5ddfc588b8840b4f85b4b63c974affde0ee5eb0967016b90e7588702",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_118.commit": "94ef6a990578b0f23c0380b8156f0f6deac351ded347060fe48dcb1a9a15042f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_118.json": "93f3a266f73a1a800a1236858cf1f4415aa20cf580b11c6b8587a23aad1ec9e8",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_119.commit": "c28f54356ddab5cf98458e3e8458fa55eb64d4ae4987d93546196479723394cc",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_119.json": "11591e5d4496391813e1bb4cbf71a8b92eb07c050c473570fec053e1da29697f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_12.commit": "49c54f06d7584f7d70db716c82d00a3e634b964ac1ee8c727b7b372d541f38f6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_12.json": "9dce76905f04454d4f1e1df2db54075fbacedc1a13c3325ca13cfb842a860db2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_120.commit": "95299b003894944b8acfba933826a5df875eec7c38c4acd3dd39a4322c2f372f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_120.json": "0728e068b324053be126cf6351af7faa3f839a79ff3fa01404242dcac658e1f5",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_121.commit": "35a673ce232d56326cae4a0cc74c5c4e0eb295315a85da6bf31e6007b001422b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_121.json": "f0c04338ea04c3975698a712ad2c0d18c754e0790fdae0b9d8161e3c66a312c0",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_122.commit": "e1810395d1988c5b19a2dc76b2accd4658472039606421e7fa75044ff63b895f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_122.json": "27a7458e22301586e144a2c47d12c3f7cfab4176d2b9daad44842d74fbd689ef",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_123.commit": "87cfc2252c1d779215a8578ad10d1d6aca584922040aadb2fb150e4dbc1eea3d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_123.json": "942d62f0288276eb50e01a49892d00c5facfb531bff44f0b0833dcac3fffd516",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_124.commit": "36e4e7c7821df8a248ae928fd61ee4a5e3018fb13bbf33efc212642c510c7373",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_124.json": "cd18f77021aa1968729fedb18f2a1e50ff0eefbff067c59a189660c2bb7c1afa",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_125.commit": "0a81769abc89e09524ab70918933346664a366215169a58c59ea432e841ad671",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_125.json": "564525ce057de2696c510c80f47c869b44f4b030dc8d0fd098b70e1cf3d67701",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_126.commit": "90fac5cd6373213495d0d35851471c147f386093d5ca2e095d5ba1e212f75b38",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_126.json": "d0d53f04bd7013fb07847a47ab6a725278c1311716b4494847275476f68faf2e",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_127.commit": "2dee6e7c8e860d204b392b2ce9ab171bfd8d0167354a417e214947a398af0106",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_127.json": "a55a4f9a89d37de71a11328c20fbb20844df4f9e85ee975873758121802d0ca1",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_128.commit": "6abf5383917b4a14ad5151c7955f8675c0c5f32d7d975881ff7ce89f85c0610b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_128.json": "2fdee347b780bda9c90dca2cad5d39527f2da04509fd5fda20122ef56023f042",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_129.commit": "fdfab240af43c3d46f5d38af46d5db8abe5dfaadaf19efdf634e76cd5681cbe3",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_129.json": "05ffe782f03785dca1ec25816a5454ee127d065e320e18934bea747aa2cf526a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_13.commit": "406043b2571c1ac20b09a9cd38b380d25ddc78b650595b750d50bdf114ec9c90",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_13.json": "73fada6ccf52bc0dfcd74aaaf51da2380bdd05f625c6e50d7e9b2e1b09b0c742",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_130.commit": "2b143483071b1623fa4b08e6b98efb06baa346f4df6215a5d5b4ab1831ff71d8",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_130.json": "2755b3cd57c6e23509f886d75cf3ed7796e61b2bf145ffcbae9a35627dfe5dc5",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_131.commit": "992984951d2a259f20d5e838cccf54956044375f66d1053be388dad2baf36b8c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_131.json": "8ecff06909c74137fd3cde4dfcd26b36a89b742dc53a00d90757336c21768d8e",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_132.commit": "1da222bf535f81c8df4412d8bfb29ae8cf097cec42aade7cbb77f1320fed11ba",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_132.json": "326d043e5a267378fad2f58e125ac2938afaf41c10708370ec7217c278410a83",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_133.commit": "437e55330e5fd572903ebd7f76021867b350e2db3c7f037087e84e73d6b38a45",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_133.json": "8222e86ce5ad2f72f184dce0a383ec150febc50e9f9c797d17b72c0b8b7e08b0",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_134.commit": "5a001ca3853670065a3c9c40274b54c1d05b8639ff6514f067fac021bf033962",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_134.json": "47400e4ddb4fe1bdc89a51a888e37a17d4172fc5179c739f4dcdc53b821f45ef",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_135.commit": "3173e4dfedf5b33b4e13ae2a7bdae454594d5542b23575743d6ae7d23ef10479",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_135.json": "1fcd3ad294461143572c8e72d01eaa8b95394a42f7af33ea9ae9cef5709d1d1e",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_136.commit": "40e27bfbf0320c522f9aeb44d195eaa1011ef7e57df26d4e1d59d0801ee00fd1",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_136.json": "4840d8b87259082020188792eed0281bb8d786aefd6194ba7e972c33a8faed13",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_137.commit": "dddd5006c8abe59c885fd3b775e9b4d017d9c641e55e8cb4ceb4cc23c05633b8",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_137.json": "f0339105186a79f4828d712332c74365121fb875ed605540c7e1d58b3f940b15",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_138.commit": "ad13b835327ca8dd5d58dc0ae8eb634ef503a884ff46ca51abb58c4e1d63a841",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_138.json": "02f02c8578caac20a18d919c11f69a52420f7edfeb6f3deeab39361bc6fffc84",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_139.commit": "79b4c82fbae5f83021af1d344f15712cc55e75d82b73ccea729dda3ce6ebeed4",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_139.json": "958f878741088a348e66abf832f652b349c16791395977238e21a745155802ea",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_14.commit": "4911afa467d24f77978f28212a908440d2e6abfa6f433b74a817eb49f18d6f89",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_14.json": "f2b79b3d076fbed9f06f4aa581a4ee3672bd98d8aa0fe1374a25c69d80ff3e07",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_140.commit": "982d392beabd128c79f335e1ae07281aa774c125fcbbd6c3295e16660a42b662",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_140.json": "d1caf42f3cde5e511beadb2925e539bee047f0ab18b00db0c4f9d08f76c3d476",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_141.commit": "c61c07ca99d9e92716b939cc57d2df2f9d9790e4298c452fddc576126039171d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_141.json": "8879b403b3537743c17220a9be113430b28992cb90ad41e7eeb3eaa5fb96c8d5",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_142.commit": "b0f744768506edd4cc166de57a387d6fef28fdb26ac32849125517788782e65c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_142.json": "f006f35425d86755d2765957c7b07488d5d0424712a0a399cc5560476008e98b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_143.commit": "ca5c4cea888c05b42d6e959bb7e19743b416e2eba0d313eb65924796b4daa7db",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_143.json": "40f116df2118feeb8597b8e18c369fc26064d255281ba4b89d704d0d2a7a2c8a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_144.commit": "32abea87400b6e6e15a45069166e835af13f3364be75979188220b3fe1f5315b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_144.json": "352ff6b4c75cb2806a81f83c5104aa84d14e95985a09c8e0e4a6ec9a4c6b6c10",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_15.commit": "a090c9f53b6777dc34eec731aab1ae7be2309b8ea1c5d7bf301254be140ec3c3",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_15.json": "daaf50e9ddfc3a967dddf2a4c0e848935ccff5514a8c3c5f287a259c4e877a5f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_16.commit": "92308c5546e3b8a7ced4fd23d7c2f0a7fa4c51b98ac8c9bd2361ff1875a09067",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_16.json": "2e2e0e815e7f49182c5380b8e0e68d3a58c136eb078dd95ad538d490e37247cb",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_17.commit": "3b7f0befa6bbc14db6c195470f47dd779e6bdfc36628d2d19bbe132c95fa28ea",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_17.json": "6a0efffd3f30c64960c4e9fb87156a1a852f4cc63a9e020817f05d0d65e71446",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_18.commit": "b9c90ddfff66cc802848df4d7b5fdeb3596e207836735f3c1f73de769155d739",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_18.json": "a2b8e0675eb1b35ff914454b16a0115f2d1fbda71fa4fc6b5ae766068c12b2fa",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_19.commit": "082b2a81e884dc11231425ea9c9627096dbdb1df281271138fc4ad6a199fcdf5",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_19.json": "ccdf5c4d8047e0b8b2a86f41aa79b4ea8b08e2be0e8df7437b23c005f31655ce",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_2.commit": "daa66f9705cdfadd342ed172516fcc0b53b8d6168fea37ee3d0945da2cd9c8b5",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_2.json": "271fd2d802d16be851e0527c5cb4955041f5935dffc61d156bef6adcf217b073",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_20.commit": "b2849782bd4d483548136533d355b4be366f06149760bc761cdef696509da765",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_20.json": "a1befefa124641055b9cb62a319404febddb5816bfb344160463b10c0b3cfd6b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_21.commit": "ea9520c9c6f9766a116e62ba975cd5cbf9115c4bc07bd8446913fc5dc1d8848a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_21.json": "f74d61dea974d25407ec0d38cf53f5d4847a8fdedfad1af7b35cfa4591690d62",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_22.commit": "eb79d7cbc7b78fc45db24e7da0dcedfab0f1ca7cee6f4a81c93c7d810533d94c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_22.json": "105639ac574c07f41f73057d20b579699f73017afef4a2a48b9ac892a5a6adbc",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_23.commit": "a117812e73cdd02d8df9f8af4bf2f117250ff685292c6828b5a853b2782773ff",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_23.json": "2f2dbddde0a8390e239215b3ece712b876d0960bdc81d9446c85ac8a72878f7b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_24.commit": "978540ab60e3fd4870385498579c2d1ca131d46bcac789d70793befcd5b4a394",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_24.json": "4034988ffd08be22f7eb8170eb8cc0154959f64b9b253bd7a8fc4f070bbc69fa",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_25.commit": "922d11edd25c7a4056ed7bacdf2eff0a50ec975d510165161ff5e55e7b79956f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_25.json": "e3f0dda16cfc1b328a008207b2f9745ba6664abc7725f9c1d51e745aefc27239",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_26.commit": "b7049ab5d0b61154acf5f32ca1870bd244038e192baf4c0879d1e2696ea3cad7",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_26.json": "6dbbb93b593ef52a45271dd468da648b5cc49535260eb3354f33eb8ace4f672c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_27.commit": "7c36c52f4cd42f9063fc96c9de138cacf1d33bb06ebd842b9ef210571b73cba4",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_27.json": "48610331f7106bc68e7c6e2f8095605dffd596bc9205c1dd14cbdf898a4b15cc",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_28.commit": "b9feabd1ecc6de023cc079975f63598c0af1c37fb38f23342fb8d832749d31ef",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_28.json": "04088408be6b38c4be4a6933ddda31fea9c90f002b3ca81afae6a2891dd56080",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_29.commit": "1d59e35392a5c99b1efa97b27ceba53ca1a7c0821993129a56b73d17911a9f8d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_29.json": "65c1f2b1ec7a385eb6800eb9959c3b022a9d83661ee12d04845e90239b463065",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_3.commit": "42ed5fa558c501761b653af7a69e15082fc834c9c41ddf7622d61e1c40992310",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_3.json": "75b3c4cc758986eb3f2d453b28de70027f6e324ffde1abe43f247099267ee810",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_30.commit": "f0baa2658aa0839fae79ab960e6c2b53927604502933f99b10cc235ba95291c2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_30.json": "7cdc5ffc56e7924d23734c8a9a46adc49e61dfba726ddbde561fa51d96e46273",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_31.commit": "a57e7f921db3a0de5eead7bb345581ad00ea5acf932f27866d64d287b53465d3",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_31.json": "d7ac47c3a5f5e488434a46800afcf337b149487ca13e907ed7b5aff37f030d3f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_32.commit": "68364c9aeac2277d02e3ae34408864fe722467d9ab514bbff5eccbbe3486b452",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_32.json": "7349fac99a643676b700f825aeee7bd4a690f8fa5e47c738eb092050cb4e4554",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_33.commit": "71f94f1faa236adbea300301431ad5721b2e93e1ca3323bef4d78a1c1bd4df2b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_33.json": "9631f4a622b1ad9c46d628a7d5a1da7dffb7b69b1a1d7d16717af8a8e60e1804",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_34.commit": "cb46bc5672c06cdd604881535adb4ad28074655f714a70b183ebebd7d9e633b6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_34.json": "802466197bc8a8021ca515233a9c9b6dbc04279f4f52fab655c1c6dc52c8c850",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_35.commit": "161a96ca5c13ad2fb6a503ae89d7a911d18db51065c18df16a8ca6399081f93c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_35.json": "889b48a6c6ca85ba51893085dda32298946633827d359668af405a34141d7644",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_36.commit": "c3540ece76ca031147da9b911111d7e416048c25841fd3a33e4eae84fd88fb9a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_36.json": "fcff71cc03a537a44c57255b4f782521f3664a5b81342f3ad8e79b37004d150e",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_37.commit": "446249cb898ae22eb40dfc945e02faee404d3b1de47983caee024b2e1a38a3c3",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_37.json": "3bc660a5e1f70c6a9851c031f1c61dc91157765c191ec61a3b55442c0ff5f5c2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_38.commit": "76c3669373837ea40d066c1fbcfe958424a9a7bb907a7bb8ff7181d59dc4cf93",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_38.json": "cc8444bcc69322e26d2e354a2a6b3f7e84e0b108ef8512c5418637dcc3bee89a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_39.commit": "9fca43727f659c1500c6f8ee3ea5661bd69c37473a120ff5e071d7f64fabdeca",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_39.json": "86d7cf63a7795e387219e04fdecc326183f0d7fa9b2176aa21858e9db99d35e6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_4.commit": "c582fa8897e99529542e6c76c76c31bd1b88add62e906d9aaf958f27ccb94bf9",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_4.json": "3c614e8f6100240ce671b5efc866afc50884018601049665449ef7d5ffc5da89",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_40.commit": "e9c1449d56a4878986141a16a2af908d74e1ae808e80b8f101f3ff6f97d22fcc",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_40.json": "9335da17d1026321521596df5463c7a419b998be1607377b027fc4ad375da02f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_41.commit": "d8fbb7efc06b3af479c1e8d64b3da3fd78bcaba03e343a4772d44bdc000f8862",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_41.json": "87ed73aff3790ae69d822a1bcf0dc3a1c7f4c799e318d807c70afd558883a4f9",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_42.commit": "1f06932f9dc33e255c4dac633ed61153eb990fc58cc8e83b5c070d5ea2ca7840",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_42.json": "f1042412f7918a6f19fe1f7d4cf3663523e57f89e0d02430d0739de41e034e88",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_43.commit": "904cd5f70719bcb60c53b65133d60956cc3384e581e2f6dc1a8d29ab21784555",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_43.json": "c27c59fe23484aa743c0f55fb40d25608d71da096fbc4d1fa560bd8c8cdec27f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_44.commit": "2ceb253b36ebeb30bbd90df9cb7951e89ecc5b935ad346acc8ab16f914ef8d56",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_44.json": "8728eeaf4cc36b70db9586eadb967f7885157bcbe77f969c91eb563a53fed162",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_45.commit": "b673c6809ce9157ffbcc1846ff583f44438476265999650dfaca0ff12563b6c1",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_45.json": "ec2720c410c52a2040454a1bef65b980f1c54adefdd616ba25eda49678bbbc5f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_46.commit": "0c863dbd4b50820b4e6950fa054bad1445394a001e25f04a8b8a80dc03106805",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_46.json": "5082363b5d27c4ed4b66afe96d29cb5c0f77b2e4f7158297c5ba71a1670587d8",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_47.commit": "048f88e76a4e85739a191c8c8232da3e727c5b219d950ec332cb2834415bfb1d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_47.json": "c6e12eb05766b7c06a6edb5521a4acb08ce6dfd0745b85e69ba9ac7d07ec0d72",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_48.commit": "3faa4da978733954b6292459f458e988916e75131287add4e548f61ef7866759",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_48.json": "d04573c4b8df5096e593fc478233abf7b25e60cf47a7cfe8a5f957a6cea43c3e",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_49.commit": "c3b2c7c28fe5314665c8df9bfd0b4bdb1b2a7d2253ee5c5f8b5c525d74378ee8",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_49.json": "2f876954aa3b9fa51193b3701f0df1cd9fcc69f9c791399a800ef101fca7c01b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_5.commit": "734959994ef8c0f6973222d4861675cb093f1868bbc143742ec2c5c71eabaad4",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_5.json": "476dabd8bdafa0a5a2bf1a75ede8e62edbd3aafbfcd5d010be8970af2b816c52",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_50.commit": "969e54695b99cceb06b43ec7ff6d6cfaecd92a0c50e46ff7f3bfba1fccf93097",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_50.json": "509f93fefe748ad766f27ca388c80da267be4c1075676792dcb27f98e50e1788",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_51.commit": "4586abef04ed73482030481c0be1f49d4739cc5f1b5f277824afa2871f2ad35b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_51.json": "7ff463830437c4780efaf3e5b0d1e5f04bc68f59c3636180d2ed0e163ed0432c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_52.commit": "87656770f95277e5f0b6b578f638aa46de128e20bc82e9aefd2fff4281657410",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_52.json": "a9afb05caa9c5c7f0644ce8f0909e40a79d1ef7fd5107f44ffcdabcaf9bab2cb",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_53.commit": "7a2ce28febf1682740597f5624550e0840dda71a81f627e794f52f5310c3c86b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_53.json": "9457b302599f8d4422e974f3d0dc72d94149a3b2948086bcda4f93d02b04b25d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_54.commit": "516f8aeec26909779ec0afca3e23bf791336f86913468b01a29d6d3d8263b775",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_54.json": "d2cf2e9a01e14c7ae19ae06ec99595e349fd763ab2517f220d5afebf7e5bdf06",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_55.commit": "40aced1b4d8e1eeb504c4001316b2b8c04c35107db0676f77f7690daf8a0e009",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_55.json": "0b54f6156b8a911383beabf98bd40befb1a7b991eb2a0adc3565d3b0e36e5125",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_56.commit": "a6280a11bc09dd04ab800925ed19c8f34642f5ad7d5d95a5f1121194539a3404",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_56.json": "7d3365ae2919e81b7c5ea747209486916930db98f2cfe1f9a513d93c6d79cfb7",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_57.commit": "1f33abae97dd7952787b409f8469b03d1c4dc4697acba21f440e8ba9b01ac08a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_57.json": "f20122d7980b0c15a63df97c51e95f9dc12b56e9c249164b49658abcf155c8c2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_58.commit": "0e21b9fda106693e2f6f4243c75a93f2150eda539d976addd42872e53383794a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_58.json": "3214c560a0352c360a60c3d91e09b34621de6468ae7d2a07a68116fb4e9cca2d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_59.commit": "55bbc68461d3a1ba7d62c87231a658c8ab159aa7f490860bb17909a8c5ada6e3",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_59.json": "4d16e6f88132d4080d10c8953c985240d0ba9fdfc5e15b22e94ca7a9dacbb8c3",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_6.commit": "872abc0659b070c384e6505beb4daf4b4e3d63b4d335c392ffcbda1b50c47085",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_6.json": "893c8d5406e03296f2002282a265b5bacad2ab4f776edb085fdf9cc7d332cf9b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_60.commit": "890dd922aa99a2ced706422244bf5c18578dcc3a0a33233142c46c53941a1d11",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_60.json": "83843a2f988d1f5af70b9933f2320234ce3f6c8507db52de60ddf29efa218817",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_61.commit": "7fe413f50bdb5410565db9e6086df1d9e2e506b6f1a90710096b7610c57c123c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_61.json": "efe79d83203a9e7f782e8248ac28f27e8ac8531b678b5c1d4b847c9e5e4c7cdc",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_62.commit": "fed672a7c68c12f1ba2ef95f71a6da63378446f3aba2a6312f78dd6561a88787",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_62.json": "64c8a98370f74edc75891e56908919c5ffaafa736a1beb81c69fb81a0c84f31c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_63.commit": "2c6f61994fe68b4e3d3a23fe59a5e12c450874d891417927b6ce4153ffdd2399",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_63.json": "e5402aa29d917d5e0ad37208499bce7e27f282f7d428b47c75824a186c2c22e7",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_64.commit": "6b2ccb2e9135a52b28d83c95fbc7ec85b1fe193d06680c1a4b50508a62ce6220",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_64.json": "1b5ec18708bf27656a9e23ce220d499e3fc69dfd2be95d5ae5d64827f42d0a86",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_65.commit": "409a7b51cdadc93cabbec894cd9e442cb8f9c84e134a402dcb09e434ad9edb34",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_65.json": "2d0e27a1a6611306b06e497fc056160326301aa4d3c6016ea0a3dcf489cc242c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_66.commit": "fe29d1357af3009bf054a9d155d2d7eb08f35ed44b57885314a261536e5cde14",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_66.json": "92b9d43a7b0492e0f31ca39f261e79f5ffb9d7d16c10cac00a14fa2be419bf5e",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_67.commit": "e131a40efc43e89e219e37b647bb589d12a597d4f3993eb4a3edb447f9910cc2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_67.json": "60c668833f2d2cfb5e31e95a3cb936c272f0dc8b4ab55392e7b21f4755db84a9",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_68.commit": "95e67d31c8cdab02c854fec44aa130569331bcdd56a98c5af82a5a7d80c96512",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_68.json": "80215e8392fab4df2269e08cca3cb13644acc8c313f9286d86afebdc5e9d9e9d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_69.commit": "86b94f34928585f6740537c6cb30566fad6335af8046cd3c98465cda5d336fdb",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_69.json": "134ce1cd586fe3d7aa66b618d97cc35a90b86b9f7316d02bbc88812797c9f2fe",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_7.commit": "d7cce781a8ced001bfa8c9954bb20e10e3454dbe7c6bc67cdb0ef880f36e4ba6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_7.json": "62e15dd8a9ea52b446bca14fd8c1287553a8937efdab886c606714b05d6e279d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_70.commit": "9cf66b3cc200ebca58d49ebdc1cac655912ce756218bebb5aafb4226ebdff447",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_70.json": "6f4bc3af8527ccae7295dca4c73d096ae5ac4036861d9da52e333d8d52fa5170",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_71.commit": "d7bf215cc628372946e63c69c525131dad534b35e22ec524b648762989541997",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_71.json": "0ecad128e0865df001651386dfcb1ad3e18fa717eab4ada6ad2768766cb59f78",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_72.commit": "ebef1980c4134817250eefb688c34cc412bde9f0b315d324b617bcf37622d8e4",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_72.json": "883d0a027869ca69793607a7572faa75050ca69cc75f11e2a000e45687308bb6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_73.commit": "d7b006e5d6c585076cba3d8606b0e065234b6b938d724d5400f57ea306b4bdda",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_73.json": "2ae3b581b17030d9828d2b3fb776868fd264352763d55b20113d03f561e7447c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_74.commit": "5a1e4ac09fc3ebf22eb5297f9a66efa20bba06f679697aca6703dbc09bf3f959",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_74.json": "ef64cee1d6a9615ffbd80cea761877812d7ef4ae95ebbddbbc21a0724124191b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_75.commit": "6dd80d957157c1d766c63028a58bc340cecd1dfe6e8925d860fd2874a1e9fcfa",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_75.json": "0bb32978b942f46632c52ce71f7d6836519c55172851b206ed70dd5fde1f9474",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_76.commit": "57907807eb1c74e96a2ab3d07642f865c0f55a9cc44b48ed733604cd3a7a0988",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_76.json": "2b43974072e01e025bb31f09d82f3a6fcab5b04908ddb862d87388d563744e19",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_77.commit": "0bf417b76a89e389be688def52fbfb5805198efae099f91948003349154b312a",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_77.json": "a5c4008d6209309682263c25c9fdaf0f022176d4b0d1269ec81a0bc3e89fc6b9",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_78.commit": "725af1c3b919bb5fe9f83dd38560a9c198cf5aa5060acf2fb074688f01deecae",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_78.json": "44ca224b28b5180c75df7a0b09df46729fd011e8ae604c6935f32d50d0875f16",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_79.commit": "2839240f58eff6b190028be6eb7c6d0113220df79360acb544c44f7eba50cfbf",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_79.json": "ef5e553bfafc777cade22db713120525c3546e5f66a8feae29db7a06a1ea24fd",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_8.commit": "58bffecd20e142d3e278c235b0d7232d36d679e70a5164d40699577a4bca8200",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_8.json": "2651e0728357f0b59df34c6ee38187c69e6b67ac6fada0e8663914cf3be0541c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_80.commit": "b7c5accf5ccb296ff430f3704481605ca3d5f3000e3b12e9085f63cde92bd2f6",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_80.json": "9ed771ea35c6e5930866424df573d5be555462d1fd4a1c31cb285de3a6b3e306",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_81.commit": "a08b0882ddc9b7b39e2946c529c159e735752f064a4bf8083ca451eedbea4f13",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_81.json": "013c9b17cc50328ae6a4b4758fd3b787441340669a65a181076f332ad68ae03f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_82.commit": "6a52e4886152f786b219ab3059cecbac68ae54eaa8e29fdc0a2fc2c41c8b1314",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_82.json": "a8f25e890368c8f624506b2e68a37e3f092c2e5aa8fe4c30c7db61823a17b41b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_83.commit": "3661b607c8fb5cb6b6ed606ede706c2f12ceb7c7a8ac545b50cef9c1eaae1813",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_83.json": "0b328700abcb67ec2935256bdbe89e68a22eb8cd537cf0d9849880464c25807d",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_84.commit": "212c343e436b303d0cadd834544dfe2cb6697265c0ce80e1bc17f99ebb0df91c",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_84.json": "6b841b7bc8d68edc49a60bc2274af17e8ff6b87116315ad8b3eceb2bddb20280",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_85.commit": "77d62140fea8eb4006ad75095a74a377fecdde4660152acfe533ea6c63d7f419",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_85.json": "e982ab31159e5d031ae570b5927eb57eba9bca1ef624bc859f144d93408d86f5",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_86.commit": "14d28c8c0e3354187207895ec5d31ab418db4073b7c22e3ba6c4495f872ab273",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_86.json": "693a03d7622f509d154701c44c27042af3976703dabd1dcf59331f67c02bcfd3",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_87.commit": "b4b5442d41e3438de38a0cd646d94a767e1cc439cd63c365ab9c649f3a80566f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_87.json": "1d74d5f48bd4085a5dd03c92fe92b24274f52c8ec636a2f04a9cfac48917ad91",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_88.commit": "c2d6425ec26058e79f29f5aa8bb29d0cf8cb920ef083c5e81dbede51e9f55668",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_88.json": "e888f2e86b22b3f905186ac10bd0facf85d19e6f954265e2c543362d47b0b597",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_89.commit": "6a5aab1a792178da5673efd7b4c61b56260f9ee58242e8b05141f94405dbc213",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_89.json": "fbebd9d30802d0cd87332580b10a4c08b94e2ac3c40ab4698cdd6e8b50ada456",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_9.commit": "7c246b34837e0ed2f4dddaf113bd3e1c3ec3f43085906c66627d3cc667c1984b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_9.json": "28669c927e29f69e00e925328444dc463166a9fb0adbf289ca482dc9207a8ea2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_90.commit": "cc871f9a81137897d86c4af0af78840a2b2d901764eb01f1f170133006d5f027",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_90.json": "619d4e83af8ee4c093eb4957d043a8a3a1ba7ed02871e158db9dee6b7c304085",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_91.commit": "100dd7bb17fafcb535412e6bbde64d08be0ae117b8b440a809436b57244e029e",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_91.json": "20ef67410d8be12f430559389cd31ad2d97f4e7cbc451da0b18175673646fbb2",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_92.commit": "e2db468037bad7a4be55b3b049ce4ce453b67439e93b57336ac60ead7c53f3f4",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_92.json": "e96fa95e13cdcb1a67069a65cd5f8af71d6f05374bc04755bc60e71be0599892",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_93.commit": "5f76795cda37b86398883aab06d00f4d86f72b4916e433092a0dfadb77209529",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_93.json": "5e844171bc6cf9b66f185c16fee064cc238c5e580d6980a9feeede05d482e6ea",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_94.commit": "1e77e5134a700a8c81722c5e2c2c51317891a4efe30fcbfa4d59ecfd11db928f",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_94.json": "5daf56a310966c16a32353b22e0a666a60575c429f9e5394f06dc9bf80e725db",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_95.commit": "19cd6acc5c0829562b0b2ac3a37b800e7278e4342e3b42b1499e664447ce3675",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_95.json": "21444d86849799d4180b4d24a19912275bd5a241c39e098f0acda3eca4a71418",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_96.commit": "e37bb742a47899f2bd743dd0d7ec0138260c7ffcbea0a5a546945af8b68b29f0",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_96.json": "9cf33d8be51b321c8bf875b1b4fa0841ce84a6a3137d612fa73d8f648511a9b4",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_97.commit": "979aede8b8e8d76474861b1ff816e8cab6c919a561989698ca3197249fb6d623",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_97.json": "85e505cedf18a34b7a3d87ee323a9ef1c01a191e1304bce802c70ef24dd4b864",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_98.commit": "30731f4f3ca395ca9f3d4253d0e759ad53b3fc46d4849e59b5cc9cf4985ae46b",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_98.json": "3d54dc867768959ea88daa3d59b2fbaa3c141eb231c8a26afffa03f309f22d30",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_99.commit": "3424fa748a1530668fbe4c8a1f7208b08e817cc783098e396a13b9f9b1b2aa63",
+    "campaign/raw/01_G100-R2_S0_P-GRB/journal/event_99.json": "30b7b0cd781d18fe75193800f6895a8946468061efeb5affa1b161e9d108d32c",
+    "campaign/raw/02_G100-R2_S0_ENS-C/affinity.json": "35bddf85563ae026c4fcc57c175603d0665727eb6d23159cb2b55596420bfef2",
+    "campaign/raw/02_G100-R2_S0_ENS-C/audit_execution_metrics.json": "90800f47e9ec19f23f0dbe5602aa499f4a058c8ebc18ccafcd918967c7856a07",
+    "campaign/raw/02_G100-R2_S0_ENS-C/audit.json": "e3248df2eb505e13e3b10b37be9451a8013555ec56805ad9fa5d8dd26e59f280",
+    "campaign/raw/02_G100-R2_S0_ENS-C/claim_rejections.json": "1aba8cea6e7f20abce74032b5d4f3363a6d7f0f7199ec156ca46a260990a5d21",
+    "campaign/raw/02_G100-R2_S0_ENS-C/cohort_check.json": "b0a638e81a10aeee0df8a43858a81345c7c0887bb3937ff204af6ef3b61e6ad1",
+    "campaign/raw/02_G100-R2_S0_ENS-C/completion.json": "3f6b65321b2f14bf82c764e86d0e15eed5bf9c63cbdacef4166484a60eda6ee0",
+    "campaign/raw/02_G100-R2_S0_ENS-C/hga.csv.descent.csv": "6979b2370203aa4137c8703a5a2ec3189e17b8ea65928c729dacf04c3dd66fdc",
+    "campaign/raw/02_G100-R2_S0_ENS-C/hga.csv.joint_seed.csv": "12f46edad5460658b3d3b4a82ef0862c3226f5ab1518de33b5ec4f0bb1a99176",
+    "campaign/raw/02_G100-R2_S0_ENS-C/hga.csv.joint.csv": "9abb585b2f0500b8804d878717a458aae91e4ee5e93380cda204aa0caff531e0",
+    "campaign/raw/02_G100-R2_S0_ENS-C/independent_endpoint_closeout.json": "a9285f8126214932f0a034725631249014819ded3fcdd0f1b331608f3d630f9d",
+    "campaign/raw/02_G100-R2_S0_ENS-C/independent_evidence.json": "1596c1bf8c37a4035a70cc6be9012729917227a5e24f986a5a72fd2a0b543c9b",
+    "campaign/raw/02_G100-R2_S0_ENS-C/launch.json": "34a48a80cfeb7db5e8d6e0ea79eaaf0cae21b00317ad2fbc8c58518a98de662d",
+    "campaign/raw/02_G100-R2_S0_ENS-C/native_claims.json": "3f2f861cdfac1e1fd263846e8fe97c7da1d8805da450c0aaf9c4e844e9988831",
+    "campaign/raw/02_G100-R2_S0_ENS-C/native_end_receipt.json": "b122e2e7c197269ba180b3a5eee3b71d8326bffe6a23bcc7d1688d811b202543",
+    "campaign/raw/02_G100-R2_S0_ENS-C/native.log": "0717e824b7cf229b1fe6d1992427123a52b3b6faad848abac1139d0d1e6f8935",
+    "campaign/raw/02_G100-R2_S0_ENS-C/observations.json": "67bdf4bde9aeab336d3e68cabb0911c6ec3a5d0ea9b6176c48c09ee10d8568c3",
+    "campaign/raw/02_G100-R2_S0_ENS-C/phases.csv": "1381c0431723f265a94a275ab07090507d40e0561be23297a282be3d5f323900",
+    "campaign/raw/02_G100-R2_S0_ENS-C/postexit_audit_receipt.json": "2a16740f3db965ea676a9aa84e7642836ef2a6829683edd7c3ec3b694c65711b",
+    "campaign/raw/02_G100-R2_S0_ENS-C/process_start_marker.json": "9cd6fc706562302e0a5e6b439968bc40038bf780b2b5479c29e01d01e9e6f448",
+    "campaign/raw/02_G100-R2_S0_ENS-C/progress_publication_receipt.json": "f41e3fa118b6082cded6c6f4a2f5e466397a2a0aac8b816084740a1b06a3859a",
+    "campaign/raw/02_G100-R2_S0_ENS-C/progress.csv": "77771797b3c26fef094fbb089249f4f3c5da95307b64ce1e5f80ab2fe232ffc1",
+    "campaign/raw/02_G100-R2_S0_ENS-C/result.json": "f82fb19f8e789c31f150fa2affdfb7c91a50b942a1bc8d22d97670c8c0a21d67",
+    "campaign/raw/02_G100-R2_S0_ENS-C/samples.jsonl": "677d6222e0282404d11353f1c0d830142d8cfdedfc89a970d39b62dcbf9283e3",
+    "campaign/raw/02_G100-R2_S0_ENS-C/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "campaign/raw/02_G100-R2_S0_ENS-C/stdout.log": "ee25c4f32645e4a5ffd97e3a887f8ee4df995cb119d1f0be9ffb964bb5b0cb38",
+    "campaign/raw/02_G100-R2_S0_ENS-C/whole_arm_receipt.json": "5b5b772861e447942d5f5dc87f2a5d3441c6765b5681ddfb2e55601097139b69",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_1.commit": "1623a7ba80ce3e610ee4af4da40e65b522471477a7f5168f7c0926d4d70b8963",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_1.json": "d4a0850984d46cbbfc617706ac8109640f52509d0977dbbec252608b8fa7d6a6",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_10.commit": "b519a01b645574a6e2cb71fc6a46f7ffb4249f0e80023273aa05d057ee9f7069",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_10.json": "227c24b5dd214ff28b1aac91b26744d957608a8fd8835b8145243e6a120a3730",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_11.commit": "52469903889d05485663547d1304830929385f9d7fd3675e567a5835aced8d31",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_11.json": "016f4ff6451cf1e06f3819f0b0429f142556983f095e2cc7daffa2687cfce6e0",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_12.commit": "73c809e2390badb94526131e3f31efad3aa0a5cd8f3098abfae32a6ed596949c",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_12.json": "a858dc643a8f3159a2c47e19b6ef2c27a36c3d537b97f36106627668f42e9adf",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_13.commit": "44b6eb1bba4bcd7f6196a3f627be05ed1affb4a550faf3fedb5734626d08e0ec",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_13.json": "20e18b972882e33d1daa218554be9e813f32397def1ef900d8dfdd27e5f964cd",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_14.commit": "41366ec1808893d79e81ac5ae85880b8658e59f9b58358b3ca32eb0fa4c9c59a",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_14.json": "1d244f5c4f6b7b50b2ce3df4b4cbabe7659625d206acc29a7b7ea536f2add6ec",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_15.commit": "63b9057feca04c69fdf6b6bcd464f90271d11f7e4908bd8381fb402c35a84e03",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_15.json": "d70ea9e26d2963e997b5639b6225911f9bc271c610b2953f74894ef354cfe538",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_16.commit": "749ee48ea78a08ac4bd3e3551fbf0f91190f92bc203e5fe9a7592be98979e734",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_16.json": "46939f93ccc3f72dfcaab7c0e1435284ff3dfbfeeaaece8940df14abceaa74e5",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_17.commit": "719c0b1a55a22a245912709669fa1c9a72df52ea97f1e9727e58842ee6e1b2f4",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_17.json": "e0eca70a21f481088283741a2eb7977ed305ca328ad93379484fb525c2cc94bd",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_18.commit": "c99e2e3c0167d0d804b709c64d57178a87ea7707146b3c14f353094da78d83dc",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_18.json": "7f142184e4f67705447e5ec9cfb1e82880761e1ff15d4d9c05893ff985007ecf",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_19.commit": "67ce332e87285e2d85b2b935666081c2ee9efdcbe07dac70310db8770fc0a453",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_19.json": "f32658d5ed6213766cb3f512b040aff1bc966028451dc5409900e2c0c6c08e5e",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_2.commit": "0f3133101c2862b3fa63a341d087051a4b5340f0cc9a9992780bd8c10e0117b5",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_2.json": "53bf884ae4b3f353b2fcfb891483ae4380a1f90b9eacb15ffc1d9d2fb8dffa03",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_20.commit": "d6289f74ef83c77191c66ada98a61bbb9d6ea9b6f2233619c233a0f9cf2d0976",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_20.json": "ee26bf0ab7354be40278d3a51008a9d47b9374541e29b1a646b5fd006484ff0e",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_21.commit": "debf5bab958be1474fc8467d410c4b5cfff64957aefc99d6636932fac80a9d3e",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_21.json": "9ded0e2da7581928a592361e2847fad3e1cad3e89cfebe8d07e13db80c39b49d",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_22.commit": "5ab10082007f54d0bea779fe712ae9e70d90f05151a514f3a000837ee23d660b",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_22.json": "6a9fb6c115a76d81340a23b653b96609b32f7f3147b57ed624a88a3b4f0107ce",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_23.commit": "7f9d210507eea1e0b87ce45e78d6ffc4a33aaed81ad5bdd86ced0f89631dba3b",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_23.json": "2e5a152faba991d4634baa79efccc970c3ac129c10c006fb9f71ba0ddddfff73",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_3.commit": "6ec4d78143c2346f57efdd554149228513b742c8d823be1a50d20ceec40dd528",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_3.json": "61f28bca3d13200937b4e91baf6497e6082fd0c91d8ac4d56a75e79df858b14a",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_4.commit": "6d74232531d46ef8f10b703d762bf8441574c4c83ede02e90bd0fa76325ee613",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_4.json": "68502f8350d7759ae4f8c454311b68bb6b254d1e6cd978c5715a8e5ccbf79fa1",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_5.commit": "3d976b83e29153ceeb027f3c9dd563c304ced8d6f0098e6e4f549a000e0d6c95",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_5.json": "1b9a384e6dbb69923137e81ae3cbbfc8b2152c086a526bb515b4d64527c836c7",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_6.commit": "f5e2f1b6a7fcc693a6cc2aeb22769ba2949a87ec5693245c9b030fa5180dc15c",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_6.json": "85836f30d93f8a2862ad376fd42d395e181a9c8cd3d7d53d2b0e3d441511c1ce",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_7.commit": "ab4e167364fc05523de3a011472fafeb4bb7ed9c830b34237108632bd1d194bd",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_7.json": "046694af1bf827ed7b1928c9ea4a8eb3b59269d4576c548d895314cb84243219",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_8.commit": "aac5a447b341fad520fc85378e70df21623c2d50321a0480f00f6014b5364cd6",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_8.json": "e1a4338cdb0c4b7daa21e5c92af10dbba9c3713d39cee5c4c9895be78339416b",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_9.commit": "e1b2d259c071677ef89e65f00fae720f94ed1fbb62d70b2ac58236315dd24ab8",
+    "campaign/raw/02_G100-R2_S0_ENS-C/journal/event_9.json": "c2a9f08f99d189e6e3be485c65bb24330ef22ded925942e7ebfddec322066926",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/adaptive_mass_decision_ledger.csv": "6c71fe7c3b0415b2f6d5e901f5ce1a5a0196a98b0a060de63d61016a7d47d05a",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/c6_split_decision_ledger.csv": "ff099fe80d1e2f398af6a332e1580bc6b171fb65bed31feac5758efb84734e73",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/contraction_ledger.csv": "a4b4b4b38ac826c3348010dc0f7306d46f59ff32c70e3c651bc662724f211116",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/global_bound_trace.csv": "65d3370884c3df3ca075d2ecf24106b792dd5bc7c55b4454337009eb01c37daa",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/initial_decomposition_ledger.csv": "bbb2a84fb5776240d42b74a166402abee6df6c6e1f040bcd0e45ee10eeecc181",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/initial_witness.json": "d28742313156f5dc29d22e6ee37b021c548a711bfef1407563218aac5a50df96",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/lp_status_ledger.csv": "6c4a73398500b04e6b064b87d43d1f3388197c869b2ec825110ae7bd34952810",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/native_0_witness.json": "6233ef514f3d2c18b7dc7da851cd9b8e23d4741bb89049b4d5635dc81b2a4818",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/native_target_ledger.csv": "c28dddda41f5ad1d8f117d429ea2d14de8b3bfa98ef9e87fa1ba41aa924471db",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/paper_leaf_ledger.csv": "eee25ffc1ed9ddb6ab8e0a7050158aa5dc07f170ddbe7c9c3fa240432c6aea21",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/paper_optimize_ledger.csv": "af76af49b1aaa6eb984f8bc28371028ffc03be42a50c80a6ef0784f93008589c",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/paper_tree_events.csv": "bed37276a6cfd70199214f05155b4f35060d1f235c6fd59b9b6624aeb113c36e",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/parent_child_bound_ledger.csv": "911f7d7e37b3176a5e45649487bd38fc9756d8fe5c796f93f16925f1ef175137",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/round68_existing_0_witness.json": "d28742313156f5dc29d22e6ee37b021c548a711bfef1407563218aac5a50df96",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/split_decision_ledger.csv": "68ac36a547d5f6c5046741fb83a1306da520d771fa074450f38e833fe08d062c",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/models/L0_epoch_0_generation_1.lp": "dbd88b82003df5c251e35d999ee1b7ef30b53fc800c7aecacf2118e14bc7b44b",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/models/L0.0_epoch_0_generation_2.lp": "050547757b40e52d4dd79872cb74a8da06e5fce490ee53a1f0f46dae0e32caa7",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/models/L0.1_epoch_0_generation_3.lp": "f1e11cb216b26d7477b107d87e041f42a50dcf3ab3a17b806b572966eb6d9e82",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/native_logs/L0_lp.gurobi.log": "d26ed9b96a7b9490331a4d94184b417ab59ec451b5116f889eb4bfa2a9e35213",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log": "59f96722af9c5990196860712715b2cd5f53d5fa31e2f1a9a3df613ac0ad6d6b",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json": "302dae11752ee21beefc51d5288e9a35f15fc9416b33381a550dd75f24d55976",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv": "e46f0165e5f8b754d4c158c8a6e5af9c810fb774ea53c6319060ff754c2df5aa",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/native_logs/L0.0_lp.gurobi.log": "eb04b47f4b6baa2e0e13bad2fe492f5b150132ca64026cd04e1d5eea0a76e054",
+    "campaign/raw/02_G100-R2_S0_ENS-C/external/native_logs/L0.1_lp.gurobi.log": "570e5b1e51340b670e0a8be924cc9329cb9dfc2ea1718d31f55e7051f7314385"
+  },
+  "actual_fee_binding_root": "results/unified_exact_round114",
+  "actual_fee_bindings": {
+    "fees/cli01/01_after.json": "37a63d3aa27c773b38fa00827b7e75b793c9240499eaebf0dd34a4f4d429dfaf",
+    "fees/cli01/01_before.json": "18c20235086503688e0c5cdb0b7cce0721e01d22f5af062850f3e4e667e2b4da",
+    "fees/cli01/02_after.json": "6112414af4e1ce408eee147c86eca616c6de5259a03016b0c7767135707d6d3e",
+    "fees/cli01/02_before.json": "688cd37c723df64256d568c81aa0a2129e18dfb7794a0e0f8c9a7579c4f6ec8d",
+    "fees/cli01/launch.json": "ea697cce0698340f529b0fec4711d5371bc7da28e742d40dfcf87d6e23acd710",
+    "fees/cli01/pending_exit_receipt.json": "1a9e38f8740ee0f1b76ccb50f059a23f3d49e51f46f9ad46c1fbf0d895031e42",
+    "fees/cli01/receipt.json": "1129143d52074c1399ee1f9bb6d9b459811a785417aef1ec5c24400b639570a4",
+    "fees/finite01/failure.txt": "58913ac517f77551b8ab29630ba402e118bc0ad8924d9bba8f2b88e29d5ce7a7",
+    "fees/finite01/launch.json": "d863bf12f189d99ad0dfe77252ef8b3bf7711ae778cf9097605a618bbe42e5ad",
+    "fees/finite01/pending_exit_receipt.json": "b532cfc0e51b1dbd34455806dd08b32d13e56f3cdac129042d619e3f98b43ebe",
+    "fees/finite01/receipt.json": "544a39c79d80dab6f08ece50c330e303c3d0e97d9d0611ec31a9593480a334a8",
+    "fees/finite02/launch.json": "a3c9b5f0da42c629660c3e1b58eacb0633704d212d35b237c6ab8a8e11800d64",
+    "fees/finite02/pending_exit_receipt.json": "8157cbd5c33ef76b05b4b678c98d4a47b47a359793cf373baac3b5679eca4a44",
+    "fees/finite02/receipt.json": "998e23ee08ac9cca6a4700bf5ad70df18935a74d8e0ec3b552fda7a5514325b3",
+    "fees/formal01/01_after.json": "95132d5b7b256a4d0daacd3adc171cdcf72821dc7781cd0b4fd8f43ec8d1eee6",
+    "fees/formal01/01_before.json": "684ef3d9e7a9a69c78177676df6f2d5ee4234e43e5efcc23e59d633c62930e2b",
+    "fees/formal01/02_after.json": "1454becbbea089b5a845efe68fc18391b70a49c4ff3ebd08d5a2a4af16773bcb",
+    "fees/formal01/02_before.json": "b129ef0c435759d8373c5178969859457b83d2a4e422acc2f622dfe70dd2a301",
+    "fees/formal01/failure.txt": "c139ccd3012bb2e7d3b7a7c99262924d853985e7edd44c5868d8067adc8fe032",
+    "fees/formal01/launch.json": "44db2160a1e5bf05f72099f19580862f77ae6d1aad539b9650f485c612e3ffff",
+    "fees/formal01/pending_exit_receipt.json": "1c4327510db1a980d3da58a8627c9b7968ea993dcbfac48336b333c2734e57ea",
+    "fees/formal01/receipt.json": "dc5216cacc2c964e0cf75ef53db2a0bd43439c4403be71ed359796784e1ffbfd",
+    "fees/post01/launch.json": "803cc2c77ebd6dd07fc87a6fd671366f6fd88e5d3e37361537cca1190b72162a",
+    "fees/post01/pending_exit_receipt.json": "c7c73cfa5de8ba331476be2352ca38940f8785e5a36215a56611b1c463429d91",
+    "fees/post01/receipt.json": "69238faf16cfc83e40498905be78a7a31bea89d53cc093c2edd7b3be491edc7a"
+  }
+}

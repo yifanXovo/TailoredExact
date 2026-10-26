@@ -1,0 +1,9 @@
+stage,status,cap_seconds,reason
+M1 correctness/core,completed,120,frozen candidate evaluated
+symmetry correctness/core/development,completed,120|300,both core-qualified candidates evaluated on D1-D14
+A1 correctness/core,completed,120,frozen candidate evaluated
+A1-R1 correctness/core,completed,120,sole authorized revision evaluated
+confirmation C1-C9,not_opened,1200,no candidate passed full development
+key-long checks,not_opened,1800,no candidate reached the promotion gate
+symmetry+A1 interaction,not_opened,120|300|1200,neither component passed independent confirmation
+K1-AM integration,not_opened,300|1200|1800,no new fixed-interval backend passed

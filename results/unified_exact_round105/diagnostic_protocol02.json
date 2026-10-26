@@ -1,0 +1,70 @@
+{
+  "phase": "real structure qualification",
+  "roles": [
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 600,
+      "method_order": [
+        "IR-FULL"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true,
+      "question": "Complete medium no-hit and activation roles; protect actual P/ENS position, quality and all preparation costs."
+    },
+    {
+      "id": "F5",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+      "family": "synthetic",
+      "geography": "perturbed_grid",
+      "inventory": "paired_shortage",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "complete_Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "source_manifest": "results/unified_exact_round86/protocol.json",
+      "method_order": [
+        "IR-FULL"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 600,
+      "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "question": "read-only first/last observable native root and positive-node vectors on original ENS"
+    }
+  ],
+  "performance_claim": false,
+  "no_per_car_production_caps": true
+}

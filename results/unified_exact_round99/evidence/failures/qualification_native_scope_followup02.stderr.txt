@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round99_native_followup.py", line 42, in <module>
+    if __name__=='__main__':run(sys.argv[1])
+                            ^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round99_native_followup.py", line 12, in run
+    admission.ensure_idle();dest=OUT/'diagnostics'/label;dest.mkdir(parents=True,exist_ok=False)
+    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round99_idle.py", line 6, in ensure_idle
+    assert not foreign,('foreign solver or build process active',foreign)
+           ^^^^^^^^^^^
+AssertionError: ('foreign solver or build process active', [{'ProcessId': 38672, 'Name': 'python.exe', 'CommandLine': 'E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe E:\\codes\\ExactEBRP\\scripts\\round99_native_followup.py native_scope_followup02'}])

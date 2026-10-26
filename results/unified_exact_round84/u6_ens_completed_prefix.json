@@ -1,0 +1,96 @@
+{
+  "recorded_unix": 1789659488.7323425,
+  "completed": 8,
+  "active": {
+    "number": 9,
+    "arm": "K1-R",
+    "started_unix": 1789659397.4052365,
+    "driver_pid": 48520,
+    "destination": "results\\unified_exact_round84\\campaign\\local_raw\\09_U6_K1-R"
+  },
+  "U6_records": [
+    {
+      "number": 7,
+      "id": "U6",
+      "arm": "P-GRB",
+      "wall_seconds": 3597.1099999998696,
+      "returncode": 0,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "passed": true,
+      "endpoint": {
+        "U": 0.14819747529511856,
+        "L": 0.12651916793596993,
+        "gap": 0.021678307359148635,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "native_calls_started": 1,
+      "native_calls_returned": 1,
+      "physical_witnesses": 168,
+      "global_bound_events": 56,
+      "committed_events": 227,
+      "offline_replay_seconds": 0.16569760022684932
+    },
+    {
+      "number": 8,
+      "id": "U6",
+      "arm": "ENS-C",
+      "wall_seconds": 3597.1400000001304,
+      "returncode": 0,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "passed": true,
+      "endpoint": {
+        "U": 0.14990547589906003,
+        "L": 0.13117221090547532,
+        "gap": 0.018733264993584714,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "native_calls_started": 6,
+      "native_calls_returned": 6,
+      "physical_witnesses": 23,
+      "global_bound_events": 100,
+      "committed_events": 136,
+      "offline_replay_seconds": 0.9122426998801529,
+      "startup_controller": {
+        "F": 0.1730399057385859,
+        "neutral": 17,
+        "relocations": 0,
+        "exchanges": 17,
+        "equal_net_pairs": 17687,
+        "insertions": 6,
+        "quantities": 61,
+        "exhausted": true,
+        "deadline": false,
+        "zero": false,
+        "verification_failed": false,
+        "optimizer_calls": 0
+      },
+      "outer_handoff": {
+        "final_route_match": true,
+        "initial_route_match": false
+      }
+    }
+  ],
+  "U6_pair_comparison": {
+    "whole_cap_seconds": 3600,
+    "ENS_P_delta_U": 0.0017080006039414675,
+    "ENS_P_delta_L": 0.004653042969505389,
+    "ENS_P_gap_change": -0.0029450423655639213,
+    "ENS_P_gap_reduction_percent": 13.58520440167604,
+    "scope": "Current independently valid U6 P/ENS completed pair; both finalized endpoints equal their R83 values. Formal replication and actual Start audits remain pending; K1-R is active."
+  },
+  "previous_six": "d7_completed_comparison.json",
+  "completed_paid_process_seconds": 28353.15599999996,
+  "completed_optimize_starts": 32,
+  "completed_optimize_returns": 30,
+  "normal_returned_runs": 6,
+  "valid_whole_run_hard_stops": 2,
+  "stage_complete": false,
+  "overall_goal_complete": false,
+  "scope": "Eight independently valid completed runs; active U6 K1-R cost is additional. No extra run or source change."
+}

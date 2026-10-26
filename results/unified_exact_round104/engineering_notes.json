@@ -1,0 +1,26 @@
+{
+  "scope": "Engineering provenance only; actual paid failures remain in fees.csv",
+  "unreceipted_early_freeze_parse_failure": {
+    "script": "scripts/round104_freeze.py",
+    "failure": "SyntaxError unmatched ')' before executing the body",
+    "Optimize_calls": 0,
+    "DP_calls": 0,
+    "outer_seconds": null,
+    "qualification": "No receipt or runtime invented; later successful consolidation is engineering/freeze01"
+  },
+  "abandoned_native01": {
+    "reason": "Reference preparation completed; source changed before native arms were admitted",
+    "native_arms_started": 0,
+    "qualification": "Reference children and parent preparation cost are charged; native02 is a new frozen campaign"
+  },
+  "scope_annotation01": {
+    "failure": "After writing corrected clock CSV and annotation, exclusive original reporting_identity writer rejected overwriting",
+    "numeric_cells_changed": false,
+    "Optimize_calls": 0,
+    "DP_calls": 0,
+    "resolution": "Preserve original identity; scope_annotation02 verifies the partial annotation against original bytes and all cells"
+  },
+  "engineering_snapshot": "fees_summary.json engineering list is the closed-receipt snapshot before fees01 and final annotation/packing; final closed engineering jobs are retained separately",
+  "production_modification_after_control": false,
+  "failed_build_labels": ["candidate01", "candidate02"]
+}

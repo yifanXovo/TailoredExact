@@ -1,0 +1,23 @@
+{
+  "UTC": "2026-10-16T17:01:32.152166+00:00",
+  "reason": "Expose separately preserved sealed P recovery sidecars to report and empty-root reader; retain original failure and all producer definitions.",
+  "before_SHA": {
+    "scripts/round122_finish_report.py": "ca7058e870af0ce80e1ed8d8313b1b7514575288f38dc5f0f06916f632e29546",
+    "scripts/round122_release.py": "9bc6c8ac8ff1a9b9498e6044b7c751b4911285b1fe71d5bcb9113561b0356d14"
+  },
+  "after_SHA": {
+    "scripts/round122_finish_report.py": "0203e1c55da255212f4a9b62faff43aa6cc7ce2bad2851a64273fdbad714c9af",
+    "scripts/round122_release.py": "8820e82b948fb321bfed45b7f6e9cdd883fb1b3f5016e5634b0599e07963552c"
+  },
+  "report_entire_original_finish_body_AST_unchanged": true,
+  "all_other_release_functions_AST_unchanged": true,
+  "restored_reader_original_body_AST_unchanged_after_unwrapping_one_view": true,
+  "actual_original_failed_audit_and_recovered_audit_independently_read": true,
+  "context_restores_Path_methods": true,
+  "source_files_unchanged": 216,
+  "measured_helpers_unchanged": 92,
+  "Optimize": 0,
+  "native_starts": 0,
+  "actual_full_report_and_public_restore": "PENDING_LAST_ORIGINAL_D1_POSITION",
+  "previous_revision_SHA": "fc5bb6709c983ac3dbd351b749622480f82e0e47af456ae042cab91d682fb4d8"
+}

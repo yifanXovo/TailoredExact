@@ -1,0 +1,38 @@
+{
+  "roles": [
+    {
+      "id": "R99-N2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        16,
+        22,
+        28
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "shortage",
+      "T_seconds": 6600,
+      "cap_seconds": 3600,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "input_path": "reference/round99_confirmation/N2.txt",
+      "instance_path": "reference/round99_confirmation/N2.txt",
+      "input_sha256": "370cb51b4d2351b3881cd74ab93406d76834efcf856430f742b8f243a9060a27",
+      "scenario_id": "round99-discrete-structure-confirmation-v1-N2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 601,
+      "total_target": 647,
+      "zero_excluded_by_stock_shortage": true
+    }
+  ],
+  "phase": "certification extension",
+  "reference_billing": "one_finite_batch",
+  "candidate_freeze_sha256": "b34702d12d69d1e6dd59b8a7b39d8ea82d8eb596d0511ee1440857e5212342cc",
+  "optimizer_calls": 0,
+  "resource_decision_sha256": "33ef228fab0b78ef800fe2baf870b6d4788b90b66a69f00e3f1c3d084e6a1470"
+}

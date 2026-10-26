@@ -1,0 +1,143 @@
+{
+  "panel": [
+    {
+      "panel_class": "matched_route_horizon",
+      "scenario_id": "cb443_V30_compact_r1_shortage_M03_Q30_T18000",
+      "scenario_sha256": "9611a23125848e9e17f92ffd79cfea4696271a1c01ae29892c55b83935ebd16b",
+      "dataset_family": "citibike443-regional-v1",
+      "landscape_id": "cb443_V30_compact_r1_shortage",
+      "selection_id": "cb443_V30_compact_r1",
+      "V": "30",
+      "geographic_regime": "compact",
+      "inventory_regime": "shortage",
+      "replicate": "1",
+      "M": "3",
+      "Q": "30",
+      "complete_Q_vector": "[30,30,30]",
+      "T_seconds": "18000",
+      "pickup_seconds": "60.0",
+      "drop_seconds": "60.0",
+      "lambda": 0.15,
+      "instance_path": "reference/citibike443-regional-v1/instances/V30/cb443_V30_compact_r1_shortage_M03_Q30.txt",
+      "instance_file_sha256": "070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+      "landscape_path": "reference/citibike443-regional-v1/landscapes/V30/cb443_V30_compact_r1_shortage.json",
+      "landscape_file_sha256": "ad09b78643e8cd5a4e6ed463528d6d599c690ae33e0ba9aaebf346fac37cf0a3",
+      "selection_status": "selected_round58_before_performance",
+      "method_first": "pgrb",
+      "method_second": "k1_am_sf",
+      "replicate_selection_rule": "",
+      "fractional_factor_assignment_rule": "",
+      "primary_position_within_V": "",
+      "corresponding_primary_cell_replicate": "2",
+      "uses_other_replicate_for_corresponding_cell": "True",
+      "matched_landscape_ordinal": "7",
+      "inventory_rotation_rule": "shortage_balanced_surplus_cycle",
+      "id": "D6",
+      "role": "R84 frozen long protection/repetition role; see plan.md",
+      "stage": "exposed_development",
+      "input_sha256": "070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+      "cap": 3600
+    },
+    {
+      "panel_class": "matched_route_horizon",
+      "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+      "scenario_sha256": "0262e2315fe97d74cdb7a22997c23e68b7a3e72b8922da4338b0f3260ad7bd38",
+      "dataset_family": "citibike443-regional-v1",
+      "landscape_id": "cb443_V50_regional_r1_shortage",
+      "selection_id": "cb443_V50_regional_r1",
+      "V": "50",
+      "geographic_regime": "regional",
+      "inventory_regime": "shortage",
+      "replicate": "1",
+      "M": "4",
+      "Q": "30",
+      "complete_Q_vector": "[30,30,30,30]",
+      "T_seconds": "18000",
+      "pickup_seconds": "60.0",
+      "drop_seconds": "60.0",
+      "lambda": 0.15,
+      "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+      "instance_file_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+      "landscape_path": "reference/citibike443-regional-v1/landscapes/V50/cb443_V50_regional_r1_shortage.json",
+      "landscape_file_sha256": "5c2eba293b97936ca6853aefbbfd24b5751860597e0c59379badeba75e949d81",
+      "selection_status": "selected_round58_before_performance",
+      "method_first": "k1_am_sf",
+      "method_second": "pgrb",
+      "replicate_selection_rule": "",
+      "fractional_factor_assignment_rule": "",
+      "primary_position_within_V": "",
+      "corresponding_primary_cell_replicate": "2",
+      "uses_other_replicate_for_corresponding_cell": "True",
+      "matched_landscape_ordinal": "10",
+      "inventory_rotation_rule": "shortage_balanced_surplus_cycle",
+      "id": "D7",
+      "role": "R84 frozen long protection/repetition role; see plan.md",
+      "stage": "exposed_development",
+      "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+      "round61_stage": "development",
+      "round61_role": "V50 long-T mixed; long native routes",
+      "round62_role": "V50 long-T mixed; long native routes",
+      "cap": 3600
+    },
+    {
+      "id": "U6",
+      "family": "citibike",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "geography": "compact",
+      "inventory": "shortage",
+      "T_seconds": 18000,
+      "cap": 3600,
+      "instance_path": "reference/round82_unadapted_confirmation/U6.txt",
+      "input_sha256": "1556e893376349de92f9213642d7be0005dcb44e47e037d34f77040711787e3f",
+      "scenario_id": "round82-unadapted-confirmation-v1_U6",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "stage": "exposed_development",
+      "role": "R84 frozen long protection/repetition role; see plan.md",
+      "lambda": 0.15
+    }
+  ],
+  "order": [
+    "D6",
+    "D7",
+    "U6"
+  ],
+  "arms": [
+    "P-GRB",
+    "ENS-C",
+    "K1-R"
+  ],
+  "all_inputs_exposed": true,
+  "prior_bindings": {
+    "D6": {
+      "folder": "results\\unified_exact_round83\\startup\\local_raw\\D6\\ENS-C",
+      "descent_sha256": "38ce3f8d5f49280e8e58c34cc4ce003df7ff5abb09f16a4ba5090afd7b6970bf",
+      "initial_sha256": "65b73ebabd7daf2ec4c289c79640f985a179ef447fbfdcd0d29eec6d3f918a57",
+      "final_sha256": "cd1e6d3da1198a5223c52cf874f2fd6635dff76d5c2a11e927b32244f84d26f1"
+    },
+    "D7": {
+      "folder": "results\\unified_exact_round83\\startup\\local_raw\\D7\\ENS-C",
+      "descent_sha256": "24071b751153c45ee8a0b12fb3c3aa98e64879de4ece93821ca53c88ff41c6c3",
+      "initial_sha256": "767732148d0cc24c917f80a412c85be01cadcedc9071e07ba3d0bb17a7fa7142",
+      "final_sha256": "c1be84a636cbae6110559fd3bd93d71a9cbaf47e9c901d0fad250be9a1b81360"
+    },
+    "U6": {
+      "folder": "results\\unified_exact_round83\\startup\\local_raw\\U6\\ENS-C",
+      "descent_sha256": "d1bb08925c12906233bc571a0302b9a7f9f909f17bcfc92a330aaae2e66fdd10",
+      "initial_sha256": "1e077bf25c44b65e2c1bb133bd519dfb94371127876b8685d66594324dfce1a9",
+      "final_sha256": "094bcb05dc457cd7de2cfb07321868ccc41355070b056d95a44ab5e4d7a895fb"
+    }
+  },
+  "prior_U6_campaign_identity_sha256": "d2329fd6509f66fea039d0b08c3c2a78063fa1bb8e2356b338815fea3eb03e16",
+  "prior_U6_endpoints_sha256": "6918a027bd567237359c4520e46ba24c3f87cf74b8053d1960a93c941b29d33f",
+  "source": {
+    "D6_D7": "results/unified_exact_round81/campaign/identity.json",
+    "U6": "results/unified_exact_round83/protocol.json"
+  },
+  "source_hashes": {
+    "D6_D7": "7fa06cc91978f4b31f645d1b8058e0e535b7049f7fd75f0a140f7fd7b4a311b9",
+    "U6": "db00f1673daebe949240c07292534aef4780e8882420cd4cb2f01501a21bf712"
+  }
+}

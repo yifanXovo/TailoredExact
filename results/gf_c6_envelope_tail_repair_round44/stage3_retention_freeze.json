@@ -1,0 +1,24 @@
+{
+  "development_results_observed": false,
+  "executable_sha256": "c6cd3f8c3d0220da87f96c891dc2cbbe493f6cc6e2d7b64b31210b7993e1e7fd",
+  "frozen_before_mechanism6_extension": true,
+  "mechanism6_results_observed": false,
+  "retained_count": 2,
+  "retained_tags": [
+    "noadaptive",
+    "veto-f05"
+  ],
+  "schema": "round44-stage3-retention-freeze-v1",
+  "selection_order": [
+    "correctness",
+    "major/P-GRB repair",
+    "no severe P-GRB regression",
+    "C6-advantage retention",
+    "worst shifted P-GRB ratio",
+    "shifted Work geometric mean",
+    "shifted time geometric mean",
+    "simplicity"
+  ],
+  "tie_disposition": "All passing conservative score/threshold arms had identical major and control Work except rho_M=0.007 root-mass-only on the control; veto-f05 is the simplest conservative representative.",
+  "validation_observed": false
+}

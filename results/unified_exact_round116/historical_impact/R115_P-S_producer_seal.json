@@ -1,0 +1,752 @@
+{
+  "required_SHA": {
+    "result.json": "89d4e7207c915df08e8fcb6d431ba89c447c6e07d9ab0fd68db3b748786cafaa",
+    "completion.json": "23e01afd89d7e260df88761ea2f1f394f1ba2ba4e6c4ad7d044f3ac656175d8d",
+    "observations.json": "3a95f25cba7028efd6b4aeb1709e9a6609df94ea14bf64144a8d4f99114acfff",
+    "phases.csv": "ed5d9cc2b6242249fccc20f8b2db7430864401147c0b1ff448ae4d39ad7d73f6",
+    "production_checks.json": "9e1a5b7809d74987ef37ce6520133e8c5b5188968c661cfa750a695e369d1371",
+    "progress_publication_receipt.json": "6e375fb06067df6ac4674a2734afc8c0d174921535b3c856596612a895f38313",
+    "native_end_receipt.json": "c8793724b525fd7806acf7f770d5c1c88cdc5c9ca0ee117f371744f502805f49"
+  },
+  "produced_files": [
+    {
+      "path": "affinity.json",
+      "bytes": 400
+    },
+    {
+      "path": "compact.lp",
+      "bytes": 23990890
+    },
+    {
+      "path": "completion.json",
+      "bytes": 565
+    },
+    {
+      "path": "hga.csv.descent.csv",
+      "bytes": 78363
+    },
+    {
+      "path": "hga.csv.exchange/actual_distances.json",
+      "bytes": 191217
+    },
+    {
+      "path": "hga.csv.exchange/closure_0.csv",
+      "bytes": 4094
+    },
+    {
+      "path": "hga.csv.exchange/closure_0.csv.final.json",
+      "bytes": 2259
+    },
+    {
+      "path": "hga.csv.exchange/closure_0.csv.initial.json",
+      "bytes": 2158
+    },
+    {
+      "path": "hga.csv.exchange/closure_1.csv",
+      "bytes": 2086
+    },
+    {
+      "path": "hga.csv.exchange/closure_1.csv.final.json",
+      "bytes": 2275
+    },
+    {
+      "path": "hga.csv.exchange/closure_1.csv.initial.json",
+      "bytes": 2275
+    },
+    {
+      "path": "hga.csv.exchange/closure_10.csv",
+      "bytes": 484
+    },
+    {
+      "path": "hga.csv.exchange/closure_10.csv.final.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_10.csv.initial.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_11.csv",
+      "bytes": 477
+    },
+    {
+      "path": "hga.csv.exchange/closure_11.csv.final.json",
+      "bytes": 2293
+    },
+    {
+      "path": "hga.csv.exchange/closure_11.csv.initial.json",
+      "bytes": 2293
+    },
+    {
+      "path": "hga.csv.exchange/closure_12.csv",
+      "bytes": 484
+    },
+    {
+      "path": "hga.csv.exchange/closure_12.csv.final.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_12.csv.initial.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_13.csv",
+      "bytes": 477
+    },
+    {
+      "path": "hga.csv.exchange/closure_13.csv.final.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_13.csv.initial.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_14.csv",
+      "bytes": 771
+    },
+    {
+      "path": "hga.csv.exchange/closure_14.csv.final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_14.csv.initial.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_15.csv",
+      "bytes": 631
+    },
+    {
+      "path": "hga.csv.exchange/closure_15.csv.final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_15.csv.initial.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_16.csv",
+      "bytes": 484
+    },
+    {
+      "path": "hga.csv.exchange/closure_16.csv.final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_16.csv.initial.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_17.csv",
+      "bytes": 760
+    },
+    {
+      "path": "hga.csv.exchange/closure_17.csv.final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_17.csv.initial.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_18.csv",
+      "bytes": 482
+    },
+    {
+      "path": "hga.csv.exchange/closure_18.csv.final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_18.csv.initial.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_19.csv",
+      "bytes": 482
+    },
+    {
+      "path": "hga.csv.exchange/closure_19.csv.final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_19.csv.initial.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_2.csv",
+      "bytes": 1929
+    },
+    {
+      "path": "hga.csv.exchange/closure_2.csv.final.json",
+      "bytes": 2276
+    },
+    {
+      "path": "hga.csv.exchange/closure_2.csv.initial.json",
+      "bytes": 2275
+    },
+    {
+      "path": "hga.csv.exchange/closure_20.csv",
+      "bytes": 475
+    },
+    {
+      "path": "hga.csv.exchange/closure_20.csv.final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_20.csv.initial.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_21.csv",
+      "bytes": 482
+    },
+    {
+      "path": "hga.csv.exchange/closure_21.csv.final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_21.csv.initial.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_3.csv",
+      "bytes": 1781
+    },
+    {
+      "path": "hga.csv.exchange/closure_3.csv.final.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/closure_3.csv.initial.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_4.csv",
+      "bytes": 477
+    },
+    {
+      "path": "hga.csv.exchange/closure_4.csv.final.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/closure_4.csv.initial.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/closure_5.csv",
+      "bytes": 773
+    },
+    {
+      "path": "hga.csv.exchange/closure_5.csv.final.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_5.csv.initial.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/closure_6.csv",
+      "bytes": 480
+    },
+    {
+      "path": "hga.csv.exchange/closure_6.csv.final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_6.csv.initial.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/closure_7.csv",
+      "bytes": 613
+    },
+    {
+      "path": "hga.csv.exchange/closure_7.csv.final.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/closure_7.csv.initial.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/closure_8.csv",
+      "bytes": 477
+    },
+    {
+      "path": "hga.csv.exchange/closure_8.csv.final.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/closure_8.csv.initial.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/closure_9.csv",
+      "bytes": 777
+    },
+    {
+      "path": "hga.csv.exchange/closure_9.csv.final.json",
+      "bytes": 2293
+    },
+    {
+      "path": "hga.csv.exchange/closure_9.csv.initial.json",
+      "bytes": 2293
+    },
+    {
+      "path": "hga.csv.exchange/events.jsonl",
+      "bytes": 6761
+    },
+    {
+      "path": "hga.csv.exchange/final.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/initial.json",
+      "bytes": 2158
+    },
+    {
+      "path": "hga.csv.exchange/neutral_0.json",
+      "bytes": 2275
+    },
+    {
+      "path": "hga.csv.exchange/neutral_1.json",
+      "bytes": 2275
+    },
+    {
+      "path": "hga.csv.exchange/neutral_10.json",
+      "bytes": 2293
+    },
+    {
+      "path": "hga.csv.exchange/neutral_11.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/neutral_12.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/neutral_13.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/neutral_14.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/neutral_15.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/neutral_16.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/neutral_17.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/neutral_18.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/neutral_19.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/neutral_2.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/neutral_20.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/neutral_3.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/neutral_4.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/neutral_5.json",
+      "bytes": 2291
+    },
+    {
+      "path": "hga.csv.exchange/neutral_6.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/neutral_7.json",
+      "bytes": 2294
+    },
+    {
+      "path": "hga.csv.exchange/neutral_8.json",
+      "bytes": 2293
+    },
+    {
+      "path": "hga.csv.exchange/neutral_9.json",
+      "bytes": 2292
+    },
+    {
+      "path": "hga.csv.exchange/result.json",
+      "bytes": 221
+    },
+    {
+      "path": "hga.csv.joint.csv",
+      "bytes": 9472
+    },
+    {
+      "path": "hga.csv.joint_seed.csv",
+      "bytes": 873
+    },
+    {
+      "path": "journal/event_1.commit",
+      "bytes": 95
+    },
+    {
+      "path": "journal/event_1.json",
+      "bytes": 335
+    },
+    {
+      "path": "journal/event_10.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_10.json",
+      "bytes": 4351
+    },
+    {
+      "path": "journal/event_11.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_11.json",
+      "bytes": 4351
+    },
+    {
+      "path": "journal/event_12.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_12.json",
+      "bytes": 4351
+    },
+    {
+      "path": "journal/event_13.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_13.json",
+      "bytes": 206
+    },
+    {
+      "path": "journal/event_14.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_14.json",
+      "bytes": 206
+    },
+    {
+      "path": "journal/event_15.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_15.json",
+      "bytes": 4350
+    },
+    {
+      "path": "journal/event_16.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_16.json",
+      "bytes": 4351
+    },
+    {
+      "path": "journal/event_17.commit",
+      "bytes": 90
+    },
+    {
+      "path": "journal/event_17.json",
+      "bytes": 4352
+    },
+    {
+      "path": "journal/event_18.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_18.json",
+      "bytes": 4353
+    },
+    {
+      "path": "journal/event_19.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_19.json",
+      "bytes": 4353
+    },
+    {
+      "path": "journal/event_2.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_2.json",
+      "bytes": 4343
+    },
+    {
+      "path": "journal/event_20.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_20.json",
+      "bytes": 4352
+    },
+    {
+      "path": "journal/event_21.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_21.json",
+      "bytes": 4353
+    },
+    {
+      "path": "journal/event_22.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_22.json",
+      "bytes": 4352
+    },
+    {
+      "path": "journal/event_23.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_23.json",
+      "bytes": 4352
+    },
+    {
+      "path": "journal/event_24.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_24.json",
+      "bytes": 4351
+    },
+    {
+      "path": "journal/event_25.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_25.json",
+      "bytes": 4351
+    },
+    {
+      "path": "journal/event_26.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_26.json",
+      "bytes": 4352
+    },
+    {
+      "path": "journal/event_27.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_27.json",
+      "bytes": 4352
+    },
+    {
+      "path": "journal/event_28.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_28.json",
+      "bytes": 4315
+    },
+    {
+      "path": "journal/event_29.commit",
+      "bytes": 97
+    },
+    {
+      "path": "journal/event_29.json",
+      "bytes": 4314
+    },
+    {
+      "path": "journal/event_3.commit",
+      "bytes": 95
+    },
+    {
+      "path": "journal/event_3.json",
+      "bytes": 784
+    },
+    {
+      "path": "journal/event_30.commit",
+      "bytes": 91
+    },
+    {
+      "path": "journal/event_30.json",
+      "bytes": 4315
+    },
+    {
+      "path": "journal/event_31.commit",
+      "bytes": 91
+    },
+    {
+      "path": "journal/event_31.json",
+      "bytes": 4354
+    },
+    {
+      "path": "journal/event_32.commit",
+      "bytes": 91
+    },
+    {
+      "path": "journal/event_32.json",
+      "bytes": 4357
+    },
+    {
+      "path": "journal/event_33.commit",
+      "bytes": 91
+    },
+    {
+      "path": "journal/event_33.json",
+      "bytes": 4297
+    },
+    {
+      "path": "journal/event_34.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_34.json",
+      "bytes": 88
+    },
+    {
+      "path": "journal/event_4.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_4.json",
+      "bytes": 4348
+    },
+    {
+      "path": "journal/event_5.commit",
+      "bytes": 95
+    },
+    {
+      "path": "journal/event_5.json",
+      "bytes": 163
+    },
+    {
+      "path": "journal/event_6.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_6.json",
+      "bytes": 4349
+    },
+    {
+      "path": "journal/event_7.commit",
+      "bytes": 96
+    },
+    {
+      "path": "journal/event_7.json",
+      "bytes": 4349
+    },
+    {
+      "path": "journal/event_8.commit",
+      "bytes": 95
+    },
+    {
+      "path": "journal/event_8.json",
+      "bytes": 205
+    },
+    {
+      "path": "journal/event_9.commit",
+      "bytes": 89
+    },
+    {
+      "path": "journal/event_9.json",
+      "bytes": 4350
+    },
+    {
+      "path": "launch.json",
+      "bytes": 3597
+    },
+    {
+      "path": "native.log",
+      "bytes": 12524
+    },
+    {
+      "path": "native.log.round112.native.json",
+      "bytes": 120
+    },
+    {
+      "path": "native.log.round112.start.after.matrix.json",
+      "bytes": 23218964
+    },
+    {
+      "path": "native.log.round112.start.before.matrix.json",
+      "bytes": 23218964
+    },
+    {
+      "path": "native.log.round112.start.json",
+      "bytes": 322
+    },
+    {
+      "path": "native.log.round112.start.values.csv",
+      "bytes": 1511674
+    },
+    {
+      "path": "native_end_receipt.json",
+      "bytes": 102
+    },
+    {
+      "path": "observations.json",
+      "bytes": 406883
+    },
+    {
+      "path": "phases.csv",
+      "bytes": 1557
+    },
+    {
+      "path": "process_start_marker.json",
+      "bytes": 160
+    },
+    {
+      "path": "production_checks.json",
+      "bytes": 14815
+    },
+    {
+      "path": "progress_publication_receipt.json",
+      "bytes": 486
+    },
+    {
+      "path": "result.json",
+      "bytes": 96277
+    },
+    {
+      "path": "result.json.round112.startup.json",
+      "bytes": 95635
+    },
+    {
+      "path": "samples.jsonl",
+      "bytes": 7615
+    },
+    {
+      "path": "stderr.log",
+      "bytes": 0
+    },
+    {
+      "path": "stdout.log",
+      "bytes": 60
+    }
+  ],
+  "scope": "all native output files closed; original call/model SHA assertions deferred to verification",
+  "native_stopped_no_reentry": true,
+  "cohort_review_excluded": true
+}

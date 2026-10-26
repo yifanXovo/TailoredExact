@@ -1,0 +1,14 @@
+{
+  "absolute_bound_cutoff_difference": 1.759713453803435e-7,
+  "certificate": false,
+  "classification": "strict_certificate_correctness_failure",
+  "false_certificate": false,
+  "frozen_verified_cutoff": 0.6471164334555021,
+  "native_best_bound": 0.6471162574841567,
+  "native_status": "OPTIMAL",
+  "note": "The native model closed at an objective below the frozen verified cutoff. The wrapper correctly rejected the fixed-cutoff certificate and retained complete evidence; it did not assert a false optimum.",
+  "policy": "interval-mip-v0",
+  "schema": "round50-c1-confirmation-terminal-audit-v1",
+  "state_id": "C1",
+  "status": "failed"
+}

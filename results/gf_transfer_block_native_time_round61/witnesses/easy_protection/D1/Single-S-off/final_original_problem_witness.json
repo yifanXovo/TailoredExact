@@ -1,0 +1,75 @@
+{
+  "source": "full_algorithm_final",
+  "source_result_path": "results\\gf_transfer_block_native_time_round61\\local_raw\\easy_protection\\D1\\off\\result.json",
+  "source_result_sha256": "a6c0c49751a8b59a74990cd899e03f37cb3781cbfd44bd9dab0d60a02b95daa6",
+  "input_sha256": "9af8da79275740e904d430b84d2619becbaf868a31089b50cb84cf2a0a914e5c",
+  "F": 0,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        4,
+        7,
+        6,
+        3,
+        0
+      ],
+      "operations": [
+        {
+          "station": 4,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 4
+        },
+        {
+          "station": 6,
+          "pickup": 3,
+          "drop": 0
+        },
+        {
+          "station": 3,
+          "pickup": 0,
+          "drop": 3
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        2,
+        5,
+        1,
+        8,
+        0
+      ],
+      "operations": [
+        {
+          "station": 2,
+          "pickup": 3,
+          "drop": 0
+        },
+        {
+          "station": 5,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 0,
+          "drop": 3
+        },
+        {
+          "station": 8,
+          "pickup": 0,
+          "drop": 4
+        }
+      ]
+    }
+  ]
+}

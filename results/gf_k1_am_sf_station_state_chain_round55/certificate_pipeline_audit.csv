@@ -1,0 +1,9 @@
+gate,implementation,fail_closed,status
+expected/actual model fingerprint,GurobiCertificate + backend readback,True,pass
+objective recomputation,verifySolution,True,pass
+route feasibility,verifySolution,True,pass
+global lower-bound ordering,ControllingLeafScheduler,True,pass
+global-bound monotonicity,scheduler + strict finalizer,True,pass
+restricted diagnostic range,certificate class rejection,True,pass
+process cap,process deadline plus finalization reserve,True,pass
+false fingerprint,Round55StationStateChainTests check 51,True,pass

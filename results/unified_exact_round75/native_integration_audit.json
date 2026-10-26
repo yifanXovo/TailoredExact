@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "arms": [
+    {
+      "arm": "QDS-X",
+      "physical": {
+        "F": 0.20833333333333331,
+        "G": 0.13333333333333333,
+        "P": 0.5,
+        "stations": 1,
+        "pickup": 1,
+        "drop": 0,
+        "maximum_duration": 2.0,
+        "original_T_feasible": true
+      },
+      "start_metadata_sha256": "a62be6e22c196b1e1611a29316b2df1c4abd0621a78f8bb58b2e7bacb70b0d11",
+      "model_sha256": "731be218fa86b7d177507ab3760147ef442eabb060385cc74340c26359f7ba03",
+      "model": "build\\round75\\v2\\round75_quantity_cli_81ee76e2c2853664\\QDS-X\\external\\models\\L0.1.0.1.0.0.0.1.1.lp",
+      "independent_actual_vector": {
+        "actual_columns": 71,
+        "actual_rows": 167,
+        "maximum_row_violation": 0,
+        "independent_mapping_maximum_difference": 0.0,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 0.0,
+        "actual_full_vector_valid": true
+      },
+      "native_metadata": {
+        "source": "round68_existing_0",
+        "leaf": "L0.1.0.1.0.0.0.1.1",
+        "model_sha256": "731be218fa86b7d177507ab3760147ef442eabb060385cc74340c26359f7ba03",
+        "retained_model": true,
+        "status": "accepted_by_native_log",
+        "mapping_complete": true,
+        "rows_valid": true,
+        "checked_rows": 167,
+        "maximum_row_violation": 0,
+        "objective_valid": true,
+        "objective": 0.20833333333333331,
+        "submitted": true,
+        "readback_valid": true,
+        "exact_vector_observed_in_mipsol": true,
+        "integer_vector_observed_in_mipsol": true,
+        "mapping_validation_submission_seconds": 0.0002882,
+        "native_deadline_remaining_at_optimize": 26.7817533
+      }
+    },
+    {
+      "arm": "JDS-X",
+      "physical": {
+        "F": 0.20833333333333331,
+        "G": 0.13333333333333333,
+        "P": 0.5,
+        "stations": 1,
+        "pickup": 1,
+        "drop": 0,
+        "maximum_duration": 2.0,
+        "original_T_feasible": true
+      },
+      "start_metadata_sha256": "e1aacbfb68b698c9205922d7f061999543e33bdcbb2d73ca4762eb505c394d55",
+      "model_sha256": "731be218fa86b7d177507ab3760147ef442eabb060385cc74340c26359f7ba03",
+      "model": "build\\round75\\v2\\round75_quantity_cli_81ee76e2c2853664\\JDS-X\\external\\models\\L0.1.0.1.0.0.0.1.1.lp",
+      "independent_actual_vector": {
+        "actual_columns": 71,
+        "actual_rows": 167,
+        "maximum_row_violation": 0,
+        "independent_mapping_maximum_difference": 0.0,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 0.0,
+        "actual_full_vector_valid": true
+      },
+      "native_metadata": {
+        "source": "round68_existing_0",
+        "leaf": "L0.1.0.1.0.0.0.1.1",
+        "model_sha256": "731be218fa86b7d177507ab3760147ef442eabb060385cc74340c26359f7ba03",
+        "retained_model": true,
+        "status": "accepted_by_native_log",
+        "mapping_complete": true,
+        "rows_valid": true,
+        "checked_rows": 167,
+        "maximum_row_violation": 0,
+        "objective_valid": true,
+        "objective": 0.20833333333333331,
+        "submitted": true,
+        "readback_valid": true,
+        "exact_vector_observed_in_mipsol": true,
+        "integer_vector_observed_in_mipsol": true,
+        "mapping_validation_submission_seconds": 0.0002788,
+        "native_deadline_remaining_at_optimize": 26.8009264
+      }
+    }
+  ],
+  "optimizer_calls": 0,
+  "offline_wall_seconds": 0.015227600000798702,
+  "script_sha256": "6d3b336723d4abbe1e2ce9e9a568dc35a6f92ee18c97c13787c54949d7d5a785",
+  "mapping_sha256": "557009f3d5aae925fa5fce88322e2651d016981f53e11c1b8d85d8c340343400",
+  "scope": "Actual new native CLI integration on tiny known optimum5/24, not a performance result"
+}

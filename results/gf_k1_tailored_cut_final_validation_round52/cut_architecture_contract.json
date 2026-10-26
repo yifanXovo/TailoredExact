@@ -1,0 +1,44 @@
+{
+  "schema": "round52-cut-architecture-contract-v1",
+  "solver_independent_components": [
+    "CutCandidate",
+    "CutSeparator",
+    "CutManager"
+  ],
+  "candidate_fields": [
+    "family",
+    "validity_scope",
+    "sparse_coefficients",
+    "sense",
+    "rhs",
+    "raw_violation",
+    "scaled_violation",
+    "canonical_signature",
+    "generating_interval",
+    "generating_context",
+    "support_set",
+    "vehicle_index",
+    "derivation_metadata"
+  ],
+  "manager": [
+    "canonical normalization",
+    "exact duplicate rejection",
+    "global pool membership",
+    "provable exact dominance",
+    "deterministic ranking and selection",
+    "block accounting",
+    "callback-safe failure handling",
+    "lifecycle telemetry"
+  ],
+  "gurobi_adapter": {
+    "callback": "MIPNODE",
+    "required_status": "optimal",
+    "PreCrush": 1,
+    "submission": "GRBcbcut",
+    "global_user_cuts_only": true,
+    "lazy_constraint_semantics": false,
+    "exception_safe": true
+  },
+  "base_core_constraints_retained": true,
+  "default_off_without_named_policy": true
+}

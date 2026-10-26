@@ -1,0 +1,35 @@
+{
+  "schema": "round133-independent-conditional-public-resume-source-review-v1",
+  "reviewer": "/root/reliability_review",
+  "decision": "CONDITIONAL_SOURCE_DESIGN_ACCEPTED_NOT_EXECUTION_ADMISSION",
+  "wrapper": "scripts/round133_public_resume_budget.py",
+  "wrapper_SHA": "3c61537baaefff1ba26f6c59fb9b80c37b5bf16837b2dc5686efcb77aceb56fe",
+  "original_bootstrap_SHA": "b8062780c069e252df5306d79fc5b1c22038d1adf4f0ec229cdaddc1cbca5aa8",
+  "fixed_science_commit": "e4c6f82316f8697c6dfcf59d3a0807619b7bcae8",
+  "source_review": [
+    "The original public bootstrap bytes are hard-pinned and are not edited. The imported module changes only BUDGETS before calling its original main.",
+    "New finite caps are total 7200, transport 6000, semantic 3600 seconds. Limits loads prior state cumulative seconds, so transport 6000 is cumulative, not an additional allowance. Both phases also remain bounded by cumulative total 7200.",
+    "The wrapper requires a real FAILED_PRESERVE_SAME_ROOT receipt and state, an explicit transport-limit error, no prior semantic phase, the same science commit and initially-empty owned destination, and a separately signed-off admission tied to wrapper and prior receipt hashes.",
+    "Original same-root/commit owner checks and unconditional state-PASS rerun refusal remain in the bootstrap. No new empty root is created by the wrapper.",
+    "The original HTTPS materialization, CRC/SHA/path checks, exact source publication, pinned 6024 portable entry and all three required scientific hooks remain unchanged.",
+    "Execution binding is written outside the owned scientific root. Original failed receipt/attempt and cumulative costs are preserved by the original resume main. No healthy native or scientific run is repeated."
+  ],
+  "required_before_any_execution_admission": [
+    "Original public session has actually exited and its outer fee is closed; no active recovery process or unclosed writer remains.",
+    "Actual failure is the finite transport cap, rather than a science/source/CRC/path/semantic failure; bind the complete failed public receipt, final root state and closed fee hashes.",
+    "Bind original owner, same destination and fixed science commit; preserve failed attempt/logs/fees and original bootstrap unchanged.",
+    "Bind exact final wrapper SHA and registered cumulative limits in a new independent ACCEPT_SAME_ROOT_BUDGET_EXTENSION_AFTER_REAL_LIMIT_FAILURE admission.",
+    "Publish the wrapper/admission as normal metadata, then anonymously download the fixed metadata commit bytes and verify exact hashes before the parent alone resumes.",
+    "Use only the same original failed owned root with --resume; retain all full23, J2/J3 and D24 checks and every prior second in cumulative accounting."
+  ],
+  "if_original_recovery_passes": "NOT_NEEDED; do not execute this wrapper",
+  "current_actual_recovery_result": "PENDING",
+  "execution_admission_issued": false,
+  "wrapper_executed_by_reviewer": false,
+  "tests_run_by_reviewer": false,
+  "public_recovery_started_or_restarted_by_reviewer": false,
+  "implementation_changed_by_reviewer": false,
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0
+}

@@ -1,0 +1,172 @@
+"""One anonymous science-A recovery into a new E-root; never invokes a solver."""
+from pathlib import Path,PurePosixPath
+from concurrent.futures import ThreadPoolExecutor
+import argparse,datetime,gzip,hashlib,json,os,re,shutil,subprocess,sys,time,urllib.request,zipfile,zlib
+
+def digest(data):return hashlib.sha256(data).hexdigest()
+def file_digest(path):
+    h=hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for block in iter(lambda:stream.read(1024*1024),b''):h.update(block)
+    return h.hexdigest()
+def read(p):return json.loads(Path(p).read_text(encoding='utf-8-sig'))
+def write(p,v):Path(p).parent.mkdir(parents=True,exist_ok=True);Path(p).write_text(json.dumps(v,indent=2)+'\n',encoding='utf-8')
+
+def main():
+    a=argparse.ArgumentParser();a.add_argument('--commit',required=True);a.add_argument('--destination',required=True)
+    a.add_argument('--receipt',required=True);a.add_argument('--resume',action='store_true');a.add_argument('--compile-pdf',action='store_true')
+    a.add_argument('--transport',choices=['urllib','windows-curl'],default='urllib');args=a.parse_args()
+    assert re.fullmatch('[0-9a-f]{40}',args.commit)
+    dest=Path(args.destination).resolve();allowed=Path('E:/codes/ExactEBRP-work/restore').resolve()
+    assert dest.is_relative_to(allowed) and dest!=allowed
+    receipt=Path(args.receipt).resolve();assert not receipt.is_relative_to(dest)
+    state_path=dest/'restore_state.json'
+    if dest.exists():assert args.resume and state_path.exists() and read(state_path)['commit']==args.commit
+    else:dest.mkdir(parents=True);write(state_path,dict(commit=args.commit,owner='Round127 public science-A recovery'))
+    for p in [dest,*dest.parents]:assert not p.is_junction() and not p.is_symlink()
+    base=f'https://raw.githubusercontent.com/yifanXovo/TailoredExact/{args.commit}/'
+    tick=time.perf_counter();failures=[];transformations=[]
+    def get(name):
+        for attempt in range(3):
+            try:
+                remaining=1500-(time.perf_counter()-tick)
+                assert remaining>1,'finite retrieval wall budget exhausted; preserve and resume the same root'
+                if args.transport=='windows-curl':
+                    curl=Path(os.environ['WINDIR'])/'System32/curl.exe'
+                    command=[str(curl),'--disable','--proto','=https','--proto-redir','=https',
+                        '--fail','--location','--silent','--show-error','--max-time',str(min(90,remaining)),base+name]
+                    r=subprocess.run(command,capture_output=True,timeout=min(90,remaining)+3)
+                    assert r.returncode==0,('verified Windows HTTPS transport',r.returncode,r.stderr.decode('utf-8',errors='replace'))
+                    return r.stdout
+                with urllib.request.urlopen(base+name,timeout=45) as response:return response.read()
+            except Exception as exc:
+                failures.append(dict(path=name,attempt=attempt+1,error=repr(exc)))
+                if attempt==2:raise
+                time.sleep(1+attempt)
+    try:
+        name='results/unified_exact_round127/export_manifest.json';blob=get(name);manifest=json.loads(blob)
+        path=dest/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(blob)
+        def fetch(row):
+            rel=PurePosixPath(row['path']);assert not rel.is_absolute() and '..' not in rel.parts
+            assert all(':' not in part and '\\' not in part for part in rel.parts)
+            p=dest.joinpath(*rel.parts)
+            # Validate existing, stable parents rather than resolving a missing
+            # leaf concurrently with other workers materializing its parents.
+            p.parent.mkdir(parents=True,exist_ok=True)
+            for parent in [p.parent,*p.parent.parents]:assert not parent.is_junction() and not parent.is_symlink()
+            assert p.parent.resolve().is_relative_to(dest),('resolved parent outside owned root',row['path'],str(p.parent.resolve()))
+            assert not p.is_symlink() and not p.is_junction()
+            if p.is_file() and p.stat().st_size==row['bytes'] and digest(p.read_bytes())==row['SHA256']:return row['bytes']
+            assert not p.exists(),('existing recovery bytes do not match; preserve them',row['path'])
+            raw=get(row['path']);data=raw;mode='exact'
+            if digest(data)!=row['SHA256'] and row['serialization'].startswith('exact bytes;'):
+                normalized=raw.replace(b'\r\n',b'\n')
+                for candidate,label in [(normalized,'LF'),(normalized.replace(b'\n',b'\r\n'),'CRLF')]:
+                    if digest(candidate)==row['SHA256']:data=candidate;mode=label;break
+            assert len(data)==row['bytes'] and digest(data)==row['SHA256'],('published byte identity',row['path'])
+            p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+            if mode!='exact':transformations.append(dict(path=row['path'],materialization=mode,Git_transport_SHA=digest(raw),materialized_SHA=digest(data)))
+            return len(raw)
+        start=time.perf_counter()
+        with ThreadPoolExecutor(max_workers=4) as pool:sizes=list(pool.map(fetch,manifest['files']))
+        retrieval=time.perf_counter()-start;out=dest/'results/unified_exact_round127';raw_manifest=read(out/'raw_archive_manifest.json')
+        extraction_start=time.perf_counter();extracted=[]
+        declared_files={row['path']:row for row in manifest['files']}
+        assert len(declared_files)==len(manifest['files'])
+        expected_archive_names={'training.zip','main.zip','tiny.zip','core.zip','qualification_closed_fees_original_sources.zip'}
+        assert len(raw_manifest['archives'])==len(expected_archive_names)
+        assert {archive['name'] for archive in raw_manifest['archives']}==expected_archive_names
+        for archive in raw_manifest['archives']:
+            joined=dest/'archive_transport'/archive['name'];joined.parent.mkdir(exist_ok=True)
+            if not joined.exists():
+                with joined.open('xb') as target:
+                    for part in archive['pieces']:
+                        p=dest/part['path'];assert digest(p.read_bytes())==part['SHA256']
+                        with p.open('rb') as source:shutil.copyfileobj(source,target)
+            assert joined.stat().st_size==archive['compressed_bytes'] and digest(joined.read_bytes())==archive['SHA256']
+            with zipfile.ZipFile(joined) as z:
+                infos=z.infolist();assert len(infos)==archive['file_count']
+                assert sum(i.file_size for i in infos)==archive['uncompressed_bytes']
+                if 'member_index' in archive:
+                    index=archive['member_index'];assert index['format']=='gzip-json-utf8-list-v1'
+                    expected_index_path='results/unified_exact_round127/artifacts/member_hashes/'+archive['name']+'.members.json.gz'
+                    assert index['path']==expected_index_path,'noncanonical or wrong-archive member-index path'
+                    declared=declared_files[expected_index_path]
+                    assert (declared['bytes'],declared['SHA256'])==(index['bytes'],index['SHA256'])
+                    index_rel=PurePosixPath(index['path'])
+                    assert not index_rel.is_absolute() and '..' not in index_rel.parts
+                    assert all(':' not in part and '\\' not in part for part in index_rel.parts)
+                    index_path=dest.joinpath(*index_rel.parts)
+                    assert index_path.resolve().is_relative_to(dest)
+                    payload=index_path.read_bytes()
+                    assert len(payload)==index['bytes'] and digest(payload)==index['SHA256']
+                    decoded=gzip.decompress(payload)
+                    assert len(decoded)==index['decoded_bytes'] and digest(decoded)==index['decoded_SHA256']
+                    members=json.loads(decoded);assert len(members)==index['members']
+                else:members=archive['members']
+                expected={m['path']:m for m in members}
+                assert len(expected)==len(members)==len(infos)
+                assert len({i.filename for i in infos})==len(infos) and set(expected)=={i.filename for i in infos}
+                for info in infos:
+                    rel=PurePosixPath(info.filename)
+                    assert not rel.is_absolute() and '..' not in rel.parts and all(':' not in s and '\\' not in s for s in rel.parts)
+                    target=dest/str(rel);assert target.resolve().is_relative_to(dest)
+                    if target.exists():
+                        data=target.read_bytes();assert len(data)==info.file_size and zlib.crc32(data)&0xffffffff==info.CRC
+                        continue
+                    target.parent.mkdir(parents=True,exist_ok=True)
+                    with z.open(info) as source,target.open('xb') as stream:shutil.copyfileobj(source,stream)
+                    assert target.stat().st_size==info.file_size
+            for name,member in expected.items():
+                target=dest/name
+                assert target.is_file() and not target.is_symlink() and not target.is_junction()
+                assert target.stat().st_size==member['bytes'] and file_digest(target)==member['SHA256'],('extracted member SHA256',name)
+            extracted.append(dict(name=archive['name'],files=len(infos),bytes=archive['uncompressed_bytes'],SHA256=archive['SHA256'],members_SHA256_verified=len(expected)))
+        extraction=time.perf_counter()-extraction_start;state=read(state_path)
+        commands=[]
+        if not state.get('portable_receipt_SHA'):
+            command=[sys.executable,'-B',str(dest/'scripts/round127_portable_check.py')]
+            start=time.perf_counter();r=subprocess.run(command,cwd=dest,capture_output=True,text=True)
+            commands.append(dict(command=command,returncode=r.returncode,seconds=time.perf_counter()-start,stdout=r.stdout,stderr=r.stderr))
+            assert r.returncode==0,commands[-1]
+            state['portable_receipt_SHA']=digest((dest/'portable_check_receipt.json').read_bytes());write(state_path,state)
+        assert digest((dest/'portable_check_receipt.json').read_bytes())==state['portable_receipt_SHA']
+        pdf=None
+        if args.compile_pdf:
+            env=dict(os.environ,ROUND127_PDF_TEMP=str(dest/'compile'),ROUND127_PDF_DEST=str(dest/'compiled/manuscript.pdf'),
+                ROUND127_PDF_RECEIPT=str(dest/'compiled/export.json'),TEMP=str(dest/'compile'),TMP=str(dest/'compile'))
+            (dest/'compile').mkdir(exist_ok=True)
+            command=[sys.executable,'-B',str(dest/'scripts/round127_export.py')]
+            start=time.perf_counter();r=subprocess.run(command,cwd=dest,env=env,capture_output=True,text=True)
+            commands.append(dict(command=command,returncode=r.returncode,seconds=time.perf_counter()-start,stdout=r.stdout,stderr=r.stderr));assert r.returncode==0,commands[-1]
+            texts=[]
+            for tag,path in [('published',out/'manuscript.pdf'),('rebuilt',dest/'compiled/manuscript.pdf')]:
+                target=dest/'compiled'/(tag+'.txt')
+                subprocess.run(['pdftotext','-layout',str(path),str(target)],check=True,capture_output=True)
+                texts.append(target.read_text(encoding='utf-8'))
+            assert texts[0]==texts[1],'PDF text changed; timestamps are not compared as science'
+            pages=texts[1].split('\f');selected=[]
+            for token in ['Table SC3','Algorithm 1','Appendix B. Executable']:
+                hits=[i+1 for i,p in enumerate(pages) if token in p]
+                if hits:selected.append(hits[-1])
+            for page in sorted(set(selected)):
+                subprocess.run(['pdftoppm','-f',str(page),'-l',str(page),'-scale-to','1600','-png',str(dest/'compiled/manuscript.pdf'),str(dest/'compiled'/f'check_page{page:03d}')],check=True,capture_output=True)
+            pdf=dict(compiled=True,text_equal=True,binary_timestamp_equality_not_required=True,rendered_pages=sorted(set(selected)),
+                actual_visual_reread_pending=True,PDF=str(dest/'compiled/manuscript.pdf'))
+        result=dict(status='PASS',commit=args.commit,destination=str(dest),anonymous=True,
+            transport='Public raw HTTPS via '+args.transport+'; certificate verification enabled, no credentials',
+            executed_restore_script_SHA256=digest(Path(__file__).read_bytes()),
+            manifest_SHA=digest(blob),files=len(sizes),transport_bytes=sum(sizes),retrieval_wall_seconds=retrieval,
+            serialization_materializations=transformations,archives=extracted,extraction_wall_seconds=extraction,
+            portable_check=read(dest/'portable_check_receipt.json'),PDF=pdf,commands=commands,
+            retried_retrieval_errors=failures,total_outer_task_wall_seconds=time.perf_counter()-tick,
+            network_wall_is_not_reported_as_CPU=True,native_solver_starts=0,Optimize=0,production_compilations=0,
+            scope='R127 finite science package only. No historical campaign, native binary or license restored; no re-solving.')
+        write(receipt,result);print(json.dumps({k:v for k,v in result.items() if k not in ['commands','portable_check','serialization_materializations']}))
+    except BaseException as exc:
+        failure=receipt.with_name(receipt.stem+'_failure.json')
+        prior=read(failure) if failure.exists() else []
+        prior.append(dict(commit=args.commit,destination=str(dest),error=repr(exc),retrieval_failures=failures,
+            seconds=time.perf_counter()-tick,preserved_partial_root=True));write(failure,prior);raise
+
+if __name__=='__main__':main()

@@ -1,0 +1,19 @@
+{
+  "UTC": "2026-10-23T19:51:21.410456+00:00",
+  "attempts": [
+    {
+      "action": "Small source text replacement command",
+      "failure": "Implicit Windows gbk decoded docs generator and changed one non-ASCII surname, then manuscript read raised UnicodeDecodeError",
+      "scope": "No native call or formal evidence effect; authoritative manuscript read failed before its write",
+      "resolution": "Failed generator bytes retained, exact surname repaired, manuscript changed via ASCII byte replacement, all source syntax read explicitly UTF-8"
+    },
+    {
+      "action": "Follow-up patch",
+      "failure": "Expected old docs paragraph absent because the first command had updated it before its later manuscript-read failure",
+      "scope": "Patch rejected before any writes",
+      "resolution": "Inspected exact small diff before targeted byte correction"
+    }
+  ],
+  "G1_optimization_seconds": 0,
+  "management_wall_seconds": "not separately instrumented; first command tool reported0.302112s"
+}

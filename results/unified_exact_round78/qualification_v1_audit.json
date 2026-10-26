@@ -1,0 +1,812 @@
+{
+  "version": "v1",
+  "passed": true,
+  "tests_total": 60,
+  "tests_passed": 60,
+  "source_commit": "4a0561e0f8193e3e874c1bd0bfa8bc381fb66f5e",
+  "binary_sha256": "3fae847a75c3c9d07d8f5f0444daeafb73559865e6bffb816746802b9e2f43ab",
+  "actual_optimize_calls": 147,
+  "allowed_optimize_calls": 170,
+  "ledgers": [
+    {
+      "path": "build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\paper_optimize_ledger.csv",
+      "sha256": "f970d939a4ad32b6d77569b75ae843e1ffacd8e871de742b686c1fbcc266a095",
+      "calls": 18
+    },
+    {
+      "path": "build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\paper_optimize_ledger.csv",
+      "sha256": "f23f213676bbe6b2495d5be4a8fbb9276a208131f879154624e568fdb8eccb2b",
+      "calls": 18
+    },
+    {
+      "path": "build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\paper_optimize_ledger.csv",
+      "sha256": "2f162467745f1b0ce57978411252203b67e98da53ada56414d91d7c6002f3542",
+      "calls": 18
+    },
+    {
+      "path": "build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\paper_optimize_ledger.csv",
+      "sha256": "4c09a187c5bf30c34ba10e4650fa031fe52f9e145004db77bcf2a3c7172a82e4",
+      "calls": 18
+    },
+    {
+      "path": "build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\paper_optimize_ledger.csv",
+      "sha256": "154a09387a9fd753518af628e9d0b2040c05f40da9d3af3fa0bd2b95daac7290",
+      "calls": 18
+    },
+    {
+      "path": "build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\paper_optimize_ledger.csv",
+      "sha256": "972adb3c08b622147c3277424b1cd806bbf839e8a5de86a38aa56c5407a91f07",
+      "calls": 18
+    },
+    {
+      "path": "build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\paper_optimize_ledger.csv",
+      "sha256": "8e529897d7c1764dd8176ab4d226ec2eff22ca819219de1cf40799708f306c28",
+      "calls": 18
+    },
+    {
+      "path": "build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\paper_optimize_ledger.csv",
+      "sha256": "c2f8c75a67428b112b865166bf170958516fe0bf7de097b82c1ad79e4bd1ddea",
+      "calls": 18
+    }
+  ],
+  "native_fixture_logs": [
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\exactebrp_round68_native_start_2894541856764800\\ineligible.log",
+      "calls": 1,
+      "sha256": "486c96e45915f9312eb1ddc2b47b59f1513fabce2271ed45e2f737da02185109"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\exactebrp_round68_native_start_2894541856764800\\lp.log",
+      "calls": 1,
+      "sha256": "432dc9465e70bf3fe1cd69638f06a0d6ef5ee8724a0d8234862c8cf4e6fb3b7a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\exactebrp_round68_native_start_2894541856764800\\mip.log",
+      "calls": 1,
+      "sha256": "0ef189b1e9016d8a5bf110ef178adef0e39009e1adcfe3c6e93bcf29cf034876"
+    }
+  ],
+  "all_native_logs": [
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "16475fb9eb89ea74de22e8e0a15095dbfe4cf17bd79b55b690a757a5699e5744"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "20319723d5423f03efd5a4a4dd12c2a5cb2ec596227cc99e7532731f4d0916aa"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "2665ebf6f4382ccfdb00eb82ad76ea074acbe77bfcf0074b16d4b94f36ca205b"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "c02f50c4f9a77653e48dc3fb542d48e464fa2a5ee48a81d74ac5b8416bacc208"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "89a266084767037cf83f9c57d84d2d46b17ad1549bb4cfcfac095f123e33de00"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "ba392169f0e7e5f40b231baad3a3d6152d42be1f9505d9e834c539e0e05b3bf8"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "592f747165f28000b2484a3657ee54fe5241282caabce2d959fe53b05943c5c6"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "dd0dd98cf4329a45a35046729042fe92c235b72ac6168a654cf63b5743e2ac19"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "7594bebb42721bf8eb5d12d35e374228b3ef469afc024ad82f511da8c147c298"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "495536940fcf00a4476f93821e4f7375f8d1ec0a28c8a3d9af2c9dbd0e384003"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "c6a19ec442083928a5a7313cfe44d23019f64d443992c7e053a0bdcac134e01a"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "5054bdcd1a8eccf7f24788d9de8c818db95c7f97b9c6e52b4507860dbe8982c9"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "a1140a1dea781d6da45478413afa288440b4ab077064554f7f9deafec40a3e26"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "9dadae365607b577c2f97ec43a8121af78e39ff2a462e5ba2a4be971d57a7144"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "d0266bd36f007b13aa314da81bc9fe8347d529bf21e88e5c7ba43f47051d1c55"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0.0.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "fd3b167672d8a8b58300d9e7a539cbeb5843617d62d28dffb2173ab51a2f9d1f"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "49e5dd8e70a60e580c0bbc9e784498a292e851715fbebfbe3dd8933343092ea2"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round70_cli_41b49f3e0716c303\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_terminal_mip.gurobi.log",
+      "calls": 1,
+      "sha256": "5e28ae389b2e391915a8b41dec083e0c79d3ef03ab7ac41a9418dcd14a1d63e4"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "43204a28ada5f1a0c24e29c8de719cbe57669680e2fcd0e070006e48ad5c197a"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "f4031a9ea2e2c36a8a506e56cc3c69385ac69d306806c52e8cc2e60f4dad9fa0"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "7a5742ebca1331c4fca8fadf9bfe6d2775739cf1c43a952e1c040a5876ad85f0"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "302091f4e6e78ba588f30c313bad62f9be9fc99f3f51649292249c9629f80f33"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "ea2bb32e47f0d01aae953357abd5ec1ecfc954b914624e522ab0bcd90f270082"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "72a034869f0008ba7b8c81238ffbc9f6dfa8349a7915c64138d01bc108df342d"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "5ebebf1010b974f5255640cc656b962381dcb5cb96fbe476d2fb6876bf6ebf4c"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "e7d36db442f3778695247545dc9261c5fe3d73a1bc9b12dc362a600bd4d827fe"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "24517f9e99a7b1e1cc9f83ae7b9bcf4eed1833660d3c303c4ec66446d0713504"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "56766493b5ebfbcff7de759439f8eafc29a5d811b44c04385f3e8213c3380484"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "10056341cdce46f30a23907b703819f9e445f6c66dd2315c73c21c3c8d6763c1"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "bf8243cfdc8a3315afff563c66c3f39bbb2ea9e0cfa5433c48e673a645cf368f"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "49e68338ea21a902844ad3f2789023279c78097c879423e5e68789ec7fc649f9"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "11d96f1edd40f3c6a89c61097eb2e2c3aee3d5a6bac60fb7b42cfc4a0b966992"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "a14a671c3e8e83ecc0046ed993f20baa59955121aab4f9b6d53597ca2dfa1fa3"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0.0.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "b987a59303ee242797a36b69a3aefc12335cb3075d850686ab66a28b93b4a40f"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "24052fb644a493a31ee71f44c0dea6ce0af19df754a855fa9728eaba96f4a25f"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round71_cli_3f7c7d432ea0ca58\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_terminal_mip.gurobi.log",
+      "calls": 1,
+      "sha256": "873ea9ecbf76457fdb40dac45f676446969d56e6a521a79e9f7dd6b684717522"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "dd5e9cb62b0c138735da16aae28f91eeae4aee05f1b30b67ae3db3af2ac84714"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "938c083fffa0c81d51c978b9cc4f9959718d3de4e8091809ea65e63538693667"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "6aa9d386e8c2881203bd5bf5de70c33ef5a6be1022b06d47c7f8fe05478a592a"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "96fe5da2aa3bab39f05228312797acf7c495021fae67a7837d9982543eb8ca3d"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "2afb7e8856b8cbc6ab1bf0158ee51af282956fbc899526dd8ef79778930d5be4"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "79a123f47bb13472fbda658e315c3a882058b28277a3e81aacf03e9b1c89345d"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "1cae7812ab5931f187359b45c41d1776fbdb063360f7e764d3dcfaf8516150b0"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "fee1bf65d581526ad08427d2d756bb3dc37e838de3260e519cdadbd574e7d950"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "2b311a405dfa1d2380d0ef34681f5f304c61daefcd55d0756e104b3fbd750f07"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "8182d4af546c908d2ca772cf0d07ee4b467d67cadbf945b1fb885d7c657fedbc"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "18ff7927e4450e1f9cec7edfd66c9c0e99a945d75b982c956a00fda252be8fbe"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "d2273031cbd4ee6323dbcf4bd89661848cf0eacd91e909aeaa450f25309ee233"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "f93d86a6ab9c0f945bbd37fba244bd6d61803fb0fe0743988a519cf13eea2c3c"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "e750f03ead3d81fbb2ad2747a94da33bbd919e202e52e74cb236fc2f3d6cf2e3"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "5da8bdf4885e635d891a362bfe7b26886ddae77f360e4eef0cb3036d95ab043b"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0.0.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "d26eda6c8b296949ba8c75f68dc769073ef07b74446ac383d9bf7cf82802eb5b"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "485ec43344b77e2f7227673b07bf751857c833d9d0cba39868f434d580cf6bca"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_cli_bc7ee5964308a5f3\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_terminal_mip.gurobi.log",
+      "calls": 1,
+      "sha256": "b03ca5c58fccf72c5ffb4ffc2437711c99b6466ae02933c00c0970fa7d729f70"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "269cce684779a8d6ab87e8214b81692c321a67f87cabfb2f15a51152603a3d17"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "7ec662c970c93e03341b45193537119d09099e68aaf4eafc137f9f9b9ff2cf70"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "8c9faa1a9c814a8b492af657aadf49e5d3d5cc3cb21b913b39bb12a6755b8419"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "af749fcae36c44591ff74bace30a3b37d18e4f8df761f2e9cafd14c00c913b78"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "4fad0cc8668786d7a1727410d0f8cffd89e8f5d47da09a3a7ce942c04024336a"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "e3acb60626632728ec65167fea6c547fc09de130112e8c1c382003760ebf07c2"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "588f1d8ec45f6881d237d4a1eb7962796c66ef6595c3799885f2e80f14cb6991"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "cce77324a8dde56365fa3d1bfc3a8e1d64199d3527e70c2fb66a25427b7797b4"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "47d2cf59d95da4b538eeb6cbabf44c9dda5ed829cc9b6fe4699d8596049cc897"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "eec4199dc4d22c0754eea6d80054fd2fe8a90e28dfa3544aec8c816132725efa"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "4e2a1e0d2aa0fe2e3bfafb5162b68eab9e0c82dd24495c186e0116224f9f3851"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "22dd2cbc9db46d59f6e2d9000345a42021e353a3ee4040b3f94ba8084a2b26c0"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "b09500f549c3ce619c6810ec9ab3af2b5f7a1bbecd6a6b6deb764fa5d92555f3"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "3d895b10395bb096904514dabea06459ea60b05ca692a677bc8a59b2effcdad9"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "2f26978f24c28d48d21f5731ef05886fa78f2511f53cf48894c48647034b016f"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0.0.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "8e82e7e03e0cb95f6172c6c047ffa779289543274005a167a9e31b6e3abde133"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "c264cd9cd143cee1bc6bbfbf000e5343285f5c1611faed83b1208a27933ecbbc"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round73_seed_cli_fb291c8c5ed08ea3\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_terminal_mip.gurobi.log",
+      "calls": 1,
+      "sha256": "11a4ca9b69d3d2eda00d5ca9af2efa52bee547e94f16bf3340610abc528f793d"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "3c8e7e9ef45c0e1ed06b719c0f572afb0253c1bb24bd85ec1fef710f8a1a8a28"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "de68046a63d323899bbc67e0d7e80b35e36e5e9f1fe6c4fb936b05e67b962bd4"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "0fa7c4936531ef7b0611d5652d7603eba93013a8c0e5ff169d318a6f67f6de7e"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "afc81508216814c880c5b1748f2933bd898485a4c8657deccdb859cd2fb1f2ff"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "dd02055d82944549867d01a2133b292358d652893b26e218ca917cffa7edc5d8"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "ba6399339728456d6d7ef6554fee93f783057c8f14614d112671986ea2c54afc"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "e0d0e3b7871d576fda80e4401495ebec197acbe5feed255a66df51c5aec0921e"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "1db9f389650d57f3ecadd8b7e1d401a333fe8023397bd21a9b594ee865a6cf6c"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "6032433603e25736a7d586491df5469845754d72becd5caf7bd834c89628c790"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "785a2d018ba4a80a6fda13ff7f77c83d798a6065949d6d4bbb9744aadbbe79a7"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "d32efce9747bba98cfeac181c8e58d4ff5bc13ec78ff6a2e736f6883927a4cd6"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "2bab8322471b5454ba516551f3f900e0210d174566e3e30f9f36bd59a751279e"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "0d346b879c56515c4467fada54f86e4fa8dd8f9c42672073fc32d413ee99206c"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "111da40a10195f9f79b315c1cd9ba0b69f408a6f685bb3b19aa7bbc8a5370b5b"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "dbf543fc3fc8b5e69009b9c55cc2272b38ea2116cea0b58c71a1c0b38fd20840"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "70342634dd75f40089eb67e1cc2bf9cd2378d05a5c6c58301622fc228d7d4985"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "958fce44c5cd826ac92fadca1601e8b9851f44852b0850b57a570e32068dfdb2"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\JDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_terminal_mip.gurobi.log",
+      "calls": 1,
+      "sha256": "240996ac8f3761fb261e4634a68222da51ae0780612736581a5853f45c6e57df"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "bc2d313ef8922dfa1aa852f2998b2a93f386f3698cc6feaa6ba30f7521a4806d"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "adba2842c3fe1d07a4aa6586c2a576331875bff4f185094fc6a5ac673063565c"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "0fb8972f8d13b12e1e299f608a1d0db19c3694721417b517f5a89b889ea3030b"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "4cf95ea9ae9c1629ad8f7063bc84d890e3210225a217b934d3b5c5a2e9d7b179"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "c286644817e66f822f78954a6b3e5755985b95ee115dbd3ad83fcb4b0ea705e8"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "19ffbb260193e2464111047e9b317bde9fbcdc651f96f34d88e767fb0cd033b6"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "4aeccfdbe39d4cf939dbb0e567a92d07be16ed432ef07b2f3b7c44621b49aa33"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "6f1c9ca3e29655eada4f3fa474a48f89678491db42acbf533b7ee1019aa2d41c"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "8e7a66c329eb865736c9816b47348201f03cd241fbcd4da12bf3059dfd8994a3"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "fc0072f439b62d29e8e845def13794d81e46e1ee476ebabd5519c2e7ae5ab17f"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "a6d7e4b27302415cafd3919fec71783438567592c7f8da92f657ceb2defd68d9"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "3ae4f3e2810eee2a198ee7c13d3658b7b30691ce8eb80d10fd09486cc0395fcf"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "ff7c14be2c426673cfe957adb503f9e4c08e229aa943cd2ca7549a95732fb9a5"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "f7329ff94da260f934bdf4525b934563a8d87dff76450715dcd2299e17875a21"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "977e3113fb9fed003319607bb093ebf44daa720fb6a5ac5d6dbcd4a547b512bc"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "4c8a2bd26bdb300b8b0edc3918eb792435f351adcb991ca7b927263d1f552aa9"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "996f99d6ffb084747c89f6e04ea88654f35bbfabdccce1627c9677c219ef85ed"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round75_quantity_cli_914f678251ff75ed\\QDS-X\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_terminal_mip.gurobi.log",
+      "calls": 1,
+      "sha256": "b20fdaf7ac726635a689a41d59df32f8068d9c71013475f69a9a3f6779ab5c61"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "ec5a225b1a94eb31f92edfccc0098fb698346eaad8141a25ec704d9b3c48ac30"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "7bb5bb15db42e56602554dbf200c95ec820fdf14d46f8aba324e4288c1afb081"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "1130641ebb8c6823f7e6d358764aee5c3998edfbd4c168342a86b1ecf3ff6710"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "f88e7d117d00a10029665ddd6d9242e55fa57371070a76f2781bb2d2888f3cba"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "63b4b7e301669b7bf640fe8f8910577cb9a23a841356de84cc72f946997a4ffd"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "db6700167615e2c3e8ff34852231fc68e6636400de101b261e057cca52e8048a"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "07d7de890190474d9a0c48001efaaac9cc236f7b3f2689574412f6a6080458ed"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "d6b813e15911c4844325e3e02029593907ab427e194260d988d0b2ac9b73ab5e"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "952dc58bd5ba5823803d88f4e5f049caa0083d692f5fe1516bf0e666ca65a9d4"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "82f1c8fc123610996eee371d2082108720a988e057c781b2c61459597aa422e7"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "e6c17a1ba306e81263de5da439429fe5268cfc430c53ebdaaa93c9eedb4936d1"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "6242a66f03bc529ad3a03850b0f28665231cb8072a35d783babd547e7ce56c76"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "57897563474d2658145be8c9c2d025d448b44771e6549269c18c9e65286882a0"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "7f9ca38ee292a8c290a79dccf1f77c25fd08ccc2cce522e674a692556b5bae62"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "3911c167607ab5d455f2a36e349f5eade7db68505cc55d26c4da3a9f91d023c8"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "925e2fe461c81b96857dd8a5104b74433fece80341ad2713fedd5fccfd2a1a38"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "1d69d41ae36514c0e7c049b91a86d5cfcad7fe4b78dd9af0f3ce897f1fc9bcbd"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round76_closure_cli_31ecc1cafd979a4f\\JDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_terminal_mip.gurobi.log",
+      "calls": 1,
+      "sha256": "8b7fec77e29116d30f2b1c1ce75123ce6e646bfaa480b7670f76639bde44634f"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "b065c1c11fb29174ad09ad54f9d494ce92199687352e3533e94b8934c88839ab"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "cf4c2c99d65938d18cdfad57503c5d46c924680f237c009ea38c04c73185c756"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "2cd2106d2203b486413f7f2588a58b94d5e66577daf2fa7116868076204aa6d8"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "0798f059965990e3cf98a2c55c5e156644eed25651a8a5f93489dd4962999b65"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "28c1417cc56ddd788d9259404dcef68027100c95f70b9add71d462e0c2a636ed"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "d7c8ee0314a12a83b44b1119bbb7872800e740ec49ac636f6d069c133053b6c8"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "70b60ab1f449b6a6617cb3010c9eb828cb2e9e24aa085315b260f73c3341db82"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "2a3527172d623b34f8da68c1c215c7125e1818e0c9405ff28f80df43f3dc7cec"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "67b2dd7829108860d732a60118e0abaf682aeb0e039881191c17386152996fd8"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "dfaccad4da499cc7efc942bcb59f1d9b482b1eb2fed7adb3c09099103c1a0560"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "14e53fecd738eee2e10a591d39ce8b7ba984d5468dd39dae2b7e2701675cf4b8"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "8305958126fa2c4817cff6c85c106327c9f299abc4a1de795c80618fccf83eab"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "0466364f40131c890d815d4de03a8a5ec6cb6aa26c4c0a7ff2ecc552435f024a"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "e4a66b590264766d197d9069e64b626dcb5ba292cf1077d6419085f64760df89"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "3ad05bd2f8c0de1a5ec4458983f2b0453dd4a8b8d251cb80dfca5817da95696c"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.1.0_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "753721791ceeb2388a97fcd70f6d57c165ab59f35f0676a97e80d70ab7bfc184"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_lp.gurobi.log",
+      "calls": 1,
+      "sha256": "88facd0ebfa6edbc3af6cbfeade3a39c9d693d913544c9d0768777f0271e670e"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-round66\\build\\round78\\v1\\round78_balanced_cli_d088884eac14aae7\\BDS-C\\external\\native_logs\\L0.1.0.1.0.0.0.1.1_terminal_mip.gurobi.log",
+      "calls": 1,
+      "sha256": "e74fa6f9cadc8c70438ea2e687c580b2bf933ce8e5dcd63afef7dbf0244713f8"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\exactebrp_round68_native_start_2894541856764800\\ineligible.log",
+      "calls": 1,
+      "sha256": "486c96e45915f9312eb1ddc2b47b59f1513fabce2271ed45e2f737da02185109"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\exactebrp_round68_native_start_2894541856764800\\lp.log",
+      "calls": 1,
+      "sha256": "432dc9465e70bf3fe1cd69638f06a0d6ef5ee8724a0d8234862c8cf4e6fb3b7a"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\exactebrp_round68_native_start_2894541856764800\\mip.log",
+      "calls": 1,
+      "sha256": "0ef189b1e9016d8a5bf110ef178adef0e39009e1adcfe3c6e93bcf29cf034876"
+    }
+  ],
+  "failed_cli": [],
+  "oracle": "Round78 balanced structural: 7 exhaustive placement cases and actual mixed neutral/strict controller; artifacts=E:/codes/ExactEBRP-round66/build/round78/v1/round78_structural_cc35ffb70999e087",
+  "full_qualification_wall_seconds": 103.90591820003465,
+  "qualification_sha256": "a057b93e745e4a4d9fc2558ba413f11d24e7ff9d6f82c7598a4478a2bffc067f",
+  "audit_script_sha256": "c6a2833d05baa29c72950090fb5132bd80bfe9f85078b86151d2564b28091fb7",
+  "offline_audit_seconds": 0.04094199975952506
+}

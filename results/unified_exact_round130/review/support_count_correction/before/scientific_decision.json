@@ -1,0 +1,178 @@
+{
+  "UTC": "2026-10-22T13:04:32.573597+00:00",
+  "execution": "COMPLETE",
+  "tag": "SELECTED_MS2_WITH_SCOPED_OR_MIXED_ATTRIBUTION",
+  "version_axis": "S2/MS2 is the sole adopted method; predecessor numbers retain original labels; repository default unchanged",
+  "axes": {
+    "same_H_backend": {
+      "records": [
+        {
+          "id": "UC-B20-B",
+          "status": "REPEATED_DIRECT_INCREMENT",
+          "attribution_eligible": true,
+          "exposure": "complete matched H and both backends",
+          "seed_observations": [
+            {
+              "seed": 0,
+              "classification": "BOTH_CERTIFIED",
+              "direction": "Win",
+              "materiality": "LEFT_MATERIALLY_FASTER",
+              "left_minus_right_seconds": -233.71554430003744,
+              "threshold": 10.0
+            },
+            {
+              "seed": 1,
+              "classification": "BOTH_CERTIFIED",
+              "direction": "Win",
+              "materiality": "LEFT_MATERIALLY_FASTER",
+              "left_minus_right_seconds": -123.61303300003055,
+              "threshold": 10.0
+            }
+          ]
+        },
+        {
+          "id": "UC-C20-U",
+          "status": "REPEATED_DIRECT_INCREMENT",
+          "attribution_eligible": true,
+          "exposure": "complete matched H and both backends",
+          "seed_observations": [
+            {
+              "seed": 0,
+              "classification": "LEFT_ONLY_CERTIFIED",
+              "direction": "Win",
+              "materiality": null,
+              "left_minus_right_seconds": null,
+              "threshold": null
+            },
+            {
+              "seed": 1,
+              "classification": "LEFT_ONLY_CERTIFIED",
+              "direction": "Win",
+              "materiality": null,
+              "left_minus_right_seconds": null,
+              "threshold": null
+            }
+          ]
+        },
+        {
+          "id": "UC-B30-S",
+          "status": "UNDETERMINED",
+          "attribution_eligible": true,
+          "exposure": "complete matched H and both backends",
+          "seed_observations": [
+            {
+              "seed": 0,
+              "classification": "BOTH_OPEN",
+              "direction": "UNDETERMINED",
+              "materiality": null,
+              "left_minus_right_seconds": null,
+              "threshold": null
+            },
+            {
+              "seed": 1,
+              "classification": "BOTH_OPEN",
+              "direction": "UNDETERMINED",
+              "materiality": null,
+              "left_minus_right_seconds": null,
+              "threshold": null
+            }
+          ]
+        }
+      ],
+      "repeated_direct_roles": [
+        "UC-B20-B",
+        "UC-C20-U"
+      ]
+    },
+    "outer_control": {
+      "records": [
+        {
+          "id": "UC-B20-B",
+          "status": "CLOSE_AT_BOTH_SEEDS",
+          "attribution_eligible": true,
+          "exposure": "same effective root; actual split/target package exposed",
+          "seed_observations": [
+            {
+              "seed": 0,
+              "classification": "BOTH_CERTIFIED",
+              "direction": "Lose",
+              "materiality": "TIME_CLOSE",
+              "left_minus_right_seconds": 2.16093169990927,
+              "threshold": 10.0
+            },
+            {
+              "seed": 1,
+              "classification": "BOTH_CERTIFIED",
+              "direction": "Lose",
+              "materiality": "TIME_CLOSE",
+              "left_minus_right_seconds": 1.9185894986148924,
+              "threshold": 10.0
+            }
+          ]
+        },
+        {
+          "id": "UC-C20-U",
+          "status": "CLOSE_AT_BOTH_SEEDS",
+          "attribution_eligible": false,
+          "exposure": "same-root or actual split/target exposure insufficient",
+          "seed_observations": [
+            {
+              "seed": 0,
+              "classification": "BOTH_CERTIFIED",
+              "direction": "Win",
+              "materiality": "TIME_CLOSE",
+              "left_minus_right_seconds": -2.1262209999840707,
+              "threshold": 55.470934439997656
+            },
+            {
+              "seed": 1,
+              "classification": "BOTH_CERTIFIED",
+              "direction": "Lose",
+              "materiality": "TIME_CLOSE",
+              "left_minus_right_seconds": 0.8812120191287249,
+              "threshold": 48.093889480002694
+            }
+          ]
+        },
+        {
+          "id": "UC-B30-S",
+          "status": "UNDETERMINED",
+          "attribution_eligible": false,
+          "exposure": "same-root or actual split/target exposure insufficient",
+          "seed_observations": [
+            {
+              "seed": 0,
+              "classification": "BOTH_OPEN",
+              "direction": "UNDETERMINED",
+              "materiality": null,
+              "left_minus_right_seconds": null,
+              "threshold": null
+            },
+            {
+              "seed": 1,
+              "classification": "BOTH_OPEN",
+              "direction": "UNDETERMINED",
+              "materiality": null,
+              "left_minus_right_seconds": null,
+              "threshold": null
+            }
+          ]
+        }
+      ],
+      "repeated_direct_roles": []
+    }
+  },
+  "reverse_reference_roles": [],
+  "claim_scope_assessment": {
+    "UTC": "2026-10-22T13:04:32.155370+00:00",
+    "all_reverse_roles_considered": true,
+    "reverse_roles": [],
+    "proof_or_identity_issue": false,
+    "reference_exposes_core_claim_gap": false,
+    "reason": "The adopted S2 has repeated direct same-H backend support: on B20 it saves 233.71554430003744 and 123.61303300003055 seconds against independently paid PS, and on C20 it certifies at both Seeds while PS remains open. The outer package has no repeated certificate or material time increment in this panel. B20 exposes three natural splits and one reached partial target at each Seed, but S2R certifies in 1.3975899000652134 and 1.5858365014428273 seconds versus S2 in 3.5585215999744833 and 3.5044260000577196. C20 has no split/target exposure; its S2/S2R differences are also time-close. All four both-certified S2/S2R observations are TIME_CLOSE; their strict three Lose and one Win directions remain. All four methods stay open on B30 at both Seeds. No repeated material reverse reference role or proof/identity problem is observed. Retain S2 as the sole paper method and narrow decomposition-speed claims to this limited evidence; no additional experiment is required or authorized.",
+    "abstract_result": "Relative to independently paid same-H PS, S2 is materially faster on B20 and certifies C20 while PS remains open at both Seeds. All four both-certified S2/S2R comparisons are time-close; B20's three splits per Seed provide no demonstrated net speed gain. All methods remain open on B30. These observations support a backend increment with scoped outer-control attribution.",
+    "discussion_result": "S2 is retained as the sole proposed method. On these already-known roles, its full backend and representation package adds direct gains after each method pays complete H. Net multi-leaf runtime gain is not demonstrated: B20's H already attains the final objective and the single-root S2R certifies quickly, C20 has no split/target exposure, and B30 remains open. The empirical contribution is therefore complete integration with limited direct certification evidence; individual runtime necessity and larger-instance stability remain unestablished. The fixed attribution study ends here."
+  },
+  "R129_candidate_pass_not_reconsidered": true,
+  "no_new_method_or_Seed_or_role_or_budget_authorized": true
+}

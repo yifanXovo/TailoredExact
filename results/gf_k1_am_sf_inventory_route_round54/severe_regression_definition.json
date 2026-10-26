@@ -1,0 +1,14 @@
+{
+  "schema": "round54-severe-regression-definition-v1",
+  "exact_rows": {
+    "work": "candidate/baseline >1.50 and delta >50",
+    "time": "candidate/baseline >1.50 and delta >60 seconds"
+  },
+  "capped_rows_any": [
+    "baseline certifies and candidate does not",
+    "GI ratio >1.50 and absolute increase >=0.05",
+    "gap ratio >1.50 and absolute increase >=0.05"
+  ],
+  "root_closure_invalid": "candidate row invalid; F0 fallback is correctness-only",
+  "generalization_v50_material_worsening": "same capped-row severe criteria"
+}

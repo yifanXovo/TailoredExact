@@ -1,0 +1,5 @@
+campaign,role,reference,candidate,both_certified,reference_certificate,candidate_certificate,reference_full_seconds,candidate_full_seconds,certified_time_delta,reference_gap,candidate_gap,inference
+isolation01,F2,ENS-C,FLEET-SHELL,True,True,True,571.1720000000059,549.875,-21.297000000005937,3.3306690738754696e-16,4.773959005888173e-15,Combined parameter/execution effects and changed native paths; no same-point causal decomposition
+isolation01,F2,FLEET-SHELL,FLEET-SHADOW,True,True,True,549.875,601.4379999999946,51.562999999994645,4.773959005888173e-15,4.773959005888173e-15,Combined parameter/execution effects and changed native paths; no same-point causal decomposition
+isolation01,F2,FLEET-SHADOW,FLEET-SUBMIT,False,True,False,601.4379999999946,1197.4070000000065,,4.773959005888173e-15,0.010494181311227258,Combined parameter/execution effects and changed native paths; no same-point causal decomposition
+isolation01,F2,FLEET-SUBMIT,FLEET-ROOT,False,False,True,1197.4070000000065,864.4679999999935,,0.010494181311227258,1.1102230246251565e-15,Combined parameter/execution effects and changed native paths; no same-point causal decomposition

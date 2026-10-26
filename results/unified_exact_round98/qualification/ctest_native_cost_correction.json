@@ -1,0 +1,28 @@
+{
+  "records": [
+    {
+      "label": "ctest01",
+      "receipt_sha256": "bc5ffe43adf53b9828dda7e57bc525f030588fc3316e09b7afa42938fc05bc97",
+      "stdout_sha256": "a815bd7ae06613607e29e8f0a8eceec377aedccf57d5bd5f25fdddd2365bf53d",
+      "optimizer_calls": 3
+    },
+    {
+      "label": "ctest02",
+      "receipt_sha256": "b8bcf94d4f6239a64ccb4b4ca51ced0eed33401fdfb4f62d95ce53cb6fe36b54",
+      "stdout_sha256": "207e42603b0b84fb52b2057092600db230f682cb1daaf693e2572486b0e6282e",
+      "optimizer_calls": 3
+    },
+    {
+      "label": "ctest_v2",
+      "receipt_sha256": "568bb746d1f32563590660162fbaf04d99594d15a17f5fef39c3a4c26d038866",
+      "stdout_sha256": "d720cb69b0197abe58653e1ca07308ca2ecbad35f55fb82bfeaf431ac4abead3",
+      "optimizer_calls": 3
+    }
+  ],
+  "actual_starts": 3,
+  "optimizer_calls": 9,
+  "outer_seconds": 5.276381500530988,
+  "evidence": "Round68StartTests passed in all three CTest logs; native fixture asserts backend stats optimize_count==3 after LP/MIP/ineligible-Start MIP",
+  "source_sha256": "4e20e8168685afb9e2f6d71e5f2884be063c635ad3103fa7781d1a796dccb554",
+  "original_receipts_preserved": true
+}

@@ -1,0 +1,41 @@
+{
+  "role": {
+    "id": "F5",
+    "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+    "family": "synthetic",
+    "geography": "perturbed_grid",
+    "inventory": "paired_shortage",
+    "V": 50,
+    "M": 4,
+    "Q": 30,
+    "complete_Q_vector": [
+      30,
+      30,
+      30,
+      30
+    ],
+    "T_seconds": 7200,
+    "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+    "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+    "source_manifest": "results/unified_exact_round86/protocol.json",
+    "method_order": [],
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "cap_seconds": 7200,
+    "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+    "Q_vector": [
+      30,
+      30,
+      30,
+      30
+    ]
+  },
+  "kind": "native",
+  "cap_seconds": 600.0,
+  "source": "results\\unified_exact_round102\\long_tail01\\raw\\02_F5_J-SUBMIT\\external\\models\\L0.0_epoch_0_generation_2.lp",
+  "source_sha256": "6493bd9b60e94124f4d43bbd55d0a20a5650e65867a114db78d1386815ac9f19",
+  "point_source": "results\\unified_exact_round102\\long_tail01\\raw\\02_F5_J-SUBMIT\\external\\native_logs\\L0.0_terminal_mip.gurobi.log.round102.point.json",
+  "mechanism": "restricted infinity-distance LP, complete C++ witness support, exact-dyadic certificates",
+  "production": false
+}

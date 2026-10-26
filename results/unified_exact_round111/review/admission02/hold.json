@@ -1,0 +1,6 @@
+{
+  "decision": "HOLD",
+  "error": "Traceback (most recent call last):\n  File \"E:\\codes\\ExactEBRP-round111\\results\\unified_exact_round111\\review\\round111_independent_review.py\", line 520, in main\n    audit = run(a,args.mode,args.pe,args.dll,args.fixture_root or root)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-round111\\results\\unified_exact_round111\\review\\round111_independent_review.py\", line 458, in run\n    value['budget'] = fees(a,9,12600+360)\n                      ^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-round111\\results\\unified_exact_round111\\review\\round111_independent_review.py\", line 269, in fees\n    records.append(dict(label=path.parent.name,**receipt,qualification=qualification,\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: dict() got multiple values for keyword argument 'qualification'\n",
+  "Optimize": 0,
+  "native_environment": 0
+}

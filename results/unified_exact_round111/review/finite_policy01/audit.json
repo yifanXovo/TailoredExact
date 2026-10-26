@@ -1,0 +1,200 @@
+{
+  "decision": "ACCEPT_FINITE_CURRENT_NUMERICAL_RETURN_SCOPE_POLICY",
+  "actual_roles": [
+    15,
+    17,
+    25,
+    26
+  ],
+  "checks": [
+    {
+      "number": 15,
+      "test": "actual signed recovery and native scope/return dispositions",
+      "accepted": true
+    },
+    {
+      "number": 15,
+      "test": "wrong current arm identity",
+      "correctly_rejected": true
+    },
+    {
+      "number": 15,
+      "test": "same tuple with different model bytes",
+      "correctly_rejected": true
+    },
+    {
+      "number": 15,
+      "test": "retain one damaged native lower claim",
+      "correctly_rejected": true
+    },
+    {
+      "number": 15,
+      "test": "retain a necessary damaged derived closure",
+      "correctly_rejected": true
+    },
+    {
+      "number": 15,
+      "test": "infer missing-event flag from rc0 alone",
+      "correctly_rejected": true
+    },
+    {
+      "number": 15,
+      "test": "fabricate exact clock from lower interval endpoint",
+      "correctly_rejected": true
+    },
+    {
+      "number": 15,
+      "test": "change own floor certification with same physical U",
+      "correctly_rejected": true
+    },
+    {
+      "number": 17,
+      "test": "actual signed recovery and native scope/return dispositions",
+      "accepted": true
+    },
+    {
+      "number": 17,
+      "test": "wrong current arm identity",
+      "correctly_rejected": true
+    },
+    {
+      "number": 17,
+      "test": "same tuple with different model bytes",
+      "correctly_rejected": true
+    },
+    {
+      "number": 17,
+      "test": "retain one damaged native lower claim",
+      "correctly_rejected": true
+    },
+    {
+      "number": 17,
+      "test": "retain a necessary damaged derived closure",
+      "correctly_rejected": true
+    },
+    {
+      "number": 17,
+      "test": "infer missing-event flag from rc0 alone",
+      "correctly_rejected": true
+    },
+    {
+      "number": 17,
+      "test": "fabricate exact clock from lower interval endpoint",
+      "correctly_rejected": true
+    },
+    {
+      "number": 17,
+      "test": "change own floor certification with same physical U",
+      "correctly_rejected": true
+    },
+    {
+      "number": 25,
+      "test": "actual signed recovery and native scope/return dispositions",
+      "accepted": true
+    },
+    {
+      "number": 25,
+      "test": "wrong current arm identity",
+      "correctly_rejected": true
+    },
+    {
+      "number": 25,
+      "test": "same tuple with different model bytes",
+      "correctly_rejected": true
+    },
+    {
+      "number": 25,
+      "test": "retain one damaged native lower claim",
+      "correctly_rejected": true
+    },
+    {
+      "number": 25,
+      "test": "retain a necessary damaged derived closure",
+      "correctly_rejected": true
+    },
+    {
+      "number": 25,
+      "test": "infer missing-event flag from rc0 alone",
+      "correctly_rejected": true
+    },
+    {
+      "number": 25,
+      "test": "fabricate exact clock from lower interval endpoint",
+      "correctly_rejected": true
+    },
+    {
+      "number": 25,
+      "test": "change own floor certification with same physical U",
+      "correctly_rejected": true
+    },
+    {
+      "number": 25,
+      "test": "discard positive-G right LP with damaged MIP",
+      "correctly_rejected": true
+    },
+    {
+      "number": 25,
+      "test": "use root zero witness against positive-G damaged domain",
+      "correctly_rejected": true
+    },
+    {
+      "number": 26,
+      "test": "actual signed recovery and native scope/return dispositions",
+      "accepted": true
+    },
+    {
+      "number": 26,
+      "test": "wrong current arm identity",
+      "correctly_rejected": true
+    },
+    {
+      "number": 26,
+      "test": "same tuple with different model bytes",
+      "correctly_rejected": true
+    },
+    {
+      "number": 26,
+      "test": "retain one damaged native lower claim",
+      "correctly_rejected": true
+    },
+    {
+      "number": 26,
+      "test": "retain a necessary damaged derived closure",
+      "correctly_rejected": true
+    },
+    {
+      "number": 26,
+      "test": "infer missing-event flag from rc0 alone",
+      "correctly_rejected": true
+    },
+    {
+      "number": 26,
+      "test": "fabricate exact clock from lower interval endpoint",
+      "correctly_rejected": true
+    },
+    {
+      "number": 26,
+      "test": "change own floor certification with same physical U",
+      "correctly_rejected": true
+    }
+  ],
+  "retained_input_bindings": {
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_15.json": "a01cd2d258b36048e303dc354eed77009c8f35424f2af003e2bbd900cabdc5fa",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_15_signed_audit.json": "cf61c8b28105574d2e78069d9a6f0b0e0bada1d9236f44beabe5a2f4a33cca3b",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_17.json": "29886af24b6081a1dbdb086e2e1c6c4eaee3ab119b75f9a9ce079dc7e85857d0",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_17_signed_audit.json": "bcb18e57e767844e0cd3a8ebcf1c589723ff690f31dc88ba2bd155bb0c7120c6",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_25.json": "8caf12658dead7e49fcecfc21863fc60b511efeea3306e3946df361db8cbcd28",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_25_signed_audit.json": "09e2b8e9616cbe0848516ec1bf1e84d4ba9b2c17e99bd8580abbccf111673314",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_26.json": "d931f7b03104db4ee8f07e2bec919649a8fc41ba272ffa681dec924c80ea3930",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_26_signed_audit.json": "f8272de10d561bbda93debdd6064265267a11aa66c1a759ee3ccdac552283c52"
+  },
+  "actual_scope_return_fact_SHA": "fdf1e5d845957530d40c404e0829d3ed41ed814fe806db110faebf61b28f6d0e",
+  "source_old_root": "E:\\codes\\ExactEBRP-round110",
+  "repeated_fraction_or_full_matrix_math": false,
+  "old_raw_modified": false,
+  "future_calls_need_their_own_current_proof": true,
+  "no_tuple_recovery_authority": true,
+  "Optimize": 0,
+  "native_environment": 0,
+  "source_SHA": "0225328685f7bc1d0508e138a614d4cb848fa9eb06757e084f7f56a01ccd2cef"
+}

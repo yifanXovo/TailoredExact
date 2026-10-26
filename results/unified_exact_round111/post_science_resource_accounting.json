@@ -1,0 +1,92 @@
+{
+  "scientific_payload_commit": "b92b27c895043af669e64ae32ef0b232262c3244",
+  "original_resource_accounting_SHA": "b8af092f20971c9e8469cad7b0810e70e0c0d387d096969309e9465d2c6931e7",
+  "original_cutoff_unix": 1791633259.8791227,
+  "addendum_cutoff_unix": 1791634503.2870805,
+  "research": {
+    "paid_starts": 15,
+    "paid_outer_seconds": 11299.309934754972,
+    "remaining_starts": 9,
+    "remaining_outer_seconds": 6700.690065245028,
+    "qualification_starts": 6,
+    "qualification_seconds": 583.7201481292723,
+    "unclosed": []
+  },
+  "additional_engineering_receipts": [
+    {
+      "label": "current_report02",
+      "seconds": 0.10547339997719973,
+      "exit_code": 0,
+      "receipt_SHA": "b1341601a707074913c9c9c75250aa86cdbaa11ab3a2c7d5f87312faf16912c8",
+      "Optimize": 0,
+      "native_processes": 0
+    },
+    {
+      "label": "public_export01",
+      "seconds": 0.7669991001021117,
+      "exit_code": 0,
+      "receipt_SHA": "3f2d0d838d70a47c8b6badee0badbc994ce268dd266761369dfabdfc3e5e0c1d",
+      "Optimize": 0,
+      "native_processes": 0
+    },
+    {
+      "label": "public_pack01",
+      "seconds": 49.88148470001761,
+      "exit_code": 0,
+      "receipt_SHA": "ea9092b7fa41794c74ac5c5e2da6763d699dc4d28eeaf2697a6bf39ef003081e",
+      "Optimize": 0,
+      "native_processes": 0
+    },
+    {
+      "label": "public_rebuild01",
+      "seconds": 144.9745099999709,
+      "exit_code": 0,
+      "receipt_SHA": "6a5bc35b32d4fe0a632f36a30d4c9e17d962bacdde7df8bbb535384d9dd2955b",
+      "Optimize": 0,
+      "native_processes": 0
+    },
+    {
+      "label": "public_restore01",
+      "seconds": 7.385820999974385,
+      "exit_code": 0,
+      "receipt_SHA": "b9928b7680e1eee3ffd7bbef93addf49d3af2390f2df3a5a41214eda18a5f993",
+      "Optimize": 0,
+      "native_processes": 0
+    },
+    {
+      "label": "independent_delivery01",
+      "seconds": 0.14359540003351867,
+      "exit_code": 0,
+      "receipt_SHA": "b4f8694ec76d979336f7053fbf4292e2255d6b2074060fb76acad7e5eba52920",
+      "Optimize": 0,
+      "native_processes": 0
+    }
+  ],
+  "additional_independent_receipts": [
+    {
+      "label": "final_raw01",
+      "seconds": 249.229168400052,
+      "exit_code": 0,
+      "receipt_SHA": "013d101765b4a7f959e216220b689bcff3691b2b6a9f0ab0c37be3774865234c",
+      "audit_SHA": "82d9ec0dfd9612de9064dc1df7b0220a795bc838fe90a1b658c3f1564d810348",
+      "cwd": "E:\\codes\\ExactEBRP-round111",
+      "Optimize": 0,
+      "native_environment": 0
+    },
+    {
+      "label": "public_raw01",
+      "seconds": 189.17361270007677,
+      "exit_code": 0,
+      "receipt_SHA": "2c95f2c2791fc6847b996a822ef66c1a68511f0e05a8105735da4d81d4efa42b",
+      "audit_SHA": "d5fc15c34232056633e01fdc686d513b656dd95581a19d502776f28d4a24cc18",
+      "cwd": "E:\\codes\\ExactEBRP-round111-public-restored01",
+      "Optimize": 0,
+      "native_environment": 0
+    }
+  ],
+  "total_measured_engineering_seconds_through_cutoff": 578.5208832001081,
+  "total_measured_independent_seconds_through_cutoff": 452.27492939995136,
+  "nested_internal_pack_restore_and_duplicated_copy_receipts_not_added": true,
+  "manual_and_unreceipted_interactive_time": "unknown",
+  "preparation_push_PR_remote_and_final_review_receipts_later": true
+}

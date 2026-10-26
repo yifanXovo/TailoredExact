@@ -1,0 +1,59 @@
+{
+  "schema": "round115-producer-dependencies-v2",
+  "edges": [
+    [
+      "t0/admission_identity",
+      "original_PE_input_H_models_Start_callbacks_controller"
+    ],
+    [
+      "original_PE_input_H_models_Start_callbacks_controller",
+      "native_return_cleanup_serialization_close"
+    ],
+    [
+      "native_return_cleanup_serialization_close",
+      "observer_drain_completion_observations_light_fleet_return_checks"
+    ],
+    [
+      "observer_drain_completion_observations_light_fleet_return_checks",
+      "producer_seal_closed_then_t_produce"
+    ],
+    [
+      "producer_seal_closed_then_t_produce",
+      "producer_receipt_and_complete_R114_offline_verification"
+    ],
+    [
+      "producer_receipt_and_complete_R114_offline_verification",
+      "verification_closeout_closed_then_t_verified"
+    ],
+    [
+      "verification_closeout_closed_then_t_verified",
+      "next_fixed_method"
+    ],
+    [
+      "all_four_verified",
+      "cohort_revocation_pairs_export_restore_review"
+    ]
+  ],
+  "production_decision_modules": [
+    "src/PhysicalWitnessValidation.cpp",
+    "src/NativeEvidenceJournal.cpp",
+    "src/MipStartMapping.cpp",
+    "src/Round112CompactStart.inc",
+    "src/ProcessPhaseLedger.cpp",
+    "src/GurobiBaseline.cpp",
+    "src/PaperExternalGiniTree.cpp",
+    "src/Evaluator.cpp"
+  ],
+  "retained_supervisor": "original R90 run_one through observations; full final fleet/normal return check before seal",
+  "moved_independent_functions": [
+    "round114_audit.journal",
+    "round114_audit.return_chain",
+    "round114_audit.independent",
+    "round114_audit.claims_for",
+    "round114_audit.rejected_mandatory",
+    "round113_audit.adapter",
+    "round114_ps.adapter"
+  ],
+  "no_verifier_to_producer_edge": true,
+  "no_cohort_to_online_edge": true
+}

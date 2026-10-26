@@ -1,0 +1,81 @@
+{
+  "schema": "round133-C-R3-D24-loaded-bits-v1",
+  "UTC": "2026-10-25T06:40:40.334884+00:00",
+  "status": "FROZEN_BEFORE_NATIVE_LOAD",
+  "purpose": "Close B3 layer3 serialization-to-engine-loading identity for the known D24 bound counterexample",
+  "hypothesis": "Python binary64 parsing of the serialized LP and the same-DLL LP reader may differ in coefficients, bounds, types or objective",
+  "cap_seconds": 120,
+  "budget_category": "C",
+  "subscope": "C-R3 targeted read-only model diagnosis; not a transfer of unused C-R1 allowance",
+  "model": "results/unified_exact_round133/dependencies/C/D24_call4_serialized.lp",
+  "model_SHA256": "a630251059be795777416ea1d63e6d8881c17baf1b75ccba776b5004a7294bc1",
+  "original_model_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round132\\results\\unified_exact_round132\\campaign\\D_group24\\raw\\02_X-35-U_S1_R1_S2\\external\\models\\L0_epoch_0_generation_1.lp",
+  "original_scope": "D_group24 / X-35-U / Seed1 / S2 / call4",
+  "python": "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+  "python_SHA256": "2204195cec25879507d958a8b6949add67091244b8b4da9cf3672f993548fa49",
+  "gurobipy_version": "13.0.2",
+  "gurobipy_init": "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Lib\\site-packages\\gurobipy\\__init__.py",
+  "gurobipy_init_SHA256": "5dfc4d680cff408b02e283f21fe4b8c2462985142b27f9d5de33489d7472bce3",
+  "DLL": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+  "DLL_SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "script": "scripts/round133_loaded_d24.py",
+  "script_SHA256": "a2b7deb8c68c4aabbdea5f6fe434dc3c1c44b2359601cdb2f278eb803f5e9937",
+  "helper_bindings": {
+    "scripts/round133_common.py": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+    "scripts/round99_gurobi_runtime.py": "4a7eb1b811bc326d8f6870946966ad8b88dcbfe040997b2101d11d08ff1cfb08"
+  },
+  "pure_parser": {
+    "path": "results/unified_exact_round133/review/directed_old_evidence_check.py",
+    "file_SHA256": "277badcbeeaad5e6ef982029e7261845724d960acbbb4b9d0d31fe294763f5b6",
+    "names": [
+      "number",
+      "expression",
+      "model"
+    ],
+    "definitions_SHA256": "b62bff04f641f4215a85bc4a0a1aee49f7a5725e316eed3d80d828635e0aa826",
+    "executes_old_checker_top_level": false
+  },
+  "exact_point_proof": {
+    "path": "results/unified_exact_round133/review/directed_old_evidence_receipt.json",
+    "SHA256": "c116ecf7792a13fd294864312e0c31540e0b1a4f8ebfb28fe743e1867dfa98be",
+    "completion_SHA256": "6fde8c357fa6c1736d4e7a514ef0a72941483e4768f3eeb72a856e357ed01d2f",
+    "rows": 22996,
+    "columns": 9391,
+    "exact_objective": "295153098392673137459/324518553658426726783156020576256",
+    "new_Fraction_row_check": false
+  },
+  "expected_model": {
+    "rows": 22996,
+    "columns": 9391,
+    "sense": 1,
+    "objective_constant": 0
+  },
+  "settings": {
+    "Threads": 1,
+    "Seed": 1,
+    "Presolve": -1,
+    "MIPFocus": 0,
+    "Cuts": -1,
+    "MIPGap": 0,
+    "MIPGapAbs": 0,
+    "FeasibilityTol": 1e-06,
+    "IntFeasTol": 1e-05,
+    "OptimalityTol": 1e-06
+  },
+  "comparison": "Name-bijection for rows/columns; every coefficient/RHS/bound/type/objective compared by IEEE binary64 bits; no duplicate named LP terms accepted",
+  "signed_zero_policy": "Record raw signed-zero bit differences; +0 and -0 denote the same exact rational linear-model value. Never claim raw bit identity if they differ.",
+  "admission_to_proof_transfer": "All nonzero binary64 fields and all types/names/dimensions identical; only a separately disclosed sign-of-zero normalization may be algebraically immaterial",
+  "mismatch_exit": "Preserve every delta and stop after this load; no Optimize, new parameters, second load or repeated point calculation",
+  "limitations": [
+    "This new initial-model load is not a snapshot of the historical retained LP/MIP state",
+    "No assertion about hidden presolve/cut/tree matrices or native internal pruning"
+  ],
+  "wording_correction": "Earlier D24 proof is serialized-binary64 matrix feasibility; engine-loaded equivalence is established only by this new comparison if it passes",
+  "destination": "results/unified_exact_round133/diagnostics/C_R3_D24_loaded_bits",
+  "native_Optimize_limit": 0,
+  "Start_limit": 0,
+  "compilation_limit": 0,
+  "point_recalculation_limit": 0,
+  "primary_agent_is_unique_meter_starter": true,
+  "preparation_outer_seconds": 0.026723399991169572
+}

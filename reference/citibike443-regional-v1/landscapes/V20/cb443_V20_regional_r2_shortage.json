@@ -1,0 +1,271 @@
+{
+  "V": 20,
+  "capacities": [
+    33,
+    51,
+    31,
+    31,
+    56,
+    49,
+    31,
+    19,
+    27,
+    27,
+    28,
+    75,
+    23,
+    27,
+    36,
+    25,
+    33,
+    62,
+    23,
+    27
+  ],
+  "classification": "generated_untested_paper_candidate",
+  "dataset_family": "citibike443-regional-v1",
+  "depot": {
+    "artificial": true,
+    "capacity_placeholder": 100000,
+    "coordinate_utm18n_meters": [
+      587106.663,
+      4504077.634
+    ],
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "generator_version": "citibike443-regional-v1.0.0",
+  "geographic_regime": "regional",
+  "initial": [
+    4,
+    10,
+    23,
+    4,
+    42,
+    39,
+    2,
+    2,
+    18,
+    18,
+    4,
+    55,
+    17,
+    18,
+    24,
+    2,
+    22,
+    9,
+    2,
+    2
+  ],
+  "inventory_regime": "shortage",
+  "landscape_id": "cb443_V20_regional_r2_shortage",
+  "local_imbalance_level": "high",
+  "min_ratio": [
+    0.3061,
+    0.3196,
+    0.3194,
+    0.3065,
+    0.3,
+    0.3204,
+    0.2806,
+    0.3316,
+    0.2926,
+    0.2926,
+    0.3143,
+    0.2867,
+    0.3261,
+    0.2926,
+    0.2778,
+    0.308,
+    0.2818,
+    0.3,
+    0.3087,
+    0.2926
+  ],
+  "points_utm18n_meters": [
+    [
+      586562.218,
+      4503844.293
+    ],
+    [
+      587418.659,
+      4505077.297
+    ],
+    [
+      587635.709,
+      4502824.891
+    ],
+    [
+      587933.534,
+      4503962.018
+    ],
+    [
+      586430.902,
+      4505211.151
+    ],
+    [
+      586955.153,
+      4503191.191
+    ],
+    [
+      586809.007,
+      4504578.73
+    ],
+    [
+      587403.439,
+      4504470.973
+    ],
+    [
+      587940.646,
+      4503368.469
+    ],
+    [
+      587208.935,
+      4503684.669
+    ],
+    [
+      586874.698,
+      4505195.502
+    ],
+    [
+      587103.161,
+      4504207.302
+    ],
+    [
+      587127.432,
+      4504790.449
+    ],
+    [
+      587291.912,
+      4503083.187
+    ],
+    [
+      586471.881,
+      4504515.761
+    ],
+    [
+      586771.932,
+      4503477.037
+    ],
+    [
+      587613.879,
+      4503289.003
+    ],
+    [
+      586503.566,
+      4504163.497
+    ],
+    [
+      586584.708,
+      4504813.267
+    ],
+    [
+      587491.885,
+      4503803.992
+    ]
+  ],
+  "replicate": 2,
+  "schema": "citibike443-station-landscape-v1",
+  "seed": 498092074,
+  "seed_derivation_material": "citibike443-regional-v1|inventory|cb443_V20_regional_r2|shortage",
+  "selection_id": "cb443_V20_regional_r2",
+  "source_hashes": {
+    "capacity_sha256": "92ca9b05e66d1425bbc801be2dd9c0776b1a9707e62a60b821d941aa98625ae1",
+    "coordinate_sha256": "c5fd892cc82e07332d4796edb0527182d9c60883acc9b87a5410dab569f990d1"
+  },
+  "source_station_row_indices": [
+    144,
+    225,
+    65,
+    150,
+    230,
+    92,
+    193,
+    183,
+    104,
+    129,
+    229,
+    165,
+    205,
+    85,
+    187,
+    114,
+    99,
+    162,
+    206,
+    140
+  ],
+  "statistics": {
+    "absolute_total_shortage_or_surplus": 43,
+    "balanced_station_count": 0,
+    "bounding_box_height_m": 2386.2599999997765,
+    "bounding_box_width_m": 1509.7439999999478,
+    "capacity_maximum": 75,
+    "capacity_mean": 35.7,
+    "capacity_median": 31.0,
+    "capacity_minimum": 19,
+    "deficit_station_count": 10,
+    "geographic_diameter_m": 2673.1623023767197,
+    "local_l1_imbalance": 215,
+    "maximum_depot_distance_m": 1359.873043399476,
+    "maximum_local_absolute_imbalance": 22,
+    "maximum_pairwise_station_distance_m": 2673.1623023767197,
+    "mean_depot_distance_m": 800.2985948277449,
+    "mean_pairwise_station_distance_m": 1122.8126593306547,
+    "min_ratio_maximum": 0.3316,
+    "min_ratio_minimum": 0.2778,
+    "station_inventory_minus_target": -43,
+    "surplus_station_count": 10,
+    "total_capacity": 714,
+    "total_initial_inventory": 317,
+    "total_target_inventory": 360,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.30610195,
+    "weight_minimum": 0.1
+  },
+  "target": [
+    17,
+    28,
+    17,
+    16,
+    28,
+    27,
+    14,
+    11,
+    13,
+    13,
+    15,
+    35,
+    13,
+    13,
+    16,
+    13,
+    15,
+    31,
+    12,
+    13
+  ],
+  "weights": [
+    0.235918,
+    0.64,
+    0.235918,
+    0.20898,
+    0.64,
+    0.595102,
+    0.16,
+    0.1,
+    0.137959,
+    0.137959,
+    0.183673,
+    1.0,
+    0.137959,
+    0.137959,
+    0.20898,
+    0.137959,
+    0.183673,
+    0.78449,
+    0.117551,
+    0.137959
+  ]
+}

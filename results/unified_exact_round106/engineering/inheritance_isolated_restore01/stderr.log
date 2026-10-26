@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_restore.py", line 37, in <module>
+    inherited(sys.argv[2])
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_restore.py", line 23, in inherited
+    total=unpack(old/'evidence.tar.gz',old/'manifest.json',destination)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_restore.py", line 16, in unpack
+    else:p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
+                                                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\pathlib.py", line 1036, in write_bytes
+    with self.open(mode='wb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Administrator\\.codex\\worktrees\\round106-structural-conflict-events\\ExactEBRP\\results\\unified_exact_round106\\inherited_restore01\\results\\unified_exact_round105\\control01\\raw\\04_F2_ENS-C\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log'

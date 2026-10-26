@@ -1,0 +1,23 @@
+[0/1] Re-running CMake...
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: E:/codes/ExactEBRP/build/research/round96-multi-quantity
+[1/7] Building CXX object CMakeFiles/round96_route_order.dir/src/Round96RouteOrder.cpp.obj
+E:/codes/ExactEBRP/src/Round96RouteOrder.cpp: In function 'ebrp::Round96OrderResult ebrp::runRound96RouteOrder(const Instance&, const SolveOptions&, const std::vector<RoutePlan>&, const std::filesystem::__cxx11::path&)':
+E:/codes/ExactEBRP/src/Round96RouteOrder.cpp:78:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   78 |                 if(ra)std::reverse(first.begin(),first.end());if(rb)std::reverse(second.begin(),second.end());
+      |                 ^~
+E:/codes/ExactEBRP/src/Round96RouteOrder.cpp:78:63: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   78 |                 if(ra)std::reverse(first.begin(),first.end());if(rb)std::reverse(second.begin(),second.end());
+      |                                                               ^~
+E:/codes/ExactEBRP/src/Round96RouteOrder.cpp:86:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   86 |                 if(!feasible)continue;++out.stats.load_feasible;
+      |                 ^~
+E:/codes/ExactEBRP/src/Round96RouteOrder.cpp:86:39: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   86 |                 if(!feasible)continue;++out.stats.load_feasible;
+      |                                       ^~
+[2/7] Linking CXX static library libround96_route_order.a
+[3/7] Building CXX object CMakeFiles/Round96RouteOrderDiagnostic.dir/tests/round96_route_order_diagnostic.cpp.obj
+[4/7] Building CXX object CMakeFiles/Round96RouteOrderTests.dir/tests/round96_route_order_tests.cpp.obj
+[5/7] Linking CXX executable Round96RouteOrderDiagnostic.exe
+[6/7] Linking CXX executable Round96RouteOrderTests.exe

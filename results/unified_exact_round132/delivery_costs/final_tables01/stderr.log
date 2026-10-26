@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\round132\scripts\round132_analysis.py", line 351, in <module>
+    if __name__=='__main__':run(partial='--partial' in sys.argv,heavy='--light' not in sys.argv)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round132\scripts\round132_analysis.py", line 216, in run
+    assert a['T_cert']==(a['T_produce'] if qualified(a) and a['certificate'] else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

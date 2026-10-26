@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "-c",
+    "import sys,ast\nfrom pathlib import Path\nsys.path.insert(0,'scripts')\nimport round97_continue_development02 as q\nast.parse(Path(q.__file__).read_text())\nidentity=q.read(q.CAMP/'identity.json')\nassert len(q.prefix(identity,5))==5\nq.check_prior_vectors(identity,5)\nassert callable(q.vectors.check)\nprint('Exact interrupted prefix and all prior vector receipts passed; no new optimizer.')\n"
+  ],
+  "optimizer_calls": 0
+}

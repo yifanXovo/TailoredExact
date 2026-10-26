@@ -1,0 +1,16 @@
+{
+  "schema": "round43-invalidated-extension-rows-v1",
+  "round_id": 43,
+  "reason": "windows_legacy_path_length_prevented_deep_lp_artifact_write",
+  "failure_evidence": "paper_static_leaf_model_build_failed:Cannot write CPLEX LP",
+  "affected_run_ids": [
+    "stage3-symmetric-extension__round39_small_medium_V12_M3_Q30_slot08_seed1343324363__algorithm__K1__d2__rho0.05__d__single__symmetric7200",
+    "stage3-symmetric-extension__round39_small_medium_V12_M3_Q30_slot08_seed1343324363__algorithm__K1__d2__rho0.1__d__single__symmetric7200",
+    "stage3-symmetric-extension__round39_small_medium_V12_M3_Q30_slot08_seed1343324363__algorithm__K4__d2__rho0.05__d__single__symmetric7200"
+  ],
+  "disposition": "invalidated_not_eligible_for_analysis",
+  "remediation": "rerun_same_frozen_binary_and_parameters_under_short_x43e_run_directory_label",
+  "algorithm_changed": false,
+  "solver_contract_changed": false,
+  "executable_sha256": "52fa775e9be5d3b37686d95aaffc3d965d107ae7a3692dd1a9521df3d5877fe1"
+}

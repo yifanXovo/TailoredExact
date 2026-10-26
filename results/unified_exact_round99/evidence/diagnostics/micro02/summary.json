@@ -1,0 +1,117 @@
+{
+  "passed": true,
+  "optimizer_calls": 10,
+  "records": [
+    {
+      "mode": "q-integer",
+      "case": "",
+      "status": 2,
+      "sha256": "7c51e280584d9baac7ab29b8a985f61529123becc69beea81f8c0f0a2c8365f5",
+      "residual": {
+        "max_bound": 0,
+        "max_row": 0,
+        "max_physical_operation_integrality": 0.0
+      }
+    },
+    {
+      "mode": "q-integer",
+      "case": "_forced",
+      "status": 2,
+      "sha256": "039ebe9b4d27a91237511f361103bc3362894455aebf305d38935ccd0ca691b2",
+      "residual": {
+        "max_bound": 0.0,
+        "max_row": 0,
+        "max_physical_operation_integrality": 0.0
+      }
+    },
+    {
+      "mode": "q-integer",
+      "case": "_empty",
+      "status": 3,
+      "sha256": "9c8d3e90900d2ee6b40398febaba88366b47867e0952bc92bb1963bb69715650",
+      "residual": null
+    },
+    {
+      "mode": "m-binary",
+      "case": "",
+      "status": 2,
+      "sha256": "4661baad8218c1f155e72287f1052ed243d910047885b04b8593498c8ac2889b",
+      "residual": {
+        "max_bound": 0,
+        "max_row": 0,
+        "max_physical_operation_integrality": 0.0
+      }
+    },
+    {
+      "mode": "m-binary",
+      "case": "_forced",
+      "status": 2,
+      "sha256": "df49a11807310ada98d9e5d90afa2bd74f053446fd3717746306db5c25a4b9b2",
+      "residual": {
+        "max_bound": 0.0,
+        "max_row": 0,
+        "max_physical_operation_integrality": 0.0
+      }
+    },
+    {
+      "mode": "m-binary",
+      "case": "_empty",
+      "status": 3,
+      "sha256": "0dd63bd3c8fc32e394fa5d21a16a3741a1cef1701ecf4c2ca85fc520df5a1ded",
+      "residual": null
+    }
+  ],
+  "raw_LP": [
+    0.3239130434782609,
+    0.3239130434782609,
+    0.3239130434782609,
+    0.3239130434782609
+  ],
+  "expected": {
+    "feasible_enumerated": 39,
+    "optimum": 0.4833333333333333,
+    "witness": {
+      "routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            2,
+            3,
+            0
+          ],
+          "operations": [
+            [
+              2,
+              1,
+              0
+            ],
+            [
+              3,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            0
+          ],
+          "operations": []
+        }
+      ],
+      "final": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "G": 0.3333333333333333,
+      "F": 0.4833333333333333
+    }
+  },
+  "outer_seconds": 0.031000000424683094,
+  "script_sha256": "6b995c634ebd89004ad96f46be288e43dbe0ba8c91b20597327efd0cb7b5f872"
+}

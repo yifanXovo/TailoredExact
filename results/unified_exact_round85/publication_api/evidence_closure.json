@@ -1,0 +1,528 @@
+{
+  "target": "0f490ce49ef4662365165bbeebb249d6732cab1e",
+  "branch": "codex/round85-ensc-remaining-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round85-ensc-remaining-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5938060004264116,
+      "stderr": "",
+      "returned_sha": "77fb66ca343f602ace70e03c23275d8a1456a892"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/afa5473f238ffa04e5d0fe721f8f926f7aa3de6e",
+      "returncode": 1,
+      "wall_seconds": 0.5854440000839531,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 5.330680499784648,
+      "stderr": "",
+      "returned_sha": "afa5473f238ffa04e5d0fe721f8f926f7aa3de6e"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 1.0191497998312116,
+      "stderr": "",
+      "returned_sha": "8286e3fad3ba26aee8709a28e59eb51d7a735bb5"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/42c226aa004d981422368312fe640af311a1c67a",
+      "returncode": 1,
+      "wall_seconds": 0.6159739000722766,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.4722444000653923,
+      "stderr": "",
+      "returned_sha": "42c226aa004d981422368312fe640af311a1c67a"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 1.2836635997518897,
+      "stderr": "",
+      "returned_sha": "e4f99a67b212322c1011b1be83ffb91e3743581d"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/00b4cc781a36ab640cd8dc49b72644800d69be1f",
+      "returncode": 1,
+      "wall_seconds": 0.5455485000275075,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.566253900062293,
+      "stderr": "",
+      "returned_sha": "a09b3fc890a2057f946157d905b246b3b65a1c75"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.4192415000870824,
+      "stderr": "",
+      "returned_sha": "5413355e722339d860e73a36ec7654a7df8d46ee"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.2976840999908745,
+      "stderr": "",
+      "returned_sha": "a172bd6e5d6e37a51e6d80191c056d29fd82e2a7"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.4843477997928858,
+      "stderr": "",
+      "returned_sha": "c22e2290cc775f9b9fdc31664ad0ff64a8318b13"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.3335132002830505,
+      "stderr": "",
+      "returned_sha": "b7fe9c75aeac77f6a768b9c8588f7dc8379fc1d2"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 9.043722599744797,
+      "stderr": "",
+      "returned_sha": "edf5adb240c4b050e7079f969347978fde3fb165"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.1421999000012875,
+      "stderr": "",
+      "returned_sha": "202ea00eb52bb776fb2c0a0c215115d401235ffc"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 3.564019599929452,
+      "stderr": "",
+      "returned_sha": "91a328407a8d3714bc301801008532e54d2f23aa"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 3.286552299745381,
+      "stderr": "",
+      "returned_sha": "dace77fa5b1f94d81d368a87dbb18db1681cf963"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.174875999800861,
+      "stderr": "",
+      "returned_sha": "8a5632f766da9e9e02bbd454db97eb403cfe36f4"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 3.1430873000063,
+      "stderr": "",
+      "returned_sha": "4c63b767a7b489b101b4ee6f8c9031c7d69eab90"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 3.1908327997662127,
+      "stderr": "",
+      "returned_sha": "7d8b212189eb22ef923023ca0c567b68e4c4957f"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.684454900212586,
+      "stderr": "",
+      "returned_sha": "cbc7afab25730d67e14186b3fe1e34114d5e2788"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.8087010998278856,
+      "stderr": "",
+      "returned_sha": "5f4279bf2321419e171e8dec5a5083a508c76605"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 3.692414099816233,
+      "stderr": "",
+      "returned_sha": "2839937ba493f94e887bd248b0237e89fe703cc6"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 3.182554400060326,
+      "stderr": "",
+      "returned_sha": "211b1e4deaf50c32ec630b79cac4f66713f0ba8e"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.133405299857259,
+      "stderr": "",
+      "returned_sha": "0155ca8340b1a9ad260d0cdf57759448cf6a2e35"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.715019699651748,
+      "stderr": "",
+      "returned_sha": "6d28263002f8353ea0434ee46cd25170b85bd951"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.7184729999862611,
+      "stderr": "",
+      "returned_sha": "e0b687e0b3740e6a901c9d993140ef5976c3f14e"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.782393000088632,
+      "stderr": "",
+      "returned_sha": "b2c2084a74965b1c26768eb02e74a71f44cc6e72"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.0706489998847246,
+      "stderr": "",
+      "returned_sha": "6e39771d21e9ee1c141cf29b63d143008334f481"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.0256407000124454,
+      "stderr": "",
+      "returned_sha": "3e5b2aa5a64025bd6fdd396723ba3a8251559699"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.9816371002234519,
+      "stderr": "",
+      "returned_sha": "ffd004ce3faebd16f6b0214c49ad83f9962e3430"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.7575702001340687,
+      "stderr": "",
+      "returned_sha": "a7b828bcb29dfa10cdc892516561b43182c590aa"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.7530235000886023,
+      "stderr": "",
+      "returned_sha": "62c164feda8e66e89d7e34585d4a30aef26d7859"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.7409947998821735,
+      "stderr": "",
+      "returned_sha": "68d8c942509359d7a1ebfcbffee4f0108a71b4bf"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.8808375000953674,
+      "stderr": "",
+      "returned_sha": "2b572d573c3c0abc40d037c1b88854bb768d1044"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.7691541002131999,
+      "stderr": "",
+      "returned_sha": "4a8878c6b9c4dd137ff160b0a49a2f904043fea4"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 6.8238832000643015,
+      "stderr": "",
+      "returned_sha": "00b4cc781a36ab640cd8dc49b72644800d69be1f"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 1.1619700998999178,
+      "stderr": "",
+      "returned_sha": "0f490ce49ef4662365165bbeebb249d6732cab1e"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round85-ensc-remaining-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5700429999269545,
+      "stderr": "",
+      "returned_sha": "77fb66ca343f602ace70e03c23275d8a1456a892"
+    },
+    {
+      "method": "PATCH",
+      "path": "git/refs/heads/codex/round85-ensc-remaining-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 1.5272597996518016,
+      "stderr": "",
+      "returned_sha": "0f490ce49ef4662365165bbeebb249d6732cab1e"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round85-ensc-remaining-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5932506998069584,
+      "stderr": "",
+      "returned_sha": "0f490ce49ef4662365165bbeebb249d6732cab1e"
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "551abb780c7430a5c2aa23e5e231a80971f2878f61a8fd93c2c8559cb0de8712",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 97.02999249985442,
+  "initial_remote_head": "77fb66ca343f602ace70e03c23275d8a1456a892",
+  "original_commits": [
+    "8286e3fad3ba26aee8709a28e59eb51d7a735bb5",
+    "e4f99a67b212322c1011b1be83ffb91e3743581d",
+    "0f490ce49ef4662365165bbeebb249d6732cab1e"
+  ],
+  "binary_verification_policy": "Each local Git blob SHA is recomputed from bytes and matched to the base64 creation response; exact root tree and commit required. No full remote body readback is claimed.",
+  "verified_exact_trees": [
+    "afa5473f238ffa04e5d0fe721f8f926f7aa3de6e",
+    "42c226aa004d981422368312fe640af311a1c67a",
+    "00b4cc781a36ab640cd8dc49b72644800d69be1f"
+  ],
+  "verified_exact_commits": [
+    "8286e3fad3ba26aee8709a28e59eb51d7a735bb5",
+    "e4f99a67b212322c1011b1be83ffb91e3743581d",
+    "0f490ce49ef4662365165bbeebb249d6732cab1e"
+  ],
+  "binary_content_addresses": [
+    {
+      "sha": "a09b3fc890a2057f946157d905b246b3b65a1c75",
+      "bytes": 1952356,
+      "sha256": "c500c1fcef6093e70fd3bd0c99cb8fc205b79071a21f97c9e80e7bd603a3e9ac",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "5413355e722339d860e73a36ec7654a7df8d46ee",
+      "bytes": 931434,
+      "sha256": "ef5fe4fc87ecd0599e4055c6347c7167f543f376ef2d3301568bfae95a9ed82f",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "a172bd6e5d6e37a51e6d80191c056d29fd82e2a7",
+      "bytes": 64930,
+      "sha256": "dc54ab69afcce3778c94584a51e3782a864686c4ffdd73d3543e999419012a11",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "c22e2290cc775f9b9fdc31664ad0ff64a8318b13",
+      "bytes": 287298,
+      "sha256": "5fa6dabd873e525d38d19663b766ba29734702a28e92f8fcd8c84da7115ac1bd",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "b7fe9c75aeac77f6a768b9c8588f7dc8379fc1d2",
+      "bytes": 1114245,
+      "sha256": "e5808e9de5e3af9c023ba53941263133577079ddb1d5c1d2bdc63652b489fbca",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "edf5adb240c4b050e7079f969347978fde3fb165",
+      "bytes": 1053305,
+      "sha256": "c8c23164285e97a9cf267594339b0408497581b5c3226374a78b95f56517cccc",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "202ea00eb52bb776fb2c0a0c215115d401235ffc",
+      "bytes": 570981,
+      "sha256": "6afc932c0b10c1086bce1f1956252699e01e5ef28e2291ce132908df261107f3",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "91a328407a8d3714bc301801008532e54d2f23aa",
+      "bytes": 3785809,
+      "sha256": "fdd068012748ed56f5a7ca9d29d7a8dd1470865738bf072991879367edc7fb1a",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "dace77fa5b1f94d81d368a87dbb18db1681cf963",
+      "bytes": 3620027,
+      "sha256": "df48e1345d005d139b4debdbac1eacf4e509a3d2a0816b3c627167391a188c4f",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "8a5632f766da9e9e02bbd454db97eb403cfe36f4",
+      "bytes": 217382,
+      "sha256": "0fbace0dfb09e9c25d03f0ef9c10f02e3691c99f6f991fc2f9ca769f7a7ef3fc",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "4c63b767a7b489b101b4ee6f8c9031c7d69eab90",
+      "bytes": 2021747,
+      "sha256": "82bdab62cc49d28cf0cbe6422e68fbe442a4e520cedde573342888979ade9880",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "7d8b212189eb22ef923023ca0c567b68e4c4957f",
+      "bytes": 1929502,
+      "sha256": "dce7682aea3f04a39611a8e1f1563eedfb0ee326ee93ff605c40139ce571d169",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "cbc7afab25730d67e14186b3fe1e34114d5e2788",
+      "bytes": 794663,
+      "sha256": "c6299dbaf49cefa5d56f88cd578f7b71bc435814f0d3c38ad75f7c7d9b9ca4ca",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "5f4279bf2321419e171e8dec5a5083a508c76605",
+      "bytes": 207308,
+      "sha256": "66c0d54826792a6d4e41aa504fe309e1fa3b6a60064920231999ef978316d4a2",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "2839937ba493f94e887bd248b0237e89fe703cc6",
+      "bytes": 4236248,
+      "sha256": "64f84a014ebe9831e2ecdce61bd105255e4ac9b46adf5db49a817eff062bb861",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "211b1e4deaf50c32ec630b79cac4f66713f0ba8e",
+      "bytes": 3888164,
+      "sha256": "838917c1ee64f54cd51de91a520c258a501bc7377b07196a3c459fc2aa1ecf31",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "0155ca8340b1a9ad260d0cdf57759448cf6a2e35",
+      "bytes": 207067,
+      "sha256": "9ea124afa5ebd8db010d0b646ed9065240808f332f9e61b8e6ec3a16ceef6d23",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "6d28263002f8353ea0434ee46cd25170b85bd951",
+      "bytes": 135102,
+      "sha256": "ac02775bbe7d89e532c977cf6cae8f973d53211774e778a9ba13c034866966a8",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "e0b687e0b3740e6a901c9d993140ef5976c3f14e",
+      "bytes": 174669,
+      "sha256": "b1bb4a77da84c670a8457d4db5dc4c4232a1786db081d13962249ba7efbcced2",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "b2c2084a74965b1c26768eb02e74a71f44cc6e72",
+      "bytes": 191303,
+      "sha256": "35b471743fb407abb3da1abbae662297593a0862d45fd0eeeac88c6cdbf0cbec",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "6e39771d21e9ee1c141cf29b63d143008334f481",
+      "bytes": 469527,
+      "sha256": "30a11343d068130c1dab49c003e625f1633462f75fde4a925096e2b3b159a02d",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "3e5b2aa5a64025bd6fdd396723ba3a8251559699",
+      "bytes": 577082,
+      "sha256": "95da16d494f8c28a21a00363233a58af8868a198221b337800b82bdd3f4df553",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "ffd004ce3faebd16f6b0214c49ad83f9962e3430",
+      "bytes": 505944,
+      "sha256": "38dbe3934d802ae91896922fc06cc597757b7a8a04c418a0b86c3263938bf894",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "a7b828bcb29dfa10cdc892516561b43182c590aa",
+      "bytes": 185038,
+      "sha256": "acddf110b4bf951ea88ce97b30ee53c7035581d6ef5da30055bfb56f1ffffd44",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "62c164feda8e66e89d7e34585d4a30aef26d7859",
+      "bytes": 177237,
+      "sha256": "e18121c1590cae5b098e0766ebe999169a0f3b9c39642a8cc811b9a210b46c43",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "68d8c942509359d7a1ebfcbffee4f0108a71b4bf",
+      "bytes": 176280,
+      "sha256": "8047ee80d64d2fd291689d70e700182152021ddff97e926043980b4d8fa9d00f",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "2b572d573c3c0abc40d037c1b88854bb768d1044",
+      "bytes": 188075,
+      "sha256": "b871df665f18c652d06c35671206919ce7122472fd6565975efa1763440a1b20",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "4a8878c6b9c4dd137ff160b0a49a2f904043fea4",
+      "bytes": 202503,
+      "sha256": "6c4115f3058e46c52d0c06ebc2d85d677b2e4a45faa2115cf5870353b07ad32d",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    }
+  ],
+  "passed": true,
+  "final_remote_head": "0f490ce49ef4662365165bbeebb249d6732cab1e",
+  "original_history_preserved": true
+}

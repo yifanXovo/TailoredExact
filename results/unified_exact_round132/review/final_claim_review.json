@@ -1,0 +1,99 @@
+{
+  "status": "PASS_FINITE_SCIENTIFIC_CLAIMS_AND_REPORTING",
+  "UTC": "2026-10-24T13:28:44.120262+00:00",
+  "evidence_receipt_SHA": "da1760f4c0628e488a4c94f86a3e892ad781bf9ee847c6d76be83202f5914f4e",
+  "checker_SHA": "07ecaba1e51988863652f0b88df28f745ce6d9116245dc3d6b90cab1640f2f5b",
+  "inputs": {
+    "manuscript.md": "ca97e894b5d69b3b704f27b78c2ed5da18614eb9186d0257ca4b6eab4669030e",
+    "manuscript.pdf": "f9d1a80db93e8264261008133ab0f587c4ee749bcf0bcd707bfad6623ed9b28d",
+    "mathematical_analysis.md": "d8171152d1677e0bfa7ca1fe830231ccdf229c047e121d78663b798a0ac882a6",
+    "joint_structure_note.md": "a1197d288c18860c9b8096d6501f994daf9b0bc6eff4f5b2b4f54e14bfcd5395",
+    "final_report.md": "17c5b157bbee043aaaeda09e07ab4c91da39327dd5802c38685cc396dd3473a0",
+    "history_to_claim.csv": "55ca95eaaf3fd90b97df71c7daac3e5c73356f15ccbfbd4b6e249ae7a24b2b40",
+    "current_method_manifest.json": "0a09f92469829b0a06ffa8c4e7bb99a2032d8f515774c9102623566a0e11a1a8",
+    "references.bib": "92c5f9e8497d776aecbd47df7aca4f745f69e3585bf52d643a81057889d667a4",
+    "literature_evidence.csv": "8902cc5bcf6ae49473b350753da9bdcc9d9835032d3874030a8e98b9d5d31345",
+    "literature_comparison.csv": "e7ae6f37146fdd955863eb1378d231389a154477e2138ac99af99915d3869a2c",
+    "reproducibility.md": "20e6bc86f4b7fb54a0bb0545e25053e6217e8e738d1b17f25d1dfce9999ade49",
+    "review/final_reporting_addendum.md": "28c0884297db71c36cdf195cf9441fbcd1b17acd416b8f49bd5b4f1ca2b5eb11"
+  },
+  "static_scope_receipt_SHA": "cce343f9c81d3de1f65ce14cbc10c2645403a77bbae596e222d6797fcdcc4872",
+  "full_replay_start_reporting_sources": [
+    {
+      "path": "scripts/round132_analysis.py",
+      "SHA": "4eb5eb4d37945bc07e8bdc417f19a055e4758ebebdb279a76f6d530cad244ff2"
+    },
+    {
+      "path": "results/unified_exact_round132/timing_environment_amendment.json",
+      "SHA": "d84186d2a2521fab0cdfdbfb4a22ff8a1d6df3cba352ae4d4629146c53b1f1f6"
+    },
+    {
+      "path": "results/unified_exact_round132/review/final_reporting_addendum.md",
+      "SHA": "28c0884297db71c36cdf195cf9441fbcd1b17acd416b8f49bd5b4f1ca2b5eb11"
+    }
+  ],
+  "actual_final_sources_bound_after_text_layout_corrections": true,
+  "no_campaign_replay_restarted_for_text_or_PDF_changes": true,
+  "directions": {
+    "D:S2/P": {
+      "Win": 16,
+      "UNDETERMINED": 6,
+      "Lose": 1,
+      "UNEVALUABLE": 1
+    },
+    "D:S2/PS": {
+      "Win": 8,
+      "UNDETERMINED": 2,
+      "Lose": 2
+    },
+    "D:PS/P": {
+      "UNDETERMINED": 8,
+      "Win": 3,
+      "Lose": 1
+    },
+    "C:S2R-GEOM/S2R": {
+      "Win": 2,
+      "Lose": 4,
+      "UNDETERMINED": 2
+    },
+    "C:S2R-SP/S2R": {
+      "Win": 3,
+      "Lose": 3,
+      "UNDETERMINED": 2
+    }
+  },
+  "source_loss_dispositions": {
+    "required_positions": 84,
+    "typed_positions": 64,
+    "performance_qualified_observations": 83,
+    "disclosed_source_loss_observations": 1,
+    "native_source_qualified_observations": 83,
+    "performance_unevaluable_comparisons": 1,
+    "unresolved_unqualified_observations": [],
+    "unresolved_unevaluable_comparisons": [],
+    "all_required_positions_performance_qualified": false,
+    "rejected_native_proof_reliability_restored": false,
+    "raw_own_zero_not_treated_as_open_or_time_win": true
+  },
+  "E_J2": {
+    "status": "STRICT_EXACT_FULL_REFERENCE_WITNESS",
+    "lhs": "15/2",
+    "exact_joint_RHS": 7,
+    "rows_checked": 558,
+    "bounds_checked": 225,
+    "reference_exact_matrix_SHA": "cb7f13289cb6bae58bae5e3bedde8c7b0ff8df9fc711ff190595f7c720a3b310",
+    "enumeration_SHA": "c3bb1ef4d4ca7c2f7c5b59024b7f30c94e4b9041e2c8c673b6727696754a17dc"
+  },
+  "original_objective_increments": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "strict_original_objective_optimality_claimed": false,
+  "PDF_QA_receipt_SHA": "feee9e1089b42d608a4438a2330fa1eacebcf6c9fe9d7c7428cec59867ba74f9",
+  "remaining_scientific_reporting_blockers": [],
+  "unresolved_native_source_reliability_not_rehabilitated": true,
+  "overall_publication_recovery_cleanup_completion_not_claimed": true,
+  "external_replication": false
+}

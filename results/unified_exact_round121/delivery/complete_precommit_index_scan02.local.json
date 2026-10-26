@@ -1,0 +1,1615 @@
+{
+  "schema": "r121-complete-actual-index-scan-v1",
+  "attempt": 2,
+  "base_published_head": "726b3b2cfb64da5788328a68fb2c28824e751507",
+  "index_tree": "ddcd9e44f8a0a02992d488d597dac2a0588a3c44",
+  "scope": "all actual index delta since last published PR183 head; all parts of changed carriers included",
+  "index_bindings": {
+    "results/unified_exact_round121/fees/formal03_R98_C2/group_verification_receipt.json": {
+      "SHA": "e790ee2055655537ce2f67bf27afb9be24a93f08c8e36e2f31c9adeaff220aba",
+      "bytes": 185
+    },
+    "results/unified_exact_round121/campaign/group04/identity.json": {
+      "SHA": "d0fb9e00a556a80b45c309b7cb627358cefccb61278bc20f93453fdf4472e730",
+      "bytes": 49066
+    },
+    "results/unified_exact_round121/engineering/pre_generation_preparation.json": {
+      "SHA": "329384e3f9f21378cba5950ab570c430c23a6eb06a47d7b33d5ee75e62a9b643",
+      "bytes": 573
+    },
+    "results/unified_exact_round121/reconstruction/group04/controller_events.csv": {
+      "SHA": "e4a06d6b89d2a6c77b47c59a509cda6188b5b67bc8a3f5d9642d76ac4d01770a",
+      "bytes": 1123
+    },
+    "results/unified_exact_round121/review/extra_review.md": {
+      "SHA": "7baa29c4dfffa4c2c88fc184d76c5356431079a4a1510a2b2d468e7218d232ad",
+      "bytes": 3174
+    },
+    "results/unified_exact_round121/reconstruction/group02/controller_AM.csv": {
+      "SHA": "b189d0ec36d63d5337b6aefd3c42bd6f0b60fdba9012f5368ce97a08e694635b",
+      "bytes": 1236
+    },
+    "results/unified_exact_round121/reconstruction/group03/controller_native.csv": {
+      "SHA": "a60124f200e22f749e37679bd374d2e12abea6907e2c328f4f4486289eac0926",
+      "bytes": 4599
+    },
+    "results/unified_exact_round121/reconstruction/group05/time_partitions.csv": {
+      "SHA": "10c74e037857ca5d6fcfe8a2a52e922eea8f93dd51284fe852fecba8e7142383",
+      "bytes": 760
+    },
+    "results/unified_exact_round121/qualification/read_only_patch_identity.json": {
+      "SHA": "59cc162af15d78395826f6e6c64044bc06a763292564f76998ef79a29c85c4a6",
+      "bytes": 11203
+    },
+    "results/unified_exact_round121/resumption/before_resume01/protocol.json": {
+      "SHA": "d077c2e8d66eb43174211102535269f56184c9d7fd6137bdc2e366270e7af157",
+      "bytes": 3585
+    },
+    "scripts/round121_campaign.py": {
+      "SHA": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0",
+      "bytes": 5533
+    },
+    "results/unified_exact_round121/reconstruction/group01/arms.csv": {
+      "SHA": "e3e3e8ec366ef9939fdde75f0d1bc88111e527dd110c935b20264d9c093fd3a5",
+      "bytes": 4282
+    },
+    "results/unified_exact_round121/resumption/before_child_cleanup_fix/candidate_identity.json": {
+      "SHA": "793bbad7fa0399cf4cd945b47e8d10947d7d94292f6c3667ae0d04db37d7dd17",
+      "bytes": 33211
+    },
+    "results/unified_exact_round121/engineering/reference_compile01/launch.json": {
+      "SHA": "52f07635d56e6742778d9c703c9e5a202e70b9219729abba62a4ded82eaa2bfd",
+      "bytes": 1124
+    },
+    "results/unified_exact_round121/reconstruction/group01/checkpoints.csv": {
+      "SHA": "a40d8458530ccc3048ab3cd24e05b8b807c81a7b5746407bcc2c715bb8bba970",
+      "bytes": 1289
+    },
+    "results/unified_exact_round121/reconstruction/group04/progress_publication.csv": {
+      "SHA": "3de9da59cb3b9abd0525cc1635c93599aa5976f0c977e074c955f47e6a8cbf6d",
+      "bytes": 574
+    },
+    "results/unified_exact_round121/mathematical_contract.md": {
+      "SHA": "28590c533ba2c210bad636e8ba97255a953c28d62df17519079eda1902ce44e1",
+      "bytes": 8682
+    },
+    "results/unified_exact_round121/reconstruction/group03/mechanism.csv": {
+      "SHA": "51b74f3d854ba1ba4c974927e9cce6be9bcba3d8f43887eb2f2c6303dbb89874",
+      "bytes": 21003
+    },
+    "reference/round121_confirmation/Q30-C2-B_selection.json": {
+      "SHA": "b99a18978303dc6903c4f7e656a8025975d10fe39d9a699f2079ba927ad10bb3",
+      "bytes": 2104
+    },
+    "results/unified_exact_round121/seed_stratification.json": {
+      "SHA": "746144beb0ff0434270e7a5309b00c592661e7434d1e40d2ea5f1b9604edb368",
+      "bytes": 59587
+    },
+    "results/unified_exact_round121/compact_evidence/evidence.tar.gz.part002": {
+      "SHA": "2f0e75bbd9794a919d5859ff9d47b8ab034e78bafe66f7a6eef78423dea13a32",
+      "bytes": 21244925
+    },
+    "results/unified_exact_round121/fees/qualification02/failure.txt": {
+      "SHA": "d3ed8deda03626b987407c5af4a7c3d48ee120aaee781da2a35f1b680838d482",
+      "bytes": 1511
+    },
+    "results/unified_exact_round121/reconstruction/group04/pairs.csv": {
+      "SHA": "bc6bf94700500cefa3d758b419a4a08d475402d2dd61aed9dff8eb76a7d5c043",
+      "bytes": 1942
+    },
+    "results/unified_exact_round121/reconstruction/group03/chronological_covers.csv": {
+      "SHA": "0fcedfdae3893671b2d77187150f6d8b9a8118692b117b7f51a6bc4f3abb93e2",
+      "bytes": 3352
+    },
+    "results/unified_exact_round121/engineering/pre_qualification_staged_scan.json": {
+      "SHA": "7b8a957c977510cb565d58726687a17a67bbd351be1a5f17f8db762c21fbf51f",
+      "bytes": 348
+    },
+    "results/unified_exact_round121/reconstruction/group03/controller_child_bounds.csv": {
+      "SHA": "62f4c45bb3f00c19853759fb4ecfce2c46105ce4ed16226c750aa1a706fa7978",
+      "bytes": 920
+    },
+    "results/unified_exact_round121/paper_claim_evidence_map.md": {
+      "SHA": "e933661240be7bcd1f6bd3bf26c6a046649c66a45e5683b35b76a8dc1792ea46",
+      "bytes": 1521
+    },
+    "results/unified_exact_round121/reconstruction/group04/chronological_covers.csv": {
+      "SHA": "01afd07b4c428058d31acc5a38be697d682e97943fdcf9e40f0476acc53836c2",
+      "bytes": 134442
+    },
+    "results/unified_exact_round121/reconstruction/group05/pairs.csv": {
+      "SHA": "56ed96c895702557433652cc8739095994f487f56bceb4af17c3cd8b81aec8a0",
+      "bytes": 1780
+    },
+    "results/unified_exact_round121/fees/formal01_F2/01_after.json": {
+      "SHA": "e5a48707831eba173d14dfb68af3b42c313b551f8d5205b7dee3f74324079cc1",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/reconstruction/group03/controller_targets.csv": {
+      "SHA": "dc06f8b4e1002c7154ae1166a944beb1c8b8c858b98c245de5dddd1300387861",
+      "bytes": 781
+    },
+    "results/unified_exact_round121/qualification/resume01/recovery_fixture_provenance_revision.json": {
+      "SHA": "bc601a2e4c014217d79bbb137614874b88268d626244fef55abcaa422745a5c3",
+      "bytes": 435
+    },
+    "results/unified_exact_round121/qualification/h100/processes.jsonl": {
+      "SHA": "e4cf465a8d74d03b419822e6d359bef2949fa51ac701e67705585bad26786526",
+      "bytes": 1050
+    },
+    "results/unified_exact_round121/resumption/before_policy_text_alignment/final_freeze01.json": {
+      "SHA": "1905be2948c20dcbec6fb6353bd031453ce61fa443fb0f98e28e9913f0bc1479",
+      "bytes": 32666
+    },
+    "results/unified_exact_round121/reconstruction/group03/current_core.json": {
+      "SHA": "ecce7a567a594fa21f3f59a0fb714b975eb3c1f893782442a5272548de2a2836",
+      "bytes": 920485
+    },
+    "results/unified_exact_round121/objective_parts.csv": {
+      "SHA": "80b15f6587420a0b4a9c668408b6e93ef619d5b5ad3daec7e2566036a5dcb0c9",
+      "bytes": 3927
+    },
+    "results/unified_exact_round121/reconstruction/group02/mechanism.csv": {
+      "SHA": "4e1037d2aa99812ba9da1c401ba9affda364d2d644b053c45354dce27fe909ba",
+      "bytes": 7040
+    },
+    "results/unified_exact_round121/reconstruction/group02/target_discovery.csv": {
+      "SHA": "e37ca6b97f5644e234ff543f4925312830bd0501f074fee6f5b6bda765287c24",
+      "bytes": 873
+    },
+    "results/unified_exact_round121/reconstruction/group04/clock_qualification.csv": {
+      "SHA": "6c07c4da15b09de7a6086aa82277d2f6438436d57861a4021476e7a215038901",
+      "bytes": 1471
+    },
+    "results/unified_exact_round121/reconstruction/group03/controller_LP_status.csv": {
+      "SHA": "dd3fbda6653fdd580f5637c78c646b765f4b3c8a3b879db9dc8d39a78f57d007",
+      "bytes": 949
+    },
+    "results/unified_exact_round121/reconstruction/group05/controller_targets.csv": {
+      "SHA": "0f8736a0bdbb9d88da102cebe1ca3f497b14bd7766c15525b0b91926c5b2c100",
+      "bytes": 790
+    },
+    "results/unified_exact_round121/resumption/final_freeze01.json": {
+      "SHA": "047ad44134966cbbef13c9d9348e7d450e7459579bc37dd52eaeacc44147150f",
+      "bytes": 32763
+    },
+    "results/unified_exact_round121/reconstruction/group04/target_discovery.csv": {
+      "SHA": "79ceee47718af388ee048278a9a9eeca0449e7b0c9c3bfeb164abc073670815e",
+      "bytes": 877
+    },
+    "reference/round121_confirmation/Q50-C2-U_parsed.json": {
+      "SHA": "1da892c10d53091e23043679e1c41b79799816618aab2c970ea1bc19c5440b1d",
+      "bytes": 74029
+    },
+    "results/unified_exact_round121/resumption/before_resume01/delivery_summary.md": {
+      "SHA": "f37be972ed28bb244ffefdba116226a4c67eddd7b5b7717f0b1ee71013beb9ff",
+      "bytes": 2845
+    },
+    "results/unified_exact_round121/review/resume_precontract_version01.py": {
+      "SHA": "eb63107916a0e967e55529207721a70cce0b9e38fb645b5d593c52f99045b557",
+      "bytes": 37505
+    },
+    "results/unified_exact_round121/qualification/h100/identity.json": {
+      "SHA": "267795198017c57e981bb03671697793672323667c9f0276879f6ce44a977ae7",
+      "bytes": 49966
+    },
+    "results/unified_exact_round121/review/qualification_blocked_review.md": {
+      "SHA": "c2e2fac1ce264391a3f50f63fef78e8e1c7397dbe18a3376de0cf7ddecd39c9d",
+      "bytes": 2618
+    },
+    "results/unified_exact_round121/fees/qualification02/receipt.json": {
+      "SHA": "220b5bebb528d7659e9104d3b932195d61a0d20b7824502a70674716c72e2050",
+      "bytes": 572
+    },
+    "results/unified_exact_round121/delivery/pr_body.md": {
+      "SHA": "ec2c1f6b319fc518544223c3cb6e681eaa500ba7ebca0cba5e15ce07d2726f1b",
+      "bytes": 4128
+    },
+    "results/unified_exact_round121/campaign/group01/identity.json": {
+      "SHA": "a2695ece4e06ad0b071999f690e33fbacc32c6768a058e25203b204169905b87",
+      "bytes": 50244
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/01_after.json": {
+      "SHA": "3ca0e1708e9f5f73f719db94d11a89de22fec2f2316af0a3ae27efeb6ab3950f",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/reconstruction/group05/controller_child_bounds.csv": {
+      "SHA": "4eabfc56a26f7f1e21979cb564c4be997b5c72d53f0fc1676f2e074644569e86",
+      "bytes": 1264
+    },
+    "results/unified_exact_round121/review/performance_admission.json": {
+      "SHA": "ebc0e94afd94874085b49d8326c0fa6324f7f436e91e8114afbb5d03dcb84537",
+      "bytes": 33013
+    },
+    "results/unified_exact_round121/fees/qualification01/receipt.json": {
+      "SHA": "cbfc57db6d473e6c9c10a1674f22bbc47199e1ab548cfc7f19704d1bff61c0f8",
+      "bytes": 572
+    },
+    "results/unified_exact_round121/reconstruction/group01/covers.csv": {
+      "SHA": "5b23b50a4fef4a8aecdca6d6fb7d93e2861020e642950e529b5d3fb6dc6c91fa",
+      "bytes": 7825753
+    },
+    "results/unified_exact_round121/reconstruction/group03/native_counts.csv": {
+      "SHA": "ff1b2f7784327931f8901d7793c84a4d2d805ecc620dd820881b042f2fc67980",
+      "bytes": 242
+    },
+    "results/unified_exact_round121/fees/qualification04/failure.txt": {
+      "SHA": "6d30c3a8f59e04c02f72e37d86d6754a5478f803313979ae0e35293384457f64",
+      "bytes": 1481
+    },
+    "results/unified_exact_round121/fees/formal01_F2/02_after.json": {
+      "SHA": "2c3864f561517c5d3fc1c9a268fe081bbe3234382ea641691eef80162ce78a60",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/resumption/before_complete_documentation/delivery_summary.md": {
+      "SHA": "866e2efde136ccd0b11418e47814648058787d6ff87684f224a2649bec0c3580",
+      "bytes": 3960
+    },
+    "results/unified_exact_round121/reconstruction/group01/controller_child_bounds.csv": {
+      "SHA": "c67fa9c97e118dbc0792293901d1194e3f19a086fe0163aa8364ed6e687373e8",
+      "bytes": 1260
+    },
+    "results/unified_exact_round121/fees/formal01_F2/pending_exit_receipt.json": {
+      "SHA": "d661e6ea633e5b44c266bfbc3cb2543bdf21d968a01d7ccac24ef4aa98510f46",
+      "bytes": 318
+    },
+    "results/unified_exact_round121/resumption/before_resume01/paper_algorithm_spec.md": {
+      "SHA": "4575df92b7bcc425871a1b9d35e10e8c01cfd8b339000ae624e7d3eb76f6b5b6",
+      "bytes": 19195
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/01_after.json": {
+      "SHA": "b741fc00d4cf1e1fada2f17dc453676d155ff42333d086f8589bc8da4bd147a3",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/resumption/before_document_reference_key_fix/protocol_preimage_receipt.json": {
+      "SHA": "d507d45facfe4419eb196ddfe304ff0df11cfacf5b415992f3fbdae100a4d5e4",
+      "bytes": 644
+    },
+    "results/unified_exact_round121/campaign/group03/identity.json": {
+      "SHA": "3b31b798713592a778026c6f63a50e7f2a8fc4407fa5610501b3aec5e15b5647",
+      "bytes": 46669
+    },
+    "results/unified_exact_round121/reconstruction/group04/controller_child_bounds.csv": {
+      "SHA": "4e594e8c6509bc680cd625dec0064276dfabdf3c62ebe37ca4d9e250740f4803",
+      "bytes": 930
+    },
+    "results/unified_exact_round121/resumption/before_resume01/candidate_identity.json": {
+      "SHA": "8f2dc518a751f11dbef6d8a910c53d4055d48cc0a05ac75df987d8af3d664168",
+      "bytes": 32990
+    },
+    "results/unified_exact_round121/reconstruction/group01/clock_qualification.csv": {
+      "SHA": "7bc2e7291b8c927e9b90c24e2922312de3d88cacb17c53bdccb1d2acab506975",
+      "bytes": 1800
+    },
+    "results/unified_exact_round121/open_endpoint_decomposition.json": {
+      "SHA": "d8bb59705700fc5fd21878bbfa773b243148c69e0f47918752f25f23c570a22c",
+      "bytes": 16525
+    },
+    "results/unified_exact_round121/resumption/formal04_observation.json": {
+      "SHA": "fcfa579f57353717417dea8fc15432506d50fe695f10a7fd3551625446a1e4e5",
+      "bytes": 675
+    },
+    "results/unified_exact_round121/reconstruction/group03/pairs.csv": {
+      "SHA": "3b83058bc79504aa4ee77107b00071d869f599229a0a8d7ac93d1dec74be51aa",
+      "bytes": 1960
+    },
+    "results/unified_exact_round121/reconstruction/group04/current_core.json": {
+      "SHA": "5474df548569b4478605b441aa4cbd5caee8115471546253d0cdc93156883e1b",
+      "bytes": 1673756
+    },
+    "results/unified_exact_round121/reconstruction/group05/native_claims.csv": {
+      "SHA": "52530c9c00723591dcab047e6eefe30901ef3c6329a22a25511e6760542e92f6",
+      "bytes": 59525
+    },
+    "results/unified_exact_round121/reconstruction/group02/controller_events.csv": {
+      "SHA": "18076b680cf891b9fa5827bf23ab6ebe33d9f256b9a3dc50b1a15ce05e6f7a8c",
+      "bytes": 420
+    },
+    "results/unified_exact_round121/reconstruction/group04/own_UB_flow.csv": {
+      "SHA": "cb0c44e553a00c2527def4622f30b4ef9edf9fc949a0269981313a5fc01b3021",
+      "bytes": 118676
+    },
+    "results/unified_exact_round121/engineering/restore_comparator_check.json": {
+      "SHA": "76ac9ca1a00ed64f58950563b202c9333cafa7852797f6451fb41cabb14979b3",
+      "bytes": 388
+    },
+    "results/unified_exact_round121/reconstruction/group01/current_core.json": {
+      "SHA": "5be44852f06b0512c3a5176d8c64ba1512096be2a06ede0d23602945e7ec2d57",
+      "bytes": 40422779
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/pending_exit_receipt.json": {
+      "SHA": "d22622f2e509fac1c7d2bad537c34ddc242b3cb639aaf7affbc88eea430fc658",
+      "bytes": 318
+    },
+    "results/unified_exact_round121/candidate_identity.json": {
+      "SHA": "d7b9084b8ff3710fa2e39671f57dfd9bf493663d7b18734fa138fc20d8286bad",
+      "bytes": 33308
+    },
+    "results/unified_exact_round121/reconstruction/group01/controller_targets.csv": {
+      "SHA": "7fd851ce8a505ab39830280fa685e90bf0244d73bdcc10ca1a29d67a368206fc",
+      "bytes": 1035
+    },
+    "results/unified_exact_round121/resumption/before_complete_documentation/latest_execution_state.json": {
+      "SHA": "0f9e46a5745139f2b6cb453fdcaf6833076677354d80ffc211427d2a88d06c41",
+      "bytes": 967
+    },
+    "results/unified_exact_round121/argv_freeze.json": {
+      "SHA": "9d43a7601a0d51831d622a27c8510927aa36736e74bb0b0ecae3afae85837b72",
+      "bytes": 103231
+    },
+    "results/unified_exact_round121/own_fleets_and_objective_parts.json": {
+      "SHA": "2f07db34219231f4fcd4931e8b507fff9d33d957c810e6343b21711c96b4ad77",
+      "bytes": 55780
+    },
+    "results/unified_exact_round121/prospective_helper_freeze.json": {
+      "SHA": "b5b4180971cd675d74b97b41cc769236c7c5b73f4eac23a447d463a71ac665c3",
+      "bytes": 32177
+    },
+    "reference/round121_confirmation/Q40-R2-S_source_mapping.json": {
+      "SHA": "455297ba186e4e6209ac5555f5c3710224a39eea95e9b7b0fff81d901d925bdc",
+      "bytes": 15877
+    },
+    "reference/round121_confirmation/Q50-C2-U_landscape.json": {
+      "SHA": "5a3a7260fe68f8ad5974cebf6efe3a53d906dc54b41b8793ffd245d695ce6f42",
+      "bytes": 37923
+    },
+    "results/unified_exact_round121/review/h_reselection_sources/R98-C2/saved_D0_witness_and_matrix.json": {
+      "SHA": "01de6158c3f7e582acaf91b83674e0a9358b473e588feb07f9967b54cf6c6c68",
+      "bytes": 3646644
+    },
+    "results/unified_exact_round121/resumption/formal05_observation.json": {
+      "SHA": "cd0190c07b91193d8e44c1619784064dc07a331f4ec9cdb81617526d7a1327b4",
+      "bytes": 663
+    },
+    "results/unified_exact_round121/engineering/final_native_boundary.json": {
+      "SHA": "6efb317c8028179686f4c8c2f3786f7bbb1d43677c078367731a32cdde566904",
+      "bytes": 1258
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/03_before.json": {
+      "SHA": "b36e7fcb53b18d8ed9134095dcdab8371f05d8663e2005a22d85fa0d86c6fe26",
+      "bytes": 139
+    },
+    "results/unified_exact_round121/resumption/before_policy_text_alignment/prospective_helper_freeze.json": {
+      "SHA": "4b59126b2e4e2014609fc27c92515d387f4a35f0f5756c3d8297accb66fbfbe8",
+      "bytes": 32177
+    },
+    "results/unified_exact_round121/reconstruction/group01/controller_native.csv": {
+      "SHA": "4b3049ca2ef5378e17c65a1594b142997a099efe83a761e8d809975b57bb969a",
+      "bytes": 6578
+    },
+    "results/unified_exact_round121/resumption/qualification05_observation.json": {
+      "SHA": "9a4c7d6ba36d303af4ea7555e34581e6ae98ce74f6ae68ae5aababe405314f4f",
+      "bytes": 742
+    },
+    "results/unified_exact_round121/review/resume_precontract.json": {
+      "SHA": "85e7f60ad885f941c77c05a8cab7787eedccc5871d6a69f49ae4002fffd645ba",
+      "bytes": 54902
+    },
+    "results/unified_exact_round121/reconstruction/group02/clock_qualification.csv": {
+      "SHA": "717e1d87256785b7374cbb8909850344259274b6920a0c1366f4600b5a69cfff",
+      "bytes": 1459
+    },
+    "reference/round121_confirmation/Q40-R2-S_selection.json": {
+      "SHA": "ff25cd161604756877346809c8fb619def76f9fd6c8277c97f7c0aabdcddc8e6",
+      "bytes": 2236
+    },
+    "results/unified_exact_round121/reconstruction/group02/native_calls.csv": {
+      "SHA": "9be14615bd7f319c61493c2f2f67c7ca73c642ffc8a3701a5eba5444d73c8b74",
+      "bytes": 6206
+    },
+    "results/unified_exact_round121/resumption/authorization01.json": {
+      "SHA": "02a03088ef3304f6ed3827747f3d9f8c06c7f673eb499f0f165bf3ed238a2d7f",
+      "bytes": 2035
+    },
+    "results/unified_exact_round121/fees/formal01_F2/launch.json": {
+      "SHA": "252cf312b52e71f2303b4421e0bac566c142cb2198a248601d7e2b03593016c6",
+      "bytes": 951
+    },
+    "results/unified_exact_round121/delivery/app_attachment_receipt.json": {
+      "SHA": "e9de97a8783cce866b0d1bc47082067ebbd87009b8bfedf43e8ae53c8c64986f",
+      "bytes": 354
+    },
+    "results/unified_exact_round121/qualification/finite_fixtures.json": {
+      "SHA": "387ec064d9b9b8940ac276c44f4f5396376fa81273e866c4e0fe7458b23c6e20",
+      "bytes": 983
+    },
+    "results/unified_exact_round121/resumption/before_resume01/source/scripts/round121_finish_report.py": {
+      "SHA": "8fca701e19bd3a1fea649c4ba6e35c1db690135ead490dac73a7d9241ac0dbf2",
+      "bytes": 15806
+    },
+    "results/unified_exact_round121/fees/qualification03/failure.txt": {
+      "SHA": "5ad8b9c13f5db7da04546eeee8dad7a46dda7654bcbe2ff289f81fb2e188c431",
+      "bytes": 3257
+    },
+    "results/unified_exact_round121/fixed_position_status.json": {
+      "SHA": "ab9c598185354e8d02ffde814db13343cf3d36fcd2c5cc8b17a629b5e95d19cb",
+      "bytes": 5919
+    },
+    "results/unified_exact_round121/fees/formal01_F2/receipt.json": {
+      "SHA": "51cb172fad1091848652946610dff913e8c2ce965f3db81f5e03c95481e3d173",
+      "bytes": 573
+    },
+    "results/unified_exact_round121/reconstruction/group05/target_discovery.csv": {
+      "SHA": "b2a75646053354c92096f46599981d46ce0a548a2be12e39ff89e8ef460891d0",
+      "bytes": 877
+    },
+    "results/unified_exact_round121/delivery/public_export_receipt.json": {
+      "SHA": "dc4ac801cfd10447f8ea5fbbf85ab2004fdea209a5ebd1fb29acab3ef0fd22e0",
+      "bytes": 553
+    },
+    "results/unified_exact_round121/review/actual_H100_MB_readonly_review.json": {
+      "SHA": "66c7258e944ed3cb89259d20ef8e684c07b16d8705b70bb67d897e2f873fdda1",
+      "bytes": 221465
+    },
+    "results/unified_exact_round121/blocked_current_core.json": {
+      "SHA": "e1cb3e4f47831fe4e8973deb734c66b74f09d4c3f0dba9d948dd136ccfdc5269",
+      "bytes": 57070
+    },
+    "results/unified_exact_round121/reconstruction/group01/chronological_covers.csv": {
+      "SHA": "99e800e945a01df414efd59f60a1c9c136437dda228f6f3886ded92d54772fc2",
+      "bytes": 4875
+    },
+    "results/unified_exact_round121/paper_algorithm_spec.md": {
+      "SHA": "1bdd1cb63edecd8733042186feed3349440a7dea6a4a5e8a0eb13846b0b93356",
+      "bytes": 19585
+    },
+    "results/unified_exact_round121/compact_evidence/manifest.json": {
+      "SHA": "2676960a52abff3a33c276bd456ffab70106e9ec2b92cc642d23ce31ef82eb0a",
+      "bytes": 10064840
+    },
+    "results/unified_exact_round121/review/resume_precontract_publication_note01.json": {
+      "SHA": "b457f3370eb5f781fe9a861656ce796eccdeb0a5e100bd1a0c6f54bcb243b4f2",
+      "bytes": 1699
+    },
+    "results/unified_exact_round121/resumption/latest_execution_state.json": {
+      "SHA": "c1981b634357324920cd216a797dfd1798a853d16c918ec53bc15bd905bb3454",
+      "bytes": 859
+    },
+    "results/unified_exact_round121/review/resume_precontract_finding02.json": {
+      "SHA": "c14e84ea2ab4df697a638d208314709d3aed4462adf6d0b290609e21a418de0b",
+      "bytes": 976
+    },
+    "results/unified_exact_round121/reconstruction/group02/covers.csv": {
+      "SHA": "6f19990fb784a344eac084079b0ae53b3e89dcc272f86b5a7d1867e8b036ef72",
+      "bytes": 295171
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/receipt.json": {
+      "SHA": "f96318b4022a2090bdffb256a1f7084d939da31c799ae70deb9b785639199f91",
+      "bytes": 572
+    },
+    "results/unified_exact_round121/reconstruction/group02/controller_child_bounds.csv": {
+      "SHA": "eb6b75e803c7095231e5a4ebe27085ee4389d47c8ef0c805c9361c79acba81b7",
+      "bytes": 556
+    },
+    "results/unified_exact_round121/review/resume_precontract_baseline.json": {
+      "SHA": "f5dffc651c2785c50f7aa36bedc49dbedc3b2ebf3e5fd92035c21fe61c61edf9",
+      "bytes": 392989
+    },
+    "results/unified_exact_round121/resumption/before_resume01/all18_pairs.json": {
+      "SHA": "83ce40d0be970029e96414b03ff94687ff666a1b1d67391d9c78cf735b2aeda1",
+      "bytes": 5539
+    },
+    "results/unified_exact_round121/resumption/before_resume01/paper_claim_evidence_map.md": {
+      "SHA": "630ea0402f8b0304e32f1355dd893f3804211156989b2a520d216e84166330c9",
+      "bytes": 1688
+    },
+    "results/unified_exact_round121/fees/formal01_F2/03_after.json": {
+      "SHA": "a39cd5547c6000a141dd1bcfdf9f9352ec7db44afb48d87dc20fd629918c4ae3",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/reconstruction/group02/checkpoints.csv": {
+      "SHA": "01d72ea3e4cc2e6139c8141d25a90f2e08fc94d0814de9ea56899fafbabfbcf0",
+      "bytes": 2139
+    },
+    "results/unified_exact_round121/resumption/before_resume01/final_report.md": {
+      "SHA": "72b3c00867a65e58a13fb17a3dcb025ddb4cbfc787f559940fc47b2a9ec9cd3f",
+      "bytes": 6878
+    },
+    "results/unified_exact_round121/reconstruction/group02/chronological_covers.csv": {
+      "SHA": "9efd94dedce8b55c799e610644462922349060e1396f2c960da503277f75831c",
+      "bytes": 163125
+    },
+    "results/unified_exact_round121/campaign/group02/identity.json": {
+      "SHA": "97cd08873d2d1bcb6a1d610c0054a0eb2bf7561fabd8f4a07494919c33e35ce3",
+      "bytes": 49043
+    },
+    "results/unified_exact_round121/resumption/engineering_findings.json": {
+      "SHA": "061083e66f331c87876b49b4516647f9c7231e5f23d3de78973d960d2e5bff7b",
+      "bytes": 1696
+    },
+    "results/unified_exact_round121/reconstruction/group03/native_claims.csv": {
+      "SHA": "28972eb58d70c0344856fa9cd61aa4690e3e213c607a647de6de8e18317cdbe4",
+      "bytes": 332959
+    },
+    "results/unified_exact_round121/reconstruction/group02/current_core.json": {
+      "SHA": "5018e9fba86a0de6dd9fb611861dcd0560c16ea4f9c871cc63d86faf1645c32a",
+      "bytes": 1986247
+    },
+    "results/unified_exact_round121/mechanism_account.json": {
+      "SHA": "d761d9719b4b878ed3695565353f80be81be974a206438ec3ae0696045a296df",
+      "bytes": 267326
+    },
+    "results/unified_exact_round121/reconstruction/group04/native_claims.csv": {
+      "SHA": "e654d786bc31a3c2abfcbc5ea5f114349d950be44f735e5c2ff4987afc9f6ca2",
+      "bytes": 828235
+    },
+    "results/unified_exact_round121/qualification/resume01/current_core.json": {
+      "SHA": "267f3c1a438ef6bbced2264081a90556d60cbafab02875fc0fb032b8750e530c",
+      "bytes": 6547688
+    },
+    "results/unified_exact_round121/delivery/payload_scan.json": {
+      "SHA": "00350c98fc597a41f8f5cd8cf8c8ddf73b5d350682e643ade601ed98115dc559",
+      "bytes": 352
+    },
+    "results/unified_exact_round121/fees/formal01_F2/01_before.json": {
+      "SHA": "5eab9d5b3090c35d68cda9d55664d419acfa4d6cbc8ab10ca8611c1ac521455f",
+      "bytes": 136
+    },
+    "results/unified_exact_round121/public_pack_receipt.json": {
+      "SHA": "4ce842f8654772f30c47f3fe391e12ac4cbb3a995f16c8c34722d72c01a35b85",
+      "bytes": 713
+    },
+    "results/unified_exact_round121/reconstruction/group05/progress_publication.csv": {
+      "SHA": "11223424bebfc9f6a5a656ec3220dec02a66cbf115926aa1c61c9307e6002209",
+      "bytes": 574
+    },
+    "results/unified_exact_round121/qualification/prospective_helper_freeze_before_readonly_fix.json": {
+      "SHA": "e39d62a38049984aebd1a265342697da512769f9fe5709cd371b82f52c51bb5b",
+      "bytes": 32073
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/02_before.json": {
+      "SHA": "a639131902713baa4f051545b6dc75cee19fcd0a79e7a70cbc5ee8cde70a29e0",
+      "bytes": 136
+    },
+    "results/unified_exact_round121/delivery/review_and_recovery_scope.json": {
+      "SHA": "7f65a7d31f05f31966b8d4499147f6ec63837abec4c7d333ddfeb947b32729fe",
+      "bytes": 1573
+    },
+    "results/unified_exact_round121/qualification/h100/runtime_status.json": {
+      "SHA": "f7f104a88401194ff2591228cd543c4d92425d73711f012858f6217b97b2f665",
+      "bytes": 379
+    },
+    "results/unified_exact_round121/reconstruction/group05/fleets.csv": {
+      "SHA": "52876f6791c98e6b4df1f53139b266dba313cfa959296b2ec39e5fa9e04f75f6",
+      "bytes": 6441
+    },
+    "results/unified_exact_round121/reconstruction/group03/target_discovery.csv": {
+      "SHA": "2aeb8a12204ad109a06e0f7427f117efe376dd89a96c87ac3a82b2adfe359e23",
+      "bytes": 868
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/01_before.json": {
+      "SHA": "47a919e6587b02fe9872199cce661605b47ecaa1abb506711129ddd06643a16c",
+      "bytes": 143
+    },
+    "results/unified_exact_round121/engineering/report_receipt.json": {
+      "SHA": "1fbc6c72e713c57692ed942783f6666e114625197641aa70e20d6665790f73e9",
+      "bytes": 80
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/01_after.json": {
+      "SHA": "ee53d21b144f53a09f417ca05424735e4939e151d875c7f68d9b77c65a856156",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/fees/formal01_F2/02_before.json": {
+      "SHA": "38ca7884a44bbb5a16441ce437f4d768119d09e1296df643e93cffbc05f067df",
+      "bytes": 132
+    },
+    "results/unified_exact_round121/goal.md": {
+      "SHA": "6853ebe46098a6b7a2d4e94ba51686f428f3ae1d6d82e3b492f70872d4fb294d",
+      "bytes": 20333
+    },
+    "results/unified_exact_round121/fees/formal03_R98_C2/01_before.json": {
+      "SHA": "66ceb5aaea7e58db65e29dd12535fa87b105c54f862ea2e3e331c4909491587d",
+      "bytes": 138
+    },
+    "results/unified_exact_round121/delivery/initial_remote_readback.json": {
+      "SHA": "6c74df7ebecb3c8437829aa49db7dc18dac580d0c45b7e18d67bd88b634e816e",
+      "bytes": 3946
+    },
+    "results/unified_exact_round121/fees/formal01_F2/03_before.json": {
+      "SHA": "c6f75b557fd09dc95732c580eddb6c50e5c0e530a1ba33dd22d2de078a30ddd5",
+      "bytes": 131
+    },
+    "results/unified_exact_round121/reconstruction/group03/controller_events.csv": {
+      "SHA": "ef62d0f7d4120cc9e36870915768b9f17c3f3d023d79bb65bd206f691c525ee8",
+      "bytes": 1128
+    },
+    "results/unified_exact_round121/resumption/before_policy_text_alignment/candidate_identity.json": {
+      "SHA": "c78828e507a49289a035df04b5f6bbfd4304aa9ce13b084072cb8c9c34c0b9c8",
+      "bytes": 33211
+    },
+    "results/unified_exact_round121/fees/qualification05/02_before.json": {
+      "SHA": "4156a53cd56b3661a5268ebcc2936dc54328cfafd90d9bbfce038ebbe3cc950a",
+      "bytes": 2807
+    },
+    "results/unified_exact_round121/delivery/restored_check.json": {
+      "SHA": "7b27732410b0f3229f0a382bde888a5a609a142d4dbaf9e82255ac2c6b15db3c",
+      "bytes": 293209
+    },
+    ".gitattributes": {
+      "SHA": "18298a742c72d9fd41b5f47a6482d7bb18269293a68dd46ecdb3ab95a0d963fd",
+      "bytes": 14177
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/03_after.json": {
+      "SHA": "cdb3938ec3de7fc8c6bd43d655c99aa87dcd103f37f617244044b0100ce4a5b8",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/delivery/final_local_observation.json": {
+      "SHA": "54a533d596ad03405ce537f4d36ab454dce7fc2f9e5524f8dfd059661940b282",
+      "bytes": 1290
+    },
+    "results/unified_exact_round121/reconstruction/group05/native_counts.csv": {
+      "SHA": "7a4d8c3b3fa8532f292d60fac92a8a93cf617482e03cda66b136248bff80d95f",
+      "bytes": 250
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/pending_exit_receipt.json": {
+      "SHA": "98bdce4092a07f870114a926565c56fbf0ab865da97c5cc30fe95781a763bd9f",
+      "bytes": 316
+    },
+    "reference/round121_confirmation/Q40-R2-S_parsed.json": {
+      "SHA": "e34817848a30f66dc099c3937fcee190692d4ab7ec068afaadf7b0bfb484a3bb",
+      "bytes": 48710
+    },
+    "results/unified_exact_round121/reconstruction/group03/own_UB_flow.csv": {
+      "SHA": "adb4cd77cbd88e61b3ca233f90849da78efdd7a63fba1a32a4f4567cc14c8ffc",
+      "bytes": 283632
+    },
+    "results/unified_exact_round121/measurement_policy_v2.md": {
+      "SHA": "6f77267c76129ca4ff2a851c7233b3482329ea9822c2682d393b17c1d9b75c1a",
+      "bytes": 2455
+    },
+    "results/unified_exact_round121/reconstruction/group01/native_claims.csv": {
+      "SHA": "d4471e246692aa51bc4341521d4b775f24cf96031c20579ac4508a09e4bb4f4d",
+      "bytes": 26709124
+    },
+    "results/unified_exact_round121/qualification/actual_CLI_status.json": {
+      "SHA": "0ddd6e7b758fa5ef6104d24cbb8fb189852bc8c683878da08b94771437d1992e",
+      "bytes": 983
+    },
+    "results/unified_exact_round121/RESUME.md": {
+      "SHA": "9f12bc344e0fcf2a58d6f17a1fa25bde78c2820b66dfc44c2ef38c2625311721",
+      "bytes": 23703
+    },
+    "results/unified_exact_round121/engineering/reference_compile02/launch.json": {
+      "SHA": "52f07635d56e6742778d9c703c9e5a202e70b9219729abba62a4ded82eaa2bfd",
+      "bytes": 1124
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/03_before.json": {
+      "SHA": "5776080027b931ac43ac8d774c91e62d41f27da6c5b9d9fe1b4eb51ec1a89d31",
+      "bytes": 137
+    },
+    "results/unified_exact_round121/qualification/h100/summary.jsonl": {
+      "SHA": "b1dcfefb617bc19a40947afded322ef51bba745c36db8978f950cf8dcf3a0f7b",
+      "bytes": 3330
+    },
+    "results/unified_exact_round121/resource_summary.json": {
+      "SHA": "d97cfd77f13ca8ce45494299bddd5f0a9b8bddb8b4721c51b5694b966799e084",
+      "bytes": 1490
+    },
+    "results/unified_exact_round121/engineering/reference_compile01/receipt.json": {
+      "SHA": "613b36a02c0557618532824f3f08c9355b0bbc7e063cafd4fc292f7457864d98",
+      "bytes": 221
+    },
+    "results/unified_exact_round121/qualification/reference_batch.tsv": {
+      "SHA": "ff87622ffc1edadacd13122193b2d7619374d645d842d0f8877dd875607860c2",
+      "bytes": 872
+    },
+    "results/unified_exact_round121/review/pre_contract.json": {
+      "SHA": "4ffc8624a21b6b5217121503b9be248cce7666dc85406854e2838d3a02f46a0c",
+      "bytes": 101856
+    },
+    "results/unified_exact_round121/reconstruction/group05/checkpoints.csv": {
+      "SHA": "61696178b136663685648cfef85c6e4b9b41cd55d5b5014fc96da66384060d92",
+      "bytes": 2490
+    },
+    "results/unified_exact_round121/fees/qualification02/launch.json": {
+      "SHA": "ae63841ab7133990615ffabc884411fc646cf115029168901ac5ca8668545db9",
+      "bytes": 941
+    },
+    "results/unified_exact_round121/resumption/before_document_reference_key_fix/final_freeze01.json": {
+      "SHA": "963bee9fa8006d80016349897a3d7d930c5be07a2fbb154dd1b2eef3f73a4159",
+      "bytes": 32763
+    },
+    "results/unified_exact_round121/engineering/pre_generation_staged_scan02.json": {
+      "SHA": "c7831ae41cc07feddecc881f9c61a964e391d672a477fdcda99d7e3457bd15d5",
+      "bytes": 346
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/03_before.json": {
+      "SHA": "7c99dc55e85180287d3666c5309be40736ddf6891a8a4a79cb24b81d114ed329",
+      "bytes": 139
+    },
+    "results/unified_exact_round121/resumption/before_resume01/all16_arms.json": {
+      "SHA": "32162dc44caa75799c9b7dcb80290e19b42d1f7dd1da65ce40b3d91c75aac116",
+      "bytes": 6093
+    },
+    "results/unified_exact_round121/resumption/publication_archive_failure01.json": {
+      "SHA": "258e5a3cd59500af5b265bad6100e903a581f938dad6855e25864ac3c4e9f6d1",
+      "bytes": 951
+    },
+    "scripts/round121_prepare.py": {
+      "SHA": "65d481c41c49dca386a88dd05dea9937917ce99642b4b5fe8a41a11bd356aa7a",
+      "bytes": 8251
+    },
+    "results/unified_exact_round121/resumption/before_resume01/measurement_policy_v2.md": {
+      "SHA": "a9205e33ce44dfc60d16160507f04ff74fa0386979ba270bda4d8ef2cc0e6d6f",
+      "bytes": 1962
+    },
+    "results/unified_exact_round121/engineering/pre_generation_staged_scan.json": {
+      "SHA": "92ca328946e2e2c540a0e07ed4d41a598b1fa10cb7e30a29c4701c7ba925d3e1",
+      "bytes": 350
+    },
+    "results/unified_exact_round121/reconstruction/group04/split_exposure.csv": {
+      "SHA": "2550a5b106fe8b4fcc5b197b0596552ab3c97b6829d6f150718605e674acd1cc",
+      "bytes": 186
+    },
+    "results/unified_exact_round121/reconstruction/group02/fleets.csv": {
+      "SHA": "64555d30d297a24fb2c5a663145bbf095d6c3ba539516e41dfd2558cab6fabb7",
+      "bytes": 4053
+    },
+    "results/unified_exact_round121/resumption/before_auditor_identity_binding_fix/prospective_helper_freeze.json": {
+      "SHA": "4c87ae5ffe4f8b88b6068014cef3b44a556b7f1346df4aa07e327c5af508da82",
+      "bytes": 32177
+    },
+    "results/unified_exact_round121/delivery/public_restore_receipt.json": {
+      "SHA": "028566c12ab4d1a515beaf52536714de226f9a53e2fb59bd8247fa88246fe6cf",
+      "bytes": 405
+    },
+    "results/unified_exact_round121/reconstruction/group02/own_UB_flow.csv": {
+      "SHA": "965eb956fbc8743b1938c3691954c99d6a2de4b6e84d866a98d5cc2d82c87fe8",
+      "bytes": 60145
+    },
+    "scripts/round121_release.py": {
+      "SHA": "64e08f1cef1042100e74a2f4ab0e712e89fd944ff52283a2bf93658dd0fe367c",
+      "bytes": 13002
+    },
+    "results/unified_exact_round121/review/minimal_qualification_scope_review.json": {
+      "SHA": "e989de5c85d7140d834d37295edc12a72a3db46de478353b18c6feb387107c7d",
+      "bytes": 8854
+    },
+    "results/unified_exact_round121/qualification/resume01/recovery_fixture.json": {
+      "SHA": "bc601a2e4c014217d79bbb137614874b88268d626244fef55abcaa422745a5c3",
+      "bytes": 435
+    },
+    "results/unified_exact_round121/review/h_reselection_sources/F2/saved_D0_witness_and_matrix.json": {
+      "SHA": "b362728ed1bcb1baaab1ed136e216d220cd4d8ec9863a9f9cbff0be20aca2fa3",
+      "bytes": 966113
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/02_after.json": {
+      "SHA": "d65f050110573a3634753868cb79783c400a5988268bd12050ee49e6b2d5a2b3",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/reconstruction/group04/native_calls.csv": {
+      "SHA": "bb8c91d6ba2f48e026f7046fb0c1bfa13b1443fac937e7596318a01d44326b93",
+      "bytes": 7713
+    },
+    "results/unified_exact_round121/compact_evidence/evidence.tar.gz.part001": {
+      "SHA": "bc3fecbb586a164add72606a148fd176db0fd612f4071b9a3a4c5421c1fe494c",
+      "bytes": 33554432
+    },
+    "results/unified_exact_round121/generation_receipt.json": {
+      "SHA": "1186e67a39420b1b9d0bae5ddafdd369f54314523e7466ae758997592eb179d1",
+      "bytes": 1917
+    },
+    "results/unified_exact_round121/fees/formal03_R98_C2/02_before.json": {
+      "SHA": "13982f1c1821ab2f31c10d5b5a977f6e58ebfdf8c2d7117dadc4751c89b5b9f9",
+      "bytes": 137
+    },
+    "results/unified_exact_round121/production_identity.json": {
+      "SHA": "71f9539dd64cd845f7a1765603753d87665d84adc2889257d0bfc0ba67403780",
+      "bytes": 23757
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/launch.json": {
+      "SHA": "d0201b1a365e479a88d6933a00af7ba547ae4f2d89c32268d877f709e8f66716",
+      "bytes": 958
+    },
+    "results/unified_exact_round121/reconstruction/group02/progress_publication.csv": {
+      "SHA": "e95c0a68229381dc5aae7ff58f4c222427db871ebe8597c9d2962ddbb761d11c",
+      "bytes": 571
+    },
+    "results/unified_exact_round121/qualification/helper_freeze_before_owner_fix.json": {
+      "SHA": "df241e8b8a5bf73cd53c8aedede2685922ca4b7e651acc1e76c38dc601416000",
+      "bytes": 32073
+    },
+    "results/unified_exact_round121/reconstruction/group04/fleets.csv": {
+      "SHA": "cda153a0cfa76455d2a83b6a46bad229306a78f32d167da581d7b8106cdbc924",
+      "bytes": 4356
+    },
+    "results/unified_exact_round121/review/h_reselection_sources/R98-C2/actual_D1_three_rows_and_provenance.json": {
+      "SHA": "51a653761f521e6a5447ec060e7d9b38d1cdd45c39ac6d22ccec1e09448e350e",
+      "bytes": 4863
+    },
+    "results/unified_exact_round121/resumption/before_resume01/seed_stratification.json": {
+      "SHA": "4a3e57868caf4ce19353f9ab6ae109f8d8dd02790e2e5e1e593dcec47e570878",
+      "bytes": 465
+    },
+    "results/unified_exact_round121/review/resume_precontract_version01.md": {
+      "SHA": "c0b0877c0e8e1eafd93f4f89a17ad72bf6fc874e9d04d788c910c945f40253d6",
+      "bytes": 3136
+    },
+    "results/unified_exact_round121/resumption/before_producer_provenance_fix/prospective_helper_freeze.json": {
+      "SHA": "e780e5f9626f229792cf1255a02a5af8d38f3a79ebf8ab1c4a2cb72116cd5854",
+      "bytes": 32177
+    },
+    "scripts/qualify_round121.py": {
+      "SHA": "48fe95bea2b0d4e014c760ee4f80da00a6867ab875b23928c190644efffdad1b",
+      "bytes": 17265
+    },
+    "results/unified_exact_round121/initialization_receipt.json": {
+      "SHA": "079a8055b0bd5603216b0f098291690ca3b66990cc2f08c0f94b01db64308fbe",
+      "bytes": 1796
+    },
+    "results/unified_exact_round121/fees/qualification02/01_reference_before.json": {
+      "SHA": "883dea40f8d5c5e1afeb0ec88c265c6adec1965e18dfa1027f5b1b7d0f1268d7",
+      "bytes": 473
+    },
+    "results/unified_exact_round121/engineering/preparation_failure_ledger.json": {
+      "SHA": "134a097b298258ba559c9b3a515ca374a4d9674a468bdedb29e4470147f0c983",
+      "bytes": 914
+    },
+    "results/unified_exact_round121/resumption/before_resume01/prospective_helper_freeze.json": {
+      "SHA": "677b16507ea89c58927bd24bb875f2d7d2a3f4a4f5392a8005b7336057976bd7",
+      "bytes": 32073
+    },
+    "results/unified_exact_round121/reconstruction/group03/split_exposure.csv": {
+      "SHA": "e8f0b95c52416ee72e617a56a2490616d3da488f3824a6f3713b155bae0fc416",
+      "bytes": 178
+    },
+    "results/unified_exact_round121/resumption/before_resume01/source/scripts/round121_fixtures.py": {
+      "SHA": "b6b0b0cab6f088f8bd28d2eb917df4686e7679b12b0e5f8237c41e76dac65bd7",
+      "bytes": 6683
+    },
+    "results/unified_exact_round121/reconstruction/group01/split_exposure.csv": {
+      "SHA": "0d1e902bb3d5697de9575cab19ec6c2d4cb1d6c4e7c417cae555f5c632db28c2",
+      "bytes": 191
+    },
+    "results/unified_exact_round121/fees/formal03_R98_C2/03_after.json": {
+      "SHA": "ca23d5d862063e1e5656fe4c17947677288016173d41245346a0a54425182123",
+      "bytes": 226
+    },
+    "reference/round121_confirmation/Q30-C2-B_parsed.json": {
+      "SHA": "1670953d383c4cecf71a096cf5fdd7bdbd6b1a3c6402007a0e9dee9b5ae0ff6c",
+      "bytes": 28786
+    },
+    "results/unified_exact_round121/reconstruction/group01/native_calls.csv": {
+      "SHA": "fa1dc3335f700e066d657a4582357b3fc78489638f146c2c7d0ce5ed2ec9587b",
+      "bytes": 10442
+    },
+    "results/unified_exact_round121/fees/qualification02/01_reference_return.json": {
+      "SHA": "caeab646df6f1945e0b971453f8e63ad9882a040a8f41dbb5ef766c7ea7d7f23",
+      "bytes": 96
+    },
+    "results/unified_exact_round121/engineering/blocked_report_receipt.json": {
+      "SHA": "e6e51cfb2d76e94426266e8e9bd1be1adfcf1f0e4ef623b3bb9e6c7ed7538898",
+      "bytes": 79
+    },
+    "results/unified_exact_round121/fees/qualification03/pending_exit_receipt.json": {
+      "SHA": "2a19a87ee710bb9e117838086b32f86edbee2077969415015ec759dad756407e",
+      "bytes": 315
+    },
+    "results/unified_exact_round121/reconstruction/group01/controller_LP_status.csv": {
+      "SHA": "6ad134759320f21ee9dd878a25a3437a5e73f8b22cab72327ec08f6d7a3c16f4",
+      "bytes": 1322
+    },
+    "results/unified_exact_round121/resumption/before_resume01/qualification_summary.md": {
+      "SHA": "4a314945e17b91588f12e15b9eb361f74a966c1c869275c04034de30dc1df330",
+      "bytes": 1622
+    },
+    "reference/round121_confirmation/Q40-R2-S_landscape.json": {
+      "SHA": "1ea98a7e818416ef2784d97d21442a8f54783e10583bf64a9eca8e7af711e1ba",
+      "bytes": 31236
+    },
+    "reference/round121_confirmation/Q50-C2-U_selection.json": {
+      "SHA": "b5e1f6e659fc0b387a9735a3f12258605eeee1ba1df528b18398eb3cfc78acf2",
+      "bytes": 2284
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/01_before.json": {
+      "SHA": "c0ec8e18e5c7b7be645262adcca4522a7981a4ced1db9b4b82f8e5c260316269",
+      "bytes": 141
+    },
+    "results/unified_exact_round121/reconstruction/group04/time_partitions.csv": {
+      "SHA": "bdade8dc5971ad3691ec565d2df4400dfef52e37fa9332aef8406f99217e91d6",
+      "bytes": 753
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/02_before.json": {
+      "SHA": "8c4e7f1569ddc5b7236f1e13c34f649de0a20b196fcfb67042e0f582e3ca7c4f",
+      "bytes": 138
+    },
+    "results/unified_exact_round121/resumption/blocked_publication01_archive.json": {
+      "SHA": "caaa1b9222e5d518c04383bd3e2f34ecc642e058e1f7cdaeb6cb11afe0da3f0e",
+      "bytes": 4826
+    },
+    "results/unified_exact_round121/review/resume_precontract.md": {
+      "SHA": "08d79d5d6c34d3df59187defca45d2f130211d63b4f49dc9a212d830cd9a3dde",
+      "bytes": 4472
+    },
+    "results/unified_exact_round121/fees/qualification01/pending_exit_receipt.json": {
+      "SHA": "a824609c9f433aa301f4bcef1fc26ec6d1b8eeb5ad6b4dab7b3c5a2a86054554",
+      "bytes": 317
+    },
+    "scripts/round121_reaudit.py": {
+      "SHA": "007b8a0720b1e1c3fc7cbcc1a9ecf126fe2c3b16f53fadd50cf94efb82a7172f",
+      "bytes": 12238
+    },
+    "results/unified_exact_round121/fees/qualification04/receipt.json": {
+      "SHA": "61454cc0b6c6159d5c971d6b68a69527a45bb14b801ce36b4974ae5cd214f588",
+      "bytes": 564
+    },
+    "results/unified_exact_round121/reconstruction/group03/clock_qualification.csv": {
+      "SHA": "ab20c94ce0b3de478024fc7173d9200e71b58719cb916bcdc0e807f6ce80cdd9",
+      "bytes": 1463
+    },
+    "results/unified_exact_round121/reconstruction/group05/mechanism.csv": {
+      "SHA": "35b985bbe44725fdc54597e271c5134f363269b0be28a720e62f7f09310365cd",
+      "bytes": 1103
+    },
+    "results/unified_exact_round121/resumption/before_producer_provenance_fix/final_freeze01.json": {
+      "SHA": "cf270a20894343972c558b03052cde1193c756bc9b8f6b04377def2a04e28362",
+      "bytes": 32763
+    },
+    "results/unified_exact_round121/reconstruction/group05/clock_qualification.csv": {
+      "SHA": "6ea502d7202133a35174133e24e102421364fdfbdfa466fd636a9cc4c9fb7f5d",
+      "bytes": 1460
+    },
+    "results/unified_exact_round121/fees/formal01_F2/04_before.json": {
+      "SHA": "01aedd6dd6fb30871bd8d55893bdd6ab1e9881de4f2b0b78b30b155ba6ed3b9a",
+      "bytes": 130
+    },
+    "results/unified_exact_round121/fees/qualification04/launch.json": {
+      "SHA": "c798e7b86369e7471c100422d7e0770c9e1f7a58c5b6a8cfa3132916114cb66f",
+      "bytes": 965
+    },
+    "results/unified_exact_round121/review/h_reselection_sources/F2/saved_D0_witness_record.json": {
+      "SHA": "e2c3d39dd19849d5aae67b990a3ea058c10d19282b7b1bb4bd0ac81728196cfd",
+      "bytes": 747
+    },
+    "results/unified_exact_round121/fees/formal01_F2/group_verification_receipt.json": {
+      "SHA": "ee64374e3e221616073c3bf3e89132c0b103064d6d5dc2b65f42001746627929",
+      "bytes": 184
+    },
+    "results/unified_exact_round121/all18_pairs.json": {
+      "SHA": "5c49b16505d86f3c50a87f74c32163c0d9b2717e590213527ed4cad8efaec03e",
+      "bytes": 22603
+    },
+    "results/unified_exact_round121/fees/formal03_R98_C2/receipt.json": {
+      "SHA": "eaa7d419f94f5c31d5c883be6a85809ee30877aa4afd7d9c1d2fddec3525a928",
+      "bytes": 571
+    },
+    "results/unified_exact_round121/reconstruction/group03/time_partitions.csv": {
+      "SHA": "a8b048ab2c91931cf16606952195a22fc48b8ebfbaf6627dc2a7aa88c36addae",
+      "bytes": 765
+    },
+    "results/unified_exact_round121/reconstruction/group04/arms.csv": {
+      "SHA": "f12111594761a57df4073f1eab8311c5e54751a02299f3ccd8fbda00976d10f3",
+      "bytes": 3630
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/launch.json": {
+      "SHA": "d69b755dabfd23d7fc5a4f5fc66223c81ebe25670611870105d096336cbf54ec",
+      "bytes": 952
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/02_before.json": {
+      "SHA": "9b8455065454531fbe7710f0358c13359f59b9f6da055f1e009fda17ae78a9de",
+      "bytes": 139
+    },
+    "results/unified_exact_round121/delivery_summary.md": {
+      "SHA": "866e2efde136ccd0b11418e47814648058787d6ff87684f224a2649bec0c3580",
+      "bytes": 3960
+    },
+    "results/unified_exact_round121/review/resume_precontract_version01.json": {
+      "SHA": "1859c1e9b9ef2713d3ecf5d4282dd9aa3e5bd21bce6b33ea790c16c68dd8feb2",
+      "bytes": 54742
+    },
+    "results/unified_exact_round121/resumption/formal02_observation.json": {
+      "SHA": "28e83a6bf8ee1b72a563b4ff37eb333c80d44140b566af07647c8751ebb1a14d",
+      "bytes": 691
+    },
+    "results/unified_exact_round121/source_recipe.json": {
+      "SHA": "96278a7108a5f86a18f5f4723b1ceac5256d7da1260a59db1deee547637e2d5a",
+      "bytes": 7855
+    },
+    "results/unified_exact_round121/reconstruction/group04/controller_LP_status.csv": {
+      "SHA": "c9899aa98b8d86bc5639d70e588397a2ac4a06249cfe52e274420b1df4adc837",
+      "bytes": 959
+    },
+    "results/unified_exact_round121/reconstruction/group02/numerical_reliability.csv": {
+      "SHA": "2981980bb06ae707784365ee95f57d8dd0f95fdd830770d00f96acc556b176c1",
+      "bytes": 1470
+    },
+    "results/unified_exact_round121/reconstruction/group04/controller_AM.csv": {
+      "SHA": "20fdb267866b9050a245de44eb0b1e516a029cc3b0bffb204df0e7ee5efd55a2",
+      "bytes": 2044
+    },
+    "scripts/round121_common.py": {
+      "SHA": "1a401ff0a4ffffbab0265e62d6c46d89b60bad2d2587ffd12999b5db042029f6",
+      "bytes": 6181
+    },
+    "results/unified_exact_round121/fees/qualification05/01_before.json": {
+      "SHA": "a826d5a6c69ce7565d19f9e291dadfd71ee357e91f7fefc2f484c98fd1a7bfba",
+      "bytes": 2807
+    },
+    "results/unified_exact_round121/safe_restore.md": {
+      "SHA": "6c27177961738264b18a86b9f72b24c3095a32ee913cde472309fc0fa391fb5b",
+      "bytes": 3230
+    },
+    "results/unified_exact_round121/qualification/resume01/identity.json": {
+      "SHA": "92090aa14b81a8f5654685eef3b9858f332aeb141850e981e150b2e93755d7e1",
+      "bytes": 50274
+    },
+    "results/unified_exact_round121/fees/qualification03/launch.json": {
+      "SHA": "91c9cb80131a8476464029b3513d40559eaebc9198980d7a97cf1cfbff7f4a96",
+      "bytes": 968
+    },
+    "results/unified_exact_round121/reconstruction/group01/pairs.csv": {
+      "SHA": "63c62a8046fd7b2550b61fa866727d826d9474e6226d96f5108d5dcda836e982",
+      "bytes": 2970
+    },
+    "results/unified_exact_round121/review/qualification_blocked_review.json": {
+      "SHA": "e5e75945a44379aaa2ed6ff055bdbd9c9219fef1d66f6b672a6afaa3a441c12a",
+      "bytes": 58712
+    },
+    "results/unified_exact_round121/campaign/group05/identity.json": {
+      "SHA": "cc8a07add8a8885901a44089799807fe0aaa702b03f4f80675c57a5ce4413e08",
+      "bytes": 49071
+    },
+    "results/unified_exact_round121/reconstruction/group03/fleets.csv": {
+      "SHA": "8c6067ec1bc7b23c14051131abda104e9656a701fa6d5df9549bd1a6a9b68d87",
+      "bytes": 4931
+    },
+    "results/unified_exact_round121/reconstruction/group03/progress_publication.csv": {
+      "SHA": "d9f8389c4220f0844a756bb94739eac25867266e63516ae6717801ee09795906",
+      "bytes": 566
+    },
+    "results/unified_exact_round121/reconstruction/group05/controller_AM.csv": {
+      "SHA": "6ff27c041a84e55e3194a6985686100ebf8b1eb19af45bc2a3e817e49afe9e94",
+      "bytes": 2022
+    },
+    "results/unified_exact_round121/fees/qualification02/01_reference_PID.json": {
+      "SHA": "b4b8e9e609275fcebd34477a4adb3b5af1ecc33c82f95e77ef073564ea15dd49",
+      "bytes": 435
+    },
+    "results/unified_exact_round121/final_report.md": {
+      "SHA": "70c5380bd65764081f93601996206cca65ffdb49f8ccabe16671278d9e7f7dfd",
+      "bytes": 12805
+    },
+    "results/unified_exact_round121/reconstruction/group02/split_exposure.csv": {
+      "SHA": "65d51f448f237670514a528bcac4be6a2d4ed49fe154854126589ac0d3667244",
+      "bytes": 183
+    },
+    "results/unified_exact_round121/reconstruction/group04/mechanism.csv": {
+      "SHA": "4bee27af695baafccb65920193aad03931a3b59d7048f3c4300d9c06290f59b0",
+      "bytes": 10339
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/launch.json": {
+      "SHA": "f6f6df8c4431e2b7c73ccacf61c252abe92514982778dc55acec75e4819f3ae8",
+      "bytes": 956
+    },
+    "results/unified_exact_round121/fees/qualification05/pending_exit_receipt.json": {
+      "SHA": "917b1b675f15413fe00f3a793213b8c14cbebfce9b6246738908312f6aa75364",
+      "bytes": 317
+    },
+    "results/unified_exact_round121/resumption/before_complete_documentation/safe_restore.md": {
+      "SHA": "8ad713d4f9e39e394245481e13b9b7fde8841c5e002310b164adb66f2bc454c0",
+      "bytes": 2526
+    },
+    "results/unified_exact_round121/resumption/before_complete_documentation/RESUME.md": {
+      "SHA": "5537efde0c2f25c9221578755310da7caf703c073e32250d833026fa942a3720",
+      "bytes": 22299
+    },
+    "results/unified_exact_round121/resumption/before_document_reference_key_fix/candidate_identity.json": {
+      "SHA": "c212da0d20c553b17bac0d9ce778793ba235dad03cdecdadb8da17042b92e9b7",
+      "bytes": 33308
+    },
+    "results/unified_exact_round121/qualification/candidate_identity_before_owner_fix.json": {
+      "SHA": "6d032345d366f0f79a8a8ede316ea2e85cec4fa8398e56e05daeaa4db42c28da",
+      "bytes": 32990
+    },
+    "results/unified_exact_round121/input_manifest.json": {
+      "SHA": "329415ee68018aab88d3d9377f3aa9998da041202571e512db3277f80da5df65",
+      "bytes": 14737
+    },
+    "results/unified_exact_round121/reconstruction/group05/covers.csv": {
+      "SHA": "833f350d720e8c47f18433d3b3c7e6bd620138f597cb61a457077787bb5ac2e7",
+      "bytes": 36117
+    },
+    "results/unified_exact_round121/public_dependency_closure.json": {
+      "SHA": "e2bb00bc807d3aaeb6f148ccb18e5bc8110b1cd1e1ec59458af3deee362c9966",
+      "bytes": 3139
+    },
+    "results/unified_exact_round121/reconstruction/group03/arms.csv": {
+      "SHA": "3836f085862fe69d93bbb2ffe0405b544a12d9ca6a462362ad194e5b8da1d926",
+      "bytes": 3622
+    },
+    "results/unified_exact_round121/reconstruction/group05/controller_native.csv": {
+      "SHA": "cd161363a36e62f1399eb0d4647781d0eec475fb29e0c888f1583601850f502b",
+      "bytes": 6372
+    },
+    "results/unified_exact_round121/reconstruction/group01/controller_AM.csv": {
+      "SHA": "6de5be3d032d296f84154694261bbb84063e70af28b28212ed98d1f1820cdd7f",
+      "bytes": 2880
+    },
+    "results/unified_exact_round121/review/actual_H100_P_readonly_review.json": {
+      "SHA": "01ca9fdb116bd90b1986e72c856d6b9037d14e52a49a0f9eb661456fcc5ed378",
+      "bytes": 54154
+    },
+    "results/unified_exact_round121/reconstruction/group01/native_counts.csv": {
+      "SHA": "2fcdb58163ad55754747fe46b5ca4bc095e1fafc4f8b3bb86c6beae5923fd51c",
+      "bytes": 257
+    },
+    "results/unified_exact_round121/resumption/before_resume01/resource_summary.json": {
+      "SHA": "9d613ab79160efbf14f1f0e2e53f0a428e8bbbd20f981bcc1d6ea50037d399ff",
+      "bytes": 2235
+    },
+    "results/unified_exact_round121/all16_arms.csv": {
+      "SHA": "cb3f7f589feb47ec5dd80d8f141a820aeee0d98ce934c47764ad9797f0d83e65",
+      "bytes": 15357
+    },
+    "scripts/round121_fixtures.py": {
+      "SHA": "d77e2cb884300c6742fb70ce1594063448cb40041c96c756f8347ffaba1e0a48",
+      "bytes": 6704
+    },
+    "results/unified_exact_round121/reconstruction/group02/native_claims.csv": {
+      "SHA": "9af41d78856587cb09e482b2e05a7fca064fbc44db1ac0dff1b88f7ef095e6e1",
+      "bytes": 1011604
+    },
+    "results/unified_exact_round121/resumption/before_child_cleanup_fix/final_freeze01.json": {
+      "SHA": "554723d85de3545a6512c31bb51a9a12f6dd9170827d72fde5cede965319c26a",
+      "bytes": 32666
+    },
+    "results/unified_exact_round121/reconstruction/group04/native_counts.csv": {
+      "SHA": "05521d5103834e3f802db0f771387cd98b22facc72b2f2a7b4934758759e2864",
+      "bytes": 250
+    },
+    "results/unified_exact_round121/reconstruction/group01/own_UB_flow.csv": {
+      "SHA": "a007be326df31dcd234ae64bbb0417a40e2c5ba4c01e38b9ce671cc18f1e6db6",
+      "bytes": 36813
+    },
+    "results/unified_exact_round121/resumption/before_document_reference_key_fix/prospective_helper_freeze.json": {
+      "SHA": "3c56a65ced926193c68e03e85cdd081e20a1e28f74f9c9c910a5b7d39ad1edd0",
+      "bytes": 32177
+    },
+    "results/unified_exact_round121/reconstruction/group05/native_calls.csv": {
+      "SHA": "4313db4ec13a4fbe1e41f95565fc1dcc7e1e5dcd8d82c84e4ad7f694876e812b",
+      "bytes": 10214
+    },
+    "results/unified_exact_round121/seed_sensitivity.csv": {
+      "SHA": "a1f7e70dc5e871f2987a2458019a4bb393213d21451e885d8fd0125cc9b968b5",
+      "bytes": 453
+    },
+    "results/unified_exact_round121/fees/qualification01/failure.txt": {
+      "SHA": "fa2f891d1614dc3eece9d85274ecdb258f86e6469dd85314d03fd3a2978d268e",
+      "bytes": 1731
+    },
+    "results/unified_exact_round121/reconstruction/group01/numerical_reliability.csv": {
+      "SHA": "b3fe61c0e417f46c952b3b67e4efac39f9c3c86f1aca77d3b4d5cbe404178461",
+      "bytes": 1713
+    },
+    "results/unified_exact_round121/all16_arms.json": {
+      "SHA": "41f4404ea4f1cf868237c8bf86fd82db7bf2d3589fe78a335ab0f76a79ca9795",
+      "bytes": 39450
+    },
+    "results/unified_exact_round121/fees/qualification03/existing_P_readonly_requalification.json": {
+      "SHA": "ab89513adc3bddf64678db32782adb21a47276bbaf768e850b899335ddf50ab1",
+      "bytes": 9768
+    },
+    "results/unified_exact_round121/preflight_R120_pair_replay.json": {
+      "SHA": "4e2c48cb3f0e2c2b276cad7513549c0d7fd02b4ce5a5be0c020fb82ae1d2dccd",
+      "bytes": 77828
+    },
+    "results/unified_exact_round121/qualification/candidate_identity_before_readonly_fix.json": {
+      "SHA": "b72535bd8efac5488eacb36df28d74ce75dfa842b64c7a1ea4b54cc3b0865224",
+      "bytes": 32990
+    },
+    "results/unified_exact_round121/resumption/before_resume01/source/scripts/qualify_round121.py": {
+      "SHA": "825e1b1a10b8aa674e6950cc85e0ae8280341e2b02aa6e59cd6134241a52cf79",
+      "bytes": 11724
+    },
+    "results/unified_exact_round121/resumption/before_auditor_identity_binding_fix/final_freeze01.json": {
+      "SHA": "0b88df17ec8147347f3f695a3890776f52664a760cb1ac7fa7655452130e8c8d",
+      "bytes": 32763
+    },
+    "results/unified_exact_round121/resumption/before_resume01/snapshot_receipt.json": {
+      "SHA": "7509cbe1b728d65c0af65dd672897a4c9e3c69c0849229e34aaa9329ec28f87f",
+      "bytes": 3799
+    },
+    "results/unified_exact_round121/reconstruction/group03/controller_AM.csv": {
+      "SHA": "8e63eaa509cbbe22f8ee8f788ced820e67c79651627b77ca8396f4c857945a77",
+      "bytes": 2129
+    },
+    "results/unified_exact_round121/fees/qualification03/receipt.json": {
+      "SHA": "896cdad7dca5d35c35d09675d9075f65262cfcb81e989db375666a73b60711f8",
+      "bytes": 567
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/01_before.json": {
+      "SHA": "e7b7857a3550b976fb2bd3b218728ee4eb237e4b1fe8f842cb198ef8aa69550a",
+      "bytes": 142
+    },
+    "results/unified_exact_round121/resumption/before_resume01/stage_decision.json": {
+      "SHA": "efa117c11e8987fd992663f2ec8d8d9ed720c37fac8db8270ca0c274afe6af95",
+      "bytes": 1669
+    },
+    "results/unified_exact_round121/resumption/before_resume01/source/scripts/round121_campaign.py": {
+      "SHA": "075cd5cb328dbea98eb51a7585f79dde7fb4ab36e302919f21dfdc73510bd8a2",
+      "bytes": 2790
+    },
+    "results/unified_exact_round121/resumption/publication_scan_finding.json": {
+      "SHA": "1fd0df58617fcb734dabb15bf3c21c7c5ea8b96122c334d98350c46600d42d82",
+      "bytes": 899
+    },
+    "results/unified_exact_round121/fees/qualification01/launch.json": {
+      "SHA": "12511fa336d6c58686cf29a2374942dd0cb67206b195c68e11fd60a2759e4097",
+      "bytes": 896
+    },
+    "results/unified_exact_round121/reconstruction/group02/native_counts.csv": {
+      "SHA": "e3a62f443dec5861549e7aba6a43965adcdbe788c6bb701c7ec2d9fc71790094",
+      "bytes": 247
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/03_after.json": {
+      "SHA": "83a565bf82cfea80046dab01d18c87c9885c51df8055c736ae91ed84317e5cff",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/fees/qualification05/receipt.json": {
+      "SHA": "663a9f04d0f609380278e3acc94d66841df70d7c668bf17899f4fae65d6ce93d",
+      "bytes": 572
+    },
+    "scripts/round121_finish_report.py": {
+      "SHA": "e160d33f73953fd6dcba6cdfb9e90f4c87435cad8c599c8ff243d15ed6eca017",
+      "bytes": 21147
+    },
+    "results/unified_exact_round121/delivery/restored_check_scope.json": {
+      "SHA": "7206d1e178c53a925c0e870d339c5d2a672992575cf2ed4b644f3f1fd75b9022",
+      "bytes": 1125
+    },
+    "results/unified_exact_round121/delivery/carrier_scan.json": {
+      "SHA": "e1acff86900eecf2132fe90f65472a2979b73f08572b8429bd51caecb8e3fd21",
+      "bytes": 475
+    },
+    "results/unified_exact_round121/fees/qualification05/02_after.json": {
+      "SHA": "709ed2bf72f5386a9a67109c45841550b63a109dcdb57f7dd633973234157f7f",
+      "bytes": 211
+    },
+    "results/unified_exact_round121/review/pre_contract.md": {
+      "SHA": "ceb7c7b99dac07026d2d0e3f29513db9b3b161422e621b6d5503eb4aa6dd5052",
+      "bytes": 12724
+    },
+    "results/unified_exact_round121/qualification/minimum_admission_plan.json": {
+      "SHA": "915305e5d149852fb06c7725c11a4ec1ddc7e060576e0c8fe02f85099d56f946",
+      "bytes": 34071
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/02_after.json": {
+      "SHA": "aa21ece61962beaa4693f82e88355a1109e6a67de546ea5a88be1d9669e71bd8",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/reconstruction/group01/time_partitions.csv": {
+      "SHA": "48f57941840f67cf603fc6435ba62c9c24834954d9f9b48f8891cb9dc46f71fa",
+      "bytes": 911
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/receipt.json": {
+      "SHA": "6e15469ec006e22a2a0ff64fc4955252e7c76b7cbd506d80e57724c7110d51f2",
+      "bytes": 573
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/02_after.json": {
+      "SHA": "981aa43682c18cc2a692ca9936bdbfc8d6d5515e94c6e72e56ea71c003b01d29",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/group_verification_receipt.json": {
+      "SHA": "665831e2b417b4cc738cfaecff6e0d4259889a80b8316ae6d5b28537dbc86881",
+      "bytes": 184
+    },
+    "results/unified_exact_round121/resumption/before_resume01/RESUME.md": {
+      "SHA": "bfdaae1a3ba917d5fc3402ecc6fc1d3f8220f33c72fa1b0292a348723a411261",
+      "bytes": 11864
+    },
+    "results/unified_exact_round121/resumption/before_resume01/mechanism_account.json": {
+      "SHA": "f282ba00147dfd3669d63b58f8d70bd315e9e1944f69677e8c47ddd2cbb079d4",
+      "bytes": 330
+    },
+    "reference/round121_confirmation/Q30-C2-B_landscape.json": {
+      "SHA": "395a1e667c54a4e0f681216869e8e3874fe4d34942eb91394135946edadd9a54",
+      "bytes": 24161
+    },
+    "results/unified_exact_round121/fees/qualification04/pending_exit_receipt.json": {
+      "SHA": "d5d2de87f3362725f7156d1939fa2623d7cdc0661dd473aa0faeb2a4da47477d",
+      "bytes": 314
+    },
+    "results/unified_exact_round121/reconstruction/group01/controller_events.csv": {
+      "SHA": "e481f4a603c01a37384f0537da7f090ec1f2250c5984269379f6a474b211fbb8",
+      "bytes": 2059
+    },
+    "results/unified_exact_round121/reconstruction/group03/native_calls.csv": {
+      "SHA": "93841061dec5cb5290c528edc037835982d8c5271691c2baaf240744d609317a",
+      "bytes": 7667
+    },
+    "results/unified_exact_round121/all18_pairs.csv": {
+      "SHA": "b26eb028ab70a7837767621583cd96108af97d0d7becb988deaf1c5e4d3f26fd",
+      "bytes": 8744
+    },
+    "scripts/round121_resume_precontract_review.py": {
+      "SHA": "eb63107916a0e967e55529207721a70cce0b9e38fb645b5d593c52f99045b557",
+      "bytes": 37505
+    },
+    "results/unified_exact_round121/fees/formal03_R98_C2/01_after.json": {
+      "SHA": "25f3d1ed7e6d020486a094777487699a2b1e3d7a41aea58798f6281c802c8cb6",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/reconstruction/group04/checkpoints.csv": {
+      "SHA": "6f140c314a6560322f78a86bfeda6c8d014bf174ef51f9473c7b08df3c1c2c72",
+      "bytes": 2549
+    },
+    "results/unified_exact_round121/reconstruction/group03/covers.csv": {
+      "SHA": "dee10335c43c0e6c540631bb71f54d5b577636445410026c9e5e51f6c5383361",
+      "bytes": 67747
+    },
+    "results/unified_exact_round121/reconstruction/group03/numerical_reliability.csv": {
+      "SHA": "947a0aea691beeb18ff84c22133610bdf18fafbdfb665b0f23133e8534b8daef",
+      "bytes": 1465
+    },
+    "results/unified_exact_round121/reconstruction/group05/numerical_reliability.csv": {
+      "SHA": "e82c4aef3667ecfe4b440a5c94e468801f0c3df4eedb71903b0448165c7ddf87",
+      "bytes": 1470
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/group_verification_receipt.json": {
+      "SHA": "c5a1b442907ca8f2597807ef1cfafc4dfb9f66aad52c5f93f4c99e037873ee80",
+      "bytes": 185
+    },
+    "results/unified_exact_round121/fees/formal03_R98_C2/launch.json": {
+      "SHA": "0c2dfde30f6bcdb649bf1767fb3f7752bf38d3717cfc6f481a7e1d253db6800d",
+      "bytes": 953
+    },
+    "results/unified_exact_round121/delivery/science_staged_scan.json": {
+      "SHA": "e3d7bf88e9cb3d69bed0092d6c2c45964c4d9bf3ae64116a967c0bd097bb6ff9",
+      "bytes": 474
+    },
+    "results/unified_exact_round121/reconstruction/group02/time_partitions.csv": {
+      "SHA": "3fd855fee51dd6796e092c16ca363aa0734d265e7eb5f12d43c26025b540aba7",
+      "bytes": 766
+    },
+    "results/unified_exact_round121/reconstruction/group04/covers.csv": {
+      "SHA": "dd3979e6c891a044d5b248a715c9b65323d8f169c4aae0ac2c4e93ce96358609",
+      "bytes": 257255
+    },
+    "results/unified_exact_round121/resumption/before_resume01/source/scripts/round121_common.py": {
+      "SHA": "0e5ff0a8445d013eb1c98f730cad87f22a71d4bf08df5ee67481f27205b8818c",
+      "bytes": 6062
+    },
+    "results/unified_exact_round121/reconstruction/group02/controller_native.csv": {
+      "SHA": "9f3c49bfb8ba5eea36834d49e55bff8b7466e9cc1f658a6636e423799849c88a",
+      "bytes": 3759
+    },
+    "results/unified_exact_round121/reconstruction/group04/controller_native.csv": {
+      "SHA": "6f33f53429d4d4448827a260331545cc4abf8a5d3143cd6b94cc64153368a2f3",
+      "bytes": 4606
+    },
+    "results/unified_exact_round121/engineering/reference_compile02/receipt.json": {
+      "SHA": "3f0963b66ae1ee2ec379e028d9cef8d47799826bc2d97cce87a8cf07345132b8",
+      "bytes": 283
+    },
+    "results/unified_exact_round121/resumption/formal03_observation.json": {
+      "SHA": "686a37fb593d2346a4829f7c01d810104fb030c4b5cfe0391b25b01f7a419bce",
+      "bytes": 685
+    },
+    "results/unified_exact_round121/resumption/formal01_observation.json": {
+      "SHA": "d8051ea79b32229a70bbff7c2ee940566e974d928117bc4c4818aac3f8d11508",
+      "bytes": 691
+    },
+    "results/unified_exact_round121/fees/formal03_R98_C2/pending_exit_receipt.json": {
+      "SHA": "3417073c52418741e0852e70ccb125a90d781f549df3dde31754e56edf79a279",
+      "bytes": 318
+    },
+    "results/unified_exact_round121/fees/formal04_Q40_R2_S/group_verification_receipt.json": {
+      "SHA": "5b4f3be217af4b54d711d6f24bea073370ddf9e3f0b4edc83fc36ae0fbd9f2a7",
+      "bytes": 184
+    },
+    "results/unified_exact_round121/fees/formal02_Q30_C2_B/receipt.json": {
+      "SHA": "0a5e77f9cbe7e96183410e3005fcb146c918bd538244a6d19b557a5d2238b85f",
+      "bytes": 566
+    },
+    "results/unified_exact_round121/reconstruction/group04/numerical_reliability.csv": {
+      "SHA": "6bcbada37804c12b30ab460e4d4f1525ef3a78c07a28554193f39fd8427f4f3c",
+      "bytes": 1473
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/pending_exit_receipt.json": {
+      "SHA": "8301f668d9b1a04dd2211258cd80afc436eb720ab276bec22668bee4a319f450",
+      "bytes": 318
+    },
+    "results/unified_exact_round121/reconstruction/group05/own_UB_flow.csv": {
+      "SHA": "1c5df511ac5ef7edc1513eff846127d3790f099dadbb6568bd879ff47423c65c",
+      "bytes": 117337
+    },
+    "results/unified_exact_round121/reconstruction/group02/arms.csv": {
+      "SHA": "1d46a701fb03135fafd61674472333bcbbb6ba2b062888701e3d9a8aabbe6481",
+      "bytes": 3626
+    },
+    "results/unified_exact_round121/reconstruction/group01/fleets.csv": {
+      "SHA": "5c6e187777bedbef5d6aaa1111cea33df0f77ca0734b947c8c626c4bfcf7155b",
+      "bytes": 2317
+    },
+    "results/unified_exact_round121/review/h_reselection_sources/R98-C2/saved_D0_witness_record.json": {
+      "SHA": "5132b554b3e2d0c15bac9664833b87cd4f74c92ed844cef93e864e1b7b76c4d5",
+      "bytes": 739
+    },
+    "results/unified_exact_round121/resumption/before_report_spec_state_fix/round121_finish_report.py": {
+      "SHA": "3a034284e7b8c85a3bc82680f4eb294b9c1ddf2fe91bd7537b4d6e63f12e9326",
+      "bytes": 16012
+    },
+    "results/unified_exact_round121/resumption/before_producer_provenance_fix/candidate_identity.json": {
+      "SHA": "8036c5525e8cab31c9d42cc2a1d2dc892caf5b7d53bb8c6ea5a12507e3d59cc3",
+      "bytes": 33308
+    },
+    "results/unified_exact_round121/fees/formal03_R98_C2/02_after.json": {
+      "SHA": "13b2031b9d5f10fb3112bfd5d0c2ca976ee481ded45f3bafa0ef99884919e1b8",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/review/extra_review.json": {
+      "SHA": "b94ea6dab959c80f76fcbbe749088ee30cfb64b644e2485b271d7ba3b01b173f",
+      "bytes": 28773
+    },
+    "results/unified_exact_round121/resumption/producer_identity_check.json": {
+      "SHA": "dc444b031f7a8a413bb5d8928e1e1f1f1f12540ec4f91c2b15d5aedd8554c959",
+      "bytes": 825
+    },
+    "results/unified_exact_round121/reconstruction/group05/current_core.json": {
+      "SHA": "1b3e8373d3ddb0a6fe7f8eb6ae1a25dadd2ad9f222392b3339650bad871f1e93",
+      "bytes": 695693
+    },
+    "results/unified_exact_round121/fees/formal03_R98_C2/03_before.json": {
+      "SHA": "cccd154a11e473ac5bb6e5e03e60b6b10cbe5ba8826ad91c2bb0785c50126bb4",
+      "bytes": 136
+    },
+    "results/unified_exact_round121/fees/qualification05/01_after.json": {
+      "SHA": "e106c1a21740463efd1e8871b7d9d3682dc1c7acd28283bda78e7310cb3e57bf",
+      "bytes": 211
+    },
+    "results/unified_exact_round121/reconstruction/group02/controller_LP_status.csv": {
+      "SHA": "442d8e62b5a1c0a7c65b3829c2ab894017cec20a6b2873d5d259f9a26d1f1a5d",
+      "bytes": 975
+    },
+    "results/unified_exact_round121/protocol.json": {
+      "SHA": "162ad2a628411dba81cfe98bd10bdb9a8b53e09bf50aeb38f15cc89990436e81",
+      "bytes": 3970
+    },
+    "results/unified_exact_round121/reconstruction/group05/controller_LP_status.csv": {
+      "SHA": "e2b28021dec261dbb788927c7f93a5fe6f4a098a82fa567e401cc7fb58cd0811",
+      "bytes": 1487
+    },
+    "results/unified_exact_round121/qualification_summary.md": {
+      "SHA": "740ff295f5bb143141c8d57fe3bf0468dd2f95c59a07eade87c11c7fcb6e4fe7",
+      "bytes": 1660
+    },
+    "results/unified_exact_round121/reconstruction/group01/target_discovery.csv": {
+      "SHA": "ba8a53b4b9cfa826cc99f3f0a24cc7194ce22461f02472cfa7038d5e546adf86",
+      "bytes": 1008
+    },
+    "results/unified_exact_round121/reconstruction/group01/progress_publication.csv": {
+      "SHA": "661f04ac4beaddc20b045a3ec2b4290565da909be96be4f9951484facd16f598",
+      "bytes": 640
+    },
+    "reference/round121_confirmation/Q30-C2-B_source_mapping.json": {
+      "SHA": "e2aeaf34b27d6249ec597306306ed7f6efc15d2f39b662ca6648776b596d25c7",
+      "bytes": 11833
+    },
+    "results/unified_exact_round121/fees/qualification02/pending_exit_receipt.json": {
+      "SHA": "dfb1d9cb136bbe29fd029637c495acb19cc7e163a469348fa34c407c632d4e64",
+      "bytes": 317
+    },
+    "results/unified_exact_round121/resumption/before_child_cleanup_fix/prospective_helper_freeze.json": {
+      "SHA": "ebfbcf3f8ad87156572d55cba9cbdea66f9b9b30e537e8faab5dd4108188d922",
+      "bytes": 32177
+    },
+    "results/unified_exact_round121/fees/qualification05/launch.json": {
+      "SHA": "aab7ccfa23b6be1245176bce8f010b39e6e02083aa839bd3229b1006485139d7",
+      "bytes": 967
+    },
+    "results/unified_exact_round121/reconstruction/group01/mechanism.csv": {
+      "SHA": "b0f2d4a771ba15e6c1be16f82ab0f8e4fffb4860e23326680e76f91938f9513c",
+      "bytes": 17737
+    },
+    "results/unified_exact_round121/reconstruction/group02/pairs.csv": {
+      "SHA": "ac5fe70afc3f04b43533544a985d5f5258abbb942d1e01f8e5f49dd05e81a35e",
+      "bytes": 1918
+    },
+    "results/unified_exact_round121/review/resume_precontract_finding01.json": {
+      "SHA": "7b481283460ac08ed34c85cb387ca17aee9a64278ea55e3fe65dc9051cec5960",
+      "bytes": 1436
+    },
+    "results/unified_exact_round121/reconstruction/group05/split_exposure.csv": {
+      "SHA": "0c5703944b04d9ebe15309af5251b635736ac6a92a8de384dcdc60749e648b86",
+      "bytes": 186
+    },
+    "results/unified_exact_round121/reconstruction/group04/controller_targets.csv": {
+      "SHA": "b8b2be8ebe5e9bbd70589b5bed459772fee1f298f351da8dd4b89e38d2808138",
+      "bytes": 782
+    },
+    "results/unified_exact_round121/reconstruction/group05/controller_events.csv": {
+      "SHA": "739d7fb911b32ad1559c5214018156c8803d5f5a77d3d91443e7bd17b5ee6fd3",
+      "bytes": 1505
+    },
+    "results/unified_exact_round121/reconstruction/group03/checkpoints.csv": {
+      "SHA": "148017edbf934882ff0554be17a891083383eccdc9f1592cb31f53b9f3783744",
+      "bytes": 1937
+    },
+    "results/unified_exact_round121/fees/formal01_F2/04_after.json": {
+      "SHA": "916bed9431b01890e42422d2b2be3695d68df2c356a2e3a3d64d2bc50fc1f21a",
+      "bytes": 226
+    },
+    "results/unified_exact_round121/reconstruction/group05/chronological_covers.csv": {
+      "SHA": "341fe82d2aaefc9c86ba0b06c75516cca89bebf3c056244e500be46a5806f646",
+      "bytes": 21380
+    },
+    "results/unified_exact_round121/review/h_reselection_sources/F2/actual_D1_three_rows_and_provenance.json": {
+      "SHA": "541c1194275f3fcf028f18249b40af0eaa3ed7b2144a5d3f4c5f0d5c9ac49611",
+      "bytes": 4232
+    },
+    "results/unified_exact_round121/resumption/before_auditor_identity_binding_fix/candidate_identity.json": {
+      "SHA": "e4b1add998f1934690243cead9609fd9686b3558f2664dac0d7424cf61f36c7a",
+      "bytes": 33308
+    },
+    "results/unified_exact_round121/stage_decision.json": {
+      "SHA": "b739462b17596041c1f85683311c42b45fdd0ee1df5f8ad987530c0cb2db736f",
+      "bytes": 1036
+    },
+    "results/unified_exact_round121/reconstruction/group05/arms.csv": {
+      "SHA": "2a858c8bcca78ab6b18477e476cce1a40539926879a84b3420810b38b52e244a",
+      "bytes": 3587
+    },
+    "results/unified_exact_round121/resumption/before_resume01/source/scripts/round121_prepare.py": {
+      "SHA": "43532ec092ed6525cc017dd0f7d796ed1e310ac5d58e3ee1ffcf05bc95a11db0",
+      "bytes": 8169
+    },
+    "results/unified_exact_round121/fees/qualification02/01_reference_stdout.txt": {
+      "SHA": "edad9a2d26cf2a87fe5070c051f244de2a1c5bff9f496bb56661105e03836f34",
+      "bytes": 492
+    },
+    "results/unified_exact_round121/review/resume_precontract_finding03.json": {
+      "SHA": "0baf4d1c42d8ff027ec2ef296b95c1252794fde06be51417afdace3853d1c91d",
+      "bytes": 2141
+    },
+    "reference/round121_confirmation/Q50-C2-U_source_mapping.json": {
+      "SHA": "d3cb66f31da56071acb14c6d8b1b3b078843926a38ea39661cfda5d8d244cebd",
+      "bytes": 19884
+    },
+    "results/unified_exact_round121/fees/formal05_Q50_C2_U/03_after.json": {
+      "SHA": "c83331c4341e9f487583588829b7fa9db993eecc5678d48db1e4f86d5e8a4236",
+      "bytes": 226
+    }
+  },
+  "index_worktree_transport_exceptions": [
+    ".gitattributes"
+  ],
+  "deferred_historical_delivery_bindings": [
+    {
+      "path": "results/unified_exact_round121/delivery/payload_scan.json",
+      "index_SHA": "00350c98fc597a41f8f5cd8cf8c8ddf73b5d350682e643ade601ed98115dc559",
+      "worktree_SHA": "b056a31b8b49da24fcb926c5088344b679b8f639bc88f79d827558a4b277919c",
+      "index_byte_identity": "preserved original blocked delivery receipt",
+      "complete_receipt_deferred_to_later_actual_delivery_commit": true
+    },
+    {
+      "path": "results/unified_exact_round121/delivery/carrier_scan.json",
+      "index_SHA": "e1acff86900eecf2132fe90f65472a2979b73f08572b8429bd51caecb8e3fd21",
+      "worktree_SHA": "5949e142d2a87f872555f504514658d8d3cb2c8a093f4bcf28e3a7e9aa952397",
+      "index_byte_identity": "preserved original blocked delivery receipt",
+      "complete_receipt_deferred_to_later_actual_delivery_commit": true
+    }
+  ],
+  "staged_members_matching_scientific_carrier": 370,
+  "report": {
+    "tool_version": "round117-publication-security-v1",
+    "passed": true,
+    "files": 391,
+    "archive_members": 47681,
+    "bytes_scanned": 644922771,
+    "archives": [
+      {
+        "path": "results/unified_exact_round121/compact_evidence/evidence.tar.gz",
+        "members": 47681
+      }
+    ],
+    "findings": [],
+    "errors": [],
+    "raw_values_emitted": false,
+    "network_requests": 0,
+    "native_starts": 0,
+    "Optimize": 0,
+    "engineering_seconds": 29.3379358999955
+  },
+  "observed_unix": 1792087222.4868739,
+  "receipt_does_not_attest_future_commit": true
+}

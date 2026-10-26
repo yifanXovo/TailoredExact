@@ -1,0 +1,245 @@
+{
+  "schema": "round116-source-recipe-v1",
+  "frozen_UTC": "2026-10-12T05:31:13.994377+00:00",
+  "version": "round116-capital-external-v1",
+  "family_material": "round116-capital-external-v1|source_sha256={first_valid_station_response_SHA256}",
+  "selection_id_format": "cabi_V{V:02d}_{compact_or_regional}_r{replicate}",
+  "official_entry": "https://capitalbikeshare.com/system-data",
+  "official_license": "https://capitalbikeshare.com/data-license-agreement",
+  "official_discovery": "https://gbfs.capitalbikeshare.com/gbfs/2.3/gbfs.json",
+  "station_endpoint": "read contemporaneous English station_information from official discovery",
+  "system_endpoint": "read contemporaneous English system_information from same discovery",
+  "max_attempts_per_endpoint": 3,
+  "unique_snapshot": "first HTTP-successful structurally valid complete stations response",
+  "retries": "transport/HTTP failure or truncated/invalid JSON only; never dissatisfaction with count/geography/difficulty",
+  "denied_access": "stop without bypass or changed proxy/account",
+  "source_interface": "official GBFS only",
+  "allow_hosts": [
+    "capitalbikeshare.com",
+    "www.capitalbikeshare.com",
+    "gbfs.capitalbikeshare.com",
+    "gbfs.lyft.com"
+  ],
+  "static_station_rule": {
+    "station_id": "nonempty JSON string; preserve exact UTF-8 bytes and leading zeros",
+    "capacity": "finite JSON numeric integer value, excluding bool/string; 0<capacity<100; no rounding/imputation",
+    "coordinates": "finite JSON numeric WGS84 longitude[-180,180] latitude[-90,90], excluding bool/string",
+    "virtual": "exclude exactly is_virtual_station=true; no dynamic status or vehicle/user/trip records"
+  },
+  "exclusions": "record every original zero-based stations-array row, reasons, ID and original row",
+  "duplicates": "same ID: physical capacity/lat/lon/explicit virtual flag must agree, otherwise DATA_BLOCKED; merge identical and retain all rows",
+  "different_ID_same_coordinate": "retain separately",
+  "source_order": "station_id UTF-8 byte lexicographic; zero-based unique source_row_index",
+  "minimum_qualified_stations": 200,
+  "projection_contract_SHA": "15554a7fe01602de7a6ec45e61fe54830076cf7355188e91b73081093f939f3a",
+  "projection_range": "all qualified WGS84 rows must lie within EPSG:32618 area; otherwise DATA_BLOCKED, no geographic exclusion",
+  "coordinates": "pyproj float64, record full output then Python round(x,3); inherited three-decimal serialization",
+  "geographic_regimes": [
+    "compact",
+    "regional"
+  ],
+  "replicates": [
+    1,
+    2
+  ],
+  "pure_rules": {
+    "anchors": "R57 four anchors per V: first SHA256 ordering; others max min Euclidean; tie smaller source index",
+    "compact": "anchor nearest V in distance then source-index order",
+    "regional": "farthest-first V within nearest 2V; maximize min distance, then smaller anchor distance, then smaller source index",
+    "target": "R57 .44+.12*hash_unit; floor(C*f+.5), clipped[1,C]",
+    "inventory": "R109/R57 delta=max(V,floor(.12*sumD+.5)); shortage sumD-delta, balanced sumD, surplus min(sumC,sumD+delta); original perturbation, total adjustment and both-sign repair",
+    "weight": "max(.1,(D/maxD)^2), Python round six decimals, maximum normalization, round six decimals",
+    "depot": "arithmetic centroid of serialized service coordinates, three decimals, placeholders100000/50000/0",
+    "distance": "only original production Parser reconstructs Euclidean/1.5; no supplied distance matrix",
+    "min_ratio": "four-decimal compatibility only, no inventory floor"
+  },
+  "roles": [
+    {
+      "number": 1,
+      "id": "E20-C1",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "Q_class": "H",
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "P-S",
+        "ENS-C",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "external"
+    },
+    {
+      "number": 2,
+      "id": "E20-R2",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "Q_class": "X",
+      "T_seconds": 7200,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-S",
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "external"
+    },
+    {
+      "number": 3,
+      "id": "E50-C1",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "balanced",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "Q_class": "H",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "M-B",
+        "P-S"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "external"
+    },
+    {
+      "number": 4,
+      "id": "E50-R2",
+      "V": 50,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "Q_class": "X",
+      "T_seconds": 18000,
+      "cap_seconds": 1800,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-S",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "external"
+    },
+    {
+      "number": 5,
+      "id": "E100-C1",
+      "V": 100,
+      "M": 8,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        20,
+        25,
+        25,
+        35,
+        35,
+        40,
+        40
+      ],
+      "Q_class": "X",
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "P-S",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "external"
+    },
+    {
+      "number": 6,
+      "id": "E100-R2",
+      "V": 100,
+      "M": 8,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "Q_class": "H",
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "P-S",
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "external"
+    }
+  ],
+  "thin_adapter_SHA": "b2f77cce78333e65449ba201e2e56bf565df5a25c025d6bca32cade2222b684c",
+  "original_generator_SHA": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
+  "inherited_math_adapter_SHA": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+  "no_private_source": true,
+  "no_solver_pilot": true,
+  "retain_every_legal_draw": true,
+  "independent_cities_or_IID_claim": false,
+  "real_demand_claim": false,
+  "license_scope": "non-commercial research source appendix only; no standalone raw dataset, logos or endorsement"
+}

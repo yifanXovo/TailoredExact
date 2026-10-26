@@ -1,0 +1,99 @@
+{
+  "UTC": "2026-10-16T19:10:23.721838+00:00",
+  "passed": true,
+  "PR": {
+    "baseRefName": "codex/round121-frozen-d1-confirmation",
+    "headRefName": "codex/round122-paper-benchmark",
+    "headRefOid": "baf3c7e3a9fc7e263d5c7c03a69403160e030db0",
+    "isDraft": true,
+    "number": 184,
+    "state": "OPEN",
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/184"
+  },
+  "R121": {
+    "baseRefName": "codex/round120-native-proof-disjunction",
+    "headRefName": "codex/round121-frozen-d1-confirmation",
+    "headRefOid": "65c5aaa56583bcddf9baeae7392bd94baaed9396",
+    "isDraft": true,
+    "number": 183,
+    "state": "OPEN",
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/183"
+  },
+  "public_repository": true,
+  "verified_remote_files": [
+    {
+      "path": "results/unified_exact_round122/all32_arms.json",
+      "bytes": 83760,
+      "SHA256": "543b37a347ca4264468d7c2df32791b7794fe2467591e25b12711d5e88ab0442",
+      "Git_blob": "36c54b2267fb9582ac768203e839922c20fb21ec",
+      "actual_remote_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round122/all48_pairs.json",
+      "bytes": 61039,
+      "SHA256": "d5bf7ae99bbdc8f1cf7787de7be19fe9b4183fc1349ca76ae09cf7e80bd856d4",
+      "Git_blob": "2a832d80e0ba5981e8f2eb6efee967d2f990b573",
+      "actual_remote_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round122/stage_decision.json",
+      "bytes": 1122,
+      "SHA256": "bcd4b694b59913e573309938b15d3eafb3eeb9416b3c8d82f03dac0ce67300fe",
+      "Git_blob": "9219f60183d8e76514dfe227368076b1300f44a7",
+      "actual_remote_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round122/paper_result_interpretation.md",
+      "bytes": 29879,
+      "SHA256": "3702389ef3a682c4c659e8233f348a3fa733d878b31cd9114380680d8dcdc7b8",
+      "Git_blob": "0d83880d15ea019b8294633e4a6dccc6db130a7c",
+      "actual_remote_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round122/final_report.md",
+      "bytes": 16433,
+      "SHA256": "6baa016dd5a9f272663b20b7dc7e54f8c9e0a87fd6e25201f09f743be0012c7f",
+      "Git_blob": "80907b09745f44b5888cbcd584598883dc47c070",
+      "actual_remote_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round122/delivery/restored_check_summary.json",
+      "bytes": 3453,
+      "SHA256": "307ad4160c09855122ce64e9fb0d62b30f52be456bcd9cf175534d4d82da60a5",
+      "Git_blob": "1479b06d01f91287aac81afc65cdcc8e2f283e9d",
+      "actual_remote_bytes_equal": true
+    },
+    {
+      "path": "results/unified_exact_round122/delivery/public_export_restore_receipt.json",
+      "bytes": 4168,
+      "SHA256": "f6e88db005782cd57caf388f4a94c7c516d4674e87df4c54403b506254f7c467",
+      "Git_blob": "88164d3c10582fb18b1838396ba0190551e66121",
+      "actual_remote_bytes_equal": true
+    },
+    {
+      "path": "scripts/round122_public_https.py",
+      "bytes": 6141,
+      "SHA256": "58e71cbad072f88ae34040520355e48c6b33c95b262de2a28dc7d968cee10efe",
+      "Git_blob": "9c258825a72244bb2dd73a5565f5298e2cf5cc8d",
+      "actual_remote_bytes_equal": true
+    },
+    {
+      "path": "WORKSPACE_POLICY.md",
+      "bytes": 1386,
+      "SHA256": "457104207419b3bcb05419cd02cef5ea71a85579322c96dd94d8cb5043aa4b9f",
+      "Git_blob": "a0628cfbbfdfd0e483489353c6e873fadb505a19",
+      "actual_remote_bytes_equal": true
+    }
+  ],
+  "canonical_manifest_and_six_part_Git_objects_unchanged_from_public_scienceA": true,
+  "carrier_finite_metadata_entries": 7,
+  "scienceA": "9ed88cf9da87c3ceb7aebc43694f865eacbc86a7",
+  "receipt_commit_B": "baf3c7e3a9fc7e263d5c7c03a69403160e030db0",
+  "PR_body_SHA256": "f45725ecb974c053cd0ba5a136345402320f74a6e78b6b1983855bc29175af52",
+  "PR_body_cleanup_pending": true,
+  "full_carrier_redownloaded": false,
+  "full_replay_repeated": false,
+  "engineering_seconds": 12.660352000006242,
+  "Optimize": 0,
+  "native_starts": 0
+}

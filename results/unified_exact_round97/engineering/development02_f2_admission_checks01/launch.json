@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-c",
+    "import sys;sys.path.insert(0,'scripts');import round97_continue_after_v1_recovery as c;c.ext.ensure_idle();i=c.read(c.CAMP/'identity.json');c.identity_check(i);c.prefix(i,10);selected=i['launches'][10:13];assert [(x['number'],x['id'],x['arm'],x['cap_seconds']) for x in selected]==[(11,'F2','FEEDBACK',900),(12,'F2','P-GRB',900),(13,'F2','OFF',900)];assert all(not c.Path(x['destination']).exists() for x in selected);print('Exact completed prefix, recovery binding, frozen identity and original unstarted F2 block passed; Optimize=0')"
+  ],
+  "optimizer_calls": 0
+}

@@ -1,0 +1,32 @@
+{
+  "allowed": [
+    "current mathematical state",
+    "certified bounds",
+    "parametric LP state",
+    "interval geometry",
+    "fixed global parameters",
+    "certificate tolerances"
+  ],
+  "candidate_results_observed": false,
+  "external_cap_is_not_a_decision_input": true,
+  "forbidden": [
+    "instance name",
+    "path",
+    "seed",
+    "V",
+    "M",
+    "Q",
+    "panel membership",
+    "historical winner",
+    "time",
+    "Work",
+    "nodes",
+    "iterations",
+    "memory",
+    "hardware",
+    "learned policy",
+    "per-instance dispatch"
+  ],
+  "schema": "round45-forbidden-decision-inputs-v1",
+  "telemetry_excluded_from_decision_hash": true
+}

@@ -1,0 +1,76 @@
+{
+  "checked_utc": "2026-10-18T09:13:51.034196+00:00",
+  "science_commit": "31fdaff705a8edf2a9ef49239a44f0d870505b60",
+  "PR_at_science_A": {
+    "baseRefName": "codex/round124-review-ready-manuscript",
+    "headRefName": "codex/round125-self-contained-methods",
+    "headRefOid": "31fdaff705a8edf2a9ef49239a44f0d870505b60",
+    "isDraft": true,
+    "state": "OPEN",
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/187"
+  },
+  "production_bindings_checked": 216,
+  "production_src_include_changes": 0,
+  "binary_hashes": {
+    "PE": "5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba",
+    "DLL": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+  },
+  "binaries_copied": false,
+  "protected_dirty_sha256_after": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+  },
+  "protected_dirty_unchanged": true,
+  "frozen_tables_public_byte_equality": true,
+  "main_entry_worktree_modified_by_task": false,
+  "forbidden_operations": {
+    "new_formal_arms": 0,
+    "solver_processes_launched": 0,
+    "LP_MIP_CP_DP_Optimize_calls": 0,
+    "production_compilations": 0,
+    "H_searches": 0,
+    "production_edits": 0
+  },
+  "resource_scope": {
+    "initialization_file_created_utc": "2026-10-18T08:48:07Z",
+    "check_wall_seconds": 0.03502689994638786,
+    "public_rebuild_wall_seconds": 6.358785899996292,
+    "public_payload_bytes": 683789,
+    "full_campaign_restores": 0,
+    "full_clones": 0,
+    "CPU_total": "not instrumented; no estimate from agent/network waiting",
+    "scope": "bounded reading and finite arithmetic; no larger machine budget extension needed"
+  },
+  "execution_issues_repaired": [
+    {
+      "issue": "WindowsApps python stub returned without producing files",
+      "repair": "used bundled absolute Python executable; actual successful executions have receipts"
+    },
+    {
+      "issue": "initial three matrix adapter mismatches",
+      "repair": "serialized zprod column name and literal lower-row orientation fixed; all 64 now match; no production change"
+    },
+    {
+      "issue": "initial cover-preservation check was tautological",
+      "repair": "independent reviewer required event-consuming bounded transition adapter; actual corrected execution passed"
+    },
+    {
+      "issue": "first git add rejected paths outside sparse patterns",
+      "repair": "added only results/unified_exact_round125 to this worktree sparse list; no history expanded"
+    },
+    {
+      "issue": "core.autocrlf would change staged evidence bytes",
+      "repair": "new-directory .gitattributes * -text plus renormalize; index/manifest and all R124 public table bytes matched"
+    },
+    {
+      "issue": "plain git diff --check treated preserved CRLF as whitespace",
+      "repair": "command-local core.whitespace=cr-at-eol check passed; no evidence byte rewrite"
+    }
+  ],
+  "excerpt_receipt_relocation": {
+    "original_path": "E:\\codes\\ExactEBRP-work\\evidence\\round125\\review\\independent_finite_results.json",
+    "retained_path": "review/independent_excerpt_results.json",
+    "sha256": "20ba040c4baf13f8fde6ee9d90df69be560fde5ddd1af18ed724cccb1128c036"
+  }
+}

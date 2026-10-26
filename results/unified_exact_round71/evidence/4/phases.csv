@@ -1,0 +1,8 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",29.99905,26.99905,"absolute process deadline origin"
+1,0.0011230999999999999,"instance_parsing_start","start",29.998876899999999,26.998876899999999,"tests/data/round59_tiny.txt"
+2,0.0018173,"instance_parsing_complete","complete",29.998182799999999,26.998182799999999,"instance=round59_tiny.txt"
+3,0.0110315,"plain_gurobi_optimize_launch","start",29.9889686,26.9889686,"absolute_work_remaining=26.989066"
+4,0.016320500000000002,"final_result_serialization_start","start",29.9836797,26.983679599999999,""
+5,0.017256899999999999,"final_result_serialization_complete","complete",29.9827431,26.9827431,""
+6,0.017405199999999999,"process_exit","complete",29.982595,26.982594899999999,"rc=0"

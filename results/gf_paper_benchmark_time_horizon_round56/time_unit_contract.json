@@ -1,0 +1,15 @@
+{
+  "T_unit": "seconds",
+  "drop_time_seconds": 60,
+  "horizons": {
+    "10800": "3-hour",
+    "1800": "0.5-hour",
+    "18000": "5-hour",
+    "3600": "1-hour"
+  },
+  "interpretation": "seconds under the repository's frozen travel/service-time convention",
+  "parser_speed_factor": 1.5,
+  "pickup_time_seconds": 60,
+  "schema": "round56-time-unit-contract-v1",
+  "unsupported_physical_speed_claim": false
+}

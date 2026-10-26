@@ -1,0 +1,15 @@
+{
+  "UTC": "2026-10-22T02:18:50.085699+00:00",
+  "stage": "document-only export before Pandoc/native solver",
+  "fee": "pdf_export01",
+  "exit_code": 1,
+  "reason": "Git CRLF text decoded without newline normalization and expanded by Windows write to CRCRLF; inherited table layout guard matched zero tables",
+  "repair": "Normalize inherited manuscript and supplement CRLF to LF before writing; scientific data and formula bytes unchanged",
+  "failed_export_preserved": true,
+  "formal_retries": 0,
+  "inspection_errors": [
+    "attempted nonexistent round126_documents.py; actual exporter is round126_export.py",
+    "GBK stdout could not print inherited Unicode; diagnostic reissued with UTF8",
+    "diagnostic used round128_common.BASE instead of R129 BASE; no mutation from failed git-show"
+  ]
+}

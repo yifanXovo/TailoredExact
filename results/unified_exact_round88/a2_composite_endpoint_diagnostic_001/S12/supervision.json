@@ -1,0 +1,41 @@
+{
+  "case": "S12",
+  "child_cpp_calls": 2,
+  "child_pid": 42544,
+  "child_returncode": 0,
+  "child_rounds": 1,
+  "child_status": "completed_composite_endpoint",
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "E:\\codes\\ExactEBRP\\scripts\\round88_quantity_composite_probe.py",
+    "diagnose",
+    "--case",
+    "S12",
+    "--out-dir",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\a2_composite_endpoint_diagnostic_001\\S12"
+  ],
+  "final_hashes": {
+    "adapter_sha256": "7ded4c4ce60bf075be0f373c38a7912e7d915cae658407307c9887c87597c452",
+    "binary_sha256": "23d4fd53602d46f599f3f58e33c3ec96c4eec01b972e22ee0d4815cc42a54693",
+    "composite_sha256": "dccbf59fa462a25308419f49a719f59d0d9ef514f917ab377b9215ffdcdcd898",
+    "flow_sha256": "fdbe04bdc7b933397aac3ec4fa9d9f0b5adf99c8550c98d14e96ce89db43328d",
+    "input_sha256": "060ee6366b2277c8427675e1a1484de7db10d2ef82a64d4e2ffa6e4695b7b626",
+    "old_probe_sha256": "6a06a03212dc5da954be57e7c81b5a0f67c77bea592720955dc9c2b8e3c9c77c",
+    "witness_sha256": "af1a591e03c65fd81b96c4fe52b92978f09e34b9a2c2108ff807fc838225fd4b"
+  },
+  "method": "round88-a2-composite-penalty-offline",
+  "preflight": {
+    "adapter_sha256": "7ded4c4ce60bf075be0f373c38a7912e7d915cae658407307c9887c87597c452",
+    "binary_sha256": "23d4fd53602d46f599f3f58e33c3ec96c4eec01b972e22ee0d4815cc42a54693",
+    "composite_sha256": "dccbf59fa462a25308419f49a719f59d0d9ef514f917ab377b9215ffdcdcd898",
+    "flow_sha256": "fdbe04bdc7b933397aac3ec4fa9d9f0b5adf99c8550c98d14e96ce89db43328d",
+    "input_sha256": "060ee6366b2277c8427675e1a1484de7db10d2ef82a64d4e2ffa6e4695b7b626",
+    "old_probe_sha256": "6a06a03212dc5da954be57e7c81b5a0f67c77bea592720955dc9c2b8e3c9c77c",
+    "witness_sha256": "af1a591e03c65fd81b96c4fe52b92978f09e34b9a2c2108ff807fc838225fd4b"
+  },
+  "status": "diagnostic_completed",
+  "timed_out": false,
+  "wall_clock_boundary": "before_supervision_json_write",
+  "whole_process_limit_seconds": 120.0,
+  "whole_process_wall_seconds": 0.27408429980278015
+}

@@ -1,0 +1,50 @@
+{
+  "exit_code": 0,
+  "outer_seconds_lower": 9525.818823328562,
+  "qualification": false,
+  "actual_native_children": 4,
+  "uncertain_native_children": 0,
+  "child_states": [
+    {
+      "id": "PB-C35-U",
+      "arm": "M-B",
+      "seed": 0,
+      "state": "actual_started",
+      "PID_receipt_SHA": "82c297581514f9ab2c10769e4aa1ea995cf259610db2e106ea4f4db8c79ec9ed"
+    },
+    {
+      "id": "PB-C35-U",
+      "arm": "MB-D1",
+      "seed": 0,
+      "state": "actual_started",
+      "PID_receipt_SHA": "61f6d68b7c7b23cc6e41b7d1b73d7c208ab761e3c39862911b37e8950a3bfc7d"
+    },
+    {
+      "id": "PB-C35-U",
+      "arm": "P-GRB",
+      "seed": 0,
+      "state": "actual_started",
+      "PID_receipt_SHA": "6880fc3bf4e034aaae959ea68e2b8ebeb2442b837278dd7c2053cc2a53cb71ca"
+    },
+    {
+      "id": "PB-C35-U",
+      "arm": "ENS-C",
+      "seed": 0,
+      "state": "actual_started",
+      "PID_receipt_SHA": "6643e6925e554d33b23227b658e0f406dce42ea8b8dd9a0a45d0348e5e280d4c"
+    }
+  ],
+  "wrapper_pid": 30204,
+  "conservative_process_starts": 5,
+  "necessary_trailer_complete": true,
+  "nested_native_seconds_added": false,
+  "outer_seconds_upper": 9525.839133600006,
+  "actual_exit_observed": true,
+  "exit_observed_unix": 1792110252.270115,
+  "process_creation_unix": 1792100726.4337292,
+  "actual_exit_code": 0,
+  "controller_elapsed": 9525.839133600006,
+  "wrapper_import_creation_trailer_and_exit_included": true,
+  "controller_process_count": 1,
+  "controller_wait_is_nested_not_added_again": true
+}

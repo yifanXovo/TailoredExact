@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "UTC": "2026-10-23T06:37:34.083810+00:00",
+  "export_files_verified": 555,
+  "export_manifest_SHA": "eca34d98b8f3975fcd8e5eeca78d4d8b580ae563f7aefadab091375d4b2b9f00",
+  "all_export_bytes_match": true,
+  "original_native_assets_match": true,
+  "source_bindings_checked": 217,
+  "adapter_bindings_checked": 84,
+  "production_source_diff_empty": true,
+  "all_ten_inputs_original_SHA": true,
+  "archives": 27,
+  "maximum_piece_bytes": 25186449,
+  "directed_dirty_hash_checks": [
+    {
+      "path": "results/gf_compact_bc_round/handling_convention_test/handling_convention.json",
+      "before": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+      "after": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+      "unchanged": true
+    },
+    {
+      "path": "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv",
+      "before": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+      "after": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+      "unchanged": true
+    },
+    {
+      "path": "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json",
+      "before": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202",
+      "after": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202",
+      "unchanged": true
+    }
+  ],
+  "no_entire_workspace_integrity_claim": true,
+  "one_science_commit_recovery_pending": true,
+  "actual_R130_PR192_rechecked_open_Draft_unmerged": true,
+  "actual_R130_head_rechecked": "c302bae0ec128f0d4c651fb29d04cb41b491f721"
+}

@@ -1,0 +1,14 @@
+field,legacy_representation,current_representation,decision
+legacy V,first-line integer V,first-line integer V,retained
+legacy M,first-line integer M,first-line integer M,retained
+legacy Q,"bracketed vector, usually homogeneous",complete homogeneous vector [Q]*M,retained; Q=20 and Q=30 variants
+station capacity,depot-inclusive capacities,authoritative source capacity at indices 1..V,retained real-derived field
+initial inventory,uniform independent random integer,controlled shortage/balanced/surplus integer inventory,redesigned synthetic field
+target inventory,uniform target band by average/low/high label,shared deterministic target profile per geographic selection,redesigned synthetic field
+weights,"target squared normalized, historical scales 10 or 1","max(0.1,(target/max_target)^2), normalized max 1",adapted synthetic field
+min_ratio,"uniform random [0.01,0.5]","0.10+0.40*(target/capacity), bounded [0.1,0.5]",redesigned synthetic field
+points,depot centroid plus selected UTM coordinates,rounded centroid plus exact three-decimal authoritative UTM coordinates,retained with explicit precision contract
+distances,"serialized, but legacy/current readers recompute from points",not serialized; parser recomputes Euclidean/1.5,adapted to one authority
+T,loader argument,scenario-manifest field and --T,retained external representation
+pickup/drop,code constants,current 60/60-second parser arguments,retained current default
+dataset identity,path/filename only,"canonical family, IDs, source hashes, file hashes, scenario identities",new provenance layer

@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-c",
+    "import sys;sys.path.insert(0,'scripts');import round97_operator_attribution as a;a.ext.ensure_idle();p=a.CAMP/'identity.json';i=a.read(p);assert not (a.CAMP/'raw').exists() and not (a.CAMP/'queue').exists() and not (a.CAMP/'summary.jsonl').exists();oldsource=a.CAMP/'prelaunch_runner_v1.py.txt';assert a.sha(oldsource)==i['attribution_runner_sha256'];oldhash=a.sha(p);archive=a.CAMP/'prelaunch_identity_v1.json';assert not archive.exists() and archive.resolve().parent==a.CAMP.resolve();p.rename(archive);new=dict(i,attribution_runner_sha256=a.sha(a.__file__),helper_hashes=a.helper_bindings(),prelaunch_revision=dict(optimizer_calls=0,reason='Independent review found missing per-arm manifest hash guard; fix before any paid start.',previous_identity_path=archive.relative_to(a.ROOT).as_posix(),previous_identity_sha256=oldhash,previous_runner_path=oldsource.relative_to(a.ROOT).as_posix(),previous_runner_sha256=a.sha(oldsource)));a.write(p,new);a.check(new);a.prefix(new,0);assert new['launches']==i['launches'];print('Original unstarted freeze and runner preserved, guard added, all launches byte-equivalent; Optimize=0')"
+  ],
+  "optimizer_calls": 0
+}

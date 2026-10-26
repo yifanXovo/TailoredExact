@@ -1,0 +1,83 @@
+{
+  "UTC": "2026-10-20T19:53:05.968359+00:00",
+  "sources": {
+    "CITI": {
+      "identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "table_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "rows": 443,
+      "qualified": 442
+    },
+    "CABI": {
+      "identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "table_SHA": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+      "rows": 865,
+      "qualified": 865
+    }
+  },
+  "roles": [
+    {
+      "id": "SM-C8-S",
+      "source": "CITI",
+      "V": 8,
+      "M": 1,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        20
+      ],
+      "T_seconds": 2400,
+      "cap_seconds": 90,
+      "selection_id": "r127_SM-C8-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15
+    },
+    {
+      "id": "SM-B10-B",
+      "source": "CABI",
+      "V": 10,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        15,
+        25
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 90,
+      "selection_id": "r127_SM-B10-B_regional_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15
+    }
+  ],
+  "families": {
+    "CITI": "round127-tiny-regression-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "CABI": "round127-tiny-regression-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8"
+  },
+  "dependencies": {
+    "scripts/round127_data.py": "de063492c429bc545e87a1fbdb4f7e00c3ad4cb5cff2b2feaada5a3f74aae275",
+    "scripts/round126_data.py": "5a1f8078f76a74a7d7c862abc1ee489b327c145a695c74e6f982163ebcd7ed21",
+    "scripts/round122_data.py": "b7997dcd173ee301be7f34949c99cb5f791bf22b84f548d1adceb8d11054d6b9",
+    "scripts/round118_data.py": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+    "scripts/round109_data.py": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+    "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+  },
+  "coordinate_decimals": 3,
+  "weight_decimals": 6,
+  "target_fraction": [
+    0.44,
+    0.56
+  ],
+  "inventory_perturbation": {
+    "balanced": 0.18,
+    "other": 0.3
+  },
+  "total_correction": "unchanged R126/R122",
+  "original_selection_weights_depot_and_distance": true,
+  "no_redraw": true,
+  "no_network": true,
+  "no_Optimize_or_H": true
+}

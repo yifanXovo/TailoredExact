@@ -1,0 +1,57 @@
+{
+  "schema": "round135-complete-goal-audit-v1",
+  "passed": true,
+  "UTC": "2026-10-26T15:26:59.837648+00:00",
+  "science_commit": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+  "verified_base": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+  "science_and_manuscript_complete": true,
+  "stage1_arms": 10,
+  "stage2_arms": 22,
+  "formal_arms": 32,
+  "matched_pairs": 16,
+  "planned_cap_seconds": 23520,
+  "new_fixed_root_LP_Optimize": 2,
+  "certificate_counts": {
+    "S2": 10,
+    "AP": 10
+  },
+  "candidate_disposition": "research-only",
+  "core_source_additions": 67,
+  "default_unchanged": true,
+  "no_healthy_outcome_reruns": true,
+  "conservative_computation_seconds": 17415.454914600206,
+  "computation_limit_seconds": 28800,
+  "PDF": {
+    "pages": 38,
+    "SHA256": "7f0fab6030becd403d83abb7068ae4cbf4c1ad41eaa3a0a5f25e43aaf253ea57",
+    "visual_QA_passed": true
+  },
+  "public_recovery": {
+    "passed": true,
+    "commit": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+    "receipt_SHA256": "5de0557931adda6c54c46e5dd595c965cff5c69f8fd158034b3e152a149b199c",
+    "formal_positions": 32,
+    "root_checks": 2,
+    "Optimize": 0,
+    "compile": 0,
+    "vendor_DLL_loads": 0,
+    "historical_campaign_recoveries": 0,
+    "one_owned_root": true
+  },
+  "pull_request_snapshot": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/197",
+    "base": "codex/round134-paper-ready-s2-and-count-bound",
+    "head": "codex/round135-aggregate-penalty-and-paper",
+    "base_sha": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+    "head_sha": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+    "draft": true,
+    "state": "open",
+    "merged": false
+  },
+  "independent_scientific_review_SHA256": "fb3ea52e60a4c51b2fc4578307ccd74a6673880615ecc6e923c436aea2bf7d81",
+  "independent_delivery_review_SHA256": "97e763f248005f13fa63112ab35f9cb594245827411d802a1878eff6e42941f4",
+  "protected_assets_passed": true,
+  "no_merge_force_push_email_or_submission": true,
+  "remaining_author_facts_nonblocking": true,
+  "final_metadata_publication_policy": "The subsequent normal metadata commit carries these actual receipts; its final PR head is read back separately without recursive commit self-reference."
+}

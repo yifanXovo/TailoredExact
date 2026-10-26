@@ -1,0 +1,14 @@
+{
+  "schema": "round114-review-engineering-failure-v1",
+  "reviewer": "/root/independent_admission",
+  "failure": "PowerShell dynamic filename array parsed as one concatenated string",
+  "failed_dependency": "authority/recovery_15.json recovery_15_signed_audit.json",
+  "failed_expression": "@('recovery_'+n+'.json','recovery_'+n+'_signed_audit.json')",
+  "correction": "Use explicit parentheses around each concatenated array element",
+  "native_starts": 0,
+  "Optimize": 0,
+  "compiler_starts": 0,
+  "qualification_driver_starts": 0,
+  "original_raw_or_helper_changes": 0,
+  "no_accept_signed": true
+}

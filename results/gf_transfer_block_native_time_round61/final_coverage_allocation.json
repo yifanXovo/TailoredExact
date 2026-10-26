@@ -1,0 +1,27 @@
+{
+  "reason": "Complete corrected first-nonempty/repair telemetry for D3/D4 without changing frozen work or selection; retain an explicit end-to-end easy-role protection pair.",
+  "additional_construction": [
+    {
+      "id": "D3",
+      "stage": "quality_final",
+      "cap": 90
+    },
+    {
+      "id": "D4",
+      "stage": "quality_final",
+      "cap": 90
+    }
+  ],
+  "easy_protection": {
+    "id": "D1",
+    "modes": [
+      "off",
+      "submit"
+    ],
+    "cap": 60
+  },
+  "reserved_conflict_calls": 3,
+  "projected_charged_total_after_current_pipeline_and_allocation": 69,
+  "remaining_reserve": 3,
+  "no_candidate_or_threshold_revision": true
+}

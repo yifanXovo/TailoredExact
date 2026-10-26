@@ -121,3 +121,5 @@ The best low_gini_1 run is noncertified but improves the fixed-interval lower
 bound to `0.048723364` at 3600s. This is positive bound-progress evidence, not
 a full `moderate_seed3301` certificate. Plain CPLEX and diagnostic rows remain
 benchmark/diagnostic-only.
+> Historical evidence report. Any "current" designation below is local to its
+> original round and is superseded by K1-AM-SF (`paper-k1-am-sf`).

@@ -1,0 +1,20 @@
+{
+  "closure_commit": "fe8d856f2d7bf867c5ea292937effa66e953f613",
+  "attempts": [
+    {
+      "transport": "default HTTPS",
+      "result": "Empty reply from server"
+    },
+    {
+      "transport": "default HTTPS retry",
+      "result": "Empty reply from server"
+    },
+    {
+      "transport": "per-command HTTP/1.1",
+      "result": "Failed to connect port443 after21083ms"
+    }
+  ],
+  "pr_body_updated": true,
+  "closure_commit_remote_verified": false,
+  "scope": "Local closure saved; publication retry pending. No alternate solver runs or reset credit."
+}

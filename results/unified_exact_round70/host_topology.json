@@ -1,0 +1,142 @@
+{
+  "cores": [
+    {
+      "core_record": 0,
+      "group": 0,
+      "affinity_mask": 3,
+      "logical_processors": [
+        0,
+        1
+      ],
+      "SMT": true,
+      "efficiency_class": 1
+    },
+    {
+      "core_record": 1,
+      "group": 0,
+      "affinity_mask": 12,
+      "logical_processors": [
+        2,
+        3
+      ],
+      "SMT": true,
+      "efficiency_class": 1
+    },
+    {
+      "core_record": 2,
+      "group": 0,
+      "affinity_mask": 48,
+      "logical_processors": [
+        4,
+        5
+      ],
+      "SMT": true,
+      "efficiency_class": 1
+    },
+    {
+      "core_record": 3,
+      "group": 0,
+      "affinity_mask": 192,
+      "logical_processors": [
+        6,
+        7
+      ],
+      "SMT": true,
+      "efficiency_class": 1
+    },
+    {
+      "core_record": 4,
+      "group": 0,
+      "affinity_mask": 768,
+      "logical_processors": [
+        8,
+        9
+      ],
+      "SMT": true,
+      "efficiency_class": 1
+    },
+    {
+      "core_record": 5,
+      "group": 0,
+      "affinity_mask": 3072,
+      "logical_processors": [
+        10,
+        11
+      ],
+      "SMT": true,
+      "efficiency_class": 1
+    },
+    {
+      "core_record": 6,
+      "group": 0,
+      "affinity_mask": 12288,
+      "logical_processors": [
+        12,
+        13
+      ],
+      "SMT": true,
+      "efficiency_class": 1
+    },
+    {
+      "core_record": 7,
+      "group": 0,
+      "affinity_mask": 49152,
+      "logical_processors": [
+        14,
+        15
+      ],
+      "SMT": true,
+      "efficiency_class": 1
+    },
+    {
+      "core_record": 8,
+      "group": 0,
+      "affinity_mask": 65536,
+      "logical_processors": [
+        16
+      ],
+      "SMT": false,
+      "efficiency_class": 0
+    },
+    {
+      "core_record": 9,
+      "group": 0,
+      "affinity_mask": 131072,
+      "logical_processors": [
+        17
+      ],
+      "SMT": false,
+      "efficiency_class": 0
+    },
+    {
+      "core_record": 10,
+      "group": 0,
+      "affinity_mask": 262144,
+      "logical_processors": [
+        18
+      ],
+      "SMT": false,
+      "efficiency_class": 0
+    },
+    {
+      "core_record": 11,
+      "group": 0,
+      "affinity_mask": 524288,
+      "logical_processors": [
+        19
+      ],
+      "SMT": false,
+      "efficiency_class": 0
+    }
+  ],
+  "physical_core_count": 12,
+  "logical_processor_count": 20,
+  "efficiency_classes": [
+    0,
+    1
+  ],
+  "optimizer_calls": 0,
+  "affinity_changed": false,
+  "scope": "Read-only Win32 topology for a prospective uniformly controlled measurement setup; not a diagnosis of where the prior run actually executed",
+  "source": "https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-processor_relationship"
+}

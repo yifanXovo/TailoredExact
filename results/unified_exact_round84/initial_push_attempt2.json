@@ -1,0 +1,18 @@
+{
+  "command": [
+    "git",
+    "-c",
+    "http.version=HTTP/1.1",
+    "push",
+    "-u",
+    "origin",
+    "codex/round84-ensc-long-protection-replication"
+  ],
+  "head": "8f7ed3eee1068caee250ad6f209db2d51ab2ce29",
+  "returncode": 128,
+  "wall_seconds": 21.232463099993765,
+  "stdout": "",
+  "stderr": "fatal: unable to access 'https://github.com/yifanXovo/TailoredExact.git/': Failed to connect to github.com port 443 after 21110 ms: Could not connect to server\n",
+  "prior_ref_check": "GitHub connector returned404 for exact R84 ref",
+  "optimizer_calls": 0
+}

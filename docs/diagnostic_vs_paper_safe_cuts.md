@@ -27,3 +27,5 @@ Examples include S-bucket closure without full parent S-domain coverage, Benders
 ## Category D: LP-Pattern Heuristics
 
 Rows suggested only by a specific LP solution are diagnostic until converted into a globally valid inequality family. Cutting a fractional solution is not enough for paper evidence.
+> Historical research note. This file predates Round 54; K1-AM-SF and
+> `paper-k1-am-sf` are the current stable mainline.

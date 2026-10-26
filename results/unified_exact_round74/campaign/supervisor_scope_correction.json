@@ -1,0 +1,87 @@
+{
+  "independent_checks_passed": true,
+  "number": 4,
+  "arm": "K1-R",
+  "original_summary_sha256": "e2d801e6ad66c38278674bab246defa66b51747dff6532fb9d6b726eb0bdee90",
+  "original_audit": {
+    "passed": false,
+    "error": "AssertionError()",
+    "offline_replay_seconds": 0.0750963999889791
+  },
+  "raw_audit_sha256": "2746aaaa8290a7e1d008d715087221061b8046b077b72228692e0e4c148916d7",
+  "driver_sha256": "d1b65cf137e30c1ef13a6a18807c87a9f0643394b21f7c0fbba33571aa4ebd0c",
+  "source_plan_sha256": "99df85316d39560727357f12ccac3e11bb33e7e3903caca9cb5cf16567b8352b",
+  "validated_audit": {
+    "binary_sha256": "90d7bd2f84744b87958ff19a6e35bed76722cf680964a04ad6331135f5ff9029",
+    "committed_events": 57,
+    "native_calls_started": 6,
+    "native_calls_returned": 6,
+    "physical_witnesses": 1,
+    "native_physical_witnesses": 0,
+    "scoped_bound_events": 43,
+    "global_native_bound_events": 43,
+    "UB": 0.21564407531579494,
+    "LB": 0.19772972251984766,
+    "gap": 0.017914352795947275,
+    "lower_bound_source": "complete_domain_native_evidence",
+    "certificate": false,
+    "solver_finalization_certificate": false,
+    "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+    "witnesses": [
+      {
+        "F": 0.21564407531579494,
+        "G": 0.03872267378877319,
+        "P": 1.179476010180145,
+        "stations": 50,
+        "pickup": 228,
+        "drop": 228,
+        "maximum_duration": 17975.490961810894,
+        "original_T_feasible": true,
+        "source": "same_run_verified_startup",
+        "call": 0,
+        "sequence": 2,
+        "available": 598.125
+      }
+    ],
+    "passed": true,
+    "normal_result_certificate": false,
+    "endpoint": {
+      "U": 0.21564407531579505,
+      "L": 0.19772972251984766,
+      "gap": 0.017914352795947386,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "round31_c6_external_gini_tree_time_limit"
+    },
+    "supervisor_scope_correction": true
+  },
+  "offending_guard": "assert audited['native_physical_witnesses']>=1",
+  "reason": "The original contract requires a physical same-run UB and complete-domain LB, not a native MIPSOL witness. The retained HGA point is independently feasible in the active MIP model, even though native search returns with no incumbent. The outer witness was not a native solver observation.",
+  "gates_preserved": "Original physical objective/routes, input/build/commands, numerical tolerances, native settings, model hashes, scope/coverage, contradictions, whole-run cost and affinity restoration.",
+  "native_mip_solutions": 0,
+  "native_mip_scope": {
+    "leaf": "L0.0.0",
+    "lower_g": 0,
+    "upper_g": 0.05391101882894876
+  },
+  "startup_G": 0.038722673788773324,
+  "new_optimizer_calls": 0,
+  "new_runs": 0,
+  "offline_initial_witness_model_check": {
+    "compatible_interval": true,
+    "compatible_cutoff": true,
+    "cutoff": 0.21564407531579505,
+    "columns": 23563,
+    "rows": 103581,
+    "maximum_row_violation": 1.1102230246251565e-16,
+    "objective_error": 2.7755575615628914e-17,
+    "violations": [],
+    "all_bounds_types_rows_valid": true,
+    "mapping_symmetry": "Remove empty routes; reorder only equal-capacity vehicles by served count then original label; reverify",
+    "scope": "Offline retained-witness mapping; not a native submission or general proof"
+  },
+  "mapping_sha256": "557009f3d5aae925fa5fce88322e2651d016981f53e11c1b8d85d8c340343400",
+  "wall_seconds": 1.1013869000598788,
+  "script_sha256": "b571b6d1b335915fe85def5ec4d8bb76f848c5cc403136e7f7eb68dad7ec53fc",
+  "scope": "One retained supervisor false negative; raw run, failed audit and summary remain byte-identical. No candidate-specific solver exception or new native witness is introduced."
+}

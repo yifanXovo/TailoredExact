@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "--fail",
+    "--silent",
+    "--show-error",
+    "--location",
+    "--connect-timeout",
+    "30",
+    "--max-time",
+    "300",
+    "https://raw.githubusercontent.com/yifanXovo/TailoredExact/4d85c66a28321a37ca83354ee7849eef5a3fcae3/results/unified_exact_round107/evidence_index.md"
+  ],
+  "path": "results/unified_exact_round107/evidence_index.md",
+  "expected_SHA": "1cef2bf4aeb6946c93ec69b7b5345e88a6aca2e97be390886a952310d94ff040",
+  "expected_bytes": 6017
+}

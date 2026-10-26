@@ -1,0 +1,9 @@
+campaign,id,arm,number,telemetry_seconds,event,leaf_id,gamma_L,gamma_U,status,global_lb,verified_ub,detail
+qualification/cli02,H100,ENS-C,3,0.57864680000000002,lp_complete,L0,0,0.25452870897207147,optimal,0.083116989631294769,0.25452870897207147,complete_lp_relaxation
+qualification/cli02,H100,ENS-C,3,3.0316808000000002,native_bound_target_reached,L0,0,0.25452870897207147,open,0.10273229827187166,0.25452870897207147,c6_child_bound_reached_parent_requeued_no_forced_split
+qualification/cli02,H100,ENS-C,3,3.0317321000000002,child_lp_reuse,L0,0,0.25452870897207147,open,0.10273229827187166,0.25452870897207147,c6_cached_complete_child_lp_pair_reused
+qualification/cli02,H100,ENS-C,3,82.128237900000002,terminal_mip_complete,L0,0,0.25452870897207147,OPTIMAL,0.16058906725504885,0.16058906725504907,native_terminal_mip_optimal
+qualification/cli02,H100,M-B,4,0.72964269999999998,lp_complete,L0,0,0.25452870897207147,optimal,0.089235196104895678,0.25452870897207147,complete_lp_relaxation
+qualification/cli02,H100,M-B,4,3.4701360999999999,native_bound_target_reached,L0,0,0.25452870897207147,open,0.10392020064650601,0.25452870897207147,c6_child_bound_reached_parent_requeued_no_forced_split
+qualification/cli02,H100,M-B,4,3.4702232,child_lp_reuse,L0,0,0.25452870897207147,open,0.10392020064650601,0.25452870897207147,c6_cached_complete_child_lp_pair_reused
+qualification/cli02,H100,M-B,4,84.581757600000003,terminal_mip_complete,L0,0,0.25452870897207147,OPTIMAL,0.16058906725504873,0.16058906725504907,native_terminal_mip_optimal

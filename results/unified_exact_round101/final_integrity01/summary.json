@@ -1,0 +1,615 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "records": [
+    {
+      "campaign": "native01",
+      "number": 1,
+      "id": "F2",
+      "arm": "FLEET-SHADOW",
+      "committed_events": 145,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "native01",
+      "number": 2,
+      "id": "F2",
+      "arm": "FLEET-SUBMIT",
+      "committed_events": 101,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "isolation01",
+      "number": 1,
+      "id": "F2",
+      "arm": "ENS-C",
+      "committed_events": 6185,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": true,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "isolation01",
+      "number": 2,
+      "id": "F2",
+      "arm": "FLEET-SHELL",
+      "committed_events": 6064,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": true,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "isolation01",
+      "number": 3,
+      "id": "F2",
+      "arm": "FLEET-SHADOW",
+      "committed_events": 6064,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": true,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "isolation01",
+      "number": 4,
+      "id": "F2",
+      "arm": "FLEET-SUBMIT",
+      "committed_events": 6470,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "isolation01",
+      "number": 5,
+      "id": "F2",
+      "arm": "FLEET-ROOT",
+      "committed_events": 9531,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": true,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "isolation01",
+      "number": 6,
+      "id": "F2",
+      "arm": "P-GRB",
+      "committed_events": 4447,
+      "native_calls": 1,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "development01",
+      "number": 1,
+      "id": "R98-C2",
+      "arm": "P-GRB",
+      "committed_events": 287,
+      "native_calls": 1,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "development01",
+      "number": 2,
+      "id": "R98-C2",
+      "arm": "ENS-C",
+      "committed_events": 84,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "development01",
+      "number": 3,
+      "id": "R98-C2",
+      "arm": "FLEET-ROOT",
+      "committed_events": 114,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "development01",
+      "number": 4,
+      "id": "R99-N2",
+      "arm": "ENS-C",
+      "committed_events": 98,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "development01",
+      "number": 5,
+      "id": "R99-N2",
+      "arm": "FLEET-ROOT",
+      "committed_events": 128,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "development01",
+      "number": 6,
+      "id": "R99-N2",
+      "arm": "P-GRB",
+      "committed_events": 301,
+      "native_calls": 1,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "protection01",
+      "number": 1,
+      "id": "F2",
+      "arm": "P-GRB",
+      "committed_events": 4413,
+      "native_calls": 1,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "protection01",
+      "number": 2,
+      "id": "F2",
+      "arm": "ENS-C",
+      "committed_events": 6185,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": true,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "protection01",
+      "number": 3,
+      "id": "F2",
+      "arm": "FLEET-ROOT",
+      "committed_events": 9531,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": true,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "long01",
+      "number": 1,
+      "id": "F5",
+      "arm": "ENS-C",
+      "committed_events": 80,
+      "native_calls": 7,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "long01",
+      "number": 2,
+      "id": "F5",
+      "arm": "FLEET-ROOT",
+      "committed_events": 95,
+      "native_calls": 7,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "long01",
+      "number": 3,
+      "id": "F5",
+      "arm": "P-GRB",
+      "committed_events": 273,
+      "native_calls": 1,
+      "stop_reason": "whole_run_hard_stop",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "confirmation01",
+      "number": 1,
+      "id": "C101-V20",
+      "arm": "ENS-C",
+      "committed_events": 3385,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": true,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "confirmation01",
+      "number": 2,
+      "id": "C101-V20",
+      "arm": "FLEET-ROOT",
+      "committed_events": 4740,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": true,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "confirmation01",
+      "number": 3,
+      "id": "C101-V20",
+      "arm": "P-GRB",
+      "committed_events": 8473,
+      "native_calls": 1,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "confirmation01",
+      "number": 4,
+      "id": "C101-V30",
+      "arm": "P-GRB",
+      "committed_events": 278,
+      "native_calls": 1,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "confirmation01",
+      "number": 5,
+      "id": "C101-V30",
+      "arm": "FLEET-ROOT",
+      "committed_events": 337,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "confirmation01",
+      "number": 6,
+      "id": "C101-V30",
+      "arm": "ENS-C",
+      "committed_events": 368,
+      "native_calls": 5,
+      "stop_reason": "whole_run_hard_stop",
+      "certificate": false,
+      "recovered_original_audit": true
+    },
+    {
+      "campaign": "confirmation01",
+      "number": 7,
+      "id": "C101-V50",
+      "arm": "FLEET-ROOT",
+      "committed_events": 46,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "confirmation01",
+      "number": 8,
+      "id": "C101-V50",
+      "arm": "P-GRB",
+      "committed_events": 289,
+      "native_calls": 1,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    },
+    {
+      "campaign": "confirmation01",
+      "number": 9,
+      "id": "C101-V50",
+      "arm": "ENS-C",
+      "committed_events": 61,
+      "native_calls": 5,
+      "stop_reason": "normal_return",
+      "certificate": false,
+      "recovered_original_audit": false
+    }
+  ],
+  "protected_user_files": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+  },
+  "frozen_production_binary_sha256": "99b18e8a7e08edc4d379f85938f9e43f92431824148d64baf20b8169083cb918",
+  "candidate_stays_default_off": true,
+  "script_sha256": "dd428c965b38d0240d2610473b32bb736370c487381828dbd15ac1855440b959",
+  "fee_account": {
+    "completed_charged_starts": 45,
+    "completed_charged_seconds": 69575.05679539999,
+    "reserved_starts": 0,
+    "reserved_cap_seconds": 0,
+    "maximum_current_plan_starts": 45,
+    "maximum_current_plan_seconds": 69575.05679539999,
+    "remaining_after_current_plan_starts": 27,
+    "remaining_after_current_plan_seconds": 10424.943204600015,
+    "within_limits": true,
+    "fees": [
+      {
+        "label": "confirmation01/1/C101-V20/ENS-C",
+        "starts": 1,
+        "seconds": 217.375,
+        "process_seconds": 217.17199999999139
+      },
+      {
+        "label": "confirmation01/2/C101-V20/FLEET-ROOT",
+        "starts": 1,
+        "seconds": 266.64000000001397,
+        "process_seconds": 266.4210000000021
+      },
+      {
+        "label": "confirmation01/3/C101-V20/P-GRB",
+        "starts": 1,
+        "seconds": 1797.5,
+        "process_seconds": 1797.2340000000258
+      },
+      {
+        "label": "confirmation01/4/C101-V30/P-GRB",
+        "starts": 1,
+        "seconds": 7197.5,
+        "process_seconds": 7197.296999999991
+      },
+      {
+        "label": "confirmation01/5/C101-V30/FLEET-ROOT",
+        "starts": 1,
+        "seconds": 7197.390999999974,
+        "process_seconds": 7197.187999999995
+      },
+      {
+        "label": "confirmation01/6/C101-V30/ENS-C",
+        "starts": 1,
+        "seconds": 7198.3429999999935,
+        "process_seconds": 7198.108999999997
+      },
+      {
+        "label": "confirmation01/7/C101-V50/FLEET-ROOT",
+        "starts": 1,
+        "seconds": 1797.4370000000054,
+        "process_seconds": 1797.2030000000086
+      },
+      {
+        "label": "confirmation01/8/C101-V50/P-GRB",
+        "starts": 1,
+        "seconds": 1797.3440000000119,
+        "process_seconds": 1797.1560000000172
+      },
+      {
+        "label": "confirmation01/9/C101-V50/ENS-C",
+        "starts": 1,
+        "seconds": 1797.4219999999914,
+        "process_seconds": 1797.2030000000086
+      },
+      {
+        "label": "confirmation01/reference_batch",
+        "starts": 1,
+        "seconds": 1.5053589000017382
+      },
+      {
+        "label": "development01/1/R98-C2/P-GRB",
+        "starts": 1,
+        "seconds": 1797.3590000000113,
+        "process_seconds": 1797.1410000000033
+      },
+      {
+        "label": "development01/2/R98-C2/ENS-C",
+        "starts": 1,
+        "seconds": 1797.452999999994,
+        "process_seconds": 1797.1560000000027
+      },
+      {
+        "label": "development01/3/R98-C2/FLEET-ROOT",
+        "starts": 1,
+        "seconds": 1797.3589999999967,
+        "process_seconds": 1797.1560000000027
+      },
+      {
+        "label": "development01/4/R99-N2/ENS-C",
+        "starts": 1,
+        "seconds": 1797.375,
+        "process_seconds": 1797.172000000006
+      },
+      {
+        "label": "development01/5/R99-N2/FLEET-ROOT",
+        "starts": 1,
+        "seconds": 1797.3910000000033,
+        "process_seconds": 1797.1719999999914
+      },
+      {
+        "label": "development01/6/R99-N2/P-GRB",
+        "starts": 1,
+        "seconds": 1797.3440000000119,
+        "process_seconds": 1797.1560000000027
+      },
+      {
+        "label": "development01/reference_batch",
+        "starts": 1,
+        "seconds": 0.6562398999958532
+      },
+      {
+        "label": "isolation01/1/F2/ENS-C",
+        "starts": 1,
+        "seconds": 571.1720000000059,
+        "process_seconds": 570.9840000000113
+      },
+      {
+        "label": "isolation01/2/F2/FLEET-SHELL",
+        "starts": 1,
+        "seconds": 549.875,
+        "process_seconds": 549.656999999992
+      },
+      {
+        "label": "isolation01/3/F2/FLEET-SHADOW",
+        "starts": 1,
+        "seconds": 601.4379999999946,
+        "process_seconds": 601.2189999999973
+      },
+      {
+        "label": "isolation01/4/F2/FLEET-SUBMIT",
+        "starts": 1,
+        "seconds": 1197.4070000000065,
+        "process_seconds": 1197.1879999999946
+      },
+      {
+        "label": "isolation01/5/F2/FLEET-ROOT",
+        "starts": 1,
+        "seconds": 864.4679999999935,
+        "process_seconds": 864.25
+      },
+      {
+        "label": "isolation01/6/F2/P-GRB",
+        "starts": 1,
+        "seconds": 1197.3600000000006,
+        "process_seconds": 1197.156999999992
+      },
+      {
+        "label": "isolation01/reference_batch",
+        "starts": 1,
+        "seconds": 0.3107659000088461
+      },
+      {
+        "label": "long01/1/F5/ENS-C",
+        "starts": 1,
+        "seconds": 7197.405999999988,
+        "process_seconds": 7197.2179999999935
+      },
+      {
+        "label": "long01/2/F5/FLEET-ROOT",
+        "starts": 1,
+        "seconds": 7197.485000000015,
+        "process_seconds": 7197.266000000003
+      },
+      {
+        "label": "long01/3/F5/P-GRB",
+        "starts": 1,
+        "seconds": 7198.2970000000205,
+        "process_seconds": 7198.094000000012
+      },
+      {
+        "label": "long01/reference_batch",
+        "starts": 1,
+        "seconds": 1.0056647000019439
+      },
+      {
+        "label": "native01/1/F2/FLEET-SHADOW",
+        "starts": 1,
+        "seconds": 117.70300000000861,
+        "process_seconds": 117.5
+      },
+      {
+        "label": "native01/2/F2/FLEET-SUBMIT",
+        "starts": 1,
+        "seconds": 117.3119999999908,
+        "process_seconds": 117.125
+      },
+      {
+        "label": "native01/reference_batch",
+        "starts": 1,
+        "seconds": 0.3399368999962462
+      },
+      {
+        "label": "protection01/1/F2/P-GRB",
+        "starts": 1,
+        "seconds": 1197.75,
+        "process_seconds": 1197.547000000006
+      },
+      {
+        "label": "protection01/2/F2/ENS-C",
+        "starts": 1,
+        "seconds": 572.0779999999941,
+        "process_seconds": 571.875
+      },
+      {
+        "label": "protection01/3/F2/FLEET-ROOT",
+        "starts": 1,
+        "seconds": 858.5,
+        "process_seconds": 858.2660000000033
+      },
+      {
+        "label": "protection01/reference_batch",
+        "starts": 1,
+        "seconds": 0.32334269999410026
+      },
+      {
+        "label": "qualification/cost_replay01",
+        "starts": 1,
+        "seconds": 3.7504998999938834,
+        "failed": false
+      },
+      {
+        "label": "qualification/lp01",
+        "starts": 1,
+        "seconds": 69.18889239999407,
+        "failed": false
+      },
+      {
+        "label": "qualification/matrix_guards01",
+        "starts": 1,
+        "seconds": 2.2524515999975847,
+        "failed": false
+      },
+      {
+        "label": "qualification/numeric_replay01",
+        "starts": 1,
+        "seconds": 3.7742300999962026,
+        "failed": false
+      },
+      {
+        "label": "qualification/pure01",
+        "starts": 1,
+        "seconds": 0.13771459998679347,
+        "failed": false
+      },
+      {
+        "label": "qualification/pure02",
+        "starts": 1,
+        "seconds": 0.18881099999998696,
+        "failed": false
+      },
+      {
+        "label": "qualification/pure03",
+        "starts": 1,
+        "seconds": 0.18790799999260344,
+        "failed": false
+      },
+      {
+        "label": "qualification/pure04",
+        "starts": 1,
+        "seconds": 0.18623989999468904,
+        "failed": false
+      },
+      {
+        "label": "qualification/pure05",
+        "starts": 1,
+        "seconds": 0.20219189999625087,
+        "failed": false
+      },
+      {
+        "label": "qualification/reextension01",
+        "starts": 1,
+        "seconds": 1.5625470000086352,
+        "failed": false
+      }
+    ],
+    "reserved": [],
+    "incomplete_receipt_batches": [],
+    "internal_Optimize_calls_not_double_billed": true,
+    "conservatism": "Formal starts charged with full completion time including prelaunch; qualification pure/replay batches also counted. Engineering/offline audits separate."
+  },
+  "limitation": "Identity, durable receipt, call scope, fees and explicit recovery audit; separate exact rank/physical witness replay and independent review required."
+}

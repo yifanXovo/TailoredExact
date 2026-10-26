@@ -1,0 +1,29 @@
+{
+  "audit_passed": true,
+  "contraction_score": {
+    "C_d_classification": "inadmissible_constant_by_construction_and_observation: C1=0.5, C2=0.75 on every mechanism row",
+    "admissible": false,
+    "disposition": "skipped_inadmissible_constant_signal",
+    "entered": false,
+    "entry_condition": "C_d is mathematically admissible and adds stable structural information"
+  },
+  "rank1_lifted_cuts": {
+    "chi_denominator_material": false,
+    "disposition": "skipped_entry_false_equal_global_root_lp_and_vacuous_chi",
+    "entered": false,
+    "entry_condition": "fixed-K4 gains arise from formulation strength not captured by the objective-Gini envelope",
+    "missing_transferable_root_strength_observed": false,
+    "strong_control_K4_minus_K1_global_root_lp": 0.0,
+    "strong_control_chi": 0.0,
+    "supporting_evidence": [
+      "results/gf_k1_k4_envelope_refinement_round43/stage2_envelope_capture.json",
+      "results/gf_k1_k4_envelope_refinement_round43/stage2_envelope_diagnostics.csv"
+    ]
+  },
+  "round_id": 43,
+  "schema": "round43-stage4-disposition-v1",
+  "stage3_has_passing_candidate": false,
+  "stage4_candidate_count": 0,
+  "stage4_entered": false,
+  "stage4_required": false
+}

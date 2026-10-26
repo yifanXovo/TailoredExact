@@ -1,0 +1,366 @@
+{
+  "schema": "citibike443-station-landscape-v1",
+  "dataset_family": "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324",
+  "classification": "generated_untested_paper_candidate",
+  "generator_version": "citibike443-regional-v1.0.0",
+  "landscape_id": "r132_X_15-B_DIVVY_balanced",
+  "selection_id": "r132_X_15-B_DIVVY",
+  "V": 15,
+  "geographic_regime": "regional",
+  "replicate": 2,
+  "inventory_regime": "balanced",
+  "local_imbalance_level": "moderate",
+  "seed": 159487912,
+  "seed_derivation_material": "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced",
+  "source_station_row_indices": [
+    836,
+    713,
+    707,
+    831,
+    784,
+    591,
+    767,
+    837,
+    833,
+    590,
+    773,
+    787,
+    586,
+    725,
+    772
+  ],
+  "source_hashes": {
+    "public_table_sha256": "abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324"
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      440071.296,
+      4621762.741
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    15,
+    2,
+    2,
+    15,
+    3,
+    2,
+    4,
+    11,
+    8,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "initial": [
+    10,
+    2,
+    1,
+    9,
+    0,
+    0,
+    0,
+    7,
+    3,
+    0,
+    2,
+    0,
+    1,
+    2,
+    0
+  ],
+  "target": [
+    8,
+    1,
+    1,
+    7,
+    1,
+    1,
+    2,
+    6,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "weights": [
+    1.0,
+    0.1,
+    0.1,
+    0.765625,
+    0.1,
+    0.1,
+    0.1,
+    0.5625,
+    0.25,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1
+  ],
+  "min_ratio": [
+    0.3133,
+    0.3,
+    0.3,
+    0.2867,
+    0.2333,
+    0.3,
+    0.3,
+    0.3182,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.3
+  ],
+  "points_utm18n_meters": [
+    [
+      439193.98,
+      4620604.665
+    ],
+    [
+      441219.22,
+      4622644.287
+    ],
+    [
+      438365.167,
+      4623079.468
+    ],
+    [
+      440654.461,
+      4621304.901
+    ],
+    [
+      439840.207,
+      4622812.198
+    ],
+    [
+      441618.45,
+      4621507.677
+    ],
+    [
+      438509.721,
+      4622206.168
+    ],
+    [
+      438785.523,
+      4621389.486
+    ],
+    [
+      440181.832,
+      4622006.566
+    ],
+    [
+      440015.657,
+      4620870.871
+    ],
+    [
+      441053.659,
+      4621753.503
+    ],
+    [
+      441492.525,
+      4622137.848
+    ],
+    [
+      439978.712,
+      4621315.678
+    ],
+    [
+      439170.197,
+      4621397.419
+    ],
+    [
+      440990.127,
+      4621410.382
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 3613.0841708671283,
+    "mean_pairwise_station_distance_m": 1662.2159033372043,
+    "maximum_pairwise_station_distance_m": 3613.0841708671283,
+    "mean_depot_distance_m": 1161.8782292476442,
+    "maximum_depot_distance_m": 2155.1441151741424,
+    "bounding_box_width_m": 3253.282999999996,
+    "bounding_box_height_m": 2474.8030000003055,
+    "capacity_minimum": 2,
+    "capacity_maximum": 15,
+    "capacity_mean": 4.933333333333334,
+    "capacity_median": 2,
+    "total_capacity": 74,
+    "total_initial_inventory": 37,
+    "total_target_inventory": 37,
+    "station_inventory_minus_target": 0,
+    "absolute_total_shortage_or_surplus": 0,
+    "local_l1_imbalance": 16,
+    "maximum_local_absolute_imbalance": 2,
+    "surplus_station_count": 6,
+    "deficit_station_count": 7,
+    "balanced_station_count": 2,
+    "weight_minimum": 0.1,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.24520833333333333,
+    "min_ratio_minimum": 0.2333,
+    "min_ratio_maximum": 0.3182
+  },
+  "generation_trace": {
+    "initial_before_total_correction": [
+      11,
+      2,
+      2,
+      10,
+      0,
+      0,
+      1,
+      8,
+      3,
+      0,
+      2,
+      0,
+      2,
+      2,
+      0
+    ],
+    "initial_after_total_correction": [
+      10,
+      2,
+      1,
+      9,
+      0,
+      0,
+      0,
+      7,
+      3,
+      0,
+      2,
+      0,
+      1,
+      2,
+      0
+    ],
+    "initial_after_sign_repair": [
+      10,
+      2,
+      1,
+      9,
+      0,
+      0,
+      0,
+      7,
+      3,
+      0,
+      2,
+      0,
+      1,
+      2,
+      0
+    ],
+    "desired_total": 37,
+    "delta_amount": 15,
+    "local_scale": 0.18,
+    "inventory_hash_order": [
+      2,
+      9,
+      12,
+      4,
+      3,
+      6,
+      7,
+      5,
+      0,
+      11,
+      1,
+      14,
+      10,
+      8,
+      13
+    ],
+    "sign_repair_hash_order": [
+      5,
+      7,
+      11,
+      10,
+      3,
+      8,
+      1,
+      4,
+      9,
+      2,
+      12,
+      14,
+      13,
+      0,
+      6
+    ],
+    "anchor_material": "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|geographic-anchor-set|V=15",
+    "selection_material": "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|selection|V=15|geography=regional|replicate=2",
+    "inventory_material": "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced",
+    "target_materials": [
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=836",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=713",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=707",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=831",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=784",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=591",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=767",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=837",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=833",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=590",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=773",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=787",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=586",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=725",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r132_X_15-B_DIVVY|row=772"
+    ],
+    "inventory_order_materials": [
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|0",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|1",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|2",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|3",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|4",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|5",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|6",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|7",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|8",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|9",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|10",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|11",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|12",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|13",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|14"
+    ],
+    "sign_repair_order_materials": [
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|0",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|1",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|2",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|3",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|4",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|5",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|6",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|7",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|8",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|9",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|10",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|11",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|12",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|13",
+      "round132-frozen-s2-prospective-v2|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r132_X_15-B_DIVVY|balanced|sign-repair|14"
+    ]
+  },
+  "coordinate_CRS": "EPSG:32616",
+  "source": "DIVVY"
+}

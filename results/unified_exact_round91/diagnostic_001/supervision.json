@@ -1,0 +1,30 @@
+{
+  "ceiling_seconds": 300,
+  "command": [
+    "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+    "E:\\codes\\ExactEBRP\\scripts\\round91_handling_rounding_diagnostic.py",
+    "diagnose",
+    "--manifest",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round91\\qualification_001\\export\\export_manifest.json",
+    "--admission",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round91\\diagnostic_admission_001.json",
+    "--out",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round91\\diagnostic_001\\diagnostic",
+    "--deadline-monotonic",
+    "3874313.2103759"
+  ],
+  "lp_sha256_after": "9872d149c970c99f2b0175929221fb42692c6915a68a4e57e94dd1492fb79a29",
+  "lp_sha256_before": "9872d149c970c99f2b0175929221fb42692c6915a68a4e57e94dd1492fb79a29",
+  "manifest_sha256_after": "04f9fde82d1a7c5d7be97ae1734cc81e71d978623a2bfbc90764d699041957ef",
+  "manifest_sha256_before": "04f9fde82d1a7c5d7be97ae1734cc81e71d978623a2bfbc90764d699041957ef",
+  "process_peak_working_set_bytes": 23535616,
+  "result_file_invalid": false,
+  "result_present": true,
+  "returncode": 0,
+  "schema": "round91-handling-rounding-supervision-v1",
+  "scope": "One research diagnostic; nonoptimal/residual failure is unknown, not a bound",
+  "script_identity_consistent": true,
+  "script_sha256_after": "5a39d8b26e91d61ae2e5835fefa890d0b982aa8f7fd7c345c828642a2e5753ca",
+  "status": "all_three_certified",
+  "supervisor_body_wall_seconds": 0.514210999943316
+}

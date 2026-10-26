@@ -1,0 +1,123 @@
+{
+  "decision": "ACCEPT",
+  "purpose": "Independent correctness and protocol admission for the frozen eight-arm Round107 development campaign only.",
+  "reviewer": "/root/independent_review",
+  "production_source_commit": "7c21af688cc32c4af1147aa23549def3e5c4642d",
+  "production_PE_SHA": "bf06540df705aa8d1d517764bd5ebd0f4ce04b01b2797f6c562c60780367e732",
+  "fixture_PE_SHA": "4d2305aae6a4d7ae3416f059b641e37a48036ba36a899522fface4a5c2ed4684",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "qualification_identity_SHA": "302a089419177a7344b0449f3b4c3a3db1156f97c1bc38966871b94f6de4486e",
+  "development_protocol_SHA": "7ce11d10d60fcca8913935f271a711baabe740ce32f05d674844d7a62fe27ead",
+  "confirmation_protocol_SHA": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+  "campaign_identity_SHA": "f308a460638db61cad043b76d1c303339fe08e11956f92a8f4fc0aba42b058c6",
+  "campaign_runner_SHA": "ab3a6bcde5b5506b9d7b5dc65d4033bba1a54cce0e7709374e72ed30240315f3",
+  "source_files_independently_hashed": 204,
+  "blockers": [],
+  "qualification_evidence": {
+    "independent_arithmetic": {
+      "path": "review/independent_final17.json",
+      "sha256": "e81774d7043f7b12d7ba33b670370dc9be824880bd328aef248078cc6864b435",
+      "layer": "Independent stdlib Decimal inventory/ownership/permutation exhaustion and actual LP/raw-vector/base-row/objective/AM/cover recomputation"
+    },
+    "raw_identities": {
+      "path": "review/final17_receipt_checks.json",
+      "sha256": "a409cb652e335193d872280344ef819d03d90b727bfcbf784ae74cc0f9d941a2",
+      "layer": "Actual process/plan/stdout/native-log/source/PE/DLL/helper byte checks; all eight formal arms unstarted"
+    },
+    "threshold_remap": {
+      "path": "review/threshold_remap01/result.json",
+      "sha256": "db8cf9cc6d3c51cc317dadf907a3e6416b54b5faf366e1f55db03ead1e3e6357",
+      "layer": "INDEPENDENT_STDLIB_ACTUAL_DOMAIN_THRESHOLD_OPERATOR_REPLAY",
+      "actual_domains": "final03 strict request_2 to outside request_3",
+      "stale_activity": 5,
+      "full_current_activity": 6,
+      "rhs": 5,
+      "native_B_threshold_absent_to_present": "NOT_EXPOSED",
+      "additional_native_fixture_required": false,
+      "reason": "Pure actual-domain/column counterexample and reviewed complete-semantic storage/fresh current-Y mapping prove the contract; no concrete correctness blocker."
+    },
+    "native_target_controller": {
+      "actual": true,
+      "target": 0.34192011176074916,
+      "bound": 0.4220385674931129,
+      "native_status": "INTERRUPTED",
+      "legal_requeues": 1,
+      "subsequent_terminal": true,
+      "complete_small_original_certificate": true
+    },
+    "native_terminal_scope": {
+      "actual": true,
+      "scope_optimum": 0.1181818181818182,
+      "target_case_optimum": 0.542741935483871,
+      "strict_INF_without_Start": true,
+      "outside_global_witness_high_local_bound": true,
+      "cross_request_cache_hits": 2,
+      "remapped_FULL_rows": 1
+    },
+    "inner_deadline": {
+      "actual": true,
+      "source": "qualification/final02/inner_deadline",
+      "layer": "Isolated actual FULL using production inner callback; not integrated MIPSOL",
+      "Optimize_calls": 1,
+      "IIS_calls": 0,
+      "cancel_seconds": 3.0022363,
+      "status": "INTERRUPTED",
+      "solutions": 0,
+      "oracle_decision": "UNKNOWN",
+      "reuse_identity": "All final02 bound source bytes equal final03 except Round107GurobiFrontier.inc, which isolated inner path does not execute; DLL identical"
+    },
+    "outer_deadline": {
+      "actual": true,
+      "source": "qualification/final03/outer_deadline",
+      "deadline_seconds": 15,
+      "status": "open_local_obligation:global_deadline_in_master",
+      "certified": false,
+      "target_reached": false
+    },
+    "selected_native_call_totals": {
+      "LP": 12,
+      "master": 7,
+      "oracle": 35,
+      "core": 0,
+      "IIS": 0
+    }
+  },
+  "budget_at_review": {
+    "paid_starts": 41,
+    "paid_outer_seconds": 177.204159899964,
+    "remaining_starts": 31,
+    "remaining_outer_seconds": 79822.79584010004,
+    "unclosed_paid_launches": [],
+    "eight_arm_wrapper_and_children_reserve": 9,
+    "eight_arm_nominal_seconds": 12000,
+    "native_final01_child_count_correction_retained": true
+  },
+  "permitted_campaign": "F2 then R98-C2, each P-GRB/ENS-C/GLOBAL-STRUCT/FRONTIER-STRUCT, complete eight arms serially under frozen billed supervisor.",
+  "limitations": [
+    "Qualification fixtures are not performance benefits.",
+    "Native B threshold missing-to-present is NOT_EXPOSED; zero-solver qualification is labeled separately.",
+    "Inner deadline is an isolated production-callback component fixture; natural integrated UNKNOWN and post-cancel candidate exposure must be reported separately.",
+    "Global formal certification still requires original complete ENS coverage, qualified statuses and independently verified own physical witness.",
+    "Confirmation remains sealed until the frozen gates are evaluated from the complete development group.",
+    "Final formal comparisons/fees/mechanisms and public-only isolated restoration require independent delivery review."
+  ],
+  "previous_review_records_retained": [
+    "review/implementation_initial01.md",
+    "review/implementation_repaired01.md",
+    "review/engineering_final17/",
+    "review/engineering_final17_02/",
+    "review/engineering_final17_03/",
+    "review/engineering_final17_04/",
+    "review/engineering_final17_05/",
+    "review/engineering_final17_receipt_preinit01.json",
+    "review/engineering_final17_receipt_checks01/"
+  ],
+  "independent_reviewer_native_solver_processes": 0,
+  "independent_reviewer_compiler_processes": 0,
+  "independent_reviewer_Optimize_calls": 0,
+  "independent_reviewer_IIS_calls": 0,
+  "production_edits": 0,
+  "report": "review/implementation_final17.md",
+  "created_utc": "2026-10-07T17:19:47.140Z"
+}
+

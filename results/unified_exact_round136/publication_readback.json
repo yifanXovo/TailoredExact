@@ -1,0 +1,55 @@
+{
+  "PR_creation_transport": "connector create returned ReadTimeout; actual outcome recovered by exact head/base PR lookup; no duplicate create",
+  "actual_PR": {
+    "number": 198,
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/198",
+    "title": "Round136: establish the paper S2 mainline and organize project history",
+    "base": "main",
+    "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242",
+    "head": "codex/round136-mainline-consolidation",
+    "head_sha": "715d487674d56bc89358cf098599bc78f29d878f",
+    "draft": true,
+    "merged": false,
+    "state": "open"
+  },
+  "small_file_access": [
+    {
+      "path": "config/paper_s2.json",
+      "ref": "715d487674d56bc89358cf098599bc78f29d878f",
+      "remote_git_blob": "6baabb3483ce3e3b1d620a260c70a438bc7f022d",
+      "encoding": "utf-8",
+      "method": "connected GitHub file tool; not a new raw/public restore",
+      "actual_bytes": 2603,
+      "SHA256": "f3f20396a3dbba3a98b7d33dcc640513fe4c7c9ce2a9ce9843dc14cd3cccf938",
+      "actual_remote_content_equals_pinned_Git_blob": true
+    },
+    {
+      "path": "scripts/paper_s2.py",
+      "ref": "715d487674d56bc89358cf098599bc78f29d878f",
+      "remote_git_blob": "c8b9811ad0361e7559d06229a807d68d6f00922e",
+      "encoding": "utf-8",
+      "method": "connected GitHub file tool; not a new raw/public restore",
+      "actual_bytes": 8773,
+      "SHA256": "663bedff4d3423e8dd7c46ef2bcdb5c141676340fbcb9c26d0ffe833ee06501d",
+      "actual_remote_content_equals_pinned_Git_blob": true
+    }
+  ],
+  "UTC": "2026-10-26T18:09:48.473753+00:00",
+  "old_PR_count": 113,
+  "open_PR_count_with_consolidation": 114,
+  "branches": 137,
+  "tags": 3,
+  "main_unchanged": true,
+  "old_PR_states_unchanged": true,
+  "CLI_GraphQL_observation": "two metadata requests returned HTTP504; complete REST pagination and exact PR REST readback succeeded",
+  "PR_diff_metadata": {
+    "changed_files_reported_by_GitHub": 0,
+    "additions_reported": 0,
+    "deletions_reported": 0,
+    "actual_local_incremental_changed_files": 25,
+    "note": "GitHub full-history PR diff counters report zero; these are not used as a change audit. The bounded R135-to-Round136 Git diff is authoritative."
+  },
+  "native_Optimize": 0,
+  "recompile": 0,
+  "new_raw_recovery": 0
+}

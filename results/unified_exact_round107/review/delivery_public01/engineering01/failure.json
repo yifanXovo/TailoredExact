@@ -1,0 +1,6 @@
+{
+  "type": "AssertionError",
+  "message": "",
+  "traceback": "Traceback (most recent call last):\n  File \"E:/r107_delivery107_01/delivery_checker.py\", line 773, in <module>\n    result=run()\n           ^^^^^\n  File \"E:/r107_delivery107_01/delivery_checker.py\", line 684, in run\n    evidence['controller']=cover(d/'external',a,result)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:/r107_delivery107_01/delivery_checker.py\", line 358, in cover\n    assert 'native_bound_target_reached' in names and 'child_lp_reuse' in names and 'terminal_mip_complete' in names\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "source_reads_completed": 120027
+}

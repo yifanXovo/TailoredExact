@@ -1,0 +1,316 @@
+{
+  "schema": "round135-actual-PR-and-key-file-readback-v1",
+  "UTC": "2026-10-26 15:19:23 UTC",
+  "pull_request": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/197",
+    "number": 197,
+    "title": "Round135: aggregate state-penalty evaluation and manuscript refinement",
+    "base": "codex/round134-paper-ready-s2-and-count-bound",
+    "base_sha": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+    "head": "codex/round135-aggregate-penalty-and-paper",
+    "head_sha": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "created_at": "2026-10-26T15:18:19Z",
+    "updated_at": "2026-10-26T15:18:19Z"
+  },
+  "base_pull_request": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/196",
+    "number": 196,
+    "title": "Round134: paper-ready S2 certificates, final-version evidence and inventory-count bounds",
+    "base": "codex/round133-native-reliability-and-objective-gap",
+    "base_sha": "39043b15b3cceae2cab14a3fbaec39e2b16339ce",
+    "head": "codex/round134-paper-ready-s2-and-count-bound",
+    "head_sha": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "created_at": "2026-10-26T01:12:09Z",
+    "updated_at": "2026-10-26T01:20:04Z"
+  },
+  "key_files": [
+    {
+      "path": "results/unified_exact_round135/candidate_decision.json",
+      "ref": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+      "Git_blob_SHA": "81f135c4fabb4bd123295035ff5daf8174cbd601",
+      "display_url": "https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/candidate_decision.json",
+      "readback_scope": "complete JSON",
+      "content": {
+        "UTC": "2026-10-26T13:37:16.704816+00:00",
+        "study_complete": true,
+        "decision": "research-only",
+        "study_scope_paragraph": "Both preregistered stages were entered and all 32 positions completed, giving 16 matched pairs across seven known structural/protection inputs. The first-stage decision used all ten sealed positions and their original-objective endpoint signal. No position, Seed, order or cap was replaced after observing outcomes. The plan retained 8,760 plus 14,760 cap-seconds; actual costs are reported separately. Every ordinary adverse and open observation remains in the evidence.",
+        "paper_results_paragraph": "All 32 preregistered positions completed, with 10/16 certificates for each method. K-20-S remains open with the same U at both Seeds; AP reduces the gaps by about 7% and 30%. K-35-U also remains open: AP improves U at both Seeds, but its qualified L is weaker at both. Its gaps are smaller by about 25% and 2.8%, so the result is a primal/dual trade-off rather than endpoint dominance or faster proof. On the original D13 input both methods remain open at the same U. AP slightly narrows the Seed0 gap but widens the Seed1 gap by about 14%. This is mixed protection evidence, despite the absence of a new certificate loss.\n\nAmong the ten both-certified pairs, AP has no substantive time advantage and two substantive adverse differences: K-15-S Seed0 takes 149.31 seconds versus 112.11 for S2, and X-35-B Seed0 takes 79.97 versus 17.59. Their Seed1 differences are small. UC-B20-B remains certified in about four seconds on both sides, and micro repetitions have small absolute differences. Most of the two slowdowns lies in native MIP time, accompanied by higher Work and node counts; LP setup is a small part of the added cost. Complete production, postverification and total clocks, every endpoint and the exposed root/child/MIP costs are retained in Supplement S4.",
+        "paper_conclusion_paragraph": "AP retains the intended numerical root strengthening and improves some complete-search endpoints, but it does not improve certification coverage or establish a reliable complete-time advantage. The substantial Seed0 slowdowns and mixed D13 protection outcome do not justify replacing the accepted S2 method. We retain AP as a default-off research option and keep S2 as the supported main algorithm. The projection result explains retained state information under its stated premises; it does not guarantee a faster native search.",
+        "advance_assessment": "The main advances in this round are structural understanding and manuscript maturity. Selected full-method endpoint gains are real, but the complete panel does not support a uniform AP performance improvement. The finite AP study is closed without a new candidate or parameter grid. The smallest next work is author/coauthor review of the complete paper, confirmation of the HGA-TGBC author order, affiliations and current status and this paper's author list, and the named CITI source-capture/selection facts before journal-specific submission preparation.",
+        "AP_default_enabled": false,
+        "accepted_S2_retained": true,
+        "repository_ENS_default_unchanged": true,
+        "full_panel_completed": true,
+        "completed_arms": 32,
+        "complete_pairs": 16,
+        "certificate_counts": {
+          "S2": 10,
+          "AP": 10
+        },
+        "material_certified_time": {
+          "AP_favorable": 0,
+          "AP_adverse": 2
+        },
+        "summary_SHA": "23a30cc220c96f66e54b5c0634fc855430c4a90388cd0ce464d5cb0d7f72574b",
+        "G1_seconds": 17148.624478299604,
+        "postverification_seconds": 266.83043630060274,
+        "conservative_seconds": 17415.454914600206,
+        "no_outcome_retries": true,
+        "no_further_candidate_grid": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round135/reports/summary.json",
+      "ref": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+      "Git_blob_SHA": "c794fac75484808d9d1e7a7cd464b45935959472",
+      "display_url": "https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/reports/summary.json",
+      "readback_scope": "complete JSON",
+      "content": {
+        "UTC": "2026-10-26T13:37:16.208439+00:00",
+        "stage1": {
+          "planned": 10,
+          "completed": 10,
+          "missing": []
+        },
+        "stage2": {
+          "planned": 22,
+          "completed": 22,
+          "not_entered": []
+        },
+        "completed_positions": [
+          "C01",
+          "C02",
+          "C03",
+          "C04",
+          "C05",
+          "C06",
+          "C07",
+          "C08",
+          "C09",
+          "C10",
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D05",
+          "D06",
+          "D07",
+          "D08",
+          "D09",
+          "D10",
+          "D11",
+          "D12",
+          "D13",
+          "D14",
+          "D15",
+          "D16",
+          "D17",
+          "D18",
+          "D19",
+          "D20",
+          "D21",
+          "D22"
+        ],
+        "registered_total": 32,
+        "completed": 32,
+        "complete_pairs": 16,
+        "certificate_counts": {
+          "S2": 10,
+          "AP": 10
+        },
+        "directions": {
+          "Win": 6,
+          "UNDETERMINED": 6,
+          "Lose": 4
+        },
+        "direction_counts_include_micro_and_nonmaterial_differences": true,
+        "material_certified_time": {
+          "AP_favorable": 0,
+          "AP_adverse": 2
+        },
+        "pair_classes": {
+          "BOTH_CERTIFIED": 10,
+          "BOTH_OPEN": 6
+        },
+        "budget": {
+          "G1_seconds": 17148.624478299604,
+          "remaining_G1_seconds": 11651.375521700396,
+          "by_category": {
+            "B": 36.76280710019637,
+            "C": 10.063681199997724,
+            "D": 17101.79798999941,
+            "E": 0,
+            "repair": 0
+          },
+          "limits": {
+            "B": 28800,
+            "C": 28800,
+            "D": 28800,
+            "E": 28800,
+            "repair": 28800
+          },
+          "category_remaining": {
+            "B": 28763.237192899804,
+            "C": 28789.936318800002,
+            "D": 11698.20201000059,
+            "E": 28800,
+            "repair": 28800
+          },
+          "separately_reported_seconds": 266.83043630060274,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "root_IND_gain_retained": true,
+        "only_one_candidate": true,
+        "all_entered_adverse_and_open_retained": true,
+        "not_random_holdout": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round135/reports/roots.json",
+      "ref": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+      "Git_blob_SHA": "02b1ab0dc619ee1deeb1e224484d3d9be24df8cd",
+      "display_url": "https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/reports/roots.json",
+      "readback_scope": "complete JSON",
+      "content": [
+        {
+          "role": "K-20-S",
+          "status": "NUMERICAL_OPTIMAL_LP",
+          "L0_reused": 0.19514915244120534,
+          "L_IND_reused": 0.31875854261558056,
+          "L_AP": 0.3187585426155805,
+          "delta_AP_IND": -5.551115123125783e-17,
+          "quality": {
+            "ConstrVio": 0,
+            "BoundVio": 0,
+            "DualVio": 4.579669976578771e-16,
+            "ConstrResidual": 7.275957614183426e-12,
+            "DualResidual": 4.510281037539698e-16,
+            "ComplVio": 0
+          },
+          "AP_slack": -6.279698983036042e-16,
+          "before": {
+            "rows": 6637,
+            "columns": 3096,
+            "nonzeros": 38286
+          },
+          "after": {
+            "rows": 6638,
+            "columns": 3096,
+            "nonzeros": 38737
+          },
+          "construct_AP_seconds": 0.001338499947451055,
+          "load_and_construct_seconds": 0.09058379998896271,
+          "optimize_wall_seconds": 0.17076140001881868,
+          "native_runtime": 0.1659998893737793,
+          "Work": 0.4273225621440746,
+          "iterations": 3510,
+          "nodes": 0,
+          "native_identity": {
+            "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+            "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+            "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+            "loaded_engine_modules": [
+              "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+            ]
+          },
+          "LP_Optimize": 1,
+          "MIP_Optimize": 0,
+          "original_domain_interval_cutoff_unchanged": true,
+          "numerical_confirmation_not_rational_certificate": true,
+          "preserves_IND_gain": true
+        },
+        {
+          "role": "K-35-U",
+          "status": "NUMERICAL_OPTIMAL_LP",
+          "L0_reused": 0.20017766194929548,
+          "L_IND_reused": 0.27385768132726535,
+          "L_AP": 0.27385768132726473,
+          "delta_AP_IND": -6.106226635438361e-16,
+          "quality": {
+            "ConstrVio": 0,
+            "BoundVio": 0,
+            "DualVio": 2.0781125155552253e-07,
+            "ConstrResidual": 1.4551915228366852e-11,
+            "DualResidual": 4.2327252813834093e-16,
+            "ComplVio": 0
+          },
+          "AP_slack": 7.806255641895632e-17,
+          "before": {
+            "rows": 23624,
+            "columns": 10007,
+            "nonzeros": 163516
+          },
+          "after": {
+            "rows": 23625,
+            "columns": 10007,
+            "nonzeros": 164059
+          },
+          "construct_AP_seconds": 0.0012525999918580055,
+          "load_and_construct_seconds": 0.1358010999392718,
+          "optimize_wall_seconds": 1.413359300000593,
+          "native_runtime": 1.4159998893737793,
+          "Work": 3.8763655927311897,
+          "iterations": 13298,
+          "nodes": 0,
+          "native_identity": {
+            "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+            "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+            "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+            "loaded_engine_modules": [
+              "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+            ]
+          },
+          "LP_Optimize": 1,
+          "MIP_Optimize": 0,
+          "original_domain_interval_cutoff_unchanged": true,
+          "numerical_confirmation_not_rational_certificate": true,
+          "preserves_IND_gain": true
+        }
+      ]
+    },
+    {
+      "path": "results/unified_exact_round135/manuscript.md",
+      "ref": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+      "Git_blob_SHA": "fc0a34e5ef988aa84a4d400ec4d09452cf2cbc62",
+      "display_url": "https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/manuscript.md",
+      "readback_scope": "lines 1-22",
+      "content": "# An inventory-state exact algorithm for bicycle redistribution with ratio-Gini and target-deviation costs\n\n## Abstract\n\nStatic bicycle redistribution couples final station inventories with vehicle routes, prefix loads and handling time. We minimize ratio-Gini dispersion plus weighted relative target deviation under empty departure, loaded return and unique nonzero one-way service. Our exact method shares finite inventory states between service and objective representations, uses problem-specific supply and support inequalities, and maintains complete Gini-interval coverage around native LP and MIP solves. We prove implicit service integrality and establish the physical embeddings and coverage conditions needed for certification. In historical twelve-input/two-Seed validation, the method obtains 17/24 qualified certificates versus 9/24 for a cold compact control. Final implementation confirmation on six known roles obtains 12/14 versus 9/14, while retaining two substantive paid-start compact reversals and unresolved positive-objective 35-station endpoints. Six certified within-instance weight points show an equity-target trade-off on one input and a stable operating platform on another. The results support the integrated exact method within the specified model and test scope, and a bounded state-penalty study distinguishes relaxation improvement from complete-search performance.\n\n## 1. Introduction\n\nRedistribution vehicles can improve station availability only when the chosen inventory vector can be realized by feasible routes and loading operations. Supply must be collected before it is delivered, capacity applies at every route prefix, and handling consumes the same time budget as travel. When equity is measured by inventory-to-target ratios, the final inventory vector also determines both the numerator and denominator of the Gini coefficient. These dependencies make routing and inventory allocation inseparable.\n\nWe study static bicycle redistribution with empty vehicle departure, loaded return, and at most one nonzero one-way service at each station. The objective combines ratio-Gini dispersion and weighted relative target deviation. The model and HGA-TGBC framework originate in the direct same-problem project manuscript [@hgaTgbcManuscript]. The present contribution is an exact solution method for that operational setting. The supplied decoder remains a feasible-solution component; the exact method supplies the bounds, coverage and termination arguments needed to distinguish a good plan from a certified optimum.\n\nOur first contribution is a shared finite-state representation of final inventory, service and objective information. Unique service and binary direction imply integer pickup and delivery even when these quantities are declared continuous. Linking the same states to movement and visits prevents the relaxation from treating service decisions independently of the inventory mixtures used in the objective. We develop this representation with ordered supply compatibility and support/handling inequalities, and state their assumptions and physical embeddings.\n\nSecond, the Gini-interval tailored branch-and-cut method (GI-TBC, implemented as S2) combines a fully paid feasible startup, the shared representation, valid inequalities and complete interval coverage. The controller preserves the physical problem while refining objective intervals. Its correctness depends on applicable bounds and complete coverage; numerical source qualification and physical solution verification are stated separately.\n\nThird, the computational study measures complete-method cost against cold compact and independently paid-start compact controls. Historical breadth and final implementation confirmation retain their own versions and denominators. The study identifies substantial certification and runtime advantages, paid-start reversals and a positive-objective size boundary. A within-instance weight experiment relates the equity-target trade-off to actual vehicle operations. A bounded formulation study explains why retaining more state information can improve an LP without guaranteeing a faster complete algorithm.\n\n### 1.1 Relation to previous work\n\nStatic bike redistribution has been studied under several target, service and vehicle conventions. Raviv et al. develop static repositioning models; Chemla et al. study static rebalancing; Erdogan et al. address demand intervals and an exact rebalancing algorithm [@raviv2013; @chemla2013; @erdogan2014; @erdogan2015]. Schuijbroek et al. connect inventory requirements to routing [@schuijbroek2017]. Forbidden temporary operations, repeated visits, robust inventory requirements and demand-interval disjunctions give related but different feasible sets [@bruck2019; @bulhoes2018; @bruck2025; @ikonen2025]. The HGA-TGBC manuscript is the direct same-problem antecedent; the other studies supply routing and formulation context rather than matched performance baselines.\n"
+    }
+  ],
+  "app_attachment_passed": true,
+  "science_commit": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+  "final_metadata_commit_is_subsequent": true,
+  "key_file_comparison": {
+    "passed": true,
+    "checks": [
+      {
+        "path": "results/unified_exact_round135/candidate_decision.json",
+        "Git_blob_identity_matches": true,
+        "content_comparison": "Exact parsed JSON values"
+      },
+      {
+        "path": "results/unified_exact_round135/reports/summary.json",
+        "Git_blob_identity_matches": true,
+        "content_comparison": "Exact parsed JSON values"
+      },
+      {
+        "path": "results/unified_exact_round135/reports/roots.json",
+        "Git_blob_identity_matches": true,
+        "content_comparison": "Exact parsed JSON values"
+      },
+      {
+        "path": "results/unified_exact_round135/manuscript.md",
+        "Git_blob_identity_matches": true,
+        "content_comparison": "Requested lines 1-22 agree after connector trailing-blank normalization; full Git blob ID is exact"
+      }
+    ]
+  }
+}

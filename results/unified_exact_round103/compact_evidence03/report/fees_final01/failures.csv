@@ -1,0 +1,7 @@
+label,seconds,starts,failed,process_seconds,observed_end_to_end_seconds,additional_postexit_audit_seconds,native_Optimize_calls,auxiliary_Optimize_calls,DP_calls,stop_reason,inherited_finite_batch_billing_units,Optimize_calls,conservative_actual_child_start_count,resource_hull_DP_calls,inherited_R102_DP_calls,inherited_R102_DP_evidence,LP_begin_records,LP_return_records,DP_begin_records,DP_return_records,model_read_attempts,attempt_scope,scope
+fees/evidence_development01,1.3735281000263058,1,True,,,,0,0,0,normal_return,,,,,,,0,0,0,0,,No optimizer invoked by this batch,
+fees/independent_review01,6.027296599990223,1,True,,,,0,0,40,normal_return,,,,,,,0,0,40,40,6,"Independent level DP attempts, two support recomputations; zero Optimize",
+fees/point_C2_native01,0.7337514999962877,1,True,,,,0,0,0,normal_return,,,,,,,0,0,0,0,,No optimizer invoked by this batch,
+fees/small_hull01,0.611566599982325,1,True,,,,0,0,0,normal_return,,,,,,,0,0,0,0,,No optimizer invoked by this batch,
+fees/small_hull02,0.7918966000434011,1,True,,,,0,0,0,normal_return,,,,,,,0,0,0,0,1,No optimizer invoked by this batch,
+rejected_overlapping_launch_preflight,1.0,1,True,,,,0,0,0,ensure_idle rejected before receipt creation,,0,,,,,,,,,,,conservative allowance for observed0.911s shell attempt; no optimizer started and no overlap occurred

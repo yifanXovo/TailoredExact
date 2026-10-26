@@ -1,0 +1,137 @@
+{
+  "objective": 0.506343307565206,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        1,
+        10,
+        7,
+        4,
+        0
+      ],
+      "operations": [
+        {
+          "station": 1,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 10,
+          "pickup": 0,
+          "drop": 9
+        },
+        {
+          "station": 7,
+          "pickup": 1,
+          "drop": 0
+        },
+        {
+          "station": 4,
+          "pickup": 0,
+          "drop": 1
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        8,
+        5,
+        2,
+        0
+      ],
+      "operations": [
+        {
+          "station": 8,
+          "pickup": 1,
+          "drop": 0
+        },
+        {
+          "station": 5,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 2,
+          "pickup": 0,
+          "drop": 9
+        }
+      ]
+    },
+    {
+      "vehicle": 2,
+      "nodes": [
+        0,
+        9,
+        3,
+        6,
+        0
+      ],
+      "operations": [
+        {
+          "station": 9,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 3,
+          "pickup": 0,
+          "drop": 3
+        },
+        {
+          "station": 6,
+          "pickup": 0,
+          "drop": 7
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      1189.694072063803,
+      1225.1831295309762,
+      1080.0216716218329
+    ],
+    "route_operation_time": [
+      1200,
+      1080,
+      1200
+    ],
+    "route_duration": [
+      2389.694072063803,
+      2305.183129530976,
+      2280.021671621833
+    ],
+    "final_inventories": [
+      50000,
+      15,
+      15,
+      10,
+      18,
+      14,
+      9,
+      21,
+      38,
+      26,
+      15,
+      13,
+      13
+    ],
+    "G": 0.17721566970978195,
+    "P": 2.194184252369493,
+    "objective": 0.506343307565206,
+    "errors": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "archive_refs": [
+    {
+      "name": "archive/main-round37-20260813",
+      "target_commit": "1459308492a5eceed523dee53b5f9d79141b5242",
+      "local_tag_object": "61f573ac7e38592ca461f9f72bd42b28e8c8f160",
+      "remote_readback": [
+        "61f573ac7e38592ca461f9f72bd42b28e8c8f160\trefs/tags/archive/main-round37-20260813",
+        "1459308492a5eceed523dee53b5f9d79141b5242\trefs/tags/archive/main-round37-20260813^{}"
+      ],
+      "role": "pre-consolidation main / Round37 / PR84"
+    },
+    {
+      "name": "archive/round38-g2a-not-adopted",
+      "target_commit": "3b4942490bce0d3da73dcf9fdf27344e9ab04296",
+      "local_tag_object": "1f0b25872268eb723eef0af3e4b1e350d8d5914b",
+      "remote_readback": [
+        "1f0b25872268eb723eef0af3e4b1e350d8d5914b\trefs/tags/archive/round38-g2a-not-adopted",
+        "3b4942490bce0d3da73dcf9fdf27344e9ab04296\trefs/tags/archive/round38-g2a-not-adopted^{}"
+      ],
+      "role": "independent Round38 negative G2-A result; not adopted"
+    }
+  ],
+  "paper_snapshot_ref": {
+    "name": "paper-s2-round136",
+    "target_commit": "715d487674d56bc89358cf098599bc78f29d878f",
+    "local_tag_object": "e49ee9fe6b65ee1f5944858a0a4031947d1c3730",
+    "remote_readback": [
+      "e49ee9fe6b65ee1f5944858a0a4031947d1c3730\trefs/tags/paper-s2-round136",
+      "715d487674d56bc89358cf098599bc78f29d878f\trefs/tags/paper-s2-round136^{}"
+    ],
+    "role": "verified paper-S2 entry code/config snapshot; later publication metadata is separate"
+  },
+  "existing_refs_overwritten": false,
+  "counts_after_preparation": {
+    "branches": 137,
+    "tags": 3,
+    "existing_refs_overwritten": false
+  }
+}

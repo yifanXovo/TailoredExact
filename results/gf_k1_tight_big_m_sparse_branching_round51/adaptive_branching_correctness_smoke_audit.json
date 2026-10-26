@@ -1,0 +1,27 @@
+{
+  "checks": {
+    "all_23_a1_models_byte_identical_to_m1_v0": true,
+    "candidate_budget_at_most_four": true,
+    "candidate_family_cap_at_most_two": true,
+    "each_candidate_has_down_and_up_probe": true,
+    "end_to_end_work_accounting_exact": true,
+    "every_positive_priority_exact_readback": true,
+    "every_probe_bound_readback_valid": true,
+    "every_probe_fresh_and_fingerprint_matched": true,
+    "false_certificate_absent": true,
+    "lifecycle_valid": true,
+    "no_in_memory_model_reuse": true,
+    "one_fresh_model_per_root_probe_terminal_event": true,
+    "positive_priority_count_at_most_two": true,
+    "probe_budget_at_most_eight": true,
+    "smoke_evidence_complete_and_cap_respected": true,
+    "smoke_exact_certificate": true,
+    "terminal_model_fresh": true
+  },
+  "executable_sha256": "abfcf957b30f36d8688635306285934a4d8420e09b95fbcd7367161545a305fa",
+  "model_count": 10,
+  "probe_count": 8,
+  "schema": "round51-a1-correctness-smoke-audit-v1",
+  "selected_priority_count": 2,
+  "status": "pass"
+}

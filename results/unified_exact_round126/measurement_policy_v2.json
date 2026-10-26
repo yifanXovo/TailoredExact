@@ -1,0 +1,11 @@
+{
+  "main_clock": "T_produce",
+  "T_cert": "T_produce iff final certificate qualified; otherwise null",
+  "T_produce": "Full own startup, admission, all model/LP/MIP/Start/online work, native exit and producer seal",
+  "T_verify": "Only independent read-only verification and mandatory closeout after seal; no optimization",
+  "T_total": "T_produce + T_verify; group reconciliation separately charged",
+  "native_reserve_seconds": 30,
+  "native_cli_limit": "cap minus 6, with the inherited absolute remaining-deadline rule",
+  "hard_stop": "cap minus 2",
+  "open_return_before_cap": "report actual duration and nominal cap; no cap-substituted T_cert or speedup"
+}

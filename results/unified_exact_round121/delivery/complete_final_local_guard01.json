@@ -1,0 +1,42 @@
+{
+  "schema": "r121-final-local-guard-after-actual-publication-v1",
+  "passed": true,
+  "observed_UTC": "2026-10-15T18:41:22.084828+00:00",
+  "observed_published_commit": "09af846c42a455d59d2f860f8d9f621accd7f9b9",
+  "scientific_commit": "afee0f53c932139c07a7281da4c26a19412f9257",
+  "production_source_files": 216,
+  "frozen_runtime_helpers": 89,
+  "all_frozen_SHA256_equal": true,
+  "PE_SHA256": "5471f9c199c016e26178e6fc83aba42e5d2e1ee797735d68a864dbada4c7cbba",
+  "DLL_SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "carrier_manifest_SHA256": "2676960a52abff3a33c276bd456ffab70106e9ec2b92cc642d23ce31ef82eb0a",
+  "actual_independent_review_and_supplement_hashes_unchanged": true,
+  "active_native_processes": [],
+  "all_native_fees_closed": true,
+  "resource": {
+    "starts": 31,
+    "outer_seconds": 35578.67575955391,
+    "qualification_starts": 10,
+    "qualification_seconds": 670.1436495780945,
+    "total_limits": [
+      40,
+      48000
+    ],
+    "qualification_limits": [
+      12,
+      1800
+    ]
+  },
+  "stage": "ADVANCE_FROZEN_D1_TO_PAPER_BENCHMARK",
+  "complete_arms": 16,
+  "complete_pairs": 18,
+  "main_HEAD": "8dc274eb34ee6d8a575f0b94b57ef04476efc0f1",
+  "main_branch": "codex/round105-inventory-route-decomposition",
+  "main_tracked_status_and_three_dirty_hashes_unchanged": true,
+  "main_untracked_not_enumerated": true,
+  "Native": 0,
+  "Optimize": 0,
+  "compiles": 0,
+  "scoped_guard_seconds": 1.0713551999942865,
+  "does_not_attest_own_or_future_commits": true
+}

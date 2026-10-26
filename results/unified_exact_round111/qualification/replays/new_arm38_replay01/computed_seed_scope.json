@@ -1,0 +1,52 @@
+{
+  "schema": "round109-computed-seed-scope-v1",
+  "actual_seed": 1,
+  "recovered_calls": [
+    {
+      "call": 4,
+      "raw_native_preconditions": 0,
+      "computed_native_prerequisites": true,
+      "model": {
+        "path": "results/unified_exact_round110/campaign/raw/38_G20-C2_S1_M-B/external/models/L0_epoch_0_generation_1.lp",
+        "SHA": "5f2928ad81cf5c30fefae2949c791586d650b2146c3526d887832f4a0372c3ac",
+        "rows": 8154,
+        "columns": 2314,
+        "quantity_columns": 80,
+        "quantity_type": "C",
+        "direction_columns": 40,
+        "frozen_A_B_rows_checked": 40,
+        "route_load_Y_integer": true,
+        "state_assignment_direction_binary": true
+      },
+      "scope": {
+        "saved_G_lower": 0,
+        "saved_G_upper": 0.013075430267295598,
+        "saved_objective_cutoff": 0.013075430267295598,
+        "true_G_cap_floor_checked": true,
+        "metadata_scope_is_actual_model_scope": true
+      },
+      "native_log_SHA": "8de8cde1d1e3f5203d02f7bdbe8893d9dd341d5cd4a9ec1ad8b6f3a7858378b7",
+      "successful_return": true,
+      "actual_settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 1,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "other_conjuncts_basis": "unchanged full-production request defaults + actual canonical matrix/types + linked native return + backend postcondition gate",
+      "qualification_role": "offline mathematical scope proof; no raw callback/global flag promotion"
+    }
+  ],
+  "observations_SHA": "567ff2c7080f53bee3dbd91018893a30e5100183f55738156a19f3d689ca699d",
+  "completion_SHA": "4522e6c5bbb3cfb254a04107f0c813bfd52a1dabc9a8bc44301533dc18aee85d",
+  "result_SHA": "a1c749884ea4a977a270548e74ab0c1c7be7608044c6c683d6f487e8da7ad867",
+  "producer_source_SHA": "a124605525f7e2310771e9bb73b381c6fa72d89f2b61c221b604ab076add8d39",
+  "raw_flags_preserved": true,
+  "raw_global_available_and_global_bound_unchanged": true,
+  "production_or_search_changed": false
+}

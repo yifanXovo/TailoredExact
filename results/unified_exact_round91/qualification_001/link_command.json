@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "-o",
+    "build/research/round91-handling-rounding/Round91HandlingRoundingProbe.exe",
+    "build/research/round91-handling-rounding/Round91HandlingRoundingProbe.obj",
+    "build/research/round90-lp-g-split/libexact_ebrp_core.a",
+    "-lkernel32",
+    "-luser32",
+    "-lgdi32",
+    "-lwinspool",
+    "-lshell32",
+    "-lole32",
+    "-loleaut32",
+    "-luuid",
+    "-lcomdlg32",
+    "-ladvapi32"
+  ],
+  "executable": "D:/msys64/ucrt64/bin/g++.exe",
+  "stage": "link",
+  "started_utc": "2026-09-27T02:39:57.0100034Z"
+}

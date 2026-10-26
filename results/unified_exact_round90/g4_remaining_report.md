@@ -1,0 +1,25 @@
+# Round90 LP-G G4 remaining nine-role batch
+
+The root-signed batch ran once in its frozen order: N12, D4, E7, C6, C8, F1, C20, B50, S50, with one ENS-C and one LP-G process per role (18/18). Seed 0, one thread, affinity mask 4, Presolve Auto, the frozen inputs/scenarios and the same Round90 binary were used. The command exited 0. There was no retry, extra seed, never-started arm, process error, risk stop, or residual solver/build process. The original raw directories remain in place and have not been archived in this task.
+
+| Role | ENS-C process / certificate | LP-G process / certificate | LP-G / ENS-C process ratio | Paired result |
+|---|---:|---:|---:|---|
+| N12 | 1.843 s / yes | 2.500 s / yes | 1.3565 | Both certified; LP-G slower by 0.657 s. |
+| D4 | 58.047 s / yes | 59.407 s / yes | 1.0234 | Both certified; LP-G slower by 1.360 s. |
+| E7 | 1.906 s / yes | 2.125 s / yes | 1.1149 | Both certified; LP-G slower by 0.219 s. |
+| C6 | 1197.188 s / no | 1197.203 s / no | censored | Both reached the complete-run deadline. |
+| C8 | 1197.094 s / no | 1197.141 s / no | censored | Both reached the complete-run deadline. |
+| F1 | 13.250 s / yes | 13.094 s / yes | 0.9882 | Both certified; LP-G faster by 0.156 s. |
+| C20 | 341.219 s / yes | 382.922 s / yes | 1.1222 | Both certified; LP-G slower by 41.703 s. |
+| B50 | 1148.078 s / yes | 762.406 s / yes | 0.6641 | Both certified; LP-G faster by 385.672 s. |
+| S50 | 3597.187 s / no | 3597.157 s / no | censored | Both reached the complete-run deadline. |
+
+The companion `g4_remaining_table.csv` gives every arm's audited physical U, global L, gap, exact process wall, native status, cap, seed/readback, witnesses, coverage, native model-build/read/solver time, and LP-G phase counts. Twelve arms certified the original problem. The six censored arms retained physical U and valid global L but have no certificate: C6 LP-G/ENS-C gaps 0.092542/0.115161, C8 0.078919/0.108827, and S50 0.016176/0.016304. Their nearly equal deadline process times are not certification-time ratios. LP-G's C6 physical U is worse than ENS-C's (1.6854701602 versus 1.6844828571), while its C8 U is better (0.8017207825 versus 0.8066898279); these are distinct from the gaps. C20 LP-G's reported signed gap is -1.39e-16, a roundoff-scale bound inversion within the existing cross-arm tolerance, not a negative mathematical gap claim. Historical P-GRB data are not concurrent Round90 arms and are not included in these ratios.
+
+All 18 native parameter readbacks, original-problem physical audits, root/parent-child coverage checks, and nine cross-arm global-L versus physical-U contradiction checks passed. There are 103 audited physical witness rows across the 18 runs. No preregistered severe paired signal fired. This finite single-seed evidence includes both clear B50 improvement and several certified slowdowns; it does not itself promote LP-G.
+
+The nine LP-G runs recorded 22 eligible point proposals: 12 current optimal parent-LP G points and 10 midpoint fallbacks. All 22 child-LP pairs and associated AM decisions completed. Six actual atomic two-child splits occurred (N12 one, C6 one, C8 one, B50 three). Seven proposals led to native-target parent requeue and nine to a requested exact-parent MIP/closure action. All recorded proposal epochs were 0; the requeues expose same-epoch reuse, while epoch-change invalidation was not observed in this batch. A requested closure is not a completed proof: C6, C8 and S50 LP-G remained open at deadline. Candidate split choices, current/child LP SHA receipts, AM, transactions and native-target events are preserved in each arm's `split_evidence` and original ledgers. No history-wide LP byte archive is claimed.
+
+The sum of 18 complete-process walls is **14,769.767 s**. Prelaunch admission per arm totals 5.280 s and offline audit per arm totals 3.543 s; both are nested in the single external command's **14,780.090222 s** launch-to-exit wall (2026-09-27 05:41:11.945Z to 09:47:32.051Z). Native model build/read/solver fields total 151.526/7.517/14,477.191 s and are further nested, not additive research cost. The external wall includes startup validation, evidence handling and the wrapper exit; the runner's internal outer wall of 14,779.707 s begins only after preflight. Post-run evidence/report work is recorded separately in `g4_remaining_postrun_workflow.receipt.json` and is not called zero or folded into algorithm timing.
+
+Immutable handoff anchors: campaign `summary.jsonl` SHA-256 `950dd6ffc40101c9ff6dbcb7620ccbfc1472a74c3e3e485c7d5bd6a082b5581a`; `run_completion.json` `184043c3bf76f6162cfbd9af2a8bbe9cddb0644c13e1ef04d8d8dac4dacd9c7a`; outer receipt `a076921f520475031683f1296a03220d2b871a796f0ab3cfbe05f9b7c50512bc`; and frozen `identity.json` `c248fcaa41af4d10f3a3b7f9ac86cfa22c303475e6de2f60dbf3319206231ac7`. The seven source files, wrapper, preregistration and binary still match the bound SHA-256 values, including main binary `bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2`. The checkout branch/HEAD changed during the batch for unrelated new Round92 files; frozen-file byte identity, not branch name, governs this run.

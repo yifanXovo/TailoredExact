@@ -1,0 +1,90 @@
+{
+  "schema": "round92-handling-u6-repeat-postflight-v1",
+  "source_checks": [
+    {
+      "path": "CMakeLists.txt",
+      "expected_sha256": "3ed76c71f6c4844b621df13eb6d9f29bfc60fb352869e834593a37218be05e33",
+      "actual_sha256": "3ed76c71f6c4844b621df13eb6d9f29bfc60fb352869e834593a37218be05e33"
+    },
+    {
+      "path": "include/Instance.hpp",
+      "expected_sha256": "cce079054948a09ce083c830fad5ee7cb35165728b9d692f1df272c8a7b6ccbc",
+      "actual_sha256": "cce079054948a09ce083c830fad5ee7cb35165728b9d692f1df272c8a7b6ccbc"
+    },
+    {
+      "path": "include/CanonicalCompactModel.hpp",
+      "expected_sha256": "f454470edd4b793be73175ee6b92934f81f3b7e955b8b46b678dec1da0f4ad35",
+      "actual_sha256": "f454470edd4b793be73175ee6b92934f81f3b7e955b8b46b678dec1da0f4ad35"
+    },
+    {
+      "path": "include/PhysicalDurationTolerance.hpp",
+      "expected_sha256": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+      "actual_sha256": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a"
+    },
+    {
+      "path": "include/Round92HandlingActivation.hpp",
+      "expected_sha256": "5bad5b1e023ea07fd753bd33993cbe604c7b2a6d05576523ae0d757019668f2d",
+      "actual_sha256": "5bad5b1e023ea07fd753bd33993cbe604c7b2a6d05576523ae0d757019668f2d"
+    },
+    {
+      "path": "src/Round92HandlingActivation.cpp",
+      "expected_sha256": "d638d09f4cf1e474da620444f10d0b30a28d2dd8b235993cb88a49d76ff363e5",
+      "actual_sha256": "d638d09f4cf1e474da620444f10d0b30a28d2dd8b235993cb88a49d76ff363e5"
+    },
+    {
+      "path": "src/CplexBaseline.cpp",
+      "expected_sha256": "3e59c3a0f2bb8ba402175ca3eff3c43e87af403459be9fe7e3ca799cb25642ae",
+      "actual_sha256": "3e59c3a0f2bb8ba402175ca3eff3c43e87af403459be9fe7e3ca799cb25642ae"
+    },
+    {
+      "path": "src/Evaluator.cpp",
+      "expected_sha256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+      "actual_sha256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41"
+    },
+    {
+      "path": "src/GurobiBaseline.cpp",
+      "expected_sha256": "ce8800e189fcbf0e43a9a768fd55df7092fb82e1b465e263508362a6d9f95b31",
+      "actual_sha256": "ce8800e189fcbf0e43a9a768fd55df7092fb82e1b465e263508362a6d9f95b31"
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "expected_sha256": "14a5f5a5e51072d755b713ebc8ced9dc7c4e3061641eb4976daa3bfbf0e0a0ec",
+      "actual_sha256": "14a5f5a5e51072d755b713ebc8ced9dc7c4e3061641eb4976daa3bfbf0e0a0ec"
+    },
+    {
+      "path": "src/main.cpp",
+      "expected_sha256": "9a97f287f27a0ddf09255a7b9e120cd3fe954771cb2e234533d1fc5a482a37b5",
+      "actual_sha256": "9a97f287f27a0ddf09255a7b9e120cd3fe954771cb2e234533d1fc5a482a37b5"
+    },
+    {
+      "path": "tests/round92_handling_activation_tests.cpp",
+      "expected_sha256": "006cac5a8fb7fac47bad8fca91efb022ae3faa319764210c98a6267875fd6875",
+      "actual_sha256": "006cac5a8fb7fac47bad8fca91efb022ae3faa319764210c98a6267875fd6875"
+    },
+    {
+      "path": "tests/round92_handling_integration_tests.cpp",
+      "expected_sha256": "bfd5ea3c6263c742e6438cc04440d5e3d1580ed4bf27fc6062eb947e0df50f77",
+      "actual_sha256": "bfd5ea3c6263c742e6438cc04440d5e3d1580ed4bf27fc6062eb947e0df50f77"
+    },
+    {
+      "path": "tests/round92_handling_lp_readback.py",
+      "expected_sha256": "c0c73af4e0909ff3a584324b51694eed8b3814fabb31250a9cd81e973686df26",
+      "actual_sha256": "c0c73af4e0909ff3a584324b51694eed8b3814fabb31250a9cd81e973686df26"
+    },
+    {
+      "path": "tests/round92_handling_activation_cli_test.cmake",
+      "expected_sha256": "b8af40bb4be0c6dd66471a1e4656aecb600bfe0505a2225816c4236184389b4e",
+      "actual_sha256": "b8af40bb4be0c6dd66471a1e4656aecb600bfe0505a2225816c4236184389b4e"
+    }
+  ],
+  "source_hashes_match": true,
+  "main_sha256": "767d2cbfa50f332a8b9cd6fa3f01888509509b11c2444100d7cafd63bc204b9b",
+  "main_matches": true,
+  "core_sha256": "29cb167a388e1a76bd544131bf59684be3950f92f13ecdb755525644f596de12",
+  "core_matches": true,
+  "residual_heavy_processes": [],
+  "no_residual_heavy_processes": true,
+  "captured_unix": 1790540678.18187,
+  "passed": true,
+  "wall_seconds": 0.32631790032610297
+}

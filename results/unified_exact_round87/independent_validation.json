@@ -1,0 +1,59 @@
+{
+  "all_formal_runs_replayed": true,
+  "runs": 10,
+  "completed_pairs": 5,
+  "all_formal_run_audits_passed": true,
+  "cross_arm_checks": [
+    {
+      "id": "D6",
+      "maximum_same_run_global_L": 0.15708313110317404,
+      "minimum_independent_physical_U": 0.15708313110317415,
+      "passed": true,
+      "scope": "offline contradiction check only; never a combined algorithm endpoint"
+    },
+    {
+      "id": "D7",
+      "maximum_same_run_global_L": 0.2082190823632304,
+      "minimum_independent_physical_U": 0.21646672611586926,
+      "passed": true,
+      "scope": "offline contradiction check only; never a combined algorithm endpoint"
+    },
+    {
+      "id": "U6",
+      "maximum_same_run_global_L": 0.13488129830664097,
+      "minimum_independent_physical_U": 0.14527298125514043,
+      "passed": true,
+      "scope": "offline contradiction check only; never a combined algorithm endpoint"
+    },
+    {
+      "id": "F2",
+      "maximum_same_run_global_L": 0.865943520322989,
+      "minimum_independent_physical_U": 0.8659435203229894,
+      "passed": true,
+      "scope": "offline contradiction check only; never a combined algorithm endpoint"
+    },
+    {
+      "id": "F5",
+      "maximum_same_run_global_L": 0.2815127199958849,
+      "minimum_independent_physical_U": 0.2999915384940973,
+      "passed": true,
+      "scope": "offline contradiction check only; never a combined algorithm endpoint"
+    }
+  ],
+  "certified_roles": [
+    "D6",
+    "F2"
+  ],
+  "certified_objectives": {
+    "D6": 0.15708313110317415,
+    "F2": 0.8659435203229894
+  },
+  "witness_rows": 971,
+  "raw_index_rows": 75,
+  "excluded_run11_raw_index_rows": 317,
+  "optimizer_calls": 0,
+  "numerical_certificate_only": true,
+  "strict_rational_proof": false,
+  "original_planned_runs": 18,
+  "user_closed_after_run": 10
+}

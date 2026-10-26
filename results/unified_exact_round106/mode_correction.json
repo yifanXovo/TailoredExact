@@ -1,0 +1,20 @@
+{
+  "finding": "Independent delivery review found that the initial selection report mislabeled production's vehicle-tagged distinct_car_modes as label-free physical-parameter modes.",
+  "withdrawn_publication": "real_modes_report.json",
+  "replacement_publication": "real_modes_report02.json",
+  "F2": {
+    "vehicle_tagged": 134,
+    "physical_parameter_keyed": 126
+  },
+  "C2": {
+    "FULL": 4432,
+    "CORE": 365,
+    "STRUCT": 4755,
+    "counts_coincide_because_Q_values_are_distinct": true
+  },
+  "impact": "Selection/terminology only. All eight selected physical modes remain distinct. Raw source summaries and formal CSV fields distinct_car_modes remain unchanged and retain their original vehicle-tagged meaning. No production/PE/DLL/numeric/performance identity changed.",
+  "failed_engineering_label": "selected_modes02",
+  "replacement_engineering_label": "selected_modes03",
+  "Optimize_calls": 0,
+  "IIS_calls": 0
+}

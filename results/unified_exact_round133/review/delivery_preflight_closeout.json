@@ -1,0 +1,168 @@
+{
+  "schema": "round133-implementation-worker-delivery-preflight-closeout-v1",
+  "UTC": "2026-10-25T12:10:17.405526+00:00",
+  "status": "LOCAL_PREFLIGHT_PASS",
+  "independent_review": "PENDING independent reviewer; this is implementation evidence only",
+  "public_empty_root_recovery": "NOT_RUN; main agent owns the unique fixed-commit operation",
+  "actual_full_policy_replay": {
+    "formal22": 22,
+    "unit1": 1,
+    "full_replays": 23,
+    "management_receipts": 22,
+    "stdout_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\fees\\delivery_portable_local_preflight_01\\stdout.log",
+    "stdout_SHA": "9262592abe645cb3b3c89ce2514eb429c138d0e688a18cf364e5cf7eb79ee40a",
+    "outer_seconds": 399.6160910000326,
+    "executed_checker_SHA": "e35a951be774ba9219945a11f91003896c888fd3096b21b5bfe9b5ee1a9520dc",
+    "executed_source_preserved": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\infra\\portable_source_versions\\local_preflight01_e35a951be.py"
+  },
+  "final_code": {
+    "portable_SHA": "6024c92660aed5d78a6fade0f371cac4621bc822d74008296a5539319b93a37d",
+    "restore_SHA": "b8062780c069e252df5306d79fc5b1c22038d1adf4f0ec229cdaddc1cbca5aa8",
+    "fixture_driver_SHA": "ab1df3176e01c8b5d24017e4c7a6c5175b9a2c69a2e82195fdb21ff43a80f111",
+    "portable_executable_AST_equal_to_actual_replay": true,
+    "portable_change_since_actual_replay": "module documentation only; measured 23-arm code body unchanged",
+    "public_restore_pin_matches_final_portable": true
+  },
+  "source_and_memory_contracts": {
+    "receipt_path": "E:\\codes\\ExactEBRP-work\\worktrees\\round133\\results\\unified_exact_round133\\qualification\\delivery_python_preflight_05.json",
+    "receipt_SHA": "4c0d58fe8c8b614d637cfd07096bbda32d6b3625d108d9cd58750fd31f44fae7",
+    "checks": 32
+  },
+  "actual_runtime_initialization": [
+    {
+      "name": "libpython3.12.dll",
+      "scope": "Python/Windows standard runtime initialization"
+    },
+    {
+      "name": "kernel32",
+      "scope": "Python/Windows standard runtime initialization"
+    }
+  ],
+  "DLL_scope": "solver/vendor only; Python runtime separately recorded",
+  "vendor_DLL_load": 0,
+  "unit_generic_and_role_qualification": [
+    {
+      "actual_policy": "933 frozen original unit policy",
+      "generic_reader_performance_evidence_eligible": true,
+      "role_performance_evidence_eligible": false
+    }
+  ],
+  "fees": [
+    {
+      "label": "delivery_D24_point_replay_04",
+      "receipt_SHA": "1b999b257519071fd35503fad532eb8830d3d3bab0396ac249f1b78b81d7ef63",
+      "exit_code": 0,
+      "outer_seconds": 1.8517747999867424,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 1.8517747999867424,
+      "start_unix": 1792928246.2974658,
+      "end_unix": 1792928248.1428306,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "postverify"
+    },
+    {
+      "label": "delivery_python_preflight_01",
+      "receipt_SHA": "bc143ab5eba51161229743118ad20923900ab4dab44a1668385ea16a38be4dff",
+      "exit_code": 1,
+      "outer_seconds": 0.10166349995415658,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 0.10166349995415658,
+      "start_unix": 1792928746.4350684,
+      "end_unix": 1792928746.5369682,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "postverify"
+    },
+    {
+      "label": "delivery_python_preflight_02",
+      "receipt_SHA": "5e7b187f36baf697e65e6d8b630d8b7685b31e9c40db98f6d71cbe13ec3a1840",
+      "exit_code": 1,
+      "outer_seconds": 0.1034312000265345,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 0.1034312000265345,
+      "start_unix": 1792928833.0671997,
+      "end_unix": 1792928833.1791723,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "postverify"
+    },
+    {
+      "label": "delivery_python_preflight_03",
+      "receipt_SHA": "6ae61037dc1e22b2a2d2ca1673462ca4b4aa243db3678539b9e57fb5dc01cef4",
+      "exit_code": 0,
+      "outer_seconds": 0.34442149999085814,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 0.34442149999085814,
+      "start_unix": 1792928922.0639975,
+      "end_unix": 1792928922.408148,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "postverify"
+    },
+    {
+      "label": "delivery_python_preflight_04",
+      "receipt_SHA": "3341b076bb93b7ccb70303aab8cd8b97fa4364743244b361a1a2f75c9e2d912b",
+      "exit_code": 0,
+      "outer_seconds": 0.1893876000540331,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 0.1893876000540331,
+      "start_unix": 1792929120.2491693,
+      "end_unix": 1792929120.452969,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "postverify"
+    },
+    {
+      "label": "delivery_portable_local_preflight_01",
+      "receipt_SHA": "913be8bb5ec7d8b9c39473645b80c62cb218f3b01cd18c2d1ee09d605d60255d",
+      "exit_code": 0,
+      "outer_seconds": 399.6160910000326,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 399.6160910000326,
+      "start_unix": 1792929389.1220348,
+      "end_unix": 1792929788.7289875,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "postverify"
+    },
+    {
+      "label": "delivery_python_preflight_05",
+      "receipt_SHA": "3e4aaba310a1fa725b850fb75bbf8868a36ded874c58fcb715c0faa4e40ccf5b",
+      "exit_code": 0,
+      "outer_seconds": 0.38013950001914054,
+      "G1_seconds": 0.0,
+      "separately_reported_seconds": 0.38013950001914054,
+      "start_unix": 1792930077.1250014,
+      "end_unix": 1792930077.5091288,
+      "timeout": false,
+      "supervisor_failure": null,
+      "exit_observed": true,
+      "nested_H_LP_MIP_not_added": true,
+      "budget_category": "postverify"
+    }
+  ],
+  "failures_preserved": [
+    "delivery_python_preflight_01",
+    "delivery_python_preflight_02"
+  ],
+  "frozen_execution_helpers_adapter_raw_and_clocks_changed": false,
+  "second_empty_root_created": false,
+  "network_recovery": false,
+  "Optimize": 0,
+  "native_compilation": 0,
+  "subprocesses_in_scientific_replay": 0,
+  "Git_processes": 0
+}

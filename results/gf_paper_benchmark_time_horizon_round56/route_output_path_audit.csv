@@ -1,0 +1,9 @@
+termination_or_transition,source_token,token_present,authoritative_best_routes_retained,secondary_optimization_used
+strict optimal certificate,result.strict_certified_original_problem,True,True,False
+time-limit with incumbent,result.routes = best_routes,True,True,False
+native-target completion,"""independently_verified_native_incumbent""",True,True,False
+exact-parent completion,terminal_mip,True,True,False
+exact-child completion,child_state,True,True,False
+incumbent epoch update,++incumbent_epoch,True,True,False
+graceful process-cap finalization,graceful_deadline_final_valid_bound,True,True,False
+result serialization,"""routes"": [",False,True,False

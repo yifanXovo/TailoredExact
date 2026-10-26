@@ -1,0 +1,156 @@
+{
+  "schema": "round88-ot-second-pair-raw-index-v1",
+  "roots": [
+    "results/unified_exact_round88/ot_f2_l0_diagnostic_001",
+    "results/unified_exact_round88/ot_d7_l00_diagnostic_001"
+  ],
+  "by_root": {
+    "ot_f2_l0_diagnostic_001": {
+      "file_count": 13,
+      "uncompressed_bytes": 3455889
+    },
+    "ot_d7_l00_diagnostic_001": {
+      "file_count": 13,
+      "uncompressed_bytes": 24835796
+    }
+  },
+  "file_count": 26,
+  "uncompressed_bytes": 28291685,
+  "archive_path": "results/unified_exact_round88/runner_ot_second_pair_raw.tar.gz",
+  "archive_bytes": 3455472,
+  "archive_sha256": "966ebdd886b735cc10e673f5351b0fa611c88fbe79072d140d4efc89c96d9a42",
+  "archive_roundtrip_verified": true,
+  "all_original_files_preserved_in_place": true,
+  "files": [
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/aggregate.log",
+      "bytes": 1281,
+      "sha256": "b3bb88194318605b79607218f911788c0c7312c1561e1c88988fc9b4c5a6faa9"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/B1+B2.log",
+      "bytes": 1277,
+      "sha256": "00abbe8f3e51f0322dd4cef23fc0727c787c326840317035c8c5c18faaf94562"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/B1.log",
+      "bytes": 1274,
+      "sha256": "5ed0beff641055d532f431368ad1fbd8316f1a6fb7a08b72f6c94d3f16792bce"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/B2.log",
+      "bytes": 1319,
+      "sha256": "da85ce6eebdb71264ccdcecfb4b904ecffb8925da977122819286d784d752a0a"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/base.log",
+      "bytes": 2197,
+      "sha256": "d5118ab6959aa0b4d6a4ced760aeb058fc8f4214fb203859b00e6f80e6932932"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/base_row_residuals.jsonl",
+      "bytes": 817140,
+      "sha256": "912a15e3fb3d16cf7b75e3685a1260f57294f965f550cc787c42a2fc80eb6c09"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/diagnose_timing.json",
+      "bytes": 150,
+      "sha256": "cfdb703737ba7f60eae25fad4e638c1acab1f9e25e8a9ffeb7a6e1f1510b8cd6"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/fixed_point_primal.json",
+      "bytes": 82181,
+      "sha256": "c89e5786fb878fbccd12211963d1656170609898140979bf83543f6754f0b4f9"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/fixed_point_rows.jsonl",
+      "bytes": 2544203,
+      "sha256": "d65d6ce29d9b2d98f22f1ebf5e4c682a024f9a7768994b294065d190bf91e45a"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/diagnostic/result.json",
+      "bytes": 3888,
+      "sha256": "6e58ba82b07f3483dabc768268790eb4fb02e689bc063a09aacc5b5e340acb2a"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ot_f2_l0_diagnostic_001/supervision.json",
+      "bytes": 979,
+      "sha256": "ef08de4efbfefa04ac0d08fe177fe0ba6b4ca26c41adb0fa70092ab114e31dbd"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/aggregate.log",
+      "bytes": 1292,
+      "sha256": "b9b55bc7837cea0fddcddf7aa046e77ed2506edda023b49003d59b2985e30bdf"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/B1+B2.log",
+      "bytes": 1354,
+      "sha256": "fe76bef154008e4fa0dee13bff30b5d913e47d89594c2220089f4e3242b1c0bb"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/B1.log",
+      "bytes": 1351,
+      "sha256": "a62cc7c68771da58a548631cf00c8af012d350c56bf44f7788bdd80bd3124d7c"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/B2.log",
+      "bytes": 1351,
+      "sha256": "75a74880abcbdf58eb2b4e69fddd5335ea179cdb81557967d74bd73da7a504f0"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/base.log",
+      "bytes": 2208,
+      "sha256": "ac97d2476e730b66380788b040072919824fab3758c4a1813a7d17be17077247"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/base_row_residuals.jsonl",
+      "bytes": 9625822,
+      "sha256": "b7c763582c919024f04f3a93b12905cbb8935690795aa6e3933f13be2b4dd536"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/diagnose_timing.json",
+      "bytes": 149,
+      "sha256": "62de1eb713647d196d3a20c4d85a2faf2cb68028cfe682b5c4f114f7d38f1453"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/fixed_point_primal.json",
+      "bytes": 590121,
+      "sha256": "09c7610bce13cb7f028042ccfe5c5a635ac704830c1bd778fea03a10ba43af7c"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/fixed_point_rows.jsonl",
+      "bytes": 14607274,
+      "sha256": "cf30d7e75d73edd2ccbcb205b0200e9fb5f4c14ac3c3d8c56aa5a0ce3e21bccc"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/diagnostic/result.json",
+      "bytes": 3894,
+      "sha256": "f7568e4bab4e42a49ca8efdaa79306f67f0a17cdcbc00b0eea667c8777681603"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ot_d7_l00_diagnostic_001/supervision.json",
+      "bytes": 980,
+      "sha256": "2b78ccf8483ffa4462b9035ef682a8ad9b6d89cd79811a4e1ffb10211154343b"
+    }
+  ]
+}

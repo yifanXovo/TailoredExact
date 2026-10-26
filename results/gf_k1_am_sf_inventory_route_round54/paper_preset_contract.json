@@ -1,0 +1,30 @@
+{
+  "schema": "round54-paper-preset-contract-v1",
+  "preset": "paper-k1-am-sf",
+  "human_name": "K1-AM-SF",
+  "stable_contract": "stable_mainline_contract.json",
+  "controller": "Round 53 frozen K1-AM",
+  "K0": 1,
+  "tau": 0.08,
+  "split_point": "midpoint",
+  "inner_policy": "interval-mip-core-no-exhaustive-subset-duration",
+  "all_research_mechanisms_default_off": true,
+  "semantic_sentinels": [
+    "major witness",
+    "strong control",
+    "V10 easy negative control",
+    "numerical endpoint",
+    "V20 sentinel",
+    "V50 sentinel"
+  ],
+  "required_equivalence": [
+    "controller actions",
+    "interval endpoints",
+    "inner backend policy",
+    "model fingerprints",
+    "objective",
+    "bounds",
+    "certificate class",
+    "deterministic command settings"
+  ]
+}

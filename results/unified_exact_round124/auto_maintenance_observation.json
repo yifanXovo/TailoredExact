@@ -1,0 +1,30 @@
+{
+  "observed_commit_process": 31904,
+  "commit_child": 36476,
+  "observed_maintenance_PID": 34260,
+  "observed_gc_PID": 4064,
+  "observed_prune_PID": 32748,
+  "creation_window_Asia_Shanghai": "2026-10-18 06:59:14 to 06:59:19",
+  "observed_command": "git prune --expire 2.weeks.ago",
+  "cause": "installed Git automatic post-commit maintenance was not disabled on first commit",
+  "guarded_stop_attempt": [
+    {
+      "ProcessId": 32748,
+      "Action": "already_exited_or_guard_not_matched"
+    },
+    {
+      "ProcessId": 4064,
+      "Action": "already_exited_or_guard_not_matched"
+    },
+    {
+      "ProcessId": 34260,
+      "Action": "already_exited_or_guard_not_matched"
+    }
+  ],
+  "result": "processes already exited before guarded stop; commit returned exit 0",
+  "git_warning": "too many unreachable loose objects; run git prune to remove them",
+  "unreachable_object_deletions": "not enumerated; no zero-deletion claim",
+  "manual_prune_or_history_rewrite_requested_or_run": false,
+  "subsequent_commands": "per-command gc.auto=0 and maintenance.auto=false; no repository setting changed",
+  "protection": "main dirty hashes, all earlier worktree HEADs, frozen PE/DLL and prior evidence verified separately at closeout"
+}

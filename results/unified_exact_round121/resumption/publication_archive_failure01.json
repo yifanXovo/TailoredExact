@@ -1,0 +1,14 @@
+{
+  "schema": "r121-publication-history-archive-failure-v1",
+  "operation": "archive earlier blocked carrier/export only",
+  "actual_failure": "AssertionError at post-move file-set comparison",
+  "cause": "Windows MAX_PATH: moved ordinary part-file path268 characters; Python is_file/exists returned False. PowerShell confirmed ordinary file and original6860901 bytes.",
+  "no_link_or_native_data_failure": true,
+  "original_script_stopped_without_deletion": true,
+  "observed_before_shortening": {
+    "public_carrier.tar": "d992391ec82371dc73959c031cc7464dd2d40d8b1c680a648f5f3c316e27c65d",
+    "carrier/results/unified_exact_round121/compact_evidence/evidence.tar.gz.part001": "7997a0e38103752e3bd5c4dd8ab1eed1e41dd371201576ebaf30771acb63e9ea",
+    "carrier/results/unified_exact_round121/compact_evidence/manifest.json": "67af37586becfbcfdd5e57ea7d31206625a2902e0d3572a65be5861dac56fbbf"
+  },
+  "observed_unix": 1792086788.3351374
+}

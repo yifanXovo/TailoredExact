@@ -1,0 +1,68 @@
+{
+  "algorithm_arms_before_extensions": 100,
+  "base_commit": "6b721dea0dfcadbe80cc862ab3a74c25a211d784",
+  "base_tree": "fa4da2ffa862040ad147503401f92b630b5acf56",
+  "complete_count": 50,
+  "dataset_family": "citibike443-regional-v1",
+  "dataset_manifest_sha256": "fe919ef04159fce2c9fb4cc3b0ecee9a8c91f46da6e5269354c6e70cb7f78d67",
+  "files": [
+    {
+      "bytes": 1504,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/round58_panel_selection_protocol.json",
+      "sha256": "30c7af19cb5fad3583425ff24d3703e43fe86e11c13231a0add74480accfff7f"
+    },
+    {
+      "bytes": 21233,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/round58_primary_panel.csv",
+      "sha256": "d6b66f810fb043dbc9a6b8708eabe62fbdd7a104696440e1ba12efb86aecb09e"
+    },
+    {
+      "bytes": 13801,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/round58_matched_T_panel.csv",
+      "sha256": "407e606ab7ca968ead73d2f8ff185981a1b3f4408e4d6d64a478f93368a022d6"
+    },
+    {
+      "bytes": 34507,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/round58_complete_panel.csv",
+      "sha256": "2e4fbf46a04c0779d7946016aa7ecd05d9531fc96a76cd8a3c3b6283f2c232ef"
+    },
+    {
+      "bytes": 154472,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/round58_reserve_inventory.csv",
+      "sha256": "dbe0813c2a5dd1243ae2399016166c32da95e72501e50f5b9641fa8b420dc3de"
+    },
+    {
+      "bytes": 2079,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/round58_panel_balance_audit.csv",
+      "sha256": "1b4b9f479c7dc7728b852774de85c7202991a8a351f43f0ddf40c87433c3fde2"
+    },
+    {
+      "bytes": 15059,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/execution_order_manifest.csv",
+      "sha256": "cb801b04865b5885a82e2ded2660763be28b362a53ae02ba9d2bf6ca3a14d2b0"
+    },
+    {
+      "bytes": 195,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/method_order_balance_audit.csv",
+      "sha256": "0a3975be453454199a7179c6edfcab2ee596eb44c668d0371b94a5ca24d023f6"
+    },
+    {
+      "bytes": 1160,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/paired_solver_contract.json",
+      "sha256": "25e25e5d816e17987476e09a6e9fc4a5ff76315043f56e3d067c0654b9fed75a"
+    },
+    {
+      "bytes": 659,
+      "path": "results/gf_citibike443_k1_vs_pgrb_round58/gap_definition_contract.json",
+      "sha256": "3e7cbe2f0ff29627d0012e64d96933911ce248252bb3b27f30a9891f34766347"
+    }
+  ],
+  "matched_T_count": 20,
+  "panel_adaptation_used": false,
+  "performance_results_opened_before_freeze": false,
+  "primary_count": 30,
+  "recorded_at_utc": "2026-08-31T13:19:23.149876+00:00",
+  "replacement_allowed": false,
+  "reserve_count": 910,
+  "schema": "round58-panel-freeze-manifest-v1"
+}

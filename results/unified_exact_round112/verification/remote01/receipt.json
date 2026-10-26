@@ -1,0 +1,4848 @@
+{
+  "schema": "round112_actual_remote_publication_verification_v1",
+  "observed_UTC": "2026-10-10T19:50:10.958459+00:00",
+  "decision": "PASS",
+  "scientific_stage": "BLOCKED",
+  "PR": "https://github.com/yifanXovo/TailoredExact/pull/174",
+  "head_commit": "1e90dbc5eacddedf925d88c8608e897c56b4ad69",
+  "base_commit": "ded38c756a32a464bfa9800212da75778707d974",
+  "head_ref": "codex/round112-paid-start-backend-attribution",
+  "base_ref": "codex/round111-seed-block-confirmation",
+  "state": "OPEN",
+  "draft": true,
+  "scientific_payload_commit": "a3cac1df0ee1d4eaaeb87343508e0af31cfc3b40",
+  "measured_production_commit": "d0014a7163e3996fe120471420e56b089c9715ae",
+  "all_remote_required_Git_blobs_equal": true,
+  "required_files": 890,
+  "current_round_files": 645,
+  "measured_sources": 206,
+  "frozen_helpers": 38,
+  "archive_bytes": 82842777,
+  "archive_Git_blob_SHA1": "b21c48edb8aac8abd5a257c45f98cfcc630361d3",
+  "archive_SHA256_from_actual_public_recovery": "f35beeef7bf8ffdd286ceda1f7166f83eb57281c79b223791f886dd0b44cb81d",
+  "archive_remote_identity_basis": "same Git blob SHA1 and size as committed local archive",
+  "archive_downloaded_again": false,
+  "artificial_parts": 0,
+  "public_member_count": 55916,
+  "public_forbidden_native_files": [],
+  "future_receipt_commit_verified": false,
+  "native_starts": 0,
+  "Optimize": 0,
+  "compiler_starts": 0,
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "label": "local_head",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gh",
+        "pr",
+        "view",
+        "174",
+        "--repo",
+        "yifanXovo/TailoredExact",
+        "--json",
+        "number,url,title,body,headRefName,headRefOid,baseRefName,isDraft,state,headRepository,headRepositoryOwner"
+      ],
+      "label": "pr174",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gh",
+        "pr",
+        "view",
+        "173",
+        "--repo",
+        "yifanXovo/TailoredExact",
+        "--json",
+        "url,headRefName,headRefOid,baseRefName,isDraft,state"
+      ],
+      "label": "pr173",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/codex/round112-paid-start-backend-attribution",
+        "refs/heads/codex/round111-seed-block-confirmation"
+      ],
+      "label": "ls_remote",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "ls-tree",
+        "-r",
+        "-l",
+        "-z",
+        "HEAD",
+        "--",
+        "results/unified_exact_round112",
+        "CMakeLists.txt",
+        "include/Bounds.hpp",
+        "include/Branching.hpp",
+        "include/CanonicalCompactModel.hpp",
+        "include/Column.hpp",
+        "include/ColumnGeneration.hpp",
+        "include/ColumnPool.hpp",
+        "include/ConnectivityFlow.hpp",
+        "include/ControllingLeafScheduler.hpp",
+        "include/CplexBaseline.hpp",
+        "include/Cuts.hpp",
+        "include/DenseProgress.hpp",
+        "include/DeterministicDinic.hpp",
+        "include/Evaluator.hpp",
+        "include/ExternalGiniTree.hpp",
+        "include/FileSha256.hpp",
+        "include/FixedIntervalMipBackend.hpp",
+        "include/FleetEventCuts.hpp",
+        "include/GiniAdaptiveParametric.hpp",
+        "include/GiniBranching.hpp",
+        "include/GiniEnvelopeRefinement.hpp",
+        "include/GiniEnvelopeTailRepair.hpp",
+        "include/GiniFrontierGeometry.hpp",
+        "include/GurobiBaseline.hpp",
+        "include/GurobiCertificate.hpp",
+        "include/GurobiProgress.hpp",
+        "include/HgaTgbcRunner.hpp",
+        "include/Instance.hpp",
+        "include/IntervalRowFactory.hpp",
+        "include/InventoryRouteCuts.hpp",
+        "include/InventoryRouteRootClosure.hpp",
+        "include/Logger.hpp",
+        "include/Master.hpp",
+        "include/MipStartMapping.hpp",
+        "include/ModelCorrectness.hpp",
+        "include/NativeEvidenceJournal.hpp",
+        "include/NativeOtB1.hpp",
+        "include/ObjectiveResourceCompression.hpp",
+        "include/PaperExternalGiniTree.hpp",
+        "include/PaperK1AmSf.hpp",
+        "include/Parser.hpp",
+        "include/PenaltyCoverSeparation.hpp",
+        "include/PhysicalDurationTolerance.hpp",
+        "include/PhysicalWitnessValidation.hpp",
+        "include/Pricing.hpp",
+        "include/ProcessPhaseLedger.hpp",
+        "include/ReplicaExternalGiniTree.hpp",
+        "include/Result.hpp",
+        "include/Round105Decomposition.hpp",
+        "include/Round106Events.hpp",
+        "include/Round106Research.hpp",
+        "include/Round107LpMetadata.hpp",
+        "include/Round107Research.hpp",
+        "include/Round107Scope.hpp",
+        "include/Round48K1AMF.hpp",
+        "include/Round49K1RC.hpp",
+        "include/Round50IntervalMip.hpp",
+        "include/Round51IntervalMip.hpp",
+        "include/Round52GurobiCutAdapter.hpp",
+        "include/Round52TailoredCuts.hpp",
+        "include/Round53CallbackIsolation.hpp",
+        "include/Round58Benchmark.hpp",
+        "include/Round59Research.hpp",
+        "include/Round60Candidates.hpp",
+        "include/Round61Candidates.hpp",
+        "include/Round61TimeOracle.hpp",
+        "include/Round62Passive.hpp",
+        "include/Round62Thresholds.hpp",
+        "include/Round63TimeResource.hpp",
+        "include/Round64SharedResource.hpp",
+        "include/Round65Projection.hpp",
+        "include/Round65Proof.hpp",
+        "include/Round73JointInsertion.hpp",
+        "include/Round75QuantityDescent.hpp",
+        "include/Round76PhysicalClosure.hpp",
+        "include/Round78BalancedRelocation.hpp",
+        "include/Round83BlockExchange.hpp",
+        "include/Round92HandlingActivation.hpp",
+        "include/Round93CoQuantityDescent.hpp",
+        "include/Round95FullBlockDescent.hpp",
+        "include/Round96MultiQuantity.hpp",
+        "include/Round96RouteOrder.hpp",
+        "include/Round97NativeClosure.hpp",
+        "include/Round98StateService.hpp",
+        "include/ServiceResourceCuts.hpp",
+        "include/ServiceResourceHull.hpp",
+        "include/StaticSegmentedGini.hpp",
+        "include/StationSet.hpp",
+        "include/StrictCertificate.hpp",
+        "include/TailoredBC.hpp",
+        "include/TailoredBCCallbacks.hpp",
+        "include/TailoredBCCplexApi.hpp",
+        "include/TailoredBCCuts.hpp",
+        "include/TailoredExact.hpp",
+        "scripts/analyze_round61.py",
+        "scripts/generate_citibike443_regional_v1.py",
+        "scripts/round100_campaign.py",
+        "scripts/round100_common.py",
+        "scripts/round100_idle.py",
+        "scripts/round101_common.py",
+        "scripts/round103_common.py",
+        "scripts/round107_reader.py",
+        "scripts/round108_decisions.py",
+        "scripts/round108_reader.py",
+        "scripts/round108_scopes.py",
+        "scripts/round109_campaign.py",
+        "scripts/round109_common.py",
+        "scripts/round109_data.py",
+        "scripts/round109_prepare.py",
+        "scripts/round109_reference_batch.cpp",
+        "scripts/round109_seed_audit.py",
+        "scripts/round109_seed_recovery.py",
+        "scripts/round109_seed_scope.py",
+        "scripts/round110_common.py",
+        "scripts/round110_public.py",
+        "scripts/round111_common.py",
+        "scripts/round111_seed_audit.py",
+        "scripts/round112_audit.py",
+        "scripts/round112_campaign.py",
+        "scripts/round112_common.py",
+        "scripts/round112_initialize.py",
+        "scripts/round112_reference_batch.cpp",
+        "scripts/round70_affinity.py",
+        "scripts/round75_startup.py",
+        "scripts/round83_audit_v2.py",
+        "scripts/round86_native_evidence.py",
+        "scripts/round88_a1_g3.py",
+        "scripts/round90_lp_g_g3.py",
+        "scripts/round94_lpg_contemporary.py",
+        "scripts/round94_lpg_formal_recovery_v3.py",
+        "scripts/round96_external.py",
+        "scripts/round96_prepare.py",
+        "scripts/round99_pure_start_audit.py",
+        "src/Bounds.cpp",
+        "src/Branching.cpp",
+        "src/ColumnGeneration.cpp",
+        "src/ColumnPool.cpp",
+        "src/ConnectivityFlow.cpp",
+        "src/ControllingLeafScheduler.cpp",
+        "src/CplexBaseline.cpp",
+        "src/Cuts.cpp",
+        "src/DenseProgress.cpp",
+        "src/DispersionChildBound.cpp",
+        "src/Evaluator.cpp",
+        "src/ExternalGiniTree.cpp",
+        "src/FileSha256.cpp",
+        "src/FleetEventCuts.cpp",
+        "src/GiniAdaptiveParametric.cpp",
+        "src/GiniBranching.cpp",
+        "src/GiniEnvelopeRefinement.cpp",
+        "src/GiniEnvelopeTailRepair.cpp",
+        "src/GiniFrontierGeometry.cpp",
+        "src/GurobiBaseline.cpp",
+        "src/GurobiBaselineStub.cpp",
+        "src/GurobiCertificate.cpp",
+        "src/GurobiProgress.cpp",
+        "src/HgaTgbcRunner.cpp",
+        "src/IntervalRowFactory.cpp",
+        "src/InventoryRouteCuts.cpp",
+        "src/InventoryRouteRootClosure.cpp",
+        "src/Logger.cpp",
+        "src/Master.cpp",
+        "src/MipStartMapping.cpp",
+        "src/ModelCorrectness.cpp",
+        "src/NativeEvidenceJournal.cpp",
+        "src/NativeOtB1.cpp",
+        "src/ObjectiveResourceCompression.cpp",
+        "src/PaperExternalGiniTree.cpp",
+        "src/PaperK1AmSf.cpp",
+        "src/Parser.cpp",
+        "src/PenaltyCoverSeparation.cpp",
+        "src/PhysicalWitnessValidation.cpp",
+        "src/Pricing.cpp",
+        "src/ProcessPhaseLedger.cpp",
+        "src/ReplicaExternalGiniTree.cpp",
+        "src/Result.cpp",
+        "src/Round103GurobiHull.inc",
+        "src/Round104GurobiObjective.inc",
+        "src/Round105Decomposition.cpp",
+        "src/Round105GurobiDecomposition.inc",
+        "src/Round106Events.cpp",
+        "src/Round106GurobiEvents.inc",
+        "src/Round106GurobiResearch.inc",
+        "src/Round107GurobiFrontier.inc",
+        "src/Round112CompactStart.inc",
+        "src/Round48K1AMF.cpp",
+        "src/Round49K1RC.cpp",
+        "src/Round50IntervalMip.cpp",
+        "src/Round51IntervalMip.cpp",
+        "src/Round52GurobiCutAdapter.cpp",
+        "src/Round52TailoredCuts.cpp",
+        "src/Round53CallbackIsolation.cpp",
+        "src/Round58Benchmark.cpp",
+        "src/Round60Candidates.cpp",
+        "src/Round61Candidates.cpp",
+        "src/Round61TimeOracle.cpp",
+        "src/Round62Passive.cpp",
+        "src/Round62Thresholds.cpp",
+        "src/Round63TimeResource.cpp",
+        "src/Round64SharedResource.cpp",
+        "src/Round65Projection.cpp",
+        "src/Round73JointInsertion.cpp",
+        "src/Round75QuantityDescent.cpp",
+        "src/Round76PhysicalClosure.cpp",
+        "src/Round78BalancedRelocation.cpp",
+        "src/Round83BlockExchange.cpp",
+        "src/Round92HandlingActivation.cpp",
+        "src/Round93CoQuantityDescent.cpp",
+        "src/Round95FullBlockDescent.cpp",
+        "src/Round96MultiQuantity.cpp",
+        "src/Round96RouteOrder.cpp",
+        "src/Round97NativeClosure.cpp",
+        "src/ServiceResourceCuts.cpp",
+        "src/ServiceResourceHull.cpp",
+        "src/StaticSegmentedGini.cpp",
+        "src/StrictCertificate.cpp",
+        "src/TailoredBC.cpp",
+        "src/TailoredBCCallbacks.cpp",
+        "src/TailoredBCCplexApi.cpp",
+        "src/TailoredBCCuts.cpp",
+        "src/TailoredExact.cpp",
+        "src/compare_main.cpp",
+        "src/hga_tgbc/HgaTgbcGreedy.cpp",
+        "src/main.cpp",
+        "src/round100_model_export.cpp",
+        "src/round101_fleet_diagnostic.cpp",
+        "src/round102_service_diagnostic.cpp",
+        "src/round103_hull_oracle.cpp",
+        "src/round104_compress_main.cpp",
+        "src/round105_oracle_main.cpp",
+        "src/round106_research_main.cpp",
+        "src/round49_rc_extract_main.cpp",
+        "src/round50_interval_mip_main.cpp",
+        "src/round54_inventory_route_main.cpp",
+        "src/round61_candidate_main.cpp",
+        "src/round61_time_main.cpp",
+        "src/round62_native_micro.cpp",
+        "src/round62_projection_audit.cpp",
+        "src/round62_threshold_main.cpp",
+        "src/round63_resource_probe.cpp",
+        "src/round64_projection_audit.cpp",
+        "src/round64_resource_probe.cpp",
+        "src/round65_reference_build.cpp",
+        "src/round98_model_export.cpp",
+        "src/round99_model_export.cpp"
+      ],
+      "label": "local_required_tree",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/yifanXovo/TailoredExact/git/trees/1e90dbc5eacddedf925d88c8608e897c56b4ad69"
+      ],
+      "label": "remote_tree_0",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/yifanXovo/TailoredExact/git/trees/2c383eaac1e9fa47d480307d6f09f75d35ed6541?recursive=1"
+      ],
+      "label": "remote_tree_1",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/yifanXovo/TailoredExact/git/trees/fe8a421ee75a7fe8cdd1b4918e74b51494029e32"
+      ],
+      "label": "remote_tree_2",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/yifanXovo/TailoredExact/git/trees/a6a2260bbb7e3c938b58fa63782a86c6fbbc4a00?recursive=1"
+      ],
+      "label": "remote_tree_3",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/yifanXovo/TailoredExact/git/trees/cfa5e902cd37c56e12ecbffcad6274c5b491e0f0?recursive=1"
+      ],
+      "label": "remote_tree_4",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/yifanXovo/TailoredExact/git/trees/25d43cb3e31c9e7eb5638651237b4b9e31e7a266?recursive=1"
+      ],
+      "label": "remote_tree_5",
+      "returncode": 0
+    }
+  ],
+  "bindings": [
+    {
+      "path": "CMakeLists.txt",
+      "Git_blob_SHA1": "72588f2a7df1d5732c40dbafe0b5e4a17f71f840",
+      "bytes": 29984
+    },
+    {
+      "path": "include/Bounds.hpp",
+      "Git_blob_SHA1": "0c6e3e1248cd5c033e168341b77a5e04cae1be7b",
+      "bytes": 9851
+    },
+    {
+      "path": "include/Branching.hpp",
+      "Git_blob_SHA1": "b715244f21e3f4c798fe3c77d2d891c305ef8d5c",
+      "bytes": 518
+    },
+    {
+      "path": "include/CanonicalCompactModel.hpp",
+      "Git_blob_SHA1": "0e66589734001a2c53b573e3debc6de2933966d0",
+      "bytes": 6506
+    },
+    {
+      "path": "include/Column.hpp",
+      "Git_blob_SHA1": "2d6e63996fbeba0179537d679200346b7f93c1b9",
+      "bytes": 858
+    },
+    {
+      "path": "include/ColumnGeneration.hpp",
+      "Git_blob_SHA1": "9f2ba7f76eb70ddf6332ae58610d34c2f3c9c0a6",
+      "bytes": 43310
+    },
+    {
+      "path": "include/ColumnPool.hpp",
+      "Git_blob_SHA1": "5c4472f3efd7269d904246677258aa35ba8a9234",
+      "bytes": 1719
+    },
+    {
+      "path": "include/ConnectivityFlow.hpp",
+      "Git_blob_SHA1": "cbd9b54b7e3a21a38220e56f210347ba4a437fd8",
+      "bytes": 3774
+    },
+    {
+      "path": "include/ControllingLeafScheduler.hpp",
+      "Git_blob_SHA1": "fe530edd8ba5b580385cc176fdae19fdd09d1ab1",
+      "bytes": 9009
+    },
+    {
+      "path": "include/CplexBaseline.hpp",
+      "Git_blob_SHA1": "f0ba10b56ecc423a4f45ddc41f0afc50951f47e4",
+      "bytes": 578
+    },
+    {
+      "path": "include/Cuts.hpp",
+      "Git_blob_SHA1": "49daf8d1b5b51ba96da27a852068e3b15c1ff61e",
+      "bytes": 937
+    },
+    {
+      "path": "include/DenseProgress.hpp",
+      "Git_blob_SHA1": "7c50d8a54f6fa12aee6c25666ea3be94ff64050e",
+      "bytes": 6935
+    },
+    {
+      "path": "include/DeterministicDinic.hpp",
+      "Git_blob_SHA1": "b98d0cc912ba732004c7947cfb280aafa118ab3f",
+      "bytes": 4382
+    },
+    {
+      "path": "include/Evaluator.hpp",
+      "Git_blob_SHA1": "caee4210b7e55fd4f1567e836cc0e52aca5f026c",
+      "bytes": 303
+    },
+    {
+      "path": "include/ExternalGiniTree.hpp",
+      "Git_blob_SHA1": "169e8d67e1a0b0c5181c632f90e06a649a6d1f2e",
+      "bytes": 2913
+    },
+    {
+      "path": "include/FileSha256.hpp",
+      "Git_blob_SHA1": "bd703b45b3f8cd209e9cb73863418c9a95f6c526",
+      "bytes": 200
+    },
+    {
+      "path": "include/FixedIntervalMipBackend.hpp",
+      "Git_blob_SHA1": "3d1ff11720aa104f0d936f5b212d1a7a4d1e3949",
+      "bytes": 24011
+    },
+    {
+      "path": "include/FleetEventCuts.hpp",
+      "Git_blob_SHA1": "d264afebe60e01cfc361bd770c674fcdd87f0230",
+      "bytes": 2149
+    },
+    {
+      "path": "include/GiniAdaptiveParametric.hpp",
+      "Git_blob_SHA1": "e7d8ea1a00d8ea14261e0f2f68135668504c548b",
+      "bytes": 4246
+    },
+    {
+      "path": "include/GiniBranching.hpp",
+      "Git_blob_SHA1": "b10e86dbad14997501feace18fdeed0cae62926d",
+      "bytes": 429
+    },
+    {
+      "path": "include/GiniEnvelopeRefinement.hpp",
+      "Git_blob_SHA1": "4116e604addc058d1bf3deb6236716eae4f66361",
+      "bytes": 4085
+    },
+    {
+      "path": "include/GiniEnvelopeTailRepair.hpp",
+      "Git_blob_SHA1": "45e8fc5eda9fa1c3e66f3913514fbd790b5a9b66",
+      "bytes": 5232
+    },
+    {
+      "path": "include/GiniFrontierGeometry.hpp",
+      "Git_blob_SHA1": "d154e9c90e2d232f214c789507f798529e708c56",
+      "bytes": 8785
+    },
+    {
+      "path": "include/GurobiBaseline.hpp",
+      "Git_blob_SHA1": "67fcace8b0f0368b5b5765d9bc82cfcdbf19822c",
+      "bytes": 795
+    },
+    {
+      "path": "include/GurobiCertificate.hpp",
+      "Git_blob_SHA1": "4b5425f070f938bb97855492ae529015c98c4937",
+      "bytes": 2378
+    },
+    {
+      "path": "include/GurobiProgress.hpp",
+      "Git_blob_SHA1": "6dd84ea7b5a7d3a016aeaee6ad834e011b2c9705",
+      "bytes": 1054
+    },
+    {
+      "path": "include/HgaTgbcRunner.hpp",
+      "Git_blob_SHA1": "c7037324df3843bc114c52d62e7383037eaba3b9",
+      "bytes": 3561
+    },
+    {
+      "path": "include/Instance.hpp",
+      "Git_blob_SHA1": "c796f17877978ed3a1cff59131bd6521f6f369ca",
+      "bytes": 38951
+    },
+    {
+      "path": "include/IntervalRowFactory.hpp",
+      "Git_blob_SHA1": "ab850b8fb9d6cc825323a19c6d623a37b032f39e",
+      "bytes": 5025
+    },
+    {
+      "path": "include/InventoryRouteCuts.hpp",
+      "Git_blob_SHA1": "ca5d24d7b03c136135f543dbca45bcbc6e97761d",
+      "bytes": 2476
+    },
+    {
+      "path": "include/InventoryRouteRootClosure.hpp",
+      "Git_blob_SHA1": "535b15d2a0831611b68bd53af2ac05511ed04ad6",
+      "bytes": 2416
+    },
+    {
+      "path": "include/Logger.hpp",
+      "Git_blob_SHA1": "70d50ddbaacc377a769b5fd94bb0da5803f8a06c",
+      "bytes": 327
+    },
+    {
+      "path": "include/Master.hpp",
+      "Git_blob_SHA1": "4e54f825543aa49e8b6db02578270f2e0805ad7b",
+      "bytes": 741
+    },
+    {
+      "path": "include/MipStartMapping.hpp",
+      "Git_blob_SHA1": "0ae48201d9ee2b94f385d64a64de739ed4ad7de7",
+      "bytes": 1390
+    },
+    {
+      "path": "include/ModelCorrectness.hpp",
+      "Git_blob_SHA1": "d81ca1e14bd9f45c94e5e1a26964da304da3d55c",
+      "bytes": 2009
+    },
+    {
+      "path": "include/NativeEvidenceJournal.hpp",
+      "Git_blob_SHA1": "9e922de5daef7514debc91d6cd80a75ecbc2b8c9",
+      "bytes": 2772
+    },
+    {
+      "path": "include/NativeOtB1.hpp",
+      "Git_blob_SHA1": "893f658d301c1ea146949edb80abb8a7fe287339",
+      "bytes": 2219
+    },
+    {
+      "path": "include/ObjectiveResourceCompression.hpp",
+      "Git_blob_SHA1": "422e9208027f58b50764627a3983f4f343f70933",
+      "bytes": 945
+    },
+    {
+      "path": "include/PaperExternalGiniTree.hpp",
+      "Git_blob_SHA1": "41018f7c7a020ccfecd282dce0120ed16dd0c4ff",
+      "bytes": 4799
+    },
+    {
+      "path": "include/PaperK1AmSf.hpp",
+      "Git_blob_SHA1": "158d2e82bcaca2b9e7407a65de02c6266beb3de8",
+      "bytes": 944
+    },
+    {
+      "path": "include/Parser.hpp",
+      "Git_blob_SHA1": "2f44040bbe41c1adc66f55de8c4d9143f25d5748",
+      "bytes": 417
+    },
+    {
+      "path": "include/PenaltyCoverSeparation.hpp",
+      "Git_blob_SHA1": "6fef8e4ed39b8f33f6458597b1229303e52f8784",
+      "bytes": 2045
+    },
+    {
+      "path": "include/PhysicalDurationTolerance.hpp",
+      "Git_blob_SHA1": "271ceb17f00cb3c67979e144c72de88ca5c35b0f",
+      "bytes": 264
+    },
+    {
+      "path": "include/PhysicalWitnessValidation.hpp",
+      "Git_blob_SHA1": "9279b7c6f5fd1690da293ce80cb0fdff2dc220de",
+      "bytes": 614
+    },
+    {
+      "path": "include/Pricing.hpp",
+      "Git_blob_SHA1": "56e8717f45f9d69512292131c7963fe1709ed2d6",
+      "bytes": 9666
+    },
+    {
+      "path": "include/ProcessPhaseLedger.hpp",
+      "Git_blob_SHA1": "61c7cbcc2470804551087f286d30ec556961443c",
+      "bytes": 927
+    },
+    {
+      "path": "include/ReplicaExternalGiniTree.hpp",
+      "Git_blob_SHA1": "3e97e2be006fe329454cd29d74be3a862b55085c",
+      "bytes": 730
+    },
+    {
+      "path": "include/Result.hpp",
+      "Git_blob_SHA1": "4991afdf2d0045ac0da08e8d03a74c566fd142ae",
+      "bytes": 102235
+    },
+    {
+      "path": "include/Round105Decomposition.hpp",
+      "Git_blob_SHA1": "2aaec8d32446eeca5a4756356dbb707f842e53b3",
+      "bytes": 1763
+    },
+    {
+      "path": "include/Round106Events.hpp",
+      "Git_blob_SHA1": "e4d7287a86a11730750ac76d1ca63e2fe2fbdd22",
+      "bytes": 1439
+    },
+    {
+      "path": "include/Round106Research.hpp",
+      "Git_blob_SHA1": "c101ed8b86395809b1fd1c653dd76db0fd189d1f",
+      "bytes": 704
+    },
+    {
+      "path": "include/Round107LpMetadata.hpp",
+      "Git_blob_SHA1": "5b33a9c5b7b1762e5eecd38b8a18c82ec5caa92b",
+      "bytes": 4581
+    },
+    {
+      "path": "include/Round107Research.hpp",
+      "Git_blob_SHA1": "0bf1757d4f265cb13c3a5e81c9b4604397840676",
+      "bytes": 296
+    },
+    {
+      "path": "include/Round107Scope.hpp",
+      "Git_blob_SHA1": "59d1d0ab46ebdca33c28752e99e47f31ce395a2f",
+      "bytes": 2345
+    },
+    {
+      "path": "include/Round48K1AMF.hpp",
+      "Git_blob_SHA1": "82244eb41564129f7245d4a1bbccf06bdd71ff14",
+      "bytes": 2937
+    },
+    {
+      "path": "include/Round49K1RC.hpp",
+      "Git_blob_SHA1": "61d2c5425a3c7a74d84519294b09fa2d63b37ffe",
+      "bytes": 3152
+    },
+    {
+      "path": "include/Round50IntervalMip.hpp",
+      "Git_blob_SHA1": "29f24466f357087f0b9fb4febb125d7af58537bd",
+      "bytes": 3056
+    },
+    {
+      "path": "include/Round51IntervalMip.hpp",
+      "Git_blob_SHA1": "f579bab65bfdf36ee402a4c7aac3e7ae6fa1a23f",
+      "bytes": 3468
+    },
+    {
+      "path": "include/Round52GurobiCutAdapter.hpp",
+      "Git_blob_SHA1": "f8004fa1798f5fc6eed2196c4b1afa376a447f4d",
+      "bytes": 1270
+    },
+    {
+      "path": "include/Round52TailoredCuts.hpp",
+      "Git_blob_SHA1": "6dbcc8f0567aff3d0dd83d6a5514f7215a6cf193",
+      "bytes": 5005
+    },
+    {
+      "path": "include/Round53CallbackIsolation.hpp",
+      "Git_blob_SHA1": "c259b2714741a818e3eff84a4b79ec567afd7187",
+      "bytes": 477
+    },
+    {
+      "path": "include/Round58Benchmark.hpp",
+      "Git_blob_SHA1": "ba580873aab335df2eb64c460b728eef7ff39e3c",
+      "bytes": 1517
+    },
+    {
+      "path": "include/Round59Research.hpp",
+      "Git_blob_SHA1": "1338f767cc0567ae82892ba1ba62aec8365f66d3",
+      "bytes": 2299
+    },
+    {
+      "path": "include/Round60Candidates.hpp",
+      "Git_blob_SHA1": "1840841c19ff5b206474876e6ca4d155baa295c6",
+      "bytes": 3411
+    },
+    {
+      "path": "include/Round61Candidates.hpp",
+      "Git_blob_SHA1": "063499f023df16932f30f5179f91616b8284ff58",
+      "bytes": 2747
+    },
+    {
+      "path": "include/Round61TimeOracle.hpp",
+      "Git_blob_SHA1": "7dad221e1286a8bb26d417463570e5558637ebd3",
+      "bytes": 1515
+    },
+    {
+      "path": "include/Round62Passive.hpp",
+      "Git_blob_SHA1": "4d8c69fab9aba5f3d09f0eb6ca2bc17330717a00",
+      "bytes": 944
+    },
+    {
+      "path": "include/Round62Thresholds.hpp",
+      "Git_blob_SHA1": "010ee5e75021cc2857f928bee07a674dbe63889a",
+      "bytes": 2025
+    },
+    {
+      "path": "include/Round63TimeResource.hpp",
+      "Git_blob_SHA1": "a61793ce2f9f89ccf3d26aacb5bf130c4b01ead6",
+      "bytes": 1731
+    },
+    {
+      "path": "include/Round64SharedResource.hpp",
+      "Git_blob_SHA1": "188ce1f97158a9ab00b6857f2769f47994229c55",
+      "bytes": 721
+    },
+    {
+      "path": "include/Round65Projection.hpp",
+      "Git_blob_SHA1": "d3bd1cc16a7cdf9ab8d315f577ef7a036111903b",
+      "bytes": 1882
+    },
+    {
+      "path": "include/Round65Proof.hpp",
+      "Git_blob_SHA1": "67197ccf70254a24bf858ba03671a96c856d33d2",
+      "bytes": 1956
+    },
+    {
+      "path": "include/Round73JointInsertion.hpp",
+      "Git_blob_SHA1": "5f975e5ce86af5188ea155f5a6a6fba5ec31b4a1",
+      "bytes": 1651
+    },
+    {
+      "path": "include/Round75QuantityDescent.hpp",
+      "Git_blob_SHA1": "e0997f9c71ad748c601efcbb863c57f47418fa4a",
+      "bytes": 1739
+    },
+    {
+      "path": "include/Round76PhysicalClosure.hpp",
+      "Git_blob_SHA1": "ef064c8823b7d4cdae29cf5b1b3b8b3fdf27c98f",
+      "bytes": 1196
+    },
+    {
+      "path": "include/Round78BalancedRelocation.hpp",
+      "Git_blob_SHA1": "3fb9d33e0b27d0aff977579644f1c16cf7fdc1d3",
+      "bytes": 1563
+    },
+    {
+      "path": "include/Round83BlockExchange.hpp",
+      "Git_blob_SHA1": "5e6c59cb4bb466d9887101620e6a91c948b3d800",
+      "bytes": 1150
+    },
+    {
+      "path": "include/Round92HandlingActivation.hpp",
+      "Git_blob_SHA1": "75f1793e275a086f766a8419e2dc4b76d962d1ef",
+      "bytes": 4172
+    },
+    {
+      "path": "include/Round93CoQuantityDescent.hpp",
+      "Git_blob_SHA1": "2e4f00a70a874b89afb75ce1788ab396016f4b25",
+      "bytes": 2923
+    },
+    {
+      "path": "include/Round95FullBlockDescent.hpp",
+      "Git_blob_SHA1": "e6c817a3c16e57d702dbde30f993c83dad700112",
+      "bytes": 3465
+    },
+    {
+      "path": "include/Round96MultiQuantity.hpp",
+      "Git_blob_SHA1": "232e019c050c506e4debde0f116d737ef0b987df",
+      "bytes": 762
+    },
+    {
+      "path": "include/Round96RouteOrder.hpp",
+      "Git_blob_SHA1": "3fea6f93eaaea9f05b5539b45127d10b6ad36d25",
+      "bytes": 1034
+    },
+    {
+      "path": "include/Round97NativeClosure.hpp",
+      "Git_blob_SHA1": "947ac0dbc0210bcc221ff1b2bee9e793b365fd54",
+      "bytes": 2540
+    },
+    {
+      "path": "include/Round98StateService.hpp",
+      "Git_blob_SHA1": "5584fcb61593d9bc8dfdb6291918be872744da8a",
+      "bytes": 2098
+    },
+    {
+      "path": "include/ServiceResourceCuts.hpp",
+      "Git_blob_SHA1": "68876d4ec711ab95c857351a47b87ef0de2e371f",
+      "bytes": 1938
+    },
+    {
+      "path": "include/ServiceResourceHull.hpp",
+      "Git_blob_SHA1": "6c132a3b86865e7b695498291b9b089d04ce6032",
+      "bytes": 1285
+    },
+    {
+      "path": "include/StaticSegmentedGini.hpp",
+      "Git_blob_SHA1": "62b3070d3487cc4e5bffa5e7ae23d49baf0969fd",
+      "bytes": 4094
+    },
+    {
+      "path": "include/StationSet.hpp",
+      "Git_blob_SHA1": "13260be47d83537d09378b2839dd31f9ada57099",
+      "bytes": 4265
+    },
+    {
+      "path": "include/StrictCertificate.hpp",
+      "Git_blob_SHA1": "a50bbab41a7919f73f75ab9b8c0bc49bad1924c3",
+      "bytes": 3906
+    },
+    {
+      "path": "include/TailoredBC.hpp",
+      "Git_blob_SHA1": "9456532ff3db7d57e1907a333b60437360d4fb49",
+      "bytes": 623
+    },
+    {
+      "path": "include/TailoredBCCallbacks.hpp",
+      "Git_blob_SHA1": "2f554fb9247707b6a08016662ddd67af66fb2b4e",
+      "bytes": 131
+    },
+    {
+      "path": "include/TailoredBCCplexApi.hpp",
+      "Git_blob_SHA1": "a64263a802205f76763fd0c2e92e1793eced2f54",
+      "bytes": 19917
+    },
+    {
+      "path": "include/TailoredBCCuts.hpp",
+      "Git_blob_SHA1": "b03f737ad8a2b57f770b363d7544340e1b3b2474",
+      "bytes": 615
+    },
+    {
+      "path": "include/TailoredExact.hpp",
+      "Git_blob_SHA1": "97e5b1704ba88c4e17aa0072e9a8202db22c2600",
+      "bytes": 187
+    },
+    {
+      "path": "results/unified_exact_round112/RESUME.md",
+      "Git_blob_SHA1": "dcd3a8bc96f97cd30f5c6461d8fe2fa035bde633",
+      "bytes": 5569
+    },
+    {
+      "path": "results/unified_exact_round112/blocking_incident.json",
+      "Git_blob_SHA1": "0529c351e565ae53aabbbafe38bb1a77a5bd2314",
+      "bytes": 2497
+    },
+    {
+      "path": "results/unified_exact_round112/blocking_incident.md",
+      "Git_blob_SHA1": "2dbd05539d9604f1d9572817fa07ddacbdf21fa2",
+      "bytes": 2328
+    },
+    {
+      "path": "results/unified_exact_round112/campaign/identity.json",
+      "Git_blob_SHA1": "2655bad5ead833a1c96efaa142a7da2077021589",
+      "bytes": 97911
+    },
+    {
+      "path": "results/unified_exact_round112/campaign/processes.jsonl",
+      "Git_blob_SHA1": "5e61afb369174113791f37b47d58c5c911bc9a1e",
+      "bytes": 2543
+    },
+    {
+      "path": "results/unified_exact_round112/campaign/runtime_status.json",
+      "Git_blob_SHA1": "832bad72dfeaa3e84d5002db1ca5f5267bb9aecb",
+      "bytes": 382
+    },
+    {
+      "path": "results/unified_exact_round112/campaign/summary.jsonl",
+      "Git_blob_SHA1": "97bf0eec601f1d8ecbb792cb48ae15413f6d6092",
+      "bytes": 11279
+    },
+    {
+      "path": "results/unified_exact_round112/candidate_identity.json",
+      "Git_blob_SHA1": "65d8b54a38017b0fba8dfab2d243ab97c04e2d6b",
+      "bytes": 66990
+    },
+    {
+      "path": "results/unified_exact_round112/compact_evidence/evidence.tar.gz",
+      "Git_blob_SHA1": "b21c48edb8aac8abd5a257c45f98cfcc630361d3",
+      "bytes": 82842777
+    },
+    {
+      "path": "results/unified_exact_round112/compact_evidence/manifest.json",
+      "Git_blob_SHA1": "cce72a7bb2a7fcd98af01cbacdc9849dc3eddbd0",
+      "bytes": 12134058
+    },
+    {
+      "path": "results/unified_exact_round112/contribution_evidence_map.md",
+      "Git_blob_SHA1": "982a02a05c803ec7ca5c388fdee7ccc1436245f8",
+      "bytes": 3932
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/build01/launch.json",
+      "Git_blob_SHA1": "1ce7afec75ef71c051baad0a372d2476c5f1761d",
+      "bytes": 401
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/build01/process.json",
+      "Git_blob_SHA1": "6f2239c049bbef9f9fead5d4a5ebaf7c89ffd2f4",
+      "bytes": 38
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/build01/receipt.json",
+      "Git_blob_SHA1": "4f04b152c5cf8b44c4dd3dc366fb32b906226289",
+      "bytes": 115
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/build02/launch.json",
+      "Git_blob_SHA1": "4beaf2b66980f5ef920bab13451ea9895b4fe7ea",
+      "bytes": 430
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/build02/process.json",
+      "Git_blob_SHA1": "baeba4709c0682617cb89a57277e1862ddf8db79",
+      "bytes": 38
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/build02/receipt.json",
+      "Git_blob_SHA1": "7ac10065082753d3b6dec02c55dbfbda7cde6a7a",
+      "bytes": 116
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/build03/launch.json",
+      "Git_blob_SHA1": "8770f202de38b377d0b7bfd9dbafa1526bf1c30c",
+      "bytes": 431
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/build03/process.json",
+      "Git_blob_SHA1": "5356a04f43646b17bffe15737edd4fd5805d1bc4",
+      "bytes": 38
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/build03/receipt.json",
+      "Git_blob_SHA1": "edec52f142d26fe918892251cb7e91c36ebd6b10",
+      "bytes": 115
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/compile_start_fault01/launch.json",
+      "Git_blob_SHA1": "750bfe534b3bec76c40790d2c6c050beb3917c54",
+      "bytes": 546
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/compile_start_fault01/process.json",
+      "Git_blob_SHA1": "0976505f33b9d8994aa0919c70608c02b065f8b1",
+      "bytes": 38
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/compile_start_fault01/receipt.json",
+      "Git_blob_SHA1": "0bddf5d420618f37ad92ae5d86a6bef3dc87614f",
+      "bytes": 116
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/configure01/launch.json",
+      "Git_blob_SHA1": "f73b7322a233ec137e075b6005caf68fd47b9154",
+      "bytes": 669
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/configure01/process.json",
+      "Git_blob_SHA1": "3a0165322f9f4aef36956bbe65af696e8d6816e3",
+      "bytes": 38
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/configure01/receipt.json",
+      "Git_blob_SHA1": "c49b7b311a667d1a8adfb5995d2b279e71f84c99",
+      "bytes": 116
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/final_reader01/receipt.json",
+      "Git_blob_SHA1": "6b33027e7cf9c4ab1d80e970867fe8775cf4dd59",
+      "bytes": 202
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/final_reader01/stderr.txt",
+      "Git_blob_SHA1": "3e9c59b2a5da237383334259a92941f2f8cbf722",
+      "bytes": 1128
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/final_reader01/stdout.txt",
+      "Git_blob_SHA1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/final_reader02/receipt.json",
+      "Git_blob_SHA1": "be064bcaafdb1e3e29cda0c4544f37d96e4b8c42",
+      "bytes": 270
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/final_reader02/stderr.txt",
+      "Git_blob_SHA1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/final_reader02/stdout.txt",
+      "Git_blob_SHA1": "227d65f3588295214b00639bf3833d61e8bf3d3a",
+      "bytes": 2739
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/incident01/idle_query.json",
+      "Git_blob_SHA1": "2833be8302cfef9aa0e9ffc5ad15ccdbc0b8e1b1",
+      "bytes": 217
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/offline_qualification01/launch.json",
+      "Git_blob_SHA1": "0d3dbf39ea2ae4ad9b61a74f784e2ba4787afa1f",
+      "bytes": 416
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/offline_qualification01/process.json",
+      "Git_blob_SHA1": "baf6b93f44e11f5e49c99ea58d509b889f74ad27",
+      "bytes": 38
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/offline_qualification01/receipt.json",
+      "Git_blob_SHA1": "ebfe551ac3c61b78263ead8c41e971cc24d1fbdb",
+      "bytes": 117
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/offline_qualification02/launch.json",
+      "Git_blob_SHA1": "46200fe46dce7303b99aee3f86ad6ff652c32265",
+      "bytes": 416
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/offline_qualification02/process.json",
+      "Git_blob_SHA1": "cec3161ff7214607beca28ecf82cea441ab416e5",
+      "bytes": 38
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/offline_qualification02/receipt.json",
+      "Git_blob_SHA1": "ce63a131b1c9df61f33a5c2eb37f5dd8aee2b31c",
+      "bytes": 116
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/offline_qualification03/launch.json",
+      "Git_blob_SHA1": "04ffe7f87141a40c5fa4667ae326f4a94b375235",
+      "bytes": 416
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/offline_qualification03/process.json",
+      "Git_blob_SHA1": "b7ca8bd1494942859b02b403bec18c4b49bae9a1",
+      "bytes": 38
+    },
+    {
+      "path": "results/unified_exact_round112/engineering/offline_qualification03/receipt.json",
+      "Git_blob_SHA1": "a7986b150fe50e58f0655cafae83cf68d9fa311b",
+      "bytes": 115
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/01_after.json",
+      "Git_blob_SHA1": "18ca8dfba621fd6f741b74313c29cb6ffb99df07",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/01_before.json",
+      "Git_blob_SHA1": "2333f0ee77f4a962b3bb583ae4e704b6eb0eca9c",
+      "bytes": 88
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/02_after.json",
+      "Git_blob_SHA1": "395c6fb81a27f7fcc5a502ca38acd8952547432a",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/02_before.json",
+      "Git_blob_SHA1": "da845b7e251ed5376c1a41d9c0be1b7e3a8ae65e",
+      "bytes": 85
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/03_after.json",
+      "Git_blob_SHA1": "1a216e8ccf66be6a6877b499264fa779e7da73d3",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/03_before.json",
+      "Git_blob_SHA1": "df27af692398e8be6134a79207b1cc994cb8eddb",
+      "bytes": 87
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/04_after.json",
+      "Git_blob_SHA1": "c11f5ed2a6d81ae38899a674b4e302e35b2623d0",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/04_before.json",
+      "Git_blob_SHA1": "8713cacdf0ca57dd7654ad2469f3ed1d895872d9",
+      "bytes": 85
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/launch.json",
+      "Git_blob_SHA1": "d50075ca041ec108ae1590a58b5cca638dcab0ff",
+      "bytes": 4722
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/pending_exit_receipt.json",
+      "Git_blob_SHA1": "3439b5631f3f7d176fc3463e2b8326e23959c5aa",
+      "bytes": 225
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main01/receipt.json",
+      "Git_blob_SHA1": "1faead97aedb3759ef970b0c4f9f764525c2df11",
+      "bytes": 561
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/05_after.json",
+      "Git_blob_SHA1": "646676f59874af9692d1c24a9fb76bfa8fc845fe",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/05_before.json",
+      "Git_blob_SHA1": "83fb0d666c0f06eb2d2d0996de6e86d94f68cb8a",
+      "bytes": 90
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/06_after.json",
+      "Git_blob_SHA1": "22582ac7888038e5028c8324297f9796f29b7ce8",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/06_before.json",
+      "Git_blob_SHA1": "ebed8a59afbc6802a9a0aadd866ddd6fab8f2b73",
+      "bytes": 90
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/07_after.json",
+      "Git_blob_SHA1": "3d35730f193af37c60041ed6e53be1b4a1ad3bc0",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/07_before.json",
+      "Git_blob_SHA1": "06b3c80d563b6fdec2486dcb736d113ad0e89420",
+      "bytes": 92
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/08_after.json",
+      "Git_blob_SHA1": "95152c5f4394fe8303bb57308f57e5637a1730dd",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/08_before.json",
+      "Git_blob_SHA1": "1e7cd281b5f9f89c0089aea4702a6a6cbc818a75",
+      "bytes": 92
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/launch.json",
+      "Git_blob_SHA1": "bfc51fa1455ddd5cc8d8880f1afb7854e675a6b9",
+      "bytes": 4721
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/pending_exit_receipt.json",
+      "Git_blob_SHA1": "543a9a7d4e6f1b73e4c4c939ca381a1c8f9715f7",
+      "bytes": 224
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main02/receipt.json",
+      "Git_blob_SHA1": "9fe6489a672e62eafa14b9c83472602d40fa1136",
+      "bytes": 557
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/09_after.json",
+      "Git_blob_SHA1": "c1a84f97251b18228fb1c4d278019880ae2cfeb1",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/09_before.json",
+      "Git_blob_SHA1": "38794f6bea3504a57d8333d33600f4d3160eb4c6",
+      "bytes": 94
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/10_after.json",
+      "Git_blob_SHA1": "131fba6ccd9a8dfa4d92df309f8e7d21438b2351",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/10_before.json",
+      "Git_blob_SHA1": "f433e0b7fccd2e61c37dfcba4114657fee7902a6",
+      "bytes": 95
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/11_after.json",
+      "Git_blob_SHA1": "756c690c6b77565a7176a6b95ed135fae35e5c62",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/11_before.json",
+      "Git_blob_SHA1": "f9b91cd4ed83f1a6cf1c4f8ee5b7d6bbb3580c23",
+      "bytes": 93
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/12_after.json",
+      "Git_blob_SHA1": "cc4563325e724d99a97202e7768ca172e8a825a1",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/12_before.json",
+      "Git_blob_SHA1": "059f11d08e5fbd766356dd807c1f2157c215e2b9",
+      "bytes": 93
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/launch.json",
+      "Git_blob_SHA1": "44f4144a779a0fd340441266371e749014e90e5f",
+      "bytes": 4724
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/pending_exit_receipt.json",
+      "Git_blob_SHA1": "f0a223c2be7f5b6cecc90c61656cde9ce5a98e54",
+      "bytes": 224
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main03/receipt.json",
+      "Git_blob_SHA1": "0f96c3272be6674a797caeac445ae2c1acb87d1e",
+      "bytes": 557
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main04/13_before.json",
+      "Git_blob_SHA1": "66152c92b94ee79f81c9b3dc8ebd6eb7e384d40d",
+      "bytes": 91
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main04/failure.txt",
+      "Git_blob_SHA1": "f05b8d4c3dcf4e85ae4fa0a86efaf1c9f75b233c",
+      "bytes": 1038
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main04/launch.json",
+      "Git_blob_SHA1": "2f41d3d3699d8766ca9da18d398de5f6f3df1410",
+      "bytes": 4722
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main04/pending_exit_receipt.json",
+      "Git_blob_SHA1": "d76bee492bd021bf55a61f3bfa12d0a7fdb2d50b",
+      "bytes": 224
+    },
+    {
+      "path": "results/unified_exact_round112/fees/main04/receipt.json",
+      "Git_blob_SHA1": "2bfc90528ca7861c4bad35279a927dc7e0c3eadb",
+      "bytes": 559
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli01/01_after.json",
+      "Git_blob_SHA1": "137e7588739ab1e70b1240b85efa5eaf3a07b001",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli01/01_before.json",
+      "Git_blob_SHA1": "d50d5cfd15f82da2de097446edd33454fe7b3b97",
+      "bytes": 90
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli01/02_before.json",
+      "Git_blob_SHA1": "74108f46532b851689767aec445f4c812d19a7ac",
+      "bytes": 87
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli01/failure.txt",
+      "Git_blob_SHA1": "ff541f32433240d31efc2618eaa6b90d0c7698a9",
+      "bytes": 832
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli01/launch.json",
+      "Git_blob_SHA1": "39682dea7527c8af52b6f9967e1b5db1761e7d4a",
+      "bytes": 4765
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli01/pending_exit_receipt.json",
+      "Git_blob_SHA1": "2613cb70a0fad9a8df12fd96267988248afb0177",
+      "bytes": 223
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli01/receipt.json",
+      "Git_blob_SHA1": "723d77f589625d490970b53da336af4b19fa4985",
+      "bytes": 558
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/01_after.json",
+      "Git_blob_SHA1": "37d113142afe9854c85c5ed05a02363aeda9ac77",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/01_before.json",
+      "Git_blob_SHA1": "be019d1e68604216d186695857fe4eb7ddf0581f",
+      "bytes": 88
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/02_after.json",
+      "Git_blob_SHA1": "442fbb5759f8c216f1290b707bf1af8fa1ab595c",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/02_before.json",
+      "Git_blob_SHA1": "40875c3ca451e7b6838c7cf2bc1f3970a8cc0cb2",
+      "bytes": 88
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/03_after.json",
+      "Git_blob_SHA1": "398864d78a0d8bd2949b6865e1193e6dade05e84",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/03_before.json",
+      "Git_blob_SHA1": "c417689f78545d11b55b71e8b1bdb0876f6c1bf4",
+      "bytes": 88
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/04_after.json",
+      "Git_blob_SHA1": "8e8ba6e15cb05895e2d6bcc952db17f735f91daf",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/04_before.json",
+      "Git_blob_SHA1": "08568f8a549e93543e9d9c1f370e3e5d4aa4a983",
+      "bytes": 88
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/launch.json",
+      "Git_blob_SHA1": "a06c33de8c2e516f14efc0a808df0d83757af534",
+      "bytes": 4765
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/pending_exit_receipt.json",
+      "Git_blob_SHA1": "fabdcaeadc17a9bfeafd88604f85f9c2092ccfa6",
+      "bytes": 224
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_cli02/receipt.json",
+      "Git_blob_SHA1": "3ad58680485bf4d43947e95f62f1e974088b47d2",
+      "bytes": 560
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_positive01/01_after.json",
+      "Git_blob_SHA1": "d69776ea95fa48d318fb0507d9f1c75ee806841d",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_positive01/01_before.json",
+      "Git_blob_SHA1": "e8d8733cadc699abd242468e494515af0fc0c3ff",
+      "bytes": 101
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_positive01/02_after.json",
+      "Git_blob_SHA1": "f51e5e933433aca92e65b47324b3e008459a6368",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_positive01/02_before.json",
+      "Git_blob_SHA1": "ad44e2018e5347a7011395926377e254ed273d33",
+      "bytes": 99
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_positive01/launch.json",
+      "Git_blob_SHA1": "efed09b18b0141fb074c62c5d93871f341fecb8e",
+      "bytes": 4773
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_positive01/pending_exit_receipt.json",
+      "Git_blob_SHA1": "1bb21721d7ff52760fffdef30e8d55ea73c4bb79",
+      "bytes": 223
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_positive01/receipt.json",
+      "Git_blob_SHA1": "36a95d385be91e0fa42f8965a4ab0750b91a776f",
+      "bytes": 557
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_zero01/01_after.json",
+      "Git_blob_SHA1": "ca89f56b62eefa35d94ba49a121f2293aedd7609",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_zero01/01_before.json",
+      "Git_blob_SHA1": "e05f92df9ef31c9c8c4cbb82b7a982fd726fc493",
+      "bytes": 91
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_zero01/launch.json",
+      "Git_blob_SHA1": "bc307dbb8b880e3822d0c045df03836f4297289a",
+      "bytes": 4766
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_zero01/pending_exit_receipt.json",
+      "Git_blob_SHA1": "5ee3440f4de3b642156f93d63826b87bc2cfd09d",
+      "bytes": 224
+    },
+    {
+      "path": "results/unified_exact_round112/fees/qualification_zero01/receipt.json",
+      "Git_blob_SHA1": "016141060530328f25de4f68e7e623a29e8c8aa9",
+      "bytes": 560
+    },
+    {
+      "path": "results/unified_exact_round112/fees/reference01/launch.json",
+      "Git_blob_SHA1": "dc0e39f4fe025a28221745bf4505d70497307fe6",
+      "bytes": 4629
+    },
+    {
+      "path": "results/unified_exact_round112/fees/reference01/native_launch.json",
+      "Git_blob_SHA1": "7f814d0f77714da9850c6c988213518088e28fd7",
+      "bytes": 21593
+    },
+    {
+      "path": "results/unified_exact_round112/fees/reference01/pending_exit_receipt.json",
+      "Git_blob_SHA1": "933388043de0c7baa8c46865fdfa903590e89441",
+      "bytes": 223
+    },
+    {
+      "path": "results/unified_exact_round112/fees/reference01/receipt.json",
+      "Git_blob_SHA1": "6cc534165dc577e5c5abc79ff32218bcfda806bb",
+      "bytes": 556
+    },
+    {
+      "path": "results/unified_exact_round112/fees/start_fault01/launch.json",
+      "Git_blob_SHA1": "c2ebb7ec5aa8c6cf797976a2d5fdf3f8a494d39b",
+      "bytes": 4665
+    },
+    {
+      "path": "results/unified_exact_round112/fees/start_fault01/native_launch.json",
+      "Git_blob_SHA1": "0224da657c9d1789951726d2b6087b1bf14b03dc",
+      "bytes": 22134
+    },
+    {
+      "path": "results/unified_exact_round112/fees/start_fault01/pending_exit_receipt.json",
+      "Git_blob_SHA1": "ad1c495e4396c0129e5c3756bee19b7453deede5",
+      "bytes": 224
+    },
+    {
+      "path": "results/unified_exact_round112/fees/start_fault01/receipt.json",
+      "Git_blob_SHA1": "999675f93e7237dc1ddebcdf9fbbfde9bf6767f4",
+      "bytes": 560
+    },
+    {
+      "path": "results/unified_exact_round112/final_report.md",
+      "Git_blob_SHA1": "e3ad16d7667d253450dea66709904ebf9ebd4df5",
+      "bytes": 11294
+    },
+    {
+      "path": "results/unified_exact_round112/fixed_manifest.json",
+      "Git_blob_SHA1": "01756edef60feb3075c4b5f5e0edab0a53f72958",
+      "bytes": 73865
+    },
+    {
+      "path": "results/unified_exact_round112/goal.md",
+      "Git_blob_SHA1": "50e4fa09b02576bdf023938ea9aab6ba36803167",
+      "bytes": 26920
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities.json",
+      "Git_blob_SHA1": "2917b2cff5a0f9160fb7b14f96e9de2ef44e2136",
+      "bytes": 16012
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/00c51ca7d17e7bac_final_wrapper_closure.json",
+      "Git_blob_SHA1": "0e1b9ebe782b79a869368207ca17fc7c11e57b3d",
+      "bytes": 11068
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/086dd2d47d394d1a_goal.md",
+      "Git_blob_SHA1": "390c8507e4bb5759624a7790b9ff7a8252cf2f52",
+      "bytes": 23986
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/0cb5bd7b140de33b_history_increment.md",
+      "Git_blob_SHA1": "afbe0fdfc36db7baa8a1cea8ba2a014be1584975",
+      "bytes": 1766
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/14eff90a1b362b3d_final_report.md",
+      "Git_blob_SHA1": "6011a21d56e32867fd87b34d5ac708c142776332",
+      "bytes": 7091
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/2883b294c0e838a6_current_numerical_evidence.md",
+      "Git_blob_SHA1": "08df78d892fd7d67aaf067c345060c37414d9974",
+      "bytes": 10853
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/2bcae45bb3f00bdb_baseline_equivalence_audit.md",
+      "Git_blob_SHA1": "8451d24caa5aaade8aa197c44bf446edc7fe07ff",
+      "bytes": 676
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/2c4956a70dcb65ed_arms.csv",
+      "Git_blob_SHA1": "e942531d507d8af6891486b1d0205d8a1f8ec0f1",
+      "bytes": 4401
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/2d000e6e32ff70ca_startup_historical_attribution.md",
+      "Git_blob_SHA1": "9b4d01d41eb2f0c4a3989512f6bde40cdc0c2340",
+      "bytes": 2235
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/2d63aa6ac407b45f_final_report.md",
+      "Git_blob_SHA1": "28c0a9cba8a64f66e437f2f571a933ec0ae06dee",
+      "bytes": 6391
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/2eb5ea9d92887b04_final_report.md",
+      "Git_blob_SHA1": "a120ed363179a19a30e5894fe9b5a86a812a2cac",
+      "bytes": 13882
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/3612c8a5c02a34c1_status.md",
+      "Git_blob_SHA1": "75d8151f2641cd6235c6a8f27cd81415ec1fad79",
+      "bytes": 3856
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/3b2f9ea53c12d53d_final_report.md",
+      "Git_blob_SHA1": "aa6cb32772c7fb76811801f94548c044dd88f7bf",
+      "bytes": 20942
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/51adfe95af0620a1_final_report.md",
+      "Git_blob_SHA1": "84044c70b789e86e24e62502e246ba99969afc6b",
+      "bytes": 3810
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/566d5fe52eb47d83_final_report.md",
+      "Git_blob_SHA1": "e8e1aa44aff347a3bf40a5015eee06f48774c7c0",
+      "bytes": 15844
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/5fac8cff55f420ee_seed_pairs.csv",
+      "Git_blob_SHA1": "3ad2642130e33b156432c74ee4559aabe4ef9bd1",
+      "bytes": 1506
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/626b4f7319022e79_CanonicalCompactModel.hpp",
+      "Git_blob_SHA1": "0e66589734001a2c53b573e3debc6de2933966d0",
+      "bytes": 6506
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/643606e73a405fae_actual_algorithm_contract.md",
+      "Git_blob_SHA1": "3025806b9ad8f33c528889fcc2df63b9aea5c01f",
+      "bytes": 6718
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/66024988f4582079_main.cpp",
+      "Git_blob_SHA1": "d9ba8b42fe1a5bc6f1a5310170f7c18a4cfeb2df",
+      "bytes": 1117869
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/7fb2c51072f4b003_\u5df2\u7c98\u8d34\u7684\u6587\u672c.txt",
+      "Git_blob_SHA1": "50e4fa09b02576bdf023938ea9aab6ba36803167",
+      "bytes": 26920
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/8295be43852e4eb6_final_report.md",
+      "Git_blob_SHA1": "3105e65273344fe44a33ae743f41a7f3b94ba252",
+      "bytes": 11071
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/82d9ec0dfd9612de_audit.json",
+      "Git_blob_SHA1": "55369284c0ecd93efef3914c0c8c6ccfc896f049",
+      "bytes": 7904852
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/85d384db7ff8cdc5_round111_common.py",
+      "Git_blob_SHA1": "be755e69f61ee3eb17b16a686446a55dae7a2038",
+      "bytes": 3712
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/9dcc1f25a9158aa9_root_decision.md",
+      "Git_blob_SHA1": "694dd0abbd9ef2125e277f566dfe2fdf8dabab3c",
+      "bytes": 3280
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/a08b43ca7851f46c_contribution_evidence_map.md",
+      "Git_blob_SHA1": "34486bb5d6919813d61676a2d2b09ceb09261265",
+      "bytes": 5591
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/a124605525f7e231_GurobiBaseline.cpp",
+      "Git_blob_SHA1": "6989cbf87f1fcd53c4bdc35401470f13abf28524",
+      "bytes": 276965
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/a16473244b07e79a_performance_admission_provenance.md",
+      "Git_blob_SHA1": "365ffeee8578b497a92653f0c1984902286aecc7",
+      "bytes": 4205
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/ae3081b46cd2fd2a_public_recovery.md",
+      "Git_blob_SHA1": "523f972ec71ab1d5315e9e39cd6bcfb7d192a4f8",
+      "bytes": 2695
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/b45ef943572b3351_qualification_arms.csv",
+      "Git_blob_SHA1": "c3b8ec47830db947c5fe7d0d42208c0b22fd31d3",
+      "bytes": 2046
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/bb7da1bdd701ee4d_round111_campaign.py",
+      "Git_blob_SHA1": "fdfed3b6d68e415351043e97556c1f38bf662b52",
+      "bytes": 11975
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/c80b53a18547e664_c0_c5_pgrb_mechanism_comparison.md",
+      "Git_blob_SHA1": "9efaee06e88caaba480d0de29d515db2df506c01",
+      "bytes": 3845
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/ca27b127695d17d2_final_report.md",
+      "Git_blob_SHA1": "ea72fa840f2372ddb3f4ae1fc59ea441344e6f65",
+      "bytes": 16894
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/d0d676a16d511046_fixed_route_report.md",
+      "Git_blob_SHA1": "978e2d3e80f33a80bd6f35634b04d219777c0ba7",
+      "bytes": 2924
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/d8f2b66c8c237b10_root_decision.md",
+      "Git_blob_SHA1": "796640ebb379a4d566bf3d0f94ccc91e7db3d2d8",
+      "bytes": 3399
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/da6e41b36a8602bd_history_attribution.md",
+      "Git_blob_SHA1": "4a877d81a9453759105d3e0b50ba3df7dc9819c0",
+      "bytes": 5045
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/e09fb8a2cbe6b3e2_final_report.md",
+      "Git_blob_SHA1": "0172eac72160158c286a9de110bc67d26f62acd9",
+      "bytes": 17711
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/e38b76d650ff6995_final_report.md",
+      "Git_blob_SHA1": "0c5886fe25892ef04a72694d0bb44572f6b46e98",
+      "bytes": 17954
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/e5c105af2557facc_paper_candidate_spec.md",
+      "Git_blob_SHA1": "01ade7709a95c6e0a2d5b122424ab96d8423cb3a",
+      "bytes": 10083
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/ec8163febb8097f3_theory_and_mechanism_note.md",
+      "Git_blob_SHA1": "9c38759d39f7dfc617c5c59554ce952724931ebc",
+      "bytes": 2574
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/ed23953c5be3d77e_time_partitions.csv",
+      "Git_blob_SHA1": "59cb24ada9501952ed8e8b4a8af3ba1abb42ec27",
+      "bytes": 2151
+    },
+    {
+      "path": "results/unified_exact_round112/history/authorities/f8e7d7412613a390_MipStartMapping.cpp",
+      "Git_blob_SHA1": "b67841061fc720aa40f11f795df736f5cba05e44",
+      "bytes": 14903
+    },
+    {
+      "path": "results/unified_exact_round112/history/inherited_reference/F2/build.json",
+      "Git_blob_SHA1": "2e89badc6aa93bb46f70410af3167ac037c31324",
+      "bytes": 180
+    },
+    {
+      "path": "results/unified_exact_round112/history/inherited_reference/G100-R2/build.json",
+      "Git_blob_SHA1": "e5775dcddc2fb7d1eb39744d6fdb9af2f06f9630",
+      "bytes": 184
+    },
+    {
+      "path": "results/unified_exact_round112/history/inherited_reference/G50-C1/build.json",
+      "Git_blob_SHA1": "d9b330f5c40de7b0dfb41111212c2897ebe03c52",
+      "bytes": 183
+    },
+    {
+      "path": "results/unified_exact_round112/history/inherited_reference/R108-L48/build.json",
+      "Git_blob_SHA1": "a954fba4fd373f19287ec76c112dd26a015b6cec",
+      "bytes": 183
+    },
+    {
+      "path": "results/unified_exact_round112/history/inherited_reference/R98-C2/build.json",
+      "Git_blob_SHA1": "b377f8901c69c846c17afe42394e1b00aa759038",
+      "bytes": 183
+    },
+    {
+      "path": "results/unified_exact_round112/input_manifest.json",
+      "Git_blob_SHA1": "6b18d3500261157a4525add7b8611ac84aca6577",
+      "bytes": 4718
+    },
+    {
+      "path": "results/unified_exact_round112/mathematical_algorithm.md",
+      "Git_blob_SHA1": "3da24b57e4785a55dd2cfc183e897ca02ff08b42",
+      "bytes": 4514
+    },
+    {
+      "path": "results/unified_exact_round112/minimal_diff.md",
+      "Git_blob_SHA1": "5797ed784a304550c27ae18c9be2de1e982729af",
+      "bytes": 2050
+    },
+    {
+      "path": "results/unified_exact_round112/next_research_decision.md",
+      "Git_blob_SHA1": "2b1ec3bba3880339b56bec5f1e42d82d2613b849",
+      "bytes": 1625
+    },
+    {
+      "path": "results/unified_exact_round112/numerical_policy.md",
+      "Git_blob_SHA1": "e8fbc4ea8cf2a4c5edad4a32d826b781632233ad",
+      "bytes": 3899
+    },
+    {
+      "path": "results/unified_exact_round112/production_identity.json",
+      "Git_blob_SHA1": "11bd954f58b89dda4d9adaf01ea73a447189c10d",
+      "bytes": 23427
+    },
+    {
+      "path": "results/unified_exact_round112/protocol.json",
+      "Git_blob_SHA1": "d785c5c8ae4c83cfb9a92b8b5cf18956e482a840",
+      "bytes": 5067
+    },
+    {
+      "path": "results/unified_exact_round112/public_dependency_closure.json",
+      "Git_blob_SHA1": "bbaf0839fc1170b2030f25c18963a5494d21a0f0",
+      "bytes": 2319
+    },
+    {
+      "path": "results/unified_exact_round112/public_export_receipt.json",
+      "Git_blob_SHA1": "b9e68f0d5469262e97590a3fc14883b9d9f8b74c",
+      "bytes": 1394
+    },
+    {
+      "path": "results/unified_exact_round112/public_pack_receipt.json",
+      "Git_blob_SHA1": "4f5d91ce8e63d156208e4d29c6a4bdeb3b01f241",
+      "bytes": 396
+    },
+    {
+      "path": "results/unified_exact_round112/public_restore_instructions.md",
+      "Git_blob_SHA1": "298a9c53c1627ff4bb6008f9aa9ce30045ac6d17",
+      "bytes": 2754
+    },
+    {
+      "path": "results/unified_exact_round112/qualification.md",
+      "Git_blob_SHA1": "ec67566895872b7672861cfd30e38cea511e564d",
+      "bytes": 3100
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/H100_partial_same_H.json",
+      "Git_blob_SHA1": "c171d550b95d670aef37692f13afb80786de2267",
+      "bytes": 231803
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/H100_same_H.json",
+      "Git_blob_SHA1": "81a1ac1fa2e7f97f1532f7143cc4171ddbc0b465",
+      "bytes": 347866
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_failure.json",
+      "Git_blob_SHA1": "3849403193c986ea8b9dbdcd09d166ad51bb214b",
+      "bytes": 332
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/CMakeLists.txt",
+      "Git_blob_SHA1": "72588f2a7df1d5732c40dbafe0b5e4a17f71f840",
+      "bytes": 29984
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/candidate_identity.json",
+      "Git_blob_SHA1": "c67b756b30403a8ac9c5e5f156277078c006e673",
+      "bytes": 66990
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Bounds.hpp",
+      "Git_blob_SHA1": "0c6e3e1248cd5c033e168341b77a5e04cae1be7b",
+      "bytes": 9851
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Branching.hpp",
+      "Git_blob_SHA1": "b715244f21e3f4c798fe3c77d2d891c305ef8d5c",
+      "bytes": 518
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/CanonicalCompactModel.hpp",
+      "Git_blob_SHA1": "0e66589734001a2c53b573e3debc6de2933966d0",
+      "bytes": 6506
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Column.hpp",
+      "Git_blob_SHA1": "2d6e63996fbeba0179537d679200346b7f93c1b9",
+      "bytes": 858
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ColumnGeneration.hpp",
+      "Git_blob_SHA1": "9f2ba7f76eb70ddf6332ae58610d34c2f3c9c0a6",
+      "bytes": 43310
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ColumnPool.hpp",
+      "Git_blob_SHA1": "5c4472f3efd7269d904246677258aa35ba8a9234",
+      "bytes": 1719
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ConnectivityFlow.hpp",
+      "Git_blob_SHA1": "cbd9b54b7e3a21a38220e56f210347ba4a437fd8",
+      "bytes": 3774
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ControllingLeafScheduler.hpp",
+      "Git_blob_SHA1": "fe530edd8ba5b580385cc176fdae19fdd09d1ab1",
+      "bytes": 9009
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/CplexBaseline.hpp",
+      "Git_blob_SHA1": "f0ba10b56ecc423a4f45ddc41f0afc50951f47e4",
+      "bytes": 578
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Cuts.hpp",
+      "Git_blob_SHA1": "49daf8d1b5b51ba96da27a852068e3b15c1ff61e",
+      "bytes": 937
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/DenseProgress.hpp",
+      "Git_blob_SHA1": "7c50d8a54f6fa12aee6c25666ea3be94ff64050e",
+      "bytes": 6935
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/DeterministicDinic.hpp",
+      "Git_blob_SHA1": "b98d0cc912ba732004c7947cfb280aafa118ab3f",
+      "bytes": 4382
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Evaluator.hpp",
+      "Git_blob_SHA1": "caee4210b7e55fd4f1567e836cc0e52aca5f026c",
+      "bytes": 303
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ExternalGiniTree.hpp",
+      "Git_blob_SHA1": "169e8d67e1a0b0c5181c632f90e06a649a6d1f2e",
+      "bytes": 2913
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/FileSha256.hpp",
+      "Git_blob_SHA1": "bd703b45b3f8cd209e9cb73863418c9a95f6c526",
+      "bytes": 200
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/FixedIntervalMipBackend.hpp",
+      "Git_blob_SHA1": "3d1ff11720aa104f0d936f5b212d1a7a4d1e3949",
+      "bytes": 24011
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/FleetEventCuts.hpp",
+      "Git_blob_SHA1": "d264afebe60e01cfc361bd770c674fcdd87f0230",
+      "bytes": 2149
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/GiniAdaptiveParametric.hpp",
+      "Git_blob_SHA1": "e7d8ea1a00d8ea14261e0f2f68135668504c548b",
+      "bytes": 4246
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/GiniBranching.hpp",
+      "Git_blob_SHA1": "b10e86dbad14997501feace18fdeed0cae62926d",
+      "bytes": 429
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/GiniEnvelopeRefinement.hpp",
+      "Git_blob_SHA1": "4116e604addc058d1bf3deb6236716eae4f66361",
+      "bytes": 4085
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/GiniEnvelopeTailRepair.hpp",
+      "Git_blob_SHA1": "45e8fc5eda9fa1c3e66f3913514fbd790b5a9b66",
+      "bytes": 5232
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/GiniFrontierGeometry.hpp",
+      "Git_blob_SHA1": "d154e9c90e2d232f214c789507f798529e708c56",
+      "bytes": 8785
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/GurobiBaseline.hpp",
+      "Git_blob_SHA1": "67fcace8b0f0368b5b5765d9bc82cfcdbf19822c",
+      "bytes": 795
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/GurobiCertificate.hpp",
+      "Git_blob_SHA1": "4b5425f070f938bb97855492ae529015c98c4937",
+      "bytes": 2378
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/GurobiProgress.hpp",
+      "Git_blob_SHA1": "6dd84ea7b5a7d3a016aeaee6ad834e011b2c9705",
+      "bytes": 1054
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/HgaTgbcRunner.hpp",
+      "Git_blob_SHA1": "c7037324df3843bc114c52d62e7383037eaba3b9",
+      "bytes": 3561
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Instance.hpp",
+      "Git_blob_SHA1": "c796f17877978ed3a1cff59131bd6521f6f369ca",
+      "bytes": 38951
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/IntervalRowFactory.hpp",
+      "Git_blob_SHA1": "ab850b8fb9d6cc825323a19c6d623a37b032f39e",
+      "bytes": 5025
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/InventoryRouteCuts.hpp",
+      "Git_blob_SHA1": "ca5d24d7b03c136135f543dbca45bcbc6e97761d",
+      "bytes": 2476
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/InventoryRouteRootClosure.hpp",
+      "Git_blob_SHA1": "535b15d2a0831611b68bd53af2ac05511ed04ad6",
+      "bytes": 2416
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Logger.hpp",
+      "Git_blob_SHA1": "70d50ddbaacc377a769b5fd94bb0da5803f8a06c",
+      "bytes": 327
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Master.hpp",
+      "Git_blob_SHA1": "4e54f825543aa49e8b6db02578270f2e0805ad7b",
+      "bytes": 741
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/MipStartMapping.hpp",
+      "Git_blob_SHA1": "0ae48201d9ee2b94f385d64a64de739ed4ad7de7",
+      "bytes": 1390
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ModelCorrectness.hpp",
+      "Git_blob_SHA1": "d81ca1e14bd9f45c94e5e1a26964da304da3d55c",
+      "bytes": 2009
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/NativeEvidenceJournal.hpp",
+      "Git_blob_SHA1": "9e922de5daef7514debc91d6cd80a75ecbc2b8c9",
+      "bytes": 2772
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/NativeOtB1.hpp",
+      "Git_blob_SHA1": "893f658d301c1ea146949edb80abb8a7fe287339",
+      "bytes": 2219
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ObjectiveResourceCompression.hpp",
+      "Git_blob_SHA1": "422e9208027f58b50764627a3983f4f343f70933",
+      "bytes": 945
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/PaperExternalGiniTree.hpp",
+      "Git_blob_SHA1": "41018f7c7a020ccfecd282dce0120ed16dd0c4ff",
+      "bytes": 4799
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/PaperK1AmSf.hpp",
+      "Git_blob_SHA1": "158d2e82bcaca2b9e7407a65de02c6266beb3de8",
+      "bytes": 944
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Parser.hpp",
+      "Git_blob_SHA1": "2f44040bbe41c1adc66f55de8c4d9143f25d5748",
+      "bytes": 417
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/PenaltyCoverSeparation.hpp",
+      "Git_blob_SHA1": "6fef8e4ed39b8f33f6458597b1229303e52f8784",
+      "bytes": 2045
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/PhysicalDurationTolerance.hpp",
+      "Git_blob_SHA1": "271ceb17f00cb3c67979e144c72de88ca5c35b0f",
+      "bytes": 264
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/PhysicalWitnessValidation.hpp",
+      "Git_blob_SHA1": "9279b7c6f5fd1690da293ce80cb0fdff2dc220de",
+      "bytes": 614
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Pricing.hpp",
+      "Git_blob_SHA1": "56e8717f45f9d69512292131c7963fe1709ed2d6",
+      "bytes": 9666
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ProcessPhaseLedger.hpp",
+      "Git_blob_SHA1": "61c7cbcc2470804551087f286d30ec556961443c",
+      "bytes": 927
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ReplicaExternalGiniTree.hpp",
+      "Git_blob_SHA1": "3e97e2be006fe329454cd29d74be3a862b55085c",
+      "bytes": 730
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Result.hpp",
+      "Git_blob_SHA1": "4991afdf2d0045ac0da08e8d03a74c566fd142ae",
+      "bytes": 102235
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round105Decomposition.hpp",
+      "Git_blob_SHA1": "2aaec8d32446eeca5a4756356dbb707f842e53b3",
+      "bytes": 1763
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round106Events.hpp",
+      "Git_blob_SHA1": "e4d7287a86a11730750ac76d1ca63e2fe2fbdd22",
+      "bytes": 1439
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round106Research.hpp",
+      "Git_blob_SHA1": "c101ed8b86395809b1fd1c653dd76db0fd189d1f",
+      "bytes": 704
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round107LpMetadata.hpp",
+      "Git_blob_SHA1": "5b33a9c5b7b1762e5eecd38b8a18c82ec5caa92b",
+      "bytes": 4581
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round107Research.hpp",
+      "Git_blob_SHA1": "0bf1757d4f265cb13c3a5e81c9b4604397840676",
+      "bytes": 296
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round107Scope.hpp",
+      "Git_blob_SHA1": "59d1d0ab46ebdca33c28752e99e47f31ce395a2f",
+      "bytes": 2345
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round48K1AMF.hpp",
+      "Git_blob_SHA1": "82244eb41564129f7245d4a1bbccf06bdd71ff14",
+      "bytes": 2937
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round49K1RC.hpp",
+      "Git_blob_SHA1": "61d2c5425a3c7a74d84519294b09fa2d63b37ffe",
+      "bytes": 3152
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round50IntervalMip.hpp",
+      "Git_blob_SHA1": "29f24466f357087f0b9fb4febb125d7af58537bd",
+      "bytes": 3056
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round51IntervalMip.hpp",
+      "Git_blob_SHA1": "f579bab65bfdf36ee402a4c7aac3e7ae6fa1a23f",
+      "bytes": 3468
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round52GurobiCutAdapter.hpp",
+      "Git_blob_SHA1": "f8004fa1798f5fc6eed2196c4b1afa376a447f4d",
+      "bytes": 1270
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round52TailoredCuts.hpp",
+      "Git_blob_SHA1": "6dbcc8f0567aff3d0dd83d6a5514f7215a6cf193",
+      "bytes": 5005
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round53CallbackIsolation.hpp",
+      "Git_blob_SHA1": "c259b2714741a818e3eff84a4b79ec567afd7187",
+      "bytes": 477
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round58Benchmark.hpp",
+      "Git_blob_SHA1": "ba580873aab335df2eb64c460b728eef7ff39e3c",
+      "bytes": 1517
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round59Research.hpp",
+      "Git_blob_SHA1": "1338f767cc0567ae82892ba1ba62aec8365f66d3",
+      "bytes": 2299
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round60Candidates.hpp",
+      "Git_blob_SHA1": "1840841c19ff5b206474876e6ca4d155baa295c6",
+      "bytes": 3411
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round61Candidates.hpp",
+      "Git_blob_SHA1": "063499f023df16932f30f5179f91616b8284ff58",
+      "bytes": 2747
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round61TimeOracle.hpp",
+      "Git_blob_SHA1": "7dad221e1286a8bb26d417463570e5558637ebd3",
+      "bytes": 1515
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round62Passive.hpp",
+      "Git_blob_SHA1": "4d8c69fab9aba5f3d09f0eb6ca2bc17330717a00",
+      "bytes": 944
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round62Thresholds.hpp",
+      "Git_blob_SHA1": "010ee5e75021cc2857f928bee07a674dbe63889a",
+      "bytes": 2025
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round63TimeResource.hpp",
+      "Git_blob_SHA1": "a61793ce2f9f89ccf3d26aacb5bf130c4b01ead6",
+      "bytes": 1731
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round64SharedResource.hpp",
+      "Git_blob_SHA1": "188ce1f97158a9ab00b6857f2769f47994229c55",
+      "bytes": 721
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round65Projection.hpp",
+      "Git_blob_SHA1": "d3bd1cc16a7cdf9ab8d315f577ef7a036111903b",
+      "bytes": 1882
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round65Proof.hpp",
+      "Git_blob_SHA1": "67197ccf70254a24bf858ba03671a96c856d33d2",
+      "bytes": 1956
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round73JointInsertion.hpp",
+      "Git_blob_SHA1": "5f975e5ce86af5188ea155f5a6a6fba5ec31b4a1",
+      "bytes": 1651
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round75QuantityDescent.hpp",
+      "Git_blob_SHA1": "e0997f9c71ad748c601efcbb863c57f47418fa4a",
+      "bytes": 1739
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round76PhysicalClosure.hpp",
+      "Git_blob_SHA1": "ef064c8823b7d4cdae29cf5b1b3b8b3fdf27c98f",
+      "bytes": 1196
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round78BalancedRelocation.hpp",
+      "Git_blob_SHA1": "3fb9d33e0b27d0aff977579644f1c16cf7fdc1d3",
+      "bytes": 1563
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round83BlockExchange.hpp",
+      "Git_blob_SHA1": "5e6c59cb4bb466d9887101620e6a91c948b3d800",
+      "bytes": 1150
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round92HandlingActivation.hpp",
+      "Git_blob_SHA1": "75f1793e275a086f766a8419e2dc4b76d962d1ef",
+      "bytes": 4172
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round93CoQuantityDescent.hpp",
+      "Git_blob_SHA1": "2e4f00a70a874b89afb75ce1788ab396016f4b25",
+      "bytes": 2923
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round95FullBlockDescent.hpp",
+      "Git_blob_SHA1": "e6c817a3c16e57d702dbde30f993c83dad700112",
+      "bytes": 3465
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round96MultiQuantity.hpp",
+      "Git_blob_SHA1": "232e019c050c506e4debde0f116d737ef0b987df",
+      "bytes": 762
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round96RouteOrder.hpp",
+      "Git_blob_SHA1": "3fea6f93eaaea9f05b5539b45127d10b6ad36d25",
+      "bytes": 1034
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round97NativeClosure.hpp",
+      "Git_blob_SHA1": "947ac0dbc0210bcc221ff1b2bee9e793b365fd54",
+      "bytes": 2540
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/Round98StateService.hpp",
+      "Git_blob_SHA1": "5584fcb61593d9bc8dfdb6291918be872744da8a",
+      "bytes": 2098
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ServiceResourceCuts.hpp",
+      "Git_blob_SHA1": "68876d4ec711ab95c857351a47b87ef0de2e371f",
+      "bytes": 1938
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/ServiceResourceHull.hpp",
+      "Git_blob_SHA1": "6c132a3b86865e7b695498291b9b089d04ce6032",
+      "bytes": 1285
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/StaticSegmentedGini.hpp",
+      "Git_blob_SHA1": "62b3070d3487cc4e5bffa5e7ae23d49baf0969fd",
+      "bytes": 4094
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/StationSet.hpp",
+      "Git_blob_SHA1": "13260be47d83537d09378b2839dd31f9ada57099",
+      "bytes": 4265
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/StrictCertificate.hpp",
+      "Git_blob_SHA1": "a50bbab41a7919f73f75ab9b8c0bc49bad1924c3",
+      "bytes": 3906
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/TailoredBC.hpp",
+      "Git_blob_SHA1": "9456532ff3db7d57e1907a333b60437360d4fb49",
+      "bytes": 623
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/TailoredBCCallbacks.hpp",
+      "Git_blob_SHA1": "2f554fb9247707b6a08016662ddd67af66fb2b4e",
+      "bytes": 131
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/TailoredBCCplexApi.hpp",
+      "Git_blob_SHA1": "a64263a802205f76763fd0c2e92e1793eced2f54",
+      "bytes": 19917
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/TailoredBCCuts.hpp",
+      "Git_blob_SHA1": "b03f737ad8a2b57f770b363d7544340e1b3b2474",
+      "bytes": 615
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/include/TailoredExact.hpp",
+      "Git_blob_SHA1": "97e5b1704ba88c4e17aa0072e9a8202db22c2600",
+      "bytes": 187
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/production_identity.json",
+      "Git_blob_SHA1": "59844636aba616640594e9f03ea65d379eb3cc2c",
+      "bytes": 23681
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/analyze_round61.py",
+      "Git_blob_SHA1": "0207dfa996153175e4681564a55a9bc2602e95c0",
+      "bytes": 21878
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/generate_citibike443_regional_v1.py",
+      "Git_blob_SHA1": "c3e5010337e0591767458c8864866d94f26cbbc8",
+      "bytes": 127494
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round100_campaign.py",
+      "Git_blob_SHA1": "d0c7e2337c3c611e723f4e03e99c1b0959c20a1d",
+      "bytes": 11142
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round100_common.py",
+      "Git_blob_SHA1": "23648562e7a19ec53515a5fa2d3b21c346fa0719",
+      "bytes": 2347
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round100_idle.py",
+      "Git_blob_SHA1": "cc585b27b0039780477cc16087e65e511252abf1",
+      "bytes": 1069
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round101_common.py",
+      "Git_blob_SHA1": "df1d650f3b26a99e3debc99ef711d466f56297c1",
+      "bytes": 2270
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round103_common.py",
+      "Git_blob_SHA1": "4daca1ce56def19a95457b5d7654b506919bdc07",
+      "bytes": 2099
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round107_reader.py",
+      "Git_blob_SHA1": "e8ec365962cb3183f26a1bf62b8c0d2877f82a0f",
+      "bytes": 48416
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round108_decisions.py",
+      "Git_blob_SHA1": "2adfef419f8c803c70b6de8f9fc9bd75b342f136",
+      "bytes": 7997
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round108_reader.py",
+      "Git_blob_SHA1": "ac6a432ee31351dd6df4a368dbecb9df6ae71dd6",
+      "bytes": 48357
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round108_scopes.py",
+      "Git_blob_SHA1": "abe3aac608bb6ec24ac2ad41d47d201daa945d6c",
+      "bytes": 4248
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round109_campaign.py",
+      "Git_blob_SHA1": "21a685d71ad2d7e8a985b70d7d973ea48f99315d",
+      "bytes": 17169
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round109_common.py",
+      "Git_blob_SHA1": "a683792c1568683732a5c6dcb2908adeeb50aabd",
+      "bytes": 3257
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round109_data.py",
+      "Git_blob_SHA1": "59216e2de26a8ca96ba73983d6ab35c364644de5",
+      "bytes": 6442
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round109_prepare.py",
+      "Git_blob_SHA1": "9fb6a0351d172f0621d104ca31b44370e13aa417",
+      "bytes": 10013
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round109_reference_batch.cpp",
+      "Git_blob_SHA1": "98716b5db4bdf4228475c194f6226b7d8c4eb6f9",
+      "bytes": 1575
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round109_seed_audit.py",
+      "Git_blob_SHA1": "94122beb65daed604b80372ebf338c701ba471b4",
+      "bytes": 3632
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round109_seed_recovery.py",
+      "Git_blob_SHA1": "bc961cc40683206fa9cd7ff759fcd9aaa5465825",
+      "bytes": 9393
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round109_seed_scope.py",
+      "Git_blob_SHA1": "2b27fd0912cbed08bf7378e5b1bb5d122702b60f",
+      "bytes": 8695
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round110_common.py",
+      "Git_blob_SHA1": "252044450a38554e33cbca46755187c7d9eba605",
+      "bytes": 3967
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round111_common.py",
+      "Git_blob_SHA1": "f9c352c790498243c82e4a0644bcc84a9e3d1781",
+      "bytes": 3776
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round111_seed_audit.py",
+      "Git_blob_SHA1": "51352f599c34b0f3a765f6110d623f61c5fe81ab",
+      "bytes": 6838
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round112_audit.py",
+      "Git_blob_SHA1": "7be1d148d4f2f9fb18ef82e6744a4511679f047a",
+      "bytes": 6424
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round112_campaign.py",
+      "Git_blob_SHA1": "5c9009b24176f4083dcc7b0a6507fea555e2fbf6",
+      "bytes": 11408
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round112_common.py",
+      "Git_blob_SHA1": "63429258a697171d4f6418d40ccbc31a106ad32c",
+      "bytes": 2687
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round112_initialize.py",
+      "Git_blob_SHA1": "ef1736d92f10e2de1da6d548d343e0b602c92724",
+      "bytes": 5698
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round112_reference_batch.cpp",
+      "Git_blob_SHA1": "cc5d7368d837e455a0e3de5a9807b44b8e7000b8",
+      "bytes": 1175
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round70_affinity.py",
+      "Git_blob_SHA1": "46f97d80b6dc07f28b9fbc157a842df96e175ac6",
+      "bytes": 4509
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round75_startup.py",
+      "Git_blob_SHA1": "4bd46cf3c1648c6cab1b4bc6a4ca03ab85953e60",
+      "bytes": 12402
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round83_audit_v2.py",
+      "Git_blob_SHA1": "f269e92a7cf6216b74493ea347d097dc24cc3cf7",
+      "bytes": 7547
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round86_native_evidence.py",
+      "Git_blob_SHA1": "d4cc9ff5c8cd7decf0d677b704b7bcf5cd779914",
+      "bytes": 11468
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round88_a1_g3.py",
+      "Git_blob_SHA1": "68c7aa4f2945814923737b835c48c22224312afd",
+      "bytes": 35352
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round90_lp_g_g3.py",
+      "Git_blob_SHA1": "7b7d338a59dfbe2cf97ef290f2ea6117bb0a8d07",
+      "bytes": 51527
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round94_lpg_contemporary.py",
+      "Git_blob_SHA1": "ca24744d3d55ae6b562497ace55ff28fba16a2e6",
+      "bytes": 55473
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round94_lpg_formal_recovery_v3.py",
+      "Git_blob_SHA1": "513eb33eb2d9042a2158929a60085ccfcb2827a6",
+      "bytes": 25366
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round96_external.py",
+      "Git_blob_SHA1": "8d2ec1302571ad66564c14082e5dff8d732a3bfb",
+      "bytes": 7554
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round96_prepare.py",
+      "Git_blob_SHA1": "3539695a0e35be17878f2329f9e5670d30589b26",
+      "bytes": 8730
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/scripts/round99_pure_start_audit.py",
+      "Git_blob_SHA1": "51876bffa674ec8e6722496ab5f82a184f53b9d1",
+      "bytes": 8007
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Bounds.cpp",
+      "Git_blob_SHA1": "9ca5f67b10ed6e3d6f517d2edc5de13af8326ae9",
+      "bytes": 136634
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Branching.cpp",
+      "Git_blob_SHA1": "d84c00ce9e7f9732c3aaa2025748a01a6ef44480",
+      "bytes": 1772
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ColumnGeneration.cpp",
+      "Git_blob_SHA1": "bb99223b4e0742b07955c6f0d91569732635c53b",
+      "bytes": 215247
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ColumnPool.cpp",
+      "Git_blob_SHA1": "31f3a10150f810232da991ad08039a993b488e13",
+      "bytes": 11156
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ConnectivityFlow.cpp",
+      "Git_blob_SHA1": "8f9c83d81d82c44eac5accb548e04733e08f588a",
+      "bytes": 10991
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ControllingLeafScheduler.cpp",
+      "Git_blob_SHA1": "b58c3b17fd293850c9373a8672194c4db5b2c365",
+      "bytes": 46072
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/CplexBaseline.cpp",
+      "Git_blob_SHA1": "b2c070e4b2c1c5f8c9dadf7248db45a81484642c",
+      "bytes": 390985
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Cuts.cpp",
+      "Git_blob_SHA1": "7b7bf86dd8e6d158f2f1370e646f97233e7cb702",
+      "bytes": 4584
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/DenseProgress.cpp",
+      "Git_blob_SHA1": "be162d776564f74b9c4eca50c94654914c999be6",
+      "bytes": 20110
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/DispersionChildBound.cpp",
+      "Git_blob_SHA1": "e2da9288255060fbc8ba72ed2b2cc017a674334b",
+      "bytes": 6869
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Evaluator.cpp",
+      "Git_blob_SHA1": "e9d9e5f08bf8877ffb6e826824f5cba2733c66c1",
+      "bytes": 6239
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ExternalGiniTree.cpp",
+      "Git_blob_SHA1": "932833d9fdb1ff59fde93f472730d547d3a8d2eb",
+      "bytes": 71577
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/FileSha256.cpp",
+      "Git_blob_SHA1": "f7e6ffef9a34f033965173721e9419ce3da9c826",
+      "bytes": 3709
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/FleetEventCuts.cpp",
+      "Git_blob_SHA1": "1824ee9616cd2d8a7f145a712ff75be735deea6e",
+      "bytes": 27072
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/GiniAdaptiveParametric.cpp",
+      "Git_blob_SHA1": "877736fe146daefeff05fda4afbdc5fcf2f1eb56",
+      "bytes": 20421
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/GiniBranching.cpp",
+      "Git_blob_SHA1": "383339596e10e196ba52b25d839d9549ccf7f448",
+      "bytes": 1616
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/GiniEnvelopeRefinement.cpp",
+      "Git_blob_SHA1": "0088716bc898c8cc7514a27a51d62b2d5865873c",
+      "bytes": 25904
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/GiniEnvelopeTailRepair.cpp",
+      "Git_blob_SHA1": "59c558fc6841de0029bfcc8a386c96508096fe51",
+      "bytes": 19448
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/GiniFrontierGeometry.cpp",
+      "Git_blob_SHA1": "fe093d406ecd43a21cca768bcd3a93ee6bd40814",
+      "bytes": 24213
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/GurobiBaseline.cpp",
+      "Git_blob_SHA1": "8e1ce1f5657b971e7e77a5a92d2463859be252ca",
+      "bytes": 281475
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/GurobiBaselineStub.cpp",
+      "Git_blob_SHA1": "f89dda23711d61f57fc6e26c49494087e351ef1b",
+      "bytes": 3452
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/GurobiCertificate.cpp",
+      "Git_blob_SHA1": "bd3a099b0634d5ac2cf2f185b9cf500d64c11f3c",
+      "bytes": 5706
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/GurobiProgress.cpp",
+      "Git_blob_SHA1": "e8b6e3971725059cc93668e0c3a543e21b7a674a",
+      "bytes": 1999
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/HgaTgbcRunner.cpp",
+      "Git_blob_SHA1": "b6a1efd7e4a273f17ea5b309714985f918180956",
+      "bytes": 27569
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/IntervalRowFactory.cpp",
+      "Git_blob_SHA1": "0b06476750b44ef228af90744069d69fdb2d0196",
+      "bytes": 40028
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/InventoryRouteCuts.cpp",
+      "Git_blob_SHA1": "76c29a32d64d17717ed5c9fcf5a77f95468f2c95",
+      "bytes": 14074
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/InventoryRouteRootClosure.cpp",
+      "Git_blob_SHA1": "f7f6f94a05c016fc869940ab254f9bfd1eae7d6b",
+      "bytes": 13514
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Logger.cpp",
+      "Git_blob_SHA1": "cf3f546ba9c53221fa727e957473e53df7695386",
+      "bytes": 566
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Master.cpp",
+      "Git_blob_SHA1": "e1e594131b7525c37bd47dcd673721778fad0e77",
+      "bytes": 5470
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/MipStartMapping.cpp",
+      "Git_blob_SHA1": "714be5138ef0dd378f5f6098eb9c450a8340f130",
+      "bytes": 15074
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ModelCorrectness.cpp",
+      "Git_blob_SHA1": "a197e5ab03d6299f22eb5049473318e260bbcec6",
+      "bytes": 5342
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/NativeEvidenceJournal.cpp",
+      "Git_blob_SHA1": "32828462aa624c9b55eef178405e11bc6fe80ef5",
+      "bytes": 13423
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/NativeOtB1.cpp",
+      "Git_blob_SHA1": "5d6679ca872d169cccc7891dd84e603a35992cb9",
+      "bytes": 23390
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ObjectiveResourceCompression.cpp",
+      "Git_blob_SHA1": "15655ce84489d61a71304300952d0b1b71da2e44",
+      "bytes": 5115
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/PaperExternalGiniTree.cpp",
+      "Git_blob_SHA1": "37117c754efa19179d8ab22812e44f0d4c0ce105",
+      "bytes": 512575
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/PaperK1AmSf.cpp",
+      "Git_blob_SHA1": "715916e8434b9f67943e531589d987afb0b6d1ed",
+      "bytes": 8632
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Parser.cpp",
+      "Git_blob_SHA1": "292a787f42856732c0db550f0f306d1a0babaf58",
+      "bytes": 8480
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/PenaltyCoverSeparation.cpp",
+      "Git_blob_SHA1": "77b8c63c8c9ff73ea1df68c27534d3546153d97f",
+      "bytes": 11451
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/PhysicalWitnessValidation.cpp",
+      "Git_blob_SHA1": "ea18cfa7c0c18e57840a33fe41768b2d61733821",
+      "bytes": 4881
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Pricing.cpp",
+      "Git_blob_SHA1": "1d9516227ff8c56c52ee7e8582d90ff10be0c0f3",
+      "bytes": 104029
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ProcessPhaseLedger.cpp",
+      "Git_blob_SHA1": "d0da60995c9730db00dff2d7294ebf18c224aab3",
+      "bytes": 3200
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ReplicaExternalGiniTree.cpp",
+      "Git_blob_SHA1": "55481648d8f18217daf01900e841fc8bf0f9e485",
+      "bytes": 56998
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Result.cpp",
+      "Git_blob_SHA1": "406e735c07b63259a49a5716e73f555ff6777ba6",
+      "bytes": 250280
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round103GurobiHull.inc",
+      "Git_blob_SHA1": "6fd26c7eac3a467f4e65ed1bd0a150531ee09e24",
+      "bytes": 20303
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round104GurobiObjective.inc",
+      "Git_blob_SHA1": "247b6377ba54ebebdfb73d691fb5b07c9fa794ea",
+      "bytes": 27457
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round105Decomposition.cpp",
+      "Git_blob_SHA1": "bcf471c412a83f250fb3f7fa324aca757332284d",
+      "bytes": 6918
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round105GurobiDecomposition.inc",
+      "Git_blob_SHA1": "8bf31ed462f76ee98d27671a42b8aabcf64617b1",
+      "bytes": 32656
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round106Events.cpp",
+      "Git_blob_SHA1": "b53e0625039c8cc7cedcfa2fac3ae9654c4e7812",
+      "bytes": 9894
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round106GurobiEvents.inc",
+      "Git_blob_SHA1": "301d7625cfe2405c201f5f19938805646b6d10a3",
+      "bytes": 34131
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round106GurobiResearch.inc",
+      "Git_blob_SHA1": "aa55a23c29ad544d747550141e613f348bb6cc58",
+      "bytes": 14031
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round107GurobiFrontier.inc",
+      "Git_blob_SHA1": "7eb2d98cae4534034a3cd0369f220f4284cad6fc",
+      "bytes": 63118
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round112CompactStart.inc",
+      "Git_blob_SHA1": "a6198c41939dfd076d977c1d68edf5edd96053be",
+      "bytes": 7117
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round48K1AMF.cpp",
+      "Git_blob_SHA1": "c5c5518f2dceab38d3aeca6747b952189564322b",
+      "bytes": 13732
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round49K1RC.cpp",
+      "Git_blob_SHA1": "d37346878b82650c844c120107f9f26d409c62d6",
+      "bytes": 18118
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round50IntervalMip.cpp",
+      "Git_blob_SHA1": "d0bcb6213d6a223f93eab7100d4b0d77c665a11b",
+      "bytes": 17237
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round51IntervalMip.cpp",
+      "Git_blob_SHA1": "d0f33d106d852ca19bde968f6d9acad9fd44aef2",
+      "bytes": 9669
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round52GurobiCutAdapter.cpp",
+      "Git_blob_SHA1": "32bc6914bc9262f856a63e503786e78fa0170348",
+      "bytes": 2841
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round52TailoredCuts.cpp",
+      "Git_blob_SHA1": "024c0a2eddce8bed4303fa3f738d4183cb4fc160",
+      "bytes": 16967
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round53CallbackIsolation.cpp",
+      "Git_blob_SHA1": "68fd9c09e64c3d1b58bcc0b7c3651b4bd7c0c4c1",
+      "bytes": 1533
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round58Benchmark.cpp",
+      "Git_blob_SHA1": "c021ab6efc0455f5fc9734e9e41e3a1e4e283a79",
+      "bytes": 6023
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round60Candidates.cpp",
+      "Git_blob_SHA1": "45b25c2be0953a37cf6e7d108d47c6a5195b5634",
+      "bytes": 16609
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round61Candidates.cpp",
+      "Git_blob_SHA1": "2251f17a69dd91d6beec94b97fd4e313df614211",
+      "bytes": 19999
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round61TimeOracle.cpp",
+      "Git_blob_SHA1": "0b8f1c946e6500385bed94eb23c682c8ff302a2f",
+      "bytes": 18640
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round62Passive.cpp",
+      "Git_blob_SHA1": "ce5d8972688ce3b0582e40ba19b959b33ec13e7d",
+      "bytes": 3531
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round62Thresholds.cpp",
+      "Git_blob_SHA1": "90910624a75b9e01939d9f31d11b384756ee4db1",
+      "bytes": 19778
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round63TimeResource.cpp",
+      "Git_blob_SHA1": "aef0753746adb9c9aa69caf5d139b8fc0b5af0e6",
+      "bytes": 11533
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round64SharedResource.cpp",
+      "Git_blob_SHA1": "b4a723b9116d8dd9be21cf5b97b4e8e1b320f966",
+      "bytes": 5508
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round65Projection.cpp",
+      "Git_blob_SHA1": "d81e9e6eb103b1cbca4074808d6fbc346a6fcf17",
+      "bytes": 14130
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round73JointInsertion.cpp",
+      "Git_blob_SHA1": "7c25edd41d48bebb10a395c51daf09e2e53f554f",
+      "bytes": 14626
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round75QuantityDescent.cpp",
+      "Git_blob_SHA1": "9c4c8a0ba670ef83a4eb6d1ff251565816df1b4a",
+      "bytes": 16645
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round76PhysicalClosure.cpp",
+      "Git_blob_SHA1": "16cca19d3cfbcf7fddee4f098cb6e0134ef6958b",
+      "bytes": 4689
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round78BalancedRelocation.cpp",
+      "Git_blob_SHA1": "649e455694fecbc1b2223e8e375733c0d147d5aa",
+      "bytes": 15936
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round83BlockExchange.cpp",
+      "Git_blob_SHA1": "7f201c4e5070656f89fab6c6ca24de63cfc0fd4f",
+      "bytes": 12512
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round92HandlingActivation.cpp",
+      "Git_blob_SHA1": "2b00f4c6390d642ec30d31d47d30ec3b399fdfb6",
+      "bytes": 20049
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round93CoQuantityDescent.cpp",
+      "Git_blob_SHA1": "bd5f036cae8adda61b68533b4543eecef460e4e7",
+      "bytes": 14863
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round95FullBlockDescent.cpp",
+      "Git_blob_SHA1": "01d77f2f56675dfa088eedd9260c0e8ea5654892",
+      "bytes": 15061
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round96MultiQuantity.cpp",
+      "Git_blob_SHA1": "0c3faad8a8cd3ed0622d796e92021fed4dc7482e",
+      "bytes": 5830
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round96RouteOrder.cpp",
+      "Git_blob_SHA1": "3380a53976695927c9755f9abcb8ca8412b5f590",
+      "bytes": 7334
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/Round97NativeClosure.cpp",
+      "Git_blob_SHA1": "2e6239dff06e017ec97d133ee6af03a9bcd5e46c",
+      "bytes": 21491
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ServiceResourceCuts.cpp",
+      "Git_blob_SHA1": "489c641444f165d334195fdf0e5f3aa5b38685b8",
+      "bytes": 16211
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/ServiceResourceHull.cpp",
+      "Git_blob_SHA1": "da03964b418a817b0638eb4059127c2f9de106be",
+      "bytes": 9414
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/StaticSegmentedGini.cpp",
+      "Git_blob_SHA1": "9cabc76665a59f0ac0620b40ea3126a035b4e75d",
+      "bytes": 16389
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/StrictCertificate.cpp",
+      "Git_blob_SHA1": "6f9d286359d43b198d4165af740283dc007573c5",
+      "bytes": 12134
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/TailoredBC.cpp",
+      "Git_blob_SHA1": "865f5fbaba0dfbfce56cf4fb1e82406a2752d0e6",
+      "bytes": 5222
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/TailoredBCCallbacks.cpp",
+      "Git_blob_SHA1": "e3c4020e7826a661e3830ad4bdd7bfeefde0f57d",
+      "bytes": 2243
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/TailoredBCCplexApi.cpp",
+      "Git_blob_SHA1": "c595fe5ffbef01ccab537af006707e33472a1e24",
+      "bytes": 351106
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/TailoredBCCuts.cpp",
+      "Git_blob_SHA1": "6e4dc90b9d23a719af99fd5cb6fb5d17a41ed4c2",
+      "bytes": 177
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/TailoredExact.cpp",
+      "Git_blob_SHA1": "7430858084c9410c025d3ac393b882139d389c23",
+      "bytes": 57558
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/compare_main.cpp",
+      "Git_blob_SHA1": "1ea77d593afdc9913103fd6b02da54fa904a9bb8",
+      "bytes": 56923
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/hga_tgbc/HgaTgbcGreedy.cpp",
+      "Git_blob_SHA1": "b63c2b292cc74b85b895e8cc3be0e3f6113d2056",
+      "bytes": 100387
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/main.cpp",
+      "Git_blob_SHA1": "2ea0e92ac0484df11885d26a3126a93c2b48d03a",
+      "bytes": 1120762
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round100_model_export.cpp",
+      "Git_blob_SHA1": "9fd64afd0b017a0bec4436e86a72bdf0b3372f72",
+      "bytes": 1718
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round101_fleet_diagnostic.cpp",
+      "Git_blob_SHA1": "c98861b7a3d0fcb345406e5ae06eaef658b3763f",
+      "bytes": 2146
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round102_service_diagnostic.cpp",
+      "Git_blob_SHA1": "4d8ec2ca61059ea0c39a9ee534a668f371a65a61",
+      "bytes": 2403
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round103_hull_oracle.cpp",
+      "Git_blob_SHA1": "7322486cf283935a25100990f2d85093ad7c4262",
+      "bytes": 2544
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round104_compress_main.cpp",
+      "Git_blob_SHA1": "9fd56a39950aebb1cc30f4437a559c2208da4408",
+      "bytes": 1762
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round105_oracle_main.cpp",
+      "Git_blob_SHA1": "dfeb3098e036dceb8cd17b31f9017668e1bb7034",
+      "bytes": 1596
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round106_research_main.cpp",
+      "Git_blob_SHA1": "dbc6583babcc6dcac2a2883404f2cdcb6dcbfa9e",
+      "bytes": 1920
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round49_rc_extract_main.cpp",
+      "Git_blob_SHA1": "5ffca146bb5f008c30f473b278597bbbd6dae4e3",
+      "bytes": 5408
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round50_interval_mip_main.cpp",
+      "Git_blob_SHA1": "e1c784a89c92f640e8c3ea829473a1034c147c5f",
+      "bytes": 87700
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round54_inventory_route_main.cpp",
+      "Git_blob_SHA1": "d163b28effe5c3bc1a550b0b47df7b73e3af99c1",
+      "bytes": 26970
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round61_candidate_main.cpp",
+      "Git_blob_SHA1": "7a2968b4fa104246e559803239dc54ed5377a79e",
+      "bytes": 7255
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round61_time_main.cpp",
+      "Git_blob_SHA1": "f9fe3133bee8af198f95b7fec5e6a2a756fea60f",
+      "bytes": 2410
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round62_native_micro.cpp",
+      "Git_blob_SHA1": "d4d7c3c9743bad6d9796ec7000e07c11f0685ae8",
+      "bytes": 4953
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round62_projection_audit.cpp",
+      "Git_blob_SHA1": "9794124fe566707c12ec251d4449f6ae35c22a56",
+      "bytes": 12107
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round62_threshold_main.cpp",
+      "Git_blob_SHA1": "d5e8b4adc4f2d01148d952ebf796151845626a18",
+      "bytes": 2093
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round63_resource_probe.cpp",
+      "Git_blob_SHA1": "c0d8d4c336e0be8a2db938086739295a6eb65d4d",
+      "bytes": 15567
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round64_projection_audit.cpp",
+      "Git_blob_SHA1": "a7dba14c693abc321ba9405d42d5c006c22fc9f4",
+      "bytes": 12156
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round64_resource_probe.cpp",
+      "Git_blob_SHA1": "ab52bed81ffe52667775cce609b2e9c7d9153ace",
+      "bytes": 9206
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round65_reference_build.cpp",
+      "Git_blob_SHA1": "5cbb2a301b5f6a4e8d6568c97e8277d3b9c633d8",
+      "bytes": 2711
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round98_model_export.cpp",
+      "Git_blob_SHA1": "9abb20a758886b2b5f4fa89faaaf39f198b1a7df",
+      "bytes": 1681
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/candidate01_source/src/round99_model_export.cpp",
+      "Git_blob_SHA1": "b3aefeba7fa488a9d1e57bf2e07b51dabf87d180",
+      "bytes": 1708
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli01/identity.json",
+      "Git_blob_SHA1": "4a4f52dcf747ea5fe10644c8d435b4e115b22254",
+      "bytes": 40914
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli01/processes.jsonl",
+      "Git_blob_SHA1": "d622b6f6952743186c015c9458190dd771cd05eb",
+      "bytes": 410
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli01/reference/H100/build.json",
+      "Git_blob_SHA1": "1027bd1029230333143a233c4a8b580a49a34642",
+      "bytes": 160
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli01/runtime_status.json",
+      "Git_blob_SHA1": "46a833dfefeba3b26bc9e603fc0e0bff412a0163",
+      "bytes": 393
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli01/summary.jsonl",
+      "Git_blob_SHA1": "3906494aa4bafa5546e72735e925b5d5cc8d2ad8",
+      "bytes": 1741
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli02/identity.json",
+      "Git_blob_SHA1": "100f04ab9197d5187a30d4c4bf9bffaf70345fe5",
+      "bytes": 40913
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli02/processes.jsonl",
+      "Git_blob_SHA1": "d2fc33a42ad23dc706104359bafa0359917951f5",
+      "bytes": 818
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli02/qualification_trailer.json",
+      "Git_blob_SHA1": "de4b998fb2b788a9c5754c9924a1dfbbbc2e021a",
+      "bytes": 9001
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli02/reference/H100/build.json",
+      "Git_blob_SHA1": "1027bd1029230333143a233c4a8b580a49a34642",
+      "bytes": 160
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli02/runtime_status.json",
+      "Git_blob_SHA1": "b473b4ebcf11f9411a3615ad0fca9aaf6bace1b2",
+      "bytes": 392
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/cli02/summary.jsonl",
+      "Git_blob_SHA1": "32e6da7c16d4627f91f3034dde443345803633ec",
+      "bytes": 3764
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/inherited_reference_locations.json",
+      "Git_blob_SHA1": "15b126983ecb3e990e94b14e1753bbfd03d74529",
+      "bytes": 2954
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/offline_missing_column/audit.json",
+      "Git_blob_SHA1": "d8fa90f84a0f859801d15202f48556415b26bb11",
+      "bytes": 343
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/offline_missing_column/native.log.round112.start.after.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/offline_missing_column/native.log.round112.start.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/offline_missing_column/native.log.round112.start.json",
+      "Git_blob_SHA1": "923fc89ee8607c05d5cf57f1c5bbf0b56caa4aad",
+      "bytes": 321
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/offline_missing_column/native.log.round112.start.values.csv",
+      "Git_blob_SHA1": "e7fdb24931be97824c12494a6c3cccf838607e23",
+      "bytes": 33182
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/offline_missing_column/result.json.round112.startup.json",
+      "Git_blob_SHA1": "f3118ca6a573bb217e4961706bf9f01a03065bb7",
+      "bytes": 86102
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/original_model_equivalence.json",
+      "Git_blob_SHA1": "494c6918310899f62a8a756675708e7d2ce737b3",
+      "bytes": 2637
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/plan.json",
+      "Git_blob_SHA1": "3b31389fe9f31ebc1a11cc3f6f15cc09367b6b3b",
+      "bytes": 477
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/positive01/identity.json",
+      "Git_blob_SHA1": "4929c0f81c78ea4e7f3bfbea768950e4931b46eb",
+      "bytes": 34244
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/positive01/processes.jsonl",
+      "Git_blob_SHA1": "14f3823f86af752e28f988c3dfb4bcb9d2fd0763",
+      "bytes": 462
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/positive01/qualification_trailer.json",
+      "Git_blob_SHA1": "2c604fb7601a6eaa337a4c8b3a8a7c361b62662d",
+      "bytes": 6643
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/positive01/reference/positive5over24/build.json",
+      "Git_blob_SHA1": "636765d952d502900c022a282632d21b31ea1143",
+      "bytes": 158
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/positive01/runtime_status.json",
+      "Git_blob_SHA1": "ad3243b09a1c236b5dc142b30d320bc3331a5763",
+      "bytes": 357
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/positive01/summary.jsonl",
+      "Git_blob_SHA1": "263960e631af31bfb893afb71552d0bc3e280aa9",
+      "bytes": 1918
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/backend_conclusions.json",
+      "Git_blob_SHA1": "0967ef424bce6791893e9a57bb952f80fd536e93",
+      "bytes": 3
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/compact_Starts.csv",
+      "Git_blob_SHA1": "1bbc5981bbade17f70d67d55aba4d19a6d047799",
+      "bytes": 831
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/controller_AM.csv",
+      "Git_blob_SHA1": "14f0ab9b0385933c9de022c1cade1d1ae2f6b431",
+      "bytes": 2083
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/controller_LP_status.csv",
+      "Git_blob_SHA1": "4a6b02b5f44e3d0ffc283eb4c146f2acaa31605b",
+      "bytes": 1028
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/controller_child_bounds.csv",
+      "Git_blob_SHA1": "70792e2b34a74621615b97cd9a79e0914315956d",
+      "bytes": 959
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/controller_events.csv",
+      "Git_blob_SHA1": "45bbce41a150ad071095f77e2452eb88877f11cc",
+      "bytes": 1537
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/controller_native.csv",
+      "Git_blob_SHA1": "bcdf6a8328491af157c9c6bc47d7246e5a900726",
+      "bytes": 4194
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/controller_targets.csv",
+      "Git_blob_SHA1": "08e548ec77d1b806dee0040542fe3f81f6976e89",
+      "bytes": 787
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/fees.csv",
+      "Git_blob_SHA1": "857ed4289f2efeff259434d0021a31891ad430c0",
+      "bytes": 480
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/fleets.csv",
+      "Git_blob_SHA1": "6b46f974217941db1d0ee08e342bf58caca9315e",
+      "bytes": 4670
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/journal_trace.csv",
+      "Git_blob_SHA1": "1e1a32c012206b471b11e7db1f973feeddbcd3bf",
+      "bytes": 269476
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/model_contracts.csv",
+      "Git_blob_SHA1": "aac0cda6d6cdb178b65305f71379368793908cf7",
+      "bytes": 2151
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/native_bounds.csv",
+      "Git_blob_SHA1": "273adaff2576426bb8610af03583dd715e12b33c",
+      "bytes": 270644
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/native_calls.csv",
+      "Git_blob_SHA1": "c67c94ab61f4d619be53ca3c3e9e2ea8acd8fe11",
+      "bytes": 8795
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/own_UB_flow.csv",
+      "Git_blob_SHA1": "8c14d101929f380a9bb4e5b2109f060ca5405577",
+      "bytes": 30954
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/qualification_arms.csv",
+      "Git_blob_SHA1": "61fa658adf7576f9767686a5b3ecf600a0ec463e",
+      "bytes": 4541
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/scope_contracts.csv",
+      "Git_blob_SHA1": "9eb7d4669d4057be032dbfa7d249bbba2444d0a0",
+      "bytes": 1023
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/startup_fleets.csv",
+      "Git_blob_SHA1": "40ed9862e995287f47bafd0d2bf5a2176eed746a",
+      "bytes": 1507
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/summary.json",
+      "Git_blob_SHA1": "e7cdf1e505f1d698547ce080ff7783d4a6ce5897",
+      "bytes": 449
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/tailored_Starts.csv",
+      "Git_blob_SHA1": "d3885941c5b60f5885192e16ff08e0fa174a552a",
+      "bytes": 2337
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reconstruction03/time_partitions.csv",
+      "Git_blob_SHA1": "4928e7f2e5082a9dcfffe973bf78428c7d54a67d",
+      "bytes": 1179
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/reference_batch.tsv",
+      "Git_blob_SHA1": "619f121281bec9bf0bd62590987299edf4ce2471",
+      "bytes": 1169
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/actual_heterogeneous_H.after.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/actual_heterogeneous_H.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/actual_heterogeneous_H.json",
+      "Git_blob_SHA1": "b481d31f598ba927b21e4acffb92486df097eef1",
+      "bytes": 310
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/actual_heterogeneous_H.values.csv",
+      "Git_blob_SHA1": "b79159c5fb10fae8adaee737fbbb3235d2f50d54",
+      "bytes": 31640
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/bound_violation.before.matrix.json",
+      "Git_blob_SHA1": "ef8c820abed6fe35fdbfdc1e1c1330f1f9035077",
+      "bytes": 266634
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/bound_violation.json",
+      "Git_blob_SHA1": "d7a0f749da17afad61fbe0a4e70d804f018c26e2",
+      "bytes": 73
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/cases.jsonl",
+      "Git_blob_SHA1": "a6ccebbec4b94b178ae64ff454b59dcff99e51a4",
+      "bytes": 2730
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/empty_vehicle_0.after.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/empty_vehicle_0.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/empty_vehicle_0.json",
+      "Git_blob_SHA1": "7d619053dfbcaecacd20713d595e25cd59cb9922",
+      "bytes": 310
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/empty_vehicle_0.values.csv",
+      "Git_blob_SHA1": "467dc11e1110cc908591c5823b4e29527b1cc4cd",
+      "bytes": 33510
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/invalid_physical.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/invalid_physical.json",
+      "Git_blob_SHA1": "521fce55c6a3522383027fa0acf3ab5fa9193730",
+      "bytes": 80
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/loaded_return.after.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/loaded_return.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/loaded_return.json",
+      "Git_blob_SHA1": "241fc40a1c0595882060c03c266305e072afb125",
+      "bytes": 309
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/loaded_return.values.csv",
+      "Git_blob_SHA1": "24810d7cfabc140456194d689100b48aae1bebef",
+      "bytes": 31944
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/necessary_audit.json",
+      "Git_blob_SHA1": "b38d8267afb0442c31dae29d526fdb429817fec0",
+      "bytes": 21585
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/nonfinite_readback.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/nonfinite_readback.json",
+      "Git_blob_SHA1": "ba929e2d5d6d551556d0e9e8a94f8d05eacfe72f",
+      "bytes": 65
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/objective_mismatch.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/objective_mismatch.json",
+      "Git_blob_SHA1": "e104ec5919666aca06a0d0a594855798b6b7818e",
+      "bytes": 60
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/readback_api_failure.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/readback_api_failure.json",
+      "Git_blob_SHA1": "7c124ba4bbc835be196abcaf3aaf83edba916198",
+      "bytes": 55
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/readback_mismatch.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/readback_mismatch.json",
+      "Git_blob_SHA1": "ba929e2d5d6d551556d0e9e8a94f8d05eacfe72f",
+      "bytes": 65
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/row_violation.before.matrix.json",
+      "Git_blob_SHA1": "54100ff8291f6bbd69a12fa604aa002283c41287",
+      "bytes": 284501
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/row_violation.json",
+      "Git_blob_SHA1": "dcba30cade4f1bfd97e8e2a72da50d9b62820732",
+      "bytes": 74
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/submit_api_failure.before.matrix.json",
+      "Git_blob_SHA1": "aa9fd8098039767d3c12b6374843e646817ae916",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/submit_api_failure.json",
+      "Git_blob_SHA1": "35ae2a29dbce895e07fec5f74dc365a68af83463",
+      "bytes": 55
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/type_violation.before.matrix.json",
+      "Git_blob_SHA1": "6c7cf734eda62c892a185dddc979f1e6a8ed39da",
+      "bytes": 270320
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/type_violation.json",
+      "Git_blob_SHA1": "e6c8fbdf279e8b9cfb2856dac0a48997432159da",
+      "bytes": 79
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/unsupported_column.before.matrix.json",
+      "Git_blob_SHA1": "cb92fd6ae006177fb9a4909bd7053b19988bb02d",
+      "bytes": 270346
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault01/unsupported_column.json",
+      "Git_blob_SHA1": "e107543e6397fa16477c1d77661082fff816a609",
+      "bytes": 111
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/start_fault_batch.cpp",
+      "Git_blob_SHA1": "196bd4cbef8a5d3ece46dc378c011ca5aec394ac",
+      "bytes": 5062
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/summary.json",
+      "Git_blob_SHA1": "b79ba62132971a026e95dcd20d7553f008348886",
+      "bytes": 6636
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/zero01/identity.json",
+      "Git_blob_SHA1": "b85676d68617a2a894d3251d7137ceddfde0a79a",
+      "bytes": 30408
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/zero01/processes.jsonl",
+      "Git_blob_SHA1": "61d613782282b490879c30de2289c570c917e447",
+      "bytes": 210
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/zero01/qualification_trailer.json",
+      "Git_blob_SHA1": "a45648d80dd5b4f1b86d15a89480aba1322121cd",
+      "bytes": 5368
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/zero01/reference/ownzero/build.json",
+      "Git_blob_SHA1": "93dc5403c561f630f5cebc5e99683cc76a5a272c",
+      "bytes": 158
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/zero01/runtime_status.json",
+      "Git_blob_SHA1": "0e3c0001e7c79595e49f3efbba18d2851d5f7e3b",
+      "bytes": 349
+    },
+    {
+      "path": "results/unified_exact_round112/qualification/zero01/summary.jsonl",
+      "Git_blob_SHA1": "16787d580afbff75f79438aa25f3aa0b29b50b8c",
+      "bytes": 899
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/arms.csv",
+      "Git_blob_SHA1": "bc5b663c2ec17ad5dca1eee371ba33da60e3295e",
+      "bytes": 10896
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/backend_conclusions.json",
+      "Git_blob_SHA1": "5c9ea7125ef19f5f7af87cbf64dfd1f302de055f",
+      "bytes": 2757
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/checkpoints.csv",
+      "Git_blob_SHA1": "23611a65fa797d568413975d8176b794eee7e494",
+      "bytes": 8488
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/chronological_covers.csv",
+      "Git_blob_SHA1": "33e78fee72d99020fc52f1dfee406c1e8c8fe202",
+      "bytes": 5479387
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/compact_Starts.csv",
+      "Git_blob_SHA1": "0acdcb1f8ed3f7c1493e5f6602f3e09d9a118dbb",
+      "bytes": 1716
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/controller_AM.csv",
+      "Git_blob_SHA1": "208e4087647f003b9c902467f411a173ea4c7528",
+      "bytes": 7367
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/controller_LP_status.csv",
+      "Git_blob_SHA1": "a35b1916e2007f064694d18b8546cb765ab8399d",
+      "bytes": 4579
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/controller_child_bounds.csv",
+      "Git_blob_SHA1": "7eac5b0f68c9cffa4191372330e9fe230a21803e",
+      "bytes": 3527
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/controller_events.csv",
+      "Git_blob_SHA1": "582590ca05d5f055df7f7b6e7acf45ee4660c27c",
+      "bytes": 6063
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/controller_native.csv",
+      "Git_blob_SHA1": "b24b33fb88c01a7c2c6edfd841a2533b557203a3",
+      "bytes": 19193
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/controller_targets.csv",
+      "Git_blob_SHA1": "63de0e44e550ebdbb4815548b4130bcc20852494",
+      "bytes": 2938
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/covers.csv",
+      "Git_blob_SHA1": "d2e1d3284088f7ce0ff0975955a0d482663b2aac",
+      "bytes": 9709330
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/execution_failures.csv",
+      "Git_blob_SHA1": "36a8c2f9acab7b03cc7bd0885bbe9211429e2322",
+      "bytes": 442
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/fees.csv",
+      "Git_blob_SHA1": "51988bc33857f3ddeb0529a49fc8aa7349bd28a8",
+      "bytes": 678
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/fleets.csv",
+      "Git_blob_SHA1": "4acaa3c57349e083fc096bc66824194448fcccb6",
+      "bytes": 23612
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/journal_trace.csv",
+      "Git_blob_SHA1": "4b261bb92228ecaf9ee74c2c45bc7b95b38afd9b",
+      "bytes": 2828096
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/model_contracts.csv",
+      "Git_blob_SHA1": "4f19148cdf34903c2f78365ef9ae6e8a952f3e2b",
+      "bytes": 8791
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/native_bounds.csv",
+      "Git_blob_SHA1": "d5969c0134cf015cb5e1d6b5c0f385ade1fa852f",
+      "bytes": 2918665
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/native_calls.csv",
+      "Git_blob_SHA1": "2304cf3a84e5aef555b12fbadbeebc9f322cd6f8",
+      "bytes": 34864
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/own_UB_flow.csv",
+      "Git_blob_SHA1": "d3d062dc1b7a80a4e7db644b51c2cb3a6104dd61",
+      "bytes": 732213
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/pairs.csv",
+      "Git_blob_SHA1": "1697a1756cf65bc0136af98dab1e091a14e9af4e",
+      "bytes": 10441
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/partial_bounds.csv",
+      "Git_blob_SHA1": "c8352ce365f74c72b842e8caffa0a1ed4b548389",
+      "bytes": 246
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/partial_fleets.csv",
+      "Git_blob_SHA1": "f25b21ee626e1c81d49b126ccadff114a3584c4e",
+      "bytes": 8283
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/partial_journal.csv",
+      "Git_blob_SHA1": "780c82a42da41d023b0ab908e14236c8c894202b",
+      "bytes": 15218
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/partial_model_contracts.csv",
+      "Git_blob_SHA1": "57cbaa240b7353288e59ce01caa0d6e8dac7617f",
+      "bytes": 902
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/partial_native_calls.csv",
+      "Git_blob_SHA1": "28ab96b66ba6f2f9d03520cf9eb29e2a90a3b92f",
+      "bytes": 2100
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/partial_scope_contracts.csv",
+      "Git_blob_SHA1": "74d4a5340e2088c19d4f01a4e83f7069cf13c50c",
+      "bytes": 492
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/qualification_arms.csv",
+      "Git_blob_SHA1": "5e337b33ce5f4b48684d5f431415827ef2f1db1c",
+      "bytes": 4585
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/returned_native_proofs.csv",
+      "Git_blob_SHA1": "01800b5ccc2eb6c54ad426038a3ad187d7e578bc",
+      "bytes": 8037
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/same_H.csv",
+      "Git_blob_SHA1": "4a1bfdec40bd06e5710fe403885b9b449433a90d",
+      "bytes": 585
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/same_H_fleets.csv",
+      "Git_blob_SHA1": "c3c5ec4fd4f3d433ea53adea2e3df13f0732fa3b",
+      "bytes": 1376999
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/scope_contracts.csv",
+      "Git_blob_SHA1": "cc5065398eda70c29c748acebfc50459abc78c26",
+      "bytes": 4329
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/split_exposure.csv",
+      "Git_blob_SHA1": "8cddf4be541fd32bc048644956d0b1029b4e8447",
+      "bytes": 947
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/startup_fleets.csv",
+      "Git_blob_SHA1": "afc74d7f391fc49c6c06ab65dc0914151d27923b",
+      "bytes": 6241
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/summary.json",
+      "Git_blob_SHA1": "791d02f9b849a1cad9c8df2325be0828fdc480b7",
+      "bytes": 3862
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/tailored_Starts.csv",
+      "Git_blob_SHA1": "76f9237ed1af646be8af7dc59554dc965658e685",
+      "bytes": 8383
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/target_discovery.csv",
+      "Git_blob_SHA1": "155b4ce11507ed89b4285fd22925b2e0ecfdc1ca",
+      "bytes": 1445
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/time_partitions.csv",
+      "Git_blob_SHA1": "03e3e78c017092598088f157ff84b12ebf560338",
+      "bytes": 2698
+    },
+    {
+      "path": "results/unified_exact_round112/reports_final/unstarted.csv",
+      "Git_blob_SHA1": "0e2b0e89ab0d43c4f3e1dcff071a000b86a6109a",
+      "bytes": 204
+    },
+    {
+      "path": "results/unified_exact_round112/research_question.md",
+      "Git_blob_SHA1": "88a6d2c6e0272ea5da2a530c91c58c1ea607281c",
+      "bytes": 3203
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/qualification_read_bindings.json",
+      "Git_blob_SHA1": "6229642ba020ba22ab56339bfefe27db939759ec",
+      "bytes": 990600
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/raw_audit.json",
+      "Git_blob_SHA1": "138d42080c12c6305dbfd272b5a3c5d27ad46342",
+      "bytes": 79046
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/backend_conclusions.json",
+      "Git_blob_SHA1": "0967ef424bce6791893e9a57bb952f80fd536e93",
+      "bytes": 3
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/compact_Starts.csv",
+      "Git_blob_SHA1": "1bbc5981bbade17f70d67d55aba4d19a6d047799",
+      "bytes": 831
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/controller_AM.csv",
+      "Git_blob_SHA1": "14f0ab9b0385933c9de022c1cade1d1ae2f6b431",
+      "bytes": 2083
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/controller_LP_status.csv",
+      "Git_blob_SHA1": "4a6b02b5f44e3d0ffc283eb4c146f2acaa31605b",
+      "bytes": 1028
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/controller_child_bounds.csv",
+      "Git_blob_SHA1": "70792e2b34a74621615b97cd9a79e0914315956d",
+      "bytes": 959
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/controller_events.csv",
+      "Git_blob_SHA1": "45bbce41a150ad071095f77e2452eb88877f11cc",
+      "bytes": 1537
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/controller_native.csv",
+      "Git_blob_SHA1": "bcdf6a8328491af157c9c6bc47d7246e5a900726",
+      "bytes": 4194
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/controller_targets.csv",
+      "Git_blob_SHA1": "08e548ec77d1b806dee0040542fe3f81f6976e89",
+      "bytes": 787
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/fees.csv",
+      "Git_blob_SHA1": "857ed4289f2efeff259434d0021a31891ad430c0",
+      "bytes": 480
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/fleets.csv",
+      "Git_blob_SHA1": "6b46f974217941db1d0ee08e342bf58caca9315e",
+      "bytes": 4670
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/journal_trace.csv",
+      "Git_blob_SHA1": "1e1a32c012206b471b11e7db1f973feeddbcd3bf",
+      "bytes": 269476
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/model_contracts.csv",
+      "Git_blob_SHA1": "aac0cda6d6cdb178b65305f71379368793908cf7",
+      "bytes": 2151
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/native_bounds.csv",
+      "Git_blob_SHA1": "273adaff2576426bb8610af03583dd715e12b33c",
+      "bytes": 270644
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/native_calls.csv",
+      "Git_blob_SHA1": "c67c94ab61f4d619be53ca3c3e9e2ea8acd8fe11",
+      "bytes": 8795
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/own_UB_flow.csv",
+      "Git_blob_SHA1": "8c14d101929f380a9bb4e5b2109f060ca5405577",
+      "bytes": 30954
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/qualification_arms.csv",
+      "Git_blob_SHA1": "61fa658adf7576f9767686a5b3ecf600a0ec463e",
+      "bytes": 4541
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/scope_contracts.csv",
+      "Git_blob_SHA1": "9eb7d4669d4057be032dbfa7d249bbba2444d0a0",
+      "bytes": 1023
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/startup_fleets.csv",
+      "Git_blob_SHA1": "40ed9862e995287f47bafd0d2bf5a2176eed746a",
+      "bytes": 1507
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/summary.json",
+      "Git_blob_SHA1": "c80e5820e74e72f0634e9b026d7d4b20acfed81a",
+      "bytes": 449
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/tailored_Starts.csv",
+      "Git_blob_SHA1": "d3885941c5b60f5885192e16ff08e0fa174a552a",
+      "bytes": 2337
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/reconstruction/time_partitions.csv",
+      "Git_blob_SHA1": "4928e7f2e5082a9dcfffe973bf78428c7d54a67d",
+      "bytes": 1179
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission02/supplement.json",
+      "Git_blob_SHA1": "dc2a1b26671db1a927cd2b2550d38a66a5e0b5e6",
+      "bytes": 5734
+    },
+    {
+      "path": "results/unified_exact_round112/review/admission_audit.py",
+      "Git_blob_SHA1": "8ca4a4b75e73073f8da3ba9c1dc668ddf9ce858d",
+      "bytes": 17926
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/audit.json",
+      "Git_blob_SHA1": "1884296e45f43e5a82258249c7499eda64389c95",
+      "bytes": 1194
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/production.diff",
+      "Git_blob_SHA1": "2b2cb1ce054d8e949cc2b38b155a8651260421fa",
+      "bytes": 15425
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/review.md",
+      "Git_blob_SHA1": "4b44048427c8f6dcda78e0628f40f56d2bd70b02",
+      "bytes": 4495
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/source_bindings.json",
+      "Git_blob_SHA1": "4172f2e5042f11be4c9ebe6c075a98f7047a0c7c",
+      "bytes": 930
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/source_snapshot/include/GurobiBaseline.hpp",
+      "Git_blob_SHA1": "67fcace8b0f0368b5b5765d9bc82cfcdbf19822c",
+      "bytes": 795
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/source_snapshot/include/Instance.hpp",
+      "Git_blob_SHA1": "c796f17877978ed3a1cff59131bd6521f6f369ca",
+      "bytes": 38951
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/source_snapshot/src/GurobiBaseline.cpp",
+      "Git_blob_SHA1": "8e1ce1f5657b971e7e77a5a92d2463859be252ca",
+      "bytes": 281475
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/source_snapshot/src/GurobiBaselineStub.cpp",
+      "Git_blob_SHA1": "f89dda23711d61f57fc6e26c49494087e351ef1b",
+      "bytes": 3452
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/source_snapshot/src/MipStartMapping.cpp",
+      "Git_blob_SHA1": "714be5138ef0dd378f5f6098eb9c450a8340f130",
+      "bytes": 15074
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/source_snapshot/src/Round112CompactStart.inc",
+      "Git_blob_SHA1": "a6198c41939dfd076d977c1d68edf5edd96053be",
+      "bytes": 7117
+    },
+    {
+      "path": "results/unified_exact_round112/review/design01/source_snapshot/src/main.cpp",
+      "Git_blob_SHA1": "0f96270c835bfc1307e317c0c61b5899c6e3dca4",
+      "bytes": 1120386
+    },
+    {
+      "path": "results/unified_exact_round112/review/final_reader_delta01.json",
+      "Git_blob_SHA1": "d49589cead42adcc8cb312f2f7e69444b1239f22",
+      "bytes": 23931
+    },
+    {
+      "path": "results/unified_exact_round112/review/final_reader_delta01.md",
+      "Git_blob_SHA1": "103d2c1d3b7256f82393402f4d4a03efb414b122",
+      "bytes": 2871
+    },
+    {
+      "path": "results/unified_exact_round112/review/final_reader_delta_audit.py",
+      "Git_blob_SHA1": "d47d52bb23ff723a0161fa2469055896bb0342db",
+      "bytes": 14048
+    },
+    {
+      "path": "results/unified_exact_round112/review/history_review.json",
+      "Git_blob_SHA1": "8a9c71f85b5e1c3cd33a946e7c58307c88161592",
+      "bytes": 11707
+    },
+    {
+      "path": "results/unified_exact_round112/review/history_review.md",
+      "Git_blob_SHA1": "2a8dc56ffc00d368f1e3202e9bda9eb87b3562a6",
+      "bytes": 7143
+    },
+    {
+      "path": "results/unified_exact_round112/review/performance_admission.json",
+      "Git_blob_SHA1": "9431b8889142287c5ecb027919a0d74cac9bf732",
+      "bytes": 75521
+    },
+    {
+      "path": "results/unified_exact_round112/review/performance_admission.md",
+      "Git_blob_SHA1": "0ad1e0fa686b25bc93131220d03de4d3df690d8a",
+      "bytes": 7853
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/arms.csv",
+      "Git_blob_SHA1": "b03dbcd7878fb8c517443ddced14d54653c2ccbe",
+      "bytes": 7774
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/backend_conclusions.json",
+      "Git_blob_SHA1": "55eed3b6ff223dc088cf2f34695a4bb3860a2da9",
+      "bytes": 2703
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/checkpoints.csv",
+      "Git_blob_SHA1": "23611a65fa797d568413975d8176b794eee7e494",
+      "bytes": 8488
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/compact_Starts.csv",
+      "Git_blob_SHA1": "0acdcb1f8ed3f7c1493e5f6602f3e09d9a118dbb",
+      "bytes": 1716
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/controller_AM.csv",
+      "Git_blob_SHA1": "208e4087647f003b9c902467f411a173ea4c7528",
+      "bytes": 7367
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/controller_LP_status.csv",
+      "Git_blob_SHA1": "a35b1916e2007f064694d18b8546cb765ab8399d",
+      "bytes": 4579
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/controller_child_bounds.csv",
+      "Git_blob_SHA1": "7eac5b0f68c9cffa4191372330e9fe230a21803e",
+      "bytes": 3527
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/controller_events.csv",
+      "Git_blob_SHA1": "582590ca05d5f055df7f7b6e7acf45ee4660c27c",
+      "bytes": 6063
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/controller_native.csv",
+      "Git_blob_SHA1": "b24b33fb88c01a7c2c6edfd841a2533b557203a3",
+      "bytes": 19193
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/controller_targets.csv",
+      "Git_blob_SHA1": "63de0e44e550ebdbb4815548b4130bcc20852494",
+      "bytes": 2938
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/fees.csv",
+      "Git_blob_SHA1": "51988bc33857f3ddeb0529a49fc8aa7349bd28a8",
+      "bytes": 678
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/fleets.csv",
+      "Git_blob_SHA1": "4acaa3c57349e083fc096bc66824194448fcccb6",
+      "bytes": 23612
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/journal_trace.csv",
+      "Git_blob_SHA1": "4b261bb92228ecaf9ee74c2c45bc7b95b38afd9b",
+      "bytes": 2828096
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/model_contracts.csv",
+      "Git_blob_SHA1": "4f19148cdf34903c2f78365ef9ae6e8a952f3e2b",
+      "bytes": 8791
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/native_bounds.csv",
+      "Git_blob_SHA1": "d5969c0134cf015cb5e1d6b5c0f385ade1fa852f",
+      "bytes": 2918665
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/native_calls.csv",
+      "Git_blob_SHA1": "aec974a84806288cad21588bffe7ef31a345f2eb",
+      "bytes": 34940
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/own_UB_flow.csv",
+      "Git_blob_SHA1": "9f79df475ba3b0f25f39ff0ad5848ce1f4ccabf9",
+      "bytes": 133359
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/pairs.csv",
+      "Git_blob_SHA1": "fa1bca724568f6702d5e3872529dd0da4435e7d6",
+      "bytes": 8736
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/qualification_arms.csv",
+      "Git_blob_SHA1": "61fa658adf7576f9767686a5b3ecf600a0ec463e",
+      "bytes": 4541
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/same_H.csv",
+      "Git_blob_SHA1": "4a1bfdec40bd06e5710fe403885b9b449433a90d",
+      "bytes": 585
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/scope_contracts.csv",
+      "Git_blob_SHA1": "cc5065398eda70c29c748acebfc50459abc78c26",
+      "bytes": 4329
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/startup_fleets.csv",
+      "Git_blob_SHA1": "afc74d7f391fc49c6c06ab65dc0914151d27923b",
+      "bytes": 6241
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/summary.json",
+      "Git_blob_SHA1": "386b4d7cbf4df7f6c27e2134fc4e62bf356c1392",
+      "bytes": 3370
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/tailored_Starts.csv",
+      "Git_blob_SHA1": "76f9237ed1af646be8af7dc59554dc965658e685",
+      "bytes": 8383
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/time_partitions.csv",
+      "Git_blob_SHA1": "03e3e78c017092598088f157ff84b12ebf560338",
+      "bytes": 2698
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal01/reconstruction/unstarted.csv",
+      "Git_blob_SHA1": "979c562ffb9f14f8a96d98951269cbdd93eac9cb",
+      "bytes": 228
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal03/postformal_review.json",
+      "Git_blob_SHA1": "6ac927e825b684631b26dae502c58a77b8663df3",
+      "bytes": 227706
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal03/process_snapshot.json",
+      "Git_blob_SHA1": "25cc77adeff3133275f65eff531c9d451d639745",
+      "bytes": 150
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal03/signature.json",
+      "Git_blob_SHA1": "5a9f8ed295be0cc8d8e8fbbca589fce43aea6f35",
+      "bytes": 1332
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal_audit.py",
+      "Git_blob_SHA1": "00a409c1e360d9379ffb8fa65af852d3aaf4d1d8",
+      "bytes": 13844
+    },
+    {
+      "path": "results/unified_exact_round112/review/postformal_review.md",
+      "Git_blob_SHA1": "8e5bddb9128664cbd8f9708fb546ee7875c26175",
+      "bytes": 6399
+    },
+    {
+      "path": "results/unified_exact_round112/review/restored_root01.json",
+      "Git_blob_SHA1": "f499624718b0e07594093a55c43ba746b5fbb2d5",
+      "bytes": 223302
+    },
+    {
+      "path": "results/unified_exact_round112/review/restored_root01.md",
+      "Git_blob_SHA1": "8d453e40c26af2b312ab52c6b9fc68c4e6d440d9",
+      "bytes": 5039
+    },
+    {
+      "path": "results/unified_exact_round112/verification/actual_restore_receipt.json",
+      "Git_blob_SHA1": "57b25b8e5d2f61dd6d58fc5786838158dcd90918",
+      "bytes": 693
+    },
+    {
+      "path": "results/unified_exact_round112/verification/compare02/receipt.json",
+      "Git_blob_SHA1": "7b12be0cc86e126462ce93e3169b66cfda4f5abe",
+      "bytes": 496
+    },
+    {
+      "path": "results/unified_exact_round112/verification/compare02/stderr.txt",
+      "Git_blob_SHA1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "results/unified_exact_round112/verification/compare02/stdout.txt",
+      "Git_blob_SHA1": "d18f88218c35e55d634510f4396396bce83cd846",
+      "bytes": 346
+    },
+    {
+      "path": "results/unified_exact_round112/verification/core_file_SHA_comparison.json",
+      "Git_blob_SHA1": "71e225382b71d133377071e7fbb9f47ad22f173f",
+      "bytes": 7651
+    },
+    {
+      "path": "results/unified_exact_round112/verification/pr_body.md",
+      "Git_blob_SHA1": "154d577b465d010a7a7375c87af0f7b0bfaae85c",
+      "bytes": 6093
+    },
+    {
+      "path": "results/unified_exact_round112/verification/rebuild01/receipt.json",
+      "Git_blob_SHA1": "768e83c986bd2cfd57aa8f382b90548ab0cbd5c3",
+      "bytes": 424
+    },
+    {
+      "path": "results/unified_exact_round112/verification/rebuild01/stderr.txt",
+      "Git_blob_SHA1": "42c036e77d2d36bbbddb4427fdd6c53d8cf880f1",
+      "bytes": 1074
+    },
+    {
+      "path": "results/unified_exact_round112/verification/rebuild01/stdout.txt",
+      "Git_blob_SHA1": "227d65f3588295214b00639bf3833d61e8bf3d3a",
+      "bytes": 2739
+    },
+    {
+      "path": "results/unified_exact_round112/verification/recovery.md",
+      "Git_blob_SHA1": "fc2fe2c50699f299970fdedfdcaa71ebca2c9009",
+      "bytes": 3292
+    },
+    {
+      "path": "results/unified_exact_round112/verification/recovery_delivery_receipt.json",
+      "Git_blob_SHA1": "2adda7785e75de4cab29482f9e348bf36265b31e",
+      "bytes": 3119
+    },
+    {
+      "path": "scripts/analyze_round61.py",
+      "Git_blob_SHA1": "275e3f66141015b40509e1c9bf9f597c805ac170",
+      "bytes": 21597
+    },
+    {
+      "path": "scripts/generate_citibike443_regional_v1.py",
+      "Git_blob_SHA1": "fdb90d8c5e6f5c12d19bd414f72e6a4f8bfc913d",
+      "bytes": 125151
+    },
+    {
+      "path": "scripts/round100_campaign.py",
+      "Git_blob_SHA1": "d0c7e2337c3c611e723f4e03e99c1b0959c20a1d",
+      "bytes": 11142
+    },
+    {
+      "path": "scripts/round100_common.py",
+      "Git_blob_SHA1": "23648562e7a19ec53515a5fa2d3b21c346fa0719",
+      "bytes": 2347
+    },
+    {
+      "path": "scripts/round100_idle.py",
+      "Git_blob_SHA1": "cc585b27b0039780477cc16087e65e511252abf1",
+      "bytes": 1069
+    },
+    {
+      "path": "scripts/round101_common.py",
+      "Git_blob_SHA1": "df1d650f3b26a99e3debc99ef711d466f56297c1",
+      "bytes": 2270
+    },
+    {
+      "path": "scripts/round103_common.py",
+      "Git_blob_SHA1": "4daca1ce56def19a95457b5d7654b506919bdc07",
+      "bytes": 2099
+    },
+    {
+      "path": "scripts/round107_reader.py",
+      "Git_blob_SHA1": "e8ec365962cb3183f26a1bf62b8c0d2877f82a0f",
+      "bytes": 48416
+    },
+    {
+      "path": "scripts/round108_decisions.py",
+      "Git_blob_SHA1": "2adfef419f8c803c70b6de8f9fc9bd75b342f136",
+      "bytes": 7997
+    },
+    {
+      "path": "scripts/round108_reader.py",
+      "Git_blob_SHA1": "ac6a432ee31351dd6df4a368dbecb9df6ae71dd6",
+      "bytes": 48357
+    },
+    {
+      "path": "scripts/round108_scopes.py",
+      "Git_blob_SHA1": "abe3aac608bb6ec24ac2ad41d47d201daa945d6c",
+      "bytes": 4248
+    },
+    {
+      "path": "scripts/round109_campaign.py",
+      "Git_blob_SHA1": "21a685d71ad2d7e8a985b70d7d973ea48f99315d",
+      "bytes": 17169
+    },
+    {
+      "path": "scripts/round109_common.py",
+      "Git_blob_SHA1": "a683792c1568683732a5c6dcb2908adeeb50aabd",
+      "bytes": 3257
+    },
+    {
+      "path": "scripts/round109_data.py",
+      "Git_blob_SHA1": "59216e2de26a8ca96ba73983d6ab35c364644de5",
+      "bytes": 6442
+    },
+    {
+      "path": "scripts/round109_prepare.py",
+      "Git_blob_SHA1": "9fb6a0351d172f0621d104ca31b44370e13aa417",
+      "bytes": 10013
+    },
+    {
+      "path": "scripts/round109_reference_batch.cpp",
+      "Git_blob_SHA1": "98716b5db4bdf4228475c194f6226b7d8c4eb6f9",
+      "bytes": 1575
+    },
+    {
+      "path": "scripts/round109_seed_audit.py",
+      "Git_blob_SHA1": "94122beb65daed604b80372ebf338c701ba471b4",
+      "bytes": 3632
+    },
+    {
+      "path": "scripts/round109_seed_recovery.py",
+      "Git_blob_SHA1": "bc961cc40683206fa9cd7ff759fcd9aaa5465825",
+      "bytes": 9393
+    },
+    {
+      "path": "scripts/round109_seed_scope.py",
+      "Git_blob_SHA1": "2b27fd0912cbed08bf7378e5b1bb5d122702b60f",
+      "bytes": 8695
+    },
+    {
+      "path": "scripts/round110_common.py",
+      "Git_blob_SHA1": "252044450a38554e33cbca46755187c7d9eba605",
+      "bytes": 3967
+    },
+    {
+      "path": "scripts/round110_public.py",
+      "Git_blob_SHA1": "4710bdacac070e208dd679a1ad7a3105a4243c96",
+      "bytes": 20207
+    },
+    {
+      "path": "scripts/round111_common.py",
+      "Git_blob_SHA1": "be755e69f61ee3eb17b16a686446a55dae7a2038",
+      "bytes": 3712
+    },
+    {
+      "path": "scripts/round111_seed_audit.py",
+      "Git_blob_SHA1": "041004e27362269caaf96d149ce475994b988d7f",
+      "bytes": 6724
+    },
+    {
+      "path": "scripts/round112_audit.py",
+      "Git_blob_SHA1": "7be1d148d4f2f9fb18ef82e6744a4511679f047a",
+      "bytes": 6424
+    },
+    {
+      "path": "scripts/round112_campaign.py",
+      "Git_blob_SHA1": "8ba3d7cec0d2d642fe29c8318f51c066eb33b5ab",
+      "bytes": 11408
+    },
+    {
+      "path": "scripts/round112_common.py",
+      "Git_blob_SHA1": "63429258a697171d4f6418d40ccbc31a106ad32c",
+      "bytes": 2687
+    },
+    {
+      "path": "scripts/round112_initialize.py",
+      "Git_blob_SHA1": "ef1736d92f10e2de1da6d548d343e0b602c92724",
+      "bytes": 5698
+    },
+    {
+      "path": "scripts/round112_reference_batch.cpp",
+      "Git_blob_SHA1": "cc5d7368d837e455a0e3de5a9807b44b8e7000b8",
+      "bytes": 1175
+    },
+    {
+      "path": "scripts/round70_affinity.py",
+      "Git_blob_SHA1": "46f97d80b6dc07f28b9fbc157a842df96e175ac6",
+      "bytes": 4509
+    },
+    {
+      "path": "scripts/round75_startup.py",
+      "Git_blob_SHA1": "4bd46cf3c1648c6cab1b4bc6a4ca03ab85953e60",
+      "bytes": 12402
+    },
+    {
+      "path": "scripts/round83_audit_v2.py",
+      "Git_blob_SHA1": "f269e92a7cf6216b74493ea347d097dc24cc3cf7",
+      "bytes": 7547
+    },
+    {
+      "path": "scripts/round86_native_evidence.py",
+      "Git_blob_SHA1": "d4cc9ff5c8cd7decf0d677b704b7bcf5cd779914",
+      "bytes": 11468
+    },
+    {
+      "path": "scripts/round88_a1_g3.py",
+      "Git_blob_SHA1": "68c7aa4f2945814923737b835c48c22224312afd",
+      "bytes": 35352
+    },
+    {
+      "path": "scripts/round90_lp_g_g3.py",
+      "Git_blob_SHA1": "7b7d338a59dfbe2cf97ef290f2ea6117bb0a8d07",
+      "bytes": 51527
+    },
+    {
+      "path": "scripts/round94_lpg_contemporary.py",
+      "Git_blob_SHA1": "ca24744d3d55ae6b562497ace55ff28fba16a2e6",
+      "bytes": 55473
+    },
+    {
+      "path": "scripts/round94_lpg_formal_recovery_v3.py",
+      "Git_blob_SHA1": "513eb33eb2d9042a2158929a60085ccfcb2827a6",
+      "bytes": 25366
+    },
+    {
+      "path": "scripts/round96_external.py",
+      "Git_blob_SHA1": "8d2ec1302571ad66564c14082e5dff8d732a3bfb",
+      "bytes": 7554
+    },
+    {
+      "path": "scripts/round96_prepare.py",
+      "Git_blob_SHA1": "3539695a0e35be17878f2329f9e5670d30589b26",
+      "bytes": 8730
+    },
+    {
+      "path": "scripts/round99_pure_start_audit.py",
+      "Git_blob_SHA1": "7062ccfbbc17bb8d10c3083177831ea403a36ff9",
+      "bytes": 7880
+    },
+    {
+      "path": "src/Bounds.cpp",
+      "Git_blob_SHA1": "9ca5f67b10ed6e3d6f517d2edc5de13af8326ae9",
+      "bytes": 136634
+    },
+    {
+      "path": "src/Branching.cpp",
+      "Git_blob_SHA1": "d84c00ce9e7f9732c3aaa2025748a01a6ef44480",
+      "bytes": 1772
+    },
+    {
+      "path": "src/ColumnGeneration.cpp",
+      "Git_blob_SHA1": "bb99223b4e0742b07955c6f0d91569732635c53b",
+      "bytes": 215247
+    },
+    {
+      "path": "src/ColumnPool.cpp",
+      "Git_blob_SHA1": "31f3a10150f810232da991ad08039a993b488e13",
+      "bytes": 11156
+    },
+    {
+      "path": "src/ConnectivityFlow.cpp",
+      "Git_blob_SHA1": "8f9c83d81d82c44eac5accb548e04733e08f588a",
+      "bytes": 10991
+    },
+    {
+      "path": "src/ControllingLeafScheduler.cpp",
+      "Git_blob_SHA1": "b58c3b17fd293850c9373a8672194c4db5b2c365",
+      "bytes": 46072
+    },
+    {
+      "path": "src/CplexBaseline.cpp",
+      "Git_blob_SHA1": "b2c070e4b2c1c5f8c9dadf7248db45a81484642c",
+      "bytes": 390985
+    },
+    {
+      "path": "src/Cuts.cpp",
+      "Git_blob_SHA1": "7b7bf86dd8e6d158f2f1370e646f97233e7cb702",
+      "bytes": 4584
+    },
+    {
+      "path": "src/DenseProgress.cpp",
+      "Git_blob_SHA1": "be162d776564f74b9c4eca50c94654914c999be6",
+      "bytes": 20110
+    },
+    {
+      "path": "src/DispersionChildBound.cpp",
+      "Git_blob_SHA1": "e2da9288255060fbc8ba72ed2b2cc017a674334b",
+      "bytes": 6869
+    },
+    {
+      "path": "src/Evaluator.cpp",
+      "Git_blob_SHA1": "e9d9e5f08bf8877ffb6e826824f5cba2733c66c1",
+      "bytes": 6239
+    },
+    {
+      "path": "src/ExternalGiniTree.cpp",
+      "Git_blob_SHA1": "932833d9fdb1ff59fde93f472730d547d3a8d2eb",
+      "bytes": 71577
+    },
+    {
+      "path": "src/FileSha256.cpp",
+      "Git_blob_SHA1": "f7e6ffef9a34f033965173721e9419ce3da9c826",
+      "bytes": 3709
+    },
+    {
+      "path": "src/FleetEventCuts.cpp",
+      "Git_blob_SHA1": "1824ee9616cd2d8a7f145a712ff75be735deea6e",
+      "bytes": 27072
+    },
+    {
+      "path": "src/GiniAdaptiveParametric.cpp",
+      "Git_blob_SHA1": "877736fe146daefeff05fda4afbdc5fcf2f1eb56",
+      "bytes": 20421
+    },
+    {
+      "path": "src/GiniBranching.cpp",
+      "Git_blob_SHA1": "383339596e10e196ba52b25d839d9549ccf7f448",
+      "bytes": 1616
+    },
+    {
+      "path": "src/GiniEnvelopeRefinement.cpp",
+      "Git_blob_SHA1": "0088716bc898c8cc7514a27a51d62b2d5865873c",
+      "bytes": 25904
+    },
+    {
+      "path": "src/GiniEnvelopeTailRepair.cpp",
+      "Git_blob_SHA1": "59c558fc6841de0029bfcc8a386c96508096fe51",
+      "bytes": 19448
+    },
+    {
+      "path": "src/GiniFrontierGeometry.cpp",
+      "Git_blob_SHA1": "fe093d406ecd43a21cca768bcd3a93ee6bd40814",
+      "bytes": 24213
+    },
+    {
+      "path": "src/GurobiBaseline.cpp",
+      "Git_blob_SHA1": "8e1ce1f5657b971e7e77a5a92d2463859be252ca",
+      "bytes": 281475
+    },
+    {
+      "path": "src/GurobiBaselineStub.cpp",
+      "Git_blob_SHA1": "f89dda23711d61f57fc6e26c49494087e351ef1b",
+      "bytes": 3452
+    },
+    {
+      "path": "src/GurobiCertificate.cpp",
+      "Git_blob_SHA1": "bd3a099b0634d5ac2cf2f185b9cf500d64c11f3c",
+      "bytes": 5706
+    },
+    {
+      "path": "src/GurobiProgress.cpp",
+      "Git_blob_SHA1": "e8b6e3971725059cc93668e0c3a543e21b7a674a",
+      "bytes": 1999
+    },
+    {
+      "path": "src/HgaTgbcRunner.cpp",
+      "Git_blob_SHA1": "b6a1efd7e4a273f17ea5b309714985f918180956",
+      "bytes": 27569
+    },
+    {
+      "path": "src/IntervalRowFactory.cpp",
+      "Git_blob_SHA1": "0b06476750b44ef228af90744069d69fdb2d0196",
+      "bytes": 40028
+    },
+    {
+      "path": "src/InventoryRouteCuts.cpp",
+      "Git_blob_SHA1": "76c29a32d64d17717ed5c9fcf5a77f95468f2c95",
+      "bytes": 14074
+    },
+    {
+      "path": "src/InventoryRouteRootClosure.cpp",
+      "Git_blob_SHA1": "f7f6f94a05c016fc869940ab254f9bfd1eae7d6b",
+      "bytes": 13514
+    },
+    {
+      "path": "src/Logger.cpp",
+      "Git_blob_SHA1": "cf3f546ba9c53221fa727e957473e53df7695386",
+      "bytes": 566
+    },
+    {
+      "path": "src/Master.cpp",
+      "Git_blob_SHA1": "e1e594131b7525c37bd47dcd673721778fad0e77",
+      "bytes": 5470
+    },
+    {
+      "path": "src/MipStartMapping.cpp",
+      "Git_blob_SHA1": "714be5138ef0dd378f5f6098eb9c450a8340f130",
+      "bytes": 15074
+    },
+    {
+      "path": "src/ModelCorrectness.cpp",
+      "Git_blob_SHA1": "a197e5ab03d6299f22eb5049473318e260bbcec6",
+      "bytes": 5342
+    },
+    {
+      "path": "src/NativeEvidenceJournal.cpp",
+      "Git_blob_SHA1": "32828462aa624c9b55eef178405e11bc6fe80ef5",
+      "bytes": 13423
+    },
+    {
+      "path": "src/NativeOtB1.cpp",
+      "Git_blob_SHA1": "5d6679ca872d169cccc7891dd84e603a35992cb9",
+      "bytes": 23390
+    },
+    {
+      "path": "src/ObjectiveResourceCompression.cpp",
+      "Git_blob_SHA1": "15655ce84489d61a71304300952d0b1b71da2e44",
+      "bytes": 5115
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "Git_blob_SHA1": "37117c754efa19179d8ab22812e44f0d4c0ce105",
+      "bytes": 512575
+    },
+    {
+      "path": "src/PaperK1AmSf.cpp",
+      "Git_blob_SHA1": "715916e8434b9f67943e531589d987afb0b6d1ed",
+      "bytes": 8632
+    },
+    {
+      "path": "src/Parser.cpp",
+      "Git_blob_SHA1": "292a787f42856732c0db550f0f306d1a0babaf58",
+      "bytes": 8480
+    },
+    {
+      "path": "src/PenaltyCoverSeparation.cpp",
+      "Git_blob_SHA1": "77b8c63c8c9ff73ea1df68c27534d3546153d97f",
+      "bytes": 11451
+    },
+    {
+      "path": "src/PhysicalWitnessValidation.cpp",
+      "Git_blob_SHA1": "ea18cfa7c0c18e57840a33fe41768b2d61733821",
+      "bytes": 4881
+    },
+    {
+      "path": "src/Pricing.cpp",
+      "Git_blob_SHA1": "1d9516227ff8c56c52ee7e8582d90ff10be0c0f3",
+      "bytes": 104029
+    },
+    {
+      "path": "src/ProcessPhaseLedger.cpp",
+      "Git_blob_SHA1": "d0da60995c9730db00dff2d7294ebf18c224aab3",
+      "bytes": 3200
+    },
+    {
+      "path": "src/ReplicaExternalGiniTree.cpp",
+      "Git_blob_SHA1": "55481648d8f18217daf01900e841fc8bf0f9e485",
+      "bytes": 56998
+    },
+    {
+      "path": "src/Result.cpp",
+      "Git_blob_SHA1": "406e735c07b63259a49a5716e73f555ff6777ba6",
+      "bytes": 250280
+    },
+    {
+      "path": "src/Round103GurobiHull.inc",
+      "Git_blob_SHA1": "6fd26c7eac3a467f4e65ed1bd0a150531ee09e24",
+      "bytes": 20303
+    },
+    {
+      "path": "src/Round104GurobiObjective.inc",
+      "Git_blob_SHA1": "247b6377ba54ebebdfb73d691fb5b07c9fa794ea",
+      "bytes": 27457
+    },
+    {
+      "path": "src/Round105Decomposition.cpp",
+      "Git_blob_SHA1": "bcf471c412a83f250fb3f7fa324aca757332284d",
+      "bytes": 6918
+    },
+    {
+      "path": "src/Round105GurobiDecomposition.inc",
+      "Git_blob_SHA1": "8bf31ed462f76ee98d27671a42b8aabcf64617b1",
+      "bytes": 32656
+    },
+    {
+      "path": "src/Round106Events.cpp",
+      "Git_blob_SHA1": "b53e0625039c8cc7cedcfa2fac3ae9654c4e7812",
+      "bytes": 9894
+    },
+    {
+      "path": "src/Round106GurobiEvents.inc",
+      "Git_blob_SHA1": "301d7625cfe2405c201f5f19938805646b6d10a3",
+      "bytes": 34131
+    },
+    {
+      "path": "src/Round106GurobiResearch.inc",
+      "Git_blob_SHA1": "aa55a23c29ad544d747550141e613f348bb6cc58",
+      "bytes": 14031
+    },
+    {
+      "path": "src/Round107GurobiFrontier.inc",
+      "Git_blob_SHA1": "7eb2d98cae4534034a3cd0369f220f4284cad6fc",
+      "bytes": 63118
+    },
+    {
+      "path": "src/Round112CompactStart.inc",
+      "Git_blob_SHA1": "a6198c41939dfd076d977c1d68edf5edd96053be",
+      "bytes": 7117
+    },
+    {
+      "path": "src/Round48K1AMF.cpp",
+      "Git_blob_SHA1": "c5c5518f2dceab38d3aeca6747b952189564322b",
+      "bytes": 13732
+    },
+    {
+      "path": "src/Round49K1RC.cpp",
+      "Git_blob_SHA1": "d37346878b82650c844c120107f9f26d409c62d6",
+      "bytes": 18118
+    },
+    {
+      "path": "src/Round50IntervalMip.cpp",
+      "Git_blob_SHA1": "d0bcb6213d6a223f93eab7100d4b0d77c665a11b",
+      "bytes": 17237
+    },
+    {
+      "path": "src/Round51IntervalMip.cpp",
+      "Git_blob_SHA1": "d0f33d106d852ca19bde968f6d9acad9fd44aef2",
+      "bytes": 9669
+    },
+    {
+      "path": "src/Round52GurobiCutAdapter.cpp",
+      "Git_blob_SHA1": "32bc6914bc9262f856a63e503786e78fa0170348",
+      "bytes": 2841
+    },
+    {
+      "path": "src/Round52TailoredCuts.cpp",
+      "Git_blob_SHA1": "024c0a2eddce8bed4303fa3f738d4183cb4fc160",
+      "bytes": 16967
+    },
+    {
+      "path": "src/Round53CallbackIsolation.cpp",
+      "Git_blob_SHA1": "68fd9c09e64c3d1b58bcc0b7c3651b4bd7c0c4c1",
+      "bytes": 1533
+    },
+    {
+      "path": "src/Round58Benchmark.cpp",
+      "Git_blob_SHA1": "c021ab6efc0455f5fc9734e9e41e3a1e4e283a79",
+      "bytes": 6023
+    },
+    {
+      "path": "src/Round60Candidates.cpp",
+      "Git_blob_SHA1": "45b25c2be0953a37cf6e7d108d47c6a5195b5634",
+      "bytes": 16609
+    },
+    {
+      "path": "src/Round61Candidates.cpp",
+      "Git_blob_SHA1": "2251f17a69dd91d6beec94b97fd4e313df614211",
+      "bytes": 19999
+    },
+    {
+      "path": "src/Round61TimeOracle.cpp",
+      "Git_blob_SHA1": "0b8f1c946e6500385bed94eb23c682c8ff302a2f",
+      "bytes": 18640
+    },
+    {
+      "path": "src/Round62Passive.cpp",
+      "Git_blob_SHA1": "ce5d8972688ce3b0582e40ba19b959b33ec13e7d",
+      "bytes": 3531
+    },
+    {
+      "path": "src/Round62Thresholds.cpp",
+      "Git_blob_SHA1": "90910624a75b9e01939d9f31d11b384756ee4db1",
+      "bytes": 19778
+    },
+    {
+      "path": "src/Round63TimeResource.cpp",
+      "Git_blob_SHA1": "aef0753746adb9c9aa69caf5d139b8fc0b5af0e6",
+      "bytes": 11533
+    },
+    {
+      "path": "src/Round64SharedResource.cpp",
+      "Git_blob_SHA1": "b4a723b9116d8dd9be21cf5b97b4e8e1b320f966",
+      "bytes": 5508
+    },
+    {
+      "path": "src/Round65Projection.cpp",
+      "Git_blob_SHA1": "d81e9e6eb103b1cbca4074808d6fbc346a6fcf17",
+      "bytes": 14130
+    },
+    {
+      "path": "src/Round73JointInsertion.cpp",
+      "Git_blob_SHA1": "7c25edd41d48bebb10a395c51daf09e2e53f554f",
+      "bytes": 14626
+    },
+    {
+      "path": "src/Round75QuantityDescent.cpp",
+      "Git_blob_SHA1": "9c4c8a0ba670ef83a4eb6d1ff251565816df1b4a",
+      "bytes": 16645
+    },
+    {
+      "path": "src/Round76PhysicalClosure.cpp",
+      "Git_blob_SHA1": "16cca19d3cfbcf7fddee4f098cb6e0134ef6958b",
+      "bytes": 4689
+    },
+    {
+      "path": "src/Round78BalancedRelocation.cpp",
+      "Git_blob_SHA1": "649e455694fecbc1b2223e8e375733c0d147d5aa",
+      "bytes": 15936
+    },
+    {
+      "path": "src/Round83BlockExchange.cpp",
+      "Git_blob_SHA1": "7f201c4e5070656f89fab6c6ca24de63cfc0fd4f",
+      "bytes": 12512
+    },
+    {
+      "path": "src/Round92HandlingActivation.cpp",
+      "Git_blob_SHA1": "2b00f4c6390d642ec30d31d47d30ec3b399fdfb6",
+      "bytes": 20049
+    },
+    {
+      "path": "src/Round93CoQuantityDescent.cpp",
+      "Git_blob_SHA1": "bd5f036cae8adda61b68533b4543eecef460e4e7",
+      "bytes": 14863
+    },
+    {
+      "path": "src/Round95FullBlockDescent.cpp",
+      "Git_blob_SHA1": "01d77f2f56675dfa088eedd9260c0e8ea5654892",
+      "bytes": 15061
+    },
+    {
+      "path": "src/Round96MultiQuantity.cpp",
+      "Git_blob_SHA1": "0c3faad8a8cd3ed0622d796e92021fed4dc7482e",
+      "bytes": 5830
+    },
+    {
+      "path": "src/Round96RouteOrder.cpp",
+      "Git_blob_SHA1": "3380a53976695927c9755f9abcb8ca8412b5f590",
+      "bytes": 7334
+    },
+    {
+      "path": "src/Round97NativeClosure.cpp",
+      "Git_blob_SHA1": "2e6239dff06e017ec97d133ee6af03a9bcd5e46c",
+      "bytes": 21491
+    },
+    {
+      "path": "src/ServiceResourceCuts.cpp",
+      "Git_blob_SHA1": "489c641444f165d334195fdf0e5f3aa5b38685b8",
+      "bytes": 16211
+    },
+    {
+      "path": "src/ServiceResourceHull.cpp",
+      "Git_blob_SHA1": "da03964b418a817b0638eb4059127c2f9de106be",
+      "bytes": 9414
+    },
+    {
+      "path": "src/StaticSegmentedGini.cpp",
+      "Git_blob_SHA1": "9cabc76665a59f0ac0620b40ea3126a035b4e75d",
+      "bytes": 16389
+    },
+    {
+      "path": "src/StrictCertificate.cpp",
+      "Git_blob_SHA1": "6f9d286359d43b198d4165af740283dc007573c5",
+      "bytes": 12134
+    },
+    {
+      "path": "src/TailoredBC.cpp",
+      "Git_blob_SHA1": "865f5fbaba0dfbfce56cf4fb1e82406a2752d0e6",
+      "bytes": 5222
+    },
+    {
+      "path": "src/TailoredBCCallbacks.cpp",
+      "Git_blob_SHA1": "e3c4020e7826a661e3830ad4bdd7bfeefde0f57d",
+      "bytes": 2243
+    },
+    {
+      "path": "src/TailoredBCCplexApi.cpp",
+      "Git_blob_SHA1": "c595fe5ffbef01ccab537af006707e33472a1e24",
+      "bytes": 351106
+    },
+    {
+      "path": "src/TailoredBCCuts.cpp",
+      "Git_blob_SHA1": "6e4dc90b9d23a719af99fd5cb6fb5d17a41ed4c2",
+      "bytes": 177
+    },
+    {
+      "path": "src/TailoredExact.cpp",
+      "Git_blob_SHA1": "7430858084c9410c025d3ac393b882139d389c23",
+      "bytes": 57558
+    },
+    {
+      "path": "src/compare_main.cpp",
+      "Git_blob_SHA1": "1ea77d593afdc9913103fd6b02da54fa904a9bb8",
+      "bytes": 56923
+    },
+    {
+      "path": "src/hga_tgbc/HgaTgbcGreedy.cpp",
+      "Git_blob_SHA1": "b63c2b292cc74b85b895e8cc3be0e3f6113d2056",
+      "bytes": 100387
+    },
+    {
+      "path": "src/main.cpp",
+      "Git_blob_SHA1": "39be7e65672a8ddf390e4b1f09e0ab0a8e510d64",
+      "bytes": 1121099
+    },
+    {
+      "path": "src/round100_model_export.cpp",
+      "Git_blob_SHA1": "9fd64afd0b017a0bec4436e86a72bdf0b3372f72",
+      "bytes": 1718
+    },
+    {
+      "path": "src/round101_fleet_diagnostic.cpp",
+      "Git_blob_SHA1": "c98861b7a3d0fcb345406e5ae06eaef658b3763f",
+      "bytes": 2146
+    },
+    {
+      "path": "src/round102_service_diagnostic.cpp",
+      "Git_blob_SHA1": "4d8ec2ca61059ea0c39a9ee534a668f371a65a61",
+      "bytes": 2403
+    },
+    {
+      "path": "src/round103_hull_oracle.cpp",
+      "Git_blob_SHA1": "7322486cf283935a25100990f2d85093ad7c4262",
+      "bytes": 2544
+    },
+    {
+      "path": "src/round104_compress_main.cpp",
+      "Git_blob_SHA1": "9fd56a39950aebb1cc30f4437a559c2208da4408",
+      "bytes": 1762
+    },
+    {
+      "path": "src/round105_oracle_main.cpp",
+      "Git_blob_SHA1": "dfeb3098e036dceb8cd17b31f9017668e1bb7034",
+      "bytes": 1596
+    },
+    {
+      "path": "src/round106_research_main.cpp",
+      "Git_blob_SHA1": "dbc6583babcc6dcac2a2883404f2cdcb6dcbfa9e",
+      "bytes": 1920
+    },
+    {
+      "path": "src/round49_rc_extract_main.cpp",
+      "Git_blob_SHA1": "5ffca146bb5f008c30f473b278597bbbd6dae4e3",
+      "bytes": 5408
+    },
+    {
+      "path": "src/round50_interval_mip_main.cpp",
+      "Git_blob_SHA1": "e1c784a89c92f640e8c3ea829473a1034c147c5f",
+      "bytes": 87700
+    },
+    {
+      "path": "src/round54_inventory_route_main.cpp",
+      "Git_blob_SHA1": "d163b28effe5c3bc1a550b0b47df7b73e3af99c1",
+      "bytes": 26970
+    },
+    {
+      "path": "src/round61_candidate_main.cpp",
+      "Git_blob_SHA1": "7a2968b4fa104246e559803239dc54ed5377a79e",
+      "bytes": 7255
+    },
+    {
+      "path": "src/round61_time_main.cpp",
+      "Git_blob_SHA1": "f9fe3133bee8af198f95b7fec5e6a2a756fea60f",
+      "bytes": 2410
+    },
+    {
+      "path": "src/round62_native_micro.cpp",
+      "Git_blob_SHA1": "d4d7c3c9743bad6d9796ec7000e07c11f0685ae8",
+      "bytes": 4953
+    },
+    {
+      "path": "src/round62_projection_audit.cpp",
+      "Git_blob_SHA1": "9794124fe566707c12ec251d4449f6ae35c22a56",
+      "bytes": 12107
+    },
+    {
+      "path": "src/round62_threshold_main.cpp",
+      "Git_blob_SHA1": "d5e8b4adc4f2d01148d952ebf796151845626a18",
+      "bytes": 2093
+    },
+    {
+      "path": "src/round63_resource_probe.cpp",
+      "Git_blob_SHA1": "c0d8d4c336e0be8a2db938086739295a6eb65d4d",
+      "bytes": 15567
+    },
+    {
+      "path": "src/round64_projection_audit.cpp",
+      "Git_blob_SHA1": "a7dba14c693abc321ba9405d42d5c006c22fc9f4",
+      "bytes": 12156
+    },
+    {
+      "path": "src/round64_resource_probe.cpp",
+      "Git_blob_SHA1": "ab52bed81ffe52667775cce609b2e9c7d9153ace",
+      "bytes": 9206
+    },
+    {
+      "path": "src/round65_reference_build.cpp",
+      "Git_blob_SHA1": "5cbb2a301b5f6a4e8d6568c97e8277d3b9c633d8",
+      "bytes": 2711
+    },
+    {
+      "path": "src/round98_model_export.cpp",
+      "Git_blob_SHA1": "9abb20a758886b2b5f4fa89faaaf39f198b1a7df",
+      "bytes": 1681
+    },
+    {
+      "path": "src/round99_model_export.cpp",
+      "Git_blob_SHA1": "b3aefeba7fa488a9d1e57bf2e07b51dabf87d180",
+      "bytes": 1708
+    }
+  ],
+  "elapsed_engineering_seconds": 7.731777400011197
+}

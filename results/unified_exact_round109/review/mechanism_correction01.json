@@ -1,0 +1,963 @@
+{
+  "decision": "ACCEPT_CORRECTION",
+  "original_diag_SHA": "fbe5dc7cdab994ce6da5592bc76b3dd16ac0cd861df23066e43a81f3d56289b4",
+  "original_contract_SHA": "0dd72b8577ebb0b3e3b9a7802ce1737b4b5d56eae6e783bb3666f1151e9b041b",
+  "erroneous_text_preserved": "G50-C1 MB and ENS had zero Optimize calls. ENS zero certification is its own HGA physical witness plus original nonnegative objective floor; this role cannot identify a p/d, A/B, native MIP or branching cause.",
+  "correction": "Both G50-C1 M-B and ENS-C executed3 LP and1 terminal MIP with one inherited existing Start. ENS zero fleet is native_MIPSOL call4; ENS certificate was already independently reconstructed through real terminal native OPTIMAL/root cover. No zero-call shortcut was executed. Prior human zeroOptimize/HGA-only characterization is withdrawn.",
+  "actual_raw_reaudited": true,
+  "physics_cold_counterexample_floor_and_thresholds_unchanged": true,
+  "mechanisms": [
+    {
+      "arm": "M-B",
+      "actual_Optimize": 4,
+      "LP": 3,
+      "terminal_MIP": 1,
+      "submitted_existing_Start": 1,
+      "native_records": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "model_SHA": "2d4a2d6f42b1dd4d0c1903167307df79ff290bc4140b20be2b09c8b2d24857e2",
+          "model_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "native_log_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\native_logs\\L0_lp.gurobi.log",
+          "actual_read_native_log": "results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\native_logs\\L0_lp.gurobi.log",
+          "native_log_SHA": "7e43ce5c38ab006ca93c552abf385a4420a0eb1f7079e02fb21e4bdb51cb35fd",
+          "native_status": "OPTIMAL",
+          "solve_kind": "LP",
+          "return_sequence": 4,
+          "native_types": null,
+          "returned_native_log_L": 0.0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "model_SHA": "7c2bc3a3f541cb5b5a1c0213c00f057911bf949f041e1c18248e87f44a961876",
+          "model_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\models\\L0.0_epoch_0_generation_2.lp",
+          "native_log_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\native_logs\\L0.0_lp.gurobi.log",
+          "actual_read_native_log": "results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\native_logs\\L0.0_lp.gurobi.log",
+          "native_log_SHA": "5a9206315ec0c15fe26d42f5b557c6d89971b305141828efa2840b1154f374cd",
+          "native_status": "OPTIMAL",
+          "solve_kind": "LP",
+          "return_sequence": 6,
+          "native_types": null,
+          "returned_native_log_L": 0.0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "model_SHA": "dd125a32593647df314b967e5d664d9a1098ece73b06a6f0e06f1ffef0585a1d",
+          "model_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\models\\L0.1_epoch_0_generation_3.lp",
+          "native_log_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\native_logs\\L0.1_lp.gurobi.log",
+          "actual_read_native_log": "results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\native_logs\\L0.1_lp.gurobi.log",
+          "native_log_SHA": "4c720ef6874c49106f169eb24a66b4f2ca403dccf9b65fae69e3e3d020b7c7d0",
+          "native_status": "OPTIMAL",
+          "solve_kind": "LP",
+          "return_sequence": 8,
+          "native_types": null,
+          "returned_native_log_L": 0.01626008968609865
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "model_SHA": "2d4a2d6f42b1dd4d0c1903167307df79ff290bc4140b20be2b09c8b2d24857e2",
+          "model_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+          "native_log_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+          "actual_read_native_log": "results\\unified_exact_round109\\campaign\\raw\\13_G50-C1_S0_M-B\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+          "native_log_SHA": "63350f5c788c748aafd0af10eddf4ceb0cb6bf94897cd73ce72bf1d06eb525d8",
+          "native_status": "TIME_LIMIT",
+          "solve_kind": "MIP",
+          "return_sequence": 13,
+          "native_types": {
+            "C": 12641,
+            "I": 250,
+            "B": 11062
+          },
+          "returned_native_log_L": 0.0
+        }
+      ],
+      "final_cover": {
+        "root_gamma": [
+          0.0,
+          0.0325201793721973
+        ],
+        "same_arm_startup_physical_U": 0.03252017937219731,
+        "physical_gmax": 0.98,
+        "raw_published_final_L": 0.0,
+        "unconditional_whole_root_supported_L": 0.0,
+        "conditional_min_raw_L_own_U": 0.0,
+        "live_leaves": [
+          {
+            "leaf_id": "L0",
+            "parent_id": "",
+            "depth": "0",
+            "child_index": "-1",
+            "gamma_L": "0",
+            "gamma_U": "0.032520179372197297",
+            "base_lower_bound": "0",
+            "lower_bound": "0",
+            "status": "open",
+            "lp_complete": "1",
+            "lp_optimal": "1",
+            "lp_infeasible": "0",
+            "lp_bound": "0",
+            "terminal_mip_started": "1",
+            "terminal_ready": "1",
+            "coalesced_block_id": "",
+            "coverage_member_ids": "",
+            "c6_native_phase_count": "0",
+            "c6_frontier_milestone_reached": "0",
+            "c6_children_ready": "0",
+            "single_child_contraction_parent": "0",
+            "strict_infeasible_half_verified": "0",
+            "contracted_infeasible_gamma_L": "",
+            "contracted_infeasible_gamma_U": "",
+            "contraction_source": "",
+            "closure_source": "",
+            "lower_bound_sources": "objective_nonnegative_penalty_G_floor;optimal_complete_lp_relaxation;native_terminal_mip_bound"
+          }
+        ],
+        "independently_qualified_actual_leaves": [
+          {
+            "leaf": "L0",
+            "original_status": "open",
+            "G_interval": [
+              0.0,
+              0.0325201793721973
+            ],
+            "raw_leaf_L": 0.0,
+            "whole_scope_supported_L": 0.0,
+            "conditional_claim": 0.0,
+            "discharge_reason": null,
+            "discharged": false
+          }
+        ],
+        "actual_parent_child_partitions": [],
+        "actual_atomic_split_events": [],
+        "whole_improving_domain_covered": true,
+        "all_relevant_closed": false,
+        "open_relevant_leaves": 1,
+        "proofs": [
+          {
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 4,
+            "call": 1,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0,
+            "hi": 0.01626008968609865,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 6,
+            "call": 2,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0.01626008968609865,
+            "hi": 0.0325201793721973,
+            "L": 0.01626008968609865,
+            "cutoff": 0.0325201793721973,
+            "sequence": 8,
+            "call": 3,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 11,
+            "call": 4,
+            "source": "actual_same_arm_committed_integer_native_callback"
+          }
+        ],
+        "global_trace_rows": 10,
+        "raw_final_trace": {
+          "process_elapsed_seconds": "1770.070203",
+          "exact_phase_elapsed_seconds": "1759.6958678000001",
+          "event_type": "finalization",
+          "active_leaf": "",
+          "active_leaf_valid_lower_bound": "0",
+          "other_open_leaf_min_valid_lower_bound": "",
+          "valid_global_lower_bound": "0",
+          "verified_global_upper_bound": "0.0081826280623608014",
+          "open_relevant_leaf_count": "1",
+          "closed_relevant_leaf_count": "0",
+          "event_source": "graceful_deadline_final_valid_bound"
+        },
+        "genuine_active_leaf_split": false,
+        "native_final_proofs": [
+          {
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 4,
+            "call": 1,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0,
+            "hi": 0.01626008968609865,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 6,
+            "call": 2,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0.01626008968609865,
+            "hi": 0.0325201793721973,
+            "L": 0.01626008968609865,
+            "cutoff": 0.0325201793721973,
+            "sequence": 8,
+            "call": 3,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 13,
+            "call": 4,
+            "source": "actual_returned_integer_native_final_log"
+          }
+        ]
+      }
+    },
+    {
+      "arm": "ENS-C",
+      "actual_Optimize": 4,
+      "LP": 3,
+      "terminal_MIP": 1,
+      "submitted_existing_Start": 1,
+      "native_records": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "model_SHA": "0a402b1d2fc25ac807e018f71659d8c703ece160a67ad037befe3bad91e53b2d",
+          "model_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+          "native_log_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\native_logs\\L0_lp.gurobi.log",
+          "actual_read_native_log": "results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\native_logs\\L0_lp.gurobi.log",
+          "native_log_SHA": "c03164e20888bd9561bc105dad5f9a040d5a1c16178528c151d7b7d18561a22b",
+          "native_status": "OPTIMAL",
+          "solve_kind": "LP",
+          "return_sequence": 4,
+          "native_types": null,
+          "returned_native_log_L": 0.0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "model_SHA": "74948437465c2f118e074d4aa2fd2675df91126c6c222360fc84a9b433848cdb",
+          "model_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\models\\L0.0_epoch_0_generation_2.lp",
+          "native_log_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\native_logs\\L0.0_lp.gurobi.log",
+          "actual_read_native_log": "results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\native_logs\\L0.0_lp.gurobi.log",
+          "native_log_SHA": "013ac7ed9de299554d0a997236604a0fbb6d4df1b30849186918ce015db53d13",
+          "native_status": "OPTIMAL",
+          "solve_kind": "LP",
+          "return_sequence": 6,
+          "native_types": null,
+          "returned_native_log_L": 0.0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "model_SHA": "2f9bfbcdb3a93afd91e201c9b4965bd094491f14dd0dbb255b63b043780deee7",
+          "model_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\models\\L0.1_epoch_0_generation_3.lp",
+          "native_log_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\native_logs\\L0.1_lp.gurobi.log",
+          "actual_read_native_log": "results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\native_logs\\L0.1_lp.gurobi.log",
+          "native_log_SHA": "29a65070477e66b6767e8f342c6473e70ae5b638afc74d8b3d7c38f22bd7ee79",
+          "native_status": "OPTIMAL",
+          "solve_kind": "LP",
+          "return_sequence": 8,
+          "native_types": null,
+          "returned_native_log_L": 0.01626008968609865
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "model_SHA": "0a402b1d2fc25ac807e018f71659d8c703ece160a67ad037befe3bad91e53b2d",
+          "model_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+          "native_log_path": "E:\\codes\\ExactEBRP-round109\\results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+          "actual_read_native_log": "results\\unified_exact_round109\\campaign\\raw\\14_G50-C1_S0_ENS-C\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+          "native_log_SHA": "d98b2ff6d52f7dd3979524e042518fb97af57cc3475603c8ee4c4d570e7c2413",
+          "native_status": "OPTIMAL",
+          "solve_kind": "MIP",
+          "return_sequence": 14,
+          "native_types": {
+            "C": 12241,
+            "I": 650,
+            "B": 11062
+          },
+          "returned_native_log_L": 0.0
+        }
+      ],
+      "final_cover": {
+        "root_gamma": [
+          0.0,
+          0.0325201793721973
+        ],
+        "same_arm_startup_physical_U": 0.03252017937219731,
+        "physical_gmax": 0.98,
+        "raw_published_final_L": 0.0,
+        "unconditional_whole_root_supported_L": 0.0,
+        "conditional_min_raw_L_own_U": 0.0,
+        "live_leaves": [
+          {
+            "leaf_id": "L0",
+            "parent_id": "",
+            "depth": "0",
+            "child_index": "-1",
+            "gamma_L": "0",
+            "gamma_U": "0.032520179372197297",
+            "base_lower_bound": "0",
+            "lower_bound": "2.9976021664879229e-17",
+            "status": "closed",
+            "lp_complete": "1",
+            "lp_optimal": "1",
+            "lp_infeasible": "0",
+            "lp_bound": "0",
+            "terminal_mip_started": "1",
+            "terminal_ready": "1",
+            "coalesced_block_id": "",
+            "coverage_member_ids": "",
+            "c6_native_phase_count": "0",
+            "c6_frontier_milestone_reached": "0",
+            "c6_children_ready": "0",
+            "single_child_contraction_parent": "0",
+            "strict_infeasible_half_verified": "0",
+            "contracted_infeasible_gamma_L": "",
+            "contracted_infeasible_gamma_U": "",
+            "contraction_source": "",
+            "closure_source": "native_terminal_mip_optimal",
+            "lower_bound_sources": "objective_nonnegative_penalty_G_floor;optimal_complete_lp_relaxation;native_terminal_mip_bound"
+          }
+        ],
+        "independently_qualified_actual_leaves": [
+          {
+            "leaf": "L0",
+            "original_status": "closed",
+            "G_interval": [
+              0.0,
+              0.0325201793721973
+            ],
+            "raw_leaf_L": 2.997602166487923e-17,
+            "whole_scope_supported_L": 0.0,
+            "conditional_claim": 0.0,
+            "discharge_reason": "terminal_saved_status",
+            "discharged": true
+          }
+        ],
+        "actual_parent_child_partitions": [],
+        "actual_atomic_split_events": [],
+        "whole_improving_domain_covered": true,
+        "all_relevant_closed": true,
+        "open_relevant_leaves": 0,
+        "proofs": [
+          {
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 4,
+            "call": 1,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0,
+            "hi": 0.01626008968609865,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 6,
+            "call": 2,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0.01626008968609865,
+            "hi": 0.0325201793721973,
+            "L": 0.01626008968609865,
+            "cutoff": 0.0325201793721973,
+            "sequence": 8,
+            "call": 3,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 11,
+            "call": 4,
+            "source": "actual_same_arm_committed_integer_native_callback"
+          }
+        ],
+        "global_trace_rows": 9,
+        "raw_final_trace": {
+          "process_elapsed_seconds": "315.46770579999998",
+          "exact_phase_elapsed_seconds": "305.09545320000001",
+          "event_type": "finalization",
+          "active_leaf": "",
+          "active_leaf_valid_lower_bound": "0",
+          "other_open_leaf_min_valid_lower_bound": "",
+          "valid_global_lower_bound": "0",
+          "verified_global_upper_bound": "0",
+          "open_relevant_leaf_count": "0",
+          "closed_relevant_leaf_count": "0",
+          "event_source": "completed_exact_tree_final_bound"
+        },
+        "genuine_active_leaf_split": false,
+        "native_final_proofs": [
+          {
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 4,
+            "call": 1,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0,
+            "hi": 0.01626008968609865,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 6,
+            "call": 2,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0.01626008968609865,
+            "hi": 0.0325201793721973,
+            "L": 0.01626008968609865,
+            "cutoff": 0.0325201793721973,
+            "sequence": 8,
+            "call": 3,
+            "source": "actual_returned_native_LP"
+          },
+          {
+            "lo": 0,
+            "hi": 0.0325201793721973,
+            "L": 0.0,
+            "cutoff": 0.0325201793721973,
+            "sequence": 14,
+            "call": 4,
+            "source": "actual_returned_integer_native_final_log"
+          }
+        ]
+      }
+    }
+  ],
+  "ENS_zero_witnesses": [
+    {
+      "U": 0.0,
+      "G": 0.0,
+      "P": 0.0,
+      "S": 50.0,
+      "H": 0.0,
+      "final_inventories": [
+        50000,
+        9,
+        10,
+        12,
+        10,
+        9,
+        10,
+        9,
+        10,
+        11,
+        10,
+        9,
+        11,
+        11,
+        11,
+        12,
+        12,
+        10,
+        10,
+        11,
+        9,
+        10,
+        10,
+        11,
+        13,
+        10,
+        11,
+        9,
+        9,
+        10,
+        11,
+        13,
+        9,
+        9,
+        10,
+        13,
+        9,
+        11,
+        11,
+        11,
+        10,
+        10,
+        11,
+        10,
+        13,
+        11,
+        10,
+        12,
+        10,
+        15,
+        9
+      ],
+      "routes": [
+        {
+          "vehicle": 0,
+          "travel_seconds": 3267.1529819508005,
+          "handling_seconds": 3120,
+          "duration_seconds": 6387.1529819508005,
+          "prefix_loads": [
+            0,
+            3,
+            0,
+            4,
+            8,
+            12,
+            16,
+            12,
+            8,
+            4,
+            8,
+            11,
+            7,
+            3,
+            0
+          ],
+          "return_load": 0,
+          "total_pickup": 26,
+          "total_station_drop": 26
+        },
+        {
+          "vehicle": 1,
+          "travel_seconds": 4420.967382758984,
+          "handling_seconds": 2760,
+          "duration_seconds": 7180.967382758984,
+          "prefix_loads": [
+            0,
+            3,
+            7,
+            3,
+            8,
+            4,
+            9,
+            5,
+            8,
+            4,
+            7,
+            4,
+            0
+          ],
+          "return_load": 0,
+          "total_pickup": 23,
+          "total_station_drop": 23
+        },
+        {
+          "vehicle": 2,
+          "travel_seconds": 4317.188309052213,
+          "handling_seconds": 2880,
+          "duration_seconds": 7197.188309052213,
+          "prefix_loads": [
+            0,
+            4,
+            8,
+            12,
+            16,
+            20,
+            24,
+            20,
+            16,
+            13,
+            9,
+            5,
+            0
+          ],
+          "return_load": 0,
+          "total_pickup": 24,
+          "total_station_drop": 24
+        },
+        {
+          "vehicle": 3,
+          "travel_seconds": 4342.982539580989,
+          "handling_seconds": 2760,
+          "duration_seconds": 7102.982539580989,
+          "prefix_loads": [
+            0,
+            3,
+            6,
+            10,
+            6,
+            3,
+            8,
+            4,
+            8,
+            12,
+            8,
+            4,
+            0
+          ],
+          "return_load": 0,
+          "total_pickup": 23,
+          "total_station_drop": 23
+        }
+      ],
+      "full_routes": [
+        {
+          "vehicle": 0,
+          "nodes": [
+            0,
+            4,
+            1,
+            2,
+            8,
+            3,
+            5,
+            15,
+            22,
+            12,
+            21,
+            32,
+            18,
+            10,
+            7,
+            0
+          ],
+          "operations": [
+            {
+              "station": 4,
+              "pickup": 3,
+              "drop": 0
+            },
+            {
+              "station": 1,
+              "pickup": 0,
+              "drop": 3
+            },
+            {
+              "station": 2,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 8,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 3,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 5,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 15,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 22,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 12,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 21,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 32,
+              "pickup": 3,
+              "drop": 0
+            },
+            {
+              "station": 18,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 10,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 7,
+              "pickup": 0,
+              "drop": 3
+            }
+          ]
+        },
+        {
+          "vehicle": 1,
+          "nodes": [
+            0,
+            37,
+            38,
+            41,
+            24,
+            13,
+            25,
+            48,
+            20,
+            17,
+            11,
+            28,
+            14,
+            0
+          ],
+          "operations": [
+            {
+              "station": 37,
+              "pickup": 3,
+              "drop": 0
+            },
+            {
+              "station": 38,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 41,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 24,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 13,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 25,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 48,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 20,
+              "pickup": 3,
+              "drop": 0
+            },
+            {
+              "station": 17,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 11,
+              "pickup": 3,
+              "drop": 0
+            },
+            {
+              "station": 28,
+              "pickup": 0,
+              "drop": 3
+            },
+            {
+              "station": 14,
+              "pickup": 0,
+              "drop": 4
+            }
+          ]
+        },
+        {
+          "vehicle": 2,
+          "nodes": [
+            0,
+            16,
+            19,
+            30,
+            39,
+            33,
+            23,
+            35,
+            46,
+            50,
+            6,
+            9,
+            47,
+            0
+          ],
+          "operations": [
+            {
+              "station": 16,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 19,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 30,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 39,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 33,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 23,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 35,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 46,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 50,
+              "pickup": 0,
+              "drop": 3
+            },
+            {
+              "station": 6,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 9,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 47,
+              "pickup": 0,
+              "drop": 5
+            }
+          ]
+        },
+        {
+          "vehicle": 3,
+          "nodes": [
+            0,
+            40,
+            27,
+            36,
+            45,
+            26,
+            49,
+            43,
+            34,
+            31,
+            42,
+            44,
+            29,
+            0
+          ],
+          "operations": [
+            {
+              "station": 40,
+              "pickup": 3,
+              "drop": 0
+            },
+            {
+              "station": 27,
+              "pickup": 3,
+              "drop": 0
+            },
+            {
+              "station": 36,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 45,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 26,
+              "pickup": 0,
+              "drop": 3
+            },
+            {
+              "station": 49,
+              "pickup": 5,
+              "drop": 0
+            },
+            {
+              "station": 43,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 34,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 31,
+              "pickup": 4,
+              "drop": 0
+            },
+            {
+              "station": 42,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 44,
+              "pickup": 0,
+              "drop": 4
+            },
+            {
+              "station": 29,
+              "pickup": 0,
+              "drop": 4
+            }
+          ]
+        }
+      ],
+      "empty_vehicles_added": 0,
+      "sequence": 13,
+      "source": "native_MIPSOL_verified_original_routes",
+      "improving": 1,
+      "raw_available": 315.48400000005495,
+      "safe_complete_arm_available": 316.74503960006405
+    }
+  ],
+  "bounded_causal_statement": "This one role establishes actual method outcomes and integer-domain difference, not independent causal attribution to p/d alone, Start alone or branching. No algorithm/rerun intervention occurred.",
+  "reviewer_Optimize": 0
+}

@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "optimizer_calls": 0,
+  "starts": [
+    {
+      "start_path": "results/unified_exact_round99/confirmation_recovery01/raw/02_N3_ENS-C/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+      "start_sha256": "316fd22eb5e75b6e54abab844ad0bb8a1814bec77e9cec04dcebc24d3c56f0bf",
+      "vector_sha256": "d87de8ebd50c9fefa59ca87036cf205e54091978a52492dbc0df85210f1aa582",
+      "model_sha256": "84e8353102c90d603ae36c0f4727b74813cd0dde925a40ed0e9d955b8a882128",
+      "maximum_absolute_residual": 9.847678228425139e-14,
+      "mode": "off",
+      "rows": 105575,
+      "columns": 26795,
+      "objective": 0.31640342284629175,
+      "actual_quantity_type": "I",
+      "direction_columns": 200,
+      "per_column_restored_type_checked": true,
+      "ordered_native_columns_checked": true,
+      "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+    },
+    {
+      "start_path": "results/unified_exact_round99/confirmation_recovery01/raw/02_N3_ENS-C/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+      "start_sha256": "00f376111ed0d248b025d3fb30045ad0b4fe07e0f9b58bb300b07868cdfddf56",
+      "vector_sha256": "d87de8ebd50c9fefa59ca87036cf205e54091978a52492dbc0df85210f1aa582",
+      "model_sha256": "84e8353102c90d603ae36c0f4727b74813cd0dde925a40ed0e9d955b8a882128",
+      "maximum_absolute_residual": 9.847678228425139e-14,
+      "mode": "off",
+      "rows": 105575,
+      "columns": 26795,
+      "objective": 0.31640342284629175,
+      "actual_quantity_type": "I",
+      "direction_columns": 200,
+      "per_column_restored_type_checked": true,
+      "ordered_native_columns_checked": true,
+      "parser_scope": "strict C++ one-line linear LP grammar; actual CSV/readback; stdlib only"
+    }
+  ]
+}

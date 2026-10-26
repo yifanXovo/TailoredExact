@@ -1,0 +1,420 @@
+{
+  "version": "round109-geographic-mb-evaluation-v1",
+  "roles": [
+    {
+      "number": 1,
+      "id": "G20-C1",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 2,
+      "id": "G20-C2",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 900,
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 3,
+      "id": "G20-R1",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "surplus",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 900,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 4,
+      "id": "G20-R2",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 5,
+      "id": "G50-C1",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "balanced",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 6,
+      "id": "G50-C2",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 7,
+      "id": "G50-R1",
+      "V": 50,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 8,
+      "id": "G50-R2",
+      "V": 50,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 9,
+      "id": "G100-C1",
+      "V": 100,
+      "M": 8,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "surplus",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40,
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 10,
+      "id": "G100-C2",
+      "V": 100,
+      "M": 8,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 3600,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "ENS-C"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 11,
+      "id": "G100-R1",
+      "V": 100,
+      "M": 8,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "balanced",
+      "Q_class": "X",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40,
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 3600,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    },
+    {
+      "number": 12,
+      "id": "G100-R2",
+      "V": 100,
+      "M": 8,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_class": "H",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "main"
+    }
+  ],
+  "seed_checks": [
+    {
+      "number": 13,
+      "id": "G20-C2",
+      "gurobi_seed": 1,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ]
+    },
+    {
+      "number": 14,
+      "id": "G50-R1",
+      "gurobi_seed": 1,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ]
+    },
+    {
+      "number": 15,
+      "id": "G100-R2",
+      "gurobi_seed": 1,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ]
+    }
+  ],
+  "public_source": {
+    "path": "results/data_generation_citibike_round57/source_station_table.csv",
+    "commit": "d11c94d81e6a2c5dcd64dad8c54b390f3cb4a027",
+    "blob": "84fb8af5aaa9836d316820227e4f06e8cd4b1e63",
+    "bytes": 69678,
+    "SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "rows": 443,
+    "eligible": 442
+  },
+  "adapter_SHA": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+  "original_generator_SHA": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
+  "prepare_SHA": "e8684188f2b015d68702d0400570415ec6ef1f15d1f6b46ad5e8b4bb7913342a",
+  "pure_rules": [
+    "four farthest anchors per V; original ties",
+    "compact nearest V; regional farthest-first within nearest 2V",
+    "centroid at three decimals",
+    "target 44%-56% capacity by inherited hash profile",
+    "12% total offset, at least V; local imbalance; deterministic total correction and ensure_both_local_signs",
+    "max-normalized weights; inherited four-decimal compatibility min_ratio; original points-only writer"
+  ],
+  "differences": [
+    "public source table replaces private capacity/coordinate rehash",
+    "new family prefix in all hash material",
+    "explicit heterogeneous or homogeneous fleet header; listed external T",
+    "trace-only intermediate recording"
+  ],
+  "no_performance_pilot": true,
+  "retain_every_legal_draw": true,
+  "zero_solve_checks_only": true,
+  "minimum_ratio_is_compatibility_only": true,
+  "empty_routes_are_data_witness_only_never_extra_Start": true,
+  "synthetic_fields": [
+    "depot",
+    "target",
+    "initial",
+    "weights",
+    "min_ratio",
+    "fleet",
+    "T"
+  ],
+  "same_city_source": true,
+  "independent_IID_geographic_samples_claim": false
+}

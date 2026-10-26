@@ -1,0 +1,13 @@
+In file included from C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_reference.cpp:5:
+C:/Users/Administrator/.codex/worktrees/round121-frozen-d1-confirmation/ExactEBRP/src/round65_reference_build.cpp:9:9: warning: "NOMINMAX" redefined
+    9 | #define NOMINMAX
+      |         ^~~~~~~~
+In file included from D:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h:680,
+                 from D:/msys64/ucrt64/include/c++/14.2.0/bits/requires_hosted.h:31,
+                 from D:/msys64/ucrt64/include/c++/14.2.0/chrono:35,
+                 from C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\include/Instance.hpp:3,
+                 from C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\include/CanonicalCompactModel.hpp:3,
+                 from C:/Users/Administrator/.codex/worktrees/round121-frozen-d1-confirmation/ExactEBRP/src/round65_reference_build.cpp:3:
+D:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/os_defines.h:45:9: note: this is the location of the previous definition
+   45 | #define NOMINMAX 1
+      |         ^~~~~~~~

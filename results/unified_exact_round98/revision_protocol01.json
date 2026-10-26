@@ -1,0 +1,53 @@
+{
+  "roles": [
+    {
+      "id": "R97-C3",
+      "V": 50,
+      "M": 4,
+      "Q": 25,
+      "geometry": "anisotropic_cloud",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "R3",
+        "P-GRB",
+        "ENS-C",
+        "R2"
+      ],
+      "input_path": "reference/round97_confirmation/C3.txt",
+      "instance_path": "reference/round97_confirmation/C3.txt",
+      "input_sha256": "8f440bf70eb96e51c709d36d6b29a12d5ba2539ac03798ff2512e69b3026991e",
+      "scenario_id": "round97-native-confirmation-v1-C3",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 987,
+      "total_target": 1063,
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": -773033508,
+        "canonical_sha256": "27ad8303644dad2e2316cb50502b003b61c60c45ec7f565a161ed6ad8b9ab917",
+        "columns": 13412,
+        "rows": 35696
+      },
+      "Q_vector": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "historical_initial_witness": "results/unified_exact_round97/confirmation01/raw/08_C3_OFF/external/initial_witness.json",
+      "historical_initial_witness_sha256": "edc6ffd4e45db6c87656e8dd897957803cd033d3460d53f09e6ccfa095230444",
+      "diagnostic_cutoff": 0.2950507923367922,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.2950507923367922,
+      "prepaid_reference": "vehicle01"
+    }
+  ],
+  "phase": "registered C3 vehicle-state development",
+  "plan_sha256": "48b37d9692a355b7e7ad30fbd1656733708687dcc53e8e847ab0c822dc54f79d",
+  "maximum_calls_qualification": 7,
+  "maximum_starts_full": 4,
+  "maximum_full_outer_seconds": 7200
+}

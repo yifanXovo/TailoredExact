@@ -1,0 +1,166 @@
+{
+  "stage": "BLOCKED",
+  "evidence_layer": "R112_COMPLETE12_PLUS_R113_GEO8",
+  "new_formal_arm_positions": 8,
+  "new_qualified_formal_arms": 3,
+  "inherited_qualified_formal_arms": 12,
+  "layered_arm_positions": 20,
+  "incomplete_new_formal_arms": 1,
+  "interrupted_new_formal_arms": 0,
+  "postexit_blocked_new_formal_arms": 1,
+  "unstarted_new_formal_arms": 4,
+  "pair_positions": 30,
+  "new_pair_positions": 12,
+  "inherited_evaluable_pairs": 18,
+  "evaluable_pairs": 21,
+  "unevaluable_pairs": 9,
+  "qualified_qualification_arms": 4,
+  "backend_conclusions": {
+    "ENS-C": {
+      "status": "INCOMPLETE_ATTRIBUTION",
+      "denominator": 5,
+      "eligible_count": 4,
+      "counts": {
+        "WIN": 3,
+        "LOSS": 1
+      },
+      "five_role_vector": [
+        {
+          "id": "F2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "R98-C2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "R108-L48",
+          "classification": "LOSS",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "G50-C1",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 113,
+          "performance_helper_identity": "303e900baf8d6dfb6f80570a9c585aded727ef66202148df2237a900eee0ba2b"
+        },
+        {
+          "id": "G100-R2",
+          "classification": "UNEVALUABLE",
+          "eligible": false,
+          "reason": "CURRENT_AUTHORITY_BARRIER_FIXED_STOP",
+          "reason_codes": [
+            "CURRENT_AUTHORITY_BARRIER_FIXED_STOP",
+            "MISSING_OR_UNEVALUABLE"
+          ],
+          "severe_regression": null,
+          "origin_round": 113,
+          "performance_helper_identity": "303e900baf8d6dfb6f80570a9c585aded727ef66202148df2237a900eee0ba2b"
+        }
+      ]
+    },
+    "M-B": {
+      "status": "INCOMPLETE_ATTRIBUTION",
+      "denominator": 5,
+      "eligible_count": 4,
+      "counts": {
+        "WIN": 2,
+        "LOSS": 1,
+        "TIE": 1
+      },
+      "five_role_vector": [
+        {
+          "id": "F2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "R98-C2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "R108-L48",
+          "classification": "LOSS",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 112,
+          "performance_helper_identity": "a21242977b11845d34f328bf58963bc089b2b32ad89953e305d24c552751553b"
+        },
+        {
+          "id": "G50-C1",
+          "classification": "TIE",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false,
+          "origin_round": 113,
+          "performance_helper_identity": "303e900baf8d6dfb6f80570a9c585aded727ef66202148df2237a900eee0ba2b"
+        },
+        {
+          "id": "G100-R2",
+          "classification": "UNEVALUABLE",
+          "eligible": false,
+          "reason": "CURRENT_AUTHORITY_BARRIER_FIXED_STOP",
+          "reason_codes": [
+            "CURRENT_AUTHORITY_BARRIER_FIXED_STOP",
+            "MISSING_OR_UNEVALUABLE"
+          ],
+          "severe_regression": null,
+          "origin_round": 113,
+          "performance_helper_identity": "303e900baf8d6dfb6f80570a9c585aded727ef66202148df2237a900eee0ba2b"
+        }
+      ]
+    }
+  },
+  "conservative_starts": 15,
+  "outer_fee_seconds_upper": 6112.501114845276,
+  "native_Optimize_completed_new_and_qualification_journals": 21,
+  "unqualified_new_formal_actual_Optimize": 1,
+  "unqualified_new_formal_returned": 1,
+  "actual_Optimize_all_observed_new_and_qualification": 22,
+  "formal_native_Optimize_qualified_new_arms": 9,
+  "reader_SHA": "7aecf8ae0a8fcad16bafa96b7739b9cd63f0c5436fa382bf421cfac8c30b7cc3",
+  "pure_offline": true,
+  "native_rerun": false,
+  "default_ENS_changed": false,
+  "primary_benchmark": "cold P-GRB",
+  "prior_round112_state": "BLOCKED",
+  "prior_partial13_endpoint_rejected": true,
+  "old_clock_adjusted": false,
+  "all20_measured_under_new_wrapper": false,
+  "current_reader_fee_pending": false
+}

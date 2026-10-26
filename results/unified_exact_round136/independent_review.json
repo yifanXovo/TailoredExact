@@ -1,0 +1,193 @@
+{
+  "reviewer": "/root/round136_independent_review",
+  "role": "different agent from primary organizer; independent saved-data/source and guarded-cleanup review",
+  "UTC": "2026-10-26T18:02:20.676290+00:00",
+  "status": "PASS_PREPARATION_COMPLETE_PENDING_D2_USER_CONFIRMATION",
+  "content_review": "PASS",
+  "delivery_pending": [],
+  "checks": {
+    "G3_1_science_and_identity": {
+      "status": "PASS",
+      "frozen_production_sources_independently_hashed": 218,
+      "production_CXX_or_build_file_diff_from_R135": false,
+      "immutable_R135_paper_and_evidence_files_hashed": 9,
+      "certificate_counts": {
+        "S2": 10,
+        "AP": 10
+      },
+      "R135_arms_pairs_roles": [
+        32,
+        16,
+        7
+      ],
+      "material_AP_certified_time_losses": [
+        {
+          "role": "K-15-S",
+          "seed": "0",
+          "direction": "Lose"
+        },
+        {
+          "role": "X-35-B",
+          "seed": "0",
+          "direction": "Lose"
+        }
+      ],
+      "R134_comparable_S2_state_and_U_equal": 12,
+      "equal_cap_subset": 8,
+      "claims_reviewed": "R132 17/24 S2 and R134 12/14 are separate panels/policies; AP research-only/off; fixed-domain relaxation inclusion does not order finite-search lower bounds or certification times; no causal-branch attribution"
+    },
+    "G3_2_history": {
+      "status": "PASS",
+      "open_old_PRs": 113,
+      "distinct_heads": 97,
+      "duplicate_groups": 16,
+      "contained_old_PRs": 112,
+      "only_independent_PR": 85,
+      "independent_head": "3b4942490bce0d3da73dcf9fdf27344e9ab04296",
+      "main_is_R135_merge_base": true,
+      "R135_ahead_behind": [
+        735,
+        0
+      ],
+      "ordinary_merge_and_final_user_confirmation_required": true,
+      "archive_refs_independently_read_back": true,
+      "actual_consolidation_PR_not_yet_created_at_this_phase": true
+    },
+    "G3_3_launcher": {
+      "status": "PASS",
+      "independent_whole_vector_normalization_matches_all_S2_launches": 16,
+      "actual_launcher_plans_for_all_16_independently_checked_in_prior_native_free_step": true,
+      "AP_flag_absent": true,
+      "ENS_C_compatibility_default_distinguished": true,
+      "complete_own_H_native_single_thread_affinity4_cap_minus6_hardstop_minus2": true,
+      "resolved_review_suggestions": [
+        "UC example physical T=7200",
+        "default --run DLL SHA guard"
+      ],
+      "config_SHA256": "f3f20396a3dbba3a98b7d33dcc640513fe4c7c9ce2a9ce9843dc14cd3cccf938",
+      "launcher_SHA256": "663bedff4d3423e8dd7c46ef2bcdb5c141676340fbcb9c26d0ffe833ee06501d"
+    },
+    "G3_4_cleanup": {
+      "status": "PASS",
+      "specific_seven_path_plan_independently_checked_before_execution": true,
+      "all_render_files_byte_count_SHA_and_indexed_PNG_SHA_checked_before_execution": true,
+      "source_PDF_and_review_receipts_retained": true,
+      "R124_R125_dirty_untracked_ignored_zero_and_ref_ancestry_checked_before_execution": true,
+      "resolved_script_review_suggestion": "refuse unexpected render subdirectories before recursive removal",
+      "actual_seven_paths_absent_after_guarded_cleanup": true,
+      "logical_bytes_removed": 503405825,
+      "observed_E_free_byte_change": 556449792,
+      "original_HEAD_and_9_protected_file_hashes_rechecked": true,
+      "R120_core_worktree_and_R122_R130_R132_R133_R134_R135_dependency_worktrees_retained": true,
+      "passed_R135_restore_retained": true,
+      "locked_and_other_ignored_raw_worktrees_retained": true,
+      "no_deletion_performed_by_reviewer": true
+    },
+    "G3_5_handoff_scope": {
+      "status": "PASS",
+      "one_maintained_source_set": "results/unified_exact_round135 paper_body.md + model_and_algorithm_appendices.md assembled by round135_documents.py assemble; supplement/references/figures alongside",
+      "current_manuscript_and_PDF_bytes_unchanged": true,
+      "author_fact_gaps": [
+        "HGA-TGBC author order/affiliations/current status",
+        "exact-method author order/affiliations",
+        "CITI original capture URL/date/443-row selection provenance"
+      ],
+      "concrete_TRE_EJOR_positioning_questions_and_feedback_triggers": true,
+      "new_local_links_checked": 56,
+      "one_review_link_pending_copy": [],
+      "native_seconds": 0,
+      "Optimize": 0,
+      "compile": 0,
+      "new_formal_panels": 0,
+      "repeated_public_restore": 0
+    }
+  },
+  "reviewed_file_SHA256": {
+    "README.md": "6b8be8b748b1e276cb5e36ba26a7984c4563a0c5ad4a35587137d97a6c69a560",
+    "config/paper_s2.json": "f3f20396a3dbba3a98b7d33dcc640513fe4c7c9ce2a9ce9843dc14cd3cccf938",
+    "scripts/paper_s2.py": "663bedff4d3423e8dd7c46ef2bcdb5c141676340fbcb9c26d0ffe833ee06501d",
+    "docs/paper_s2_release.md": "c7d2679f5c691771e3b3d53903843b81ea13721f7fae69adc2ab706851e9b2bf",
+    "docs/paper_review.md": "8dd1dd0c81e1641003ad06cee7ba822707b7434f2ef12617c82602b8ea60f6a1",
+    "docs/current_mainline.md": "639ad01276cbcd2ea97bfdf7323603a7aabb2b947328b22ef1a0aadfccdf1ff8",
+    "docs/unified_exact_research_index.md": "fb39c9aaa8a8322bc30b85a285e38099b71502d2d95df5d3b20051b6d6eb0e7a",
+    "Manuscript/README.md": "f528ef5ead2e29791db82a71439637b00a2429cc0151c7cf66c1ba6da458a5f6",
+    "results/unified_exact_round136/RESUME.md": "6a7d415cbb8cd27bdc0e6920ef6c41bdbacfdc663309721760388e0248c8858a",
+    "results/unified_exact_round136/integration_status.json": "2c24dc9e5c3fb1739568270f437f8728b1adbaefa65f7e1beca773cc68f0c0dd",
+    "results/unified_exact_round136/stable_refs.json": "0b28d262b9d256fc1a0e237088a3979aa36255b92bcf60704d2f7351b117c9a8",
+    "results/unified_exact_round136/entry_verification.json": "c2bf5f684e2c4ba36507e1b7b9b75753f65c1eb2a5274e593ca1fa89eec72668",
+    "results/unified_exact_round136/cleanup_plan.json": "4936ab7afb828d59cb0ee92c9f4c457564ec230eef69affe79b56c926509b6a8",
+    "results/unified_exact_round136/cleanup_result.json": "9fc95eadd04d7d34562ad487c59374573b76068080a4f24ae54ceef2e1ec43e7",
+    "results/unified_exact_round136/pr_inventory.json": "cd0496b0d0a63c96726b5717edd71cdcc9b24acedc8c98c702d830ab7da3f151",
+    "results/unified_exact_round136/pr_disposition.csv": "856843f56210153d35c6bcdf14c5958c51fa55867576ed7375b4089cf131c7d9",
+    "results/unified_exact_round136/local_inventory.json": "4a2e3d53675d555aad1a8b8267771925bfd7ef6dca7318ad126f8478c2ed923c",
+    "results/unified_exact_round136/publication_readback.json": "fd5d1ad9467ad1784c5ece91205bb473f64a58daf7e6b13c89dbc9c134efd049",
+    "results/unified_exact_round136/post_pr_cleanup.json": "ce239e949337b0e21cb3f7efe4a2553f4d855663e2565b45bb68cc17d9e68e8c",
+    "results/unified_exact_round136/entry_links.json": "fe8028f9ecfb41e7ed87c9a9084653e5a158f0985c8f923976eedbec9f8ac2dc"
+  },
+  "blocking_findings": [],
+  "limits": "No new solver run or raw/public recovery. No independent third-party native reproduction. Earlier read-only inspection and cleanup-safety checks occurred before this final automated identity/metadata step; its elapsed time alone is not total reviewer CPU or active time. No future publication is attested by this receipt.",
+  "final_automated_step_seconds": 4.79964270000346,
+  "first_phase_receipt": {
+    "status": "CONTENT_REVIEW_PASS_DELIVERY_METADATA_PENDING",
+    "UTC": "2026-10-26T18:02:20.676290+00:00",
+    "SHA256": "a7c49b02763e00837ad1938754507190a3a2e7bc402d3ffdd283c65e1d53e9f2",
+    "fixed_commit_copy": "715d487674d56bc89358cf098599bc78f29d878f:results/unified_exact_round136/independent_review.json",
+    "scope": "full G3 content/identity and specific seven-path cleanup checks; initial checks retained below",
+    "original_config_CRLF_SHA256": "6d9dfac325cbab2e8a76cfe54339ee14febc5121178df9fd04250e411dd0f076",
+    "original_local_inventory_SHA256": "02fc0b91adfb18d3f7fb8ed4053b15dcae19a8283a061d7d064c35b4a2e1a4f7"
+  },
+  "UTC_final_metadata_review": "2026-10-26T18:13:49.881317+00:00",
+  "main_and_old_PR_state_changes": "NOT_PERFORMED; one final user confirmation required by goal D2",
+  "checks_scope": "Initial content-review and precleanup checks are retained as actually performed before PR creation; final publication metadata is separately checked below.",
+  "publication_metadata_review": {
+    "status": "PASS",
+    "independent_connected_GitHub_PR_metadata_readback": {
+      "tool": "mcp__codex_apps__github_get_pr_info",
+      "number": 198,
+      "url": "https://github.com/yifanXovo/TailoredExact/pull/198",
+      "title": "Round136: establish the paper S2 mainline and organize project history",
+      "base": "main",
+      "base_sha": "1459308492a5eceed523dee53b5f9d79141b5242",
+      "head": "codex/round136-mainline-consolidation",
+      "head_sha": "715d487674d56bc89358cf098599bc78f29d878f",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "mergeable": true,
+      "commits_reported": 736
+    },
+    "independent_git_ls_remote_readback": true,
+    "stable_refs_all_three_targets_and_peels_match": true,
+    "paper_entry_snapshot": "715d487674d56bc89358cf098599bc78f29d878f",
+    "old_open_PRs_rechecked_from_full_paginated_REST": 113,
+    "old_PR_heads_unchanged": 113,
+    "open_total_after_preparation": 114,
+    "branches": 137,
+    "tags": 3,
+    "main_still_Round37": true,
+    "R135_to_entry_increment_file_count": 25,
+    "GitHub_large_PR_changed_file_counters_zero_not_used_as_diff_audit": true,
+    "config_EOL_only_normalization": {
+      "previous_CRLF_SHA256": "6d9dfac325cbab2e8a76cfe54339ee14febc5121178df9fd04250e411dd0f076",
+      "current_LF_SHA256": "f3f20396a3dbba3a98b7d33dcc640513fe4c7c9ce2a9ce9843dc14cd3cccf938",
+      "local_bytes_equal_published_fixed_Git_blob": true,
+      "JSON_frozen_argv_semantics_rechecked_unchanged": true
+    },
+    "launcher_SHA256_unchanged": "663bedff4d3423e8dd7c46ef2bcdb5c141676340fbcb9c26d0ffe833ee06501d",
+    "porcelain_leading_space_display_correction_and_updated_full_inventory_hash_checked": true,
+    "full_local_inventory_SHA256": "4d1b0d73cdc6d2622b263992e7cfe9ca22bcb7fd6ac2c0fa75c63ed676e3fb93",
+    "post_PR_download_duplicate_cleanup": {
+      "logical_bytes": 11376,
+      "observed_free_byte_change": 16384,
+      "path_absent": true,
+      "receipt_and_retained_source_blob_hashes_agree": true,
+      "scope": "checked after removal against actual publication receipt and retained immutable source blobs; distinct from independent predeletion check of seven primary cleanup paths"
+    },
+    "connector_create_timeout_recovered_as_existing_PR198_without_duplicate_create": true,
+    "GraphQL_504_disclosed_REST_success": true,
+    "new_native_Optimize": 0,
+    "compile": 0,
+    "raw_restore": 0,
+    "later_receipt_commit_and_final_external_readback": "not yet observed by this receipt; primary will perform external readback after normal metadata publication, without recursively rewriting this review"
+  }
+}

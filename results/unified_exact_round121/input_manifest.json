@@ -1,0 +1,502 @@
+{
+  "roles": [
+    {
+      "id": "F2",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds": 3600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 1200,
+      "method_order": [
+        "MB-D0",
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ],
+      "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "M": 2,
+      "V": 20,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "panel_kind": "known_seed_sensitivity",
+      "gurobi_seed": 1
+    },
+    {
+      "id": "Q30-C2-B",
+      "V": 30,
+      "M": 3,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "selection_id": "cabi_r121_V30_compact_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation",
+      "input_path": "reference/round121_confirmation/Q30-C2-B.txt",
+      "instance_path": "reference/round121_confirmation/Q30-C2-B.txt",
+      "input_sha256": "9d9737dc36819cf8648aec820b456504bc7f26bf3cde474de351da2e0d34596c",
+      "input_bytes": 1824,
+      "selection_path": "reference/round121_confirmation/Q30-C2-B_selection.json",
+      "landscape_path": "reference/round121_confirmation/Q30-C2-B_landscape.json",
+      "source_response_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 211,
+      "total_target": 211,
+      "total_capacity": 419,
+      "sum_weights": 12.900832,
+      "lambda_sum_weights": 1.9351247999999999,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.18954093443827516,
+        "P": 4.462812060822511,
+        "lambda_P": 0.6694218091233767,
+        "F": 0.8589627435616518,
+        "duration": 0,
+        "all_loads": 0
+      },
+      "role_identity": "new after D1 freeze; generated once without H/LP/MIP screening"
+    },
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "MB-D1"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true,
+      "panel_kind": "known_seed_sensitivity",
+      "gurobi_seed": 1
+    },
+    {
+      "id": "Q40-R2-S",
+      "V": 40,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r121_V40_regional_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "MB-D1",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation",
+      "input_path": "reference/round121_confirmation/Q40-R2-S.txt",
+      "instance_path": "reference/round121_confirmation/Q40-R2-S.txt",
+      "input_sha256": "ca501c5b72642336ec252c78204fd9b1db25523f1f5a08027abb1ab496f10d84",
+      "input_bytes": 2388,
+      "selection_path": "reference/round121_confirmation/Q40-R2-S_selection.json",
+      "landscape_path": "reference/round121_confirmation/Q40-R2-S_landscape.json",
+      "source_response_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 263,
+      "total_target": 303,
+      "total_capacity": 616,
+      "sum_weights": 19.842984,
+      "lambda_sum_weights": 2.9764476,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.3925552394489895,
+        "P": 12.504137666089466,
+        "lambda_P": 1.8756206499134198,
+        "F": 2.2681758893624093,
+        "duration": 0,
+        "all_loads": 0
+      },
+      "role_identity": "new after D1 freeze; generated once without H/LP/MIP screening"
+    },
+    {
+      "id": "Q50-C2-U",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r121_V50_compact_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "MB-D1"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation",
+      "input_path": "reference/round121_confirmation/Q50-C2-U.txt",
+      "instance_path": "reference/round121_confirmation/Q50-C2-U.txt",
+      "input_sha256": "b2a1910b9f07820d0c60ba596ab5afa31f066bfe265b8535c948b67c6ddce119",
+      "input_bytes": 2945,
+      "selection_path": "reference/round121_confirmation/Q50-C2-U_selection.json",
+      "landscape_path": "reference/round121_confirmation/Q50-C2-U_landscape.json",
+      "source_response_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 366,
+      "total_target": 316,
+      "total_capacity": 633,
+      "sum_weights": 17.355387,
+      "lambda_sum_weights": 2.60330805,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.28851380548187333,
+        "P": 10.42976182994228,
+        "lambda_P": 1.564464274491342,
+        "F": 1.8529780799732154,
+        "duration": 0,
+        "all_loads": 0
+      },
+      "role_identity": "new after D1 freeze; generated once without H/LP/MIP screening"
+    }
+  ],
+  "new_roles": [
+    {
+      "id": "Q30-C2-B",
+      "V": 30,
+      "M": 3,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "selection_id": "cabi_r121_V30_compact_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation",
+      "input_path": "reference/round121_confirmation/Q30-C2-B.txt",
+      "instance_path": "reference/round121_confirmation/Q30-C2-B.txt",
+      "input_sha256": "9d9737dc36819cf8648aec820b456504bc7f26bf3cde474de351da2e0d34596c",
+      "input_bytes": 1824,
+      "selection_path": "reference/round121_confirmation/Q30-C2-B_selection.json",
+      "landscape_path": "reference/round121_confirmation/Q30-C2-B_landscape.json",
+      "source_response_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 211,
+      "total_target": 211,
+      "total_capacity": 419,
+      "sum_weights": 12.900832,
+      "lambda_sum_weights": 1.9351247999999999,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.18954093443827516,
+        "P": 4.462812060822511,
+        "lambda_P": 0.6694218091233767,
+        "F": 0.8589627435616518,
+        "duration": 0,
+        "all_loads": 0
+      },
+      "role_identity": "new after D1 freeze; generated once without H/LP/MIP screening"
+    },
+    {
+      "id": "Q40-R2-S",
+      "V": 40,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r121_V40_regional_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "MB-D1",
+        "M-B",
+        "P-GRB"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation",
+      "input_path": "reference/round121_confirmation/Q40-R2-S.txt",
+      "instance_path": "reference/round121_confirmation/Q40-R2-S.txt",
+      "input_sha256": "ca501c5b72642336ec252c78204fd9b1db25523f1f5a08027abb1ab496f10d84",
+      "input_bytes": 2388,
+      "selection_path": "reference/round121_confirmation/Q40-R2-S_selection.json",
+      "landscape_path": "reference/round121_confirmation/Q40-R2-S_landscape.json",
+      "source_response_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 263,
+      "total_target": 303,
+      "total_capacity": 616,
+      "sum_weights": 19.842984,
+      "lambda_sum_weights": 2.9764476,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.3925552394489895,
+        "P": 12.504137666089466,
+        "lambda_P": 1.8756206499134198,
+        "F": 2.2681758893624093,
+        "duration": 0,
+        "all_loads": 0
+      },
+      "role_identity": "new after D1 freeze; generated once without H/LP/MIP screening"
+    },
+    {
+      "id": "Q50-C2-U",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r121_V50_compact_r2",
+      "gurobi_seed": 0,
+      "method_order": [
+        "M-B",
+        "P-GRB",
+        "MB-D1"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "panel_kind": "prospective_confirmation",
+      "input_path": "reference/round121_confirmation/Q50-C2-U.txt",
+      "instance_path": "reference/round121_confirmation/Q50-C2-U.txt",
+      "input_sha256": "b2a1910b9f07820d0c60ba596ab5afa31f066bfe265b8535c948b67c6ddce119",
+      "input_bytes": 2945,
+      "selection_path": "reference/round121_confirmation/Q50-C2-U_selection.json",
+      "landscape_path": "reference/round121_confirmation/Q50-C2-U_landscape.json",
+      "source_response_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 366,
+      "total_target": 316,
+      "total_capacity": 633,
+      "sum_weights": 17.355387,
+      "lambda_sum_weights": 2.60330805,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "G": 0.28851380548187333,
+        "P": 10.42976182994228,
+        "lambda_P": 1.564464274491342,
+        "F": 1.8529780799732154,
+        "duration": 0,
+        "all_loads": 0
+      },
+      "role_identity": "new after D1 freeze; generated once without H/LP/MIP screening"
+    }
+  ],
+  "qualification_roles": [
+    {
+      "id": "H100",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        13,
+        21
+      ],
+      "T_seconds": 5100,
+      "cap_seconds": 120,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "MB-D0",
+        "MB-D1"
+      ],
+      "input_path": "reference/round100_confirmation/H100.txt",
+      "instance_path": "reference/round100_confirmation/H100.txt",
+      "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 1,
+      "panel_kind": "qualification",
+      "scenario_id": "H100"
+    }
+  ],
+  "family": "round121-frozen-d1-confirmation-v1|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "source_recipe_SHA": "96278a7108a5f86a18f5f4723b1ceac5256d7da1260a59db1deee547637e2d5a",
+  "recipe_commit_before_generation": "4a205b322a1ca94940479b53b2f87d4c79778318",
+  "generated_once": true,
+  "new_problem_denominator": 3,
+  "known_role_seed_denominator": 2,
+  "formal_arm_denominator": 16,
+  "source_rows": 865,
+  "raw_source_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "table_SHA": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+  "overlaps": [
+    {
+      "id": "Q30-C2-B",
+      "old_id": "E20-C1",
+      "old_V": 20,
+      "new_V": 30,
+      "overlap": 0
+    },
+    {
+      "id": "Q30-C2-B",
+      "old_id": "E20-R2",
+      "old_V": 20,
+      "new_V": 30,
+      "overlap": 7
+    },
+    {
+      "id": "Q30-C2-B",
+      "old_id": "E50-C1",
+      "old_V": 50,
+      "new_V": 30,
+      "overlap": 1
+    },
+    {
+      "id": "Q30-C2-B",
+      "old_id": "E50-R2",
+      "old_V": 50,
+      "new_V": 30,
+      "overlap": 0
+    },
+    {
+      "id": "Q30-C2-B",
+      "old_id": "N40-R1-S",
+      "old_V": 40,
+      "new_V": 30,
+      "overlap": 15
+    },
+    {
+      "id": "Q40-R2-S",
+      "old_id": "E20-C1",
+      "old_V": 20,
+      "new_V": 40,
+      "overlap": 1
+    },
+    {
+      "id": "Q40-R2-S",
+      "old_id": "E20-R2",
+      "old_V": 20,
+      "new_V": 40,
+      "overlap": 0
+    },
+    {
+      "id": "Q40-R2-S",
+      "old_id": "E50-C1",
+      "old_V": 50,
+      "new_V": 40,
+      "overlap": 0
+    },
+    {
+      "id": "Q40-R2-S",
+      "old_id": "E50-R2",
+      "old_V": 50,
+      "new_V": 40,
+      "overlap": 3
+    },
+    {
+      "id": "Q40-R2-S",
+      "old_id": "N40-R1-S",
+      "old_V": 40,
+      "new_V": 40,
+      "overlap": 0
+    },
+    {
+      "id": "Q50-C2-U",
+      "old_id": "E20-C1",
+      "old_V": 20,
+      "new_V": 50,
+      "overlap": 0
+    },
+    {
+      "id": "Q50-C2-U",
+      "old_id": "E20-R2",
+      "old_V": 20,
+      "new_V": 50,
+      "overlap": 0
+    },
+    {
+      "id": "Q50-C2-U",
+      "old_id": "E50-C1",
+      "old_V": 50,
+      "new_V": 50,
+      "overlap": 0
+    },
+    {
+      "id": "Q50-C2-U",
+      "old_id": "E50-R2",
+      "old_V": 50,
+      "new_V": 50,
+      "overlap": 5
+    },
+    {
+      "id": "Q50-C2-U",
+      "old_id": "N40-R1-S",
+      "old_V": 40,
+      "new_V": 50,
+      "overlap": 0
+    }
+  ],
+  "exact_historical_SHA_duplicates": false,
+  "same_known_city_not_IID": true
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "round43-final-test-audit-v1",
+  "build": {
+    "status": "passed",
+    "configuration": "Release",
+    "clean_first": true,
+    "gurobi_enabled": true,
+    "gurobi_version": "13.0.2",
+    "official_executable_sha256": "52fa775e9be5d3b37686d95aaffc3d965d107ae7a3692dd1a9521df3d5877fe1",
+    "clean_rebuild_executable_sha256": "801cb2f474781c54a8eb3614ce335b89245ad7d0b87880aeeb51ecb89da4b8f5",
+    "binary_hash_match": false,
+    "binary_hash_difference_reason": "The PE linker embeds non-reproducible metadata. The clean rebuild passed the complete source-equivalence test suite; all official experiment rows remain bound to the frozen official executable hash."
+  },
+  "ctest": {
+    "status": "passed",
+    "passed": 21,
+    "total": 21
+  },
+  "existing_python_tests": {
+    "status": "passed",
+    "passed": 18,
+    "total": 18,
+    "unit": "protocol scripts from rounds 25 through 43"
+  },
+  "python_protocol_tests": {
+    "status": "passed",
+    "passed": 20,
+    "total": 20,
+    "detail": "8 static Round 43 protocol checks plus 12 terminal evidence checks"
+  },
+  "default_off": {
+    "status": "passed",
+    "passed": 3,
+    "total": 3
+  },
+  "secret_scan": {
+    "status": "passed",
+    "findings": 0,
+    "license_artifact_findings": 0
+  },
+  "evidence": {
+    "official_runs": 110,
+    "artifact_rows": 18139,
+    "required_artifacts_per_run": 20
+  }
+}

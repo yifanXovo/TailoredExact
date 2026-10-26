@@ -1,0 +1,35 @@
+{
+  "recorded_after": "isolation01 arms 1 and 2 completed; arms 3-6 unresolved",
+  "purpose": "Finite continuation envelope; no case-specific candidate dispatch",
+  "development": {
+    "roles": ["R98-C2", "R99-N2"],
+    "common_cap_seconds": 1800,
+    "arms": ["P-GRB", "ENS-C", "one uniform fleet candidate selected from the F2 isolation"],
+    "maximum_starts": 6,
+    "maximum_solver_seconds": 10800
+  },
+  "existing_tail": {
+    "role": "F5",
+    "common_cap_seconds": 7200,
+    "arms": ["P-GRB", "ENS-C", "frozen fleet candidate"],
+    "maximum_starts": 3,
+    "maximum_solver_seconds": 21600,
+    "classification": "Known development input; never called a holdout"
+  },
+  "confirmation": {
+    "generation": "Once, after uniform candidate freeze; all outputs retained; no redraw, reseed, or outcome-based replacement",
+    "roles": [
+      {"V": 30, "M": 3, "common_cap_seconds": 7200, "required_nonzero": true, "classification": "design-isolated medium/large long group"},
+      {"V": 20, "M": 2, "common_cap_seconds": 1800, "classification": "nonzero certification protection"},
+      {"V": 50, "M": 4, "common_cap_seconds": 1800, "classification": "large heterogeneous fleet budget role"}
+    ],
+    "arms": ["P-GRB", "ENS-C", "same frozen fleet candidate"],
+    "maximum_starts": 9,
+    "maximum_solver_seconds": 32400
+  },
+  "total_future_formal_cap_seconds": 64800,
+  "no_MB_stacking_without_fleet_value": true,
+  "candidate_selection": "One root/tree range and one structural strength for all roles. Candidate not frozen yet. No new frequency, time, Work, restart, seed or instance-name policy.",
+  "admission": "Check actual fee ledger and reserve all caps before starting each finite group. A correctness failure or sufficiently supported finite-family rejection may stop admission; initial short failure does not.",
+  "comparison": "Both certified: compare full normal completion. One certified: record window advantage/loss and censoring without a speed factor. Neither certified: compare covered common-window U/L/gap; final times unknown."
+}

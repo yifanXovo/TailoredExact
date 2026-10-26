@@ -1,0 +1,45 @@
+{
+  "k1_am_sf": {
+    "K0": 1,
+    "backend": "F0-CLEAN",
+    "dynamic_user_cuts": false,
+    "method": "gcap-frontier",
+    "native_branching": true,
+    "preset": "paper-k1-am-sf",
+    "score": "balanced normalized closure",
+    "split": "midpoint",
+    "tau": 0.08
+  },
+  "maximum_cap_seconds": 21600,
+  "pgrb": {
+    "HGA_or_imported_routes": false,
+    "custom_branching": false,
+    "gini_decomposition": false,
+    "known_optimum_or_archive_bounds": false,
+    "method": "gurobi",
+    "one_original_compact_MILP": true,
+    "plain_baseline": true,
+    "strict_expected_model_fingerprint_required": true,
+    "tailored_cuts": false
+  },
+  "schema": "round58-paired-solver-contract-v1",
+  "screen_cap_seconds": 3600,
+  "screen_checkpoints_seconds": [
+    300,
+    1200,
+    3600
+  ],
+  "shared": {
+    "Gurobi": "13.0.2",
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0,
+    "PreCrush": "default",
+    "Presolve": "Auto",
+    "Seed": 0,
+    "Threads": 1,
+    "executable": "same frozen executable",
+    "fresh_process_per_run": true,
+    "machine": "WIN-3NO58RVQ4VC",
+    "one_optimizer_process_at_a_time": true
+  }
+}

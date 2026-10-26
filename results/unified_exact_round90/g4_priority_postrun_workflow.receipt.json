@@ -1,0 +1,16 @@
+{
+  "report_sha256": "5368e6dc99c25a1d9ae41dfe1df294df60eebf585448b9fa1eae52c5c2ca9fa3",
+  "initial_report_sha256_before_cost_correction": "b30d1293e72a6b1885df0a7e36db5e789ced68da9aeb9cca6f7d6938294e0dbd",
+  "corrected_report_hash_observed_utc": "2026-09-27T05:22:24.1503194Z",
+  "elapsed_wall_until_corrected_report_hash_seconds": 334.3883761,
+  "table_path": "results/unified_exact_round90/g4_priority_table.csv",
+  "scope": "Elapsed wall between outer command completion and final report/table observation; includes read-only evidence inspection, report writing, tool latency or idle; not a dedicated CPU-time measurement and not part of any arm process wall",
+  "schema": "round90-g4-priority-postrun-workflow-v1",
+  "table_sha256": "00a3a569c5ff651b1e5bd9c1a876b25286719da766623a3cacdf71e095ff025f",
+  "elapsed_wall_since_outer_command_seconds": 210.2364326,
+  "correction_note": "Initial derived receipt parsed an already-deserialized UTC DateTime as local +08:00 and lost its fractional seconds, inflating the subtraction by about eight hours. The initial bytes are preserved separately; the corrected interval is the arithmetic difference between the two written UTC timestamps. This is elapsed wall, not CPU time.",
+  "preserved_initial_receipt_sha256": "8e34a2c19e0e42133648bd5ba4bf657894de862020c972f79976ea5792171220",
+  "outer_command_ended_utc": "2026-09-27T05:16:49.7619433Z",
+  "report_path": "results/unified_exact_round90/g4_priority_report.md",
+  "report_and_table_observed_utc": "2026-09-27T05:20:19.9983759+00:00"
+}

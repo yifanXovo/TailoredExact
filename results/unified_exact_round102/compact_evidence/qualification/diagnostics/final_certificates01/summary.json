@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "Optimize": 0,
+  "certificates": 20,
+  "distinct_supports": 5,
+  "physical_row_witness_checks": 972,
+  "unique_physical_witnesses": {
+    "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e": 26,
+    "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76": 147,
+    "370cb51b4d2351b3881cd74ab93406d76834efcf856430f742b8f243a9060a27": 139
+  },
+  "records": [
+    {
+      "path": "results/unified_exact_round102/development01/raw/04_R99-N2_J-SUBMIT/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "8ddfe1766ab9bc06c5d700500fbcb28035b1ff4320e0328310ba09c35d156a50",
+      "rows": 1,
+      "API0": 1
+    },
+    {
+      "path": "results/unified_exact_round102/development01/raw/04_R99-N2_J-SUBMIT/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "8ddfe1766ab9bc06c5d700500fbcb28035b1ff4320e0328310ba09c35d156a50",
+      "rows": 1,
+      "API0": 1
+    },
+    {
+      "path": "results/unified_exact_round102/isolation03/raw/01_F2_J-SHADOW/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "b92dc1201719699b6044ff87b237c1cc865a289dea4a1d87d7a466d44a3734ea",
+      "rows": 4,
+      "API0": 0
+    },
+    {
+      "path": "results/unified_exact_round102/isolation04/raw/01_R99-N2_J-SHADOW/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "8287e1b6a511a14bcfe475be182c35b0470602e63f4107f5d0b8e576da51c09a",
+      "rows": 1,
+      "API0": 0
+    },
+    {
+      "path": "results/unified_exact_round102/isolation04/raw/01_R99-N2_J-SHADOW/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "8287e1b6a511a14bcfe475be182c35b0470602e63f4107f5d0b8e576da51c09a",
+      "rows": 1,
+      "API0": 0
+    },
+    {
+      "path": "results/unified_exact_round102/native02/raw/01_F2_J-SHADOW/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "b92dc1201719699b6044ff87b237c1cc865a289dea4a1d87d7a466d44a3734ea",
+      "rows": 4,
+      "API0": 0
+    },
+    {
+      "path": "results/unified_exact_round102/native02/raw/02_F2_J-SUBMIT/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "7d47dfd709feddd5d912bc2c314540f3d90a7b474f9df0be589c1f97d4168b37",
+      "rows": 4,
+      "API0": 4
+    },
+    {
+      "path": "results/unified_exact_round102/protection01/raw/02_F2_J-SUBMIT/external/native_logs/L0_terminal_mip.gurobi.log.round102.certificates.jsonl",
+      "sha256": "7d47dfd709feddd5d912bc2c314540f3d90a7b474f9df0be589c1f97d4168b37",
+      "rows": 4,
+      "API0": 4
+    }
+  ],
+  "seconds": 0.7624432999873534,
+  "script_sha256": "ba0c1587d2c663bcad21fb9a63f6315ec987ec16c678265f304337c8d6d55b76",
+  "scope": "Actual signed dyadic rows, global lower-contract containment, complete integer support upper replay, original physical routes; no independent native search or later full vector reconstruction"
+}

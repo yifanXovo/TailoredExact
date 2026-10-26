@@ -1,0 +1,221 @@
+{
+  "UTC": "2026-10-22T08:06:12.024750+00:00",
+  "Optimize": 0,
+  "R112_cases": [
+    {
+      "case": "actual_heterogeneous_H",
+      "passed": true,
+      "rejected": false,
+      "submission_API_calls": 1,
+      "native_Optimize_calls": 0,
+      "fault_injected": false,
+      "physical_valid_before_fault": true,
+      "reason": ""
+    },
+    {
+      "case": "empty_vehicle_0",
+      "passed": true,
+      "rejected": false,
+      "submission_API_calls": 1,
+      "native_Optimize_calls": 0,
+      "fault_injected": false,
+      "physical_valid_before_fault": true,
+      "reason": ""
+    },
+    {
+      "case": "loaded_return",
+      "passed": true,
+      "rejected": false,
+      "submission_API_calls": 1,
+      "native_Optimize_calls": 0,
+      "fault_injected": false,
+      "physical_valid_before_fault": true,
+      "reason": ""
+    },
+    {
+      "case": "unsupported_column",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 0,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": true,
+      "reason": "round112_mapping_unsupported_complete_start_column:unsupported_round112_column"
+    },
+    {
+      "case": "bound_violation",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 0,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": true,
+      "reason": "round112_mapping_start_bound_violation:G"
+    },
+    {
+      "case": "type_violation",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 0,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": true,
+      "reason": "round112_mapping_start_integrality_violation:G"
+    },
+    {
+      "case": "row_violation",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 0,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": true,
+      "reason": "round112_rows_linear_constraint_violation"
+    },
+    {
+      "case": "objective_mismatch",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 0,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": true,
+      "reason": "round112_objective_mismatch"
+    },
+    {
+      "case": "invalid_physical",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 0,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": false,
+      "reason": "normalization requires verified complete routes"
+    },
+    {
+      "case": "submit_api_failure",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 1,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": true,
+      "reason": "round112_start_api_777"
+    },
+    {
+      "case": "readback_api_failure",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 1,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": true,
+      "reason": "round112_start_api_778"
+    },
+    {
+      "case": "nonfinite_readback",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 1,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": true,
+      "reason": "round112_start_readback_mismatch"
+    },
+    {
+      "case": "readback_mismatch",
+      "passed": true,
+      "rejected": true,
+      "submission_API_calls": 1,
+      "native_Optimize_calls": 0,
+      "fault_injected": true,
+      "physical_valid_before_fault": true,
+      "reason": "round112_start_readback_mismatch"
+    }
+  ],
+  "R112_cases_source_SHA": "ebb00f6725629fd660ab05a748c6d2d14ca9aa0428c8993ac9c4236d305169d9",
+  "unchanged_actual_mapper_sources": {
+    "src/Round112CompactStart.inc": "eac79743634dd5b7a5c8b4721831ed5967a35bab62d2009ceb542f7ff739419d"
+  },
+  "general_mapper_evolution": "Since R112 only the optional R120Pair argument and r120_h-column branch were added; PS has neither R120 pair nor r120_h. See exact retained diff. No R130 mapper edit.",
+  "general_mapper_old_SHA": "7f5d56a8b1eb8f31ea324a4581516ea85bb5c1fa830ce211ef05c2460b90c463",
+  "general_mapper_current_SHA": "0273526e80f452bd074b912bec2d14fe0e960c36208c0d586ebfc19db281fe13",
+  "valid_physical_cases": [
+    "actual_heterogeneous_H",
+    "empty_vehicle_0",
+    "loaded_return"
+  ],
+  "injected_fault_cases_are_not_real_Gurobi_failures": true,
+  "R128_boundary_returns": [
+    {
+      "name": "native_zero_S_duration60",
+      "method": "MD-R (full three-station predecessor)",
+      "actual_new_native_run": false,
+      "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+      "input_SHA": "12921db7582c03d93a01ac559ab28e7cb4eb4f443380866a7f39a1b49193b541",
+      "own_result_SHA": "af5767405cf41276e18d296b05d659f59fcd6763e65dd84341ddc7807f046b93",
+      "reconstructed_SHA": "1f4829d8bfa7a1c95e5624da5f3968e574442430c880b1ba40e6f2b3e2bad084",
+      "native_Optimize": 2,
+      "status": "optimal",
+      "certificate": true,
+      "U": 0.3,
+      "L": 0.3,
+      "signed_gap": 0.0,
+      "actual_root_LP": 1,
+      "actual_root_MIP": 1
+    },
+    {
+      "name": "native_zero_S_duration3600",
+      "method": "MD-R (full three-station predecessor)",
+      "actual_new_native_run": false,
+      "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+      "input_SHA": "12921db7582c03d93a01ac559ab28e7cb4eb4f443380866a7f39a1b49193b541",
+      "own_result_SHA": "7f734eb32cf71282df4fc5a6adcc8e1a48763ac930787918632e81f4167d2ba9",
+      "reconstructed_SHA": "8899072668aa04f7f3b5e04ed932a755da6814a999dde2069123120a3c1f0c4e",
+      "native_Optimize": 2,
+      "status": "optimal",
+      "certificate": true,
+      "U": 0.3,
+      "L": 0.3,
+      "signed_gap": 0.0,
+      "actual_root_LP": 1,
+      "actual_root_MIP": 1
+    },
+    {
+      "name": "native_tiny_positive_U",
+      "method": "MD-R (full three-station predecessor)",
+      "actual_new_native_run": false,
+      "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+      "input_SHA": "a748a97d561c03f64ea9473b04b706104161016c244192a3f3cb9401adc47c89",
+      "own_result_SHA": "d5800e88c6b48da5c13264308f8a9d6e435f0305ef3d56a5dcd5029104ef2381",
+      "reconstructed_SHA": "b69f39ef73d8e441a00e3f76d7d61cbc6a11da762a70139d89911e36e614f69a",
+      "native_Optimize": 2,
+      "status": "optimal",
+      "certificate": true,
+      "U": 3e-09,
+      "L": 0.0,
+      "signed_gap": 3e-09,
+      "actual_root_LP": 1,
+      "actual_root_MIP": 1
+    },
+    {
+      "name": "native_R98-C2_MD_R_open_final",
+      "method": "MD-R (full three-station predecessor)",
+      "actual_new_native_run": false,
+      "PE_SHA": "ac96cfea3e0ac109cda523b9a1e2458d98a7d552bf0542e2877c1379e84234fa",
+      "input_SHA": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "own_result_SHA": "dc049b40ffd50e00e6068c77b0a7a87674686dce39b9ec467d4eee7430632fb6",
+      "reconstructed_SHA": "0d1c308bb3115b32bcb34628da99e642d640b5f5cdc47458da57b6ed2dd64aa0",
+      "native_Optimize": 2,
+      "status": "round31_c6_external_gini_tree_time_limit",
+      "certificate": false,
+      "U": 0.2991105685991542,
+      "L": 0.18876504408197672,
+      "signed_gap": 0.11034552451717747,
+      "actual_root_LP": 1,
+      "actual_root_MIP": 1
+    }
+  ],
+  "inheritance_scope": "Unchanged mapper and R128 return/deadline logic; new pair-only root gets fresh full matrix, sentinel, own Start and real two-call checks",
+  "not_a_repeat_of_historical_campaign": true
+}

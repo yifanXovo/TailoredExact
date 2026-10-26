@@ -1,0 +1,32 @@
+
+Gurobi 13.0.2 (win64) logging started Sun Sep 27 03:52:21 2026
+
+Set parameter LogFile to value "results\unified_exact_round88\ot_epigraph_qualification\toy\B1\optimizer.log"
+Set parameter OutputFlag to value 1
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+MIPGap  0
+LogToConsole  0
+Threads  1
+
+Optimize a model with 13 rows, 13 columns and 30 nonzeros (Min)
+Model fingerprint: 0x62907662
+Model has 1 linear objective coefficients
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [5e-01, 2e+00]
+  RHS range        [1e+00, 1e+00]
+
+Presolve removed 13 rows and 13 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  0.000000000e+00

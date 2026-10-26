@@ -1,0 +1,50 @@
+{
+  "pull_request": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/197",
+    "number": 197,
+    "state": "open",
+    "merged": false,
+    "mergeable": false,
+    "draft": true,
+    "body": "The weighted aggregate state-penalty row (AP) preserves the intended numerical root strengthening, but the complete-method panel does not support replacing the accepted S2 algorithm. AP remains a default-off research option. The paper is revised around the supported shared-state exact method and its strongest accepted results.\r\n\r\nThis Draft PR is stacked on #196, base `codex/round134-paper-ready-s2-and-count-bound`, verified at `d3353749e6933e6685c7f0d92d153d0641816bcb`. R134's complete own H, M-B/VD-P representation, pair-only support, controller, physical model and proof/numerical policies are preserved. The core production change is 67 added lines across three files; the repository ENS-C default is unchanged.\r\n\r\n### AP result and decision\r\n\r\nThe ideal IND/AP projection argument states its local lower/finite upper-bound and aggregate-only-use premises, including zero weights and zero residual capacity. It distinguishes projection equivalence from coordinatewise or old VD-J equality, and ideal mathematics from loaded binary64 expressions. Only two new continuous fixed-domain LPs are used: AP gives 0.3187585426155805 on K-20-S and 0.27385768132726473 on K-35-U, matching the reused IND bounds numerically. Default-off root exports are byte-identical and the candidate adds one row with no variables.\r\n\r\nBoth preregistered stages completed: 10 + 22 arms, 16 pairs on seven known structural/protection inputs, with 8,760 + 14,760 cap-seconds. Every adverse and open result remains; no healthy arm was repeated. Each method certifies 10/16 positions. AP has zero substantive certified-time wins and two substantive adverse differences: K-15-S Seed0 takes 149.31s versus 112.11s, and X-35-B Seed0 takes 79.97s versus 17.59s. Both Seed1 differences are small. K20 open gaps improve at both Seeds. K35 primal endpoints improve while both lower bounds are weaker. Original-input D13 remains open on both methods, with a small Seed0 improvement and an approximately 14% wider AP gap at Seed1. Old R55 subinterval evidence is risk context only.\r\n\r\nThe disposition is **research-only**. The root and selected endpoint gains do not establish a reliable certification or complete-time advantage. The finite study stops without another candidate grid or numerical-engineering campaign. R132/R134 evidence keeps its original versions and denominators.\r\n\r\n### Paper and verification\r\n\r\nThe complete manuscript and model/algorithm appendices now center the objective embedding, shared inventory/service states, service integrality, ordered supply and support/handling arguments. Independent zero proof sits with termination. One version table, substantive result/weight interpretation, full-precision supplement, historical controls and accurate HGA-TGBC lineage/provenance replace repeated round chronology. The 38-page final PDF passes actual visual QA and independent integrated review. It is ready for advisor/coauthor TRE/EJOR discussion; author order/affiliations/publication status and the named CITI capture/selection facts remain before journal submission. No priority or higher Operations Research claim is inferred from AP.\r\n\r\nValidation includes 75 production AP model contracts, 24,564 state-coefficient checks, both root comparisons and all 32 frozen native arms. Production sources, bound execution helpers, PE/DLL and original dirty/native assets remain protected. Study computation is 17,148.624478s plus 266.830436s separately metered postverification; the conservative sum, 17,415.454915s, is below the 28,800s hard ceiling. Writing/PDF/archive and replay clocks are separate, without adding nested H/LP/MIP costs.\r\n\r\nThe one owned anonymous fixed-commit public recovery passes all 32 current positions and both AP root coefficient/residual checks, with original measured clocks preserved and Optimize/compilation/vendor-DLL loads zero. It verifies 172 manifest files and 34 finite current carriers, with no local source/raw fallback or historical whole-campaign recovery. The first attempt completed in 2979.937s; this read-only delivery duration is separate from study computation. Actual receipts are included in the subsequent delivery metadata.\r\n\r\nFixed science payload: `2b27711484d85afbbb3a8446df83da89fcc901ec`. Later delivery metadata records actual recovery/PR completion without repackaging the science snapshot.\r\n\r\n- [Complete manuscript](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/manuscript.md), [PDF](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/manuscript.pdf) and [full supplement](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/supplement.md)\r\n- [Five scientific answers](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/final_report.md), [all arms](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/reports/arms.csv), [pairs](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/reports/pairs.csv) and [two roots](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/reports/roots.json)\r\n- [Projection/history note](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/ap_math_and_history.md), [integrated review](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/review/final_integrated_review.json), [finite reproduction](https://github.com/yifanXovo/TailoredExact/blob/2b27711484d85afbbb3a8446df83da89fcc901ec/results/unified_exact_round135/reproducibility.md)\r\n\r\nKeep Draft and unmerged. No automatic merge, force push, default-entry change, email or journal submission.",
+    "title": "Round135: aggregate state-penalty evaluation and manuscript refinement",
+    "base": "codex/round134-paper-ready-s2-and-count-bound",
+    "base_sha": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+    "head": "codex/round135-aggregate-penalty-and-paper",
+    "head_sha": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+    "head_repo_id": 1274661812,
+    "head_repo_full_name": "yifanXovo/TailoredExact",
+    "merge_commit_sha": null,
+    "user": {
+      "login": "yifanXovo",
+      "name": "yifanXovo",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/171729629?v=4",
+      "id": 171729629
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-26T15:18:19Z",
+    "updated_at": "2026-10-26T15:18:19Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 3,
+    "changed_files": 174,
+    "additions": 67885,
+    "deletions": 0,
+    "display_url": "https://github.com/yifanXovo/TailoredExact/pull/197",
+    "display_title": "Round135: aggregate state-penalty evaluation and manuscript refinement"
+  },
+  "attachment": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"artifact_type\":\"pull_request\",\"url\":\"https://github.com/yifanXovo/TailoredExact/pull/197\"}"
+      }
+    ],
+    "isError": false
+  },
+  "body_contains_no_pending_recovery_placeholder": true
+}

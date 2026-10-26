@@ -1,0 +1,109 @@
+{
+  "objective": 0,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        4,
+        7,
+        6,
+        3,
+        0
+      ],
+      "operations": [
+        {
+          "station": 4,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 4
+        },
+        {
+          "station": 6,
+          "pickup": 3,
+          "drop": 0
+        },
+        {
+          "station": 3,
+          "pickup": 0,
+          "drop": 3
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        2,
+        5,
+        1,
+        8,
+        0
+      ],
+      "operations": [
+        {
+          "station": 2,
+          "pickup": 3,
+          "drop": 0
+        },
+        {
+          "station": 5,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 1,
+          "pickup": 0,
+          "drop": 3
+        },
+        {
+          "station": 8,
+          "pickup": 0,
+          "drop": 4
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      1320.8516783955197,
+      1479.5125514452395
+    ],
+    "route_operation_time": [
+      840,
+      840
+    ],
+    "route_duration": [
+      2160.8516783955197,
+      2319.5125514452393
+    ],
+    "final_inventories": [
+      50000,
+      10,
+      10,
+      10,
+      10,
+      9,
+      9,
+      11,
+      12
+    ],
+    "G": 0,
+    "P": 0,
+    "objective": 0,
+    "errors": []
+  }
+}

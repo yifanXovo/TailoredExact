@@ -1,0 +1,39 @@
+{
+  "schema": "round90-g4-remaining-archive-workflow-receipt-v1",
+  "first_attempt_started_utc": "2026-09-27T09:57:12.6928147+00:00",
+  "handoff_observed_utc": "2026-09-27T10:07:37.5463494+00:00",
+  "whole_elapsed_seconds": 624.8535347,
+  "external_command_wall_sum_seconds": 381.2446744,
+  "inter_command_inspection_handoff_and_receipt_elapsed_seconds": 243.60886029999995,
+  "note": "Elapsed residual includes inspections, engineering correction, report/list construction and receipt overhead; no CPU-time attribution.",
+  "attempts": [
+    {
+      "receipt": "g4_remaining_archive_plan_outer_001.receipt.json",
+      "outer_wall_seconds": 1.1139987,
+      "exit_code": 1
+    },
+    {
+      "receipt": "g4_remaining_archive_plan_outer_002.receipt.json",
+      "outer_wall_seconds": 11.365575,
+      "exit_code": 0
+    },
+    {
+      "receipt": "g4_remaining_archive_check_outer_001.receipt.json",
+      "outer_wall_seconds": 11.0169986,
+      "exit_code": 0
+    },
+    {
+      "receipt": "g4_remaining_archive_build_outer_001.receipt.json",
+      "outer_wall_seconds": 357.7481021,
+      "exit_code": 0
+    }
+  ],
+  "adapter_sha256": "1114c01b905ed8361399b2d22445369ec7d89d48ae38cf655d873476e2ddaa05",
+  "index_sha256": "30df7b9b084f0bc386ee08b6f3394042180a231dd2040e252f342cb3cd54c862",
+  "handoff_sha256": "7394e9a0d79fad7bb834819203128fcdda5410f8fc3cd5f6a98fb7636562b800",
+  "regular_list_sha256": "90f2628893dcf524a93e372589f3662d3839232d951c49fa62de62e52ccf2f6c",
+  "archive_list_sha256": "fd51c6456f219ba82d1f066b3c73aad76974b5d6323425d3560053aab85991f3",
+  "residual_heavy_processes": 0,
+  "active_run_lock_present": false,
+  "compute_slot_released": true
+}

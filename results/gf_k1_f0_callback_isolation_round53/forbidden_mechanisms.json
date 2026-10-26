@@ -1,0 +1,40 @@
+{
+  "schema": "round53-forbidden-mechanisms-v1",
+  "outer_controller_changes": 0,
+  "mechanisms_forbidden": [
+    "gamma-veto",
+    "AMF",
+    "reduced-cost rescue",
+    "fixed-rho fallback",
+    "PMM",
+    "FPMM",
+    "non-midpoint points",
+    "AMC for K1",
+    "symmetry variants",
+    "static branching priorities",
+    "adaptive branching priorities",
+    "root strong-branch probes",
+    "Round51 M1",
+    "additional cut families"
+  ],
+  "dispatch_inputs_forbidden": [
+    "instance_name",
+    "path",
+    "seed",
+    "V",
+    "M",
+    "Q",
+    "difficulty_label",
+    "stage_membership",
+    "elapsed_time",
+    "Work",
+    "node_count",
+    "memory",
+    "hardware",
+    "historical_winner"
+  ],
+  "core_feasibility_constraint_removal": false,
+  "known_optimum_or_archive_injection": false,
+  "post_confirmation_revision": false,
+  "post_sealed_opening_revision": false
+}

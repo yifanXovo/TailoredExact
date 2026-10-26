@@ -1,0 +1,208 @@
+{
+  "target": "3189c5ae0834a7e023ae281ed6151aac67131b4d",
+  "branch": "codex/round84-ensc-long-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.6703036003746092,
+      "stderr": "",
+      "returned_sha": "baf19b2d5d923a1578adc31019500c6cb215ee68"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/0484255f39ea86703c2d9841c67997cfaba3c715",
+      "returncode": 1,
+      "wall_seconds": 0.635850100312382,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 10.127430399879813,
+      "stderr": "",
+      "returned_sha": "802fc16beca52413fe55fd8df304c3b8b916f33c"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.7439382001757622,
+      "stderr": "",
+      "returned_sha": "a481898842db47366c4fb01dab41a17145a55d3a"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.7025337000377476,
+      "stderr": "",
+      "returned_sha": "e2beac60c0487605987351b06ab518ad6dae8988"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 2.324523599818349,
+      "stderr": "",
+      "returned_sha": "5579eaeda515aae5d28924696619d8c06f8e6417"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 6.638583299703896,
+      "stderr": "",
+      "returned_sha": "0484255f39ea86703c2d9841c67997cfaba3c715"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 1.0797647000290453,
+      "stderr": "",
+      "returned_sha": "3189c5ae0834a7e023ae281ed6151aac67131b4d"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5788010000251234,
+      "stderr": "",
+      "returned_sha": "baf19b2d5d923a1578adc31019500c6cb215ee68"
+    },
+    {
+      "method": "PATCH",
+      "path": "git/refs/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 1.6608772999607027,
+      "stderr": "",
+      "returned_sha": "3189c5ae0834a7e023ae281ed6151aac67131b4d"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round84-ensc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.6414361000061035,
+      "stderr": "",
+      "returned_sha": "3189c5ae0834a7e023ae281ed6151aac67131b4d"
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "c8fe4617e08a8567fc85e77c3df525d1a66a17737d11f3e871e5a38306cef78e",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 31.014140299987048,
+  "initial_remote_head": "baf19b2d5d923a1578adc31019500c6cb215ee68",
+  "original_commits": [
+    "3189c5ae0834a7e023ae281ed6151aac67131b4d"
+  ],
+  "prior_receipt_bindings": [
+    {
+      "file": "final_evidence_binary.json",
+      "sha256": "60e7b4406c39f6b8404edc0bf463f45b737da3999f67f57c680e943b2a234c65"
+    },
+    {
+      "file": "final_evidence_http1.json",
+      "sha256": "5e8644d17dcb9d57ad7323fee6e348dfd1762dd5ccc9e52a8cd46cd23f975c71"
+    }
+  ],
+  "binary_verification_policy": "Git blob SHA equals locally recomputed content address; original tree and commit SHAs required. Prior successful byte readbacks are distinguished from creation-SHA acknowledgments. No new whole binary download is claimed.",
+  "binary_content_addresses": [
+    {
+      "sha": "f07767d39e3aec9655aed79a6414d27c50d6ab50",
+      "bytes": 982073,
+      "sha256": "c9cff321dd8c3a6ded6eb72e8ab62a0aca4196208f4b5e4a42209c9d3c13bfb6",
+      "verification": "prior_successful_full_byte_readback"
+    },
+    {
+      "sha": "085d70dd831da88c8fd65ea545801536df26216d",
+      "bytes": 1182737,
+      "sha256": "5a823edc3adf07287462f9499e4316354067ad0f52a4364c19c83cea8a968b70",
+      "verification": "prior_successful_full_byte_readback"
+    },
+    {
+      "sha": "d77a0e7fb002d4c7bb5fd9f7e7352cd574e9c9cd",
+      "bytes": 798971,
+      "sha256": "40223208a60a2165e423ad19ac21ece673a54a80d8dde9bb96e19c21add6a6df",
+      "verification": "prior_successful_full_byte_readback"
+    },
+    {
+      "sha": "994fed8bae87ccc2d335f4f020f5f27dd32021ea",
+      "bytes": 4235998,
+      "sha256": "e466503194ca5ccbcb9b049777644cfaab2059de5b019053c822e438366228a0",
+      "verification": "prior_successful_full_byte_readback"
+    },
+    {
+      "sha": "3e2fbbeba8edef0642bfd7dda4b4ae5959fff80d",
+      "bytes": 3808827,
+      "sha256": "0defc46691d5abf07f9896f21e62eeef7f4bd478a3ccfe83226a838d23545ace",
+      "verification": "prior_successful_full_byte_readback"
+    },
+    {
+      "sha": "bba414786d701395e9822e307cbee3c0adcdbaef",
+      "bytes": 635242,
+      "sha256": "55dab473cdbc74640a8ff3d61d9f8c87cd3b2e55b4dfa0a425267bde5d453e6b",
+      "verification": "prior_successful_full_byte_readback"
+    },
+    {
+      "sha": "5800e4d556bd31b96b24f86581330493f635a4cc",
+      "bytes": 7718146,
+      "sha256": "b6900559766a55d35b4163b74b23b83c238aeddacac3ed65064585129edf5682",
+      "verification": "prior_successful_full_byte_readback"
+    },
+    {
+      "sha": "f77b93d6d32aa1c43570dbae52a6e228ac18e811",
+      "bytes": 12463968,
+      "sha256": "44635909cf8aad07216f2a138322084edac13d1d2c57bb258dfebe1bd8c6d17d",
+      "verification": "prior_successful_full_byte_readback"
+    },
+    {
+      "sha": "f9ed0cf941b104bed4a271d459a4b8d6a3fa9a2f",
+      "bytes": 626807,
+      "sha256": "6649ce9e84e92f551594a464754a62f5a434a72ff1dbb38d8654e98756b05e56",
+      "verification": "prior_successful_full_byte_readback"
+    },
+    {
+      "sha": "f36aa723b83d995fa7e11fc2e81a6c313bbff63f",
+      "bytes": 12666892,
+      "sha256": "9b3f59b3b73d3f6fde86abfaaebe489f6e21b3de77a1438a14bbf5585b9d7652",
+      "verification": "prior_successful_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "802fc16beca52413fe55fd8df304c3b8b916f33c",
+      "bytes": 17380892,
+      "sha256": "da1ef2586d2dc2541a01e82abac941f4fd3f21749ff43a2ded5396f8f2f4443b",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "a481898842db47366c4fb01dab41a17145a55d3a",
+      "bytes": 202820,
+      "sha256": "db3d2d70e4706d02cc24bda5af898794eec142aaf27394edd90fd819b9abf1bb",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "e2beac60c0487605987351b06ab518ad6dae8988",
+      "bytes": 197692,
+      "sha256": "3aaa3ff0f657a7e3c78870d25bfc5b7d64a54592a045f1088e2ee5f5a2ed5ba8",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    },
+    {
+      "sha": "5579eaeda515aae5d28924696619d8c06f8e6417",
+      "bytes": 189567,
+      "sha256": "61cd64b856f2463cbc5f87a30a3c0fd219316a87c49dbbfc0b53d34c6b7c10d3",
+      "verification": "current_creation_SHA_acknowledgment_no_full_readback"
+    }
+  ],
+  "verified_exact_trees": [
+    "0484255f39ea86703c2d9841c67997cfaba3c715"
+  ],
+  "verified_exact_commits": [
+    "3189c5ae0834a7e023ae281ed6151aac67131b4d"
+  ],
+  "passed": true,
+  "final_remote_head": "3189c5ae0834a7e023ae281ed6151aac67131b4d",
+  "original_history_preserved": true
+}

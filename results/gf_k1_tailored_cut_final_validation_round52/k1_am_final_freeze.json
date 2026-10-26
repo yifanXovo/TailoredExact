@@ -1,0 +1,19 @@
+{
+  "schema": "round52-k1-am-final-freeze-v1",
+  "name": "K1-AM-FINAL",
+  "frozen": true,
+  "controller_manifest": "results/gf_k1_tailored_cut_final_validation_round52/k1_am_controller_freeze.json",
+  "inner_backend_manifest": "results/gf_k1_tailored_cut_final_validation_round52/final_inner_backend_freeze_manifest.json",
+  "K0": 1,
+  "tau": 0.08,
+  "point_rule": "midpoint",
+  "round48_k1_amf": "off",
+  "round49_k1_am_rc": "off",
+  "executable": "build/round52/ExactEBRP.exe",
+  "executable_sha256": "d245c76f6397c757894610d8f5238cfeb971761ff7e05edf51058e451d810151",
+  "validation_process_cap_seconds": 1800,
+  "Threads": 1,
+  "Seed": 0,
+  "Presolve": "Auto",
+  "algorithm_changes_after_freeze": 0
+}

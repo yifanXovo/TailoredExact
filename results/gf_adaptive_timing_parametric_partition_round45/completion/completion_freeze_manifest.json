@@ -1,0 +1,43 @@
+{
+  "amendment": {
+    "added_row_count": 19,
+    "amended_row_count": 232,
+    "original_required_run_matrix_sha256": "ec2a79868687fbf36dee48a3981666fcab2bf316d45ae0164dbf8c0be3e737d2",
+    "original_row_count": 213,
+    "reason": "ordinary split-path parent-bound correction triggers Section 9.2 mandatory rerun",
+    "schema": "round45-completion-freeze-amendment-v1",
+    "selection_basis": "the already-fixed five-development/seven-validation/seven-holdout panel; no new rerun result inspected"
+  },
+  "complex_d_r43_rows": 6,
+  "counterfactual_rows": 128,
+  "files": [
+    {
+      "path": "results/gf_adaptive_timing_parametric_partition_round45/completion/round45_completion_erratum.md",
+      "sha256": "d81fa477f426881f2f4511f1ccc5d75cafea3818d6a33015a8732e1e5893b6be",
+      "size_bytes": 1238
+    },
+    {
+      "path": "results/gf_adaptive_timing_parametric_partition_round45/completion/prior_classification_disposition.json",
+      "sha256": "dd01b0f7aa7003153062deeedbb4ae68fdf8440a403830c9465336c144e51f8b",
+      "size_bytes": 573
+    },
+    {
+      "path": "results/gf_adaptive_timing_parametric_partition_round45/completion/completion_contract.md",
+      "sha256": "6ac8becc35f036081353188da20df0fc678151edd702c261ba6fe9af3dd92361",
+      "size_bytes": 1098
+    },
+    {
+      "path": "results/gf_adaptive_timing_parametric_partition_round45/completion/required_run_matrix.csv",
+      "sha256": "ec2a79868687fbf36dee48a3981666fcab2bf316d45ae0164dbf8c0be3e737d2",
+      "size_bytes": 177127
+    }
+  ],
+  "frozen_before_completion_candidate_results": true,
+  "mandatory_complex_rows": 48,
+  "matrix_rows": 213,
+  "required_run_count": 232,
+  "required_run_matrix_sha256": "68150245976b0781f88dd6d81045cef67c78f29a018b96b008956113f5d5a997",
+  "schema": "round45-completion-freeze-manifest-v1",
+  "starting_local_commit": "0dbba47a0bf6e909d555cce1af8d9e32c4c7b035",
+  "starting_local_tree": "0066f6f306a46c8d0145c2fbe3b8effc8dbe039b"
+}

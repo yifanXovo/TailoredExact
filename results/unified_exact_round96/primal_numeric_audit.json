@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "id": "F5",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 4,
+      "maximum_duration_coefficient_difference": 0.0,
+      "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+      "minimum_nonzero_coefficient": 0.041666666666666664,
+      "minimum_nonunit_distance_to_one": 0.04166666666666663
+    },
+    {
+      "id": "F2",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 2,
+      "maximum_duration_coefficient_difference": 0.0,
+      "canonical_sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+      "minimum_nonzero_coefficient": 0.03571428571428571,
+      "minimum_nonunit_distance_to_one": 0.0357142857142857
+    },
+    {
+      "id": "V1",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 3,
+      "maximum_duration_coefficient_difference": 0.0,
+      "canonical_sha256": "a5a372c306b02b5b213cc3a16bbf0e1d3ad8b49c60d2355ae9674b9563ba7e6c",
+      "minimum_nonzero_coefficient": 0.037037037037037035,
+      "minimum_nonunit_distance_to_one": 0.03703703703703698
+    },
+    {
+      "id": "V2",
+      "objective_exact_binary64_match": true,
+      "duration_rows": 4,
+      "maximum_duration_coefficient_difference": 0.0,
+      "canonical_sha256": "826fe09e515e26d979d6eef80b669543be6e68cb01b4968aeb1303604739b3d0",
+      "minimum_nonzero_coefficient": 0.03571428571428571,
+      "minimum_nonunit_distance_to_one": 0.0357142857142857
+    }
+  ],
+  "optimizer_calls": 0,
+  "identity_sha256": "1f60ba662f40b4a46e2c82bcf0996627421333a7dba343b81b6e8092f354914b",
+  "source_sha256": "84b0b9174e1c97b7289a5309354908ce90855fe80857dda5c19d06d124cadced",
+  "limitation": "Actual original objective/time rows and finite input/state scales; inherited floating dynamic-row contract, not arbitrary-real writer fidelity."
+}

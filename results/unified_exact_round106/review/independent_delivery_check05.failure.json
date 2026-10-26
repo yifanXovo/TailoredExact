@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "layer": "INDEPENDENT_ZERO_SOLVER_REVIEW",
+  "executed_source": "independent_delivery_check05.executed.py",
+  "reason": "Reviewer max-bound aggregation failed on a correctly persisted null native global bound. Fresh checker excludes unavailable bounds before comparing the admitted pre-candidate LB. All preceding raw lazy and candidate checks had completed for F2 STRUCT and C2 FULL.",
+  "Optimize_calls": 0,
+  "IIS_calls": 0,
+  "native_process_starts": 0
+}

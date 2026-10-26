@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "--fail",
+    "--silent",
+    "--show-error",
+    "--location",
+    "--connect-timeout",
+    "30",
+    "--max-time",
+    "300",
+    "https://raw.githubusercontent.com/yifanXovo/TailoredExact/4d85c66a28321a37ca83354ee7849eef5a3fcae3/results/unified_exact_round107/reports05/superseded_arm_results.csv"
+  ],
+  "path": "results/unified_exact_round107/reports05/superseded_arm_results.csv",
+  "expected_SHA": "ddf3ffa084abee2ca92fcbfa9ac6792a658ad9baa3fc5e2f3a751345ceaa6770",
+  "expected_bytes": 4086
+}

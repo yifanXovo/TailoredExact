@@ -1,0 +1,17 @@
+{
+  "command": [
+    "curl.exe",
+    "--fail",
+    "--silent",
+    "--show-error",
+    "--location",
+    "--connect-timeout",
+    "30",
+    "--max-time",
+    "300",
+    "https://raw.githubusercontent.com/yifanXovo/TailoredExact/4d85c66a28321a37ca83354ee7849eef5a3fcae3/results/unified_exact_round107/scope_contract.md"
+  ],
+  "path": "results/unified_exact_round107/scope_contract.md",
+  "expected_SHA": "4ceeca760af8b38534852ac843e0b1bddf527b1d93bb08e8ac8955e3883f1b25",
+  "expected_bytes": 8875
+}

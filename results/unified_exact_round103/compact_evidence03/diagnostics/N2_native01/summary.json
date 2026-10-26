@@ -1,0 +1,87 @@
+{
+  "role": "R99-N2",
+  "kind": "native",
+  "statuses": [
+    "OUTSIDE",
+    "INSIDE",
+    "INSIDE"
+  ],
+  "records": [
+    {
+      "status": "OUTSIDE",
+      "reason": "complete_domain_dyadic_support_row",
+      "vehicle": 0,
+      "seconds": 0.711578600021312,
+      "Optimize_calls": 40,
+      "DP_calls": 40,
+      "columns": 40,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.03585923175308585,
+      "full_distance_lower": 0.0029143849814297763,
+      "coefficient_scale": 1073741824,
+      "safe_rhs_rational": "276996801/536870912",
+      "exact_activity_rational": "156816155034709645150971/302231454903657293676544",
+      "exact_excess_rational": "880818813907215928059/302231454903657293676544"
+    },
+    {
+      "status": "INSIDE",
+      "reason": "explicit_exact_dyadic_combination_within_declared_tolerance",
+      "vehicle": 1,
+      "seconds": 4.888546200003475,
+      "Optimize_calls": 209,
+      "DP_calls": 208,
+      "columns": 209,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.0,
+      "normalized_residual": 3.7619844108569754e-16
+    },
+    {
+      "status": "INSIDE",
+      "reason": "explicit_exact_dyadic_combination_within_declared_tolerance",
+      "vehicle": 2,
+      "seconds": 5.635202599980403,
+      "Optimize_calls": 225,
+      "DP_calls": 224,
+      "columns": 225,
+      "duplicates": 0,
+      "tolerance": 1e-08,
+      "zero_width_residual": 0.0,
+      "restricted_distance": 0.0,
+      "normalized_residual": 2.965467498297617e-15
+    }
+  ],
+  "total_Optimize_calls": 474,
+  "total_DP_calls": 472,
+  "outer_seconds": 12.578415299998596,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "affinity": {
+    "launcher_pid": 352,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  },
+  "actual_matrix_residual": {
+    "objective": 0.13283184331382947,
+    "maximum_absolute_residual": 2.1121993043493603e-14,
+    "violations_over_native_feasibility_tol": []
+  },
+  "source_sha256": "7eb245f733f64f4d4901355d528f6453182dffa7839cae232d880b2c04fe54b4"
+}

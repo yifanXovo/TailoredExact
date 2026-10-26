@@ -1,0 +1,1081 @@
+{
+  "execution": "COMPLETE_BOUNDED_TINY_STEP",
+  "cases": [
+    {
+      "id": "J1",
+      "single_plans": [
+        18,
+        32
+      ],
+      "joint_pairs": 119,
+      "theta": true,
+      "threshold_ranks": 80,
+      "IR_rows": 30,
+      "queried_directions": 64,
+      "positive_numeric_gaps": 0,
+      "best_numeric": null,
+      "best_strict": null,
+      "event_controls": [
+        {
+          "events": [
+            [
+              3,
+              "p",
+              1
+            ]
+          ],
+          "exact_rank": 1,
+          "status": 2,
+          "value": 1.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              1,
+              "d",
+              1
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 2.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              1,
+              "d",
+              2
+            ],
+            [
+              2,
+              "p",
+              1
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 2.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              2,
+              "p",
+              1
+            ],
+            [
+              3,
+              "p",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 3.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              1,
+              "d",
+              1
+            ],
+            [
+              2,
+              "p",
+              1
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 4,
+          "status": 2,
+          "value": 4.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              1,
+              "d",
+              2
+            ],
+            [
+              2,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 2.7043478260869565,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              2
+            ],
+            [
+              2,
+              "d",
+              1
+            ],
+            [
+              3,
+              "p",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 2.76056338028169,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              2
+            ],
+            [
+              1,
+              "d",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 3.0000000000000004,
+          "qualification": "PASS"
+        }
+      ],
+      "budget_exit": false,
+      "canonical_scope": {
+        "requested_cutoff": 0.675,
+        "actual_objective_cutoff_present": true,
+        "W_present": true,
+        "G_bounds": [
+          0,
+          0.675
+        ],
+        "production_backend_exposure": "diagnostic canonical root, not a production timing arm"
+      },
+      "canonical_SHA": "db30e30e8aa447ddbdacbd83b3cca85cc570f23a59e665f65d900990908558ec",
+      "reference_exact_matrix_SHA": "db2276f98c90dbbfa8d8dbd2b1560f571c9d480ac10496399fbdb74cf6fc3a51",
+      "joint_exact_matrix_SHA": "b05d4098943ef13142533a25f1b68f32eb592de9b3a2f47c99cb79a3d04d02a1",
+      "original_objective_receipt_SHAs": {
+        "original_objective_reference.json": "786c9b8d3581d4ab85513f99998688a0490747659bada2e7de262989b0c51f12",
+        "original_objective_joint.json": "1296952fc4c92f2f3efc9f98c044e931191348b4a6af58e91bc32ac802af6fa5"
+      },
+      "full_current_micro_objective_reference": 0.0,
+      "full_current_micro_objective_joint": 0.0,
+      "current_objective_increment": 0.0
+    },
+    {
+      "id": "J2",
+      "single_plans": [
+        11,
+        23
+      ],
+      "joint_pairs": 59,
+      "theta": true,
+      "threshold_ranks": 80,
+      "IR_rows": 30,
+      "queried_directions": 64,
+      "positive_numeric_gaps": 1,
+      "best_numeric": {
+        "direction": 61,
+        "w": [
+          1,
+          -1,
+          2,
+          2,
+          0,
+          -2,
+          -1,
+          2,
+          2,
+          1,
+          -2,
+          -1,
+          -1,
+          0,
+          2,
+          -2,
+          2,
+          1,
+          -2,
+          -1,
+          -2,
+          1,
+          1,
+          -1
+        ],
+        "gap": 0.5,
+        "Psi_exact": 7,
+        "proof": {
+          "status": "EXACT_EXTENSION",
+          "values": {
+            "G": "3/8",
+            "e_2": "1",
+            "e_4": "1",
+            "h_1_4": "1",
+            "h_2_4": "1",
+            "h_3_4": "1",
+            "r_1": "1",
+            "r_2": "1",
+            "r_3": "1",
+            "x_0_0_1": "1/2",
+            "x_0_0_2": "1/2",
+            "x_0_3_0": "1",
+            "z_0_1": "1/2",
+            "x_0_1_3": "1/2",
+            "z_0_2": "1/2",
+            "x_0_2_3": "1/2",
+            "z_0_3": "1",
+            "x_1_0_1": "1/2",
+            "x_1_2_0": "1/2",
+            "z_1_1": "1/2",
+            "x_1_1_2": "1/2",
+            "z_1_2": "1/2",
+            "conn_0_0_1": "3/2",
+            "conn_0_0_2": "1/2",
+            "conn_0_1_3": "1",
+            "conn_1_0_1": "1",
+            "conn_1_1_2": "1/2",
+            "Y_1": "1",
+            "Y_2": "1",
+            "Y_3": "1",
+            "p_0_2": "1/2",
+            "p_0_1": "1/2",
+            "d_0_3": "1",
+            "d_1_2": "1/2",
+            "p_1_1": "1/2",
+            "ord_0_1": "1/2",
+            "ord_0_2": "1/2",
+            "ord_0_3": "1",
+            "ord_1_1": "1/2",
+            "ord_1_2": "1/2",
+            "mode_0_1": "1/2",
+            "load_0_1": "1/2",
+            "mode_0_2": "1/2",
+            "load_0_2": "1/2",
+            "mode_1_1": "1/2",
+            "state_g_1_1": "3/8",
+            "state_1_1": "1",
+            "zprod_1": "3/8",
+            "state_g_2_0": "3/8",
+            "state_2_0": "1/2",
+            "state_2_2": "1/2",
+            "state_g_3_1": "3/8",
+            "state_3_1": "1",
+            "zprod_3": "3/8",
+            "state_g_4_0": "3/8",
+            "state_4_0": "1",
+            "mix0[3]": "1/2",
+            "mix0[6]": "1/2",
+            "mix1[0]": "1/2",
+            "mix1[13]": "1/2",
+            "theta0_0_1": "1/2",
+            "theta1_0_1": "1/2",
+            "theta0_1_0": "1/2",
+            "theta1_1_2": "1/2",
+            "theta0_2_1": "1"
+          },
+          "all_rows_and_bounds_checked": 783,
+          "fraction_semantics": "exact rationals of loaded binary64 coefficients",
+          "lhs": "15/2",
+          "RHS": 7,
+          "strict": true
+        },
+        "reference_exact_matrix_SHA": "cb7f13289cb6bae58bae5e3bedde8c7b0ff8df9fc711ff190595f7c720a3b310",
+        "enumeration_SHA": "c3bb1ef4d4ca7c2f7c5b59024b7f30c94e4b9041e2c8c673b6727696754a17dc"
+      },
+      "best_strict": {
+        "direction": 61,
+        "w": [
+          1,
+          -1,
+          2,
+          2,
+          0,
+          -2,
+          -1,
+          2,
+          2,
+          1,
+          -2,
+          -1,
+          -1,
+          0,
+          2,
+          -2,
+          2,
+          1,
+          -2,
+          -1,
+          -2,
+          1,
+          1,
+          -1
+        ],
+        "gap": 0.5,
+        "Psi_exact": 7,
+        "proof": {
+          "status": "EXACT_EXTENSION",
+          "values": {
+            "G": "3/8",
+            "e_2": "1",
+            "e_4": "1",
+            "h_1_4": "1",
+            "h_2_4": "1",
+            "h_3_4": "1",
+            "r_1": "1",
+            "r_2": "1",
+            "r_3": "1",
+            "x_0_0_1": "1/2",
+            "x_0_0_2": "1/2",
+            "x_0_3_0": "1",
+            "z_0_1": "1/2",
+            "x_0_1_3": "1/2",
+            "z_0_2": "1/2",
+            "x_0_2_3": "1/2",
+            "z_0_3": "1",
+            "x_1_0_1": "1/2",
+            "x_1_2_0": "1/2",
+            "z_1_1": "1/2",
+            "x_1_1_2": "1/2",
+            "z_1_2": "1/2",
+            "conn_0_0_1": "3/2",
+            "conn_0_0_2": "1/2",
+            "conn_0_1_3": "1",
+            "conn_1_0_1": "1",
+            "conn_1_1_2": "1/2",
+            "Y_1": "1",
+            "Y_2": "1",
+            "Y_3": "1",
+            "p_0_2": "1/2",
+            "p_0_1": "1/2",
+            "d_0_3": "1",
+            "d_1_2": "1/2",
+            "p_1_1": "1/2",
+            "ord_0_1": "1/2",
+            "ord_0_2": "1/2",
+            "ord_0_3": "1",
+            "ord_1_1": "1/2",
+            "ord_1_2": "1/2",
+            "mode_0_1": "1/2",
+            "load_0_1": "1/2",
+            "mode_0_2": "1/2",
+            "load_0_2": "1/2",
+            "mode_1_1": "1/2",
+            "state_g_1_1": "3/8",
+            "state_1_1": "1",
+            "zprod_1": "3/8",
+            "state_g_2_0": "3/8",
+            "state_2_0": "1/2",
+            "state_2_2": "1/2",
+            "state_g_3_1": "3/8",
+            "state_3_1": "1",
+            "zprod_3": "3/8",
+            "state_g_4_0": "3/8",
+            "state_4_0": "1",
+            "mix0[3]": "1/2",
+            "mix0[6]": "1/2",
+            "mix1[0]": "1/2",
+            "mix1[13]": "1/2",
+            "theta0_0_1": "1/2",
+            "theta1_0_1": "1/2",
+            "theta0_1_0": "1/2",
+            "theta1_1_2": "1/2",
+            "theta0_2_1": "1"
+          },
+          "all_rows_and_bounds_checked": 783,
+          "fraction_semantics": "exact rationals of loaded binary64 coefficients",
+          "lhs": "15/2",
+          "RHS": 7,
+          "strict": true
+        },
+        "reference_exact_matrix_SHA": "cb7f13289cb6bae58bae5e3bedde8c7b0ff8df9fc711ff190595f7c720a3b310",
+        "enumeration_SHA": "c3bb1ef4d4ca7c2f7c5b59024b7f30c94e4b9041e2c8c673b6727696754a17dc"
+      },
+      "event_controls": [
+        {
+          "events": [
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 1,
+          "status": 2,
+          "value": 1.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              1,
+              "p",
+              1
+            ],
+            [
+              3,
+              "d",
+              2
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 2.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              1,
+              "d",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 2.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 3.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              1,
+              "p",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ],
+            [
+              3,
+              "d",
+              2
+            ]
+          ],
+          "exact_rank": 4,
+          "status": 2,
+          "value": 4.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              1,
+              "d",
+              1
+            ],
+            [
+              2,
+              "d",
+              2
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 2.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              2
+            ],
+            [
+              2,
+              "d",
+              2
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 3.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              2
+            ],
+            [
+              1,
+              "p",
+              1
+            ],
+            [
+              2,
+              "d",
+              2
+            ],
+            [
+              3,
+              "d",
+              2
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 3.0,
+          "qualification": "PASS"
+        }
+      ],
+      "budget_exit": false,
+      "canonical_scope": {
+        "requested_cutoff": 1.0333333333333332,
+        "actual_objective_cutoff_present": true,
+        "W_present": true,
+        "G_bounds": [
+          0,
+          0.75
+        ],
+        "production_backend_exposure": "diagnostic canonical root, not a production timing arm"
+      },
+      "canonical_SHA": "527beb94fd263c6db3f304182c76e7921b6cbe3c247a7fe5bd7e5cccdd01d845",
+      "reference_exact_matrix_SHA": "cb7f13289cb6bae58bae5e3bedde8c7b0ff8df9fc711ff190595f7c720a3b310",
+      "joint_exact_matrix_SHA": "20be7033fb6918aa3ca3a1a9f5a0cd017fa64010738afcaafa5f0b9eed040254",
+      "original_objective_receipt_SHAs": {
+        "original_objective_reference.json": "a5ae8630eb450879700b719d19569eac1812b0bb1a4916001491636eaeae7a7c",
+        "original_objective_joint.json": "6efdd3ae46bacdec563c0db4195ec7f4456b52d8d1e723a0cb1a093f04ec7b82"
+      },
+      "full_current_micro_objective_reference": 0.15,
+      "full_current_micro_objective_joint": 0.15,
+      "current_objective_increment": 0.0
+    },
+    {
+      "id": "J3",
+      "single_plans": [
+        11,
+        30
+      ],
+      "joint_pairs": 66,
+      "theta": true,
+      "threshold_ranks": 80,
+      "IR_rows": 30,
+      "queried_directions": 64,
+      "positive_numeric_gaps": 0,
+      "best_numeric": null,
+      "best_strict": null,
+      "event_controls": [
+        {
+          "events": [
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 1,
+          "status": 2,
+          "value": 1.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              1,
+              "p",
+              1
+            ],
+            [
+              3,
+              "d",
+              2
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 2.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              1,
+              "d",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 2.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 3.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              1,
+              "p",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ],
+            [
+              3,
+              "d",
+              2
+            ]
+          ],
+          "exact_rank": 4,
+          "status": 2,
+          "value": 4.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              1,
+              "d",
+              1
+            ],
+            [
+              2,
+              "d",
+              2
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 2.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              2
+            ],
+            [
+              2,
+              "d",
+              2
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 3.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              2
+            ],
+            [
+              1,
+              "p",
+              1
+            ],
+            [
+              2,
+              "d",
+              2
+            ],
+            [
+              3,
+              "d",
+              2
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 3.0,
+          "qualification": "PASS"
+        }
+      ],
+      "budget_exit": false,
+      "canonical_scope": {
+        "requested_cutoff": 1.0333333333333332,
+        "actual_objective_cutoff_present": true,
+        "W_present": true,
+        "G_bounds": [
+          0,
+          0.75
+        ],
+        "production_backend_exposure": "diagnostic canonical root, not a production timing arm"
+      },
+      "canonical_SHA": "21381affde4d57f87bb86453d7f0cd20021990b06c8552a03c46cdbcef7b08d6",
+      "reference_exact_matrix_SHA": "e14dcd88b02b6576d6e7b1961259da6ce0de446bc3a017f7f876099074ef442c",
+      "joint_exact_matrix_SHA": "522835121dc9bd3f45efc32631bffddf13709877dca86ccf8536352cc99a2a0e",
+      "original_objective_receipt_SHAs": {
+        "original_objective_reference.json": "09a1ea1199bf69035ec5a1ca55a911d66b5aa59399971fd67100f18e60833716",
+        "original_objective_joint.json": "45814de8ae102b02fd6be9c4ea4e2bed147212ebc2acfbddf12c514380d688a0"
+      },
+      "full_current_micro_objective_reference": 0.15,
+      "full_current_micro_objective_joint": 0.15,
+      "current_objective_increment": 0.0
+    },
+    {
+      "id": "J4",
+      "single_plans": [
+        35,
+        35
+      ],
+      "joint_pairs": 177,
+      "theta": true,
+      "threshold_ranks": 80,
+      "IR_rows": 30,
+      "queried_directions": 64,
+      "positive_numeric_gaps": 0,
+      "best_numeric": null,
+      "best_strict": null,
+      "event_controls": [
+        {
+          "events": [
+            [
+              3,
+              "p",
+              1
+            ]
+          ],
+          "exact_rank": 1,
+          "status": 2,
+          "value": 0.75,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              1,
+              "p",
+              1
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 1.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              1,
+              "d",
+              1
+            ],
+            [
+              2,
+              "p",
+              1
+            ]
+          ],
+          "exact_rank": 2,
+          "status": 2,
+          "value": 1.0,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              2,
+              "p",
+              1
+            ],
+            [
+              3,
+              "p",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 2.25,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              1,
+              "p",
+              1
+            ],
+            [
+              2,
+              "p",
+              1
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 4,
+          "status": 2,
+          "value": 2.5,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "p",
+              1
+            ],
+            [
+              1,
+              "d",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 1.5,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "d",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ],
+            [
+              3,
+              "p",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 1.5,
+          "qualification": "PASS"
+        },
+        {
+          "events": [
+            [
+              0,
+              "d",
+              1
+            ],
+            [
+              1,
+              "p",
+              1
+            ],
+            [
+              2,
+              "d",
+              1
+            ],
+            [
+              3,
+              "d",
+              1
+            ]
+          ],
+          "exact_rank": 3,
+          "status": 2,
+          "value": 2.0,
+          "qualification": "PASS"
+        }
+      ],
+      "budget_exit": false,
+      "canonical_scope": {
+        "requested_cutoff": 0.0,
+        "actual_objective_cutoff_present": false,
+        "W_present": true,
+        "G_bounds": [
+          0,
+          0.0
+        ],
+        "production_backend_exposure": "none; physical startup-zero"
+      },
+      "canonical_SHA": "6ad7fe35e63baa9eb0da9782557912e04fe8dbdd230ea1989ced77da59d20115",
+      "reference_exact_matrix_SHA": "a65bfc9d79f2ef3ea98c8fb03026a5bc199ade6d94d3038783556e42c6939a4b",
+      "joint_exact_matrix_SHA": "d4470c31582ddcc88f94dc3434c9dbd8bb8634bf7bcddce3976c7bf45c138059",
+      "original_objective_receipt_SHAs": {
+        "original_objective_reference.json": "e909c443a178463797453e79cf60153f9394cb56165d78a6e6636a66c2d13d8f",
+        "original_objective_joint.json": "289f66902c0c9a708bb717caa9b4b2372cf32fba13b24fb64f21fe31f73b1707"
+      },
+      "full_current_micro_objective_reference": 0.0,
+      "full_current_micro_objective_joint": 0.0,
+      "current_objective_increment": 0.0
+    }
+  ],
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "plan_SHA": "d8de4cba395f475c83b8f22e8fc0abd31c887ffe0fdb6c289ce0af626adad7dd",
+  "runner_SHA": "8d0d723a32a8f11dcd240778e44d6f172c44f02fe5c65e05c706d13b9ceafdf6",
+  "seconds": 1.211743799969554,
+  "full_real_role_steps": "NOT_ADMITTED: tiny exact joint maxima cannot omit outside supply/receiver stations; no complete full-universe support upper bound is supplied",
+  "no_large_separator_or_production_change": true,
+  "limited_directions_do_not_prove_full_hull_equality": true
+}

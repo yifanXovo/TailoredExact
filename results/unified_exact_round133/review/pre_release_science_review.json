@@ -1,0 +1,57 @@
+{
+  "schema": "round133-independent-pre-release-science-review-v1",
+  "UTC": "2026-10-25T11:54:24.802218+00:00",
+  "reviewer": "/root/reliability_review",
+  "decision": "ACCEPT_SCIENTIFIC_PAYLOAD_ONLY",
+  "science_documents": {
+    "manuscript.md": "76d176cb883a88b64d27b43f1994d66f5dd337f9bcc579540b91b707324c93ff",
+    "final_report.md": "7cefc8e4abb9722a3de80353f8a2bd7abd5b36e660340a806fb0269ef8fa187f",
+    "readiness.md": "6fac36002417b04d29f8d9000bcdccbe7261f85486c5979bd16fda1b1ba8e90c",
+    "independent_review.md": "2ef5bc3553f88e559f5b3189262c9a9f9e188fe8de29e28c34ee8cdcf5d439b5",
+    "native_reliability_analysis.md": "302715cb244f470c4f484646f60bd25eff970b324d7dd38c44fbc4bf0b117c1c",
+    "joint_objective_gap_note.md": "7ea45be897570b3f679f425a360ca6ed27bc77a36c822750eebfb1b97fb226ae",
+    "historical_impact.md": "f319c1be054285d52fb6e8ed9e71180a0a1ffc6076bd133cbbbbb858efcbf062",
+    "historical_impact.json": "3eec81c3c7751f18dcd918a4c5f4ec2299d6b596f9942079480ac341c844488e",
+    "references.bib": "9d9489329f4c7dec18c82f2643d99056eb3a12e25bcddd0b8126b4bf3714cddc",
+    "reproducibility.md": "29752494171235730fe95e68b6219795e12ff8ca6f78f91c5ea0ee1ea74e3794",
+    "delivery_plan.json": "c448aebdb92fe07fe85942fcddca0787869e2843f95408f78aafa0658cb1569d"
+  },
+  "reviewed_manuscript_change_from_R132": "127 added /18 removed lines; numerical source, qualification/bridge and exact objective-gap amendments",
+  "independently_checked_tables": {
+    "Q2_positions": 14,
+    "Q3_positions": 8,
+    "Q4_pairs": 4,
+    "display_precision_matches_raw": true,
+    "negative_signed_gap_and_null_Tcert_retained": true
+  },
+  "citation_keys": 12,
+  "bibliographic_entries": 23,
+  "all_manuscript_citation_keys_resolve": true,
+  "science_results": {
+    "D1": "14 implementation /13 sources /8 certificates /5 qualified-open /1 source-rejected safe-open",
+    "D3": "8 qualified certificates;4 complete pairs;2Win/2Lose all TIME_CLOSE;actual marker absent",
+    "math": "J2 service difference; J2/J3 exact loaded LP=lambda_hat, IP=1/4+lambda_hat at stated coefficient; gap1/4",
+    "original_native_internal_causes": "UNKNOWN",
+    "historical_D24_source": "REJECTED"
+  },
+  "retained_conditions": [
+    "Equal targets/weights and integer inventories for stated balancing/IP formula; tau0 and loaded return handled separately",
+    "Actual serialized-binary64 point differs from tight ideal completion; same-DLL transfer discloses three signed zeros and initial-state scope",
+    "R13217/24 plus independent own-zero,84 arms/64 comparisons stay historical; K35B UNKNOWN",
+    "D1 real UC3split/child-target/requeue/cache path is distinct from unobserved natural NEXT",
+    "D3 matrix identities match per pair and do not exercise removed-marker domains; no broad speed claim",
+    "First verifier failure, effective adapter, old fees and real verification delay remain; wrapper wall is paid"
+  ],
+  "source_code_review": "Previous independent design/freeze/ABI/consumer and exact boundary reviews retained; production identity unchanged",
+  "delivery_draft": "Bounded current carriers, exact source bytes/main binding/old code dependencies, anonymous fixed commit, one owned root, three required pure checks; runtime still pending",
+  "pending": [
+    "Local closed-root replay and actual public one-root recovery, source publication/carrier scans and fixed manifest",
+    "Rendered PDF formula/table/citation/cross-page visual QA",
+    "Actual Draft PR/base/head/key-file remote readback and owned cleanup",
+    "Final independent delivery/readiness review after those actual outcomes"
+  ],
+  "no_new_Native_or_matrix_required_by_this_review": true,
+  "native_Optimize": 0,
+  "compilation": 0,
+  "outer_review_seconds": 0.01625640003476292
+}

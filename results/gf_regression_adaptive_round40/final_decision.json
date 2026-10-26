@@ -1,0 +1,60 @@
+{
+  "automatic_mainline_change": false,
+  "default_c6_equivalence": {
+    "all_passed": true,
+    "deterministic_fields_per_pair": 25,
+    "pairs": 3
+  },
+  "exactness": {
+    "accepted_rows": 112,
+    "audited_rows": 112,
+    "expected_fail_closed_rows": 5,
+    "false_certificates": 0,
+    "strict_exact_rows": 107
+  },
+  "part1": {
+    "best_research_arm": "C6-K1-ADAPTIVE-DECISIVE",
+    "major_regression_eliminated_vs_p_grb": false,
+    "major_regression_materially_reduced": true,
+    "panel_instances": 10,
+    "promotion": false,
+    "rows": 50,
+    "simple_k1_reduces_fragmentation": true,
+    "strong_control_preserved_vs_k4": false,
+    "strong_control_preserved_vs_p_grb": true,
+    "time_wins_vs_k4": 8
+  },
+  "part2": {
+    "baseline_total_seconds": 2505.4312995,
+    "baseline_total_work": 4977.863313085145,
+    "candidate": "C6-NESTED-DYADIC-K4",
+    "candidate_total_seconds": 2646.9181365,
+    "candidate_total_work": 5224.636103427845,
+    "endpoint_strictly_resolved": true,
+    "legacy_boundary_preservation_passes": 0,
+    "median_time_ratio": 1.0106239700341044,
+    "median_work_ratio": 1.042411148724018,
+    "nested_boundary_preservation_passes": 10,
+    "panel_instances": 24,
+    "promotion": false,
+    "round36_different_ub_pairs": 10,
+    "rows": 48,
+    "runtime_monotonicity_claim": false,
+    "time_wins": 10,
+    "work_wins": 9
+  },
+  "part3": {
+    "implemented": false,
+    "reason": "No solver-independent evidence distinguishes fragmentation-dominated cases from coarse-MIP-dominated cases; a dispatch would require forbidden historical or effort-based signals."
+  },
+  "presolve": {
+    "frozen_policy": "gurobi-auto",
+    "gurobi_presolve_value": -1,
+    "instance_dispatch": false,
+    "labeling_ambiguous": true,
+    "round39_solver_level_contract_fair": true
+  },
+  "promotion_recommendation": "retain_frozen_c6_hga_full_k4_rho_0_01",
+  "round_id": 40,
+  "schema": "round40-final-decision-v1"
+}

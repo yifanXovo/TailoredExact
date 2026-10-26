@@ -1,0 +1,6 @@
+{"phase": "launching_registered_arm", "unix": 1790737334.3771355, "queue_elapsed_seconds": 0.01600499963387847, "number": 8, "id": "V1", "arm": "OFF"}
+{"phase": "registered_arm_audited", "unix": 1790739132.7701924, "queue_elapsed_seconds": 1798.4087585997768, "number": 8, "endpoint": {"U": 0.17155123467659872, "L": 0.1534048797180084, "gap": 0.01814635495859032, "certificate": false, "source": "normal_finalized_physical_endpoint", "status": "round31_c6_external_gini_tree_time_limit"}}
+{"phase": "auditing_actual_model_vectors", "unix": 1790739133.2528484, "queue_elapsed_seconds": 1798.8920292998664, "number": 8}
+{"phase": "actual_model_vectors_passed", "unix": 1790739135.6689055, "queue_elapsed_seconds": 1801.3076306995936, "number": 8, "optimizer_calls": 0, "wrapper_seconds": 2.4147477000951767, "audit_path": "development02_08_vectors.json", "audit_sha256": "d42eba6173f006b4ecb967e5397f69b652181e4c051fd03037f5d1332513631b"}
+{"phase": "launching_registered_arm", "unix": 1790739135.6929061, "queue_elapsed_seconds": 1801.3321890998632, "number": 9, "id": "V1", "arm": "FEEDBACK"}
+{"phase": "stopped_failure_no_restart", "unix": 1790740934.9163775, "queue_elapsed_seconds": 3600.5553616997786, "error": "RuntimeError('Audit failed; retain evidence and stop before next arm')"}

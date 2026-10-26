@@ -1,0 +1,101 @@
+{
+  "schema": "round114-independent-finite-evidence-review-v1",
+  "decision": "FINITE_EVIDENCE_ACCEPTED_ADMISSION_PENDING_ACTUAL_CLI_POST_EXIT",
+  "reviewer": "/root/independent_admission",
+  "candidate_identity_SHA": "8c5a5bc25ef289f30a1d4fb1a8ee60723c41ca8a3238b00c0669605f7cd50175",
+  "helpers_count": 47,
+  "helper_discrepancies": [],
+  "qualification_test_SHA": "80b69a140481912895de2d9ce326db16a62470bcfed3e172aaccdc43988b0a99",
+  "counterexample_script_SHA": "f973cbc8b3eb845f16add6694ad17c543218186e4abae44fdde74766d298d904",
+  "counterexample_binding_counts": {
+    "source_bindings": 173,
+    "outputs": 13
+  },
+  "counterexample_verifications": [
+    {
+      "interpretation": "printed_decimal",
+      "columns": 13326,
+      "rows": 35567,
+      "exact_objective": [
+        45712900593749998475327921669999919927,
+        156250000000000004650000000000000000000000000000000000
+      ],
+      "objective_float": 2.9256256379999997E-16,
+      "row_violations": 0,
+      "bound_violations": 0,
+      "integer_violations": 0,
+      "second_arithmetic_check": true
+    },
+    {
+      "interpretation": "api_binary64",
+      "columns": 13326,
+      "rows": 35567,
+      "exact_objective": [
+        578670508043629023668324959834778213,
+        2923003274661805906503377255652739024473565530423296
+      ],
+      "objective_float": 1.979712144217771E-16,
+      "row_violations": 0,
+      "bound_violations": 0,
+      "integer_violations": 0,
+      "second_arithmetic_check": true
+    }
+  ],
+  "receipt_bindings": {
+    "claims": {
+      "SHA": "0f4979a4134cdd08f00219113b5f5fa3bd80d73c087bc1fb1f1119f4aba0a90b",
+      "case_count": 5
+    },
+    "zero_calls": {
+      "SHA": "348cff327eb98558d5f7dd599119f300b5124ca1ff37a085f6cb1bf93f3c7216",
+      "case_count": 15
+    },
+    "journal": {
+      "SHA": "480ee6c3359d950e38b90cdf41656d38461fee927205be9b1a33de2ed55b6d08",
+      "case_count": 3
+    },
+    "supervisor": {
+      "SHA": "dd113ef1f5c42292514f0057b9809cdb9297c4fbe206117d33d82c172e3eb495",
+      "case_count": 8
+    },
+    "inherited_returns": {
+      "SHA": "aa46c910cf6a19c8969caff028b920e43fe65111f227ae471bfac188be469aab",
+      "case_count": 14
+    },
+    "compatibility": {
+      "SHA": "923a1f5331a2774d1452f19568c971bf9669e4dbcee0d187b11cc36563956d93",
+      "case_count": 1
+    }
+  },
+  "old_fixture_endpoints_and_intervals_match": true,
+  "old_missing_returned_preserved": [
+    {
+      "fixture": 17,
+      "declared": 1,
+      "actual": 1,
+      "journal_returned": 0,
+      "verified_returned": 1,
+      "not_started": 0
+    },
+    {
+      "fixture": 25,
+      "declared": 4,
+      "actual": 4,
+      "journal_returned": 3,
+      "verified_returned": 4,
+      "not_started": 0
+    }
+  ],
+  "old_P15_P26_source_reduced_open_only": true,
+  "old_15_qualified_21_pairs_signed_gap_preserved": true,
+  "first_failed_driver_receipt_SHA": "544a39c79d80dab6f08ece50c330e303c3d0e97d9d0611ec31a9593480a334a8",
+  "first_failed_driver_reason": "test synthetic unknown event omitted schema, KeyError; raw and fee retained; only test corrected",
+  "finite_conservative_starts": 2,
+  "finite_outer_seconds_upper": 9.546379089355469,
+  "second_driver_receipt_SHA": "998e23ee08ac9cca6a4700bf5ad70df18935a74d8e0ec3b552fda7a5514325b3",
+  "independent_readonly_engineering_seconds": 0.2004534,
+  "reviewer_native_starts": 0,
+  "reviewer_Optimize": 0,
+  "reviewer_qualification_driver_starts": 0,
+  "two_actual_H100_CLI_and_closed_post_driver_still_required": true
+}

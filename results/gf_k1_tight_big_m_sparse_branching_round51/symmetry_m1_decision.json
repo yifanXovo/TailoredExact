@@ -1,0 +1,89 @@
+{
+  "baseline": "m1-tight-big-m-v0",
+  "candidates": {
+    "m1-s1-route-start-order": {
+      "aggregate_candidate_work": 4470.853697390277,
+      "aggregate_m1_v0_work": 4913.062414749017,
+      "aggregate_work_ratio": 0.9099932628514491,
+      "confirmation_opened": false,
+      "correctness_failures": 0,
+      "d13_baseline_certificate": true,
+      "d13_candidate_certificate": false,
+      "d13_round50_symmetry_regression_reproduced": true,
+      "decision": "reject",
+      "development_gate_passed": false,
+      "false_certificates": 0,
+      "improved_states": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "D7",
+        "D9",
+        "D10"
+      ],
+      "lost_baseline_certificate_states": [
+        "D12",
+        "D13"
+      ],
+      "severe_regression_states": [
+        "D12",
+        "D13"
+      ]
+    },
+    "m1-s1r-used-first-route-start-order": {
+      "aggregate_candidate_work": 4693.38190032052,
+      "aggregate_m1_v0_work": 4913.062414749017,
+      "aggregate_work_ratio": 0.9552864393155243,
+      "confirmation_opened": false,
+      "correctness_failures": 0,
+      "d13_baseline_certificate": true,
+      "d13_candidate_certificate": false,
+      "d13_round50_symmetry_regression_reproduced": true,
+      "decision": "reject",
+      "development_gate_passed": false,
+      "false_certificates": 0,
+      "improved_states": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5",
+        "D6",
+        "D9",
+        "D10",
+        "D11"
+      ],
+      "lost_baseline_certificate_states": [
+        "D13"
+      ],
+      "severe_regression_states": [
+        "D13",
+        "D14"
+      ]
+    }
+  },
+  "confirmation_opened": false,
+  "development_cap_seconds": 300,
+  "development_states": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14"
+  ],
+  "final_symmetry_policy": "v0-cardinality",
+  "reason": "both_candidates_lost_mandatory_D13_certificate",
+  "schema": "round51-symmetry-m1-decision-v1"
+}

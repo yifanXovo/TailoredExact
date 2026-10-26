@@ -1,0 +1,39 @@
+{
+  "fixed_interval_cap_seconds": 1200,
+  "k1_additional_confirmation": [
+    "round39_small_hard_V10_M1_Q30_slot02_seed1721447042",
+    "round39_small_hard_V12_M1_Q20_slot05_seed180890838",
+    "round39_small_medium_V10_M1_Q20_slot04_seed1035775879",
+    "round39_small_medium_V8_M3_Q30_slot03_seed1177285734"
+  ],
+  "k1_existing_confirmation": [
+    "tight_T_seed3101",
+    "high_imbalance_seed3202",
+    "moderate_seed3302"
+  ],
+  "no_algorithm_change_after_panel_open": true,
+  "recovery_rule": "use only when exact primary reconstruction fails before Stage 2; never choose after candidate results",
+  "recovery_states": {
+    "C1R": "D4",
+    "C2R": "D5",
+    "C3R": "D9",
+    "C4R": "D13",
+    "C5R": "D14",
+    "C6R": "D2",
+    "C7R": "D12",
+    "C8R": "D6",
+    "C9R": "D1"
+  },
+  "schema": "round50-confirmation-panel-freeze-v1",
+  "states": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9"
+  ]
+}

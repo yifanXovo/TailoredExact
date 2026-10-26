@@ -1,0 +1,5 @@
+check,before,after,classification,rerun
+canonical incumbent row,verified_seed.objective,current verified_ub,semantic implementation defect fixed,D1-D14 300s mandatory
+parent LP request cutoff,verified_seed.objective,current verified_ub,semantic implementation defect fixed,D1-D14 300s mandatory
+retained model after improvement,could remain cached,discard and rebuild lazily,semantic implementation defect fixed,K1 sentinels mandatory
+cached LP evidence,could remain complete,epoch mismatch invalidates,semantic implementation defect fixed,K1 sentinels mandatory

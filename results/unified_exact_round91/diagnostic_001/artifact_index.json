@@ -1,0 +1,143 @@
+{
+  "admission_sha256": "de10e8ce483100e6acaa609cf28814302e1add0d7c897c8e60df3fb46232eab8",
+  "scope": "One root-admitted A/B/C fixed canonical LP diagnostic, full raw primal/residual and outer watchdog receipts",
+  "actual_optimize_arms": 3,
+  "schema": "round91-handling-rounding-diagnostic-index-v1",
+  "file_count": 26,
+  "files": [
+    {
+      "path": "results/unified_exact_round91/diagnostic_001_outer/outer_receipt.json",
+      "bytes": 1358,
+      "sha256": "98100be980f49858e4cd20ed4203e7da24d9d5f201e47d89eb0b8743fbd34655"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001_outer/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001_outer/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/A/arm_result.json",
+      "bytes": 2089,
+      "sha256": "355a77a5c49e7dddfdbbe67b307b283e32cbd7eb0b0de44a0ded6e51a0fa8a10"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/A/bound_residuals.jsonl",
+      "bytes": 49379,
+      "sha256": "114ac8e7983afc529af7cea5c1bfe3d63569179816d1d5f534e7fb285841f273"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/A/gurobi.log",
+      "bytes": 68,
+      "sha256": "4cf2761288800963105999746fd235e68628c09ca595de271fccf15d99ea40cc"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/A/primal.jsonl",
+      "bytes": 9888,
+      "sha256": "ceaad6cd436a1bfe95805d322bdf6a2b734ca042163f26533cc5762c77f419ad"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/A/row_residuals.jsonl",
+      "bytes": 104331,
+      "sha256": "8ecde87159b7e27f79df26dfd893f0e399bc4a5fe9cf39c894b80bdcfb0e2e80"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/B/arm_result.json",
+      "bytes": 2124,
+      "sha256": "d11cb3f41e139c1a083110f76231e5d83a34403df8a8f5e748579b5328c6db76"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/B/bound_residuals.jsonl",
+      "bytes": 50064,
+      "sha256": "7d035cf62877785fd337e12cbaec6d4075daef5b38f974f2ebb46c5ef3876ea0"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/B/gurobi.log",
+      "bytes": 68,
+      "sha256": "4cf2761288800963105999746fd235e68628c09ca595de271fccf15d99ea40cc"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/B/primal.jsonl",
+      "bytes": 10539,
+      "sha256": "1bbde7ed9a0c59d0550719b5fd57aaa2e798d83f52caad5b38a6d6b01c67db5c"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/B/row_residuals.jsonl",
+      "bytes": 107007,
+      "sha256": "37ff4697cad567ec1b7df51e8b13e902dd628e4a5b93028774bddeb6f4ba21aa"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/C/arm_result.json",
+      "bytes": 2094,
+      "sha256": "24f75f36c7da4281e954b758351c59aa145ad40803acde6389b49c17ba631efa"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/C/bound_residuals.jsonl",
+      "bytes": 49195,
+      "sha256": "826e4448249c36e447a1ab29e82bc41a2587a2ba1967ebf4687651124bfa87c2"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/C/gurobi.log",
+      "bytes": 68,
+      "sha256": "4cf2761288800963105999746fd235e68628c09ca595de271fccf15d99ea40cc"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/C/primal.jsonl",
+      "bytes": 9698,
+      "sha256": "28b7af326d5fa786c4c6d957dd42ef5c5ba12bb307281243ca1a6d42744efb9a"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/C/row_residuals.jsonl",
+      "bytes": 104589,
+      "sha256": "7ca0079462c9a75b3d00dcfcfcf2454e75002e410196b88d4cca8e13dd608991"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/diagnostic_result.json",
+      "bytes": 25548,
+      "sha256": "91c7dabff8d77417aac363f068234186763b5cae136753109ea0ee2c81c88cf7"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/diagnostic/identity.json",
+      "bytes": 17791,
+      "sha256": "8887a24f8c11ec4f7187f1fa3cccfc38192d5d59a1d5c74689ab1d5fb097ffc2"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/postflight_audit.json",
+      "bytes": 6150,
+      "sha256": "89aef08376e0b5f355f1f514d9a1e269b58666a1f3707bc093c349ea50009cfe"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/postrun_process_check.json",
+      "bytes": 185,
+      "sha256": "ea337abd22ad2f18f4b96ff826ffbfb990a4ec858960ca4acb8618bc71e89905"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/report.md",
+      "bytes": 4222,
+      "sha256": "d4e8d4459b2736df9abcbe604abf3f2393aed89154b277868c37f63b769e0b71"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/unified_exact_round91/diagnostic_001/supervision.json",
+      "bytes": 1504,
+      "sha256": "c1d9b5cfc9da8a9b0f00529e56de2c2d92173f80416ba23e79c3330409839ffa"
+    }
+  ],
+  "total_bytes": 557959.0,
+  "watchdog_contract_sha256": "866967b175f4e18560f48c8b5376b5c05cf52b26f9ad795ca09ec179998795ea",
+  "reruns": 0,
+  "lp_sha256": "9872d149c970c99f2b0175929221fb42692c6915a68a4e57e94dd1492fb79a29"
+}

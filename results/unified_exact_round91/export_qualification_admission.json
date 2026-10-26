@@ -1,0 +1,18 @@
+{
+  "schema": "round91-handling-rounding-export-qualification-v1",
+  "authorized_by": "root",
+  "allow_build": true,
+  "allow_export": true,
+  "allow_optimize": false,
+  "source_root": "E:/codes/ExactEBRP",
+  "build_dir": "build/research/round91-handling-rounding",
+  "export_dir": "results/unified_exact_round91/qualification_001/export",
+  "probe_sha256": "9eeef0954a1f282034594371278abdc1398427dcf4202502c75fddb365f41810",
+  "frozen_core_path": "build/research/round90-lp-g-split/libexact_ebrp_core.a",
+  "frozen_core_sha256": "92e6ae6ba2c9d9515a4173dca6a8ff507147228d2639e71a513d4bb24e4ba2f7",
+  "frozen_main_sha256": "bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2",
+  "frozen_source_manifest": "results/unified_exact_round90/preregistration_g3.json",
+  "build_handoff_revision_sha256": "d25d4822ba00c38f27251d992119dc7030cd6d59d4db58d20bc3bec131a17a70",
+  "independent_source_review_sha256": "6099bb064f1c97f5de77179b0d6dcb2a428679d1b76f136e4ed4f58d74777c65",
+  "limits": "One standalone compile/link and one zero-Optimize canonical export. Preserve failures and all costs. No frozen Round90 source, CMake, library, binary or historical evidence changes. No A/B/C LP solves."
+}

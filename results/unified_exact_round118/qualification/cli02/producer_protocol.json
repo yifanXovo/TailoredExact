@@ -1,0 +1,155 @@
+{
+  "round": 118,
+  "actual_base": "71ccd3b75ca8d713018f4edd222cd4c5f0a0b962",
+  "production_source": "d0014a7163e3996fe120471420e56b089c9715ae",
+  "PE_SHA": "a8356b6ad6a5ced47e0d41374ec2184669349c083370eabd76989fb9c11539a8",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "roles": [
+    {
+      "number": 1,
+      "id": "N40-R1-S",
+      "V": 40,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "Q_class": "X",
+      "T_seconds": 10800,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "cap_seconds": 5400,
+      "method_order": [
+        "P-GRB",
+        "M-B",
+        "P-S",
+        "ENS-C"
+      ],
+      "panel_kind": "positive_confirmation",
+      "input_path": "reference/round118_positive/N40-R1-S.txt",
+      "instance_path": "reference/round118_positive/N40-R1-S.txt",
+      "input_sha256": "cdbbadbb6fd4e1742cb063001003686e55ba2b5045f584b84d2fd238ba616c7a",
+      "input_bytes": 2384,
+      "selection_path": "reference/round118_positive/N40-R1-S_selection.json",
+      "landscape_path": "reference/round118_positive/N40-R1-S_landscape.json",
+      "source_response_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "source_recipe_SHA": "efcc443d5786e27da1b70a664f7413b3dbe3bd4f33e8dd7fb5f7f0a19f84a067",
+      "total_initial": 239,
+      "total_target": 279,
+      "role_identity": "unmeasured_after_once_only_generation"
+    }
+  ],
+  "pairs": [
+    [
+      "ENS-C",
+      "P-GRB"
+    ],
+    [
+      "M-B",
+      "P-GRB"
+    ],
+    [
+      "P-S",
+      "P-GRB"
+    ],
+    [
+      "ENS-C",
+      "P-S"
+    ],
+    [
+      "M-B",
+      "P-S"
+    ],
+    [
+      "M-B",
+      "ENS-C"
+    ]
+  ],
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "formal_arms": 4,
+  "each_formal_cap": 5400,
+  "nominal_seconds": 21600,
+  "maximum_starts": 20,
+  "maximum_outer_seconds": 28000,
+  "qualification_maximum_starts": 11,
+  "qualification_maximum_seconds": 1200,
+  "qualification_plan": {
+    "finite_replay": {
+      "starts": 1,
+      "cap": 180
+    },
+    "reference": {
+      "starts": 2,
+      "cap": 360
+    },
+    "H100_PS_MB": {
+      "starts": 3,
+      "cap": 600
+    },
+    "post_admission": {
+      "starts": 1,
+      "cap": 60
+    }
+  },
+  "qualification_planned_starts": 7,
+  "qualification_planned_declared_seconds": 1200,
+  "formal_wrapper_children": 5,
+  "formal_group_reserve": 120,
+  "main_clock": "T_produce",
+  "secondary_clock": "T_total",
+  "own_H_seed": 20260626,
+  "own_H_seeds": "24+1 / R76 / R83",
+  "gurobi_seed": 0,
+  "no_cross_arm_transfer": true,
+  "original_native_window_unchanged": true,
+  "default": "ENS-C",
+  "candidate": "M-B finite R111",
+  "primary": "cold P-GRB",
+  "control": "P-S",
+  "materiality": {
+    "a_U": "max(.001,.01*abs(U_C))",
+    "a_gap": "max(.001,.10*abs(gap_C))",
+    "a_t": "max(30,.10*t_C)"
+  },
+  "closure_tolerance": 1e-07,
+  "signed_gap_not_clipped": true,
+  "positive_analysis_offline_only": true,
+  "stage_priority": [
+    "PROOF_RELIABILITY_PRIORITY",
+    "PRIMARY_BENCHMARK_RISK_ON_THIS_ROLE",
+    "NONZERO_PROOF_INCREMENT_ON_THIS_ROLE",
+    "LIMITED_OR_MIXED_ROLE_EVIDENCE"
+  ],
+  "no_algorithm_change": true,
+  "no_performance_retry": true,
+  "no_additional_input_or_seed": true,
+  "qualification_final_plan": {
+    "already_paid_starts": 8,
+    "additional_H100_wrapper_and_children": 3,
+    "finite_post_admission_in_same_wrapper": true,
+    "final_starts": 11
+  },
+  "budget_authorization_SHA": "c3d344c5d2140ab0962d99a5ed21375922a2d07dc668523bd912b0465762a680"
+}

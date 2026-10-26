@@ -1,0 +1,109 @@
+{
+  "UTC": "2026-10-23T15:24:24.965592+00:00",
+  "cases": [
+    {
+      "id": "J1",
+      "b": [
+        2,
+        0,
+        1,
+        1
+      ],
+      "Q": [
+        1,
+        2
+      ],
+      "T": 240
+    },
+    {
+      "id": "J2",
+      "b": [
+        2,
+        2,
+        0,
+        0
+      ],
+      "Q": [
+        1,
+        2
+      ],
+      "T": 240
+    },
+    {
+      "id": "J3",
+      "b": [
+        2,
+        1,
+        1,
+        0
+      ],
+      "Q": [
+        1,
+        2
+      ],
+      "T": 360
+    },
+    {
+      "id": "J4",
+      "b": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "Q": [
+        1,
+        1
+      ],
+      "T": 240
+    }
+  ],
+  "n": 4,
+  "vehicles": 2,
+  "capacity": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "target": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "weights": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "coordinates": "depot and all four stations at(0,0); no exterior stations",
+  "handling": [
+    60,
+    60
+  ],
+  "lambda_value": 0.15,
+  "R": "all finite integral one-way service plans; each operation<=Q, final return0..Q, 120*sum pickups<=T; enumerate all orders and retain a physical prefix-feasible route",
+  "completeness": "all station options, all vehicle plans, all disjoint fleet pairs; no restricted-column maximum used as an upper bound",
+  "reference": "current S2 canonical all-continuous root + same R_k convex combinations + R98 vehicle/state theta + all station-distinct threshold-event rank rows using exact joint maximum + all R54 IR-IN/OUT subsets",
+  "rank_relation": "exact same-domain ranks may be stronger than R101 necessary-travel ranks; every legal complete tiny fleet embeds; no unqualified general domain containment claim",
+  "order": "J1,J2,J3,J4; event-count controls first then64 fixed integer quantity/ownership support directions per case; current objective reoptimized on reference and full joint columns",
+  "normal_seed": "SHA256 round132-joint-v2|case|direction|coordinate mapped to{-2,-1,0,1,2}",
+  "limits": {
+    "total_seconds": 10800,
+    "per_LP_seconds": 60,
+    "per_car_plans": 4096,
+    "joint_pairs": 65536,
+    "exact_basis_free_columns": 90,
+    "exact_basis_seconds": 45
+  },
+  "strict_witness": "exact joint integer support RHS plus rational full-reference extension, each car mixing certificate, theta/rank/IR checks; otherwise NUMERICAL_CANDIDATE_ONLY with exact obstacle",
+  "subsequent_gate": "No real-role model use unless a valid joint support upper bound includes all outside donors/receivers and the exact same full R_k; tiny cuts do not transfer by deleting other stations",
+  "native_calls_serial": true,
+  "no_D_C_information_transfer": true,
+  "Optimize": 0,
+  "zero_cutoff": "J4 has own physical U=0; production S2 would terminate at startup zero. Record actual canonical cutoff/SP presence; this artificial canonical comparison is not backend exposure.",
+  "proof_binding": "Save exact rational snapshot of actual B_ref binary64 rows and bounds plus SHA; strict witnesses bind that snapshot and complete enumeration.",
+  "control_policy": "Event controls must be OPTIMAL within inherited tolerance or UNKNOWN; a rank or monotonicity contradiction is investigated, never a new structural result."
+}

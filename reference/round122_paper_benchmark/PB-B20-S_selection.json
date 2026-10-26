@@ -1,0 +1,64 @@
+{
+  "schema": "round122-geographic-selection-v1",
+  "dataset_family": "round122-paper-benchmark-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "generator_version": "round122-thin-offline-adapter-v1",
+  "selection_id": "cabi_r122_V20_regional_r2",
+  "V": 20,
+  "geographic_regime": "regional",
+  "replicate": 2,
+  "seed": 1043640568,
+  "seed_derivation_material": "round122-paper-benchmark-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|selection|V=20|geography=regional|replicate=2",
+  "anchor_source_station_row_index": 783,
+  "anchor_coordinate_utm18n_meters": [
+    332028.17,
+    4327213.239
+  ],
+  "selection_mechanism": "farthest-first coverage inside the 2V nearest eligible stations around the anchor",
+  "tie_breaking": "ascending zero-based source_station_row_index",
+  "eligible_station_rule": "0 < source capacity < 100",
+  "eligible_station_count": 865,
+  "candidate_pool_size": 40,
+  "selected_source_station_row_indices": [
+    783,
+    645,
+    266,
+    707,
+    322,
+    710,
+    815,
+    327,
+    628,
+    513,
+    656,
+    518,
+    773,
+    416,
+    651,
+    427,
+    576,
+    511,
+    423,
+    572
+  ],
+  "selection_order_is_local_station_order": true,
+  "depot_rule": "artificial arithmetic centroid of serialized service-station coordinates, rounded to three decimals",
+  "depot_coordinate_utm18n_meters": [
+    329218.819,
+    4319719.857
+  ],
+  "source_capacity_summary": {
+    "minimum": 10,
+    "maximum": 23,
+    "mean": 15.25,
+    "median": 15.0
+  },
+  "geographic_statistics": {
+    "geographic_diameter_m": 15871.255737771668,
+    "mean_pairwise_station_distance_m": 7152.52334632407,
+    "maximum_pairwise_station_distance_m": 15871.255737771668,
+    "mean_depot_distance_m": 5215.29404909683,
+    "maximum_depot_distance_m": 8248.436218554005,
+    "bounding_box_width_m": 14872.456999999995,
+    "bounding_box_height_m": 12027.343000000343
+  }
+}

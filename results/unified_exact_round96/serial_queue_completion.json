@@ -1,0 +1,42 @@
+{
+  "records": [
+    {
+      "campaign": "primal",
+      "number": 1,
+      "role": "F5",
+      "arm": "ENS-C",
+      "cap_seconds": 3600,
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round96\\primal\\raw\\01_F5_ENS-C",
+      "exit_code": 0,
+      "wall_seconds": 3598.6065022996627,
+      "scope": "Outer runner including preflight and offline audit; native/process cost is nested, never added twice."
+    },
+    {
+      "campaign": "primal",
+      "number": 2,
+      "role": "F5",
+      "arm": "P-GRB",
+      "cap_seconds": 3600,
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round96\\primal\\raw\\02_F5_P-GRB",
+      "exit_code": 0,
+      "wall_seconds": 3598.705180400051,
+      "scope": "Outer runner including preflight and offline audit; native/process cost is nested, never added twice."
+    },
+    {
+      "campaign": "primal",
+      "number": 3,
+      "role": "F5",
+      "arm": "ORDER-ON",
+      "cap_seconds": 3600,
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round96\\primal\\raw\\03_F5_ORDER-ON",
+      "exit_code": 1,
+      "wall_seconds": 3598.584198900033,
+      "scope": "Outer runner including preflight and offline audit; native/process cost is nested, never added twice."
+    }
+  ],
+  "error": "AssertionError('preserve paid prefix and stop; no retry')",
+  "completed": 3,
+  "planned": 27,
+  "elapsed_seconds": 10795.8997982,
+  "passed": false
+}

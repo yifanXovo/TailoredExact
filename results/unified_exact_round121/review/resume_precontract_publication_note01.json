@@ -1,0 +1,28 @@
+{
+  "kind": "post_check_publication_byte_identity_note_not_a_new_scientific_check",
+  "UTC": "2026-10-15T07:56:33.032090+00:00",
+  "actual_metadata_rebound_gate_SHA": "85e7f60ad885f941c77c05a8cab7787eedccc5871d6a69f49ae4002fffd645ba",
+  "current_gitattributes_SHA": "7935dda8be7ff9e9f2d720da52737a1274240d978a7e0edbe0fbe5b1a3d44162",
+  "observed_byte_preserving_patterns": [
+    "/results/unified_exact_round121/**",
+    "/scripts/*round121*",
+    "/reference/round121_confirmation/**"
+  ],
+  "issue": "Parent reported CRLF worktree JSON was normalized to LF in index because R121 patterns lacked -text.",
+  "example_local_document_SHA": "02a03088ef3304f6ed3827747f3d9f8c06c7f673eb499f0f165bf3ed238a2d7f",
+  "example_parent_reported_old_HEAD_blob_SHA_prefix": "022c2a",
+  "parent_reported_local_commit": "1594b0771",
+  "git_details_not_independently_queried": true,
+  "fix_scope": "Only R121 metadata/scripts/new-input patterns; no runtime, original raw, earlier historical helper or production byte changes.",
+  "unchanged_runtime_helpers": 89,
+  "unchanged_production_source_files": 216,
+  "same_unchanged_review_script": true,
+  "candidate_SHA": "d7b9084b8ff3710fa2e39671f57dfd9bf493663d7b18734fa138fc20d8286bad",
+  "protocol_SHA": "162ad2a628411dba81cfe98bd10bdb9a8b53e09bf50aeb38f15cc89990436e81",
+  "resume_identity_SHA": "92090aa14b81a8f5654685eef3b9858f332aeb141850e981e150b2e93755d7e1",
+  "index_delta_byte_equality_and_next_strict_scan": "Separate parent publication obligation; no Git, index, future commit or publication certification by this reviewer",
+  "reviewer_native_starts": 0,
+  "reviewer_Optimize": 0,
+  "reviewer_compiles": 0,
+  "reviewer_Git": 0
+}

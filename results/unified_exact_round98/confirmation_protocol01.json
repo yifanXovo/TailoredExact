@@ -1,0 +1,96 @@
+{
+  "roles": [
+    {
+      "id": "C1",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        12,
+        18
+      ],
+      "geometry": "three_clusters",
+      "inventory": "surplus",
+      "T_seconds": 4800,
+      "cap_seconds": 900,
+      "method_order": [
+        "P-GRB",
+        "R3",
+        "ENS-C"
+      ],
+      "input_path": "reference/round98_confirmation/C1.txt",
+      "instance_path": "reference/round98_confirmation/C1.txt",
+      "input_sha256": "149100d4f0b532787ac0d0f4f5d88da3667b70d92b3256c24ab8601926da40e7",
+      "scenario_id": "round98-state-service-confirmation-v1-C1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 426,
+      "total_target": 398,
+      "zero_excluded_by_stock_shortage": false
+    },
+    {
+      "id": "C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "R3"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true
+    },
+    {
+      "id": "C3",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        20,
+        25,
+        30,
+        35
+      ],
+      "geometry": "separated_islands",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 3600,
+      "method_order": [
+        "R3",
+        "ENS-C",
+        "P-GRB"
+      ],
+      "input_path": "reference/round98_confirmation/C3.txt",
+      "instance_path": "reference/round98_confirmation/C3.txt",
+      "input_sha256": "defa0feb33841eca3d1079d9e7a6908a84b8ddecf5ffb308fdadf0037d491ec3",
+      "scenario_id": "round98-state-service-confirmation-v1-C3",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 941,
+      "total_target": 1012,
+      "zero_excluded_by_stock_shortage": true
+    }
+  ],
+  "recipe_sha256": "58ab6dcaeae2d3531e979aab8f5e4e806d72fc2a0e2b32e29ae8e9ce97718e08",
+  "candidate_freeze_sha256": "824a2e5f1b27f228b5ff801b50fa30ead5486b5e50c6ebf3d4f650fcbbb159a9",
+  "optimizer_calls": 0,
+  "phase": "frozen independent confirmation",
+  "reference_billing": "one_finite_batch"
+}

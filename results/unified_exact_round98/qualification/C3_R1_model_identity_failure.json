@@ -1,0 +1,174 @@
+{
+  "optimizer_calls": 0,
+  "bad": [
+    {
+      "event": {
+        "schema": 1,
+        "sequence": 3,
+        "kind": "call",
+        "call": 1,
+        "full_original": 0,
+        "native_preconditions": 0,
+        "leaf": "L0",
+        "model_sha256": "e4ea2d3b47703c5f0fbb55604392ac4bc4b26261e74e06ff2ddbc019832356f3",
+        "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\models\\L0.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\native_logs\\L0_lp.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.2950507923367922,
+        "cutoff": 0.2950507923367922,
+        "gmax": 0.98,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor",
+            "lower_g": 0,
+            "upper_g": 0.2950507923367922,
+            "lower": 0,
+            "cutoff": 0.2950507923367922
+          }
+        ]
+      },
+      "actual_sha": "064be329cfd14745666daa019bfc1a18ad4ba62b30a96a37a04a1ce34ab5561a"
+    },
+    {
+      "event": {
+        "schema": 1,
+        "sequence": 5,
+        "kind": "call",
+        "call": 2,
+        "full_original": 0,
+        "native_preconditions": 0,
+        "leaf": "L0.0",
+        "model_sha256": "dda52aac2c221d8e1d96870708f6c89339d0f1bb34373eec559fe6268473bf75",
+        "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\models\\L0.0.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\native_logs\\L0.0_lp.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.1475253961683961,
+        "cutoff": 0.2950507923367922,
+        "gmax": 0.98,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.2950507923367922,
+            "lower": 0.15119257155187033,
+            "cutoff": 0.2950507923367922
+          }
+        ]
+      },
+      "actual_sha": "e084f03db714bc787fa321e6466b39e4c756d5c0a0893c83e52577157243c071"
+    },
+    {
+      "event": {
+        "schema": 1,
+        "sequence": 7,
+        "kind": "call",
+        "call": 3,
+        "full_original": 0,
+        "native_preconditions": 0,
+        "leaf": "L0.1",
+        "model_sha256": "ecd4d119195d5c4a2ce82b3a4f6f5217cfddcbcded2204af9e42f2e16969de52",
+        "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\models\\L0.1.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\native_logs\\L0.1_lp.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0.1475253961683961,
+        "upper_g": 0.2950507923367922,
+        "cutoff": 0.2950507923367922,
+        "gmax": 0.98,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.2950507923367922,
+            "lower": 0.15119257155187033,
+            "cutoff": 0.2950507923367922
+          }
+        ]
+      },
+      "actual_sha": "53035d2a131b831a0510a8f8773cc996d057c73b7afc414c2d5cd55d21089d72"
+    },
+    {
+      "event": {
+        "schema": 1,
+        "sequence": 9,
+        "kind": "call",
+        "call": 4,
+        "full_original": 0,
+        "native_preconditions": 1,
+        "leaf": "L0",
+        "model_sha256": "e4ea2d3b47703c5f0fbb55604392ac4bc4b26261e74e06ff2ddbc019832356f3",
+        "model_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\models\\L0.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.2950507923367922,
+        "cutoff": 0.2950507923367922,
+        "gmax": 0.98,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.2950507923367922,
+            "lower": 0.15119257155187033,
+            "cutoff": 0.2950507923367922
+          }
+        ]
+      },
+      "actual_sha": "064be329cfd14745666daa019bfc1a18ad4ba62b30a96a37a04a1ce34ab5561a"
+    }
+  ],
+  "current_models": {
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\models\\L0.lp": "064be329cfd14745666daa019bfc1a18ad4ba62b30a96a37a04a1ce34ab5561a",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\models\\L0.0.lp": "e084f03db714bc787fa321e6466b39e4c756d5c0a0893c83e52577157243c071",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round98\\development02\\raw\\14_R97-C3_R1\\external\\models\\L0.1.lp": "53035d2a131b831a0510a8f8773cc996d057c73b7afc414c2d5cd55d21089d72"
+  }
+}

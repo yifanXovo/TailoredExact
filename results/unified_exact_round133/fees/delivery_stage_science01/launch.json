@@ -1,0 +1,45 @@
+{
+  "UTC": "2026-10-25T12:23:23.908412+00:00",
+  "kind": "delivery",
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-B",
+    "scripts/round133_git_stage.py"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round133",
+  "timeout_seconds": 180.0,
+  "reservation_seconds": 180.0,
+  "budget_before": {
+    "G1_seconds": 11824.854547899857,
+    "remaining_G1_seconds": 27775.145452100143,
+    "by_category": {
+      "C": 711.0482404999202,
+      "D": 6433.36667340016,
+      "E": 2.2934773000308515,
+      "D3": 3508.809842899791,
+      "repair": 1169.336313799955
+    },
+    "limits": {
+      "C": 7200.0,
+      "D": 18000.0,
+      "E": 1800.0,
+      "D3": 7200.0,
+      "repair": 5400.0
+    },
+    "category_remaining": {
+      "C": 6488.95175950008,
+      "D": 11566.63332659984,
+      "E": 1797.7065226999691,
+      "D3": 3691.190157100209,
+      "repair": 4230.663686200045
+    },
+    "separately_reported_seconds": 1103.8273856005399,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "parent_pid": 24564,
+  "parent_birth": {
+    "creation_filetime": 134374046037912815,
+    "creation_unix": 1792931003.7912807
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "outer_seconds_lower": 264.5788011061668,
+  "actual_native_children": 3,
+  "uncertain_native_children": 0,
+  "child_states": [
+    {
+      "id": "H100",
+      "arm": "P-GRB",
+      "state": "actual_started",
+      "child_birth_SHA": "a8f680fbbc85990ff242a2e90a8a1151206bd773d5f586ec37800994b5c3bf12"
+    },
+    {
+      "id": "H100",
+      "arm": "M-B",
+      "state": "actual_started",
+      "child_birth_SHA": "3a2d65b35f1f828ce864a34eca55d32eafb9e742fc2b8bdbfc3dc6f147c816a4"
+    },
+    {
+      "id": "H100",
+      "arm": "ENS-C",
+      "state": "actual_started",
+      "child_birth_SHA": "127947114191d7ad0891bdae06ea4376edcb1905aacd0a75376c3f91718b91d3"
+    }
+  ],
+  "conservative_process_starts": 4,
+  "wrapper_pid": 13124,
+  "necessary_trailer_complete": true
+}

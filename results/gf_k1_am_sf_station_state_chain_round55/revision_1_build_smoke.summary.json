@@ -1,0 +1,29 @@
+{
+  "schema": "round55-fixed-interval-stage-summary-v1",
+  "stage": "revision_1_build_smoke",
+  "mode": "build",
+  "cap_seconds": 30,
+  "row_count": 4,
+  "state_count": 1,
+  "arm_count": 4,
+  "arms": [
+    "F0-CLEAN",
+    "SF-R1",
+    "VD-P",
+    "VD-P+SF-R1"
+  ],
+  "states": [
+    "D1"
+  ],
+  "executable_sha256": "e27078980e6a33174df1a54a56c4297d5bf594ea868b31853568083abf2c03a6",
+  "all_engineering_valid": true,
+  "false_certificate_count": 0,
+  "certificate_counts": {
+    "F0-CLEAN": 0,
+    "SF-R1": 0,
+    "VD-P": 0,
+    "VD-P+SF-R1": 0
+  },
+  "shifted_work_geometric_mean_vs_f0": {},
+  "aggregate_gi_vs_f0": {}
+}

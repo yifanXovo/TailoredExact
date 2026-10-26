@@ -1,0 +1,60 @@
+{
+  "algorithm_preset": "research-round70-vds-descent",
+  "status": "paper_external_gini_tree_invalid_configuration",
+  "objective": 0.20833333333333331,
+  "upper_bound": 0.20833333333333331,
+  "lower_bound": 0,
+  "strict_certified_original_problem": false,
+  "external_gini_tree_failure_reason": "c6_startup_variant_contract_mismatch_or_local_redecode",
+  "hga_stop_mode": "decoded-descent",
+  "decoded_descent_complete": true,
+  "decoded_descent_seeds_completed": 24,
+  "decoded_descent_checks": 41,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        1,
+        0
+      ],
+      "operations": [
+        {
+          "station": 1,
+          "pickup": 1,
+          "drop": 0
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "feasible": true,
+    "original_solution_feasible": true,
+    "original_objective_recomputed": true,
+    "routes_start_end_depot": true,
+    "station_disjoint": true,
+    "load_feasible": true,
+    "station_feasible": true,
+    "duration_feasible": true,
+    "objective_matches": true,
+    "route_travel_time": [
+      2
+    ],
+    "route_operation_time": [
+      2
+    ],
+    "route_duration": [
+      4
+    ],
+    "final_inventories": [
+      50,
+      2,
+      1,
+      2
+    ],
+    "G": 0.13333333333333333,
+    "P": 0.5,
+    "objective": 0.20833333333333331,
+    "errors": []
+  }
+}

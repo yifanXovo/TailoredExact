@@ -1,0 +1,63 @@
+{
+  "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        17,
+        18,
+        16,
+        0
+      ],
+      "operations": [
+        {
+          "station": 17,
+          "pickup": 10,
+          "drop": 0
+        },
+        {
+          "station": 18,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 16,
+          "pickup": 0,
+          "drop": 15
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        9,
+        8,
+        7,
+        0
+      ],
+      "operations": [
+        {
+          "station": 9,
+          "pickup": 9,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 17
+        }
+      ]
+    }
+  ],
+  "F": 0.8659435203229894,
+  "result_path": "results\\unified_exact_round101\\isolation01\\raw\\05_F2_FLEET-ROOT\\result.json",
+  "result_sha256": "787fa93dcf2e513880c02727cf2b43ef0dcab06ef0f9bd26731a63c7e2f75b00",
+  "scope": "Audited same-run final physical routes, not a new primal input"
+}

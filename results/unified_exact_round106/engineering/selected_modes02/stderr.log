@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_selected_modes.py", line 106, in <module>
+    main()
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_selected_modes.py", line 99, in main
+    selection_source_SHA=sha(__file__),
+                         ^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_selected_modes.py", line 16, in sha
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'read_bytes'

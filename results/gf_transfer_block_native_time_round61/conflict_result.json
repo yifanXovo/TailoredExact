@@ -1,0 +1,312 @@
+{
+  "status": "bounded_attempt_complete",
+  "id": "D4",
+  "source_mode": "mip",
+  "original_inventory": [
+    0,
+    14,
+    15,
+    14,
+    17,
+    14,
+    9,
+    14,
+    39,
+    30,
+    14,
+    14,
+    13
+  ],
+  "retained_inventory": [
+    0,
+    14,
+    15,
+    14,
+    -1,
+    14,
+    9,
+    14,
+    -1,
+    30,
+    14,
+    -1,
+    -1
+  ],
+  "attempts": [
+    {
+      "step": 1,
+      "release": [
+        4,
+        8,
+        12
+      ],
+      "accepted": true,
+      "classification": "original_T_strictly_infeasible",
+      "status": 2,
+      "LP": 0,
+      "T_original": 2400,
+      "safe_duration_bound": 37524.716539059635,
+      "lower": 3331.6234731709214,
+      "upper": 3331.6234731709246,
+      "time_independent_infeasible": 0,
+      "parameters_verified": 1,
+      "seconds": 104.2695017,
+      "solver_seconds": 104.25300002098083,
+      "work": 146.29959827786917
+    },
+    {
+      "step": 2,
+      "release": [
+        11
+      ],
+      "accepted": true,
+      "classification": "original_T_strictly_infeasible",
+      "status": 9,
+      "LP": 0,
+      "T_original": 2400,
+      "safe_duration_bound": 37524.716539059635,
+      "lower": 3252.952625011076,
+      "upper": 3331.6234731709246,
+      "time_independent_infeasible": 0,
+      "parameters_verified": 1,
+      "seconds": 118.006428,
+      "solver_seconds": 117.99000000953674,
+      "work": 169.27008762114892
+    }
+  ],
+  "final_proof": "results\\gf_transfer_block_native_time_round61\\local_raw\\oracle_conflict_2\\D4\\mip\\oracle_result.json",
+  "fixed_stations": 8,
+  "original_fixed_stations": 12,
+  "scope": "global original physical problem for this unchanged input and T; diagnostic proof only",
+  "no_good": {
+    "names": [
+      "bit_1_0",
+      "bit_1_1",
+      "bit_1_2",
+      "bit_1_3",
+      "bit_1_4",
+      "bit_2_0",
+      "bit_2_1",
+      "bit_2_2",
+      "bit_2_3",
+      "bit_2_4",
+      "bit_2_5",
+      "bit_3_0",
+      "bit_3_1",
+      "bit_3_2",
+      "bit_3_3",
+      "bit_3_4",
+      "bit_3_5",
+      "bit_5_0",
+      "bit_5_1",
+      "bit_5_2",
+      "bit_5_3",
+      "bit_5_4",
+      "bit_6_0",
+      "bit_6_1",
+      "bit_6_2",
+      "bit_6_3",
+      "bit_6_4",
+      "bit_7_0",
+      "bit_7_1",
+      "bit_7_2",
+      "bit_7_3",
+      "bit_7_4",
+      "bit_9_0",
+      "bit_9_1",
+      "bit_9_2",
+      "bit_9_3",
+      "bit_9_4",
+      "bit_9_5",
+      "bit_10_0",
+      "bit_10_1",
+      "bit_10_2",
+      "bit_10_3",
+      "bit_10_4",
+      "bit_10_5"
+    ],
+    "coefficients": [
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      -1,
+      -1,
+      -1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      1,
+      1,
+      -1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      -1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      1
+    ],
+    "rhs": -24
+  },
+  "point_checks": [
+    {
+      "source": "results\\gf_verified_candidate_native_round60\\local_raw\\fixed_120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "first_root_relaxation",
+        "1",
+        "0"
+      ],
+      "activity": -9.075177048874387,
+      "rhs": -24,
+      "violation": -14.924822951125613,
+      "violated": false
+    },
+    {
+      "source": "results\\gf_verified_candidate_native_round60\\local_raw\\fixed_120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "latest_root_relaxation",
+        "28",
+        "0"
+      ],
+      "activity": -7.978628249119098,
+      "rhs": -24,
+      "violation": -16.021371750880903,
+      "violated": false
+    },
+    {
+      "source": "results\\gf_verified_candidate_native_round60\\local_raw\\fixed_120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "bounded_nonroot_relaxation",
+        "0",
+        "1"
+      ],
+      "activity": -7.256333625118726,
+      "rhs": -24,
+      "violation": -16.743666374881272,
+      "violated": false
+    },
+    {
+      "source": "results\\gf_verified_candidate_native_round60\\local_raw\\fixed_120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "bounded_nonroot_relaxation",
+        "0",
+        "2"
+      ],
+      "activity": -8.904484972769724,
+      "rhs": -24,
+      "violation": -15.095515027230276,
+      "violated": false
+    },
+    {
+      "source": "results\\gf_verified_candidate_native_round60\\local_raw\\fixed_120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "bounded_nonroot_relaxation",
+        "0",
+        "3"
+      ],
+      "activity": -6.797127290728212,
+      "rhs": -24,
+      "violation": -17.202872709271787,
+      "violated": false
+    },
+    {
+      "source": "results\\gf_transfer_block_native_time_round61\\local_raw\\fixed120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "first_root_relaxation",
+        "1",
+        "0"
+      ],
+      "activity": -9.075177048874387,
+      "rhs": -24,
+      "violation": -14.924822951125613,
+      "violated": false
+    },
+    {
+      "source": "results\\gf_transfer_block_native_time_round61\\local_raw\\fixed120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "latest_root_relaxation",
+        "28",
+        "0"
+      ],
+      "activity": -7.978628249119098,
+      "rhs": -24,
+      "violation": -16.021371750880903,
+      "violated": false
+    },
+    {
+      "source": "results\\gf_transfer_block_native_time_round61\\local_raw\\fixed120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "bounded_nonroot_relaxation",
+        "0",
+        "1"
+      ],
+      "activity": -7.256333625118726,
+      "rhs": -24,
+      "violation": -16.743666374881272,
+      "violated": false
+    },
+    {
+      "source": "results\\gf_transfer_block_native_time_round61\\local_raw\\fixed120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "bounded_nonroot_relaxation",
+        "0",
+        "2"
+      ],
+      "activity": -8.904484972769724,
+      "rhs": -24,
+      "violation": -15.095515027230276,
+      "violated": false
+    },
+    {
+      "source": "results\\gf_transfer_block_native_time_round61\\local_raw\\fixed120\\D4\\off\\node_samples.csv",
+      "source_sha256": "7b06f7a0421ce7d215540c24994113e00bb42f44ebcc40f1606f320c28384f0c",
+      "sample": [
+        "bounded_nonroot_relaxation",
+        "0",
+        "3"
+      ],
+      "activity": -6.797127290728212,
+      "rhs": -24,
+      "violation": -17.202872709271787,
+      "violated": false
+    }
+  ],
+  "reusable_across_gini_leaves": true,
+  "static_trial_gate": false,
+  "static_trial_decision": "not_run_nonviolated_on_recorded_points_and_high_MIP_proof_cost",
+  "additional_analytic_proof": "cheap_inventory_time_diagnostics.json: D4 four-station clique, all other stations free; also nonviolated"
+}

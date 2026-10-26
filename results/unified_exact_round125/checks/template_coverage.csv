@@ -1,0 +1,72 @@
+template,sample_status,saved_row
+depot_balance,matched,c6186
+depot_at_most_one,matched,c6187
+station_in,matched,c6188
+station_out,matched,c6189
+unique_service,matched,c16998
+rank_lower,matched,c17250
+rank_upper,matched,c17251
+MTZ,matched,c17350
+F0_link,matched,c6594
+F0_station,matched,c9144
+F0_depot,matched,c9194
+load_depot_1,matched,c27800
+load_internal_1,matched,c27900
+load_depot_-1,matched,c27801
+load_internal_-1,matched,c27901
+nonnegative_return,matched,c32800
+vehicle_duration,matched,c32801
+gini_cap,matched,c1
+gini_floor,matched,c2
+H_spread,matched,c3
+fixed_center_1,matched,c1228
+variable_center_1,matched,c3678
+fixed_center_-1,matched,c1229
+variable_center_-1,matched,c3679
+original_cutoff,matched,c6128
+penalty_floor,matched,c6130
+e_budget,matched,c6131
+scalar_estimator,matched,c6129
+SP_ll,matched,c6181
+SP_uu,matched,c6182
+SP_ul,matched,c6183
+SP_lu,matched,c6184
+SP_lift,matched,c6185
+stock_upper,matched,c17048
+stock_lower,matched,c17049
+handling,matched,c99161
+visit_stock_upper,matched,c99061
+visit_stock_lower,matched,c99062
+pickup_visit,matched,c27450
+drop_visit,matched,c27451
+mode_visit,matched,c27452
+pickup_mode,matched,c27453
+drop_mode,matched,c27454
+nonzero_service,matched,c27455
+load_visit,matched,c27456
+inventory_balance,matched,c98861
+A_movement,matched,c101662
+B_visit,matched,c101663
+state_sum,matched,c101664
+state_inventory,matched,c101665
+state_g_sum,matched,c101666
+state_product,matched,c101667
+state_g_lower,matched,c101612
+state_g_upper,matched,c101613
+ratio,matched,c98862
+deviation_pos,matched,c98863
+deviation_neg,matched,c98864
+H_pos,matched,c99162
+H_neg,matched,c99163
+gini_product,matched,c104256
+transfer_j1,matched,c17050
+support_2_conditional,matched,c48858
+support_3_conditional,matched,c50083
+symmetry,matched,c98858
+singleton_unreachable,source-only; absent trigger in selected open-leaf matrix,CplexBaseline.cpp:1713-1728; A23 z<=0
+pair_support_cover,source-only; absent trigger in selected open-leaf matrix,CplexBaseline.cpp:2049-2108; A27 sum(z)<=1
+triple_support_cover,source-only; absent trigger in selected open-leaf matrix,CplexBaseline.cpp:2049-2108; A27 sum(z)<=2
+required_drop_conditional,source-only; absent trigger in selected open-leaf matrix,IntervalRowFactory.cpp:634-650; A31
+required_pick_conditional,source-only; absent trigger in selected open-leaf matrix,IntervalRowFactory.cpp:634-650; A31
+domain_infeasible,source-only; absent trigger in selected open-leaf matrix,IntervalRowFactory.cpp domain reset/flag; A19-A20; 0<=-1
+numerical_penalty_closure,source-only; absent trigger in selected open-leaf matrix,IntervalRowFactory.cpp:745-751; A32; 0<=-1

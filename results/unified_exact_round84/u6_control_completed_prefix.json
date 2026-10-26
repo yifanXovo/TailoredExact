@@ -1,0 +1,44 @@
+{
+  "recorded_unix": 1789655872.313441,
+  "completed": 7,
+  "active": {
+    "number": 8,
+    "arm": "ENS-C",
+    "started_unix": 1789655799.3342073,
+    "driver_pid": 48520,
+    "destination": "results\\unified_exact_round84\\campaign\\local_raw\\08_U6_ENS-C"
+  },
+  "U6_P_record": {
+    "number": 7,
+    "id": "U6",
+    "arm": "P-GRB",
+    "wall_seconds": 3597.1099999998696,
+    "returncode": 0,
+    "within_cap": true,
+    "stop_reason": "normal_return",
+    "passed": true,
+    "endpoint": {
+      "U": 0.14819747529511856,
+      "L": 0.12651916793596993,
+      "gap": 0.021678307359148635,
+      "certificate": false,
+      "source": "normal_finalized_physical_endpoint",
+      "status": "time_limit"
+    },
+    "native_calls_started": 1,
+    "native_calls_returned": 1,
+    "physical_witnesses": 168,
+    "global_bound_events": 56,
+    "committed_events": 227,
+    "offline_replay_seconds": 0.16569760022684932
+  },
+  "previous_six": "d7_completed_comparison.json",
+  "completed_paid_process_seconds": 24756.01599999983,
+  "completed_optimize_starts": 26,
+  "completed_optimize_returns": 24,
+  "normal_returned_runs": 5,
+  "valid_whole_run_hard_stops": 2,
+  "stage_complete": false,
+  "overall_goal_complete": false,
+  "scope": "Seven independently valid completed runs; U6 P finalized normal endpoint exactly matches R83. Formal replication audit remains pending. Active ENS-C cost is additional."
+}

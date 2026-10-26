@@ -1,0 +1,23 @@
+# Round129 fixed methods and evidence contract
+
+The paper method remains frozen full M-B / GI-TBC, formally named the **tailored branch-and-cut framework with Gini-interval decomposition**. P-GRB is the primary benchmark; historical ENS-C defaults remain unchanged. MS2 is one uniform research candidate and is not adopted by this round's execution.
+
+| ID | Independently paid complete method | Actual difference |
+| --- | --- | --- |
+| P | Cold original compact P-GRB, native default parameters, original certificate contract | No H, project strengthening, Start or cutoff |
+| MB | Original E2 frozen full M-B: complete H, R, pair/triple support, ordered supply, C_G and original outer controller | None |
+| MS2 | The same E2 complete M-B, using `--round127-mode ms2` on every input | Omit only triple support cover/conditional rows |
+
+There is no MD-R call or MD-R shortcut suppression. MB and MS2 retain the original enumeration order and shared 50000-candidate cap. The role candidate counts are 1120, 2660, 2660, 13485 and 2660, hence this panel cannot reassign a binding truncation budget. Expected triple counts are 910, 2280, 2280, 12180 and 2280; actual cover versus conditional counts and any unexposed startup-zero cases are determined from each own-H returned root, not assumed.
+
+All methods use the original E2 PE and original Gurobi 13.0.2 DLL, lambda=.15, pickup=drop=60, H_seed=20260626, Threads=MIPThreads=1, affinity mask 4, Presolve Auto, MIPFocus=0, Cuts=-1, original objective quality and numerical tolerances. Only Gurobi Seed changes to the predeclared 0 or 1. The original complete deadline includes admission, H, modeling, LP/MIP, Start, online checks and output; reserve30/native-offset6/hard-stop-offset2 remain. Each method obtains its own H/UB/Start, independently paying all its work. No result or cache is supplied across arms or Seeds.
+
+`argv_freeze.json` records every final command. The inherited command helper's two P-only legacy executable declarations were corrected from E0 to the measured E2 before formal production. Both nonempty strings still compare equal in the unchanged native admission test; no model, numerical parameter, H or controller was changed. `review/argv_identity_correction.json` preserves the first commands and binding, old/new identities and rationale. Neither `--round128-mode off` nor any tuning parameter file is present.
+
+The established returned-model, full physical fleet, complete Start, actual-Seed, source/return/coverage reader remains in force. Qualification is incremental: original E2 bytes/seal, one R126 adapter fixture, one small and one medium known-input no-Optimize matrix difference, and five cold structural references required by the P reader. These references are not performance screening; no fresh qualification Optimize is used. Every actual formal MB/MS2 own-H root is checked again after execution. No data salt, T, Q, inventory or parameter is selected from observed performance.
+
+Only a qualified final certificate receives `T_cert=T_produce`; otherwise the value remains null. `T_verify` and `T_total` remain separate. Both-open comparisons are UNDETERMINED, not ties; time ratios exist only on explicitly labelled both-certified intersections. The inherited historical materiality field is retained without rewriting; the separate Round129 decision magnitude is max(10 seconds,10% of MB time) for a certified MS2 gain, with a symmetric faster-method reference for costs.
+
+At a fixed valid scope with identical variable domains and objective, deleting valid rows preserves the physical integer optimum and can only lower or preserve the mathematical optimal LP bound. It need not reduce certification time. Root LP time, row count, nodes, work or an open gap do not replace the final certificate. Pure triple-support attribution additionally requires matching complete H/actions/fleet, initial U/scope, native settings and all other actual rows/columns/types/bounds/objective. Subsequent own-UB trajectories may differ. No new D effect is measured and no multi-leaf speedup is inferred from split counts.
+
+The four new inputs are a finite nonfactorial, non-IID panel from two existing sources. The two Seeds are matched observations of each problem. The known PB-C20-B protection role is reported separately and cannot satisfy the new-signal conditions. All thirty arms, ten groups and thirty typed shared-data comparisons are retained, including open, adverse and unexposed observations. Exactly the five preregistered rules determine the finite candidate recommendation; the round ends without extra roles, Seeds, tuning or a per-instance hybrid.

@@ -1,0 +1,27 @@
+{
+  "phase": "complete development comparisons, conditional on independent real-mode gate",
+  "process_shutdown_margin_seconds": 30,
+  "no_per_car_production_caps": true,
+  "candidate_policy": "IR-CORE; one F2 IR-FULL ablation, no other mechanism changes",
+  "roles": [
+    {
+      "id":"F2", "V":20, "M":2, "Q_vector":[30,30],
+      "scenario_id":"round86-unadapted-varied-structures-v1_F2",
+      "input_path":"reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256":"ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds":3600, "pickup_seconds":60, "drop_seconds":60, "lambda":0.15,
+      "cap_seconds":1200, "method_order":["P-GRB","IR-FULL","IR-CORE","ENS-C"]
+    },
+    {
+      "id":"R98-C2", "V":30, "M":3, "Q_vector":[20,25,30],
+      "scenario_id":"round98-state-service-confirmation-v1-C2",
+      "input_path":"reference/round98_confirmation/C2.txt",
+      "input_sha256":"07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "T_seconds":7200, "pickup_seconds":60, "drop_seconds":60, "lambda":0.15,
+      "cap_seconds":1800, "method_order":["ENS-C","IR-CORE","P-GRB"]
+    }
+  ],
+  "certificate_times_only_for_final_ordering": true,
+  "matched_censoring_does_not_establish_final_speed_order": true,
+  "reserved_confirmation_policy":"confirmation_policy.json"
+}

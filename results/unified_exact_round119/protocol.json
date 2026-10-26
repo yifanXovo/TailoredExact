@@ -1,0 +1,121 @@
+{
+  "round": 119,
+  "base": "a756929a428f7afde30cbf66babbe44d0a1860ce",
+  "common": {
+    "threads": 1,
+    "mip_threads": 1,
+    "gurobi_seed": 0,
+    "gurobi_presolve": -1,
+    "gurobi_version": "13.0.2",
+    "affinity_mask": 4,
+    "native_limit_offset_seconds": 6,
+    "hard_stop_offset_seconds": 2,
+    "shutdown_margin_seconds": 30,
+    "requested_mip_gap": 0,
+    "requested_mip_gap_abs": 0,
+    "FeasibilityTol": 1e-06,
+    "OptimalityTol": 1e-06,
+    "IntFeasTol": 1e-05
+  },
+  "groups": [
+    {
+      "number": 1,
+      "id": "N40-R1-S",
+      "campaign": "campaign/group01",
+      "conditional": false,
+      "cap_seconds": 5400,
+      "methods": [
+        "P-GRB",
+        "M-B",
+        "MB-PC"
+      ],
+      "nominal_seconds": 16200,
+      "management_reserve": 120
+    },
+    {
+      "number": 2,
+      "id": "F2",
+      "campaign": "campaign/group02",
+      "conditional": false,
+      "cap_seconds": 1200,
+      "methods": [
+        "M-B",
+        "MB-PC",
+        "P-GRB"
+      ],
+      "nominal_seconds": 3600,
+      "management_reserve": 120
+    },
+    {
+      "number": 3,
+      "id": "R98-C2",
+      "campaign": "campaign/group03",
+      "conditional": false,
+      "cap_seconds": 1800,
+      "methods": [
+        "MB-PC",
+        "P-GRB",
+        "M-B"
+      ],
+      "nominal_seconds": 5400,
+      "management_reserve": 120
+    },
+    {
+      "number": 4,
+      "id": "E50-C1",
+      "campaign": "campaign/group04",
+      "conditional": true,
+      "cap_seconds": 3600,
+      "methods": [
+        "P-GRB",
+        "MB-PC",
+        "M-B"
+      ],
+      "nominal_seconds": 10800,
+      "management_reserve": 120
+    }
+  ],
+  "pairs": [
+    [
+      "MB-PC",
+      "M-B"
+    ],
+    [
+      "MB-PC",
+      "P-GRB"
+    ],
+    [
+      "M-B",
+      "P-GRB"
+    ]
+  ],
+  "maximum_starts": 40,
+  "maximum_outer_seconds": 48000,
+  "qualification_maximum_starts": 12,
+  "qualification_maximum_seconds": 2400,
+  "planned_qualification": {
+    "wrapper_starts": 1,
+    "native_children": 5,
+    "outer_cap": 1200,
+    "H100_caps": 120,
+    "fixture_cap": 300,
+    "Optimize_free_exporter": 1,
+    "order": "zero-Optimize exporter/finite checks -> explicit micro chain -> H100 P/M-B/MB-PC"
+  },
+  "formal_development_arms": 9,
+  "conditional_confirmation_arms": 3,
+  "formal_nominal_seconds": 36000,
+  "materiality": {
+    "a_U": "max(.001,.01*abs(U_C))",
+    "a_gap": "max(.001,.10*abs(gap_C))",
+    "a_t": "max(30,.10*t_C)"
+  },
+  "original_evidence_tolerance": 1e-07,
+  "signed_gap_preserved": true,
+  "deadline_not_reset": true,
+  "default_ENS_changed": false,
+  "no_extra_paid_child_probe": true,
+  "confirmation_only_after_all_four_original_admission_conditions": true,
+  "no_formal_retry_or_performance_revision": true,
+  "all_online_algorithm_work_in_T_produce": true
+}

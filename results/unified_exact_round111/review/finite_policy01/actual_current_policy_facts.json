@@ -1,0 +1,349 @@
+[
+  {
+    "number": 15,
+    "key": [
+      15,
+      "G50-C1",
+      0,
+      "P-GRB"
+    ],
+    "observation_source_path": "results/unified_exact_round110/campaign/raw/15_G50-C1_S0_P-GRB/observations.json",
+    "observation_source_SHA": "bde9e9534ca6369dfec5f5611f92bc9ba4d2a1077b85cf3cb932a8deab4bc8aa",
+    "calls": {
+      "1": {
+        "schema": 1,
+        "sequence": 2,
+        "kind": "call",
+        "call": 1,
+        "full_original": 1,
+        "native_preconditions": 1,
+        "leaf": "",
+        "model_sha256": "3c4385055008239f0b26af749792e95eeb7ef22403ef58035a51b5e75eb16b8c",
+        "model_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\15_G50-C1_S0_P-GRB\\compact.lp",
+        "model_scope": "complete_original_compact_milp",
+        "native_log_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\15_G50-C1_S0_P-GRB\\native.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.98,
+        "cutoff": 0,
+        "gmax": 0.98,
+        "cover": []
+      }
+    },
+    "returned_call_ids": [
+      1
+    ],
+    "raw_audit_passed": "True",
+    "original_journal_return_missing": "False",
+    "independent_normal_return_proved": true,
+    "own_U": 0.26019451545210387,
+    "qualified_L": 0.0,
+    "certificate": false,
+    "signed_audit_SHA": "cf61c8b28105574d2e78069d9a6f0b0e0bada1d9236f44beabe5a2f4a33cca3b",
+    "whole_clock_interval": [
+      1770.4377317999022,
+      1771.3234165931356
+    ]
+  },
+  {
+    "number": 17,
+    "key": [
+      17,
+      "G50-C2",
+      0,
+      "P-GRB"
+    ],
+    "observation_source_path": "results/unified_exact_round110/campaign/raw/17_G50-C2_S0_P-GRB/observations.json",
+    "observation_source_SHA": "e0521ef09d401b41e20e8d9030e7e3eee34b5a29489ab4b4b1dec35fa9e0a853",
+    "calls": {
+      "1": {
+        "schema": 1,
+        "sequence": 2,
+        "kind": "call",
+        "call": 1,
+        "full_original": 1,
+        "native_preconditions": 1,
+        "leaf": "",
+        "model_sha256": "5d0ec4d4d06f54996243c3c7997f0fa05ab716e9ca639350ca00fb425169d0e7",
+        "model_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\17_G50-C2_S0_P-GRB\\compact.lp",
+        "model_scope": "complete_original_compact_milp",
+        "native_log_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\17_G50-C2_S0_P-GRB\\native.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.98,
+        "cutoff": 0,
+        "gmax": 0.98,
+        "cover": []
+      }
+    },
+    "returned_call_ids": [],
+    "raw_audit_passed": "False",
+    "original_journal_return_missing": "True",
+    "independent_normal_return_proved": true,
+    "own_U": 0.0,
+    "qualified_L": 0.0,
+    "certificate": true,
+    "signed_audit_SHA": "bcb18e57e767844e0cd3a8ebcf1c589723ff690f31dc88ba2bd155bb0c7120c6",
+    "whole_clock_interval": [
+      643.59993320005,
+      644.5207961242414
+    ]
+  },
+  {
+    "number": 25,
+    "key": [
+      25,
+      "G100-C1",
+      0,
+      "M-B"
+    ],
+    "observation_source_path": "results/unified_exact_round110/campaign/raw/25_G100-C1_S0_M-B/observations.json",
+    "observation_source_SHA": "7f78baf42ec281f2c93a3e843225b925b84d1ed44e864cb40e6996e8870923bc",
+    "calls": {
+      "1": {
+        "schema": 1,
+        "sequence": 3,
+        "kind": "call",
+        "call": 1,
+        "full_original": 0,
+        "native_preconditions": 0,
+        "leaf": "L0",
+        "model_sha256": "4102fb95032098399a5473ff1ca17fdea7801ff584b7c9f5c74f1d9a22f2a9e9",
+        "model_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\25_G100-C1_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\25_G100-C1_S0_M-B\\external\\native_logs\\L0_lp.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.12558768468095108,
+        "cutoff": 0.12558768468095108,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor",
+            "lower_g": 0,
+            "upper_g": 0.12558768468095108,
+            "lower": 0,
+            "cutoff": 0.12558768468095108
+          }
+        ]
+      },
+      "2": {
+        "schema": 1,
+        "sequence": 5,
+        "kind": "call",
+        "call": 2,
+        "full_original": 0,
+        "native_preconditions": 0,
+        "leaf": "L0.0",
+        "model_sha256": "5f92c056f5b58c3f52e5f5a6edf28b61f030be6c3fafe7af52602a0e4274186c",
+        "model_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\25_G100-C1_S0_M-B\\external\\models\\L0.0_epoch_0_generation_2.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\25_G100-C1_S0_M-B\\external\\native_logs\\L0.0_lp.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.06279384234047554,
+        "cutoff": 0.12558768468095108,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.12558768468095108,
+            "lower": 0,
+            "cutoff": 0.12558768468095108
+          }
+        ]
+      },
+      "3": {
+        "schema": 1,
+        "sequence": 7,
+        "kind": "call",
+        "call": 3,
+        "full_original": 0,
+        "native_preconditions": 0,
+        "leaf": "L0.1",
+        "model_sha256": "e87bbcdb81613f64a1e5cf8385cef4decba85f841804b378dbfe97d7fd133e0d",
+        "model_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\25_G100-C1_S0_M-B\\external\\models\\L0.1_epoch_0_generation_3.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\25_G100-C1_S0_M-B\\external\\native_logs\\L0.1_lp.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0.06279384234047554,
+        "upper_g": 0.12558768468095108,
+        "cutoff": 0.12558768468095108,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.12558768468095108,
+            "lower": 0,
+            "cutoff": 0.12558768468095108
+          }
+        ]
+      },
+      "4": {
+        "schema": 1,
+        "sequence": 9,
+        "kind": "call",
+        "call": 4,
+        "full_original": 0,
+        "native_preconditions": 1,
+        "leaf": "L0",
+        "model_sha256": "4102fb95032098399a5473ff1ca17fdea7801ff584b7c9f5c74f1d9a22f2a9e9",
+        "model_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\25_G100-C1_S0_M-B\\external\\models\\L0_epoch_0_generation_1.lp",
+        "model_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+        "native_log_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\25_G100-C1_S0_M-B\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.12558768468095108,
+        "cutoff": 0.12558768468095108,
+        "gmax": 0.99,
+        "cover": [
+          {
+            "id": "L0",
+            "source": "|objective_nonnegative_penalty_G_floor|optimal_complete_lp_relaxation",
+            "lower_g": 0,
+            "upper_g": 0.12558768468095108,
+            "lower": 0,
+            "cutoff": 0.12558768468095108
+          }
+        ]
+      }
+    },
+    "returned_call_ids": [
+      1,
+      2,
+      3
+    ],
+    "raw_audit_passed": "False",
+    "original_journal_return_missing": "True",
+    "independent_normal_return_proved": true,
+    "own_U": 0.0,
+    "qualified_L": 0.0,
+    "certificate": true,
+    "signed_audit_SHA": "09e2b8e9616cbe0848516ec1bf1e84d4ba9b2c17e99bd8580abbccf111673314",
+    "whole_clock_interval": [
+      2325.8637184998947,
+      2326.2628009853656
+    ]
+  },
+  {
+    "number": 26,
+    "key": [
+      26,
+      "G100-C1",
+      0,
+      "P-GRB"
+    ],
+    "observation_source_path": "results/unified_exact_round110/campaign/raw/26_G100-C1_S0_P-GRB/observations.json",
+    "observation_source_SHA": "37dacb7897b75253ed0bf47032ce6205efd675b917ca558a31f3d2e9b7da6a00",
+    "calls": {
+      "1": {
+        "schema": 1,
+        "sequence": 2,
+        "kind": "call",
+        "call": 1,
+        "full_original": 1,
+        "native_preconditions": 1,
+        "leaf": "",
+        "model_sha256": "864c5093e937fc10f3205920b1eea1f5e2520eae801a647996b6d1a1c25ed490",
+        "model_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\26_G100-C1_S0_P-GRB\\compact.lp",
+        "model_scope": "complete_original_compact_milp",
+        "native_log_path": "E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\campaign\\raw\\26_G100-C1_S0_P-GRB\\native.log",
+        "settings": {
+          "read_return_code": 0,
+          "Threads": 1,
+          "Seed": 0,
+          "Presolve": -1,
+          "MIPGap": 0,
+          "MIPGapAbs": 0,
+          "FeasibilityTol": 1e-06,
+          "IntFeasTol": 1e-05,
+          "OptimalityTol": 1e-06
+        },
+        "lower_g": 0,
+        "upper_g": 0.99,
+        "cutoff": 0,
+        "gmax": 0.99,
+        "cover": []
+      }
+    },
+    "returned_call_ids": [
+      1
+    ],
+    "raw_audit_passed": "True",
+    "original_journal_return_missing": "False",
+    "independent_normal_return_proved": true,
+    "own_U": 0.21697499525901037,
+    "qualified_L": 0.0,
+    "certificate": false,
+    "signed_audit_SHA": "f8272de10d561bbda93debdd6064265267a11aa66c1a759ee3ccdac552283c52",
+    "whole_clock_interval": [
+      3574.4382823999035,
+      3574.776744435658
+    ]
+  }
+]

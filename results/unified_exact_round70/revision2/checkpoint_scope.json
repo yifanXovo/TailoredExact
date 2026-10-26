@@ -1,0 +1,17 @@
+{
+  "script_sha256": "7a3843dba7254e785118888c34a4ef0ca5c874c3518374d05df60af2fbd1f1f5",
+  "optimizer_calls": 0,
+  "records": 16,
+  "final_witness_backdated": false,
+  "all_historical_LB_checked_against_final_verified_UB": true,
+  "relative_gap_definition": "(UB-LB)/abs(UB) for an available nonzero UB; otherwise unavailable. Signed numerical discrepancies are preserved.",
+  "timing": "Process trace plus nonnegative external-minus-internal wall overhead up front. Buffered frontier callbacks additionally receive a conservative setup/tail shift. P callbacks use optimize launch after their epoch.",
+  "comparison": "Intermediate P UB is native telemetry. Candidate initial routes require full-hash event linkage and conservative publication time, or exact initialization. Objective equality alone never supplies a historical witness. Full-run endpoints are independently verified.",
+  "round70_wrapper_sha256": "1589ddc7dbfbf372a52dd64c3dac1456f6dd11344879ce1f3c9db66657c9db61",
+  "hga_provenance_helper_sha256": "5c102d078e4119d4e3947efb3a6f70b4f23dc065982f1ce5e526e1db3f6e1e04",
+  "startup_deadline_runs": 2,
+  "current_package_sha256": "b35d97692767e320962a4b9f9649928979880c0997b06a9e2e1126f47a46887a",
+  "DS_clock": "Synchronous verified-event hash plus decoded_descent_complete phase, never generation0",
+  "horizons": "300 and600 for each declared D6/D7 arm; no new run or internal stopping rule",
+  "limitation": "Intermediate P UB is native telemetry; candidate early UB is only the retained initial physical witness. Conservative buffered-bound shifts can understate early progress and differ across arms. Only final endpoints enter performance pairs."
+}

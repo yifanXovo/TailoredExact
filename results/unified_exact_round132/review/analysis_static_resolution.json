@@ -1,0 +1,22 @@
+{
+  "decision": "STATIC_FINDINGS_RESOLVED_NOT_FINAL_RESULT_ACCEPTANCE",
+  "reviewed_analysis_SHA": "9511623375c4d568d73affce67fad5788b320026c0a9b45498da0afcb6c650b2",
+  "reviewed_delivery_SHA": "b012febc91c789480f872302261aad8afb5b45cbfda531eb6748893a09fd9955",
+  "prior_review": "review/analysis_E_static_addendum.json",
+  "findings": [
+    {"id": "A-S1", "status": "resolved_static", "finding": "Analysis verifies arm id/input SHA/Seed/repeat/underlying method/destination against bound group identities, and saves analysis_inputs.json hashes."},
+    {"id": "A-S2", "status": "resolved_static", "finding": "Unavailable/unqualified physical or numeric evidence produces a derived issue, clears derived certificate/time and eligibility, yields UNEVALUABLE pairs, and prevents final-mode acceptance."},
+    {"id": "A-S3", "status": "resolved_static", "finding": "Final analysis rejects missing arms, derived issues, open G1 receipts, category overrun and global overrun. Delivery meters use a distinct delivery_costs tree and count outer time once."},
+    {"id": "TARGET_MIP", "status": "resolved_static", "finding": "Non-LP solve kinds, including target MIPs, enter the MIP total and retain a separate target count."},
+    {"id": "PARTIAL_ELIGIBILITY_COMMENT", "status": "withdrawn_reviewer_misread", "finding": "Current95116233 source already sets formal_performance_evidence_eligible=False in the physical failure branch; no author change was necessary."}
+  ],
+  "same_H_scope": "Own paid H traces/fleets, actual C root interval/cutoff and actual backend exposure are separate predicates. Equal Start rules alone are not assumed to give equal realized H.",
+  "actual_compact_progress": "Actual result.gurobi_progress_path is indexed separately from the arm progress stub; the prepared portable entry checks only those exact current paths and hashes.",
+  "historical_scope": "Only two explicitly labelled R131 fleets from its small final review are physically replayed; they are not new performance observations or newly supplied certificates.",
+  "reviewed_raw_arms": 0,
+  "review_enumeration": 0,
+  "review_Optimize": 0,
+  "review_H": 0,
+  "review_compile": 0,
+  "final_execution_evidence_pending": true
+}

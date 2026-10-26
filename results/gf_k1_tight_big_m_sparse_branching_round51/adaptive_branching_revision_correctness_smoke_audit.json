@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "a1_has_two_positive_priorities": true,
+    "a1r_best_variable_and_score_identical_to_a1": true,
+    "a1r_end_to_end_work_accounting_exact": true,
+    "a1r_has_exactly_one_priority_at_tier_one": true,
+    "a1r_lifecycle_valid": true,
+    "a1r_one_fresh_model_per_root_probe_terminal_event": true,
+    "a1r_terminal_model_fresh": true,
+    "all_23_three_way_models_byte_and_structure_identical": true,
+    "candidate_pool_probes_scores_and_work_identical": true,
+    "every_other_a1r_priority_zero": true,
+    "paired_smoke_exact_and_evidence_complete": true,
+    "paired_smoke_has_no_false_certificate": true,
+    "same_executable_hash_for_paired_smoke": true
+  },
+  "executable_sha256": "b5e12cd23699d8ea2177381e3e154eb4c385873b4ec180699f71270c81803cd4",
+  "probe_count": 8,
+  "schema": "round51-a1r-correctness-smoke-audit-v1",
+  "selected_priority_count": 1,
+  "source_commit": "b32368b322d25fa4a543a4ac29fdaae5b4861b37",
+  "status": "pass"
+}

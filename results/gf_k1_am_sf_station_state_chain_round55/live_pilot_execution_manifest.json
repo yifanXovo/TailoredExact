@@ -1,0 +1,25 @@
+{
+  "schema": "round55-live-pilot-execution-manifest-v1",
+  "frozen_before_live_pilot_results_opened": true,
+  "states": ["D1", "D3", "D4", "D12", "D13", "D14", "C3", "V50_MODERATE"],
+  "roles": {
+    "D1": "major",
+    "D3": "strong parent",
+    "D4": "strong child",
+    "D12": "numerical endpoint",
+    "D13": "high imbalance",
+    "D14": "moderate",
+    "C3": "additional V20 fixed state",
+    "V50_MODERATE": "V50 fixed state"
+  },
+  "arms": ["F0-CLEAN", "SF-MC4", "VD-P", "VD-J"],
+  "cap_seconds": 120,
+  "maximum_leaders": 3,
+  "selection_gate": [
+    "zero correctness failures",
+    "zero false certificates",
+    "exact mapping",
+    "no severe pilot regression",
+    "two-role material improvement or certificate gain or strong LP gain with acceptable overhead"
+  ]
+}

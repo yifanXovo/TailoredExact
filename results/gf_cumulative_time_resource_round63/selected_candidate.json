@@ -1,0 +1,26 @@
+{
+  "resource_mode": "root",
+  "selected_for": "uniform diagnostic follow-up and confirmation, not default promotion",
+  "default_enabled": false,
+  "promotion_gate_passed": false,
+  "known_disqualification": "D4 full Single-S: 121.391 s versus actual OFF 90.141 s; material certified-time regression",
+  "selection_timing": "After charged launch 52 and before the predeclared C3 OFF/root follow-up; later C3 and confirmation outcomes will not change the selected mode",
+  "basis_charged_numbers": [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52],
+  "rationale": [
+    "C2 root certifies in 485.719 s while actual OFF does not certify within 600 s.",
+    "C2 root saves 66.735 s / 12.08% versus the same fresh-model root-dry lifecycle, establishing an incremental resource-row benefit.",
+    "D7 root reduces the final absolute gap by 10.29%; D7 root-dry has exactly the OFF endpoints, isolating the inserted rows from lifecycle changes in this role.",
+    "Explicit has a larger D7 gap gain, but materially worsens C2 gap and D4 certified time; root is the lower-size execution with evidence across both full-K1 development roles.",
+    "The D4 failure remains disqualifying. No per-instance winner, fallback or historical-arm veto is introduced."
+  ],
+  "measured_native_source_commit": "dc8d3e4a0ee3f63f0858b2c3b38a59a92cd1e783",
+  "build_freeze": "build_freeze_v4.json",
+  "threshold_mode": "off",
+  "candidate_submission": "off",
+  "archive": "off",
+  "prefix": "off",
+  "execution": "At most one mincut per vehicle on the first optimal required LP; cache at most M global physical rows; add them to fresh canonical MIP models only; no extra optimizer calls mandated, no LP closure, no PreCrush change",
+  "confirmation_status_at_selection": "C4 and C5 inputs/performance unopened; previously public metadata-selected roles",
+  "confirmation_order": ["C4", "C5"],
+  "confirmation_cap_seconds": 600
+}

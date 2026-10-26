@@ -1,0 +1,29 @@
+{
+  "C_d_classification": "inadmissible_constant_by_construction_and_observation: C1=0.5, C2=0.75 on every mechanism row",
+  "forbidden_inputs_observed": [],
+  "full_exact_runtime_observed_for_selection": false,
+  "primary": {
+    "d": 2,
+    "score": "D_d",
+    "score_mode": "d"
+  },
+  "reason": "Both D variants vary and are valid. Depth 2 has higher median tau (stronger envelope capture) while retaining material D variation; choose it as the single primary before any screened full exact runtime. C_d is not an admissible decision signal.",
+  "rho_selection_reason": "On the frozen d=2 mechanism atlas, rho 0.01, 0.03, and 0.05 produce the same six root split decisions, so retain 0.05 as their representative. Rho 0.10 produces a distinct three/six root split pattern and is the second admissible value.",
+  "round_id": 43,
+  "schema": "round43-stage1-structural-selection-v1",
+  "secondary_score": null,
+  "selection_inputs": [
+    "D_d variation",
+    "tau_d envelope capture",
+    "C_d variation",
+    "old-score rank correlation",
+    "LP terminal-valid status"
+  ],
+  "solver_work_observed_for_selection": false,
+  "stage2_depth": 2,
+  "stage2_row_count": 24,
+  "stage3_rho_values": [
+    0.05,
+    0.1
+  ]
+}

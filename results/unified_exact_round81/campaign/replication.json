@@ -1,0 +1,722 @@
+{
+  "realizations": [
+    {
+      "id": "S12",
+      "arm": "P-GRB",
+      "prior_stage": 79,
+      "cap": 120,
+      "prior": {
+        "U": 0.05856397312578516,
+        "L": 0.05856397312578512,
+        "gap": 4.163336342344337e-17,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 5.657000000122935,
+        "relative_gap": 7.109040114819771e-16
+      },
+      "current": {
+        "U": 0.05856397312578516,
+        "L": 0.05856397312578512,
+        "gap": 4.163336342344337e-17,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 5.640000000130385,
+        "relative_gap": 7.109040114819771e-16
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.0,
+        "gap_delta": 0.0,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_small",
+        "wall_delta": -0.01699999999254942,
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "S12",
+      "arm": "BDS-C",
+      "prior_stage": 79,
+      "cap": 120,
+      "prior": {
+        "U": 0.05856397312578515,
+        "L": 0.05856397312578488,
+        "gap": 2.706168622523819e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 1.8119999999180436,
+        "relative_gap": 4.620876074632852e-15
+      },
+      "current": {
+        "U": 0.05856397312578515,
+        "L": 0.05856397312578488,
+        "gap": 2.706168622523819e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 1.7969999997876585,
+        "relative_gap": 4.620876074632852e-15
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.0,
+        "gap_delta": 0.0,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_small",
+        "wall_delta": -0.01500000013038516,
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "S12",
+      "arm": "K1-R",
+      "prior_stage": 79,
+      "cap": 120,
+      "prior": {
+        "U": 0.05856397312578515,
+        "L": 0.058563973125784964,
+        "gap": 1.8735013540549517e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 40.73400000017136,
+        "relative_gap": 3.1990680516688973e-15
+      },
+      "current": {
+        "U": 0.05856397312578515,
+        "L": 0.058563973125784964,
+        "gap": 1.8735013540549517e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 40.59400000004098,
+        "relative_gap": 3.1990680516688973e-15
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.0,
+        "gap_delta": 0.0,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_small",
+        "wall_delta": -0.14000000013038516,
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "C2",
+      "arm": "P-GRB",
+      "prior_stage": 79,
+      "cap": 300,
+      "prior": {
+        "U": 0.8299634131717752,
+        "L": 0.7710715199887214,
+        "gap": 0.05889189318305388,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit",
+        "available": true,
+        "paid_completion_seconds": 297.06199999991804,
+        "relative_gap": 0.07095721600304468
+      },
+      "current": {
+        "U": 0.8299634131717752,
+        "L": 0.7710715199887214,
+        "gap": 0.05889189318305388,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit",
+        "available": true,
+        "paid_completion_seconds": 297.06199999991804,
+        "relative_gap": 0.07095721600304468
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.0,
+        "gap_delta": 0.0,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_open",
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "C2",
+      "arm": "BDS-C",
+      "prior_stage": 79,
+      "cap": 300,
+      "prior": {
+        "U": 0.8299634131717752,
+        "L": 0.8299634131717741,
+        "gap": 1.1102230246251565e-15,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 113.875,
+        "relative_gap": 1.3376770674533056e-15
+      },
+      "current": {
+        "U": 0.8299634131717752,
+        "L": 0.8299634131717741,
+        "gap": 1.1102230246251565e-15,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 113.46900000004098,
+        "relative_gap": 1.3376770674533056e-15
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.0,
+        "gap_delta": 0.0,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_other",
+        "wall_delta": -0.4059999999590218,
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "C2",
+      "arm": "K1-R",
+      "prior_stage": 79,
+      "cap": 300,
+      "prior": {
+        "U": 0.8299634131717752,
+        "L": 0.7971726503248864,
+        "gap": 0.032790762846888866,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "available": true,
+        "paid_completion_seconds": 297.0779999997467,
+        "relative_gap": 0.03950868475223046
+      },
+      "current": {
+        "U": 0.8299634131717752,
+        "L": 0.797157738520128,
+        "gap": 0.0328056746516473,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "available": true,
+        "paid_completion_seconds": 297.0779999997467,
+        "relative_gap": 0.039526651574046674
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": -1.49118047584329e-05,
+        "gap_delta": 1.49118047584329e-05,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_open",
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "D4",
+      "arm": "P-GRB",
+      "prior_stage": 79,
+      "cap": 300,
+      "prior": {
+        "U": 0.506343307565206,
+        "L": 0.19448381648991847,
+        "gap": 0.3118594910752875,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit",
+        "available": true,
+        "paid_completion_seconds": 297.07800000021234,
+        "relative_gap": 0.6159052295465104
+      },
+      "current": {
+        "U": 0.506343307565206,
+        "L": 0.19451219956842988,
+        "gap": 0.31183110799677605,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit",
+        "available": true,
+        "paid_completion_seconds": 297.07800000021234,
+        "relative_gap": 0.6158491745378091
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": 2.838307851141253e-05,
+        "gap_delta": -2.8383078511440285e-05,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_open",
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "D4",
+      "arm": "BDS-C",
+      "prior_stage": 79,
+      "cap": 300,
+      "prior": {
+        "U": 0.506343307565206,
+        "L": 0.5063433075652056,
+        "gap": 3.3306690738754696e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 52.92200000025332,
+        "relative_gap": 6.57788702667222e-16
+      },
+      "current": {
+        "U": 0.506343307565206,
+        "L": 0.5063433075652056,
+        "gap": 3.3306690738754696e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 52.73400000017136,
+        "relative_gap": 6.57788702667222e-16
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.0,
+        "gap_delta": 0.0,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_small",
+        "wall_delta": -0.1880000000819564,
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "D4",
+      "arm": "K1-R",
+      "prior_stage": 79,
+      "cap": 300,
+      "prior": {
+        "U": 0.506343307565206,
+        "L": 0.5063433073265636,
+        "gap": 2.3864232812087494e-10,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 135.17199999978766,
+        "relative_gap": 4.713053861981636e-10
+      },
+      "current": {
+        "U": 0.506343307565206,
+        "L": 0.5063433073265636,
+        "gap": 2.3864232812087494e-10,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal",
+        "available": true,
+        "paid_completion_seconds": 134.68699999991804,
+        "relative_gap": 4.713053861981636e-10
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.0,
+        "gap_delta": 0.0,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_other",
+        "wall_delta": -0.48499999986961484,
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "D6",
+      "arm": "P-GRB",
+      "prior_stage": 80,
+      "cap": 3600,
+      "prior": {
+        "U": 0.1572411758522922,
+        "L": 0.15078231039028528,
+        "gap": 0.006458865462006913,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit",
+        "available": true,
+        "paid_completion_seconds": 3597.1720000002533,
+        "relative_gap": 0.041076171219135274
+      },
+      "current": {
+        "U": 0.1572411758522922,
+        "L": 0.15078948840741413,
+        "gap": 0.0064516874448780626,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit",
+        "available": true,
+        "paid_completion_seconds": 3597.1720000002533,
+        "relative_gap": 0.0410305214897311
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": 7.178017128850467e-06,
+        "gap_delta": -7.178017128850467e-06,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_open",
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    },
+    {
+      "id": "D6",
+      "arm": "BDS-C",
+      "prior_stage": 80,
+      "cap": 3600,
+      "prior": {
+        "U": 0.15750980361456174,
+        "L": 0.15580755380144062,
+        "gap": 0.001702249813121115,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "available": true,
+        "paid_completion_seconds": 3597.125,
+        "relative_gap": 0.01080726262148512
+      },
+      "current": {
+        "U": 0.15750980361456174,
+        "L": 0.15578327977056106,
+        "gap": 0.0017265238440006825,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit",
+        "available": true,
+        "paid_completion_seconds": 3597.1720000002533,
+        "relative_gap": 0.010961373859785994
+      },
+      "change_between_realizations": {
+        "UB_delta": 0.0,
+        "LB_delta": -2.4274030879567476e-05,
+        "gap_delta": 2.4274030879567476e-05,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_open",
+        "material_improvement": false,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "identical_source_binary_input_cap_flags": true,
+      "scope": "Both original and one fresh repeat retained. Frozen practical comparisons are descriptive, not statistical equivalence."
+    }
+  ],
+  "matched_pair_comparisons": [
+    {
+      "id": "S12",
+      "reference": "P-GRB",
+      "candidate": "BDS-C",
+      "prior_stage": 79,
+      "prior_comparison": {
+        "UB_delta": -6.938893903907228e-18,
+        "LB_delta": -2.3592239273284576e-16,
+        "gap_delta": 2.2898349882893854e-16,
+        "mixed_UB_LB_directions": true,
+        "classification": "both_certified_small",
+        "wall_delta": -3.845000000204891,
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "current_comparison": {
+        "UB_delta": -6.938893903907228e-18,
+        "LB_delta": -2.3592239273284576e-16,
+        "gap_delta": 2.2898349882893854e-16,
+        "mixed_UB_LB_directions": true,
+        "classification": "both_certified_small",
+        "wall_delta": -3.8430000003427267,
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    },
+    {
+      "id": "S12",
+      "reference": "P-GRB",
+      "candidate": "K1-R",
+      "prior_stage": 79,
+      "prior_comparison": {
+        "UB_delta": -6.938893903907228e-18,
+        "LB_delta": -1.5265566588595902e-16,
+        "gap_delta": 1.457167719820518e-16,
+        "mixed_UB_LB_directions": true,
+        "classification": "both_certified_small",
+        "wall_delta": 35.07700000004843,
+        "material_improvement": false,
+        "material_regression": true,
+        "severe_regression": true
+      },
+      "current_comparison": {
+        "UB_delta": -6.938893903907228e-18,
+        "LB_delta": -1.5265566588595902e-16,
+        "gap_delta": 1.457167719820518e-16,
+        "mixed_UB_LB_directions": true,
+        "classification": "both_certified_small",
+        "wall_delta": 34.95399999991059,
+        "material_improvement": false,
+        "material_regression": true,
+        "severe_regression": true
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    },
+    {
+      "id": "S12",
+      "reference": "K1-R",
+      "candidate": "BDS-C",
+      "prior_stage": 79,
+      "prior_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": -8.326672684688674e-17,
+        "gap_delta": 8.326672684688674e-17,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_small",
+        "wall_delta": -38.92200000025332,
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "current_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": -8.326672684688674e-17,
+        "gap_delta": 8.326672684688674e-17,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_small",
+        "wall_delta": -38.79700000025332,
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    },
+    {
+      "id": "C2",
+      "reference": "P-GRB",
+      "candidate": "BDS-C",
+      "prior_stage": 79,
+      "prior_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.05889189318305277,
+        "gap_delta": -0.05889189318305277,
+        "mixed_UB_LB_directions": false,
+        "classification": "certificate_gain",
+        "material_improvement": null,
+        "severe_regression": null
+      },
+      "current_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.05889189318305277,
+        "gap_delta": -0.05889189318305277,
+        "mixed_UB_LB_directions": false,
+        "classification": "certificate_gain",
+        "material_improvement": null,
+        "severe_regression": null
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    },
+    {
+      "id": "C2",
+      "reference": "P-GRB",
+      "candidate": "K1-R",
+      "prior_stage": 79,
+      "prior_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.026101130336165013,
+        "gap_delta": -0.026101130336165013,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_open",
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "current_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.02608621853140658,
+        "gap_delta": -0.02608621853140658,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_open",
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    },
+    {
+      "id": "C2",
+      "reference": "K1-R",
+      "candidate": "BDS-C",
+      "prior_stage": 79,
+      "prior_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.032790762846887755,
+        "gap_delta": -0.032790762846887755,
+        "mixed_UB_LB_directions": false,
+        "classification": "certificate_gain",
+        "material_improvement": null,
+        "severe_regression": null
+      },
+      "current_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.03280567465164619,
+        "gap_delta": -0.03280567465164619,
+        "mixed_UB_LB_directions": false,
+        "classification": "certificate_gain",
+        "material_improvement": null,
+        "severe_regression": null
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    },
+    {
+      "id": "D4",
+      "reference": "P-GRB",
+      "candidate": "BDS-C",
+      "prior_stage": 79,
+      "prior_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.31185949107528715,
+        "gap_delta": -0.31185949107528715,
+        "mixed_UB_LB_directions": false,
+        "classification": "certificate_gain",
+        "material_improvement": null,
+        "severe_regression": null
+      },
+      "current_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.3118311079967757,
+        "gap_delta": -0.3118311079967757,
+        "mixed_UB_LB_directions": false,
+        "classification": "certificate_gain",
+        "material_improvement": null,
+        "severe_regression": null
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    },
+    {
+      "id": "D4",
+      "reference": "P-GRB",
+      "candidate": "K1-R",
+      "prior_stage": 79,
+      "prior_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.31185949083664516,
+        "gap_delta": -0.31185949083664516,
+        "mixed_UB_LB_directions": false,
+        "classification": "certificate_gain",
+        "material_improvement": null,
+        "severe_regression": null
+      },
+      "current_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 0.3118311077581337,
+        "gap_delta": -0.3118311077581337,
+        "mixed_UB_LB_directions": false,
+        "classification": "certificate_gain",
+        "material_improvement": null,
+        "severe_regression": null
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    },
+    {
+      "id": "D4",
+      "reference": "K1-R",
+      "candidate": "BDS-C",
+      "prior_stage": 79,
+      "prior_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 2.3864199505396755e-10,
+        "gap_delta": -2.3864199505396755e-10,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_other",
+        "wall_delta": -82.24999999953434,
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "current_comparison": {
+        "UB_delta": 0.0,
+        "LB_delta": 2.3864199505396755e-10,
+        "gap_delta": -2.3864199505396755e-10,
+        "mixed_UB_LB_directions": false,
+        "classification": "both_certified_other",
+        "wall_delta": -81.95299999974668,
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    },
+    {
+      "id": "D6",
+      "reference": "P-GRB",
+      "candidate": "BDS-C",
+      "prior_stage": 80,
+      "prior_comparison": {
+        "UB_delta": 0.00026862776226954654,
+        "LB_delta": 0.0050252434111553446,
+        "gap_delta": -0.004756615648885798,
+        "mixed_UB_LB_directions": true,
+        "classification": "both_open",
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "current_comparison": {
+        "UB_delta": 0.00026862776226954654,
+        "LB_delta": 0.004993791363146927,
+        "gap_delta": -0.00472516360087738,
+        "mixed_UB_LB_directions": true,
+        "classification": "both_open",
+        "material_improvement": true,
+        "material_regression": false,
+        "severe_regression": false
+      },
+      "scope": "Each comparison uses its own matched fresh controls; no historical K1 row is imported into the R81 D6 pair."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "round88-a1-g3-cross-arm-v1",
+  "id": "C2",
+  "arms": [
+    {
+      "arm": "P-GRB",
+      "strongest_same_arm_global_L": 0.7847741824937943,
+      "minimum_same_arm_physical_U": 0.8299634131717751,
+      "physically_verified_witness_rows": 12,
+      "final_physical_verification_present": true
+    },
+    {
+      "arm": "ENS-C",
+      "strongest_same_arm_global_L": 0.8299634131717741,
+      "minimum_same_arm_physical_U": 0.8299634131717751,
+      "physically_verified_witness_rows": 8,
+      "final_physical_verification_present": true
+    },
+    {
+      "arm": "A1",
+      "strongest_same_arm_global_L": 0.8299634110741255,
+      "minimum_same_arm_physical_U": 0.8299634131717751,
+      "physically_verified_witness_rows": 5,
+      "final_physical_verification_present": true
+    }
+  ],
+  "strongest_global_L": 0.8299634131717741,
+  "minimum_physical_U": 0.8299634131717751,
+  "tolerance": 1e-07,
+  "passed": true,
+  "scope": "Offline original-problem contradiction check, not a combined algorithm endpoint"
+}

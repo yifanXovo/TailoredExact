@@ -1,0 +1,367 @@
+{
+  "schema": "round126-station-landscape-v1",
+  "dataset_family": "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "classification": "generated_untested_paper_candidate",
+  "generator_version": "round126-thin-offline-adapter-v1",
+  "landscape_id": "r126_SC-B15-S_regional_r1_shortage",
+  "selection_id": "r126_SC-B15-S_regional_r1",
+  "V": 15,
+  "geographic_regime": "regional",
+  "replicate": 1,
+  "inventory_regime": "shortage",
+  "local_imbalance_level": "high",
+  "seed": 2097768837,
+  "seed_derivation_material": "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage",
+  "source_station_row_indices": [
+    263,
+    427,
+    629,
+    422,
+    251,
+    254,
+    855,
+    279,
+    274,
+    702,
+    628,
+    646,
+    267,
+    278,
+    262
+  ],
+  "source_hashes": {
+    "identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+    "table_SHA": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+    "rows": 865,
+    "qualified": 865
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      315470.528,
+      4327138.311
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    15,
+    15,
+    15,
+    15,
+    19,
+    9,
+    16,
+    15,
+    15,
+    15,
+    11,
+    15,
+    21,
+    18,
+    15
+  ],
+  "initial": [
+    11,
+    11,
+    10,
+    12,
+    3,
+    0,
+    12,
+    0,
+    12,
+    0,
+    1,
+    2,
+    3,
+    12,
+    10
+  ],
+  "target": [
+    8,
+    7,
+    7,
+    8,
+    10,
+    4,
+    8,
+    7,
+    8,
+    7,
+    6,
+    8,
+    10,
+    9,
+    7
+  ],
+  "weights": [
+    0.64,
+    0.49,
+    0.49,
+    0.64,
+    1.0,
+    0.16,
+    0.64,
+    0.49,
+    0.64,
+    0.49,
+    0.36,
+    0.64,
+    1.0,
+    0.81,
+    0.49
+  ],
+  "min_ratio": [
+    0.3133,
+    0.2867,
+    0.2867,
+    0.3133,
+    0.3105,
+    0.2778,
+    0.3,
+    0.2867,
+    0.3133,
+    0.2867,
+    0.3182,
+    0.3133,
+    0.2905,
+    0.3,
+    0.2867
+  ],
+  "points_utm18n_meters": [
+    [
+      313502.236,
+      4332699.218
+    ],
+    [
+      322707.823,
+      4322764.136
+    ],
+    [
+      315778.494,
+      4325835.535
+    ],
+    [
+      317567.971,
+      4320521.961
+    ],
+    [
+      309523.891,
+      4329493.118
+    ],
+    [
+      314481.335,
+      4329484.282
+    ],
+    [
+      317090.934,
+      4323692.766
+    ],
+    [
+      311283.274,
+      4331286.475
+    ],
+    [
+      314764.767,
+      4327429.711
+    ],
+    [
+      317145.829,
+      4325882.463
+    ],
+    [
+      322502.385,
+      4324029.972
+    ],
+    [
+      316049.435,
+      4324334.476
+    ],
+    [
+      313287.109,
+      4329611.308
+    ],
+    [
+      312261.794,
+      4331748.757
+    ],
+    [
+      314110.642,
+      4328260.491
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 14801.866832833795,
+    "mean_pairwise_station_distance_m": 6318.467844844826,
+    "maximum_pairwise_station_distance_m": 14801.866832833795,
+    "mean_depot_distance_m": 4357.7475599586205,
+    "maximum_depot_distance_m": 8456.467693289447,
+    "bounding_box_width_m": 13183.931999999972,
+    "bounding_box_height_m": 12177.257000000216,
+    "capacity_minimum": 9,
+    "capacity_maximum": 21,
+    "capacity_mean": 15.266666666666667,
+    "capacity_median": 15,
+    "total_capacity": 229,
+    "total_initial_inventory": 99,
+    "total_target_inventory": 114,
+    "station_inventory_minus_target": -15,
+    "absolute_total_shortage_or_surplus": 15,
+    "local_l1_imbalance": 71,
+    "maximum_local_absolute_imbalance": 7,
+    "surplus_station_count": 8,
+    "deficit_station_count": 7,
+    "balanced_station_count": 0,
+    "weight_minimum": 0.16,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.5986666666666667,
+    "min_ratio_minimum": 0.2778,
+    "min_ratio_maximum": 0.3182
+  },
+  "generation_trace": {
+    "initial_before_total_correction": [
+      13,
+      12,
+      12,
+      13,
+      4,
+      1,
+      13,
+      2,
+      13,
+      2,
+      3,
+      3,
+      4,
+      14,
+      12
+    ],
+    "initial_after_total_correction": [
+      11,
+      11,
+      10,
+      12,
+      3,
+      0,
+      12,
+      0,
+      12,
+      0,
+      1,
+      2,
+      3,
+      12,
+      10
+    ],
+    "initial_after_sign_repair": [
+      11,
+      11,
+      10,
+      12,
+      3,
+      0,
+      12,
+      0,
+      12,
+      0,
+      1,
+      2,
+      3,
+      12,
+      10
+    ],
+    "desired_total": 99,
+    "delta_amount": 15,
+    "local_scale": 0.3,
+    "inventory_hash_order": [
+      2,
+      10,
+      13,
+      7,
+      0,
+      9,
+      14,
+      12,
+      8,
+      5,
+      1,
+      11,
+      3,
+      4,
+      6
+    ],
+    "sign_repair_hash_order": [
+      7,
+      5,
+      3,
+      12,
+      6,
+      1,
+      8,
+      2,
+      10,
+      13,
+      11,
+      9,
+      14,
+      4,
+      0
+    ],
+    "anchor_material": "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|geographic-anchor-set|V=15",
+    "selection_material": "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|selection|V=15|geography=regional|replicate=1",
+    "inventory_material": "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage",
+    "target_materials": [
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=263",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=427",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=629",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=422",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=251",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=254",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=855",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=279",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=274",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=702",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=628",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=646",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=267",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=278",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r126_SC-B15-S_regional_r1|row=262"
+    ],
+    "inventory_order_materials": [
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|0",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|1",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|2",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|3",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|4",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|5",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|6",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|7",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|8",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|9",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|10",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|11",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|12",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|13",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|14"
+    ],
+    "sign_repair_order_materials": [
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|0",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|1",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|2",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|3",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|4",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|5",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|6",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|7",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|8",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|9",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|10",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|11",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|12",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|13",
+      "round126-small-certification-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r126_SC-B15-S_regional_r1|shortage|sign-repair|14"
+    ]
+  }
+}

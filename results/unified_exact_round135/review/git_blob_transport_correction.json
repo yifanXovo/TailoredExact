@@ -1,0 +1,37 @@
+{
+  "unpublished_precheck_commit": "0f5c56c1909c080cb6a8490f6c17e17fa6fa15e2",
+  "reason": "Previously indexed text was not refreshed by a normal add after the exact-byte attributes were introduced. Explicit renormalize applies the current -text policy without touching physical files.",
+  "differences": [
+    {
+      "path": "results/unified_exact_round135/baseline.json",
+      "old_Git_bytes": 1877,
+      "actual_bytes": 1913,
+      "newline_only": true
+    },
+    {
+      "path": "results/unified_exact_round135/review/early_math_code_review.json",
+      "old_Git_bytes": 4353,
+      "actual_bytes": 4445,
+      "newline_only": true
+    },
+    {
+      "path": "scripts/round135_common.py",
+      "old_Git_bytes": 12791,
+      "actual_bytes": 13043,
+      "newline_only": true
+    },
+    {
+      "path": "scripts/round135_export.cpp",
+      "old_Git_bytes": 4710,
+      "actual_bytes": 4776,
+      "newline_only": true
+    },
+    {
+      "path": "scripts/round135_read.py",
+      "old_Git_bytes": 62916,
+      "actual_bytes": 63816,
+      "newline_only": true
+    }
+  ],
+  "source_or_result_semantics_changed": false
+}

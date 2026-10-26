@@ -10,6 +10,59 @@ struct GiniIntervalGeometry {
     double upper = 0.0;
 };
 
+// Round 40 coarse-start policies alter only the initial exact cover and
+// whether the existing complete-child refinement logic may run. They do not
+// inspect instance metadata, solver effort, time, or historical outcomes.
+struct Round40CoarseStartGeometry {
+    bool valid = false;
+    bool adaptive_refinement = false;
+    std::vector<GiniIntervalGeometry> initial_intervals;
+    std::string reason = "not_evaluated";
+};
+
+Round40CoarseStartGeometry makeRound40CoarseStartGeometry(
+    double proof_lower,
+    double proof_upper,
+    int frozen_initial_interval_count,
+    const std::string& policy,
+    double tolerance);
+
+// Round 40 incumbent-stable geometry. The full hierarchy is rooted at the
+// problem-derived mathematical Gini maximum. A proof incumbent activates
+// only the intersecting prefix and may truncate its last cell. The selected
+// level is the finest dyadic level with at most the frozen target number of
+// active cells. Thus a stronger incumbent either preserves the level or moves
+// to a nested refinement; it never slides an internal boundary.
+struct Round40NestedDyadicGeometry {
+    bool valid = false;
+    double proof_lower = 0.0;
+    double proof_upper = 0.0;
+    double stable_root_upper = 0.0;
+    int dyadic_level = 0;
+    long long global_cell_count = 1;
+    std::vector<GiniIntervalGeometry> active_anchor_cells;
+    std::vector<GiniIntervalGeometry> active_intervals;
+    std::vector<long long> active_global_cell_indices;
+    int truncated_active_interval_count = 0;
+    std::string reason = "not_evaluated";
+};
+
+Round40NestedDyadicGeometry makeRound40NestedDyadicGeometry(
+    double proof_lower,
+    double proof_upper,
+    double stable_root_upper,
+    int target_active_interval_count,
+    double tolerance);
+
+// Checks the policy's promised stability relation for two verified cutoffs
+// on the same root: every weaker-UB internal boundary still relevant below
+// the stronger cutoff must occur in the stronger geometry.
+bool round40NestedBoundaryPreservation(
+    const Round40NestedDyadicGeometry& weaker,
+    const Round40NestedDyadicGeometry& stronger,
+    double tolerance,
+    std::string* reason = nullptr);
+
 // Solver-neutral input to the Round 37 exploratory pilot.  The policy may
 // inspect only complete initial-cell LP bounds and the frozen Gini geometry.
 // Runtime, node counts, instance metadata, scenario labels, and historical
@@ -121,6 +174,58 @@ std::vector<GiniIntervalGeometry> splitLegacyFrontierInterval(
     double lower,
     double upper,
     int split_factor);
+
+// Round90 candidate-only geometry. `current_optimal_parent_g_available` is
+// established by the controller's LP/epoch/artifact checks. This pure helper
+// never changes the frozen default midpoint function.
+struct Round90LpGSplitGeometry {
+    bool valid = false;
+    bool used_parent_g = false;
+    double midpoint = 0.0;
+    double split_point = 0.0;
+    std::vector<GiniIntervalGeometry> children;
+    std::string reason = "not_evaluated";
+};
+
+Round90LpGSplitGeometry selectRound90LpGSplitGeometry(
+    double lower,
+    double upper,
+    bool current_optimal_parent_g_available,
+    double parent_g);
+
+// The controller supplies the actual on-disk canonical SHA after reading the
+// cached child's model. This candidate-only predicate prevents a same-id
+// child from substituting an old domain, cutoff epoch, or LP bound.
+struct Round90LpGCachedChildIdentity {
+    std::string id;
+    std::string parent_id;
+    int child_index = -1;
+    int split_depth = -1;
+    GiniIntervalGeometry leaf_interval;
+    GiniIntervalGeometry artifact_interval;
+    GiniIntervalGeometry lp_interval;
+    long long artifact_epoch = -1;
+    long long lp_epoch = -1;
+    bool artifact_ready = false;
+    bool artifact_written = false;
+    bool lp_complete = false;
+    bool lp_terminal_valid = false;
+    bool lp_optimal = false;
+    bool lp_infeasible = false;
+    std::string artifact_sha256;
+    std::string lp_artifact_sha256;
+    std::string observed_file_sha256;
+};
+
+bool validRound90LpGCachedChild(
+    const Round90LpGCachedChildIdentity& cached,
+    const std::string& expected_id,
+    const std::string& expected_parent_id,
+    int expected_child_index,
+    int expected_split_depth,
+    const GiniIntervalGeometry& expected_interval,
+    long long current_incumbent_epoch,
+    std::string* reason = nullptr);
 
 bool exactIntervalCoverage(const GiniIntervalGeometry& parent,
                            const std::vector<GiniIntervalGeometry>& children,

@@ -1,0 +1,748 @@
+{
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\engineering\\public_remote_verify03\\verify.py",
+    "--root",
+    "E:\\codes\\ExactEBRP-round108",
+    "--pr-number",
+    "170",
+    "--head",
+    "ea14ac7b1762e360fb564b46a47946539f10b2bf",
+    "--label",
+    "phase03",
+    "--isolated-review",
+    "results/unified_exact_round108/review/public_isolated_review01.json"
+  ],
+  "read_root": "E:\\codes\\ExactEBRP-round108",
+  "source_SHA": "81444ce741bad2c06bd286beb9cbd9bb42aeb2f5349973b371f2107026a30946",
+  "engineering": true,
+  "Optimize": 0,
+  "IIS": 0,
+  "exit_code": 0,
+  "seconds": 39.32254190009553,
+  "checked_at_utc": "2026-10-08T20:59:13Z",
+  "remote_head": "ea14ac7b1762e360fb564b46a47946539f10b2bf",
+  "remote_base": "b5db3f038f64215766a54498d8acc82e384de733",
+  "remote_draft": true,
+  "R107_latest_unchanged": true,
+  "PR_body_exact_prepared_text": true,
+  "PR_tables_exact_final_report": true,
+  "required_public_files_readable": true,
+  "public_carrier_files_exact": true,
+  "combined_remote_archive_SHA": "9ae11d97e81f9434b7ac438fe32d61341e8712ea6e1d6699b7030fa0b0f347d8",
+  "remote_carrier_part_count": 2,
+  "production_and_helpers_unchanged": true,
+  "original_user_changes_preserved": true,
+  "file_checks_SHA": "ff5ee1341ad18af52cc55526e11ec43e9626045f3958aa5a054565097be7e679",
+  "remote_files_checked": 27,
+  "pr_metadata_SHA": "3bbedf025a93708dcfa4ce7c4e4e2e44e26805f286ff5a76736a2c55dad4a4de",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03594480000901967,
+      "stdout_SHA": "c9b8469ed5214b67a902225fe0343a6ebaf45fe41c48a151ca65f204307d6247",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "ls-remote",
+        "origin",
+        "refs/heads/codex/round108-frozen-mb-validation",
+        "refs/heads/codex/round107-ens-frontier-route-events"
+      ],
+      "exit_code": 0,
+      "seconds": 1.233042799984105,
+      "stdout_SHA": "4ae518073d2ff3791bcee91963e84c5e49823f51b2e7566a0ed2263fe9995a2f",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/pulls/170"
+      ],
+      "exit_code": 0,
+      "seconds": 1.098219000035897,
+      "stdout_SHA": "cdb8aa4581b9dcb32f9dba1b04fd49102154afb928917f3043f3855f6df18487",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/pulls/169"
+      ],
+      "exit_code": 0,
+      "seconds": 1.0940510999644175,
+      "stdout_SHA": "8bd3d5d0a058c1d3dad02e3f7f15ec2098b4b6ba81c11eaeaeaf49f8ae1558f4",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--name-only",
+        "b5db3f038f64215766a54498d8acc82e384de733",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf",
+        "--",
+        "src",
+        "include",
+        "tests",
+        "CMakeLists.txt"
+      ],
+      "exit_code": 0,
+      "seconds": 0.038386199972592294,
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/final_report.md?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7971796001074836,
+      "stdout_SHA": "310b85c4e1f3c23c62011301061d86d84befcb91f0c4c254aa8fdf24de7d5e72",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/final_report.md"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03890680009499192,
+      "stdout_SHA": "bb02e551efdf6214b15be82afcc47129817a79e96ef6da384b749e481d94610a",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/research_decision.md?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7885805999394506,
+      "stdout_SHA": "4a8f33cf9c5fc9d5f837550b3c1c921fb7abb76177eb443db7f6bdea224d00c6",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/research_decision.md"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04672540002502501,
+      "stdout_SHA": "598856d3ab931c878f1dd5544ad748a106c765be29fe16a3f89bafb12076df65",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/candidate_identity.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 1.8061921000480652,
+      "stdout_SHA": "ede5770417574e95914dec0bb219393ba8922ecde5ef20af9438eced007cab16",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/candidate_identity.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.042242700001224875,
+      "stdout_SHA": "bcf5729b26ef2623d5ae2facde55eddebf01d3531b106ec2690186279988809c",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/representation_contract.md?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7644404000602663,
+      "stdout_SHA": "7afd7c0117bef01f61e0213d9f0a280ec91118bd57e3938c35921739947a1064",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/representation_contract.md"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03876000002492219,
+      "stdout_SHA": "8f8d3672c8150cd4d4909760e02676aed5f27419c0361106fce6d4a9cc311b4d",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/development_protocol.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7784501999849454,
+      "stdout_SHA": "3dbf38a0d61c0fe83bf8af17ee667dbbf918da3b2ca7774081eb2fbe22512ea4",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/development_protocol.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.044982300023548305,
+      "stdout_SHA": "65eb7d0f5102f390521d2351f1d63860cc49468b763d5de2704bf4175a1128ab",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/confirmation_protocol.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7760502999881282,
+      "stdout_SHA": "71489cdb0911a5e94356b920a908f80f6e0f14a7bab991cfcbce302f44794ebe",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/confirmation_protocol.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048317299922928214,
+      "stdout_SHA": "8abeefd3d2b64e2228df45b5e12d8275a579cf7eea6aa4641ce4c3be31d4e6c8",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/input_manifest.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7935276000062004,
+      "stdout_SHA": "d7a0ddadb224f5a6438155494e89d698d859afa992f9b4f55bfb8f408ca42311",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/input_manifest.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.037415600032545626,
+      "stdout_SHA": "f75d64eff2d4b96949e9969096038ffd82d5972452dcf0d2facdf7c0e85050bf",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/admission_decision.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.778311499976553,
+      "stdout_SHA": "977be4ff9305fb396d0ca00f65966df70033ca2b1552a4c87c0775d3d89ab3f3",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/admission_decision.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0375789999961853,
+      "stdout_SHA": "5c5c4681aceb7f9b7a322725517e33824921adbdef5d1ef2fdd347c5f5103177",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/selection_decision.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7437518999213353,
+      "stdout_SHA": "1758ee5827cdf4fa6c796ec1bd584feba8dba6cbb0eba6a892fab2a348c3f87c",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/selection_decision.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04243330005556345,
+      "stdout_SHA": "c8e7185f6acf9fd5e6f029d0e08c40f9141b9786ed629c5bea2ca6903214aa91",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/reproduce.md?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7889816000824794,
+      "stdout_SHA": "4bf7bd870169477b50e09be310dd2ece9e50e7c2b296108d5c47366570997c74",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/reproduce.md"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03576330002397299,
+      "stdout_SHA": "d2800ef12c20cd7b42fa9a610595cc698fe28d3b6024f19cd9e05253587b66f8",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/RESUME.md?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8084349000127986,
+      "stdout_SHA": "f53bbcb4c300d9e588a135079c118f97ef70c616451e626d844188337732a5ba",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/RESUME.md"
+      ],
+      "exit_code": 0,
+      "seconds": 0.040419000084511936,
+      "stdout_SHA": "49de297e34dbb449ee31ab149b6054d1643c481e72cd6aeb6399a2f659a03364",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/public_pack_receipt.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7761534000746906,
+      "stdout_SHA": "33b58b0f9ef09df2920c048641b7b05363f7801ea89de447147fa0416281c2e8",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/public_pack_receipt.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04210169997531921,
+      "stdout_SHA": "16c89a7745482a21140d03a7a334174747bd0c3d0d77e5a2571ec0d78d12ad0f",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/public_export_receipt.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8006019999738783,
+      "stdout_SHA": "ebab1a3eeb0dcd13c499b5ea366b57245eec56e63389691888c0f2a94784fa83",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/public_export_receipt.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.036584599991329014,
+      "stdout_SHA": "15a494fb7398950072ea4bceadbde34bf26c26699b4864671b1af85177cae508",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/public_restore_receipt.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.792340200045146,
+      "stdout_SHA": "e36e156e29572798eb69cbacbe280c18e840f8e4e2bc0a9d84699d2119dfefdb",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/public_restore_receipt.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.048557200003415346,
+      "stdout_SHA": "6b970631cb9a442d45953525eb4e2be86b914d3345ab4e6839868f9dd7f7f438",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/public_comparison_receipt.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7588635999709368,
+      "stdout_SHA": "326b431096ddbbc1760a0d1da91c33b542b0b887594406f715a3612c924f69da",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/public_comparison_receipt.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04309250006917864,
+      "stdout_SHA": "852903c49cf2deae0059ff7fb566f8239b75113de05384c6ccbc7c1c5babdb83",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/reports_final/summary.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7750010000308976,
+      "stdout_SHA": "e84ec51985d177e2ec8f702c5fea3035ecb59a1ce4b6b3e2ea994cb09f7d07df",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/reports_final/summary.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.0398447000188753,
+      "stdout_SHA": "31c22b6aea86f2061b0605699f41d345305902af99d3b025d9a016ce8ffaf277",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/reports_final/arms.csv?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7946463000262156,
+      "stdout_SHA": "030e8a9b50cb39270b9936a6535bf48be02d7bffbe201034f69f8b2697c7bf41",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/reports_final/arms.csv"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03655309998430312,
+      "stdout_SHA": "a6b943f2df7fedfacbcec8763977f083b925cef6dbb2169070c2d04fd0515c30",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/reports_final/pairs.csv?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7816172000020742,
+      "stdout_SHA": "42eac50374854d825569355e5d0efe51cd9d37d850b67343cafb8bde67b235e4",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/reports_final/pairs.csv"
+      ],
+      "exit_code": 0,
+      "seconds": 0.036597899976186454,
+      "stdout_SHA": "40df340d0110cb2f18367588becdee7d770c3413f8f5238e91df099a96fe32c1",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/reports_final/worst_losses.csv?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7964059000369161,
+      "stdout_SHA": "e2a509087d63578b2337e00d526a5a6a323425a1571ef5a5aa69cb94e30c0bbc",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/reports_final/worst_losses.csv"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04230259999167174,
+      "stdout_SHA": "f83cfa73d7b93934548f9f1b2be9d47d8fd34b763338fdf6ef09e63c1f2df6e4",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/reports_final/candidate_evidence_gap.csv?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8036700999364257,
+      "stdout_SHA": "d3afe3821fc770552bb3d29450a1c78c2445394408f1a30c81ae7533bc1441b5",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/reports_final/candidate_evidence_gap.csv"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04058900009840727,
+      "stdout_SHA": "a8be99eaddd54f85ac99a6dba97915ee78b419bb620a14abd2e0ab8826bb8237",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/reports_final/stopped_mechanism_families.csv?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.782709400053136,
+      "stdout_SHA": "fad31e6a4fca5819e18404b257ca9ad918373dae6e62420a017fa8b57891c756",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/reports_final/stopped_mechanism_families.csv"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04058109992183745,
+      "stdout_SHA": "3a7e8747aedb47623260af376b555725b720661181fdd9cc178191bf96c00d27",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/review/final_local_review01.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7998914000345394,
+      "stdout_SHA": "cb0ff4bdd9bea1ffe560fed0a27d0c456c15fa35e81a53c4ab7f352fe44f3330",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/review/final_local_review01.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03737360006198287,
+      "stdout_SHA": "eab4d1c7409efb05b9f98ea70b5b544fda47654dcbaf1934110f3f503c71c8f8",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/review/packaging_exact_parts_review01.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7551704000215977,
+      "stdout_SHA": "9bdfda427767e172eab1003926efe0df3f5583d40a9d8ae02f10afbce8954cb0",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/review/packaging_exact_parts_review01.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04449819994624704,
+      "stdout_SHA": "a8564a68278611595a4e338e9dbce319f2b2b9b14a0dabf8dc7a259b42ac7c83",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/review/public_isolated_review01.json?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7565841999603435,
+      "stdout_SHA": "0e5c4da0e276240b39dde5f3c4dcfd36f0a17dd52b70883cea5cd6fa200af8cb",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/review/public_isolated_review01.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.045875399955548346,
+      "stdout_SHA": "5222e1c25787275c80f56ca51524123e3f13d8ac00397114b3608df862165d58",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Program Files/GitHub CLI/gh.exe",
+        "api",
+        "repos/yifanXovo/TailoredExact/contents/results/unified_exact_round108/compact_evidence?ref=ea14ac7b1762e360fb564b46a47946539f10b2bf"
+      ],
+      "exit_code": 0,
+      "seconds": 0.7842259999597445,
+      "stdout_SHA": "a98283a5d3db333bd5fc73ad5288567baebbbb8c7564d2e6ef4142a872a128a4",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/compact_evidence/evidence.tar.gz.part001"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04000119992997497,
+      "stdout_SHA": "bf5bfc6cd859c7f61732b5fd2e06673f8138b11ecad9423b175019e9039bb579",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Windows/System32/curl.exe",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--max-time",
+        "180",
+        "https://raw.githubusercontent.com/yifanXovo/TailoredExact/ea14ac7b1762e360fb564b46a47946539f10b2bf/results/unified_exact_round108/compact_evidence/evidence.tar.gz.part001"
+      ],
+      "exit_code": 0,
+      "seconds": 6.894533299957402,
+      "stdout_SHA": "006160e7a28f2d35d0171e8b4512969af19950b20e9d17de3d69687b6848f01e",
+      "stdout_bytes": 94371840,
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_streamed": true,
+      "TLS_verification_not_disabled": true
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/compact_evidence/evidence.tar.gz.part002"
+      ],
+      "exit_code": 0,
+      "seconds": 0.036408300045877695,
+      "stdout_SHA": "06bf34e3aefbaeeafe0a129c32cb3294f04798fde44047520db540330f25db47",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Windows/System32/curl.exe",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--max-time",
+        "180",
+        "https://raw.githubusercontent.com/yifanXovo/TailoredExact/ea14ac7b1762e360fb564b46a47946539f10b2bf/results/unified_exact_round108/compact_evidence/evidence.tar.gz.part002"
+      ],
+      "exit_code": 0,
+      "seconds": 5.2165630999952555,
+      "stdout_SHA": "3fc3b631245cea9649c2190583c3d268f4dbcc6b05ca83d5b3135e6876486774",
+      "stdout_bytes": 60640489,
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_streamed": true,
+      "TLS_verification_not_disabled": true
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "ea14ac7b1762e360fb564b46a47946539f10b2bf:results/unified_exact_round108/compact_evidence/manifest.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04112779989372939,
+      "stdout_SHA": "816c6310c8e2cfe5f220c24b39c436f3a998f050460f29c1147c7aba69b1c95a",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "C:/Windows/System32/curl.exe",
+        "--fail",
+        "--silent",
+        "--show-error",
+        "--location",
+        "--proto",
+        "=https",
+        "--proto-redir",
+        "=https",
+        "--max-time",
+        "180",
+        "https://raw.githubusercontent.com/yifanXovo/TailoredExact/ea14ac7b1762e360fb564b46a47946539f10b2bf/results/unified_exact_round108/compact_evidence/manifest.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.8060891999630257,
+      "stdout_SHA": "214bdc55cb827d7189e73525b5a954c8fd7a3ad2bdae985542a58e8e9e455cbb",
+      "stdout_bytes": 17344180,
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_streamed": true,
+      "TLS_verification_not_disabled": true
+    }
+  ],
+  "conservative_solver_starts": 0,
+  "route_oracle": 0
+}

@@ -1,0 +1,13 @@
+# R94 三臂 adapter 独立源码静审
+
+**源码静审 PASS，可进入一次零 Optimize `prepare`；不准据此运行四次 P 资格或十二个正式臂。** 受审 `scripts/round94_lpg_contemporary.py` SHA256 `5dcb3e481aef4767ee16372ef3c095c88dd36e8635e10b1184edba8669cbc587`；`results/unified_exact_round94/preregistration.json` SHA256 `767b8abe628bb5e84c8c44ddf2b65869f44212e17bea362fc0284b4afb445774`。文件改字节后须重审相应范围。工作目录 `E:/codes/ExactEBRP`。
+
+预注册逐项绑定冻结 R90 binary SHA `bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2`、旧 D6/G3/R88/R86 reader、R87 模型祖先、plan 与四输入。我独立重算 prereg 中 11 项既存身份加四输入，15/15 相符；源码 `validate` 又要求旧 R90 gate/七核心源与 166 个保存源行身份一致，`prepare` 使用只读 `git cat-file` 逐 blob 复核，不以当前 R94 工作树冒充旧编译源。`identity.json` 绑定新 adapter/预注册/旧源和 12+4 命令；`qualify`、`run` 分别要求 root 按该 identity 单独签 lease，且一次性目录/起始收据阻止悄然重启。
+
+命令审查：形式上固定 F2→C20→B50→U6 内的原定顺序，12 个正式进程 cap 合计 13,500 s；ENS-C/LP-G 从冻结 R90 `command_for` 产生，去除各自输出路径后唯一区别为 `--round90-lp-g-split false/true`，24+1 等旧预设不变。P 从冻结 R88 P 命令产生，走 `--method gurobi --plain-baseline`、独立 `compact.lp` 路径与 `--round24-expected-gurobi-model-fingerprint`、双 executable SHA 绑定；无 ENS preset、LP-G flag、HGA/MIP start 或旧 incumbent。四次 P 资格使用同一 P 命令但将 `--time-limit`、`--process-wall-time-limit`、`--process-shutdown-margin` 设零、每个外部整个进程上限 15 s；源码明确记录每例仍须一次 native Optimize，最多四次资格进程/60 s，不把资格搜索值喂给正式比较。所有四次独立资格经实际 `compact.lp` SHA/指纹/行列/原生 domain、lifecycle、五项 native set/get 和完整原问题 journal scope 审计过关，才可能形成单独的正式 lease。
+
+证据审查：正式 P 复用旧 R88 的原物理 witness/全局界 reader，ENS/LP 复用旧 R90 `audit_launch` 与 LP-G proposal→双子 LP→AM→target→atomic split 区分；新 hook **增加**逐 call 参数/原生前提检查。最初源版误把 P 专属 `native_mip_strict_gap_parameters_valid` 与 `gurobi_version` 施于 ENS/LP；两项已修为 P 检这两字段，ENS/LP 检 `external_gini_tree_backend_parameter_roundtrip_valid`，三臂都逐项核 Threads、Seed、Presolve、MIPGap、MIPGapAbs 的 requested/effective/set/get。新的两臂/三臂交叉核仅检查 `max global L ≤ min physical U + 1e-7`，不合成任何单臂证书；缺 U 可报告 unknown。严重规则对双证书或参考证书+候选删失使用 `>1.5×` 且 `>30 s`，双 open 使用有合法 U/L 的绝对目标 gap `>1.5×` 且 `>.01`；P 已证而 LP-G open 单列晋升阻断。比较一形成就停，单 seed 标研究信号而非已确认回退。失败前缀、原生正常/硬停、partial journal 和未知 Optimize 数均有单列收据；进程/receipt 完整 launch-to-exit 最终以 root 外层 PowerShell Stopwatch/真实退出码为权威，内层写盘前时间不可单独称完整费用。
+
+只读资格自检：以 `python -B` 导入新 adapter、读旧模块、运行 `validate→formal_launches→qualification_launches`，得到 **166** 源行、**12** 正式命令、**4** 资格命令及 **13,500 s** 正式 cap；对旧 R88 P、R90 ENS、R90 LP-G 的现有正常 result 分别调用新五参数 readback 均通过，**零进程启动、零 Optimize**。最终成功外层 **0.1340868 s**。此前独立一次同类手动导入遗漏把 `scripts` 放入 `sys.path`，在导入旧模块时以 `ModuleNotFoundError` 退出，耗 **0.246905 s**；补上仅手动 `-c` 所需路径后一次旧源身份/命令自检耗 **0.2282474 s** 并成功。三次均未写 campaign、调用 native 或触发资格。此静审不保证未来模型导出必能在 15 s 内成功，也不证明四例性能或证书；实际 `prepare` 结果仍需单独核准。
+
+审查会话日志 `C:/Users/Administrator/.codex/sessions/2026/09/28/rollout-2026-09-28T12-55-39-01a0e65e-5f9f-7b92-9e7b-975d53f9cc35.jsonl`。

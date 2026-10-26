@@ -1,0 +1,22 @@
+{
+  "schema": "round52-final-inner-backend-definition-v1",
+  "name": "historical-production-v0",
+  "classification": "fallback_after_bounded_tailored_cut_negative_result",
+  "interval_policy": "interval-mip-v0",
+  "tailored_user_cut_callback": "off",
+  "tailored_cut_family": "none",
+  "support_rank": 0,
+  "separation_scope": "none",
+  "selection_rule": "none",
+  "PreCrush_override": "none",
+  "round51_subset_duration_policy": "historical-100000 with the frozen V<=12 writer guard",
+  "branching": "Gurobi default",
+  "Presolve": "Auto",
+  "Seed": 0,
+  "Threads": 1,
+  "MIPGap": 0,
+  "MIPGapAbs": 0,
+  "base_feasibility_constraints_removed": 0,
+  "reason": "SD-R3-ROOT-BLOCKMAX lost D1 and D13 baseline certificates in complete development and missed the Work gate; F1/F2 also failed certificate retention",
+  "changes_after_freeze_allowed": 0
+}

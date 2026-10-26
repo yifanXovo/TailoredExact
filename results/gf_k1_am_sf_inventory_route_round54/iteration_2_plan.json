@@ -1,0 +1,20 @@
+{
+  "schema": "round54-inventory-route-iteration-plan-v1",
+  "iteration": 2,
+  "status_before_iteration_1": "conditionally_not_opened",
+  "sole_predeclared_variant": {
+    "id": "IR3",
+    "definition": "One exact root pass, adding at most one most-violated inbound mixed cut and one most-violated outbound mixed cut."
+  },
+  "entry_condition": "Open only if valid IR1/IR2 full closure passes the offline live gate but closure overhead clearly dominates the observed LP-bound gain.",
+  "forbidden_reasons_to_open": [
+    "repair an instance-specific regression",
+    "fit a time, Work, node, memory, size, M, Q, or named-instance threshold",
+    "add a second cut family or alter K1-AM-SF controller semantics",
+    "respond to final-MIP runtime after confirmation begins"
+  ],
+  "selection_rule": "IR3 must independently pass the same frozen offline live-entry gate before any live candidate test.",
+  "maximum_round54_development_iterations": 2,
+  "maximum_round54_live_variants": 2,
+  "new_parameter": false
+}

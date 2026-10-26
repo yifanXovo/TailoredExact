@@ -1,0 +1,16 @@
+{
+  "confirmation_before_final_freeze": false,
+  "max_live_candidates": 2,
+  "max_offline_design_iterations": 2,
+  "max_stage3_rule_revisions": 1,
+  "offline_permitted_changes": [
+    "D versus H",
+    "RCD versus RCDS",
+    "proven registry correction",
+    "proven duplicate removal",
+    "reduced-cost sign/rounding/stale-state bug correction"
+  ],
+  "post_stage3_permitted_change": "switch only among frozen D/H and RCD/RCDS",
+  "post_stage4_change_allowed": false,
+  "schema": "round49-bounded-iteration-policy-v1"
+}

@@ -1,0 +1,27 @@
+{
+  "Gurobi": {
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0,
+    "PreCrush": "default",
+    "Presolve": "Auto",
+    "Seed": 0,
+    "Threads": 1,
+    "branching": "native/default"
+  },
+  "algorithm_preset": "paper-k1-am-sf",
+  "archive_scanning": false,
+  "dynamic_user_cut_callback": false,
+  "external_known_upper_bound": false,
+  "fixed_interval_backend": "F0-CLEAN",
+  "focus_only": false,
+  "imported_incumbent": false,
+  "one_optimizer_process_at_a_time": true,
+  "outer_controller": {
+    "K0": 1,
+    "split_point_rule": "midpoint",
+    "split_score_rule": "balanced-normalized-closure",
+    "tau": 0.08
+  },
+  "prior_result_interval_bounds": false,
+  "schema": "round56-official-solver-parameter-contract-v1"
+}

@@ -1,0 +1,41 @@
+{
+  "UTC": "2026-10-17T12:01:36.3978680Z",
+  "purpose": "Exact owned-path deletion preflight",
+  "scientific_commit": "4591de6834e8324ef0df9dfdd50e9fed88be1d45",
+  "pushed_review_head": "29684f8d105de2ad03059a627f22784ec62b2898",
+  "PR": 185,
+  "public_recovery_passed": true,
+  "related_processes_exited": true,
+  "historical_pids_all_absent": [
+    27084,
+    10204,
+    25236,
+    24548,
+    5512,
+    14732,
+    10804,
+    13124,
+    17300,
+    14984
+  ],
+  "candidate_plan": [
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round123\\public-export",
+      "files": 1,
+      "logical_bytes": 50595840,
+      "ownership": "Single hash-verified public export intermediate",
+      "no_reparse_points": true,
+      "absolute_root_verified": true
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\restore\\round123-4591de6834e8",
+      "files": 6408,
+      "logical_bytes": 374150289,
+      "ownership": "Original manifest plus exact successful checker additional-path inventory",
+      "no_reparse_points": true,
+      "absolute_root_verified": true
+    }
+  ],
+  "retained_recovery_receipts_and_outputs": "E:/codes/ExactEBRP-work/evidence/round123/public_recovery",
+  "no_force_or_old_directory_cleanup": true
+}

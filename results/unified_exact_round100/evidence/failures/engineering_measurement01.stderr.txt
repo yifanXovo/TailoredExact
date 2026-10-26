@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round100_measure.py", line 80, in <module>
+    if __name__=='__main__':main(sys.argv[1],sys.argv[2:])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round100_measure.py", line 39, in main
+    checkpoint_rows.append(dict(base,checkpoint_full_seconds=cp,covered=covered,**point,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: dict() got multiple values for keyword argument 'source'

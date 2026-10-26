@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round116\scripts\round116_campaign.py", line 99, in billed
+    supervised(l,i,arm_tick);finish_producer(l,arm_tick,armunix);verify(l,i)
+                                                                 ^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round116\scripts\round115_verify.py", line 24, in verify
+    value=adapter(l,read(d/'observations.json'),read(d/'completion.json'),i)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round116\scripts\round114_audit.py", line 241, in adapter
+    j=journal(root,l,d,observations);chain=return_chain(root,l,d,j,r,c)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round116\scripts\round114_audit.py", line 113, in return_chain
+    assert text.count('Optimize a model with ')==1,'unknown extra/unbound Optimize in call log'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: unknown extra/unbound Optimize in call log

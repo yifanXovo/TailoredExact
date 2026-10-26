@@ -1,0 +1,31 @@
+# Round134 review and submission readiness
+
+The manuscript is ready for formal advisor/coauthor review, subject to the explicitly listed bibliographic and data-provenance checks before submission. It contains a complete main argument, maintained model and algorithm appendices, a supplement with every final-panel observation, references, two figures, and an actually inspected 43-page PDF. This is a review-readiness judgment, not a claim of journal acceptance or a completed submission. Independent scientific integration, PDF inspection and later publication receipts have separate records.
+
+## Supported contribution
+
+The contribution is the complete S2 exact method for the stated redistribution problem: shared finite inventory/service states, links to physical routing and resource feasibility, valid objective strengthening, and scoped interval coverage with independent physical verification. Standard McCormick and value-disjunction tools are attributed. The problem model and startup descend from the supplied project implementation; the draft does not claim invention of either. Existing paid-start and root controls show that an initial fleet alone does not explain the whole observed method benefit; an independently substantial net effect of the outer controller is not established.
+
+The final implementation separates native-source qualification from an independent original-domain exact-zero proof. All 32 fixed final-version positions completed. S2 has 12/14 certificates, P 9/14 and PS 2/4. Normal positive certification and the actual split/child-target/cache path remain operational. One natural S2 observation retains rejected native evidence while certifying its own physically legal exact-zero fleet using the independent nonnegative floor. No historical rejected native source is retroactively upgraded.
+
+## Performance assessment
+
+The final panel preserves the demonstrated method advantages and gives no evidence of a broad regression across its six known roles. This conclusion is scoped to a targeted confirmation, not a new holdout or population-level statistical guarantee. S2/P has 12 favorable directions and 2 both-open comparisons. S2/PS has 2 certificate advantages and 2 certified-time losses. Both PS losses occur in the known X-35-B role, exceed the stated substantive-size threshold, and remain in the main interpretation: S2 takes about 17.606/18.277s versus PS 7.251/7.196s. K-35-U remains open at both Seeds; Seed0 has better P primal U but a better S2 lower bound, while Seed1 has both better S2 endpoints. A 35-station zero certificate is not evidence that all positive-objective 35-station runs close. R132 breadth, R133 repair checks and this final confirmation retain separate versions and denominators.
+
+All six within-instance weight points are numerically certified under the accepted engineering policy. K-15-S displays increasing Gini and decreasing average relative deviation as the weight rises; UC-B20-B displays a platform. The same-feasible-set slope and monotonicity statements include error-aware forms supported by accepted original-objective U/L bounds. They are not justified by primal feasibility tolerance, and the figure does not estimate a continuous efficient frontier between the measured points.
+
+## TC decision
+
+TC has an exact original-objective increment of 3/16 over the explicitly retained J2/J3 complete joint reference, old state penalty and full pairwise CDF/product controls. It closes 75% of the old 1/4 integrality gap, leaving 1/16. This is a result on these named references, not dominance over all historical dynamic programs, VD-J, Hall or lifted concave-epigraph closures. Both real-root three-layer comparisons are complete. TC adds no reliable numerical gain after the old state-penalty control; the old optimal vectors already satisfy it with slack. The finite investigation therefore stops, with no production TC mechanism and no additional roots or Seeds.
+
+## Journal account and minimal author work
+
+The strongest TRE account connects final inventory decisions, route prefixes, loaded returns and handling to an exact redistribution algorithm, then explains the measured effective-weight tradeoff through legal operations. The strongest EJOR account emphasizes the problem-specific inventory/service linkage, valid strengthening, proof coverage and complete-cost computational comparisons. See [submission_positioning.md](submission_positioning.md) for the checked primary scope sources and the limits of these judgments.
+
+Before submission, authors should (1) confirm whether there is an external same-problem heuristic/model paper and provide its exact author/title/DOI if applicable; (2) confirm original data/coordinate origins, synthetic inventory/target/weight generation and redistribution permissions; (3) resolve the named full-text formula/constraint comparisons in [literature_scope.md](literature_scope.md) only where stronger priority or equivalence claims are desired; and (4) supply author/affiliation/funding information and apply the chosen journal's then-current requirements. No author identity, unavailable paper content or data permission is invented. These are specific author checks, not requests for further native experiments.
+
+For a higher Operations Research positioning, this round supplies a narrow exact tiny-reference theorem and a finished evidentiary manuscript. The absent incremental real-root TC gain, positive-objective size limit, limited new-instance generalization and incomplete component attribution mean that the gap to a striking general model/theory/algorithm or measured practical-impact contribution is not substantially closed. Universal fastest time is not a requirement for either the present contribution or a stronger future one.
+
+## Reusable delivery
+
+The fixed scientific snapshot provides the finite current-round reproduction entry and source/transport manifests. Local read-only preflight, actual anonymous fixed-commit recovery, English stacked Draft PR status and final protected-asset checks are accepted only through their actual receipts; see [reproducibility.md](reproducibility.md) and the later completion audit. Delivery never recompiles, invokes Optimize or loads a vendor DLL.

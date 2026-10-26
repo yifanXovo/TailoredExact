@@ -1,0 +1,78 @@
+{
+  "schema": "round88-d7-ot-diagnostic-raw-index-v1",
+  "source_root": "results/unified_exact_round88/ot_d7_diagnostic_001",
+  "file_count": 13,
+  "uncompressed_bytes": 25231259,
+  "archive_path": "results/unified_exact_round88/runner_ot_d7_diagnostic_001_raw.tar.gz",
+  "archive_bytes": 3094297,
+  "archive_sha256": "629e810804ceedbc448f9368831700c508ef51c96f58cd7a13345d2f77076b30",
+  "archive_roundtrip_verified": true,
+  "all_original_files_preserved_in_place": true,
+  "files": [
+    {
+      "path": "diagnostic/aggregate.log",
+      "bytes": 1289,
+      "sha256": "2c237538e2865b6251aac36ff961e6f43c4f94b50d277c2549eb109eb617f772"
+    },
+    {
+      "path": "diagnostic/B1+B2.log",
+      "bytes": 1461,
+      "sha256": "6f65f7fb868c04d111cce5ead8398d642708d6db4e5855b32c53b64902e77b2c"
+    },
+    {
+      "path": "diagnostic/B1.log",
+      "bytes": 1347,
+      "sha256": "4f15a191748c92990d100edfe34af32d32fa0436ef06e5596d4cf1d94a2e0828"
+    },
+    {
+      "path": "diagnostic/B2.log",
+      "bytes": 1347,
+      "sha256": "d050165e7e62144378e05796be3e1e56e3790cbc02b9a1a688db5811e7b9156a"
+    },
+    {
+      "path": "diagnostic/base.log",
+      "bytes": 2208,
+      "sha256": "1530b440e70ce8909a0f323059618e40258fb06c4508960f3b96b0f1f0963c5c"
+    },
+    {
+      "path": "diagnostic/base_row_residuals.jsonl",
+      "bytes": 9628040,
+      "sha256": "e29992a4f0a5eb9c74ea0ae9c66f290bd85c10d0e268efc45d3f69d7d1394216"
+    },
+    {
+      "path": "diagnostic/diagnose_timing.json",
+      "bytes": 149,
+      "sha256": "ba821e3d06fda6dd5f69ad2f3413433d5735de8323b9678e52c3b2669e371720"
+    },
+    {
+      "path": "diagnostic/fixed_point_primal.json",
+      "bytes": 590275,
+      "sha256": "d23b0ef63c7c7aeb259846bc7fda207af24cef0a3bfda5dde71ed7d2af4b6b87"
+    },
+    {
+      "path": "diagnostic/fixed_point_rows.jsonl",
+      "bytes": 15000238,
+      "sha256": "f4f0efb37b97071fea157fc33bf139f0b6d2d2aa229d63ffaa533fb2e191a7b8"
+    },
+    {
+      "path": "diagnostic/result.json",
+      "bytes": 3930,
+      "sha256": "c4af54afd0c36e986e546fb1eee555e1b807cefc95d0c0af982b6f5a1a0e2253"
+    },
+    {
+      "path": "stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "supervision.json",
+      "bytes": 975,
+      "sha256": "824c0425d857518a22bebbadaef50f557c957ae3e4ec0b5b4964c71cae6f8555"
+    }
+  ]
+}

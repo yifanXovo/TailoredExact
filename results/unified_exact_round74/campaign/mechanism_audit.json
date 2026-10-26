@@ -1,0 +1,466 @@
+{
+  "all_checks_passed": true,
+  "arms": [
+    {
+      "arm": "P-GRB",
+      "wall_seconds": 1197.1089999997057,
+      "endpoint": {
+        "U": 0.27732086593398886,
+        "L": 0.1972864787145512,
+        "gap": 0.08003438721943765,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "phase_events": [],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "",
+          "lower_g": 0,
+          "upper_g": 0.98,
+          "cutoff": 0,
+          "model_sha256": "4cd7967ea4d65804e6ab7ae8913033454ba495766ff9eb03529bd935f6e0bace",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.27732086593398864,
+        "G": 0.09989121031469565,
+        "P": 1.1828643707952866,
+        "stations": 47,
+        "pickup": 209,
+        "drop": 209,
+        "maximum_duration": 17978.256445183477,
+        "original_T_feasible": true
+      }
+    },
+    {
+      "arm": "DS-X",
+      "wall_seconds": 1197.1099999998696,
+      "endpoint": {
+        "U": 0.29823122778993305,
+        "L": 0.20414629462573686,
+        "gap": 0.0940849331641962,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0028538000000000001",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "1199.9971462999999",
+          "work_deadline_remaining_seconds": "1196.9971462999999",
+          "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "9.9120375000000003",
+          "event": "decoded_descent_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "1190.0879626999999",
+          "work_deadline_remaining_seconds": "1187.0879625",
+          "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=24"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "9.9144077999999993",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "1190.0855922999999",
+          "work_deadline_remaining_seconds": "1187.0855922999999",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.544510590216379,
+          "cutoff": 0.544510590216379,
+          "model_sha256": "83ab63e874d8b75c76b2e8edce75588f2affdec3515849214336ad0e7ebc3adb",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.2722552951081895,
+          "cutoff": 0.544510590216379,
+          "model_sha256": "8848c26a4d15c42ea340f08858dd23983cc706e6a10d6491f92fbd444ae0c413",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.2722552951081895,
+          "upper_g": 0.544510590216379,
+          "cutoff": 0.544510590216379,
+          "model_sha256": "2c1190cd8aead573119e204e6ff5be37aa0349241b1d6481a1cf9ba419b87393",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.544510590216379,
+          "cutoff": 0.544510590216379,
+          "model_sha256": "83ab63e874d8b75c76b2e8edce75588f2affdec3515849214336ad0e7ebc3adb",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.29823122778993283,
+        "G": 0.09086768735767292,
+        "P": 1.382423602881733,
+        "stations": 47,
+        "pickup": 210,
+        "drop": 210,
+        "maximum_duration": 17952.562761289235,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.5445105902163795,
+        "G": 0.2273990839816184,
+        "P": 2.1140767082317407,
+        "stations": 39,
+        "pickup": 166,
+        "drop": 157,
+        "maximum_duration": 17919.266388280612,
+        "original_T_feasible": true,
+        "available_seconds": 9.969000000040978,
+        "sequence": 2
+      },
+      "descent": {
+        "completed_seeds": 24,
+        "passes": 371,
+        "decoded_checks": 2355,
+        "cross_route_checks": 298,
+        "accepted_cross_route": 178,
+        "extra_seed_checks": 0,
+        "extra_seed_moves": 0,
+        "extra_seed_cross_route_neighbors": 0,
+        "extra_seed_cross_route_checks": 0,
+        "extra_seed_cross_route_moves": 0
+      }
+    },
+    {
+      "arm": "JDS-X",
+      "wall_seconds": 1197.0779999997467,
+      "endpoint": {
+        "U": 0.3258015747725623,
+        "L": 0.2047706223798961,
+        "gap": 0.12103095239266617,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.051940800000000002",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "1199.9480592",
+          "work_deadline_remaining_seconds": "1196.9480592",
+          "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "10.258173299999999",
+          "event": "decoded_descent_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "1189.7418269",
+          "work_deadline_remaining_seconds": "1186.7418267",
+          "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=25"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "10.260358500000001",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "1189.7396415000001",
+          "work_deadline_remaining_seconds": "1186.7396415000001",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.38077368746245777,
+          "cutoff": 0.38077368746245777,
+          "model_sha256": "71f8b8dfe8a5702213da956811af69767269ba4ef39fdfc7fe5c3c1fe5bd64d5",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.19038684373122888,
+          "cutoff": 0.38077368746245777,
+          "model_sha256": "64cd59c7882db75224c485b43e02916db8cde913dd7c29c4eda04079a140af4c",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.19038684373122888,
+          "upper_g": 0.38077368746245777,
+          "cutoff": 0.38077368746245777,
+          "model_sha256": "9cb58405a9d08c89d6414d177f7a85c96b24c87447055a183b97060261db75bb",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.38077368746245777,
+          "cutoff": 0.38077368746245777,
+          "model_sha256": "71f8b8dfe8a5702213da956811af69767269ba4ef39fdfc7fe5c3c1fe5bd64d5",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.325801574772562,
+        "G": 0.11459013990565772,
+        "P": 1.4080762324460283,
+        "stations": 49,
+        "pickup": 213,
+        "drop": 213,
+        "maximum_duration": 17999.375336848483,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.3807736874624573,
+        "G": 0.13338764645209003,
+        "P": 1.649240273402449,
+        "stations": 46,
+        "pickup": 183,
+        "drop": 183,
+        "maximum_duration": 17985.801546637405,
+        "original_T_feasible": true,
+        "available_seconds": 10.32799999974668,
+        "sequence": 2
+      },
+      "descent": {
+        "completed_seeds": 25,
+        "passes": 374,
+        "decoded_checks": 2396,
+        "cross_route_checks": 298,
+        "accepted_cross_route": 178,
+        "extra_seed_checks": 41,
+        "extra_seed_moves": 2,
+        "extra_seed_cross_route_neighbors": 0,
+        "extra_seed_cross_route_checks": 0,
+        "extra_seed_cross_route_moves": 0
+      }
+    },
+    {
+      "arm": "K1-R",
+      "wall_seconds": 1197.1399999996647,
+      "endpoint": {
+        "U": 0.21564407531579505,
+        "L": 0.19772972251984766,
+        "gap": 0.017914352795947386,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      },
+      "phase_events": [
+        {
+          "sequence": "4",
+          "process_seconds": "0.0027780000000000001",
+          "event": "hga_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "1199.9972221",
+          "work_deadline_remaining_seconds": "1196.9972221",
+          "detail": "label=primary_hga;native_generation_stagnation_hga"
+        },
+        {
+          "sequence": "5",
+          "process_seconds": "598.04512709999995",
+          "event": "hga_generation_loop_complete",
+          "status": "complete",
+          "nominal_deadline_remaining_seconds": "601.95487309999999",
+          "work_deadline_remaining_seconds": "598.95487300000002",
+          "detail": "label=primary_hga;generations=2739;no_improve=2000"
+        },
+        {
+          "sequence": "7",
+          "process_seconds": "598.05792680000002",
+          "event": "exact_phase_start",
+          "status": "start",
+          "nominal_deadline_remaining_seconds": "601.94207319999998",
+          "work_deadline_remaining_seconds": "598.94207319999998",
+          "detail": "arm=round31-nonblocking-native-bound"
+        }
+      ],
+      "call_scopes": [
+        {
+          "call": 1,
+          "leaf": "L0",
+          "lower_g": 0,
+          "upper_g": 0.21564407531579505,
+          "cutoff": 0.21564407531579505,
+          "model_sha256": "f9469522f7aacde46496bf7affbb34193aa3f1765699f4efce12fe4fe3b1ff7e",
+          "native_preconditions": 0
+        },
+        {
+          "call": 2,
+          "leaf": "L0.0",
+          "lower_g": 0,
+          "upper_g": 0.10782203765789752,
+          "cutoff": 0.21564407531579505,
+          "model_sha256": "0dfe26cb63e08f2ce9ee5effaacd60184663a74bef86bb1dfe3b61183fc9bf75",
+          "native_preconditions": 0
+        },
+        {
+          "call": 3,
+          "leaf": "L0.1",
+          "lower_g": 0.10782203765789752,
+          "upper_g": 0.21564407531579505,
+          "cutoff": 0.21564407531579505,
+          "model_sha256": "de8248a827741217fcfedfc3ff1e2f0f1c5aa9e7bf8f742f84e58ae0b256cf06",
+          "native_preconditions": 0
+        },
+        {
+          "call": 4,
+          "leaf": "L0.0.0",
+          "lower_g": 0,
+          "upper_g": 0.05391101882894876,
+          "cutoff": 0.21564407531579505,
+          "model_sha256": "6c5f54b5f6c72dea0c32e737be79c815280c14b047cf1274d5e37d05a8d94f07",
+          "native_preconditions": 0
+        },
+        {
+          "call": 5,
+          "leaf": "L0.0.1",
+          "lower_g": 0.05391101882894876,
+          "upper_g": 0.10782203765789752,
+          "cutoff": 0.21564407531579505,
+          "model_sha256": "548611ca8cee2f86006eabae0cfcf639560101c77b0536a97563a94cbf6969e2",
+          "native_preconditions": 0
+        },
+        {
+          "call": 6,
+          "leaf": "L0.0.0",
+          "lower_g": 0,
+          "upper_g": 0.05391101882894876,
+          "cutoff": 0.21564407531579505,
+          "model_sha256": "6c5f54b5f6c72dea0c32e737be79c815280c14b047cf1274d5e37d05a8d94f07",
+          "native_preconditions": 1
+        }
+      ],
+      "endpoint_physical": {
+        "F": 0.21564407531579494,
+        "G": 0.03872267378877319,
+        "P": 1.179476010180145,
+        "stations": 50,
+        "pickup": 228,
+        "drop": 228,
+        "maximum_duration": 17975.490961810894,
+        "original_T_feasible": true
+      },
+      "startup": {
+        "F": 0.21564407531579494,
+        "G": 0.03872267378877319,
+        "P": 1.179476010180145,
+        "stations": 50,
+        "pickup": 228,
+        "drop": 228,
+        "maximum_duration": 17975.490961810894,
+        "original_T_feasible": true,
+        "available_seconds": 598.125,
+        "sequence": 2
+      }
+    }
+  ],
+  "start_decisions": [
+    {
+      "arm": "DS-X",
+      "call": 4,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round74\\campaign\\local_raw\\02_D7_DS-X\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "eba1bc16d25fe76f3c6c21675268c36571d7297af14ebcbc4dec526bd4c2f30f",
+      "witness_sha256": "b5a45c7fab5c103ed962775390b313d6d7f2dcc8487fcaf9ae5d9f1289732ad4",
+      "independent_actual_vector": {
+        "actual_columns": 25943,
+        "actual_rows": 104726,
+        "maximum_row_violation": 1.0830225605218402e-12,
+        "independent_mapping_maximum_difference": 1.509903313490213e-14,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 4.440892098500626e-16,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_0",
+      "leaf": "L0",
+      "model_sha256": "83ab63e874d8b75c76b2e8edce75588f2affdec3515849214336ad0e7ebc3adb",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 104726,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.544510590216379,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0346997,
+      "native_deadline_remaining_at_optimize": 1171.5804039
+    },
+    {
+      "arm": "JDS-X",
+      "call": 4,
+      "eligible": true,
+      "native_log_accepted": true,
+      "metadata": "results\\unified_exact_round74\\campaign\\local_raw\\03_D7_JDS-X\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+      "metadata_sha256": "69e61e5a398f9db1f4fec3723500196e510bd35df9d098eafa361b032d407042",
+      "witness_sha256": "d550be234564799dcf0d3ae978a5ebb53750ac068f840e2275d5c2eba40b1750",
+      "independent_actual_vector": {
+        "actual_columns": 25943,
+        "actual_rows": 104726,
+        "maximum_row_violation": 1.1102230246251565e-16,
+        "independent_mapping_maximum_difference": 1.4210854715202004e-14,
+        "readback_maximum_difference": 0.0,
+        "actual_objective_error": 4.440892098500626e-16,
+        "actual_full_vector_valid": true
+      },
+      "source": "round68_existing_0",
+      "leaf": "L0",
+      "model_sha256": "71f8b8dfe8a5702213da956811af69767269ba4ef39fdfc7fe5c3c1fe5bd64d5",
+      "retained_model": true,
+      "status": "accepted_by_native_log",
+      "mapping_complete": true,
+      "rows_valid": true,
+      "checked_rows": 104726,
+      "maximum_row_violation": 0,
+      "objective_valid": true,
+      "objective": 0.38077368746245777,
+      "submitted": true,
+      "readback_valid": true,
+      "exact_vector_observed_in_mipsol": true,
+      "integer_vector_observed_in_mipsol": true,
+      "mapping_validation_submission_seconds": 0.0340902,
+      "native_deadline_remaining_at_optimize": 1170.2864096
+    }
+  ],
+  "controls_checked": 2,
+  "first24_logical_paths_equal": true,
+  "actual_Start_decisions": 2,
+  "eligible_Starts": 2,
+  "native_accepted_Starts": 2,
+  "optimizer_calls": 0,
+  "wall_seconds": 4.061980600003153,
+  "script_sha256": "d787350f0599a2a60a40f1f53fab77ed4536206a93429e76529cc7a0ff56bf9a",
+  "mapping_sha256": "557009f3d5aae925fa5fce88322e2651d016981f53e11c1b8d85d8c340343400",
+  "scope": "Independent retained submitted/readback vectors and native acceptance logs. No causal speed attribution from acceptance alone; pending interrupted observer flags are not finalized."
+}

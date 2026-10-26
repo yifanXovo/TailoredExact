@@ -1,0 +1,42 @@
+{
+  "records": [
+    {
+      "revision": 1,
+      "ctest_passed": 46,
+      "native_start_fixture_calls": 3,
+      "real_cli_calls": 0,
+      "total_native_Optimize_calls": 3,
+      "test_log_sha256": "b38e82feedebca84b36405db8a3d64a17981b4bb34cda13cca7636b5d2ab5dbb",
+      "cli_artifacts": null
+    },
+    {
+      "revision": 2,
+      "ctest_passed": 47,
+      "native_start_fixture_calls": 3,
+      "real_cli_calls": 18,
+      "total_native_Optimize_calls": 21,
+      "test_log_sha256": "147b87a6172a49d6e9f80ec8936f8a285f35645942789b63654a1793d3520105",
+      "cli_artifacts": "E:\\codes\\ExactEBRP-round66\\build\\round70_v2\\round70_cli_7defaae99fed4c2f"
+    }
+  ],
+  "total_native_Optimize_calls": 24,
+  "scope": "Executed CTest native calls: Round68 fixture checks its runtime optimize_count==3; real CLI count independently matches retained native ledger. Other C++ tests have no native solver entry. Round24 factory occurs only in the non-Gurobi-build branch and does not solve.",
+  "native_entry_source_scan": [
+    {
+      "path": "tests\\round24_backend_tests.cpp",
+      "line": 430,
+      "source": "const auto backend=ebrp::makeGurobiFixedIntervalBackend(instance,defaults);"
+    },
+    {
+      "path": "tests\\round68_start_tests.cpp",
+      "line": 78,
+      "source": "auto backend=ebrp::makeGurobiFixedIntervalBackend(in,options);"
+    }
+  ],
+  "source_sha256": {
+    "tests\\round24_backend_tests.cpp": "ebe3d1ffdec987dcca641477ce30e0338098ad6eccdf31d3ce18197eddae8efd",
+    "tests\\round68_start_tests.cpp": "96a3dcd7f2ab36c7ec8eeb1768d6659f903dd99f26c9a8359fc4c862bf519ff9",
+    "tests\\round70_descent_cli_test.cmake": "0ad5f01dacc0a72c81575c4e7997af80667a051f7f28e5109d15e38a5ee75d65"
+  },
+  "new_optimizer_calls_for_this_audit": 0
+}

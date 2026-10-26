@@ -1,0 +1,56 @@
+{
+  "tests_passed": 50,
+  "tests_total": 51,
+  "failed_test": "Round73JointInsertionCliTests",
+  "failure": "round47_adaptive_mass_pure_c6_contract_mismatch",
+  "actual_native_calls": 39,
+  "failed_JI_native_calls": 0,
+  "structural_comparisons": 37,
+  "feasible_motifs": 2741,
+  "repair": "Admit the already isolated joint-insertion preset in the remaining AM startup guard",
+  "formal_diagnostics_launched": 0,
+  "manifest": [
+    {
+      "source": "build\\round73\\v1\\configure.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v1\\configure.log.gz",
+      "source_sha256": "7127611fb73fd1d9e766a20e09e9516b30f576ed74fdd259841ed1e4f014e844",
+      "sha256": "eedbd3d38db4b8bd6bd0983676db7212fff05898aeaac8a64111e51059f0c94d"
+    },
+    {
+      "source": "build\\round73\\v1\\build.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v1\\build.log.gz",
+      "source_sha256": "457e0783d37aedd5a9e19a6d453408f109715569f656a6442577a137950077f6",
+      "sha256": "8929ecebdc380861aff60ac12a320fcf90deb945bd02366b742c31c57d4fc388"
+    },
+    {
+      "source": "build\\round73\\v1\\tests.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v1\\tests.log.gz",
+      "source_sha256": "817c133f6d297581b77d1f06bd0e42baba82762a685f9057fb32995fe234e710",
+      "sha256": "e54d5b1f9a4f02bf941429e30c621fbad3e126e62d0cb41060369e2531de92ab"
+    },
+    {
+      "source": "build\\round73\\v1\\round73_cli_cbe6258f4c04a19e\\hga.csv.joint.csv",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v1\\hga.csv.joint.csv.gz",
+      "source_sha256": "6d6f39aa205923c72250e029f879cc4dbeff120b7df26a93c2c60135c64ea042",
+      "sha256": "d1edc7a8dc718e846b432da8ddd39d9b122a45c5ff30eae9424d762f0c53b867"
+    },
+    {
+      "source": "build\\round73\\v1\\round73_cli_cbe6258f4c04a19e\\result.json",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v1\\result.json.gz",
+      "source_sha256": "728c9c88f9a29a9a2d273bc3eecdcbc41ade21084a563b2ea4ec9ec3ac18cfa3",
+      "sha256": "3f6b97ec9f9e14021cc20170c02ce5f79dc45181115261ff47164661cd9aab32"
+    },
+    {
+      "source": "build\\round73\\v1\\round73_cli_cbe6258f4c04a19e\\stderr.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v1\\stderr.log.gz",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "source": "build\\round73\\v1\\round73_cli_cbe6258f4c04a19e\\stdout.log",
+      "artifact": "results\\unified_exact_round73\\qualification_failures\\v1\\stdout.log.gz",
+      "source_sha256": "0175bd745089e645775286f7d3fc014b07772fb9ce6a1bfc5f4ea251a304dca6",
+      "sha256": "bad0daba6f209a70d2f745a4027aed4d9bc6af069c545d449e8d68c87a16c638"
+    }
+  ]
+}

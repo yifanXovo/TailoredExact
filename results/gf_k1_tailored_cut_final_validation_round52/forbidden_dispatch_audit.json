@@ -1,0 +1,36 @@
+{
+  "schema": "round52-forbidden-dispatch-audit-v1",
+  "status": "pass",
+  "audited_dispatch_inputs": [
+    "instance_name",
+    "path",
+    "seed",
+    "V",
+    "M",
+    "Q",
+    "difficulty_label",
+    "panel_membership",
+    "historical_winner",
+    "elapsed_time",
+    "Work",
+    "node_count",
+    "memory",
+    "hardware"
+  ],
+  "policy_dispatch_matches": 0,
+  "policy_identity_source": "explicit named Round50 interval-MIP policy only",
+  "candidate_policy": "f3-sd-r3-root-blockmax",
+  "final_policy": "interval-mip-v0",
+  "structural_instance_data_use": "V/M/Q and instance arrays are used only to construct globally valid rows, never to choose a policy",
+  "source_audit": [
+    "src/Round50IntervalMip.cpp: named policy parser",
+    "src/GurobiBaseline.cpp: callback activation/scope from parsed named policy",
+    "src/Round52TailoredCuts.cpp: solver-independent structural separation",
+    "scripts/run_round52_fixed_interval_panel.py: one predeclared policy per arm",
+    "scripts/run_round52_final_panel.py: one frozen policy per method"
+  ],
+  "final_panel_rows_with_instance_specific_algorithm_dispatch": 0,
+  "forbidden_mechanisms_enabled_in_final_backend": 0,
+  "lazy_constraints_used": false,
+  "base_feasibility_constraints_removed": 0
+}

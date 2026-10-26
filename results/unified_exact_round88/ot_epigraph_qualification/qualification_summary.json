@@ -1,0 +1,84 @@
+{
+  "completed_stages": 5,
+  "outer_qualifier_elapsed_seconds_so_far": 4.137852999847382,
+  "outer_qualifier_wall_seconds": 4.1380759999156,
+  "real_source_optimize_calls": 0,
+  "schema": "round88-ot-epigraph-qualification-summary-v1",
+  "stages": [
+    {
+      "command": [
+        "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+        "E:\\codes\\ExactEBRP\\tests\\round88_ot_epigraph_test.py"
+      ],
+      "external_launch_to_exit_wall_seconds": 0.3272458999417722,
+      "returncode": 0,
+      "scope": "Full stage command outside wall; nested stage timings are not additive",
+      "stage": "micro",
+      "stderr_sha256": "e45031b42cb70906b3d7bb5521c9565b64dbadd4d9d13a5b895e3d15f85f0f2a",
+      "stdout_sha256": "0f619f005165e695a71a522589ee93dc073d94d00c88cabe4a493fb1591191ad"
+    },
+    {
+      "command": [
+        "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+        "E:\\codes\\ExactEBRP\\scripts\\round88_ot_epigraph_qualify.py",
+        "toy",
+        "--out-dir",
+        "results\\unified_exact_round88\\ot_epigraph_qualification\\toy"
+      ],
+      "external_launch_to_exit_wall_seconds": 0.12730129994452,
+      "returncode": 0,
+      "scope": "Full stage command outside wall; nested stage timings are not additive",
+      "stage": "toy",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "1335a65e4a1cc8ce93d88825e2379a17ce6908df941b4ab37af662514fb0792f"
+    },
+    {
+      "command": [
+        "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+        "E:\\codes\\ExactEBRP\\scripts\\round88_ot_epigraph_qualify.py",
+        "job",
+        "--out-dir",
+        "results\\unified_exact_round88\\ot_epigraph_qualification\\job"
+      ],
+      "external_launch_to_exit_wall_seconds": 0.44332379987463355,
+      "returncode": 0,
+      "scope": "Full stage command outside wall; nested stage timings are not additive",
+      "stage": "job",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+        "E:\\codes\\ExactEBRP\\scripts\\round88_ot_epigraph_qualify.py",
+        "audit",
+        "--out-dir",
+        "results\\unified_exact_round88\\ot_epigraph_qualification\\source_audit"
+      ],
+      "external_launch_to_exit_wall_seconds": 2.969013199675828,
+      "returncode": 0,
+      "scope": "Full stage command outside wall; nested stage timings are not additive",
+      "stage": "audit",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+        "E:\\codes\\ExactEBRP\\scripts\\round88_ot_epigraph.py",
+        "prepare-supervise",
+        "--out-dir",
+        "results\\unified_exact_round88\\ot_epigraph_qualification\\preparation"
+      ],
+      "external_launch_to_exit_wall_seconds": 0.25025520008057356,
+      "returncode": 0,
+      "scope": "Full stage command outside wall; nested stage timings are not additive",
+      "stage": "prepare",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "status": "qualification_stages_completed_pending_independent_review",
+  "sum_external_stage_command_wall_seconds": 4.1171393995173275,
+  "toy_optimize_calls": 2
+}

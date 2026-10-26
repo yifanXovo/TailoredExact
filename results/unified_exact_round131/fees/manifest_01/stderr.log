@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\round131\scripts\round131_release.py", line 79, in <module>
+    {'pack':pack,'manifest':manifest,'restore':restore}[action]()
+  File "E:\codes\ExactEBRP-work\worktrees\round131\scripts\round131_release.py", line 50, in manifest
+    assert p.is_file(),str(p);scanned+=scan(p)
+           ^^^^^^^^^^^
+AssertionError: E:\codes\ExactEBRP-work\worktrees\round131\results\unified_exact_round128\source_fix_scope.md

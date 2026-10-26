@@ -1,0 +1,97 @@
+{
+  "phase": "real structure qualification",
+  "roles": [
+    {
+      "id": "F2",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds": 3600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 300,
+      "method_order": [
+        "IR-FULL"
+      ],
+      "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "M": 2,
+      "V": 20,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "historical_initial_witness": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/initial_witness.json",
+      "historical_initial_witness_sha256": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02",
+      "diagnostic_cutoff": 0.885348300934578,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.885348300934578,
+      "question": "Complete certification-scale self-paid finite-pool ACTIVE and full SHADOW cost, contemporary protected ENS and principal compact P"
+    },
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "geometry": "radial_spokes",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 600,
+      "method_order": [
+        "IR-FULL"
+      ],
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "instance_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 554,
+      "total_target": 600,
+      "zero_excluded_by_stock_shortage": true,
+      "question": "Complete medium no-hit and activation roles; protect actual P/ENS position, quality and all preparation costs."
+    },
+    {
+      "id": "F5",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+      "family": "synthetic",
+      "geography": "perturbed_grid",
+      "inventory": "paired_shortage",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "complete_Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "source_manifest": "results/unified_exact_round86/protocol.json",
+      "method_order": [
+        "IR-FULL"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 600,
+      "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "question": "read-only first/last observable native root and positive-node vectors on original ENS"
+    }
+  ],
+  "performance_claim": false,
+  "no_per_car_production_caps": true
+}

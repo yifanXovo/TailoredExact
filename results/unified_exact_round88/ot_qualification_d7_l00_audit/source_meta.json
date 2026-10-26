@@ -1,0 +1,55 @@
+{
+  "status": "zero_optimize_audit_passed_prepared_only",
+  "role": "D7_ENS-C_L0.0",
+  "historical_scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+  "historical_status": "incomplete_external_tree_time_limit",
+  "historical_node": {
+    "leaf_id": "L0.0",
+    "parent_id": "L0",
+    "depth": 1,
+    "gamma_l_ledger": "0",
+    "gamma_u_ledger": "0.14572448675212263",
+    "gamma_l_actual_lp": "0",
+    "gamma_u_actual_lp": "0.14572448675212263",
+    "lp_status": "OPTIMAL",
+    "historical_lp_bound": 0.18593747661188215,
+    "historical_scope": "speculative_child_lp_optimal; split rejected for no strict child improvement; parent coverage retained; not a final paper_leaf_ledger row",
+    "evidence": [
+      "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/lp_status_ledger.csv",
+      "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/parent_child_bound_ledger.csv",
+      "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/c6_split_decision_ledger.csv",
+      "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/global_bound_trace.csv",
+      "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/paper_optimize_ledger.csv"
+    ]
+  },
+  "model": {
+    "path": "E:/codes/ExactEBRP-round87-runtime/campaign/local_raw/03_D7_ENS-C/external/models/L0.0.lp",
+    "sha256": "27cbb486939374c3f42eb7f1e97cd6ed20281b114115118c89434fa00e85c77f",
+    "bytes": 16915124,
+    "package_index": "results/unified_exact_round87/package_index.json",
+    "package_index_sha_matches": true,
+    "cutoff_actual_lp_row": "c6128",
+    "cutoff_actual_lp_rhs": "0.29144897350424526",
+    "later_final_verified_ub_not_used_as_cutoff": 0.2235315457737183
+  },
+  "input": {
+    "path": "C:/Users/Administrator/.codex/worktrees/round87-ensc-pgrb-long-convergence/ExactEBRP/reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+    "sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+    "scenario_source": "results/unified_exact_round87/protocol.json",
+    "T_seconds": 18000,
+    "lambda": 0.15,
+    "pickup_seconds": 60,
+    "drop_seconds": 60
+  },
+  "audit_manifest": "results/unified_exact_round88/ot_qualification_d7_l00_audit/manifest.json",
+  "audit_manifest_sha256": "e73e08318afe65d9c4d145f2dd8efe8732783b11e0628f347434b4093c2f09fd",
+  "audit_structure": {
+    "variables": 25943,
+    "constraints": 104726,
+    "nonzeros": 724951,
+    "required_rows_verified": 5616,
+    "support_fingerprint": "b8912b72618ceb976cd964c3d8213c5a17ca901d4d3f7e0f2a5880b2c5c90b98",
+    "audit_wall_seconds_through_manifest_write": 1.2636569999158382
+  },
+  "optimize_invocations_for_this_preparation": 0
+}

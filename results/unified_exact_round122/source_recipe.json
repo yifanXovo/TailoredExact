@@ -1,0 +1,425 @@
+{
+  "round": 122,
+  "base": "65c5aaa56583bcddf9baeae7392bd94baaed9396",
+  "UTC": "2026-10-15T20:42:38.119765+00:00",
+  "sources": {
+    "CITI": {
+      "identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "table_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "rows": 443,
+      "qualified": 442
+    },
+    "CABI": {
+      "identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "table_SHA": "d982051e5871c575ecdf9df538605401bd98341ae9b3b48112482eff80d42ffa",
+      "rows": 865,
+      "qualified": 865
+    }
+  },
+  "families": {
+    "CITI": "round122-paper-benchmark-v1|source=CITI|source_sha256=9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "CABI": "round122-paper-benchmark-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8"
+  },
+  "roles": [
+    {
+      "id": "PB-C20-B",
+      "source": "CITI",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "balanced",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "selection_id": "citi_r122_V20_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "id": "PB-B20-S",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 900,
+      "selection_id": "cabi_r122_V20_regional_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "id": "PB-C35-U",
+      "source": "CITI",
+      "V": 35,
+      "M": 3,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "surplus",
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 2400,
+      "selection_id": "citi_r122_V35_regional_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "id": "PB-B35-B",
+      "source": "CABI",
+      "V": 35,
+      "M": 3,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        25,
+        25,
+        25
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 2400,
+      "selection_id": "cabi_r122_V35_compact_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "id": "PB-C50-S",
+      "source": "CITI",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "citi_r122_V50_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    },
+    {
+      "id": "PB-B50-U",
+      "source": "CABI",
+      "V": 50,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r122_V50_regional_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0"
+    }
+  ],
+  "full_fixed_running_table": [
+    {
+      "id": "PB-C20-B",
+      "source": "CITI",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "balanced",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 900,
+      "selection_id": "citi_r122_V20_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "group_number": 1,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "M-B",
+        "MB-D1"
+      ]
+    },
+    {
+      "id": "PB-B20-S",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "shortage",
+      "Q_vector": [
+        20,
+        40
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 900,
+      "selection_id": "cabi_r122_V20_regional_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "group_number": 2,
+      "method_order": [
+        "ENS-C",
+        "M-B",
+        "MB-D1",
+        "P-GRB"
+      ]
+    },
+    {
+      "id": "PB-C35-U",
+      "source": "CITI",
+      "V": 35,
+      "M": 3,
+      "geometry": "regional",
+      "replicate": 1,
+      "inventory": "surplus",
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 2400,
+      "selection_id": "citi_r122_V35_regional_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "group_number": 3,
+      "method_order": [
+        "M-B",
+        "MB-D1",
+        "P-GRB",
+        "ENS-C"
+      ]
+    },
+    {
+      "id": "PB-B35-B",
+      "source": "CABI",
+      "V": 35,
+      "M": 3,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        25,
+        25,
+        25
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 2400,
+      "selection_id": "cabi_r122_V35_compact_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "group_number": 4,
+      "method_order": [
+        "MB-D1",
+        "P-GRB",
+        "ENS-C",
+        "M-B"
+      ]
+    },
+    {
+      "id": "PB-C50-S",
+      "source": "CITI",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "citi_r122_V50_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "group_number": 5,
+      "method_order": [
+        "MB-D1",
+        "M-B",
+        "ENS-C",
+        "P-GRB"
+      ]
+    },
+    {
+      "id": "PB-B50-U",
+      "source": "CABI",
+      "V": 50,
+      "M": 4,
+      "geometry": "regional",
+      "replicate": 2,
+      "inventory": "surplus",
+      "Q_vector": [
+        20,
+        25,
+        35,
+        40
+      ],
+      "T_seconds": 18000,
+      "cap_seconds": 3600,
+      "selection_id": "cabi_r122_V50_regional_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "new_problem_Seed0",
+      "group_number": 6,
+      "method_order": [
+        "P-GRB",
+        "MB-D1",
+        "M-B",
+        "ENS-C"
+      ]
+    },
+    {
+      "id": "PB-B35-B",
+      "source": "CABI",
+      "V": 35,
+      "M": 3,
+      "geometry": "compact",
+      "replicate": 2,
+      "inventory": "balanced",
+      "Q_vector": [
+        25,
+        25,
+        25
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 2400,
+      "selection_id": "cabi_r122_V35_compact_r2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 1,
+      "panel_kind": "fixed_input_Seed1_sensitivity",
+      "group_number": 7,
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "MB-D1",
+        "M-B"
+      ]
+    },
+    {
+      "id": "PB-C50-S",
+      "source": "CITI",
+      "V": 50,
+      "M": 4,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 10800,
+      "cap_seconds": 3600,
+      "selection_id": "citi_r122_V50_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 1,
+      "panel_kind": "fixed_input_Seed1_sensitivity",
+      "group_number": 8,
+      "method_order": [
+        "M-B",
+        "ENS-C",
+        "P-GRB",
+        "MB-D1"
+      ]
+    }
+  ],
+  "generation_dependencies": {
+    "scripts/round122_data.py": "273efa690ade7097e4a3278b2d06837b86e5f19bf705286f152dc4ffced6645b",
+    "scripts/round118_data.py": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+    "scripts/round109_data.py": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+    "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+  },
+  "source_loader": "CITI R109 load (C++/R57 row semantics); CABI R118 source_check only, no wrapper configure",
+  "four_original_anchors_hash_order_ties": true,
+  "target_fraction": [
+    0.44,
+    0.56
+  ],
+  "coordinates_decimals": 3,
+  "weights_decimals": 6,
+  "delta": "max(V,floor(.12*sum(D)+.5))",
+  "local_perturbation": {
+    "balanced": 0.18,
+    "other": 0.3
+  },
+  "original_total_correction_sign_repair_max_normalization_and_centroid": true,
+  "only_instance_first_line_replaced_by_actual_Q_vector": true,
+  "generated_input_count": 0,
+  "no_network_or_reprojection": true,
+  "no_difficulty_filter": true,
+  "no_redraw": true,
+  "formal_arms": 32,
+  "formal_pairs": 48,
+  "nominal_seconds": 79200,
+  "management_reference": 960,
+  "total_limit_seconds": 100000,
+  "qualification_soft_seconds": 3000,
+  "qualification_authorized_seconds": 6000,
+  "no_V60_V100_or_additional_research_input": true
+}

@@ -1,0 +1,53 @@
+{
+  "version": "round106-structural-candidate-confirmation-v1",
+  "roles": [
+    {
+      "id": "N36",
+      "V": 36,
+      "M": 3,
+      "Q_vector": [
+        24,
+        30,
+        36
+      ],
+      "geometry": "three_clusters",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 5400
+    },
+    {
+      "id": "S12",
+      "V": 12,
+      "M": 2,
+      "Q_vector": [
+        8,
+        12
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "surplus",
+      "T_seconds": 3600,
+      "cap_seconds": 900
+    }
+  ],
+  "seed": "SHA256(version|id|field), first8 bytes /2^64",
+  "generator_SHA": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+  "writer_SHA": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
+  "source_SHA": "b713cc86b17c4ba9d0b4c12acfbdae2390fef4a984a8872fe3b2eb1eac163a11",
+  "retained_tail": {
+    "id": "F5",
+    "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+    "V": 50,
+    "M": 4,
+    "Q_vector": [
+      30,
+      30,
+      30,
+      30
+    ],
+    "T_seconds": 7200,
+    "cap_seconds": 5400
+  },
+  "no_reseed_replace_resize_or_T_adjustment": true,
+  "Optimize_calls": 0,
+  "generated_before_development_feedback": true
+}

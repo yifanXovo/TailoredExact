@@ -1,0 +1,54 @@
+{
+  "schema": "round54-separator-root-closure-protocol-v1",
+  "separator": "exact deterministic source-sink min-cut or maximum closure",
+  "subset_enumeration": false,
+  "heuristic_sampling": false,
+  "depot_fixed_outside": true,
+  "deterministic_tie_breaking": true,
+  "returns": [
+    "most violated inbound",
+    "most violated outbound"
+  ],
+  "direct_recomputation_required": true,
+  "tolerance": {
+    "source": "certificate tolerance",
+    "value": 1e-07,
+    "fitted_threshold": false
+  },
+  "cut_record": [
+    "subset",
+    "direction",
+    "raw/scaled violation",
+    "coefficients",
+    "RHS",
+    "min-cut objective",
+    "direct objective",
+    "canonical signature",
+    "scope"
+  ],
+  "root_closure": [
+    "build F0-CLEAN continuous relaxation",
+    "solve LP",
+    "separate exact inbound/outbound cuts",
+    "reject nonviolated/duplicate/dominated cuts",
+    "add selected cuts and reoptimize",
+    "repeat to no strict violation or LP infeasibility",
+    "restore/rebuild integer model",
+    "add accepted pool",
+    "terminal MIP with callback off/default PreCrush/native branching"
+  ],
+  "performance_based_loop_stop": false,
+  "safety_failures": [
+    "repeated canonical cut",
+    "nondecreasing violation from numerical inconsistency",
+    "invalid min-cut reconstruction",
+    "nonfinite LP result"
+  ],
+  "safety_failure_action": "candidate invalid; exact F0 fallback; fallback is not supporting evidence",
+  "end_to_end_accounting": true,
+  "LP_evidence_reuse_requires": [
+    "complete fingerprint match",
+    "same interval",
+    "same incumbent epoch"
+  ]
+}

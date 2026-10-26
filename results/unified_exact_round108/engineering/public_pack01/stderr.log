@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round108\scripts\round108_public.py", line 161, in <module>
+    if a.operation=='pack':pack(a.root)
+                           ^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round108\scripts\round108_public.py", line 112, in pack
+    assert value['archive_bytes']<95*1024*1024,'Actual carrier too large: preserve and explicitly prepare exact parts'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Actual carrier too large: preserve and explicitly prepare exact parts

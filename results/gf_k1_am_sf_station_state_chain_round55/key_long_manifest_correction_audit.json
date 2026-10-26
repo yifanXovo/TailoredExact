@@ -1,0 +1,16 @@
+{
+  "schema": "round55-key-long-manifest-correction-audit-v1",
+  "classification": "evidence-only defect",
+  "defect": "The Stage 0 key-long freeze named the two scale instances but omitted their fixed-interval endpoints and verified cutoffs.",
+  "detected_after_confirmation_extension": true,
+  "detected_before_key_long_results": true,
+  "repair": "Resolve each already-frozen instance to the stable K1-AM-SF root interval using a verifier-passed incumbent under the final executable, then freeze the exact command inputs in key_long_execution_manifest.json.",
+  "result_independent": true,
+  "algorithm_changed": false,
+  "formulation_changed": false,
+  "leader_changed": false,
+  "state_role_changed": false,
+  "rerun_requirement": "No completed result is affected; the key-long stage had not opened.",
+  "raw_preparation_location": "results/gf_k1_am_sf_station_state_chain_round55/tmp/key_long_root_preparation",
+  "raw_preparation_is_local_only": true
+}

@@ -1,0 +1,153 @@
+{
+  "records": [
+    {
+      "path": "results/unified_exact_round119/engineering/build01.json",
+      "SHA": "23669939505bcee97ca911f012faea7d7c403dd2afc640e6767bd7937b44ee1e",
+      "record": {
+        "exit_code": 0,
+        "seconds": 126.4712592,
+        "Optimize": 0,
+        "native_starts": 0,
+        "serial": true,
+        "kind": "build"
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/build02.json",
+      "SHA": "d812ef1c867bbc94d242af99c8feb7c546c828217107e2ee8bc48bcc8ce9bc11",
+      "record": {
+        "exit_code": 1,
+        "native_starts": 0,
+        "kind": "build",
+        "serial": true,
+        "Optimize": 0,
+        "seconds": 1.9445741
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/build03.json",
+      "SHA": "91038f5bfbf4a24fcbda605ec01d1bcf6e7420f9e381c0e4d91e963a435bef4b",
+      "record": {
+        "serial": true,
+        "Optimize": 0,
+        "seconds": 2.7560876,
+        "native_starts": 0,
+        "kind": "build",
+        "exit_code": 0
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/build04.json",
+      "SHA": "1358c6ffaf391862bb621a31e43babc7cfea1e491a6894b6de6471d108a1fb47",
+      "record": {
+        "exit_code": 0,
+        "Optimize": 0,
+        "seconds": 9.3007856,
+        "kind": "build",
+        "native_starts": 0,
+        "serial": true
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/build05.json",
+      "SHA": "a2823e29b74b567922b4b067e06044645b1f87a1e275b1ceb978983c21b0d121",
+      "record": {
+        "exit_code": 0,
+        "seconds": 10.5974689,
+        "Optimize": 0,
+        "kind": "build",
+        "serial": true,
+        "native_starts": 0
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/build06.json",
+      "SHA": "49e7fc5caee180900c3a8ffdf0b69934d7b790631c16287d8edfb093ec9af0e3",
+      "record": {
+        "seconds": 2.8957178,
+        "serial": true,
+        "kind": "build",
+        "exit_code": 0,
+        "Optimize": 0,
+        "native_starts": 0
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/configure01.json",
+      "SHA": "6e2b0912b4025e85194ec04fbcf438c6107258bbab41f863e82fa32f39255d63",
+      "record": {
+        "exit_code": null,
+        "kind": "configure",
+        "configuration_unchanged": true,
+        "Optimize": 0,
+        "native_starts": 0,
+        "seconds": 0.0654511
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/configure02.json",
+      "SHA": "c3b2ad63271e16bb0b0d3ef9b24d53add7508cbb88102896eda266fdbc4a7d05",
+      "record": {
+        "exit_code": 0,
+        "native_starts": 0,
+        "Optimize": 0,
+        "kind": "configure",
+        "seconds": 3.5234457
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/lifecycle_build02_receipt.json",
+      "SHA": "0ce462c3f18e403b3c7f82ba95c4b6802efed78f1fac8e586ac974e015e2ab15",
+      "record": {
+        "exit_code": 0,
+        "seconds": 1.7090297,
+        "Optimize": 0,
+        "production_PE_relinked": false
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/lifecycle_build_receipt.json",
+      "SHA": "9c0869b1904835e07c01fdf69c876fdce0217dc4574fed629f59ee6b6d63399b",
+      "record": {
+        "exit_code": 1,
+        "seconds": 2.5018734,
+        "Optimize": 0,
+        "production_PE_relinked": false
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/report_receipt.json",
+      "SHA": "aee0f029f7b1afb0e4bce809dbb39489b6dc8e9fb07ff7f4024732c1c89aab84",
+      "record": {
+        "seconds": 0.5103739000005589,
+        "Optimize": 0,
+        "native_starts": 0,
+        "stage": "STOP_TESTED_CONFIGURATION"
+      }
+    },
+    {
+      "path": "results/unified_exact_round119/engineering/source_staged_scan.json",
+      "SHA": "f4f7f285a70d0cd867ffb8423e3de2eb8da4291efc7cc38092bbaba2bb60d281",
+      "record": {
+        "tool_version": "round117-publication-security-v1",
+        "passed": true,
+        "files": 21,
+        "archive_members": 0,
+        "bytes_scanned": 2145738,
+        "archives": [],
+        "findings": [],
+        "errors": [],
+        "raw_values_emitted": false,
+        "network_requests": 0,
+        "native_starts": 0,
+        "Optimize": 0,
+        "engineering_seconds": 1.7834746000589803
+      }
+    }
+  ],
+  "failed_builds_retained": true,
+  "human_seconds": "unknown",
+  "other_unmeasured_file_preparation_seconds": "unknown",
+  "compiler_or_pack_or_pure_math_cost_not_native_solver_fee": true,
+  "Optimize": 0
+}

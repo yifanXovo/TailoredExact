@@ -1,0 +1,37 @@
+{
+  "allowed": [
+    "interval endpoints",
+    "verified incumbent U",
+    "valid parent and descendant lower bounds",
+    "valid infeasibility and optimality statuses",
+    "model-derived interval geometry",
+    "fixed K0",
+    "fixed d",
+    "fixed rho",
+    "certificate tolerance"
+  ],
+  "decision_hash_excludes_telemetry": true,
+  "forbidden": [
+    "instance filename",
+    "instance ID",
+    "generation seed",
+    "V",
+    "M",
+    "Q",
+    "scenario label",
+    "difficulty stratum",
+    "historical winner",
+    "elapsed seconds",
+    "Gurobi Work",
+    "processed nodes",
+    "simplex iterations",
+    "barrier iterations",
+    "memory",
+    "hardware identifier",
+    "leaf effort",
+    "historical classifier",
+    "known regression lookup table"
+  ],
+  "schema": "round43-forbidden-decision-inputs-v1",
+  "source_level_audit_required": true
+}

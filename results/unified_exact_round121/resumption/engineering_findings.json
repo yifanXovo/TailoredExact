@@ -1,0 +1,35 @@
+{
+  "UTC": "2026-10-15T07:44:13.463391+00:00",
+  "scope": "pre-native resumed audit wiring; not a numerical source-proof contradiction",
+  "findings": [
+    {
+      "id": "supervisor_failure_cleanup",
+      "observed": "Independent fake-child check identified kill exception could bypass wait before supervisor owns child",
+      "repair": "try kill finally wait",
+      "native_starts": 0
+    },
+    {
+      "id": "old_producer_new_protocol_mismatch",
+      "observed": "Real existing P full verify passed but item hit unchanged endpoint saved-prereg equality",
+      "repair": "strict actual producer provenance identity for preserved P/MB, separate final auditor identity and receipts",
+      "native_starts": 0
+    },
+    {
+      "id": "auditor_object_not_bound",
+      "observed": "Pure wrong-current-prereg negative fixture was accepted by initial provenance helper",
+      "repair": "exact current auditor object/file plus protocol/authorization/original-producer/candidate SHA equality; wrong identity rejected",
+      "native_starts": 0
+    },
+    {
+      "id": "reviewer_serialization_assumption",
+      "observed": "Reviewer initial old-protocol byte comparison assumed a newline/serialization form",
+      "repair": "read exact preserved SHA and semantic authorized delta independently; no raw/source change",
+      "native_starts": 0
+    }
+  ],
+  "current_candidate_SHA": "c212da0d20c553b17bac0d9ce778793ba235dad03cdecdadb8da17042b92e9b7",
+  "old_original_raw_or_fee_modified": false,
+  "production_algorithm_changed": false,
+  "no_real_native_retries": true,
+  "engineering_time": "scoped precontract/fixture receipts; total human time unknown"
+}

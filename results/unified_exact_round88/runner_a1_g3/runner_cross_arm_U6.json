@@ -1,0 +1,32 @@
+{
+  "schema": "round88-a1-g3-cross-arm-v1",
+  "id": "U6",
+  "arms": [
+    {
+      "arm": "P-GRB",
+      "strongest_same_arm_global_L": 0.12514525983992003,
+      "minimum_same_arm_physical_U": 0.21407703935595196,
+      "physically_verified_witness_rows": 139,
+      "final_physical_verification_present": true
+    },
+    {
+      "arm": "ENS-C",
+      "strongest_same_arm_global_L": 0.12905844168500294,
+      "minimum_same_arm_physical_U": 0.15142092391739326,
+      "physically_verified_witness_rows": 18,
+      "final_physical_verification_present": true
+    },
+    {
+      "arm": "A1",
+      "strongest_same_arm_global_L": 0.13104882774065976,
+      "minimum_same_arm_physical_U": 0.16201650377553967,
+      "physically_verified_witness_rows": 21,
+      "final_physical_verification_present": true
+    }
+  ],
+  "strongest_global_L": 0.13104882774065976,
+  "minimum_physical_U": 0.15142092391739326,
+  "tolerance": 1e-07,
+  "passed": true,
+  "scope": "Offline original-problem contradiction check, not a combined algorithm endpoint"
+}

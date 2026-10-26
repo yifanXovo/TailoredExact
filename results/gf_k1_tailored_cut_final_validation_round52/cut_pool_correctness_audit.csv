@@ -1,0 +1,13 @@
+audit_id,property,fixture,expected,observed,status
+P01,normalization_order_invariance,"same row, reversed coefficients",same canonical signature,same canonical signature,pass
+P02,duplicate_rejection,"same normalized row twice in one batch",one eligible row,one eligible row,pass
+P03,global_pool_membership,"successful submission then membership query",present,present,pass
+P04,global_pool_duplicate_rejection,"resubmit pooled signature",rejected,rejected,pass
+P05,exact_dominance,"same normalized LHS with tighter RHS",weaker row rejected,weaker row rejected,pass
+P06,dominance_scope,"different normalized LHS",no dominance,no dominance,pass
+P07,deterministic_block_selection,"multiple violated rows in two vehicle blocks",one maximum per vehicle,one maximum per vehicle,pass
+P08,family_accounting,"generated/violated/selected/added lifecycle",monotone exact counters,monotone exact counters,pass
+P09,vehicle_accounting,"selected candidates in vehicle blocks",per-vehicle counter incremented,per-vehicle counter incremented,pass
+P10,no_model_leakage,"begin model two after submitted cut in model one",empty pool and reset telemetry,empty pool and reset telemetry,pass
+P11,failed_submission,"injected nonzero GRBcbcut return",failure counted and row absent from pool,failure counted and row absent from pool,pass
+P12,callback_exception,"injected submitter exception",caught and counted,caught and counted,pass

@@ -1,0 +1,26 @@
+# Actual independent Round111 current raw review
+
+`final_raw01` actually exited 0 from `E:/codes/ExactEBRP-round111`, with 7,657,703 checks, 249.229168400052 engineering seconds, no native environment and no Optimize. Its decision is `ACCEPT_INDEPENDENT_LAYERED_CURRENT_RAW_DECISION`; the independently calculated research stage is `CONFIRMATION_SUPPORT` on `R110_MAIN_36_PLUS_R111_SEED_6`.
+
+Audit SHA-256: `82d9ec0dfd9612de9064dc1df7b0220a795bc838fe90a1b658c3f1564d810348`. Actual receipt SHA-256: `013d101765b4a7f959e216220b689bcff3691b2b6a9f0ab0c37be3774865234c`. The execution source snapshots and actual stdout/stderr hashes are retained beside that receipt. Reviewer driver SHA is `ef00654c57262d7967ee43866443200128ac85f91543805bb76568e20715fbf4`, core SHA `099db79b05183916aef95a9516c429637411a3cfefbd74ca560b6b56f0df0282`, decision SHA `65d2e3e26912c4ab3f17d688c1b8c67c6fe419cf233498fa772e0abe196751e2`, finite importer SHA `692a8477be2d3e6c6415bedcc410c8c593b081a6db3a5cc8b0cb22dea74634ca`.
+
+Every new arm was reconstructed independently from its own raw input, physical fleets, native observations and model bytes. Checks cover physical inventory/load/route/time/objective, model objective and rows, declared/restored continuous/integer/binary types, all-column submitted Starts, actual Seed and nine settings, true-G/cutoff/epoch scope, native lifecycle and normal returns, own floors and complete interval cover. Cached independent parses remain tied to current bytes and clear between arms. The current three actual wrapper trees bind the admitted performance sources, were created after the independent signature, contain the exact once-only fixed group commands and maintain serial start/native-return/audit order. Actual PE and DLL bytes and all 205 production bindings were rehashed without loading a native library.
+
+|New / old|Own arm|Whole seconds|Cap|Qualified|
+|---|---|---|---|---|
+|1 / 37|G20-C2 P-GRB|4.306077580899|900|true|
+|2 / 38|G20-C2 M-B|4.148141000070609|900|true|
+|3 / 39|G50-R1 M-B|1775.1242041393416|1800|true|
+|4 / 40|G50-R1 P-GRB|1771.3181914000306|1800|true|
+|5 / 41|G100-R2 P-GRB|3575.7809209054103|3600|true|
+|6 / 42|G100-R2 M-B|3584.8850907000015|3600|true|
+
+All exact native/audit/whole clocks and raw SHA bindings were checked without truncation or retroactive cost adjustment. The new G20-C2 pair is TIE; G50-R1 and G100-R2 are WIN. There are three evaluable pairs, three nonLOSS pairs, no severe P regression and no Seed0 WIN to current Seed1 LOSS. The inherited main denominator remains twelve roles, with M-B/P eleven WIN and one TIE and the original size/geometry gains. Its M-B/ENS five WIN, three TIE and four LOSS, including severe G50-C1/G100-R2 costs, are preserved. ENS remains default and has no pointwise veto.
+
+Only the fixed signed main36 import and its finite retained source/qualification bindings were reviewed. Historical raw matrices were not re-audited. Every original published inherited field, including the exact empty qualification fields for 15/17/25/26, is unchanged; imported qualification is additive. Their old exact-clock nulls, outward intervals, raw flags and native-return distinctions remain in the authority. Returned journals are present for 15/26 and missing for 17/25. The old six Seed rows are unchanged. Old Round110 remains BLOCKED and its old arm42 remains UNEVALUABLE: native_end3571.0120709999464, required_audit_end3600.707823600038, whole3600.7215734999627 exceeds cap3600.
+
+The independent result matches all decisive current report fields, all 36 main pair rows, three current Seed pair rows, the full stage conditions, flattened size/geometry gains, both Seed flip aliases, and the exact root/report stage bytes. Published whole-clock assessment and total charged fees agree with the raw receipts. Paid research is fifteen conservative starts and 11299.309934754972 outer seconds, including six qualification starts and the preserved 583.7201481292723 outward qualification upper charge. No native child durations are added again and no earlier failed slots are refunded.
+
+The exact frozen `final_report.md`, `contribution_evidence_map.md`, `paper_candidate_spec.md` and `repair_scope.md` were read and bound in the actual audit. They retain physical scaling and conditional implicit integer/zero-floor claims; complete scope/cover obligations; C2's distinct historical benchmark-gap repair; disclosed ENS costs; limited L48 two-parent-split exposure and historical R110 zero-split scope; unproved G100-R2 zero optimum; the limited actual-CLI/final-wrapper closure; empirical rather than hard realtime timing; geographic/synthetic overlap; and the same two falsifiable future questions. No new algorithm, independent geographic sample, statistical guarantee or completed paper benchmark is claimed. Resource accounting has an explicit generation cutoff; later review/restoration/remote observations require their own addendum and receipts.
+
+This signs the actual original-root current raw and frozen narrative assessment. Public restoration and explicit restored-root recomputation remain required delivery work; this document does not predeclare their completion. Admission03 and all earlier actual failure sources/streams/receipts remain intact.

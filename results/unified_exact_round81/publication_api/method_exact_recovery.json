@@ -1,0 +1,111 @@
+{
+  "target": "7a10c0b65191c63e940de8f4c56ae2504bfd7333",
+  "branch": "codex/round81-bdsc-long-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round81-bdsc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5616544000804424,
+      "stderr": "",
+      "returned_sha": "f607ffe590eb90922910517fb1633c69324731d8"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/5a3bbe5c6c0f53cff0a64ba707a76bc2f77414bd",
+      "returncode": 0,
+      "wall_seconds": 0.6122407000511885,
+      "stderr": "",
+      "returned_sha": "5a3bbe5c6c0f53cff0a64ba707a76bc2f77414bd"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 4.264895299915224,
+      "stderr": "",
+      "returned_sha": "784fbd7b0e7fd58355d4548746ce3a89be0f946c"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/3b1c170463a0d84e3f4001c68e6dc88da5ef4afa",
+      "returncode": 1,
+      "wall_seconds": 0.5800197999924421,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/8d9ed56d8a3fa7f97941df8fd6091c1f9bd73eaa",
+      "returncode": 1,
+      "wall_seconds": 0.6170617998577654,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/fc3413768a20ba92da2c7bbbdc3a56727639744b",
+      "returncode": 1,
+      "wall_seconds": 0.6158080003224313,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.9989386000670493,
+      "stderr": "",
+      "returned_sha": "e79526e77bd210662213bc2e76b4f4ee10e2297f"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 0.9308138000778854,
+      "stderr": "",
+      "returned_sha": "fc3413768a20ba92da2c7bbbdc3a56727639744b"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 1,
+      "wall_seconds": 11.736025200225413,
+      "stderr": "gh: We couldn't respond to your request in time. Sorry about that. Please try resubmitting your request and contact us if the problem persists. (HTTP 504)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/8d9ed56d8a3fa7f97941df8fd6091c1f9bd73eaa",
+      "returncode": 1,
+      "wall_seconds": 0.5520447003655136,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "e1a7865ed4048811db24ab701efb99946efd928c7fd68653cad83ceb5526db5b",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 21.947112999856472,
+  "initial_remote_head": "f607ffe590eb90922910517fb1633c69324731d8",
+  "original_commits": [
+    "784fbd7b0e7fd58355d4548746ce3a89be0f946c",
+    "77cf16fbf96041617d6f36144158b5c533b59eb2",
+    "f38c83e80b5fce12437757ff0427406435575cf6",
+    "66b87fd6913a65f4214cecb3b1807a048a1e5d01",
+    "e7776ac96cf032bb205306cf7af9078fbc72aac6",
+    "682cb150e6bc3ef19616dfb15d175f19effce617",
+    "7a10c0b65191c63e940de8f4c56ae2504bfd7333"
+  ],
+  "verified_existing_trees": [
+    "5a3bbe5c6c0f53cff0a64ba707a76bc2f77414bd"
+  ],
+  "verified_exact_commits": [
+    "784fbd7b0e7fd58355d4548746ce3a89be0f946c"
+  ],
+  "verified_exact_trees": [
+    "fc3413768a20ba92da2c7bbbdc3a56727639744b"
+  ],
+  "passed": false,
+  "error": "RuntimeError('GitHub API request failed; see ledger')"
+}

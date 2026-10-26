@@ -1,0 +1,11 @@
+{"phase": "auditing_actual_model_vectors", "unix": 1790702569.8735075, "number": 1}
+{"phase": "actual_model_vectors_passed", "unix": 1790702579.2428713, "number": 1, "wrapper_seconds": 9.364378800150007, "optimizer_calls": 0, "audit_path": "qualification03_01_vectors.json", "audit_sha256": "7cb3e6cb66b18993d75fd3cf3e6a861ad499cb4a3a6b3c278b32236ae9689a88"}
+{"phase": "launching_registered_arm", "unix": 1790702579.2438703, "number": 2, "id": "F5", "arm": "FEEDBACK"}
+{"phase": "registered_arm_audited", "unix": 1790703477.4601195, "number": 2, "endpoint": {"U": 0.30209182268348567, "L": 0.281414298078084, "gap": 0.020677524605401676, "certificate": false, "source": "normal_finalized_physical_endpoint", "status": "round31_c6_external_gini_tree_time_limit"}}
+{"phase": "auditing_actual_model_vectors", "unix": 1790703477.9620404, "number": 2}
+{"phase": "actual_model_vectors_passed", "unix": 1790703485.0005069, "number": 2, "wrapper_seconds": 7.03281020000577, "optimizer_calls": 0, "audit_path": "qualification03_02_vectors.json", "audit_sha256": "51a6217a7fe5d8375f56d41689734ad6da86d3f962eef4c4b8db36c17655d107"}
+{"phase": "launching_registered_arm", "unix": 1790703485.001507, "number": 3, "id": "F2", "arm": "FEEDBACK"}
+{"phase": "registered_arm_audited", "unix": 1790703723.033213, "number": 3, "endpoint": {"U": 0.8659435203229894, "L": 0.8249745315648761, "gap": 0.04096898875811328, "certificate": false, "source": "normal_finalized_physical_endpoint", "status": "round31_c6_external_gini_tree_time_limit"}}
+{"phase": "auditing_actual_model_vectors", "unix": 1790703723.5723174, "number": 3}
+{"phase": "actual_model_vectors_passed", "unix": 1790703724.3623412, "number": 3, "wrapper_seconds": 0.7838842002674937, "optimizer_calls": 0, "audit_path": "qualification03_03_vectors.json", "audit_sha256": "ec27fd87b6e1103b425719b125bf51751827c78fbd44cf48b4794865497920d1"}
+{"phase": "complete_requires_root_qualification_decision", "unix": 1790703724.3633404, "completed_registered_arms": [1, 2, 3]}

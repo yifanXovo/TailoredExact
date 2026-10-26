@@ -1,0 +1,48 @@
+{
+  "schema": "round90-lp-g-g3-smoke-postflight-v1",
+  "observed_utc": "2026-09-26T23:08:22.5999213Z",
+  "identity_sha256": "119fc81c0868b6069e229571a01ad9b2c89112ed36bf1938caf376ad6c7c4976",
+  "runner_sha256": "da04cf7481dd6f1841383a9390059297a0db51c4ce509a449d5c71725e38b1fe",
+  "prereg_sha256": "dbc1543d2d5b112a127151736ac54d13fe168723a9327561f65aaa81bbaf745b",
+  "binary_sha256": "bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2",
+  "source_hashes": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "4d1ad96639e1ef8a4093174636a1ef8e4563519485fc7d0ee82af68696057de0",
+      "matches_identity": true
+    },
+    {
+      "path": "include/GiniFrontierGeometry.hpp",
+      "sha256": "c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305",
+      "matches_identity": true
+    },
+    {
+      "path": "include/Instance.hpp",
+      "sha256": "386ffd2a778d0fa8648f3eb2ef091d9742c7e25e0b947cf31aa7e1db99efcb3f",
+      "matches_identity": true
+    },
+    {
+      "path": "src/GiniFrontierGeometry.cpp",
+      "sha256": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f",
+      "matches_identity": true
+    },
+    {
+      "path": "src/main.cpp",
+      "sha256": "efe8b0598483c2c3d2b3afb611fd2352f2005c53fe4cb9de95ebeab553c61570",
+      "matches_identity": true
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "sha256": "3de879702ca6dd964a1273558fc5152eaa26fad9001860c0e298270bdb7975a9",
+      "matches_identity": true
+    },
+    {
+      "path": "tests/round90_lp_g_split_tests.cpp",
+      "sha256": "2dd4582bb757624228fb610a2c9b3cc55fec0b84dca892601ecc1bec83a58d4d",
+      "matches_identity": true
+    }
+  ],
+  "matches_prepared_identity": true,
+  "active_heavy_process_count": 0,
+  "active_heavy_processes": []
+}

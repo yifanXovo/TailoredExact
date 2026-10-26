@@ -1,0 +1,75 @@
+{
+  "version": "round99-discrete-structure-confirmation-v1",
+  "roles": [
+    {
+      "id": "N1",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        16,
+        24
+      ],
+      "geometry": "offset_annulus",
+      "inventory": "surplus",
+      "T_seconds": 4500,
+      "cap_seconds": 900
+    },
+    {
+      "id": "N2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        16,
+        22,
+        28
+      ],
+      "geometry": "bent_corridor",
+      "inventory": "shortage",
+      "T_seconds": 6600,
+      "cap_seconds": 1800
+    },
+    {
+      "id": "N3",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        18,
+        24,
+        30,
+        36
+      ],
+      "geometry": "anisotropic_cloud",
+      "inventory": "shortage",
+      "T_seconds": 7800,
+      "cap_seconds": 3600
+    }
+  ],
+  "orders": [
+    [
+      "P-GRB",
+      "M-B",
+      "ENS-C"
+    ],
+    [
+      "ENS-C",
+      "P-GRB",
+      "M-B"
+    ],
+    [
+      "M-B",
+      "ENS-C",
+      "P-GRB"
+    ]
+  ],
+  "source_sha256": "e75d7c0f9a3d21784d5e3ad2efc95c439e96cf26303af784e52e2edebf559693",
+  "landscape_source_sha256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+  "writer_sha256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+  "seed": "SHA256(version|id|field), first8 bytes /2^64",
+  "optimizer_calls": 0,
+  "relation_to_history": "Reuse R96 deterministic geometric/inventory families and text writer; new version/id seed, points, inventory, heterogeneous fleets and mathematical T. Families appeared in historical R96/R97; these bytes and outcomes have never been observed.",
+  "retention": "Retain all3 inputs and all zero/difficult/negative outcomes. No reseed, replacement, resizing, T adjustment or outcome-based switch.",
+  "maximum_formal_starts": 9,
+  "maximum_formal_seconds": 18900,
+  "finite_reference_children": 3,
+  "maximum_reference_child_seconds": 60
+}

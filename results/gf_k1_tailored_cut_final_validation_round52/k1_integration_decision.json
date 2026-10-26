@@ -1,0 +1,24 @@
+{
+  "schema": "round52-k1-integration-decision-v1",
+  "final_candidate": "K1-AM-FINAL",
+  "controller": "frozen K1-AM",
+  "controller_K0": 1,
+  "controller_tau": 0.08,
+  "controller_point_rule": "midpoint",
+  "inner_backend": "historical-production-v0",
+  "new_inner_backend_integrated": false,
+  "integration_rerun_required": false,
+  "equivalence_basis": [
+    "final inner backend equals historical production v0",
+    "tailored callback remains default-off",
+    "334-row tau replay has zero changed actions",
+    "three tau sentinel action traces are equivalent",
+    "default-off implicit/explicit sentinel is exact-equivalent",
+    "controller source SHA is unchanged after freeze"
+  ],
+  "major_repair_preserved": true,
+  "strong_control_preserved": true,
+  "controller_changes_after_integration": 0,
+  "final_executable": "build/round52/ExactEBRP.exe",
+  "final_executable_sha256": "d245c76f6397c757894610d8f5238cfeb971761ff7e05edf51058e451d810151"
+}

@@ -1,0 +1,12 @@
+{
+  "status": "FAILED_REVIEW_PRESERVE_EVIDENCE",
+  "error": "AssertionError(('reader write flags', WindowsPath('E:/codes/ExactEBRP-work/worktrees/round132/scripts/__pycache__/round108_reader.cpython-312.pyc'), 32896))",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round132\\scripts\\round132_portable_check.py\", line 1643, in main\n    try: result,code=check(args.root,preflight=args.preflight,own_fee=args.own_fee)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round132\\scripts\\round132_portable_check.py\", line 1603, in check\n    facts=formal_evidence(out,rows)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round132\\scripts\\round132_portable_check.py\", line 820, in formal_evidence\n    core,reconstruction,source_reader,evidence,handoff,H,prior=reader_imports()\n                                                               ^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round132\\scripts\\round132_portable_check.py\", line 661, in reader_imports\n    import round108_reader as core\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1331, in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 935, in _load_unlocked\n  File \"<frozen importlib._bootstrap_external>\", line 995, in exec_module\n  File \"<frozen importlib._bootstrap_external>\", line 1091, in get_code\n  File \"<frozen importlib._bootstrap_external>\", line 1190, in get_data\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\round132\\scripts\\round132_portable_check.py\", line 699, in hook\n    assert not (flags and flags & (1|2|64|128|256|512|1024)),('reader write flags',path,flags)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('reader write flags', WindowsPath('E:/codes/ExactEBRP-work/worktrees/round132/scripts/__pycache__/round108_reader.cpython-312.pyc'), 32896)\n",
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0,
+  "no_performance_retry_authorized": true,
+  "seconds": 0.28881419997196645,
+  "previous_receipt_retained": "results/unified_exact_round132/review/final_independent_evidence.prior01.json",
+  "UTC": "2026-10-24T11:48:55.411446+00:00"
+}

@@ -1,0 +1,16 @@
+# Round90 LP-G G3 smoke: E8 and S12
+
+The signed smoke lease (`effee5739c1422467bc2c82425dd55240a7d88e5203a91e262ec90e45906352e`) authorized one frozen `run-smoke` call. All four planned arms completed normally under their individual 120 s full-process caps, passed offline audit, and returned original-problem optimal endpoints. No rest arm ran. The candidate executable, runner, preregistration, and seven candidate source hashes matched the prepared identity before launch; no source, binary, or runner was changed.
+
+| Role / arm | Process wall (s) | Prelaunch (s) | Fully observed end-to-end (s) | Physical U | Global L | Gap | Final certificate |
+|---|---:|---:|---:|---:|---:|---:|---|
+| E8 ENS-C | 3.109 | 0.375 | 3.484 | 0.021337006039780566 | 0.021337006039780573 | −6.94e−18 | yes |
+| E8 LP-G | 3.515 | 0.250 | 3.765 | 0.021337006039780566 | 0.021337006039780573 | −6.94e−18 | yes |
+| S12 LP-G | 3.578 | 0.281 | 3.859 | 0.05856397312578515 | 0.05856397312578488 | 2.71e−16 | yes |
+| S12 ENS-C | 3.484 | 0.234 | 3.718 | 0.05856397312578515 | 0.05856397312578488 | 2.71e−16 | yes |
+
+All four result files report valid root and parent/child coverage and strict external-tree certification. The observational interim audit bound is correctly marked uncertified; the separate normally finalized physical endpoint is certified. Original-route witnesses are physically checked (six rows per E8 arm, two per S12 arm). Both cross-arm checks passed against the strongest recorded global L and minimum physical U with the existing `1e−7` tolerance. There was no timeout, unknown endpoint, or audit failure.
+
+LP-G split evidence must be read separately from certificate and runtime. E8 made **two** eligible proposals at the same current optimal parent-LP G point, `0.005566015439536745`, inside `[0, 0.022295597484276734]`; neither was a midpoint fallback. Both child LP pairs completed. The first proposal ended in a native-target parent requeue with no split; the second ended in exact parent closure. The two receipts refer to the same parent and child optimize rows and canonical model hashes, supporting same-epoch reuse. S12 made **one** eligible proposal at the legacy midpoint because no valid interior LP-G point was available; its child LP pair completed and exact parent closure followed. Across both candidate arms there was **no realized atomic two-child split**. Thus this smoke exercises proposal, child-LP, requeue, and closure wiring, but does not yet demonstrate a committed LP-G partition or incumbent-epoch invalidation. These short runs do not establish a performance advantage.
+
+The full outer `run-smoke` command wall was **15.1096716 s**. Nested native process time summed to **13.686 s**; prelaunch totaled **1.140 s**, making fully observed per-arm end-to-end time **14.826 s**. The remaining **0.2836716 s** is outer runner and cross-arm work. Offline per-arm audit time summed to **0.0598435 s** and is nested inside the outer total; it is not added again. Exact argv, starts/exits, native streams, audit receipts and split ledgers remain in the four `runner_lp_g_g3/raw/` directories. The top-level `summary.jsonl`, `runner_smoke_completion.json`, two `runner_cross_arm_*.json`, and `smoke_outer_001.*` files preserve the batch and cross-arm evidence.

@@ -1,0 +1,57 @@
+[1/2] Building CXX object CMakeFiles/Round65ReferenceBuild.dir/src/round65_reference_build.cpp.obj
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:9:9: warning: "NOMINMAX" redefined
+    9 | #define NOMINMAX
+      |         ^~~~~~~~
+In file included from D:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h:680,
+                 from D:/msys64/ucrt64/include/c++/14.2.0/bits/requires_hosted.h:31,
+                 from D:/msys64/ucrt64/include/c++/14.2.0/chrono:35,
+                 from E:/codes/ExactEBRP/include/Instance.hpp:3,
+                 from E:/codes/ExactEBRP/include/CanonicalCompactModel.hpp:3,
+                 from E:/codes/ExactEBRP/src/round65_reference_build.cpp:3:
+D:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/os_defines.h:45:9: note: this is the location of the previous definition
+   45 | #define NOMINMAX 1
+      |         ^~~~~~~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp: In function 'int main(int, char**)':
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:24:23: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv**, int, int, int)' {aka 'int (*)(_GRBenv**, int, int, int)'} [-Wcast-function-type]
+   24 | #define API(n) auto n=reinterpret_cast<decltype(&GRB##n)>(GetProcAddress(dll,"GRB" #n));if(!n)throw std::runtime_error("missing API " #n)
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:25:5: note: in expansion of macro 'API'
+   25 |     API(emptyenvinternal);API(setintparam);API(startenv);API(readmodel);API(getintattr);API(freemodel);API(freeenv);
+      |     ^~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:24:23: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv*, const char*, int)' {aka 'int (*)(_GRBenv*, const char*, int)'} [-Wcast-function-type]
+   24 | #define API(n) auto n=reinterpret_cast<decltype(&GRB##n)>(GetProcAddress(dll,"GRB" #n));if(!n)throw std::runtime_error("missing API " #n)
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:25:27: note: in expansion of macro 'API'
+   25 |     API(emptyenvinternal);API(setintparam);API(startenv);API(readmodel);API(getintattr);API(freemodel);API(freeenv);
+      |                           ^~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:24:23: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv*)' {aka 'int (*)(_GRBenv*)'} [-Wcast-function-type]
+   24 | #define API(n) auto n=reinterpret_cast<decltype(&GRB##n)>(GetProcAddress(dll,"GRB" #n));if(!n)throw std::runtime_error("missing API " #n)
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:25:44: note: in expansion of macro 'API'
+   25 |     API(emptyenvinternal);API(setintparam);API(startenv);API(readmodel);API(getintattr);API(freemodel);API(freeenv);
+      |                                            ^~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:24:23: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBenv*, const char*, GRBmodel**)' {aka 'int (*)(_GRBenv*, const char*, _GRBmodel**)'} [-Wcast-function-type]
+   24 | #define API(n) auto n=reinterpret_cast<decltype(&GRB##n)>(GetProcAddress(dll,"GRB" #n));if(!n)throw std::runtime_error("missing API " #n)
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:25:58: note: in expansion of macro 'API'
+   25 |     API(emptyenvinternal);API(setintparam);API(startenv);API(readmodel);API(getintattr);API(freemodel);API(freeenv);
+      |                                                          ^~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:24:23: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*, const char*, int*)' {aka 'int (*)(_GRBmodel*, const char*, int*)'} [-Wcast-function-type]
+   24 | #define API(n) auto n=reinterpret_cast<decltype(&GRB##n)>(GetProcAddress(dll,"GRB" #n));if(!n)throw std::runtime_error("missing API " #n)
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:25:73: note: in expansion of macro 'API'
+   25 |     API(emptyenvinternal);API(setintparam);API(startenv);API(readmodel);API(getintattr);API(freemodel);API(freeenv);
+      |                                                                         ^~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:24:23: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(GRBmodel*)' {aka 'int (*)(_GRBmodel*)'} [-Wcast-function-type]
+   24 | #define API(n) auto n=reinterpret_cast<decltype(&GRB##n)>(GetProcAddress(dll,"GRB" #n));if(!n)throw std::runtime_error("missing API " #n)
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:25:89: note: in expansion of macro 'API'
+   25 |     API(emptyenvinternal);API(setintparam);API(startenv);API(readmodel);API(getintattr);API(freemodel);API(freeenv);
+      |                                                                                         ^~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:24:23: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(GRBenv*)' {aka 'void (*)(_GRBenv*)'} [-Wcast-function-type]
+   24 | #define API(n) auto n=reinterpret_cast<decltype(&GRB##n)>(GetProcAddress(dll,"GRB" #n));if(!n)throw std::runtime_error("missing API " #n)
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:/codes/ExactEBRP/src/round65_reference_build.cpp:25:104: note: in expansion of macro 'API'
+   25 |     API(emptyenvinternal);API(setintparam);API(startenv);API(readmodel);API(getintattr);API(freemodel);API(freeenv);
+      |                                                                                                        ^~~
+[2/2] Linking CXX executable Round65ReferenceBuild.exe

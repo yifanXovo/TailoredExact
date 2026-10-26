@@ -1,0 +1,29 @@
+{
+  "binary_sha256": "23d4fd53602d46f599f3f58e33c3ec96c4eec01b972e22ee0d4815cc42a54693",
+  "candidate_sha256": "f60f78afb97a94e2a0902682bfb0b54ca7a5858f68899cd70f19bfd5abebb447",
+  "command": [
+    "E:\\codes\\ExactEBRP\\build\\research\\round88-a1\\ExactEBRP.exe",
+    "--input",
+    "E:\\codes\\ExactEBRP\\reference\\qualification_round39\\small-easy\\round39_small_easy_V12_M3_Q30_slot08_seed1167625600.txt",
+    "--T",
+    "3600",
+    "--pickup-time",
+    "60",
+    "--drop-time",
+    "60",
+    "--lambda",
+    "0.15",
+    "--method",
+    "incumbent-import-test",
+    "--incumbent-json",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\qualification\\a2_endpoint_20260927\\05_e8_import\\candidate.json",
+    "--incumbent-format",
+    "route_json",
+    "--out",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\qualification\\a2_endpoint_20260927\\05_e8_import\\cpp_result.json",
+    "--log",
+    "E:\\codes\\ExactEBRP\\results\\unified_exact_round88\\qualification\\a2_endpoint_20260927\\05_e8_import\\cpp.log"
+  ],
+  "input_sha256": "587737b9d000c1712220232a0fe957073f1f03ac649a63a4775abd9166603acd",
+  "witness_sha256": "70534fd162bff80ad50210ad94a02a2e0e7f6c6efafd67e58a3dea32ac1faea3"
+}

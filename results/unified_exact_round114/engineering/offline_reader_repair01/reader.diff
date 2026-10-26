@@ -1,0 +1,129 @@
+--- admitted/read_round114.py
++++ reported/read_round114.py
+@@ -7,12 +7,27 @@
+ import round111_decisions as decisions
+ from round114_claims import reconcile,qualify_endpoint
+ from compare_round112_startup import compare as compare_H
+-from read_round113 import clock,native_log
++from read_round113 import native_log
+ 
+ ROUND='results/unified_exact_round114'
+ LAYER='R112_COMPLETE12_PLUS_R113_G50_4_PLUS_R114_G100_4'
+ csv.field_size_limit(64*1024*1024)
+ read,write,sha,table,portable=core.read,core.write,core.sha,core.table,core.portable
++
++def clock_evidence(d,l):
++    """Retain every inherited clock check; report an actual cap failure as data."""
++    w=read(d/'whole_arm_receipt.json');a=read(d/'postexit_audit_receipt.json')
++    n=read(d/'native_end_receipt.json');c=read(d/'completion.json');t=w['complete_seconds']
++    assert math.isfinite(t) and 0<n['complete_seconds_until_native_end']<=a['complete_seconds_until_audit_end']<=t
++    assert w['cap_seconds']==l['cap_seconds']
++    assert w['metrics_written_before_whole'] and (d/'audit_execution_metrics.json').is_file()
++    assert w['progress_publication_receipt_written_before_whole']
++    assert w['progress_receipt_SHA']==sha(d/'progress_publication_receipt.json')
++    assert w['includes_admission_identity_startup_native_outputs_necessary_postexit_audit_crosscheck_metrics']
++    assert c['returncode']==0 and c['stop_reason']=='normal_return' and c['within_cap']
++    return dict(complete_seconds=t,within_cap=t<=l['cap_seconds'],cap_seconds=l['cap_seconds'],
++        cap_excess_seconds=max(0.,t-l['cap_seconds']),whole_receipt_SHA=sha(d/'whole_arm_receipt.json'),
++        original_whole_unchanged=True)
+ 
+ def typed(row):
+     out={}
+@@ -90,7 +105,8 @@
+                     failure_reason='FIXED_ARM_NOT_STARTED' if status=='UNSTARTED' else 'REQUIRED_EXECUTION_OR_CLOCK_EVIDENCE_MISSING',
+                     missing_files=[q for q in required if not (d/q).is_file()],native_Optimize=None,PE_SHA=i['candidate_binary_sha256'],DLL_SHA=i['dll_sha256'])
+                 (new if formal else qual).append(row);recs['execution_failures'].append(row);continue
+-            t=clock(d,l,formal);whole=read(d/'whole_arm_receipt.json');ind=read(d/'independent_evidence.json')
++            clock_record=clock_evidence(d,l);t=clock_record['complete_seconds']
++            whole=read(d/'whole_arm_receipt.json');ind=read(d/'independent_evidence.json')
+             assert whole['independent_evidence_SHA']==sha(d/'independent_evidence.json')
+             assert whole['independent_closeout_SHA']==sha(d/'independent_endpoint_closeout.json')
+             assert whole['own_UB_floor_zero_evidence_written_before_whole'] and not whole['future_cohort_review_in_clock']
+@@ -112,14 +128,16 @@
+                 normal=ep['arm']
+                 for k in ['U','L','gap']:assert abs(normal[k]-necessary['endpoint'][k])<=1e-7
+                 assert normal['certificate']==necessary['endpoint']['certificate']
+-            item=dict(l=l,d=d,i=i,j=j,ind=ind,normal=normal,ep=ep,t=t,label=label,chain=chain,formal=formal)
++            item=dict(l=l,d=d,i=i,j=j,ind=ind,normal=normal,ep=ep,t=t,label=label,chain=chain,formal=formal,
++                clock_record=clock_record)
+             local.append(item)
+             if formal:all_claims+=claims;all_witnesses+=ind['witnesses'];byrole[l['arm']]=item
+             else:
+-                e=dict(ind,clock_valid=True,necessary_closeout_complete=True)
++                e=dict(ind,clock_valid=clock_record['within_cap'],necessary_closeout_complete=True)
+                 endpoint=qualify_endpoint(e,local_rejection['damaged_calls'],normal)
+                 qual.append(dict(endpoint,**label,complete_seconds=t,origin_round=114,native_Optimize=j['started'],not_performance=True))
+             recs['fleets'].append(dict(label,**ind['physical']))
++            recs['clock_qualification'].append(dict(label,**clock_record))
+             recs['native_counts'].append(dict(label,**ind['counts'],LP=sum(q['solve_kind']=='LP' for q in chain['ledger']),
+                 actual_declared_not_started_not_conflated=True))
+             recs['native_bounds'].extend(dict(label,**q) for q in claims)
+@@ -151,13 +169,24 @@
+     for item in local:
+         if not item['formal']:continue
+         l,d,j,ind,t=item['l'],item['d'],item['j'],item['ind'],item['t'];damage=[q for q in final['damaged_calls'] if q['arm']==l['arm']]
+-        endpoint=qualify_endpoint(dict(ind,clock_valid=True,necessary_closeout_complete=True),damage,item['normal'])
++        clock_valid=item['clock_record']['within_cap']
++        endpoint=qualify_endpoint(dict(ind,clock_valid=clock_valid,necessary_closeout_complete=True),damage,item['normal'])
++        if not clock_valid:
++            endpoint.update(failure_reason='WHOLE_ARM_CAP_EXCEEDED',source_reduced=False,
++                native_proof_qualified=not bool(damage),native_claims_qualified=not bool(damage),endpoint_source=None,
++                diagnostic_U=ind['own_U'],diagnostic_L=item['normal']['L'] if item['normal'] else None,
++                diagnostic_certificate=item['normal']['certificate'] if item['normal'] else None,
++                diagnostics_are_formal_endpoint=False)
+         row=dict(endpoint,**item['label'],origin_round=114,evidence_layer=LAYER,complete_seconds=t,cap_seconds=l['cap_seconds'],
+             status=read(d/'result.json')['status'],native_Optimize=j['started'],input_SHA=l['panel']['input_sha256'],
+             PE_SHA=item['i']['candidate_binary_sha256'],DLL_SHA=item['i']['dll_sha256'],source_commit=item['i']['measured_source_commit'],
+             performance_helper_identity=sha(out/'candidate_identity.json'),original_clock_path=(d/'whole_arm_receipt.json').relative_to(root).as_posix(),
+-            own_exact_zero=ind['own_exact_zero'],new_R114_measurement=True,raw_audit_passed=read(d/'audit.json')['passed'])
++            own_exact_zero=ind['own_exact_zero'],new_R114_measurement=True,raw_audit_passed=read(d/'audit.json')['passed'],
++            whole_within_cap=clock_valid,cap_excess_seconds=item['clock_record']['cap_excess_seconds'],
++            execution_status='COMPLETE_WITHIN_CAP' if clock_valid else 'WHOLE_ARM_CAP_EXCEEDED')
+         row['relative_gap'],row['relative_gap_null_reason']=decisions.relative(row);new.append(row);item['final_arm']=row
++        if not clock_valid:recs['execution_failures'].append(dict(item['label'],failure_reason='WHOLE_ARM_CAP_EXCEEDED',
++            **item['clock_record'],formal_protocol_qualified=False))
+         offset=read(d/'native_end_receipt.json')['complete_seconds_until_native_end']-read(d/'completion.json')['fully_observed_end_to_end_seconds']
+         zero=[q for q in j['witnesses'] if q['F']==0. and q['Y'][1:]==core.evidence.instance(root,l['panel'])['D'][1:]]
+         first=min(zero,key=lambda q:q['available']) if zero else None
+@@ -167,7 +196,9 @@
+             complete_certificate_available_seconds=t if row['certificate'] else None,native_true_first_discovery='unknown',
+             conservative_validation_upper_distinct_from_commit=True))
+         recs['checkpoints'].append(dict(item['label'],seconds=t,observed=True,U=row['U'],L=row['L'],gap=row['gap'],certificate=row['certificate'],
+-            source_reduced=row['source_reduced'],native_proof_qualified=row['native_proof_qualified'],reason='true complete endpoint'))
++            source_reduced=row['source_reduced'],native_proof_qualified=row['native_proof_qualified'],
++            formal_endpoint_qualified=row['formal_protocol_qualified'],diagnostic_only=not clock_valid,
++            diagnostic_U=ind['own_U'] if not clock_valid else None,reason='true complete endpoint' if clock_valid else 'actual whole cap failure; no formal endpoint'))
+         for point in [300,600,900,1200,1800,3600]:
+             if point>=t:
+                 if row['certificate']:recs['checkpoints'].append(dict(item['label'],seconds=point,observed=True,U=row['U'],L=row['L'],gap=row['gap'],certificate=True,reason='already established own certificate continued'))
+@@ -178,7 +209,8 @@
+             bound=[q['global_bound'] for q in j['bounds'] if q['global_available'] and q['call'] not in bad and q['available']+max(0.,offset)<=point]
+             L=max([0.]+bound) if not damage else 0.
+             recs['checkpoints'].append(dict(item['label'],seconds=point,observed=True,U=U,L=L,gap=U-L,certificate=False,
+-                source_reduced=bool(damage),native_proof_qualified=not damage,reason='actual committed own physical witness; final values never backfilled'))
++                source_reduced=bool(damage),native_proof_qualified=not damage,formal_endpoint_qualified=clock_valid,
++                diagnostic_only=not clock_valid,reason='actual committed own physical witness; final values never backfilled'))
+     pairrows=[];conclusions={};same=[]
+     if not qualification_only:
+         protocol=read(out/'protocol.json');lookup={(q['id'],q['arm']):q for q in new};role=protocol['roles'][0]['id']
+@@ -186,6 +218,9 @@
+             H=compare_H(root,protocol['roles'][0],{m:byrole[m]['d'] for m in ['P-S','ENS-C','M-B']});same=H['comparisons']
+             recs['same_H']=same
+             recs['same_H_fleets']=[dict(id=role,arm=m,**v) for m,v in H['arms'].items()]
++        else:
++            recs['same_H_missing']=[dict(id=role,candidate=X,control='P-S',qualified=False,
++                missing_arms=[m for m in [X,'P-S'] if m not in byrole],reason='FIXED_ARM_NOT_STARTED') for X in ['ENS-C','M-B']]
+         for X,C in protocol['pairs']:
+             a,c=lookup[role,X],lookup[role,C];v=decisions.pair(a,c)
+             delta=dict(dU=a['U']-c['U'],dL=a['L']-c['L'],dGap=a['gap']-c['gap']) if v['evaluable'] else dict(dU=None,dL=None,dGap=None)
+@@ -234,6 +269,10 @@
+         default_ENS_changed=False,primary_benchmark='cold P-GRB',old_R113_state='BLOCKED',no_historical_clock_recreated=True,
+         qualification_native_Optimize=sum(q['native_Optimize'] for q in qual if q.get('native_Optimize') is not None),
+         formal_actual_Optimize=sum(q.get('native_Optimize',0) or 0 for q in new))
++    summary.update(original_admitted_reader_SHA=candidate['offline_reader_SHA'],
++        offline_report_repair_disclosed=sha(__file__)!=candidate['offline_reader_SHA'],
++        formal_native_children_executed=sum(f['actual_children'] for f in fees if not f['qualification']),
++        whole_cap_failed_arms=[q['arm'] for q in new if q.get('failure_reason')=='WHOLE_ARM_CAP_EXCEEDED'])
+     table(dest/'arms.csv',arms);table(dest/'new_arms.csv',new);table(dest/'pairs.csv',pairs);table(dest/'new_pairs.csv',pairrows)
+     table(dest/'qualification_arms.csv',qual);recs['fees']=fees
+     for name,rows in sorted(recs.items()):table(dest/(name+'.csv'),rows)

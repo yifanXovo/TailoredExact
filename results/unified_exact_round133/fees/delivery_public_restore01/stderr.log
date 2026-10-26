@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "E:/codes/ExactEBRP-work/temp/round133/public_bootstrap.py", line 421, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "E:/codes/ExactEBRP-work/temp/round133/public_bootstrap.py", line 384, in main
+    archives=recovery.extract_current(manifest)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:/codes/ExactEBRP-work/temp/round133/public_bootstrap.py", line 261, in extract_current
+    with z.open(info) as source:self.install_stream(name,source,row['bytes'],row['SHA256'],info.CRC)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:/codes/ExactEBRP-work/temp/round133/public_bootstrap.py", line 117, in install_stream
+    self.limits.remaining('transport');target=self.path(name,True)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:/codes/ExactEBRP-work/temp/round133/public_bootstrap.py", line 86, in remaining
+    assert left>0,('finite public recovery limit exhausted',key,self.snapshot())
+           ^^^^^^
+AssertionError: ('finite public recovery limit exhausted', 'transport', {'total': 1800.0036431000335, 'transport': 1800.0036434000358, 'semantic': 0.0})

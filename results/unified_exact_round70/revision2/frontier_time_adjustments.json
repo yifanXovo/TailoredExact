@@ -1,0 +1,72 @@
+{
+  "adjustments": [
+    {
+      "number": 27,
+      "id": "D6",
+      "arm": "VD-S",
+      "first_data_row": 9,
+      "last_data_row": 62,
+      "leaf": "L0.0",
+      "recorded_last_callback_process_seconds": 579.602221,
+      "following_actual_process_seconds": 597.0238698,
+      "following_event": "interruption",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 17.42164880000007,
+      "callback_records": 54
+    },
+    {
+      "number": 28,
+      "id": "D6",
+      "arm": "DS",
+      "first_data_row": 9,
+      "last_data_row": 174,
+      "leaf": "L0.0",
+      "recorded_last_callback_process_seconds": 596.7739472999999,
+      "following_actual_process_seconds": 597.0255799,
+      "following_event": "incumbent_improvement",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 0.25163260000010723,
+      "callback_records": 166
+    },
+    {
+      "number": 29,
+      "id": "D6",
+      "arm": "K1-R",
+      "first_data_row": 8,
+      "last_data_row": 9,
+      "leaf": "L0.0",
+      "recorded_last_callback_process_seconds": 322.90269620000004,
+      "following_actual_process_seconds": 322.9261138,
+      "following_event": "child_native_bound_target",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 0.023417599999959293,
+      "callback_records": 2
+    },
+    {
+      "number": 29,
+      "id": "D6",
+      "arm": "K1-R",
+      "first_data_row": 12,
+      "last_data_row": 78,
+      "leaf": "L0.0",
+      "recorded_last_callback_process_seconds": 595.6740499,
+      "following_actual_process_seconds": 597.0379861,
+      "following_event": "interruption",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 1.363936200000012,
+      "callback_records": 67
+    },
+    {
+      "number": 32,
+      "id": "D7",
+      "arm": "DS",
+      "first_data_row": 6,
+      "last_data_row": 44,
+      "leaf": "L0",
+      "recorded_last_callback_process_seconds": 300.6573859,
+      "following_actual_process_seconds": 597.0525449,
+      "following_event": "incumbent_improvement",
+      "conservative_setup_and_unobserved_tail_shift_seconds": 296.39515900000004,
+      "callback_records": 39
+    }
+  ],
+  "optimizer_calls": 0,
+  "method": "Shift each buffered native-bound group so its last recorded improvement coincides with the subsequent actual process-clock event; this upper-bounds missing setup plus an unobserved tail",
+  "effect": "Conservative intermediate availability only. Whole-run endpoints, solver source, parameters and completed wall costs are unchanged."
+}

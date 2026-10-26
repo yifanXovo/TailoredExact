@@ -1,0 +1,513 @@
+{
+  "target": "002aa711a6bc5e6a745546f4d3dd9003ae82ca68",
+  "branch": "codex/round81-bdsc-long-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round81-bdsc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5992848998866975,
+      "stderr": "",
+      "returned_sha": "aaf8de23ceaef0620c825a48667aa81f6d67385a"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/fb61d9fe518ae63c93a230d38d9de11262f9a392",
+      "returncode": 1,
+      "wall_seconds": 0.6000010999850929,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/5126c443ddb2201d1d46301b9c01926236cfb5b8",
+      "returncode": 1,
+      "wall_seconds": 0.588145799934864,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/77636aa81cc6d6b0648f2d4e4422a25f6e42d79a",
+      "returncode": 1,
+      "wall_seconds": 0.5812377999536693,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/327b82a096855dd58fe028acc1c0f20d1897fdb6",
+      "returncode": 1,
+      "wall_seconds": 0.5835699997842312,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.1758016999810934,
+      "stderr": "",
+      "returned_sha": "2203e26881f1fe61f2813e849a5b65f632dbbacc"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 0.8140146997757256,
+      "stderr": "",
+      "returned_sha": "327b82a096855dd58fe028acc1c0f20d1897fdb6"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.685550699941814,
+      "stderr": "",
+      "returned_sha": "b95dc61881094d939662f5de60e1cb9d25862958"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 0.7857440998777747,
+      "stderr": "",
+      "returned_sha": "77636aa81cc6d6b0648f2d4e4422a25f6e42d79a"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 6.040139799937606,
+      "stderr": "",
+      "returned_sha": "5126c443ddb2201d1d46301b9c01926236cfb5b8"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 2.204609400127083,
+      "stderr": "",
+      "returned_sha": "fb61d9fe518ae63c93a230d38d9de11262f9a392"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 0.9053703998215497,
+      "stderr": "",
+      "returned_sha": "634af302d3838af7a02fada83b587f246e13b0fa"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/6155dc23e580bc43dc1e92fe576fcf5c71ee6085",
+      "returncode": 1,
+      "wall_seconds": 0.5830845995806158,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/95c59f08e666b19a8d561c301b0f20cc93485ade",
+      "returncode": 1,
+      "wall_seconds": 0.6041661999188364,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/6907f1e4ca7e9676b9ce964f0615ea1bd956c856",
+      "returncode": 1,
+      "wall_seconds": 0.5906547997146845,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.7425416000187397,
+      "stderr": "",
+      "returned_sha": "7e098abb4f6f4bb47500947450fc89e14a50641a"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 0.7673948998562992,
+      "stderr": "",
+      "returned_sha": "6907f1e4ca7e9676b9ce964f0615ea1bd956c856"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.6062550996430218,
+      "stderr": "",
+      "returned_sha": "95c59f08e666b19a8d561c301b0f20cc93485ade"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/a1bac22206e0e7e49399e1d677d3885d0cf57078",
+      "returncode": 1,
+      "wall_seconds": 0.5830140998587012,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.851073999889195,
+      "stderr": "",
+      "returned_sha": "a2b66ed295309c8673d263f71a1b8100a0e47778"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.5097012999467552,
+      "stderr": "",
+      "returned_sha": "a1bac22206e0e7e49399e1d677d3885d0cf57078"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 2.3627456999383867,
+      "stderr": "",
+      "returned_sha": "6155dc23e580bc43dc1e92fe576fcf5c71ee6085"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 0.8166203000582755,
+      "stderr": "",
+      "returned_sha": "bbdd1b866f77721423d7dcc5a185ea7a89178f17"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/87f5386f2ae9b0ecac66c094d279d93fa5576849",
+      "returncode": 1,
+      "wall_seconds": 0.6024758000858128,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/7723499ccabd4a540fc6acbb89ae04469b995dc1",
+      "returncode": 1,
+      "wall_seconds": 0.5825711996294558,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.43861939990893,
+      "stderr": "",
+      "returned_sha": "a1f23a2b763c02cf65c9577c81f3313b8d729674"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.6379333999939263,
+      "stderr": "",
+      "returned_sha": "7723499ccabd4a540fc6acbb89ae04469b995dc1"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/84c22233f1fb2405dec0330b58a09d52d4ee1e79",
+      "returncode": 1,
+      "wall_seconds": 0.5855012997053564,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/85e80bcda4c52a4d88de2bb28ab2a6751ac0d427",
+      "returncode": 1,
+      "wall_seconds": 0.6073786001652479,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.7408660002984107,
+      "stderr": "",
+      "returned_sha": "21be6ddea46497e3e857f3003549ba0c6999315a"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.1444961000233889,
+      "stderr": "",
+      "returned_sha": "5dd17fae4a7c5f91818a809ac15c07a90931af20"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 0.873339899815619,
+      "stderr": "",
+      "returned_sha": "85e80bcda4c52a4d88de2bb28ab2a6751ac0d427"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.7169396001845598,
+      "stderr": "",
+      "returned_sha": "84c22233f1fb2405dec0330b58a09d52d4ee1e79"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 2.5665611997246742,
+      "stderr": "",
+      "returned_sha": "87f5386f2ae9b0ecac66c094d279d93fa5576849"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 0.878371600061655,
+      "stderr": "",
+      "returned_sha": "389a8738674db2eae611888c2557ea48b2883671"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/4b24156f2df7dcb114bac9b9510334dd324c9af5",
+      "returncode": 1,
+      "wall_seconds": 0.5740687996149063,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/ef600aac5c58caba9b4012f8f7d2498416a51ed1",
+      "returncode": 1,
+      "wall_seconds": 0.5836865999735892,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/a460b6f88e1724ef7b0a9410fb6428fdcc8c7faa",
+      "returncode": 1,
+      "wall_seconds": 0.5943084000609815,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.7710923003032804,
+      "stderr": "",
+      "returned_sha": "b285ba4faad7fd33fdd5b8bcc0d160166914d35f"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 0.7556964000687003,
+      "stderr": "",
+      "returned_sha": "a460b6f88e1724ef7b0a9410fb6428fdcc8c7faa"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.5978395002894104,
+      "stderr": "",
+      "returned_sha": "ef600aac5c58caba9b4012f8f7d2498416a51ed1"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 2.6261823000386357,
+      "stderr": "",
+      "returned_sha": "4b24156f2df7dcb114bac9b9510334dd324c9af5"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 1.0163648002780974,
+      "stderr": "",
+      "returned_sha": "69a76c237ca5d39d776727acec42af7f16c71c24"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/38b0ad731d04a3551b25a01756a92d10e7d0d79c",
+      "returncode": 1,
+      "wall_seconds": 0.6149770999327302,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/ea6d847e188c46e7bcea1e01ee0e934de891a198",
+      "returncode": 1,
+      "wall_seconds": 0.5226930999197066,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 1.3757790997624397,
+      "stderr": "",
+      "returned_sha": "f732611ebd37b6e79cda0fe4e005b8f49b2f305d"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.177266400307417,
+      "stderr": "",
+      "returned_sha": "ea6d847e188c46e7bcea1e01ee0e934de891a198"
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/beec2e9cd6a77d86c786ca28010aba5833b2690c",
+      "returncode": 1,
+      "wall_seconds": 0.5968041997402906,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "GET",
+      "path": "git/trees/5f3a56d00afafce5cc1b61cf6968972d8e90a684",
+      "returncode": 1,
+      "wall_seconds": 0.5959516996517777,
+      "stderr": "gh: Not Found (HTTP 404)\n",
+      "returned_sha": null
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.7299837996251881,
+      "stderr": "",
+      "returned_sha": "c6aabee22e8c21e6115ed3b9c9c8f296c88416d3"
+    },
+    {
+      "method": "POST",
+      "path": "git/blobs",
+      "returncode": 0,
+      "wall_seconds": 0.7326731001958251,
+      "stderr": "",
+      "returned_sha": "417755d3523297ce1d46d16989c50daa8b8f8e15"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.2127725002355874,
+      "stderr": "",
+      "returned_sha": "5f3a56d00afafce5cc1b61cf6968972d8e90a684"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 1.3679252001456916,
+      "stderr": "",
+      "returned_sha": "beec2e9cd6a77d86c786ca28010aba5833b2690c"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 2.280433099716902,
+      "stderr": "",
+      "returned_sha": "38b0ad731d04a3551b25a01756a92d10e7d0d79c"
+    },
+    {
+      "method": "POST",
+      "path": "git/commits",
+      "returncode": 0,
+      "wall_seconds": 0.8102941000834107,
+      "stderr": "",
+      "returned_sha": "002aa711a6bc5e6a745546f4d3dd9003ae82ca68"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round81-bdsc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.583462500013411,
+      "stderr": "",
+      "returned_sha": "aaf8de23ceaef0620c825a48667aa81f6d67385a"
+    },
+    {
+      "method": "PATCH",
+      "path": "git/refs/heads/codex/round81-bdsc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 1.0085710999555886,
+      "stderr": "",
+      "returned_sha": "002aa711a6bc5e6a745546f4d3dd9003ae82ca68"
+    },
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round81-bdsc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5942609999328852,
+      "stderr": "",
+      "returned_sha": "002aa711a6bc5e6a745546f4d3dd9003ae82ca68"
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "70610eed4a0f9f419eb47fcbd27479ff398ddab763b2573e6f3ec02bc29ace84",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 64.90475540002808,
+  "initial_remote_head": "aaf8de23ceaef0620c825a48667aa81f6d67385a",
+  "original_commits": [
+    "634af302d3838af7a02fada83b587f246e13b0fa",
+    "bbdd1b866f77721423d7dcc5a185ea7a89178f17",
+    "389a8738674db2eae611888c2557ea48b2883671",
+    "69a76c237ca5d39d776727acec42af7f16c71c24",
+    "002aa711a6bc5e6a745546f4d3dd9003ae82ca68"
+  ],
+  "verified_exact_trees": [
+    "327b82a096855dd58fe028acc1c0f20d1897fdb6",
+    "77636aa81cc6d6b0648f2d4e4422a25f6e42d79a",
+    "5126c443ddb2201d1d46301b9c01926236cfb5b8",
+    "fb61d9fe518ae63c93a230d38d9de11262f9a392",
+    "6907f1e4ca7e9676b9ce964f0615ea1bd956c856",
+    "95c59f08e666b19a8d561c301b0f20cc93485ade",
+    "a1bac22206e0e7e49399e1d677d3885d0cf57078",
+    "6155dc23e580bc43dc1e92fe576fcf5c71ee6085",
+    "7723499ccabd4a540fc6acbb89ae04469b995dc1",
+    "85e80bcda4c52a4d88de2bb28ab2a6751ac0d427",
+    "84c22233f1fb2405dec0330b58a09d52d4ee1e79",
+    "87f5386f2ae9b0ecac66c094d279d93fa5576849",
+    "a460b6f88e1724ef7b0a9410fb6428fdcc8c7faa",
+    "ef600aac5c58caba9b4012f8f7d2498416a51ed1",
+    "4b24156f2df7dcb114bac9b9510334dd324c9af5",
+    "ea6d847e188c46e7bcea1e01ee0e934de891a198",
+    "5f3a56d00afafce5cc1b61cf6968972d8e90a684",
+    "beec2e9cd6a77d86c786ca28010aba5833b2690c",
+    "38b0ad731d04a3551b25a01756a92d10e7d0d79c"
+  ],
+  "verified_exact_commits": [
+    "634af302d3838af7a02fada83b587f246e13b0fa",
+    "bbdd1b866f77721423d7dcc5a185ea7a89178f17",
+    "389a8738674db2eae611888c2557ea48b2883671",
+    "69a76c237ca5d39d776727acec42af7f16c71c24",
+    "002aa711a6bc5e6a745546f4d3dd9003ae82ca68"
+  ],
+  "passed": true,
+  "final_remote_head": "002aa711a6bc5e6a745546f4d3dd9003ae82ca68",
+  "original_history_preserved": true
+}

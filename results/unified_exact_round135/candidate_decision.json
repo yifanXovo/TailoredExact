@@ -1,0 +1,29 @@
+{
+  "UTC": "2026-10-26T13:37:16.704816+00:00",
+  "study_complete": true,
+  "decision": "research-only",
+  "study_scope_paragraph": "Both preregistered stages were entered and all 32 positions completed, giving 16 matched pairs across seven known structural/protection inputs. The first-stage decision used all ten sealed positions and their original-objective endpoint signal. No position, Seed, order or cap was replaced after observing outcomes. The plan retained 8,760 plus 14,760 cap-seconds; actual costs are reported separately. Every ordinary adverse and open observation remains in the evidence.",
+  "paper_results_paragraph": "All 32 preregistered positions completed, with 10/16 certificates for each method. K-20-S remains open with the same U at both Seeds; AP reduces the gaps by about 7% and 30%. K-35-U also remains open: AP improves U at both Seeds, but its qualified L is weaker at both. Its gaps are smaller by about 25% and 2.8%, so the result is a primal/dual trade-off rather than endpoint dominance or faster proof. On the original D13 input both methods remain open at the same U. AP slightly narrows the Seed0 gap but widens the Seed1 gap by about 14%. This is mixed protection evidence, despite the absence of a new certificate loss.\n\nAmong the ten both-certified pairs, AP has no substantive time advantage and two substantive adverse differences: K-15-S Seed0 takes 149.31 seconds versus 112.11 for S2, and X-35-B Seed0 takes 79.97 versus 17.59. Their Seed1 differences are small. UC-B20-B remains certified in about four seconds on both sides, and micro repetitions have small absolute differences. Most of the two slowdowns lies in native MIP time, accompanied by higher Work and node counts; LP setup is a small part of the added cost. Complete production, postverification and total clocks, every endpoint and the exposed root/child/MIP costs are retained in Supplement S4.",
+  "paper_conclusion_paragraph": "AP retains the intended numerical root strengthening and improves some complete-search endpoints, but it does not improve certification coverage or establish a reliable complete-time advantage. The substantial Seed0 slowdowns and mixed D13 protection outcome do not justify replacing the accepted S2 method. We retain AP as a default-off research option and keep S2 as the supported main algorithm. The projection result explains retained state information under its stated premises; it does not guarantee a faster native search.",
+  "advance_assessment": "The main advances in this round are structural understanding and manuscript maturity. Selected full-method endpoint gains are real, but the complete panel does not support a uniform AP performance improvement. The finite AP study is closed without a new candidate or parameter grid. The smallest next work is author/coauthor review of the complete paper, confirmation of the HGA-TGBC author order, affiliations and current status and this paper's author list, and the named CITI source-capture/selection facts before journal-specific submission preparation.",
+  "AP_default_enabled": false,
+  "accepted_S2_retained": true,
+  "repository_ENS_default_unchanged": true,
+  "full_panel_completed": true,
+  "completed_arms": 32,
+  "complete_pairs": 16,
+  "certificate_counts": {
+    "S2": 10,
+    "AP": 10
+  },
+  "material_certified_time": {
+    "AP_favorable": 0,
+    "AP_adverse": 2
+  },
+  "summary_SHA": "23a30cc220c96f66e54b5c0634fc855430c4a90388cd0ce464d5cb0d7f72574b",
+  "G1_seconds": 17148.624478299604,
+  "postverification_seconds": 266.83043630060274,
+  "conservative_seconds": 17415.454914600206,
+  "no_outcome_retries": true,
+  "no_further_candidate_grid": true
+}

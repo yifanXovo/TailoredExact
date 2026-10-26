@@ -1,0 +1,20 @@
+{
+  "algorithm_runtime_excludes": [
+    "expanded archive formatting",
+    "archive hashing",
+    "archive reread",
+    "independent archive verification"
+  ],
+  "checkpoints_seconds": [
+    300,
+    1200,
+    3600
+  ],
+  "common_comparison_horizon_seconds": 3600,
+  "extension_cap_seconds": 7200,
+  "extension_rule": "V>=20 and T=18000",
+  "maximum_cap_seconds": 7200,
+  "ordinary_cap_seconds": 3600,
+  "process_cap_field": "solver_process_cap_seconds",
+  "schema": "round56-solver-time-contract-v1"
+}

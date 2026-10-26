@@ -1,0 +1,12 @@
+{
+  "original_outer_seconds": 173.01180821377784,
+  "outer_seconds_interval": [173.01180821377784, 582.8230838775635],
+  "budget_charge_seconds": 582.8230838775635,
+  "wrapper_creation_unix": 1791621118.1769161,
+  "exit_observed_no_later_than_unix": 1791621701.0,
+  "observation": "Actual exec session 87324 had returned exit 0 before the clock tool returned 2026-10-10 08:41:40 UTC. One full second is added for displayed clock truncation. This is an outward upper bound including observation delay, not an exact exit time or trailer cost estimate.",
+  "original_receipt_unchanged": true,
+  "reason": "Original fee receipt preceded final qualification checks and identity write; conservatively include all work through actual observed process exit.",
+  "nested_seconds_added": false,
+  "slots_refunded": 0
+}

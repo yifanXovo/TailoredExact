@@ -1,0 +1,27 @@
+{
+  "roles": [
+    {
+      "id": "H100",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        13,
+        21
+      ],
+      "T_seconds": 5100,
+      "cap_seconds": 120,
+      "method_order": [
+        "P-S",
+        "M-B"
+      ],
+      "input_path": "reference/round100_confirmation/H100.txt",
+      "instance_path": "reference/round100_confirmation/H100.txt",
+      "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 0,
+      "panel_kind": "qualification"
+    }
+  ]
+}

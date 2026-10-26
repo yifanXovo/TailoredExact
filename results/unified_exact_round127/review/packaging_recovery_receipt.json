@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "UTC": "2026-10-21T05:05:40.724920+00:00",
+  "actual_carrier_plaintext_bytes_scanned": 2648964647,
+  "forbidden_extensions": [
+    ".dll",
+    ".exe",
+    ".html",
+    ".key",
+    ".lic",
+    ".otf",
+    ".p12",
+    ".pem",
+    ".pfx",
+    ".ttf",
+    ".woff",
+    ".woff2"
+  ],
+  "archives": 5,
+  "members": 519614,
+  "no_native_software_or_credentials": true,
+  "full_SHA256_and_ZIP_CRC_streamed": true,
+  "scope": "Original four completed stage ZIPs had passed precompression scan and are preserved byte-for-byte; every final carrier member is additionally decompressed, credential-scanned and SHA256 indexed with the corrected token boundary. Only missing support files were appended to a fresh copy; failed partial retained.",
+  "failed_partial": {
+    "path": "E:\\codes\\ExactEBRP-work\\temp\\round127\\archives\\qualification_closed_fees_original_sources.zip",
+    "bytes": 24933358,
+    "SHA256": "49e493223aa48c15eca0e72b8895269d8fa29013a9559f87acdb7bd408689e66"
+  },
+  "appended_support_paths": [
+    "results/unified_exact_round127/fees/finite_carrier_pack_01/PID.json",
+    "results/unified_exact_round127/fees/finite_carrier_pack_01/launch.json",
+    "results/unified_exact_round127/fees/finite_carrier_pack_01/receipt.json",
+    "results/unified_exact_round127/fees/finite_carrier_pack_01/stderr.log",
+    "results/unified_exact_round127/fees/finite_carrier_pack_01/stdout.log",
+    "results/unified_exact_round127/source_E0/src/PaperExternalGiniTree.cpp",
+    "results/unified_exact_round127/source_E0/src/main.cpp"
+  ],
+  "original_stage_ZIP_SHA256": {
+    "training": "c537cc98606617309d108b360560d25fba0be3ca93a28ec9ac807c1086688a33",
+    "main": "95311472996025d016a3e428575a6395d80a264c121ec5e283932f24be8bd7ec",
+    "tiny": "3d6313400f7d81a3962d699c0ea0208436f8851e9ab1c446c4c174cf1e4ebb87",
+    "core": "4a282cf616e181743c7ae8d73990b2b36f16b68e37dca0bd8fe43351150ff3a7"
+  },
+  "original_failed_fee": {
+    "exit_code": 1,
+    "outer_seconds": 2617.5073867999017,
+    "start_unix": 1792555792.4441395,
+    "end_unix": 1792558409.9511786,
+    "exit_observed": true,
+    "nested_seconds_added": false
+  },
+  "native_solver_starts": 0,
+  "Optimize": 0,
+  "executed_source_SHA256": "8ccaba3643b19022fc2d1c606ab74cd1ae91d02b1c72a3166364912c719b8a27",
+  "seconds": 127.30681850004476
+}

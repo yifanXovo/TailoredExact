@@ -61,3 +61,5 @@ The implementation is gated by:
 ```
 
 and audited by `scripts/audit_bucket_ratio_domain_tightening.py`.
+> Historical research note. This file predates Round 54; K1-AM-SF and
+> `paper-k1-am-sf` are the current stable mainline.

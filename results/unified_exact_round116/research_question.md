@@ -1,0 +1,9 @@
+# Round116 research question
+
+The missing evidence is finite transfer to one preregistered external station-coordinate/capacity source. Additional win/loss measurements on the old five roles would not answer that question. The frozen ENS-C default, R111 finite M-B candidate, cold P-GRB primary benchmark, and independently paid P-S contribution control will be compared on six specified synthetic inputs from one official system snapshot. All 24 arms and 36 within-role pairs are required for a complete panel.
+
+The three evidence axes are execution completeness, feasible-solution/backend comparisons, and numerical proof reliability. A legal positive fleet, an own strict zero certificate from Y=D and F>=0, and a reliable nonzero native certificate are different outcomes. SOURCE_REDUCED_OPEN retains own U and independent floor0 but cannot establish native proof progress or recover wrongly pruned search. Known R115 contradictions are inherited risks rather than Round116 discoveries.
+
+R115 completed four G100 arms. Its P-S own zero at producer1306.5367294s establishes optimum0; ENS/M-B/P positive endpoints remain approximately .0055284553/.0114347383/.0399421005. All four have a rejected native call, including P-S. The historical ENS/P-S W/W/L/W/L and M-B/P-S W/W/L/T/L vectors are MIXED with heterogeneous old-whole/new-producer clocks. G50 missing cold clock, R114 ENS overwhole and R110 BLOCKED remain unchanged.
+
+The new panel can support limited transfer, contradict that expectation, or expose numerical inconsistency. Each is a valid result. It is neither a final paper benchmark nor six independent cities, real demand validation, a new algorithm, or authorization to reopen stopped mechanism grids. No result-based redraw, seed/lambda sweep, formal retry or production adjustment is permitted. After full execution, apply exactly one preregistered A-D resource decision; a genuine blocker receives BLOCKED with its precise scope.

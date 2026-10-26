@@ -1,0 +1,48 @@
+{
+  "target": "682cb150e6bc3ef19616dfb15d175f19effce617",
+  "branch": "codex/round81-bdsc-long-protection-replication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "git/ref/heads/codex/round81-bdsc-long-protection-replication",
+      "returncode": 0,
+      "wall_seconds": 0.5900988997891545,
+      "stderr": "",
+      "returned_sha": "f607ffe590eb90922910517fb1633c69324731d8"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 0,
+      "wall_seconds": 0.8155632996931672,
+      "stderr": "",
+      "returned_sha": "9ae6e5ae3b22c74b2b52f25164aaa26d8e521647"
+    },
+    {
+      "method": "POST",
+      "path": "git/trees",
+      "returncode": 1,
+      "wall_seconds": 11.385134699754417,
+      "stderr": "gh: We couldn't respond to your request in time. Sorry about that. Please try resubmitting your request and contact us if the problem persists. (HTTP 504)\n",
+      "returned_sha": null
+    }
+  ],
+  "optimizer_calls": 0,
+  "script_sha256": "80b0d18f3068bb6ce88bcea4052c7f0445b23f5f46870e61629daa50692ff4df",
+  "scope": "Exact blobs, tree and original commit hashes required before a non-force branch update",
+  "wall_seconds": 13.155926599632949,
+  "initial_remote_head": "f607ffe590eb90922910517fb1633c69324731d8",
+  "original_commits": [
+    "784fbd7b0e7fd58355d4548746ce3a89be0f946c",
+    "77cf16fbf96041617d6f36144158b5c533b59eb2",
+    "f38c83e80b5fce12437757ff0427406435575cf6",
+    "66b87fd6913a65f4214cecb3b1807a048a1e5d01",
+    "e7776ac96cf032bb205306cf7af9078fbc72aac6",
+    "682cb150e6bc3ef19616dfb15d175f19effce617"
+  ],
+  "verified_exact_trees": [
+    "9ae6e5ae3b22c74b2b52f25164aaa26d8e521647"
+  ],
+  "passed": false,
+  "error": "RuntimeError('GitHub API request failed; see ledger')"
+}

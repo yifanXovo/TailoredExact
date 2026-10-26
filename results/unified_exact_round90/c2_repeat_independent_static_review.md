@@ -1,0 +1,9 @@
+# C2 seed-repeat wrapper：独立静态审查
+
+审查冻结的 `scripts/round90_lp_g_c2_repeat.py` SHA256 `cd9f45e51e11f3ae616cb0a6c34f224a9076bc0953911660600e4b5ac26894ba`、修订后 `preregistration_c2_repeat.json` SHA256 `ef48cf87bee61a5ce77eb2538c4459bdf00330ae7e28dfb28d8f87c9fb533d55` 和 `c2_repeat_preparation.md` SHA256 `d2d2c7843d3303551a9393a70332e399a622a05fa83a2ca184b6b75607efe503`。仅源码与既存 seed-0 小收据只读核查；未导入、执行、测试、准备、构建或求解。**静态通过，可由 root 用独立 gate 准入一次零 Optimize `prepare`；`run` 仍需另签四臂 lease。**
+
+四条命令由冻结 G3 `command_for` 生成，只改 `--gurobi-seed` 的 0 为相应的 1 或 2，目的地另指向新 campaign。固定次序为 seed1 ENS-C→LP-G、seed2 LP-G→ENS-C；各臂完整 process cap 600 s、native 594 s、hard stop 598 s，线程/Presolve/affinity、R83 默认与 LP-G 开关保持 G3 语义。`validate` 绑定旧 qualification gate、同一二进制、七个 production source SHA、八个 harness SHA、C2 输入 SHA；seed-0 的 G3 summary/cross-arm/两臂 launch、audit、completion、result 逐字节固定且原样保留。首次发现旧独立 review SHA 因术语更正而失效，作者已将 prereg 绑定改为当前 `146fb00d5da2e3aa52698c644bee8de1300e04869de17d6da6b7ab58f44d8e3e`，未改 wrapper 算法。后续若此文件再改，gate 必须重签。
+
+隔离加载旧 runner 后仅给私有模块对象的 `CAMPAIGN` 赋每个新 seed 目录；`run_one` 的 raw、processes、summary、runtime 与 cross-arm 输出均使用该变量或新 launch destination，不写旧 G3 campaign。新总 summary 另存，按 `seed` 过滤构造两臂 pair，避免跨 seed 混合；每组写独立原问题 L/U 矛盾收据并沿用冻结严重信号规则。normal return 必须核 C++ `result.json` 的 Seed/Threads/Presolve requested、effective 与 set/get 返回码及实际 preset；seed-0 结果存在对应字段。非正常或无结果仅记 unknown，不能伪装成读回通过。已证书的各组才计 process-time 比例；未证书组单列，三组中位数仅作描述，不选最好 seed、不作统计或普遍性能结论。
+
+`prepare` 在任何新目录写入前要求 root 新 gate 的 exact schema、身份及 `allow_optimize=false`；`run` 要求新目录 identity 和单独 root lease，预注册最多四条完整进程臂，严重信号可提前停后续，并以 `run_started.json` 与独占 lock 防重跑/覆盖。初版 marker 将四臂误写为最多四次内部 Optimize；作者已改为 `complete_process_runs_planned=4` 并声明内部 Optimize 次数不受臂数限定，语义正确。每次已启动臂保留 raw 和 per-seed prefix；臂内异常写耗时下界失败收据，最终 `run_completion` 记录已完成臂 process wall 与整次 outer wall，后者含审计/失败；交叉审计或严重信号后的异常同样保留已写 pair/summary 与 outer error。现有 G3 运行器的证书审计逻辑不在此重复重审。该 wrapper 是 C2 单例波动复核，不构成 LP-G 晋级或跳过 D6/F2 保护角色的证据。

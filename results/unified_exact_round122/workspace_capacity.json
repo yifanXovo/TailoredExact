@@ -1,0 +1,28 @@
+{
+  "raw_projection_bytes": 8589934592,
+  "carrier_upper_bytes": 8589934592,
+  "pack_intermediate_bytes": 2147483648,
+  "one_restore_bytes": 8589934592,
+  "sparse_code_authorities_build_bytes": 1073741824,
+  "safety_margin_bytes": 21474836480,
+  "minimum_group_start_free_bytes": 42949672960,
+  "peak_incremental_upper_bytes": 50465865728,
+  "free_before_native_bytes": 217983913984,
+  "measured_baseline": {
+    "campaign": {
+      "files": 41136,
+      "bytes": 382064632
+    },
+    "qualification": {
+      "files": 5815,
+      "bytes": 52238798
+    },
+    "compact_evidence": {
+      "files": 3,
+      "bytes": 64864197
+    }
+  },
+  "estimate_basis": "8x R121 actual16-arm campaign metadata, minimum8GiB; uncompressed carrier upper, one independent restore; revise between groups from actual increments",
+  "no_heavy_scan_or_pack_during_solver": true,
+  "old_raw_or_restore_automatically_deleted": false
+}

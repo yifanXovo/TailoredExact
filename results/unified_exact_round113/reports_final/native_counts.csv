@@ -1,0 +1,8 @@
+campaign,id,arm,number,declared_calls,actual_Optimize,returned,explicit_not_started,LP,MIP,solve_kinds
+qualification/cli01,H100,P-GRB,1,1,1,1,0,0,1,"{""MIP"":1}"
+qualification/cli01,H100,P-S,2,1,1,1,0,0,1,"{""MIP"":1}"
+qualification/cli01,H100,ENS-C,3,5,5,5,0,3,2,"{""CHILD_BOUND_TARGET_MIP"":1,""LP"":3,""MIP"":1}"
+qualification/cli01,H100,M-B,4,5,5,5,0,3,2,"{""CHILD_BOUND_TARGET_MIP"":1,""LP"":3,""MIP"":1}"
+campaign,G50-C1,M-B,1,4,4,4,0,3,1,"{""LP"":3,""MIP"":1}"
+campaign,G50-C1,ENS-C,2,4,4,4,0,3,1,"{""LP"":3,""MIP"":1}"
+campaign,G50-C1,P-S,3,1,1,1,0,0,1,"{""MIP"":1}"

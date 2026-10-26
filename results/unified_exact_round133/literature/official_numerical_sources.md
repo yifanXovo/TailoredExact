@@ -1,0 +1,14 @@
+# Targeted numerical-source reading
+
+Read on 25 October 2026 (Asia/Shanghai). This is a bounded update of the existing literature comparison, not a new review. The four official pages were opened and their relevant sections read through the web tool. No external full paper, source HTML copy or commercial material is redistributed.
+
+| Official source | Reading scope | Supported use in this manuscript |
+| --- | --- | --- |
+| [Tolerances and User-Scaling](https://docs.gurobi.com/projects/optimizer/en/current/concepts/numericguide/tolerances_scaling.html) | IntFeasTol, FeasibilityTol, OptimalityTol, absolute tolerance and scaling discussion | These thresholds govern integrality and primal/dual residuals in their stated units. They are not a bound on the physical objective discrepancy. A model can admit points within tolerance that are infeasible in exact arithmetic. |
+| [Tolerances and Ill Conditioning](https://docs.gurobi.com/projects/optimizer/en/current/concepts/modeling/tolerances.html) | Finite precision, ill conditioning and final primal/dual quality | Solver computations have finite precision; quality checks concern the actual computed primal/dual quantities. The page does not prove that the R132 anomalies come from ill conditioning. |
+| [Solver Parameters to Manage Numerical Issues](https://docs.gurobi.com/projects/optimizer/en/current/concepts/numericguide/numeric_parameters.html) | Presolve diagnostics, model reformulation, NumericFocus, scaling and tolerance advice | Numerical settings may help some models and incur performance costs. This motivates explicit hypotheses and limited diagnostics, rather than globally disabling presolve/cuts or treating a stricter tolerance as a correctness theorem. |
+| [Callback Codes](https://docs.gurobi.com/projects/optimizer/en/current/reference/numericcodes/callbacks.html) | `where` / `what`; MIP, MIPSOL and MIPNODE objective-bound and incumbent fields | `MIP_OBJBND` is a current native best-bound observation. Its availability does not establish physical embedding, a project-specific local source's eligibility, global cover or online consumption by the outer controller. |
+
+The project conclusions in the right column apply these definitions to its own evidence chain; the official pages do not diagnose or endorse the project implementation. None supplies an objective-error allowance of 1e-6 or a reason to relax the inherited 1e-7 qualification contract. Requested zero MIP gaps are also not a rational-arithmetic certificate.
+
+Four `@manual` entries are appended to `references.bib`, leaving the inherited bibliography intact. Existing mathematical and related-routing references retain their earlier stated access limits. The new equal-target balancing explanation has a self-contained unit-transfer proof and is described as a standard discrete/majorization fact; no uninspected mathematical source or novelty comparison is added.

@@ -1,0 +1,38 @@
+{
+  "stage": 86,
+  "plan_commit": "0666c13e2ee8c21c318667def1149980fbd692ac",
+  "driver_session": 88121,
+  "driver_pid": 45336,
+  "completed": 12,
+  "planned": 12,
+  "active": null,
+  "last_experiment": {
+    "number": 12,
+    "arm": "K1-R",
+    "started_unix": 1789702266.3837655,
+    "driver_pid": 45336,
+    "destination": "results\\unified_exact_round86\\campaign\\local_raw\\12_F6_K1-R"
+  },
+  "campaign_lock_present": false,
+  "recorded_child_pid": 24448,
+  "recorded_child_mask": 4,
+  "active_elapsed_at_snapshot": null,
+  "total_completed_process_seconds": 22579.454000001773,
+  "completed_native_starts": 49,
+  "completed_native_returns": 49,
+  "updated_unix": 1789705887.842713,
+  "stage_complete": true,
+  "overall_goal_complete": true,
+  "no_relaunch": true,
+  "snapshot_script_sha256": "f803657c9c5b3958742244256125a0fd1a59a677c80d129c4f36e3724ff4abf4",
+  "scope": "Mutable recovery snapshot, not a performance checkpoint or proof of PID liveness. Native and driver status must be read independently.",
+  "driver_completion": {
+    "completed": 12,
+    "planned": 12,
+    "all_valid": true,
+    "ended_unix": 1789705863.6461186
+  },
+  "publication_complete": true,
+  "pr": 147,
+  "closure_note": "Original driver and all native/audit/package/plot producers closed. Historical PIDs are not live. Evidence PR147 independently verified."
+}

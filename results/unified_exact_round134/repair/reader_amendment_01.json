@@ -1,0 +1,39 @@
+{
+  "UTC": "2026-10-25T19:05:00.121440+00:00",
+  "before": {
+    "UTC": "2026-10-25T19:04:02.305376+00:00",
+    "candidate_SHA": "c1c16fc9322be3fc31eed393a0434d00e3040a5be6276db15dbff449608ce42c",
+    "helper_SHA": {
+      "scripts/round134_common.py": "af13361ae1523d2504dbde534e5fc5768a352649cd111f44748dbb5db0088f67",
+      "scripts/round134_campaign.py": "b3dd9590ee6fbce086db791aa0f016e625ffe2bc4b96e32ad65c773b123b4b88",
+      "scripts/round134_read.py": "81f0f098e093fbaff1fbb363c8393664d77d4688898087d1714a031d8d678776",
+      "scripts/round133_campaign.py": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+      "scripts/round133_postverify_repair.py": "8feae1d544d92fba843f4836f0c685c2cf38151f20386cd2538396ac34af6640",
+      "scripts/round133_read.py": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+      "scripts/round115_campaign.py": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03",
+      "scripts/round121_campaign.py": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0"
+    },
+    "C_matrix_SHA": "096ae8ac51fce984abfbdebb034529abf880a81101b9e6b10a2d8fd97643d374",
+    "D_matrix_SHA": "2892d22dd5125d0d9fc8bf8086d37c812654d96cb1af3c7051babdc3122a9db5"
+  },
+  "after": {
+    "UTC": "2026-10-25T19:04:02.305376+00:00",
+    "candidate_SHA": "c1c16fc9322be3fc31eed393a0434d00e3040a5be6276db15dbff449608ce42c",
+    "helper_SHA": {
+      "scripts/round134_common.py": "af13361ae1523d2504dbde534e5fc5768a352649cd111f44748dbb5db0088f67",
+      "scripts/round134_campaign.py": "b3dd9590ee6fbce086db791aa0f016e625ffe2bc4b96e32ad65c773b123b4b88",
+      "scripts/round134_read.py": "51d0416fa64a7530277dc4cc3c49c6e59e8c5d0adf8022c8d2576d25d64a483e",
+      "scripts/round133_campaign.py": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+      "scripts/round133_postverify_repair.py": "8feae1d544d92fba843f4836f0c685c2cf38151f20386cd2538396ac34af6640",
+      "scripts/round133_read.py": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+      "scripts/round115_campaign.py": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03",
+      "scripts/round121_campaign.py": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0"
+    },
+    "C_matrix_SHA": "096ae8ac51fce984abfbdebb034529abf880a81101b9e6b10a2d8fd97643d374",
+    "D_matrix_SHA": "2892d22dd5125d0d9fc8bf8086d37c812654d96cb1af3c7051babdc3122a9db5"
+  },
+  "reason": "C01 native producer healthy and sealed; reader expected_configuration was absent from new launch schema. Derive identical registered settings from seed, argv and configuration; retain failed audit logs and source bytes.",
+  "native_Optimize": 0,
+  "producer_and_plan_bytes_unchanged": true,
+  "no_solver_retry_no_certificate_backdating": true
+}

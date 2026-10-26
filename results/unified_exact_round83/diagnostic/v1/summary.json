@@ -1,0 +1,2836 @@
+{
+  "compile": {
+    "returncode": 0,
+    "wall_seconds": 5.6036604000255466,
+    "whole_tree_timeout": false,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "records": [
+    {
+      "id": "structural",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.09299999987706542,
+        "watchdog": false,
+        "restored_affinity": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "audit": {
+        "passed": true,
+        "oracle_cases": [
+          {
+            "case": "negative_relative_prefix_and_ties",
+            "relocations": 14,
+            "exchange_pairs": 4,
+            "exchange_feasible": 3,
+            "exchange_improving": 0,
+            "selected_kind": 0,
+            "found": true,
+            "passed": true
+          },
+          {
+            "case": "heterogeneous_Q",
+            "relocations": 14,
+            "exchange_pairs": 4,
+            "exchange_feasible": 2,
+            "exchange_improving": 0,
+            "selected_kind": 0,
+            "found": true,
+            "passed": true
+          },
+          {
+            "case": "loaded_return",
+            "relocations": 19,
+            "exchange_pairs": 7,
+            "exchange_feasible": 3,
+            "exchange_improving": 1,
+            "selected_kind": 0,
+            "found": true,
+            "passed": true
+          },
+          {
+            "case": "nonmetric_duration",
+            "relocations": 14,
+            "exchange_pairs": 4,
+            "exchange_feasible": 3,
+            "exchange_improving": 0,
+            "selected_kind": 0,
+            "found": false,
+            "passed": true
+          },
+          {
+            "case": "exact_T_boundary",
+            "relocations": 14,
+            "exchange_pairs": 4,
+            "exchange_feasible": 3,
+            "exchange_improving": 0,
+            "selected_kind": 0,
+            "found": true,
+            "passed": true
+          },
+          {
+            "case": "unused_vehicle_and_deletion",
+            "relocations": 8,
+            "exchange_pairs": 3,
+            "exchange_feasible": 3,
+            "exchange_improving": 0,
+            "selected_kind": 0,
+            "found": true,
+            "passed": true
+          },
+          {
+            "case": "empty_routes",
+            "relocations": 0,
+            "exchange_pairs": 0,
+            "exchange_feasible": 0,
+            "exchange_improving": 0,
+            "selected_kind": 0,
+            "found": false,
+            "passed": true
+          },
+          {
+            "case": "nonzero_net_beneficial_exchange",
+            "relocations": 8,
+            "exchange_pairs": 3,
+            "exchange_feasible": 3,
+            "exchange_improving": 2,
+            "selected_kind": 1,
+            "found": true,
+            "passed": true
+          }
+        ],
+        "optimizer_calls": 0
+      }
+    },
+    {
+      "id": "U6",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.11000000033527613,
+        "watchdog": false,
+        "restored_affinity": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.2144304717575782,
+          "G": 0.09373675706399522,
+          "P": 0.8046247646238867,
+          "stations": 49,
+          "pickup": 176,
+          "drop": 176,
+          "maximum_duration": 13872.14835760551,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.1783909575481966,
+          "G": 0.05336478010395868,
+          "P": 0.8335078496282529,
+          "stations": 49,
+          "pickup": 189,
+          "drop": 189,
+          "maximum_duration": 11088.156294008553,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.1783909575481964,
+          "neutral": 25,
+          "relocations": 1,
+          "exchanges": 24,
+          "equal_net_pairs": 26946,
+          "insertions": 1,
+          "quantities": 42,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.21443047175757857,
+              "final_UB": 0.21443047175757857,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 3,
+              "quantity_feasible": 3891,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006601999999999997,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 14,
+              "placements": 555,
+              "feasible": 155,
+              "improving": 0,
+              "exchange_pairs": 953,
+              "exchange_feasible": 404,
+              "exchange_improving": 31,
+              "best_key": [
+                1,
+                0,
+                0,
+                1,
+                2,
+                7,
+                9
+              ],
+              "best_potential": [
+                13517.478525291375,
+                13458.097382458505,
+                13033.0778810054,
+                11860.20637411503
+              ],
+              "current_potential": [
+                13872.14835760551,
+                13658.167836756662,
+                13517.478525291375,
+                13458.097382458505
+              ]
+            }
+          },
+          {
+            "iteration": 1,
+            "closure": {
+              "initial_UB": 0.21443047175757857,
+              "final_UB": 0.20650670464659798,
+              "accepted": 15,
+              "counts": {
+                "insertions": 1,
+                "quantities": 14,
+                "singles": 0,
+                "pairs": 14,
+                "cross_vehicle": 0,
+                "sign_flips": 3,
+                "removed_stops": 2
+              },
+              "independently_checked_physical_witnesses": 17,
+              "returned_to_outer": true,
+              "insertion_placements": 1680,
+              "insertion_quantities": 48,
+              "quantity_feasible": 62493,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0103527,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 19,
+              "placements": 754,
+              "feasible": 247,
+              "improving": 4,
+              "exchange_pairs": 961,
+              "exchange_feasible": 407,
+              "exchange_improving": 40,
+              "best_key": [
+                0,
+                0,
+                5,
+                7,
+                2,
+                3,
+                3
+              ],
+              "best_potential": [
+                13517.478525291375,
+                13458.097382458505,
+                13252.551823752256,
+                11980.946541061168
+              ],
+              "current_potential": [
+                14083.45630326938,
+                13517.478525291375,
+                13458.097382458505,
+                12013.719011052794
+              ]
+            }
+          },
+          {
+            "iteration": 2,
+            "closure": {
+              "initial_UB": 0.20650670464659798,
+              "final_UB": 0.2052651115402624,
+              "accepted": 2,
+              "counts": {
+                "insertions": 0,
+                "quantities": 2,
+                "singles": 0,
+                "pairs": 2,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 4,
+              "returned_to_outer": true,
+              "insertion_placements": 318,
+              "insertion_quantities": 18,
+              "quantity_feasible": 11527,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.001920599999999998,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 13,
+              "placements": 520,
+              "feasible": 192,
+              "improving": 5,
+              "exchange_pairs": 944,
+              "exchange_feasible": 426,
+              "exchange_improving": 37,
+              "best_key": [
+                1,
+                1,
+                1,
+                3,
+                3,
+                9,
+                10
+              ],
+              "best_potential": [
+                13372.551823752256,
+                12912.663091641198,
+                12874.346832517876,
+                11980.946541061168
+              ],
+              "current_potential": [
+                13517.478525291375,
+                13458.097382458505,
+                13372.551823752256,
+                11980.946541061168
+              ]
+            }
+          },
+          {
+            "iteration": 3,
+            "closure": {
+              "initial_UB": 0.2052651115402624,
+              "final_UB": 0.2052651115402624,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3804,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006198000000000002,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 13,
+              "placements": 516,
+              "feasible": 198,
+              "improving": 0,
+              "exchange_pairs": 928,
+              "exchange_feasible": 408,
+              "exchange_improving": 21,
+              "best_key": [
+                1,
+                0,
+                8,
+                10,
+                2,
+                1,
+                4
+              ],
+              "best_potential": [
+                13118.322121550671,
+                12936.73927086901,
+                12912.663091641198,
+                12874.346832517876
+              ],
+              "current_potential": [
+                13372.551823752256,
+                12912.663091641198,
+                12874.346832517876,
+                11980.946541061168
+              ]
+            }
+          },
+          {
+            "iteration": 4,
+            "closure": {
+              "initial_UB": 0.2052651115402624,
+              "final_UB": 0.19712755824789302,
+              "accepted": 7,
+              "counts": {
+                "insertions": 0,
+                "quantities": 7,
+                "singles": 0,
+                "pairs": 7,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 9,
+              "returned_to_outer": true,
+              "insertion_placements": 848,
+              "insertion_quantities": 48,
+              "quantity_feasible": 28820,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0047215,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 11,
+              "placements": 434,
+              "feasible": 179,
+              "improving": 0,
+              "exchange_pairs": 902,
+              "exchange_feasible": 390,
+              "exchange_improving": 11,
+              "best_key": [
+                1,
+                0,
+                1,
+                8,
+                3,
+                1,
+                8
+              ],
+              "best_potential": [
+                12936.73927086901,
+                12912.663091641198,
+                12698.91966910378,
+                12684.898717885302
+              ],
+              "current_potential": [
+                13238.322121550671,
+                12936.73927086901,
+                12912.663091641198,
+                12874.346832517876
+              ]
+            }
+          },
+          {
+            "iteration": 5,
+            "closure": {
+              "initial_UB": 0.19712755824789302,
+              "final_UB": 0.19152484963373922,
+              "accepted": 5,
+              "counts": {
+                "insertions": 0,
+                "quantities": 5,
+                "singles": 0,
+                "pairs": 5,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 7,
+              "returned_to_outer": true,
+              "insertion_placements": 636,
+              "insertion_quantities": 36,
+              "quantity_feasible": 21827,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0036672000000000024,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 14,
+              "placements": 553,
+              "feasible": 252,
+              "improving": 0,
+              "exchange_pairs": 997,
+              "exchange_feasible": 434,
+              "exchange_improving": 10,
+              "best_key": [
+                1,
+                2,
+                5,
+                6,
+                3,
+                9,
+                10
+              ],
+              "best_potential": [
+                12925.765601893374,
+                12912.663091641198,
+                12715.566503879043,
+                12578.91966910378
+              ],
+              "current_potential": [
+                12936.73927086901,
+                12912.663091641198,
+                12684.898717885302,
+                12578.91966910378
+              ]
+            }
+          },
+          {
+            "iteration": 6,
+            "closure": {
+              "initial_UB": 0.19152484963373922,
+              "final_UB": 0.19152484963373922,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3625,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006071999999999952,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 14,
+              "placements": 553,
+              "feasible": 251,
+              "improving": 0,
+              "exchange_pairs": 997,
+              "exchange_feasible": 431,
+              "exchange_improving": 12,
+              "best_key": [
+                1,
+                1,
+                9,
+                10,
+                3,
+                12,
+                13
+              ],
+              "best_potential": [
+                12715.566503879043,
+                12660.605984261372,
+                12578.91966910378,
+                12326.55107277291
+              ],
+              "current_potential": [
+                12925.765601893374,
+                12912.663091641198,
+                12715.566503879043,
+                12578.91966910378
+              ]
+            }
+          },
+          {
+            "iteration": 7,
+            "closure": {
+              "initial_UB": 0.19152484963373922,
+              "final_UB": 0.19152484963373922,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3617,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0021745999999999988,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 14,
+              "placements": 553,
+              "feasible": 253,
+              "improving": 0,
+              "exchange_pairs": 997,
+              "exchange_feasible": 442,
+              "exchange_improving": 13,
+              "best_key": [
+                1,
+                1,
+                1,
+                2,
+                2,
+                4,
+                6
+              ],
+              "best_potential": [
+                12660.605984261372,
+                12578.91966910378,
+                12498.057486713873,
+                12267.685843899215
+              ],
+              "current_potential": [
+                12715.566503879043,
+                12660.605984261372,
+                12578.91966910378,
+                12326.55107277291
+              ]
+            }
+          },
+          {
+            "iteration": 8,
+            "closure": {
+              "initial_UB": 0.19152484963373922,
+              "final_UB": 0.19152484963373922,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3706,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.000754699999999997,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 15,
+              "placements": 593,
+              "feasible": 291,
+              "improving": 0,
+              "exchange_pairs": 1030,
+              "exchange_feasible": 480,
+              "exchange_improving": 17,
+              "best_key": [
+                1,
+                1,
+                9,
+                10,
+                3,
+                8,
+                9
+              ],
+              "best_potential": [
+                12578.91966910378,
+                12498.057486713873,
+                12456.774544434094,
+                11986.515412848576
+              ],
+              "current_potential": [
+                12660.605984261372,
+                12578.91966910378,
+                12498.057486713873,
+                12267.685843899215
+              ]
+            }
+          },
+          {
+            "iteration": 9,
+            "closure": {
+              "initial_UB": 0.19152484963373922,
+              "final_UB": 0.1893292638652077,
+              "accepted": 2,
+              "counts": {
+                "insertions": 0,
+                "quantities": 2,
+                "singles": 0,
+                "pairs": 2,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 4,
+              "returned_to_outer": true,
+              "insertion_placements": 318,
+              "insertion_quantities": 18,
+              "quantity_feasible": 11140,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0019506999999999997,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 17,
+              "placements": 671,
+              "feasible": 246,
+              "improving": 0,
+              "exchange_pairs": 1044,
+              "exchange_feasible": 483,
+              "exchange_improving": 16,
+              "best_key": [
+                1,
+                0,
+                4,
+                5,
+                1,
+                8,
+                9
+              ],
+              "best_potential": [
+                12512.277967819275,
+                12498.057486713873,
+                12475.487360586618,
+                12456.774544434094
+              ],
+              "current_potential": [
+                12578.91966910378,
+                12498.057486713873,
+                12456.774544434094,
+                11986.515412848576
+              ]
+            }
+          },
+          {
+            "iteration": 10,
+            "closure": {
+              "initial_UB": 0.1893292638652077,
+              "final_UB": 0.1893292638652077,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3711,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006253000000000022,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 17,
+              "placements": 671,
+              "feasible": 242,
+              "improving": 0,
+              "exchange_pairs": 1044,
+              "exchange_feasible": 486,
+              "exchange_improving": 2,
+              "best_key": [
+                1,
+                0,
+                5,
+                6,
+                1,
+                1,
+                2
+              ],
+              "best_potential": [
+                12508.217204333403,
+                12498.057486713873,
+                12456.774544434094,
+                12237.756478506612
+              ],
+              "current_potential": [
+                12512.277967819275,
+                12498.057486713873,
+                12475.487360586618,
+                12456.774544434094
+              ]
+            }
+          },
+          {
+            "iteration": 11,
+            "closure": {
+              "initial_UB": 0.1893292638652077,
+              "final_UB": 0.1893292638652077,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3710,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006198999999999996,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 17,
+              "placements": 671,
+              "feasible": 243,
+              "improving": 0,
+              "exchange_pairs": 1044,
+              "exchange_feasible": 487,
+              "exchange_improving": 6,
+              "best_key": [
+                1,
+                0,
+                6,
+                8,
+                1,
+                3,
+                5
+              ],
+              "best_potential": [
+                12498.057486713873,
+                12456.774544434094,
+                12397.856007386512,
+                12362.549612364126
+              ],
+              "current_potential": [
+                12508.217204333403,
+                12498.057486713873,
+                12456.774544434094,
+                12237.756478506612
+              ]
+            }
+          },
+          {
+            "iteration": 12,
+            "closure": {
+              "initial_UB": 0.1893292638652077,
+              "final_UB": 0.18906029954181153,
+              "accepted": 1,
+              "counts": {
+                "insertions": 0,
+                "quantities": 1,
+                "singles": 0,
+                "pairs": 1,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 3,
+              "returned_to_outer": true,
+              "insertion_placements": 212,
+              "insertion_quantities": 12,
+              "quantity_feasible": 7391,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0012727999999999975,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 16,
+              "placements": 631,
+              "feasible": 203,
+              "improving": 0,
+              "exchange_pairs": 1038,
+              "exchange_feasible": 488,
+              "exchange_improving": 5,
+              "best_key": [
+                1,
+                0,
+                6,
+                7,
+                2,
+                10,
+                11
+              ],
+              "best_potential": [
+                12456.774544434094,
+                12362.549612364126,
+                11935.706802834975,
+                11849.455690065512
+              ],
+              "current_potential": [
+                12498.057486713873,
+                12456.774544434094,
+                12397.856007386512,
+                12362.549612364126
+              ]
+            }
+          },
+          {
+            "iteration": 13,
+            "closure": {
+              "initial_UB": 0.18906029954181153,
+              "final_UB": 0.18902196520050318,
+              "accepted": 1,
+              "counts": {
+                "insertions": 0,
+                "quantities": 1,
+                "singles": 0,
+                "pairs": 1,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 3,
+              "returned_to_outer": true,
+              "insertion_placements": 212,
+              "insertion_quantities": 12,
+              "quantity_feasible": 7355,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0033958999999999934,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 15,
+              "placements": 590,
+              "feasible": 190,
+              "improving": 0,
+              "exchange_pairs": 1030,
+              "exchange_feasible": 488,
+              "exchange_improving": 10,
+              "best_key": [
+                1,
+                1,
+                2,
+                5,
+                3,
+                7,
+                10
+              ],
+              "best_potential": [
+                11996.919700768352,
+                11935.706802834975,
+                11849.455690065512,
+                11468.139756963956
+              ],
+              "current_potential": [
+                12456.774544434094,
+                12362.549612364126,
+                11935.706802834975,
+                11849.455690065512
+              ]
+            }
+          },
+          {
+            "iteration": 14,
+            "closure": {
+              "initial_UB": 0.18902196520050318,
+              "final_UB": 0.18391749023354498,
+              "accepted": 5,
+              "counts": {
+                "insertions": 0,
+                "quantities": 5,
+                "singles": 0,
+                "pairs": 5,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 7,
+              "returned_to_outer": true,
+              "insertion_placements": 636,
+              "insertion_quantities": 36,
+              "quantity_feasible": 21629,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.003737200000000003,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 16,
+              "placements": 631,
+              "feasible": 205,
+              "improving": 0,
+              "exchange_pairs": 986,
+              "exchange_feasible": 468,
+              "exchange_improving": 15,
+              "best_key": [
+                1,
+                1,
+                0,
+                6,
+                3,
+                0,
+                5
+              ],
+              "best_potential": [
+                11935.706802834975,
+                11849.455690065512,
+                11777.579645872014,
+                11709.496290154168
+              ],
+              "current_potential": [
+                12116.919700768352,
+                11935.706802834975,
+                11849.455690065512,
+                11348.139756963956
+              ]
+            }
+          },
+          {
+            "iteration": 15,
+            "closure": {
+              "initial_UB": 0.18391749023354498,
+              "final_UB": 0.18024988111856136,
+              "accepted": 2,
+              "counts": {
+                "insertions": 0,
+                "quantities": 2,
+                "singles": 0,
+                "pairs": 2,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 4,
+              "returned_to_outer": true,
+              "insertion_placements": 318,
+              "insertion_quantities": 18,
+              "quantity_feasible": 11132,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.001931199999999994,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 18,
+              "placements": 702,
+              "feasible": 248,
+              "improving": 0,
+              "exchange_pairs": 1053,
+              "exchange_feasible": 510,
+              "exchange_improving": 5,
+              "best_key": [
+                1,
+                0,
+                7,
+                8,
+                3,
+                9,
+                10
+              ],
+              "best_potential": [
+                11849.455690065512,
+                11709.496290154168,
+                11534.413666560533,
+                11371.680159946927
+              ],
+              "current_potential": [
+                11935.706802834975,
+                11897.579645872014,
+                11849.455690065512,
+                11709.496290154168
+              ]
+            }
+          },
+          {
+            "iteration": 16,
+            "closure": {
+              "initial_UB": 0.18024988111856136,
+              "final_UB": 0.17979830946132,
+              "accepted": 1,
+              "counts": {
+                "insertions": 0,
+                "quantities": 1,
+                "singles": 0,
+                "pairs": 1,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 3,
+              "returned_to_outer": true,
+              "insertion_placements": 212,
+              "insertion_quantities": 12,
+              "quantity_feasible": 7433,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.001264299999999996,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 19,
+              "placements": 742,
+              "feasible": 277,
+              "improving": 0,
+              "exchange_pairs": 1107,
+              "exchange_feasible": 548,
+              "exchange_improving": 8,
+              "best_key": [
+                1,
+                0,
+                4,
+                5,
+                2,
+                3,
+                4
+              ],
+              "best_potential": [
+                11709.496290154168,
+                11479.237293894541,
+                11371.680159946927,
+                11277.672673792784
+              ],
+              "current_potential": [
+                11849.455690065512,
+                11709.496290154168,
+                11654.413666560533,
+                11371.680159946927
+              ]
+            }
+          },
+          {
+            "iteration": 17,
+            "closure": {
+              "initial_UB": 0.17979830946132,
+              "final_UB": 0.17979830946132,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3708,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006612000000000007,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 19,
+              "placements": 742,
+              "feasible": 282,
+              "improving": 0,
+              "exchange_pairs": 1107,
+              "exchange_feasible": 553,
+              "exchange_improving": 9,
+              "best_key": [
+                1,
+                0,
+                4,
+                5,
+                1,
+                0,
+                1
+              ],
+              "best_potential": [
+                11479.237293894541,
+                11371.680159946927,
+                11368.490080327496,
+                11157.859817151635
+              ],
+              "current_potential": [
+                11709.496290154168,
+                11479.237293894541,
+                11371.680159946927,
+                11277.672673792784
+              ]
+            }
+          },
+          {
+            "iteration": 18,
+            "closure": {
+              "initial_UB": 0.17979830946132,
+              "final_UB": 0.17979830946132,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3708,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006315000000000071,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 19,
+              "placements": 742,
+              "feasible": 286,
+              "improving": 0,
+              "exchange_pairs": 1107,
+              "exchange_feasible": 557,
+              "exchange_improving": 6,
+              "best_key": [
+                1,
+                1,
+                8,
+                9,
+                3,
+                2,
+                3
+              ],
+              "best_potential": [
+                11479.237293894541,
+                11211.242650864286,
+                11157.859817151635,
+                11047.52204681752
+              ],
+              "current_potential": [
+                11479.237293894541,
+                11371.680159946927,
+                11368.490080327496,
+                11157.859817151635
+              ]
+            }
+          },
+          {
+            "iteration": 19,
+            "closure": {
+              "initial_UB": 0.17979830946132,
+              "final_UB": 0.17979830946132,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3708,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0011112000000000066,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 19,
+              "placements": 742,
+              "feasible": 292,
+              "improving": 0,
+              "exchange_pairs": 1107,
+              "exchange_feasible": 566,
+              "exchange_improving": 4,
+              "best_key": [
+                1,
+                1,
+                9,
+                10,
+                2,
+                1,
+                2
+              ],
+              "best_potential": [
+                11211.242650864286,
+                11157.859817151635,
+                11088.156294008553,
+                10832.587687584986
+              ],
+              "current_potential": [
+                11479.237293894541,
+                11211.242650864286,
+                11157.859817151635,
+                11047.52204681752
+              ]
+            }
+          },
+          {
+            "iteration": 20,
+            "closure": {
+              "initial_UB": 0.17979830946132,
+              "final_UB": 0.17979830946132,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3709,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006344999999999962,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 19,
+              "placements": 742,
+              "feasible": 296,
+              "improving": 0,
+              "exchange_pairs": 1107,
+              "exchange_feasible": 571,
+              "exchange_improving": 2,
+              "best_key": [
+                1,
+                0,
+                5,
+                9,
+                3,
+                8,
+                12
+              ],
+              "best_potential": [
+                11169.31535668953,
+                11088.156294008553,
+                11084.865379469815,
+                10832.587687584986
+              ],
+              "current_potential": [
+                11211.242650864286,
+                11157.859817151635,
+                11088.156294008553,
+                10832.587687584986
+              ]
+            }
+          },
+          {
+            "iteration": 21,
+            "closure": {
+              "initial_UB": 0.17979830946132,
+              "final_UB": 0.17885495616698813,
+              "accepted": 1,
+              "counts": {
+                "insertions": 0,
+                "quantities": 1,
+                "singles": 0,
+                "pairs": 1,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 3,
+              "returned_to_outer": true,
+              "insertion_placements": 212,
+              "insertion_quantities": 12,
+              "quantity_feasible": 7371,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0012614999999999987,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 16,
+              "placements": 628,
+              "feasible": 215,
+              "improving": 0,
+              "exchange_pairs": 1023,
+              "exchange_feasible": 520,
+              "exchange_improving": 2,
+              "best_key": [
+                1,
+                0,
+                5,
+                6,
+                3,
+                4,
+                5
+              ],
+              "best_potential": [
+                11090.161429663265,
+                11088.156294008553,
+                10977.875089672943,
+                10832.587687584986
+              ],
+              "current_potential": [
+                11169.31535668953,
+                11088.156294008553,
+                11084.865379469815,
+                10832.587687584986
+              ]
+            }
+          },
+          {
+            "iteration": 22,
+            "closure": {
+              "initial_UB": 0.17885495616698813,
+              "final_UB": 0.17885495616698813,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3686,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006315000000000071,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 16,
+              "placements": 628,
+              "feasible": 216,
+              "improving": 0,
+              "exchange_pairs": 1023,
+              "exchange_feasible": 520,
+              "exchange_improving": 1,
+              "best_key": [
+                1,
+                0,
+                8,
+                11,
+                3,
+                6,
+                9
+              ],
+              "best_potential": [
+                11088.156294008553,
+                11068.973181934838,
+                11031.01544803449,
+                10832.587687584986
+              ],
+              "current_potential": [
+                11090.161429663265,
+                11088.156294008553,
+                10977.875089672943,
+                10832.587687584986
+              ]
+            }
+          },
+          {
+            "iteration": 23,
+            "closure": {
+              "initial_UB": 0.17885495616698813,
+              "final_UB": 0.1783909575481964,
+              "accepted": 1,
+              "counts": {
+                "insertions": 0,
+                "quantities": 1,
+                "singles": 0,
+                "pairs": 1,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 3,
+              "returned_to_outer": true,
+              "insertion_placements": 212,
+              "insertion_quantities": 12,
+              "quantity_feasible": 6920,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.004130899999999993,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 17,
+              "placements": 668,
+              "feasible": 230,
+              "improving": 0,
+              "exchange_pairs": 1148,
+              "exchange_feasible": 526,
+              "exchange_improving": 1,
+              "best_key": [
+                1,
+                0,
+                6,
+                7,
+                3,
+                8,
+                9
+              ],
+              "best_potential": [
+                11088.156294008553,
+                11023.408236664893,
+                10998.701298533575,
+                10832.587687584986
+              ],
+              "current_potential": [
+                11088.156294008553,
+                11068.973181934838,
+                11031.01544803449,
+                10832.587687584986
+              ]
+            }
+          },
+          {
+            "iteration": 24,
+            "closure": {
+              "initial_UB": 0.1783909575481964,
+              "final_UB": 0.1783909575481964,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3460,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006024999999999919,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 17,
+              "placements": 668,
+              "feasible": 230,
+              "improving": 0,
+              "exchange_pairs": 1148,
+              "exchange_feasible": 526,
+              "exchange_improving": 1,
+              "best_key": [
+                1,
+                1,
+                0,
+                2,
+                3,
+                6,
+                8
+              ],
+              "best_potential": [
+                11088.156294008553,
+                10998.701298533575,
+                10997.352579780028,
+                10983.315550285453
+              ],
+              "current_potential": [
+                11088.156294008553,
+                11023.408236664893,
+                10998.701298533575,
+                10832.587687584986
+              ]
+            }
+          },
+          {
+            "iteration": 25,
+            "closure": {
+              "initial_UB": 0.1783909575481964,
+              "final_UB": 0.1783909575481964,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 6,
+              "quantity_feasible": 3470,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0006055999999999978,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 15,
+              "placements": 590,
+              "feasible": 201,
+              "improving": 0,
+              "exchange_pairs": 1121,
+              "exchange_feasible": 512,
+              "exchange_improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                11088.156294008553,
+                10998.701298533575,
+                10997.352579780028,
+                10983.315550285453
+              ]
+            }
+          }
+        ],
+        "neutral_states": 25,
+        "strict_moves": 43,
+        "unique_recorded_route_states": 38,
+        "offline_seconds": 1.1301394002512097,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis; no complete performance claim"
+      }
+    },
+    {
+      "id": "D6",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.06300000008195639,
+        "watchdog": false,
+        "restored_affinity": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.1578497125151539,
+          "G": 0.028608467664919014,
+          "P": 0.8616082990015659,
+          "stations": 30,
+          "pickup": 122,
+          "drop": 122,
+          "maximum_duration": 10831.913396631193,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.15708313110317407,
+          "G": 0.0276361189802119,
+          "P": 0.8629800808197478,
+          "stations": 30,
+          "pickup": 121,
+          "drop": 121,
+          "maximum_duration": 8747.473446808384,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.15708313110317415,
+          "neutral": 13,
+          "relocations": 0,
+          "exchanges": 13,
+          "equal_net_pairs": 3039,
+          "insertions": 0,
+          "quantities": 2,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.15784971251515398,
+              "final_UB": 0.15784971251515398,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2207,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0002854000000000003,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 8,
+              "placements": 174,
+              "feasible": 45,
+              "improving": 0,
+              "exchange_pairs": 221,
+              "exchange_feasible": 140,
+              "exchange_improving": 11,
+              "best_key": [
+                1,
+                0,
+                2,
+                3,
+                2,
+                4,
+                5
+              ],
+              "best_potential": [
+                10279.981185432775,
+                9980.213868539136,
+                9969.422214904669
+              ],
+              "current_potential": [
+                10831.913396631193,
+                10565.25892753544,
+                10279.981185432775
+              ]
+            }
+          },
+          {
+            "iteration": 1,
+            "closure": {
+              "initial_UB": 0.15784971251515398,
+              "final_UB": 0.15784971251515398,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2209,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.00031690000000000017,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 8,
+              "placements": 174,
+              "feasible": 52,
+              "improving": 0,
+              "exchange_pairs": 221,
+              "exchange_feasible": 143,
+              "exchange_improving": 8,
+              "best_key": [
+                1,
+                0,
+                5,
+                8,
+                1,
+                6,
+                10
+              ],
+              "best_potential": [
+                9980.213868539136,
+                9883.562597247237,
+                9828.67116962083
+              ],
+              "current_potential": [
+                10279.981185432775,
+                9980.213868539136,
+                9969.422214904669
+              ]
+            }
+          },
+          {
+            "iteration": 2,
+            "closure": {
+              "initial_UB": 0.15784971251515398,
+              "final_UB": 0.15784971251515398,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2170,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.00027589999999999906,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 8,
+              "placements": 173,
+              "feasible": 45,
+              "improving": 0,
+              "exchange_pairs": 212,
+              "exchange_feasible": 123,
+              "exchange_improving": 5,
+              "best_key": [
+                1,
+                1,
+                1,
+                2,
+                2,
+                3,
+                4
+              ],
+              "best_potential": [
+                9939.402348653904,
+                9883.562597247237,
+                9669.3838847855
+              ],
+              "current_potential": [
+                9980.213868539136,
+                9883.562597247237,
+                9828.67116962083
+              ]
+            }
+          },
+          {
+            "iteration": 3,
+            "closure": {
+              "initial_UB": 0.15784971251515398,
+              "final_UB": 0.15784971251515398,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2175,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.00027019999999999995,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 8,
+              "placements": 173,
+              "feasible": 47,
+              "improving": 0,
+              "exchange_pairs": 212,
+              "exchange_feasible": 124,
+              "exchange_improving": 5,
+              "best_key": [
+                1,
+                0,
+                8,
+                10,
+                2,
+                3,
+                6
+              ],
+              "best_potential": [
+                9700.279829937741,
+                9669.3838847855,
+                9444.415863944923
+              ],
+              "current_potential": [
+                9939.402348653904,
+                9883.562597247237,
+                9669.3838847855
+              ]
+            }
+          },
+          {
+            "iteration": 4,
+            "closure": {
+              "initial_UB": 0.15784971251515398,
+              "final_UB": 0.15765792139965246,
+              "accepted": 1,
+              "counts": {
+                "insertions": 0,
+                "quantities": 1,
+                "singles": 0,
+                "pairs": 1,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 3,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 4285,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0005312000000000008,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 7,
+              "placements": 153,
+              "feasible": 45,
+              "improving": 0,
+              "exchange_pairs": 201,
+              "exchange_feasible": 122,
+              "exchange_improving": 5,
+              "best_key": [
+                1,
+                0,
+                0,
+                1,
+                1,
+                6,
+                7
+              ],
+              "best_potential": [
+                9498.530660830858,
+                9444.415863944923,
+                9081.714363761821
+              ],
+              "current_potential": [
+                9700.279829937741,
+                9669.3838847855,
+                9444.415863944923
+              ]
+            }
+          },
+          {
+            "iteration": 5,
+            "closure": {
+              "initial_UB": 0.15765792139965246,
+              "final_UB": 0.15765792139965246,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2140,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0002876999999999984,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 7,
+              "placements": 153,
+              "feasible": 48,
+              "improving": 0,
+              "exchange_pairs": 201,
+              "exchange_feasible": 122,
+              "exchange_improving": 3,
+              "best_key": [
+                1,
+                0,
+                2,
+                3,
+                1,
+                4,
+                5
+              ],
+              "best_potential": [
+                9444.749477391462,
+                9444.415863944923,
+                9133.219324431788
+              ],
+              "current_potential": [
+                9498.530660830858,
+                9444.415863944923,
+                9081.714363761821
+              ]
+            }
+          },
+          {
+            "iteration": 6,
+            "closure": {
+              "initial_UB": 0.15765792139965246,
+              "final_UB": 0.15765792139965246,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2140,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0002681000000000003,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 7,
+              "placements": 153,
+              "feasible": 48,
+              "improving": 0,
+              "exchange_pairs": 201,
+              "exchange_feasible": 122,
+              "exchange_improving": 2,
+              "best_key": [
+                1,
+                0,
+                1,
+                3,
+                2,
+                7,
+                9
+              ],
+              "best_potential": [
+                9437.967299847922,
+                9188.65586264094,
+                9133.219324431788
+              ],
+              "current_potential": [
+                9444.749477391462,
+                9444.415863944923,
+                9133.219324431788
+              ]
+            }
+          },
+          {
+            "iteration": 7,
+            "closure": {
+              "initial_UB": 0.15765792139965246,
+              "final_UB": 0.15765792139965246,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2194,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.00027450000000000044,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 4,
+              "placements": 88,
+              "feasible": 21,
+              "improving": 0,
+              "exchange_pairs": 219,
+              "exchange_feasible": 137,
+              "exchange_improving": 3,
+              "best_key": [
+                1,
+                0,
+                5,
+                10,
+                2,
+                5,
+                10
+              ],
+              "best_potential": [
+                9325.924126062288,
+                9278.506086085861,
+                9133.219324431788
+              ],
+              "current_potential": [
+                9437.967299847922,
+                9188.65586264094,
+                9133.219324431788
+              ]
+            }
+          },
+          {
+            "iteration": 8,
+            "closure": {
+              "initial_UB": 0.15765792139965246,
+              "final_UB": 0.15708313110317415,
+              "accepted": 1,
+              "counts": {
+                "insertions": 0,
+                "quantities": 1,
+                "singles": 0,
+                "pairs": 1,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 3,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 4632,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0005824000000000003,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 5,
+              "placements": 108,
+              "feasible": 31,
+              "improving": 0,
+              "exchange_pairs": 226,
+              "exchange_feasible": 159,
+              "exchange_improving": 2,
+              "best_key": [
+                1,
+                0,
+                5,
+                6,
+                1,
+                0,
+                1
+              ],
+              "best_potential": [
+                9220.402532546272,
+                9158.506086085861,
+                8981.258037933254
+              ],
+              "current_potential": [
+                9325.924126062288,
+                9158.506086085861,
+                9133.219324431788
+              ]
+            }
+          },
+          {
+            "iteration": 9,
+            "closure": {
+              "initial_UB": 0.15708313110317415,
+              "final_UB": 0.15708313110317415,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2324,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.00028730000000000075,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 5,
+              "placements": 108,
+              "feasible": 37,
+              "improving": 0,
+              "exchange_pairs": 226,
+              "exchange_feasible": 159,
+              "exchange_improving": 1,
+              "best_key": [
+                1,
+                0,
+                1,
+                2,
+                1,
+                1,
+                2
+              ],
+              "best_potential": [
+                9158.506086085861,
+                9027.18530886299,
+                8808.967472349344
+              ],
+              "current_potential": [
+                9220.402532546272,
+                9158.506086085861,
+                8981.258037933254
+              ]
+            }
+          },
+          {
+            "iteration": 10,
+            "closure": {
+              "initial_UB": 0.15708313110317415,
+              "final_UB": 0.15708313110317415,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2335,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0002938999999999997,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 5,
+              "placements": 108,
+              "feasible": 45,
+              "improving": 0,
+              "exchange_pairs": 226,
+              "exchange_feasible": 159,
+              "exchange_improving": 5,
+              "best_key": [
+                1,
+                0,
+                2,
+                8,
+                2,
+                0,
+                6
+              ],
+              "best_potential": [
+                9027.18530886299,
+                9005.610232828312,
+                8984.656511026125
+              ],
+              "current_potential": [
+                9158.506086085861,
+                9027.18530886299,
+                8808.967472349344
+              ]
+            }
+          },
+          {
+            "iteration": 11,
+            "closure": {
+              "initial_UB": 0.15708313110317415,
+              "final_UB": 0.15708313110317415,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2156,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0003275000000000014,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 4,
+              "placements": 88,
+              "feasible": 28,
+              "improving": 0,
+              "exchange_pairs": 217,
+              "exchange_feasible": 130,
+              "exchange_improving": 2,
+              "best_key": [
+                1,
+                0,
+                6,
+                10,
+                2,
+                6,
+                10
+              ],
+              "best_potential": [
+                9027.18530886299,
+                8694.936626368002,
+                8659.597095645708
+              ],
+              "current_potential": [
+                9027.18530886299,
+                9005.610232828312,
+                8984.656511026125
+              ]
+            }
+          },
+          {
+            "iteration": 12,
+            "closure": {
+              "initial_UB": 0.15708313110317415,
+              "final_UB": 0.15708313110317415,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2151,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.00028459999999999597,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 6,
+              "placements": 132,
+              "feasible": 61,
+              "improving": 0,
+              "exchange_pairs": 228,
+              "exchange_feasible": 122,
+              "exchange_improving": 6,
+              "best_key": [
+                1,
+                1,
+                3,
+                4,
+                2,
+                5,
+                6
+              ],
+              "best_potential": [
+                8747.473446808384,
+                8694.936626368002,
+                8623.236354762783
+              ],
+              "current_potential": [
+                9027.18530886299,
+                8694.936626368002,
+                8659.597095645708
+              ]
+            }
+          },
+          {
+            "iteration": 13,
+            "closure": {
+              "initial_UB": 0.15708313110317415,
+              "final_UB": 0.15708313110317415,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 0,
+              "insertion_quantities": 0,
+              "quantity_feasible": 2151,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0002821000000000004,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 6,
+              "placements": 132,
+              "feasible": 62,
+              "improving": 0,
+              "exchange_pairs": 228,
+              "exchange_feasible": 122,
+              "exchange_improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                8747.473446808384,
+                8694.936626368002,
+                8623.236354762783
+              ]
+            }
+          }
+        ],
+        "neutral_states": 13,
+        "strict_moves": 2,
+        "unique_recorded_route_states": 16,
+        "offline_seconds": 0.1662670997902751,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis; no complete performance claim"
+      }
+    },
+    {
+      "id": "D7",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.030999999959021807,
+        "watchdog": false,
+        "restored_affinity": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.3005435182943174,
+          "G": 0.08518370744592048,
+          "P": 1.4357320723226463,
+          "stations": 49,
+          "pickup": 206,
+          "drop": 206,
+          "maximum_duration": 13547.57446194861,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.271177227019433,
+          "G": 0.07840694575829603,
+          "P": 1.2851352084075796,
+          "stations": 49,
+          "pickup": 207,
+          "drop": 207,
+          "maximum_duration": 12762.900621714316,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.27117722701943325,
+          "neutral": 3,
+          "relocations": 0,
+          "exchanges": 3,
+          "equal_net_pairs": 3319,
+          "insertions": 0,
+          "quantities": 12,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.30054351829431747,
+              "final_UB": 0.30054351829431747,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 3,
+              "quantity_feasible": 3446,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0005947000000000001,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 15,
+              "placements": 597,
+              "feasible": 146,
+              "improving": 0,
+              "exchange_pairs": 848,
+              "exchange_feasible": 329,
+              "exchange_improving": 12,
+              "best_key": [
+                1,
+                1,
+                10,
+                12,
+                2,
+                8,
+                11
+              ],
+              "best_potential": [
+                13221.098354693857,
+                12586.476466862903,
+                12559.029738466079,
+                12546.109670709
+              ],
+              "current_potential": [
+                13547.574461948609,
+                13221.098354693857,
+                12546.109670709,
+                11646.312847541685
+              ]
+            }
+          },
+          {
+            "iteration": 1,
+            "closure": {
+              "initial_UB": 0.30054351829431747,
+              "final_UB": 0.29785610557174325,
+              "accepted": 5,
+              "counts": {
+                "insertions": 0,
+                "quantities": 5,
+                "singles": 0,
+                "pairs": 5,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 7,
+              "returned_to_outer": true,
+              "insertion_placements": 636,
+              "insertion_quantities": 18,
+              "quantity_feasible": 20792,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0036140999999999994,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 16,
+              "placements": 636,
+              "feasible": 176,
+              "improving": 0,
+              "exchange_pairs": 825,
+              "exchange_feasible": 316,
+              "exchange_improving": 2,
+              "best_key": [
+                1,
+                1,
+                0,
+                2,
+                3,
+                5,
+                7
+              ],
+              "best_potential": [
+                12882.900621714316,
+                12671.752695943107,
+                12559.029738466079,
+                12546.109670709
+              ],
+              "current_potential": [
+                13221.098354693857,
+                12706.476466862903,
+                12559.029738466079,
+                12546.109670709
+              ]
+            }
+          },
+          {
+            "iteration": 2,
+            "closure": {
+              "initial_UB": 0.29785610557174325,
+              "final_UB": 0.29785610557174325,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 106,
+              "insertion_quantities": 3,
+              "quantity_feasible": 3462,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0005786000000000003,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 17,
+              "placements": 676,
+              "feasible": 205,
+              "improving": 0,
+              "exchange_pairs": 809,
+              "exchange_feasible": 300,
+              "exchange_improving": 1,
+              "best_key": [
+                1,
+                0,
+                2,
+                3,
+                2,
+                7,
+                8
+              ],
+              "best_potential": [
+                12882.900621714316,
+                12671.752695943107,
+                12555.868601447155,
+                12473.808589059334
+              ],
+              "current_potential": [
+                12882.900621714316,
+                12671.752695943107,
+                12559.029738466079,
+                12546.109670709
+              ]
+            }
+          },
+          {
+            "iteration": 3,
+            "closure": {
+              "initial_UB": 0.29785610557174325,
+              "final_UB": 0.27117722701943325,
+              "accepted": 7,
+              "counts": {
+                "insertions": 0,
+                "quantities": 7,
+                "singles": 0,
+                "pairs": 7,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 9,
+              "returned_to_outer": true,
+              "insertion_placements": 848,
+              "insertion_quantities": 24,
+              "quantity_feasible": 27437,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.0055262,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 17,
+              "placements": 676,
+              "feasible": 165,
+              "improving": 0,
+              "exchange_pairs": 837,
+              "exchange_feasible": 314,
+              "exchange_improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                12762.900621714316,
+                12671.752695943107,
+                12593.808589059334,
+                12555.868601447155
+              ]
+            }
+          }
+        ],
+        "neutral_states": 3,
+        "strict_moves": 12,
+        "unique_recorded_route_states": 6,
+        "offline_seconds": 0.17737510008737445,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis; no complete performance claim"
+      }
+    },
+    {
+      "id": "E8",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.015999999828636646,
+        "watchdog": false,
+        "restored_affinity": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.022295597484276727,
+          "G": 0.017295597484276726,
+          "P": 0.03333333333333333,
+          "stations": 6,
+          "pickup": 16,
+          "drop": 16,
+          "maximum_duration": 1626.5044971958976,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.022295597484276727,
+          "G": 0.017295597484276726,
+          "P": 0.03333333333333333,
+          "stations": 6,
+          "pickup": 16,
+          "drop": 16,
+          "maximum_duration": 1626.5044971958976,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.022295597484276734,
+          "neutral": 0,
+          "relocations": 0,
+          "exchanges": 0,
+          "equal_net_pairs": 5,
+          "insertions": 0,
+          "quantities": 0,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.022295597484276734,
+              "final_UB": 0.022295597484276734,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 648,
+              "insertion_quantities": 459,
+              "quantity_feasible": 150,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 0.00010779999999999991,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 3,
+              "placements": 18,
+              "feasible": 18,
+              "improving": 0,
+              "exchange_pairs": 5,
+              "exchange_feasible": 5,
+              "exchange_improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                1626.5044971958976,
+                1404.1135782858253,
+                1003.3060804245201
+              ]
+            }
+          }
+        ],
+        "neutral_states": 0,
+        "strict_moves": 0,
+        "unique_recorded_route_states": 1,
+        "offline_seconds": 0.0030499999411404133,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis; no complete performance claim"
+      }
+    },
+    {
+      "id": "N12",
+      "completion": {
+        "returncode": 0,
+        "wall_seconds": 0.014999999664723873,
+        "watchdog": false,
+        "restored_affinity": {
+          "process_mask": 1048575,
+          "system_mask": 1048575
+        }
+      },
+      "valid": true,
+      "audit": {
+        "passed": true,
+        "initial": {
+          "F": 0.8798356173330035,
+          "G": 0.2975440355148217,
+          "P": 3.8819438787878786,
+          "stations": 4,
+          "pickup": 14,
+          "drop": 14,
+          "maximum_duration": 3420.410204470497,
+          "original_T_feasible": true
+        },
+        "final": {
+          "F": 0.8798356173330035,
+          "G": 0.2975440355148217,
+          "P": 3.8819438787878786,
+          "stations": 4,
+          "pickup": 14,
+          "drop": 14,
+          "maximum_duration": 3420.410204470497,
+          "original_T_feasible": true
+        },
+        "result": {
+          "F": 0.8798356173330036,
+          "neutral": 0,
+          "relocations": 0,
+          "exchanges": 0,
+          "equal_net_pairs": 0,
+          "insertions": 0,
+          "quantities": 0,
+          "exhausted": true,
+          "deadline": false,
+          "zero": false,
+          "verification_failed": false,
+          "optimizer_calls": 0
+        },
+        "transitions": [
+          {
+            "iteration": 0,
+            "closure": {
+              "initial_UB": 0.8798356173330036,
+              "final_UB": 0.8798356173330036,
+              "accepted": 0,
+              "counts": {
+                "insertions": 0,
+                "quantities": 0,
+                "singles": 0,
+                "pairs": 0,
+                "cross_vehicle": 0,
+                "sign_flips": 0,
+                "removed_stops": 0
+              },
+              "independently_checked_physical_witnesses": 2,
+              "returned_to_outer": true,
+              "insertion_placements": 920,
+              "insertion_quantities": 0,
+              "quantity_feasible": 82,
+              "terminal_status": "joint_neighborhood_exhausted",
+              "trace_interval_seconds": 9.890000000000029e-05,
+              "trace_interval_scope": "Excludes initial/final snapshot overhead; full startup wall includes all module work"
+            },
+            "neutral_oracle": {
+              "balanced_blocks": 2,
+              "placements": 0,
+              "feasible": 0,
+              "improving": 0,
+              "exchange_pairs": 0,
+              "exchange_feasible": 0,
+              "exchange_improving": 0,
+              "best_key": null,
+              "best_potential": null,
+              "current_potential": [
+                3420.410204470497
+              ]
+            }
+          }
+        ],
+        "neutral_states": 0,
+        "strict_moves": 0,
+        "unique_recorded_route_states": 1,
+        "offline_seconds": 0.002737899776548147,
+        "optimizer_calls": 0,
+        "scope": "Fixed-witness diagnosis; no complete performance claim"
+      }
+    }
+  ],
+  "failure": null,
+  "total_driver_seconds": 7.489758299663663,
+  "optimizer_calls": 0
+}

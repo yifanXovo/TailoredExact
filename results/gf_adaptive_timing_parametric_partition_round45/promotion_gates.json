@@ -1,0 +1,26 @@
+{
+  "complex_confirmation": {
+    "lower_GI_than_pgrb_majority": true,
+    "median_c6_advantage_retention_min": 0.5,
+    "no_candidate_specific_engineering_failure": true,
+    "no_false_certificates": true,
+    "strict_certificates_at_least_pgrb": true
+  },
+  "frozen_before_candidate_runs": true,
+  "schema": "round45-promotion-gates-v1",
+  "timing": {
+    "must_be_genuinely_adaptive": true,
+    "must_retain_major_harmful_witness": true,
+    "no_false_certificates": true,
+    "no_material_severe_pgrb_regression": true,
+    "noadaptive_ineligible": true,
+    "split_confirmed_beneficial_leaf_if_any": true
+  },
+  "validation_material": {
+    "candidate_over_pgrb_time_geomean_max": 1.1,
+    "candidate_over_pgrb_work_geomean_max": 1.0,
+    "major_witness_repaired": true,
+    "strong_control_pgrb_advantage_min": 2.0,
+    "wins_at_least_losses": true
+  }
+}

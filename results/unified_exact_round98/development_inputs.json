@@ -1,0 +1,202 @@
+{
+  "roles": [
+    {
+      "id": "F2",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds": 3600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 900,
+      "method_order": [
+        "ORDER-ON",
+        "P-GRB",
+        "ENS-C"
+      ],
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": 788240696,
+        "canonical_sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+        "columns": 1591,
+        "rows": 3689
+      },
+      "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "M": 2,
+      "V": 20,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "historical_initial_witness": "results/unified_exact_round97/development02/raw/13_F2_OFF/external/initial_witness.json",
+      "historical_initial_witness_sha256": "f4c42011f4c8b3416203f612d1266463d3d486f73073bc4df9efa627d2f99e02",
+      "diagnostic_cutoff": 0.885348300934578,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.885348300934578
+    },
+    {
+      "id": "F5",
+      "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+      "family": "synthetic",
+      "geography": "perturbed_grid",
+      "inventory": "paired_shortage",
+      "V": 50,
+      "M": 4,
+      "Q": 30,
+      "complete_Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "T_seconds": 7200,
+      "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+      "source_manifest": "results/unified_exact_round86/protocol.json",
+      "method_order": [
+        "ENS-C",
+        "P-GRB",
+        "ORDER-ON"
+      ],
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 3600,
+      "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": -1011005748,
+        "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+        "columns": 13410,
+        "rows": 35693
+      },
+      "Q_vector": [
+        30,
+        30,
+        30,
+        30
+      ],
+      "historical_initial_witness": "results/unified_exact_round97/development02/raw/03_F5_OFF/external/initial_witness.json",
+      "historical_initial_witness_sha256": "16698da7b0c4ea43f1b8608aa9162b6788fed436c943c7065823a23328754b8d",
+      "diagnostic_cutoff": 0.38430409168754603,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.38430409168754603
+    },
+    {
+      "id": "R97-C2",
+      "V": 30,
+      "M": 4,
+      "Q": 15,
+      "geometry": "bent_corridor",
+      "inventory": "surplus",
+      "T_seconds": 5400,
+      "cap_seconds": 900,
+      "method_order": [
+        "OFF",
+        "P-GRB",
+        "FEEDBACK"
+      ],
+      "input_path": "reference/round97_confirmation/C2.txt",
+      "instance_path": "reference/round97_confirmation/C2.txt",
+      "input_sha256": "02e0d367a6deaabfb312dfdd1629ca60932eac7cb33b69075aeed8fc56d00dce",
+      "scenario_id": "round97-native-confirmation-v1-C2",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 639,
+      "total_target": 592,
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": 511273102,
+        "canonical_sha256": "1d5b25447d62d81eab7f8945a94459dc124d578eca1baf9c997b1b6d01515c89",
+        "columns": 5342,
+        "rows": 13616
+      },
+      "Q_vector": [
+        15,
+        15,
+        15,
+        15
+      ],
+      "historical_initial_witness": "results/unified_exact_round97/confirmation01/raw/04_C2_OFF/external/initial_witness.json",
+      "historical_initial_witness_sha256": "c7c4adb498f6b4320ab0d06a3c5c7678843a919afd5430ebd756bd38a8ca5810",
+      "diagnostic_cutoff": 0.17404536343054874,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.17404536343054874
+    },
+    {
+      "id": "R97-C3",
+      "V": 50,
+      "M": 4,
+      "Q": 25,
+      "geometry": "anisotropic_cloud",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "method_order": [
+        "FEEDBACK",
+        "OFF",
+        "P-GRB"
+      ],
+      "input_path": "reference/round97_confirmation/C3.txt",
+      "instance_path": "reference/round97_confirmation/C3.txt",
+      "input_sha256": "8f440bf70eb96e51c709d36d6b29a12d5ba2539ac03798ff2512e69b3026991e",
+      "scenario_id": "round97-native-confirmation-v1-C3",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 987,
+      "total_target": 1063,
+      "reference": {
+        "optimizer_calls": 0,
+        "fingerprint": -773033508,
+        "canonical_sha256": "27ad8303644dad2e2316cb50502b003b61c60c45ec7f565a161ed6ad8b9ab917",
+        "columns": 13412,
+        "rows": 35696
+      },
+      "Q_vector": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "historical_initial_witness": "results/unified_exact_round97/confirmation01/raw/08_C3_OFF/external/initial_witness.json",
+      "historical_initial_witness_sha256": "edc6ffd4e45db6c87656e8dd897957803cd033d3460d53f09e6ccfa095230444",
+      "diagnostic_cutoff": 0.2950507923367922,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.2950507923367922
+    },
+    {
+      "id": "D6",
+      "scenario_id": "cb443_V30_compact_r1_shortage_M03_Q30_T18000",
+      "input_path": "reference/citibike443-regional-v1/instances/V30/cb443_V30_compact_r1_shortage_M03_Q30.txt",
+      "input_sha256": "070c2c1413840a09a264d238bdfa320ef76d293a45cab919095851afdea8c01d",
+      "T_seconds": 18000,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "LP-G"
+      ],
+      "instance_path": "reference/citibike443-regional-v1/instances/V30/cb443_V30_compact_r1_shortage_M03_Q30.txt",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        30,
+        30,
+        30
+      ],
+      "historical_initial_witness": "results/unified_exact_round90/runner_lp_g_d6_tail/D6/raw/01_D6_ENS-C/external/initial_witness.json",
+      "historical_initial_witness_sha256": "a7c27db1ce4dd148a60703bab1749494d63b45a331ea4f407238a0afd7a39b36",
+      "diagnostic_cutoff": 0.15750980361456174,
+      "diagnostic_gamma_L": 0,
+      "diagnostic_gamma_U": 0.15750980361456174
+    }
+  ],
+  "optimizer_calls": 0,
+  "distinction": "R97-C2 surplus weak proof and R97-C3 feedback regression are development, not independent confirmation",
+  "diagnostic_witness_policy": "Historical root cutoff only; formal witnesses freshly self-paid each arm"
+}

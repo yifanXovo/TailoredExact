@@ -1,0 +1,81 @@
+{
+  "schema": "round103-independent-review-conclusion-v1",
+  "status": "MATHEMATICAL_CHECKS_PASSED_WITH_NUMERICAL_AND_HISTORICAL_LOG_LIMITATIONS",
+  "production_source_commit": "03973eb162ea20502312a58242decb8c741ffd20",
+  "raw_audit": "results/unified_exact_round103/review/independent_review01.json",
+  "independent_script": "results/unified_exact_round103/review/independent_review01.py",
+  "receipt": "results/unified_exact_round103/fees/independent_review01/receipt.json",
+  "receipt_preserved": {
+    "exit_code": 1,
+    "stop_reason": "normal_return",
+    "outer_seconds": 6.027296599990223,
+    "engineering": false,
+    "failure": "Final metadata assertion required begin records in legacy C2 logs. All numerical checks had completed successfully and their results remain in raw_audit.",
+    "rerun": false
+  },
+  "independent_counts": {
+    "Optimize_attempts": 0,
+    "DP_attempts": 40,
+    "DP_returns": 40,
+    "support_recomputations": 2,
+    "model_read_attempts": 6,
+    "model_read_returns": 6,
+    "validated_plans": 254
+  },
+  "exact_checks": {
+    "production_support_upper": [6, 143476734093],
+    "production_row_scale": ["1/137438953472", "1/2147483648"],
+    "production_rhs_exact_dyadic_matches": true,
+    "combination_weights": "Exact saved rational weights; nonnegative and exact mass one. These normalized weights are generally not dyadic.",
+    "all_plans_same_predicate_valid": true,
+    "C2_normalized_residuals": [4.4802076670054e-9, 3.518078948019915e-15, 7.431294520946291e-9],
+    "F2_normalized_residuals": [8.455989071232991e-10, 1.124442841476923e-9],
+    "C2_F2_exact_rational_residuals_below_declared_1e_8": true,
+    "F5_base_and_anchor_weights_and_plans_valid": true,
+    "production_original_rows_preserved": 9269,
+    "production_added_rows": 2,
+    "production_binary64_row_domain_objective_readback_exact": true,
+    "production_canonical_sha256": "2dcb2f8f5f7ce7b2d7c1a6667c8648df26eed6b154cebd186cc9d359271c0175"
+  },
+  "numeric_full_matrix_checks": {
+    "C2_original_rows": 31081,
+    "C2_maximum_residual": 9.992007221626409e-15,
+    "F2_original_rows": 9269,
+    "F2_maximum_residual": 9.134305036564762e-10,
+    "F2_objective": 0.6380050404044969,
+    "F5_original_rows": 105416,
+    "F5_base_maximum_residual": 1.4551915228366852e-11,
+    "F5_anchor_maximum_residual": 2.573870006017387e-10,
+    "F5_numeric_upper_objective": 0.24416944802753704,
+    "F5_base_signed_upper_minus_reported_outer_LB": 2.7755575615628914e-17,
+    "F5_anchor_signed_upper_minus_reported_outer_LB": -2.4980018054066022e-15,
+    "native_Start_rows": 9271,
+    "native_Start_maximum_residual": 2.220446049250313e-16,
+    "native_Start_objective": 0.8853483009345782,
+    "native_Start_integer_domain_checked": true,
+    "scope": "Reader-only numerical matrix residuals at saved floating points. No exact rational full-matrix feasibility or exact hull optimality proof. No route upper bound derived from finite service columns."
+  },
+  "preserved_signed_and_status_evidence": {
+    "F2_vehicle_1_restricted_distance": -3.537018457822756e-12,
+    "F5_base_original_capacity_status": "UNKNOWN",
+    "F5_anchor_original_capacity_status": "UNKNOWN",
+    "no_signed_bracket_clipping": true,
+    "no_native_B_and_B_rerun": true,
+    "no_independent_dual_or_all_827_capacity_rows_reverification": true
+  },
+  "historical_fee_metadata": [
+    {"label":"capacity_C2_01","outer_begin":0,"outer_return":79,"master_begin":0,"master_return":1566,"DP_return":1471,"outer_seconds":77.2147330000007,"exit_code":0,"limitation":"Legacy format has no begin records; successful return counts match declared totals. Attempt counts cannot independently be reconstructed from begin events."},
+    {"label":"capacity_F2_01","outer_begin":456,"outer_return":456,"master_begin":3188,"master_return":3188,"DP_return":3105,"outer_seconds":134.6017661000078,"exit_code":0},
+    {"label":"capacity_F5_01","outer_begin":54,"outer_return":54,"master_begin":4265,"master_return":4265,"DP_return":4141,"outer_seconds":334.3111884999962,"exit_code":0},
+    {"label":"capacity_anchor_F5_01","outer_begin":58,"outer_return":58,"master_begin":2639,"master_return":2639,"DP_return":2571,"outer_seconds":358.36592089998885,"exit_code":0},
+    {"label":"primal_F5_base01","outer_seconds":10.212828799994895,"exit_code":0},
+    {"label":"primal_F5_anchor01","outer_seconds":9.377346399996895,"exit_code":0},
+    {"label":"native01_F2_H_SHADOW","end_to_end_seconds":117.71799999999348,"process_cap_seconds":120,"exit_code":0},
+    {"label":"native01_F2_H_SUBMIT","end_to_end_seconds":117.2960000000021,"process_cap_seconds":120,"exit_code":0}
+  ],
+  "representation_findings": [
+    "Historical C2 reason strings call normalized combinations exact_dyadic; their correct arithmetic class is exact_rational.",
+    "round103_hull.py stores verified_distance_upper as float(exact_fraction), rounded to nearest. Some displayed values lie fractionally below the exact rational residual. INSIDE admission compares exact Fraction before rounding, so the checked membership conclusion remains valid. A strict exported upper bound should round upward or cite the authoritative rational residual.",
+    "BYREFERENCE solveBudgeted requests are freshly constructed at inspected call sites, so no request reuse mutation was found. Round44 warm_start_enabled ledger columns now reflect final request state including Round68 injection; use Round44 verification and outcome fields when attributing a Start to Round44."
+  ]
+}

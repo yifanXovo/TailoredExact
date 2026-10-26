@@ -1,0 +1,35 @@
+{
+  "schema": "round52-solver-contract-v1",
+  "gurobi": {
+    "Presolve": "Auto",
+    "Seed": 0,
+    "Threads": 1,
+    "MIPGap": 0.0,
+    "MIPGapAbs": 0.0,
+    "PreCrush_for_user_cuts": 1
+  },
+  "objective": "complete original minimization objective",
+  "incumbent_contract": "same verified incumbent contract",
+  "gini_range": "same strict-improver Gini range",
+  "certificate_tolerance": 1e-07,
+  "maximum_total_process_seconds": 1800,
+  "cap_includes": [
+    "model construction",
+    "callback",
+    "cut generation",
+    "solver",
+    "verification",
+    "checkpoint emission"
+  ],
+  "known_optimum_injection": false,
+  "archive_winner_injection": false,
+  "instance_specific_parameters": false,
+  "required_invariants": [
+    "exact original feasible set",
+    "complete interval coverage",
+    "valid lower bounds",
+    "monotone global bounds",
+    "finite exact termination",
+    "strict original-problem certificates"
+  ]
+}

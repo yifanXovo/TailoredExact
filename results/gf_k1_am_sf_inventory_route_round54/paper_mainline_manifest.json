@@ -1,0 +1,45 @@
+{
+  "schema": "round54-paper-mainline-manifest-v1",
+  "name": "K1-AM-SF",
+  "full_name": "K1 Adaptive-Mass with Sparse Fixed-Interval Formulation",
+  "canonical_preset": "paper-k1-am-sf",
+  "outer_aliases": [
+    "k1-am-f0",
+    "paper-k1-am-f0"
+  ],
+  "inner_policy_alias": "interval-mip-core-no-exhaustive-subset-duration",
+  "outer": {
+    "K0": 1,
+    "initial_interval": "complete strict-improver Gini interval",
+    "split_point": "midpoint",
+    "score": "adaptive-mass",
+    "tau": 0.08,
+    "native_target": "Round 53 unchanged",
+    "exact_parent_closure": true,
+    "exact_interval_coverage": true,
+    "monotone_global_lower_bound": true,
+    "strict_original_problem_certificate": true
+  },
+  "inner": {
+    "name": "F0-CLEAN",
+    "base": "Round 50 interval-MIP v0 core",
+    "removed": [
+      "historical exhaustive V<=12 subset-duration block"
+    ],
+    "all_other_audited_static_families_retained": true,
+    "engine": "Gurobi native branch-and-cut",
+    "Threads": 1,
+    "Seed": 0,
+    "Presolve": "Auto",
+    "MIPGap": 0,
+    "MIPGapAbs": 0,
+    "branching": "native default",
+    "PreCrush": "default",
+    "MIPNODE_user_cut_callback": "off",
+    "tailored_dynamic_user_cuts": "off"
+  },
+  "semantic_sentinels": 6,
+  "semantic_sentinels_passed": 6,
+  "model_file_note": "Major, strong, V10, and numerical sentinels each produced three byte-identical model files. The bounded V20/V50 sentinels remained in heuristic startup and generated no fixed-interval model file; their evidence is deterministic command/controller/backend/outcome identity.",
+  "classification": "k1_am_sf_mainline_frozen"
+}

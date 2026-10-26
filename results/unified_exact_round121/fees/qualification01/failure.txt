@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\qualify_round121.py", line 16, in billed
+    finite()
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_fixtures.py", line 72, in run
+    value=event_chain(root,l,d,dict(started=0));assert value['not_exposed_original_verified_zero_H'];checks.append('zero_certificate_without_native_exposure')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_evidence.py", line 120, in event_chain
+    def event_chain(root,l,d,j):return prior.event_chain(root,l,d,j)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round120_evidence.py", line 71, in event_chain
+    physical=core.full_fleet(root,l['panel'],read(d/'result.json'))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round108_reader.py", line 91, in full_fleet
+    w['routes']=routes;physical=evidence.physical(root,p,w)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round107_reader.py", line 84, in physical
+    assert reported is not None and close(result['F'],reported),(result,reported)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ({'G': 0.0, 'P': 0.0, 'F': 0.0, 'Y': [0, 1]}, None)

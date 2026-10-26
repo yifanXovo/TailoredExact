@@ -1,0 +1,8 @@
+sequence,process_seconds,event,status,nominal_deadline_remaining_seconds,work_deadline_remaining_seconds,detail
+0,0,"process_entry","start",1.7976931348623157e+308,1.7976931348623157e+308,"absolute process deadline origin"
+1,0.0011104999999999999,"instance_parsing_start","start",1.7976931348623157e+308,1.7976931348623157e+308,"reference/round86_unadapted_confirmation/F2.txt"
+2,0.0035017,"instance_parsing_complete","complete",1.7976931348623157e+308,1.7976931348623157e+308,"instance=F2.txt"
+3,0.14790139999999999,"plain_gurobi_optimize_launch","start",1.7976931348623157e+308,1.7976931348623157e+308,"absolute_work_remaining=0.000000"
+4,0.15815709999999999,"final_result_serialization_start","start",1.7976931348623157e+308,1.7976931348623157e+308,""
+5,0.1592605,"final_result_serialization_complete","complete",1.7976931348623157e+308,1.7976931348623157e+308,""
+6,0.15936330000000001,"process_exit","complete",1.7976931348623157e+308,1.7976931348623157e+308,"rc=0"

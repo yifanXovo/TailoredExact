@@ -1,0 +1,19 @@
+# Round102 qualification scope
+
+The candidate is default-off root-only `--round102-service-cuts submit` on the protected original ENS-C path. It uses the inherited actual-matrix contract plus original per-car p/d/z mapping, all-station integer support, exact-dyadic signed coefficients and outward resource/RHS/activity arithmetic. P retains its fresh canonical compact matrix, no external Start and original parameter readback; baseline ENS runs share the exact same current build.
+
+| Check | Evidence | Scope/limit |
+|---|---|---|
+| S derivation and R62 relationship | mathematical_algorithm.md; independent read-only review | Integer-valid positive parts/subset rows; deficiency-one conditional projection inherited; no entire VD-P projection equivalence |
+| Actual S implication | lp01: eight selected rows OPTIMAL; F5 exact exported duration receipt | Full-A literal rows, plus specific F5 entire positive part; no all-event closure |
+| Actual J common-coordinate increment | F2 raw/maximum full old-matrix vectors, residuals below1e-6, support1496/car | F2 objective gain4.9686e-05; N2 nonoptimal-point separation; C2/F5 selected directions weak; finite catalog only |
+| Pure C++ support | build04 tests1728 signed enumeration cases and boundary fixtures | c0, zero-weight suppliers, intermediate D>P, cumulative P>Q, heterogeneous capacities, unsafe dimension/score refusal |
+| Native mapping and activation | native02 four actual node0 API0 rows; independent signed exact activity and first full9269-row residual | API success is not permanent retention; later sliced certificates do not establish full later old-model feasible vectors |
+| Failure qualification | faults02 actual-private callback/fake API100 checks; engineering/fault_reader_final01.json ten unchanged durable-reader rejections | Status, cut API, certificate persistence, unknown exceptions and summary errors invalidate outcomes and later bound publication; no independent real engine crash rerun |
+| All production rows | diagnostics/final_certificates02:41 saved rows/22 supports/4756 physical checks | Includes SHADOW proof rows; successful submission counts are separate; no later complete vector reconstruction |
+| Design-isolated confirmation | C3 three1800s arms; N3 three3600s arms; prelong_C3/N3 checks | Frozen source/inputs/rules; C3 loses ENS budget quality, N3 gains; both unproved |
+| Two long groups | confirmation_long01 N3 and long_tail01 F5, each three3600s arms | Both completed; F5 no activation and subthreshold quality differences; no broad certification/default claim |
+
+The independent reviewer uses a separate recurrence and no production Python DP import. It does not independently rerun native Optimize/search. One2.07s initial independent calculation overlapped only engineering build; clean gated reruns reproduce it and all performance is serial. Exact moment of native discovery/certificate is unknown; publication/observation clocks bound availability only. Historical prefixes cannot predict future errors; total storage loss cannot be repaired by hash.
+
+Complete development, two frozen confirmation roles and both long groups have returned normally/audited. N2/N3 material budget gains coexist with C3 material regression; F2 timing and F5 quality changes miss frozen joint thresholds, and C2/F5 production directions have no submission. Keep the new component OFF and ENS-C default. Independent final review passed, including separately recomputed N3 supports4516/197 and actual signed activity. Reporting and fee reconciliation are in reports_final01 and reports_final01_clocks;56 billed starts/43126.28325889993s,124 actual Optimize calls. All41 saved records include31 API0 submissions and ten SHADOW records; service_distinct_rows.csv separates22 different submitted mathematical rows from22 distinct support certificates. Their equal counts are incidental. Mathematical/API qualification alone does not authorize adoption.

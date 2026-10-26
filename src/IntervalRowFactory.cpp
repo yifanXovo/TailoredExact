@@ -1,4 +1,5 @@
 #include "IntervalRowFactory.hpp"
+#include "Round127Research.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -412,10 +413,10 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
                    options.global_handling_capacity_cuts, true,
                    "fleet_handling_capacity_valid_for_full_root_domain");
     registerFamily(out, "support_duration", IntervalRowScope::Global,
-                   options.compact_bc_support_duration_cuts, true,
+                   round127EmitCR() && options.compact_bc_support_duration_cuts, true,
                    "support_duration_cover_valid_for_full_root_domain");
     registerFamily(out, "transfer_compat", IntervalRowScope::Global,
-                   options.compact_bc_pairwise_transfer_compatibility, true,
+                   round127EmitCR() && options.compact_bc_pairwise_transfer_compatibility, true,
                    "pairwise_transfer_compatibility_valid_for_full_root_domain");
     registerFamily(out, "direct_gini_cap_floor", IntervalRowScope::IntervalLocal,
                    options.compact_bc_direct_gini_rows, true,
@@ -424,25 +425,25 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
                    options.compact_bc_tight_mccormick, true,
                    "mccormick_envelope_uses_child_bounds");
     registerFamily(out, "objective_estimator_cutoff", IntervalRowScope::IntervalLocal,
-                   options.compact_bc_objective_estimator_cutoff, true,
+                   round127EmitCG() && options.compact_bc_objective_estimator_cutoff, true,
                    "objective_estimator_uses_child_domains");
     registerFamily(out, "penalty_lb_closure", IntervalRowScope::IntervalLocal,
                    options.compact_bc_penalty_lb_closure, true,
                    "penalty_closure_uses_child_inventory_domains");
     registerFamily(out, "gini_spread", IntervalRowScope::IntervalLocal,
-                   options.gini_spread_cuts, true,
+                   round127EmitCG() && options.gini_spread_cuts, true,
                    "pairwise_spread_uses_child_gini_upper_bound");
     registerFamily(out, "required_movement", IntervalRowScope::IntervalLocal,
                    options.required_movement_cuts, true,
                    "movement_requirement_uses_child_inventory_domains");
     registerFamily(out, "low_gini_centering", IntervalRowScope::IntervalLocal,
-                   options.low_gini_ratio_band_tightening, true,
+                   round127EmitCG() && options.low_gini_ratio_band_tightening, true,
                    "centering_band_uses_child_gini_upper_bound");
     registerFamily(out, "variable_s_centering", IntervalRowScope::IntervalLocal,
-                   options.compact_bc_variable_s_centering, true,
+                   round127EmitCG() && options.compact_bc_variable_s_centering, true,
                    "variable_ratio_sum_centering_uses_child_gini_upper_bound");
     registerFamily(out, "sp_product_estimator", IntervalRowScope::IntervalLocal,
-                   options.compact_bc_sp_product_estimator != "off", true,
+                   round127EmitCG() && options.compact_bc_sp_product_estimator != "off", true,
                    "ratio_sum_penalty_product_uses_child_domains");
     registerFamily(out, "gini_interval_bound", IntervalRowScope::IntervalBound,
                    interval_enabled, true, "exact_parent_child_interval_subset");
@@ -494,9 +495,11 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
             for (int k = 0; k < M; ++k) {
                 const double travel = instance.dist[0][i] + instance.dist[i][0];
                 int movement = 0;
-                if (instance.total_time_limit + 1e-9 >= travel && cunit > 1e-12) {
-                    movement = static_cast<int>(std::floor(
-                        (instance.total_time_limit - travel) / cunit + 1e-9));
+                if (instance.total_time_limit + 1e-9 >= travel) {
+                    movement = cunit > 1e-12
+                        ? static_cast<int>(std::min<double>(instance.Q[k], std::floor(
+                            (instance.total_time_limit - travel) / cunit + 1e-9)))
+                        : instance.Q[k];
                 }
                 pickup_reach = std::max(pickup_reach,
                     std::min({instance.initial[i], instance.Q[k], movement}));
@@ -607,7 +610,7 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
         noteFamily(out, "interval_tight_mccormick_G_bit");
     }
 
-    if (options.gini_spread_cuts && V > 1) {
+    if (round127EmitCG() && options.gini_spread_cuts && V > 1) {
         for (int i = 1; i <= V; ++i) {
             for (int j = i + 1; j <= V; ++j) {
                 std::map<std::string, double> row;
@@ -648,7 +651,7 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
         noteFamily(out, "required_station_movement");
     }
 
-    const bool low_centering = options.low_gini_ratio_band_tightening &&
+    const bool low_centering = round127EmitCG() && options.low_gini_ratio_band_tightening &&
         options.compact_bc_direct_gini_rows && V > 1;
     if (low_centering) {
         const double spread_upper = static_cast<double>(V) * request.gamma_U *
@@ -714,7 +717,7 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
         noteFamily(out, "verified_incumbent_objective_row");
     }
 
-    if (options.compact_bc_objective_estimator_cutoff &&
+    if (round127EmitCG() && options.compact_bc_objective_estimator_cutoff &&
         request.add_incumbent_row && cutoff_active &&
         out.domain.s_upper > 1e-12) {
         std::map<std::string, double> estimator;
@@ -740,12 +743,9 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
                out.domain.penalty_lower, true, false,
                "absolute_deviation_local_inventory_domain");
         noteFamily(out, "penalty_lower_bound_closure");
-        if (request.add_incumbent_row && cutoff_active &&
-            request.gamma_L + options.lambda * out.domain.penalty_lower >=
-                cutoff_value - 1e-9) {
-            addRow(out, "penalty_lower_bound_closure", {}, 'L', -1.0,
-                   true, false, "interval_no_improver_domain_closure");
-        }
+        // R133: retain the valid penalty floor, but keep F<=cutoff inclusive.
+        // The former tolerance-based 0<=-1 marker excluded legal boundary
+        // completions. Ordinary qualified bounds handle outer gap closure.
     }
 
     if ((options.interval_oracle_penalty_domain_tightening ||
@@ -763,7 +763,7 @@ IntervalRowFactoryResult buildRound18StaticIntervalRows(
         noteFamily(out, "penalty_deviation_upper_bound");
     }
 
-    const bool sp_estimator = request.add_incumbent_row && cutoff_active &&
+    const bool sp_estimator = round127EmitCG() && request.add_incumbent_row && cutoff_active &&
         options.compact_bc_sp_product_estimator != "off" &&
         out.domain.s_upper >= out.domain.s_lower - 1e-12 &&
         out.domain.penalty_upper >= out.domain.penalty_lower - 1e-12;

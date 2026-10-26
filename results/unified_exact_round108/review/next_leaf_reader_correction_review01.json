@@ -1,0 +1,86 @@
+{
+  "decision": "ACCEPT",
+  "current_reader_SHA": "52cadcf5ff7ce5fcfb1f828efd1a81a1c4d14d5e31d9b6b72963f7348e8408c1",
+  "scope": "Pure inherited next-leaf provenance token, fully supported open-leaf discharge, and partial-target count disclosure",
+  "actual_performance_changed": false,
+  "performance_reruns": 0,
+  "actual_raw_evidence_contradictions": [],
+  "primary_attempts": [
+    {
+      "attempt": 1,
+      "receipt_path": "results/unified_exact_round108/engineering/confirmation_L48_reader01/receipt.json",
+      "receipt_SHA": "dced778468bc46c3f2bbc4440ea1125d84cbe043d978419f01503aeeeb195fb2",
+      "source_SHA": "72e9597d24a87a7b71215b1a6e575f4355a13f1946884c128a70e2f24b5814d7",
+      "exit_code": 1,
+      "seconds": 52.67744230001699
+    },
+    {
+      "attempt": 2,
+      "receipt_path": "results/unified_exact_round108/engineering/confirmation_L48_reader02/receipt.json",
+      "receipt_SHA": "63345225fbe450d5a4ef7e507a22b8e2e652da0f60452c496ab2438ab2cbfe15",
+      "source_SHA": "6772d9c6cf565415d631222d59ac73991ffaf4fa8d4844318519d0b778c25fce",
+      "exit_code": 1,
+      "seconds": 51.04420750006102
+    },
+    {
+      "attempt": 3,
+      "receipt_path": "results/unified_exact_round108/engineering/confirmation_L48_reader03/receipt.json",
+      "receipt_SHA": "cf5b4653f67eeb816afb10548a0599cf6e27921a520e8d6f4fdf063e28d4ab44",
+      "source_SHA": "a079d3311b9e08f1ac337483f4ba53e2bcb2a697e2b0fccefc120cfdc85dff62",
+      "exit_code": 0,
+      "seconds": 86.14889190008398
+    },
+    {
+      "attempt": 4,
+      "receipt_path": "results/unified_exact_round108/engineering/confirmation_L48_reader04/receipt.json",
+      "receipt_SHA": "c75e84e401a2bb9187ce200ea477284b3a990b78d32532f9f5dbaa5292c4d1d1",
+      "source_SHA": "52cadcf5ff7ce5fcfb1f828efd1a81a1c4d14d5e31d9b6b72963f7348e8408c1",
+      "exit_code": 0,
+      "seconds": 85.97490719996858
+    }
+  ],
+  "finite_cases": 21,
+  "finite_checks_SHA": "23fc094531bdca9d3b0d9ba8aa7a257d88e252189b11bf86f5e4338a781d068a",
+  "finite_source_SHA": "d39b07dc9a896a48d946bafae4d38f8bbdb28a02ecccb5cdb988e34be2513c17",
+  "finite_actual_command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "results/unified_exact_round108/review/next_leaf_partition_finite_audit01.py",
+    "--root",
+    "E:/codes/ExactEBRP-round108",
+    "--out",
+    "E:/codes/ExactEBRP-round108/results/unified_exact_round108/review/next_leaf_partition_finite02"
+  ],
+  "finite_explicit_read_root": "E:\\codes\\ExactEBRP-round108",
+  "finite_exit_code": 0,
+  "finite_first_attempt_preserved": {
+    "checks_SHA": "55d760363ad879f33af31f3261b7650f1d93f568b4eb126d75d0e9282258c591",
+    "receipt_SHA": "591e721fecd4f1b37f96d35eced53ca650a8a81d1a70e097107bf632754cc14c",
+    "source_SHA": "5fe966ac8bdd9766b0e4316445e039283b6e9ea8c92ca2a83c5efec7d3714db8",
+    "reason": "Synthetic harness supplied active-leaf bound as raw endpoint although other open leaf determined the minimum; repaired fixture input, not a production/raw evidence defect"
+  },
+  "independent_complete_partition_source_SHA": "0ea270ed33cd4cc1f0ef287146f64d6cc455377efdf6f5a498fb0a3f741299d5",
+  "independent_raw_audit_SHA": "8ac37c91a488bca767dae4d00a43c468a6b4fdf1b00b032513798bd100d0a008",
+  "reader03_to04": {
+    "diff_SHA": "7192877c66fb4b7d1f8ba277249095c78b072f6cbbef25484a2c6088e0f0ed1b",
+    "unchanged_other_CSV_files": 28,
+    "unchanged_CSV_data_fields": 1286668,
+    "decision_JSON_unchanged": true,
+    "partial_count_independently_reconciled_to_actual_native_calls": true
+  },
+  "source_semantics": {
+    "original_next_leaf_merge": "src/PaperExternalGiniTree.cpp:4236-4240",
+    "whole_leaf_proof_before_discharge": true,
+    "conditional_lower_is_min_proof_L_cutoff": true,
+    "raw_published_signed_L_and_gap_preserved": true,
+    "call_model_log_leaf_return_identity_required": true,
+    "no_future_evidence": true
+  },
+  "reviewer_zero_solver_calls": {
+    "Optimize": 0,
+    "LP_solve": 0,
+    "IIS": 0,
+    "native_environment": 0,
+    "compiler": 0,
+    "production_edits": 0
+  }
+}

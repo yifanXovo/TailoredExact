@@ -1,0 +1,18 @@
+{
+  "schema": "round133-independent-conservative-legacy-reader-admission-v1",
+  "UTC": "2026-10-25T08:01:23.559073+00:00",
+  "reviewer": "/root/reliability_review",
+  "primary_implementer": "/root",
+  "decision": "ACCEPT",
+  "reader_SHA": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+  "policy": "OLD_D3_MARKER_UNEVALUABLE_AFTER_COMPLETE_AUDIT",
+  "D3_matrix_SHA": "1f1839df95a8d2d62280aa4e4417177cd6d2829ec7618c2acdf3273893f88182",
+  "candidate_manifest_SHA": "101e8f75d2675d1f728ddd8aa4010d0b57821218e730a7b06207239af6a997b2",
+  "legacy_fixture_SHA": "80a44658e72b19eec1984c21166377df4263667589046b0eb1ad5086f857d31a",
+  "allowed": "Only known source/mode/motif-bound ORIGINAL_E3 D3 marker receives evidence-complete UNEVALUABLE after all audits",
+  "forbidden": "No physical-box proof, native numerical-counterexample reclassification, analytic certificate upgrade, or candidate exception",
+  "qualify_implementation_model_scope_native_performance_certificate": false,
+  "T_cert": null,
+  "D3_execution_admission": false,
+  "Optimize": 0
+}

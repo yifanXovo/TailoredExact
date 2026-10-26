@@ -1,0 +1,40 @@
+{
+  "schema": "round90-lp-g-pure-qualification-cost-reconciliation-v1",
+  "note": "Additive correction to batch_summary.json command_wall_seconds_sum null; original receipt and summary files preserved",
+  "command_receipt_wall_sum_seconds": 1.1513118,
+  "outer_batch_wall_seconds": 1.2274166,
+  "batch_wrapper_overhead_seconds": 0.07610479999999997,
+  "commands": [
+    {
+      "name": "01_Round90LpGSplitTests",
+      "external_launch_to_exit_wall_seconds": 0.0761766,
+      "receipt_path": "results\\unified_exact_round90\\qualification_001\\01_Round90LpGSplitTests.receipt.json"
+    },
+    {
+      "name": "02_GlobalGiniTreeTests",
+      "external_launch_to_exit_wall_seconds": 0.1563913,
+      "receipt_path": "results\\unified_exact_round90\\qualification_001\\02_GlobalGiniTreeTests.receipt.json"
+    },
+    {
+      "name": "03_Round47AdaptiveMassTests",
+      "external_launch_to_exit_wall_seconds": 0.3442892,
+      "receipt_path": "results\\unified_exact_round90\\qualification_001\\03_Round47AdaptiveMassTests.receipt.json"
+    },
+    {
+      "name": "04_non_ENS_custom_preset",
+      "external_launch_to_exit_wall_seconds": 0.4555441,
+      "receipt_path": "results\\unified_exact_round90\\qualification_001\\04_non_ENS_custom_preset.receipt.json"
+    },
+    {
+      "name": "05_round90_plus_round88_A1",
+      "external_launch_to_exit_wall_seconds": 0.0594213,
+      "receipt_path": "results\\unified_exact_round90\\qualification_001\\05_round90_plus_round88_A1.receipt.json"
+    },
+    {
+      "name": "06_round90_plus_round89_B1",
+      "external_launch_to_exit_wall_seconds": 0.0594893,
+      "receipt_path": "results\\unified_exact_round90\\qualification_001\\06_round90_plus_round89_B1.receipt.json"
+    }
+  ],
+  "all_passed": true
+}

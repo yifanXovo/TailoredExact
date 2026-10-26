@@ -1,0 +1,117 @@
+{
+  "roles": [
+    {
+      "group_number": 1,
+      "id": "SC-C15-S",
+      "source": "CITI",
+      "V": 15,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 3600,
+      "cap_seconds": 600,
+      "method_order": [
+        "P-GRB",
+        "M-B"
+      ],
+      "selection_id": "r126_SC-C15-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 1,
+      "panel_kind": "E1_known_role_mechanism",
+      "input_path": "results/unified_exact_round126/inputs/SC-C15-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-C15-S.txt",
+      "input_sha256": "9849095e3496254fa9ea28715939b7380bd47fbaa6e998bff56c688e0e176101",
+      "input_bytes": 1007,
+      "selection_path": "results/unified_exact_round126/inputs/SC-C15-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-C15-S_landscape.json",
+      "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+      "total_initial": 157,
+      "total_target": 178,
+      "total_capacity": 372,
+      "sum_weights": 9.599999,
+      "lambda_sum_weights": 1.43999985,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.2940486363360608,
+        "G": 0.3807154116507461,
+        "P": 6.088888164568765,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "group_number": 4,
+      "id": "SC-B20-S",
+      "source": "CABI",
+      "V": 20,
+      "M": 2,
+      "geometry": "compact",
+      "replicate": 1,
+      "inventory": "shortage",
+      "Q_vector": [
+        30,
+        30
+      ],
+      "T_seconds": 5400,
+      "cap_seconds": 1200,
+      "method_order": [
+        "M-B",
+        "P-GRB"
+      ],
+      "selection_id": "r126_SC-B20-S_compact_r1",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 1,
+      "panel_kind": "E1_known_role_mechanism",
+      "input_path": "results/unified_exact_round126/inputs/SC-B20-S.txt",
+      "instance_path": "results/unified_exact_round126/inputs/SC-B20-S.txt",
+      "input_sha256": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+      "input_bytes": 1282,
+      "selection_path": "results/unified_exact_round126/inputs/SC-B20-S_selection.json",
+      "landscape_path": "results/unified_exact_round126/inputs/SC-B20-S_landscape.json",
+      "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+      "total_initial": 191,
+      "total_target": 217,
+      "total_capacity": 434,
+      "sum_weights": 6.988919999999999,
+      "lambda_sum_weights": 1.0483379999999998,
+      "empty_fleet": {
+        "physically_feasible": true,
+        "F": 1.0210835916162502,
+        "G": 0.387427018120739,
+        "P": 4.224377156636741,
+        "not_supplied_to_formal_arms": true
+      }
+    },
+    {
+      "id": "PB-B35-B",
+      "V": 35,
+      "M": 3,
+      "Q_vector": [
+        25,
+        25,
+        25
+      ],
+      "T_seconds": 7200,
+      "cap_seconds": 1200,
+      "input_path": "reference/round122_paper_benchmark/PB-B35-B.txt",
+      "input_sha256": "41fdb57cad176be7746bb7c884f62da1643920ac2c49d75bd5235663936a5e3a",
+      "source": "CABI",
+      "inventory": "balanced",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "gurobi_seed": 1,
+      "panel_kind": "E1_known_role_mechanism"
+    }
+  ],
+  "all_known_research_roles": true,
+  "no_input_generation": true
+}

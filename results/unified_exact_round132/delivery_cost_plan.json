@@ -1,0 +1,87 @@
+{
+  "UTC": "2026-10-23T15:40:51.543226+00:00",
+  "non_native_postverify": "measured disjoint segments inside group supervisors",
+  "remaining_plan": {
+    "read_only_current_table_replay_soft_seconds": 7200,
+    "PDF_export_soft_seconds": 900,
+    "packing_soft_seconds": 7200,
+    "public_recovery_soft_seconds": 18000,
+    "postpack_carrier_membership_check_soft_seconds": 300,
+    "initial_science_push_soft_seconds": 1200,
+    "cleanup_soft_seconds": 7200,
+    "final_metadata_push_soft_seconds": 300
+  },
+  "soft_estimates_not_G1_limits": true,
+  "no_formal_window_changes": true,
+  "writing_and_manual_reading": "wall elapsed estimate reported separately; not exact CPU",
+  "scale_revision_UTC": "2026-10-24T12:34:18.127545+00:00",
+  "finite_tool_timeouts_seconds": {
+    "current_independent_replay_existing_launch": 7200,
+    "packing": 10800,
+    "public_recovery_outer": 21600,
+    "public_recovery_inner_isolated_checker": 10800,
+    "public_transport_existing_global_window": 1800,
+    "cleanup": 10800,
+    "postpack_carrier_membership_check": 900,
+    "initial_science_push": 3600,
+    "final_metadata_push": 1200
+  },
+  "actual_scale_basis": {
+    "current_campaign_files": 1040559,
+    "current_campaign_logical_bytes": 5440301663,
+    "additional_current_progress_bytes": 47609257,
+    "source": "engineering/carrier_file_inventory.json; prepublication size stat",
+    "inherited_R131_archive_members": 264452,
+    "reason": "Current healthy independent replay exceeded initial2400s soft estimate; over one million required current journal files. Finite delivery allowances are registered before pack and one public recovery. No experimental cap, Seed, input, candidate or formal clock changes.",
+    "completed_independent_replay_outer_seconds": 5541.306450600037,
+    "completed_independent_replay_receipt_SHA": "f09b0d85e27d035cd3491b12a507fa572b11460fda5ce58e144fec31b4f91a42",
+    "completed_independent_check_receipt_SHA": "da1760f4c0628e488a4c94f86a3e892ad781bf9ee847c6d76be83202f5914f4e",
+    "public_inner_timeout_basis": "10800s was registered before packing; completed first replay5541.3064506s confirms the initial2400s soft estimate was insufficient. Public recovery keeps the same finite10800s isolated-check allowance and21600s outer allowance; no native cap changes.",
+    "completed_current_carriers": {
+      "archives": 34,
+      "members": 1042789,
+      "compressed_bytes": 574011070,
+      "uncompressed_bytes": 5535765415,
+      "pieces": 34,
+      "pack_outer_seconds": 6303.212861899985,
+      "carrier_progress_check_outer_seconds": 3.895663099945523
+    }
+  },
+  "cost_boundaries": "Full process wall receipts count each delivery outer once; nested children are not added. G1 unchanged.",
+  "postpack_carrier_membership_scope": "One author publication check reuses the existing independent progress_and_history reader after pack01 closes; validates36 actual extra compact progress files in current member indexes and two existing small historical fleets. Roughly one million compressed index records, not a new full formal replay, solver call, or research enumeration.",
+  "initial_science_push_basis": "One normal push of34 finite ZIPs totalling574011070bytes plus exact small source/metadata dependencies; no force push or history rewrite.",
+  "genuine_public_transport_repair": {
+    "registered_UTC": "2026-10-24T15:55:55.506012+00:00",
+    "failure": "Mixed LF/CRLF in literature_evidence.csv was stored as all-LF in the science Git blob; uniform LF/CRLF restoration cannot reproduce the exact manifest bytes.",
+    "same_owned_root_only": true,
+    "science_commit_unchanged": "52b02252ba47e8228b73e071d6ed692385a4f816",
+    "finite_science_blob_inventory_soft_seconds": 120,
+    "finite_science_blob_inventory_timeout_seconds": 600,
+    "materialization_soft_seconds": 120,
+    "materialization_timeout_seconds": 600,
+    "normal_repair_metadata_push_timeout_seconds": 1200,
+    "no_new_native_or_checker_replay_started": true,
+    "repair_scope": "Public metadata of line-ending ordinals only; actual anonymous reconstruction must hash-match the fixed science manifest. Inspect all931 Git blobs once to discover the complete affected set before the same-root resume.",
+    "actual_materialization_receipt": "review/public_transport_materialization01.json",
+    "repair_metadata_commit": "d1e3ba8009d99fa52e053f5ab454fbaf2e689545",
+    "same_root_resume_outer_timeout_seconds": 21300,
+    "resume_timeout_basis": "Within original21600s recovery envelope after262.8757298s failed attempt and5.0666438s public materialization; isolated checker remains10800s. No formal cap changes.",
+    "documentation_checkpoint_push": {
+      "registered_UTC": "2026-10-24T16:27:12.519525+00:00",
+      "soft_seconds": 300,
+      "timeout_seconds": 1200,
+      "scope": "Small completed reproduction-entry and sole-reviewer narrow repair reports; no science/carrier/manifest rewrite or recursive recovery."
+    }
+  },
+  "cleanup_actual_scale_basis": {
+    "registered_UTC": "2026-10-24T19:27:18.224990+00:00",
+    "members": 1042789,
+    "logical_member_bytes": 5535765415,
+    "passed_public_reader_outer_seconds": 12080.056826799992,
+    "passed_nested_reader_seconds": 5920.247893400025,
+    "cleanup_soft_seconds": 7200,
+    "existing_cleanup_hard_seconds": 10800,
+    "reason": "One owned million-member restoration inventory/hash sweep and native PowerShell removal,34 byte-identical temporary ZIPs,and272 reconstructible images. The full public read-only replay actually passed; no Native clock/cap changes. Logical bytes and observed volume delta will be distinct."
+  },
+  "final_metadata_scope": "Receipt/status/report updates only, under5MiB expected. One normal push; actual post-push receipt/readback is retained outside this fixed science snapshot without recursive publication."
+}

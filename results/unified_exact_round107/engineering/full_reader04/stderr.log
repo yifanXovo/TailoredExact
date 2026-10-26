@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 593, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 588, in main
+    root=a.root.resolve();dest=a.out.resolve();summary=rebuild(root,dest)
+                                                       ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 513, in rebuild
+    j=journal(root,launch['panel'],d);ep=endpoint(root,launch,ident,d,j);m=mechanism(root,launch,d)
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round107-ens-frontier-route-events\ExactEBRP\scripts\round107_reader.py", line 377, in mechanism
+    for i,x,y in route['operations']:op[i-1]=x-y
+                                             ~^~
+TypeError: unsupported operand type(s) for -: 'str' and 'str'

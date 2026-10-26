@@ -1,0 +1,49 @@
+{
+  "role": "R98-C2",
+  "statuses": [
+    "OUTSIDE",
+    "INSIDE",
+    "OUTSIDE"
+  ],
+  "anchors": {
+    "0": [
+      3,
+      25,
+      26
+    ],
+    "1": [
+      19,
+      20,
+      22
+    ],
+    "2": [
+      2,
+      4,
+      17
+    ]
+  },
+  "total_Optimize_calls": 294,
+  "total_DP_calls": 293,
+  "outer_seconds": 18.05132450000383,
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "affinity": {
+    "launcher_pid": 18580,
+    "before": {
+      "process_mask": 1048575,
+      "system_mask": 1048575
+    },
+    "effective": {
+      "process_mask": 4,
+      "system_mask": 1048575
+    },
+    "selected_logical_processor": 2,
+    "explicit_set_target": "own launcher only"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "status": "COMPLETE_SAFE_CLEANUP",
+  "started_UTC": "2026-10-26T17:56:41.6877843Z",
+  "finished_UTC": "2026-10-26T17:56:42.1337087Z",
+  "plan_SHA256": "4936ab7afb828d59cb0ee92c9f4c457564ec230eef69affe79b56c926509b6a8",
+  "actions": [
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round135\\pdf\\visual_QA_1819682b3718",
+      "operation": "Remove-Item -LiteralPath -Recurse",
+      "removed": true
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round135\\pdf\\visual_QA_18d445ab3a2f",
+      "operation": "Remove-Item -LiteralPath -Recurse",
+      "removed": true
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round135\\pdf\\visual_QA_383bb03f6cd0",
+      "operation": "Remove-Item -LiteralPath -Recurse",
+      "removed": true
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round135\\pdf\\visual_QA_7f0fab6030be",
+      "operation": "Remove-Item -LiteralPath -Recurse",
+      "removed": true
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round135\\pdf\\visual_QA_8245d4521265",
+      "operation": "Remove-Item -LiteralPath -Recurse",
+      "removed": true
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round124",
+      "operation": "git worktree remove (no force)",
+      "removed": true
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\round125",
+      "operation": "git worktree remove (no force)",
+      "removed": true
+    }
+  ],
+  "logical_file_bytes_removed": 503405825,
+  "E_free_before": 138591535104,
+  "E_free_after": 139147984896,
+  "observed_E_free_byte_change": 556449792,
+  "cleanup_seconds": 0.4393702,
+  "new_native_solves": 0,
+  "recompile": 0,
+  "force_remove": false,
+  "git_gc_prune_or_history_rewrite": false,
+  "protected_restore_present": true,
+  "retained": "original shared Git root and user content; all unique raw/failures; protected PE/DLL; R120 core/build; R122/R130/R132/R133/R134/R135 dependencies; passed R135 restore; source PDFs and review receipts; other ignored/untracked worktrees; locked initializing checkout"
+}

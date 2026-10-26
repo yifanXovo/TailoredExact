@@ -1,0 +1,80 @@
+{
+  "base_branch": "codex/round50-k1-interval-mip-vnext",
+  "base_head": "eccc795c0f5b2df5b57e24da31b56648150334b9",
+  "base_tree": "e6d6ea69ce69bb2fb659b7f65506ad1ed90b98e7",
+  "baseline_reproduction_cap_seconds": 120,
+  "baseline_reproduction_policy": "interval-mip-v0",
+  "baseline_reproduction_result_inspected": false,
+  "baseline_reproduction_states": [
+    "D2",
+    "D5",
+    "D6",
+    "C6"
+  ],
+  "branch": "codex/round51-tight-big-m-root-sparse-branching",
+  "cmake": "3.30.5-msvc23",
+  "compiler": "g++ 14.2.0 MSYS2 UCRT64",
+  "formulation_changed": false,
+  "frozen_before_candidate_build_or_result": true,
+  "frozen_before_formulation_change": true,
+  "gurobi": "13.0.2 build v13.0.2rc1",
+  "machine": "WIN-3NO58RVQ4VC; Intel i7-12700KF; Windows 10 19045",
+  "round50_fixed_executable_sha256": "85a6404acb015ea71e1b56a656f85665cda46b1f72a29a7174e6f48d96f8e81a",
+  "round50_full_executable_sha256": "7cc8ecb324c69526b38f21a8d66cdc4ca6ab6de0cd03639f916f25340d097a2e",
+  "round50_pr": "https://github.com/yifanXovo/TailoredExact/pull/104",
+  "round50_references": [
+    {
+      "path": "results/gf_k1_interval_mip_vnext_round50/fixed_interval_state_manifest.csv",
+      "sha256": "5e1690e7ce3c068dac41ec040cacc2b02130773cce286318620d718a6f32e9dc",
+      "size_bytes": 20497
+    },
+    {
+      "path": "results/gf_k1_interval_mip_vnext_round50/fixed_interval_state_reconstruction_audit.csv",
+      "sha256": "539a4e548cded904fe28a92c721a4bdb7e87df82a460c30551ce4eb3811230a9",
+      "size_bytes": 27895
+    },
+    {
+      "path": "results/gf_k1_interval_mip_vnext_round50/development_panel_freeze.json",
+      "sha256": "f8f0ea1a1fe4e8ec7b757fa58ca36d1d6e5894e78656a507e4838a5f40f486b9",
+      "size_bytes": 887
+    },
+    {
+      "path": "results/gf_k1_interval_mip_vnext_round50/confirmation_panel_freeze.json",
+      "sha256": "b48551cbcd4459482b22bb35ad9502e3f73bed88eda399cc6e9d3c69b4f08c95",
+      "size_bytes": 948
+    },
+    {
+      "path": "results/gf_k1_interval_mip_vnext_round50/severe_regression_definition.json",
+      "sha256": "dfe06b6c25c53e0e4129b1f71db7a85eec08f98de868ee583f2590b2295f10b6",
+      "size_bytes": 743
+    },
+    {
+      "path": "results/gf_k1_interval_mip_vnext_round50/solver_contract.json",
+      "sha256": "da0a83e0b1ad8f5ed1b573943606ca25a8cf65ea99dffa983b23cd147047bd8f",
+      "size_bytes": 637
+    }
+  ],
+  "round51_frozen_files": [
+    {
+      "path": "research_contract.md",
+      "sha256": "1258971ae34e2b33a923adf38d2dbaef89a0baa303a081558440baa891310292",
+      "size_bytes": 2124
+    },
+    {
+      "path": "promotion_gates.json",
+      "sha256": "821bdf0b9f6de2a723f3ff35d8900f920fadeaff91a8f5ef1e1a033d4b431ce7",
+      "size_bytes": 1394
+    },
+    {
+      "path": "bounded_iteration_policy.json",
+      "sha256": "1307d95a2e9525c6a343bd608e12dcd01a41ea6eb83713c2cbc0fa2a442dbe52",
+      "size_bytes": 1315
+    },
+    {
+      "path": "preexisting_file_preservation_audit.json",
+      "sha256": "739c5d61643b689f94e7bee105aa85fca1691e2034020812540dc05c38ed9430",
+      "size_bytes": 855
+    }
+  ],
+  "schema": "round51-stage0-freeze-manifest-v1"
+}

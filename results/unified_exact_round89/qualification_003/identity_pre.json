@@ -1,0 +1,55 @@
+{
+  "checked_utc": "2026-09-26T21:48:05.2366081Z",
+  "lease_sha256": "a9c623a7d80dd55579bff230d80c711c5894cfa85d3db924cdc026e52e26d72b",
+  "review_sha256": "e77f14f19a4757cc85aa03925f0a5401193490f2ab7218909e249fcab5a4c0b2",
+  "all_identity_match": true,
+  "source_hashes": [
+    {
+      "path": "include/NativeOtB1.hpp",
+      "sha256": "bd64c92a83d109c602dbb31bd10bbba524db857bb357fee6ba26c7d8da3df0eb"
+    },
+    {
+      "path": "src/NativeOtB1.cpp",
+      "sha256": "e4722c675c6470d85f369a80304adace4403b61c579d95c6ff62594b8576ef0b"
+    },
+    {
+      "path": "src/GurobiBaseline.cpp",
+      "sha256": "b12aa28adae1792b3ba7d3f75cedfec3ffc926410fe9a0f6daa0784b192a0eab"
+    },
+    {
+      "path": "include/Instance.hpp",
+      "sha256": "fd081f82b114fe2bc5c9a23d08f50c50977c148ef7406b2c536f88757f4bd720"
+    },
+    {
+      "path": "include/FixedIntervalMipBackend.hpp",
+      "sha256": "7c0f5e30752c64893cacfdb710930a72f477bef0928d5c89fb3ed0246d77756c"
+    },
+    {
+      "path": "src/main.cpp",
+      "sha256": "bde69286c291d74abb719e9f266cb994133319fdfa3b5d5c71478d9ef92c7e20"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "eda744ecf2bdacfd596a2e1f6686209ab1288bcd632dc9a815e8b7b743020fb7"
+    },
+    {
+      "path": "tests/round89_native_ot_b1_micro.cpp",
+      "sha256": "7669dd38992d238737b5a6d0e5f8a042e0458b5036d8bab070ca1dc29fbcd279"
+    },
+    {
+      "path": "tests/round89_native_ot_b1_fraction_oracle.py",
+      "sha256": "c772ea7a25f43f5027298e14f42a7ff32681ae17a71291a894b1ac8bb4926caf"
+    }
+  ],
+  "binary_hashes": [
+    {
+      "path": "build/research/round89-native-ot-b1/ExactEBRP.exe",
+      "sha256": "8d5f0ad4a3cf588875a6a3b8ac67c5bdbb2b2df54a5fd49bea56de2034a17e8d"
+    },
+    {
+      "path": "build/research/round89-native-ot-b1/Round89NativeOtB1Micro.exe",
+      "sha256": "9d268d10a6ab044869ff138bbc87c450997156e4bb7d183a3b7e011656f8b5d8"
+    }
+  ],
+  "recorder_sha256": "cb2565e8b72dac08fc363164250fa2b31f3b21a7a8dc24f834527aeb110b886d"
+}

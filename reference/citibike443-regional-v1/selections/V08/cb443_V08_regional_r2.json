@@ -1,0 +1,52 @@
+{
+  "V": 8,
+  "anchor_coordinate_utm18n_meters": [
+    592518.382,
+    4504817.089
+  ],
+  "anchor_source_station_row_index": 207,
+  "candidate_pool_size": 16,
+  "dataset_family": "citibike443-regional-v1",
+  "depot_coordinate_utm18n_meters": [
+    592174.232,
+    4504775.482
+  ],
+  "depot_rule": "artificial arithmetic centroid of serialized service-station coordinates, rounded to three decimals",
+  "eligible_station_count": 442,
+  "eligible_station_rule": "0 < source capacity < 100",
+  "generator_version": "citibike443-regional-v1.0.0",
+  "geographic_regime": "regional",
+  "geographic_statistics": {
+    "bounding_box_height_m": 1375.327000000514,
+    "bounding_box_width_m": 961.8610000000335,
+    "geographic_diameter_m": 1512.8404002331088,
+    "maximum_depot_distance_m": 878.413992295612,
+    "maximum_pairwise_station_distance_m": 1512.8404002331088,
+    "mean_depot_distance_m": 514.6251061109973,
+    "mean_pairwise_station_distance_m": 791.9990480089583
+  },
+  "replicate": 2,
+  "schema": "citibike443-geographic-selection-v1",
+  "seed": 2122999655,
+  "seed_derivation_material": "citibike443-regional-v1|selection|V=8|geography=regional|replicate=2",
+  "selected_source_station_row_indices": [
+    207,
+    161,
+    213,
+    253,
+    243,
+    160,
+    189,
+    209
+  ],
+  "selection_id": "cb443_V08_regional_r2",
+  "selection_mechanism": "farthest-first coverage inside the 2V nearest eligible stations around the anchor",
+  "selection_order_is_local_station_order": true,
+  "source_capacity_summary": {
+    "maximum": 32,
+    "mean": 24.125,
+    "median": 23.5,
+    "minimum": 15
+  },
+  "tie_breaking": "ascending zero-based source_station_row_index"
+}

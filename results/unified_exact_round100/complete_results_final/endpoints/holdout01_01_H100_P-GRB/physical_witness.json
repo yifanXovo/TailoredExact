@@ -1,0 +1,130 @@
+{
+  "input_path": "reference/round100_confirmation/H100.txt",
+  "input_sha256": "04cfc75a36585eddea81693964eed9ef4c207e62b687e955e63fd4fb00d7bf71",
+  "F": 0.16997427062953857,
+  "U": 0.16997427062953857,
+  "routes": [
+    {
+      "vehicle": 0,
+      "nodes": [
+        0,
+        17,
+        15,
+        5,
+        7,
+        4,
+        11,
+        2,
+        8,
+        20,
+        0
+      ],
+      "operations": [
+        {
+          "station": 17,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 15,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 5,
+          "pickup": 2,
+          "drop": 0
+        },
+        {
+          "station": 7,
+          "pickup": 0,
+          "drop": 7
+        },
+        {
+          "station": 4,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 11,
+          "pickup": 0,
+          "drop": 11
+        },
+        {
+          "station": 2,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 8,
+          "pickup": 4,
+          "drop": 0
+        },
+        {
+          "station": 20,
+          "pickup": 0,
+          "drop": 10
+        }
+      ]
+    },
+    {
+      "vehicle": 1,
+      "nodes": [
+        0,
+        3,
+        12,
+        13,
+        10,
+        16,
+        9,
+        18,
+        14,
+        0
+      ],
+      "operations": [
+        {
+          "station": 3,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 12,
+          "pickup": 7,
+          "drop": 0
+        },
+        {
+          "station": 13,
+          "pickup": 5,
+          "drop": 0
+        },
+        {
+          "station": 10,
+          "pickup": 0,
+          "drop": 11
+        },
+        {
+          "station": 16,
+          "pickup": 8,
+          "drop": 0
+        },
+        {
+          "station": 9,
+          "pickup": 0,
+          "drop": 11
+        },
+        {
+          "station": 18,
+          "pickup": 0,
+          "drop": 2
+        },
+        {
+          "station": 14,
+          "pickup": 0,
+          "drop": 4
+        }
+      ]
+    }
+  ],
+  "source_result": "results/unified_exact_round100/holdout01/raw/01_H100_P-GRB/result.json",
+  "source_sha256": "0f6e0a16a9456246c0c367676ff95ee2905da3f0d7b263e475cc8e0a81edd09f"
+}

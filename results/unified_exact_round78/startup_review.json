@@ -1,0 +1,114 @@
+{
+  "passed": true,
+  "pairs": [
+    {
+      "id": "D3",
+      "JDS_C_UB": 0.0781153026105612,
+      "BDS_C_UB": 0.0781153026105612,
+      "JDS_C_wall": 0.06199999991804361,
+      "BDS_C_wall": 0.06199999991804361,
+      "route_identical": true,
+      "all25_paths_equal": true,
+      "balanced": {
+        "F": 0.0781153026105612,
+        "neutral": 0,
+        "insertions": 0,
+        "quantities": 0,
+        "exhausted": true,
+        "deadline": false,
+        "zero": false,
+        "verification_failed": false,
+        "optimizer_calls": 0
+      },
+      "returned_to_outer": true
+    },
+    {
+      "id": "C2",
+      "JDS_C_UB": 0.8370914675547019,
+      "BDS_C_UB": 0.8370914675547019,
+      "JDS_C_wall": 0.07800000021234155,
+      "BDS_C_wall": 0.07800000021234155,
+      "route_identical": true,
+      "all25_paths_equal": true,
+      "balanced": {
+        "F": 0.837091467554702,
+        "neutral": 0,
+        "insertions": 0,
+        "quantities": 0,
+        "exhausted": true,
+        "deadline": false,
+        "zero": false,
+        "verification_failed": false,
+        "optimizer_calls": 0
+      },
+      "returned_to_outer": true
+    },
+    {
+      "id": "D4",
+      "JDS_C_UB": 0.506422789224163,
+      "BDS_C_UB": 0.506422789224163,
+      "JDS_C_wall": 0.07800000021234155,
+      "BDS_C_wall": 0.07800000021234155,
+      "route_identical": true,
+      "all25_paths_equal": true,
+      "balanced": {
+        "F": 0.506422789224163,
+        "neutral": 0,
+        "insertions": 0,
+        "quantities": 0,
+        "exhausted": true,
+        "deadline": false,
+        "zero": false,
+        "verification_failed": false,
+        "optimizer_calls": 0
+      },
+      "returned_to_outer": true
+    },
+    {
+      "id": "D6",
+      "JDS_C_UB": 0.1600272806044027,
+      "BDS_C_UB": 0.1578497125151539,
+      "JDS_C_wall": 5.75,
+      "BDS_C_wall": 5.764999999664724,
+      "route_identical": false,
+      "all25_paths_equal": true,
+      "balanced": {
+        "F": 0.15784971251515398,
+        "neutral": 2,
+        "insertions": 0,
+        "quantities": 4,
+        "exhausted": true,
+        "deadline": false,
+        "zero": false,
+        "verification_failed": false,
+        "optimizer_calls": 0
+      },
+      "returned_to_outer": true
+    },
+    {
+      "id": "D7",
+      "JDS_C_UB": 0.3316215612701626,
+      "BDS_C_UB": 0.3005435182943174,
+      "JDS_C_wall": 10.203000000212342,
+      "BDS_C_wall": 10.32799999974668,
+      "route_identical": false,
+      "all25_paths_equal": true,
+      "balanced": {
+        "F": 0.30054351829431747,
+        "neutral": 4,
+        "insertions": 2,
+        "quantities": 44,
+        "exhausted": true,
+        "deadline": false,
+        "zero": false,
+        "verification_failed": false,
+        "optimizer_calls": 0
+      },
+      "returned_to_outer": true
+    }
+  ],
+  "whole_wall_seconds": 32.4820000003092,
+  "offline_seconds": 0.301509200129658,
+  "optimizer_calls": 0,
+  "scope": "Fresh startup only; complete-method benefit unknown"
+}

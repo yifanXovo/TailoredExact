@@ -1,0 +1,17 @@
+{
+  "schema": "round54-ir-cut-validity-protocol-v1",
+  "global_cuts": {
+    "IR-IN": "sum_{i in A}(Y_i-b_i) <= sum_k Q_k delta^-_k(A)",
+    "IR-OUT": "sum_{i in A}(b_i-Y_i) <= sum_k Q_k delta^+_k(A)"
+  },
+  "interval_projected": {
+    "IR-PROJ-IN": "sum_k Q_k delta^-_k(A) >= max(0,sum_{i in A}(L_i-b_i))",
+    "IR-PROJ-OUT": "sum_k Q_k delta^+_k(A) >= max(0,sum_{i in A}(b_i-U_i))"
+  },
+  "proof": "sum vehicle load conservation inside A; crossing load is in [0,Q_k]; sum vehicles and substitute inventory balance",
+  "depot_outside_subset": true,
+  "empty_subset_cut_forbidden": true,
+  "projected_scope": "interval-local and incumbent-epoch-local",
+  "cardinality_companions": "forbidden unless separately formally proved",
+  "integer_validity_and_lp_reconstruction_required": true
+}

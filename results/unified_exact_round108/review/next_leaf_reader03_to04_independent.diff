@@ -1,0 +1,15 @@
+--- accepted reader03
++++ reader04
+@@ -517,8 +517,10 @@
+             open_counts=[int(q['open_relevant_leaf_count']) for q in covers]
+             root_LPs=[q for q in controller['controller_LP_status'] if q['leaf_id']=='L0']
+             records['mechanism_summary'].append(dict(label,initial_own_physical_U=j['witnesses'][0]['F'] if j['witnesses'] else None,
+-                actual_native_Optimize=j['started'],LP_calls=kinds['LP'],partial_target_MIP_calls=kinds['CHILD_BOUND_TARGET_MIP'],
+-                terminal_MIP_calls=kinds['MIP'],other_solve_kinds={k:v for k,v in kinds.items() if k not in ['LP','CHILD_BOUND_TARGET_MIP','MIP']},
++                actual_native_Optimize=j['started'],LP_calls=kinds['LP'],
++                partial_target_MIP_calls=kinds['CHILD_BOUND_TARGET_MIP']+kinds['NEXT_LEAF_TARGET_MIP'],
++                child_bound_target_MIP_calls=kinds['CHILD_BOUND_TARGET_MIP'],next_leaf_target_MIP_calls=kinds['NEXT_LEAF_TARGET_MIP'],
++                terminal_MIP_calls=kinds['MIP'],other_solve_kinds={k:v for k,v in kinds.items() if k not in ['LP','CHILD_BOUND_TARGET_MIP','NEXT_LEAF_TARGET_MIP','MIP']},
+                 AM_action_counts=dict(collections.Counter(q['selected_action'] for q in controller['controller_AM'])),
+                 actual_tree_event_counts=dict(collections.Counter(q['event'] for q in controller['controller_events'])),
+                 maximum_open_relevant_leaves=max(open_counts,default=0),multiple_open_relevant_leaves_observed=any(n>1 for n in open_counts),

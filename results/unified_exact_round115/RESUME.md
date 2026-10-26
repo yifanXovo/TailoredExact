@@ -1,0 +1,13 @@
+# Round115 resume
+
+execution_stage=COMPLETE. Isolated E:/codes/ExactEBRP-round115 on codex/round115-producer-clock-attribution-closure, verified R114 parent e436748521cf5aabbe84a24a5e9cf3836550563c. Exact source206/PE/DLL and admitted helper/reader/arithmetic bytes unchanged.
+
+finite01/cli01/post01 qualification and admission ACCEPT preceded formal01. Exactly four G100 P/ENS/P-S/M-B arms have completed once and necessary serial per-arm verification is closed. There are no native children or formal wrapper left running. All four final cohort observations qualify, with damaged native calls preserved and source-reduced physical results; P-S owns strict zero. Six current pairs close; 19/20 positions and27/30 descriptive pairs qualify. ENS W/W/L/W/L and M-B W/W/L/T/L are both MIXED across heterogeneous old-whole/new-producer layers. Old G50 cold-P missing clock and R114 ENS overcap remain unchanged.
+
+Paid ledger12/24 starts and12590.651394606/20000 seconds, qualification7/10 and445.768154383/600. Never repeat any existing paid destination. No performance work remains. Priority A: freeze this phase; only external coverage/paper work may be a later explicitly requested task.
+
+Pending delivery actions at scientific-payload creation: one compact committed public export/fresh-root restore, actual restored-reader comparison, one extra seven-question implementer-authored review and stacked English Draft PR publication. Later actual receipts are separate from their exported scientific payload. No independent third-party executor is claimed.
+
+Actual delivery subsequently completed: one carrier Git archive, empty-root SHA restore, one targeted394-byte signed-authority Git-blob supplement after a preserved reconstruction failure, all35 restored core files equal, and one seven-question whole-goal review with seven PASS results. The science commit is fcf9aa4881a76bbbb26f5ec409a74ea384672886; supplement70fd7c6fc3c3dbbb3ad218a52ebfd8ac173c42eb. No new carrier or performance replay occurred. Current remaining action is Draft PR publication and actual remote verification; its later receipt must not claim future self-validation.
+
+Draft PR177 is now created and attached: https://github.com/yifanXovo/TailoredExact/pull/177. Actual remote observation01 verifies OPEN/Draft, R114 base e436748521cf5aabbe84a24a5e9cf3836550563c, current published science/delivery head0885b4d678d422837891487f7aeeb3d8fec08544 and62 necessary file/carrier OIDs. Publication metadata is a subsequent receipt commit; its final push is observed separately rather than asserted in advance here. All scientific/experimental/restore/review work is complete. Stop after final live publication verification; do not start phase A automatically.

@@ -1,0 +1,61 @@
+{
+  "literal_byte_check_passed": false,
+  "all_normalized_code_equal": true,
+  "all_qualified_working_source_hashes_unchanged": true,
+  "source_commit": "4496078f25c0cdad1cf7a5c39835fd23121e8978",
+  "files": [
+    {
+      "path": "src/main.cpp",
+      "commit_blob_sha256": "0d43ba4cd714a12b508dac0b7375394193e7580d3964c840972ad61c57c65d4f",
+      "working_sha256": "4bf0fb79c96053678afe89b3e6426ebbd123e0d1c488c8d0d8d84413535bb4ae",
+      "byte_equal": false,
+      "LF_normalized_equal": true,
+      "commit_CRLF": 0,
+      "working_CRLF": 19960,
+      "working_LF": 19960
+    },
+    {
+      "path": "src/PaperExternalGiniTree.cpp",
+      "commit_blob_sha256": "3edafee1a5170dd46b7e9375f16962f9cc06897da1b3cf0907fe85938df3e512",
+      "working_sha256": "de462667f40f4d1b7d656a4988332e15fe63d26cc6f582bd9c3cfbe5cf3a1450",
+      "byte_equal": false,
+      "LF_normalized_equal": true,
+      "commit_CRLF": 0,
+      "working_CRLF": 8929,
+      "working_LF": 8929
+    },
+    {
+      "path": "src/Round83BlockExchange.cpp",
+      "commit_blob_sha256": "7402242968c8fa5db9957089b132b0afde893110f302a841b5a8ca76d115faf9",
+      "working_sha256": "7402242968c8fa5db9957089b132b0afde893110f302a841b5a8ca76d115faf9",
+      "byte_equal": true,
+      "LF_normalized_equal": true,
+      "commit_CRLF": 0,
+      "working_CRLF": 0,
+      "working_LF": 200
+    },
+    {
+      "path": "include/Round83BlockExchange.hpp",
+      "commit_blob_sha256": "249616345fa539a9c02e35f9bfcdf80838f414f6c07f1bda7e9ff4600bda183e",
+      "working_sha256": "249616345fa539a9c02e35f9bfcdf80838f414f6c07f1bda7e9ff4600bda183e",
+      "byte_equal": true,
+      "LF_normalized_equal": true,
+      "commit_CRLF": 0,
+      "working_CRLF": 0,
+      "working_LF": 24
+    },
+    {
+      "path": "CMakeLists.txt",
+      "commit_blob_sha256": "8d5fa1fc999d0300fdcbf5fa50c900053307e1e272bb65d4b1c494ba6cc2a1d0",
+      "working_sha256": "f97bb0f59ed0667c98e71146e8057c5f2cc415e17476db30d2faad87a37208de",
+      "byte_equal": false,
+      "LF_normalized_equal": true,
+      "commit_CRLF": 0,
+      "working_CRLF": 441,
+      "working_LF": 441
+    }
+  ],
+  "wall_seconds": 0.20956069976091385,
+  "optimizer_calls": 0,
+  "initial_check": "AssertionError on src/main.cpp literal blob comparison retained; no solver/source/build change."
+}

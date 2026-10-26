@@ -1,0 +1,22 @@
+{
+  "status": "authorized_once_after_resource_release",
+  "authorized_by": "Astra",
+  "scope": "One offline same-source D7 L0 LP diagnostic; not an ENS/P-GRB performance experiment",
+  "manifest": "results/unified_exact_round88/ot_qualification_d7_audit_v4/manifest.json",
+  "manifest_sha256": "a0996967e9278469defa43ab1c630b0d16f7e996062f71bf91efa9a656f99a4d",
+  "lp_sha256": "06275aba5e2378d719390e295654849d8868fb92fd8b0366619e1c33fa713069",
+  "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+  "math_sha256": "2b8855609cf469098d050fcd9c89efac01b2cb41ee07f023b5a7b79f9ff71840",
+  "diagnostic_sha256": "c1cb1776d1b1eef0f03977e00060c1690e5505517d0e4baa71feb3b672fa0756",
+  "supervisor_sha256": "ea79e400d727bc94ca20c5ddfec61c3dfaaafd2e1f7d175a2fe5f4ffb8135d29",
+  "runner_model_record": "gpt-6-sol/high",
+  "independent_review": "ot_tool_independent_review.md",
+  "final_tests": "12/12 passed in 0.116s; ot_qualification_final_tests.log",
+  "source_provenance_check": "LP hash matches Round87 package_index.json; reviewed manifest distinguishes original cutoff from later improved UB",
+  "whole_diagnostic_limit_seconds": 120,
+  "expected_maximum_optimize_calls": 5,
+  "output_directory": "results/unified_exact_round88/ot_d7_diagnostic_001",
+  "command": ["build/research/round88-ot/venv/Scripts/python.exe", "scripts/round88_ot_supervise.py", "--manifest", "results/unified_exact_round88/ot_qualification_d7_audit_v4/manifest.json", "--out-dir", "results/unified_exact_round88/ot_d7_diagnostic_001", "--whole-process-limit-seconds", "120"],
+  "unknown_policy": "Preserve partial/timeout outputs and all paid costs; no cut rejection or formal algorithm decision inferred from timeout",
+  "resource_policy": "One worker owns solver slot; no concurrent build, experiment, compression or heavy audit; G3 rest remains unapproved"
+}

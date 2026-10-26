@@ -1,0 +1,36 @@
+{
+  "schema": "round92-g1-v2-preregistration-v1",
+  "status": "source_only_conditional_no_execution_admitted",
+  "source_commit": "ea190d909bbc8fbb0caaaada78c928f71be18bc1",
+  "source_identity_path": "results/unified_exact_round92/physical_envelope_source_identity.json",
+  "source_identity_sha256": "02dbca61efb415d64561a9a15a868b7f8822354b8c0afb4c2f76675b8bbf6bbf",
+  "source_files_count": 15,
+  "runner_path": "scripts/round92_g1_v2_qualification.py",
+  "execution_admission_path_proposed": "results/unified_exact_round92/g1_v2_execution_admission.json",
+  "build_root": "build/research/round92-handling-activation",
+  "preserve_root": "build/research/round92-handling-activation/qualified_v1",
+  "evidence_root": "results/unified_exact_round92/qualification_003",
+  "old_binary_sha256": {
+    "ExactEBRP.exe": "bf99199172b9d783bcb55ad532d25f748348d08907a9f8b5b5de92bf9afe2524",
+    "libexact_ebrp_core.a": "fd977d68e87ea5c116d33a25943abc8a036295e33c72c60c36bdf357c2e26be6",
+    "Round92HandlingActivationTests.exe": "fed6f5fd5178bcd69af581dcbabf093c241e5c4063c7702b8f3ab3d1ec946f1a",
+    "Round92HandlingIntegrationTests.exe": "c806fcaf6321884e95b738438ad54c8904f90ad3179feb474bab0824dbe9310a"
+  },
+  "old_binary_sources": {
+    "ExactEBRP.exe": "qualification_002/artifact_index.json",
+    "libexact_ebrp_core.a": "qualification_002/artifact_index.json",
+    "Round92HandlingActivationTests.exe": "qualification_001/artifact_index.json",
+    "Round92HandlingIntegrationTests.exe": "qualification_002/artifact_index.json"
+  },
+  "stages": ["preserve", "build", "ctest", "export", "readback"],
+  "build_targets": ["ExactEBRP", "Round92HandlingActivationTests", "Round92HandlingIntegrationTests"],
+  "build_parallel_jobs": 4,
+  "ctest_filter": "^(Round92HandlingActivationTests|Round92HandlingActivationCliTests)$",
+  "export_output": "results/unified_exact_round92/qualification_003/canonical_export",
+  "readback_script": "tests/round92_handling_lp_readback.py",
+  "optimize_calls": 0,
+  "configuration_calls": 0,
+  "retry_or_auto_repair": false,
+  "stop_policy": "At the first failed preservation, build, CTest, exporter, readback, or identity check, retain the prefix and stop without retry or algorithm repair.",
+  "execution_gate": "Root must create a separate exact admission pinning this preregistration SHA, runner SHA, and existing source identity SHA after D6 explicitly releases compute."
+}

@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "-c",
+    "import json,hashlib;from pathlib import Path;j=json.loads(Path('results/unified_exact_round97/final_summary/evidence_index.json').read_text());bad=[p for p,h in j['source_bindings'].items() if not Path(p).is_file() or hashlib.sha256(Path(p).read_bytes()).hexdigest()!=h];print(dict(bindings=len(j['source_bindings']),solver_rows=j['solver_rows'],pairs=j['copied_pair_rows'],bad=bad));assert not bad"
+  ],
+  "optimizer_calls": 0
+}

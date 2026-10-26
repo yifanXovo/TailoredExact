@@ -1,0 +1,20 @@
+{
+  "schema": "round55-sparse-candidate-selection-v1",
+  "frozen_before_live_pilot_results_inspected": true,
+  "active_family_count": 17,
+  "families_audited": 17,
+  "proved_strengthening_only_families": [
+    "objective_lower_estimator",
+    "penalty_lower_bound_closure",
+    "sp_product_mccormick_rows",
+    "sp_product_objective_estimator",
+    "pair_support_duration_cover",
+    "triple_support_duration_cover"
+  ],
+  "SF_R1": null,
+  "SF_R2": null,
+  "selection": "none",
+  "reason": "No single active family met the simultaneous exactness, negligible multi-role contribution, material-cost, and uniform-removal evidence gate before the live pilot.",
+  "live_sparse_removal_candidates": 0,
+  "classification_if_no_later_evidence_defect": "no_additional_family_removed"
+}

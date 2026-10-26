@@ -1,0 +1,11 @@
+{
+  "schema": "round88-ot-epigraph-outer-command-receipt-v1",
+  "command": "build/research/round88-ot/venv/Scripts/python.exe scripts/round88_ot_epigraph_qualify.py run-all --out-dir results/unified_exact_round88/ot_epigraph_qualification",
+  "working_directory": "E:/codes/ExactEBRP",
+  "exit_code": 0,
+  "outside_exec_command_wall_seconds": 4.416753,
+  "measurement_source": "exec_command.wall_time_seconds; includes command shell/tool launch and process completion",
+  "nested_qualifier_wall_seconds": 4.1380759999156,
+  "sum_stage_launch_to_exit_wall_seconds": 4.1171393995173275,
+  "cost_note": "Nested and stage costs are decompositions of the outside command wall, not additive to it. No individual stage or source audit time is counted twice."
+}

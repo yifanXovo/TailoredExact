@@ -55,3 +55,5 @@ The moderate low-Gini callback workers still may not return a solver-final JSON 
 The long-run convergence runner executes fixed-interval callback solves behind a child-process boundary. The parent process can terminate the worker tree while preserving CPLEX-native best-bound trajectory rows from the progress CSV. This is the production diagnostic path for callback hard leaves that may not return solver-final JSON promptly.
 
 The callback backend also exposes optional bound-aware expensive-separation pacing. It throttles only optional valid subset/support/transfer separation. Cheap valid rows remain active, and no feasible solution is removed by the pacing rule.
+> Historical CPLEX callback design. It is not the current K1-AM-SF
+> implementation.

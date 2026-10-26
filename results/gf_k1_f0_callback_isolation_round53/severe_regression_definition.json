@@ -1,0 +1,13 @@
+{
+  "schema": "round53-severe-regression-definition-v1",
+  "exact_rows": {
+    "work": "candidate/baseline > 1.50 and candidate-baseline > 50",
+    "time": "candidate/baseline > 1.50 and candidate-baseline > 60 seconds"
+  },
+  "capped_rows_any": [
+    "baseline certifies and candidate does not",
+    "GI ratio > 1.50 and absolute increase >= 0.05",
+    "gap ratio > 1.50 and absolute increase >= 0.05"
+  ],
+  "full_k1_vs_pgrb": "reuse results/gf_k1_tailored_cut_final_validation_round52/severe_regression_definition.json"
+}

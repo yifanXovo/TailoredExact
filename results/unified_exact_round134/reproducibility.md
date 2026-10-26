@@ -1,0 +1,17 @@
+# Finite current-round reproduction
+
+The scientific payload is fixed at `29adc14cf2089442298b409ba2bc06963e77bc14`. Read export_manifest.json and source_publication.json from that exact commit, including when the current branch contains later delivery metadata. The actual one-root anonymous check passed 200 files and 38 current-only archives at attempt1; see [public_restore_receipt.json](public_restore_receipt.json) and [the published semantic receipt](delivery/public_restore_semantic.json). The current-only bootstrap is scripts/round134_public_restore.py; its fixed-commit SHA is recorded in delivery_bootstrap_binding.json before execution. It uses anonymous HTTPS and a standard-library Python runtime plus system curl.
+
+```
+python round134_public_restore.py --commit 29adc14cf2089442298b409ba2bc06963e77bc14 --destination E:/codes/ExactEBRP-work/restore/round134-public-YOUR_NEW_UNIQUE_NAME --receipt EXTERNAL_RECEIPT_PATH
+```
+
+The destination must be one new owned initially empty directory under the declared restore parent. A real failed transport/check may resume the same failed root with --resume, preserving healthy verified downloads and failures. A completed root cannot be rerun. This entry documents the one required current-round check; actual outcomes appear in public_restore_receipt.json. Total cumulative recovery budget is7200s, with four transport workers. It does not use Git, a local raw/source fallback, native Optimize, compilation or vendor DLLs.
+
+All36 current formal positions are restored with their unchanged producer seals, physical/model/H/Start/source/return/coverage evidence and original measured clocks. The same current reader and the pure accepted-H adapter execute under the established R133 closed-root engine; derived JSON is regenerated in memory and compared. Exact current source bytes are mounted from current_source_bytes.zip, so Git newline conversion cannot masquerade as source identity. Executable, object/archive and DLL hashes are historical execution attestations only; their bytes are not distributed or loaded.
+
+The only inherited tiny carrier is complete_tiny_joint_study.zip at52b02252ba47e8228b73e071d6ed692385a4f816, SHA256 d2e55d7ae5fcaf5bb0c9d39a489b589006f3a29eb350b167fd790ad399a0aac1. Its original bytes remain unchanged. Exact J2/J3 witness and old-control extensions are replayed without a solver. The two current root exports and six LP records are restored; exact coefficient/count/downrounding and added-row residuals are regenerated. Native LP optimality and historical old/current export equality remain explicitly preserved execution/review attestations, not new rational proofs or a recovery-time re-solve. No historical whole campaign is restored.
+
+Reports/C and reports/D contain every endpoint, matched comparison and operation record. Manuscript, supplement, bibliography, independent_proof.md, tc_note.md and review/ provide the reading path. Local closed-root preflight is run once before publication. transport/read-only adapter failures are retained and repaired only where affected; no healthy experiment is rerun for delivery.
+
+Scientific manifest hashes refer to the fixed science snapshot. Later publication/completion receipts and the final metadata commit do not rewrite that snapshot or recursively package their own receipts. No native assets, licenses, credentials, vendor fonts or unauthorized full papers are published.

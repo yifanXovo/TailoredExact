@@ -1,0 +1,34 @@
+{
+  "role": {
+    "id": "R99-N2",
+    "V": 30,
+    "M": 3,
+    "Q_vector": [
+      16,
+      22,
+      28
+    ],
+    "geometry": "bent_corridor",
+    "inventory": "shortage",
+    "T_seconds": 6600,
+    "cap_seconds": 3600,
+    "method_order": [],
+    "input_path": "reference/round99_confirmation/N2.txt",
+    "instance_path": "reference/round99_confirmation/N2.txt",
+    "input_sha256": "370cb51b4d2351b3881cd74ab93406d76834efcf856430f742b8f243a9060a27",
+    "scenario_id": "round99-discrete-structure-confirmation-v1-N2",
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "total_initial": 601,
+    "total_target": 647,
+    "zero_excluded_by_stock_shortage": true
+  },
+  "kind": "raw",
+  "cap_seconds": 600.0,
+  "source": "results\\unified_exact_round100\\certification_N201\\raw\\03_R99-N2_ENS-C\\external\\models\\L0_epoch_0_generation_1.lp",
+  "source_sha256": "7eb245f733f64f4d4901355d528f6453182dffa7839cae232d880b2c04fe54b4",
+  "point_source": "R101 complete raw LP point",
+  "mechanism": "restricted infinity-distance LP, complete C++ witness support, exact-dyadic certificates",
+  "production": false
+}

@@ -1,0 +1,29 @@
+{
+  "version": "round100-minimal-integrality-holdout-v1",
+  "role": {
+    "id": "H100",
+    "V": 20,
+    "M": 2,
+    "Q_vector": [
+      13,
+      21
+    ],
+    "geometry": "anisotropic_cloud",
+    "inventory": "shortage",
+    "T_seconds": 5100,
+    "cap_seconds": 1800
+  },
+  "method_order": [
+    "P-GRB",
+    "M-B",
+    "ENS-C"
+  ],
+  "seed": "SHA256(version|id|field), first8 bytes /2^64",
+  "landscape_source_sha256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+  "writer_sha256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+  "scope": "new input bytes unused in selection; inherited geometric family, one role only; not broad generalization",
+  "rationale": "R98 and R99 confirmation inputs are already observed. Freeze a single fresh V20 shortage role with heterogeneous fleet; no pilot, reseed, redraw or difficulty adjustment.",
+  "retain_all_outcomes": true,
+  "no_optimizer_in_generation": true,
+  "candidate_freeze_sha256": "b34702d12d69d1e6dd59b8a7b39d8ea82d8eb596d0511ee1440857e5212342cc"
+}

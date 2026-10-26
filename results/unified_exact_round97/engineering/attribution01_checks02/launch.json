@@ -1,0 +1,8 @@
+{
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "-c",
+    "import ast,sys;from pathlib import Path;sys.path.insert(0,'scripts');import round97_operator_attribution as a;a.ext.ensure_idle();ast.parse(Path(a.__file__).read_text(encoding='utf-8'));i=a.read(a.CAMP/'identity.json');a.check(i);a.prefix(i,0);assert all(not a.Path(l['destination']).exists() for l in i['launches']);assert 'assert sha(CAMP/'identity.json')==frozen_batch_sha' in Path(a.__file__).read_text(encoding='utf-8');print('Revised frozen admission and per-arm batch hash guard checked, Optimize=0')"
+  ],
+  "optimizer_calls": 0
+}

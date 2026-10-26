@@ -1,0 +1,244 @@
+{
+  "status": "OUTSIDE",
+  "reason": "complete_domain_dyadic_support_row",
+  "vehicle": 1,
+  "seconds": 0.0014597000554203987,
+  "Optimize_calls": 1,
+  "DP_calls": 1,
+  "columns": 11,
+  "duplicates": 1,
+  "tolerance": 1e-08,
+  "zero_width_residual": 0.0,
+  "history": [
+    {
+      "iteration": 1,
+      "restricted_distance": 0.375,
+      "verified_combination_residual": 0.375,
+      "support_lower": 0.5,
+      "support_upper": 0.5,
+      "pricing_quantization_error": 0.0,
+      "full_distance_lower": 0.375,
+      "quantized_violation": 0.375,
+      "normalization": 1.0,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  ],
+  "restricted_distance": 0.375,
+  "full_distance_lower": 0.375,
+  "weights": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      2147483648,
+      2147483648,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "coefficient_scale": 4294967296,
+  "safe_rhs_rational": "1/2",
+  "exact_activity_rational": "7/8",
+  "exact_excess_rational": "3/8",
+  "support": {
+    "valid": true,
+    "vehicle": 1,
+    "upper": 2147483648,
+    "resource_limit": 2,
+    "weights": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        2147483648,
+        2147483648,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "levels": [
+      [
+        3,
+        2,
+        2147483648
+      ]
+    ],
+    "solution": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "anchors": [],
+    "anchor_travel": [
+      0
+    ]
+  },
+  "combination": [
+    {
+      "lambda_rational": "3/8",
+      "lambda_float": 0.375,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "lambda_rational": "3/8",
+      "lambda_float": 0.375,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "lambda_rational": "1/16",
+      "lambda_float": 0.0625,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "lambda_rational": "3/16",
+      "lambda_float": 0.1875,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "verified_distance_upper": 0.375,
+  "verified_distance_upper_rational": "3/8"
+}

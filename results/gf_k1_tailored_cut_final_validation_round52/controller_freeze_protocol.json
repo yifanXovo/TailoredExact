@@ -1,0 +1,29 @@
+{
+  "schema": "round52-controller-freeze-protocol-v1",
+  "freeze_after_tau_decision": true,
+  "controller": {
+    "K0": 1,
+    "initial_intervals": 1,
+    "initial_range": "complete strict-improver Gini interval",
+    "refinement": "midpoint",
+    "adaptive_mass_formula": "Round47",
+    "native_target_behavior": "Round47",
+    "exact_parent_closure": "Round47",
+    "infeasible_child_behavior": "Round47",
+    "coverage": "exact complete",
+    "certification": "global exact"
+  },
+  "no_split_controller_research_after_freeze": true,
+  "default_off": [
+    "gamma-veto",
+    "AMF",
+    "reduced-cost rescue",
+    "fixed-rho fallback",
+    "root-processing rescue",
+    "PMM/FPMM",
+    "non-midpoint split points",
+    "AMC for K1",
+    "adaptive branching",
+    "Round51 M1"
+  ]
+}

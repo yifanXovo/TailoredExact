@@ -1,0 +1,33 @@
+{
+  "decision": "PENDING",
+  "scope": "Light static inspection of unmeasured report/recovery helpers; actual formal review is not executed.",
+  "UTC": "2026-10-15T21:15:27.520685+00:00",
+  "source_SHA": {
+    "scripts/round122_finish_report.py": "86ad01631e0b493b949bd150cb245bd7d012a0e5986d9e2fe09e044bddb9f622",
+    "scripts/round122_release.py": "98284d2cb98f392f8a87bacd7f294545b91382ab891d50a1fc877488ffc146b6"
+  },
+  "findings": [
+    {
+      "issue": "Raw tree event source and explicit root proof completeness",
+      "status": "ADDRESSED_BY_PARENT",
+      "observed": "Reporter prefers paper_tree_events.csv, retains valid reconstruction controller_events.csv fallback, and separately records split rows/counts, paid pair completeness, saved installed pair and registration events."
+    },
+    {
+      "issue": "Whole compressed carrier scan memory",
+      "status": "ADDRESSED_BY_PARENT",
+      "observed": "Release scan_carrier traverses persisted parts with Joined through unchanged Scanner.tar/member/recursive payload checks; no whole-carrier concatenation at that call site."
+    },
+    {
+      "issue": "Main-table proof categories and legacy panel metadata",
+      "status": "ADDRESSED_BY_PARENT",
+      "observed": "paper_arm retains legacy flag and derives separate numerical nonzero, independent zero, reliable open and source-reduced columns; zero and source-reduced overlap remains possible."
+    }
+  ],
+  "independent_implementation": "review/post_formal_independent.py",
+  "prepared_tests_receipt": "review/post_formal_preparation02.json",
+  "actual_formal_review": "PENDING_PARENT_NOTICE_AND_ALL_REQUIRED_SEALED_GROUPS",
+  "evolving_formal_raw_read": false,
+  "native_starts": 0,
+  "Optimize": 0,
+  "measured_helpers_or_raw_modified": false
+}

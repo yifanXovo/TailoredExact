@@ -1,0 +1,29 @@
+{
+  "decision": "STATIC_REVIEW_ONLY_NOT_FINAL_ACCEPTANCE",
+  "scope": "Read-only source and small frozen-plan inspection; no raw traversal or experiment execution",
+  "inputs": {
+    "scripts/round132_analysis.py": "e03c7f3cbadb2b063b532fe6e1bdbe0fb9cffd082967f02cdfdd9ff5f6f83b34",
+    "scripts/round132_joint.py": "856e95e2753f2229ecbf9054dc0334093e612ba6c78ba5e7f576827cbf2812d5",
+    "results/unified_exact_round132/E_experiment_plan.json": "db2bc424d315ad770099d25d525b2736cfa0476569120006d7003cb49e6bb6d1",
+    "results/unified_exact_round132/experiment_plan.json": "f73f89ff1cc5ec2e2772a30e63b7c5d9b23d6a34362879d5cac1067c0e3f63ee",
+    "results/unified_exact_round132/C_experiment_plan.json": "91040549bf094368483faad90ebdf5eb2825202795fe14b241100b9a6b169fa5"
+  },
+  "open_findings": [
+    {"id": "A-S1", "location": "scripts/round132_analysis.py:130", "finding": "Join must validate per-arm frozen group/launch identity before overwriting reporting labels; persist actual derived-input hashes."},
+    {"id": "A-S2", "location": "scripts/round132_analysis.py:135", "finding": "Preserve missing or invalid observations as UNEVALUABLE instead of raising before classification."},
+    {"id": "A-S3", "location": "scripts/round132_analysis.py:210", "finding": "Final result qualification must require cost closure and category/global accounting, beyond60/24/64 counts."}
+  ],
+  "resolved": [
+    {"id": "RESOURCE_ORDER", "finding": "Derived physical resource table follows route.nodes; independent existing physical feasibility reader already followed routes. No native experiment change."},
+    {"id": "E-F6", "finding": "Frozen asset/plan/runner/source identity is checked and captured before enumeration."},
+    {"id": "E-F7", "finding": "Native INFEASIBLE now seals a contradiction and stops at all four stage types."}
+  ],
+  "E_finite_execution_scope_unchanged": true,
+  "reviewed_raw_arms": 0,
+  "review_enumeration": 0,
+  "review_Optimize": 0,
+  "review_H": 0,
+  "review_compile": 0,
+  "external_reproduction": false,
+  "performance_result_acceptance": false
+}

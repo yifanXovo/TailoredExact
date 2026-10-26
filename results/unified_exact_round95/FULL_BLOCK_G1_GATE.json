@@ -1,0 +1,34 @@
+{
+  "schema": "round95-full-block-g1-qualified-driver-v1",
+  "status": "qualified",
+  "authority": "Root independent G1 acceptance",
+  "scope": "Isolated fixed D6/E8/S12 diagnostics only; no production integration",
+  "preregistration_sha256": "2773c0a159c90e7f69343a2babfa827ce061dfc26a42f2948395413fbfe70a12",
+  "driver_binary": {
+    "sha256": "a69114b730fe6f65cdc6d519dd2f9b6cf753903b89608b174316cd0e5a7cf1a7",
+    "path": "build/research/round95-full-block/Round95FullBlockDiagnostic.exe"
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "aa85e10cc3738c8e44f1d99a3aa174ca542515d765ace9ed49262d933bfc1b27",
+    "include/Round95FullBlockDescent.hpp": "20150387b81db8287d44a959e9716274dff2f18586fd0014398b5bf200470573",
+    "src/Round95FullBlockDescent.cpp": "279eaf94fb769aab8cb89472ee3c698a25eb551f521a715c9af2a7cd859de5bb",
+    "tests/round95_full_block_diagnostic.cpp": "300c1359a845f92f6e28966b808042ff01a315f1cd91ffe913a8611061a4cc8a",
+    "tests/round95_full_block_tests.cpp": "080a4cbd928b7bc957d8888790e819c4c5814d81924df0e274792676e405850d",
+    "src/Evaluator.cpp": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+    "src/Result.cpp": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+    "src/Parser.cpp": "9402d2744b4b2a7a83c3152d90d6d6438ca9c3e417d1a57da14dd8101c3b2911",
+    "src/ProcessPhaseLedger.cpp": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+    "include/PhysicalDurationTolerance.hpp": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+    "src/Round75QuantityDescent.cpp": "f904a7f7355e897df1aff3d07757d8c2ac5b8dff134235c061637d46a87c0075",
+    "src/Round76PhysicalClosure.cpp": "a9a43c9db00096fc81168cf30a5b2805cacf42b0de9b42b723094f4007db8ce8",
+    "src/Round83BlockExchange.cpp": "7402242968c8fa5db9957089b132b0afde893110f302a841b5a8ca76d115faf9",
+    "src/Round93CoQuantityDescent.cpp": "cf3ea08852f56a10bceeb59c169ff92de4d9d8aad0914a7233985ce7da4f2012",
+    "scripts/round95_full_block_diagnostic.py": "3a43088d35d65a1568e18019f5fa0089f12261479420731ab86fc4f1643e80e6"
+  },
+  "g1_manifest_sha256": "847890b44aae31ac445b9bcd3149f6768f2cbd2eaf4742b192291ce09bed317d",
+  "reviews": [
+    "results/unified_exact_round95/math_source_static_review.md",
+    "results/unified_exact_round95/g1_independent_review.md",
+    "results/unified_exact_round95/g2_supervisor_static_review.md"
+  ]
+}

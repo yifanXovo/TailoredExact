@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP\scripts\round98_lp_diagnostic.py", line 73, in <module>
+    if __name__=='__main__':run(sys.argv[1],sys.argv[2])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP\scripts\round98_lp_diagnostic.py", line 57, in run
+    assert abs(results[1]['objective']-results[2]['objective'])<=1e-7
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

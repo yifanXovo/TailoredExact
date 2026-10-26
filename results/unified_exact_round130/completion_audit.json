@@ -1,0 +1,74 @@
+{
+  "UTC": "2026-10-22T14:03:46.720016+00:00",
+  "status": "SCIENCE_AND_DELIVERY_COMPLETE_FINAL_METADATA_PUSH_READBACK_PENDING",
+  "scientific_tag": "SELECTED_MS2_WITH_SCOPED_OR_MIXED_ATTRIBUTION",
+  "actual_requirements": [
+    {
+      "requirement": "Adopted sole S2/MS2 version and accurate predecessor migration",
+      "evidence": "paper_version_manifest.json; paper_method_config.json; evidence_migration.csv",
+      "completed": true
+    },
+    {
+      "requirement": "Frozen original-S2/P E2/E3 bridge and new-control qualification",
+      "evidence": "E3_frozen.json; preformal_source_provenance.json; qualification/",
+      "completed": true
+    },
+    {
+      "requirement": "Independent preformal PS/S2R source/model/Start/root/budget admission",
+      "evidence": "review/preformal_independent_review.md; review/performance_admission.json",
+      "completed": true
+    },
+    {
+      "requirement": "All24 fixed paid arms and all30 typed comparisons on six shared groups",
+      "evidence": "arms.csv; pairs.csv; stratified_summary.json; campaign/group01..06",
+      "completed": true
+    },
+    {
+      "requirement": "Actual same-H/root/Start, split-target exposure, costs and signed coverage facts",
+      "evidence": "same_H.csv; actual_method_differences.json; mechanism_costs.csv; closure_sources.csv",
+      "completed": true
+    },
+    {
+      "requirement": "Substantive three-axis decision with all adverse/open outcomes",
+      "evidence": "claim_decision.md; scientific_decision.json; final_report.md",
+      "completed": true
+    },
+    {
+      "requirement": "Independent final arithmetic/denominators and finite evidence/fleet replay",
+      "evidence": "review/final_independent_review.md; review/final_independent_evidence.json",
+      "completed": true
+    },
+    {
+      "requirement": "Full maintained paper/appendices and actual PDF affected-page review",
+      "evidence": "manuscript_lineage.json; manuscript.pdf; review/pdf_visual_review.json",
+      "completed": true
+    },
+    {
+      "requirement": "Actual-member and loose publication scan with finite exact dependencies",
+      "evidence": "raw_archive_manifest.json; export_manifest.json; review/publication_scan.json",
+      "completed": true
+    },
+    {
+      "requirement": "One science-commit anonymous empty-root recovery without native work",
+      "evidence": "public_restore_receipt.json; review/public_recovery_attempts/",
+      "completed": true
+    },
+    {
+      "requirement": "Bounded owned cleanup and unique/user/old-worktree protection",
+      "evidence": "cleanup_receipt.json; review/final_protection_check.json",
+      "completed": true
+    },
+    {
+      "requirement": "All nonoverlapping outer fees closed under39600 without nested double counting",
+      "evidence": "resource_accounting.json",
+      "completed": true
+    },
+    {
+      "requirement": "English stacked open Draft PR with normal publication",
+      "evidence": "review/created_PR_readback.json; final local post-push receipt",
+      "completed": true
+    }
+  ],
+  "final_short_metadata_push_readback_pending": true,
+  "no_extra_experiment_or_second_recovery": true
+}

@@ -1,0 +1,29 @@
+{
+  "command": [
+    "scripts/qualify_round121.py",
+    "qualification04",
+    "--minimum-final-D1"
+  ],
+  "cwd": "C:\\Users\\Administrator\\.codex\\worktrees\\round121-frozen-d1-confirmation\\ExactEBRP",
+  "wrapper_pid": 19192,
+  "wrapper_creation_unix": 1792042987.016199,
+  "conservative_process_starts": 2,
+  "declared_native_children": 1,
+  "qualification": true,
+  "outer_cap": 600,
+  "budget_before": {
+    "paid_starts": 6,
+    "paid_outer_seconds": 423.4524049758911,
+    "remaining_starts": 34,
+    "remaining_outer_seconds": 47576.54759502411,
+    "qualification_starts": 6,
+    "qualification_seconds": 423.4524049758911,
+    "unclosed": []
+  },
+  "remaining_fixed_obligations": {
+    "starts": 21,
+    "seconds": 37800
+  },
+  "frozen_UTC": "2026-10-15T05:43:07.158485+00:00",
+  "start_accounting": "wrapper plus actual/uncertain children; failed declarations charged, no refund for failure; nested native time not added"
+}

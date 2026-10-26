@@ -1,0 +1,27 @@
+{
+  "schema": "round53-f0-mathematical-contract-v1",
+  "paper_name": "F0-CLEAN",
+  "research_policy": "interval-mip-core-no-exhaustive-subset-duration",
+  "historical_alias": "f0-no-rank3-support-duration",
+  "primary_candidate_frozen_before_runs": true,
+  "removed_family": "historical exhaustive subset-duration strengthening block written under the production-v0 V<=12 guard",
+  "removed_round52_static_rank2_rank3_block": true,
+  "dynamic_support_duration_callback": "off",
+  "PreCrush_override": "none",
+  "preserved": [
+    "all core feasibility rows",
+    "all variables and order",
+    "all domains",
+    "all non-target coefficients and RHS",
+    "objective",
+    "interval restriction",
+    "cutoff",
+    "symmetry",
+    "Gurobi default branching",
+    "solver parameters"
+  ],
+  "uniform_definition": "F0-CLEAN never includes the exhaustive static subset-duration family",
+  "V_gt_12_equivalence_reason": "production v0 historically does not generate the target family for V>12",
+  "instance_size_dispatch": false,
+  "integer_feasible_set_and_objective_must_match": true
+}

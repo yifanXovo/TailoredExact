@@ -1,0 +1,66 @@
+{
+  "schema": "round135-independent-light-text-prereview-v1",
+  "reviewer": "/root/independent_review",
+  "UTC": "2026-10-26T10:42:33.042088+00:00",
+  "disposition": "PASS",
+  "blocking_findings": [],
+  "unresolved_scientific_findings": [],
+  "resolved_small_notation_issue": {
+    "file": "paper_body.md",
+    "original_line": 301,
+    "issue": "Projection coordinates x and P_e were used before main-text definitions.",
+    "resolution": "Explicit definitions now precede the conditional projection statement.",
+    "verified_definition_lines": [
+      {
+        "line": 301,
+        "text": "which adds one row and no variables. The total nonzero count remains comparable to the stationwise system because the row is dense; fewer rows alone do not imply lower solve cost. Write \\(P_e=\\sum_i\\omega_i e_i\\), and let \\(x\\) collect all variables except \\(e\\). In the ideal formulation, if every applicable local lower bound is at most \\(\\phi_i(s)\\), \\(\\phi_i(s)\\le M_i\\) for the actual finite local upper bound \\(M_i\\), and every other use of \\(e\\) is through its weighted total, AP has the same \\((x,P_e)\\) projection as all stationwise lower bounds \\(e_i\\ge\\phi_i(s)\\). The supplement gives the constructive proof, handles zero weights and states why this does not imply equivalence to VD-J equalities or independent \\(Se_i\\) products."
+      }
+    ]
+  },
+  "checks": {
+    "objective_and_empty_departure_loaded_return_conservation": true,
+    "handling_identity_and_prefix_capacity_interpretation": true,
+    "main_Gini_epigraph_and_objective_preserving_physical_embedding": true,
+    "implicit_service_integrality_assumptions_and_proof": true,
+    "ordered_supply_metric_and_integer_unit_assumptions": true,
+    "support_handling_uses_cumulative_pickup_not_capacity": true,
+    "AP_state_cancellation_and_conditional_projection_correct": true,
+    "projection_not_coordinatewise_or_VDJ_equality": true,
+    "ideal_theorem_and_loaded_binary64_scope_separate": true,
+    "R55_tested_adverse_antecedent_retained": true,
+    "R132_R133_R134_R135_versions_and_denominators_separate": true,
+    "HGA_actual_manuscript_title_and_model_heuristic_inheritance_consistent": true,
+    "HGA_author_order_affiliations_publication_status_remain_unconfirmed": true,
+    "document_editor_metadata_not_promoted_to_authorship": true,
+    "coordinates_capacities_and_synthetic_operational_fields_separated": true,
+    "no_claim_of_observed_trip_demand": true,
+    "AP_two_pending_result_placeholders_not_treated_as_defects": true
+  },
+  "reading_window": {
+    "start_UTC": "2026-10-26T10:42:33.040055+00:00",
+    "end_UTC": "2026-10-26T10:42:33.042088+00:00",
+    "seconds": 0.0018003999721258879,
+    "scope": "Final instrumented readback/snapshot of all six reviewed text files; preceding reasoning/readouts in this agent turn were not separately clocked."
+  },
+  "source_SHA256": {
+    "paper_body.md": "a950bba850efb1814e65bfe70609126e672b44d957404a75a0002be0dcb02217",
+    "model_and_algorithm_appendices.md": "54e594a9d9f17c1c809b0967ca802bc4a01bd14ed3a6b4b4b9c52fef4eccc30e",
+    "ap_math_and_history.md": "d66445c9c7c88d6d2af08e347db325d01bf9dd1968ae6bb38c077154affa38e0",
+    "literature_scope.md": "9c77e9ee38ed21f42f506710182791df228c3a45d73db290cdaf49fa163fedad",
+    "data_provenance.md": "14eb633fa6b65bfe2156055c1a84b2f889cb9eb55eea153f1c6732e8060fd550",
+    "hga_source_check.json": "2a2f3adbe8ddbced6362cf07026ffbec4184a41d93b22a487d670aa2af974d82"
+  },
+  "actions": {
+    "only_requested_small_texts_read": true,
+    "large_raw_reads": 0,
+    "checker_runs": 0,
+    "Optimize": 0,
+    "compilation": 0,
+    "PDF_export": 0,
+    "archiving": 0,
+    "vendor_DLL_loads": 0,
+    "native_process_interference": false,
+    "writes_only_this_report": true
+  },
+  "scope_limit": "This is a lightweight textual consistency review, not final G3 evidence/PDF/public-recovery acceptance. D13 exact-CRLF transport dependency will be reviewed with the final restoration scope; no old input or native run was altered."
+}

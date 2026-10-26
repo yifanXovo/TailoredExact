@@ -1,0 +1,140 @@
+{
+  "new_problem_denominator": 6,
+  "Seed1_same_input_blocks": 2,
+  "main_Seed0_groups": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "Seed1_groups": [
+    7,
+    8
+  ],
+  "sensitivity": [
+    {
+      "id": "PB-B35-B",
+      "candidate": "MB-D1",
+      "control": "P-GRB",
+      "Seed0": "WIN",
+      "Seed1": "WIN",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-B35-B",
+      "candidate": "M-B",
+      "control": "P-GRB",
+      "Seed0": "WIN",
+      "Seed1": "WIN",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-B35-B",
+      "candidate": "ENS-C",
+      "control": "P-GRB",
+      "Seed0": "WIN",
+      "Seed1": "WIN",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-B35-B",
+      "candidate": "MB-D1",
+      "control": "M-B",
+      "Seed0": "MIXED",
+      "Seed1": "WIN",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-B35-B",
+      "candidate": "MB-D1",
+      "control": "ENS-C",
+      "Seed0": "MIXED",
+      "Seed1": "WIN",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-B35-B",
+      "candidate": "M-B",
+      "control": "ENS-C",
+      "Seed0": "TIE",
+      "Seed1": "LOSS",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-C50-S",
+      "candidate": "MB-D1",
+      "control": "P-GRB",
+      "Seed0": "WIN",
+      "Seed1": "WIN",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-C50-S",
+      "candidate": "M-B",
+      "control": "P-GRB",
+      "Seed0": "WIN",
+      "Seed1": "WIN",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-C50-S",
+      "candidate": "ENS-C",
+      "control": "P-GRB",
+      "Seed0": "WIN",
+      "Seed1": "WIN",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-C50-S",
+      "candidate": "MB-D1",
+      "control": "M-B",
+      "Seed0": "TIE",
+      "Seed1": "TIE",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-C50-S",
+      "candidate": "MB-D1",
+      "control": "ENS-C",
+      "Seed0": "TIE",
+      "Seed1": "TIE",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    },
+    {
+      "id": "PB-C50-S",
+      "candidate": "M-B",
+      "control": "ENS-C",
+      "Seed0": "TIE",
+      "Seed1": "TIE",
+      "Seed0_severe": false,
+      "Seed1_severe": false,
+      "WIN_to_LOSS": false
+    }
+  ],
+  "no_best_of_Seed": true,
+  "not_IID_not_factorial": true
+}

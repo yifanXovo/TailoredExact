@@ -1,0 +1,17 @@
+{
+  "schema": "round55-interaction-decision-v1",
+  "opening_gate": "two mechanisms independently pass their confirmation gates",
+  "gate_met": false,
+  "independently_confirmed_mechanisms": [
+    "VD-P"
+  ],
+  "rejected_or_unopened_mechanisms": {
+    "SF-R1": "failed the frozen severe-regression gate",
+    "VD-J": "failed fixed-interval development",
+    "penalty_cover": "not opened because VD-J did not pass confirmation",
+    "MC4": "failed the live-pilot severe-regression gate"
+  },
+  "development_rows": 0,
+  "confirmation_rows": 0,
+  "classification": "interaction_not_opened"
+}

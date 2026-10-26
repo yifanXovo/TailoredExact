@@ -1,0 +1,2643 @@
+{
+  "schema": "round133-finite-current-public-export-v1",
+  "base_commit": "1ae14721e800d7c601adc1e7e42d5dfa89e48fbb",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 17827,
+      "SHA256": "a56608b91d3322b0690882a2a02caa5510ce23e406af74e101598b692be93156",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/.gitignore",
+      "bytes": 67,
+      "SHA256": "999709fbc4eabd5ed1ce92558c289b5bbd5aef6177d6dcfd308862b8c92d5dde",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_01.zip",
+      "bytes": 1197087,
+      "SHA256": "fac6b4940824d461d563c2d9d0ee1647c14774b1376da7de55f749ef87f24c93",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_02.zip",
+      "bytes": 1211128,
+      "SHA256": "151db5a8c90054bd7abca814bc4a47d1740d5f6694d29057a4be0eb026d03b1f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_03.zip",
+      "bytes": 9193363,
+      "SHA256": "34948019fdb55bb84f2d636d5bd9b81c14271a439fb7ebeb01034b41300e988d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_04.zip",
+      "bytes": 12750706,
+      "SHA256": "e58abae57e875390fbff324858f5b7e4f7488c7c46e2b63c75e1d43cb645ca3d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_05.zip",
+      "bytes": 9146139,
+      "SHA256": "a24d54f0b3510943b7974aef01093bd3f09d97d914177eeeda2679949c7a0444",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_06.zip",
+      "bytes": 9436081,
+      "SHA256": "b9eb8135f88e0c55c0bdb7b9b6cca69c5c8572e30adf65c579fbe79b6297dd37",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_07.zip",
+      "bytes": 10619211,
+      "SHA256": "7bc5bc0c940a0fb301339386865977b7649d5b7b06d2b48781d039c8a2b1348f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_08.zip",
+      "bytes": 7192712,
+      "SHA256": "5e01c4e1dcfed214cf5a1f8a9ba3d3f0f0f95ebd9475751707650ebc6ce47e2c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_09.zip",
+      "bytes": 9658401,
+      "SHA256": "f5f2c1114cde9adde274a301f804cb2ee7a6173ab797f37eb0f24a1662ed45c0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_10.zip",
+      "bytes": 14126197,
+      "SHA256": "1cb9ee5ea0ff9f4ef745b7a100a42b677c669e837a57163c29c65215c62289c0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_11.zip",
+      "bytes": 7653360,
+      "SHA256": "529d01acac4c10c707e6425a9d0d74a8aa2a04aaad2fb9c64eb8147ebe06eba7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_12.zip",
+      "bytes": 13155479,
+      "SHA256": "31560ab236506be00c3e0bbf490407192328d152ed3f3694aa78c8e44b1d0390",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_13.zip",
+      "bytes": 917137,
+      "SHA256": "2810783d14a1e4dccad684c6cc1bcfa595809016a0ba263f0410d655d196a8e0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D1_14.zip",
+      "bytes": 913366,
+      "SHA256": "9b13b8f6de463ba90c3e99e2ab77e75bff8670a7838237c0483748bfd0be2b90",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D3_01.zip",
+      "bytes": 429408,
+      "SHA256": "8558f36e053e33a43c6f760cfc17b65791f6c90aed97871c93cd47e0330eb7ca",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D3_02.zip",
+      "bytes": 435608,
+      "SHA256": "04826abad9fb9f23d199ec43ce2d386109944a996d79c6438c2897e3c45f552d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D3_03.zip",
+      "bytes": 428769,
+      "SHA256": "992b4325b5be05b9b48937d35caf6703ec3ee28838a770485aad3830cb0a4014",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D3_04.zip",
+      "bytes": 422814,
+      "SHA256": "82c36e69c73bd16d729911681bab9164b6189cd01b4bb83c7fe4313b816b3d60",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D3_05.zip",
+      "bytes": 12895683,
+      "SHA256": "2b05fa4c12371942423157c65820d46ed72dd82aa29f6e8a9a88735b370edf83",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D3_06.zip",
+      "bytes": 12560099,
+      "SHA256": "ebaaaf7d66338fe73e865bb48d7babc69fad0bb63ae70f2f49acbc088d9a26c9",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D3_07.zip",
+      "bytes": 9043169,
+      "SHA256": "aceb36d831eec249b8e0887b49eed75c6fa7426bdd9debd695043f8819a9a98b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/campaign_D3_08.zip",
+      "bytes": 9307587,
+      "SHA256": "073cdbf3ffffaaa7c4f8e457a211338f8b47f2086604fa267cac120ed598764f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/candidate_source_bytes.zip",
+      "bytes": 458707,
+      "SHA256": "63f292673167bceb5074f1813d68fd084b8db215bef3b2178e10f5fbc70c811c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/current_native_progress.zip",
+      "bytes": 1758762,
+      "SHA256": "e0e4cb5e44642f06110a9d5e0cb6164e1dcc9c2593d8fc250c37f8d2cba3f3bc",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/diagnostics_qualification_math_dependencies_closed_fees.zip",
+      "bytes": 10687979,
+      "SHA256": "64a9342d365d08af44fda110395d2827bf9dfd0e002007fe5e21fcb8758eba7a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/artifacts/execution_helper_bytes.zip",
+      "bytes": 374088,
+      "SHA256": "749102a5d2e7b10fdaf0011656842659ad2ec78b3d0b080bbe13ff35e2151936",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/baseline.json",
+      "bytes": 1431,
+      "SHA256": "05c77b99d5f6e3c951e344a2a5866a4b22ea1c749cf62bc113feeadc97b58827",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/candidate_build.json",
+      "bytes": 16819,
+      "SHA256": "84067f2e1b99e6420bbf2090aa4f2c89b40cb89759e43afcb7225dd1017ebede",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/candidate_manifest.json",
+      "bytes": 14280,
+      "SHA256": "101e8f75d2675d1f728ddd8aa4010d0b57821218e730a7b06207239af6a997b2",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_01_01/verification.json",
+      "bytes": 142,
+      "SHA256": "bbd0f2adeabe50a7502e11f88eb19a267e23551d05a8d9401398228efed83c26",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_01_postverify_repair_01/verification.json",
+      "bytes": 127,
+      "SHA256": "1db35179e57308d83a061ee3a7e39b8e4debb5a41ddb72aaacfacdf159f26cfe",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_02_01/verification.json",
+      "bytes": 143,
+      "SHA256": "3714ac6ecdbdbf17cc4673518cc96bd6f3cc729584d61dca6aa028fe6af3c50c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_03_01/verification.json",
+      "bytes": 143,
+      "SHA256": "389069595b3e0926a616a17c9b62f48b62211c068803dbf47387f300dd34fd08",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_04_01/verification.json",
+      "bytes": 141,
+      "SHA256": "b2970693672e53097b5d679699516afdb274a26bedf176645c71867b80f532d7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_05_01/verification.json",
+      "bytes": 142,
+      "SHA256": "df3ff75e13be42f83fb0d4c4c488bec34b972248c25a633e7d1d1bb38e4c6d9f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_06_01/verification.json",
+      "bytes": 142,
+      "SHA256": "3ad34d21a5af516b297daa5902de7794631736ab8708f55377ab1fc258889bee",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_07_01/verification.json",
+      "bytes": 142,
+      "SHA256": "efc1c581a940cd76ed3e8d52c3eda981fa54c466d09b9b3d46292214577d7664",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_08_01/verification.json",
+      "bytes": 142,
+      "SHA256": "c386ac89c4d3ab44b6412d2285820a2100ef50b7bb9eb3f1dbb481c871c19c60",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_09_01/verification.json",
+      "bytes": 142,
+      "SHA256": "c3daaa1ec39510a968193f092ebb854e87bca5e11acf530ae373db3803781168",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_10_01/verification.json",
+      "bytes": 143,
+      "SHA256": "a2f21c9018e956ea81b0de83a8628ead98ed5a3436440ff6f5b81e99364a1d18",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_11_01/verification.json",
+      "bytes": 142,
+      "SHA256": "c8734013755974aa42f318cc98fbf3196fd8f6610e5c81372b3a742772b50d0c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_12_01/verification.json",
+      "bytes": 143,
+      "SHA256": "cb6a5b66a4491138a8651734c7da642a6021ed77f73db4e1feed33701671b423",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_13_01/verification.json",
+      "bytes": 143,
+      "SHA256": "bea55a5c2526cc8a4b0ec7b673f4ad36ac31df2c2ed51a72bd006e0182a3341d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D1_14_01/verification.json",
+      "bytes": 142,
+      "SHA256": "f68828016121aba1ea91b4e7f13b0a6bfe0d03be8e69018d8dcde15c4f35d20e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D2_small_native_01/D2_unit_verification.json",
+      "bytes": 143,
+      "SHA256": "1b8e7af717fbe518a36e1e33aa61bda5848c36da09e0a202c882f86a2272260b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D3_01_01/verification.json",
+      "bytes": 142,
+      "SHA256": "6f8943a12303aa9294433ad257226b051de5de02dc106b56317e00fae30b7df0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D3_02_01/verification.json",
+      "bytes": 143,
+      "SHA256": "69b4bb7cf3267ceaed936903b75a53fc31d42da01b85529370883b8f4f00dc7c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D3_03_01/verification.json",
+      "bytes": 143,
+      "SHA256": "d5fa370cb39f08a51e7fe93d96adb1e932c581bedd7a3e055c9e5d3e3d68b76b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D3_04_01/verification.json",
+      "bytes": 143,
+      "SHA256": "4c4e20487fbca3807203a6de68fe69e542f533fcee4c2f47f4c0be6be2a91e24",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D3_05_01/verification.json",
+      "bytes": 142,
+      "SHA256": "3d462f5ecb7c6fbd8852a8c67eb222ae6f7ae24a1907581225a684c7ee978c98",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D3_06_01/verification.json",
+      "bytes": 143,
+      "SHA256": "d635fb66279e85bc244a71dc74c4771b5e969dd5d563ec9e48f275609e63aa17",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D3_07_01/verification.json",
+      "bytes": 143,
+      "SHA256": "bdef6832c5d0350c7815c7433353bae61421473b9c51ab24de04363d9b23995d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/cost_segments/D3_08_01/verification.json",
+      "bytes": 142,
+      "SHA256": "2aeade11a47827684c9055c26a3d9ee1e0afc414bac0e86be1165fdf56a3cea6",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/delivery_plan.json",
+      "bytes": 1739,
+      "SHA256": "c448aebdb92fe07fe85942fcddca0787869e2843f95408f78aafa0658cb1569d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_01.members.json.gz",
+      "bytes": 6040,
+      "SHA256": "a9e32958221a8ab54b322cf42ba7af869343139d115611751a8d70a1ef66af88",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_02.members.json.gz",
+      "bytes": 7148,
+      "SHA256": "278ddcab538d8b68b67a17a648549d52d7b26a95b2643b7bb9373a956f052551",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_03.members.json.gz",
+      "bytes": 793938,
+      "SHA256": "3bea16eea37d20ed19d79837ee9a5e8050ae380753db6087d9729d92ba746f4d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_04.members.json.gz",
+      "bytes": 1108103,
+      "SHA256": "95b6d54e92a54889134a533173360536a20163fcce0d08793a2827aeb48b38a8",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_05.members.json.gz",
+      "bytes": 791814,
+      "SHA256": "b18aae9919c54827dbe6f821c8514bf890715a526d983359c0d27d94e2869d14",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_06.members.json.gz",
+      "bytes": 815463,
+      "SHA256": "35e585ccfd6801b9b12d22fe5341ae810b70dde179dd35aa27b5f7f77e74cbb3",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_07.members.json.gz",
+      "bytes": 1014222,
+      "SHA256": "df8bcd2e6a1a404e312c231c2140c73727239780508195f2a6945f5eaf6642ed",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_08.members.json.gz",
+      "bytes": 629502,
+      "SHA256": "244ecfa5a8371520f26736672d437f3087fe16bd6340522fb2f4b2be6b5660d5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_09.members.json.gz",
+      "bytes": 910115,
+      "SHA256": "5019c7a644df0f154cbe877f484ec5b8939aaabca2e4f2b0276cc8719250fd4d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_10.members.json.gz",
+      "bytes": 1339762,
+      "SHA256": "51c372fd78212a6b59ea3476aa35a6b4b72a27f4ef08b7989ccd0f1f39e95a8d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_11.members.json.gz",
+      "bytes": 670133,
+      "SHA256": "3aa8716999a9d9d8e666e042627503fa234505bb01dfba327f483c5ec2d9501a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_12.members.json.gz",
+      "bytes": 1259382,
+      "SHA256": "e1c399ec72014f1fa2793c44df5f97af7af7517c2d17e1f3d2ef4a6d4e4d39f0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_13.members.json.gz",
+      "bytes": 9877,
+      "SHA256": "d45e154defd995346d61dc77e039fa43f19651b696ff40a3afa77c60c81c2c00",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D1_14.members.json.gz",
+      "bytes": 9481,
+      "SHA256": "69beb3d77c51b3af81b124fe4e47d12bda90f1c6ce3f225f28f451a0874ecd9a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D3_01.members.json.gz",
+      "bytes": 15548,
+      "SHA256": "695488177d0419c33d5fb8a8959335716bd61c41e3e7dd108746f4a33ccc6455",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D3_02.members.json.gz",
+      "bytes": 16235,
+      "SHA256": "c4eaa29082b696a03ddc08515449093b132ecd5bed6af3d3a1a7d0b617937071",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D3_03.members.json.gz",
+      "bytes": 15464,
+      "SHA256": "9f4027a06b2c8a144f7bb6d28fe98f818657d1456566fb4727159d8aa1fd8200",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D3_04.members.json.gz",
+      "bytes": 14696,
+      "SHA256": "f34c51805572e7d5c2b1778992bb6caf7b074abbbbf544f7b18a05db955a316f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D3_05.members.json.gz",
+      "bytes": 1109024,
+      "SHA256": "168b4b62c425bbc2b25c4fdefeaab362a618afb7cf2cfe9395c26c5f75619986",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D3_06.members.json.gz",
+      "bytes": 1107892,
+      "SHA256": "7b4ab0063d6653eb998fc271a0a881d4d2b893b3d92712fc1e728999dca1634b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D3_07.members.json.gz",
+      "bytes": 791276,
+      "SHA256": "fcaee94b7811fef106fb2de8c257327e30777faffc38ee93efa48e3fe6ff07db",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/campaign_D3_08.members.json.gz",
+      "bytes": 792725,
+      "SHA256": "68a7d6a77569c4f270d79f7d934305bc9a4d32307a15959ce0c6d5f0492048da",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/current_native_progress.members.json.gz",
+      "bytes": 326,
+      "SHA256": "7fb8cc2fe88ec34620847c374ba9f243c9b8b907887f659e4a84996c927dcd2f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/evidence/diagnostics_qualification_math_dependencies_closed_fees.members.json.gz",
+      "bytes": 830400,
+      "SHA256": "77c514a9c910aaefefa2d95f3e6ec4184052521330e2b11b37c98d1a216cec9e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/final_report.md",
+      "bytes": 28861,
+      "SHA256": "7cefc8e4abb9722a3de80353f8a2bd7abd5b36e660340a806fb0269ef8fa187f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/goal.md",
+      "bytes": 55348,
+      "SHA256": "3943b6fbf06bb95b77f14097e494a82c88d6255a97ab4964c5298976076819a5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/historical_impact.json",
+      "bytes": 231849,
+      "SHA256": "3eec81c3c7751f18dcd918a4c5f4ec2299d6b596f9942079480ac341c844488e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/historical_impact.md",
+      "bytes": 10513,
+      "SHA256": "f319c1be054285d52fb6e8ed9e71180a0a1ffc6076bd133cbbbbb858efcbf062",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/independent_review.md",
+      "bytes": 16615,
+      "SHA256": "2ef5bc3553f88e559f5b3189262c9a9f9e188fe8de29e28c34ee8cdcf5d439b5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/inputs/K-15-S.txt",
+      "bytes": 1003,
+      "SHA256": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/inputs/SC-B20-S.txt",
+      "bytes": 1282,
+      "SHA256": "70ebad164c3da58c52d0ad7fce651a6f4d90f54323a939d6c109a17eaffb8b3c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/inputs/SC-C15-B.txt",
+      "bytes": 1012,
+      "SHA256": "c0d5fc4eee62e1e454b8acde8b721640e410bf496593b14d4cbdb1ccf36f14ea",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/inputs/UC-B20-B.txt",
+      "bytes": 1271,
+      "SHA256": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/inputs/X-35-U.txt",
+      "bytes": 2066,
+      "SHA256": "6a040c2d36b40f833cf083eab2aac3bde37185e85d7e66c415a98e2cbf59fe68",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/joint_objective_gap_note.md",
+      "bytes": 17200,
+      "SHA256": "7ea45be897570b3f679f425a360ca6ed27bc77a36c822750eebfb1b97fb226ae",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/literature/official_numerical_sources.md",
+      "bytes": 2915,
+      "SHA256": "c08ebdf3aaa4713fecf50c07df9fd4a0868966753a83553b0ceb75480b6136d0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/manuscript.md",
+      "bytes": 161557,
+      "SHA256": "76d176cb883a88b64d27b43f1994d66f5dd337f9bcc579540b91b707324c93ff",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/manuscript.pdf",
+      "bytes": 362895,
+      "SHA256": "0c43fd125d75fe36e7fae0bc62b714b807a827bf4135cdb6afa6102864aef4cc",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/native_reliability_analysis.md",
+      "bytes": 21198,
+      "SHA256": "302715cb244f470c4f484646f60bd25eff970b324d7dd38c44fbc4bf0b117c1c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/pdf_export.json",
+      "bytes": 3224,
+      "SHA256": "0c6f571eb61d97f4c14e0c580c0477f03403fcf1c5d31afe86f025e1fc42e5a6",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/pdf_export_attempt01.json",
+      "bytes": 3123,
+      "SHA256": "d15b4bbc72c657f7ddaf605b4677697b91a691066c228d6ab1d2392587058597",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/pdf_export_attempt02.json",
+      "bytes": 2969,
+      "SHA256": "b516070c436ccb0cd2f317a4fc692af44047882c54b8908aebb8f609fff4e4fc",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/pdf_export_attempt03.json",
+      "bytes": 2969,
+      "SHA256": "f7d94d4f6bc44e216becd0d7f9d97a16f512668151d153d25212405d7581fec6",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/C_diagnostics.json",
+      "bytes": 16700,
+      "SHA256": "e37841cc874ae8cbf9dd1dc818e53fc6123f614454f670353b4e42322b538017",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/C_diagnostics_runtime_repair.json",
+      "bytes": 18463,
+      "SHA256": "3aa532e31bc167222d56fcbf63888778ef7420fb44bd4832f220ae6bb48ced48",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/C_helpers_amendment.json",
+      "bytes": 2054,
+      "SHA256": "258d2cbb6c8200bcba76637672cd26beb54d75e1e360a363a57d692117c57239",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/C_R3_D24_loaded_bits.json",
+      "bytes": 4442,
+      "SHA256": "cf7afdae3281c4787de927f54e7a46f3531ce993f97beabcfd39a02ec4231fb3",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/D1_matrix_frozen.json",
+      "bytes": 98631,
+      "SHA256": "9e638fddd2f5e99b6cadafc933c38d093ec77eb47339345b78895b2ee4070afe",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/D3_matrix_draft.json",
+      "bytes": 100881,
+      "SHA256": "53b0db30877a05fd486527ec4c5c43a3956267931f246b2eae56089b296fdaf7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/D3_matrix_frozen.json",
+      "bytes": 63307,
+      "SHA256": "1f1839df95a8d2d62280aa4e4417177cd6d2829ec7618c2acdf3273893f88182",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/D_matrix_draft.json",
+      "bytes": 166741,
+      "SHA256": "5f36ff26be0f8f7ee336a7b94431f14677e3585123965ce1443cf39043abaeb1",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/postverify_handoff_repair_amendment.json",
+      "bytes": 10462,
+      "SHA256": "7501459291ac9a7a2945f0ce022f52a72d09822df21cec7eb014889f0a8e4f6b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/postverify_handoff_repair_amendment_v01_superseded_before_execution.json",
+      "bytes": 8460,
+      "SHA256": "8878469302227cb4925df29fac495c1472688f9b09250dd1376c6e1cbb8d071f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/plans/postverify_handoff_repair_amendment_v02_superseded_before_execution.json",
+      "bytes": 9142,
+      "SHA256": "28e75162890833d8ffe71c8a0a2dd0e618c20ad3f20510b19fab7bf27142f457",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/prose_science_check.json",
+      "bytes": 7807,
+      "SHA256": "f6e0459f7c2bfc29f8a1e1f2fe1cd91b72de66328ac69edf109463ed7019c578",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/prose_science_final_check.json",
+      "bytes": 1603,
+      "SHA256": "72f3a078a37be917de93728aa91ce0974b09708a40559c054500f69a8559bf6b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/prose_science_tense_check.json",
+      "bytes": 969,
+      "SHA256": "e090676249ab1f6271be45aabb7b54d01125619c2813fbba0c0d7a797e5bb118",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/raw_archive_manifest.json",
+      "bytes": 24764,
+      "SHA256": "b3377afc1b875959f1897aaa3c5b902066d5da7e3f2eaea266274936e5cadedd",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/readiness.md",
+      "bytes": 5670,
+      "SHA256": "6fac36002417b04d29f8d9000bcdccbe7261f85486c5979bd16fda1b1ba8e90c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/references.bib",
+      "bytes": 11302,
+      "SHA256": "9d9489329f4c7dec18c82f2643d99056eb3a12e25bcddd0b8126b4bf3714cddc",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D1/arms.csv",
+      "bytes": 19989,
+      "SHA256": "bf207b740a0d3e3b55f394641f6f00be261550617caf66caa5d070d47f6cee97",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D1/arms.json",
+      "bytes": 47736,
+      "SHA256": "7066cb24b5071dcd6e70190c4664339319e19d8e60d5fcaefe762fa766889217",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D1/pairs.csv",
+      "bytes": 2528,
+      "SHA256": "e62691f6353e6eb83ebc28d5f7c6b04c6a8c0f0b7d0f0d768cd49690da6a600a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D1/pairs.json",
+      "bytes": 6542,
+      "SHA256": "3b6b7d5ac4939747566052b29ab8fd636a7282d1b85995b0f7b66753da11f3c0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D1/postverify_repair_management_gate.json",
+      "bytes": 15841,
+      "SHA256": "1b868d33887839a30f41e33cf9ade3d6670ebadac11580fea5ced140a4c41dc1",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D3/arms.csv",
+      "bytes": 12126,
+      "SHA256": "adcd8f2e18fca5f019e981977a4271cf0c01191a8c264d44d35e0a3b07cf77a1",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D3/arms.json",
+      "bytes": 28758,
+      "SHA256": "cdeebb16c8bc5b13d9aa9929218dda3fa7940e62f2e23754348864f8745401ee",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D3/pairs.csv",
+      "bytes": 1666,
+      "SHA256": "11211a1b56e8006d56d691fe4be66188714bb3da3ecbe35a6a3fd1f50b9effad",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D3/pairs.json",
+      "bytes": 3546,
+      "SHA256": "40fc76a37a2f5fc776a32726f229258928e7af0dc978660fb4ac65f529ad1358",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reports/D3/postverify_repair_management_gate.json",
+      "bytes": 9419,
+      "SHA256": "4d5d90f42d278c7a87ee3bc0a1864f5a3772238bd114697d470e4ef28294fc7f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/reproducibility.md",
+      "bytes": 3233,
+      "SHA256": "29752494171235730fe95e68b6219795e12ff8ca6f78f91c5ea0ee1ea74e3794",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/resource_accounting_science.json",
+      "bytes": 44972,
+      "SHA256": "8bbaf87500f362fb90a4dd68b09771abf2961d03997b3c11bf12c3f28924a054",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/c_readout_repair_review.md",
+      "bytes": 1617,
+      "SHA256": "367bbca14fe8183f99d33848bf8f0fe29aee7342559889d29c5c84787b98d4ba",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/candidate_review_findings.md",
+      "bytes": 4708,
+      "SHA256": "bee6e93895181d429c1edb5194b12691249e110263279e82f6a826672e7aa988",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/D1_admission.json",
+      "bytes": 2000,
+      "SHA256": "43dec2c388f5b9886e2543a142a647a388f30dfe19ed138a358a9d5a46ac520b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/D1_completion_review.json",
+      "bytes": 15697,
+      "SHA256": "4bf1979f82250c388d97c23a555c89f247443f0fddb6f076f46af7e315987cb0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/D1_postverify_continuation_admission.json",
+      "bytes": 2834,
+      "SHA256": "51470983b1bca57833790f5ed441fbfe5435c64c76eb2a8fdd9a75194ce5e37d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/d24_loaded_transfer_review.json",
+      "bytes": 1667,
+      "SHA256": "69840a14fa089856da65cdc0066c876ae08a1786033c9a910d7e10f0d23aceed",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/D2_small_native_admission.json",
+      "bytes": 2171,
+      "SHA256": "f230bc07ccc55692285935ac6f94f55e44d6b4ca8be5f48d7cab3362825f2f07",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/D2_small_native_review.json",
+      "bytes": 1871,
+      "SHA256": "cf238bf038823167f3acdb4507e227e7213f3edc59ebf7d17aa02da1a92a1025",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/D3_admission.json",
+      "bytes": 2261,
+      "SHA256": "7d464dcedce4c5aec346c94cede8cb2c6dcbde7629f93c1d3072b61146c9c49e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/D3_completion_review.json",
+      "bytes": 16841,
+      "SHA256": "1974873e3326765989051d69dd99bd3276d2b16f8db0f8f1db56f345c3a3ddcf",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/D3_old_source_preflight.json",
+      "bytes": 230666,
+      "SHA256": "7231e1b197a30c4f33c608309085d1513fcc3b1a2bc65d3af0cb2430c08bbf1b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/delivery_preflight_closeout.json",
+      "bytes": 6582,
+      "SHA256": "5cf5338c15b498565589765104041208acde2bab34018b61609c9dcfc6084205",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/delivery_tools_local_review.json",
+      "bytes": 34722,
+      "SHA256": "efe7ea77e3a2a2fc0ec94d5776099ab4532020e7fd8e5621752673ceb2b1da55",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/delivery_tools_metadata_review_attempt01_failure.json",
+      "bytes": 567,
+      "SHA256": "a9b33db0659b439038389b07b29d8a8d5db6ab1bfc3abc5411bd98e0ecbf8099",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/design_review.md",
+      "bytes": 13009,
+      "SHA256": "c904ab63450322db1b36763bcaad9ad04bd83af29855a510b0a5982e8e6a2938",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/directed_old_evidence_check.py",
+      "bytes": 9997,
+      "SHA256": "277badcbeeaad5e6ef982029e7261845724d960acbbb4b9d0d31fe294763f5b6",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/directed_old_evidence_receipt.json",
+      "bytes": 32719,
+      "SHA256": "c116ecf7792a13fd294864312e0c31540e0b1a4f8ebfb28fe743e1867dfa98be",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/frozen_matrix_identity_checks.json",
+      "bytes": 102524,
+      "SHA256": "bd0924af8750ad27cb2b609e22f938f8cf2c3d31d284e9bd74ed3c362b7066f5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/H_handoff_mismatch_design_review.md",
+      "bytes": 3528,
+      "SHA256": "156c0c21f47d03c09d81462ea805e2e0037a5e165138dbad84790d576c032b51",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/independent_joint_review.py",
+      "bytes": 4271,
+      "SHA256": "d634e995e89e084ef4b57d472c8457af584b05dfc6bc2d6cb8b2e63a67c79bba",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/independent_joint_review_receipt.json",
+      "bytes": 1834,
+      "SHA256": "7127878af1862be7c327894b8076e0adc25bb84b6c30be88dc0137eef9a859d6",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/independent_joint_review_receipt_v2.json",
+      "bytes": 1834,
+      "SHA256": "d88bd7a9c69aa19f7d643a4554df9784183345ef24f51fd3803031cb32188a0c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/joint_math_review.md",
+      "bytes": 3073,
+      "SHA256": "6394ba451b8a9f73a01749c5c6ade59cddd0e6f036dc07caf20657d08bc54c27",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/legacy_shortcut_reader_admission.json",
+      "bytes": 1084,
+      "SHA256": "52b73792e77cfba1dae4ef9be882b78bfd7f5f12fbc33dcb745b574a71e114ac",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/no_improver_embedding_review.md",
+      "bytes": 5483,
+      "SHA256": "990fdee8c81cbbbb956d94da8f6fdc24164f5be89a74bfdf0244690cf3595db0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/packing_space_check.json",
+      "bytes": 234,
+      "SHA256": "eb4f37abe8e7b1d9c5387cf4507777434c5107c95b65623d0198a4fff1bf6bb7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/pdf_render_attempt02.json",
+      "bytes": 39063,
+      "SHA256": "4af721f129f292a0222b8c3fb06c639b7e790d3cf58efb905c76a575b91e0c5e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/pdf_render_attempt03.json",
+      "bytes": 38452,
+      "SHA256": "3808bba5ba1a12e89b77687b5fa376f308ec6f8d74a3426ce012287edc8d8452",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/pdf_render_receipt.json",
+      "bytes": 37803,
+      "SHA256": "ecdf0f0b614a4f9d9fa86ec05424f87fccd9d2b96f8c10d7427e1e8842dabf12",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/pdf_visual_QA.json",
+      "bytes": 39250,
+      "SHA256": "92750b451c72741e16e205171ee3c2d74aa2a30410825bb86600a8fe8ca04e30",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/portable_source_pre_review.md",
+      "bytes": 4225,
+      "SHA256": "d63f71b3239dc28b64a12a4c9927e67b6271ca255559b839e695f3907aa4f4cf",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/postverify_handoff_repair_admission.json",
+      "bytes": 2640,
+      "SHA256": "4eeb292208574a67b15124e6c6f79c8b3e1615a56c9d9fd54df294f9d92d78b2",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/pre_admission.json",
+      "bytes": 3262,
+      "SHA256": "40ecf301cd6ae552023cbfbdeda2f8cc846f213d552c0501b4847b465f16c5f2",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/pre_admission_identity_checks.json",
+      "bytes": 3277,
+      "SHA256": "e5342f3879ea8b6ee14629fb05621fd6923cd0986d8bd5e9060acbbf99439a36",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/pre_freeze_static_review.json",
+      "bytes": 3397,
+      "SHA256": "edcee60e038a89f1c48c72cf63dc17d6aebacbf51c21687b5a15db958b7eab97",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/pre_release_science_admission.json",
+      "bytes": 2830,
+      "SHA256": "a476aaf1c17794e2a5b9fe81111733db80dfbe325608bb901749f9327dc291ba",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/pre_release_science_review.json",
+      "bytes": 3807,
+      "SHA256": "adf7b7fd99c0f9d933519e821b2ffd507246879f5d4bfc1c1ba2dcd40d8ea230",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/protected_final.json",
+      "bytes": 2022,
+      "SHA256": "7a62e96ebc6870bacc0af603d44366409bc79e0883ba9e1c61cedc4c761e5045",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/public_restore_source_pre_review.md",
+      "bytes": 3239,
+      "SHA256": "213ae218c66428ed38c4547b4b3af1b8e0417df47515beaaa923cad1c8cf6207",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/publication_scan.json",
+      "bytes": 225,
+      "SHA256": "e8adc05d812da12af3f5942f561e0cb70e2d6143964e1261e4c0b7331e010381",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/related_prs_before_delivery.json",
+      "bytes": 642,
+      "SHA256": "45546fc143aba974014a99c3449ace7eca509cd35c6f6f99be1edc6c29d442a5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_complete_D1_admit_D3.py",
+      "bytes": 17431,
+      "SHA256": "dd2b23ed7328c2abb378689c50564e4493bc8e28308913cd1811bb88a2582dc1",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_complete_D3.py",
+      "bytes": 11179,
+      "SHA256": "c23f6a5b2d653b1253a78f8f5cf86d4bff647b589d4d39da9c48e9f07e54f6e5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_D3_source_preflight.py",
+      "bytes": 4096,
+      "SHA256": "a88c88501f977a1eb881f027ad2cbdaf19ab8c9a3ce1aa97805d3d63255ac45b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_delivery_tools_review.py",
+      "bytes": 12961,
+      "SHA256": "d58644542a3c44998d53cbb043911ef5de97f7254c70c6d5094e30026aa9d6b3",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_frozen_matrix_check.py",
+      "bytes": 10635,
+      "SHA256": "619070e3e057b35e9b410db3e9b4231e3b2d6b77063bda1db48c6491590fe88e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_grant_D1.py",
+      "bytes": 9298,
+      "SHA256": "a61555577606ae10999fe854a89e03b218ba741e711efbf92b10aaebce21078d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_grant_handoff_repair.py",
+      "bytes": 5719,
+      "SHA256": "ebc7f45213fafaf7afec3d14f12a831ef5fc3dbe505a8a2d6cfcb6103c2c1a7d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_grant_small_native.py",
+      "bytes": 8370,
+      "SHA256": "6ae4b25eb83e8dfcecb48eedcd430bd3109fbe57a2c89a6eae8dc86fbe67022c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_pre_admission_check.py",
+      "bytes": 8702,
+      "SHA256": "12d6f55ba418990879c4e0eb2361368c3f371abcf9ba967e5155624cb065ab5e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_release_repaired_D1.py",
+      "bytes": 7578,
+      "SHA256": "5803587954a4cd0c50a9861bb735df5404337d01e38f3787ee08d70b9d500598",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/round133_science_pre_release.py",
+      "bytes": 9223,
+      "SHA256": "0b2a64dfbae990323ce1ac26f27e2a27957679ea9d2c735952134eb7a51834de",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/review/source_manifest_transport_review.json",
+      "bytes": 1213,
+      "SHA256": "2c8c27df51018ccad9b5b03463751c36d4fb2ba64252d7a5a38a54d175eff7df",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/CMakeLists.txt",
+      "bytes": 30843,
+      "SHA256": "31586cafdc97110c005da1fdde56e35d1228a454179a085d90a2b60b11fbf073",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Bounds.hpp",
+      "bytes": 9851,
+      "SHA256": "133e136da94126a5ad91281c9e502552f4484cba62a3193cc46772c9237ae2f4",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Branching.hpp",
+      "bytes": 518,
+      "SHA256": "275bb0019aed3138f652271f561a6d50de20394b27211aaec6b347255ce8cb0b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/CanonicalCompactModel.hpp",
+      "bytes": 6609,
+      "SHA256": "efc670847eb1b0c2f4056c79a64aba0d51f6e96cd9f860d8ad70941801205b39",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Column.hpp",
+      "bytes": 858,
+      "SHA256": "f235e7d75fef263ab343acef6ad30075b975e76be2a6320287d4cebb4f3ebbe5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ColumnGeneration.hpp",
+      "bytes": 43310,
+      "SHA256": "b56213b9c03cc3e72fcb1f16fde544fd30445e9fe4c94dce152d7bf3276c8a49",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ColumnPool.hpp",
+      "bytes": 1719,
+      "SHA256": "154c3e54000b65b5fe448106935c6572cc997c8aaaa4e125b9dec95a331fc05c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ConnectivityFlow.hpp",
+      "bytes": 3774,
+      "SHA256": "4ad49231d642cae8536b546a5569f5092f8986969070e54bb3b6044e66a238ed",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ControllingLeafScheduler.hpp",
+      "bytes": 9009,
+      "SHA256": "87e37afa415f36756b2d263f5ed9ce15a4b20caa9c8e1a1406c78bc2bd16825e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/CplexBaseline.hpp",
+      "bytes": 578,
+      "SHA256": "8be5e2e67ac908820f4fe04775bac315f271eab9a12e6a022bfb9ae9f2c9cd78",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Cuts.hpp",
+      "bytes": 937,
+      "SHA256": "e98a30e9451e917b54d25610d007eac00d8f3756b8856118172e88bd00f20cf0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/DenseProgress.hpp",
+      "bytes": 6935,
+      "SHA256": "10d9f92bacb6484f696f97a226b175a1a71f7f8d5549ec825e0181e39a309fb2",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/DeterministicDinic.hpp",
+      "bytes": 4382,
+      "SHA256": "0035affeaf0906b7ef2c2f6ad33efd569a5a5d41218f29e79d3a585995a7e572",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Evaluator.hpp",
+      "bytes": 303,
+      "SHA256": "df5a98b1a9456fbaff142369eb919f78459f703a5af4e9a872c1137fb5c598ec",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ExternalGiniTree.hpp",
+      "bytes": 2913,
+      "SHA256": "244bdc2d09d9993ca2a818cd4e4a73b496ba2e194a810a86eea1162ae0f8b40e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/FileSha256.hpp",
+      "bytes": 200,
+      "SHA256": "9ce848d6c6c282292a927ca470ee4555e59b5cfa3d8ac9a050b7290c3674b9d4",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/FixedIntervalMipBackend.hpp",
+      "bytes": 24280,
+      "SHA256": "8cb49d1e9b6123017208553e136e9ee8c57ce76e378b4098e45846adbae34473",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/FleetEventCuts.hpp",
+      "bytes": 2149,
+      "SHA256": "10a7ee1ab0a80c3c91eb8d260a425727803383d82489f372cfa30b231a087d70",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/GiniAdaptiveParametric.hpp",
+      "bytes": 4246,
+      "SHA256": "ba5de1f66dd0d84d3463a2ebb3aa3ce981105bee902badc033194e4463e908f8",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/GiniBranching.hpp",
+      "bytes": 429,
+      "SHA256": "f6e4cc383e8f3b302033b374fe10f5572845a796dc07785fa963ea984bc7280b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/GiniEnvelopeRefinement.hpp",
+      "bytes": 4085,
+      "SHA256": "e882817323837b41d80367a66bcf7ac50e553a86f59c4b7b69d22576db881fb2",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/GiniEnvelopeTailRepair.hpp",
+      "bytes": 5232,
+      "SHA256": "f2d413e82a28414ffab9a451e7a3bd0719074e2b9b82b7dde21bd0359e6ad72e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/GiniFrontierGeometry.hpp",
+      "bytes": 8785,
+      "SHA256": "c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/GurobiBaseline.hpp",
+      "bytes": 795,
+      "SHA256": "49b5bc60484b5391a07343ba48441ef40b72ea06354ea2b44d8de1d7667da770",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/GurobiCertificate.hpp",
+      "bytes": 2378,
+      "SHA256": "914279764d62946b35b9d3f175cafad3766f79f702e2ebc9212fd3671858239c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/GurobiProgress.hpp",
+      "bytes": 1054,
+      "SHA256": "018c4a88aa769df8f997f61fdfd20fe7f8eef7f35216d7716c34387a1cd1d907",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/hga_tgbc/AVLCalculator.h",
+      "bytes": 7918,
+      "SHA256": "324aa71018554d66620a56922a8829ac1aca85a140c91c3a1c9c8c10b12b92bc",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/hga_tgbc/GreedyExtensions.h",
+      "bytes": 3102,
+      "SHA256": "d6c500d2bb990e39278127022b7cd9adc5f92570e69f1b995a0851d294b2a31d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/hga_tgbc/GreedyMethods.h",
+      "bytes": 3873,
+      "SHA256": "568f527bdaf6d088489dbf3fff551dfd8304582684cf972671308293b8a1c92c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/hga_tgbc/HybridGA.h",
+      "bytes": 66925,
+      "SHA256": "2ac2233743ffa883fb517c7df70c5b29bbb420123f8a57d474434c2a6820dc62",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/hga_tgbc/InstanceData.h",
+      "bytes": 1324,
+      "SHA256": "c695f84324a72302c91a21f4d1aa17d2c155239d1baa3b3821acf127ae0756f0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/hga_tgbc/Solvers.h",
+      "bytes": 2274,
+      "SHA256": "1382d476927207de909143a124a8075ea065a2e74e17177d7a8c43cc644d3fe9",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/HgaTgbcRunner.hpp",
+      "bytes": 3561,
+      "SHA256": "01a0a95fcd6a5d1b23206503c8cc4814b10cdea243249970f0aa6ecaed222ae8",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Instance.hpp",
+      "bytes": 39287,
+      "SHA256": "e9e396495d431fbb00f412df00929470f9332d5ab57c5561ca0c98b0a456026e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/IntervalRowFactory.hpp",
+      "bytes": 5025,
+      "SHA256": "1fbf17a169fc8f65d4bb267b0594720e6e9a3d4c73fd65ccbcf47df2b23df4d8",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/InventoryRouteCuts.hpp",
+      "bytes": 2476,
+      "SHA256": "434ecff4b7241016782f7a88da2a7c3305603259cd7c14cf52cd3596dfc0749a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/InventoryRouteRootClosure.hpp",
+      "bytes": 2416,
+      "SHA256": "e05262dc208e60a7e38cf67c1777da5eed1636fe5a3874479cdec902ce709ec2",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Logger.hpp",
+      "bytes": 327,
+      "SHA256": "43528e60e97f4b56e2639d9adcfc61a5e2ca7fcd889073e732ebaa7d070ca334",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Master.hpp",
+      "bytes": 741,
+      "SHA256": "ba8512c5741d80bb573a63907840ff1ea6623453a598fd03be0e26ddc6863d12",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/MipStartMapping.hpp",
+      "bytes": 1460,
+      "SHA256": "c5375a6a2ae28c599d4b73cce172a9575c8f7490d14a6dcbab0410e58d6554cf",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ModelCorrectness.hpp",
+      "bytes": 2009,
+      "SHA256": "f8f0632084823a2433a5403d3154a391910ee487c45e79e528d6c9efd9dc2c04",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/NativeEvidenceJournal.hpp",
+      "bytes": 2772,
+      "SHA256": "3e45f12f9329babd8ffc01e95a6e6c689dffd790ed100dfe18ed7631fca8e141",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/NativeOtB1.hpp",
+      "bytes": 2219,
+      "SHA256": "bd64c92a83d109c602dbb31bd10bbba524db857bb357fee6ba26c7d8da3df0eb",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ObjectiveResourceCompression.hpp",
+      "bytes": 945,
+      "SHA256": "c99acd5281780fa72f42f7ffdda2c4fba66acdb9947a9b83dec762ca95c804c7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/PaperExternalGiniTree.hpp",
+      "bytes": 4799,
+      "SHA256": "ec6b23bc70b2baf8e7083b1cc836d3ed0c80f9384f87a4ad161a5ae5f93415bd",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/PaperK1AmSf.hpp",
+      "bytes": 944,
+      "SHA256": "fee8662d26f863ab9e75022ba70d6d400cccef4b5f3c92470bcce0df368c757c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Parser.hpp",
+      "bytes": 417,
+      "SHA256": "6f7f49f621ac858769b5144a1d5675bbb80ebdcb92ee6f216340d363ef0370c0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/PenaltyCoverSeparation.hpp",
+      "bytes": 2045,
+      "SHA256": "877c3e8c290b088e7aabdead0771516e8ce45091a5047f42d7d9ff8e6a8d7913",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/PhysicalDurationTolerance.hpp",
+      "bytes": 264,
+      "SHA256": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/PhysicalWitnessValidation.hpp",
+      "bytes": 614,
+      "SHA256": "b26e544483a3297259aa77a2f4f420878e7f42eb5f469bfd6beee64cd7585010",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Pricing.hpp",
+      "bytes": 9666,
+      "SHA256": "9b5f6b429db2311cad54e8657d3840cd4836c7bbf74025eb551238d010de77da",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ProcessPhaseLedger.hpp",
+      "bytes": 927,
+      "SHA256": "90537efecc29d752c47fb088d16bff16baddbe36af858e33f3315efbca65b1b0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ReplicaExternalGiniTree.hpp",
+      "bytes": 730,
+      "SHA256": "094bae61508ea9af2d54f51dcffbd1dc832e40624e123fb73ced05bb57b4ccfb",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Result.hpp",
+      "bytes": 102235,
+      "SHA256": "3c18b79e6690e7156be912748b3f5cb1b7910c1aa3befa1f58f15ebd66d67c1a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round105Decomposition.hpp",
+      "bytes": 1763,
+      "SHA256": "eccca5f2ff4a8b0c8d6de114c251a3b1225fa13ef7a3c4d0d81e5e1f00e3f46a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round106Events.hpp",
+      "bytes": 1439,
+      "SHA256": "8f7ec442881798652877694129cda936993e6f81dead7d422d8b15dcfb9e3e5a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round106Research.hpp",
+      "bytes": 704,
+      "SHA256": "c33bee11181eb029026b5010a9c89240416fad3be02c665dfc49295a7299f9f9",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round107LpMetadata.hpp",
+      "bytes": 4581,
+      "SHA256": "5b57f944f69f16fa79c109ba49be646fe3625f7f38f6be91b0396a2685fc6007",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round107Research.hpp",
+      "bytes": 296,
+      "SHA256": "207577fef6a37fd23514b9d97836f8e1a6e1450fe7f7a5d8a9dd5cf762b8cf3f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round107Scope.hpp",
+      "bytes": 2345,
+      "SHA256": "59f61ced9654b1b5c78aeb8a2fd53333a6337c870c87135506ade41d65b7e14c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round119ProofContraction.hpp",
+      "bytes": 2529,
+      "SHA256": "0c5891ff61e4264b08b4d2d36667d6a05c95bc8440822c3d3c63056b700fe76f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round120NativeProof.hpp",
+      "bytes": 2280,
+      "SHA256": "5abc168af8ebf9d3bd7681bde8a5b643bdbe9e65365ed68bde446b522944c61a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round127Research.hpp",
+      "bytes": 3559,
+      "SHA256": "6f78ac3241d48978bf6b1bbbc65d81d966f6173ddcd5d8b9489d0a6e68c7cca9",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round48K1AMF.hpp",
+      "bytes": 2937,
+      "SHA256": "b878f176a8c7a888bd83f41e9928c29da9cc49544bc9c511e817fe5829d432c0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round49K1RC.hpp",
+      "bytes": 3152,
+      "SHA256": "2343513138418e6f98b87e0939c276b2b15b7013a4bd77abddedb9e6b07730be",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round50IntervalMip.hpp",
+      "bytes": 3056,
+      "SHA256": "0a8f8f45f7deed6b04be377c410c6a39603f4271e9b14ff8fc56b2a8e7908208",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round51IntervalMip.hpp",
+      "bytes": 3468,
+      "SHA256": "eece149db3fd19471c9ac7ee54b27d523449ffa7647e71290018c25ef32bc510",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round52GurobiCutAdapter.hpp",
+      "bytes": 1270,
+      "SHA256": "4ebd434fb2a3b1f63652f7bd89bd04992bd1efee07896497d295c8e3d6d29a4f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round52TailoredCuts.hpp",
+      "bytes": 5005,
+      "SHA256": "48f98021d28b9ff604d5b17060477427552614abc16588a08981b8c21b0baf71",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round53CallbackIsolation.hpp",
+      "bytes": 477,
+      "SHA256": "ac988f08d12bd8e2952268b99267ea53ec5c4c5f094579b4e299f76121ca00c1",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round58Benchmark.hpp",
+      "bytes": 1517,
+      "SHA256": "98bb286eb654d3ab3d93dfc6a0432bb7e771f7219c1a8b6e3efb66c4f8417882",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round59Research.hpp",
+      "bytes": 2299,
+      "SHA256": "839aa0f949abd89788e45cd23228fc8bc009a57cdd9396e077e6d261d6c434b3",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round60Candidates.hpp",
+      "bytes": 3411,
+      "SHA256": "ab47bb15291bcfcaa5f35fc8b1fe9667997198a1bf6dddff84ac278676427ffa",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round61Candidates.hpp",
+      "bytes": 2747,
+      "SHA256": "a8da3b153aac709f0bd3d113266fe5bcf4d714103abcc86061fbe8727a39133d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round61TimeOracle.hpp",
+      "bytes": 1515,
+      "SHA256": "1b054e31f7f1825d6e7d56bf114adc030fe65364404a3d352c95c79734c5aaef",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round62Passive.hpp",
+      "bytes": 944,
+      "SHA256": "985daaa5614398e76d5e46cda838dc63b96fbf5a0a2ea0c0df2d851e5eed356d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round62Thresholds.hpp",
+      "bytes": 2025,
+      "SHA256": "9bad4401fde82b7632a9bd6c4eec0b0ea1482c17d8f9b94455ac83d771f592bf",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round63TimeResource.hpp",
+      "bytes": 1731,
+      "SHA256": "5bb455029bb018118d21f2dbdeaa3bb47539eb8547560a981fb5b616ac48345e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round64SharedResource.hpp",
+      "bytes": 721,
+      "SHA256": "1a541cc39bd4a58715fa7ca309cb4918f271790f7cf40c26e16f6de084893207",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round65Projection.hpp",
+      "bytes": 1882,
+      "SHA256": "e0a5d77eea89dba483f47c410f171454a8b08e0a05b6cdd80e6b5eef4335d531",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round65Proof.hpp",
+      "bytes": 1956,
+      "SHA256": "89d3c68c218ebadac3c447c1b0067b93e8220527a402d413aafec6d7e1e0e8f1",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round73JointInsertion.hpp",
+      "bytes": 1651,
+      "SHA256": "06049ff4974c008833f3d5d6f2eecde5ffb7d61e3633c10ef7d865385ca560e7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round75QuantityDescent.hpp",
+      "bytes": 1739,
+      "SHA256": "d0e7f32055f81b8821f833cfe726dcb2efd0c325eda7b1eddf2395b4c8f11956",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round76PhysicalClosure.hpp",
+      "bytes": 1196,
+      "SHA256": "fa3234cbe0a05fd187dacf3ca2f79b13b7a3cc5db8de97da0c33ea28f7149421",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round78BalancedRelocation.hpp",
+      "bytes": 1563,
+      "SHA256": "4e5a46ae98eb67190947f614763ac67785724538b9d568673b62e8d57a9cd991",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round83BlockExchange.hpp",
+      "bytes": 1150,
+      "SHA256": "c967be51e18e35814fca4284d57d439f56a40b5b9c343b6d388d9b6ad71feba3",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round92HandlingActivation.hpp",
+      "bytes": 4172,
+      "SHA256": "5bad5b1e023ea07fd753bd33993cbe604c7b2a6d05576523ae0d757019668f2d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round93CoQuantityDescent.hpp",
+      "bytes": 2923,
+      "SHA256": "92656c6a27dda13b794965fdf6d49bcc38007d16b6780f0ba822f62134253ee2",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round95FullBlockDescent.hpp",
+      "bytes": 3465,
+      "SHA256": "20150387b81db8287d44a959e9716274dff2f18586fd0014398b5bf200470573",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round96MultiQuantity.hpp",
+      "bytes": 762,
+      "SHA256": "bf8a3651655b44cced20a8948e6b4fadb56721979637badfdb9e713978112b37",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round96RouteOrder.hpp",
+      "bytes": 1034,
+      "SHA256": "ffb21848c6cc21ee106e9131ad1bb1a9fc2cf214ecb6a6e85e88ea8c05f11d91",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round97NativeClosure.hpp",
+      "bytes": 2540,
+      "SHA256": "0147433cef8256914dead30c166c14f562086cab7bb59a76904bf6c85217f14b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/Round98StateService.hpp",
+      "bytes": 2098,
+      "SHA256": "5b202a5db205941cde679ab967508546a171e5846de79dbc8454591a76f126e7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ServiceResourceCuts.hpp",
+      "bytes": 1938,
+      "SHA256": "a901db79764a9f3f6a893b74ebc7980bb7cc72402b36268b68d41cffdd48818f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/ServiceResourceHull.hpp",
+      "bytes": 1285,
+      "SHA256": "37f035446b3f80f3e461a03c1d1262f8afb1b208615cc56a09899fad19789154",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/StaticSegmentedGini.hpp",
+      "bytes": 4094,
+      "SHA256": "798d1301b22a73440955e190bca697013e7f1132b8a4bf0bf025b48a6c0f8408",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/StationSet.hpp",
+      "bytes": 4265,
+      "SHA256": "e3cbaa6a7b0ffce271d4603a018b20bdf197ddf1dc0c65477beaa7860a80b8ff",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/StrictCertificate.hpp",
+      "bytes": 3906,
+      "SHA256": "c1ea9bbebb3d6f8944aed9c44f30624c26f25c8342bc29fbfc4278b3c0cde706",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/TailoredBC.hpp",
+      "bytes": 623,
+      "SHA256": "56caf466d7fd66fadd1cc9a71b0ea2b2dff27a1a94c1afc1dfb54199ac14a6fa",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/TailoredBCCallbacks.hpp",
+      "bytes": 131,
+      "SHA256": "324b68b779bafb5e4e266d591f699339f773555a27615df16140cd3faa05aa5b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/TailoredBCCplexApi.hpp",
+      "bytes": 19917,
+      "SHA256": "44a0d3f82745310c8eea42931187512e4e58ad556522c2389f138a4a478808ff",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/TailoredBCCuts.hpp",
+      "bytes": 615,
+      "SHA256": "96e3d012cddc58f460a71acba244991f34a228b2f67c1a3a56d71628a726eb8d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/include/TailoredExact.hpp",
+      "bytes": 187,
+      "SHA256": "d8f0a5da11527353efe3359c9d32359e907fc369c778b70d749680cd894ddfde",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Bounds.cpp",
+      "bytes": 136634,
+      "SHA256": "05c6e795b4c22c27ae55dbca07a99901006259cc56fb3e3ae0fc259bace561ed",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Branching.cpp",
+      "bytes": 1772,
+      "SHA256": "86bec005e02bf4410ea74119abcd669bc102bf78b7b911a73c53a22e9e3f83bb",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ColumnGeneration.cpp",
+      "bytes": 215247,
+      "SHA256": "9a8cae6d1fcd7f80e52d44eeb63e85cc7c2fb9cf587c56dc57f8c8bc17325eb3",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ColumnPool.cpp",
+      "bytes": 11156,
+      "SHA256": "64469057f76da3ccc16832091f791024fda67dd99cfe67e30138b4062cb88325",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/compare_main.cpp",
+      "bytes": 56923,
+      "SHA256": "901a8ad8a32f72ea931fb173ef97ae0e0b9d143a3effde9a56e9bf17928d6930",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ConnectivityFlow.cpp",
+      "bytes": 10991,
+      "SHA256": "14ec8c8b8e2dbb2bab91d83537118b71fdbe5961f9fc51123c4fafb5da56bd46",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ControllingLeafScheduler.cpp",
+      "bytes": 46072,
+      "SHA256": "6bbc7e773355bac11e2fb60d9ec4641d57eedd7baf29c38de6eba3cde3674303",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/CplexBaseline.cpp",
+      "bytes": 391228,
+      "SHA256": "8e93eec1403d26b629c851746c90c2c2ec1ffc2c683b959c1f37f06d4be6cc72",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Cuts.cpp",
+      "bytes": 4584,
+      "SHA256": "08065ae482dd559403579810bcb5f74abe4b8ca685d33d2ff967dd9aceda8fb0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/DenseProgress.cpp",
+      "bytes": 20110,
+      "SHA256": "6fa297312cedc09d58011bd7e7514fb332d8fd6a22bfe4be8fc49b06c9b878d6",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/DispersionChildBound.cpp",
+      "bytes": 6869,
+      "SHA256": "753d447cf19d2b77fff1ad715236af12f7ea2e1fceef7bf4ac4e171a156f3cc3",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Evaluator.cpp",
+      "bytes": 6239,
+      "SHA256": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ExternalGiniTree.cpp",
+      "bytes": 71577,
+      "SHA256": "4e51bc6e3b0e9993b317c6c4aa0fb659f5cd88a71d19fe78608fa80c85e1bfae",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/FileSha256.cpp",
+      "bytes": 3709,
+      "SHA256": "f53636fafb00848a9cdff7c03c70dcf506f4080b1711869694608776789ac45a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/FleetEventCuts.cpp",
+      "bytes": 27072,
+      "SHA256": "ba093f046223191e0feea5c80d79a32ca35d2a9183495e3e388b3dd59a83ba5d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/GiniAdaptiveParametric.cpp",
+      "bytes": 20421,
+      "SHA256": "dff46ddba14238ebf8ff18633cc02169c15272437850da321198e5a6ee35f44b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/GiniBranching.cpp",
+      "bytes": 1616,
+      "SHA256": "33e1ec3fee27fd4d1302da9b4671bc547bddfbb8c6ae074f3f80b410cd7da149",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/GiniEnvelopeRefinement.cpp",
+      "bytes": 25904,
+      "SHA256": "dd60cf05867aee9de7f07ee519a09797315595c93755506566e1dd2e802c7659",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/GiniEnvelopeTailRepair.cpp",
+      "bytes": 19448,
+      "SHA256": "97ae5837ba352215e35e613d919e09356fac600ecada5aa5922110b44c071465",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/GiniFrontierGeometry.cpp",
+      "bytes": 24213,
+      "SHA256": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/GurobiBaseline.cpp",
+      "bytes": 296568,
+      "SHA256": "9962f693cfa03672169deb9c45a0b1f63831dae503e57c87d98838ac81ee45a1",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/GurobiBaselineStub.cpp",
+      "bytes": 3452,
+      "SHA256": "2d112d5919f7b9a3b197ae75076f70c9a00f6da0d5a66192f7aea36094904033",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/GurobiCertificate.cpp",
+      "bytes": 5706,
+      "SHA256": "1c47526e0139d264917e5a8ab71fb873277f7353ce0c7ec47e02487fef7f01bd",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/GurobiProgress.cpp",
+      "bytes": 1999,
+      "SHA256": "9cccfb4ecdf359cbd98a63174357d0b9e263ba9278b06d884c3c970b65deaea7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/hga_tgbc/HgaTgbcGreedy.cpp",
+      "bytes": 100387,
+      "SHA256": "871b3f3e024e273bbc8ee55d60dfc29f11d5282891eae1ed1419da02119821cd",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/HgaTgbcRunner.cpp",
+      "bytes": 27569,
+      "SHA256": "418fa40968a22196c72eb48879e7bc4a72bb8f7a570faba99b77814248e5d8a5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/IntervalRowFactory.cpp",
+      "bytes": 40343,
+      "SHA256": "e2fa0d2a7f28da39b34f09c03060f1c7a004d3f37884651c66e2519313394655",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/InventoryRouteCuts.cpp",
+      "bytes": 14074,
+      "SHA256": "f76e9dcf44339358b21cd2c2c508e32165d95ce43801160cd62329119ecee8fc",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/InventoryRouteRootClosure.cpp",
+      "bytes": 13514,
+      "SHA256": "543545f781a57d693434cc2b22902f45c84ae46c6615ff25a68d833004d94845",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Logger.cpp",
+      "bytes": 566,
+      "SHA256": "3cbab7e975f5c97ee5bbe98984716fc44c245f48604f329ad9d41d144d415b63",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/main.cpp",
+      "bytes": 1127772,
+      "SHA256": "c1508b72562ad67107c3ba8874487e1468883c0fca343811b5b5ef1e0d442479",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Master.cpp",
+      "bytes": 5470,
+      "SHA256": "c18046da62482e8de2cbfc3df09bb4053e631cde830b6925d5e5921d44c2d1f0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/MipStartMapping.cpp",
+      "bytes": 15693,
+      "SHA256": "0273526e80f452bd074b912bec2d14fe0e960c36208c0d586ebfc19db281fe13",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ModelCorrectness.cpp",
+      "bytes": 5342,
+      "SHA256": "112499f70aee6865855532cfceb253d164433368626bf4c8fed3539b40c6e3ec",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/NativeEvidenceJournal.cpp",
+      "bytes": 13423,
+      "SHA256": "446d39aec3a0d45471d4172281b2d94c680104acc297db2ca1b814d18b0b6af7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/NativeOtB1.cpp",
+      "bytes": 23390,
+      "SHA256": "e4722c675c6470d85f369a80304adace4403b61c579d95c6ff62594b8576ef0b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ObjectiveResourceCompression.cpp",
+      "bytes": 5115,
+      "SHA256": "60dc25830ee0e50a7770553adef178eb595337aa3eeabd8ef6710dd645b6e81d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/PaperExternalGiniTree.cpp",
+      "bytes": 534570,
+      "SHA256": "c92ee7e79edf71dbd793b10d0644a5a2878b229d3c2598b38e0513382bd13570",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/PaperK1AmSf.cpp",
+      "bytes": 8632,
+      "SHA256": "a46dc43c2b0cba21b427d1c38884114e6b68f3e52f6c13493b609aecde702440",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Parser.cpp",
+      "bytes": 8480,
+      "SHA256": "acc0897e687dde82355f2153272e2fb1c68c1ec5507a549894109dd51b4b4ccc",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/PenaltyCoverSeparation.cpp",
+      "bytes": 11451,
+      "SHA256": "6d1e696bc893390e03019fd2f116449a0830cde2f0c347081a79a9ed4cdc0d49",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/PhysicalWitnessValidation.cpp",
+      "bytes": 4881,
+      "SHA256": "0004bd96cad2cf70ad1bf56826ed632b2e6927209e4d172c6526889d610ad678",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Pricing.cpp",
+      "bytes": 104029,
+      "SHA256": "061ac766fee8bf0bc7ed206130e9e2ab2de74e78924ee7f077c7a4a35c1e6083",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ProcessPhaseLedger.cpp",
+      "bytes": 3200,
+      "SHA256": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ReplicaExternalGiniTree.cpp",
+      "bytes": 56998,
+      "SHA256": "697640629d71bd75414bfd0b8203f6fccd9c8faf99fddabfcdfc2e83bd1bd003",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Result.cpp",
+      "bytes": 250280,
+      "SHA256": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round100_model_export.cpp",
+      "bytes": 1718,
+      "SHA256": "2ad6f259661bb717ad9d073814dfeb652e930a88a22a38796e88b0783240242c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round101_fleet_diagnostic.cpp",
+      "bytes": 2146,
+      "SHA256": "a0a499fe8d557ab8be1910f84debc01aea91f90b5ca410cfd97cbf6c9e6791f0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round102_service_diagnostic.cpp",
+      "bytes": 2403,
+      "SHA256": "3ee62d0885c387b092fa2d7ee7098ac733899fa4170aa7a70e2b3f167c6150c6",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round103_hull_oracle.cpp",
+      "bytes": 2544,
+      "SHA256": "fa6c78610a767ca6d73d95f1a94e43654a2e1ffaa71f670211501a8872584df2",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round103GurobiHull.inc",
+      "bytes": 20303,
+      "SHA256": "3a7013e5225d239f6c169b6f9df172258ef3ba1308572e86e915ff7ed3045761",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round104_compress_main.cpp",
+      "bytes": 1762,
+      "SHA256": "7a421040cfc9d23ae4249a156b9cde324247047af0e89f989355af511b5b0160",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round104GurobiObjective.inc",
+      "bytes": 27457,
+      "SHA256": "3f302ad895de1f449fa157b0e79e465f057b7f40839fa0db9ba279a1bb1a58ed",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round105_oracle_main.cpp",
+      "bytes": 1596,
+      "SHA256": "4b57b2c09a19a0a0acb752ba77413ab9728b9ee5ed801f2e226cbd9b4443fee8",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round105Decomposition.cpp",
+      "bytes": 6918,
+      "SHA256": "14539f42283d74e88bad7b7b5a69a78718cae69ae751d37f4a5df22d10bb6ae6",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round105GurobiDecomposition.inc",
+      "bytes": 32656,
+      "SHA256": "92f31755e43820d24564bf27c44e1c3869e181752a5516d20bee742979c91ab6",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round106_research_main.cpp",
+      "bytes": 1920,
+      "SHA256": "e8b0702249b21ddfbc9fd81d1c212e72eec9f7169732317eb655f83b1396baeb",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round106Events.cpp",
+      "bytes": 9894,
+      "SHA256": "c8ad10f87de50557c60ffade40eeba5827f5c67d821cc7159f92b127e4f56fe0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round106GurobiEvents.inc",
+      "bytes": 34131,
+      "SHA256": "94bc21f018e0b66a795dab81ade0746a11980a634d5039ff00c03a0c8c96d7b1",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round106GurobiResearch.inc",
+      "bytes": 14031,
+      "SHA256": "e9123e34a40129b6358a8981777a89190ea102c327ebb4aa120a9a2caa3d4e6f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round107GurobiFrontier.inc",
+      "bytes": 63118,
+      "SHA256": "248a9fdd263c8ee8db882d68875366589d22b09c948373a253a1e3687c4e461a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round112CompactStart.inc",
+      "bytes": 7117,
+      "SHA256": "eac79743634dd5b7a5c8b4721831ed5967a35bab62d2009ceb542f7ff739419d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round119ProofContraction.cpp",
+      "bytes": 8381,
+      "SHA256": "ccb0eb0e6108cf59c3c69748366c023de0b652b2c4c210932e0e72eb4ad3a78f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round120NativeProof.cpp",
+      "bytes": 13709,
+      "SHA256": "40c72a1f78da2e005e7e0ecf2c9a1d2efa2a0aa1cb413837cba9a82277cca9ce",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round48K1AMF.cpp",
+      "bytes": 13732,
+      "SHA256": "305e00e21e7ab23f5b3bb0d3919b4fb6d9edbd9c147b5ebe832056c531a8640f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round49_rc_extract_main.cpp",
+      "bytes": 5408,
+      "SHA256": "1c72138b30fb5cc04a8db9b5584276ae375c96e4adc6f2e9ce376e974452fa8e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round49K1RC.cpp",
+      "bytes": 18118,
+      "SHA256": "5b2f7dc45b6403ad940ea3be1156ae941c68b15c984c04344d2f404433051bcb",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round50_interval_mip_main.cpp",
+      "bytes": 87700,
+      "SHA256": "0b19b941e8e116b84af79c55c393b2fa66f7a7a88aea1e32188274138d6e7514",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round50IntervalMip.cpp",
+      "bytes": 17237,
+      "SHA256": "627d22610210ac1b748f363dbfd3b6e02f655b5b561655be59723627f13ebba7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round51IntervalMip.cpp",
+      "bytes": 9669,
+      "SHA256": "b0133b20bf47e45405d1167232f547f655a567d3fdfaff04df3f5401cf3824d0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round52GurobiCutAdapter.cpp",
+      "bytes": 2841,
+      "SHA256": "6ee0f1ba27c5243e421feb5c8d7bdc60aae7e99d11f2d3b3f23c7050a7d4f3a0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round52TailoredCuts.cpp",
+      "bytes": 16967,
+      "SHA256": "90c64a6be953cf0c274805923bb364cd4bbb0238ccc2bf3b13f4b06dea267e41",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round53CallbackIsolation.cpp",
+      "bytes": 1533,
+      "SHA256": "28583d0f4d42d6a3ed5d3f707aefccde681bb7e41286a657e3b1796324e3df91",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round54_inventory_route_main.cpp",
+      "bytes": 26970,
+      "SHA256": "c859ba94550e1d33adf535e21fb6bdb0f44763d7d8d6765370f65968692c8986",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round58Benchmark.cpp",
+      "bytes": 6023,
+      "SHA256": "f81e84821c892de3b99f7a79beb3317c3f9b37c4b51051f7192d0aaf812dabdd",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round60Candidates.cpp",
+      "bytes": 16609,
+      "SHA256": "63bef04086c0cf9a3d9c94a430550d5b33e120c662e4b07940bd841662b0d333",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round61_candidate_main.cpp",
+      "bytes": 7255,
+      "SHA256": "d0e1916a7327f851515a28d6665bb24ab97441b737156dacc960518290a665a8",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round61_time_main.cpp",
+      "bytes": 2410,
+      "SHA256": "7930aac4126b4ea8e5e96a84d9ab4deeadd7d67cb722f146d49cf8f7db80fa50",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round61Candidates.cpp",
+      "bytes": 19999,
+      "SHA256": "c22fd9723df604fc3be20f47ca0cf674b5fec475bff6a5f8091bd68879d14501",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round61TimeOracle.cpp",
+      "bytes": 18640,
+      "SHA256": "b5876fb8ea2174a67f64bea4d52cbfc4a4c3a49803ee2965358b3aaa784b4576",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round62_native_micro.cpp",
+      "bytes": 4953,
+      "SHA256": "4699beecac1cc1e1c53c65928d53d63ab4890c008203992c1fc806bb567d29b9",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round62_projection_audit.cpp",
+      "bytes": 12107,
+      "SHA256": "95b9eb7390a22b1d2a487f70aba5818b618ce7a16f9035300d591f54de4f6e3d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round62_threshold_main.cpp",
+      "bytes": 2093,
+      "SHA256": "a6e52bcb7cac428f207d955c2e796026bee57b998247eb34f34e44e166a2bec5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round62Passive.cpp",
+      "bytes": 3531,
+      "SHA256": "da73ae99af2d0069f5d453abf69673cb771b9d973eed4405d30d85595e1ce4d4",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round62Thresholds.cpp",
+      "bytes": 19778,
+      "SHA256": "474c49d10d710785fb063a4f538391cd6618b456cf256da4f6a6686cd4923256",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round63_resource_probe.cpp",
+      "bytes": 15567,
+      "SHA256": "7336c2171f89b042235ae64d1ca5379e30fcc4eb0dfc428e46a924eb958c0759",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round63TimeResource.cpp",
+      "bytes": 11533,
+      "SHA256": "599f1223413718b9b1ac2d185175626ea98b14ba82b4537abcb1e43a4a38a9a2",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round64_projection_audit.cpp",
+      "bytes": 12156,
+      "SHA256": "2d53c7dea4e2bd272910193cf3f38000c236316610fdd2eb066893adf93ec732",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round64_resource_probe.cpp",
+      "bytes": 9206,
+      "SHA256": "3af5b4f053208723d5411d2f3181b26c96a2176d2b8fcf5e5b9d56f172cb7100",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round64SharedResource.cpp",
+      "bytes": 5508,
+      "SHA256": "60ee4ebbeb1f3d9b7211267a42087dd0a1254617cac1551187bb5699976fb625",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round65_reference_build.cpp",
+      "bytes": 2711,
+      "SHA256": "2a0dbd56af5158baf86b7397cf7d384e194fbe10172df41f683188ba6215c417",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round65Projection.cpp",
+      "bytes": 14130,
+      "SHA256": "2461d281782026f8982bd334de3b1ae9fa1486f390642724842629b741cdbad9",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round73JointInsertion.cpp",
+      "bytes": 14626,
+      "SHA256": "e624fb74f575cce78ede760d7b52c3778d933621fc057a9f65d5a45f93716034",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round75QuantityDescent.cpp",
+      "bytes": 16645,
+      "SHA256": "f904a7f7355e897df1aff3d07757d8c2ac5b8dff134235c061637d46a87c0075",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round76PhysicalClosure.cpp",
+      "bytes": 4689,
+      "SHA256": "d39f05d34532e666c4e0ebcc08a311f2383a3d33a46d520f2cdd58981c4b675e",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round78BalancedRelocation.cpp",
+      "bytes": 15936,
+      "SHA256": "d082472fbb77d103345a9e77c6a17a815feb46b281c2491a13c8b8ded5eb4393",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round83BlockExchange.cpp",
+      "bytes": 12512,
+      "SHA256": "5a70c158a75f447c40fbff995703339cb5b59c551cba1be193283947724644a5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round92HandlingActivation.cpp",
+      "bytes": 20049,
+      "SHA256": "d638d09f4cf1e474da620444f10d0b30a28d2dd8b235993cb88a49d76ff363e5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round93CoQuantityDescent.cpp",
+      "bytes": 14863,
+      "SHA256": "cf3ea08852f56a10bceeb59c169ff92de4d9d8aad0914a7233985ce7da4f2012",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round95FullBlockDescent.cpp",
+      "bytes": 15061,
+      "SHA256": "10b390f6b47a77ff25812e8c990e17f1ba956d4121d1eced910a72aab479dcfb",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round96MultiQuantity.cpp",
+      "bytes": 5830,
+      "SHA256": "0fdc37a2ebdaf08dc63fe161a64c423b513fd56593ccec8c351e73fd49d16238",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round96RouteOrder.cpp",
+      "bytes": 7334,
+      "SHA256": "b8e354f80ca57d97a5ac712df03c6313c6d013f5edb618e8dfb0b023e56303a8",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/Round97NativeClosure.cpp",
+      "bytes": 21491,
+      "SHA256": "39f7d168a288a6fece32d7985160dd7a2d8a1756c918465ad588e6c81fb19731",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round98_model_export.cpp",
+      "bytes": 1681,
+      "SHA256": "ea7080903574ee0b11b56311add6e929d31f50f20f3a06a1227f01590e65ce28",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/round99_model_export.cpp",
+      "bytes": 1708,
+      "SHA256": "f01cd1b44cc2706d68492a875dbfdc393dc780ede63ab712227006e5fc8e26cf",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ServiceResourceCuts.cpp",
+      "bytes": 16211,
+      "SHA256": "f1f0e97b47dbc9e6038f797892fa33764e843253ccca2cc0b49ac4c632a452fc",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/ServiceResourceHull.cpp",
+      "bytes": 9414,
+      "SHA256": "d567e9f9e270e65a98a357830214af19b527c44f9891589cdaa452b29164d10b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/StaticSegmentedGini.cpp",
+      "bytes": 16389,
+      "SHA256": "7c717ddd668a1ce54320fd0dff98010a5f16270fae5727c0641657a8911f90ed",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/StrictCertificate.cpp",
+      "bytes": 12134,
+      "SHA256": "a1858bb0945e64fc709bd3534b4e02f07d7d5481cca075d3a8ebc07916372ef9",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/TailoredBC.cpp",
+      "bytes": 5222,
+      "SHA256": "b350b2d94aec9ad507f256d281dd7a2deb9f08b05ddfb777cfcadcedad44ee15",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/TailoredBCCallbacks.cpp",
+      "bytes": 2243,
+      "SHA256": "33a4bc26911359f523b3ff5cb0af0a2193386f0ceabaf1b90250ccc54890736b",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/TailoredBCCplexApi.cpp",
+      "bytes": 351106,
+      "SHA256": "931084a6b586966196b38a7e324b6a73e4d0a494c28273b540c19e7e0bae67e7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/TailoredBCCuts.cpp",
+      "bytes": 177,
+      "SHA256": "a115454a170fce8b31a439d0ad5cfdadacac7f6b9f0d5761a39b5196a97b7705",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/old_code/7564a5415331b380e24d1ec06936dcfd56557e67/src/TailoredExact.cpp",
+      "bytes": 57558,
+      "SHA256": "d7193cdda00408912c5adca4f4b8f13f3fe6f71e32ee6e5ab5c5be36cc6e7f84",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/reused_production_main.cpp",
+      "bytes": 1127772,
+      "SHA256": "c1508b72562ad67107c3ba8874487e1468883c0fca343811b5b5ef1e0d442479",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/reused_production_main_binding.json",
+      "bytes": 11207,
+      "SHA256": "22aa1a0e26a5d2a86b1b0b1471504ab7b05bae1f29c8485b5262669f1d76b202",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/reused_research_main.cpp",
+      "bytes": 1128455,
+      "SHA256": "3c5c9ba6f87f74c43ca95290b0b5cf7ad5cc50b31741bd01507f3818d1e23bc5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source/reused_research_main_binding.json",
+      "bytes": 461,
+      "SHA256": "e4a6d24814686ab3833b4148122c5593e579ae696ecd87f2315af9967f9fcfad",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round133/source_publication.json",
+      "bytes": 107264,
+      "SHA256": "2a6ca115e28c1ef06daa66cd1d363dda2ef64747fbefcdbc647220fe1eccc329",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "results/unified_exact_round94/preregistration.json",
+      "bytes": 5832,
+      "SHA256": "767b8abe628bb5e84c8c44ddf2b65869f44212e17bea362fc0284b4afb445774",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_abi.py",
+      "bytes": 2545,
+      "SHA256": "7590092b6f9dd6860bc13b65464eb2f67d45dbe3a61ee143b874a7369051c361",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_analysis_repair.py",
+      "bytes": 3664,
+      "SHA256": "ca47eddd123b2a6ba51f193cb4c4f86b7cfc40504417924a424cee7fe32831f5",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_build.py",
+      "bytes": 6404,
+      "SHA256": "b0d896fc07dbed2a1b5fccd6e734f62006e5ab0991847fe5aaf06aa9989edc24",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_campaign.py",
+      "bytes": 14629,
+      "SHA256": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_cleanup.py",
+      "bytes": 7165,
+      "SHA256": "136a35cf99c66b380d2d1ee0a9c54279852cccf38ab284592f0a1488449f0072",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_common.py",
+      "bytes": 12788,
+      "SHA256": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_d24_point_check.py",
+      "bytes": 7969,
+      "SHA256": "a2791a2231e422d71dc117bcf8b46d562621a619eff6034794be79a3d2ed311f",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_delivery_preflight.py",
+      "bytes": 11419,
+      "SHA256": "ab1df3176e01c8b5d24017e4c7a6c5175b9a2c69a2e82195fdb21ff43a80f111",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_delivery_status.py",
+      "bytes": 3577,
+      "SHA256": "90791428746ba1f468c33a5c2fc3e41449e623e512dd5d7ef1b9baa8cf436acc",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_diagnostic.py",
+      "bytes": 23240,
+      "SHA256": "a3dd2108c27a5de47d375f0ba4d5fd6bc9acb92ee225ce7e977c657c9112d2d0",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_diagnostic_runtime_repair.py",
+      "bytes": 1220,
+      "SHA256": "d128b1c69034b08cedb35e9b729df230306bcfba2ec061c4104abdf6540dea5a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_documents.py",
+      "bytes": 5157,
+      "SHA256": "2c28a60614e30e4ff16c53e1c900e5ef9f47ec24b34461cef6266e0b5c37fc5c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_freeze_candidate.py",
+      "bytes": 3323,
+      "SHA256": "f3c58adec443092d609ff87284e4cfb014dada3714b760091c06e77d040432a4",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_git_stage.py",
+      "bytes": 1744,
+      "SHA256": "99043cdf4436978aebc3d8183fdc1b34fa88ec1f320d721dba5eed78076a4477",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_joint_check.py",
+      "bytes": 12446,
+      "SHA256": "892fac7d3396f1a27f3c18c051ad054f1a273ddd8e84e6cd55b97faee26381db",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_loaded_d24.py",
+      "bytes": 14657,
+      "SHA256": "a2b7deb8c68c4aabbdea5f6fe434dc3c1c44b2359601cdb2f278eb803f5e9937",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_pdf_qa.py",
+      "bytes": 6220,
+      "SHA256": "db71528b587e42366cab520100c4ae64429d3c1e82860e660299bae90dc9ba7c",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_portable_check.py",
+      "bytes": 39265,
+      "SHA256": "6024c92660aed5d78a6fade0f371cac4621bc822d74008296a5539319b93a37d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_postverify_repair.py",
+      "bytes": 19896,
+      "SHA256": "8feae1d544d92fba843f4836f0c685c2cf38151f20386cd2538396ac34af6640",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_postverify_repair_tests.py",
+      "bytes": 12757,
+      "SHA256": "9cff594ba9aa6a6fbfb8cb6adddf35f9a2211c7efcddb4c924d02ab86ed96e21",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_prepare_dependencies.py",
+      "bytes": 4590,
+      "SHA256": "f3d4d78149f1e64f478f9ffa6836e838782acad6cc4bb1b8c838f2efa7196328",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_public_restore.py",
+      "bytes": 28205,
+      "SHA256": "b8062780c069e252df5306d79fc5b1c22038d1adf4f0ec229cdaddc1cbca5aa8",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_read.py",
+      "bytes": 60903,
+      "SHA256": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_reader_tests.py",
+      "bytes": 10118,
+      "SHA256": "a3a5496f1e5c0a21f81c2b2ba1beef72af862ea29a3755753cb2cec58663cc75",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_release.py",
+      "bytes": 11702,
+      "SHA256": "411958a6d79d23205ac718caed5569a24cb9cfda82253261de589ec08e212127",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_small_native.py",
+      "bytes": 15121,
+      "SHA256": "1f0a8bd4026614182a60d5bf4a99f98ea44de8d462d0f8603e5a01ed797d59b1",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_stage_imports.py",
+      "bytes": 2040,
+      "SHA256": "17cb985de00445f7646eecaff26ae4004d622feced8877991dd3c1ab758fafd7",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "scripts/round133_stage_inputs.py",
+      "bytes": 1428,
+      "SHA256": "01d9efb3ec577f1595397228eccdc27de2ec76e4dcce3fb6c2766d0f51d9f229",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "tests/native_evidence_journal_tests.cpp",
+      "bytes": 12272,
+      "SHA256": "e14798e704c8e4cfb0139e7b8502e3a9cdf646dd8f095b9fb013a1edc5177924",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "tests/round133_inclusive_cutoff_tests.cpp",
+      "bytes": 3312,
+      "SHA256": "e258f7ad033899df0d1d49014164e3ff119ac1baba4b14dbabed78c7b21f8442",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "tests/round133_terminal_tests.cpp",
+      "bytes": 3569,
+      "SHA256": "c24d9891a7e3780af52fbc51efc825831bb306405ad80fcb5762e9fdcb59c281",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    },
+    {
+      "path": "WORKSPACE_POLICY.md",
+      "bytes": 1409,
+      "SHA256": "3812091c415a87116472e56f7f9c598c36ee485a654383d15e8b03fca69c042d",
+      "serialization": "exact bytes; hash-checked LF/CRLF transport materialization only"
+    }
+  ],
+  "file_count": 436,
+  "external_dependencies": [
+    {
+      "source_commit": "52b02252ba47e8228b73e071d6ed692385a4f816",
+      "source_path": "results/unified_exact_round132/artifacts/complete_tiny_joint_study.zip",
+      "target": "inherited_dependencies/complete_tiny_joint_study.zip",
+      "bytes": 213859,
+      "SHA256": "d2e55d7ae5fcaf5bb0c9d39a489b589006f3a29eb350b167fd790ad399a0aac1",
+      "purpose": "Explicit fixed tiny carrier for J2/J3 exact replay; no other old campaign recovery"
+    }
+  ],
+  "archive_manifest": "results/unified_exact_round133/raw_archive_manifest.json",
+  "source_publication": "results/unified_exact_round133/source_publication.json",
+  "fixed_science_commit_is_required_from_caller": true,
+  "no_HEAD_or_local_raw_fallback": true,
+  "old_34_carriers_unchanged": true,
+  "one_owned_empty_root": true,
+  "Optimize": 0,
+  "compilation": 0,
+  "no_native_assets_credentials_licenses_fonts_or_external_full_papers": true,
+  "later_delivery_receipts_excluded_without_recursive_repacking": true
+}

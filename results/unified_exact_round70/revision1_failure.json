@@ -1,0 +1,153 @@
+{
+  "revision": 1,
+  "valid_for_performance": false,
+  "performance_runs": 0,
+  "micro_runs": 6,
+  "failed_micro_runs": 2,
+  "actual_wall_seconds": 0.7659999998286366,
+  "optimizer_calls": 21,
+  "runs": [
+    {
+      "number": 1,
+      "id": "micro",
+      "arm": "P-GRB",
+      "status": "optimal",
+      "wall": 0.20299999974668026,
+      "optimizer_calls": 1,
+      "certificate": true,
+      "failure_reason": "",
+      "retained_destination": "results\\unified_exact_round70\\local_raw\\correctness\\micro\\P-GRB",
+      "independent_physical": {
+        "F": 0.20833333333333331,
+        "G": 0.13333333333333333,
+        "P": 0.5,
+        "stations": 1,
+        "pickup": 1,
+        "drop": 0,
+        "maximum_duration": 4.0,
+        "original_T_feasible": true
+      },
+      "UB": 0.20833333333333331,
+      "LB": 0.20833333333333331
+    },
+    {
+      "number": 2,
+      "id": "micro",
+      "arm": "VD-S",
+      "status": "optimal",
+      "wall": 0.125,
+      "optimizer_calls": 1,
+      "certificate": true,
+      "failure_reason": "none",
+      "retained_destination": "results\\unified_exact_round70\\local_raw\\correctness\\micro\\VD-S",
+      "independent_physical": {
+        "F": 0.20833333333333331,
+        "G": 0.13333333333333333,
+        "P": 0.5,
+        "stations": 1,
+        "pickup": 1,
+        "drop": 0,
+        "maximum_duration": 4.0,
+        "original_T_feasible": true
+      },
+      "UB": 0.20833333333333331,
+      "LB": 0.20833333333333331
+    },
+    {
+      "number": 3,
+      "id": "micro",
+      "arm": "DS",
+      "status": "paper_external_gini_tree_invalid_configuration",
+      "wall": 0.03200000012293458,
+      "optimizer_calls": 0,
+      "certificate": false,
+      "failure_reason": "c6_startup_variant_contract_mismatch_or_local_redecode",
+      "retained_destination": "results\\unified_exact_round70\\local_raw\\correctness\\micro\\DS",
+      "independent_physical": {
+        "F": 0.20833333333333331,
+        "G": 0.13333333333333333,
+        "P": 0.5,
+        "stations": 1,
+        "pickup": 1,
+        "drop": 0,
+        "maximum_duration": 4.0,
+        "original_T_feasible": true
+      },
+      "UB": 0.20833333333333331,
+      "LB": 0
+    },
+    {
+      "number": 4,
+      "id": "micro-zero",
+      "arm": "P-GRB",
+      "status": "optimal",
+      "wall": 0.030999999959021807,
+      "optimizer_calls": 1,
+      "certificate": true,
+      "failure_reason": "",
+      "retained_destination": "results\\unified_exact_round70\\local_raw\\correctness\\micro-zero\\P-GRB",
+      "independent_physical": {
+        "F": 0.20833333333333331,
+        "G": 0.13333333333333333,
+        "P": 0.5,
+        "stations": 1,
+        "pickup": 1,
+        "drop": 0,
+        "maximum_duration": 2.0,
+        "original_T_feasible": true
+      },
+      "UB": 0.20833333333333331,
+      "LB": 0.20833333333333331
+    },
+    {
+      "number": 5,
+      "id": "micro-zero",
+      "arm": "VD-S",
+      "status": "optimal",
+      "wall": 0.3440000000409782,
+      "optimizer_calls": 18,
+      "certificate": true,
+      "failure_reason": "none",
+      "retained_destination": "results\\unified_exact_round70\\local_raw\\correctness\\micro-zero\\VD-S",
+      "independent_physical": {
+        "F": 0.20833333333333331,
+        "G": 0.13333333333333333,
+        "P": 0.5,
+        "stations": 1,
+        "pickup": 1,
+        "drop": 0,
+        "maximum_duration": 2.0,
+        "original_T_feasible": true
+      },
+      "UB": 0.20833333333333331,
+      "LB": 0.20833333333333331
+    },
+    {
+      "number": 6,
+      "id": "micro-zero",
+      "arm": "DS",
+      "status": "paper_external_gini_tree_invalid_configuration",
+      "wall": 0.030999999959021807,
+      "optimizer_calls": 0,
+      "certificate": false,
+      "failure_reason": "c6_startup_variant_contract_mismatch_or_local_redecode",
+      "retained_destination": "results\\unified_exact_round70\\local_raw\\correctness\\micro-zero\\DS",
+      "independent_physical": {
+        "F": 0.20833333333333331,
+        "G": 0.13333333333333333,
+        "P": 0.5,
+        "stations": 1,
+        "pickup": 1,
+        "drop": 0,
+        "maximum_duration": 2.0,
+        "original_T_feasible": true
+      },
+      "UB": 0.20833333333333331,
+      "LB": 0
+    }
+  ],
+  "root_cause": "C6 backend frozen-startup validator omitted decoded-descent, so both DS calls returned invalid configuration after a verified heuristic. Driver checked only failed substring; second invalid micro was not stopped until audit.",
+  "correction": "Explicit DS admission in C6/AM/coarse-root guards; real CLI regression; new driver rejects invalid/missing-coverage results after each launch. Preserve all original six runs; no old result replacement.",
+  "revision2_resource_extension": "Six fresh micro runs at30 plus ten no-opt reference exports on a rebuilt binary; same27 as-yet-unstarted performance launches. Stage-wide worst case9240 experiment seconds,12 micro launches. No performance design or thresholds changed.",
+  "offline_scope": "Physical endpoints verified separately; two DS runs have valid UB only, no exact proof. Successful controls kept as superseded qualification, excluded from new measured panel."
+}

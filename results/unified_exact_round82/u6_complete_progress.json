@@ -1,0 +1,81 @@
+{
+  "scope": "All original U6 arms normal/valid; final joint/Start audits pending.",
+  "records": [
+    {
+      "arm": "P-GRB",
+      "wall": 3597.2969999997877,
+      "endpoint": {
+        "U": 0.14819747529511856,
+        "L": 0.12644446829183334,
+        "gap": 0.021753007003285224,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      }
+    },
+    {
+      "arm": "BDS-C",
+      "wall": 3597.157000000123,
+      "endpoint": {
+        "U": 0.15904919605066142,
+        "L": 0.1298329506858786,
+        "gap": 0.029216245364782817,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      }
+    },
+    {
+      "arm": "K1-R",
+      "wall": 3597.1710000000894,
+      "endpoint": {
+        "U": 0.14506957238613563,
+        "L": 0.12670560212952584,
+        "gap": 0.018363970256609796,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "round31_c6_external_gini_tree_time_limit"
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "reference": "P-GRB",
+      "candidate": "BDS-C",
+      "UB_delta": 0.01085172075554286,
+      "LB_delta": 0.003388482394045267,
+      "gap_delta": 0.007463238361497593,
+      "mixed_UB_LB_directions": true,
+      "classification": "both_open",
+      "material_improvement": false,
+      "material_regression": true,
+      "severe_regression": false
+    },
+    {
+      "reference": "P-GRB",
+      "candidate": "K1-R",
+      "UB_delta": -0.0031279029089829324,
+      "LB_delta": 0.00026113383769249543,
+      "gap_delta": -0.003389036746675428,
+      "mixed_UB_LB_directions": false,
+      "classification": "both_open",
+      "material_improvement": true,
+      "material_regression": false,
+      "severe_regression": false
+    },
+    {
+      "reference": "K1-R",
+      "candidate": "BDS-C",
+      "UB_delta": 0.013979623664525792,
+      "LB_delta": 0.0031273485563527714,
+      "gap_delta": 0.01085227510817302,
+      "mixed_UB_LB_directions": true,
+      "classification": "both_open",
+      "material_improvement": false,
+      "material_regression": true,
+      "severe_regression": true
+    }
+  ],
+  "K1_P_advantage_retention": -2.2021709764046875,
+  "optimizer_calls_in_readback": 0
+}

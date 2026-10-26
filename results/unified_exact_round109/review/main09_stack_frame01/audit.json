@@ -1,0 +1,72 @@
+{
+  "decision": "ACCEPT_ADDITIONAL_STATIC_STACK_FACTS",
+  "original_diag_SHA": "7663f064e05f6d4f0d54f1cfe8420ba5baf87e2b497e3fda109eda047495545a",
+  "original_PE_SHA": "4647ee9f146a010ae4bc48f191ec12d4b9113e167b8eeccf0e43a3764e0a8ee0",
+  "original_diagnosis_not_modified": true,
+  "confirmed_main_fixed_frame_allocation_bytes": 1414288,
+  "confirmed_parser_fixed_frame_allocation_bytes": 1712,
+  "confirmed_single_DFS_frame_explicit_stack_sub_bytes": 32,
+  "reserved_main_thread_stack_bytes": 2097152,
+  "theoretical_space_after_main_fixed_frame_before_other_call_frames_bytes": 682864,
+  "additional_pushes_return_addresses_guard_pages_and_other_frames_reduce_theoretical_space": true,
+  "inference": "Large fixed main frame consumes about1.35MiB of the2MiB reserve before parsing; the parser frame is only1712bytes, while recursive regex matching consumes the remaining stack. Exact failing regex depth/payload and attribution of main frame to individual local objects remain unproved without a crash stack/variable-layout audit.",
+  "samePE_sameentry_environment_fix_still_unqualified": true,
+  "stage": "BLOCKED",
+  "resumption_allowed": false,
+  "actual_engineering_commands": [
+    {
+      "label": "main_prologue",
+      "argv": [
+        "D:/msys64/ucrt64/bin/objdump.exe",
+        "-d",
+        "-C",
+        "--start-address=0x1400ba135",
+        "--stop-address=0x1400ba180",
+        "E:\\codes\\ExactEBRP-round109\\build\\research\\round109-inherited-mb-v1\\ExactEBRP.exe"
+      ],
+      "cwd": "E:\\codes\\ExactEBRP-round109",
+      "exit_code": 0,
+      "engineering_seconds": 0.07268530002329499,
+      "stdout_SHA": "ae746d32c97ad7c9fe76a0d7c2d2eca42106ed79929be42ed4fa0beb4e2a5f2e",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "solver_launch": false
+    },
+    {
+      "label": "Parser_prologue",
+      "argv": [
+        "D:/msys64/ucrt64/bin/objdump.exe",
+        "-d",
+        "-C",
+        "--start-address=0x1400e8c28",
+        "--stop-address=0x1400e8c80",
+        "E:\\codes\\ExactEBRP-round109\\build\\research\\round109-inherited-mb-v1\\ExactEBRP.exe"
+      ],
+      "cwd": "E:\\codes\\ExactEBRP-round109",
+      "exit_code": 0,
+      "engineering_seconds": 0.06986509996932,
+      "stdout_SHA": "c92ed4a4be2c6b0b6287242a9a153e13e09fdbba96b7e154991cd9b5997a475a",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "solver_launch": false
+    },
+    {
+      "label": "regex_DFS_prologue",
+      "argv": [
+        "D:/msys64/ucrt64/bin/objdump.exe",
+        "-d",
+        "-C",
+        "--start-address=0x1405cd780",
+        "--stop-address=0x1405cd7e0",
+        "E:\\codes\\ExactEBRP-round109\\build\\research\\round109-inherited-mb-v1\\ExactEBRP.exe"
+      ],
+      "cwd": "E:\\codes\\ExactEBRP-round109",
+      "exit_code": 0,
+      "engineering_seconds": 0.0711916999425739,
+      "stdout_SHA": "65ffef3e72c636466bb406bc093438aa620d9cf4b770c028ddc9fd0d818bb3ca",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "solver_launch": false
+    }
+  ],
+  "Optimize": 0,
+  "native_environment": 0,
+  "production_edits": 0
+}

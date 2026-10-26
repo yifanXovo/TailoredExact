@@ -1,0 +1,832 @@
+{
+  "schema": "round97-two-batch-analysis-view-v1",
+  "analysis_only": true,
+  "launches": [
+    {
+      "number": 1,
+      "id": "F5",
+      "arm": "OLD-FEEDBACK",
+      "mode": "feedback",
+      "operator": "r83",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB",
+          "ORDER-ON"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 3600,
+        "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -1011005748,
+          "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+          "columns": 13410,
+          "rows": 35693
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\01_F5_OLD-FEEDBACK",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 2,
+      "id": "F5",
+      "arm": "FEEDBACK",
+      "mode": "feedback",
+      "operator": "r96",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB",
+          "ORDER-ON"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 3600,
+        "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -1011005748,
+          "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+          "columns": 13410,
+          "rows": 35693
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\02_F5_FEEDBACK",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 3,
+      "id": "F5",
+      "arm": "OFF",
+      "mode": "observe",
+      "operator": "r83",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB",
+          "ORDER-ON"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 3600,
+        "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -1011005748,
+          "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+          "columns": 13410,
+          "rows": 35693
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\03_F5_OFF",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 4,
+      "id": "F5",
+      "arm": "P-GRB",
+      "mode": "off",
+      "operator": "r83",
+      "panel": {
+        "id": "F5",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F5",
+        "family": "synthetic",
+        "geography": "perturbed_grid",
+        "inventory": "paired_shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 7200,
+        "instance_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "input_sha256": "5145b134f52dc573900b0b271325639fb04dc5eed37bf996f6b984f74efacc8a",
+        "source_manifest": "results/unified_exact_round86/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB",
+          "ORDER-ON"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 3600,
+        "input_path": "reference/round86_unadapted_confirmation/F5.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -1011005748,
+          "canonical_sha256": "15fb6806659b221df87b5b31520fd7dc127825e4e89101732f69b316924d98fb",
+          "columns": 13410,
+          "rows": 35693
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\04_F5_P-GRB",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 5,
+      "id": "D7",
+      "arm": "P-GRB",
+      "mode": "off",
+      "operator": "r83",
+      "panel": {
+        "id": "D7",
+        "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "family": "citibike443-regional-v1",
+        "geography": "regional",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "input_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -373258443,
+          "canonical_sha256": "4cd7967ea4d65804e6ab7ae8913033454ba495766ff9eb03529bd935f6e0bace",
+          "columns": 13360,
+          "rows": 35618
+        },
+        "cap_seconds": 3600
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\05_D7_P-GRB",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 6,
+      "id": "D7",
+      "arm": "OFF",
+      "mode": "observe",
+      "operator": "r83",
+      "panel": {
+        "id": "D7",
+        "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "family": "citibike443-regional-v1",
+        "geography": "regional",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "input_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -373258443,
+          "canonical_sha256": "4cd7967ea4d65804e6ab7ae8913033454ba495766ff9eb03529bd935f6e0bace",
+          "columns": 13360,
+          "rows": 35618
+        },
+        "cap_seconds": 3600
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\06_D7_OFF",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 7,
+      "id": "D7",
+      "arm": "FEEDBACK",
+      "mode": "feedback",
+      "operator": "r96",
+      "panel": {
+        "id": "D7",
+        "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "family": "citibike443-regional-v1",
+        "geography": "regional",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "input_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -373258443,
+          "canonical_sha256": "4cd7967ea4d65804e6ab7ae8913033454ba495766ff9eb03529bd935f6e0bace",
+          "columns": 13360,
+          "rows": 35618
+        },
+        "cap_seconds": 3600
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\07_D7_FEEDBACK",
+      "stage": "complete_development",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 8,
+      "id": "V1",
+      "arm": "OFF",
+      "mode": "observe",
+      "operator": "r83",
+      "panel": {
+        "id": "V1",
+        "V": 30,
+        "M": 3,
+        "Q": 25,
+        "geometry": "three_clusters",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "method_order": [
+          "P-GRB",
+          "ORDER-ON",
+          "ENS-C"
+        ],
+        "input_path": "reference/round96_primal_validation/V1.txt",
+        "instance_path": "reference/round96_primal_validation/V1.txt",
+        "input_sha256": "dd841e57b2c22158002b0c9ec4940a9f071c11b8881a32b65168bbdb182f6829",
+        "scenario_id": "round96-primal-validation-V1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 571,
+        "total_target": 620,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 2054431081,
+          "canonical_sha256": "a5a372c306b02b5b213cc3a16bbf0e1d3ad8b49c60d2355ae9674b9563ba7e6c",
+          "columns": 4234,
+          "rows": 10615
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\08_V1_OFF",
+      "stage": "complete_development",
+      "cap_seconds": 1800,
+      "hard_stop_seconds": 1798
+    },
+    {
+      "number": 9,
+      "id": "V1",
+      "arm": "FEEDBACK",
+      "mode": "feedback",
+      "operator": "r96",
+      "panel": {
+        "id": "V1",
+        "V": 30,
+        "M": 3,
+        "Q": 25,
+        "geometry": "three_clusters",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "method_order": [
+          "P-GRB",
+          "ORDER-ON",
+          "ENS-C"
+        ],
+        "input_path": "reference/round96_primal_validation/V1.txt",
+        "instance_path": "reference/round96_primal_validation/V1.txt",
+        "input_sha256": "dd841e57b2c22158002b0c9ec4940a9f071c11b8881a32b65168bbdb182f6829",
+        "scenario_id": "round96-primal-validation-V1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 571,
+        "total_target": 620,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 2054431081,
+          "canonical_sha256": "a5a372c306b02b5b213cc3a16bbf0e1d3ad8b49c60d2355ae9674b9563ba7e6c",
+          "columns": 4234,
+          "rows": 10615
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK",
+      "stage": "complete_development",
+      "cap_seconds": 1800,
+      "hard_stop_seconds": 1798
+    },
+    {
+      "number": 10,
+      "id": "V1",
+      "arm": "P-GRB",
+      "mode": "off",
+      "operator": "r83",
+      "panel": {
+        "id": "V1",
+        "V": 30,
+        "M": 3,
+        "Q": 25,
+        "geometry": "three_clusters",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "method_order": [
+          "P-GRB",
+          "ORDER-ON",
+          "ENS-C"
+        ],
+        "input_path": "reference/round96_primal_validation/V1.txt",
+        "instance_path": "reference/round96_primal_validation/V1.txt",
+        "input_sha256": "dd841e57b2c22158002b0c9ec4940a9f071c11b8881a32b65168bbdb182f6829",
+        "scenario_id": "round96-primal-validation-V1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 571,
+        "total_target": 620,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 2054431081,
+          "canonical_sha256": "a5a372c306b02b5b213cc3a16bbf0e1d3ad8b49c60d2355ae9674b9563ba7e6c",
+          "columns": 4234,
+          "rows": 10615
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\10_V1_P-GRB",
+      "stage": "complete_development",
+      "cap_seconds": 1800,
+      "hard_stop_seconds": 1798
+    },
+    {
+      "number": 11,
+      "id": "F2",
+      "arm": "FEEDBACK",
+      "mode": "feedback",
+      "operator": "r96",
+      "panel": {
+        "id": "F2",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+        "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+        "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+        "T_seconds": 3600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 900,
+        "method_order": [
+          "ORDER-ON",
+          "P-GRB",
+          "ENS-C"
+        ],
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 788240696,
+          "canonical_sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+          "columns": 1591,
+          "rows": 3689
+        },
+        "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+        "M": 2,
+        "V": 20
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\11_F2_FEEDBACK",
+      "stage": "complete_development",
+      "cap_seconds": 900,
+      "hard_stop_seconds": 898
+    },
+    {
+      "number": 12,
+      "id": "F2",
+      "arm": "P-GRB",
+      "mode": "off",
+      "operator": "r83",
+      "panel": {
+        "id": "F2",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+        "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+        "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+        "T_seconds": 3600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 900,
+        "method_order": [
+          "ORDER-ON",
+          "P-GRB",
+          "ENS-C"
+        ],
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 788240696,
+          "canonical_sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+          "columns": 1591,
+          "rows": 3689
+        },
+        "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+        "M": 2,
+        "V": 20
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\12_F2_P-GRB",
+      "stage": "complete_development",
+      "cap_seconds": 900,
+      "hard_stop_seconds": 898
+    },
+    {
+      "number": 13,
+      "id": "F2",
+      "arm": "OFF",
+      "mode": "observe",
+      "operator": "r83",
+      "panel": {
+        "id": "F2",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+        "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+        "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+        "T_seconds": 3600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 900,
+        "method_order": [
+          "ORDER-ON",
+          "P-GRB",
+          "ENS-C"
+        ],
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 788240696,
+          "canonical_sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+          "columns": 1591,
+          "rows": 3689
+        },
+        "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+        "M": 2,
+        "V": 20
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\13_F2_OFF",
+      "stage": "complete_development",
+      "cap_seconds": 900,
+      "hard_stop_seconds": 898
+    },
+    {
+      "number": 1,
+      "id": "D7",
+      "arm": "OLD-FEEDBACK",
+      "mode": "feedback",
+      "operator": "r83",
+      "panel": {
+        "id": "D7",
+        "scenario_id": "cb443_V50_regional_r1_shortage_M04_Q30_T18000",
+        "family": "citibike443-regional-v1",
+        "geography": "regional",
+        "inventory": "shortage",
+        "V": 50,
+        "M": 4,
+        "Q": 30,
+        "complete_Q_vector": [
+          30,
+          30,
+          30,
+          30
+        ],
+        "T_seconds": 18000,
+        "instance_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "input_sha256": "d7dbd018331b9d5f3d84c0fd6c907560ef1fa92a2f8c153ac7d81e46a6cd4e9c",
+        "source_manifest": "results/unified_exact_round84/protocol.json",
+        "method_order": [
+          "ENS-C",
+          "P-GRB"
+        ],
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "input_path": "reference/citibike443-regional-v1/instances/V50/cb443_V50_regional_r1_shortage_M04_Q30.txt",
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": -373258443,
+          "canonical_sha256": "4cd7967ea4d65804e6ab7ae8913033454ba495766ff9eb03529bd935f6e0bace",
+          "columns": 13360,
+          "rows": 35618
+        },
+        "cap_seconds": 3600
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\attribution01\\raw\\01_D7_OLD-FEEDBACK",
+      "stage": "complete_operator_attribution",
+      "cap_seconds": 3600,
+      "hard_stop_seconds": 3598
+    },
+    {
+      "number": 2,
+      "id": "V1",
+      "arm": "OLD-FEEDBACK",
+      "mode": "feedback",
+      "operator": "r83",
+      "panel": {
+        "id": "V1",
+        "V": 30,
+        "M": 3,
+        "Q": 25,
+        "geometry": "three_clusters",
+        "inventory": "shortage",
+        "T_seconds": 7200,
+        "cap_seconds": 1800,
+        "method_order": [
+          "P-GRB",
+          "ORDER-ON",
+          "ENS-C"
+        ],
+        "input_path": "reference/round96_primal_validation/V1.txt",
+        "instance_path": "reference/round96_primal_validation/V1.txt",
+        "input_sha256": "dd841e57b2c22158002b0c9ec4940a9f071c11b8881a32b65168bbdb182f6829",
+        "scenario_id": "round96-primal-validation-V1",
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "total_initial": 571,
+        "total_target": 620,
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 2054431081,
+          "canonical_sha256": "a5a372c306b02b5b213cc3a16bbf0e1d3ad8b49c60d2355ae9674b9563ba7e6c",
+          "columns": 4234,
+          "rows": 10615
+        }
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\attribution01\\raw\\02_V1_OLD-FEEDBACK",
+      "stage": "complete_operator_attribution",
+      "cap_seconds": 1800,
+      "hard_stop_seconds": 1798
+    },
+    {
+      "number": 3,
+      "id": "F2",
+      "arm": "OLD-FEEDBACK",
+      "mode": "feedback",
+      "operator": "r83",
+      "panel": {
+        "id": "F2",
+        "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+        "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+        "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+        "T_seconds": 3600,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "lambda": 0.15,
+        "cap_seconds": 900,
+        "method_order": [
+          "ORDER-ON",
+          "P-GRB",
+          "ENS-C"
+        ],
+        "reference": {
+          "optimizer_calls": 0,
+          "fingerprint": 788240696,
+          "canonical_sha256": "ad2ac9af96e732b9407acc39dc7a21922e092e7dd9c7d05d32513ac1ac52a23d",
+          "columns": 1591,
+          "rows": 3689
+        },
+        "instance_path": "reference/round86_unadapted_confirmation/F2.txt",
+        "M": 2,
+        "V": 20
+      },
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\attribution01\\raw\\03_F2_OLD-FEEDBACK",
+      "stage": "complete_operator_attribution",
+      "cap_seconds": 900,
+      "hard_stop_seconds": 898
+    }
+  ],
+  "source_campaigns": [
+    {
+      "batch": "development02",
+      "launches": [
+        {
+          "number": 1,
+          "id": "F5",
+          "arm": "OLD-FEEDBACK",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\01_F5_OLD-FEEDBACK"
+        },
+        {
+          "number": 2,
+          "id": "F5",
+          "arm": "FEEDBACK",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\02_F5_FEEDBACK"
+        },
+        {
+          "number": 3,
+          "id": "F5",
+          "arm": "OFF",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\03_F5_OFF"
+        },
+        {
+          "number": 4,
+          "id": "F5",
+          "arm": "P-GRB",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\04_F5_P-GRB"
+        },
+        {
+          "number": 5,
+          "id": "D7",
+          "arm": "P-GRB",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\05_D7_P-GRB"
+        },
+        {
+          "number": 6,
+          "id": "D7",
+          "arm": "OFF",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\06_D7_OFF"
+        },
+        {
+          "number": 7,
+          "id": "D7",
+          "arm": "FEEDBACK",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\07_D7_FEEDBACK"
+        },
+        {
+          "number": 8,
+          "id": "V1",
+          "arm": "OFF",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\08_V1_OFF"
+        },
+        {
+          "number": 9,
+          "id": "V1",
+          "arm": "FEEDBACK",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\09_V1_FEEDBACK"
+        },
+        {
+          "number": 10,
+          "id": "V1",
+          "arm": "P-GRB",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\10_V1_P-GRB"
+        },
+        {
+          "number": 11,
+          "id": "F2",
+          "arm": "FEEDBACK",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\11_F2_FEEDBACK"
+        },
+        {
+          "number": 12,
+          "id": "F2",
+          "arm": "P-GRB",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\12_F2_P-GRB"
+        },
+        {
+          "number": 13,
+          "id": "F2",
+          "arm": "OFF",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\development02\\raw\\13_F2_OFF"
+        }
+      ]
+    },
+    {
+      "batch": "attribution01",
+      "launches": [
+        {
+          "number": 1,
+          "id": "D7",
+          "arm": "OLD-FEEDBACK",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\attribution01\\raw\\01_D7_OLD-FEEDBACK"
+        },
+        {
+          "number": 2,
+          "id": "V1",
+          "arm": "OLD-FEEDBACK",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\attribution01\\raw\\02_V1_OLD-FEEDBACK"
+        },
+        {
+          "number": 3,
+          "id": "F2",
+          "arm": "OLD-FEEDBACK",
+          "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round97\\attribution01\\raw\\03_F2_OLD-FEEDBACK"
+        }
+      ]
+    }
+  ],
+  "source_bindings": {
+    "results/unified_exact_round97/development02/identity.json": "517e6d79827cdbb75b94ec98dcf5b4c0c724fc738cfa1bc7448c8b4c67d57550",
+    "results/unified_exact_round97/development02/summary.jsonl": "4a179aeff0958d2bc27d3469bcbfcbbb8488407662310bd83584ea1aceca2fae",
+    "results/unified_exact_round97/development02_01_vectors.json": "ccf40c102c5d6a4d94169241447e08c1be9cad5410e57f063cd170845ab3e60f",
+    "results/unified_exact_round97/development02_02_vectors.json": "1d11df3dad4437581e52c5f985a74d3f3a16d65860b91337e5d21e390b77561e",
+    "results/unified_exact_round97/development02_03_vectors.json": "4ac9c43231de99767d9433478c446dfde9201a297353b70410d4f7f73adcd50c",
+    "results/unified_exact_round97/development02_06_vectors.json": "7e896779978f42dde604a88185095268e3116ce910fa6d8064cceb5a375c638e",
+    "results/unified_exact_round97/development02_07_vectors.json": "f1ea0a97d6047fc29f122ccaf10b5466153a9ae6af23b39a3148c34b4d196104",
+    "results/unified_exact_round97/development02_08_vectors.json": "d42eba6173f006b4ecb967e5397f69b652181e4c051fd03037f5d1332513631b",
+    "results/unified_exact_round97/development02_09_vectors.json": "5eb8c3f0afcefb32bbbc6a235bb41248ca16fb5cae2dd50aa60078397d68a5f0",
+    "results/unified_exact_round97/development02_11_vectors.json": "5ca68fde4cc2f31451491bdf2fbb0896ba24dbf8161998ac6d6e38dbb65954ae",
+    "results/unified_exact_round97/development02_13_vectors.json": "a5971f05e1876d56bf8dc2b04f4502890002ac88c8f482572a32d6ae98257b3c",
+    "results/unified_exact_round97/attribution01/identity.json": "9394417a646deb06fd07f696b17a4b4e2947994c804f4b6b0462bf3a81b89726",
+    "results/unified_exact_round97/attribution01/summary.jsonl": "f41e9909f2ce8fe91cfd6b5f76aefc0877b619c741dc135a5a7f7afd99f044f9",
+    "results/unified_exact_round97/attribution01_01_vectors.json": "412246b52cbc4a7a639888e41b48dfb2a1c344d8aae464f8eb17694c7c35fda4",
+    "results/unified_exact_round97/attribution01_02_vectors.json": "46154302eceb7c598adb3228d02e07362897fd8443ee1f55d3c3caadb55d0316",
+    "results/unified_exact_round97/attribution01_03_vectors.json": "c70f1caaf9be6db147ee671ba9a63284b14a7d892eb8cb99a71a9feda478f15b"
+  },
+  "candidate_binary_sha256": "7ea6b0eb3500084f6b93748ca43bedfb7ac7ec04591dd19c889a195e1ad31943",
+  "maximum_new_solver_starts": 0,
+  "optimizer_calls": 0,
+  "interpretation": "All four original development roles with both operators, OFF and P. Numbers belong to source campaigns; raw destinations uniquely identify runs. No result is copied into another arm."
+}

@@ -1,0 +1,120 @@
+"""Three pre-confirmation old-closure controls; no prior run is repeated."""
+import argparse
+import json
+import time
+from pathlib import Path
+import round97_campaign_v2 as campaign
+import round97_development_v2 as development
+import round97_continue_after_v1_recovery as completed_development
+import round97_vector_audit as vectors
+from round97_campaign_v2 import ROOT, OUT, read, write, sha, ext, r90, helper_bindings
+
+CAMP=OUT/'attribution01'
+PLAN=OUT/'development02_f2_report.md'
+COST=OUT/'costs/development02_complete_before_attribution/identity.json'
+
+
+def prepare():
+    ext.ensure_idle();assert not CAMP.exists()
+    prior=read(development.CAMP/'identity.json')
+    completed_development.identity_check(prior)
+    completed_development.prefix(prior,13)
+    costs=read(COST)
+    assert costs['solver_starts']==24
+    assert costs['solver_process_seconds']+6300+18900<80000
+    assert read(OUT/'confirmation_inputs.json')['optimizer_calls']==0
+    assert not (OUT/'confirmation_candidate_freeze.json').exists()
+    assert not (OUT/'confirmation01').exists()
+    assert read(OUT/'development02_analysis/identity.json')['solver_starts']==13
+    launches=[]
+    for role,cap in [('D7',3600),('V1',1800),('F2',900)]:
+        original=next(r for r in prior['launches'] if r['id']==role and r['arm']=='FEEDBACK')
+        panel=dict(original['panel']);assert panel['cap_seconds']==cap
+        number=len(launches)+1;dest=CAMP/'raw'/f'{number:02d}_{role}_OLD-FEEDBACK'
+        command=r90.command_for(prior['prereg'],panel,'ENS-C',dest)+[
+            '--round97-native-closure','feedback','--round97-native-operator','r83']
+        launches.append(dict(number=number,id=role,arm='OLD-FEEDBACK',mode='feedback',operator='r83',
+            panel=panel,destination=str(dest),stage='complete_operator_attribution',
+            cap_seconds=cap,hard_stop_seconds=cap-2,command=command))
+    identity=dict(prior,schema='round97-three-old-operator-controls-v1',launches=launches,
+        maximum_starts=3,maximum_process_seconds=6300,helper_hashes=helper_bindings(),
+        attribution_runner_sha256=sha(__file__),
+        decision_bindings={p.relative_to(ROOT).as_posix():sha(p) for p in [
+            PLAN,COST,development.CAMP/'identity.json',development.CAMP/'summary.jsonl',
+            OUT/'development02_analysis/identity.json',OUT/'development02_analysis/arms.csv',
+            OUT/'development02_analysis/pairs.csv',OUT/'confirmation_inputs.json']},
+        question='Resolve old physical closure versus combined ordering across remaining development roles before selecting one uniform confirmation candidate. No prior-arm rerun or confirmation-informed tuning.',
+        cost_ceiling_including_reserved_confirmation=costs['solver_process_seconds']+6300+18900)
+    write(CAMP/'identity.json',identity)
+    print(json.dumps(dict(prepared='attribution01',new_starts=3,maximum_process_seconds=6300,
+                         projected_solver_seconds_with_confirmation=identity['cost_ceiling_including_reserved_confirmation'])))
+
+
+def check(identity):
+    assert identity['attribution_runner_sha256']==sha(__file__)
+    for path,expected in identity['decision_bindings'].items():assert sha(ROOT/path)==expected,path
+    assert not (OUT/'confirmation_candidate_freeze.json').exists()
+    assert [(r['id'],r['arm'],r['operator'],r['cap_seconds']) for r in identity['launches']]==[
+        ('D7','OLD-FEEDBACK','r83',3600),('V1','OLD-FEEDBACK','r83',1800),('F2','OLD-FEEDBACK','r83',900)]
+    completed_development.identity_check(read(development.CAMP/'identity.json'))
+    completed_development.prefix(read(development.CAMP/'identity.json'),13)
+
+
+def prefix(identity,count):
+    path=CAMP/'summary.jsonl'
+    rows=[json.loads(s) for s in path.read_text().splitlines()] if path.exists() else []
+    assert len(rows)==count
+    for launch,row in zip(identity['launches'][:count],rows,strict=True):
+        assert (row['number'],row['id'],row['arm'])==(launch['number'],launch['id'],launch['arm'])
+        raw=Path(launch['destination']);audit=read(raw/'audit.json');receipt=read(raw/'completion.json')
+        assert row['audit_passed'] and audit['passed'] and receipt==row['completion']
+        assert row['endpoint']==audit['endpoint']
+        assert receipt['stop_reason']=='normal_return' and receipt['returncode']==0 and receipt['within_cap']
+        assert (raw/'result.json').exists()
+        if (raw/'external/round97/events.jsonl').exists():
+            path=OUT/f"attribution01_{launch['number']:02d}_vectors.json"
+            assert read(path)['passed'] and read(path)['optimizer_calls']==0
+            matches=[e for e in map(json.loads,(CAMP/'queue/events.jsonl').read_text().splitlines())
+                     if e['phase']=='actual_model_vectors_passed' and e['number']==launch['number']]
+            assert len(matches)==1 and matches[0]['audit_sha256']==sha(path)
+    return rows
+
+
+def run_all():
+    ext.ensure_idle();identity=read(CAMP/'identity.json');check(identity);prefix(identity,0)
+    assert all(not Path(r['destination']).exists() for r in identity['launches'])
+    queue=CAMP/'queue';queue.mkdir(exist_ok=False)
+    write(queue/'identity.json',dict(batch_sha256=sha(CAMP/'identity.json'),queue_sha256=sha(__file__),
+        maximum_new_starts=3,maximum_new_process_seconds=6300,
+        policy='One attempt per frozen additional old-closure role; serial and stop on any abnormality.'))
+    started=time.perf_counter()
+    def record(phase,**extra):
+        row=dict(phase=phase,unix=time.time(),queue_elapsed_seconds=time.perf_counter()-started,**extra)
+        with (queue/'events.jsonl').open('a',encoding='utf-8') as stream:stream.write(json.dumps(row)+'\n');stream.flush()
+        tmp=queue/'status.json.tmp';tmp.write_text(json.dumps(row,indent=2)+'\n');tmp.replace(queue/'status.json')
+        print(json.dumps(row),flush=True)
+    try:
+        for launch in identity['launches']:
+            check(identity);number=launch['number'];prefix(identity,number-1)
+            record('launching_registered_arm',number=number,id=launch['id'],arm=launch['arm'])
+            campaign.run('attribution01',number)
+            raw=Path(launch['destination']);audit=read(raw/'audit.json');receipt=read(raw/'completion.json')
+            assert receipt['stop_reason']=='normal_return' and receipt['returncode']==0 and audit['passed']
+            record('registered_arm_audited',number=number,endpoint=audit['endpoint'])
+            ext.ensure_idle()
+            if (raw/'external/round97/events.jsonl').exists():
+                label=f'attribution01_{number:02d}_vectors';tick=time.perf_counter()
+                record('auditing_actual_model_vectors',number=number)
+                vectors.check(str(raw),label);path=OUT/(label+'.json');assert read(path)['passed']
+                record('actual_model_vectors_passed',number=number,optimizer_calls=0,
+                    wrapper_seconds=time.perf_counter()-tick,audit_path=path.relative_to(OUT).as_posix(),audit_sha256=sha(path))
+            prefix(identity,number)
+        record('block_complete_requires_candidate_selection',completed_prefix=3)
+    except BaseException as error:
+        record('stopped_failure_no_restart',error=repr(error));raise
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','run-all']);a=p.parse_args()
+    if a.action=='prepare':prepare()
+    else:run_all()

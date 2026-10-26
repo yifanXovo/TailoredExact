@@ -1,5 +1,367 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
+# Round135 executed helpers, staged protocol and manuscript retain actual bytes.
+/scripts/round135* -text whitespace=cr-at-eol
+/results/unified_exact_round135/** -text whitespace=cr-at-eol
+/results/unified_exact_round135/**/*.log -whitespace
+/include/Round135Research.hpp -text whitespace=cr-at-eol
+# Round134 final source, protocol, raw carriers and reading artifacts.
+/scripts/round134* -text whitespace=cr-at-eol
+/results/unified_exact_round134/** -text whitespace=cr-at-eol
+/results/unified_exact_round134/**/*.log -whitespace
+/tests/round134* -text whitespace=cr-at-eol
+/include/IndependentObjectiveProof.hpp -text whitespace=cr-at-eol
+# Round133 executed sources, protocols and evidence retain their actual bytes.
+/scripts/round133* -text whitespace=cr-at-eol
+/results/unified_exact_round133/** -text whitespace=cr-at-eol
+/results/unified_exact_round133/**/*.log -whitespace
+/tests/round133* -text whitespace=cr-at-eol
+/tests/native_evidence_journal_tests.cpp -text whitespace=cr-at-eol
+/include/ControllingLeafScheduler.hpp -text whitespace=cr-at-eol
+/include/FixedIntervalMipBackend.hpp -text whitespace=cr-at-eol
+/include/NativeEvidenceJournal.hpp -text whitespace=cr-at-eol
+/src/ControllingLeafScheduler.cpp -text whitespace=cr-at-eol
+/src/NativeEvidenceJournal.cpp -text whitespace=cr-at-eol
+/src/Round105GurobiDecomposition.inc -text whitespace=cr-at-eol
+/src/Round107GurobiFrontier.inc -text whitespace=cr-at-eol
+# Round132 frozen plans, current source snapshots and read-only delivery bytes.
+/scripts/round132* -text whitespace=cr-at-eol
+/scripts/Round132Expression.hpp -text whitespace=cr-at-eol
+/results/unified_exact_round132/** -text whitespace=cr-at-eol
+/results/unified_exact_round132/**/*.log -whitespace
+# Round131 frozen protocol, original-byte inputs, adapters and evidence.
+/scripts/round131* -text whitespace=cr-at-eol
+/results/unified_exact_round131/** -text whitespace=cr-at-eol
+/results/unified_exact_round131/**/*.log -whitespace
+# Round130 current protocol, original-byte input copies and scoped evidence.
+/scripts/round130* -text whitespace=cr-at-eol
+/results/unified_exact_round130/** -text whitespace=cr-at-eol
+/results/unified_exact_round130/qualification/inherited/*.diff -whitespace
+# Round128 protocol, driver and evidence identities preserve actual bytes.
+/scripts/round128* -text whitespace=cr-at-eol
+/results/unified_exact_round128/** -text whitespace=cr-at-eol
+# Preserve the failed cleanup child's stderr verbatim, including its blank error lines.
+/results/unified_exact_round128/review/cleanup_attempts/attempt01/stderr.txt -text -whitespace
+# Round127 frozen runtime/input bytes; two old benchmark blobs retain original LF.
+/scripts/round127* -text
+/include/Round127Research.hpp -text
+/src/main.cpp -text
+/src/CplexBaseline.cpp -text
+/src/IntervalRowFactory.cpp -text
+/src/PaperExternalGiniTree.cpp -text
+/src/GurobiBaseline.cpp -text
+/reference/round122_paper_benchmark/*.txt -text
+
 results/gf_gurobi_performance_recovery_round29/** -text
 
 # Preserve byte-exact Round 31 evidence and its recorded SHA-256 values.
 results/gf_nonblocking_gurobi_c6_round31/** -text
+
+# Preserve byte-exact Round 39 frozen inputs, scripts, and recorded hashes.
+reference/qualification_round39/** -text
+results/gf_small_hard_light_round39/** -text whitespace=-trailing-space
+scripts/*round39*.py -text
+scripts/round39_common.py whitespace=-blank-at-eof
+tests/round39_protocol_tests.py -text
+
+# Preserve byte-exact Round 45 completion evidence and recorded SHA-256 values.
+results/gf_adaptive_timing_parametric_partition_round45/completion/** -text whitespace=cr-at-eol
+
+# Preserve byte-exact Round 46 screening evidence and recorded SHA-256 values.
+results/gf_c6_rho_k1_k4_screen_round46/** -text whitespace=cr-at-eol
+
+# Preserve byte-exact Round 49 compact evidence and recorded SHA-256 values.
+results/gf_k1_lp_primal_dual_rescue_round49/** -text whitespace=cr-at-eol
+
+# Round62 preflight found automatic CRLF conversion changes manifest input hashes.
+# Keep the original checked-in dataset bytes and this round's evidence exact.
+reference/citibike443-regional-v1/** -text
+results/gf_passive_threshold_conflicts_round62/** -text whitespace=cr-at-eol
+scripts/*round62*.py -text whitespace=cr-at-eol
+
+# Preserve Round 65 ledger, freeze, receipt and diagnostic source byte hashes.
+results/gf_budgeted_proof_round65/** -text whitespace=cr-at-eol
+scripts/*round65* -text whitespace=cr-at-eol
+
+# Preserve Round67 compact evidence and measured Python driver byte hashes.
+results/unified_exact_round67/** -text whitespace=cr-at-eol
+scripts/*round67*.py -text whitespace=cr-at-eol
+results/unified_exact_round68/** -text whitespace=cr-at-eol
+scripts/*round68*.py -text whitespace=cr-at-eol
+results/unified_exact_round68/qualification_native_v4/*.log -text -whitespace
+results/unified_exact_round69/** -text whitespace=cr-at-eol
+scripts/*round69*.py -text whitespace=cr-at-eol
+results/unified_exact_round70/** -text whitespace=cr-at-eol
+scripts/*round70*.py -text whitespace=cr-at-eol
+
+# Keep Round74 frozen driver, raw-evidence metadata and recorded hashes exact.
+results/unified_exact_round74/** -text whitespace=cr-at-eol
+scripts/*round74*.py -text whitespace=cr-at-eol
+results/unified_exact_round75/** -text whitespace=cr-at-eol
+scripts/*round75*.py -text whitespace=cr-at-eol
+results/unified_exact_round76/** -text whitespace=cr-at-eol
+scripts/*round76*.py -text whitespace=cr-at-eol
+
+results/unified_exact_round77/** -text whitespace=cr-at-eol
+scripts/*round77*.py -text whitespace=cr-at-eol
+
+results/unified_exact_round78/** -text whitespace=cr-at-eol
+scripts/*round78*.py -text whitespace=cr-at-eol
+
+results/unified_exact_round79/** -text
+scripts/round79*.py -text
+
+results/unified_exact_round79/bundle_manifest.json -diff linguist-generated=true
+
+results/unified_exact_round80/** -text
+scripts/round80*.py -text
+
+results/unified_exact_round81/** -text
+scripts/round81*.py -text
+
+results/unified_exact_round82/** -text
+scripts/round82*.py -text
+reference/round82_unadapted_confirmation/** -text
+
+# Preserve measured Matplotlib SVG bytes, including harmless path whitespace.
+results/unified_exact_round82/figures/long_window_gaps.svg -whitespace
+results/unified_exact_round82/figures_v2/long_window_gaps.svg -whitespace
+
+results/unified_exact_round83/** -text whitespace=cr-at-eol
+scripts/round83*.py -text
+include/Round83BlockExchange.hpp -text
+src/Round83BlockExchange.cpp -text
+tests/round83_exchange_diagnostic.cpp -text
+tests/round83*.cmake -text
+results/unified_exact_round83/figures/u6_bounds_and_gap.svg -whitespace
+
+results/unified_exact_round84/** -text whitespace=cr-at-eol
+scripts/round84*.py -text
+results/unified_exact_round84/figures/*.svg -whitespace
+
+results/unified_exact_round85/** -text whitespace=cr-at-eol
+scripts/round85*.py -text whitespace=cr-at-eol
+results/unified_exact_round85/figures/*.svg -whitespace
+
+# Round86 immutable research bytes
+/results/unified_exact_round86/** -text whitespace=cr-at-eol
+/scripts/round86_*.py -text whitespace=cr-at-eol
+/reference/round86_unadapted_confirmation/** -text whitespace=cr-at-eol
+/results/unified_exact_round86/figures/*.svg -whitespace
+
+# Preserve the Round91 fixed-model diagnostic and its frozen source hashes.
+/results/unified_exact_round91/** -text whitespace=cr-at-eol
+/scripts/round91_handling_rounding_diagnostic.py -text whitespace=cr-at-eol
+/scripts/round91_handling_real_diagnostic.py -text whitespace=cr-at-eol
+/tests/round91_handling_rounding_probe.cpp -text whitespace=cr-at-eol
+
+# Preserve the conditional G4 continuation protocol before any execution.
+/scripts/round90_lp_g_g4_remaining.py -text whitespace=cr-at-eol
+/results/unified_exact_round90/preregistration_g4_remaining.json -text whitespace=cr-at-eol
+/results/unified_exact_round90/g4_remaining* -text whitespace=cr-at-eol
+
+# Preserve the actual qualified source and research evidence bytes. Automatic
+# checkout newline conversion otherwise breaks their recorded SHA-256 pins.
+/CMakeLists.txt -text whitespace=cr-at-eol
+/include/** -text whitespace=cr-at-eol
+/src/** -text whitespace=cr-at-eol
+/tests/round90_lp_g_split_tests.cpp -text whitespace=cr-at-eol
+/results/unified_exact_round88/** -text whitespace=cr-at-eol
+/results/unified_exact_round89/** -text whitespace=cr-at-eol
+/results/unified_exact_round90/** -text whitespace=cr-at-eol
+/scripts/round88*.py -text whitespace=cr-at-eol
+/scripts/round89*.py -text whitespace=cr-at-eol
+/scripts/round90*.py -text whitespace=cr-at-eol
+/scripts/round91*.py -text whitespace=cr-at-eol
+/research_plans/ensc_optimization_plan_2026-09-26.md -text whitespace=cr-at-eol
+/research_plans/ensc_optimization_instances_2026-09-26.json -text whitespace=cr-at-eol
+# Native/build logs retain their original trailing whitespace as raw evidence.
+/results/unified_exact_round88/**/*.log -whitespace
+/results/unified_exact_round89/**/*.log -whitespace
+/results/unified_exact_round90/**/*.log -whitespace
+
+# Round92 candidate source, qualification fixtures and evidence pins.
+/results/unified_exact_round92/** -text whitespace=cr-at-eol
+/scripts/round92*.py -text whitespace=cr-at-eol
+/tests/round92* -text whitespace=cr-at-eol
+/results/unified_exact_round92/**/*.log -whitespace
+
+# Three-round continuation: preserve source/evidence bytes before qualification.
+/results/unified_exact_round93/** -text whitespace=cr-at-eol
+/results/unified_exact_round94/** -text whitespace=cr-at-eol
+/results/unified_exact_round95/** -text whitespace=cr-at-eol
+/scripts/round93*.py -text whitespace=cr-at-eol
+/scripts/round94*.py -text whitespace=cr-at-eol
+/scripts/round95*.py -text whitespace=cr-at-eol
+/tests/round93* -text whitespace=cr-at-eol
+/tests/round94* -text whitespace=cr-at-eol
+/tests/round95* -text whitespace=cr-at-eol
+/results/unified_exact_round93/**/*.log -whitespace
+/results/unified_exact_round94/**/*.log -whitespace
+/results/unified_exact_round95/**/*.log -whitespace
+
+# Round96 prospective inputs, drivers and receipts retain their hashed bytes.
+/reference/round96_external/** -text
+/reference/round96_primal_validation/** -text
+/results/unified_exact_round96/** -text whitespace=cr-at-eol
+/scripts/round96*.py -text whitespace=cr-at-eol
+/tests/round96* -text whitespace=cr-at-eol
+/results/unified_exact_round96/**/*.log -whitespace
+
+# Round97 frozen drivers and evidence must preserve receipt hashes on checkout.
+/results/unified_exact_round97/** -text whitespace=cr-at-eol
+/scripts/round97*.py -text whitespace=cr-at-eol
+/tests/round97* -text whitespace=cr-at-eol
+/reference/round97*/** -text
+/results/unified_exact_round97/**/*.log -whitespace
+
+# Round98 source and evidence retain frozen bytes across checkout.
+/results/unified_exact_round98/** -text whitespace=cr-at-eol
+/scripts/round98*.py -text whitespace=cr-at-eol
+/tests/round98* -text whitespace=cr-at-eol
+/reference/round98*/** -text
+/results/unified_exact_round98/**/*.log -whitespace
+
+# Round100 frozen input, driver and evidence hashes survive Windows checkout.
+/results/unified_exact_round100/** -text whitespace=cr-at-eol
+/scripts/round100*.py -text whitespace=cr-at-eol
+/tests/round100* -text whitespace=cr-at-eol
+/reference/round100_confirmation/** -text
+# This inherited role is consumed byte-exactly by the Round100 frozen protocol.
+/reference/round99_confirmation/N2.txt -text
+
+# Round101 prospective driver, evidence and fixture hashes.
+/results/unified_exact_round101/** -text whitespace=cr-at-eol
+/scripts/round101*.py -text whitespace=cr-at-eol
+/tests/round101* -text whitespace=cr-at-eol
+/reference/round101_confirmation/** -text
+/results/unified_exact_round101/**/*.log -whitespace
+
+# Round102 proof/receipt/driver hashes retain exact bytes across checkout.
+/results/unified_exact_round102/** -text whitespace=cr-at-eol
+/scripts/round102*.py -text whitespace=cr-at-eol
+/results/unified_exact_round102/**/*.log -whitespace
+
+# Round103 frozen driver, proof, receipt and input hashes survive checkout.
+/results/unified_exact_round103/** -text whitespace=cr-at-eol
+/scripts/round103*.py -text whitespace=cr-at-eol
+/tests/round103* -text whitespace=cr-at-eol
+/reference/round103_confirmation/** -text
+/results/unified_exact_round103/**/*.log -whitespace
+
+# Round104 frozen drivers, compact evidence and signed review retain exact bytes.
+/results/unified_exact_round104/** -text whitespace=cr-at-eol
+/scripts/round104*.py -text whitespace=cr-at-eol
+/tests/round104* -text whitespace=cr-at-eol
+/results/unified_exact_round104/**/*.log -whitespace
+
+# Round106 public compact carriers and recovery identities retain exact bytes.
+/results/unified_exact_round106/** -text whitespace=cr-at-eol
+/scripts/round106*.py -text whitespace=cr-at-eol
+/tests/round106* -text whitespace=cr-at-eol
+/reference/round106*/** -text
+/include/Round106*.hpp -text
+/src/Round106* -text
+/results/unified_exact_round106/**/*.log -whitespace
+
+# Round107 exact source, frozen protocol, raw receipts and compact carrier bytes.
+/results/unified_exact_round107/** -text whitespace=cr-at-eol
+/scripts/round107*.py -text whitespace=cr-at-eol
+/scripts/round107*.ps1 -text whitespace=cr-at-eol
+/tests/round107* -text whitespace=cr-at-eol
+/results/unified_exact_round107/**/*.log -whitespace
+
+# Preserve historical admission/review bytes, including their final blank lines.
+/results/unified_exact_round107/review/implementation_final17.md whitespace=cr-at-eol,-blank-at-eof
+/results/unified_exact_round107/review/performance_admission_final17.json whitespace=cr-at-eol,-blank-at-eof
+# Preserve Round108 frozen protocols, inputs and raw reconstruction bytes.
+results/unified_exact_round108/** -text
+reference/round108_confirmation/** -text
+scripts/round108*.py -text
+
+# Preserve Round109 frozen input, reader, report and exact public-carrier bytes.
+results/unified_exact_round109/** -text whitespace=cr-at-eol
+reference/round109_geographic/** -text
+scripts/round109* -text whitespace=cr-at-eol
+results/data_generation_citibike_round57/source_station_table.csv -text
+# Audit streams and this inherited parser preserve their actual final blank lines.
+results/unified_exact_round109/**/*.log -whitespace
+results/unified_exact_round109/**/round109_independent_parser.py whitespace=cr-at-eol,-blank-at-eof
+
+# Preserve Round110 actual build, qualification, frozen evidence and raw bytes.
+results/unified_exact_round110/** -text whitespace=cr-at-eol
+scripts/round110* -text whitespace=cr-at-eol
+results/unified_exact_round110/**/*.log -whitespace
+
+# Preserve Round112 actual clocks, signatures, helpers and exact public carrier.
+results/unified_exact_round112/** -text whitespace=cr-at-eol
+scripts/*round112* -text whitespace=cr-at-eol
+results/unified_exact_round112/**/*.log -whitespace
+results/unified_exact_round112/goal.md whitespace=cr-at-eol,-blank-at-eof
+results/unified_exact_round112/history/authorities/** -whitespace
+results/unified_exact_round112/qualification/candidate01_source/** -whitespace
+results/unified_exact_round112/review/design01/production.diff -whitespace
+
+# Preserve Round115 admitted byte hashes and compressed public parts.
+/results/unified_exact_round115/** -text whitespace=cr-at-eol
+/scripts/*round115*.py -text whitespace=cr-at-eol
+/results/unified_exact_round115/compact_evidence/evidence.tar.gz.part* -diff -merge
+
+# Preserve the one-source Round116 recipes, inputs and admitted evidence bytes.
+/results/unified_exact_round116/** -text whitespace=cr-at-eol
+/reference/round116_external/** -text
+/scripts/*round116* -text whitespace=cr-at-eol
+/results/unified_exact_round116/**/*.log -whitespace
+/results/unified_exact_round116/engineering/reporting_reader.diff -whitespace
+
+# Preserve scientific/security publication bytes across Windows Git checkouts.
+/results/unified_exact_round117/** -text whitespace=cr-at-eol
+/results/unified_exact_round117/safe_evidence/*.part* binary
+/results/unified_exact_round116/source/** -text
+/results/unified_exact_round116/compact_evidence/** -text whitespace=cr-at-eol
+/results/unified_exact_round116/public_reproduction.md -text
+/scripts/publication_security.py -text
+/scripts/round117_*.py -text
+/scripts/round116_data.py -text
+/scripts/round116_delivery.py -text
+/tests/test_publication_security.py -text
+
+# Round118 scoped bytes; inherited rules above remain unchanged.
+scripts/round118*.py text eol=lf
+scripts/qualify_round118*.py text eol=lf
+scripts/read_round118.py text eol=lf
+scripts/round118_reference.cpp text eol=lf
+reference/round118_positive/** text eol=lf
+results/unified_exact_round118/**/*.json text eol=lf
+results/unified_exact_round118/**/*.md text eol=lf
+results/unified_exact_round118/**/*.csv text eol=lf
+results/unified_exact_round118/**/*.tsv text eol=lf
+results/unified_exact_round118/compact_evidence/*.part* -text
+# Frozen native/producer outputs retain their original Windows line endings.
+results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
+
+# Preserve Round121 frozen metadata, runtime and input SHA byte identities.
+/results/unified_exact_round121/** -text whitespace=cr-at-eol
+/scripts/*round121* -text whitespace=cr-at-eol
+/reference/round121_confirmation/** -text whitespace=cr-at-eol
+
+# Preserve the exact late Round122 delivery-tool bytes recorded by review/execution receipts.
+/scripts/round122_release.py -text whitespace=cr-at-eol
+/scripts/round122_public_https.py -text whitespace=cr-at-eol
+/results/unified_exact_round122/engineering/public_https_transport_v1.py -text whitespace=cr-at-eol
+/results/unified_exact_round122/engineering/release_before_manifest_newline_fix.py -text whitespace=cr-at-eol
+/results/unified_exact_round122/engineering/cleanup_round122.ps1 -text whitespace=cr-at-eol
+/results/unified_exact_round122/engineering/cleanup_round122_plan_v1.ps1 -text whitespace=cr-at-eol
+
+# Keep actual late receipt/reviewer digests exact; scientific carrier files retain scienceA bytes.
+/results/unified_exact_round122/delivery/** -text whitespace=cr-at-eol
+/results/unified_exact_round122/review/post_formal_* -text whitespace=cr-at-eol
+
+# Preserve the authoritative actual post-PR cleanup receipt bytes.
+/results/unified_exact_round122/cleanup_summary.json -text whitespace=cr-at-eol
+
+# Round136 entry and maintenance receipts retain checked bytes across checkout.
+/scripts/paper_s2.py text eol=lf
+/scripts/verify_paper_s2.py text eol=lf
+/config/paper_s2.json text eol=lf
+/results/unified_exact_round136/** -text whitespace=cr-at-eol
+/results/unified_exact_round136/goal.md whitespace=cr-at-eol,-blank-at-eof

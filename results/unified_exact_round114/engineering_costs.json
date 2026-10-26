@@ -1,0 +1,395 @@
+{
+  "schema": "round114-cost-ledger-separate-engineering-v1",
+  "created_UTC": "2026-10-11T16:35:47.575882+00:00",
+  "scientific_costs": {
+    "fee_rows": [
+      {
+        "label": "cli01",
+        "qualification": true,
+        "starts": 3,
+        "actual_children": 2,
+        "seconds": 178.05349802970886,
+        "exit_code": 0,
+        "actual_exit_observed": true,
+        "necessary_trailer_complete": true,
+        "receipt_SHA": "1129143d52074c1399ee1f9bb6d9b459811a785417aef1ec5c24400b639570a4"
+      },
+      {
+        "label": "finite01",
+        "qualification": true,
+        "starts": 1,
+        "actual_children": 0,
+        "seconds": 4.630215883255005,
+        "exit_code": 1,
+        "actual_exit_observed": true,
+        "necessary_trailer_complete": true,
+        "receipt_SHA": "544a39c79d80dab6f08ece50c330e303c3d0e97d9d0611ec31a9593480a334a8"
+      },
+      {
+        "label": "finite02",
+        "qualification": true,
+        "starts": 1,
+        "actual_children": 0,
+        "seconds": 4.916163206100464,
+        "exit_code": 0,
+        "actual_exit_observed": true,
+        "necessary_trailer_complete": true,
+        "receipt_SHA": "998e23ee08ac9cca6a4700bf5ad70df18935a74d8e0ec3b552fda7a5514325b3"
+      },
+      {
+        "label": "formal01",
+        "qualification": false,
+        "starts": 5,
+        "actual_children": 2,
+        "seconds": 7178.921706250752,
+        "exit_code": 1,
+        "actual_exit_observed": true,
+        "necessary_trailer_complete": true,
+        "receipt_SHA": "dc5216cacc2c964e0cf75ef53db2a0bd43439c4403be71ed359796784e1ffbfd"
+      },
+      {
+        "label": "post01",
+        "qualification": true,
+        "starts": 1,
+        "actual_children": 0,
+        "seconds": 1.873103141784668,
+        "exit_code": 0,
+        "actual_exit_observed": true,
+        "necessary_trailer_complete": true,
+        "receipt_SHA": "69238faf16cfc83e40498905be78a7a31bea89d53cc093c2edd7b3be491edc7a"
+      }
+    ],
+    "conservative_starts": 11,
+    "actual_OS_starts": 9,
+    "outer_seconds_upper": 7368.394686511601,
+    "qualification_conservative_starts": 6,
+    "qualification_outer_seconds_upper": 189.472980260849,
+    "formal_conservative_starts": 5,
+    "formal_actual_children": 2,
+    "formal_outer_seconds_upper": 7178.921706250752,
+    "actual_Optimize_qualification": 6,
+    "actual_Optimize_formal": 5,
+    "unclosed_fees": [],
+    "limits": {
+      "starts": 16,
+      "outer_seconds": 17000,
+      "qualification_starts": 8,
+      "qualification_outer_seconds": 900
+    },
+    "unstarted_declared_slots_refunded": false,
+    "nested_arm_and_native_inclusive_time_added_to_outer_total": false,
+    "unused_budget_authorizes_rerun": false
+  },
+  "engineering_measured_sections": [
+    {
+      "label": "initialization",
+      "measured_seconds": 1.5822234000079334,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/initialization01/receipt.json",
+        "bytes": 224,
+        "SHA256": "c91e950170d456fc8321f4d1c6b651ee5cb5c87e6e6c10fd62158cbfe4dde186"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "original offline reader failure",
+      "measured_seconds": 2.7215553,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/offline_reader_repair01/failure_receipt.json",
+        "bytes": 289,
+        "SHA256": "dcba20f9c8671a91a9d38c6cf294f159b985f1cf21cdc3dac4990cf093a8d68d"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "offline repair01 rebuild",
+      "measured_seconds": 3.5949976,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/offline_reader_repair01/rebuild_receipt.json",
+        "bytes": 282,
+        "SHA256": "9a37f48052545310eacaa2b3ef382521525c1ef677c6f186e41d28b23ac3b589"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "offline repair01 targeted check",
+      "measured_seconds": 0.14927289995830506,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/offline_reader_repair01/targeted_checks.json",
+        "bytes": 1966,
+        "SHA256": "5e2f82d735f50138d8800fd065c1fa601f67ad725264a577d60bc90a4bbd6a98"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "offline repair02 first targeted check failure",
+      "measured_seconds": 0.273855,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/offline_reader_repair02/check_failure01.json",
+        "bytes": 417,
+        "SHA256": "a3700826700c05bcd31a9f1fc6a8b7ecbe011c67a8dd75334a13a39674e1db67"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "offline repair02 rebuild",
+      "measured_seconds": 3.3335243,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/offline_reader_repair02/rebuild_receipt.json",
+        "bytes": 276,
+        "SHA256": "e9311a9c095fcf4d20d3f8183f333ffa8bda93eb2b2a7608b1ee466c9f271133"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "offline repair02 targeted check",
+      "measured_seconds": 0.2229566000169143,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/offline_reader_repair02/targeted_checks.json",
+        "bytes": 4706,
+        "SHA256": "6b5a48b9c87c391827e3f143b7d4e9c36f22d831f3e13c27587e4823c83ec139"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "public pack",
+      "measured_seconds": 9.93293300003279,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/public_pack_receipt.json",
+        "bytes": 455,
+        "SHA256": "87695802169066ef67c19284aed1a499ddadb21d0953ef47771498b0bf4973a8"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "public export",
+      "measured_seconds": 0.20919550000689924,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/public_export_receipt.json",
+        "bytes": 969,
+        "SHA256": "b4bc65231e87a81905eb4593c73134a720e38ab5d5ff9bf66feda770a7d92457"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "actual empty-root restore",
+      "measured_seconds": 3.6425462999613956,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/public_restore_receipt.json",
+        "bytes": 654,
+        "SHA256": "3a1c4908417b5f186f2fb930e958f92d7a4c0d083d25a1f8ae750011851a0968"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "restored-root reader and core comparison",
+      "measured_seconds": 15.1394345,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/restored_reader_receipt.json",
+        "bytes": 1618,
+        "SHA256": "f189ab4495e83361f79688f958a6ca611b540e5bebe08abb8a8d1a7969c7d38a"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "existing scientific commit amend and blob check",
+      "measured_seconds": 1.4046906000003219,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/delivery01/science_commit_receipt.json",
+        "bytes": 438,
+        "SHA256": "9980ebc6725c0a3057ff57b821814d99e5045a901cdfd98790fc30994a241502"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "science push and immediate base verification",
+      "measured_seconds": 24.333268900052644,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/delivery01/push_scientific_payload01.json",
+        "bytes": 1347,
+        "SHA256": "9b7d01ef168d73917f10892388ac7e3480fdf1f02995a566997dd1155874645a"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "Draft PR creation",
+      "measured_seconds": 3.1794034999329597,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/delivery01/pr_creation01.json",
+        "bytes": 561,
+        "SHA256": "0a75beb7878bd7682226d6673d3fdb5d3a8fbb05f756113ebb438e56d4779846"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "actual science-head remote object verification",
+      "measured_seconds": 14.948204999906011,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/remote_verification_payload.json",
+        "bytes": 203610,
+        "SHA256": "a51816ef0f12474a34b391b27f482f54117e4414a8d0bae8ec2adcc499f2232b"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "exact restoration receipt copy",
+      "measured_seconds": 0.011481199995614588,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/delivery01/restoration_receipt_copy01.json",
+        "bytes": 1328,
+        "SHA256": "a9e1d35f953849beb6a504e49be5e60a5ee1873612fe2f2bd5c5d92e86d098e8"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "admission measured read-only review section",
+      "measured_seconds": 2.8933925,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/review/performance_admission.json",
+        "bytes": 35648,
+        "SHA256": "0279c84162d44eb9d81b56d8ddb5adb65e6c3be06c938e8028b760755f0fd69b"
+      },
+      "Optimize": 0,
+      "full_review_orchestration_seconds": null
+    },
+    {
+      "label": "postformal reconstruction 1",
+      "measured_seconds": 3.398772,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/review/postformal01/signed_review.json",
+        "bytes": 101526,
+        "SHA256": "e393976df1bb7b9e8cafdd1d8205feea4e460f26982f33c568ced4ae88697c24"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "postformal reconstruction 2",
+      "measured_seconds": 3.423341,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/review/postformal01/signed_review.json",
+        "bytes": 101526,
+        "SHA256": "e393976df1bb7b9e8cafdd1d8205feea4e460f26982f33c568ced4ae88697c24"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "postformal independent validation",
+      "measured_seconds": 0.5602053999900818,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/review/postformal01/signed_review.json",
+        "bytes": 101526,
+        "SHA256": "e393976df1bb7b9e8cafdd1d8205feea4e460f26982f33c568ced4ae88697c24"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "postformal complete Start check",
+      "measured_seconds": 7.287771500064991,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/review/postformal01/signed_review.json",
+        "bytes": 101526,
+        "SHA256": "e393976df1bb7b9e8cafdd1d8205feea4e460f26982f33c568ced4ae88697c24"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "postformal metadata/history check",
+      "measured_seconds": 0.08936740003991872,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/review/postformal01/signed_review.json",
+        "bytes": 101526,
+        "SHA256": "e393976df1bb7b9e8cafdd1d8205feea4e460f26982f33c568ced4ae88697c24"
+      },
+      "Optimize": 0
+    },
+    {
+      "label": "whole-goal initial review observed UTC interval",
+      "measured_seconds": 651.886,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/review/whole_goal01/signed_review.json",
+        "bytes": 26080,
+        "SHA256": "16a82d5dec9fd52d2c88fe80cc7ba683a8cd324bd765336680aa10b4e5fcd03d"
+      },
+      "measurement": "Difference of actual host UTC observations at review entry and conclusion; covers inspection and reasoning, excludes subsequent report persistence.",
+      "Optimize": 0
+    },
+    {
+      "label": "exact restored review receipt copy",
+      "measured_seconds": 0.012855099979788065,
+      "source_receipt": {
+        "path": "results/unified_exact_round114/engineering/delivery01/restored_review_copy01.json",
+        "SHA256": "946869e144c8f5e0661cc300674846d92d30060d2d440dd7161215e867a1e962"
+      },
+      "Optimize": 0
+    }
+  ],
+  "postformal_engineering_failed_probe_records": [
+    {
+      "scope": "reviewer inline check compile only",
+      "exit_code": 1,
+      "tool_observed_wall_seconds": 0.2067327,
+      "diagnostic": "File \"<stdin>\", line 74\r\n    assert (q['solve_kind']=='LP')==not bool(call['native_preconditions'])\r\n                                    ^^^\r\nSyntaxError: invalid syntax",
+      "Optimize": 0,
+      "native_children": 0
+    },
+    {
+      "scope": "reviewer native-header assumption rejected; actual LP logs have no Variable types header; corrected to require the actual simplex terminal/LP ledger and preserve absent header as unknown",
+      "exit_code": 1,
+      "tool_observed_wall_seconds": 0.7383874,
+      "diagnostic": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 66, in <module>\r\nAssertionError",
+      "Optimize": 0,
+      "native_children": 0
+    },
+    {
+      "scope": "reviewer CSV byte-string comparison rejected harmless 1800 vs 1800.0; corrected to normalize only enumerated numeric fields and retain exact equality for all original identities/texts",
+      "exit_code": 1,
+      "tool_observed_wall_seconds": 0.7530336,
+      "diagnostic": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 113, in <module>\r\nAssertionError: ('historical field', 'G50-C1', 'M-B', 'cap_seconds', '1800', '1800.0')",
+      "Optimize": 0,
+      "native_children": 0
+    },
+    {
+      "scope": "signature command process creation rejected before execution; corrected using short read-only snapshot and apply_patch",
+      "exit_code": null,
+      "process_created": false,
+      "tool_observed_wall_seconds": 0,
+      "diagnostic": "Windows CreateProcess rejected overly long command: \u6587\u4ef6\u540d\u6216\u6269\u5c55\u540d\u592a\u957f\u3002 (os error 206)",
+      "Optimize": 0,
+      "native_children": 0,
+      "files_mutated": 0
+    }
+  ],
+  "postformal_binding_snapshot_measured_seconds": 0.6136819,
+  "unknown_engineering_times": {
+    "orchestration_or_human_wall_seconds": null,
+    "unmeasured_source_edit_reasoning_seconds": null,
+    "full_postformal_reviewer_wall_seconds": null,
+    "full_admission_reviewer_wall_seconds": null,
+    "initial_staging_failures_seconds": null,
+    "whole_goal_report_persistence_and_signature_correction_seconds": null,
+    "receipt_commit_push_and_final_remote_verification_not_yet_observed": null
+  },
+  "engineering_section_sum": null,
+  "do_not_sum_nested_or_overlapping_sections": true,
+  "engineering_not_charged_as_solver_or_qualification_nominal": true,
+  "restored_review_signed_receipt_pending": false,
+  "new_native_Optimize_after_formal_stop": 0,
+  "restored_review_actual_engineering": {
+    "observed_wall_through_signature_preparation_seconds": 578.5032538,
+    "observation_start_utc": "2026-10-11T16:23:40.5172346+00:00",
+    "observation_end_utc": "2026-10-11T16:33:19.0204884+00:00",
+    "independently_measured_member_and_core_comparison_seconds": 6.190451100002974,
+    "comparison_is_nested_in_review_wall_do_not_add": true,
+    "earlier_actual_empty_root_restore_seconds": 3.6425462999613956,
+    "earlier_actual_explicit_root_reader_seconds": 15.1394345,
+    "restoration_and_reader_done_before_review_separate_receipts": true,
+    "solver_or_qualification_time_added_by_review_seconds": 0,
+    "subsequent_persistence_and_handoff_seconds": null,
+    "CPU_breakdown_seconds": null,
+    "human_breakdown_seconds": null,
+    "orchestration_breakdown_seconds": null,
+    "unknowns_are_not_zero": true
+  },
+  "restored_review_attestation_path": "results/unified_exact_round114/review/restored01/signed_review.json",
+  "restored_review_attestation_SHA256": "0a8d6d8c59acf43c9045882eb0ea988b2e1d2f7f521b5cd914a847009240ce19"
+}

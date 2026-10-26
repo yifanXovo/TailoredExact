@@ -1,0 +1,24 @@
+{
+  "K0": 1,
+  "adaptive_split": false,
+  "all_rows_same_frozen_executable": true,
+  "depth": 2,
+  "executable_sha256": "6d96a7c580b8af81cbbb50fba3a5ebece9b0873cb79ad4a4d592d153d6a97040",
+  "maximum_modes_allowed": 2,
+  "note": "Right-censored rows are never treated as exact solves. Their valid final gaps rank modes only after correctness and exact certificate count; Work is the next criterion.",
+  "primary_mode": "single",
+  "round_id": 43,
+  "row_count": 24,
+  "schema": "round43-stage2-envelope-selection-v1",
+  "selected_modes": [
+    "single",
+    "constant"
+  ],
+  "selection_order": [
+    "engineering correctness",
+    "certified row count",
+    "mean final relative gap for right-censored rows",
+    "geometric mean total Work",
+    "simpler mode on exact ties"
+  ]
+}

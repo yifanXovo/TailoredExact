@@ -1,0 +1,11 @@
+{
+  "reason": "historical strong-control T is 2400, not harness default 2850",
+  "affected_id": "D4",
+  "affected_runs": 4,
+  "algorithm_semantic_change": false,
+  "prior_results_excluded": true,
+  "source": "scripts/run_round55_k1_integration.py:T_BY_INSTANCE",
+  "fingerprint_expected": -1613219318,
+  "fingerprint_observed_wrong_T": 148073801,
+  "distinct_performance_scenarios_including_invalid": 11
+}

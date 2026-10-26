@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round109\results\unified_exact_round109\review\round109_independent_final_compare.py", line 30, in <module>
+    for field in ['stage','main_WIN','main_LOSS','main_severe_P_regressions','stratum_WIN','seed1_nonLOSS','seed1_severe_regressions','seed0_WIN_to_seed1_LOSS']:assert ps[field]==selection[field],field
+                                                                                                                                                                        ~~^^^^^^^
+KeyError: 'main_WIN'
+

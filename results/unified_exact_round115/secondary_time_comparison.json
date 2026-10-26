@@ -1,0 +1,88 @@
+{
+  "ordering": {
+    "T_produce": [
+      "P-S",
+      "M-B",
+      "ENS-C",
+      "P-GRB"
+    ],
+    "T_total": [
+      "P-S",
+      "P-GRB",
+      "M-B",
+      "ENS-C"
+    ]
+  },
+  "ordering_differs": true,
+  "actual_clocks": [
+    {
+      "arm": "P-GRB",
+      "T_produce": 3571.484854530776,
+      "T_verify": 0.7543377000838518,
+      "T_total": 3572.2391922308598
+    },
+    {
+      "arm": "ENS-C",
+      "T_produce": 3570.8066784000257,
+      "T_verify": 34.90702469996177,
+      "T_total": 3605.7137030999875
+    },
+    {
+      "arm": "P-S",
+      "T_produce": 1306.5367294000462,
+      "T_verify": 10.792634399957024,
+      "T_total": 1317.3293638000032
+    },
+    {
+      "arm": "M-B",
+      "T_produce": 3570.692636599997,
+      "T_verify": 34.78396290005185,
+      "T_total": 3605.476599500049
+    }
+  ],
+  "total_exceeds_3600": [
+    "ENS-C",
+    "M-B"
+  ],
+  "secondary_pair_classifications": [
+    {
+      "candidate": "ENS-C",
+      "control": "P-GRB",
+      "classification": "WIN",
+      "severe_regression": false
+    },
+    {
+      "candidate": "M-B",
+      "control": "P-GRB",
+      "classification": "WIN",
+      "severe_regression": false
+    },
+    {
+      "candidate": "P-S",
+      "control": "P-GRB",
+      "classification": "WIN",
+      "severe_regression": false
+    },
+    {
+      "candidate": "ENS-C",
+      "control": "P-S",
+      "classification": "LOSS",
+      "severe_regression": true
+    },
+    {
+      "candidate": "M-B",
+      "control": "P-S",
+      "classification": "LOSS",
+      "severe_regression": true
+    },
+    {
+      "candidate": "M-B",
+      "control": "ENS-C",
+      "classification": "LOSS",
+      "severe_regression": true
+    }
+  ],
+  "main_clock_preregistered": true,
+  "cross_round_exact_speedup": false,
+  "Optimize": 0
+}

@@ -1,0 +1,107 @@
+{
+  "records": [
+    {
+      "point_source": "results\\unified_exact_round102\\native01\\raw\\01_F2_J-SHADOW\\external\\native_logs\\L0_terminal_mip.gurobi.log.round102.point.json",
+      "point_sha256": "5f17c7749c69544b49ab95e82f82548706b218b11a5e255b037e347a1a74d8ff",
+      "actual_source": "results\\unified_exact_round102\\native01\\raw\\01_F2_J-SHADOW\\external\\models\\L0_epoch_0_generation_1.lp",
+      "actual_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "source": "optimal original-column native root vector after native root processing",
+      "residual": {
+        "objective": 0.6071799602644684,
+        "maximum_absolute_residual": 3.183231456205249e-12,
+        "violations_over_native_feasibility_tol": []
+      },
+      "old_complete_model_feasible_to_tol": true,
+      "J": [
+        {
+          "family": "occupancy",
+          "fleet_excess": -7843.925611457423,
+          "per_vehicle_excesses": [
+            -4163.247225938718,
+            -3680.678385518705
+          ]
+        },
+        {
+          "family": "actual-direction",
+          "fleet_excess": -11.92561145742318,
+          "per_vehicle_excesses": [
+            -247.24722593871812,
+            235.32161448129494
+          ]
+        },
+        {
+          "family": "desired-direction",
+          "fleet_excess": -2641.925611457423,
+          "per_vehicle_excesses": [
+            -1562.2472259387182,
+            -1079.678385518705
+          ]
+        },
+        {
+          "family": "fixed-charge",
+          "fleet_excess": -1116.757269555054,
+          "per_vehicle_excesses": [
+            -1176.121253323231,
+            59.363983768177015
+          ]
+        }
+      ]
+    },
+    {
+      "point_source": "results\\unified_exact_round102\\native01\\raw\\02_F2_J-SUBMIT\\external\\native_logs\\L0_terminal_mip.gurobi.log.round102.point.json",
+      "point_sha256": "5f17c7749c69544b49ab95e82f82548706b218b11a5e255b037e347a1a74d8ff",
+      "actual_source": "results\\unified_exact_round102\\native01\\raw\\02_F2_J-SUBMIT\\external\\models\\L0_epoch_0_generation_1.lp",
+      "actual_sha256": "a37e2165fb900bb0d26d9158b89ade883202049456b7d1c6180f361070638091",
+      "source": "optimal original-column native root vector after native root processing",
+      "residual": {
+        "objective": 0.6071799602644684,
+        "maximum_absolute_residual": 3.183231456205249e-12,
+        "violations_over_native_feasibility_tol": []
+      },
+      "old_complete_model_feasible_to_tol": true,
+      "J": [
+        {
+          "family": "occupancy",
+          "fleet_excess": -7843.925611457423,
+          "per_vehicle_excesses": [
+            -4163.247225938718,
+            -3680.678385518705
+          ]
+        },
+        {
+          "family": "actual-direction",
+          "fleet_excess": -11.92561145742318,
+          "per_vehicle_excesses": [
+            -247.24722593871812,
+            235.32161448129494
+          ]
+        },
+        {
+          "family": "desired-direction",
+          "fleet_excess": -2641.925611457423,
+          "per_vehicle_excesses": [
+            -1562.2472259387182,
+            -1079.678385518705
+          ]
+        },
+        {
+          "family": "fixed-charge",
+          "fleet_excess": -1116.757269555054,
+          "per_vehicle_excesses": [
+            -1176.121253323231,
+            59.363983768177015
+          ]
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "Optimize_calls": 0
+}

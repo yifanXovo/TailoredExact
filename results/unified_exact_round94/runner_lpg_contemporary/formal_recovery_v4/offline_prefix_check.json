@@ -1,0 +1,161 @@
+{
+  "schema": "round94-formal-prefix-offline-v3",
+  "passed": true,
+  "original_paid_arms": 2,
+  "new_native_processes": 0,
+  "new_optimize_calls": 0,
+  "recovered_records": [
+    {
+      "number": 1,
+      "id": "F2",
+      "arm": "P-GRB",
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round94\\runner_lpg_contemporary\\formal\\raw\\01_F2_P-GRB",
+      "completion": {
+        "schema": "round90-lp-g-g3-completion-v1",
+        "number": 1,
+        "id": "F2",
+        "arm": "P-GRB",
+        "returncode": 0,
+        "process_wall_seconds": 897.1720000002533,
+        "prelaunch_seconds": 0.23499999986961484,
+        "end_to_end_seconds": 897.4070000001229,
+        "wrapper_wall_seconds": 897.1720000002533,
+        "fully_observed_end_to_end_seconds": 897.4070000001229,
+        "postexit_drain_and_restore_seconds": 0.0,
+        "process_cap_seconds": 900,
+        "within_cap": true,
+        "stop_reason": "normal_return",
+        "committed_events": 3260,
+        "ended_unix": 1790577551.5376997
+      },
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.8659435203229894,
+        "L": 0.7577452455123087,
+        "gap": 0.10819827481068067,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "split_evidence": null,
+      "audit_error": null
+    },
+    {
+      "number": 2,
+      "id": "F2",
+      "arm": "ENS-C",
+      "destination": "E:\\codes\\ExactEBRP\\results\\unified_exact_round94\\runner_lpg_contemporary\\formal\\raw\\02_F2_ENS-C",
+      "completion": {
+        "schema": "round90-lp-g-g3-completion-v1",
+        "number": 2,
+        "id": "F2",
+        "arm": "ENS-C",
+        "returncode": 0,
+        "process_wall_seconds": 544.2650000001304,
+        "prelaunch_seconds": 0.26599999982863665,
+        "end_to_end_seconds": 544.530999999959,
+        "wrapper_wall_seconds": 544.2650000001304,
+        "fully_observed_end_to_end_seconds": 544.530999999959,
+        "postexit_drain_and_restore_seconds": 0.0,
+        "process_cap_seconds": 900,
+        "within_cap": true,
+        "stop_reason": "normal_return",
+        "committed_events": 6185,
+        "ended_unix": 1790578096.1376402
+      },
+      "audit_passed": true,
+      "endpoint": {
+        "U": 0.8659435203229894,
+        "L": 0.865943520322989,
+        "gap": 3.3306690738754696e-16,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "split_evidence": {
+        "status": "not_applicable_default_off",
+        "eligible_proposals": 0
+      },
+      "audit_error": null
+    }
+  ],
+  "strongest_original_global_L": 0.865943520322989,
+  "minimum_original_physical_U": 0.8659435203229896,
+  "cross_arm_passed": true,
+  "original_process_wall_seconds": [
+    897.1720000002533,
+    544.2650000001304
+  ],
+  "P_endpoint": {
+    "U": 0.8659435203229894,
+    "L": 0.7577452455123087,
+    "gap": 0.10819827481068067,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "time_limit"
+  },
+  "ENS_endpoint": {
+    "U": 0.8659435203229894,
+    "L": 0.865943520322989,
+    "gap": 3.3306690738754696e-16,
+    "certificate": true,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "optimal"
+  },
+  "scope_check": [
+    {
+      "schema": "round94-native-scope-adapter-v3",
+      "arm": "P-GRB",
+      "native_calls": 1,
+      "lp_calls": [],
+      "mip_calls": [],
+      "global_bound_call_ids": [
+        1
+      ],
+      "ledger_sha256": null,
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "all_flags_strictly_decoded": true
+    },
+    {
+      "schema": "round94-native-scope-adapter-v3",
+      "arm": "ENS-C",
+      "native_calls": 5,
+      "lp_calls": [
+        1,
+        2,
+        3
+      ],
+      "mip_calls": [
+        4,
+        5
+      ],
+      "global_bound_call_ids": [
+        4,
+        5
+      ],
+      "ledger_sha256": "e5ffffbdf6d4e062ccc0d5090188a2bd165e141e423e70273fbf69f197bf356d",
+      "settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 0,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "all_flags_strictly_decoded": true
+    }
+  ]
+}

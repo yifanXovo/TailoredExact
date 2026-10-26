@@ -1,0 +1,46 @@
+{
+  "preexisting_files_preserved": true,
+  "source_head": "91ff7da1b",
+  "failures": [
+    {
+      "label": "mode_extract_F2_01",
+      "phase": "read-only admission",
+      "reason": "existing idle guard rejects any wrapper while real diagnostic solver is active",
+      "solver_process_started": false,
+      "Optimize": 0,
+      "receipt_created": false
+    }
+  ],
+  "abandoned_preparations": [
+    "diagnostic01"
+  ],
+  "label_audit_failure": "diagnostic_F2_01",
+  "label_recovery": "diagnostic_F2_label_recovery01",
+  "configuration_changes": "none",
+  "failed_native_endpoint": {
+    "label": "diagnostic_F5_01",
+    "reason": "external hard stop before native after-call/quality/solution/summary",
+    "qualified_endpoint": false,
+    "outer_fee_preserved": true,
+    "log_bound_not_recovered": true
+  },
+  "separate_paid_retry": {
+    "label": "diagnostic_F5_02",
+    "campaign": "diagnostic04",
+    "same_production_PE": true,
+    "shutdown_reserve_seconds": 30,
+    "physical_T_changed": false,
+    "startup_changed": false,
+    "original_failure_rewritten": false
+  },
+  "matched_controls": "control01 freezes the existing whole-process shutdown reserve30 for all P/ENS/FULL/CORE arms inside original total caps. It does not change native tolerance, mathematical T, P model, startup or adapter/permission configuration.",
+  "engineering_report_failure": {
+    "label": "report01",
+    "reason": "missing json import at final print after all zero-native report outputs persisted",
+    "Optimize": 0,
+    "IIS": 0,
+    "receipt_retained": true,
+    "fresh_repair": "report02",
+    "original_outputs_not_overwritten": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "candidate_results_observed": false,
+  "schema": "round45-severe-regression-policy-v1",
+  "severe_if": "Work ratio > 1.5 AND time ratio > 1.5 AND (time delta > 60 seconds OR Work delta > 100)",
+  "startup_rows_cannot_block_alone": true,
+  "time_delta_gt_seconds": 60,
+  "time_ratio_gt": 1.5,
+  "work_delta_gt": 100,
+  "work_ratio_gt": 1.5
+}

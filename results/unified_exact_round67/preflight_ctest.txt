@@ -1,0 +1,100 @@
+Internal ctest changing into directory: E:/codes/ExactEBRP-round66/build/round67
+Test project E:/codes/ExactEBRP-round66/build/round67
+      Start  1: Round66ArcLoadTests
+ 1/44 Test  #1: Round66ArcLoadTests .....................   Passed    0.14 sec
+      Start  2: Round67LogStateTests
+ 2/44 Test  #2: Round67LogStateTests ....................***Failed    0.08 sec
+offset-domain linking missing
+
+      Start  3: Round65Tests
+ 3/44 Test  #3: Round65Tests ............................   Passed    0.15 sec
+      Start  4: Round64Tests
+ 4/44 Test  #4: Round64Tests ............................   Passed    0.26 sec
+      Start  5: Round63Tests
+ 5/44 Test  #5: Round63Tests ............................   Passed    0.30 sec
+      Start  6: Round62Tests
+ 6/44 Test  #6: Round62Tests ............................   Passed    0.14 sec
+      Start  7: Round61CandidateTests
+ 7/44 Test  #7: Round61CandidateTests ...................   Passed    0.11 sec
+      Start  8: Round59ResearchTests
+ 8/44 Test  #8: Round59ResearchTests ....................   Passed    0.07 sec
+      Start  9: Round60CandidateTests
+ 9/44 Test  #9: Round60CandidateTests ...................   Passed    0.07 sec
+      Start 10: ControllingLeafSchedulerTests
+10/44 Test #10: ControllingLeafSchedulerTests ...........   Passed    0.05 sec
+      Start 11: GlobalGiniTreeTests
+11/44 Test #11: GlobalGiniTreeTests .....................   Passed    0.08 sec
+      Start 12: StrictCertificateTests
+12/44 Test #12: StrictCertificateTests ..................   Passed    0.05 sec
+      Start 13: ConnectivityFlowTests
+13/44 Test #13: ConnectivityFlowTests ...................   Passed    0.05 sec
+      Start 14: StrictSerializationTests
+14/44 Test #14: StrictSerializationTests ................   Passed    0.06 sec
+      Start 15: ModelCorrectnessTests
+15/44 Test #15: ModelCorrectnessTests ...................   Passed    0.04 sec
+      Start 16: DenseProgressTests
+16/44 Test #16: DenseProgressTests ......................   Passed    0.05 sec
+      Start 17: DispersionChildBoundTests
+17/44 Test #17: DispersionChildBoundTests ...............   Passed    0.05 sec
+      Start 18: Round24BackendTests
+18/44 Test #18: Round24BackendTests .....................   Passed    0.12 sec
+      Start 19: Round27PaperSchedulingTests
+19/44 Test #19: Round27PaperSchedulingTests .............   Passed    0.14 sec
+      Start 20: Round28ReplicaTests
+20/44 Test #20: Round28ReplicaTests .....................   Passed    0.13 sec
+      Start 21: Round29PerformanceRecoveryTests
+21/44 Test #21: Round29PerformanceRecoveryTests .........   Passed    0.13 sec
+      Start 22: Round30C5Tests
+22/44 Test #22: Round30C5Tests ..........................   Passed    0.13 sec
+      Start 23: Round31C6Tests
+23/44 Test #23: Round31C6Tests ..........................   Passed    0.13 sec
+      Start 24: Round36CausalTests
+24/44 Test #24: Round36CausalTests ......................   Passed    0.13 sec
+      Start 25: Round37GeometryTests
+25/44 Test #25: Round37GeometryTests ....................   Passed    0.04 sec
+      Start 26: Round40CoarseStartTests
+26/44 Test #26: Round40CoarseStartTests .................   Passed    0.05 sec
+      Start 27: Round40UbGeometryTests
+27/44 Test #27: Round40UbGeometryTests ..................   Passed    0.04 sec
+      Start 28: Round41StaticSegmentedTests
+28/44 Test #28: Round41StaticSegmentedTests .............   Passed    0.05 sec
+      Start 29: Round42StaticSegmentedTests
+29/44 Test #29: Round42StaticSegmentedTests .............   Passed    0.05 sec
+      Start 30: Round43EnvelopeRefinementTests
+30/44 Test #30: Round43EnvelopeRefinementTests ..........   Passed    0.05 sec
+      Start 31: Round44EnvelopeTailRepairTests
+31/44 Test #31: Round44EnvelopeTailRepairTests ..........   Passed    0.05 sec
+      Start 32: Round45AdaptiveParametricTests
+32/44 Test #32: Round45AdaptiveParametricTests ..........   Passed    0.05 sec
+      Start 33: Round46C6RhoTests
+33/44 Test #33: Round46C6RhoTests .......................   Passed    0.13 sec
+      Start 34: Round47AdaptiveMassTests
+34/44 Test #34: Round47AdaptiveMassTests ................   Passed    0.13 sec
+      Start 35: Round48K1AMFTests
+35/44 Test #35: Round48K1AMFTests .......................   Passed    0.06 sec
+      Start 36: Round49K1LPPrimalDualTests
+36/44 Test #36: Round49K1LPPrimalDualTests ..............   Passed    0.05 sec
+      Start 37: Round50IntervalMipTests
+37/44 Test #37: Round50IntervalMipTests .................   Passed    0.04 sec
+      Start 38: Round51TightBigMTests
+38/44 Test #38: Round51TightBigMTests ...................   Passed    0.05 sec
+      Start 39: Round52TailoredCutTests
+39/44 Test #39: Round52TailoredCutTests .................   Passed    0.05 sec
+      Start 40: Round53F0AndCallbackTests
+40/44 Test #40: Round53F0AndCallbackTests ...............   Passed    0.14 sec
+      Start 41: Round54MainlineAndInventoryRouteTests
+41/44 Test #41: Round54MainlineAndInventoryRouteTests ...   Passed    0.05 sec
+      Start 42: Round55StationStateChainTests
+42/44 Test #42: Round55StationStateChainTests ...........   Passed    0.43 sec
+      Start 43: Round56PaperBenchmarkTests
+43/44 Test #43: Round56PaperBenchmarkTests ..............   Passed    0.12 sec
+      Start 44: Round58CitiBikePairedBenchmarkTests
+44/44 Test #44: Round58CitiBikePairedBenchmarkTests .....   Passed    0.06 sec
+
+98% tests passed, 1 tests failed out of 44
+
+Total Test time (real) =   4.38 sec
+
+The following tests FAILED:
+	  2 - Round67LogStateTests (Failed)
+Errors while running CTest

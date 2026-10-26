@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\qualify_round121.py", line 35, in billed
+    actual+=1;execute(l,h)
+              ^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_campaign.py", line 11, in execute
+    supervised(l,i,tick);finish_producer(l,tick,t0unix);verify(l,i)
+                                                        ^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_evidence.py", line 124, in verify
+    j=audit.journal(ROOT,l,d,read(d/'observations.json'));context=ArmModels();contracts=[]
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_evidence.py", line 100, in journal
+    proof=qualify_seed(root,l,observations,read(d/'completion.json'),read(d.parents[1]/'identity.json'))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round121-frozen-d1-confirmation\ExactEBRP\scripts\round121_evidence.py", line 73, in qualify_seed
+    c=j['calls'][cid];assert c['native_preconditions'] is False and cid in j['returned_ids']
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

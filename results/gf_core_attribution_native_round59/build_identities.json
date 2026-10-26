@@ -1,0 +1,33 @@
+{
+  "attribution_source_commit": "a93685308d68e0269fcb70e857162fa686390ee2",
+  "compiler": "MSYS2 UCRT64 g++ 14.2.0",
+  "build_dir": "build/round59-core",
+  "executable_sha256": {
+    "ExactEBRP": "623f673ed42de8b7665c95731bed3ae0fe9a97946f75c50c77c9c31bd8ed0b3e",
+    "Round50IntervalMipExperiment": "7a05dfb5c14a5a7041278bd16e4c48d45fc01b8c6a59a09f68804b1d841ec972",
+    "Round59ResearchTests": "7b83831039eb31bd61e78f526e2f925fcaa97b0fcaa41eca9f2501f6dfcfd1bf"
+  },
+  "diagnostic_source_commit": "2592c1950",
+  "attribution_executable_unchanged_during_runs": true,
+  "diagnostic_executable_sha256": "7a05dfb5c14a5a7041278bd16e4c48d45fc01b8c6a59a09f68804b1d841ec972",
+  "legacy_diagnostic_source_commit": "54c888716d2cc519a4e83e901154f56b4c068885",
+  "legacy_diagnostic_executable_sha256": "95b8f6f98470cec7d5ca9f28897db7f3ac1daa7e3dcf0a21922f853e4d677dbb",
+  "native_mechanism_source_commit": "2592c1950",
+  "native_mechanism_executable_sha256": "7a05dfb5c14a5a7041278bd16e4c48d45fc01b8c6a59a09f68804b1d841ec972",
+  "literal_original_source_commit": "d50e1e413db8da66d2fc10999daae591b7898402",
+  "literal_original_executable_sha256": "f8175ec6e8d90a7d4612b4cdbd7f380dc7146fd8b4a926ae53c624291e9df4ca",
+  "final_regression_source_commit": "96e3c4968c28fc1c5beec1769309cc70d5ff8dc9",
+  "final_regression_build_sha256": {
+    "ExactEBRP": "f7366908d3103e5fa2533a08fdede2f662b0ad8daf6a1ff40487dabb5db2dd34",
+    "Round50IntervalMipExperiment": "c6b83e0f067c6b87a260ea646b6ec8bb0946b0b3046cd67415e2747b7b31a2b9",
+    "Round59ResearchTests": "e023ae7799b342551ff4f63e7b28bae08ffdcffb152c6a332f49f1ec7afdc3da"
+  },
+  "final_ctest": {
+    "passed": 36,
+    "failed": 0,
+    "elapsed_seconds": 2.36,
+    "log_sha256": "c0273770aefcfcde661843e6441940c3e3ffe2a7bdb25afd5de824e053bd269d"
+  },
+  "frozen_attribution_binary_path": "results/gf_core_attribution_native_round59/local_raw/binaries/ExactEBRP-623f673e.exe",
+  "post_performance_change": "telemetry-only integer read for GRB_CB_MIP_SOLCNT; ignored old CSV field; no solver behavior or model change"
+}

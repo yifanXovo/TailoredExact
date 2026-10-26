@@ -1,0 +1,78 @@
+{
+  "status": "ACCEPT_FINITE_ONE_ARM_DERIVED_DISPOSITION",
+  "full_observations_or_other_campaign_raw_read": false,
+  "full_final_review": false,
+  "scope": "The one small author source-loss record, source input SHA bindings, and raw-versus-performance clocks match independently checked arm evidence. All84 counts, per-arm censored fields and complete typed comparison tables remain for full review.",
+  "author_runner_SHA": "4eb5eb4d37945bc07e8bdc417f19a055e4758ebebdb279a76f6d530cad244ff2",
+  "source_loss_record": {
+    "line": "D",
+    "id": "X-35-U",
+    "seed": 1,
+    "method": "S2",
+    "own_physical_zero_certificate_retained": true,
+    "native_proof_qualified": false,
+    "source_reduced": true,
+    "formal_performance_evidence_eligible": false,
+    "raw_reconstructed_T_cert": 448.4828956000274,
+    "formal_performance_T_cert": null,
+    "T_produce": 448.4828956000274,
+    "T_verify": 9.949797699926421,
+    "T_total": 458.4326932999538,
+    "disposition": "UNEVALUABLE formal performance; independent own-zero proof retained; not ordinary open",
+    "damaged_calls": [
+      {
+        "arm": "M-B",
+        "call": 4
+      }
+    ],
+    "rejected_bound_values": [
+      2.2155204177669103e-07,
+      2.3794866331140976e-07,
+      2.889725344877011e-07
+    ],
+    "own_zero_witness_sequences": [
+      21
+    ],
+    "native_source_reliability_unresolved": true,
+    "no_native_retry": true,
+    "sources": [
+      {
+        "path": "results/unified_exact_round132/campaign/D_group24/raw/02_X-35-U_S1_R1_S2/independent_evidence.json",
+        "SHA": "fa5909bd7bf378778deacc0f550846fda4a3fe546fc372577f3975674912a159"
+      },
+      {
+        "path": "results/unified_exact_round132/campaign/D_group24/raw/02_X-35-U_S1_R1_S2/claim_rejections.json",
+        "SHA": "15b3f1800e58b0c454bfae0ff030ce814f5b825c2ac9df2a3df58e4f3f84a349"
+      },
+      {
+        "path": "results/unified_exact_round132/campaign/D_group24/raw/02_X-35-U_S1_R1_S2/producer_receipt.json",
+        "SHA": "253cd8106304a829f878878ad7dbd508645f6fde5cf37a0ea8a2232604924d98"
+      }
+    ]
+  },
+  "checked_inputs": [
+    {
+      "path": "results/unified_exact_round132/source_loss_dispositions.json",
+      "bytes": 2055,
+      "SHA": "3b32eac529e9ea2aafafa7432e6f2f5a706a2c5a81337de52b0a6eb5d6fbf609"
+    },
+    {
+      "path": "results/unified_exact_round132/analysis_inputs.json",
+      "bytes": 30867,
+      "SHA": "edf2b3faa9fb77674b520714556297daf7991ef24117cc2d9a928cbbe5b5b9b1"
+    },
+    {
+      "path": "results/unified_exact_round132/engineering/final_analysis_clock01/reporting_policy.json",
+      "bytes": 1000,
+      "SHA": "4af19f2a5a207c15e23dddff0e093bc53ca071a7a2413842f76c98dd90dae7f9"
+    },
+    {
+      "path": "results/unified_exact_round132/review/source_loss_narrow_check.json",
+      "bytes": 19359,
+      "SHA": "0cb937d4e76bb1608229d00665b0ba4a1a34d06b4baeca180450e4a67e64d7f8"
+    }
+  ],
+  "Optimize": 0,
+  "raw_modified": false,
+  "elapsed_seconds": 0.010225599980913103
+}

@@ -1,0 +1,164 @@
+{
+  "schema": "round117-redaction-v1",
+  "tool_version": "round117-publication-security-v1",
+  "entries": [
+    {
+      "original_path": "results/unified_exact_round116/source/requests/system_data/01.response",
+      "original_sha256": "e90dbc4aab4ceff963cba44e7997875533528175a32a1b718a339463592b282e",
+      "original_bytes": 128348,
+      "sanitized_path": "results/unified_exact_round116/source/requests/system_data/01.response",
+      "sanitized_sha256": "265601dd208341c64c34d9cbd176263be744ba56269ffdbbb6e00627a2afbbc0",
+      "sanitized_bytes": 3286,
+      "categories": [
+        "scripts",
+        "client_credentials",
+        "runtime_configuration",
+        "non-text_attributes"
+      ],
+      "reason": "Remove non-scientific web runtime/session material; preserve source provenance"
+    },
+    {
+      "original_path": "results/unified_exact_round116/source/requests/system_data/01.json",
+      "original_sha256": "5bbc598303ffb3624453efd2527a77a20222b6bb1c76fb19e04e1d261f283406",
+      "original_bytes": 1386,
+      "sanitized_path": "results/unified_exact_round116/source/requests/system_data/01.json",
+      "sanitized_sha256": "cc50b7c6b4f035c2341ce4642ac928364b4b24ba0980cc469d9a25233fe5e3db",
+      "sanitized_bytes": 1383,
+      "categories": [
+        "response_header_whitelist",
+        "source_identity_separated_from_safe_identity"
+      ],
+      "reason": "Remove non-scientific web runtime/session material; preserve source provenance"
+    },
+    {
+      "original_path": "results/unified_exact_round116/source/requests/license/01.response",
+      "original_sha256": "89e7c6dcfd383aeb68422de288eaf8c61e86dd317c8f162de49c31cdc6ada181",
+      "original_bytes": 123565,
+      "sanitized_path": "results/unified_exact_round116/source/requests/license/01.response",
+      "sanitized_sha256": "21928fb25e3d8de216ac68a154a5d875dc8d83151b77066a400b8fea891cb9b6",
+      "sanitized_bytes": 5713,
+      "categories": [
+        "scripts",
+        "client_credentials",
+        "runtime_configuration",
+        "non-text_attributes"
+      ],
+      "reason": "Remove non-scientific web runtime/session material; preserve source provenance"
+    },
+    {
+      "original_path": "results/unified_exact_round116/source/requests/license/01.json",
+      "original_sha256": "a4e7ec9dc0c677c81177d6a41c29b483db53c27958e89cb8ee3ab88726f04cfd",
+      "original_bytes": 1408,
+      "sanitized_path": "results/unified_exact_round116/source/requests/license/01.json",
+      "sanitized_sha256": "27be35bdfd174eb51d717c78bf03e027d81d29552268c0f20d870682b5ffba03",
+      "sanitized_bytes": 1405,
+      "categories": [
+        "response_header_whitelist",
+        "source_identity_separated_from_safe_identity"
+      ],
+      "reason": "Remove non-scientific web runtime/session material; preserve source provenance"
+    },
+    {
+      "original_path": "results/unified_exact_round116/source/requests/discovery/01.json",
+      "original_sha256": "6ff2350501d9103c231226abb6b1869d32f7967ccecddac36318ecb0c5be5c0a",
+      "original_bytes": 1296,
+      "sanitized_path": "results/unified_exact_round116/source/requests/discovery/01.json",
+      "sanitized_sha256": "ff76ee7fe9a667ddf5e947d5405bd8d17b0ff4ba6a126fd61155eec29ce0de50",
+      "sanitized_bytes": 1358,
+      "categories": [
+        "response_header_whitelist",
+        "source_identity_separated_from_safe_identity"
+      ],
+      "reason": "Remove non-scientific web runtime/session material; preserve source provenance"
+    },
+    {
+      "original_path": "results/unified_exact_round116/source/requests/station_information/01.json",
+      "original_sha256": "4209e9d15f42ec61b7674689662be0bea1ff1a03de6355e407e7e8324dc55152",
+      "original_bytes": 1329,
+      "sanitized_path": "results/unified_exact_round116/source/requests/station_information/01.json",
+      "sanitized_sha256": "240ed1de0abd591f494688e37ade60e3e3d212b8067f0f8121cbefebc6971ccc",
+      "sanitized_bytes": 1393,
+      "categories": [
+        "response_header_whitelist",
+        "source_identity_separated_from_safe_identity"
+      ],
+      "reason": "Remove non-scientific web runtime/session material; preserve source provenance"
+    },
+    {
+      "original_path": "results/unified_exact_round116/source/requests/system_information/01.json",
+      "original_sha256": "c51037047167628f291f3d560b3672a8fb05077cb6798ed7b998461a54408b6e",
+      "original_bytes": 1319,
+      "sanitized_path": "results/unified_exact_round116/source/requests/system_information/01.json",
+      "sanitized_sha256": "2cc066db4308f0dc2bf07cbf32f6e46c27b01bad5197f233a17686c69a8dfb0d",
+      "sanitized_bytes": 1380,
+      "categories": [
+        "response_header_whitelist",
+        "source_identity_separated_from_safe_identity"
+      ],
+      "reason": "Remove non-scientific web runtime/session material; preserve source provenance"
+    },
+    {
+      "original_path": "results/unified_exact_round116/source/snapshot.json",
+      "original_sha256": "8d821d846d00ec2c8b3c66e253a77aee8425d3a137d3c96683f3418b476f54f1",
+      "original_bytes": 8932,
+      "sanitized_path": "results/unified_exact_round116/source/snapshot.json",
+      "sanitized_sha256": "89e4e89d6e6641b6aea3c073adb8b2e1643f28f99809e769cf41822e38dde1d1",
+      "sanitized_bytes": 9688,
+      "categories": [
+        "nested_response_headers",
+        "explicit_safe_HTML_identity_mapping"
+      ],
+      "reason": "Remove non-scientific web runtime/session material; preserve source provenance"
+    },
+    {
+      "original_path": "scripts/round116_data.py",
+      "original_sha256": "b2f77cce78333e65449ba201e2e56bf565df5a25c025d6bca32cade2222b684c",
+      "sanitized_path": "scripts/round116_data.py",
+      "sanitized_sha256": "40d31f708e695637fb05787b2fd14bb0b1f1239438d75da98a8bf00be002a3be",
+      "categories": [
+        "closed_unsafe_acquisition"
+      ],
+      "preserved_historical_code_path": "results/unified_exact_round117/historical_helpers/round116_data.py.txt",
+      "reason": "Security publication change; old admitted identity remains attached only to original bytes"
+    },
+    {
+      "original_path": "scripts/round116_delivery.py",
+      "original_sha256": "0a3eaf93989205ef99e5c9f713fd9427669a855d943e5bdcd69bc6ccd5b31ae0",
+      "sanitized_path": "scripts/round116_delivery.py",
+      "sanitized_sha256": "2fe6bda7202ef285097d6836387d28387096734097a72a968679198ec48f7f10",
+      "categories": [
+        "publication_gate"
+      ],
+      "preserved_historical_code_path": "results/unified_exact_round117/historical_helpers/round116_delivery.py.txt",
+      "reason": "Security publication change; old admitted identity remains attached only to original bytes"
+    }
+  ],
+  "original_carrier_parts": [
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz.part001",
+      "SHA": "810418d03e225ba5cb23068260f389b96b975730d32fdc5ca44c7777f09b6a11",
+      "bytes": 33554432
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz.part002",
+      "SHA": "67082e84ada3534608e82bc73bc2c660b2c28544acadc93cb4704ab60ca3599f",
+      "bytes": 33554432
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz.part003",
+      "SHA": "cfce28473192ee9ed7d23d5cbfd27432a5871a56946a2fc9ee8f79c6a929767f",
+      "bytes": 33554432
+    },
+    {
+      "path": "results/unified_exact_round116/compact_evidence/evidence.tar.gz.part004",
+      "SHA": "72867016d0574e484712a4266bbf225c82279a09c85bd18f86b65dedde8185c2",
+      "bytes": 31308475
+    }
+  ],
+  "carrier_mapping_path": "results/unified_exact_round117/carrier_replacement.json",
+  "safe_manifest_path": "results/unified_exact_round117/safe_evidence/manifest.json",
+  "scientific_comparison": "All unchanged old carrier members compared byte for byte during streaming replacement; four-role reconstruction checked separately",
+  "review_scope": "Both HTMLs, five receipts, all nested requests, entire R116 carrier and R115 inherited carrier; no history purge claim",
+  "old_SHA_does_not_verify_safe_bytes": true,
+  "original_hash_cannot_reconstruct_removed_secrets": true
+}

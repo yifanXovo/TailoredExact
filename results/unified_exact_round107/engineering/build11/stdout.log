@@ -1,0 +1,423 @@
+[1/10] Building CXX object CMakeFiles/Round107Tests.dir/tests/round107_tests.cpp.obj
+[2/10] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/PaperExternalGiniTree.cpp.obj
+[3/10] Building CXX object CMakeFiles/exact_ebrp_core.dir/src/GurobiBaseline.cpp.obj
+In file included from C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:1831:
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round103GurobiHull.inc: In member function 'virtual void ebrp::{anonymous}::GurobiFixedIntervalBackend::prepareResourceHull(ebrp::FixedIntervalMipRequest&)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round103GurobiHull.inc:69:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   69 |             if(!name)throw std::runtime_error("round103_column_name");identity.names[j]=name;}
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round103GurobiHull.inc:69:71: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   69 |             if(!name)throw std::runtime_error("round103_column_name");identity.names[j]=name;}
+      |                                                                       ^~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round103GurobiHull.inc: In lambda function:
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round103GurobiHull.inc:130:21: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  130 |                     if(!m.optimal)return m;m.lambda.resize(added);m.direction.resize(n,{0,0,0});std::vector<double> dual(constraints);
+      |                     ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round103GurobiHull.inc:130:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  130 |                     if(!m.optimal)return m;m.lambda.resize(added);m.direction.resize(n,{0,0,0});std::vector<double> dual(constraints);
+      |                                            ^
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round103GurobiHull.inc:133:21: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+  133 |                     for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(widths[i][t])m.direction[i][t]=(dual[lower[i][t]]+dual[upper[i][t]])/widths[i][t];return m;
+      |                     ^~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round103GurobiHull.inc:133:154: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+  133 |                     for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(widths[i][t])m.direction[i][t]=(dual[lower[i][t]]+dual[upper[i][t]])/widths[i][t];return m;
+      |                                                                                                                                                          ^~~~~~
+In file included from C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:1832:
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc: In member function 'virtual void ebrp::{anonymous}::GurobiFixedIntervalBackend::prepareObjectiveResources(ebrp::FixedIntervalMipRequest&)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc:69:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   69 |             if(!name)throw std::runtime_error("round104_column_name");identity.names[j]=name;}
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc:69:71: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   69 |             if(!name)throw std::runtime_error("round104_column_name");identity.names[j]=name;}
+      |                                                                       ^~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc: In lambda function:
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc:139:21: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  139 |                     if(!m.optimal)return m;m.lambda.resize(added);m.direction.resize(n,{0,0,0});std::vector<double> dual(constraints);
+      |                     ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc:139:44: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  139 |                     if(!m.optimal)return m;m.lambda.resize(added);m.direction.resize(n,{0,0,0});std::vector<double> dual(constraints);
+      |                                            ^
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc:142:21: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+  142 |                     for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(widths[i][t])m.direction[i][t]=(dual[lower[i][t]]+dual[upper[i][t]])/widths[i][t];return m;
+      |                     ^~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc:142:154: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+  142 |                     for(std::size_t i=1;i<n;++i)for(int t=0;t<3;++t)if(widths[i][t])m.direction[i][t]=(dual[lower[i][t]]+dual[upper[i][t]])/widths[i][t];return m;
+      |                                                                                                                                                          ^~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc: In member function 'virtual void ebrp::{anonymous}::GurobiFixedIntervalBackend::prepareObjectiveResources(ebrp::FixedIntervalMipRequest&)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc:193:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  193 |                 if(pi[j]>0)++positive_pi;if(pi[j]<0)active.push_back(pool_rows[j]);}
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round104GurobiObjective.inc:193:42: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  193 |                 if(pi[j]>0)++positive_pi;if(pi[j]<0)active.push_back(pool_rows[j]);}
+      |                                          ^~
+In file included from C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:4200:
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc: In member function 'ebrp::SolverNeutralModelDomain ebrp::{anonymous}::R105Session::domain(GRBmodel*)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:82:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   82 |             if (!name) throw std::runtime_error("round105_missing_column");d.names[i]=name; }
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:82:76: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   82 |             if (!name) throw std::runtime_error("round105_missing_column");d.names[i]=name; }
+      |                                                                            ^
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc: In member function 'int ebrp::{anonymous}::R105Session::optimize(GRBmodel*, const std::string&, const std::filesystem::__cxx11::path&)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:126:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  126 |         if(b) calls<<bound;calls<<',';if(o)calls<<objective;
+      |         ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:126:28: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  126 |         if(b) calls<<bound;calls<<',';if(o)calls<<objective;
+      |                            ^~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc: In member function 'ebrp::Round105OracleResult ebrp::{anonymous}::R105Session::oracle(const ebrp::Round105Pattern&, const std::filesystem::__cxx11::path&, bool)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:170:21: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  170 |                     if(next!=-1)throw std::runtime_error("round105_oracle_ambiguous_arc");next=j;
+      |                     ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:170:91: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  170 |                     if(next!=-1)throw std::runtime_error("round105_oracle_ambiguous_arc");next=j;
+      |                                                                                           ^~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:173:21: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+  173 |                     else throw std::runtime_error("round105_oracle_open_route");break; }
+      |                     ^~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:173:81: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+  173 |                     else throw std::runtime_error("round105_oracle_open_route");break; }
+      |                                                                                 ^~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:225:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  225 |                 if(i<1 || i>in.V)throw std::runtime_error("round105_iis_bad_station");groups.insert(i);
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:225:87: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  225 |                 if(i<1 || i>in.V)throw std::runtime_error("round105_iis_bad_station");groups.insert(i);
+      |                                                                                       ^~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc: In function 'ebrp::SolveResult ebrp::{anonymous}::r105Solve(const ebrp::Instance&, const ebrp::SolveOptions&, const ebrp::SolveResult&, ebrp::SolveResult&)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:367:32: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  367 |                 if(z){++served;if(pick!=std::max(0,in.initial[i]-inventory[i]) || drop!=std::max(0,inventory[i]-in.initial[i]))
+      |                                ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:368:87: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  368 |                     throw std::runtime_error("round105_inventory_operation_mismatch");p[k].operation[i]=pick-drop;}
+      |                                                                                       ^
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:401:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  401 |             if(!cuts)throw std::runtime_error("round105_conflict_persist_failed");cut=true;
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round105GurobiDecomposition.inc:401:83: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  401 |             if(!cuts)throw std::runtime_error("round105_conflict_persist_failed");cut=true;
+      |                                                                                   ^~~
+In file included from C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:4201:
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiEvents.inc: In member function 'void ebrp::{anonymous}::R106State::candidate(GRBmodel*, void*)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiEvents.inc:163:32: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  163 |                 if(z){++served;if(p!=std::max(0,in.initial[i]-inventory[i])||d!=std::max(0,inventory[i]-in.initial[i]))
+      |                                ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiEvents.inc:164:86: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  164 |                     throw std::runtime_error("round106_inventory_operation_mapping");cars[k].operation[i]=p-d;}
+      |                                                                                      ^~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiEvents.inc:223:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  223 |                 if(cuts.empty())throw std::runtime_error("round106_proved_mode_without_raw_violated_lazy");break;
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiEvents.inc:223:108: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  223 |                 if(cuts.empty())throw std::runtime_error("round106_proved_mode_without_raw_violated_lazy");break;
+      |                                                                                                            ^~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiEvents.inc:238:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  238 |             if(!lazy)throw std::runtime_error("round106_lazy_ledger_persist_failed");++rejected;
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiEvents.inc:238:86: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  238 |             if(!lazy)throw std::runtime_error("round106_lazy_ledger_persist_failed");++rejected;
+      |                                                                                      ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiEvents.inc:240:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  240 |             if(expired())cancel(master,"global_deadline_after_valid_rejection");return;
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiEvents.inc:240:81: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  240 |             if(expired())cancel(master,"global_deadline_after_valid_rejection");return;
+      |                                                                                 ^~~~~~
+In file included from C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:4202:
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiResearch.inc: In function 'std::vector<double> ebrp::{anonymous}::r106FileVector(const std::filesystem::__cxx11::path&, const ebrp::SolverNeutralModelDomain&)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiResearch.inc:8:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+    8 |         if(line.empty()||line[0]=='#')continue;std::istringstream s(line);std::string name;double v=0;
+      |         ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiResearch.inc:8:48: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+    8 |         if(line.empty()||line[0]=='#')continue;std::istringstream s(line);std::string name;double v=0;
+      |                                                ^~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiResearch.inc: In function 'std::vector<ebrp::RoutePlan> ebrp::{anonymous}::r106FleetDecode(const ebrp::Instance&, const ebrp::SolverNeutralModelDomain&, const std::vector<double>&)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiResearch.inc:22:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   22 |                 if(next!=-1)throw std::runtime_error("offline_fleet_ambiguous_arc");next=j;
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiResearch.inc:22:85: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   22 |                 if(next!=-1)throw std::runtime_error("offline_fleet_ambiguous_arc");next=j;
+      |                                                                                     ^~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiResearch.inc: In function 'int ebrp::{anonymous}::r106ScriptedGet(void*, int, int, void*)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiResearch.inc:70:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+   70 |     else if(what==GRB_CB_MIPSOL_OBJBND)*static_cast<double*>(out)=s.bound;else return 1;return 0;
+      |     ^~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round106GurobiResearch.inc:70:89: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+   70 |     else if(what==GRB_CB_MIPSOL_OBJBND)*static_cast<double*>(out)=s.bound;else return 1;return 0;
+      |                                                                                         ^~~~~~
+In file included from C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:4203:
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc: In member function 'void ebrp::{anonymous}::R107State::candidate(GRBmodel*, void*)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:227:32: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  227 |                 if(z){++served;if(p!=std::max(0,in.initial[i]-inventory[i])||d!=std::max(0,inventory[i]-in.initial[i]))
+      |                                ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:228:86: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  228 |                     throw std::runtime_error("round107_inventory_operation_mapping");cars[k].operation[i]=p-d;}
+      |                                                                                      ^~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:299:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  299 |                 if(cuts.empty())throw std::runtime_error("round107_proved_mode_without_raw_violated_lazy");break;
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:299:108: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  299 |                 if(cuts.empty())throw std::runtime_error("round107_proved_mode_without_raw_violated_lazy");break;
+      |                                                                                                            ^~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:314:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  314 |             if(!lazy)throw std::runtime_error("round107_lazy_ledger_persist_failed");++rejected;
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:314:86: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  314 |             if(!lazy)throw std::runtime_error("round107_lazy_ledger_persist_failed");++rejected;
+      |                                                                                      ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:317:13: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  317 |             if(expired())cancel(master,"global_deadline_after_valid_rejection");return;
+      |             ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:317:81: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  317 |             if(expired())cancel(master,"global_deadline_after_valid_rejection");return;
+      |                                                                                 ^~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:344:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  344 |                 if(expired())cancel(master,"global_deadline_after_verified_candidate");return;
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:344:88: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  344 |                 if(expired())cancel(master,"global_deadline_after_verified_candidate");return;
+      |                                                                                        ^~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc: In member function 'virtual ebrp::FixedIntervalMipOutcome ebrp::{anonymous}::R107FrontierBackend::solve(const ebrp::FixedIntervalMipRequest&)':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:663:21: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  663 |                     if(found==evidence.cache.end()||found->second.status!=Round105OracleStatus::Feasible)break;fleet.push_back(found->second.route);
+      |                     ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:663:112: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  663 |                     if(found==evidence.cache.end()||found->second.status!=Round105OracleStatus::Feasible)break;fleet.push_back(found->second.route);
+      |                                                                                                                ^~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:713:17: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+  713 |                 if(out.native_bound_available)q.native_evidence->nativeBound(journal_call,out.native_bound);q.native_evidence->returned(journal_call,0);journal_finalized=true;}
+      |                 ^~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/Round107GurobiFrontier.inc:713:109: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+  713 |                 if(out.native_bound_available)q.native_evidence->nativeBound(journal_call,out.native_bound);q.native_evidence->returned(journal_call,0);journal_finalized=true;}
+      |                                                                                                             ^
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv**, const char*, int, int, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:220:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv**, const char*, int, int, int)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv**, int, int, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:221:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv**, int, int, int)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:222:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = void (*)(_GRBenv*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:223:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(_GRBenv*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = const char* (*)(_GRBenv*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:224:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'const char* (*)(_GRBenv*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = void (*)(int*, int*, int*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:225:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(int*, int*, int*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, _GRBmodel**); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:226:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, _GRBmodel**)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, _GRBmodel**, const char*, int, double*, double*, double*, char*, char**); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:227:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, _GRBmodel**, const char*, int, double*, double*, double*, char*, char**)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int, int*, double*, double, double, double, char, const char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:228:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int, int*, double*, double, double, double, char, const char*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:229:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = _GRBenv* (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:230:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to '_GRBenv* (*)(_GRBmodel*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:231:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, int)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, double); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:232:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, double)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, const char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:233:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, const char*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, int*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:234:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, int*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBenv*, const char*, double*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:235:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBenv*, const char*, double*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int (*)(_GRBmodel*, void*, int, void*), void*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:236:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int (*)(_GRBmodel*, void*, int, void*), void*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(void*, int, int, void*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:237:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, int, int, void*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(void*, const double*, double*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:238:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, const double*, double*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(void*, int, const int*, const double*, char, double); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:239:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(void*, int, const int*, const double*, char, double)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = void (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:241:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'void (*)(_GRBmodel*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:243:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:244:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, double*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:245:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, double*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, int, int*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:246:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, int, int*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, char**); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:247:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, char**)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, int, double*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:248:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, int, double*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*, int, int, char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:249:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*, int, int, char*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int, int*, double*, char, double, const char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:253:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int, int*, double*, char, double, const char*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, const char*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:255:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, const char*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = int (*)(_GRBmodel*, int*, int*, int*, double*, int, int); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:256:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'int (*)(_GRBmodel*, int*, int*, int*, double*, int, int)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp: In instantiation of 'bool ebrp::{anonymous}::resolve(HMODULE, const char*, T&) [with T = _GRBmodel* (*)(_GRBmodel*); HMODULE = HINSTANCE__*]':
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:257:5:   required from here
+  214 |     if (!resolve(api.library, symbol, api.member)) { \
+      |          ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/Administrator/.codex/worktrees/round107-ens-frontier-route-events/ExactEBRP/src/GurobiBaseline.cpp:117:14: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to '_GRBmodel* (*)(_GRBmodel*)' [-Wcast-function-type]
+  117 |     target = reinterpret_cast<T>(GetProcAddress(library, name));
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[4/10] Linking CXX static library libexact_ebrp_core.a
+[5/10] Linking CXX executable Round65ReferenceBuild.exe
+[6/10] Linking CXX executable Round106Research.exe
+[7/10] Linking CXX executable Round107Tests.exe
+[8/10] Linking CXX executable ExactEBRP.exe
+[9/10] Linking CXX executable Round105Tests.exe
+[10/10] Linking CXX executable Round106Tests.exe

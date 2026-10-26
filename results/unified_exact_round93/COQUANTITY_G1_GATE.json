@@ -1,0 +1,35 @@
+{
+  "schema": "round93-coquantity-g1-qualified-driver-v1",
+  "status": "qualified",
+  "authority": "Root G1 acceptance and one fixed G2 batch authorization",
+  "scope": "One D6/E8/S12 diagnostic each, 120 seconds whole-case, total 360 seconds, no retry or production integration",
+  "git_source_commit": "031352810",
+  "preregistration_sha256": "d853322f29f91b12027f3d82229bc94afae654e90b4a63f6158b4042419106bb",
+  "driver_binary": {
+    "sha256": "fa67457fcb80a6b385b147bd6fda96c83593c106f8da75b471243d4bd2331c8c",
+    "path": "build/research/round93-coquantity/Round93CoQuantityDiagnostic.exe"
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "81314778f2a24a5e504bca2cb8e8caece917c4139be795b3fa2ea2e59866c087",
+    "include/Round93CoQuantityDescent.hpp": "92656c6a27dda13b794965fdf6d49bcc38007d16b6780f0ba822f62134253ee2",
+    "src/Round93CoQuantityDescent.cpp": "cf3ea08852f56a10bceeb59c169ff92de4d9d8aad0914a7233985ce7da4f2012",
+    "tests/round93_co_quantity_tests.cpp": "b8008945cea3244978b9ff1fd40bb732d54835469c8dce430865ac8894f9edb9",
+    "tests/round93_co_quantity_diagnostic.cpp": "8e339616123818b7f8fbf7b2f6b69502f8ec4663efb7ad0c29b4e5126466ce8a",
+    "src/Evaluator.cpp": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+    "src/Result.cpp": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+    "src/Parser.cpp": "9402d2744b4b2a7a83c3152d90d6d6438ca9c3e417d1a57da14dd8101c3b2911",
+    "src/ProcessPhaseLedger.cpp": "4e25f27d8d028dcd5a6f390387000f57813bdcdb998bd74ba184ab130f5bb302",
+    "include/PhysicalDurationTolerance.hpp": "06121e8deb0e00b86239cca2a5f58a210c864c6a74710d76882e2466f9fc1f2a",
+    "src/Round75QuantityDescent.cpp": "f904a7f7355e897df1aff3d07757d8c2ac5b8dff134235c061637d46a87c0075",
+    "src/Round76PhysicalClosure.cpp": "a9a43c9db00096fc81168cf30a5b2805cacf42b0de9b42b723094f4007db8ce8",
+    "src/Round83BlockExchange.cpp": "7402242968c8fa5db9957089b132b0afde893110f302a841b5a8ca76d115faf9",
+    "scripts/round93_coquantity_diagnostic.py": "79a1440e6690e0299211149457cf112cfcaae9c79d5985133dd37f5b8000cd09"
+  },
+  "reviews": [
+    "results/unified_exact_round93/math_source_static_review.md",
+    "results/unified_exact_round93/g1_independent_evidence_review.md",
+    "results/unified_exact_round93/math_g2_harness_static_review.md"
+  ],
+  "g1_manifest_sha256": "0f911a2a1815510e4902c73c0ed2797ebcc1ea2f0ad05fddc780562df609abb4",
+  "cost_caveat": "G1 build full wall was not captured; first live tool wait30.007s is only a paid prefix. G2 full wall must use an outer Stopwatch through final process exit."
+}

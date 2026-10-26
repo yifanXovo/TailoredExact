@@ -1,0 +1,25 @@
+{
+  "decision": "HOLD",
+  "error": "Traceback (most recent call last):\n  File \"E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\review\\round110_independent_review.py\", line 351, in main\n    candidate, campaign, header = identity(a, request, args.mode)\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\codes\\ExactEBRP-round110\\results\\unified_exact_round110\\review\\round110_independent_review.py\", line 55, in identity\n    a.require(candidate['production_PE_SHA'] == contract['production_PE_SHA'] ==\n                                                ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\nKeyError: 'production_PE_SHA'\n",
+  "mode": "admission",
+  "Optimize": 0,
+  "native_environment": 0,
+  "completed_checks": 16,
+  "read_bindings": {
+    "results/unified_exact_round109/review/round109_independent_parser.py": "ecfb894faa24bc8c5889a0466051f5cc709cfa2969c3ca6529ab826c237acb3a",
+    "results/unified_exact_round109/review/round109_independent_kernel.py": "3bb8f84f4949ca59cc8720a4acd04d568a41f9eac1382f26138066d5c49f6287",
+    "results/unified_exact_round109/review/round109_independent_decision.py": "b518597b8ccaf100607e4e6738688be9032957039396e5bb23a3f0ebe817a926",
+    "results/unified_exact_round109/review/round109_independent_seed_scope.py": "847092a0354fb69ad6151dbe45e9d4c175ea39687c597a1fab8bae6ed5adf8b9",
+    "results/unified_exact_round110/review/admission_request.json": "27fcc6afe799ce3dd3bfffd80c9b1a81e3f7c6bb0c7700b6faa1f447ab21af27",
+    "results/unified_exact_round110/candidate_identity.json": "9380dfe6c680c8b039ccd6f678890e1903b46d656c79b7bfb724cd49bb089a36",
+    "results/unified_exact_round110/candidate_contract_freeze.json": "62adf760b93bd0195d1722e38b8dfd95cacc0e4441d54a2a8294c049d9fb44e1",
+    "results/unified_exact_round110/campaign/identity.json": "7f7fa09b73371b489f6eb9498add7a2b323f5c1e5bcf6e6af1b48ff84b149c41"
+  },
+  "explicit_read_root": "E:\\codes\\ExactEBRP-round110",
+  "no_original_root_fallback": true,
+  "reviewer_source_bindings": {
+    "round110_independent_review.py": "b3bd8d133e52f853f1134f9c7252faf597482593d09ae99fb19288c756f21cec",
+    "round110_independent_core.py": "ef8d76e7d458ba8d7ca56af29a46acbd2fb74ecb407bc60683449c7241bf5b58",
+    "round110_independent_cold_rejection.py": "2a94b3b64953c8e55a4b56c2a1423791b172c9cf9147e268d24469cc7b6db1de"
+  }
+}

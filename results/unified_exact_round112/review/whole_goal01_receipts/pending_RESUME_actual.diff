@@ -1,0 +1,18 @@
+diff --git a/results/unified_exact_round112/RESUME.md b/results/unified_exact_round112/RESUME.md
+index dcd3a8bc9..5b0e7758a 100644
+--- a/results/unified_exact_round112/RESUME.md
++++ b/results/unified_exact_round112/RESUME.md
+@@ -74,6 +74,11 @@ BLOCKED_PUBLIC_RESTORATION_VERIFIED, with no original-root science fallback.
+ The historical admission reader binding is explicitly superseded by the
+ independently reviewed final offline reader; 206 production source and 38
+ performance-helper bindings remain unchanged.
+-Next: later actual-recovery receipt commit; English stacked Draft PR base R111;
+-remote verification and extra whole-goal audit. Scientific state stays BLOCKED.
++Actual-recovery receipts committed and pushed at
++1e90dbc5eacddedf925d88c8608e897c56b4ad69. English stacked Draft PR174 is open:
++https://github.com/yifanXovo/TailoredExact/pull/174, base R111 at ded38c756.
++Actual remote01 verifies that existing head/base/OPEN/DRAFT and all 890 required
++Git blobs, including 645 current-round files and the exact single carrier.
++Next: extra independent whole-goal audit, later remote/audit receipt commit,
++push, and final read-only remote check. Scientific state stays BLOCKED.
+ No new mechanism, default change, old-PR rewrite or automatic follow-up long run.

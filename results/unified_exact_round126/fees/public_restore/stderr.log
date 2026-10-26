@@ -1,0 +1,55 @@
+Traceback (most recent call last):
+  File "D:\msys64\ucrt64\lib\python3.12\urllib\request.py", line 1344, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "D:\msys64\ucrt64\lib\python3.12\http\client.py", line 1336, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "D:\msys64\ucrt64\lib\python3.12\http\client.py", line 1382, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "D:\msys64\ucrt64\lib\python3.12\http\client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "D:\msys64\ucrt64\lib\python3.12\http\client.py", line 1091, in _send_output
+    self.send(msg)
+  File "D:\msys64\ucrt64\lib\python3.12\http\client.py", line 1035, in send
+    self.connect()
+  File "D:\msys64\ucrt64\lib\python3.12\http\client.py", line 1477, in connect
+    self.sock = self._context.wrap_socket(self.sock,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\msys64\ucrt64\lib\python3.12\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\round126\scripts\round126_public_restore.py", line 119, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round126\scripts\round126_public_restore.py", line 32, in main
+    name='results/unified_exact_round126/export_manifest.json';blob=get(name);manifest=json.loads(blob)
+                                                                    ^^^^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\round126\scripts\round126_public_restore.py", line 26, in get
+    with urllib.request.urlopen(base+name,timeout=45) as response:return response.read()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\urllib\request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\urllib\request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\urllib\request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\urllib\request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\urllib\request.py", line 1392, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\urllib\request.py", line 1347, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>

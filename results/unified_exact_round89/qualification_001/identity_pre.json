@@ -1,0 +1,54 @@
+{
+  "lease_sha256": "bb6d7a746ae0b9fb8601721dc3249fa233d9b88bedd1c353e4a448f4645e7972",
+  "source_commit": "bc8d80efb59ecbc20082c7514b2ca7dca559d38e",
+  "checked_utc": "2026-09-26T21:24:45.8378502Z",
+  "sources": [
+    {
+      "path": "include/NativeOtB1.hpp",
+      "sha256": "bd64c92a83d109c602dbb31bd10bbba524db857bb357fee6ba26c7d8da3df0eb"
+    },
+    {
+      "path": "src/NativeOtB1.cpp",
+      "sha256": "e4722c675c6470d85f369a80304adace4403b61c579d95c6ff62594b8576ef0b"
+    },
+    {
+      "path": "src/GurobiBaseline.cpp",
+      "sha256": "b12aa28adae1792b3ba7d3f75cedfec3ffc926410fe9a0f6daa0784b192a0eab"
+    },
+    {
+      "path": "include/Instance.hpp",
+      "sha256": "fd081f82b114fe2bc5c9a23d08f50c50977c148ef7406b2c536f88757f4bd720"
+    },
+    {
+      "path": "include/FixedIntervalMipBackend.hpp",
+      "sha256": "7c0f5e30752c64893cacfdb710930a72f477bef0928d5c89fb3ed0246d77756c"
+    },
+    {
+      "path": "src/main.cpp",
+      "sha256": "bde69286c291d74abb719e9f266cb994133319fdfa3b5d5c71478d9ef92c7e20"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "eda744ecf2bdacfd596a2e1f6686209ab1288bcd632dc9a815e8b7b743020fb7"
+    },
+    {
+      "path": "tests/round89_native_ot_b1_micro.cpp",
+      "sha256": "24e5b6c49dfa91108e1e1f4f538cc7c9a3a0564888670a02ce4fe8ac5b82d2e0"
+    },
+    {
+      "path": "tests/round89_native_ot_b1_fraction_oracle.py",
+      "sha256": "c772ea7a25f43f5027298e14f42a7ff32681ae17a71291a894b1ac8bb4926caf"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "build/research/round89-native-ot-b1/ExactEBRP.exe",
+      "sha256": "8d5f0ad4a3cf588875a6a3b8ac67c5bdbb2b2df54a5fd49bea56de2034a17e8d"
+    },
+    {
+      "path": "build/research/round89-native-ot-b1/Round89NativeOtB1Micro.exe",
+      "sha256": "678780b1109469080068720ad076be43589ccda164dff9c9f6004dc44803b947"
+    }
+  ],
+  "all_match": true
+}

@@ -1,0 +1,1056 @@
+{
+  "binary_sha256": "7ea6b0eb3500084f6b93748ca43bedfb7ac7ec04591dd19c889a195e1ad31943",
+  "committed_events": 65,
+  "native_calls_started": 7,
+  "native_calls_returned": 7,
+  "physical_witnesses": 33,
+  "native_physical_witnesses": 32,
+  "scoped_bound_events": 17,
+  "global_native_bound_events": 17,
+  "UB": 0.296258586409751,
+  "LB": 0.28144494010980303,
+  "gap": 0.014813646299947969,
+  "physical_upper_available": true,
+  "lower_bound_source": "complete_domain_native_evidence",
+  "certificate": false,
+  "solver_finalization_certificate": false,
+  "explanation": "Observational interrupted endpoint; no native optimality or rational certificate is inferred.",
+  "witnesses": [
+    {
+      "F": 0.384304091687546,
+      "G": 0.0795643099893529,
+      "P": 2.0315985446546208,
+      "stations": 47,
+      "pickup": 139,
+      "drop": 138,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "same_run_verified_startup",
+      "call": 0,
+      "sequence": 2,
+      "available": 12.967999999877065
+    },
+    {
+      "F": 0.384304091687546,
+      "G": 0.0795643099893529,
+      "P": 2.0315985446546208,
+      "stations": 47,
+      "pickup": 139,
+      "drop": 138,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 6,
+      "sequence": 14,
+      "available": 58.186999999918044
+    },
+    {
+      "F": 0.384304091687546,
+      "G": 0.0795643099893529,
+      "P": 2.0315985446546208,
+      "stations": 47,
+      "pickup": 139,
+      "drop": 138,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 20,
+      "available": 92.375
+    },
+    {
+      "F": 0.3841567178451383,
+      "G": 0.0794168963953924,
+      "P": 2.0315988096649726,
+      "stations": 47,
+      "pickup": 140,
+      "drop": 139,
+      "maximum_duration": 7190.87438593076,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 29,
+      "available": 576.0
+    },
+    {
+      "F": 0.38358676859080115,
+      "G": 0.08044522167521674,
+      "P": 2.020943646103896,
+      "stations": 47,
+      "pickup": 141,
+      "drop": 140,
+      "maximum_duration": 7184.116593617511,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 30,
+      "available": 576.3429999998771
+    },
+    {
+      "F": 0.36887562321071865,
+      "G": 0.08060524858791503,
+      "P": 1.9218024974853576,
+      "stations": 47,
+      "pickup": 145,
+      "drop": 144,
+      "maximum_duration": 7184.116593617511,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 31,
+      "available": 581.030999999959
+    },
+    {
+      "F": 0.36114666576571036,
+      "G": 0.07550482997101705,
+      "P": 1.9042789052979556,
+      "stations": 48,
+      "pickup": 144,
+      "drop": 143,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 32,
+      "available": 584.6400000001304
+    },
+    {
+      "F": 0.36073188522523836,
+      "G": 0.07473778348851602,
+      "P": 1.9066273449114823,
+      "stations": 48,
+      "pickup": 144,
+      "drop": 143,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 33,
+      "available": 587.0460000000894
+    },
+    {
+      "F": 0.35272419025186585,
+      "G": 0.07605862471215194,
+      "P": 1.8444371035980927,
+      "stations": 48,
+      "pickup": 144,
+      "drop": 143,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 34,
+      "available": 589.2650000001304
+    },
+    {
+      "F": 0.35247784864442194,
+      "G": 0.07629001788731678,
+      "P": 1.841252205047368,
+      "stations": 48,
+      "pickup": 144,
+      "drop": 143,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 35,
+      "available": 592.2960000000894
+    },
+    {
+      "F": 0.3514066439830007,
+      "G": 0.07684186176485651,
+      "P": 1.8304318814542946,
+      "stations": 48,
+      "pickup": 144,
+      "drop": 143,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 36,
+      "available": 592.8280000002123
+    },
+    {
+      "F": 0.3334657579092074,
+      "G": 0.07642250978197232,
+      "P": 1.7136216541815672,
+      "stations": 48,
+      "pickup": 144,
+      "drop": 143,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 37,
+      "available": 593.125
+    },
+    {
+      "F": 0.3332914100408356,
+      "G": 0.07627475952229615,
+      "P": 1.713444336790263,
+      "stations": 48,
+      "pickup": 144,
+      "drop": 143,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 38,
+      "available": 596.4840000001714
+    },
+    {
+      "F": 0.33323032384116136,
+      "G": 0.07594516544218714,
+      "P": 1.7152343893264947,
+      "stations": 48,
+      "pickup": 145,
+      "drop": 144,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 39,
+      "available": 597.7179999998771
+    },
+    {
+      "F": 0.3332219561003332,
+      "G": 0.07578986645135903,
+      "P": 1.7162139309931614,
+      "stations": 48,
+      "pickup": 145,
+      "drop": 144,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 40,
+      "available": 635.0929999998771
+    },
+    {
+      "F": 0.33316121082432554,
+      "G": 0.07510834735288757,
+      "P": 1.72035242314292,
+      "stations": 48,
+      "pickup": 146,
+      "drop": 145,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 41,
+      "available": 644.811999999918
+    },
+    {
+      "F": 0.33310906249534755,
+      "G": 0.07542336424130083,
+      "P": 1.7179046550269779,
+      "stations": 48,
+      "pickup": 146,
+      "drop": 145,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 42,
+      "available": 648.030999999959
+    },
+    {
+      "F": 0.33310538529965406,
+      "G": 0.07556661829560737,
+      "P": 1.7169251133603112,
+      "stations": 48,
+      "pickup": 146,
+      "drop": 145,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 43,
+      "available": 655.2179999998771
+    },
+    {
+      "F": 0.33069092357663227,
+      "G": 0.07602791032258562,
+      "P": 1.6977534216936445,
+      "stations": 48,
+      "pickup": 146,
+      "drop": 145,
+      "maximum_duration": 7178.05882397944,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 44,
+      "available": 669.2340000001714
+    },
+    {
+      "F": 0.3253342282822099,
+      "G": 0.08404777547165093,
+      "P": 1.6085763520703935,
+      "stations": 49,
+      "pickup": 146,
+      "drop": 146,
+      "maximum_duration": 7184.116593617511,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 45,
+      "available": 674.6090000001714
+    },
+    {
+      "F": 0.31083002671550475,
+      "G": 0.07558389428279252,
+      "P": 1.568307549551415,
+      "stations": 47,
+      "pickup": 150,
+      "drop": 149,
+      "maximum_duration": 7138.221416785873,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 46,
+      "available": 674.75
+    },
+    {
+      "F": 0.31041046986352183,
+      "G": 0.07618012648878063,
+      "P": 1.5615356224982746,
+      "stations": 48,
+      "pickup": 149,
+      "drop": 148,
+      "maximum_duration": 7138.221416785873,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 47,
+      "available": 799.4679999998771
+    },
+    {
+      "F": 0.3086281776570804,
+      "G": 0.07624033174610728,
+      "P": 1.549252306073154,
+      "stations": 48,
+      "pickup": 150,
+      "drop": 149,
+      "maximum_duration": 7169.987537985387,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 48,
+      "available": 801.0150000001304
+    },
+    {
+      "F": 0.30862766630806987,
+      "G": 0.0769269934819829,
+      "P": 1.5446711521739132,
+      "stations": 48,
+      "pickup": 150,
+      "drop": 149,
+      "maximum_duration": 7169.987537985387,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 49,
+      "available": 897.155999999959
+    },
+    {
+      "F": 0.30789124306580984,
+      "G": 0.07685890944426833,
+      "P": 1.5402155574769434,
+      "stations": 48,
+      "pickup": 151,
+      "drop": 150,
+      "maximum_duration": 7193.673488578268,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 50,
+      "available": 1357.7960000000894
+    },
+    {
+      "F": 0.3074532992466442,
+      "G": 0.07719640426146634,
+      "P": 1.5350459665678524,
+      "stations": 48,
+      "pickup": 151,
+      "drop": 150,
+      "maximum_duration": 7193.673488578268,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 51,
+      "available": 1359.9210000000894
+    },
+    {
+      "F": 0.30726507454070817,
+      "G": 0.07826803853280304,
+      "P": 1.5266469067193678,
+      "stations": 49,
+      "pickup": 150,
+      "drop": 149,
+      "maximum_duration": 7169.987537985387,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 52,
+      "available": 1573.4530000002123
+    },
+    {
+      "F": 0.3068729719629039,
+      "G": 0.07846271413681695,
+      "P": 1.5227350521739131,
+      "stations": 49,
+      "pickup": 150,
+      "drop": 149,
+      "maximum_duration": 7169.987537985387,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 53,
+      "available": 1573.655999999959
+    },
+    {
+      "F": 0.30331322294968066,
+      "G": 0.07858796005112997,
+      "P": 1.4981684193236715,
+      "stations": 49,
+      "pickup": 152,
+      "drop": 151,
+      "maximum_duration": 7174.531317099777,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 54,
+      "available": 1740.25
+    },
+    {
+      "F": 0.3023554344430611,
+      "G": 0.07878056029451039,
+      "P": 1.4904991609903382,
+      "stations": 49,
+      "pickup": 153,
+      "drop": 152,
+      "maximum_duration": 7179.457304441514,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 55,
+      "available": 2156.5780000002123
+    },
+    {
+      "F": 0.2986870415108931,
+      "G": 0.07785232823190759,
+      "P": 1.4722314218599033,
+      "stations": 49,
+      "pickup": 152,
+      "drop": 152,
+      "maximum_duration": 7179.457304441514,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 56,
+      "available": 2542.7340000001714
+    },
+    {
+      "F": 0.2971057541126202,
+      "G": 0.07834764083363471,
+      "P": 1.4583874218599033,
+      "stations": 49,
+      "pickup": 154,
+      "drop": 154,
+      "maximum_duration": 7184.063001343018,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 57,
+      "available": 2884.7960000000894
+    },
+    {
+      "F": 0.296258586409751,
+      "G": 0.0786508618807655,
+      "P": 1.45071816352657,
+      "stations": 49,
+      "pickup": 155,
+      "drop": 155,
+      "maximum_duration": 7184.063001343018,
+      "original_T_feasible": true,
+      "source": "native_MIPSOL_verified_original_routes",
+      "call": 7,
+      "sequence": 58,
+      "available": 2981.2650000001304
+    }
+  ],
+  "normal_result_certificate": false,
+  "final_only_physical_witness": false,
+  "final_physical_verification": {
+    "F": 0.296258586409751,
+    "G": 0.0786508618807655,
+    "P": 1.45071816352657,
+    "stations": 49,
+    "pickup": 155,
+    "drop": 155,
+    "maximum_duration": 7184.063001343018,
+    "original_T_feasible": true
+  },
+  "endpoint": {
+    "U": 0.2962585864097505,
+    "L": 0.28144494010980303,
+    "gap": 0.01481364629994747,
+    "certificate": false,
+    "source": "normal_finalized_physical_endpoint",
+    "status": "round31_c6_external_gini_tree_time_limit"
+  },
+  "five_native_parameter_readback": {
+    "threads": {
+      "requested": 1,
+      "effective": 1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "seed": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "presolve": {
+      "requested": -1,
+      "effective": -1,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    },
+    "mip_gap_abs": {
+      "requested": 0,
+      "effective": 0,
+      "set_return_code": 0,
+      "get_return_code": 0
+    }
+  },
+  "round97": {
+    "events": 39,
+    "status_counts": {
+      "start_matching_state_observation_only": 4,
+      "submitted_processing_pending": 10,
+      "duplicate_submission_this_call": 11,
+      "physical_closure_no_strict_improvement": 14
+    },
+    "physical_witnesses": [
+      {
+        "path": "accepted_23_ab36594929f4f40b43ff6d28f58cc46c7a6cacd0ae8284658c1adb842b78773a.json",
+        "sha256": "f5e1ca3a2fac50af6cd794d283cde3fbbd035c6c7eac7adce457376688d4ae5b",
+        "F": 0.3086281776570804
+      },
+      {
+        "path": "accepted_27_fe0fb2bbada772ebb01772eeb1f8c65431aadb7b376715c771bb788f3b16d67d.json",
+        "sha256": "17061deeefaaa4d6748cd55771ad03035906fe11c6fdd37af1e991f15e9ee877",
+        "F": 0.3074532992466442
+      },
+      {
+        "path": "accepted_29_02b9ff52b580f3be21b89016422ad90c876337deb24a1d222cc8a596583f5567.json",
+        "sha256": "899a17ae5bf85acfa5b1fd22b1bb69493b9c1a2acf3a7a5532bf323ef36a245d",
+        "F": 0.3068729719629039
+      },
+      {
+        "path": "accepted_34_b5cb7904d81b8191793ab3bcd19979dfae01c19ebc39febf3b77d150e4af1f14.json",
+        "sha256": "fd2229f4977581cf7b5389a58946cbbb12206d2c0ac8e79e07c8d221a66c2267",
+        "F": 0.296258586409751
+      },
+      {
+        "path": "accepted_5_42fe67f4770b2b22199bfec84f803c11d87351093f11743bb919604abda81e9e.json",
+        "sha256": "e414d3a344a956b8572e751acb513d17f992582b5707d238dee2d6c80b917bb5",
+        "F": 0.3649097895576815
+      },
+      {
+        "path": "accepted_5_441aa4fd300319bfe05d544ad9698c166931bed388934480627dd45a0b69d624.json",
+        "sha256": "f1d76403593e413ff6a517fdd2638ddeaadb847fbb5bf503818d6b1c24113980",
+        "F": 0.34462951190215985
+      },
+      {
+        "path": "accepted_5_4ce9ed890f3b43a43c0f35257959587692dabc6ea5f1f1e4284697123e0d0db3.json",
+        "sha256": "86de755ec33efc37aa92a1a9bd2726187b953a2bba9d7c80241b0da9caf3d776",
+        "F": 0.3444894234740416
+      },
+      {
+        "path": "accepted_5_5ae1cda10f5dcc942792b54595c8d199ce2679a7eda57b0027678627b778cf2d.json",
+        "sha256": "6d47588f8ce6c45392d3d39e957e5f381c1c4e3a825289b6272d34d0573000b4",
+        "F": 0.3444993555243302
+      },
+      {
+        "path": "accepted_5_7a544a1e4cbe99e09ca2e42fd1023256c92534b88d136d240de5ff907c1af15e.json",
+        "sha256": "883580556d346eafdc0c6aad2e2d9257e41dde18a57ee93978270b88d8527ceb",
+        "F": 0.34487478906574165
+      },
+      {
+        "path": "accepted_5_b52e8511017c3bc151af7facee5322210ba66b3b67150807c44e36c8c13224cc.json",
+        "sha256": "710381f825b5b5d776a378af36157b727d8cddcd7bbcd97b87cf21599e2ba59e",
+        "F": 0.3487000307853698
+      },
+      {
+        "path": "accepted_5_d8ff678fbd9946a385d9242376c1a075f64b928a053365bdddb04189e2fbadc1.json",
+        "sha256": "a125171514dc3894ac84906a1b8ee3d6c06c8805fe28d0da8a1fd63ea2a217de",
+        "F": 0.3455386923089721
+      },
+      {
+        "path": "accepted_6_10565cdf1c4918955021488c3e9225e42b0ef96b2c2ee10d3b1574c3adbeefa6.json",
+        "sha256": "d3c5fc6a96f3e3b5a2ac90368da85c240ac7a7b70bdf4cda8d2e56b8395f1979",
+        "F": 0.34403414436153046
+      },
+      {
+        "path": "accepted_6_3133903915a83b91ef26feb5b674a4902321a63668e53fa02b85e08732a27136.json",
+        "sha256": "e9af53fce676c7ac7d1260d9f9f73e3103aa718f9ae4c6467faa68eacab93268",
+        "F": 0.34422597671212013
+      },
+      {
+        "path": "accepted_6_53b31113069628b94a84a0865bcd76165214b68104cc501079498c2c7f6f2f7c.json",
+        "sha256": "168cc80a05bddbc6a2194ea6e1d110829382c9f2392c4801266c68948be3e356",
+        "F": 0.34408631521639715
+      },
+      {
+        "path": "accepted_7_1575d855876531ca6806db14043dbec613d58a9a08447086a24de169aac2b289.json",
+        "sha256": "7e7495604b85657ce203525d252048e628895bd3ac07c58c1b842a5ba8c34bb9",
+        "F": 0.33120503147262653
+      },
+      {
+        "path": "accepted_7_19d3dce4a9d8d7554536ba5357ada0dfd5580fb32291e81635a5a06564e85c80.json",
+        "sha256": "a04c02e13d728ebceeeb83ec693bd15b0b5c723ac37e52df03d270066aea9ea3",
+        "F": 0.33249074866272416
+      },
+      {
+        "path": "accepted_7_20974782f79387f577774d1cf6c0f2024940743c32056ed2c801987096f1e4cf.json",
+        "sha256": "4b4ab8602dbc72da6f74f144555cad4b0fcd20362730ae8c45ba4cba4d7cdfa1",
+        "F": 0.33120056717159285
+      },
+      {
+        "path": "accepted_7_3d1576d81d763a3a5dd08b68a3fc24e82e6da1ec84a0914f3f755a35559b5c68.json",
+        "sha256": "99d68c5218098e086923a5ee6f0026233c3745af2168dda9a3a89c57914da017",
+        "F": 0.3253342282822099
+      },
+      {
+        "path": "accepted_7_3f8ee4f24927e769d2efdc0bf976aaae63b510fce1a517c79c60cd414df21d8a.json",
+        "sha256": "24a618de050ce03b240331dd316a346250add991e2ad48b7697ec92d1584f4d7",
+        "F": 0.34225094430325564
+      },
+      {
+        "path": "accepted_7_62984fdb76ca10f7470e82e8eef9a18405d0d0b04ceca4f6d95241de4467cb1d.json",
+        "sha256": "c9a225136883de3464fc65ab43a84733ca2ce929dfd3921f763bec25fb12e7f6",
+        "F": 0.3311785694410544
+      },
+      {
+        "path": "accepted_7_6c73a6cea8db2928da41bd4a52c14c832ca5942ffb9326d7d71fc8662dfeb90a.json",
+        "sha256": "9c6026264658d49f068ab4958664facd98d1896664bf39e7aa214afcd2ace4da",
+        "F": 0.33086099724773016
+      },
+      {
+        "path": "accepted_7_7980c0cc1427c81d92e32bfed635a88a4516236ae8072f7023fc7b2e3b8e6c21.json",
+        "sha256": "4dcca3fd92a70e109a98598651d7c8b92839b17b053d5eaaf264b8a5520ac878",
+        "F": 0.33088065150430396
+      },
+      {
+        "path": "accepted_7_83e8034369499afc6cb26a041f30cb451ad1c650817300e13b865809707a3ace.json",
+        "sha256": "040a7221a75c996f5d07dc13300cced2ed248450cfc88a791537ae3f473e0001",
+        "F": 0.3377703410798928
+      },
+      {
+        "path": "accepted_7_9f335785c75abb61467528d12f893cf8223811d3482183932f3d3dd0b94c304c.json",
+        "sha256": "8568d782a415f30074209fbd9f0dce65b5737eb482a375f8e2bdf4c9ca834e77",
+        "F": 0.34258789172573895
+      },
+      {
+        "path": "accepted_7_cd76355a4ca5d46129013efca0a79cc75d2be0157704b98d0429c7de23d5e0b9.json",
+        "sha256": "b3d154db6ab6c91934291989e8977b2f6a60a6462415c372d13207b362f3a883",
+        "F": 0.3317590338096715
+      },
+      {
+        "path": "accepted_7_d256946f6b37e174c494b7f020cfdce78717b3305aa511d8372e8fa02988b60e.json",
+        "sha256": "b0a75ac71719297380b12f5b8321b49cb66378bdc8823a8730e6dd2c7c0809f1",
+        "F": 0.3345709913674433
+      },
+      {
+        "path": "accepted_7_dc51371db1d510914e7725927100e7553ea09514a23832e380a2aa7193b85efb.json",
+        "sha256": "b26f15ba9b42a0b84524d9045d126327868ca04fc7f9848ce6a6e7a6f4809588",
+        "F": 0.33112330224748476
+      },
+      {
+        "path": "accepted_7_e27ee2efaa3ee3081906a1e011696e32d3a439e19ee2d4e20f188f29fcc7d84c.json",
+        "sha256": "a2cb1e2d5c6de07d871f02a91c7f607f06c061a1997a0d6f9861c7ef88799bd6",
+        "F": 0.3309977212587611
+      },
+      {
+        "path": "accepted_7_f5fb5b2a70f378ce4e635d8c141b64f52a191454ee6a38e1b2b1a9be58c95373.json",
+        "sha256": "50ee3ee3ed70bb6c17e3fdca32be591666fdedfec919228e24080f31b77dcb87",
+        "F": 0.34237882567220057
+      },
+      {
+        "path": "accepted_8_314471cf49ad4ce9f4c0af8c37b29bd05fc8c40b6c92135c0ffc9516789ca709.json",
+        "sha256": "973a0c49a3549f6a2841d9c1e4a0d2170b37e15feec403a9bb0e5e494877fc27",
+        "F": 0.32111299418058337
+      },
+      {
+        "path": "accepted_8_350948436b43d32a0e768489d235431ed216568c283c5fc96bf8689ec3ecff6d.json",
+        "sha256": "4f95a5daf2eb6072a152bf514d220fc1d1b6e633e356103c97208435ad9b1afa",
+        "F": 0.31083002671550475
+      },
+      {
+        "path": "accepted_8_3e87516fb1474166db033096f40a406c90932e3bf57e2d298d637862df60151f.json",
+        "sha256": "ec47dadea96cfc981f1029ad6d8339402f5d365d8736a92449e3447b0670c2ff",
+        "F": 0.3212519667785897
+      },
+      {
+        "path": "accepted_8_4da39f999f7df5a6f89e1347ad84123567672be821363f35fcd122eae13836a6.json",
+        "sha256": "d7e7885067e17efee5a7b6335869eff1b198559fb7c9bee5cddf9188eb968292",
+        "F": 0.31868112272883986
+      },
+      {
+        "path": "accepted_8_720cbe7ba922b79697004c22345dd43b2457a44344321f907a35b10af5e787ae.json",
+        "sha256": "0e8ab16519f48b57a4065156900d3e37b3557deca1a2c4c709c315a40dcc1f15",
+        "F": 0.31141365191409853
+      },
+      {
+        "path": "accepted_8_bb50aac6320fac8628e90c36c8af6a36695d86ebc561acd6cbaf309666e0497a.json",
+        "sha256": "8a86578e4174bef07016fa7800a543eb9dddf89ba3c36b1b44227540529cadfd",
+        "F": 0.32110863735356865
+      },
+      {
+        "path": "accepted_8_dc3d74779e8b9dbf6e417ecd25a0513899bbc6d852699e8040ee22b2cbf85b3b.json",
+        "sha256": "83fffec7c2075e1204368524c0bffb1099d53211c4bd0ecb4301177fe877c8a2",
+        "F": 0.31264685077065346
+      },
+      {
+        "path": "accepted_8_f28c55dd6c701d83236d24dbe4b642071318da4f09de6e32ddf62c52f3ec784f.json",
+        "sha256": "67efae88f116adbca0895feac0c84a62afcc79afdf65ff16375c40fde88ee3b5",
+        "F": 0.322323490332023
+      },
+      {
+        "path": "candidate_10.json",
+        "sha256": "5926a51151b755c4a6d2c9510e5c4874ce5a4cb28bdaa6b01c76667ce0a4a7ae",
+        "F": 0.3269329066024939
+      },
+      {
+        "path": "candidate_11.json",
+        "sha256": "5926a51151b755c4a6d2c9510e5c4874ce5a4cb28bdaa6b01c76667ce0a4a7ae",
+        "F": 0.3269329066024939
+      },
+      {
+        "path": "candidate_12.json",
+        "sha256": "5926a51151b755c4a6d2c9510e5c4874ce5a4cb28bdaa6b01c76667ce0a4a7ae",
+        "F": 0.3269329066024939
+      },
+      {
+        "path": "candidate_13.json",
+        "sha256": "5926a51151b755c4a6d2c9510e5c4874ce5a4cb28bdaa6b01c76667ce0a4a7ae",
+        "F": 0.3269329066024939
+      },
+      {
+        "path": "candidate_14.json",
+        "sha256": "5926a51151b755c4a6d2c9510e5c4874ce5a4cb28bdaa6b01c76667ce0a4a7ae",
+        "F": 0.3269329066024939
+      },
+      {
+        "path": "candidate_15.json",
+        "sha256": "5926a51151b755c4a6d2c9510e5c4874ce5a4cb28bdaa6b01c76667ce0a4a7ae",
+        "F": 0.3269329066024939
+      },
+      {
+        "path": "candidate_16.json",
+        "sha256": "5926a51151b755c4a6d2c9510e5c4874ce5a4cb28bdaa6b01c76667ce0a4a7ae",
+        "F": 0.3269329066024939
+      },
+      {
+        "path": "candidate_17.json",
+        "sha256": "5926a51151b755c4a6d2c9510e5c4874ce5a4cb28bdaa6b01c76667ce0a4a7ae",
+        "F": 0.3269329066024939
+      },
+      {
+        "path": "candidate_18.json",
+        "sha256": "66c38cf740dc676510b3d166a6c5f6d095ca6cc04e925b20635fa2fbd27380fa",
+        "F": 0.32686503317334104
+      },
+      {
+        "path": "candidate_19.json",
+        "sha256": "66c38cf740dc676510b3d166a6c5f6d095ca6cc04e925b20635fa2fbd27380fa",
+        "F": 0.32686503317334104
+      },
+      {
+        "path": "candidate_20.json",
+        "sha256": "66c38cf740dc676510b3d166a6c5f6d095ca6cc04e925b20635fa2fbd27380fa",
+        "F": 0.32686503317334104
+      },
+      {
+        "path": "candidate_23.json",
+        "sha256": "373b96ee1571ec645c2cca02b45629289c82114d6b3f1270bdd45c9e00a95ac5",
+        "F": 0.3086281776570804
+      },
+      {
+        "path": "candidate_25.json",
+        "sha256": "aacfeb3262f13b0e6cee727a9ee0c9ab5c128db708eb3a33556757f162b1da4c",
+        "F": 0.30862766630806987
+      },
+      {
+        "path": "candidate_27.json",
+        "sha256": "54768268fb504ff8d9f3f7915301b9b59b65700cb5abb45cc5e5a7d5280aefe0",
+        "F": 0.3074532992466442
+      },
+      {
+        "path": "candidate_29.json",
+        "sha256": "6b3065a107e3b02e2b2e4ab6e59f752bbd234b691c88374d86df30ce976ae092",
+        "F": 0.3068729719629039
+      },
+      {
+        "path": "candidate_31.json",
+        "sha256": "af0d7b15781b8bcd651930e745ab2a662394e7db2bc02da9c70bbe1e465fb7f6",
+        "F": 0.30331322294968066
+      },
+      {
+        "path": "candidate_32.json",
+        "sha256": "e061ff311a6911e8578726389dd810a89336e8b20bb0e6e068b204b51be25f22",
+        "F": 0.3023554344430611
+      },
+      {
+        "path": "candidate_33.json",
+        "sha256": "4c6d9b6be4e41b9165a09ce01b24cdca95384f4a9a9a8157d15ad434ab49f9b0",
+        "F": 0.2986870415108931
+      },
+      {
+        "path": "candidate_34.json",
+        "sha256": "df7022c482915219d5dc48849b5eb106dcf3804eba8fd9f23d07e02394e1dad1",
+        "F": 0.296258586409751
+      },
+      {
+        "path": "candidate_5.json",
+        "sha256": "7fd32d88c634d07703b5c090b195eb2bbceabfeb0954ae806d358fdbb575f8f4",
+        "F": 0.3444894234740416
+      },
+      {
+        "path": "candidate_6.json",
+        "sha256": "45019032b8ce4285edbbcda254d5f725f9be04be7a87ece051a55354f114f730",
+        "F": 0.34403414436153046
+      },
+      {
+        "path": "candidate_7.json",
+        "sha256": "72fa0ea1ccdc3f9f47887a687a509c1dbc65fba76f9e0bef9de966e93fc0787d",
+        "F": 0.3253342282822099
+      },
+      {
+        "path": "candidate_8.json",
+        "sha256": "b101918c511a9e0704132a648b186da578182cc10d9d2c17062715dd520b1772",
+        "F": 0.31083002671550475
+      },
+      {
+        "path": "candidate_9.json",
+        "sha256": "b101918c511a9e0704132a648b186da578182cc10d9d2c17062715dd520b1772",
+        "F": 0.31083002671550475
+      },
+      {
+        "path": "input_0206eea02bbc2a13b98f96bb413c2a05c62e2bad0b515c6ba18e0f6aff3478d7.json",
+        "sha256": "1d6c51b2037f9031ab85108fd27ada3a400438227f2eaf0c4f9ee771ddd6649c",
+        "F": 0.33316121082432554
+      },
+      {
+        "path": "input_02b9ff52b580f3be21b89016422ad90c876337deb24a1d222cc8a596583f5567.json",
+        "sha256": "165dc392287866b8fc0547c2166877bb399d1da55a50218fc3bd22dbba244aa3",
+        "F": 0.3068729719629039
+      },
+      {
+        "path": "input_0a0374f65f1f22519510b9504166c5350182e82925135f4b4a52acd61b4dd7d0.json",
+        "sha256": "03ac523f16bf3bc87976d7225c6e01f2d9971ce70fa88b7d5e34c0d8a293d2b0",
+        "F": 0.31041046986352183
+      },
+      {
+        "path": "input_239b569dbf6cef0b9a840ca608ff8d17564ffcc3bba9b6f605e29d7b94181f7b.json",
+        "sha256": "d7de6ee71a3628b988395d400d1ef129a658d5cc9fa5015f39247e5498500a07",
+        "F": 0.3841567178451383
+      },
+      {
+        "path": "input_2a42edf69492b56f75e0c5b5153804fc9ae6a9d056ab905478b9324552edd1ba.json",
+        "sha256": "aaa7e47682a0e80842107ebf5e959ce3c16209528b991038d87ae64134ba8b01",
+        "F": 0.30726507454070817
+      },
+      {
+        "path": "input_350948436b43d32a0e768489d235431ed216568c283c5fc96bf8689ec3ecff6d.json",
+        "sha256": "f66c2c940bce850362f2d6ed8fcbc8f3bb97e0714b2a124e12b29f964bc91b65",
+        "F": 0.31083002671550475
+      },
+      {
+        "path": "input_362c7fb96d51e8419c0ddf95ba4dbce1862044477f4fd5cc9a17f9850fa033ec.json",
+        "sha256": "b36dc90195cf08013546057ac6ab87152896350f4e5e40f0509fa552625e3f5f",
+        "F": 0.36887562321071865
+      },
+      {
+        "path": "input_3b15b0d8bfe09d2c8673e11a56c9c88d25ca5c67bbf4bb9295c35dfeadc1cdb3.json",
+        "sha256": "2429f3bc5c866955aae4fd290276a2e4a7bbab32757e66653ec9c73f9ce76abc",
+        "F": 0.2986870415108931
+      },
+      {
+        "path": "input_3c86843da1e16f89a1b9de8a7a7aa400482ff09dfd993437293189c24436fcb6.json",
+        "sha256": "dcbf7eabc1ce6c2730cd9b1bacbaee5d13adaa85262e8c1590f7c040186bc95c",
+        "F": 0.30331322294968066
+      },
+      {
+        "path": "input_3cfdde12a10e10e26f0c437816d3f482b6b56211e08accd8e2c75209c43f9693.json",
+        "sha256": "84b6520382d6948ccdc322e8d4fe191cb4c2499892f87bcf8aa03ffe6effbf2b",
+        "F": 0.3023554344430611
+      },
+      {
+        "path": "input_3d1576d81d763a3a5dd08b68a3fc24e82e6da1ec84a0914f3f755a35559b5c68.json",
+        "sha256": "f855d9541087e2f57e0ac05245324df3080efb97b6d44f4aa41afd6e3b06b1c8",
+        "F": 0.3253342282822099
+      },
+      {
+        "path": "input_4346e857e683dabd9e9669a9edafd2012b837c8279f94774d149bcde8fb405c3.json",
+        "sha256": "79a9a278ba110487b7dddcdf685f292854107e54f61576d7dddb4a8a63012c30",
+        "F": 0.35247784864442194
+      },
+      {
+        "path": "input_473f785e9126dfce75624ad1abe6c2ab5e37d6e32ce10828c7b80ff8044cc3e8.json",
+        "sha256": "de9ea900d89a10039c01cc7eb6ae5df7769c268fb102e7481f717f1c2738eab4",
+        "F": 0.36114666576571036
+      },
+      {
+        "path": "input_4a656114710a3e942eee5f1699ed0605bda7976437b697df54db487791128b2e.json",
+        "sha256": "27c128e6209c2bebd196efc5dc15fb42116b97b943eff5a0cf41d9eb19a8213e",
+        "F": 0.38358676859080115
+      },
+      {
+        "path": "input_553a6c9b1f037e6e4967416c526e002c218c651eb6c9f62cc47bf70d25ab5a50.json",
+        "sha256": "66870574903e078b09b8683401760306ffc49c162ec8a745e6dd00fa0faf6265",
+        "F": 0.36073188522523836
+      },
+      {
+        "path": "input_5f635b956020a2529bb5f594b90038942c1803c98faed22e14c81c3ce2ff548a.json",
+        "sha256": "5a6b5cffdbef4811edb3febe94b0536bfd3c973f2d9b8e49c5bf6b21576bd00c",
+        "F": 0.3332219561003332
+      },
+      {
+        "path": "input_667d3800d399bb69aa7f0f9f536f99022285d1531c9992bd2e91bc83bf24c60f.json",
+        "sha256": "b05cdbbebee96b54f773dd7b0f6ad2f8c2750c7814524d215e529a309e603cf5",
+        "F": 0.35272419025186585
+      },
+      {
+        "path": "input_66bb2745eb1f92a2d13c1744489bbbfc8e77d14605c1a50a3949c34bfbfe3ca0.json",
+        "sha256": "6b2a875e5d7de0768a6bce529d2aba243a462d22dc2ea2f80bbd8a4bf88148fe",
+        "F": 0.384304091687546
+      },
+      {
+        "path": "input_6d42445a52b3a54f8432d7bca1cdfbda98643ce06d62f22bde05307c4b3ef1c6.json",
+        "sha256": "d63f17f52eeeba7aa29556d94c36fb503612b7dddbda97ce70aa381f0655a70a",
+        "F": 0.33323032384116136
+      },
+      {
+        "path": "input_77417a6aca2a63022d2190a94497ea1c8bb15835d4370d1e133d00ffd0c6fc75.json",
+        "sha256": "5c361a60aea5cffceedbd6184f919e085da8f7cff6de28a294a5609d9ce0aef6",
+        "F": 0.33310538529965406
+      },
+      {
+        "path": "input_8fc0adb054afbd63fb5324aa093427820aca935d71f21d83a1af67676511aac7.json",
+        "sha256": "8e721ea1f91627b5dd62cd4448029be45fc1b9c3f936bcd5ea76e5e59c55c162",
+        "F": 0.3514066439830007
+      },
+      {
+        "path": "input_a17e853d10b5ff36fe29223e32ff74c1ad40d5d6c65000b95b40b57c92435315.json",
+        "sha256": "1a5ef099070c5b36a9540a31d3e687bf20b5160cba5d51ad849591285f196437",
+        "F": 0.30862766630806987
+      },
+      {
+        "path": "input_a4dbd87c5f9ad9c1f3eed9e3f2969cf0f2ee7fe4ca7ce22f8c9bb1f0ffb4cb7d.json",
+        "sha256": "72599f2176d6c31e8ff1d6e03f947e669bb6bccdf56da0fda2e076a6f6223af3",
+        "F": 0.2971057541126202
+      },
+      {
+        "path": "input_ab36594929f4f40b43ff6d28f58cc46c7a6cacd0ae8284658c1adb842b78773a.json",
+        "sha256": "6bf7401867fbaa2d741ab2517455d4e725e703cbf66004945b8c6ab15872f189",
+        "F": 0.3086281776570804
+      },
+      {
+        "path": "input_b5cb7904d81b8191793ab3bcd19979dfae01c19ebc39febf3b77d150e4af1f14.json",
+        "sha256": "fda0b8188d1c89766fc4aa883ba9633214cb90fa804b34109d2422a8247e8bc0",
+        "F": 0.296258586409751
+      },
+      {
+        "path": "input_c6a668f93b1ee948b7058bc44866b61ea5db81ca4546ee0dc29bf76b3d42b504.json",
+        "sha256": "e377f91ff6264a38ed3fef4e9fe819f555708285b9c5b99d9dad0217a204f2f1",
+        "F": 0.33069092357663227
+      },
+      {
+        "path": "input_db04afd34e1e8c9fd00c5e73d643d0a302d35ee641558091d4496434645a3881.json",
+        "sha256": "feb43748acb3a7621ce6b9ca45b48e5aeb3fd3292d6dd86f44eab4ef9e49e786",
+        "F": 0.33310906249534755
+      },
+      {
+        "path": "input_f03019def7983b0a9609c4a5dfc443cf7eafcec0ffa9e5e69da70ad4976982c2.json",
+        "sha256": "95a434ed4f3babf2ae34c31ed9dc18f1b67bdba0c837e193ddf4f101355035cd",
+        "F": 0.3332914100408356
+      },
+      {
+        "path": "input_fa0963abfd87a3b25457d8a4e5bb43cf3e3531351b4f64d22cba9f708d003689.json",
+        "sha256": "fe72951cb8dd8c34ae608dec59c5c594c86c59b42f83019d8811f712e762c74c",
+        "F": 0.3334657579092074
+      },
+      {
+        "path": "input_fa7a959df3d4623e18a836a0ccb70feedb2453a2724622248ba6f7309bc93780.json",
+        "sha256": "7da3f882f40505e457be8235335535654ccaaf3d7c5e79815cb35524a287bd29",
+        "F": 0.30789124306580984
+      },
+      {
+        "path": "input_fe0fb2bbada772ebb01772eeb1f8c65431aadb7b376715c771bb788f3b16d67d.json",
+        "sha256": "31c5b73d7eed4524bb169e4551bc28d25d7aa2fe0bdda26eb5529b510bb37fb8",
+        "F": 0.3074532992466442
+      }
+    ],
+    "verified_candidates": 37,
+    "strict_closure_improvements": 21,
+    "excluded_start_matching_events": 4,
+    "eligible_physical_events": 35,
+    "post_start_events": 35,
+    "accepted_order_moves": 0,
+    "order_proposals": 0,
+    "incremental_order_improvement_events": 0,
+    "incremental_order_count_scope": "Recorded fresh-closure joint R96/R83 increment; excludes cache reuse and interrupted improvements not retained by the best archive, so is a lower bound, not all discoveries.",
+    "vector_observations": 6,
+    "native_incumbent_changes": 10,
+    "archive_handoffs": 0,
+    "complete_callback_seconds": 2.738927199991648,
+    "closure_seconds": 0.9891658,
+    "mapping_validation_seconds": 0.2394443
+  },
+  "passed": true,
+  "native_scope_adapter": {
+    "schema": "round94-native-scope-adapter-v3",
+    "arm": "OLD-FEEDBACK",
+    "native_calls": 7,
+    "lp_calls": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "mip_calls": [
+      6,
+      7
+    ],
+    "global_bound_call_ids": [
+      6,
+      7
+    ],
+    "ledger_sha256": "a45a7ed3a3ef3bd7be70e92598029f5ff0c155b7eb4b5076f52adf71713bbbde",
+    "settings": {
+      "read_return_code": 0,
+      "Threads": 1,
+      "Seed": 0,
+      "Presolve": -1,
+      "MIPGap": 0,
+      "MIPGapAbs": 0,
+      "FeasibilityTol": 1e-06,
+      "IntFeasTol": 1e-05,
+      "OptimalityTol": 1e-06
+    },
+    "all_flags_strictly_decoded": true
+  },
+  "lp_g_split_evidence": null,
+  "offline_audit_seconds": 0.26205920008942485
+}

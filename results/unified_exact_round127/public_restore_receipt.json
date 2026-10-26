@@ -1,0 +1,321 @@
+{
+  "status": "PASS",
+  "commit": "6b4f2e662b709590479732cfca2c6c3c5ff3dd20",
+  "destination": "E:\\codes\\ExactEBRP-work\\restore\\round127-public-A",
+  "anonymous": true,
+  "transport": "Public raw HTTPS via windows-curl; certificate verification enabled, no credentials",
+  "executed_restore_script_SHA256": "df492432dc8722d57e9f9f15868b671bf3b82aa8d9e505d80838913ea36b0034",
+  "manifest_SHA": "12d2703bf6f80166bee82007cda9434486ddc81b380acdc0bf5b6b33de8b204c",
+  "files": 540,
+  "transport_bytes": 326271785,
+  "retrieval_wall_seconds": 140.8328838000307,
+  "serialization_materializations": [
+    {
+      "path": "results/unified_exact_round122/input_manifest.json",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "7d9d2de6a7038a6aa6acfd08bf7b7bea266c4a16c52303a8d11a9377b5062d50",
+      "materialized_SHA": "090dddf2ef236beef56c14c563eaf1931eae35b96826dc20123c70e022321915"
+    },
+    {
+      "path": "scripts/analyze_round61.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861",
+      "materialized_SHA": "fad9154b399dd9eb3463510f8480dd1e8a22974729902e0a25ec78a9ae551cce"
+    },
+    {
+      "path": "scripts/generate_citibike443_regional_v1.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+      "materialized_SHA": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+    },
+    {
+      "path": "scripts/qualify_round120.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "c7586285f9dcfe04f874e0d1b3bb9ad0b93dfab45f7f733c7ac80ec087145a14",
+      "materialized_SHA": "24e6c41494abb723d006660b08b754c0075f84dc1279e4bf8bf70a5081ac689a"
+    },
+    {
+      "path": "scripts/read_round120.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "d1bc2284c457740387ef7b0904f1ebcb797a430f087c258b166ecafdd04c77d2",
+      "materialized_SHA": "b7e0e1e81735ae9cc4fe8651f1835688ff404a0d6b78077bec19feddd62735e1"
+    },
+    {
+      "path": "scripts/round111_decisions.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "64feb5d4e98157eb0c5759703b16096f74b807c18bc41a9d0825fc49ebe332ec",
+      "materialized_SHA": "bb9a27d5e15cbe52175b228a52f1c8c6c394bdbef5ea227fa9d54924c44a6f63"
+    },
+    {
+      "path": "scripts/round111_seed_audit.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "528ab1b02b90c5d4d82113c15e617278114dcf72f1cb79f15dc4be42a92ac667",
+      "materialized_SHA": "da70eb1a01cdcf988fcfe0963ef39692d513cc5ae20ecae18835832bed45e2c5"
+    },
+    {
+      "path": "scripts/round114_campaign.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "6b40ca1f7f1a133478eaf3a89d8f8c7eba13ffe3b6f80bae0358f86d787716c7",
+      "materialized_SHA": "abdc9f5fa08965696e17982b0092cae95425e3fb4cad86368b57592893a8b8ab"
+    },
+    {
+      "path": "scripts/round114_audit.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "38b9275afd045e9d5b72cb901a3fbe9f939f474811b0b47d3a34275cb02df9d4",
+      "materialized_SHA": "a8c55a0bcd3d5a7083d1109850fa728f35378c4dafb5a4cc185089c6c530b758"
+    },
+    {
+      "path": "scripts/round114_claims.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "5b166b07da359e50b663c4655a29ce6789aaaec04ef1b8b8230b8b69cfef06fd",
+      "materialized_SHA": "d0fc9e2ea15cf37a463c895adf8cfd784762706fd73744c2a99720eebd010149"
+    },
+    {
+      "path": "scripts/round114_common.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "25ee8c762fc230f956905c00835eb70e2ad97e8758bcff9b2c8813d1686deaa6",
+      "materialized_SHA": "5fc5e753a51a655d7526ee08177da16df5699495a02eadf55575ed88dca30d9e"
+    },
+    {
+      "path": "scripts/round114_ps.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "9ed84c968781d7dcd0dc0764377fe9df8d91266e9ae40d74f09b3a35671f867d",
+      "materialized_SHA": "6bf8d31541bce73d33b5fc2d861cacb85da9fe18ecdcf574cfcbff24f4499a3c"
+    },
+    {
+      "path": "scripts/round120_campaign.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "6874f524b6d6387d4492656c39c1e1068bd5c9238b31823df18f5c02c322b9e6",
+      "materialized_SHA": "561bd20a09fc1347a8188831979646603bc08e0ce7c98377c30f176945c6d5f0"
+    },
+    {
+      "path": "scripts/round120_common.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "f6a04a22cb1dcc7660bf3b9efb61543c5947b56de9874d41ac6f87a25ab479fe",
+      "materialized_SHA": "a1302c682e146294e48e5f78e086a1c0af713775358f64875756b1a222256077"
+    },
+    {
+      "path": "scripts/round120_math_audit.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "f341106a8ef4286caef70493c3660bba18ea62aea609f7b29134a912a9b07b36",
+      "materialized_SHA": "7334f742647aaffa4e29b41d09b43902e9ff399482ef2e83fc02a588400b1afa"
+    },
+    {
+      "path": "scripts/round120_evidence.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "2cfd75746ae7a61c628647bc56217ae6b80f474999ec3215fe4cd5cc49f6b653",
+      "materialized_SHA": "db89c758b238bfe2836001c4cf5e270a84d2b2834aa5a552589cb1863a4d9be5"
+    },
+    {
+      "path": "scripts/round120_prepare.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "992656c509780565b7a1624465a3350cf73d0c688a8d6a8479cfe6d1ee6f42bb",
+      "materialized_SHA": "d0354d810ce2278a220e7d2f58490397b4dd080f5dc290ff1bc15ff9247d6964"
+    },
+    {
+      "path": "scripts/round122_common.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "5bfe6890df669a43c11cee2724c99c535ec05f61adce2a42cda4be85070040ec",
+      "materialized_SHA": "1afde640f299d64fe810506aaedc0d59a2cf3c0b7129b87dc9d84688830e587e"
+    },
+    {
+      "path": "scripts/round122_data.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "273efa690ade7097e4a3278b2d06837b86e5f19bf705286f152dc4ffced6645b",
+      "materialized_SHA": "b7997dcd173ee301be7f34949c99cb5f791bf22b84f548d1adceb8d11054d6b9"
+    },
+    {
+      "path": "scripts/round122_evidence.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "c37bb09e82a8f3fa0ceaa1d79cd276813a56a228099701096fa1f640e2ec4f9d",
+      "materialized_SHA": "bb3e1e711f4ae1f48c7ef1a1b2092d75627e1104711653fd98aa605fe7a74ea4"
+    },
+    {
+      "path": "scripts/round126_common.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "0a8252da3c37c2e50c8f24acad67bba57f8f073dd900b1faf275c3fdc3f4d5ac",
+      "materialized_SHA": "beb4c87e81d7a745d3d7f3d94d4e146e4826df4289f6482e45230cb6a8a025b7"
+    },
+    {
+      "path": "scripts/round122_prepare.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "38442f900e16c5a7485ec26afec7629c260f69775e5658a4b6f65af7c9062c9d",
+      "materialized_SHA": "dbd8544440a9e7a37310984141af86f2d9f9ad8929d41ba181e209cd2c6484ce"
+    },
+    {
+      "path": "scripts/round126_data.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "2ece33430653f63f456d74125c809ae63f32f8eb392b6f706823df01dee96345",
+      "materialized_SHA": "5a1f8078f76a74a7d7c862abc1ee489b327c145a695c74e6f982163ebcd7ed21"
+    },
+    {
+      "path": "scripts/round126_export.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "352ddf3c8e560e4d9c21c40666871573fa52ec9dc209c51bc024bf16ad6a2b0a",
+      "materialized_SHA": "297a1524ee17c8d25c56b48c5e1405ecee769fc9088eb3835850d4ec4dc8463a"
+    },
+    {
+      "path": "scripts/round126_run.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "d3f7bdf51d40100f6bcc57a76c543fe6946364b60dfcb6cc501b90ce85eb3cc3",
+      "materialized_SHA": "d121a5414c1919bbc1893fff25e2a51ca18a259772bc4a04850f87a2a3f0d939"
+    },
+    {
+      "path": "scripts/round61_research.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "088b5a4c4626b528658e403e163958074676f4ea8b58ed8548a54f4727c18571",
+      "materialized_SHA": "3a288c045e58bbc7e19dad330db2bdae4257daaf63a66313ee32b89205e14955"
+    },
+    {
+      "path": "scripts/round73_qualify.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "ad6062138d6dce6ab049cb6bc5986ba68fdecbda4588dbeda14a51b00de978c0",
+      "materialized_SHA": "b4428f5a42b2e58d8ca6c84fbb5d28ae1c678f8f41e9bdbba4f6954c01e88efd"
+    },
+    {
+      "path": "scripts/round73_seed_diagnostic.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "08b23e80febe63627f8ae79d22df115d4c127d809de411f21e87a3e305a1dca0",
+      "materialized_SHA": "3263595bf7ddda4472d6c519b136faec7b3f9d4ab4e3009bb5bf108d9cc0e3c8"
+    },
+    {
+      "path": "scripts/round99_common.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "760bf112a9c9c0cd1388c842aaa71b715b2958b44fb37541a5a3a2194c024ee0",
+      "materialized_SHA": "bd1ecd710fa4e52093e6027a247ce77c4ddaa00b56ee0ef499cd45ccd41f8208"
+    },
+    {
+      "path": "scripts/round99_pure_start_audit.py",
+      "materialization": "CRLF",
+      "Git_transport_SHA": "4157be5495f22b91e2ee0ac5e8680d0ce33768bba3f55b66027315d5cf02dad9",
+      "materialized_SHA": "c769dbdc978025ba84cbb8f566d493018f912f35c74346047434e2e21af4f882"
+    }
+  ],
+  "archives": [
+    {
+      "name": "training.zip",
+      "files": 168998,
+      "bytes": 777633955,
+      "SHA256": "c537cc98606617309d108b360560d25fba0be3ca93a28ec9ac807c1086688a33",
+      "members_SHA256_verified": 168998
+    },
+    {
+      "name": "main.zip",
+      "files": 133818,
+      "bytes": 671935496,
+      "SHA256": "95311472996025d016a3e428575a6395d80a264c121ec5e283932f24be8bd7ec",
+      "members_SHA256_verified": 133818
+    },
+    {
+      "name": "tiny.zip",
+      "files": 15296,
+      "bytes": 73351641,
+      "SHA256": "3d6313400f7d81a3962d699c0ea0208436f8851e9ab1c446c4c174cf1e4ebb87",
+      "members_SHA256_verified": 15296
+    },
+    {
+      "name": "core.zip",
+      "files": 174369,
+      "bytes": 954326512,
+      "SHA256": "4a282cf616e181743c7ae8d73990b2b36f16b68e37dca0bd8fe43351150ff3a7",
+      "members_SHA256_verified": 174369
+    },
+    {
+      "name": "qualification_closed_fees_original_sources.zip",
+      "files": 27133,
+      "bytes": 171717043,
+      "SHA256": "355090fec7bb4d9d645c224c6b2a89f156704f7dedf3cf406e4d9c52a6c12428",
+      "members_SHA256_verified": 27133
+    }
+  ],
+  "extraction_wall_seconds": 2401.3826527000638,
+  "portable_check": {
+    "status": "PASS",
+    "producer_seals_verified": 90,
+    "actual_call_model_hashes_verified": 168,
+    "training_positions": 36,
+    "selection_recomputed": {
+      "id": "q2",
+      "MIPFocus": 2,
+      "Cuts": -1,
+      "nondefault_parameters": 1,
+      "complete_qualified": true,
+      "N": 4,
+      "N_by_seed": {
+        "2": 2,
+        "3": 2
+      },
+      "N_min": 2,
+      "S_q": 0.6568870237580052
+    },
+    "pair_classes": {
+      "main": {
+        "BOTH_CERTIFIED": 2,
+        "LEFT_ONLY_CERTIFIED": 3,
+        "BOTH_OPEN": 1
+      },
+      "tiny": {
+        "BOTH_CERTIFIED": 12
+      },
+      "core": {
+        "BOTH_CERTIFIED": 6,
+        "LEFT_ONLY_CERTIFIED": 4,
+        "UNEVALUABLE": 3,
+        "RIGHT_ONLY_CERTIFIED": 1,
+        "BOTH_OPEN": 7
+      }
+    },
+    "tiny_threshold_flags": {
+      "SM-C8-S": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "SM-B10-B": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "source_bindings_verified": {
+      "E0": 216,
+      "E1": 217
+    },
+    "formal_arms": 54,
+    "blocked_MD": 3,
+    "aliases": 0,
+    "cold_model_groups_with_identical_bytes": 6,
+    "native_starts": 0,
+    "Optimize": 0,
+    "production_compilations": 0,
+    "seconds": 8.87143250007648,
+    "scope": "Every training/evaluation sealed endpoint/clock, actual model bytes, independent finite selection/pair/alias arithmetic. Physical and matrix qualification are separately documented finite checks; no new optimization or universal rational proof."
+  },
+  "PDF": null,
+  "commands": [
+    {
+      "command": [
+        "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\restore\\round127-public-A\\scripts\\round127_portable_check.py"
+      ],
+      "returncode": 0,
+      "seconds": 8.986750300042331,
+      "stdout": "{\"status\": \"PASS\", \"producer_seals_verified\": 90, \"actual_call_model_hashes_verified\": 168, \"training_positions\": 36, \"selection_recomputed\": {\"id\": \"q2\", \"MIPFocus\": 2, \"Cuts\": -1, \"nondefault_parameters\": 1, \"complete_qualified\": true, \"N\": 4, \"N_by_seed\": {\"2\": 2, \"3\": 2}, \"N_min\": 2, \"S_q\": 0.6568870237580052}, \"pair_classes\": {\"main\": {\"BOTH_CERTIFIED\": 2, \"LEFT_ONLY_CERTIFIED\": 3, \"BOTH_OPEN\": 1}, \"tiny\": {\"BOTH_CERTIFIED\": 12}, \"core\": {\"BOTH_CERTIFIED\": 6, \"LEFT_ONLY_CERTIFIED\": 4, \"UNEVALUABLE\": 3, \"RIGHT_ONLY_CERTIFIED\": 1, \"BOTH_OPEN\": 7}}, \"tiny_threshold_flags\": {\"SM-C8-S\": [false, false, false, false, false, false], \"SM-B10-B\": [false, false, false, false, false, false]}, \"source_bindings_verified\": {\"E0\": 216, \"E1\": 217}, \"formal_arms\": 54, \"blocked_MD\": 3, \"aliases\": 0, \"cold_model_groups_with_identical_bytes\": 6, \"native_starts\": 0, \"Optimize\": 0, \"production_compilations\": 0, \"seconds\": 8.87143250007648, \"scope\": \"Every training/evaluation sealed endpoint/clock, actual model bytes, independent finite selection/pair/alias arithmetic. Physical and matrix qualification are separately documented finite checks; no new optimization or universal rational proof.\"}\n",
+      "stderr": ""
+    }
+  ],
+  "retried_retrieval_errors": [],
+  "total_outer_task_wall_seconds": 2552.169691799907,
+  "network_wall_is_not_reported_as_CPU": true,
+  "native_solver_starts": 0,
+  "Optimize": 0,
+  "production_compilations": 0,
+  "scope": "R127 finite science package only. No historical campaign, native binary or license restored; no re-solving."
+}

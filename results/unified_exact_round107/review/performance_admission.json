@@ -1,0 +1,196 @@
+{
+  "decision": "ACCEPT",
+  "purpose": "Independent correctness and protocol re-admission for complete same-identity development03 eight-arm campaign only.",
+  "reviewer": "/root/independent_review",
+  "production_source_commit": "bb0017620008f9c98e40ba032d022f52f4f23788",
+  "production_PE_SHA": "364501ac3dd2599834ee2bf40ccceca2d6c01bbb761cdc706f141832619088a2",
+  "fixture_PE_SHA": "516e04b2b88c39e05ee75c706d75dc67e8087898ccd44a629b65379a7ddd8058",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "qualification_identity_SHA": "322e6d10f6b09e9fc8986173dcca3263fa32894cf2068496cfa26428786161a9",
+  "development_protocol_SHA": "4efb68123ffd1edb6275cff2b86fe926c1e5ceb4ce83b8887b334bd69c4619b3",
+  "confirmation_protocol_SHA": "e8cc12f8ccc21a28c0ab66c962e340660cd8a1aa475fff76c9f6691d6e984e6b",
+  "campaign_identity_SHA": "b5820966314ca829636a039c8ca6584d4a1a0e4726685166241b851c0d9028b8",
+  "campaign_runner_SHA": "b69707b9bc5635ec31b77c073c57c8288640ac2fa0ed0eba1e1cb4eef413cd02",
+  "source_files_independently_hashed": 205,
+  "blockers": [],
+  "qualification_evidence": {
+    "independent_arithmetic": {
+      "path": "review/independent_final17.json",
+      "sha256": "e81774d7043f7b12d7ba33b670370dc9be824880bd328aef248078cc6864b435",
+      "layer": "Independent stdlib Decimal inventory/ownership/permutation exhaustion and actual LP/raw-vector/base-row/objective/AM/cover recomputation"
+    },
+    "raw_identities": {
+      "path": "review/final17_receipt_checks.json",
+      "sha256": "a409cb652e335193d872280344ef819d03d90b727bfcbf784ae74cc0f9d941a2",
+      "layer": "Actual process/plan/stdout/native-log/source/PE/DLL/helper byte checks; all eight formal arms unstarted"
+    },
+    "threshold_remap": {
+      "path": "review/threshold_remap01/result.json",
+      "sha256": "db8cf9cc6d3c51cc317dadf907a3e6416b54b5faf366e1f55db03ead1e3e6357",
+      "layer": "INDEPENDENT_STDLIB_ACTUAL_DOMAIN_THRESHOLD_OPERATOR_REPLAY",
+      "actual_domains": "final03 strict request_2 to outside request_3",
+      "stale_activity": 5,
+      "full_current_activity": 6,
+      "rhs": 5,
+      "native_B_threshold_absent_to_present": "NOT_EXPOSED",
+      "additional_native_fixture_required": false,
+      "reason": "Pure actual-domain/column counterexample and reviewed complete-semantic storage/fresh current-Y mapping prove the contract; no concrete correctness blocker."
+    },
+    "native_target_controller": {
+      "actual": true,
+      "target": 0.34192011176074916,
+      "bound": 0.4220385674931129,
+      "native_status": "INTERRUPTED",
+      "legal_requeues": 1,
+      "subsequent_terminal": true,
+      "complete_small_original_certificate": true,
+      "historical_production_PE_SHA": "bf06540df705aa8d1d517764bd5ebd0f4ce04b01b2797f6c562c60780367e732"
+    },
+    "native_terminal_scope": {
+      "actual": true,
+      "scope_optimum": 0.1181818181818182,
+      "target_case_optimum": 0.542741935483871,
+      "strict_INF_without_Start": true,
+      "outside_global_witness_high_local_bound": true,
+      "cross_request_cache_hits": 2,
+      "remapped_FULL_rows": 1,
+      "historical_production_PE_SHA": "bf06540df705aa8d1d517764bd5ebd0f4ce04b01b2797f6c562c60780367e732"
+    },
+    "inner_deadline": {
+      "actual": true,
+      "source": "qualification/final02/inner_deadline",
+      "layer": "Isolated actual FULL using production inner callback; not integrated MIPSOL",
+      "Optimize_calls": 1,
+      "IIS_calls": 0,
+      "cancel_seconds": 3.0022363,
+      "status": "INTERRUPTED",
+      "solutions": 0,
+      "oracle_decision": "UNKNOWN",
+      "reuse_identity": "Exact GurobiBaseline/R105Session/inner oracle/DLL bytes unchanged. The new LP metadata helper and CLI preset guard are not on isolated inner path. Historical raw bytes and original PE remain retained."
+    },
+    "outer_deadline": {
+      "actual": true,
+      "source": "qualification/final03/outer_deadline",
+      "deadline_seconds": 15,
+      "status": "open_local_obligation:global_deadline_in_master",
+      "certified": false,
+      "target_reached": false,
+      "historical_production_PE_SHA": "bf06540df705aa8d1d517764bd5ebd0f4ce04b01b2797f6c562c60780367e732"
+    },
+    "selected_native_call_totals": {
+      "LP": 15,
+      "master": 9,
+      "oracle": 38,
+      "core": 0,
+      "IIS": 0
+    },
+    "repaired_production_CLI": {
+      "actual": true,
+      "source": "qualification/cli02",
+      "production_PE_SHA": "364501ac3dd2599834ee2bf40ccceca2d6c01bbb761cdc706f141832619088a2",
+      "original_R83_R68_startup_seeds": 25,
+      "actual_LP": 3,
+      "actual_scoped_MIP": 2,
+      "actual_oracle": 3,
+      "IIS": 0,
+      "journal_commits": 15,
+      "journal_intents": 5,
+      "journal_returns": 5,
+      "actual_target": 0.5296185500343287,
+      "qualified_target_bound": 0.6058893255531174,
+      "legal_requeues": 1,
+      "subsequent_terminal": true,
+      "terminal_censored": true,
+      "final_own_physical_UB": 0.8699780578177863,
+      "complete_cover_LB": 0.6861761566988539,
+      "strict_certificate": false,
+      "normal_deadline": true
+    },
+    "semantic_LP_metadata": {
+      "independent_path": "review/independent_lp_semantics01.json",
+      "independent_SHA": "9041bf4856ab0534a4d4cfd908bc5913407b6aa3b5ad904690ff55373ab68655",
+      "native0_regression_path": "qualification/lp_metadata02",
+      "actual_canonical_files": 13,
+      "original_F2_order_difference_reproduced": true,
+      "malformed_missing_nonfinite_errors_retained": true,
+      "Optimize": 0
+    }
+  },
+  "budget_at_review": {
+    "paid_starts": 62,
+    "closed_paid_outer_seconds": 3061.845352799981,
+    "remaining_starts": 10,
+    "unclosed_paid_launches": [
+      "fees/cli_and_development03"
+    ],
+    "current_wrapper_reserved_starts": 10,
+    "current_wrapper_CLI_children": 1,
+    "current_wrapper_formal_children": 8,
+    "admission_pause_charged_in_final_outer_seconds": true,
+    "conditional_confirmation_wrapper_and_children_reserve": 10,
+    "max_conservative_starts_with_confirmation": 72
+  },
+  "permitted_campaign": "Complete development03: F2 then R98-C2, each P-GRB/ENS-C/GLOBAL-STRUCT/FRONTIER-STRUCT, all eight serial with new PE/source/DLL/protocol/helper pins. All old partial performance controls and failed arm4 remain retained; they cannot substitute any new arm.",
+  "limitations": [
+    "Qualification fixtures are not performance benefits.",
+    "Native B threshold missing-to-present is NOT_EXPOSED; zero-solver qualification is labeled separately.",
+    "Inner deadline is an isolated production-callback component fixture; natural integrated UNKNOWN and post-cancel candidate exposure must be reported separately.",
+    "Global formal certification still requires original complete ENS coverage, qualified statuses and independently verified own physical witness.",
+    "Confirmation remains sealed until the frozen gates are evaluated from the complete development group.",
+    "Final formal comparisons/fees/mechanisms and public-only isolated restoration require independent delivery review."
+  ],
+  "previous_review_records_retained": [
+    "review/implementation_initial01.md",
+    "review/implementation_repaired01.md",
+    "review/engineering_final17/",
+    "review/engineering_final17_02/",
+    "review/engineering_final17_03/",
+    "review/engineering_final17_04/",
+    "review/engineering_final17_05/",
+    "review/engineering_final17_receipt_preinit01.json",
+    "review/engineering_final17_receipt_checks01/"
+  ],
+  "independent_reviewer_native_solver_processes": 0,
+  "independent_reviewer_compiler_processes": 0,
+  "independent_reviewer_Optimize_calls": 0,
+  "independent_reviewer_IIS_calls": 0,
+  "production_edits": 0,
+  "report": "review/implementation_final17.md",
+  "created_utc": "2026-10-07T17:19:47.140Z",
+  "reviewed_utc": "2026-10-07T18:51:49.620666+00:00",
+  "remaining_correctness_blockers": [],
+  "correctness_repairs": [
+    "Original R83/R68 inherited startup is admitted and compared against its original preset, not forbidden.",
+    "Only post-delegated-LP evidence metadata changed to finite semantic coefficient maps; canonical LP, original LP backend and MIP/controller/inner mathematics remain unchanged."
+  ],
+  "prior_admissions_preserved": [
+    "review/performance_admission_final17.json",
+    "review/performance_admission_repair_pending01.json"
+  ],
+  "repaired_CLI_review": {
+    "path": "review/independent_repair_cli02.json",
+    "sha256": "ea5811b306bd7bf49ddd31c984477aee473359b84d7944f73a59adedac064efa",
+    "layer": "INDEPENDENT_STDLIB_ACTUAL_CLI_RAW_AUDIT",
+    "engineering_receipt": "review/engineering_repair_cli04/receipt.json",
+    "native_solver_processes": 0,
+    "compiler_processes": 0
+  },
+  "qualification_reuse": {
+    "changed_old_source_paths": [
+      "src/main.cpp",
+      "include/Round107Scope.hpp",
+      "src/Round107GurobiFrontier.inc"
+    ],
+    "added_metadata_header": true,
+    "unchanged_R107State_MIP_ScopeFacts_decision": true,
+    "unchanged_other_old_source_bindings": 201,
+    "test_driver_unchanged": true,
+    "previous_native_PE": "bf06540df705aa8d1d517764bd5ebd0f4ce04b01b2797f6c562c60780367e732",
+    "previous_native_fixture_PE": "4d2305aae6a4d7ae3416f059b641e37a48036ba36a899522fface4a5c2ed4684",
+    "new_native_CLI_required_and_observed": true
+  },
+  "failed_native_accounting": "Qualification native_call_totals are selected-qualified-source counts only. The retained cli01 failure executed one original LP even though its emergency result reports zero; final all-run totals must count that raw LP separately.",
+  "confirmation": "Sealed confirmation remains unstarted; only the frozen A/B gates after all eight current-identity arms may authorize it.",
+  "production_or_helper_changes_after_gate": "Any changed production identity requires new actual affected qualification, independent re-admission, refreeze and full current-identity eight arms.",
+  "pause_policy": "No heavy audit/build/compression/native work while the serial group is active."
+}

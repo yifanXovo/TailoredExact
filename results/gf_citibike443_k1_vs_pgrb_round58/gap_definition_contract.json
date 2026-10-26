@@ -1,0 +1,12 @@
+{
+  "absolute_gap": "max(0, verified_upper_bound - valid_lower_bound)",
+  "ambiguous_field_name_gap_forbidden": true,
+  "formulas_frozen_before_results": true,
+  "missing_endpoint_policy": "all three computed gaps are unavailable",
+  "orientation": "minimization",
+  "relative_gap": "absolute_gap / max(abs(verified_upper_bound), 1e-6)",
+  "scaled_gap": "absolute_gap / max(1, abs(verified_upper_bound))",
+  "schema": "round58-gap-definition-contract-v1",
+  "valid_lower_bound": "solver bound accepted only after method-specific scope/lifecycle checks",
+  "verified_upper_bound": "objective of independently verified original-problem incumbent"
+}

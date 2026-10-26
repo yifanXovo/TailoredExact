@@ -1,0 +1,60 @@
+{
+  "roles": [
+    {
+      "id": "F2",
+      "V": 20,
+      "M": 2,
+      "Q_vector": [
+        30,
+        30
+      ],
+      "scenario_id": "round86-unadapted-varied-structures-v1_F2",
+      "input_path": "reference/round86_unadapted_confirmation/F2.txt",
+      "input_sha256": "ebdf99e77dc9dcc57946970fa6d7e1cdf2defdcd277562a454d4889c716b645e",
+      "T_seconds": 3600,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 1200,
+      "method_order": [
+        "P-GRB",
+        "ENS-C",
+        "EVENT-STRUCT"
+      ]
+    },
+    {
+      "id": "R98-C2",
+      "V": 30,
+      "M": 3,
+      "Q_vector": [
+        20,
+        25,
+        30
+      ],
+      "scenario_id": "round98-state-service-confirmation-v1-C2",
+      "input_path": "reference/round98_confirmation/C2.txt",
+      "input_sha256": "07d0964c87b534254e6bf2957911859a6a2bd73e377211728b7e65f44294fc76",
+      "T_seconds": 7200,
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "EVENT-FULL",
+        "EVENT-CORE",
+        "P-GRB",
+        "EVENT-STRUCT"
+      ]
+    }
+  ],
+  "phase": "eight complete serial development arms after independent admission",
+  "process_shutdown_margin_seconds": 30,
+  "nominal_seconds": 12600,
+  "maximum_formal_children": 8,
+  "runtime_policy": "uniform single MIPSOL/lazy master; no AM for EVENT; FULL/CORE new A/B disabled; STRUCT new A/B enabled, native fallback FULL; fixed car order; one monotonic startup deadline; no instance/size/stagnation dispatch",
+  "master": "R105 global VD-P/F0, all necessary rows retained, only x/load integer types relaxed, self-paid non-strict U0 domain",
+  "confirmation_protocol_SHA": "0a4a4017ab5cdc68454fb967be66a858161db45d2280580a739b7016a1048150",
+  "decision_after_all_eight": true,
+  "allow_one_evidence_based_substantive_revision": true
+}

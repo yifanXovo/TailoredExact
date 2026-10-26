@@ -1,0 +1,71 @@
+{
+  "status": "INSIDE",
+  "reason": "explicit_exact_rational_combination_within_declared_tolerance",
+  "vehicle": 0,
+  "seconds": 0.0008521000272594392,
+  "Optimize_calls": 1,
+  "DP_calls": 0,
+  "columns": 8,
+  "duplicates": 0,
+  "tolerance": 1e-08,
+  "zero_width_residual": 0.0,
+  "history": [],
+  "restricted_distance": 0.0,
+  "normalized_residual": 0.0,
+  "combination": [
+    {
+      "lambda_rational": "1/2",
+      "lambda_float": 0.5,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "lambda_rational": "1/2",
+      "lambda_float": 0.5,
+      "plan": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "verified_distance_upper": 0.0,
+  "verified_distance_upper_rational": "0"
+}

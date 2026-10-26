@@ -1,0 +1,118 @@
+{
+  "scope": "independent bounded arithmetic/source assertions; no native execution",
+  "facts": [
+    {
+      "name": "closed floor is not a NEXT competitor",
+      "passed": true,
+      "detail": "Including a proof-cover Closed leaf as a scheduling competitor changes the action."
+    },
+    {
+      "name": "NEXT requeue precedes reached milestone",
+      "passed": true,
+      "detail": "Already-reached milestone does not override a lower relevant open competitor."
+    },
+    {
+      "name": "NEXT milestone permits later lookahead",
+      "passed": true,
+      "detail": "No timed quantum and no fresh NEXT target after the retained milestone."
+    },
+    {
+      "name": "three AM actions",
+      "passed": true,
+      "detail": "Fixed teaching states; no LP solve. AM uses raw child bounds."
+    },
+    {
+      "name": "epoch invalidation source leaves milestone intact",
+      "passed": true,
+      "detail": "Direct source text assertion within active ensureArtifact invalidation block."
+    },
+    {
+      "name": "neutral source uses exact equality and full potential",
+      "passed": true,
+      "detail": "Direct source assertions; not a rerun of the physical neighborhood."
+    },
+    {
+      "name": "neutral tolerance substitution would alter acceptance",
+      "passed": true,
+      "detail": "A tiny objective increase and an earlier duration increase are rejected despite small residual or lower sum."
+    },
+    {
+      "name": "tight physical Gini scalar SP inequalities",
+      "passed": true,
+      "detail": {
+        "fixed_ratio_vectors": 64,
+        "exact_fraction_arithmetic": true,
+        "includes_S_zero": true
+      }
+    },
+    {
+      "name": "nonstrict numerical closure is not exact infeasibility",
+      "passed": true,
+      "detail": {
+        "n": 2,
+        "C": [
+          1,
+          1
+        ],
+        "D": [
+          1,
+          1
+        ],
+        "initial": [
+          1,
+          0
+        ],
+        "Q": 1,
+        "h": 2,
+        "T": 2,
+        "coordinates": "all zero",
+        "lambda_value": 1,
+        "weights": [
+          "1/10000000000",
+          "1/2000000000"
+        ],
+        "interval": [
+          "1/2",
+          "1/2"
+        ],
+        "own_empty_U": "1000000001/2000000000",
+        "declared_route": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "declared_operations": [
+          1,
+          -1
+        ],
+        "physical_F": "5000000001/10000000000",
+        "interpretation": "Known numerical guard limitation within 1e-7; not a counterexample to ideal rows or a new native campaign."
+      }
+    },
+    {
+      "name": "native and post-seal signed-gap predicates differ",
+      "passed": true,
+      "detail": "With all other gates true, native one-sided gap predicate accepts; clean published post-seal audit rejects L>U+1e-7."
+    },
+    {
+      "name": "ideal complement and raw numeric floor differ",
+      "passed": true,
+      "detail": "Raw scheduler merge retains 1.0000002, while source-cutoff-completed ideal floor is 1."
+    }
+  ],
+  "sources": {
+    "PaperExternalGiniTree.cpp": "911f95e06f568317306a897f6e90eba9e43e52db1ec7ffec9c9a1426ade5e433",
+    "ControllingLeafScheduler.cpp": "6bbc7e773355bac11e2fb60d9ec4641d57eedd7baf29c38de6eba3cde3674303",
+    "ExternalGiniTree.cpp": "4e51bc6e3b0e9993b317c6c4aa0fb659f5cd88a71d19fe78608fa80c85e1bfae",
+    "IntervalRowFactory.cpp": "11d739171c660fd3c2761f575a72639da6d8fa57189da0ea5d3afbe3a319fa46",
+    "CplexBaseline.cpp": "9a230e48f9c6f5179d5760c216fd39774579e268c762aea4fe089efd076ea65c",
+    "HgaTgbcRunner.cpp": "418fa40968a22196c72eb48879e7bc4a72bb8f7a570faba99b77814248e5d8a5",
+    "Round83BlockExchange.cpp": "5a70c158a75f447c40fbff995703339cb5b59c551cba1be193283947724644a5",
+    "hga_tgbc/HgaTgbcGreedy.cpp": "871b3f3e024e273bbc8ee55d60dfc29f11d5282891eae1ed1419da02119821cd"
+  },
+  "source_mode": "compact saved source excerpts; no source revalidation",
+  "optimizer_calls": 0,
+  "production_compilations": 0,
+  "H_searches": 0
+}

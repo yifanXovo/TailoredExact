@@ -1,0 +1,76 @@
+{
+  "UTC": "2026-10-25T07:40:49.358646+00:00",
+  "reviewer": "/root/reliability_review",
+  "source_commit": "4507c3554c6544048d307168779c8757f53cc5ae",
+  "candidate_manifest_SHA": "101e8f75d2675d1f728ddd8aa4010d0b57821218e730a7b06207239af6a997b2",
+  "build_manifest_SHA": "84067f2e1b99e6420bbf2090aa4f2c89b40cb89759e43afcb7225dd1017ebede",
+  "actual_source_and_header_files": 109,
+  "source_zip_members": 110,
+  "executed_source_zip_SHA": "63f292673167bceb5074f1813d68fd084b8db215bef3b2178e10f5fbc70c811c",
+  "current_and_zipped_executed_source_bytes_match": true,
+  "actual_binary_identities": [
+    {
+      "kind": "production",
+      "PE_SHA": "edfd4e2839afbe8571f00860402ae7596f702d4b494c1da8af0043acabf209ce",
+      "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+    },
+    {
+      "kind": "research",
+      "PE_SHA": "e0ff2e616124c2521af77fcd62ac068cf9f51fabdc5a60b03a58b66a6d988e0f",
+      "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+    }
+  ],
+  "original_PE_identities_preserved": true,
+  "main_compact_archive_compiler_identities_checked": true,
+  "ABI_receipt_SHA": "595cf20c16779df5777548ad71674496a7e2bc1f1836d024cb3e8b6fc0d26f68",
+  "ABI_layouts": {
+    "previous": {
+      "scope": 256,
+      "request": 1048,
+      "outcome": 1928,
+      "native_scope_offset": 112,
+      "gamma_L_offset": 432
+    },
+    "candidate": {
+      "scope": 256,
+      "request": 1048,
+      "outcome": 1928,
+      "native_scope_offset": 112,
+      "gamma_L_offset": 432
+    }
+  },
+  "core_test_receipts": [
+    {
+      "name": "native_evidence_journal_tests_05",
+      "receipt_SHA": "657a6e3663f60895c93d19ca5a7cf9c3255f19c29bfbe3cc305ea4df43b2c807",
+      "stdout_SHA": "4bf8f653c379ee98c6527ae703b7cfec8476d2652b84fa1b512cebfa87fbee05",
+      "stdout": "59 scope, coverage, physical contradiction and receipt checks passed; zero Optimize calls"
+    },
+    {
+      "name": "round133_terminal_tests_05",
+      "receipt_SHA": "c1acc6c00e406009a6932b83e2bbb5105f60e33c8b982cb9a9bc01b632cf120a",
+      "stdout_SHA": "14c8c11a4c560d074bb6a6ea0463a6dd8baa6bf60aa4575083acff5dc3494486",
+      "stdout": "terminal, target, source rejection and normal proof checks pass; zero Optimize"
+    },
+    {
+      "name": "round133_inclusive_cutoff_tests_02",
+      "receipt_SHA": "45147f836e7cc17ac12f063ff22555325e65b32e438701a82fe438db2bb3b2f8",
+      "stdout_SHA": "299a1eafbdd1f8f9fb876294ab70250cd7b98717b3c800288b21a3f2681c8a00",
+      "stdout": "27 generated rows/bounds preserve exact dyadic boundary; old artificial row violates it by1; zero Optimize"
+    },
+    {
+      "name": "round27_paper_scheduling_tests_01",
+      "receipt_SHA": "eb8b9df2647dafde20a64ee1753fcb78a19152536f25ad4ca6669869b6e73c3f",
+      "stdout_SHA": "94541de545adc342ff4b7e29530c66130ccbd06e3cb97a4cd01b8fa371794f0f",
+      "stdout": "Round27PaperSchedulingTests passed 47 checks"
+    }
+  ],
+  "original_input_files_checked": 5,
+  "original_input_bytes": 6634,
+  "actual_input_bytes_equal_fixed_commit_sources": true,
+  "native_Optimize": 0,
+  "native_module_imports": 0,
+  "compilation": 0,
+  "repeated_exact_point_calculation": 0,
+  "outer_seconds": 0.5105621999828145
+}

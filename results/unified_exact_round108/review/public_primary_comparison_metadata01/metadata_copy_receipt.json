@@ -1,0 +1,58 @@
+{
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\engineering\\public_primary_metadata01\\copy.py",
+    "--root",
+    "E:\\codes\\ExactEBRP-round108",
+    "--recovered-root",
+    "E:\\round108-public-recovered-20261009-v1"
+  ],
+  "exit_code": 0,
+  "seconds": 0.014349799952469766,
+  "source_SHA": "cc3e502c5d8b23de9c75f2ba3c76451a306ac61a13f0d375da318f99b0d4b6ca",
+  "files": [
+    {
+      "source": "E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\public_comparison_receipt.json",
+      "destination": "E:\\round108-public-recovered-20261009-v1\\results\\unified_exact_round108\\review\\public_primary_comparison_metadata01\\public_comparison_receipt.json",
+      "bytes": 5740,
+      "SHA256": "5addfd63ad1ab35309af334c6fdd7f405fa236f76d60cd56c8bbb18b620db682"
+    },
+    {
+      "source": "E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\public_restore_receipt.json",
+      "destination": "E:\\round108-public-recovered-20261009-v1\\results\\unified_exact_round108\\review\\public_primary_comparison_metadata01\\public_restore_receipt.json",
+      "bytes": 707,
+      "SHA256": "c74f401c7408df8abe8e3a0e27962a3337d2e23148e777879ad13dd51b8d2b7b"
+    },
+    {
+      "source": "E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\engineering\\public_rebuild01\\receipt.json",
+      "destination": "E:\\round108-public-recovered-20261009-v1\\results\\unified_exact_round108\\review\\public_primary_comparison_metadata01\\public_rebuild_wrapper_receipt.json",
+      "bytes": 3728,
+      "SHA256": "aaeaf6e771c791b02ef1340cc505aae7d0055697f6a793d4cf0ed75803394487"
+    },
+    {
+      "source": "E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\engineering\\public_rebuild01\\launch.json",
+      "destination": "E:\\round108-public-recovered-20261009-v1\\results\\unified_exact_round108\\review\\public_primary_comparison_metadata01\\public_rebuild_launch.json",
+      "bytes": 3464,
+      "SHA256": "24122cdc70079794923646fa4e98a0be582286b78bf25565288b9f3067324257"
+    },
+    {
+      "source": "E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\engineering\\public_rebuild01\\stdout.log",
+      "destination": "E:\\round108-public-recovered-20261009-v1\\results\\unified_exact_round108\\review\\public_primary_comparison_metadata01\\public_rebuild_stdout.log",
+      "bytes": 1841,
+      "SHA256": "198e31a081e12805913e4a83de0d868f6673f117c0d7b512c75eb64ad4fd3679"
+    },
+    {
+      "source": "E:\\codes\\ExactEBRP-round108\\results\\unified_exact_round108\\engineering\\public_rebuild01\\stderr.log",
+      "destination": "E:\\round108-public-recovered-20261009-v1\\results\\unified_exact_round108\\review\\public_primary_comparison_metadata01\\public_rebuild_stderr.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Exact completed public reconstruction metadata; no raw carrier or rebuilt output mutation",
+  "raw_evidence_read": false,
+  "summary_reconstruction": false,
+  "engineering": true,
+  "Optimize": 0,
+  "IIS": 0,
+  "conservative_solver_starts": 0
+}

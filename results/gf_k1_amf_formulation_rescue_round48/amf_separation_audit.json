@@ -1,0 +1,21 @@
+{
+  "checks": {
+    "B1": false,
+    "B2": false,
+    "B3": true,
+    "B4": true,
+    "H1": true,
+    "H2": true
+  },
+  "failed_checks": [
+    "B1",
+    "B2"
+  ],
+  "formula_changed_after_freeze": false,
+  "gini_coordinate_fully_excluded": true,
+  "primary_offline_gate_passed": false,
+  "registry_changed_after_freeze": false,
+  "required_consequence": "open Stage3 eight-row diagnostic only; forbid Stage4/5; bounded structural negative",
+  "schema": "round48-amf-separation-audit-v1",
+  "structural_classification": "amf_partial_structural_separation"
+}

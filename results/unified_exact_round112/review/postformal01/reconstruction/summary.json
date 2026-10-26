@@ -1,0 +1,130 @@
+{
+  "stage": "BLOCKED",
+  "formal_arms": 12,
+  "pair_positions": 30,
+  "qualified_qualification_arms": 7,
+  "backend_conclusions": {
+    "ENS-C": {
+      "status": "INCOMPLETE_ATTRIBUTION",
+      "denominator": 5,
+      "eligible_count": 3,
+      "counts": {
+        "WIN": 2,
+        "LOSS": 1
+      },
+      "five_role_vector": [
+        {
+          "id": "F2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false
+        },
+        {
+          "id": "R98-C2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false
+        },
+        {
+          "id": "R108-L48",
+          "classification": "LOSS",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false
+        },
+        {
+          "id": "G50-C1",
+          "classification": "UNEVALUABLE",
+          "eligible": false,
+          "reason": "BACKEND_NOT_EXPOSED",
+          "reason_codes": [
+            "BACKEND_NOT_EXPOSED",
+            "MISSING_OR_UNEVALUABLE"
+          ],
+          "severe_regression": null
+        },
+        {
+          "id": "G100-R2",
+          "classification": "UNEVALUABLE",
+          "eligible": false,
+          "reason": "BACKEND_NOT_EXPOSED",
+          "reason_codes": [
+            "BACKEND_NOT_EXPOSED",
+            "MISSING_OR_UNEVALUABLE"
+          ],
+          "severe_regression": null
+        }
+      ]
+    },
+    "M-B": {
+      "status": "INCOMPLETE_ATTRIBUTION",
+      "denominator": 5,
+      "eligible_count": 3,
+      "counts": {
+        "WIN": 2,
+        "LOSS": 1
+      },
+      "five_role_vector": [
+        {
+          "id": "F2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false
+        },
+        {
+          "id": "R98-C2",
+          "classification": "WIN",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false
+        },
+        {
+          "id": "R108-L48",
+          "classification": "LOSS",
+          "eligible": true,
+          "reason": "QUALIFIED",
+          "reason_codes": [],
+          "severe_regression": false
+        },
+        {
+          "id": "G50-C1",
+          "classification": "UNEVALUABLE",
+          "eligible": false,
+          "reason": "BACKEND_NOT_EXPOSED",
+          "reason_codes": [
+            "BACKEND_NOT_EXPOSED",
+            "MISSING_OR_UNEVALUABLE"
+          ],
+          "severe_regression": null
+        },
+        {
+          "id": "G100-R2",
+          "classification": "UNEVALUABLE",
+          "eligible": false,
+          "reason": "BACKEND_NOT_EXPOSED",
+          "reason_codes": [
+            "BACKEND_NOT_EXPOSED",
+            "MISSING_OR_UNEVALUABLE"
+          ],
+          "severe_regression": null
+        }
+      ]
+    }
+  },
+  "conservative_starts": 39,
+  "outer_fee_seconds_upper": 18061.35593342781,
+  "native_Optimize": 60,
+  "reader_SHA": "d6240700b6b5272cf7f0bac8487101373ac2c608156a247b1de20507aff32cfc",
+  "pure_offline": true,
+  "native_rerun": false,
+  "default_ENS_changed": false,
+  "primary_benchmark": "cold P-GRB"
+}

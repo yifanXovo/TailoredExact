@@ -1,0 +1,310 @@
+{
+  "schema": "round133-independent-post-public-delivery-review-v1",
+  "UTC": "2026-10-25T13:38:54.142154+00:00",
+  "reviewer": "/root/reliability_review",
+  "primary_delivery_and_cleanup_launcher": "/root",
+  "decision": "ACCEPT_PUBLIC_RECOVERY_AND_GUARDED_CLEANUP",
+  "public_restore_receipt_SHA": "02245307f18d91d950eda3203591563e61d6060a5320455f08b27ffa989e77e1",
+  "science_commit": "e4c6f82316f8697c6dfcf59d3a0807619b7bcae8",
+  "owned_destination": "E:\\codes\\ExactEBRP-work\\restore\\round133-public-e4c6f823",
+  "public_recovery": {
+    "status": "PASS",
+    "files": 436,
+    "archives": 24,
+    "current_members": 321003,
+    "export_manifest_SHA": "19518b22302fc51a2085899129cd67cf015536df02761feecc25f9fa8cff59f0",
+    "portable_stdout_SHA": "b961d9aa4045f72c4bd76189699a2258d8bed8806121d7b96621b64829e60291",
+    "portable_formal_positions": 22,
+    "unit_positions": 1,
+    "unit_in_performance_denominator": false,
+    "J2_J3_receipt_SHA": "a356f65f849cb80936f675b59bd3f0056a57a2ebe14106d178ad284b88635f1f",
+    "D24_receipt_SHA": "c8d77e95415d993b72f37af93e4817c4e04b4a65d57f1c8c7e4e33db54f1bc78",
+    "source_members": [
+      110,
+      89
+    ],
+    "old_named_source_members": 217,
+    "one_original_initially_empty_owned_root": true,
+    "internal_cumulative_seconds": {
+      "total": 3243.502248400124,
+      "transport": 2833.5253835001495,
+      "semantic": 409.9768669999903
+    },
+    "final_state_cumulative_seconds": {
+      "total": 3243.5066968001192,
+      "transport": 2833.5253835001495,
+      "semantic": 409.98131469998043
+    },
+    "failed_outer_seconds": 1800.2186158999102,
+    "resume_outer_seconds": 1443.7407627999783,
+    "separately_paid_outer_sum_seconds": 3243.9593786998885,
+    "G1_seconds": 0.0,
+    "zero_native_Optimize_compile_vendor_DLL": true,
+    "original_failed_attempt_preserved": true
+  },
+  "same_root_resume": {
+    "admission_SHA": "c2ea3d1d8ad4b07a9ae2cc3c5dd9e4d01ff7aec9be206918d78b5cba54f0e00d",
+    "wrapper_SHA": "2357ead1c1a31d4b4be0ccb2055ba3db9fc7ff381e62bac0a1e416f704cd59b0",
+    "bootstrap_SHA": "b8062780c069e252df5306d79fc5b1c22038d1adf4f0ec229cdaddc1cbca5aa8",
+    "metadata_commit": "c86044ddc67fb3dca199089497478f578b6a4bcf",
+    "anonymous_exact_bytes_before_execution": true,
+    "only_cumulative_limits_changed": true,
+    "original_and_resume_process_exit_observed": true,
+    "recorded_resume_and_supervisor_pids_independently_observed_absent": true,
+    "no_unclosed_fees": true
+  },
+  "all_23_clock_and_scientific_receipt_comparisons": [
+    {
+      "arm_id": "01_X-35-U_S0_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "02_X-35-U_S1_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": true,
+      "certificate": false
+    },
+    {
+      "arm_id": "03_SC-B20-S_S0_GEOM_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": false
+    },
+    {
+      "arm_id": "04_SC-B20-S_S0_S2R_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "05_SC-B20-S_S1_S2R_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "06_SC-B20-S_S1_GEOM_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "07_K-15-S_S0_P_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": false
+    },
+    {
+      "arm_id": "08_K-15-S_S0_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "09_K-15-S_S0_PS_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": false
+    },
+    {
+      "arm_id": "10_K-15-S_S1_PS_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": false
+    },
+    {
+      "arm_id": "11_K-15-S_S1_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "12_K-15-S_S1_P_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": false
+    },
+    {
+      "arm_id": "13_UC-B20-B_S0_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "14_UC-B20-B_S1_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "01_SC-C15-B_S0_S2_original_E3",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "02_SC-C15-B_S0_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "03_SC-C15-B_S1_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "04_SC-C15-B_S1_S2_original_E3",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "05_SC-B20-S_S0_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "06_SC-B20-S_S0_S2_original_E3",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "07_SC-B20-S_S1_S2_original_E3",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "08_SC-B20-S_S1_S2_candidate",
+      "formal": true,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    },
+    {
+      "arm_id": "D2_TWO_STATION_S1_S2",
+      "formal": false,
+      "all_original_measured_clock_fields_equal": true,
+      "all_derived_normalized_semantics_equal": true,
+      "source_reduced": false,
+      "certificate": true
+    }
+  ],
+  "exact_joint_comparisons": {
+    "J2": {
+      "fleets": 59,
+      "loaded_rows": 583,
+      "bounds": 284,
+      "LP": "5404319552844595/36028797018963968",
+      "IP": "14411518807585587/36028797018963968",
+      "gap": "1/4"
+    },
+    "J3": {
+      "fleets": 66,
+      "loaded_rows": 583,
+      "bounds": 298,
+      "LP": "5404319552844595/36028797018963968",
+      "IP": "14411518807585587/36028797018963968",
+      "gap": "1/4"
+    }
+  },
+  "D24": {
+    "rows": 22996,
+    "columns": 9391,
+    "equalities": 601,
+    "objective": "295153098392673137459/324518553658426726783156020576256",
+    "all_three_claims_refuted_beyond_original_tolerance": true,
+    "loaded_signed_zero_only": 3,
+    "historical_source": "REJECTED",
+    "internal_native_cause": "UNKNOWN",
+    "no_historical_presolve_cut_tree_claim": true
+  },
+  "PDF": {
+    "PDF_SHA": "0c43fd125d75fe36e7fae0bc62b714b807a827bf4135cdb6afa6102864aef4cc",
+    "QA_SHA": "92750b451c72741e16e205171ee3c2d74aa2a30410825bb86600a8fe8ca04e30",
+    "pages": 50,
+    "embedded_fonts": 19,
+    "primary_actual_visual_inspection": "/root: all prior/final pages and affected pages, recorded in immutable QA",
+    "independent_actual_visual_inspection": "/root/reliability_review: all current 50 pages through nine final contact sheets; full-size pages 2,11,12,16,17,28,39,40,50",
+    "independent_visible_defects_found": [],
+    "images_and_contact_sheet_SHA_all_rechecked": true,
+    "scientific_source_unchanged": true,
+    "subpoint_2pt_table_warnings_no_visible_overhang": true
+  },
+  "remote": {
+    "independent_readback_SHA": "ff8b4ae25e2555466101f933bc4d1460f1748419fa4d6c6a51f99264382ec8d4",
+    "key_file_blob_identities": 12,
+    "PR": "https://github.com/yifanXovo/TailoredExact/pull/195",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "actual_head": "c86044ddc67fb3dca199089497478f578b6a4bcf",
+    "science_commit": "e4c6f82316f8697c6dfcf59d3a0807619b7bcae8"
+  },
+  "guarded_cleanup": {
+    "reviewed_source_SHA": "136a35cf99c66b380d2d1ee0a9c54279852cccf38ab284592f0a1488449f0072",
+    "scope": "Only verified current owned recovery copies and hash-recorded reconstructible TEMP archive/PDF duplicates",
+    "required_before_first_delete": "The cleanup source independently hashes the complete exact restored set and retained carrier pieces and resolves every deletion target inside the explicit permitted parent; it must stop on any mismatch.",
+    "retain": "All original unique current raw, original failures, source/receipts, published pieces, PE/DLL, old rounds/worktrees and user content",
+    "record": "Pre-delete exact plan plus actual deletion receipt and logical bytes; observed volume-space change separately",
+    "actual_cleanup": "PENDING_PARENT_ONLY",
+    "final_delivery_review": "REQUIRED_AFTER_ACTUAL_CLEANUP_AND_METADATA_PUBLICATION"
+  },
+  "no_full_23_or_math_replay_repeated_by_this_review": true,
+  "no_Native_compile_public_recovery_or_deletion_by_this_review": true,
+  "final_delivery_acceptance": false,
+  "submission_readiness": "Separate scoped manuscript-preparation judgment; not automatic journal submission or acceptance",
+  "Optimize": 0,
+  "native_starts": 0,
+  "compilation": 0,
+  "metadata_comparison_seconds": 0.2492285999469459
+}

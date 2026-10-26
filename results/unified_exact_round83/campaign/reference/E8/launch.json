@@ -1,0 +1,30 @@
+{
+  "command": [
+    "E:\\codes\\ExactEBRP-round66\\build\\round83\\v1\\Round65ReferenceBuild.exe",
+    "reference/qualification_round39/small-easy/round39_small_easy_V12_M3_Q30_slot08_seed1167625600.txt",
+    "3600",
+    "60",
+    "60",
+    "0.15",
+    "E:\\codes\\ExactEBRP-round66\\results\\unified_exact_round83\\campaign\\reference\\E8"
+  ],
+  "binary_sha256": "f9456c99759c9e9e62dcf19cc13300ce55f6d30d616d0547e75026a1d68fa3c3",
+  "input": {
+    "id": "E8",
+    "scenario_id": "round39_small_easy_V12_M3_Q30_slot08_seed1167625600",
+    "instance_path": "reference/qualification_round39/small-easy/round39_small_easy_V12_M3_Q30_slot08_seed1167625600.txt",
+    "input_sha256": "587737b9d000c1712220232a0fe957073f1f03ac649a63a4775abd9166603acd",
+    "V": 12,
+    "M": 3,
+    "Q": 30,
+    "T_seconds": 3600,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "role": "R83 fixed complete-method role; see full_screen_plan.md",
+    "stage": "exposed_development"
+  },
+  "cap": 30,
+  "expected_optimize_calls": 0,
+  "plan_sha256": "8653c5ebc07a3e4f2408fac45296189975f12449dfa71f94f3bffb8a5e1a1b50"
+}

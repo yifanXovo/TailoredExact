@@ -1,0 +1,173 @@
+{
+  "decision": "ACCEPT_LIGHTWEIGHT_NARRATIVE_REVIEW",
+  "stage": "BLOCKED",
+  "resumption_allowed": false,
+  "scope": "Narrative snapshot after completed independent raw and comparison audits; future delivery receipts must be reviewed separately.",
+  "actual_utc": "2026-10-09T05:11:22.233051+00:00",
+  "explicit_read_root": "E:\\codes\\ExactEBRP-round109",
+  "bindings": {
+    "review/final_blocked_raw01/audit.json": "ff08f530e59a9edd0641e08e656d761937f6d043c758c80e77877484ef16980d",
+    "review/final_blocked_compare02/audit.json": "b08eb3f90646d48528bf0a89aed3a1eef8f96eb00bd67557f8cf2c98917feb31",
+    "final_report.md": "fa1adacb5b886b189f605044aee734ebab78ca8d2e03af8a2c40080294b0c1fd",
+    "paper_candidate_spec.md": "f6a931746471ef6f65e9df354a0bdcc2148f5c2299b773def0592283a3fe4c1f",
+    "main09_stack_failure.md": "2913f728d6419dc2cafed392fc99f3a46cb60ab1d391f80b911edfcee005c88b",
+    "reproduce.md": "72288803dc595e34f607e3f4b1750a090668d7de2c525a1a733662871c57eda2"
+  },
+  "source_SHA": "6b96331ffb6df3798599713065edb1c43cf418d2fdcae04060836f315909c882",
+  "text_checks": [
+    {
+      "file": "final_report.md",
+      "required_statement": "**Stage: BLOCKED.**"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "All6 formal Seed1 arms are unstarted."
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "micro-positive objective1.000173407530002e-12"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "separately\nfrom ENS's physical F=0 fleet"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "combined qualification/formal rebuild has99 actual Optimize calls"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "63LP and36MIP"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "54LP and28MIP"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "maximum simultaneously relevant active\nleaves is1"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "NEXT_LEAF target MIP count\nis0"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "51 conservative starts"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "18618.079987913487"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "final526 and return1"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "target/final795 and return95"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "unknown exact;[1770.375,1771.833281]"
+    },
+    {
+      "file": "final_report.md",
+      "required_statement": "unknown exact;[643.7820000000065,645.352919]"
+    },
+    {
+      "file": "reproduce.md",
+      "required_statement": "python <new-recovered-root>/scripts/round109_finalize_blocked.py rebuild"
+    },
+    {
+      "file": "reproduce.md",
+      "required_statement": "review/round109_independent_blocked.py --root <new-recovered-root> --public"
+    },
+    {
+      "file": "reproduce.md",
+      "required_statement": "There is no original-worktree fallback."
+    },
+    {
+      "file": "reproduce.md",
+      "required_statement": "All six formal Seed1 arms are\nunmeasured."
+    },
+    {
+      "file": "paper_candidate_spec.md",
+      "required_statement": "Round109 stage is BLOCKED"
+    },
+    {
+      "file": "paper_candidate_spec.md",
+      "required_statement": "ENS-C remains the default"
+    },
+    {
+      "file": "paper_candidate_spec.md",
+      "required_statement": "including return\nunloading"
+    },
+    {
+      "file": "paper_candidate_spec.md",
+      "required_statement": "representation"
+    },
+    {
+      "file": "paper_candidate_spec.md",
+      "required_statement": "This equivalence does not require the two"
+    },
+    {
+      "file": "main09_stack_failure.md",
+      "required_statement": "0xC00000FD"
+    },
+    {
+      "file": "main09_stack_failure.md",
+      "required_statement": "1,414,288bytes"
+    },
+    {
+      "file": "main09_stack_failure.md",
+      "required_statement": "or valid physical endpoint."
+    },
+    {
+      "file": "main09_stack_failure.md",
+      "required_statement": "No\nqualified ordinary environment-only same-PE/same-entry repair was found."
+    }
+  ],
+  "own_valid_arms": 24,
+  "own_certified_arms": 14,
+  "own_open_arms": 10,
+  "own_qualification_arms": 5,
+  "own_pair_counts": {
+    "M-B/P-GRB": {
+      "WIN": 7,
+      "TIE": 1,
+      "severe_regressions": 0
+    },
+    "M-B/ENS-C": {
+      "WIN": 3,
+      "TIE": 3,
+      "LOSS": 2,
+      "severe_regressions": 1
+    },
+    "ENS-C/P-GRB": {
+      "WIN": 7,
+      "TIE": 1,
+      "severe_regressions": 0
+    }
+  },
+  "formal_solve_kinds": {
+    "MIP": 24,
+    "LP": 54,
+    "CHILD_BOUND_TARGET_MIP": 4
+  },
+  "formal_target_kinds": {
+    "child_disjunction": 4
+  },
+  "actual_Optimize_prior_audit": 99,
+  "formal_Optimize_prior_audit": 82,
+  "formal_Seed1_unmeasured": 6,
+  "V100_performance_unassessed": true,
+  "micro_positive_cold_countervector_distinct_from_ENS_zero_fleet": true,
+  "operations_paragraph_future_receipts_not_claimed_as_completed": true,
+  "unchanged_original_audits_and_core_files": true,
+  "raw_rebuilds_this_review": 0,
+  "Optimize_this_review": 0,
+  "native_environments_this_review": 0,
+  "production_edits": 0,
+  "engineering_elapsed_seconds": 0.2241980000399053
+}

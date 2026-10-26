@@ -1,0 +1,91 @@
+{
+  "optimizer_calls": 0,
+  "source_cpp_sha256": "39f7d168a288a6fece32d7985160dd7a2d8a1756c918465ad588e6c81fb19731",
+  "records": [
+    {
+      "path": "results/unified_exact_round97/qualification02/raw/01_F5_SHADOW/external/round97/events.jsonl",
+      "sha256": "477d2264a9898769963da2f9a1d80bba684ba4c28fdb96e84b1b3bef798ff24b",
+      "submission_threshold_records": 0,
+      "distinct_logged_call_value_pairs": 0
+    },
+    {
+      "path": "results/unified_exact_round97/qualification02/raw/02_F5_FEEDBACK/external/round97/events.jsonl",
+      "sha256": "3487cb7ee7671b6d6c538f0b39dba71d2342cc4b403f261752f413a8f8388f61",
+      "submission_threshold_records": 0,
+      "distinct_logged_call_value_pairs": 0
+    },
+    {
+      "path": "results/unified_exact_round97/qualification02/raw/03_F2_FEEDBACK/external/round97/events.jsonl",
+      "sha256": "7b424a1643b67f3cc45a61f53a9ccb65913bd311f7c212615ae22f9700062d5e",
+      "submission_threshold_records": 3,
+      "distinct_logged_call_value_pairs": 3
+    },
+    {
+      "path": "results/unified_exact_round97/qualification03/raw/01_F5_SHADOW/external/round97/events.jsonl",
+      "sha256": "60d154a4b8a8120583f2138959735da4e252c3fe6cbacc1b3170c20d8f358443",
+      "submission_threshold_records": 0,
+      "distinct_logged_call_value_pairs": 0
+    },
+    {
+      "path": "results/unified_exact_round97/qualification03/raw/02_F5_FEEDBACK/external/round97/events.jsonl",
+      "sha256": "1a9509fc11381b65a881b897f2a4b5fd7d2580e4f62ccd083a75b5e14c739655",
+      "submission_threshold_records": 5,
+      "distinct_logged_call_value_pairs": 3
+    },
+    {
+      "path": "results/unified_exact_round97/qualification03/raw/03_F2_FEEDBACK/external/round97/events.jsonl",
+      "sha256": "0881e20e2a348e02d1aee5ef60da432798075a63f871135f181c01af7a9b4b67",
+      "submission_threshold_records": 3,
+      "distinct_logged_call_value_pairs": 3
+    },
+    {
+      "path": "results/unified_exact_round97/development01/raw/01_F5_SHADOW/external/round97/events.jsonl",
+      "sha256": "b57508153f7c1f6c9535b0fdd993bb747554af269172c143d3c071d154419f90",
+      "submission_threshold_records": 0,
+      "distinct_logged_call_value_pairs": 0
+    },
+    {
+      "path": "results/unified_exact_round97/development01/raw/02_F5_FEEDBACK/external/round97/events.jsonl",
+      "sha256": "3d1dae5a3ac879a2dcf3f19294636d4f30208dd468309efefe66aa55127caedd",
+      "submission_threshold_records": 10,
+      "distinct_logged_call_value_pairs": 6
+    },
+    {
+      "path": "results/unified_exact_round97/development01/raw/03_F5_OFF/external/round97/events.jsonl",
+      "sha256": "9169c77e9ab2e9da723fb2dc72a1bc82816da9c89f2c6886d41bd884b43079f0",
+      "submission_threshold_records": 0,
+      "distinct_logged_call_value_pairs": 0
+    },
+    {
+      "path": "results/unified_exact_round97/development02/raw/01_F5_OLD-FEEDBACK/external/round97/events.jsonl",
+      "sha256": "4334040799a62dc150c778747b8c2d29412a4498dd191d674d69e5b1f1fd3fb2",
+      "submission_threshold_records": 10,
+      "distinct_logged_call_value_pairs": 6
+    },
+    {
+      "path": "results/unified_exact_round97/development02/raw/02_F5_FEEDBACK/external/round97/events.jsonl",
+      "sha256": "2052c425201cf49e1dc3d3fe3169854b0aa7abb54f829ea5c134e995481b04ea",
+      "submission_threshold_records": 6,
+      "distinct_logged_call_value_pairs": 4
+    },
+    {
+      "path": "results/unified_exact_round97/development02/raw/03_F5_OFF/external/round97/events.jsonl",
+      "sha256": "78cff44fb90c6d7ad1287faa28c4481f74b6a736de94000ca98f30170343e4a6",
+      "submission_threshold_records": 0,
+      "distinct_logged_call_value_pairs": 0
+    },
+    {
+      "path": "results/unified_exact_round97/development02/raw/06_D7_OFF/external/round97/events.jsonl",
+      "sha256": "f4ab23e258dfc73836bfb6f6db346b0984a2f07e7943bd0725b74b695bf649c8",
+      "submission_threshold_records": 0,
+      "distinct_logged_call_value_pairs": 0
+    },
+    {
+      "path": "results/unified_exact_round97/development02/raw/07_D7_FEEDBACK/external/round97/events.jsonl",
+      "sha256": "2211718c380039e14481b399e49a03c4ba3733db1dfc8b86e56a9a759ce1b4fe",
+      "submission_threshold_records": 5,
+      "distinct_logged_call_value_pairs": 2
+    }
+  ],
+  "meaning": "Legacy native_incumbent_change is one record per submitted candidate whose threshold is later satisfied: native value <= candidate objective+1e-8 and native value < incumbent-before-1e-8. A single native value can satisfy multiple submissions. It does not count distinct incumbent updates or prove candidate equality/unique source. Distinct logged call/value pairs are only a deduplication of these records, not all actual native updates. Raw events and historical CSV columns remain unchanged."
+}

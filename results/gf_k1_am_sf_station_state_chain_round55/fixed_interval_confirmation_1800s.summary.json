@@ -1,0 +1,47 @@
+{
+  "schema": "round55-fixed-interval-stage-summary-v1",
+  "stage": "fixed_interval_confirmation_1800s",
+  "mode": "solve",
+  "cap_seconds": 1800,
+  "row_count": 38,
+  "state_count": 19,
+  "arm_count": 2,
+  "arms": [
+    "F0-CLEAN",
+    "VD-P"
+  ],
+  "states": [
+    "D1",
+    "E_MAJOR_L",
+    "E_MAJOR_R",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "C1",
+    "C2",
+    "D13",
+    "D14",
+    "V50_MODERATE",
+    "V50_TIGHT2400"
+  ],
+  "executable_sha256": "5151efab9fbd82b91004e2255e60f112707278033d74549a4b0705000b681264",
+  "all_engineering_valid": true,
+  "false_certificate_count": 0,
+  "certificate_counts": {
+    "F0-CLEAN": 14,
+    "VD-P": 16
+  },
+  "shifted_work_geometric_mean_vs_f0": {
+    "VD-P": 0.6637457968702356
+  },
+  "aggregate_gi_vs_f0": {
+    "VD-P": 0.5064701989122932
+  }
+}

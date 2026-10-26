@@ -1,0 +1,98 @@
+{
+  "UTC": "2026-10-20T20:11:15.098904+00:00",
+  "zero_Optimize_SHA": "aaf052b8279d0b300804bcdceac37fb14bd19ca50e99239e8edda7ddcab6665b",
+  "actual_S12_root_differences": [
+    {
+      "mode": "mr",
+      "removed_rows": 596,
+      "removed_columns": [],
+      "families": {
+        "ordered_supply": 24,
+        "conditional_2": 132,
+        "conditional_3": 440
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "mode": "mg",
+      "removed_rows": 336,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ],
+      "families": {
+        "H_spread": 66,
+        "explicit_centering": 264,
+        "linear_objective_estimator": 1,
+        "W_SP": 5
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    },
+    {
+      "mode": "ms2",
+      "removed_rows": 440,
+      "removed_columns": [],
+      "families": {
+        "conditional_3": 440
+      },
+      "remaining_objective_types_bounds_and_duplicate_preserving_rows_identical": true
+    }
+  ],
+  "H_checks": [
+    {
+      "method": "E0_MB",
+      "full_H_complete": true,
+      "fleet_equal": true,
+      "actions_equal": true,
+      "final_inventory_equal": true
+    },
+    {
+      "method": "MD",
+      "full_H_complete": true,
+      "fleet_equal": true,
+      "actions_equal": true,
+      "final_inventory_equal": true
+    },
+    {
+      "method": "MR",
+      "full_H_complete": true,
+      "fleet_equal": true,
+      "actions_equal": true,
+      "final_inventory_equal": true
+    },
+    {
+      "method": "MG",
+      "full_H_complete": true,
+      "fleet_equal": true,
+      "actions_equal": true,
+      "final_inventory_equal": true
+    },
+    {
+      "method": "MS2",
+      "full_H_complete": true,
+      "fleet_equal": true,
+      "actions_equal": true,
+      "final_inventory_equal": true
+    }
+  ],
+  "MD_S12_single_root_LP_MIP_functional": true,
+  "MD_general_mathematical_qualification": false,
+  "boundary_SHA": "e97faadc8760ce4d414f221b23c3ee497f1d3851e73d60dfec4d7a61244b3e92",
+  "vehicle_permutation_physical_equivalence": true,
+  "numerical_cutoff_closure_exception": "R126 Appendix A.5.6/A.7 retained; not an inclusive-set infeasibility statement",
+  "qualified_methods": [
+    "P",
+    "PT",
+    "MB",
+    "MR",
+    "MG",
+    "MS2"
+  ],
+  "blocked_methods": [
+    "MD"
+  ],
+  "reviewer_source": "review/preformal_source_review.md",
+  "reviewer_math": "review/preformal_cutoff_boundary_review.md",
+  "scope": "finite direct checks plus concentrated second-executor review; no third-party replication or full rational proof"
+}

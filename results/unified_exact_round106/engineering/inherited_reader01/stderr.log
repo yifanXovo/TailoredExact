@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_reader.py", line 172, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_reader.py", line 165, in main
+    root=a.root.resolve();dest=a.out.resolve();dest.mkdir(parents=True,exist_ok=False);old=legacy(root,dest);new=None
+                                                                                           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_reader.py", line 110, in legacy
+    for name,new in [('arm_results.csv',dest/'r105_arm_results.csv'),('paired_results.csv',dest/'r105_paired_results.csv'),('fees.csv',dest/'r105_fees.csv'),('native_calls.csv',dest/'r105_native_calls.csv')]:compare_csv(out/'reports02'/name,new)
+                                                                                                                                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\round106-structural-conflict-events\ExactEBRP\scripts\round106_reader.py", line 124, in compare_csv
+    for k in x:assert same(x[k],y[k]),(expected,k,x[k],y[k])
+                      ^^^^^^^^^^^^^^^
+AssertionError: (WindowsPath('E:/r106-recovery/r105-02/results/unified_exact_round105/reports02/arm_results.csv'), 'destination', 'results\\unified_exact_round105\\control01\\raw\\04_F2_ENS-C', 'results/unified_exact_round105/control01/raw/04_F2_ENS-C')

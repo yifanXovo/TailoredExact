@@ -1,0 +1,57 @@
+{
+  "schema": "round108-independent-qualification-accounting-review-v1",
+  "decision": "ACCEPT",
+  "scope": "Supplemental accounting correction plan, not solver retry or performance gate",
+  "reviewed_utc": "2026-10-08T05:55:09Z",
+  "qualification_fee_corrections": [
+    {
+      "label": "qualification_prepare01",
+      "original_launch_SHA": "f94dbc170d408c232b85935d45e98263cdf5f5626ea418e554760ee0416c6461",
+      "original_receipt_SHA": "1e4888dc0899a7bfd781f759c688a20e574d2c1587edaa926b323ea6586312b7",
+      "original_declared_starts": 11,
+      "additional_retained_correction_starts": 1,
+      "corrected_conservative_starts": 12,
+      "original_outer_seconds": 6.942225599952508
+    },
+    {
+      "label": "qualification_cli01",
+      "original_launch_SHA": "f0903258b301f77fdc9bda1e9ca70379308005f827b6264a673b67f0674353ab",
+      "original_receipt_SHA": "70ce1658af60254a1f49ec6fd5ff4418168c98bca01234360061e2ef05bbf95e",
+      "original_declared_starts": 6,
+      "additional_retained_correction_starts": 1,
+      "corrected_conservative_starts": 7,
+      "original_outer_seconds": 262.23416950000683
+    }
+  ],
+  "corrected_qualification_conservative_starts": 19,
+  "bridge_reserved_starts": 7,
+  "corrected_qualification_plus_bridge_reserved_starts": 26,
+  "full_confirmation_groups": 5,
+  "starts_per_confirmation_group": 4,
+  "corrected_full_plan_starts": 46,
+  "maximum_starts": 48,
+  "unused_start_capacity": 2,
+  "original_outer_seconds_unchanged": 269.17639509995934,
+  "frozen_budget_function_ignores_supplemental_corrections": true,
+  "manual_corrected_pre_group_budget_check_required": true,
+  "original_launch_receipts_must_remain_unchanged": true,
+  "source_bindings": {
+    "scripts/round108_common.py": "1498b6ea0bf2abdb56e1c843b23d6c7530ccea7630d351690c4afb8ea230ba5b",
+    "scripts/round108_qualification.py": "e41dfef2fa97c8a7851500e83f7a3079709bc7ddddfcd8fb0d9a55e350e8fe5a",
+    "scripts/round108_campaign.py": "a4fdb46de45eceabf82a046920b9c11b36120254abf2681d86c5919157ab1a74",
+    "scripts/round107_reader.py": "3b04fe6757ae097ec721c13937b4ff9f463af73bc07ec699572d034bc46b788e"
+  },
+  "performance_admission_SHA": "79f346beb90b665a9ec0df8a32ee7087fd9406abedb626b049b90cf3c9439a62",
+  "markdown_SHA": "5ae3c48f3251309f105fb7a2640d826b5303be192df2bce8d5d4dae14dcfe141",
+  "earlier_independent_declaration_only_count17_superseded": true,
+  "correction_files_application_is_parent_pending": true,
+  "reviewer_calls": {
+    "native": 0,
+    "Optimize": 0,
+    "LP_solve": 0,
+    "IIS": 0,
+    "compiler": 0,
+    "full_reader": 0,
+    "raw_archive_scan": 0
+  }
+}

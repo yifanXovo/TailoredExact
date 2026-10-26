@@ -1,0 +1,42 @@
+{
+  "roles": [
+    {
+      "id": "R98-C3",
+      "V": 50,
+      "M": 4,
+      "Q_vector": [
+        20,
+        25,
+        30,
+        35
+      ],
+      "geometry": "separated_islands",
+      "inventory": "shortage",
+      "T_seconds": 7200,
+      "cap_seconds": 1800,
+      "method_order": [
+        "ENS-C",
+        "H-SUBMIT",
+        "P-GRB"
+      ],
+      "input_path": "reference/round98_confirmation/C3.txt",
+      "instance_path": "reference/round98_confirmation/C3.txt",
+      "input_sha256": "defa0feb33841eca3d1079d9e7a6908a84b8ddecf5ffb308fdadf0037d491ec3",
+      "scenario_id": "round98-state-service-confirmation-v1-C3",
+      "pickup_seconds": 60,
+      "drop_seconds": 60,
+      "lambda": 0.15,
+      "total_initial": 941,
+      "total_target": 1012,
+      "zero_excluded_by_stock_shortage": true,
+      "design_isolated_in_R103": false,
+      "historical_role_not_globally_unseen": true,
+      "metadata_source": "results/unified_exact_round98/confirmation_protocol01.json",
+      "metadata_sha256": "a689b6c5cbb4acd0bfc47ce3cb315d4cd8beaef9b4089131dcbdb4228ef143aa",
+      "question": "Known R102 regression protection; preserve ENS advantage and reveal principal P comparison."
+    }
+  ],
+  "phase": "hull development",
+  "reference_billing": "one_finite_batch",
+  "planned_once": true
+}

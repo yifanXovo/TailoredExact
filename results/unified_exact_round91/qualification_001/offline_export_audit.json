@@ -1,0 +1,89 @@
+{
+  "all_source7_before_checked": true,
+  "row_count_matches": true,
+  "witness_feasible": true,
+  "lp_sha_matches": true,
+  "core_sha256_after": "92e6ae6ba2c9d9515a4173dca6a8ff507147228d2639e71a513d4bb24e4ba2f7",
+  "main_sha256_after": "bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2",
+  "probe_unchanged": true,
+  "all_15_state_bounds": true,
+  "all_5_onehot_rows": true,
+  "all_10_pickup_bounds": true,
+  "probe_sha256_after": "9eeef0954a1f282034594371278abdc1398427dcf4202502c75fddb365f41810",
+  "column_count_manifest": 244,
+  "all_10_zero_drop_bounds": true,
+  "verified_cutoff_row": true,
+  "input_sha_matches": true,
+  "core_unchanged": true,
+  "witness_F": 0.2833333333333333,
+  "f0_policy": true,
+  "lp_sha256": "9872d149c970c99f2b0175929221fb42692c6915a68a4e57e94dd1492fb79a29",
+  "all_5_inventory_balance_rows": true,
+  "G_bound": true,
+  "optimizer_calls_manifest": 0,
+  "export_manifest_source_file_count": 165,
+  "vd_p": true,
+  "main_unchanged": true,
+  "input_sha256": "bf04309a7ccca93387e13013c9af2ded1b41d0a15d6b1874cf9a41ac02a2fb83",
+  "nonzero_count_manifest": 2056,
+  "schema": "round91-zero-optimize-export-audit-v1",
+  "all_export_manifest_source_files_match": true,
+  "row_count": 555,
+  "binary_sha_matches": true,
+  "binary_sha256": "bdc76157ed87193a0e2dae4b8548884b3a9b2d37cbfc70b926df23b90c25162a",
+  "manifest_scope": "complete_original_compact_milp_intersected_with_static_gini_interval",
+  "witness_expected_residual": 0,
+  "source7": [
+    {
+      "after_matches": true,
+      "before_verified": true,
+      "expected": "4d1ad96639e1ef8a4093174636a1ef8e4563519485fc7d0ee82af68696057de0",
+      "path": "CMakeLists.txt",
+      "after": "4d1ad96639e1ef8a4093174636a1ef8e4563519485fc7d0ee82af68696057de0"
+    },
+    {
+      "after_matches": true,
+      "before_verified": true,
+      "expected": "c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305",
+      "path": "include/GiniFrontierGeometry.hpp",
+      "after": "c6d8b45bb43027b0ecde60160501ca0a3c07877dbc35bbfbe5fbaaec72c94305"
+    },
+    {
+      "after_matches": true,
+      "before_verified": true,
+      "expected": "386ffd2a778d0fa8648f3eb2ef091d9742c7e25e0b947cf31aa7e1db99efcb3f",
+      "path": "include/Instance.hpp",
+      "after": "386ffd2a778d0fa8648f3eb2ef091d9742c7e25e0b947cf31aa7e1db99efcb3f"
+    },
+    {
+      "after_matches": true,
+      "before_verified": true,
+      "expected": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f",
+      "path": "src/GiniFrontierGeometry.cpp",
+      "after": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f"
+    },
+    {
+      "after_matches": true,
+      "before_verified": true,
+      "expected": "efe8b0598483c2c3d2b3afb611fd2352f2005c53fe4cb9de95ebeab553c61570",
+      "path": "src/main.cpp",
+      "after": "efe8b0598483c2c3d2b3afb611fd2352f2005c53fe4cb9de95ebeab553c61570"
+    },
+    {
+      "after_matches": true,
+      "before_verified": true,
+      "expected": "3de879702ca6dd964a1273558fc5152eaa26fad9001860c0e298270bdb7975a9",
+      "path": "src/PaperExternalGiniTree.cpp",
+      "after": "3de879702ca6dd964a1273558fc5152eaa26fad9001860c0e298270bdb7975a9"
+    },
+    {
+      "after_matches": true,
+      "before_verified": true,
+      "expected": "2dd4582bb757624228fb610a2c9b3cc55fec0b84dca892601ecc1bec83a58d4d",
+      "path": "tests/round90_lp_g_split_tests.cpp",
+      "after": "2dd4582bb757624228fb610a2c9b3cc55fec0b84dca892601ecc1bec83a58d4d"
+    }
+  ],
+  "all_source7_after_match": true,
+  "all_5_Y_reconstruction_rows": true
+}

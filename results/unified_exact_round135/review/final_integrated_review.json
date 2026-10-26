@@ -1,0 +1,382 @@
+{
+  "schema": "round135-independent-final-science-manuscript-PDF-review-v1",
+  "reviewer": "/root/independent_review",
+  "disposition": "PASS_SCIENCE_MANUSCRIPT_AND_FINAL_PDF",
+  "science_and_manuscript_pass": true,
+  "complete_goal_or_delivery_pass_implied": false,
+  "review_window": {
+    "start_UTC": "2026-10-26 13:49:03 UTC",
+    "end_UTC": "2026-10-26 14:05:53 UTC",
+    "elapsed_wall_seconds": 1010,
+    "scope": "Reading, targeted standard-library/PDF readbacks and actual image inspection. Includes waits for the primary author's two narrow PDF corrections; this is not exclusive compute time."
+  },
+  "blocking_findings": [],
+  "unresolved_scientific_or_visual_findings": [],
+  "resolved_findings": [
+    {
+      "id": "G3-01",
+      "file": "model_and_algorithm_appendices.md",
+      "original_line": 311,
+      "assembled_original_line": 634,
+      "issue": "A.5.4 described pair-then-triple enumeration and the 20,825-per-vehicle example without distinguishing the current pair-only S2 from the historical triple-enabled full-M-B writer.",
+      "resolution": "The primary author explicitly states current S2 pairs only, no triple counter consumption, and 1,225 candidate pairs at n=50; the 20,825 example is now explicitly historical. The reviewer checked the final source and actual PDF pages 20-21.",
+      "native_or_reader_changes": 0,
+      "native_reruns": 0,
+      "status": "RESOLVED"
+    },
+    {
+      "id": "G3-02",
+      "found_by": "primary author during refreshed PDF QA",
+      "issue": "The A.5.4 clarification caused A.6 to be isolated at the bottom of PDF page 23.",
+      "resolution": "A local Needspace layout rule moves A.6 together with Lemma A3 to page 24. The reviewer inspected final pages 1,23,24,25 and verified page 1's corresponding TOC update.",
+      "status": "RESOLVED"
+    }
+  ],
+  "scientific_design": {
+    "accepted_R134_S2_retained": true,
+    "AP_default_off": true,
+    "ENS_default_unchanged": true,
+    "one_candidate_only": true,
+    "stage1": {
+      "arms": 10,
+      "cap_seconds": 8760,
+      "complete_pairs": 5
+    },
+    "stage2": {
+      "arms": 22,
+      "cap_seconds": 14760,
+      "entered": true,
+      "advance_seed1_positions": []
+    },
+    "registered_total": {
+      "arms": 32,
+      "pairs": 16,
+      "inputs": 7,
+      "cap_seconds": 23520
+    },
+    "all_registered_positions_completed": true,
+    "matched_commands_equal_after_output_path_normalization_except_AP_flag": true,
+    "all_formal_lambda_point15": true,
+    "serial_single_thread_independent_launches": true,
+    "stage2_entry_justified": "All ten Stage 1 positions were sealed before entry. K20 had a real lower-bound/gap benefit and K35 a material primal/gap benefit with the weaker lower bound explicitly disclosed; D13 and the opposite-order micro repeats showed no early certificate loss. The remaining fixed Seeds/protection roles were needed to assess persistence.",
+    "no_result_selection_or_outcome_retry_found": true,
+    "known_structural_and_protection_inputs_not_random_holdout": true
+  },
+  "recomputed_evidence": {
+    "arms": 32,
+    "pairs": 16,
+    "certificates": {
+      "AP": 10,
+      "S2": 10
+    },
+    "all_pair_clock_endpoint_closeout_checks_pass": true,
+    "sources_checked": 218,
+    "execution_helpers_checked": 9,
+    "capsule_members": 312,
+    "capsule_helpers": 91,
+    "PE_SHA": "652335fbc004eb4799c01d074dd43c31a883ae40fc353ed37eaa82e98b53a3ed",
+    "G1": 17148.624478299604,
+    "separate": 266.83043630060274,
+    "conservative": 17415.454914600206,
+    "fees": 47,
+    "D13_bytes": 5631,
+    "D13_CRLF": 30,
+    "initial_inspection_PDF_SHA": "18d445ab3a2fdaa3f3447dc9f85d8bf42c2fd8c92e8eda08037ed0524b8a55a7",
+    "final_PDF_SHA": "7f0fab6030becd403d83abb7068ae4cbf4c1ad41eaa3a0a5f25e43aaf253ea57",
+    "material_certified_comparisons": [
+      {
+        "role": "K-15-S",
+        "seed": 0,
+        "AP": 149.3096360997297,
+        "S2": 112.11311539378949,
+        "delta": 37.1965207059402,
+        "delta_MIP": 36.914000034332275,
+        "AP_Work": 213.66192380677913,
+        "S2_Work": 160.92570304225362,
+        "AP_nodes": 60497,
+        "S2_nodes": 48701
+      },
+      {
+        "role": "X-35-B",
+        "seed": 0,
+        "AP": 79.973826370202,
+        "S2": 17.58870143815875,
+        "delta": 62.385124932043254,
+        "delta_MIP": 62.026999950408936,
+        "AP_Work": 158.19580568150334,
+        "S2_Work": 27.01371600756504,
+        "AP_nodes": 681,
+        "S2_nodes": 1
+      }
+    ],
+    "open_comparisons": [
+      {
+        "role": "K-20-S",
+        "seed": 0,
+        "relative_gap_change": -0.07048941264496976,
+        "deltaU": 0,
+        "deltaL": 0.0008092600647421344
+      },
+      {
+        "role": "K-35-U",
+        "seed": 0,
+        "relative_gap_change": -0.2531370198709534,
+        "deltaU": -0.03918311296908561,
+        "deltaL": -0.007065539315699199
+      },
+      {
+        "role": "R55-D13",
+        "seed": 0,
+        "relative_gap_change": -0.009011799984337128,
+        "deltaU": 0,
+        "deltaL": 0.00045576761291155066
+      },
+      {
+        "role": "K-20-S",
+        "seed": 1,
+        "relative_gap_change": -0.3026628973861631,
+        "deltaU": 0,
+        "deltaL": 0.004591717462104072
+      },
+      {
+        "role": "K-35-U",
+        "seed": 1,
+        "relative_gap_change": -0.02749923368273936,
+        "deltaU": -0.01752264645103796,
+        "deltaL": -0.0143998741549769
+      },
+      {
+        "role": "R55-D13",
+        "seed": 1,
+        "relative_gap_change": 0.13829797800768198,
+        "deltaU": 0,
+        "deltaL": -0.006325205394251743
+      }
+    ]
+  },
+  "performance_judgment": {
+    "decision": "research-only",
+    "agrees_with_candidate_decision": true,
+    "certificate_coverage": "AP 10/16; S2 10/16; ten BOTH_CERTIFIED pairs and six BOTH_OPEN pairs.",
+    "substantive_AP_certified_time_wins": 0,
+    "substantive_AP_certified_time_losses": 2,
+    "K20": "Both Seeds keep the same feasible U. AP gaps shrink by 7.0489% and 30.2663%; both methods remain open.",
+    "K35": "AP improves U at both Seeds but has weaker qualified L at both. Gap reductions of 25.3137% and 2.7499% are a primal/dual trade-off, not endpoint dominance or a faster proof.",
+    "D13": "Both methods remain open at the same U. AP reduces the Seed0 gap by 0.9012% but increases the Seed1 gap by 13.8298%. Historical 300-second L0.1.0 VD-J data are used only as risk background.",
+    "adverse_cost_attribution": "K15 Seed0 adds 37.1965 complete-production seconds, of which 36.9140 are native MIP time; X35B Seed0 adds 62.3851 seconds, of which 62.0270 are native MIP time. Higher Work and nodes corroborate the stated narrow attribution. The report does not treat fewer rows or stronger roots as full-method success.",
+    "micro": "All four matched micro repetitions retain their absolute times and opposite orders. Their small AP wins are not counted as substantive full-method time advantages.",
+    "adoption_not_supported": true,
+    "negative_and_mixed_results_not_hidden": true,
+    "no_new_candidate_grid_required": true
+  },
+  "mathematical_and_code_review": {
+    "early_independent_reviews_reused": [
+      "review/early_math_code_review.json",
+      "review/preintegration_static_review.json",
+      "review/light_academic_text_review.json"
+    ],
+    "B2_cancellation_identity_correct": true,
+    "AP_integer_physical_extension_valid": true,
+    "B4_projection_proof_correct_with_local_bounds_and_exclusive_weighted_total_use": true,
+    "zero_weights_and_C_zero_handled": true,
+    "not_coordinatewise_and_not_VDJ_equality_equivalence": true,
+    "aggregate_W_SP_compatible_with_preserved_P_e": true,
+    "independent_S_e_i_products_excluded_from_projection_claim": true,
+    "ideal_math_not_promoted_to_exact_rational_loaded_matrix_equivalence": true,
+    "machine_precision_upper_bound_and_noncollinearity_exceptions_disclosed": true,
+    "same_two_saved_domains_and_exactly_two_incremental_LP_Optimize_calls": true,
+    "AP_matches_reused_IND_numerically": true,
+    "all_other_LP_bounds_types_objective_and_rows_unchanged": true,
+    "default_off_root_exports_byte_identical_to_R134": true,
+    "early_exact_state_coefficient_checks": 990,
+    "production_source_and_execution_helper_hashes_still_match_freeze": true,
+    "no_nodewise_high_precision_framework_or_numeric_engineering_reopened": true,
+    "main_Gini_epigraph_embedding_and_implicit_service_integrality_correct": true,
+    "ordered_supply_and_support_handling_assumptions_and_proofs_correct": true,
+    "coverage_cutoff_and_independent_zero_statements_scoped_correctly": true
+  },
+  "budget": {
+    "registered_cap_sum_seconds": 23520,
+    "hard_new_computation_limit_seconds": 28800,
+    "actual_metered_G1_seconds": 17148.624478299604,
+    "separately_reported_metered_seconds": 266.83043630060274,
+    "conservative_sum_seconds": 17415.454914600206,
+    "conservative_margin_seconds": 11384.545085399794,
+    "fees_recomputed": 47,
+    "nested_H_LP_MIP_Work_not_double_counted": true,
+    "document_and_delivery_final_accounting_still_to_be_finalized": true,
+    "local_preflight_separate_delivery_seconds": 655.6367304001469
+  },
+  "R55_and_input_transport": {
+    "VDJ_was_live_in_root_pilot_development": true,
+    "stage_counts_are_all_candidate_rows": {
+      "root": 108,
+      "pilot": 32,
+      "development": 42
+    },
+    "zero_live_applies_only_to_later_penalty_cover": true,
+    "old_subinterval_results_not_compared_as_new_whole_method_times": true,
+    "D13_original_SHA256": "ce60fd4e74ad23174be2d4a08ca6e52c0043cee22f3c9b17153b9e8bbcfdbe42",
+    "D13_actual_bytes": 5631,
+    "D13_CRLF_count": 30,
+    "D13_current_file_unchanged": true,
+    "D13_exact_CRLF_dependency": "The current original bytes must be supplied by the declared single-member explicit input carrier; the older Git LF blob differs only in 30 line endings. Packaging/public restoration acceptance remains a delivery item.",
+    "helper_exact_bytes_capsule_and_new_R135_gitattributes_preserve_execution_bytes": true
+  },
+  "manuscript_and_attribution": {
+    "full_main_body_and_maintained_model_algorithm_appendices_present": true,
+    "complete_supplement_has_R134_and_all_R135_numeric_tables": true,
+    "no_result_placeholders": true,
+    "cited_keys": 23,
+    "bibliography_entries": 30,
+    "undefined_citation_keys": [],
+    "single_version_table_keeps_R132_R133_R134_R135_identity": true,
+    "abstract_and_main_contributions_focus_on_supported_integrated_algorithm": true,
+    "TC_and_AP_findings_do_not_replace_supported_S2_algorithm": true,
+    "exact_HGA_title": "Equity-aware Bike Repositioning in Station-based Bike-sharing Systems",
+    "HGA_same_problem_model_and_heuristic_inheritance_explicit": true,
+    "active_H_uses_decoder_and_descent_not_genetic_generations": true,
+    "HGA_author_order_affiliations_and_status_not_invented": true,
+    "document_editor_metadata_not_treated_as_authorship": true,
+    "coordinate_capacity_sources_separated_from_synthetic_operating_fields": true,
+    "CABI_and_Divvy_archived_request_receipts_distinguished_from_live_feeds": true,
+    "CITI_unknown_capture_and_443_row_selection_facts_named_specifically": true,
+    "no_private_manuscript_or_foreign_full_text_publication_required": true,
+    "literature_priority_and_exact_model_equivalence_claims_narrowed_to_available_evidence": true
+  },
+  "final_PDF": {
+    "PDF_SHA": "7f0fab6030becd403d83abb7068ae4cbf4c1ad41eaa3a0a5f25e43aaf253ea57",
+    "manuscript_SHA": "3dfd049a3f92c4385467e2b5f096bc1846345cea3a68fa89ce133fe771ed16c6",
+    "page_count": 38,
+    "same_pixel_pages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "new_pixels_pages_actual_magnified": [
+      1,
+      23,
+      24,
+      25
+    ],
+    "new_render_contact_hashes_verified": 7,
+    "no_replacement_characters": true,
+    "A6_heading_and_LemmaA3_on_same_page": true,
+    "all_final_38_visual_pages_covered": true,
+    "status": "PASS_ACTUAL_VISUAL_AND_IDENTITY_REVIEW",
+    "visual_coverage": "All seven contact sheets for the 8245d4521265 snapshot were actually viewed, covering all 38 pages; 34 pages in the final 7f0fab6030be snapshot are byte-identical PNGs. All four changed final pages 1,23,24,25 were actually viewed at page size. Final pages 4,20,21,28 were also inspected at page size in the unchanged-pixel chain, alongside pages 5,6,9,12 from the earlier exact-pixel snapshots.",
+    "initial_visual_snapshot": "18d445ab3a2fdaa3f3447dc9f85d8bf42c2fd8c92e8eda08037ed0524b8a55a7",
+    "intermediate_visual_snapshot": "8245d4521265e26b0affa34f2a94178664e682a0594b7a5566a536ef89f8bbaa",
+    "no_clipped_text_tables_formulas_or_unreadable_glyphs_found": true,
+    "negative_AP_conclusion_and_numeric_tables_match_text_and_reports": true,
+    "HGA_citation_and_reference_rendering_readable": true,
+    "no_re_render_by_reviewer": true
+  },
+  "advisor_and_journal_judgment": {
+    "advisor_coauthor_submission_discussion_ready": true,
+    "journal_suitability_is_a_scoped_inference_not_acceptance_prediction": true,
+    "TRE": "Strongest account: coupled inventory redistribution, feasible supply order, prefix loads, handling/returns and effective-weight operational interpretation on explicitly generated operating scenarios.",
+    "EJOR": "Strongest account: shared-state exact method, validity/embedding/coverage, and complete-cost comparisons against cold and independently paid-start compact controls.",
+    "OR": "This round improves structural explanation and manuscript maturity. The elementary AP projection result, two root LPs and mixed complete-method evidence do not themselves establish a substantial new general-theory/algorithmic advance.",
+    "remaining_specific_author_facts": [
+      "HGA-TGBC manuscript bibliographic author order, affiliations and current publication/submission status.",
+      "Whether the exact-method paper shares that author list; its final author order, affiliations, funding and journal front matter.",
+      "Original capture URL/date and the origin of the earlier CITI 443-row selection."
+    ],
+    "no_additional_native_experiments_needed_for_this_goal": true
+  },
+  "delivery_separate": {
+    "local_preflight": {
+      "path": "review/local_preflight.json",
+      "SHA256": "c422ba3ada7ff6ae604d7a863a1174162fe0d6ce0e13de2e3b08904475b33397",
+      "passed": true,
+      "formal_positions": 32,
+      "roots": 2,
+      "seconds": 655.6367304001469,
+      "Optimize": 0,
+      "compile": 0,
+      "vendor_DLL_loads": 0,
+      "original_measured_clocks_preserved": true,
+      "source_publication_SHA": "ccfeecf9d31e6c9d21e8bc6770bdfc32fc65349183a2a25c94916c3e7c39a377"
+    },
+    "local_preflight_observed_pass_not_reexecuted_by_reviewer": true,
+    "actual_public_recovery": "PENDING; no pass granted by this review.",
+    "English_stacked_Draft_PR_and_base_head_open_unmerged_readback": "PENDING; no pass granted by this review.",
+    "final_protection_and_document_delivery_cost_receipts": "PENDING final delivery integration.",
+    "whole_goal_completion_not_implied": true
+  },
+  "reviewer_actions": {
+    "Optimize": 0,
+    "compilation": 0,
+    "vendor_DLL_loads": 0,
+    "full_semantic_checker_runs": 0,
+    "PDF_re_renders": 0,
+    "checks": "Targeted JSON/clock/manifest/input/source/PE/capsule identity readbacks, recomputation of all pair and budget arithmetic, citation coverage, direct PDF text extraction, contact-sheet and page-PNG visual inspection.",
+    "primary_paper_or_production_files_modified": false,
+    "sole_write": "review/final_integrated_review.json",
+    "readback_corrections": "Only reviewer-local readback assumptions were corrected: the closeout uses necessary_verification_complete/implementation_qualified/evidence_complete, metadata must be decoded as UTF-8, and the final TOC also changes pixels when A.6 moves. These were zero-mutation static/PDF checks, never solver or experimental retries."
+  },
+  "reviewed_file_SHA256": {
+    "goal.md": "c0f135b0b960d14ac1fc34e5400c09fdf6386e5d589d070e0056a88a4f1fdcfb",
+    "reports/arms.json": "83386216b7af9652b00dde07a406d49493d62c9ce092a175d9a1d01581bb581f",
+    "reports/pairs.json": "7f707fd10244f170b2888ffbaec2370a6c51fcbf728b914f02a5d37311b8a1e5",
+    "reports/summary.json": "23a30cc220c96f66e54b5c0634fc855430c4a90388cd0ce464d5cb0d7f72574b",
+    "candidate_manifest.json": "24b4298e0341f41c6dbe054795c51aaad5a0b42bb6e2c6ed92cab61a0ee05af4",
+    "candidate_build.json": "cc31b25aae8d971a964e4a8ced5771d7b2ea29eab4cd40b51ca479ec4ec0a4b1",
+    "execution_binding.json": "920c9a9ba0ab5ef937941b1b03f6a52796f5c04c77bfe6283a8950cba5ffb29a",
+    "candidate_decision.json": "5349a4e942ce1dd178fc4f5a365391b3fde3db3697e2830f942e25d75cd6bb98",
+    "stage_decision.json": "193e116866a66af25908bf7373884944ea533b806d1f252bc106e4665b4f0cea",
+    "scientific_closeout.json": "d33feb77b269b4be04107d64128bacca7a899c4be6cb3d97f57e158ae30302f3",
+    "resource_accounting.json": "9396e63454fa78aaa62055bf8bdb43f7cc1c1539f3b47119630be8b722b9a1c6",
+    "paper_body.md": "d271e703e17cf15fdc8e3f3acd83cbee1103c972ae7669d37987e0d3c743c0bb",
+    "model_and_algorithm_appendices.md": "fb2cefdc62c18a241a9fb90f642af547d91dacd94ec0a3782717e4549e6b9a92",
+    "manuscript.md": "3dfd049a3f92c4385467e2b5f096bc1846345cea3a68fa89ce133fe771ed16c6",
+    "manuscript.pdf": "7f0fab6030becd403d83abb7068ae4cbf4c1ad41eaa3a0a5f25e43aaf253ea57",
+    "supplement.md": "40f57e413aaa54ce5dd81db6dced1d52439546d6402fbb97ad203ab105f37125",
+    "references.bib": "7e8f00d07a6fe4179cd84055ce42b247757f2b84a4f84b55f172cf08869859c1",
+    "ap_math_and_history.md": "d66445c9c7c88d6d2af08e347db325d01bf9dd1968ae6bb38c077154affa38e0",
+    "data_provenance.md": "14eb633fa6b65bfe2156055c1a84b2f889cb9eb55eea153f1c6732e8060fd550",
+    "literature_scope.md": "9c77e9ee38ed21f42f506710182791df228c3a45d73db290cdaf49fa163fedad",
+    "hga_source_check.json": "2a2f3adbe8ddbced6362cf07026ffbec4184a41d93b22a487d670aa2af974d82",
+    "input_provenance.json": "4a48e5e3c091fe454cd20c6de2de3ba576e11edab5eb32e20f9e8acb2ba291f8",
+    "reproducibility.md": "ed20718582ae802a699fa4fc8be20b562092a5f437125edf21f4b012263edfb6",
+    "submission_positioning.md": "18bb54263a99a26dfe426b1fefd5fa5343aa7603a2e39b3d99895c1f07ef19b1",
+    "source_publication.json": "ccfeecf9d31e6c9d21e8bc6770bdfc32fc65349183a2a25c94916c3e7c39a377",
+    "review/pdf_render_receipt.json": "3f5288c9faf3c495e4dd4d1a038eb85792308542bc4e7809e599619e07947ced",
+    "review/pdf_visual_review.json": "45fe6d23949b749f604474800aecd1f764f901786ea5a87fd74d7ed23860d7a6",
+    "review/pdf_final_raster_diff.json": "c5c1f929fa3ecbca0d9f3fd223de68bfd465c225852e8b08adce60e58b8ac499",
+    "review/local_preflight.json": "c422ba3ada7ff6ae604d7a863a1174162fe0d6ce0e13de2e3b08904475b33397",
+    "repair/helper_byte_transport.json": "6046c4a81f372eb6f628800c9b1bcc7e7b4a9552bf1f8b2d68a36e3f9f2ce411"
+  }
+}

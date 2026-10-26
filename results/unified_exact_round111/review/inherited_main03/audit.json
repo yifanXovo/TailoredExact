@@ -1,0 +1,323 @@
+{
+  "decision": "ACCEPT_FIXED_R110_MAIN36_IMPORT",
+  "evidence_layer": "R110_MAIN_36_PLUS_R111_SEED_6",
+  "inherited_science_commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+  "verified_R110_head": "13ed7eeb83b647f585837638ed9158b84f274d66",
+  "original_full_independent_audit_SHA": "958616d42215a6ee60d468a1f717182d59825ca230db5c82ff8c0b0fa5c09cab",
+  "original_full_independent_receipt_SHA": "d4869c50551293e1f4480cc6a575f3432a41c9afccebcfc94d742b7f06652d68",
+  "original_audit_not_duplicated": true,
+  "current_import_repeats_historical_matrix_or_physics": false,
+  "main36_actually_executed_historical_raw_authority": true,
+  "full_clock_qualification": true,
+  "preserved_old_round110_stage": "BLOCKED",
+  "preserved_old_all42_valid_formal": false,
+  "stats": {
+    "main_counts": {
+      "WIN": 11,
+      "TIE": 1
+    },
+    "MB_ENS_counts": {
+      "WIN": 5,
+      "TIE": 3,
+      "LOSS": 4
+    },
+    "main_severe_P_regressions": 0,
+    "main_denominator": 12
+  },
+  "derived_empty_qualification_arms": [
+    15,
+    17,
+    25,
+    26
+  ],
+  "source_bindings": {
+    "results/unified_exact_round110/review/public_full_raw02/audit.json": {
+      "path": "results/unified_exact_round110/review/public_full_raw02/audit.json",
+      "commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "bytes": 64554545,
+      "SHA": "958616d42215a6ee60d468a1f717182d59825ca230db5c82ff8c0b0fa5c09cab",
+      "authority": "direct immutable Git blob"
+    },
+    "results/unified_exact_round110/review/public_full_raw02/receipt.json": {
+      "path": "results/unified_exact_round110/review/public_full_raw02/receipt.json",
+      "commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "bytes": 722,
+      "SHA": "d4869c50551293e1f4480cc6a575f3432a41c9afccebcfc94d742b7f06652d68",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/public_full_raw02_receipt.json"
+    },
+    "results/unified_exact_round110/review/round110_independent_final_review.py": {
+      "path": "results/unified_exact_round110/review/round110_independent_final_review.py",
+      "commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "bytes": 36724,
+      "SHA": "e95a3a40a89f9ec5a69e19b500634d9f93f3911f2e62690be714001f5146f435",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_final_review.py"
+    },
+    "results/unified_exact_round110/review/round110_independent_core.py": {
+      "path": "results/unified_exact_round110/review/round110_independent_core.py",
+      "commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "bytes": 16906,
+      "SHA": "2b01ac7b1d9f1cbe8da97a18ea007698ac9f584fd8c8e9735b1a46736d8f093f",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_core.py"
+    },
+    "results/unified_exact_round110/review/round110_independent_final_core.py": {
+      "path": "results/unified_exact_round110/review/round110_independent_final_core.py",
+      "commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "bytes": 8834,
+      "SHA": "cadf9460f0b255a2c09bd40a8d84ca7b21e36c99de10bacb389ea2708306ba3d",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_final_core.py"
+    },
+    "results/unified_exact_round110/review/round110_independent_cold_rejection.py": {
+      "path": "results/unified_exact_round110/review/round110_independent_cold_rejection.py",
+      "commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "bytes": 21154,
+      "SHA": "4366eb3da7ec1c9da983b58ff414663d75665c83b3663a388c25659aa35125c7",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_cold_rejection.py"
+    },
+    "results/unified_exact_round110/review/round110_independent_scoped_rejection.py": {
+      "path": "results/unified_exact_round110/review/round110_independent_scoped_rejection.py",
+      "commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "bytes": 22462,
+      "SHA": "3a462251907f16d97332936211b48b0cf6f6f67878b9fc5aa244a3c71c3c2f6b",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_scoped_rejection.py"
+    },
+    "results/unified_exact_round110/review/round110_independent_final_publication.py": {
+      "path": "results/unified_exact_round110/review/round110_independent_final_publication.py",
+      "commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "bytes": 31853,
+      "SHA": "6ed0e6e766d6af5eefb865f10d0fe5fb682cba5dcbd06d69dfe11d9f828009fd",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_final_publication.py"
+    },
+    "results/unified_exact_round109/review/round109_independent_parser.py": {
+      "path": "results/unified_exact_round109/review/round109_independent_parser.py",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 6042,
+      "SHA": "ecfb894faa24bc8c5889a0466051f5cc709cfa2969c3ca6529ab826c237acb3a",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round109_independent_parser.py"
+    },
+    "results/unified_exact_round109/review/round109_independent_kernel.py": {
+      "path": "results/unified_exact_round109/review/round109_independent_kernel.py",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 42525,
+      "SHA": "3bb8f84f4949ca59cc8720a4acd04d568a41f9eac1382f26138066d5c49f6287",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round109_independent_kernel.py"
+    },
+    "results/unified_exact_round109/review/round109_independent_decision.py": {
+      "path": "results/unified_exact_round109/review/round109_independent_decision.py",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 10647,
+      "SHA": "b518597b8ccaf100607e4e6738688be9032957039396e5bb23a3f0ebe817a926",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round109_independent_decision.py"
+    },
+    "results/unified_exact_round109/review/round109_independent_seed_scope.py": {
+      "path": "results/unified_exact_round109/review/round109_independent_seed_scope.py",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 16909,
+      "SHA": "847092a0354fb69ad6151dbe45e9d4c175ea39687c597a1fab8bae6ed5adf8b9",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/round109_independent_seed_scope.py"
+    },
+    "results/unified_exact_round110/candidate_identity.json": {
+      "path": "results/unified_exact_round110/candidate_identity.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 119928,
+      "SHA": "9380dfe6c680c8b039ccd6f678890e1903b46d656c79b7bfb724cd49bb089a36",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/candidate_identity.json"
+    },
+    "results/unified_exact_round110/campaign/identity.json": {
+      "path": "results/unified_exact_round110/campaign/identity.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 192120,
+      "SHA": "7f7fa09b73371b489f6eb9498add7a2b323f5c1e5bcf6e6af1b48ff84b149c41",
+      "authority": "fixed public_full_raw02 audit read_bindings; carrier payload at immutable science commit",
+      "fixed_authority_commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "fixed_authority_audit_SHA": "958616d42215a6ee60d468a1f717182d59825ca230db5c82ff8c0b0fa5c09cab",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/campaign_identity.json"
+    },
+    "results/unified_exact_round110/protocol.json": {
+      "path": "results/unified_exact_round110/protocol.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 9527,
+      "SHA": "ed6f8c3f880348b22ccff01fe5d99b5e77ce746d65511915927f47d011f55e28",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/protocol.json"
+    },
+    "results/unified_exact_round110/input_manifest.json": {
+      "path": "results/unified_exact_round110/input_manifest.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 12464,
+      "SHA": "1f701266c2e1947ea5e9094a411b4c21751164a5a02125f576282ec660b2d80d",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/input_manifest.json"
+    },
+    "results/unified_exact_round110/reports_final/selection_decision.json": {
+      "path": "results/unified_exact_round110/reports_final/selection_decision.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 19549,
+      "SHA": "da50f456cf4365477519c4c32f23fb5f352dc34fdd394db79a9d971f603dac91",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/selection_decision.json"
+    },
+    "results/unified_exact_round110/reports_final/arms.csv": {
+      "path": "results/unified_exact_round110/reports_final/arms.csv",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 27390,
+      "SHA": "293619d5d2c0b7caa4b66dc3ef233333bb2b40d23894bc49075b300e76726d09",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/arms.csv"
+    },
+    "results/unified_exact_round110/reports_final/pairs.csv": {
+      "path": "results/unified_exact_round110/reports_final/pairs.csv",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 15899,
+      "SHA": "cba5ef30020bb67b656551aa1406d3ee2c0b77e088c69249eb32f7ad3e2fce3e",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/pairs.csv"
+    },
+    "results/unified_exact_round110/campaign/reader_recovery/15_G50-C1_S0_P-GRB.json": {
+      "path": "results/unified_exact_round110/campaign/reader_recovery/15_G50-C1_S0_P-GRB.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 34929,
+      "SHA": "a01cd2d258b36048e303dc354eed77009c8f35424f2af003e2bbd900cabdc5fa",
+      "authority": "fixed public_full_raw02 audit read_bindings; carrier payload at immutable science commit",
+      "fixed_authority_commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "fixed_authority_audit_SHA": "958616d42215a6ee60d468a1f717182d59825ca230db5c82ff8c0b0fa5c09cab",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/recovery_15.json"
+    },
+    "results/unified_exact_round110/review/current_cold15_01/audit.json": {
+      "path": "results/unified_exact_round110/review/current_cold15_01/audit.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 1307890,
+      "SHA": "cf61c8b28105574d2e78069d9a6f0b0e0bada1d9236f44beabe5a2f4a33cca3b",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/recovery_15_signed_audit.json"
+    },
+    "results/unified_exact_round110/campaign/reader_recovery/17_G50-C2_S0_P-GRB.json": {
+      "path": "results/unified_exact_round110/campaign/reader_recovery/17_G50-C2_S0_P-GRB.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 54060,
+      "SHA": "29886af24b6081a1dbdb086e2e1c6c4eaee3ab119b75f9a9ce079dc7e85857d0",
+      "authority": "fixed public_full_raw02 audit read_bindings; carrier payload at immutable science commit",
+      "fixed_authority_commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "fixed_authority_audit_SHA": "958616d42215a6ee60d468a1f717182d59825ca230db5c82ff8c0b0fa5c09cab",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/recovery_17.json"
+    },
+    "results/unified_exact_round110/review/current_cold17_02/audit.json": {
+      "path": "results/unified_exact_round110/review/current_cold17_02/audit.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 3113529,
+      "SHA": "bcb18e57e767844e0cd3a8ebcf1c589723ff690f31dc88ba2bd155bb0c7120c6",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/recovery_17_signed_audit.json"
+    },
+    "results/unified_exact_round110/campaign/reader_recovery/25_G100-C1_S0_M-B.json": {
+      "path": "results/unified_exact_round110/campaign/reader_recovery/25_G100-C1_S0_M-B.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 48406,
+      "SHA": "8caf12658dead7e49fcecfc21863fc60b511efeea3306e3946df361db8cbcd28",
+      "authority": "fixed public_full_raw02 audit read_bindings; carrier payload at immutable science commit",
+      "fixed_authority_commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "fixed_authority_audit_SHA": "958616d42215a6ee60d468a1f717182d59825ca230db5c82ff8c0b0fa5c09cab",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/recovery_25.json"
+    },
+    "results/unified_exact_round110/review/current_scoped25_01/audit.json": {
+      "path": "results/unified_exact_round110/review/current_scoped25_01/audit.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 771131,
+      "SHA": "09e2b8e9616cbe0848516ec1bf1e84d4ba9b2c17e99bd8580abbccf111673314",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/recovery_25_signed_audit.json"
+    },
+    "results/unified_exact_round110/campaign/reader_recovery/26_G100-C1_S0_P-GRB.json": {
+      "path": "results/unified_exact_round110/campaign/reader_recovery/26_G100-C1_S0_P-GRB.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 40399,
+      "SHA": "d931f7b03104db4ee8f07e2bec919649a8fc41ba272ffa681dec924c80ea3930",
+      "authority": "fixed public_full_raw02 audit read_bindings; carrier payload at immutable science commit",
+      "fixed_authority_commit": "13ed7eeb83b647f585837638ed9158b84f274d66",
+      "fixed_authority_audit_SHA": "958616d42215a6ee60d468a1f717182d59825ca230db5c82ff8c0b0fa5c09cab",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/recovery_26.json"
+    },
+    "results/unified_exact_round110/review/current_cold26_01/audit.json": {
+      "path": "results/unified_exact_round110/review/current_cold26_01/audit.json",
+      "commit": "c4efe042bc6654ccd2e14b7e0d65c904a15d3390",
+      "bytes": 2868996,
+      "SHA": "f8272de10d561bbda93debdd6064265267a11aa66c1a759ee3ccdac552283c52",
+      "authority": "direct immutable Git blob",
+      "retained_path": "results/unified_exact_round111/review/inherited_main03/authority/recovery_26_signed_audit.json"
+    }
+  },
+  "retained_bindings": {
+    "results/unified_exact_round111/review/inherited_main03/authority/arms.csv": "293619d5d2c0b7caa4b66dc3ef233333bb2b40d23894bc49075b300e76726d09",
+    "results/unified_exact_round111/review/inherited_main03/authority/campaign_identity.json": "7f7fa09b73371b489f6eb9498add7a2b323f5c1e5bcf6e6af1b48ff84b149c41",
+    "results/unified_exact_round111/review/inherited_main03/authority/candidate_identity.json": "9380dfe6c680c8b039ccd6f678890e1903b46d656c79b7bfb724cd49bb089a36",
+    "results/unified_exact_round111/review/inherited_main03/authority/input_manifest.json": "1f701266c2e1947ea5e9094a411b4c21751164a5a02125f576282ec660b2d80d",
+    "results/unified_exact_round111/review/inherited_main03/authority/pairs.csv": "cba5ef30020bb67b656551aa1406d3ee2c0b77e088c69249eb32f7ad3e2fce3e",
+    "results/unified_exact_round111/review/inherited_main03/authority/protocol.json": "ed6f8c3f880348b22ccff01fe5d99b5e77ce746d65511915927f47d011f55e28",
+    "results/unified_exact_round111/review/inherited_main03/authority/public_full_raw02_receipt.json": "d4869c50551293e1f4480cc6a575f3432a41c9afccebcfc94d742b7f06652d68",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_15.json": "a01cd2d258b36048e303dc354eed77009c8f35424f2af003e2bbd900cabdc5fa",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_15_signed_audit.json": "cf61c8b28105574d2e78069d9a6f0b0e0bada1d9236f44beabe5a2f4a33cca3b",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_17.json": "29886af24b6081a1dbdb086e2e1c6c4eaee3ab119b75f9a9ce079dc7e85857d0",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_17_signed_audit.json": "bcb18e57e767844e0cd3a8ebcf1c589723ff690f31dc88ba2bd155bb0c7120c6",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_25.json": "8caf12658dead7e49fcecfc21863fc60b511efeea3306e3946df361db8cbcd28",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_25_signed_audit.json": "09e2b8e9616cbe0848516ec1bf1e84d4ba9b2c17e99bd8580abbccf111673314",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_26.json": "d931f7b03104db4ee8f07e2bec919649a8fc41ba272ffa681dec924c80ea3930",
+    "results/unified_exact_round111/review/inherited_main03/authority/recovery_26_signed_audit.json": "f8272de10d561bbda93debdd6064265267a11aa66c1a759ee3ccdac552283c52",
+    "results/unified_exact_round111/review/inherited_main03/authority/round109_independent_decision.py": "b518597b8ccaf100607e4e6738688be9032957039396e5bb23a3f0ebe817a926",
+    "results/unified_exact_round111/review/inherited_main03/authority/round109_independent_kernel.py": "3bb8f84f4949ca59cc8720a4acd04d568a41f9eac1382f26138066d5c49f6287",
+    "results/unified_exact_round111/review/inherited_main03/authority/round109_independent_parser.py": "ecfb894faa24bc8c5889a0466051f5cc709cfa2969c3ca6529ab826c237acb3a",
+    "results/unified_exact_round111/review/inherited_main03/authority/round109_independent_seed_scope.py": "847092a0354fb69ad6151dbe45e9d4c175ea39687c597a1fab8bae6ed5adf8b9",
+    "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_cold_rejection.py": "4366eb3da7ec1c9da983b58ff414663d75665c83b3663a388c25659aa35125c7",
+    "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_core.py": "2b01ac7b1d9f1cbe8da97a18ea007698ac9f584fd8c8e9735b1a46736d8f093f",
+    "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_final_core.py": "cadf9460f0b255a2c09bd40a8d84ca7b21e36c99de10bacb389ea2708306ba3d",
+    "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_final_publication.py": "6ed0e6e766d6af5eefb865f10d0fe5fb682cba5dcbd06d69dfe11d9f828009fd",
+    "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_final_review.py": "e95a3a40a89f9ec5a69e19b500634d9f93f3911f2e62690be714001f5146f435",
+    "results/unified_exact_round111/review/inherited_main03/authority/round110_independent_scoped_rejection.py": "3a462251907f16d97332936211b48b0cf6f6f67878b9fc5aa244a3c71c3c2f6b",
+    "results/unified_exact_round111/review/inherited_main03/authority/selection_decision.json": "da50f456cf4365477519c4c32f23fb5f352dc34fdd394db79a9d971f603dac91",
+    "results/unified_exact_round111/review/inherited_main03/execution_source.py": "692a8477be2d3e6c6415bedcc410c8c593b081a6db3a5cc8b0cb22dea74634ca",
+    "results/unified_exact_round111/review/inherited_main03/launch.json": "1700de310c7443249cd2c459d7e99f5dc991d2cde12a93ac812994b6eb2291d8",
+    "results/unified_exact_round111/review/inherited_main03/main36_actual_independent_records.json": "e6f6cec2e35f617f91807f6ae19f3737c3c08d5ab0d2944976bffdc6a188549f",
+    "results/unified_exact_round111/review/inherited_main03/main36_imported_rows.json": "719c364bed82bb0e918874a68a1c9f8cdf32631d439ae15a3206f36780fe25d5",
+    "results/unified_exact_round111/review/inherited_main03/main36_independently_recomputed_pairs.json": "705320600b8926756b3071af1f9f9066788f729b17f25fa5a3229daabeed4b7e",
+    "results/unified_exact_round111/review/inherited_main03/main36_original_clock_evidence.json": "b0ecb4002d4ceb29f00b3f4a7220c38d2d3363918c0a07492c78c6147edefd51",
+    "results/unified_exact_round111/review/inherited_main03/main36_preserved_numeric_differences.json": "a65ef9919b0e5275a21e621560ceef0df8475a388911859c2755868c4eea12cb",
+    "results/unified_exact_round111/review/inherited_main03/main36_published_primitive_recomputed_pairs.json": "b4f03955a2e93272c328a4975616ce1b86d4a514f45f717db39641a32bbdc9bb",
+    "results/unified_exact_round111/review/inherited_main03/main36_qualification_derivations.json": "401bef6b8cee70db43960b0cda20b33c65f3f34c5578255a05f356489e1b7bd1"
+  },
+  "original_signed_native_publication_numeric_differences": [
+    {
+      "number": 24,
+      "id": "G50-R2",
+      "arm": "P-GRB",
+      "field": "L",
+      "original_published_value": 5.421010862427522e-20,
+      "original_independent_value": 0,
+      "original_frozen_comparator_tolerance": 1e-07,
+      "signed_original_value_retained": true
+    },
+    {
+      "number": 24,
+      "id": "G50-R2",
+      "arm": "P-GRB",
+      "field": "gap",
+      "original_published_value": -5.421010862427522e-20,
+      "original_independent_value": 0.0,
+      "original_frozen_comparator_tolerance": 1e-07,
+      "signed_original_value_retained": true
+    }
+  ],
+  "completed_checks": 1236,
+  "Optimize": 0,
+  "native_environment": 0,
+  "source_SHA": "692a8477be2d3e6c6415bedcc410c8c593b081a6db3a5cc8b0cb22dea74634ca"
+}

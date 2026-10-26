@@ -1,0 +1,132 @@
+{
+  "arms": [
+    {
+      "K0": 4,
+      "arm": "K4-r001",
+      "coarse_start": "off",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.01,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    },
+    {
+      "K0": 4,
+      "arm": "K4-r012",
+      "coarse_start": "off",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.12,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    },
+    {
+      "K0": 4,
+      "arm": "K4-r015",
+      "coarse_start": "off",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.15,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    },
+    {
+      "K0": 4,
+      "arm": "K4-r020",
+      "coarse_start": "off",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.2,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    },
+    {
+      "K0": 4,
+      "arm": "K4-r050",
+      "coarse_start": "off",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.5,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    },
+    {
+      "K0": 1,
+      "arm": "K1-r001",
+      "coarse_start": "k1-adaptive",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.01,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    },
+    {
+      "K0": 1,
+      "arm": "K1-r012",
+      "coarse_start": "k1-adaptive",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.12,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    },
+    {
+      "K0": 1,
+      "arm": "K1-r015",
+      "coarse_start": "k1-adaptive",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.15,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    },
+    {
+      "K0": 1,
+      "arm": "K1-r020",
+      "coarse_start": "k1-adaptive",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.2,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    },
+    {
+      "K0": 1,
+      "arm": "K1-r050",
+      "coarse_start": "k1-adaptive",
+      "lifecycle": "original_c6",
+      "point_rule": "midpoint",
+      "research_default_off": true,
+      "rho": 0.5,
+      "round43": "off",
+      "round44": "off",
+      "round45": "off"
+    }
+  ],
+  "frozen_before_candidate_results": true,
+  "historical_old_c6_reconstruction_rho": 0.01,
+  "only_differences": [
+    "K0_initialization",
+    "c6_normalized_split_threshold"
+  ],
+  "paper_c6_preset_rho": 0.01,
+  "schema": "round46-arm-definition-v1"
+}

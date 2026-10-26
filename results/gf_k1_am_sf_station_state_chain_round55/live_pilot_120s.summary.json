@@ -1,0 +1,44 @@
+{
+  "schema": "round55-fixed-interval-stage-summary-v1",
+  "stage": "live_pilot_120s",
+  "mode": "solve",
+  "cap_seconds": 120,
+  "row_count": 32,
+  "state_count": 8,
+  "arm_count": 4,
+  "arms": [
+    "F0-CLEAN",
+    "SF-MC4",
+    "VD-P",
+    "VD-J"
+  ],
+  "states": [
+    "D1",
+    "D3",
+    "D4",
+    "D12",
+    "D13",
+    "D14",
+    "C3",
+    "V50_MODERATE"
+  ],
+  "executable_sha256": "23df13014018d9dd83260c2f4a0a08fa1bf8d7763a9c692938b97ac381fb2a90",
+  "all_engineering_valid": true,
+  "false_certificate_count": 0,
+  "certificate_counts": {
+    "F0-CLEAN": 2,
+    "SF-MC4": 3,
+    "VD-P": 3,
+    "VD-J": 3
+  },
+  "shifted_work_geometric_mean_vs_f0": {
+    "SF-MC4": 0.9004944970726886,
+    "VD-P": 0.789283245480973,
+    "VD-J": 0.8287668866986568
+  },
+  "aggregate_gi_vs_f0": {
+    "SF-MC4": 0.9607629993915774,
+    "VD-P": 0.7336466274633364,
+    "VD-J": 0.7332711204440215
+  }
+}

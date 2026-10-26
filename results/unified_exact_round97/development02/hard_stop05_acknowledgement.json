@@ -1,0 +1,51 @@
+{
+  "number": 5,
+  "id": "D7",
+  "arm": "P-GRB",
+  "optimizer_calls": 0,
+  "additional_solver_starts": 0,
+  "source_bindings": {
+    "results/unified_exact_round97/development02/identity.json": "517e6d79827cdbb75b94ec98dcf5b4c0c724fc738cfa1bc7448c8b4c67d57550",
+    "results/unified_exact_round97/development02/raw/05_D7_P-GRB/completion.json": "cabaaa283405d42af9b5d7f9cfbce6e300d9ed38f99884cc84b748b9621f2674",
+    "results/unified_exact_round97/development02/raw/05_D7_P-GRB/audit.json": "fed88caf87346c2d41e28a11e29c87bec6f6dcd683f340356ee3b71907e7dd5a",
+    "results/unified_exact_round97/development02/raw/05_D7_P-GRB/observations.json": "6a92fb09ea62ee442b8d4d67e6719a2e2e5f856b8539201a31838e10706b1dab",
+    "results/unified_exact_round97/development02/raw/05_D7_P-GRB/launch.json": "822ac206bf64049d94d3fa79e44ed1a624bc9f27fd8b2318b79fe78afa77b37b",
+    "results/unified_exact_round97/development02/raw/05_D7_P-GRB/native.log": "2ef2bdf36c234018457fb9029077f7a5b31e3dfdd4263b238f32e436dc38c795",
+    "results/unified_exact_round97/development02/raw/05_D7_P-GRB/compact.lp": "4cd7967ea4d65804e6ab7ae8913033454ba495766ff9eb03529bd935f6e0bace",
+    "results/unified_exact_round97/development02/queue_d7/identity.json": "5b3b7db81f6f492d999cb88a448384e3c4161e8b1f6ca284f519050ecf212153",
+    "results/unified_exact_round97/development02/queue_d7/events.jsonl": "590a4a694c835ddfcb6b098bd363768154716686473acf0d0667e45986d6d58f",
+    "results/unified_exact_round97/development02/queue_d7/status.json": "12f32840acdc498f5d2a468c4737282753dfdf4d940a7ea428f6776b8fd26c2d"
+  },
+  "completion": {
+    "schema": "round90-lp-g-g3-completion-v1",
+    "number": 5,
+    "id": "D7",
+    "arm": "P-GRB",
+    "returncode": 1,
+    "process_wall_seconds": 3598.030999999959,
+    "prelaunch_seconds": 0.23500000033527613,
+    "end_to_end_seconds": 3598.2660000002943,
+    "wrapper_wall_seconds": 3598.030999999959,
+    "fully_observed_end_to_end_seconds": 3598.2660000002943,
+    "postexit_drain_and_restore_seconds": 0.0,
+    "process_cap_seconds": 3600,
+    "within_cap": true,
+    "stop_reason": "whole_run_hard_stop",
+    "committed_events": 305,
+    "ended_unix": 1790729274.455939
+  },
+  "endpoint": {
+    "U": 0.2372849915487284,
+    "L": 0.19858649317712468,
+    "gap": 0.03869849837160372,
+    "certificate": false,
+    "source": "interrupted_committed_evidence",
+    "status": "whole_run_hard_stop"
+  },
+  "observed_native_call_scopes": 1,
+  "returned_native_calls": 0,
+  "verified_complete_optimize_count": null,
+  "interpretation": "Audited interrupted committed evidence only. No finalized result or certificate; full3598.031s paid. Native TimeLimit3594 had not returned before preregistered supervisor3598 threshold. Exact internal reason unknown.",
+  "decision": "Continue only original unstarted arms using an exact arm5 exception. No retry, cap extension, source/algorithm change, rewritten failure or automatic allowance for future interruptions.",
+  "independent_review": "Read-only third-perspective review found no material validity barrier to exact-run guarded continuation; require explicit interruption classification and unknown complete Optimize count."
+}

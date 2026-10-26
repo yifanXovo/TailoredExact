@@ -1,0 +1,86 @@
+{
+  "G": 0.41571018802973714,
+  "M": 1,
+  "P": 2.7307983838350056,
+  "V": 8,
+  "algorithm_wall_time_seconds": 0.6127782,
+  "algorithm_work": 0.03804605856081495,
+  "certificate_status": true,
+  "complete_Q_vector": [
+    30
+  ],
+  "drop_time_seconds": 60,
+  "executable_sha256": "34e992060e3adffd3a7795c2c783672044996edd7234bf7e9f58a662b1c32fea",
+  "final_gap": 2.690373784538581e-16,
+  "final_inventory": [
+    50000,
+    7,
+    9,
+    13,
+    22,
+    22,
+    11,
+    5,
+    10
+  ],
+  "lower_bound": 0.8253299456049878,
+  "mandatory_in_memory_verification_accounting": "included in frozen algorithm timing; not separately instrumented and not subtracted",
+  "mandatory_in_memory_verification_seconds": null,
+  "mathematical_instance_sha256": "9169ccd73740febc38c62de11c8e95fe8db51e5004395cd652d0bff9bc104afa",
+  "objective": 0.825329945604988,
+  "pickup_time_seconds": 60,
+  "route_archive_materialization_seconds": 3.96000687032938e-05,
+  "route_post_optimization_performed": false,
+  "route_time_limit_seconds": 1800,
+  "routes": [
+    {
+      "final_depot_unload": 11,
+      "initial_vehicle_load": 0,
+      "native_route_present_in_result": true,
+      "native_vehicle_index": 0,
+      "nodes": [
+        0,
+        8,
+        0
+      ],
+      "operation_time": 1320,
+      "operations": [
+        {
+          "cumulative_route_duration": 860.9562096267,
+          "cumulative_travel_time": 200.9562096267,
+          "drop": 0,
+          "final_station_inventory": 10,
+          "initial_station_inventory": 21,
+          "inventory_change": -11,
+          "load_after_operation": 11,
+          "load_before_operation": 0,
+          "native_vehicle_index": 0,
+          "operation_time": 660,
+          "pickup": 11,
+          "predecessor": 0,
+          "route_sequence_position": 1,
+          "station": 8,
+          "successor": 0,
+          "travel_time_from_predecessor": 200.9562096267
+        }
+      ],
+      "route_duration": 1721.9124192534,
+      "route_slack": 78.0875807466,
+      "total_pickup": 11,
+      "total_station_drop": 0,
+      "travel_time": 401.9124192534,
+      "used": true,
+      "utilization": 0.9566180106963333,
+      "vehicle_capacity": 30
+    }
+  ],
+  "run_identity_sha256": "3dbc91a1dd000366e488b9612a886e60369aed663dbac18043ff55e64d23c41b",
+  "scenario_id": "r56_V08_M01_Q30_T01800_seed1760458116",
+  "schema": "round56-native-solution-v1",
+  "solution_class": "certified_optimal_solution",
+  "source_commit": "75e58521158aba8628ebc9444444ec3841415285",
+  "source_result_path": "results/gf_paper_benchmark_time_horizon_round56/local_raw/official/r56_V08_M01_Q30_T01800_seed1760458116/result.json",
+  "source_result_sha256": "6a94099d5f0765a5f2b0f82bccff93599245f988215fda695a614ea291ffc2ff",
+  "strict_rejection_reason": "none",
+  "verified_upper_bound": 0.8253299456049881
+}

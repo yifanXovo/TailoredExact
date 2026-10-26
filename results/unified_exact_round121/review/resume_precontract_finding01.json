@@ -1,0 +1,20 @@
+{
+  "kind": "actual_final_file_affected_check_finding",
+  "UTC": "2026-10-15T07:38:44.475746+00:00",
+  "decision": "CORRECTION_REQUIRED_NO_ADMISSION",
+  "affected_arm": "P-GRB",
+  "completed_before_failure": "final inherited evidence.verify passed in new exclusive system-temp attempt",
+  "failure": "read_round118.item -> read_round116.reconstruct_arm -> core.endpoint: saved_launch.prereg_sha256 == ident.prereg_sha256 failed",
+  "original_prereg_SHA": "d077c2e8d66eb43174211102535269f56184c9d7fd6137bdc2e366270e7af157",
+  "resumed_prereg_SHA": "c0a51a3ca418d71cc9fb198202468845994c303aaf2baf49f88436e4eaa928e9",
+  "candidate_SHA": "8036c5525e8cab31c9d42cc2a1d2dc892caf5b7d53bb8c6ea5a12507e3d59cc3",
+  "resume_identity_SHA": "0e37c5bacd6a76d12ef6336bd84408dfdea427255ae8a39d4a648cc992419f59",
+  "reaudit_source_SHA": "277f66aa213e4e15d8bcc771a697ed65562ce5ce3f8285d793788608f386cfe6",
+  "raw_before_after_check": "reaudit.replay checked its complete original tree hash equality before raising; temporary outputs removed",
+  "M_B_affected_replay": "NOT_REACHED",
+  "required_fix": "Strict explicit per-producer original-protocol provenance for reused P/MB, bound to final helpers/authorization; preserve endpoint assertion and raw. Use the same validated producer identity in replay and later item/finalize.",
+  "reviewer_native_starts": 0,
+  "reviewer_Optimize": 0,
+  "reviewer_compiles": 0,
+  "reviewer_Git": 0
+}

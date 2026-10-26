@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "UTC": "2026-10-21T06:02:11.115092+00:00",
+  "science_A_commit": "6b4f2e662b709590479732cfca2c6c3c5ff3dd20",
+  "files": [
+    {
+      "path": "results/unified_exact_round127/resource_accounting.json",
+      "bytes": 362520,
+      "SHA256": "64044eab464fc1523887354a6c51861f90a27f5f9eb6ac003e766bf5b1dcd547"
+    },
+    {
+      "path": "results/unified_exact_round127/public_restore_receipt.json",
+      "bytes": 14093,
+      "SHA256": "43c50ed7fe9449c7eed5e290f9d4b90db172ef93cec6058d40d29517df718703"
+    },
+    {
+      "path": "results/unified_exact_round127/cleanup_receipt.json",
+      "bytes": 28223,
+      "SHA256": "4ceb0f7698f5ececd941bc98b4e03c89a5676bb90dc51554a8f60860c338b5d1"
+    },
+    {
+      "path": "results/unified_exact_round127/delivery_receipt.json",
+      "bytes": 23685,
+      "SHA256": "3b507085dfc6ac7eae92bde1be0e94b33cea3f02c94a2c317963ac56353ad0d9"
+    },
+    {
+      "path": "results/unified_exact_round127/completion_audit.json",
+      "bytes": 22753,
+      "SHA256": "bafd846cb2e9e0c1742357cf889a9f18edc9d212c81f39268056a04a2ef02d2c"
+    },
+    {
+      "path": "results/unified_exact_round127/completion_audit.md",
+      "bytes": 4019,
+      "SHA256": "6554ebc7f6d7cfa19ae2aaf06bfe4ced9a10bc3094ec1a1666f88c22d31fb3ca"
+    },
+    {
+      "path": "results/unified_exact_round127/RESUME.md",
+      "bytes": 1723,
+      "SHA256": "eca24da0952169e369d45203d058b08b66596f8543e10dcbfb00979f02f60bc6"
+    },
+    {
+      "path": "results/unified_exact_round127/runtime_status.json",
+      "bytes": 1292,
+      "SHA256": "418e67a8da39a5c148480e241f31de7994725c65247b9272d90a7c1f5246f141"
+    },
+    {
+      "path": "results/unified_exact_round127/review_actions.md",
+      "bytes": 13673,
+      "SHA256": "af9d472a2b1b724ec7ef270dbf2b5678240a76b71a088efff8c185d5d5089130"
+    }
+  ],
+  "actual_plaintext_bytes_scanned": 471981,
+  "no_credentials_or_forbidden_artifacts": true,
+  "scope": "Actual post-A recovery/cleanup/accounting/completion metadata only. Does not modify the science-A export manifest or hash this scan itself."
+}

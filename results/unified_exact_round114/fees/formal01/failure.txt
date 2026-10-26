@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-round114\scripts\round114_campaign.py", line 149, in billed
+    rec=supervised(l,i,arm_tick);finish_arm(l,i,arm_tick,rec,fee)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\codes\ExactEBRP-round114\scripts\round114_campaign.py", line 130, in finish_arm
+    assert seconds<=l['cap_seconds'],'full arm exceeded frozen cap'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: full arm exceeded frozen cap

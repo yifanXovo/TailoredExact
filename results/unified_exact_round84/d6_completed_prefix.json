@@ -1,0 +1,91 @@
+{
+  "recorded_unix": 1789641481.743983,
+  "completed": 3,
+  "active": {
+    "number": 4,
+    "arm": "P-GRB",
+    "started_unix": 1789641408.4727015,
+    "driver_pid": 48520,
+    "destination": "results\\unified_exact_round84\\campaign\\local_raw\\04_D7_P-GRB"
+  },
+  "records": [
+    {
+      "number": 1,
+      "id": "D6",
+      "arm": "P-GRB",
+      "wall_seconds": 3597.186999999918,
+      "returncode": 0,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "passed": true,
+      "endpoint": {
+        "U": 0.1572411758522922,
+        "L": 0.15081548193591474,
+        "gap": 0.006425693916377456,
+        "certificate": false,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "time_limit"
+      },
+      "native_calls_started": 1,
+      "native_calls_returned": 1,
+      "physical_witnesses": 62,
+      "global_bound_events": 3480,
+      "committed_events": 3545,
+      "offline_replay_seconds": 0.05177119979634881
+    },
+    {
+      "number": 2,
+      "id": "D6",
+      "arm": "ENS-C",
+      "wall_seconds": 3171.157000000123,
+      "returncode": 0,
+      "within_cap": true,
+      "stop_reason": "normal_return",
+      "passed": true,
+      "endpoint": {
+        "U": 0.15708313110317415,
+        "L": 0.15708313110316996,
+        "gap": 4.191091917959966e-15,
+        "certificate": true,
+        "source": "normal_finalized_physical_endpoint",
+        "status": "optimal"
+      },
+      "native_calls_started": 6,
+      "native_calls_returned": 6,
+      "physical_witnesses": 4,
+      "global_bound_events": 3452,
+      "committed_events": 3469,
+      "offline_replay_seconds": 0.12716879975050688
+    },
+    {
+      "number": 3,
+      "id": "D6",
+      "arm": "K1-R",
+      "wall_seconds": 3598.0780000002123,
+      "returncode": 1,
+      "within_cap": true,
+      "stop_reason": "whole_run_hard_stop",
+      "passed": true,
+      "endpoint": {
+        "U": 0.15708313110317407,
+        "L": 0.1483180363170433,
+        "gap": 0.008765094786130773,
+        "certificate": false,
+        "source": "interrupted_committed_evidence",
+        "status": "whole_run_hard_stop"
+      },
+      "native_calls_started": 7,
+      "native_calls_returned": 6,
+      "physical_witnesses": 1,
+      "global_bound_events": 2167,
+      "committed_events": 2182,
+      "offline_replay_seconds": 0.035021400079131126
+    }
+  ],
+  "completed_paid_process_seconds": 10366.422000000253,
+  "completed_optimize_starts": 14,
+  "completed_optimize_returns": 13,
+  "scope": "Completed D6 prefix only; active D7 cost is additional. Two normal returns and one valid whole-run hard stop. Final campaign, Start and replication audits remain pending.",
+  "stage_complete": false,
+  "overall_goal_complete": false
+}

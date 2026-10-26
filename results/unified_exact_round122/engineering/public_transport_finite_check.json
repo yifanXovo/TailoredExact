@@ -1,0 +1,111 @@
+{
+  "UTC": "2026-10-16T13:59:06.409516+00:00",
+  "passed": true,
+  "cases": [
+    {
+      "case": "positive_streaming",
+      "accepted": true,
+      "member_names_and_bytes_equal": true,
+      "streamed_reconstruction_equal": true
+    },
+    {
+      "case": "changed_public_manifest",
+      "rejected": true,
+      "error_class": "AssertionError"
+    },
+    {
+      "case": "wrong_part_hash",
+      "rejected": true,
+      "error_class": "AssertionError"
+    },
+    {
+      "case": "truncated_part",
+      "rejected": true,
+      "error_class": "OSError"
+    },
+    {
+      "case": "trailing_part",
+      "rejected": true,
+      "error_class": "AssertionError"
+    },
+    {
+      "case": "outside_carrier_prefix",
+      "rejected": true,
+      "error_class": "AssertionError"
+    },
+    {
+      "case": "unsafe_member",
+      "rejected": true,
+      "error_class": "ValueError"
+    },
+    {
+      "case": "duplicate_part",
+      "rejected": true,
+      "error_class": "AssertionError"
+    },
+    {
+      "case": "boolean_part_size",
+      "rejected": true,
+      "error_class": "AssertionError"
+    },
+    {
+      "case": "invalid_digest",
+      "rejected": true,
+      "error_class": "AssertionError"
+    },
+    {
+      "case": "unfixed_ref",
+      "rejected": true,
+      "error_class": "AssertionError"
+    },
+    {
+      "case": "invalid_commit",
+      "rejected": true,
+      "error_class": "AssertionError"
+    },
+    {
+      "case": "outside_TEMP",
+      "rejected": true,
+      "error_class": "AssertionError"
+    }
+  ],
+  "fixture_parts": 11,
+  "fixture_compressed_bytes": 174,
+  "simulated_HTTP_requests": 19,
+  "actual_public_network_requests": 0,
+  "scientific_carrier_exports": 0,
+  "scientific_restores": 0,
+  "local_process_or_git_archive_calls": 0,
+  "removed_toy_files": [
+    {
+      "name": "positive_streaming.tar",
+      "bytes": 20480,
+      "SHA": "aafd91c1ec017f5e548465fc000ae6afef563c7b627abf96dd2980831ebea2c6"
+    },
+    {
+      "name": "wrong_part_hash.tar",
+      "bytes": 4096,
+      "SHA": "89e4f2b4802b9ca2847888d147c79087b5fc904dcc41c8eebaa5a7f9cbfdb551"
+    },
+    {
+      "name": "truncated_part.tar",
+      "bytes": 3584,
+      "SHA": "6167489b8b4d68243493cd2cfa68e0e952134bc7547de0612e7161afbbaaa2d5"
+    },
+    {
+      "name": "trailing_part.tar",
+      "bytes": 4096,
+      "SHA": "fe6f045bc39aae5e3530559972b8fde086b9d4d98e8061b8a06b0536afc1fa50"
+    }
+  ],
+  "removed_toy_logical_bytes": 32256,
+  "TEMP_fixture_path": "E:\\codes\\ExactEBRP-work\\temp\\round122\\public-transport-finite",
+  "fixture_path_guarded_and_removed": true,
+  "code_SHA": "ef12933c29b26dfd33744d404a5c7e0afd285e9d180c7ca8c2e14fff4c9ee2ea",
+  "release_SHA": "9bc6c8ac8ff1a9b9498e6044b7c751b4911285b1fe71d5bcb9113561b0356d14",
+  "measured_helpers_unchanged": true,
+  "production_sources_unchanged": true,
+  "native_starts": 0,
+  "Optimize": 0,
+  "engineering_seconds": 1.2363574000191875
+}

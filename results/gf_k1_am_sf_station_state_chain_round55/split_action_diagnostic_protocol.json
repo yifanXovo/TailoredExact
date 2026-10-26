@@ -1,0 +1,27 @@
+{
+  "schema": "round55-split-action-diagnostic-protocol-v1",
+  "conditional": true,
+  "opening": [
+    "inner candidate passes fixed confirmation",
+    "fails full K1",
+    "material AM action changes",
+    "matched evidence links failure to action changes"
+  ],
+  "counterfactuals": [
+    "stable formulation+stable action",
+    "candidate formulation+candidate action",
+    "candidate formulation+stable action",
+    "stable formulation+candidate action"
+  ],
+  "restricted_runs_are_original_certificates": false,
+  "maximum_split_revisions": 1,
+  "forbidden_inputs": [
+    "time",
+    "Work",
+    "nodes",
+    "V/M/Q",
+    "instance features",
+    "history",
+    "classifier"
+  ]
+}

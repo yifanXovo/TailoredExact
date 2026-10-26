@@ -1,0 +1,18 @@
+string(RANDOM LENGTH 16 ALPHABET 0123456789abcdef suffix)
+set(root "${OUTPUT_ROOT}/round78_structural_${suffix}")
+if(EXISTS "${root}")
+  message(FATAL_ERROR "Refusing to replace prior structural evidence")
+endif()
+file(MAKE_DIRECTORY "${root}")
+execute_process(COMMAND "${TEST_EXE}" structural "${root}"
+  RESULT_VARIABLE code OUTPUT_FILE "${root}/stdout.log"
+  ERROR_FILE "${root}/stderr.log" TIMEOUT 30)
+if(NOT code EQUAL 0)
+  message(FATAL_ERROR "Balanced structural/controller test failed: ${code}; artifacts=${root}")
+endif()
+file(READ "${root}/result.json" result)
+string(JSON passed GET "${result}" passed)
+if(NOT passed)
+  message(FATAL_ERROR "Balanced structural oracle did not pass")
+endif()
+message(STATUS "Round78 balanced structural: 7 exhaustive placement cases and actual mixed neutral/strict controller; artifacts=${root}")

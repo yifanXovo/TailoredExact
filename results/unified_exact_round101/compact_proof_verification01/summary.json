@@ -1,0 +1,415 @@
+{
+  "passed": true,
+  "certificates": 45,
+  "small_dp_certificates": 22,
+  "distinct_contract_proof_replays": 23,
+  "records": [
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\confirmation01_02_C101-V20_FLEET-ROOT\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "8297f6531c568c756adf5679a0887869b1c304079da1ef8e3ef5c1be4c6c73db",
+      "rows": 2,
+      "samples": [
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 4,
+          "method": "complete_subset_dp",
+          "violation": 1.5058704642869747
+        },
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 7,
+          "method": "complete_subset_dp",
+          "violation": 0.014252338103705851
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\confirmation01_05_C101-V30_FLEET-ROOT\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "ea3ae918c6f81d71a5d32c3a54254ef324f14ce955c0e447dac4da6d0980a692",
+      "rows": 1,
+      "samples": [
+        {
+          "node": 0,
+          "support": 4,
+          "rank": 1,
+          "method": "eligibility_slot_upper",
+          "violation": 0.27597014588406016
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\confirmation01_05_C101-V30_FLEET-ROOT\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "3bfbd1dc03426da1fb75226e3aa25248b47330223bf2e7fb5a17b0bc3aa9f100",
+      "rows": 3,
+      "samples": [
+        {
+          "node": 0,
+          "support": 4,
+          "rank": 1,
+          "method": "eligibility_slot_upper",
+          "violation": 0.27597014588406016
+        },
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 8,
+          "method": "complete_subset_dp",
+          "violation": 0.48786668541232986
+        },
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 8,
+          "method": "complete_subset_dp",
+          "violation": 0.15033194989794116
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\confirmation01_07_C101-V50_FLEET-ROOT\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "76c0de78e905384777b9cf0dcfe30484c61f07d9a45c2bbbeef853ddfcd4ff68",
+      "rows": 2,
+      "samples": [
+        {
+          "node": 0,
+          "support": 26,
+          "rank": 6,
+          "method": "eligibility_slot_upper",
+          "violation": 2.984009006396137
+        },
+        {
+          "node": 0,
+          "support": 24,
+          "rank": 12,
+          "method": "eligibility_slot_upper",
+          "violation": 2.6943369394517744
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\confirmation01_07_C101-V50_FLEET-ROOT\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "76c0de78e905384777b9cf0dcfe30484c61f07d9a45c2bbbeef853ddfcd4ff68",
+      "rows": 2,
+      "samples": [
+        {
+          "node": 0,
+          "support": 26,
+          "rank": 6,
+          "method": "eligibility_slot_upper",
+          "violation": 2.984009006396137
+        },
+        {
+          "node": 0,
+          "support": 24,
+          "rank": 12,
+          "method": "eligibility_slot_upper",
+          "violation": 2.6943369394517744
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\development01_03_R98-C2_FLEET-ROOT\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "0caee40fc223792270bc3e3dfa6e858b2cb68894521070c63a8fc884358fc8e4",
+      "rows": 2,
+      "samples": [
+        {
+          "node": 0,
+          "support": 15,
+          "rank": 4,
+          "method": "eligibility_slot_upper",
+          "violation": 1.4920008685356352
+        },
+        {
+          "node": 0,
+          "support": 15,
+          "rank": 4,
+          "method": "eligibility_slot_upper",
+          "violation": 1.0654337786188977
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\development01_03_R98-C2_FLEET-ROOT\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "0caee40fc223792270bc3e3dfa6e858b2cb68894521070c63a8fc884358fc8e4",
+      "rows": 2,
+      "samples": [
+        {
+          "node": 0,
+          "support": 15,
+          "rank": 4,
+          "method": "eligibility_slot_upper",
+          "violation": 1.4920008685356352
+        },
+        {
+          "node": 0,
+          "support": 15,
+          "rank": 4,
+          "method": "eligibility_slot_upper",
+          "violation": 1.0654337786188977
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\development01_05_R99-N2_FLEET-ROOT\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "a8a4e2c1cfe94cd9f4a05d22121be7f48861032c70c64f0f360e4abe45525b4a",
+      "rows": 2,
+      "samples": [
+        {
+          "node": 0,
+          "support": 12,
+          "rank": 2,
+          "method": "eligibility_slot_upper",
+          "violation": 2.274611995135053
+        },
+        {
+          "node": 0,
+          "support": 7,
+          "rank": 1,
+          "method": "complete_subset_dp",
+          "violation": 1.2854240045489826
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\development01_05_R99-N2_FLEET-ROOT\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "1225a1afacdbf4d2434b394f9a4eab8458b373cc8f718b8e556f2d7f323388cd",
+      "rows": 3,
+      "samples": [
+        {
+          "node": 0,
+          "support": 12,
+          "rank": 2,
+          "method": "eligibility_slot_upper",
+          "violation": 2.274611995135053
+        },
+        {
+          "node": 0,
+          "support": 7,
+          "rank": 1,
+          "method": "complete_subset_dp",
+          "violation": 1.2854240045489826
+        },
+        {
+          "node": 0,
+          "support": 2,
+          "rank": 1,
+          "method": "eligibility_slot_upper",
+          "violation": 0.005013267707498103
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\isolation01_03_F2_FLEET-SHADOW\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "b815c33e0a3b18194b7d72660d0521d2419670173348d4aa56d6e8330b82cea2",
+      "rows": 4,
+      "samples": [
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 3.18230079989095
+        },
+        {
+          "node": 0,
+          "support": 12,
+          "rank": 2,
+          "method": "eligibility_slot_upper",
+          "violation": 1.3592521772697979
+        },
+        {
+          "node": 2,
+          "support": 5,
+          "rank": 3,
+          "method": "complete_subset_dp",
+          "violation": 0.40865289042788117
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\isolation01_04_F2_FLEET-SUBMIT\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "cdd1a41a466b7f7fd20cc0117887da8b863792b6e057e2377930efdce0899aa5",
+      "rows": 4,
+      "samples": [
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 3.18230079989095
+        },
+        {
+          "node": 0,
+          "support": 12,
+          "rank": 2,
+          "method": "eligibility_slot_upper",
+          "violation": 1.3592521772697979
+        },
+        {
+          "node": 11,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 0.04787986502461727
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\isolation01_05_F2_FLEET-ROOT\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "d922dd9e11973bbbdc6eba062368161c55b8660934de2b130a1b4ecb6f4e831c",
+      "rows": 3,
+      "samples": [
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 3.18230079989095
+        },
+        {
+          "node": 0,
+          "support": 12,
+          "rank": 2,
+          "method": "eligibility_slot_upper",
+          "violation": 1.3592521772697979
+        },
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 0.05923727892257879
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\long01_02_F5_FLEET-ROOT\\L0.0_c6_1_child_disjunction_target_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "bfa303b6684de9b01e9daa0ed6f972560ac87dcfeb2cb98293b83c86c1ef9943",
+      "rows": 2,
+      "samples": [
+        {
+          "node": 0,
+          "support": 21,
+          "rank": 8,
+          "method": "eligibility_slot_upper",
+          "violation": 1.5741606008079516
+        },
+        {
+          "node": 0,
+          "support": 36,
+          "rank": 16,
+          "method": "eligibility_slot_upper",
+          "violation": 1.2432413379131402
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\long01_02_F5_FLEET-ROOT\\L0.0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "bfa303b6684de9b01e9daa0ed6f972560ac87dcfeb2cb98293b83c86c1ef9943",
+      "rows": 2,
+      "samples": [
+        {
+          "node": 0,
+          "support": 21,
+          "rank": 8,
+          "method": "eligibility_slot_upper",
+          "violation": 1.5741606008079516
+        },
+        {
+          "node": 0,
+          "support": 36,
+          "rank": 16,
+          "method": "eligibility_slot_upper",
+          "violation": 1.2432413379131402
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\native01_01_F2_FLEET-SHADOW\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "7f5f55a6bfc91da917966b62e22f71b5c3e4730fb1afd2a351c9077c9b329b2d",
+      "rows": 4,
+      "samples": [
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 3.18230079989095
+        },
+        {
+          "node": 0,
+          "support": 12,
+          "rank": 2,
+          "method": "eligibility_slot_upper",
+          "violation": 1.3592521772697979
+        },
+        {
+          "node": 2,
+          "support": 5,
+          "rank": 3,
+          "method": "complete_subset_dp",
+          "violation": 0.40865289042788117
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\native01_02_F2_FLEET-SUBMIT\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "1892d5cd044443d99f8cc63e84504a8ec47b5d3c6b7caa7c131636687e93f127",
+      "rows": 4,
+      "samples": [
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 3.18230079989095
+        },
+        {
+          "node": 0,
+          "support": 12,
+          "rank": 2,
+          "method": "eligibility_slot_upper",
+          "violation": 1.3592521772697979
+        },
+        {
+          "node": 11,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 0.04787986502461727
+        }
+      ]
+    },
+    {
+      "path": "results\\unified_exact_round101\\compact_evidence\\native\\protection01_03_F2_FLEET-ROOT\\L0_terminal_mip.gurobi.log.round101.certificates.jsonl",
+      "sha256": "d922dd9e11973bbbdc6eba062368161c55b8660934de2b130a1b4ecb6f4e831c",
+      "rows": 3,
+      "samples": [
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 3.18230079989095
+        },
+        {
+          "node": 0,
+          "support": 12,
+          "rank": 2,
+          "method": "eligibility_slot_upper",
+          "violation": 1.3592521772697979
+        },
+        {
+          "node": 0,
+          "support": 9,
+          "rank": 2,
+          "method": "complete_subset_dp",
+          "violation": 0.05923727892257879
+        }
+      ]
+    }
+  ],
+  "scope": "exact dyadic lower-contract replay, complete DP layers and safe scalable caps; no native search rerun"
+}

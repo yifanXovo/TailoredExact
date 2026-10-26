@@ -1,0 +1,16 @@
+{
+  "exit_code": 1,
+  "optimizer_calls": 0,
+  "additional_solver_starts": 0,
+  "cause": "Mutable status.json incorrectly used exclusive-create write(); failed before vector audit and before any new launch",
+  "authoritative_events": "events.jsonl",
+  "status_file_stale": true,
+  "wait_overlaps_existing_paid_solver": true,
+  "repair": "Separate recovery01 queue with atomic status replacement and exact completed-prefix/never-started guards",
+  "repair_status_test": {
+    "transitions": 2,
+    "passed": true,
+    "optimizer_calls": 0,
+    "command_wall_seconds": 0.2262262
+  }
+}

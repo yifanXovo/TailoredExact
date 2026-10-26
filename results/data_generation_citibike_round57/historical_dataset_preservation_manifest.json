@@ -1,0 +1,211 @@
+{
+  "classification": "all_historical_datasets_preserved",
+  "families": [
+    {
+      "complete_content_tree_sha256_after": "e7260345037c04cda67b9c2557ae0b3d116543a85eccc9da620a02b62acd6fc5",
+      "complete_content_tree_sha256_before": "e7260345037c04cda67b9c2557ae0b3d116543a85eccc9da620a02b62acd6fc5",
+      "family_name": "legacy_hybrid_ga_testdata",
+      "file_count": 4330,
+      "local_path": "E:\\codes\\Hybrid GA\\testdata",
+      "preservation_status": "PASS",
+      "real_derived_or_synthetic": "mixed_real_derived_and_synthetic",
+      "representative_hashes": [
+        {
+          "bytes": 1346,
+          "relative_path": "1/test_data_1.txt",
+          "sha256": "fd619b13d19ac13bc7e268e86ac39dde6de3f2f539485215b0f44efc074d40e5"
+        },
+        {
+          "bytes": 1378,
+          "relative_path": "17/test_data_88.txt",
+          "sha256": "2abac089ea87902158924286a01ca4cb74fc12e2dd923882e406c28911e3a3eb"
+        },
+        {
+          "bytes": 1331,
+          "relative_path": "38/test_data_110.txt",
+          "sha256": "71201f4d3b0b0174b61f7ae540358d56db1eed5a4b10e5728b2eb0da2854e73b"
+        },
+        {
+          "bytes": 1348,
+          "relative_path": "6/test_data_168.txt",
+          "sha256": "9bf42732f0cef0db0c45ff40aa9443a1604120bf7bb61e8062d66651e3b57f6a"
+        },
+        {
+          "bytes": 1650297,
+          "relative_path": "TuningSamples/citibike_real_V400_M5_static.txt",
+          "sha256": "346abfe3a102ab25d63033a4874042562858b12dfb1e2c74d3d679b918bc1474"
+        }
+      ],
+      "status": "historical_mixed",
+      "superseded": "not_superseded",
+      "total_size_bytes": 520185732,
+      "used_in_historical_experiments": true
+    },
+    {
+      "complete_content_tree_sha256_after": "f8bd46c0ec34f474c0009479164307a41f63c7c6512a9c21a490d179cc7e068c",
+      "complete_content_tree_sha256_before": "f8bd46c0ec34f474c0009479164307a41f63c7c6512a9c21a490d179cc7e068c",
+      "family_name": "exactebrp_generated",
+      "file_count": 12,
+      "local_path": "E:\\codes\\ExactEBRP\\reference\\generated",
+      "preservation_status": "PASS",
+      "real_derived_or_synthetic": "synthetic",
+      "representative_hashes": [
+        {
+          "bytes": 1758,
+          "relative_path": "manifest.csv",
+          "sha256": "edddb5d8d99e8288f1229702a0417780e81f0a81de13650099d2ece313b8b802"
+        },
+        {
+          "bytes": 1944,
+          "relative_path": "regen_V10_M1_average.txt",
+          "sha256": "a60c76cca6371b9fdc07dcf4eda2614eb9e38c16f6e501ac80867d866f4467d5"
+        },
+        {
+          "bytes": 5676,
+          "relative_path": "regen_V20_M2_average.txt",
+          "sha256": "4270628f953203521a8bb7382975b8baee3f21e694c93e8d2bd176588939ed55"
+        },
+        {
+          "bytes": 28607,
+          "relative_path": "regen_V50_M5_low.txt",
+          "sha256": "14908ec32b7fcd20aa6d095197a3b13259520f3782b12635911bae6d24f78f81"
+        },
+        {
+          "bytes": 1434,
+          "relative_path": "regen_V8_M2_average.txt",
+          "sha256": "382a531accca0ee0aa51a597e8f2e9d3387f927bd9a1e30fae26f3ce220ef21a"
+        }
+      ],
+      "status": "historical_reference",
+      "superseded": "not_superseded",
+      "total_size_bytes": 345062,
+      "used_in_historical_experiments": true
+    },
+    {
+      "complete_content_tree_sha256_after": "9f1286f71963d910a438cf3d6f70d07e6a9e845170b04989fb29335e66af17d6",
+      "complete_content_tree_sha256_before": "9f1286f71963d910a438cf3d6f70d07e6a9e845170b04989fb29335e66af17d6",
+      "family_name": "exactebrp_round56",
+      "file_count": 70,
+      "local_path": "E:\\codes\\ExactEBRP\\reference\\round56_paper_candidate",
+      "preservation_status": "PASS",
+      "real_derived_or_synthetic": "controlled_synthetic",
+      "representative_hashes": [
+        {
+          "bytes": 4187,
+          "relative_path": "base/r56_moderate_V08_seed1760458116.json",
+          "sha256": "07363a01c310586c0295516630e40fbd8b95b0be5004b81909fa541c8e1d1516"
+        },
+        {
+          "bytes": 43848,
+          "relative_path": "fleet_variants/V50/r56_V50_M04_Q20.txt",
+          "sha256": "46cb0f21b94ccabd5b67505473d3326bbfe3e3fce329b653afece79ba0afee68"
+        },
+        {
+          "bytes": 1742,
+          "relative_path": "scenario_descriptors/r56_V12_M02_Q30_T18000_seed1330133768.json",
+          "sha256": "9358e6f98baa02343e6a4c6c182066a1d9b0055132ead9653bdc5cfde7b6d105"
+        },
+        {
+          "bytes": 1749,
+          "relative_path": "scenario_descriptors/r56_V30_M03_Q30_T01800_seed913438282.json",
+          "sha256": "65bab59b6e85e24d813e840cf206d36800facded16700303dfc07aaddbe5007b"
+        },
+        {
+          "bytes": 1786,
+          "relative_path": "scenario_descriptors/r56_V50_M05_Q30_T18000_seed811442003.json",
+          "sha256": "3389190b6d6ac66c693ea56725cae34c52f999fe0f0ff0f919d7506652cdf352"
+        }
+      ],
+      "status": "historical_paper_candidate",
+      "superseded": "not_superseded",
+      "total_size_bytes": 428415,
+      "used_in_historical_experiments": true
+    },
+    {
+      "complete_content_tree_sha256_after": "9fe6af00dda7dca2fb97d6822f0ecb6a312cbb16a45732c55d598dd1394d3382",
+      "complete_content_tree_sha256_before": "9fe6af00dda7dca2fb97d6822f0ecb6a312cbb16a45732c55d598dd1394d3382",
+      "family_name": "exactebrp_all_pre_round57_reference",
+      "file_count": 292,
+      "local_path": "E:\\codes\\ExactEBRP\\reference",
+      "preservation_status": "PASS",
+      "real_derived_or_synthetic": "mixed",
+      "representative_hashes": [
+        {
+          "bytes": 555248,
+          "relative_path": "Paper Draft 2.docx",
+          "sha256": "aabf6fc3377dcca25e36409bcbfb3a371091fafee93e93ce769d1778cc81d870"
+        },
+        {
+          "bytes": 28452,
+          "relative_path": "heldout_round26/V50_M3/moderate_seed6301.txt",
+          "sha256": "d07c4fc1d6f4c54b1964d7d1c925dd12b780f1973f5b61f1e02c1cfa35404ae3"
+        },
+        {
+          "bytes": 2546,
+          "relative_path": "regen_candidate_V12_M2_average.txt",
+          "sha256": "0bb0416cc9540fffbb91299d5c9ed3d6c2363906424005b1c40b4e3829ddf4f0"
+        },
+        {
+          "bytes": 28465,
+          "relative_path": "round55_sealed_generalization/V50_M3_Q20/round55_sealed_generalization_high_imbalance_3600_V50_M3_Q20_seed1172417783.txt",
+          "sha256": "71ed13774dcdeaea0d559c6f3ca1375f8093af052bf68ff1b123c4f2ed3addfb"
+        },
+        {
+          "bytes": 17246,
+          "relative_path": "spatial_exact.py",
+          "sha256": "5d88b28a4de8e50d9ee0a3d32a3e90a457f54b6a8efb19dd39febf8f6341eda4"
+        }
+      ],
+      "status": "historical_reference_collection",
+      "superseded": "not_superseded",
+      "total_size_bytes": 3379412,
+      "used_in_historical_experiments": true
+    },
+    {
+      "complete_content_tree_sha256_after": "e96c02c434c16d47dd4a80761c9ed0a06fd89052471de00a3b8e52e6ec3d00fa",
+      "complete_content_tree_sha256_before": "e96c02c434c16d47dd4a80761c9ed0a06fd89052471de00a3b8e52e6ec3d00fa",
+      "family_name": "exactebrp_testdata",
+      "file_count": 1,
+      "local_path": "E:\\codes\\ExactEBRP\\testdata",
+      "preservation_status": "PASS",
+      "real_derived_or_synthetic": "synthetic_or_example",
+      "representative_hashes": [
+        {
+          "bytes": 354,
+          "relative_path": "examples/gcap_smoke_V4_M1.txt",
+          "sha256": "248a5ce368eec4fee255164f39b18362850a588b852b695bf0d35f0346ceaef9"
+        }
+      ],
+      "status": "historical_testdata",
+      "superseded": "not_superseded",
+      "total_size_bytes": 354,
+      "used_in_historical_experiments": false
+    }
+  ],
+  "interpretation": {
+    "legacy_hybrid_ga": "retained as historical mixed real-derived/synthetic data and provenance evidence",
+    "new_family": "adds real Citi Bike geographic and capacity provenance and has not been performance-tested",
+    "round56": "retained as controlled synthetic benchmark data"
+  },
+  "new_family": {
+    "family_name": "citibike443-regional-v1",
+    "file_count": 349,
+    "local_path": "E:\\codes\\ExactEBRP\\reference\\citibike443-regional-v1",
+    "real_derived_or_synthetic": "real Citi Bike geography/capacity plus documented synthetic fields",
+    "status": "generated_untested_paper_candidate",
+    "superseded": false,
+    "total_size_bytes": 2669571,
+    "used_in_historical_experiments": false
+  },
+  "repository_checks": {
+    "authoritative_source_hashes_unchanged": true,
+    "exactebrp_branch_unchanged": true,
+    "exactebrp_head_unchanged": true,
+    "exactebrp_preexisting_filtered_status_unchanged": true,
+    "exactebrp_preexisting_tracked_modification_hashes_unchanged": true,
+    "legacy_head_unchanged": true,
+    "legacy_preexisting_tracked_modification_hashes_unchanged": true,
+    "legacy_status_unchanged": true
+  },
+  "schema": "citibike-data-round-historical-preservation-manifest-v1"
+}

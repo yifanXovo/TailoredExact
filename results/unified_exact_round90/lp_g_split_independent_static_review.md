@@ -1,0 +1,9 @@
+# Round90 LP-G split 编译快照独立静态审查
+
+**结论：当前源码无静态阻断，可进入另行准入的纯测试与零 Optimize 身份资格；尚未准入实际求解或性能批次。** 我只读 `plan.md`、实现合同、R88 split 数学、七份源码 diff 与两次编译收据；未运行测试、构建或 Optimize。作者按审查意见补了候选账本打开／写入失败门禁，最终 `src/PaperExternalGiniTree.cpp` SHA-256 为 `3de879702ca6dd964a1273558fc5152eaa26fad9001860c0e298270bdb7975a9`；其余六份源码 SHA 见 `static_review_handoff.md`，当前 `ExactEBRP.exe` 为 `bac65ff3b5b099852f2eedd7ef462ad700e5c1131778bd56dca310b3dd0af2f2`。初次配置/编译及窄修重编均 exit 0，总外层构建成本 41.0621198 秒；这些只证明可编译。
+
+**控制流与证明边界。** 研究 flag 默认 false，只接受 Round83 ENS-C 的 `gcap-frontier`，拒绝 Round88 A1/Round89 native B1 混合。关时仍调用原 `splitLegacyFrontierInterval`；新 helper 只在开时使用。开时先要求父 LP 完整、terminal-valid、optimal、feasible、当前 incumbent epoch；`lp_artifact_sha256` 在 LP 完成时保存实际 artifact SHA，消费点逐项核当前叶域、artifact epoch/区间/路径、磁盘 SHA 和 LP SHA。若有限 `G` 严格处于 `a<G<b`，同一 double `p=G` 构成 `[a,p]`、`[p,b]`；缺失、非有限或边界 G 退回原中点。两子域严格内点与端点逐值相等检查先于旧容差覆盖检查，不借容差填补真实空隙，也没有新增端点距离／平衡阈值。原 depth 8、宽度 `1e−4`、双侧完整子 LP、AM `0.08`、子域不可行证明、native target/requeue、原子替换、末端精确 MIP 与全程截止保留。因此覆盖与每路径有限分裂的旧论证可沿用；LP-G 仅最大化**固定父 LP 点**两侧产品行较小的原始违反量，不保证严格子 LP 界改善、排除其他同值最优点或缩短证明时间。
+
+**缓存、账本与身份。** 同 epoch C6 requeue 仅在缓存子 id/父 id/左右索引/深度、精确候选域、当前 LP 和 artifact epoch/域、terminal LP 状态、记录 SHA 与磁盘 SHA 均匹配时复用；同 id 异域直接失败而不偷用旧 bound。 verified UB 更新的 incumbent epoch 路径先使父 artifact/LP/G/child cache 失效，后续 `solveLp` 重新建模。候选专属 precision-17 账本把 proposal、完整／未知 child LP、AM 决策、实际原子替换或父叶 native requeue 分开；Round47 contraction 表头和行在候选臂写实际切点，flag-off 仍保留 midpoint 表述。最终窄修在 flag-on 表头与逐行 flush 失败时抛出错误，避免无账本的候选证书。有效身份通过 `effectiveAlgorithmIdentity` 进入配置快照、结果与 emergency 路径；原内部 ENS-C preset 不被改名。
+
+**下一道门槛。** 新三组纯 fixture 覆盖严格内点／相邻 double、fallback、深度宽度及缓存 predicate 的端点、epoch、LP 域与 SHA 拒绝，但目前**仅编译未执行**。它们本身也不能证明实际 controller 经过同 epoch native-target requeue 与 incumbent 更新后确实重新选点、重建两子模型。应先在独立 lease 下跑纯/旧回归及非法 CLI 组合，再用小型实际模型记录父 LP G、候选点、完整两子 LP、AM、缓存/epoch 路径、最终覆盖与物理证书；任何截止前未完的子证据报 unknown。没有这些执行证据，不应把本静态通过升级为运行正确性或性能结论。

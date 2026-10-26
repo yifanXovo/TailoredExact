@@ -1,0 +1,48 @@
+{
+  "schema": "round109-computed-seed-scope-v1",
+  "actual_seed": 1,
+  "recovered_calls": [
+    {
+      "call": 1,
+      "raw_native_preconditions": 0,
+      "computed_native_prerequisites": true,
+      "model": {
+        "path": "results/unified_exact_round110/campaign/raw/40_G50-R1_S1_P-GRB/compact.lp",
+        "SHA": "c1d52077aeaaca8ad1932d14f4d9656f6275274ac9485ee9da478d1a52988d71",
+        "rows": 35561,
+        "columns": 13322,
+        "quantity_columns": 400,
+        "quantity_type": "I",
+        "direction_columns": 200,
+        "frozen_A_B_rows_checked": 0,
+        "route_load_Y_integer": true,
+        "state_assignment_direction_binary": true
+      },
+      "scope": {
+        "full_original_reference_already_checked": true
+      },
+      "native_log_SHA": "92a5d43c2255edfe3149afeefd9cb749c072a4f34b86beaefc0c40f57ff01ec5",
+      "successful_return": true,
+      "actual_settings": {
+        "read_return_code": 0,
+        "Threads": 1,
+        "Seed": 1,
+        "Presolve": -1,
+        "MIPGap": 0,
+        "MIPGapAbs": 0,
+        "FeasibilityTol": 1e-06,
+        "IntFeasTol": 1e-05,
+        "OptimalityTol": 1e-06
+      },
+      "other_conjuncts_basis": "unchanged full-production request defaults + actual canonical matrix/types + linked native return + backend postcondition gate",
+      "qualification_role": "offline mathematical scope proof; no raw callback/global flag promotion"
+    }
+  ],
+  "observations_SHA": "273164f2117a11cf3ebb99364d86d75ec6697d181b724e19f9d090e8ea356efd",
+  "completion_SHA": "df3268f8b3f63f45b4ddc53200eefd16ee6d124909e6aa9c608f0c8dc7b65db7",
+  "result_SHA": "6db3b973429fa628f6f16213b9dcc7b95fde9bf8fd8f62e17e17280aadc1eb32",
+  "producer_source_SHA": "a124605525f7e2310771e9bb73b381c6fa72d89f2b61c221b604ab076add8d39",
+  "raw_flags_preserved": true,
+  "raw_global_available_and_global_bound_unchanged": true,
+  "production_or_search_changed": false
+}

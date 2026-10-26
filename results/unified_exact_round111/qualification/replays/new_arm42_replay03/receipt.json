@@ -1,0 +1,38 @@
+{
+  "kind": "new",
+  "number": 42,
+  "qualification_fixture": false,
+  "necessary_admission_identity_seconds": 0.0831264000153169,
+  "adapter_seconds": 14.510740999947302,
+  "necessary_postexit_seconds": 14.515012299991213,
+  "phases": {},
+  "phases_are_nested_do_not_sum": true,
+  "error": null,
+  "comparison": {
+    "exact_recursive_equal": true,
+    "excluded": [
+      "/offline_audit_seconds",
+      "/neutral_exchange/offline_seconds"
+    ],
+    "baseline_SHA": "d3fcccab00b788c629cadc4b24bac40c683b17ab044018b5b73467f9ab8a6e4f",
+    "current_SHA": "ece7c25360e4cd4988b08ce91c80f245062ceb3fd69b203e9e89cb524422ef6a"
+  },
+  "output_metadata_cost_included": true,
+  "old_raw_read_only": true,
+  "Optimize": 0,
+  "engineer_replay_does_not_change_old_whole_clock_or_eligibility": true,
+  "optimized_phase_metrics": {
+    "content_identity_check_seconds": 0.056366999982856214,
+    "model_read_parse_seconds": 8.430463899974711,
+    "duplicate_row_Counter_seconds": 0.1456322999438271,
+    "single_column_classification_seconds": 0.11724389996379614,
+    "pure_model_cache_misses": 1.0,
+    "per_contract_type_and_input_check_seconds": 0.03636609995737672,
+    "frozen_A_B_checks_seconds": 0.0025538000045344234,
+    "per_call_scope_check_seconds": 0.061846100026741624,
+    "adapter_inclusive_seconds": 14.10977019998245,
+    "cached_models_before_clear": 1,
+    "call_legality_cached": false,
+    "cached_models_after_clear": 0
+  }
+}

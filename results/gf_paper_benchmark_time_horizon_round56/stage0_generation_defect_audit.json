@@ -1,0 +1,19 @@
+{
+  "schema": "round56-stage0-generation-defect-audit-v1",
+  "issue_id": "R56-GEN-001",
+  "recorded_before_fix": true,
+  "optimizer_runtime_result_count_at_discovery": 0,
+  "classification": "scenario_identity_bug",
+  "defect": "Base-landscape coordinates were serialized to three decimals after the distance matrix was computed from unrounded in-memory coordinates. The parser reconstructs distances from the serialized points, so the stored generator matrix was not exactly the parser-effective matrix.",
+  "maximum_absolute_distance_difference_seconds_by_V": {
+    "8": 0.00072598072506480094,
+    "12": 0.0006375310773023557,
+    "20": 0.0006506219013999726,
+    "30": 0.0006491169555715715,
+    "50": 0.0008030664590137349
+  },
+  "mathematical_effect_on_future_runs": "Without correction, the solver would still use parser-effective distances consistently, but the frozen base JSON and generator audit would claim slightly different distances and their identities would not describe the exact parsed model data.",
+  "historical_rounds_affected": false,
+  "round56_runtime_results_affected": false,
+  "required_fix": "Round coordinates first, compute and serialize distances from those exact serialized coordinates, regenerate all base/fleet/scenario identities, and issue a superseding corrected Stage 0 freeze before any optimizer run."
+}
