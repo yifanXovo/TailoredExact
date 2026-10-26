@@ -358,3 +358,10 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 
 # Preserve the authoritative actual post-PR cleanup receipt bytes.
 /results/unified_exact_round122/cleanup_summary.json -text whitespace=cr-at-eol
+
+# Round136 entry and maintenance receipts retain checked bytes across checkout.
+/scripts/paper_s2.py text eol=lf
+/scripts/verify_paper_s2.py text eol=lf
+/config/paper_s2.json text eol=lf
+/results/unified_exact_round136/** -text whitespace=cr-at-eol
+/results/unified_exact_round136/goal.md whitespace=cr-at-eol,-blank-at-eof

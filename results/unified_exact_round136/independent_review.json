@@ -1,0 +1,133 @@
+{
+  "reviewer": "/root/round136_independent_review",
+  "role": "different agent from primary organizer; independent saved-data/source and guarded-cleanup review",
+  "UTC": "2026-10-26T18:02:20.676290+00:00",
+  "status": "CONTENT_REVIEW_PASS_DELIVERY_METADATA_PENDING",
+  "content_review": "PASS",
+  "delivery_pending": [
+    "actual paper-s2-round136 target and remote readback",
+    "actual English base=main PR and base/head/status readback",
+    "narrow publication-metadata review after those actions"
+  ],
+  "checks": {
+    "G3_1_science_and_identity": {
+      "status": "PASS",
+      "frozen_production_sources_independently_hashed": 218,
+      "production_CXX_or_build_file_diff_from_R135": false,
+      "immutable_R135_paper_and_evidence_files_hashed": 9,
+      "certificate_counts": {
+        "S2": 10,
+        "AP": 10
+      },
+      "R135_arms_pairs_roles": [
+        32,
+        16,
+        7
+      ],
+      "material_AP_certified_time_losses": [
+        {
+          "role": "K-15-S",
+          "seed": "0",
+          "direction": "Lose"
+        },
+        {
+          "role": "X-35-B",
+          "seed": "0",
+          "direction": "Lose"
+        }
+      ],
+      "R134_comparable_S2_state_and_U_equal": 12,
+      "equal_cap_subset": 8,
+      "claims_reviewed": "R132 17/24 S2 and R134 12/14 are separate panels/policies; AP research-only/off; fixed-domain relaxation inclusion does not order finite-search lower bounds or certification times; no causal-branch attribution"
+    },
+    "G3_2_history": {
+      "status": "PASS",
+      "open_old_PRs": 113,
+      "distinct_heads": 97,
+      "duplicate_groups": 16,
+      "contained_old_PRs": 112,
+      "only_independent_PR": 85,
+      "independent_head": "3b4942490bce0d3da73dcf9fdf27344e9ab04296",
+      "main_is_R135_merge_base": true,
+      "R135_ahead_behind": [
+        735,
+        0
+      ],
+      "ordinary_merge_and_final_user_confirmation_required": true,
+      "archive_refs_independently_read_back": true,
+      "actual_consolidation_PR_not_yet_created_at_this_phase": true
+    },
+    "G3_3_launcher": {
+      "status": "PASS",
+      "independent_whole_vector_normalization_matches_all_S2_launches": 16,
+      "actual_launcher_plans_for_all_16_independently_checked_in_prior_native_free_step": true,
+      "AP_flag_absent": true,
+      "ENS_C_compatibility_default_distinguished": true,
+      "complete_own_H_native_single_thread_affinity4_cap_minus6_hardstop_minus2": true,
+      "resolved_review_suggestions": [
+        "UC example physical T=7200",
+        "default --run DLL SHA guard"
+      ],
+      "config_SHA256": "6d9dfac325cbab2e8a76cfe54339ee14febc5121178df9fd04250e411dd0f076",
+      "launcher_SHA256": "663bedff4d3423e8dd7c46ef2bcdb5c141676340fbcb9c26d0ffe833ee06501d"
+    },
+    "G3_4_cleanup": {
+      "status": "PASS",
+      "specific_seven_path_plan_independently_checked_before_execution": true,
+      "all_render_files_byte_count_SHA_and_indexed_PNG_SHA_checked_before_execution": true,
+      "source_PDF_and_review_receipts_retained": true,
+      "R124_R125_dirty_untracked_ignored_zero_and_ref_ancestry_checked_before_execution": true,
+      "resolved_script_review_suggestion": "refuse unexpected render subdirectories before recursive removal",
+      "actual_seven_paths_absent_after_guarded_cleanup": true,
+      "logical_bytes_removed": 503405825,
+      "observed_E_free_byte_change": 556449792,
+      "original_HEAD_and_9_protected_file_hashes_rechecked": true,
+      "R120_core_worktree_and_R122_R130_R132_R133_R134_R135_dependency_worktrees_retained": true,
+      "passed_R135_restore_retained": true,
+      "locked_and_other_ignored_raw_worktrees_retained": true,
+      "no_deletion_performed_by_reviewer": true
+    },
+    "G3_5_handoff_scope": {
+      "status": "PASS",
+      "one_maintained_source_set": "results/unified_exact_round135 paper_body.md + model_and_algorithm_appendices.md assembled by round135_documents.py assemble; supplement/references/figures alongside",
+      "current_manuscript_and_PDF_bytes_unchanged": true,
+      "author_fact_gaps": [
+        "HGA-TGBC author order/affiliations/current status",
+        "exact-method author order/affiliations",
+        "CITI original capture URL/date/443-row selection provenance"
+      ],
+      "concrete_TRE_EJOR_positioning_questions_and_feedback_triggers": true,
+      "new_local_links_checked": 56,
+      "one_review_link_pending_copy": [
+        "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round136\\independent_review.json"
+      ],
+      "native_seconds": 0,
+      "Optimize": 0,
+      "compile": 0,
+      "new_formal_panels": 0,
+      "repeated_public_restore": 0
+    }
+  },
+  "reviewed_file_SHA256": {
+    "README.md": "6b8be8b748b1e276cb5e36ba26a7984c4563a0c5ad4a35587137d97a6c69a560",
+    "config/paper_s2.json": "6d9dfac325cbab2e8a76cfe54339ee14febc5121178df9fd04250e411dd0f076",
+    "scripts/paper_s2.py": "663bedff4d3423e8dd7c46ef2bcdb5c141676340fbcb9c26d0ffe833ee06501d",
+    "docs/paper_s2_release.md": "c7d2679f5c691771e3b3d53903843b81ea13721f7fae69adc2ab706851e9b2bf",
+    "docs/paper_review.md": "8dd1dd0c81e1641003ad06cee7ba822707b7434f2ef12617c82602b8ea60f6a1",
+    "docs/current_mainline.md": "639ad01276cbcd2ea97bfdf7323603a7aabb2b947328b22ef1a0aadfccdf1ff8",
+    "docs/unified_exact_research_index.md": "fb39c9aaa8a8322bc30b85a285e38099b71502d2d95df5d3b20051b6d6eb0e7a",
+    "Manuscript/README.md": "f528ef5ead2e29791db82a71439637b00a2429cc0151c7cf66c1ba6da458a5f6",
+    "results/unified_exact_round136/RESUME.md": "d3f496194c729bad149b2a5fa5753befa49bf60dc3bf1b13266172c834745951",
+    "results/unified_exact_round136/integration_status.json": "fe15c3460e5943661edd7da54bf911d522c4c39c45c0492db65593efc100e5fb",
+    "results/unified_exact_round136/stable_refs.json": "bf47acda448c338f4ffaa326c4d9059ae17bf3a6ddbf39f1814feceb96efd97d",
+    "results/unified_exact_round136/entry_verification.json": "c2bf5f684e2c4ba36507e1b7b9b75753f65c1eb2a5274e593ca1fa89eec72668",
+    "results/unified_exact_round136/cleanup_plan.json": "4936ab7afb828d59cb0ee92c9f4c457564ec230eef69affe79b56c926509b6a8",
+    "results/unified_exact_round136/cleanup_result.json": "9fc95eadd04d7d34562ad487c59374573b76068080a4f24ae54ceef2e1ec43e7",
+    "results/unified_exact_round136/pr_inventory.json": "efd3e68c570426551e2b5857b89a9bb2d8eb497d2ff0ecb7473f56fb1e4b62f3",
+    "results/unified_exact_round136/pr_disposition.csv": "2399bf11f42a3fe15bc05b46a10e682d15016c665d5b4d6c7ceb96eccea9d4c4",
+    "results/unified_exact_round136/local_inventory.json": "02fc0b91adfb18d3f7fb8ed4053b15dcae19a8283a061d7d064c35b4a2e1a4f7"
+  },
+  "blocking_findings": [],
+  "limits": "No new solver run or raw/public recovery. No independent third-party native reproduction. Earlier read-only inspection and cleanup-safety checks occurred before this final automated identity/metadata step; its elapsed time alone is not total reviewer CPU or active time. No future publication is attested by this receipt.",
+  "final_automated_step_seconds": 4.79964270000346
+}
