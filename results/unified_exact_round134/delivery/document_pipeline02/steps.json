@@ -1,0 +1,37 @@
+[
+  {
+    "stage": "plots",
+    "command": [
+      "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\round134\\scripts\\round134_plots.py"
+    ],
+    "exit_code": 0,
+    "separate_document_delivery_seconds": 3.499514100025408,
+    "native_Optimize": 0,
+    "production_compile": 0
+  },
+  {
+    "stage": "assemble",
+    "command": [
+      "D:\\msys64\\ucrt64\\bin\\python.exe",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\round134\\scripts\\round134_documents.py",
+      "assemble"
+    ],
+    "exit_code": 0,
+    "separate_document_delivery_seconds": 0.15296799992211163,
+    "native_Optimize": 0,
+    "production_compile": 0
+  },
+  {
+    "stage": "PDF",
+    "command": [
+      "D:\\msys64\\ucrt64\\bin\\python.exe",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\round134\\scripts\\round134_documents.py",
+      "pdf"
+    ],
+    "exit_code": 0,
+    "separate_document_delivery_seconds": 9.52707269997336,
+    "native_Optimize": 0,
+    "production_compile": 0
+  }
+]

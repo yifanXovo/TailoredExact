@@ -1,0 +1,152 @@
+[
+  {
+    "role": "K-20-S",
+    "L0": 0.19514915244120534,
+    "L_old": 0.31875854261558056,
+    "L_old_TC": 0.31875854261558056,
+    "U": 0.7168065462777502,
+    "U_source": "archived R132 own physically verified best fleet",
+    "cutoff": 0.7752127578025219,
+    "g_interval": [
+      0,
+      0.7752127578025219
+    ],
+    "old_increment": 0.12360939017437522,
+    "TC_increment": 0.0,
+    "gap_after": 0.39804800366216964,
+    "statuses": [
+      "NUMERICAL_OPTIMAL_LP",
+      "NUMERICAL_OPTIMAL_LP",
+      "NUMERICAL_OPTIMAL_LP"
+    ],
+    "construct_seconds": [
+      0.16480250004678965,
+      0.16051350010093302,
+      0.15749659994617105
+    ],
+    "solve_seconds": [
+      0.13100004196166992,
+      0.16499996185302734,
+      0.17499995231628418
+    ],
+    "sizes": [
+      {
+        "rows": 6637,
+        "columns": 3096,
+        "nonzeros": 38286
+      },
+      {
+        "rows": 6657,
+        "columns": 3096,
+        "nonzeros": 38737
+      },
+      {
+        "rows": 6658,
+        "columns": 3096,
+        "nonzeros": 39192
+      }
+    ],
+    "quality": [
+      {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 8.694434061595757e-15,
+        "ConstrResidual": 5.002220859751105e-12,
+        "DualResidual": 8.694434061595757e-15,
+        "ComplVio": 0.0
+      },
+      {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 6.938893903907228e-17,
+        "ConstrResidual": 7.275957614183426e-12,
+        "DualResidual": 1.700029006457271e-16,
+        "ComplVio": 0.0
+      },
+      {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 2.7755575615628914e-17,
+        "ConstrResidual": 7.275957614183426e-12,
+        "DualResidual": 3.8163916471489756e-16,
+        "ComplVio": 0.0
+      }
+    ],
+    "strict_rational_gain_claim": false
+  },
+  {
+    "role": "K-35-U",
+    "L0": 0.20017766194929548,
+    "L_old": 0.27385768132726535,
+    "L_old_TC": 0.2738576813272652,
+    "U": 0.6928543586313136,
+    "U_source": "current final-version C S2 Seed0",
+    "cutoff": 0.7674566047247167,
+    "g_interval": [
+      0,
+      0.7674566047247167
+    ],
+    "old_increment": 0.07368001937796986,
+    "TC_increment": -1.6653345369377348e-16,
+    "gap_after": 0.41899667730404844,
+    "statuses": [
+      "NUMERICAL_OPTIMAL_LP",
+      "NUMERICAL_OPTIMAL_LP",
+      "NUMERICAL_OPTIMAL_LP"
+    ],
+    "construct_seconds": [
+      0.24986999994143844,
+      0.24966029997449368,
+      0.2541228999616578
+    ],
+    "solve_seconds": [
+      0.32200002670288086,
+      1.121999979019165,
+      0.875999927520752
+    ],
+    "sizes": [
+      {
+        "rows": 23624,
+        "columns": 10007,
+        "nonzeros": 163516
+      },
+      {
+        "rows": 23659,
+        "columns": 10007,
+        "nonzeros": 164059
+      },
+      {
+        "rows": 23660,
+        "columns": 10007,
+        "nonzeros": 165057
+      }
+    ],
+    "quality": [
+      {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 0.0,
+        "ConstrResidual": 7.275957614183426e-12,
+        "DualResidual": 1.109138822452671e-16,
+        "ComplVio": 0.0
+      },
+      {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 6.453171330633722e-16,
+        "ConstrResidual": 1.8189894035458565e-11,
+        "DualResidual": 6.83481049534862e-16,
+        "ComplVio": 0.0
+      },
+      {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 1.4661882818955974e-14,
+        "ConstrResidual": 1.4551915228366852e-11,
+        "DualResidual": 1.3426759704060487e-15,
+        "ComplVio": 0.0
+      }
+    ],
+    "strict_rational_gain_claim": false
+  }
+]

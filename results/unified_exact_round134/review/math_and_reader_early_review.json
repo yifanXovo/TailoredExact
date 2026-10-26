@@ -1,0 +1,111 @@
+{
+  "schema": "round134-independent-math-reader-review-v1",
+  "reviewer": "independent_review; separate from primary implementer",
+  "Optimize": 0,
+  "vendor_DLL_loads": 0,
+  "production_sources_modified": false,
+  "findings": [],
+  "checks": {
+    "tiny": {
+      "J2": {
+        "exact_rows_each_point": 583,
+        "exact_bounds_each_point": 284,
+        "actual_VDP_numerator_rows": [
+          "c352",
+          "c353",
+          "c347",
+          "c364",
+          "c365",
+          "c359",
+          "c376",
+          "c377",
+          "c371",
+          "c388",
+          "c389",
+          "c383",
+          "c390"
+        ],
+        "selected_complete_fleets_verified": 4,
+        "R88_pair_CDF_and_qCDF_differences_zero": true,
+        "increment": "3/16",
+        "remaining_gap": "1/16"
+      },
+      "J3": {
+        "exact_rows_each_point": 583,
+        "exact_bounds_each_point": 298,
+        "actual_VDP_numerator_rows": [
+          "c352",
+          "c353",
+          "c347",
+          "c364",
+          "c365",
+          "c359",
+          "c376",
+          "c377",
+          "c371",
+          "c388",
+          "c389",
+          "c383",
+          "c390"
+        ],
+        "selected_complete_fleets_verified": 4,
+        "R88_pair_CDF_and_qCDF_differences_zero": true,
+        "increment": "3/16",
+        "remaining_gap": "1/16"
+      }
+    },
+    "roots": {
+      "K-20-S": {
+        "numerical_L": [
+          0.19514915244120534,
+          0.31875854261558056,
+          0.31875854261558056
+        ],
+        "TC_increment": 0.0,
+        "old_optimum_TC_slack_recomputed": 32.43528338048917,
+        "max_added_row_violation_recomputed": 1.1102230246251565e-16,
+        "same_archived_current_matrix": true,
+        "actual_loaded_ratios_and_all_stations_verified": true,
+        "TC_and_penalty_exact_reconstruction_and_safe_rounding": true
+      },
+      "K-35-U": {
+        "numerical_L": [
+          0.20017766194929548,
+          0.27385768132726535,
+          0.2738576813272652
+        ],
+        "TC_increment": -1.6653345369377348e-16,
+        "old_optimum_TC_slack_recomputed": 54.731406327852156,
+        "max_added_row_violation_recomputed": 8.326672684688674e-17,
+        "same_archived_current_matrix": true,
+        "actual_loaded_ratios_and_all_stations_verified": true,
+        "TC_and_penalty_exact_reconstruction_and_safe_rounding": true
+      }
+    },
+    "reader": {
+      "producer_independent_class_required_before_time_is_accepted": true,
+      "physical_inventory_F0_and_floor0_rechecked": true,
+      "source_rejection_requires_full_domain_safe_open_disposition": true,
+      "source_status_separate_from_final_independent_certificate": true,
+      "native_release_lifecycle_return_True_AST_verified": true
+    }
+  },
+  "decision": "ACCEPT_SCOPED_MATH_AND_READER",
+  "seconds": 4.625307899899781,
+  "source_hashes": {
+    "scripts\\round134_count_bound.py": "d364f56bbb91108e9265938112ba6df3446efa79e95fc2576184a14da5e11457",
+    "scripts\\round134_roots.py": "60f7491af31464d08f196c12784f450c50192913105072a817f9a556ae79dcd3",
+    "scripts\\round134_read.py": "51d0416fa64a7530277dc4cc3c49c6e59e8c5d0adf8022c8d2576d25d64a483e",
+    "results\\unified_exact_round134\\math\\tiny_exact.json": "34eec018acc825a3fb21a0ae7d5d98e6405d320050e2884a04f1fca858a84bcf",
+    "results\\unified_exact_round134\\math\\root_plan.json": "f0b4888b4e3f14d8c275ff614549bbeeafa3f5225c69098641ea22af7230eef3"
+  },
+  "scope_limitations": [
+    "Real-root native OPTIMAL/residual evidence is numerical, not a strict rational dual certificate.",
+    "Tiny increment is over the completed joint+state penalty+R88 CDF reference, not all historical DP closures.",
+    "C/D and manuscript/recovery require final integration review."
+  ],
+  "review_process_corrections": [
+    "A prior message alleged missing return True after a range ended before that line. Full function/AST confirms it always existed; allegation withdrawn without code change.",
+    "First independent arithmetic check stopped after tiny replay on passing str instead of Path to old parser, before any root replay. Corrected reviewer call here; no native work repeated."
+  ]
+}

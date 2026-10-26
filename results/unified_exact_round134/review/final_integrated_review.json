@@ -1,0 +1,451 @@
+{
+  "schema": "round134-final-independent-integrated-review-v1",
+  "UTC": "2026-10-26T00:31:24.184589+00:00",
+  "reviewer": "independent_review, sameG3 reviewer separate from primary implementer",
+  "passed": true,
+  "scientific_checks_passed": true,
+  "new_Optimize": 0,
+  "new_compile": 0,
+  "new_tiny_full_replay": 0,
+  "findings": [],
+  "delivery": {
+    "public_recovery": "PENDING",
+    "PR_push_readback": "PENDING",
+    "future_delivery_acceptance_not_inferred": true
+  },
+  "review_process_corrections": [
+    "First clock/physical check compared station-only operations inventory with full fleet inventory including depot; corrected reviewer predicate to Y[1:]. No science bytes or native work repeated. Failed check outer0.24386s.",
+    "First PDF receipt link check used a POSIX key against reviewer-written Windows source_hashes keys and stopped. Normalized the lookup only; immutable scientific/PDF sources remained identical. Failed outer0.2057578s."
+  ],
+  "all36_checks": [
+    {
+      "arm_id": "C01_SM-B10-B_S0_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "complete_original_cold_compact_native_OPTIMAL_and_physical_UB"
+    },
+    {
+      "arm_id": "C02_SM-B10-B_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "C03_SM-B10-B_S0_R2_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "C04_SM-B10-B_S0_R2_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "complete_original_cold_compact_native_OPTIMAL_and_physical_UB"
+    },
+    {
+      "arm_id": "C05_SM-B10-B_S1_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "C06_SM-B10-B_S1_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "complete_original_cold_compact_native_OPTIMAL_and_physical_UB"
+    },
+    {
+      "arm_id": "C07_SM-B10-B_S1_R2_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "complete_original_cold_compact_native_OPTIMAL_and_physical_UB"
+    },
+    {
+      "arm_id": "C08_SM-B10-B_S1_R2_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "C09_K-15-S_S0_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": false,
+      "basis": "complete_original_cold_compact_qualified_native_bound_open"
+    },
+    {
+      "arm_id": "C10_K-15-S_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "C11_K-15-S_S0_R1_PS",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": false,
+      "basis": "qualified_paid_start_original_compact_open"
+    },
+    {
+      "arm_id": "C12_K-15-S_S1_R1_PS",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": false,
+      "basis": "qualified_paid_start_original_compact_open"
+    },
+    {
+      "arm_id": "C13_K-15-S_S1_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "C14_K-15-S_S1_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": false,
+      "basis": "complete_original_cold_compact_qualified_native_bound_open"
+    },
+    {
+      "arm_id": "C15_UC-B20-B_S0_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "complete_original_cold_compact_native_OPTIMAL_and_physical_UB"
+    },
+    {
+      "arm_id": "C16_UC-B20-B_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "C17_UC-B20-B_S1_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "C18_UC-B20-B_S1_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "complete_original_cold_compact_native_OPTIMAL_and_physical_UB"
+    },
+    {
+      "arm_id": "C19_K-35-U_S0_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": false,
+      "basis": "complete_original_cold_compact_qualified_native_bound_open"
+    },
+    {
+      "arm_id": "C20_K-35-U_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open"
+    },
+    {
+      "arm_id": "C21_K-35-U_S1_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": false,
+      "basis": "qualified_complete_original_interval_cover_open"
+    },
+    {
+      "arm_id": "C22_K-35-U_S1_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": false,
+      "basis": "complete_original_cold_compact_qualified_native_bound_open"
+    },
+    {
+      "arm_id": "C23_X-35-U_S0_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": false,
+      "basis": "complete_original_cold_compact_qualified_native_bound_open"
+    },
+    {
+      "arm_id": "C24_X-35-U_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR"
+    },
+    {
+      "arm_id": "C25_X-35-U_S1_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR"
+    },
+    {
+      "arm_id": "C26_X-35-U_S1_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR"
+    },
+    {
+      "arm_id": "C27_X-35-B_S0_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR"
+    },
+    {
+      "arm_id": "C28_X-35-B_S0_R1_PS",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR"
+    },
+    {
+      "arm_id": "C29_X-35-B_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR"
+    },
+    {
+      "arm_id": "C30_X-35-B_S1_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR"
+    },
+    {
+      "arm_id": "C31_X-35-B_S1_R1_PS",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR"
+    },
+    {
+      "arm_id": "C32_X-35-B_S1_R1_P",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR"
+    },
+    {
+      "arm_id": "D01_K-15-S_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "D02_K-15-S_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "D03_UC-B20-B_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    },
+    {
+      "arm_id": "D04_UC-B20-B_S0_R1_S2",
+      "physical_replay": true,
+      "clock_and_seal_links": true,
+      "certificate": true,
+      "basis": "qualified_complete_original_interval_cover_closed"
+    }
+  ],
+  "counts": {
+    "C": 32,
+    "D_new": 4,
+    "C_certificates": {
+      "P": 9,
+      "PS": 2,
+      "S2": 12
+    },
+    "C_denominators": {
+      "P": 14,
+      "PS": 4,
+      "S2": 14
+    },
+    "comparisons": {
+      "P": {
+        "n": 14,
+        "classes": {
+          "BOTH_CERTIFIED": 9,
+          "LEFT_ONLY_CERTIFIED": 3,
+          "BOTH_OPEN": 2
+        },
+        "directions": {
+          "Win": 12,
+          "UNDETERMINED": 2
+        }
+      },
+      "PS": {
+        "n": 4,
+        "classes": {
+          "LEFT_ONLY_CERTIFIED": 2,
+          "BOTH_CERTIFIED": 2
+        },
+        "directions": {
+          "Win": 2,
+          "Lose": 2
+        }
+      }
+    },
+    "independent_certificates": 9,
+    "losses": [
+      {
+        "role": "X-35-B",
+        "seed": 0,
+        "repeat": 1,
+        "left": "S2",
+        "right": "PS",
+        "left_U": 0.0,
+        "left_L": 0.0,
+        "right_U": 0.0,
+        "right_L": 0.0,
+        "left_T_cert": 17.606032623560168,
+        "right_T_cert": 7.250546223251149,
+        "cap": 2400,
+        "class": "BOTH_CERTIFIED",
+        "direction": "Lose",
+        "left_minus_right_seconds": 10.355486400309019,
+        "right_over_left_ratio": 0.4118216964762726,
+        "material": true,
+        "micro": false
+      },
+      {
+        "role": "X-35-B",
+        "seed": 1,
+        "repeat": 1,
+        "left": "S2",
+        "right": "PS",
+        "left_U": 0.0,
+        "left_L": 0.0,
+        "right_U": 0.0,
+        "right_L": 0.0,
+        "left_T_cert": 18.27744961460121,
+        "right_T_cert": 7.195779468980618,
+        "cap": 2400,
+        "class": "BOTH_CERTIFIED",
+        "direction": "Lose",
+        "left_minus_right_seconds": 11.081670145620592,
+        "right_over_left_ratio": 0.39369713065613726,
+        "material": true,
+        "micro": false
+      }
+    ]
+  },
+  "D_checks": "All6 certified points, input/Omega constancy, effective weights, physical objective identity and four error-aware neighboring relations pass. Errors use accepted engineering original-objective bounds, not primal tolerance.",
+  "budget_recomputed": {
+    "G1_seconds": 18194.18499070048,
+    "by_category": {
+      "B": 30.455383000080474,
+      "C": 17917.469909500447,
+      "delivery": 0.0,
+      "D": 228.9697852997342,
+      "postverify": 0.0,
+      "E": 17.289912900218084,
+      "repair": 0.0
+    },
+    "fee_receipts": 59,
+    "separate_fee_seconds": 83.27623369998764,
+    "native_intervals_nonoverlapping": 42,
+    "compile_test_intervals_checked": 12,
+    "limit_seconds": 57600,
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "source_branches": {
+    "24": {
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR",
+      "native_qualified": true,
+      "raw_lifecycle": true,
+      "source_rejections": 0,
+      "T_produce": 120.2566853313474,
+      "T_verify": 3.4503352000610903
+    },
+    "25": {
+      "basis": "INDEPENDENT_EXACT_ZERO_FULL_DOMAIN_NONNEGATIVE_FLOOR",
+      "native_qualified": false,
+      "raw_lifecycle": false,
+      "source_rejections": 3,
+      "T_produce": 452.8414401500486,
+      "T_verify": 3.4633971999865025
+    }
+  },
+  "manuscript_corrections_confirmed": true,
+  "status": "PASS_SCIENTIFIC_AND_REVIEW_MANUSCRIPT_INTEGRATION",
+  "PDF": {
+    "SHA256": "6a3400388ad8efa83581532e492008b3e95ebbbe49b579a013b1c3a37bafb680",
+    "pages": 43,
+    "independent_pages_visually_inspected": [
+      4,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      25,
+      32,
+      43
+    ],
+    "independent_sample_findings": [],
+    "primary_allpage_QA": "PASS_ACTUAL_43_PAGES",
+    "primary_QA_receipt_SHA256": "fa7caff6f075c2ae8d8fb5ea0c2acc9ee9c4f46516339b1ab6aebcc6d03a6308",
+    "primary_full_size_pages": [
+      8,
+      9,
+      11,
+      26
+    ],
+    "all_fonts_embedded": true,
+    "remaining_layout_findings": []
+  },
+  "scientific_scope": [
+    "Normal positive K15 and exposed UC split/target/cache proofs remain; both K35U positive lower-bound endpoints stay open.",
+    "Known X35B PS reversals are both substantive under preregistered rule and retained; current known-role evidence shows no broad systematic deterioration.",
+    "Complete S2 evidence is separated from independent outer-controller speed causality and historical timing environment.",
+    "Already completed independent tiny/math review is reused unchanged: strict3/16 tiny increase over named old controls, no added real-root TC gain and no productionTC.",
+    "The manuscript can be assessed for advisor review with explicit bounds; no journal acceptance or population performance claim.",
+    "External same-problem citation, provenance/permissions and journal-specific formatting remain author submission work."
+  ],
+  "source_hashes": {
+    "results\\unified_exact_round134\\reports\\summary.json": "1676f269dcfd22f09d7f57f91da81f4cec36a8610cc14fd7c5857cdd4dc72959",
+    "results\\unified_exact_round134\\reports\\C\\arms.json": "0f09365531f6c4f4da7b984d83a8e8b6ce3388bc837a27ce60b6258422491a69",
+    "results\\unified_exact_round134\\reports\\C\\pairs.json": "4b726d8077302c548575d9c8097fae7be765c0fb2a87bdfce2bf03e365759baa",
+    "results\\unified_exact_round134\\reports\\D\\six_points.json": "31cae2543b59da79183984df4ed3843df7f8900b194413b294910de618281080",
+    "results\\unified_exact_round134\\reports\\D\\tradeoff_relations.json": "8163194f0fb44d038eb81eb0b63a0d9fd59ce98d4b7e2a06caecd615254eb42f",
+    "results\\unified_exact_round134\\reports\\D\\lambda_pipeline_audit.json": "8945964a1569d3a99f8071fd3e32bb40be76011f1feec9141fe2e4ba0253d4a7",
+    "results\\unified_exact_round134\\manuscript.md": "bcfb4af87db83c8b83097fd7e47a2a7f71c4361a08529664344df6f78b04ca0a",
+    "results\\unified_exact_round134\\supplement.md": "1ae9cc238cd26acadf8667a9325aa80568e63189b898e43884a9d5b311c1fa94",
+    "results\\unified_exact_round134\\references.bib": "1c48edb167c03ad732b6008ee64f1b2f86553e7b167aa08f315e89dee1a580a0",
+    "scripts\\round134_read.py": "51d0416fa64a7530277dc4cc3c49c6e59e8c5d0adf8022c8d2576d25d64a483e"
+  },
+  "arithmetic_check_seconds": 0.15141420008148998,
+  "finalized_UTC": "2026-10-26T00:34:46.628280+00:00",
+  "submission_readiness": {
+    "path": "results/unified_exact_round134/submission_readiness.md",
+    "SHA256": "b21070e0317a12cb0e2a983cb2a877ccf7a54c5d071ee263eecb4c652c5e3f4d",
+    "checked": true,
+    "assessment": "Scoped formal advisor/coauthor review readiness is supported. Both materialPS reversals, positiveK35U open endpoints, all6 weight certificates, stopTC decision and smallest author/provenance/formatting tasks are retained. HigherOR positioning limits remain explicit."
+  },
+  "final_PDF_receipt_check_seconds": 0.0022705000592395663
+}

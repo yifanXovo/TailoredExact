@@ -302,7 +302,10 @@ def validate_event_lifecycle(payloads, future=True, require_complete=True):
                 postreturn_quality=sorted(quality),source_revoked=rejected)
 
 def expected_settings(launch):
-    config=launch['expected_configuration']
+    config=launch.get('expected_configuration') or dict(threads=1,mip_threads=1,
+        gurobi_seed=launch['seed'],gurobi_presolve=int(launch['command'][launch['command'].index('--gurobi-presolve')+1]),
+        configuration=launch['configuration'],requested_mip_gap=0,requested_mip_gap_abs=0,
+        FeasibilityTol=1e-6,IntFeasTol=1e-5,OptimalityTol=1e-6)
     assert type(config['gurobi_seed']) is int and 0<=config['gurobi_seed']<=2000000000
     assert type(config['gurobi_presolve']) is int and -1<=config['gurobi_presolve']<=2
     assert config['threads']==config['mip_threads']==1

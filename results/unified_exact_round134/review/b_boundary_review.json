@@ -1,0 +1,34 @@
+{
+  "schema": "round134-independent-zero-boundary-review-v1",
+  "UTC": "2026-10-25T20:01:26.216954+00:00",
+  "reviewer": "independent_review; separate from primary implementer",
+  "decision": "NO_CORRECTION_NEEDED_FOR_STATED_BOUNDARY",
+  "Optimize": 0,
+  "compilation": 0,
+  "production_sources_modified": false,
+  "actual_source_checks": {
+    "main_external_path_precedes_generic_zero_return": "src/main.cpp:13547 external solve and return; generic objective<=1e-12 begins13558",
+    "ms2_configuration": "include/Round127Research.hpp requires round43/44/45 off, complete frozen M-B options",
+    "zero_width_geometry": "makeLegacyFrontierIntervals emits one [0,0]; exactIntervalCoverage permits zero width and requires endpoint coverage",
+    "return_chain_native_lifecycle_guard": "l['arm'] in ['ENS-C', 'M-B'] and actual",
+    "return_chain_zero_native_behavior": "actual=[] bypasses native resource/old-combined-lifecycle assertions; normal process phases, completion and clock remain checked",
+    "independent_reader_branch": "producer class independent_zero_nonnegative_floor plus exact inventory/physical F0, claimed certificate and floor0; cover not required",
+    "strict_vs_epsilon": "P has no startup; final helper grants strict independent class only from exact inventory+complete fleet. PS own startup nearzero positive keeps epsilon_nonnegative_floor; its inherited status startup_zero is a legacy numerical label. S2 ms2 final helper grants independent class only for exact zero; nearzero positives retain inherited epsilon-tolerant outer proof with own_exact_zero=false."
+  },
+  "scope_limitations": [
+    "No new native path executed; conclusion follows actual entry/control guards and new helper rather than a hypothetical fixture.",
+    "A different reachable engineering failure with actual native calls and intact independent zero proof would require its concrete cleanup evidence; no expanded repair is justified for the stated zero-call boundary.",
+    "Legacy PS nearzero certificate prose/status still contains zero wording; final class and exact-zero indicator must determine strict-vs-epsilon reporting."
+  ],
+  "source_hashes": {
+    "src/main.cpp": "c1508b72562ad67107c3ba8874487e1468883c0fca343811b5b5ef1e0d442479",
+    "src/PaperExternalGiniTree.cpp": "44156056b5ef5b4eeca2d273cc0fef183764a40df606734dafff3d5c1f1bd179",
+    "src/GurobiBaseline.cpp": "49db7c07cddd17e1904e6b41ea2f69dfc492b80225dfd4be7c71bc0ee1d8fecf",
+    "include/IndependentObjectiveProof.hpp": "1ef00600437eb4a4ab4a17617736acb8c7adcb4f191d945ee1735ea00f173bde",
+    "include/Round127Research.hpp": "b7e8df3ba4471ba150f33cd49323f60ec0d1cffbb8d6d49799360224e9e98d91",
+    "src/GiniFrontierGeometry.cpp": "a4640594421ec578561ff19ee0125526b8c213ac26c2833299427caf6e03024f",
+    "scripts/round114_audit.py": "a8c55a0bcd3d5a7083d1109850fa728f35378c4dafb5a4cc185089c6c530b758",
+    "scripts/round134_read.py": "51d0416fa64a7530277dc4cc3c49c6e59e8c5d0adf8022c8d2576d25d64a483e"
+  },
+  "findings": []
+}

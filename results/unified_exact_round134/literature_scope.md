@@ -1,0 +1,15 @@
+# Literature and provenance checks for the review manuscript
+
+The pre-existing routing/model comparison is retained from the R124/R125 source review, with the access limits in `results/unified_exact_round125/literature_scope.md`. This round adds a targeted TC positioning search on 26 October 2026 (Asia/Shanghai). Searches covered Gini/CDF/threshold representations and budget-derived cardinality/concave epigraph inequalities. It is not an exhaustive priority search.
+
+| Primary source | Material actually available | Manuscript use and remaining question |
+|---|---|---|
+| [Yitzhaki and Schechtman, chapter 2](https://link.springer.com/chapter/10.1007/978-1-4614-4720-7_2) | Publisher abstract, notes, bibliography and citation metadata; full subscription chapter unavailable. | Established alternative Gini representations; the paper independently proves its finite threshold identities. Before asserting a precise equation-to-equation literature equivalence, inspect the complete chapter's CDF formulas and discrete-distribution convention. Citation year 2013 follows publisher citation, with online dates in 2012. |
+| [Yu and Ahmed](https://www.sciencedirect.com/science/article/pii/S1572528615000444) | Publisher-indexed article text, including the mean-risk knapsack section's sorted-cost cardinality argument; direct open requests returned 403/redirect error. | A budget-derived activation count and concave epigraph strengthening are established tools. Their complete lifted inequalities are not implemented or dominated here. Final volume date is May 2017, volume 24, pp.87-102, despite the DOI's 2015 component. |
+| [Dorfman](https://www.jstor.org/stable/1924845) | JSTOR landing page did not expose article text. | Bibliographic lead for the distribution-function Gini formula, also listed by the inspected Springer notes. No claim to have read the original proof; no statement depends on access to it. |
+
+The TC contribution is the specified all-station inventory-state aggregate and its demonstrated increment over the explicitly retained controls. The threshold identity, cheapest-increment count and chord inequality are not presented as newly invented mathematics. No general dominance over historical DP, VD-J equality or complete concave epigraph closures is asserted.
+
+The physical problem and startup descend from the supplied project model/heuristic code. The available project material does not identify a verified external same-problem heuristic article by author, title and DOI. Before journal submission the authors should confirm whether such a paper exists, add its precise citation if applicable, and align model-inheritance wording. The current draft explicitly claims the exact algorithm and evidence, rather than invention of the underlying model or heuristic. This bibliographic clarification does not require new optimization runs.
+
+Other specific access gaps remain the final Raviv article, full Chemla article and complete recent Qiao/Caggiani formulations. Their unread constraints are not used to claim mathematical equivalence or performance superiority. No foreign full text is redistributed.

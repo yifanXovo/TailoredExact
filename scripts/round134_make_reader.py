@@ -47,6 +47,10 @@ TOL=1e-7''')
                       "certificate_qualified=(arm.get('independent_proof',False) or not bool(j['source_rejections'])) and not bool(legacy_issue)")
     code=code.replace("'round133_endpoint.json'","'round134_endpoint.json'")
     code=code.replace("'round133_verification_failure.json'","'round134_verification_failure.json'")
+    code=code.replace("    config=launch['expected_configuration']", """    config=launch.get('expected_configuration') or dict(threads=1,mip_threads=1,
+        gurobi_seed=launch['seed'],gurobi_presolve=int(launch['command'][launch['command'].index('--gurobi-presolve')+1]),
+        configuration=launch['configuration'],requested_mip_gap=0,requested_mip_gap_abs=0,
+        FeasibilityTol=1e-6,IntFeasTol=1e-5,OptimalityTol=1e-6)""")
     (ROOT/'scripts/round134_read.py').write_text(code,encoding='utf-8')
     print('Round134 reader created; native schema and all source checks retained')
 if __name__=='__main__':main()

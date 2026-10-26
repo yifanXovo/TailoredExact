@@ -1,0 +1,9 @@
+{
+  "UTC": "2026-10-26T00:37:32.801979+00:00",
+  "original_failure": "delivery/archive",
+  "cause": "recorded native progress path is relative to ROOT",
+  "change": "resolve relative current paths; verify and reuse every completed carrier and existing transport piece; preserve incomplete empty progress ZIP before affected retry",
+  "scope": "transport/archive only; no reader predicate, source/PE, raw, scientific result or healthy experiment changed",
+  "Optimize": 0,
+  "compile": 0
+}

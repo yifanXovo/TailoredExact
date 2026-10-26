@@ -1,0 +1,90 @@
+{
+  "schema": "round134-independent-paper-static-review-v1",
+  "UTC": "2026-10-25T22:54:47.021008+00:00",
+  "reviewer": "independent_review; separate from primary implementer",
+  "decision": "ACCEPT_STATIC_TEXT_CORRECTIONS_CONFIRMED",
+  "Optimize": 0,
+  "compile": 0,
+  "PDF_export": 0,
+  "archive_execution": 0,
+  "production_or_body_modified": false,
+  "small_static_check_seconds": 0.005065200035460293,
+  "source_hashes": {
+    "results/unified_exact_round134/paper_body.md": "6642312c8090c0a84d663dad465e62bb03bdab87d23f278b5a6286b76418c5fa",
+    "scripts/round134_documents.py": "ce5fd2563475a3d764347cad582178608b30fc7aa2629c8473c554a630ed6d1a",
+    "results/unified_exact_round134/submission_positioning.md": "c24c39775e281d573bdf5d53ba25de2addfec2e927602419935b35b2444c5045",
+    "results/unified_exact_round134/literature_scope.md": "3bfab3e761d80a40df313db7f90a95a3a4341c76af1363e443f50fa2cc5743b4",
+    "results/unified_exact_round134/references.bib": "1c48edb167c03ad732b6008ee64f1b2f86553e7b167aa08f315e89dee1a580a0"
+  },
+  "passed_science_checks": [
+    "Independent exact inventory proof, physical fleet verification, epsilon and native-source qualification are distinct; insufficient positive/rejected evidence remains open.",
+    "Proof finalization, resource release, output and normal return belong to complete production clock; offline audit cannot backdate proof.",
+    "rho=lambda*Omega, optimal and suboptimal-error inequalities have correct signs and same-feasible-set premise; primal tolerance is not an objective-error bound.",
+    "TC retains all stations, upper stock budget, legal supports, actual loaded ratio coefficients and safe rounding.",
+    "Tiny exact3/16 increment and1/16 remaining gap concern named full joint+old penalty+R88 CDF reference; explicit algebraic extensions are not misrepresented as new combined native solve.",
+    "Real roots retain old penalty and conclude no added TC gain; production remains separate.",
+    "CompleteS2 support, ownH effects and outer independent net gain are separated; adverse/open/unknown size boundaries remain.",
+    "Historical counts/policies retain version labels; final32+4 is known-role confirmation, not holdout.",
+    "Standard tools, limited literature access and missing exact same-problem external citation are disclosed; journal positioning is an authorship assessment."
+  ],
+  "text_findings": [
+    {
+      "id": "PAPER1",
+      "scope": "retained AppendixA introduction",
+      "issue": "Old paragraph calls7564... the current E3 source and uses E3_binding as current identities.",
+      "needed": "Relabel historical model authority and point current execution to candidate_manifest/source_publication."
+    },
+    {
+      "id": "PAPER2",
+      "scope": "retained AppendixB introduction",
+      "issue": "Algorithm1 appears in Section4 is stale; new body puts algorithm inSection3.",
+      "needed": "Update section reference."
+    },
+    {
+      "id": "PAPER3",
+      "scope": "retained B.1 fixed-entry paragraph",
+      "issue": "current_method_manifest and relative D_argv_freeze/C_argv_freeze are R132 historical plans, absent from current folder.",
+      "needed": "Distinguish historical source and current C_matrix_frozen/D_matrix_frozen/candidate_manifest."
+    },
+    {
+      "id": "PAPER4",
+      "scope": "retained B.4 last paragraph before replacement",
+      "issue": "Qualification reference to Sections5.4 andA.7 points to new weight section5.4.",
+      "needed": "Use currentA.7/B.4.1 plus dated supporting history. OldB.4.1-internal B.4.2 sentence is removed already, not an additional defect."
+    },
+    {
+      "id": "PAPER5",
+      "scope": "documents.py new A.7 native-source sentence",
+      "issue": "Qualified source required even when analytic floor exists is broad without naming native-derived closures.",
+      "needed": "Prefix For a native-derived bound or closure to preserve the independent-zero exception."
+    }
+  ],
+  "static_artifact_checks": {
+    "assembler_AST_parse": true,
+    "body_citation_keys": 18,
+    "missing_citation_keys": [],
+    "template_placeholders_pending_complete_results": [
+      "C_MAIN_TABLE",
+      "C_RESULTS",
+      "D_RESULTS",
+      "D_TABLE",
+      "FINAL_ABSTRACT",
+      "FINAL_CONCLUSION",
+      "OPERATIONAL_RESULTS",
+      "ROOT_ABSTRACT",
+      "ROOT_RESULTS",
+      "ROOT_TABLE"
+    ]
+  },
+  "limitations": [
+    "FinalC/D counts, assembledPDF/visualQA and public restoration remain outside this pre-result static pass.",
+    "Primary web pages were not refetched in this narrow local-text review."
+  ],
+  "review_process_failure_retained": "First tiny static check used locale-default read_text and stopped on GBK decode before output. Repeated with explicit UTF8; no scientific calculation or native work repeated. Failed outer0.2450325s.",
+  "resolution": {
+    "all5_findings_resolved_in_actual_assembled_manuscript": true,
+    "UTC": "2026-10-26T00:31:50.954867+00:00",
+    "manuscript_SHA256": "bcfb4af87db83c8b83097fd7e47a2a7f71c4361a08529664344df6f78b04ca0a",
+    "details": "A historical authority vs current capsule corrected; Algorithm1 Section3 corrected; current C/D/lambda template corrected; B4 qualification pointers corrected; A7 source conditions explicitly limited to native-derived bound/closure. No production, reader or experiment changes."
+  }
+}
