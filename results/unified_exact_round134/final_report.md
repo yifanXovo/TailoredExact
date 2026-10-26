@@ -1,6 +1,6 @@
 # Round134 final scientific report
 
-This is the scientific payload at the pre-publication freeze. Actual public recovery, PR readback and final completion are recorded separately; no pending delivery is represented here as already passed.
+The scientific payload is fixed at `29adc14cf2089442298b409ba2bc06963e77bc14`. Actual anonymous recovery passed all 36 current positions and the declared mathematics from that commit. [Draft PR #196](https://github.com/yifanXovo/TailoredExact/pull/196) is open, Draft and unmerged on the verified Round133 base; actual API readback matched its English body and 12 key-file identities. Later completion and the final self-publishing readback are recorded separately in completion_audit.json and the external final receipt. The five scientific answers below are unchanged by delivery metadata.
 
 ## 1. Implementation completion
 
@@ -20,7 +20,7 @@ X-35-U: Seed0 U=0, L=0, certified; Seed1 U=0, L=0, certified.
 
 X-35-B: Seed0 U=0, L=0, certified; Seed1 U=0, L=0, certified.
 
-The normal positive K-15-S and actual split/target/cache UC-B20-B paths provide concrete retained advantages. Existing paid-start reversals and positive-objective size limits remain material boundaries. A role-level regression assessment, after the final integrated review, is given in submission_readiness.md. It is not inferred from a simple win count or speed on an erroneous old model.
+The normal positive K-15-S and actual split/target/cache UC-B20-B paths provide concrete retained advantages. Existing paid-start reversals and positive-objective size limits remain material boundaries. The final six-role panel gives no evidence of a broad regression; both substantive PS reversals remain confined to the known X-35-B role. This targeted evidence does not establish universal or population-level performance. The scoped review judgment is in submission_readiness.md. It is not inferred from a simple win count or speed on an erroneous old model.
 
 ## 3. Within-instance weight experiment
 
