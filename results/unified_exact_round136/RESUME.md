@@ -5,6 +5,14 @@ on R135 `25800aa6b51bf7607b51e5df14a10a5ca4571889`. The English consolidation
 PR targets **main**. Its actual number, base/head and final checks are recorded
 in [integration_status.json](integration_status.json).
 
+The actual PR is [#198](https://github.com/yifanXovo/TailoredExact/pull/198),
+open, Draft and unmerged. The verified entry snapshot is
+`715d487674d56bc89358cf098599bc78f29d878f` (`paper-s2-round136`). Review the
+[Round136-only incremental changes](https://github.com/yifanXovo/TailoredExact/compare/25800aa6b51bf7607b51e5df14a10a5ca4571889...715d487674d56bc89358cf098599bc78f29d878f)
+separately from the full 735-commit historical integration. Later receipt
+commits carry publication metadata; final remote readback is kept outside the
+commit it observes under `E:\codes\ExactEBRP-work\evidence\round136\final_remote_readback.json`.
+
 The authoritative algorithm/run entry is
 [paper-S2 release](../../docs/paper_s2_release.md). The current
 [review packet](../../docs/paper_review.md) links the sole R135 source set,
@@ -21,7 +29,7 @@ ENS-C, physical model, complete own H and proof/numerical policies are unchanged
 * [PR disposition](pr_disposition.csv) lists every base/head, containment,
   duplicates, proposed reason and actual state. [Full metadata](pr_inventory.json)
   includes all 136 branch heads. No old PR state has been changed.
-* [Local inventory](local_inventory.json) covers 39 registered worktrees at
+* [Local inventory](local_inventory.json) covers 39 registered worktrees (including paper-current) at
   entry, tracked changes, untracked/ignored counts and samples, actual file
   sizes, protected identities and temporary/restore roots. The full path
   inventory is retained locally under the recorded evidence path/size/SHA.
@@ -73,8 +81,9 @@ can be separate commits; no commit is claimed to attest its own future state.
 
 ## One final authorization batch
 
-**Integration preparation is complete once the actual PR and final review are
-read back. Main update and old-PR closure require the single final confirmation
+**Integration preparation is complete; actual PR/ref publication is read back
+and final independent metadata review is recorded in its receipt. Main update
+and old-PR closure require the single final confirmation
 specified by goal D2. They are not performed automatically.**
 
 The concrete proposed batch is:
