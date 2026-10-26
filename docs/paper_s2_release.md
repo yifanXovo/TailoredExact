@@ -21,6 +21,9 @@ is introduced. AP stays research-only/off; TC and AP are completed studies.
 ## Run once
 
 The active local checkout is `E:\codes\ExactEBRP-work\worktrees\paper-current`.
+It is on local `main`, tracking `origin/main`, after the authorized PR #198
+merge; final HEAD equality is recorded in the closeout readback. The code/config
+remains the verified `paper-s2-round136` snapshot.
 The shared original checkout `E:\codes\ExactEBRP` retains its R105 HEAD and
 protected user changes. Use an installed Python 3 runtime; the validated local
 one is `D:\msys64\ucrt64\bin\python.exe`.
@@ -136,11 +139,14 @@ remote readback are in [stable_refs.json](../results/unified_exact_round136/stab
 No existing ref is overwritten. Keep long-term evidence pinned to commits.
 
 [Round136 RESUME](../results/unified_exact_round136/RESUME.md) records the
-actual English **base=main** consolidation PR, review/checks, cleanup and final
-authorization state. The branch begins at the verified R135 head and preserves
-all 735 existing commits. A normal merge is proposed. Old PRs are only closed
-after that merge and the one final user authorization; PR85 is separately
-archived as non-adopted, with its independent history retained.
+authorized completion of the English **base=main** consolidation PR #198.
+Ordinary merge `053b38a1bd66ad918e3c28932ebcd8f786704aeb` preserves the full
+R135 chain. Of #86-#197, GitHub marked 17 merged and this closeout closed the
+remaining 95 after refreshed-head containment checks. PR85 was already closed
+and unmerged at readback and is separately recorded as completed/not adopted.
+All 137 remote branches and three stable tags remain; independent R38 is not
+an ancestor of main. Minimal final status records are committed on main under
+the same explicit approval; the external final readback records that commit.
 
 Remaining author facts and feedback-triggered research conditions are in the
 [review packet](paper_review.md). No fresh AP/TC research, formal panel, email

@@ -1,5 +1,5 @@
 {
-  "status": "COMPLETE_PREPARATION_AWAITING_ONE_FINAL_D2_CONFIRMATION",
+  "status": "ROUND136_AUTHORIZED_CLOSEOUT_COMPLETE",
   "user_facing_date": "2026-10-27 Asia/Shanghai",
   "UTC": "2026-10-26T18:15:19.658608+00:00",
   "PR": 198,
@@ -14,11 +14,7 @@
   "compatibility_CLI_default": "ENS-C",
   "all_S2_argv_vectors_checked": 16,
   "production_source_hashes_checked": 218,
-  "entry_links_checked": 69,
-  "independent_review": {
-    "status": "PASS_PREPARATION_COMPLETE_PENDING_D2_USER_CONFIRMATION",
-    "SHA256": "b7d346be14d9e533d1b17e6999e0543b82e4217b4219675344a7b5322a3def94"
-  },
+  "entry_links_checked": 72,
   "native_seconds": 0,
   "native_limit_seconds": 600,
   "Optimize": 0,
@@ -35,22 +31,46 @@
     "worktrees_at_inventory": 39,
     "worktrees_after": 37
   },
-  "main_updated": false,
-  "old_PR_states_changed": false,
-  "old_PRs_open": 113,
-  "open_PRs_including_consolidation": 114,
+  "main_updated": true,
+  "old_PR_states_changed": true,
+  "old_PRs_open": 0,
+  "open_PRs_including_consolidation": 0,
   "three_stable_refs_published": true,
-  "required_final_user_confirmation": {
-    "ordinary_merge_PR": 198,
-    "close_absorbed_PR_range": "#86-#197 only after refreshed containment in main",
-    "archive_close_independent_PR": 85,
-    "retain_remote_branches_and_negative_history": true
-  },
   "author_facts_pending": [
     "HGA-TGBC author order/affiliations/current publication or submission status",
     "exact-method paper author order/affiliations",
     "original CITI capture URL/date and 443-row selection/filter provenance"
   ],
   "advisor_decision_pending": "TRE/EJOR account and concrete feedback; no automatic AP/TC or other new candidate work",
-  "final_publication_scope": "final receipt commit is followed by an external final_remote_readback.json; no self-attestation of future Git state"
+  "final_publication_scope": "authorized minimal record commit is followed by external E:/codes/ExactEBRP-work/evidence/round136/closeout/final_readback.json; no self-attestation of future Git state",
+  "authorized_closeout_UTC": "2026-10-26T19:03:18.398034+00:00",
+  "main_merge_commit": "053b38a1bd66ad918e3c28932ebcd8f786704aeb",
+  "actual_merged_PR_head": "3fed6fb6776e3f86414c81e0de636707211b2084",
+  "PR198_ready_then_ordinary_merge": true,
+  "manual_old_PRs_closed": 95,
+  "old_PRs_GitHub_marked_merged": 17,
+  "PR85_closed_unmerged_not_adopted": true,
+  "unhandled_exceptions": [],
+  "remote_branches_retained": 137,
+  "stable_tags_retained": 3,
+  "original_user_changes_preserved": true,
+  "original_protection_receipt_SHA256": "9ad073c106c87c1d5e140d0cae29922e23442efe2db3f98a30f604c65bba9ada",
+  "paper_current_branch": "main",
+  "final_readback_path": "E:\\codes\\ExactEBRP-work\\evidence\\round136\\closeout\\final_readback.json",
+  "authorization_completed": {
+    "ordinary_merge_PR": 198,
+    "close_absorbed_PR_range": "#86-#197 only after refreshed containment in main",
+    "archive_close_independent_PR": 85,
+    "retain_remote_branches_and_negative_history": true,
+    "status": "explicitly approved and completed; no pending confirmation"
+  },
+  "preparation_independent_review": {
+    "status": "PASS_PREPARATION_COMPLETE_PENDING_D2_USER_CONFIRMATION",
+    "SHA256": "b7d346be14d9e533d1b17e6999e0543b82e4217b4219675344a7b5322a3def94"
+  },
+  "independent_closeout_review": {
+    "path": "closeout_review.json",
+    "status": "PASS_ACTUAL_AUTHORIZED_MERGE_CLOSURES_AND_MINIMAL_RECORD_REVIEW",
+    "SHA256": "ff2464017b7cb3176661335d19892d6dd8500b1427dba6e34256d6e8c0d26f53"
+  }
 }

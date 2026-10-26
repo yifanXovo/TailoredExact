@@ -26,7 +26,9 @@ Read the [complete manuscript](results/unified_exact_round135/manuscript.md),
 The bare executable retains its **ENS-C compatibility default**. AP and TC are
 closed research studies, with AP research-only and default off.
 
-Round136 prepares a normal, history-preserving merge into Git `main`;
+Round136 was merged into Git `main` by ordinary merge commit in
+[PR #198](https://github.com/yifanXovo/TailoredExact/pull/198). The active
+`paper-current` checkout tracks `main`;
 [integration, PR disposition and local cleanup](results/unified_exact_round136/RESUME.md)
 record the actual state. The original `E:\codes\ExactEBRP` checkout retains
 user changes and the shared Git store. New work belongs under
