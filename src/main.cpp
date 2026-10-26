@@ -3544,6 +3544,19 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     ebrp::round137Apply(opt, ebrp::round127().mode);
     ebrp::round127Validate(opt);
     ebrp::round135Validate();
+    if ((ebrp::round127().mode == "ms2" || ebrp::round127().mode == "s2-root") &&
+        !opt.out_path.empty()) {
+        const auto path = std::filesystem::path(opt.out_path).parent_path() / "round137_parameters.json";
+        std::filesystem::create_directories(path.parent_path());
+        std::ofstream parameters(path);
+        parameters << std::setprecision(17)
+            << "{\"split_threshold\":" << opt.split_threshold
+            << ",\"delete_ab\":" << (ebrp::round137().delete_ab ? "true" : "false")
+            << ",\"delete_cr\":" << (ebrp::round137().delete_cr ? "true" : "false")
+            << ",\"delete_cg\":" << (ebrp::round137().delete_cg ? "true" : "false")
+            << ",\"loaded_after_presets\":true}\n";
+        if (!parameters) throw std::runtime_error("Round137 parameter readback persistence failed");
+    }
     if(opt.round120_native_proof!="off" &&
         (opt.algorithm_preset!="research-round83-vds-equal-net-exchange" || opt.method!="gcap-frontier" ||
          opt.round98_state_service!="m-binary" || !opt.k1_am_sf_controller_enabled ||

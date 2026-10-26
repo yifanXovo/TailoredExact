@@ -1,0 +1,26 @@
+{
+  "base": "b2b940c1e517a72e226ec60fc49ff19651737632",
+  "dependencies": [
+    {
+      "path": "results/unified_exact_round94/preregistration.json",
+      "commit": "b2b940c1e517a72e226ec60fc49ff19651737632",
+      "SHA": "767b8abe628bb5e84c8c44ddf2b65869f44212e17bea362fc0284b4afb445774",
+      "bytes": 5832
+    }
+  ],
+  "attempts": [
+    {
+      "UTC": "2026-10-26T21:14:37.513496+00:00",
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\r\n  File \"<string>\", line 1, in <module>\r\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round135_read.py\", line 13, in <module>\r\n    import round111_seed_audit as models\r\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round111_seed_audit.py\", line 10, in <module>\r\n    import round109_seed_audit as inherited\r\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round109_seed_audit.py\", line 9, in <module>\r\n    import round100_campaign as original\r\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round100_campaign.py\", line 10, in <module>\r\n    import round96_external as ext\r\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round96_external.py\", line 23, in <module>\r\n    COMMON=read(ROOT/'results/unified_exact_round94/preregistration.json')['common']\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round96_prepare.py\", line 30, in read\r\n    def read(p): return json.loads(Path(p).read_text(encoding='utf-8'))\r\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"D:\\msys64\\ucrt64\\lib\\python3.12\\pathlib.py\", line 1027, in read_text\r\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"D:\\msys64\\ucrt64\\lib\\python3.12\\pathlib.py\", line 1013, in open\r\n    return io.open(self, mode, buffering, encoding, errors, newline)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nFileNotFoundError: [Errno 2] No such file or directory: 'E:\\\\codes\\\\ExactEBRP-work\\\\worktrees\\\\paper-current\\\\results\\\\unified_exact_round94\\\\preregistration.json'\r\n"
+    },
+    {
+      "UTC": "2026-10-26T21:14:38.025732+00:00",
+      "returncode": 0,
+      "stderr": ""
+    }
+  ],
+  "PASS": true,
+  "Optimize": 0,
+  "no_campaign_restore": true
+}

@@ -1,0 +1,364 @@
+{
+  "schema": "citibike443-station-landscape-v1",
+  "dataset_family": "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324",
+  "classification": "generated_untested_paper_candidate",
+  "generator_version": "citibike443-regional-v1.0.0",
+  "landscape_id": "r137_N-X15-S_shortage",
+  "selection_id": "r137_N-X15-S",
+  "V": 15,
+  "geographic_regime": "compact",
+  "replicate": 2,
+  "inventory_regime": "shortage",
+  "local_imbalance_level": "high",
+  "seed": 1562191345,
+  "seed_derivation_material": "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage",
+  "source_station_row_indices": [
+    1368,
+    1401,
+    1398,
+    2034,
+    1991,
+    1990,
+    1350,
+    1992,
+    1366,
+    1367,
+    1989,
+    1363,
+    1397,
+    1371,
+    1986
+  ],
+  "source_hashes": {
+    "public_table_sha256": "abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324"
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      441994.816,
+      4655965.581
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    6,
+    10,
+    10,
+    6,
+    15,
+    15,
+    7,
+    15,
+    8,
+    15,
+    8,
+    18,
+    10,
+    6,
+    19
+  ],
+  "initial": [
+    4,
+    0,
+    0,
+    3,
+    11,
+    1,
+    0,
+    11,
+    1,
+    12,
+    4,
+    13,
+    1,
+    4,
+    0
+  ],
+  "target": [
+    3,
+    4,
+    4,
+    3,
+    7,
+    7,
+    3,
+    8,
+    4,
+    8,
+    4,
+    9,
+    5,
+    3,
+    8
+  ],
+  "weights": [
+    0.111111,
+    0.197531,
+    0.197531,
+    0.111111,
+    0.604938,
+    0.604938,
+    0.111111,
+    0.790123,
+    0.197531,
+    0.790123,
+    0.197531,
+    1.0,
+    0.308642,
+    0.111111,
+    0.790123
+  ],
+  "min_ratio": [
+    0.3,
+    0.26,
+    0.26,
+    0.3,
+    0.2867,
+    0.2867,
+    0.2714,
+    0.3133,
+    0.3,
+    0.3133,
+    0.3,
+    0.3,
+    0.3,
+    0.3,
+    0.2684
+  ],
+  "points_utm18n_meters": [
+    [
+      440099.55,
+      4657190.524
+    ],
+    [
+      440101.204,
+      4657190.51
+    ],
+    [
+      440820.528,
+      4657217.547
+    ],
+    [
+      440820.833,
+      4657224.428
+    ],
+    [
+      442190.35,
+      4657073.641
+    ],
+    [
+      442218.356,
+      4655375.639
+    ],
+    [
+      442165.003,
+      4654913.046
+    ],
+    [
+      443231.637,
+      4657144.602
+    ],
+    [
+      443197.93,
+      4656346.954
+    ],
+    [
+      443444.377,
+      4656494.27
+    ],
+    [
+      442112.184,
+      4654425.354
+    ],
+    [
+      443427.166,
+      4655987.131
+    ],
+    [
+      441326.479,
+      4653772.366
+    ],
+    [
+      441328.631,
+      4653772.348
+    ],
+    [
+      443438.007,
+      4655355.351
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 3873.190241216802,
+    "mean_pairwise_station_distance_m": 2238.30065147169,
+    "maximum_pairwise_station_distance_m": 3873.190241216802,
+    "mean_depot_distance_m": 1627.6595878154037,
+    "maximum_depot_distance_m": 2292.785725224524,
+    "bounding_box_width_m": 3344.82699999999,
+    "bounding_box_height_m": 3452.0800000000745,
+    "capacity_minimum": 6,
+    "capacity_maximum": 19,
+    "capacity_mean": 11.2,
+    "capacity_median": 10,
+    "total_capacity": 168,
+    "total_initial_inventory": 65,
+    "total_target_inventory": 80,
+    "station_inventory_minus_target": -15,
+    "absolute_total_shortage_or_surplus": 15,
+    "local_l1_imbalance": 49,
+    "maximum_local_absolute_imbalance": 8,
+    "surplus_station_count": 6,
+    "deficit_station_count": 7,
+    "balanced_station_count": 2,
+    "weight_minimum": 0.111111,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.4082303333333333,
+    "min_ratio_minimum": 0.26,
+    "min_ratio_maximum": 0.3133
+  },
+  "generation_trace": {
+    "initial_before_total_correction": [
+      5,
+      1,
+      1,
+      5,
+      12,
+      2,
+      1,
+      13,
+      2,
+      13,
+      6,
+      14,
+      2,
+      5,
+      2
+    ],
+    "initial_after_total_correction": [
+      4,
+      0,
+      0,
+      3,
+      11,
+      1,
+      0,
+      11,
+      1,
+      12,
+      4,
+      13,
+      1,
+      4,
+      0
+    ],
+    "initial_after_sign_repair": [
+      4,
+      0,
+      0,
+      3,
+      11,
+      1,
+      0,
+      11,
+      1,
+      12,
+      4,
+      13,
+      1,
+      4,
+      0
+    ],
+    "desired_total": 65,
+    "delta_amount": 15,
+    "local_scale": 0.3,
+    "inventory_hash_order": [
+      10,
+      14,
+      7,
+      2,
+      3,
+      8,
+      13,
+      6,
+      4,
+      5,
+      11,
+      1,
+      9,
+      12,
+      0
+    ],
+    "sign_repair_hash_order": [
+      7,
+      2,
+      6,
+      13,
+      5,
+      1,
+      0,
+      8,
+      14,
+      12,
+      3,
+      4,
+      11,
+      10,
+      9
+    ],
+    "anchor_material": "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|geographic-anchor-set|V=15",
+    "selection_material": "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|selection|V=15|geography=compact|replicate=2",
+    "inventory_material": "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage",
+    "target_materials": [
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1368",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1401",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1398",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=2034",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1991",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1990",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1350",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1992",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1366",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1367",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1989",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1363",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1397",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1371",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|target-profile|r137_N-X15-S|row=1986"
+    ],
+    "inventory_order_materials": [
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|0",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|1",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|2",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|3",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|4",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|5",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|6",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|7",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|8",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|9",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|10",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|11",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|12",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|13",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|14"
+    ],
+    "sign_repair_order_materials": [
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|0",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|1",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|2",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|3",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|4",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|5",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|6",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|7",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|8",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|9",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|10",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|11",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|12",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|13",
+      "round137-gi-tbc-stage-consolidation-v1|source=DIVVY|source_sha256=abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324|inventory|r137_N-X15-S|shortage|sign-repair|14"
+    ]
+  }
+}

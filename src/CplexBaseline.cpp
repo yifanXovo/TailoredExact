@@ -2985,7 +2985,7 @@ void writeCompactLp(const Instance& instance,
             Expr movement_reconstruction;
             Expr visit_reconstruction;
             Expr direction_reconstruction;
-            if (state_service && !vehicle_state_service && round137EmitAB()) {
+            if (state_service && !vehicle_state_service) {
                 for (int k = 0; k < M; ++k) {
                     addTerm(movement_reconstruction, pName(k, i), 1.0);
                     addTerm(movement_reconstruction, dName(k, i), 1.0);
@@ -3027,7 +3027,7 @@ void writeCompactLp(const Instance& instance,
                 addTerm(perspective_upper, selector, -g_ub);
                 writeConstraint(out, cid, perspective_upper, "<=", 0.0);
             }
-            if (state_service && !vehicle_state_service) {
+            if (state_service && !vehicle_state_service && round137EmitAB()) {
                 writeConstraint(out, cid, movement_reconstruction, "=", 0.0);
                 writeConstraint(out, cid, visit_reconstruction, "=", 1.0);
                 if (linked_direction) writeConstraint(out, cid, direction_reconstruction, "=", 0.0);
