@@ -35,10 +35,12 @@ def verify(launch,identity):
     api=types.SimpleNamespace(**dict(vars(original_models),ArmModels=ArmModels))
     ns=dict(vars(inherited),ROOT=ROOT,OUT=OUT,DLL=DLL,models=api)
     run=types.FunctionType(inherited.verify.__code__,ns)
-    value=run(launch,identity)
     expected=launch.get('AM_threshold',.08)
     if launch['arm']=='M-B':
         actual=read(Path(launch['destination'])/'round137_parameters.json')
         assert actual==dict(split_threshold=expected,delete_ab=launch['method']=='NO_AB',
             delete_cr=launch['method']=='NO_CR',delete_cg=launch['method']=='NO_CG',loaded_after_presets=True)
-    return value
+        write(Path(launch['destination'])/'round137_control_audit.json',dict(PASS=True,
+            parameter_readback_SHA=sha(Path(launch['destination'])/'round137_parameters.json'),
+            actual=actual,checked_before_qualification_closeout=True,Optimize=0))
+    return run(launch,identity)
