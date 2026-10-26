@@ -26,6 +26,7 @@
 #include "Round106Events.hpp"
 #include "Round120NativeProof.hpp"
 #include "Round127Research.hpp"
+#include "Round135Research.hpp"
 #include "Master.hpp"
 #include "Parser.hpp"
 #include "Pricing.hpp"
@@ -864,6 +865,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--global-gini-tree-mip-start-audit") opt.global_gini_tree_mip_start_audit_path = requireValue(i, argc, argv);
         else if (arg == "--gurobi-threads") opt.gurobi_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
+        else if (arg == "--round135-aggregate-penalty") ebrp::round135AggregatePenalty() = true;
         else if (arg == "--round127-mode") ebrp::round127().mode = lowerAscii(requireValue(i, argc, argv));
         else if (arg == "--round128-mode") {
             const auto mode=lowerAscii(requireValue(i, argc, argv));
@@ -3533,6 +3535,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round127Validate(opt);
+    ebrp::round135Validate();
     if(opt.round120_native_proof!="off" &&
         (opt.algorithm_preset!="research-round83-vds-equal-net-exchange" || opt.method!="gcap-frontier" ||
          opt.round98_state_service!="m-binary" || !opt.k1_am_sf_controller_enabled ||

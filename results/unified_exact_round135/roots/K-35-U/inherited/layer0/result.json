@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-25T19:49:42.632870+00:00",
+  "role": "K-35-U",
+  "layer": 0,
+  "scope_SHA": "abe6473e99db0b5c888babdce1a29ed6228f6a7d763e2b48639485d97092dedb",
+  "source_matrix_SHA": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+  "construction_SHA": "fe859897bf9cfa097ec10aa98d8b17b97f69d46ea66321debe623cd08a866fec",
+  "native_identity": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "LP_only": true,
+  "MIP_Optimize": 0,
+  "LP_Optimize": 1,
+  "Status": 2,
+  "optimal": true,
+  "primal_objective": 0.20017766194929548,
+  "numerical_lower": 0.20017766194929548,
+  "native_ObjBound": 0.20017766194929548,
+  "primal_value_not_used_as_lower_without_OPTIMAL": true,
+  "qualification": "NUMERICAL_OPTIMAL_LP",
+  "rigorous_rational_lower_certificate": false,
+  "quality": {
+    "ConstrVio": 0.0,
+    "BoundVio": 0.0,
+    "DualVio": 0.0,
+    "ConstrResidual": 7.275957614183426e-12,
+    "DualResidual": 1.109138822452671e-16,
+    "ComplVio": 0.0
+  },
+  "added_row_residuals": [],
+  "before": {
+    "rows": 23624,
+    "columns": 10007,
+    "nonzeros": 163516
+  },
+  "after": {
+    "rows": 23624,
+    "columns": 10007,
+    "nonzeros": 163516
+  },
+  "Work": 0.9681170353042003,
+  "nodes": 0.0,
+  "iterations": 5468.0,
+  "barrier_iterations": 0,
+  "solver_runtime": 0.32200002670288086,
+  "construct_and_load_seconds": 0.24986999994143844,
+  "optimize_wall_seconds": 0.3333236000034958,
+  "total_before_final_output_seconds": 0.6491585000185296,
+  "same_parameters_same_domain_independent_continuous_model": true
+}

@@ -1,0 +1,32 @@
+{
+  "default_off_canonical_equal": true,
+  "AP_only_one_added_row": true,
+  "same_bounds_types_objective": true,
+  "added_nonzeros": 451,
+  "new_variables": 0,
+  "Start_checks": [
+    {
+      "source": "startup_physical",
+      "inside_fixed_root_support": true,
+      "lhs": 3.535155717171717,
+      "rhs": 3.5351557171717163,
+      "slack": 8.881784197001252e-16,
+      "full_physical_fleet_reused": true,
+      "selected_state_extension_valid": true
+    },
+    {
+      "source": "archived_best_physical",
+      "inside_fixed_root_support": true,
+      "lhs": 3.4179684191919195,
+      "rhs": 3.417968419191918,
+      "slack": 1.3322676295501878e-15,
+      "full_physical_fleet_reused": true,
+      "selected_state_extension_valid": true
+    }
+  ],
+  "inherited_matrix_SHA": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+  "AP_matrix_SHA": "5b0eeb406223029023587995842781679ec46edeffc75438847e655be4ea8968",
+  "source_commit": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+  "ideal_B4_upper_bounds_valid": true,
+  "loaded_binary64_exact_rational_upper_bounds_have_machine_precision_exceptions": true
+}

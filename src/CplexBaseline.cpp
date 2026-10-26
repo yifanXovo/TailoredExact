@@ -1,5 +1,6 @@
 #include "CplexBaseline.hpp"
 #include "Round127Research.hpp"
+#include "Round135Research.hpp"
 #include "Round62Thresholds.hpp"
 #include "Round63TimeResource.hpp"
 #include "Round64SharedResource.hpp"
@@ -3146,6 +3147,35 @@ void writeCompactLp(const Instance& instance,
                 if (static_stats) static_stats->aggregate_mccormick_rows += 4;
             }
         }
+    }
+    if (round135AggregatePenalty()) {
+        round135Validate();
+        if (!station_state_vdp || options.round98_state_service != "m-binary" || !strengthened)
+            throw std::runtime_error("Round135 AP requires the S2 inventory-service state domain");
+        Expr aggregate_penalty;
+        for (int i = 1; i <= V; ++i) {
+            if (instance.weights[i] > 0) aggregate_penalty[eName(i)] = instance.weights[i];
+            const double loaded_ratio = 1.0 / instance.target[i];
+            for (int y = y_lb[i]; y <= y_ub[i]; ++y) {
+                const double coefficient = round135PenaltyCoefficient(loaded_ratio, y, instance.weights[i]);
+                if (coefficient > 1e-12) aggregate_penalty[stateName(i, y)] = -coefficient;
+            }
+        }
+        // One row, no new variables; the same writer serves root, child,
+        // target and terminal models, using each model's actual legal support.
+        // The legacy generic writer abbreviates coefficients within 1e-12
+        // of one. Preserve the downward-rounded AP coefficients verbatim.
+        out << " c" << cid++ << ": ";
+        if (aggregate_penalty.empty()) out << "0 G";
+        bool first_ap_term = true;
+        for (const auto& term : aggregate_penalty) {
+            out << (first_ap_term ? (term.second < 0 ? "- " : "") :
+                    (term.second < 0 ? " - " : " + "));
+            out << num(std::fabs(term.second)) << " " << term.first;
+            first_ap_term = false;
+        }
+        out << " >= 0\n";
+        if (stats != nullptr) stats->enabled_families.push_back("round135_aggregate_state_penalty");
     }
     Expr gini;
     for (int i = 1; i <= V; ++i) addTerm(gini, zprodName(i), static_cast<double>(V) / instance.target[i]);

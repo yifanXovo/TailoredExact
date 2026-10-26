@@ -1,0 +1,92 @@
+{
+  "schema": "round135-independent-early-math-code-review-v1",
+  "UTC": "2026-10-26T08:41:51.770715+00:00",
+  "reviewer": "/root/independent_review",
+  "disposition": "PASS_WITH_NUMERIC_SCOPE",
+  "blocking_findings": [],
+  "production_scope": "Default-off process-local flag; same canonical writer emits exactly one AP row on the active S2 inventory-service support. H, controller, physics, numeric tolerances and certificate logic unchanged.",
+  "coefficient_argument": "Correctly rounded fma(c,y,-1), abs and nextafter toward zero bound the exact loaded-ratio deviation from below; a second toward-zero step bounds the weighted product. y is nonnegative int and exactly representable. Tiny omitted RHS terms only weaken AP. Dedicated AP serialization preserves actual binary64 coefficients near one.",
+  "theorem_review": {
+    "B2_identity": true,
+    "AP_integer_physical_validity": true,
+    "B4_projection_constructive_proof": true,
+    "required_assumptions": [
+      "Every local e lower bound <= phi_i(s) <= actual finite M_i",
+      "Other uses of e in ideal constraints/objective only through weighted total P_e"
+    ],
+    "zero_weights_and_C_zero_covered": true,
+    "not_coordinatewise_or_VDJ_equality_equivalence": true
+  },
+  "numeric_caveats": [
+    "Ideal theorem is not an exact-rational equivalence claim for rounded loaded matrices. K20 has max state deviation above e<=1 by at most 1.1102230246251565e-16 under the exact-loaded-ratio interpretation; K35 has none.",
+    "K35 numerical LP DualVio 2.0781125155552253e-7 is below the unchanged OptimalityTol 1e-6; no rational optimality certificate is claimed."
+  ],
+  "R55_history_checked": {
+    "VDJ_live_in_root_pilot_development": true,
+    "root_census_all_arms": 108,
+    "pilot_all_arms": 32,
+    "development_all_arms": 42,
+    "D13_VDP_Work": 370.2633658025567,
+    "D13_VDJ_Work": 562.303260927356,
+    "D13_VDJ_gap": 0.007727473952421125,
+    "zero_live_applies_to_later_penalty_cover_only": true
+  },
+  "roots": [
+    {
+      "role": "K-20-S",
+      "default_off_canonical_and_bytes_equal": true,
+      "AP_only_one_added_row": true,
+      "bounds_types_objective_equal": true,
+      "exact_coefficient_checks": 451,
+      "omitted_nonzero_terms": 17,
+      "max_absolute_coefficient_weakening": 2.5717275531356165e-16,
+      "added_nonzeros": 451,
+      "new_variables": 0,
+      "LP_Optimize_recorded": 1,
+      "MIP_Optimize_recorded": 0,
+      "L_AP": 0.3187585426155805,
+      "L_IND_reused": 0.31875854261558056,
+      "delta_AP_IND": -5.551115123125783e-17,
+      "saved_vector_max_row_violation": 2.7284841053187847e-12,
+      "saved_vector_max_bound_violation": 0,
+      "recorded_DualVio": 4.579669976578771e-16,
+      "saved_Start_checks_pass": true
+    },
+    {
+      "role": "K-35-U",
+      "default_off_canonical_and_bytes_equal": true,
+      "AP_only_one_added_row": true,
+      "bounds_types_objective_equal": true,
+      "exact_coefficient_checks": 539,
+      "omitted_nonzero_terms": 24,
+      "max_absolute_coefficient_weakening": 2.7898907426695336e-16,
+      "added_nonzeros": 543,
+      "new_variables": 0,
+      "LP_Optimize_recorded": 1,
+      "MIP_Optimize_recorded": 0,
+      "L_AP": 0.27385768132726473,
+      "L_IND_reused": 0.27385768132726535,
+      "delta_AP_IND": -6.106226635438361e-16,
+      "saved_vector_max_row_violation": 2.8754776337791554e-13,
+      "saved_vector_max_bound_violation": 0,
+      "recorded_DualVio": 2.0781125155552253e-07,
+      "saved_Start_checks_pass": true
+    }
+  ],
+  "source_SHA256": {
+    "include/Round135Research.hpp": "945f42f88f99390424cdcf039952320c1a09c764c11639b1e62db6ee7b08baf3",
+    "src/CplexBaseline.cpp": "5cb41fca1cdbf21bbebdf076bfbd2a10cdb633efa7558526c20fd85f918a80d0",
+    "src/main.cpp": "089ba509ec6e7e44fadbd9f34acbd43dcf82b8aa9a82a89e8b73f13ddaeac761",
+    "scripts/round135_roots.py": "05466866070d0480759aec8735c9ee92453b2926062ed086ec02c138bd14854b"
+  },
+  "reviewer_actions": {
+    "read_only_evidence_and_source": true,
+    "writes_only_this_review": true,
+    "Optimize": 0,
+    "compilation": 0,
+    "vendor_DLL_loads": 0,
+    "native_reruns": 0
+  },
+  "reviewer_script_seconds": 1.642530099954456,
+  "remaining_review": "Final integration, stage decision, full entered-position denominator/costs, manuscript, citations, PDF and public restoration remain for a later review."
+}
