@@ -1,5 +1,6 @@
 #pragma once
 #include "Instance.hpp"
+#include "Round137Research.hpp"
 #include <filesystem>
 #include <fstream>
 #include <sstream>
@@ -32,8 +33,8 @@ inline bool round127Md() { return round127().mode=="md" || round128InclusiveRoot
 inline bool round128EmitIntervalNoImproverDomainClosure() {
     return !round128InclusiveRoot();
 }
-inline bool round127EmitCR() { return round127().mode!="mr"; }
-inline bool round127EmitCG() { return round127().mode!="mg"; }
+inline bool round127EmitCR() { return round127().mode!="mr" && !round137().delete_cr; }
+inline bool round127EmitCG() { return round127().mode!="mg" && !round137().delete_cg; }
 inline bool round127EmitTriple() {
     return round127().mode!="ms2" && round127().mode!="s2-root";
 }

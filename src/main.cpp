@@ -866,6 +866,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gurobi-threads") opt.gurobi_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round135-aggregate-penalty") ebrp::round135AggregatePenalty() = true;
+        else if (arg == "--round137-delete-ab") ebrp::round137().delete_ab = true;
+        else if (arg == "--round137-delete-cr") ebrp::round137().delete_cr = true;
+        else if (arg == "--round137-delete-cg") ebrp::round137().delete_cg = true;
+        else if (arg == "--round137-am-threshold") {
+            ebrp::round137().am_threshold = std::stod(requireValue(i, argc, argv));
+            ebrp::round137().am_threshold_explicit = true;
+        }
         else if (arg == "--round127-mode") ebrp::round127().mode = lowerAscii(requireValue(i, argc, argv));
         else if (arg == "--round128-mode") {
             const auto mode=lowerAscii(requireValue(i, argc, argv));
@@ -3534,6 +3541,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round96 route order requires isolated ENS-C Round83 gcap-frontier");
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
+    ebrp::round137Apply(opt, ebrp::round127().mode);
     ebrp::round127Validate(opt);
     ebrp::round135Validate();
     if(opt.round120_native_proof!="off" &&

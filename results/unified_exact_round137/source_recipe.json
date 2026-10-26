@@ -1,0 +1,175 @@
+{
+  "UTC": "2026-10-26T21:13:57.149065+00:00",
+  "base": "b2b940c1e517a72e226ec60fc49ff19651737632",
+  "known": [
+    "K-15-S",
+    "X-15-B",
+    "UC-B20-B",
+    "K-20-S",
+    "K-35-U",
+    "X-35-B"
+  ],
+  "new_specs": [
+    [
+      "N-B15-B",
+      "CABI",
+      15,
+      "balanced",
+      "compact",
+      1
+    ],
+    [
+      "N-X15-S",
+      "DIVVY",
+      15,
+      "shortage",
+      "compact",
+      2
+    ],
+    [
+      "N-C20-U",
+      "CITI",
+      20,
+      "surplus",
+      "compact",
+      1
+    ],
+    [
+      "N-X20-B",
+      "DIVVY",
+      20,
+      "balanced",
+      "regional",
+      2
+    ],
+    [
+      "N-B35-S",
+      "CABI",
+      35,
+      "shortage",
+      "compact",
+      1
+    ],
+    [
+      "N-C35-B",
+      "CITI",
+      35,
+      "balanced",
+      "regional",
+      2
+    ],
+    [
+      "R-B20-S",
+      "CABI",
+      20,
+      "shortage",
+      "compact",
+      1
+    ],
+    [
+      "R-X20-S",
+      "DIVVY",
+      20,
+      "shortage",
+      "compact",
+      2
+    ],
+    [
+      "R-B35-S",
+      "CABI",
+      35,
+      "shortage",
+      "compact",
+      1
+    ],
+    [
+      "R-X35-S",
+      "DIVVY",
+      35,
+      "shortage",
+      "compact",
+      2
+    ]
+  ],
+  "family": "round137-gi-tbc-stage-consolidation-v1",
+  "source": "fixed archived CITI/R57, CABI/R116, DIVVY/R132 snapshots; no new network acquisition",
+  "selection": "unchanged four-anchor compact/regional rule and replicate; fixed table order; exclude previous new selections within source; no result-dependent redraw",
+  "inventory": "unchanged R109/R122 shortage/balanced/surplus mathematics and sign repair",
+  "B1_T": "n15:3600/5400 compact/regional; n20:5400/7200; n35:7200/10800",
+  "B2_T": "base=2*max_depot_distance/1.5+120*sum(max(b-D,0))/M; T1=ceil(max(1800,.75*base)/300)*300; T2=ceil(1.5*T1/300)*300",
+  "B2_positive": "serialized sum(D)-sum(b)>0, min(w)>0; both local supply and receiving stations required",
+  "weights": "B1 lambda=.15; B2 rho=1; B3 rho=.5,1,2; lambda=rho/Omega",
+  "B3_preselected": [
+    "R-B20-S-T1",
+    "R-X35-S-T2"
+  ],
+  "C1_roles": [
+    "K-15-S",
+    "K-20-S",
+    "UC-B20-B",
+    "K-35-U"
+  ],
+  "C1_caps": [
+    600,
+    1200,
+    1200,
+    2400
+  ],
+  "C2_roles": [
+    "K-15-S",
+    "UC-B20-B",
+    "K-20-S",
+    "K-35-U"
+  ],
+  "C2_caps": [
+    600,
+    1200,
+    1200,
+    2400
+  ],
+  "D2_roles": [
+    "K-15-S",
+    "UC-B20-B",
+    "R-B20-S-T1",
+    "K-35-U"
+  ],
+  "D2_caps": [
+    600,
+    1200,
+    1200,
+    2400
+  ],
+  "D2_AM_mechanism": [
+    "K-15-S",
+    "UC-B20-B"
+  ],
+  "AM": [
+    0.04,
+    0.08,
+    0.16
+  ],
+  "default_AM": 0.08,
+  "H_seed": 20260626,
+  "Gurobi_Seeds": [
+    0,
+    1
+  ],
+  "default_AP": false,
+  "pair_only": true,
+  "threads": 1,
+  "serial": true,
+  "affinity": 4,
+  "C1_adjustment": "UC-B20-B retains its exact1200s matching C2/D2 cap; cap sum5400, extra10800s",
+  "total_planned_positions": 120,
+  "planned_caps_seconds": 174600,
+  "limit_seconds": 216000,
+  "generation_dependencies": {
+    "scripts/round137_setup.py": "b0afb6de9beb697a3616839713aa5bd9bb57b43f2db60153f34ee3e39afb8630",
+    "scripts/round122_data.py": "b7997dcd173ee301be7f34949c99cb5f791bf22b84f548d1adceb8d11054d6b9",
+    "scripts/round109_data.py": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+    "scripts/round118_data.py": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+    "scripts/generate_citibike443_regional_v1.py": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8"
+  },
+  "Optimize": 0,
+  "H": 0
+}
