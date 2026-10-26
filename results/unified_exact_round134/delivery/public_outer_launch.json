@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-10-26T00:47:31.979103+00:00",
+  "kind": "delivery",
+  "command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "E:/codes/ExactEBRP-work/temp/round134/public_bootstrap_29adc14cf208/round134_public_restore.py",
+    "--commit",
+    "29adc14cf2089442298b409ba2bc06963e77bc14",
+    "--destination",
+    "E:/codes/ExactEBRP-work/restore/round134-public-29adc14cf208",
+    "--receipt",
+    "E:/codes/ExactEBRP-work/temp/round134/public_restore_attempt01.json"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round134",
+  "timeout_seconds": 7500.0,
+  "reservation_seconds": 7500.0,
+  "budget_before": {
+    "G1_seconds": 18194.18499070048,
+    "remaining_G1_seconds": 39405.81500929952,
+    "by_category": {
+      "B": 30.455383000080474,
+      "C": 17917.469909500447,
+      "D": 228.9697852997342,
+      "E": 17.289912900218084,
+      "repair": 0.0
+    },
+    "limits": {
+      "B": 57600.0,
+      "C": 57600.0,
+      "D": 57600.0,
+      "E": 57600.0,
+      "repair": 57600.0
+    },
+    "category_remaining": {
+      "B": 57569.54461699992,
+      "C": 39682.53009049955,
+      "D": 57371.030214700266,
+      "E": 57582.71008709978,
+      "repair": 57600.0
+    },
+    "separately_reported_seconds": 83.27623369998764,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "parent_pid": 69872,
+  "parent_birth": {
+    "creation_filetime": 134374492518853378,
+    "creation_unix": 1792975651.8853378
+  }
+}

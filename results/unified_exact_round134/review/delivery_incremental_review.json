@@ -1,0 +1,127 @@
+{
+  "schema": "round134-incremental-independent-delivery-review-v1",
+  "UTC": "2026-10-26T00:50:01.821619+00:00",
+  "reviewer": "same G3 independent reviewer",
+  "passed": false,
+  "status": "ACTUAL_PUBLIC_RECOVERY_PASS_PENDING_DRAFT_PR_READBACK",
+  "science_commit": "29adc14cf2089442298b409ba2bc06963e77bc14",
+  "scientific_full_review_repeated": false,
+  "new_Optimize": 0,
+  "new_compile": 0,
+  "new_archive_or_PDF": 0,
+  "new_full_raw_scan_or_restore": 0,
+  "local_preflight": {
+    "passed": true,
+    "formal_positions": 36,
+    "math": "tiny plus six root records",
+    "seconds": 265.9578682000283,
+    "all36_recorded_endpoint_and_clock_values_equal_scientific_tables": true,
+    "original_policy_predicates_unchanged": true,
+    "receipt_SHA256": "84a632b93139aeb61e88d424a389d5319d7776aa9df6d6429227ec261681b52f"
+  },
+  "payload": {
+    "archives": 38,
+    "members": 189372,
+    "compressed_bytes": 108491611,
+    "completed_carriers_verified_and_reused": 36,
+    "archive_failure_and_affected_resume_preserved": true,
+    "archive_receipts": [
+      {
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round134_release.py",
+          "pack"
+        ],
+        "exit_code": 1,
+        "seconds": 47.8526828000322,
+        "kind": "delivery_archive",
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "compile": 0,
+        "unique_raw_preserved": true
+      },
+      {
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\python.exe",
+          "scripts/round134_release.py",
+          "pack"
+        ],
+        "exit_code": 0,
+        "seconds": 84.39404050004669,
+        "kind": "delivery_archive",
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "compile": 0,
+        "unique_raw_preserved": true
+      }
+    ],
+    "old_carriers_rewritten": 0
+  },
+  "publication": {
+    "191_current_manifest_Git_blob_byte_check": "PASS_RECEIPT",
+    "inherited9_dependencies": "PASS_RECEIPT",
+    "normal_push": "PASS_RECEIPT",
+    "byte_only_index_normalization_retains_working_scientific_bytes": true,
+    "protected_directed_assets_and_source": "PASS_RECEIPT",
+    "anonymous_bootstrap_SHA256": "225e6dc3b7c63043c64181b27b02056bcab89c7734bbf8a54571a72ac9540496",
+    "bootstrap_checked_before_execution": true,
+    "same_reader_and_accepted_H_policy_capsule": true
+  },
+  "static_recommendations_closed": [
+    "REC1 actualOPTIMAL status/residual thresholds checked by current portable code",
+    "REC2 all-station support/B premise checked",
+    "REC3 historical matrix equality explicitly attested, not re-solved or old-matrix reread"
+  ],
+  "delivery": {
+    "actual_public_recovery": "PASS_ATTEMPT1_ONE_OWNED_ROOT",
+    "public_receipt_not_yet_accepted": false,
+    "new_PR_status_and_base_head_readback": "PENDING",
+    "no_future_success_inferred": true
+  },
+  "science_and_PDF_unchanged": true,
+  "findings": [],
+  "new_check_seconds": 0.004779099952429533,
+  "receipt_bindings": {
+    "results\\unified_exact_round134\\delivery\\local_preflight.json": "84a632b93139aeb61e88d424a389d5319d7776aa9df6d6429227ec261681b52f",
+    "results\\unified_exact_round134\\raw_archive_manifest.json": "aab6ad7f105303dc815e8d0f04831e8344cb4c494cc21d3139c838b4378950e4",
+    "results\\unified_exact_round134\\source_publication.json": "4a8cca354cdef9b61a441c828941a21821ed83a9c5958e69b9ac41b3d5ee888e",
+    "results\\unified_exact_round134\\review\\final_integrated_review.json": "b6e4a4f8e89c729f9be4d4f5752f350713005c7962e2239343cbb3e46bc6b97e",
+    "results\\unified_exact_round134\\public_restore_receipt.json": "ee0b7d596c4530b3225ebbefaac377b07f8f0505c39fdb1ba7feafeddc43f91d",
+    "results\\unified_exact_round134\\delivery\\public_restore_semantic.json": "ffcae656632b7a045a04f12fe9dc87da74fb0e85185818ef1047033036403d08",
+    "results\\unified_exact_round134\\publication_receipt.json": "b0ffba8a8f27c18e04c5cca6e1ea747afba4c4aa3f961fb398c5b2cb0870ff6b",
+    "results\\unified_exact_round134\\resource_accounting.json": "62bc153aa330955e7ce8548a109f7a6e5c760f0f5fcdbde8b5e9d4387eec1ad2",
+    "results\\unified_exact_round134\\protection_final.json": "c6eaa93a85cb77f175e36e0980bcf466ef2f514924ca381d8fdda0f7ae04abdf"
+  },
+  "public_verified_UTC": "2026-10-26T01:09:49.154259+00:00",
+  "actual_public_recovery": {
+    "science_commit": "29adc14cf2089442298b409ba2bc06963e77bc14",
+    "files": 200,
+    "archives": 38,
+    "members": 189372,
+    "attempt": 1,
+    "one_owned_initially_empty_root": true,
+    "anonymous_fixed_commit_HTTPS": true,
+    "local_fallback": false,
+    "Optimize": 0,
+    "compile": 0,
+    "vendor_DLL_loads": 0,
+    "all36_endpoint_certificate_clock_fields_equal_local_preflight": true,
+    "all36_seven_normalized_derived_semantics_equal_local_preflight": true,
+    "tiny_and_current_root_math_records_equal_local_preflight": true,
+    "original_external_public_and_semantic_bytes_equal_published_copies": true,
+    "public_receipt_SHA256": "ee0b7d596c4530b3225ebbefaac377b07f8f0505c39fdb1ba7feafeddc43f91d",
+    "semantic_receipt_SHA256": "ffcae656632b7a045a04f12fe9dc87da74fb0e85185818ef1047033036403d08",
+    "manifest_SHA256": "41390b612990ae877c2a9cf8a6b3e71c9d8394b18d0f0b19bc0fa550aa141602",
+    "outer_seconds": 1233.7390010999516,
+    "semantic_child_seconds": 1032.6745226000203,
+    "child_not_added_again": true
+  },
+  "incremental_resource_and_protection_check": {
+    "G1_unchanged": 18194.18499070048,
+    "explicit_separate_process_intervals_recomputed": 1799.0213439001,
+    "separate_intervals_not_claimed_total_elapsed_wall": true,
+    "directed_protection_matches_science_commit_receipt": true,
+    "scope": "three original dirty files, four original native assets, original HEAD and frozen current source/PE/DLL; no whole-disk guarantee"
+  },
+  "new_public_incremental_check_seconds": 0.010396700003184378
+}

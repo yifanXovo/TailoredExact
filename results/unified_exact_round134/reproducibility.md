@@ -1,9 +1,9 @@
 # Finite current-round reproduction
 
-The scientific payload is fixed by its full science commit, recorded in the later publication receipt. Read export_manifest.json and source_publication.json from that commit. The current-only bootstrap is scripts/round134_public_restore.py; its fixed-commit SHA is recorded in delivery_bootstrap_binding.json before execution. It uses anonymous HTTPS and a standard-library Python runtime plus system curl.
+The scientific payload is fixed at `29adc14cf2089442298b409ba2bc06963e77bc14`. Read export_manifest.json and source_publication.json from that exact commit, including when the current branch contains later delivery metadata. The actual one-root anonymous check passed 200 files and 38 current-only archives at attempt1; see [public_restore_receipt.json](public_restore_receipt.json) and [the published semantic receipt](delivery/public_restore_semantic.json). The current-only bootstrap is scripts/round134_public_restore.py; its fixed-commit SHA is recorded in delivery_bootstrap_binding.json before execution. It uses anonymous HTTPS and a standard-library Python runtime plus system curl.
 
 ```
-python round134_public_restore.py --commit FULL_40_HEX_SCIENCE_COMMIT --destination E:/codes/ExactEBRP-work/restore/round134-public-SHORT_COMMIT --receipt EXTERNAL_RECEIPT_PATH
+python round134_public_restore.py --commit 29adc14cf2089442298b409ba2bc06963e77bc14 --destination E:/codes/ExactEBRP-work/restore/round134-public-YOUR_NEW_UNIQUE_NAME --receipt EXTERNAL_RECEIPT_PATH
 ```
 
 The destination must be one new owned initially empty directory under the declared restore parent. A real failed transport/check may resume the same failed root with --resume, preserving healthy verified downloads and failures. A completed root cannot be rerun. This entry documents the one required current-round check; actual outcomes appear in public_restore_receipt.json. Total cumulative recovery budget is7200s, with four transport workers. It does not use Git, a local raw/source fallback, native Optimize, compilation or vendor DLLs.
