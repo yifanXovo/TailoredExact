@@ -1,0 +1,96 @@
+[
+  {
+    "role": "K-20-S",
+    "status": "NUMERICAL_OPTIMAL_LP",
+    "L0_reused": 0.19514915244120534,
+    "L_IND_reused": 0.31875854261558056,
+    "L_AP": 0.3187585426155805,
+    "delta_AP_IND": -5.551115123125783e-17,
+    "quality": {
+      "ConstrVio": 0.0,
+      "BoundVio": 0.0,
+      "DualVio": 4.579669976578771e-16,
+      "ConstrResidual": 7.275957614183426e-12,
+      "DualResidual": 4.510281037539698e-16,
+      "ComplVio": 0.0
+    },
+    "AP_slack": -6.279698983036042e-16,
+    "before": {
+      "rows": 6637,
+      "columns": 3096,
+      "nonzeros": 38286
+    },
+    "after": {
+      "rows": 6638,
+      "columns": 3096,
+      "nonzeros": 38737
+    },
+    "construct_AP_seconds": 0.001338499947451055,
+    "load_and_construct_seconds": 0.09058379998896271,
+    "optimize_wall_seconds": 0.17076140001881868,
+    "native_runtime": 0.1659998893737793,
+    "Work": 0.4273225621440746,
+    "iterations": 3510.0,
+    "nodes": 0.0,
+    "native_identity": {
+      "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+      "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "loaded_engine_modules": [
+        "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+      ]
+    },
+    "LP_Optimize": 1,
+    "MIP_Optimize": 0,
+    "original_domain_interval_cutoff_unchanged": true,
+    "numerical_confirmation_not_rational_certificate": true,
+    "preserves_IND_gain": true
+  },
+  {
+    "role": "K-35-U",
+    "status": "NUMERICAL_OPTIMAL_LP",
+    "L0_reused": 0.20017766194929548,
+    "L_IND_reused": 0.27385768132726535,
+    "L_AP": 0.27385768132726473,
+    "delta_AP_IND": -6.106226635438361e-16,
+    "quality": {
+      "ConstrVio": 0.0,
+      "BoundVio": 0.0,
+      "DualVio": 2.0781125155552253e-07,
+      "ConstrResidual": 1.4551915228366852e-11,
+      "DualResidual": 4.2327252813834093e-16,
+      "ComplVio": 0.0
+    },
+    "AP_slack": 7.806255641895632e-17,
+    "before": {
+      "rows": 23624,
+      "columns": 10007,
+      "nonzeros": 163516
+    },
+    "after": {
+      "rows": 23625,
+      "columns": 10007,
+      "nonzeros": 164059
+    },
+    "construct_AP_seconds": 0.0012525999918580055,
+    "load_and_construct_seconds": 0.1358010999392718,
+    "optimize_wall_seconds": 1.413359300000593,
+    "native_runtime": 1.4159998893737793,
+    "Work": 3.8763655927311897,
+    "iterations": 13298.0,
+    "nodes": 0.0,
+    "native_identity": {
+      "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+      "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "loaded_engine_modules": [
+        "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+      ]
+    },
+    "LP_Optimize": 1,
+    "MIP_Optimize": 0,
+    "original_domain_interval_cutoff_unchanged": true,
+    "numerical_confirmation_not_rational_certificate": true,
+    "preserves_IND_gain": true
+  }
+]

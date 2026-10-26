@@ -1,4 +1,9 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
+# Round135 executed helpers, staged protocol and manuscript retain actual bytes.
+/scripts/round135* -text whitespace=cr-at-eol
+/results/unified_exact_round135/** -text whitespace=cr-at-eol
+/results/unified_exact_round135/**/*.log -whitespace
+/include/Round135Research.hpp -text whitespace=cr-at-eol
 # Round134 final source, protocol, raw carriers and reading artifacts.
 /scripts/round134* -text whitespace=cr-at-eol
 /results/unified_exact_round134/** -text whitespace=cr-at-eol

@@ -1,0 +1,100 @@
+{
+  "UTC": "2026-10-26T13:37:16.208439+00:00",
+  "stage1": {
+    "planned": 10,
+    "completed": 10,
+    "missing": []
+  },
+  "stage2": {
+    "planned": 22,
+    "completed": 22,
+    "not_entered": []
+  },
+  "completed_positions": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09",
+    "C10",
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08",
+    "D09",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22"
+  ],
+  "registered_total": 32,
+  "completed": 32,
+  "complete_pairs": 16,
+  "certificate_counts": {
+    "S2": 10,
+    "AP": 10
+  },
+  "directions": {
+    "Win": 6,
+    "UNDETERMINED": 6,
+    "Lose": 4
+  },
+  "direction_counts_include_micro_and_nonmaterial_differences": true,
+  "material_certified_time": {
+    "AP_favorable": 0,
+    "AP_adverse": 2
+  },
+  "pair_classes": {
+    "BOTH_CERTIFIED": 10,
+    "BOTH_OPEN": 6
+  },
+  "budget": {
+    "G1_seconds": 17148.624478299604,
+    "remaining_G1_seconds": 11651.375521700396,
+    "by_category": {
+      "B": 36.76280710019637,
+      "C": 10.063681199997724,
+      "D": 17101.79798999941,
+      "E": 0.0,
+      "repair": 0.0
+    },
+    "limits": {
+      "B": 28800.0,
+      "C": 28800.0,
+      "D": 28800.0,
+      "E": 28800.0,
+      "repair": 28800.0
+    },
+    "category_remaining": {
+      "B": 28763.237192899804,
+      "C": 28789.936318800002,
+      "D": 11698.20201000059,
+      "E": 28800.0,
+      "repair": 28800.0
+    },
+    "separately_reported_seconds": 266.83043630060274,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "root_IND_gain_retained": true,
+  "only_one_candidate": true,
+  "all_entered_adverse_and_open_retained": true,
+  "not_random_holdout": true
+}
