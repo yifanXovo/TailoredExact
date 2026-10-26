@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-26T14:15:52.561487+00:00",
+  "UTC": "2026-10-26T15:26:59.813567+00:00",
   "new_computation": {
     "G1_seconds": 17148.624478299604,
     "remaining_G1_seconds": 11651.375521700396,
@@ -56,6 +56,12 @@
     "delivery_archive_receipt.json": {
       "seconds": 92.75679239979945
     },
+    "public_bootstrap.json": {
+      "seconds": 0.9676402001641691
+    },
+    "public_restore_receipt.json": {
+      "cumulative_seconds": 2979.9374551998917
+    },
     "review/local_preflight.json": {
       "seconds": 655.6367304001469
     }
@@ -64,7 +70,15 @@
   "nested_H_LP_MIP_Work_never_added": true,
   "explicit_offline_verification_segments_reported_separately": true,
   "authoring_window_start": "2026-10-26T08:48:35.410144+00:00",
-  "authoring_window_end": "2026-10-26T14:15:52.561487+00:00",
+  "authoring_window_end": "2026-10-26T15:26:59.818418+00:00",
   "authoring_window_overlaps_native_wait_not_exclusive_CPU_time": true,
-  "journal_submission_or_external_messaging": 0
+  "journal_submission_or_external_messaging": 0,
+  "publication_and_delivery_window": {
+    "start_UTC": "2026-10-26T14:26:59.041860+00:00",
+    "end_UTC": "2026-10-26T15:26:59.836578+00:00",
+    "elapsed_wall_seconds": 3600.794718,
+    "scope": "Normal Git push, anonymous public recovery, GitHub creation/readback and final review waits; this window is not exclusive CPU time and is not added to G1."
+  },
+  "separate_Git_blob_verification_seconds": 7.679391199955717,
+  "public_semantic_seconds_nested_inside_public_cumulative": 2635.9295538000297
 }

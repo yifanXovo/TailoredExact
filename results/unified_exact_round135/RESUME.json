@@ -1,7 +1,28 @@
 {
-  "state": "IMPLEMENTATION_AND_QUALIFICATION",
-  "goal_active": true,
-  "next": "build and default-off matrix/AP-only comparison; two incremental LPs; freeze staged campaign",
-  "no_production_default_change": true,
-  "no_automatic_rerun": true
+  "state": "COMPLETE",
+  "goal_active": false,
+  "UTC": "2026-10-26T15:26:59.837648+00:00",
+  "science_commit": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+  "base_commit": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+  "branch": "codex/round135-aggregate-penalty-and-paper",
+  "pull_request": "https://github.com/yifanXovo/TailoredExact/pull/197",
+  "candidate_disposition": "research-only",
+  "supported_algorithm": "R134 S2 unchanged; AP remains default off",
+  "public_restore_destination": "E:\\codes\\ExactEBRP-work\\restore\\round135-public-2b27711484d8",
+  "public_restore_passed": true,
+  "formal_positions": 32,
+  "complete_pairs": 16,
+  "no_remaining_required_scientific_or_delivery_work": true,
+  "next": "Advisor/coauthor review and the specific author/CITI facts in submission_readiness.md. Do not rerun healthy experiments or completed recovery.",
+  "metadata_publication": "The subsequent normal metadata commit carries these actual receipts; its final PR head is read back separately without recursive commit self-reference.",
+  "completed_recovery_command": [
+    "D:/msys64/ucrt64/bin/python.exe",
+    "E:\\codes\\ExactEBRP-work\\temp\\round135\\public\\2b27711484d8\\round135_public_restore.py",
+    "--commit",
+    "2b27711484d85afbbb3a8446df83da89fcc901ec",
+    "--destination",
+    "E:\\codes\\ExactEBRP-work\\restore\\round135-public-2b27711484d8",
+    "--receipt",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round135\\results\\unified_exact_round135\\public_restore_receipt.json"
+  ]
 }

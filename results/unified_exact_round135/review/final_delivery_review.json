@@ -1,0 +1,188 @@
+{
+  "schema": "round135-independent-final-delivery-incremental-review-v1",
+  "passed": true,
+  "reviewer": "/root/independent_review",
+  "disposition": "PASS_ACTUAL_PUBLIC_RECOVERY_AND_STACKED_DRAFT_PR",
+  "scope": "Narrow delivery increment only. Reuses the accepted scientific/manuscript/PDF review without rerunning or rereviewing those parts; resolves its then-pending public-recovery and PR items using actual receipts and one independent live GitHub metadata readback.",
+  "review_window": {
+    "start_UTC": "2026-10-26 15:04:20 UTC",
+    "end_UTC": "2026-10-26 15:25:41 UTC",
+    "elapsed_wall_seconds": 1281,
+    "includes_waiting_for_actual_public_semantic_completion_and_PR_creation": true,
+    "not_exclusive_compute_time": true
+  },
+  "findings": [],
+  "unresolved_findings_in_this_scope": [],
+  "science_identity": {
+    "fixed_science_commit": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+    "verified_research_base": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+    "manifest_SHA256": "f21b7be1c0684e5b3aa284f5243a561d6091eb09a313b2f3f98b4dc49284be10",
+    "manifest_files": 172,
+    "finite_current_carriers": 34,
+    "existing_integrated_review_SHA256": "fb3ea52e60a4c51b2fc4578307ccd74a6673880615ecc6e923c436aea2bf7d81",
+    "existing_integrated_review_untouched": true,
+    "accepted_final_PDF_SHA256": "7f0fab6030becd403d83abb7068ae4cbf4c1ad41eaa3a0a5f25e43aaf253ea57",
+    "no_new_scientific_claim_or_candidate_adoption": true
+  },
+  "transport_and_bootstrap": {
+    "bootstrap_actual_download_and_published_manifest_script_hash_match": true,
+    "restored_manifest_hash_matches_fixed_science_manifest": true,
+    "science_Git_blob_verification": {
+      "observed_pass": true,
+      "files": 172,
+      "bytes": 216529004,
+      "scope": "Existing actual Git-blob verification record, supplemented by independent four-key-file blob-identity readback checks; the reviewer did not repeat the full 216 MB verification."
+    },
+    "five_Git_blob_newline_corrections": {
+      "record": "review/git_blob_transport_correction.json",
+      "newline_only": true,
+      "physical_source_input_results_manuscript_and_PDF_not_recompiled_or_recomputed": true,
+      "unpublished_precheck_commit": "0f5c56c1909c080cb6a8490f6c17e17fa6fa15e2"
+    },
+    "D13_single_explicit_input_carrier": {
+      "member_count": 1,
+      "actual_restored_original_SHA256": "ce60fd4e74ad23174be2d4a08ca6e52c0043cee22f3c9b17153b9e8bbcfdbe42",
+      "restored_hash_independently_checked": true
+    },
+    "no_sealed_file_modified_by_reviewer": true
+  },
+  "actual_public_recovery": {
+    "passed": true,
+    "commit": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+    "destination": "E:/codes/ExactEBRP-work/restore/round135-public-2b27711484d8",
+    "initially_empty": true,
+    "one_owned_root": true,
+    "attempt": 1,
+    "files": 172,
+    "archives": 34,
+    "archive_names_hashes_and_member_counts_match_manifest": true,
+    "formal_positions": 32,
+    "registered_positions": 32,
+    "AP_roots": 2,
+    "certificate_counts": {
+      "S2": 10,
+      "AP": 10
+    },
+    "Optimize": 0,
+    "compile": 0,
+    "vendor_DLL_loads": 0,
+    "semantic_Git_calls": 0,
+    "semantic_subprocess_calls": 0,
+    "historical_whole_campaign_recoveries": 0,
+    "local_source_or_raw_fallback": false,
+    "anonymous_fixed_commit_HTTPS": true,
+    "original_measured_clocks_preserved": true,
+    "restored_raw_read_only": true,
+    "owned_restore_state_observed": "PASS",
+    "owned_restore_state_SHA256": "d5a3a75ecba474975c84fd6b369f055f021c693435ab790d359a44d0d9c9d624",
+    "total_outer_seconds": 2979.9374551998917,
+    "semantic_wrapper_seconds": 2635.9295538000297,
+    "semantic_checker_internal_seconds": 2635.3383790000807,
+    "duration_scope": "Actual read-only delivery clocks, separate from the sealed study computation; wrapper and internal semantic times are nested and are not added together.",
+    "receipt_and_semantic_cross_hash_binding_passed": true,
+    "reviewer_did_not_rerun_recovery_or_semantic_reader": true
+  },
+  "actual_PR": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/197",
+    "number": 197,
+    "title": "Round135: aggregate state-penalty evaluation and manuscript refinement",
+    "base": "codex/round134-paper-ready-s2-and-count-bound",
+    "base_sha": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+    "head": "codex/round135-aggregate-penalty-and-paper",
+    "head_sha": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "created_at": "2026-10-26T15:18:19Z",
+    "updated_at": "2026-10-26T15:18:19Z",
+    "independent_live_connector_readback": {
+      "tool": "GitHub get_pr_info",
+      "url": "https://github.com/yifanXovo/TailoredExact/pull/197",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "base": "codex/round134-paper-ready-s2-and-count-bound",
+      "base_sha": "d3353749e6933e6685c7f0d92d153d0641816bcb",
+      "head": "codex/round135-aggregate-penalty-and-paper",
+      "head_sha": "2b27711484d85afbbb3a8446df83da89fcc901ec",
+      "recovery_placeholder_absent": true,
+      "actual_public_recovery_PASS_paragraph_present": true,
+      "actual_2979_point937_second_first_attempt_disclosed": true,
+      "mergeable": true
+    },
+    "stacked_on_PR": 196,
+    "actual_app_attachment_observed_pass_in_readback_record": true,
+    "key_file_checks": [
+      {
+        "path": "results/unified_exact_round135/candidate_decision.json",
+        "Git_blob_SHA": "81f135c4fabb4bd123295035ff5daf8174cbd601",
+        "scope": "complete JSON"
+      },
+      {
+        "path": "results/unified_exact_round135/reports/summary.json",
+        "Git_blob_SHA": "c794fac75484808d9d1e7a7cd464b45935959472",
+        "scope": "complete JSON"
+      },
+      {
+        "path": "results/unified_exact_round135/reports/roots.json",
+        "Git_blob_SHA": "02b1ab0dc619ee1deeb1e224484d3d9be24df8cd",
+        "scope": "complete JSON"
+      },
+      {
+        "path": "results/unified_exact_round135/manuscript.md",
+        "Git_blob_SHA": "fc0a34e5ef988aa84a4d400ec4d09452cf2cbc62",
+        "scope": "lines 1-22"
+      }
+    ],
+    "three_complete_JSON_readbacks_match_local_values": true,
+    "manuscript_requested_lines_match_after_only_connector_trailing_blank_normalization": true,
+    "all_four_full_Git_blob_ids_independently_match_actual_local_bytes": true,
+    "English_PR_claims_match_existing_accepted_science_and_actual_delivery_receipts": true,
+    "core_production_diff_confirmed": {
+      "files": 3,
+      "added_lines": 67
+    },
+    "AP_contract_count_confirmed": 75,
+    "AP_state_coefficient_check_count_confirmed": 24564,
+    "no_merge_force_push_default_entry_change_email_or_journal_submission_performed_by_reviewer": true
+  },
+  "evidence_SHA256": {
+    "public_bootstrap.json": "bf3a1f0def97c97645e5aed6af96219d1e67a8a4d4741d23e9421114ee86a21e",
+    "review/science_Git_blob_verification.json": "0a07250ac799eb09e7c21d9d148fad2b6ebd839777ff6ebd5d393ab2a9e3ffa2",
+    "review/git_blob_transport_correction.json": "2c12cb06042149fe6ff1579df9141039d2f1e80ae771b02c6215753e176eba5f",
+    "export_manifest.json": "f21b7be1c0684e5b3aa284f5243a561d6091eb09a313b2f3f98b4dc49284be10",
+    "public_restore_receipt.json": "5de0557931adda6c54c46e5dd595c965cff5c69f8fd158034b3e152a149b199c",
+    "public_restore_receipt.semantic_attempt1.json": "a59a58a7e7be38a1bf7dbb2298756056637385d9a576dc857f37a875d29ab04e",
+    "remote_readback.json": "40055112e4cc5455c6eb173d816a33ae9d5133f62082b2e64c67746cc3fc5deb",
+    "review/pull_request_creation.json": "c8b0591059155f8ad572636c15e747e61e655e7614d5d5e6eac190528c5144ae",
+    "review/final_integrated_review.json": "fb3ea52e60a4c51b2fc4578307ccd74a6673880615ecc6e923c436aea2bf7d81",
+    "source_publication.json": "ccfeecf9d31e6c9d21e8bc6770bdfc32fc65349183a2a25c94916c3e7c39a377",
+    "manuscript.pdf": "7f0fab6030becd403d83abb7068ae4cbf4c1ad41eaa3a0a5f25e43aaf253ea57"
+  },
+  "carry_forward": {
+    "scientific_and_final_PDF_review": "PASS remains in review/final_integrated_review.json; that file is unchanged.",
+    "old_pending_delivery_status": "The earlier pending public-recovery/PR statements describe the earlier review time. This actual incremental review now resolves those two items.",
+    "author_specific_missing_facts": "Unchanged from the accepted manuscript review; no author, affiliation or publication status is invented.",
+    "no_additional_native_or_full_reader_work_required": true
+  },
+  "owner_final_metadata_actions_still_pending": [
+    "Write the final RESUME, actual delivery audit, budget and protection receipts.",
+    "Normally commit and push this incremental review and the final metadata without altering any of the 172 sealed manifest members.",
+    "Read back the latest PR head after the subsequent metadata push; retain Draft/open/unmerged status and the fixed science-payload identity."
+  ],
+  "acceptance_boundary": "passed=true covers the actual public recovery and PR/readback at observed head 2b27711484d85afbbb3a8446df83da89fcc901ec. It does not claim that the subsequently planned metadata commit or its later head readback already happened.",
+  "reviewer_actions": {
+    "Optimize": 0,
+    "compilation": 0,
+    "vendor_DLL_loads": 0,
+    "recovery_runs": 0,
+    "full_reader_replays": 0,
+    "PDF_exports": 0,
+    "repackaging": 0,
+    "scientific_or_PDF_content_rereview": false,
+    "small_identity_hash_checks_and_metadata_readbacks_only": true,
+    "independent_live_GitHub_metadata_reads": 1,
+    "sealed_files_modified": 0,
+    "sole_write": "review/final_delivery_review.json"
+  }
+}
