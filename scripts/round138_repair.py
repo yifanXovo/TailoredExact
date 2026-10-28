@@ -60,10 +60,13 @@ def build():
     sources={p.relative_to(ROOT).as_posix():sha(p) for folder in ['src','include'] for p in (ROOT/folder).rglob('*') if p.suffix in ('.cpp','.hpp','.h','.inc')}
     prior=read(OUT/'candidate_manifest.json');changed=[name for name,digest in sources.items() if prior['source_hashes'][name]!=digest]
     assert changed==['src/CplexBaseline.cpp'],changed
-    manifest=dict(prior,source_commit=git('rev-parse','HEAD').decode().strip(),source_hashes=sources,
+    manifest=dict(prior,UTC=utc(),schema='round138-shared-stock-product-v2',parent_manifest_UTC=prior['UTC'],
+        source_commit=git('rev-parse','HEAD').decode().strip(),source_hashes=sources,
         production_PE=str(pe),production_PE_SHA=sha(pe),research_PE=str(pe),research_PE_SHA=sha(pe),
         version='v2-exact-power-of-two-new-row-transport',primary_v1_manifest_SHA=sha(OUT/'candidate_manifest.json'),
         repair='Only new stock rows with nonzero slope <1e-12 are scaled by an exact positive power of two until slope >=1e-12; all other canonical bytes remain unchanged')
+    manifest['primary_v1_build_SHA']=manifest.pop('source_build_SHA')
+    manifest['primary_v1_qualification_SHA']=manifest.pop('qualification_SHA')
     write(OUT/'candidate_repair_manifest.json',manifest)
     write(OUT/'candidate_repair_build.json',dict(UTC=utc(),manifest_SHA=sha(OUT/'candidate_repair_manifest.json'),
         compiled_units=['CplexBaseline'],unchanged_main_object=dict(path=str(BUILD/'main.o'),SHA256=sha(BUILD/'main.o')),
@@ -145,5 +148,28 @@ def native():
         conclusion='Every actually used primary STOCK model preserves all four intended native coefficient maps/RHS. None enters the changed scale branch; V2 emits identical four rows on these scopes and all other source/rows are unchanged. The primary runs remain measured V1 evidence, not retagged V2 repeats.',
         no_primary_native_rerun=True,no_solution_bound_or_certificate_backfill=True))
     print(f'PASS actual native rows: 7 repaired domains and {len(used)} unique used V1 models; zero Optimize')
+
+def metadata():
+    assert not budget()['unclosed']
+    keys={'candidate_repair_build.json':'manifest_SHA','qualification/repair_matrix_checks.json':'repaired_manifest_SHA',
+        'qualification/native_coefficients.json':'repaired_manifest_SHA','repair/primary_native_bridge.json':'v2_manifest_SHA'}
+    names=['candidate_repair_manifest.json',*keys];before={name:read(OUT/name) for name in names}
+    backup=OUT/'repair/before_metadata_binding_fix.json';assert not backup.exists();write(backup,before)
+    path=OUT/'candidate_repair_manifest.json';old_SHA=sha(path);manifest=before['candidate_repair_manifest.json']
+    manifest['parent_manifest_UTC']=manifest.pop('UTC');manifest['UTC']=before['candidate_repair_build.json']['UTC']
+    manifest['schema']='round138-shared-stock-product-v2'
+    manifest['primary_v1_build_SHA']=manifest.pop('source_build_SHA')
+    manifest['primary_v1_qualification_SHA']=manifest.pop('qualification_SHA')
+    write(path,manifest);current=sha(path)
+    records={}
+    for name,key in keys.items():
+        old=before[name];assert old[key]==old_SHA
+        old['pre_metadata_manifest_SHA']=old[key];old[key]=current;write(OUT/name,old)
+        records[name]=dict(key=key,current_SHA=sha(OUT/name))
+    write(OUT/'repair/metadata_binding_amendment.json',dict(UTC=utc(),old_manifest_SHA=old_SHA,current_manifest_SHA=current,
+        prior_records_SHA=sha(backup),updated_derived_bindings=records,
+        changes='V2 identity fields now distinguish inherited V1 build/qualification/time from actual V2 records; no source/PE/matrix/native result changed',
+        Optimize=0,new_native_model_reads=0))
+    print('V2 identity metadata corrected; original records retained, Native evidence unchanged')
 
 if __name__=='__main__':globals()[sys.argv[1]]()
