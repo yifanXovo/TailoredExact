@@ -232,17 +232,6 @@
       "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\current_raw_carrier_pack.stderr.log"
     },
     {
-      "operation": "current_raw_carrier_pack_02",
-      "start_UTC": "2026-10-28T08:19:30.831985+00:00",
-      "end_UTC": "2026-10-28T08:35:41.431400+00:00",
-      "seconds": 970.6084237999748,
-      "exit_code": 0,
-      "separately_reported_not_G1": true,
-      "Optimize": 0,
-      "stdout": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\current_raw_carrier_pack_02.stdout.log",
-      "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\current_raw_carrier_pack_02.stderr.log"
-    },
-    {
       "operation": "source_capsule",
       "start_UTC": "2026-10-28T08:03:13.005398+00:00",
       "end_UTC": "2026-10-28T08:03:13.438165+00:00",
@@ -263,6 +252,39 @@
       "Optimize": 0,
       "stdout": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\local_strict_pure_preflight.stdout.log",
       "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\local_strict_pure_preflight.stderr.log"
+    },
+    {
+      "operation": "current_raw_carrier_pack_02",
+      "start_UTC": "2026-10-28T08:19:30.831985+00:00",
+      "end_UTC": "2026-10-28T08:35:41.431400+00:00",
+      "seconds": 970.6084237999748,
+      "exit_code": 0,
+      "separately_reported_not_G1": true,
+      "Optimize": 0,
+      "stdout": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\current_raw_carrier_pack_02.stdout.log",
+      "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\current_raw_carrier_pack_02.stderr.log"
+    },
+    {
+      "operation": "scientific_export_manifest",
+      "start_UTC": "2026-10-28T09:02:18.903533+00:00",
+      "end_UTC": "2026-10-28T09:04:23.037698+00:00",
+      "seconds": 124.12891059997492,
+      "exit_code": 0,
+      "separately_reported_not_G1": true,
+      "Optimize": 0,
+      "stdout": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\scientific_export_manifest.stdout.log",
+      "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\scientific_export_manifest.stderr.log"
+    },
+    {
+      "operation": "scientific_export_manifest_final",
+      "start_UTC": "2026-10-28T09:11:22.844015+00:00",
+      "end_UTC": "2026-10-28T09:13:27.347667+00:00",
+      "seconds": 124.5045946999453,
+      "exit_code": 0,
+      "separately_reported_not_G1": true,
+      "Optimize": 0,
+      "stdout": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\scientific_export_manifest_final.stdout.log",
+      "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\scientific_export_manifest_final.stderr.log"
     },
     {
       "operation": "normal_science_push",
@@ -289,26 +311,76 @@
       "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\one_anonymous_public_recovery.stderr.log"
     },
     {
-      "operation": "scientific_export_manifest",
-      "start_UTC": "2026-10-28T09:02:18.903533+00:00",
-      "end_UTC": "2026-10-28T09:04:23.037698+00:00",
-      "seconds": 124.12891059997492,
-      "exit_code": 0,
+      "operation": "same_owned_public_recovery_resume2",
+      "start_UTC": "2026-10-28T10:59:02.036368+00:00",
+      "end_UTC": "2026-10-28T12:06:06.992444+00:00",
+      "seconds": 4024.9564716999885,
+      "exit_code": 1,
       "separately_reported_not_G1": true,
       "Optimize": 0,
-      "stdout": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\scientific_export_manifest.stdout.log",
-      "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\scientific_export_manifest.stderr.log"
+      "stdout": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\same_owned_public_recovery_resume2.stdout.log",
+      "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\same_owned_public_recovery_resume2.stderr.log",
+      "same_owned_root": true,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "prior_failed_seconds": 4975.3498603999615
     },
     {
-      "operation": "scientific_export_manifest_final",
-      "start_UTC": "2026-10-28T09:11:22.844015+00:00",
-      "end_UTC": "2026-10-28T09:13:27.347667+00:00",
-      "seconds": 124.5045946999453,
+      "operation": "delivery_adapter_push",
+      "start_UTC": "2026-10-28T11:02:57.201175+00:00",
+      "end_UTC": "2026-10-28T11:02:58.758918+00:00",
+      "seconds": 1.5580239999108016,
+      "exit_code": 128,
+      "separately_reported_not_G1": true,
+      "Optimize": 0,
+      "commit": "73dd81de1fa8dc5a2abd65c5efbe018aa0812105"
+    },
+    {
+      "operation": "delivery_adapter_push_retry1",
+      "start_UTC": "2026-10-28T11:04:58.101244+00:00",
+      "end_UTC": "2026-10-28T11:05:19.336938+00:00",
+      "seconds": 21.23546650004573,
+      "exit_code": 128,
+      "separately_reported_not_G1": true,
+      "Optimize": 0,
+      "commit": "73dd81de1fa8dc5a2abd65c5efbe018aa0812105",
+      "error": "fatal: unable to access 'https://github.com/yifanXovo/TailoredExact.git/': Failed to connect to github.com port 443 after 21104 ms: Could not connect to server\n"
+    },
+    {
+      "operation": "delivery_adapter_push_retry2",
+      "start_UTC": "2026-10-28T11:09:04.989806+00:00",
+      "end_UTC": "2026-10-28T11:09:57.781292+00:00",
+      "seconds": 52.79138880013488,
       "exit_code": 0,
       "separately_reported_not_G1": true,
       "Optimize": 0,
-      "stdout": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\scientific_export_manifest_final.stdout.log",
-      "stderr": "E:\\codes\\ExactEBRP-work\\temp\\round137\\publication_logs\\scientific_export_manifest_final.stderr.log"
+      "commit": "73dd81de1fa8dc5a2abd65c5efbe018aa0812105",
+      "error": "To https://github.com/yifanXovo/TailoredExact.git\n   e735c3447..73dd81de1  HEAD -> codex/round137-gi-tbc-consolidation\n"
+    },
+    {
+      "operation": "final_immutable_delivery_and_protected_tree_check",
+      "start_UTC": "2026-10-28T12:13:11.193656+00:00",
+      "end_UTC": "2026-10-28T12:13:13.423998+00:00",
+      "seconds": 2.2329576001502573,
+      "exit_code": 0,
+      "separately_reported_not_G1": true,
+      "Optimize": 0
+    },
+    {
+      "operation": "bounded_final_PNG_duplicate_cleanup",
+      "start_UTC": "2026-10-28T12:17:08.3189112Z",
+      "end_UTC": "2026-10-28T12:17:08.3642931Z",
+      "seconds": 0.0462817,
+      "exit_code": 0,
+      "separately_reported_not_G1": true,
+      "Optimize": 0,
+      "receipt": "delivery/cleanup_receipt.json"
     }
+  ],
+  "recorded_UTC": "2026-10-28T12:18:37.295770+00:00",
+  "native_G1_seconds_unchanged": 118955.40056290105,
+  "scope_note": "Ordinary operation clocks, including failed transfers, overlap where processes overlap. Their sum is not elapsed wall time or G1 native computation.",
+  "retained_small_metadata_check_failures": [
+    "delivery/metadata_check_format_failure.json",
+    "delivery/cleanup_precheck_failure.json"
   ]
 }

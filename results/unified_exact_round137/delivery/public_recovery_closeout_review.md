@@ -1,0 +1,25 @@
+# Public recovery closeout and finite PNG scope: independent review
+
+Review UTC: 2026-10-28T12:13:48.095216+00:00
+
+**PASS for the expressly bounded H/G2 alternative; full public semantic replay remains incomplete.** The new receipt is SHA `0ff0633d78bf5d7a07dc3a2629be4206397e103cb69fab7494c87a200b84436d`. It has no generic passed field, states public byte integrity=true/local full semantics=true/public full semantics=false, and preserves the original stronger-driver failure. This matches the conditions in bounded_recovery_scope_review.md, not a retroactive public-semantic PASS.
+
+Actual attempt2 state/failure ended at12:06:06.952143Z, FAILED_PRESERVE, subprocess.TimeoutExpired with2864.074728500098s semantic allowance and9000.061082500033s cumulative driver time. The small termination/receipt overhead above9000 is reported, not hidden as extra budget. Both operations exited1; failure/state/log copies and original passed=false receipt hashes agree. No completed public semantic receipt exists. No terminating SHA/assertion mismatch is reported; absence of one is not proof that all semantic checks finished. No reset/third run is authorized or needed for this closeout.
+
+The actual phase-observation record binds exact parent/child/root/script observations for both attempts to the reviewed driver/wrapper control flow. Every hash-checked fetch and archive/member check must finish before those exact semantic children can start. The new receipt accurately identifies this as phase inference, not an emitted standalone byte-PASS log. Counts814/123/1399812 match the fixed e735 manifest; the local120/904 receipt and source-publication hashes bind the same frozen science. The addendum now describes both actual timeouts, the additional full-public limitation and separate accepted scope. This satisfies the user's finite public-read/recovery requirement under the previously reviewed G2/H interpretation without weakening scientific qualification.
+
+## Only the approved46 final PNGs
+
+The reviewer independently checked all46 current plan entries: exact unique page01–46 filenames, exact allowed TEMP parent, non-reparse file/ancestor paths, current bytes/SHA agreement with the approved render receipt, and total8922383 logical bytes. Local and actually restored public PDF both retain SHA fb9f6b706145d7fbe8f6183672ecb4be6179eb44dbb3098d9647ade25ef9c29b. These completed90dpi QA derivatives can be regenerated from the retained PDF/render workflow; they are not unique science or failure records. The review no longer depends on these PNG copies.
+
+A NEW accepted cleanup plan may therefore use the scoped public-byte/local-semantic receipt as its finite H gate, without calling the full public replay successful. Preserve the old pending plan unchanged. Before actual action, the implementer must reconfirm the required remote readback, all relevant process termination, exact paths/hashes and no remaining dependency; delete only the46 named regular files using literal, nonrecursive native operations. This does not authorize deleting their parent directory, contact sheets, earlier/failure renders, public root, raw/failures, dependencies, active/protected/old trees or carriers. Preserve plan/receipts outside the cleaned files and record actual file bytes and observed volume change separately.
+
+No deletion, native/build/replay or recovery was performed by this reviewer. Actual cleanup results and final PR/delivery readback remain the subsequent acceptance step.
+
+Bindings: observations `5d5223ac2a5e4816302df6f42832814ce8f4f9ef165e86ac73ba982e15b9df31`; scope review `a6d67480be9c5a241bc2373eab3a6c10f3869f7442c03e0f1ef99adb3880887e`; old pending PNG plan `82a509d77c6851860cfaa7de7fdf8bafc82a2bb9ee03a46fee5cf5cad2489d9c`; addendum `236d9f26adac3bf55a7a6405b5c490a3b633b0af7d93cfa05f39f4dbef6e1834`.
+
+## Final integrity evidence and historical gate
+
+The additional actual `immutable_delivery_integrity.json` is SHA `e6103b2f11bccc967af951b0ee718e203bf97273628525ec2520a3a3a6fa9067`. Its814 records/832563246 bytes agree with the frozen manifest totals, with no mismatches; it records219 source/93 helper/324 capsule-member checks, retained PE/DLL hashes without loading, and unchanged protected original HEAD/three dirty-file hashes. This is another actual byte/integrity check, not a substitute full-public-semantic result or a repeated reviewer832MB read.
+
+`infra/cleanup_intent.json` remains unchanged historical intent, including its self-imposed requirement for the extra full public replay PASS. The present explicit H/G2 assessment and NEW accepted plan supersede that one stronger delivery gate only, using the separately scoped receipt; they do not mark the old gate fulfilled or authorize any removal from the failed public root. The old intent also records a rejected cleanup-script preparation command. That record remains; this review does not override an execution-policy denial or authorize bypassing it. Any actual file operation must independently be admitted by the tools and remain within the46-file safe scope; a new denial must be honored and reported.
