@@ -100,7 +100,16 @@ def admission():
     m=read(OUT/'matrix_frozen.json');assert m['candidate_manifest_SHA']==sha(OUT/'candidate_manifest.json')
     assert m['experiment_plan_SHA']==sha(OUT/'experiment_plan.json')
     inherited._candidate(OUT/'candidate_manifest.json')
-    for name,digest in m['helpers'].items():assert sha(ROOT/name)==digest,name
+    amendment_path=OUT/'review/reader_amendment.json'
+    replacements={}
+    if amendment_path.exists():
+        amendment=read(amendment_path)
+        assert amendment['decision']=='ACCEPT' and amendment['matrix_SHA']==sha(OUT/'matrix_frozen.json')
+        replacements=amendment['helper_replacements']
+        assert set(replacements)=={'scripts/round138_read.py','scripts/round138_campaign.py'}
+        for name,binding in replacements.items():assert m['helpers'][name]==binding['old_SHA']
+    for name,digest in m['helpers'].items():
+        assert sha(ROOT/name)==replacements.get(name,{}).get('new_SHA',digest),name
     return m
 
 def arm(position,label):

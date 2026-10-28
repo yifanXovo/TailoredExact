@@ -1,0 +1,53 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "/root/independent_review",
+  "date_Asia_Shanghai": "2026-10-29",
+  "matrix_SHA": "9c584f3f20232c17ec169ecaab4d9937071f60192f810c22665ef1e200f1bac5",
+  "helper_replacements": {
+    "scripts/round138_read.py": {
+      "old_SHA": "6e388c09e1e2fad9ee2008e68ae6dbd108149a1e25ce1b0be7f0ca98b3e8039a",
+      "new_SHA": "b677146dbc86953ef8930294140d299cfe914b767f8bff48b5cd89be53debf5a"
+    },
+    "scripts/round138_campaign.py": {
+      "old_SHA": "a3128059984d14c22eb94dbb8c32e2fde55a5f6aa812ca7874e0f4e0c322b5b5",
+      "new_SHA": "6933113d6881980e06ae6ab43f8c125a75d9e40be1335767fc255d61f719f227"
+    }
+  },
+  "proposal_SHA": "8f4c988c3f4f7e4c071e4c79db1e6574828535a09bd223f405f0c737db29e084",
+  "scope": "Only the explicit baseline-r137 postreader lifecycle dispatch and the two hash-bound helper replacements are admitted. Reverify the already sealed first arm without native reentry. The same dispatch applies to the registered BASE micro position. Candidate source, PE, commands, original matrix, raw evidence and proof/source adjudication stay bound to their existing records.",
+  "cause": "Postreader used legacy event lifecycle for explicitly frozen modern baseline-r137; native run1 returned OPTIMAL and is sealed. Strict modern lifecycle is now required without changing historical source adjudication.",
+  "failed_fee_SHA": "1d553cc63c53984a4adcc84eccafb1ae33b6635616b40a5e627b9bae57cb7954",
+  "stderr_SHA": "6acb8e59a2d3fbda7a743075471f6ff644c949737b7b119e0d288315306034c1",
+  "actual_baseline_modern_lifecycle": {
+    "declared": 5,
+    "returned": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "postreturn_quality": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "source_revoked": false
+  },
+  "strict_negative_controls": [
+    "missing postreturn quality rejected",
+    "duplicate quality rejected",
+    "premature quality rejected"
+  ],
+  "baseline_micro_same_version_branch_checked": true,
+  "original_producer_seal_and_8_required_files_checked": true,
+  "original_completion_end_to_end_seconds": 121.75,
+  "original_producer_receipt_T_produce": 122.57938176719472,
+  "new_Optimize_by_reviewer": 0,
+  "new_native_library_loads_by_reviewer": 0,
+  "no_native_rerun": true,
+  "no_production_source_PE_or_command_changes": true,
+  "full_endpoint_verification_still_pending": true
+}

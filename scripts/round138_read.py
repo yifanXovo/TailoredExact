@@ -20,6 +20,16 @@ class ArmModels(accepted.ArmModels):
 
 def verify(launch,identity):
     ns=dict(vars(accepted),ROOT=ROOT,OUT=OUT,ArmModels=ArmModels)
+    if launch['version']=='baseline-r137':
+        # The accepted R137 PE emits modern post-return quality events. Its
+        # source is still the frozen older commit, not today's candidate tree.
+        # Keep source adjudication intact, but require the strict modern event
+        # lifecycle for this explicitly named baseline rather than legacy E3.
+        old=accepted.inherited
+        def modern_lifecycle(payloads,future):
+            return old.validate_event_lifecycle(payloads,True)
+        journal=types.FunctionType(old._journal.__code__,dict(vars(old),validate_event_lifecycle=modern_lifecycle))
+        ns['inherited']=types.SimpleNamespace(**dict(vars(old),_journal=journal))
     run=types.FunctionType(accepted.verify.__code__,ns)
     d=Path(launch['destination']);enabled=launch['panel'].get('round138_stock_rlt',False)
     if enabled:
