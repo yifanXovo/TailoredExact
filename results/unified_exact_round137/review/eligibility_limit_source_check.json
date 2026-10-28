@@ -1,0 +1,149 @@
+{
+  "UTC": "2026-10-26T22:48:15.097451+00:00",
+  "Optimize": 0,
+  "source_locations": [
+    "src/PaperExternalGiniTree.cpp:6661",
+    "src/PaperExternalGiniTree.cpp:8217",
+    "src/PaperExternalGiniTree.cpp:9341",
+    "src/GiniFrontierGeometry.cpp:legacyAdaptiveSplitEligible",
+    "src/ControllingLeafScheduler.cpp:leaves"
+  ],
+  "actual_closed_observations": [
+    {
+      "position": 3,
+      "summary": {
+        "status": "RECORDED_GUARD_AUDIT_COMPLETE",
+        "evaluations": 2,
+        "depth_rejections": 0,
+        "width_rejections": 0,
+        "unknown": 0,
+        "maximum_depth": 8,
+        "minimum_width": 0.0001,
+        "width_numeric_margin": 1e-12,
+        "source_premise": "PaperExternalGiniTree writes every eligible/ineligible outcome; registered scheduler leaf geometry/depth is retained unchanged in paper_leaf_ledger; legacyAdaptiveSplitEligible is depth<8 and width>1e-4+1e-12",
+        "limits_may_both_reject": true,
+        "no_test_or_rejection_inferred_from_zero_width_proof": true
+      },
+      "observations": [
+        {
+          "parent_id": "L0",
+          "eligible": true,
+          "recorded_reason": "adaptive_mass_score_below_tau_native_target",
+          "depth": 0,
+          "width": 0.6623605074511707,
+          "depth_condition_rejected": false,
+          "width_condition_rejected": false,
+          "classification": "ELIGIBLE"
+        },
+        {
+          "parent_id": "L0",
+          "eligible": true,
+          "recorded_reason": "adaptive_mass_no_strict_child_improvement",
+          "depth": 0,
+          "width": 0.6623605074511707,
+          "depth_condition_rejected": false,
+          "width_condition_rejected": false,
+          "classification": "ELIGIBLE"
+        }
+      ]
+    },
+    {
+      "position": 5,
+      "summary": {
+        "status": "RECORDED_GUARD_AUDIT_COMPLETE",
+        "evaluations": 1,
+        "depth_rejections": 0,
+        "width_rejections": 0,
+        "unknown": 0,
+        "maximum_depth": 8,
+        "minimum_width": 0.0001,
+        "width_numeric_margin": 1e-12,
+        "source_premise": "PaperExternalGiniTree writes every eligible/ineligible outcome; registered scheduler leaf geometry/depth is retained unchanged in paper_leaf_ledger; legacyAdaptiveSplitEligible is depth<8 and width>1e-4+1e-12",
+        "limits_may_both_reject": true,
+        "no_test_or_rejection_inferred_from_zero_width_proof": true
+      },
+      "observations": [
+        {
+          "parent_id": "L0",
+          "eligible": true,
+          "recorded_reason": "adaptive_mass_no_strict_child_improvement",
+          "depth": 0,
+          "width": 0.08166666666666667,
+          "depth_condition_rejected": false,
+          "width_condition_rejected": false,
+          "classification": "ELIGIBLE"
+        }
+      ]
+    },
+    {
+      "position": 7,
+      "summary": {
+        "status": "RECORDED_GUARD_AUDIT_COMPLETE",
+        "evaluations": 5,
+        "depth_rejections": 0,
+        "width_rejections": 0,
+        "unknown": 0,
+        "maximum_depth": 8,
+        "minimum_width": 0.0001,
+        "width_numeric_margin": 1e-12,
+        "source_premise": "PaperExternalGiniTree writes every eligible/ineligible outcome; registered scheduler leaf geometry/depth is retained unchanged in paper_leaf_ledger; legacyAdaptiveSplitEligible is depth<8 and width>1e-4+1e-12",
+        "limits_may_both_reject": true,
+        "no_test_or_rejection_inferred_from_zero_width_proof": true
+      },
+      "observations": [
+        {
+          "parent_id": "L0",
+          "eligible": true,
+          "recorded_reason": "adaptive_mass_preserve_child_infeasibility_split",
+          "depth": 0,
+          "width": 0.5773330699702928,
+          "depth_condition_rejected": false,
+          "width_condition_rejected": false,
+          "classification": "ELIGIBLE"
+        },
+        {
+          "parent_id": "L0.0",
+          "eligible": true,
+          "recorded_reason": "adaptive_mass_preserve_child_infeasibility_split",
+          "depth": 1,
+          "width": 0.2886665349851464,
+          "depth_condition_rejected": false,
+          "width_condition_rejected": false,
+          "classification": "ELIGIBLE"
+        },
+        {
+          "parent_id": "L0.0.1",
+          "eligible": true,
+          "recorded_reason": "adaptive_mass_preserve_child_infeasibility_split",
+          "depth": 2,
+          "width": 0.1443332674925732,
+          "depth_condition_rejected": false,
+          "width_condition_rejected": false,
+          "classification": "ELIGIBLE"
+        },
+        {
+          "parent_id": "L0.0.1.0",
+          "eligible": true,
+          "recorded_reason": "adaptive_mass_score_below_tau_native_target",
+          "depth": 3,
+          "width": 0.0721666337462866,
+          "depth_condition_rejected": false,
+          "width_condition_rejected": false,
+          "classification": "ELIGIBLE"
+        },
+        {
+          "parent_id": "L0.0.1.0",
+          "eligible": true,
+          "recorded_reason": "adaptive_mass_no_strict_child_improvement",
+          "depth": 3,
+          "width": 0.0721666337462866,
+          "depth_condition_rejected": false,
+          "width_condition_rejected": false,
+          "classification": "ELIGIBLE"
+        }
+      ]
+    }
+  ],
+  "zero_width_proof_not_counted_as_trigger": true,
+  "no_producer_or_frozen_helper_changes": true
+}

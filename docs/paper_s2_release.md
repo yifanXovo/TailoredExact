@@ -1,153 +1,133 @@
-# Paper-S2 release and run guide
+# GI-TBC release and paper-S2 run guide
 
-This is the authoritative current entry established in Round136 (27 October
-2026, Asia/Shanghai). It accepts the completed R135 outcome and makes no new
-algorithm or performance claim.
+This guide describes the Round137 branch from verified main
+`b2b940c1e517a72e226ec60fc49ff19651737632`. The English Draft PR targets
+`main` and must remain a Draft; its actual identity/readback belongs in the
+continuation record. This record does not assert that the branch has merged. The accepted
+Round136 mainline and all historical observations remain separately pinned.
 
-## Four identities
+## Algorithm, implementation and evidence identities
 
-| Identity | Current meaning |
+| Identity | Meaning |
 |---|---|
-| Paper algorithm | **S2 / GI-TBC / ms2**: complete own H, M-B shared inventory/service states, VD-P, uniform pair-only support, existing controller and R134 proof policy |
-| Code snapshot | R135 production source `29b3c8baa06ea3b1dc4cb4620c3040c3183cc0c4`; metadata head `25800aa6b51bf7607b51e5df14a10a5ca4571889`; AP disabled |
-| Paper and evidence | Maintained R135 manuscript/PDF and supplement; R132 breadth, R134 final confirmation, R135 AP study keep their original versions and denominators |
-| Compatibility CLI default | **ENS-C** when using the bare executable; recommending paper-S2 and updating Git `main` do not change that default |
+| Formal method | **GI-TBC - Gini-interval tailored branch-and-cut** |
+| Implementation | Historical S2, configuration `ms2`; the thin public entry keeps the name `paper_s2.py` |
+| Current production source | `779713ad9a0b01edc538ecb64df9438739127be3`; actual frozen source/PE hashes are in the [candidate manifest](../results/unified_exact_round137/candidate_manifest.json) |
+| Current Round137 profile | [gi_tbc_round137.json](../config/gi_tbc_round137.json), normalized against all 28 actual default vectors in the frozen 120-position matrix; actual guarded promotion and all 28 CLI checks passed with six refusal cases and zero native execution |
+| Compatibility identities | Bare executable default remains ENS-C; immutable [paper_s2.json](../config/paper_s2.json) preserves the accepted R135 profile and its 16-vector provenance |
+| Current paper | Maintained R135 lineage, now with Round137 question-led experiments, complete model/algorithm appendices and original bibliography |
 
-The physical model remains empty departure, loaded return with unloading time,
-unique nonzero one-way service, route-prefix capacity and depot exclusion from
-the objective. No instance identity/size dispatch or time-based method switch
-is introduced. AP stays research-only/off; TC and AP are completed studies.
+GI-TBC independently pays complete own H, keeps M-B shared inventory/service
+states, VD-P, uniform pair-only support, the current interval controller and
+R134 proof policy. AP stays off. There is no instance/size dispatch, elapsed-time
+algorithm switch or cross-method/Seed/weight Start transfer. Research-only
+single-group flags change only their declared control.
 
-## Run once
+The physical problem retains empty departure, loaded return including unloading,
+unique nonzero one-way service, prefix vehicle-capacity constraints and depot
+exclusion from the objective. Deliveries may free capacity for later pickups,
+so cumulative pickups may exceed Q while each route-prefix load stays in [0,Q].
+Initial/final inventory is integer and bounded by station capacity. Mathematical
+targets satisfy D>0; the computational text format stores integer targets.
+The present test targets additionally satisfy D<=C, without adding that
+target-capacity condition to physical feasibility.
 
-The active local checkout is `E:\codes\ExactEBRP-work\worktrees\paper-current`.
-It is on local `main`, tracking `origin/main`, after the authorized PR #198
-merge; final HEAD equality is recorded in the closeout readback. The code/config
-remains the verified `paper-s2-round136` snapshot.
-The shared original checkout `E:\codes\ExactEBRP` retains its R105 HEAD and
-protected user changes. Use an installed Python 3 runtime; the validated local
-one is `D:\msys64\ucrt64\bin\python.exe`.
+| Uniform parameter | Current setting |
+|---|---|
+| AM threshold | 0.08; actual post-preset field checked |
+| Maximum outer depth / minimum width | 8 / 1e-4; recorded guard exposure and unknowns are reported |
+| Support / AP | Pair-only / off |
+| Own H seed | 20260626, distinct from Gurobi Seed |
+| Gurobi | 13.0.2; one thread; presolve -1; Windows affinity mask 4 |
+| Main / limited repeat Seeds | Seed0 / preselected Seed1 |
+| Physical handling | Per-unit pickup/drop from the launch; study uses 60/60 seconds and includes return unloading |
+| Experimental caps | 600/1200/2400 s by size; cap is a computing allowance, separate from physical T |
+
+## Expand or run one independent command
+
+Use `E:\codes\ExactEBRP-work\worktrees\paper-current`; keep the protected
+original `E:\codes\ExactEBRP` unchanged. New runs/build/raw/temp/recovery assets
+belong under `E:\codes\ExactEBRP-work\`. The verified local Python is
+`D:\msys64\ucrt64\bin\python.exe`.
 
 ```powershell
 Set-Location E:\codes\ExactEBRP-work\worktrees\paper-current
 & 'D:\msys64\ucrt64\bin\python.exe' -B scripts\paper_s2.py `
   --input results\unified_exact_round130\inputs\UC-B20-B.txt `
-  --out-dir E:\codes\ExactEBRP-work\runs\paper-s2-example `
-  --T 7200 --pickup-time 60 --drop-time 60 --lambda 0.15 --cap 600 --seed 0
+  --out-dir E:\codes\ExactEBRP-work\runs\gi-tbc-example `
+  --T 7200 --pickup-time 60 --drop-time 60 --lambda 0.15 --cap 1200 --seed 0 --json
 ```
 
-This is a dry run: it displays the actual expanded command without creating
-output or starting the solver. Append `--json` to inspect the full launch plan,
-or `--run` to execute. Choose a new output directory each time; existing
-directories are refused, including empty ones. The example is an entry check,
-not another performance sample. This round uses zero new native solves.
+This expands the full frozen command without starting the producer or creating
+output. Append `--run` to execute; choose a new output directory each time.
+Existing directories, nonfinite weights, negative Seeds, insufficient caps and
+unrecognized algorithm overrides are refused. No extra-argv escape hatch exists.
+`--exe` accepts a compatible local executable and records its actual hash; it
+is not silently relabelled as the verified PE.
 
-| Option | Meaning |
-|---|---|
-| `--input` | Physical input, with fleet capacities from that input |
-| `--T` | Physical route-duration horizon, in seconds |
-| `--pickup-time`, `--drop-time` | Per-unit handling seconds; drop time also prices returned-load unloading |
-| `--lambda` | Objective penalty weight, retaining the original objective convention |
-| `--cap` | Whole native-process budget, integer seconds greater than 36; complete own H is included |
-| `--seed` | Explicit Gurobi Seed; the accepted own-H policy/Seed remains unchanged |
-| `--out-dir` | New output root; all result/log/phase/H/progress/native-evidence paths expand beneath it |
-| `--exe` | Optional local executable implementing the R135 configuration; its SHA is recorded |
+In the registered campaign, the whole-process cap, native `--time-limit=cap-6`,
+shutdown margin 30 and supervisor hard stop `cap-2` keep their distinct roles.
+Own H, construction, online checks,
+solve/proof/output belong to production. Postverification and total clocks stay
+separate; nested H/LP/MIP/Work are not added again. A producer journal by itself
+is not the independent formal paper audit.
 
-The [frozen full vector](../config/paper_s2.json) is extracted from actual R135
-launches, not reconstructed from a shortlist of flags. All 16 S2 launch vectors
-are identical after normalizing the executable, output paths and the explicitly
-allowed data/experiment parameters. Native `--time-limit=cap-6`, process wall
-limit `cap`, shutdown margin 30 and outer hard stop `cap-2` retain their original
-roles. `--threads 1`, `--mip-threads 1`, presolve -1 and Windows affinity mask 4
-are fixed. The full preset and research settings include `m-binary`, `ms2`,
-LP-G split false, candidate mode off, witness audit true and HGA zero-stop true.
-No AP-enable flag is present and there is no general extra-argv escape hatch.
-
-The launcher records command, input/PE/config hashes, completion and affinity.
-It launches the producer independently of campaign prepare/freeze/run code;
-only the pure OS-affinity helper is reused. The producer's result and native
-journal do not constitute a replay of the formal paper's independent audit.
-Use the original finite reproduction policy for paper evidence and its clocks.
-A rebuilt/custom PE has its actual hash recorded and is not represented as the
-verified historical PE unless its bytes match.
+The actual [entry-check receipt](../results/unified_exact_round137/entry_check.json)
+records 28 CLI vectors, physical/objective/cap/Seed/input identities, source and
+local PE/DLL byte hashes and six refusal cases, with zero Optimize/build/vendor
+library loads. Its ordinary verification clock is separate from experiment cost.
 
 ## Runtime and build identity
 
-Prefer the existing successful R135 binary:
+The frozen Round137 production executable is
+`E:\codes\ExactEBRP-work\build-cache\round137\ExactEBRP.exe`, SHA256
+`d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd`.
+Gurobi DLL `D:\gurobi1302\win64\bin\gurobi130.dll` has SHA256
+`9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88`.
 
-* `E:\codes\ExactEBRP-work\build-cache\round135\ExactEBRP.exe`
-* PE SHA256 `652335fbc004eb4799c01d074dd43c31a883ae40fc353ed37eaa82e98b53a3ed`
-* Gurobi 13.0.2 DLL: `D:\gurobi1302\win64\bin\gurobi130.dll`
-* DLL SHA256 `9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88`
+The actual incremental build and zero-Optimize deletion/default checks are in
+[infra](../results/unified_exact_round137/infra) and
+[qualification](../results/unified_exact_round137/qualification).
+They reuse the verified MinGW UCRT64/C++17 caches and static core, including
+retained historical dependencies. This is an identity-specific incremental
+build record, not a clean-machine build prescription. Public recovery carries
+source/evidence and attestations, never commercial native assets or credentials.
 
-The actual successful build is recorded in
-[candidate_build.json](../results/unified_exact_round135/candidate_build.json)
-and [round135_build.py](../scripts/round135_build.py): MinGW UCRT64 g++, C++17,
-`-Wall -Wextra -Wpedantic -DEXACT_EBRP_ENABLE_GUROBI=1`, qualified include paths,
-recompiled writer/main and the retained R133/R134 objects plus R120 static core.
-The compiler SHA is `8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1`.
-This incremental build depends on those exact caches and the R120 core at its
-recorded path. It is not a generic clean-machine CMake Release prescription.
-The original build script is a historical campaign action; ordinary use should
-invoke the verified PE through the thin launcher. Round136 performs no build.
+## Paper, finite experiments and interpretation
 
-## Paper, tables and finite reproduction
+Start with the [advisor/coauthor reading packet](paper_review.md), then the
+[PDF](../results/unified_exact_round137/manuscript.pdf),
+[manuscript source](../results/unified_exact_round137/manuscript.md),
+[supplement](../results/unified_exact_round137/supplement.md),
+[bibliography](../results/unified_exact_round137/references.bib) and
+[stage report](../results/unified_exact_round137/final_report.md).
 
-Start with the [two-page review note](paper_review.md), then the
-[complete manuscript](../results/unified_exact_round135/manuscript.md),
-[checked 38-page PDF](../results/unified_exact_round135/manuscript.pdf),
-[supplement](../results/unified_exact_round135/supplement.md) and
-[bibliography](../results/unified_exact_round135/references.bib).
+The registered study comprises 120 method positions, 16 base inputs, 20 physical
+configurations and 24 objective configurations. Seeds, weights, AM and mechanism
+variants are not independent new inputs. Main Seed0 breadth gives GI-TBC 9/12
+certificates versus P 7/12 and PS 7/12; positive-resource pairs give 4/8 versus 0/8
+and 0/8. Open certificate times are null. PS's substantive X-35-B reversal, K-35-U's opposed
+P/GI-TBC endpoints, all n35 resource open results, mixed conditional mechanism
+costs and material descriptive Seed shifts remain visible.
 
-| Version | Evidence and interpretation |
-|---|---|
-| R132 | Twelve inputs/two Seeds; 17/24 S2, 9/24 cold P, 4/12 paid-start PS qualified certificates under the original policy |
-| R134 | Final six-known-role confirmation: S2 12/14, P 9/14, PS 2/4; four additional weight runs plus two reused points |
-| R135 | AP comparison: 10+22 complete positions, 16 pairs on seven known inputs; S2 and AP each certify 10/16 |
+Historical R132, R134 and R135 retain their original source, policy and
+counts. The [research index](unified_exact_research_index.md) pins those studies;
+none is relabelled as a current observation or pooled into a new success rate.
+Historical S2 counts are R132 17/24 versus P 9/24 and PS 4/12, and R134
+12/14 versus P 9/14 and PS 2/4. R135 retains its own AP-study panels.
+AP stays off after its mixed/negative accepted study. Same-domain ideal LP
+strengthening need not improve capped endpoints or complete certificate time.
 
-Original-version links are in the [research index](unified_exact_research_index.md).
-R134 [complete matched tables](https://github.com/yifanXovo/TailoredExact/tree/d3353749e6933e6685c7f0d92d153d0641816bcb/results/unified_exact_round134/reports)
-and R135 [arms](../results/unified_exact_round135/reports/arms.csv),
-[pairs](../results/unified_exact_round135/reports/pairs.csv),
-[two roots](../results/unified_exact_round135/reports/roots.json) retain adverse
-and open results. These denominators are not interchangeable. Twelve R135 S2
-observations can be matched to R134 by role/Seed/repeat/input/weight, with the
-same certificate/open status and U; eight also have equal caps. This does not
-require a new baseline panel.
+The [finite recovery policy](../results/unified_exact_round137/reproducibility.md)
+specifies one fixed commit; only a passed actual
+[public restore receipt](../results/unified_exact_round137/public_restore_receipt.json)
+establishes completion of that recovery. Recovery is a bounded anonymous
+HTTPS read and pure 120-position replay, with no Optimize, compilation, Git
+fallback or vendor DLL load. Resume only a failed transfer in its original
+owned root; never repeat a passed recovery or R135's accepted recovery.
 
-AP strengthens the two same-domain numerical roots but has no substantive
-certified-time win, two substantive adverse Seed0 differences, and mixed open
-endpoints. For the same domain/objective, feasible-set inclusion gives
-`R_AP subset R_0 => min(R_AP) f >= min(R_0) f`. Finite complete searches can
-follow different paths, so neither `L_AP(t) >= L_S2(t)` nor faster AP
-certification follows. K35's stronger root and weaker final lower bound are
-compatible; no specific native-branch/cut attribution is established.
-
-[Finite reproduction](../results/unified_exact_round135/reproducibility.md),
-[completed R135 RESUME](../results/unified_exact_round135/RESUME.md) and its
-[public PASS receipt](../results/unified_exact_round135/public_restore_receipt.json)
-describe the science commit `2b27711484d85afbbb3a8446df83da89fcc901ec`.
-The existing `E:\codes\ExactEBRP-work\restore\round135-public-2b27711484d8`
-is retained read-only. Do not rerun a passed recovery. Round136 verifies new
-small entry files and identities without another raw recovery or panel.
-
-## Stable references and integration
-
-The small set of stable refs is `archive/main-round37-20260813`,
-`paper-s2-round136` and `archive/round38-g2a-not-adopted`; actual targets and
-remote readback are in [stable_refs.json](../results/unified_exact_round136/stable_refs.json).
-No existing ref is overwritten. Keep long-term evidence pinned to commits.
-
-[Round136 RESUME](../results/unified_exact_round136/RESUME.md) records the
-authorized completion of the English **base=main** consolidation PR #198.
-Ordinary merge `053b38a1bd66ad918e3c28932ebcd8f786704aeb` preserves the full
-R135 chain. Of #86-#197, GitHub marked 17 merged and this closeout closed the
-remaining 95 after refreshed-head containment checks. PR85 was already closed
-and unmerged at readback and is separately recorded as completed/not adopted.
-All 137 remote branches and three stable tags remain; independent R38 is not
-an ancestor of main. Minimal final status records are committed on main under
-the same explicit approval; the external final readback records that commit.
-
-Remaining author facts and feedback-triggered research conditions are in the
-[review packet](paper_review.md). No fresh AP/TC research, formal panel, email
-or submission is scheduled by this release.
+The [continuation record](../results/unified_exact_round137/RESUME.md) identifies
+actual completion, PR readback and bounded cleanup when those steps occur. Stable historical refs and
+old branches are retained. No automatic merge, force-push, old-PR cleanup,
+email or submission is part of this delivery. Author facts and three concrete
+next research questions are in the reading packet and stage report.

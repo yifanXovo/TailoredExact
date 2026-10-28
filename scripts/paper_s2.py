@@ -1,4 +1,4 @@
-"""Expand the complete frozen R135 S2 argv; run only with --run.
+"""Expand the complete frozen Round137 GI-TBC argv (historical S2); run only with --run.
 
 No campaign import, model compilation, input selection or algorithm switching.
 The pure Windows affinity helper preserves the original measurement setting.
@@ -16,7 +16,7 @@ import time
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG = ROOT / 'config/paper_s2.json'
+CONFIG = ROOT / 'config/gi_tbc_round137.json'
 
 
 def read(path):
@@ -53,7 +53,7 @@ def parser():
     p.add_argument('--lambda', dest='lambda_value', type=number, default='0.15')
     p.add_argument('--cap', type=int, required=True, help='whole native process budget in seconds (>36)')
     p.add_argument('--seed', type=int, required=True, help='explicit Gurobi Seed; own H remains frozen')
-    p.add_argument('--exe', type=Path, help='local R135-compatible executable; default uses verified R135 PE')
+    p.add_argument('--exe', type=Path, help='local GI-TBC-compatible executable; default uses verified Round137 PE')
     p.add_argument('--run', action='store_true', help='execute; otherwise only display the expanded command')
     p.add_argument('--json', action='store_true', help='display the complete machine-readable launch plan')
     return p
@@ -83,7 +83,7 @@ def plan(args, config):
         raise ValueError('executable is missing; supply --exe: ' + str(executable))
     digest = sha(executable)
     if args.exe is None and digest != config['verified_PE_SHA256']:
-        raise ValueError('default executable differs from the verified R135 PE')
+        raise ValueError('default executable differs from the verified Round137 PE')
     values = dict(exe=str(executable), input=str(instance), T=args.T,
                   pickup_time=args.pickup_time, drop_time=args.drop_time,
                   native_limit=str(args.cap - config['native_limit_offset_seconds']),
@@ -94,11 +94,11 @@ def plan(args, config):
     command = [values[token[2:-1]] if token.startswith('${') and token.endswith('}')
                else token for token in config['argv']]
     if normalize(command, config) != config['argv']:
-        raise ValueError('expanded command differs from the frozen S2 vector')
+        raise ValueError('expanded command differs from the frozen GI-TBC vector')
     dll = Path(config['verified_DLL'])
     dll_sha = sha(dll) if dll.is_file() else None
     if args.run and args.exe is None and dll_sha != config['verified_DLL_SHA256']:
-        raise ValueError('default DLL is missing or differs from the verified R135 DLL')
+        raise ValueError('default DLL is missing or differs from the verified Round137 DLL')
     return dict(schema='paper-S2-launch-v1', algorithm=config['algorithm'], AP=False,
                 command=command, windows_command=subprocess.list2cmdline(command), cwd=str(ROOT),
                 output_directory=str(output), input_SHA256=sha(instance),

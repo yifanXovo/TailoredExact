@@ -1,0 +1,776 @@
+{
+  "UTC": "2026-10-28T03:18:14.055184+00:00",
+  "scope": "Complete20 Seed0 mechanism views (16 new plus4 real shared B1 defaults); small sealed endpoint/control and child-CSV reads only. No audit/model/root-LP parsing.",
+  "extra_native_positions": 16,
+  "shared_defaults": [
+    3,
+    7,
+    12,
+    14
+  ],
+  "rows": [
+    {
+      "id": "K-15-S",
+      "method": "S2",
+      "U": 0.5922648822560825,
+      "L": 0.5922648792385111,
+      "signed_gap": 3.017571414964948e-09,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 112.76930311694741,
+      "T_produce": 112.76930311694741,
+      "T_verify": 3.770370300160721,
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 600,
+      "seed": 0,
+      "T_seconds": 3600,
+      "H_complete": true,
+      "H_semantic_SHA": "e401f8707e904aa99e7cecb78b024ee73d101e643e8a11dc4be9c7710ce672fe",
+      "H_fleet_SHA": "8d1517b9c36f24f31e5d663138917f9b62835b198634fed6777400203570cc63",
+      "position": 3,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "f4cb68cb5bb08c61c8460dad746ffbfaec9a5889d354dedb52f9ec06818dde8e",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-15-S",
+      "method": "S2R",
+      "U": 0.5922648822560825,
+      "L": 0.5922648792385111,
+      "signed_gap": 3.017571414964948e-09,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 112.6489236864727,
+      "T_produce": 112.6489236864727,
+      "T_verify": 3.3459695000201464,
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 600,
+      "seed": 0,
+      "T_seconds": 3600,
+      "H_complete": true,
+      "H_semantic_SHA": "e401f8707e904aa99e7cecb78b024ee73d101e643e8a11dc4be9c7710ce672fe",
+      "H_fleet_SHA": "8d1517b9c36f24f31e5d663138917f9b62835b198634fed6777400203570cc63",
+      "position": 81,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "1740d56d0486027792da9e0551df754aa619ed4c6ad3a62bed455284d3c38a18",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {},
+      "AM_actions": {}
+    },
+    {
+      "id": "K-15-S",
+      "method": "NO_AB",
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560823,
+      "signed_gap": 2.220446049250313e-16,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 128.32486700359732,
+      "T_produce": 128.32486700359732,
+      "T_verify": 3.6131221000105143,
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 600,
+      "seed": 0,
+      "T_seconds": 3600,
+      "H_complete": true,
+      "H_semantic_SHA": "e401f8707e904aa99e7cecb78b024ee73d101e643e8a11dc4be9c7710ce672fe",
+      "H_fleet_SHA": "8d1517b9c36f24f31e5d663138917f9b62835b198634fed6777400203570cc63",
+      "position": 82,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "d4fc12f20cfb9160ff628f27aafaccf2950e85a6571ce559f7455f4de8582159",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": true,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-15-S",
+      "method": "NO_CR",
+      "U": 0.5922648822560825,
+      "L": 0.5922648818745102,
+      "signed_gap": 3.8157232928881513e-10,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 75.10639921855181,
+      "T_produce": 75.10639921855181,
+      "T_verify": 2.3999733000528067,
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 600,
+      "seed": 0,
+      "T_seconds": 3600,
+      "H_complete": true,
+      "H_semantic_SHA": "e401f8707e904aa99e7cecb78b024ee73d101e643e8a11dc4be9c7710ce672fe",
+      "H_fleet_SHA": "8d1517b9c36f24f31e5d663138917f9b62835b198634fed6777400203570cc63",
+      "position": 83,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "4d5721a2dae202e130d57db2d9623b88bf29d19fda1179b749f950427601452d",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": true,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-15-S",
+      "method": "NO_CG",
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560826,
+      "signed_gap": -1.1102230246251565e-16,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 143.15033101825975,
+      "T_produce": 143.15033101825975,
+      "T_verify": 4.47362759988755,
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 600,
+      "seed": 0,
+      "T_seconds": 3600,
+      "H_complete": true,
+      "H_semantic_SHA": "e401f8707e904aa99e7cecb78b024ee73d101e643e8a11dc4be9c7710ce672fe",
+      "H_fleet_SHA": "8d1517b9c36f24f31e5d663138917f9b62835b198634fed6777400203570cc63",
+      "position": 84,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "65f4408ec91f897953c26fd4284b007abee1cf6d587979f78f79fbab4feb1525",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": true,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "UC-B20-B",
+      "method": "S2",
+      "U": 0.5773330699702928,
+      "L": 0.5773330699702925,
+      "signed_gap": 2.220446049250313e-16,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 4.148974274052307,
+      "T_produce": 4.148974274052307,
+      "T_verify": 2.347000499954447,
+      "input_SHA": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 7200,
+      "H_complete": true,
+      "H_semantic_SHA": "b792cde61bee15ba6e8fb05ba121bc70ad0192ebfb8df2752d529ad1ac989c6c",
+      "H_fleet_SHA": "975b85136da77e7495c164e77306084f4c76707955ef85363155e180426330f4",
+      "position": 7,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "dc1ed6a1d78f5afe088475e9b3ac9f86aaf1257931b63b347c62fce13d0b44ec",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "LOGICAL_ONE_INFEASIBLE": 3,
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "split": 3,
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "UC-B20-B",
+      "method": "S2R",
+      "U": 0.5773330699702928,
+      "L": 0.5773330699702925,
+      "signed_gap": 2.220446049250313e-16,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 1.8720622234977782,
+      "T_produce": 1.8720622234977782,
+      "T_verify": 0.4078939000610262,
+      "input_SHA": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 7200,
+      "H_complete": true,
+      "H_semantic_SHA": "b792cde61bee15ba6e8fb05ba121bc70ad0192ebfb8df2752d529ad1ac989c6c",
+      "H_fleet_SHA": "975b85136da77e7495c164e77306084f4c76707955ef85363155e180426330f4",
+      "position": 88,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "7a697f98f8592e288b046104d3f34740b4e3383fae45e3a551b21e9642d9dead",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {},
+      "AM_actions": {}
+    },
+    {
+      "id": "UC-B20-B",
+      "method": "NO_AB",
+      "U": 0.5773330699702928,
+      "L": 0.5773330699702925,
+      "signed_gap": 2.220446049250313e-16,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 4.186188247986138,
+      "T_produce": 4.186188247986138,
+      "T_verify": 2.248288500122726,
+      "input_SHA": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 7200,
+      "H_complete": true,
+      "H_semantic_SHA": "b792cde61bee15ba6e8fb05ba121bc70ad0192ebfb8df2752d529ad1ac989c6c",
+      "H_fleet_SHA": "975b85136da77e7495c164e77306084f4c76707955ef85363155e180426330f4",
+      "position": 85,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "493d5312e5ea8d89777c6e6959b4a0dedd9b7418091696e172f7f6ae339d3594",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": true,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "LOGICAL_ONE_INFEASIBLE": 3,
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "split": 3,
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "UC-B20-B",
+      "method": "NO_CR",
+      "U": 0.5773330699702928,
+      "L": 0.5773330699702925,
+      "signed_gap": 2.220446049250313e-16,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 4.917749513173476,
+      "T_produce": 4.917749513173476,
+      "T_verify": 2.2885682000778615,
+      "input_SHA": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 7200,
+      "H_complete": true,
+      "H_semantic_SHA": "b792cde61bee15ba6e8fb05ba121bc70ad0192ebfb8df2752d529ad1ac989c6c",
+      "H_fleet_SHA": "975b85136da77e7495c164e77306084f4c76707955ef85363155e180426330f4",
+      "position": 86,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "f0aedd3db3ffda347b0e2c9219f448eaef6b6c890df3c99272857f817e8a93bf",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": true,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "LOGICAL_ONE_INFEASIBLE": 3,
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "split": 3,
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "UC-B20-B",
+      "method": "NO_CG",
+      "U": 0.5773330699702928,
+      "L": 0.5773330699702925,
+      "signed_gap": 2.220446049250313e-16,
+      "certificate": true,
+      "performance_eligible": true,
+      "T_cert": 3.3491218658164144,
+      "T_produce": 3.3491218658164144,
+      "T_verify": 1.7032509001437575,
+      "input_SHA": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 7200,
+      "H_complete": true,
+      "H_semantic_SHA": "b792cde61bee15ba6e8fb05ba121bc70ad0192ebfb8df2752d529ad1ac989c6c",
+      "H_fleet_SHA": "975b85136da77e7495c164e77306084f4c76707955ef85363155e180426330f4",
+      "position": 87,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "128edc0f0b415f416c44b11227dd37680dda422bb85485f7ee93372292605e61",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": true,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "LOGICAL_ONE_INFEASIBLE": 3,
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "split": 3,
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-20-S",
+      "method": "S2",
+      "U": 0.7168065462777502,
+      "L": 0.7053557934942464,
+      "signed_gap": 0.011450752783503826,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 1172.1900049846154,
+      "T_verify": 61.143827999942005,
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 5400,
+      "H_complete": true,
+      "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6",
+      "H_fleet_SHA": "7cf75862eb2b9a81fdd8179011c7c5af8ec6d1bb859629cc96116b16494b2741",
+      "position": 12,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "3d085aa226cf896760de54a663c1dfbf2d752a2375f4aad978544b0a86c98ddf",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-20-S",
+      "method": "S2R",
+      "U": 0.7168065462777502,
+      "L": 0.7064051401819257,
+      "signed_gap": 0.010401406095824517,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 1172.2240666267462,
+      "T_verify": 61.89190729986876,
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 5400,
+      "H_complete": true,
+      "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6",
+      "H_fleet_SHA": "7cf75862eb2b9a81fdd8179011c7c5af8ec6d1bb859629cc96116b16494b2741",
+      "position": 91,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "741e14e167daeafc32be4673fb18c87e1d303c244a767af5c4c043717b19aa53",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {},
+      "AM_actions": {}
+    },
+    {
+      "id": "K-20-S",
+      "method": "NO_AB",
+      "U": 0.7168065462777502,
+      "L": 0.7041277559892903,
+      "signed_gap": 0.012678790288459862,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 1172.1212213840336,
+      "T_verify": 41.73579439986497,
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 5400,
+      "H_complete": true,
+      "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6",
+      "H_fleet_SHA": "7cf75862eb2b9a81fdd8179011c7c5af8ec6d1bb859629cc96116b16494b2741",
+      "position": 92,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "6c668b2dceff6c4b280489975151d9ac67fb62adcac9e04fdf607d8041a416ff",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": true,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-20-S",
+      "method": "NO_CR",
+      "U": 0.7168065462777502,
+      "L": 0.7034438462201227,
+      "signed_gap": 0.013362700057627519,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 1171.9135071802884,
+      "T_verify": 36.67447500000708,
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 5400,
+      "H_complete": true,
+      "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6",
+      "H_fleet_SHA": "7cf75862eb2b9a81fdd8179011c7c5af8ec6d1bb859629cc96116b16494b2741",
+      "position": 89,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "154376b54625a7a6cfa9d8fdaf28ff348ad2f49f75a966c99155f5f837619ee5",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": true,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-20-S",
+      "method": "NO_CG",
+      "U": 0.7168065462777502,
+      "L": 0.7052959899997195,
+      "signed_gap": 0.01151055627803066,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 1171.955286903074,
+      "T_verify": 43.49981810012832,
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 1200,
+      "seed": 0,
+      "T_seconds": 5400,
+      "H_complete": true,
+      "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6",
+      "H_fleet_SHA": "7cf75862eb2b9a81fdd8179011c7c5af8ec6d1bb859629cc96116b16494b2741",
+      "position": 90,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "22bc9f6da8d875202f6e1b27a476a618100b829491a780cf8f4304c9bbd7dd1f",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": true,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_SCORE_GATE": 1,
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "native-target": 1,
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-35-U",
+      "method": "S2",
+      "U": 0.6928543586313136,
+      "L": 0.565765681464995,
+      "signed_gap": 0.12708867716631866,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 2371.151857807068,
+      "T_verify": 3.80004969984293,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 2400,
+      "seed": 0,
+      "T_seconds": 10800,
+      "H_complete": true,
+      "H_semantic_SHA": "2959cced1252671e53485880b2eff56c5f7da6cf19f7c74f9148a531c1efbcf3",
+      "H_fleet_SHA": "98e7d86e11116f888c72cf7deb7164be2a376609d58c4c6b99f29e7d45013e35",
+      "position": 14,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "4e0e15564558bdd426cccb85c5593b9a68615985b32a4f9f92f41acdb53044f4",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-35-U",
+      "method": "S2R",
+      "U": 0.6928543586313136,
+      "L": 0.5661057354376344,
+      "signed_gap": 0.1267486231936792,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 2370.993731437018,
+      "T_verify": 6.527973500080407,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 2400,
+      "seed": 0,
+      "T_seconds": 10800,
+      "H_complete": true,
+      "H_semantic_SHA": "2959cced1252671e53485880b2eff56c5f7da6cf19f7c74f9148a531c1efbcf3",
+      "H_fleet_SHA": "98e7d86e11116f888c72cf7deb7164be2a376609d58c4c6b99f29e7d45013e35",
+      "position": 94,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "65caf6a710645d60fd734914696552bf042ba7fa7976d4e4d55abcf272c8c415",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {},
+      "AM_actions": {}
+    },
+    {
+      "id": "K-35-U",
+      "method": "NO_AB",
+      "U": 0.6546388773802415,
+      "L": 0.5643549517781669,
+      "signed_gap": 0.09028392560207466,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 2372.378604715457,
+      "T_verify": 3.7916156998835504,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 2400,
+      "seed": 0,
+      "T_seconds": 10800,
+      "H_complete": true,
+      "H_semantic_SHA": "2959cced1252671e53485880b2eff56c5f7da6cf19f7c74f9148a531c1efbcf3",
+      "H_fleet_SHA": "98e7d86e11116f888c72cf7deb7164be2a376609d58c4c6b99f29e7d45013e35",
+      "position": 95,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "6532a027e9fcff7c0114186bbcfbc4b032f0b7eb9bb9d746ee8dc06e9e7183f4",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": true,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-35-U",
+      "method": "NO_CR",
+      "U": 0.6897628681632767,
+      "L": 0.5369961724289694,
+      "signed_gap": 0.15276669573430735,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 2370.9697852777317,
+      "T_verify": 3.562907300191,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 2400,
+      "seed": 0,
+      "T_seconds": 10800,
+      "H_complete": true,
+      "H_semantic_SHA": "2959cced1252671e53485880b2eff56c5f7da6cf19f7c74f9148a531c1efbcf3",
+      "H_fleet_SHA": "98e7d86e11116f888c72cf7deb7164be2a376609d58c4c6b99f29e7d45013e35",
+      "position": 96,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "c0b1d6f37d9a6e42db09024b4a5d898e2fb061b2fc84740ae9e9b073ff37c889",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": true,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "exact-close": 1
+      }
+    },
+    {
+      "id": "K-35-U",
+      "method": "NO_CG",
+      "U": 0.6662619195893547,
+      "L": 0.5509797701128951,
+      "signed_gap": 0.11528214947645954,
+      "certificate": false,
+      "performance_eligible": true,
+      "T_cert": null,
+      "T_produce": 2370.9783108080737,
+      "T_verify": 2.6383525000419468,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 2400,
+      "seed": 0,
+      "T_seconds": 10800,
+      "H_complete": true,
+      "H_semantic_SHA": "2959cced1252671e53485880b2eff56c5f7da6cf19f7c74f9148a531c1efbcf3",
+      "H_fleet_SHA": "98e7d86e11116f888c72cf7deb7164be2a376609d58c4c6b99f29e7d45013e35",
+      "position": 93,
+      "lambda_value": 0.15,
+      "endpoint_SHA": "90c7503ed85548355cf2c48cb1e111643f9bd32446fceeaf53ff87160bd0a0ac",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": true,
+        "loaded_after_presets": true
+      },
+      "AM_classes": {
+        "FINITE_TERMINAL_NO_STRICT": 1
+      },
+      "AM_actions": {
+        "exact-close": 1
+      }
+    }
+  ],
+  "eligible": 20,
+  "own_certificates": 10,
+  "own_open": 10,
+  "K35_pattern": "Each of AB/CR/CG deletion has better verified own U and weaker qualified final L than full; legal root-only has same U and higher final L. All5 open.",
+  "root_LP_model_cost_complete_attribution_and_Seed1_pending": true,
+  "budget": {
+    "G1_seconds": 106448.18789390032,
+    "remaining_G1_seconds": 109551.81210609968,
+    "by_category": {
+      "native": 106448.18789390032,
+      "diagnostic": 0.0
+    },
+    "limits": {
+      "native": 216000.0,
+      "diagnostic": 216000.0
+    },
+    "category_remaining": {
+      "native": 109551.81210609968,
+      "diagnostic": 216000.0
+    },
+    "separately_reported_seconds": 679.9771204001736,
+    "unclosed": [
+      {
+        "label": "arm_097",
+        "kind": "native",
+        "reservation": 600.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\fees\\arm_097\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-10-26T21:18:57.895601+00:00",
+  "kind": "build",
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\g++.exe",
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-DEXACT_EBRP_ENABLE_GUROBI=1",
+    "-IE:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\include",
+    "-IE:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts",
+    "-ID:/gurobi1302/win64/include",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round137_export.cpp",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round133\\NativeEvidenceJournal.o",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round133\\ControllingLeafScheduler.o",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\GurobiBaseline.o",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\PaperExternalGiniTree.o",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\IntervalRowFactory.o",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\CplexBaseline.o",
+    "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\build\\research\\round120\\libexact_ebrp_core.a",
+    "-lkernel32",
+    "-luser32",
+    "-lgdi32",
+    "-lwinspool",
+    "-lshell32",
+    "-lole32",
+    "-loleaut32",
+    "-luuid",
+    "-lcomdlg32",
+    "-ladvapi32",
+    "-o",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\Round137Export.exe"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current",
+  "timeout_seconds": 120.0,
+  "reservation_seconds": 120.0,
+  "budget_before": {
+    "G1_seconds": 0.0,
+    "remaining_G1_seconds": 216000.0,
+    "by_category": {
+      "native": 0.0,
+      "diagnostic": 0.0
+    },
+    "limits": {
+      "native": 216000.0,
+      "diagnostic": 216000.0
+    },
+    "category_remaining": {
+      "native": 216000.0,
+      "diagnostic": 216000.0
+    },
+    "separately_reported_seconds": 61.57068829983473,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "parent_pid": 75636,
+  "parent_birth": {
+    "creation_filetime": 134375231311706574,
+    "creation_unix": 1793049531.170658
+  }
+}

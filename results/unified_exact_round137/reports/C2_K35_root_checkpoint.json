@@ -1,0 +1,115 @@
+{
+  "UTC": "2026-10-28T01:58:45.957888+00:00",
+  "scope": "Sealed K35 full versus legal post-R130 root-only endpoint comparison; no audit/LP/root-point parsing.",
+  "rows": [
+    {
+      "position": 14,
+      "method": "S2",
+      "U": 0.6928543586313136,
+      "L": 0.565765681464995,
+      "T_produce": 2371.151857807068,
+      "T_verify": 3.80004969984293,
+      "T_cert": null,
+      "certificate": false,
+      "performance_eligible": true,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 2400,
+      "seed": 0,
+      "T": 10800,
+      "H_complete": true,
+      "H_semantic_SHA": "2959cced1252671e53485880b2eff56c5f7da6cf19f7c74f9148a531c1efbcf3",
+      "H_fleet_SHA": "98e7d86e11116f888c72cf7deb7164be2a376609d58c4c6b99f29e7d45013e35",
+      "endpoint_SHA": "4e0e15564558bdd426cccb85c5593b9a68615985b32a4f9f92f41acdb53044f4",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "launch_mode": "ms2"
+    },
+    {
+      "position": 94,
+      "method": "S2R",
+      "U": 0.6928543586313136,
+      "L": 0.5661057354376344,
+      "T_produce": 2370.993731437018,
+      "T_verify": 6.527973500080407,
+      "T_cert": null,
+      "certificate": false,
+      "performance_eligible": true,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "cap_seconds": 2400,
+      "seed": 0,
+      "T": 10800,
+      "H_complete": true,
+      "H_semantic_SHA": "2959cced1252671e53485880b2eff56c5f7da6cf19f7c74f9148a531c1efbcf3",
+      "H_fleet_SHA": "98e7d86e11116f888c72cf7deb7164be2a376609d58c4c6b99f29e7d45013e35",
+      "endpoint_SHA": "65caf6a710645d60fd734914696552bf042ba7fa7976d4e4d55abcf272c8c415",
+      "parameters": {
+        "split_threshold": 0.08,
+        "delete_ab": false,
+        "delete_cr": false,
+        "delete_cg": false,
+        "loaded_after_presets": true
+      },
+      "launch_mode": "s2-root"
+    }
+  ],
+  "root_final_L_minus_full": 0.0003400539726394758,
+  "same_verified_U": true,
+  "both_open": true,
+  "interpretation": "Root-only has the higher final qualified lower endpoint at the same verified U; no certificate-time or initial root-LP attribution follows.",
+  "active": {
+    "UTC": "2026-10-28T01:56:19.684393+00:00",
+    "position": 95,
+    "stage": "C2",
+    "arm_id": "R137_095_K-35-U_S0_NO_AB",
+    "fee_label": "arm_095"
+  },
+  "active_actual_process": {
+    "pid": 55620,
+    "same_process_alive": true,
+    "recorded_creation_filetime": 134376261797193392,
+    "actual": {
+      "creation_filetime": 134376261797193392,
+      "creation_unix": 1793152579.7193394
+    },
+    "command": [
+      "D:\\msys64\\ucrt64\\bin\\python.exe",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round137_campaign.py",
+      "arm",
+      "95",
+      "arm_095"
+    ]
+  },
+  "budget": {
+    "G1_seconds": 101704.7657059005,
+    "remaining_G1_seconds": 114295.2342940995,
+    "by_category": {
+      "native": 101704.7657059005,
+      "diagnostic": 0.0
+    },
+    "limits": {
+      "native": 216000.0,
+      "diagnostic": 216000.0
+    },
+    "category_remaining": {
+      "native": 114295.2342940995,
+      "diagnostic": 216000.0
+    },
+    "separately_reported_seconds": 672.4838346000761,
+    "unclosed": [
+      {
+        "label": "arm_095",
+        "kind": "native",
+        "reservation": 2400.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\fees\\arm_095\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  }
+}

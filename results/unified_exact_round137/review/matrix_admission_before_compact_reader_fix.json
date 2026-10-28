@@ -1,0 +1,44 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "dabaa61df5ceff7bb3fa8adc0e315538e650d6cb4ba1abd7407ecb4e003af0ba",
+  "UTC": "2026-10-26T21:25:31.671950+00:00",
+  "reviewer": "/root/independent_review",
+  "scope": "Independent current-source, frozen-input/argv and saved-matrix checks before native performance; no Optimize or compilation",
+  "source_commit": "779713ad9a0b01edc538ecb64df9438739127be3",
+  "source_snapshot": {
+    "production_sources": 219,
+    "frozen_helpers": 93,
+    "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+    "candidate_manifest_SHA": "77f1a9955a7d59fc4870374b6bfdc86889b6e47fe39c457510095c2c03b06a8e"
+  },
+  "evidence_SHA": "5a0a8ccb5fd20ca255cbe3b64291139f9e41ce8b1404c54ec766c267841eb3a2",
+  "report_SHA": "e263520a61b31d277903b310f128f6feb58c18b01bc7d005730382ceb2649ddf",
+  "checks": {
+    "all_120_launch_identity_input_and_reference_bindings": true,
+    "actual_P_PS_executable_SHA_override": true,
+    "actual_post_preset_first_class_AM_field": true,
+    "s2_root_accepted_inclusive_workflow": true,
+    "pair_only_and_single_group_deletions": true,
+    "default_off_R135_matrix_equality": true,
+    "actual_reader_A_B_presence_and_absence": true,
+    "serialized_shortage_and_rho_floors": true,
+    "paired_T_only_difference": true,
+    "real_shared_baselines": true,
+    "stage_counts_and_60h_budget": true,
+    "source_PE_DLL_helper_hashes": true,
+    "no_native_performance_yet": true,
+    "B3_floor_scales_with_actual_rho": true,
+    "all_120_argv_unchanged_by_floor_metadata_correction": true
+  },
+  "findings": [
+    "Initial wrong A/B guard corrected before native and retained; final emission guard independently checked",
+    "MR/MG not selected; independent group controls retain ms2 pair-only",
+    "Pre-closeout actual AM/deletion readback check and SHA saved before qualification closes",
+    "Native qualification and final result/manuscript review remain required",
+    "Implementer corrected B3 copied rho1 floor before any run; reviewer independently verified12 values and all120 unchanged argv; prior provisional acceptance superseded"
+  ],
+  "Optimize": 0,
+  "compilation": 0,
+  "commercial_native_loads": 0,
+  "supersedes": "review/matrix_admission_before_weight_floor_correction.json"
+}

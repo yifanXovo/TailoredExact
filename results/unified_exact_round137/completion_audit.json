@@ -1,0 +1,155 @@
+{
+  "schema": "round137-A-through-H-completion-audit-v1",
+  "recorded_UTC": "2026-10-28T12:27:54.554973+00:00",
+  "status": "PASS_USER_A_THROUGH_H_WITH_DISCLOSED_BOUNDED_PUBLIC_CHECK",
+  "fixed_science_commit": "e735c3447eb1443713c700942d873de1783a4a26",
+  "scientific_and_document_work_complete": true,
+  "public_finite_check_satisfied_with_disclosed_G2_H_alternative": true,
+  "public_full_semantic_complete": false,
+  "original_public_driver_passed": false,
+  "sections": {
+    "A": {
+      "status": "SATISFIED",
+      "evidence": [
+        "initialization.json",
+        "candidate_manifest.json",
+        "delivery/immutable_delivery_integrity.json"
+      ]
+    },
+    "B": {
+      "status": "SATISFIED",
+      "positions": 72,
+      "base_inputs": 16,
+      "physical_configurations": 20,
+      "objective_configurations": 24,
+      "evidence": [
+        "matrix_frozen.json",
+        "reports/arms.csv",
+        "reports/pairs.csv",
+        "final_report.md"
+      ]
+    },
+    "C": {
+      "status": "SATISFIED",
+      "AM_extra_positions": 8,
+      "mechanism_extra_positions": 16,
+      "evidence": [
+        "final_report.md",
+        "supplement.md",
+        "review/final_science_review.md"
+      ]
+    },
+    "D": {
+      "status": "SATISFIED",
+      "preselected_seed1_positions": 24,
+      "two_seeds_are_not_a_distribution": true,
+      "evidence": [
+        "reports/arms.csv",
+        "supplement.md"
+      ]
+    },
+    "E": {
+      "status": "SATISFIED",
+      "decision": "RETAIN_ACCEPTED_GI_TBC",
+      "future_priorities": 3,
+      "evidence": [
+        "candidate_decision.json",
+        "final_report.md"
+      ]
+    },
+    "F": {
+      "status": "SATISFIED",
+      "PDF_pages": 46,
+      "PDF_SHA256": "fb9f6b706145d7fbe8f6183672ecb4be6179eb44dbb3098d9647ade25ef9c29b",
+      "actual_visual_complete": true,
+      "author_fact_groups_pending_nonblocking": 3,
+      "evidence": [
+        "paper_body.md",
+        "model_and_algorithm_appendices.md",
+        "supplement.md",
+        "references.bib",
+        "review/pdf_render_receipt.json",
+        "review/final_document_review.md"
+      ]
+    },
+    "G": {
+      "status": "SATISFIED",
+      "native_positions": 120,
+      "G1_seconds": 118955.40056290105,
+      "limit_seconds": 216000,
+      "remaining_seconds": 97044.59943709895,
+      "nested_costs_not_readded": true,
+      "evidence": [
+        "resource_accounting.json",
+        "ordinary_operations.json",
+        "review/final_science_review.md"
+      ]
+    },
+    "H": {
+      "status": "SATISFIED_FINITE_PUBLIC_BYTE_RECOVERY_PLUS_LOCAL_FULL_SEMANTIC_ALTERNATIVE",
+      "public_transport_integrity_complete": true,
+      "local_full_semantic_complete": true,
+      "public_full_semantic_complete": false,
+      "no_native_replay": true,
+      "PR": "https://github.com/yifanXovo/TailoredExact/pull/199",
+      "draft": true,
+      "base": "main",
+      "merged": false,
+      "cleanup_removed_files": 46,
+      "cleanup_logical_bytes": 8922383,
+      "evidence": [
+        "delivery/bounded_public_recovery_receipt.json",
+        "delivery/public_recovery_closeout_review.md",
+        "delivery/cleanup_receipt.json",
+        "delivery/pr_pre_cleanup_readback.json",
+        "remote_readback.json"
+      ],
+      "actual_published_delivery_head": "7596430f40f2396aa75bd8fc45455f7353b8fa8c",
+      "actual_PR_body_updated_and_read_back": true,
+      "actual_key_delivery_files_read_back": 7
+    }
+  },
+  "protected_original_unchanged": true,
+  "frozen_814_delivered_files_unchanged": true,
+  "remaining_stronger_check": "Extra full public-root semantic replay incomplete at finite I/O/deadline bound; no full-public-semantic PASS claimed. User G2/H permits the disclosed two-part alternative.",
+  "forbidden_actions_performed": {
+    "merge": false,
+    "force_push": false,
+    "old_round_deletion": false,
+    "email_or_submission": false
+  },
+  "final_publication_readback_required_after_closing_push": true,
+  "evidence_SHA256": {
+    "delivery/bounded_public_recovery_receipt.json": "0ff0633d78bf5d7a07dc3a2629be4206397e103cb69fab7494c87a200b84436d",
+    "delivery/public_recovery_closeout_review.md": "ef8c9d81450915f9807428cae06ced53629503213fbf2560ce6a7820145eed55",
+    "delivery/cleanup_receipt.json": "403a468e3025bb68d7b76500c8ac73645c3fcfc28518cf8ece230d3af3ef909c",
+    "delivery/immutable_delivery_integrity.json": "e6103b2f11bccc967af951b0ee718e203bf97273628525ec2520a3a3a6fa9067",
+    "review/final_science_review.md": "d90064f778e5152ed849af1854c4a550b6593631f79a7caeaf4aabe6a9e83fe2",
+    "review/final_document_review.md": "f28f917ef02d745c3d422a392e035f1b41b5dd5e86f729f42be4f29c77060c32",
+    "review/local_preflight.json": "55f01a3051fe11d610e3666fb28bf9c154a2a62b4ec1434795c57980679d351a",
+    "review/pdf_render_receipt.json": "51d22658aeb2993ba8fd85c23f86eb51b70166e38745d7090cfa92174194ab50",
+    "resource_accounting.json": "3db88721fd1a6d6944f498284c11e91b576f6b422eb7bb1dfee2155c2372c2d3",
+    "delivery/final_delivery_review.md": "a2d9a42918be3db0fd17e35ab0a405adbd03058286b34019f0d2a1ac68b6cd9a",
+    "remote_readback.json": "457ab280a7b80d310506e58375d1c432a8a27cf80783daa9a58d8150007540ce",
+    "ordinary_operations.json": "a0913f40f5b818a3ffab2077180010cf95d429a241af9cb6fa0287fb350942fd"
+  },
+  "independent_final_delivery_review": {
+    "path": "delivery/final_delivery_review.md",
+    "SHA256": "a2d9a42918be3db0fd17e35ab0a405adbd03058286b34019f0d2a1ac68b6cd9a",
+    "reviewed_records_and_actual_cleanup": "PASS",
+    "normal_closing_push_body_update_and_head_readback": "COMPLETED_AT_DATED_7596430f40f2396aa75bd8fc45455f7353b8fa8c_CHECKPOINT",
+    "reviewed_checkpoint_audit_SHA": "dd7ef6a135b5453d9bad91ae2b34d37562021ace77191dd66027f51504d8e568"
+  },
+  "final_receipt_publication_note": "All required science, manuscript, scoped recovery evidence, actual cleanup, independent reviews and updated Draft PR have been published and actually read back at7596430f40f2396aa75bd8fc45455f7353b8fa8c. The next normal commit publishes this completed audit/readback/ledger only; actual resulting head must be read back externally before goal completion.",
+  "actual_published_readback": {
+    "path": "remote_readback.json",
+    "SHA256": "457ab280a7b80d310506e58375d1c432a8a27cf80783daa9a58d8150007540ce",
+    "PR_head": "7596430f40f2396aa75bd8fc45455f7353b8fa8c",
+    "Draft": true,
+    "open": true,
+    "base": "main",
+    "unmerged": true,
+    "key_files": 7,
+    "attached": true
+  }
+}

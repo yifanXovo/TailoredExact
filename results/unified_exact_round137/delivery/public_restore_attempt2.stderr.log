@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\paper-current\results\unified_exact_round137\delivery\round137_public_resume_io.py", line 26, in <module>
+    exec(compile(text.replace(before,after),str(published)+'::metadata_io_launch','exec'),namespace)
+  File "E:\codes\ExactEBRP-work\restore\round137-public-e735c3447eb1\scripts\round137_public_restore.py::metadata_io_launch", line 163, in <module>
+  File "E:\codes\ExactEBRP-work\restore\round137-public-e735c3447eb1\scripts\round137_public_restore.py::metadata_io_launch", line 141, in run
+  File "D:\msys64\ucrt64\lib\python3.12\subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\msys64\ucrt64\lib\python3.12\subprocess.py", line 1630, in _communicate
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['D:\\msys64\\ucrt64\\bin\\python.exe', 'E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\delivery\\round137_public_semantic_io.py', '--root', 'E:\\codes\\ExactEBRP-work\\restore\\round137-public-e735c3447eb1', '--receipt', 'E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\public_restore_receipt.semantic_attempt2.json']' timed out after 2864.074728500098 seconds

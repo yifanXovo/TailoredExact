@@ -1,0 +1,364 @@
+{
+  "schema": "citibike443-station-landscape-v1",
+  "dataset_family": "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+  "classification": "generated_untested_paper_candidate",
+  "generator_version": "citibike443-regional-v1.0.0",
+  "landscape_id": "r137_N-B15-B_balanced",
+  "selection_id": "r137_N-B15-B",
+  "V": 15,
+  "geographic_regime": "compact",
+  "replicate": 1,
+  "inventory_regime": "balanced",
+  "local_imbalance_level": "moderate",
+  "seed": 2141562742,
+  "seed_derivation_material": "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced",
+  "source_station_row_indices": [
+    297,
+    575,
+    538,
+    419,
+    743,
+    490,
+    817,
+    859,
+    565,
+    836,
+    207,
+    746,
+    803,
+    487,
+    663
+  ],
+  "source_hashes": {
+    "public_table_sha256": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8"
+  },
+  "depot": {
+    "artificial": true,
+    "coordinate_utm18n_meters": [
+      326179.08,
+      4313442.069
+    ],
+    "capacity_placeholder": 100000,
+    "initial_placeholder": 50000,
+    "target_placeholder": 0
+  },
+  "capacities": [
+    24,
+    16,
+    8,
+    15,
+    19,
+    15,
+    19,
+    15,
+    20,
+    15,
+    15,
+    19,
+    19,
+    15,
+    19
+  ],
+  "initial": [
+    9,
+    11,
+    5,
+    10,
+    12,
+    11,
+    13,
+    5,
+    7,
+    5,
+    4,
+    12,
+    7,
+    11,
+    6
+  ],
+  "target": [
+    13,
+    8,
+    4,
+    7,
+    9,
+    8,
+    9,
+    8,
+    11,
+    8,
+    7,
+    9,
+    10,
+    8,
+    9
+  ],
+  "weights": [
+    1.0,
+    0.378698,
+    0.1,
+    0.289941,
+    0.47929,
+    0.378698,
+    0.47929,
+    0.378698,
+    0.715976,
+    0.378698,
+    0.289941,
+    0.47929,
+    0.591716,
+    0.378698,
+    0.47929
+  ],
+  "min_ratio": [
+    0.3167,
+    0.3,
+    0.3,
+    0.2867,
+    0.2895,
+    0.3133,
+    0.2895,
+    0.3133,
+    0.32,
+    0.3133,
+    0.2867,
+    0.2895,
+    0.3105,
+    0.3133,
+    0.2895
+  ],
+  "points_utm18n_meters": [
+    [
+      326457.18,
+      4313398.152
+    ],
+    [
+      326783.325,
+      4313594.299
+    ],
+    [
+      326124.417,
+      4312945.553
+    ],
+    [
+      326511.377,
+      4313962.589
+    ],
+    [
+      325581.135,
+      4313331.626
+    ],
+    [
+      327391.235,
+      4312926.639
+    ],
+    [
+      325519.485,
+      4314029.647
+    ],
+    [
+      327069.169,
+      4314424.923
+    ],
+    [
+      325811.212,
+      4314520.324
+    ],
+    [
+      327524.72,
+      4312400.626
+    ],
+    [
+      324986.163,
+      4313895.499
+    ],
+    [
+      326900.588,
+      4311891.629
+    ],
+    [
+      324814.616,
+      4312945.054
+    ],
+    [
+      326123.081,
+      4315084.74
+    ],
+    [
+      325088.501,
+      4312279.742
+    ]
+  ],
+  "statistics": {
+    "geographic_diameter_m": 3286.4076121767307,
+    "mean_pairwise_station_distance_m": 1623.2999721347242,
+    "maximum_pairwise_station_distance_m": 3286.4076121767307,
+    "mean_depot_distance_m": 1111.5407939095348,
+    "maximum_depot_distance_m": 1710.098823947093,
+    "bounding_box_width_m": 2710.103999999992,
+    "bounding_box_height_m": 3193.111000000499,
+    "capacity_minimum": 8,
+    "capacity_maximum": 24,
+    "capacity_mean": 16.866666666666667,
+    "capacity_median": 16,
+    "total_capacity": 253,
+    "total_initial_inventory": 128,
+    "total_target_inventory": 128,
+    "station_inventory_minus_target": 0,
+    "absolute_total_shortage_or_surplus": 0,
+    "local_l1_imbalance": 46,
+    "maximum_local_absolute_imbalance": 4,
+    "surplus_station_count": 8,
+    "deficit_station_count": 7,
+    "balanced_station_count": 0,
+    "weight_minimum": 0.1,
+    "weight_maximum": 1.0,
+    "weight_mean": 0.45321493333333335,
+    "min_ratio_minimum": 0.2867,
+    "min_ratio_maximum": 0.32
+  },
+  "generation_trace": {
+    "initial_before_total_correction": [
+      9,
+      11,
+      5,
+      10,
+      12,
+      11,
+      12,
+      5,
+      7,
+      5,
+      4,
+      12,
+      7,
+      11,
+      6
+    ],
+    "initial_after_total_correction": [
+      9,
+      11,
+      5,
+      10,
+      12,
+      11,
+      13,
+      5,
+      7,
+      5,
+      4,
+      12,
+      7,
+      11,
+      6
+    ],
+    "initial_after_sign_repair": [
+      9,
+      11,
+      5,
+      10,
+      12,
+      11,
+      13,
+      5,
+      7,
+      5,
+      4,
+      12,
+      7,
+      11,
+      6
+    ],
+    "desired_total": 128,
+    "delta_amount": 15,
+    "local_scale": 0.18,
+    "inventory_hash_order": [
+      6,
+      8,
+      4,
+      10,
+      13,
+      9,
+      1,
+      12,
+      11,
+      14,
+      2,
+      0,
+      3,
+      7,
+      5
+    ],
+    "sign_repair_hash_order": [
+      1,
+      10,
+      3,
+      7,
+      4,
+      9,
+      8,
+      11,
+      5,
+      0,
+      12,
+      14,
+      6,
+      2,
+      13
+    ],
+    "anchor_material": "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|geographic-anchor-set|V=15",
+    "selection_material": "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|selection|V=15|geography=compact|replicate=1",
+    "inventory_material": "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced",
+    "target_materials": [
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=297",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=575",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=538",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=419",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=743",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=490",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=817",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=859",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=565",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=836",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=207",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=746",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=803",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=487",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|target-profile|r137_N-B15-B|row=663"
+    ],
+    "inventory_order_materials": [
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|0",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|1",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|2",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|3",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|4",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|5",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|6",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|7",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|8",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|9",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|10",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|11",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|12",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|13",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|14"
+    ],
+    "sign_repair_order_materials": [
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|0",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|1",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|2",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|3",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|4",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|5",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|6",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|7",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|8",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|9",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|10",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|11",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|12",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|13",
+      "round137-gi-tbc-stage-consolidation-v1|source=CABI|source_sha256=d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8|inventory|r137_N-B15-B|balanced|sign-repair|14"
+    ]
+  }
+}

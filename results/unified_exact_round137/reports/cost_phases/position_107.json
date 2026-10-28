@@ -1,0 +1,48 @@
+{
+  "H_search_phase": {
+    "start_event": "hga_start",
+    "end_event": "decoded_descent_complete",
+    "label_key": "label",
+    "starts": [
+      {
+        "sequence": "4",
+        "process_seconds": "0.057837800000000002",
+        "event": "hga_start",
+        "status": "start",
+        "nominal_deadline_remaining_seconds": "2399.9421625999998",
+        "work_deadline_remaining_seconds": "2369.9421625",
+        "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+      }
+    ],
+    "ends": [
+      {
+        "sequence": "5",
+        "process_seconds": "0.61198540000000001",
+        "event": "decoded_descent_complete",
+        "status": "complete",
+        "nominal_deadline_remaining_seconds": "2399.388015",
+        "work_deadline_remaining_seconds": "2369.3880149000001",
+        "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=25"
+      }
+    ],
+    "span_seconds": 0.5541476,
+    "status": "MATCHED_SINGLE_RECORDED_SPAN",
+    "complete_cost_decomposition": false,
+    "matched_label": "primary_hga",
+    "start_status": "start",
+    "end_status": "complete"
+  },
+  "first_canonical_model_phase": {
+    "start_event": "root_canonical_model_construction_start",
+    "end_event": "root_canonical_model_construction_complete",
+    "label_key": "leaf",
+    "starts": [],
+    "ends": [],
+    "span_seconds": null,
+    "status": "NOT_RECORDED",
+    "complete_cost_decomposition": false
+  },
+  "phase_ledger_SHA": "3682366c816959f3fb9418ade1e03656a1db5f9bcbd63ac6568eca2366c0ab4e",
+  "nested_diagnostic_not_extra_budget": true,
+  "H_complete_is_a_separate_qualification_field": true
+}

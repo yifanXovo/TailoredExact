@@ -1,0 +1,15 @@
+# Bounded public recovery: actual final outcome
+
+Science is fixed at e735c3447eb1443713c700942d873de1783a4a26; the814-file export manifest SHA is fba957ec57d42e1cfbb31704e016d9b3887ca9a2b9c231715a4a1618c7e7c99b. The original scientific bytes, input/source/PE bindings and measured clocks have not changed.
+
+Both anonymous public attempts used one initially empty owned root. All814 declared fixed-commit files and123 archives /1,399,812 members passed the preceding size/SHA and expansion checks. Actual semantic-child starts, exact script/root commands and immutable driver/wrapper hashes establish completion of those byte gates by the reviewed control flow; this is a documented inference, not an invented standalone completed driver receipt. See public_byte_phase_observations.json.
+
+Attempt1 reached its4500-second semantic limit. Attempt2 resumed the same root, reverified downloaded/expanded bytes and used an independently reviewed metadata-admission-only adapter. It ended at2026-10-28T12:06:06.952143Z with subprocess.TimeoutExpired, after its remaining2864.074728500098-second semantic allowance. Total recorded driver time is9000.061082500033 seconds, including scheduler/termination overhead; the9000-second bound was never reset or extended. Both failed attempts, state, operation receipts and available logs remain preserved. The original public_restore_receipt.json remains passed=false.
+
+The full public-root semantic replay is therefore INCOMPLETE. There is no claim of a full-public-semantic PASS. The frozen e735 policy records the intended stronger replay; this addendum explicitly amends the delivery acceptance scope, without rewriting that history or any science.
+
+User H asks for one finite public read/recovery check; G2 allows clearly disclosed alternative evidence for a locally uncompleted task. Independently reviewed bounded acceptance combines actual complete anonymous byte recovery with the already completed local strict semantic replay of these same immutable source/data:120 positions,904 comparisons,536 byte-identical and368 equal under the declared neutral offline-timer/dependent-hash normalization. Original producer/certificate clocks and all qualification predicates remain unchanged. See bounded_public_recovery_receipt.json and bounded_recovery_scope_review.md. These are separate location-specific claims.
+
+No Optimize, compilation, commercial native asset loading, historical campaign restoration or healthy solver repetition was used for public recovery. No third recovery or open-ended extension is scheduled. The owned root is retained for diagnosis; a future public full semantic audit is optional follow-up, not a completed result.
+
+The I/O adapter changes complete declared-tree metadata admission only, rejects every reparse/link and the same native suffixes, and matches the original allowed sets on the73-file fixture. It leaves the downloaded checker, physics/model/Start/source/lifecycle/clock/qualification logic intact. Source and independent adapter review remain in this directory.

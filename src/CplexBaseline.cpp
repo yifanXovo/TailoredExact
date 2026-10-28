@@ -3027,7 +3027,7 @@ void writeCompactLp(const Instance& instance,
                 addTerm(perspective_upper, selector, -g_ub);
                 writeConstraint(out, cid, perspective_upper, "<=", 0.0);
             }
-            if (state_service && !vehicle_state_service) {
+            if (state_service && !vehicle_state_service && round137EmitAB()) {
                 writeConstraint(out, cid, movement_reconstruction, "=", 0.0);
                 writeConstraint(out, cid, visit_reconstruction, "=", 1.0);
                 if (linked_direction) writeConstraint(out, cid, direction_reconstruction, "=", 0.0);

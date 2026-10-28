@@ -1,0 +1,44 @@
+{
+  "UTC": "2026-10-28T12:13:13.423998+00:00",
+  "status": "PASS_IMMUTABLE_DELIVERY_AND_PROTECTED_TREE_BYTES",
+  "fixed_science_commit": "e735c3447eb1443713c700942d873de1783a4a26",
+  "export_manifest_SHA256": "fba957ec57d42e1cfbb31704e016d9b3887ca9a2b9c231715a4a1618c7e7c99b",
+  "declared_files_checked": 814,
+  "declared_bytes_checked": 832563246,
+  "current_commit_records": 813,
+  "pinned_dependency_records": 1,
+  "mismatches": [],
+  "production_sources_checked": 219,
+  "execution_helpers_checked": 93,
+  "exact_source_capsule_members_checked": 324,
+  "source_capsule_SHA256": "5d10219120c7f572436391203c507eda1518209c13e9c1d6ceb8c48544f4a6fc",
+  "local_semantic_receipt_SHA256": "55f01a3051fe11d610e3666fb28bf9c154a2a62b4ec1434795c57980679d351a",
+  "local_semantic_matches_frozen_source_publication": true,
+  "protected_original": {
+    "root": "E:\\codes\\ExactEBRP",
+    "HEAD": "8dc274eb34ee6d8a575f0b94b57ef04476efc0f1",
+    "HEAD_unchanged": true,
+    "original_tracked_dirty_SHA256": {
+      "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+      "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+      "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+    },
+    "all_three_unchanged": true,
+    "task_writes": 0
+  },
+  "native_assets_retained_without_load": {
+    "PE": {
+      "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\ExactEBRP.exe",
+      "SHA256": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+      "retained": true,
+      "loaded": false
+    },
+    "DLL": {
+      "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+      "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "retained": true,
+      "loaded": false
+    }
+  },
+  "scope": "Final bounded immutable delivery byte check; no native/replay/rebuild, no historical raw scan"
+}

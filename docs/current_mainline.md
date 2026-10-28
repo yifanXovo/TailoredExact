@@ -1,16 +1,31 @@
-# Current mainline
+# Current mainline and Round137 paper branch
 
-The authoritative current entry is the
-[paper-S2 release and run guide](paper_s2_release.md).
-It identifies S2 / GI-TBC / ms2, the R135 source/PE, AP off, the complete run
-command, evidence versions, current paper and integration status.
+The [GI-TBC release and paper-S2 run guide](paper_s2_release.md) identifies the
+formal method, source/PE/configuration, command, paper and finite evidence.
+The [review packet](paper_review.md) gives a question-led reading order.
 
-Git `main` now includes the paper S2 entry through ordinary merge
-`053b38a1bd66ad918e3c28932ebcd8f786704aeb` in PR #198.
-`E:\codes\ExactEBRP-work\worktrees\paper-current` is on local `main`, tracking
-`origin/main`; the final record commit changes only closeout metadata and
-current-status pointers. The verified code/config snapshot remains
-`paper-s2-round136`. The bare executable retains its ENS-C default.
+The Round137 branch `codex/round137-gi-tbc-consolidation` starts from verified
+main `b2b940c1e517a72e226ec60fc49ff19651737632`. Its English Draft PR targets
+`main` and must remain a Draft; record its actual identity/readback in the
+continuation record. This record does not claim it has merged. The accepted Round136 mainline
+is separately pinned at the
+[fixed main record](https://github.com/yifanXovo/TailoredExact/blob/b2b940c1e517a72e226ec60fc49ff19651737632/docs/current_mainline.md).
+PR #198 and the historical consolidation/cleanup remain completed records.
 
-The previous R55-era K1-AM-SF description is retained unchanged as
-[historical documentation](history/current_mainline_r55.md).
+The promoted `scripts/paper_s2.py` resolves `config/gi_tbc_round137.json`;
+the actual [28-vector entry check](../results/unified_exact_round137/entry_check.json) passed and binds it to the frozen matrix. GI-TBC retains complete
+own H, M-B/VD-P shared states, pair-only support, tau_AM=.08, depth 8 / minimum
+width 1e-4 and AP off. Historical S2/ms2 and paper-S2 remain aliases/entry names;
+the bare executable retains ENS-C. Old `config/paper_s2.json` bytes are preserved.
+
+Use `E:\codes\ExactEBRP-work\worktrees\paper-current`; protect the original
+`E:\codes\ExactEBRP` and user changes. Explicitly inherit both WORKSPACE_POLICY
+conventions: new build/raw/temp/restore assets stay under ExactEBRP-work;
+post-PR cleanup is bounded to completed reconstructible current-round duplicates
+after evidence/public recovery acceptance, retaining unique raw/failures and
+necessary runtime/build dependencies. No old-round deletion is authorized.
+
+The [Round137 continuation record](../results/unified_exact_round137/RESUME.md)
+records actual delivery steps as they occur and the remaining author facts. Prior evidence is pinned
+in the [research index](unified_exact_research_index.md), and the former R55
+description remains [historical](history/current_mainline_r55.md).

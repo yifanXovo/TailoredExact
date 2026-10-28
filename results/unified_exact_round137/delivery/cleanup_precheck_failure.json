@@ -1,0 +1,14 @@
+{
+  "status": "PRECHECK_ABORTED_WITH_ZERO_MUTATIONS_THEN_CORRECTED",
+  "actual_error": "Finite planned byte total mismatch",
+  "cause": "PowerShell Measure-Object on OrderedDictionary entries did not produce the intended per-key byte sum; corrected to an explicit Int64 sum and PSCustomObject records.",
+  "failed_tool_wall_seconds": 0.5335836,
+  "exit_code": 1,
+  "observed_after_aborted_precheck": {
+    "PNGs_present": 46,
+    "accepted_plan_exists": false,
+    "cleanup_receipt_exists": false
+  },
+  "later_actual_action": "See cleanup_receipt.json; full path/ancestor/file SHA prechecks were rerun before the46 finite non-recursive removals",
+  "native": 0
+}
