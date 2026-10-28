@@ -374,13 +374,32 @@
       "separately_reported_not_G1": true,
       "Optimize": 0,
       "receipt": "delivery/cleanup_receipt.json"
+    },
+    {
+      "operation": "closing_delivery_commit1",
+      "start_UTC": "2026-10-28T12:23:56.885285+00:00",
+      "end_UTC": "2026-10-28T12:24:17.658662+00:00",
+      "seconds": 20.772978200111538,
+      "exit_code": 0,
+      "separately_reported_not_G1": true,
+      "Optimize": 0
+    },
+    {
+      "operation": "closing_delivery_push1",
+      "start_UTC": "2026-10-28T12:24:17.705115+00:00",
+      "end_UTC": "2026-10-28T12:24:29.220152+00:00",
+      "seconds": 11.514971600146964,
+      "exit_code": 0,
+      "separately_reported_not_G1": true,
+      "Optimize": 0
     }
   ],
-  "recorded_UTC": "2026-10-28T12:18:37.295770+00:00",
+  "recorded_UTC": "2026-10-28T12:27:54.554973+00:00",
   "native_G1_seconds_unchanged": 118955.40056290105,
   "scope_note": "Ordinary operation clocks, including failed transfers, overlap where processes overlap. Their sum is not elapsed wall time or G1 native computation.",
   "retained_small_metadata_check_failures": [
     "delivery/metadata_check_format_failure.json",
     "delivery/cleanup_precheck_failure.json"
-  ]
+  ],
+  "ledger_snapshot_note": "Includes actual first closing commit/push. The later final receipt-only commit/push remains in external publication_logs to avoid a recursive receipt-commit chain."
 }

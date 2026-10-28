@@ -1,7 +1,7 @@
 {
   "schema": "round137-A-through-H-completion-audit-v1",
-  "recorded_UTC": "2026-10-28T12:19:10.343741+00:00",
-  "status": "READY_FOR_NORMAL_CLOSING_PUBLICATION_AFTER_FINAL_INDEPENDENT_REVIEW",
+  "recorded_UTC": "2026-10-28T12:27:54.554973+00:00",
+  "status": "PASS_USER_A_THROUGH_H_WITH_DISCLOSED_BOUNDED_PUBLIC_CHECK",
   "fixed_science_commit": "e735c3447eb1443713c700942d873de1783a4a26",
   "scientific_and_document_work_complete": true,
   "public_finite_check_satisfied_with_disclosed_G2_H_alternative": true,
@@ -86,7 +86,7 @@
       ]
     },
     "H": {
-      "status": "SATISFIED_ARTIFACTS_AND_DRAFT_PENDING_CLOSING_RECEIPT_PUBLICATION",
+      "status": "SATISFIED_FINITE_PUBLIC_BYTE_RECOVERY_PLUS_LOCAL_FULL_SEMANTIC_ALTERNATIVE",
       "public_transport_integrity_complete": true,
       "local_full_semantic_complete": true,
       "public_full_semantic_complete": false,
@@ -101,8 +101,12 @@
         "delivery/bounded_public_recovery_receipt.json",
         "delivery/public_recovery_closeout_review.md",
         "delivery/cleanup_receipt.json",
-        "delivery/pr_pre_cleanup_readback.json"
-      ]
+        "delivery/pr_pre_cleanup_readback.json",
+        "remote_readback.json"
+      ],
+      "actual_published_delivery_head": "7596430f40f2396aa75bd8fc45455f7353b8fa8c",
+      "actual_PR_body_updated_and_read_back": true,
+      "actual_key_delivery_files_read_back": 7
     }
   },
   "protected_original_unchanged": true,
@@ -124,12 +128,28 @@
     "review/final_document_review.md": "f28f917ef02d745c3d422a392e035f1b41b5dd5e86f729f42be4f29c77060c32",
     "review/local_preflight.json": "55f01a3051fe11d610e3666fb28bf9c154a2a62b4ec1434795c57980679d351a",
     "review/pdf_render_receipt.json": "51d22658aeb2993ba8fd85c23f86eb51b70166e38745d7090cfa92174194ab50",
-    "resource_accounting.json": "3db88721fd1a6d6944f498284c11e91b576f6b422eb7bb1dfee2155c2372c2d3"
+    "resource_accounting.json": "3db88721fd1a6d6944f498284c11e91b576f6b422eb7bb1dfee2155c2372c2d3",
+    "delivery/final_delivery_review.md": "a2d9a42918be3db0fd17e35ab0a405adbd03058286b34019f0d2a1ac68b6cd9a",
+    "remote_readback.json": "457ab280a7b80d310506e58375d1c432a8a27cf80783daa9a58d8150007540ce",
+    "ordinary_operations.json": "a0913f40f5b818a3ffab2077180010cf95d429a241af9cb6fa0287fb350942fd"
   },
   "independent_final_delivery_review": {
     "path": "delivery/final_delivery_review.md",
     "SHA256": "a2d9a42918be3db0fd17e35ab0a405adbd03058286b34019f0d2a1ac68b6cd9a",
     "reviewed_records_and_actual_cleanup": "PASS",
-    "normal_closing_push_body_update_and_head_readback": "PENDING"
+    "normal_closing_push_body_update_and_head_readback": "COMPLETED_AT_DATED_7596430f40f2396aa75bd8fc45455f7353b8fa8c_CHECKPOINT",
+    "reviewed_checkpoint_audit_SHA": "dd7ef6a135b5453d9bad91ae2b34d37562021ace77191dd66027f51504d8e568"
+  },
+  "final_receipt_publication_note": "All required science, manuscript, scoped recovery evidence, actual cleanup, independent reviews and updated Draft PR have been published and actually read back at7596430f40f2396aa75bd8fc45455f7353b8fa8c. The next normal commit publishes this completed audit/readback/ledger only; actual resulting head must be read back externally before goal completion.",
+  "actual_published_readback": {
+    "path": "remote_readback.json",
+    "SHA256": "457ab280a7b80d310506e58375d1c432a8a27cf80783daa9a58d8150007540ce",
+    "PR_head": "7596430f40f2396aa75bd8fc45455f7353b8fa8c",
+    "Draft": true,
+    "open": true,
+    "base": "main",
+    "unmerged": true,
+    "key_files": 7,
+    "attached": true
   }
 }
