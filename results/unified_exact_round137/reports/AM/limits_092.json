@@ -1,0 +1,32 @@
+{
+  "summary": {
+    "status": "RECORDED_GUARD_ROWS_AUDITED",
+    "evaluations": 1,
+    "depth_rejections": 0,
+    "width_rejections": 0,
+    "width_also_would_reject": 0,
+    "unknown": 0,
+    "maximum_depth": 8,
+    "minimum_width": 0.0001,
+    "width_numeric_margin": 1e-12,
+    "source_premise": "Recorded guard rows cover completed eligible decisions and reached ineligible branches; eligible work can stop before its row. Ordinary retained scheduler epochs preserve leaf geometry/depth; source-rejection reset makes this reconstruction unknown. The guard is depth<8 && width>1e-4+1e-12, with short-circuit evaluation.",
+    "only_recorded_rows_audited": true,
+    "missing_row_not_proof_of_no_attempt": true,
+    "source_rejection_reset_guard": false,
+    "no_test_or_rejection_inferred_from_zero_width_proof": true
+  },
+  "observations": [
+    {
+      "parent_id": "L0",
+      "eligible": true,
+      "recorded_reason": "adaptive_mass_no_strict_child_improvement",
+      "depth": 0,
+      "width": 0.7752127578025219,
+      "depth_condition_rejected": false,
+      "width_condition_evaluated": true,
+      "width_condition_rejected": false,
+      "width_would_also_reject": false,
+      "classification": "ELIGIBLE"
+    }
+  ]
+}

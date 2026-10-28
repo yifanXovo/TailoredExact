@@ -1,0 +1,33 @@
+{
+  "UTC": "2026-10-28T06:58:27.614287+00:00",
+  "study_complete": true,
+  "decision": "RETAIN_ACCEPTED_GI_TBC",
+  "source_commit": "779713ad9a0b01edc538ecb64df9438739127be3",
+  "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+  "default_AM": 0.08,
+  "AP": false,
+  "pair_only": true,
+  "new_production_mechanism": false,
+  "complete_positions": 120,
+  "budget": {
+    "G1_seconds": 118955.40056290105,
+    "remaining_G1_seconds": 97044.59943709895,
+    "by_category": {
+      "native": 118955.40056290105,
+      "diagnostic": 0.0
+    },
+    "limits": {
+      "native": 216000.0,
+      "diagnostic": 216000.0
+    },
+    "category_remaining": {
+      "native": 97044.59943709895,
+      "diagnostic": 216000.0
+    },
+    "separately_reported_seconds": 757.3407170001883,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "paper_conclusion": "GI-TBC retains the accepted shared inventory/service representation, pair-only resource strengthening, complete own startup and Gini-interval coverage. On the twelve-input current breadth panel it certifies 9/12, versus P 7/12 and PS 7/12; the independent positive-resource panel certifies4/8, versus P 0/8 and PS 0/8. Substantive comparator reversals, opposing primal/dual endpoints, finite AM/Seed exposure and any open positive-objective 35-station results delimit the conclusion. The bounded conditional mechanism results include reversals of all three K-15-S deletion-time directions in the preselected second Seed; they do not justify per-instance settings, additive speed-up attribution or a new default. We retain tau=.08 and AP off. The next study should target an actual positive-objective bottleneck and the established integer-stock/original-epigraph gap, rather than purchase a generic stability grid or relabel previous negative candidates.",
+  "independent_final_review_and_actual_PDF_QA_separately_required": true
+}

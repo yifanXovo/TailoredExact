@@ -1,12 +1,13 @@
 # Research index
 
 Current algorithm, configuration, commands and paper:
-[paper-S2 release](paper_s2_release.md).
+[GI-TBC release / paper-S2 entry](paper_s2_release.md).
 Current advisor/coauthor reading order and specific author facts:
 [review packet](paper_review.md).
 
 | Evidence version | Purpose and fixed authority |
 |---|---|
+| R137 | **GI-TBC stage consolidation:** 120 registered positions, 16 base inputs / 20 physical / 24 objective configurations; 33.043167 native hours. [Stage report](../results/unified_exact_round137/final_report.md), [maintained manuscript/PDF](../results/unified_exact_round137/manuscript.pdf), [complete tables](../results/unified_exact_round137/reports), [independent review](../results/unified_exact_round137/review/final_science_review.md), [actual entry check](../results/unified_exact_round137/entry_check.json), [finite recovery policy](../results/unified_exact_round137/reproducibility.md) and [delivery/PR status](../results/unified_exact_round137/RESUME.md). Branch from verified main; main integration requires a separate merge. |
 | R135 | Accepted S2 retained; AP research-only/off. [Report](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/final_report.md), [32 arms/16 pairs](https://github.com/yifanXovo/TailoredExact/tree/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/reports), [reproduction policy](https://github.com/yifanXovo/TailoredExact/blob/25800aa6b51bf7607b51e5df14a10a5ca4571889/results/unified_exact_round135/reproducibility.md) |
 | R134 | Final implementation confirmation, 12/14 S2, 9/14 P, 2/4 PS; weight experiment. [Report and tables](https://github.com/yifanXovo/TailoredExact/tree/d3353749e6933e6685c7f0d92d153d0641816bcb/results/unified_exact_round134) |
 | R132 | Twelve-input/two-Seed breadth under its original policy: 17/24 S2, 9/24 P, 4/12 PS. [Original version](https://github.com/yifanXovo/TailoredExact/tree/1ae14721e800d7c601adc1e7e42d5dfa89e48fbb/results/unified_exact_round132) |

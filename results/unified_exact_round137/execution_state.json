@@ -1,0 +1,78 @@
+{
+  "UTC": "2026-10-28T09:02:18.901485+00:00",
+  "state": "SCIENCE_AND_LOCAL_PREFLIGHT_COMPLETE_PREPUBLICATION",
+  "goal_complete": false,
+  "immutable_snapshot_scope": "Final dated prepublication checkpoint; final delivery is completion_audit.json and RESUME.md",
+  "native_campaign_complete": true,
+  "sealed_positions": 120,
+  "performance_eligible_positions": 120,
+  "paired_contrasts": 126,
+  "base_inputs": 16,
+  "physical_configurations": 20,
+  "objective_configurations": 24,
+  "original_driver_exit_code": 0,
+  "native_or_observer_process_required": false,
+  "actual_native_retries": 0,
+  "budget": {
+    "G1_seconds": 118955.40056290105,
+    "remaining_G1_seconds": 97044.59943709895,
+    "by_category": {
+      "native": 118955.40056290105,
+      "diagnostic": 0.0
+    },
+    "limits": {
+      "native": 216000.0,
+      "diagnostic": 216000.0
+    },
+    "category_remaining": {
+      "native": 97044.59943709895,
+      "diagnostic": 216000.0
+    },
+    "separately_reported_seconds": 757.3407170001883,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "decision": "RETAIN_ACCEPTED_GI_TBC",
+  "source_commit": "779713ad9a0b01edc538ecb64df9438739127be3",
+  "current_profile": "config/gi_tbc_round137.json",
+  "actual_entry_check": "entry_check.json",
+  "actual_entry_check_PASS": true,
+  "final_science_review": "review/final_science_review.md",
+  "final_science_review_PASS": true,
+  "PDF_revision": 4,
+  "PDF_SHA": "fb9f6b706145d7fbe8f6183672ecb4be6179eb44dbb3098d9647ade25ef9c29b",
+  "PDF_pages": 46,
+  "PDF_actual_whole_visual_QA_complete": true,
+  "formal_documents_applied": true,
+  "formal_document_independent_review_pending": false,
+  "local_preflight_complete": true,
+  "public_restore_complete": false,
+  "Draft_PR_created": false,
+  "cleanup_complete": false,
+  "past_interim_checkpoints": "infra/execution_state_before_publication.json",
+  "remaining": [
+    "Final document review",
+    "Current-only source/raw carriers",
+    "Local strict pure preflight",
+    "Immutable manifest and normal commit/push",
+    "One anonymous fixed-commit public recovery",
+    "English Draft PR base=main and actual readback",
+    "Bounded current reconstructible cleanup",
+    "Final A-H audit and closing receipt commit"
+  ],
+  "formal_document_independent_review": "review/final_document_review.md",
+  "formal_document_independent_review_PASS": true,
+  "raw_carriers_complete": true,
+  "raw_carriers": 123,
+  "source_capsule_complete": true,
+  "source_capsule_files": 324,
+  "transport_IO_review": "review/carrier_IO_review.md",
+  "transport_IO_review_PASS": true,
+  "local_preflight_seconds": 2820.3790082000196,
+  "public_recovery_limits": {
+    "cumulative_seconds": 9000,
+    "semantic_seconds": 4500
+  },
+  "prepublication_metadata_review": "review/prepublication_delivery_review.md",
+  "prepublication_metadata_review_PASS": true
+}

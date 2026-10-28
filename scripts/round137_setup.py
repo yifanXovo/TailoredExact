@@ -51,6 +51,16 @@ NEW=[('N-B15-B','CABI',15,'balanced','compact',1),
      ('R-X35-S','DIVVY',35,'shortage','compact',2)]
 KNOWN=['K-15-S','X-15-B','UC-B20-B','K-20-S','K-35-U','X-35-B']
 
+def b1_route_time(n,geometry):
+    """Predeclared compact/regional table; n20 regional is 7200, not 8100.
+
+    The original Round137 once-only draw used the generator at its recorded
+    recipe_commit. Its N-X20-B metadata was corrected before matrix admission
+    and before any native run; retain that historical recipe and receipt.
+    """
+    return {'compact':{15:3600,20:5400,35:7200},
+            'regional':{15:5400,20:7200,35:10800}}[geometry][n]
+
 def recipe():
     from round137_common import write,sha,utc
     assert not (OUT/'source_recipe.json').exists()
@@ -127,8 +137,7 @@ def generate():
             panel_kind='Round137 preregistered new draw from archived public snapshot',
             selection_path=dest.with_name(name+'_selection.json').relative_to(ROOT).as_posix())
         if name.startswith('N-'):
-            p.update(module='B1',T_seconds={15:3600,20:5400,35:7200}[n]*(1.5 if geometry=='regional' else 1))
-            p['T_seconds']=int(p['T_seconds']);roles.append(p)
+            p.update(module='B1',T_seconds=b1_route_time(n,geometry));roles.append(p)
         else:
             assert sum(D)-sum(b)>0 and min(w)>0 and any(x>y for x,y in zip(b,D)) and any(x<y for x,y in zip(b,D))
             # Serialized depot coordinates, rather than a solver route, fix T.

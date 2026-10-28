@@ -1,0 +1,618 @@
+{
+  "UTC": "2026-10-28T06:48:14.511840+00:00",
+  "registered": 120,
+  "completed": 120,
+  "missing": [],
+  "completed_positions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    115,
+    116,
+    111,
+    112,
+    113,
+    114,
+    117,
+    118,
+    119,
+    120
+  ],
+  "stages": {
+    "B1": {
+      "expected": 36,
+      "completed": 36,
+      "certificates": {
+        "S2": 9,
+        "PS": 7,
+        "P": 7
+      },
+      "ineligible": [],
+      "comparisons": {
+        "PS/P": {
+          "n": 12,
+          "classes": {
+            "BOTH_OPEN": 5,
+            "BOTH_CERTIFIED": 7
+          },
+          "directions": {
+            "UNDETERMINED": 5,
+            "Win": 6,
+            "Lose": 1
+          },
+          "both_certified_n": 7,
+          "both_certified_geomean": 2.687056766902886,
+          "material_wins": 5,
+          "material_losses": 0
+        },
+        "S2/P": {
+          "n": 12,
+          "classes": {
+            "LEFT_ONLY_CERTIFIED": 2,
+            "BOTH_CERTIFIED": 7,
+            "BOTH_OPEN": 3
+          },
+          "directions": {
+            "Win": 9,
+            "UNDETERMINED": 3
+          },
+          "both_certified_n": 7,
+          "both_certified_geomean": 11.35339413122267,
+          "material_wins": 6,
+          "material_losses": 0
+        },
+        "S2/PS": {
+          "n": 12,
+          "classes": {
+            "LEFT_ONLY_CERTIFIED": 2,
+            "BOTH_CERTIFIED": 7,
+            "BOTH_OPEN": 3
+          },
+          "directions": {
+            "Win": 6,
+            "Lose": 3,
+            "UNDETERMINED": 3
+          },
+          "both_certified_n": 7,
+          "both_certified_geomean": 4.225215585716353,
+          "material_wins": 4,
+          "material_losses": 1
+        }
+      }
+    },
+    "B2": {
+      "expected": 24,
+      "completed": 24,
+      "certificates": {
+        "S2": 4
+      },
+      "ineligible": [],
+      "comparisons": {
+        "PS/P": {
+          "n": 8,
+          "classes": {
+            "BOTH_OPEN": 8
+          },
+          "directions": {
+            "UNDETERMINED": 8
+          },
+          "both_certified_n": 0,
+          "both_certified_geomean": null,
+          "material_wins": 0,
+          "material_losses": 0
+        },
+        "S2/P": {
+          "n": 8,
+          "classes": {
+            "LEFT_ONLY_CERTIFIED": 4,
+            "BOTH_OPEN": 4
+          },
+          "directions": {
+            "Win": 4,
+            "UNDETERMINED": 4
+          },
+          "both_certified_n": 0,
+          "both_certified_geomean": null,
+          "material_wins": 0,
+          "material_losses": 0
+        },
+        "S2/PS": {
+          "n": 8,
+          "classes": {
+            "LEFT_ONLY_CERTIFIED": 4,
+            "BOTH_OPEN": 4
+          },
+          "directions": {
+            "Win": 4,
+            "UNDETERMINED": 4
+          },
+          "both_certified_n": 0,
+          "both_certified_geomean": null,
+          "material_wins": 0,
+          "material_losses": 0
+        }
+      }
+    },
+    "B3": {
+      "expected": 12,
+      "completed": 12,
+      "certificates": {
+        "S2": 1
+      },
+      "ineligible": [],
+      "comparisons": {
+        "PS/P": {
+          "n": 6,
+          "classes": {
+            "BOTH_OPEN": 6
+          },
+          "directions": {
+            "UNDETERMINED": 6
+          },
+          "both_certified_n": 0,
+          "both_certified_geomean": null,
+          "material_wins": 0,
+          "material_losses": 0
+        },
+        "S2/P": {
+          "n": 6,
+          "classes": {
+            "BOTH_OPEN": 4,
+            "LEFT_ONLY_CERTIFIED": 2
+          },
+          "directions": {
+            "UNDETERMINED": 4,
+            "Win": 2
+          },
+          "both_certified_n": 0,
+          "both_certified_geomean": null,
+          "material_wins": 0,
+          "material_losses": 0
+        },
+        "S2/PS": {
+          "n": 6,
+          "classes": {
+            "BOTH_OPEN": 4,
+            "LEFT_ONLY_CERTIFIED": 2
+          },
+          "directions": {
+            "UNDETERMINED": 4,
+            "Win": 2
+          },
+          "both_certified_n": 0,
+          "both_certified_geomean": null,
+          "material_wins": 0,
+          "material_losses": 0
+        }
+      },
+      "new_positions": 12,
+      "new_objective_configurations_per_method": 4,
+      "full_weight_configurations_per_method": 6,
+      "shared_baseline_positions": [
+        37,
+        38,
+        39,
+        58,
+        59,
+        60
+      ],
+      "shared_baseline_observation_stage": "B2",
+      "no_shared_position_added_to_native_count": true
+    },
+    "C1": {
+      "expected": 8,
+      "completed": 8,
+      "certificates": {
+        "AM004": 2,
+        "AM016": 2
+      },
+      "ineligible": [],
+      "comparisons": {
+        "AM004/S2": {
+          "n": 4,
+          "classes": {
+            "BOTH_CERTIFIED": 2,
+            "BOTH_OPEN": 2
+          },
+          "directions": {
+            "Lose": 2,
+            "UNDETERMINED": 2
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 0.9903041222373675,
+          "material_wins": 0,
+          "material_losses": 0
+        },
+        "AM016/S2": {
+          "n": 4,
+          "classes": {
+            "BOTH_CERTIFIED": 2,
+            "BOTH_OPEN": 2
+          },
+          "directions": {
+            "Lose": 1,
+            "UNDETERMINED": 2,
+            "Win": 1
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 1.0058428561096078,
+          "material_wins": 0,
+          "material_losses": 0
+        }
+      }
+    },
+    "C2": {
+      "expected": 16,
+      "completed": 16,
+      "certificates": {
+        "S2R": 2,
+        "NO_AB": 2,
+        "NO_CR": 2,
+        "NO_CG": 2
+      },
+      "ineligible": [],
+      "comparisons": {
+        "NO_AB/S2": {
+          "n": 4,
+          "classes": {
+            "BOTH_CERTIFIED": 2,
+            "BOTH_OPEN": 2
+          },
+          "directions": {
+            "Lose": 2,
+            "UNDETERMINED": 2
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 0.933256515890992,
+          "material_wins": 0,
+          "material_losses": 1
+        },
+        "NO_CG/S2": {
+          "n": 4,
+          "classes": {
+            "BOTH_CERTIFIED": 2,
+            "BOTH_OPEN": 2
+          },
+          "directions": {
+            "Lose": 1,
+            "Win": 1,
+            "UNDETERMINED": 2
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 0.987879937644405,
+          "material_wins": 0,
+          "material_losses": 1
+        },
+        "NO_CR/S2": {
+          "n": 4,
+          "classes": {
+            "BOTH_CERTIFIED": 2,
+            "BOTH_OPEN": 2
+          },
+          "directions": {
+            "Win": 1,
+            "Lose": 1,
+            "UNDETERMINED": 2
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 1.1254964942684254,
+          "material_wins": 1,
+          "material_losses": 0
+        },
+        "S2R/S2": {
+          "n": 4,
+          "classes": {
+            "BOTH_CERTIFIED": 2,
+            "BOTH_OPEN": 2
+          },
+          "directions": {
+            "Win": 2,
+            "UNDETERMINED": 2
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 1.4895056542422935,
+          "material_wins": 0,
+          "material_losses": 0
+        }
+      }
+    },
+    "D2-main": {
+      "expected": 12,
+      "completed": 12,
+      "certificates": {
+        "S2": 3,
+        "PS": 1,
+        "P": 1
+      },
+      "ineligible": [],
+      "comparisons": {
+        "PS/P": {
+          "n": 4,
+          "classes": {
+            "BOTH_OPEN": 3,
+            "BOTH_CERTIFIED": 1
+          },
+          "directions": {
+            "UNDETERMINED": 3,
+            "Win": 1
+          },
+          "both_certified_n": 1,
+          "both_certified_geomean": 2.5082639502017305,
+          "material_wins": 1,
+          "material_losses": 0
+        },
+        "S2/P": {
+          "n": 4,
+          "classes": {
+            "LEFT_ONLY_CERTIFIED": 2,
+            "BOTH_CERTIFIED": 1,
+            "BOTH_OPEN": 1
+          },
+          "directions": {
+            "Win": 3,
+            "UNDETERMINED": 1
+          },
+          "both_certified_n": 1,
+          "both_certified_geomean": 76.71246711918843,
+          "material_wins": 1,
+          "material_losses": 0
+        },
+        "S2/PS": {
+          "n": 4,
+          "classes": {
+            "LEFT_ONLY_CERTIFIED": 2,
+            "BOTH_CERTIFIED": 1,
+            "BOTH_OPEN": 1
+          },
+          "directions": {
+            "Win": 3,
+            "UNDETERMINED": 1
+          },
+          "both_certified_n": 1,
+          "both_certified_geomean": 30.5838893522425,
+          "material_wins": 1,
+          "material_losses": 0
+        }
+      }
+    },
+    "D2-AM": {
+      "expected": 4,
+      "completed": 4,
+      "certificates": {
+        "AM004": 2,
+        "AM016": 2
+      },
+      "ineligible": [],
+      "comparisons": {
+        "AM004/S2": {
+          "n": 2,
+          "classes": {
+            "BOTH_CERTIFIED": 2
+          },
+          "directions": {
+            "Win": 2
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 1.004325322230123,
+          "material_wins": 0,
+          "material_losses": 0
+        },
+        "AM016/S2": {
+          "n": 2,
+          "classes": {
+            "BOTH_CERTIFIED": 2
+          },
+          "directions": {
+            "Lose": 1,
+            "Win": 1
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 1.0039386487382216,
+          "material_wins": 0,
+          "material_losses": 0
+        }
+      }
+    },
+    "D2-mechanism": {
+      "expected": 8,
+      "completed": 8,
+      "certificates": {
+        "S2R": 2,
+        "NO_AB": 2,
+        "NO_CR": 2,
+        "NO_CG": 2
+      },
+      "ineligible": [],
+      "comparisons": {
+        "NO_AB/S2": {
+          "n": 2,
+          "classes": {
+            "BOTH_CERTIFIED": 2
+          },
+          "directions": {
+            "Win": 1,
+            "Lose": 1
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 1.0634604125420282,
+          "material_wins": 1,
+          "material_losses": 0
+        },
+        "NO_CG/S2": {
+          "n": 2,
+          "classes": {
+            "BOTH_CERTIFIED": 2
+          },
+          "directions": {
+            "Win": 2
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 1.2673175294950294,
+          "material_wins": 1,
+          "material_losses": 0
+        },
+        "NO_CR/S2": {
+          "n": 2,
+          "classes": {
+            "BOTH_CERTIFIED": 2
+          },
+          "directions": {
+            "Lose": 2
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 0.8810347493971971,
+          "material_wins": 0,
+          "material_losses": 1
+        },
+        "S2R/S2": {
+          "n": 2,
+          "classes": {
+            "BOTH_CERTIFIED": 2
+          },
+          "directions": {
+            "Win": 2
+          },
+          "both_certified_n": 2,
+          "both_certified_geomean": 1.4603262149681047,
+          "material_wins": 0,
+          "material_losses": 0
+        }
+      }
+    }
+  },
+  "budget": {
+    "G1_seconds": 118955.40056290105,
+    "remaining_G1_seconds": 97044.59943709895,
+    "by_category": {
+      "native": 118955.40056290105,
+      "diagnostic": 0.0
+    },
+    "limits": {
+      "native": 216000.0,
+      "diagnostic": 216000.0
+    },
+    "category_remaining": {
+      "native": 97044.59943709895,
+      "diagnostic": 216000.0
+    },
+    "separately_reported_seconds": 757.3407170001883,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "base_inputs": 16,
+  "physical_configurations": 20,
+  "objective_configurations": 24,
+  "denominator_warning": "Seed/weight/variant repeats and shared stations are not independent random samples; historical panels separate; no censored time imputation",
+  "all_entered_adverse_open_and_ineligible_retained": true,
+  "independent_certificate_count": 12,
+  "rejected_native_independent_certificates": [
+    "R137_028_N-X20-B_S0_P"
+  ]
+}

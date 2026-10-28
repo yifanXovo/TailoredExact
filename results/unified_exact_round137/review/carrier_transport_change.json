@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-10-28T08:18:54.126664+00:00",
+  "scope": "Current-only archive I/O, outside frozen production sources and93 helpers",
+  "reason": "Actual metadata census:1398502 campaign files; serial tiny-member open/write/seek is a delivery bottleneck",
+  "interrupted_only_process": {
+    "PID": 56592,
+    "parent": 63236,
+    "command": "round137_release.py pack",
+    "first_partial_and_logs_retained": true,
+    "native_retry": false
+  },
+  "old_source_SHA": "1f72c82a16ad3000876f7a6bf2045c7692b1e046e6cdd32c23fce42858389a45",
+  "new_source_SHA": "0015d0e0c014e39fa1f3620925cb9f73a263a1d48005f01afdee1157315bb581",
+  "bounded_read_workers": 8,
+  "max_buffered_members": 32,
+  "ZIP_format": "Standard ZIP DEFLATE with forward-only data descriptors",
+  "unchanged_member_bytes_SHA_checks": true,
+  "completed_archives_revalidated_against_originals": true,
+  "Optimize": 0,
+  "compile": 0,
+  "public_expansion_IO": {
+    "UTC": "2026-10-28T08:21:03.992716+00:00",
+    "old_source_SHA": "ca42f85177b8f970aaed8474cabf5a937f6894970c960c36a3d6d692b0e5a783",
+    "new_source_SHA": "c1dd2a335b46369b11b57eb7b1f3113c5d2bdc3046b1d98d9bd970522b4bc7be",
+    "scope": "One owned finite restore only; exact same manifest/archives/per-member hashes, cumulative7200s and semantic3600s",
+    "workers": 8,
+    "maximum_submitted_members": 32,
+    "link_policy": "Every distinct parent and complete ancestry validated under lock; each pre-existing target lstat-rejects every Windows reparse tag and non-regular file before hash reuse",
+    "unchanged_anonymous_fixed_commit_and_no_native_policy": true
+  }
+}

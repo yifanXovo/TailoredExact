@@ -1,0 +1,135 @@
+{
+  "UTC": "2026-10-27T08:14:32.542160+00:00",
+  "scope": "documentation premise clarification only",
+  "implementation": "target stored as vector<int>; parser rejects nonpositive station targets; no target<=capacity parser/physical row added",
+  "source_SHA256": {
+    "include/Instance.hpp": "e9e396495d431fbb00f412df00929470f9332d5ab57c5561ca0c98b0a456026e",
+    "src/Parser.cpp": "acc0897e687dde82355f2153272e2fb1c68c1ec5507a549894109dd51b4b4ccc",
+    "src/PhysicalWitnessValidation.cpp": "0004bd96cad2cf70ad1bf56826ed632b2e6927209e4d172c6526889d610ad678"
+  },
+  "source_locations": [
+    "include/Instance.hpp:20",
+    "src/Parser.cpp:160",
+    "src/Parser.cpp:192",
+    "src/PhysicalWitnessValidation.cpp:33"
+  ],
+  "actual_input_checks": [
+    {
+      "base": "K-15-S",
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "stations": 15,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "X-15-B",
+      "input_SHA": "c62fdf9dba207a161add1579cd8274d9a66988c4c50db151751eef80435c142c",
+      "stations": 15,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "UC-B20-B",
+      "input_SHA": "be549149049a41aab0374aa0872ca7bc6f290f3b4ccc18b6f4aae75754d1217b",
+      "stations": 20,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "K-20-S",
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "stations": 20,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "K-35-U",
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "stations": 35,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "X-35-B",
+      "input_SHA": "2e66f0e144f3950633aa8d9e4b490ef7fc3f838e4cdc477f1daf9dc4df1f27a1",
+      "stations": 35,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "N-B15-B",
+      "input_SHA": "be69ab8b5dfda82294d7a4c997e8e9e8d483a2e800ab3da057b93dbe15f3a860",
+      "stations": 15,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "N-X15-S",
+      "input_SHA": "773f919eac35a74d02377b30c531d0021617362a9d0ea2bc0252c02221aa34d3",
+      "stations": 15,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "N-C20-U",
+      "input_SHA": "93b93b6abed55cf97f8ee21ddd85fb8501554b8e4c35bb997ae75782f1f98e16",
+      "stations": 20,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "N-X20-B",
+      "input_SHA": "c211a1139db85152fbdf2a7362a43a7389d25e865119debd0878c0e7fea81684",
+      "stations": 20,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "N-B35-S",
+      "input_SHA": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "stations": 35,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "N-C35-B",
+      "input_SHA": "23dc726c169de65d73ee4e3019371533c89b3468732b60b92a0b098c1f6c8565",
+      "stations": 35,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "R-B20-S",
+      "input_SHA": "d80b5af16dbf828b90f2ff20b248c0bb3756fab1124233b5e4a984a951889143",
+      "stations": 20,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "R-X20-S",
+      "input_SHA": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "stations": 20,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "R-B35-S",
+      "input_SHA": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+      "stations": 35,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    },
+    {
+      "base": "R-X35-S",
+      "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "stations": 35,
+      "integer_positive_targets": true,
+      "all_test_D_le_C": true
+    }
+  ],
+  "physical_capacity_bounds": "0<=b_i,Y_i<=C_i; D_i>0",
+  "tested_D_le_C_is_data_convention": true,
+  "Native_Optimize": 0,
+  "regeneration": false,
+  "frozen_source_PE_input_matrix_changes": false
+}

@@ -20,7 +20,8 @@ def prepare():
             for method in orders[j%3]:add(stage,p,method)
     for j,role in enumerate(['R-B20-S-T1','R-X35-S-T2']):
         for rho in [.5,2.]:
-            p=copy.deepcopy(by[role]);p.update(id=role+f'-rho{rho:g}',physical_configuration_id=role,rho=rho,**{'lambda':rho/p['Omega']})
+            p=copy.deepcopy(by[role]);p.update(id=role+f'-rho{rho:g}',physical_configuration_id=role,rho=rho,
+                positive_objective_floor=rho*p['positive_objective_floor'],**{'lambda':rho/p['Omega']})
             for method in orders[j%3]:add('B3',p,method)
     for role in ['K-15-S','K-20-S','UC-B20-B','K-35-U']:
         for tau,method in [(.04,'AM004'),(.16,'AM016')]:add('C1',by[role],method,tau=tau)

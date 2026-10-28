@@ -33,7 +33,17 @@ def verify(launch,identity):
     # Fresh function namespace per arm. Original code/modules remain untouched;
     # all physical, H, Start, lifecycle, domain and proof predicates are reused.
     api=types.SimpleNamespace(**dict(vars(original_models),ArmModels=ArmModels))
-    ns=dict(vars(inherited),ROOT=ROOT,OUT=OUT,DLL=DLL,models=api)
+    def ap_contract(model,data,enabled):
+        if launch['arm'] in ('P-GRB','P-S'):
+            # R135 added a state-formulation AP audit to the R134 reader.
+            # Compact P/PS have no state selectors; retain their original
+            # canonical, type, physical, lifecycle and Start contracts.
+            assert not enabled and not any(n.startswith('state_') for n in model['order'])
+            return dict(enabled=False,AP_rows=0,state_coefficients_checked=0,
+                not_applicable_original_compact=True,original_R134_contracts_retained=True)
+        return inherited.ap_audit.contract(model,data,enabled)
+    ns=dict(vars(inherited),ROOT=ROOT,OUT=OUT,DLL=DLL,models=api,
+            ap_audit=types.SimpleNamespace(contract=ap_contract))
     run=types.FunctionType(inherited.verify.__code__,ns)
     expected=launch.get('AM_threshold',.08)
     if launch['arm']=='M-B':

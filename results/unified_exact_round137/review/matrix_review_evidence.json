@@ -1,0 +1,144 @@
+{
+  "PASS": true,
+  "matrix_SHA": "dabaa61df5ceff7bb3fa8adc0e315538e650d6cb4ba1abd7407ecb4e003af0ba",
+  "source_commit": "779713ad9a0b01edc538ecb64df9438739127be3",
+  "checked_current_HEAD": "eb27120ca6ee542d42c4e94558d57e5a8570f544",
+  "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+  "source_files": 219,
+  "helper_files": 93,
+  "positions": 120,
+  "caps": 174600,
+  "reserve": 41400,
+  "limit": 216000,
+  "stages": {
+    "B1": [
+      36,
+      50400
+    ],
+    "B2": [
+      24,
+      43200
+    ],
+    "B3": [
+      12,
+      21600
+    ],
+    "C1": [
+      8,
+      10800
+    ],
+    "C2": [
+      16,
+      21600
+    ],
+    "D2-main": [
+      12,
+      16200
+    ],
+    "D2-AM": [
+      4,
+      3600
+    ],
+    "D2-mechanism": [
+      8,
+      7200
+    ]
+  },
+  "shortage_floors": [
+    {
+      "id": "R-B20-S-T1",
+      "shortage": 20,
+      "Omega": 13.47,
+      "a": 0.06999999999999999,
+      "floor": 0.10393466963622865,
+      "T": 3300
+    },
+    {
+      "id": "R-B20-S-T2",
+      "shortage": 20,
+      "Omega": 13.47,
+      "a": 0.06999999999999999,
+      "floor": 0.10393466963622865,
+      "T": 5100
+    },
+    {
+      "id": "R-X20-S-T1",
+      "shortage": 20,
+      "Omega": 7.888886,
+      "a": 0.05,
+      "floor": 0.12676060979965992,
+      "T": 4800
+    },
+    {
+      "id": "R-X20-S-T2",
+      "shortage": 20,
+      "Omega": 7.888886,
+      "a": 0.05,
+      "floor": 0.12676060979965992,
+      "T": 7200
+    },
+    {
+      "id": "R-B35-S-T1",
+      "shortage": 35,
+      "Omega": 18.140499000000002,
+      "a": 0.041322399999999995,
+      "floor": 0.07972680354603254,
+      "T": 4800
+    },
+    {
+      "id": "R-B35-S-T2",
+      "shortage": 35,
+      "Omega": 18.140499000000002,
+      "a": 0.041322399999999995,
+      "floor": 0.07972680354603254,
+      "T": 7200
+    },
+    {
+      "id": "R-X35-S-T1",
+      "shortage": 35,
+      "Omega": 13.261724000000001,
+      "a": 0.037037,
+      "floor": 0.09774709532486121,
+      "T": 4200
+    },
+    {
+      "id": "R-X35-S-T2",
+      "shortage": 35,
+      "Omega": 13.261724000000001,
+      "a": 0.037037,
+      "floor": 0.09774709532486121,
+      "T": 6300
+    }
+  ],
+  "deletions": {
+    "no-ab": {
+      "removed": 30,
+      "added": 0,
+      "removed_columns": []
+    },
+    "no-cr": {
+      "removed": 240,
+      "added": 0,
+      "removed_columns": []
+    },
+    "no-cg": {
+      "removed": 531,
+      "added": 0,
+      "removed_columns": [
+        "W_SP",
+        "r_max",
+        "r_min"
+      ]
+    }
+  },
+  "shared_defaults_checked": 36,
+  "current_reader_model_contract_checks": [
+    "full A/B presence",
+    "minus A/B absence; continuous quantities and retained integer/binary types"
+  ],
+  "B3_floor_metadata_correct_for_actual_rho": true,
+  "all_120_argv_unchanged_by_floor_correction": true,
+  "Optimize": 0,
+  "compilation": 0,
+  "commercial_native_loads": 0
+}
