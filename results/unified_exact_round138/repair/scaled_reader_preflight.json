@@ -1,0 +1,51 @@
+{
+  "PASS": true,
+  "models": [
+    {
+      "path": "results/unified_exact_round138/qualification/repair/tiny_alpha/stock/original.lp",
+      "SHA": "4d48f234fc2ff3826eb523769812d27c95970435b4e859f71e417055867ae132",
+      "rows": 23628,
+      "columns": 10007,
+      "quantity_columns": 210,
+      "quantity_type": "C",
+      "direction_columns": 105,
+      "frozen_A_B_rows_checked": 70,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true,
+      "stock_RLT": {
+        "enabled": true,
+        "rows": 4,
+        "actual_alpha": 1e-13,
+        "actual_beta": 0.2,
+        "B": 326,
+        "Bminus": 251,
+        "actual_canonical_rows_checked": true,
+        "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+      }
+    },
+    {
+      "path": "results/unified_exact_round138/qualification/repair/root/stock/original.lp",
+      "SHA": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+      "rows": 23628,
+      "columns": 10007,
+      "quantity_columns": 210,
+      "quantity_type": "C",
+      "direction_columns": 105,
+      "frozen_A_B_rows_checked": 70,
+      "route_load_Y_integer": true,
+      "state_assignment_direction_binary": true,
+      "stock_RLT": {
+        "enabled": true,
+        "rows": 4,
+        "actual_alpha": 0.0,
+        "actual_beta": 0.7674566047247167,
+        "B": 326,
+        "Bminus": 251,
+        "actual_canonical_rows_checked": true,
+        "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+      }
+    }
+  ],
+  "Optimize": 0,
+  "vendor_DLL_loads": 0
+}

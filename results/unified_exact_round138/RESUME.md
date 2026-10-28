@@ -67,6 +67,119 @@ session identity/PID and fee files determine progress; never restart a healthy
 running position. Production source/PE, solve commands and original policy
 were unchanged by this postreader correction.
 
+Update 02:22: all four pilot positions have sealed qualified results. STOCK
+certifies K15 in33.818226547s, RX20 in15.340479234s, K20 in101.635384901s;
+matching R137 times112.769303117s,20.506461604s, and K20 open at cap1200.
+pilot_decision.json authorizes completing positions5-11 with identical frozen
+candidate and commands. Ordinary commit2b0dd40bf records only postreader/paper
+scaffolding and pilot decision; production source pin and PE remain839283773.
+`round138_campaign.py run 11` has now been launched. It skips1-4, runs K35,
+the four n35 resource roles, then BASE/STOCK micro. It may need about3.3h if
+the five n35 positions all exhaust caps. Inspect small active_position/runtime
+metadata and owned fee PID; do not start another run. Avoid build/heavy I/O/PDF
+while native timing is active. Need choose and preregister limited Seed1 after
+Seed0 outcomes, still no new source/profile changes during the comparison.
+
+Update around02:50: current long runner session61535 is healthy on position5
+K35 (startUTC18:21:45, local02:21:45; cap2400). It will automatically proceed
+to6-11; inspect owned fee/PID and small active_position/runtime metadata before
+any action. No extra experiments during this timed sequence. Avoid build,
+heavy I/O, Git commits and PDF exports until it closes. Native LP/seed/row/Start
+checks for1-4 passed. Pending5-11 may take until about05:40 local in worst case.
+
+New code scaffolding, not yet executed: round138_documents.py (assemble/PDF only
+after final decision), round138_delivery.py (additive local checks/carriers only
+after no open fee), round138_tiny_read.py (prepare7 selected old members after
+native closes; portable exact tiny replay). Public byte-read script is still
+to be written. Source C++ and PE have not changed; do not rebuild them.
+
+Optional E offline checks actually completed in round138_offline_products.py:
+four stock LP vectors have zero handling-product violation; RX20 and RX35-T2
+handling caps >=B make those products locally VD-P implied (proof appended to
+mathematical_analysis.md). Four existing GS optimal vectors also satisfy the
+products for tighter safe lower S bounds, using exact stored-double arithmetic.
+These are point checks, not new LP optima/redundancy claims. Reports are in
+reports/offline_products.json; zero new Optimize and no new Seed invented.
+Independent reviewer requested four prose fixes, now applied: full VD-P incl
+sum(q)=g, full-precision claim limited to new rows, D>0/weights/lambda>=0,
+and reports/LP.json distinguishes report Optimize0 from source LP Optimize20.
+
+Update03:02: position5 K35 completed and qualified open. STOCK U=.6695955692140068,
+L=.556776897983438; R137 BASE U=.6928543586313136,L=.565765681464995. Opposed
+endpoints: stock has better U but worse L; smaller signed/relative gap cannot
+hide the L regression. It is a clear Seed1 mixed-role candidate (K20 is the
+main certificate-benefit candidate). Position6 R-B35-S-T1 automatically started
+UTC19:01:21/local03:01:21. Running session remains61535. Completed experiment
+G1=2658.7819087004755s; active position6 is additionally reserved/ongoing.
+
+Additional scaffolds now present: round138_plots.py, round138_public_read.py,
+round138_ordinary.py, round138_tiny_read.py. Syntax was checked, but no plots,
+PDF, archives, additive replay, public read or cleanup has yet run. Post-native
+ordinary steps should use round138_ordinary.py (not common.meter), since child
+guards require no open experiment fee; it records disjoint ordinary seconds.
+Publication uses finite binary carriers with internal member index. Public
+script needs publication_pin.json after science commit/push and performs only
+anonymous new-carrier/member byte checks within cumulative1800s, same owned
+E-work restore root on resume, no Git fallback/Optimize/native DLL.
+
+Update04:22: position6 RB35-T1 qualified open, STOCK U=.5699751069873084,
+L=.5008429884159913 vs BASE .59151763477047/.45590389125187164 (both better).
+Position7 RB35-T2 qualified open, STOCK U=.4012002178390506,L=.22918159966432358
+vs BASE .34464262559194814/.2189859496034747 (better L, materially worse U
+and gap). Preserve this adverse result. Position8 RX35-T1 startedUTC20:20:31.746,
+same live session61535, then9 RX35-T2,10/11micro automatically. Seed0 primary
+should finish by about05:40 local if both remaining n35 exhaust2400s.
+
+Accounting correction actually applied (not a solve):26 native zero-Optimize
+export processes total28.38460709922947s conservatively reclassified into
+diagnostic G1 via infra/external_costs.json; original fee receipts unchanged.
+cost_report.json subtracts the same amount once from ordinary net. Last closed
+G1 afterposition7 =7429.463991399389s plus ongoingposition8. Update accounting
+again at final. Source LP Optimize20, not zero; report-generation Optimize0.
+
+Reviewer's latest static fixes applied: tiny_read now dots original objective
+coefficients against all4 exact witnesses and matching IP/zero fleets; ordinary
+wrapper finally records exceptions/timeouts; Seed1 requires unique selected
+roles. Reviewers accept the scripts' design. New pending post-native qualification:
+round138_native_rows.py uses the existing GP Python runtime to read actual new
+coefficients/RHS for7 domains with zero Optimize. Execute only after timed
+campaigns under common.meter kinddiagnostic (actual wall charged); this script
+has no own no-open-fee guard, unlike ordinary stages.
+
+Independent candidate entry now exists, still research-only:
+config/gi_tbc_stock_rlt_round138.json + scripts/paper_s2_stock_rlt.py. They reuse
+the unchanged original paper_s2.plan/execute and only appendstockflag/newPE;
+parent profile byte SHA checked. Static review passed. Pending actual dry check
+round138_entry_check.py (9 main/micro STOCK vectors +2refusals, noOptimize/DLL).
+
+round138_seed1.py scaffold is ready but UNEXECUTED. After Seed0 all11 qualify,
+run analyze full, then write seed1_selection.json with1-2 unique roles and
+English rationale tied to actual results; strong default candidates now K20
+(certificate benefit) and RB35-T2 (adverse), subject to last2 outcomes. `prepare`
+freezes at most4 fresh BASE/STOCK runs, Seed1,H20260626, samePE/controller.
+Get independent review/seed1_admission.json with exact matrixSHA before `run`.
+Both methods independent own H/cost; no favourable repeat replacesSeed0.
+
+Further pending post-native helpers: round138_traces.py collects actual guarded
+controller U/L curves on selected known roles (separate diagnostic native-process
+clock, final values must agree with endpoints), old baselines only3members each.
+Use bundled DOCUMENT_PYTHON for this/matplotlib. round138_plots.py produces
+two additional static figures; documents.py now includes physicalT/lambda/cap
+and G/Pavg/S tables plus guarded traces. Do not run any until no live experiment.
+Public/delivery/archive/ordinary/plots/tiny dependencies/entry/native coeff
+scaffolds remain unexecuted. R137 main entry/config/PE and C++ source/PE839
+remain untouched; no Git operations/build/PDF during native timing.
+
+round138_analyze.py full currently works and writes a PARTIAL report:4 new
+positions,3 core pairs, missing5-11. Re-run only after the sequence or a closed
+stage, and never call a partial report a complete study. After Seed0, choose
+max2 result-selected roles (prioritize main certificate benefit + adverse/mixed
+n35 outcome) and implement a separately frozen paired Seed1 script/matrix with
+fresh BASE/STOCK runs. Keep the8 historical Seed0 baselines and K15 bridge
+distinct. Full source/PE remains839283773; postreader2-helper changes bound by
+review/reader_amendment.json. New auxiliary scripts were created after helper
+freeze and do not change admitted production helpers.
+
 Independent reviewer agent is `/root/independent_review`; user goal H explicitly
 authorizes this delegation. It has completed math/static/LP admission reviews
 and is reviewing the frozen full matrix. Use collaboration followup, not app
@@ -85,3 +198,23 @@ PDF skill has been read; before the first PDF authoring command, run the bundled
 mark_artifact_operation_started.mjs once. Use existing document assembly rather
 than old Manuscript sources; keep R137 complete manuscript unchanged. No PDF
 export, build or heavy I/O during timed formal solves.
+
+Update05:01: position8 RX35-T1 qualified open atUTC21:00:10.379,
+STOCK U=.5920260898638284,L=.49102330473230565 vs BASE
+U=.5921904488701923,L=.46335799724827287; both improve (mainly L).
+Position9 RX35-T2 startedUTC21:00:10.433858, live session61535 remains.
+Then10/11micro automatic. Closed G1=9804.289947399404s plus liveposition9.
+New auxiliary scaffolds added UNEXECUTED: round138_report.py (six-question
+report with stable cost snapshot), round138_pdf_qa.py (Poppler render and
+manifest only; actual visual inspection still needed), round138_closeout.py
+(new-carrier finite screen and exact-manifest preview-only cleanup).
+Guide docs/round138_research.md prepared; final stage decision still pending.
+Public_read resume now handles valid complete.part and preserves full corrupt
+part before retransmission; publication_pin must include manifest_bytes. PDF
+export receipt actual-source identity corrected. Independent lightweight
+postprocessing design review ACCEPT, with cleanup binding currentcarrierSHA
+and exact rendered PNG names/hashes applied. New helper sources not committed
+or executed while formal native runs remain active; frozen helpers untouched.
+Tiny_read CLI now accepts optional --receipt; final local run should use
+math/selected_replay.json. Report requires that/nativecoeff/entry/localsemantic
+PASS before generation. No new Optimize, compile, archives or PDF occurred.

@@ -1,0 +1,135 @@
+{
+  "PASS": true,
+  "cases": [
+    {
+      "case": "root",
+      "alpha": 0.0,
+      "beta": 0.7674566047247167,
+      "cutoff": 0.7674566047247167,
+      "new_rows": 4,
+      "new_columns": 0,
+      "historical_and_v1_and_v2_off_equal": true,
+      "exact_positive_row_scaling": true,
+      "row_scales": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "stock_model": "results/unified_exact_round138/qualification/repair/root/stock/original.lp",
+      "stock_SHA": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045"
+    },
+    {
+      "case": "child_low",
+      "alpha": 0.0,
+      "beta": 0.38372830236235833,
+      "cutoff": 0.7674566047247167,
+      "new_rows": 4,
+      "new_columns": 0,
+      "historical_and_v1_and_v2_off_equal": true,
+      "exact_positive_row_scaling": true,
+      "row_scales": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "stock_model": "results/unified_exact_round138/qualification/repair/child_low/stock/original.lp",
+      "stock_SHA": "bb478df4db779e6a61f782940d7153e0ebbb1a628b3191fb5d2fb94129f6333b"
+    },
+    {
+      "case": "child_high",
+      "alpha": 0.38372830236235833,
+      "beta": 0.7674566047247167,
+      "cutoff": 0.7674566047247167,
+      "new_rows": 4,
+      "new_columns": 0,
+      "historical_and_v1_and_v2_off_equal": true,
+      "exact_positive_row_scaling": true,
+      "row_scales": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "stock_model": "results/unified_exact_round138/qualification/repair/child_high/stock/original.lp",
+      "stock_SHA": "c2dc817220d8ecadb9efee962ac5bbe0fcfb74d0f4c384e4247d0d0deb5b238f"
+    },
+    {
+      "case": "cutoff_refresh",
+      "alpha": 0.0,
+      "beta": 0.7674566047247167,
+      "cutoff": 0.690710944252245,
+      "new_rows": 4,
+      "new_columns": 0,
+      "historical_and_v1_and_v2_off_equal": true,
+      "exact_positive_row_scaling": true,
+      "row_scales": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "stock_model": "results/unified_exact_round138/qualification/repair/cutoff_refresh/stock/original.lp",
+      "stock_SHA": "647df33dc612ea2f2afbdcf1b1758af3f6ee3d578b0448ba6d91d42cf20db532"
+    },
+    {
+      "case": "degenerate",
+      "alpha": 0.2,
+      "beta": 0.2,
+      "cutoff": 2.0,
+      "new_rows": 4,
+      "new_columns": 0,
+      "historical_and_v1_and_v2_off_equal": true,
+      "exact_positive_row_scaling": true,
+      "row_scales": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "stock_model": "results/unified_exact_round138/qualification/repair/degenerate/stock/original.lp",
+      "stock_SHA": "a06816502d79c4d309d93814787321d13a66b4aa49ced3ab8d10e3ae36fd216f"
+    },
+    {
+      "case": "tiny_alpha",
+      "alpha": 1e-13,
+      "beta": 0.2,
+      "cutoff": 2.0,
+      "new_rows": 4,
+      "new_columns": 0,
+      "historical_and_v1_and_v2_off_equal": true,
+      "exact_positive_row_scaling": true,
+      "row_scales": [
+        16.0,
+        1.0,
+        1.0,
+        16.0
+      ],
+      "stock_model": "results/unified_exact_round138/qualification/repair/tiny_alpha/stock/original.lp",
+      "stock_SHA": "4d48f234fc2ff3826eb523769812d27c95970435b4e859f71e417055867ae132"
+    },
+    {
+      "case": "near_one",
+      "alpha": 0.9999999999995,
+      "beta": 1.0,
+      "cutoff": 2.0,
+      "new_rows": 4,
+      "new_columns": 0,
+      "historical_and_v1_and_v2_off_equal": true,
+      "exact_positive_row_scaling": true,
+      "row_scales": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "stock_model": "results/unified_exact_round138/qualification/repair/near_one/stock/original.lp",
+      "stock_SHA": "9557f879abf0d371c2f18a93486d4bd9db971aae7dd23bcc8640232e7d849e79"
+    }
+  ],
+  "Optimize": 0,
+  "repaired_manifest_SHA": "aea824a4d1e1b85ef7e4f77fa8b447599791db516cb99ab2ab77cf7089823317",
+  "no_tolerance_or_proof_policy_change": true,
+  "pre_metadata_manifest_SHA": "f88621b4959fb33f4af46b8301b1a244194306eb05d885c8961bec5899b3a8d5"
+}

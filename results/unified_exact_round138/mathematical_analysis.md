@@ -20,7 +20,8 @@ B^-:=\max(0,B-\sum_kQ_k)\le\tau\le B.
 
 Deliveries free space for subsequent pickups, so cumulative pickups need not
 be bounded by a vehicle's capacity. No such invalid bound is introduced.
-Targets and objective weights may be heterogeneous. Write
+Targets and objective weights may be heterogeneous, with \(D_i>0\),
+\(\omega_i\ge0\), and \(\lambda\ge0\). Write
 \(r_i=Y_i/D_i\), \(S=\sum_i r_i\), \(A=\sum_{i<j}|r_i-r_j|\) and
 \(P=\sum_i\omega_i|r_i-1|\). The physical objective is
 \(F=G_{\rm true}+\lambda P\), with \(G_{\rm true}=A/(nS)\) when \(S>0\)
@@ -68,7 +69,7 @@ zero \(g\), and a collapsed interval. The implementation uses the current
 writer's actual \(g\) bounds. It neither treats a cutoff as a global physical
 fact nor silently substitutes a stronger local stock budget.
 
-All variable coefficients are emitted at max_digits10, bypassing the legacy
+All variable coefficients in the four new rows are emitted at max_digits10, bypassing the legacy
 near-zero and near-one coefficient filters. Only the new multiplied right
 sides are rounded outward by one ULP: upward for upper rows, downward for lower
 rows. Exact Fraction checks confirm their directions. No general tolerance or
@@ -78,7 +79,8 @@ native proof policy changes.
 
 Let \(\mathcal P=\{s\ge0:\sum_y s_{iy}=1,\ As\le b\}\), and let
 \(\mathcal X=\{(s,g,q):s\in\mathcal P,\ \alpha\le g\le\beta,\ q=gs\}\).
-Retain \(s\in\mathcal P\), the station VD-P inequalities, and impose for
+Retain \(s\in\mathcal P\), the full station VD-P constraints (including
+\(\sum_yq_{iy}=g\)), and impose for
 **every row defining the selected resource block**
 
 \[
@@ -118,7 +120,7 @@ They do not describe the full integer inventory, route or original-objective
 epigraph hull. Omitting products of other resource rows does not preserve the
 stronger all-row hull conclusion.
 
-## 4. Strict complementarity with TC in the original J2/J3 reference
+## 4. Strictly complementary information with TC in the original J2/J3 reference
 
 Keep the original joint fleet mixture, theta, event ranks, cutsets, old state
 penalty and declared R88 CDF/product controls free. Here \(n=4\), \(B=3\),
@@ -214,3 +216,18 @@ state completion. With unloading on return, handling time is
 \((t_p+t_d)C\), so \((t_p+t_d)C\le mT\) is necessary. This does not cap
 cumulative pickups by Q. Such a row is an optional separate exploration;
 the primary full comparison changes only the four stated inventory rows.
+
+The saved stock-enhanced LP optima were also inspected without a new solver
+call. None of the four violates these two handling-budget product rows. This
+does not prove them redundant when the handling cap is tighter than B. When
+\(c=mT/(t_p+t_d)\ge B\), however, redundancy in the local VD-P block follows
+directly from \(0\le(b_i-y)_+\le b_i\):
+\(C(q)-\alpha C(s)\le B(g-\alpha)\le c(g-\alpha)\), and
+\(\beta C(s)-C(q)\le B(\beta-g)\le c(\beta-g)\).
+The RX20 and RX35-T2 inspected domains satisfy this sufficient condition.
+The four saved GS optimum vectors additionally satisfy the product rows for
+a tighter safe fractional-knapsack lower S bound; their new-row residuals
+were recomputed exactly from the stored binary64 values. These are existing
+numerical optimum witnesses, not new exact rational LP certificates. The
+record is reports/offline_products.json, with zero new Optimize and no newly
+invented Seed. Neither check changes the primary full candidate.

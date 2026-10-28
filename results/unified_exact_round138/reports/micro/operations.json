@@ -1,0 +1,130 @@
+[
+  {
+    "stage": "micro",
+    "position": 10,
+    "role": "SM-B10-B",
+    "method": "BASE",
+    "seed": 0,
+    "repeat": 1,
+    "lambda_value": 0.15,
+    "station_inventory": [
+      2,
+      3,
+      11,
+      8,
+      11,
+      3,
+      3,
+      3,
+      7,
+      9
+    ],
+    "total_inventory": 60,
+    "total_initial": 60,
+    "total_target": 60,
+    "target_under": 5,
+    "target_equal": 0,
+    "target_over": 5,
+    "pickups": 0,
+    "drops": 0,
+    "returns": 0,
+    "maximum_duration": 0.0,
+    "T": 3600,
+    "routes": [
+      {
+        "vehicle": 0,
+        "Q": 15,
+        "nodes": [
+          0,
+          0
+        ],
+        "pickups": 0,
+        "drops": 0,
+        "return_load": 0,
+        "peak_prefix_load": 0,
+        "travel_seconds": 0.0,
+        "handling_seconds": 0,
+        "duration_seconds": 0.0
+      },
+      {
+        "vehicle": 1,
+        "Q": 25,
+        "nodes": [
+          0,
+          0
+        ],
+        "pickups": 0,
+        "drops": 0,
+        "return_load": 0,
+        "peak_prefix_load": 0,
+        "travel_seconds": 0.0,
+        "handling_seconds": 0,
+        "duration_seconds": 0.0
+      }
+    ]
+  },
+  {
+    "stage": "micro",
+    "position": 11,
+    "role": "SM-B10-B",
+    "method": "STOCK",
+    "seed": 0,
+    "repeat": 1,
+    "lambda_value": 0.15,
+    "station_inventory": [
+      2,
+      3,
+      11,
+      8,
+      11,
+      3,
+      3,
+      3,
+      7,
+      9
+    ],
+    "total_inventory": 60,
+    "total_initial": 60,
+    "total_target": 60,
+    "target_under": 5,
+    "target_equal": 0,
+    "target_over": 5,
+    "pickups": 0,
+    "drops": 0,
+    "returns": 0,
+    "maximum_duration": 0.0,
+    "T": 3600,
+    "routes": [
+      {
+        "vehicle": 0,
+        "Q": 15,
+        "nodes": [
+          0,
+          0
+        ],
+        "pickups": 0,
+        "drops": 0,
+        "return_load": 0,
+        "peak_prefix_load": 0,
+        "travel_seconds": 0.0,
+        "handling_seconds": 0,
+        "duration_seconds": 0.0
+      },
+      {
+        "vehicle": 1,
+        "Q": 25,
+        "nodes": [
+          0,
+          0
+        ],
+        "pickups": 0,
+        "drops": 0,
+        "return_load": 0,
+        "peak_prefix_load": 0,
+        "travel_seconds": 0.0,
+        "handling_seconds": 0,
+        "duration_seconds": 0.0
+      }
+    ]
+  }
+]

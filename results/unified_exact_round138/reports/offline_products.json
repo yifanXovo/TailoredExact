@@ -1,0 +1,116 @@
+{
+  "UTC": "2026-10-28T18:40:08.740333+00:00",
+  "handling": [
+    {
+      "role": "K-35-U",
+      "cap": "270",
+      "B": 326,
+      "C": 98.9474135785271,
+      "Cq": 6.955686954415027,
+      "linear_budget_slack": 171.05258642147288,
+      "upper_product_slack": 8.312894165032594,
+      "lower_product_slack": 122.96254303937216,
+      "max_product_violation": 0.0,
+      "local_VDP_already_implies_handling_products_when_cap_at_least_B": false,
+      "integer_basis": "C(s)=sum pickups by shared one-way states; total handling h*C <= M*T includes return unloading",
+      "stock_solution_SHA": "086c04803801c076cd29597174f1a1d7a878a8a7c1e9f07856e0fedada16aa93"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "cap": "80",
+      "B": 65,
+      "C": 23.15804409334444,
+      "Cq": 4.840305343511452,
+      "linear_budget_slack": 56.84195590665556,
+      "upper_product_slack": 6.89376821651631,
+      "lower_product_slack": 35.91128939087159,
+      "max_product_violation": 0.0,
+      "local_VDP_already_implies_handling_products_when_cap_at_least_B": true,
+      "integer_basis": "C(s)=sum pickups by shared one-way states; total handling h*C <= M*T includes return unloading",
+      "stock_solution_SHA": "eb9edc830819eacdbe45f5ad18128f4ab4cbb7b074894520e5483e956f1cbbcd"
+    },
+    {
+      "role": "R-X35-S-T2",
+      "cap": "315/2",
+      "B": 146,
+      "C": 56.771992360973506,
+      "Cq": 0.32945736434108497,
+      "linear_budget_slack": 100.72800763902649,
+      "upper_product_slack": 0.456747709654686,
+      "lower_product_slack": 42.31738513789993,
+      "max_product_violation": 0.0,
+      "local_VDP_already_implies_handling_products_when_cap_at_least_B": true,
+      "integer_basis": "C(s)=sum pickups by shared one-way states; total handling h*C <= M*T includes return unloading",
+      "stock_solution_SHA": "b0a41a4db74216fb1b2ed0300ddef3be059ea8d9ab97ccbd8aebc5637176d703"
+    },
+    {
+      "role": "K-20-S",
+      "cap": "90",
+      "B": 208,
+      "C": 68.51120405883722,
+      "Cq": 0.7694456546164166,
+      "linear_budget_slack": 21.488795941162778,
+      "upper_product_slack": 0.017487401241282206,
+      "lower_product_slack": 16.640901362163152,
+      "max_product_violation": 0.0,
+      "local_VDP_already_implies_handling_products_when_cap_at_least_B": false,
+      "integer_basis": "C(s)=sum pickups by shared one-way states; total handling h*C <= M*T includes return unloading",
+      "stock_solution_SHA": "3b60391acd5968e368f18c729df55962729c07cc50f2e3ea59a14a6157e3f8c9"
+    }
+  ],
+  "GS_lower_bound_controls": [
+    {
+      "role": "K-35-U",
+      "variant": "gs_independent",
+      "tighter_S_lower_exact": "1822603219906424123/72057594037927936",
+      "safe_loaded_S_lower": 25.293700743700743,
+      "new_lower_MC_slack": 1.1102231928046,
+      "new_upper_MC_slack": 6.783577835582459,
+      "saved_optimum_satisfies_tighter_lower_domain_products": true,
+      "stored_binary64_point_new_row_residuals_exactly_recomputed": true,
+      "full_vector_not_claimed_rational_LP_certificate": true,
+      "solution_SHA": "f3da8fe2e034867e2fb8cacedcde914fbb836b194f33f0d1f6044c720b55a05d"
+    },
+    {
+      "role": "K-35-U",
+      "variant": "gs_shared",
+      "tighter_S_lower_exact": "1822603219906424123/72057594037927936",
+      "safe_loaded_S_lower": 25.293700743700743,
+      "new_lower_MC_slack": 1.1102231928045998,
+      "new_upper_MC_slack": 6.78357783558246,
+      "saved_optimum_satisfies_tighter_lower_domain_products": true,
+      "stored_binary64_point_new_row_residuals_exactly_recomputed": true,
+      "full_vector_not_claimed_rational_LP_certificate": true,
+      "solution_SHA": "80808bad719fe906ec2701847df494b9b0ff1965ec093cf30cba647c132d607c"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "variant": "gs_independent",
+      "tighter_S_lower_exact": "708155298549825/562949953421312",
+      "safe_loaded_S_lower": 1.257936507936508,
+      "new_lower_MC_slack": 2.5006014847461286,
+      "new_upper_MC_slack": 8.022865190953729,
+      "saved_optimum_satisfies_tighter_lower_domain_products": true,
+      "stored_binary64_point_new_row_residuals_exactly_recomputed": true,
+      "full_vector_not_claimed_rational_LP_certificate": true,
+      "solution_SHA": "6fda5fcf632521556334135282c8c2f783e994bc137e8d793eeb99a6527a7913"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "variant": "gs_shared",
+      "tighter_S_lower_exact": "708155298549825/562949953421312",
+      "safe_loaded_S_lower": 1.257936507936508,
+      "new_lower_MC_slack": 2.50060148474613,
+      "new_upper_MC_slack": 8.022865190953727,
+      "saved_optimum_satisfies_tighter_lower_domain_products": true,
+      "stored_binary64_point_new_row_residuals_exactly_recomputed": true,
+      "full_vector_not_claimed_rational_LP_certificate": true,
+      "solution_SHA": "bd2d6d596f99a5abcaad52893da3c1c171b4d16cdd9ea464e29d5d2717269025"
+    }
+  ],
+  "Optimize": 0,
+  "solver_imports": 0,
+  "seconds": 0.05261030001565814,
+  "source": "Previously saved Round138 Seed0 LP vectors; no new solve and no invented new Seed",
+  "scope": "Point diagnostics and new-row arithmetic, not new LP optimum or complete-method results"
+}

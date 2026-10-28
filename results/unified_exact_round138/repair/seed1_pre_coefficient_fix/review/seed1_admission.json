@@ -1,0 +1,54 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "/root/independent_review",
+  "date_Asia_Shanghai": "2026-10-29",
+  "matrix_SHA": "d7c02b71910cb9b493eb29f28f1d321864704554839a03c2f477f1e92f2743fb",
+  "selection_SHA": "c403e1cb89f6d7385feade22988abe780baefbf2233fa2c18ca2e54a61095a43",
+  "primary_matrix_SHA": "9c584f3f20232c17ec169ecaab4d9937071f60192f810c22665ef1e200f1bac5",
+  "source_Seed0_report_SHA": "e7cad03e11f71ea843cedfabbe05dee599042a84a4669af39bfff46b259002bc",
+  "runner_SHA": "2162e20a56058b8e3868cbaf08e96dd8c534e1e0904a0c3cdcb72846e2efc3b1",
+  "candidate_manifest_SHA": "07e1d207447d643df79ff86a4df5adb93bc9ef63cb62ad623dc2150fd75c5bd2",
+  "scope": "Exactly four fresh complete Seed1 positions: K20 BASE/STOCK followed by RB35-T2 STOCK/BASE. Result-selected paired confirmation after the complete known Seed0 panel. No source, PE, physical model, objective, controller or proof-policy change. No replacement of primary Seed0 evidence and no runtime-distribution or independent-validation claim.",
+  "roles": [
+    "K-20-S",
+    "R-B35-S-T2"
+  ],
+  "positions": 4,
+  "maximum_caps_seconds": 7200,
+  "Gurobi_Seed": 1,
+  "H_seed": 20260626,
+  "serial": true,
+  "threads": 1,
+  "affinity_mask": 4,
+  "production_source_commit": "83928377336a860acf78f684d1723a5040467bb5",
+  "candidate_PE_SHA": "a41ea8eefd8551799a1d08e6d328beba1b70856433b07d96551790f0f5a4d8ae",
+  "baseline_PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+  "checked": {
+    "all_4_identity_hashes": true,
+    "all_actual_commands_match_own_Seed0_method_except_Seed_and_output": true,
+    "all_input_hashes_and_exact_T_lambda_caps": true,
+    "actual_CLI_panel_launch_prereg_Seed1": true,
+    "BASE_modern_reader_amendment_retained": true,
+    "STOCK_flag_only_and_AP_TC_off": true,
+    "reversed_second_role_order": true,
+    "all_destinations_and_fee_labels_fresh": true,
+    "no_incoming_Start_solution_bound_or_tree": true,
+    "selection_rationale_matches_full_Seed0_pairs": true,
+    "primary_complete_11_new_arms_and_8_pairs": true,
+    "no_open_fee": true
+  },
+  "budget_before": {
+    "G1_seconds": 12182.041263099527,
+    "remaining_G1_seconds": 74217.95873690047,
+    "reserved_maximum_seconds": 7200
+  },
+  "new_Optimize_by_reviewer": 0,
+  "new_native_library_loads_by_reviewer": 0,
+  "conditions": [
+    "Retain all ordinary adverse/open outcomes and the complete Seed0 table.",
+    "Each method pays independent own H and all online production/proof costs through the unchanged primary arm path.",
+    "Use the reviewed baseline-r137 modern postreader adapter without changing historical source adjudication.",
+    "Stop on actual identity/reader failures; preserve attempts and costs, and diagnose before any bounded registered repair.",
+    "Complete the later native coefficient/entry/tiny/local/PDF/public/delivery checks and independent final integration review."
+  ]
+}

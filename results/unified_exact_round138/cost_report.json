@@ -1,0 +1,39 @@
+{
+  "UTC": "2026-10-28T19:19:38.562574+00:00",
+  "experiment": {
+    "G1_seconds": 2687.166515799705,
+    "remaining_G1_seconds": 83712.8334842003,
+    "by_category": {
+      "native": 2644.6374928003643,
+      "diagnostic": 42.52902299934067
+    },
+    "limits": {
+      "native": 86400.0,
+      "diagnostic": 86400.0
+    },
+    "category_remaining": {
+      "native": 83755.36250719964,
+      "diagnostic": 86357.47097700066
+    },
+    "separately_reported_seconds": 80.13994789938442,
+    "unclosed": [
+      {
+        "label": "arm_006",
+        "kind": "native",
+        "reservation": 2400.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\fees\\arm_006\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "qualification_reclassification_count": 26,
+  "qualification_reclassification_seconds": 28.38460709922947,
+  "fee_ordinary_raw_seconds": 80.13994789938442,
+  "fee_ordinary_net_seconds": 51.755340800154954,
+  "additional_disjoint_ordinary_steps_seconds": 0,
+  "additional_disjoint_ordinary_steps": 0,
+  "no_nested_experiment_double_charge": true,
+  "initial_interactive_reading_and_writing_not_precision_metered": true,
+  "during_native_offline_point_check_seconds": 0.05261030001565814,
+  "during_native_offline_seconds_overlap_and_are_not_added_again": true
+}
