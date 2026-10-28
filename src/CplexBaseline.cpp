@@ -3204,11 +3204,11 @@ void writeCompactLp(const Instance& instance,
             if (slope != 0.0 && budget != 0.0)
                 rhs = std::nextafter(rhs, upper ? std::numeric_limits<double>::infinity()
                                                : -std::numeric_limits<double>::infinity());
-            // The native LP reader drops coefficients at or below 1e-13.
+            // The native LP reader can drop extremely small coefficients.
             // Preserve the complete new row by an exact positive power-of-two
             // scale, including its already outward RHS. Ordinary rows retain
             // identical canonical bytes; no coefficient is silently removed.
-            if (slope != 0.0 && std::fabs(slope) <= 1e-13) {
+            if (slope != 0.0 && std::fabs(slope) < 1e-12) {
                 int exponent = 0;
                 while (std::ldexp(std::fabs(slope), exponent) < 1e-12) {
                     if (exponent >= 1023)

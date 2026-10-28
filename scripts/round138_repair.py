@@ -11,7 +11,7 @@ def scaled_rows(n,alpha,beta,Bminus,B):
     out=[]
     for row in stock_rows(n,alpha,beta,Bminus,B):
         terms,sense,rhs=row;slope=abs(dict(terms).get('Y_1',0.));exponent=0
-        if 0<slope<=1e-13:
+        if 0<slope<1e-12:
             while math.ldexp(slope,exponent)<1e-12:
                 assert exponent<1023;exponent+=1
         out.append((tuple((name,math.ldexp(value,exponent)) for name,value in terms),sense,math.ldexp(rhs,exponent)))
@@ -63,7 +63,7 @@ def build():
     manifest=dict(prior,source_commit=git('rev-parse','HEAD').decode().strip(),source_hashes=sources,
         production_PE=str(pe),production_PE_SHA=sha(pe),research_PE=str(pe),research_PE_SHA=sha(pe),
         version='v2-exact-power-of-two-new-row-transport',primary_v1_manifest_SHA=sha(OUT/'candidate_manifest.json'),
-        repair='Only new stock rows with nonzero slope <=1e-13 are scaled by an exact positive power of two until slope >=1e-12; all other canonical bytes remain unchanged')
+        repair='Only new stock rows with nonzero slope <1e-12 are scaled by an exact positive power of two until slope >=1e-12; all other canonical bytes remain unchanged')
     write(OUT/'candidate_repair_manifest.json',manifest)
     write(OUT/'candidate_repair_build.json',dict(UTC=utc(),manifest_SHA=sha(OUT/'candidate_repair_manifest.json'),
         compiled_units=['CplexBaseline'],unchanged_main_object=dict(path=str(BUILD/'main.o'),SHA256=sha(BUILD/'main.o')),
@@ -133,7 +133,7 @@ def native():
                 path=core.portable(ROOT,call['model_path']);digest=sha(path);assert digest==call['model_sha256']
                 if digest in seen:continue
                 seen.add(digest);model=core.lp_model(path);alpha,beta=model['bounds']['G']
-                assert all(v==0 or abs(v)>1e-13 for v in (alpha,beta)),('A used V1 model entered the repaired branch',path,alpha,beta)
+                assert all(v==0 or abs(v)>=1e-12 for v in (alpha,beta)),('A used V1 model entered the repaired branch',path,alpha,beta)
                 expected=stock_rows(p['V'],alpha,beta,Bm,B);assert expected==scaled_rows(p['V'],alpha,beta,Bm,B)
                 fact=inspect(path,expected);used.append(dict(arm_id=l['arm_id'],alpha=alpha,beta=beta,
                     v2_scaling_branch_not_entered=True,canonical_new_rows_unchanged_by_v2=True,**fact))
