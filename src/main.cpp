@@ -1,4 +1,5 @@
 #include "Round63TimeResource.hpp"
+#include "Round138Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -866,6 +867,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gurobi-threads") opt.gurobi_threads = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round135-aggregate-penalty") ebrp::round135AggregatePenalty() = true;
+        else if (arg == "--round138-stock-rlt") ebrp::round138().stock_rlt = true;
         else if (arg == "--round137-delete-ab") ebrp::round137().delete_ab = true;
         else if (arg == "--round137-delete-cr") ebrp::round137().delete_cr = true;
         else if (arg == "--round137-delete-cg") ebrp::round137().delete_cg = true;
@@ -3542,8 +3544,20 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if (ebrp::round138().stock_rlt && ebrp::round127().mode != "ms2")
+        throw std::runtime_error("Round138 stock RLT requires explicit ms2 research mode");
     ebrp::round127Validate(opt);
     ebrp::round135Validate();
+    if (ebrp::round138().stock_rlt && !opt.out_path.empty()) {
+        const auto path = std::filesystem::path(opt.out_path).parent_path() / "round138_parameters.json";
+        std::filesystem::create_directories(path.parent_path());
+        std::ofstream parameters(path);
+        parameters << std::setprecision(17)
+            << "{\"stock_rlt\":true,\"gurobi_seed\":" << opt.gurobi_seed
+            << ",\"H_seed\":" << opt.primal_heuristic_seed
+            << ",\"loaded_after_presets\":true}\n";
+        if (!parameters) throw std::runtime_error("Round138 parameter readback persistence failed");
+    }
     if ((ebrp::round127().mode == "ms2" || ebrp::round127().mode == "s2-root") &&
         !opt.out_path.empty()) {
         const auto path = std::filesystem::path(opt.out_path).parent_path() / "round137_parameters.json";
