@@ -3204,6 +3204,26 @@ void writeCompactLp(const Instance& instance,
             if (slope != 0.0 && budget != 0.0)
                 rhs = std::nextafter(rhs, upper ? std::numeric_limits<double>::infinity()
                                                : -std::numeric_limits<double>::infinity());
+            // The native LP reader drops coefficients at or below 1e-13.
+            // Preserve the complete new row by an exact positive power-of-two
+            // scale, including its already outward RHS. Ordinary rows retain
+            // identical canonical bytes; no coefficient is silently removed.
+            if (slope != 0.0 && std::fabs(slope) <= 1e-13) {
+                int exponent = 0;
+                while (std::ldexp(std::fabs(slope), exponent) < 1e-12) {
+                    if (exponent >= 1023)
+                        throw std::runtime_error("Round138 stock row scale is not finite");
+                    ++exponent;
+                }
+                for (auto& term : row) {
+                    term.second = std::ldexp(term.second, exponent);
+                    if (!std::isfinite(term.second))
+                        throw std::runtime_error("Round138 scaled stock coefficient is not finite");
+                }
+                rhs = std::ldexp(rhs, exponent);
+                if (!std::isfinite(rhs))
+                    throw std::runtime_error("Round138 scaled stock RHS is not finite");
+            }
             out << " c" << cid++ << ": ";
             bool first = true;
             for (const auto& term : row) {
