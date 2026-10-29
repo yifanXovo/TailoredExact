@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-29T20:47:36.571686+00:00",
+  "UTC": "2026-10-29T21:02:26.121425+00:00",
   "experiment": {
     "G1_seconds": 21831.71896730084,
     "remaining_G1_seconds": 21368.28103269916,
@@ -22,9 +22,48 @@
   "fee_ordinary_seconds": 146.28815149981529,
   "experimental_outer_including_pure_postverification_seconds": 21932.245612900937,
   "experimental_outer_including_pure_postverification_within_43200": true,
-  "additional_disjoint_ordinary_seconds": 161.20430890005082,
-  "recorded_disjoint_process_wall_total_seconds": 22139.211427700706,
+  "additional_disjoint_ordinary_seconds": 376.61985510005616,
+  "recorded_disjoint_process_wall_total_seconds": 22354.62697390071,
   "ordinary_steps": [
+    {
+      "label": "archive_science",
+      "SHA": "5df4ec629593cb3aab082889870a765b1bb07270e20af48a5b343abc910d01d2",
+      "receipt": {
+        "UTC": "2026-10-29T20:55:35.259634+00:00",
+        "exit_code": 0,
+        "seconds": 162.34735849988647,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "bounded_preview_cleanup",
+      "SHA": "b7b93510dfdd4af09da22525979b57b2e1df0c0666b41516b7f388157b37840e",
+      "receipt": {
+        "UTC": "2026-10-29T21:01:05.414657+00:00",
+        "exit_code": 0,
+        "seconds": 0.14161999989300966,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "carrier_layout_check",
+      "SHA": "4f3b758a5210c041ceaeaabf0294ffa0cbc45fc91a8d20a8dadf3b4ce98359e5",
+      "receipt": {
+        "UTC": "2026-10-29T20:56:16.886258+00:00",
+        "exit_code": 0,
+        "seconds": 1.11557130003348,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
     {
       "label": "entry_check",
       "SHA": "0de4134f6464f92acb0e97c08c0bf4854c2a3968dee6908d1ae4e38571c924d0",
@@ -84,6 +123,19 @@
         "UTC": "2026-10-29T20:35:08.643069+00:00",
         "exit_code": 0,
         "seconds": 0.41149930004030466,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "git_push_science",
+      "SHA": "cd5a728a7908db2087a8fb534157d963094b2f15e261a1330aed1652758b8f67",
+      "receipt": {
+        "UTC": "2026-10-29T20:58:35.400724+00:00",
+        "exit_code": 0,
+        "seconds": 22.57130579999648,
         "G1_seconds": 0,
         "Optimize": 0,
         "not_also_in_fee_meter": true,
@@ -260,6 +312,45 @@
       }
     },
     {
+      "label": "public_new_carriers",
+      "SHA": "b775df2f051254541cfe29ad9bdcec532f9c2cdd49a2aba333c3f260bc9d0b18",
+      "receipt": {
+        "UTC": "2026-10-29T20:59:38.252224+00:00",
+        "exit_code": 1,
+        "seconds": 0.8799211999867111,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "public_new_carriers_windows_ca",
+      "SHA": "f18eba812b0d797cb53bb9bc01d8185a3b44ece76e20ccf34f8ccde9677d0dff",
+      "receipt": {
+        "UTC": "2026-10-29T21:00:42.134731+00:00",
+        "exit_code": 0,
+        "seconds": 26.747820200165734,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "refs_before_publication",
+      "SHA": "39d2a1c9e0273235c06b982a800c163302bab59cb16da5e49f1760161bb56814",
+      "receipt": {
+        "UTC": "2026-10-29T20:56:18.866956+00:00",
+        "exit_code": 0,
+        "seconds": 1.6119492000434548,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
       "label": "refs_refresh",
       "SHA": "bb1a96cfe4c4314d0f72ddb1d8fdb69609689a9d2390429c0e4bb74c2a7058a6",
       "receipt": {
@@ -393,7 +484,8 @@
   "reused_reference_original_clocks_retained_without_new_charge": true,
   "all_experiment_qualification_and_failed_attempts_charged": true,
   "ordinary_failed_steps": [
-    "interim_local_semantic"
+    "interim_local_semantic",
+    "public_new_carriers"
   ],
   "complete_outer_cost_without_nested_H_LP_MIP_Work_double_count": true,
   "precision_scope": "Measured processes only; interactive reading/editing/review/Git are not assigned invented precision"

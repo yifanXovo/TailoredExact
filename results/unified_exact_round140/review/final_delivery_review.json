@@ -1,0 +1,91 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T21:04:51.700246+00:00",
+  "scope": "Bounded final delivery metadata cross-check only; earlier accepted science and all-page PDF reviews are not repeated.",
+  "PR": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/202",
+    "number": 202,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round139-stock-rlt-placement",
+    "base_sha": "5a7159398591032b267d6bf98e5ffd4942f36944",
+    "head": "codex/round140-two-sided-threshold-count",
+    "observed_publication_head": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+    "attached": true
+  },
+  "independent_remote_PR_readback": {
+    "tool": "GitHub get_pr_info",
+    "repository_full_name": "yifanXovo/TailoredExact",
+    "pr_number": 202,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round139-stock-rlt-placement",
+    "base_sha": "5a7159398591032b267d6bf98e5ffd4942f36944",
+    "head": "codex/round140-two-sided-threshold-count",
+    "head_sha": "15e401f794bb53e31c5848e0edabf0b4153ca678"
+  },
+  "fixed_science_commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+  "measured_production_source_commit": "81ab886e23220be97a858e66961056cef727d074",
+  "carrier_manifest_SHA": "8611912f5744f01ce74496ed0e78db28cb965ba1693a02b10322edec4434f6d4",
+  "carriers": 19,
+  "members": 41185,
+  "public_read": {
+    "PASS": true,
+    "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+    "cumulative_seconds": 26.911494200117886,
+    "limit_seconds": 1800,
+    "claim": "Anonymous fixed-commit archive and member byte readability, not a new scientific/solver replay.",
+    "first_issuer_chain_failure_preserved": true,
+    "recovery": "Same frozen reader with installed Windows Python default TLS verification; no bypass or global setting change.",
+    "reader_SHA": "036ac104f10a4af543b2f98fc531ee8412744f8299d970037b1924d4f9f341ff"
+  },
+  "cleanup": {
+    "completed": true,
+    "deleted_files": 9,
+    "deleted_file_bytes": 2552234,
+    "observed_volume_free_change": 2576384,
+    "scope": "Only the exact final preview PNGs already reviewed; no recursive deletion or old-round/user/raw/runtime/source deletion.",
+    "retained_first_layout_raw_PDF_TeX_PE_DLL": true
+  },
+  "checked_receipt_hashes": {
+    "PR_created.json": "bacdad5c0c816ee3d7c779411242dffa87d549587303d2f1dbee060ac9154e54",
+    "PR_delivery.json": "8900072d16f717c63306e0d5f051dbfd66abc7de0397bfba5776edb45f4330a8",
+    "PR_attachment.json": "bddbfae90588431435a56fa6660f6e13265ee6ce5e12e3ee04785b55098d7c59",
+    "publication_pin.json": "bfc1710e7ec039c013fd001bb204614aa2ec08280fb403776e9be21cb39b2240",
+    "carrier_manifest.json": "8611912f5744f01ce74496ed0e78db28cb965ba1693a02b10322edec4434f6d4",
+    "carrier_layout_check.json": "83b36d7403eee3ac6c415b696170ef8e81f242eaac27ab7f2f2f3f94a14821c6",
+    "publication_staged_check.json": "5597425bf201eaeb283df6771f2592f9b6b5e698420a0a2e5075381fb1925b49",
+    "public_restore_receipt.json": "ad7f517d49112a718d7f7589d3825aa8a20cda95d6e114b2f60191ee59d0da57",
+    "public_read_attempts.json": "7ab25bc551d6832c5bde57d6e467b8342a5fe94b9707043b2869ad534c7dc1f4",
+    "public_read_runtime.json": "30170232d9d6d08ecc6ef176fdb4ebf450e4b6749210e1b7b8dd474af4b9c403",
+    "cleanup_screening.json": "3db6be36a7688eb845a604c1097ead1be0b929ef696b877e477a2b1279d62173",
+    "cleanup_receipt.json": "5398d57d647ca72d5bceb20c3189bdbcbf3deb1463a301f62727a9e3860c1e6e",
+    "cost_report.json": "652cb19d6d4336e57baffe97b2034442f0bb36269995f20bb5fb87bb186b72b0"
+  },
+  "checks": {
+    "PR_created_attached_and_independently_read_back": true,
+    "fixed_manifest_and_public_success_match_all_19_carrier_identities": true,
+    "staged_51_byte_records_and_layout_157_modules_6_inputs_bound": true,
+    "prior_scientific_PDF_acceptance_unchanged": true,
+    "cleanup_deleted_hashes_match_nine_previously_viewed_pages": true,
+    "unique_raw_and_source_and_needed_runtime_retained": true,
+    "experiment_cost_unchanged_and_full_outer_under_43200": true,
+    "old_acceptance_not_reopened": true,
+    "late_delivery_metadata_distinct_from_fixed_carrier_snapshots": true
+  },
+  "cost": {
+    "G1_seconds": 21831.71896730084,
+    "experimental_outer_including_postverification_seconds": 21932.245612900937,
+    "ordinary_snapshot_UTC": "2026-10-29T21:02:26.121425+00:00"
+  },
+  "remaining_closeout": "The primary agent will normally commit/push this and other late delivery metadata, then perform the final remote HEAD/base/draft readback. The observed science publication head above is not claimed to be that future metadata head.",
+  "reviewer_new_public_downloads": 0,
+  "reviewer_member_rechecks": 0,
+  "reviewer_archive_reads": 0,
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_Native_loads": 0,
+  "reviewer_compilation": 0
+}

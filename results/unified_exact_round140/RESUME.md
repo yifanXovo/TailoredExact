@@ -62,18 +62,56 @@ operation marker succeeded exactly once. Independent scientific selection and fi
 passed. review/final_integration_review.json binds the nine actual images and
 final PDF SHA 16b28ced769847405f1d88320301808b26d64776791ae4d682ec2d0944a1eedf.
 
-Publication remains in progress at this snapshot. Actual main and R139 refs
-were fetched and rechecked in publication_refs.json: main remains b2b940c...,
-R139 remains 5a715939..., so the selected Draft PR base is
-`codex/round139-stock-rlt-placement`. The research branch is
-`codex/round140-two-sided-threshold-count`. Required remaining delivery steps:
-freeze current-round carriers and actual cost/source metadata; normal commit
-and push; create/attach the English Draft PR and read back actual base/head;
-perform the bounded anonymous fixed-commit new-carrier/member byte check;
-then screen/delete only eligible final preview PNGs and record bytes/space.
-No merge, force-push, old-round deletion, email or submission is authorized.
+Publication and bounded closeout are complete. The English open Draft PR is
+[#202](https://github.com/yifanXovo/TailoredExact/pull/202), attached to the current chat. Actual main and
+R139 refs were fetched before publication: main b2b940c1e517a72e226ec60fc49ff19651737632
+still does not contain the required R139, so the verified PR base is
+`codex/round139-stock-rlt-placement` at
+`5a7159398591032b267d6bf98e5ffd4942f36944`. The head branch is
+`codex/round140-two-sided-threshold-count`. `PR_created.json` and `PR_delivery.json`
+retain the actual creation/readback. Later delivery metadata advances the head;
+the final live head is read back after the last normal push, without attempting
+to embed a commit's own hash in its contents.
 
-Use `python -B scripts/round140_common.py budget` and `status <fee>` for durable
-records. Every admitted position is sealed: do not rerun it. Goal completion
-requires actual PR/public/cleanup readbacks, not merely this scientific decision.
-The later final-delivery fields supersede this prepublication snapshot.
+Immutable science/source/raw publication is `15e401f794bb53e31c5848e0edabf0b4153ca678`.
+`publication_pin.json` fixes carrier_manifest SHA
+`8611912f5744f01ce74496ed0e78db28cb965ba1693a02b10322edec4434f6d4`. Nineteen immutable new carriers contain 41185
+members and 43784589 compressed bytes. `carrier_layout_check.json` verifies
+157 Python source modules, all six base inputs and the reviewed PDF member;
+`publication_staged_check.json` verifies 51 actual Git index byte identities.
+The science archive includes the prepublication metadata snapshots. Later
+PR/public/cleanup/cost/resume metadata are additive commits and do not rebuild
+or silently replace those science carriers.
+
+The anonymous fixed-commit new-carrier/member check passed for all 19 archives
+and 41185 members. It used 26.911494200 seconds cumulatively,
+including the preserved first certificate-chain failure, below 1800 seconds.
+The same frozen reader succeeded using the installed Windows document Python
+and its default TLS certificate verification; verification was never disabled,
+and no global setting changed. `public_restore_receipt.json`,
+`public_read_attempts.json`, `public_read_runtime.json` and
+`infra/public_read_attempt01/` record the scope and failure/recovery. This is
+public byte/member readability, separate from the existing local scientific,
+physical and proof checks. It does not redo old-round public semantic acceptance.
+
+After actual PR/public/PDF acceptance, bounded cleanup deleted exactly nine
+reconstructible final page previews, 2552234 file bytes.
+The observed E: volume free-space change was 2576384
+bytes and is not claimed as exact causal allocation. `cleanup_screening.json`
+and `cleanup_receipt.json` bind each deleted PNG hash and absolute safe path.
+All unique raw, failures, first-layout previews, final/source PDFs and TeX,
+carriers, necessary PE/DLL/objects, active trees, old rounds and user content
+remain retained. The protected original workspace was not used for new assets.
+
+`cost_report.json` is the measured closed-process snapshot before final delivery
+metadata publication; the unchanged experimental total is authoritative.
+Final small metadata push/readback receipts are retained separately under
+`E:/codes/ExactEBRP-work` to avoid a self-referential publication/cost cycle.
+No merge, force-push, old-round deletion, email or submission was performed.
+
+No Native/Optimize, build or benchmark remains to resume. Every admitted
+position is sealed: do not rerun it. Use `python -B scripts/round140_common.py
+budget` only to inspect durable accounting. Stable launches continue through
+`scripts/paper_s2.py`; research reproduction uses `scripts/paper_s2_tc2.py`
+with the declared uniform mode. Further work requires a new structural question,
+with per-vehicle linear return bounds the first bounded candidate.
