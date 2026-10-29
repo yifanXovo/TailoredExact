@@ -1,6 +1,7 @@
 #include "Round63TimeResource.hpp"
 #include "Round138Research.hpp"
 #include "Round139Research.hpp"
+#include "Round140Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -870,6 +871,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round135-aggregate-penalty") ebrp::round135AggregatePenalty() = true;
         else if (arg == "--round138-stock-rlt") ebrp::round138().stock_rlt = true;
         else if (arg == "--round139-stock-placement") ebrp::round139().set(requireValue(i, argc, argv));
+        else if (arg == "--round140-counts") ebrp::round140().set(requireValue(i, argc, argv));
         else if (arg == "--round137-delete-ab") ebrp::round137().delete_ab = true;
         else if (arg == "--round137-delete-cr") ebrp::round137().delete_cr = true;
         else if (arg == "--round137-delete-cg") ebrp::round137().delete_cg = true;
@@ -3546,6 +3548,20 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if (ebrp::round140().enabled()) {
+        if (ebrp::round127().mode != "ms2" || ebrp::round139().enabled() ||
+            opt.round120_native_proof != "off" || opt.round119_proof_contraction || opt.round90_lp_g_split)
+            throw std::runtime_error("Round140 counts require isolated ms2 and uniform stock placement");
+        if (!opt.out_path.empty()) {
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round140_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream parameters(path);
+            parameters << "{\"counts\":" << std::quoted(ebrp::round140().counts)
+                << ",\"stock\":" << (ebrp::round138().stock_rlt ? "true" : "false")
+                << ",\"placement\":\"both\",\"gurobi_seed\":" << opt.gurobi_seed
+                << ",\"H_seed\":" << opt.primal_heuristic_seed << ",\"loaded_after_presets\":true}\n";
+            if (!parameters) throw std::runtime_error("Round140 parameter persistence failed");
+        }
+    }
     if (ebrp::round139().enabled()) {
         if (ebrp::round127().mode != "ms2" || ebrp::round138().stock_rlt ||
             opt.round120_native_proof != "off" || opt.round119_proof_contraction ||

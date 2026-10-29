@@ -1,0 +1,27 @@
+"""Minimal current-writer build with unchanged old objects and no ABI changes."""
+from round140_common import *
+
+def main():
+    assert not budget()['unclosed']
+    old=read(ROOT/'results/unified_exact_round139/candidate_build.json')
+    assert sha(COMPILER)==old['compiler_SHA'] and sha(DLL)==DLL_SHA
+    assert sha(old['archive']['path'])==old['archive']['SHA256']
+    for path,digest in old['linked_objects'].items():assert sha(path)==digest,path
+    BUILD.mkdir(parents=True,exist_ok=False);flags=old['flags']
+    for stem in ['CplexBaseline','main']:
+        assert metered('compile_'+stem,'build',[COMPILER,*flags,'-c',ROOT/'src'/f'{stem}.cpp','-o',BUILD/f'{stem}.o'],timeout=600)==0
+    objects=[BUILD/'CplexBaseline.o' if Path(p).stem=='CplexBaseline' else Path(p) for p in old['linked_objects']]
+    system=['-lkernel32','-luser32','-lgdi32','-lwinspool','-lshell32','-lole32','-loleaut32','-luuid','-lcomdlg32','-ladvapi32']
+    command=[COMPILER,BUILD/'main.o',*objects,old['archive']['path'],*system,'-o',E3]
+    assert metered('link_production','build',command,timeout=120)==0
+    export=BUILD/'Round140Export.exe'
+    assert metered('compile_exporter','build',[COMPILER,*flags,ROOT/'scripts/round140_export.cpp',*objects,old['archive']['path'],*system,'-o',export],timeout=180)==0
+    source={p.relative_to(ROOT).as_posix():sha(p) for folder in ['src','include'] for p in (ROOT/folder).rglob('*') if p.suffix in ('.cpp','.hpp','.h','.inc')}
+    write(OUT/'candidate_build.json',dict(UTC=utc(),production=native_identity(),source_hashes=source,
+        compiled_units=['CplexBaseline','main'],linked_objects={str(p):sha(p) for p in objects},
+        archive=old['archive'],compiler_SHA=old['compiler_SHA'],flags=flags,link_command=list(map(str,command)),
+        exporter_PE=str(export),exporter_SHA=sha(export),source_ABI_unchanged=True,
+        no_new_columns=True,scope='Two aggregate count rows in the canonical writer, used uniformly by outer LP and native target/terminal'))
+    print('Round140 production/export PEs built; historical PEs/objects retained')
+
+if __name__=='__main__':main()
