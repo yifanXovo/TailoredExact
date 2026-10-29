@@ -29,3 +29,12 @@ The [Round137 continuation record](../results/unified_exact_round137/RESUME.md)
 records actual delivery steps as they occur and the remaining author facts. Prior evidence is pinned
 in the [research index](unified_exact_research_index.md), and the former R55
 description remains [historical](history/current_mainline_r55.md).
+
+The [Round138 inventory-product study](round138_research.md) now provides a
+separate research entry, mathematical proofs, 20 same-domain LPs, eight matched
+Seed0 configurations and two result-selected paired Seed1 confirmations.
+Its [stage decision](../results/unified_exact_round138/candidate_decision.json)
+is **RESEARCH_ONLY**: the K20 proof benefit persists, while hard-role endpoints
+remain mixed. The original GI-TBC entry/profile/PE above remain the stable
+method. The delivered V2 fixes tiny new-row coefficient transport; measured V1
+primary results and the exact Native bridge retain their separate identities.

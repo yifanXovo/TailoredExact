@@ -1,0 +1,61 @@
+{
+  "UTC": "2026-10-28T22:01:44.891558+00:00",
+  "roles": [
+    "K-20-S",
+    "R-B35-S-T2"
+  ],
+  "selection_rationale": "The limited second Seed was selected after all eleven new Seed0 positions and the complete eight-configuration comparison were sealed. K-20-S tests the main certificate benefit: stock certifies in 101.63538490096107 seconds while matched GI-TBC remains open at its 1200-second cap. R-B35-S-T2 tests the largest observed U regression: stock U rises by 0.05655759224710244 and the signed gap worsens from 0.12565667598847344 to 0.172018618174727 despite a higher L. K35 and RX35-T2 opposed endpoints remain in the primary table; they are not replaced or discarded. This is conditional finite confirmation, not a new independent sample or a runtime-distribution estimate. Both methods start fresh, pay their full own H and other costs, use Gurobi Seed1 with H seed20260626, and retain the original physical parameters and caps. Before any Seed1 Optimize, actual native coefficient readback exposed a tiny-slope LP-reader transport defect. All primary scopes were natively bridged and unaffected. STOCK Seed1 therefore uses the separately registered V2 exact power-of-two transport build; this is disclosed as a build confirmation as well as a limited second Seed, not a pure Seed-only change. The original unused registration/gate is retained under repair/seed1_pre_coefficient_fix.",
+  "dependencies": [
+    {
+      "role": "K-20-S",
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "archive": "results/unified_exact_round137/artifacts/campaign_012.zip",
+      "SHA256": "c9ebe9e0fef1f824e765450447b4e15759666bedf60886b0f73ce3addbb076c2",
+      "members": [
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/global_bound_trace.csv",
+          "SHA256": "412adb102581f27c3cb9207969cc2b67e2dc082ea080e77cd119bb040d2424fc",
+          "bytes": 7667867
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/audit.json",
+          "SHA256": "dd862e508c122432e5231a5da2216b0d32bcdae7c070f18e1fc4bf494789e2af",
+          "bytes": 28411156
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/round135_endpoint.json",
+          "SHA256": "3d085aa226cf896760de54a663c1dfbf2d752a2375f4aad978544b0a86c98ddf",
+          "bytes": 3202
+        }
+      ]
+    },
+    {
+      "role": "R-B35-S-T2",
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "archive": "results/unified_exact_round137/artifacts/campaign_052.zip",
+      "SHA256": "9432f7877c80f7059d8597bca932327aab8c54ec36837a9d8ff5ea468a51f552",
+      "members": [
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/global_bound_trace.csv",
+          "SHA256": "2766fc1bd6d8aea777b84993ee20eb79f5fc3e48f0b3b07bf89e6a0c5efa11d7",
+          "bytes": 28619
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/audit.json",
+          "SHA256": "2c01e473988ed65d5f953447175b8e2867dffe901196ae86c7a02fa1514c3266",
+          "bytes": 148220
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/round135_endpoint.json",
+          "SHA256": "4796e669619f9e6ae18d8acc5f9b8a76735a14d69549507a960a75cafc0b729a",
+          "bytes": 3320
+        }
+      ]
+    }
+  ],
+  "rows": 45354,
+  "Optimize": 0,
+  "scope": "Actual guarded controller valid_global_lower_bound and verified_global_upper_bound; each sealed run has no source revocation and its final trace agrees with the qualified endpoint",
+  "clock": "Native process elapsed; formal T_produce/T_cert remain their independently complete clocks",
+  "no_raw_node_bound_substitution": true
+}

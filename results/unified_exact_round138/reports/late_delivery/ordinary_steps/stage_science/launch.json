@@ -1,0 +1,26 @@
+{
+  "UTC": "2026-10-29T00:03:21.562788+00:00",
+  "command": [
+    "git",
+    "-c",
+    "gc.auto=0",
+    "-c",
+    "maintenance.auto=false",
+    "add",
+    "--sparse",
+    "--",
+    "scripts/round138*.py",
+    "scripts/paper_s2_stock_rlt.py",
+    "config/gi_tbc_stock_rlt_round138.json",
+    "docs/current_mainline.md",
+    "docs/round138_research.md",
+    "docs/unified_exact_research_index.md",
+    "results/unified_exact_round138",
+    "include/Round138Research.hpp",
+    "src/main.cpp",
+    "src/CplexBaseline.cpp"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current",
+  "Optimize": 0,
+  "scope": "Ordinary non-experiment operation; solver invocation forbidden by selected script contract"
+}

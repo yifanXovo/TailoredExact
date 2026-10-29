@@ -1,0 +1,39 @@
+{
+  "UTC": "2026-10-28T21:51:26.964849+00:00",
+  "manifest_SHA": "aea824a4d1e1b85ef7e4f77fa8b447599791db516cb99ab2ab77cf7089823317",
+  "compiled_units": [
+    "CplexBaseline"
+  ],
+  "unchanged_main_object": {
+    "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round138\\main.o",
+    "SHA256": "1b6aee422b52bfdb6c46ad4af3a9d1f1de737326dfe0561b4807a9d506435f63"
+  },
+  "linked_objects": {
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round133\\NativeEvidenceJournal.o": "d74ee59c43d5e24ec7e3411cdd564a5758acd9320e70917ec6157b28c3bc7e8c",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round133\\ControllingLeafScheduler.o": "70fd35f75fe82399af597c110e54292dffad98c867951a1056f1ef6c5f0704a3",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\GurobiBaseline.o": "a9917d6c81a527fc987034112d17f693c945c23ed142857c0f2d4e4ba0ab2dcc",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\PaperExternalGiniTree.o": "7c33070b97a6ba0a4a56eca9591e054e76f69ddf0eed6b5d7486eec16411f48a",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\IntervalRowFactory.o": "5d859625b91463121080af25ed9d0921be0a375829bfcdb58d85a99eaa9f2af2",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round138-coefficient-fix\\CplexBaseline.o": "277beb2e253f4a1476427ac0062997d5f4dec3ece4a6eed49d9dc10858adbf16"
+  },
+  "archive": {
+    "path": "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\build\\research\\round120\\libexact_ebrp_core.a",
+    "SHA256": "f2f7608894793b60794b91fa204c7d5e8a7ce13078e6115be32ca645804c9acd"
+  },
+  "compiler_SHA": "8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1",
+  "flags": [
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-DEXACT_EBRP_ENABLE_GUROBI=1",
+    "-IE:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\include",
+    "-IE:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts",
+    "-ID:/gurobi1302/win64/include"
+  ],
+  "exporter_PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round138-coefficient-fix\\Round138Export.exe",
+  "exporter_SHA": "43acc7e832ec59d5c257f2c32098d23507ce224d639334c65a29245fbb4f770f",
+  "old_production_PE_untouched": true,
+  "source_ABI_unchanged": true,
+  "pre_metadata_manifest_SHA": "f88621b4959fb33f4af46b8301b1a244194306eb05d885c8961bec5899b3a8d5"
+}

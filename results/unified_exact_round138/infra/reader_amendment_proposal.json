@@ -1,0 +1,26 @@
+{
+  "UTC": "2026-10-28T18:11:53.007559+00:00",
+  "matrix_SHA": "9c584f3f20232c17ec169ecaab4d9937071f60192f810c22665ef1e200f1bac5",
+  "cause": "Postreader used legacy event lifecycle for explicitly frozen modern baseline-r137; native run1 returned OPTIMAL and is sealed. Strict modern lifecycle is now required without changing historical source adjudication.",
+  "helper_replacements": {
+    "scripts/round138_read.py": {
+      "old_SHA": "6e388c09e1e2fad9ee2008e68ae6dbd108149a1e25ce1b0be7f0ca98b3e8039a",
+      "new_SHA": "b677146dbc86953ef8930294140d299cfe914b767f8bff48b5cd89be53debf5a"
+    },
+    "scripts/round138_campaign.py": {
+      "old_SHA": "a3128059984d14c22eb94dbb8c32e2fde55a5f6aa812ca7874e0f4e0c322b5b5",
+      "new_SHA": "6933113d6881980e06ae6ab43f8c125a75d9e40be1335767fc255d61f719f227"
+    }
+  },
+  "failed_fee_SHA": "1d553cc63c53984a4adcc84eccafb1ae33b6635616b40a5e627b9bae57cb7954",
+  "stderr_SHA": "6acb8e59a2d3fbda7a743075471f6ff644c949737b7b119e0d288315306034c1",
+  "no_production_source_PE_or_command_changes": true,
+  "no_native_rerun": true,
+  "verification_only_command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round138_campaign.py",
+    "arm",
+    "1",
+    "arm_001_verify02"
+  ]
+}

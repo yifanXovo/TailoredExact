@@ -1,0 +1,19 @@
+{
+  "UTC": "2026-10-28T23:51:40.185210+00:00",
+  "study_complete": true,
+  "decision": "RESEARCH_ONLY",
+  "candidate": "GI-TBC+stock-RLT",
+  "delivered_version": "V2 coefficient-transport repair",
+  "full_results_discussion": "The primary certificate count is 2/8 for matched GI-TBC and 3/8 for stock RLT. K15 certifies in 33.818227 seconds versus 112.769303 seconds, a substantive difference under the declared rule; the separate contemporaneous BASE bridge takes 122.579382 seconds. RX20 certifies in 15.340479 versus 20.506462 seconds, below the ten-second substantive threshold. K20 adds a certificate in 101.635385 seconds while its baseline remains open at cap1200; no baseline convergence time or capped time ratio is invented. All five n35 primary configurations remain open. RB35-T1 and RX35-T1 improve both U and L, with the RX35-T1 improvement mostly in L. K35 improves U but loses L. RB35-T2 improves L but materially worsens U and both gap measures. RX35-T2 improves L but worsens U and signed gap, even though its relative gap is slightly smaller. The component table shows that RB35-T2 worsens both true G and P_avg; RX35-T2 improves P_avg but its G increase is larger. No endpoint is hidden by a preferred gap measure. Both micro controls certify in about one second; their small time difference gives no substantive overhead conclusion.",
+  "interpretation": "The mathematical budget-product gap and all four real same-domain LP increments are established. Those increments sometimes yield complete proof benefits, particularly on K20 and K15, but they do not order finite-budget primal/dual endpoints on the resource-constrained n35 roles. The selected second Seed retains the K20 certificate benefit and reverses the RB35-T2 U direction. The known panel and selected second Seed support a focused research conclusion, not universal dominance, a new unseen benchmark claim, or an additive allocation of runtime benefit.",
+  "decision_paragraph": "Keep GI-TBC+stock-RLT research-only. The continuous-block explanation, real-root improvements and repeated K20 certificate benefit justify retaining the uniform four-row mechanism for further study. The primary upper-bound regressions on two resource configurations and K35 lower-bound regression leave insufficient evidence for a default promotion. Preserve the accepted GI-TBC entry/profile/PE and expose the repaired V2 only through its separate explicit research entry. This decision does not require every role to win; it reflects the size and practical relevance of the observed opposed endpoints.",
+  "next_question": "The next informative question is whether the four inventory rows in the target MIP delay verified incumbent discovery even when their LP bounds improve. A minimal screen is one Seed0 BASE/STOCK target-MIP pair on the same saved initial RB35-T2 interval, exact objective/cutoff and physical input, with no imported Start and at most 120 seconds each. Record first own physically verified improvement and supported L. Label it a fixed-subproblem diagnostic; do not backfill it into the completed full runs. Only if that screen supports the mechanism should a separately named uniform LP-bound-only placement of stock RLT receive a small complete pilot. This directly tests a primal/dual placement question without another AM grid or broad Seed repetition.",
+  "primary_full_SHA": "e7cad03e11f71ea843cedfabbe05dee599042a84a4669af39bfff46b259002bc",
+  "Seed1_SHA": "551cc22da0378151fc8de35edce3ed7713e04725a6524eaef3524dc6dc11e797",
+  "mathematical_analysis_SHA": "124f9e6b55953b6f66ad18c729479ae34acab2a2afb8310c286f4578fdad21ee",
+  "LP_SHA": "982c10ed11fb8e57692b16d3e0de9735a191f58520505f151ed35d5d774f678c",
+  "primary_V1_manifest_SHA": "07e1d207447d643df79ff86a4df5adb93bc9ef63cb62ad623dc2150fd75c5bd2",
+  "delivered_V2_manifest_SHA": "aea824a4d1e1b85ef7e4f77fa8b447599791db516cb99ab2ab77cf7089823317",
+  "original_default_preserved": true,
+  "Optimize": 0
+}

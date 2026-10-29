@@ -1,0 +1,18 @@
+{
+  "UTC": "2026-10-28T18:02:29.162054+00:00",
+  "Optimize": 0,
+  "issues": [
+    {
+      "kind": "offline parser shape",
+      "description": "Initial setup treated LP objective (terms, constant) as terms; corrected before any new Optimize; inherited bytes retained"
+    },
+    {
+      "kind": "offline result key",
+      "description": "Qualification physical dict uses return_loads; replaced erroneous returns access with full physical evidence; existing successful exports reused without reexecution"
+    },
+    {
+      "kind": "same-domain cutoff",
+      "description": "RX20 first export used independently recomputed U, one ULP above saved native cutoff, causing 23 old rows to differ. Comparison refused before Optimize; failed export preserved. All roots now use original beta/native cutoff, and require exact semantic baseline plus four-row delta. Validated physical U remains the common gap reference."
+    }
+  ]
+}

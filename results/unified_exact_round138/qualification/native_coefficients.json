@@ -1,0 +1,84 @@
+{
+  "PASS": true,
+  "cases": [
+    {
+      "case": "root",
+      "Seed": 0,
+      "Threads": 1,
+      "model": "results/unified_exact_round138/qualification/repair/root/stock/original.lp",
+      "SHA256": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+      "rows": 4,
+      "all_native_coefficients_and_RHS_exact": true
+    },
+    {
+      "case": "child_low",
+      "Seed": 0,
+      "Threads": 1,
+      "model": "results/unified_exact_round138/qualification/repair/child_low/stock/original.lp",
+      "SHA256": "bb478df4db779e6a61f782940d7153e0ebbb1a628b3191fb5d2fb94129f6333b",
+      "rows": 4,
+      "all_native_coefficients_and_RHS_exact": true
+    },
+    {
+      "case": "child_high",
+      "Seed": 0,
+      "Threads": 1,
+      "model": "results/unified_exact_round138/qualification/repair/child_high/stock/original.lp",
+      "SHA256": "c2dc817220d8ecadb9efee962ac5bbe0fcfb74d0f4c384e4247d0d0deb5b238f",
+      "rows": 4,
+      "all_native_coefficients_and_RHS_exact": true
+    },
+    {
+      "case": "cutoff_refresh",
+      "Seed": 0,
+      "Threads": 1,
+      "model": "results/unified_exact_round138/qualification/repair/cutoff_refresh/stock/original.lp",
+      "SHA256": "647df33dc612ea2f2afbdcf1b1758af3f6ee3d578b0448ba6d91d42cf20db532",
+      "rows": 4,
+      "all_native_coefficients_and_RHS_exact": true
+    },
+    {
+      "case": "degenerate",
+      "Seed": 0,
+      "Threads": 1,
+      "model": "results/unified_exact_round138/qualification/repair/degenerate/stock/original.lp",
+      "SHA256": "a06816502d79c4d309d93814787321d13a66b4aa49ced3ab8d10e3ae36fd216f",
+      "rows": 4,
+      "all_native_coefficients_and_RHS_exact": true
+    },
+    {
+      "case": "tiny_alpha",
+      "Seed": 0,
+      "Threads": 1,
+      "model": "results/unified_exact_round138/qualification/repair/tiny_alpha/stock/original.lp",
+      "SHA256": "4d48f234fc2ff3826eb523769812d27c95970435b4e859f71e417055867ae132",
+      "rows": 4,
+      "all_native_coefficients_and_RHS_exact": true
+    },
+    {
+      "case": "near_one",
+      "Seed": 0,
+      "Threads": 1,
+      "model": "results/unified_exact_round138/qualification/repair/near_one/stock/original.lp",
+      "SHA256": "9557f879abf0d371c2f18a93486d4bd9db971aae7dd23bcc8640232e7d849e79",
+      "rows": 4,
+      "all_native_coefficients_and_RHS_exact": true
+    }
+  ],
+  "Optimize": 0,
+  "model_reads": 32,
+  "Seed": 0,
+  "Threads": 1,
+  "native_identity": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "repaired_manifest_SHA": "aea824a4d1e1b85ef7e4f77fa8b447599791db516cb99ab2ab77cf7089823317",
+  "prior_failure_preserved": "fees/native_coeff_readback",
+  "no_tolerance_change": true,
+  "pre_metadata_manifest_SHA": "f88621b4959fb33f4af46b8301b1a244194306eb05d885c8961bec5899b3a8d5"
+}

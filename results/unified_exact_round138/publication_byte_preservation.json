@@ -1,0 +1,93 @@
+{
+  "UTC": "2026-10-29T00:14:50.212405+00:00",
+  "reason": "core.autocrlf=true had normalized top-level generated CSV and reviewer receipt text while immutable carriers already preserved actual measured/reviewed bytes. Round138 now inherits the same byte-preserving .gitattributes convention as previous accepted rounds.",
+  "unchanged_numeric_science_and_immutable_carriers": true,
+  "no_rearchive_or_resolve": true,
+  "affected_original_text_files": [
+    {
+      "path": "results/unified_exact_round138/repair/seed1_pre_coefficient_fix/review/seed1_admission.json",
+      "science_Git_blob_SHA256": "2119cc261fb32db2b9b933cbad1541783dd5dfc2579d128bd6341129c250e894",
+      "actual_local_and_carrier_bytes_SHA256": "52b114fabc1a266480463860ecf834184ef8ac1d528a96d2ba342e479b792ad0",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/reports/LP.csv",
+      "science_Git_blob_SHA256": "a585b20e2ca994eeaf12c593e40e8512fb26127f1dc6fdc1ab82ce1680b82d27",
+      "actual_local_and_carrier_bytes_SHA256": "ff9c3ae3567be98935c9c6421fa7c3e9ad1cd671c1a39ac439eeae1371b029e5",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/reports/contemporaneous-baseline-bridge/arms.csv",
+      "science_Git_blob_SHA256": "1aa3858e09d7645066888385fd70b26459c60fdba8a076382f1b8cecf1bd3055",
+      "actual_local_and_carrier_bytes_SHA256": "587c542ce908a8cd6aaf62fd4638ca74e19f6224221aca4d8be82abbf70013ec",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/reports/core-completion/arms.csv",
+      "science_Git_blob_SHA256": "51a9cea68f620cbf973f3eb6c21d5d222b32de08a93fd31d792922cba059f8df",
+      "actual_local_and_carrier_bytes_SHA256": "aa0ca5e6a54bdd6530ee6ca73a39e19509dc350beb8b1d01ddd41d17dffc73b8",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/reports/micro/arms.csv",
+      "science_Git_blob_SHA256": "606a785dc5d4f71671d9f8d6e34cf1e23c2a9d9eb209a3680e20f7018a70b444",
+      "actual_local_and_carrier_bytes_SHA256": "23eb7c053ad8323ecc6bcdca0a7731691198790164c82dad009b8c35cf48793b",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/reports/new_arms.csv",
+      "science_Git_blob_SHA256": "c80a52998635df81fc545ec9373d8edeb5def55dc01a40672d117aa3e2d3833b",
+      "actual_local_and_carrier_bytes_SHA256": "25f082f1f16540791f24f4ecc611a60870235be595890cbdd0bbf97e09c86918",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/reports/pairs.csv",
+      "science_Git_blob_SHA256": "b8258bd0bbc7a0ee62b28a254e04f92c18b0a002c47b7339bbf101225bd424b9",
+      "actual_local_and_carrier_bytes_SHA256": "6812c1caad8e7c8599896504e1d2fa17934996e74910382bb6ed2b6e156988a1",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/reports/pilot/arms.csv",
+      "science_Git_blob_SHA256": "10d578480c934a714555b580c7cc92d451e63149be06e477715de2714fc12a29",
+      "actual_local_and_carrier_bytes_SHA256": "0082ddc023bba2c48955af1e2034bff479f5427f6cb1a61f64619d6a0604310b",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/reports/seed1.csv",
+      "science_Git_blob_SHA256": "f8db11a4769de59c4518924a5d5c892b52b056938b863e98477101d52d13c745",
+      "actual_local_and_carrier_bytes_SHA256": "8b431a51ac0e8eb979e88b94760cddb2546e6e13cf61442adf08e6991b9c3b41",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/reports/trajectories.csv",
+      "science_Git_blob_SHA256": "5d120d12c5391a6d245dcf458b0aec85befdeee56fd6f0188b3302b9679ee85d",
+      "actual_local_and_carrier_bytes_SHA256": "6606fca42dfec40eb7d23f8b4ad20d8d1621562c87dcddb3387f2e3290db7405",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/review/final_integration.json",
+      "science_Git_blob_SHA256": "321740f7edf4e938b880b27933f1fb52b301df0a3b937b330ac9425c3620d783",
+      "actual_local_and_carrier_bytes_SHA256": "c669debc355f2e2e60c3417b369cb6710d86d9f122f0aa3b9e72b6992b595eae",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/review/final_integration.md",
+      "science_Git_blob_SHA256": "43bae90e615d6b3445919fde56a51d44d2ccd03a59f52c46f7b75b91862a6922",
+      "actual_local_and_carrier_bytes_SHA256": "bec8338c487f1bf02e5bbe4c68aa94ed5e1ea9027c6468e28a80b7def0fed9be",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/review/reader_amendment.json",
+      "science_Git_blob_SHA256": "65cd6df222ffbaab1e86120b952367c4dae4a846a09d5609e9d27e4ed9677438",
+      "actual_local_and_carrier_bytes_SHA256": "6ed24eba6c064d877b9e43756454f0b916532ba1d5873211672219e51559cfe4",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    },
+    {
+      "path": "results/unified_exact_round138/review/seed1_admission.json",
+      "science_Git_blob_SHA256": "9d88e04d787237c7d1f970eae1e6f68d83a6344d8be483bd975c7085dd11c336",
+      "actual_local_and_carrier_bytes_SHA256": "a65067866b1da98b07268b4bb15b96d2d9cc59d94b3aa681f7802ea9d4e09a53",
+      "only_difference": "CRLF preserved instead of Git autocrlf LF conversion"
+    }
+  ],
+  "Optimize": 0
+}

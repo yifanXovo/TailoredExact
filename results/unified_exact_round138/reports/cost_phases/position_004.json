@@ -1,0 +1,71 @@
+{
+  "H_search_phase": {
+    "start_event": "hga_start",
+    "end_event": "decoded_descent_complete",
+    "label_key": "label",
+    "starts": [
+      {
+        "sequence": "4",
+        "process_seconds": "0.015134",
+        "event": "hga_start",
+        "status": "start",
+        "nominal_deadline_remaining_seconds": "1199.9848663",
+        "work_deadline_remaining_seconds": "1169.9848661999999",
+        "detail": "label=primary_hga;finite_random_seed_decoded_descent"
+      }
+    ],
+    "ends": [
+      {
+        "sequence": "5",
+        "process_seconds": "0.3584946",
+        "event": "decoded_descent_complete",
+        "status": "complete",
+        "nominal_deadline_remaining_seconds": "1199.6415059999999",
+        "work_deadline_remaining_seconds": "1169.6415058",
+        "detail": "label=primary_hga;generations=0;no_improve=0;completed_seeds=25"
+      }
+    ],
+    "span_seconds": 0.3433606,
+    "status": "MATCHED_SINGLE_RECORDED_SPAN",
+    "complete_cost_decomposition": false,
+    "matched_label": "primary_hga",
+    "start_status": "start",
+    "end_status": "complete"
+  },
+  "first_canonical_model_phase": {
+    "start_event": "root_canonical_model_construction_start",
+    "end_event": "root_canonical_model_construction_complete",
+    "label_key": "leaf",
+    "starts": [
+      {
+        "sequence": "14",
+        "process_seconds": "0.37964019999999998",
+        "event": "root_canonical_model_construction_start",
+        "status": "start",
+        "nominal_deadline_remaining_seconds": "1199.6203599",
+        "work_deadline_remaining_seconds": "1169.6203598",
+        "detail": "leaf=L0"
+      }
+    ],
+    "ends": [
+      {
+        "sequence": "17",
+        "process_seconds": "0.63783540000000005",
+        "event": "root_canonical_model_construction_complete",
+        "status": "complete",
+        "nominal_deadline_remaining_seconds": "1199.3621648000001",
+        "work_deadline_remaining_seconds": "1169.3621647",
+        "detail": "leaf=L0"
+      }
+    ],
+    "span_seconds": 0.25819520000000007,
+    "status": "MATCHED_SINGLE_RECORDED_SPAN",
+    "complete_cost_decomposition": false,
+    "matched_label": "L0",
+    "start_status": "start",
+    "end_status": "complete"
+  },
+  "phase_ledger_SHA": "e2f2b35062208e0c6138e14b88b504a913425003379fe846c4321ad30bc37086",
+  "nested_diagnostic_not_extra_budget": true,
+  "H_complete_is_a_separate_qualification_field": true
+}

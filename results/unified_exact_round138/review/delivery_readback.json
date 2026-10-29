@@ -1,0 +1,151 @@
+{
+  "schema": "round138-independent-bounded-delivery-readback-v2-final",
+  "UTC": "2026-10-29T00:24:41.221171+00:00",
+  "reviewer": "/root/independent_review",
+  "decision": "ACCEPT",
+  "bounded_receipt_checks_PASS": true,
+  "scope": "Actual local delivery/public/cleanup receipts, selected restored-file readback, exact line-ending preservation check, current final metadata, and direct connected GitHub PR metadata. No new public member replay or whole historical recovery.",
+  "science_commit": "1b19897ab5819ab3b7485ddc978954b45225f361",
+  "carrier_manifest_SHA": "4fba11a23aadcf5723b964017def69b52c07dea45330f6c30edb5bc9046de14c",
+  "PR_observation": {
+    "URL": "https://github.com/yifanXovo/TailoredExact/pull/200",
+    "readback_source": "GitHub connected get_pr_info, independently invoked by reviewer after successful normal delivery snapshot push",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round137-gi-tbc-consolidation",
+    "base_SHA": "72fdcd31716d7b4798727b4ea964b32059c630d1",
+    "head": "codex/round138-shared-product-resource-coupling",
+    "head_SHA": "ba1de463b0b229b7986eb37101fa862e0a9e8b45",
+    "English_title_and_body_read": true,
+    "body_now_reports_public_and_cleanup_complete": true,
+    "body_science_and_V1_V2_scope_consistent": true
+  },
+  "public_readback": {
+    "receipt_PASS": true,
+    "archives": 19,
+    "members_reported_checked": 99052,
+    "cumulative_seconds": 28.67516169999726,
+    "limit_seconds": 1800.0,
+    "attempts": 2,
+    "first_attempt": "Retained MSYS SSL certificate validation failure before any manifest/archive download",
+    "second_attempt": "Same fixed pin, same owned restore root, same cumulative history; existing Windows Python with certificate validation enabled",
+    "certificate_or_global_trust_bypass": false,
+    "local_restored_archive_sizes_and_checked_markers_verified": 19,
+    "local_restored_archive_hashes_rechecked": [
+      "source_v1_and_frozen_helpers.zip",
+      "source_and_helpers.zip",
+      "science_and_paper.zip"
+    ],
+    "local_restored_manifest_and_attempt_history_hashes_verified": true,
+    "scope_is_byte_and_member_readability_not_full_public_semantic_replay": true,
+    "R137_previous_public_semantic_limitation_not_resolved_or_relabelled": true
+  },
+  "cleanup_readback": {
+    "exact_target": "E:/codes/ExactEBRP-work/worktrees/paper-current/results/unified_exact_round138/qa_pages",
+    "target_now_absent": true,
+    "deleted_paths_and_hashes_match_previously_actually_viewed_manifest": true,
+    "files": 13,
+    "file_bytes": 2937847,
+    "observed_volume_free_change": 2969600,
+    "free_change_is_concurrent_observation_not_file_byte_identity": true,
+    "public_receipt_and_PDF_render_visual_review_hash_chain_verified": true,
+    "all_15_unique_raw_destinations_and_seals_retained": true,
+    "native_failure_and_unused_pre_repair_Seed1_retained": true,
+    "actual_PE_DLL_carrier_and_restore_files_retained": true
+  },
+  "default_and_cost": {
+    "five_required_entry_config_hashes_match_source_publication": true,
+    "G1_seconds": 18214.684111300157,
+    "G1_open_fees": [],
+    "science_cost_snapshot_preserved": true,
+    "later_ordinary_costs_separate": true,
+    "late_closed_record_files_independently_hashed": 40,
+    "final_snapshot_ordinary_metered_total_seconds": 439.2624084998388
+  },
+  "blocking_receipt_issues": [],
+  "bindings": {
+    "publication_pin.json": "0a13cb7a4c2f32071ed7bf67c5e487bb15a6a72081c216e28e273211f43830a7",
+    "PR_delivery.json": "5358e2b93a6e2778f39439654778b55541d53ca8a6e0f7c5592ac00f9e7920ab",
+    "carrier_manifest.json": "4fba11a23aadcf5723b964017def69b52c07dea45330f6c30edb5bc9046de14c",
+    "source_publication.json": "5cc20b501412544dd016a789bff9cb5c14960d5f3125696bb884f9423fad81c7",
+    "publication_screen.json": "bd36f9dc938f0a39605e2396778eb075ed03ed4ff033c35f9dfd87d04af74847",
+    "public_restore_receipt.json": "6acb50e0f196bfee7dd395a1bafb8a0264a5f1c8368f80db55b7f8476a6fdc8a",
+    "reports/late_delivery/public_attempts.json": "538b58fbfaf9762185bdc3ac9e5268f501e776d86de0de093965789cfc18eb39",
+    "reports/late_delivery/public_owner.json": "a609c6588e8268bdf8e4d7682bbc5850ee49b5e838f723ec7336ae01c4bd7082",
+    "reports/late_delivery/retained_records.json": "183c1590649ce5b5af2a1a068c0078c2a18c3068d33c634da204ff888f1c349b",
+    "public_read_runtime_amendment.json": "3d47af77527a4531ef9a09fed6471527e72b315661da5817eacab5abce94b3e7",
+    "cleanup_receipt.json": "7fe53df276f47380a0ea16ee1aa08e49c9a17bd406e3618a1e843e1209137a09",
+    "pdf_visual_review.json": "32efce807132f6431732b696901bb228ae027898a1048f67c79f8981aa361c63",
+    "pdf_render_manifest.json": "adffb032485b0ba9f91bd1569d68cd3d2dc63f14e92a3587077454c4b80b981c",
+    "manuscript.pdf": "35ac859af077ae659fbc601664ddfc95f82cc104446d671904c5ba415d3b6e8b",
+    "review/final_integration.json": "c669debc355f2e2e60c3417b369cb6710d86d9f122f0aa3b9e72b6992b595eae",
+    "review/final_integration.md": "bec8338c487f1bf02e5bbe4c68aa94ed5e1ea9027c6468e28a80b7def0fed9be",
+    "cost_report.json": "a880ace1de8f39fea152029fef58ee3e04557ec39a6a25824baba875c8a5c766",
+    "reports/cost_at_science_freeze.json": "0bb7697352610225049339c0b68aab499f28f6b04e4e023bae4b1aaabb0efcc2",
+    "ordinary_steps/public_read/launch.json": "ae1855a4a85239d4725528d96fe7fba9f8e50fed2d2aa13222c1043bc18bc095",
+    "ordinary_steps/public_read/receipt.json": "6d63c77347da7aaf3dde746ddfd1601c79043e9b37cce245bf9a738a14b366d4",
+    "ordinary_steps/public_read_windows_resume/launch.json": "3e994277242c454e47b1ddf75872687b1272d4f9b0e8bdf69f7d3780d2c8a392",
+    "ordinary_steps/public_read_windows_resume/receipt.json": "b9426b869285ca00fd7798791c02bae043b3627ad21e34ff5ff3522720012b96",
+    "ordinary_steps/final_preview_cleanup/receipt.json": "1f694e2c8a549ef6e9cc492ee2028b540a320d0c09522c4cb1bc9968c1107903",
+    "reports/pr_after_delivery_snapshot.json": "4b2125360258130ce2f9e418fbc5a9bdfbed113cb779b9ee8a24a3dded179787",
+    "publication_byte_preservation.json": "a564d72e2548b9b1433114a1456ddc079056c5b9d19cea354c97e169df8dc0e9",
+    "final_delivery_report.md": "66ad60e7752cb2b946f8187e0a4f22f09673c63c3545ba8d31c5f2ebfe52f5f7",
+    "RESUME.md": "c98b0b93edbb40bdf41cd7ef9d014f14aa32d03d016435330d0f27bff3516d89",
+    "infra/automatic_maintenance_interruption.json": "c871c106aa8dc9f6bbcb6254dd48d95e052e91c2ac9b887f310e6abed90ac4ef",
+    "ordinary_steps/push_delivery_receipts/receipt.json": "5d5b1d90b361f85efa7768f202de1666163dd1ba4cedaa257a880567eea802ad"
+  },
+  "review_actions": {
+    "new_Optimize": 0,
+    "commercial_DLL_loads": 0,
+    "compilation": 0,
+    "new_public_downloads": 0,
+    "member_reinflation_or_whole_old_recovery": 0,
+    "production_or_frozen_helper_changes": 0,
+    "Git_mutation": 0,
+    "publication_or_cleanup": 0,
+    "written_files": [
+      "review/delivery_readback.json",
+      "review/delivery_readback.md"
+    ],
+    "Git_reads": "Only exact local commit blobs, attributes and HEAD plus connected PR metadata; no Git mutation."
+  },
+  "acceptance_scope": "Final independent H/I review of the actually pushed delivery snapshot and the current final late-metadata bytes, before ordinary publication of this review receipt. The root agent will normally publish this receipt and read back the resulting PR head separately; this receipt does not recursively claim its own future commit hash.",
+  "previous_interim_review": {
+    "JSON_SHA": "53b82362481f525908a3f0880d496d5a6ce8b5b1170a10bce456b1b53aa9add5",
+    "MD_SHA": "d2d28fea208a28960909a4bee623c7a11ba95f2b305a2b3befe0e6a5de30853a"
+  },
+  "byte_preservation_check": {
+    "files": 14,
+    "science_commit": "1b19897ab5819ab3b7485ddc978954b45225f361",
+    "delivery_snapshot": "ba1de463b0b229b7986eb37101fa862e0a9e8b45",
+    "actual_Git_blobs_independently_read_at_both_commits": true,
+    "all_science_blobs_equal_actual_bytes_with_CRLF_replaced_by_LF": true,
+    "all_delivery_blobs_equal_actual_original_bytes": true,
+    "Round138_scoped_text_unset_attributes_independently_verified": true,
+    "immutable_carriers_and_numeric_science_unchanged": true,
+    "no_rearchive_or_resolve": true
+  },
+  "late_metadata_check": {
+    "closed_record_files_hashed": 40,
+    "already_committed_in_observed_snapshot": 36,
+    "explicit_log_files_present_in_snapshot": 18,
+    "four_successful_push_record_files_ready_for_final_metadata_publication": true,
+    "final_cost_snapshot_UTC": "2026-10-29T00:20:56.007697+00:00",
+    "ordinary_recorded_total_seconds": 439.2624084998388,
+    "ordinary_total_is_nonexhaustive_point_in_time_metered_scope": true,
+    "automatic_Git_maintenance_interruption_separately_disclosed": true,
+    "final_report_and_RESUME_current_bytes_read": true,
+    "PR_delivery_scope_has_no_stale_pending_steps": true
+  },
+  "unresolved_substantive_issues": [],
+  "publication_boundary": {
+    "observed_pushed_snapshot": "ba1de463b0b229b7986eb37101fa862e0a9e8b45",
+    "current_final_metadata_bound_below": "Accepted current bytes; some are intentionally newer than the observed snapshot and accompany this ordinary receipt publication.",
+    "post_push_actual_head_record": "E:/codes/ExactEBRP-work/temp/round138/final_pr_readback.json",
+    "no_receipt_self_commit_hash_requirement": true
+  },
+  "root_bindings": {
+    ".gitattributes": "7320c97966dc039ad10e932e37291d21b3c74fb560d34a0a1f2544a39027e1b3"
+  }
+}

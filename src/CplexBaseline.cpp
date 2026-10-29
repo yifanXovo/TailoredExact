@@ -1,6 +1,7 @@
 #include "CplexBaseline.hpp"
 #include "Round127Research.hpp"
 #include "Round135Research.hpp"
+#include "Round138Research.hpp"
 #include "Round62Thresholds.hpp"
 #include "Round63TimeResource.hpp"
 #include "Round64SharedResource.hpp"
@@ -3176,6 +3177,70 @@ void writeCompactLp(const Instance& instance,
         }
         out << " >= 0\n";
         if (stats != nullptr) stats->enabled_families.push_back("round135_aggregate_state_penalty");
+    }
+    if (round138().stock_rlt) {
+        if (!station_state_vdp || options.round98_state_service != "m-binary" || !strengthened)
+            throw std::runtime_error("Round138 stock RLT requires GI-TBC shared VD-P states");
+        long long stock = 0, fleet_capacity = 0;
+        for (int i = 1; i <= V; ++i) stock += instance.initial[i];
+        for (int q : instance.Q) fleet_capacity += q;
+        // Empty departures and loaded returns give B-sum(Q) <= sum(Y) <= B.
+        // Depot inventory and cumulative pickups never enter this budget.
+        const double B = static_cast<double>(stock);
+        const double Bminus = static_cast<double>(std::max(0LL, stock - fleet_capacity));
+        if (stock < 0 || stock > 9007199254740992LL)
+            throw std::runtime_error("Round138 stock total is not exactly representable");
+        const auto emit_stock_row = [&](double slope, double budget, bool upper) {
+            Expr row;
+            for (int i = 1; i <= V; ++i) {
+                row[zprodName(i)] = 1.0;
+                if (slope != 0.0) row[yName(i)] = -slope;
+            }
+            if (budget != 0.0) row["G"] = -budget;
+            double rhs = -slope * budget;
+            if (!std::isfinite(rhs)) throw std::runtime_error("Round138 nonfinite stock RHS");
+            // One outward ULP encloses the exact product of the stored doubles.
+            // All variable coefficients are emitted verbatim at max_digits10.
+            if (slope != 0.0 && budget != 0.0)
+                rhs = std::nextafter(rhs, upper ? std::numeric_limits<double>::infinity()
+                                               : -std::numeric_limits<double>::infinity());
+            // The native LP reader can drop extremely small coefficients.
+            // Preserve the complete new row by an exact positive power-of-two
+            // scale, including its already outward RHS. Ordinary rows retain
+            // identical canonical bytes; no coefficient is silently removed.
+            if (slope != 0.0 && std::fabs(slope) < 1e-12) {
+                int exponent = 0;
+                while (std::ldexp(std::fabs(slope), exponent) < 1e-12) {
+                    if (exponent >= 1023)
+                        throw std::runtime_error("Round138 stock row scale is not finite");
+                    ++exponent;
+                }
+                for (auto& term : row) {
+                    term.second = std::ldexp(term.second, exponent);
+                    if (!std::isfinite(term.second))
+                        throw std::runtime_error("Round138 scaled stock coefficient is not finite");
+                }
+                rhs = std::ldexp(rhs, exponent);
+                if (!std::isfinite(rhs))
+                    throw std::runtime_error("Round138 scaled stock RHS is not finite");
+            }
+            out << " c" << cid++ << ": ";
+            bool first = true;
+            for (const auto& term : row) {
+                out << (first ? (term.second < 0 ? "- " : "") :
+                        (term.second < 0 ? " - " : " + "));
+                out << num(std::fabs(term.second)) << " " << term.first;
+                first = false;
+            }
+            out << (upper ? " <= " : " >= ") << num(rhs) << "\n";
+        };
+        // Exactly four rows per canonical construction, including child and
+        // cutoff refresh models; canonical bytes bind cache/model identities.
+        emit_stock_row(g_lb, Bminus, false);
+        emit_stock_row(g_ub, B, false);
+        emit_stock_row(g_ub, Bminus, true);
+        emit_stock_row(g_lb, B, true);
+        if (stats != nullptr) stats->enabled_families.push_back("round138_stock_rlt");
     }
     Expr gini;
     for (int i = 1; i <= V; ++i) addTerm(gini, zprodName(i), static_cast<double>(V) / instance.target[i]);

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\paper-current\scripts\round138_public_read.py", line 115, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "E:\codes\ExactEBRP-work\worktrees\paper-current\scripts\round138_public_read.py", line 113, in main
+    if error:raise RuntimeError('Public read incomplete; preserve this root and resume only missing transfer/read')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Public read incomplete; preserve this root and resume only missing transfer/read

@@ -1,0 +1,27 @@
+{
+  "UTC": "2026-10-28T21:55:25.674432+00:00",
+  "old_manifest_SHA": "f88621b4959fb33f4af46b8301b1a244194306eb05d885c8961bec5899b3a8d5",
+  "current_manifest_SHA": "aea824a4d1e1b85ef7e4f77fa8b447599791db516cb99ab2ab77cf7089823317",
+  "prior_records_SHA": "02d132cd8e1a69fd1f331eccb16478afebf6727a7fd7b8a3038878c881cea19a",
+  "updated_derived_bindings": {
+    "candidate_repair_build.json": {
+      "key": "manifest_SHA",
+      "current_SHA": "6e14fa63fa0259999a7f4e049d194b7bad0636929a70a7f5f5319cc414e1821c"
+    },
+    "qualification/repair_matrix_checks.json": {
+      "key": "repaired_manifest_SHA",
+      "current_SHA": "551904634a9e0443c9fcad63a875ff3ad417e760d19e3072135198e6e74ef8f6"
+    },
+    "qualification/native_coefficients.json": {
+      "key": "repaired_manifest_SHA",
+      "current_SHA": "e0f0a5c14fb771686027c1ee88466d5bb7dd2050e9a23aad805f9c87b6bdbaa7"
+    },
+    "repair/primary_native_bridge.json": {
+      "key": "v2_manifest_SHA",
+      "current_SHA": "1b7a083cb790d41d4313cf7a885dd85fab3b599e364df431bfeb8d1e36e9a928"
+    }
+  },
+  "changes": "V2 identity fields now distinguish inherited V1 build/qualification/time from actual V2 records; no source/PE/matrix/native result changed",
+  "Optimize": 0,
+  "new_native_model_reads": 0
+}
