@@ -1,0 +1,114 @@
+{
+  "decision": "ACCEPT",
+  "candidate_decision_SHA": "7459f73b89438c6f226bd2828373ae72aa5335a9c52dd42f067043b6decf8104",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T20:41:32.829918+00:00",
+  "scope": "Final scientific selection and stop decision only; PDF visual integration, PR/public byte delivery and cleanup remain separate unfinished acceptance steps",
+  "accepted_scientific_disposition": "RESEARCH_ONLY_STOP_FULL_PROMOTION",
+  "TC2_scope": "Qualified discrete inventory-count component with exact block separation and five actual same-domain LP gains; stop complete promotion after the adverse five-role panel.",
+  "TC_STOCK_scope": "Eight Seed0 configurations on six inputs plus one adverse decision-selected Seed1 support research-only retention and no further same-structure full benchmark promotion.",
+  "evidence": {
+    "full_report_SHA": "91063003e6417e2bf5f44bd6536c05e9f46dd26298f79192093b25107001b7bc",
+    "LP_report_SHA": "f69cf08120f90fb9c4ca7a4aabe30ddc595c45afcae9454a307f68e347926b69",
+    "LP_precision_SHA": "961f18d1a1f2528429fc3a6739f5830e3e9794ee8791193b6aad62ac5e063c0f",
+    "seed1_report_SHA": "8322707bb63d1070b02cf00ba793da11a3676bbc81a98c437f261140a3503598",
+    "math_note_SHA": "74e1365f58a129511f64fed87603ada8b5a413c73b52a7bdf33e1f93406fa2c4",
+    "current_return_screen_SHA": "bcfa11b1abf2892eb63922d5940763486c2fb6a0af8fcf6d6893c8c16aa2935e",
+    "entry_check_SHA": "a226e898b132480485cda40fb9af7ed8b349110646205bcce4c7021681aa3f31",
+    "local_semantic_SHA": "25eba4be977e98f0c1d243b5104b6b3e31fc0c6f9f5916adc6e0017b95bbfaec",
+    "Native_actual": [
+      {
+        "batch": "qualification",
+        "SHA": "f0f49a7099dfe9c88a03ce5b2361e3e46c34157a426b6b2d26e624c2f2bdb566",
+        "used_calls": 10
+      },
+      {
+        "batch": "primary",
+        "SHA": "0a9ecf44c3654a28020ac56ebb2a448e39de5a6a708a8103f35d7af0765e7712",
+        "used_calls": 25
+      },
+      {
+        "batch": "incremental",
+        "SHA": "bcbf624be178ecbacb92a8d28eacaf2a95cb1d660af6648c06de1c53cb9f540f",
+        "used_calls": 10
+      },
+      {
+        "batch": "attribution",
+        "SHA": "212be58a4b2b6b4b3656b8b2bf410ae0604985559ad9a566105a54e357da4ee2",
+        "used_calls": 4
+      },
+      {
+        "batch": "combination",
+        "SHA": "256884369e2cf0b33fdfa9336bf5f5989d80d5f0e8878ef95e21f2853c896a9c",
+        "used_calls": 10
+      },
+      {
+        "batch": "extension",
+        "SHA": "260d7fea289ad3b14381c9ea1cbca71e9ff7a5285a5dfe0ef35b56b27e771fd3",
+        "used_calls": 15
+      },
+      {
+        "batch": "seed1",
+        "SHA": "e4d62673eb9ee05a3a6837fcb143115e6b875167d11dc710d68e69ddcc5cd978",
+        "used_calls": 5
+      }
+    ]
+  },
+  "checks": {
+    "new_formal_positions": 14,
+    "new_Seed0_positions": 13,
+    "new_Seed1_positions": 1,
+    "qualification_positions_separate": 2,
+    "new_explicit_continuous_LPs": 11,
+    "exact_and_numerical_and_full_method_claims_separated": true,
+    "old_TC_retained_and_no_single_row_dominance_counterexample": true,
+    "negative_constants_and_coefficients_and_unsupported_ranges_correctly_scoped": true,
+    "same_H_and_distinct_reference_source_PE_clocks_disclosed": true,
+    "all_bad_Seed0_and_Seed1_outcomes_retained": true,
+    "bilingual_discussions_consistent": true,
+    "open_T_cert_null_no_cap_speedup_imputation": true,
+    "Native_import_Seed0_distinct_from_actual_Seed1": true,
+    "stable_six_entry_files_unchanged": true,
+    "no_further_experiments": true,
+    "remaining_question_is_not_an_authorized_new_round_run": true
+  },
+  "witness_scope": {
+    "selected_trajectories": 5,
+    "saved_records": 137,
+    "MIPSOL_records": 132,
+    "prior_R140_110_records_are_subset_not_extra": 110,
+    "old_R139_184_records_not_newly_replayed": true,
+    "no_independent_experiment_or_discovery_time_claim": true
+  },
+  "numerical_scope_correction": "English and Chinese return-screen statements now explicitly use the recorded 1e-7 residual tolerance; exact Fraction W=1/3 retains block-only scope.",
+  "budget_snapshot": {
+    "G1_seconds": 21831.71896730084,
+    "remaining_G1_seconds": 21368.28103269916,
+    "by_category": {
+      "native": 21680.44718810008,
+      "diagnostic": 151.27177920076065
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 21519.55281189992,
+      "diagnostic": 43048.72822079924
+    },
+    "separately_reported_seconds": 146.28815149981529,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "experimental_outer_including_pure_postverification_seconds": 21932.245612900937,
+  "experimental_outer_within_43200": true,
+  "remaining_delivery": [
+    "Generate and visually inspect every final PDF page; obtain separate independent integration/PDF review.",
+    "Bind final source/carrier/manifest and reused Seed1 metadata, then deliver Draft PR, bounded public byte/member check and current-round cleanup receipts.",
+    "Refresh ordinary cost metadata without rerunning accepted scientific experiments."
+  ],
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0,
+  "reviewer_compilation": 0,
+  "reviewer_archive_reads": 0
+}

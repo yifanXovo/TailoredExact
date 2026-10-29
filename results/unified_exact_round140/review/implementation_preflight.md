@@ -80,3 +80,12 @@ representative child and cutoff-refresh exports, Native coefficients/types,
 several integer solutions, and counts-off equivalence. The nine numerical
 continuous LP outcomes relayed by the primary implementer have not been
 independently integrated or promoted to complete-method claims in this review.
+
+Follow-up closure: the primary implementer added the `row.empty()` / `0 G`
+handling. The later independent qualification-plan review rehashed the fixed
+source, PE and manifests, reparsed all twelve saved root/child/cutoff-refresh
+exports against the exact oracle, and reviewed the recorded actual Native
+`getRow`/RHS/type comparisons and their implementation. Both concrete
+follow-ups above are therefore closed for admission of the two short
+qualification runs. See `qualification_admission.json`; complete-method
+performance admission is a separate later decision.

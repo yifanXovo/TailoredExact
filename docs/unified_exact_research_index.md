@@ -46,3 +46,20 @@ does not improve the critical RB35-T2 endpoint; LP-only loses the main gains.
 Decision: stop asymmetric expansion, retain existing BOTH research-only and
 leave stable GI-TBC unchanged. New charged experiment time is 1.769950 h of 16 h;
 the full inherited panel remains eight configurations on six base inputs.
+
+# Round140 addition: two-sided inventory threshold counts
+
+The [research guide](round140_research.md),
+[scientific report](../results/unified_exact_round140/final_report.md),
+[mathematical analysis](../results/unified_exact_round140/mathematical_analysis.md)
+and [paper increment](../results/unified_exact_round140/manuscript.pdf) separate
+exact block strictness, five real optimized LP gains and mixed complete-method
+performance. TC2 retains old TC and adds one two-sided aggregate without new
+columns. Its complete panel stops at five roles after an important K35
+regression. The old TC+stock combination completes eight Seed0 configurations;
+one matched critical Seed1 weakens its largest Seed0 repair. Fourteen new
+formal positions, two separate qualifications and eleven explicit continuous
+LPs retain their own costs and identities. Decision: research-only and stop
+full promotion; stable R137 remains unchanged. Actual publication, public-byte
+read and finite cleanup are recorded separately in the
+[continuation record](../results/unified_exact_round140/RESUME.md).

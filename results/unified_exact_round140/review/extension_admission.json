@@ -1,0 +1,93 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "643be4766c71e74932f89e7988475b800e7f1eaa4ed62714fe85c1ff4438b21c",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T18:26:48.884874+00:00",
+  "scope": "Only three Seed0 old-TC+stock extension positions for the single selected uniform TC_STOCK candidate",
+  "result_selection_review_SHA": "b355064b0cc1cf22691388c84526afe759df1131750bc4ee22e2b9fbec24458e",
+  "candidate_manifest_SHA": "ae753ff92df5badb9f78c78065f708136561f05a1aa58ffecb282d8dd0d4c021",
+  "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+  "production_PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "roles": [
+    {
+      "role": "R-X20-S-T1",
+      "counts": "tc",
+      "stock": true,
+      "Seed": 0,
+      "H_seed": 20260626,
+      "cap_seconds": 1200,
+      "T_seconds": 4800,
+      "rho": 1,
+      "lambda_value": 0.12676060979965992,
+      "input_SHA": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "identity_SHA": "6e559a05f948e8703670a459a2be69ef219a757ae59126a7a7d4b4daba698b68"
+    },
+    {
+      "role": "R-B35-S-T1",
+      "counts": "tc",
+      "stock": true,
+      "Seed": 0,
+      "H_seed": 20260626,
+      "cap_seconds": 2400,
+      "T_seconds": 4800,
+      "rho": 1,
+      "lambda_value": 0.055125275219827186,
+      "input_SHA": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+      "identity_SHA": "cbdafd1a8ff29eb29552c62e17896f0a0dd3590d455114884e36c0b469ae2722"
+    },
+    {
+      "role": "R-X35-S-T1",
+      "counts": "tc",
+      "stock": true,
+      "Seed": 0,
+      "H_seed": 20260626,
+      "cap_seconds": 2400,
+      "T_seconds": 4200,
+      "rho": 1,
+      "lambda_value": 0.0754049775127276,
+      "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "identity_SHA": "49a5df2fb8ddc54546f4a17262b685fd70c281daad3e0c736a1ba11133d841f0"
+    }
+  ],
+  "checks": {
+    "source_PE_DLL_helpers_input_identity_hashes": true,
+    "commands_match_frozen_R138_roles_except_new_PE_count_rule_and_output_paths": true,
+    "own_H_no_cross_arm_information": true,
+    "Seed0_single_thread_serial": true,
+    "physical_T_objectives_caps_match_goal_and_accepted_reference": true,
+    "uniform_old_TC_rule_and_BOTH_stock": true
+  },
+  "budget_snapshot": {
+    "G1_seconds": 14702.825708300341,
+    "remaining_G1_seconds": 28497.17429169966,
+    "by_category": {
+      "native": 14559.267615699675,
+      "diagnostic": 143.558092600666
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 28640.732384300325,
+      "diagnostic": 43056.441907399334
+    },
+    "separately_reported_seconds": 118.80751519999467,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "admitted_nominal_cap_seconds": 6000,
+  "D3_shared_comparisons_nominal_used": 9000,
+  "budget_allocation": "Use the planned remaining-three-role main-candidate allowance for the single evidence-selected TC_STOCK combination; do not charge another comparison block or duplicate nested H/LP/MIP costs.",
+  "constraints": [
+    "No TC2 extension is admitted; its complete panel remains five roles.",
+    "No Seed1 is admitted by this gate.",
+    "All prior ten formal positions and two qualification positions remain separate retained identities.",
+    "After qualified closeout, make a result-based adoption/research-only/stop decision; any later paired Seed1 requires a decision-changing uncertainty and a separate budget/admission check."
+  ],
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0,
+  "reviewer_compilation": 0,
+  "reviewer_archive_reads": 0
+}

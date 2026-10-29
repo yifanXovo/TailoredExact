@@ -1,0 +1,78 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "8b07e3edc4e4b96673c51e7a70d55e0fd2f6beba9904633373b3a903473a2179",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T17:43:39.767303+00:00",
+  "scope": "Admission of two old-TC+stock runs to complete the same five-role uniform combination comparison",
+  "result_selection_review_SHA": "29a11664324acc4bf00e56e9d741362bac2cc8c9752d88f6cbd8dc62f29802cb",
+  "candidate_manifest_SHA": "ae753ff92df5badb9f78c78065f708136561f05a1aa58ffecb282d8dd0d4c021",
+  "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+  "production_PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "roles": [
+    {
+      "role": "K-15-S",
+      "counts": "tc",
+      "stock": true,
+      "Seed": 0,
+      "H_seed": 20260626,
+      "cap_seconds": 600,
+      "T_seconds": 3600,
+      "lambda_value": 0.15,
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "identity_SHA": "d0e51b51a6e38ff3caa8b0aaf620c2eb53400376d3853c3f88b1188694b8ffe2"
+    },
+    {
+      "role": "R-X35-S-T2",
+      "counts": "tc",
+      "stock": true,
+      "Seed": 0,
+      "H_seed": 20260626,
+      "cap_seconds": 2400,
+      "T_seconds": 6300,
+      "lambda_value": 0.0754049775127276,
+      "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "identity_SHA": "019e1af34095c1dad34d0668aa5f5868832919444ba6e47fec93217d97dea975"
+    }
+  ],
+  "checks": {
+    "source_PE_DLL_helpers_input_identity_hashes": true,
+    "commands_match_same_role_TC2_except_count_rule_and_output_paths": true,
+    "own_H_no_cross_arm_information": true,
+    "Seed0_single_thread_serial": true,
+    "unchanged_physical_T_objective_caps": true,
+    "uniform_old_TC_rule_and_BOTH_stock": true
+  },
+  "budget_snapshot": {
+    "G1_seconds": 12283.377153800335,
+    "remaining_G1_seconds": 30916.622846199665,
+    "by_category": {
+      "native": 12142.853222099598,
+      "diagnostic": 140.52393170073628
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 31057.1467779004,
+      "diagnostic": 43059.476068299264
+    },
+    "separately_reported_seconds": 106.91309130005538,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "admitted_nominal_cap_seconds": 3000,
+  "D3_comparison_nominal_before": 6000,
+  "D3_comparison_nominal_after": 9000,
+  "D3_shared_planning_allowance": 9000,
+  "constraints": [
+    "No new Seed1 is admitted.",
+    "No automatic eight-configuration extension is admitted.",
+    "After qualified closeout, select at most one uniform candidate or stop; preserve all adverse/open results and keep TC2 gains separate from old-TC combination gains."
+  ],
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0,
+  "reviewer_compilation": 0,
+  "reviewer_archive_reads": 0
+}

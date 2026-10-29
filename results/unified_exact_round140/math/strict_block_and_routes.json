@@ -1,0 +1,473 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "solver_imports": 0,
+  "g": "1/6",
+  "g_domain": [
+    "0",
+    "1/2"
+  ],
+  "selector": [
+    "1/2",
+    "1/4",
+    "1/4"
+  ],
+  "state_g": [
+    "1/12",
+    "1/24",
+    "1/24"
+  ],
+  "H_sum": "2",
+  "J": "1/2",
+  "tau": "3",
+  "TC_rhs": "2",
+  "TC2_rhs": "6",
+  "exact_stock_rows": [
+    {
+      "lhs": "0",
+      "sense": ">=",
+      "rhs": "0"
+    },
+    {
+      "lhs": "-11/6",
+      "sense": ">=",
+      "rhs": "-5/2"
+    },
+    {
+      "lhs": "-3/2",
+      "sense": "<=",
+      "rhs": "-3/2"
+    },
+    {
+      "lhs": "-1/3",
+      "sense": "<=",
+      "rhs": "0"
+    }
+  ],
+  "routes": [
+    {
+      "Y": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "weight": "1/12",
+      "route": [
+        1,
+        4,
+        2
+      ],
+      "loads": [
+        2,
+        0,
+        2
+      ],
+      "services": [
+        {
+          "station": 1,
+          "p": 2,
+          "d": 0
+        },
+        {
+          "station": 4,
+          "p": 0,
+          "d": 2
+        },
+        {
+          "station": 2,
+          "p": 2,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "weight": "1/12",
+      "route": [
+        1,
+        3,
+        4,
+        2
+      ],
+      "loads": [
+        2,
+        1,
+        0,
+        2
+      ],
+      "services": [
+        {
+          "station": 1,
+          "p": 2,
+          "d": 0
+        },
+        {
+          "station": 3,
+          "p": 0,
+          "d": 1
+        },
+        {
+          "station": 4,
+          "p": 0,
+          "d": 1
+        },
+        {
+          "station": 2,
+          "p": 2,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        0,
+        1,
+        0,
+        2
+      ],
+      "weight": "1/12",
+      "route": [
+        1,
+        4,
+        2,
+        3
+      ],
+      "loads": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "services": [
+        {
+          "station": 1,
+          "p": 2,
+          "d": 0
+        },
+        {
+          "station": 4,
+          "p": 0,
+          "d": 2
+        },
+        {
+          "station": 2,
+          "p": 1,
+          "d": 0
+        },
+        {
+          "station": 3,
+          "p": 1,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "weight": "1/12",
+      "route": [
+        1,
+        3,
+        2
+      ],
+      "loads": [
+        2,
+        1,
+        2
+      ],
+      "services": [
+        {
+          "station": 1,
+          "p": 2,
+          "d": 0
+        },
+        {
+          "station": 3,
+          "p": 0,
+          "d": 1
+        },
+        {
+          "station": 2,
+          "p": 1,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        0,
+        2,
+        0,
+        1
+      ],
+      "weight": "1/12",
+      "route": [
+        1,
+        4,
+        3
+      ],
+      "loads": [
+        2,
+        1,
+        2
+      ],
+      "services": [
+        {
+          "station": 1,
+          "p": 2,
+          "d": 0
+        },
+        {
+          "station": 4,
+          "p": 0,
+          "d": 1
+        },
+        {
+          "station": 3,
+          "p": 1,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        0,
+        2,
+        1,
+        0
+      ],
+      "weight": "1/12",
+      "route": [
+        1
+      ],
+      "loads": [
+        2
+      ],
+      "services": [
+        {
+          "station": 1,
+          "p": 2,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        1,
+        0,
+        0,
+        2
+      ],
+      "weight": "1/12",
+      "route": [
+        1,
+        3,
+        4,
+        2
+      ],
+      "loads": [
+        1,
+        2,
+        0,
+        2
+      ],
+      "services": [
+        {
+          "station": 1,
+          "p": 1,
+          "d": 0
+        },
+        {
+          "station": 3,
+          "p": 1,
+          "d": 0
+        },
+        {
+          "station": 4,
+          "p": 0,
+          "d": 2
+        },
+        {
+          "station": 2,
+          "p": 2,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        1,
+        0,
+        2,
+        0
+      ],
+      "weight": "1/12",
+      "route": [
+        1,
+        3,
+        2
+      ],
+      "loads": [
+        1,
+        0,
+        2
+      ],
+      "services": [
+        {
+          "station": 1,
+          "p": 1,
+          "d": 0
+        },
+        {
+          "station": 3,
+          "p": 0,
+          "d": 1
+        },
+        {
+          "station": 2,
+          "p": 2,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        1,
+        2,
+        0,
+        0
+      ],
+      "weight": "1/12",
+      "route": [
+        1,
+        3
+      ],
+      "loads": [
+        1,
+        2
+      ],
+      "services": [
+        {
+          "station": 1,
+          "p": 1,
+          "d": 0
+        },
+        {
+          "station": 3,
+          "p": 1,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        2,
+        0,
+        0,
+        1
+      ],
+      "weight": "1/12",
+      "route": [
+        2,
+        4,
+        3
+      ],
+      "loads": [
+        2,
+        1,
+        2
+      ],
+      "services": [
+        {
+          "station": 2,
+          "p": 2,
+          "d": 0
+        },
+        {
+          "station": 4,
+          "p": 0,
+          "d": 1
+        },
+        {
+          "station": 3,
+          "p": 1,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        2,
+        0,
+        1,
+        0
+      ],
+      "weight": "1/12",
+      "route": [
+        2
+      ],
+      "loads": [
+        2
+      ],
+      "services": [
+        {
+          "station": 2,
+          "p": 2,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    },
+    {
+      "Y": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "weight": "1/12",
+      "route": [
+        2,
+        3
+      ],
+      "loads": [
+        1,
+        2
+      ],
+      "services": [
+        {
+          "station": 2,
+          "p": 1,
+          "d": 0
+        },
+        {
+          "station": 3,
+          "p": 1,
+          "d": 0
+        }
+      ],
+      "return_load": 2
+    }
+  ],
+  "scope": "Strict relaxation block; mixed physical route block, with sufficiently large travel/time allowance. No claim of complete exported matrix or own-H cutoff feasibility, nor objective gain."
+}

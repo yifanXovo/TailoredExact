@@ -1,0 +1,159 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T20:50:16.964123+00:00",
+  "scope": "Independent scientific/document integration and all-page visual acceptance of the final nine-page PDF; not PR/public-byte/cleanup delivery acceptance",
+  "candidate_decision_SHA": "7459f73b89438c6f226bd2828373ae72aa5335a9c52dd42f067043b6decf8104",
+  "scientific_selection_review_SHA": "40d2cda2915740bf3c658aac4a0f56fadbc9b7338c6a7904c20ea9986f15bce1",
+  "PDF_SHA": "16b28ced769847405f1d88320301808b26d64776791ae4d682ec2d0944a1eedf",
+  "render_manifest_SHA": "fe1bda1be2a67f608941a5dbf4ccfdb06c8144ab83b37518b0575b0bbe411f29",
+  "reviewed_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "actual_images_viewed": true,
+  "image_review_tool": "functions.view_image with original detail, all nine final PNGs",
+  "pages": [
+    {
+      "page": 1,
+      "preview": "results/unified_exact_round140/qa_pages/page-1.png",
+      "PNG_SHA": "b05feffe493046e64c65518714881096718f290b4b6220407e3156a70eaf0b5e",
+      "text_characters": 2202,
+      "independent_visual_PASS": true,
+      "observation": "Title, date, contents, initial budget equations and B=326/tau=295 distinction legible."
+    },
+    {
+      "page": 2,
+      "preview": "results/unified_exact_round140/qa_pages/page-2.png",
+      "PNG_SHA": "2286915d01fff79aba0ea6e831b228c7544aa991913d6b9d26baa5e7cbbba9d7",
+      "text_characters": 2399,
+      "independent_visual_PASS": true,
+      "observation": "Threshold identity, lower/upper count proof and signed two-sided chord fully legible."
+    },
+    {
+      "page": 3,
+      "preview": "results/unified_exact_round140/qa_pages/page-3.png",
+      "PNG_SHA": "de7e8f5932f6700640f9f7ebf46cb9997e0b11897ff4219a64245957ecbfeb9a",
+      "text_characters": 4002,
+      "independent_visual_PASS": true,
+      "observation": "Old-TC retention counterpoint, exact block witness and W=1/3 extension correctly rendered; scope limitations visible."
+    },
+    {
+      "page": 4,
+      "preview": "results/unified_exact_round140/qa_pages/page-4.png",
+      "PNG_SHA": "14fd4744575a54ce2ccef76a49c89921c7ad6a8852e16838489cc779933ec20a",
+      "text_characters": 3371,
+      "independent_visual_PASS": true,
+      "observation": "Five LP gains and lower-budget/forced-high distribution tables complete and legible."
+    },
+    {
+      "page": 5,
+      "preview": "results/unified_exact_round140/qa_pages/page-5.png",
+      "PNG_SHA": "ce601abd821079492af4f0e65f97d65acd8ec9867bbc8b964965f733452f53e3",
+      "text_characters": 2287,
+      "independent_visual_PASS": true,
+      "observation": "Numerical return-screen tolerance and complete-method setup clear; whitespace keeps the main comparison table intact on page 6."
+    },
+    {
+      "page": 6,
+      "preview": "results/unified_exact_round140/qa_pages/page-6.png",
+      "PNG_SHA": "974f4eae01339efc206fccb562e467c7cec7a7915652b8c3360b3f1c845c1445",
+      "text_characters": 3663,
+      "independent_visual_PASS": true,
+      "observation": "Complete 29-row Seed0 endpoint table fits; all open labels and adverse results readable."
+    },
+    {
+      "page": 7,
+      "preview": "results/unified_exact_round140/qa_pages/page-7.png",
+      "PNG_SHA": "ef02b16e689e601b4a0e96256b6d8f480a0007e3baab3a56c5b2729a434b50b7",
+      "text_characters": 3303,
+      "independent_visual_PASS": true,
+      "observation": "Both 14-row gap/time tables include Seed labels and complete clocks; mechanism discussion legible."
+    },
+    {
+      "page": 8,
+      "preview": "results/unified_exact_round140/qa_pages/page-8.png",
+      "PNG_SHA": "c1115244a9da9bac296292d77802ea0193876a0d41f09f0c127ccdab8734da90",
+      "text_characters": 3041,
+      "independent_visual_PASS": true,
+      "observation": "Seed0 call paths and limited adverse Seed1 table fit; matched-reference distinct-PE caveat visible."
+    },
+    {
+      "page": 9,
+      "preview": "results/unified_exact_round140/qa_pages/page-9.png",
+      "PNG_SHA": "b7b04207b8669cb8d4cf7cf663f48c2de7a48bdd4ab7c68bf7d60aa414879507",
+      "text_characters": 3586,
+      "independent_visual_PASS": true,
+      "observation": "Research-only/stop decision, remaining question, cost, reproducibility and both references fit on one page."
+    }
+  ],
+  "visual_findings": "No clipped or overlapping text, unreadable glyphs, broken table rows, blank final page or orphaned reference. Final page contains both complete references. The modest page-5 whitespace intentionally preserves the full comparison table on page 6.",
+  "file_hashes": {
+    "candidate_decision.json": "7459f73b89438c6f226bd2828373ae72aa5335a9c52dd42f067043b6decf8104",
+    "final_report.md": "acd3ada0f00be4add39ae1f8e5f636ee59a76fd9f42c8a2d0854cfa2e779a395",
+    "manuscript.md": "53eb1eeb911c206cb9c08d4125725def5813db420ad6b78fde1bbe1209097871",
+    "manuscript.pdf": "16b28ced769847405f1d88320301808b26d64776791ae4d682ec2d0944a1eedf",
+    "references.bib": "479416191281aeff557b749ad6c74299408b4dd15f45fba95b0125609f49aad3",
+    "mathematical_analysis.md": "74e1365f58a129511f64fed87603ada8b5a413c73b52a7bdf33e1f93406fa2c4",
+    "document_assembly.json": "bd56cd38a937579eb8ff6b6d7450726ce1e1596493d05eba45ce6daa6f27729d",
+    "pdf_export.json": "5d4736a0851bf659a811915d539bf6a9444015923a3565e422df48cf079e3277",
+    "pdf_render_manifest.json": "fe1bda1be2a67f608941a5dbf4ccfdb06c8144ab83b37518b0575b0bbe411f29",
+    "pdf_visual_review.json": "a80bc17f53795a551bf1adaf51456938e601945a279606be9fb51cc378f5c66f",
+    "PDF_marker.json": "571662fb0efae76cfbeff9cdc4d314560131d19f0ccdbaa6d816663273953888",
+    "paper/source_lineage.json": "89263ea7866a5def95da54560b08cdcfcb4baa25e60ad3191e831db11bd707c3",
+    "paper/reading.md": "1c842a1e20e071b6b5d413f1bffbed66309c3c7d630f4857eef843eed00a3693",
+    "paper/reading.tex": "3a5f293d74c951c7bdb59096b32f720a7715da9d70089a0f80f0b3587b6f6f4c",
+    "paper/header.tex": "2244e3e213acccfb62348a747b1f05f19b8c45ffe8dea9a9e8ddbafc0c5a1f53",
+    "cost_report.json": "38d176263592c3d01abc11f00e436413bdd3186d7745ea660eef631ba085c0f8",
+    "entry_check.json": "a226e898b132480485cda40fb9af7ed8b349110646205bcce4c7021681aa3f31",
+    "local_semantic_check.json": "25eba4be977e98f0c1d243b5104b6b3e31fc0c6f9f5916adc6e0017b95bbfaec",
+    "qualification/source_import_coverage.json": "283074c498c09671b94c1c21f1635be9bef0ef4d18e339db1633ae1c1faa24ab",
+    "seed1_reference_reuse.json": "74310747278eeca448783af11d077f5be0fded091fbbe7b79aa8de61acb83e50",
+    "reports/full.json": "91063003e6417e2bf5f44bd6536c05e9f46dd26298f79192093b25107001b7bc",
+    "reports/LP.json": "f69cf08120f90fb9c4ca7a4aabe30ddc595c45afcae9454a307f68e347926b69",
+    "reports/seed1.json": "8322707bb63d1070b02cf00ba793da11a3676bbc81a98c437f261140a3503598"
+  },
+  "checks": {
+    "exact_block_vs_complete_cutoff_scope_clear": true,
+    "W_one_third_extension_block_only": true,
+    "numerical_return_screen_tolerance_1e_minus7_explicit": true,
+    "old_TC_retained_and_negative_coefficients_constant_preserved": true,
+    "counts_14_formal_2_qualification_11_continuous_LPs_consistent": true,
+    "five_trajectories_137_records_132_MIPSOL_not_independent_experiments": true,
+    "adverse_Seed1_and_all_Seed0_tradeoffs_present": true,
+    "explicit_Seed_labels_in_gap_and_clock_tables": true,
+    "default_research_tc_separate_from_unchanged_six_stable_entry_files": true,
+    "source_157_module_closure_current_and_six_base_inputs_planned_for_carrier": true,
+    "reused_Seed1_metadata_copies_hashed": true,
+    "final_PDF_TeX_header_and_reading_markdown_lineage_consistent": true,
+    "one_successful_PDF_marker": true,
+    "first_layout_sources_and_previews_retained": true,
+    "current_cost_report_matches_scientific_total": true,
+    "experimental_outer_including_postverification_below_43200": true,
+    "public_reader_finite_new_carrier_only_no_Native_or_Optimize": true,
+    "cleanup_guard_binds_current_public_manifest_commit_science_and_visual_PDF": true
+  },
+  "integration_fixes_closed": [
+    "Refresh the stale pre-Seed1 cost report to the final unchanged experiment total.",
+    "Refresh static source coverage after the non-scientific layout wording repair; old coverage retained separately."
+  ],
+  "packet_stage": "Planned source/configuration/import coverage and publication/cleanup guards reviewed statically. Actual new carrier hashes, Git staged bytes, anonymous public recovery and deletion receipts remain later delivery checks.",
+  "experimental_G1_seconds": 21831.71896730084,
+  "experimental_outer_including_pure_postverification_seconds": 21932.245612900937,
+  "downstream_delivery_pending": [
+    "Draft PR actual base/head/draft readback.",
+    "Fixed science/source/carrier publication and bounded anonymous byte/member recovery.",
+    "Bounded current-round cleanup after public/PDF acceptance, with deletion/retention receipt."
+  ],
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0,
+  "reviewer_compilation": 0,
+  "reviewer_archive_reads": 0
+}

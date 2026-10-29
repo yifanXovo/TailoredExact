@@ -1,0 +1,77 @@
+{
+  "cases": [
+    {
+      "name": "root",
+      "alpha": 0.0,
+      "beta": 0.7752127578025219,
+      "cutoff": 0.7752127578025219
+    },
+    {
+      "name": "child",
+      "alpha": 0.19380318945063046,
+      "beta": 0.38760637890126093,
+      "cutoff": 0.7752127578025219
+    },
+    {
+      "name": "cutoff_refresh",
+      "alpha": 0,
+      "beta": 0.7751127578025219,
+      "cutoff": 0.7751127578025219
+    }
+  ],
+  "panel": {
+    "id": "K-20-S",
+    "layer": "K",
+    "source": "CITI",
+    "V": 20,
+    "M": 2,
+    "inventory": "shortage",
+    "geometry": "compact",
+    "replicate": 1,
+    "Q_vector": [
+      30,
+      30
+    ],
+    "T_seconds": 5400,
+    "cap_seconds": 1200,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "selection_id": "r132_K_20-S_CITI",
+    "panel_kind": "Round137 preselected known representative",
+    "input_path": "results/unified_exact_round132/inputs/K-20-S.txt",
+    "instance_path": "results/unified_exact_round132/inputs/K-20-S.txt",
+    "input_sha256": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+    "selection_path": "results/unified_exact_round132/inputs/K-20-S_selection.json",
+    "landscape_path": "results/unified_exact_round132/inputs/K-20-S_landscape.json",
+    "input_bytes": 1287,
+    "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "total_initial": 208,
+    "total_target": 236,
+    "total_capacity": 470,
+    "sum_weights": 11.312498,
+    "Omega": 11.312498,
+    "rho": 1.6968747,
+    "gurobi_seed": 0,
+    "reference": {
+      "optimizer_calls": 0,
+      "canonical_sha256": "33bd7545eceb2271c50dabd40cbea06da7ab34676a96e9427e9d7e09551b6ea8",
+      "rows": 3629,
+      "columns": 1551,
+      "nonzeros": 16310,
+      "fingerprint": 1315253155
+    },
+    "module": "B1",
+    "base_id": "K-20-S",
+    "known": true
+  },
+  "variants": [
+    "off",
+    "stock",
+    "tc_stock",
+    "tc2_stock"
+  ],
+  "Seed": 0,
+  "Threads": 1,
+  "Optimize": 0
+}

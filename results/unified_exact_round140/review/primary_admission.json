@@ -1,0 +1,131 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "935bcd12d8b07a24df2f2d39bedab3910e41482ef5656889f6952c8e1ae1f662",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T13:45:42.800974+00:00",
+  "scope": "Admission of the frozen primary complete-method runs only; no automatic extension or Seed1 admission",
+  "candidate_manifest_SHA": "ae753ff92df5badb9f78c78065f708136561f05a1aa58ffecb282d8dd0d4c021",
+  "production_PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+  "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+  "roles": [
+    {
+      "role": "K-20-S",
+      "counts": "tc2",
+      "stock": true,
+      "Seed": 0,
+      "cap_seconds": 1200,
+      "T_seconds": 5400,
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "counts": "tc2",
+      "stock": true,
+      "Seed": 0,
+      "cap_seconds": 2400,
+      "T_seconds": 7200,
+      "input_SHA": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a"
+    },
+    {
+      "role": "K-15-S",
+      "counts": "tc2",
+      "stock": true,
+      "Seed": 0,
+      "cap_seconds": 600,
+      "T_seconds": 3600,
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f"
+    },
+    {
+      "role": "K-35-U",
+      "counts": "tc2",
+      "stock": true,
+      "Seed": 0,
+      "cap_seconds": 2400,
+      "T_seconds": 10800,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb"
+    },
+    {
+      "role": "R-X35-S-T2",
+      "counts": "tc2",
+      "stock": true,
+      "Seed": 0,
+      "cap_seconds": 2400,
+      "T_seconds": 6300,
+      "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2"
+    }
+  ],
+  "qualification_audit": {
+    "actual_matrix_checks_SHA": "3966a69ca6db1d7d03254f6c9b137bf974518e3a6886fb04553d631ff14ac421",
+    "Native_actual_SHA": "f0f49a7099dfe9c88a03ce5b2361e3e46c34157a426b6b2d26e624c2f2bdb566",
+    "runs": [
+      {
+        "role": "K-15-S",
+        "counts": "tc2",
+        "certificate": true,
+        "T_cert": 37.10392909636721,
+        "T_produce": 37.10392909636721,
+        "T_verify": 2.717818700009957,
+        "T_total": 39.82174779637717,
+        "U": 0.5922648822560825,
+        "L": 0.5922648822560754,
+        "audit_SHA": "d880b2a891624346fcd29b7d3f6b46edfebeea783642a2029b6f106bd064fba6",
+        "control_SHA": "e64c060448e46c810b258070ab1a06dac74b559e35dc3a0ce1048eaffdce21c9"
+      },
+      {
+        "role": "K-20-S",
+        "counts": "tc",
+        "certificate": false,
+        "T_cert": null,
+        "T_produce": 61.132640085648745,
+        "T_verify": 3.9674912998452783,
+        "T_total": 65.10013138549402,
+        "U": 0.7168065462777502,
+        "L": 0.7073654475486426,
+        "audit_SHA": "8e58c86d911877909044be3a045f093b56c7d37824111828b9c52147edb92a0e",
+        "control_SHA": "e8754efc884a46847e3a187b140d92e58d1b587dca144ebdac25b56750846714"
+      }
+    ],
+    "actual_calls": 10,
+    "unique_artifacts": 6,
+    "LP_target_terminal_covered": true
+  },
+  "checks": {
+    "source_PE_DLL_helpers_input_identity_hashes": true,
+    "actual_matrices_reparsed_against_oracle": true,
+    "producer_seals_and_reader_closeout_hashes": true,
+    "own_H_and_no_cross_arm_injection": true,
+    "Seed0_single_thread_serial": true,
+    "physical_T_objective_caps_match_goal_and_frozen_reference": true,
+    "stable_R137_unchanged": true,
+    "uniform_TC_or_TC2_and_stock_placement": true,
+    "old_TC_incremental_controls_registered": true
+  },
+  "budget_snapshot": {
+    "G1_seconds": 126.17624580068514,
+    "remaining_G1_seconds": 43073.823754199315,
+    "by_category": {
+      "native": 0.0,
+      "diagnostic": 126.17624580068514
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 43200.0,
+      "diagnostic": 43073.823754199315
+    },
+    "separately_reported_seconds": 52.51046679960564,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "admitted_batch_nominal_cap": 9000,
+  "joint_primary_incremental_nominal_seconds": 12600,
+  "scope_limits": [
+    "The cap90 K20 open outcome is implementation qualification, not evidence that the full-cap method fails.",
+    "The primary five and old-TC two positions are separate complete methods; no candidate performance or TC2 attribution is established by admission.",
+    "Expansion and paired Seed1 remain conditional on observed complete results and total 43200-second charged budget."
+  ],
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0
+}

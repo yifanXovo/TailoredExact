@@ -1,0 +1,400 @@
+{
+  "UTC": "2026-10-29T20:47:36.571686+00:00",
+  "experiment": {
+    "G1_seconds": 21831.71896730084,
+    "remaining_G1_seconds": 21368.28103269916,
+    "by_category": {
+      "native": 21680.44718810008,
+      "diagnostic": 151.27177920076065
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 21519.55281189992,
+      "diagnostic": 43048.72822079924
+    },
+    "separately_reported_seconds": 146.28815149981529,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "fee_ordinary_seconds": 146.28815149981529,
+  "experimental_outer_including_pure_postverification_seconds": 21932.245612900937,
+  "experimental_outer_including_pure_postverification_within_43200": true,
+  "additional_disjoint_ordinary_seconds": 161.20430890005082,
+  "recorded_disjoint_process_wall_total_seconds": 22139.211427700706,
+  "ordinary_steps": [
+    {
+      "label": "entry_check",
+      "SHA": "0de4134f6464f92acb0e97c08c0bf4854c2a3968dee6908d1ae4e38571c924d0",
+      "receipt": {
+        "UTC": "2026-10-29T20:35:00.924449+00:00",
+        "exit_code": 0,
+        "seconds": 2.997867099940777,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "final_full",
+      "SHA": "a0003d8d7680d50a2fb6f702ec8a7b606ecd601c763e23e370078f4d1cbd44f7",
+      "receipt": {
+        "UTC": "2026-10-29T20:34:32.285728+00:00",
+        "exit_code": 0,
+        "seconds": 0.8149357000365853,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "final_local_semantics",
+      "SHA": "0f6284c32f262fc5ca280201b07b5fcc1d3652896c870f79826b2d5f4ea999bf",
+      "receipt": {
+        "UTC": "2026-10-29T20:35:52.210427+00:00",
+        "exit_code": 0,
+        "seconds": 54.28543630009517,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "final_scientific_report",
+      "SHA": "688393af63cbbbd509f1258229b1ddf38bc49916dc77de0847a13331c566e720",
+      "receipt": {
+        "UTC": "2026-10-29T20:42:04.985801+00:00",
+        "exit_code": 0,
+        "seconds": 0.11722899996675551,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "final_selected_vectors",
+      "SHA": "f85b90b95805650ad5bb43c40dd0d4655dff61f3b9a7fb73bd80128f49f495e8",
+      "receipt": {
+        "UTC": "2026-10-29T20:35:08.643069+00:00",
+        "exit_code": 0,
+        "seconds": 0.41149930004030466,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "inherited_dependencies",
+      "SHA": "8727a0dd998644d516caa10443911950ee8daafa76b164f9e6b3c71372c77b0b",
+      "receipt": {
+        "UTC": "2026-10-29T20:38:00.412687+00:00",
+        "exit_code": 0,
+        "seconds": 0.14322350011207163,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "interim_local_semantic",
+      "SHA": "63cad9b13697dae2debcb6f80f2f90ad326f38419cb7d56453ae07f43d125ac9",
+      "receipt": {
+        "UTC": "2026-10-29T16:31:12.443365+00:00",
+        "exit_code": 1,
+        "seconds": 0.44272830011323094,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "interim_nine_sealed",
+      "SHA": "ad60c6855bf0343a2ad569c36b6c15d49767093c4593d2592e3ac466086db8a7",
+      "receipt": {
+        "UTC": "2026-10-29T16:33:13.809992+00:00",
+        "exit_code": 0,
+        "seconds": 28.83087519998662,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_assembly",
+      "SHA": "32a4da1ac4cde42e55f3701e51e9eb102e8476c1795c7aade574ba3e331e7d62",
+      "receipt": {
+        "UTC": "2026-10-29T20:42:05.598252+00:00",
+        "exit_code": 0,
+        "seconds": 0.26302709989249706,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_assembly_layout1",
+      "SHA": "ffa7b75021a22fdaf1a7c7f54f381a312d14011edf96e6906372344332cda68a",
+      "receipt": {
+        "UTC": "2026-10-29T20:44:02.442978+00:00",
+        "exit_code": 0,
+        "seconds": 0.19389169989153743,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_pdf",
+      "SHA": "93fff6f1dc390f141152cce159a5c8a0b1f9389694fa474d6a49c549d00d1ceb",
+      "receipt": {
+        "UTC": "2026-10-29T20:42:12.549877+00:00",
+        "exit_code": 0,
+        "seconds": 6.591333299875259,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_pdf_layout1",
+      "SHA": "35b69d2b127657b1d276f5e44f5693e4120dd74dc18e17f1ece2f59b51114e6c",
+      "receipt": {
+        "UTC": "2026-10-29T20:44:08.437992+00:00",
+        "exit_code": 0,
+        "seconds": 5.881012000143528,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "offline_return_screen",
+      "SHA": "b15515b7624d01ed939128a3fdfd6b130a271e40b9950300843c3481bb9d80c2",
+      "receipt": {
+        "UTC": "2026-10-29T16:33:14.112516+00:00",
+        "exit_code": 0,
+        "seconds": 0.19236589991487563,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "pdf_render",
+      "SHA": "1f740d6476fe14c8391174082310be1c8a20d739f226d91eb193436050f64ed0",
+      "receipt": {
+        "UTC": "2026-10-29T20:42:21.930011+00:00",
+        "exit_code": 0,
+        "seconds": 2.4576073999051005,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "pdf_render_layout1",
+      "SHA": "915de70d7d3e4e6c20d67550c5220a33b131864d0de6c6d4bb3561eb66e2879d",
+      "receipt": {
+        "UTC": "2026-10-29T20:44:10.795095+00:00",
+        "exit_code": 0,
+        "seconds": 2.2514033000916243,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "post_attribution_full",
+      "SHA": "42ba2f6a483baa9cd6b7c830f0d3efb2f5041e69f3fc209ac87946a9175424f0",
+      "receipt": {
+        "UTC": "2026-10-29T17:13:54.701540+00:00",
+        "exit_code": 0,
+        "seconds": 0.3349424998741597,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "post_combination_full",
+      "SHA": "e940ccb155a14681a2eb00c4acccb358c4b217005dd9a8977faf930fafba27bd",
+      "receipt": {
+        "UTC": "2026-10-29T18:24:41.048274+00:00",
+        "exit_code": 0,
+        "seconds": 0.872147100046277,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "post_extension_full",
+      "SHA": "762c88c2c5640f021868239db932abdf862a2bf130408c75fa79e50dc40809fa",
+      "receipt": {
+        "UTC": "2026-10-29T19:46:49.005081+00:00",
+        "exit_code": 0,
+        "seconds": 0.9030204999726266,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "refs_refresh",
+      "SHA": "bb1a96cfe4c4314d0f72ddb1d8fdb69609689a9d2390429c0e4bb74c2a7058a6",
+      "receipt": {
+        "UTC": "2026-10-29T20:39:46.498516+00:00",
+        "exit_code": 0,
+        "seconds": 2.151510300114751,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "return_product_current",
+      "SHA": "3916be3fa1ea696ca4629a7e26523ad539c6b0bae828fe4fb635bd7089eb06b9",
+      "receipt": {
+        "UTC": "2026-10-29T19:46:54.548006+00:00",
+        "exit_code": 0,
+        "seconds": 0.20410840003751218,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "seed0_local_semantics",
+      "SHA": "94693321f3cf5d222aafa3db0bf0e9f68e3b8b34c6f62316e21f9d508750a66f",
+      "receipt": {
+        "UTC": "2026-10-29T19:48:59.655213+00:00",
+        "exit_code": 0,
+        "seconds": 46.47532680002041,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "seed1_pair_report",
+      "SHA": "9c9e8abdb232a0b4ddd90bb3848903d0ff4bb280daea2bfd9e8d2d1114082da8",
+      "receipt": {
+        "UTC": "2026-10-29T20:34:36.342593+00:00",
+        "exit_code": 0,
+        "seconds": 0.18544359994120896,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "seed1_reference_metadata",
+      "SHA": "2983585857b3b865b66f9caca6ec726dfd249090dd2f11a4c73d7ba182d20124",
+      "receipt": {
+        "UTC": "2026-10-29T19:54:32.537082+00:00",
+        "exit_code": 0,
+        "seconds": 0.34514079988002777,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "selected_vectors",
+      "SHA": "8e3a1553ab161bf0e047716b66a1d85c782aa6894609876363780df05b917611",
+      "receipt": {
+        "UTC": "2026-10-29T17:43:29.476544+00:00",
+        "exit_code": 0,
+        "seconds": 0.3106384000275284,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "software_bindings",
+      "SHA": "e6c0e0e856baa668f98e692336ee7c11350f183671e1ee745deaaf3d98bc82a1",
+      "receipt": {
+        "UTC": "2026-10-29T20:38:00.532351+00:00",
+        "exit_code": 0,
+        "seconds": 0.2394954999908805,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "source_import_coverage",
+      "SHA": "40a7529e0081a2dc62a296325b0181f5336ddbe45c8a58c51ba1e2269b3fd1bf",
+      "receipt": {
+        "UTC": "2026-10-29T18:25:27.218822+00:00",
+        "exit_code": 0,
+        "seconds": 1.0727941999211907,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "source_import_coverage_after_layout",
+      "SHA": "27f2128d5a29643b706c24554728cfefcd9f54572307fd19f7b0bcb9f23a2f94",
+      "receipt": {
+        "UTC": "2026-10-29T20:47:36.374485+00:00",
+        "exit_code": 0,
+        "seconds": 0.9358426001854241,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "source_import_coverage_final",
+      "SHA": "c598eb317c81ca7f7028ce48f67d679b251cf0e15944ef302bdfb86b73bd63c6",
+      "receipt": {
+        "UTC": "2026-10-29T20:40:56.022753+00:00",
+        "exit_code": 0,
+        "seconds": 1.299463100032881,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    }
+  ],
+  "reused_reference_original_clocks_retained_without_new_charge": true,
+  "all_experiment_qualification_and_failed_attempts_charged": true,
+  "ordinary_failed_steps": [
+    "interim_local_semantic"
+  ],
+  "complete_outer_cost_without_nested_H_LP_MIP_Work_double_count": true,
+  "precision_scope": "Measured processes only; interactive reading/editing/review/Git are not assigned invented precision"
+}
