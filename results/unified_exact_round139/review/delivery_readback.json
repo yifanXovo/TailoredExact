@@ -1,0 +1,222 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "/root/round139_review",
+  "review_snapshot_UTC": "2026-10-29T12:27:41.947012+00:00",
+  "date": "2026-10-29",
+  "timezone": "Asia/Shanghai",
+  "scope": "Bounded delivery snapshot; no renewed scientific/public semantic audit",
+  "observed_PR_snapshot_UTC": "2026-10-29T12:21:50.028Z",
+  "observed_PR": {
+    "UTC_observed": "2026-10-29T12:21:50.028Z",
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/201",
+    "number": 201,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "base": "codex/round138-shared-product-resource-coupling",
+    "base_sha": "d606062edddf58c13a7c3acb48e896fc787ff856",
+    "head": "codex/round139-stock-rlt-placement",
+    "head_sha": "6d6c51c287f02fc3607dcad2b555738b2780c5af",
+    "title": "Round139: study inventory-product placement across LP control and native MIP search",
+    "scope": "Actual API readback after delivery metadata commit A was pushed; this snapshot does not purport to contain its own later commit",
+    "body_matches_PR_BODY_md": true,
+    "production_source_commit": "6b22433f525df4d1a6ce48a70b5b6414a53aa73b",
+    "science_commit": "94a275b7545eba4464a25945bbadc8b4bc896962"
+  },
+  "observed_local_HEAD": "6d6c51c287f02fc3607dcad2b555738b2780c5af",
+  "fixed_science_commit": "94a275b7545eba4464a25945bbadc8b4bc896962",
+  "metadata_public_commit": "6d6c51c287f02fc3607dcad2b555738b2780c5af",
+  "evidence_SHA": {
+    "PR_READBACK.json": "7556c8f59b23290c0862f8a75b028e07a91c7aef89f20e548a47f5778b76a291",
+    "PR_CREATED.json": "14e8094389cbf9e9edb4ac7828a7eac7072dbd40bbc0e7ecc6fb1bf5ab074eb2",
+    "PR_BODY.md": "45292f9bb1f79ebbcdb995ffb269f170718f5237b4456778435347aaee77c09f",
+    "public_restore_receipt.json": "e150b5cc326017188d7777b0e22d2acda0e34dc1a32710649228233f3f943296",
+    "public_metadata_read_receipt.json": "4e34bebccb1937187ef463e22dce971084af869ee270b139075acba24e60aad2",
+    "publication_pin.json": "fb7a2cf05bc2b26ad03812d7f87dcb1e240dc778c0d16c2ec97e4a1a7fe83f15",
+    "carrier_manifest.json": "ac610af4c64eb730d1a35fa46dd398685137fc6b952f371895c63695b3feb47c",
+    "source_publication.json": "a75b8a7a284764fa068fce96375e7285b2bb62cbbe723c54a2edda8571968835",
+    "cleanup_screening.json": "6fc77a4ff677f97b9c6cfe394923c808430efe17ca11f46eff207e391971f470",
+    "cleanup_receipt.json": "a76ef8595fc94d5c7b7ac9da7b812419bf48c1ce99bed5c1d9f8a5cc9e5c043c",
+    "cost_report.json": "add96562db87750f901e2bbe80bd33bdffd1c43ca9cd826dc8080580d43389ed",
+    "RESUME.md": "877321340b659bb14d6e94a28de3043cf406ab937294d7bf5fc91a2386ea574c",
+    "final_delivery_report.md": "6243395253e75ece00a3447680344a680f1769a8b616e225b9d6d06e29cf4c77",
+    "candidate_decision.json": "068e2507f37a8eb41cd7d62b7ab78596d6a177d4f77442655fb4e91fc0029c8a",
+    "reports/full.json": "d89cdcd12d1ddd7b247876dfc8f56d3e689578bbafb85cd0721254da514f4b83",
+    "final_report.md": "3d0703acb28a7a404a24ac3e062b08b670f9d5dfeaf4a611671e8ab2c0454886",
+    "manuscript.pdf": "cb6b80eabf43b53dc412f070e212595826accc9dca5d61a220cedfe2a5fdf146",
+    "review/final_integration.json": "842a1da8fab6f75fe82747823416b0769259093ad4a0ff34af64c4a858852fb8",
+    "infra/closeout_checks.json": "c54db70b8ae1b4362264162d75a86a47890bd021a9ae078cb0068f58aa0875f2",
+    "ordinary_steps/public_metadata/receipt.json": "f979c7dac30c746537a6330a2e557901a98a5ff9a7cb196bfe96dcc3f0a8c073"
+  },
+  "public_archives": 13,
+  "public_members": 119112,
+  "public_metadata_files": 12,
+  "public_cumulative_seconds": 63.96711560012773,
+  "public_limit_seconds": 1800,
+  "public_metadata_cached_bytes_checked": [
+    {
+      "path": "results/unified_exact_round139/PR_BODY.md",
+      "public_A_SHA": "45292f9bb1f79ebbcdb995ffb269f170718f5237b4456778435347aaee77c09f",
+      "current_SHA": "45292f9bb1f79ebbcdb995ffb269f170718f5237b4456778435347aaee77c09f",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/PR_CREATED.json",
+      "public_A_SHA": "14e8094389cbf9e9edb4ac7828a7eac7072dbd40bbc0e7ecc6fb1bf5ab074eb2",
+      "current_SHA": "14e8094389cbf9e9edb4ac7828a7eac7072dbd40bbc0e7ecc6fb1bf5ab074eb2",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/RESUME.md",
+      "public_A_SHA": "877321340b659bb14d6e94a28de3043cf406ab937294d7bf5fc91a2386ea574c",
+      "current_SHA": "877321340b659bb14d6e94a28de3043cf406ab937294d7bf5fc91a2386ea574c",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/cost_report.json",
+      "public_A_SHA": "c880b78f7a1fe0e8d8c70748b16cacf2eb1ebcdb660f11e910a71c384940ab04",
+      "current_SHA": "add96562db87750f901e2bbe80bd33bdffd1c43ca9cd826dc8080580d43389ed",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/public_restore_receipt.json",
+      "public_A_SHA": "e150b5cc326017188d7777b0e22d2acda0e34dc1a32710649228233f3f943296",
+      "current_SHA": "e150b5cc326017188d7777b0e22d2acda0e34dc1a32710649228233f3f943296",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/cleanup_screening.json",
+      "public_A_SHA": "6fc77a4ff677f97b9c6cfe394923c808430efe17ca11f46eff207e391971f470",
+      "current_SHA": "6fc77a4ff677f97b9c6cfe394923c808430efe17ca11f46eff207e391971f470",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/cleanup_receipt.json",
+      "public_A_SHA": "a76ef8595fc94d5c7b7ac9da7b812419bf48c1ce99bed5c1d9f8a5cc9e5c043c",
+      "current_SHA": "a76ef8595fc94d5c7b7ac9da7b812419bf48c1ce99bed5c1d9f8a5cc9e5c043c",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/ordinary_steps/archive_science/receipt.json",
+      "public_A_SHA": "9d29d92f353ab64b1684ebcb71764ff07d7803f04d8ec808a56396e2fde0bf7a",
+      "current_SHA": "9d29d92f353ab64b1684ebcb71764ff07d7803f04d8ec808a56396e2fde0bf7a",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/ordinary_steps/public_read/receipt.json",
+      "public_A_SHA": "70f7fd033c1ce5975031269064490808dafb55b2b6edeff50dc5d4e47aaaa141",
+      "current_SHA": "70f7fd033c1ce5975031269064490808dafb55b2b6edeff50dc5d4e47aaaa141",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/ordinary_steps/cleanup/receipt.json",
+      "public_A_SHA": "22b554ef2d04332713c231824fdde99b463a988af7aa45e613a32521d3556446",
+      "current_SHA": "22b554ef2d04332713c231824fdde99b463a988af7aa45e613a32521d3556446",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/infra/closeout_checks.json",
+      "public_A_SHA": "c54db70b8ae1b4362264162d75a86a47890bd021a9ae078cb0068f58aa0875f2",
+      "current_SHA": "c54db70b8ae1b4362264162d75a86a47890bd021a9ae078cb0068f58aa0875f2",
+      "cached_bytes_checked": true
+    },
+    {
+      "path": "results/unified_exact_round139/publication_pin.json",
+      "public_A_SHA": "fb7a2cf05bc2b26ad03812d7f87dcb1e240dc778c0d16c2ec97e4a1a7fe83f15",
+      "current_SHA": "fb7a2cf05bc2b26ad03812d7f87dcb1e240dc778c0d16c2ec97e4a1a7fe83f15",
+      "cached_bytes_checked": true
+    }
+  ],
+  "archive_check_not_repeated": true,
+  "full_public_semantic_recovery_claimed": false,
+  "local_git_scope": "Only read commit path differences and current production-path status; never a public recovery fallback",
+  "metadata_only_paths_between_science_and_A": [
+    "results/unified_exact_round139/PR_BODY.md",
+    "results/unified_exact_round139/PR_CREATED.json",
+    "results/unified_exact_round139/RESUME.md",
+    "results/unified_exact_round139/cleanup_receipt.json",
+    "results/unified_exact_round139/cleanup_screening.json",
+    "results/unified_exact_round139/cost_report.json",
+    "results/unified_exact_round139/infra/closeout_checks.json",
+    "results/unified_exact_round139/ordinary_steps/archive_science/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/cleanup/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/entry_check/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/exact_pilot/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/final_full/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/final_vectors/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/final_vectors_v2/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/inherited_member_selection/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/inherited_member_selection_v2/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/interim_full/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/interim_vectors/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/local_semantics/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/manuscript_assembly/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/manuscript_assembly_v2/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/manuscript_pdf/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/manuscript_pdf_v2/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/pdf_render/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/pdf_render_v2/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/public_read/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/scientific_plots/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/scientific_plots_v2/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/scientific_report/receipt.json",
+    "results/unified_exact_round139/ordinary_steps/scientific_report_count_scope/receipt.json",
+    "results/unified_exact_round139/public_restore_receipt.json",
+    "results/unified_exact_round139/publication_pin.json"
+  ],
+  "production_or_fixed_science_changed": false,
+  "current_cost": {
+    "experiment_seconds": 6371.821015599417,
+    "fee_ordinary_seconds": 91.7436834005639,
+    "additional_disjoint_ordinary_seconds": 512.778711399762,
+    "measured_ordinary_total_seconds": 604.5223948003259,
+    "open_fees": [],
+    "current_cost_SHA": "add96562db87750f901e2bbe80bd33bdffd1c43ca9cd826dc8080580d43389ed",
+    "public_A_cost_SHA": "c880b78f7a1fe0e8d8c70748b16cacf2eb1ebcdb660f11e910a71c384940ab04",
+    "public_A_vs_current_cost_difference": "Only later UTC/ordinary accounting and public_metadata wrapper receipt; experiment fields identical"
+  },
+  "cleanup": {
+    "deleted_PNGs": 18,
+    "deleted_file_bytes": 3821777,
+    "observed_free_space_delta": 3854336,
+    "retained_paths_exist": [
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\pilot\\001",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\pilot\\002",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\pilot\\003",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\pilot\\004",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\pilot\\005",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\pilot\\006",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\qualification\\001",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\qualification\\002",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\qualification\\003",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\qualification\\004",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\manuscript.pdf",
+      "E:\\codes\\ExactEBRP-work\\temp\\round139\\pdf\\attempt01",
+      "E:\\codes\\ExactEBRP-work\\temp\\round139\\pdf\\attempt02",
+      "E:\\codes\\ExactEBRP-work\\build-cache\\round139\\ExactEBRP.exe",
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\candidate_build.json",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round139\\artifacts",
+      "E:\\codes\\ExactEBRP-work\\restore\\round139-public",
+      "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current"
+    ],
+    "retained_native_setup_failures": [
+      "qualification_exact",
+      "qualification_exact_native",
+      "qualification_exact_v2"
+    ],
+    "no_old_round_or_user_deletion": true
+  },
+  "scientific_stopping_scope_unchanged": true,
+  "final_delivery_report_link_resolved": true,
+  "remaining_routine_publication": "Principal will commit/push this review with late receipts normally, then read the actual final PR head; this review does not claim to observe its own future commit.",
+  "Optimize": 0,
+  "compilation": 0,
+  "commercial_native_asset_loads": 0,
+  "network_downloads_by_reviewer": 0,
+  "archive_unpacking_by_reviewer": 0,
+  "deleted_files_by_reviewer": 0,
+  "blocking_defects": [],
+  "report": "delivery_readback.md"
+}

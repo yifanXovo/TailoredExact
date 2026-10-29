@@ -1,0 +1,2312 @@
+{
+  "UTC": "2026-10-29T09:32:48.067375+00:00",
+  "roles": [
+    {
+      "role": "K-20-S",
+      "same_initial_H_witness": true,
+      "matrices": [
+        {
+          "leaf": "L0",
+          "base_SHA": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+          "both_SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        },
+        {
+          "leaf": "L0.0",
+          "base_SHA": "7dd2641dc3093686735d3206ff0044f362ba6ea31965fdec915cea819a17e04e",
+          "both_SHA": "87ecae3605f669d4833a3d24a3cdd98bcb6b9aa776d2cda49f76a98b63884530",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        },
+        {
+          "leaf": "L0.1",
+          "base_SHA": "2a6a36203c72fb83aa8df21f8a283a374e49adc0e8c92308dac3b640d5565b23",
+          "both_SHA": "d53ec02368c8dcfe12ce54007687ecfedf05f79327c702142ef5c76e4c348672",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        }
+      ],
+      "methods": [
+        {
+          "method": "BASE",
+          "measured_source": "779713ad9a0b01edc538ecb64df9438739127be3",
+          "source_files": {
+            "external/paper_optimize_ledger.csv": "daaf108f79dbdfad59507090fbb36ce934eb4ade408c8fcc5614145953b42309",
+            "external/adaptive_mass_decision_ledger.csv": "a9a4ca125ff165d3bbe5dad41bda9ade97dd0cf7f5e7a1af5f3f7d0c5980d571",
+            "external/initial_witness.json": "0481429579b640fe60e9ad726e4903bb86eadc6a4b72016520a13906111f4876"
+          },
+          "LP": 3,
+          "target": 1,
+          "terminal": 1,
+          "optimize": [
+            {
+              "leaf_id": "L0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "1169.3808921",
+              "solver_runtime": "0.14199995994567871",
+              "work": "0.36762292725541956",
+              "nodes": "0",
+              "simplex_iterations": "3284",
+              "barrier_iterations": "0",
+              "memory_gb": "0.015986945999999998",
+              "model_sha256": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\012\\raw\\R137_012_K-20-S_S0_S2\\external\\native_logs\\L0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "1168.9387259",
+              "solver_runtime": "0.11100006103515625",
+              "work": "0.31373062344316444",
+              "nodes": "0",
+              "simplex_iterations": "2291",
+              "barrier_iterations": "0",
+              "memory_gb": "0.017128048",
+              "model_sha256": "7dd2641dc3093686735d3206ff0044f362ba6ea31965fdec915cea819a17e04e",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\012\\raw\\R137_012_K-20-S_S0_S2\\external\\native_logs\\L0.0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.1",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "1168.5262977",
+              "solver_runtime": "0.10299992561340332",
+              "work": "0.25283316137566414",
+              "nodes": "0",
+              "simplex_iterations": "2867",
+              "barrier_iterations": "0",
+              "memory_gb": "0.018316151999999999",
+              "model_sha256": "2a6a36203c72fb83aa8df21f8a283a374e49adc0e8c92308dac3b640d5565b23",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\012\\raw\\R137_012_K-20-S_S0_S2\\external\\native_logs\\L0.1_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "CHILD_BOUND_TARGET_MIP",
+              "native_status": "INTERRUPTED",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "1168.3802952999999",
+              "solver_runtime": "0.33300018310546875",
+              "work": "0.72937883081308641",
+              "nodes": "1",
+              "simplex_iterations": "3652",
+              "barrier_iterations": "0",
+              "memory_gb": "0.023363432",
+              "model_sha256": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\012\\raw\\R137_012_K-20-S_S0_S2\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "MIP",
+              "native_status": "TIME_LIMIT",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "1168.0073709000001",
+              "solver_runtime": "1167.9790000915527",
+              "work": "1904.9439308320766",
+              "nodes": "449569",
+              "simplex_iterations": "8597023",
+              "barrier_iterations": "0",
+              "memory_gb": "0.36361497500000001",
+              "model_sha256": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\012\\raw\\R137_012_K-20-S_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log"
+            }
+          ],
+          "AM": [
+            {
+              "decision_sequence": "1",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.77521275780252186",
+              "B_p": "0.19514915244120534",
+              "B_L": "0.19607825994917552",
+              "B_R": "0.54077065457207962",
+              "U": "0.77521275780252186",
+              "proof_gap": "0.58006360536131651",
+              "g_L_raw": "0.0016017338432936944",
+              "g_R_raw": "0.59583379983922569",
+              "g_L": "0.0016017338432936944",
+              "g_R": "0.59583379983922569",
+              "eta": "0.0016017338432936944",
+              "mu": "0.29871776684125967",
+              "S_AM": "0.00047846635674276053",
+              "adaptive_rho_I": "0.2678113218572381",
+              "score_tolerance": "1.7239489462420363e-07",
+              "selected_action": "native-target",
+              "native_target": "0.19607825994917552",
+              "deterministic_reason": "adaptive_mass_score_below_tau_native_target",
+              "coverage_update": "parent_coverage_retained"
+            },
+            {
+              "decision_sequence": "2",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.77521275780252186",
+              "B_p": "0.20062332694598975",
+              "B_L": "0.19607825994917552",
+              "B_R": "0.54077065457207962",
+              "U": "0.77521275780252186",
+              "proof_gap": "0.57458943085653214",
+              "g_L_raw": "-0.007910112425908989",
+              "g_R_raw": "0.59198326554499481",
+              "g_L": "0",
+              "g_R": "0.59198326554499481",
+              "eta": "0",
+              "mu": "0.2959916327724974",
+              "S_AM": "0",
+              "adaptive_rho_I": "0.27027791039447702",
+              "score_tolerance": "1.7403731901861631e-07",
+              "selected_action": "exact-close",
+              "native_target": "",
+              "deterministic_reason": "adaptive_mass_no_strict_child_improvement",
+              "coverage_update": "parent_coverage_retained"
+            }
+          ],
+          "Native": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\012\\raw\\R137_012_K-20-S_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+              "SHA256": "a2c110e0162ba6492d7400244527313f64bb6bbdf2aaa369e7fa72c93fc2e4b5",
+              "incumbent_events": [
+                {
+                  "line": "H  457   356                       0.7386108    0.59518  19.4%  66.9    5s",
+                  "approx_native_seconds": 5.0
+                },
+                {
+                  "line": "H  457   348                       0.7368530    0.59518  19.2%  66.9    5s",
+                  "approx_native_seconds": 5.0
+                },
+                {
+                  "line": "H  457   334                       0.7318949    0.59518  18.7%  66.9    6s",
+                  "approx_native_seconds": 6.0
+                },
+                {
+                  "line": "H  457   334                       0.7309894    0.59518  18.6%  66.9    6s",
+                  "approx_native_seconds": 6.0
+                },
+                {
+                  "line": "H  457   331                       0.7296645    0.59518  18.4%  66.9    6s",
+                  "approx_native_seconds": 6.0
+                },
+                {
+                  "line": "H  457   330                       0.7292783    0.59518  18.4%  66.9    6s",
+                  "approx_native_seconds": 6.0
+                },
+                {
+                  "line": "H  574   395                       0.7284200    0.59720  18.0%  63.5   12s",
+                  "approx_native_seconds": 12.0
+                },
+                {
+                  "line": "H  574   375                       0.7264751    0.59720  17.8%  63.5   12s",
+                  "approx_native_seconds": 12.0
+                },
+                {
+                  "line": "H  574   356                       0.7264192    0.59720  17.8%  63.5   12s",
+                  "approx_native_seconds": 12.0
+                },
+                {
+                  "line": "H  574   338                       0.7261524    0.59720  17.8%  63.5   12s",
+                  "approx_native_seconds": 12.0
+                },
+                {
+                  "line": "H  574   321                       0.7258857    0.59720  17.7%  63.5   12s",
+                  "approx_native_seconds": 12.0
+                },
+                {
+                  "line": "H  574   305                       0.7255617    0.59720  17.7%  63.5   12s",
+                  "approx_native_seconds": 12.0
+                },
+                {
+                  "line": "H  588   297                       0.7250861    0.59720  17.6%  88.2   15s",
+                  "approx_native_seconds": 15.0
+                },
+                {
+                  "line": "H  591   284                       0.7242783    0.59720  17.5%  90.4   15s",
+                  "approx_native_seconds": 15.0
+                },
+                {
+                  "line": "H  593   271                       0.7239720    0.59720  17.5%  90.6   16s",
+                  "approx_native_seconds": 16.0
+                },
+                {
+                  "line": "H  593   257                       0.7234404    0.59720  17.4%  90.6   16s",
+                  "approx_native_seconds": 16.0
+                },
+                {
+                  "line": "H  593   244                       0.7224034    0.59720  17.3%  90.6   16s",
+                  "approx_native_seconds": 16.0
+                },
+                {
+                  "line": "H  593   232                       0.7220450    0.59720  17.3%  90.6   16s",
+                  "approx_native_seconds": 16.0
+                },
+                {
+                  "line": "H  593   221                       0.7216636    0.59720  17.2%  90.6   16s",
+                  "approx_native_seconds": 16.0
+                },
+                {
+                  "line": "H  674   220                       0.7204610    0.59720  17.1%  96.3   18s",
+                  "approx_native_seconds": 18.0
+                },
+                {
+                  "line": "H 1154   296                       0.7204610    0.62340  13.5%   102   25s",
+                  "approx_native_seconds": 25.0
+                },
+                {
+                  "line": "H 1487   409                       0.7187251    0.63518  11.6%   105   30s",
+                  "approx_native_seconds": 30.0
+                },
+                {
+                  "line": "H 1530   424                       0.7181830    0.63520  11.6%   104   30s",
+                  "approx_native_seconds": 30.0
+                },
+                {
+                  "line": "H 1530   411                       0.7168335    0.63520  11.4%   104   30s",
+                  "approx_native_seconds": 30.0
+                },
+                {
+                  "line": "H 2828   819                       0.7168335    0.66743  6.89%   100   44s",
+                  "approx_native_seconds": 44.0
+                },
+                {
+                  "line": "H56293 24048                       0.7168065    0.69357  3.24%  25.7  205s",
+                  "approx_native_seconds": 205.0
+                },
+                {
+                  "line": "H56294 24049                       0.7168065    0.69357  3.24%  25.7  206s",
+                  "approx_native_seconds": 206.0
+                }
+              ],
+              "root": "Root relaxation: objective 1.953585e-01, 3349 iterations, 0.17 seconds (0.41 work units)",
+              "Start_lines": [
+                "Loaded user MIP start with objective 0.775213",
+                "Loaded MIP start from previous solve with objective 0.775213"
+              ],
+              "intermediate_rounded_native_objectives_not_independently_physical_U": true
+            }
+          ],
+          "Starts": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\012\\raw\\R137_012_K-20-S_S0_S2\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+              "SHA256": "e014a9ae7a860c0e90bd3566c03dfa5fc5f553966e83fcbe6c67f61d1fa46cac",
+              "record": {
+                "source": "round68_existing_0",
+                "leaf": "L0",
+                "model_sha256": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 6637,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.7752127578025219,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.0054723,
+                "native_deadline_remaining_at_optimize": 1168.3479877
+              }
+            },
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\012\\raw\\R137_012_K-20-S_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+              "SHA256": "ef73ed2b6dd40d603ccff6c4e58b5d69528c8d2b2a341c6e753937e06521d5cb",
+              "record": {
+                "source": "round68_existing_1",
+                "leaf": "L0",
+                "model_sha256": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 6637,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.7752127578025219,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.0062977,
+                "native_deadline_remaining_at_optimize": 1167.9754424
+              }
+            }
+          ],
+          "U": 0.7168065462777502,
+          "L": 0.7053557934942464,
+          "certificate": false,
+          "T_cert": null
+        },
+        {
+          "method": "BOTH",
+          "measured_source": "83928377336a860acf78f684d1723a5040467bb5",
+          "source_files": {
+            "external/paper_optimize_ledger.csv": "71e7417e98112bcfd7803348f20371e3fd10c914b51b93761aa6a7eb41648c28",
+            "external/adaptive_mass_decision_ledger.csv": "98ea51035ee236c2951e19e564534bccf15b73c62e21efdef53a6182ce350bbb",
+            "external/initial_witness.json": "0481429579b640fe60e9ad726e4903bb86eadc6a4b72016520a13906111f4876"
+          },
+          "LP": 3,
+          "target": 0,
+          "terminal": 1,
+          "optimize": [
+            {
+              "leaf_id": "L0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "1169.3620659999999",
+              "solver_runtime": "0.12899994850158691",
+              "work": "0.31672033083339907",
+              "nodes": "0",
+              "simplex_iterations": "3344",
+              "barrier_iterations": "0",
+              "memory_gb": "0.016005528000000002",
+              "model_sha256": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\004\\raw\\R138_004_K-20-S_S0_STOCK\\external\\native_logs\\L0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "1168.9306165",
+              "solver_runtime": "0.098999977111816406",
+              "work": "0.28216636371858167",
+              "nodes": "0",
+              "simplex_iterations": "2355",
+              "barrier_iterations": "0",
+              "memory_gb": "0.017148394000000001",
+              "model_sha256": "87ecae3605f669d4833a3d24a3cdd98bcb6b9aa776d2cda49f76a98b63884530",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\004\\raw\\R138_004_K-20-S_S0_STOCK\\external\\native_logs\\L0.0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.1",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "1168.5144898000001",
+              "solver_runtime": "0.11700010299682617",
+              "work": "0.23250596805430621",
+              "nodes": "0",
+              "simplex_iterations": "2785",
+              "barrier_iterations": "0",
+              "memory_gb": "0.019492722000000001",
+              "model_sha256": "d53ec02368c8dcfe12ce54007687ecfedf05f79327c702142ef5c76e4c348672",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\004\\raw\\R138_004_K-20-S_S0_STOCK\\external\\native_logs\\L0.1_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "MIP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "1168.3344517",
+              "solver_runtime": "98.819000005722046",
+              "work": "148.19500670363479",
+              "nodes": "22823",
+              "simplex_iterations": "757362",
+              "barrier_iterations": "0",
+              "memory_gb": "0.085488513000000002",
+              "model_sha256": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\004\\raw\\R138_004_K-20-S_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log"
+            }
+          ],
+          "AM": [
+            {
+              "decision_sequence": "1",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.77521275780252186",
+              "B_p": "0.20459043917810038",
+              "B_L": "0.20459043917810113",
+              "B_R": "0.54077065457207951",
+              "U": "0.77521275780252186",
+              "proof_gap": "0.57062231862442148",
+              "g_L_raw": "1.3133039440667749e-15",
+              "g_R_raw": "0.58914662890227742",
+              "g_L": "1.3133039440667749e-15",
+              "g_R": "0.58914662890227742",
+              "eta": "1.3133039440667749e-15",
+              "mu": "0.29457331445113938",
+              "S_AM": "3.8686429568550366e-16",
+              "adaptive_rho_I": "0.271579250649568",
+              "score_tolerance": "1.7524727090167418e-07",
+              "selected_action": "exact-close",
+              "native_target": "",
+              "deterministic_reason": "adaptive_mass_no_strict_child_improvement",
+              "coverage_update": "parent_coverage_retained"
+            }
+          ],
+          "Native": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\004\\raw\\R138_004_K-20-S_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+              "SHA256": "e212705cf6b0e173ce25d2189e620b3feac2b1721848c4b5a5c3656e6fb63d98",
+              "incumbent_events": [
+                {
+                  "line": "H  597   471                       0.7401132    0.61730  16.6%   115   14s",
+                  "approx_native_seconds": 14.0
+                },
+                {
+                  "line": "H  597   447                       0.7295601    0.61730  15.4%   115   14s",
+                  "approx_native_seconds": 14.0
+                },
+                {
+                  "line": "H  597   425                       0.7253472    0.61730  14.9%   115   14s",
+                  "approx_native_seconds": 14.0
+                },
+                {
+                  "line": "H  614   410                       0.7235991    0.61730  14.7%   118   16s",
+                  "approx_native_seconds": 16.0
+                },
+                {
+                  "line": "H  614   390                       0.7195637    0.61730  14.2%   118   16s",
+                  "approx_native_seconds": 16.0
+                },
+                {
+                  "line": "H  614   371                       0.7190200    0.61730  14.1%   118   16s",
+                  "approx_native_seconds": 16.0
+                },
+                {
+                  "line": "H  676   351                       0.7177415    0.61730  14.0%   126   18s",
+                  "approx_native_seconds": 18.0
+                },
+                {
+                  "line": "H  676   334                       0.7172312    0.61730  13.9%   126   18s",
+                  "approx_native_seconds": 18.0
+                },
+                {
+                  "line": "H 2005   259                       0.7172147    0.70392  1.85%   120   36s",
+                  "approx_native_seconds": 36.0
+                },
+                {
+                  "line": "* 3140   702              72       0.7168065    0.70631  1.46%  86.6   40s",
+                  "approx_native_seconds": 40.0
+                }
+              ],
+              "root": "Root relaxation: objective 2.048258e-01, 2465 iterations, 0.10 seconds (0.26 work units)",
+              "Start_lines": [
+                "Loaded user MIP start with objective 0.775213"
+              ],
+              "intermediate_rounded_native_objectives_not_independently_physical_U": true
+            }
+          ],
+          "Starts": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\004\\raw\\R138_004_K-20-S_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+              "SHA256": "2d1f0ad40e1382852e19cb05a8023a453e993ceca5af543984ebf419f6a0c217",
+              "record": {
+                "source": "round68_existing_0",
+                "leaf": "L0",
+                "model_sha256": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 6641,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.7752127578025219,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.0068628,
+                "native_deadline_remaining_at_optimize": 1168.3007617
+              }
+            }
+          ],
+          "U": 0.7168065462777502,
+          "L": 0.7168065462777424,
+          "certificate": true,
+          "T_cert": 101.63538490096107
+        }
+      ]
+    },
+    {
+      "role": "R-B35-S-T2",
+      "same_initial_H_witness": true,
+      "matrices": [
+        {
+          "leaf": "L0",
+          "base_SHA": "47231f37c61856b55fa7a820a6cde874b3591a001e780afb29eacf7777942584",
+          "both_SHA": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        },
+        {
+          "leaf": "L0.0",
+          "base_SHA": "8f2c6918c7db93a6aea21f12d98d13262de17c3f46ed8ae1566352e403f26f62",
+          "both_SHA": "a77a029c2eecba3487721de73943b27ab35b20cb6c1494c0d7cbb8504b73451f",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        },
+        {
+          "leaf": "L0.1",
+          "base_SHA": "51ea03d12f8e97a0d945ccc357c0cbd400c57bd89ba02dd2bc093831a110c620",
+          "both_SHA": "b3113d4d59c042ca9c834f620d1a2855aafb60216a0b32349a26ee8b296ef2fa",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        }
+      ],
+      "methods": [
+        {
+          "method": "BASE",
+          "measured_source": "779713ad9a0b01edc538ecb64df9438739127be3",
+          "source_files": {
+            "external/paper_optimize_ledger.csv": "fe406ad7ca69fa4ffd0d3551804771b0e1078859fbaabb811c700c1907683dd2",
+            "external/adaptive_mass_decision_ledger.csv": "0ecc11a1de119e4bb3308c0472e004ef5120fb43def64d112f626e0ac4bb29f3",
+            "external/initial_witness.json": "17b666a13235887df28a5d2f5c3f4a6be07b2a81748327b46f44198ae274fe9b"
+          },
+          "LP": 3,
+          "target": 0,
+          "terminal": 1,
+          "optimize": [
+            {
+              "leaf_id": "L0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2367.1318984",
+              "solver_runtime": "0.84200000762939453",
+              "work": "2.7716263085777921",
+              "nodes": "0",
+              "simplex_iterations": "8848",
+              "barrier_iterations": "0",
+              "memory_gb": "0.060628973000000003",
+              "model_sha256": "47231f37c61856b55fa7a820a6cde874b3591a001e780afb29eacf7777942584",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\052\\raw\\R137_052_R-B35-S-T2_S0_S2\\external\\native_logs\\L0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2365.0336736999998",
+              "solver_runtime": "1.1449999809265137",
+              "work": "3.6790356002834774",
+              "nodes": "0",
+              "simplex_iterations": "10645",
+              "barrier_iterations": "0",
+              "memory_gb": "0.064917609000000001",
+              "model_sha256": "8f2c6918c7db93a6aea21f12d98d13262de17c3f46ed8ae1566352e403f26f62",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\052\\raw\\R137_052_R-B35-S-T2_S0_S2\\external\\native_logs\\L0.0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.1",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2362.6061672000001",
+              "solver_runtime": "0.52999997138977051",
+              "work": "1.7483695322028134",
+              "nodes": "0",
+              "simplex_iterations": "5915",
+              "barrier_iterations": "0",
+              "memory_gb": "0.070234725999999997",
+              "model_sha256": "51ea03d12f8e97a0d945ccc357c0cbd400c57bd89ba02dd2bc093831a110c620",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\052\\raw\\R137_052_R-B35-S-T2_S0_S2\\external\\native_logs\\L0.1_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "MIP",
+              "native_status": "TIME_LIMIT",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2361.8965664000002",
+              "solver_runtime": "2361.7769999504089",
+              "work": "5777.8089504270283",
+              "nodes": "6707",
+              "simplex_iterations": "7707248",
+              "barrier_iterations": "0",
+              "memory_gb": "0.41803675099999998",
+              "model_sha256": "47231f37c61856b55fa7a820a6cde874b3591a001e780afb29eacf7777942584",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\052\\raw\\R137_052_R-B35-S-T2_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log"
+            }
+          ],
+          "AM": [
+            {
+              "decision_sequence": "1",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.44548980895179674",
+              "B_p": "0.12891073999200497",
+              "B_L": "0.12891073999200517",
+              "B_R": "0.31386118707282873",
+              "U": "0.44548980895179674",
+              "proof_gap": "0.31657906895979177",
+              "g_L_raw": "6.1371407133071943e-16",
+              "g_R_raw": "0.58421565168073075",
+              "g_L": "6.1371407133071943e-16",
+              "g_R": "0.58421565168073075",
+              "eta": "6.1371407133071943e-16",
+              "mu": "0.29210782584036571",
+              "S_AM": "1.7927068306405557e-16",
+              "adaptive_rho_I": "0.27387147115914406",
+              "score_tolerance": "3.1587686001480543e-07",
+              "selected_action": "exact-close",
+              "native_target": "",
+              "deterministic_reason": "adaptive_mass_no_strict_child_improvement",
+              "coverage_update": "parent_coverage_retained"
+            }
+          ],
+          "Native": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\052\\raw\\R137_052_R-B35-S-T2_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+              "SHA256": "7fef83d76bf576dbd3dcc177b5611abec34acdedf49944f22aa0242a074a1d25",
+              "incumbent_events": [
+                {
+                  "line": "H   22    22                       0.4437676    0.17710  60.1%  4000   79s",
+                  "approx_native_seconds": 79.0
+                },
+                {
+                  "line": "H   24    24                       0.4433607    0.17710  60.1%  4140   85s",
+                  "approx_native_seconds": 85.0
+                },
+                {
+                  "line": "H   24    24                       0.4429647    0.17710  60.0%  4140   89s",
+                  "approx_native_seconds": 89.0
+                },
+                {
+                  "line": "H  113   111                       0.4354405    0.17710  59.3%  1739  117s",
+                  "approx_native_seconds": 117.0
+                },
+                {
+                  "line": "H  113   111                       0.4337582    0.17710  59.2%  1739  118s",
+                  "approx_native_seconds": 118.0
+                },
+                {
+                  "line": "H  471   456                       0.4331626    0.17712  59.1%   784  164s",
+                  "approx_native_seconds": 164.0
+                },
+                {
+                  "line": "H  587   521                       0.4304912    0.20299  52.8%  1607  433s",
+                  "approx_native_seconds": 433.0
+                },
+                {
+                  "line": "H  587   494                       0.4262678    0.20299  52.4%  1607  434s",
+                  "approx_native_seconds": 434.0
+                },
+                {
+                  "line": "H  587   469                       0.4262162    0.20299  52.4%  1607  434s",
+                  "approx_native_seconds": 434.0
+                },
+                {
+                  "line": "H  587   446                       0.4262162    0.20299  52.4%  1607  436s",
+                  "approx_native_seconds": 436.0
+                },
+                {
+                  "line": "H  590   425                       0.4046150    0.20299  49.8%  1643  454s",
+                  "approx_native_seconds": 454.0
+                },
+                {
+                  "line": "H  590   403                       0.4002475    0.20299  49.3%  1643  455s",
+                  "approx_native_seconds": 455.0
+                },
+                {
+                  "line": "H  590   383                       0.3990204    0.20299  49.1%  1643  455s",
+                  "approx_native_seconds": 455.0
+                },
+                {
+                  "line": "H  590   364                       0.3897746    0.20299  47.9%  1643  455s",
+                  "approx_native_seconds": 455.0
+                },
+                {
+                  "line": "H  590   345                       0.3889359    0.20299  47.8%  1643  456s",
+                  "approx_native_seconds": 456.0
+                },
+                {
+                  "line": "H  591   329                       0.3888254    0.20299  47.8%  1649  461s",
+                  "approx_native_seconds": 461.0
+                },
+                {
+                  "line": "H  591   312                       0.3887713    0.20299  47.8%  1649  461s",
+                  "approx_native_seconds": 461.0
+                },
+                {
+                  "line": "H  606   306                       0.3887713    0.20425  47.5%  1726  496s",
+                  "approx_native_seconds": 496.0
+                },
+                {
+                  "line": "H  607   292                       0.3887713    0.20425  47.5%  1726  497s",
+                  "approx_native_seconds": 497.0
+                },
+                {
+                  "line": "H  617   284                       0.3884535    0.20425  47.4%  1748  514s",
+                  "approx_native_seconds": 514.0
+                },
+                {
+                  "line": "H  631   281                       0.3840459    0.20425  46.8%  1804  541s",
+                  "approx_native_seconds": 541.0
+                },
+                {
+                  "line": "H  631   268                       0.3840443    0.20425  46.8%  1804  541s",
+                  "approx_native_seconds": 541.0
+                },
+                {
+                  "line": "H  644   264                       0.3840443    0.20425  46.8%  1849  561s",
+                  "approx_native_seconds": 561.0
+                },
+                {
+                  "line": "H  649   256                       0.3820011    0.20425  46.5%  1859  570s",
+                  "approx_native_seconds": 570.0
+                },
+                {
+                  "line": "H  650   245                       0.3819531    0.20425  46.5%  1862  573s",
+                  "approx_native_seconds": 573.0
+                },
+                {
+                  "line": "H  658   240                       0.3819531    0.20425  46.5%  1864  585s",
+                  "approx_native_seconds": 585.0
+                },
+                {
+                  "line": "H  661   233                       0.3819531    0.20425  46.5%  1876  589s",
+                  "approx_native_seconds": 589.0
+                },
+                {
+                  "line": "H  661   223                       0.3819531    0.20425  46.5%  1876  589s",
+                  "approx_native_seconds": 589.0
+                },
+                {
+                  "line": "H  683   228                       0.3814159    0.20425  46.5%  1896  625s",
+                  "approx_native_seconds": 625.0
+                },
+                {
+                  "line": "H  683   220                       0.3813654    0.20425  46.4%  1896  625s",
+                  "approx_native_seconds": 625.0
+                },
+                {
+                  "line": "H  753   258                       0.3811798    0.20425  46.4%  1952  683s",
+                  "approx_native_seconds": 683.0
+                },
+                {
+                  "line": "H  762   256                       0.3800612    0.20425  46.3%  1969  693s",
+                  "approx_native_seconds": 693.0
+                },
+                {
+                  "line": "H  773   255                       0.3799644    0.20425  46.2%  1997  711s",
+                  "approx_native_seconds": 711.0
+                },
+                {
+                  "line": "H  777   251                       0.3798606    0.20425  46.2%  2004  733s",
+                  "approx_native_seconds": 733.0
+                },
+                {
+                  "line": "H  777   245                       0.3796090    0.20425  46.2%  2004  733s",
+                  "approx_native_seconds": 733.0
+                },
+                {
+                  "line": "H  777   239                       0.3792536    0.20425  46.1%  2004  733s",
+                  "approx_native_seconds": 733.0
+                },
+                {
+                  "line": "H 1127   342                       0.3632344    0.20425  43.8%  1704  840s",
+                  "approx_native_seconds": 840.0
+                },
+                {
+                  "line": "H 1127   339                       0.3623525    0.20425  43.6%  1704  841s",
+                  "approx_native_seconds": 841.0
+                },
+                {
+                  "line": "H 1128   339                       0.3621368    0.20425  43.6%  1709  841s",
+                  "approx_native_seconds": 841.0
+                },
+                {
+                  "line": "H 1265   467                       0.3621368    0.20425  43.6%  1622  896s",
+                  "approx_native_seconds": 896.0
+                },
+                {
+                  "line": "H 1279   476                       0.3621368    0.20425  43.6%  1611  900s",
+                  "approx_native_seconds": 900.0
+                },
+                {
+                  "line": "H 2958  1693                       0.3621368    0.21238  41.4%  1234 1337s",
+                  "approx_native_seconds": 1337.0
+                },
+                {
+                  "line": "H 6706  4180                       0.3446426    0.21899  36.5%  1128 2357s",
+                  "approx_native_seconds": 2357.0
+                }
+              ],
+              "root": "Root relaxation: objective 1.289107e-01, 9564 iterations, 0.73 seconds (1.86 work units)",
+              "Start_lines": [
+                "Loaded user MIP start with objective 0.44549"
+              ],
+              "intermediate_rounded_native_objectives_not_independently_physical_U": true
+            }
+          ],
+          "Starts": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\052\\raw\\R137_052_R-B35-S-T2_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+              "SHA256": "6c818cbc19963c1590330764ffd02c8facfd8ebc8bfe2821f7d096ac0aad6885",
+              "record": {
+                "source": "round68_existing_0",
+                "leaf": "L0",
+                "model_sha256": "47231f37c61856b55fa7a820a6cde874b3591a001e780afb29eacf7777942584",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 23666,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.44548980895179674,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.017166,
+                "native_deadline_remaining_at_optimize": 2361.7662002
+              }
+            }
+          ],
+          "U": 0.34464262559194814,
+          "L": 0.2189859496034747,
+          "certificate": false,
+          "T_cert": null
+        },
+        {
+          "method": "BOTH",
+          "measured_source": "83928377336a860acf78f684d1723a5040467bb5",
+          "source_files": {
+            "external/paper_optimize_ledger.csv": "0e9aa536b90f7acf08a5137caf119c0c8c91554f685d53bb52e4c283a334fc89",
+            "external/adaptive_mass_decision_ledger.csv": "cf8013f71f461329fd74ba4bd1b583a480f7ce0345ee579b54825af944557e13",
+            "external/initial_witness.json": "17b666a13235887df28a5d2f5c3f4a6be07b2a81748327b46f44198ae274fe9b"
+          },
+          "LP": 3,
+          "target": 0,
+          "terminal": 1,
+          "optimize": [
+            {
+              "leaf_id": "L0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2367.0406972000001",
+              "solver_runtime": "0.81700015068054199",
+              "work": "2.470857790478326",
+              "nodes": "0",
+              "simplex_iterations": "7433",
+              "barrier_iterations": "0",
+              "memory_gb": "0.060666316999999997",
+              "model_sha256": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\007\\raw\\R138_007_R-B35-S-T2_S0_STOCK\\external\\native_logs\\L0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2364.9349920999998",
+              "solver_runtime": "1.4200000762939453",
+              "work": "4.0290282004577049",
+              "nodes": "0",
+              "simplex_iterations": "11847",
+              "barrier_iterations": "0",
+              "memory_gb": "0.064957800999999996",
+              "model_sha256": "a77a029c2eecba3487721de73943b27ab35b20cb6c1494c0d7cbb8504b73451f",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\007\\raw\\R138_007_R-B35-S-T2_S0_STOCK\\external\\native_logs\\L0.0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.1",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2362.2446562999999",
+              "solver_runtime": "0.55500006675720215",
+              "work": "1.752280732925058",
+              "nodes": "0",
+              "simplex_iterations": "6093",
+              "barrier_iterations": "0",
+              "memory_gb": "0.070287626000000006",
+              "model_sha256": "b3113d4d59c042ca9c834f620d1a2855aafb60216a0b32349a26ee8b296ef2fa",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\007\\raw\\R138_007_R-B35-S-T2_S0_STOCK\\external\\native_logs\\L0.1_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "MIP",
+              "native_status": "TIME_LIMIT",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2361.5236676999998",
+              "solver_runtime": "2361.4319999217987",
+              "work": "5396.3832047649303",
+              "nodes": "10202",
+              "simplex_iterations": "6248704",
+              "barrier_iterations": "0",
+              "memory_gb": "0.52734232199999997",
+              "model_sha256": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\007\\raw\\R138_007_R-B35-S-T2_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log"
+            }
+          ],
+          "AM": [
+            {
+              "decision_sequence": "1",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.44548980895179674",
+              "B_p": "0.12915129151291505",
+              "B_L": "0.12915129151291532",
+              "B_R": "0.31386118707282878",
+              "U": "0.44548980895179674",
+              "proof_gap": "0.31633851743888169",
+              "g_L_raw": "8.7740107781820906e-16",
+              "g_R_raw": "0.58389947912555629",
+              "g_L": "8.7740107781820906e-16",
+              "g_R": "0.58389947912555629",
+              "eta": "8.7740107781820906e-16",
+              "mu": "0.29194973956277859",
+              "S_AM": "2.5615701616112737e-16",
+              "adaptive_rho_I": "0.2740197683334375",
+              "score_tolerance": "3.1611706047475199e-07",
+              "selected_action": "exact-close",
+              "native_target": "",
+              "deterministic_reason": "adaptive_mass_no_strict_child_improvement",
+              "coverage_update": "parent_coverage_retained"
+            }
+          ],
+          "Native": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\007\\raw\\R138_007_R-B35-S-T2_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+              "SHA256": "49a662781b197da86583f789de2c4755526e20e65511c24e1f9a2b6c643ac227",
+              "incumbent_events": [
+                {
+                  "line": "H    0     0                       0.4420246    0.18287  58.6%     -   59s",
+                  "approx_native_seconds": 59.0
+                },
+                {
+                  "line": "H    0     0                       0.4418172    0.18287  58.6%     -   59s",
+                  "approx_native_seconds": 59.0
+                },
+                {
+                  "line": "H   10    10                       0.4402432    0.18588  57.8%  3838   70s",
+                  "approx_native_seconds": 70.0
+                },
+                {
+                  "line": "H   10    10                       0.4401064    0.18588  57.8%  3838   70s",
+                  "approx_native_seconds": 70.0
+                },
+                {
+                  "line": "H  421   402                       0.4399447    0.18873  57.1%   699  134s",
+                  "approx_native_seconds": 134.0
+                },
+                {
+                  "line": "H  541   482                       0.4386594    0.21177  51.7%   664  207s",
+                  "approx_native_seconds": 207.0
+                },
+                {
+                  "line": "H  562   471                       0.4172621    0.21186  49.2%   999  273s",
+                  "approx_native_seconds": 273.0
+                },
+                {
+                  "line": "H  562   448                       0.4168386    0.21186  49.2%   999  273s",
+                  "approx_native_seconds": 273.0
+                },
+                {
+                  "line": "H  688   506                       0.4168386    0.21186  49.2%   981  322s",
+                  "approx_native_seconds": 322.0
+                },
+                {
+                  "line": "H  865   548                       0.4163972    0.21186  49.1%   958  381s",
+                  "approx_native_seconds": 381.0
+                },
+                {
+                  "line": "H  865   528                       0.4162643    0.21186  49.1%   958  381s",
+                  "approx_native_seconds": 381.0
+                },
+                {
+                  "line": "H  901   533                       0.4153303    0.21186  49.0%   964  397s",
+                  "approx_native_seconds": 397.0
+                },
+                {
+                  "line": "H  980   536                       0.4145657    0.21247  48.7%   997  434s",
+                  "approx_native_seconds": 434.0
+                },
+                {
+                  "line": "H  980   519                       0.4145239    0.21247  48.7%   997  434s",
+                  "approx_native_seconds": 434.0
+                },
+                {
+                  "line": "H 1138   598                       0.4143198    0.21247  48.7%   952  493s",
+                  "approx_native_seconds": 493.0
+                },
+                {
+                  "line": "H 1230   624                       0.4142669    0.21250  48.7%   957  538s",
+                  "approx_native_seconds": 538.0
+                },
+                {
+                  "line": "H 1230   609                       0.4140968    0.21250  48.7%   957  538s",
+                  "approx_native_seconds": 538.0
+                },
+                {
+                  "line": "H 1397   609                       0.4023862    0.21319  47.0%   887  581s",
+                  "approx_native_seconds": 581.0
+                },
+                {
+                  "line": "H 1397   609                       0.4021090    0.21319  47.0%   887  589s",
+                  "approx_native_seconds": 589.0
+                },
+                {
+                  "line": "H 1397   607                       0.4012002    0.21319  46.9%   887  591s",
+                  "approx_native_seconds": 591.0
+                },
+                {
+                  "line": "H 2958  1777                       0.4012002    0.21699  45.9%   709  965s",
+                  "approx_native_seconds": 965.0
+                },
+                {
+                  "line": "H 6890  4817                       0.4012002    0.22631  43.6%   632 1731s",
+                  "approx_native_seconds": 1731.0
+                },
+                {
+                  "line": "H 8856  6401                       0.4012002    0.22815  43.1%   608 2094s",
+                  "approx_native_seconds": 2094.0
+                }
+              ],
+              "root": "Root relaxation: objective 1.291513e-01, 7886 iterations, 0.61 seconds (1.54 work units)",
+              "Start_lines": [
+                "Loaded user MIP start with objective 0.44549"
+              ],
+              "intermediate_rounded_native_objectives_not_independently_physical_U": true
+            }
+          ],
+          "Starts": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\007\\raw\\R138_007_R-B35-S-T2_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+              "SHA256": "f816e8fe3730e62f467a0d977c37c4768a68116192d9fb1d9ef5f89b5fd39725",
+              "record": {
+                "source": "round68_existing_0",
+                "leaf": "L0",
+                "model_sha256": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 23670,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.44548980895179674,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.0174672,
+                "native_deadline_remaining_at_optimize": 2361.3972312
+              }
+            }
+          ],
+          "U": 0.4012002178390506,
+          "L": 0.22918159966432358,
+          "certificate": false,
+          "T_cert": null
+        }
+      ]
+    },
+    {
+      "role": "K-15-S",
+      "same_initial_H_witness": true,
+      "matrices": [
+        {
+          "leaf": "L0",
+          "base_SHA": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+          "both_SHA": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        },
+        {
+          "leaf": "L0.0",
+          "base_SHA": "590ae612c7d11f0e071340379c053e47d91349c1ecbe25af88683eca855541aa",
+          "both_SHA": "602543f11ae7423bbbe9cd7e1a96d593c120931e1c0f4cf7e1ca6d01128b2e1d",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        },
+        {
+          "leaf": "L0.1",
+          "base_SHA": "cc9205110487daaf951c9b24ad310ca9398ece88edb1e2c39645f108f3f078bf",
+          "both_SHA": "f71e5807a24859a6936588baec5094b5cf72376f6580209aebd7f1dd40d3cc79",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        }
+      ],
+      "methods": [
+        {
+          "method": "BASE",
+          "measured_source": "779713ad9a0b01edc538ecb64df9438739127be3",
+          "source_files": {
+            "external/paper_optimize_ledger.csv": "25f0ee1913d859d25c9f873d1ed3d19d582412b234e7b8bd2edcd66f8f611aed",
+            "external/adaptive_mass_decision_ledger.csv": "8692f3bc052a0f748f2da983e501c71656316b8229e7db78bd788b51b30cce45",
+            "external/initial_witness.json": "998e7797d5bdaf67aab962578c88172be79da30e3b272c90dde9ba1b3379cc7f"
+          },
+          "LP": 3,
+          "target": 1,
+          "terminal": 1,
+          "optimize": [
+            {
+              "leaf_id": "L0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "569.54706439999995",
+              "solver_runtime": "0.082999944686889648",
+              "work": "0.18462773548151529",
+              "nodes": "0",
+              "simplex_iterations": "2000",
+              "barrier_iterations": "0",
+              "memory_gb": "0.0097917739999999996",
+              "model_sha256": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\003\\raw\\R137_003_K-15-S_S0_S2\\external\\native_logs\\L0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "569.3109991",
+              "solver_runtime": "0.069000005722045898",
+              "work": "0.19395140750297724",
+              "nodes": "0",
+              "simplex_iterations": "2072",
+              "barrier_iterations": "0",
+              "memory_gb": "0.010467232999999999",
+              "model_sha256": "590ae612c7d11f0e071340379c053e47d91349c1ecbe25af88683eca855541aa",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\003\\raw\\R137_003_K-15-S_S0_S2\\external\\native_logs\\L0.0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.1",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "569.06786929999998",
+              "solver_runtime": "0.043999910354614258",
+              "work": "0.10994933102420817",
+              "nodes": "0",
+              "simplex_iterations": "1453",
+              "barrier_iterations": "0",
+              "memory_gb": "0.011419383",
+              "model_sha256": "cc9205110487daaf951c9b24ad310ca9398ece88edb1e2c39645f108f3f078bf",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\003\\raw\\R137_003_K-15-S_S0_S2\\external\\native_logs\\L0.1_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "CHILD_BOUND_TARGET_MIP",
+              "native_status": "INTERRUPTED",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "568.99320650000004",
+              "solver_runtime": "0.19900012016296387",
+              "work": "0.46191584229605093",
+              "nodes": "1",
+              "simplex_iterations": "2807",
+              "barrier_iterations": "0",
+              "memory_gb": "0.019893220999999999",
+              "model_sha256": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\003\\raw\\R137_003_K-15-S_S0_S2\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "MIP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "568.76510199999996",
+              "solver_runtime": "110.34999990463257",
+              "work": "159.97525872594886",
+              "nodes": "48700",
+              "simplex_iterations": "1071414",
+              "barrier_iterations": "0",
+              "memory_gb": "0.077455786999999998",
+              "model_sha256": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\003\\raw\\R137_003_K-15-S_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log"
+            }
+          ],
+          "AM": [
+            {
+              "decision_sequence": "1",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.6623605074511707",
+              "B_p": "0.16713688186516093",
+              "B_L": "0.16771837778369372",
+              "B_R": "0.46742171186900949",
+              "U": "0.6623605074511707",
+              "proof_gap": "0.49522362558600974",
+              "g_L_raw": "0.0011742087584062555",
+              "g_R_raw": "0.60636208470166275",
+              "g_L": "0.0011742087584062555",
+              "g_R": "0.60636208470166275",
+              "eta": "0.0011742087584062555",
+              "mu": "0.30376814673003449",
+              "S_AM": "0.00035668721841524304",
+              "adaptive_rho_I": "0.26335875193358499",
+              "score_tolerance": "2.0192898390185472e-07",
+              "selected_action": "native-target",
+              "native_target": "0.16771837778369372",
+              "deterministic_reason": "adaptive_mass_score_below_tau_native_target",
+              "coverage_update": "parent_coverage_retained"
+            },
+            {
+              "decision_sequence": "2",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.6623605074511707",
+              "B_p": "0.16811703688669516",
+              "B_L": "0.16771837778369372",
+              "B_R": "0.46742171186900949",
+              "U": "0.6623605074511707",
+              "proof_gap": "0.49424347056447554",
+              "g_L_raw": "-0.00080660469332276209",
+              "g_R_raw": "0.60558144478970743",
+              "g_L": "0",
+              "g_R": "0.60558144478970743",
+              "eta": "0",
+              "mu": "0.30279072239485372",
+              "S_AM": "0",
+              "adaptive_rho_I": "0.26420888779966034",
+              "score_tolerance": "2.0232943775180491e-07",
+              "selected_action": "exact-close",
+              "native_target": "",
+              "deterministic_reason": "adaptive_mass_no_strict_child_improvement",
+              "coverage_update": "parent_coverage_retained"
+            }
+          ],
+          "Native": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\003\\raw\\R137_003_K-15-S_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+              "SHA256": "a5634a9df2faa82cfc67b9578e0077856153fa0143c5df5340ffa11979af8199",
+              "incumbent_events": [
+                {
+                  "line": "H    4     4                       0.6547232    0.43865  33.0%   138    1s",
+                  "approx_native_seconds": 1.0
+                },
+                {
+                  "line": "H   50    50                       0.6541524    0.44535  31.9%   126    2s",
+                  "approx_native_seconds": 2.0
+                },
+                {
+                  "line": "H  647   451                       0.6483789    0.45920  29.2%  86.5    9s",
+                  "approx_native_seconds": 9.0
+                },
+                {
+                  "line": "H  647   429                       0.5955648    0.45920  22.9%  86.5    9s",
+                  "approx_native_seconds": 9.0
+                },
+                {
+                  "line": "H  907   407                       0.5927108    0.47882  19.2%  87.3   13s",
+                  "approx_native_seconds": 13.0
+                },
+                {
+                  "line": "H  907   385                       0.5926388    0.47882  19.2%  87.3   13s",
+                  "approx_native_seconds": 13.0
+                },
+                {
+                  "line": "H 1518   338                       0.5922649    0.51474  13.1%  88.3   16s",
+                  "approx_native_seconds": 16.0
+                },
+                {
+                  "line": "H 2554   508                       0.5922649    0.54278  8.36%  78.8   22s",
+                  "approx_native_seconds": 22.0
+                },
+                {
+                  "line": "H 6806  1480                       0.5922649    0.56092  5.29%  46.5   31s",
+                  "approx_native_seconds": 31.0
+                },
+                {
+                  "line": "H 7873  1707                       0.5922649    0.56239  5.04%  42.9   34s",
+                  "approx_native_seconds": 34.0
+                }
+              ],
+              "root": "Root relaxation: objective 1.671522e-01, 2433 iterations, 0.10 seconds (0.25 work units)",
+              "Start_lines": [
+                "Loaded user MIP start with objective 0.662361",
+                "MIP start from previous solve did not produce a new incumbent solution"
+              ],
+              "intermediate_rounded_native_objectives_not_independently_physical_U": true
+            }
+          ],
+          "Starts": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\003\\raw\\R137_003_K-15-S_S0_S2\\external\\native_logs\\L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+              "SHA256": "0e1d80d59a58db87b525bc27d1b13a72b97a8e51be23f1a142429d4062d24772",
+              "record": {
+                "source": "round68_existing_0",
+                "leaf": "L0",
+                "model_sha256": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 3990,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.6623605074511707,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.0036656,
+                "native_deadline_remaining_at_optimize": 568.9747088
+              }
+            },
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\003\\raw\\R137_003_K-15-S_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+              "SHA256": "2427dcaa69021aeac757850527e97b6186098fe26487a3a474390c5268a3e724",
+              "record": {
+                "source": "round68_existing_1",
+                "leaf": "L0",
+                "model_sha256": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 3990,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.6623605074511707,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.0039778,
+                "native_deadline_remaining_at_optimize": 568.7465028
+              }
+            }
+          ],
+          "U": 0.5922648822560825,
+          "L": 0.5922648792385111,
+          "certificate": true,
+          "T_cert": 112.76930311694741
+        },
+        {
+          "method": "BOTH",
+          "measured_source": "83928377336a860acf78f684d1723a5040467bb5",
+          "source_files": {
+            "external/paper_optimize_ledger.csv": "716bdd30f657fd39b2d691b3dc38cb5afa0e5fe442ce4a3ef8599441e3933233",
+            "external/adaptive_mass_decision_ledger.csv": "fefeb0f23c5f356b92bd8e99884a89c658d37690e6b79a8165f92d878c8bfa9a",
+            "external/initial_witness.json": "998e7797d5bdaf67aab962578c88172be79da30e3b272c90dde9ba1b3379cc7f"
+          },
+          "LP": 3,
+          "target": 0,
+          "terminal": 1,
+          "optimize": [
+            {
+              "leaf_id": "L0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "569.53969729999994",
+              "solver_runtime": "0.038000106811523438",
+              "work": "0.12815432505169505",
+              "nodes": "0",
+              "simplex_iterations": "1293",
+              "barrier_iterations": "0",
+              "memory_gb": "0.0098104400000000001",
+              "model_sha256": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\002\\raw\\R138_002_K-15-S_S0_STOCK\\external\\native_logs\\L0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "569.32106510000006",
+              "solver_runtime": "0.052000045776367188",
+              "work": "0.13451674006925249",
+              "nodes": "0",
+              "simplex_iterations": "1445",
+              "barrier_iterations": "0",
+              "memory_gb": "0.010487303",
+              "model_sha256": "602543f11ae7423bbbe9cd7e1a96d593c120931e1c0f4cf7e1ca6d01128b2e1d",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\002\\raw\\R138_002_K-15-S_S0_STOCK\\external\\native_logs\\L0.0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.1",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "569.09708139999998",
+              "solver_runtime": "0.067999839782714844",
+              "work": "0.13101440543250434",
+              "nodes": "0",
+              "simplex_iterations": "1780",
+              "barrier_iterations": "0",
+              "memory_gb": "0.011451345",
+              "model_sha256": "f71e5807a24859a6936588baec5094b5cf72376f6580209aebd7f1dd40d3cc79",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\002\\raw\\R138_002_K-15-S_S0_STOCK\\external\\native_logs\\L0.1_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "MIP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "569.01392150000004",
+              "solver_runtime": "31.641000032424927",
+              "work": "44.304146282641504",
+              "nodes": "8064",
+              "simplex_iterations": "264623",
+              "barrier_iterations": "0",
+              "memory_gb": "0.058816414999999997",
+              "model_sha256": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\002\\raw\\R138_002_K-15-S_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log"
+            }
+          ],
+          "AM": [
+            {
+              "decision_sequence": "1",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.6623605074511707",
+              "B_p": "0.1724298557592866",
+              "B_L": "0.17242985575928665",
+              "B_R": "0.46742171186900955",
+              "U": "0.6623605074511707",
+              "proof_gap": "0.4899306516918841",
+              "g_L_raw": "1.1330409934459177e-16",
+              "g_R_raw": "0.60210941097688742",
+              "g_L": "1.1330409934459177e-16",
+              "g_R": "0.60210941097688742",
+              "eta": "1.1330409934459177e-16",
+              "mu": "0.30105470548844376",
+              "S_AM": "3.4110732258819446e-17",
+              "adaptive_rho_I": "0.26573243514066536",
+              "score_tolerance": "2.0411052694056862e-07",
+              "selected_action": "exact-close",
+              "native_target": "",
+              "deterministic_reason": "adaptive_mass_no_strict_child_improvement",
+              "coverage_update": "parent_coverage_retained"
+            }
+          ],
+          "Native": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\002\\raw\\R138_002_K-15-S_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+              "SHA256": "c519e8eb7f810144d3391e436ab64adf6262d11b36c587645a3bf55d765d1916",
+              "incumbent_events": [
+                {
+                  "line": "*  298   252              71       0.6402979    0.48359  24.5%  50.2    2s",
+                  "approx_native_seconds": 2.0
+                },
+                {
+                  "line": "H  299   246                       0.6368365    0.48359  24.1%  50.0    2s",
+                  "approx_native_seconds": 2.0
+                },
+                {
+                  "line": "H  299   245                       0.6362574    0.48359  24.0%  50.0    2s",
+                  "approx_native_seconds": 2.0
+                },
+                {
+                  "line": "H  698   411                       0.6236255    0.51226  17.9%  76.3    8s",
+                  "approx_native_seconds": 8.0
+                },
+                {
+                  "line": "H  709   396                       0.6135647    0.51226  16.5%  78.6    9s",
+                  "approx_native_seconds": 9.0
+                },
+                {
+                  "line": "H  801   381                       0.6135647    0.51226  16.5%  84.3   11s",
+                  "approx_native_seconds": 11.0
+                },
+                {
+                  "line": "* 1135   363              55       0.6131977    0.52491  14.4%  80.6   13s",
+                  "approx_native_seconds": 13.0
+                },
+                {
+                  "line": "H 1139   306                       0.5942158    0.52669  11.4%  80.8   13s",
+                  "approx_native_seconds": 13.0
+                },
+                {
+                  "line": "H 1139   289                       0.5942084    0.52669  11.4%  80.8   13s",
+                  "approx_native_seconds": 13.0
+                },
+                {
+                  "line": "H 1139   271                       0.5931887    0.52669  11.2%  80.8   13s",
+                  "approx_native_seconds": 13.0
+                },
+                {
+                  "line": "H 1173   251                       0.5926388    0.52740  11.0%  80.9   14s",
+                  "approx_native_seconds": 14.0
+                },
+                {
+                  "line": "* 5020   242              51       0.5922649    0.58229  1.68%  42.3   26s",
+                  "approx_native_seconds": 26.0
+                }
+              ],
+              "root": "Root relaxation: objective 1.726186e-01, 1735 iterations, 0.06 seconds (0.17 work units)",
+              "Start_lines": [
+                "Loaded user MIP start with objective 0.662361"
+              ],
+              "intermediate_rounded_native_objectives_not_independently_physical_U": true
+            }
+          ],
+          "Starts": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\002\\raw\\R138_002_K-15-S_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+              "SHA256": "9527b7730efef3b9cfc1aef574b478c991e7c687023f97d0a659098238cadd23",
+              "record": {
+                "source": "round68_existing_0",
+                "leaf": "L0",
+                "model_sha256": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 3994,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.6623605074511707,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.003542,
+                "native_deadline_remaining_at_optimize": 568.9942066000001
+              }
+            }
+          ],
+          "U": 0.5922648822560825,
+          "L": 0.5922648822560638,
+          "certificate": true,
+          "T_cert": 33.81822654698044
+        }
+      ]
+    },
+    {
+      "role": "K-35-U",
+      "same_initial_H_witness": true,
+      "matrices": [
+        {
+          "leaf": "L0",
+          "base_SHA": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+          "both_SHA": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        },
+        {
+          "leaf": "L0.0",
+          "base_SHA": "74f19a6563a0416c3a1696c692f8d742e110ae3a190a24b8300f9a45c03fbbca",
+          "both_SHA": "bb478df4db779e6a61f782940d7153e0ebbb1a628b3191fb5d2fb94129f6333b",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        },
+        {
+          "leaf": "L0.1",
+          "base_SHA": "8bf70f6d5ff12111b4fa907b99fbb6cf15f05e3b2a32726c48a9a2219d0b7281",
+          "both_SHA": "c2dc817220d8ecadb9efee962ac5bbe0fcfb74d0f4c384e4247d0d0deb5b238f",
+          "common": {
+            "order": true,
+            "bounds": true,
+            "types": true,
+            "objective": true
+          },
+          "removed_rows": 0,
+          "added_rows": 4,
+          "only_four_stock_rows": true
+        }
+      ],
+      "methods": [
+        {
+          "method": "BASE",
+          "measured_source": "779713ad9a0b01edc538ecb64df9438739127be3",
+          "source_files": {
+            "external/paper_optimize_ledger.csv": "aa737049527bf0a38e0b417e0b52ad217076da20d5fb4af439a0a540eda364ad",
+            "external/adaptive_mass_decision_ledger.csv": "a6536cd3262bd6ad3f72c7a930232103f8720d5be3efafbf985323891c1db275",
+            "external/initial_witness.json": "e179aaadc58812297b6254f0447341c861a33d190265787337f57ce8b0f8ec93"
+          },
+          "LP": 3,
+          "target": 0,
+          "terminal": 1,
+          "optimize": [
+            {
+              "leaf_id": "L0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2368.2939013",
+              "solver_runtime": "0.34400010108947754",
+              "work": "0.96811703530420035",
+              "nodes": "0",
+              "simplex_iterations": "5468",
+              "barrier_iterations": "0",
+              "memory_gb": "0.056866855000000001",
+              "model_sha256": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\014\\raw\\R137_014_K-35-U_S0_S2\\external\\native_logs\\L0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2366.7175317000001",
+              "solver_runtime": "0.32100009918212891",
+              "work": "1.0093300906039266",
+              "nodes": "0",
+              "simplex_iterations": "5908",
+              "barrier_iterations": "0",
+              "memory_gb": "0.061122817000000003",
+              "model_sha256": "74f19a6563a0416c3a1696c692f8d742e110ae3a190a24b8300f9a45c03fbbca",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\014\\raw\\R137_014_K-35-U_S0_S2\\external\\native_logs\\L0.0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.1",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2365.1454272000001",
+              "solver_runtime": "0.2779998779296875",
+              "work": "0.85526429005778071",
+              "nodes": "0",
+              "simplex_iterations": "4655",
+              "barrier_iterations": "0",
+              "memory_gb": "0.065421172999999999",
+              "model_sha256": "8bf70f6d5ff12111b4fa907b99fbb6cf15f05e3b2a32726c48a9a2219d0b7281",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\014\\raw\\R137_014_K-35-U_S0_S2\\external\\native_logs\\L0.1_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "MIP",
+              "native_status": "TIME_LIMIT",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2364.6896618999999",
+              "solver_runtime": "2364.5840001106262",
+              "work": "5048.0598402146243",
+              "nodes": "18922",
+              "simplex_iterations": "7854350",
+              "barrier_iterations": "0",
+              "memory_gb": "0.41312339599999998",
+              "model_sha256": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\014\\raw\\R137_014_K-35-U_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log"
+            }
+          ],
+          "AM": [
+            {
+              "decision_sequence": "1",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.76745660472471666",
+              "B_p": "0.20017766194929548",
+              "B_L": "0.20017766194929551",
+              "B_R": "0.54526678093378689",
+              "U": "0.76745660472471666",
+              "proof_gap": "0.56727894277542124",
+              "g_L_raw": "4.8927561950095166e-17",
+              "g_R_raw": "0.60832351240844129",
+              "g_L": "4.8927561950095166e-17",
+              "g_R": "0.60832351240844129",
+              "eta": "4.8927561950095166e-17",
+              "mu": "0.30416175620422065",
+              "S_AM": "1.4881893169531749e-17",
+              "adaptive_rho_I": "0.26301794478818796",
+              "score_tolerance": "1.7628012691870371e-07",
+              "selected_action": "exact-close",
+              "native_target": "",
+              "deterministic_reason": "adaptive_mass_no_strict_child_improvement",
+              "coverage_update": "parent_coverage_retained"
+            }
+          ],
+          "Native": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\014\\raw\\R137_014_K-35-U_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+              "SHA256": "d04c9b802b1aaeaaed1a6f0a13f92fd2c876dda5e87b158f8ed651dd1899dfe8",
+              "incumbent_events": [
+                {
+                  "line": "H   95    93                       0.7674566    0.43312  43.6%   476   34s",
+                  "approx_native_seconds": 34.0
+                },
+                {
+                  "line": "H  329   302                       0.7525843    0.43890  41.7%   268   41s",
+                  "approx_native_seconds": 41.0
+                },
+                {
+                  "line": "H  329   302                       0.7451507    0.43890  41.1%   268   41s",
+                  "approx_native_seconds": 41.0
+                },
+                {
+                  "line": "H  374   347                       0.7447098    0.43890  41.1%   274   43s",
+                  "approx_native_seconds": 43.0
+                },
+                {
+                  "line": "H  583   503                       0.7447098    0.45392  39.0%   423  126s",
+                  "approx_native_seconds": 126.0
+                },
+                {
+                  "line": "H  583   478                       0.7447098    0.45392  39.0%   423  126s",
+                  "approx_native_seconds": 126.0
+                },
+                {
+                  "line": "H10247  6013                       0.7399970    0.52745  28.7%   326 1402s",
+                  "approx_native_seconds": 1402.0
+                },
+                {
+                  "line": "H10320  5755                       0.7391617    0.52745  28.6%   335 1494s",
+                  "approx_native_seconds": 1494.0
+                },
+                {
+                  "line": "H10320  5468                       0.7388322    0.52745  28.6%   335 1494s",
+                  "approx_native_seconds": 1494.0
+                },
+                {
+                  "line": "H10320  5195                       0.7351307    0.52745  28.3%   335 1494s",
+                  "approx_native_seconds": 1494.0
+                },
+                {
+                  "line": "H10374  4927                       0.7349116    0.52745  28.2%   334 1501s",
+                  "approx_native_seconds": 1501.0
+                },
+                {
+                  "line": "H10422  4705                       0.7348968    0.52745  28.2%   336 1514s",
+                  "approx_native_seconds": 1514.0
+                },
+                {
+                  "line": "H10428  4473                       0.7305665    0.52745  27.8%   336 1520s",
+                  "approx_native_seconds": 1520.0
+                },
+                {
+                  "line": "H10590  4323                       0.7305664    0.52745  27.8%   340 1552s",
+                  "approx_native_seconds": 1552.0
+                },
+                {
+                  "line": "H10753  4159                       0.7205869    0.52745  26.8%   343 1575s",
+                  "approx_native_seconds": 1575.0
+                },
+                {
+                  "line": "H10824  3973                       0.7126478    0.52745  26.0%   346 1593s",
+                  "approx_native_seconds": 1593.0
+                },
+                {
+                  "line": "H10861  3793                       0.7079134    0.52745  25.5%   345 1600s",
+                  "approx_native_seconds": 1600.0
+                },
+                {
+                  "line": "H10861  3604                       0.7019728    0.52745  24.9%   345 1600s",
+                  "approx_native_seconds": 1600.0
+                },
+                {
+                  "line": "H10861  3432                       0.7003150    0.52745  24.7%   345 1600s",
+                  "approx_native_seconds": 1600.0
+                },
+                {
+                  "line": "H10917  3274                       0.7001164    0.52745  24.7%   346 1610s",
+                  "approx_native_seconds": 1610.0
+                },
+                {
+                  "line": "H10917  3118                       0.6968541    0.52745  24.3%   346 1610s",
+                  "approx_native_seconds": 1610.0
+                },
+                {
+                  "line": "H11321  3096                       0.6937002    0.52745  24.0%   349 1660s",
+                  "approx_native_seconds": 1660.0
+                },
+                {
+                  "line": "H11766  3069                       0.6937001    0.52745  24.0%   355 1723s",
+                  "approx_native_seconds": 1723.0
+                },
+                {
+                  "line": "H11766  2936                       0.6928544    0.52745  23.9%   355 1725s",
+                  "approx_native_seconds": 1725.0
+                },
+                {
+                  "line": "H14608  3461                       0.6928544    0.54476  21.4%   386 2029s",
+                  "approx_native_seconds": 2029.0
+                }
+              ],
+              "root": "Root relaxation: objective 2.001777e-01, 5188 iterations, 0.38 seconds (1.06 work units)",
+              "Start_lines": [
+                "Loaded user MIP start with objective 0.767457"
+              ],
+              "intermediate_rounded_native_objectives_not_independently_physical_U": true
+            }
+          ],
+          "Starts": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round137\\campaign\\014\\raw\\R137_014_K-35-U_S0_S2\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+              "SHA256": "367ee88e5f0c3d577f92c2e9e5081c7b4389f06b87bd0b8d5801ef6db856fcd5",
+              "record": {
+                "source": "round68_existing_0",
+                "leaf": "L0",
+                "model_sha256": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 23624,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.7674566047247167,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.0169066,
+                "native_deadline_remaining_at_optimize": 2364.5641506
+              }
+            }
+          ],
+          "U": 0.6928543586313136,
+          "L": 0.565765681464995,
+          "certificate": false,
+          "T_cert": null
+        },
+        {
+          "method": "BOTH",
+          "measured_source": "83928377336a860acf78f684d1723a5040467bb5",
+          "source_files": {
+            "external/paper_optimize_ledger.csv": "6a54e7bb18941e8b1452c4d0ca38119e162b5afc94e6b3fbc9f97e5d515c1012",
+            "external/adaptive_mass_decision_ledger.csv": "630e53754066736901f382fd4de910f6250dad141253c0a06a21f8da83b8b661",
+            "external/initial_witness.json": "e179aaadc58812297b6254f0447341c861a33d190265787337f57ce8b0f8ec93"
+          },
+          "LP": 3,
+          "target": 0,
+          "terminal": 1,
+          "optimize": [
+            {
+              "leaf_id": "L0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2368.2764784999999",
+              "solver_runtime": "0.28100013732910156",
+              "work": "0.79560630113435415",
+              "nodes": "0",
+              "simplex_iterations": "4270",
+              "barrier_iterations": "0",
+              "memory_gb": "0.056889376999999998",
+              "model_sha256": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\005\\raw\\R138_005_K-35-U_S0_STOCK\\external\\native_logs\\L0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.0",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2366.7575978",
+              "solver_runtime": "0.33899998664855957",
+              "work": "0.95295791332700563",
+              "nodes": "0",
+              "simplex_iterations": "5653",
+              "barrier_iterations": "0",
+              "memory_gb": "0.061148187",
+              "model_sha256": "bb478df4db779e6a61f782940d7153e0ebbb1a628b3191fb5d2fb94129f6333b",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\005\\raw\\R138_005_K-35-U_S0_STOCK\\external\\native_logs\\L0.0_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0.1",
+              "solve_kind": "LP",
+              "native_status": "OPTIMAL",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2365.1253836999999",
+              "solver_runtime": "0.22000002861022949",
+              "work": "0.62558617799489835",
+              "nodes": "0",
+              "simplex_iterations": "3857",
+              "barrier_iterations": "0",
+              "memory_gb": "0.065454586999999995",
+              "model_sha256": "c2dc817220d8ecadb9efee962ac5bbe0fcfb74d0f4c384e4247d0d0deb5b238f",
+              "in_memory_model_reused": "0",
+              "integer_domain_restored": "1",
+              "basis_reuse_status": "not_submitted_domain_transition_model_object_only",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\005\\raw\\R138_005_K-35-U_S0_STOCK\\external\\native_logs\\L0.1_lp.gurobi.log"
+            },
+            {
+              "leaf_id": "L0",
+              "solve_kind": "MIP",
+              "native_status": "TIME_LIMIT",
+              "optimize_return_code": "0",
+              "global_deadline_remaining_at_launch": "2364.7324964999998",
+              "solver_runtime": "2364.6169998645782",
+              "work": "4692.1846644278021",
+              "nodes": "15727",
+              "simplex_iterations": "7152610",
+              "barrier_iterations": "0",
+              "memory_gb": "0.40506866000000002",
+              "model_sha256": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+              "in_memory_model_reused": "1",
+              "integer_domain_restored": "0",
+              "basis_reuse_status": "not_requested",
+              "native_log": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\005\\raw\\R138_005_K-35-U_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log"
+            }
+          ],
+          "AM": [
+            {
+              "decision_sequence": "1",
+              "K0": "1",
+              "tau": "0.080000000000000002",
+              "interval_id": "L0",
+              "parent_id": "",
+              "depth": "0",
+              "gamma_L": "0",
+              "gamma_U": "0.76745660472471666",
+              "B_p": "0.21808877901382714",
+              "B_L": "0.21808877901382714",
+              "B_R": "0.54526678093378689",
+              "U": "0.76745660472471666",
+              "proof_gap": "0.54936782571088949",
+              "g_L_raw": "0",
+              "g_R_raw": "0.59555362838474735",
+              "g_L": "0",
+              "g_R": "0.59555362838474735",
+              "eta": "0",
+              "mu": "0.29777681419237367",
+              "S_AM": "0",
+              "adaptive_rho_I": "0.26865758577266985",
+              "score_tolerance": "1.820274126430535e-07",
+              "selected_action": "exact-close",
+              "native_target": "",
+              "deterministic_reason": "adaptive_mass_no_strict_child_improvement",
+              "coverage_update": "parent_coverage_retained"
+            }
+          ],
+          "Native": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\005\\raw\\R138_005_K-35-U_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log",
+              "SHA256": "2c5a56619f758a4dc31bec813868e05b01b6ecf6651d2d49c737060450f69083",
+              "incumbent_events": [
+                {
+                  "line": "H    2     2                       0.7659064    0.44564  41.8%   798   22s",
+                  "approx_native_seconds": 22.0
+                },
+                {
+                  "line": "H  431   396                       0.7611873    0.45771  39.9%   314   50s",
+                  "approx_native_seconds": 50.0
+                },
+                {
+                  "line": "H  573   491                       0.7576370    0.45827  39.5%   431  123s",
+                  "approx_native_seconds": 123.0
+                },
+                {
+                  "line": "H  574   467                       0.7556086    0.45827  39.4%   434  124s",
+                  "approx_native_seconds": 124.0
+                },
+                {
+                  "line": "H 2125  1051                       0.7555156    0.48565  35.7%   382  303s",
+                  "approx_native_seconds": 303.0
+                },
+                {
+                  "line": "H 2125  1051                       0.7555044    0.48565  35.7%   382  303s",
+                  "approx_native_seconds": 303.0
+                },
+                {
+                  "line": "H 2125  1042                       0.7465675    0.48565  34.9%   382  303s",
+                  "approx_native_seconds": 303.0
+                },
+                {
+                  "line": "H 2467  1229                       0.7320675    0.48892  33.2%   384  331s",
+                  "approx_native_seconds": 331.0
+                },
+                {
+                  "line": "H 2467  1228                       0.7312752    0.48892  33.1%   384  331s",
+                  "approx_native_seconds": 331.0
+                },
+                {
+                  "line": "H 2467  1153                       0.7093701    0.48892  31.1%   384  331s",
+                  "approx_native_seconds": 331.0
+                },
+                {
+                  "line": "H 2468  1153                       0.7092546    0.48892  31.1%   384  333s",
+                  "approx_native_seconds": 333.0
+                },
+                {
+                  "line": "H 2508  1165                       0.7090236    0.48892  31.0%   378  334s",
+                  "approx_native_seconds": 334.0
+                },
+                {
+                  "line": "H 2714  1283                       0.7087586    0.49485  30.2%   391  355s",
+                  "approx_native_seconds": 355.0
+                },
+                {
+                  "line": "H 4524  2489                       0.7087586    0.50901  28.2%   408  519s",
+                  "approx_native_seconds": 519.0
+                },
+                {
+                  "line": "H 5534  3058                       0.7029312    0.51541  26.7%   419  604s",
+                  "approx_native_seconds": 604.0
+                },
+                {
+                  "line": "H 5534  3037                       0.7006557    0.51541  26.4%   419  604s",
+                  "approx_native_seconds": 604.0
+                },
+                {
+                  "line": "H 5534  3024                       0.6994481    0.51541  26.3%   419  604s",
+                  "approx_native_seconds": 604.0
+                },
+                {
+                  "line": "H 5746  3160                       0.6992142    0.51734  26.0%   426  630s",
+                  "approx_native_seconds": 630.0
+                },
+                {
+                  "line": "H 5746  3142                       0.6970716    0.51734  25.8%   426  630s",
+                  "approx_native_seconds": 630.0
+                },
+                {
+                  "line": "H 5746  3142                       0.6970589    0.51734  25.8%   426  630s",
+                  "approx_native_seconds": 630.0
+                },
+                {
+                  "line": "H 6890  3749                       0.6958215    0.52391  24.7%   429  735s",
+                  "approx_native_seconds": 735.0
+                },
+                {
+                  "line": "H 6890  3655                       0.6887159    0.52391  23.9%   429  745s",
+                  "approx_native_seconds": 745.0
+                },
+                {
+                  "line": "H 6890  3422                       0.6796874    0.52391  22.9%   429  747s",
+                  "approx_native_seconds": 747.0
+                },
+                {
+                  "line": "H 6959  3383                       0.6775438    0.52464  22.6%   427  753s",
+                  "approx_native_seconds": 753.0
+                },
+                {
+                  "line": "H12669  5249                       0.6695956    0.54284  18.9%   454 2036s",
+                  "approx_native_seconds": 2036.0
+                }
+              ],
+              "root": "Root relaxation: objective 2.180888e-01, 6281 iterations, 0.36 seconds (0.92 work units)",
+              "Start_lines": [
+                "Loaded user MIP start with objective 0.767457"
+              ],
+              "intermediate_rounded_native_objectives_not_independently_physical_U": true
+            }
+          ],
+          "Starts": [
+            {
+              "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\campaign\\005\\raw\\R138_005_K-35-U_S0_STOCK\\external\\native_logs\\L0_terminal_mip.gurobi.log.round68.start.json",
+              "SHA256": "3674cb5ceb18390ee5fef74ed119dbbae91e0890fcd02093b2a3b87fc3cc88d4",
+              "record": {
+                "source": "round68_existing_0",
+                "leaf": "L0",
+                "model_sha256": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+                "retained_model": true,
+                "status": "accepted_by_native_log",
+                "mapping_complete": true,
+                "rows_valid": true,
+                "checked_rows": 23628,
+                "maximum_row_violation": 0,
+                "objective_valid": true,
+                "objective": 0.7674566047247167,
+                "submitted": true,
+                "readback_valid": true,
+                "exact_vector_observed_in_mipsol": true,
+                "integer_vector_observed_in_mipsol": true,
+                "mapping_validation_submission_seconds": 0.0173959,
+                "native_deadline_remaining_at_optimize": 2364.6127836
+              }
+            }
+          ],
+          "U": 0.6695955692140068,
+          "L": 0.556776897983438,
+          "certificate": false,
+          "T_cert": null
+        }
+      ]
+    }
+  ],
+  "Optimize": 0,
+  "clock_scope": "Native log timestamps are rounded model-objective diagnostics; controller global trace is qualified after return. Neither supplies independent physical intermediate U without a saved vector.",
+  "controlled_attribution": "Exact common matrix comparison and immutable input/domain/H identity; differing call and retained-state paths are disclosed, no additive timing attribution."
+}

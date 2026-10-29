@@ -1,0 +1,342 @@
+{
+  "UTC": "2026-10-29T12:22:36.897214+00:00",
+  "experiment": {
+    "G1_seconds": 6371.821015599417,
+    "remaining_G1_seconds": 51228.17898440058,
+    "by_category": {
+      "native": 6172.0360805997625,
+      "diagnostic": 199.78493499965407
+    },
+    "limits": {
+      "native": 57600.0,
+      "diagnostic": 57600.0
+    },
+    "category_remaining": {
+      "native": 51427.96391940024,
+      "diagnostic": 57400.215065000346
+    },
+    "separately_reported_seconds": 91.7436834005639,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "fee_ordinary_seconds": 91.7436834005639,
+  "additional_disjoint_ordinary_seconds": 512.778711399762,
+  "ordinary_steps": [
+    {
+      "label": "archive_science",
+      "SHA": "9d29d92f353ab64b1684ebcb71764ff07d7803f04d8ec808a56396e2fde0bf7a",
+      "receipt": {
+        "UTC": "2026-10-29T12:01:07.132973+00:00",
+        "exit_code": 0,
+        "seconds": 400.83659059996717,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "cleanup",
+      "SHA": "22b554ef2d04332713c231824fdde99b463a988af7aa45e613a32521d3556446",
+      "receipt": {
+        "UTC": "2026-10-29T12:12:01.172583+00:00",
+        "exit_code": 0,
+        "seconds": 0.10785070015117526,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "scope": "Explicit bounded screening/hash and current-round preview deletion; review/interactive time not assigned precision"
+      }
+    },
+    {
+      "label": "entry_check",
+      "SHA": "65f0e92f86dc2646153fe45cf1241d983b152403b16f31b80b7b01f19405b7fd",
+      "receipt": {
+        "UTC": "2026-10-29T10:47:10.360686+00:00",
+        "exit_code": 0,
+        "seconds": 2.031532300170511,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "exact_pilot",
+      "SHA": "8829cc2bcd2d2baed843106b5c97238ac0265b5cd74e5774f9008a01c795620e",
+      "receipt": {
+        "UTC": "2026-10-29T11:31:30.640919+00:00",
+        "exit_code": 0,
+        "seconds": 5.374905399978161,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "final_full",
+      "SHA": "852f98f8b50e070eb0013f60017809b4278277bb96c687d271460b033e549a8b",
+      "receipt": {
+        "UTC": "2026-10-29T11:30:53.691682+00:00",
+        "exit_code": 0,
+        "seconds": 0.767886099871248,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "final_vectors",
+      "SHA": "a5a8221419141fc1ef8fe761396e028028f97f715687f82be8a922decfd25cfa",
+      "receipt": {
+        "UTC": "2026-10-29T11:31:31.590968+00:00",
+        "exit_code": 0,
+        "seconds": 0.8177199999336153,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "final_vectors_v2",
+      "SHA": "5d6baac192fa30c71f7307de64aabdf360e56868a1682972031387babc004f4a",
+      "receipt": {
+        "UTC": "2026-10-29T11:43:17.525567+00:00",
+        "exit_code": 0,
+        "seconds": 0.891756400000304,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "inherited_member_selection",
+      "SHA": "8939f49ef7d9fb034b431a54d59c9cc9d2eb53c24099076459f62b0a5e0b6082",
+      "receipt": {
+        "UTC": "2026-10-29T11:51:58.288865+00:00",
+        "exit_code": 1,
+        "seconds": 0.12300270004197955,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "inherited_member_selection_v2",
+      "SHA": "deae1ce8c7d5ff3a875d932dd60dc2ad4bb6dc577084d788705c6dfd346bcdce",
+      "receipt": {
+        "UTC": "2026-10-29T11:53:22.969614+00:00",
+        "exit_code": 0,
+        "seconds": 2.2695192999672145,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "interim_full",
+      "SHA": "f8f4da681603df2673fa18bd7a9915589f61982c1adc0a1715cf5740af98a8c4",
+      "receipt": {
+        "UTC": "2026-10-29T10:46:30.988461+00:00",
+        "exit_code": 0,
+        "seconds": 0.9444893000181764,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "interim_vectors",
+      "SHA": "e0db45c8412fecbc8d5296b5ba17e55def53774a393312c44e1e8bde3fba659f",
+      "receipt": {
+        "UTC": "2026-10-29T10:46:42.895852+00:00",
+        "exit_code": 0,
+        "seconds": 0.8393580999691039,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "local_semantics",
+      "SHA": "4bf5bed6d86850475b3bb32ab118b2392f60cb97f62c048876e7a2881104ffac",
+      "receipt": {
+        "UTC": "2026-10-29T11:31:39.151623+00:00",
+        "exit_code": 0,
+        "seconds": 7.426354499999434,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_assembly",
+      "SHA": "6e6b1a8658b197074de526254ac85a727293ab372c258d748faf2dad1c085b06",
+      "receipt": {
+        "UTC": "2026-10-29T11:37:19.421398+00:00",
+        "exit_code": 0,
+        "seconds": 0.6346227000467479,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_assembly_v2",
+      "SHA": "a2ed90690c8f20331423c1977ccb125d13f5648b9705a5e7fa9642c8445de093",
+      "receipt": {
+        "UTC": "2026-10-29T11:43:19.360377+00:00",
+        "exit_code": 0,
+        "seconds": 0.13542629987932742,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_pdf",
+      "SHA": "ce246954eca172acd474e02da8175cedb9c1f3458af91262ca528f992987b21d",
+      "receipt": {
+        "UTC": "2026-10-29T11:37:26.963495+00:00",
+        "exit_code": 0,
+        "seconds": 7.437588199973106,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_pdf_v2",
+      "SHA": "e47134836360f0207feacda1e10b1df626ffb9e16d50c852d179e75a71e3fcad",
+      "receipt": {
+        "UTC": "2026-10-29T11:43:25.471399+00:00",
+        "exit_code": 0,
+        "seconds": 6.022790199844167,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "pdf_render",
+      "SHA": "e510b8cdd79cf6edec51be051bce9c3728ac2e0a587b267e1e2369f4476e8eca",
+      "receipt": {
+        "UTC": "2026-10-29T11:37:36.717858+00:00",
+        "exit_code": 0,
+        "seconds": 2.203799600014463,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "pdf_render_v2",
+      "SHA": "1c67ee822625bb347db6a93e5f5294c1f037d9da298c930a55791d73e324775a",
+      "receipt": {
+        "UTC": "2026-10-29T11:43:27.372819+00:00",
+        "exit_code": 0,
+        "seconds": 1.7902099001221359,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "public_metadata",
+      "SHA": "f979c7dac30c746537a6330a2e557901a98a5ff9a7cb196bfe96dcc3f0a8c073",
+      "receipt": {
+        "UTC": "2026-10-29T12:22:19.103082+00:00",
+        "exit_code": 0,
+        "seconds": 28.711251399945468,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "public_read",
+      "SHA": "70f7fd033c1ce5975031269064490808dafb55b2b6edeff50dc5d4e47aaaa141",
+      "receipt": {
+        "UTC": "2026-10-29T12:09:33.535611+00:00",
+        "exit_code": 0,
+        "seconds": 35.57210069987923,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_plots",
+      "SHA": "bbb95f1c04e2cd51bc64d6613c60dfc72611550a26457017eb34e3d8b8808bd4",
+      "receipt": {
+        "UTC": "2026-10-29T11:37:09.693458+00:00",
+        "exit_code": 0,
+        "seconds": 6.071851399959996,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_plots_v2",
+      "SHA": "f416f25e8d4d74a094e8a35f71d8e295552cfb7cadadd3a8b1adef9e5a268f82",
+      "receipt": {
+        "UTC": "2026-10-29T11:43:19.112233+00:00",
+        "exit_code": 0,
+        "seconds": 1.4814104000106454,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_report",
+      "SHA": "9be6a203be6e52973005387e10fddcfad71940e999fbfe994e193377ab20a32b",
+      "receipt": {
+        "UTC": "2026-10-29T11:35:00.328234+00:00",
+        "exit_code": 0,
+        "seconds": 0.1365125000011176,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_report_count_scope",
+      "SHA": "ede691c9b6edce46be4ef84780a56f4ec8bdbe2892e664a05471b1547f966688",
+      "receipt": {
+        "UTC": "2026-10-29T11:37:03.511473+00:00",
+        "exit_code": 0,
+        "seconds": 0.15018270001746714,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    }
+  ],
+  "reused_BASE_BOTH_positions_have_no_new_charge": true,
+  "all_qualification_and_failures_charged": true,
+  "complete_outer_cost_without_nested_H_LP_MIP_Work_double_count": true,
+  "precision_scope": "Measured build/verification and explicit ordinary commands only; interactive reading/editing/review/Git/tool time not exhaustively metered or assigned invented precision"
+}

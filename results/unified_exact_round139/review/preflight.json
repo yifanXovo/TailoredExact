@@ -1,0 +1,33 @@
+{
+  "reviewer": "/root/round139_review",
+  "date": "2026-10-29",
+  "timezone": "Asia/Shanghai",
+  "decision": "ACCEPT",
+  "admission_scope": "Targeted qualification only; full admission awaits actual matrix/parameter/small-run receipts",
+  "source_hashes": {
+    "include/Round139Research.hpp": "04db66e632de37b693146f9bd0d5a2d5b7c9f722f45497aa4a3f1420086974e0",
+    "src/PaperExternalGiniTree.cpp": "13f6fdeecf28a1a478b41fc930680be9c89cbc9e528dcf96b7178e30d534f01a",
+    "src/main.cpp": "8b22a094d8f187d8f8b5853075e288eb1ba11c16e3b7b0da512b0403bddd8d9a",
+    "src/CplexBaseline.cpp": "9a977c923ec5ff69d61f28640aa2c88e71b905928a63a66b8572e1c189e363dc",
+    "include/Round127Research.hpp": "e45042fd2ae7b78a7467fd891de34ffe9b18f1f4b065dc7918cddf60742d775e",
+    "src/NativeEvidenceJournal.cpp": "19888cf9c133e73226680b972153e20541cc1770b97d79bd1a584a16af3f29a3",
+    "scripts/round139_common.py": "b46533617ed7e90bb36e9ba286433ca5cb9e93efe93b141d40c719dd919fb20d",
+    "scripts/round139_build.py": "7ac51eb6b0e5151d23aafe9583f361e7171997c3e2169bc95da49f5ee7e014b8"
+  },
+  "Optimize_calls": 0,
+  "compiler_calls": 0,
+  "vendor_library_loads": 0,
+  "blocking_defects": [],
+  "required_actual_checks": [
+    "00/11 canonical equivalence",
+    "10/01 root-child-refresh native rows and types",
+    "LP-to-terminal and target-to-terminal lifecycle",
+    "immutable LP evidence SHA retained separately",
+    "Seed0 Threads1 and H_seed20260626",
+    "registered physical/objective/version/cap and complete reconstruction cost"
+  ],
+  "diagnostic_limitations": [
+    "Native event estimated timestamps omit explicit role-rebuild preparation offset; do not interpret publication or estimated event clocks as exact discovery times"
+  ],
+  "report": "preflight.md"
+}

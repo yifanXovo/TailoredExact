@@ -33,3 +33,16 @@ scope, tiny TC complementarity, conditional GS relation, real LP controls and
 mixed full outcomes remain distinct. Decision: research-only; accepted GI-TBC
 is retained. V1 primary evidence and the V2 coefficient-transport repair/Seed1
 confirmation have separate source/PE bindings and a finite Native matrix bridge.
+
+# Round139 addition: placement, AM and native search
+
+The [research guide](round139_research.md),
+[scientific report](../results/unified_exact_round139/final_report.md),
+[mathematical analysis](../results/unified_exact_round139/mathematical_analysis.md)
+and [paper increment](../results/unified_exact_round139/manuscript.pdf) distinguish
+explicit LP strengthening from native-MIP strengthening. Three known roles have
+twelve actual full cells (six reused, six new). MIP-only retains proof gains but
+does not improve the critical RB35-T2 endpoint; LP-only loses the main gains.
+Decision: stop asymmetric expansion, retain existing BOTH research-only and
+leave stable GI-TBC unchanged. New charged experiment time is 1.769950 h of 16 h;
+the full inherited panel remains eight configurations on six base inputs.

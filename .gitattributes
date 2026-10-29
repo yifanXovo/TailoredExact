@@ -378,3 +378,11 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /config/gi_tbc_stock_rlt_round138.json -text whitespace=cr-at-eol
 /results/unified_exact_round138/** -text whitespace=cr-at-eol
 /results/unified_exact_round138/**/*.log -whitespace
+
+# Round139 measured helpers, immutable matrices and delivery retain exact bytes.
+/scripts/*round139* -text whitespace=cr-at-eol
+/scripts/paper_s2_stock_placement.py -text whitespace=cr-at-eol
+/include/Round139Research.hpp -text whitespace=cr-at-eol
+/config/gi_tbc_stock_placement_round139.json -text whitespace=cr-at-eol
+/results/unified_exact_round139/** -text whitespace=cr-at-eol
+/results/unified_exact_round139/**/*.log -whitespace

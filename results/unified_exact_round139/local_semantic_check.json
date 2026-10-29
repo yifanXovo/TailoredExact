@@ -1,0 +1,878 @@
+{
+  "PASS": true,
+  "UTC": "2026-10-29T11:31:39.111729+00:00",
+  "positions": [
+    {
+      "arm_id": "R139_pilot_001_K-15-S_S0_lp-only",
+      "placement": "lp-only",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.5922648822560825,
+      "L": 0.5922648792385111,
+      "audit_SHA": "22c030a37020383e6db74b2d45347bbf625b055bfdd98ddbc05ebf06240f2814",
+      "closeout_SHA": "d8f077d0635861fdee8909fba19e6051f9e19481045b4b56dc8baf0c34bc9022",
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/pilot/001/raw/R139_pilot_001_K-15-S_S0_lp-only/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/001/raw/R139_pilot_001_K-15-S_S0_lp-only/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "602543f11ae7423bbbe9cd7e1a96d593c120931e1c0f4cf7e1ca6d01128b2e1d",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.33118025372558535,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/001/raw/R139_pilot_001_K-15-S_S0_lp-only/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "f71e5807a24859a6936588baec5094b5cf72376f6580209aebd7f1dd40d3cc79",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.33118025372558535,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/001/raw/R139_pilot_001_K-15-S_S0_lp-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    },
+    {
+      "arm_id": "R139_pilot_002_K-20-S_S0_lp-only",
+      "placement": "lp-only",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.7168065462777502,
+      "L": 0.7056254892792957,
+      "audit_SHA": "db656beae003dd612f6084e8c2b198cdb9887f9e37e021d3c32a738c42027207",
+      "closeout_SHA": "4d08cc532b14b915b534b721cb90df4a4a06996c54179399e0597c9770e9836f",
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/pilot/002/raw/R139_pilot_002_K-20-S_S0_lp-only/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/002/raw/R139_pilot_002_K-20-S_S0_lp-only/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "87ecae3605f669d4833a3d24a3cdd98bcb6b9aa776d2cda49f76a98b63884530",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.38760637890126093,
+          "B": 208,
+          "Bminus": 148,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/002/raw/R139_pilot_002_K-20-S_S0_lp-only/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "d53ec02368c8dcfe12ce54007687ecfedf05f79327c702142ef5c76e4c348672",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.38760637890126093,
+          "beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/002/raw/R139_pilot_002_K-20-S_S0_lp-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    },
+    {
+      "arm_id": "R139_pilot_003_R-B35-S-T2_S0_lp-only",
+      "placement": "lp-only",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.36213682657245494,
+      "L": 0.21839259471625916,
+      "audit_SHA": "8695c7cd60cdb24616f9d7cf5ecbf8c8374ad349b38025ca2438e263cb6fd7c3",
+      "closeout_SHA": "2065c08a9d711066cf0f892af26a2554dda927b46136891dcc436e4fbf930962",
+      "physical_return_loads": [
+        3,
+        3,
+        0
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/pilot/003/raw/R139_pilot_003_R-B35-S-T2_S0_lp-only/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/003/raw/R139_pilot_003_R-B35-S-T2_S0_lp-only/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "a77a029c2eecba3487721de73943b27ab35b20cb6c1494c0d7cbb8504b73451f",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.22274490447589837,
+          "B": 236,
+          "Bminus": 161,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/003/raw/R139_pilot_003_R-B35-S-T2_S0_lp-only/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "b3113d4d59c042ca9c834f620d1a2855aafb60216a0b32349a26ee8b296ef2fa",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.22274490447589837,
+          "beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/003/raw/R139_pilot_003_R-B35-S-T2_S0_lp-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "47231f37c61856b55fa7a820a6cde874b3591a001e780afb29eacf7777942584",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    },
+    {
+      "arm_id": "R139_pilot_004_K-15-S_S0_mip-only",
+      "placement": "mip-only",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560638,
+      "audit_SHA": "0a30ba496c2e832022c05292d1a8f89e811e503cab0becef8f88e8e598eea295",
+      "closeout_SHA": "6024b13a5e6e8b8725fbc9acf70fb2753dab571a080277a428c973e7b2d34d38",
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "lifecycle": {
+        "declared": 5,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/pilot/004/raw/R139_pilot_004_K-15-S_S0_mip-only/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/004/raw/R139_pilot_004_K-15-S_S0_mip-only/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "590ae612c7d11f0e071340379c053e47d91349c1ecbe25af88683eca855541aa",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.33118025372558535,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/004/raw/R139_pilot_004_K-15-S_S0_mip-only/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "cc9205110487daaf951c9b24ad310ca9398ece88edb1e2c39645f108f3f078bf",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.33118025372558535,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/004/raw/R139_pilot_004_K-15-S_S0_mip-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/004/raw/R139_pilot_004_K-15-S_S0_mip-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    },
+    {
+      "arm_id": "R139_pilot_005_K-20-S_S0_mip-only",
+      "placement": "mip-only",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.7168065462777502,
+      "L": 0.716806546277749,
+      "audit_SHA": "3d0befd8e825db234928f2f42781ea55b859255fb78d23400bda59e91fd81cca",
+      "closeout_SHA": "d2a1f0b3ed56d9be8de03ba9fbe0739810174af9e910ba0018ac57efb6030a3b",
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "lifecycle": {
+        "declared": 5,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/pilot/005/raw/R139_pilot_005_K-20-S_S0_mip-only/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/005/raw/R139_pilot_005_K-20-S_S0_mip-only/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "7dd2641dc3093686735d3206ff0044f362ba6ea31965fdec915cea819a17e04e",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.38760637890126093,
+          "B": 208,
+          "Bminus": 148,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/005/raw/R139_pilot_005_K-20-S_S0_mip-only/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "2a6a36203c72fb83aa8df21f8a283a374e49adc0e8c92308dac3b640d5565b23",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.38760637890126093,
+          "beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/005/raw/R139_pilot_005_K-20-S_S0_mip-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/005/raw/R139_pilot_005_K-20-S_S0_mip-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    },
+    {
+      "arm_id": "R139_pilot_006_R-B35-S-T2_S0_mip-only",
+      "placement": "mip-only",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.4012002178390506,
+      "L": 0.22918159966432358,
+      "audit_SHA": "31803024fca0dadd695d69dafaa79c8e333a00bae22973d5f489803cfa39f34c",
+      "closeout_SHA": "153ce164bc4b947889c170887c124320482979069d35922ba7bd1d9f0822071b",
+      "physical_return_loads": [
+        5,
+        0,
+        5
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/pilot/006/raw/R139_pilot_006_R-B35-S-T2_S0_mip-only/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "47231f37c61856b55fa7a820a6cde874b3591a001e780afb29eacf7777942584",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/006/raw/R139_pilot_006_R-B35-S-T2_S0_mip-only/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "8f2c6918c7db93a6aea21f12d98d13262de17c3f46ed8ae1566352e403f26f62",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.22274490447589837,
+          "B": 236,
+          "Bminus": 161,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/006/raw/R139_pilot_006_R-B35-S-T2_S0_mip-only/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "51ea03d12f8e97a0d945ccc357c0cbd400c57bd89ba02dd2bc093831a110c620",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.22274490447589837,
+          "beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/pilot/006/raw/R139_pilot_006_R-B35-S-T2_S0_mip-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    },
+    {
+      "arm_id": "R139_qualification_001_K-15-S_S0_base",
+      "placement": "base",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.5922648822560825,
+      "L": 0.5686334560350293,
+      "audit_SHA": "762378c325dec9387a58d3287322579cf0ba0835f2a1df32005cbdeb163978cd",
+      "closeout_SHA": "3877c5fe31224a0f46318993d29fcf71883a44f91de8b1a2aaa88556eb60bae6",
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "lifecycle": {
+        "declared": 5,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/qualification/001/raw/R139_qualification_001_K-15-S_S0_base/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/001/raw/R139_qualification_001_K-15-S_S0_base/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "590ae612c7d11f0e071340379c053e47d91349c1ecbe25af88683eca855541aa",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.33118025372558535,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/001/raw/R139_qualification_001_K-15-S_S0_base/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "cc9205110487daaf951c9b24ad310ca9398ece88edb1e2c39645f108f3f078bf",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.33118025372558535,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/001/raw/R139_qualification_001_K-15-S_S0_base/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/001/raw/R139_qualification_001_K-15-S_S0_base/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    },
+    {
+      "arm_id": "R139_qualification_002_K-15-S_S0_both",
+      "placement": "both",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560638,
+      "audit_SHA": "a63e4b17acec92e900045da5faf01ecb384317f725e81d8577cb2e90f11c601a",
+      "closeout_SHA": "908f8d7e2d6902b2d66779cb5039c0b297a44353a5eb711553d4f383c69b020b",
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/qualification/002/raw/R139_qualification_002_K-15-S_S0_both/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/002/raw/R139_qualification_002_K-15-S_S0_both/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "602543f11ae7423bbbe9cd7e1a96d593c120931e1c0f4cf7e1ca6d01128b2e1d",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.33118025372558535,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/002/raw/R139_qualification_002_K-15-S_S0_both/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "f71e5807a24859a6936588baec5094b5cf72376f6580209aebd7f1dd40d3cc79",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.33118025372558535,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/002/raw/R139_qualification_002_K-15-S_S0_both/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    },
+    {
+      "arm_id": "R139_qualification_003_K-15-S_S0_lp-only",
+      "placement": "lp-only",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.5922648822560825,
+      "L": 0.5687859385196293,
+      "audit_SHA": "8837011753653b028d3ff4da524570c668fdfa8b050b601ae3c0a9eb779e29f7",
+      "closeout_SHA": "3d6ae8e53898652bb26d55b7be4faaacb927c49fc7016422a7bcaef5d3433e8d",
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/qualification/003/raw/R139_qualification_003_K-15-S_S0_lp-only/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/003/raw/R139_qualification_003_K-15-S_S0_lp-only/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "602543f11ae7423bbbe9cd7e1a96d593c120931e1c0f4cf7e1ca6d01128b2e1d",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.33118025372558535,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/003/raw/R139_qualification_003_K-15-S_S0_lp-only/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "f71e5807a24859a6936588baec5094b5cf72376f6580209aebd7f1dd40d3cc79",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.33118025372558535,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/003/raw/R139_qualification_003_K-15-S_S0_lp-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    },
+    {
+      "arm_id": "R139_qualification_004_K-15-S_S0_mip-only",
+      "placement": "mip-only",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560638,
+      "audit_SHA": "80f1de2f92b1d39116cc5365eb979aa1f081691a5fdc9d94a62cc743d694906c",
+      "closeout_SHA": "c63b1cbba2c46ac1ef23e3a62e76d534af18068a739a8065693c1aca2263bcf5",
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "lifecycle": {
+        "declared": 5,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source_revoked": false
+      },
+      "models": [
+        {
+          "path": "results/unified_exact_round139/qualification/004/raw/R139_qualification_004_K-15-S_S0_mip-only/external/models/L0_epoch_0_generation_1.lp",
+          "SHA": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/004/raw/R139_qualification_004_K-15-S_S0_mip-only/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA": "590ae612c7d11f0e071340379c053e47d91349c1ecbe25af88683eca855541aa",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.33118025372558535,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/004/raw/R139_qualification_004_K-15-S_S0_mip-only/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA": "cc9205110487daaf951c9b24ad310ca9398ece88edb1e2c39645f108f3f078bf",
+          "stock": false,
+          "rows": 0,
+          "exact_multiplicity": true,
+          "alpha": 0.33118025372558535,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/004/raw/R139_qualification_004_K-15-S_S0_mip-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        },
+        {
+          "path": "results/unified_exact_round139/qualification/004/raw/R139_qualification_004_K-15-S_S0_mip-only/external/models/L0_epoch_0_generation_4.lp",
+          "SHA": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "stock": true,
+          "rows": 4,
+          "exact_multiplicity": true,
+          "alpha": 0.0,
+          "beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "canonical_integer_types_preserved": true
+        }
+      ]
+    }
+  ],
+  "seconds": 6.946935899788514,
+  "Optimize": 0,
+  "vendor_DLL_loads": 0,
+  "scope": "Additive pure physical fleet, seal, lifecycle, exact stock multiplicity, parameter and immutable model replay; original full H/Start/proof readers remain separate authorities"
+}

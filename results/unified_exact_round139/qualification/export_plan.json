@@ -1,0 +1,83 @@
+{
+  "UTC": "2026-10-29T09:40:13.226944+00:00",
+  "cases": [
+    {
+      "name": "root",
+      "alpha": 0,
+      "beta": 0.6623605074511707,
+      "cutoff": 0.6623605074511707
+    },
+    {
+      "name": "child",
+      "alpha": 0,
+      "beta": 0.33118025372558535,
+      "cutoff": 0.6623605074511707
+    },
+    {
+      "name": "cutoff_refresh",
+      "alpha": 0,
+      "beta": 0.6622605074511707,
+      "cutoff": 0.6622605074511707
+    }
+  ],
+  "placement": [
+    "lp-only",
+    "mip-only"
+  ],
+  "roles": [
+    "LP",
+    "MIP"
+  ],
+  "Seed": 0,
+  "Threads": 1,
+  "H_seed": null,
+  "scope": "Deterministic zero-Optimize export of real root/child and representative refreshed cutoff; no physical incumbent or solve result claimed by refresh export",
+  "panel": {
+    "id": "K-15-S",
+    "layer": "K",
+    "source": "CITI",
+    "V": 15,
+    "M": 2,
+    "inventory": "shortage",
+    "geometry": "compact",
+    "replicate": 1,
+    "Q_vector": [
+      30,
+      30
+    ],
+    "T_seconds": 3600,
+    "cap_seconds": 90,
+    "pickup_seconds": 60,
+    "drop_seconds": 60,
+    "lambda": 0.15,
+    "selection_id": "r132_K_15-S_CITI",
+    "panel_kind": "Round139 known research panel / placement",
+    "input_path": "results/unified_exact_round132/inputs/K-15-S.txt",
+    "instance_path": "results/unified_exact_round132/inputs/K-15-S.txt",
+    "input_sha256": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+    "selection_path": "results/unified_exact_round132/inputs/K-15-S_selection.json",
+    "landscape_path": "results/unified_exact_round132/inputs/K-15-S_landscape.json",
+    "input_bytes": 1003,
+    "source_identity_SHA": "9f9aad24e61d661971c24c6f5ec78a69081edf01ffc433563e52a70b2eaca2d0",
+    "total_initial": 135,
+    "total_target": 153,
+    "total_capacity": 314,
+    "sum_weights": 9.473371,
+    "Omega": 9.473371,
+    "rho": 1.42100565,
+    "gurobi_seed": 0,
+    "reference": {
+      "optimizer_calls": 0,
+      "canonical_sha256": "f93e47b49db8b8e04fc93e2d92324b94f7a0caad924e5b70ef2079f0fd7e8ca9",
+      "rows": 2199,
+      "columns": 976,
+      "nonzeros": 9570,
+      "fingerprint": 986651534
+    },
+    "module": "B1",
+    "base_id": "K-15-S",
+    "known": true,
+    "round137_delete_ab": false,
+    "round139_placement": "base"
+  }
+}

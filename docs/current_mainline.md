@@ -38,3 +38,11 @@ is **RESEARCH_ONLY**: the K20 proof benefit persists, while hard-role endpoints
 remain mixed. The original GI-TBC entry/profile/PE above remain the stable
 method. The delivered V2 fixes tiny new-row coefficient transport; measured V1
 primary results and the exact Native bridge retain their separate identities.
+
+The [Round139 placement study](round139_research.md) completes the three-role
+BASE/BOTH/LP-only/MIP-only comparison with six new full Seed0 positions.
+Native-only placement preserves K15/K20 proof benefits but repeats BOTH's
+RB35-T2 adverse endpoint, while LP-only loses the main proof benefits. The
+decision is to stop asymmetric expansion and retain existing BOTH research-only;
+the stable GI-TBC and R138 entries are unchanged. The inherited BOTH eight-role
+panel and old Seed1 remain separate identities, not new asymmetric measurements.
