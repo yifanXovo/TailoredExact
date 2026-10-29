@@ -1,0 +1,168 @@
+{
+  "review_type": "result-selected continuation recommendation, not final study acceptance",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T17:16:14.459958+00:00",
+  "recommendation": "COMPLETE_OLD_TC_ON_THE_SAME_FIVE_ROLES",
+  "stop_TC2_as_priority_complete_candidate": true,
+  "retain_TC2_math_and_same_domain_LP_increment": true,
+  "source_report_SHA": "269d622f0851dfe89010319c4926775e57597844ed8c8007c6d51e8350b3ab46",
+  "source_csv_SHA": "2b6d2ee26c781d0836aaaf857c2e051ef114d8f89bcc5216ca79953ed50324f1",
+  "source_report_UTC": "2026-10-29T17:13:54.678989+00:00",
+  "all_entered_formal_positions": 8,
+  "findings": [
+    {
+      "role": "K-20-S",
+      "methods": [
+        {
+          "method": "TC_STOCK",
+          "U": 0.7168065462777502,
+          "L": 0.7168065460411465,
+          "certificate": true,
+          "T_cert": 135.69681281410158,
+          "first_AM_action": "native-target",
+          "LP_calls": 3,
+          "target_calls": 1,
+          "terminal_calls": 1,
+          "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6"
+        },
+        {
+          "method": "TC2_STOCK",
+          "U": 0.7168065462777502,
+          "L": 0.7168065462777474,
+          "certificate": true,
+          "T_cert": 115.01962330681272,
+          "first_AM_action": "native-target",
+          "LP_calls": 3,
+          "target_calls": 1,
+          "terminal_calls": 1,
+          "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6"
+        }
+      ]
+    },
+    {
+      "role": "R-B35-S-T2",
+      "methods": [
+        {
+          "method": "TC_STOCK",
+          "U": 0.3190804926922912,
+          "L": 0.23392726213848986,
+          "certificate": false,
+          "T_cert": null,
+          "first_AM_action": "native-target",
+          "LP_calls": 3,
+          "target_calls": 1,
+          "terminal_calls": 1,
+          "H_semantic_SHA": "af1290503013a4c529945e9553359661023494373cca41ed890be99d8eba19d2"
+        },
+        {
+          "method": "TC2_STOCK",
+          "U": 0.32427571778578423,
+          "L": 0.22990420853681653,
+          "certificate": false,
+          "T_cert": null,
+          "first_AM_action": "native-target",
+          "LP_calls": 3,
+          "target_calls": 1,
+          "terminal_calls": 1,
+          "H_semantic_SHA": "af1290503013a4c529945e9553359661023494373cca41ed890be99d8eba19d2"
+        }
+      ]
+    },
+    {
+      "role": "K-35-U",
+      "methods": [
+        {
+          "method": "TC_STOCK",
+          "U": 0.6504387119575558,
+          "L": 0.5682885263298959,
+          "certificate": false,
+          "T_cert": null,
+          "first_AM_action": "exact-close",
+          "LP_calls": 3,
+          "target_calls": 0,
+          "terminal_calls": 1,
+          "H_semantic_SHA": "2959cced1252671e53485880b2eff56c5f7da6cf19f7c74f9148a531c1efbcf3"
+        },
+        {
+          "method": "TC2_STOCK",
+          "U": 0.7021486134198561,
+          "L": 0.5419703765884023,
+          "certificate": false,
+          "T_cert": null,
+          "first_AM_action": "native-target",
+          "LP_calls": 3,
+          "target_calls": 1,
+          "terminal_calls": 1,
+          "H_semantic_SHA": "2959cced1252671e53485880b2eff56c5f7da6cf19f7c74f9148a531c1efbcf3"
+        }
+      ]
+    }
+  ],
+  "attribution_Native_readback_SHA": "212be58a4b2b6b4b3656b8b2bf410ae0604985559ad9a566105a54e357da4ee2",
+  "rationale": [
+    "Old TC+stock has substantive complete-method value on two important hard roles: it beats TC2 in both U and L on K35 and RB35-T2, and on K35 also beats both inherited BASE and stock. Its K35 path begins exact-close rather than TC2 native-target, with the same own H.",
+    "TC2 still provides a valid exact block separation and stronger reoptimized bounds in all five LP domains. Its K20 certificate is faster than old TC but slower than stock; that isolated advantage does not offset the two observed hard-role regressions when selecting the next uniform complete candidate.",
+    "The old-TC method has not yet been tested on K15 or RX35-T2. K15 checks preservation of the established fast-proof benefit; RX35-T2 checks the remaining hard-role incumbent/bound tradeoff. These missing facts can change the choice between a uniform old-TC continuation and stopping.",
+    "Two added positions complete the same five-role comparison rather than expanding both candidates to eight. This is the permitted landing of the existing TC+stock combination, not a renaming of its gains as TC2 gains."
+  ],
+  "recommended_positions": [
+    {
+      "role": "K-15-S",
+      "counts": "tc",
+      "stock": true,
+      "cap_seconds": 600,
+      "T_seconds": 3600,
+      "seed": 0,
+      "H_seed": 20260626
+    },
+    {
+      "role": "R-X35-S-T2",
+      "counts": "tc",
+      "stock": true,
+      "cap_seconds": 2400,
+      "T_seconds": 6300,
+      "seed": 0,
+      "H_seed": 20260626
+    }
+  ],
+  "D3_shared_nominal": {
+    "before": 6000,
+    "additional": 3000,
+    "after": 9000,
+    "shared_planning_allowance": 9000
+  },
+  "budget_snapshot": {
+    "G1_seconds": 12283.377153800335,
+    "remaining_G1_seconds": 30916.622846199665,
+    "by_category": {
+      "native": 12142.853222099598,
+      "diagnostic": 140.52393170073628
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 31057.1467779004,
+      "diagnostic": 43059.476068299264
+    },
+    "separately_reported_seconds": 106.91309130005538,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "no_new_Seed1_recommended_now": true,
+  "no_automatic_eight_configuration_extension": true,
+  "study_complete": false,
+  "prospective_run_admission": false,
+  "followup_conditions": [
+    "Freeze and obtain SHA-bound admission for the two new independent own-H Seed0 positions before running them; keep the same uniform old-TC rule and physical/objective parameters.",
+    "After their qualified closeout, choose at most one uniform candidate for any remaining three-role extension. Preservation of K15 proof and a useful or interpretable RX35 endpoint are decision evidence, not a requirement to win every cell.",
+    "If the new old-TC positions show important regressions that remove its apparent broader value, report the completed finite negative/mixed comparison and stop expansion. A remaining budget is not a reason to fill a table.",
+    "Only request paired Seed1 if uncertainty in a key positive or adverse result could change the adoption/stop decision; do not run it merely because the method remains research-only."
+  ],
+  "causal_limit": "Different AM paths and Native outcomes are observable whole-method changes; one Seed does not identify additive causal runtime or prove a universal dominance rule.",
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0,
+  "reviewer_compilation": 0,
+  "reviewer_archive_reads": 0
+}

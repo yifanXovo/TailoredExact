@@ -1,0 +1,180 @@
+{
+  "UTC": "2026-10-29T19:46:54.522150+00:00",
+  "Optimize": 0,
+  "vendor_DLL_loads": 0,
+  "scope": "Existing new continuous LP optimal vectors only, not complete Native incumbents or a new solve. R<=Q obstruction is classified before product projection.",
+  "comparison_tolerance": 1e-07,
+  "evaluation": "Exact Fraction of saved binary64 values, with explicit numerical residual tolerance",
+  "cases": [
+    {
+      "role": "K-20-S",
+      "variant": "tc2_stock",
+      "B": 208,
+      "tau": 208.0,
+      "G": 0.0627381602484736,
+      "J": 13.04953733168251,
+      "R": [
+        -9.492406860545088e-15,
+        2.3869795029440866e-15
+      ],
+      "Q": [
+        30,
+        30
+      ],
+      "return_bounds_feasible": true,
+      "return_upper_violations": [
+        0.0,
+        0.0
+      ],
+      "sum_lower": 0.0,
+      "target": 1.1102230246251565e-16,
+      "sum_upper": -5.508217937251358e-15,
+      "product_projection_feasible_ignoring_return_bound_check": true,
+      "product_signal_beyond_linear_bounds": false,
+      "solution_SHA": "39fb7b982d104abd3e11bb5f81812aaabde6bf0364a96b55a3e620c34fa51393",
+      "result_SHA": "f27e1a48cb115125d290e4cd51f8a94bfa00b15d993fa85101ba2b146d5f5f67",
+      "source_model_SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "variant": "tc2_stock",
+      "B": 236,
+      "tau": 236.0,
+      "G": 0.01082702033559142,
+      "J": 2.5551767991995704,
+      "R": [
+        3.7822956572286515e-13,
+        -8.11156697366755e-14,
+        -2.8623024089791116e-13
+      ],
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "return_bounds_feasible": true,
+      "return_upper_violations": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sum_lower": 0.0,
+      "target": 5.06886199680423e-15,
+      "sum_upper": 4.848557425974434e-15,
+      "product_projection_feasible_ignoring_return_bound_check": true,
+      "product_signal_beyond_linear_bounds": false,
+      "solution_SHA": "290482f24ec77d2d13c862bdcbfb13685167e7c3e6c0250979207059289f928f",
+      "result_SHA": "4fd1a06a3eeb1f5f7c5d2431bb8688838ccc138c9e9d2c503afdc46666a26b73",
+      "source_model_SHA": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175"
+    },
+    {
+      "role": "R-X35-S-T2",
+      "variant": "tc2_stock",
+      "B": 146,
+      "tau": 146.00000000000003,
+      "G": 0.01097567638718358,
+      "J": 1.6024487525288027,
+      "R": [
+        -9.373057885397884e-14,
+        1.3530843112619095e-14,
+        4.287195598529081e-14
+      ],
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "return_bounds_feasible": true,
+      "return_upper_violations": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sum_lower": 0.0,
+      "target": -1.734723475976807e-17,
+      "sum_upper": -1.5851235893717154e-14,
+      "product_projection_feasible_ignoring_return_bound_check": true,
+      "product_signal_beyond_linear_bounds": false,
+      "solution_SHA": "7f0939c2daff248aa1f2254fd19c353dc5f11181b3119480e24ad967e0c14788",
+      "result_SHA": "8164c96713b3a89861dc6dd02e6c2d1f48acb4d04d786fc04986d8e73c36022e",
+      "source_model_SHA": "644b58945bf548cc787aa1568cf5577be355fc649d3515a67977f84ff34b12ec"
+    },
+    {
+      "role": "K-35-U",
+      "variant": "tc2_stock",
+      "B": 326,
+      "tau": 295.0,
+      "G": 0.0645055728962724,
+      "J": 21.028816764184803,
+      "R": [
+        7.596520224190168,
+        3.4970010581966573,
+        19.906478717613176
+      ],
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "return_bounds_feasible": true,
+      "return_upper_violations": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sum_lower": 0.0,
+      "target": -4.440892098500626e-16,
+      "sum_upper": 4.83791796722043,
+      "product_projection_feasible_ignoring_return_bound_check": true,
+      "product_signal_beyond_linear_bounds": false,
+      "solution_SHA": "a07b22f271eee21aeee61046cfc615e3b3f4c75c20e2d148d88d244e475af97a",
+      "result_SHA": "85f1ea227265daa8f9578f12d69aa90d31102404aa0a8201526c622a4a540715",
+      "source_model_SHA": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "variant": "tc2_stock",
+      "B": 65,
+      "tau": 65.0,
+      "G": 0.1466823301637714,
+      "J": 9.534351460645142,
+      "R": [
+        -5.551115123125783e-17,
+        3.164135620181696e-15
+      ],
+      "Q": [
+        30,
+        30
+      ],
+      "return_bounds_feasible": true,
+      "return_upper_violations": [
+        0.0,
+        0.0
+      ],
+      "sum_lower": 0.0,
+      "target": 7.112366251504909e-17,
+      "sum_upper": 2.340961836212584e-15,
+      "product_projection_feasible_ignoring_return_bound_check": true,
+      "product_signal_beyond_linear_bounds": false,
+      "solution_SHA": "05dde7e4a067ee2ea0d958a773572cc54b76220142d7094f03d735c3f777ccf0",
+      "result_SHA": "fa01687351d342e601cf80f1198cfcfd9f506db6d97d1d7723a0ad496fc4523e",
+      "source_model_SHA": "80ef9015788208bc8f5c8404a97174cd2f732d1a278430b12624e3cc75c86901"
+    }
+  ],
+  "product_signal_roles": [],
+  "exact_strict_block_return_extension": {
+    "scope": "Exact return-product extension of the existing strict relaxation-block witness; not full BRP/cutoff feasibility",
+    "B": 5,
+    "tau": 3,
+    "R": 2,
+    "Q": 2,
+    "g": "1/6",
+    "J": "1/2",
+    "W": "1/3",
+    "lower": "1/3",
+    "upper": "1/3",
+    "conservation": true
+  },
+  "source_SHA": "0170bedbd06649710934c7942afa5846317a0ec47bbd8c1983bacd260b2948cb",
+  "seconds": 0.09432599996216595
+}

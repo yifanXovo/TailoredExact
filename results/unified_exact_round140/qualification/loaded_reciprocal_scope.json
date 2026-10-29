@@ -1,0 +1,66 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "roles": [
+    {
+      "role": "K-15-S",
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+      "target_min": 8,
+      "target_max": 13,
+      "serialized_reciprocal_equal": true
+    },
+    {
+      "role": "R-X20-S-T1",
+      "input_SHA": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "target_min": 1,
+      "target_max": 9,
+      "serialized_reciprocal_equal": true
+    },
+    {
+      "role": "K-20-S",
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "target_min": 9,
+      "target_max": 16,
+      "serialized_reciprocal_equal": true
+    },
+    {
+      "role": "K-35-U",
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "target_min": 4,
+      "target_max": 13,
+      "serialized_reciprocal_equal": true
+    },
+    {
+      "role": "R-B35-S-T1",
+      "input_SHA": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+      "target_min": 5,
+      "target_max": 11,
+      "serialized_reciprocal_equal": true
+    },
+    {
+      "role": "R-B35-S-T2",
+      "input_SHA": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+      "target_min": 5,
+      "target_max": 11,
+      "serialized_reciprocal_equal": true
+    },
+    {
+      "role": "R-X35-S-T1",
+      "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "target_min": 1,
+      "target_max": 9,
+      "serialized_reciprocal_equal": true
+    },
+    {
+      "role": "R-X35-S-T2",
+      "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "target_min": 1,
+      "target_max": 9,
+      "serialized_reciprocal_equal": true
+    }
+  ],
+  "instance_target_type": "std::vector<int>",
+  "parser": "namedIntVector; positive integer validation",
+  "proof": "Positive int32 reciprocal >= 1/INT_MAX > 1e-12; target=1 has exact c=1, otherwise c<=0.5. Generic writer filtering/near-one abbreviation therefore preserve every loaded ratio.",
+  "independent_reviewer": "Same conclusion independently verified by /root/independent_review; no source/PE/helper modification"
+}

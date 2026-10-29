@@ -2,6 +2,7 @@
 #include "Round127Research.hpp"
 #include "Round135Research.hpp"
 #include "Round138Research.hpp"
+#include "Round140Research.hpp"
 #include "Round62Thresholds.hpp"
 #include "Round63TimeResource.hpp"
 #include "Round64SharedResource.hpp"
@@ -3241,6 +3242,50 @@ void writeCompactLp(const Instance& instance,
         emit_stock_row(g_ub, Bminus, true);
         emit_stock_row(g_lb, B, true);
         if (stats != nullptr) stats->enabled_families.push_back("round138_stock_rlt");
+    }
+    if (round140().enabled()) {
+        if (!station_state_vdp || options.round98_state_service != "m-binary" || !strengthened)
+            throw std::runtime_error("Round140 counts require GI-TBC shared VD-P states");
+        std::vector<std::vector<int>> support(V+1);
+        std::vector<double> ratios(V+1);
+        long long B=0,fleet=0;
+        for (int i=1;i<=V;++i) {
+            B+=instance.initial[i];
+            ratios[i]=1.0/instance.target[i]; // Same loaded coefficient as r_i-c_i Y_i.
+            for (int y=y_lb[i];y<=y_ub[i];++y) support[i].push_back(y);
+        }
+        for (int q:instance.Q) fleet+=q;
+        const auto counts=round140CountRows(support,ratios,std::max(0LL,B-fleet),B);
+        if (counts.infeasible) {
+            // A real support/budget incompatibility, never a clamped count interval.
+            writeConstraint(out,cid,Expr{},"<=",-1);
+        } else {
+            const auto emit_count_row=[&](const auto& coefficients,double constant) {
+                Expr row;
+                for (int i=1;i<=V;++i) for (int j=i+1;j<=V;++j) row[hName(i,j)]=1;
+                for (const auto& term:coefficients) row[stateName(term.first.first,term.first.second)]=-term.second;
+                double smallest=1;
+                for (const auto& term:row) if (term.second) smallest=std::min(smallest,std::fabs(term.second));
+                int scale=0;
+                while (std::ldexp(smallest,scale)<1e-12) {
+                    if (++scale>1023) throw std::runtime_error("TC2 row scale overflow");
+                }
+                out << " c" << cid++ << ": ";bool first=true;
+                if (row.empty()) out << "0 G";
+                for (const auto& term:row) {
+                    const double value=std::ldexp(term.second,scale);
+                    if (!std::isfinite(value)) throw std::runtime_error("TC2 scaled coefficient overflow");
+                    out << (first ? (value<0 ? "- " : "") : (value<0 ? " - " : " + "));
+                    out << num(std::fabs(value)) << " " << term.first;first=false;
+                }
+                const double rhs=std::ldexp(constant,scale);
+                if (!std::isfinite(rhs)) throw std::runtime_error("TC2 scaled constant overflow");
+                out << " >= " << num(rhs) << "\n";
+            };
+            emit_count_row(counts.tc,0); // Retained even when TC2 is enabled.
+            if (round140().counts=="tc2") emit_count_row(counts.tc2,counts.constant);
+        }
+        if (stats) stats->enabled_families.push_back("round140_"+round140().counts);
     }
     Expr gini;
     for (int i = 1; i <= V; ++i) addTerm(gini, zprodName(i), static_cast<double>(V) / instance.target[i]);

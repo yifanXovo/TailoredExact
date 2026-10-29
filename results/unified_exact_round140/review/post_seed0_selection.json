@@ -1,0 +1,345 @@
+{
+  "review_type": "Complete Seed0 selection and necessity of one bounded second-Seed confirmation",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T19:51:56.849769+00:00",
+  "recommendation": "RECOMMEND_ONE_RB35_T2_TC_STOCK_SEED1_WITH_REUSED_MATCHED_REFERENCES",
+  "selected_uniform_followup": "TC_STOCK",
+  "report_SHA": "da3773cd793cc86e15393afa23c5eb91dba1c250e3304f466b4bd88a143d71b8",
+  "report_UTC": "2026-10-29T19:46:48.989450+00:00",
+  "new_Seed0_formal_positions": 13,
+  "TC_STOCK_Seed0_configurations": 8,
+  "TC2_Seed0_configurations": 5,
+  "qualification_positions_separate": 2,
+  "Seed0_complete_summary": [
+    {
+      "role": "K-35-U",
+      "TC_STOCK": {
+        "U": 0.6504387119575558,
+        "L": 0.5682885263298959,
+        "certificate": false,
+        "T_cert": null
+      },
+      "BASE": {
+        "U": 0.6928543586313136,
+        "L": 0.565765681464995,
+        "certificate": false,
+        "T_cert": null
+      },
+      "STOCK": {
+        "U": 0.6695955692140068,
+        "L": 0.556776897983438,
+        "certificate": false,
+        "T_cert": null
+      }
+    },
+    {
+      "role": "K-15-S",
+      "TC_STOCK": {
+        "U": 0.5922648822560825,
+        "L": 0.5922648798623145,
+        "certificate": true,
+        "T_cert": 45.24253812013194
+      },
+      "BASE": {
+        "U": 0.5922648822560825,
+        "L": 0.5922648792385111,
+        "certificate": true,
+        "T_cert": 112.76930311694741
+      },
+      "STOCK": {
+        "U": 0.5922648822560825,
+        "L": 0.5922648822560638,
+        "certificate": true,
+        "T_cert": 33.81822654698044
+      }
+    },
+    {
+      "role": "R-X35-S-T2",
+      "TC_STOCK": {
+        "U": 0.3702071037136712,
+        "L": 0.2050709555237063,
+        "certificate": false,
+        "T_cert": null
+      },
+      "BASE": {
+        "U": 0.4032719988628547,
+        "L": 0.2108870198670429,
+        "certificate": false,
+        "T_cert": null
+      },
+      "STOCK": {
+        "U": 0.40985548222597845,
+        "L": 0.21498016272542564,
+        "certificate": false,
+        "T_cert": null
+      }
+    },
+    {
+      "role": "R-X20-S-T1",
+      "TC_STOCK": {
+        "U": 0.6453250303858205,
+        "L": 0.64532503038582,
+        "certificate": true,
+        "T_cert": 7.512173175811768
+      },
+      "BASE": {
+        "U": 0.6453250303858205,
+        "L": 0.6453250303858202,
+        "certificate": true,
+        "T_cert": 20.506461604032665
+      },
+      "STOCK": {
+        "U": 0.6453250303858205,
+        "L": 0.6453250303858192,
+        "certificate": true,
+        "T_cert": 15.340479233767837
+      }
+    },
+    {
+      "role": "R-B35-S-T1",
+      "TC_STOCK": {
+        "U": 0.5776346623975794,
+        "L": 0.49893214937367575,
+        "certificate": false,
+        "T_cert": null
+      },
+      "BASE": {
+        "U": 0.59151763477047,
+        "L": 0.45590389125187164,
+        "certificate": false,
+        "T_cert": null
+      },
+      "STOCK": {
+        "U": 0.5699751069873084,
+        "L": 0.5008429884159913,
+        "certificate": false,
+        "T_cert": null
+      }
+    },
+    {
+      "role": "R-X35-S-T1",
+      "TC_STOCK": {
+        "U": 0.5841151465260732,
+        "L": 0.49279373802681264,
+        "certificate": false,
+        "T_cert": null
+      },
+      "BASE": {
+        "U": 0.5921904488701923,
+        "L": 0.46335799724827287,
+        "certificate": false,
+        "T_cert": null
+      },
+      "STOCK": {
+        "U": 0.5920260898638284,
+        "L": 0.49102330473230565,
+        "certificate": false,
+        "T_cert": null
+      }
+    },
+    {
+      "role": "K-20-S",
+      "TC_STOCK": {
+        "U": 0.7168065462777502,
+        "L": 0.7168065460411465,
+        "certificate": true,
+        "T_cert": 135.69681281410158
+      },
+      "BASE": {
+        "U": 0.7168065462777502,
+        "L": 0.7053557934942464,
+        "certificate": false,
+        "T_cert": null
+      },
+      "STOCK": {
+        "U": 0.7168065462777502,
+        "L": 0.7168065462777424,
+        "certificate": true,
+        "T_cert": 101.63538490096107
+      }
+    },
+    {
+      "role": "R-B35-S-T2",
+      "TC_STOCK": {
+        "U": 0.3190804926922912,
+        "L": 0.23392726213848986,
+        "certificate": false,
+        "T_cert": null
+      },
+      "BASE": {
+        "U": 0.34464262559194814,
+        "L": 0.2189859496034747,
+        "certificate": false,
+        "T_cert": null
+      },
+      "STOCK": {
+        "U": 0.4012002178390506,
+        "L": 0.22918159966432358,
+        "certificate": false,
+        "T_cert": null
+      }
+    }
+  ],
+  "rationale": [
+    "TC+stock has real but mixed complete-method value: K35 and RB35-T2 improve both endpoints over BASE and stock; RX35-T1 has a smaller dual-endpoint improvement; RX35-T2 improves U while lowering L; RB35-T1 is slightly worse than stock in both endpoints but better than BASE. K15/K20 retain certificates while taking longer than stock, and RX20 certifies faster.",
+    "The largest claimed repair is Seed-sensitive: RB35-T2 stock improves from its adverse Seed0 U near .4012 to Seed1 U .32224484, already close to old-TC Seed0 U .31908049. A within-Seed1 TC-versus-stock comparison can change whether the combination deserves next research priority or should stop complete promotion.",
+    "This is the D4 decision-changing trigger, not the research-only label or the existence of an eight-cell table. Only one new candidate position is needed because accepted, parameter-matched Seed1 reference runs already exist.",
+    "No new stock solve, second role or TC2 Seed1 is justified now. The TC2 K35 Seed0 regression and every slower-proof, weak-L and adverse dual-endpoint observation remain retained."
+  ],
+  "reference_reuse_review": {
+    "eligible": true,
+    "reference_report_path": "results/unified_exact_round138/reports/seed1.json",
+    "reference_report_SHA": "551cc22da0378151fc8de35edce3ed7713e04725a6524eaef3524dc6dc11e797",
+    "reference_matrix_SHA": "60f9c2fdb91c1ccdc94b4d9bc32a60cb48fd507e212118dedcb586dd2bbdaebc",
+    "references": [
+      {
+        "method": "STOCK",
+        "seed": 1,
+        "U": 0.32224484174746326,
+        "L": 0.2311394490964326,
+        "T_cert": null,
+        "T_produce": 2371.09968585521,
+        "T_verify": 3.858540300047025,
+        "T_total": 2374.958226155257,
+        "PE_SHA": "f4c764ff7164bf042ef612403f82b850698b97c80018bf06b2feff1167d65403",
+        "source_commit": "04506fa613446d2ef2bd19794f778909422c51fd",
+        "H_semantic_SHA": "af1290503013a4c529945e9553359661023494373cca41ed890be99d8eba19d2",
+        "H_fleet_SHA": "e0190e8f4ccd0f83b10183be7625437658052c504edf503c2e8ec0ddbd693a7d",
+        "input_SHA": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+        "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "group": "campaign_seed1/003",
+        "identity_SHA": "c61aa92df21f71bb42309eaa7115ca1e7cb449c73677f45080fae83865bbc25a",
+        "endpoint_path": "results/unified_exact_round138/campaign_seed1/003/raw/R138_S1_003_R-B35-S-T2_STOCK/round135_endpoint.json",
+        "endpoint_SHA": "57f4ca71cab0360f1fc25711e0a606c5e4316d367140b6aad5175aec646433fa",
+        "audit_SHA": "b88b62bcf22b4c1f4bee77e67d1464b0e3d21671d86e832fe800fb6829c1aba2",
+        "closeout_SHA": "b022974e09812dbeb57d9f1937731a89fed8f060f61531f03602b077fe6a0d40",
+        "control_SHA": "7c9f71f0485b145fd61e21a63f40c498b27ed14134237ad86c74a247a181fa5d",
+        "common_parameters": {
+          "threads": 1,
+          "mip_threads": 1,
+          "gurobi_seed": 1,
+          "gurobi_presolve": -1,
+          "gurobi_version": "13.0.2",
+          "affinity_mask": 4,
+          "native_limit_offset_seconds": 6,
+          "hard_stop_offset_seconds": 2,
+          "shutdown_margin_seconds": 30,
+          "requested_mip_gap": 0,
+          "requested_mip_gap_abs": 0,
+          "FeasibilityTol": 1e-06,
+          "OptimalityTol": 1e-06,
+          "IntFeasTol": 1e-05
+        },
+        "H_seed": 20260626,
+        "T_seconds": 7200,
+        "cap_seconds": 2400,
+        "lambda_value": 0.055125275219827186,
+        "stock_transport": "power-of-two-v2",
+        "fixed_science_pin": "1b19897ab5819ab3b7485ddc978954b45225f361"
+      },
+      {
+        "method": "BASE",
+        "seed": 1,
+        "U": 0.3595536804168414,
+        "L": 0.2181462246050608,
+        "T_cert": null,
+        "T_produce": 2371.1477357051335,
+        "T_verify": 12.394738199887797,
+        "T_total": 2383.5424739050213,
+        "PE_SHA": "d6fd9e6687ac7d4377e2d7fd683d59bd3354d7dfb3a9e5b3723d0fe62b6c7fbd",
+        "source_commit": "779713ad9a0b01edc538ecb64df9438739127be3",
+        "H_semantic_SHA": "af1290503013a4c529945e9553359661023494373cca41ed890be99d8eba19d2",
+        "H_fleet_SHA": "e0190e8f4ccd0f83b10183be7625437658052c504edf503c2e8ec0ddbd693a7d",
+        "input_SHA": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+        "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "group": "campaign_seed1/004",
+        "identity_SHA": "e5a8312aa22865bf5e74ff0a1070cad779ded32702da2b3443b1f41cfb1cc6a3",
+        "endpoint_path": "results/unified_exact_round138/campaign_seed1/004/raw/R138_S1_004_R-B35-S-T2_BASE/round135_endpoint.json",
+        "endpoint_SHA": "c4027cd0c31ea4c62ad255f3cdb41eb867f2590800826198715253f1bec92ab6",
+        "audit_SHA": "134269437f780b59f462fff12acd4988d951a1c5d0554ca6fe95cbfc76676e1f",
+        "closeout_SHA": "d6605bb31d4c3bc39dd26828c95114cd9223d57acf2b6df7eed2d273842c0667",
+        "control_SHA": "0bb6201e01bedf5d7817ecd8705ae9b42fbeadc9c169b4d1e908e1312a76f787",
+        "common_parameters": {
+          "threads": 1,
+          "mip_threads": 1,
+          "gurobi_seed": 1,
+          "gurobi_presolve": -1,
+          "gurobi_version": "13.0.2",
+          "affinity_mask": 4,
+          "native_limit_offset_seconds": 6,
+          "hard_stop_offset_seconds": 2,
+          "shutdown_margin_seconds": 30,
+          "requested_mip_gap": 0,
+          "requested_mip_gap_abs": 0,
+          "FeasibilityTol": 1e-06,
+          "OptimalityTol": 1e-06,
+          "IntFeasTol": 1e-05
+        },
+        "H_seed": 20260626,
+        "T_seconds": 7200,
+        "cap_seconds": 2400,
+        "lambda_value": 0.055125275219827186,
+        "stock_transport": "baseline",
+        "fixed_science_pin": "1b19897ab5819ab3b7485ddc978954b45225f361"
+      }
+    ],
+    "build_scope": "Matched accepted complete-method references with their original distinct source/PE identities. STOCK is accepted R138 V2 power-of-two transport, not primary V1. This is not a same-PE intervention or new baseline measurement.",
+    "clock_scope": "Retain original T_produce/T_cert/T_verify/T_total. Reuse creates zero new experiment fee.",
+    "remaining_delivery_requirement": "Bind the reused Seed1 metadata and fixed carrier/member dependencies in the new delivery without reopening old public recovery."
+  },
+  "recommended_new_position": {
+    "role": "R-B35-S-T2",
+    "method": "TC_STOCK",
+    "counts": "tc",
+    "stock": true,
+    "Seed": 1,
+    "H_seed": 20260626,
+    "cap_seconds": 2400,
+    "T_seconds": 7200,
+    "rho": 1,
+    "lambda_value": 0.055125275219827186,
+    "PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1"
+  },
+  "budget_snapshot": {
+    "G1_seconds": 19457.331654000795,
+    "remaining_G1_seconds": 23742.668345999205,
+    "by_category": {
+      "native": 19309.212326100096,
+      "diagnostic": 148.1193279006984
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 23890.787673899904,
+      "diagnostic": 43051.8806720993
+    },
+    "separately_reported_seconds": 135.9853396997787,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "additional_new_nominal_cap_seconds": 2400,
+  "existing_references_new_fee_seconds": 0,
+  "D4_role_count": 1,
+  "D4_new_method_count": 1,
+  "interpretation_conditions": [
+    "Compare TC to STOCK at Seed1 using both verified U and supported L, qualification and original full clocks; BASE1 is inherited context. Never infer a speedup from open cap times.",
+    "Useful incremental Seed1 behavior without an important opposed endpoint supports next uniform research priority, with every tradeoff disclosed. It does not replace stable R137 or establish cross-Seed dominance.",
+    "An important adverse Seed1 result against the already good STOCK1 reference weakens the main claimed repair and supports research-only closure without further complete promotion.",
+    "Mixed or nearly equal endpoints remain mixed or limited evidence, not confirmed superiority. Do not add Seeds or roles merely to obtain a favorable answer.",
+    "Every Seed0 result remains a retained primary observation; a favorable Seed1 never overwrites its adverse endpoints or slower certificate times."
+  ],
+  "return_product_scope_review": {
+    "screen_SHA": "bcfa11b1abf2892eb63922d5940763486c2fb6a0af8fcf6d6893c8c16aa2935e",
+    "no_saved_point_product_signal": true,
+    "exact_W_extension": "W=1/3 with lower=upper=1/3 and J+W=5g; relaxation-block scope only"
+  },
+  "prospective_run_admission": false,
+  "study_complete": false,
+  "stable_R137_default_unchanged": true,
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0,
+  "reviewer_compilation": 0,
+  "reviewer_archive_reads": 0
+}

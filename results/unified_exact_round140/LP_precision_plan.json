@@ -1,0 +1,30 @@
+{
+  "UTC": "2026-10-29T15:47:45.679747+00:00",
+  "positions": [
+    {
+      "position": 1,
+      "role": "R-X20-S-T1",
+      "variant": "tc_stock",
+      "seed": 0,
+      "cap_seconds": 120
+    },
+    {
+      "position": 2,
+      "role": "R-X20-S-T1",
+      "variant": "tc2_stock",
+      "seed": 0,
+      "cap_seconds": 120
+    }
+  ],
+  "reason": "Primary RX20 numerical increment is only 6.4e-6 and its dual violation is about 1.36e-7 at default tolerance; confirm this small effect without changing complete-method parameters",
+  "FeasibilityTol": 1e-09,
+  "OptimalityTol": 1e-09,
+  "Seed": 0,
+  "Threads": 1,
+  "serial": true,
+  "scope_SHA": "b9c5e4121bb5eb7d43d10659f2d4072c7cce51247e0ba2e0c393868a7bb548b6",
+  "stock_LP_SHA": "80ef9015788208bc8f5c8404a97174cd2f732d1a278430b12624e3cc75c86901",
+  "inherited_solver_source_SHA": "2ccb55133a3327f98dd26a4d3a399d7896899b6105e2d5272a31da386ea27cfb",
+  "probe_source_SHA": "6a8b13eb74f68abf40f0672f33f08842f1f9b8a13002c25b3b3079796d5ec306",
+  "before_new_Optimize": true
+}

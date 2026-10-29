@@ -1,0 +1,12 @@
+
+\usepackage{pdflscape}
+\usepackage{etoolbox}
+\usepackage{needspace}
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,breakatwhitespace=false,
+  columns=fullflexible,keepspaces=true,showstringspaces=false}
+\AtBeginEnvironment{longtable}{\footnotesize}
+\setlength{\emergencystretch}{8em}
+\widowpenalty=10000\clubpenalty=10000
+\setlength{\LTpre}{6pt}
+\setlength{\LTpost}{6pt}
+\AtBeginDocument{\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}}

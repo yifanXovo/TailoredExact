@@ -46,3 +46,14 @@ RB35-T2 adverse endpoint, while LP-only loses the main proof benefits. The
 decision is to stop asymmetric expansion and retain existing BOTH research-only;
 the stable GI-TBC and R138 entries are unchanged. The inherited BOTH eight-role
 panel and old Seed1 remain separate identities, not new asymmetric measurements.
+
+The [Round140 inventory-count study](round140_research.md) retains an exact
+inventory-lower-budget TC2 strengthening, with optimized increments on five
+matched continuous domains. Its five-role complete panel has an important
+K35 regression. The old TC+stock combination completes eight Seed0
+configurations, but slower small-role proofs, horizon tradeoffs and one adverse
+critical paired Seed1 prevent full promotion. Both remain research-only;
+stable GI-TBC above is unchanged. The separate Round140 research entry defaults
+to the tested old-TC mode and exposes TC2 explicitly for reproduction. See the
+[scientific decision](../results/unified_exact_round140/candidate_decision.json)
+and [delivery status](../results/unified_exact_round140/RESUME.md).

@@ -1,0 +1,121 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "097fd76a2857f6d052defba5d2bb29c264b966481cf8fd5aeb180aca348c3015",
+  "reviewer": "/root/independent_review",
+  "scope": "Admission of two cap90 qualification runs only; no formal performance admission",
+  "reviewed_at_UTC": "2026-10-29T13:40:40.512619+00:00",
+  "candidate_manifest_SHA": "ae753ff92df5badb9f78c78065f708136561f05a1aa58ffecb282d8dd0d4c021",
+  "candidate_build_SHA": "4dbb3fe4e0ba560040a88d816df2c24856140593167ec0c73a00df1e2f7ad24e",
+  "production_PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+  "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+  "matrix_checks_SHA": "2015a7d6f14184fdef0fdf00bd16569c9de35412461fc92c1fbf12fec4d7375d",
+  "roles": [
+    {
+      "role": "K-15-S",
+      "counts": "tc2",
+      "cap": 90,
+      "Seed": 0,
+      "input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f"
+    },
+    {
+      "role": "K-20-S",
+      "counts": "tc",
+      "cap": 90,
+      "Seed": 0,
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42"
+    }
+  ],
+  "checks": {
+    "source_and_PE_and_DLL_hashes": true,
+    "frozen_helpers_and_identities": true,
+    "input_hashes": true,
+    "own_H_no_cross_arm_information": true,
+    "Seed0_single_thread_serial": true,
+    "nominal_cap_seconds": 180,
+    "empty_singleton_row_fixed": true,
+    "all_12_actual_LP_files_reparsed_against_Fraction_oracle": true,
+    "native_readback_evidence_and_check_code_reviewed": true,
+    "counts_off_historical_equivalence_record_reviewed": true,
+    "reader_extends_inherited_full_lifecycle_and_model_checks": true
+  },
+  "caveats": [
+    "Native coefficient readback was performed by the primary qualification process; this independent review rechecked its saved evidence and implementation without reloading Native.",
+    "No qualification run or complete-method performance result exists yet; these must pass the actual inherited reader before formal panel admission."
+  ],
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0,
+  "reparsed_artifacts": [
+    {
+      "case": "root",
+      "variant": "off",
+      "SHA": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+      "rows": 0
+    },
+    {
+      "case": "root",
+      "variant": "stock",
+      "SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+      "rows": 0
+    },
+    {
+      "case": "root",
+      "variant": "tc_stock",
+      "SHA": "65e7ac9b71f60a80207ce066ac12a44d581778c02cd9240eaebe2acc635e1fd0",
+      "rows": 1
+    },
+    {
+      "case": "root",
+      "variant": "tc2_stock",
+      "SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030",
+      "rows": 2
+    },
+    {
+      "case": "child",
+      "variant": "off",
+      "SHA": "8a85cfcc61249e221dd7ae48ee12c78f44914f4e0e1f10e1d27fbb7520a35cf2",
+      "rows": 0
+    },
+    {
+      "case": "child",
+      "variant": "stock",
+      "SHA": "326b37fd51eeb5cbdb62075d8fde7c0cb7a99929097e3ae9238c44ea3441eb67",
+      "rows": 0
+    },
+    {
+      "case": "child",
+      "variant": "tc_stock",
+      "SHA": "f1b5ea456781d9c97ed64e1682f133d98de7a2ae78e418449278c0f4a1982add",
+      "rows": 1
+    },
+    {
+      "case": "child",
+      "variant": "tc2_stock",
+      "SHA": "1b0cf792b7af52a7850b2f2a3b1f9311b44dd363255abbebb5c76c75a549e5ee",
+      "rows": 2
+    },
+    {
+      "case": "cutoff_refresh",
+      "variant": "off",
+      "SHA": "56cd4b12ed84b7667eaf39e703a4018b2f988511638c2bbc7bc0020e10bb8e17",
+      "rows": 0
+    },
+    {
+      "case": "cutoff_refresh",
+      "variant": "stock",
+      "SHA": "a14b2fe17a98f0b553667162e85b666f919848478428a43b6f3ab2118811efb4",
+      "rows": 0
+    },
+    {
+      "case": "cutoff_refresh",
+      "variant": "tc_stock",
+      "SHA": "65524f0dd1740abe9ed90a3395a69c79f51ffdc92cf934cc94d96155a853b0d1",
+      "rows": 1
+    },
+    {
+      "case": "cutoff_refresh",
+      "variant": "tc2_stock",
+      "SHA": "30c6d63eb332f4b83faa1fe3cb53a52b3c1d939451e6a8a43f89469bee77f1ef",
+      "rows": 2
+    }
+  ]
+}

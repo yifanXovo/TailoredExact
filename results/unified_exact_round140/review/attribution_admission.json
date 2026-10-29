@@ -1,0 +1,83 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "584660532db9ba8d7edcb1097c4b9ff02de63377e8275691c1f0e3c51bb2830f",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T16:33:37.535276+00:00",
+  "scope": "One result-selected full K35 old-TC+stock attribution run only; no automatic eight-role or Seed1 expansion",
+  "candidate_manifest_SHA": "ae753ff92df5badb9f78c78065f708136561f05a1aa58ffecb282d8dd0d4c021",
+  "production_PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+  "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+  "role": {
+    "role": "K-35-U",
+    "counts": "tc",
+    "stock": true,
+    "Seed": 0,
+    "H_seed": 20260626,
+    "cap_seconds": 2400,
+    "T_seconds": 10800,
+    "lambda_value": 0.15,
+    "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb"
+  },
+  "checks": {
+    "source_PE_DLL_helpers_identity_input_hashes": true,
+    "own_H_no_cross_arm_information": true,
+    "uniform_same_method_rule": true,
+    "same_K35_physical_and_objective_domain": true,
+    "registered_primary_incremental_sealed_and_qualified_snapshot": true,
+    "primary_incremental_Native_readback_records_reviewed": true
+  },
+  "completed_5plus2_snapshot": {
+    "report_SHA": "3ff7a58b5552cb99fb7cfbe1f11b19cc9077e4df06daabd6fe4801b112d010f9",
+    "UTC": "2026-10-29T16:30:15.745704+00:00",
+    "new_positions": 7,
+    "Native_readback": [
+      {
+        "batch": "primary",
+        "SHA": "0a9ecf44c3654a28020ac56ebb2a448e39de5a6a708a8103f35d7af0765e7712",
+        "calls": 25,
+        "unique_artifacts": 15,
+        "distinct_matrix_SHA": 15
+      },
+      {
+        "batch": "incremental",
+        "SHA": "bcbf624be178ecbacb92a8d28eacaf2a95cb1d660af6648c06de1c53cb9f540f",
+        "calls": 10,
+        "unique_artifacts": 6,
+        "distinct_matrix_SHA": 6
+      }
+    ],
+    "attribution_not_in_this_pre_registration_snapshot": true
+  },
+  "budget_snapshot": {
+    "G1_seconds": 9909.658233700553,
+    "remaining_G1_seconds": 33290.34176629945,
+    "by_category": {
+      "native": 9771.692002299707,
+      "diagnostic": 137.96623140084557
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 33428.30799770029,
+      "diagnostic": 43062.033768599154
+    },
+    "separately_reported_seconds": 99.37093400000595,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "admitted_nominal_cap_seconds": 2400,
+  "D3_comparison_nominal_before": 3600,
+  "D3_comparison_nominal_after": 6000,
+  "D3_shared_nominal_limit": 9000,
+  "followup_conditions": [
+    "After sealing K35 old TC+stock, compare its actual U/L, qualified cover, own H and control path with the already sealed TC2 K35 result; do not turn root LP gains into full-method claims.",
+    "If old TC removes the K35 regression while already dominating TC2 on RB35, reassess whether TC2 has enough unique full-method value before expanding the same TC2 candidate.",
+    "If K35 still has the same adverse behavior under old TC, separate the shared combination limitation from the new TC2 contribution; informative mixed boundaries can still justify a finite next comparison.",
+    "Any eight-role extension or paired Seed1 needs its own evidence-selected reason and total-budget check; do not expand both candidates mechanically.",
+    "The premature pure semantic reader lacked a closeout for this newly registered unrun group; this metadata failure supplies no candidate performance or scientific rejection."
+  ],
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0
+}

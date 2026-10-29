@@ -1,0 +1,54 @@
+{
+  "UTC": "2026-10-29T20:39:12.411889+00:00",
+  "study_complete": true,
+  "completion_scope": "Scientific study and all selected experiments; PR/public/PDF/cleanup completion is recorded separately",
+  "decision": "RESEARCH_ONLY_STOP_FULL_PROMOTION",
+  "new_default_promotion": false,
+  "selected_uniform_candidate": "TC_STOCK",
+  "TC2_disposition": "Retain mathematical/LP research component; stop uniform complete expansion after five roles",
+  "TC_STOCK_disposition": "Retain research-only; no full promotion after eight Seed0 configurations and one adverse critical Seed1",
+  "new_formal_complete_positions": 14,
+  "new_Seed0_positions": 13,
+  "new_Seed1_positions": 1,
+  "qualification_positions": 2,
+  "new_explicit_continuous_LP_solves": 11,
+  "TC2_Seed0_configurations": 5,
+  "TC_STOCK_Seed0_configurations": 8,
+  "base_inputs": 6,
+  "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+  "production_PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+  "full_report_SHA": "91063003e6417e2bf5f44bd6536c05e9f46dd26298f79192093b25107001b7bc",
+  "seed1_report_SHA": "8322707bb63d1070b02cf00ba793da11a3676bbc81a98c437f261140a3503598",
+  "LP_report_SHA": "f69cf08120f90fb9c4ca7a4aabe30ddc595c45afcae9454a307f68e347926b69",
+  "cost_at_scientific_closeout": {
+    "G1_seconds": 21831.71896730084,
+    "remaining_G1_seconds": 21368.28103269916,
+    "by_category": {
+      "native": 21680.44718810008,
+      "diagnostic": 151.27177920076065
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 21519.55281189992,
+      "diagnostic": 43048.72822079924
+    },
+    "separately_reported_seconds": 146.28815149981529,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "no_further_experiments": true,
+  "all_adverse_and_open_positions_retained": true,
+  "complete_discussion": "TC2+stock certifies K15 and K20 in 36.133 and 115.020 seconds. Stock certifies them in 33.818 and 101.635 seconds; old TC+stock takes 45.243 and 135.697 seconds. TC2 preserves the established proof benefit but adds no new certificate in its five-role panel. K35 is a material adverse result: TC2 U/L .7021486134/.5419703766 is worse than BASE, stock and old TC+stock. RB35-T2 improves over BASE/stock under TC2, but old TC+stock is better at both endpoints, so this repair is not a TC2-exclusive benefit. RX35-T2 under TC2 improves U relative to both references and L relative to BASE, while remaining below the stock L.\n\nThe selected uniform old TC+stock method completes all eight configurations on six base inputs. It certifies three, matching stock's three versus BASE's two. K35 and RB35-T2 improve both U and L over both references in Seed0; RX35-T1 also improves both over stock by smaller amounts. RB35-T1 is slightly worse than stock at both endpoints. RX35-T2 improves U but weakens L against both references, and TC2 is better than old TC at both endpoints there. K15/K20 retain proof but are substantively slower than stock under the inherited max(10 seconds,10 percent) comparison rule. RX20 takes 7.512 versus stock 15.340 seconds; the difference is below the inherited absolute 10-second threshold and does not alone drive selection.\n\nThe one decision-selected RB35-T2 Seed1 changes the priority assessment. Old TC+stock returns U/L .3730513800/.2308383524 versus the accepted stock Seed1 .3222448417/.2311394491: U worsens by .0508065383 and L by .0003010967. Relative to BASE Seed1 .3595536804/.2181462246 it has worse U and stronger L. The large Seed0 repair of stock is not robust in this confirmation. The reference retains its original V2 source/PE and clocks; this is not a same-PE causal intervention. No average or favorable role erases these adverse observations.",
+  "complete_discussion_zh": "TC2+stock在K15、K20分别36.133、115.020秒获证；stock为33.818、101.635秒，旧TC+stock为45.243、135.697秒。TC2保留已有快速证明收益，在五角色中没有新增获证。K35是重要不利结果：TC2的U/L=.7021486134/.5419703766同时弱于BASE、stock及旧TC+stock。RB35-T2虽改善BASE/stock，但旧TC双端更好，因此该修复不能归为TC2独有收益。RX35-T2的TC2改善两参照U及BASE的L，但L仍弱于stock。\n\n统一旧TC+stock完成六基础输入的八配置，获证3个，与stock相同，BASE为2个。Seed0的K35、RB35-T2双端优于两参照；RX35-T1对stock也有较小双端收益。RB35-T1略弱于stock双端；RX35-T2的U改善但L弱于两参照，且该角色TC2双端优于旧TC。K15/K20虽仍获证，但按继承的max(10秒,较小时间10%)标准相对stock构成实质时间回退。RX20为7.512秒对stock15.340秒，差值未达继承的10秒绝对门槛，不单独驱动采用。\n\n关键RB35-T2的单项Seed1改变推荐强度：旧TC+stock为.3730513800/.2308383524，已验收stock Seed1为.3222448417/.2311394491，U变差.0508065383，L变差.0003010967。相对BASE Seed1的.3595536804/.2181462246则U更差、L更强。Seed0对stock的最大修复没有在这次确认中保持；原参照保留V2源码/PE与原时钟，不能称同PE因果干预。所有不利结果均保留。",
+  "mechanism_discussion": "The actual canonical writer puts stock and the declared counts uniformly in outer LP, native target and terminal. TC2 improves all five matched continuous LP objectives over old TC+stock, including K35 and the precision-confirmed small RX20 increment. This does not predict capped complete outcomes. At K20 both old TC and TC2 take native-target then exact-close, unlike inherited stock's immediate exact-close; that action change is not unique to TC2. The target lifts the qualified parent above the cached left-child bound before exact-close.\n\nK35 makes the distinction particularly clear. Old TC has parent and left-child LP bounds both .2180887790 and selects exact-close, despite no root objective increment over stock. TC2 raises the parent to .2260440515 and left child to .2276013978, triggers native-target, then raises the parent to .2660215686 and selects exact-close. Its stronger early bounds coexist with worse capped U/L. These are observable whole-method control/search changes with identical initial H; they do not isolate additive causal runtime per row or imply a general rule that stronger rows hurt search. Native returned ObjBoundC and externally merged final L stay separate. All 137 saved witness records in five explicitly selected new trajectories, including 132 MIPSOL records, are physically replayed; these are not independent experiments or unique discovery clocks. The old accepted 184 records are not newly replayed.",
+  "mechanism_discussion_zh": "实际canonical writer将stock及声明的TC/TC2统一送入外层LP、native target与terminal。TC2在五个匹配连续域上均比旧TC+stock提高目标，包括K35及经紧容差确认的RX20微小增量；这不预示完整cap表现。K20的新旧TC都走native-target再exact-close，而继承stock直接exact-close，故动作改变并非TC2独有。target返回的合格parent界超过缓存left-child界后转exact-close。\n\nK35尤其清楚：旧TC的parent与left-child LP界均为.2180887790，根目标相对stock无增量却直接exact-close；TC2把parent/left提高到.2260440515/.2276013978，先native-target，再把parent提高到.2660215686后exact-close，最终cap U/L反而更弱。这是相同自身H下可观察的完整控制/搜索路径差异，不是逐行因果计时分摊，也不证明强行普遍损害搜索。Native返回ObjBoundC与外部合并L分别保留。五条指定新增轨迹共137条保存见证记录（132条MIPSOL）已物理复算；它们不是独立实验、唯一向量或精确发现时钟。旧184条验收记录没有重新回放。",
+  "conditional_discussion": "After the initial five TC2 roles, the required K20/RB35-T2 old-TC controls and the critical K35 attribution showed that old TC had stronger complete value on two hard roles. The last K15/RX35-T2 old-TC controls completed the same five-role comparison; their nominal comparison caps total 9000 seconds. Independent review then allocated the planned 6000-second remaining-three-role allowance only to uniform TC+stock. TC2 stops at five complete roles; only old TC reaches eight. No instance-specific algorithm rule or asymmetric placement is introduced.\n\nOne RB35-T2 Seed1 is justified by a real decision uncertainty: stock Seed1 was already near old-TC Seed0. It reuses matched accepted BASE1/STOCK1, retaining their input, physical T, cap, exact lambda, Seed, threads, affinity, H, different measured source/PE and original costs. No new stock solve, second Seed1 role, or TC2 repeat is run. The unfavorable confirmation supports retaining research tools and stopping full promotion. Return-product exploration closes after the old eight-point and new five-point offline screens; all five new TC2 optima pass the return-bound and W-projection screen within the recorded 1e-7 numerical residual tolerance. No product LP or third complete-method line is opened.",
+  "conditional_discussion_zh": "初始TC2五角色后，必要K20/RB35-T2旧TC对照及关键K35归因表明旧组合在两个硬角色更有完整价值；再补K15/RX35-T2完成同五角色比较，旧TC对照名义cap合计9000秒。独立复核将原计划余三角色6000秒额度仅调剂给统一TC+stock。TC2完整面板停在五角色，只有旧TC达到八配置；没有实例身份补丁或非对称placement。\n\n单项RB35-T2 Seed1源于真实决策不确定性：stock Seed1已接近旧TC Seed0。直接复用匹配且已验收的BASE1/STOCK1，保留输入、物理T、cap、精确lambda、Seed、线程、affinity、自身H、不同原源码/PE与原费用；没有新stock、第二Seed1角色或TC2重复。不利确认支持保留研究工具并停止完整推广。返库产品备选在旧8点与新5点离线筛查后收束；5个新TC2最优点先过逐车R界再过W投影，在记录的1e-7数值残差容差内均未见阻断，没有新增产品LP或第三完整算法线。",
+  "decision_paragraph": "RESEARCH ONLY; STOP FULL-ALGORITHM PROMOTION. TC2 is a qualified inventory-driven discrete strengthening with strict block separation even under exact common/return products and real optimized LP gains beyond old TC+stock. It is retained as a default-off research component, with no claim of a full BRP cutoff strictness theorem or new integer gap closure. Its important K35 regression rejects promotion as a uniform complete candidate. The selected old TC+stock combination is also retained research-only: its useful Seed0 hard-role outcomes are qualified by slower proofs, horizon tradeoffs and the adverse critical Seed1. Neither configuration is recommended for stable-default replacement or further full benchmarking without new structural evidence. The R137 GI-TBC stable entry and earlier R138/R139 entries stay unchanged. The independent Round140 research entry defaults to the selected tested old-TC mode and explicitly exposes TC2 for reproduction; this does not promote the stable default.",
+  "decision_paragraph_zh": "决定：RESEARCH_ONLY，停止完整算法推广。TC2把库存下预算转成可核实的离散计数信息，即使共同因子及返库乘积完全一致仍有块级严格分离，并在五个实际连续域上超出旧TC+stock；保留这一默认关闭的研究组件，严格结论不冒充完整BRP cutoff定理或新的整数闭gap。K35的重要双端回退否定其统一完整候选推广。统一旧TC+stock也仅保留research-only：Seed0硬角色收益受到较慢获证、物理T边界及关键Seed1不利结果限制。两者均不替换稳定默认，也不在没有新结构证据时继续扩大完整benchmark。R137稳定GI-TBC及R138/R139入口保持原样；本轮独立研究入口默认已测试的旧TC模式，显式参数可复现TC2，研究入口选择不等于稳定推广。",
+  "remaining_question": "The most useful next question is whether explicitly enforcing each vehicle's return upper bound can yield a genuine optimized increment beyond TC+stock at the K35 domain whose retained old-TC optimum violates that bound. Begin with a bounded same-domain reoptimization separating linear return bounds from product rows, and proceed to complete comparison only after an actual objective gain. Positive return load or saved-point separation alone does not establish that gain.",
+  "remaining_question_zh": "最值得继续的问题：在K35旧TC最优点仍违反逐车返库上界的共同域，显式加入各车线性R<=Q是否能产生超出TC+stock的真实重新优化增量。先做有界同域比较，将线性上界与产品行分开；出现实际目标增量后再考虑完整方法。正返库或切掉保存点本身都不足以证明该增量。"
+}

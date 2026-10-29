@@ -386,3 +386,12 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /config/gi_tbc_stock_placement_round139.json -text whitespace=cr-at-eol
 /results/unified_exact_round139/** -text whitespace=cr-at-eol
 /results/unified_exact_round139/**/*.log -whitespace
+
+# Round140 frozen measured helpers, actual count rows and delivery retain bytes.
+/scripts/round140* -text whitespace=cr-at-eol
+/scripts/paper_s2_tc2.py -text whitespace=cr-at-eol
+/include/Round140Research.hpp -text whitespace=cr-at-eol
+/config/gi_tbc_tc2_round140.json -text whitespace=cr-at-eol
+/results/unified_exact_round140/** -text whitespace=cr-at-eol
+/results/unified_exact_round140/**/*.log -whitespace
+/results/unified_exact_round140/goal.md whitespace=cr-at-eol,-blank-at-eof

@@ -1,0 +1,130 @@
+{
+  "UTC": "2026-10-29T15:47:46.847516+00:00",
+  "results": [
+    {
+      "position": 1,
+      "role": "R-X20-S-T1",
+      "variant": "tc_stock",
+      "seed": 0,
+      "cap_seconds": 120,
+      "status": "NUMERICAL_OPTIMAL_CONTINUOUS_LP",
+      "L": 0.3775575302969418,
+      "validated_U": 0.7530539180896819,
+      "signed_gap": 0.37549638779274014,
+      "relative_gap": 0.49863147747147357,
+      "H_sum": 53.37373737373738,
+      "TC_rhs": 53.37373737373741,
+      "TC2_rhs": 57.7475890090014,
+      "TC2_violation": 4.373851635264025,
+      "G": 0.146675919500347,
+      "tau": 65.0,
+      "J": 9.533934767522554,
+      "before": {
+        "rows": 6027,
+        "columns": 2480,
+        "nonzeros": 35282
+      },
+      "after": {
+        "rows": 6028,
+        "columns": 2480,
+        "nonzeros": 35598
+      },
+      "source_SHA": "80ef9015788208bc8f5c8404a97174cd2f732d1a278430b12624e3cc75c86901",
+      "solution_SHA": "43eeff6c9b0995b724f24561284520585a405dfedf7d3e8540d6b801cd0cccae",
+      "construction_seconds": 0.07821599999442697,
+      "optimize_wall_seconds": 0.063365199835971,
+      "Runtime": 0.07699990272521973,
+      "Work": 0.1534343516388677,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 1.3877787807814457e-17,
+        "ConstrResidual": 3.637978807091713e-12,
+        "DualResidual": 1.1102230246251565e-16,
+        "ComplVio": 0.0
+      },
+      "native_identity": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "Seed": 0,
+      "Threads": 1,
+      "FeasibilityTol": 1e-09,
+      "OptimalityTol": 1e-09,
+      "precision_probe_source_SHA": "6a8b13eb74f68abf40f0672f33f08842f1f9b8a13002c25b3b3079796d5ec306",
+      "LP_Optimize": 1,
+      "MIP_Optimize": 0,
+      "plan_SHA": "230016a27521e86c2aaf6dbc610752a893ff63f1ff49b843188727575dff13c4",
+      "writer_source_SHA": "87e108f90b978c6d9f273a491c40c17cc9bc88cf73a22aa65a73d12223772319"
+    },
+    {
+      "position": 2,
+      "role": "R-X20-S-T1",
+      "variant": "tc2_stock",
+      "seed": 0,
+      "cap_seconds": 120,
+      "status": "NUMERICAL_OPTIMAL_CONTINUOUS_LP",
+      "L": 0.3775639409603663,
+      "validated_U": 0.7530539180896819,
+      "signed_gap": 0.37548997712931564,
+      "relative_gap": 0.49862296458378985,
+      "H_sum": 53.37373737373737,
+      "TC_rhs": 49.540222249105774,
+      "TC2_rhs": 53.3737373737374,
+      "TC2_violation": 2.842170943040401e-14,
+      "G": 0.1466823301637714,
+      "tau": 65.0,
+      "J": 9.534351460645142,
+      "before": {
+        "rows": 6027,
+        "columns": 2480,
+        "nonzeros": 35282
+      },
+      "after": {
+        "rows": 6029,
+        "columns": 2480,
+        "nonzeros": 35914
+      },
+      "source_SHA": "80ef9015788208bc8f5c8404a97174cd2f732d1a278430b12624e3cc75c86901",
+      "solution_SHA": "51ffe08f286ae911b0e28c06336a5924485e7f6fbea24dc2ca7b2417a5b3ad28",
+      "construction_seconds": 0.07399849989451468,
+      "optimize_wall_seconds": 0.06920440006069839,
+      "Runtime": 0.06400012969970703,
+      "Work": 0.17623355018765252,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 1.0842021724855044e-19,
+        "ConstrResidual": 3.9108272176235914e-11,
+        "DualResidual": 1.6653345369377348e-16,
+        "ComplVio": 0.0
+      },
+      "native_identity": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "Seed": 0,
+      "Threads": 1,
+      "FeasibilityTol": 1e-09,
+      "OptimalityTol": 1e-09,
+      "precision_probe_source_SHA": "6a8b13eb74f68abf40f0672f33f08842f1f9b8a13002c25b3b3079796d5ec306",
+      "LP_Optimize": 1,
+      "MIP_Optimize": 0,
+      "plan_SHA": "230016a27521e86c2aaf6dbc610752a893ff63f1ff49b843188727575dff13c4",
+      "writer_source_SHA": "87e108f90b978c6d9f273a491c40c17cc9bc88cf73a22aa65a73d12223772319"
+    }
+  ],
+  "delta": 6.410663424494256e-06,
+  "new_LP_Optimize": 2,
+  "MIP_Optimize": 0,
+  "complete_algorithm_tolerances_unchanged": true,
+  "not_replacement_of_primary_results": true
+}

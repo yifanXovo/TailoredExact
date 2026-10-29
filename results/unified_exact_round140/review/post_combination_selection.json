@@ -1,0 +1,197 @@
+{
+  "review_type": "Post-five-role uniform-candidate selection for a finite conditional extension",
+  "reviewer": "/root/independent_review",
+  "reviewed_at_UTC": "2026-10-29T18:26:03.572908+00:00",
+  "recommendation": "EXTEND_ONLY_UNIFORM_TC_STOCK_TO_REMAINING_THREE_CONFIGURATIONS",
+  "selected_followup_method": "TC_STOCK",
+  "TC2_complete_panel_stops_at_five_roles": true,
+  "report_SHA": "acca6905401856ea9e929a3fb3391cd5fbd654a3feaac2ba967d320701dc1e53",
+  "new_arms_csv_SHA": "2fa536d57caa18271a189ce37ae84aa1d1c7d4fb7a5766a33a0a9bcfe58a98b8",
+  "report_UTC": "2026-10-29T18:24:41.023931+00:00",
+  "new_formal_positions": 10,
+  "qualification_positions_separate": 2,
+  "combination_Native_readback_SHA": "256884369e2cf0b33fdfa9336bf5f5989d80d5f0e8878ef95e21f2853c896a9c",
+  "rationale": [
+    "Uniform TC+stock has two important hard-role dual-endpoint improvements over both inherited BASE and stock: K35 and RB35-T2. This is enough complete-method signal to justify a limited continuation, rather than closing solely because every role does not win.",
+    "K15 and K20 retain their qualified certificates, including the K20 benefit relative to the open stable baseline, but both are slower than stock and TC2. These adverse certified-time comparisons must remain explicit.",
+    "RX35-T2 improves verified U but weakens supported L relative to both BASE and stock. TC2 is better than old TC in both endpoints on this role. The old-TC candidate therefore has an observed mixed boundary, not full dominance.",
+    "The T1 variants of the same RB35/RX35 base inputs directly test whether this hard-role behavior persists at shorter physical horizons. RX20 supplies the remaining different base input, including the historical root where old TC had no objective increment.",
+    "The planned three positions complete only one uniform follow-up candidate. TC2 remains a five-role complete comparison with valid mathematical and same-domain LP increments; TC+stock results are explicitly the landing of an existing combination and are not attributed to TC2."
+  ],
+  "observed_tradeoffs": [
+    {
+      "role": "K-15-S",
+      "old_TC": {
+        "U": 0.5922648822560825,
+        "L": 0.5922648798623145,
+        "certificate": true,
+        "T_cert": 45.24253812013194
+      },
+      "stock": {
+        "U": 0.5922648822560825,
+        "L": 0.5922648822560638,
+        "certificate": true,
+        "T_cert": 33.81822654698044
+      },
+      "TC2": {
+        "U": 0.5922648822560825,
+        "L": 0.5922648822560754,
+        "certificate": true,
+        "T_cert": 36.13321069651283
+      }
+    },
+    {
+      "role": "K-20-S",
+      "old_TC": {
+        "U": 0.7168065462777502,
+        "L": 0.7168065460411465,
+        "certificate": true,
+        "T_cert": 135.69681281410158
+      },
+      "stock": {
+        "U": 0.7168065462777502,
+        "L": 0.7168065462777424,
+        "certificate": true,
+        "T_cert": 101.63538490096107
+      },
+      "TC2": {
+        "U": 0.7168065462777502,
+        "L": 0.7168065462777474,
+        "certificate": true,
+        "T_cert": 115.01962330681272
+      }
+    },
+    {
+      "role": "K-35-U",
+      "old_TC": {
+        "U": 0.6504387119575558,
+        "L": 0.5682885263298959,
+        "certificate": false,
+        "T_cert": null
+      },
+      "stock": {
+        "U": 0.6695955692140068,
+        "L": 0.556776897983438,
+        "certificate": false,
+        "T_cert": null
+      },
+      "TC2": {
+        "U": 0.7021486134198561,
+        "L": 0.5419703765884023,
+        "certificate": false,
+        "T_cert": null
+      }
+    },
+    {
+      "role": "R-B35-S-T2",
+      "old_TC": {
+        "U": 0.3190804926922912,
+        "L": 0.23392726213848986,
+        "certificate": false,
+        "T_cert": null
+      },
+      "stock": {
+        "U": 0.4012002178390506,
+        "L": 0.22918159966432358,
+        "certificate": false,
+        "T_cert": null
+      },
+      "TC2": {
+        "U": 0.32427571778578423,
+        "L": 0.22990420853681653,
+        "certificate": false,
+        "T_cert": null
+      }
+    },
+    {
+      "role": "R-X35-S-T2",
+      "old_TC": {
+        "U": 0.3702071037136712,
+        "L": 0.2050709555237063,
+        "certificate": false,
+        "T_cert": null
+      },
+      "stock": {
+        "U": 0.40985548222597845,
+        "L": 0.21498016272542564,
+        "certificate": false,
+        "T_cert": null
+      },
+      "TC2": {
+        "U": 0.36663598739288883,
+        "L": 0.21169919612207808,
+        "certificate": false,
+        "T_cert": null
+      }
+    }
+  ],
+  "recommended_positions": [
+    {
+      "role": "R-X20-S-T1",
+      "counts": "tc",
+      "stock": true,
+      "Seed": 0,
+      "H_seed": 20260626,
+      "cap_seconds": 1200,
+      "T_seconds": 4800,
+      "rho": 1
+    },
+    {
+      "role": "R-B35-S-T1",
+      "counts": "tc",
+      "stock": true,
+      "Seed": 0,
+      "H_seed": 20260626,
+      "cap_seconds": 2400,
+      "T_seconds": 4800,
+      "rho": 1
+    },
+    {
+      "role": "R-X35-S-T1",
+      "counts": "tc",
+      "stock": true,
+      "Seed": 0,
+      "H_seed": 20260626,
+      "cap_seconds": 2400,
+      "T_seconds": 4200,
+      "rho": 1
+    }
+  ],
+  "budget_snapshot": {
+    "G1_seconds": 14702.825708300341,
+    "remaining_G1_seconds": 28497.17429169966,
+    "by_category": {
+      "native": 14559.267615699675,
+      "diagnostic": 143.558092600666
+    },
+    "limits": {
+      "native": 43200.0,
+      "diagnostic": 43200.0
+    },
+    "category_remaining": {
+      "native": 28640.732384300325,
+      "diagnostic": 43056.441907399334
+    },
+    "separately_reported_seconds": 118.80751519999467,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "D3_shared_comparisons_nominal_used": 9000,
+  "D3_shared_comparisons_no_new_allocation": true,
+  "proposed_extension_nominal_cap": 6000,
+  "extension_budget_source": "Reallocate the planned remaining-three-role main-candidate allowance to the single evidence-selected TC+stock candidate; charge actual outer costs within the common 43200-second total.",
+  "prospective_admission": false,
+  "study_complete": false,
+  "no_Seed1_recommended_now": true,
+  "stable_R137_default_unchanged": true,
+  "required_next_steps": [
+    "Freeze the three exact current-PE commands and obtain SHA-bound independent admission before execution.",
+    "Retain all ten prior formal results, their unfavorable endpoints/times and independent own-H identities; do not overwrite or reclassify the TC2 five-role panel.",
+    "After the extension, decide adopt/research-only/stop on the complete uniform evidence without averaging away important adverse roles.",
+    "Only consider paired Seed1 if a remaining key uncertainty can change that decision; an eight-configuration table itself does not require Seed1."
+  ],
+  "reviewer_Optimize": 0,
+  "reviewer_commercial_DLL_loads": 0,
+  "reviewer_compilation": 0,
+  "reviewer_archive_reads": 0
+}
