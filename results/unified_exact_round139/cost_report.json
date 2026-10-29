@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-29T12:14:03.584740+00:00",
+  "UTC": "2026-10-29T12:22:36.897214+00:00",
   "experiment": {
     "G1_seconds": 6371.821015599417,
     "remaining_G1_seconds": 51228.17898440058,
@@ -20,7 +20,7 @@
     "nested_H_LP_MIP_Work_not_added": true
   },
   "fee_ordinary_seconds": 91.7436834005639,
-  "additional_disjoint_ordinary_seconds": 484.0674599998165,
+  "additional_disjoint_ordinary_seconds": 512.778711399762,
   "ordinary_steps": [
     {
       "label": "archive_science",
@@ -250,6 +250,19 @@
         "UTC": "2026-10-29T11:43:27.372819+00:00",
         "exit_code": 0,
         "seconds": 1.7902099001221359,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "public_metadata",
+      "SHA": "f979c7dac30c746537a6330a2e557901a98a5ff9a7cb196bfe96dcc3f0a8c073",
+      "receipt": {
+        "UTC": "2026-10-29T12:22:19.103082+00:00",
+        "exit_code": 0,
+        "seconds": 28.711251399945468,
         "G1_seconds": 0,
         "Optimize": 0,
         "not_also_in_fee_meter": true,
