@@ -1,0 +1,19 @@
+{
+  "Optimize": 0,
+  "counts": {
+    "qualification": {
+      "actual_report_SHA": "713c78960480cadc56025b2b215a21a3d2f8de75fa3c80105041197e0ee2e8fd",
+      "unique_artifact_paths": 14,
+      "unique_canonical_SHA256s": 6,
+      "used_calls": 18
+    },
+    "pilot": {
+      "actual_report_SHA": "4717eb0b424547a164120c7891185c1337219465c8b25a783e34f3aafd3283ef",
+      "unique_artifact_paths": 24,
+      "unique_canonical_SHA256s": 18,
+      "used_calls": 26
+    }
+  },
+  "original_admitted_receipts_unchanged": true,
+  "scope": "The legacy unique_actual_models field counts distinct artifact paths within a batch, not distinct mathematical matrices or SHA256 values. Calls, immutable artifact paths and canonical SHA256 identities are distinct denominators."
+}

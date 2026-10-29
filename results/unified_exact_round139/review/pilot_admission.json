@@ -1,0 +1,122 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "/root/round139_review",
+  "date": "2026-10-29",
+  "timezone": "Asia/Shanghai",
+  "matrix_SHA": "15eb072714a74b9062ba09004488bc82fbd54fbb9b94e6872761ce9a1e8266aa",
+  "matrix": "pilot_matrix.json",
+  "source_commit": "6b22433f525df4d1a6ce48a70b5b6414a53aa73b",
+  "production_PE_SHA": "e8ecdd503c7a46125ef54936a4cca4e00c3f78c4df30b252ee423df3e194e13e",
+  "positions": [
+    {
+      "position": 1,
+      "role": "K-15-S",
+      "placement": "lp-only",
+      "Seed": 0,
+      "cap": 600,
+      "T": 3600,
+      "Q": [
+        30,
+        30
+      ],
+      "lambda_value": 0.15
+    },
+    {
+      "position": 2,
+      "role": "K-20-S",
+      "placement": "lp-only",
+      "Seed": 0,
+      "cap": 1200,
+      "T": 5400,
+      "Q": [
+        30,
+        30
+      ],
+      "lambda_value": 0.15
+    },
+    {
+      "position": 3,
+      "role": "R-B35-S-T2",
+      "placement": "lp-only",
+      "Seed": 0,
+      "cap": 2400,
+      "T": 7200,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "lambda_value": 0.055125275219827186
+    },
+    {
+      "position": 4,
+      "role": "K-15-S",
+      "placement": "mip-only",
+      "Seed": 0,
+      "cap": 600,
+      "T": 3600,
+      "Q": [
+        30,
+        30
+      ],
+      "lambda_value": 0.15
+    },
+    {
+      "position": 5,
+      "role": "K-20-S",
+      "placement": "mip-only",
+      "Seed": 0,
+      "cap": 1200,
+      "T": 5400,
+      "Q": [
+        30,
+        30
+      ],
+      "lambda_value": 0.15
+    },
+    {
+      "position": 6,
+      "role": "R-B35-S-T2",
+      "placement": "mip-only",
+      "Seed": 0,
+      "cap": 2400,
+      "T": 7200,
+      "Q": [
+        20,
+        25,
+        30
+      ],
+      "lambda_value": 0.055125275219827186
+    }
+  ],
+  "nominal_new_caps_seconds": 8400,
+  "current_charged_seconds": 199.78493499965407,
+  "Optimize_calls_by_reviewer": 0,
+  "compiler_calls_by_reviewer": 0,
+  "vendor_library_loads_by_reviewer": 0,
+  "evidence_SHA": {
+    "qualification/qualification_actual.json": "713c78960480cadc56025b2b215a21a3d2f8de75fa3c80105041197e0ee2e8fd",
+    "qualification/role_refresh_checks.json": "4c03966e3f9b8449615231a93444d4ae7c2dacffcf96e648a314eac35185607e",
+    "qualification/export_plan.json": "fb9e1ac7600b34b46bf3356aedf549c2b2a3a727f15ca14fd0f22580cbc0989f",
+    "baseline_reuse.json": "12c752b9e8d49ea2060fe4764679e291b20e01afcbc0394bed5ce4f7ac985047",
+    "review/preflight.json": "7a1edeea5943323d3d6852be263e8e548478ca53690e716145a2d889b0736505",
+    "review/qualification_admission.json": "5d1d6102ff1a67274d474a8184571dd0f4a6caf04b9ff92a5e31abc735822164",
+    "scripts/round139_qualify.py": "a819f780f81795e7de0c5ddcde8d532b7173c844df4b9ab3c43a50af3ff6b41d"
+  },
+  "rationale": [
+    "All six positions preserve frozen input,T/Q,objective doubles,own H,AM.08,Seed0 and full caps. All input/source/helper/identity/PE hashes independently matched.",
+    "Actual four-cell qualification passed inherited physical/proof/Start/lifecycle gates. Exact Counter multiplicities and native coefficient/RHS/type receipts support declared LP/target/terminal placement.",
+    "BASE/BOTH actual canonical files match historical SHA. LP integer domains restore; 10 rebuilds integer artifact; 01 retains target-to-terminal integer state.",
+    "Twelve role exports cover root,child and explicitly representative cutoff refresh; no actual controller cutoff update is claimed.",
+    "All existing fees are closed, including failed setup/readback attempts. Production/helper hashes remain unchanged and budget covers 8400 additional nominal seconds.",
+    "Historical BASE/BOTH reuse preserves measured V1/V2 identities, Seed0, physical/objective/cap and complete-cost definitions. This is adaptive known-panel research.",
+    "No additional same-domain target/terminal diagnostic is needed before bounded full pilot."
+  ],
+  "limits": [
+    "cap90 qualification endpoints do not rank complete performance or select a winner.",
+    "Apply exact row-multiplicity audit to all entered full pilot matrices after production.",
+    "Native log clocks support approximate search analysis; global publication clocks do not identify exact first discovery.",
+    "D3 expansion and any Seed1 follow-up require result-based registration and review."
+  ],
+  "blocking_defects": []
+}
