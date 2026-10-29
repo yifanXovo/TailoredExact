@@ -1,6 +1,7 @@
 #include "PaperExternalGiniTree.hpp"
 #include "IndependentObjectiveProof.hpp"
 #include "Round127Research.hpp"
+#include "Round139Research.hpp"
 #include "Round98StateService.hpp"
 
 #include "CanonicalCompactModel.hpp"
@@ -31,6 +32,7 @@
 #include <cmath>
 #include <filesystem>
 #include <fstream>
+#include <functional>
 #include <iomanip>
 #include <limits>
 #include <memory>
@@ -133,6 +135,7 @@ void copyLpPrimalDualEvidence(const FixedIntervalMipOutcome& outcome,
 struct PaperLeafRuntime {
     bool round65_core_due = false;
     bool artifact_ready = false;
+    bool artifact_stock_rlt = false;
     CanonicalCompactModelArtifact artifact;
     long long artifact_incumbent_epoch = -1;
     long long artifact_generation = -1;
@@ -3607,7 +3610,13 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     }
     long long round68_start_sequence = 0;
     long long round107_request_sequence = 0;
+    std::function<void(FixedIntervalMipRequest&)> prepareRound139Mip;
     auto solveBudgeted = [&](FixedIntervalMipRequest& request) {
+        if (round139().asymmetric() &&
+            request.solve_kind != FixedIntervalSolveKind::PaperLpRelaxation) {
+            if (!prepareRound139Mip) throw std::runtime_error("round139_role_preparer_unset");
+            prepareRound139Mip(request);
+        }
         if(round120) {
             round120->observe(best_routes,0);
             if(request.solve_kind!=FixedIntervalSolveKind::PaperLpRelaxation &&
@@ -3906,7 +3915,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         return true;
     };
     auto ensureArtifact = [&](const ControllingLeaf& leaf,
-                              PaperLeafRuntime& state) -> bool {
+                              PaperLeafRuntime& state,
+                              bool native_mip = false) -> bool {
         if (round127Md() && state.artifact_ready &&
             state.artifact_incumbent_epoch != incumbent_epoch) {
             result.external_gini_tree_failure_reason="round127_md_static_root_epoch_change_forbidden";
@@ -3941,6 +3951,19 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             state.round43_lp_g_available = false;
             state.round43_lp_objective_available = false;
             state.round43_lp_work = 0.0;
+        }
+        const bool desired_stock = round139().stock(native_mip);
+        if (round139().enabled() && state.artifact_ready &&
+            state.artifact_stock_rlt != desired_stock) {
+            if (!std::filesystem::exists(state.artifact.path) ||
+                fileSha256(state.artifact.path) != state.artifact.sha256)
+                throw std::runtime_error("round139_immutable_role_artifact_changed:" + leaf.id);
+            backend->discardLeaf(leaf.id);
+            ++result.external_gini_tree_canonical_artifact_invalidation_count;
+            state.artifact_ready = false;
+            state.artifact = CanonicalCompactModelArtifact{};
+            // Same domain/cutoff: retain paid LP evidence and scheduler bounds.
+            // An epoch change above still invalidates them under the old policy.
         }
         if (state.artifact_ready) {
             if (std::filesystem::exists(state.artifact.path) &&
@@ -3994,11 +4017,15 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         // historical canonical matrix, needed for independent scope replay.
         state.artifact_generation =
             result.external_gini_tree_canonical_artifact_generation_count + 1;
-        state.artifact = writeCanonicalCompactModel(
-            instance, options, artifact_dir / "models" /
-                (leaf.id + "_epoch_" + std::to_string(incumbent_epoch) +
-                 "_generation_" + std::to_string(state.artifact_generation) + ".lp"),
-            spec);
+        {
+            Round139StockWriterScope writer_scope(desired_stock);
+            state.artifact = writeCanonicalCompactModel(
+                instance, options, artifact_dir / "models" /
+                    (leaf.id + "_epoch_" + std::to_string(incumbent_epoch) +
+                     "_generation_" + std::to_string(state.artifact_generation) + ".lp"),
+                spec);
+        }
+        state.artifact_stock_rlt = desired_stock;
         if(round120 && round120->installed() && state.artifact.written) {
             const auto base=state.artifact;
             state.artifact=extendRound120Artifact(base,round120->pair(),options.round120_native_proof=="d1",
@@ -4068,6 +4095,24 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 state.artifact.failure_reason;
         }
         return state.artifact_ready;
+    };
+
+    prepareRound139Mip = [&](FixedIntervalMipRequest& request) {
+        auto& state = runtime.at(request.leaf_id);
+        if (!state.artifact_ready || state.artifact.sha256 != request.canonical_model_fingerprint)
+            throw std::runtime_error("round139_request_artifact_mismatch:" + request.leaf_id);
+        ControllingLeaf leaf;
+        leaf.id = request.leaf_id;
+        leaf.gamma_L = request.gamma_L;
+        leaf.gamma_U = request.gamma_U;
+        if (!ensureArtifact(leaf, state, true))
+            throw std::runtime_error("round139_mip_artifact_build_failed:" + request.leaf_id);
+        request.canonical_model_path = state.artifact.path;
+        request.canonical_model_fingerprint = state.artifact.sha256;
+        request.canonical_model_scope = state.artifact.model_scope;
+        request.canonical_row_signature = state.artifact.row_signature;
+        // Rebuilding is paid from the same complete-process deadline.
+        request.global_deadline_remaining_seconds = globalDeadlineRemaining();
     };
 
     auto solveLp = [&](const ControllingLeaf& leaf,

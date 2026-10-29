@@ -1,5 +1,6 @@
 #include "Round63TimeResource.hpp"
 #include "Round138Research.hpp"
+#include "Round139Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -868,6 +869,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round135-aggregate-penalty") ebrp::round135AggregatePenalty() = true;
         else if (arg == "--round138-stock-rlt") ebrp::round138().stock_rlt = true;
+        else if (arg == "--round139-stock-placement") ebrp::round139().set(requireValue(i, argc, argv));
         else if (arg == "--round137-delete-ab") ebrp::round137().delete_ab = true;
         else if (arg == "--round137-delete-cr") ebrp::round137().delete_cr = true;
         else if (arg == "--round137-delete-cg") ebrp::round137().delete_cg = true;
@@ -3544,6 +3546,23 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if (ebrp::round139().enabled()) {
+        if (ebrp::round127().mode != "ms2" || ebrp::round138().stock_rlt ||
+            opt.round120_native_proof != "off" || opt.round119_proof_contraction ||
+            opt.round90_lp_g_split)
+            throw std::runtime_error("Round139 placement requires isolated ms2 without legacy stock flag or historical proof/split controls");
+        if (!opt.out_path.empty()) {
+            const auto path = std::filesystem::path(opt.out_path).parent_path() / "round139_parameters.json";
+            std::filesystem::create_directories(path.parent_path());
+            std::ofstream parameters(path);
+            parameters << std::setprecision(17) << "{\"placement\":" << std::quoted(ebrp::round139().placement)
+                << ",\"LP_stock\":" << (ebrp::round139().stock(false) ? "true" : "false")
+                << ",\"MIP_stock\":" << (ebrp::round139().stock(true) ? "true" : "false")
+                << ",\"gurobi_seed\":" << opt.gurobi_seed << ",\"H_seed\":" << opt.primal_heuristic_seed
+                << ",\"loaded_after_presets\":true}\n";
+            if (!parameters) throw std::runtime_error("Round139 parameter readback persistence failed");
+        }
+    }
     if (ebrp::round138().stock_rlt && ebrp::round127().mode != "ms2")
         throw std::runtime_error("Round138 stock RLT requires explicit ms2 research mode");
     ebrp::round127Validate(opt);
