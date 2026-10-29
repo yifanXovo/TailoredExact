@@ -37,6 +37,7 @@ def LP():
             result_SHA=sha(target/'result.json'),plan_SHA=sha(OUT/'roots/plan.json')))
     csv_write(OUT/'reports/LP.csv',rows)
     write(OUT/'reports/LP.json',dict(UTC=utc(),rows=rows,pure_checks=checks,Optimize=0,
+        Optimize_field_scope='This pure report generation only',source_LP_Optimize=len(rows),
         LP_optima_are_floating_point_not_rational_certificates=True,
         postsolve_additional_hash_binding=True,original_plan_registered_before_Optimize=True))
     print('20 LP summaries and solution/original-matrix replay checks pass')
@@ -54,7 +55,7 @@ def full():
         role=b['role'];match=[a for a in arms if a['role']==role and a['method']=='STOCK' and a['seed']==0]
         if not match:continue
         a=match[0];old=b['baseline']
-        baseline={k:(float(old[k]) if old[k] else None) for k in ['U','L','T_produce','T_cert','G','P_avg','S','relative_gap']}
+        baseline={k:(float(old[k]) if old[k] else None) for k in ['U','L','T_produce','T_cert','T_verify','T_total','G','P_avg','S','relative_gap']}
         baseline['certificate']=old['certificate']=='True'
         pair=dict(role=role,seed=0,baseline_origin='R137 frozen matching complete run',
             baseline_position=b['position'],candidate_position=a['position'],
@@ -65,6 +66,8 @@ def full():
             base_relative_gap=baseline['relative_gap'],stock_relative_gap=a['relative_gap'],
             base_T_cert=baseline['T_cert'],stock_T_cert=a['T_cert'],
             base_T_produce=baseline['T_produce'],stock_T_produce=a['T_produce'],
+            base_T_verify=baseline['T_verify'],stock_T_verify=a['T_verify'],
+            base_T_total=baseline['T_total'],stock_T_total=a['T_total'],
             base_G=baseline['G'],stock_G=a['G'],base_P_avg=baseline['P_avg'],stock_P_avg=a['P_avg'],
             base_S=baseline['S'],stock_S=a['S'])
         if baseline['certificate'] and a['certificate']:

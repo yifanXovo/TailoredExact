@@ -1,220 +1,97 @@
-# Round138 continuation
+# Round138 continuation: science complete, delivery pending
 
-User requested strict execution of `goal.md` A-J. Goal remains ACTIVE until
-science, manuscript increment, independent final review, English Draft PR,
-finite public byte recovery and bounded current-round cleanup are complete.
+Always use E:/codes/ExactEBRP-work/worktrees/paper-current. Protect original
+E:/codes/ExactEBRP, old rounds, unique science/failures and runtime assets.
+Goal ACTIVE: user authorized full goal, normal push and English Draft PR,
+finite new-carrier read and bounded cleanup. No merge/force-push/email.
 
-- Use `E:/codes/ExactEBRP-work/worktrees/paper-current` explicitly. Original
-  `E:/codes/ExactEBRP` is protected. WORKSPACE_POLICY conventions inherited.
-- Branch: `codex/round138-shared-product-resource-coupling`, based on accepted
-  R137 `72fdcd31716d7b4798727b4ea964b32059c630d1`. main is still
-  `b2b940c1e517a72e226ec60fc49ff19651737632`; PR base must be R137 branch.
-- Production/source pin: `839283773` (full hash in candidate_manifest.json).
-  Default-off CLI `--round138-stock-rlt`, exactly four stock product rows,
-  no extra variables. R137 entry/config/PE remain intact. Candidate PE in
-  `E:/codes/ExactEBRP-work/build-cache/round138/ExactEBRP.exe`.
-- New solve budget: 86400 s total. Actual fee ledger uses
-  `scripts/round138_common.py budget`; nested H/LP/MIP not added twice.
-  All new unqualified experiments Seed0; only explicit limited repeats Seed1.
-  Full own H seed remains 20260626. Single thread, affinity4, serial.
-- New runtime: `D:/msys64/ucrt64/bin/python.exe` for scripts; Python LP runtime
-  `E:/codes/ExactEBRP/build/research/round88-ot/venv/Scripts/python.exe`,
-  Gurobi13.0.2 bound to `D:/gurobi1302/win64/bin/gurobi130.dll`.
+All Native experiments DONE, sessions61535 and5441 exited0, no open fees.
+G1=18214.684111300157s=5.059634475h; remaining68185.3158887 of86400.
+Eight configurations/six inputs/sixteen nominal core positions: eight matched
+R137 baselines reused, eleven fresh Seed0 positions and four selected Seed1.
+Explicit Seeds0/1, H20260626, Gurobi13.0.2, Threads1/affinity4. No transfer.
 
-Completed: actual refs/idle processes/policy checked; mathematical/history
-review and exact J2/J3 four-cell replay; heterogeneous product counterexample;
-four R137 saved roots including three specified points; seven-domain actual
-default-off matrix bridge and exact four-row/full-precision/RHS checks;
-20 preregistered same-domain LPs, all OPTIMAL. See roots/*/result.json,
-math/exact.json and review/{pre_math,pre_implementation,LP_admission}.md.
+Primary V1 source83928377336a860acf78f684d1723a5040467bb5 / PE SHA
+ a41ea8eefd8551799a1d08e6d328beba1b70856433b07d96551790f0f5a4d8ae.
+V2 delivered/Seed1 source04506fa613446d2ef2bd19794f778909422c51fd / PE SHA
+ f4c764ff7164bf042ef612403f82b850698b97c80018bf06b2feff1167d65403.
+Both PE retained in build-cache/round138 and round138-coefficient-fix.
+Original R137 PE/DLL retained. Stable paper_s2.py/gi_tbc_round137.json and
+compat paper_s2.json unchanged. Current research profile explicitly uses V2.
 
-Stock LP increments over newly reoptimized base: K35 +.0179111171,
-RX20 +.0459632140, RX35T2 +.0070363188, K20 +.0094412867.
-TC+stock adds further information on K20/RX35. Main full candidate is uniformly
-stock-only (minimum four rows), AP/TC off. GS controls were independent and
-shared aggregate envelopes on K35/RX20, with justified same-domain S bounds.
+Actual tiny-alpha Native readback failed4.3128927s (charged, retained).
+V2 scales ONLY new rows for nonzero slopes<1e-12 by exact positive2^k,
+including already-outward RHS; finite guards. Seven Native domains pass.
+All33 used primary STOCK calls/25unique models had positive endpoints>=.2123,
+so unchanged factor1, actual coefficients/RHS checked. No V1 rerun/retagging.
+V1 source+316frozen-helper members already in immutable
+artifacts/source_v1_and_frozen_helpers.zip. Unused old Seed1 registration/gate/
+script/selection/identities retained under repair/seed1_pre_coefficient_fix.
+Metadata correction preserved prior records; do not overwrite old manifests.
+New private scaled_read and V1-history/V2-current admission independently accepted.
+Original4 R138 helpers common/read/setup/campaign unchanged except reviewed
+postreader amendment. K15 first verification failure repaired without Native
+repeat; T_verify342.185s is elapsed closeout spanning repair, not actual CPU.
 
-Three offline preparation bugs/corrections are disclosed in
-infra/preflight_corrections.json. In particular initial RX20 stock export used
-a recomputed U differing from native cutoff by one ULP; exact matrix comparison
-refused it before Optimize. That export is preserved. Corrected exports reuse
-the original stored beta/native cutoff and differ from each saved matrix only
-by four rows. Gap denominators still use the independently validated U.
+Results and proofs now in final_report.md, candidate_decision.json, manuscript.md.
+Decision RESEARCH_ONLY. K15cert112.77->33.82s; RX20difference<10s;
+K20S0 BASEopen1200 vs STOCKcert101.64s; S1 BASEopen vs V2cert90.23s.
+All5 primary n35 open. K35betterU/worseL, RB35T1/RX35T1bothbetter;
+RB35T2/RX35T2primary betterL/worseU (RX35T2signedgap also worse despite
+smallerrelativegap). S1 RB35T2 V2U.32224484/L.23113945 vs BASE
+U.35955368/L.21814622: bothbetter, retains adverse S0 separately.
+Twenty real LPs complete, four positive stock increments; TC/GS/AP scopes clear.
+Exact tiny full-aux/CDF/zero-loaded-return replay and selected dependencies pass.
+Continuous selected-P hull, TC complementarity and conditional GS inclusion
+proved/reviewed; no full integer/route hull or arbitrary historicGS dominance.
+No further Optimize needed. Next minimal question is fixed-domain target-MIP
+incumbent discovery, not another broad benchmark/Seed/AM grid.
 
-Full plan: experiment_plan.json and matrix_frozen.json. Eight physical/objective
-configurations / six base inputs / 16 nominal core method positions; eight
-strictly matched accepted R137 baselines reused, eight new STOCK runs. Also
-one contemporaneous K15 frozen-PE BASE bridge and two 90s micro runs, total11
-new positions. Independent reviewer must write full_admission.json with exact
-matrix SHA and ACCEPT before run. Pilot is positions1-4; do not launch duplicate
-healthy processes or overwrite failed evidence. `round138_campaign.py run 4`
-executes pilot, later `run 11` completes remaining entered panel. Every run
-uses inherited complete producer, physical/H/Start/certificate reader, plus
-actual new stock rows audited in every used model. Baseline full costs were
-paid independently in R137 and are not newly charged.
+Additive local semantic PASSall15 new arms (physical, seals, lifecycle/params,
+every used stock row and multiplicity). Original full H/Start/proof audits kept;
+no relabelled independent full semantic replay. V2entry9vectors+2refusalsPASS.
+Science cost snapshot fixed; final accounting must add later ordinary steps.
+Accounting includes closed ordinary receipts; interactive edit/review/Git not
+exhaustively timed. Do not treat ordinary or nested H/LP/MIP as extra G1.
 
-Update 2026-10-29 02:14 Asia/Shanghai: full admission ACCEPT. Position1 BASE
-native returned OPTIMAL and was sealed; its first postreader incorrectly used
-legacy rather than modern event ordering for `baseline-r137`. Original failed
-fee/log retained; no native rerun. Strict modern lifecycle private namespace
-and the narrow two-helper amendment were independently reviewed (including
-three negative controls) and accepted in review/reader_amendment.json. Original
-matrix bytes remain unchanged. Only verification was resumed under engineering
-fee arm_001_verify02; it passed. Formal T_produce=122.57938176719472s; U and L
-match R137. Failed native fee charged the original producer once. The next
-`run 4` skips sealed/qualified position1 and starts positions2-4. Current active
-session identity/PID and fee files determine progress; never restart a healthy
-running position. Production source/PE, solve commands and original policy
-were unchanged by this postreader correction.
+Current PDF SHA35ac859af077ae659fbc601664ddfc95f82cc104446d671904c5ba415d3b6e8b,
+13pages, attempt02, final PNGs qa_pages/page-01..13. Marker succeeded EXACTLY
+ONCE already. Do not repeat marker. Root inspected latest6/9/10/13, table labels/
+whole-table pagination/duplicate discussion/float flow/annotation crossing fixed.
+Independent reviewer /root/independent_review now actually reviewing ALL latest
+pages and final science. Wait for final_integration.json/md acceptance.
+Only remaining TeX warning duplicate hyperref colorlinks, no overfull.
+Old PDF/render attempts retained under E-work/temp/round138. Poppler rendering +
+bundled pypdf; no installs. Matplotlib reuses R137python-packages cache.
 
-Update 02:22: all four pilot positions have sealed qualified results. STOCK
-certifies K15 in33.818226547s, RX20 in15.340479234s, K20 in101.635384901s;
-matching R137 times112.769303117s,20.506461604s, and K20 open at cap1200.
-pilot_decision.json authorizes completing positions5-11 with identical frozen
-candidate and commands. Ordinary commit2b0dd40bf records only postreader/paper
-scaffolding and pilot decision; production source pin and PE remain839283773.
-`round138_campaign.py run 11` has now been launched. It skips1-4, runs K35,
-the four n35 resource roles, then BASE/STOCK micro. It may need about3.3h if
-the five n35 positions all exhaust caps. Inspect small active_position/runtime
-metadata and owned fee PID; do not start another run. Avoid build/heavy I/O/PDF
-while native timing is active. Need choose and preregister limited Seed1 after
-Seed0 outcomes, still no new source/profile changes during the comparison.
+Remaining required actions (no more permission needed):
+1. Finish actual PDF/science review; pdf_visual_review.json binds PDF_SHA,
+   render_manifest_SHA, actual page IDs/reviewers. Update export pending flag.
+2. Refresh refs/#199: initial mainb2b940c1, R137 accepted72fdcd31, PR199openDraft.
+   Current branch codex/round138-shared-product-resource-coupling. If main
+   absorbed R137 base=main else codex/round137-gi-tbc-consolidation. No merge.
+3. Archive using round138_delivery.py archive (updated V2/current source plus
+   existing V1 carrier). Diagnostics roots/qual/fees/infra/repair/costsegments,
+   only CLOSED ordinary dirs; never capture own open archive receipt/stdout.
+   No other carrier created yet. Screen using closeout.py screen.
+4. Normal commit/push ONLY R138/scripts/docs. Use git add --sparse explicit
+   paths; many old untracked R137 assets exist, never global addA/delete them.
+5. Create English Draft PR title: Round138: study shared-product consistency
+   with global inventory and resource budgets. Attach with app attach_artifact,
+   read actual draft/state/base/head. NO push/PR/public check has happened yet.
+6. publication_pin.json from pushed SCIENCE commit and published Git blob bytes:
+   commit40hex, manifest_path, manifest_SHA, manifest_bytes. Run public_read.py
+   only new-carrier/archive/member byte checks, cumulative1800s, same owned
+   E-work/restore/round138-public on resume. No Gitfallback/vendor/build/Optimize.
+   R137 prior public full-semantic limitation stays unchanged; no old restore.
+7. PR_delivery.json needs URL/number/state/draft. After actual publicPASS and
+   finalQA/DraftPR run closeout.py cleanup: ONLY exact qa_pages PNGs matching
+   current PDF/rendered hashes/current screened+public manifest and archivedPDF
+   member hash. Keep unique raw/failures/PE/DLL/old trees. Record free-space.
+8. Final ordinary cost/PR/public/cleanup/continuation metadata normal commit/push
+   as deltas, no recursive repack of fixed science. Read actual PR head/state.
+   Ask reviewer bounded actual delivery check; only then goal complete.
+9. Final Chinese six answers with PR/report and PDF output citation exactly once
+   in its own paragraph per PDF skill. All entered comparisons must remain.
 
-Update around02:50: current long runner session61535 is healthy on position5
-K35 (startUTC18:21:45, local02:21:45; cap2400). It will automatically proceed
-to6-11; inspect owned fee/PID and small active_position/runtime metadata before
-any action. No extra experiments during this timed sequence. Avoid build,
-heavy I/O, Git commits and PDF exports until it closes. Native LP/seed/row/Start
-checks for1-4 passed. Pending5-11 may take until about05:40 local in worst case.
-
-New code scaffolding, not yet executed: round138_documents.py (assemble/PDF only
-after final decision), round138_delivery.py (additive local checks/carriers only
-after no open fee), round138_tiny_read.py (prepare7 selected old members after
-native closes; portable exact tiny replay). Public byte-read script is still
-to be written. Source C++ and PE have not changed; do not rebuild them.
-
-Optional E offline checks actually completed in round138_offline_products.py:
-four stock LP vectors have zero handling-product violation; RX20 and RX35-T2
-handling caps >=B make those products locally VD-P implied (proof appended to
-mathematical_analysis.md). Four existing GS optimal vectors also satisfy the
-products for tighter safe lower S bounds, using exact stored-double arithmetic.
-These are point checks, not new LP optima/redundancy claims. Reports are in
-reports/offline_products.json; zero new Optimize and no new Seed invented.
-Independent reviewer requested four prose fixes, now applied: full VD-P incl
-sum(q)=g, full-precision claim limited to new rows, D>0/weights/lambda>=0,
-and reports/LP.json distinguishes report Optimize0 from source LP Optimize20.
-
-Update03:02: position5 K35 completed and qualified open. STOCK U=.6695955692140068,
-L=.556776897983438; R137 BASE U=.6928543586313136,L=.565765681464995. Opposed
-endpoints: stock has better U but worse L; smaller signed/relative gap cannot
-hide the L regression. It is a clear Seed1 mixed-role candidate (K20 is the
-main certificate-benefit candidate). Position6 R-B35-S-T1 automatically started
-UTC19:01:21/local03:01:21. Running session remains61535. Completed experiment
-G1=2658.7819087004755s; active position6 is additionally reserved/ongoing.
-
-Additional scaffolds now present: round138_plots.py, round138_public_read.py,
-round138_ordinary.py, round138_tiny_read.py. Syntax was checked, but no plots,
-PDF, archives, additive replay, public read or cleanup has yet run. Post-native
-ordinary steps should use round138_ordinary.py (not common.meter), since child
-guards require no open experiment fee; it records disjoint ordinary seconds.
-Publication uses finite binary carriers with internal member index. Public
-script needs publication_pin.json after science commit/push and performs only
-anonymous new-carrier/member byte checks within cumulative1800s, same owned
-E-work restore root on resume, no Git fallback/Optimize/native DLL.
-
-Update04:22: position6 RB35-T1 qualified open, STOCK U=.5699751069873084,
-L=.5008429884159913 vs BASE .59151763477047/.45590389125187164 (both better).
-Position7 RB35-T2 qualified open, STOCK U=.4012002178390506,L=.22918159966432358
-vs BASE .34464262559194814/.2189859496034747 (better L, materially worse U
-and gap). Preserve this adverse result. Position8 RX35-T1 startedUTC20:20:31.746,
-same live session61535, then9 RX35-T2,10/11micro automatically. Seed0 primary
-should finish by about05:40 local if both remaining n35 exhaust2400s.
-
-Accounting correction actually applied (not a solve):26 native zero-Optimize
-export processes total28.38460709922947s conservatively reclassified into
-diagnostic G1 via infra/external_costs.json; original fee receipts unchanged.
-cost_report.json subtracts the same amount once from ordinary net. Last closed
-G1 afterposition7 =7429.463991399389s plus ongoingposition8. Update accounting
-again at final. Source LP Optimize20, not zero; report-generation Optimize0.
-
-Reviewer's latest static fixes applied: tiny_read now dots original objective
-coefficients against all4 exact witnesses and matching IP/zero fleets; ordinary
-wrapper finally records exceptions/timeouts; Seed1 requires unique selected
-roles. Reviewers accept the scripts' design. New pending post-native qualification:
-round138_native_rows.py uses the existing GP Python runtime to read actual new
-coefficients/RHS for7 domains with zero Optimize. Execute only after timed
-campaigns under common.meter kinddiagnostic (actual wall charged); this script
-has no own no-open-fee guard, unlike ordinary stages.
-
-Independent candidate entry now exists, still research-only:
-config/gi_tbc_stock_rlt_round138.json + scripts/paper_s2_stock_rlt.py. They reuse
-the unchanged original paper_s2.plan/execute and only appendstockflag/newPE;
-parent profile byte SHA checked. Static review passed. Pending actual dry check
-round138_entry_check.py (9 main/micro STOCK vectors +2refusals, noOptimize/DLL).
-
-round138_seed1.py scaffold is ready but UNEXECUTED. After Seed0 all11 qualify,
-run analyze full, then write seed1_selection.json with1-2 unique roles and
-English rationale tied to actual results; strong default candidates now K20
-(certificate benefit) and RB35-T2 (adverse), subject to last2 outcomes. `prepare`
-freezes at most4 fresh BASE/STOCK runs, Seed1,H20260626, samePE/controller.
-Get independent review/seed1_admission.json with exact matrixSHA before `run`.
-Both methods independent own H/cost; no favourable repeat replacesSeed0.
-
-Further pending post-native helpers: round138_traces.py collects actual guarded
-controller U/L curves on selected known roles (separate diagnostic native-process
-clock, final values must agree with endpoints), old baselines only3members each.
-Use bundled DOCUMENT_PYTHON for this/matplotlib. round138_plots.py produces
-two additional static figures; documents.py now includes physicalT/lambda/cap
-and G/Pavg/S tables plus guarded traces. Do not run any until no live experiment.
-Public/delivery/archive/ordinary/plots/tiny dependencies/entry/native coeff
-scaffolds remain unexecuted. R137 main entry/config/PE and C++ source/PE839
-remain untouched; no Git operations/build/PDF during native timing.
-
-round138_analyze.py full currently works and writes a PARTIAL report:4 new
-positions,3 core pairs, missing5-11. Re-run only after the sequence or a closed
-stage, and never call a partial report a complete study. After Seed0, choose
-max2 result-selected roles (prioritize main certificate benefit + adverse/mixed
-n35 outcome) and implement a separately frozen paired Seed1 script/matrix with
-fresh BASE/STOCK runs. Keep the8 historical Seed0 baselines and K15 bridge
-distinct. Full source/PE remains839283773; postreader2-helper changes bound by
-review/reader_amendment.json. New auxiliary scripts were created after helper
-freeze and do not change admitted production helpers.
-
-Independent reviewer agent is `/root/independent_review`; user goal H explicitly
-authorizes this delegation. It has completed math/static/LP admission reviews
-and is reviewing the frozen full matrix. Use collaboration followup, not app
-thread tools. No other agents required.
-
-Remaining: full pilot and justified completion; finite Seed1 selected on actual
-results (max two roles paired); optional resource exploration only if informative;
-aggregate U/L/certificates/times/trajectories, explicit research decision;
-paper increment in current R137 lineage and affected-page PDF QA; source/raw
-carriers/portable pure reader, final independent review; normal push and English
-Draft PR (no merge/force push), attach PR; bounded public new-carrier read and
-current-round cleanup/retention receipt. Preserve R137 historical recovery
-limitations, do not reopen all historical recovery or delete old rounds.
-
-PDF skill has been read; before the first PDF authoring command, run the bundled
-mark_artifact_operation_started.mjs once. Use existing document assembly rather
-than old Manuscript sources; keep R137 complete manuscript unchanged. No PDF
-export, build or heavy I/O during timed formal solves.
-
-Update05:01: position8 RX35-T1 qualified open atUTC21:00:10.379,
-STOCK U=.5920260898638284,L=.49102330473230565 vs BASE
-U=.5921904488701923,L=.46335799724827287; both improve (mainly L).
-Position9 RX35-T2 startedUTC21:00:10.433858, live session61535 remains.
-Then10/11micro automatic. Closed G1=9804.289947399404s plus liveposition9.
-New auxiliary scaffolds added UNEXECUTED: round138_report.py (six-question
-report with stable cost snapshot), round138_pdf_qa.py (Poppler render and
-manifest only; actual visual inspection still needed), round138_closeout.py
-(new-carrier finite screen and exact-manifest preview-only cleanup).
-Guide docs/round138_research.md prepared; final stage decision still pending.
-Public_read resume now handles valid complete.part and preserves full corrupt
-part before retransmission; publication_pin must include manifest_bytes. PDF
-export receipt actual-source identity corrected. Independent lightweight
-postprocessing design review ACCEPT, with cleanup binding currentcarrierSHA
-and exact rendered PNG names/hashes applied. New helper sources not committed
-or executed while formal native runs remain active; frozen helpers untouched.
-Tiny_read CLI now accepts optional --receipt; final local run should use
-math/selected_replay.json. Report requires that/nativecoeff/entry/localsemantic
-PASS before generation. No new Optimize, compile, archives or PDF occurred.
+Detailed prior continuation retained in infra/continuation_before_delivery.md.

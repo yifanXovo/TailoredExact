@@ -1,0 +1,506 @@
+{
+  "PASS": true,
+  "cases": {
+    "J2": {
+      "cells": {
+        "base": {
+          "full_matrix": {
+            "status": "EXACT_FEASIBLE",
+            "rows": 583,
+            "bounds": 284,
+            "equality_nonzero": 0,
+            "max_equality_residual": "0",
+            "max_inequality_violation": "0",
+            "failures": []
+          },
+          "CDF": {
+            "B1": {
+              "rows": 38,
+              "new_columns": 20,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            },
+            "B2": {
+              "rows": 70,
+              "new_columns": 40,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            }
+          },
+          "stock_slacks": [
+            "0",
+            "0",
+            "9/4",
+            "0"
+          ],
+          "original_objective": "5404319552844595/36028797018963968"
+        },
+        "stock": {
+          "full_matrix": {
+            "status": "EXACT_FEASIBLE",
+            "rows": 583,
+            "bounds": 284,
+            "equality_nonzero": 0,
+            "max_equality_residual": "0",
+            "max_inequality_violation": "0",
+            "failures": []
+          },
+          "CDF": {
+            "B1": {
+              "rows": 38,
+              "new_columns": 20,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            },
+            "B2": {
+              "rows": 70,
+              "new_columns": 40,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            }
+          },
+          "stock_slacks": [
+            "0",
+            "0",
+            "9/4",
+            "0"
+          ],
+          "original_objective": "5404319552844595/36028797018963968"
+        },
+        "tc": {
+          "full_matrix": {
+            "status": "EXACT_FEASIBLE",
+            "rows": 583,
+            "bounds": 284,
+            "equality_nonzero": 0,
+            "max_equality_residual": "0",
+            "max_inequality_violation": "0",
+            "failures": []
+          },
+          "CDF": {
+            "B1": {
+              "rows": 38,
+              "new_columns": 20,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            },
+            "B2": {
+              "rows": 70,
+              "new_columns": 40,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_Q_1_2": "3/16",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_Q_2_2": "3/16",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_Q_3_2": "3/16",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1",
+                "otepi_Q_4_2": "3/16"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            }
+          },
+          "stock_slacks": [
+            "3/4",
+            "3/16",
+            "3/2",
+            "-3/16"
+          ],
+          "original_objective": "12159718993900339/36028797018963968"
+        },
+        "tc_stock": {
+          "full_matrix": {
+            "status": "EXACT_FEASIBLE",
+            "rows": 583,
+            "bounds": 284,
+            "equality_nonzero": 0,
+            "max_equality_residual": "0",
+            "max_inequality_violation": "0",
+            "failures": []
+          },
+          "CDF": {
+            "B1": {
+              "rows": 38,
+              "new_columns": 20,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            },
+            "B2": {
+              "rows": 70,
+              "new_columns": 40,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_Q_1_1": "1/16",
+                "otepi_Q_1_2": "1/4",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_Q_2_1": "1/16",
+                "otepi_Q_2_2": "1/4",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_Q_3_1": "1/16",
+                "otepi_Q_3_2": "1/4",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1",
+                "otepi_Q_4_1": "1/16",
+                "otepi_Q_4_2": "1/4"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            }
+          },
+          "stock_slacks": [
+            "3/4",
+            "0",
+            "3/2",
+            "0"
+          ],
+          "original_objective": "14411518807585587/36028797018963968"
+        }
+      },
+      "matching_IP": true,
+      "zero_inventory_loaded_return_full_matrix": {
+        "status": "EXACT_FEASIBLE",
+        "rows": 583,
+        "bounds": 284,
+        "equality_nonzero": 0,
+        "max_equality_residual": "0",
+        "max_inequality_violation": "0",
+        "failures": []
+      },
+      "zero_stock_slacks": [
+        "0",
+        "9/4",
+        "0",
+        "0"
+      ],
+      "lambda_hat": "5404319552844595/36028797018963968"
+    },
+    "J3": {
+      "cells": {
+        "base": {
+          "full_matrix": {
+            "status": "EXACT_FEASIBLE",
+            "rows": 583,
+            "bounds": 298,
+            "equality_nonzero": 0,
+            "max_equality_residual": "0",
+            "max_inequality_violation": "0",
+            "failures": []
+          },
+          "CDF": {
+            "B1": {
+              "rows": 38,
+              "new_columns": 20,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            },
+            "B2": {
+              "rows": 70,
+              "new_columns": 40,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            }
+          },
+          "stock_slacks": [
+            "0",
+            "0",
+            "9/4",
+            "0"
+          ],
+          "original_objective": "5404319552844595/36028797018963968"
+        },
+        "stock": {
+          "full_matrix": {
+            "status": "EXACT_FEASIBLE",
+            "rows": 583,
+            "bounds": 298,
+            "equality_nonzero": 0,
+            "max_equality_residual": "0",
+            "max_inequality_violation": "0",
+            "failures": []
+          },
+          "CDF": {
+            "B1": {
+              "rows": 38,
+              "new_columns": 20,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            },
+            "B2": {
+              "rows": 70,
+              "new_columns": 40,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            }
+          },
+          "stock_slacks": [
+            "0",
+            "0",
+            "9/4",
+            "0"
+          ],
+          "original_objective": "5404319552844595/36028797018963968"
+        },
+        "tc": {
+          "full_matrix": {
+            "status": "EXACT_FEASIBLE",
+            "rows": 583,
+            "bounds": 298,
+            "equality_nonzero": 0,
+            "max_equality_residual": "0",
+            "max_inequality_violation": "0",
+            "failures": []
+          },
+          "CDF": {
+            "B1": {
+              "rows": 38,
+              "new_columns": 20,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            },
+            "B2": {
+              "rows": 70,
+              "new_columns": 40,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_Q_1_2": "3/16",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_Q_2_2": "3/16",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_Q_3_2": "3/16",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1",
+                "otepi_Q_4_2": "3/16"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            }
+          },
+          "stock_slacks": [
+            "3/4",
+            "3/16",
+            "3/2",
+            "-3/16"
+          ],
+          "original_objective": "12159718993900339/36028797018963968"
+        },
+        "tc_stock": {
+          "full_matrix": {
+            "status": "EXACT_FEASIBLE",
+            "rows": 583,
+            "bounds": 298,
+            "equality_nonzero": 0,
+            "max_equality_residual": "0",
+            "max_inequality_violation": "0",
+            "failures": []
+          },
+          "CDF": {
+            "B1": {
+              "rows": 38,
+              "new_columns": 20,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            },
+            "B2": {
+              "rows": 70,
+              "new_columns": 40,
+              "exact_feasible": true,
+              "actual_prefix_values": {
+                "otepi_C_1_1": "1/4",
+                "otepi_C_1_2": "1",
+                "otepi_Q_1_1": "1/16",
+                "otepi_Q_1_2": "1/4",
+                "otepi_C_2_1": "1/4",
+                "otepi_C_2_2": "1",
+                "otepi_Q_2_1": "1/16",
+                "otepi_Q_2_2": "1/4",
+                "otepi_C_3_1": "1/4",
+                "otepi_C_3_2": "1",
+                "otepi_Q_3_1": "1/16",
+                "otepi_Q_3_2": "1/4",
+                "otepi_C_4_1": "1/4",
+                "otepi_C_4_2": "1",
+                "otepi_Q_4_1": "1/16",
+                "otepi_Q_4_2": "1/4"
+              },
+              "zero_absolute_difference_columns": true,
+              "failures": []
+            }
+          },
+          "stock_slacks": [
+            "3/4",
+            "0",
+            "3/2",
+            "0"
+          ],
+          "original_objective": "14411518807585587/36028797018963968"
+        }
+      },
+      "matching_IP": true,
+      "zero_inventory_loaded_return_full_matrix": {
+        "status": "EXACT_FEASIBLE",
+        "rows": 583,
+        "bounds": 298,
+        "equality_nonzero": 0,
+        "max_equality_residual": "0",
+        "max_inequality_violation": "0",
+        "failures": []
+      },
+      "zero_stock_slacks": [
+        "0",
+        "9/4",
+        "0",
+        "0"
+      ],
+      "lambda_hat": "5404319552844595/36028797018963968"
+    }
+  },
+  "Optimize": 0,
+  "vendor_DLL_loads": 0,
+  "seconds": 0.30626079998910427
+}

@@ -1,38 +1,281 @@
 {
-  "UTC": "2026-10-28T19:19:38.562574+00:00",
+  "UTC": "2026-10-28T23:45:55.846009+00:00",
   "experiment": {
-    "G1_seconds": 2687.166515799705,
-    "remaining_G1_seconds": 83712.8334842003,
+    "G1_seconds": 18214.684111300157,
+    "remaining_G1_seconds": 68185.31588869984,
     "by_category": {
-      "native": 2644.6374928003643,
-      "diagnostic": 42.52902299934067
+      "native": 18139.989471900277,
+      "diagnostic": 74.69463939988054
     },
     "limits": {
       "native": 86400.0,
       "diagnostic": 86400.0
     },
     "category_remaining": {
-      "native": 83755.36250719964,
-      "diagnostic": 86357.47097700066
+      "native": 68260.01052809972,
+      "diagnostic": 86325.30536060012
     },
-    "separately_reported_seconds": 80.13994789938442,
-    "unclosed": [
-      {
-        "label": "arm_006",
-        "kind": "native",
-        "reservation": 2400.0,
-        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round138\\fees\\arm_006\\PID.json"
-      }
-    ],
+    "separately_reported_seconds": 173.68809119984508,
+    "unclosed": [],
     "nested_H_LP_MIP_Work_not_added": true
   },
   "qualification_reclassification_count": 26,
   "qualification_reclassification_seconds": 28.38460709922947,
-  "fee_ordinary_raw_seconds": 80.13994789938442,
-  "fee_ordinary_net_seconds": 51.755340800154954,
-  "additional_disjoint_ordinary_steps_seconds": 0,
-  "additional_disjoint_ordinary_steps": 0,
+  "fee_ordinary_raw_seconds": 173.68809119984508,
+  "fee_ordinary_net_seconds": 145.3034841006156,
+  "additional_disjoint_ordinary_steps_seconds": 40.087757099187,
+  "additional_disjoint_ordinary_steps": 19,
   "no_nested_experiment_double_charge": true,
+  "ordinary_step_receipts": [
+    {
+      "label": "full_summary",
+      "receipt_SHA": "5aec183e03c13026584b60f1f0f01c01716e3e1d71e35138d6d97fb9d7011858",
+      "receipt": {
+        "UTC": "2026-10-28T21:40:17.392121+00:00",
+        "exit_code": 0,
+        "seconds": 3.5226443000137806,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "guarded_trajectories",
+      "receipt_SHA": "3f3ca4da36bfb2663a20def85c647cdb9874baea42689ab2e90da71f3804a35e",
+      "receipt": {
+        "UTC": "2026-10-28T21:59:51.790775+00:00",
+        "exit_code": 1,
+        "seconds": 0.9187016999348998,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "guarded_trajectories02",
+      "receipt_SHA": "29a6d29d8d918ed00248db538a4af8f41b498f3e3b41f667a726b93307878356",
+      "receipt": {
+        "UTC": "2026-10-28T22:00:43.646898+00:00",
+        "exit_code": 0,
+        "seconds": 6.413404899882153,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "guarded_trajectories03",
+      "receipt_SHA": "e078ce18969b0decdcd4352e6ba9d7e8746fd5ea48a5c4bca946dfd7b8b01180",
+      "receipt": {
+        "UTC": "2026-10-28T22:01:46.274835+00:00",
+        "exit_code": 0,
+        "seconds": 2.259330000029877,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "local_semantic",
+      "receipt_SHA": "143ffbca9b1fd42bbbc7a8988ea700842016e2d8c2ef90b3d2d45a08347e7f99",
+      "receipt": {
+        "UTC": "2026-10-28T23:45:22.196244+00:00",
+        "exit_code": 0,
+        "seconds": 17.058373699896038,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "preserve_pre_coefficient_fix",
+      "receipt_SHA": "a1e59b4fedc3f0168f09048d1c718ad1e29e87469220f43126ee592523736a9e",
+      "receipt": {
+        "UTC": "2026-10-28T21:48:56.504952+00:00",
+        "exit_code": 0,
+        "seconds": 0.45318950014188886,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scaled_reader_preflight",
+      "receipt_SHA": "8ff8a6f11e8b8ea375e0d388fcc5223773372c69c65e6aa251a55d62bdf2b722",
+      "receipt": {
+        "UTC": "2026-10-28T21:57:51.006665+00:00",
+        "exit_code": 0,
+        "seconds": 1.2340121997985989,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_decision",
+      "receipt_SHA": "577f76bd429eb15def950d49dc556427563666746e2d716c0e7294c97574cb4c",
+      "receipt": {
+        "UTC": "2026-10-28T23:45:55.444105+00:00",
+        "exit_code": 0,
+        "seconds": 0.14210339984856546,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_figures",
+      "receipt_SHA": "d2ea4d11b90b37b38a307594037a4595d7298be28ea092afd09e2a5e0c5cb2d7",
+      "receipt": {
+        "UTC": "2026-10-28T21:59:52.257109+00:00",
+        "exit_code": 1,
+        "seconds": 0.08531769993714988,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_figures02",
+      "receipt_SHA": "4bc69bdbd163de303dfee7c556678a675c375dbaf4b3e5e299f6ecedcb045ad1",
+      "receipt": {
+        "UTC": "2026-10-28T22:00:45.516315+00:00",
+        "exit_code": 0,
+        "seconds": 1.4969261998776346,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_figures03",
+      "receipt_SHA": "5c1819e266c1c777062467c7072341e977f1a607fd671236a73fa7dbdb746c90",
+      "receipt": {
+        "UTC": "2026-10-28T22:01:48.171818+00:00",
+        "exit_code": 0,
+        "seconds": 1.4985909999813884,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "seed1_prepare",
+      "receipt_SHA": "3c596eccc5724ccc119b77324c42f6efdd3afe7596530601b636238eb052556d",
+      "receipt": {
+        "UTC": "2026-10-28T21:40:53.194260+00:00",
+        "exit_code": 0,
+        "seconds": 0.6118739999365062,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "seed1_prepare_v2",
+      "receipt_SHA": "14f49a3576e22065154daada97dfeff11c873596c8896c1151ffa57222c60fad",
+      "receipt": {
+        "UTC": "2026-10-28T21:57:08.676501+00:00",
+        "exit_code": 0,
+        "seconds": 0.6237606999929994,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "seed1_summary",
+      "receipt_SHA": "3fd2acaa546a887cf93b8c45c066d3621c5816585ea82b0d84ba9edf58d60e45",
+      "receipt": {
+        "UTC": "2026-10-28T23:44:52.133741+00:00",
+        "exit_code": 0,
+        "seconds": 0.6555959000252187,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "seed1_v2_admission_preflight",
+      "receipt_SHA": "f56221495dbf2186ef4c0137dc7d7e211085da8709e1bbd3d519c680976180e5",
+      "receipt": {
+        "UTC": "2026-10-28T22:02:52.966050+00:00",
+        "exit_code": 0,
+        "seconds": 0.6673952999990433,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "tiny_dependencies",
+      "receipt_SHA": "0d0bdf58b85b01b9cc852fa6217656a7bc8849bbcac10c1d0b46156f0823ccdb",
+      "receipt": {
+        "UTC": "2026-10-28T21:59:49.681263+00:00",
+        "exit_code": 0,
+        "seconds": 0.1798980999737978,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "tiny_exact_replay",
+      "receipt_SHA": "9d2bb09d9ab844d3ee3d51131f830834c93cb974e7f13eaf914dd1adf801b4a5",
+      "receipt": {
+        "UTC": "2026-10-28T21:59:50.493095+00:00",
+        "exit_code": 0,
+        "seconds": 0.42909469990991056,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "v2_entry_check",
+      "receipt_SHA": "74f85b29fbe1d7e981cc208b5e38fe517c146178f6cbad58f6b541dd0e8ba228",
+      "receipt": {
+        "UTC": "2026-10-28T21:56:21.830889+00:00",
+        "exit_code": 0,
+        "seconds": 1.6223138000350446,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "v2_metadata_bindings",
+      "receipt_SHA": "e39dc72862c759155762b6207c8afb9878f8638032db3acdab7f80ed5d72f9ff",
+      "receipt": {
+        "UTC": "2026-10-28T21:55:25.688660+00:00",
+        "exit_code": 0,
+        "seconds": 0.21522999997250736,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    }
+  ],
+  "ordinary_precision_scope": "Individually metered build/verification and explicit ordinary steps; interactive reading, editing, review and intermediate Git/tool actions are not exhaustively timed",
   "initial_interactive_reading_and_writing_not_precision_metered": true,
   "during_native_offline_point_check_seconds": 0.05261030001565814,
   "during_native_offline_seconds_overlap_and_are_not_added_again": true

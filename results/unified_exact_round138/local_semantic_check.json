@@ -1,0 +1,1016 @@
+{
+  "PASS": true,
+  "UTC": "2026-10-28T23:45:22.093771+00:00",
+  "arms": [
+    {
+      "arm_id": "R138_001_K-15-S_S0_BASE",
+      "method": "BASE",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.5922648822560825,
+      "L": 0.5922648792385111,
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.33118025372558535,
+          "B": 135,
+          "Bminus": 75,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.33118025372558535,
+          "actual_beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 5,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "9ddb97a4f0cf8a1ad7e583d6cb8b55cc302dbd14a4989218124a6df33f2ce3c1",
+      "closeout_SHA": "ddbf2eaf0014da946574b782eb8ffc9cdd4777429261886dde509c4698003e5e"
+    },
+    {
+      "arm_id": "R138_002_K-15-S_S0_STOCK",
+      "method": "STOCK",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560638,
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.33118025372558535,
+          "B": 135,
+          "Bminus": 75,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.33118025372558535,
+          "actual_beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.6623605074511707,
+          "B": 135,
+          "Bminus": 75,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "e66b977bf6b96e2fb135336d01d6bc0f1c185e610e55257428c6cc19f7cfc93b",
+      "closeout_SHA": "9b7584583cb8207f29064788113bb89f34d428f678238a1f782a333d0c2128b7"
+    },
+    {
+      "arm_id": "R138_003_R-X20-S-T1_S0_STOCK",
+      "method": "STOCK",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.6453250303858205,
+      "L": 0.6453250303858192,
+      "physical_return_loads": [
+        0,
+        1
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7530539180896818,
+          "B": 65,
+          "Bminus": 5,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.3765269590448409,
+          "B": 65,
+          "Bminus": 5,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.3765269590448409,
+          "actual_beta": 0.7530539180896818,
+          "B": 65,
+          "Bminus": 5,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7530539180896818,
+          "B": 65,
+          "Bminus": 5,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "5366c04302d754012b65b40351b6851694f6460bb65fa69832310432b2426aef",
+      "closeout_SHA": "546143fde2cd2caf52c137e2af5f74ab6605fa24518234b062e4b730bea05d0b"
+    },
+    {
+      "arm_id": "R138_004_K-20-S_S0_STOCK",
+      "method": "STOCK",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.7168065462777502,
+      "L": 0.7168065462777424,
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.38760637890126093,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.38760637890126093,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "d05e5c05423403451e487d6370b9dd78f79f6f9e542462f6fb9c50c581547d92",
+      "closeout_SHA": "73664de89ad8adaf5191107f11717a7217d93e64ff9af1ee3b9ecc1a0f112789"
+    },
+    {
+      "arm_id": "R138_005_K-35-U_S0_STOCK",
+      "method": "STOCK",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.6695955692140068,
+      "L": 0.556776897983438,
+      "physical_return_loads": [
+        12,
+        0,
+        15
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7674566047247167,
+          "B": 326,
+          "Bminus": 251,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.38372830236235833,
+          "B": 326,
+          "Bminus": 251,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.38372830236235833,
+          "actual_beta": 0.7674566047247167,
+          "B": 326,
+          "Bminus": 251,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7674566047247167,
+          "B": 326,
+          "Bminus": 251,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "7944668fc25c785f2564c1a5a5314720729e18c2dbcb6abff8d824e1a8faa59f",
+      "closeout_SHA": "40265b24cd28a3e06c8d6007dedd45a065b694e621f51d3d24d1d5c13ddaf003"
+    },
+    {
+      "arm_id": "R138_006_R-B35-S-T1_S0_STOCK",
+      "method": "STOCK",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.5699751069873084,
+      "L": 0.5008429884159913,
+      "physical_return_loads": [
+        0,
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.6351732034025019,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.31758660170125097,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.31758660170125097,
+          "actual_beta": 0.6351732034025019,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.6351732034025019,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "494c53345da284e1a09430cb025dded3d483666d1ea3f8ec4de16ecab0ee3086",
+      "closeout_SHA": "a159bb8660c9812510e47438f2b9fc10d0bfc1af72f8da278baac44d0aacc2d2"
+    },
+    {
+      "arm_id": "R138_007_R-B35-S-T2_S0_STOCK",
+      "method": "STOCK",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.4012002178390506,
+      "L": 0.22918159966432358,
+      "physical_return_loads": [
+        5,
+        0,
+        5
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.22274490447589837,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.22274490447589837,
+          "actual_beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "e93d43d85131b65b2a039deeafaf677265a8a14f6337d864bafbce4f4f10a085",
+      "closeout_SHA": "b5a487b216d6eb81247115005b7e70813e2efbe53f94b4d82ad7c7cbab2f605f"
+    },
+    {
+      "arm_id": "R138_008_R-X35-S-T1_S0_STOCK",
+      "method": "STOCK",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.5920260898638284,
+      "L": 0.49102330473230565,
+      "physical_return_loads": [
+        0,
+        1,
+        0
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.6197695177886836,
+          "B": 146,
+          "Bminus": 71,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.3098847588943418,
+          "B": 146,
+          "Bminus": 71,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.3098847588943418,
+          "actual_beta": 0.6197695177886836,
+          "B": 146,
+          "Bminus": 71,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.6197695177886836,
+          "B": 146,
+          "Bminus": 71,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "9853dfab6d1c6cd7036feb339758f3f5f0f20c489347ec45d06b94a8cbe94dc4",
+      "closeout_SHA": "065b0b491280d5560f247def7f3ad66221d0030d3142b39518f10c4984df7707"
+    },
+    {
+      "arm_id": "R138_009_R-X35-S-T2_S0_STOCK",
+      "method": "STOCK",
+      "seed": 0,
+      "certificate": false,
+      "U": 0.40985548222597845,
+      "L": 0.21498016272542564,
+      "physical_return_loads": [
+        1,
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.4246498451636407,
+          "B": 146,
+          "Bminus": 71,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.21232492258182034,
+          "B": 146,
+          "Bminus": 71,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.21232492258182034,
+          "actual_beta": 0.4246498451636407,
+          "B": 146,
+          "Bminus": 71,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.4246498451636407,
+          "B": 146,
+          "Bminus": 71,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "e8c88fe38134bf76f5022b3871d80ed17d3c855e1b7fd1841737a1a7bc01f163",
+      "closeout_SHA": "ca1f04e9aad3d13697c76c6450a748cf35b3945cf9a7c70d5ce311aadc4dff04"
+    },
+    {
+      "arm_id": "R138_010_SM-B10-B_S0_BASE",
+      "method": "BASE",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.5358910752996684,
+          "B": 60,
+          "Bminus": 20,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 1,
+        "returned": [
+          1
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "a73f807907fc24107f350e21548499198cd7a861fb61f0b46f99cae9d0436548",
+      "closeout_SHA": "1f72767f97c8400339bcde17127efcf2c9789c01e556fca5a109057bfda634d8"
+    },
+    {
+      "arm_id": "R138_011_SM-B10-B_S0_STOCK",
+      "method": "STOCK",
+      "seed": 0,
+      "certificate": true,
+      "U": 0.5358910752996684,
+      "L": 0.5358910752996684,
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.5358910752996684,
+          "B": 60,
+          "Bminus": 20,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 1,
+        "returned": [
+          1
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "9774c1ec7f5268571e5aeef5ba010794e8e2349d72c9793b3ccf468ab35ab393",
+      "closeout_SHA": "9453606a6005ad5b7a34317e97abdf39a700d6a785ac63f28638beaa93f1d724"
+    },
+    {
+      "arm_id": "R138_S1_001_K-20-S_BASE",
+      "method": "BASE",
+      "seed": 1,
+      "certificate": false,
+      "U": 0.7168065462777502,
+      "L": 0.7016685009666251,
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.38760637890126093,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.38760637890126093,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 5,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "68b5a17935b42449e07866bdff59839a634a55e10b3ef9333763dee05c0d5e1f",
+      "closeout_SHA": "70c9efb5bf5e7f45862e95123efb2bc3feb3b97be63512101f26529ba791f976"
+    },
+    {
+      "arm_id": "R138_S1_002_K-20-S_STOCK",
+      "method": "STOCK",
+      "seed": 1,
+      "certificate": true,
+      "U": 0.7168065462777502,
+      "L": 0.7168065462777444,
+      "physical_return_loads": [
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true,
+          "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.38760637890126093,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true,
+          "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.38760637890126093,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true,
+          "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.7752127578025219,
+          "B": 208,
+          "Bminus": 148,
+          "actual_canonical_rows_checked": true,
+          "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "2b570aca265a3d1f82277f0549488551e3a48154f58019d3acfe56b42e2f9054",
+      "closeout_SHA": "003cf16d765285464f9a4a39b3cddc28a44af69f46e30df7c7c6749ac761e717"
+    },
+    {
+      "arm_id": "R138_S1_003_R-B35-S-T2_STOCK",
+      "method": "STOCK",
+      "seed": 1,
+      "certificate": false,
+      "U": 0.32224484174746326,
+      "L": 0.2311394490964326,
+      "physical_return_loads": [
+        0,
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true,
+          "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.22274490447589837,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true,
+          "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.22274490447589837,
+          "actual_beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true,
+          "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+        },
+        {
+          "enabled": true,
+          "rows": 4,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true,
+          "transport": "V2 exact positive power-of-two scaling for tiny nonzero slopes"
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "b88b62bcf22b4c1f4bee77e67d1464b0e3d21671d86e832fe800fb6829c1aba2",
+      "closeout_SHA": "b022974e09812dbeb57d9f1937731a89fed8f060f61531f03602b077fe6a0d40"
+    },
+    {
+      "arm_id": "R138_S1_004_R-B35-S-T2_BASE",
+      "method": "BASE",
+      "seed": 1,
+      "certificate": false,
+      "U": 0.3595536804168414,
+      "L": 0.2181462246050608,
+      "physical_return_loads": [
+        0,
+        0,
+        0
+      ],
+      "models": [
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.22274490447589837,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.22274490447589837,
+          "actual_beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        },
+        {
+          "enabled": false,
+          "rows": 0,
+          "actual_alpha": 0.0,
+          "actual_beta": 0.44548980895179674,
+          "B": 236,
+          "Bminus": 161,
+          "actual_canonical_rows_checked": true
+        }
+      ],
+      "lifecycle": {
+        "declared": 4,
+        "returned": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "source_revoked": false
+      },
+      "audit_SHA": "134269437f780b59f462fff12acd4988d951a1c5d0554ca6fe95cbfc76676e1f",
+      "closeout_SHA": "d6605bb31d4c3bc39dd26828c95114cd9223d57acf2b6df7eed2d273842c0667"
+    }
+  ],
+  "seconds": 16.53229150013067,
+  "Optimize": 0,
+  "vendor_DLL_loads": 0,
+  "scope": "Additive pure replay of physical fleets, modern lifecycle/parameters, seals and every used model stock row; complete H/Start/proof qualification is retained from each original full postproduction reader, not relabelled as a new independent full semantic replay"
+}

@@ -23,3 +23,13 @@ retained unchanged under [history](history/unified_exact_research_index_through_
 Those statements describe that historical round. The
 [R135 mathematical/history note](../results/unified_exact_round135/ap_math_and_history.md)
 and supplement preserve earlier antecedents and negative results.
+# Round138 addition: shared products and global inventory
+
+The [research guide](round138_research.md),
+[six-question report](../results/unified_exact_round138/final_report.md) and
+[incremental manuscript](../results/unified_exact_round138/manuscript.md)
+record the default-off four-row inventory RLT study. The exact continuous-block
+scope, tiny TC complementarity, conditional GS relation, real LP controls and
+mixed full outcomes remain distinct. Decision: research-only; accepted GI-TBC
+is retained. V1 primary evidence and the V2 coefficient-transport repair/Seed1
+confirmation have separate source/PE bindings and a finite Native matrix bridge.

@@ -75,6 +75,32 @@ sides are rounded outward by one ULP: upward for upper rows, downward for lower
 rows. Exact Fraction checks confirm their directions. No general tolerance or
 native proof policy changes.
 
+Actual native coefficient readback subsequently exposed an additional transport
+boundary: Gurobi omitted the negative Y coefficients in the test with
+\(\alpha=10^{-13}\), despite their full-precision LP text. Small matrix
+coefficients can be treated as zero by the native optimizer
+[@GurobiNumericR138]. Deleting these negative terms from an upper row could
+strengthen it unsafely; feasibility tolerance is not a validity argument.
+The separately identified V2 writer therefore scales only a new row whose
+nonzero slope has magnitude below \(10^{-12}\). It uses the smallest positive
+power of two that raises that slope to at least \(10^{-12}\), multiplying
+every coefficient and the already outward RHS by the same finite `ldexp`.
+Binary power-of-two multiplication is exact here, so normalization recovers
+the original stored coefficients and outward RHS. Nonfinite transport is
+rejected. The \(10^{-13}\) test uses factors 16, 1, 1, 16; all seven native
+coefficient/RHS readbacks pass after this fix.
+
+All 33 used STOCK calls in the primary V1 study, representing 25 unique
+model matrices, have positive interval endpoints at least
+0.21232492258182034. Their scaling factor is one, and actual native readback
+confirms every intended new coefficient and RHS. The 20 same-domain LPs also
+avoid the changed branch. Primary V1 data keep their original source/PE
+identity. V2 is separately built and registered for the limited Seed1
+confirmation and delivered research entry; this build change is disclosed.
+The failure, exact source carrier, zero-Optimize bridge and independently
+reviewed replacement registration are retained under `repair/` and
+`qualification/`.
+
 ## 3. Continuous selected-resource product hull
 
 Let \(\mathcal P=\{s\ge0:\sum_y s_{iy}=1,\ As\le b\}\), and let
@@ -200,6 +226,47 @@ same-domain reoptimizations reported separately.
 The new GS controls use the same saved domain, a proved fractional-inventory
 knapsack upper bound on S, no reverse-H inequality, no S buckets and no
 controller change. Independent W and shared W controls are named separately.
+
+**Conditional relation for the present GS controls.** Suppose
+\(S(s)=c^\top s\) has bounds \(S_l\le S(s)\le S_u\) valid for the
+selected continuous stock polytope \(\mathcal P\) of Section 3, and write
+\(W_{\rm shared}=c^\top q\). The endpoint decomposition gives
+
+\[
+W_{\rm shared}-\alpha S=(g-\alpha)S(s^\beta),\qquad
+\beta S-W_{\rm shared}=(\beta-g)S(s^\alpha).
+\]
+
+Bounding both endpoint S values between \(S_l,S_u\) yields the four
+aggregate McCormick inequalities. Endpoint and collapsed intervals use the
+exact product relation already established. With identical common base rows,
+and retaining \(H_\Sigma\le nW_{\rm shared}\), this proves the conditional
+inclusions in the original variable space
+
+\[
+\mathcal F_{\rm stock}\subseteq\mathcal F_{\rm shared\ GS}
+\subseteq\operatorname{proj}_{\rm original}
+             (\mathcal F_{\rm independent\ GS}).
+\]
+
+For the second inclusion choose the independent aggregate variable equal to
+the shared one; it has zero objective coefficient and no additional unrelated
+constraints in this control. The present fractional-inventory-knapsack upper
+bounds use the same visible supports, stock upper bound and ratio coefficients,
+so they are valid for this \(\mathcal P\); \(S_l=0\) is valid by nonnegativity.
+The additional lower stock bound only tightens \(\mathcal P\). Thus the
+corollary applies to these ideal mathematical controls. Equal optimal values
+on K35 do not turn either inclusion into equality of feasible regions.
+
+The displayed heterogeneous witness shows that shared GS does not imply stock
+in the pure product block. It does not establish strict inclusion after all
+BRP/TC rows are added. If an S bound uses route, cutoff or other information
+outside the selected stock \(\mathcal P\), the premise must be proved anew;
+this is not dominance over arbitrary historical GS architectures. Actual
+outward/native floating-point matrices remain supported by their numerical
+comparisons and readback, rather than being relabeled exact symbolic dominance
+certificates. This corollary needs no new solve or change to the full candidate.
+
 R55 MC4 and VD-P concern station boxes/state hulls; they are not the missing
 global budget products. R132-133 already distinguish service-coordinate
 strictness from objective gains. R135 AP/IND addresses state-penalty
