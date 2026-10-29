@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-29T11:54:26.195751+00:00",
+  "UTC": "2026-10-29T12:14:03.584740+00:00",
   "experiment": {
     "G1_seconds": 6371.821015599417,
     "remaining_G1_seconds": 51228.17898440058,
@@ -20,8 +20,34 @@
     "nested_H_LP_MIP_Work_not_added": true
   },
   "fee_ordinary_seconds": 91.7436834005639,
-  "additional_disjoint_ordinary_seconds": 47.55091799981892,
+  "additional_disjoint_ordinary_seconds": 484.0674599998165,
   "ordinary_steps": [
+    {
+      "label": "archive_science",
+      "SHA": "9d29d92f353ab64b1684ebcb71764ff07d7803f04d8ec808a56396e2fde0bf7a",
+      "receipt": {
+        "UTC": "2026-10-29T12:01:07.132973+00:00",
+        "exit_code": 0,
+        "seconds": 400.83659059996717,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "cleanup",
+      "SHA": "22b554ef2d04332713c231824fdde99b463a988af7aa45e613a32521d3556446",
+      "receipt": {
+        "UTC": "2026-10-29T12:12:01.172583+00:00",
+        "exit_code": 0,
+        "seconds": 0.10785070015117526,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "scope": "Explicit bounded screening/hash and current-round preview deletion; review/interactive time not assigned precision"
+      }
+    },
     {
       "label": "entry_check",
       "SHA": "65f0e92f86dc2646153fe45cf1241d983b152403b16f31b80b7b01f19405b7fd",
@@ -224,6 +250,19 @@
         "UTC": "2026-10-29T11:43:27.372819+00:00",
         "exit_code": 0,
         "seconds": 1.7902099001221359,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "public_read",
+      "SHA": "70f7fd033c1ce5975031269064490808dafb55b2b6edeff50dc5d4e47aaaa141",
+      "receipt": {
+        "UTC": "2026-10-29T12:09:33.535611+00:00",
+        "exit_code": 0,
+        "seconds": 35.57210069987923,
         "G1_seconds": 0,
         "Optimize": 0,
         "not_also_in_fee_meter": true,
