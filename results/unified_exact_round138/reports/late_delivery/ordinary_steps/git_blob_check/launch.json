@@ -1,0 +1,12 @@
+{
+  "UTC": "2026-10-29T00:05:05.108848+00:00",
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\python.exe",
+    "-B",
+    "-c",
+    "import sys;sys.path.insert(0,\"scripts\");from round138_common import *;commit=git(\"rev-parse\",\"HEAD\").decode().strip();m=read(OUT/\"carrier_manifest.json\");rows=[];[(rows.append(dict(path=c[\"path\"],SHA256=hashlib.sha256(git(\"show\",commit+\":\"+c[\"path\"])).hexdigest(),expected=c[\"SHA256\"]))) for c in m[\"carriers\"]];assert all(r[\"SHA256\"]==r[\"expected\"] for r in rows);path=\"results/unified_exact_round138/carrier_manifest.json\";raw=git(\"show\",commit+\":\"+path);assert hashlib.sha256(raw).hexdigest()==sha(OUT/\"carrier_manifest.json\");write(OUT/\"science_commit_preflight.json\",dict(UTC=utc(),commit=commit,manifest_path=path,manifest_SHA=hashlib.sha256(raw).hexdigest(),manifest_bytes=len(raw),carrier_Git_blobs=rows,all_actual_Git_bytes_match=True,Optimize=0));print(commit,len(rows),\"Git carrier blobs match exact archived bytes\")"
+  ],
+  "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current",
+  "Optimize": 0,
+  "scope": "Ordinary non-experiment operation; solver invocation forbidden by selected script contract"
+}

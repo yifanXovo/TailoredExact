@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-28T23:45:55.846009+00:00",
+  "UTC": "2026-10-29T00:11:06.382263+00:00",
   "experiment": {
     "G1_seconds": 18214.684111300157,
     "remaining_G1_seconds": 68185.31588869984,
@@ -23,10 +23,36 @@
   "qualification_reclassification_seconds": 28.38460709922947,
   "fee_ordinary_raw_seconds": 173.68809119984508,
   "fee_ordinary_net_seconds": 145.3034841006156,
-  "additional_disjoint_ordinary_steps_seconds": 40.087757099187,
-  "additional_disjoint_ordinary_steps": 19,
+  "additional_disjoint_ordinary_steps_seconds": 284.56415719911456,
+  "additional_disjoint_ordinary_steps": 40,
   "no_nested_experiment_double_charge": true,
   "ordinary_step_receipts": [
+    {
+      "label": "commit_science",
+      "receipt_SHA": "7ee0a5d4588048e3e3219ac635a518d2e1d8c21b6a6ed24e5ac9ce2c5ff60684",
+      "receipt": {
+        "UTC": "2026-10-29T00:03:31.898598+00:00",
+        "exit_code": 0,
+        "seconds": 7.174758200068027,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "final_preview_cleanup",
+      "receipt_SHA": "1f694e2c8a549ef6e9cc492ee2028b540a320d0c09522c4cb1bc9968c1107903",
+      "receipt": {
+        "UTC": "2026-10-29T00:10:28.367409+00:00",
+        "exit_code": 0,
+        "seconds": 0.14656390016898513,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
     {
       "label": "full_summary",
       "receipt_SHA": "5aec183e03c13026584b60f1f0f01c01716e3e1d71e35138d6d97fb9d7011858",
@@ -34,6 +60,19 @@
         "UTC": "2026-10-28T21:40:17.392121+00:00",
         "exit_code": 0,
         "seconds": 3.5226443000137806,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "git_blob_check",
+      "receipt_SHA": "3bd37cb992fd0844b5012622d8ac4e5985533be30dd81692345a6009a64ac382",
+      "receipt": {
+        "UTC": "2026-10-29T00:05:06.461345+00:00",
+        "exit_code": 0,
+        "seconds": 1.3482809998095036,
         "G1_seconds": 0,
         "Optimize": 0,
         "not_also_in_fee_meter": true,
@@ -93,12 +132,168 @@
       }
     },
     {
+      "label": "manuscript_assembly",
+      "receipt_SHA": "284b10702f58ec48af5b0031992d555d92f7fde0c9d167ed5df08c337e71941a",
+      "receipt": {
+        "UTC": "2026-10-28T23:45:56.957628+00:00",
+        "exit_code": 0,
+        "seconds": 0.16794620011933148,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_assembly02",
+      "receipt_SHA": "3324f74a4c41c42d2f6e4e49b0d4b3c2b158b73496ab5a1be253e33954421f02",
+      "receipt": {
+        "UTC": "2026-10-28T23:51:41.243088+00:00",
+        "exit_code": 0,
+        "seconds": 0.15766489994712174,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_pdf",
+      "receipt_SHA": "e902ae7991bbd4055e223fd2c28467c2368f80346eda38c91c91441313d67a4d",
+      "receipt": {
+        "UTC": "2026-10-28T23:46:16.306719+00:00",
+        "exit_code": 0,
+        "seconds": 8.39397280011326,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "manuscript_pdf02",
+      "receipt_SHA": "6ce0d0019e0ef194010c8b1ad56c0dea38d99db45c020d0baedd6eb13c8d7581",
+      "receipt": {
+        "UTC": "2026-10-28T23:51:48.243964+00:00",
+        "exit_code": 0,
+        "seconds": 6.645269299857318,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "pdf_render",
+      "receipt_SHA": "e96f35715355113696c3a57d623fe77303838efd26405ea13e3274bf4b9d0330",
+      "receipt": {
+        "UTC": "2026-10-28T23:46:24.834824+00:00",
+        "exit_code": 1,
+        "seconds": 2.8247760999947786,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "pdf_render02",
+      "receipt_SHA": "62d57267ec97f8fac598fb1f1b5e016256ed9c933e7731cd30b3a082b89519d7",
+      "receipt": {
+        "UTC": "2026-10-28T23:47:25.673799+00:00",
+        "exit_code": 0,
+        "seconds": 2.643107800045982,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "pdf_render03",
+      "receipt_SHA": "d6ce51dc4549e3e76b574c82e8149dae56400699e9656b333113d4ec2d9afa31",
+      "receipt": {
+        "UTC": "2026-10-28T23:52:00.494394+00:00",
+        "exit_code": 0,
+        "seconds": 2.645055599976331,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
       "label": "preserve_pre_coefficient_fix",
       "receipt_SHA": "a1e59b4fedc3f0168f09048d1c718ad1e29e87469220f43126ee592523736a9e",
       "receipt": {
         "UTC": "2026-10-28T21:48:56.504952+00:00",
         "exit_code": 0,
         "seconds": 0.45318950014188886,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "public_read",
+      "receipt_SHA": "6d63c77347da7aaf3dde746ddfd1601c79043e9b37cce245bf9a738a14b366d4",
+      "receipt": {
+        "UTC": "2026-10-29T00:09:22.515533+00:00",
+        "exit_code": 1,
+        "seconds": 0.7800131998956203,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "public_read_windows_resume",
+      "receipt_SHA": "b9426b869285ca00fd7798791c02bae043b3627ad21e34ff5ff3522720012b96",
+      "receipt": {
+        "UTC": "2026-10-29T00:10:19.347875+00:00",
+        "exit_code": 0,
+        "seconds": 28.483238799963146,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "publication_screen",
+      "receipt_SHA": "07bdd1e8fbe96e96628d3953f1ea0dd546b6a3fcff4a0eaade2561946ae7183c",
+      "receipt": {
+        "UTC": "2026-10-29T00:01:08.742049+00:00",
+        "exit_code": 0,
+        "seconds": 5.4783030999824405,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "push_science",
+      "receipt_SHA": "0827bbeebc3b67cbd5f060c751ffc7e89ba0194c864e1dca54e21c379a109562",
+      "receipt": {
+        "UTC": "2026-10-29T00:05:36.979760+00:00",
+        "exit_code": 0,
+        "seconds": 30.137066199909896,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "refresh_refs",
+      "receipt_SHA": "0ffdd430c032c1c05206d8058e6ebed6788972a47f039d1b698ffbd336d39c64",
+      "receipt": {
+        "UTC": "2026-10-28T23:56:18.613197+00:00",
+        "exit_code": 0,
+        "seconds": 4.657735700020567,
         "G1_seconds": 0,
         "Optimize": 0,
         "not_also_in_fee_meter": true,
@@ -119,12 +314,38 @@
       }
     },
     {
+      "label": "scientific_archive",
+      "receipt_SHA": "2c4d021e040eb66e0a8793746f9f6acae0a8eb9bc32d436202dad18a2feb33b0",
+      "receipt": {
+        "UTC": "2026-10-29T00:00:52.241586+00:00",
+        "exit_code": 0,
+        "seconds": 139.08364730002359,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
       "label": "scientific_decision",
       "receipt_SHA": "577f76bd429eb15def950d49dc556427563666746e2d716c0e7294c97574cb4c",
       "receipt": {
         "UTC": "2026-10-28T23:45:55.444105+00:00",
         "exit_code": 0,
         "seconds": 0.14210339984856546,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_decision02",
+      "receipt_SHA": "95209ca692a0520b89e7af69bc07b8dd91e51d505e0a36c7a8017f1e76dbccf9",
+      "receipt": {
+        "UTC": "2026-10-28T23:51:40.187799+00:00",
+        "exit_code": 0,
+        "seconds": 0.1422430998645723,
         "G1_seconds": 0,
         "Optimize": 0,
         "not_also_in_fee_meter": true,
@@ -164,6 +385,45 @@
         "UTC": "2026-10-28T22:01:48.171818+00:00",
         "exit_code": 0,
         "seconds": 1.4985909999813884,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_figures04",
+      "receipt_SHA": "13469c9812fd3b103d4b80477cc00bd0a6f8cc29372837b5c9f7cc413876f75c",
+      "receipt": {
+        "UTC": "2026-10-28T23:51:39.688769+00:00",
+        "exit_code": 0,
+        "seconds": 1.5026812001597136,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_report",
+      "receipt_SHA": "5de5246dd91eb2eb531804a889ee8e1a1489acd2d44c620330d1fe784b2df1e0",
+      "receipt": {
+        "UTC": "2026-10-28T23:45:56.391704+00:00",
+        "exit_code": 0,
+        "seconds": 0.17768780002370477,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "scientific_report02",
+      "receipt_SHA": "07e01f2b6ea54cc42763d9b1c1ec6d6e25dad38307111b8be4a511f7b71998a8",
+      "receipt": {
+        "UTC": "2026-10-28T23:51:40.705500+00:00",
+        "exit_code": 0,
+        "seconds": 0.15661889989860356,
         "G1_seconds": 0,
         "Optimize": 0,
         "not_also_in_fee_meter": true,
@@ -216,6 +476,19 @@
         "UTC": "2026-10-28T22:02:52.966050+00:00",
         "exit_code": 0,
         "seconds": 0.6673952999990433,
+        "G1_seconds": 0,
+        "Optimize": 0,
+        "not_also_in_fee_meter": true,
+        "failure": null
+      }
+    },
+    {
+      "label": "stage_science",
+      "receipt_SHA": "aefd42d8b46af1403733b442487ef577b2e3681025087fbeb9aa92f846c47751",
+      "receipt": {
+        "UTC": "2026-10-29T00:03:23.285179+00:00",
+        "exit_code": 0,
+        "seconds": 1.7297690000850707,
         "G1_seconds": 0,
         "Optimize": 0,
         "not_also_in_fee_meter": true,

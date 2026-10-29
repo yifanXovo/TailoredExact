@@ -371,3 +371,10 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round137/** -text whitespace=cr-at-eol
 /results/unified_exact_round137/**/*.log -whitespace
 /config/gi_tbc_round137.json -text whitespace=cr-at-eol
+
+# Round138 actual execution, reviewed receipts and late delivery preserve bytes.
+/scripts/*round138* -text whitespace=cr-at-eol
+/scripts/paper_s2_stock_rlt.py -text whitespace=cr-at-eol
+/config/gi_tbc_stock_rlt_round138.json -text whitespace=cr-at-eol
+/results/unified_exact_round138/** -text whitespace=cr-at-eol
+/results/unified_exact_round138/**/*.log -whitespace

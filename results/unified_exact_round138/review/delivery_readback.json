@@ -1,0 +1,108 @@
+{
+  "schema": "round138-independent-bounded-delivery-readback-v1",
+  "UTC": "2026-10-29T00:13:46.146157+00:00",
+  "reviewer": "/root/independent_review",
+  "decision": "PENDING_FINAL_HEAD",
+  "bounded_receipt_checks_PASS": true,
+  "scope": "Local actual receipt and selected restored-file readback plus direct connected GitHub PR metadata. No new public member replay or whole historical recovery.",
+  "science_commit": "1b19897ab5819ab3b7485ddc978954b45225f361",
+  "carrier_manifest_SHA": "4fba11a23aadcf5723b964017def69b52c07dea45330f6c30edb5bc9046de14c",
+  "PR_observation": {
+    "URL": "https://github.com/yifanXovo/TailoredExact/pull/200",
+    "readback_source": "GitHub connected get_pr_info, independently invoked by reviewer",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round137-gi-tbc-consolidation",
+    "base_SHA": "72fdcd31716d7b4798727b4ea964b32059c630d1",
+    "head": "codex/round138-shared-product-resource-coupling",
+    "head_SHA": "1b19897ab5819ab3b7485ddc978954b45225f361",
+    "English_title_and_body_read": true,
+    "body_delivery_state_still_pending": true
+  },
+  "public_readback": {
+    "receipt_PASS": true,
+    "archives": 19,
+    "members_reported_checked": 99052,
+    "cumulative_seconds": 28.67516169999726,
+    "limit_seconds": 1800.0,
+    "attempts": 2,
+    "first_attempt": "Retained MSYS SSL certificate validation failure before any manifest/archive download",
+    "second_attempt": "Same fixed pin, same owned restore root, same cumulative history; existing Windows Python with certificate validation enabled",
+    "certificate_or_global_trust_bypass": false,
+    "local_restored_archive_sizes_and_checked_markers_verified": 19,
+    "local_restored_archive_hashes_rechecked": [
+      "source_v1_and_frozen_helpers.zip",
+      "source_and_helpers.zip",
+      "science_and_paper.zip"
+    ],
+    "local_restored_manifest_and_attempt_history_hashes_verified": true,
+    "scope_is_byte_and_member_readability_not_full_public_semantic_replay": true,
+    "R137_previous_public_semantic_limitation_not_resolved_or_relabelled": true
+  },
+  "cleanup_readback": {
+    "exact_target": "E:/codes/ExactEBRP-work/worktrees/paper-current/results/unified_exact_round138/qa_pages",
+    "target_now_absent": true,
+    "deleted_paths_and_hashes_match_previously_actually_viewed_manifest": true,
+    "files": 13,
+    "file_bytes": 2937847,
+    "observed_volume_free_change": 2969600,
+    "free_change_is_concurrent_observation_not_file_byte_identity": true,
+    "public_receipt_and_PDF_render_visual_review_hash_chain_verified": true,
+    "all_15_unique_raw_destinations_and_seals_retained": true,
+    "native_failure_and_unused_pre_repair_Seed1_retained": true,
+    "actual_PE_DLL_carrier_and_restore_files_retained": true
+  },
+  "default_and_cost": {
+    "five_required_entry_config_hashes_match_source_publication": true,
+    "G1_seconds": 18214.684111300157,
+    "G1_open_fees": [],
+    "science_cost_snapshot_preserved": true,
+    "later_ordinary_costs_separate": true,
+    "late_closed_record_files_independently_hashed": 36
+  },
+  "pending": [
+    "Final metadata commit/push head has not yet been supplied or independently read back.",
+    "PR body still describes the now-completed public read and cleanup as remaining delivery steps; final metadata/PR-state update is pending."
+  ],
+  "blocking_receipt_issues": [],
+  "bindings": {
+    "publication_pin.json": "0a13cb7a4c2f32071ed7bf67c5e487bb15a6a72081c216e28e273211f43830a7",
+    "PR_delivery.json": "616e81d2a8e928a51f19e99d86d561d0c6029f66ed1d21ceea7a427bdd47fce3",
+    "carrier_manifest.json": "4fba11a23aadcf5723b964017def69b52c07dea45330f6c30edb5bc9046de14c",
+    "source_publication.json": "5cc20b501412544dd016a789bff9cb5c14960d5f3125696bb884f9423fad81c7",
+    "publication_screen.json": "bd36f9dc938f0a39605e2396778eb075ed03ed4ff033c35f9dfd87d04af74847",
+    "public_restore_receipt.json": "6acb50e0f196bfee7dd395a1bafb8a0264a5f1c8368f80db55b7f8476a6fdc8a",
+    "reports/late_delivery/public_attempts.json": "538b58fbfaf9762185bdc3ac9e5268f501e776d86de0de093965789cfc18eb39",
+    "reports/late_delivery/public_owner.json": "a609c6588e8268bdf8e4d7682bbc5850ee49b5e838f723ec7336ae01c4bd7082",
+    "reports/late_delivery/retained_records.json": "9cf0fa8cf66ed3b4775ef7e6f57476da8b6d69cd57cd4a0a156aa868450f68fb",
+    "public_read_runtime_amendment.json": "3d47af77527a4531ef9a09fed6471527e72b315661da5817eacab5abce94b3e7",
+    "cleanup_receipt.json": "7fe53df276f47380a0ea16ee1aa08e49c9a17bd406e3618a1e843e1209137a09",
+    "pdf_visual_review.json": "32efce807132f6431732b696901bb228ae027898a1048f67c79f8981aa361c63",
+    "pdf_render_manifest.json": "adffb032485b0ba9f91bd1569d68cd3d2dc63f14e92a3587077454c4b80b981c",
+    "manuscript.pdf": "35ac859af077ae659fbc601664ddfc95f82cc104446d671904c5ba415d3b6e8b",
+    "review/final_integration.json": "c669debc355f2e2e60c3417b369cb6710d86d9f122f0aa3b9e72b6992b595eae",
+    "review/final_integration.md": "bec8338c487f1bf02e5bbe4c68aa94ed5e1ea9027c6468e28a80b7def0fed9be",
+    "cost_report.json": "5a9f111bfafee73482dfed0e22976503578993e94f2d7387fe7c338a685d422b",
+    "reports/cost_at_science_freeze.json": "0bb7697352610225049339c0b68aab499f28f6b04e4e023bae4b1aaabb0efcc2",
+    "ordinary_steps/public_read/launch.json": "ae1855a4a85239d4725528d96fe7fba9f8e50fed2d2aa13222c1043bc18bc095",
+    "ordinary_steps/public_read/receipt.json": "6d63c77347da7aaf3dde746ddfd1601c79043e9b37cce245bf9a738a14b366d4",
+    "ordinary_steps/public_read_windows_resume/launch.json": "3e994277242c454e47b1ddf75872687b1272d4f9b0e8bdf69f7d3780d2c8a392",
+    "ordinary_steps/public_read_windows_resume/receipt.json": "b9426b869285ca00fd7798791c02bae043b3627ad21e34ff5ff3522720012b96",
+    "ordinary_steps/final_preview_cleanup/receipt.json": "1f694e2c8a549ef6e9cc492ee2028b540a320d0c09522c4cb1bc9968c1107903"
+  },
+  "review_actions": {
+    "new_Optimize": 0,
+    "commercial_DLL_loads": 0,
+    "compilation": 0,
+    "new_public_downloads": 0,
+    "member_reinflation_or_whole_old_recovery": 0,
+    "production_or_frozen_helper_changes": 0,
+    "Git_mutation": 0,
+    "publication_or_cleanup": 0,
+    "written_files": [
+      "review/delivery_readback.json",
+      "review/delivery_readback.md"
+    ]
+  }
+}
