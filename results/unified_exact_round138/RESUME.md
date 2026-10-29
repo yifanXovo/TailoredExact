@@ -52,8 +52,11 @@ Cleanup is one-shot; do not run it again or extend deletion to old versions.
 PR_delivery.json and review/delivery_readback.json supply actual final delivery
 readback. cost_report.json is the final metered snapshot with ordinary-work
 scope, excluding nested experiment double charge and exhaustive interactive
-precision. Late receipt commits/push and actual PR metadata readback are the
-only remaining closeout operations while this note is being finalized.
+precision. No scientific comparison remains. The final review receipt records acceptance
+of the published delivery snapshot and current late metadata; the root agent
+then normally publishes that receipt and reads back the resulting PR head.
+The post-push actual readback is also retained at
+E:/codes/ExactEBRP-work/temp/round138/final_pr_readback.json.
 Do not merge/force-push/delete historic branches/send email or submit.
 
 Prior chronological notes are retained in infra/continuation_before_delivery.md.
