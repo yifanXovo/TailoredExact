@@ -3271,6 +3271,7 @@ void writeCompactLp(const Instance& instance,
                     if (++scale>1023) throw std::runtime_error("TC2 row scale overflow");
                 }
                 out << " c" << cid++ << ": ";bool first=true;
+                if (row.empty()) out << "0 G";
                 for (const auto& term:row) {
                     const double value=std::ldexp(term.second,scale);
                     if (!std::isfinite(value)) throw std::runtime_error("TC2 scaled coefficient overflow");
