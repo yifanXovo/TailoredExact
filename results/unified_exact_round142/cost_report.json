@@ -1,0 +1,464 @@
+{
+  "UTC": "2026-10-30T17:22:53.883777+00:00",
+  "experiment": {
+    "G1_seconds": 7420.26558019896,
+    "remaining_G1_seconds": 21379.73441980104,
+    "by_category": {
+      "diagnostic": 104.89451009919867,
+      "native": 7315.371070099762
+    },
+    "limits": {
+      "diagnostic": 3600.0,
+      "native": 28800.0
+    },
+    "category_remaining": {
+      "diagnostic": 3495.1054899008013,
+      "native": 21484.62892990024
+    },
+    "separately_reported_seconds": 126.74212200054899,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "charged_new_experiment_seconds": 7504.312010499183,
+  "charged_new_experiment_hours": 2.0845311140275506,
+  "experimental_outer_including_pure_postverification_seconds": 7504.312010499183,
+  "conservative_outer_within_28800": true,
+  "fee_ordinary_seconds": 126.74212200054899,
+  "additional_disjoint_ordinary_seconds": 3.101582699920982,
+  "experimental_fee_receipts": [
+    {
+      "label": "01_K-35-U_low_all",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 5.339084399864078,
+        "G1_seconds": 5.339084399864078,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372458.848769,
+        "end_unix": 1793372464.1738646,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "01_K-35-U_low_selected",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.8574184998869896,
+        "G1_seconds": 2.8574184998869896,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372392.4874866,
+        "end_unix": 1793372395.344787,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "02_K-35-U_high_all",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 5.12785129994154,
+        "G1_seconds": 5.12785129994154,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372464.1988354,
+        "end_unix": 1793372469.333041,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "02_K-35-U_high_selected",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.0760591998696327,
+        "G1_seconds": 2.0760591998696327,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372395.3604114,
+        "end_unix": 1793372397.429989,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "03_R-B35-S-T2_low_all",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 5.325200399849564,
+        "G1_seconds": 5.325200399849564,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372469.3361533,
+        "end_unix": 1793372474.6729398,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "03_R-B35-S-T2_low_selected",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.8415991000365466,
+        "G1_seconds": 3.8415991000365466,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372397.4524703,
+        "end_unix": 1793372401.2926297,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "04_R-B35-S-T2_high_all",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 5.719305099919438,
+        "G1_seconds": 5.719305099919438,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372474.6937387,
+        "end_unix": 1793372480.3993585,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "04_R-B35-S-T2_high_selected",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.7571024999488145,
+        "G1_seconds": 3.7571024999488145,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372401.3094676,
+        "end_unix": 1793372405.0658445,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "05_K-20-S_low_all",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.975072900066152,
+        "G1_seconds": 2.975072900066152,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372480.4230294,
+        "end_unix": 1793372483.4076655,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "05_K-20-S_low_selected",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.7282718999776989,
+        "G1_seconds": 0.7282718999776989,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372405.0658445,
+        "end_unix": 1793372405.8048158,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "06_K-20-S_high_all",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.078866000054404,
+        "G1_seconds": 3.078866000054404,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372483.4260554,
+        "end_unix": 1793372486.5053778,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "06_K-20-S_high_selected",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.7085242997854948,
+        "G1_seconds": 0.7085242997854948,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372405.8204398,
+        "end_unix": 1793372406.525113,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "bridge_001",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 98.07278460008092,
+        "G1_seconds": 87.5876801002305,
+        "separately_reported_seconds": 10.485104499850422,
+        "start_unix": 1793378406.5870135,
+        "end_unix": 1793378504.6641011,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "bridge_002",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2385.5523747999687,
+        "G1_seconds": 2371.107878499897,
+        "separately_reported_seconds": 14.444496300071478,
+        "start_unix": 1793378504.6905775,
+        "end_unix": 1793380890.261423,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "math_tiny",
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 0.16529930010437965,
+        "G1_seconds": 0.16529930010437965,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372391.9019372,
+        "end_unix": 1793372392.0608068,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "math_tiny_fixed",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.37602910003624856,
+        "G1_seconds": 0.37602910003624856,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372457.9440355,
+        "end_unix": 1793372458.3236947,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "native_writer",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.4124783000443131,
+        "G1_seconds": 0.4124783000443131,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372777.0332272,
+        "end_unix": 1793372777.4458158,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "pilot_001",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2389.2123410999775,
+        "G1_seconds": 2371.218367499998,
+        "separately_reported_seconds": 17.993973599979654,
+        "start_unix": 1793373235.4246573,
+        "end_unix": 1793375624.6550188,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "pilot_002",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2387.5738580999896,
+        "G1_seconds": 2371.1977397999726,
+        "separately_reported_seconds": 16.37611830001697,
+        "start_unix": 1793375624.6817234,
+        "end_unix": 1793378012.2604048,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "pilot_003",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 96.58044409984723,
+        "G1_seconds": 86.71518149971962,
+        "separately_reported_seconds": 9.865262600127608,
+        "start_unix": 1793378012.287037,
+        "end_unix": 1793378108.876319,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "pilot_004",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 33.04776380001567,
+        "G1_seconds": 27.54422269994393,
+        "separately_reported_seconds": 5.503541100071743,
+        "start_unix": 1793378108.9040065,
+        "end_unix": 1793378141.9432335,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "qualification_001",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 70.96191890002228,
+        "G1_seconds": 61.58398499991745,
+        "separately_reported_seconds": 9.377933900104836,
+        "start_unix": 1793372974.9714909,
+        "end_unix": 1793373045.9419754,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "tiny_cpp",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.8223627998959273,
+        "G1_seconds": 0.8223627998959273,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793372775.8521013,
+        "end_unix": 1793372776.6775298,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    }
+  ],
+  "ordinary_steps": [
+    {
+      "label": "full_tables",
+      "SHA": "e15d774ae7b35e6bdeb795d7c7a52110f1e61fe1a89297bf8dd934e1986b0568",
+      "receipt": {
+        "UTC": "2026-10-30T17:22:34.618125+00:00",
+        "exit_code": 0,
+        "seconds": 1.5026304998900741,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "local_semantics",
+      "SHA": "f01b9a87289183e954476502d1184c853358077fa86a19c84be614521aa1e1e5",
+      "receipt": {
+        "UTC": "2026-10-30T17:22:37.256697+00:00",
+        "exit_code": 0,
+        "seconds": 0.7620552000589669,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "reference_pins",
+      "SHA": "8d9e84665cc98541cd58756474754faf6e9ac804263793bd811bb58cd31b5bba",
+      "receipt": {
+        "UTC": "2026-10-30T17:22:36.126254+00:00",
+        "exit_code": 0,
+        "seconds": 0.42502769990824163,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "software_bindings",
+      "SHA": "3e90503d0d15f62549c807872658a51821fbd871ca21e8f46a9db6eb1fddf01d",
+      "receipt": {
+        "UTC": "2026-10-30T17:22:35.366413+00:00",
+        "exit_code": 0,
+        "seconds": 0.4118693000636995,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    }
+  ],
+  "failed_steps": [
+    "math_tiny"
+  ],
+  "qualifiers_and_failures_charged": true,
+  "nested_H_LP_MIP_Work_not_added_twice": true,
+  "old_references_new_Optimize": 0,
+  "charge_scope": "Conservative primary round charge is every experimental outer, including mandatory pure postverification. The inherited G1 submeter separately excludes those explicit disjoint verification segments; neither value is added to the other.",
+  "precision_scope": "Measured processes only; offline prepare elapsed is in offline_screen.json. Interactive editing/review/Git has no invented precise process clock. Late delivery I/O/cleanup receipts are additive, outside fixed science carriers."
+}

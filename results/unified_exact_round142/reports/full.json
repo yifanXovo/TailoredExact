@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-30T16:35:59.549879+00:00",
+  "UTC": "2026-10-30T17:22:33.437622+00:00",
   "new_arms": [
     {
       "batch": "pilot",
@@ -132,6 +132,71 @@
       "products": "selected"
     },
     {
+      "batch": "bridge",
+      "position": 1,
+      "role": "K-20-S",
+      "method": "D1",
+      "seed": 0,
+      "formal_entered": true,
+      "legacy_formal_performance_flag": false,
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "physical_T": 5400,
+      "lambda_value": 0.15,
+      "cap": 1200,
+      "source_commit": "9b024c451b00f84f9f1cac0905eab457cc82a5b9",
+      "PE_SHA": "1337ab5a78685640b1064780de4765b004e8ec2d73e1fbe17f0b1ed5ffc48f52",
+      "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "U": 0.7168065462777502,
+      "L": 0.7168065462777501,
+      "certificate": true,
+      "signed_gap": 1.1102230246251565e-16,
+      "relative_gap": 1.5488461013509832e-16,
+      "T_produce": 87.54576722695492,
+      "T_cert": 87.54576722695492,
+      "T_verify": 9.93112640012987,
+      "T_total": 97.47689362708479,
+      "H_complete": true,
+      "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6",
+      "H_fleet_SHA": "7cf75862eb2b9a81fdd8179011c7c5af8ec6d1bb859629cc96116b16494b2741",
+      "external_merged_final_L": 0.7168065462777501,
+      "terminal_native_return_ObjBoundC": 0.7168065462777501,
+      "terminal_native_return_ObjVal": 0.7168065462777503,
+      "LP_calls": 3,
+      "count_LP_calls": 2,
+      "target_calls": 1,
+      "terminal_calls": 1,
+      "root_LP_seconds": 0.1960000991821289,
+      "root_LP_Work": 0.4282316731489169,
+      "Gini_LP_seconds": 0.5150001049041748,
+      "count_LP_seconds": 0.33500003814697266,
+      "target_seconds": 0.2820000648498535,
+      "target_Work": 0.5728004986793586,
+      "terminal_seconds": 83.0460000038147,
+      "probe_construction_seconds": 0.1469707,
+      "probe_total_seconds": 0.5867405000000001,
+      "probe_Work": 0.8667427606908636,
+      "Native_total_Work": 140.03142385906688,
+      "terminal_Work": 137.24653424361784,
+      "terminal_nodes": 18588.0,
+      "root_L": 0.23482187788475253,
+      "first_AM_action": "native-target",
+      "AM_action_sequence": "native-target;exact-close",
+      "actual_split_count": 0,
+      "pair_ready": true,
+      "root_threshold": "72057594037927932*2^-56",
+      "root_pivot": 7,
+      "root_SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030",
+      "probe0_SHA": "510cf17f7b5ad4da664801dfc69922180eb695b39bfb5c4c569469c69737f0f8",
+      "probe1_SHA": "7da820fe4233edcbddb18b0d8dc0aa463aaf509622fc95cd29c905ba1056106b",
+      "beta0": 0.255556602786186,
+      "beta1": 0.2681924850446407,
+      "scope_count_proof_binding": true,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round142\\campaign_bridge\\001\\raw\\R142_bridge_001_K-20-S_S0_OFF",
+      "printed_terminal_ObjVal": 0.7168065462778,
+      "printed_terminal_ObjBound": 0.7168065462778,
+      "products": "off"
+    },
+    {
       "batch": "pilot",
       "position": 1,
       "role": "K-35-U",
@@ -260,6 +325,71 @@
       "printed_terminal_ObjVal": 0.3574021021699,
       "printed_terminal_ObjBound": 0.2293655469101,
       "products": "selected"
+    },
+    {
+      "batch": "bridge",
+      "position": 2,
+      "role": "R-B35-S-T2",
+      "method": "D1",
+      "seed": 0,
+      "formal_entered": true,
+      "legacy_formal_performance_flag": false,
+      "input_SHA": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+      "physical_T": 7200,
+      "lambda_value": 0.055125275219827186,
+      "cap": 2400,
+      "source_commit": "9b024c451b00f84f9f1cac0905eab457cc82a5b9",
+      "PE_SHA": "1337ab5a78685640b1064780de4765b004e8ec2d73e1fbe17f0b1ed5ffc48f52",
+      "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "U": 0.41377327502170724,
+      "L": 0.2279034490037257,
+      "certificate": false,
+      "signed_gap": 0.18586982601798155,
+      "relative_gap": 0.4492069382881978,
+      "T_produce": 2371.073038647184,
+      "T_cert": null,
+      "T_verify": 13.609237700002268,
+      "T_total": 2384.6822763471864,
+      "H_complete": true,
+      "H_semantic_SHA": "af1290503013a4c529945e9553359661023494373cca41ed890be99d8eba19d2",
+      "H_fleet_SHA": "e0190e8f4ccd0f83b10183be7625437658052c504edf503c2e8ec0ddbd693a7d",
+      "external_merged_final_L": 0.2279034490037257,
+      "terminal_native_return_ObjBoundC": 0.2279034490037257,
+      "terminal_native_return_ObjVal": 0.4137732668537287,
+      "LP_calls": 3,
+      "count_LP_calls": 2,
+      "target_calls": 1,
+      "terminal_calls": 1,
+      "root_LP_seconds": 2.2330000400543213,
+      "root_LP_Work": 6.808820592313385,
+      "Gini_LP_seconds": 4.987000226974487,
+      "count_LP_seconds": 3.940000057220459,
+      "target_seconds": 1.9030001163482666,
+      "target_Work": 5.081533008905061,
+      "terminal_seconds": 2350.1189999580383,
+      "probe_construction_seconds": 0.48951279999999997,
+      "probe_total_seconds": 4.788223,
+      "probe_Work": 12.256352713735794,
+      "Native_total_Work": 5700.111060890537,
+      "terminal_Work": 5667.3445334886555,
+      "terminal_nodes": 8633.0,
+      "root_L": 0.1354492347766555,
+      "first_AM_action": "native-target",
+      "AM_action_sequence": "native-target;exact-close",
+      "actual_split_count": 0,
+      "pair_ready": true,
+      "root_threshold": "72057594037927932*2^-56",
+      "root_pivot": 5,
+      "root_SHA": "e8d8b48a007bb94d14ef7115fa738512fa992704bafd5e99c98c07eb56651285",
+      "probe0_SHA": "1178bd57974adf9df77a431fff08de12b1903abfe95eb4d55fb7c90203954d17",
+      "probe1_SHA": "9da9829cdc76a47325be8faca868257e21ec5395b8d6655959e806aad5750e0d",
+      "beta0": 0.1463016529428662,
+      "beta1": 0.15056684239780596,
+      "scope_count_proof_binding": true,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round142\\campaign_bridge\\002\\raw\\R142_bridge_002_R-B35-S-T2_S0_OFF",
+      "printed_terminal_ObjVal": 0.4137732668537,
+      "printed_terminal_ObjBound": 0.2279034490037,
+      "products": "off"
     }
   ],
   "qualification": [
@@ -2085,6 +2215,70 @@
       "same_PE": false
     },
     {
+      "role": "K-20-S",
+      "candidate": "D1",
+      "reference": "TC_STOCK",
+      "seed": 0,
+      "delta_U": 0.0,
+      "delta_L": 2.3660362558075576e-10,
+      "candidate_certificate": true,
+      "reference_certificate": true,
+      "delta_T_produce": -48.151045587146655,
+      "delta_T_total": -44.956976586952806,
+      "T_produce_threshold": 10.0,
+      "T_total_threshold": 10.0,
+      "same_input_physics_objective_cap_seed_H": true,
+      "same_PE": false
+    },
+    {
+      "role": "K-20-S",
+      "candidate": "D1",
+      "reference": "TC2_STOCK",
+      "seed": 0,
+      "delta_U": 0.0,
+      "delta_L": 2.6645352591003757e-15,
+      "candidate_certificate": true,
+      "reference_certificate": true,
+      "delta_T_produce": -27.473856079857796,
+      "delta_T_total": -22.87110227975063,
+      "T_produce_threshold": 10.0,
+      "T_total_threshold": 10.0,
+      "same_input_physics_objective_cap_seed_H": true,
+      "same_PE": false
+    },
+    {
+      "role": "K-20-S",
+      "candidate": "D1",
+      "reference": "base",
+      "seed": 0,
+      "delta_U": 0.0,
+      "delta_L": 0.011450752783503715,
+      "candidate_certificate": true,
+      "reference_certificate": false,
+      "delta_T_produce": -1084.6442377576604,
+      "delta_T_total": -1135.8569393574726,
+      "T_produce_threshold": 10.0,
+      "T_total_threshold": 10.0,
+      "same_input_physics_objective_cap_seed_H": true,
+      "same_PE": false
+    },
+    {
+      "role": "K-20-S",
+      "candidate": "D1",
+      "reference": "both",
+      "seed": 0,
+      "delta_U": 0.0,
+      "delta_L": 7.66053886991358e-15,
+      "candidate_certificate": true,
+      "reference_certificate": true,
+      "delta_T_produce": -14.08961767400615,
+      "delta_T_total": -6.982778373872861,
+      "T_produce_threshold": 10.0,
+      "T_total_threshold": 10.0,
+      "same_input_physics_objective_cap_seed_H": true,
+      "same_PE": false
+    },
+    {
       "role": "K-35-U",
       "candidate": "CP",
       "reference": "TC_STOCK",
@@ -2211,6 +2405,70 @@
       "T_total_threshold": 237.51690495782532,
       "same_input_physics_objective_cap_seed_H": true,
       "same_PE": false
+    },
+    {
+      "role": "R-B35-S-T2",
+      "candidate": "D1",
+      "reference": "TC_STOCK",
+      "seed": 0,
+      "delta_U": 0.09469278232941603,
+      "delta_L": -0.006023813134764161,
+      "candidate_certificate": false,
+      "reference_certificate": false,
+      "delta_T_produce": -0.005048135295510292,
+      "delta_T_total": 5.845663864864036,
+      "T_produce_threshold": 237.10730386471843,
+      "T_total_threshold": 237.88366124823224,
+      "same_input_physics_objective_cap_seed_H": true,
+      "same_PE": false
+    },
+    {
+      "role": "R-B35-S-T2",
+      "candidate": "D1",
+      "reference": "TC2_STOCK",
+      "seed": 0,
+      "delta_U": 0.08949755723592301,
+      "delta_L": -0.00200075953309084,
+      "candidate_certificate": false,
+      "reference_certificate": false,
+      "delta_T_produce": -0.1487551829777658,
+      "delta_T_total": 5.161927117034793,
+      "T_produce_threshold": 237.10730386471843,
+      "T_total_threshold": 237.95203492301516,
+      "same_input_physics_objective_cap_seed_H": true,
+      "same_PE": false
+    },
+    {
+      "role": "R-B35-S-T2",
+      "candidate": "D1",
+      "reference": "base",
+      "seed": 0,
+      "delta_U": 0.0691306494297591,
+      "delta_L": 0.008917499400250994,
+      "candidate_certificate": false,
+      "reference_certificate": false,
+      "delta_T_produce": 0.03481512772850692,
+      "delta_T_total": 9.877938127610832,
+      "T_produce_threshold": 237.10382235194558,
+      "T_total_threshold": 237.48043382195758,
+      "same_input_physics_objective_cap_seed_H": true,
+      "same_PE": false
+    },
+    {
+      "role": "R-B35-S-T2",
+      "candidate": "D1",
+      "reference": "both",
+      "seed": 0,
+      "delta_U": 0.012573057182656666,
+      "delta_L": -0.0012781506605978876,
+      "candidate_certificate": false,
+      "reference_certificate": false,
+      "delta_T_produce": -0.05509633105248213,
+      "delta_T_total": 9.513226768933237,
+      "T_produce_threshold": 237.10730386471843,
+      "T_total_threshold": 237.51690495782532,
+      "same_input_physics_objective_cap_seed_H": true,
+      "same_PE": false
     }
   ],
   "conditional_pairs": [],
@@ -2218,11 +2476,11 @@
   "unstarted": [],
   "all_entered_preserved": true,
   "budget": {
-    "G1_seconds": 4961.570021598833,
-    "remaining_G1_seconds": 23838.429978401167,
+    "G1_seconds": 7420.26558019896,
+    "remaining_G1_seconds": 21379.73441980104,
     "by_category": {
       "diagnostic": 104.89451009919867,
-      "native": 4856.675511499634
+      "native": 7315.371070099762
     },
     "limits": {
       "diagnostic": 3600.0,
@@ -2230,9 +2488,9 @@
     },
     "category_remaining": {
       "diagnostic": 3495.1054899008013,
-      "native": 23943.324488500366
+      "native": 21484.62892990024
     },
-    "separately_reported_seconds": 101.81252120062709,
+    "separately_reported_seconds": 126.74212200054899,
     "unclosed": [],
     "nested_H_LP_MIP_Work_not_added": true
   },
@@ -2263,6 +2521,17 @@
       "delta_T_total": -6.595509459264576
     },
     {
+      "role": "K-20-S",
+      "seed": 0,
+      "candidate": "D1",
+      "reference": "R141_D1",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": 0.0,
+      "delta_T_produce": -5.989806912839413,
+      "delta_T_total": -5.10460311267525
+    },
+    {
       "role": "K-35-U",
       "seed": 0,
       "candidate": "CP",
@@ -2283,7 +2552,569 @@
       "delta_L": 0.0014471274744312923,
       "delta_T_produce": 0.10496534989215434,
       "delta_T_total": 2.0547202499583364
+    },
+    {
+      "role": "R-B35-S-T2",
+      "seed": 0,
+      "candidate": "D1",
+      "reference": "R141_D1",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": -1.497043189316316e-05,
+      "delta_T_produce": 0.01690426655113697,
+      "delta_T_total": 0.07833836670033634
     }
   ],
-  "same_PE_bridges": []
+  "same_PE_bridges": [
+    {
+      "role": "K-20-S",
+      "seed": 0,
+      "same_PE": true,
+      "parent_selection_pivot_links_equal": true,
+      "first_integer_equal_except_floor": true,
+      "candidate_floor": {
+        "SHA": "76bac00995c1fb6e5696a9fb9a2e644ea7cd727af6538a998d53b59e2c0397ac",
+        "base_SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030",
+        "floor_row": [
+          [
+            [
+              "G",
+              1.0
+            ],
+            [
+              "e_1",
+              0.0474609
+            ],
+            [
+              "e_10",
+              0.0474609
+            ],
+            [
+              "e_11",
+              0.05859375
+            ],
+            [
+              "e_12",
+              0.08437499999999999
+            ],
+            [
+              "e_13",
+              0.15
+            ],
+            [
+              "e_14",
+              0.0708984
+            ],
+            [
+              "e_15",
+              0.0708984
+            ],
+            [
+              "e_16",
+              0.11484375
+            ],
+            [
+              "e_17",
+              0.0474609
+            ],
+            [
+              "e_18",
+              0.11484375
+            ],
+            [
+              "e_19",
+              0.08437499999999999
+            ],
+            [
+              "e_2",
+              0.15
+            ],
+            [
+              "e_20",
+              0.15
+            ],
+            [
+              "e_3",
+              0.0708984
+            ],
+            [
+              "e_4",
+              0.05859375
+            ],
+            [
+              "e_5",
+              0.08437499999999999
+            ],
+            [
+              "e_6",
+              0.0708984
+            ],
+            [
+              "e_7",
+              0.0474609
+            ],
+            [
+              "e_8",
+              0.05859375
+            ],
+            [
+              "e_9",
+              0.11484375
+            ],
+            [
+              "r141_b",
+              -0.012563706968555906
+            ]
+          ],
+          ">=",
+          0.2556287780760846
+        ]
+      },
+      "bridge_floor": {
+        "SHA": "a18bd6d53ebd7193c7dc7b51853fb65513edeba1eb08ae75f69e7a56e79fd7b8",
+        "base_SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030",
+        "floor_row": [
+          [
+            [
+              "G",
+              1.0
+            ],
+            [
+              "e_1",
+              0.0474609
+            ],
+            [
+              "e_10",
+              0.0474609
+            ],
+            [
+              "e_11",
+              0.05859375
+            ],
+            [
+              "e_12",
+              0.08437499999999999
+            ],
+            [
+              "e_13",
+              0.15
+            ],
+            [
+              "e_14",
+              0.0708984
+            ],
+            [
+              "e_15",
+              0.0708984
+            ],
+            [
+              "e_16",
+              0.11484375
+            ],
+            [
+              "e_17",
+              0.0474609
+            ],
+            [
+              "e_18",
+              0.11484375
+            ],
+            [
+              "e_19",
+              0.08437499999999999
+            ],
+            [
+              "e_2",
+              0.15
+            ],
+            [
+              "e_20",
+              0.15
+            ],
+            [
+              "e_3",
+              0.0708984
+            ],
+            [
+              "e_4",
+              0.05859375
+            ],
+            [
+              "e_5",
+              0.08437499999999999
+            ],
+            [
+              "e_6",
+              0.0708984
+            ],
+            [
+              "e_7",
+              0.0474609
+            ],
+            [
+              "e_8",
+              0.05859375
+            ],
+            [
+              "e_9",
+              0.11484375
+            ],
+            [
+              "r141_b",
+              -0.012635882258454686
+            ]
+          ],
+          ">=",
+          0.25555660278618597
+        ]
+      },
+      "delta_U": 0.0,
+      "delta_L": -4.440892098500626e-16,
+      "delta_T_produce": -0.8743232463020831,
+      "delta_T_total": -1.4909063465893269,
+      "CP_source_floors": [
+        0.25562877807608464,
+        0.26819248504464055
+      ],
+      "old_source_floors": [
+        0.255556602786186,
+        0.2681924850446407
+      ]
+    },
+    {
+      "role": "R-B35-S-T2",
+      "seed": 0,
+      "same_PE": true,
+      "parent_selection_pivot_links_equal": true,
+      "first_integer_equal_except_floor": true,
+      "candidate_floor": {
+        "SHA": "4b11b22c72f3b9dde8f7ce7899d0453c241a587eaf17e1891c6a8735bdae1bab",
+        "base_SHA": "e8d8b48a007bb94d14ef7115fa738512fa992704bafd5e99c98c07eb56651285",
+        "floor_row": [
+          [
+            [
+              "G",
+              1.0
+            ],
+            [
+              "e_1",
+              0.016400927008678203
+            ],
+            [
+              "e_10",
+              0.03690201686293194
+            ],
+            [
+              "e_11",
+              0.03690201686293194
+            ],
+            [
+              "e_12",
+              0.016400927008678203
+            ],
+            [
+              "e_13",
+              0.045558063204325296
+            ],
+            [
+              "e_14",
+              0.022323476327746
+            ],
+            [
+              "e_15",
+              0.016400927008678203
+            ],
+            [
+              "e_16",
+              0.022323476327746
+            ],
+            [
+              "e_17",
+              0.029157191320922315
+            ],
+            [
+              "e_18",
+              0.045558063204325296
+            ],
+            [
+              "e_19",
+              0.022323476327746
+            ],
+            [
+              "e_2",
+              0.022323476327746
+            ],
+            [
+              "e_20",
+              0.045558063204325296
+            ],
+            [
+              "e_21",
+              0.011389543363718934
+            ],
+            [
+              "e_22",
+              0.022323476327746
+            ],
+            [
+              "e_23",
+              0.016400927008678203
+            ],
+            [
+              "e_24",
+              0.03690201686293194
+            ],
+            [
+              "e_25",
+              0.03690201686293194
+            ],
+            [
+              "e_26",
+              0.022323476327746
+            ],
+            [
+              "e_27",
+              0.045558063204325296
+            ],
+            [
+              "e_28",
+              0.022323476327746
+            ],
+            [
+              "e_29",
+              0.029157191320922315
+            ],
+            [
+              "e_3",
+              0.055125275219827186
+            ],
+            [
+              "e_30",
+              0.016400927008678203
+            ],
+            [
+              "e_31",
+              0.022323476327746
+            ],
+            [
+              "e_32",
+              0.03690201686293194
+            ],
+            [
+              "e_33",
+              0.016400927008678203
+            ],
+            [
+              "e_34",
+              0.029157191320922315
+            ],
+            [
+              "e_35",
+              0.03690201686293194
+            ],
+            [
+              "e_4",
+              0.055125275219827186
+            ],
+            [
+              "e_5",
+              0.011389543363718934
+            ],
+            [
+              "e_6",
+              0.016400927008678203
+            ],
+            [
+              "e_7",
+              0.016400927008678203
+            ],
+            [
+              "e_8",
+              0.029157191320922315
+            ],
+            [
+              "e_9",
+              0.03690201686293194
+            ],
+            [
+              "r141_b",
+              -0.004008749136127225
+            ]
+          ],
+          ">=",
+          0.14655809326167774
+        ]
+      },
+      "bridge_floor": {
+        "SHA": "3b08854a28353d662a5c6b0d545f47450bd02ecf4965bc39f017a5eedab8d8c3",
+        "base_SHA": "e8d8b48a007bb94d14ef7115fa738512fa992704bafd5e99c98c07eb56651285",
+        "floor_row": [
+          [
+            [
+              "G",
+              1.0
+            ],
+            [
+              "e_1",
+              0.016400927008678203
+            ],
+            [
+              "e_10",
+              0.03690201686293194
+            ],
+            [
+              "e_11",
+              0.03690201686293194
+            ],
+            [
+              "e_12",
+              0.016400927008678203
+            ],
+            [
+              "e_13",
+              0.045558063204325296
+            ],
+            [
+              "e_14",
+              0.022323476327746
+            ],
+            [
+              "e_15",
+              0.016400927008678203
+            ],
+            [
+              "e_16",
+              0.022323476327746
+            ],
+            [
+              "e_17",
+              0.029157191320922315
+            ],
+            [
+              "e_18",
+              0.045558063204325296
+            ],
+            [
+              "e_19",
+              0.022323476327746
+            ],
+            [
+              "e_2",
+              0.022323476327746
+            ],
+            [
+              "e_20",
+              0.045558063204325296
+            ],
+            [
+              "e_21",
+              0.011389543363718934
+            ],
+            [
+              "e_22",
+              0.022323476327746
+            ],
+            [
+              "e_23",
+              0.016400927008678203
+            ],
+            [
+              "e_24",
+              0.03690201686293194
+            ],
+            [
+              "e_25",
+              0.03690201686293194
+            ],
+            [
+              "e_26",
+              0.022323476327746
+            ],
+            [
+              "e_27",
+              0.045558063204325296
+            ],
+            [
+              "e_28",
+              0.022323476327746
+            ],
+            [
+              "e_29",
+              0.029157191320922315
+            ],
+            [
+              "e_3",
+              0.055125275219827186
+            ],
+            [
+              "e_30",
+              0.016400927008678203
+            ],
+            [
+              "e_31",
+              0.022323476327746
+            ],
+            [
+              "e_32",
+              0.03690201686293194
+            ],
+            [
+              "e_33",
+              0.016400927008678203
+            ],
+            [
+              "e_34",
+              0.029157191320922315
+            ],
+            [
+              "e_35",
+              0.03690201686293194
+            ],
+            [
+              "e_4",
+              0.055125275219827186
+            ],
+            [
+              "e_5",
+              0.011389543363718934
+            ],
+            [
+              "e_6",
+              0.016400927008678203
+            ],
+            [
+              "e_7",
+              0.016400927008678203
+            ],
+            [
+              "e_8",
+              0.029157191320922315
+            ],
+            [
+              "e_9",
+              0.03690201686293194
+            ],
+            [
+              "r141_b",
+              -0.004265189454939753
+            ]
+          ],
+          ">=",
+          0.14630165294286618
+        ]
+      },
+      "delta_U": -0.05637117285179699,
+      "delta_L": 0.0014620979063244555,
+      "delta_T_produce": 0.08806108334101737,
+      "delta_T_total": 1.976381883258,
+      "CP_source_floors": [
+        0.14655809326167776,
+        0.150566842397805
+      ],
+      "old_source_floors": [
+        0.1463016529428662,
+        0.15056684239780596
+      ]
+    }
+  ]
 }

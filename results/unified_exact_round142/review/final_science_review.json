@@ -1,0 +1,535 @@
+{
+  "decision": "PASS_SCIENCE",
+  "scope": "Final local scientific and semantic integration only; PDF visual, PR, public readability and cleanup not yet signed off",
+  "reviewer": "independent_review (non-implementer)",
+  "UTC": "2026-10-30T17:29:05.151981+00:00",
+  "read_SHA256": {
+    "mathematical_analysis.md": "5eef2afc3edf5595dccfd7a09e89954f993a0ef9ea3a30c3dd0cf9aa108f3efd",
+    "LP_report.md": "c83b96ad8995bdf6bc148dc71d1cbd07b331c378457d747a7518478796ad0c8d",
+    "final_report.md": "87d13b51f6187913172a294f6289eb643249ca5dbe877f1f1a775eca238392f1",
+    "candidate_decision.json": "fb3b4ace944745342ab6d5366b297cb9c61873541cb6860cbc5ed9c729c76557",
+    "cost_report.json": "ae3e84c6ce9980eb138f634650b6515e613e75be0a81e7812c00a59726113b7e",
+    "local_semantic_check.json": "24a69f219bde3d1a0850cb91c2f0564efe6a60d4386d84cb4677b572dcfd178a",
+    "candidate_manifest.json": "3690b4a0b2bc4e0b06df83f7add345e33d8751f64db00d084d26100cd0bd2274",
+    "reports/LP.json": "0621fe82a16038df1b7ced0ecdfc27138429150edb0151b2fedc40609b391eb0",
+    "reports/full.json": "a1a45f0713e48ed98ac04194597ea19cbfd20b9ffac4d00cf15868d6d0233218",
+    "reports/new_arms.csv": "c28acc741239cc503a60b37d3553644f9a5933f16641bec61a89f4b3c205cf3e",
+    "reports/same_PE_bridges.csv": "487bc8f69db3bafd023f73a32e3ffd35af8b4f245c761bfa78bcd08b9bba78b4",
+    "review/selection.json": "34b742f98b5cee974811c40d893a4a2cb296edbd78f89d57934a30ef1a9ed5f9",
+    "entry_check.json": "0bc25466373a3756e224f3401d89c2684255adcd885027b41dd9c25b6337495e",
+    "measured_helper_versions.json": "7a2a82a0d2d33096015526996ff4d2d3b4e787a72dddc45a298de45d8af4ff8f"
+  },
+  "source_commit": "9b024c451b00f84f9f1cac0905eab457cc82a5b9",
+  "PE_SHA": "1337ab5a78685640b1064780de4765b004e8ec2d73e1fbe17f0b1ed5ffc48f52",
+  "findings": [],
+  "checks": {
+    "B_attainable_source_optimum_premise_and_serialization_boundary": true,
+    "CP_exact_membership_actual_g_counts_RHS_scaling_source_only": true,
+    "count_selector_network_integrality_and_R138_hull_scope": true,
+    "fixed_g_linear_ranges_and_graph_slice_caveat": true,
+    "strict_9_over_40_fixture_scope_not_full_BRP_gain": true,
+    "six_sources_twelve_C_controls_no_new_C_Optimize": true,
+    "selected_ALL_LP_gains_quality_and_floor_policy": true,
+    "all_six_formal_arms_and_one_qualification_bound_to_actual_sealed_sources": true,
+    "every_source_floor_bound_to_actual_call_and_SHA": true,
+    "positive_and_negative_floor_delta_endpoints_conservative": true,
+    "two_same_PE_integer_matrices_equal_except_floor": true,
+    "stable_and_all_old_research_entry_profiles_preserved": true,
+    "all_positive_adverse_failed_entered_results_retained": true,
+    "all_Seed0_ownH_single_thread_serial_and_complete_clocks": true,
+    "cost_outer_and_G1_disjoint_alternative_views_and_under_8h": true,
+    "result_based_stop_no_optional_extra_roles_Seed1_or_RLT_grid": true
+  },
+  "complete_checks": [
+    {
+      "role": "K-15-S",
+      "method": "CP",
+      "cap": 600,
+      "qualification": false,
+      "control_SHA": "28300a44dbd84552ba922689a4e4572b149b7020ee43d9838490fd5882b02ca4",
+      "closeout_SHA": "9a07a33f3f96409c293e7e29b167a52572a843c9e6ff0fce6cc0abf916246470",
+      "chain_SHA": "37119dafc279ae8753ac50c1ecb046c7f6683172bf766650694434b538fbdec0",
+      "sources": [
+        {
+          "call": 4,
+          "SHA": "211c52483ccfdb098be2d574fd9cfcc17dd4a463c0c7db52b99c12faf261b5e1",
+          "side": 0,
+          "beta": 0.2305443432800799,
+          "native_rows_checked": 7
+        },
+        {
+          "call": 5,
+          "SHA": "db612e673a37179fa162647aad69a0f65ec1a886f69494550967cf83076fe0bf",
+          "side": 1,
+          "beta": 0.2474588124894042,
+          "native_rows_checked": 7
+        }
+      ],
+      "floor_delta": 0.016914469209324316,
+      "actual_endpoint0_exact": "8306235347908347/36028797018963968",
+      "actual_endpoint1_exact": "35662573302938435/144115188075855872"
+    },
+    {
+      "role": "K-20-S",
+      "method": "CP",
+      "cap": 1200,
+      "qualification": false,
+      "control_SHA": "007539bb7c48714bdc313d970f7ad19a5954cc4431f9b5bed0e9ac1037bbbd75",
+      "closeout_SHA": "09922df16e07791ae5f5e36c72e71e39c5fa298d51b2d28fa12aad274d4f60d1",
+      "chain_SHA": "5c3e4a3eaaf333e19e7eb231a53f0f511fb17017f50e5c9e2491fe9e2b3daf34",
+      "sources": [
+        {
+          "call": 4,
+          "SHA": "a248368bfa7099a7d9a84df0e669a1a0705b2a9cd9ee0bda69f9ced468c34b30",
+          "side": 0,
+          "beta": 0.25562877807608464,
+          "native_rows_checked": 7
+        },
+        {
+          "call": 5,
+          "SHA": "73da94d44333abcae3b1ec85d31f2ae297ec9b43dbc6103acb04e3d64e4af9e1",
+          "side": 1,
+          "beta": 0.26819248504464055,
+          "native_rows_checked": 7
+        }
+      ],
+      "floor_delta": 0.012563706968555906,
+      "actual_endpoint0_exact": "4604998678754519/18014398509481984",
+      "actual_endpoint1_exact": "77301220845479055/288230376151711744"
+    },
+    {
+      "role": "K-20-S",
+      "method": "D1",
+      "cap": 1200,
+      "qualification": false,
+      "control_SHA": "f7ef5a8af744bbfa948cbb481b2f5891033893d2d5a107e6da616ef5b27f4cbc",
+      "closeout_SHA": "d7e6855b600a979db80072f6ff5e38bc0935fd77076fa86a133fcbc5ae847e8a",
+      "chain_SHA": "4f2b1452caa143fe9593aa3054f469afb19d8271c28d6b374069a64b39080039",
+      "sources": [
+        {
+          "call": 4,
+          "SHA": "510cf17f7b5ad4da664801dfc69922180eb695b39bfb5c4c569469c69737f0f8",
+          "side": 0,
+          "beta": 0.255556602786186,
+          "native_rows_checked": 2
+        },
+        {
+          "call": 5,
+          "SHA": "7da820fe4233edcbddb18b0d8dc0aa463aaf509622fc95cd29c905ba1056106b",
+          "side": 1,
+          "beta": 0.2681924850446407,
+          "native_rows_checked": 2
+        }
+      ],
+      "floor_delta": 0.012635882258454686,
+      "actual_endpoint0_exact": "1150924621079937/4503599627370496",
+      "actual_endpoint1_exact": "77301220845479103/288230376151711744"
+    },
+    {
+      "role": "K-35-U",
+      "method": "CP",
+      "cap": 2400,
+      "qualification": false,
+      "control_SHA": "b5d04189732a648e15f6528f607e4aaec04bac170faf39c3a88b9e90d3edd0cf",
+      "closeout_SHA": "d77a4e5bc62124071d9561db0e73d0fedcd760f3bdf0babf140112962f3b35a7",
+      "chain_SHA": "b5060f0e2db85fc9915a805dceedd25be63c063604f7023cbc55beb27f989dbb",
+      "sources": [
+        {
+          "call": 4,
+          "SHA": "43826ef47c4a8fe5ad87f9b157ad43058932a9e5dd1f255bdfb433b9852703ac",
+          "side": 0,
+          "beta": 0.241586146621482,
+          "native_rows_checked": 7
+        },
+        {
+          "call": 5,
+          "SHA": "6f8c7f5a7d27e7ad71eb33a80d057d7d077c76152001ec0e295d730f27daf96d",
+          "side": 1,
+          "beta": 0.24016381583310395,
+          "native_rows_checked": 7
+        }
+      ],
+      "floor_delta": -0.0014223307883780571,
+      "actual_endpoint0_exact": "4352029119609521/18014398509481984",
+      "actual_endpoint1_exact": "553780055804847743/2305843009213693952"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "CP",
+      "cap": 2400,
+      "qualification": false,
+      "control_SHA": "fa5073c0511c5220f1ab5562f7c5803f5570752eb5e7d2a895a7425b3ab9f8c2",
+      "closeout_SHA": "38ac63406fc904f2d41e40c1f51124e8daf230c1105ce914e46608d69ce09852",
+      "chain_SHA": "7d709bbb5a9836e10f3cf98ebe0d6b520bff87a8ea3968487cab0ee08415a101",
+      "sources": [
+        {
+          "call": 4,
+          "SHA": "62bb1f6864ab3dd6f70c3adf7ff108e65eea2b26b62291339ce3ab8a66f20302",
+          "side": 0,
+          "beta": 0.14655809326167776,
+          "native_rows_checked": 7
+        },
+        {
+          "call": 5,
+          "SHA": "8b0c0766ac756783526b5e8368c50f24b744d1216b76fd455b97f1d5eba17ce1",
+          "side": 1,
+          "beta": 0.150566842397805,
+          "native_rows_checked": 7
+        }
+      ],
+      "floor_delta": 0.004008749136127225,
+      "actual_endpoint0_exact": "2640155896805689/18014398509481984",
+      "actual_endpoint1_exact": "86795875240589647/576460752303423488"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "D1",
+      "cap": 2400,
+      "qualification": false,
+      "control_SHA": "2638ad3eedc3c215b230590ceecb82e203a6bbd9a6112030d2cc3a9999600474",
+      "closeout_SHA": "9ec1dee0bbac5593574619b8ca1af0f25b8645ee412947be084dcdcb4485a236",
+      "chain_SHA": "34ecf87380fd1c6e7f567d360e8e324765e5cf4b5065b2ab662614cfe2095b2c",
+      "sources": [
+        {
+          "call": 4,
+          "SHA": "1178bd57974adf9df77a431fff08de12b1903abfe95eb4d55fb7c90203954d17",
+          "side": 0,
+          "beta": 0.1463016529428662,
+          "native_rows_checked": 2
+        },
+        {
+          "call": 5,
+          "SHA": "9da9829cdc76a47325be8faca868257e21ec5395b8d6655959e806aad5750e0d",
+          "side": 1,
+          "beta": 0.15056684239780596,
+          "native_rows_checked": 2
+        }
+      ],
+      "floor_delta": 0.004265189454939753,
+      "actual_endpoint0_exact": "2635536278708719/18014398509481984",
+      "actual_endpoint1_exact": "86795875240590207/576460752303423488"
+    },
+    {
+      "role": "K-20-S",
+      "method": "CP",
+      "cap": 90,
+      "qualification": true,
+      "control_SHA": "841619d79f62e4a81beb0d0c66ea15e6b3df55c148c9e51024a776ec0642e237",
+      "closeout_SHA": "563e784fc57a2967921b5a2caadd1127b25ab93c8d2c2c046afc62e0fbb97a2d",
+      "chain_SHA": "7ef87ea31a198efe6326304c066dd806b37ad3eab506b77ee11748afc2442712",
+      "sources": [
+        {
+          "call": 4,
+          "SHA": "a248368bfa7099a7d9a84df0e669a1a0705b2a9cd9ee0bda69f9ced468c34b30",
+          "side": 0,
+          "beta": 0.25562877807608464,
+          "native_rows_checked": 7
+        },
+        {
+          "call": 5,
+          "SHA": "73da94d44333abcae3b1ec85d31f2ae297ec9b43dbc6103acb04e3d64e4af9e1",
+          "side": 1,
+          "beta": 0.26819248504464055,
+          "native_rows_checked": 7
+        }
+      ],
+      "floor_delta": 0.012563706968555906,
+      "actual_endpoint0_exact": "4604998678754519/18014398509481984",
+      "actual_endpoint1_exact": "77301220845479055/288230376151711744"
+    }
+  ],
+  "old_entry_profile_checks": [
+    {
+      "path": "scripts/paper_s2.py",
+      "SHA": "58a35f88a5b54c2f4b968ca6b7a862c98bd6573c0e95a0f1abca5d7a52f7bab8",
+      "semantics_unchanged": true
+    },
+    {
+      "path": "scripts/paper_s2_count_disjunction.py",
+      "SHA": "bdef63cd39790a8a15f6e2573f3236f459ee81ba116b8eeaab4997eb76972bc1",
+      "semantics_unchanged": true
+    },
+    {
+      "path": "scripts/paper_s2_stock_placement.py",
+      "SHA": "b073a603c4214216780cd60ec8bd07c133af1e9b07409f545f5a35d790ea8d75",
+      "semantics_unchanged": true
+    },
+    {
+      "path": "scripts/paper_s2_stock_rlt.py",
+      "SHA": "d87d25c42848f4329cb48f6bd9b7914ce0c0530fa9b900d3ca1ab325b4bba1cf",
+      "semantics_unchanged": true
+    },
+    {
+      "path": "scripts/paper_s2_tc2.py",
+      "SHA": "8e5763117f1314459e98a11e5a4b3c61fc26f39961e8388cf135e09f55dc0df3",
+      "semantics_unchanged": true
+    },
+    {
+      "path": "config/gi_tbc_count_disjunction_round141.json",
+      "SHA": "85b2ab2d475845fd96f7ca949e30d3714c469669b4a8f406156bd3eb48dcc047",
+      "semantics_unchanged": true
+    },
+    {
+      "path": "config/gi_tbc_round137.json",
+      "SHA": "9c76a442d97b504abfbb419722000b50fdba7f5bdeae9160cace555ef71c9dd0",
+      "semantics_unchanged": true
+    },
+    {
+      "path": "config/gi_tbc_stock_placement_round139.json",
+      "SHA": "8e188fb60eb908b0d304fd0c602d9857318888df2e7874b92065ad116f26cef8",
+      "semantics_unchanged": true
+    },
+    {
+      "path": "config/gi_tbc_stock_rlt_round138.json",
+      "SHA": "ac7cace16f2f2e9489c47a8677b95addb68e34827cc1cb3542af345ff12380db",
+      "semantics_unchanged": true
+    },
+    {
+      "path": "config/gi_tbc_tc2_round140.json",
+      "SHA": "6ad824def8900f1a5cb62d30d96d51b63faed0232069fabe3ee35d7ab51c6271",
+      "semantics_unchanged": true
+    }
+  ],
+  "formal_results": [
+    {
+      "role": "K-15-S",
+      "method": "CP",
+      "seed": 0,
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560502,
+      "certificate": true,
+      "T_produce": 27.48824833286926,
+      "T_cert": 27.48824833286926,
+      "T_verify": 5.156886400189251,
+      "T_total": 32.64513473305851
+    },
+    {
+      "role": "K-20-S",
+      "method": "CP",
+      "seed": 0,
+      "U": 0.7168065462777502,
+      "L": 0.7168065462777496,
+      "certificate": true,
+      "T_produce": 86.67144398065284,
+      "T_cert": 86.67144398065284,
+      "T_verify": 9.314543299842626,
+      "T_total": 95.98598728049546
+    },
+    {
+      "role": "K-20-S",
+      "method": "D1",
+      "seed": 0,
+      "U": 0.7168065462777502,
+      "L": 0.7168065462777501,
+      "certificate": true,
+      "T_produce": 87.54576722695492,
+      "T_cert": 87.54576722695492,
+      "T_verify": 9.93112640012987,
+      "T_total": 97.47689362708479
+    },
+    {
+      "role": "K-35-U",
+      "method": "CP",
+      "seed": 0,
+      "U": 0.6654188890722282,
+      "L": 0.5450407754893646,
+      "certificate": false,
+      "T_produce": 2371.1798273329623,
+      "T_cert": null,
+      "T_verify": 16.993668399984017,
+      "T_total": 2388.1734957329463
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "CP",
+      "seed": 0,
+      "U": 0.35740210216991025,
+      "L": 0.22936554691005015,
+      "certificate": false,
+      "T_produce": 2371.161099730525,
+      "T_cert": null,
+      "T_verify": 15.49755849991925,
+      "T_total": 2386.6586582304444
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "D1",
+      "seed": 0,
+      "U": 0.41377327502170724,
+      "L": 0.2279034490037257,
+      "certificate": false,
+      "T_produce": 2371.073038647184,
+      "T_cert": null,
+      "T_verify": 13.609237700002268,
+      "T_total": 2384.6822763471864
+    }
+  ],
+  "conclusions": {
+    "adopt_stable_default": false,
+    "recommendation": "RESEARCH_ONLY_CLOSE_COUNT_PROOF_CONTINUATION",
+    "source_information": "Real missing common-factor freedom; weak-source/min-cover gains 2.381078e-5 / 2.564403e-4 / 7.217529e-5. ALL adds no numerical objective value.",
+    "matched_K20": "-.874323s production and -1.490906s total, below substantive threshold; no isolated CP proof-time claim.",
+    "matched_RB": "U improves .056371173 and L improves .001462098 versus actual same-PE old D1; valid partial hard-role repair, no claim Native branches on b.",
+    "adverse_K35": "U worsens .009869163 and L worsens .014489358 versus historical D1; no new same-PE K35, so retain cross-version boundary without CP-only blame.",
+    "adoption_boundary": "K35/RB remain behind historical old TC+stock at both endpoints. Missing roles stay untested; no remaining-four or Seed1 work needed to decide this candidate."
+  },
+  "budget": {
+    "conservative_experimental_outer_seconds": 7504.312010499183,
+    "G1_online_submeter_seconds": 7420.26558019896,
+    "not_added_to_each_other": true,
+    "ceiling_seconds": 28800,
+    "all_23_experimental_receipts_closed": true
+  },
+  "remaining_required_experiments": [],
+  "pending_delivery": [
+    "Final rendered PDF must still be visually checked page by page at its final SHA.",
+    "English Draft PR with verified base/head/draft and fixed science pin.",
+    "Bounded new-carrier public byte/member check, separate from this local scientific validation.",
+    "Current-round-only bounded cleanup after evidence/public acceptance; preserve unique raw/failures and necessary runtime."
+  ],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "independent_actual_source_domain_checks": [
+    {
+      "role": "K-15-S",
+      "method": "CP",
+      "call": 4,
+      "current_g_bounds": [
+        0.0,
+        0.6623605074511707
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "K-15-S",
+      "method": "CP",
+      "call": 5,
+      "current_g_bounds": [
+        0.0,
+        0.6623605074511707
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "K-20-S",
+      "method": "CP",
+      "call": 4,
+      "current_g_bounds": [
+        0.0,
+        0.7752127578025219
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "K-20-S",
+      "method": "CP",
+      "call": 5,
+      "current_g_bounds": [
+        0.0,
+        0.7752127578025219
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "K-20-S",
+      "method": "D1",
+      "call": 4,
+      "current_g_bounds": [
+        0.0,
+        0.7752127578025219
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "K-20-S",
+      "method": "D1",
+      "call": 5,
+      "current_g_bounds": [
+        0.0,
+        0.7752127578025219
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "K-35-U",
+      "method": "CP",
+      "call": 4,
+      "current_g_bounds": [
+        0.0,
+        0.7674566047247167
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "K-35-U",
+      "method": "CP",
+      "call": 5,
+      "current_g_bounds": [
+        0.0,
+        0.7674566047247167
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "CP",
+      "call": 4,
+      "current_g_bounds": [
+        0.0,
+        0.44548980895179674
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "CP",
+      "call": 5,
+      "current_g_bounds": [
+        0.0,
+        0.44548980895179674
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "D1",
+      "call": 4,
+      "current_g_bounds": [
+        0.0,
+        0.44548980895179674
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "D1",
+      "call": 5,
+      "current_g_bounds": [
+        0.0,
+        0.44548980895179674
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "K-20-S",
+      "method": "CP",
+      "call": 4,
+      "current_g_bounds": [
+        0.0,
+        0.7752127578025219
+      ],
+      "parent_rows_and_columns_retained": true
+    },
+    {
+      "role": "K-20-S",
+      "method": "CP",
+      "call": 5,
+      "current_g_bounds": [
+        0.0,
+        0.7752127578025219
+      ],
+      "parent_rows_and_columns_retained": true
+    }
+  ]
+}

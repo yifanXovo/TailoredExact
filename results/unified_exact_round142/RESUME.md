@@ -44,6 +44,16 @@ necessary PE/DLL and the active worktree. Zero deletion is acceptable.
   bridge_matrix.json and review/bridge_admission.json. Do not add remaining
   roles or Seed1 without a new decision-changing fact. K35's adverse comparison
   remains cross-version rather than an isolated CP causal claim.
+- Both bridges are complete and healthy. K20 selected CP versus same-PE D1
+  changes production by -0.874323 seconds and total by -1.490906 seconds,
+  below the substantive threshold. RB35-T2 changes U by -0.056371173 and L
+  by +0.001462098; actual first integer matrices match except the floor row.
+- The scientific decision is **RESEARCH_ONLY_CLOSE_COUNT_PROOF_CONTINUATION**.
+  There are 12 standalone LPs, four selected full positions, two same-PE old-D1
+  controls, one healthy cap90 qualifier and no new Seed1. Conservative complete
+  experimental outers are 7504.312010 seconds (2.084531 hours), including
+  mandatory postverification; the nonadditive online G1 submeter is7420.265580
+  seconds. Stopping is result-based with ample remaining budget.
 
 ## Safe continuation commands
 
@@ -70,11 +80,12 @@ Separate reproduction entry:
 `--run` is explicit; `--products selected` is the frozen candidate and
 `--products off` supplies same-PE old D1 behavior. Bare C++ defaults off.
 
-## Pending closeout
+## Delivery closeout
 
-Assess full results before optional expansion/bridge/Seed1; keep adverse
-results, full costs and open T_cert=null. Finish compact reports, decision,
-independent final review, incremental manuscript/PDF page review, finite new
-carriers, English Draft PR to the actual eligible base, one bounded anonymous
-archive/member read, and current-round cleanup. No automatic merge, force
-push, historical deletion or message to others follows.
+Scientific tables, decision and pure local seal/physical/lifecycle checks are
+complete. All planned experiments are closed; no further Optimize is required.
+The incremental PDF/page review, independent final integration, finite new
+carriers, English Draft PR/readback, bounded public byte/member read and
+current-round cleanup are the remaining delivery steps. Their actual receipts
+will be appended here. No automatic merge, force push, historical deletion or
+message to others follows.
