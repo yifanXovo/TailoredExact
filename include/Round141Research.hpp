@@ -29,7 +29,9 @@ inline std::vector<std::string> split(const std::string& s,char c) {
     std::vector<std::string> a;std::istringstream f(s);std::string v;while(std::getline(f,v,c))a.push_back(v);return a;
 }
 inline std::string material(const std::filesystem::path& p) {
-    std::ifstream f(p,std::ios::binary);require(bool(f),"model_read_failed");std::ostringstream s;s<<f.rdbuf();return s.str();
+    // The inherited Windows canonical writer emits CRLF. Read as text before
+    // editing section boundaries; identity hashes still use original bytes.
+    std::ifstream f(p);require(bool(f),"model_read_failed");std::ostringstream s;s<<f.rdbuf();return s.str();
 }
 inline std::vector<std::vector<int>> supports(const std::string& text,int n) {
     std::vector<std::set<int>> found(n+1);std::regex pattern("\\bstate_([0-9]+)_([0-9]+)\\b");

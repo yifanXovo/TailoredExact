@@ -20492,6 +20492,13 @@ int main(int argc, char** argv) {
         }
         ebrp::recordProcessPhase(
             opt, "final_result_serialization_start", "start");
+        if(ebrp::round141().enabled()&&!opt.out_path.empty()) {
+            const auto& c=ebrp::round141();const auto path=std::filesystem::path(opt.out_path).parent_path()/"round141_outcome.json";
+            std::ofstream f(path);f<<"{\"mode\":"<<std::quoted(c.mode)<<",\"attempted\":"<<(c.attempted?"true":"false")
+                <<",\"root_qualified\":"<<(c.root_qualified?"true":"false")<<",\"pair_ready\":"<<(c.ready?"true":"false")
+                <<",\"reason\":"<<std::quoted(c.ready?"embedded":c.attempted?"no_complete_qualified_count_pair":c.root_qualified?"normal_root_flow_finished_before_first_integer_request":"no_qualified_normal_root_before_return")<<"}\n";
+            if(!f)throw std::runtime_error("Round141 outcome persistence failed");
+        }
         const std::string json = ebrp::resultsToJson(results);
         if (!opt.out_path.empty()) ebrp::writeTextFile(opt.out_path, json);
         else std::cout << json;

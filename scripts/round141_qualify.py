@@ -12,18 +12,18 @@ def build():
     args=[compiler,*old['flags'],ROOT/'scripts/round141_qualify.cpp',*manifest['objects'],
           manifest['archive']['path'],'-lkernel32','-luser32','-lgdi32','-lwinspool','-lshell32',
           '-lole32','-loleaut32','-luuid','-lcomdlg32','-ladvapi32','-o',target]
-    assert metered('compile_tiny','build',args,timeout=180)==0
+    assert metered(target.parent.name+'_compile_tiny','build',args,timeout=180)==0
     write(OUT/'qualification_build.json',dict(PE=str(target),PE_SHA=sha(target),source_SHA=sha(ROOT/'scripts/round141_qualify.cpp')))
 
 def tiny():
     pe=read(OUT/'qualification_build.json');assert sha(pe['PE'])==pe['PE_SHA']
-    assert metered('tiny_cpp','diagnostic',[pe['PE'],OUT/'qualification/tiny'],30,45)==0
+    assert metered('tiny_cpp_v3','diagnostic',[pe['PE'],OUT/'qualification/tiny_v3'],30,45)==0
 
 def native_tiny():
     from round100_gurobi_runtime import gp,binding
     from round141_math import model_counts,serializable,child_rows
     assert binding()['sha256']==DLL_SHA
-    root=OUT/'qualification/tiny';facts=[]
+    root=OUT/'qualification/tiny_v3';facts=[]
     parsed={key:core.lp_model(root/(key+'.lp')) for key in ['parent','count_low','count_high','d0','d1','successor','successor_d0']}
     parent=parsed['parent'];add=serializable(model_counts(parent,0,2))
     with gp.Env(empty=True) as env:

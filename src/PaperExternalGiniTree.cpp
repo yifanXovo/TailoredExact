@@ -3648,7 +3648,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         const auto solved=PaperClock::now();const auto out=backend->solve(probe);
                         const double construction=std::chrono::duration<double>(solved-built).count();
                         const double total=std::chrono::duration<double>(PaperClock::now()-built).count();
-                        if(out.attempted) optimize<<probe.leaf_id<<",COUNT_LP,"<<csvField(out.native_status)<<','<<out.optimize_return_code<<','<<probe.global_deadline_remaining_seconds<<','
+                        if(out.attempted) optimize<<probe.leaf_id<<",LP,"<<csvField(out.native_status)<<','<<out.optimize_return_code<<','<<probe.global_deadline_remaining_seconds<<','
                             <<out.solver_runtime_seconds<<','<<out.work<<','<<out.nodes<<','<<out.simplex_iterations<<','<<out.barrier_iterations<<','<<out.memory_gb<<','<<artifact.sha256<<','
                             <<out.in_memory_model_reused<<','<<out.integer_domain_restored<<','<<csvField(out.basis_reuse_status)<<','<<csvField(out.native_log_path)<<'\n';
                         backend->discardLeaf(probe.leaf_id);
