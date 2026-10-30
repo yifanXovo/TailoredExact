@@ -38,6 +38,8 @@ int main(int argc,char** argv){try {
     check(!evaluateNativeLocalInfeasibility(scope,{high}).inconsistent,"other-side feasible witness does not refute side infeasibility");
     check(evaluateNativeLocalInfeasibility(scope,{low}).inconsistent,"same-side witness refutes side infeasibility");
     check(!evaluateNativeEvidenceBound(scope,.1,{high}).available,"count side never becomes global Gini coverage");
+    auto legacy=scope;legacy.settings_json="{}";legacy.native_preconditions=false;
+    check(evaluateNativeLocalInfeasibility(legacy,{low}).inconsistent,"default-off contradiction-before-qualification order preserved");
     auto malformed=scope;malformed.settings_json="{\"round141_count_scope\":\"bad\"}";
     check(!evaluateNativeLocalScope(malformed).available,"malformed count scope fails closed");
     opt.process_start_time_valid=true;opt.process_start_time=std::chrono::steady_clock::now();opt.native_evidence_dir=(dir/"revocation_journal").string();

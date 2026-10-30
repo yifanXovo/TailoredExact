@@ -71,12 +71,12 @@ def run(batch,stop_after=None):
         if (Path(group['launch']['destination'])/'verification_closeout.json').exists():continue
         label=f'{batch}_{group["position"]:03}';assert not (OUT/'fees'/label).exists(),'Inspect existing fee and sealed producer; no automatic repeat'
         write(OUT/'active_position.json',dict(UTC=utc(),batch=batch,position=group['position'],fee_label=label,arm_id=group['arm_id']))
-        assert metered(label,'diagnostic' if batch=='qualification' else 'native',
+        assert metered(label,'diagnostic' if batch.startswith('qualification') else 'native',
             [PYTHON,ROOT/'scripts/round141_campaign.py','arm',batch,group['position'],label],group['launch']['cap_seconds'],group['launch']['cap_seconds']+1800)==0
     write(OUT/f'{batch}_run_return.json',dict(UTC=utc(),budget=budget()))
 
 def qualification():
-    freeze('qualification',[dict(role='K-20-S',mode='d1',cap=90),dict(role='K-15-S',mode='d0',cap=90)],
+    freeze('qualification_v4',[dict(role='K-20-S',mode='d1',cap=90),dict(role='K-15-S',mode='d0',cap=90)],
         'Finite own-H/normal-root/count-probe/Native target and terminal qualification after exact writer/Start/source tests; not performance observations')
 
 def pilot():

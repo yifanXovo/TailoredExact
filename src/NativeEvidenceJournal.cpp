@@ -162,8 +162,13 @@ NativeEvidenceBound evaluateNativeLocalScope(const NativeEvidenceScope& s) {
 }
 NativeEvidenceBound evaluateNativeLocalInfeasibility(const NativeEvidenceScope& s,
     const std::vector<Verification>& witnesses) {
-    const auto valid=evaluateNativeLocalScope(s);if(!valid.available)return valid;
     const auto count_scope=round141ScopeValue(s.settings_json);
+    // Preserve the historical contradiction-before-qualification order when
+    // no new count domain is present. Count metadata itself must be valid
+    // before it can decide whether a physical witness belongs to this side.
+    if(!count_scope.empty()) {
+        const auto valid=evaluateNativeLocalScope(s);if(!valid.available)return valid;
+    }
     for(const auto& v:witnesses)if(verified(v) && (s.full_original ||
         (v.G>=s.lower_g && v.G<=s.upper_g && v.objective<=s.cutoff)) &&
         (count_scope.empty() || (!v.final_inventory.empty() && round141ScopeContains(count_scope,v.final_inventory)))) {
