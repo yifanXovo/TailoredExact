@@ -1,0 +1,74 @@
+{
+  "PASS": true,
+  "reviewer": "independent_review (non-implementer)",
+  "scope": "preliminary mathematical review, not new LP optimum or BRP integer-hull proof",
+  "UTC": "2026-10-30T14:56:26.518004+00:00",
+  "read_SHA256": {
+    "results/unified_exact_round142/goal.md": "dde8d25306b037807b5c290bf1f352067d7a84b061e564d68b328996b47a9fd2",
+    "results/unified_exact_round138/mathematical_analysis.md": "124f9e6b55953b6f66ad18c729479ae34acab2a2afb8310c286f4578fdad21ee",
+    "results/unified_exact_round141/mathematical_analysis.md": "6e831d43179f2a0ae2a9daaa9b0bd18f2403195fed6a2c6e639c0f80c66e8b96",
+    "WORKSPACE_POLICY.md": "3812091c415a87116472e56f7f9c598c36ee485a654383d15e8b03fca69c042d"
+  },
+  "Optimize": 0,
+  "compile": 0,
+  "findings": [],
+  "B": "Ideal sandwich is correct assuming same full objective, source subset of parent, valid floors, and one weak-source optimum satisfying the opposite link endpoint with its integral b. Actual directed floor serialization needs numerical endpoint bounds.",
+  "C_CP": "All four signs/constants valid slack products; alpha<beta CP also implies count ranges. At collapsed interval, retain explicit count ranges.",
+  "network_integrality": "Finite nested threshold counts are chain-arc flows in a station-choice network with integer supplies and integer lower/upper capacities. Integral network-flow projection onto support choice arcs proves integer selector polytope. No weighted stock/time/route rows enter this claim.",
+  "hull": "R138 endpoint decomposition plus network integrality gives exact convex hull of shared-factor products for count-only selector block. At any fixed g on graph q=g*s, a fractional selector decomposes at that same g into integral selectors. Do not identify the entire hull fixed-g slice with the graph.",
+  "parent_selected_ALL": "The two unnormalized endpoint masses beta*s-q and q-alpha*s are nonnegative and nested across thresholds. Parent bounds plus conditional selected bounds imply propagated bounds for each mass, hence all propagated CP; converse follows interval containment. Collapsed g needs explicit count ranges for the claimed selector hull.",
+  "fixture": {
+    "stock_slacks": [
+      "3/8",
+      "3/8",
+      "3/8",
+      "3/8"
+    ],
+    "K": [
+      "3",
+      "1"
+    ],
+    "W": [
+      "9/10",
+      "3/5"
+    ],
+    "parent_CP_slacks": [
+      [
+        "3/20",
+        "3/20",
+        "3/5",
+        "3/5"
+      ],
+      [
+        "3/5",
+        "3/5",
+        "3/20",
+        "3/20"
+      ]
+    ],
+    "conditional_CP_slacks": [
+      "3/5",
+      "9/40",
+      "3/20",
+      "-9/40"
+    ],
+    "maximum_violation": "9/40",
+    "alpha_selector": [
+      "1/10",
+      "4/5",
+      "1/10"
+    ],
+    "beta_selector": [
+      "2/5",
+      "1/5",
+      "2/5"
+    ],
+    "beta_endpoint_K2": "8/5",
+    "scope": "strict relaxation-block separation only",
+    "TC_rhs": "2",
+    "parent_TC2_rhs": "4",
+    "child_TC2_rhs": "5"
+  },
+  "alpha_positive_and_fixed_g_exact_product_cases": 54,
+  "pending": "New Python/C++ writer and actual Native row readback, source-only installation, candidate matrices/floors/results not yet available."
+}

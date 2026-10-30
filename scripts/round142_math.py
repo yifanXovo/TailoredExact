@@ -158,8 +158,9 @@ def prepare():
 
 def tiny():
     tick=time.perf_counter();supports={str(i):[0,1,2] for i in range(1,5)}
-    add=json.loads(json.dumps(serializable(count_rows({int(i):ys for i,ys in supports.items()},
-        {i:F(1) for i in range(1,5)},3,5))))
+    raw=count_rows({int(i):ys for i,ys in supports.items()}, {i:F(1) for i in range(1,5)},3,5)
+    raw.update(supports={int(i):ys for i,ys in supports.items()},ratios={i:F(1) for i in range(1,5)})
+    add=json.loads(json.dumps(serializable(raw)))
     add.update(supports=supports,ratios={i:1. for i in supports})
     x={'G':F(3,8)}
     for i in supports:
