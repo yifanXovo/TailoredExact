@@ -1,0 +1,104 @@
+{
+  "PASS": true,
+  "positions": [
+    {
+      "batch": "qualification_v6",
+      "check": {
+        "PASS": true,
+        "triggered": true,
+        "pair_ready": true,
+        "choice": {
+          "kind": "root_count_selected",
+          "threshold_units": "72057594037927932",
+          "threshold_exponent": -56,
+          "ell": 0,
+          "u": 18,
+          "pivot": 7,
+          "K_star": 7.143095898198276,
+          "count_range_violation": 0,
+          "rule": "max_weighted_remainder_then_lp_floor",
+          "root_SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030",
+          "support_SHA": "fadfbc3bb5af7376fd84f2526f844fa285d6f366e38945f632fe2987295fa7e3",
+          "domain_cutoff": 0.7752127578025219,
+          "model_cutoff": 0.7752127578025219
+        },
+        "sides": [
+          {
+            "side": 0,
+            "call": 4,
+            "model_SHA": "510cf17f7b5ad4da664801dfc69922180eb695b39bfb5c4c569469c69737f0f8",
+            "raw_bound": 0.2555567027861861,
+            "beta": 0.255556602786186,
+            "settings_SHA": "a1d9a15194088583b019316b1e812df9c3d70a94482395b4bb00241e11b9f785"
+          },
+          {
+            "side": 1,
+            "call": 5,
+            "model_SHA": "7da820fe4233edcbddb18b0d8dc0aa463aaf509622fc95cd29c905ba1056106b",
+            "raw_bound": 0.2681925850446408,
+            "beta": 0.2681924850446407,
+            "settings_SHA": "fb8a0a62fc8e76e0fcd3999268a58818b2cde6e429ede579412506c15e8ebfdb"
+          }
+        ],
+        "cover": 0.255556602786186,
+        "verification_closeout_SHA": "f1d0777a07e3a7fc103a69bc2cc0c3ba25fb68e9b2ebbdb354f81187495b3aba",
+        "complete_control_audit_SHA": "ebf4afea8a50db98242929b09280b9666670b26b14a63b28db30fdd42fd40d74",
+        "source_input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+        "pure_reader_SHA": "3365a9fd39eb524fdf747765682a6dab9e035b24534522d665eb904c358d9fec",
+        "Optimize": 0,
+        "Native_load": 0,
+        "seconds": 0.5333161000162363
+      }
+    },
+    {
+      "batch": "qualification_v6b",
+      "check": {
+        "PASS": true,
+        "triggered": true,
+        "pair_ready": true,
+        "choice": {
+          "kind": "root_count_selected",
+          "threshold_units": "72057594037927932",
+          "threshold_exponent": -56,
+          "ell": 0,
+          "u": 13,
+          "pivot": 5,
+          "K_star": 5.0128949762096155,
+          "count_range_violation": 0,
+          "rule": "max_weighted_remainder_then_lp_floor",
+          "root_SHA": "ceb38a967fd1799dd806994318172f3dec2af516038a606d588392960b45bad1",
+          "support_SHA": "2919b1472ea0cf88a3a5d13da62472beec1aeacab44a17fd7d9f511ae174271d",
+          "domain_cutoff": 0.6623605074511707,
+          "model_cutoff": 0.6623605074511707
+        },
+        "sides": [
+          {
+            "side": 0,
+            "call": 4,
+            "model_SHA": "897885f827721d8d36ebdb42ebefebefac040d1aa2b3a2c604d70d7dc41824e1",
+            "raw_bound": 0.2305444432800799,
+            "beta": 0.23054434328007986,
+            "settings_SHA": "1c1931be5f2cad34c352c737dc5d0e1da738253bc36d7c65fe6ad0a140019072"
+          },
+          {
+            "side": 1,
+            "call": 5,
+            "model_SHA": "6205f73ed016f9d889dd8174549a992d6936416d5d8617fc833bc547dfea22db",
+            "raw_bound": 0.24745891248940516,
+            "beta": 0.24745881248940513,
+            "settings_SHA": "4518a14fc16fad8a588b754bac26c65c6fb2d4f3fce00876e64c426f01ddd123"
+          }
+        ],
+        "cover": 0.23054434328007986,
+        "verification_closeout_SHA": "cfbff3312bbd545f1a6f0d40ea54781305ace50857f74fc237647e937fb81a46",
+        "complete_control_audit_SHA": "9aef0aae6158b7d0922f2599eee30912dd65ca260ab837a302fb291428bf7f8f",
+        "source_input_SHA": "fc50f41438436f7771197a40616e0557fb53865bb0d7117f304bd8e281af402f",
+        "pure_reader_SHA": "3365a9fd39eb524fdf747765682a6dab9e035b24534522d665eb904c358d9fec",
+        "Optimize": 0,
+        "Native_load": 0,
+        "seconds": 0.3310277001000941
+      }
+    }
+  ],
+  "Optimize": 0
+}

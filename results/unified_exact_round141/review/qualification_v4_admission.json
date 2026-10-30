@@ -1,0 +1,46 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "independent agent round141_independent_review",
+  "matrix_SHA": "a25d1b6ec15376908ff635f7cd8884b60b9dd0ef6397e7da38fd7fbfc522f15e",
+  "candidate_manifest_SHA": "7014f39f875349bf665d711b28dbfa9ec40f5ede9a64f7be07ac5b12962d7a59",
+  "source_commit": "e774d77cf0d69e331f2f0ea1813cbd4b2a09ee36",
+  "production_PE_SHA": "c0eba4f6c254cb9646a3d5ecfb3d51921c92fca323b075f10560adf577acc4e6",
+  "scope": "two cap90 own-H qualification positions only; complete pilot requires review of their actual Native chains",
+  "new_nominal_cap_seconds": 180,
+  "budget_before": {
+    "G1_seconds": 97.7651849000249,
+    "remaining_G1_seconds": 35902.234815099975,
+    "by_category": {
+      "diagnostic": 97.7651849000249,
+      "native": 0.0
+    },
+    "limits": {
+      "diagnostic": 3600.0,
+      "native": 36000.0
+    },
+    "category_remaining": {
+      "diagnostic": 3502.234815099975,
+      "native": 36000.0
+    },
+    "separately_reported_seconds": 174.1462981996592,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "basis": [
+    "actual count writer retains parent rows, correct conditional TC2 and side links",
+    "two independently verified physical sides set actual Start b=0/1",
+    "same-side versus opposite-side bound/infeasible witness handling, malformed scope rejection and source revocation pass",
+    "one containing descendant accepted; source cutoff/g expansion rejected",
+    "eight actual Native ObjCon/signed-delta endpoint transports pass with zero Optimize",
+    "default-off contradiction-before-qualification ordering restored and tiny assertion passes",
+    "correct active-path event initialization and explicit main no-trigger outcome",
+    "matrix/identity/input/helper/source/PE hashes checked; Seed0, one thread, own H20260626 and stock BOTH+TC+TC2 fixed",
+    "serial ledger has no pending fee and enough diagnostic/total allowance"
+  ],
+  "Optimize": 0,
+  "native_load": 0,
+  "compile": 0,
+  "review_seconds": 0.08506419998593628,
+  "stable_historical_entries_independently_checked": 8,
+  "additional_entry_review_seconds": 0.27875799988396466
+}

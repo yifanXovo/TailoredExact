@@ -1,0 +1,37 @@
+{
+  "reviewer": "independent agent round141_independent_review",
+  "Optimize": 0,
+  "native_load": 0,
+  "compile": 0,
+  "production_preflight_pass": true,
+  "source_hashes": {
+    "include/Round141Research.hpp": "7b051b30802f112e1c6efc660518b78567b99e39e0fc78f957422605beb2e37e",
+    "src/NativeEvidenceJournal.cpp": "3f3abdf160ada40e80aaf34366e2d4b57889f275cd2b9464596fbb74cefc6289",
+    "src/GurobiBaseline.cpp": "c278a89c31f379a9fbf0334f809762189d2289ceb4cd63267a5a78571a16342d",
+    "src/PaperExternalGiniTree.cpp": "16249d3fa081f398f5e889a2416ea0710e10fef42376f5e0b33410e811629c32",
+    "src/MipStartMapping.cpp": "12aed2515a452df464a53ded56b86c14fdbf7bfd4b66e47ff26a79866a2ee192",
+    "src/main.cpp": "2d66d16e69ed4f9a67108ca95cc47380b3713514d37ea1640e92d06f19518323"
+  },
+  "core_checks_pass": [
+    "dyadic physical threshold identity and supported count construction match R140",
+    "low propagates suffix upper counts; high propagates prefix lower counts",
+    "probe appends side and conditional TC2 to exact SHA-bound parent with old rows retained",
+    "two count requests use independent IDs/canonical artifacts and never Gini scheduler child updates",
+    "count-side scope includes root/support SHA, exact threshold units/exponent,pivot,side and station supports",
+    "Native parameter readback preserves count scope; global-bound evaluation rejects a lone count side",
+    "same-side final_inventory membership filters witness contradictions; existing source rejection disables dependent embedding",
+    "qualified optimum or qualified improvement infeasibility floors use min(raw,actual source cutoff) minus inherited1e-7",
+    "embedding remaps frozen physical threshold to current support and requires g/cutoff/support containment",
+    "complete linear objective includes ObjCon and reuses directed R120 endpoint guard for either delta sign",
+    "Start b uses independently verified physical final_inventory count",
+    "Native audit checks every added row and actual objective/type/binary bounds/default priority"
+  ],
+  "required_corrections": [],
+  "recommendations": [
+    "record explicit no-trigger outcome when normal root closes before first MIP",
+    "online score uses deterministic long double arithmetic; reserve exact arithmetic claims for threshold membership/coefficient construction",
+    "before expensive pilot qualify both physical sides, scope rejection/source invalidation, contained descendant and actual Native readback"
+  ],
+  "qualification_pending": true,
+  "seconds": 0.004038899904116988
+}

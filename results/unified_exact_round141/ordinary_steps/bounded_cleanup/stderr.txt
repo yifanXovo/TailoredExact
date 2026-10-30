@@ -1,0 +1,8 @@
+Get-FileHash : The term 'Get-FileHash' is not recognized as the name of a cmdlet, function, script file, or operable pr
+ogram. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At E:\codes\ExactEBRP-work\worktrees\paper-current\scripts\round141_cleanup.ps1:18 char:17
++ $manifestSHA = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Pat ...
++                 ~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (Get-FileHash:String) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 

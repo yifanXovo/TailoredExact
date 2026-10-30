@@ -1,0 +1,72 @@
+{
+  "PASS": true,
+  "reviewer": "independent agent round141_independent_review",
+  "scope": "LP mathematics/history integration only; no final complete performance decision",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "LP_report_SHA": "dca93d437cb18d769308ca2f05435b7a6f87e74a213cdda6821c297849e2213c",
+  "LP_json_SHA": "8ca322d71f5d3785f812a63bf8bd5ed652670c133df526b2c89d4cb5535b4f70",
+  "math_SHA": "6e831d43179f2a0ae2a9daaa9b0bd18f2403195fed6a2c6e639c0f80c66e8b96",
+  "checks": [
+    "39 standalone continuous LPs correctly decomposed as3 parents+24 count children+6 D0/D1+6 Gini children",
+    "all stated table values reproduce compact results; covers use both-side minimum",
+    "matched Gini parent equality is structural row multiset/bounds/types/objective, not a claim of identical archive bytes",
+    "raw optimal values distinguished from conservative1e-7-margin numerical floors and exact rational solver proof",
+    "actual fractional-b projection recomputed independently; only RB/K20 saved D0 optima separated, all optimized D1/D0 objectives equal to numerical scale",
+    "plain balanced K35 last-bit variation correctly not attributed to mathematical strengthening",
+    "early Native root-cut bounds are explicitly path observations with displayed times, not redundancy on new model/future nodes",
+    "standard scalar hull, old R120 axis, exact threshold identity, supplied safe-M no-separation screen and return-bound witness retain their scopes"
+  ],
+  "selected_count_vs_Gini": [
+    {
+      "role": "K-35-U",
+      "count_cover": 0.24014000505315194,
+      "gini_cover": 0.22760129778163438,
+      "increment": 0.012538707271517568
+    },
+    {
+      "role": "R-B35-S-T2",
+      "count_cover": 0.1463016529428662,
+      "gini_cover": 0.1356413979617531,
+      "increment": 0.010660254981113115
+    },
+    {
+      "role": "K-20-S",
+      "count_cover": 0.255556602786186,
+      "gini_cover": 0.2353961289504691,
+      "increment": 0.020160473835716924
+    }
+  ],
+  "cutoff_metadata_diagnostics": [
+    {
+      "role": "K-35-U",
+      "validated_U": 0.7674566047247167,
+      "actual_source_cutoff": 0.7674566047247167,
+      "binary64_steps_between_metadata_U_and_source_cutoff": 0
+    },
+    {
+      "role": "R-B35-S-T2",
+      "validated_U": 0.4454898089517964,
+      "actual_source_cutoff": 0.44548980895179674,
+      "binary64_steps_between_metadata_U_and_source_cutoff": 6
+    },
+    {
+      "role": "K-20-S",
+      "validated_U": 0.7752127578025221,
+      "actual_source_cutoff": 0.7752127578025219,
+      "binary64_steps_between_metadata_U_and_source_cutoff": 2
+    }
+  ],
+  "minor_text_precision_requests": [
+    "Restrict fixed-G/support language to count/D0/D1 comparisons; Gini children deliberately rebuild intervals and may shrink supports. Their shared parent is matched.",
+    "Treat K35 plain LP-floor1.74e-7 observed increase as numerical scale too; no substantive plain K35 increment established.",
+    "Describe initial cutoff issue as last-bit mismatch rather than asserting one ulp unless the original serialized unmatched rows are separately measured. Metadata U/source cutoffs differ by2 and6 binary64 steps."
+  ],
+  "no_new_Optimize_needed_for_text_edits": true,
+  "seconds": 0.0014969001058489084,
+  "previous_LP_report_SHA": "dca93d437cb18d769308ca2f05435b7a6f87e74a213cdda6821c297849e2213c",
+  "minor_text_precision_requests_resolved": true,
+  "text_corrections_acceptance": "ACCEPT: fixed-parent language limited to count/D0/D1; both tiny K35 plain changes treated as numerical scale; initial Gini issue described as last-bit cutoff mismatch.",
+  "additional_review_seconds": 0.005186100024729967
+}

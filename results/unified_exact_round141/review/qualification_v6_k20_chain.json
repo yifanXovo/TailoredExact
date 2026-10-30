@@ -1,0 +1,44 @@
+{
+  "PASS": true,
+  "reviewer": "independent agent round141_independent_review",
+  "scope": "first V6 cap90 K20 D1 actual source/Native chain; qualification only",
+  "Optimize": 0,
+  "native_load": 0,
+  "actual_calls_checked": 7,
+  "actual_LP_restore_count": 5,
+  "count_side_proof_bindings": [
+    {
+      "side": 0,
+      "call": 4,
+      "model_SHA": "510cf17f7b5ad4da664801dfc69922180eb695b39bfb5c4c569469c69737f0f8",
+      "raw_bound": 0.2555567027861861,
+      "beta": 0.255556602786186,
+      "local_qualified": true,
+      "global_available": false,
+      "VType_restored": true,
+      "Native_log_SHA": "52ac37c7719f57cdbd84f5163865becccab9ea0808ee417fe23eaed4d72ec80b",
+      "printed_objective_rounding_interval_contains_actual": true
+    },
+    {
+      "side": 1,
+      "call": 5,
+      "model_SHA": "7da820fe4233edcbddb18b0d8dc0aa463aaf509622fc95cd29c905ba1056106b",
+      "raw_bound": 0.2681925850446408,
+      "beta": 0.2681924850446407,
+      "local_qualified": true,
+      "global_available": false,
+      "VType_restored": true,
+      "Native_log_SHA": "a36e3ee5c055e41b01b4e9144bf7211a6bbd11a4353f3b3646c72e24e677acea",
+      "printed_objective_rounding_interval_contains_actual": true
+    }
+  ],
+  "observations_SHA": "e6a2e7587a30b78aad9078f9aabc86b3d780ecf4bc3d61c129e3dee787eb4789",
+  "producer_seal_SHA": "433d61a1cc0d60855ce0d6bcf7132357d18d064de35e6344b58e07bd624dc900",
+  "audit_SHA": "9229dc4d893b272aea406469c44c17dc44538df12f5f1eaa71b232425ae7dc4f",
+  "reader_SHA": "04c2002603e7603d7a504d2ba26fd6964237314674be0eebec38ee806968ed33",
+  "count_inputs_filtered_only_for_Gini_cover": true,
+  "raw_count_chain_retained_in_full_audits": true,
+  "producer_rerun": false,
+  "review_note": "An initial reviewer-side fixed1e-12 printed-log equality check was too strict for 10-digit log output; replaced by exact Decimal rounding interval. Exact journal/probe raw-bound identity already held. No scientific failure or tolerance change.",
+  "seconds": 0.37354899989441037
+}

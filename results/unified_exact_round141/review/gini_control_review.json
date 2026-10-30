@@ -1,0 +1,48 @@
+{
+  "PASS": true,
+  "reviewer": "independent agent round141_independent_review",
+  "Optimize": 0,
+  "native_load": 0,
+  "scope": "same-source Gini versus count cover; not Native search outcome",
+  "gini_match_SHA": "56f227e5e1ee9748e1737e0eef105130fe7c5e39df9963bc72f3aefa0bc174d9",
+  "roles": [
+    {
+      "role": "K-35-U",
+      "parent_L": 0.22604405146770096,
+      "gini_raw_side_L": [
+        0.2276013977816344,
+        0.5452667809337869
+      ],
+      "gini_conservative_cover": 0.22760129778163438,
+      "count_conditional_cover": 0.24014000505315194,
+      "count_minus_gini_cover": 0.012538707271517568,
+      "source_parent_row_multiset_matched": true
+    },
+    {
+      "role": "R-B35-S-T2",
+      "parent_L": 0.13544923477665524,
+      "gini_raw_side_L": [
+        0.13564149796175312,
+        0.31386118707282873
+      ],
+      "gini_conservative_cover": 0.1356413979617531,
+      "count_conditional_cover": 0.1463016529428662,
+      "count_minus_gini_cover": 0.010660254981113115,
+      "source_parent_row_multiset_matched": true
+    },
+    {
+      "role": "K-20-S",
+      "parent_L": 0.23482187788475256,
+      "gini_raw_side_L": [
+        0.23539622895046913,
+        0.5407706545720795
+      ],
+      "gini_conservative_cover": 0.2353961289504691,
+      "count_conditional_cover": 0.255556602786186,
+      "count_minus_gini_cover": 0.020160473835716924,
+      "source_parent_row_multiset_matched": true
+    }
+  ],
+  "conclusion": "All three source-matched count conditional covers exceed the full canonical Gini midpoint cover; this confirms new count-axis LP information and supports the finite pilot recommendation. It does not predict complete performance.",
+  "seconds": 0.002377999946475029
+}

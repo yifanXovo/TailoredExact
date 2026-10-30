@@ -1,0 +1,39 @@
+{
+  "round": 141,
+  "study_complete": true,
+  "delivery_complete_in_this_record": false,
+  "recommendation": "RESEARCH_ONLY_STOP_FURTHER_FULL_EXPANSION",
+  "selected_uniform_candidate": "D1",
+  "promote_stable_default": false,
+  "stable_default": "R137 GI-TBC, unchanged",
+  "production_source_commit": "0b6148c22e572e7151bb5c90b4746cb0d7f706e1",
+  "production_PE_SHA": "572a224c1a4dd8cfe067fe536f36ad83087d1bec0596a3b604e2146204b17130",
+  "standalone_continuous_LPs": 39,
+  "formal_full_positions": 6,
+  "D1_Seed0_roles": [
+    "K-15-S",
+    "K-20-S",
+    "K-35-U",
+    "R-B35-S-T2"
+  ],
+  "D0_Seed0_roles": [
+    "K-20-S",
+    "K-35-U"
+  ],
+  "healthy_cap90_qualifications": 2,
+  "failed_cap90_qualifications_preserved": 1,
+  "new_Seed1_positions": 0,
+  "solver_seed": 0,
+  "H_seed": 20260626,
+  "G1_seconds": 7610.444692199584,
+  "G1_hours": 2.1140124144998844,
+  "budget_ceiling_seconds": 36000,
+  "independent_selection": "review/selection.json",
+  "remaining_required_experiments": [],
+  "decision_paragraph": "Retain the uniform root-count D1 entry as research-only and stop further full expansion. The integer cover, nested conditional chords and scoped floor transport are valid and produce new matched LP information. Complete-method evidence is mixed: the conditional floor helps K20 relative to D0 and improves K35's incumbent, but adds no certificate over the TC2 carrier, gives no substantive proof-clock improvement over accepted stock on the two small roles, and materially regresses RB35-T2. Stable R137 GI-TBC remains the default; D0 is an attribution control, not a replacement uniform candidate. This is a finite negative adoption decision, not a claim that every count disjunction or future stronger proof must fail.",
+  "complete_discussion": "The four D1 Seed0 roles retain two qualified certificates, K15 and K20, versus one for stable GI-TBC on these roles. STOCK, old TC+STOCK and TC2+STOCK already retain both proofs. K15 D1 produces its certificate in 32.3593 seconds (37.0207 total), compared with stock's 33.8182 (34.9299 total). K20 D1 closes in 93.5356 seconds (102.5815 total), compared with stock's 101.6354 (104.4597 total). Both differences against stock are below the inherited substantive threshold. K35 D1 ends at U/L=.655549726/.559530134: a substantial repair over TC2, but a stronger incumbent and weaker bound than stable GI-TBC; old TC+STOCK remains better at both ends. RB35-T2 D1 ends at .413773275/.227918419, worse at both ends than stock, TC2 and old TC+STOCK. Its U is about 20.1% worse than stable GI-TBC despite a stronger L. All formal positions are independently paid complete methods under the registered caps; open T_cert remains null.",
+  "conditional_discussion": "The same-PE K20 comparison isolates a useful conditional-floor effect: D1 saves 23.6894 production seconds and 24.7674 total seconds versus independently paid D0, with the same U and effectively identical certificate L. Its terminal Work/nodes are 137.2465/18588 versus D0's 173.2820/28554. K35 D1 improves D0's U by .011628889 but loses .000311467 in L, a real small bound regression; neither dominates. Their cap-limited producer clocks are effectively equal. D0 itself already improves TC2's K35 U by .0349700 and L by .0178712, so the whole carrier repair cannot be credited to the conditional delta. Exact root/probe identities, floors and first integer matrices except the verified floor row match in both pairs. No RB D0 was entered: its adverse whole-method result is not attributed causally to the conditional delta.",
+  "mechanism_discussion": "All six formal methods actually select once, obtain both qualified count LPs and install the valid pair. There is no actual outer Gini split. D1 probe totals are about .323 seconds for K15, .594 for K20, 3.128 for K35 and 4.775 for RB35-T2, including construction/solve/qualification. The complete producer clocks pay these costs. The standalone D1/D0 common-root objectives coincide, even though the written fractional-b projection separates actual D0 optima on K20 and RB. Both side floors lie below the carrier's observed Native early bounds. The evidence therefore supports changed feasible geometry and search paths, without an additional root LP optimum, a general redundancy theorem, a claim that Native branches on b, or an additive allocation of runtime to a row. K35 D1 uses slightly less terminal Work but more nodes than D0; it is not a universal search-effort improvement. The small probe cost does not by itself explain the important RB endpoint regression.",
+  "conditional_work_discussion": "Independent result-based selection requires no further experiments. The remaining four D1 configurations are not entered after the important RB regression and lack of material new stock proof-clock value. An RB D0 could supply local attribution, but is not required to change the current D1 adoption/stop decision; no such attribution is claimed. Existing D0 results do not consistently dominate D1 and give no basis for the one allowed uniform D0 adjustment. No decision-changing Seed1 pair is identified, and no favorable-Seed search is opened. The optional count-to-inventory tightening is left untested here as a future source-strength question, rather than forced into a second candidate. The full potential universe remains eight configurations on six base inputs; the entered D1 pilot uses four existing inputs, not eight new instances. Stopping is based on completed full windows and independent review, not budget exhaustion.",
+  "remaining_question": "The one useful follow-up is whether a count-implied total-inventory tightening can cheaply strengthen the two conditional source floors beyond the carrier's early Native bounds. Derive and test it first on matched saved LP domains, retaining parent rows and the same physical threshold/support scope, before considering another complete panel. The current weak floors and unchanged D1-over-D0 LP optimum do not justify a branching-priority, Seed or placement grid."
+}

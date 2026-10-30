@@ -1,0 +1,41 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "independent agent round141_independent_review",
+  "matrix_SHA": "b52c95ffcbc4a445dbff88ca2243c9c922e134f3480d25fc46bb3113f862c21e",
+  "candidate_manifest_SHA": "f8e471c1aef2820efddab8c2de81e0f2bc2abc583f82e09446e8db5dc999a5e4",
+  "source_commit": "0b6148c22e572e7151bb5c90b4746cb0d7f706e1",
+  "production_PE_SHA": "572a224c1a4dd8cfe067fe536f36ad83087d1bec0596a3b604e2146204b17130",
+  "scope": "one K15 D0 cap90 own-H qualification; pilot not yet admitted",
+  "new_nominal_cap_seconds": 90,
+  "budget_before": {
+    "G1_seconds": 221.4944783996325,
+    "remaining_G1_seconds": 35778.50552160037,
+    "by_category": {
+      "diagnostic": 221.4944783996325,
+      "native": 0.0
+    },
+    "limits": {
+      "diagnostic": 3600.0,
+      "native": 36000.0
+    },
+    "category_remaining": {
+      "diagnostic": 3378.5055216003675,
+      "native": 36000.0
+    },
+    "separately_reported_seconds": 271.7329521996435,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "basis": [
+    "V6 production/row/Start/scope/lifecycle preflight unchanged",
+    "first V6 K20 D1 actual seven-call chain and both side proof bindings accepted separately",
+    "pure reader keeps all count calls in full lifecycle/quality/source/matrix audits while excluding count sides only from Gini coverage algebra",
+    "current pure reader verifies explicit R137 parameters; helper hashes bound to new matrix",
+    "one new independent own-H Seed0/single-thread K15 D0 identity; old V6 second position remains unrun",
+    "both qualification pairs will receive standalone actual proof-binding checks before pilot admission"
+  ],
+  "Optimize": 0,
+  "native_load": 0,
+  "compile": 0,
+  "review_seconds": 0.07932400004938245
+}

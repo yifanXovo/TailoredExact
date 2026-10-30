@@ -1,0 +1,63 @@
+{
+  "decision": "ACCEPT",
+  "reviewer": "independent agent round141_independent_review",
+  "matrix_SHA": "5c65ab9f930759851dfaf40942f2ab7afcde77d92c375d9c3d60a952d1912609",
+  "candidate_manifest_SHA": "f8e471c1aef2820efddab8c2de81e0f2bc2abc583f82e09446e8db5dc999a5e4",
+  "source_commit": "0b6148c22e572e7151bb5c90b4746cb0d7f706e1",
+  "production_PE_SHA": "572a224c1a4dd8cfe067fe536f36ad83087d1bec0596a3b604e2146204b17130",
+  "scope": "four-role uniform D1 finite complete pilot",
+  "nominal_caps_seconds": 6600,
+  "joint_pilot_control_cap_seconds": 10200,
+  "budget_before": {
+    "G1_seconds": 253.7717897996772,
+    "remaining_G1_seconds": 35746.22821020032,
+    "by_category": {
+      "diagnostic": 253.7717897996772,
+      "native": 0.0
+    },
+    "limits": {
+      "diagnostic": 3600.0,
+      "native": 36000.0
+    },
+    "category_remaining": {
+      "diagnostic": 3346.228210200323,
+      "native": 36000.0
+    },
+    "separately_reported_seconds": 279.0059996997006,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "qualification_actual_chains": [
+    {
+      "batch": "qualification_v6",
+      "chain_audit_SHA": "f455b6d822b79f862c144fa60121570a5e6fd794c9bc616cb2786584b62914ab",
+      "audit_SHA": "9229dc4d893b272aea406469c44c17dc44538df12f5f1eaa71b232425ae7dc4f",
+      "call_count": 7,
+      "LP_restore_count": 5,
+      "certificate": false
+    },
+    {
+      "batch": "qualification_v6b",
+      "chain_audit_SHA": "205fd2a6d168b0bcebe7c908a3e5851ab9013933e92b2e48dcdcd86fbf3be280",
+      "audit_SHA": "14e55fdb5248d9a8c2328ebf6c65d48b9e9d635bd2e1b651d8da437f97310cf4",
+      "call_count": 7,
+      "LP_restore_count": 5,
+      "certificate": true
+    }
+  ],
+  "actual_chain_script_SHA": "3365a9fd39eb524fdf747765682a6dab9e035b24534522d665eb904c358d9fec",
+  "basis": [
+    "three same-source conditional count cover gains beyond both parent and Gini midpoint",
+    "two actual D0 points separated by the written D1 scalar projection, with fractional b optimized; D0/D1 LP optima equal",
+    "uniform maximum-weighted-remainder threshold and LP-floor pivot frozen for every role",
+    "qualified K20 D1 and K15 D0 actual chains preserve all seven calls, LP restoration, source scopes, physical Start and Native row audits",
+    "each pair floor is independently bound to actual count-side call/model/root/support/threshold/cutoff and qualified LP returns",
+    "D0 and D1 share carrier, selector rule, links, two independent online proofs and all costs; only final floor differs",
+    "Seed0/single-thread/own H20260626, AM.08 and stable controls preserved; all registered identities/hash bindings checked",
+    "important complete regressions or absent useful results limit further expansion; no automatic eight-role panel or Seed search"
+  ],
+  "Optimize": 0,
+  "native_load": 0,
+  "compile": 0,
+  "review_seconds": 0.10684159980155528
+}

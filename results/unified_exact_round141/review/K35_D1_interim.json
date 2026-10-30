@@ -1,0 +1,124 @@
+{
+  "PASS": true,
+  "reviewer": "independent agent round141_independent_review",
+  "scope": "K35 D1 interim only; D0 active and remaining pilot pending",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "full_snapshot_SHA": "9c18e6d96b01717e96abc04ca3323f6d5e813d4d810fd5c87ba8786b77c1224b",
+  "endpoint_SHA": "b32d6a29a270d53e514b609d49a4293b944f4c518ecac75cfa1ab7c3e6485d9d",
+  "chain_SHA": "2e170f3b05ec02669ca9c35651f267a7e5ffa00ce1d74db39da1e7aa2dcebb56",
+  "control_audit_SHA": "6c302018f04341d6d5aff5246095270eaf1408c7fa78ad8f7420857706852d4b",
+  "K35_D1": {
+    "U": 0.6555497257916947,
+    "L": 0.5595301336362788,
+    "signed_gap": 0.09601959215541589,
+    "relative_gap": 0.14647186685869618,
+    "T_produce": 2371.1314443545416,
+    "T_cert": null,
+    "T_verify": 14.869034099858254,
+    "T_total": 2386.0004784544,
+    "probe_total_seconds": 3.127834,
+    "beta0": 0.24153984574983522,
+    "beta1": 0.24014000505315217,
+    "actual_split_count": 0
+  },
+  "comparisons": [
+    {
+      "reference": "TC_STOCK",
+      "U": 0.6504387119575558,
+      "L": 0.5682885263298959,
+      "delta_U_D1_minus_reference": 0.005111013834138922,
+      "delta_L_D1_minus_reference": -0.008758392693617112,
+      "same_PE": false,
+      "original_source_and_clocks_retained": true
+    },
+    {
+      "reference": "TC2_STOCK",
+      "U": 0.7021486134198561,
+      "L": 0.5419703765884023,
+      "delta_U_D1_minus_reference": -0.046598887628161445,
+      "delta_L_D1_minus_reference": 0.01755975704787649,
+      "same_PE": false,
+      "original_source_and_clocks_retained": true
+    },
+    {
+      "reference": "base",
+      "U": 0.6928543586313136,
+      "L": 0.565765681464995,
+      "delta_U_D1_minus_reference": -0.037304632839618934,
+      "delta_L_D1_minus_reference": -0.006235547828716159,
+      "same_PE": false,
+      "original_source_and_clocks_retained": true
+    },
+    {
+      "reference": "both",
+      "U": 0.6695955692140068,
+      "L": 0.556776897983438,
+      "delta_U_D1_minus_reference": -0.014045843422312076,
+      "delta_L_D1_minus_reference": 0.002753235652840802,
+      "same_PE": false,
+      "original_source_and_clocks_retained": true
+    }
+  ],
+  "interpretation": [
+    "D1 materially repairs both K35 endpoints relative to its R140 TC2 carrier: U down0.0465988876 and L up0.0175597570.",
+    "D1 also improves both endpoints over accepted stock: U down0.0140458434 and L up0.00275323565.",
+    "Against stable GI-TBC, U improves0.0373046328 while L falls0.00623554783; report this tradeoff.",
+    "Old TC+stock remains better on both endpoints: D1 U higher0.00511101383 and L lower0.00875839269.",
+    "All compared observations are capped open; T_cert stays null. Close cap-length production times do not establish faster certification.",
+    "The two online proofs cost3.128 seconds inside the full method and are bound to actual count scopes; this is genuine exposure, not a non-triggered mechanism.",
+    "Single-seed cross-PE reference comparisons support method positioning only; only the pending same-PE paid D0 can attribute incremental value to conditional versus common floor.",
+    "No outer count split or observed Native b-branch is established; count links, common floor and induced Native search remain competing explanations until D0."
+  ],
+  "remaining_resolutions": {
+    "control002_K35": "Finish the registered full cap and compare same-PE independent own-H/count proofs; assess whether conditional delta adds value beyond binary/links/common cover. No inference from an in-flight window.",
+    "pilot003_K15": "Check preservation of the fast proof and complete T_produce/T_total against stable, stock and TC2 with the inherited materiality rule; tiny proof overhead alone is not the full cost.",
+    "pilot004_RB35T2": "Test the second hard scenario where actual D0 projection separation existed; compare U/L and capped open status to stable/stock/TC2 and retain unfavorable outcomes. If RB drives the benefit or mechanism conclusion, add the required independently paid D0 within the shared comparison allowance.",
+    "initial_six_selection": "Wait all four D1 and two registered D0 endpoints before adoption/stop decision. Remaining four configurations and any single-role Seed1 are conditional, not automatic."
+  },
+  "seconds": 0.0029819998890161514,
+  "post_D0_followup": {
+    "PASS": true,
+    "scope": "post-D0 interim; K15/RB pilot pending",
+    "full_snapshot_SHA": "29b6b5cfd15661ba281feaf718bb02ddb839b96a119979dfaf5ddec16a0ba32c",
+    "D0": {
+      "U": 0.6671786143618157,
+      "L": 0.5598416004685446,
+      "signed_gap": 0.1073370138932711,
+      "relative_gap": 0.16088197610462,
+      "T_produce": 2371.1338428263552,
+      "T_cert": null,
+      "T_verify": 14.830190300010145,
+      "T_total": 2385.9640331263654,
+      "probe_total_seconds": 2.8671453,
+      "terminal_Work": 4999.293377669962,
+      "terminal_nodes": 19487.0
+    },
+    "D1_minus_D0": {
+      "delta_U": -0.01162888857012101,
+      "delta_L": -0.0003114668322657943,
+      "delta_T_produce": -0.002398471813648939,
+      "delta_T_total": 0.036445328034460545
+    },
+    "delta_signed_gap": -0.011317421737855216,
+    "actual_first_integer_models_identical_except_objective_floor": true,
+    "base_SHA": "a43ca72421d39c22f7c10f348203bd563d599742a4e8525e98dddbc165a49e68",
+    "D0_vs_TC2": {
+      "delta_U": -0.034969999058040435,
+      "delta_L": 0.017871223880142284,
+      "same_PE": false
+    },
+    "interpretation": [
+      "D0 already recovers much of the observed TC2 carrier regression; the repair cannot be attributed wholly to side-dependent floors. D0 versus the old carrier is still a cross-PE method comparison.",
+      "The matched same-PE D1 floor improves U by0.0116288886 and lowers L by0.000311466832 relative to D0. The L loss is small but real at the inherited tolerance, not a last-bit artifact.",
+      "Signed gap improves by0.0113174217. Neither endpoint set dominates the other, and both are full-cap open observations with null certification time.",
+      "First canonical integer models are equal except their uniquely named objective-floor rows; source/probe/physical/H/Seed/cap identity checks pass. This supports the conditional-information attribution within the recorded paired experiment.",
+      "Native Work is slightly lower for D1 while nodes are higher; do not call this universally cheaper search or evidence of count branching. Tiny total-time difference at a common cap has no convergence interpretation.",
+      "Continue K15 proof-cost and RB hard-role evaluation as admitted. Final selection remains pending; no per-role mechanism changes, extra LP/grid or Seed search is justified by this interim pair."
+    ],
+    "Optimize": 0,
+    "Native_load": 0,
+    "seconds": 0.007870000088587403
+  }
+}

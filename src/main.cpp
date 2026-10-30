@@ -2,6 +2,7 @@
 #include "Round138Research.hpp"
 #include "Round139Research.hpp"
 #include "Round140Research.hpp"
+#include "Round141Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -872,6 +873,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round138-stock-rlt") ebrp::round138().stock_rlt = true;
         else if (arg == "--round139-stock-placement") ebrp::round139().set(requireValue(i, argc, argv));
         else if (arg == "--round140-counts") ebrp::round140().set(requireValue(i, argc, argv));
+        else if (arg == "--round141-count-proof") ebrp::round141().set(requireValue(i, argc, argv));
         else if (arg == "--round137-delete-ab") ebrp::round137().delete_ab = true;
         else if (arg == "--round137-delete-cr") ebrp::round137().delete_cr = true;
         else if (arg == "--round137-delete-cg") ebrp::round137().delete_cg = true;
@@ -3548,6 +3550,17 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round141().enabled()) {
+        if(ebrp::round127().mode!="ms2"||ebrp::round140().counts!="tc2"||!ebrp::round138().stock_rlt||
+            ebrp::round139().enabled()||opt.round120_native_proof!="off"||opt.round119_proof_contraction||opt.round90_lp_g_split)
+            throw std::runtime_error("Round141 requires isolated ms2, BOTH stock+TC+TC2, and no historical proof flags");
+        if(!opt.out_path.empty()) {
+            auto path=std::filesystem::path(opt.out_path).parent_path()/"round141_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"mode\":"<<std::quoted(ebrp::round141().mode)<<",\"threshold_rule\":\"max_weighted_remainder\",\"pivot\":\"lp_floor\",\"root_once\":true,\"BranchPriority\":0,\"counts\":\"tc2\",\"stock\":true,\"Seed\":"<<opt.gurobi_seed<<",\"H_seed\":"<<opt.primal_heuristic_seed<<"}\n";
+            if(!f)throw std::runtime_error("Round141 parameter readback persistence failed");
+        }
+    }
     if (ebrp::round140().enabled()) {
         if (ebrp::round127().mode != "ms2" || ebrp::round139().enabled() ||
             opt.round120_native_proof != "off" || opt.round119_proof_contraction || opt.round90_lp_g_split)
@@ -20168,6 +20181,7 @@ int main(int argc, char** argv) {
         std::vector<std::filesystem::path> files = ebrp::collectInputFiles(opt.input_path);
         std::vector<ebrp::SolveResult> results;
         for (const auto& file : files) {
+            ebrp::round141ResetRun();
             ebrp::recordProcessPhase(
                 opt, "instance_parsing_start", "start", file.string());
             ebrp::Instance instance = ebrp::parseInstanceFile(
@@ -20479,6 +20493,13 @@ int main(int argc, char** argv) {
         }
         ebrp::recordProcessPhase(
             opt, "final_result_serialization_start", "start");
+        if(ebrp::round141().enabled()&&!opt.out_path.empty()) {
+            const auto& c=ebrp::round141();const auto path=std::filesystem::path(opt.out_path).parent_path()/"round141_outcome.json";
+            std::ofstream f(path);f<<"{\"mode\":"<<std::quoted(c.mode)<<",\"attempted\":"<<(c.attempted?"true":"false")
+                <<",\"root_qualified\":"<<(c.root_qualified?"true":"false")<<",\"pair_ready\":"<<(c.ready?"true":"false")
+                <<",\"reason\":"<<std::quoted(c.ready?"embedded":c.attempted?"no_complete_qualified_count_pair":c.root_qualified?"normal_root_flow_finished_before_first_integer_request":"no_qualified_normal_root_before_return")<<"}\n";
+            if(!f)throw std::runtime_error("Round141 outcome persistence failed");
+        }
         const std::string json = ebrp::resultsToJson(results);
         if (!opt.out_path.empty()) ebrp::writeTextFile(opt.out_path, json);
         else std::cout << json;

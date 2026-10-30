@@ -1,0 +1,568 @@
+{
+  "schema": "round141-independent-carrier-coverage-v1",
+  "UTC": "2026-10-30T06:42:19.366144+00:00",
+  "reviewer": "/root/round141_independent_review",
+  "decision": "ACCEPT_LOCAL_MEMBER_COVERAGE",
+  "PASS": true,
+  "unresolved_substantive_issues": [],
+  "scope": "Narrow local member coverage. Complete archive/member byte hashes were checked in preceding pure reads; this final record does not rerun them or rebuild immutable ZIPs.",
+  "carrier_manifest_SHA": "de95da5b5eb4f6d77647a9ea3d4b27b6b86e06819e8406e67b1f248220218213",
+  "source_publication_SHA": "d47a868f99ba6be899a1d8cc0006dab34cf6d0c27c7d246a507fb1d7f04e8508",
+  "compressed_bytes": 59694704,
+  "indexed_members": 29060,
+  "actual_payload_uncompressed_bytes_hashed_in_precheck": 447318856,
+  "carriers": [
+    {
+      "path": "results/unified_exact_round141/artifacts/campaign_control_001.zip",
+      "SHA256": "02538bd1ccf4fd3ef9dccf8ebd61771d3dcf7045161c2563b8ddc057f3dbcc61",
+      "bytes": 6704124,
+      "members": 10907,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "aac368f4cb44bd9651189e153a94c05a036016f73d2030a549b4c8d067220518",
+      "observed_actual_zip_entries": 10908,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/campaign_control_002.zip",
+      "SHA256": "0f5105c728baccb2426ebe81a9b2cbbb80e3462dcb72a7bb041c0ef05be2b468",
+      "bytes": 3038796,
+      "members": 1315,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "ba0c42307d984553750396669a1e9f670051fa24c7be325cb7b8cac1ad94736c",
+      "observed_actual_zip_entries": 1316,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/campaign_pilot_001.zip",
+      "SHA256": "7bb17f17f6b982389f1596d9f5be1008ab394276a62929740967533c9c3a82b8",
+      "bytes": 4370778,
+      "members": 6709,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "29840b4f9d9effdf961b6b8b10c7c3050930e9964974192486a1a8ce80e4107d",
+      "observed_actual_zip_entries": 6710,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/campaign_pilot_002.zip",
+      "SHA256": "cb52cf86377ccce6a3a15ee4401c2442f1cd1c0ba0fb46d0bfcc19184e3b24af",
+      "bytes": 2955364,
+      "members": 1175,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "8fadc754172965506815f7c69edf886141a4b386460cdda2305aff2ac20d3062",
+      "observed_actual_zip_entries": 1176,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/campaign_pilot_003.zip",
+      "SHA256": "91863d666d0234932139f2ae83b0e380073dc1e31028f2e09a3d6698c0e9984d",
+      "bytes": 1624715,
+      "members": 2153,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "a577d895ecea3dd58668af292098da4d788eee5f295136df67e3e01ab032a93f",
+      "observed_actual_zip_entries": 2154,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/campaign_pilot_004.zip",
+      "SHA256": "a176bb852565791659c80e010686da6dec867247257abb85bdcf95914d46c4b2",
+      "bytes": 2638842,
+      "members": 493,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "a4813b8b294d46ad7a4c8c4502d9f17eab091fd174152c412e5afad4d234ab18",
+      "observed_actual_zip_entries": 494,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/campaign_qualification_v5_001.zip",
+      "SHA256": "5ac02615199bee2621f2cc1ef6f7de9e4eca92cc81b4b61ff837fb828866ead6",
+      "bytes": 1511698,
+      "members": 1447,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "15f3ea7b2916b597e93a32833b7054458cc9e4e331a0e1115740c81e5197378c",
+      "observed_actual_zip_entries": 1448,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/campaign_qualification_v6_001.zip",
+      "SHA256": "ac682715fbcf7bbede4f5c5bf514fd6a62d5e8e974423c0b496536f56edd8f5d",
+      "bytes": 1580445,
+      "members": 1455,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "43458b59f4ffd49484bed9fbfaa2e6c811985c18cdabde889a1fc296f9c10a6d",
+      "observed_actual_zip_entries": 1456,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/campaign_qualification_v6b_001.zip",
+      "SHA256": "215624a5970255be9918b98b1f3930f0a15c4474a3bfd06470ac438106945611",
+      "bytes": 1475292,
+      "members": 1721,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "3903e83f02aa039915c5d2f68fd94ac17821f003b6423b5fb1b32171cb155ea7",
+      "observed_actual_zip_entries": 1722,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/diagnostics_and_failures.zip",
+      "SHA256": "8552f9cbc2927e16b9f1e77f470a31651e4764c9034daa0e1fb0f04ee7a10d31",
+      "bytes": 31272296,
+      "members": 1202,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "a813fa0c447d1d62bdd655fb2612d40a910dde04aa831d65e03f69fdb7a56b71",
+      "observed_actual_zip_entries": 1203,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/source_and_helpers.zip",
+      "SHA256": "f2164911e0e8bf3bd2513ff5d953c98b5f0e2365be7791604894f1fe9cbf4aee",
+      "bytes": 1702410,
+      "members": 380,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "12cf0f224dfd5a54886fd3cc807afa83426889f09cbff5e46cef05e5d9beb1b7",
+      "observed_actual_zip_entries": 381,
+      "archive_index_all_payload_bytes_previously_verified": true
+    },
+    {
+      "path": "results/unified_exact_round141/artifacts/science_and_paper.zip",
+      "SHA256": "f63a6a44b0e531e3b887b5772f299f1429ada57d36b7d132df99807e0551ddcc",
+      "bytes": 819944,
+      "members": 103,
+      "member_index": "__round141_member_index__.json",
+      "member_index_SHA": "facbc7919aa66d12676bd50289e2c6ca1daa800fde52afc7b1b650dcae1e0d9c",
+      "observed_actual_zip_entries": 104,
+      "archive_index_all_payload_bytes_previously_verified": true
+    }
+  ],
+  "completed_byte_checks": {
+    "all_12_actual_archive_SHA_and_sizes": true,
+    "all_12_actual_index_SHA_and_counts": true,
+    "exact_unique_zip_member_sets_equal_index_plus_index_itself": true,
+    "all_29060_actual_payload_member_SHA_and_sizes": true,
+    "path_traversal_absolute_paths_and_symlinks_absent": true,
+    "BANNED_assets_absent": true,
+    "BANNED_suffixes": [
+      ".a",
+      ".dll",
+      ".exe",
+      ".lib",
+      ".lic",
+      ".o",
+      ".obj",
+      ".otf",
+      ".ttf"
+    ]
+  },
+  "producer_coverage": {
+    "actual_count": 9,
+    "formal": 6,
+    "healthy_qualification": 2,
+    "failed_V5_qualification": 1,
+    "all_sealed_required_outputs_and_healthy_audit_endpoint_control_chain_present": true,
+    "positions": [
+      {
+        "batch": "pilot",
+        "position": 3,
+        "role": "K-15-S",
+        "method": "D1",
+        "failed_V5_qualification": false,
+        "raw_prefix": "results/unified_exact_round141/campaign_pilot/003/raw/R141_pilot_003_K-15-S_S0_D1",
+        "carrier": "results/unified_exact_round141/artifacts/campaign_pilot_003.zip"
+      },
+      {
+        "batch": "control",
+        "position": 1,
+        "role": "K-20-S",
+        "method": "D0",
+        "failed_V5_qualification": false,
+        "raw_prefix": "results/unified_exact_round141/campaign_control/001/raw/R141_control_001_K-20-S_S0_D0",
+        "carrier": "results/unified_exact_round141/artifacts/campaign_control_001.zip"
+      },
+      {
+        "batch": "pilot",
+        "position": 1,
+        "role": "K-20-S",
+        "method": "D1",
+        "failed_V5_qualification": false,
+        "raw_prefix": "results/unified_exact_round141/campaign_pilot/001/raw/R141_pilot_001_K-20-S_S0_D1",
+        "carrier": "results/unified_exact_round141/artifacts/campaign_pilot_001.zip"
+      },
+      {
+        "batch": "control",
+        "position": 2,
+        "role": "K-35-U",
+        "method": "D0",
+        "failed_V5_qualification": false,
+        "raw_prefix": "results/unified_exact_round141/campaign_control/002/raw/R141_control_002_K-35-U_S0_D0",
+        "carrier": "results/unified_exact_round141/artifacts/campaign_control_002.zip"
+      },
+      {
+        "batch": "pilot",
+        "position": 2,
+        "role": "K-35-U",
+        "method": "D1",
+        "failed_V5_qualification": false,
+        "raw_prefix": "results/unified_exact_round141/campaign_pilot/002/raw/R141_pilot_002_K-35-U_S0_D1",
+        "carrier": "results/unified_exact_round141/artifacts/campaign_pilot_002.zip"
+      },
+      {
+        "batch": "pilot",
+        "position": 4,
+        "role": "R-B35-S-T2",
+        "method": "D1",
+        "failed_V5_qualification": false,
+        "raw_prefix": "results/unified_exact_round141/campaign_pilot/004/raw/R141_pilot_004_R-B35-S-T2_S0_D1",
+        "carrier": "results/unified_exact_round141/artifacts/campaign_pilot_004.zip"
+      },
+      {
+        "batch": "qualification_v6",
+        "position": 1,
+        "role": "K-20-S",
+        "method": "D1",
+        "failed_V5_qualification": false,
+        "raw_prefix": "results/unified_exact_round141/campaign_qualification_v6/001/raw/R141_qualification_v6_001_K-20-S_S0_D1",
+        "carrier": "results/unified_exact_round141/artifacts/campaign_qualification_v6_001.zip"
+      },
+      {
+        "batch": "qualification_v6b",
+        "position": 1,
+        "role": "K-15-S",
+        "method": "D0",
+        "failed_V5_qualification": false,
+        "raw_prefix": "results/unified_exact_round141/campaign_qualification_v6b/001/raw/R141_qualification_v6b_001_K-15-S_S0_D0",
+        "carrier": "results/unified_exact_round141/artifacts/campaign_qualification_v6b_001.zip"
+      },
+      {
+        "batch": "qualification_v5",
+        "position": 1,
+        "role": "K-20-S",
+        "method": "D1",
+        "failed_V5_qualification": true,
+        "raw_prefix": "results/unified_exact_round141/campaign_qualification_v5/001/raw/R141_qualification_v5_001_K-20-S_S0_D1",
+        "carrier": "results/unified_exact_round141/artifacts/campaign_qualification_v5_001.zip"
+      }
+    ]
+  },
+  "LP_coverage": {
+    "actual_positions": 39,
+    "MPS_result_solution_members": 117,
+    "all_result_canonical_solution_SHA_match_archived_actual_bytes": true,
+    "LP_positions_SHA": "4fcd3821ce2227ab8005257af180860bc33d31902f04d45dd527b7a9a333baa4"
+  },
+  "construction_and_ordinary_failures": {
+    "all_local_files_in_required_diagnostic_roots_match_archived_bytes": true,
+    "roots": {
+      "domains": 118,
+      "LP": 207,
+      "qualification": 103,
+      "math": 1,
+      "fees": 640,
+      "cost_segments": 9
+    },
+    "pre_archive_ordinary_count": 24,
+    "pre_archive_ordinary_receipts": [
+      {
+        "label": "accounting_pre_delivery",
+        "receipt_SHA": "dab6045749f10631f59308bfea81f7c80c002f5dec9599f68b15cec2a7c3f79a",
+        "exit_code": 0,
+        "seconds": 0.23179299989715219
+      },
+      {
+        "label": "aggregate_after_k15",
+        "receipt_SHA": "7c0145c5f93e9c30bbe29a0161b9c2230bff3da99d03be74721391dcc4453a81",
+        "exit_code": 0,
+        "seconds": 1.5198041000403464
+      },
+      {
+        "label": "aggregate_initial_six",
+        "receipt_SHA": "910f6d58694b2cc5ef9cbce5ae58b0e5069cc888a49df9efdf733baf88be0bfe",
+        "exit_code": 1,
+        "seconds": 0.023492000065743923
+      },
+      {
+        "label": "aggregate_initial_six_with_path",
+        "receipt_SHA": "9168252d745ab1dfede7c3d21b2bb8112b59c46da22432a943ba861555ec9446",
+        "exit_code": 0,
+        "seconds": 2.229047999950126
+      },
+      {
+        "label": "aggregate_k35_pair",
+        "receipt_SHA": "3f758073957329d3294e8f2386bb68373101f1b2a16a0f410fd042d7836d3fc0",
+        "exit_code": 0,
+        "seconds": 1.5172996998298913
+      },
+      {
+        "label": "appendix_PDF",
+        "receipt_SHA": "f9b68309a6f76b4ee7e04e924fc0bfbe8a3318016ef41c7d0f235da12cce4d76",
+        "exit_code": 0,
+        "seconds": 7.347339400090277
+      },
+      {
+        "label": "appendix_PDF_layout02",
+        "receipt_SHA": "a9c9fe30f0c70063aac813886aca9c8d66cf1061a669e128a8ad195472c0ffb3",
+        "exit_code": 0,
+        "seconds": 5.868673600023612
+      },
+      {
+        "label": "chain_control_002",
+        "receipt_SHA": "7aea32b54ea9b5696dbf699fb01ab9a928a5d6eed2c5243d0ce3b1b255b18fac",
+        "exit_code": 0,
+        "seconds": 1.2694808999076486
+      },
+      {
+        "label": "chain_pilot_003",
+        "receipt_SHA": "911c0c1668aa13ecfd7f03169da8d044d3266c93a2af99a91593f4e37bd3316b",
+        "exit_code": 0,
+        "seconds": 0.7164272998925298
+      },
+      {
+        "label": "chain_pilot_004",
+        "receipt_SHA": "fcf4b93924c94bb68b3577c03f40417cc01e01a7091d9b348699ab18da0d6cd2",
+        "exit_code": 0,
+        "seconds": 1.1881655000615865
+      },
+      {
+        "label": "endpoint_figure",
+        "receipt_SHA": "e586505f2a30db674c83a7188f0d800f19dc296d99cec1b24846c05e34220aea",
+        "exit_code": 1,
+        "seconds": 0.37672899989411235
+      },
+      {
+        "label": "endpoint_figure_existing_deps",
+        "receipt_SHA": "bc22651f555f57bba63c4832e4e96811dbbd216c9f43da2df0ce398a061065eb",
+        "exit_code": 0,
+        "seconds": 5.783363899914548
+      },
+      {
+        "label": "fixed_dependencies",
+        "receipt_SHA": "391d45f8a995c46f5ad3bdb8a5ba7d79761977ae3a0f89dd1e70dcfd1efb8705",
+        "exit_code": 0,
+        "seconds": 0.6661837000865489
+      },
+      {
+        "label": "local_semantics",
+        "receipt_SHA": "3e59780f73afc76fb28f8acb9d65eadce43b10895e5d4d441a6b23c8248cb62c",
+        "exit_code": 0,
+        "seconds": 0.7560029998421669
+      },
+      {
+        "label": "paper_assembly",
+        "receipt_SHA": "f8357c5f57f53b265018f892871ffd0f0960c273b8f851802d19c30c99255886",
+        "exit_code": 0,
+        "seconds": 0.23361660004593432
+      },
+      {
+        "label": "paper_assembly_layout02",
+        "receipt_SHA": "1403bf254d0a6f328dd4615745e3a51269bd6f945fb33890f71a21cc3ed8e6fd",
+        "exit_code": 0,
+        "seconds": 0.22586919995956123
+      },
+      {
+        "label": "paper_assembly_parameters",
+        "receipt_SHA": "e03f03ead229a6e2f2c70ff6cb65ec6b990d5724bbb7eff143792fce09e9bae3",
+        "exit_code": 0,
+        "seconds": 0.24163110018707812
+      },
+      {
+        "label": "PDF_render",
+        "receipt_SHA": "c96ed868d2a182ef4b5e417450261e7767d2db8f1aab9edd32081fa85fc2b849",
+        "exit_code": 0,
+        "seconds": 2.3287225000094622
+      },
+      {
+        "label": "PDF_render_layout02",
+        "receipt_SHA": "f5535e68dbe6f540d7b72c60375834f68bb0b689a781c8eb330b334498d10266",
+        "exit_code": 0,
+        "seconds": 1.894146100152284
+      },
+      {
+        "label": "scientific_report",
+        "receipt_SHA": "e75129d0179db70e2ec02f7360d296a1b02a8869fd941c2e2675b6757bca975a",
+        "exit_code": 0,
+        "seconds": 0.21677870000712574
+      },
+      {
+        "label": "scientific_report_final_text",
+        "receipt_SHA": "34ed7cdd246644e15638a0d41fbce3b4823fda4d57c3ac4a5d3c1ca5e112bcbf",
+        "exit_code": 0,
+        "seconds": 0.22304209996946156
+      },
+      {
+        "label": "scientific_report_parameters",
+        "receipt_SHA": "aea19ba6427d5f87af4eb9af0d835a9d1cde29309835e6080053bc8c8aea0029",
+        "exit_code": 0,
+        "seconds": 0.21813610009849072
+      },
+      {
+        "label": "software_bindings",
+        "receipt_SHA": "4bd40041c70cdc9239079aef87ce84f37bec3d0e81b02e3bd170b6c2e45a7b5a",
+        "exit_code": 0,
+        "seconds": 0.3890203998889774
+      },
+      {
+        "label": "stable_entry_final_check",
+        "receipt_SHA": "9938a0a670498f8ddd896d89a1dfb07ab3e5fd50ce29a28ec4ec962a4b231ca2",
+        "exit_code": 0,
+        "seconds": 0.7586991998832673
+      }
+    ],
+    "all_prearchive_ordinary_stdout_stderr_receipts_present": true,
+    "additive_archive_own_receipt": [
+      {
+        "label": "archive_science",
+        "receipt_SHA": "01e4ea29fa119ed05a555d5236101682e9531e721bc3d2350690e15aed6c5dae",
+        "exit_code": 0,
+        "seconds": 21.64371049986221
+      }
+    ],
+    "archive_receipt_scope": "Post-creation archive_science receipt is additive and cannot recursively belong to its own immutable carrier."
+  },
+  "source_and_identity_coverage": {
+    "identity_counts": {
+      "actual_source_hashes": 223,
+      "frozen_formal_helpers": 105,
+      "current_source_files": 380,
+      "inputs": 6,
+      "configuration_files": 5
+    },
+    "all_actual_production_sources_formal_frozen_helpers_current_source_inputs_profiles_match_member_bytes": true,
+    "stable_R137_R138_R139_R140_and_new_R141_launchers_present": true,
+    "all_7_original_batch_helper_maps_retained": true,
+    "old_qualification_helper_bindings_not_current_source_ZIP": [
+      {
+        "batch": "qualification_matrix.json",
+        "path": "scripts/round141_campaign.py",
+        "SHA256": "f6ca6aa573b8bf061ce33ffe883eac7127d9d31ae6cab89f6ade2bb9bfffdf6d"
+      },
+      {
+        "batch": "qualification_matrix.json",
+        "path": "scripts/round141_read.py",
+        "SHA256": "e68880b1210c252ca815cb63d19c1b00891208f4375b6e00a4805565a247d89d"
+      },
+      {
+        "batch": "qualification_v4_matrix.json",
+        "path": "scripts/round141_campaign.py",
+        "SHA256": "0c962de720b0307cfb387b8c96a83f9eb72b7b8c030fb0b9375cdbad1e0e0c3a"
+      },
+      {
+        "batch": "qualification_v4_matrix.json",
+        "path": "scripts/round141_read.py",
+        "SHA256": "e68880b1210c252ca815cb63d19c1b00891208f4375b6e00a4805565a247d89d"
+      },
+      {
+        "batch": "qualification_v5_matrix.json",
+        "path": "scripts/round141_campaign.py",
+        "SHA256": "39aff3e37021a7d594df868df4ca532f6944983ab6c10162a043834ef330a9fa"
+      },
+      {
+        "batch": "qualification_v5_matrix.json",
+        "path": "scripts/round141_read.py",
+        "SHA256": "e68880b1210c252ca815cb63d19c1b00891208f4375b6e00a4805565a247d89d"
+      },
+      {
+        "batch": "qualification_v6_matrix.json",
+        "path": "scripts/round141_campaign.py",
+        "SHA256": "9010cb7f39514e2f83558ab6c9711f4b548268e02967a661734f22ac83caa3bd"
+      },
+      {
+        "batch": "qualification_v6_matrix.json",
+        "path": "scripts/round141_read.py",
+        "SHA256": "e68880b1210c252ca815cb63d19c1b00891208f4375b6e00a4805565a247d89d"
+      }
+    ],
+    "old_qualification_fixed_Git_sources": [
+      {
+        "path": "scripts/round141_campaign.py",
+        "SHA256": "0c962de720b0307cfb387b8c96a83f9eb72b7b8c030fb0b9375cdbad1e0e0c3a",
+        "fixed_commit": "e774d77cf0d69e331f2f0ea1813cbd4b2a09ee36",
+        "git_show_bytes_verified_in_prior_targeted_read": true,
+        "ancestor_of_current_delivery_HEAD_verified": true
+      },
+      {
+        "path": "scripts/round141_campaign.py",
+        "SHA256": "39aff3e37021a7d594df868df4ca532f6944983ab6c10162a043834ef330a9fa",
+        "fixed_commit": "bc75925f2accc91c99598701616765802d123418",
+        "git_show_bytes_verified_in_prior_targeted_read": true,
+        "ancestor_of_current_delivery_HEAD_verified": true
+      },
+      {
+        "path": "scripts/round141_campaign.py",
+        "SHA256": "9010cb7f39514e2f83558ab6c9711f4b548268e02967a661734f22ac83caa3bd",
+        "fixed_commit": "0b6148c22e572e7151bb5c90b4746cb0d7f706e1",
+        "git_show_bytes_verified_in_prior_targeted_read": true,
+        "ancestor_of_current_delivery_HEAD_verified": true
+      },
+      {
+        "path": "scripts/round141_campaign.py",
+        "SHA256": "f6ca6aa573b8bf061ce33ffe883eac7127d9d31ae6cab89f6ade2bb9bfffdf6d",
+        "fixed_commit": "8cfe8afec36a6c926f1c06172eb22e280750e30d",
+        "git_show_bytes_verified_in_prior_targeted_read": true,
+        "ancestor_of_current_delivery_HEAD_verified": true
+      },
+      {
+        "path": "scripts/round141_read.py",
+        "SHA256": "e68880b1210c252ca815cb63d19c1b00891208f4375b6e00a4805565a247d89d",
+        "fixed_commit": "8cfe8afec36a6c926f1c06172eb22e280750e30d",
+        "git_show_bytes_verified_in_prior_targeted_read": true,
+        "ancestor_of_current_delivery_HEAD_verified": true
+      }
+    ],
+    "scope": "Five distinct old qualification-only helper contents referenced eight times are fixed by verified commit/path/SHA in current branch ancestry. Formal 105 helpers are actual source ZIP members. Normal branch publication retains ancestry; no extra old raw replay or recursive source repack is required."
+  },
+  "paper_science_and_review": {
+    "PDF_SHA": "205e791baa5f30e3966fff03f05ae60f67203ccfa58eafaaccfec3804a73813c",
+    "all_reviewed_science_paths_match_archived_actual_bytes": true,
+    "science_paths": [
+      "manuscript.pdf",
+      "manuscript.md",
+      "references.bib",
+      "figures/pilot_endpoints.png",
+      "mathematical_analysis.md",
+      "LP_report.md",
+      "final_report.md",
+      "candidate_decision.json",
+      "candidate_manifest.json",
+      "cost_report.json",
+      "entry_check.json",
+      "source_publication.json",
+      "full_reference_dependencies.json",
+      "inherited_dependencies.json",
+      "goal.md"
+    ],
+    "prepack_review_JSONs_covered": 20,
+    "all_prepack_review_JSONs_present": true,
+    "final_integration_review_SHA": "c0f230a51075a6f1e3ff23156360cd2e5372233bf5637751a6903d1d5580b9d4",
+    "late_scope": "carrier_coverage.json and later publication/PR/cleanup receipts are additive; immutable science ZIPs need no rebuild."
+  },
+  "old_dependencies": {
+    "fixed_metadata_pins": 4,
+    "accepted_BASE_STOCK_dependencies": 8,
+    "R140_reference_dependencies": 8,
+    "selected_continuous_members": 5,
+    "fixed_commit_archive_SHA_selected_member_identities_retained": true,
+    "old_full_raw_archives_not_repacked_or_replayed": true,
+    "scope": "Accepted fixed references and necessary member identities; no old full-raw recovery or public acceptance repeated."
+  },
+  "not_certified_here": [
+    "push",
+    "Draft PR and actual base/head/draft readback",
+    "bounded anonymous fixed-science public byte/member check",
+    "post-PR cleanup"
+  ],
+  "pure_precheck_adaptations": [
+    "Initial check reached new archive_science own-receipt and classified it correctly as additive.",
+    "Second check had reviewer hardcoded 23 prearchive ordinary items from earlier snapshot; actual count is 24 including accounting_pre_delivery.",
+    "A final metadata-only old-reference check initially expected archive_SHA for both old schemas; R140 uses carrier.SHA256. Both formats carry fixed pins and this receipt does not request old raw replay."
+  ],
+  "observed_precheck_tool_wall_seconds": [
+    2.6,
+    2.8,
+    4.0
+  ],
+  "precheck_scope": "Each preceding check had already completed all archive/index/payload hashes before these pure coverage-metadata adaptations. No original experiment or immutable archive changed. Final receipt writes existing verified observations without another full hash run.",
+  "Optimize": 0,
+  "Native_DLL_loads": 0,
+  "builds": 0,
+  "archive_rebuilds": 0,
+  "public_IO": 0,
+  "final_receipt_process_seconds": 0.18471820000559092
+}
