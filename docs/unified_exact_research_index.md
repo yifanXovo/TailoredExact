@@ -87,3 +87,25 @@ the important RB35-T2 regression prevents uniform promotion. Necessary D0
 controls establish K20 conditional-floor value and a K35 endpoint tradeoff.
 Decision: research-only and stop further full expansion, at 2.114012 hours of
 the 10-hour new-experiment ceiling; stable GI-TBC remains unchanged.
+
+# Round142 addition: conditional shared-factor count consistency
+
+The [research guide](round142_research.md),
+[scientific report](../results/unified_exact_round142/final_report.md),
+[mathematical note](../results/unified_exact_round142/mathematical_analysis.md)
+and [LP report](../results/unified_exact_round142/LP_report.md) document the
+count-local CP continuation. Twelve new continuous LPs raise the three weaker
+sources/min-covers; propagated ALL gives no extra optimized information.
+The scalar-floor attainability premise, count-selector network integrality,
+limited product hull and exact 9/40 witness are stated separately from full
+routing claims. Reverse inventory tightening is implied and leaves all 24
+old budgets unchanged.
+
+Four selected Seed0 full roles plus two same-PE old-D1 bridges preserve an
+important RB35-T2 repair, a nonmaterial incremental K20 proof-clock change and
+the adverse K35 cross-version result. Research-only; close this count-proof
+continuation without remaining roles or Seed1. Conservative experimental
+outers including mandatory postverification total 7504.312010 seconds
+(2.084531 hours) of the eight-hour ceiling. Stable GI-TBC and old entries are
+retained. Actual Draft PR, public read and current-round cleanup remain
+separate in [RESUME](../results/unified_exact_round142/RESUME.md).

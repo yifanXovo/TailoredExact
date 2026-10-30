@@ -1,0 +1,458 @@
+{
+  "PASS": true,
+  "UTC": "2026-10-30T17:22:37.241067+00:00",
+  "positions": [
+    {
+      "arm_id": "R142_bridge_001_K-20-S_S0_OFF",
+      "qualification": false,
+      "method": "D1",
+      "seed": 0,
+      "U": 0.7168065462777502,
+      "L": 0.7168065462777501,
+      "certificate": true,
+      "control_SHA": "f7ef5a8af744bbfa948cbb481b2f5891033893d2d5a107e6da616ef5b27f4cbc",
+      "closeout_SHA": "d7e6855b600a979db80072f6ff5e38bc0935fd77076fa86a133fcbc5ae847e8a",
+      "models": [
+        {
+          "call": 1,
+          "SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030"
+        },
+        {
+          "call": 2,
+          "SHA": "16e0b36fc89d8a1dfce682c13e647948abdf2b48d2f8035a26c2e272e0eb3355"
+        },
+        {
+          "call": 3,
+          "SHA": "7094aa05e4328cbbe9bcf17c3323e896b2e3f1af6d863eac275d9bab47df081a"
+        },
+        {
+          "call": 4,
+          "SHA": "510cf17f7b5ad4da664801dfc69922180eb695b39bfb5c4c569469c69737f0f8"
+        },
+        {
+          "call": 5,
+          "SHA": "7da820fe4233edcbddb18b0d8dc0aa463aaf509622fc95cd29c905ba1056106b"
+        },
+        {
+          "call": 6,
+          "SHA": "a18bd6d53ebd7193c7dc7b51853fb65513edeba1eb08ae75f69e7a56e79fd7b8"
+        },
+        {
+          "call": 7,
+          "SHA": "a18bd6d53ebd7193c7dc7b51853fb65513edeba1eb08ae75f69e7a56e79fd7b8"
+        }
+      ],
+      "lifecycle": {
+        "declared": 7,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "source_revoked": false
+      }
+    },
+    {
+      "arm_id": "R142_bridge_002_R-B35-S-T2_S0_OFF",
+      "qualification": false,
+      "method": "D1",
+      "seed": 0,
+      "U": 0.41377327502170724,
+      "L": 0.2279034490037257,
+      "certificate": false,
+      "control_SHA": "2638ad3eedc3c215b230590ceecb82e203a6bbd9a6112030d2cc3a9999600474",
+      "closeout_SHA": "9ec1dee0bbac5593574619b8ca1af0f25b8645ee412947be084dcdcb4485a236",
+      "models": [
+        {
+          "call": 1,
+          "SHA": "e8d8b48a007bb94d14ef7115fa738512fa992704bafd5e99c98c07eb56651285"
+        },
+        {
+          "call": 2,
+          "SHA": "98e8f08a0a4b2b4d9a163bf9e8313ff54fe9b9a00b1dd91b92c15d8d324ee218"
+        },
+        {
+          "call": 3,
+          "SHA": "6236c84a70503aaebfd84452a43cd9d101853f0d59c2aaa64c5b37bd09f01262"
+        },
+        {
+          "call": 4,
+          "SHA": "1178bd57974adf9df77a431fff08de12b1903abfe95eb4d55fb7c90203954d17"
+        },
+        {
+          "call": 5,
+          "SHA": "9da9829cdc76a47325be8faca868257e21ec5395b8d6655959e806aad5750e0d"
+        },
+        {
+          "call": 6,
+          "SHA": "3b08854a28353d662a5c6b0d545f47450bd02ecf4965bc39f017a5eedab8d8c3"
+        },
+        {
+          "call": 7,
+          "SHA": "3b08854a28353d662a5c6b0d545f47450bd02ecf4965bc39f017a5eedab8d8c3"
+        }
+      ],
+      "lifecycle": {
+        "declared": 7,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "source_revoked": false
+      }
+    },
+    {
+      "arm_id": "R142_pilot_001_K-35-U_S0_SELECTED",
+      "qualification": false,
+      "method": "CP",
+      "seed": 0,
+      "U": 0.6654188890722282,
+      "L": 0.5450407754893646,
+      "certificate": false,
+      "control_SHA": "b5d04189732a648e15f6528f607e4aaec04bac170faf39c3a88b9e90d3edd0cf",
+      "closeout_SHA": "d77a4e5bc62124071d9561db0e73d0fedcd760f3bdf0babf140112962f3b35a7",
+      "models": [
+        {
+          "call": 1,
+          "SHA": "a43ca72421d39c22f7c10f348203bd563d599742a4e8525e98dddbc165a49e68"
+        },
+        {
+          "call": 2,
+          "SHA": "4e808e3baa189bb1546d95034ee16e3de491767427b84c4c3c39278acd21a4aa"
+        },
+        {
+          "call": 3,
+          "SHA": "bc458ec7cf587314c4e03ab04ac6bb1b262a343e499f701d4da84458399d458b"
+        },
+        {
+          "call": 4,
+          "SHA": "43826ef47c4a8fe5ad87f9b157ad43058932a9e5dd1f255bdfb433b9852703ac"
+        },
+        {
+          "call": 5,
+          "SHA": "6f8c7f5a7d27e7ad71eb33a80d057d7d077c76152001ec0e295d730f27daf96d"
+        },
+        {
+          "call": 6,
+          "SHA": "7dbd70aa3fba0b936a0465e5f7b6fb67a302b32250d157d6fa958b0289be9548"
+        },
+        {
+          "call": 7,
+          "SHA": "7dbd70aa3fba0b936a0465e5f7b6fb67a302b32250d157d6fa958b0289be9548"
+        }
+      ],
+      "lifecycle": {
+        "declared": 7,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "source_revoked": false
+      }
+    },
+    {
+      "arm_id": "R142_pilot_002_R-B35-S-T2_S0_SELECTED",
+      "qualification": false,
+      "method": "CP",
+      "seed": 0,
+      "U": 0.35740210216991025,
+      "L": 0.22936554691005015,
+      "certificate": false,
+      "control_SHA": "fa5073c0511c5220f1ab5562f7c5803f5570752eb5e7d2a895a7425b3ab9f8c2",
+      "closeout_SHA": "38ac63406fc904f2d41e40c1f51124e8daf230c1105ce914e46608d69ce09852",
+      "models": [
+        {
+          "call": 1,
+          "SHA": "e8d8b48a007bb94d14ef7115fa738512fa992704bafd5e99c98c07eb56651285"
+        },
+        {
+          "call": 2,
+          "SHA": "98e8f08a0a4b2b4d9a163bf9e8313ff54fe9b9a00b1dd91b92c15d8d324ee218"
+        },
+        {
+          "call": 3,
+          "SHA": "6236c84a70503aaebfd84452a43cd9d101853f0d59c2aaa64c5b37bd09f01262"
+        },
+        {
+          "call": 4,
+          "SHA": "62bb1f6864ab3dd6f70c3adf7ff108e65eea2b26b62291339ce3ab8a66f20302"
+        },
+        {
+          "call": 5,
+          "SHA": "8b0c0766ac756783526b5e8368c50f24b744d1216b76fd455b97f1d5eba17ce1"
+        },
+        {
+          "call": 6,
+          "SHA": "4b11b22c72f3b9dde8f7ce7899d0453c241a587eaf17e1891c6a8735bdae1bab"
+        },
+        {
+          "call": 7,
+          "SHA": "4b11b22c72f3b9dde8f7ce7899d0453c241a587eaf17e1891c6a8735bdae1bab"
+        }
+      ],
+      "lifecycle": {
+        "declared": 7,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "source_revoked": false
+      }
+    },
+    {
+      "arm_id": "R142_pilot_003_K-20-S_S0_SELECTED",
+      "qualification": false,
+      "method": "CP",
+      "seed": 0,
+      "U": 0.7168065462777502,
+      "L": 0.7168065462777496,
+      "certificate": true,
+      "control_SHA": "007539bb7c48714bdc313d970f7ad19a5954cc4431f9b5bed0e9ac1037bbbd75",
+      "closeout_SHA": "09922df16e07791ae5f5e36c72e71e39c5fa298d51b2d28fa12aad274d4f60d1",
+      "models": [
+        {
+          "call": 1,
+          "SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030"
+        },
+        {
+          "call": 2,
+          "SHA": "16e0b36fc89d8a1dfce682c13e647948abdf2b48d2f8035a26c2e272e0eb3355"
+        },
+        {
+          "call": 3,
+          "SHA": "7094aa05e4328cbbe9bcf17c3323e896b2e3f1af6d863eac275d9bab47df081a"
+        },
+        {
+          "call": 4,
+          "SHA": "a248368bfa7099a7d9a84df0e669a1a0705b2a9cd9ee0bda69f9ced468c34b30"
+        },
+        {
+          "call": 5,
+          "SHA": "73da94d44333abcae3b1ec85d31f2ae297ec9b43dbc6103acb04e3d64e4af9e1"
+        },
+        {
+          "call": 6,
+          "SHA": "76bac00995c1fb6e5696a9fb9a2e644ea7cd727af6538a998d53b59e2c0397ac"
+        },
+        {
+          "call": 7,
+          "SHA": "76bac00995c1fb6e5696a9fb9a2e644ea7cd727af6538a998d53b59e2c0397ac"
+        }
+      ],
+      "lifecycle": {
+        "declared": 7,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "source_revoked": false
+      }
+    },
+    {
+      "arm_id": "R142_pilot_004_K-15-S_S0_SELECTED",
+      "qualification": false,
+      "method": "CP",
+      "seed": 0,
+      "U": 0.5922648822560825,
+      "L": 0.5922648822560502,
+      "certificate": true,
+      "control_SHA": "28300a44dbd84552ba922689a4e4572b149b7020ee43d9838490fd5882b02ca4",
+      "closeout_SHA": "9a07a33f3f96409c293e7e29b167a52572a843c9e6ff0fce6cc0abf916246470",
+      "models": [
+        {
+          "call": 1,
+          "SHA": "ceb38a967fd1799dd806994318172f3dec2af516038a606d588392960b45bad1"
+        },
+        {
+          "call": 2,
+          "SHA": "c87668b69c2f6160119d27e0734318f0b684b912263c5b9b190c452939128974"
+        },
+        {
+          "call": 3,
+          "SHA": "cf4d4c2bafc7d258ed288ccc8e1ceeb40eea003d6bb54ede22f0c5a2ece6b3f5"
+        },
+        {
+          "call": 4,
+          "SHA": "211c52483ccfdb098be2d574fd9cfcc17dd4a463c0c7db52b99c12faf261b5e1"
+        },
+        {
+          "call": 5,
+          "SHA": "db612e673a37179fa162647aad69a0f65ec1a886f69494550967cf83076fe0bf"
+        },
+        {
+          "call": 6,
+          "SHA": "1d9deb1d9c21e294c86e225d1191aa4579c541caac7f0c135c1259ec40c4e3fc"
+        },
+        {
+          "call": 7,
+          "SHA": "1d9deb1d9c21e294c86e225d1191aa4579c541caac7f0c135c1259ec40c4e3fc"
+        }
+      ],
+      "lifecycle": {
+        "declared": 7,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "source_revoked": false
+      }
+    },
+    {
+      "arm_id": "R142_qualification_001_K-20-S_S0_SELECTED",
+      "qualification": true,
+      "method": "CP",
+      "seed": 0,
+      "U": 0.7168065462777502,
+      "L": 0.7100410694056126,
+      "certificate": false,
+      "control_SHA": "841619d79f62e4a81beb0d0c66ea15e6b3df55c148c9e51024a776ec0642e237",
+      "closeout_SHA": "563e784fc57a2967921b5a2caadd1127b25ab93c8d2c2c046afc62e0fbb97a2d",
+      "models": [
+        {
+          "call": 1,
+          "SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030"
+        },
+        {
+          "call": 2,
+          "SHA": "16e0b36fc89d8a1dfce682c13e647948abdf2b48d2f8035a26c2e272e0eb3355"
+        },
+        {
+          "call": 3,
+          "SHA": "7094aa05e4328cbbe9bcf17c3323e896b2e3f1af6d863eac275d9bab47df081a"
+        },
+        {
+          "call": 4,
+          "SHA": "a248368bfa7099a7d9a84df0e669a1a0705b2a9cd9ee0bda69f9ced468c34b30"
+        },
+        {
+          "call": 5,
+          "SHA": "73da94d44333abcae3b1ec85d31f2ae297ec9b43dbc6103acb04e3d64e4af9e1"
+        },
+        {
+          "call": 6,
+          "SHA": "76bac00995c1fb6e5696a9fb9a2e644ea7cd727af6538a998d53b59e2c0397ac"
+        },
+        {
+          "call": 7,
+          "SHA": "76bac00995c1fb6e5696a9fb9a2e644ea7cd727af6538a998d53b59e2c0397ac"
+        }
+      ],
+      "lifecycle": {
+        "declared": 7,
+        "returned": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "not_started": [],
+        "postreturn_quality": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "source_revoked": false
+      }
+    }
+  ],
+  "seconds": 0.301571800140664,
+  "Optimize": 0,
+  "Native_load": 0,
+  "scope": "Additive seal/physical/lifecycle/hash replay; original complete physical/H/Start/quality/scope/source-floor/Native-row audits are retained separately."
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include "Round140Research.hpp"
+#include "Round142Research.hpp"
 #include "Round120NativeProof.hpp"
 #include "FileSha256.hpp"
 #include <regex>
@@ -196,7 +197,16 @@ inline CanonicalCompactModelArtifact round141Probe(const Instance& instance,int 
     for(const auto& [name,value]:coefficients)if(value)chord.coefficients[name]=-down(value,g.exponent);
     double smallest=1;for(const auto& [name,value]:chord.coefficients){(void)name;if(value)smallest=std::min(smallest,std::fabs(value));}int exponent=0;while(std::ldexp(smallest,exponent)<1e-12)++exponent;
     for(auto& term:chord.coefficients)term.second=std::ldexp(term.second,exponent);chord.rhs=std::ldexp(chord.rhs,exponent);rows.push_back(chord);
-    return round141Append(base,std::move(rows),path,false,side==0?"count_low":"count_high");
+    // Append once: the Native expected matrix covers the original count and
+    // child TC2 rows as well as every new range and product row under one SHA.
+    auto products=round142SourceRows<Row>(c,g,side,base.gamma_L,base.gamma_U);
+    rows.insert(rows.end(),products.begin(),products.end());
+    const auto out=round141Append(base,std::move(rows),path,false,side==0?"count_low":"count_high");
+    if(round142().enabled())round141Event("round142_source_rows",
+        "\"mode\":\""+round142().products+"\",\"side\":"+std::to_string(side)+
+        ",\"rows\":"+std::to_string(products.size())+",\"alpha\":"+number(base.gamma_L)+
+        ",\"beta\":"+number(base.gamma_U)+",\"model_SHA\":\""+out.sha256+"\"");
+    return out;
 }
 inline bool round141Contains(const Round141Choice& c,const CanonicalCompactModelArtifact& base,double cutoff) {
     if(!base.interval_restricted||base.gamma_L<c.a||base.gamma_U>c.z||cutoff>c.cutoff)return false;

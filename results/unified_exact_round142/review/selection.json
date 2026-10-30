@@ -1,0 +1,361 @@
+{
+  "decision": "RESEARCH_ONLY_STOP_EXPANSION_AFTER_TWO_MATCHED_D1_BRIDGES",
+  "phase": "Post-four-role pilot, before required same-PE attribution controls",
+  "reviewer": "independent_review (non-implementer)",
+  "independently_assessed": true,
+  "UTC": "2026-10-30T16:38:41.991490+00:00",
+  "promote_stable_default": false,
+  "stable_method": "R137 GI-TBC unchanged",
+  "uniform_candidate": "selected CP in two R141 D1 count-proof LP sources, stock BOTH + old TC + TC2",
+  "scope": {
+    "matched_new_continuous_LPs": 12,
+    "formal_complete_selected_Seed0_positions": 4,
+    "healthy_cap90_qualifications_excluded_from_performance": 1,
+    "proofs": 2,
+    "new_Seed1_positions": 0,
+    "entered_failures": 0,
+    "all_entered_preserved": true
+  },
+  "evidence_levels": {
+    "expression": "Conditional CP fills a real VD-P endpoint count inconsistency; count-selector-only integrality/hull and strict 9/40 block witness are valid. Standard RLT/network tools are not new general theory.",
+    "source_optimization": "Selected weak-source/min-cover gains K35 2.3810779951e-5, RB35-T2 2.5644031881e-4, K20 7.2175289899e-5 exceed numerical equality. ALL adds at most about 2e-15 beyond selected. Saved full optimum satisfies every new linear range, so gains are product consistency, not range-only.",
+    "complete_search": "Two small-role proofs remain, with no new proof versus old D1 or stock. RB improves materially versus old D1, while K35 worsens at both endpoints; no uniform promotion follows from stronger LP sources."
+  },
+  "rationale": [
+    "K15/K20 production gains versus old R141 D1 are 4.8711/6.8641 seconds, both below max(10s,10% of the smaller clock). Their total gains 4.3755/6.5955 seconds are also below that threshold. These are cross-version observations pending the K20 bridge.",
+    "K20 versus historical stock has a substantive production gain of about14.964 seconds, but total gain about8.474 seconds is below10seconds. Both signs and clocks should remain visible; this does not establish a same-PE CP effect.",
+    "K35 CP U/L=.665418889/.545040775 versus old D1 .655549726/.559530134 is adverse at both ends (+.009869163 U,-.014489358 L). Preserve the full-window result; do not attribute it solely to CP without a same-PE K35 control.",
+    "RB35-T2 CP U/L=.357402102/.229365547 materially repairs old D1 (.413773275/.227918419), but remains worse at both ends than old TC+stock (.319080493/.233927262) and TC2+stock (.324275718/.229904209). Against stable GI-TBC it trades a worse U for a stronger L.",
+    "The frozen candidate has real structural and mixed search value, without a close adoption ambiguity. Extra roles may map more heterogeneity but cannot erase the completed K35 adverse boundary or established hard-role dominance by old TC+stock. No fresh structural signal supports an8-role completion.",
+    "Remaining budget is ample; stopping expansion is based on results and marginal decision value, not the8-hour ceiling. No per-instance method choice, new RLT variant, AM/Seed grid or H redesign is justified."
+  ],
+  "conditional_decisions": [
+    {
+      "option": "remaining four selected Seed0 roles",
+      "decision": "DO_NOT_RUN",
+      "reason": "Not decision-changing for this frozen candidate. The goal permits mixed results but asks to reject important or broad regressions; current K35 loss plus lack of substantive old-D1 time improvement is enough to retain research-only. Missing roles remain untested, not inferred."
+    },
+    {
+      "option": "one paired Seed1 confirmation",
+      "decision": "DO_NOT_RUN",
+      "reason": "No near-boundary adoption decision is at stake. A favorable RB or K20 seed would not cure K35/old-TC hard-role evidence; an unfavorable seed would not change stop. Avoid seed search."
+    },
+    {
+      "option": "same-PE old D1 bridge K20",
+      "decision": "RUN_ONCE_SEED0_FULL_CAP1200",
+      "reason": "Clarify the modest proof-clock improvement and verify new-source floor attribution under identical PE/control flow. Counts products off, old D1 d1 retained; own H/root/two probes/search and complete verification paid independently."
+    },
+    {
+      "option": "same-PE old D1 bridge RB35-T2",
+      "decision": "RUN_ONCE_SEED0_FULL_CAP2400",
+      "reason": "This is the largest favorable whole-method endpoint difference and the hard role with the largest source/cover gain. A matched old D1 run determines whether that partial repair survives the PE bridge; do not promise Native count branching or monotone search benefit."
+    },
+    {
+      "option": "same-PE K35 or D0 extra grids",
+      "decision": "NOT_REQUIRED",
+      "reason": "K35 adverse endpoints may be reported as cross-version. This round needs no causal CP-blame claim or new D0 grid. Replacing K20 by another hard role would consume4800seconds without clarifying the main small-role timing claim."
+    }
+  ],
+  "required_next_experiments": [
+    {
+      "role": "K-20-S",
+      "method": "old R141 D1 on current PE",
+      "products": "off",
+      "Seed": 0,
+      "cap_seconds": 1200,
+      "physical_T": 5400
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "old R141 D1 on current PE",
+      "products": "off",
+      "Seed": 0,
+      "cap_seconds": 2400,
+      "physical_T": 7200
+    }
+  ],
+  "nominal_required_bridge_seconds": 3600,
+  "post_bridge_rule": "Unless a bridge exposes a new substantive correctness or adoption fact, preserve selected CP as research-only and close this count-proof continuation. Do not automatically extend roles or seeds after a favorable bridge.",
+  "required_next_nonexperimental_work": [
+    "Freeze and independently admit exactly the two same-PE bridges; retain own-H/call/SHA/floor/clock bindings.",
+    "Write final positive/adverse tables and decision, source/mathematical explanation, incremental manuscript and final independent review.",
+    "Normal commit/push/English Draft PR, fixed science, bounded new-carrier public reads, current-round-only safe cleanup and continuation entry."
+  ],
+  "comparisons": [
+    {
+      "role": "K-15-S",
+      "reference": "D1",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": -3.008704396734174e-14,
+      "delta_T_produce": -4.871086392085999,
+      "delta_T_total": -4.375545291928574,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-15-S",
+      "reference": "base",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": 3.0175391074749314e-09,
+      "delta_T_produce": -85.28105478407815,
+      "delta_T_total": -83.89453868404962,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-15-S",
+      "reference": "both",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": -1.354472090042691e-14,
+      "delta_T_produce": -6.329978214111179,
+      "delta_T_total": -2.284784313989803,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-15-S",
+      "reference": "TC_STOCK",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": 2.393735765160443e-09,
+      "delta_T_produce": -17.754289787262678,
+      "delta_T_total": -15.706506787100807,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-15-S",
+      "reference": "TC2_STOCK",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": -2.5202062658991053e-14,
+      "delta_T_produce": -8.644962363643572,
+      "delta_T_total": -6.194840763462707,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-20-S",
+      "reference": "D1",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": -4.440892098500626e-16,
+      "delta_T_produce": -6.864130159141496,
+      "delta_T_total": -6.595509459264576,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-20-S",
+      "reference": "base",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": 0.01145075278350327,
+      "delta_T_produce": -1085.5185610039625,
+      "delta_T_total": -1137.347845704062,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-20-S",
+      "reference": "both",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": 7.216449660063518e-15,
+      "delta_T_produce": -14.963940920308232,
+      "delta_T_total": -8.473684720462188,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-20-S",
+      "reference": "TC_STOCK",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": 2.366031814915459e-10,
+      "delta_T_produce": -49.02536883344874,
+      "delta_T_total": -46.44788293354213,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-20-S",
+      "reference": "TC2_STOCK",
+      "same_PE": false,
+      "delta_U": 0.0,
+      "delta_L": 2.220446049250313e-15,
+      "delta_T_produce": -28.34817932615988,
+      "delta_T_total": -24.362008626339957,
+      "production_materiality_threshold": 10.0,
+      "total_materiality_threshold": 10.0
+    },
+    {
+      "role": "K-35-U",
+      "reference": "D1",
+      "same_PE": false,
+      "delta_U": 0.009869163280533555,
+      "delta_L": -0.01448935814691421,
+      "delta_T_produce": 0.0483829784207046,
+      "delta_T_total": 2.1730172785464674,
+      "production_materiality_threshold": 237.11314443545416,
+      "total_materiality_threshold": 238.60004784544
+    },
+    {
+      "role": "K-35-U",
+      "reference": "base",
+      "same_PE": false,
+      "delta_U": -0.02743546955908538,
+      "delta_L": -0.02072490597563037,
+      "delta_T_produce": 0.027969525894150138,
+      "delta_T_total": 13.221588226035237,
+      "production_materiality_threshold": 237.11518578070684,
+      "total_materiality_threshold": 237.4951907506911
+    },
+    {
+      "role": "K-35-U",
+      "reference": "both",
+      "same_PE": false,
+      "delta_U": -0.0041766801417785215,
+      "delta_L": -0.011736122494073409,
+      "delta_T_produce": 0.11212585144676268,
+      "delta_T_total": 13.041280251462013,
+      "production_materiality_threshold": 237.10677014815155,
+      "total_materiality_threshold": 237.51322154814844
+    },
+    {
+      "role": "K-35-U",
+      "reference": "TC_STOCK",
+      "same_PE": false,
+      "delta_U": 0.014980177114672477,
+      "delta_L": -0.023247750840531323,
+      "delta_T_produce": 0.06110675516538322,
+      "delta_T_total": 9.589248155010864,
+      "production_materiality_threshold": 237.1118720577797,
+      "total_materiality_threshold": 237.85842475779356
+    },
+    {
+      "role": "K-35-U",
+      "reference": "TC2_STOCK",
+      "same_PE": false,
+      "delta_U": -0.03672972434762789,
+      "delta_L": 0.003070398900962279,
+      "delta_T_produce": 0.00893409107811749,
+      "delta_T_total": 8.227046291111037,
+      "production_materiality_threshold": 237.11708932418844,
+      "total_materiality_threshold": 237.99464494418353
+    },
+    {
+      "role": "R-B35-S-T2",
+      "reference": "D1",
+      "same_PE": false,
+      "delta_U": -0.05637117285179699,
+      "delta_L": 0.0014471274744312923,
+      "delta_T_produce": 0.10496534989215434,
+      "delta_T_total": 2.0547202499583364,
+      "production_materiality_threshold": 237.1056134380633,
+      "total_materiality_threshold": 238.4603937980486
+    },
+    {
+      "role": "R-B35-S-T2",
+      "reference": "base",
+      "same_PE": false,
+      "delta_U": 0.012759476577962114,
+      "delta_L": 0.01037959730657545,
+      "delta_T_produce": 0.12287621106952429,
+      "delta_T_total": 11.854320010868832,
+      "production_materiality_threshold": 237.10382235194558,
+      "total_materiality_threshold": 237.48043382195758
+    },
+    {
+      "role": "R-B35-S-T2",
+      "reference": "both",
+      "same_PE": false,
+      "delta_U": -0.043798115669140325,
+      "delta_L": 0.00018394724572656784,
+      "delta_T_produce": 0.03296475228853524,
+      "delta_T_total": 11.489608652191237,
+      "production_materiality_threshold": 237.11281349782368,
+      "total_materiality_threshold": 237.51690495782532
+    },
+    {
+      "role": "R-B35-S-T2",
+      "reference": "TC_STOCK",
+      "same_PE": false,
+      "delta_U": 0.038321609477619034,
+      "delta_L": -0.0045617152284397056,
+      "delta_T_produce": 0.08301294804550707,
+      "delta_T_total": 7.8220457481220365,
+      "production_materiality_threshold": 237.10780867824798,
+      "total_materiality_threshold": 237.88366124823224
+    },
+    {
+      "role": "R-B35-S-T2",
+      "reference": "TC2_STOCK",
+      "same_PE": false,
+      "delta_U": 0.03312638438412602,
+      "delta_L": -0.0005386616267663846,
+      "delta_T_produce": -0.06069409963674843,
+      "delta_T_total": 7.138309000292793,
+      "production_materiality_threshold": 237.11610997305252,
+      "total_materiality_threshold": 237.95203492301516
+    }
+  ],
+  "source_bindings": {
+    "full_report_SHA_at_selection": "3e1e7149a84a1d6707d6933601deb84e171a2e7defda0574e1cf280d36e6fcb2",
+    "LP_selected_summary_SHA": "f71a293806f4e09da29f5b453b7e83da320b746cee8d5f95a2a762bf1443ae94",
+    "LP_all_summary_SHA": "fd7de355f6fc8e634f949efe3071db8461f5e9b47939952b871c6a3e111a8ccb",
+    "pilot_matrix_SHA": "a9728de3d60a2e75c4b4588924760e9ae3386f1e73ddaf9b51dc7a1675cf8fe1",
+    "candidate_manifest_SHA": "3690b4a0b2bc4e0b06df83f7add345e33d8751f64db00d084d26100cd0bd2274",
+    "actual_complete_checks": [
+      {
+        "role": "K-15-S",
+        "closeout_SHA": "9a07a33f3f96409c293e7e29b167a52572a843c9e6ff0fce6cc0abf916246470",
+        "control_SHA": "28300a44dbd84552ba922689a4e4572b149b7020ee43d9838490fd5882b02ca4",
+        "chain_SHA": "37119dafc279ae8753ac50c1ecb046c7f6683172bf766650694434b538fbdec0"
+      },
+      {
+        "role": "K-20-S",
+        "closeout_SHA": "09922df16e07791ae5f5e36c72e71e39c5fa298d51b2d28fa12aad274d4f60d1",
+        "control_SHA": "007539bb7c48714bdc313d970f7ad19a5954cc4431f9b5bed0e9ac1037bbbd75",
+        "chain_SHA": "5c3e4a3eaaf333e19e7eb231a53f0f511fb17017f50e5c9e2491fe9e2b3daf34"
+      },
+      {
+        "role": "K-35-U",
+        "closeout_SHA": "d77a4e5bc62124071d9561db0e73d0fedcd760f3bdf0babf140112962f3b35a7",
+        "control_SHA": "b5d04189732a648e15f6528f607e4aaec04bac170faf39c3a88b9e90d3edd0cf",
+        "chain_SHA": "b5060f0e2db85fc9915a805dceedd25be63c063604f7023cbc55beb27f989dbb"
+      },
+      {
+        "role": "R-B35-S-T2",
+        "closeout_SHA": "38ac63406fc904f2d41e40c1f51124e8daf230c1105ce914e46608d69ce09852",
+        "control_SHA": "fa5073c0511c5220f1ab5562f7c5803f5570752eb5e7d2a895a7425b3ab9f8c2",
+        "chain_SHA": "7d709bbb5a9836e10f3cf98ebe0d6b520bff87a8ea3968487cab0ee08415a101"
+      }
+    ]
+  },
+  "budget_snapshot": {
+    "G1_seconds": 4961.570021598833,
+    "remaining_G1_seconds": 23838.429978401167,
+    "by_category": {
+      "diagnostic": 104.89451009919867,
+      "native": 4856.675511499634
+    },
+    "limits": {
+      "diagnostic": 3600.0,
+      "native": 28800.0
+    },
+    "category_remaining": {
+      "diagnostic": 3495.1054899008013,
+      "native": 23943.324488500366
+    },
+    "separately_reported_seconds": 101.81252120062709,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0
+}

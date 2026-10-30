@@ -70,3 +70,13 @@ suggestion, with the numerical scope stated in the new mathematical note.
 Its four-role D1 pilot and two D0 controls support research-only retention:
 the real K20 conditional-floor benefit does not overcome RB35-T2's important
 complete regression. No further full expansion or stable promotion follows.
+
+The [Round142 count-product source study](round142_research.md) fills a real
+conditional shared-factor relaxation gap and raises three weaker source
+min-covers. Its four-role selected pilot and two same-PE old-D1 bridges retain
+an important RB35-T2 repair but no material incremental K20 proof-clock gain;
+K35 worsens against historical D1. The independently selected decision is
+research-only and closure of this count-proof continuation, without remaining
+roles or Seed1. Stable GI-TBC and prior research entries/profiles remain
+unchanged. See the [scientific decision](../results/unified_exact_round142/candidate_decision.json)
+and [actual delivery record](../results/unified_exact_round142/RESUME.md).

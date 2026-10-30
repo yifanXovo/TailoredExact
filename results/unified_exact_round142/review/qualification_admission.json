@@ -1,0 +1,174 @@
+{
+  "decision": "ACCEPT",
+  "scope": "One cap90 K20 selected own-H new-source qualification only; no formal performance/pilot admission yet",
+  "reviewer": "independent_review (non-implementer)",
+  "UTC": "2026-10-30T15:09:16.523146+00:00",
+  "matrix_SHA": "4cdf0444b60b9ed83fc71c351f27ce95507a23d68b0ea53c77e7c42fd41eb12f",
+  "candidate_manifest_SHA": "3690b4a0b2bc4e0b06df83f7add345e33d8751f64db00d084d26100cd0bd2274",
+  "source_commit": "9b024c451b00f84f9f1cac0905eab457cc82a5b9",
+  "PE_SHA": "1337ab5a78685640b1064780de4765b004e8ec2d73e1fbe17f0b1ed5ffc48f52",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "read_SHA256": {
+    "include/Round142Research.hpp": "16cdffec8e44e078477b7bb50e9f4421a93e59255ffb6400ab0e7e4cd065c332",
+    "include/Round141Research.hpp": "9cc4d1650d611c6bfd5187c5aa26f849c476e81fac6f7a5119b7d5faf1e79d69",
+    "src/main.cpp": "a8c37122208458318d45eeedc77207cfab9370e709efd40db141340ff246a1d4",
+    "src/GurobiBaseline.cpp": "c278a89c31f379a9fbf0334f809762189d2289ceb4cd63267a5a78571a16342d",
+    "scripts/round142_math.py": "a5d3f5fc6cac79abc7b12353c35b02f52e0ed5668f6c9015c11dea8f2cb7d722",
+    "scripts/round142_lp.py": "f10a76dd378a4567983062d5376c57a3e107c9a5b3bea0146a19afee2ed95238",
+    "scripts/round142_read.py": "cad54fd37be7bf6eef8b976a502ac0076eb6902da5c6d5eaab9c0cf980f6d8c2",
+    "scripts/round142_campaign.py": "a6b146a5b7db97cec4c720f7ac19eec3077cd91c0779ead460e6fdedb86785e7",
+    "scripts/round142_qualify.py": "ada01906ff7a9ae3d1758429147738b9149bda114e2613bf13b8553ef5142561",
+    "scripts/round142_qualify.cpp": "bed04964662f2c9a558bd6ea81661c324ca0d44e195d7643ee7c0db0d8581ab9",
+    "scripts/round142_build.py": "70b415b9124fef29e863ad33410df728e54f52201c170c20f9e86b019c337e03",
+    "scripts/round142_common.py": "8d5927545f7afebba9e26be2744e46954e9913c638c34017ca3d47453bf0de15"
+  },
+  "native_writer_record_SHA": "689f3bd22fccf8754deced14380a5591c321ed84c84c110b09f950afcbb4862e",
+  "preliminary_math_SHA": "b46a0d9091323eeb9822f15e52bc09d8716c8c9309a6a831e13c51474606010c",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "findings": [],
+  "checks": {
+    "CP_signs_constants_and_actual_interval": true,
+    "exact_dyadic_membership_preserved": true,
+    "linear_ranges_retained_for_fixed_g": true,
+    "outward_RHS_and_dyadic_scaling": true,
+    "source_only_single_append_all_expected_rows": true,
+    "unchanged_embed_and_no_extra_columns_probes_or_branching": true,
+    "default_off_returns_empty_rows_and_old_R141_models": true,
+    "all_five_changed_header_dependents_recompiled_with_success_receipts": true,
+    "current_sources_PE_DLL_objects_archive_rehashed": true,
+    "12_LPs_hash_quality_seed_and_range_witness_verified": true,
+    "selected_ALL_extra_gain_below_3e_15": true
+  },
+  "independent_fixture_checks": [
+    {
+      "tag": "positive",
+      "mode": "off",
+      "side": 0,
+      "model_SHA": "e09674bdcd54746ff3cd2cb856e2dd770e6fdd18f1e89560c00c29db8a4070ed",
+      "native_checked_rows": 2
+    },
+    {
+      "tag": "positive",
+      "mode": "off",
+      "side": 1,
+      "model_SHA": "ff26e7d0fb12e447d4e8638fa692c5c15910e5f676ff6da9850068f2ef7a0610",
+      "native_checked_rows": 2
+    },
+    {
+      "tag": "positive",
+      "mode": "selected",
+      "side": 0,
+      "model_SHA": "81db03e522f974060126eee9a5db96a4135433d7a7e7f390732cb5f3e3a18b80",
+      "native_checked_rows": 7
+    },
+    {
+      "tag": "positive",
+      "mode": "selected",
+      "side": 1,
+      "model_SHA": "e6f1010a9e68aac8452e8ca3c6ecf51cda89e6e8c16de8dbc40dda8a35cb8141",
+      "native_checked_rows": 7
+    },
+    {
+      "tag": "positive",
+      "mode": "all",
+      "side": 0,
+      "model_SHA": "8c396740e99cd712183519a1b94eb60734462a3a35354d23c2fe02971d8e2a6c",
+      "native_checked_rows": 13
+    },
+    {
+      "tag": "positive",
+      "mode": "all",
+      "side": 1,
+      "model_SHA": "9efbafc1b142f7080e88acf2fdd4bd5c8d867396cca9941416bd7176a2e97dd8",
+      "native_checked_rows": 13
+    },
+    {
+      "tag": "fixed",
+      "mode": "off",
+      "side": 0,
+      "model_SHA": "328176a922061b4a3ece290613bc930ed5d9d728305a851eee401fbef37e715c",
+      "native_checked_rows": 2
+    },
+    {
+      "tag": "fixed",
+      "mode": "off",
+      "side": 1,
+      "model_SHA": "acc586b16c18c7de15a6e62ac4669e3f82e9a4b610da7301a97e9b28cd45f691",
+      "native_checked_rows": 2
+    },
+    {
+      "tag": "fixed",
+      "mode": "selected",
+      "side": 0,
+      "model_SHA": "089739c75dd9cbe77c00770d59580eeda32238529bb69159f4cc64b890a109a4",
+      "native_checked_rows": 7
+    },
+    {
+      "tag": "fixed",
+      "mode": "selected",
+      "side": 1,
+      "model_SHA": "522f4d21df06b459c2de8c6bbd62c9c1498c707407000a2951d9ede7a7dcabcf",
+      "native_checked_rows": 7
+    },
+    {
+      "tag": "fixed",
+      "mode": "all",
+      "side": 0,
+      "model_SHA": "0f95a18804da54c07256c9f7621552cd477b67bc42c184bc19b2e2dececd8833",
+      "native_checked_rows": 13
+    },
+    {
+      "tag": "fixed",
+      "mode": "all",
+      "side": 1,
+      "model_SHA": "4fef01e1359e2133fee9be175e529337046b431112bade15d3d5e41e573e4e49",
+      "native_checked_rows": 13
+    },
+    {
+      "tag": "tiny",
+      "mode": "off",
+      "side": 0,
+      "model_SHA": "f4244113bca94d2cf7ade0ede75166ab83a8ee59c77c6b950d33b39f8ba4ee47",
+      "native_checked_rows": 2
+    },
+    {
+      "tag": "tiny",
+      "mode": "off",
+      "side": 1,
+      "model_SHA": "da044d5dea967624d40c77d7057fc9649f0950bd1372639920395536bbc94144",
+      "native_checked_rows": 2
+    },
+    {
+      "tag": "tiny",
+      "mode": "selected",
+      "side": 0,
+      "model_SHA": "f1e036ed4e2fa62fbfd0527d60e7eaa9439776262f922531b8d865cf75a9dcc2",
+      "native_checked_rows": 7
+    },
+    {
+      "tag": "tiny",
+      "mode": "selected",
+      "side": 1,
+      "model_SHA": "7b78ced966db8c4593087b8eaf3798047417bb1cac49327b8f3df3fbd4fd2278",
+      "native_checked_rows": 7
+    },
+    {
+      "tag": "tiny",
+      "mode": "all",
+      "side": 0,
+      "model_SHA": "f807790a3897e1e810cd51264c9f99ed1845b88021d3c8d672ba2ffefb9e54dc",
+      "native_checked_rows": 13
+    },
+    {
+      "tag": "tiny",
+      "mode": "all",
+      "side": 1,
+      "model_SHA": "783e6757f3941e48cc58becbb6d207dae4f4c4cb8eb256604091b67e6a75ff1f",
+      "native_checked_rows": 13
+    }
+  ],
+  "pilot_boundary": "Saved-domain gains are small but above fixed numerical floor: K35 2.3811e-5, RB35-T2 2.5644e-4, K20 7.2175e-5. S is uniformly preferable to ALL here; qualified finite pilot may test complete value after cap90 admission completes. No D1-over-D0 optimized-root gain is required.",
+  "next_required": "Complete qualification reader must pass actual two-source floors/calls/SHA, source-only rows and lifecycle before separate four-role full-window pilot gate."
+}

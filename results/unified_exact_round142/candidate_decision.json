@@ -1,0 +1,616 @@
+{
+  "round": 142,
+  "study_complete": true,
+  "delivery_record": "RESUME.md and additive PR/public/cleanup receipts",
+  "recommendation": "RESEARCH_ONLY_CLOSE_COUNT_PROOF_CONTINUATION",
+  "promote_stable_default": false,
+  "stable_default": "R137 GI-TBC, unchanged",
+  "uniform_candidate": "selected CP inside both R141 D1 count LP sources",
+  "actual_production_source": "9b024c451b00f84f9f1cac0905eab457cc82a5b9",
+  "PE_SHA": "1337ab5a78685640b1064780de4765b004e8ec2d73e1fbe17f0b1ed5ffc48f52",
+  "complete_discussion": "All four selected Seed0 roles complete their original protocols. K15 and K20 keep the same two qualified proofs as old D1 and stock, with production 27.488248 / 86.671444 s and total 32.645135 / 95.985987 s. Against historical R141 D1 their production gains are 4.871086 / 6.864130 s, below the inherited max(10 s,10% of the smaller clock) threshold. K20 versus historical stock improves production by 14.963941 s, which is substantive, but total by only 8.473685 s, below 10 s. This is a cross-version whole-method comparison, not an isolated CP timing claim. K35 ends at U/L=0.665418889072/0.545040775489; its old-D1 changes are U +0.009869163281 and L -0.014489358147. RB35-T2 ends at 0.357402102170/0.229365546910, a repair over historical old D1 but still a worse U/stronger L tradeoff against stable GI-TBC, and worse at both endpoints than old TC+stock and TC2+stock. K35 is also dominated by old TC+stock. All open certificate times stay null; no cap is called convergence.",
+  "attribution_discussion": "Two independently paid same-PE old-D1 bridges retain the identical source/PE, input, own H, root, selection/pivot, count links and complete window. The first integer matrices match after removing only the floor row; source CP is absent from those integer models. K20 old D1 produces its proof in 87.545767 s (97.476894 total); selected CP changes production by -0.874323 s and total by -1.490906 s, without a substantive incremental proof-clock gain. RB old D1 ends at U/L=0.413773275022/0.227903449004; CP improves both endpoints, with U delta -0.056371172852 and L delta 0.001462097906. This is the actual matched complete intervention: stronger source models and the returned two floor coefficients. It does not identify Native branching on b or attribute the result only to the weak-side raw objective increment. K35 has no new same-PE bridge; retain its adverse cross-version comparison without assigning causality solely to CP. Native returned bounds and the externally merged supported L remain separate full-table fields.",
+  "decision_paragraph": "Retain the uniform selected-CP entry as research-only and close this count-proof continuation. Conditional count products fill a real shared-factor relaxation freedom and raise all three weaker sources/min-covers. They do not provide a sufficiently consistent complete-method increment for promotion: the small-role old-D1 proof benefit is not substantive under same-PE matching, K35 regresses at both endpoints against historical D1, and the hard roles remain behind old TC+stock at both endpoints. Stable R137 GI-TBC remains the default. Preserve the actual RB matched result and every adverse/failed result as finite research evidence; neither stronger LPs nor this panel proves general Native performance dominance.",
+  "conditional_work_discussion": "The independently selected K20/RB same-PE bridges are complete. No remaining-four-role expansion, new D0 grid or Seed1 is entered: these would not change the adoption/stop decision given the completed hard-role boundary. No missing role is inferred. ALL has no useful extra source information, reverse inventory bounds are implied and unchanged, and further similar RLT, AM/Seed grids or H redesign are not opened. A future continuation needs genuinely different joint information or search evidence, under a new explicit task. Stopping is based on scientific and marginal decision value with ample unused budget, not the 8-hour ceiling.",
+  "standalone_continuous_LPs": 12,
+  "zero_Optimize_range_controls": 12,
+  "formal_selected_Seed0_positions": 4,
+  "same_PE_old_D1_Seed0_bridges": 2,
+  "healthy_cap90_qualifications": 1,
+  "new_Seed1_positions": 0,
+  "failed_pure_fixture_constructions": 1,
+  "failed_Optimize_positions": 0,
+  "matched_cover_gains": [
+    {
+      "role": "K-35-U",
+      "old_cover": 0.24014010505315198,
+      "selected_cover": 0.24016391583310343,
+      "selected_floor": 0.2401638158331034,
+      "selected_gain": 2.3810779951449756e-05,
+      "all_cover": 0.24016391583310404,
+      "all_floor": 0.240163815833104,
+      "all_gain": 2.381077995206038e-05,
+      "ALL_minus_selected": 6.106226635438361e-16
+    },
+    {
+      "role": "R-B35-S-T2",
+      "old_cover": 0.14630175294286624,
+      "selected_cover": 0.1465581932616778,
+      "selected_floor": 0.14655809326167776,
+      "selected_gain": 0.00025644031881155716,
+      "all_cover": 0.1465581932616798,
+      "all_floor": 0.14655809326167976,
+      "all_gain": 0.00025644031881355556,
+      "ALL_minus_selected": 1.9984014443252818e-15
+    },
+    {
+      "role": "K-20-S",
+      "old_cover": 0.2555567027861861,
+      "selected_cover": 0.2556288780760847,
+      "selected_floor": 0.25562877807608464,
+      "selected_gain": 7.217528989861277e-05,
+      "all_cover": 0.2556288780760849,
+      "all_floor": 0.25562877807608486,
+      "all_gain": 7.217528989883482e-05,
+      "ALL_minus_selected": 2.220446049250313e-16
+    }
+  ],
+  "same_PE_bridges": [
+    {
+      "role": "K-20-S",
+      "seed": 0,
+      "same_PE": true,
+      "parent_selection_pivot_links_equal": true,
+      "first_integer_equal_except_floor": true,
+      "candidate_floor": {
+        "SHA": "76bac00995c1fb6e5696a9fb9a2e644ea7cd727af6538a998d53b59e2c0397ac",
+        "base_SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030",
+        "floor_row": [
+          [
+            [
+              "G",
+              1.0
+            ],
+            [
+              "e_1",
+              0.0474609
+            ],
+            [
+              "e_10",
+              0.0474609
+            ],
+            [
+              "e_11",
+              0.05859375
+            ],
+            [
+              "e_12",
+              0.08437499999999999
+            ],
+            [
+              "e_13",
+              0.15
+            ],
+            [
+              "e_14",
+              0.0708984
+            ],
+            [
+              "e_15",
+              0.0708984
+            ],
+            [
+              "e_16",
+              0.11484375
+            ],
+            [
+              "e_17",
+              0.0474609
+            ],
+            [
+              "e_18",
+              0.11484375
+            ],
+            [
+              "e_19",
+              0.08437499999999999
+            ],
+            [
+              "e_2",
+              0.15
+            ],
+            [
+              "e_20",
+              0.15
+            ],
+            [
+              "e_3",
+              0.0708984
+            ],
+            [
+              "e_4",
+              0.05859375
+            ],
+            [
+              "e_5",
+              0.08437499999999999
+            ],
+            [
+              "e_6",
+              0.0708984
+            ],
+            [
+              "e_7",
+              0.0474609
+            ],
+            [
+              "e_8",
+              0.05859375
+            ],
+            [
+              "e_9",
+              0.11484375
+            ],
+            [
+              "r141_b",
+              -0.012563706968555906
+            ]
+          ],
+          ">=",
+          0.2556287780760846
+        ]
+      },
+      "bridge_floor": {
+        "SHA": "a18bd6d53ebd7193c7dc7b51853fb65513edeba1eb08ae75f69e7a56e79fd7b8",
+        "base_SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030",
+        "floor_row": [
+          [
+            [
+              "G",
+              1.0
+            ],
+            [
+              "e_1",
+              0.0474609
+            ],
+            [
+              "e_10",
+              0.0474609
+            ],
+            [
+              "e_11",
+              0.05859375
+            ],
+            [
+              "e_12",
+              0.08437499999999999
+            ],
+            [
+              "e_13",
+              0.15
+            ],
+            [
+              "e_14",
+              0.0708984
+            ],
+            [
+              "e_15",
+              0.0708984
+            ],
+            [
+              "e_16",
+              0.11484375
+            ],
+            [
+              "e_17",
+              0.0474609
+            ],
+            [
+              "e_18",
+              0.11484375
+            ],
+            [
+              "e_19",
+              0.08437499999999999
+            ],
+            [
+              "e_2",
+              0.15
+            ],
+            [
+              "e_20",
+              0.15
+            ],
+            [
+              "e_3",
+              0.0708984
+            ],
+            [
+              "e_4",
+              0.05859375
+            ],
+            [
+              "e_5",
+              0.08437499999999999
+            ],
+            [
+              "e_6",
+              0.0708984
+            ],
+            [
+              "e_7",
+              0.0474609
+            ],
+            [
+              "e_8",
+              0.05859375
+            ],
+            [
+              "e_9",
+              0.11484375
+            ],
+            [
+              "r141_b",
+              -0.012635882258454686
+            ]
+          ],
+          ">=",
+          0.25555660278618597
+        ]
+      },
+      "delta_U": 0.0,
+      "delta_L": -4.440892098500626e-16,
+      "delta_T_produce": -0.8743232463020831,
+      "delta_T_total": -1.4909063465893269,
+      "CP_source_floors": [
+        0.25562877807608464,
+        0.26819248504464055
+      ],
+      "old_source_floors": [
+        0.255556602786186,
+        0.2681924850446407
+      ]
+    },
+    {
+      "role": "R-B35-S-T2",
+      "seed": 0,
+      "same_PE": true,
+      "parent_selection_pivot_links_equal": true,
+      "first_integer_equal_except_floor": true,
+      "candidate_floor": {
+        "SHA": "4b11b22c72f3b9dde8f7ce7899d0453c241a587eaf17e1891c6a8735bdae1bab",
+        "base_SHA": "e8d8b48a007bb94d14ef7115fa738512fa992704bafd5e99c98c07eb56651285",
+        "floor_row": [
+          [
+            [
+              "G",
+              1.0
+            ],
+            [
+              "e_1",
+              0.016400927008678203
+            ],
+            [
+              "e_10",
+              0.03690201686293194
+            ],
+            [
+              "e_11",
+              0.03690201686293194
+            ],
+            [
+              "e_12",
+              0.016400927008678203
+            ],
+            [
+              "e_13",
+              0.045558063204325296
+            ],
+            [
+              "e_14",
+              0.022323476327746
+            ],
+            [
+              "e_15",
+              0.016400927008678203
+            ],
+            [
+              "e_16",
+              0.022323476327746
+            ],
+            [
+              "e_17",
+              0.029157191320922315
+            ],
+            [
+              "e_18",
+              0.045558063204325296
+            ],
+            [
+              "e_19",
+              0.022323476327746
+            ],
+            [
+              "e_2",
+              0.022323476327746
+            ],
+            [
+              "e_20",
+              0.045558063204325296
+            ],
+            [
+              "e_21",
+              0.011389543363718934
+            ],
+            [
+              "e_22",
+              0.022323476327746
+            ],
+            [
+              "e_23",
+              0.016400927008678203
+            ],
+            [
+              "e_24",
+              0.03690201686293194
+            ],
+            [
+              "e_25",
+              0.03690201686293194
+            ],
+            [
+              "e_26",
+              0.022323476327746
+            ],
+            [
+              "e_27",
+              0.045558063204325296
+            ],
+            [
+              "e_28",
+              0.022323476327746
+            ],
+            [
+              "e_29",
+              0.029157191320922315
+            ],
+            [
+              "e_3",
+              0.055125275219827186
+            ],
+            [
+              "e_30",
+              0.016400927008678203
+            ],
+            [
+              "e_31",
+              0.022323476327746
+            ],
+            [
+              "e_32",
+              0.03690201686293194
+            ],
+            [
+              "e_33",
+              0.016400927008678203
+            ],
+            [
+              "e_34",
+              0.029157191320922315
+            ],
+            [
+              "e_35",
+              0.03690201686293194
+            ],
+            [
+              "e_4",
+              0.055125275219827186
+            ],
+            [
+              "e_5",
+              0.011389543363718934
+            ],
+            [
+              "e_6",
+              0.016400927008678203
+            ],
+            [
+              "e_7",
+              0.016400927008678203
+            ],
+            [
+              "e_8",
+              0.029157191320922315
+            ],
+            [
+              "e_9",
+              0.03690201686293194
+            ],
+            [
+              "r141_b",
+              -0.004008749136127225
+            ]
+          ],
+          ">=",
+          0.14655809326167774
+        ]
+      },
+      "bridge_floor": {
+        "SHA": "3b08854a28353d662a5c6b0d545f47450bd02ecf4965bc39f017a5eedab8d8c3",
+        "base_SHA": "e8d8b48a007bb94d14ef7115fa738512fa992704bafd5e99c98c07eb56651285",
+        "floor_row": [
+          [
+            [
+              "G",
+              1.0
+            ],
+            [
+              "e_1",
+              0.016400927008678203
+            ],
+            [
+              "e_10",
+              0.03690201686293194
+            ],
+            [
+              "e_11",
+              0.03690201686293194
+            ],
+            [
+              "e_12",
+              0.016400927008678203
+            ],
+            [
+              "e_13",
+              0.045558063204325296
+            ],
+            [
+              "e_14",
+              0.022323476327746
+            ],
+            [
+              "e_15",
+              0.016400927008678203
+            ],
+            [
+              "e_16",
+              0.022323476327746
+            ],
+            [
+              "e_17",
+              0.029157191320922315
+            ],
+            [
+              "e_18",
+              0.045558063204325296
+            ],
+            [
+              "e_19",
+              0.022323476327746
+            ],
+            [
+              "e_2",
+              0.022323476327746
+            ],
+            [
+              "e_20",
+              0.045558063204325296
+            ],
+            [
+              "e_21",
+              0.011389543363718934
+            ],
+            [
+              "e_22",
+              0.022323476327746
+            ],
+            [
+              "e_23",
+              0.016400927008678203
+            ],
+            [
+              "e_24",
+              0.03690201686293194
+            ],
+            [
+              "e_25",
+              0.03690201686293194
+            ],
+            [
+              "e_26",
+              0.022323476327746
+            ],
+            [
+              "e_27",
+              0.045558063204325296
+            ],
+            [
+              "e_28",
+              0.022323476327746
+            ],
+            [
+              "e_29",
+              0.029157191320922315
+            ],
+            [
+              "e_3",
+              0.055125275219827186
+            ],
+            [
+              "e_30",
+              0.016400927008678203
+            ],
+            [
+              "e_31",
+              0.022323476327746
+            ],
+            [
+              "e_32",
+              0.03690201686293194
+            ],
+            [
+              "e_33",
+              0.016400927008678203
+            ],
+            [
+              "e_34",
+              0.029157191320922315
+            ],
+            [
+              "e_35",
+              0.03690201686293194
+            ],
+            [
+              "e_4",
+              0.055125275219827186
+            ],
+            [
+              "e_5",
+              0.011389543363718934
+            ],
+            [
+              "e_6",
+              0.016400927008678203
+            ],
+            [
+              "e_7",
+              0.016400927008678203
+            ],
+            [
+              "e_8",
+              0.029157191320922315
+            ],
+            [
+              "e_9",
+              0.03690201686293194
+            ],
+            [
+              "r141_b",
+              -0.004265189454939753
+            ]
+          ],
+          ">=",
+          0.14630165294286618
+        ]
+      },
+      "delta_U": -0.05637117285179699,
+      "delta_L": 0.0014620979063244555,
+      "delta_T_produce": 0.08806108334101737,
+      "delta_T_total": 1.976381883258,
+      "CP_source_floors": [
+        0.14655809326167776,
+        0.150566842397805
+      ],
+      "old_source_floors": [
+        0.1463016529428662,
+        0.15056684239780596
+      ]
+    }
+  ],
+  "charged_new_experiment_seconds": 7504.312010499183,
+  "online_G1_seconds": 7420.26558019896,
+  "budget_ceiling_seconds": 28800,
+  "independent_selection_SHA": "34b742f98b5cee974811c40d893a4a2cb296edbd78f89d57934a30ef1a9ed5f9",
+  "remaining_required_experiments": [],
+  "delivery_scope": "Scientific completion does not certify later PR/public/cleanup steps; their actual status is additive in RESUME.md and the corresponding receipts."
+}
