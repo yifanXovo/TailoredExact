@@ -2,6 +2,7 @@
 #include "Evaluator.hpp"
 #include "FileSha256.hpp"
 #include "ProcessPhaseLedger.hpp"
+#include "Round141Research.hpp"
 #include <algorithm>
 #include <cmath>
 #include <fstream>
@@ -115,6 +116,9 @@ NativeEvidenceBound evaluateNativeLocalBound(const NativeEvidenceScope& s,
     auto reject=[&](const std::string& reason,bool inconsistent=false) {
         out.reason=reason;out.inconsistent=inconsistent;return out;
     };
+    std::string count_scope;
+    try {count_scope=round141ScopeValue(s.settings_json);round141ScopeContains(count_scope,{});}
+    catch(const std::exception&) {return reject("invalid_count_source_domain");}
     if(!std::isfinite(tol)||tol<0||!std::isfinite(s.gmax)||s.gmax<0||s.gmax>=1 ||
        (!s.full_original && (!std::isfinite(s.lower_g)||!std::isfinite(s.upper_g)||
         s.lower_g<0||s.upper_g<s.lower_g||!std::isfinite(s.cutoff)||s.cutoff<0)))
@@ -124,6 +128,7 @@ NativeEvidenceBound evaluateNativeLocalBound(const NativeEvidenceScope& s,
     // comparison uses tol; a nearby out-of-domain point cannot refute a call.
     for(const auto& v:witnesses) if(verified(v) &&
         (s.full_original || (v.G>=s.lower_g && v.G<=s.upper_g && v.objective<=s.cutoff)) &&
+        (count_scope.empty() || (!v.final_inventory.empty() && round141ScopeContains(count_scope,v.final_inventory))) &&
         b>v.objective+tol)
         return reject("source_bound_witness_contradiction",true);
     if(!s.native_preconditions)
@@ -143,6 +148,8 @@ bool nativeEvidenceStatusQualified(int status,int read_return_code) {
 NativeEvidenceBound evaluateNativeLocalScope(const NativeEvidenceScope& s) {
     // No synthetic native bound is introduced by a scope-only check.
     NativeEvidenceBound out;
+    try {round141ScopeContains(round141ScopeValue(s.settings_json),{});}
+    catch(const std::exception&) {out.reason="invalid_count_source_domain";return out;}
     if(!std::isfinite(s.gmax)||s.gmax<0||s.gmax>=1 ||
        (!s.full_original && (!std::isfinite(s.lower_g)||!std::isfinite(s.upper_g)||
         s.lower_g<0||s.upper_g<s.lower_g||!std::isfinite(s.cutoff)||s.cutoff<0)))
@@ -155,8 +162,11 @@ NativeEvidenceBound evaluateNativeLocalScope(const NativeEvidenceScope& s) {
 }
 NativeEvidenceBound evaluateNativeLocalInfeasibility(const NativeEvidenceScope& s,
     const std::vector<Verification>& witnesses) {
+    const auto valid=evaluateNativeLocalScope(s);if(!valid.available)return valid;
+    const auto count_scope=round141ScopeValue(s.settings_json);
     for(const auto& v:witnesses)if(verified(v) && (s.full_original ||
-        (v.G>=s.lower_g && v.G<=s.upper_g && v.objective<=s.cutoff))) {
+        (v.G>=s.lower_g && v.G<=s.upper_g && v.objective<=s.cutoff)) &&
+        (count_scope.empty() || (!v.final_inventory.empty() && round141ScopeContains(count_scope,v.final_inventory)))) {
         NativeEvidenceBound out;out.inconsistent=true;
         out.reason="source_infeasibility_witness_contradiction";return out;
     }
@@ -171,6 +181,10 @@ NativeEvidenceBound evaluateNativeEvidenceBound(const NativeEvidenceScope& s,dou
     auto reject=[&](const std::string& reason,bool inconsistent=false) {
         out.reason=reason; out.inconsistent=inconsistent; return out;
     };
+    // A count side cannot masquerade as the parent/Gini frontier obligation.
+    // Its local evidence is consumed only by the complete pair's floor rows.
+    if(s.settings_json.find("\"round141_count_scope\"")!=std::string::npos)
+        return reject("count_side_requires_cover_or_conditional_embedding");
     if(!std::isfinite(tol) || tol<0 || !std::isfinite(s.gmax) || s.gmax<0 || s.gmax>=1)
         return reject("invalid_physical_domain");
     double ub=std::numeric_limits<double>::infinity();

@@ -18,6 +18,7 @@
 #include "ServiceResourceHull.hpp"
 #include "MipStartMapping.hpp"
 #include "Round120NativeProof.hpp"
+#include "Round141Research.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
@@ -392,10 +393,12 @@ bool evidenceParameterReadback(GurobiApi& api,GRBenv* env,NativeEvidenceScope& s
     actual.integrality=intfeas;actual.optimality=optimality;
     const auto mismatch=nativeParameterMismatch(expected,actual,rc);
     auto settings=o.str();settings.pop_back();
+    const auto count_scope=round141ScopeValue(s.settings_json);
     s.settings_json=settings+",\"expected\":{\"Threads\":1,\"Seed\":"+
         std::to_string(expected.seed)+",\"Presolve\":"+std::to_string(expected.presolve)+
         ",\"MIPFocus\":"+std::to_string(expected.mip_focus)+",\"Cuts\":"+std::to_string(expected.cuts)+
         ",\"MIPGap\":0,\"MIPGapAbs\":0,\"FeasibilityTol\":1e-6,\"IntFeasTol\":1e-5,\"OptimalityTol\":1e-6}}";
+    if(!count_scope.empty()) {s.settings_json.pop_back();s.settings_json+=",\"round141_count_scope\":\""+count_scope+"\"}";}
     setNativeEvidencePreconditionReason(s,mismatch);
     return mismatch.empty();
 }
@@ -665,6 +668,43 @@ void auditRound120Native(const GurobiApi& api,GRBmodel* model,
         <<",\"objective_base\":"<<actual.objective_base<<",\"objective_delta\":"<<actual.objective_delta
         <<",\"complete_objective_row_matches_native\":true,\"endpoints_conservative\":true,\"Optimize_extra\":0}\n";
     f.close();if(!f)throw std::runtime_error("round120_native_audit_write_failed");
+}
+
+void auditRound141Native(const GurobiApi& api,GRBmodel* model,
+    const FixedIntervalMipRequest& request,const std::vector<std::string>& names,
+    const std::vector<char>& types) {
+    if(request.canonical_model_scope.find("_round141_")==std::string::npos)return;
+    using namespace round141_detail;
+    auto it=round141().expected.find(request.canonical_model_fingerprint);
+    require(it!=round141().expected.end(),"native_expected_matrix_missing");
+    int rows=0,sense=0;double constant=0;int rc=api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&rows)|
+        api.getintattr(model,GRB_INT_ATTR_MODELSENSE,&sense)|api.getdblattr(model,GRB_DBL_ATTR_OBJCON,&constant);
+    require(rc==0&&sense==GRB_MINIMIZE&&rows>=int(it->second.size()),"native_shape_or_objective_sense");
+    SolverNeutralLinearModel matrix;require(readLinearModel(api,model,int(names.size()),rows,matrix),"native_matrix_read");
+    for(std::size_t k=0;k<it->second.size();++k) {
+        int index=rows-int(it->second.size())+int(k);char* name=nullptr;
+        require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,index,&name)==0&&name,"native_row_name_read");
+        const auto& expected=it->second[k];std::map<std::string,double> actual;
+        for(int z=matrix.row_starts[index];z<matrix.row_starts[index+1];++z)actual[names.at(matrix.column_indices[z])]+=matrix.coefficients[z];
+        require(expected.name==name&&actual==expected.coefficients&&matrix.senses[index]==expected.sense&&matrix.rhs[index]==expected.rhs,"native_added_row_mismatch");
+    }
+    bool embedded=request.canonical_model_scope.find("_round141_embedded_")!=std::string::npos;
+    if(embedded) {
+        auto hit=std::find(names.begin(),names.end(),"r141_b");require(hit!=names.end(),"native_binary_missing");int h=int(hit-names.begin()),priority=-1;double lb=0,ub=0;
+        require(api.getdblattrarray(model,GRB_DBL_ATTR_LB,h,1,&lb)==0&&api.getdblattrarray(model,GRB_DBL_ATTR_UB,h,1,&ub)==0&&
+            api.getintattrarray(model,GRB_INT_ATTR_BRANCHPRIORITY,h,1,&priority)==0&&types.at(h)==GRB_BINARY&&lb==0&&ub==1&&priority==0,"native_binary_domain_or_priority");
+        std::vector<double> obj(names.size());require(api.getdblattrarray(model,GRB_DBL_ATTR_OBJ,0,int(names.size()),obj.data())==0&&obj[h]==0,"native_complete_objective_read");
+        const auto& row=it->second.back();
+        for(std::size_t j=0;j<names.size();++j)if(int(j)!=h){auto term=row.coefficients.find(names[j]);require((term==row.coefficients.end()?0:term->second)==obj[j],"native_complete_objective_row");}
+        const auto& c=round141().choice;Round120Pair scalar;scalar.a=0;scalar.m=1;scalar.b=2;scalar.beta0=c.beta[0];scalar.beta1=c.beta[1];
+        const auto guarded=round120Rows(scalar,round141().mode=="d1",constant);
+        auto term=row.coefficients.find("r141_b");double delta=term==row.coefficients.end()?0:-term->second;
+        require(row.rhs==guarded.objective_base&&delta==guarded.objective_delta,"native_ObjCon_or_floor_endpoint");
+    }
+    std::ofstream f(request.native_log_path.string()+".round141.native.json");f<<std::setprecision(17)
+        <<"{\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"scope\":"<<std::quoted(request.canonical_model_scope)
+        <<",\"added_rows_checked\":"<<it->second.size()<<",\"embedded\":"<<(embedded?"true":"false")
+        <<",\"ObjCon\":"<<constant<<",\"PASS\":true,\"Optimize_extra\":0}\n";f.close();require(bool(f),"native_audit_write");
 }
 
 bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
@@ -2758,7 +2798,7 @@ public:
 
         std::vector<double> round68_start_values;
         std::vector<char> round68_start_types;
-        try{auditRound120Native(api_,model,request,native_names,native_types);}
+        try{auditRound120Native(api_,model,request,native_names,native_types);auditRound141Native(api_,model,request,native_names,native_types);}
         catch(const std::exception& e){out.failure_reason=e.what();return out;}
         if (request.round68_verified_start) {
             ++stats_.warm_start_candidate_count;
@@ -3666,6 +3706,22 @@ public:
                 out.native_bound_available = true;
                 out.lp_objective_value = lp_objective;
                 out.lp_objective_value_available = true;
+            }
+            if(round141().enabled()&&request.leaf_id=="L0"&&round141().root_selector_sha.empty()) {
+                auto& state141=round141();int count=0;
+                round141_detail::require(api_.getintattr(model,GRB_INT_ATTR_NUMVARS,&count)==0&&count==int(native_names.size()),"root_selector_shape_readback");
+                std::vector<double> point(count);
+                round141_detail::require(api_.getdblattrarray(model,GRB_DBL_ATTR_X,0,count,point.data())==0,"root_selector_primal_readback");
+                for(int j=0;j<count;++j)if(native_names[j].rfind("state_",0)==0&&native_names[j].rfind("state_g_",0)!=0) {
+                    round141_detail::require(std::isfinite(point[j])&&point[j]>=-1e-6&&point[j]<=1+1e-6,"root_selector_invalid_primal");
+                    state141.root_selector[native_names[j]]=point[j];
+                }
+                round141_detail::require(!state141.root_selector.empty(),"root_selector_empty");
+                state141.root_selector_sha=request.canonical_model_fingerprint;
+                std::ofstream saved(state141.events.parent_path()/"round141_root_selectors.json");
+                saved<<std::setprecision(17)<<"{\"model_SHA\":"<<std::quoted(state141.root_selector_sha)<<",\"extra_Optimize\":0,\"selectors\":{";
+                bool first=true;for(const auto& term:state141.root_selector){if(!first)saved<<',';first=false;saved<<std::quoted(term.first)<<':'<<term.second;}saved<<"}}\n";saved.close();
+                round141_detail::require(bool(saved),"root_selector_formal_persistence");
             }
             // Save the actual first root LP point under one uniform E1 rule.
             // This is observational: no extra Optimize, Start or bound enters

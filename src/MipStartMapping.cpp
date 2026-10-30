@@ -3,6 +3,7 @@
 #include "Evaluator.hpp"
 #include "Round64SharedResource.hpp"
 #include "Round120NativeProof.hpp"
+#include "Round141Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -225,6 +226,14 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             value = 0.0;
         } else if (name == "G") {
             value = out.G;
+        } else if (name == "r141_b" && round141().ready) {
+            const auto& c=round141().choice;
+            if(gamma_L<c.a||gamma_U>c.z||non_strict_cutoff>c.cutoff)
+                return finish("round141_start_outside_source_domain");
+            try {value=round141Count(c,verification.final_inventory)<=c.pivot?0.:1.;}
+            catch(const std::exception&) {return finish("round141_start_source_support");}
+            if(verification.objective+1e-7<c.beta[value==0?0:1])
+                return finish("round141_start_source_counterexample");
         } else if (name == "r120_h" && round120_pair) {
             if (!round120Contains(*round120_pair, gamma_L, gamma_U))
                 return finish("round120_start_scope_not_contained");
