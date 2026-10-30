@@ -5,6 +5,14 @@ from round140_qualify import expected_counts
 import collections
 import round108_reader as core
 
+def actual_cutoff(scope):
+    parsed=core.lp_model(Path(scope['stock_model']))
+    terms,constant=parsed['objective']
+    matches=[rhs+constant for row,sense,rhs in parsed['rows']
+             if sense=='<=' and dict(row)==dict(terms)]
+    assert len(matches)==1,matches
+    return matches[0]
+
 def exports():
     build=read(ROOT/'results/unified_exact_round140/candidate_build.json')
     exporter=Path(build['exporter_PE'])
@@ -17,9 +25,9 @@ def exports():
         scope=read(OUT/'domains'/role/'scope.json');p=scope['panel']
         a,b=scope['alpha'],scope['beta'];mid=a+(b-a)/2
         for label,lo,hi in [('parent',a,b),('low',a,mid),('high',mid,b)]:
-            target=OUT/'domains'/role/'gini'/label
-            cmd=[exporter,ROOT/p['input_path'],p['T_seconds'],lo,hi,scope['validated_U'],'ms2',target,p['lambda'],'tc2_stock']
-            assert metered(f'gini_export_{role}_{label}','diagnostic',cmd,30,45)==0
+            target=OUT/'domains'/role/'gini_matched'/label
+            cmd=[exporter,ROOT/p['input_path'],p['T_seconds'],lo,hi,actual_cutoff(scope),'ms2',target,p['lambda'],'tc2_stock']
+            assert metered(f'gini_matched_export_{role}_{label}','diagnostic',cmd,30,45)==0
 
 def verify_and_plan():
     records=[];positions=[]
@@ -27,16 +35,17 @@ def verify_and_plan():
         scope=read(OUT/'domains'/role/'scope.json');p=scope['panel']
         source=core.lp_model(Path(scope['stock_model']))
         expected=collections.Counter(source['rows'])+collections.Counter(expected_counts(source,scope['Bminus'],scope['B'],'tc2'))
-        parent=core.lp_model(OUT/'domains'/role/'gini/parent/original.lp')
+        parent=core.lp_model(OUT/'domains'/role/'gini_matched/parent/original.lp')
         comparison=dict(role=role,source_stock_SHA=scope['stock_SHA'],
             root_same_rows=expected==collections.Counter(parent['rows']),
             root_same_bounds=source['bounds']==parent['bounds'],
             root_same_types=source['types']==parent['types'],
-            root_same_objective=source['objective']==parent['objective'])
+            root_same_objective=source['objective']==parent['objective'],
+            actual_source_cutoff=actual_cutoff(scope),validated_U=scope['validated_U'])
         assert all(v for k,v in comparison.items() if k.startswith('root_same')),comparison
         records.append(comparison)
         for side in ['low','high']:
-            source_lp=OUT/'domains'/role/'gini'/side/'original.lp'
+            source_lp=OUT/'domains'/role/'gini_matched'/side/'original.lp'
             child=core.lp_model(source_lp)
             assert source['objective']==child['objective']
             # Child finite supports may shrink; full writer reconstructs every
