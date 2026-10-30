@@ -1,0 +1,111 @@
+{
+  "reviewer": "independent agent round141_independent_review",
+  "Optimize": 0,
+  "native_load": 0,
+  "PASS": true,
+  "scope": "independent diagnostic selection review, not full-method promotion",
+  "actual_projection_recomputed_from_serialized_D1_audits": true,
+  "roles": [
+    {
+      "role": "K-35-U",
+      "m": 8,
+      "betas": [
+        0.24153984574983609,
+        0.24014000505315194
+      ],
+      "D0_L": 0.24014000505315194,
+      "D1_L": 0.24014000505315194,
+      "K_at_D0": 13.698257559041767,
+      "feasible_b_interval": [
+        0.22793030236167072,
+        1.0
+      ],
+      "actual_written_D1_projected_floor_at_D0": 0.24014000505315194,
+      "actual_D0_objective": 0.24014000505315194,
+      "projection_violation": 2.801957079055585e-18,
+      "exact_projection_violation": "1818574117416217/649037107316853453566312041152512",
+      "D1_optimum_delta": 0.0,
+      "R140_first_target_return_bound": 0.2660215686215974,
+      "R140_terminal_early_log_rows": [
+        "     0     0    0.22669    0  399    0.76746    0.22669  70.5%     -    1s",
+        "     0     0    0.26602    0  370    0.76746    0.26602  65.3%     -    4s",
+        "     0     0    0.32630    0  360    0.76746    0.32630  57.5%     -    5s",
+        "     0     0    0.35451    0  379    0.76746    0.35451  53.8%     -    7s",
+        "     0     0    0.36396    0  361    0.76746    0.36396  52.6%     -    8s",
+        "     0     0    0.38197    0  445    0.76746    0.38197  50.2%     -   11s"
+      ],
+      "native_log_SHA256": "353e6ff3bd71d7642eb510ecb07c653a81720b59a4272204906f174d044507c9"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "m": 5,
+      "betas": [
+        0.1463016529428662,
+        0.15056684239780596
+      ],
+      "D0_L": 0.14630165294286632,
+      "D1_L": 0.1463016529428662,
+      "K_at_D0": 9.905487726395572,
+      "feasible_b_interval": [
+        0.18867260486136816,
+        1.0
+      ],
+      "actual_written_D1_projected_floor_at_D0": 0.14710637734755694,
+      "actual_D0_objective": 0.14630165294286632,
+      "projection_violation": 0.0008047244046905991,
+      "exact_projection_violation": "4178367998461306891984539176247/5192296858534827628530496329220096",
+      "D1_optimum_delta": -1.1102230246251565e-16,
+      "R140_first_target_return_bound": 0.13900452291606932,
+      "R140_terminal_early_log_rows": [
+        "     0     0    0.13545    0  389    0.44549    0.13545  69.6%     -    2s",
+        "     0     0    0.13900    0  501    0.44549    0.13900  68.8%     -    5s",
+        "     0     0    0.14215    0  463    0.44549    0.14215  68.1%     -    6s",
+        "     0     0    0.15862    0  463    0.44549    0.15862  64.4%     -    9s",
+        "     0     0    0.15926    0  466    0.44549    0.15926  64.3%     -   10s",
+        "     0     0    0.15926    0  465    0.44549    0.15926  64.3%     -   10s"
+      ],
+      "native_log_SHA256": "61652e4213d609718bd99ca4dcb3b5470f2646f31ad53ab088358844ca01dfbc"
+    },
+    {
+      "role": "K-20-S",
+      "m": 7,
+      "betas": [
+        0.255556602786186,
+        0.2681924850446407
+      ],
+      "D0_L": 0.2555566027861862,
+      "D1_L": 0.255556602786186,
+      "K_at_D0": 9.3236995967425,
+      "feasible_b_interval": [
+        0.2112454178856819,
+        1.0
+      ],
+      "actual_written_D1_projected_floor_at_D0": 0.25822587501422756,
+      "actual_D0_objective": 0.25555660278618614,
+      "projection_violation": 0.002669272228041439,
+      "exact_projection_violation": "1732456725529227887149422842029/649037107316853453566312041152512",
+      "D1_optimum_delta": -1.6653345369377348e-16,
+      "R140_first_target_return_bound": 0.23898880172100057,
+      "R140_terminal_early_log_rows": [
+        "     0     0    0.23487    0  189    0.77521    0.23487  69.7%     -    0s",
+        "     0     0    0.23899    0  208    0.77521    0.23899  69.2%     -    0s",
+        "     0     0    0.44698    0  221    0.77521    0.44698  42.3%     -    0s",
+        "     0     0    0.47461    0  215    0.77521    0.47461  38.8%     -    0s",
+        "     0     0    0.51256    0  228    0.77521    0.51256  33.9%     -    1s",
+        "     0     0    0.51544    0  237    0.77521    0.51544  33.5%     -    1s"
+      ],
+      "native_log_SHA256": "4a32fe02d376fe4ab30b94c84c79c99eb9c714a0fee157c84cf043dd10a3b8eb"
+    }
+  ],
+  "recommendation": "PROCEED_FINITE_UNIFORM_D1_PILOT_AFTER_PRODUCTION_QUALIFICATION",
+  "reason": "All three count conditional covers improve the parent materially and LP-floor wins uniformly; RB35-T2 and K20 actual D0 points are separated after optimizing fractional b, despite equal reoptimized D0/D1 values. This is genuine C3 signal. Freeze one threshold score and LP-floor pivot; begin K20/K35 with required D0, then default four-role pilot if quality passes. Do not expand all eight without meaningful complete outcomes.",
+  "qualification": "Both floors are overtaken in R140 terminal root cut rounds (K20 by logged 0.44698 at 0s, RB35-T2 by 0.15862 at 9s, K35 by 0.26602 at 4s). These are cross-path search observations, not a global redundancy proof or grounds to ignore the actual cover/projection signals. Expect low numerical floors to cease binding; full benefit would require useful induced search/cuts.",
+  "not_yet_proven": [
+    "count-aware NativeEvidence scope, witness-side checking and source revocation",
+    "binary MIP writer and validated physical-Y Start",
+    "domain/support inheritance and both-endpoint Native qualification",
+    "same-source full canonical Gini midpoint comparison (in progress)",
+    "complete-method benefit and D1 vs D0 attribution"
+  ],
+  "seconds": 0.20994859980419278
+}

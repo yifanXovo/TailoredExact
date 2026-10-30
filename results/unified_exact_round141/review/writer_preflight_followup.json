@@ -1,0 +1,211 @@
+{
+  "PASS": true,
+  "reviewer": "independent agent round141_independent_review",
+  "Optimize": 0,
+  "native_load": 0,
+  "source_SHA": "3aaca45875497e24f818376f4f7822520276263a059a953af58ed6ce4902f924",
+  "previous_required_correction_resolved": "INFEASIBLE is now unqualified with beta=None; no entered diagnostic returned this state, so healthy observations do not require rerun",
+  "matrix_transport": "current source serializes plain MPS; actual loaded matrix fingerprint/objective/ObjCon and every new coefficient/sense/RHS/type are checked before Optimize; retained compressed-writer failure precedes Optimize",
+  "entered_results": [
+    {
+      "label": "01_K-35-U_balanced_low_plain_mps",
+      "canonical_SHA": "d1b37140a743a6f0f74821e8b88537301dd449b939d73a690b1577f698d5c2ba",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "e6936a7b201dbfc0c4b65309acfc39e222f7fdba4adbbf470e884a3979063a76"
+    },
+    {
+      "label": "02_K-35-U_balanced_low_conditional_mps",
+      "canonical_SHA": "4c652a26b589b98bf734fcdd40412a5b52fd2542f2211e6850e5bbc110e1f237",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "a1736b76cb1d872e0ac4cb85b2d31b591e13b8d034b4210e07cf027c5f06e007"
+    },
+    {
+      "label": "03_K-35-U_balanced_high_plain_mps",
+      "canonical_SHA": "b5e8b5a89d47b33cfd15a020e682a242754621d9410a09cec7c5360c185dcfaf",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "adf47e6bb2f46d08ad1dcd910eed4696fec1a97efec6e59aadf7312728f53fad"
+    },
+    {
+      "label": "04_K-35-U_balanced_high_conditional_mps",
+      "canonical_SHA": "755523fc512e4eff8ae6cca6b7be0a2eefc7a734a1decda94b340e077ef07048",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "ec70d03b7a2eb16651baa3520c8ae3f4877675e1b9ed841d5d8811648e521c1d"
+    },
+    {
+      "label": "05_K-35-U_lp_floor_low_plain_mps",
+      "canonical_SHA": "fc5de4423942ce95e076da5da965d04b3d7fafb6e30b54f04456dfb3684acf59",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "55190f87f6250782610224145def356c856ae97cf51ff2a7b3f38e831acc8715"
+    },
+    {
+      "label": "06_K-35-U_lp_floor_low_conditional_mps",
+      "canonical_SHA": "c9b2210ae6c28a22fc8fd83a8c56c2929a8e4028259f1524e7fb3ff763310ce3",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "137974d5a7a709926d45df45f6cf0fa51f5abaec3b0225646275d51d77f91571"
+    },
+    {
+      "label": "07_K-35-U_lp_floor_high_plain_mps",
+      "canonical_SHA": "7bb9c100183b0a9998ad5d07579441db4d1ddb332ff184d886b8cd40c07950db",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "d1fd02211fef73121904ada87a7ab84935210bd632f4262ef9091a3243e2ee7d"
+    },
+    {
+      "label": "08_K-35-U_lp_floor_high_conditional_mps",
+      "canonical_SHA": "d39e65156fa4fdb6572af8d1f0274fdcce96f6d3b57ec313109a03298ef78b51",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "468ac6430309d1550360299db30855a63d20432697fe22262a01cafa6676e030"
+    },
+    {
+      "label": "09_R-B35-S-T2_balanced_low_plain_mps",
+      "canonical_SHA": "1042980558b49d68b0c4ae6a7a67ae4e677e43f6af5638eda6ab196f76df0146",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "dfbf8318eb9798be4ea735325926f4e3ace5f5d34f6b170fc5414a9bb0443ce1"
+    },
+    {
+      "label": "10_R-B35-S-T2_balanced_low_conditional_mps",
+      "canonical_SHA": "8e2be41fc01c07d62a596ed03d334ad0ca0586434e784d40d0ddfc294a9cd67e",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "a3fb33816ef441d7e1c716ed8dbd6a10bc7dac103d845c886cfecd57d4d96ad0"
+    },
+    {
+      "label": "11_R-B35-S-T2_balanced_high_plain_mps",
+      "canonical_SHA": "3c9b9fe489e1b31befb42e3c2e6cbe3e289cb391f501d4772fb2882d757589e0",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "cbff3cf26cd85938f86b070f9203aad8258248e661f1168dd0b0e56037fa340f"
+    },
+    {
+      "label": "12_R-B35-S-T2_balanced_high_conditional_mps",
+      "canonical_SHA": "70fe07aa2bfd24df0639e0cd4c1a81752c1091f2702d37fa859f1246eb37f36d",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "0f4d9d282a21a2a395a5dad62cd1e95a2ec02d87637709938b558824b07b3ce6"
+    },
+    {
+      "label": "13_R-B35-S-T2_lp_floor_low_plain_mps",
+      "canonical_SHA": "0d215c7058199fb32debddb9f5afb6572b7d1c49b99ce500b4f2438730e2c6ed",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "206ac7bb08e07ddebe791300d804f1bb98d81558f8f4aa50f1546f14c19c9b36"
+    },
+    {
+      "label": "14_R-B35-S-T2_lp_floor_low_conditional_mps",
+      "canonical_SHA": "808f61e7cb9beba942366f4acceaabf2a4eb08b263b6ee6e2d1b8e5afb6593a5",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "9ed937c299adef4eb726706c80be2f4621dd9bb32aceaf888121fc43ade959ae"
+    },
+    {
+      "label": "15_R-B35-S-T2_lp_floor_high_plain_mps",
+      "canonical_SHA": "08779e184e0fc002af5b49bafaab63af99bc5417f4fa9ec700c2c746dc9555d1",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "6887f4efa828c3128fa2289237b8252ac5442a8a4f54486a3920d2ddbf749582"
+    },
+    {
+      "label": "16_R-B35-S-T2_lp_floor_high_conditional_mps",
+      "canonical_SHA": "fd4efcc1e007d6e570cec0fac4124b3bc899b526dea3220e1ff53dbd335f1e8c",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "539666de7a23911ea150fb1eb1cf04b66efa1d4a2dc49a8fbfccf2efd77ce5bb"
+    },
+    {
+      "label": "17_K-20-S_balanced_low_plain_mps",
+      "canonical_SHA": "dca7e69b8e5bf4a9fd1e5eca22e5f67eedf6aefca1d0e90657cc102f7d804d25",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "15940f5f51786f90899749f08ec208bc8eda9f3c73a755528b03a8487e5091b1"
+    },
+    {
+      "label": "18_K-20-S_balanced_low_conditional_mps",
+      "canonical_SHA": "f71bb36eeaacdb4ab4a873adc0b845897492342f64cfcc4e94646f5dfb1f8277",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "d860047e8807c214b7ac3237deb50cf29169fd6870252fd1116a92aafd5026c8"
+    },
+    {
+      "label": "19_K-20-S_balanced_high_plain_mps",
+      "canonical_SHA": "d05d4dae113107b8ecb5366e1c25e4bbda6c95a03ae5aeb30b10636c215744ff",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "ac7937cf541c56692c9d5b624ceeece18ba876a0b2923997973c6337eedd1606"
+    },
+    {
+      "label": "20_K-20-S_balanced_high_conditional_mps",
+      "canonical_SHA": "7f9a753a0ba7576b2dca26f30d4b7987c6c597417174488d495beca8d9425751",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "067f7b98337665ccc3df3f46e783ffd93e09961ec144092d733b3650a39d22e0"
+    },
+    {
+      "label": "21_K-20-S_lp_floor_low_plain_mps",
+      "canonical_SHA": "0392bf89c2cdcb5e26aab7ed644d4c777e79549a13741c0781712149830c6f0b",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "8690c46627e877425ecb24ff7355d3748ed66ae7a4cbfecc2c3fcc51801d1cc4"
+    },
+    {
+      "label": "22_K-20-S_lp_floor_low_conditional_mps",
+      "canonical_SHA": "2bf015f47b57b86dc979f8924831d38cc846c0cbc8dcd3ebc8cae7e7a1dcb6f4",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "2e4fa21580b7fdd54b2abe20dc7c93bc65507171505c691a510e77b4c2c54f78"
+    },
+    {
+      "label": "23_K-20-S_lp_floor_high_plain_mps",
+      "canonical_SHA": "001c486597bd21fcb581bb9e7cdb2a8b496be9617931c26b94822f72fc133b39",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "574152c0733a46e0104a4d3031a1216ad78d08a28e7f35e8bdb1cff555605017"
+    },
+    {
+      "label": "24_K-20-S_lp_floor_high_conditional_mps",
+      "canonical_SHA": "79aeb9b0f2c81a169e77bcd89cf27fc8b30887ae1802dbcf6fbb8f8e0b895525",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "5fe00e3ab8247cda906e3ef6ea2c25b4c11029e67d6d4a6b48097549877568a8"
+    },
+    {
+      "label": "K-20-S_lp_floor_d0",
+      "canonical_SHA": "3ffe2483bf493aefba9c09b34963cbaa48caf0bcfb8151646f6c8105cff414f3",
+      "writer_SHA": "817863a28ffc8684c7837000712cc2e39bbfba038b2f2414e01a7a932ee006e7",
+      "result_SHA": "dcccdb9aa895c3d686b13d3b6c408fc44c323067f86ff9cc3ea034966b22063a"
+    },
+    {
+      "label": "K-20-S_lp_floor_d1",
+      "canonical_SHA": "30fd6df557da395102bbfa952a1caac1b5be94494e5fc7a196ab8b26d12199d7",
+      "writer_SHA": "817863a28ffc8684c7837000712cc2e39bbfba038b2f2414e01a7a932ee006e7",
+      "result_SHA": "773a9fa14e9ea24db5fce2e71d368be14ce7f3b2c2a105d89eb4ae70254ea13f"
+    },
+    {
+      "label": "K-35-U_lp_floor_d0",
+      "canonical_SHA": "80cc4ed4ed9bea9cb04cf08c42b7a4a7fdfe21dced5198a66700401296bfed40",
+      "writer_SHA": "817863a28ffc8684c7837000712cc2e39bbfba038b2f2414e01a7a932ee006e7",
+      "result_SHA": "efcafad12d55e22376677f3a161c8b4814869cfb4b3d12859d89089c47e99fae"
+    },
+    {
+      "label": "K-35-U_lp_floor_d1",
+      "canonical_SHA": "6a69fe6db648546d482dab4382398449d99b7fb09376f8690eb46c68d8e15c7a",
+      "writer_SHA": "817863a28ffc8684c7837000712cc2e39bbfba038b2f2414e01a7a932ee006e7",
+      "result_SHA": "62ce81c15d15c23b89e4eaba2c8eb5a8cd281f5d04f851cc8959c7f70e69a05f"
+    },
+    {
+      "label": "parent_K-20-S_mps",
+      "canonical_SHA": "7fdf60f83bb5ac7ad478608cf8dc1c58be93530de83255a7d832cd5c23a2e91f",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "9dce0531ff0f1ac00b5f1af4e77a746ec27afa5bcc0a1f802ffbd3b5c79eed82"
+    },
+    {
+      "label": "parent_K-35-U_mps",
+      "canonical_SHA": "f3ceabb12d4e3f1d1e204704c0373fe734da427825a781827841a5c308571b68",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "6d35ee823afb940dab9fbd9db9c987ab6e1a5f74019b46d407558e5786617ea5"
+    },
+    {
+      "label": "parent_R-B35-S-T2_mps",
+      "canonical_SHA": "6e651b2f25c8701c8ed496081960c7898b44d31b4e871be2f1ed1aa0cb99ed01",
+      "writer_SHA": "7196188c45807a78dea8619917beafd7fccfc7b02273f1dce26f7d046bc8c15a",
+      "result_SHA": "5d4eaa626b6523e1dffa17e2de7c65b8b80cc1d88b36a1d47c8efdd4df2cb890"
+    },
+    {
+      "label": "R-B35-S-T2_lp_floor_d0",
+      "canonical_SHA": "eea5c00e1f5ac409e3bebc201c714e5cb580387ac5771b68bb677ebd2bd3d1ac",
+      "writer_SHA": "817863a28ffc8684c7837000712cc2e39bbfba038b2f2414e01a7a932ee006e7",
+      "result_SHA": "1a0ca935e79b6fb2277a5de6ab639aac5e60699f2603b005a37e97e560c43ead"
+    },
+    {
+      "label": "R-B35-S-T2_lp_floor_d1",
+      "canonical_SHA": "ac059ceedd45970c7a6e053c1aafb71ab85c7722073f0927902ab1be176a14b6",
+      "writer_SHA": "817863a28ffc8684c7837000712cc2e39bbfba038b2f2414e01a7a932ee006e7",
+      "result_SHA": "b0d119dbadad83d03afa5d6ca89156aa066440ce84358098608a36b0fd3562f0"
+    }
+  ],
+  "scope": "33 observed numerical continuous LP results only; no production NativeEvidence qualification or mathematical exact solver certificate implied",
+  "seconds": 0.005348399979993701
+}
