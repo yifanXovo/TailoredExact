@@ -1,0 +1,130 @@
+{
+  "decision": "ACCEPT",
+  "scope": "Four-role uniform selected D1 full-window pilot, Seed0; further roles/bridge/Seed1 conditional on actual results",
+  "reviewer": "independent_review (non-implementer)",
+  "UTC": "2026-10-30T15:13:03.813012+00:00",
+  "matrix_SHA": "a9728de3d60a2e75c4b4588924760e9ae3386f1e73ddaf9b51dc7a1675cf8fe1",
+  "candidate_manifest_SHA": "3690b4a0b2bc4e0b06df83f7add345e33d8751f64db00d084d26100cd0bd2274",
+  "PE_SHA": "1337ab5a78685640b1064780de4765b004e8ec2d73e1fbe17f0b1ed5ffc48f52",
+  "source_commit": "9b024c451b00f84f9f1cac0905eab457cc82a5b9",
+  "qualification_admission_SHA": "d42607ae3f492a03a1922ee33ade9f3c8c0e9c0447a6c304d9e1ec1ff0174d53",
+  "qualification_control_SHA": "841619d79f62e4a81beb0d0c66ea15e6b3df55c148c9e51024a776ec0642e237",
+  "qualification_closeout_SHA": "563e784fc57a2967921b5a2caadd1127b25ab93c8d2c2c046afc62e0fbb97a2d",
+  "qualification_models_checked": [
+    {
+      "call": 1,
+      "SHA": "a987eb6ddecf6998fd27c2fc8cd60a7810ccea65544616889d1fc5de481f8030",
+      "count_source": false,
+      "CP_rows": 0
+    },
+    {
+      "call": 2,
+      "SHA": "16e0b36fc89d8a1dfce682c13e647948abdf2b48d2f8035a26c2e272e0eb3355",
+      "count_source": false,
+      "CP_rows": 0
+    },
+    {
+      "call": 3,
+      "SHA": "7094aa05e4328cbbe9bcf17c3323e896b2e3f1af6d863eac275d9bab47df081a",
+      "count_source": false,
+      "CP_rows": 0
+    },
+    {
+      "call": 4,
+      "SHA": "a248368bfa7099a7d9a84df0e669a1a0705b2a9cd9ee0bda69f9ced468c34b30",
+      "count_source": true,
+      "CP_rows": 4
+    },
+    {
+      "call": 5,
+      "SHA": "73da94d44333abcae3b1ec85d31f2ae297ec9b43dbc6103acb04e3d64e4af9e1",
+      "count_source": true,
+      "CP_rows": 4
+    },
+    {
+      "call": 6,
+      "SHA": "76bac00995c1fb6e5696a9fb9a2e644ea7cd727af6538a998d53b59e2c0397ac",
+      "count_source": false,
+      "CP_rows": 0
+    },
+    {
+      "call": 7,
+      "SHA": "76bac00995c1fb6e5696a9fb9a2e644ea7cd727af6538a998d53b59e2c0397ac",
+      "count_source": false,
+      "CP_rows": 0
+    }
+  ],
+  "qualification_floors": [
+    {
+      "side": 0,
+      "call": 4,
+      "model_SHA": "a248368bfa7099a7d9a84df0e669a1a0705b2a9cd9ee0bda69f9ced468c34b30",
+      "raw_bound": 0.2556288780760847,
+      "beta": 0.25562877807608464,
+      "settings_SHA": "a1d9a15194088583b019316b1e812df9c3d70a94482395b4bb00241e11b9f785"
+    },
+    {
+      "side": 1,
+      "call": 5,
+      "model_SHA": "73da94d44333abcae3b1ec85d31f2ae297ec9b43dbc6103acb04e3d64e4af9e1",
+      "raw_bound": 0.2681925850446406,
+      "beta": 0.26819248504464055,
+      "settings_SHA": "fb8a0a62fc8e76e0fcd3999268a58818b2cde6e429ede579412506c15e8ebfdb"
+    }
+  ],
+  "qualification_only_not_performance": true,
+  "roles": [
+    {
+      "role": "K-35-U",
+      "cap": 2400,
+      "T": 10800,
+      "mode": "selected",
+      "Seed": 0,
+      "old_D1_argv_equal_except_PE_paths_new_switch": true
+    },
+    {
+      "role": "R-B35-S-T2",
+      "cap": 2400,
+      "T": 7200,
+      "mode": "selected",
+      "Seed": 0,
+      "old_D1_argv_equal_except_PE_paths_new_switch": true
+    },
+    {
+      "role": "K-20-S",
+      "cap": 1200,
+      "T": 5400,
+      "mode": "selected",
+      "Seed": 0,
+      "old_D1_argv_equal_except_PE_paths_new_switch": true
+    },
+    {
+      "role": "K-15-S",
+      "cap": 600,
+      "T": 3600,
+      "mode": "selected",
+      "Seed": 0,
+      "old_D1_argv_equal_except_PE_paths_new_switch": true
+    }
+  ],
+  "mathematical_note_SHA": "be0dadae7985511cbcd90bbb0044c13a53c358e78309d15e072b6f7a21b96678",
+  "mathematical_note_review": "PASS: B extension premise, count-only integrality/hull, fixed-g graph caveat, CP/range attribution and strict rational witness are accurate. No complete BRP hull or D1-over-D0 optimized-root gain claimed.",
+  "findings": [],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "budget_nominal_pilot_seconds": 6600,
+  "checks": {
+    "qualified_own_H_two_count_sources_and_pair_installed": true,
+    "full_matrix_native_added_rows_7_each": true,
+    "source_call_SHA_floor_bijection": true,
+    "CP_absent_parent_and_integer_artifact": true,
+    "root_support_and_current_g_rechecked": true,
+    "all_producer_sealed_files_rehashed": true,
+    "full_reader_physical_H_Start_scope_quality_lifecycle_passed": true,
+    "pilot_argv_match_old_D1_except_PE_paths_new_switch": true,
+    "hard_roles_get_full_registered_windows": true,
+    "uniform_no_per_role_product_choice": true
+  },
+  "next": "Review full pilot including adverse endpoints, full outer clocks and actual source floors before adoption/extension decision."
+}
