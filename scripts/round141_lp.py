@@ -100,7 +100,9 @@ def solve(spec, suffix=''):
         model.Params.TimeLimit=spec.get('cap_seconds',90)
         model.Params.FeasibilityTol=1e-6;model.Params.OptimalityTol=1e-6
         # Serialize before Optimize and optimize the actual roundtripped matrix.
-        canonical=target/'model.mps.gz';model.write(str(canonical))
+        # Windows Native installation has no compressed-MPS writer; archive
+        # compression is separate, after timed solves. Keep the actual MPS.
+        canonical=target/'model.mps';model.write(str(canonical))
         expected_fingerprint=model.Fingerprint
         original_objective={v.VarName:v.Obj for v in model.getVars()}
         original_constant=model.ObjCon
@@ -160,15 +162,16 @@ def child_plan():
     return [dict(p,label=f'{p["position"]:02}_{p["role"]}_{p["pivot_kind"]}_{p["side"]}_{p["variant"]}')
             for p in read(OUT/'LP_plan.json')['positions']]
 
-def run_children():
+def run_children(suffix=''):
     for role in read(OUT/'LP_plan.json')['roles']:
-        label=f'parent_{role}'
+        label=f'parent_{role}'+suffix
         assert metered(label,'diagnostic',[LP_PYTHON,ROOT/'scripts/round141_lp.py','one',
             json.dumps(dict(label=label,role=role,variant='parent',cap_seconds=90))],110,120)==0
     for spec in child_plan():
+        spec['label']+=suffix
         assert metered(spec['label'],'diagnostic',[LP_PYTHON,ROOT/'scripts/round141_lp.py','one',
             json.dumps(spec)],110,120)==0
 
 if __name__=='__main__':
     if sys.argv[1]=='one':solve(json.loads(sys.argv[2]))
-    elif sys.argv[1]=='run_children':run_children()
+    elif sys.argv[1]=='run_children':run_children(sys.argv[2] if len(sys.argv)>2 else '')
