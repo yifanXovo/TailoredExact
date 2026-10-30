@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-10-30T02:51:48.460831+00:00",
+  "PASS": true,
+  "roles": [
+    {
+      "role": "K-35-U",
+      "source_stock_SHA": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+      "root_same_rows": true,
+      "root_same_bounds": true,
+      "root_same_types": true,
+      "root_same_objective": true,
+      "actual_source_cutoff": 0.7674566047247167,
+      "validated_U": 0.7674566047247167
+    },
+    {
+      "role": "R-B35-S-T2",
+      "source_stock_SHA": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175",
+      "root_same_rows": true,
+      "root_same_bounds": true,
+      "root_same_types": true,
+      "root_same_objective": true,
+      "actual_source_cutoff": 0.44548980895179674,
+      "validated_U": 0.4454898089517964
+    },
+    {
+      "role": "K-20-S",
+      "source_stock_SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+      "root_same_rows": true,
+      "root_same_bounds": true,
+      "root_same_types": true,
+      "root_same_objective": true,
+      "actual_source_cutoff": 0.7752127578025219,
+      "validated_U": 0.7752127578025221
+    }
+  ],
+  "Optimize": 0,
+  "meaning": "exported parent is exactly the source-matched stock+TC+TC2 row multiset/bounds/types/objective"
+}
