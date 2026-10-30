@@ -76,7 +76,7 @@ def run(batch,stop_after=None):
     write(OUT/f'{batch}_run_return.json',dict(UTC=utc(),budget=budget()))
 
 def qualification():
-    freeze('qualification_v5',[dict(role='K-20-S',mode='d1',cap=90),dict(role='K-15-S',mode='d0',cap=90)],
+    freeze('qualification_v6',[dict(role='K-20-S',mode='d1',cap=90),dict(role='K-15-S',mode='d0',cap=90)],
         'Finite own-H/normal-root/count-probe/Native target and terminal qualification after exact writer/Start/source tests; not performance observations')
 
 def pilot():

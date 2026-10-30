@@ -3637,6 +3637,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                         probe.verified_cutoff=r141.choice.model_cutoff;probe.time_limit_seconds=globalDeadlineRemaining();
                         probe.global_deadline_remaining_seconds=probe.time_limit_seconds;
                         probe.interval_mip_policy=request.interval_mip_policy;
+                        // Capture/restore the original VTypes under the existing
+                        // lifecycle contract, then immediately discard this
+                        // unique disposable model. No probe state is reused.
+                        probe.incremental_model_reuse_enabled=true;
+                        probe.retain_model_after_solve=true;
                         probe.canonical_model_path=artifact.path;probe.canonical_model_fingerprint=artifact.sha256;
                         probe.canonical_model_scope=artifact.model_scope;probe.canonical_row_signature=artifact.row_signature;
                         probe.native_log_path=artifact_dir/"native_logs"/(probe.leaf_id+".gurobi.log");
