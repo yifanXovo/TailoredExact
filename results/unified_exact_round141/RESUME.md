@@ -3,8 +3,10 @@
 Governing task: the byte-preserved supplied `goal.md`. The scientific study is
 complete; **retain D1 research-only and stop further full expansion**. The
 independent result-based selection is in `review/selection.json`. No further
-experiment is required. The Codex goal remains active until the delivery
-steps below are actually complete.
+experiment is required. Draft PR203, the bounded public read and current-round
+cleanup are complete. Late receipts are additive to the fixed science pin;
+their final normal push is followed by live PR ref readback without embedding
+a commit's own hash in itself.
 
 ## Verified workspace and source
 
@@ -119,26 +121,40 @@ off; the separate research entry explicitly uses BOTH stock+old TC+TC2 and D1,
 with D0 available only as the explicit control. Additive local seal/physical/
 lifecycle/model-hash replay passes all eight healthy positions.
 
-## Delivery remaining
+## Completed delivery and finite closeout
 
-1. Independent final integration is complete; no substantive issue remains.
-2. Make immutable current-round source/raw/science carriers with member hashes;
-   verify actual source and paper coverage. No commercial binaries are published.
-3. Normal commit/push and English Draft PR on the verified temporary base.
-   Record actual URL/number/base/head/Draft, plus the fixed science commit.
-4. Set `publication_pin.json` to that fixed science commit/manifest, then use
-   the Windows bundled document Python for `round141_public_read.py` through
-   an ordinary step. Its cumulative bound is1800s, byte/member-only, with no
-   Optimize/build/commercial Native load. Preserve failed attempts and resume
-   only missing transfer/read work.
-5. After actual public acceptance, run bounded current-round cleanup. The
-   prepared PS script only removes hash-matched final `qa_pages/page-N.png`
-   previews after visual/PR/public/manifest/published-PDF identity checks.
-   Its required `PR_delivery.json` fields include Draft=true, state=OPEN,
-   science_commit and url. Preserve unique raw/failures, necessary PE/DLL,
-   original user content and every old round. Partial actions must be recorded.
-6. Refresh cost/status/PR head readback, commit/push additive delivery metadata,
-   and mark the Codex goal complete only after all required delivery is done.
+- Fixed immutable science/carriers:
+  `93db852d4fd82b91d5c8f681c80d776339f126d8`. The manifest SHA is
+  `de95da5b5eb4f6d77647a9ea3d4b27b6b86e06819e8406e67b1f248220218213`.
+  Twelve ZIPs contain29060 indexed members and59694704 compressed bytes.
+  Independent actual archive/index/member byte checks and necessary coverage
+  pass in `review/carrier_coverage.json`. Earlier qualification helper bytes
+  have fixed ancestor commit/path bindings; no source ZIP was rebuilt.
+- Normal push completed and English **open Draft PR203** was created:
+  https://github.com/yifanXovo/TailoredExact/pull/203 . Fresh readback confirms
+  base `codex/round140-two-sided-threshold-count` at d00bcf415..., head
+  `codex/round141-count-disjunction`, unmerged and mergeable. The opening
+  metadata head is b03d1b545...; later delivery receipts append normally.
+- One anonymous fixed-commit public read passed in20.3280588 seconds against
+  an1800-second cumulative bound. All12 ZIPs/29060 members match. It runs zero
+  Optimize, compilation or commercial Native load and has no Git fallback.
+  `public_restore_receipt.json`, copied attempt history and owner metadata
+  distinguish this byte/member result from local scientific qualification.
+- Bounded post-PR cleanup removed only8 hash-matched final page-preview PNGs,
+  1991369 logical bytes. `cleanup_intent.json` and `cleanup_record.json` record
+  paths, hashes, bytes, observed E-volume space and retained assets. Every old
+  round, original user content, unique raw/failures, active tree and necessary
+  PE/DLL remain. Initial-layout previews and export attempts also remain.
+  The first old Windows PowerShell launch lacked Get-FileHash and stopped
+  before any intent/deletion; the installed bundled pwsh then completed it.
+  Both ordinary receipts are retained. Do not rerun a completed cleanup.
+- `delivery_closeout.json` and the refreshed `cost_report.json` record actual
+  completed facts. Late archive/public/cleanup process logs and review receipts
+  are additive Git metadata, excluded from their own recursive ZIP obligation.
+  The scientific carriers remain byte-identical. Exact final head is read back
+  after the metadata push, rather than recursively rewritten into its own file.
 
-Local scientific qualification and public archive/member byte readability are
-different claims. No PR, push, public-read PASS or deletion has occurred yet.
+No merge, force-push, historical deletion, mail or submission was performed.
+No experiment, public recovery or cleanup remains to be scheduled. Any future
+continuation should inspect actual PR/receipts before an action; never repeat
+the healthy producers, one-time PDF marker or already accepted public carriers.

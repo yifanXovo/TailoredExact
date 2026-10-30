@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-30T06:18:39.553323+00:00",
+  "UTC": "2026-10-30T06:58:27.723242+00:00",
   "experiment": {
     "G1_seconds": 7610.444692199584,
     "remaining_G1_seconds": 28389.555307800416,
@@ -22,8 +22,8 @@
   "experimental_outer_including_pure_postverification_seconds": 7699.784105199855,
   "conservative_outer_within_36000": true,
   "fee_ordinary_seconds": 350.8361706000287,
-  "additional_disjoint_ordinary_seconds": 35.99167209980078,
-  "recorded_disjoint_process_wall_total_seconds": 7997.272534899414,
+  "additional_disjoint_ordinary_seconds": 80.88737709936686,
+  "recorded_disjoint_process_wall_total_seconds": 8042.16823989898,
   "experimental_fee_receipts": [
     {
       "label": "01_K-35-U_balanced_low_plain_mps",
@@ -1244,6 +1244,34 @@
   ],
   "ordinary_steps": [
     {
+      "label": "accounting_final",
+      "SHA": "935f4a018726b88310d0a7f3393bc10d8d765f50a761c613151a53f96de00a8d",
+      "receipt": {
+        "UTC": "2026-10-30T06:58:27.265499+00:00",
+        "exit_code": 0,
+        "seconds": 0.5130802998319268,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "accounting_pre_delivery",
+      "SHA": "dab6045749f10631f59308bfea81f7c80c002f5dec9599f68b15cec2a7c3f79a",
+      "receipt": {
+        "UTC": "2026-10-30T06:18:39.568983+00:00",
+        "exit_code": 0,
+        "seconds": 0.23179299989715219,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
       "label": "aggregate_after_k15",
       "SHA": "7c0145c5f93e9c30bbe29a0161b9c2230bff3da99d03be74721391dcc4453a81",
       "receipt": {
@@ -1320,6 +1348,48 @@
         "UTC": "2026-10-30T06:16:52.033691+00:00",
         "exit_code": 0,
         "seconds": 5.868673600023612,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "archive_science",
+      "SHA": "01e4ea29fa119ed05a555d5236101682e9531e721bc3d2350690e15aed6c5dae",
+      "receipt": {
+        "UTC": "2026-10-30T06:31:24.352590+00:00",
+        "exit_code": 0,
+        "seconds": 21.64371049986221,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "bounded_cleanup",
+      "SHA": "2de3ac61d192d966e528f69463e2dba450aaba8b83a5d3ac25a2c8989d38c635",
+      "receipt": {
+        "UTC": "2026-10-30T06:53:08.167918+00:00",
+        "exit_code": 1,
+        "seconds": 0.5923134000040591,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "bounded_cleanup_bundled_PS",
+      "SHA": "bb28693e4fc3eab05e9d81ea7bdb8ead613e5a121439ddf864727b6caa33d6a9",
+      "receipt": {
+        "UTC": "2026-10-30T06:53:55.945111+00:00",
+        "exit_code": 0,
+        "seconds": 0.9561439000535756,
         "Optimize": 0,
         "experimental": false,
         "error": null,
@@ -1496,6 +1566,20 @@
       }
     },
     {
+      "label": "public_read",
+      "SHA": "c5cb870090641e73b7c4f26c9fd1162384804644b51157fa079378adf22e3e62",
+      "receipt": {
+        "UTC": "2026-10-30T06:51:02.516003+00:00",
+        "exit_code": 0,
+        "seconds": 20.958663899917156,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
       "label": "scientific_report",
       "SHA": "e75129d0179db70e2ec02f7360d296a1b02a8869fd941c2e2675b6757bca975a",
       "receipt": {
@@ -1580,6 +1664,7 @@
     "qualification_v6_001",
     "tiny_cpp",
     "aggregate_initial_six",
+    "bounded_cleanup",
     "endpoint_figure"
   ],
   "qualifiers_and_failed_experimental_attempts_included": true,

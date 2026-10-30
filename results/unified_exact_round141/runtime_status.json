@@ -1,16 +1,13 @@
 {
-  "UTC": "2026-10-30T06:20:24.513174+00:00",
-  "state": "SCIENCE_COMPLETE_NO_NATIVE_PENDING",
+  "UTC": "2026-10-30T06:56:56.991695+00:00",
+  "state": "SCIENCE_PUBLICATION_CLEANUP_COMPLETE",
+  "PR": 203,
+  "science_commit": "93db852d4fd82b91d5c8f681c80d776339f126d8",
   "formal_positions": 6,
   "healthy_qualifications": 2,
   "failed_qualification_preserved": 1,
   "G1_seconds": 7610.444692199584,
+  "Native_pending": false,
   "remaining_required_experiments": [],
-  "delivery_pending": [
-    "independent final integration",
-    "carriers",
-    "normal push and Draft PR",
-    "bounded public byte/member read",
-    "bounded current-round cleanup"
-  ]
+  "final_metadata_normal_push_and_live_readback_follows": true
 }
