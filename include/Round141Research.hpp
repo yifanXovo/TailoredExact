@@ -97,6 +97,11 @@ struct Round141Controls {
     void set(const std::string& value){round141_detail::require(value=="off"||value=="d0"||value=="d1","mode");mode=value;}
 };
 inline Round141Controls& round141(){static Round141Controls c;return c;}
+inline void round141ResetRun() {
+    const auto mode=round141().mode;
+    round141()=Round141Controls{};
+    round141().mode=mode;
+}
 inline void round141Event(const std::string& kind,const std::string& fields="") {
     if(round141().events.empty())return;std::ofstream f(round141().events,std::ios::app);
     f<<"{\"kind\":"<<std::quoted(kind);if(!fields.empty())f<<','<<fields;f<<"}\n";

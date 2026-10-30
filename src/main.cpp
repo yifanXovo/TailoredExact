@@ -20181,6 +20181,7 @@ int main(int argc, char** argv) {
         std::vector<std::filesystem::path> files = ebrp::collectInputFiles(opt.input_path);
         std::vector<ebrp::SolveResult> results;
         for (const auto& file : files) {
+            ebrp::round141ResetRun();
             ebrp::recordProcessPhase(
                 opt, "instance_parsing_start", "start", file.string());
             ebrp::Instance instance = ebrp::parseInstanceFile(

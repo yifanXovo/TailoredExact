@@ -1753,6 +1753,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                        const SolveResult& verified_seed,
                                        double root_gamma_L,
                                        double root_gamma_U) {
+    round141ResetRun();
     if (options.round92_handling_activation) {
         if (options.external_gini_scheduling !=
                 "round31-nonblocking-native-bound" ||
@@ -3679,6 +3680,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             }
             if(r141.ready) {
                 round141_detail::require(native_evidence&&native_evidence->proofUsable(),"proof_dependency_revoked");
+                round141_detail::require(r141.choice.input_sha==fileSha256(instance.path),"source_input_identity");
                 auto& state=runtime.at(request.leaf_id);
                 if(state.artifact.model_scope.find("_round141_embedded_")==std::string::npos) {
                     const auto base=state.artifact;
@@ -4114,6 +4116,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         state.artifact_stock_rlt = desired_stock;
         if(round141().ready&&state.artifact.written) {
             round141_detail::require(native_evidence&&native_evidence->proofUsable(),"inherited_proof_dependency_revoked");
+            round141_detail::require(round141().choice.input_sha==fileSha256(instance.path),"inherited_source_input_identity");
             const auto base=state.artifact;
             state.artifact=round141Embed(base,verified_ub,base.path.parent_path()/(base.path.stem().string()+"_round141_"+round141().mode+".lp"));
             round141Event("floor_inherited","\"leaf\":"+std::string("\"")+leaf.id+"\",\"SHA\":\""+state.artifact.sha256+"\"");

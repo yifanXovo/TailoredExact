@@ -12,6 +12,10 @@ int main(int argc,char** argv){try {
     if(argc!=2)throw std::runtime_error("qualification output required");
     const std::filesystem::path dir(argv[1]);std::filesystem::create_directories(dir);
     int checks=0;auto check=[&](bool ok,const char* why){++checks;if(!ok)throw std::runtime_error(why);};
+    round141().mode="d1";round141().ready=true;round141().root_selector["polluted"]=1;
+    round141().expected["polluted"]={};round141ResetRun();
+    check(round141().mode=="d1"&&!round141().ready&&round141().root_selector.empty()&&round141().expected.empty(),"cross-run proof state reset with mode retained");
+    round141().mode="off";round141().ready=true;round141ResetRun();check(!round141().ready&&!round141().enabled(),"default-off clears residual proof state");
     Instance in;in.V=2;in.M=1;in.Q={2};in.initial={0,2,0};in.target={0,1,1};in.capacity={0,2,2};
     in.weights={0,.5,.5};in.dist.assign(3,std::vector<double>(3,0));in.total_time_limit=10;in.pickup_time=in.drop_time=1;
     in.path=(dir/"fixture.txt").string();{std::ofstream f(in.path);f<<"two-station physical fixture identity\n";}
