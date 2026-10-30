@@ -8,7 +8,7 @@ in [Round141](../results/unified_exact_round141/RESUME.md). The
 [R137 stable GI-TBC release](paper_s2_release.md) and R138/R139/R140 research
 entries retain their original bytes and semantics.
 
-The new axis counts stations whose physical service ratio exceeds an exact
+The new axis counts stations whose physical service ratio is at least an exact
 supported threshold. An integer low/high split propagates nested count
 bounds; each restricted LP retains old TC and parent TC2 and appends a
 conditional numerator chord. Two qualified side floors support a single

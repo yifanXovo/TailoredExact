@@ -110,7 +110,8 @@ The latest layout02 PDF was compiled/rendered while Native was idle; all eight
 actual PNGs were viewed. `pdf_visual_review.json` binds the final PDF and render
 manifest. Initial layout metadata/previews and export temp are preserved.
 Only the benign duplicate hyperref colorlinks warning remains. Independent
-final integration review is currently in progress, not yet claimed complete.
+final integration has passed in `review/final_integration_review.json`,
+binding all eight actual page views, 39 LP results, healthy chains and costs.
 
 Latest `entry_check.json` verifies stable R137 plus the R138/R139/R140 launchers
 and profiles byte-identical to the verified R140 base. New C++ mode defaults
@@ -120,7 +121,7 @@ lifecycle/model-hash replay passes all eight healthy positions.
 
 ## Delivery remaining
 
-1. Finish independent final integration and any substantive correction.
+1. Independent final integration is complete; no substantive issue remains.
 2. Make immutable current-round source/raw/science carriers with member hashes;
    verify actual source and paper coverage. No commercial binaries are published.
 3. Normal commit/push and English Draft PR on the verified temporary base.
