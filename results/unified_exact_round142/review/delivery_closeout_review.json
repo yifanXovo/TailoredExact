@@ -1,0 +1,145 @@
+{
+  "decision": "PASS_RECEIPTS_WITH_FINAL_METADATA_PUSH_PENDING",
+  "scope": "Independent bounded review of delivered PR/public/cache/cleanup receipts and unchanged local science. No repeated download, Native load, Optimize, compile or full public member replay. Final metadata commit/push/head readback has not yet occurred and is not pre-approved as completed.",
+  "reviewer": "independent_review (non-implementer)",
+  "UTC": "2026-10-30T17:49:52.270004+00:00",
+  "read_SHA256": {
+    "PR_delivery.json": "906844bcdfa95c8c0c7826c61ddbd0262f71848637e41cc59a029ed56973fe5c",
+    "PR_readback_gh.json": "052fa9ff6d9a9d6ccb731ba36df97774c2b3b73fbd59771dde42e6f910ac4a6d",
+    "publication_pin.json": "ce3c6023f84f4b50404d75cfa0fcfc78a09af8f307ac16dda8de2d24f35912fa",
+    "public_restore_receipt.json": "1fdcf6b4affb8374d495f70c87770d11e9367e23b7a237c8803d3246a7b7ce38",
+    "public_attempt_history.json": "41783cffb68a484d7fde81f37df295a58bf27f910026b456a80a8bcb11a14dbe",
+    "cleanup_intent.json": "02374be1ba1dce88f99d6874e8b0a4e5ba76dace1e7c32b8a0a6669c7287082e",
+    "cleanup_record.json": "692c367aaba86327329e74ddedbb7a96f1a562812e398cb66e25661240defb47",
+    "carrier_manifest.json": "a20c05a0be191fd2b49c41d5308575e0852a7c86bacc2876d2e090a9e5eea456",
+    "review/final_science_review.json": "27eb715743ffde6e44fc7b242ae2f32330965cef321a7f7b261a595fdf3b2c3a",
+    "review/final_integration_review.json": "61ab370095b2a0f200e60f8d272962f20ad62de099d6ce7e9de4d829cc08c486",
+    "PR_description.md": "3dcacf1ab098f9caca36eb6e276a0d37f2c39bad32213867ed7d608e0f9d85c3",
+    "RESUME.md": "5fd45fa0599494c5420a4db2f64615fc080506ca3e3470b2595f38a1c2765c41"
+  },
+  "science_commit": "61d215f1923386dbc7aa2c453d9a86b27341665d",
+  "PR": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/204",
+    "number": 204,
+    "state_at_recorded_CLI_readback": "OPEN",
+    "Draft": true,
+    "base": "codex/round141-count-disjunction",
+    "head": "codex/round142-conditional-count-products",
+    "head_SHA_at_recorded_readback": "61d215f1923386dbc7aa2c453d9a86b27341665d",
+    "merged": false,
+    "connector_PR_info_error_CLI_fallback_recorded": true
+  },
+  "public": {
+    "archives": 11,
+    "indexed_members": 18548,
+    "compressed_bytes": 41986247,
+    "cumulative_public_reader_seconds": 19.863552499795333,
+    "initial_certificate_chain_failure_preserved": true,
+    "successful_normal_Windows_interpreter_read_preserved": true,
+    "cache_owner_and_history_match": true,
+    "archive_bytes_and_checked_markers_independently_verified": [
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_bridge_001.zip",
+        "SHA256": "830ebfe6177becbfd18da3907a974d3d2ccca3022aa48af6e5a5bfa709341fe9",
+        "bytes": 4410198,
+        "members": 6710,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_bridge_002.zip",
+        "SHA256": "1c26c28205a7f1b263c9d292a64dc867d08930bd3331d4c585767b421ac9d242",
+        "bytes": 2642361,
+        "members": 492,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_001.zip",
+        "SHA256": "f6beeef08cd1bacaf9720a9b9b3607201cff4af7764d21b5c5dea190bf9b7f27",
+        "bytes": 2894205,
+        "members": 1023,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_002.zip",
+        "SHA256": "c65d7b3d882c3dacc2fb227cc3ecf2e242ce33e0b3e9bdc1b690849d561bc1ad",
+        "bytes": 2698119,
+        "members": 561,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_003.zip",
+        "SHA256": "e2edc8d628ec2930b36373a0ea2b61b8bcb6efd9c9f63ab4e223d016c562207d",
+        "bytes": 3964081,
+        "members": 5827,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_004.zip",
+        "SHA256": "ad8eba87423345c08691ef726750109751125376c4b95df6f8334ca54f36db17",
+        "bytes": 1446593,
+        "members": 1769,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/qualification_runs_001.zip",
+        "SHA256": "c39c6368292028886747087916bfcc8f4f5e792e36065963da7517f95a1be9e3",
+        "bytes": 1527101,
+        "members": 1379,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/diagnostics_and_failures.zip",
+        "SHA256": "494304c3a35d27b37345642ed27a2cddff1086c463cb7b7a201b77e619d9cca9",
+        "bytes": 16502781,
+        "members": 323,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/inherited_selected_sources.zip",
+        "SHA256": "41fda8f107f9aa23651dd91f15d3e44c0deaa94a227f9b7721a5b367bd4e0906",
+        "bytes": 3894980,
+        "members": 36,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/source_and_helpers.zip",
+        "SHA256": "9fe92f6f96430ea13ebba07c5ce791c49c2a9f74aed17bc1038358643e9117c0",
+        "bytes": 1644092,
+        "members": 368,
+        "cached_file_and_checked_marker_match": true
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/science_and_paper.zip",
+        "SHA256": "bb9a461f7ade8cc742387fe5d50197918be209f70b87e71a2286765fb6a45900",
+        "bytes": 361736,
+        "members": 60,
+        "cached_file_and_checked_marker_match": true
+      }
+    ],
+    "scope": "Receipt-backed anonymous fixed-science archive/member byte readability, not a new semantic replay"
+  },
+  "cleanup": {
+    "completed": true,
+    "deleted_files": 8,
+    "deleted_logical_bytes": 2024102,
+    "targets_only_current_round_hash_matched_final_page_previews": true,
+    "all_deleted_targets_now_absent": true,
+    "final_PDF_and_published_cached_PDF_unchanged": true,
+    "raw_failures_initial_layout_history_runtime_and_active_tree_retained": true,
+    "old_round_deletions": 0,
+    "recursive_delete": false,
+    "E_free_bytes_before": 119947452416,
+    "E_free_bytes_after": 119949488128,
+    "volume_free_space_not_equated_with_logical_deletion": true
+  },
+  "findings": [],
+  "science_or_PDF_revalidation_required": false,
+  "remaining_required_experiments": [],
+  "remaining_delivery_step": "Normal final metadata commit and push, then actual GitHub CLI base/head/Open Draft/final-head readback. Include this review and late receipts without rebuilding fixed carriers.",
+  "final_metadata_push_verified": false,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "new_downloads": 0,
+  "repeat_full_public_member_replay": false
+}

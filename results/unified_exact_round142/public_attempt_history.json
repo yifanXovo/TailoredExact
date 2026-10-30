@@ -1,0 +1,187 @@
+[
+  {
+    "attempt": 1,
+    "commit": "61d215f1923386dbc7aa2c453d9a86b27341665d",
+    "seconds": 0.3484362999442965,
+    "downloads": [],
+    "completed_archives": [],
+    "error": {
+      "type": "URLError",
+      "message": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>"
+    },
+    "ordinary_public_I_O": true
+  },
+  {
+    "attempt": 2,
+    "commit": "61d215f1923386dbc7aa2c453d9a86b27341665d",
+    "seconds": 19.515116199851036,
+    "downloads": [
+      {
+        "path": "results/unified_exact_round142/carrier_manifest.json",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 4872,
+        "SHA256": "a20c05a0be191fd2b49c41d5308575e0852a7c86bacc2876d2e090a9e5eea456",
+        "seconds": 0.7869826999958605
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_bridge_001.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 4410198,
+        "SHA256": "830ebfe6177becbfd18da3907a974d3d2ccca3022aa48af6e5a5bfa709341fe9",
+        "seconds": 1.6635094999801368
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_bridge_002.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 2642361,
+        "SHA256": "1c26c28205a7f1b263c9d292a64dc867d08930bd3331d4c585767b421ac9d242",
+        "seconds": 1.7015436999499798
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_001.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 2894205,
+        "SHA256": "f6beeef08cd1bacaf9720a9b9b3607201cff4af7764d21b5c5dea190bf9b7f27",
+        "seconds": 1.4584157997742295
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_002.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 2698119,
+        "SHA256": "c65d7b3d882c3dacc2fb227cc3ecf2e242ce33e0b3e9bdc1b690849d561bc1ad",
+        "seconds": 1.2241423998493701
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_003.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 3964081,
+        "SHA256": "e2edc8d628ec2930b36373a0ea2b61b8bcb6efd9c9f63ab4e223d016c562207d",
+        "seconds": 1.7605492000002414
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_004.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 1446593,
+        "SHA256": "ad8eba87423345c08691ef726750109751125376c4b95df6f8334ca54f36db17",
+        "seconds": 1.1446440001018345
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/qualification_runs_001.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 1527101,
+        "SHA256": "c39c6368292028886747087916bfcc8f4f5e792e36065963da7517f95a1be9e3",
+        "seconds": 1.125975799979642
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/diagnostics_and_failures.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 16502781,
+        "SHA256": "494304c3a35d27b37345642ed27a2cddff1086c463cb7b7a201b77e619d9cca9",
+        "seconds": 3.3055671001784503
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/inherited_selected_sources.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 3894980,
+        "SHA256": "41fda8f107f9aa23651dd91f15d3e44c0deaa94a227f9b7721a5b367bd4e0906",
+        "seconds": 1.6938428999856114
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/source_and_helpers.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 1644092,
+        "SHA256": "9fe92f6f96430ea13ebba07c5ce791c49c2a9f74aed17bc1038358643e9117c0",
+        "seconds": 1.3710437000263482
+      },
+      {
+        "path": "results/unified_exact_round142/artifacts/science_and_paper.zip",
+        "status": 200,
+        "resumed_bytes": 0,
+        "bytes": 361736,
+        "SHA256": "bb9a461f7ade8cc742387fe5d50197918be209f70b87e71a2286765fb6a45900",
+        "seconds": 1.2290818998590112
+      }
+    ],
+    "completed_archives": [
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/campaign_bridge_001.zip",
+        "archive_SHA": "830ebfe6177becbfd18da3907a974d3d2ccca3022aa48af6e5a5bfa709341fe9",
+        "members": 6710
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/campaign_bridge_002.zip",
+        "archive_SHA": "1c26c28205a7f1b263c9d292a64dc867d08930bd3331d4c585767b421ac9d242",
+        "members": 492
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_001.zip",
+        "archive_SHA": "f6beeef08cd1bacaf9720a9b9b3607201cff4af7764d21b5c5dea190bf9b7f27",
+        "members": 1023
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_002.zip",
+        "archive_SHA": "c65d7b3d882c3dacc2fb227cc3ecf2e242ce33e0b3e9bdc1b690849d561bc1ad",
+        "members": 561
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_003.zip",
+        "archive_SHA": "e2edc8d628ec2930b36373a0ea2b61b8bcb6efd9c9f63ab4e223d016c562207d",
+        "members": 5827
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/campaign_pilot_004.zip",
+        "archive_SHA": "ad8eba87423345c08691ef726750109751125376c4b95df6f8334ca54f36db17",
+        "members": 1769
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/qualification_runs_001.zip",
+        "archive_SHA": "c39c6368292028886747087916bfcc8f4f5e792e36065963da7517f95a1be9e3",
+        "members": 1379
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/diagnostics_and_failures.zip",
+        "archive_SHA": "494304c3a35d27b37345642ed27a2cddff1086c463cb7b7a201b77e619d9cca9",
+        "members": 323
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/inherited_selected_sources.zip",
+        "archive_SHA": "41fda8f107f9aa23651dd91f15d3e44c0deaa94a227f9b7721a5b367bd4e0906",
+        "members": 36
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/source_and_helpers.zip",
+        "archive_SHA": "9fe92f6f96430ea13ebba07c5ce791c49c2a9f74aed17bc1038358643e9117c0",
+        "members": 368
+      },
+      {
+        "PASS": true,
+        "path": "results/unified_exact_round142/artifacts/science_and_paper.zip",
+        "archive_SHA": "bb9a461f7ade8cc742387fe5d50197918be209f70b87e71a2286765fb6a45900",
+        "members": 60
+      }
+    ],
+    "error": null,
+    "ordinary_public_I_O": true
+  }
+]

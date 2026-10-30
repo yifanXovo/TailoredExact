@@ -52,7 +52,7 @@ necessary PE/DLL and the active worktree. Zero deletion is acceptable.
   There are 12 standalone LPs, four selected full positions, two same-PE old-D1
   controls, one healthy cap90 qualifier and no new Seed1. Conservative complete
   experimental outers are 7504.312010 seconds (2.084531 hours), including
-  mandatory postverification; the nonadditive online G1 submeter is7420.265580
+  mandatory postverification; the nonadditive online G1 submeter is 7420.265580
   seconds. Stopping is result-based with ample remaining budget.
 
 ## Safe continuation commands
@@ -84,8 +84,47 @@ Separate reproduction entry:
 
 Scientific tables, decision and pure local seal/physical/lifecycle checks are
 complete. All planned experiments are closed; no further Optimize is required.
-The incremental PDF/page review, independent final integration, finite new
-carriers, English Draft PR/readback, bounded public byte/member read and
-current-round cleanup are the remaining delivery steps. Their actual receipts
-will be appended here. No automatic merge, force push, historical deletion or
-message to others follows.
+The final eight-page PDF and all eight actual Poppler images passed primary
+and independent inspection. The independent local science/final-PDF review
+records their actual SHA identities; it does not stand in for public I/O.
+
+Fixed science is `61d215f1923386dbc7aa2c453d9a86b27341665d`, including 11
+carriers, 18,548 indexed members and 41,986,247 compressed bytes. Actual
+production source remains `9b024c451b00f84f9f1cac0905eab457cc82a5b9` with the
+PE/hash and controlled hybrid build lineage in candidate_manifest.json.
+
+English [Draft PR #204](https://github.com/yifanXovo/TailoredExact/pull/204)
+is open and targets `codex/round141-count-disjunction`; actual main remains
+`b2b940c1e517a72e226ec60fc49ff19651737632` and has not absorbed R141.
+GitHub connector creation succeeded. Its subsequent PR-info reads returned
+internal errors, so installed GitHub CLI independently read back the actual
+base/head, fixed-science head, Open Draft state and MERGEABLE status.
+PR_delivery.json and PR_readback_gh.json retain that readback; later additive
+metadata can advance the same head branch without retagging fixed science.
+
+Anonymous public fixed-commit bytes and every indexed member passed: 11
+archives / 18,548 members, 19.863552 cumulative seconds, zero Optimize,
+compilation or commercial Native loads. The first MSYS Python attempt failed
+certificate-chain validation before transfer; the installed Windows Python
+completed the same reader with normal certificate verification. No global
+settings changed. Both attempts and their costs are retained, and the public
+receipt is finite byte readability rather than a new empty-root semantic run.
+
+After public/evidence acceptance, bounded cleanup deleted only eight
+hash-matched final-page PNG previews (2,024,102 logical bytes), reconstructible
+from the published final PDF. Observed E-volume free space changed from
+119,947,452,416 to 119,949,488,128 bytes; concurrent activity/allocation means
+this need not equal logical deleted bytes. Unique raw/failures, initial
+typography history, all carriers, necessary PE/DLL, user content, active tree
+and every old round remain. cleanup_intent.json and cleanup_record.json bind
+actual resolved paths and actions. No recursive delete or old-round deletion
+occurred.
+
+Late public, cleanup and ordinary cost metadata are additive and do not
+rebuild fixed science or rerun healthy producers. The final metadata push and
+head-ref readback close delivery. The independent receipt check in
+review/delivery_closeout_review.json verifies the completed public/cleanup
+facts and explicitly leaves that last Git action to the producer. The final
+live PR head is checked against the actual local Git HEAD; its fixed-science
+ancestor remains the pin above. No automatic merge, force push, historical
+deletion or message to others follows.
