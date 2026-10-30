@@ -874,6 +874,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--round139-stock-placement") ebrp::round139().set(requireValue(i, argc, argv));
         else if (arg == "--round140-counts") ebrp::round140().set(requireValue(i, argc, argv));
         else if (arg == "--round141-count-proof") ebrp::round141().set(requireValue(i, argc, argv));
+        else if (arg == "--round142-count-products") ebrp::round142().set(requireValue(i, argc, argv));
         else if (arg == "--round137-delete-ab") ebrp::round137().delete_ab = true;
         else if (arg == "--round137-delete-cr") ebrp::round137().delete_cr = true;
         else if (arg == "--round137-delete-cg") ebrp::round137().delete_cg = true;
@@ -3550,6 +3551,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round142().enabled()) {
+        if(!ebrp::round141().enabled())
+            throw std::runtime_error("Round142 count products require the R141 count-proof carrier");
+        if(!opt.out_path.empty()) {
+            auto path=std::filesystem::path(opt.out_path).parent_path()/"round142_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"count_products\":"<<std::quoted(ebrp::round142().products)
+                <<",\"placement\":\"count_sources_only\",\"Seed\":"<<opt.gurobi_seed
+                <<",\"H_seed\":"<<opt.primal_heuristic_seed<<"}\n";
+            if(!f)throw std::runtime_error("Round142 parameter persistence failed");
+        }
+    }
     if(ebrp::round141().enabled()) {
         if(ebrp::round127().mode!="ms2"||ebrp::round140().counts!="tc2"||!ebrp::round138().stock_rlt||
             ebrp::round139().enabled()||opt.round120_native_proof!="off"||opt.round119_proof_contraction||opt.round90_lp_g_split)
