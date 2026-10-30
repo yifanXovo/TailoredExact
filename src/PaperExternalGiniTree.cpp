@@ -1665,11 +1665,6 @@ SolveResult solveStaticSegmentedGini(
         result.round41_static_parameter_roundtrip_valid;
 
     std::vector<RoutePlan> best_routes = verified_seed.routes;
-    if(round141().enabled()) {
-        round141().events=artifact_dir/"round141_events.jsonl";
-        round141_detail::require(!std::filesystem::exists(round141().events),"events_already_exist");
-        round141Event("initialized","\"mode\":"+std::string("\"")+round141().mode+"\",\"selection_once\":true,\"count_probes_are_not_Gini_leaves\":true");
-    }
     double verified_upper = verified_seed.objective;
     if (outcome.incumbent_available &&
         outcome.incumbent_independently_verified &&
@@ -3228,6 +3223,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     double verified_ub = verified_seed.objective;
     long long incumbent_epoch = 0;
     std::vector<RoutePlan> best_routes = verified_seed.routes;
+    if(round141().enabled()) {
+        round141().events=artifact_dir/"round141_events.jsonl";
+        round141_detail::require(!std::filesystem::exists(round141().events),"events_already_exist");
+        round141Event("initialized","\"mode\":"+std::string("\"")+round141().mode+"\",\"selection_once\":true,\"count_probes_are_not_Gini_leaves\":true");
+    }
     auto round120 = options.round120_native_proof != "off"
         ? std::make_shared<Round120NativeProof>(instance,options,artifact_dir/"round120_events.jsonl",
             root_gamma_L,root_gamma_U,best_routes)
