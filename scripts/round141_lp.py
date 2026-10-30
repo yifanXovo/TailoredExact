@@ -68,7 +68,15 @@ def solve(spec, suffix=''):
     tick=time.perf_counter()
     with gp.Env(empty=True) as env:
         env.setParam('OutputFlag',0);env.start()
-        model,vs,scope,add,audits=build_parent(gp,env,spec['role'])
+        if spec['variant']=='gini_reference':
+            scope=read(OUT/'domains'/spec['role']/'scope.json')
+            add=read(OUT/'domains'/spec['role']/'additions.json')
+            assert sha(spec['source_lp'])==spec['source_lp_SHA']
+            model=gp.read(str(spec['source_lp']),env=env)
+            for v in model.getVars():v.VType=gp.GRB.CONTINUOUS
+            model.update();vs={v.VarName:v for v in model.getVars()};audits=[]
+        else:
+            model,vs,scope,add,audits=build_parent(gp,env,spec['role'])
         before=dict(rows=model.NumConstrs,columns=model.NumVars,nonzeros=model.NumNZs)
         variant=spec['variant']; K=None
         if variant in ['plain','conditional','d0','d1']:
@@ -92,9 +100,7 @@ def solve(spec, suffix=''):
                     dict(name='r141_count_upper',terms={**{k:1. for k in keys},'r141_b':-(spec['u']-m)},sense='<',rhs=m),
                     dict(name='r141_count_lower',terms={**{k:1. for k in keys},'r141_b':-(m+1-spec['ell'])},sense='>',rhs=spec['ell'])])
                 audits.append(append_objective_floor(gp,model,vs,*spec['betas'],variant=='d1'))
-        elif variant=='gini':
-            raise RuntimeError('Gini controls require a rebuilt, source-matched canonical child, not a G-bound-only edit')
-        else: assert variant=='parent'
+        else: assert variant in ['parent','gini_reference']
         model.update()
         model.Params.Threads=1;model.Params.Seed=0;model.Params.Presolve=-1
         model.Params.TimeLimit=spec.get('cap_seconds',90)
