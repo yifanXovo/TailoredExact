@@ -36,6 +36,9 @@ def verify(launch,identity):
     actual=read(d/'round141_parameters.json')
     assert actual==dict(mode=launch['proof_mode'],threshold_rule='max_weighted_remainder',pivot='lp_floor',
         root_once=True,BranchPriority=0,counts='tc2',stock=True,Seed=launch['seed'],H_seed=20260626)
+    stable_controls=read(d/'round137_parameters.json')
+    assert stable_controls==dict(split_threshold=launch.get('AM_threshold',.08),delete_ab=False,
+        delete_cr=False,delete_cg=False,loaded_after_presets=True)
     events=[json.loads(line) for line in (d/'external/round141_events.jsonl').read_text().splitlines()]
     choice=next((e for e in events if e['kind']=='root_count_selected'),None)
     probes=[e for e in events if e['kind']=='count_probe_returned']
@@ -102,7 +105,7 @@ def verify(launch,identity):
     # Rebind local helpers to one fresh namespace: no historical module or raw
     # object is mutated, and all recursive domain checks see count membership.
     for name,fn in vars(base).items():
-        if isinstance(fn,types.FunctionType) and fn.__module__==base.__name__:
+        if isinstance(fn,types.FunctionType) and fn.__globals__ is vars(base):
             ns[name]=types.FunctionType(fn.__code__,ns,name,fn.__defaults__,fn.__closure__)
     original_same=ns['_same_domain'];original_global=ns['strict_global_bound']
     def same_domain(scope,witness):
@@ -113,13 +116,47 @@ def verify(launch,identity):
         assert count_scope(scope) is None,'count side is local; no implicit global/Gini coverage'
         return original_global(scope,value,witnesses)
     ns['_same_domain']=same_domain;ns['strict_global_bound']=global_bound
+    def gini_inputs(journal,controller):
+        # Count LPs are real audited Native calls, but are not Gini leaves or
+        # proof pieces. Their floors enter only via the independently checked
+        # canonical embedding. Keep every raw call in lifecycle/quality audits;
+        # give the inherited Gini-only coverage algebra its actual obligations.
+        count_ids={cid for cid,s in journal['calls'].items() if count_scope(s) is not None}
+        gini_j=dict(journal,calls={cid:s for cid,s in journal['calls'].items() if cid not in count_ids},
+            bounds=[b for b in journal['bounds'] if b['call'] not in count_ids],
+            returned_native_proofs=[b for b in journal.get('returned_native_proofs',[]) if b['call'] not in count_ids])
+        gini_controller=dict(controller,controller_native=[r for r in controller['controller_native']
+            if not r['leaf_id'].startswith('round141_count_')])
+        return gini_j,gini_controller
+    def gini_cover(journal,controller,U):
+        return base.core.chronological_cover(*gini_inputs(journal,controller),U)
+    def complete_gini_cover(destination,U,journal,controller,gmax):
+        gini_j,gini_controller=gini_inputs(journal,controller)
+        return base.core.complete_cover(destination,U,gini_j,gini_controller,gmax)
+    ns['core']=types.SimpleNamespace(**dict(vars(base.core),chronological_cover=gini_cover,complete_cover=complete_gini_cover))
     ns['models']=types.SimpleNamespace(**dict(vars(base.models),ArmModels=ArmModels))
     value=ns['verify'](launch,identity)
     leaves=base.core.rows(d/'external/paper_leaf_ledger.csv')
     assert not any(r['leaf_id'].startswith('round141_count_') for r in leaves)
     native_audits=[read(path) for path in (d/'external/native_logs').glob('*.round141.native.json')]
     assert all(row['PASS'] and row['Optimize_extra']==0 for row in native_audits)
-    write(d/'round141_control_audit.json',dict(PASS=True,actual=actual,outcome=outcome,probes=probes,
+    write(d/'round141_control_audit.json',dict(PASS=True,actual=actual,stable_controls=stable_controls,outcome=outcome,probes=probes,
         choice=choice,pair=pair,native_added_row_audits=native_audits,
         count_sides_not_in_Gini_frontier=True,source_membership_uses_verified_Y=True,Optimize=0))
     return value
+
+def postverify(batch,position):
+    """Re-read a sealed producer after a pure reader correction; no admission
+    bypass can start Native because this action has no producer code path.
+    """
+    matrix=read(OUT/f'{batch}_matrix.json');group=matrix['groups'][position-1]
+    camp=OUT/group['group'];assert sha(camp/'identity.json')==group['identity_SHA']
+    identity=read(camp/'identity.json');launch=identity['launches'][0];d=Path(launch['destination'])
+    assert (d/'producer_receipt.json').exists() and (d/'producer_seal.json').exists()
+    assert read(d/'producer_receipt.json')['native_stopped_no_reentry']
+    result=verify(launch,identity)
+    write(d/'round141_reader_correction.json',dict(pure_reader_SHA=sha(__file__),Optimize=0,
+        producer_rerun=False,original_matrix_SHA=sha(OUT/f'{batch}_matrix.json'),original_identity_SHA=group['identity_SHA']))
+    print(json.dumps(result['arm']),flush=True)
+
+if __name__=='__main__':postverify(sys.argv[1],int(sys.argv[2]))

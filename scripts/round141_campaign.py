@@ -79,6 +79,10 @@ def qualification():
     freeze('qualification_v6',[dict(role='K-20-S',mode='d1',cap=90),dict(role='K-15-S',mode='d0',cap=90)],
         'Finite own-H/normal-root/count-probe/Native target and terminal qualification after exact writer/Start/source tests; not performance observations')
 
+def qualification_d0():
+    freeze('qualification_v6b',[dict(role='K-15-S',mode='d0',cap=90)],
+        'The unstarted K15 D0 qualification is re-registered after a pure reader repair; no producer repeat, same V6 PE and original cap90 scope')
+
 def pilot():
     freeze('pilot',[dict(role=r) for r in ['K-20-S','K-35-U','K-15-S','R-B35-S-T2']],
         'Uniform max weighted remainder / LP-floor D1: three cover gains and two actual scalar D0-point separations support the four-role finite pilot')
