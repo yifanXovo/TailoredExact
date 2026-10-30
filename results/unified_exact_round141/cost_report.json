@@ -1,0 +1,1589 @@
+{
+  "UTC": "2026-10-30T06:18:39.553323+00:00",
+  "experiment": {
+    "G1_seconds": 7610.444692199584,
+    "remaining_G1_seconds": 28389.555307800416,
+    "by_category": {
+      "diagnostic": 253.7717897996772,
+      "native": 7356.672902399907
+    },
+    "limits": {
+      "diagnostic": 3600.0,
+      "native": 36000.0
+    },
+    "category_remaining": {
+      "diagnostic": 3346.228210200323,
+      "native": 28643.327097600093
+    },
+    "separately_reported_seconds": 350.8361706000287,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "experimental_outer_including_pure_postverification_seconds": 7699.784105199855,
+  "conservative_outer_within_36000": true,
+  "fee_ordinary_seconds": 350.8361706000287,
+  "additional_disjoint_ordinary_seconds": 35.99167209980078,
+  "recorded_disjoint_process_wall_total_seconds": 7997.272534899414,
+  "experimental_fee_receipts": [
+    {
+      "label": "01_K-35-U_balanced_low_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.7954861000180244,
+        "G1_seconds": 1.7954861000180244,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328372.5393765,
+        "end_unix": 1793328374.3356686,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "02_K-35-U_balanced_low_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.184389399830252,
+        "G1_seconds": 2.184389399830252,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328374.3386996,
+        "end_unix": 1793328376.5338125,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "03_K-35-U_balanced_high_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.8319107999559492,
+        "G1_seconds": 1.8319107999559492,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328376.5389142,
+        "end_unix": 1793328378.3664877,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "04_K-35-U_balanced_high_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.9687610999681056,
+        "G1_seconds": 1.9687610999681056,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328378.400865,
+        "end_unix": 1793328380.3658783,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "05_K-35-U_lp_floor_low_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.84515370009467,
+        "G1_seconds": 1.84515370009467,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328380.3865385,
+        "end_unix": 1793328382.232217,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "06_K-35-U_lp_floor_low_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.4177629998885095,
+        "G1_seconds": 2.4177629998885095,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328382.250875,
+        "end_unix": 1793328384.6692786,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "07_K-35-U_lp_floor_high_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.8785866000689566,
+        "G1_seconds": 1.8785866000689566,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328384.6876612,
+        "end_unix": 1793328386.5665028,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "08_K-35-U_lp_floor_high_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.1932572999503464,
+        "G1_seconds": 2.1932572999503464,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328386.5855513,
+        "end_unix": 1793328388.7790816,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "09_R-B35-S-T2_balanced_low_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.0798712999094278,
+        "G1_seconds": 3.0798712999094278,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328388.7879493,
+        "end_unix": 1793328391.8745944,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "10_R-B35-S-T2_balanced_low_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.215370000107214,
+        "G1_seconds": 3.215370000107214,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328391.89812,
+        "end_unix": 1793328395.113105,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "11_R-B35-S-T2_balanced_high_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.2218482000753284,
+        "G1_seconds": 3.2218482000753284,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328395.1171637,
+        "end_unix": 1793328398.3508306,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "12_R-B35-S-T2_balanced_high_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.3592511999886483,
+        "G1_seconds": 3.3592511999886483,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328398.3675132,
+        "end_unix": 1793328401.721903,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "13_R-B35-S-T2_lp_floor_low_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.851007199846208,
+        "G1_seconds": 2.851007199846208,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328401.737529,
+        "end_unix": 1793328404.602491,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "14_R-B35-S-T2_lp_floor_low_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.7463599001057446,
+        "G1_seconds": 2.7463599001057446,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328404.6224318,
+        "end_unix": 1793328407.3694298,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "15_R-B35-S-T2_lp_floor_high_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.1940162000246346,
+        "G1_seconds": 3.1940162000246346,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328407.3766959,
+        "end_unix": 1793328410.5840583,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "16_R-B35-S-T2_lp_floor_high_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.3880598000250757,
+        "G1_seconds": 3.3880598000250757,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328410.603802,
+        "end_unix": 1793328413.9927197,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "17_K-20-S_balanced_low_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6526758999098092,
+        "G1_seconds": 0.6526758999098092,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328414.0148382,
+        "end_unix": 1793328414.6676006,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "18_K-20-S_balanced_low_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.8425433998927474,
+        "G1_seconds": 0.8425433998927474,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328414.6788335,
+        "end_unix": 1793328415.5306187,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "19_K-20-S_balanced_high_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6138479998335242,
+        "G1_seconds": 0.6138479998335242,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328415.5532959,
+        "end_unix": 1793328416.1609833,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "20_K-20-S_balanced_high_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.8504308999981731,
+        "G1_seconds": 0.8504308999981731,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328416.1907463,
+        "end_unix": 1793328417.032201,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "21_K-20-S_lp_floor_low_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6176530001685023,
+        "G1_seconds": 0.6176530001685023,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328417.0634496,
+        "end_unix": 1793328417.6809356,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "22_K-20-S_lp_floor_low_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.8155102001037449,
+        "G1_seconds": 0.8155102001037449,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328417.6976194,
+        "end_unix": 1793328418.51969,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "23_K-20-S_lp_floor_high_plain_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6211708001792431,
+        "G1_seconds": 0.6211708001792431,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328418.5433536,
+        "end_unix": 1793328419.1554146,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "24_K-20-S_lp_floor_high_conditional_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.9180070001166314,
+        "G1_seconds": 0.9180070001166314,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328419.1720855,
+        "end_unix": 1793328420.1049633,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "control_001",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 127.43966290005483,
+        "G1_seconds": 117.26779410010204,
+        "separately_reported_seconds": 10.17186879995279,
+        "start_unix": 1793332166.247201,
+        "end_unix": 1793332293.6886525,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "control_002",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2386.076110499911,
+        "G1_seconds": 2371.172526499955,
+        "separately_reported_seconds": 14.903583999956027,
+        "start_unix": 1793335141.6349933,
+        "end_unix": 1793337527.707752,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "gini_export_K-20-S_high",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.3623254999984056,
+        "G1_seconds": 0.3623254999984056,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328594.7016926,
+        "end_unix": 1793328595.0506363,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_export_K-20-S_low",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.353774500079453,
+        "G1_seconds": 0.353774500079453,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328594.316382,
+        "end_unix": 1793328594.6729507,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_export_K-20-S_parent",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.3535750999581069,
+        "G1_seconds": 0.3535750999581069,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328593.9311676,
+        "end_unix": 1793328594.2875495,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_export_K-35-U_high",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.282775599975139,
+        "G1_seconds": 1.282775599975139,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328588.6425934,
+        "end_unix": 1793328589.9196584,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_export_K-35-U_low",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.2788704000413418,
+        "G1_seconds": 1.2788704000413418,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328587.3061223,
+        "end_unix": 1793328588.597727,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_export_K-35-U_parent",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.9414336998015642,
+        "G1_seconds": 1.9414336998015642,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328585.3358314,
+        "end_unix": 1793328587.279167,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_export_R-B35-S-T2_high",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.293226399924606,
+        "G1_seconds": 1.293226399924606,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328592.5967693,
+        "end_unix": 1793328593.8973298,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_export_R-B35-S-T2_low",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.2890649000182748,
+        "G1_seconds": 1.2890649000182748,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328591.2732015,
+        "end_unix": 1793328592.5678678,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_export_R-B35-S-T2_parent",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.286189500009641,
+        "G1_seconds": 1.286189500009641,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328589.9540179,
+        "end_unix": 1793328591.240687,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_K-20-S_high",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.5448370000813156,
+        "G1_seconds": 0.5448370000813156,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328717.064223,
+        "end_unix": 1793328717.5961144,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_K-20-S_low",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6994549999944866,
+        "G1_seconds": 0.6994549999944866,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328716.3279586,
+        "end_unix": 1793328717.0228958,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_K-35-U_high",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.0007550998125225,
+        "G1_seconds": 1.0007550998125225,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328710.6810434,
+        "end_unix": 1793328711.6822226,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_K-35-U_low",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.9510604999959469,
+        "G1_seconds": 1.9510604999959469,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328708.6975157,
+        "end_unix": 1793328710.647205,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_matched_export_K-20-S_high",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.35532810003496706,
+        "G1_seconds": 0.35532810003496706,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328701.5117085,
+        "end_unix": 1793328701.8649318,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_matched_export_K-20-S_low",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.36228320002555847,
+        "G1_seconds": 0.36228320002555847,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328700.9452436,
+        "end_unix": 1793328701.308036,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_matched_export_K-20-S_parent",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.3542557000182569,
+        "G1_seconds": 0.3542557000182569,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328700.3837106,
+        "end_unix": 1793328700.7387707,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_matched_export_K-35-U_high",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.3239380999002606,
+        "G1_seconds": 1.3239380999002606,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328692.6877706,
+        "end_unix": 1793328694.0085857,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_matched_export_K-35-U_low",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.267483999952674,
+        "G1_seconds": 1.267483999952674,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328690.6606715,
+        "end_unix": 1793328691.9313226,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_matched_export_K-35-U_parent",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.2788547999225557,
+        "G1_seconds": 1.2788547999225557,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328688.6268067,
+        "end_unix": 1793328689.9057667,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_matched_export_R-B35-S-T2_high",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.2963564000092447,
+        "G1_seconds": 1.2963564000092447,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328698.8616786,
+        "end_unix": 1793328700.1711698,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_matched_export_R-B35-S-T2_low",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.2726139998994768,
+        "G1_seconds": 1.2726139998994768,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328696.8231442,
+        "end_unix": 1793328698.0961342,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_matched_export_R-B35-S-T2_parent",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.288325299974531,
+        "G1_seconds": 1.288325299974531,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328694.781785,
+        "end_unix": 1793328696.0695403,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_R-B35-S-T2_high",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.5016270999331027,
+        "G1_seconds": 1.5016270999331027,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328714.7898276,
+        "end_unix": 1793328716.2922502,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "gini_R-B35-S-T2_low",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.0375018999911845,
+        "G1_seconds": 3.0375018999911845,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328711.7162783,
+        "end_unix": 1793328714.7541313,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "K-20-S_lp_floor_d0",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6114244998898357,
+        "G1_seconds": 0.6114244998898357,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328489.3360121,
+        "end_unix": 1793328489.954077,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "K-20-S_lp_floor_d1",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.5906951001379639,
+        "G1_seconds": 0.5906951001379639,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328489.977061,
+        "end_unix": 1793328490.5547955,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "K-35-U_lp_floor_d0",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.569097900064662,
+        "G1_seconds": 1.569097900064662,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328476.2515173,
+        "end_unix": 1793328477.831414,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "K-35-U_lp_floor_d1",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.3441395000554621,
+        "G1_seconds": 1.3441395000554621,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328477.8559542,
+        "end_unix": 1793328479.1955266,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "native_tiny",
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 0.238817100180313,
+        "G1_seconds": 0.238817100180313,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793329509.976332,
+        "end_unix": 1793329510.2089622,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "native_tiny_v3",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.3422503999900073,
+        "G1_seconds": 0.3422503999900073,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793329788.1254044,
+        "end_unix": 1793329788.4678783,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "native_tiny_v4",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.3466251001227647,
+        "G1_seconds": 0.3466251001227647,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793330180.688369,
+        "end_unix": 1793330181.0203328,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "native_tiny_v5",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.35125480010174215,
+        "G1_seconds": 0.35125480010174215,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793330410.5067248,
+        "end_unix": 1793330410.861127,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "parent_K-20-S_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6551007002126426,
+        "G1_seconds": 0.6551007002126426,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328371.8674245,
+        "end_unix": 1793328372.5237534,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "parent_K-35-U",
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 0.9125789999961853,
+        "G1_seconds": 0.9125789999961853,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328334.9491792,
+        "end_unix": 1793328335.8612018,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "parent_K-35-U_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.859396800165996,
+        "G1_seconds": 1.859396800165996,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328366.7949443,
+        "end_unix": 1793328368.6506417,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "parent_R-B35-S-T2_mps",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.179116199957207,
+        "G1_seconds": 3.179116199957207,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328368.6662605,
+        "end_unix": 1793328371.851797,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "pilot_001",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 102.65518800006248,
+        "G1_seconds": 93.5697560000699,
+        "separately_reported_seconds": 9.08543199999258,
+        "start_unix": 1793331791.870923,
+        "end_unix": 1793331894.5212815,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "pilot_002",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2386.1226818999276,
+        "G1_seconds": 2371.1796781998128,
+        "separately_reported_seconds": 14.943003700114787,
+        "start_unix": 1793332467.1952412,
+        "end_unix": 1793334853.3282511,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "pilot_003",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 37.08120030001737,
+        "G1_seconds": 32.39149840013124,
+        "separately_reported_seconds": 4.689701899886131,
+        "start_unix": 1793337544.3037653,
+        "end_unix": 1793337581.3900108,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "pilot_004",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2384.714750800049,
+        "G1_seconds": 2371.091649199836,
+        "separately_reported_seconds": 13.623101600212976,
+        "start_unix": 1793337603.8091292,
+        "end_unix": 1793339988.5300534,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "native"
+      }
+    },
+    {
+      "label": "qualification_v5_001",
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 70.6578260997776,
+        "G1_seconds": 61.564586099702865,
+        "separately_reported_seconds": 9.09324000007473,
+        "start_unix": 1793330484.2283435,
+        "end_unix": 1793330554.8904128,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "qualification_v6_001",
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 69.01744009996764,
+        "G1_seconds": 61.19329599989578,
+        "separately_reported_seconds": 7.824144100071862,
+        "start_unix": 1793330886.6003914,
+        "end_unix": 1793330955.6247704,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "qualification_v6b_001",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 37.28264830005355,
+        "G1_seconds": 32.27731140004471,
+        "separately_reported_seconds": 5.005336900008842,
+        "start_unix": 1793331471.7151062,
+        "end_unix": 1793331508.994238,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "R-B35-S-T2_lp_floor_d0",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 6.819097299827263,
+        "G1_seconds": 6.819097299827263,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328479.2301788,
+        "end_unix": 1793328486.0503435,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "R-B35-S-T2_lp_floor_d1",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 3.2395435001235455,
+        "G1_seconds": 3.2395435001235455,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328486.0763438,
+        "end_unix": 1793328489.316117,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "tiny",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.18924340000376105,
+        "G1_seconds": 0.18924340000376105,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793328277.0161123,
+        "end_unix": 1793328277.1944904,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "tiny_cpp",
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 0.5764030998107046,
+        "G1_seconds": 0.5764030998107046,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793329509.2530923,
+        "end_unix": 1793329509.829603,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "tiny_cpp_round141-v4",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6071200000587851,
+        "G1_seconds": 0.6071200000587851,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793330179.9454987,
+        "end_unix": 1793330180.5381699,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "tiny_cpp_round141-v5",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6201565999072045,
+        "G1_seconds": 0.6201565999072045,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793330409.7516248,
+        "end_unix": 1793330410.3667433,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    },
+    {
+      "label": "tiny_cpp_v3",
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 0.6056925000157207,
+        "G1_seconds": 0.6056925000157207,
+        "separately_reported_seconds": 0.0,
+        "start_unix": 1793329787.373457,
+        "end_unix": 1793329787.9785182,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "diagnostic"
+      }
+    }
+  ],
+  "ordinary_steps": [
+    {
+      "label": "aggregate_after_k15",
+      "SHA": "7c0145c5f93e9c30bbe29a0161b9c2230bff3da99d03be74721391dcc4453a81",
+      "receipt": {
+        "UTC": "2026-10-30T05:19:52.026071+00:00",
+        "exit_code": 0,
+        "seconds": 1.5198041000403464,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "aggregate_initial_six",
+      "SHA": "910f6d58694b2cc5ef9cbce5ae58b0e5069cc888a49df9efdf733baf88be0bfe",
+      "receipt": {
+        "UTC": "2026-10-30T06:00:00.173706+00:00",
+        "exit_code": 1,
+        "seconds": 0.023492000065743923,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "aggregate_initial_six_with_path",
+      "SHA": "9168252d745ab1dfede7c3d21b2bb8112b59c46da22432a943ba861555ec9446",
+      "receipt": {
+        "UTC": "2026-10-30T06:00:23.398734+00:00",
+        "exit_code": 0,
+        "seconds": 2.229047999950126,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "aggregate_k35_pair",
+      "SHA": "3f758073957329d3294e8f2386bb68373101f1b2a16a0f410fd042d7836d3fc0",
+      "receipt": {
+        "UTC": "2026-10-30T05:18:59.005448+00:00",
+        "exit_code": 0,
+        "seconds": 1.5172996998298913,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "appendix_PDF",
+      "SHA": "f9b68309a6f76b4ee7e04e924fc0bfbe8a3318016ef41c7d0f235da12cce4d76",
+      "receipt": {
+        "UTC": "2026-10-30T06:12:22.041677+00:00",
+        "exit_code": 0,
+        "seconds": 7.347339400090277,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "appendix_PDF_layout02",
+      "SHA": "a9c9fe30f0c70063aac813886aca9c8d66cf1061a669e128a8ad195472c0ffb3",
+      "receipt": {
+        "UTC": "2026-10-30T06:16:52.033691+00:00",
+        "exit_code": 0,
+        "seconds": 5.868673600023612,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "chain_control_002",
+      "SHA": "7aea32b54ea9b5696dbf699fb01ab9a928a5d6eed2c5243d0ce3b1b255b18fac",
+      "receipt": {
+        "UTC": "2026-10-30T05:18:57.117654+00:00",
+        "exit_code": 0,
+        "seconds": 1.2694808999076486,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "chain_pilot_003",
+      "SHA": "911c0c1668aa13ecfd7f03169da8d044d3266c93a2af99a91593f4e37bd3316b",
+      "receipt": {
+        "UTC": "2026-10-30T05:19:50.149477+00:00",
+        "exit_code": 0,
+        "seconds": 0.7164272998925298,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "chain_pilot_004",
+      "SHA": "fcf4b93924c94bb68b3577c03f40417cc01e01a7091d9b348699ab18da0d6cd2",
+      "receipt": {
+        "UTC": "2026-10-30T05:59:59.799263+00:00",
+        "exit_code": 0,
+        "seconds": 1.1881655000615865,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "endpoint_figure",
+      "SHA": "e586505f2a30db674c83a7188f0d800f19dc296d99cec1b24846c05e34220aea",
+      "receipt": {
+        "UTC": "2026-10-30T06:07:40.481589+00:00",
+        "exit_code": 1,
+        "seconds": 0.37672899989411235,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "endpoint_figure_existing_deps",
+      "SHA": "bc22651f555f57bba63c4832e4e96811dbbd216c9f43da2df0ce398a061065eb",
+      "receipt": {
+        "UTC": "2026-10-30T06:08:42.647834+00:00",
+        "exit_code": 0,
+        "seconds": 5.783363899914548,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "fixed_dependencies",
+      "SHA": "391d45f8a995c46f5ad3bdb8a5ba7d79761977ae3a0f89dd1e70dcfd1efb8705",
+      "receipt": {
+        "UTC": "2026-10-30T06:01:26.208782+00:00",
+        "exit_code": 0,
+        "seconds": 0.6661837000865489,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "local_semantics",
+      "SHA": "3e59780f73afc76fb28f8acb9d65eadce43b10895e5d4d441a6b23c8248cb62c",
+      "receipt": {
+        "UTC": "2026-10-30T06:01:25.159052+00:00",
+        "exit_code": 0,
+        "seconds": 0.7560029998421669,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "paper_assembly",
+      "SHA": "f8357c5f57f53b265018f892871ffd0f0960c273b8f851802d19c30c99255886",
+      "receipt": {
+        "UTC": "2026-10-30T06:10:45.598932+00:00",
+        "exit_code": 0,
+        "seconds": 0.23361660004593432,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "paper_assembly_layout02",
+      "SHA": "1403bf254d0a6f328dd4615745e3a51269bd6f945fb33890f71a21cc3ed8e6fd",
+      "receipt": {
+        "UTC": "2026-10-30T06:16:45.823887+00:00",
+        "exit_code": 0,
+        "seconds": 0.22586919995956123,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "paper_assembly_parameters",
+      "SHA": "e03f03ead229a6e2f2c70ff6cb65ec6b990d5724bbb7eff143792fce09e9bae3",
+      "receipt": {
+        "UTC": "2026-10-30T06:12:14.322349+00:00",
+        "exit_code": 0,
+        "seconds": 0.24163110018707812,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "PDF_render",
+      "SHA": "c96ed868d2a182ef4b5e417450261e7767d2db8f1aab9edd32081fa85fc2b849",
+      "receipt": {
+        "UTC": "2026-10-30T06:12:50.682282+00:00",
+        "exit_code": 0,
+        "seconds": 2.3287225000094622,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "PDF_render_layout02",
+      "SHA": "f5535e68dbe6f540d7b72c60375834f68bb0b689a781c8eb330b334498d10266",
+      "receipt": {
+        "UTC": "2026-10-30T06:16:54.289622+00:00",
+        "exit_code": 0,
+        "seconds": 1.894146100152284,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "scientific_report",
+      "SHA": "e75129d0179db70e2ec02f7360d296a1b02a8869fd941c2e2675b6757bca975a",
+      "receipt": {
+        "UTC": "2026-10-30T06:10:45.006343+00:00",
+        "exit_code": 0,
+        "seconds": 0.21677870000712574,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "scientific_report_final_text",
+      "SHA": "34ed7cdd246644e15638a0d41fbce3b4823fda4d57c3ac4a5d3c1ca5e112bcbf",
+      "receipt": {
+        "UTC": "2026-10-30T06:16:45.230055+00:00",
+        "exit_code": 0,
+        "seconds": 0.22304209996946156,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "scientific_report_parameters",
+      "SHA": "aea19ba6427d5f87af4eb9af0d835a9d1cde29309835e6080053bc8c8aea0029",
+      "receipt": {
+        "UTC": "2026-10-30T06:12:13.725271+00:00",
+        "exit_code": 0,
+        "seconds": 0.21813610009849072,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "software_bindings",
+      "SHA": "4bd40041c70cdc9239079aef87ce84f37bec3d0e81b02e3bd170b6c2e45a7b5a",
+      "receipt": {
+        "UTC": "2026-10-30T06:01:24.058759+00:00",
+        "exit_code": 0,
+        "seconds": 0.3890203998889774,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    },
+    {
+      "label": "stable_entry_final_check",
+      "SHA": "9938a0a670498f8ddd896d89a1dfb07ab3e5fd50ce29a28ec4ec962a4b231ca2",
+      "receipt": {
+        "UTC": "2026-10-30T06:17:35.369211+00:00",
+        "exit_code": 0,
+        "seconds": 0.7586991998832673,
+        "Optimize": 0,
+        "experimental": false,
+        "error": null,
+        "exit_observed": true,
+        "owned_tree_termination_on_timeout": true
+      }
+    }
+  ],
+  "failed_measured_steps": [
+    "chain_qualification",
+    "gini_plan",
+    "initial_aggregate",
+    "initial_aggregate_fixed",
+    "initial_aggregate_idle_guard",
+    "native_tiny",
+    "parent_K-35-U",
+    "postverify_qualification_v6_001_a",
+    "postverify_qualification_v6_001_b",
+    "qualification_v5_001",
+    "qualification_v6_001",
+    "tiny_cpp",
+    "aggregate_initial_six",
+    "endpoint_figure"
+  ],
+  "qualifiers_and_failed_experimental_attempts_included": true,
+  "old_references_new_Optimize": 0,
+  "nested_H_LP_MIP_Work_not_added_twice": true,
+  "precision_scope": "Measured child processes only; interactive editing, review and Git have no invented wall-time precision. Late publication/cleanup receipts are additive and are not recursively packed into their own science carrier."
+}

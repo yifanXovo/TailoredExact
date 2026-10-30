@@ -57,3 +57,16 @@ stable GI-TBC above is unchanged. The separate Round140 research entry defaults
 to the tested old-TC mode and exposes TC2 explicitly for reproduction. See the
 [scientific decision](../results/unified_exact_round140/candidate_decision.json)
 and [delivery status](../results/unified_exact_round140/RESUME.md).
+
+The [Round141 threshold-count disjunction study](round141_research.md)
+extends that research carrier with conditional count-domain chords and
+qualified one-binary objective floors. Its [scientific decision](../results/unified_exact_round141/candidate_decision.json)
+and [actual delivery record](../results/unified_exact_round141/RESUME.md)
+keep LP information, D0/D1 attribution and full-method performance separate.
+It has a separate default-off entry; stable GI-TBC and all earlier research
+launchers/profiles retain their verified bytes. The supplied same-objective
+K35 return-upper-bound witness also supersedes R140's earlier priority
+suggestion, with the numerical scope stated in the new mathematical note.
+Its four-role D1 pilot and two D0 controls support research-only retention:
+the real K20 conditional-floor benefit does not overcome RB35-T2's important
+complete regression. No further full expansion or stable promotion follows.

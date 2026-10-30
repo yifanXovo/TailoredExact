@@ -63,3 +63,27 @@ LPs retain their own costs and identities. Decision: research-only and stop
 full promotion; stable R137 remains unchanged. Actual publication, public-byte
 read and finite cleanup are recorded separately in the
 [continuation record](../results/unified_exact_round140/RESUME.md).
+
+# Round141 addition: count domains and conditional objective floors
+
+The [research guide](round141_research.md),
+[scientific report](../results/unified_exact_round141/final_report.md) and
+[mathematical note](../results/unified_exact_round141/mathematical_analysis.md)
+connect exact physical threshold counts, integer low/high coverage, nested
+count propagation and conditional numerator chords. Thirty-nine same-domain
+continuous optimizations separate plain restrictions, conditional cover,
+actual D0-point projection separation, reoptimized D0/D1 objectives and a
+matched Gini-midpoint reference. Standard disjunctive tools and the earlier
+R120--R122 Gini-axis injection are identified explicitly. The finite paid
+complete-method comparisons, adverse outcomes, costs and adoption decision
+are recorded in the linked report. Stable R137 and historical entries remain
+unchanged; publication, public-byte checks and cleanup retain their distinct
+actual receipts in the [continuation record](../results/unified_exact_round141/RESUME.md).
+
+Round141 closes with 39 standalone LPs, six formal full positions and two
+separate healthy qualifications (plus a retained failed lifecycle qualifier).
+The four-role D1 pilot keeps two proofs, without material stock clock gains;
+the important RB35-T2 regression prevents uniform promotion. Necessary D0
+controls establish K20 conditional-floor value and a K35 endpoint tradeoff.
+Decision: research-only and stop further full expansion, at 2.114012 hours of
+the 10-hour new-experiment ceiling; stable GI-TBC remains unchanged.

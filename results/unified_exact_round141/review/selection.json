@@ -1,0 +1,181 @@
+{
+  "decision": "RETAIN_D1_RESEARCH_ONLY_STOP_FURTHER_FULL_EXPANSION",
+  "reviewer": "independent agent round141_independent_review",
+  "independently_assessed": true,
+  "adopt_stable_default": false,
+  "current_complete_candidate": "one uniform max-weighted-remainder / LP-floor D1 on BOTH stock+old TC+TC2",
+  "actual_scope": {
+    "standalone_continuous_LPs": 39,
+    "new_formal_full_positions": 6,
+    "D1_Seed0_roles": [
+      "K-15-S",
+      "K-20-S",
+      "K-35-U",
+      "R-B35-S-T2"
+    ],
+    "D0_Seed0_roles": [
+      "K-20-S",
+      "K-35-U"
+    ],
+    "healthy_cap90_qualifications": 2,
+    "entered_failed_cap90_qualifications": 1,
+    "new_Seed1_positions": 0,
+    "unstarted_superseded_qualification_identities": 6,
+    "all_entered_actual_sources_preserved": true,
+    "distinct_reused_base_inputs_in_formal_panel": 4,
+    "newly_generated_inputs": 0
+  },
+  "budget_snapshot": {
+    "G1_seconds": 7610.444692199584,
+    "remaining_G1_seconds": 28389.555307800416,
+    "by_category": {
+      "diagnostic": 253.7717897996772,
+      "native": 7356.672902399907
+    },
+    "limits": {
+      "diagnostic": 3600.0,
+      "native": 36000.0
+    },
+    "category_remaining": {
+      "diagnostic": 3346.228210200323,
+      "native": 28643.327097600093
+    },
+    "separately_reported_seconds": 350.8361706000287,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "charged_hours": 2.1140124144998844,
+  "budget_is_not_reason_to_stop": "Remaining allowance is ample. Stop is result-based, not exhaustion or a short Native window.",
+  "evidence_levels": {
+    "expression_and_proof": "Integer count cover, nested conditional numerator chords and count-scoped floor transport are valid. Standard scalar disjunction/R120 injection tools are not claimed as new general theory.",
+    "relaxation": "Conditional count covers improve all three diagnostic parent and matched Gini-midpoint covers. Two actual D0 optima are separated by the written fractional-b D1 projection; no optimized D1-over-D0 root LP gain occurs.",
+    "complete_search": "K20 D1 is materially faster than same-PE D0 with identical initial integer matrices except floor. K35 D1 improves U and slightly worsens L versus D0; much carrier repair is already present in D0. RB D1 materially regresses key complete endpoints. The coherent method has useful research signal without stable-default value."
+  },
+  "rationale": [
+    "K15/K20 retain two proofs, versus one for stable GI-TBC on these four roles; stock and TC/TC2 already had both proofs. D1 adds no proof over its carrier.",
+    "Relative to accepted stock, K15 and K20 proof-clock improvements are below the inherited max(10seconds,10% of smaller clock) materiality rule; K15 total is slightly slower.",
+    "K20 provides genuine conditional-floor attribution: D1 saves23.6894309 production seconds and24.7673724 total seconds versus D0, with matching root/probe data and all remaining initial integer-model coefficients.",
+    "K35 has a useful primal repair, but its lower bound falls versus stable GI-TBC; old TC+stock still improves both endpoints over D1. D0 versus D1 gives a real U/L tradeoff, not D0 dominance.",
+    "RB35-T2 D1 ends at U/L=.4137732750/.2279184194. It is worse on both endpoints than stock, TC2 and old TC+stock; versus stable GI-TBC its U is about20.1% worse despite a stronger L. This is an important full-cap role regression.",
+    "A favorable K20 and a K35 carrier repair do not outweigh the absence of material stock proof-time benefit plus the important RB regression. No run is censored and no cap is called a certification time.",
+    "The two proof floors are overtaken early in the carrier Native paths; this limits expected direct floor strength but is not a general redundancy theorem. Search outcomes cannot be explained solely by stronger root LP bounds or by the small probe cost."
+  ],
+  "RB_comparison": [
+    {
+      "reference": "TC_STOCK",
+      "reference_U": 0.3190804926922912,
+      "reference_L": 0.23392726213848986,
+      "D1_minus_reference_U": 0.09469278232941603,
+      "D1_minus_reference_L": -0.006008842702870998,
+      "same_PE": false
+    },
+    {
+      "reference": "TC2_STOCK",
+      "reference_U": 0.32427571778578423,
+      "reference_L": 0.22990420853681653,
+      "D1_minus_reference_U": 0.08949755723592301,
+      "D1_minus_reference_L": -0.001985789101197677,
+      "same_PE": false
+    },
+    {
+      "reference": "base",
+      "reference_U": 0.34464262559194814,
+      "reference_L": 0.2189859496034747,
+      "D1_minus_reference_U": 0.0691306494297591,
+      "D1_minus_reference_L": 0.008932469832144158,
+      "same_PE": false
+    },
+    {
+      "reference": "both",
+      "reference_U": 0.4012002178390506,
+      "reference_L": 0.22918159966432358,
+      "D1_minus_reference_U": 0.012573057182656666,
+      "D1_minus_reference_L": -0.0012631802287047245,
+      "same_PE": false
+    }
+  ],
+  "conditional_work_decisions": [
+    {
+      "option": "RB35-T2 paid D0",
+      "decision": "NOT_REQUIRED_FOR_CURRENT_ADOPTION_STOP_DECISION",
+      "reason": "It would identify whether the RB loss arises from conditional delta or the common binary/links/cover combination. The unchanged D1 method already fails promotion; current paired controls do not favor D0 uniformly. This extra role is not needed if no causal RB-delta claim is made.",
+      "claim_boundary": "Do not claim conditional delta caused RB regression, and do not claim RB D0 was tested or could never work."
+    },
+    {
+      "option": "remaining four Seed0 configurations",
+      "decision": "DO_NOT_RUN",
+      "reason": "They could describe additional heterogeneity but cannot erase the completed important-role regression or establish robustness of this frozen candidate. Expansion would be mechanical without a new structural signal."
+    },
+    {
+      "option": "one decision-relevant Seed1 pair",
+      "decision": "DO_NOT_RUN",
+      "reason": "There is no close adoption ambiguity requiring seed confirmation. A favorable new seed would not undo adverse Seed0 evidence; an unfavorable one would not change the stop decision. No favorable-seed search."
+    },
+    {
+      "option": "one unified D0 adjustment",
+      "decision": "NOT_SUPPORTED_BY_CURRENT_RESULTS",
+      "reason": "D0 is materially slower on K20 and has worse K35 U for a small L advantage. There is no observed coherent D0 superiority to justify substituting it and opening a second full panel based on an unobserved RB outcome."
+    },
+    {
+      "option": "optional count-to-inventory LP tightening",
+      "decision": "DEFER_AS_NEW_SOURCE_STRENGTH_QUESTION",
+      "reason": "It would be a changed mechanism, not a correction to the tested valid floors. Current failures are complete-search outcomes rather than proof construction overhead or an identified invalid source. No additional LP is required to decide the current candidate; any future variant should first show source information that remains useful beyond Native early bounds."
+    }
+  ],
+  "required_next_experiments": [],
+  "required_next_nonexperimental_work": [
+    "write final decision and compact report/manuscript with all positive/adverse results and the untested RB-D0 boundary",
+    "finish actual PDF visual and final independent integration checks",
+    "publish normal research branch/English Draft PR, read back base/head/draft, bounded new-carrier public byte checks and finite current-round cleanup"
+  ],
+  "one_most_useful_future_question": "Can count-conditioned inventory/support tightening produce low-cost side proofs whose information remains above the relevant Native early bounds, before any new complete benchmark is admitted? The present study does not answer that changed-mechanism question.",
+  "stable_entry": "Retain R137 GI-TBC unchanged. Keep the independent count-disjunction entry/default-off component research-only; no instance-specific mechanism choice.",
+  "branching_on_count": "Not established; no outer split occurred in the six new formal positions.",
+  "source_bindings": {
+    "full_report_SHA": "e50f11fbab09fed9b344a9aa1ab6ed2b6cee891f739c47a8b074c0cb4e95a2c6",
+    "LP_report_json_SHA": "c88cb5abf0cb8809c1eb4ae6b565335ea6a112646bd069f152b45b9ca7176ca9",
+    "LP_positions_SHA": "4fcd3821ce2227ab8005257af180860bc33d31902f04d45dd527b7a9a333baa4",
+    "actual_formal_chain_checks": [
+      {
+        "role": "K-15-S",
+        "method": "D1",
+        "chain_SHA": "296c8877b1faabb4cadbe21e2215eacc047f389646713af6dc52ec5dc0ca519f",
+        "closeout_SHA": "4f8fe9658a50d192e60ed2442de4dd10c8fae7408cc4e2fa514fc64eb960af14"
+      },
+      {
+        "role": "K-20-S",
+        "method": "D0",
+        "chain_SHA": "8b4334e40351319ede74c4813a71d559e57d8e4c7cdac2b8987c767504d9d099",
+        "closeout_SHA": "a7e2dae4b0feffe6a7601c12e15c292c9cd50b21b86c23c51ae8f2dca6b79ad2"
+      },
+      {
+        "role": "K-20-S",
+        "method": "D1",
+        "chain_SHA": "a6a07b503fa794033fb136ebe53457cd6e9e32cd97dd74fdc8736e1b33d1364f",
+        "closeout_SHA": "1c78f6e5b19963bd740a9ce1af6f3df77906461a32b2865ba5a21a366573377c"
+      },
+      {
+        "role": "K-35-U",
+        "method": "D0",
+        "chain_SHA": "0b99354bd254b438cc8a5194f4f5ca4a2f02db6f3fb46b082e3d2a45afd26445",
+        "closeout_SHA": "5b4045acd2079d7cfcb2c1ae205824281122a52acc1247ca6e452a1cd8181c29"
+      },
+      {
+        "role": "K-35-U",
+        "method": "D1",
+        "chain_SHA": "2e170f3b05ec02669ca9c35651f267a7e5ffa00ce1d74db39da1e7aa2dcebb56",
+        "closeout_SHA": "9a2f6eb3cdf5f5d2f8b66085184ec651d18478a413a1c5ac815c8eebf9c26e18"
+      },
+      {
+        "role": "R-B35-S-T2",
+        "method": "D1",
+        "chain_SHA": "f0243cdfcb0540862d37bf55ade20a023674b53e6bb9834a44ceaf634c7154a6",
+        "closeout_SHA": "63ba2533b268b21e05306b8b4cae68f372cf99ed2549850fe736fc17007300c1"
+      }
+    ]
+  },
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "seconds": 0.057131499983370304
+}

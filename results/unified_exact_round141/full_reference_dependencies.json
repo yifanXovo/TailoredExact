@@ -1,0 +1,1310 @@
+{
+  "UTC": "2026-10-30T06:01:26.205742+00:00",
+  "fixed_metadata": {
+    "results/unified_exact_round140/reports/full.json": {
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "SHA": "91063003e6417e2bf5f44bd6536c05e9f46dd26298f79192093b25107001b7bc"
+    },
+    "results/unified_exact_round140/carrier_manifest.json": {
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "SHA": "8611912f5744f01ce74496ed0e78db28cb965ba1693a02b10322edec4434f6d4"
+    },
+    "results/unified_exact_round140/baseline_reuse.json": {
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "SHA": "d19e3696bc607232a0469b5984a144f107e48f0e95da7b7ec8d70aa1a596c155"
+    },
+    "results/unified_exact_round140/inherited_dependencies.json": {
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "SHA": "43181e27ebf5a9667e6240cd045aa9df60ca07c33979e532620416a0a867b567"
+    }
+  },
+  "accepted_BASE_STOCK_dependencies": [
+    {
+      "role": "K-15-S",
+      "method": "base",
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "archive": "results/unified_exact_round137/artifacts/campaign_003.zip",
+      "archive_SHA": "95022b07c66a67aa253a55199647e679dd3390cea6e3732397bd2350d2fdd692",
+      "selected_members": [
+        {
+          "member": "results/unified_exact_round137/campaign/003/identity.json",
+          "SHA256": "9360ce0e58595840aaf1114265ea03b0480b5e8d3f4b90a6b0bf25a382be4485",
+          "bytes": 29124
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/audit.json",
+          "SHA256": "f6ad47acf072d40dfce96017f1383023fde7f0b9fc9884424be52b60c47b7105",
+          "bytes": 4753053
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/adaptive_mass_decision_ledger.csv",
+          "SHA256": "8692f3bc052a0f748f2da983e501c71656316b8229e7db78bd788b51b30cce45",
+          "bytes": 1060
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/initial_witness.json",
+          "SHA256": "998e7797d5bdaf67aab962578c88172be79da30e3b272c90dde9ba1b3379cc7f",
+          "bytes": 497
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA256": "590ae612c7d11f0e071340379c053e47d91349c1ecbe25af88683eca855541aa",
+          "bytes": 444477
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA256": "cc9205110487daaf951c9b24ad310ca9398ece88edb1e2c39645f108f3f078bf",
+          "bytes": 455078
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/models/L0_epoch_0_generation_1.lp",
+          "SHA256": "93886ec613f0de3c139abf26607ecb38a2fb2ed0baff50d2b84dffd119692fed",
+          "bytes": 443856
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+          "SHA256": "b79f6575d0f8fd8b947383fe13a40de0521a5448aa38c44682f627a5b73eca8e",
+          "bytes": 2014
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "SHA256": "0e1d80d59a58db87b525bc27d1b13a72b97a8e51be23f1a142429d4062d24772",
+          "bytes": 565
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "b8315265c26b52c2302cd598d9c69a40ec78340b39b2e59852cec499a8790d77",
+          "bytes": 38088
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA256": "a5634a9df2faa82cfc67b9578e0077856153fa0143c5df5340ffa11979af8199",
+          "bytes": 6297
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA256": "2427dcaa69021aeac757850527e97b6186098fe26487a3a474390c5268a3e724",
+          "bytes": 565
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "b8315265c26b52c2302cd598d9c69a40ec78340b39b2e59852cec499a8790d77",
+          "bytes": 38088
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/external/paper_optimize_ledger.csv",
+          "SHA256": "25f0ee1913d859d25c9f873d1ed3d19d582412b234e7b8bd2edcd66f8f611aed",
+          "bytes": 2185
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/observations.json",
+          "SHA256": "551d77e75a68c8d6cbd208c1708d329a754634ae27f9f633803dc6ec86e974a8",
+          "bytes": 5212360
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/producer_receipt.json",
+          "SHA256": "519b8f2ddb4a8f08a4c1818e784a9c1aa58dc018a24991cca3f979691d3f6437",
+          "bytes": 739
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/producer_seal.json",
+          "SHA256": "546d296788233656c5e45bf96b7056bc00d6e2770e8c882718928fd423d56854",
+          "bytes": 960
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/003/raw/R137_003_K-15-S_S0_S2/round135_endpoint.json",
+          "SHA256": "f4cb68cb5bb08c61c8460dad746ffbfaec9a5889d354dedb52f9ec06818dde8e",
+          "bytes": 3128
+        }
+      ],
+      "original_manifest_SHA": "39f3e2af20965c6986966b4c88127838d7cc6a47a1fed90760012b452634b8e9"
+    },
+    {
+      "role": "K-15-S",
+      "method": "both",
+      "commit": "1b19897ab5819ab3b7485ddc978954b45225f361",
+      "archive": "results/unified_exact_round138/artifacts/campaign_002.zip",
+      "archive_SHA": "edb1ebfc5f4bf32a4befded8387b7fbaa2021e40ac57cd880899d3c3ee373cdc",
+      "selected_members": [
+        {
+          "member": "results/unified_exact_round138/campaign/002/identity.json",
+          "SHA256": "da560e5e2e569e1801d445a885f1c071aa826c3dec8e68a384e9f41903b1821b",
+          "bytes": 29126
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/audit.json",
+          "SHA256": "e66b977bf6b96e2fb135336d01d6bc0f1c185e610e55257428c6cc19f7cfc93b",
+          "bytes": 830388
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/external/adaptive_mass_decision_ledger.csv",
+          "SHA256": "fefeb0f23c5f356b92bd8e99884a89c658d37690e6b79a8165f92d878c8bfa9a",
+          "bytes": 663
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/external/initial_witness.json",
+          "SHA256": "998e7797d5bdaf67aab962578c88172be79da30e3b272c90dde9ba1b3379cc7f",
+          "bytes": 497
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA256": "602543f11ae7423bbbe9cd7e1a96d593c120931e1c0f4cf7e1ca6d01128b2e1d",
+          "bytes": 446137
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA256": "f71e5807a24859a6936588baec5094b5cf72376f6580209aebd7f1dd40d3cc79",
+          "bytes": 457534
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/external/models/L0_epoch_0_generation_1.lp",
+          "SHA256": "3eda75a7c10bb8b89e2694b40393c70b9a4c5a11e5c375728c422894961e579a",
+          "bytes": 445486
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA256": "c519e8eb7f810144d3391e436ab64adf6262d11b36c587645a3bf55d765d1916",
+          "bytes": 5319
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA256": "9527b7730efef3b9cfc1aef574b478c991e7c687023f97d0a659098238cadd23",
+          "bytes": 551
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "b8315265c26b52c2302cd598d9c69a40ec78340b39b2e59852cec499a8790d77",
+          "bytes": 38088
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/external/paper_optimize_ledger.csv",
+          "SHA256": "716bdd30f657fd39b2d691b3dc38cb5afa0e5fe442ce4a3ef8599441e3933233",
+          "bytes": 1787
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/observations.json",
+          "SHA256": "7b41bca71d93a608ff94497d35ca8aa12d7866578cb457cdcf15ab3b097cf2a1",
+          "bytes": 940036
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/producer_receipt.json",
+          "SHA256": "b326413636e18d1ed8f29bc620cb7a21cf838f9b8f8a1fc22874a5a4f0a67fed",
+          "bytes": 740
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/producer_seal.json",
+          "SHA256": "7d44f1ade1c8ff3437ec9350c54dd6a38c19f0fdf17adb10b337ce399f08bf24",
+          "bytes": 960
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/002/raw/R138_002_K-15-S_S0_STOCK/round135_endpoint.json",
+          "SHA256": "4ae1ee4d0a555bfbc2bf990880cbb3feb9da58fe85e402b709a4d4783776c533",
+          "bytes": 3152
+        }
+      ],
+      "original_manifest_SHA": "4fba11a23aadcf5723b964017def69b52c07dea45330f6c30edb5bc9046de14c"
+    },
+    {
+      "role": "K-20-S",
+      "method": "base",
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "archive": "results/unified_exact_round137/artifacts/campaign_012.zip",
+      "archive_SHA": "c9ebe9e0fef1f824e765450447b4e15759666bedf60886b0f73ce3addbb076c2",
+      "selected_members": [
+        {
+          "member": "results/unified_exact_round137/campaign/012/identity.json",
+          "SHA256": "4abb7fcc9ad36ebd1bc0ba0cafe7ac64b3074f3f590042364ca9eedb0e4306b6",
+          "bytes": 29138
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/audit.json",
+          "SHA256": "dd862e508c122432e5231a5da2216b0d32bcdae7c070f18e1fc4bf494789e2af",
+          "bytes": 28411156
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/adaptive_mass_decision_ledger.csv",
+          "SHA256": "a9a4ca125ff165d3bbe5dad41bda9ade97dd0cf7f5e7a1af5f3f7d0c5980d571",
+          "bytes": 1060
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/initial_witness.json",
+          "SHA256": "0481429579b640fe60e9ad726e4903bb86eadc6a4b72016520a13906111f4876",
+          "bytes": 653
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA256": "7dd2641dc3093686735d3206ff0044f362ba6ea31965fdec915cea819a17e04e",
+          "bytes": 834348
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA256": "2a6a36203c72fb83aa8df21f8a283a374e49adc0e8c92308dac3b640d5565b23",
+          "bytes": 850720
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/models/L0_epoch_0_generation_1.lp",
+          "SHA256": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+          "bytes": 834348
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log",
+          "SHA256": "0866bf285490adcb2e0f1319d498930725ef160cf76110e46272899c58242e2c",
+          "bytes": 2023
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.json",
+          "SHA256": "e014a9ae7a860c0e90bd3566c03dfa5fc5f553966e83fcbe6c67f61d1fa46cac",
+          "bytes": 560
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/native_logs/L0_c6_1_child_disjunction_target_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "9ec322a62cf06a8a5c69b9beb2f5b8b66d5fe79d6cb5d1eb63c310c172ed0379",
+          "bytes": 61738
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA256": "a2c110e0162ba6492d7400244527313f64bb6bbdf2aaa369e7fa72c93fc2e4b5",
+          "bytes": 24209
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA256": "ef73ed2b6dd40d603ccff6c4e58b5d69528c8d2b2a341c6e753937e06521d5cb",
+          "bytes": 560
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "9ec322a62cf06a8a5c69b9beb2f5b8b66d5fe79d6cb5d1eb63c310c172ed0379",
+          "bytes": 61738
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/paper_optimize_ledger.csv",
+          "SHA256": "daaf108f79dbdfad59507090fbb36ce934eb4ade408c8fcc5614145953b42309",
+          "bytes": 2164
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/observations.json",
+          "SHA256": "b14d3a59235b6810112cd5756ceca1d2abad670c2b786776d1e23193fe730520",
+          "bytes": 29823644
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/producer_receipt.json",
+          "SHA256": "a2a907173ac916462689c409497d0d5ef0fc835a8c38c33371b796935182ef43",
+          "bytes": 745
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/producer_seal.json",
+          "SHA256": "24ae6eb82d3b486c805098bb369e3ecf1cd918f847a3ca583430bc5e96cc60ac",
+          "bytes": 960
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/round135_endpoint.json",
+          "SHA256": "3d085aa226cf896760de54a663c1dfbf2d752a2375f4aad978544b0a86c98ddf",
+          "bytes": 3202
+        }
+      ],
+      "original_manifest_SHA": "39f3e2af20965c6986966b4c88127838d7cc6a47a1fed90760012b452634b8e9"
+    },
+    {
+      "role": "K-20-S",
+      "method": "both",
+      "commit": "1b19897ab5819ab3b7485ddc978954b45225f361",
+      "archive": "results/unified_exact_round138/artifacts/campaign_004.zip",
+      "archive_SHA": "3a72cf244289900260813586f64bc4c99e5d05125736ccf4ef0ec4c81a528ae0",
+      "selected_members": [
+        {
+          "member": "results/unified_exact_round138/campaign/004/identity.json",
+          "SHA256": "9267cf500f685bf4bb70066d2b3bd23914e4bc5dedc1090f366a7d034f22c678",
+          "bytes": 29135
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/audit.json",
+          "SHA256": "d05e5c05423403451e487d6370b9dd78f79f6f9e542462f6fb9c50c581547d92",
+          "bytes": 3032679
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/external/adaptive_mass_decision_ledger.csv",
+          "SHA256": "98ea51035ee236c2951e19e564534bccf15b73c62e21efdef53a6182ce350bbb",
+          "bytes": 665
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/external/initial_witness.json",
+          "SHA256": "0481429579b640fe60e9ad726e4903bb86eadc6a4b72016520a13906111f4876",
+          "bytes": 653
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA256": "87ecae3605f669d4833a3d24a3cdd98bcb6b9aa776d2cda49f76a98b63884530",
+          "bytes": 836539
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA256": "d53ec02368c8dcfe12ce54007687ecfedf05f79327c702142ef5c76e4c348672",
+          "bytes": 854008
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/external/models/L0_epoch_0_generation_1.lp",
+          "SHA256": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+          "bytes": 836540
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA256": "e212705cf6b0e173ce25d2189e620b3feac2b1721848c4b5a5c3656e6fb63d98",
+          "bytes": 5915
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA256": "2d1f0ad40e1382852e19cb05a8023a453e993ceca5af543984ebf419f6a0c217",
+          "bytes": 566
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "9ec322a62cf06a8a5c69b9beb2f5b8b66d5fe79d6cb5d1eb63c310c172ed0379",
+          "bytes": 61738
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/external/paper_optimize_ledger.csv",
+          "SHA256": "71e7417e98112bcfd7803348f20371e3fd10c914b51b93761aa6a7eb41648c28",
+          "bytes": 1791
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/observations.json",
+          "SHA256": "74e7953f4f69d7e3bab90e4b6d60f688b3ff5a2a1f9269c3bee8b7d10fe329e4",
+          "bytes": 3195296
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/producer_receipt.json",
+          "SHA256": "e2116b41faef78592a13071014988dc9e9616c5a2213bc425edb5e7d6ec156ba",
+          "bytes": 744
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/producer_seal.json",
+          "SHA256": "1ef681c41382122b8362cc575de925a49004d21893e54999933be78cea546c1a",
+          "bytes": 960
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/004/raw/R138_004_K-20-S_S0_STOCK/round135_endpoint.json",
+          "SHA256": "91d6146c3e92941ad356d9cff07ac0a53b417c7f8dccc17b0891ad0ad095c359",
+          "bytes": 3193
+        }
+      ],
+      "original_manifest_SHA": "4fba11a23aadcf5723b964017def69b52c07dea45330f6c30edb5bc9046de14c"
+    },
+    {
+      "role": "K-35-U",
+      "method": "base",
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "archive": "results/unified_exact_round137/artifacts/campaign_014.zip",
+      "archive_SHA": "59818f7207bdd115f3ea89dcf4ac95c4de956f868f070bc20e1176378b2b4cbb",
+      "selected_members": [
+        {
+          "member": "results/unified_exact_round137/campaign/014/identity.json",
+          "SHA256": "375a1da9f4797e62859b0045c3b7c5b436c2f04899ade2554bdf2521173ea3c6",
+          "bytes": 29156
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/audit.json",
+          "SHA256": "4a224d95627fb1f629fc1ed2dce6c08d194d4b853377224bdc204b5b2049ee16",
+          "bytes": 410668
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/external/adaptive_mass_decision_ledger.csv",
+          "SHA256": "a6536cd3262bd6ad3f72c7a930232103f8720d5be3efafbf985323891c1db275",
+          "bytes": 667
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/external/initial_witness.json",
+          "SHA256": "e179aaadc58812297b6254f0447341c861a33d190265787337f57ce8b0f8ec93",
+          "bytes": 965
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA256": "74f19a6563a0416c3a1696c692f8d742e110ae3a190a24b8300f9a45c03fbbca",
+          "bytes": 3568559
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA256": "8bf70f6d5ff12111b4fa907b99fbb6cf15f05e3b2a32726c48a9a2219d0b7281",
+          "bytes": 3589646
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/external/models/L0_epoch_0_generation_1.lp",
+          "SHA256": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+          "bytes": 3569749
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA256": "d04c9b802b1aaeaaed1a6f0a13f92fd2c876dda5e87b158f8ed651dd1899dfe8",
+          "bytes": 36191
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA256": "367ee88e5f0c3d577f92c2e9e5081c7b4389f06b87bd0b8d5801ef6db856fcd5",
+          "bytes": 566
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "68d54a24b0f26e6d68ada5164bb8ea46610d741efbf13f2b0e7c8da6539604c7",
+          "bytes": 193694
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/external/paper_optimize_ledger.csv",
+          "SHA256": "aa737049527bf0a38e0b417e0b52ad217076da20d5fb4af439a0a540eda364ad",
+          "bytes": 1785
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/observations.json",
+          "SHA256": "e0ffe38512ed1d161cdeaafeb043389a6da4a26621d86f7ee1bec3fb38e4422f",
+          "bytes": 471272
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/producer_receipt.json",
+          "SHA256": "286374d31eb393e0d1f163a99e58ee99f6f56271161ec75d3ad7e4985f96003b",
+          "bytes": 742
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/producer_seal.json",
+          "SHA256": "69606bff2b8cb5612deb87bc10706af606b21fb41587e754d06ed8fb687a59b1",
+          "bytes": 960
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/014/raw/R137_014_K-35-U_S0_S2/round135_endpoint.json",
+          "SHA256": "4e0e15564558bdd426cccb85c5593b9a68615985b32a4f9f92f41acdb53044f4",
+          "bytes": 3302
+        }
+      ],
+      "original_manifest_SHA": "39f3e2af20965c6986966b4c88127838d7cc6a47a1fed90760012b452634b8e9"
+    },
+    {
+      "role": "K-35-U",
+      "method": "both",
+      "commit": "1b19897ab5819ab3b7485ddc978954b45225f361",
+      "archive": "results/unified_exact_round138/artifacts/campaign_005.zip",
+      "archive_SHA": "5a2722043e118260fbc1b4bde747289bc14acd163d5d7d927f99cf1a03f252b2",
+      "selected_members": [
+        {
+          "member": "results/unified_exact_round138/campaign/005/identity.json",
+          "SHA256": "b24a50145ed53439ae7ba734003fd868e592b4051d6c725b5f6f915c2aaabd82",
+          "bytes": 29172
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/audit.json",
+          "SHA256": "7944668fc25c785f2564c1a5a5314720729e18c2dbcb6abff8d824e1a8faa59f",
+          "bytes": 334329
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/external/adaptive_mass_decision_ledger.csv",
+          "SHA256": "630e53754066736901f382fd4de910f6250dad141253c0a06a21f8da83b8b661",
+          "bytes": 582
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/external/initial_witness.json",
+          "SHA256": "e179aaadc58812297b6254f0447341c861a33d190265787337f57ce8b0f8ec93",
+          "bytes": 965
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA256": "bb478df4db779e6a61f782940d7153e0ebbb1a628b3191fb5d2fb94129f6333b",
+          "bytes": 3572345
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA256": "c2dc817220d8ecadb9efee962ac5bbe0fcfb74d0f4c384e4247d0d0deb5b238f",
+          "bytes": 3595338
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/external/models/L0_epoch_0_generation_1.lp",
+          "SHA256": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+          "bytes": 3573535
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA256": "2c5a56619f758a4dc31bec813868e05b01b6ecf6651d2d49c737060450f69083",
+          "bytes": 36232
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA256": "3674cb5ceb18390ee5fef74ed119dbbae91e0890fcd02093b2a3b87fc3cc88d4",
+          "bytes": 566
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "68d54a24b0f26e6d68ada5164bb8ea46610d741efbf13f2b0e7c8da6539604c7",
+          "bytes": 193694
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/external/paper_optimize_ledger.csv",
+          "SHA256": "6a54e7bb18941e8b1452c4d0ca38119e162b5afc94e6b3fbc9f97e5d515c1012",
+          "bytes": 1790
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/observations.json",
+          "SHA256": "6f33d776c272cbfae1565b900bfd856e31f79a01698036caa74dd3d45dd7b6a1",
+          "bytes": 394174
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/producer_receipt.json",
+          "SHA256": "349d6aa29527a135293d88201da37de30a162662d85a744d0d23edcade376a04",
+          "bytes": 744
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/producer_seal.json",
+          "SHA256": "76c9c0fe4a4e58a58d51365af71ec5e62d7d72d4309e32aac0d75dc534e9364c",
+          "bytes": 960
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/005/raw/R138_005_K-35-U_S0_STOCK/round135_endpoint.json",
+          "SHA256": "185dc7eed67be74c4842ae296307bae606e70c1733f9968d2f4360cba6a713cc",
+          "bytes": 3318
+        }
+      ],
+      "original_manifest_SHA": "4fba11a23aadcf5723b964017def69b52c07dea45330f6c30edb5bc9046de14c"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "base",
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "archive": "results/unified_exact_round137/artifacts/campaign_052.zip",
+      "archive_SHA": "9432f7877c80f7059d8597bca932327aab8c54ec36837a9d8ff5ea468a51f552",
+      "selected_members": [
+        {
+          "member": "results/unified_exact_round137/campaign/052/identity.json",
+          "SHA256": "888b7b4c4b1660aab8fbaafc133f3ac7d83f2cdfd8875ee00847ea18d55daa78",
+          "bytes": 29195
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/audit.json",
+          "SHA256": "2c01e473988ed65d5f953447175b8e2867dffe901196ae86c7a02fa1514c3266",
+          "bytes": 148220
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/adaptive_mass_decision_ledger.csv",
+          "SHA256": "0ecc11a1de119e4bb3308c0472e004ef5120fb43def64d112f626e0ac4bb29f3",
+          "bytes": 667
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/initial_witness.json",
+          "SHA256": "17b666a13235887df28a5d2f5c3f4a6be07b2a81748327b46f44198ae274fe9b",
+          "bytes": 1073
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA256": "8f2c6918c7db93a6aea21f12d98d13262de17c3f46ed8ae1566352e403f26f62",
+          "bytes": 3624617
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA256": "51ea03d12f8e97a0d945ccc357c0cbd400c57bd89ba02dd2bc093831a110c620",
+          "bytes": 3645444
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/models/L0_epoch_0_generation_1.lp",
+          "SHA256": "47231f37c61856b55fa7a820a6cde874b3591a001e780afb29eacf7777942584",
+          "bytes": 3624617
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA256": "7fef83d76bf576dbd3dcc177b5611abec34acdedf49944f22aa0242a074a1d25",
+          "bytes": 39420
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA256": "6c818cbc19963c1590330764ffd02c8facfd8ebc8bfe2821f7d096ac0aad6885",
+          "bytes": 566
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "f21ac8c0f502ed2d2540e36039388313334ff94bc2763888458c342690436db4",
+          "bytes": 198150
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/external/paper_optimize_ledger.csv",
+          "SHA256": "fe406ad7ca69fa4ffd0d3551804771b0e1078859fbaabb811c700c1907683dd2",
+          "bytes": 1799
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/observations.json",
+          "SHA256": "1288dd13a9da07903cc773d3bf80020bd9ad654fb241aed6713108a1400e34e7",
+          "bytes": 272188
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/producer_receipt.json",
+          "SHA256": "853accf4affeb69e164a3c467d483cc2742200cd5d10fb3d89b0a63b18f8fbad",
+          "bytes": 749
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/producer_seal.json",
+          "SHA256": "8f14be77b18f395c06c97183a39dc57fe618fa3caf47484b4452499259d6e553",
+          "bytes": 960
+        },
+        {
+          "member": "results/unified_exact_round137/campaign/052/raw/R137_052_R-B35-S-T2_S0_S2/round135_endpoint.json",
+          "SHA256": "4796e669619f9e6ae18d8acc5f9b8a76735a14d69549507a960a75cafc0b729a",
+          "bytes": 3320
+        }
+      ],
+      "original_manifest_SHA": "39f3e2af20965c6986966b4c88127838d7cc6a47a1fed90760012b452634b8e9"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "both",
+      "commit": "1b19897ab5819ab3b7485ddc978954b45225f361",
+      "archive": "results/unified_exact_round138/artifacts/campaign_007.zip",
+      "archive_SHA": "f35a6fe6cb8afe246e4e5efc818491bfd2f7801a4d06352c05b4315d2ffad52d",
+      "selected_members": [
+        {
+          "member": "results/unified_exact_round138/campaign/007/identity.json",
+          "SHA256": "e3929192cba39bab5c30d29ab91cf53f1cc5d206ba7b0c8f4d6836ef2d58ac3a",
+          "bytes": 29206
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/audit.json",
+          "SHA256": "e93d43d85131b65b2a039deeafaf677265a8a14f6337d864bafbce4f4f10a085",
+          "bytes": 167956
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/adaptive_mass_decision_ledger.csv",
+          "SHA256": "cf8013f71f461329fd74ba4bd1b583a480f7ce0345ee579b54825af944557e13",
+          "bytes": 666
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/initial_witness.json",
+          "SHA256": "17b666a13235887df28a5d2f5c3f4a6be07b2a81748327b46f44198ae274fe9b",
+          "bytes": 1073
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/models/L0.0_epoch_0_generation_2.lp",
+          "SHA256": "a77a029c2eecba3487721de73943b27ab35b20cb6c1494c0d7cbb8504b73451f",
+          "bytes": 3628403
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/models/L0.1_epoch_0_generation_3.lp",
+          "SHA256": "b3113d4d59c042ca9c834f620d1a2855aafb60216a0b32349a26ee8b296ef2fa",
+          "bytes": 3651136
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/models/L0_epoch_0_generation_1.lp",
+          "SHA256": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175",
+          "bytes": 3628403
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log",
+          "SHA256": "49a662781b197da86583f789de2c4755526e20e65511c24e1f9a2b6c643ac227",
+          "bytes": 38495
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.json",
+          "SHA256": "f816e8fe3730e62f467a0d977c37c4768a68116192d9fb1d9ef5f89b5fd39725",
+          "bytes": 566
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/native_logs/L0_terminal_mip.gurobi.log.round68.start.values.csv",
+          "SHA256": "f21ac8c0f502ed2d2540e36039388313334ff94bc2763888458c342690436db4",
+          "bytes": 198150
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/paper_optimize_ledger.csv",
+          "SHA256": "0e9aa536b90f7acf08a5137caf119c0c8c91554f685d53bb52e4c283a334fc89",
+          "bytes": 1816
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/observations.json",
+          "SHA256": "6db807f499dd22b87433c3f4516670be467eb927542cf6872ae6cbfe42961605",
+          "bytes": 232338
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/producer_receipt.json",
+          "SHA256": "ee44ffe17e917a544395764bddb435c54a56219e48e361482bb5ca1213c9ff99",
+          "bytes": 749
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/producer_seal.json",
+          "SHA256": "ff28350200e9df5ff93fbe654385c56e26c687212c6e6e913376278518ee452a",
+          "bytes": 960
+        },
+        {
+          "member": "results/unified_exact_round138/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/round135_endpoint.json",
+          "SHA256": "e7f0e892d246d1f911437c62174b521e34adbdbeb673545156d2d4dc4a48c11b",
+          "bytes": 3323
+        }
+      ],
+      "original_manifest_SHA": "4fba11a23aadcf5723b964017def69b52c07dea45330f6c30edb5bc9046de14c"
+    }
+  ],
+  "new_R140_references": [
+    {
+      "role": "K-35-U",
+      "method": "TC_STOCK",
+      "seed": 0,
+      "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+      "PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "carrier": {
+        "path": "results/unified_exact_round140/artifacts/campaign_attribution_001.zip",
+        "SHA256": "3d18c08e881ae2e4c1b5101bc905e64dd57bdb88d7c95df13f81803ee13af7fb",
+        "bytes": 2142741,
+        "members": 1623,
+        "member_index": "__round140_member_index__.json",
+        "member_index_SHA": "db4a6bc6e4d85ccfb15eb64a123a9059b28b616a43057527ed417eed5d0f030d"
+      },
+      "selected_members": {
+        "results/unified_exact_round140/campaign_attribution/001/identity.json": {
+          "SHA256": "1b4de706523501b38d3fbc1c7db73add7d7a046904fbfffdbd0f425d094d0ba1",
+          "bytes": 29743
+        },
+        "results/unified_exact_round140/campaign_attribution/001/raw/R140_attribution_001_K-35-U_S0_TC_STOCK/audit.json": {
+          "SHA256": "c60a96a9afc9c21549a8b44c537acc007b5273d714f677bad4c9633ee0cfc926",
+          "bytes": 567596
+        },
+        "results/unified_exact_round140/campaign_attribution/001/raw/R140_attribution_001_K-35-U_S0_TC_STOCK/external/paper_optimize_ledger.csv": {
+          "SHA256": "0328d808943a7dc45f7d11e62b21f71f4b49a592d7a0216acd3f17c0bb2493ca",
+          "bytes": 1912
+        },
+        "results/unified_exact_round140/campaign_attribution/001/raw/R140_attribution_001_K-35-U_S0_TC_STOCK/hga.csv.exchange/result.json": {
+          "SHA256": "1862033ad61a4c573a134fc0bff512eca9579a1e3d8edd94756a5bc11f2108f4",
+          "bytes": 216
+        },
+        "results/unified_exact_round140/campaign_attribution/001/raw/R140_attribution_001_K-35-U_S0_TC_STOCK/observations.json": {
+          "SHA256": "7dc8392a54b127eb1921f3bcc754280851332561bbef91c9471a38c949389924",
+          "bytes": 622117
+        },
+        "results/unified_exact_round140/campaign_attribution/001/raw/R140_attribution_001_K-35-U_S0_TC_STOCK/result.json": {
+          "SHA256": "182e6d50ce9299c9f647dc1eaab489cb050aa89fb71a57380be44aa005825200",
+          "bytes": 98248
+        },
+        "results/unified_exact_round140/campaign_attribution/001/raw/R140_attribution_001_K-35-U_S0_TC_STOCK/round135_endpoint.json": {
+          "SHA256": "2edef38f06fb0de3ee536670f7dbbdea596450890473920600e27d93fb05cee5",
+          "bytes": 3364
+        },
+        "results/unified_exact_round140/campaign_attribution/001/raw/R140_attribution_001_K-35-U_S0_TC_STOCK/round140_control_audit.json": {
+          "SHA256": "e8754efc884a46847e3a187b140d92e58d1b587dca144ebdac25b56750846714",
+          "bytes": 326
+        },
+        "results/unified_exact_round140/campaign_attribution/001/raw/R140_attribution_001_K-35-U_S0_TC_STOCK/verification_closeout.json": {
+          "SHA256": "9bde594636ae01947ad50e11124e184513504c9feeebd6612aef426a488006da",
+          "bytes": 807
+        }
+      },
+      "metadata": "results/unified_exact_round140/reports/full.json"
+    },
+    {
+      "role": "K-15-S",
+      "method": "TC_STOCK",
+      "seed": 0,
+      "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+      "PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "carrier": {
+        "path": "results/unified_exact_round140/artifacts/campaign_combination_001.zip",
+        "SHA256": "b35d2e93282ebf732144dd07a5044c75072349bbf4d94dab7df25e0a5d57d1fa",
+        "bytes": 2942735,
+        "members": 4634,
+        "member_index": "__round140_member_index__.json",
+        "member_index_SHA": "49d4f36fe91e6c4948c16070b4cae544901305cc65521e49095803e1521ecff3"
+      },
+      "selected_members": {
+        "results/unified_exact_round140/campaign_combination/001/identity.json": {
+          "SHA256": "d0e51b51a6e38ff3caa8b0aaf620c2eb53400376d3853c3f88b1188694b8ffe2",
+          "bytes": 29717
+        },
+        "results/unified_exact_round140/campaign_combination/001/raw/R140_combination_001_K-15-S_S0_TC_STOCK/audit.json": {
+          "SHA256": "36c88e308b6b6e64789c3bb832d432e633491da83651a3f071bf41df551a4cd9",
+          "bytes": 1580204
+        },
+        "results/unified_exact_round140/campaign_combination/001/raw/R140_combination_001_K-15-S_S0_TC_STOCK/external/paper_optimize_ledger.csv": {
+          "SHA256": "c3bcd78639944abb0f96f5fb487d319bf4bef08f61630d6d4a92c18f53e652a8",
+          "bytes": 2337
+        },
+        "results/unified_exact_round140/campaign_combination/001/raw/R140_combination_001_K-15-S_S0_TC_STOCK/hga.csv.exchange/result.json": {
+          "SHA256": "513627644a464a123fa863abc4d16803660556f47ea3307eac33edc4b80dc6cf",
+          "bytes": 214
+        },
+        "results/unified_exact_round140/campaign_combination/001/raw/R140_combination_001_K-15-S_S0_TC_STOCK/observations.json": {
+          "SHA256": "3c8b2b0b1fd5169e3331df029bfc3f100597b13d2501b3efd219932e67e305b8",
+          "bytes": 1678434
+        },
+        "results/unified_exact_round140/campaign_combination/001/raw/R140_combination_001_K-15-S_S0_TC_STOCK/result.json": {
+          "SHA256": "b540086fd02bd30e8a15c74faf1e62b31f5c206f94dce0638c7be47caabd9b45",
+          "bytes": 96945
+        },
+        "results/unified_exact_round140/campaign_combination/001/raw/R140_combination_001_K-15-S_S0_TC_STOCK/round135_endpoint.json": {
+          "SHA256": "faa827c30577a5a6ab71b02d6cfd7e79812cb1a1422ae3d1e4bac57baf654605",
+          "bytes": 3194
+        },
+        "results/unified_exact_round140/campaign_combination/001/raw/R140_combination_001_K-15-S_S0_TC_STOCK/round140_control_audit.json": {
+          "SHA256": "e8754efc884a46847e3a187b140d92e58d1b587dca144ebdac25b56750846714",
+          "bytes": 326
+        },
+        "results/unified_exact_round140/campaign_combination/001/raw/R140_combination_001_K-15-S_S0_TC_STOCK/verification_closeout.json": {
+          "SHA256": "74b9e9fb2c1cc90d943b11f2c8e9e4a9ca573aec304ffd0ea0e6f091707c26ce",
+          "bytes": 807
+        }
+      },
+      "metadata": "results/unified_exact_round140/reports/full.json"
+    },
+    {
+      "role": "K-20-S",
+      "method": "TC_STOCK",
+      "seed": 0,
+      "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+      "PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "carrier": {
+        "path": "results/unified_exact_round140/artifacts/campaign_incremental_001.zip",
+        "SHA256": "3668f0de1d9222a41c2ec911dd66ef7f5603de932660d74aa358d525f32cea4f",
+        "bytes": 8781188,
+        "members": 14542,
+        "member_index": "__round140_member_index__.json",
+        "member_index_SHA": "79b0961cd6b485b050a4574248bba39946e513d34d082a6c4521308e65b26b30"
+      },
+      "selected_members": {
+        "results/unified_exact_round140/campaign_incremental/001/identity.json": {
+          "SHA256": "5cfd5eb83fa8e7e654dc06d52f83bbefe770c9368c71651b8f4c58a8ce777f9a",
+          "bytes": 29726
+        },
+        "results/unified_exact_round140/campaign_incremental/001/raw/R140_incremental_001_K-20-S_S0_TC_STOCK/audit.json": {
+          "SHA256": "e018123dade1f5e7fdfc4773ba94552e2595b0fd4b26af6c95e5b1dd85ced14b",
+          "bytes": 5036333
+        },
+        "results/unified_exact_round140/campaign_incremental/001/raw/R140_incremental_001_K-20-S_S0_TC_STOCK/external/paper_optimize_ledger.csv": {
+          "SHA256": "f35c7e1a960aec84b2e1755e3b4c5e2129fd6676d1dd0397def4cdf4302b7e69",
+          "bytes": 2341
+        },
+        "results/unified_exact_round140/campaign_incremental/001/raw/R140_incremental_001_K-20-S_S0_TC_STOCK/hga.csv.exchange/result.json": {
+          "SHA256": "d5d398d716031889a10ef6245e41d36e9f6af842f6f4b8494fddc07ecd33c891",
+          "bytes": 215
+        },
+        "results/unified_exact_round140/campaign_incremental/001/raw/R140_incremental_001_K-20-S_S0_TC_STOCK/observations.json": {
+          "SHA256": "a64b2841cbf7b94dd9cfe5c857bcebc1dfa6e71c737e526f2e5453b6e189268a",
+          "bytes": 5308001
+        },
+        "results/unified_exact_round140/campaign_incremental/001/raw/R140_incremental_001_K-20-S_S0_TC_STOCK/result.json": {
+          "SHA256": "7293ab4905598a5efaaf27b1260c59490b5c5e8a12e18bb5f5227e0d571d9d9f",
+          "bytes": 97578
+        },
+        "results/unified_exact_round140/campaign_incremental/001/raw/R140_incremental_001_K-20-S_S0_TC_STOCK/round135_endpoint.json": {
+          "SHA256": "4958c8ec811ad112394510b0e8707e78e988c63cdd095a9dfba2e700a281b630",
+          "bytes": 3236
+        },
+        "results/unified_exact_round140/campaign_incremental/001/raw/R140_incremental_001_K-20-S_S0_TC_STOCK/round140_control_audit.json": {
+          "SHA256": "e8754efc884a46847e3a187b140d92e58d1b587dca144ebdac25b56750846714",
+          "bytes": 326
+        },
+        "results/unified_exact_round140/campaign_incremental/001/raw/R140_incremental_001_K-20-S_S0_TC_STOCK/verification_closeout.json": {
+          "SHA256": "e459b5bc9f2c6e841f8f0f49fc772879f8cb08dc3a058346d0f74cb95212c811",
+          "bytes": 807
+        }
+      },
+      "metadata": "results/unified_exact_round140/reports/full.json"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "TC_STOCK",
+      "seed": 0,
+      "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+      "PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "carrier": {
+        "path": "results/unified_exact_round140/artifacts/campaign_incremental_002.zip",
+        "SHA256": "dcc648b8a4f6253bcdefdd660ddf388429a8fa212a04f759ac28d410c96b2415",
+        "bytes": 1627128,
+        "members": 612,
+        "member_index": "__round140_member_index__.json",
+        "member_index_SHA": "742243ebea95ce8b76b7a129a0cb099025a85c5569269a699173f00f708ec16f"
+      },
+      "selected_members": {
+        "results/unified_exact_round140/campaign_incremental/002/identity.json": {
+          "SHA256": "b2d1a18b00a339f86310879bc6e2c7f9cab884e77e99c3392c4fdf18ab5ac7d9",
+          "bytes": 29777
+        },
+        "results/unified_exact_round140/campaign_incremental/002/raw/R140_incremental_002_R-B35-S-T2_S0_TC_STOCK/audit.json": {
+          "SHA256": "10601910fb1b68a7a4a559cc4a3fb8f0e21e00bdd1b0aa3b510f7dfc40248249",
+          "bytes": 206084
+        },
+        "results/unified_exact_round140/campaign_incremental/002/raw/R140_incremental_002_R-B35-S-T2_S0_TC_STOCK/external/paper_optimize_ledger.csv": {
+          "SHA256": "00a0efe73437944d40419449e1c7e5f1f3b37902181b12dfa357d9205333c625",
+          "bytes": 2346
+        },
+        "results/unified_exact_round140/campaign_incremental/002/raw/R140_incremental_002_R-B35-S-T2_S0_TC_STOCK/hga.csv.exchange/result.json": {
+          "SHA256": "564359fd6ee98292ea9c943065744bf3056b5b8419035c59b94aa6c7497dbbc0",
+          "bytes": 216
+        },
+        "results/unified_exact_round140/campaign_incremental/002/raw/R140_incremental_002_R-B35-S-T2_S0_TC_STOCK/observations.json": {
+          "SHA256": "bdc4f20314512080a1f8d2a4ae07269a6017c19309378c34c8fb2b98e70a5a26",
+          "bytes": 328796
+        },
+        "results/unified_exact_round140/campaign_incremental/002/raw/R140_incremental_002_R-B35-S-T2_S0_TC_STOCK/result.json": {
+          "SHA256": "25ce7597a28ceb0578cb84bb951a6b72867a2448453e8912e9532db463c632d5",
+          "bytes": 98876
+        },
+        "results/unified_exact_round140/campaign_incremental/002/raw/R140_incremental_002_R-B35-S-T2_S0_TC_STOCK/round135_endpoint.json": {
+          "SHA256": "a147111dafe0ff8328a6ac0adaaf5b0fa97381b10efae42b881a5c3e00b7dd1d",
+          "bytes": 3372
+        },
+        "results/unified_exact_round140/campaign_incremental/002/raw/R140_incremental_002_R-B35-S-T2_S0_TC_STOCK/round140_control_audit.json": {
+          "SHA256": "e8754efc884a46847e3a187b140d92e58d1b587dca144ebdac25b56750846714",
+          "bytes": 326
+        },
+        "results/unified_exact_round140/campaign_incremental/002/raw/R140_incremental_002_R-B35-S-T2_S0_TC_STOCK/verification_closeout.json": {
+          "SHA256": "40d5e214326d7afcd9754fc2e4d58525f5826486edb7867e97c0893c4eef6e00",
+          "bytes": 807
+        }
+      },
+      "metadata": "results/unified_exact_round140/reports/full.json"
+    },
+    {
+      "role": "K-20-S",
+      "method": "TC2_STOCK",
+      "seed": 0,
+      "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+      "PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "carrier": {
+        "path": "results/unified_exact_round140/artifacts/campaign_primary_001.zip",
+        "SHA256": "6514e70898d4c747c36484a3b138801bd1e5762c6348adf6f60f4812776875ee",
+        "bytes": 4825695,
+        "members": 7842,
+        "member_index": "__round140_member_index__.json",
+        "member_index_SHA": "d4b4841dcdcd2b05680905d43ad9ae866ebb01417fd77a3c387f095e8a789f4d"
+      },
+      "selected_members": {
+        "results/unified_exact_round140/campaign_primary/001/identity.json": {
+          "SHA256": "e1155b9a4ebb1f45a0fe6e2b3e6040272d06bf9f59a368d35cbc47a9141c4a24",
+          "bytes": 29663
+        },
+        "results/unified_exact_round140/campaign_primary/001/raw/R140_primary_001_K-20-S_S0_TC2_STOCK/audit.json": {
+          "SHA256": "055a36315ecb12882e611f960ef4cb62962510ff2ef4646a0940ecf32d448407",
+          "bytes": 2702838
+        },
+        "results/unified_exact_round140/campaign_primary/001/raw/R140_primary_001_K-20-S_S0_TC2_STOCK/external/paper_optimize_ledger.csv": {
+          "SHA256": "648b5b25930f3ba1fa5f6954dc00b3f475d79e45d96d517132b65c58fa04f78c",
+          "bytes": 2289
+        },
+        "results/unified_exact_round140/campaign_primary/001/raw/R140_primary_001_K-20-S_S0_TC2_STOCK/hga.csv.exchange/result.json": {
+          "SHA256": "d5d398d716031889a10ef6245e41d36e9f6af842f6f4b8494fddc07ecd33c891",
+          "bytes": 215
+        },
+        "results/unified_exact_round140/campaign_primary/001/raw/R140_primary_001_K-20-S_S0_TC2_STOCK/observations.json": {
+          "SHA256": "88b7ecc9177411021e83be6c8c270b751dfded8666079e2d9ab7e9dd1845c12f",
+          "bytes": 2876598
+        },
+        "results/unified_exact_round140/campaign_primary/001/raw/R140_primary_001_K-20-S_S0_TC2_STOCK/result.json": {
+          "SHA256": "7a2f1dd3f8aac428ea1ac21cc6e1feb1a1b368d9c3a4676d7b6d9c663818a158",
+          "bytes": 97401
+        },
+        "results/unified_exact_round140/campaign_primary/001/raw/R140_primary_001_K-20-S_S0_TC2_STOCK/round135_endpoint.json": {
+          "SHA256": "ecbccdc43bb0a699cec95b8080e1999086db9866bf85855e56e350502b64f201",
+          "bytes": 3228
+        },
+        "results/unified_exact_round140/campaign_primary/001/raw/R140_primary_001_K-20-S_S0_TC2_STOCK/round140_control_audit.json": {
+          "SHA256": "e64c060448e46c810b258070ab1a06dac74b559e35dc3a0ce1048eaffdce21c9",
+          "bytes": 327
+        },
+        "results/unified_exact_round140/campaign_primary/001/raw/R140_primary_001_K-20-S_S0_TC2_STOCK/verification_closeout.json": {
+          "SHA256": "7a6ccd2e0a49776d65ffc3a06c889e2198c6c3ea9e12346471c00de7073cfbe1",
+          "bytes": 807
+        }
+      },
+      "metadata": "results/unified_exact_round140/reports/full.json"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "method": "TC2_STOCK",
+      "seed": 0,
+      "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+      "PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "carrier": {
+        "path": "results/unified_exact_round140/artifacts/campaign_primary_002.zip",
+        "SHA256": "824273993d6f56de9df633665505be4871c3856879f01b46e2d926b024a8752e",
+        "bytes": 1574276,
+        "members": 524,
+        "member_index": "__round140_member_index__.json",
+        "member_index_SHA": "eb57c740f9e68812a0d4fa2cd652cc82b1d18f19bafca1dfce244a156ddac50f"
+      },
+      "selected_members": {
+        "results/unified_exact_round140/campaign_primary/002/identity.json": {
+          "SHA256": "1d27bd31a424a69fe59570f89cbe638fe5c5f57f42e76b29c555615f68c2b48a",
+          "bytes": 29714
+        },
+        "results/unified_exact_round140/campaign_primary/002/raw/R140_primary_002_R-B35-S-T2_S0_TC2_STOCK/audit.json": {
+          "SHA256": "4961666dae59ce9aecbdb2fd2c80bf2fbfcc26cb9aeb57f8811d7a89ffb2b3d3",
+          "bytes": 175738
+        },
+        "results/unified_exact_round140/campaign_primary/002/raw/R140_primary_002_R-B35-S-T2_S0_TC2_STOCK/external/paper_optimize_ledger.csv": {
+          "SHA256": "c0129ced41fcae17e27e5400a5ed8bbf25cc354e8d0622eecfb0583f4fd8dae6",
+          "bytes": 2316
+        },
+        "results/unified_exact_round140/campaign_primary/002/raw/R140_primary_002_R-B35-S-T2_S0_TC2_STOCK/hga.csv.exchange/result.json": {
+          "SHA256": "564359fd6ee98292ea9c943065744bf3056b5b8419035c59b94aa6c7497dbbc0",
+          "bytes": 216
+        },
+        "results/unified_exact_round140/campaign_primary/002/raw/R140_primary_002_R-B35-S-T2_S0_TC2_STOCK/observations.json": {
+          "SHA256": "dfa5943b7d3568dc57ad9a848d2d8833388bcee6d268c273d93816106f889c35",
+          "bytes": 289268
+        },
+        "results/unified_exact_round140/campaign_primary/002/raw/R140_primary_002_R-B35-S-T2_S0_TC2_STOCK/result.json": {
+          "SHA256": "0f951737c3412d8370901f151114347d9bdb31e83a47ffa4965272a519baa64e",
+          "bytes": 98635
+        },
+        "results/unified_exact_round140/campaign_primary/002/raw/R140_primary_002_R-B35-S-T2_S0_TC2_STOCK/round135_endpoint.json": {
+          "SHA256": "8e3f0edcd1fbabb074564841c3291bd99538f3eba0aa93aff92317c4d86a3c70",
+          "bytes": 3358
+        },
+        "results/unified_exact_round140/campaign_primary/002/raw/R140_primary_002_R-B35-S-T2_S0_TC2_STOCK/round140_control_audit.json": {
+          "SHA256": "e64c060448e46c810b258070ab1a06dac74b559e35dc3a0ce1048eaffdce21c9",
+          "bytes": 327
+        },
+        "results/unified_exact_round140/campaign_primary/002/raw/R140_primary_002_R-B35-S-T2_S0_TC2_STOCK/verification_closeout.json": {
+          "SHA256": "6014aa737b49a6fe3f5dc1980660799fe98a864392fce4688970702ef7d9fff7",
+          "bytes": 807
+        }
+      },
+      "metadata": "results/unified_exact_round140/reports/full.json"
+    },
+    {
+      "role": "K-15-S",
+      "method": "TC2_STOCK",
+      "seed": 0,
+      "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+      "PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "carrier": {
+        "path": "results/unified_exact_round140/artifacts/campaign_primary_003.zip",
+        "SHA256": "d967c37f807d79108c0452c8b4268a9ea73549e096a3c887de7a85b27dc1c69f",
+        "bytes": 1780799,
+        "members": 2680,
+        "member_index": "__round140_member_index__.json",
+        "member_index_SHA": "e9935f4da8a0193bcd5508b4337103793307f8e709ab98d6c0cb157df808432c"
+      },
+      "selected_members": {
+        "results/unified_exact_round140/campaign_primary/003/identity.json": {
+          "SHA256": "afe6279aef10f66856ab952923e5a12945ed2564f483a5ec64a0fee5d2baf2eb",
+          "bytes": 29654
+        },
+        "results/unified_exact_round140/campaign_primary/003/raw/R140_primary_003_K-15-S_S0_TC2_STOCK/audit.json": {
+          "SHA256": "c9d6c74473e71f679160a15b58d44febdee54724aafae93bc099cc4192f5b52a",
+          "bytes": 926003
+        },
+        "results/unified_exact_round140/campaign_primary/003/raw/R140_primary_003_K-15-S_S0_TC2_STOCK/external/paper_optimize_ledger.csv": {
+          "SHA256": "facb4f58b54bb18aa774d7142053223136720cb647b9a6bb1b78e2d58aa72405",
+          "bytes": 2289
+        },
+        "results/unified_exact_round140/campaign_primary/003/raw/R140_primary_003_K-15-S_S0_TC2_STOCK/hga.csv.exchange/result.json": {
+          "SHA256": "513627644a464a123fa863abc4d16803660556f47ea3307eac33edc4b80dc6cf",
+          "bytes": 214
+        },
+        "results/unified_exact_round140/campaign_primary/003/raw/R140_primary_003_K-15-S_S0_TC2_STOCK/observations.json": {
+          "SHA256": "d66f754293eb301ea193fc283d37594cc7057527371a63bbeadc8d5fa3af8d1a",
+          "bytes": 972826
+        },
+        "results/unified_exact_round140/campaign_primary/003/raw/R140_primary_003_K-15-S_S0_TC2_STOCK/result.json": {
+          "SHA256": "6019b63aa111a6c0c78e320253923c6953f25120161ffdd9317d340a82c57acf",
+          "bytes": 96793
+        },
+        "results/unified_exact_round140/campaign_primary/003/raw/R140_primary_003_K-15-S_S0_TC2_STOCK/round135_endpoint.json": {
+          "SHA256": "fbd20572ffba50f7ace33d8a5e9b8e3f2958ea5f9a474ac87c0782c7ef297a59",
+          "bytes": 3186
+        },
+        "results/unified_exact_round140/campaign_primary/003/raw/R140_primary_003_K-15-S_S0_TC2_STOCK/round140_control_audit.json": {
+          "SHA256": "e64c060448e46c810b258070ab1a06dac74b559e35dc3a0ce1048eaffdce21c9",
+          "bytes": 327
+        },
+        "results/unified_exact_round140/campaign_primary/003/raw/R140_primary_003_K-15-S_S0_TC2_STOCK/verification_closeout.json": {
+          "SHA256": "65f3e042aa61adb7cf6edb38576745db5add067a806bc2886b076f52932d6c7a",
+          "bytes": 807
+        }
+      },
+      "metadata": "results/unified_exact_round140/reports/full.json"
+    },
+    {
+      "role": "K-35-U",
+      "method": "TC2_STOCK",
+      "seed": 0,
+      "source_commit": "81ab886e23220be97a858e66961056cef727d074",
+      "PE_SHA": "0863d618aafae1e28b589d1874d0d9328ed89c6225ea0d880ba63ea2574112e1",
+      "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+      "carrier": {
+        "path": "results/unified_exact_round140/artifacts/campaign_primary_004.zip",
+        "SHA256": "7179731c4e5f6d1e154962169d9f25b5e383b1d5dfc0f64e1c7d6d6a7f0f9a3c",
+        "bytes": 1749745,
+        "members": 906,
+        "member_index": "__round140_member_index__.json",
+        "member_index_SHA": "0d26f5559e5b284950407240b7e501bdfb8d42edb652049463b5cd7b0706c338"
+      },
+      "selected_members": {
+        "results/unified_exact_round140/campaign_primary/004/identity.json": {
+          "SHA256": "789f5be64d2f492416399daa970362382304cbcb11a95857e6b50c27d0429d77",
+          "bytes": 29680
+        },
+        "results/unified_exact_round140/campaign_primary/004/raw/R140_primary_004_K-35-U_S0_TC2_STOCK/audit.json": {
+          "SHA256": "9203204fbe94bcfc8471a4dc261e1624dff2c71f967f25eb6e141b9b5a804a04",
+          "bytes": 324367
+        },
+        "results/unified_exact_round140/campaign_primary/004/raw/R140_primary_004_K-35-U_S0_TC2_STOCK/external/paper_optimize_ledger.csv": {
+          "SHA256": "fc4b86c10d7e71746d80fd9f2f0cb1ab16c60c3c435b5b97179d53fd23d47e96",
+          "bytes": 2295
+        },
+        "results/unified_exact_round140/campaign_primary/004/raw/R140_primary_004_K-35-U_S0_TC2_STOCK/hga.csv.exchange/result.json": {
+          "SHA256": "1862033ad61a4c573a134fc0bff512eca9579a1e3d8edd94756a5bc11f2108f4",
+          "bytes": 216
+        },
+        "results/unified_exact_round140/campaign_primary/004/raw/R140_primary_004_K-35-U_S0_TC2_STOCK/observations.json": {
+          "SHA256": "1439a9e3e4d421ab934e62642d64df8a1d496732c78e40d0e4a5ad5b7bab3cde",
+          "bytes": 340314
+        },
+        "results/unified_exact_round140/campaign_primary/004/raw/R140_primary_004_K-35-U_S0_TC2_STOCK/result.json": {
+          "SHA256": "4faddb38d6a804e84a71a2f493130aff478ace294a4e8353d2365f10ade18d35",
+          "bytes": 98002
+        },
+        "results/unified_exact_round140/campaign_primary/004/raw/R140_primary_004_K-35-U_S0_TC2_STOCK/round135_endpoint.json": {
+          "SHA256": "88c94aa24af6980f2a96a028ff9be6a239f377d32a7642aae17850061700d761",
+          "bytes": 3355
+        },
+        "results/unified_exact_round140/campaign_primary/004/raw/R140_primary_004_K-35-U_S0_TC2_STOCK/round140_control_audit.json": {
+          "SHA256": "e64c060448e46c810b258070ab1a06dac74b559e35dc3a0ce1048eaffdce21c9",
+          "bytes": 327
+        },
+        "results/unified_exact_round140/campaign_primary/004/raw/R140_primary_004_K-35-U_S0_TC2_STOCK/verification_closeout.json": {
+          "SHA256": "4829d54e71723f2f01afec3e97dd0edd28bd5c053ec5d78b11501b006992f462",
+          "bytes": 807
+        }
+      },
+      "metadata": "results/unified_exact_round140/reports/full.json"
+    }
+  ],
+  "selected_continuous_members": {
+    "commit": "15e401f794bb53e31c5848e0edabf0b4153ca678",
+    "carrier": "results\\unified_exact_round140\\artifacts\\diagnostics_and_failures.zip",
+    "carrier_SHA": "2cb1ab936753ce9ac26ae1f970b070b2751190af79f6a80a8b0f5d254902bf5f",
+    "members": [
+      {
+        "member": "results/unified_exact_round140/roots/K-35-U/scope.json",
+        "SHA256": "c15a4f2d92a668a223158f9f02dd3e33a1a15936d609e83b2dec1aef551d1add",
+        "bytes": 10625
+      },
+      {
+        "member": "results/unified_exact_round140/roots/K-35-U/additions.json",
+        "SHA256": "2c29686ff727805d5358c18a9c56284ab902aebe9cfe04c688a7388bc52adeb9",
+        "bytes": 620047
+      },
+      {
+        "member": "results/unified_exact_round140/LP/08_K-35-U_tc2_stock/result.json",
+        "SHA256": "85f1ea227265daa8f9578f12d69aa90d31102404aa0a8201526c622a4a540715",
+        "bytes": 1782
+      },
+      {
+        "member": "results/unified_exact_round140/LP/08_K-35-U_tc2_stock/solution.json.gz",
+        "SHA256": "a07b22f271eee21aeee61046cfc615e3b3f4c75c20e2d148d88d244e475af97a",
+        "bytes": 31767
+      },
+      {
+        "member": "results/unified_exact_round140/inherited/roots/K-35-U/stock_export/original.lp",
+        "SHA256": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+        "bytes": 3573535
+      },
+      {
+        "member": "results/unified_exact_round140/roots/R-B35-S-T2/scope.json",
+        "SHA256": "69fb2866b403b4e49f7666b0440af8244476bb4409458937b2ea3c4a3eec107d",
+        "bytes": 2022
+      },
+      {
+        "member": "results/unified_exact_round140/roots/R-B35-S-T2/additions.json",
+        "SHA256": "76ea008e2f7fdac39fe2b115a33d7a670d49f6e09acbcd2f1ff89bff7e6497bb",
+        "bytes": 504659
+      },
+      {
+        "member": "results/unified_exact_round140/LP/05_R-B35-S-T2_tc2_stock/result.json",
+        "SHA256": "4fd1a06a3eeb1f5f7c5d2431bb8688838ccc138c9e9d2c503afdc46666a26b73",
+        "bytes": 1788
+      },
+      {
+        "member": "results/unified_exact_round140/LP/05_R-B35-S-T2_tc2_stock/solution.json.gz",
+        "SHA256": "290482f24ec77d2d13c862bdcbfb13685167e7c3e6c0250979207059289f928f",
+        "bytes": 33218
+      },
+      {
+        "member": "results/unified_exact_round140/inherited/campaign/007/raw/R138_007_R-B35-S-T2_S0_STOCK/external/models/L0_epoch_0_generation_1.lp",
+        "SHA256": "462b935de3b9abc8cb779edd25f2dd354cab09bc404885fa8e0b7c36f8045175",
+        "bytes": 3628403
+      },
+      {
+        "member": "results/unified_exact_round140/roots/K-20-S/scope.json",
+        "SHA256": "40dbe47a50982f0d81056417763e31755a8f6bfdb0d32df8217e24bd05c73795",
+        "bytes": 7880
+      },
+      {
+        "member": "results/unified_exact_round140/roots/K-20-S/additions.json",
+        "SHA256": "6b3c1bded01453e4dc2cb8622f657826d5787d4695e3af3c90ea5d133338427a",
+        "bytes": 425127
+      },
+      {
+        "member": "results/unified_exact_round140/LP/01_K-20-S_tc2_stock/result.json",
+        "SHA256": "f27e1a48cb115125d290e4cd51f8a94bfa00b15d993fa85101ba2b146d5f5f67",
+        "bytes": 1781
+      },
+      {
+        "member": "results/unified_exact_round140/LP/01_K-20-S_tc2_stock/solution.json.gz",
+        "SHA256": "39fb7b982d104abd3e11bb5f81812aaabde6bf0364a96b55a3e620c34fa51393",
+        "bytes": 11315
+      },
+      {
+        "member": "results/unified_exact_round140/inherited/roots/K-20-S/stock_export_exact_cutoff/original.lp",
+        "SHA256": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+        "bytes": 836540
+      },
+      {
+        "member": "results/unified_exact_round140/roots/R-X35-S-T2/scope.json",
+        "SHA256": "9daef382efdd0f0591e5ea01a97aaf0f111baa55f52934c4b4218da8992c0a7b",
+        "bytes": 10606
+      },
+      {
+        "member": "results/unified_exact_round140/roots/R-X35-S-T2/additions.json",
+        "SHA256": "e47a6314c7839bcf21b7fbbd40aaadbc0eaf54fcdd8ec4b574f1df77214995ad",
+        "bytes": 349785
+      },
+      {
+        "member": "results/unified_exact_round140/LP/07_R-X35-S-T2_tc2_stock/result.json",
+        "SHA256": "8164c96713b3a89861dc6dd02e6c2d1f48acb4d04d786fc04986d8e73c36022e",
+        "bytes": 1805
+      },
+      {
+        "member": "results/unified_exact_round140/LP/07_R-X35-S-T2_tc2_stock/solution.json.gz",
+        "SHA256": "7f0939c2daff248aa1f2254fd19c353dc5f11181b3119480e24ad967e0c14788",
+        "bytes": 30414
+      },
+      {
+        "member": "results/unified_exact_round140/inherited/roots/R-X35-S-T2/stock_export_exact_cutoff/original.lp",
+        "SHA256": "644b58945bf548cc787aa1568cf5577be355fc649d3515a67977f84ff34b12ec",
+        "bytes": 3578009
+      },
+      {
+        "member": "results/unified_exact_round140/roots/R-X20-S-T1/scope.json",
+        "SHA256": "b9c5e4121bb5eb7d43d10659f2d4072c7cce51247e0ba2e0c393868a7bb548b6",
+        "bytes": 7635
+      },
+      {
+        "member": "results/unified_exact_round140/roots/R-X20-S-T1/additions.json",
+        "SHA256": "0d7a5aa4da95585e216873925c8cd249877e72dacda9cd54e3ca4b2a95f9a50a",
+        "bytes": 116618
+      },
+      {
+        "member": "results/unified_exact_round140/LP/09_R-X20-S-T1_tc2_stock/result.json",
+        "SHA256": "fa01687351d342e601cf80f1198cfcfd9f506db6d97d1d7723a0ad496fc4523e",
+        "bytes": 1788
+      },
+      {
+        "member": "results/unified_exact_round140/LP/09_R-X20-S-T1_tc2_stock/solution.json.gz",
+        "SHA256": "05dde7e4a067ee2ea0d958a773572cc54b76220142d7094f03d735c3f777ccf0",
+        "bytes": 8430
+      },
+      {
+        "member": "results/unified_exact_round140/inherited/roots/R-X20-S-T1/stock_export_exact_cutoff/original.lp",
+        "SHA256": "80ef9015788208bc8f5c8404a97174cd2f732d1a278430b12624e3cc75c86901",
+        "bytes": 742979
+      }
+    ],
+    "new_Optimize": 0
+  },
+  "Optimize": 0,
+  "scope": "Accepted fixed references and necessary member identities; no old full-raw recovery or public acceptance repeated."
+}
