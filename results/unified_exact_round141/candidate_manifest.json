@@ -1,6 +1,6 @@
 {
   "schema": "round141-root-count-disjunction-v1",
-  "source_commit": "bc75925f2accc91c99598701616765802d123418",
+  "source_commit": "0b6148c22e572e7151bb5c90b4746cb0d7f706e1",
   "base": "d00bcf41520bd5bbbdc81096165deba25eae8023",
   "source_hashes": {
     "src/Bounds.cpp": "05c6e795b4c22c27ae55dbca07a99901006259cc56fb3e3ae0fc259bace561ed",
@@ -39,7 +39,7 @@
     "src/NativeEvidenceJournal.cpp": "4812130dff0c605102a4bedca94632684d65ff2bff283c314136578afc49de0d",
     "src/NativeOtB1.cpp": "e4722c675c6470d85f369a80304adace4403b61c579d95c6ff62594b8576ef0b",
     "src/ObjectiveResourceCompression.cpp": "60dc25830ee0e50a7770553adef178eb595337aa3eeabd8ef6710dd645b6e81d",
-    "src/PaperExternalGiniTree.cpp": "1291590a065d3ed422aa2d87aa566374dc19421b3e7cf2efa79a3cb14945a06b",
+    "src/PaperExternalGiniTree.cpp": "45c466404ba52c0f9c8e526f8929a13e363142fc8dba0bef5ecf44991012cf1f",
     "src/PaperK1AmSf.cpp": "a46dc43c2b0cba21b427d1c38884114e6b68f3e52f6c13493b609aecde702440",
     "src/Parser.cpp": "acc0897e687dde82355f2153272e2fb1c68c1ec5507a549894109dd51b4b4ccc",
     "src/PenaltyCoverSeparation.cpp": "6d1e696bc893390e03019fd2f116449a0830cde2f0c347081a79a9ed4cdc0d49",
@@ -228,15 +228,11 @@
     "include/hga_tgbc/Solvers.h": "1382d476927207de909143a124a8075ea065a2e74e17177d7a8c43cc644d3fe9"
   },
   "compiled_units": [
-    "NativeEvidenceJournal",
-    "GurobiBaseline",
-    "PaperExternalGiniTree",
-    "MipStartMapping",
-    "main"
+    "PaperExternalGiniTree"
   ],
   "production": {
-    "PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\ExactEBRP.exe",
-    "PE_SHA": "c1456304344f7127ab12a302bb8886ca13bf3aedb1a37f154d8ce7ac6c7d6d20",
+    "PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v6\\ExactEBRP.exe",
+    "PE_SHA": "572a224c1a4dd8cfe067fe536f36ad83087d1bec0596a3b604e2146204b17130",
     "DLL": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
     "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
   },
@@ -244,7 +240,7 @@
     "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\NativeEvidenceJournal.o": "a24de3c333148495b4e427a0458327bf25ff41e90a021615ea46f55ebb8e114e",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round133\\ControllingLeafScheduler.o": "70fd35f75fe82399af597c110e54292dffad98c867951a1056f1ef6c5f0704a3",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\GurobiBaseline.o": "1bc85261bd49efda5744fef4704349aba3a5f4f29bc383dd7825701c1075cd7f",
-    "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\PaperExternalGiniTree.o": "53eee3499839eba342730bd1a62bdde957ed4992939510e32a91b7ae492f71b4",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v6\\PaperExternalGiniTree.o": "1858318a9fe56593a70254d1779539e3510c16f9847198678b2d3fae654bef19",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\IntervalRowFactory.o": "5d859625b91463121080af25ed9d0921be0a375829bfcdb58d85a99eaa9f2af2",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round140-final\\CplexBaseline.o": "125454fde6ce8b71c230a7749d2bf6495203560286ff9fcb60b2c058dd55dfef",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\MipStartMapping.o": "c4df675f02b2526b18d275d1090d1f2c3e1925b54e1b47a25eedb448d7434aef"
@@ -261,7 +257,7 @@
     "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\NativeEvidenceJournal.o",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round133\\ControllingLeafScheduler.o",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\GurobiBaseline.o",
-    "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\PaperExternalGiniTree.o",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v6\\PaperExternalGiniTree.o",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\IntervalRowFactory.o",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round140-final\\CplexBaseline.o",
     "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\MipStartMapping.o",
@@ -277,7 +273,7 @@
     "-lcomdlg32",
     "-ladvapi32",
     "-o",
-    "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\ExactEBRP.exe"
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v6\\ExactEBRP.exe"
   ],
   "default_off": true,
   "carrier": "stock BOTH + old TC + TC2",
@@ -285,10 +281,15 @@
   "root_once": true,
   "count_probes_local": true,
   "BranchPriority": 0,
-  "production_PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\ExactEBRP.exe",
-  "production_PE_SHA": "c1456304344f7127ab12a302bb8886ca13bf3aedb1a37f154d8ce7ac6c7d6d20",
-  "research_PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\ExactEBRP.exe",
-  "research_PE_SHA": "c1456304344f7127ab12a302bb8886ca13bf3aedb1a37f154d8ce7ac6c7d6d20",
+  "production_PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v6\\ExactEBRP.exe",
+  "production_PE_SHA": "572a224c1a4dd8cfe067fe536f36ad83087d1bec0596a3b604e2146204b17130",
+  "research_PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v6\\ExactEBRP.exe",
+  "research_PE_SHA": "572a224c1a4dd8cfe067fe536f36ad83087d1bec0596a3b604e2146204b17130",
   "DLL": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
-  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "main_object": {
+    "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round141-v5\\main.o",
+    "SHA": "40574b896c301da9efd78a8f7364749350f20e9a4836470c3aa283bb72853692"
+  },
+  "prior_build_SHA": "c67189b91f46b4b22b474bf3f7823b95ebb6534709abbe6f254b0cf0ff9d7f45"
 }
