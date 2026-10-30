@@ -151,9 +151,10 @@ def solve(spec, suffix=''):
                 G=point['G'],tau=math.fsum(point[f'Y_{i}'] for i in range(1,scope['panel']['V']+1)),
                 b=point.get('r141_b'))
         elif model.Status==gp.GRB.INFEASIBLE:
-            # Diagnostic numerical infeasibility is NOT an empty physical side.
-            result.update(qualified=True,beta=floor(scope['validated_U'],scope['validated_U']),
-                          infeasibility_scope='improvement LP only; side retained')
+            # No Farkas/Native qualification is implemented in this diagnostic.
+            # A status alone cannot supply even an improvement-domain floor.
+            result.update(qualified=False,beta=None,
+                          infeasibility_scope='unverified improvement LP status; side retained; parent bound only')
         write(target/'result.json',result)
         model.dispose()
     print(json.dumps({k:result.get(k) for k in ['label','role','variant','side','pivot','L','beta','qualified','K','b']}),flush=True)
@@ -172,6 +173,50 @@ def run_children(suffix=''):
         assert metered(spec['label'],'diagnostic',[LP_PYTHON,ROOT/'scripts/round141_lp.py','one',
             json.dumps(spec)],110,120)==0
 
+def select_projections():
+    records=[];positions=[]
+    for role in read(OUT/'LP_plan.json')['roles']:
+        parent=read(OUT/'LP'/f'parent_{role}_mps/result.json')
+        inherited=next(r for r in read(OUT/'offline_screen.json')['roles'] if r['role']==role)
+        assert abs(parent['L']-inherited['parent']['L'])<5e-7
+        cases=[]
+        for pivot in inherited['pivots']:
+            group={variant:{} for variant in ['plain','conditional']}
+            for spec in child_plan():
+                if spec['role']!=role or spec['pivot']!=pivot['m']:continue
+                row=read(OUT/'LP'/(spec['label']+'_mps')/'result.json')
+                assert row['qualified'] and row['status']==2
+                group[spec['variant']][spec['side']]=row
+            case=dict(pivot=pivot['m'],pivot_kind=pivot['kind'],sides=group)
+            for variant in group:
+                case[variant+'_cover']=min(r['beta'] for r in group[variant].values())
+                case[variant+'_raw_cover']=min(r['L'] for r in group[variant].values())
+            cases.append(case)
+        # Diagnostic selection only; this is not a per-role online rule.
+        chosen=max(cases,key=lambda c:(c['conditional_cover'],-c['pivot']))
+        threshold=inherited['chosen']
+        for mode in ['d0','d1']:
+            positions.append(dict(label=f'{role}_{chosen["pivot_kind"]}_{mode}',role=role,variant=mode,
+                threshold=threshold['threshold'],ell=threshold['ell'],u=threshold['u'],
+                pivot=chosen['pivot'],pivot_kind=chosen['pivot_kind'],
+                betas=[chosen['sides']['conditional'][s]['beta'] for s in ['low','high']],
+                proof_sources=[chosen['sides']['conditional'][s]['canonical_SHA'] for s in ['low','high']],
+                cap_seconds=90,Seed=0,Threads=1))
+        records.append(dict(role=role,parent=parent,cases=cases,selected_pivot=chosen['pivot'],
+            selected_pivot_kind=chosen['pivot_kind'],selection='maximum qualified conditional cover; lower m breaks ties'))
+    write(OUT/'child_comparison.json',dict(UTC=utc(),roles=records))
+    write(OUT/'projection_plan.json',dict(UTC=utc(),positions=positions,
+        diagnostic_only=True,shared_beta_sources=True,online_rule_not_yet_frozen=True))
+    print(json.dumps([dict(role=r['role'],chosen=r['selected_pivot'],
+        cases=[{k:c[k] for k in ['pivot','pivot_kind','plain_raw_cover','conditional_raw_cover']} for c in r['cases']])
+        for r in records],indent=2))
+
+def run_projections():
+    for spec in read(OUT/'projection_plan.json')['positions']:
+        assert metered(spec['label'],'diagnostic',[LP_PYTHON,ROOT/'scripts/round141_lp.py','one',json.dumps(spec)],110,120)==0
+
 if __name__=='__main__':
     if sys.argv[1]=='one':solve(json.loads(sys.argv[2]))
     elif sys.argv[1]=='run_children':run_children(sys.argv[2] if len(sys.argv)>2 else '')
+    elif sys.argv[1]=='select_projections':select_projections()
+    elif sys.argv[1]=='run_projections':run_projections()
