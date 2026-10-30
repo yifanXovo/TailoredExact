@@ -1,0 +1,53 @@
+{
+  "decision": "ACCEPT",
+  "scope": "Exactly two full-window same-PE old R141 D1 bridges; no additional roles or Seed1 admitted",
+  "reviewer": "independent_review (non-implementer)",
+  "UTC": "2026-10-30T16:39:17.723928+00:00",
+  "matrix_SHA": "ee87c28b671181a6262bd7f73775f0406f2ae08195d5ac44be63ea74a00fbfdd",
+  "candidate_manifest_SHA": "3690b4a0b2bc4e0b06df83f7add345e33d8751f64db00d084d26100cd0bd2274",
+  "source_commit": "9b024c451b00f84f9f1cac0905eab457cc82a5b9",
+  "PE_SHA": "1337ab5a78685640b1064780de4765b004e8ec2d73e1fbe17f0b1ed5ffc48f52",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "selection_SHA": "34b742f98b5cee974811c40d893a4a2cb296edbd78f89d57934a30ef1a9ed5f9",
+  "qualification_admission_SHA": "d42607ae3f492a03a1922ee33ade9f3c8c0e9c0447a6c304d9e1ec1ff0174d53",
+  "pilot_admission_SHA": "afdf09fb00642651313047d2a5c4a4523ecc654ce9f20d052b35db78c883acb3",
+  "roles": [
+    {
+      "role": "K-20-S",
+      "Seed": 0,
+      "cap": 1200,
+      "physical_T": 5400,
+      "products": "off",
+      "same_PE": true,
+      "source_only_intervention": "products off vs selected",
+      "complete_argv_equal_except_destination_and_CP_switch": true,
+      "identity_SHA": "d6581b12f9a186da279d5450423aea9824f70a01e9ce535fd229cd18a9ff6507"
+    },
+    {
+      "role": "R-B35-S-T2",
+      "Seed": 0,
+      "cap": 2400,
+      "physical_T": 7200,
+      "products": "off",
+      "same_PE": true,
+      "source_only_intervention": "products off vs selected",
+      "complete_argv_equal_except_destination_and_CP_switch": true,
+      "identity_SHA": "7081193a2e1323ea539ea24a3e0f01175e25bccceebd2b776329b406689367a6"
+    }
+  ],
+  "checks": {
+    "source_PE_DLL_helpers_hashes_current": true,
+    "matches_independent_selection_exactly": true,
+    "same_frozen_input_domain_objective_cap_seed_and_ownH": true,
+    "only_CP_source_switch_changes_argv": true,
+    "old_D1_links_pivot_scope_floors_and_default_off_behavior_retained": true,
+    "all_online_construction_probe_verification_and_search_costs_paid": true,
+    "no_historical_solution_bound_Start_or_tree_injected": true,
+    "nominal_caps_3600_within_remaining_budget": true
+  },
+  "findings": [],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "post_bridge_boundary": "Assess observed time and important RB endpoint mechanism. K35 remains cross-version descriptive; no claim CP alone caused its regression. Unless a new decision-changing fact appears, keep research-only and close this continuation; no automatic extra roles/seeds."
+}

@@ -34,10 +34,16 @@ necessary PE/DLL and the active worktree. Zero deletion is acceptable.
   source floors were installed; physical/H/Start/quality/lifecycle checks and
   source-to-call/SHA binding passed. The initial pure-Python tiny fixture
   construction failure is retained and charged; its corrected run passed.
-- Full four-role selected pilot is frozen in pilot_matrix.json: K35, RB35-T2,
-  K20, K15, with original physical T and caps. Independent pilot admission and
-  complete serial execution are the next steps. No extension or Seed1 has
-  been authorized by evidence yet.
+- All four full-window pilot positions are healthy and verified. K15/K20
+  close with producer clocks 27.488248 / 86.671444 seconds. K35 ends at
+  U/L=.665418889/.545040775, adverse against old D1; RB35-T2 ends at
+  .357402102/.229365547, favorable against old D1. Historical stock/TC/stable
+  references retain their separate actual source and full clocks.
+- Independent selection admits only same-PE old-D1 bridges for K20 and
+  RB35-T2 (products off, caps1200/2400). Their immutable matrix and gate are
+  bridge_matrix.json and review/bridge_admission.json. Do not add remaining
+  roles or Seed1 without a new decision-changing fact. K35's adverse comparison
+  remains cross-version rather than an isolated CP causal claim.
 
 ## Safe continuation commands
 

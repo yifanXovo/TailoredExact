@@ -212,3 +212,11 @@ and construction/solve costs, K/W endpoint diagnostics and conservative floors
 are recorded by LP_plan.json, LP/* and the compact LP reports. Slight negative
 changes near 1e-15 on unchanged sides are numerical equality, not a loss from
 adding valid rows. No tolerance is changed to manufacture an improvement.
+
+The reoptimized selected points make the previously missing endpoint limits
+active: K35 low has beta-endpoint count8 (formerly10.4765), K35 high has
+alpha-endpoint count9 (formerly8.39817), RB35-T2 low has beta-endpoint count5
+(formerly12.0380), and K20 low has beta-endpoint count7 (formerly10). The two
+stronger-side optima remain extensible at the same objective. These endpoint
+values are explanatory diagnostics of saved binary64 points; no division is
+used by the writer, and its no-division mass residual is the correctness check.
