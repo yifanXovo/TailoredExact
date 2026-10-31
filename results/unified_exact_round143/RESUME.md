@@ -113,3 +113,40 @@ member, then perform bounded current-round cleanup. Local scientific/PDF
 acceptance is separate from those administrative and public-I/O checks.
 Append actual receipts below as those steps complete. No automatic merge,
 force push, old-round deletion or external messaging is authorized.
+
+## Actual Draft PR and public closeout
+
+Fixed science is `516f89f2e23bfad0238c8423bfb9809c308fdec9`. The eight
+carriers contain 4134 indexed members and 13228322 compressed bytes. Actual
+production source remains `85bd2304866942fd5b397970c5ef4099bb1b73fb`;
+later administrative commits do not retag the source, PE or fixed science.
+
+English [Draft PR #205](https://github.com/yifanXovo/TailoredExact/pull/205)
+is open, Draft and mergeable at actual connector readback. Its base is
+`codex/round142-conditional-count-products`, SHA
+`37e6c4e79c18dbca6bc4622d80a5bd8a860aa13c`; actual main is still
+`b2b940c1e517a72e226ec60fc49ff19651737632`. Initial actual head readback is
+the fixed-science commit above. Additive delivery metadata advances only this
+same head branch. Creation/readback are retained in PR_delivery.json and
+PR_readback.json; no merge or force push follows.
+
+Anonymous fixed-commit recovery passes the public manifest, all eight archive
+byte hashes and every one of the 4134 indexed members. Cumulative public I/O
+is 7.144283300 seconds in one successful attempt, with zero Optimize,
+compilation or commercial Native loads. The fresh owned restore is under
+`E:/codes/ExactEBRP-work/restore`; public_restore_receipt.json,
+public_attempt_history.json and public_restore_owner.json bind actual bytes
+and paths. This public-readability result is separate from the completed
+local scientific and PDF acceptance.
+
+After PR delivery and public acceptance, bounded current-round cleanup
+screened only this round's build/temp/result roots and deleted **zero** files
+and zero logical bytes. It retains unique raw/failures, initial layout history,
+necessary production/qualification PE and object dependencies, the active tree,
+the existing Native DLL, original user content and every old round. Exact
+observed file-byte/volume snapshots are in cleanup_record.json; unrelated
+volume-space changes are not attributed to cleanup.
+
+No experimental position remains pending. The scientific result, independent
+review, seven-page PDF, public recovery and finite cleanup are complete.
+Final additive metadata publication/readback does not authorize another solve.
