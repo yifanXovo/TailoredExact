@@ -10,14 +10,19 @@ def verify(launch,identity):
     audits=[read(p) for p in d.rglob('*.round144.native.json')]
     sources=[read(p) for p in d.rglob('*.round143.native.json')]
     source=read(d/'external/round144_source.json') if enabled else None
+    applicable=enabled and source.get('applicable',True)
     evidence=read(d/'external/round144_projection.json') if enabled and source.get('qualified') else None
     exact=None
     if enabled:
         assert read(d/'round144_parameters.json')==dict(RN_P=True,Seed=launch['seed'],H_seed=20260626,stock=False,counts='off',AP=False,source_policy='once_initial_root',persistent_RN=False)
-        assert source['qualified'] and source['source_solves']==1 and not source['formal_control_from_source']
-        assert evidence['source_SHA']==source['source_SHA'] and audits and sources
-        assert all(a['PASS'] and a['RN_columns']==0 and a['PC_rows']==int(source['PC_emitted']) and a['Optimize_extra']==0 for a in audits)
-        assert all(a['PASS'] and a['model_SHA']==source['source_SHA'] for a in sources)
+        assert audits
+        if applicable:
+            assert source['qualified'] and source['source_solves']==1 and not source['formal_control_from_source']
+            assert evidence['source_SHA']==source['source_SHA'] and sources
+            assert all(a['PASS'] and a['model_SHA']==source['source_SHA'] for a in sources)
+        else:
+            assert source['source_solves']==0 and source['formal_RN_columns']==0 and evidence is None and not sources
+        assert all(a['PASS'] and a['RN_columns']==0 and a['PC_rows']==int(source.get('PC_emitted',False)) and a['Optimize_extra']==0 for a in audits)
     elif rn:
         assert not audits and not (d/'round144_parameters.json').exists() and sources
         assert read(d/'round143_parameters.json')==dict(RN=True,Seed=launch['seed'],H_seed=20260626,stock=False,counts='off',AP=False)
@@ -26,7 +31,7 @@ def verify(launch,identity):
         def model_contract(self,root,p,path,arm):
             nonlocal exact
             fact,m=super().model_contract(root,p,path,arm);B=p['total_initial'];bm=max(0,B-sum(p['Q_vector']))
-            if rn or enabled and fact['SHA']==source['source_SHA']:
+            if rn or enabled and fact['SHA']==source.get('source_SHA'):
                 spec=actual_spec(m,bm,B);wanted=check_matrix(m,spec)
                 matches=[a for a in sources if a['model_SHA']==fact['SHA']];assert matches
                 if enabled:
@@ -40,17 +45,20 @@ def verify(launch,identity):
             else:
                 assert not any(k.startswith('rn_') for k in m['order'])
                 if enabled:
-                    assert source['source_lower']<=m['bounds']['G'][0]<=m['bounds']['G'][1]<=source['source_upper']
-                    row=evidence['row'];terms={k:v for k,v in row['terms'].items() if k in m['order']}
-                    if source['PC_emitted']:
+                    if applicable:assert source['source_lower']<=m['bounds']['G'][0]<=m['bounds']['G'][1]<=source['source_upper']
+                    row=evidence['row'] if evidence else dict(terms={},rhs=0.)
+                    terms={k:v for k,v in row['terms'].items() if k in m['order']}
+                    if source.get('PC_emitted',False):
                         counter=collections.Counter(m['rows']);wanted=(tuple(sorted(terms.items())),'<=',row['rhs']);assert counter[wanted]==1
                     else:assert not terms and row['rhs']>=0
                     assert any(a['model_SHA']==fact['SHA'] for a in audits)
-                    facts.append(dict(model_SHA=fact['SHA'],kind='formal_compact',RN_columns=0,PC_rows=int(source['PC_emitted']),PC_nonzeros=len(terms)))
+                    facts.append(dict(model_SHA=fact['SHA'],kind='formal_compact',RN_columns=0,PC_rows=int(source.get('PC_emitted',False)),PC_nonzeros=len(terms)))
             return fact,m
     ns=dict(vars(accepted),ROOT=ROOT,OUT=OUT,ArmModels=Models)
     value=types.FunctionType(accepted.verify.__code__,ns)(launch,identity)
-    if enabled:assert exact and exact['PASS'] and any(f['kind']=='formal_compact' for f in facts)
+    if enabled:
+        assert any(f['kind']=='formal_compact' for f in facts)
+        if applicable:assert exact and exact['PASS']
     write(d/'round144_control_audit.json',dict(PASS=True,method=method,models=facts,source=source,exact_compiled_online_PC_check=exact,
         native_compact_audits=audits,native_RN_audits=sources,all_H_Start_physical_scope_quality_lifecycle_inherited=True,Optimize=0,Native_load=0))
     return value

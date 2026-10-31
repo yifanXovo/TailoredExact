@@ -763,6 +763,9 @@ void auditRound144Native(const GurobiApi& api,GRBmodel* model,const FixedInterva
     const auto expected=round144().expected.find(request.canonical_model_fingerprint);
     if(!round144().ready){
         require(expected==round144().expected.end(),"unexpected_PC");
+        int count=0;require(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&count)==0,"redundant_native_row_count");
+        for(int k=0;k<count;++k){char* name=nullptr;require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,k,&name)==0&&name,"redundant_native_row_name");
+            require(std::string(name)!="r144_PC"&&std::string(name).rfind("rn_",0)!=0,"redundant_native_unexpected_row");}
         std::ofstream f(request.native_log_path.string()+".round144.native.json");f<<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)
             <<",\"RN_columns\":0,\"RN_rows\":0,\"PC_rows\":0,\"PC_nonzeros\":0,\"Optimize_extra\":0}\n";
         f.close();require(bool(f),"redundant_native_audit_write");return;

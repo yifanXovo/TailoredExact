@@ -14,7 +14,7 @@ def freeze(batch,positions,reason):
     for i,spec in enumerate(positions,1):
         old=by[spec['role']];l=copy.deepcopy(old);p=l['panel'];seed=spec.get('seed',0);method=spec['method'];assert method in ('OFF','RNP','RN')
         cap=spec.get('cap',p['cap_seconds']);p.update(gurobi_seed=seed,cap_seconds=cap,round144_method=method,panel_kind='Round144 own-H stable-off / original-variable RN projection')
-        camp=OUT/('qualification/runs' if batch.startswith('qualification') else 'campaign_'+batch)/f'{i:03}';camp.mkdir(parents=True,exist_ok=False)
+        camp=OUT/(batch+'/runs' if batch.startswith('qualification') else 'campaign_'+batch)/f'{i:03}';camp.mkdir(parents=True,exist_ok=False)
         armid=f'R144_{batch}_{i:03}_{spec["role"]}_S{seed}_{method}';d=camp/'raw'/armid
         command=[v.replace(old['destination'],str(d)) for v in old['command']];command[0]=manifest['production_PE']
         for flag,v in [('--gurobi-seed',seed),('--time-limit',cap-6),('--process-wall-time-limit',cap)]:command[command.index(flag)+1]=str(v)
@@ -59,8 +59,8 @@ def run(batch,stop_after=None):
         assert metered(label,'diagnostic' if batch.startswith('qualification') else 'native',
             [PYTHON,'-B',ROOT/'scripts/round144_campaign.py','arm',batch,group['position']],group['launch']['cap_seconds']+120,group['launch']['cap_seconds']+1800)==0
     write(OUT/f'{batch}_run_return.json',dict(UTC=utc(),budget=budget()))
-def qualification():
-    freeze('qualification',[dict(role='K-20-S',cap=90,method='RNP')],'One own-H complete lifecycle health check after exact compiled/Native/writer/Start qualification; no performance inference')
+def qualification(batch='qualification'):
+    freeze(batch,[dict(role='K-20-S',cap=90,method='RNP')],'One own-H complete lifecycle health check after exact compiled/Native/writer/Start qualification; no performance inference')
 def pilot():
     freeze('pilot',[dict(role=r,method=m) for r in ['K-35-U','R-X20-S-T1'] for m in ['OFF','RNP']],
         'One projected full RN block retains matched LP increments with negligible certified transport loss; primary full-window pair before resource-role expansion')
