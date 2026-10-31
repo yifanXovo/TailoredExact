@@ -1,0 +1,142 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "native_identity": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "facts": [
+    {
+      "tag": "positive",
+      "point": "off_start",
+      "complete_columns": 77,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "positive",
+      "point": "on_start",
+      "complete_columns": 92,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "positive",
+      "point": "nonminimal_epigraph",
+      "complete_columns": 92,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "positive",
+      "model_SHA": "20fe2813014dcfa24f78ba27f703597c21eca584c3281f9ed57740bc9b7033bd",
+      "rows": 206,
+      "columns": 92,
+      "added_rows": 30,
+      "actual_Native_all_bounds_types_and_RN_rows": true,
+      "applicable": true,
+      "S_L_exact": "2",
+      "S_U_exact": "3"
+    },
+    {
+      "tag": "fixed",
+      "point": "off_start",
+      "complete_columns": 67,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "fixed",
+      "point": "on_start",
+      "complete_columns": 77,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "fixed",
+      "point": "nonminimal_epigraph",
+      "complete_columns": 77,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "fixed",
+      "model_SHA": "b01f8f6b050a8f258a755a38d027da91b3853e40ae00b70976f8e0dfa9929012",
+      "rows": 186,
+      "columns": 77,
+      "added_rows": 20,
+      "actual_Native_all_bounds_types_and_RN_rows": true,
+      "applicable": true,
+      "S_L_exact": "3",
+      "S_U_exact": "3"
+    },
+    {
+      "tag": "zero_lower",
+      "point": "off_start",
+      "complete_columns": 85,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_lower",
+      "point": "on_start",
+      "complete_columns": 85,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_lower",
+      "model_SHA": "4570b32a3237bb3480c8298400ed115c72fdcf0a10b91d468c44761f37a1d487",
+      "rows": 184,
+      "columns": 85,
+      "added_rows": 0,
+      "actual_Native_all_bounds_types_and_RN_rows": true,
+      "applicable": false,
+      "S_L_exact": "0",
+      "S_U_exact": "3"
+    },
+    {
+      "tag": "K35",
+      "model_SHA": "5d75dfbf72264c41baae1a328c3bf762d56a6e3049e4888471f1c66cc01c5cf3",
+      "rows": 25964,
+      "columns": 11177,
+      "added_rows": 2340,
+      "actual_Native_all_bounds_types_and_RN_rows": true,
+      "applicable": true,
+      "S_L_exact": "1822603219906424123/72057594037927936",
+      "S_U_exact": "1618636597501978785/36028797018963968"
+    }
+  ],
+  "exact_historical_off_K35": true,
+  "original_integer_types_and_objective_retained": true,
+  "physical_Start_g_domain_rule_retained": true,
+  "nonminimal_epigraph_extensions_checked": true
+}

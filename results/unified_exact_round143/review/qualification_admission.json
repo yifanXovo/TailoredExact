@@ -1,0 +1,173 @@
+{
+  "schema": "round143-independent-qualification-admission-v1",
+  "UTC": "2026-10-31T17:47:42.235608+00:00",
+  "reviewer": "/root/rn_review, non-primary implementer",
+  "decision": "ACCEPT",
+  "scope": "Only one K20 cap90 own-H health qualifier; performance/pilot positions not admitted",
+  "matrix_SHA": "a0ceef585eacd387743fa1f84aaca930d753e56b45ae0488f95454a4b337f95d",
+  "candidate_manifest_SHA": "c3bfbeecdd1f90e0e70119b019f6c91c86e16d99a48e4eb7287c4a218e326e0b",
+  "source_commit": "85bd2304866942fd5b397970c5ef4099bb1b73fb",
+  "source_bindings": {
+    "include/Round143Research.hpp": "dbe43ef9ace44ebba4f311a3e00087605e04cc64a9623ff2d2186663eea3e006",
+    "src/CplexBaseline.cpp": "18130fe7095dc3bd9e6cc99468c093de995c246edc25616eed73d59d673d5445",
+    "src/GurobiBaseline.cpp": "a5f21676ed74e630870de0d1e437a641246e0cc08943d8e10582d959eae9530a",
+    "src/MipStartMapping.cpp": "808c21e50fa343013ae485d80d58b602989eb3d3127e0822a33ee947bf9553e5",
+    "src/main.cpp": "96802437906234494e32d84abdede46b7e8dde83a1026f9de3051cc61d4481cd",
+    "scripts/round143_qualify.cpp": "cd3c680bc7aadc7bb625e90c0d504842bac0f37c2757cf811799f5f75b1b03fe",
+    "scripts/round143_qualify.py": "76d251593f75a5050799bdc9950af14941b870abaf3f0325d0aebf0e5303acd3",
+    "scripts/round143_campaign.py": "39cfe9aec8f0218591fe3dd0dcbdcfa6ef50a3dabf850307e8564aac9eb00566",
+    "scripts/round143_read.py": "c763ff58e6b2ab3c35d2c15dc4f8bdbb1b91fd3c4bfc20fda0b1dea20a28aac6",
+    "scripts/round143_prepare.py": "bfcb92e10ee062f6560c6cc3d58319c77548389a8ea9fab9618798ec89e0be16",
+    "scripts/paper_s2_rn.py": "2e856123feb5868e87abb10c67ea020b83e20c4fd750144341d8ff3bbaf27d04"
+  },
+  "PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round143\\ExactEBRP.exe",
+  "PE_SHA": "eaa6dc5d0091a1f3a38a0374aeccab28e94bff94606339c62b385b48cb7d44b1",
+  "DLL": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "qualification_PE_SHA": "e626a90166ed08a427eabb503dcb0c96916d660e170df854087f50d2703f0c5e",
+  "qualification_native_writer_SHA": "e062b22b5d314d277e0486dd8ee7e6da95a898bde4c269c406385472ac754774",
+  "actual_four_affected_units_compiled": true,
+  "all_manifest_source_hashes_current": true,
+  "qualification_helper_bindings_current": true,
+  "stable_entry_and_profile_unchanged": true,
+  "fixture_readonly_replay": [
+    {
+      "tag": "positive",
+      "off_SHA": "e1c8f6506f5be861849d37363ca76f06ba81260b7e56c54aa0f6a7251d33d412",
+      "on_SHA": "20fe2813014dcfa24f78ba27f703597c21eca584c3281f9ed57740bc9b7033bd",
+      "applicable": true,
+      "new_rows": 30,
+      "new_columns": 15,
+      "points": [
+        {
+          "path": "results/unified_exact_round143/qualification/writer/positive/nonminimal_epigraph.json",
+          "SHA": "31f570264ce0faf94bffa86847224473064093e1b098e82f965ef27d4c078726",
+          "residual": {
+            "constraints": 0.0,
+            "bounds": 0.0,
+            "integrality": 0
+          },
+          "all_columns": 92
+        },
+        {
+          "path": "results/unified_exact_round143/qualification/writer/positive/off_start.json",
+          "SHA": "cae0cf207b1303241d51517c936825786742d743cc42cb4ec571f91409380394",
+          "residual": {
+            "constraints": 2.220446049250313e-16,
+            "bounds": 0.0,
+            "integrality": 0
+          },
+          "all_columns": 77
+        },
+        {
+          "path": "results/unified_exact_round143/qualification/writer/positive/on_start.json",
+          "SHA": "6fdb952db47816d3c539c996f4095e2ea4e6e6f16117a2c304b0a51ffbfa98e7",
+          "residual": {
+            "constraints": 2.220446049250313e-16,
+            "bounds": 0.0,
+            "integrality": 0
+          },
+          "all_columns": 92
+        }
+      ]
+    },
+    {
+      "tag": "fixed",
+      "off_SHA": "cd67e203fe26e2468adddde562bc3c238e14a7dfe9b2b7be1b015051ed8cc8f9",
+      "on_SHA": "b01f8f6b050a8f258a755a38d027da91b3853e40ae00b70976f8e0dfa9929012",
+      "applicable": true,
+      "new_rows": 20,
+      "new_columns": 10,
+      "points": [
+        {
+          "path": "results/unified_exact_round143/qualification/writer/fixed/nonminimal_epigraph.json",
+          "SHA": "dfcc8a9296a36cd6857cbc0fd8d0c4967f9037928494398186816dcef47f35b0",
+          "residual": {
+            "constraints": 0.0,
+            "bounds": 0.0,
+            "integrality": 0
+          },
+          "all_columns": 77
+        },
+        {
+          "path": "results/unified_exact_round143/qualification/writer/fixed/off_start.json",
+          "SHA": "213d89b6e7c5899770a7d3504a63c1e956955cd16055f52232defdf5f9a687b2",
+          "residual": {
+            "constraints": 2.220446049250313e-16,
+            "bounds": 0.0,
+            "integrality": 0
+          },
+          "all_columns": 67
+        },
+        {
+          "path": "results/unified_exact_round143/qualification/writer/fixed/on_start.json",
+          "SHA": "0bfe5dc940ecacebbd4a15dad175c5cb3df95c635228f29577bbefa07568eb59",
+          "residual": {
+            "constraints": 2.220446049250313e-16,
+            "bounds": 0.0,
+            "integrality": 0
+          },
+          "all_columns": 77
+        }
+      ]
+    },
+    {
+      "tag": "zero_lower",
+      "off_SHA": "4570b32a3237bb3480c8298400ed115c72fdcf0a10b91d468c44761f37a1d487",
+      "on_SHA": "4570b32a3237bb3480c8298400ed115c72fdcf0a10b91d468c44761f37a1d487",
+      "applicable": false,
+      "new_rows": 0,
+      "new_columns": 0,
+      "points": [
+        {
+          "path": "results/unified_exact_round143/qualification/writer/zero_lower/off_start.json",
+          "SHA": "e5d8eaec770241dbfc616235de1bcd57f54796f34f4272f152511ae530f28923",
+          "residual": {
+            "constraints": 2.220446049250313e-16,
+            "bounds": 0.0,
+            "integrality": 0
+          },
+          "all_columns": 85
+        },
+        {
+          "path": "results/unified_exact_round143/qualification/writer/zero_lower/on_start.json",
+          "SHA": "e5d8eaec770241dbfc616235de1bcd57f54796f34f4272f152511ae530f28923",
+          "residual": {
+            "constraints": 2.220446049250313e-16,
+            "bounds": 0.0,
+            "integrality": 0
+          },
+          "all_columns": 85
+        }
+      ]
+    },
+    {
+      "tag": "K35",
+      "off_SHA": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+      "on_SHA": "5d75dfbf72264c41baae1a328c3bf762d56a6e3049e4888471f1c66cc01c5cf3",
+      "applicable": true,
+      "new_rows": 2340,
+      "new_columns": 1170,
+      "points": []
+    }
+  ],
+  "mathematics": {
+    "valid_bounds": "Dyadic exact sums, directed conversion and outward reciprocal safely enclose true reciprocal scope; production interval can be wider than diagnostic Fraction-direct interval by ULPs. No LP optimum equality between these two byte-distinct blocks is assumed.",
+    "compact_products": "Mass/simplex imply omitted McCormick facets. Added normalized stock uses actual c_i and integer y.",
+    "finite_caps": "Yhat<=M_i*t<=M_i*U_t, cap rounded upward. Normalized v_i>=0 and sum v_i=1 permit absolute differences <=1. h<=1 is projection redundant since h can be chosen at its absolute-difference lower envelope.",
+    "integer_equivalence": "Original route/operation/inventory integer columns retained. Normalization changes only new continuous Gini columns and leaves original objective and penalty unscaled.",
+    "Start": "Every new column mapped deterministically from verified physical inventory; physical G interval/cutoff rejection precedes mapping. Valid nonminimal model epigraph extension retained separately from physical Start eligibility."
+  },
+  "implementation_checks": [
+    "RN singleton defaults false; CLI off/on explicit; stable defaults unchanged.",
+    "CLI rejects stacking R138-R142 and other incompatible research mechanisms; R137 application runs first.",
+    "Actual writer uses current y_lb..y_ub support and the same 1/target double coefficient as original ratio rows.",
+    "Native hook checks actual ratio rows, all RN rows/coefficients/senses/RHS and all RN column types/bounds/objective before Optimize.",
+    "Own-H independent lifecycle, source/PE/helper bindings and inherited physical/Start/proof/quality/resource-release checks are retained.",
+    "Qualification is 90s with Seed0, Threads1, affinity4, H_seed20260626, and no diagnostic solutions/bounds injected."
+  ],
+  "issues": [],
+  "reviewer_Optimize": 0,
+  "reviewer_Native_load": 0,
+  "reviewer_build": 0
+}
