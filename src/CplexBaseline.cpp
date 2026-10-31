@@ -3,6 +3,7 @@
 #include "Round135Research.hpp"
 #include "Round138Research.hpp"
 #include "Round140Research.hpp"
+#include "Round143Research.hpp"
 #include "Round62Thresholds.hpp"
 #include "Round63TimeResource.hpp"
 #include "Round64SharedResource.hpp"
@@ -3509,6 +3510,20 @@ void writeCompactLp(const Instance& instance,
         }
     }
 
+    if(round143().rn) {
+        if(!station_state_vdp||options.round98_state_service!="m-binary"||!strengthened)
+            throw std::runtime_error("Round143 RN requires GI-TBC shared VD-P states");
+        std::vector<std::vector<int>> support(V+1);std::vector<double> ratios(V+1);long long B=0,fleet=0;
+        for(int i=1;i<=V;++i) {
+            B+=instance.initial[i];ratios[i]=1./instance.target[i];
+            for(int y=y_lb[i];y<=y_ub[i];++y)support[i].push_back(y);
+        }
+        for(int q:instance.Q)fleet+=q;
+        const auto rn=round143_detail::block(support,ratios,std::max(0LL,B-fleet),B);
+        for(const auto& term:rn.columns)vars.add(term.first,term.second.first,term.second.second,"C");
+        for(const auto& row:rn.rows)out<<round143_detail::emit(row);
+        if(stats)stats->enabled_families.push_back(rn.applicable?"round143_RN":"round143_RN_inapplicable");
+    }
     out << "Bounds\n";
     for (const auto& kv : vars.bounds) {
         if (kv.second.second >= 1e90) out << " " << num(kv.second.first) << " <= " << kv.first << "\n";

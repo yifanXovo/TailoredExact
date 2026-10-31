@@ -19,6 +19,7 @@
 #include "MipStartMapping.hpp"
 #include "Round120NativeProof.hpp"
 #include "Round141Research.hpp"
+#include "Round143Research.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
@@ -705,6 +706,52 @@ void auditRound141Native(const GurobiApi& api,GRBmodel* model,
         <<"{\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"scope\":"<<std::quoted(request.canonical_model_scope)
         <<",\"added_rows_checked\":"<<it->second.size()<<",\"embedded\":"<<(embedded?"true":"false")
         <<",\"ObjCon\":"<<constant<<",\"PASS\":true,\"Optimize_extra\":0}\n";f.close();require(bool(f),"native_audit_write");
+}
+
+void auditRound143Native(const GurobiApi& api,GRBmodel* model,const Instance& instance,
+    const FixedIntervalMipRequest& request,const std::vector<std::string>& names,const std::vector<char>& types) {
+    if(!round143().rn)return;
+    using namespace round143_detail;
+    const int n=instance.V,N=int(names.size());std::vector<std::vector<int>> support(n+1);std::vector<double> ratios(n+1);
+    std::regex selector("^state_([0-9]+)_([0-9]+)$");std::smatch hit;long long B=0,fleet=0;
+    for(const auto& name:names)if(std::regex_match(name,hit,selector)) {
+        int i=std::stoi(hit[1]),y=std::stoi(hit[2]);require(i>=1&&i<=n,"native_selector_station");support[i].push_back(y);
+    }
+    for(int i=1;i<=n;++i){std::sort(support[i].begin(),support[i].end());ratios[i]=1./instance.target[i];B+=instance.initial[i];}
+    for(int q:instance.Q)fleet+=q;
+    const auto expected=block(support,ratios,std::max(0LL,B-fleet),B);
+    int rows=0;require(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&rows)==0,"native_row_count");
+    SolverNeutralLinearModel matrix;require(readLinearModel(api,model,N,rows,matrix),"native_matrix");
+    std::map<std::string,Row> actual;std::vector<bool> ratio_found(n+1,false);
+    for(int k=0;k<rows;++k) {
+        char* name=nullptr;require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,k,&name)==0&&name,"native_row_name");
+        std::map<std::string,double> terms;
+        for(int z=matrix.row_starts[k];z<matrix.row_starts[k+1];++z)terms[names.at(matrix.column_indices[z])]+=matrix.coefficients[z];
+        if(std::string(name).rfind("rn_",0)==0) {
+            require(actual.emplace(name,Row{name,std::move(terms),matrix.senses[k],matrix.rhs[k]}).second,"native_duplicate_row");
+        } else if(matrix.senses[k]=='='&&matrix.rhs[k]==0&&terms.size()==2) {
+            for(int i=1;i<=n;++i)if(terms==std::map<std::string,double>{{"r_"+std::to_string(i),1},{"Y_"+std::to_string(i),-ratios[i]}})ratio_found[i]=true;
+        }
+    }
+    for(int i=1;i<=n;++i)require(ratio_found[i],"native_actual_c_mismatch");
+    require(actual.size()==expected.rows.size(),"native_added_row_count");
+    for(const auto& r:expected.rows) {
+        auto it=actual.find(r.name);require(it!=actual.end()&&it->second.coefficients==r.coefficients&&it->second.sense==r.sense&&it->second.rhs==r.rhs,"native_added_row_mismatch");
+    }
+    std::vector<double> lower(N),upper(N),objective(N);
+    require(api.getdblattrarray(model,GRB_DBL_ATTR_LB,0,N,lower.data())==0&&api.getdblattrarray(model,GRB_DBL_ATTR_UB,0,N,upper.data())==0&&
+        api.getdblattrarray(model,GRB_DBL_ATTR_OBJ,0,N,objective.data())==0,"native_column_arrays");
+    int columns=0;
+    for(int j=0;j<N;++j)if(names[j].rfind("rn_",0)==0) {
+        auto it=expected.columns.find(names[j]);require(it!=expected.columns.end(),"native_unexpected_column");
+        require(types.at(j)==GRB_CONTINUOUS&&lower[j]==it->second.first&&upper[j]==it->second.second&&objective[j]==0,"native_column_domain_or_objective");++columns;
+    }
+    require(columns==int(expected.columns.size()),"native_missing_column");
+    std::ofstream f(request.native_log_path.string()+".round143.native.json");f<<std::setprecision(17)
+        <<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"added_rows_checked\":"<<expected.rows.size()
+        <<",\"added_columns_checked\":"<<columns<<",\"actual_ratio_rows_checked\":"<<n<<",\"applicable\":"<<(expected.applicable?"true":"false")
+        <<",\"S_L\":"<<expected.sl<<",\"S_U\":"<<expected.su<<",\"L_t\":"<<expected.lt<<",\"U_t\":"<<expected.ut<<",\"Optimize_extra\":0}\n";
+    f.close();require(bool(f),"native_audit_write");
 }
 
 bool prepareRound68Start(const GurobiApi& api, GRBmodel* model,
@@ -2798,7 +2845,8 @@ public:
 
         std::vector<double> round68_start_values;
         std::vector<char> round68_start_types;
-        try{auditRound120Native(api_,model,request,native_names,native_types);auditRound141Native(api_,model,request,native_names,native_types);}
+        try{auditRound120Native(api_,model,request,native_names,native_types);auditRound141Native(api_,model,request,native_names,native_types);
+            auditRound143Native(api_,model,instance_,request,native_names,native_types);}
         catch(const std::exception& e){out.failure_reason=e.what();return out;}
         if (request.round68_verified_start) {
             ++stats_.warm_start_candidate_count;

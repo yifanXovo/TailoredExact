@@ -4,6 +4,7 @@
 #include "Round64SharedResource.hpp"
 #include "Round120NativeProof.hpp"
 #include "Round141Research.hpp"
+#include "Round143Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -202,6 +203,15 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
     const double ratio_max = instance.V > 0
         ? *std::max_element(ratio.begin() + 1, ratio.end()) : 0.0;
     std::vector<int> indices;
+    const bool rn_columns=std::find(domain.names.begin(),domain.names.end(),"rn_t")!=domain.names.end();
+    double rn_t=0;std::vector<double> rn_y(instance.V+1),rn_v(instance.V+1);
+    if(rn_columns) {
+        long double denominator=0;
+        for(int i=1;i<=instance.V;++i)denominator+=static_cast<long double>(1./instance.target[i])*final_inventory[i];
+        if(!(denominator>0))return finish("round143_start_nonpositive_denominator");
+        rn_t=static_cast<double>(1.L/denominator);
+        for(int i=1;i<=instance.V;++i){rn_y[i]=rn_t*final_inventory[i];rn_v[i]=(1./instance.target[i])*rn_y[i];}
+    }
     auto routeFamily = [&](const std::string& name) {
         return parseIndexedName(name, "x_", 3, indices) ||
             parseIndexedName(name, "z_", 2, indices) ||
@@ -226,6 +236,14 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             value = 0.0;
         } else if (name == "G") {
             value = out.G;
+        } else if(name=="rn_t"&&rn_columns) {
+            value=rn_t;
+        } else if(rn_columns&&parseIndexedName(name,"rn_w_",2,indices)&&indices[0]>=1&&indices[0]<=instance.V) {
+            value=final_inventory[indices[0]]==indices[1]?rn_t:0;
+        } else if(rn_columns&&parseIndexedName(name,"rn_Y_",1,indices)&&indices[0]>=1&&indices[0]<=instance.V) {
+            value=rn_y[indices[0]];
+        } else if(rn_columns&&parseIndexedName(name,"rn_h_",2,indices)&&indices[0]>=1&&indices[0]<=instance.V&&indices[1]>indices[0]&&indices[1]<=instance.V) {
+            value=std::fabs(rn_v[indices[0]]-rn_v[indices[1]]);
         } else if (name == "r141_b" && round141().ready) {
             const auto& c=round141().choice;
             if(gamma_L<c.a||gamma_U>c.z||non_strict_cutoff>c.cutoff)
