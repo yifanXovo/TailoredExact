@@ -109,3 +109,8 @@ outers including mandatory postverification total 7504.312010 seconds
 (2.084531 hours) of the eight-hour ceiling. Stable GI-TBC and old entries are
 retained. Actual Draft PR, public read and current-round cleanup remain
 separate in [RESUME](../results/unified_exact_round142/RESUME.md).
+
+The [Round143 reciprocal-normalization study](round143_research.md) records real
+matched LP gains but mixed complete same-PE results. It remains default-off
+research-only, with no full expansion or stable promotion; stable R137 above
+continues as the paper mainline.

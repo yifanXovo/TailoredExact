@@ -19,6 +19,10 @@ def main():
         a=read(d/'round135_endpoint.json');status['endpoint']={k:a.get(k) for k in ['U','L','certificate','T_cert','T_produce','T_verify','T_total','performance_eligible']}
     elif (d/'native.log').exists():status['native_tail']=tail(d/'native.log',3500).splitlines()[-12:]
     if (d/'progress.csv').exists():status['progress_tail']=tail(d/'progress.csv',1500).splitlines()[-2:]
+    status['terminal_tail']=tail(d/'external/native_logs/L0_terminal_mip.gurobi.log',3500).splitlines()[-3:]
+    if '--compact' in sys.argv:
+        status=dict(UTC=status['UTC'],arm=active['arm_id'],elapsed_outer_seconds=status['elapsed_outer_seconds'],
+            complete=receipt is not None,endpoint=status.get('endpoint'),terminal_tail=status['terminal_tail'],stderr=status['stderr_tail'])
     print(json.dumps(status,ensure_ascii=False))
 
 def _process_status(label):

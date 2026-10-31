@@ -1,0 +1,145 @@
+{
+  "schema": "round143-independent-stage-decision-v1",
+  "UTC": "2026-10-31T19:15:41.020652+00:00",
+  "reviewer": "/root/rn_review, non-primary implementer",
+  "decision": "RESEARCH_ONLY_STOP_FULL_EXPANSION_THIS_ROUND",
+  "stable_promotion": false,
+  "additional_experiments_admitted": false,
+  "source_commit": "85bd2304866942fd5b397970c5ef4099bb1b73fb",
+  "PE_SHA": "eaa6dc5d0091a1f3a38a0374aeccab28e94bff94606339c62b385b48cb7d44b1",
+  "evidence_SHA": {
+    "reports/full.json": "a1ac6147acafcdfd7c8a3a8d42addfeb5f2fc3eb47a6ad5fc55377101b3bc05d",
+    "reports/same_PE_pairs.csv": "aef59df7cc7d4fc2470a2ff242f5be935a2536cc5e26dfe5a365393a50352ca3",
+    "cost_report.json": "6f517f6ad99387cab6b95370f52775c8514802a2772c5417b31794f8a0bb98d1",
+    "pilot_entry_equivalence.json": "24d6e6f72ad06a6906077fc2c0bb2647cdfd91dbb71ad043e9703fb89d2efdb3",
+    "candidate_manifest.json": "c3bfbeecdd1f90e0e70119b019f6c91c86e16d99a48e4eb7287c4a218e326e0b",
+    "LP_plan.json": "fed9aef05383db34204d6458cbf004c814a534d73085ff674b2d7c6a46207c98",
+    "review/pilot_admission.json": "a31026c68f59b5996d63e5b9a37cdcadf7ad6dcd646decebec4ebb84468dd0e5"
+  },
+  "actual_raw_checks": [
+    {
+      "arm_id": "R143_pilot_001_K-35-U_S0_OFF",
+      "endpoint_SHA": "167f6a5253f7acfcd01bf88ef9bf5721312798f152caaa550e4d934447474365",
+      "closeout_SHA": "737d903b595b81a67fd83fe127cea0ef3f548231c0bccb902b55b394e53906f0",
+      "RN_control_SHA": "b049667ede3c009e04aaba53e897bf1530c3301a0b76ecabf6bd109fe2688036",
+      "full_outer_seconds": 2375.372096200008,
+      "declared_returned_calls": 4,
+      "Start_count": 1,
+      "Start_max_residual": 3.530509218307998e-14
+    },
+    {
+      "arm_id": "R143_pilot_002_K-35-U_S0_RN",
+      "endpoint_SHA": "7384150238bc043efe69ba15dea7567518e323a1c13cda80a9d09403a7a29dc5",
+      "closeout_SHA": "e5930557fce85d93c16ce12c46d966b970469772e9fcd87fb2928b273077c833",
+      "RN_control_SHA": "f93e2bdfd293cb0d461839305ac83eb5b5653fff0b4ed02b985738b3c6d79d2b",
+      "full_outer_seconds": 2377.248245500028,
+      "declared_returned_calls": 4,
+      "Start_count": 1,
+      "Start_max_residual": 3.530509218307998e-14
+    },
+    {
+      "arm_id": "R143_pilot_003_R-X20-S-T1_S0_OFF",
+      "endpoint_SHA": "01552bb75addb17dae64f5fdbcb5f8b8b762dc35de28dd6431b1ba2a031aa114",
+      "closeout_SHA": "ae047e40e17163ace4467a4836095a875d24d1b021d12df72e1a66502562d438",
+      "RN_control_SHA": "b049667ede3c009e04aaba53e897bf1530c3301a0b76ecabf6bd109fe2688036",
+      "full_outer_seconds": 23.458642999874428,
+      "declared_returned_calls": 5,
+      "Start_count": 2,
+      "Start_max_residual": 1.021405182655144e-14
+    },
+    {
+      "arm_id": "R143_pilot_004_R-X20-S-T1_S0_RN",
+      "endpoint_SHA": "85281d6344dc0bf47c0b896cec67866ce4e8a244af51377e10e59be8ff8ed9c1",
+      "closeout_SHA": "a4154b7b4a5619e09eecd7bf596c65e3bf7870cb4432aa5dbc045815c4db6028",
+      "RN_control_SHA": "b4c10deb5e74a4326a8e8e26ed3639175f5d040353581b406bb65c1535e987b0",
+      "full_outer_seconds": 24.988168200012296,
+      "declared_returned_calls": 4,
+      "Start_count": 1,
+      "Start_max_residual": 1.021405182655144e-14
+    }
+  ],
+  "same_PE_pairs": [
+    {
+      "role": "K-35-U",
+      "off_U": 0.6928543586313136,
+      "RN_U": 0.6812584983808189,
+      "delta_U": -0.01159586025049475,
+      "off_L": 0.5571587659330745,
+      "RN_L": 0.5429317742515352,
+      "delta_L": -0.014226991681539292,
+      "off_relative_gap": 0.1958500960667932,
+      "RN_relative_gap": 0.20304586945785152,
+      "delta_relative_gap": 0.007195773391058313,
+      "off_T_produce": 2371.1424591769464,
+      "RN_T_produce": 2371.108506981982,
+      "delta_T_produce": -0.03395219496451318,
+      "off_T_verify": 4.118173799943179,
+      "RN_T_verify": 6.028958600014448,
+      "delta_T_verify": 1.9107848000712693,
+      "off_T_total": 2375.2606329768896,
+      "RN_T_total": 2377.1374655819964,
+      "delta_T_total": 1.876832605106756,
+      "off_certificate": false,
+      "RN_certificate": false,
+      "same_PE": true,
+      "same_own_H": true
+    },
+    {
+      "role": "R-X20-S-T1",
+      "off_U": 0.6453250303858205,
+      "RN_U": 0.6453250303858205,
+      "delta_U": 0.0,
+      "off_L": 0.6453250303858202,
+      "RN_L": 0.6453250295887148,
+      "delta_L": -7.971053817001916e-10,
+      "off_relative_gap": 3.4408181066876875e-16,
+      "RN_relative_gap": 1.2352001955793209e-09,
+      "delta_relative_gap": 1.2351998514975102e-09,
+      "off_T_produce": 22.206689023878425,
+      "RN_T_produce": 23.49013477587141,
+      "delta_T_produce": 1.2834457519929856,
+      "off_T_verify": 1.1920445999130607,
+      "RN_T_verify": 1.4364240998402238,
+      "delta_T_verify": 0.24437949992716312,
+      "off_T_total": 23.398733623791486,
+      "RN_T_total": 24.926558875711635,
+      "delta_T_total": 1.5278252519201487,
+      "off_certificate": true,
+      "RN_certificate": true,
+      "same_PE": true,
+      "same_own_H": true
+    }
+  ],
+  "reasons": [
+    "RN supplies real complementary relaxation information: complete objectives rise materially in both BASE domains and still rise by 0.010001717909922575/0.016564448700022105 over matched TC+stock. This remains a useful research result and is not erased by full-method tradeoffs.",
+    "At the priority K35 hard role, the better physical incumbent is real and retained, but support L declines by 0.014226991681539292 and both signed and relative gaps worsen at the full window. Stronger root LP and fewer nodes do not establish stronger completed search. No endpoint dominates the other.",
+    "At the other priority signal role RX20-T1, both methods certify the same physical objective under the inherited numerical policy; RN raises producer and total clocks by 1.2834457519929856s and 1.5278252519201487s. The 7.97e-10 returned-L difference is numerical, not substantive mathematical information. There is no demonstrated proof-time gain.",
+    "The two mechanism-priority roles therefore show complementary LP information but no retained complete proof/endpoint advantage sufficient to replace stable R137. The source is correct and reproducible; qualification is not the reason for nonpromotion."
+  ],
+  "remaining_positions": {
+    "K20": "Not entered as a formal pair. Its saved root points already admit RN extensions, and cap90 was health-only. A new pair could characterize another role, but presently would not remove the observed priority K35 support-bound regression or change this round research-only classification. No unseen performance is inferred.",
+    "RB35_T2": "Not entered. Possible benefits are unknown. Adding this role merely to seek another positive outcome has no current decision-changing mechanism or adoption gate. The K35 tradeoff remains even if RB35 wins.",
+    "K15_RX35_T2": "Not entered. Optional easy-role protection/generalization checks are unnecessary without a candidate provisionally meeting the priority full-method adoption test; their outcomes remain unknown.",
+    "Seed1": "Not admitted. One selected two-method repetition could alter a local Seed1 outcome but cannot justify a runtime distribution or erase the retained adverse Seed0 hard-role result. No pending adoption/stop decision depends on it."
+  },
+  "limits": [
+    "Only two Seed0 role pairs were measured; do not claim RN is generally slower, improves no instance, or is mathematically redundant.",
+    "The source-level uniform RN lift remains default-off research code. No instance-name, size, time-switch, cutoff or tolerance patch is proposed to rescue it.",
+    "LP gains, saved-point certificates, exact integer equivalence and complete-method performance must remain separate evidential levels.",
+    "This closes full expansion for the present round. Reopening would require a specific new mechanism or decision-changing evidence, not an incomplete table."
+  ],
+  "accounting": {
+    "actual_new_experiment_seconds": 4880.559824799886,
+    "hours": 1.3557110624444129,
+    "total_ceiling_seconds": 28800,
+    "remaining_seconds": 23919.440175200114,
+    "full_outer_includes_postverification": true,
+    "qualification_and_failures_included": true,
+    "Native_internal_Work_not_added": true,
+    "stopping_reason": "Observed priority-role full-method tradeoff and absence of proof benefit; not budget exhaustion or a requirement to force positive results."
+  },
+  "recommendation": "Retain RN mathematical/LP/computational evidence and minimal default-off reproduction entry as research-only; finish paper increment, independent final review, English Draft PR, public carrier check and bounded current-round cleanup. Keep stable R137 GI-TBC as the formal method.",
+  "reviewer_Optimize": 0,
+  "reviewer_Native_load": 0,
+  "reviewer_build": 0
+}

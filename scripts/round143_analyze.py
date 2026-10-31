@@ -2,7 +2,10 @@
 import csv,re
 from round143_common import *
 
-def require_idle():assert not budget()['unclosed'],'wait for timed producers before heavy reads/export'
+def require_idle():
+    own=os.environ.get('ROUND140_METERED_PARENT_LABEL')
+    pending=[r for r in budget()['unclosed'] if not (r['label']==own and r['kind']=='document')]
+    assert not pending,'wait for timed producers before heavy reads/export'
 def csv_write(path,rows):
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
     with path.open('w',encoding='utf-8',newline='') as f:
@@ -81,8 +84,9 @@ def full():
     csv_write(OUT/'reports/new_arms.csv',rows);csv_write(OUT/'reports/qualification.csv',qualification);csv_write(OUT/'reports/same_PE_pairs.csv',pairs)
     write(OUT/'cost_report.json',dict(UTC=utc(),charged_new_experiment_seconds=budget()['G1_seconds'],experiment=budget(),
         ceiling_seconds=28800,all_complete_experimental_outers_charged=True,qualifications_and_failures_included=True,
-        offline_arithmetic_seconds=read(OUT/'math/offline_point_checks.json')['seconds'],
-        build_seconds_separate=sum(read(p)['separately_reported_seconds'] for p in (OUT/'fees').glob('*/receipt.json')),
+        offline_arithmetic_seconds=sum(read(p)['seconds'] for p in [OUT/'math/offline_point_checks.json',OUT/'math/history/offline_point_checks_v1.json'] if p.exists()),
+        offline_arithmetic_scope='Two exact certificate replays, including variant-matrix binding replay; setup and observed offline failed-tool times separately retained',
+        build_seconds_separate=sum(read(p)['outer_seconds'] for p in (OUT/'fees').glob('*/receipt.json') if read(p.parent/'launch.json')['kind']=='build'),
         H_LP_MIP_Work_not_added_again=True))
     print(json.dumps(pairs,indent=2))
 

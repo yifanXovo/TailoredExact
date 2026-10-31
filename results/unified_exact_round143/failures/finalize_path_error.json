@@ -1,0 +1,9 @@
+{
+  "Optimize": 0,
+  "Native_load": 0,
+  "phase": "delivery metadata before source/history binding",
+  "error": "git show 0ced8a89d:results/unified_exact_round143/math\\extensions\\K-20-S_base.json.gz returned 128 because Git paths require forward slashes",
+  "fix": "Normalize the stored Windows member path with Path.as_posix before Git lookup; actual old gzip bytes recovered and checked",
+  "science_values_changed": false,
+  "experimental_rerun": false
+}

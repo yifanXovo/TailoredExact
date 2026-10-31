@@ -66,10 +66,33 @@ def main():
         spec=actual_spec(parsed,bm,B);lt,ut=F(spec['L_t']),F(spec['U_t']);c={int(i):F(v) for i,v in spec['c_binary64'].items()}
         for variant in ['base','stock','tc_stock']:
             p=json.loads(gzip.decompress((folder/variant/'solution.json.gz').read_bytes()));g=F(p['G'])
+            source=folder/'inherited/original.lp'
+            if variant!='base':
+                source=next(q for q in [folder/'stock_export_exact_cutoff/original.lp',folder/'stock_export/original.lp'] if q.exists())
+            original=core.lp_model(source);matched=actual_spec(original,bm,B)
+            assert all(matched[k]==spec[k] for k in ['c_binary64','supports','L_t','U_t'])
+            if variant=='tc_stock':
+                terms={name:1. for name in original['order'] if name.startswith('h_')}
+                terms.update({name:-v for name,v in read(folder/'additions.json')['TC'].items() if v})
+                original['rows'].append((tuple(sorted(terms.items())),'>=',0.))
+            record=read(folder/variant/'result.json')
+            assert len(original['rows'])==record['after']['rows'] and len(original['order'])==record['after']['columns']
+            assert sum(len(terms) for terms,sense,rhs in original['rows'])==record['after']['nonzeros']
+            from round143_qualify import point_residual
+            # This is an inherited continuous point: integer-type residuals do
+            # not apply until the original integer model is being evaluated.
+            original['types']={k:'C' for k in original['order']}
+            primal=point_residual(original,p);assert max(primal.values())<=1e-6
+            objective=original['objective'][1]+math.fsum(a*p[k] for k,a in original['objective'][0])
+            assert abs(objective-record['L'])<=1e-8
             states={i:[(y,F(p[f'state_{i}_{y}'])) for y in spec['supports'][i]] for i in c}
             low,high,ts=interval(c,states,lt,ut)
             certificate=dict(role=role,variant=variant,old_g=float(g),old_g_exact=str(g),
-                source_model_SHA=sha(folder/'inherited/original.lp'),source_point_SHA=sha(folder/variant/'solution.json.gz'),
+                block_base_model_SHA=sha(folder/'inherited/original.lp'),actual_variant_source_SHA=sha(source),
+                inherited_complete_model_SHA=record['model_SHA'],inherited_result_SHA=sha(folder/variant/'result.json'),
+                variant_matrix_recipe='actual BASE' if variant=='base' else 'actual stock' if variant=='stock' else 'actual stock plus original TC row',
+                variant_complete_matrix_saved_point_residual=primal,variant_complete_objective=objective,
+                source_point_SHA=sha(folder/variant/'solution.json.gz'),actual_variant_c_support_and_t_bounds_match=True,
                 block='Actual production compact RN bounds; conservative directed t endpoints and redundant finite caps',
                 L_t=float(lt),U_t=float(ut),feasible_t_interval=[str(ts[0]),str(ts[-1])],breakpoint_count=len(ts),Optimize=0)
             if role in ('K-35-U','R-X20-S-T1'):
@@ -137,7 +160,7 @@ def main():
                 target=OUT/'math/extensions'/f'{role}_{variant}.json.gz';target.parent.mkdir(parents=True,exist_ok=True)
                 with gzip.open(target,'wt',encoding='utf-8') as f:json.dump(new,f,separators=(',',':'))
                 certificate.update(status='SAME_OLD_POINT_EXTENSION',normalized_G=float(G),gini_slack=float(g-G),
-                    t=float(t),linear_residual=violation,new_columns_SHA=sha(target),new_columns_path=str(target.relative_to(OUT)),
+                    t=float(t),linear_residual=violation,new_columns_SHA=sha(target),new_columns_path=target.relative_to(OUT).as_posix(),
                     exact_station_mass_and_normalization=True,old_columns_and_objective_unchanged=True)
             results.append(certificate);print(role,variant,certificate['status'],flush=True)
     write(OUT/'math/offline_point_checks.json',dict(PASS=True,results=results,Optimize=0,Native_load=0,seconds=time.perf_counter()-tick,
