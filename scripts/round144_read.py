@@ -9,13 +9,18 @@ def verify(launch,identity):
     d=Path(launch['destination']);method=launch['R144_method'];enabled=method=='RNP';rn=method=='RN';facts=[]
     audits=[read(p) for p in d.rglob('*.round144.native.json')]
     sources=[read(p) for p in d.rglob('*.round143.native.json')]
-    source=read(d/'external/round144_source.json') if enabled else None
-    applicable=enabled and source.get('applicable',True)
+    source_path=d/'external/round144_source.json';source_not_reached=enabled and not source_path.exists()
+    source=(read(source_path) if not source_not_reached else dict(source_solves=0,formal_RN_columns=0,PC_emitted=False,
+        not_reached=True,derived_postverification_disposition=True)) if enabled else None
+    applicable=enabled and not source_not_reached and source.get('applicable',True)
     evidence=read(d/'external/round144_projection.json') if enabled and source.get('qualified') else None
     exact=None
     if enabled:
         assert read(d/'round144_parameters.json')==dict(RN_P=True,Seed=launch['seed'],H_seed=20260626,stock=False,counts='off',AP=False,source_policy='once_initial_root',persistent_RN=False)
-        assert audits
+        if source_not_reached:
+            assert not audits and not sources
+            assert not any(r['payload']['kind']=='call' for r in read(d/'observations.json'))
+        else:assert audits
         if applicable:
             assert source['qualified'] and source['source_solves']==1 and not source['formal_control_from_source']
             assert evidence['source_SHA']==source['source_SHA'] and sources
@@ -77,7 +82,7 @@ def verify(launch,identity):
     ns=dict(vars(accepted),ROOT=ROOT,OUT=OUT,ArmModels=Models,inherited=inherited)
     value=types.FunctionType(accepted.verify.__code__,ns)(launch,identity)
     if enabled:
-        assert any(f['kind']=='formal_compact' for f in facts)
+        assert any(f['kind']=='formal_compact' for f in facts) or source_not_reached and value['arm']['declared_calls']==0
         if applicable:assert exact and exact['PASS']
     write(d/'round144_control_audit.json',dict(PASS=True,method=method,models=facts,source=source,exact_compiled_online_PC_check=exact,
         native_compact_audits=audits,native_RN_audits=sources,all_H_Start_physical_scope_quality_lifecycle_inherited=True,Optimize=0,Native_load=0))
