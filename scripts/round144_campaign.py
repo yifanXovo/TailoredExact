@@ -59,8 +59,8 @@ def run(batch,stop_after=None):
         assert metered(label,'diagnostic' if batch.startswith('qualification') else 'native',
             [PYTHON,'-B',ROOT/'scripts/round144_campaign.py','arm',batch,group['position']],group['launch']['cap_seconds']+120,group['launch']['cap_seconds']+1800)==0
     write(OUT/f'{batch}_run_return.json',dict(UTC=utc(),budget=budget()))
-def qualification(batch='qualification'):
-    freeze(batch,[dict(role='K-20-S',cap=90,method='RNP')],'One own-H complete lifecycle health check after exact compiled/Native/writer/Start qualification; no performance inference')
+def qualification(batch='qualification',role='K-20-S'):
+    freeze(batch,[dict(role=role,cap=90,method='RNP')],'One own-H complete lifecycle health check after exact compiled/Native/writer/Start qualification; no performance inference')
 def pilot():
     freeze('pilot',[dict(role=r,method=m) for r in ['K-35-U','R-X20-S-T1'] for m in ['OFF','RNP']],
         'One projected full RN block retains matched LP increments with negligible certified transport loss; primary full-window pair before resource-role expansion')

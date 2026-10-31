@@ -4244,6 +4244,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 probe.canonical_model_scope=source.model_scope;probe.canonical_row_signature=source.row_signature;
                 probe.native_log_path=artifact_dir/"native_logs/L0_round144_source.gurobi.log";
                 probe.capture_lp_primal_dual_evidence=true;
+                // Restore the disposable source's original integer types before
+                // releasing it, preserving the existing complete LP lifecycle
+                // accounting. It is still explicitly discarded below.
+                probe.incremental_model_reuse_enabled=true;probe.retain_model_after_solve=true;
                 const auto source_out=[&](){
                     struct SourceScope {
                         SourceScope(){require(!round143().rn,"persistent_RN_conflict");round144().source_running=true;round143().rn=true;}
