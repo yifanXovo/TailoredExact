@@ -1,0 +1,22 @@
+{
+  "primary": [
+    {
+      "position": 1,
+      "role": "K-35-U",
+      "variant": "base",
+      "cap_seconds": 120
+    },
+    {
+      "position": 2,
+      "role": "R-X20-S-T1",
+      "variant": "base",
+      "cap_seconds": 120
+    }
+  ],
+  "followup_policy": "After primary signal: 1-2 matched stock/TC+stock diagnostics; no automatic grid",
+  "Seed": 0,
+  "Threads": 1,
+  "serial": true,
+  "affinity_mask": 4,
+  "total_experiment_limit_seconds": 28800
+}

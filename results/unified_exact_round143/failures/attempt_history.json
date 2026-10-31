@@ -1,0 +1,55 @@
+{
+  "schema": "round143-retained-attempt-history-v1",
+  "all_failed_Optimize_calls": 0,
+  "attempts": [
+    {
+      "label": "initial_solver_free_setup",
+      "category": "offline_arithmetic_separate_from_experiment",
+      "Optimize": 0,
+      "Native_load": 0,
+      "observed_tool_wall_seconds": 2.7430546,
+      "error": "AssertionError at round143_math.py exact_fixtures: the fixture summed selector a instead of product b when checking sum(w)=t",
+      "fix": "Change sum(a)==t to sum(b)==t; corrected exact fixture and setup passed",
+      "evidence_kind": "Recorded from the actual failed command output; not a solver failure"
+    },
+    {
+      "label": "LP_K-35-U_base",
+      "category": "charged_experiment",
+      "Optimize": 0,
+      "Native_load": 0,
+      "outer_seconds": 0.3199595999903977,
+      "error": "AssertionError at SetProcessAffinityMask before Native import",
+      "fix": "Declare HANDLE and size_t argument/return types in the Windows ctypes call",
+      "actual_receipt": "fees/LP_K-35-U_base/receipt.json",
+      "actual_stderr": "fees/LP_K-35-U_base/stderr.log",
+      "failed_writer_commit": "75139e35a"
+    },
+    {
+      "label": "LP_K-35-U_base_repair1",
+      "category": "charged_experiment",
+      "Optimize": 0,
+      "Native_load": 1,
+      "outer_seconds": 2.350972600048408,
+      "error": "AssertionError in new-column UB readback: Native returns positive infinity, while GRB.INFINITY is the finite API sentinel 1e100",
+      "fix": "Accept UB>=GRB.INFINITY for mathematically unbounded columns; all finite RN bounds remain exact comparisons",
+      "actual_receipt": "fees/LP_K-35-U_base_repair1/receipt.json",
+      "actual_stderr": "fees/LP_K-35-U_base_repair1/stderr.log",
+      "actual_failed_model": "LP/K-35-U_base_repair1/model.mps",
+      "failed_writer_commit": "2cd162d8a"
+    },
+    {
+      "label": "initial_offline_rank_search",
+      "category": "offline_arithmetic_separate_from_experiment",
+      "Optimize": 0,
+      "Native_load": 0,
+      "observed_tool_wall_seconds": 1.7982982,
+      "error": "AssertionError: K35 BASE, fixed original-mean rank gave lower bound .010024184949625306 below saved g .038639183377866926",
+      "fix": "Use additional tied-rank supports selected from attainable interval water-filling; every final exclusion still minimizes its fixed support over all exact feasible-t breakpoints",
+      "scientific_scope": "An insufficient support is not a feasibility witness or a negative RN result; the failed assertion aborted without making that claim",
+      "evidence_kind": "Recorded from the actual failed command output; successful reconstructed certificates have separate identities"
+    }
+  ],
+  "automatic_failed_position_rerun": false,
+  "repairs_have_new_unique_fee_labels": true,
+  "raw_and_failed_models_retained": true
+}

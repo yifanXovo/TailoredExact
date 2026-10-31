@@ -1,0 +1,330 @@
+{
+  "schema": "round143-independent-final-scientific-review-v1",
+  "UTC": "2026-10-31T19:27:18.314877+00:00",
+  "reviewer": "/root/rn_review, non-primary implementer",
+  "decision": "ACCEPT_LOCAL_SCIENCE_AND_FINAL_PDF",
+  "PASS": true,
+  "scope": "Goal H six scientific checks plus actual seven-page PDF visual review. Public I/O, Draft PR delivery and bounded cleanup are separate pending work and are not certified here.",
+  "reviewed_files": {
+    "goal.md": "6087c2d38ccc504691c7fb9874ba000b8af3c9340ba6f7fa77ca42dd99166e71",
+    "final_report.md": "4afd0562de249107c202e001725299079dfa9f3fee53e365ab51163ce1734881",
+    "mathematical_analysis.md": "5d9b8840da9dbeaed960aeeb6a1ede4f8da0285a86018551d607aeb072608f46",
+    "candidate_decision.json": "459d37b3bc7146c612cf680023d5eb00811720b667faa5899171f97827e192cc",
+    "reports/LP.json": "a8208e2345109f74732ff12bd4f9d5050bd871c6e5cf2ce85665474c5d98d577",
+    "reports/LP.csv": "9f23dcdea08743a5ff468175d1089f4ea8bd4a334f2664e532c27570fcd913fd",
+    "reports/full.json": "91eaae7ccdafbfbe97de1bce531fa12069082f70f12a587d2393d92b4c77a7c7",
+    "reports/same_PE_pairs.csv": "aef59df7cc7d4fc2470a2ff242f5be935a2536cc5e26dfe5a365393a50352ca3",
+    "cost_report.json": "502ed44c20e6356d420429ff089de9eff99d673a3ff56df4cfd40d75156200fe",
+    "source_publication.json": "7cd90f0d8020a4e0f2d44721701933769ad078c3df4c4ee248c06ad2ae227f69",
+    "measured_helper_versions.json": "727a15b432ad0497cf963f78276f9683f06478d063c68c90e045c1aa1c37de2d",
+    "candidate_manifest.json": "c3bfbeecdd1f90e0e70119b019f6c91c86e16d99a48e4eb7287c4a218e326e0b",
+    "entry_check.json": "9860e5d48060345751d7de7cbe87971d0aa367a9eb083289d4ccdc7e13f9632b",
+    "pilot_entry_equivalence.json": "24d6e6f72ad06a6906077fc2c0bb2647cdfd91dbb71ad043e9703fb89d2efdb3",
+    "math/offline_point_checks.json": "cf02e84b26cd4d978cfde8033d56b4d6a0970baa9628d5949a851a7315479ede",
+    "math/history/identity_map.json": "7377d9f299658a4beea245cc9d7edce045033490affbcb27a5364853644348f6",
+    "manuscript.md": "9df30cc3eae3bd0dc694cf8ece9a3954fef06b6b133b789412dec036c8feb8fe",
+    "manuscript.pdf": "a5061fd34cb952d62232961bb26b9b5947d60cf0013f702ecff3cd074d885902",
+    "pdf_render_manifest.json": "e1c87f3061abeeb6697ddab2b2aebdb36a2213e9b47d86c1003cdaab6a5d2672",
+    "pdf_visual_review.json": "41d6e46097d74b43f53dabf13b87ec858a32ded110b7f7a22ae758d255484335",
+    "review/stage_decision.json": "42e31f9b76e9c29c4e7f555361cb96a26899e1a0d15a799e2983b2370889a31e"
+  },
+  "production_source_commit": "85bd2304866942fd5b397970c5ef4099bb1b73fb",
+  "PE_SHA": "eaa6dc5d0091a1f3a38a0374aeccab28e94bff94606339c62b385b48cb7d44b1",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "goal_H_checks": [
+    {
+      "item": 1,
+      "status": "PASS",
+      "finding": "Original g+lambda*P and penalty coefficients remain unchanged; original integer route/operation/inventory columns retain their types. Actual positive c is checked against native ratio rows. Full-scope dyadic inventory bounds are directed before reciprocal; S_L<=0 omits RN. Finite new-column caps preserve the old-space projection."
+    },
+    {
+      "item": 2,
+      "status": "PASS",
+      "finding": "Exact three-site gap 1/12 and four-site RN/TC-stock non-dominance are both retained. Neither a full integer hull nor RN dominance over TC is claimed."
+    },
+    {
+      "item": 3,
+      "status": "PASS",
+      "finding": "Twelve reconstructed fixed-point checks match actual variant matrices. Independently checked complete old primal/objective and actual c/support/t interval. Original v1 report and gzip bytes retained by identity map; certificate mathematical content and positive-extension JSON values unchanged. Six exclusions and six extensions remain separate from four reoptimized LP gains."
+    },
+    {
+      "item": 4,
+      "status": "PASS",
+      "finding": "Carrier is stable R137 plus default-off uniform RN. Historical stable entry/profile bytes are unchanged. Four affected units rebuilt; current source/PE and actual native readback remain bound. Complete Start columns and physical-G domain eligibility retain prior qualification; no research-stack leakage."
+    },
+    {
+      "item": 5,
+      "status": "PASS",
+      "finding": "Two same-PE Seed0 role pairs each own full H, serial Threads1 and original windows. All 22 complete/health Native calls returned; four diagnostic LPs make 26 Optimize calls in total. All favorable/adverse positions remain. Full outer charge 4880.559824799886s includes failures/qualification/postverification; no nested Work double charge. Reaggregation changed metadata identities, not raw or measured endpoints."
+    },
+    {
+      "item": 6,
+      "status": "PASS",
+      "finding": "Historical R88/R133/R138/R140 and standard Charnes-Cooper/Yue/Chen-Hooker antecedents retain attribution. The result-based research-only stop follows K35 U/L tradeoff and RX20 proof-clock result; absent positions and Seeds are not extrapolated and no low-value table completion is required."
+    }
+  ],
+  "current_vs_stage": {
+    "current_full_SHA": "91eaae7ccdafbfbe97de1bce531fa12069082f70f12a587d2393d92b4c77a7c7",
+    "historical_stage_full_SHA": "a1ac6147acafcdfd7c8a3a8d42addfeb5f2fc3eb47a6ad5fc55377101b3bc05d",
+    "current_cost_SHA": "502ed44c20e6356d420429ff089de9eff99d673a3ff56df4cfd40d75156200fe",
+    "historical_stage_cost_SHA": "6f517f6ad99387cab6b95370f52775c8514802a2772c5417b31794f8a0bb98d1",
+    "all_same_PE_endpoint_and_clock_numbers_identical": true,
+    "raw_endpoint_and_closeout_SHA_checked": true,
+    "experiment_charge_unchanged": true,
+    "offline_additional_exact_replay_seconds_separate": 31.637373799690977,
+    "no_experiment_rerun_required": true
+  },
+  "actual_variant_replay": [
+    {
+      "role": "K-35-U",
+      "variant": "base",
+      "source_SHA": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+      "rows": 23624,
+      "columns": 10007,
+      "nonzeros": 163516,
+      "old_full_primal_residual": {
+        "constraints": 1.4210854715202004e-14,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.20017766194929548,
+      "status": "FIXED_SELECTOR_EXCLUDED"
+    },
+    {
+      "role": "K-35-U",
+      "variant": "stock",
+      "source_SHA": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+      "rows": 23628,
+      "columns": 10007,
+      "nonzeros": 163730,
+      "old_full_primal_residual": {
+        "constraints": 1.8189894035458565e-12,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.21808877901382714,
+      "status": "FIXED_SELECTOR_EXCLUDED"
+    },
+    {
+      "role": "K-35-U",
+      "variant": "tc_stock",
+      "source_SHA": "7cb943084f51113031c6704444784030a42fcdbe213dc756db74fa134f996045",
+      "rows": 23629,
+      "columns": 10007,
+      "nonzeros": 164728,
+      "old_full_primal_residual": {
+        "constraints": 1.8189894035458565e-12,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.21808877901382714,
+      "status": "FIXED_SELECTOR_EXCLUDED"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "variant": "base",
+      "source_SHA": "ea3fb0de411e188fb5a6b2244d90343d22dcb13b8d393a480798fe44d5d416a4",
+      "rows": 6023,
+      "columns": 2480,
+      "nonzeros": 35158,
+      "old_full_primal_residual": {
+        "constraints": 8.6389229103645e-15,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.3315943162865374,
+      "status": "FIXED_SELECTOR_EXCLUDED"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "variant": "stock",
+      "source_SHA": "80ef9015788208bc8f5c8404a97174cd2f732d1a278430b12624e3cc75c86901",
+      "rows": 6027,
+      "columns": 2480,
+      "nonzeros": 35282,
+      "old_full_primal_residual": {
+        "constraints": 8.881784197001252e-15,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.37755753029694206,
+      "status": "FIXED_SELECTOR_EXCLUDED"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "variant": "tc_stock",
+      "source_SHA": "80ef9015788208bc8f5c8404a97174cd2f732d1a278430b12624e3cc75c86901",
+      "rows": 6028,
+      "columns": 2480,
+      "nonzeros": 35598,
+      "old_full_primal_residual": {
+        "constraints": 1.8189894035458565e-12,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.37755753029694195,
+      "status": "FIXED_SELECTOR_EXCLUDED"
+    },
+    {
+      "role": "K-20-S",
+      "variant": "base",
+      "source_SHA": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+      "rows": 6637,
+      "columns": 3096,
+      "nonzeros": 38286,
+      "old_full_primal_residual": {
+        "constraints": 9.460487948587115e-14,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.19514915244120534,
+      "status": "SAME_OLD_POINT_EXTENSION"
+    },
+    {
+      "role": "K-20-S",
+      "variant": "stock",
+      "source_SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+      "rows": 6641,
+      "columns": 3096,
+      "nonzeros": 38410,
+      "old_full_primal_residual": {
+        "constraints": 9.094947017729282e-13,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.2045904391781004,
+      "status": "SAME_OLD_POINT_EXTENSION"
+    },
+    {
+      "role": "K-20-S",
+      "variant": "tc_stock",
+      "source_SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+      "rows": 6642,
+      "columns": 3096,
+      "nonzeros": 38865,
+      "old_full_primal_residual": {
+        "constraints": 5.051514762044462e-15,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.22454202090625727,
+      "status": "SAME_OLD_POINT_EXTENSION"
+    },
+    {
+      "role": "R-X35-S-T2",
+      "variant": "base",
+      "source_SHA": "c7ce593e01494b8d5f531959fbd3bf230748bcc9abfe7a236dcffe81cec6e493",
+      "rows": 23334,
+      "columns": 9729,
+      "nonzeros": 164317,
+      "old_full_primal_residual": {
+        "constraints": 3.637978807091713e-12,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.18609979544714425,
+      "status": "SAME_OLD_POINT_EXTENSION"
+    },
+    {
+      "role": "R-X35-S-T2",
+      "variant": "stock",
+      "source_SHA": "644b58945bf548cc787aa1568cf5577be355fc649d3515a67977f84ff34b12ec",
+      "rows": 23338,
+      "columns": 9729,
+      "nonzeros": 164531,
+      "old_full_primal_residual": {
+        "constraints": 7.299716386910404e-15,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.1931361142188395,
+      "status": "SAME_OLD_POINT_EXTENSION"
+    },
+    {
+      "role": "R-X35-S-T2",
+      "variant": "tc_stock",
+      "source_SHA": "644b58945bf548cc787aa1568cf5577be355fc649d3515a67977f84ff34b12ec",
+      "rows": 23339,
+      "columns": 9729,
+      "nonzeros": 165378,
+      "old_full_primal_residual": {
+        "constraints": 3.637978807091713e-12,
+        "bounds": 0.0,
+        "integrality": 0.0
+      },
+      "old_objective": 0.19452186561124263,
+      "status": "SAME_OLD_POINT_EXTENSION"
+    }
+  ],
+  "pdf": {
+    "PDF_SHA": "a5061fd34cb952d62232961bb26b9b5947d60cf0013f702ecff3cd074d885902",
+    "bytes": 143941,
+    "pages": [
+      {
+        "page": 1,
+        "preview": "results/unified_exact_round143/qa_pages/page-1.png",
+        "PNG_SHA": "154ae69aa686c6f94a60a1baa1233076c2eb290048e00a8a38cfb488dd25ed9c",
+        "actual_independent_visual_inspection": true,
+        "no_clipping_overlap_missing_glyphs_or_illegible_math": true
+      },
+      {
+        "page": 2,
+        "preview": "results/unified_exact_round143/qa_pages/page-2.png",
+        "PNG_SHA": "2b193a7834cd62b7d8b900c4914b9bd215a601b5fda68e3bade032a241d8f785",
+        "actual_independent_visual_inspection": true,
+        "no_clipping_overlap_missing_glyphs_or_illegible_math": true
+      },
+      {
+        "page": 3,
+        "preview": "results/unified_exact_round143/qa_pages/page-3.png",
+        "PNG_SHA": "70c6baaa49f0980b06627c36997b0828668f232ce9c2760507b91f9d1880613e",
+        "actual_independent_visual_inspection": true,
+        "no_clipping_overlap_missing_glyphs_or_illegible_math": true
+      },
+      {
+        "page": 4,
+        "preview": "results/unified_exact_round143/qa_pages/page-4.png",
+        "PNG_SHA": "80b4dbe0ef0c859148e9715de50c3fd7ffcbb91ea1c268bc6a22e1298f55e92f",
+        "actual_independent_visual_inspection": true,
+        "no_clipping_overlap_missing_glyphs_or_illegible_math": true
+      },
+      {
+        "page": 5,
+        "preview": "results/unified_exact_round143/qa_pages/page-5.png",
+        "PNG_SHA": "954eb942f39ea9603bc8763478a9b8c424ac2f4193efec7fec1618cc4b821efe",
+        "actual_independent_visual_inspection": true,
+        "no_clipping_overlap_missing_glyphs_or_illegible_math": true
+      },
+      {
+        "page": 6,
+        "preview": "results/unified_exact_round143/qa_pages/page-6.png",
+        "PNG_SHA": "03b0f7cee724930b8f0fc069a11f709fc132fe63d65862c3f372129cf603e5ad",
+        "actual_independent_visual_inspection": true,
+        "no_clipping_overlap_missing_glyphs_or_illegible_math": true
+      },
+      {
+        "page": 7,
+        "preview": "results/unified_exact_round143/qa_pages/page-7.png",
+        "PNG_SHA": "935ba323b1cc960fddfa98657d87ccfd623ee076dc7c0c92d9af46db28556341",
+        "actual_independent_visual_inspection": true,
+        "no_clipping_overlap_missing_glyphs_or_illegible_math": true
+      }
+    ],
+    "page_count": 7,
+    "skill": "pdf:pdf",
+    "review_method": "Actually viewed every final Poppler page image through view_image, pages 1-3 and 4-7; text extraction not substituted for layout review.",
+    "layout_notes": "Formulae, table rules/columns, wrapped build/solve cells, tiny scientific notation, references, title/contents and all seven page numbers are legible and unclipped. Normal paragraph carryover across pages does not obscure meaning.",
+    "primary_visual_receipt_SHA": "41d6e46097d74b43f53dabf13b87ec858a32ded110b7f7a22ae758d255484335",
+    "PDF_marker_successful_invocations": 1,
+    "initial_document_guard_failure_retained": true
+  },
+  "final_scientific_conclusion": "RN is an exact positive-scope integer-preserving Gini lift with real complementary matched LP gains. Complete same-PE evidence retains a K35 incumbent benefit alongside a support-bound/gap regression and no RX20 proof-clock gain. Research-only retention and stopping further full expansion are supported; stable R137 remains formal.",
+  "public_I_O_verified": false,
+  "Draft_PR_delivery_verified": false,
+  "cleanup_verified": false,
+  "delivery_pending": "Do not use manuscript administrative mentions of separate receipts as proof that public recovery or cleanup has already occurred; bind their actual later receipts separately.",
+  "issues": [],
+  "reviewer_Optimize": 0,
+  "reviewer_Native_load": 0,
+  "reviewer_build": 0
+}

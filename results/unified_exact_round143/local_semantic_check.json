@@ -1,0 +1,115 @@
+{
+  "PASS": true,
+  "UTC": "2026-10-31T19:30:33.330428+00:00",
+  "raw": [
+    {
+      "arm_id": "R143_qualification_001_K-20-S_S0_RN",
+      "endpoint_SHA": "809891f9ed88ab1963c3381027004a4525ede927957eff066c15fcb52072251c",
+      "closeout_SHA": "d463ce0d66dd9e41791dc7773a65c9a165852447519dbaf7612b95a5c82333ea",
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42"
+    },
+    {
+      "arm_id": "R143_pilot_001_K-35-U_S0_OFF",
+      "endpoint_SHA": "167f6a5253f7acfcd01bf88ef9bf5721312798f152caaa550e4d934447474365",
+      "closeout_SHA": "737d903b595b81a67fd83fe127cea0ef3f548231c0bccb902b55b394e53906f0",
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb"
+    },
+    {
+      "arm_id": "R143_pilot_002_K-35-U_S0_RN",
+      "endpoint_SHA": "7384150238bc043efe69ba15dea7567518e323a1c13cda80a9d09403a7a29dc5",
+      "closeout_SHA": "e5930557fce85d93c16ce12c46d966b970469772e9fcd87fb2928b273077c833",
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb"
+    },
+    {
+      "arm_id": "R143_pilot_003_R-X20-S-T1_S0_OFF",
+      "endpoint_SHA": "01552bb75addb17dae64f5fdbcb5f8b8b762dc35de28dd6431b1ba2a031aa114",
+      "closeout_SHA": "ae047e40e17163ace4467a4836095a875d24d1b021d12df72e1a66502562d438",
+      "input_SHA": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6"
+    },
+    {
+      "arm_id": "R143_pilot_004_R-X20-S-T1_S0_RN",
+      "endpoint_SHA": "85281d6344dc0bf47c0b896cec67866ce4e8a244af51377e10e59be8ff8ed9c1",
+      "closeout_SHA": "a4154b7b4a5619e09eecd7bf596c65e3bf7870cb4432aa5dbc045815c4db6028",
+      "input_SHA": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6"
+    }
+  ],
+  "protected_prior_entries_profiles": [
+    {
+      "path": "config/gi_tbc_count_disjunction_round141.json",
+      "current_SHA": "85b2ab2d475845fd96f7ca949e30d3714c469669b4a8f406156bd3eb48dcc047",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "config/gi_tbc_count_products_round142.json",
+      "current_SHA": "93a6307271a3ad3be84a07713c3ad02e723e5c5847820c49360d09e5e4935b5c",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "config/gi_tbc_round137.json",
+      "current_SHA": "9c76a442d97b504abfbb419722000b50fdba7f5bdeae9160cace555ef71c9dd0",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "config/gi_tbc_stock_placement_round139.json",
+      "current_SHA": "8e188fb60eb908b0d304fd0c602d9857318888df2e7874b92065ad116f26cef8",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "config/gi_tbc_stock_rlt_round138.json",
+      "current_SHA": "ac7cace16f2f2e9489c47a8677b95addb68e34827cc1cb3542af345ff12380db",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "config/gi_tbc_tc2_round140.json",
+      "current_SHA": "6ad824def8900f1a5cb62d30d96d51b63faed0232069fabe3ee35d7ab51c6271",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "config/paper_s2.json",
+      "current_SHA": "f3f20396a3dbba3a98b7d33dcc640513fe4c7c9ce2a9ce9843dc14cd3cccf938",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "scripts/paper_s2.py",
+      "current_SHA": "58a35f88a5b54c2f4b968ca6b7a862c98bd6573c0e95a0f1abca5d7a52f7bab8",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "scripts/paper_s2_count_disjunction.py",
+      "current_SHA": "bdef63cd39790a8a15f6e2573f3236f459ee81ba116b8eeaab4997eb76972bc1",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "scripts/paper_s2_count_products.py",
+      "current_SHA": "d1e8293d5e31d0161a9458bdae2b7686f33cfea2903c3570d095bf0c4a2b20d8",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "scripts/paper_s2_stock_placement.py",
+      "current_SHA": "b073a603c4214216780cd60ec8bd07c133af1e9b07409f545f5a35d790ea8d75",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "scripts/paper_s2_stock_rlt.py",
+      "current_SHA": "d87d25c42848f4329cb48f6bd9b7914ce0c0530fa9b900d3ca1ab325b4bba1cf",
+      "original_semantics_and_bytes_modulo_EOL": true
+    },
+    {
+      "path": "scripts/paper_s2_tc2.py",
+      "current_SHA": "8e5763117f1314459e98a11e5a4b3c61fc26f39961e8388cf135e09f55dc0df3",
+      "original_semantics_and_bytes_modulo_EOL": true
+    }
+  ],
+  "Native_Optimize": 22,
+  "standalone_LP_Optimize": 4,
+  "total_Optimize": 26,
+  "all_returned": true,
+  "unclosed": [],
+  "experiment_seconds": 4880.559824799886,
+  "within_28800_seconds": true,
+  "final_scientific_review_SHA": "d15b5f0b4b1ab190a6e9d7f9ed8a969e4318278b2f922e49cbcc83f9dda33b9c",
+  "PDF_SHA": "a5061fd34cb952d62232961bb26b9b5947d60cf0013f702ecff3cd074d885902",
+  "current_check_Optimize": 0,
+  "current_check_Native_load": 0,
+  "seconds": 0.8098957999609411
+}

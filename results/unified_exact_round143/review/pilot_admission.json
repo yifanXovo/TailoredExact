@@ -1,0 +1,190 @@
+{
+  "schema": "round143-independent-pilot-admission-v1",
+  "UTC": "2026-10-31T17:52:37.042615+00:00",
+  "reviewer": "/root/rn_review, non-primary implementer",
+  "decision": "ACCEPT",
+  "matrix_SHA": "c4a25adf92e30ebb9b02a511bb0633c2cf4537b6ea6a83d7a8718dbc2ee8536d",
+  "candidate_manifest_SHA": "c3bfbeecdd1f90e0e70119b019f6c91c86e16d99a48e4eb7287c4a218e326e0b",
+  "source_commit": "85bd2304866942fd5b397970c5ef4099bb1b73fb",
+  "PE_SHA": "eaa6dc5d0091a1f3a38a0374aeccab28e94bff94606339c62b385b48cb7d44b1",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "source_bindings": {
+    "include/Round143Research.hpp": "dbe43ef9ace44ebba4f311a3e00087605e04cc64a9623ff2d2186663eea3e006",
+    "src/CplexBaseline.cpp": "18130fe7095dc3bd9e6cc99468c093de995c246edc25616eed73d59d673d5445",
+    "src/GurobiBaseline.cpp": "a5f21676ed74e630870de0d1e437a641246e0cc08943d8e10582d959eae9530a",
+    "src/MipStartMapping.cpp": "808c21e50fa343013ae485d80d58b602989eb3d3127e0822a33ee947bf9553e5",
+    "src/main.cpp": "96802437906234494e32d84abdede46b7e8dde83a1026f9de3051cc61d4481cd",
+    "scripts/round143_read.py": "c763ff58e6b2ab3c35d2c15dc4f8bdbb1b91fd3c4bfc20fda0b1dea20a28aac6",
+    "scripts/round143_campaign.py": "39cfe9aec8f0218591fe3dd0dcbdcfa6ef50a3dabf850307e8564aac9eb00566"
+  },
+  "positions": [
+    {
+      "position": 1,
+      "role": "K-35-U",
+      "RN": false,
+      "cap": 2400,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "lambda_value": 0.15,
+      "T_seconds": 10800,
+      "identity_SHA": "2fbcb95e760bbc78c34224df7def66f29b5b92d957c8a975c16b5d03a36a1c8a"
+    },
+    {
+      "position": 2,
+      "role": "K-35-U",
+      "RN": true,
+      "cap": 2400,
+      "input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+      "lambda_value": 0.15,
+      "T_seconds": 10800,
+      "identity_SHA": "1587825e3d1bdbc3eed6416c66d6778d04348323740a85dc10a6f8962d418a6e"
+    },
+    {
+      "position": 3,
+      "role": "R-X20-S-T1",
+      "RN": false,
+      "cap": 1200,
+      "input_SHA": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "lambda_value": 0.12676060979965992,
+      "T_seconds": 4800,
+      "identity_SHA": "b17a4a00eade9e54d379d478eac319aaa0f7f0856ea099cf4b3f3ef77b7e88d2"
+    },
+    {
+      "position": 4,
+      "role": "R-X20-S-T1",
+      "RN": true,
+      "cap": 1200,
+      "input_SHA": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "lambda_value": 0.12676060979965992,
+      "T_seconds": 4800,
+      "identity_SHA": "e171315337598d62f4f247f870f5733cfc50f45e5bbde6ebdeb884f8ea02565d"
+    }
+  ],
+  "scope": "Only frozen four positions K35 OFF/RN cap2400 and RX20-T1 OFF/RN cap1200. No further roles/Seed expansion is admitted.",
+  "qualification": {
+    "endpoint_SHA": "809891f9ed88ab1963c3381027004a4525ede927957eff066c15fcb52072251c",
+    "audit_SHA": "5d8c8886107a58c742f937ccf835316aee39fe436dd767cfd0ff8c8d0adade87",
+    "RN_audit_SHA": "4ef6e8d0364ea5fd079d10dbc7fd0c7ed3d00a580e8a9a77ac17c0995d1abfe6",
+    "closeout_SHA": "d463ce0d66dd9e41791dc7773a65c9a165852447519dbaf7612b95a5c82333ea",
+    "complete_calls": 5,
+    "returned_calls": 5,
+    "Start_columns": 3758,
+    "Start_maximum_residual": 6.48925357893404e-14,
+    "U": 0.7257630107796719,
+    "L": 0.676034137025666,
+    "T_cert": null,
+    "T_produce": 61.54668955435045,
+    "T_verify": 1.836695099947974,
+    "T_total": 63.383384654298425,
+    "budget_outer_seconds": 63.446053999941796,
+    "status": "QUALIFIED_OPEN_HEALTH_ONLY"
+  },
+  "checks_timing": "All RN parameter/native-receipt reads occur before inherited verifier entry, and RN model-row/column checks occur in model_contract hooks before the inherited t_verified stop. T_verify is measured from the producer timestamp, so includes this added work. Final clocks come from round135_endpoint.json/arm_total_receipt.json; audit.json.endpoint predates their clock update. Subsequent small RN report serialization remains in full budget outer.",
+  "budget": {
+    "G1_seconds": 79.49267189996317,
+    "remaining_G1_seconds": 28720.507328100037,
+    "by_category": {
+      "diagnostic": 79.49267189996317,
+      "native": 0.0
+    },
+    "limits": {
+      "diagnostic": 28800.0,
+      "native": 28800.0
+    },
+    "category_remaining": {
+      "diagnostic": 28720.507328100037,
+      "native": 28800.0
+    },
+    "separately_reported_seconds": 37.893494999501854,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "offline": {
+    "SHA": "185a5830da3c5e28100e1b1a4263173086ecc8467a8bbd40a690d63dd5c85132",
+    "checker_SHA": "a784f975d01190251ecf8ce0878e1dc95e01e6f007df0556961ab948bf8a33f8",
+    "results": [
+      {
+        "role": "K-35-U",
+        "variant": "base",
+        "status": "FIXED_SELECTOR_EXCLUDED",
+        "g_lower": 0.06638510719386695,
+        "separation": 0.027745923816000023
+      },
+      {
+        "role": "K-35-U",
+        "variant": "stock",
+        "status": "FIXED_SELECTOR_EXCLUDED",
+        "g_lower": 0.06639366080207368,
+        "separation": 0.00984336035967508
+      },
+      {
+        "role": "K-35-U",
+        "variant": "tc_stock",
+        "status": "FIXED_SELECTOR_EXCLUDED",
+        "g_lower": 0.06886323285761521,
+        "separation": 0.01231293241521663
+      },
+      {
+        "role": "R-X20-S-T1",
+        "variant": "base",
+        "status": "FIXED_SELECTOR_EXCLUDED",
+        "g_lower": 0.1714079330595937,
+        "separation": 0.07069522756965121
+      },
+      {
+        "role": "R-X20-S-T1",
+        "variant": "stock",
+        "status": "FIXED_SELECTOR_EXCLUDED",
+        "g_lower": 0.17162526136231854,
+        "separation": 0.024949341861971508
+      },
+      {
+        "role": "R-X20-S-T1",
+        "variant": "tc_stock",
+        "status": "FIXED_SELECTOR_EXCLUDED",
+        "g_lower": 0.17171975684488908,
+        "separation": 0.0250438373445421
+      },
+      {
+        "role": "K-20-S",
+        "variant": "base",
+        "status": "SAME_OLD_POINT_EXTENSION",
+        "new_row_residual": 1.1102230246251565e-16
+      },
+      {
+        "role": "K-20-S",
+        "variant": "stock",
+        "status": "SAME_OLD_POINT_EXTENSION",
+        "new_row_residual": 1.1102230246251565e-16
+      },
+      {
+        "role": "K-20-S",
+        "variant": "tc_stock",
+        "status": "SAME_OLD_POINT_EXTENSION",
+        "new_row_residual": 1.1102230246251565e-16
+      },
+      {
+        "role": "R-X35-S-T2",
+        "variant": "base",
+        "status": "SAME_OLD_POINT_EXTENSION",
+        "new_row_residual": 3.469446951953614e-17
+      },
+      {
+        "role": "R-X35-S-T2",
+        "variant": "stock",
+        "status": "SAME_OLD_POINT_EXTENSION",
+        "new_row_residual": 2.7755575615628914e-17
+      },
+      {
+        "role": "R-X35-S-T2",
+        "variant": "tc_stock",
+        "status": "SAME_OLD_POINT_EXTENSION",
+        "new_row_residual": 2.7755575615628914e-17
+      }
+    ],
+    "note": "Six rank lower certificates are independently recomputed over the complete exact t breakpoints; six new-column extensions meet actual production RN rows and redundant finite caps numerically. Some reconstructed rank/eta supports improve the goal-supplied bounds; they are identified as reconstructed certificates, not identical old certificate bytes. No rational full-LP optimality is claimed."
+  },
+  "issues": [],
+  "reviewer_Optimize": 0,
+  "reviewer_Native_load": 0,
+  "reviewer_build": 0
+}

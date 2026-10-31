@@ -1,0 +1,98 @@
+{
+  "UTC": "2026-10-31T19:31:53.012950+00:00",
+  "receipts": [
+    {
+      "label": "compile_CplexBaseline",
+      "category": "build",
+      "seconds": 8.868897199863568,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "compile_GurobiBaseline",
+      "category": "build",
+      "seconds": 14.266106799943373,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "compile_main",
+      "category": "build",
+      "seconds": 9.294635399943218,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "compile_MipStartMapping",
+      "category": "build",
+      "seconds": 1.7003236999735236,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "compile_qualification",
+      "category": "build",
+      "seconds": 2.431894299807027,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "document_export",
+      "category": "document",
+      "seconds": 0.14027939992956817,
+      "experimental_charge": 0,
+      "exit_code": 1
+    },
+    {
+      "label": "document_export_repair1",
+      "category": "document",
+      "seconds": 6.925753199961036,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "document_pdf_v2",
+      "category": "document",
+      "seconds": 5.424650900065899,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "document_typography",
+      "category": "document",
+      "seconds": 0.11395139992237091,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "link_production",
+      "category": "build",
+      "seconds": 1.3316375999711454,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "render_final",
+      "category": "document",
+      "seconds": 1.9598951998632401,
+      "experimental_charge": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "render_typography_v2",
+      "category": "document",
+      "seconds": 1.698274299968034,
+      "experimental_charge": 0,
+      "exit_code": 0
+    }
+  ],
+  "measured_build_seconds": 37.893494999501854,
+  "measured_document_seconds": 16.26280439971015,
+  "offline_certificate_replay_seconds": 31.637373799690977,
+  "carrier_pack_seconds": 2.938469899818301,
+  "archive_read_seconds": 0.34211029997095466,
+  "interactive_editing_or_review_time_not_invented": true,
+  "public_IO_pending": true,
+  "Optimize": 0,
+  "Native_load": 0
+}

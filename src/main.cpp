@@ -3,6 +3,7 @@
 #include "Round139Research.hpp"
 #include "Round140Research.hpp"
 #include "Round141Research.hpp"
+#include "Round143Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -871,6 +872,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         else if (arg == "--gurobi-seed") opt.gurobi_seed = std::stoi(requireValue(i, argc, argv));
         else if (arg == "--round135-aggregate-penalty") ebrp::round135AggregatePenalty() = true;
         else if (arg == "--round138-stock-rlt") ebrp::round138().stock_rlt = true;
+        else if (arg == "--round143-rn") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on")throw std::runtime_error("Round143 RN must be off or on");
+            ebrp::round143().rn=value=="on";
+        }
         else if (arg == "--round139-stock-placement") ebrp::round139().set(requireValue(i, argc, argv));
         else if (arg == "--round140-counts") ebrp::round140().set(requireValue(i, argc, argv));
         else if (arg == "--round141-count-proof") ebrp::round141().set(requireValue(i, argc, argv));
@@ -3551,6 +3557,18 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round143().rn) {
+        if(ebrp::round127().mode!="ms2"||ebrp::round138().stock_rlt||ebrp::round139().enabled()||
+            ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||
+            ebrp::round135AggregatePenalty()||opt.round90_lp_g_split||opt.round119_proof_contraction||opt.round120_native_proof!="off")
+            throw std::runtime_error("Round143 RN requires isolated stable GI-TBC ms2");
+        if(!opt.out_path.empty()) {
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round143_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"RN\":true,\"Seed\":"<<opt.gurobi_seed<<",\"H_seed\":"<<opt.primal_heuristic_seed<<",\"stock\":false,\"counts\":\"off\",\"AP\":false}\n";
+            if(!f)throw std::runtime_error("Round143 parameter persistence failed");
+        }
+    }
     if(ebrp::round142().enabled()) {
         if(!ebrp::round141().enabled())
             throw std::runtime_error("Round142 count products require the R141 count-proof carrier");
