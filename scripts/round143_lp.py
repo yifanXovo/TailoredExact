@@ -21,14 +21,17 @@ def semantics(m,old_columns=None,old_rows=None):
         e=m.getRow(c); rows.append((c.ConstrName,c.Sense,c.RHS,sorted((e.getVar(i).VarName,e.getCoeff(i)) for i in range(e.size()))))
     return dict(columns=columns,rows=rows,ObjCon=m.ObjCon,ModelSense=m.ModelSense)
 
-def solve(role,variant,cap=120):
+def solve(role,variant,attempt='',cap=120):
     assert variant in ('base','stock','tc_stock')
-    assert ctypes.windll.kernel32.SetProcessAffinityMask(ctypes.windll.kernel32.GetCurrentProcess(),4)
+    kernel=ctypes.WinDLL('kernel32',use_last_error=True)
+    kernel.GetCurrentProcess.restype=ctypes.c_void_p
+    kernel.SetProcessAffinityMask.argtypes=[ctypes.c_void_p,ctypes.c_size_t]
+    assert kernel.SetProcessAffinityMask(kernel.GetCurrentProcess(),4),ctypes.get_last_error()
     from round100_gurobi_runtime import gp,binding
     identity=binding(); assert identity['sha256']==DLL_SHA
     tick=time.perf_counter(); folder=OUT/'inherited/roots'/role
     scope=read(folder/'scope.json'); spec=read(OUT/'domains'/role/'RN.json')
-    target=OUT/'LP'/f'{role}_{variant}'; target.mkdir(parents=True,exist_ok=False)
+    target=OUT/'LP'/f'{role}_{variant}{attempt}'; target.mkdir(parents=True,exist_ok=False)
     old=read(folder/variant/'result.json'); oldpoint=json.loads(gzip.decompress((folder/variant/'solution.json.gz').read_bytes()))
     source=folder/'inherited/original.lp'
     if variant!='base':
@@ -107,11 +110,11 @@ def solve(role,variant,cap=120):
             write(target/'result.json',result)
     print(json.dumps({k:result.get(k) for k in ['role','variant','qualified','L','difference','g','weighted_penalty','build_seconds','optimize_wall_seconds']}),flush=True)
 
-def run(role,variant):
+def run(role,variant,attempt=''):
     configure()
-    label=f'LP_{role}_{variant}'
-    assert metered(label,'diagnostic',[LP_PYTHON,'-B',ROOT/'scripts/round143_lp.py','solve',role,variant],reservation=150,timeout=180)==0
+    label=f'LP_{role}_{variant}{attempt}'
+    assert metered(label,'diagnostic',[LP_PYTHON,'-B',ROOT/'scripts/round143_lp.py','solve',role,variant,attempt],reservation=150,timeout=180)==0
 
 if __name__=='__main__':
-    if sys.argv[1]=='solve': solve(sys.argv[2],sys.argv[3])
-    else: run(sys.argv[2],sys.argv[3])
+    if sys.argv[1]=='solve': solve(sys.argv[2],sys.argv[3],sys.argv[4] if len(sys.argv)>4 else '')
+    else: run(sys.argv[2],sys.argv[3],sys.argv[4] if len(sys.argv)>4 else '')
