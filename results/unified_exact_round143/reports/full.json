@@ -1,0 +1,112 @@
+{
+  "UTC": "2026-10-31T17:52:46.786716+00:00",
+  "new_arms": [],
+  "qualification": [
+    {
+      "batch": "qualification",
+      "position": 1,
+      "role": "K-20-S",
+      "RN": true,
+      "method": "RN",
+      "seed": 0,
+      "formal_entered": false,
+      "input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "physical_T": 5400,
+      "lambda_value": 0.15,
+      "cap": 90,
+      "source_commit": "85bd2304866942fd5b397970c5ef4099bb1b73fb",
+      "PE_SHA": "eaa6dc5d0091a1f3a38a0374aeccab28e94bff94606339c62b385b48cb7d44b1",
+      "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "U": 0.7257630107796719,
+      "L": 0.676034137025666,
+      "certificate": false,
+      "signed_gap": 0.04972887375400592,
+      "relative_gap": 0.06851943818490176,
+      "T_produce": 61.54668955435045,
+      "T_cert": null,
+      "T_verify": 1.836695099947974,
+      "T_total": 63.383384654298425,
+      "H_complete": true,
+      "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6",
+      "H_fleet_SHA": "7cf75862eb2b9a81fdd8179011c7c5af8ec6d1bb859629cc96116b16494b2741",
+      "declared_calls": 5,
+      "returned_calls": 5,
+      "external_merged_final_L": 0.676034137025666,
+      "terminal_native_return_ObjBoundC": 0.676034137025666,
+      "terminal_native_return_ObjVal": 0.7257630104683656,
+      "LP_calls": 3,
+      "target_calls": 1,
+      "terminal_calls": 1,
+      "root_LP_seconds": 0.1790001392364502,
+      "root_LP_Work": 0.44562682990211094,
+      "Native_total_Work": 111.57864662964865,
+      "Native_total_runtime": 58.36500024795532,
+      "terminal_Work": 109.51929400497438,
+      "terminal_nodes": 2049.0,
+      "root_L": 0.19514915244120518,
+      "AM_action_sequence": "native-target;exact-close",
+      "actual_split_count": 0,
+      "RN_models_checked": 5,
+      "Native_RN_receipts": 5,
+      "performance_eligible": true,
+      "native_proof_qualified": true,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round143\\qualification\\runs\\001\\raw\\R143_qualification_001_K-20-S_S0_RN",
+      "printed_terminal_ObjVal": 0.7257630104684,
+      "printed_terminal_ObjBound": 0.6760341370257
+    }
+  ],
+  "pairs": [],
+  "failures": [],
+  "unstarted": [
+    {
+      "batch": "pilot",
+      "position": 1,
+      "role": "K-35-U",
+      "RN": false,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round143\\campaign_pilot\\001\\raw\\R143_pilot_001_K-35-U_S0_OFF"
+    },
+    {
+      "batch": "pilot",
+      "position": 2,
+      "role": "K-35-U",
+      "RN": true,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round143\\campaign_pilot\\002\\raw\\R143_pilot_002_K-35-U_S0_RN"
+    },
+    {
+      "batch": "pilot",
+      "position": 3,
+      "role": "R-X20-S-T1",
+      "RN": false,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round143\\campaign_pilot\\003\\raw\\R143_pilot_003_R-X20-S-T1_S0_OFF"
+    },
+    {
+      "batch": "pilot",
+      "position": 4,
+      "role": "R-X20-S-T1",
+      "RN": true,
+      "destination": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round143\\campaign_pilot\\004\\raw\\R143_pilot_004_R-X20-S-T1_S0_RN"
+    }
+  ],
+  "all_entered_preserved": true,
+  "budget": {
+    "G1_seconds": 79.49267189996317,
+    "remaining_G1_seconds": 28720.507328100037,
+    "by_category": {
+      "diagnostic": 79.49267189996317,
+      "native": 0.0
+    },
+    "limits": {
+      "diagnostic": 28800.0,
+      "native": 28800.0
+    },
+    "category_remaining": {
+      "diagnostic": 28720.507328100037,
+      "native": 28800.0
+    },
+    "separately_reported_seconds": 37.893494999501854,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "Optimize": 0,
+  "clocks": "Full producer + all mandatory postverification; complete experimental outer charged once"
+}
