@@ -79,7 +79,7 @@ def solve(role,variant,attempt='',cap=120):
             assert vs['rn_t'].LB==lt and vs['rn_t'].UB==ut
             for name,v in vs.items():
                 if name.startswith('rn_') and name!='rn_t':
-                    assert v.LB==0 and v.UB==(ut if name.startswith('rn_w_') else gp.GRB.INFINITY)
+                    assert v.LB==0 and (v.UB==ut if name.startswith('rn_w_') else v.UB>=gp.GRB.INFINITY),(name,v.LB,v.UB,ut)
             model.Params.Threads=1; model.Params.Seed=0; model.Params.Presolve=-1
             model.Params.TimeLimit=cap; model.Params.FeasibilityTol=1e-6; model.Params.OptimalityTol=1e-6
             model.Params.LogFile=str(target/'native.log'); model.Params.LogToConsole=0; model.Params.OutputFlag=1
@@ -88,7 +88,11 @@ def solve(role,variant,attempt='',cap=120):
                 saved_point_full_matrix=baseline,original_semantics_retained=True,all_new_rows_and_columns_read_back=True,
                 canonical_SHA=sha(canonical),cutoff=scope['validated_U'],old_g_domain=[scope['alpha'],scope['beta']],
                 expected_rows=expected,BASE_increment_includes_physical_bound_information=(variant=='base')))
+            write(target/'native_call.json',dict(UTC=utc(),state='BEFORE_OPTIMIZE',Seed=0,Threads=1,
+                kind='LP',canonical_SHA=sha(canonical),native_identity=identity))
             built=time.perf_counter(); model.optimize(); done=time.perf_counter()
+            write(target/'native_return.json',dict(UTC=utc(),state='OPTIMIZE_RETURNED',status=model.Status,
+                Runtime=model.Runtime,Work=model.Work,Optimize=1))
             result=dict(role=role,variant=variant,status=model.Status,qualified=False,old_L=old['L'],old_g=old['G_aux'],
                 old_weighted_penalty=old['L']-old['G_aux'],before=before,after=after,
                 build_seconds=built-tick,optimize_wall_seconds=done-built,Runtime=model.Runtime,Work=model.Work,
