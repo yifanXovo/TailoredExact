@@ -2,8 +2,8 @@
 from round144_read import verify
 from round144_common import *
 configure()
-def run(batch,position):
-    label=f'{batch}_{position}_reader_recovery'
+def run(batch,position,attempt=''):
+    label=f'{batch}_{position}_reader_recovery{attempt}'
     assert metered(label,'diagnostic',[PYTHON,'-B',__file__,'verify',batch,position],120,180)==0
 def recover(batch,position):
     g=read(OUT/f'{batch}_matrix.json')['groups'][int(position)-1];identity=read(OUT/g['group']/'identity.json');l=g['launch'];d=Path(l['destination'])
@@ -17,5 +17,5 @@ def recover(batch,position):
         delayed_qualification_verification_latency_retained_in_T_total=True))
     print(json.dumps(value['arm']),flush=True)
 if __name__=='__main__':
-    if sys.argv[1]=='run':run(sys.argv[2],sys.argv[3])
+    if sys.argv[1]=='run':run(*sys.argv[2:])
     else:recover(sys.argv[2],sys.argv[3])

@@ -54,7 +54,27 @@ def verify(launch,identity):
                     assert any(a['model_SHA']==fact['SHA'] for a in audits)
                     facts.append(dict(model_SHA=fact['SHA'],kind='formal_compact',RN_columns=0,PC_rows=int(source.get('PC_emitted',False)),PC_nonzeros=len(terms)))
             return fact,m
-    ns=dict(vars(accepted),ROOT=ROOT,OUT=OUT,ArmModels=Models)
+    # All source calls remain in the complete Native/quality/lifecycle/cost
+    # audit. Only formal LPs enter the controller-bound reconstruction: the
+    # source deliberately has no formal lp_status row or installed control.
+    old=accepted.inherited;core=old.core
+    def formal_scoped_proofs(j,controller,U):
+        if not applicable:return core.scoped_proofs(j,controller,U)
+        cid=source['source_call'];call=j['calls'][cid]
+        assert cid in j['returned_ids'] and not call['native_preconditions'] and call['model_sha256']==source['source_SHA']
+        assert Path(call['model_path']).name=='round144_RN_source.lp'
+        discarded=[r for r in controller['controller_native'] if r['model_sha256']==source['source_SHA']]
+        assert len(discarded)==1 and discarded[0]['solve_kind']=='LP' and int(discarded[0]['integer_domain_restored'])==1
+        formal=dict(j,calls={k:v for k,v in j['calls'].items() if k!=cid},
+            returned_native_proofs=[p for p in j.get('returned_native_proofs',[]) if p['call']!=cid])
+        control=dict(controller,controller_native=[r for r in controller['controller_native'] if r['model_sha256']!=source['source_SHA']])
+        return core.scoped_proofs(formal,control,U)
+    cover=types.FunctionType(core.chronological_cover.__code__,dict(vars(core),scoped_proofs=formal_scoped_proofs))
+    complete=types.FunctionType(core.complete_cover.__code__,dict(vars(core),scoped_proofs=formal_scoped_proofs))
+    core_view=types.SimpleNamespace(**dict(vars(core),chronological_cover=cover,complete_cover=complete))
+    normal=types.FunctionType(old._normal_endpoint.__code__,dict(vars(old),core=core_view))
+    inherited=types.SimpleNamespace(**dict(vars(old),_normal_endpoint=normal))
+    ns=dict(vars(accepted),ROOT=ROOT,OUT=OUT,ArmModels=Models,inherited=inherited)
     value=types.FunctionType(accepted.verify.__code__,ns)(launch,identity)
     if enabled:
         assert any(f['kind']=='formal_compact' for f in facts)
