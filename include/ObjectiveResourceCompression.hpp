@@ -23,4 +23,10 @@ std::vector<int> activeResourceRows(const std::vector<ObjectiveResourceRow>&);
 std::vector<CompressedResourceRow> compressObjectiveResources(
     const std::vector<ObjectiveResourceRow>&, const std::vector<double>& lower,
     const std::vector<double>& upper, bool fleet=false);
+// One <= combination. Selected zero-objective extension columns are submitted
+// with coefficient zero; their finite boxes absorb the entire coefficient,
+// including nonzero dual residuals. Existing compression semantics are intact.
+CompressedResourceRow projectObjectiveResources(
+    const std::vector<ObjectiveResourceRow>&, const std::vector<double>& lower,
+    const std::vector<double>& upper, const std::vector<bool>& eliminate);
 }

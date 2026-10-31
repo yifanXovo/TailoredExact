@@ -92,4 +92,42 @@ std::vector<CompressedResourceRow> compressObjectiveResources(
     }
     return result;
 }
+CompressedResourceRow projectObjectiveResources(
+    const std::vector<ObjectiveResourceRow>& rows,const std::vector<double>& lower,
+    const std::vector<double>& upper,const std::vector<bool>& eliminate){
+    volatile double tiny=std::numeric_limits<double>::denorm_min();
+    volatile double twice=tiny+tiny;
+    if(lower.size()!=upper.size()||lower.size()!=eliminate.size()||
+       std::fegetround()!=FE_TONEAREST||!std::numeric_limits<double>::is_iec559||
+       twice!=2*std::numeric_limits<double>::denorm_min())
+        throw std::runtime_error("resource_projection_arithmetic_or_shape");
+    for(std::size_t j=0;j<lower.size();++j)
+        if(std::isnan(lower[j])||std::isnan(upper[j])||lower[j]>upper[j])
+            throw std::runtime_error("resource_projection_bounds");
+    std::map<int,Interval> a;Interval b;CompressedResourceRow out;out.vehicle=-1;
+    for(std::size_t k=0;k<rows.size();++k){const auto& row=rows[k];validate(row,lower.size());
+        if(out.scope.empty())out.scope=row.scope;
+        if(out.scope!=row.scope)throw std::runtime_error("resource_projection_scope");
+        if(!row.multiplier)continue;
+        out.source_rows.push_back(static_cast<int>(k));b=add(b,product(row.multiplier,row.rhs));
+        for(std::size_t t=0;t<row.indices.size();++t)
+            a[row.indices[t]]=add(a[row.indices[t]],product(row.multiplier,row.coefficients[t]));
+    }
+    Interval correction;
+    for(const auto& term:a){const int j=term.first;const auto range=term.second;
+        double coefficient=eliminate[j]?0.:range.lo/2+range.hi/2;finite(coefficient);
+        // Explicit, compensated Native transport conversion, including deletion.
+        if(std::fabs(coefficient)<1e-12)coefficient=0;
+        const double dl=down(coefficient-range.hi),du=up(coefficient-range.lo);
+        finite(lower[j]);finite(upper[j]);
+        if(std::fabs(lower[j])>=1e100||std::fabs(upper[j])>=1e100)
+            throw std::runtime_error("resource_projection_unbounded_box");
+        const double margin=std::max({product(dl,lower[j]).hi,product(dl,upper[j]).hi,
+            product(du,lower[j]).hi,product(du,upper[j]).hi});
+        correction=add(correction,{margin,margin});
+        if(coefficient){out.indices.push_back(j);out.coefficients.push_back(coefficient);}
+    }
+    out.compensation_upper=correction.hi;out.rhs=add(b,correction).hi;finite(out.rhs);
+    return out;
+}
 }

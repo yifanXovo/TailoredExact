@@ -4,6 +4,7 @@
 #include "Round140Research.hpp"
 #include "Round141Research.hpp"
 #include "Round143Research.hpp"
+#include "Round144Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -876,6 +877,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             const auto value=requireValue(i,argc,argv);
             if(value!="off"&&value!="on")throw std::runtime_error("Round143 RN must be off or on");
             ebrp::round143().rn=value=="on";
+        }
+        else if (arg == "--round144-projection") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on")throw std::runtime_error("Round144 projection must be off or on");
+            ebrp::round144().enabled=value=="on";
         }
         else if (arg == "--round139-stock-placement") ebrp::round139().set(requireValue(i, argc, argv));
         else if (arg == "--round140-counts") ebrp::round140().set(requireValue(i, argc, argv));
@@ -3557,6 +3563,19 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round144().enabled) {
+        if(ebrp::round127().mode!="ms2"||ebrp::round143().rn||ebrp::round138().stock_rlt||ebrp::round139().enabled()||
+            ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||
+            ebrp::round135AggregatePenalty()||opt.round90_lp_g_split||opt.round119_proof_contraction||opt.round120_native_proof!="off")
+            throw std::runtime_error("Round144 projection requires isolated stable GI-TBC ms2");
+        if(!opt.out_path.empty()) {
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round144_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"RN_P\":true,\"Seed\":"<<opt.gurobi_seed<<",\"H_seed\":"<<opt.primal_heuristic_seed
+                <<",\"stock\":false,\"counts\":\"off\",\"AP\":false,\"source_policy\":\"once_initial_root\",\"persistent_RN\":false}\n";
+            if(!f)throw std::runtime_error("Round144 parameter persistence failed");
+        }
+    }
     if(ebrp::round143().rn) {
         if(ebrp::round127().mode!="ms2"||ebrp::round138().stock_rlt||ebrp::round139().enabled()||
             ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||

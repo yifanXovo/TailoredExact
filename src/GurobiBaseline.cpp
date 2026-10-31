@@ -20,6 +20,7 @@
 #include "Round120NativeProof.hpp"
 #include "Round141Research.hpp"
 #include "Round143Research.hpp"
+#include "Round144Research.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
@@ -751,6 +752,30 @@ void auditRound143Native(const GurobiApi& api,GRBmodel* model,const Instance& in
         <<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"added_rows_checked\":"<<expected.rows.size()
         <<",\"added_columns_checked\":"<<columns<<",\"actual_ratio_rows_checked\":"<<n<<",\"applicable\":"<<(expected.applicable?"true":"false")
         <<",\"S_L\":"<<expected.sl<<",\"S_U\":"<<expected.su<<",\"L_t\":"<<expected.lt<<",\"U_t\":"<<expected.ut<<",\"Optimize_extra\":0}\n";
+    f.close();require(bool(f),"native_audit_write");
+}
+
+void auditRound144Native(const GurobiApi& api,GRBmodel* model,const FixedIntervalMipRequest& request,
+    const std::vector<std::string>& names){
+    if(!round144().enabled||round144().source_running)return;
+    using namespace round144_detail;
+    for(const auto& name:names)require(name.rfind("rn_",0)!=0,"persistent_extension_column");
+    const auto expected=round144().expected.find(request.canonical_model_fingerprint);
+    if(!round144().ready){require(expected==round144().expected.end(),"unexpected_PC");return;}
+    require(expected!=round144().expected.end(),"formal_model_identity");
+    int rows=0;require(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&rows)==0,"native_row_count");
+    SolverNeutralLinearModel matrix;require(readLinearModel(api,model,int(names.size()),rows,matrix),"native_matrix_read");
+    int found=0;for(int k=0;k<rows;++k){char* name=nullptr;
+        require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,k,&name)==0&&name,"native_row_name");
+        require(std::string(name).rfind("rn_",0)!=0,"persistent_extension_row");
+        if(std::string(name)=="r144_PC"){
+            std::map<std::string,double> terms;for(int j=matrix.row_starts[k];j<matrix.row_starts[k+1];++j)terms[names.at(matrix.column_indices[j])]=matrix.coefficients[j];
+            require(terms==expected->second.coefficients&&matrix.rhs[k]==expected->second.rhs&&matrix.senses[k]==expected->second.sense,"actual_PC_transport");++found;
+        }
+    }
+    require(found==1,"single_full_block_PC");
+    std::ofstream f(request.native_log_path.string()+".round144.native.json");f<<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)
+        <<",\"RN_columns\":0,\"RN_rows\":0,\"PC_rows\":1,\"PC_nonzeros\":"<<expected->second.coefficients.size()<<",\"Optimize_extra\":0}\n";
     f.close();require(bool(f),"native_audit_write");
 }
 
@@ -2846,7 +2871,8 @@ public:
         std::vector<double> round68_start_values;
         std::vector<char> round68_start_types;
         try{auditRound120Native(api_,model,request,native_names,native_types);auditRound141Native(api_,model,request,native_names,native_types);
-            auditRound143Native(api_,model,instance_,request,native_names,native_types);}
+            auditRound143Native(api_,model,instance_,request,native_names,native_types);
+            auditRound144Native(api_,model,request,native_names);}
         catch(const std::exception& e){out.failure_reason=e.what();return out;}
         if (request.round68_verified_start) {
             ++stats_.warm_start_candidate_count;
