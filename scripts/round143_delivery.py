@@ -87,7 +87,9 @@ def pack():
     sources+=list((ROOT/'scripts').glob('round143_*'))+[ROOT/'scripts/paper_s2_rn.py',ROOT/'config/gi_tbc_rn_round143.json',ROOT/'CMakeLists.txt',ROOT/'WORKSPACE_POLICY.md']
     archive('source_and_helpers.zip',[p for p in sources if p.is_file()])
     science=[p for p in OUT.iterdir() if p.is_file() and p.name not in {
-        'carrier_manifest.json','publication_pin.json','public_restore_receipt.json','cleanup_record.json','PR_delivery.json','PR_readback.json'}]
+        'carrier_manifest.json','archive_local_check.json','nonexperimental_accounting.json',
+        'publication_pin.json','public_restore_owner.json','public_attempt_history.json','public_restore_receipt.json',
+        'cleanup_record.json','PR_delivery.json','PR_readback.json','PR_description.md','delivery_costs.json'}]
     science+=files(OUT/'reports')+files(OUT/'review')
     science += [p for p in files(OUT/'layout_history') if p.suffix!='.png']
     for folder in (OUT/'fees').iterdir():
