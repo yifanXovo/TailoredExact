@@ -1,0 +1,168 @@
+{
+  "PASS": true,
+  "three_station": {
+    "old_g": "1/3",
+    "RN_minimum_g": "5/12",
+    "separation": "1/12",
+    "old_H": "2",
+    "old_J": "2/3",
+    "t": "5/8",
+    "RN_w": [
+      [
+        "0",
+        "5/8"
+      ],
+      [
+        "1/4",
+        "3/8"
+      ],
+      [
+        "5/8",
+        "0"
+      ]
+    ],
+    "scope": "Declared Gini/stock/TC/TC2/endpoint-pair subblock; not a full BRP fixture"
+  },
+  "four_station": {
+    "t": "1/3",
+    "w1": "1/4",
+    "w0": "1/12",
+    "RN_g": "0",
+    "TC_stock_min_g": "1/4"
+  },
+  "fixed_scope": {
+    "S_L_exact": "3",
+    "S_U_exact": "3",
+    "tau_L": 3,
+    "tau_U": 3,
+    "minimizer": {
+      "1": 1,
+      "2": 1,
+      "3": 1,
+      "4": 0
+    },
+    "maximizer": {
+      "1": 0,
+      "2": 1,
+      "3": 1,
+      "4": 1
+    },
+    "Bminus": 3,
+    "B": 3,
+    "c_binary64": {
+      "1": 1.0,
+      "2": 1.0,
+      "3": 1.0,
+      "4": 1.0
+    },
+    "c_exact": {
+      "1": "1",
+      "2": "1",
+      "3": "1",
+      "4": "1"
+    },
+    "supports": {
+      "1": [
+        0,
+        1
+      ],
+      "2": [
+        0,
+        1
+      ],
+      "3": [
+        0,
+        1
+      ],
+      "4": [
+        0,
+        1
+      ]
+    },
+    "arithmetic": "Fraction of actual binary64 coefficients",
+    "applicable": true,
+    "L_t": 0.3333333333333333,
+    "U_t": 0.33333333333333337,
+    "L_t_exact": "1/3",
+    "U_t_exact": "1/3"
+  },
+  "zero_scope": {
+    "S_L_exact": "0",
+    "S_U_exact": "3/2",
+    "tau_L": 0,
+    "tau_U": 2,
+    "minimizer": {
+      "1": 0,
+      "2": 0
+    },
+    "maximizer": {
+      "1": 1,
+      "2": 1
+    },
+    "Bminus": 0,
+    "B": 2,
+    "c_binary64": {
+      "1": 1.0,
+      "2": 0.5
+    },
+    "c_exact": {
+      "1": "1",
+      "2": "1/2"
+    },
+    "supports": {
+      "1": [
+        0,
+        1
+      ],
+      "2": [
+        0,
+        2
+      ]
+    },
+    "arithmetic": "Fraction of actual binary64 coefficients",
+    "applicable": false,
+    "reason": "NO_GLOBAL_POSITIVE_DENOMINATOR_BOUND"
+  },
+  "holey_scope": {
+    "S_L_exact": "14411518807585587/36028797018963968",
+    "S_U_exact": "5404319552844595/4503599627370496",
+    "tau_L": 2,
+    "tau_U": 4,
+    "minimizer": {
+      "1": 1,
+      "2": 1
+    },
+    "maximizer": {
+      "1": 0,
+      "2": 4
+    },
+    "Bminus": 2,
+    "B": 4,
+    "c_binary64": {
+      "1": 0.1,
+      "2": 0.3
+    },
+    "c_exact": {
+      "1": "3602879701896397/36028797018963968",
+      "2": "5404319552844595/18014398509481984"
+    },
+    "supports": {
+      "1": [
+        0,
+        2
+      ],
+      "2": [
+        1,
+        4
+      ]
+    },
+    "arithmetic": "Fraction of actual binary64 coefficients",
+    "applicable": true,
+    "L_t": 0.8333333333333333,
+    "U_t": 2.5000000000000004,
+    "L_t_exact": "4503599627370496/5404319552844595",
+    "U_t_exact": "36028797018963968/14411518807585587"
+  },
+  "Optimize": 0,
+  "Native_load": 0
+}
