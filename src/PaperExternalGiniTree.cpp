@@ -1755,6 +1755,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                        double root_gamma_L,
                                        double root_gamma_U) {
     round141ResetRun();
+    round144ResetRun();
     if (options.round92_handling_activation) {
         if (options.external_gini_scheduling !=
                 "round31-nonblocking-native-bound" ||

@@ -13,6 +13,7 @@ struct Round144Controls {
     std::map<std::string,round143_detail::Row> expected;
 };
 inline Round144Controls& round144(){static Round144Controls c;return c;}
+inline void round144ResetRun(){const bool enabled=round144().enabled;round144()=Round144Controls{};round144().enabled=enabled;}
 namespace round144_detail {
 inline void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error("round144_"+why);}
 inline CanonicalCompactModelArtifact append(const CanonicalCompactModelArtifact& base,

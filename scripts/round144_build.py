@@ -1,6 +1,7 @@
 """Rebuild all four affected units against the verified R143 object lineage."""
 from round144_common import *
-BUILD=WORK/'build-cache/round144'
+REVISION=sys.argv[1] if len(sys.argv)>1 else ''
+BUILD=WORK/('build-cache/round144'+REVISION)
 COMPILER=Path('D:/msys64/ucrt64/bin/g++.exe')
 STEMS=['ObjectiveResourceCompression','GurobiBaseline','PaperExternalGiniTree','main']
 SYSTEM=['-lkernel32','-luser32','-lgdi32','-lwinspool','-lshell32','-lole32','-loleaut32','-luuid','-lcomdlg32','-ladvapi32']
@@ -15,11 +16,11 @@ def main():
     assert sorted(changed)==sorted([f'src/{s}.cpp' for s in STEMS]+['include/ObjectiveResourceCompression.hpp']),changed
     BUILD.mkdir(parents=True,exist_ok=False)
     for stem in STEMS:
-        assert metered('compile_'+stem,'build',[COMPILER,*flags,'-c',ROOT/'src'/f'{stem}.cpp','-o',BUILD/f'{stem}.o'],timeout=600)==0
+        assert metered('compile_'+stem+REVISION,'build',[COMPILER,*flags,'-c',ROOT/'src'/f'{stem}.cpp','-o',BUILD/f'{stem}.o'],timeout=600)==0
     objects=[BUILD/f'{Path(p).stem}.o' if Path(p).stem in STEMS else Path(p) for p in old['objects']]
     objects.append(BUILD/'ObjectiveResourceCompression.o')
     command=[COMPILER,BUILD/'main.o',*objects,old['archive']['path'],*SYSTEM,'-o',BUILD/'ExactEBRP.exe']
-    assert metered('link_production','build',command,timeout=120)==0
+    assert metered('link_production'+REVISION,'build',command,timeout=120)==0
     source={p.relative_to(ROOT).as_posix():sha(p) for folder in ['src','include'] for p in (ROOT/folder).rglob('*') if p.suffix in ('.cpp','.hpp','.h','.inc')}
     pe=BUILD/'ExactEBRP.exe'
     manifest=dict(schema='round144-RN-projection-v1',source_commit=git('rev-parse','HEAD').decode().strip(),base=BASE,
@@ -30,5 +31,6 @@ def main():
         main_object=dict(path=str(BUILD/'main.o'),SHA=sha(BUILD/'main.o')),archive=old['archive'],compiler_SHA=sha(COMPILER),
         source_ABI_unchanged=True,link_command=list(map(str,command)),default_off=True,
         carrier='Stable R137 + once-root RN source and one original-selector/G projected row; zero formal RN columns')
+    if (OUT/'candidate_manifest.json').exists():write(OUT/'engineering/build_history'/('before'+REVISION+'.json'),read(OUT/'candidate_manifest.json'))
     write(OUT/'candidate_build.json',manifest);write(OUT/'candidate_manifest.json',manifest)
 if __name__=='__main__':main()
