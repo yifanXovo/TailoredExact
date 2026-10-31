@@ -16,7 +16,7 @@ def verify(launch,identity):
         assert read(d/'round144_parameters.json')==dict(RN_P=True,Seed=launch['seed'],H_seed=20260626,stock=False,counts='off',AP=False,source_policy='once_initial_root',persistent_RN=False)
         assert source['qualified'] and source['source_solves']==1 and not source['formal_control_from_source']
         assert evidence['source_SHA']==source['source_SHA'] and audits and sources
-        assert all(a['PASS'] and a['RN_columns']==0 and a['PC_rows']==1 and a['Optimize_extra']==0 for a in audits)
+        assert all(a['PASS'] and a['RN_columns']==0 and a['PC_rows']==int(source['PC_emitted']) and a['Optimize_extra']==0 for a in audits)
         assert all(a['PASS'] and a['model_SHA']==source['source_SHA'] for a in sources)
     elif rn:
         assert not audits and not (d/'round144_parameters.json').exists() and sources
@@ -42,9 +42,11 @@ def verify(launch,identity):
                 if enabled:
                     assert source['source_lower']<=m['bounds']['G'][0]<=m['bounds']['G'][1]<=source['source_upper']
                     row=evidence['row'];terms={k:v for k,v in row['terms'].items() if k in m['order']}
-                    counter=collections.Counter(m['rows']);wanted=(tuple(sorted(terms.items())),'<=',row['rhs']);assert counter[wanted]==1
+                    if source['PC_emitted']:
+                        counter=collections.Counter(m['rows']);wanted=(tuple(sorted(terms.items())),'<=',row['rhs']);assert counter[wanted]==1
+                    else:assert not terms and row['rhs']>=0
                     assert any(a['model_SHA']==fact['SHA'] for a in audits)
-                    facts.append(dict(model_SHA=fact['SHA'],kind='formal_compact',RN_columns=0,PC_rows=1,PC_nonzeros=len(terms)))
+                    facts.append(dict(model_SHA=fact['SHA'],kind='formal_compact',RN_columns=0,PC_rows=int(source['PC_emitted']),PC_nonzeros=len(terms)))
             return fact,m
     ns=dict(vars(accepted),ROOT=ROOT,OUT=OUT,ArmModels=Models)
     value=types.FunctionType(accepted.verify.__code__,ns)(launch,identity)

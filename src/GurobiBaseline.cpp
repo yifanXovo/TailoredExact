@@ -761,7 +761,12 @@ void auditRound144Native(const GurobiApi& api,GRBmodel* model,const FixedInterva
     using namespace round144_detail;
     for(const auto& name:names)require(name.rfind("rn_",0)!=0,"persistent_extension_column");
     const auto expected=round144().expected.find(request.canonical_model_fingerprint);
-    if(!round144().ready){require(expected==round144().expected.end(),"unexpected_PC");return;}
+    if(!round144().ready){
+        require(expected==round144().expected.end(),"unexpected_PC");
+        std::ofstream f(request.native_log_path.string()+".round144.native.json");f<<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)
+            <<",\"RN_columns\":0,\"RN_rows\":0,\"PC_rows\":0,\"PC_nonzeros\":0,\"Optimize_extra\":0}\n";
+        f.close();require(bool(f),"redundant_native_audit_write");return;
+    }
     require(expected!=round144().expected.end(),"formal_model_identity");
     int rows=0;require(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&rows)==0,"native_row_count");
     SolverNeutralLinearModel matrix;require(readLinearModel(api,model,int(names.size()),rows,matrix),"native_matrix_read");

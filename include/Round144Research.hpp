@@ -68,7 +68,9 @@ inline void project(const round143_detail::Block& rn,const FixedIntervalMipOutco
     auto& c=round144();c.row.name="r144_PC";c.row.sense='<';c.row.rhs=compressed.rhs;
     for(std::size_t k=0;k<compressed.indices.size();++k){const auto& name=out.lp_primal_dual_variable_evidence.at(compressed.indices[k]).name;
         require(name=="G"||name.rfind("state_",0)==0,"projected_nonoriginal_column");c.row.coefficients[name]=compressed.coefficients[k];}
-    require(!c.row.coefficients.empty()&&!compressed.source_rows.empty(),"empty_projection");
+    // An optimal RN block may have zero dual weight. Its 0<=0 projection
+    // contains no new information and is omitted uniformly as redundant.
+    require(!c.row.coefficients.empty()||c.row.rhs>=0,"empty_projection_infeasible");
     std::ofstream f(path);f<<std::setprecision(17)<<"{\"source_SHA\":"<<std::quoted(c.source_sha)<<",\"sign_repairs\":"<<repairs
         <<",\"compensation_upper\":"<<compressed.compensation_upper<<",\"row\":{\"name\":\"r144_PC\",\"sense\":\"<\",\"rhs\":"<<c.row.rhs<<",\"terms\":{";
     bool first=true;for(const auto& term:c.row.coefficients){if(!first)f<<',';first=false;f<<std::quoted(term.first)<<':'<<term.second;}f<<"}},\"variables\":[";
@@ -78,7 +80,7 @@ inline void project(const round143_detail::Block& rn,const FixedIntervalMipOutco
     first=true;for(const auto& r:out.lp_primal_dual_constraint_evidence){if(!first)f<<',';first=false;
         f<<"{\"name\":"<<std::quoted(r.name)<<",\"Pi\":"<<r.dual_multiplier<<",\"Slack\":"<<r.slack<<",\"CBasis\":"<<r.constraint_basis_status<<'}';}
     f<<"],\"RN_columns_submitted\":0,\"arithmetic\":\"outward binary64 intervals; signed finite-box conversion and elimination\"}\n";
-    f.close();require(bool(f),"projection_evidence_write");c.ready=true;
+    f.close();require(bool(f),"projection_evidence_write");c.ready=!c.row.coefficients.empty();
 }
 inline CanonicalCompactModelArtifact embed(const Instance& instance,const CanonicalCompactModelArtifact& base,
     double cutoff,const std::filesystem::path& path){

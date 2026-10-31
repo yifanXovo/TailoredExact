@@ -4267,10 +4267,10 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                     <<",\"source_bound\":"<<(source_out.native_bound_available?round141_detail::number(source_out.native_bound):"null")
                     <<",\"Runtime\":"<<source_out.solver_runtime_seconds<<",\"Work\":"<<source_out.work<<",\"total_preparation_seconds\":"<<std::chrono::duration<double>(PaperClock::now()-begin).count()
                     <<",\"source_lower\":"<<c.lower<<",\"source_upper\":"<<c.upper<<",\"source_cutoff\":"<<c.cutoff<<",\"source_RN_columns\":"<<rn.columns.size()
-                    <<",\"formal_RN_columns\":0,\"formal_control_from_source\":false,\"source_solves\":1}\n";f.close();require(bool(f),"source_receipt_write");
+                    <<",\"PC_emitted\":"<<(c.ready?"true":"false")<<",\"formal_RN_columns\":0,\"formal_control_from_source\":false,\"source_solves\":1}\n";f.close();require(bool(f),"source_receipt_write");
                 if(!qualified){result.external_gini_tree_failure_reason="round144_source_not_qualified:"+source_out.failure_reason;if(source_out.interrupted)stopAtDeadline();return false;}
-                const auto base=state.artifact;
-                state.artifact=embed(instance,base,verified_ub,base.path.parent_path()/(base.path.stem().string()+"_round144_compact.lp"));
+                if(c.ready){const auto base=state.artifact;
+                    state.artifact=embed(instance,base,verified_ub,base.path.parent_path()/(base.path.stem().string()+"_round144_compact.lp"));}
             } else {
                 std::ofstream f(artifact_dir/"round144_source.json");f<<"{\"qualified\":false,\"applicable\":false,\"reason\":\"no_proved_positive_denominator\",\"source_solves\":0,\"formal_RN_columns\":0}\n";
                 f.close();require(bool(f),"inapplicable_receipt_write");

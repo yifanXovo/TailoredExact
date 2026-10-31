@@ -11,7 +11,7 @@ configure()
 
 def compile_driver():
     m=read(OUT/'candidate_manifest.json');b=Path(m['production_PE']).parent;pe=b/'Round144Project.exe'
-    assert metered('compile_project_driver','build',[COMPILER,*m['flags'],ROOT/'scripts/round144_project.cpp',b/'ObjectiveResourceCompression.o','-o',pe],timeout=120)==0
+    assert metered('compile_project_driver'+os.environ.get('R144_QUAL_SUFFIX',''),'build',[COMPILER,*m['flags'],ROOT/'scripts/round144_project.cpp',b/'ObjectiveResourceCompression.o','-o',pe],timeout=120)==0
     write(OUT/'qualification_driver.json',dict(PE=str(pe),PE_SHA=sha(pe),source_SHA=sha(ROOT/'scripts/round144_project.cpp')))
 
 def writer():
@@ -69,7 +69,8 @@ def exact_check(cols,rows,cpp):
 
 def fraction():
     tick=time.perf_counter();q=read(OUT/'qualification_driver.json');assert sha(q['PE'])==q['PE_SHA'];facts=[]
-    target=OUT/'qualification/project';target.mkdir(parents=True,exist_ok=False)
+    target=OUT/'qualification/project';target.mkdir(parents=True,exist_ok=True)
+    if (OUT/'math/fixtures.json').exists():write(OUT/'math/history/fixtures_before_zero_dual_fix.json',read(OUT/'math/fixtures.json'))
     cases=[]
     cols={'G':dict(LB=-4.,UB=5.),'state_1_0':dict(LB=0.,UB=1.),'state_1_1':dict(LB=0.,UB=1.),'rn_z':dict(LB=-2.,UB=3.)}
     rows=[dict(name='rn_eq_neg',sense='=',rhs=.1,Pi=-.7,terms={'G':.5,'rn_z':1.}),
@@ -79,6 +80,7 @@ def fraction():
         dict(name='rn_bad_ge',sense='>',rhs=99.,Pi=-1e-15,terms={'G':1.}),
         dict(name='rn_bad_le',sense='<',rhs=-99.,Pi=1e-15,terms={'G':1.})]
     cases.append(('mixed_sense_signed_box_and_tiny_deletion',cols,rows))
+    cases.append(('zero_RN_dual_redundant',cols,[dict(r,Pi=0.) for r in rows]))
     for role in ['K-35-U','R-X20-S-T1']:
         p=OUT/'LP'/f'{role}_base'/'primal_dual_matrix.json.gz';v=json.loads(gzip.decompress(p.read_bytes()))
         cases.append((role,v['columns'],[r for r in v['rows'] if r['name'].startswith('rn_')]))
