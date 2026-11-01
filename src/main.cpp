@@ -3584,7 +3584,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||
             ebrp::round135AggregatePenalty()||opt.round90_lp_g_split||opt.round119_proof_contraction||opt.round120_native_proof!="off")
             throw std::runtime_error("Round144 projection requires isolated stable GI-TBC ms2");
-        if(!opt.out_path.empty()) {
+        if(!opt.out_path.empty()&&!ebrp::round145().enabled) {
             const auto path=std::filesystem::path(opt.out_path).parent_path()/"round144_parameters.json";
             std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
             f<<"{\"RN_P\":true,\"Seed\":"<<opt.gurobi_seed<<",\"H_seed\":"<<opt.primal_heuristic_seed
