@@ -39,7 +39,7 @@ inline round143_detail::Block block(const Instance& instance,const CanonicalComp
     return round143_detail::block(c.support,ratios,std::max(0LL,B-Q),B);
 }
 inline void project(const round143_detail::Block& rn,const FixedIntervalMipOutcome& out,
-    const std::filesystem::path& path){
+    const std::filesystem::path& path,const std::string& row_name="r144_PC",bool allow_inventory=false){
     require(out.lp_primal_dual_evidence_available&&out.lp_constraint_evidence_available&&out.lp_objective_sense==1,"source_dual_unavailable");
     std::map<std::string,int> index;std::vector<double> lower,upper;std::vector<bool> eliminate;
     for(const auto& v:out.lp_primal_dual_variable_evidence){
@@ -65,14 +65,16 @@ inline void project(const round143_detail::Block& rn,const FixedIntervalMipOutco
         rows.push_back(std::move(row));
     }
     const auto compressed=projectObjectiveResources(rows,lower,upper,eliminate);
-    auto& c=round144();c.row.name="r144_PC";c.row.sense='<';c.row.rhs=compressed.rhs;
+    auto& c=round144();c.row.name=row_name;c.row.sense='<';c.row.rhs=compressed.rhs;
     for(std::size_t k=0;k<compressed.indices.size();++k){const auto& name=out.lp_primal_dual_variable_evidence.at(compressed.indices[k]).name;
-        require(name=="G"||name.rfind("state_",0)==0,"projected_nonoriginal_column");c.row.coefficients[name]=compressed.coefficients[k];}
+        require(name=="G"||name.rfind("state_",0)==0||(allow_inventory&&name.rfind("Y_",0)==0),"projected_nonoriginal_column");c.row.coefficients[name]=compressed.coefficients[k];}
     // An optimal RN block may have zero dual weight. Its 0<=0 projection
     // contains no new information and is omitted uniformly as redundant.
     require(!c.row.coefficients.empty()||c.row.rhs>=0,"empty_projection_infeasible");
     std::ofstream f(path);f<<std::setprecision(17)<<"{\"source_SHA\":"<<std::quoted(c.source_sha)<<",\"sign_repairs\":"<<repairs
-        <<",\"compensation_upper\":"<<compressed.compensation_upper<<",\"row\":{\"name\":\"r144_PC\",\"sense\":\"<\",\"rhs\":"<<c.row.rhs<<",\"terms\":{";
+        <<",\"compensation_upper\":"<<compressed.compensation_upper<<",\"source_rows\":[";
+    bool first_source=true;for(const auto& r:rn.rows){if(!first_source)f<<',';first_source=false;f<<std::quoted(r.name);}
+    f<<"],\"row\":{\"name\":"<<std::quoted(row_name)<<",\"sense\":\"<\",\"rhs\":"<<c.row.rhs<<",\"terms\":{";
     bool first=true;for(const auto& term:c.row.coefficients){if(!first)f<<',';first=false;f<<std::quoted(term.first)<<':'<<term.second;}f<<"}},\"variables\":[";
     first=true;for(const auto& v:out.lp_primal_dual_variable_evidence){if(!first)f<<',';first=false;
         f<<"{\"name\":"<<std::quoted(v.name)<<",\"LB\":"<<v.lower_bound<<",\"UB\":"<<v.upper_bound<<",\"X\":"<<v.primal_value
@@ -90,7 +92,7 @@ inline CanonicalCompactModelArtifact embed(const Instance& instance,const Canoni
     auto row=c.row;
     // An absent root selector in a narrower support is identically zero.
     for(auto it=row.coefficients.begin();it!=row.coefficients.end();){
-        if(it->first=="G"){++it;continue;}
+        if(it->first=="G"||it->first.rfind("Y_",0)==0){++it;continue;}
         const auto parts=round141_detail::split(it->first,'_');require(parts.size()==3,"selector_name");
         int i=std::stoi(parts[1]),y=std::stoi(parts[2]);
         if(!std::binary_search(support.at(i).begin(),support.at(i).end(),y))it=row.coefficients.erase(it);else ++it;

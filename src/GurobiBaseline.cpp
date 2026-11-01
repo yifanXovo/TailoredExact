@@ -21,6 +21,7 @@
 #include "Round141Research.hpp"
 #include "Round143Research.hpp"
 #include "Round144Research.hpp"
+#include "Round145Research.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
@@ -720,7 +721,9 @@ void auditRound143Native(const GurobiApi& api,GRBmodel* model,const Instance& in
     }
     for(int i=1;i<=n;++i){std::sort(support[i].begin(),support[i].end());ratios[i]=1./instance.target[i];B+=instance.initial[i];}
     for(int q:instance.Q)fleet+=q;
-    const auto expected=block(support,ratios,std::max(0LL,B-fleet),B);
+    auto expected=block(support,ratios,std::max(0LL,B-fleet),B);
+    const bool joint=round145().enabled&&round144().source_running;
+    if(joint)expected=round145_detail::augment(std::move(expected),support,ratios,std::max(0LL,B-fleet),B);
     int rows=0;require(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&rows)==0,"native_row_count");
     SolverNeutralLinearModel matrix;require(readLinearModel(api,model,N,rows,matrix),"native_matrix");
     std::map<std::string,Row> actual;std::vector<bool> ratio_found(n+1,false);
@@ -728,7 +731,7 @@ void auditRound143Native(const GurobiApi& api,GRBmodel* model,const Instance& in
         char* name=nullptr;require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,k,&name)==0&&name,"native_row_name");
         std::map<std::string,double> terms;
         for(int z=matrix.row_starts[k];z<matrix.row_starts[k+1];++z)terms[names.at(matrix.column_indices[z])]+=matrix.coefficients[z];
-        if(std::string(name).rfind("rn_",0)==0) {
+        if(std::string(name).rfind("rn_",0)==0||(joint&&std::string(name).rfind("r145_",0)==0)) {
             require(actual.emplace(name,Row{name,std::move(terms),matrix.senses[k],matrix.rhs[k]}).second,"native_duplicate_row");
         } else if(matrix.senses[k]=='='&&matrix.rhs[k]==0&&terms.size()==2) {
             for(int i=1;i<=n;++i)if(terms==std::map<std::string,double>{{"r_"+std::to_string(i),1},{"Y_"+std::to_string(i),-ratios[i]}})ratio_found[i]=true;
@@ -751,7 +754,8 @@ void auditRound143Native(const GurobiApi& api,GRBmodel* model,const Instance& in
     std::ofstream f(request.native_log_path.string()+".round143.native.json");f<<std::setprecision(17)
         <<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)<<",\"added_rows_checked\":"<<expected.rows.size()
         <<",\"added_columns_checked\":"<<columns<<",\"actual_ratio_rows_checked\":"<<n<<",\"applicable\":"<<(expected.applicable?"true":"false")
-        <<",\"S_L\":"<<expected.sl<<",\"S_U\":"<<expected.su<<",\"L_t\":"<<expected.lt<<",\"U_t\":"<<expected.ut<<",\"Optimize_extra\":0}\n";
+        <<",\"S_L\":"<<expected.sl<<",\"S_U\":"<<expected.su<<",\"L_t\":"<<expected.lt<<",\"U_t\":"<<expected.ut
+        <<",\"joint_NC_TS_rows_checked\":"<<(joint?6:0)<<",\"Optimize_extra\":0}\n";
     f.close();require(bool(f),"native_audit_write");
 }
 
@@ -765,7 +769,7 @@ void auditRound144Native(const GurobiApi& api,GRBmodel* model,const FixedInterva
         require(expected==round144().expected.end(),"unexpected_PC");
         int count=0;require(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&count)==0,"redundant_native_row_count");
         for(int k=0;k<count;++k){char* name=nullptr;require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,k,&name)==0&&name,"redundant_native_row_name");
-            require(std::string(name)!="r144_PC"&&std::string(name).rfind("rn_",0)!=0,"redundant_native_unexpected_row");}
+            require(std::string(name)!="r144_PC"&&std::string(name).rfind("r145_",0)!=0&&std::string(name).rfind("rn_",0)!=0,"redundant_native_unexpected_row");}
         std::ofstream f(request.native_log_path.string()+".round144.native.json");f<<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)
             <<",\"RN_columns\":0,\"RN_rows\":0,\"PC_rows\":0,\"PC_nonzeros\":0,\"Optimize_extra\":0}\n";
         f.close();require(bool(f),"redundant_native_audit_write");return;
@@ -776,7 +780,8 @@ void auditRound144Native(const GurobiApi& api,GRBmodel* model,const FixedInterva
     int found=0;for(int k=0;k<rows;++k){char* name=nullptr;
         require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,k,&name)==0&&name,"native_row_name");
         require(std::string(name).rfind("rn_",0)!=0,"persistent_extension_row");
-        if(std::string(name)=="r144_PC"){
+        require(std::string(name).rfind("r145_NC",0)!=0&&std::string(name).rfind("r145_TS",0)!=0,"persistent_joint_source_row");
+        if(std::string(name)==expected->second.name){
             std::map<std::string,double> terms;for(int j=matrix.row_starts[k];j<matrix.row_starts[k+1];++j)terms[names.at(matrix.column_indices[j])]=matrix.coefficients[j];
             require(terms==expected->second.coefficients&&matrix.rhs[k]==expected->second.rhs&&matrix.senses[k]==expected->second.sense,"actual_PC_transport");++found;
         }

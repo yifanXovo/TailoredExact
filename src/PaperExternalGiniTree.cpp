@@ -28,6 +28,7 @@
 #include "Round120NativeProof.hpp"
 #include "Round141Research.hpp"
 #include "Round144Research.hpp"
+#include "Round145Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -4232,7 +4233,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             using namespace round144_detail;auto& c=round144();
             require(leaf.id=="L0"&&leaf.gamma_L==root_gamma_L&&leaf.gamma_U==root_gamma_U,"initial_root_source_only");
             c.attempted=true;c.cutoff=verified_ub;const auto begin=PaperClock::now();
-            const auto rn=block(instance,state.artifact);
+            const auto rn=round145().enabled?round145_detail::block(instance,state.artifact):block(instance,state.artifact);
             if(rn.applicable) {
                 const auto source=append(state.artifact,rn.rows,rn.columns,artifact_dir/"models/round144_RN_source.lp","RN_source");
                 c.source_sha=source.sha256;
@@ -4263,7 +4264,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 const bool qualified=source_out.lp_terminal_valid&&source_out.optimal&&source_out.native_bound_available&&source_out.exact_zero_gap_roundtrip&&
                     source_out.model_fingerprint_matches_request&&source_out.feasibility_consistency_gate&&source_out.solver_finalization_reached&&source_out.optimize_return_code==0&&
                     source_out.failure_reason=="none"&&source_out.lp_primal_dual_evidence_available&&source_out.lp_constraint_evidence_available&&native_evidence&&native_evidence->proofUsable();
-                if(qualified)project(rn,source_out,artifact_dir/"round144_projection.json");
+                if(qualified)project(rn,source_out,artifact_dir/"round144_projection.json",round145().enabled?"r145_PC":"r144_PC",round145().enabled);
                 std::ofstream f(artifact_dir/"round144_source.json");f<<std::setprecision(17)<<"{\"qualified\":"<<(qualified?"true":"false")
                     <<",\"source_SHA\":"<<std::quoted(source.sha256)<<",\"base_SHA\":"<<std::quoted(state.artifact.sha256)
                     <<",\"source_call\":"<<source_out.native_evidence_call<<",\"status\":"<<std::quoted(source_out.native_status)

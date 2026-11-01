@@ -5,6 +5,7 @@
 #include "Round141Research.hpp"
 #include "Round143Research.hpp"
 #include "Round144Research.hpp"
+#include "Round145Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -877,6 +878,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             const auto value=requireValue(i,argc,argv);
             if(value!="off"&&value!="on")throw std::runtime_error("Round143 RN must be off or on");
             ebrp::round143().rn=value=="on";
+        }
+        else if (arg == "--round145-projection") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on")throw std::runtime_error("Round145 projection must be off or on");
+            ebrp::round145().enabled=value=="on";
         }
         else if (arg == "--round144-projection") {
             const auto value=requireValue(i,argc,argv);
@@ -3563,6 +3569,16 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round145().enabled){
+        if(ebrp::round144().enabled)throw std::runtime_error("Round145 and Round144 projections are separate research candidates");
+        ebrp::round144().enabled=true; // Reuse the qualified once-source lifecycle.
+        if(!opt.out_path.empty()){
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round145_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"RN_JP\":true,\"NC_rows\":2,\"TS_rows\":4,\"source_policy\":\"once_initial_root\",\"formal_RN_columns\":0}\n";
+            if(!f)throw std::runtime_error("Round145 parameter persistence failed");
+        }
+    }
     if(ebrp::round144().enabled) {
         if(ebrp::round127().mode!="ms2"||ebrp::round143().rn||ebrp::round138().stock_rlt||ebrp::round139().enabled()||
             ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||
