@@ -84,7 +84,29 @@ caveat. Commercial runtime/compiler binaries and licenses are not published.
 
 ## Delivery state
 
-Scientific experiments and final scientific review complete; publication in progress.
+Scientific and delivery acceptance are **PASS**. The English Draft PR is
+https://github.com/yifanXovo/TailoredExact/pull/206, open/Draft with the verified
+R143 temporary base and codex/round144-rn-projection head.
+
+Fixed science is 24885c482f818803795cdfc98b6a7b3d1887052c; measured production
+source remains 0b5858544a671722142c8450db9b88c09c9b1c72. The closing delivery
+metadata commit is distinct and identified by the commit containing
+PR_delivery.json; the initial actual PR head readback is preserved separately.
+
+Anonymous public recovery at fixed science verified all14 archives plus the
+compressed index and all171865 members. Cumulative public I/O is
+40.982947000069544 seconds, including the retained MSYS TLS-chain failure.
+The successful Windows CPython attempt uses default verified system trust,
+with no credentials, global settings change, Optimize, compile or commercial
+Native load. See public_restore_receipt.json and public_runtime_bindings.json.
+
+Post-PR bounded cleanup screening is complete: actual deletion0 bytes.
+Unique raw/failures, measured runtime/object lineage, rendered evidence,
+temporary provenance and active tree remain. Per-root file/byte counts and
+before/after free space are in cleanup_record.json. Old rounds are untouched.
+delivery_acceptance.json records the separate scientific/PDF/PR/public/cleanup
+checks; delivery_costs.json keeps nonexperimental work separate from G1.
+
 The latest remote check is base_ref_check.json: main
 b2b940c1e517a72e226ec60fc49ff19651737632 has not absorbed R143, whose head is
 066fdb672b4330f4de9e9778308f07f1752152f1. Therefore the temporary PR base is
@@ -93,8 +115,6 @@ No merge, force-push, old-round deletion, email or submission is authorized.
 
 Retained new research/build/raw/temp/restore assets are under
 E:/codes/ExactEBRP-work. The original E:/codes/ExactEBRP tree is protected.
-Local scientific acceptance and public readability are separate; public
-recovery performs no Optimize, compile or commercial Native loading. Cleanup
-is performed only after the actual Draft PR and public acceptance; zero
-deletion is allowed while retaining unique raw/failures/runtime/active-tree
-evidence. Final delivery commits update this state with actual receipts.
+Local scientific acceptance and public readability are separate. The final
+metadata push is followed by actual PR/base/head/Draft readback. No additional
+scientific computation is needed to continue review of this research-only PR.

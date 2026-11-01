@@ -1,0 +1,16 @@
+Full reciprocal normalization retains 1170 extra formal columns on K35. This adds a separate, default-off RN-P research mode: pay once for the run's own capped RN continuous source, aggregate its RN dual block, and submit one outward-compensated selector/G row to the original model. Formal RN-P models contain no RN columns. The source is restored/discarded and kept separate from formal controller bounds, while all calls remain in lifecycle, quality and cost checks. Existing H, Start, scope and proof policies remain intact.
+
+Two matched BASE domains retain RN objective gains with compiled/transported losses of 3.83e-15 and 1.37e-14. The full four-role same-PE Seed0 panel remains mixed: K35 improves U by 4.61% and relative gap by 1.95 percentage points versus OFF, with lower supported L; RX20 proves the same optimum slightly sooner. K20/RB35 emit a tautology and add no row, and RB35 has an important adverse endpoint. The same-PE K35 full-RN bridge confirms better RN-P endpoints and 9.24% lower terminal Work, without isolating column count as the cause. Decision: **research-only**, retaining stable R137 and earlier entries/profiles.
+
+Validation includes exact/interval sign, equality, finite-box, deletion and transport checks; actual Native row readback; physical complete Start and scope rejection; off equivalence; one measured actual descendant; nine fully verified formal positions; and an independent final scientific review. All 55 complete/qualification Native calls returned; seven standalone LP optimizations are separate. Two failed qualifiers and all failed reader attempts remain in the evidence. New experimental outer cost is **14727.425396 seconds (4.090951499 hours)** of 28800, including required postverification, with no nested double count.
+
+The root-value principle is attributed to standard duality and R104, including its negative complete results. The scalar-floor separation is confined to an explicit same-objective continuous local block; no full-routing dominance or all-tree equivalence is claimed. No paid-floor, Seed1 or optional-role grid is entered.
+
+Evidence at fixed science `24885c482f818803795cdfc98b6a7b3d1887052c`:
+
+- [Scientific report](https://github.com/yifanXovo/TailoredExact/blob/24885c482f818803795cdfc98b6a7b3d1887052c/results/unified_exact_round144/final_report.md)
+- [Research increment PDF](https://github.com/yifanXovo/TailoredExact/blob/24885c482f818803795cdfc98b6a7b3d1887052c/results/unified_exact_round144/manuscript.pdf)
+- [Decision](https://github.com/yifanXovo/TailoredExact/blob/24885c482f818803795cdfc98b6a7b3d1887052c/results/unified_exact_round144/candidate_decision.json) and [independent review](https://github.com/yifanXovo/TailoredExact/blob/24885c482f818803795cdfc98b6a7b3d1887052c/results/unified_exact_round144/review/final_scientific_review.json)
+- [Bounded carrier manifest](https://github.com/yifanXovo/TailoredExact/blob/24885c482f818803795cdfc98b6a7b3d1887052c/results/unified_exact_round144/carrier_manifest.json)
+
+Measured production source remains `0b5858544a671722142c8450db9b88c09c9b1c72`; the source/PE/object lineage is distinct from the science/publication commits. The temporary base is the unmerged R143 branch (#205), as main has not absorbed it. This PR remains Draft.
