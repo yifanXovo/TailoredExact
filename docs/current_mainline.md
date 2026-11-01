@@ -85,3 +85,12 @@ The [Round143 reciprocal-normalization study](round143_research.md) records real
 matched LP gains but mixed complete same-PE results. It remains default-off
 research-only, with no full expansion or stable promotion; stable R137 above
 continues as the paper mainline.
+
+The [Round144 original-variable projection study](round144_research.md)
+retains essentially all measured RN root gain with no persistent RN columns.
+Four core same-PE pairs and one K35 full-RN bridge establish useful K35
+incumbent/representation results and a small RX20 proof-clock gain, together
+with an important RB35 adverse endpoint. The overall decision is
+[research-only](../results/unified_exact_round144/candidate_decision.json),
+closing this once-root representation experiment without stable promotion.
+Stable R137, prior entries/profiles and its formal manuscript remain unchanged.

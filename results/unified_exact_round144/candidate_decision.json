@@ -1,0 +1,48 @@
+{
+  "schema": "round144-scientific-adoption-v1",
+  "study_complete": true,
+  "decision": "RESEARCH_ONLY",
+  "summary": "One full RN-block dual box projection retains essentially all measured matched-root RN gain without persistent RN columns. The four-role same-PE core panel remains mixed: K35 has useful incumbent/gap gains with a weaker supported lower bound, RX20 proves the same optimum slightly sooner, K20 has no new row or search benefit, and RB35 has an important adverse complete endpoint. The K35 same-PE full-RN bridge confirms a useful representation result, without establishing broad stable-method superiority.",
+  "role_interpretation": "K35 RN-P improves physical U by 4.6086% and relative gap by 1.9534 percentage points versus OFF, while supported L falls 2.2958%. Its presolved columns remain 7647, root simplex iterations fall from 5188 to 3794, and the printed root-after-cuts bound rises from .42856 to .44959. Terminal Work nevertheless rises 2.5189%; this is useful mixed complete evidence, not a monotone bound or speed improvement.\n\nRX20-T1 proves the same .6453250303858205 physical objective in both methods. RN-P producer/certificate time is lower by 1.7198 seconds and complete time by 1.4246 seconds. This small measured benefit is retained without a general timing claim.\n\nK20 and RB35 both produce the exact tautology 0<=0, so the uniform rule emits no PC. Their once-source preparation costs are .4785896 and 2.3387603 seconds. K20 has identical U, a lower L by 1.66795e-5, and producer time higher by 1.1412 seconds. Its actual pure verification times are 286.7388 seconds OFF and 61.6877 seconds RN-P, giving RN-P a 223.9099-second lower observed T_total. These clocks remain unchanged; no structural search acceleration is inferred on a no-PC role. RB35 RN-P has U worse by 5.0760%, L lower by 9.02909e-5 and gap worse by 3.0944 percentage points. The verified trajectories largely coincide before OFF's late incumbent improvement; this important adverse candidate endpoint is preserved, with no claimed structural cause or proof of global RN redundancy.\n\nThe actual same-PE K35 full-RN bridge has U=.6812584983808189, L=.5429317742515352 and gap=.20304586945785152. RN-P improves its U by 2.9849%, L by .4569% and gap by 2.8273 percentage points. RN-P removes 1170 formal RN columns; presolved columns fall from 8803 to 7647, root simplex iterations from 22953 to 3794, and terminal Work from 5336.4005 to 4843.2175, despite more nodes (14826 versus 11386). RN-P T_produce is .1144 seconds higher and T_total 2.4134 seconds lower, mainly through verification. These are complete capped-window endpoint and representation observations, not a causal isolation of column count or an earlier proof. Root-after-cuts bounds .44900 and .44959 show the RN information is not immediately erased by Native cuts.",
+  "optional_controls_and_stop_reason": "The pilot's single mixed K35 endpoint did not stop expansion: all four core roles and the one meaningful K35 RN bridge received their full windows and complete verification. The overall finite panel, including an important RB35 adverse endpoint and no added root information on two roles, does not justify replacing stable R137. Retain the useful original-variable RN projection as a separate default-off research implementation and close this once-root representation experiment. Do not infer that RN or projection can never be useful elsewhere.\n\nNo paid-floor control is entered because the present adoption decision and the claimed same-PE representation comparison do not depend on a full-routing structure-versus-scalar performance claim. The exact same-objective fixed-selector local witness establishes the limited structural distinction; no strict full-routing separation, universal floor dominance or production paid-floor benefit is claimed. K15, RX35-T2 and Seed1 remain explicitly unentered. If stable adoption is reconsidered, a paired full Seed1 check of the decisive RB35 adverse role is a priority; a paid-floor active K35 control is useful if that specific structural-performance attribution is sought. Such measurements could change confidence or future direction, but a control grid is not needed to accept the current research-only scope. Unused budget is not allocated merely to use it.",
+  "scope": {
+    "formal_positions": 9,
+    "core_pairs": 4,
+    "same_PE_full_RN_bridges": 1,
+    "Gurobi_Seed": 0,
+    "H_seed": 20260626,
+    "Threads": 1,
+    "serial": true,
+    "all_own_H": true,
+    "new_candidate": "RN-P once-root single full-RN-block dual box projection",
+    "production_source_commit": "0b5858544a671722142c8450db9b88c09c9b1c72",
+    "production_PE_SHA256": "180126ae1ecf7db892c3fbb92faa73b517d19029e9824f62cd922e0d9e277d7b"
+  },
+  "information_scope": {
+    "matched_ROOT_LPs": 2,
+    "compiled_objective_losses": [3.83026943495679e-15, 1.3655743202889425e-14],
+    "actual_descendant_comparisons": 1,
+    "arbitrary_descendant_equality": false,
+    "complete_RN_projection_claim": false,
+    "strict_local_same_objective_floor_separation": true,
+    "strict_full_routing_floor_separation_claim": false,
+    "R104_prior_principle_and_negative_results_retained": true
+  },
+  "cost": {
+    "new_experiment_outer_seconds": 14727.425396299921,
+    "ceiling_seconds": 28800,
+    "all_failed_qualifications_readers_and_mandatory_postverification_included": true,
+    "nested_H_LP_MIP_Work_not_added_again": true,
+    "observed_complete_and_qualification_Native_Optimize": 55,
+    "observed_returned": 55,
+    "standalone_LP_Optimize_separate": 7,
+    "total_new_Optimize": 62
+  },
+  "remaining_required_experiments": [],
+  "unentered": ["K15 pair", "RX35-T2 pair", "Seed1 confirmation", "paid-floor control"],
+  "stable_R137_entry_profile_and_formal_manuscript_unchanged": true,
+  "binary_research_flag_defaults_off": true,
+  "earlier_RN_research_identity_retained": true,
+  "raw_results_and_clocks_not_rewritten": true,
+  "authorities": ["reports/LP.json", "reports/full.json", "reports/same_PE_pairs.csv", "reports/same_PE_RN_bridges.csv", "cost_report.json", "math/local_floor_witness.json", "review/resource_k20_admission.json", "review/bridge_admission.json"]
+}

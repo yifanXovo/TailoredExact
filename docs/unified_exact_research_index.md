@@ -114,3 +114,25 @@ The [Round143 reciprocal-normalization study](round143_research.md) records real
 matched LP gains but mixed complete same-PE results. It remains default-off
 research-only, with no full expansion or stable promotion; stable R137 above
 continues as the paper mainline.
+
+# Round144 addition: RN information projected into original variables
+
+The [research guide](round144_research.md),
+[scientific report](../results/unified_exact_round144/final_report.md),
+[mathematical note](../results/unified_exact_round144/mathematical_analysis.md)
+and [LP report](../results/unified_exact_round144/LP_report.md) separate exact
+dual/box validity, measured root retention, one actual descendant and complete
+search costs. The strict scalar-floor separation is confined to a declared
+same-objective continuous local block; no full-routing dominance is claimed.
+R104's prior root-value principle and negative complete results remain.
+
+Seven standalone LP optimizations, nine full formal positions and one healthy
+complete qualification are retained with two failed qualifiers and all failed
+reader attempts. All 55 complete/qualification Native calls returned. New
+experimental outers total 14727.425396 seconds (4.090951499 hours) of 28800.
+K35 RN-P improves incumbent/gap versus OFF and both endpoints versus same-PE
+full RN; RX20 proves the same optimum slightly sooner. K20/RB35 emit no PC;
+the important RB35 adverse endpoint remains. Overall research-only; retain
+stable R137 and close this once-root experiment without automatic floor,
+Seed1 or optional-role expansion. Actual publication/public recovery and
+bounded cleanup are recorded in [RESUME](../results/unified_exact_round144/RESUME.md).

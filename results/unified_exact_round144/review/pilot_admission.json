@@ -1,0 +1,52 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "136392ea54669eac06ff55c144eb495cd84311532814f9f3bc14c638a0544f57",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/round144_independent_review",
+  "UTC": "2026-10-31T22:21:55.330711+00:00",
+  "source_commit": "0b5858544a671722142c8450db9b88c09c9b1c72",
+  "PE_SHA": "180126ae1ecf7db892c3fbb92faa73b517d19029e9824f62cd922e0d9e277d7b",
+  "manifest_SHA": "a88132404d9bdd9cebb580a210676009616e9433a61745282910c484494d3e73",
+  "scope": "Four pre-frozen full-window same-PE Seed0 positions only; no promotion or guaranteed speed benefit",
+  "exact_online_PC_validity_margin": "39471604192445710499106768564491759/2923003274661805836407369665432566039311865085952",
+  "source_excluded_only_from_control_proof_reconstruction": true,
+  "all_five_raw_Native_calls_preserved_qualified_and_charged": true,
+  "formal_proof_call_ids": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "complete_Start_and_H": true,
+  "formal_RN_columns": 0,
+  "conditions": [
+    "Preserve failed qualifiers and their actual source/PE/reader identities; no retroactive qualification",
+    "Serial single-thread timing; full 2400/1200-second producer windows for entered roles; 28800-second aggregate experimental ceiling",
+    "Own H per method, once-root current source, no historical point/bound injection, no source bound as formal control",
+    "Report all entered endpoints and postverification costs; later expansion remains result-dependent"
+  ],
+  "source_hashes": {
+    "include/Round144Research.hpp": "92e0cbac6cd9ef114082fd091fa789fd9c0016d07fde484213492ce117dc99f3",
+    "include/ObjectiveResourceCompression.hpp": "f14f9999531b337c7e119889f15f5ea24d31fb1ccabb07db549d2410e34890be",
+    "src/ObjectiveResourceCompression.cpp": "686829f25c2088d4ba7e66083ad80411853a9c3dc610d524f3be2b6ef0e7c50e",
+    "src/PaperExternalGiniTree.cpp": "e205dd4a0817154caabdba4cea6c9fb90eccae2b015fa7fdef2c5427e69fdca7",
+    "src/GurobiBaseline.cpp": "f924a5a0699a63361916a02b190cd9916728344c1ada62a44fcbd5a0f4282f3c",
+    "src/main.cpp": "b364991c086599eeb4de3a3c97810cd6ed83843acadaf6d8910360310e39e0f2",
+    "scripts/round144_read.py": "19780e853b81adcec05798053c83cc127ed3d7ab74dab9f51a0384f9c9aa23d4",
+    "scripts/round118_call_logs.py": "0c719ad386ed7ad3c793ce93bab7bc4f190cd2a2317aeccdccff6279c7b3dca4",
+    "scripts/round144_campaign.py": "a909d03409deec2b65884ca39fe1564514349823c2c78ee20ee0f0dd7266faf5"
+  },
+  "evidence_hashes": {
+    "qualification_native_transport.json": "dac58f0a4948d98f3ae4a0e2c33c495786b174ca37687309d89f515144f86f68",
+    "qualification_native_writer.json": "afbd16be9dc95ba04e5a5be9efad6348ebfadfe9ef13a2528af5117df9b03371",
+    "math/fixtures.json": "71bc827095a548706e41857db9eb1526e3e9a0a2176a790f2eb3fa41307e99b0",
+    "qualification03/runs/001/raw/R144_qualification03_001_R-X20-S-T1_S0_RNP/round135_endpoint.json": "855f03539fc48d49862c27bad171c4bbcc22fc2b7ab130e20656cfac9d1eb7f8",
+    "qualification03/runs/001/raw/R144_qualification03_001_R-X20-S-T1_S0_RNP/round144_control_audit.json": "303b9718d7064b24672c5817891b4cdd21a80138f74ccfb2ba6def2d5619b17f",
+    "qualification03/runs/001/raw/R144_qualification03_001_R-X20-S-T1_S0_RNP/verification_closeout.json": "61ad035bca73fbf000981fe941f07d986b1e368e0432c277a37b85bd260bb5b2",
+    "LP/R-X20-S-T1_actual_high_child/result.json": "9d81813d5a190bad63521f251a37f0859126c3d3f62e8ed3a2dcdacb8db3e596"
+  },
+  "seconds": 0.1716700999531895,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0
+}

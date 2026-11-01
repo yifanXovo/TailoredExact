@@ -27,6 +27,7 @@
 #include "Round119ProofContraction.hpp"
 #include "Round120NativeProof.hpp"
 #include "Round141Research.hpp"
+#include "Round144Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -1754,6 +1755,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                        double root_gamma_L,
                                        double root_gamma_U) {
     round141ResetRun();
+    round144ResetRun();
     if (options.round92_handling_activation) {
         if (options.external_gini_scheduling !=
                 "round31-nonblocking-native-bound" ||
@@ -4119,6 +4121,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 spec);
         }
         state.artifact_stock_rlt = desired_stock;
+        if(round144().ready&&state.artifact.written) {
+            round144_detail::require(native_evidence&&native_evidence->proofUsable(),"inherited_proof_dependency_revoked");
+            const auto base=state.artifact;
+            state.artifact=round144_detail::embed(instance,base,verified_ub,
+                base.path.parent_path()/(base.path.stem().string()+"_round144_compact.lp"));
+        }
         if(round141().ready&&state.artifact.written) {
             round141_detail::require(native_evidence&&native_evidence->proofUsable(),"inherited_proof_dependency_revoked");
             round141_detail::require(round141().choice.input_sha==fileSha256(instance.path),"inherited_source_input_identity");
@@ -4220,6 +4228,58 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         if (state.lp_complete &&
             state.lp_incumbent_epoch == incumbent_epoch) return true;
         if (!ensureArtifact(leaf, state)) return false;
+        if(round144().enabled&&!round144().attempted) {
+            using namespace round144_detail;auto& c=round144();
+            require(leaf.id=="L0"&&leaf.gamma_L==root_gamma_L&&leaf.gamma_U==root_gamma_U,"initial_root_source_only");
+            c.attempted=true;c.cutoff=verified_ub;const auto begin=PaperClock::now();
+            const auto rn=block(instance,state.artifact);
+            if(rn.applicable) {
+                const auto source=append(state.artifact,rn.rows,rn.columns,artifact_dir/"models/round144_RN_source.lp","RN_source");
+                c.source_sha=source.sha256;
+                FixedIntervalMipRequest probe;probe.interval_mip_policy=options.external_gini_interval_mip_policy;
+                probe.solve_kind=FixedIntervalSolveKind::PaperLpRelaxation;probe.leaf_id=leaf.id;
+                probe.gamma_L=leaf.gamma_L;probe.gamma_U=leaf.gamma_U;probe.verified_cutoff=verified_ub;
+                probe.global_deadline_remaining_seconds=globalDeadlineRemaining();probe.new_leaf=true;
+                probe.canonical_model_path=source.path;probe.canonical_model_fingerprint=source.sha256;
+                probe.canonical_model_scope=source.model_scope;probe.canonical_row_signature=source.row_signature;
+                probe.native_log_path=artifact_dir/"native_logs/L0_round144_source.gurobi.log";
+                probe.capture_lp_primal_dual_evidence=true;
+                // Restore the disposable source's original integer types before
+                // releasing it, preserving the existing complete LP lifecycle
+                // accounting. It is still explicitly discarded below.
+                probe.incremental_model_reuse_enabled=true;probe.retain_model_after_solve=true;
+                const auto source_out=[&](){
+                    struct SourceScope {
+                        SourceScope(){require(!round143().rn,"persistent_RN_conflict");round144().source_running=true;round143().rn=true;}
+                        ~SourceScope(){round143().rn=false;round144().source_running=false;}
+                    } scope;
+                    return solveBudgeted(probe);
+                }();
+                if(source_out.attempted)optimize<<leaf.id<<",LP,"<<csvField(source_out.native_status)<<','<<source_out.optimize_return_code<<','<<probe.global_deadline_remaining_seconds<<','
+                    <<source_out.solver_runtime_seconds<<','<<source_out.work<<','<<source_out.nodes<<','<<source_out.simplex_iterations<<','<<source_out.barrier_iterations<<','<<source_out.memory_gb<<','
+                    <<source.sha256<<','<<source_out.in_memory_model_reused<<','<<source_out.integer_domain_restored<<','<<csvField(source_out.basis_reuse_status)<<','<<csvField(source_out.native_log_path)<<'\n';
+                // No source handle, point or bound is installed as formal control.
+                backend->discardLeaf(leaf.id);
+                const bool qualified=source_out.lp_terminal_valid&&source_out.optimal&&source_out.native_bound_available&&source_out.exact_zero_gap_roundtrip&&
+                    source_out.model_fingerprint_matches_request&&source_out.feasibility_consistency_gate&&source_out.solver_finalization_reached&&source_out.optimize_return_code==0&&
+                    source_out.failure_reason=="none"&&source_out.lp_primal_dual_evidence_available&&source_out.lp_constraint_evidence_available&&native_evidence&&native_evidence->proofUsable();
+                if(qualified)project(rn,source_out,artifact_dir/"round144_projection.json");
+                std::ofstream f(artifact_dir/"round144_source.json");f<<std::setprecision(17)<<"{\"qualified\":"<<(qualified?"true":"false")
+                    <<",\"source_SHA\":"<<std::quoted(source.sha256)<<",\"base_SHA\":"<<std::quoted(state.artifact.sha256)
+                    <<",\"source_call\":"<<source_out.native_evidence_call<<",\"status\":"<<std::quoted(source_out.native_status)
+                    <<",\"failure\":"<<std::quoted(source_out.failure_reason)<<",\"source_objective\":"<<(source_out.lp_objective_value_available?round141_detail::number(source_out.lp_objective_value):"null")
+                    <<",\"source_bound\":"<<(source_out.native_bound_available?round141_detail::number(source_out.native_bound):"null")
+                    <<",\"Runtime\":"<<source_out.solver_runtime_seconds<<",\"Work\":"<<source_out.work<<",\"total_preparation_seconds\":"<<std::chrono::duration<double>(PaperClock::now()-begin).count()
+                    <<",\"source_lower\":"<<c.lower<<",\"source_upper\":"<<c.upper<<",\"source_cutoff\":"<<c.cutoff<<",\"source_RN_columns\":"<<rn.columns.size()
+                    <<",\"PC_emitted\":"<<(c.ready?"true":"false")<<",\"formal_RN_columns\":0,\"formal_control_from_source\":false,\"source_solves\":1}\n";f.close();require(bool(f),"source_receipt_write");
+                if(!qualified){result.external_gini_tree_failure_reason="round144_source_not_qualified:"+source_out.failure_reason;if(source_out.interrupted)stopAtDeadline();return false;}
+                if(c.ready){const auto base=state.artifact;
+                    state.artifact=embed(instance,base,verified_ub,base.path.parent_path()/(base.path.stem().string()+"_round144_compact.lp"));}
+            } else {
+                std::ofstream f(artifact_dir/"round144_source.json");f<<"{\"qualified\":false,\"applicable\":false,\"reason\":\"no_proved_positive_denominator\",\"source_solves\":0,\"formal_RN_columns\":0}\n";
+                f.close();require(bool(f),"inapplicable_receipt_write");
+            }
+        }
         if (options.round65_budget && state.round65_core_due) return true;
         const double remaining = globalDeadlineRemaining();
         if (remaining <= 0.0) {

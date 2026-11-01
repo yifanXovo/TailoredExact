@@ -135,6 +135,7 @@ else()
 endif()
 
 add_library(exact_ebrp_core ${EXACT_EBRP_LIB_SOURCES})
+target_link_libraries(exact_ebrp_core PUBLIC round104_compression)
 add_executable(Round101FleetTests tests/round101_fleet_tests.cpp)
 target_link_libraries(Round101FleetTests PRIVATE exact_ebrp_core)
 add_test(NAME Round101FleetTests COMMAND Round101FleetTests)

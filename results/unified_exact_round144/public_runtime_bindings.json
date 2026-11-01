@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-11-01T03:26:35.968036+00:00",
+  "attempts": [
+    {
+      "attempt": 1,
+      "runtime": {
+        "path": "D:\\msys64\\ucrt64\\bin\\python.exe",
+        "SHA256": "abf7f61b2f9106470d2fe1f3407084b3ab2ff26bb20d7c41abbfb104a8f6fd48",
+        "bytes": 101984
+      },
+      "PASS": false,
+      "reason": "URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)'))"
+    },
+    {
+      "attempt": 2,
+      "runtime": {
+        "path": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "SHA256": "ceabb31054d429f57cb3825775677eeaf0db35fdabbc5ff6aef661c037154b00",
+        "bytes": 107312
+      },
+      "PASS": true,
+      "TLS": "Default verified TLS using existing Windows certificate trust"
+    }
+  ],
+  "TLS_verification_disabled": false,
+  "credentials_added": false,
+  "global_settings_changed": false,
+  "receipt_SHA256": "d83a6d8e8ac52dadef4240ad66098f78d754e550b379e2b488e181a73829beed",
+  "Optimize": 0,
+  "Native_load": 0
+}

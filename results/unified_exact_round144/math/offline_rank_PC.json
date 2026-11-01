@@ -1,0 +1,51 @@
+{
+  "PASS": true,
+  "facts": [
+    {
+      "role": "K-35-U",
+      "variant": "base",
+      "source_point_SHA": "ca585dc8107b9b472735da3f7637c0e6273f03ee613342b945a1cd8b029dc90f",
+      "violation_div_n": 0.023855359195111166,
+      "exact_nonzeros": 15
+    },
+    {
+      "role": "K-35-U",
+      "variant": "stock",
+      "source_point_SHA": "086c04803801c076cd29597174f1a1d7a878a8a7c1e9f07856e0fedada16aa93",
+      "violation_div_n": 0.005944242130579499,
+      "exact_nonzeros": 15
+    },
+    {
+      "role": "K-35-U",
+      "variant": "tc_stock",
+      "source_point_SHA": "5c5f4a36fc7350636f815495999883662be066cca908dd9ca56d3c8ad4047d40",
+      "violation_div_n": 0.011385760529762846,
+      "exact_nonzeros": 40
+    },
+    {
+      "role": "R-X20-S-T1",
+      "variant": "base",
+      "source_point_SHA": "72040698d8d58f735a53822a4bf129e9f054a16c339164a7339890df8e94e521",
+      "violation_div_n": 0.06850590621823809,
+      "exact_nonzeros": 14
+    },
+    {
+      "role": "R-X20-S-T1",
+      "variant": "stock",
+      "source_point_SHA": "eb9edc830819eacdbe45f5ad18128f4ab4cbb7b074894520e5483e956f1cbbcd",
+      "violation_div_n": 0.022542692207833517,
+      "exact_nonzeros": 14
+    },
+    {
+      "role": "R-X20-S-T1",
+      "variant": "tc_stock",
+      "source_point_SHA": "ab96773ddd6b24bc7329921ff5c16dc554512545ace1fb9415d87de3aaa211a3",
+      "violation_div_n": 0.022542692207833594,
+      "exact_nonzeros": 14
+    }
+  ],
+  "seconds": 0.11148339998908341,
+  "Optimize": 0,
+  "Native_load": 0,
+  "missing_supplement_reconstructed": true
+}

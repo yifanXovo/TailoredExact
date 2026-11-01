@@ -1,4 +1,11 @@
 # Preserve byte-exact Round 29 evidence and its recorded SHA-256 values.
+# Round144 measured projection helpers, protocol and carriers preserve bytes.
+/scripts/round144* -text whitespace=cr-at-eol
+/scripts/paper_s2_rnp.py -text whitespace=cr-at-eol
+/include/Round144Research.hpp -text whitespace=cr-at-eol
+/config/gi_tbc_rnp_round144.json -text whitespace=cr-at-eol
+/results/unified_exact_round144/** -text whitespace=cr-at-eol
+/results/unified_exact_round144/**/*.log -whitespace
 # Round135 executed helpers, staged protocol and manuscript retain actual bytes.
 /scripts/round135* -text whitespace=cr-at-eol
 /results/unified_exact_round135/** -text whitespace=cr-at-eol
