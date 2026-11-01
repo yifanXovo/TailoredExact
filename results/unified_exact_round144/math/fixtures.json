@@ -1,0 +1,148 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "Native_load": 0,
+  "seconds": 0.6176250998396426,
+  "compiled_fraction_checks": [
+    {
+      "tag": "mixed_sense_signed_box_and_tiny_deletion",
+      "PASS": true,
+      "exact_safe_rhs": "15756814527473832272551293213506882154942730465/11417981541647679048466287755595961091061972992",
+      "actual_rhs": 1.3800000000000063,
+      "exact_nonnegative_validity_margin": "37121122420907420605522673626911/11417981541647679048466287755595961091061972992",
+      "numerical_validity_margin": 3.251110740151944e-15,
+      "nonzeros": 2,
+      "sign_repairs": [
+        {
+          "name": "rn_bad_ge",
+          "Pi": -1e-15,
+          "used": 0.0
+        },
+        {
+          "name": "rn_bad_le",
+          "Pi": 1e-15,
+          "used": 0.0
+        }
+      ],
+      "RN_columns": 0,
+      "ideal_projected_rhs": "895671208097257732054441418964337/649037107316853453566312041152512",
+      "conversion_box_correction": "35781463598218052268219540738273/11417981541647679048466287755595961091061972992",
+      "input_SHA": "bc0c05102ca130583cc0e6b80c651706af216d99bb8a0d5055a31633ddbb8e55",
+      "evidence_SHA": "e5f04e54b2ae9beead2a29ffc6cd9909a0c238b548bf568b801c0a4f7f84c4e9",
+      "state_reset": true
+    },
+    {
+      "tag": "zero_RN_dual_redundant",
+      "PASS": true,
+      "exact_safe_rhs": "0",
+      "actual_rhs": 0,
+      "exact_nonnegative_validity_margin": "0",
+      "numerical_validity_margin": 0.0,
+      "nonzeros": 0,
+      "sign_repairs": [],
+      "RN_columns": 0,
+      "ideal_projected_rhs": "0",
+      "conversion_box_correction": "0",
+      "input_SHA": "f712ba41973b860806c2772f8124abefa9058c4969cb0468686d99c974e00e89",
+      "evidence_SHA": "d9891fb42e1687e3bf3edfef2c2c5e63a0dfa0d50872e4b15e517619b3aac5ab",
+      "state_reset": true
+    },
+    {
+      "tag": "K-35-U",
+      "PASS": true,
+      "exact_safe_rhs": "-4496652698014741172599435111276759393484294787443/93536104789177786765035829293842113257979682750464",
+      "actual_rhs": -0.048073978579174975,
+      "exact_nonnegative_validity_margin": "342442949729049544655627156431507827/93536104789177786765035829293842113257979682750464",
+      "numerical_validity_margin": 3.661077725022718e-15,
+      "nonzeros": 33,
+      "sign_repairs": [],
+      "RN_columns": 0,
+      "ideal_projected_rhs": "-4496652698014741849130849345798958952227387150707/93536104789177786765035829293842113257979682750464",
+      "conversion_box_correction": "2347189853016831/324518553658426726783156020576256",
+      "input_SHA": "8c770e8cafef9b407ef7689831d1575f344b5003dd41029554a723a837dbe89b",
+      "evidence_SHA": "d0ebac5c2ed9c24be62f4d0697802a456489e251202ae1ad9183c278f08418f0",
+      "state_reset": true
+    },
+    {
+      "tag": "R-X20-S-T1",
+      "PASS": true,
+      "exact_safe_rhs": "-58150771095708246308663847566587814195255865/356811923176489970264571492362373784095686656",
+      "actual_rhs": -0.16297317247142717,
+      "exact_nonnegative_validity_margin": "4523237161959834649298551200313/356811923176489970264571492362373784095686656",
+      "numerical_validity_margin": 1.2676810577662521e-14,
+      "nonzeros": 30,
+      "sign_repairs": [],
+      "RN_columns": 0,
+      "ideal_projected_rhs": "-58150771095708266669796085127806711463696953/356811923176489970264571492362373784095686656",
+      "conversion_box_correction": "296293470274558333/5192296858534827628530496329220096",
+      "input_SHA": "b8e9db43990a4b528d559eef8c5fc400aa8809b46d736caf62bedeea8cc04b87",
+      "evidence_SHA": "3d10de8cb9d2141a69158c4d84dc196fd87e879871f5739f7894284f68ba1372",
+      "state_reset": true
+    }
+  ],
+  "integer_local_physical_checks": [
+    {
+      "y": [
+        0,
+        0,
+        1
+      ],
+      "G": "2/3",
+      "slack": "9/2"
+    },
+    {
+      "y": [
+        0,
+        1,
+        0
+      ],
+      "G": "2/3",
+      "slack": "2"
+    },
+    {
+      "y": [
+        0,
+        1,
+        1
+      ],
+      "G": "1/3",
+      "slack": "4"
+    },
+    {
+      "y": [
+        1,
+        0,
+        0
+      ],
+      "G": "2/3",
+      "slack": "1/2"
+    },
+    {
+      "y": [
+        1,
+        0,
+        1
+      ],
+      "G": "1/3",
+      "slack": "5/2"
+    },
+    {
+      "y": [
+        1,
+        1,
+        0
+      ],
+      "G": "1/3",
+      "slack": "0"
+    }
+  ],
+  "floor_separation": {
+    "scope": "Three-site old Gini/stock/TC/TC2/endpoint-product block plus independent nonnegative penalty epigraph; not full routing P",
+    "old_g": "1/3",
+    "PC_requires": "5/12",
+    "penalty": "1/12",
+    "scalar_objective_floor": "5/12",
+    "PC_violation": "1/4",
+    "conclusion": "A structural PC can exclude a floor-feasible point in this declared rational block. No universal/full-routing dominance claimed."
+  }
+}

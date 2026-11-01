@@ -1,0 +1,83 @@
+{
+  "PASS": true,
+  "facts": [
+    {
+      "role": "K-35-U",
+      "L": 0.22809049692374592,
+      "old_L": 0.20017766194929548,
+      "RN_L": 0.22809049692374975,
+      "retention_loss": 3.83026943495679e-15,
+      "retention_fraction": 0.9999999999998628,
+      "columns": 10007,
+      "rows": 23625,
+      "nonzeros": 163549,
+      "Runtime": 0.24400019645690918,
+      "Work": 0.6761787214161792,
+      "iterations": 3779.0,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 3.469446951953614e-18,
+        "ConstrResidual": 7.275957614183426e-12,
+        "DualResidual": 3.469446951953614e-18,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 1.4988010832439613e-14,
+        "bounds": 0.0,
+        "objective": 0.22809049692374592
+      },
+      "RN_columns": 0,
+      "PC_rows": 1,
+      "actual_all_terms_and_RHS_read_back": true,
+      "model_SHA": "fae8bfd79f713cb53a504f4f59efac6cb4efda7a69a09ccfabca464c306ae80d",
+      "cpp_evidence_SHA": "d0ebac5c2ed9c24be62f4d0697802a456489e251202ae1ad9183c278f08418f0",
+      "Seed": 0,
+      "Threads": 1
+    },
+    {
+      "role": "R-X20-S-T1",
+      "L": 0.38976161621114946,
+      "old_L": 0.3315943162865373,
+      "RN_L": 0.3897616162111631,
+      "retention_loss": 1.3655743202889425e-14,
+      "retention_fraction": 0.9999999999997652,
+      "columns": 2480,
+      "rows": 6024,
+      "nonzeros": 35188,
+      "Runtime": 0.03900003433227539,
+      "Work": 0.12288350604377722,
+      "iterations": 1260.0,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 4.163336342344337e-17,
+        "ConstrResidual": 5.4569682106375694e-12,
+        "DualResidual": 4.440892098500626e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 7.93809462606987e-15,
+        "bounds": 0.0,
+        "objective": 0.38976161621114946
+      },
+      "RN_columns": 0,
+      "PC_rows": 1,
+      "actual_all_terms_and_RHS_read_back": true,
+      "model_SHA": "12c68ef0e6b8b0175c21624abddfb54da4b5614422be84d99b1f2de819d8f88f",
+      "cpp_evidence_SHA": "3d10de8cb9d2141a69158c4d84dc196fd87e879871f5739f7894284f68ba1372",
+      "Seed": 0,
+      "Threads": 1
+    }
+  ],
+  "LP_Optimize": 2,
+  "MIP_Optimize": 0,
+  "Native": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  }
+}

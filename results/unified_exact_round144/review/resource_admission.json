@@ -1,0 +1,46 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "aa4c498c468e5b8bb8db989064d8659128ad4358da2b3a0df7f06d641a17d0e3",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/round144_independent_review",
+  "UTC": "2026-10-31T23:50:00.970732+00:00",
+  "scope": "Only R-B35-S-T2 OFF/RN-P full-window same-V5-PE Seed0 pair; K20 not entered by this gate",
+  "PE_SHA": "180126ae1ecf7db892c3fbb92faa73b517d19029e9824f62cd922e0d9e277d7b",
+  "source_commit": "0b5858544a671722142c8450db9b88c09c9b1c72",
+  "manifest_SHA": "a88132404d9bdd9cebb580a210676009616e9433a61745282910c484494d3e73",
+  "same_pair_input_SHA": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+  "complete_primary_arms": 4,
+  "budget_remaining_snapshot": 23897.29527500039,
+  "reader_boundary_review": {
+    "decision": "ACCEPT",
+    "reader_SHA": "e9c5a37b3923be3f30b7902251854675e7c87a9c8f8b712e6cfd5b306d34ed77",
+    "source_not_reached": "Allowed only with no producer source receipt, no RN/PC audits and no declared Native call; inherited complete reader still qualifies result",
+    "derived_disposition": "Marked postverification, stored only in derived control audit; no invented producer source receipt",
+    "source_missing_with_any_call": "Rejected",
+    "positive_source_path": "Unchanged"
+  },
+  "rationale": "Qualified K35 primal/gap gain with moderate dual tradeoff and RX20 equal-objective faster proof leave no severe-stop or qualification blocker; important resource role is informative",
+  "conditions": [
+    "Serial Threads1, Seed0, separate own H and complete 2400-second windows for both entered roles",
+    "No source-bound/control injection, no algorithm change and aggregate experiment ceiling 28800 seconds",
+    "Keep all endpoints, failed qualifiers and complete postverification charges; decide later K20/bridges from these results"
+  ],
+  "unchanged_production_hashes": {
+    "include/Round144Research.hpp": "92e0cbac6cd9ef114082fd091fa789fd9c0016d07fde484213492ce117dc99f3",
+    "include/ObjectiveResourceCompression.hpp": "f14f9999531b337c7e119889f15f5ea24d31fb1ccabb07db549d2410e34890be",
+    "src/ObjectiveResourceCompression.cpp": "686829f25c2088d4ba7e66083ad80411853a9c3dc610d524f3be2b6ef0e7c50e",
+    "src/PaperExternalGiniTree.cpp": "e205dd4a0817154caabdba4cea6c9fb90eccae2b015fa7fdef2c5427e69fdca7",
+    "src/GurobiBaseline.cpp": "f924a5a0699a63361916a02b190cd9916728344c1ada62a44fcbd5a0f4282f3c",
+    "src/main.cpp": "b364991c086599eeb4de3a3c97810cd6ed83843acadaf6d8910360310e39e0f2"
+  },
+  "evidence_hashes": {
+    "reports/full.json": "1d03cc377420aa5fb1cb866870d7f2cd5d3d7a82af8f0c69596fea73dbc37a7e",
+    "reports/same_PE_pairs.csv": "e9f84813be1c4c425b26b7f02635c71d45721f7deadc284ac82d8d14d2648d5b",
+    "cost_report.json": "301a54d0feace4655e41e80f180b401b6f5722708894b5c2acb08fe09ad27c33",
+    "review/pilot_admission.json": "b1403a6dcb3ad8b007e1cb46409c5202fec6a1283e998c17b59dd9475edd7058"
+  },
+  "seconds": 0.09195389994420111,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0
+}

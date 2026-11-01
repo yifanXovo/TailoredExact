@@ -1,0 +1,45 @@
+{
+  "UTC": "2026-10-31T22:10:06.751851+00:00",
+  "reviewer": "/root/round144_independent_review",
+  "decision": "MATHEMATICS_AND_COMPILED_TRANSPORT_ACCEPTED; complete healthy lifecycle pending",
+  "facts": [
+    {
+      "role": "K-35-U",
+      "compiled_row_safe_exact": true,
+      "exact_validity_margin": "342442949729049544655627156431507827/93536104789177786765035829293842113257979682750464",
+      "binary64_margin": 3.661077725022718e-15,
+      "compiled_evidence_SHA": "d0ebac5c2ed9c24be62f4d0697802a456489e251202ae1ad9183c278f08418f0"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "compiled_row_safe_exact": true,
+      "exact_validity_margin": "4523237161959834649298551200313/356811923176489970264571492362373784095686656",
+      "binary64_margin": 1.2676810577662521e-14,
+      "compiled_evidence_SHA": "3d10de8cb9d2141a69158c4d84dc196fd87e879871f5739f7894284f68ba1372"
+    }
+  ],
+  "zero_dual_tautology": {
+    "PASS": true,
+    "evidence_SHA": "d9891fb42e1687e3bf3edfef2c2c5e63a0dfa0d50872e4b15e517619b3aac5ab",
+    "rule": "Only empty terms and nonnegative <= RHS may be omitted; empty negative RHS fails closed"
+  },
+  "reset_fix": "Verified round144ResetRun preserves enabled only and is invoked at solvePaperExternalGiniTree entry",
+  "source_hashes": {
+    "include/Round144Research.hpp": "92e0cbac6cd9ef114082fd091fa789fd9c0016d07fde484213492ce117dc99f3",
+    "src/ObjectiveResourceCompression.cpp": "686829f25c2088d4ba7e66083ad80411853a9c3dc610d524f3be2b6ef0e7c50e",
+    "src/PaperExternalGiniTree.cpp": "85d53ea8965b894ffbc5903bff200547e0b765751897915ed02d263b4a365351",
+    "src/GurobiBaseline.cpp": "f924a5a0699a63361916a02b190cd9916728344c1ada62a44fcbd5a0f4282f3c",
+    "scripts/round144_read.py": "6fee12b455968256442f2b0788ccf9924168b55bb6f96c60d5c78a503c145dbf"
+  },
+  "qualified_transport_SHA": "dac58f0a4948d98f3ae4a0e2c33c495786b174ca37687309d89f515144f86f68",
+  "qualified_writer_SHA": "afbd16be9dc95ba04e5a5be9efad6348ebfadfe9ef13a2528af5117df9b03371",
+  "seconds": 0.02595149981789291,
+  "Optimize": 0,
+  "compile": 0,
+  "Native_load": 0,
+  "remaining": [
+    "Healthy complete qualifier for repaired zero-dual path",
+    "Reader must explicitly support mathematically inapplicable nonpositive-denominator path before claiming coverage",
+    "Actual zero-row audit should count absent PC/RN rows, in addition to column names"
+  ]
+}

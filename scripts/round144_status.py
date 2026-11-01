@@ -14,5 +14,7 @@ def main():
     if (d/'external/round144_source.json').exists():value['source']=read(d/'external/round144_source.json')
     if (d/'round135_endpoint.json').exists():
         p=read(d/'round135_endpoint.json');value['endpoint']={k:p.get(k) for k in ['U','L','certificate','T_produce','T_cert','T_verify','T_total','performance_eligible']}
+    if '--brief' in sys.argv:
+        value.pop('source',None);value.pop('receipt',None)
     print(json.dumps(value,ensure_ascii=False))
 if __name__=='__main__':main()

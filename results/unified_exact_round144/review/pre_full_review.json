@@ -1,0 +1,48 @@
+{
+  "UTC": "2026-10-31T22:02:32.433483+00:00",
+  "reviewer": "Independent non-implementer /root/round144_independent_review",
+  "mathematical_check": "PASS",
+  "exact_saved_PC_checks": [
+    {
+      "role": "K-35-U",
+      "active_RN_rows": 315,
+      "wrong_sign_repair_names": [],
+      "exact_box_support": "9956705237084211884887850863095437/93536104789177786765035829293842113257979682750464",
+      "exact_transport_loss": "1076925587302296825739453836497267/93536104789177786765035829293842113257979682750464",
+      "serialized_rhs_safe_exact": true,
+      "root_retention_loss": 1.6653345369377348e-16,
+      "retention_fraction": 0.999999999999994,
+      "matrix_binding": true
+    },
+    {
+      "role": "R-X20-S-T1",
+      "active_RN_rows": 153,
+      "wrong_sign_repair_names": [],
+      "exact_box_support": "338837220744143936006326298055/356811923176489970264571492362373784095686656",
+      "exact_transport_loss": "27593030884328625363814472249/356811923176489970264571492362373784095686656",
+      "serialized_rhs_safe_exact": true,
+      "root_retention_loss": 9.992007221626409e-16,
+      "retention_fraction": 0.9999999999999828,
+      "matrix_binding": true
+    }
+  ],
+  "source_hashes": {
+    "include/Round144Research.hpp": "262c46c43465ad5b898dc4d4a6eff6e4066086c2f52bec1e2387036650e182f4",
+    "include/ObjectiveResourceCompression.hpp": "f14f9999531b337c7e119889f15f5ea24d31fb1ccabb07db549d2410e34890be",
+    "src/ObjectiveResourceCompression.cpp": "686829f25c2088d4ba7e66083ad80411853a9c3dc610d524f3be2b6ef0e7c50e",
+    "src/PaperExternalGiniTree.cpp": "535f2156b851298d125c4366de671f682755f448e7e11894f9c3964cf37eca33",
+    "src/GurobiBaseline.cpp": "115ebcf3005c18c02d4298db10eccefaf30a97dbc5e96644b4deee5a7a13f120",
+    "src/main.cpp": "b364991c086599eeb4de3a3c97810cd6ed83843acadaf6d8910360310e39e0f2",
+    "scripts/round144_lp.py": "fd7c8259e8a88a7fed6f6cf938a9dfb826ca2ae11ef33baaa4d880c668a7e97b"
+  },
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "uncovered": [
+    "Actual compiled C++ row transport versus Fraction oracle",
+    "Actual Native readback / complete Start / short complete health qualification",
+    "Full-role endpoints, descendant loss and paid-floor attribution"
+  ],
+  "lifecycle_finding": "Add/reset per-run Round144 state before multiple same-process runs; main and solver currently only reset R141",
+  "admission": "CONDITIONAL: complete scoped lifecycle repair and measured qualification before expensive full runs"
+}
