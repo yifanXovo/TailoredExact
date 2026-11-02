@@ -1,0 +1,65 @@
+{
+  "UTC": "2026-11-02T18:15:57.902030+00:00",
+  "E1_complete": true,
+  "new_LP_Optimize": 5,
+  "baseline_Optimize": 0,
+  "extra_LP_iterations": 0,
+  "one_row_gains": [
+    {
+      "role": "K-20-S",
+      "carrier": "base",
+      "old_L": 0.2360103023423648,
+      "L": 0.2382795887506511,
+      "gain": 0.002269286408286303,
+      "Runtime": 0.18499994277954102
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "joint",
+      "old_L": 0.23905218467540965,
+      "L": 0.2415117480783027,
+      "gain": 0.00245956340289305,
+      "Runtime": 0.2630000114440918
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "stock",
+      "old_L": 0.2510161099222611,
+      "L": 0.2555704958167485,
+      "gain": 0.004554385894487423,
+      "Runtime": 0.15400004386901855
+    },
+    {
+      "role": "K-35-U",
+      "carrier": "base",
+      "old_L": 0.20418702816386647,
+      "L": 0.2095681590426218,
+      "gain": 0.00538113087875533,
+      "Runtime": 1.0550000667572021
+    },
+    {
+      "role": "R-X20-S-T1",
+      "carrier": "base",
+      "old_L": 0.3650046456214907,
+      "L": 0.38163629527926674,
+      "gain": 0.016631649657776026,
+      "Runtime": 0.09800004959106445
+    }
+  ],
+  "candidate": "Standalone D + one common-S low affine/moment row",
+  "uniform": true,
+  "new_columns": 0,
+  "added_root_LP_max": 1,
+  "root_once": true,
+  "first_full_pair": {
+    "role": "K-35-U",
+    "cap_per_arm": 2400,
+    "methods": [
+      "D",
+      "D_SHARED_S"
+    ],
+    "same_new_PE": true
+  },
+  "reason": "Positive reoptimization on all five domains including D carriers; K35 has +.00538113 and an existing hard incumbent/bound tradeoff. One row already has clear value; no extra LP closure is required.",
+  "frozen_before_formal": true
+}
