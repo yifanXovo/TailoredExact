@@ -121,8 +121,10 @@ minimum g=1/2, attained by the same2n-point mixture. The joint relaxation
 is only≈3/(2n). It strictly improves O yet leaves substantial integer-objective
 consistency unexpressed. This is a fixed-selector local theorem, not a full
 route/cutoff strictness witness or a dominance claim over every R141/R142
-conditional disjunction. The supplied all-n algebra and prior finite Fraction
-checks are reused; no new n-grid or binary-specialized algorithm is introduced.
+conditional disjunction. The all-n algebra is independently reviewed in this
+round. Earlier finite Fraction checks are reported by the supplied goal; their
+missing supplemental asset is not claimed recovered or rerun here. No new
+n-grid or binary-specialized algorithm is introduced.
 
 The hhat≤1 caps are inherited integer-valid finite bounds. A pure-RN argument
 that lowers each hhat to its pair absolute minimum cannot simply be reused
@@ -140,9 +142,18 @@ Using the shared t box and per-selector L*s≤w≤U*s gives the original row
 
 Thus a positive violation separates the original x from *every* NC extension,
 not merely one saved z. Multiplier optimality is unnecessary for validity.
-The task's supplied NC2-PC saved-source violations/n are K35 .0862352641105,
-RX20 .0125145224432,K20 .1139059369152,RB35 .1340443111542. These are
-zero-Optimize separation facts. Those x also violate old TC2, so the table
+Finite reconstruction from sealed R144 data independently obtains NC2-PC
+saved-source violations/n of K35 .086235264110508,
+RX20 .0125145224431752,K20 .113905936915206,RB35 .134044311154221,
+matching the supplied signals within2.5e-14. These are zero-Optimize separation
+facts for ideal exact NC2 from actual binary64 c interpreted as rationals,
+distinct from production R140-down floating rows. The one-dimensional station
+box calculation preserves actual selector masses (without normalization) and
+checks exact primal/dual identity. The RX20 signal identifies the standalone
+saved LP point; its different complete-production optimal point gives
+.0132871368955265 and is retained separately, not relabeled as the same point.
+Exact rows, multipliers and source/point hashes are in
+`math/saved_point_NC_PC.json` and its retained history. Those x also violate old TC2, so the table
 alone cannot establish cross-information gain. The new K35 strong-O solve
 and nested O+NC+TS reoptimization answer that separate numerical question.
 No historical point or separating row is injected into fresh full runs.

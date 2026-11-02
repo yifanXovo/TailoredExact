@@ -136,3 +136,30 @@ the important RB35 adverse endpoint remains. Overall research-only; retain
 stable R137 and close this once-root experiment without automatic floor,
 Seed1 or optional-role expansion. Actual publication/public recovery and
 bounded cleanup are recorded in [RESUME](../results/unified_exact_round144/RESUME.md).
+
+# Round145 addition: shared reciprocal inventory and count information
+
+The [research guide](round145_research.md),
+[stage evidence](../results/unified_exact_round145/stage_evidence.md),
+[scientific report](../results/unified_exact_round145/final_report.md) and
+[integrated paper section](../results/unified_exact_round145/manuscript.pdf)
+connect ordinary resource products, integer threshold counts, reciprocal
+normalization and complete-block original-variable projection. The all-n
+fixed-selector theorem proves strict complementarity and states the remaining
+integer-objective gap. Four exact saved-point NC-PC signals are diagnostic
+separations, not reoptimized gains.
+
+Eleven new standalone LPs establish a K35 joint increment beyond strong
+RN+stock+TC+TC2 and actual compact root losses below 2.8e-14. Four core same-PE
+Seed0 pairs and a single K35 compact RN-P bridge assess complete value. The
+[decision](../results/unified_exact_round145/candidate_decision.json) retains
+research and ends this joint once-root trial without stable promotion. Mixed
+K35 U/L/gap, no new K20 certificate, nearly equal RX20 clocks and adverse RB35 U
+are all retained. Earlier STOCK proof gains and RN-P K35 gains remain material
+results. The R144 goal-supplied no-PC prefix finding explains only its observed
+prefix; it does not erase the old negative endpoint or explain a new active PC.
+
+No second route-A panel, boundary/Seed/floor grid or persistent full-RN control
+is added. Source/PE and final science/delivery identities are distinct; actual
+public byte/member recovery, Draft PR and current-round-only cleanup are in
+[RESUME](../results/unified_exact_round145/RESUME.md).

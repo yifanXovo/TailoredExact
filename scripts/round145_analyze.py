@@ -78,6 +78,7 @@ def full():
                 input_SHA=p['input_sha256'],physical_T=p['T_seconds'],lambda_value=p['lambda'],cap=l['cap_seconds'],
                 source_commit=identity['measured_source_commit'],PE_SHA=identity['candidate_binary_sha256'],DLL_SHA=identity['dll_sha256'],
                 **{k:a[k] for k in ['U','L','certificate','signed_gap','relative_gap','T_produce','T_cert','T_verify','T_total','H_complete','H_semantic_SHA','H_fleet_SHA','declared_calls','returned_calls']},
+                physical_G=audit['physical']['G'],physical_P=audit['physical']['P'],weighted_physical_penalty=a['U']-audit['physical']['G'],
                 external_merged_final_L=a['L'],terminal_native_return_ObjBoundC=quality.get('ObjBoundC') if quality else None,
                 terminal_native_return_ObjVal=quality.get('ObjVal') if quality else None,
                 LP_calls=sum(v['solve_kind']=='LP' for v in ledger),target_calls=sum('TARGET' in v['solve_kind'] for v in ledger),terminal_calls=sum(v['solve_kind']=='MIP' for v in ledger),
@@ -88,9 +89,11 @@ def full():
                 actual_split_count=result['external_gini_tree_split_count'],performance_eligible=True,native_proof_qualified=True,destination=str(d))
             source=control['source']
             if source:r.update(source_preparation_seconds=source.get('total_preparation_seconds',0.),source_Runtime=source.get('Runtime',0.),source_Work=source.get('Work',0.),
-                source_L=source.get('source_objective'),source_RN_columns=source.get('source_RN_columns',0),source_solves=source['source_solves'],PC_emitted=source.get('PC_emitted',False),formal_RN_columns=0)
+                source_L=source.get('source_objective'),source_RN_columns=source.get('source_RN_columns',0),source_solves=source['source_solves'],PC_emitted=source.get('PC_emitted',False),formal_RN_columns=0,
+                PC_nonzeros=max((f.get('PC_nonzeros',0) for f in control['models']),default=0))
             else:r.update(source_preparation_seconds=0.,source_solves=0,PC_emitted=False,
                 formal_RN_columns=max((f['RN_columns'] for f in control['models']),default=0))
+            r['observed_source_minus_formal_first_root_L']=(r['source_L']-r['root_L']) if source and r.get('source_L') is not None and r.get('root_L') is not None else None
             if terminal:
                 text=Path(terminal['native_log']).read_text();pres=re.findall(r'Presolved: ([\d,]+) rows, ([\d,]+) columns, ([\d,]+) nonzeros',text)
                 if pres:r.update(presolved_rows=int(pres[-1][0].replace(',','')),presolved_columns=int(pres[-1][1].replace(',','')),presolved_nonzeros=int(pres[-1][2].replace(',','')))
@@ -114,9 +117,9 @@ def full():
             assert c[k]==rn[k],(c['role'],'RN bridge',k)
         assert c['formal_RN_columns']==0 and rn['formal_RN_columns']==0
         bridges.append(dict(role=c['role'],seed=c['seed'],same_PE=True,own_H_equal=True,
-            RNJP_U=c['U'],RN_U=rn['U'],RNJP_L=c['L'],RN_L=rn['L'],RNJP_gap=c['relative_gap'],RN_gap=rn['relative_gap'],
-            RNJP_formal_RN_columns=0,RN_formal_RN_columns=rn['formal_RN_columns'],
-            **{'delta_RNJP_minus_RN_'+k:c[k]-rn[k] for k in ['U','L','relative_gap','T_produce','T_verify','T_total','terminal_Work','terminal_nodes']},
+            RNJP_U=c['U'],RNP_U=rn['U'],RNJP_L=c['L'],RNP_L=rn['L'],RNJP_gap=c['relative_gap'],RNP_gap=rn['relative_gap'],
+            RNJP_formal_RN_columns=0,RNP_formal_RN_columns=rn['formal_RN_columns'],
+            **{'delta_RNJP_minus_RNP_'+k:c[k]-rn[k] for k in ['U','L','relative_gap','T_produce','T_verify','T_total','terminal_Work','terminal_nodes']},
             causal_column_count_isolation_not_claimed=True))
     write(OUT/'reports/full.json',dict(UTC=utc(),new_arms=full,qualification=qual,pairs=pairs,RNP_bridges=bridges,failed_qualifications=failed,pending=pending,
         all_entered_native_counts=native_counts,all_entered_observed_Native_Optimize=sum(r['observed_Optimize'] for r in native_counts),
@@ -127,7 +130,8 @@ def full():
     table(OUT/'reports/all_entered_native_counts.csv',native_counts)
     write(OUT/'cost_report.json',dict(UTC=utc(),charged_new_experiment_seconds=budget()['G1_seconds'],experiment=budget(),ceiling_seconds=28800,
         outer_fees_including_failed_readers_and_all_required_postverification=True,nested_H_LP_MIP_Work_not_added_again=True,
-        offline_arithmetic_seconds=sum(read(p).get('seconds',0) for p in [OUT/'qualification_exact_writer.json'] if p.exists()),
+        offline_arithmetic_seconds=read(OUT/'qualification_exact_writer.json')['seconds']+sum(read(p)['outer_seconds'] for p in (OUT/'ordinary_steps').glob('saved_point_NC_PC*receipt.json')),
+        untimed_identity_probe_imports_and_authoring_not_invented_as_measured_cost=True,
         build_seconds_separate=sum(read(p)['outer_seconds'] for p in (OUT/'fees').glob('*/receipt.json') if read(p.parent/'launch.json')['kind']=='build'),
         all_entered_observed_Native_Optimize=sum(r['observed_Optimize'] for r in native_counts),
         failed_qualification_observed_Native_Optimize=sum(r['observed_Optimize'] for r in native_counts if r['qualification'] and not r['proof_qualified']),

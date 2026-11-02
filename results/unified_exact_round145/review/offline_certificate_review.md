@@ -1,0 +1,19 @@
+# Independent static review of finite NC-PC reconstruction
+
+Reviewer: `/root/independent_math_review`. Date: 2 November 2026 (Asia/Shanghai). Scope: static inspection of `scripts/round145_offline.py` only, during an active full run. The reviewer did not execute the script, read large raw, compile, Optimize or load Native.
+
+Inspected script SHA256: `05d4af344752c970c544ee69700a04de28a9db9c7ba96afec9ef3c3709c9570d`.
+
+**Disposition: PASS. No required mathematical correction was found in `box_dual`.**
+
+For each station the code faithfully uses the exact rational interpretation of its stored binary64 selector values. If their sum is m_i rather than exactly one, station mass and product boxes require `L*m_i<=t<=U*m_i`. The implementation intersects all of these intervals with the original `[L,U]`. It neither silently normalizes the saved point nor assumes the approximate selector sum is exactly one. Nonnegative selector values, nonempty supported mass, noncollapsed L/U and nonempty t intersection are explicit preconditions for these four finite reconstructions; failure is an assertion, not an automatic repair or a fabricated certificate.
+
+At fixed t, write `w=L*s+delta*q`, where `delta=U-L`, `0<=q<=s` and `sum(q)=(t-L*m_i)/delta`. Sorting the count coefficients k and filling this remaining mass in ascending k order gives the exact station minimum f_i(t). It is convex piecewise linear. The code's interior slopes equal the active quantile k; at a breakpoint its left/right slopes are the adjacent k values. At the station lower/upper t limits the subgradient interval has the appropriate unbounded side. The initial slope is the feasible right derivative at lo; all strictly internal jumps are accumulated exactly. Choosing lo for a nonnegative initial slope, the first jump whose new slope is nonnegative, or hi if none exists gives a minimum of `b*t+sum(f_i(t))` on the feasible interval.
+
+The returned station multipliers are selected in those subgradient intervals. The final adjustment correctly enforces stationarity against the **original** t box: Gamma=b+sum(lambda_i) may be nonnegative at t=L, nonpositive at t=U, and otherwise must be zero. In particular the code does not incorrectly treat an interior intersection endpoint `L*m_i` or `U*m_i` as the original t endpoint. Its adjustment can use the unbounded station normal at such a limiting mass. Finite-interval adjustments stay within their allowed range, and the code rejects any unfilled adjustment.
+
+For these multipliers, the dual row is `n*g>=min(L*Gamma,U*Gamma)+sum(min(L*(k-lambda_i),U*(k-lambda_i))*s)`. The exact sorted-allocation primal value and that dual value are compared for equality before a result is recorded. This is an exact per-point consistency check, not an invocation of a mathematical optimizer. Multiplier optimality would improve the separator but is not needed for row validity. A valid separating row applies to every NC extension of the same original x.
+
+The emitted `>` row has coefficients `n` on G and minus the stated selector coefficient, with RHS equal to the constant. Its violation `dual_value-n*G` has the correct positive direction. The ordinary old TC2 saved-point comparison is separately retained. No complete-objective increment or full-method benefit is inferred from the certificate.
+
+For final reporting, label this as the ideal exact NC2 count row evaluated with actual binary64 input interpreted as rationals. Production R140-down floating NC is a separately audited representation; the finite certificate need not be described as byte-identical to its row or to the absent supplemental evidence ZIP. Actual selector masses need not be exactly one, and should be reported as faithfully retained. The routine is deliberately finite and proof/diagnostic only; its endpoint preconditions do not justify introducing a second production algorithm.
