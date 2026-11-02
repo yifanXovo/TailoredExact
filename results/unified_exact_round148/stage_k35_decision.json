@@ -1,0 +1,64 @@
+{
+  "UTC": "2026-11-02T19:51:57.952464+00:00",
+  "decision": "ENTER_RB35_PRESSURE_PAIR",
+  "comparison": {
+    "role": "K-35-U",
+    "seed": 0,
+    "same_new_PE": true,
+    "own_H_equal": true,
+    "timing_relation": "same_round_serial",
+    "identical_host_load_not_claimed": true,
+    "D_U": 0.6767988451958106,
+    "D_L": 0.545729444783031,
+    "D_signed_gap": 0.1310694004127796,
+    "D_relative_gap": 0.19366079204059333,
+    "D_certificate": false,
+    "D_T_produce": 2371.1789736498613,
+    "D_T_cert": null,
+    "D_T_verify": 7.585547999944538,
+    "D_T_total": 2378.764521649806,
+    "shared_S_U": 0.6799175197270872,
+    "shared_S_L": 0.5582838556571678,
+    "shared_S_signed_gap": 0.12163366406991949,
+    "shared_S_relative_gap": 0.17889473434769285,
+    "shared_S_certificate": false,
+    "shared_S_T_produce": 2371.1246988223866,
+    "shared_S_T_cert": null,
+    "shared_S_T_verify": 8.710195400053635,
+    "shared_S_T_total": 2379.83489422244,
+    "delta_U": 0.0031186745312766773,
+    "delta_L": 0.012554410874136779,
+    "delta_signed_gap": -0.009435736342860102,
+    "delta_relative_gap": -0.014766057692900486,
+    "U_improvement_percent": -0.4607978505599232,
+    "L_improvement_percent": 2.3004825915391303,
+    "no_open_cap_as_convergence": true
+  },
+  "reason": "K35 supported L improves 2.30048% and relative gap falls 1.47661 percentage points, with a small .46080% physical U loss and both endpoints open. This is a concrete proof/incumbent tradeoff, sufficient for one bounded pressure test but not adoption. RB35 must check retention of D incumbent quality before any recommendation.",
+  "uniform_mechanism_unchanged": true,
+  "new_caps": 4800,
+  "verification_reserve": 600,
+  "budget_before": {
+    "G1_seconds": 4901.2360255005215,
+    "remaining_G1_seconds": 13098.763974499478,
+    "by_category": {
+      "diagnostic": 136.75122340064502,
+      "native": 4764.484802099876
+    },
+    "limits": {
+      "diagnostic": 18000.0,
+      "native": 18000.0
+    },
+    "category_remaining": {
+      "diagnostic": 17863.248776599354,
+      "native": 13235.515197900124
+    },
+    "separately_reported_seconds": 45.50021379976533,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "no_new_seed_or_grid": true,
+  "reader_only_fix_after_K35": "Source SHA context for zero-GD domains and actual LP-ledger binding; same production source/PE and all closed verification hashes retained",
+  "K35_executed_wrapper_commit": "33f6cc3ee",
+  "CPP_source_commit": "d5868014c8868cdc305e6ed798bf0d5c86a1bda9"
+}

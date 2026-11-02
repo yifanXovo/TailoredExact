@@ -1,0 +1,123 @@
+{
+  "schema": "round148-independent-formal-admission-v1",
+  "UTC": "2026-11-02T18:27:56.363746+00:00",
+  "decision": "ACCEPT",
+  "PASS": true,
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/round148_independent_review",
+  "matrix_SHA": "6fa84be31947e249ef279fcf13a2db58497025cd0ae87666e93979279c8efe17",
+  "candidate_manifest_SHA": "226b1bcb6f46993b495872ceab814e65dd55d8a5e4164e22360fed33499e4f8e",
+  "PE_SHA": "4beb12f8a3de992691fc4ae229fdaff43e35ef00ce29f9f2bd3cb139af792ac2",
+  "production_source_commit": "d5868014c8868cdc305e6ed798bf0d5c86a1bda9",
+  "nominal_new_caps": 4800,
+  "charged_before_admission": 134.33090230025357,
+  "remainder_before_admission": 17865.669097699745,
+  "qualifications": {
+    "producer_seal_SHA": "d3be894dd897ff2a315feebd9f09496d688546ea15e243b1b7da8cac0f3f5d85",
+    "actual_calls": 6,
+    "returned_calls": 6,
+    "actual_models": 4,
+    "actual_source_call": 1,
+    "source_model_SHA": "1a7cb5641864088f9c8438bef91c8c45854b8bb81e21d81cf90fdaf64fdce8e7",
+    "formal_model_SHA": "741efb64740ef36b2e0afab04b49a1f15011a537678f8955391d8692d4cb4963",
+    "independent_actual_row": {
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 451,
+      "conservative_box_loss": 2.0144086483134366e-12
+    },
+    "root_LP_before": 0.2360103023423648,
+    "root_LP_after": 0.23827958875065106,
+    "old_source_point_and_log_retained": true,
+    "actual_cache_discard_proved_by_nonreuse": true,
+    "complete_H_Start_quality_scope_lifecycle_closeout": true,
+    "reader_view_review": "Only the never-installed source root is omitted from LP-status/cover pairing. It remains in all complete Native/model/quality/lifecycle/cost checks; the control trace and parent-child ledger use the new root. This corrects an old one-LP-per-status assumption without changing production or optimizing again.",
+    "failure_and_recovery_retained": true
+  },
+  "independent_driver_fraction_checks": [
+    {
+      "case": "fixed_denominator",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 2,
+      "conservative_box_loss": 2.868076146948321e-16
+    },
+    {
+      "case": "holes",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 7,
+      "conservative_box_loss": 1.0636379016658238e-15
+    },
+    {
+      "case": "K-20-S_base",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 451,
+      "conservative_box_loss": 2.0144086483134366e-12
+    },
+    {
+      "case": "K-20-S_joint",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 451,
+      "conservative_box_loss": 2.015896373351529e-12
+    },
+    {
+      "case": "K-20-S_stock",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 451,
+      "conservative_box_loss": 2.0213520754498793e-12
+    },
+    {
+      "case": "K-35-U_base",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 539,
+      "conservative_box_loss": 3.0250539552626105e-12
+    },
+    {
+      "case": "moment_upper",
+      "old_GD_rows": 0,
+      "kind": "moment_upper",
+      "independently_checked_moment_station_candidates": [
+        1
+      ]
+    },
+    {
+      "case": "R-X20-S-T1_base",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 143,
+      "conservative_box_loss": 4.769504306263009e-15
+    },
+    {
+      "case": "strict_zero_old_GD",
+      "old_GD_rows": 0,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 4,
+      "conservative_box_loss": 1.304512053934559e-15
+    },
+    {
+      "case": "zero_domain",
+      "omitted_positive_S_unproved": true
+    }
+  ],
+  "actual_physical_pair": "Same new PE, own complete H, original physical problem and uniform one-row/one-added-LP mechanism; D control differs only in the default-off switch.",
+  "findings": [],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "seconds": 0.18113599997013807,
+  "execution_hash": "451747f67f0757f11f6dadd1ada317df458427ecd25a2fae6b2337753e0c1347",
+  "next_gate": "Return and validate both complete K35 arms before conditional RB35 or any further experiment; preserve the cap windows regardless of interim performance."
+}

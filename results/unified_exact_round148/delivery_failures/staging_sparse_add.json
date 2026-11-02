@@ -1,0 +1,11 @@
+{
+  "UTC": "2026-11-02T21:35:15.131Z",
+  "phase": "Late delivery Git staging",
+  "initial_result": "Git add returned 1 because Round148 results are outside the existing sparse-checkout definition; only the two-line delivery helper patch was staged.",
+  "resolution": "Use git add --sparse with the same explicit current-round file list. Keep sparse-checkout rules and all repository/global settings unchanged.",
+  "classification": "Ordinary unmetered Git delivery work; no experimental rerun",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "user_files_changed": false
+}

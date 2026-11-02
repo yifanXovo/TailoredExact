@@ -1,0 +1,36 @@
+{
+  "schema": "round148-independent-production-preflight-v1",
+  "UTC": "2026-11-02T18:17:30.3786032Z",
+  "reviewer": "/root/round148_independent_review",
+  "PASS": true,
+  "independent_nonimplementer": true,
+  "read_only": true,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "blocking_findings": [],
+  "interval_oracle_valid_for_actual_finite_slopes": true,
+  "same_station_shared_slope": true,
+  "signed_pure_selector_direction_correct": true,
+  "positive_S_zero_old_GD_eligible": true,
+  "capture_input_call_model_scope_bound": true,
+  "one_append_new_log_cache_invalidation": true,
+  "GD_expected_migration_and_old_SHA_preserved": true,
+  "compatible_subdomain_inheritance_only": true,
+  "OFF_paths_inactive": true,
+  "source_hashes": {
+    "include/Round148Research.hpp": "dd9983d22076e67d2306589429237d55087fd42786a1128a81817d1a4bdd6cde",
+    "src/main.cpp": "37d2a3787a5aef7aa43c5f44c7557fd579310678fd7d5de0d741564c04d6f0e4",
+    "src/PaperExternalGiniTree.cpp": "adac758ebe61388d45088dbb00d8a9ff6700c75bedfb89693630565be22738dd",
+    "src/GurobiBaseline.cpp": "5b3c87f8b451269aec27f890e6b702926e3684e59c2f89d885976b748defecd5",
+    "scripts/round148_rows.cpp": "01bac7d85fad36a5936fd32b232b84451b12b0cbf24d511907aafe196e677cc8"
+  },
+  "detailed_review": "review/production_preflight.md",
+  "formal_admission_pending": [
+    "C++ arithmetic driver Fraction check",
+    "Actual writer/Native signed rows and zero-GD case",
+    "Complete/nonminimal Start",
+    "Actual capture-append-reopt path"
+  ],
+  "proposed_first_pair": "K35: same new PE, D versus one-row candidate, each own-H and cap2400"
+}

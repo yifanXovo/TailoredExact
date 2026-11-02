@@ -1,0 +1,158 @@
+% Paper-ready section; requires amsmath and amssymb in the host manuscript.
+\section{A common first moment for state-conditioned Gini deviations}
+\label{sec:shared-denominator-gd}
+
+The state-conditioned Gini-deviation (GD) rows independently minimize each
+station's deviation over its conditional denominator interval. This can lose
+information because all stations share the same total. We retain a common
+first moment through a finite family of original-variable affine rows. We
+distinguish validity, separation of a saved fractional point, reoptimized LP
+information, and complete algorithm performance.
+
+\subsection{Valid affine rows and a finite oracle}
+Write $r_i=c_iY_i\ge0$ and $S=\sum_i r_i>0$. The physical Gini coefficient is
+\[
+ G=\frac{\sum_{i<j}|r_i-r_j|}{nS},\qquad
+ G\ge\sum_i\left(\frac1n-\frac{r_i}{S}\right)_+.
+\]
+The original objective remains $g+\lambda P$, with $g\ge G$.
+For state $Y_i=y$, let $0<D^-_{iy}\le S\le D^+_{iy}$ be valid necessary
+bounds from the actual support and physical inventory domain. Define
+\[
+ \phi_{iy}(t)=\left(\frac1n-\frac{c_iy}{t}\right)_+,
+ \qquad
+ \alpha_{iy}(b_i)=\min_{t\in[D^-_{iy},D^+_{iy}]}
+       \{\phi_{iy}(t)-b_it\}.
+\]
+For any finite slope $b_i$ shared by all states at station $i$, one-hot
+selection and summation give the valid epigraph inequality
+\begin{equation}
+ g\ge\sum_{i,y}\alpha_{iy}(b_i)s_{iy}
+       +\left(\sum_i b_i\right)\sum_j c_jY_j.
+ \label{eq:shared-S-affine}
+\end{equation}
+Equivalently, the coefficient of $s_{iy}$ on the right is
+$\alpha_{iy}(b_i)+(\sum_jb_j)c_iy$; this selector form adds no columns.
+The intercept and final coefficient may be negative. The inequality holds
+for nonminimal epigraph values as well as $g=G$.
+
+On $t\le nc_iy$, $\phi_{iy}=0$. On $t>nc_iy$ its second derivative is
+$-2c_iy/t^3\le0$. Subtracting a linear function preserves affine or concave
+segments. Consequently the minimum only needs the nodes
+\[
+ T_{iy}=\{D^-_{iy},D^+_{iy}\}
+       \cup\{nc_iy:D^-_{iy}\le nc_iy\le D^+_{iy}\}.
+\]
+This includes zero-stock and fixed-interval cases. This oracle is for the
+low-deviation function; the high-deviation analogue may have an interior
+minimum and is not obtained by copying this argument. Both old GD rows
+are retained. The full family contains low GD at $b_i=0$, although one
+nonzero-slope row need not individually dominate old GD everywhere.
+
+At a fractional point $(\bar s,\bar Y)$, let $\bar S=\sum_i c_i\bar Y_i$.
+The strongest family member decomposes by station into
+\[
+ \max_b H_i(b),\qquad
+ H_i(b)=b\bar S+\sum_y\bar s_{iy}
+       \min_{t\in T_{iy}}\{\phi_{iy}(t)-bt\}.
+\]
+For nonnegative masses this is piecewise-linear concave. Its breakpoints
+belong to the finite union of state-node secant slopes. Enumerating these
+and zero is sufficient when
+\begin{equation}
+ \sum_yD^-_{iy}\bar s_{iy}\le\bar S
+       \le\sum_yD^+_{iy}\bar s_{iy}.
+ \label{eq:shared-S-moment}
+\end{equation}
+Failure of this condition identifies a missing valid first-moment row,
+not an infinite Gini improvement. Production may use any finite slope,
+followed by a conservative intercept calculation, without solving an
+auxiliary optimization problem.
+
+\subsection{Convexification interpretation and strictness}
+Consider node masses $\lambda_{iyk}\ge0$ satisfying
+$\sum_k\lambda_{iyk}=s_{iy}$ and
+$\sum_{y,k}t_{iyk}\lambda_{iyk}=S$. Their minimum deviation is
+\[
+ F_i(s_i,S)=\min\left\{
+  \sum_{y,k}\lambda_{iyk}\phi_{iy}(t_{iyk}):
+  \sum_k\lambda_{iyk}=s_{iy},\quad
+  \sum_{y,k}t_{iyk}\lambda_{iyk}=S\right\}.
+\]
+Concavity on each segment allows replacing interior mass by endpoint
+mass at the same mean and no greater cost. The finite LP dual gives
+\[
+ F_i(s_i,S)=\sup_b\left\{bS+\sum_y\alpha_{iy}(b)s_{iy}\right\}
+\]
+on the moment domain. Thus the family preserves the same $S$ as a first
+moment in every station's conditional mixture. It does not restore a
+common atomic distribution across stations or the full routing hull.
+The convexification and duality tools are standard; no general
+fractional-programming or literature-priority claim is made.
+
+For a strict example, take $n=2$, $c_1=c_2=1$, support $\{1,2\}$, and total
+interval $[2,4]$. Conditional intervals are $[2,3]$ for state~1 and $[3,4]$
+for state~2. All old GD coefficients vanish. With $a=s_{11}$, $d=s_{21}$,
+$S=4-a-d$, slopes $(1/6,0)$ give $g\ge(a-d)/6$. Exchanging stations gives
+$g\ge|a-d|/6$. At $a=1/2,d=0$, the bound is $1/12>0$. This is strictness
+relative to isolated GD and coincides with the familiar two-station
+coupling bound; it is not a dominance theorem over pair-CDF inequalities.
+
+\subsection{Five matched full-domain LPs}
+We reused five sealed Round146 GD optima on three physical instances:
+three K20 carriers, one K35 carrier and one RX20 carrier. Every original
+objective coefficient and constant, variable bound, support, cutoff and
+row was retained. Only one row selected from the old optimum was appended;
+no variable was fixed at its fractional value and no baseline was
+reoptimized. The numerical optima were qualified under the existing
+$10^{-6}$ LP quality policy, rather than claimed as rational optimality
+certificates.
+\begin{center}
+\begin{tabular}{llrrr}
+Instance & Carrier & GD LP & With one row & Increase\\
+\hline
+K20 & BASE & .236010302342 & .238279588751 & .002269286408\\
+K20 & joint & .239052184675 & .241511748078 & .002459563403\\
+K20 & STOCK & .251016109922 & .255570495817 & .004554385894\\
+K35 & BASE & .204187028164 & .209568159043 & .005381130879\\
+RX20 & BASE & .365004645621 & .381636295279 & .016631649658\\
+\end{tabular}
+\end{center}
+All five saved points were strictly separated, but those violation sizes
+were not used as LP objective increments. The returned points still admit
+additional separating rows. No closure iteration was needed to establish
+useful finite LP information, and no closure or integer-hull claim follows.
+
+\subsection{Complete own-root algorithm and cost}
+The uniform experimental mechanism extends standalone D, with STOCK off.
+Each arm pays its complete own H (seed~20260626), normal root LP, separation,
+immutable append and at most one additional root LP, followed by the
+unchanged GI-TBC search. Gurobi uses Seed~0 and one thread. Slopes are finite
+binary64 values; after fixing them, outward interval arithmetic bounds
+intercepts, slope sums and final signed RHS coefficients. Exact rational
+checks verify the actual transported values. The original objective and
+physical horizon, AM~.08, depth~8, minimum width~$10^{-4}$, pair-only policy,
+M-B/VD-P carrier, AP-off configuration and R134 proof policy are retained.
+
+The normal root point is bound to its own call, model SHA and scope.
+Appending a row invalidates the old backend, LP/cache identity and unused
+child cache. Subsequent compatible models inherit the row, while the old
+GD audit identity migrates without re-embedding the old rows. A nonviolated
+row is omitted without an empty extra solve. The stable and old D entries
+retain their original meanings; the new research switch defaults off.
+
+% ROUND148_COMPLETE_RESULTS
+
+The registered complete comparisons are as follows. All costs include own H and necessary validation.
+\begin{center}
+\begin{tabular}{llrrr}
+Role & Method & Physical U & Supported L & Gap (\%)\\
+\hline
+K-35-U & D & 0.676798845 & 0.545729445 & 19.36608\\
+K-35-U & D+common S & 0.679917520 & 0.558283856 & 17.88947\\
+R-B35-S-T2 & D & 0.335883589 & 0.219663876 & 34.60119\\
+R-B35-S-T2 & D+common S & 0.371420783 & 0.220898440 & 40.52610\\
+\end{tabular}
+\end{center}
+The common-first-moment rows improve all five matched LP values. In complete own-H search, K35 supported L improves 2.3005\% with a 0.4608\% worse physical U, reducing relative gap by 1.4766 percentage points. RB35 instead has a 10.5802\% worse U and only a 0.5620\% higher L; its relative gap rises by 5.9249 percentage points. Both pairs remain open. The latter serious incumbent/signed-gap regression rules out promotion of this uniform one-row root implementation. We retain the construction and LP evidence as a research result, preserve the limited standalone-D candidate and stable R137 version, and do not open a high-deviation, RN, STOCK or AM rescue grid. These observations do not invalidate the affine family or establish performance over unseen instances or seeds.
+The newly charged outer cost is 9670.619385 seconds of the 18000-second ceiling; build cost is 45.500214 seconds separately. Nested solver runtime and Work are not added twice.

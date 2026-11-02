@@ -1,0 +1,1129 @@
+{
+  "PASS": true,
+  "results": [
+    {
+      "role": "K-20-S",
+      "carrier": "base",
+      "iteration": 1,
+      "old_L": 0.2360103023423648,
+      "L": 0.2382795887506511,
+      "gain": 0.002269286408286303,
+      "previous_objective": 0.2360103023423648,
+      "incremental_gain": 0.002269286408286303,
+      "g": 0.061061931719224596,
+      "weighted_penalty": 0.1772176570314265,
+      "Status": 2,
+      "numerical_dual_objective": 0.23827958875065122,
+      "numerical_primal_dual_gap": -1.1102230246251565e-16,
+      "infinite_bound_adverse_reduced_cost": 0.0,
+      "qualified_LP_bound": 0.2382795887506511,
+      "exact_rational_optimality_certificate": false,
+      "qualified": true,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 6.938893903907228e-18,
+        "ConstrResidual": 7.275957614183426e-12,
+        "DualResidual": 6.938893903907228e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 6.8833827526759706e-15,
+        "bounds": 0.0,
+        "objective": 0.2382795887506511
+      },
+      "baseline_residual": {
+        "constraints": 1.354472090042691e-14,
+        "bounds": 0.0,
+        "objective": 0.2360103023423648
+      },
+      "before": {
+        "rows": 6639,
+        "columns": 3096,
+        "nonzeros": 38616
+      },
+      "rows": 6640,
+      "columns": 3096,
+      "nonzeros": 39066,
+      "added_rows_total": 1,
+      "new_row_nonzeros": 450,
+      "construction_seconds": 0.7429867999162525,
+      "oracle_seconds": 0.05827890010550618,
+      "optimize_wall": 0.19551320001482964,
+      "Runtime": 0.18499994277954102,
+      "Work": 0.5004328600996103,
+      "iterations": 3962.0,
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "f8423586baaf88fdc4ef9a661374d0b32fdd32d06d98e9c0cdcd238fc36f6095",
+      "solution_SHA": "3266c33192e80147f41c7396b0732535a128763c6bc46c149f3958a1ef76dab3",
+      "source_model_SHA": "62e7b10799e157614c3ff8ae06d849141915966c2bd918e5cbbe6853c5486bd6",
+      "source_fixed_science": "8ec2aebe46398485019623d9b18a3e30617d4997",
+      "original_semantics_exactly_retained": true,
+      "actual_Native_row_readback": true,
+      "transport": {
+        "ideal_violation": 0.056249267857404486,
+        "transported_violation": 0.056249267857404465,
+        "box_loss_bound": 7.669336218174748e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 166,
+        "nonzeros": 450,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_separation": {
+        "ideal_violation": 0.041731590571772975,
+        "transported_violation": 0.04173159057177295,
+        "box_loss_bound": 7.502354035563376e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 162,
+        "nonzeros": 451,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_moment_slacks": [
+        {
+          "i": 1,
+          "lower_slack": 7.237953323308939,
+          "upper_slack": 2.834737874382261
+        },
+        {
+          "i": 2,
+          "lower_slack": 7.479024751880368,
+          "upper_slack": 2.5620106016549875
+        },
+        {
+          "i": 3,
+          "lower_slack": 7.4433559250083245,
+          "upper_slack": 3.016556056200443
+        },
+        {
+          "i": 4,
+          "lower_slack": 7.4090135010256555,
+          "upper_slack": 2.893945999654214
+        },
+        {
+          "i": 5,
+          "lower_slack": 7.502054840738726,
+          "upper_slack": 2.9573479309284885
+        },
+        {
+          "i": 6,
+          "lower_slack": 7.380810466166083,
+          "upper_slack": 3.0165560562004434
+        },
+        {
+          "i": 7,
+          "lower_slack": 7.237953323308934,
+          "upper_slack": 2.814535854180252
+        },
+        {
+          "i": 8,
+          "lower_slack": 7.4090135010256555,
+          "upper_slack": 2.893945999654214
+        },
+        {
+          "i": 9,
+          "lower_slack": 7.5950961804517965,
+          "upper_slack": 2.7438287834731705
+        },
+        {
+          "i": 10,
+          "lower_slack": 7.362492831169119,
+          "upper_slack": 2.751133922905971
+        },
+        {
+          "i": 11,
+          "lower_slack": 7.4090135010256555,
+          "upper_slack": 2.893945999654214
+        },
+        {
+          "i": 12,
+          "lower_slack": 7.4939360101561485,
+          "upper_slack": 2.9521814023759383
+        },
+        {
+          "i": 13,
+          "lower_slack": 7.479024751880368,
+          "upper_slack": 2.562010601654988
+        },
+        {
+          "i": 14,
+          "lower_slack": 7.380810466166083,
+          "upper_slack": 3.0165560562004448
+        },
+        {
+          "i": 15,
+          "lower_slack": 7.380810466166082,
+          "upper_slack": 3.0165560562004434
+        },
+        {
+          "i": 16,
+          "lower_slack": 7.5950961804517965,
+          "upper_slack": 2.743828783473171
+        },
+        {
+          "i": 17,
+          "lower_slack": 7.237953323308939,
+          "upper_slack": 2.7943338339782224
+        },
+        {
+          "i": 18,
+          "lower_slack": 7.5950961804517965,
+          "upper_slack": 2.9386339782783644
+        },
+        {
+          "i": 19,
+          "lower_slack": 7.493936010156148,
+          "upper_slack": 2.9521814023759387
+        },
+        {
+          "i": 20,
+          "lower_slack": 7.470096180451796,
+          "upper_slack": 2.9597378743822635
+        }
+      ],
+      "added_row_activities": [
+        {
+          "name": "r148_shared_S_1",
+          "violation": 2.2466701892973062e-17
+        }
+      ],
+      "no_variables_fixed_to_old_point": true,
+      "LP_Optimize": 1,
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "helper_SHA": {
+        "round148_math.py": "30d76c5a75b36c1e4d7328a6ae208b9015013ee1ab21b8938df19a9995d52ef1",
+        "round148_lp.py": "0e260bd11c3111ca8226d35981af7129b7aaca7cc599be86fc929dcc2658c062",
+        "round148_common.py": "e363cf1cc0660aebee97a7b6d2f426bbe27a1a79dd366369f03253bcadd2c4ac"
+      }
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "joint",
+      "iteration": 1,
+      "old_L": 0.23905218467540965,
+      "L": 0.2415117480783027,
+      "gain": 0.00245956340289305,
+      "previous_objective": 0.23905218467540965,
+      "incremental_gain": 0.00245956340289305,
+      "g": 0.061972915276275756,
+      "weighted_penalty": 0.17953883280202693,
+      "Status": 2,
+      "numerical_dual_objective": 0.2415116941336435,
+      "numerical_primal_dual_gap": 5.3944659184068655e-08,
+      "infinite_bound_adverse_reduced_cost": 0.0,
+      "qualified_LP_bound": 0.2415117480783027,
+      "exact_rational_optimality_certificate": false,
+      "qualified": true,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 5.3944658883853074e-08,
+        "ConstrResidual": 7.275957614183426e-12,
+        "DualResidual": 8.881784197001252e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 2.0095036745715333e-14,
+        "bounds": 0.0,
+        "objective": 0.2415117480783027
+      },
+      "baseline_residual": {
+        "constraints": 9.094947017729282e-13,
+        "bounds": 0.0,
+        "objective": 0.23905218467540965
+      },
+      "before": {
+        "rows": 7969,
+        "columns": 3758,
+        "nonzeros": 43938
+      },
+      "rows": 7970,
+      "columns": 3758,
+      "nonzeros": 44388,
+      "added_rows_total": 1,
+      "new_row_nonzeros": 450,
+      "construction_seconds": 0.6694498998112977,
+      "oracle_seconds": 0.0700112001504749,
+      "optimize_wall": 0.2631606000941247,
+      "Runtime": 0.2630000114440918,
+      "Work": 0.6814856993696966,
+      "iterations": 4617.0,
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "0c3c06261ff394157c2be7b3ef18fd695997049c184c98e31293bccff6270db8",
+      "solution_SHA": "487839b979a5a5c67566f87e28efa86a4ed9b65658bd3bcf524d384e5a5d4552",
+      "source_model_SHA": "35acc0fab87b8a0283e663731f3582043b44cefae8a4f3f0c70f29b422a1e806",
+      "source_fixed_science": "8ec2aebe46398485019623d9b18a3e30617d4997",
+      "original_semantics_exactly_retained": true,
+      "actual_Native_row_readback": true,
+      "transport": {
+        "ideal_violation": 0.05051436062465715,
+        "transported_violation": 0.05051436062465712,
+        "box_loss_bound": 7.933772514780478e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 156,
+        "nonzeros": 450,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_separation": {
+        "ideal_violation": 0.04609043088622171,
+        "transported_violation": 0.04609043088622168,
+        "box_loss_bound": 6.788368596326597e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 175,
+        "nonzeros": 451,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_moment_slacks": [
+        {
+          "i": 1,
+          "lower_slack": 7.2751006673773535,
+          "upper_slack": 2.8014712065397513
+        },
+        {
+          "i": 2,
+          "lower_slack": 7.5082670147478625,
+          "upper_slack": 2.5327683387874926
+        },
+        {
+          "i": 3,
+          "lower_slack": 7.475305952657471,
+          "upper_slack": 2.9873137933329477
+        },
+        {
+          "i": 4,
+          "lower_slack": 7.425628455770195,
+          "upper_slack": 2.8687215166440243
+        },
+        {
+          "i": 5,
+          "lower_slack": 7.536568742366255,
+          "upper_slack": 2.9314603472719716
+        },
+        {
+          "i": 6,
+          "lower_slack": 7.410052729033578,
+          "upper_slack": 2.98731379333295
+        },
+        {
+          "i": 7,
+          "lower_slack": 7.267195586176435,
+          "upper_slack": 2.7852935913127457
+        },
+        {
+          "i": 8,
+          "lower_slack": 7.4288757442335935,
+          "upper_slack": 2.867688288496579
+        },
+        {
+          "i": 9,
+          "lower_slack": 7.624338443319291,
+          "upper_slack": 2.7145865206056743
+        },
+        {
+          "i": 10,
+          "lower_slack": 7.375950958882921,
+          "upper_slack": 2.7299272197530797
+        },
+        {
+          "i": 11,
+          "lower_slack": 7.430431316332224,
+          "upper_slack": 2.867193333737924
+        },
+        {
+          "i": 12,
+          "lower_slack": 7.5250038707073355,
+          "upper_slack": 2.9241008834889737
+        },
+        {
+          "i": 13,
+          "lower_slack": 7.505104982267496,
+          "upper_slack": 2.542829351225024
+        },
+        {
+          "i": 14,
+          "lower_slack": 7.410052729033577,
+          "upper_slack": 2.9873137933329503
+        },
+        {
+          "i": 15,
+          "lower_slack": 7.410052729033577,
+          "upper_slack": 2.98731379333295
+        },
+        {
+          "i": 16,
+          "lower_slack": 7.624338443319291,
+          "upper_slack": 2.714586520605676
+        },
+        {
+          "i": 17,
+          "lower_slack": 7.267195586176434,
+          "upper_slack": 2.765091571110728
+        },
+        {
+          "i": 18,
+          "lower_slack": 7.624338443319292,
+          "upper_slack": 2.90939171541087
+        },
+        {
+          "i": 19,
+          "lower_slack": 7.525003870707335,
+          "upper_slack": 2.924100883488974
+        },
+        {
+          "i": 20,
+          "lower_slack": 7.499338443319292,
+          "upper_slack": 2.9304956115147656
+        }
+      ],
+      "added_row_activities": [
+        {
+          "name": "r148_shared_S_1",
+          "violation": 2.1558682573516452e-16
+        }
+      ],
+      "no_variables_fixed_to_old_point": true,
+      "LP_Optimize": 1,
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "helper_SHA": {
+        "round148_math.py": "30d76c5a75b36c1e4d7328a6ae208b9015013ee1ab21b8938df19a9995d52ef1",
+        "round148_lp.py": "0e260bd11c3111ca8226d35981af7129b7aaca7cc599be86fc929dcc2658c062",
+        "round148_common.py": "e363cf1cc0660aebee97a7b6d2f426bbe27a1a79dd366369f03253bcadd2c4ac"
+      }
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "stock",
+      "iteration": 1,
+      "old_L": 0.2510161099222611,
+      "L": 0.2555704958167485,
+      "gain": 0.004554385894487423,
+      "previous_objective": 0.25101610992226103,
+      "incremental_gain": 0.004554385894487478,
+      "g": 0.07605774878303204,
+      "weighted_penalty": 0.17951274703371647,
+      "Status": 2,
+      "numerical_dual_objective": 0.2555704958167442,
+      "numerical_primal_dual_gap": 4.3298697960381105e-15,
+      "infinite_bound_adverse_reduced_cost": 0.0,
+      "qualified_LP_bound": 0.2555704958167485,
+      "exact_rational_optimality_certificate": false,
+      "qualified": true,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 4.0245584642661925e-16,
+        "ConstrResidual": 6.821210263296962e-11,
+        "DualResidual": 1.8041124150158794e-15,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 6.912159733474255e-11,
+        "bounds": 0.0,
+        "objective": 0.25557049581674857
+      },
+      "baseline_residual": {
+        "constraints": 6.965261700742076e-14,
+        "bounds": 0.0,
+        "objective": 0.25101610992226103
+      },
+      "before": {
+        "rows": 6643,
+        "columns": 3096,
+        "nonzeros": 38740
+      },
+      "rows": 6644,
+      "columns": 3096,
+      "nonzeros": 39190,
+      "added_rows_total": 1,
+      "new_row_nonzeros": 450,
+      "construction_seconds": 0.6202927001286298,
+      "oracle_seconds": 0.05734440009109676,
+      "optimize_wall": 0.15285519999451935,
+      "Runtime": 0.15400004386901855,
+      "Work": 0.37925778744502964,
+      "iterations": 3529.0,
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "d69bb8af30c32593a0d9f75d550bfc6e5f6712c9ca3e27b280adde84afb4d093",
+      "solution_SHA": "79e9c1901b5c2a3428ba790bbc01aaa7a7b82102d604cef7991c8c472c14d219",
+      "source_model_SHA": "3af2818187efaccab3191901dc53d663bdfc0933beec2a7cf239ddeabae65345",
+      "source_fixed_science": "8ec2aebe46398485019623d9b18a3e30617d4997",
+      "original_semantics_exactly_retained": true,
+      "actual_Native_row_readback": true,
+      "transport": {
+        "ideal_violation": 0.04435873802368069,
+        "transported_violation": 0.04435873802368066,
+        "box_loss_bound": 7.4368316218119e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 161,
+        "nonzeros": 450,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_separation": {
+        "ideal_violation": 0.04955107868078781,
+        "transported_violation": 0.049551078680787786,
+        "box_loss_bound": 7.014306389907529e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 167,
+        "nonzeros": 451,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_moment_slacks": [
+        {
+          "i": 1,
+          "lower_slack": 7.270017135493265,
+          "upper_slack": 2.8060311051223428
+        },
+        {
+          "i": 2,
+          "lower_slack": 7.501514774983981,
+          "upper_slack": 2.5454886548614306
+        },
+        {
+          "i": 3,
+          "lower_slack": 7.4714139875016,
+          "upper_slack": 2.991330664788056
+        },
+        {
+          "i": 4,
+          "lower_slack": 7.421778126047403,
+          "upper_slack": 2.872685397547939
+        },
+        {
+          "i": 5,
+          "lower_slack": 7.521049848955794,
+          "upper_slack": 2.9281577502099876
+        },
+        {
+          "i": 6,
+          "lower_slack": 7.410138910041633,
+          "upper_slack": 2.991330664788056
+        },
+        {
+          "i": 7,
+          "lower_slack": 7.270017135493264,
+          "upper_slack": 2.7858290849203216
+        },
+        {
+          "i": 8,
+          "lower_slack": 7.4217781260474025,
+          "upper_slack": 2.87268539754794
+        },
+        {
+          "i": 9,
+          "lower_slack": 7.620321571864184,
+          "upper_slack": 2.7186033920607824
+        },
+        {
+          "i": 10,
+          "lower_slack": 7.372142264593208,
+          "upper_slack": 2.7338381101058045
+        },
+        {
+          "i": 11,
+          "lower_slack": 7.421778126047403,
+          "upper_slack": 2.872685397547939
+        },
+        {
+          "i": 12,
+          "lower_slack": 7.5210498489557915,
+          "upper_slack": 2.928157750209992
+        },
+        {
+          "i": 13,
+          "lower_slack": 7.50151477498398,
+          "upper_slack": 2.5454886548614284
+        },
+        {
+          "i": 14,
+          "lower_slack": 7.410138910041633,
+          "upper_slack": 2.991330664788055
+        },
+        {
+          "i": 15,
+          "lower_slack": 7.410138910041633,
+          "upper_slack": 2.9913306647880558
+        },
+        {
+          "i": 16,
+          "lower_slack": 7.620321571864184,
+          "upper_slack": 2.718603392060783
+        },
+        {
+          "i": 17,
+          "lower_slack": 7.270017135493262,
+          "upper_slack": 2.765627064718307
+        },
+        {
+          "i": 18,
+          "lower_slack": 7.620321571864184,
+          "upper_slack": 2.9134085868659785
+        },
+        {
+          "i": 19,
+          "lower_slack": 7.521049848955794,
+          "upper_slack": 2.928157750209987
+        },
+        {
+          "i": 20,
+          "lower_slack": 7.495321571864185,
+          "upper_slack": 2.9345124829698737
+        }
+      ],
+      "added_row_activities": [
+        {
+          "name": "r148_shared_S_1",
+          "violation": 1.0794587879808804e-17
+        }
+      ],
+      "no_variables_fixed_to_old_point": true,
+      "LP_Optimize": 1,
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "helper_SHA": {
+        "round148_math.py": "30d76c5a75b36c1e4d7328a6ae208b9015013ee1ab21b8938df19a9995d52ef1",
+        "round148_lp.py": "0e260bd11c3111ca8226d35981af7129b7aaca7cc599be86fc929dcc2658c062",
+        "round148_common.py": "e363cf1cc0660aebee97a7b6d2f426bbe27a1a79dd366369f03253bcadd2c4ac"
+      }
+    },
+    {
+      "role": "K-35-U",
+      "carrier": "base",
+      "iteration": 1,
+      "old_L": 0.20418702816386647,
+      "L": 0.2095681590426218,
+      "gain": 0.00538113087875533,
+      "previous_objective": 0.20418702816386647,
+      "incremental_gain": 0.00538113087875533,
+      "g": 0.048029680471193256,
+      "weighted_penalty": 0.16153847857142856,
+      "Status": 2,
+      "numerical_dual_objective": 0.20956815904261564,
+      "numerical_primal_dual_gap": 6.161737786669619e-15,
+      "infinite_bound_adverse_reduced_cost": 0.0,
+      "qualified_LP_bound": 0.2095681590426218,
+      "exact_rational_optimality_certificate": false,
+      "qualified": true,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 6.097553018058477e-16,
+        "ConstrResidual": 7.275957614183426e-12,
+        "DualResidual": 3.8337388819087437e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 9.094947017729282e-12,
+        "bounds": 0.0,
+        "objective": 0.2095681590426218
+      },
+      "baseline_residual": {
+        "constraints": 7.893685705084863e-14,
+        "bounds": 0.0,
+        "objective": 0.20418702816386647
+      },
+      "before": {
+        "rows": 23626,
+        "columns": 10007,
+        "nonzeros": 163921
+      },
+      "rows": 23627,
+      "columns": 10007,
+      "nonzeros": 164458,
+      "added_rows_total": 1,
+      "new_row_nonzeros": 537,
+      "construction_seconds": 1.8673769999295473,
+      "oracle_seconds": 0.0686738002113998,
+      "optimize_wall": 1.0492781000211835,
+      "Runtime": 1.0550000667572021,
+      "Work": 2.8941429412318516,
+      "iterations": 11018.0,
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "2f9a95b19c434d7d8960ddcfce452cc1454c5016ab2ee1d51eaf7120042852e4",
+      "solution_SHA": "47e52bcdb366c54239e829a1406b3320aa127a7905f1d8bc1466a3f58213149d",
+      "source_model_SHA": "00112d310618b68bc79853c2451ae4069cef2f3b09b218d11222682af4216896",
+      "source_fixed_science": "8ec2aebe46398485019623d9b18a3e30617d4997",
+      "original_semantics_exactly_retained": true,
+      "actual_Native_row_readback": true,
+      "transport": {
+        "ideal_violation": 0.02980326608942644,
+        "transported_violation": 0.02980326608942642,
+        "box_loss_bound": 3.0130435372897527e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 314,
+        "nonzeros": 537,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_separation": {
+        "ideal_violation": 0.028004456515209747,
+        "transported_violation": 0.028004456515209716,
+        "box_loss_bound": 3.485385228163986e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 330,
+        "nonzeros": 538,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_moment_slacks": [
+        {
+          "i": 1,
+          "lower_slack": 10.285664335664336,
+          "upper_slack": 9.346825396825398
+        },
+        {
+          "i": 2,
+          "lower_slack": 9.980108780108779,
+          "upper_slack": 9.013492063492068
+        },
+        {
+          "i": 3,
+          "lower_slack": 10.285664335664336,
+          "upper_slack": 9.346825396825398
+        },
+        {
+          "i": 4,
+          "lower_slack": 10.063442113442116,
+          "upper_slack": 9.092857142857143
+        },
+        {
+          "i": 5,
+          "lower_slack": 10.174553224553222,
+          "upper_slack": 9.249603174603182
+        },
+        {
+          "i": 6,
+          "lower_slack": 10.285664335664336,
+          "upper_slack": 9.346825396825398
+        },
+        {
+          "i": 7,
+          "lower_slack": 10.185664335664335,
+          "upper_slack": 9.235714285714293
+        },
+        {
+          "i": 8,
+          "lower_slack": 10.063442113442115,
+          "upper_slack": 9.092857142857145
+        },
+        {
+          "i": 9,
+          "lower_slack": 10.24121989121989,
+          "upper_slack": 9.235714285714293
+        },
+        {
+          "i": 10,
+          "lower_slack": 9.952331002330999,
+          "upper_slack": 9.069047619047625
+        },
+        {
+          "i": 11,
+          "lower_slack": 10.063442113442115,
+          "upper_slack": 9.092857142857145
+        },
+        {
+          "i": 12,
+          "lower_slack": 10.174553224553225,
+          "upper_slack": 9.249603174603179
+        },
+        {
+          "i": 13,
+          "lower_slack": 10.185664335664338,
+          "upper_slack": 9.235714285714288
+        },
+        {
+          "i": 14,
+          "lower_slack": 10.196775446775444,
+          "upper_slack": 9.235714285714293
+        },
+        {
+          "i": 15,
+          "lower_slack": 10.185664335664336,
+          "upper_slack": 9.235714285714295
+        },
+        {
+          "i": 16,
+          "lower_slack": 9.841219891219891,
+          "upper_slack": 8.81349206349207
+        },
+        {
+          "i": 17,
+          "lower_slack": 10.285664335664336,
+          "upper_slack": 9.346825396825398
+        },
+        {
+          "i": 18,
+          "lower_slack": 10.063442113442111,
+          "upper_slack": 9.09285714285715
+        },
+        {
+          "i": 19,
+          "lower_slack": 10.285664335664338,
+          "upper_slack": 9.346825396825396
+        },
+        {
+          "i": 20,
+          "lower_slack": 10.063442113442115,
+          "upper_slack": 9.092857142857145
+        },
+        {
+          "i": 21,
+          "lower_slack": 10.285664335664336,
+          "upper_slack": 9.346825396825396
+        },
+        {
+          "i": 22,
+          "lower_slack": 10.185664335664335,
+          "upper_slack": 9.235714285714291
+        },
+        {
+          "i": 23,
+          "lower_slack": 10.174553224553225,
+          "upper_slack": 9.249603174603175
+        },
+        {
+          "i": 24,
+          "lower_slack": 9.73010878010878,
+          "upper_slack": 8.791269841269845
+        },
+        {
+          "i": 25,
+          "lower_slack": 10.063442113442116,
+          "upper_slack": 9.092857142857143
+        },
+        {
+          "i": 26,
+          "lower_slack": 10.174553224553224,
+          "upper_slack": 9.249603174603179
+        },
+        {
+          "i": 27,
+          "lower_slack": 10.285664335664334,
+          "upper_slack": 9.346825396825402
+        },
+        {
+          "i": 28,
+          "lower_slack": 10.063442113442115,
+          "upper_slack": 9.092857142857145
+        },
+        {
+          "i": 29,
+          "lower_slack": 10.063442113442115,
+          "upper_slack": 9.092857142857143
+        },
+        {
+          "i": 30,
+          "lower_slack": 10.103846153846154,
+          "upper_slack": 9.124603174603175
+        },
+        {
+          "i": 31,
+          "lower_slack": 10.063442113442113,
+          "upper_slack": 9.092857142857149
+        },
+        {
+          "i": 32,
+          "lower_slack": 10.174553224553225,
+          "upper_slack": 9.249603174603177
+        },
+        {
+          "i": 33,
+          "lower_slack": 9.909595959595961,
+          "upper_slack": 8.902380952380954
+        },
+        {
+          "i": 34,
+          "lower_slack": 10.174553224553225,
+          "upper_slack": 9.249603174603177
+        },
+        {
+          "i": 35,
+          "lower_slack": 10.285664335664334,
+          "upper_slack": 9.346825396825402
+        }
+      ],
+      "added_row_activities": [
+        {
+          "name": "r148_shared_S_1",
+          "violation": 1.533027990576613e-16
+        }
+      ],
+      "no_variables_fixed_to_old_point": true,
+      "LP_Optimize": 1,
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "helper_SHA": {
+        "round148_math.py": "30d76c5a75b36c1e4d7328a6ae208b9015013ee1ab21b8938df19a9995d52ef1",
+        "round148_lp.py": "0e260bd11c3111ca8226d35981af7129b7aaca7cc599be86fc929dcc2658c062",
+        "round148_common.py": "e363cf1cc0660aebee97a7b6d2f426bbe27a1a79dd366369f03253bcadd2c4ac"
+      }
+    },
+    {
+      "role": "R-X20-S-T1",
+      "carrier": "base",
+      "iteration": 1,
+      "old_L": 0.3650046456214907,
+      "L": 0.38163629527926674,
+      "gain": 0.016631649657776026,
+      "previous_objective": 0.3650046456214907,
+      "incremental_gain": 0.016631649657776026,
+      "g": 0.16083239448289782,
+      "weighted_penalty": 0.2208039007963689,
+      "Status": 2,
+      "numerical_dual_objective": 0.38163629527926746,
+      "numerical_primal_dual_gap": -7.216449660063518e-16,
+      "infinite_bound_adverse_reduced_cost": 0.0,
+      "qualified_LP_bound": 0.38163629527926674,
+      "exact_rational_optimality_certificate": false,
+      "qualified": true,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 1.734723475976807e-17,
+        "ConstrResidual": 3.637978807091713e-12,
+        "DualResidual": 8.931657496935586e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 2.6645352591003757e-15,
+        "bounds": 0.0,
+        "objective": 0.38163629527926685
+      },
+      "baseline_residual": {
+        "constraints": 9.094947017729282e-13,
+        "bounds": 0.0,
+        "objective": 0.3650046456214907
+      },
+      "before": {
+        "rows": 6025,
+        "columns": 2480,
+        "nonzeros": 35255
+      },
+      "rows": 6026,
+      "columns": 2480,
+      "nonzeros": 35399,
+      "added_rows_total": 1,
+      "new_row_nonzeros": 144,
+      "construction_seconds": 0.49044029996730387,
+      "oracle_seconds": 0.013312199851498008,
+      "optimize_wall": 0.09794140001758933,
+      "Runtime": 0.09800004959106445,
+      "Work": 0.2449285300386593,
+      "iterations": 2415.0,
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "7427ab56b5d48f55630f933b12d0dd4061615c8663b13674571ab17deb1454ca",
+      "solution_SHA": "d87bdb17ccf743035abbe37fca9214ae2ab179d0b55c1a81807e64b111501e64",
+      "source_model_SHA": "8d6da1f7caa7621bb2c6ddc4249bd7eb7e520a1d8fac8acb2e6337d1ed765199",
+      "source_fixed_science": "8ec2aebe46398485019623d9b18a3e30617d4997",
+      "original_semantics_exactly_retained": true,
+      "actual_Native_row_readback": true,
+      "transport": {
+        "ideal_violation": 0.1072230635369575,
+        "transported_violation": 0.10722306353695746,
+        "box_loss_bound": 2.2074350634834638e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 106,
+        "nonzeros": 144,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_separation": {
+        "ideal_violation": 0.03326118388301668,
+        "transported_violation": 0.03326118388301666,
+        "box_loss_bound": 1.4742253884692039e-16,
+        "coefficient_loss_direction_PASS": true,
+        "pure_selectors": true,
+        "columns_added": 0,
+        "negative_RHS_terms": 13,
+        "nonzeros": 144,
+        "G_coefficient": 1.0,
+        "Native_tiny_floor": 1e-12
+      },
+      "remaining_moment_slacks": [
+        {
+          "i": 1,
+          "lower_slack": 13.187258340438094,
+          "upper_slack": 4.564868398990347
+        },
+        {
+          "i": 2,
+          "lower_slack": 13.176498301502615,
+          "upper_slack": 4.541656125098423
+        },
+        {
+          "i": 3,
+          "lower_slack": 13.187258340438092,
+          "upper_slack": 4.427417116867878
+        },
+        {
+          "i": 4,
+          "lower_slack": 13.187258340438094,
+          "upper_slack": 4.427417116867878
+        },
+        {
+          "i": 5,
+          "lower_slack": 13.176498301502615,
+          "upper_slack": 3.6845132679555648
+        },
+        {
+          "i": 6,
+          "lower_slack": 13.176498301502615,
+          "upper_slack": 4.541656125098423
+        },
+        {
+          "i": 7,
+          "lower_slack": 13.704972870850925,
+          "upper_slack": 4.120423954545901
+        },
+        {
+          "i": 8,
+          "lower_slack": 13.176498301502615,
+          "upper_slack": 3.6845132679555648
+        },
+        {
+          "i": 9,
+          "lower_slack": 13.176498301502615,
+          "upper_slack": 4.541656125098423
+        },
+        {
+          "i": 10,
+          "lower_slack": 13.176498301502615,
+          "upper_slack": 4.541656125098423
+        },
+        {
+          "i": 11,
+          "lower_slack": 13.187258340438094,
+          "upper_slack": 4.427417116867876
+        },
+        {
+          "i": 12,
+          "lower_slack": 13.187258340438094,
+          "upper_slack": 4.564868398990347
+        },
+        {
+          "i": 13,
+          "lower_slack": 13.176498301502615,
+          "upper_slack": 4.541656125098423
+        },
+        {
+          "i": 14,
+          "lower_slack": 13.472972626152378,
+          "upper_slack": 4.564868398990346
+        },
+        {
+          "i": 15,
+          "lower_slack": 14.14941731529537,
+          "upper_slack": 3.7077255418474886
+        },
+        {
+          "i": 16,
+          "lower_slack": 13.176498301502615,
+          "upper_slack": 3.6845132679555648
+        },
+        {
+          "i": 17,
+          "lower_slack": 13.927195093073149,
+          "upper_slack": 4.501376335498283
+        },
+        {
+          "i": 18,
+          "lower_slack": 14.14941731529537,
+          "upper_slack": 4.564868398990346
+        },
+        {
+          "i": 19,
+          "lower_slack": 14.14941731529537,
+          "upper_slack": 4.564868398990346
+        },
+        {
+          "i": 20,
+          "lower_slack": 13.937258340438094,
+          "upper_slack": 4.534559974010735
+        }
+      ],
+      "added_row_activities": [
+        {
+          "name": "r148_shared_S_1",
+          "violation": 1.1015494072452725e-16
+        }
+      ],
+      "no_variables_fixed_to_old_point": true,
+      "LP_Optimize": 1,
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "helper_SHA": {
+        "round148_math.py": "30d76c5a75b36c1e4d7328a6ae208b9015013ee1ab21b8938df19a9995d52ef1",
+        "round148_lp.py": "0e260bd11c3111ca8226d35981af7129b7aaca7cc599be86fc929dcc2658c062",
+        "round148_common.py": "e363cf1cc0660aebee97a7b6d2f426bbe27a1a79dd366369f03253bcadd2c4ac"
+      }
+    }
+  ],
+  "models": 5,
+  "physical_instances": 3,
+  "one_row_each": true,
+  "extra_LP_iterations": 0
+}

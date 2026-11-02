@@ -1,0 +1,132 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "Native_load": 0,
+  "facts": [
+    {
+      "name": "saved_zero_lower",
+      "positive_S": false,
+      "old_GD_rows": 0,
+      "source_model_SHA": "4570b32a3237bb3480c8298400ed115c72fdcf0a10b91d468c44761f37a1d487",
+      "current_generation_chosen_by_SHA": true,
+      "interfering_affine_suffix": true,
+      "actual_supports": {
+        "1": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "2": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "3": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "negatives": [
+        {
+          "case": "duplicate_source_SHA",
+          "rejected": true,
+          "reason": "missing_or_duplicate_current_source_model_SHA"
+        },
+        {
+          "case": "missing_source_SHA",
+          "rejected": true,
+          "reason": "missing_or_duplicate_current_source_model_SHA"
+        },
+        {
+          "case": "missing_source_call",
+          "rejected": true,
+          "reason": "missing_or_duplicate_current_source_call"
+        },
+        {
+          "case": "mismatched_source_call_SHA",
+          "rejected": true,
+          "reason": "current_source_call_SHA_mismatch"
+        },
+        {
+          "case": "duplicate_source_call",
+          "rejected": true,
+          "reason": "missing_or_duplicate_current_source_call"
+        },
+        {
+          "case": "missing_source_controller",
+          "rejected": true,
+          "reason": "current_source_not_unique_controller_LP"
+        },
+        {
+          "case": "source_not_LP",
+          "rejected": true,
+          "reason": "current_source_not_unique_controller_LP"
+        }
+      ]
+    },
+    {
+      "name": "positive_S_support_schema",
+      "positive_S": true,
+      "old_GD_rows": 0,
+      "source_model_SHA": "d283af1ab2fc412be82a1c0f23af11e516f3b88559720e732b4d8bb0e41296ba",
+      "current_generation_chosen_by_SHA": true,
+      "interfering_affine_suffix": true,
+      "actual_supports": {
+        "1": [
+          1,
+          2
+        ],
+        "2": [
+          1,
+          2
+        ]
+      },
+      "negatives": [
+        {
+          "case": "duplicate_source_SHA",
+          "rejected": true,
+          "reason": "missing_or_duplicate_current_source_model_SHA"
+        },
+        {
+          "case": "missing_source_SHA",
+          "rejected": true,
+          "reason": "missing_or_duplicate_current_source_model_SHA"
+        },
+        {
+          "case": "missing_source_call",
+          "rejected": true,
+          "reason": "missing_or_duplicate_current_source_call"
+        },
+        {
+          "case": "mismatched_source_call_SHA",
+          "rejected": true,
+          "reason": "current_source_call_SHA_mismatch"
+        },
+        {
+          "case": "duplicate_source_call",
+          "rejected": true,
+          "reason": "missing_or_duplicate_current_source_call"
+        },
+        {
+          "case": "missing_source_controller",
+          "rejected": true,
+          "reason": "current_source_not_unique_controller_LP"
+        },
+        {
+          "case": "source_not_LP",
+          "rejected": true,
+          "reason": "current_source_not_unique_controller_LP"
+        }
+      ]
+    }
+  ],
+  "H_no_model_omission_retained": true,
+  "synthetic_binding_stubs_are_unit_tests_not_Native_evidence": true,
+  "positive_schema_is_not_a_complete_routing_model": true,
+  "positive_zero_GD_nonzero_affine_validity": "qualification_arithmetic.json strict_zero_old_GD",
+  "helper_SHA": "7c471078f6532c3ac37a855b2242f726667cbda42e3bfe77376a79bb9be74bea"
+}

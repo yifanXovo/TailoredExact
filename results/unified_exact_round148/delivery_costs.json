@@ -1,0 +1,34 @@
+{
+  "UTC": "2026-11-02T21:33:05.338522+00:00",
+  "G1_new_experiment_seconds_unchanged": 9670.619385000728,
+  "G1_ceiling_seconds": 18000,
+  "separate_build_seconds": 45.50021379976533,
+  "measured_separate_delivery_stages": {
+    "carrier_pack_seconds": 8.800717199919745,
+    "publication_safety_scan_seconds": 0.9425846999511123,
+    "public_recovery_all_attempts_seconds": 22.899389000143856,
+    "cleanup_metadata_screen_seconds": 0.19163069990463555
+  },
+  "sum_measured_separate_delivery_stages_seconds": 32.83432159991935,
+  "public_recovery_ceiling_seconds": 1800,
+  "public_recovery_attempts": [
+    {
+      "number": 1,
+      "PASS": false,
+      "seconds": 11.371823700144887
+    },
+    {
+      "number": 2,
+      "PASS": true,
+      "seconds": 11.527565299998969
+    }
+  ],
+  "all_attempts_charged_once_to_public_IO": true,
+  "measurement_scope": "Measured pack, carrier safety scan, bounded public attempts and cleanup metadata screen. Ordinary document authoring, Git commit/push and PR API wall time are separate unmetered delivery work. No nested seconds added.",
+  "Optimize_after_scientific_pin": 0,
+  "Native_load_after_scientific_pin": 0,
+  "compile_after_scientific_pin": 0,
+  "scientific_carriers_not_repacked": true,
+  "delivery_source_patch": "public_transport_correction.json",
+  "deleted_logical_bytes": 0
+}

@@ -30,6 +30,7 @@
 #include "Round144Research.hpp"
 #include "Round145Research.hpp"
 #include "Round146Research.hpp"
+#include "Round148Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -1759,6 +1760,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     round141ResetRun();
     round144ResetRun();
     round146ResetRun();
+    round148ResetRun();
     if (options.round92_handling_activation) {
         if (options.external_gini_scheduling !=
                 "round31-nonblocking-native-bound" ||
@@ -4129,6 +4131,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             state.artifact=round146_detail::embed(instance,base,
                 base.path.parent_path()/(base.path.stem().string()+"_round146_GD.lp"));
         }
+        if(round148().ready&&state.artifact.written){
+            const auto base=state.artifact;
+            state.artifact=round148_detail::embed(instance,base,verified_ub,
+                base.path.parent_path()/(base.path.stem().string()+"_round148_shared_S.lp"));
+        }
         if(round144().ready&&state.artifact.written) {
             round144_detail::require(native_evidence&&native_evidence->proofUsable(),"inherited_proof_dependency_revoked");
             const auto base=state.artifact;
@@ -4313,14 +4320,14 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             (leaf.id + "_lp.gurobi.log");
         request.incremental_model_reuse_enabled = incremental_model_reuse;
         request.retain_model_after_solve = incremental_model_reuse;
-        request.capture_lp_primal_dual_evidence = round49_active;
+        request.capture_lp_primal_dual_evidence = round49_active || (round148().enabled&&!round148().attempted);
         if (!first_lp_launch_recorded) {
             recordProcessPhase(
                 options, "first_lp_optimize_launch", "start",
                 "leaf=" + leaf.id);
             first_lp_launch_recorded = true;
         }
-        const FixedIntervalMipOutcome outcome = solveBudgeted(request);
+        FixedIntervalMipOutcome outcome = solveBudgeted(request);
         if (outcome.attempted) optimize << leaf.id << ",LP," << csvField(outcome.native_status) << ','
                  << outcome.optimize_return_code << ',' << remaining << ','
                  << outcome.solver_runtime_seconds << ',' << outcome.work << ','
@@ -4331,6 +4338,27 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                  << outcome.integer_domain_restored << ','
                  << csvField(outcome.basis_reuse_status) << ','
                  << csvField(outcome.native_log_path) << '\n';
+        if(round148().enabled&&!round148().attempted){
+            round148_detail::generate(request,outcome,artifact_dir/"round148_selection.json");
+            if(round148().ready){
+                const auto base=state.artifact;
+                state.artifact=round148_detail::embed(instance,base,verified_ub,
+                    base.path.parent_path()/(base.path.stem().string()+"_round148_shared_S.lp"));
+                backend->discardLeaf(leaf.id);
+                state.lp_complete=false;state.lp=PaperLpResult{};state.lp_incumbent_epoch=-1;state.lp_artifact_sha256.clear();
+                state.c6_children_ready=false;state.c6_cached_children.clear();
+                state.terminal_mip_started=false;state.terminal_ready=false;
+                state.round43_lp_g_available=false;state.round43_lp_objective_available=false;state.round43_lp_work=0;
+                request.canonical_model_path=state.artifact.path;request.canonical_model_fingerprint=state.artifact.sha256;
+                request.canonical_model_scope=state.artifact.model_scope;request.canonical_row_signature=state.artifact.row_signature;
+                request.native_log_path=artifact_dir/"native_logs"/(leaf.id+"_lp_round148.gurobi.log");
+                request.global_deadline_remaining_seconds=globalDeadlineRemaining();request.capture_lp_primal_dual_evidence=false;
+                outcome=solveBudgeted(request);
+                if(outcome.attempted)optimize<<leaf.id<<",LP,"<<csvField(outcome.native_status)<<','<<outcome.optimize_return_code<<','<<request.global_deadline_remaining_seconds<<','
+                    <<outcome.solver_runtime_seconds<<','<<outcome.work<<','<<outcome.nodes<<','<<outcome.simplex_iterations<<','<<outcome.barrier_iterations<<','<<outcome.memory_gb<<','
+                    <<state.artifact.sha256<<','<<outcome.in_memory_model_reused<<','<<outcome.integer_domain_restored<<','<<csvField(outcome.basis_reuse_status)<<','<<csvField(outcome.native_log_path)<<'\n';
+            }
+        }
         if (outcome.optional_unknown) {
             state.round65_core_due = true;
             state.lp = PaperLpResult{};

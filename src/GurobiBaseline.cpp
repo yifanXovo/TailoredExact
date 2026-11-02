@@ -23,6 +23,7 @@
 #include "Round144Research.hpp"
 #include "Round145Research.hpp"
 #include "Round146Research.hpp"
+#include "Round148Research.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
@@ -816,6 +817,29 @@ void auditRound146Native(const GurobiApi& api,GRBmodel* model,const FixedInterva
     std::ofstream f(request.native_log_path.string()+".round146.native.json");f<<std::setprecision(17)
         <<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)
         <<",\"GD_rows\":"<<actual.size()<<",\"GD_nonzeros\":"<<nz<<",\"new_columns\":0,\"source_solves\":0,\"Optimize_extra\":0}\n";
+    f.close();require(bool(f),"native_audit_write");
+}
+
+void auditRound148Native(const GurobiApi& api,GRBmodel* model,const FixedIntervalMipRequest& request,
+                        const std::vector<std::string>& names){
+    if(!round148().enabled)return;
+    using namespace round148_detail;
+    int count=0;require(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&count)==0,"native_row_count");
+    SolverNeutralLinearModel matrix;require(readLinearModel(api,model,int(names.size()),count,matrix),"native_matrix");
+    std::map<std::string,round143_detail::Row> actual;
+    for(int k=0;k<count;++k){char* name=nullptr;
+        require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,k,&name)==0&&name,"native_row_name");
+        if(std::string(name).rfind("r148_",0)!=0)continue;
+        round143_detail::Row row{name,{},matrix.senses[k],matrix.rhs[k]};
+        for(int z=matrix.row_starts[k];z<matrix.row_starts[k+1];++z)row.coefficients[names.at(matrix.column_indices[z])]=matrix.coefficients[z];
+        require(actual.emplace(row.name,row).second,"duplicate_affine_row");
+    }
+    const auto hit=round148().expected.find(request.canonical_model_fingerprint);
+    if(hit==round148().expected.end())require(actual.empty()&&!round148().ready,"missing_expected");
+    else require(actual.size()==1&&actual.begin()->first==hit->second.name&&actual.begin()->second.coefficients==hit->second.coefficients&&
+                 actual.begin()->second.sense==hit->second.sense&&actual.begin()->second.rhs==hit->second.rhs,"native_affine_transport");
+    std::ofstream f(request.native_log_path.string()+".round148.native.json");f<<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)
+        <<",\"affine_rows\":"<<actual.size()<<",\"new_columns\":0,\"source_solves\":0,\"Optimize_extra\":0}\n";
     f.close();require(bool(f),"native_audit_write");
 }
 
@@ -2913,7 +2937,8 @@ public:
         try{auditRound120Native(api_,model,request,native_names,native_types);auditRound141Native(api_,model,request,native_names,native_types);
             auditRound143Native(api_,model,instance_,request,native_names,native_types);
             auditRound144Native(api_,model,request,native_names);
-            auditRound146Native(api_,model,request,native_names);}
+            auditRound146Native(api_,model,request,native_names);
+            auditRound148Native(api_,model,request,native_names);}
         catch(const std::exception& e){out.failure_reason=e.what();return out;}
         if (request.round68_verified_start) {
             ++stats_.warm_start_candidate_count;
