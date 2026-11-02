@@ -1,0 +1,26 @@
+{
+  "UTC": "2026-11-02T12:10:32.061261+00:00",
+  "files": [
+    {
+      "member": "results/unified_exact_round132/inputs/K-20-S_landscape.json",
+      "commit": "2b9740b6dde6d3d8ae0e6290c6e6531aee79b98b",
+      "Git_blob": "3770fca8585e073a45f29d46b6b22526b6305d3c",
+      "SHA256": "6e6bf81193c5dfacd47ba3cac1c4b9071227d6321a2dba4331a6a2a27654357b",
+      "bytes": 16968,
+      "restored_directly_into_current_carrier": true
+    },
+    {
+      "member": "results/unified_exact_round132/inputs/K-20-S_selection.json",
+      "commit": "2b9740b6dde6d3d8ae0e6290c6e6531aee79b98b",
+      "Git_blob": "4f40293e94f7df3a66d69ffefdbadc84d24770ef",
+      "SHA256": "741f69ef8b9b4e69a0589fb844cdc09526a29d467c3e9014cff228067957bc38",
+      "bytes": 2283,
+      "restored_directly_into_current_carrier": true
+    }
+  ],
+  "reason": "Two historical selection/landscape sidecars are absent from sparse checkout; exact fixed Git blobs are packaged without altering old trees",
+  "model_input_changed": false,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0
+}

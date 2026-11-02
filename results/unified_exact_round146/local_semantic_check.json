@@ -1,0 +1,78 @@
+{
+  "PASS": true,
+  "UTC": "2026-11-02T12:06:23.719515+00:00",
+  "source_PE_binding": true,
+  "protected_entries_profiles": [
+    "config/gi_tbc_count_disjunction_round141.json",
+    "config/gi_tbc_count_products_round142.json",
+    "config/gi_tbc_rn_round143.json",
+    "config/gi_tbc_rnjp_round145.json",
+    "config/gi_tbc_rnp_round144.json",
+    "config/gi_tbc_round137.json",
+    "config/gi_tbc_stock_placement_round139.json",
+    "config/gi_tbc_stock_rlt_round138.json",
+    "config/gi_tbc_tc2_round140.json",
+    "scripts/paper_s2.py",
+    "scripts/paper_s2_count_disjunction.py",
+    "scripts/paper_s2_count_products.py",
+    "scripts/paper_s2_rn.py",
+    "scripts/paper_s2_rnjp.py",
+    "scripts/paper_s2_rnp.py",
+    "scripts/paper_s2_stock_placement.py",
+    "scripts/paper_s2_stock_rlt.py",
+    "scripts/paper_s2_tc2.py",
+    "results/unified_exact_round137/manuscript.md",
+    "results/unified_exact_round137/manuscript.pdf"
+  ],
+  "qualified_Native_Optimize": 35,
+  "standalone_LP_Optimize": 5,
+  "raw": [
+    {
+      "arm_id": "R146_k20_001_K-20-S_S0_STOCK",
+      "endpoint_SHA": "2d2575b694e93d3c7ff461595096863e9296a4ec30ed623e668da54eebd3ded0",
+      "closeout_SHA": "edfdb061b0a4b6ab6b505fa5075022705445523a18f2566e835a7679f429d94a"
+    },
+    {
+      "arm_id": "R146_k20_002_K-20-S_S0_STOCK_GD",
+      "endpoint_SHA": "eef3ec8076d7ee9bbe787c098bd273cfbe766eec56b4af801ff41b0b0e358fc0",
+      "closeout_SHA": "7d0763026c85e6755360e302f9f1f4a9dce76a2c7d1ab08c3b203d9cd5224690"
+    },
+    {
+      "arm_id": "R146_rx20_001_R-X20-S-T1_S0_STOCK",
+      "endpoint_SHA": "bfe641c71c90582bd04a23a6f8e1f1b7c8729c35f1458c64032789d766ede9bd",
+      "closeout_SHA": "9d7a8cca819ae797506b1817feeab967eba12f06a4aef1d3e70cd38d098b2382"
+    },
+    {
+      "arm_id": "R146_rx20_002_R-X20-S-T1_S0_STOCK_GD",
+      "endpoint_SHA": "ab3927b31b39f04bf8b15ae1a82fd701104104b2efa6fe87c0d012a08d6ae3dc",
+      "closeout_SHA": "ea12f5928b5a3c0b08f245d4e4ed5b70fd3b4c2312a6d168883ec9de9b06f493"
+    },
+    {
+      "arm_id": "R146_base_bridge_001_R-B35-S-T2_S0_BASE",
+      "endpoint_SHA": "6eb2a78c56ffef66f2e64f92696f4b124f5930e27a48feda3d79a66eaf372179",
+      "closeout_SHA": "8215280e5d6dd251206c1a6af763ef073a737676de8840f1840d8dc151957e27"
+    },
+    {
+      "arm_id": "R146_rb35_001_R-B35-S-T2_S0_STOCK",
+      "endpoint_SHA": "10b916692c3cb8ed35b95dfb44e8cc48f0963e51810c1193007d179652a5472b",
+      "closeout_SHA": "74c4f46796b2328db0bbf161c3f44c7e917c340318b0c5fb76d3ca654fcd9ad4"
+    },
+    {
+      "arm_id": "R146_rb35_002_R-B35-S-T2_S0_STOCK_GD",
+      "endpoint_SHA": "4edd8a3625d6f9ceb8b9e0daecfb0c3c9bffa73f40ffdf4e6018259e09d26502",
+      "closeout_SHA": "c270a08ed5ae529927be80c7ac691ceab0b3cf833902183723abea487ce7234c"
+    },
+    {
+      "arm_id": "R146_qualification_001_K-20-S_S0_STOCK_GD",
+      "endpoint_SHA": "8af386fb07e65f6244e582b480ad7bab72e2f1cb498facaa7f04b6bac504232d",
+      "closeout_SHA": "a3568ae8ac8daf096fa29ab3278eb2fc7e00893a1e71d5be9d7eeacc90d3da7a"
+    }
+  ],
+  "all_entered_retained": true,
+  "protected_original_tracked_status_unchanged": true,
+  "old_R137_R144_results_unchanged": true,
+  "R145_only_requested_stage_tense_amendment": true,
+  "Optimize": 0,
+  "Native_load": 0,
+  "seconds": 2.09269280009903
+}

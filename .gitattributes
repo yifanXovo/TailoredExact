@@ -420,3 +420,12 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round145/** -text whitespace=cr-at-eol
 /results/unified_exact_round145/**/*.log -whitespace
 /results/unified_exact_round145/goal.md whitespace=cr-at-eol,-blank-at-eof
+
+# Round146 measured helpers, coefficient header and evidence preserve hashed bytes.
+/scripts/round146* -text whitespace=cr-at-eol
+/scripts/paper_s2_gd.py -text whitespace=cr-at-eol
+/include/Round146Research.hpp -text whitespace=cr-at-eol
+/config/gi_tbc_gd_round146.json -text whitespace=cr-at-eol
+/results/unified_exact_round146/** -text whitespace=cr-at-eol
+/results/unified_exact_round146/**/*.log -whitespace
+/results/unified_exact_round146/goal.md whitespace=cr-at-eol,-blank-at-eof

@@ -1,0 +1,73 @@
+{
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "gd_independent_review",
+  "UTC": "2026-11-02T09:36:59.816602+00:00",
+  "matrix_SHA": "6872768286bc47d71d993141a8791778c6222935d8db8c1da397ddcd6c50c564",
+  "candidate_manifest_SHA": "a36ffaceb77a0c90dca12ee3a1de3746af0ef2206b0c34d65a5b1247b8ca432a",
+  "source_commit": "1f470aa5d6a8289347b9d4323764e6e74fa83b2b",
+  "production_PE_SHA": "da8fabd315ac6228432b0f3afeba07efef3baf83300e650112d6dcdf9aca2309",
+  "reader_SHA": "688382e3684fd67624d4fd0341bceae73896a1b2885f7dc845d08cdf042171e1",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "admitted_scope": "Only registered same-PE K20 STOCK / STOCK_GD Seed0 cap1200 pair; no other full role admitted",
+  "rationale": "Five qualified matched LP gains, stronger K20 STOCK+GD signal, actual writer/Start/scope/Native qualification and one complete health pass justify a finite strong-reference test, not promotion",
+  "fixed_finding": "Reader now selects first global numeric artifact generation; old qualification helper and pre-admission matrix preserved; no producer rerun",
+  "health_U": 0.7168065462777502,
+  "health_L": 0.7119522485709344,
+  "health_Native_returns": 5,
+  "experimental_outer_seconds_before_K20": 78.1559719000943,
+  "new_nominal_caps": 2400,
+  "remaining_experimental_seconds_before_K20": 28721.844028099906,
+  "source_files_checked": 228,
+  "helper_files_checked": 104,
+  "LP": [
+    {
+      "role": "K-20-S",
+      "carrier": "base",
+      "old_L": 0.19514915244120534,
+      "L": 0.2360103023423648,
+      "gain": 0.040861149901159466,
+      "coefficient_generation_seconds": 0.001189
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "joint",
+      "old_L": 0.2228089396611013,
+      "L": 0.23905218467540965,
+      "gain": 0.01624324501430835,
+      "coefficient_generation_seconds": 0.0012178
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "stock",
+      "old_L": 0.20459043917810038,
+      "L": 0.2510161099222611,
+      "gain": 0.04642567074416071,
+      "coefficient_generation_seconds": 0.0011936
+    },
+    {
+      "role": "K-35-U",
+      "carrier": "base",
+      "old_L": 0.20017766194929548,
+      "L": 0.20418702816386647,
+      "gain": 0.004009366214570986,
+      "coefficient_generation_seconds": 0.0019452
+    },
+    {
+      "role": "R-X20-S-T1",
+      "carrier": "base",
+      "old_L": 0.3315943162865373,
+      "L": 0.3650046456214907,
+      "gain": 0.033410329334953415,
+      "coefficient_generation_seconds": 0.0003848
+    }
+  ],
+  "evidence_SHA": {
+    "qualification_exact_rows.json": "8ed08261bb71f7b59230b05370e0827b2e80d7558f5e589c9cce2b7665d213f5",
+    "qualification_native_writer.json": "35772823f7852fd133a52cf8e81d75774e33da535ca44c0fac8eb0cb7e6156e3",
+    "qualification/writer/cpp_receipt.json": "d3c2362e830b06e2a5f2831d11e14892017b668db421a19bd179c3e3ab72a8c6",
+    "qualification_run_return.json": "479c76460c4dc7a777ba7e68d2a5de2cf8880aee1055edf9d4f7ad31cca1f827"
+  }
+}

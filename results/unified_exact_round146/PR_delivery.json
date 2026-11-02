@@ -1,0 +1,43 @@
+{
+  "UTC": "2026-11-02T12:16:26.859Z",
+  "operation": "create_English_Draft_PR",
+  "fixed_science_commit": "8ec2aebe46398485019623d9b18a3e30617d4997",
+  "creation": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/208",
+    "number": 208,
+    "state": "open",
+    "merged": false,
+    "mergeable": false,
+    "draft": true,
+    "body": "Fractional inventory selectors can retain a Gini epigraph gap even with shared stock/count/reciprocal information. This adds a separate default-off direct GD mechanism: at most two original-selector rows derived from the classical Gini-Hoover relation and exact state-conditioned inventory-box denominator bounds. Coefficients are generated once, transported downward safely and inherited only on compatible sub-supports. There are no new variables, source solves, callbacks or controller changes. The physical objective remains g + lambda P.\n\nFive new matched LPs reuse sealed baseline optima/points. K20 BASE rises from .195149152441 to .236010302342, joint from .222808939661 to .239052184675, and STOCK from .204590439178 to .251016109922. K35/RX20 BASE also improve; their existing joint optimum witnesses satisfy GD, so those two cells are not reoptimized. The universal zero-stock inequality closes the R145 half/half binary family at g >= 1/2 without claiming the full routing hull or a new general inequality theorem.\n\nOne uniform STOCK+GD candidate is compared with same-PE STOCK, complete own H, Seed0/Threads1 and mandatory verification. Three complete same-PE STOCK/STOCK+GD pairs retain the uniform candidate. K20 certifies the same U=.7168065462777502 in 94.261389 versus 74.916420s (20.5227% earlier); total times are 96.931591/77.553682s. RX20 retains U=.6453250303858205 and certification, with a small absolute certificate-clock gain of 2.702614s and total gain of 2.233928s; its extra 0.468686s verification is included. RB35 improves U from 0.401200217839 to 0.377816983545 (5.8283%), L from 0.229181599664 to 0.233498944436, and gap by 4.6781 percentage points. Both RB35 arms remain open after full cap2400 windows; GD verification costs 5.005234s more. The necessary same-PE stable BASE bridge returns U/L=0.344642625592/0.218985949603. The combination raises L by 0.014512994833 but worsens U by 9.6257% and gap by 1.7379 percentage points versus BASE.\n\nDecision: **RESEARCH_ONLY**. Retain STOCK+GD as a research candidate and retain stable R137 GI-TBC as the default. Direct GD provides real original-variable optimized information and useful incremental complete-search benefits over STOCK on all three measured roles. The combination alleviates, but does not eliminate, the important RB35 incumbent/gap regression versus stable BASE. That is a limitation of the selected combination; it is not evidence that adding GD caused the older STOCK regression or that GD alone is useless. The material same-PE pressure regression, rather than tiny certified-bound differences or a small mixed endpoint, prevents stable promotion. Stop this finite full-method expansion after the BASE bridge. No K35 rescue panel, RN-P bridge, extra seed, K15/RX35 boundary run, BASE+GD second full candidate, state-Hoover branch or tuning grid is opened. These additional runs are unnecessary for this adoption decision; unused budget is not an invitation to extend the panel. The evidence is from known configurations and Seed0, so no general dominance, out-of-sample performance or multi-seed robustness is claimed.\n\nAll 35 complete/qualification Native calls returned; five standalone LPs are separate. Exact directed-arithmetic and inventory-unit checks, actual canonical/Native coefficient transport, full/nonminimal Starts, strict sub-support inheritance, scope rejection and unchanged default-off matrices pass. Independent pre-admission/final scientific review and actual PDF visual review pass. New experimental outer cost is **7412.786360100 seconds (2.059107 hours)** of 28800, without nested double counting. Every entered result and adverse endpoint is retained.\n\nFixed science `8ec2aebe46398485019623d9b18a3e30617d4997`:\n\n- [Scientific report](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/final_report.md), [decision](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/candidate_decision.json), [LP report](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/LP_report.md)\n- [Paper section](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/manuscript.pdf), [mathematics](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/mathematical_analysis.md), [same-PE results](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/reports/full.json)\n- [Independent review](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/review/final_scientific_review.json), [cost](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/cost_report.json), [carriers](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/carrier_manifest.json), [source/PE](https://github.com/yifanXovo/TailoredExact/blob/8ec2aebe46398485019623d9b18a3e30617d4997/results/unified_exact_round146/candidate_manifest.json)\n\nMeasured production source `1f470aa5d6a8289347b9d4323764e6e74fa83b2b` and PE SHA256 `da8fabd315ac6228432b0f3afeba07efef3baf83300e650112d6dcdf9aca2309` are distinct from science/delivery commits. Stable R137 and all earlier entries/profiles remain unchanged; the requested R145 stage-index tense correction does not rerun old experiments. Main has not absorbed R145, so verified R145 (#207) is the temporary base. This remains Draft; no merge or force push. Anonymous current-carrier public byte/member recovery and bounded post-PR cleanup will be recorded in late delivery metadata, with zero Optimize, compile or commercial Native load.",
+    "title": "Round146: strengthen Gini epigraphs with direct state-conditioned deviation rows",
+    "base": "codex/round145-normalized-resource-consistency",
+    "base_sha": "2b9740b6dde6d3d8ae0e6290c6e6531aee79b98b",
+    "head": "codex/round146-direct-gini-deviation",
+    "head_sha": "8ec2aebe46398485019623d9b18a3e30617d4997",
+    "head_repo_id": 1274661812,
+    "head_repo_full_name": "yifanXovo/TailoredExact",
+    "merge_commit_sha": null,
+    "user": {
+      "login": "yifanXovo",
+      "name": "yifanXovo",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/171729629?v=4",
+      "id": 171729629
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-11-02T12:15:37Z",
+    "updated_at": "2026-11-02T12:15:37Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 2,
+    "changed_files": 148,
+    "additions": 13845,
+    "deletions": 10,
+    "display_url": "https://github.com/yifanXovo/TailoredExact/pull/208",
+    "display_title": "Round146: strengthen Gini epigraphs with direct state-conditioned deviation rows"
+  }
+}

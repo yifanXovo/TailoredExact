@@ -1,0 +1,494 @@
+{
+  "PASS": true,
+  "new_LPs": [
+    {
+      "role": "K-20-S",
+      "carrier": "base",
+      "variant": "base+GD-state",
+      "L": 0.2360103023423648,
+      "g": 0.0650677958907519,
+      "weighted_penalty": 0.1709425064516129,
+      "old_L": 0.19514915244120534,
+      "old_g": 0.02209698394805468,
+      "old_weighted_penalty": 0.17305216849315067,
+      "gain": 0.040861149901159466,
+      "rows": 6639,
+      "columns": 3096,
+      "nonzeros": 38616,
+      "before": {
+        "rows": 6637,
+        "columns": 3096,
+        "nonzeros": 38286
+      },
+      "added_rows": 2,
+      "added_nonzeros": 330,
+      "coefficient_generation_seconds": 0.001189,
+      "Runtime": 0.17100000381469727,
+      "Work": 0.4323647234315903,
+      "iterations": 3736.0,
+      "optimize_wall": 0.16788740013726056,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 1.3877787807814457e-17,
+        "ConstrResidual": 7.275957614183426e-12,
+        "DualResidual": 6.661338147750939e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 1.354472090042691e-14,
+        "bounds": 0.0,
+        "objective": 0.2360103023423648
+      },
+      "baseline_residual": {
+        "constraints": 9.460487948587115e-14,
+        "bounds": 0.0,
+        "objective": 0.19514915244120534
+      },
+      "baseline_reused": {
+        "result": "results\\unified_exact_round143\\inherited\\roots\\K-20-S\\base\\result.json",
+        "result_SHA": "5a7d66043f910782ad90348b72b3bc57498026df341f622041961bd2f0f6c2e6",
+        "solution": "results\\unified_exact_round143\\inherited\\roots\\K-20-S\\base\\solution.json.gz",
+        "solution_SHA": "61eb93c994240cb9c9904162f5e28924d6a317e8aa81e8851f9f286b13a3c0e5",
+        "matrix": "results\\unified_exact_round143\\inherited\\roots\\K-20-S\\inherited\\original.lp",
+        "matrix_SHA": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+        "physical_input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+        "baseline_Optimize_new": 0
+      },
+      "activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": 4.692427002517263e-16,
+          "violation_in_g": -2.3462135012586317e-17
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": 7.45931094670027e-17,
+          "violation_in_g": -3.729655473350135e-18
+        }
+      ],
+      "old_activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": -5.683032390998688,
+          "violation_in_g": 0.2841516195499344
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": -4.909801414229435,
+          "violation_in_g": 0.24549007071147172
+        }
+      ],
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "62e7b10799e157614c3ff8ae06d849141915966c2bd918e5cbbe6853c5486bd6",
+      "row_header_SHA": "628461f955de279799fc9213b51af7977d526a32278c0bb76870fb8a5b261e68",
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "qualified": true,
+      "complete_objective_constants_old_matrix_support_bounds_cutoff_retained": true,
+      "actual_Native_GD_readback": true,
+      "LP_Optimize": 1
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "joint",
+      "variant": "joint+GD-state",
+      "L": 0.23905218467540965,
+      "g": 0.0655189982185745,
+      "weighted_penalty": 0.17353318645683513,
+      "old_L": 0.2228089396611013,
+      "old_g": 0.05122921893664172,
+      "old_weighted_penalty": 0.17157972072445957,
+      "gain": 0.01624324501430835,
+      "rows": 7969,
+      "columns": 3758,
+      "nonzeros": 43938,
+      "before": {
+        "rows": 7967,
+        "columns": 3758,
+        "nonzeros": 43608
+      },
+      "added_rows": 2,
+      "added_nonzeros": 330,
+      "coefficient_generation_seconds": 0.0012178,
+      "Runtime": 0.28999996185302734,
+      "Work": 0.7295771132090312,
+      "iterations": 4437.0,
+      "optimize_wall": 0.2850124000106007,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 5.551115123125783e-17,
+        "ConstrResidual": 7.275957614183426e-12,
+        "DualResidual": 2.220446049250313e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 9.094947017729282e-13,
+        "bounds": 0.0,
+        "objective": 0.23905218467540965
+      },
+      "baseline_residual": {
+        "constraints": 5.3290705182007514e-14,
+        "bounds": 0.0,
+        "objective": 0.22280893966110132
+      },
+      "baseline_reused": {
+        "result": "results\\unified_exact_round145\\LP\\K-20-S_joint\\result.json",
+        "result_SHA": "b8803864dffdec28f5e65f6a37b757470f55d7f6942e2bbf7ea0a6a1abcd32c3",
+        "solution": "results\\unified_exact_round145\\LP\\K-20-S_joint\\solution.json.gz",
+        "solution_SHA": "763eb6e18912a274ca25b2601b3ba280438e2f411eb36ebc879d32146ac6479e",
+        "matrix": "results\\unified_exact_round145\\LP\\K-20-S_joint\\model.mps",
+        "matrix_SHA": "8548c1400e7cd8d0df0100bd620922e2c5ccb8f8d6b10e762d2624113b3d8688",
+        "physical_input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+        "baseline_Optimize_new": 0
+      },
+      "activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": 9.92608772953929e-15,
+          "violation_in_g": -4.963043864769645e-16
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": 5.360295540768334e-16,
+          "violation_in_g": -2.6801477703841668e-17
+        }
+      ],
+      "old_activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": -0.517160762666501,
+          "violation_in_g": 0.025858038133325052
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": -0.9911442711388341,
+          "violation_in_g": 0.049557213556941704
+        }
+      ],
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "35acc0fab87b8a0283e663731f3582043b44cefae8a4f3f0c70f29b422a1e806",
+      "row_header_SHA": "628461f955de279799fc9213b51af7977d526a32278c0bb76870fb8a5b261e68",
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "qualified": true,
+      "complete_objective_constants_old_matrix_support_bounds_cutoff_retained": true,
+      "actual_Native_GD_readback": true,
+      "LP_Optimize": 1
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "stock",
+      "variant": "stock+GD-state",
+      "L": 0.2510161099222611,
+      "g": 0.07034992275546358,
+      "weighted_penalty": 0.1806661871667975,
+      "old_L": 0.20459043917810038,
+      "old_g": 0.008743700620641098,
+      "old_weighted_penalty": 0.1958467385574593,
+      "gain": 0.04642567074416071,
+      "rows": 6643,
+      "columns": 3096,
+      "nonzeros": 38740,
+      "before": {
+        "rows": 6641,
+        "columns": 3096,
+        "nonzeros": 38410
+      },
+      "added_rows": 2,
+      "added_nonzeros": 330,
+      "coefficient_generation_seconds": 0.0011936,
+      "Runtime": 0.15199995040893555,
+      "Work": 0.4343315571116775,
+      "iterations": 4096.0,
+      "optimize_wall": 0.1671104000415653,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 1.5612511283791264e-17,
+        "ConstrResidual": 5.4569682106375694e-12,
+        "DualResidual": 2.3592239273284576e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 6.965261700742076e-14,
+        "bounds": 0.0,
+        "objective": 0.25101610992226103
+      },
+      "baseline_residual": {
+        "constraints": 9.094947017729282e-13,
+        "bounds": 0.0,
+        "objective": 0.2045904391781004
+      },
+      "baseline_reused": {
+        "result": "results\\unified_exact_round143\\inherited\\roots\\K-20-S\\stock\\result.json",
+        "result_SHA": "6379581cece644ff5c969cf527553afd54de654eb01f9bfe247d57bceb5e4fac",
+        "solution": "results\\unified_exact_round143\\inherited\\roots\\K-20-S\\stock\\solution.json.gz",
+        "solution_SHA": "3b60391acd5968e368f18c729df55962729c07cc50f2e3ea59a14a6157e3f8c9",
+        "matrix": "results\\unified_exact_round143\\inherited\\roots\\K-20-S\\stock_export_exact_cutoff\\original.lp",
+        "matrix_SHA": "3c4a7ae32cf8d5c1a6b66f2a3cd9505526913420240c7462eed65a5f7a212523",
+        "physical_input_SHA": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+        "baseline_Optimize_new": 0
+      },
+      "activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": -1.7069679003611782e-15,
+          "violation_in_g": 8.534839501805891e-17
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": -5.145623510616204e-16,
+          "violation_in_g": 2.572811755308102e-17
+        }
+      ],
+      "old_activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": -5.6796277526725,
+          "violation_in_g": 0.283981387633625
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": -5.161756824970106,
+          "violation_in_g": 0.2580878412485053
+        }
+      ],
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "3af2818187efaccab3191901dc53d663bdfc0933beec2a7cf239ddeabae65345",
+      "row_header_SHA": "628461f955de279799fc9213b51af7977d526a32278c0bb76870fb8a5b261e68",
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "qualified": true,
+      "complete_objective_constants_old_matrix_support_bounds_cutoff_retained": true,
+      "actual_Native_GD_readback": true,
+      "LP_Optimize": 1
+    },
+    {
+      "role": "K-35-U",
+      "carrier": "base",
+      "variant": "base+GD-state",
+      "L": 0.20418702816386647,
+      "g": 0.04264854959243791,
+      "weighted_penalty": 0.16153847857142856,
+      "old_L": 0.20017766194929548,
+      "old_g": 0.038639183377866926,
+      "old_weighted_penalty": 0.16153847857142856,
+      "gain": 0.004009366214570986,
+      "rows": 23626,
+      "columns": 10007,
+      "nonzeros": 163921,
+      "before": {
+        "rows": 23624,
+        "columns": 10007,
+        "nonzeros": 163516
+      },
+      "added_rows": 2,
+      "added_nonzeros": 405,
+      "coefficient_generation_seconds": 0.0019452,
+      "Runtime": 1.0959999561309814,
+      "Work": 3.208863916390763,
+      "iterations": 12314.0,
+      "optimize_wall": 1.1008516000583768,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 8.965757931779334e-07,
+        "ConstrResidual": 1.4551915228366852e-11,
+        "DualResidual": 6.394590532001615e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 7.893685705084863e-14,
+        "bounds": 0.0,
+        "objective": 0.20418702816386647
+      },
+      "baseline_residual": {
+        "constraints": 1.4210854715202004e-14,
+        "bounds": 0.0,
+        "objective": 0.20017766194929548
+      },
+      "baseline_reused": {
+        "result": "results\\unified_exact_round143\\inherited\\roots\\K-35-U\\base\\result.json",
+        "result_SHA": "f24e3a8272024a3d471f7e5c0879b2ef4f882ccd75082149df9b0af918407855",
+        "solution": "results\\unified_exact_round143\\inherited\\roots\\K-35-U\\base\\solution.json.gz",
+        "solution_SHA": "ca585dc8107b9b472735da3f7637c0e6273f03ee613342b945a1cd8b029dc90f",
+        "matrix": "results\\unified_exact_round143\\inherited\\roots\\K-35-U\\inherited\\original.lp",
+        "matrix_SHA": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+        "physical_input_SHA": "1b098a63a758e60ea22c257d559e3a27aef1fdf0cb4683b684761e72bb6ab4cb",
+        "baseline_Optimize_new": 0
+      },
+      "activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": -1.3652273755937472e-15,
+          "violation_in_g": 3.900649644553563e-17
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": 1.4375219764550806e-14,
+          "violation_in_g": -4.107205647014516e-16
+        }
+      ],
+      "old_activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": -9.48919334997922,
+          "violation_in_g": 0.27111980999940627
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": -5.520936288568627,
+          "violation_in_g": 0.1577410368162465
+        }
+      ],
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "00112d310618b68bc79853c2451ae4069cef2f3b09b218d11222682af4216896",
+      "row_header_SHA": "628461f955de279799fc9213b51af7977d526a32278c0bb76870fb8a5b261e68",
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "qualified": true,
+      "complete_objective_constants_old_matrix_support_bounds_cutoff_retained": true,
+      "actual_Native_GD_readback": true,
+      "LP_Optimize": 1
+    },
+    {
+      "role": "R-X20-S-T1",
+      "carrier": "base",
+      "variant": "base+GD-state",
+      "L": 0.3650046456214907,
+      "g": 0.15,
+      "weighted_penalty": 0.21500464562149071,
+      "old_L": 0.3315943162865373,
+      "old_g": 0.10071270548994248,
+      "old_weighted_penalty": 0.2308816107965948,
+      "gain": 0.033410329334953415,
+      "rows": 6025,
+      "columns": 2480,
+      "nonzeros": 35255,
+      "before": {
+        "rows": 6023,
+        "columns": 2480,
+        "nonzeros": 35158
+      },
+      "added_rows": 2,
+      "added_nonzeros": 97,
+      "coefficient_generation_seconds": 0.0003848,
+      "Runtime": 0.09600019454956055,
+      "Work": 0.2145152797266464,
+      "iterations": 2455.0,
+      "optimize_wall": 0.08833270007744431,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 3.1017588022520803e-07,
+        "ConstrResidual": 3.637978807091713e-12,
+        "DualResidual": 2.220446049250313e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 9.094947017729282e-13,
+        "bounds": 0.0,
+        "objective": 0.3650046456214907
+      },
+      "baseline_residual": {
+        "constraints": 8.6389229103645e-15,
+        "bounds": 0.0,
+        "objective": 0.3315943162865374
+      },
+      "baseline_reused": {
+        "result": "results\\unified_exact_round143\\inherited\\roots\\R-X20-S-T1\\base\\result.json",
+        "result_SHA": "5d110becdfcc7a9d7f37de535005cbf577d33eb81cc49b83872aa3dce1f94c21",
+        "solution": "results\\unified_exact_round143\\inherited\\roots\\R-X20-S-T1\\base\\solution.json.gz",
+        "solution_SHA": "72040698d8d58f735a53822a4bf129e9f054a16c339164a7339890df8e94e521",
+        "matrix": "results\\unified_exact_round143\\inherited\\roots\\R-X20-S-T1\\inherited\\original.lp",
+        "matrix_SHA": "ea3fb0de411e188fb5a6b2244d90343d22dcb13b8d393a480798fe44d5d416a4",
+        "physical_input_SHA": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+        "baseline_Optimize_new": 0
+      },
+      "activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": 0.0,
+          "violation_in_g": 0.0
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": 0.21267472022960293,
+          "violation_in_g": -0.010633736011480146
+        }
+      ],
+      "old_activities": [
+        {
+          "name": "r146_GD_low",
+          "slack": -3.822218233141409,
+          "violation_in_g": 0.19111091165707045
+        },
+        {
+          "name": "r146_GD_high",
+          "slack": -1.726176388731889,
+          "violation_in_g": 0.08630881943659445
+        }
+      ],
+      "Seed": 0,
+      "Threads": 1,
+      "affinity_mask": 4,
+      "model_SHA": "8d6da1f7caa7621bb2c6ddc4249bd7eb7e520a1d8fac8acb2e6337d1ed765199",
+      "row_header_SHA": "628461f955de279799fc9213b51af7977d526a32278c0bb76870fb8a5b261e68",
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "qualified": true,
+      "complete_objective_constants_old_matrix_support_bounds_cutoff_retained": true,
+      "actual_Native_GD_readback": true,
+      "LP_Optimize": 1
+    }
+  ],
+  "new_Optimize": 5,
+  "baseline_Optimize": 0,
+  "strong_joint_unchanged_witnesses": [
+    "K-35-U",
+    "R-X20-S-T1"
+  ],
+  "complete_objective_and_matrix_matched": true,
+  "values_numerical_not_rational_optimality_certificates": true,
+  "selected_candidate": "STOCK+GD-state"
+}

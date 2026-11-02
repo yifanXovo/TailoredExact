@@ -1,0 +1,48 @@
+{
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "gd_independent_review",
+  "UTC": "2026-11-02T09:43:22.956803+00:00",
+  "matrix_SHA": "92c81cf09125dd1f99394f4fc9b35fab23ddd2f27b021533b7078a91a9c3bfa1",
+  "candidate_manifest_SHA": "a36ffaceb77a0c90dca12ee3a1de3746af0ef2206b0c34d65a5b1247b8ca432a",
+  "source_commit": "1f470aa5d6a8289347b9d4323764e6e74fa83b2b",
+  "production_PE_SHA": "da8fabd315ac6228432b0f3afeba07efef3baf83300e650112d6dcdf9aca2309",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "reverification": 0,
+  "admitted_scope": "Only registered RX20-T1 STOCK / STOCK_GD Seed0 cap1200 pair for certified-role stability/cost; no pressure role, additional Seed or promotion",
+  "K20": [
+    {
+      "method": "STOCK",
+      "U": 0.7168065462777502,
+      "L": 0.7168065462777424,
+      "T_cert": 94.26138946088031,
+      "T_total": 96.93159066070803,
+      "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6",
+      "H_fleet_SHA": "7cf75862eb2b9a81fdd8179011c7c5af8ec6d1bb859629cc96116b16494b2741"
+    },
+    {
+      "method": "STOCK_GD",
+      "U": 0.7168065462777502,
+      "L": 0.7168065462777242,
+      "T_cert": 74.9164195493795,
+      "T_total": 77.55368204950355,
+      "H_semantic_SHA": "6e3915f77669edd2d526156fbbb5baf659fe62c928e1f81649989afb5a2c0aa6",
+      "H_fleet_SHA": "7cf75862eb2b9a81fdd8179011c7c5af8ec6d1bb859629cc96116b16494b2741"
+    }
+  ],
+  "K20_certificate_time_reduction_fraction": 0.20522686990020683,
+  "K20_L_difference_is_roundoff_scale": true,
+  "experimental_outer_seconds_before_RX20": 252.79089090018533,
+  "new_nominal_caps": 2400,
+  "remaining_experimental_seconds_before_RX20": 28547.209109099815,
+  "rationale": "K20 same objective certified about20.52% sooner against same-PE strong STOCK; one finite certified-role test is warranted, without a robustness claim",
+  "evidence_SHA": {
+    "stage_k20.json": "7773ad9182be9c1dc8ba4ea1fba57aa2674f2b85cbbe11a88d16ee6be74e5203",
+    "reports\\full.json": "62d1e198b6a8bdfbcf592e15f0e57d033866c2116b3082705dc95d065f9cdb3c",
+    "reports\\same_PE_pairs.csv": "1967084202788e658730c48041d5a0dcbbb50230ff3c5db22b16ee0320d5d490",
+    "reports\\verified_U_trajectories.csv": "b208bd68452f1daf15e1961dd9dd4de0ffc5d09d12269e5705225d54b3ae6fbb",
+    "k20_run_return.json": "4d87be7e341712f6b7392a781b170c4b58b3dacd6e78ca877d86831ecd66d027"
+  }
+}
