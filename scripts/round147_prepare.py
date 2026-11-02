@@ -160,5 +160,54 @@ def qualify():
     print('PASS normalized argv, zero-row actual model, H/no-model, preserved old entry')
 
 
+def charge_preflight():
+    """Conservatively charge observed host-tool outer timings, without invention."""
+    configure()
+    assert not budget()['unclosed']
+    target = OUT / 'infra/external_costs.json'
+    assert not target.exists(), 'Do not count a captured probe twice'
+    observations = [
+        ('2a8704', 'initial sealed-reference qualification; closeout-schema KeyError', .6676746, 1),
+        ('57e9e3', 'wrapper/zero-lower reader fixture qualification', .8046038, 0),
+        ('d42f16', 'corrected sealed-reference qualification', 1.0260383, 0)]
+    write(target, dict(UTC=utc(), accounting_reconciliation=True,
+        clock='exec_command returned wall_time_seconds for the original outer processes',
+        conservative_charge_includes_pure_readonly_or_arithmetic_qualification=True,
+        no_reexecution=True, no_overlap_with_metered_fees=True,
+        processes=[dict(tool_chunk=chunk, description=description, kind='diagnostic', outer_seconds=seconds,
+            exit_code=code, Optimize=0, Native_load=0, old_experiment_not_repeated=True)
+            for chunk, description, seconds, code in observations]))
+    print(json.dumps(dict(charged_preflight_seconds=sum(r[2] for r in observations), budget=budget())))
+
+
+def entry():
+    """Exercise the new public CLI parser without --run; no model or Native load."""
+    configure()
+    facts = []
+    import paper_s2 as baseline
+    profile = read(ROOT / 'config/gi_tbc_gd_round147.json')
+    for group in read(OUT / 'core_matrix.json')['groups'][:2]:
+        launch = group['launch']
+        panel = launch['panel']
+        gd = 'on' if launch['R147_method'] == 'GD' else 'off'
+        output = TEMP / ('entry_dry_' + gd)
+        assert not output.exists()
+        command = [PYTHON, '-B', ROOT / 'scripts/paper_s2_gd_only.py', '--input', panel['input_path'],
+            '--out-dir', output, '--T', str(panel['T_seconds']), '--lambda', str(panel['lambda']),
+            '--cap', str(launch['cap_seconds']), '--seed', '0', '--gd', gd, '--json']
+        run = subprocess.run(list(map(str, command)), cwd=ROOT, env=environment(),
+                             capture_output=True, text=True, timeout=30)
+        assert run.returncode == 0, run.stderr
+        plan = json.loads(run.stdout)
+        assert plan['dry_run'] and plan['GD'] == (gd == 'on') and plan['STOCK'] is False
+        assert plan['matches_verified_PE'] and plan['matches_verified_DLL'] and not output.exists()
+        assert baseline.normalize(plan['command'], profile) == baseline.normalize(launch['command'], profile)
+        facts.append(dict(method=launch['R147_method'], expanded_plan=plan, actual_CLI=True))
+    write(OUT / 'entry_check.json', dict(PASS=True, UTC=utc(), entry_SHA=sha(ROOT / 'scripts/paper_s2_gd_only.py'),
+        profile_SHA=sha(ROOT / 'config/gi_tbc_gd_round147.json'), facts=facts,
+        no_output_directory_created=True, Optimize=0, Native_load=0, compile=0))
+    print('PASS actual standalone GD on/off CLI vectors; zero Optimize or Native load')
+
+
 if __name__ == '__main__':
     globals()[sys.argv[1]]()

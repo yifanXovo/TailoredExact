@@ -135,7 +135,10 @@ def full():
             comparison = dict(role=candidate['role'], seed=candidate['seed'], transition=transition,
                 reference=reference_method, candidate=candidate_method, reference_round=reference['round'],
                 candidate_round=candidate['round'], same_PE=True, own_H_equal=True,
-                same_time_period=reference['round'] == candidate['round'],
+                same_round=reference['round'] == candidate['round'],
+                timing_relation=('same_round_serial' if reference['round'] == candidate['round']
+                                 else 'same_PE_cross_round'),
+                identical_system_load_not_assumed=True,
                 **{'reference_' + k: reference[k] for k in ['U', 'L', 'relative_gap', 'certificate', 'T_cert', 'T_total']},
                 **{'candidate_' + k: candidate[k] for k in ['U', 'L', 'relative_gap', 'certificate', 'T_cert', 'T_total']},
                 **{'delta_' + k: candidate[k] - reference[k] for k in ['U', 'L', 'relative_gap', 'T_total']},

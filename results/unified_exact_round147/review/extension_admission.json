@@ -1,0 +1,98 @@
+{
+  "UTC": "2026-11-02T14:53:09.879624+00:00",
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/round147_independent_review",
+  "matrix_SHA": "1eff00b4f0650cd9d797498aa43223904153d089b5dc1b131859bd2d675da910",
+  "candidate": "GD",
+  "candidate_unchanged": true,
+  "STOCK": false,
+  "GD": true,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "findings": [],
+  "conditions": [
+    "Run extension positions 1-2 (RX20 B/D) first. Do not enter K35 positions 3-4 until stage_RX_decision.json records the RX20 stability gate.",
+    "Retain the full registered windows for every entered valid arm; no adverse-progress truncation or cap extension.",
+    "Keep the same D for all roles; no instance-based switching to SD and no extra mechanism or seed grid."
+  ],
+  "reason": "RB35 D improves both endpoints and gap against the sealed same-PE BASE. K20 preserves U but remains open with a slightly lower supported L and does not recover STOCK certificates. This is sufficient independent hard-role value and a meaningful unresolved tradeoff to justify the goal E2 finite extension. RX20 checks certificate stability; the frozen K35 B/D pair checks a second hard role and material regressions. These are selective decision-relevant tests, not an attempt to hide the K20 limitation.",
+  "checks": {
+    "extension_grid": [
+      {
+        "role": "R-X20-S-T1",
+        "method": "BASE",
+        "cap": 1200,
+        "T": 4800,
+        "lambda": 0.12676060979965992
+      },
+      {
+        "role": "R-X20-S-T1",
+        "method": "GD",
+        "cap": 1200,
+        "T": 4800,
+        "lambda": 0.12676060979965992
+      },
+      {
+        "role": "K-35-U",
+        "method": "BASE",
+        "cap": 2400,
+        "T": 10800,
+        "lambda": 0.15
+      },
+      {
+        "role": "K-35-U",
+        "method": "GD",
+        "cap": 2400,
+        "T": 10800,
+        "lambda": 0.15
+      }
+    ],
+    "nominal_caps": 7200,
+    "frozen_helpers_match": 106,
+    "stable_argv_except_allowed_experiment_values_PE_paths_GD_flag": true,
+    "all_D_STOCK_off_GD_on": true,
+    "all_B_STOCK_off_GD_off": true,
+    "Seed0_Threads1_affinity4_own_H": true,
+    "no_cross_arm_information": true,
+    "all_new_core_seals_and_complete_closeouts_checked": true,
+    "all_core_actual_parameter_and_model_audits_PASS": true,
+    "core_Native_Optimize": 15,
+    "core_Native_returned": 15,
+    "old_sealed_cells_reused": 7,
+    "new_standalone_LPs": 0,
+    "open_T_cert_remains_null": true,
+    "cross_round_same_PE_not_same_load_label_correct": true,
+    "no_compilation_or_repeated_health": true
+  },
+  "cost_review": {
+    "current_total_seconds": 4810.124505200086,
+    "native_seconds": 4806.906636700034,
+    "diagnostic_seconds": 3.217868500051704,
+    "external_original_preflight_seconds": 2.4983167,
+    "external_fees_disjoint": true,
+    "external_original_processes_not_rerun": true,
+    "serial_fee_receipts_disjoint": true,
+    "verification_cost_included_no_segments_excluded": true,
+    "remaining_after_nominal_extension": 5989.875494799915,
+    "shared_3000_reserve_still_fits": true,
+    "ceiling_seconds": 18000,
+    "corrected_source_label": "0.8046038-second fixture qualification is original tool chunk 57e9e3; prior metadata label corrected without fee change."
+  },
+  "evidence_SHA256": {
+    "results/unified_exact_round147/extension_matrix.json": "1eff00b4f0650cd9d797498aa43223904153d089b5dc1b131859bd2d675da910",
+    "results/unified_exact_round147/stage_core_decision.json": "dbe86a2822386914703213504c63b3c5aeb7cb3ecfcf8a8893d540674ca68097",
+    "results/unified_exact_round147/stages/core_full.json": "5f975953a37b9bd78f970b88d1eaa3bbc1dbf0624b0201497ddbb95e314323ae",
+    "results/unified_exact_round147/stages/core_cost.json": "c1acc2ee7b870fc6fb91af0ee8bfef8b6effec3bba27e0dbf5bc47368edeabdb",
+    "results/unified_exact_round147/reports/full.json": "5f975953a37b9bd78f970b88d1eaa3bbc1dbf0624b0201497ddbb95e314323ae",
+    "results/unified_exact_round147/candidate_manifest.json": "a47a86c315c78b46a5061360d96910fad09bc3341dce600216faf122c1e1bd29",
+    "results/unified_exact_round147/infra/external_costs.json": "591e86ee12a8b9a68d7d544614546763693f06b94549a97fc47bcc606098007c",
+    "results/unified_exact_round147/engineering/preflight_label_correction.json": "36083ddd68598587a8f55b34656f79bb8c20d3748970f856a2019eebad8cd431",
+    "results/unified_exact_round147/entry_check.json": "cc429ec172124e27377ef7b694deb8994a76857f6353523e37dc54b7dacfa36c",
+    "scripts/round147_stage.py": "a5978a572c3202773cbd8bef403183b212cb57f1c60ba41ff5b208052060155d",
+    "scripts/round147_campaign.py": "d132c9c63ebd00d280c73b7538ef6d5660cbb0f6806b4692db3c921c57bdea69",
+    "scripts/round147_read.py": "efc777a47e68d1812ba5711567421a36c93d15d89a2b839167a71c127ea48b0a",
+    "scripts/round147_common.py": "17cc6773b1267d78b958fc1e2e6c4b3b81a53d2d8be7b77da7ab07a2f8eda852"
+  }
+}
