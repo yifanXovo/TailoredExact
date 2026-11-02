@@ -1,4 +1,4 @@
-"""Four explicit mechanisms; serial own-H arms on the unchanged R146 PE."""
+"""Serial same-new-PE D/shared-S arms, each paying complete own H."""
 import copy
 import round133_campaign as inherited
 from round121_campaign import finish_producer
@@ -30,7 +30,7 @@ def freeze(batch, positions, reason):
         cap = spec.get('cap', panel['cap_seconds'])
         panel.update(gurobi_seed=seed, cap_seconds=cap, round148_method=method,
                      round138_stock_rlt=stock, round146_gd=gd,
-                     panel_kind='Round148 independent GD/stock; complete own H')
+                     panel_kind='Round148 one shared-S low root row; complete own H')
         camp = OUT / ('campaign_' + batch) / f'{i:03}'
         camp.mkdir(parents=True, exist_ok=False)
         armid = f'R148_{batch}_{i:03}_{spec["role"]}_S{seed}_{method}'

@@ -1,9 +1,11 @@
 """Reuse accepted complete R134/R137/R147 validation; add actual shared-S rows."""
 import types
 import collections
+import csv
 from fractions import Fraction as F
 import round147_read as inherited_reader
 import round108_reader as parser
+from round148_context import root_context,source_call_check
 from round148_math import station_data,alpha
 from round148_common import *
 configure()
@@ -11,6 +13,7 @@ configure()
 
 def verify(launch,identity):
     configure();d=Path(launch['destination']);enabled=launch['R148_method']=='D_SHARED_S'
+    assert not (d/'verification_closeout.json').exists(), 'closed verification is immutable; use saved aggregates or targeted read-only checks'
     selection_path=d/'external/round148_selection.json'
     selection=read(selection_path) if selection_path.exists() else None
     accepted=inherited_reader.accepted
@@ -39,7 +42,7 @@ def verify(launch,identity):
         old_view=types.SimpleNamespace(**dict(vars(old),_normal_endpoint=normal))
         accepted=types.SimpleNamespace(**dict(vars(accepted),inherited=old_view))
     value=types.FunctionType(inherited_reader.verify.__code__,dict(vars(inherited_reader),
-        ROOT=ROOT,OUT=OUT,configure=configure,accepted=accepted))(launch,identity)
+        ROOT=ROOT,OUT=OUT,configure=configure,accepted=accepted,root_context=root_context))(launch,identity)
     command=launch['command'];assert command.count('--round148-shared-s')==1
     assert command[command.index('--round148-shared-s')+1]==('on' if enabled else 'off')
     if enabled:
@@ -50,6 +53,9 @@ def verify(launch,identity):
     if not enabled:assert selection is None and not audits
     else:assert all(a['PASS'] for a in audits)
     row=selection['row'] if selection and selection['ready'] else None
+    if selection and selection.get('qualified_input'):
+        with (d/'external/paper_optimize_ledger.csv').open(newline='',encoding='utf-8-sig') as stream:
+            source_call_check(selection,read(d/'observations.json'),list(csv.DictReader(stream)))
     exact_loss=0.
     if row:
         assert selection['qualified_input'] and selection['source_call']>0
