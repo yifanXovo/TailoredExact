@@ -7,6 +7,7 @@
 #include "Round144Research.hpp"
 #include "Round145Research.hpp"
 #include "Round146Research.hpp"
+#include "Round148Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -879,6 +880,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             const auto value=requireValue(i,argc,argv);
             if(value!="off"&&value!="on")throw std::runtime_error("Round146 GD must be off or on");
             ebrp::round146().enabled=value=="on";
+        }
+        else if (arg == "--round148-shared-s") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on")throw std::runtime_error("Round148 shared S must be off or on");
+            ebrp::round148().enabled=value=="on";
         }
         else if (arg == "--round143-rn") {
             const auto value=requireValue(i,argc,argv);
@@ -3575,6 +3581,16 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round148().enabled){
+        if(!ebrp::round146().enabled||ebrp::round138().stock_rlt)
+            throw std::runtime_error("Round148 shared S requires standalone D");
+        if(!opt.out_path.empty()){
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round148_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"shared_S\":true,\"low_only\":true,\"root_once\":true,\"max_rows\":1,\"max_added_root_LP\":1,\"new_columns\":0,\"source_solves\":0}\n";
+            if(!f)throw std::runtime_error("Round148 parameter persistence failed");
+        }
+    }
     if(ebrp::round146().enabled){
         if(ebrp::round127().mode!="ms2"||ebrp::round143().rn||ebrp::round144().enabled||ebrp::round145().enabled||
             ebrp::round139().enabled()||ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||

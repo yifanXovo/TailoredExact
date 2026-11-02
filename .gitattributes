@@ -438,3 +438,12 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round147/** -text whitespace=cr-at-eol
 /results/unified_exact_round147/**/*.log -whitespace
 /results/unified_exact_round147/goal.md whitespace=cr-at-eol,-blank-at-eof
+
+# Round148 preserves measured source, rows and evidence bytes.
+/scripts/round148* -text whitespace=cr-at-eol
+/scripts/paper_s2_shared_s.py -text whitespace=cr-at-eol
+/include/Round148Research.hpp -text whitespace=cr-at-eol
+/config/gi_tbc_shared_s_round148.json -text whitespace=cr-at-eol
+/results/unified_exact_round148/** -text whitespace=cr-at-eol
+/results/unified_exact_round148/**/*.log -whitespace
+/results/unified_exact_round148/goal.md whitespace=cr-at-eol,-blank-at-eof
