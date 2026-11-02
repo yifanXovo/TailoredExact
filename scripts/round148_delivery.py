@@ -120,6 +120,8 @@ def public(commit):
     records=[]
     def fetch(relative,ref=commit):
         assert spent+time.perf_counter()-tick<1800
+        # Reuse indexes preserve Windows-native paths; public URLs require '/'.
+        relative=relative.replace('\\','/')
         url=f'https://raw.githubusercontent.com/yifanXovo/TailoredExact/{ref}/{relative}'
         destination=target/(ref[:12]+'_'+Path(relative).name)
         run=subprocess.run(['C:/Windows/System32/curl.exe','--disable','--fail','--silent','--show-error',

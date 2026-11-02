@@ -1,0 +1,15 @@
+{
+  "UTC": "2026-11-02T21:32:04.363012+00:00",
+  "type": "public_IO_URL_path_normalization_only",
+  "first_attempt_receipt": "delivery_failures/public_attempt01.json",
+  "first_attempt_receipt_SHA256": "93b14bef508689a9ab4d91b41782cea66ad79e8b899b00cee585620b100f1e5b",
+  "cause": "The inherited reuse_index archive path is Windows-native. Backslashes in the raw GitHub URL caused HTTP404 after all eight new carriers and 4074 members passed.",
+  "change": "Normalize backslashes to forward slashes only at the public URL boundary. Keep fixed science, inherited archive/member hashes, production source, executable, and sealed carriers unchanged.",
+  "old_helper_SHA256": "6a969bba7045d93f4995a1800b8ddd39cefef49383823c29759b3fe02bd1950d",
+  "new_helper_SHA256": "d5306da13948ff5e2914c5f11ba0b476456f3964fb25e2fa76945200c7ca61e8",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "charged_as": "Separate bounded public pure I/O; no experimental rerun",
+  "retry": "One bounded full recovery attempt; failure bytes and first restore retained"
+}

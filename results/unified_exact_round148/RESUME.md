@@ -88,3 +88,17 @@ Anonymous bounded public byte/member recovery uses zero Optimize, compile
 or commercial Native load. Final PR/readback, public recovery and actual
 cleanup receipts are appended below when completed, without recursively
 rewriting the fixed scientific carriers.
+
+## Actual late delivery
+
+English Draft PR [210](https://github.com/yifanXovo/TailoredExact/pull/210) is open, Draft=True, merged=False. Base `codex/round147-gd-independent-value`; snapshot head `25765c21d63e7b04133f1e7dbe2dfd53c38f476f`.
+
+Public recovery PASS=True: 8 new carriers, 4074 new members and 20 fixed inherited members; 11.527565s pure I/O, zero Optimize/compile/Native.
+
+Bounded current-round cleanup complete: 0 deleted paths, 0 bytes deleted. Unique raw/failures, required runtime and active trees remain. No old history or user content deleted. Actual logical bytes and observed volume change are in cleanup_record.json.
+
+Public delivery is complete: all eight new fixed-science archives, all 4074 indexed members and all 20 necessary fixed-R146 members match their byte/member hashes. Both bounded public attempts total 22.899389s pure I/O. The first inherited request returned HTTP404 because its index stores Windows backslashes; the late delivery helper normalizes URL separators only. The failed attempt, correction receipt and first restore are retained. Sealed carriers and scientific results were not rewritten, and no Optimize, Native load or compile occurred.
+
+Bounded cleanup screened this round's output, temp, build and both restore directories: 268862487 logical bytes retained; 0 paths and 0 bytes deleted. Keep unique raw/failures, necessary runtime, active trees and all old history. Experimental G1 remains 9670.619385001s / 18000s; delivery I/O and 45.500213800s necessary build are separate. See delivery_costs.json, public_transport_correction.json and cleanup_record.json.
+
+The fixed science commit is `25765c21d63e7b04133f1e7dbe2dfd53c38f476f`. The actual late delivery files and URL-only helper correction are a separate normal descendant commit. PR_readback.json is an immutable pre-delivery-commit snapshot; final live PR/head readback follows the normal push, without rewriting fixed carriers or recursively embedding a commit in itself.
