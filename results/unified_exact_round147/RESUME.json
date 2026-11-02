@@ -1,16 +1,13 @@
 {
-  "UTC": "2026-11-02T14:53:52.189000+00:00",
-  "state": "EXTENSION_ADMITTED_RX20_NEXT",
-  "completed_core_arms": 3,
-  "core_Native_Optimize": 15,
-  "core_all_returned": true,
-  "extension_matrix_SHA": "1eff00b4f0650cd9d797498aa43223904153d089b5dc1b131859bd2d675da910",
+  "UTC": "2026-11-02T14:55:35.031165+00:00",
+  "state": "K35_ADMITTED_NOT_STARTED",
+  "stage_RX_SHA": "7171cc6b5a8b92c8ae301d679e5c12b76d3bf9f3469dedb8bb277132fa633fd5",
   "budget": {
-    "G1_seconds": 4810.124505200086,
-    "remaining_G1_seconds": 13189.875494799915,
+    "G1_seconds": 4860.266817100009,
+    "remaining_G1_seconds": 13139.733182899992,
     "by_category": {
       "diagnostic": 3.217868500051704,
-      "native": 4806.906636700034
+      "native": 4857.048948599957
     },
     "limits": {
       "diagnostic": 18000.0,
@@ -18,13 +15,12 @@
     },
     "category_remaining": {
       "diagnostic": 17996.78213149995,
-      "native": 13193.093363299966
+      "native": 13142.951051400043
     },
     "separately_reported_seconds": 0.0,
     "unclosed": [],
     "nested_H_LP_MIP_Work_not_added": true
   },
-  "next_command": "D:/msys64/ucrt64/bin/python.exe -B scripts/round147_campaign.py run extension 2",
-  "K35_requires_RX_stage_acceptance": true,
+  "next_command": "D:/msys64/ucrt64/bin/python.exe -B scripts/round147_campaign.py run extension",
   "never_repeat_existing_fee_or_sealed_arm": true
 }
