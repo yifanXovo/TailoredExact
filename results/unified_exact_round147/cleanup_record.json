@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-11-02T16:44:11.627490+00:00",
+  "deleted_paths": [],
+  "deleted_logical_bytes": 0,
+  "retained": [
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round147",
+      "files": 133419,
+      "logical_bytes": 446386161,
+      "reason": "Unique current-round raw, active science/lineage, or finite accepted public restore retained"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round147",
+      "files": 1,
+      "logical_bytes": 2950,
+      "reason": "Unique current-round raw, active science/lineage, or finite accepted public restore retained"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\restore\\round147-public-a0673b683c64-attempt01",
+      "files": 0,
+      "logical_bytes": 0,
+      "reason": "Unique current-round raw, active science/lineage, or finite accepted public restore retained"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\restore\\round147-public-a0673b683c64-attempt02",
+      "files": 12,
+      "logical_bytes": 80532791,
+      "reason": "Unique current-round raw, active science/lineage, or finite accepted public restore retained"
+    }
+  ],
+  "free_bytes_before": 179884650496,
+  "free_bytes_after": 179884650496,
+  "observed_volume_delta": 0,
+  "volume_delta_not_attributed_to_deletion": true,
+  "bounded_current_round_only": true,
+  "old_rounds_deleted": false,
+  "original_user_tree_modified": false,
+  "necessary_inherited_PE_DLL_retained": true,
+  "retained_runtime_files": [
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round146\\ExactEBRP.exe",
+      "bytes": 22878592,
+      "SHA256": "da8fabd315ac6228432b0f3afeba07efef3baf83300e650112d6dcdf9aca2309",
+      "reason": "Required inherited production/Native/pure-arithmetic runtime; retained in place"
+    },
+    {
+      "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+      "bytes": 38766856,
+      "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+      "reason": "Required inherited production/Native/pure-arithmetic runtime; retained in place"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round146\\Round146Rows.exe",
+      "bytes": 445577,
+      "SHA256": "5c5e193ee7a2339da5d54c2df2c8a0c2f6139ad1dee038cbb7bb4343082861c5",
+      "reason": "Required inherited production/Native/pure-arithmetic runtime; retained in place"
+    }
+  ],
+  "zero_deletion_reason": "Retain unique raw and active tree; zero deletion is explicitly accepted by goal I",
+  "public_acceptance_SHA": "0a6bf4968e16728d2d1a0775ca9cad9784ecb789da93bc120d75fe254caa7131",
+  "PR_readback_SHA": "a94a645051227a1a39176564b6125ef93205185878f3d99b2d4ed2ba17924504"
+}

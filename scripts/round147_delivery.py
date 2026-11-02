@@ -3,7 +3,6 @@ import gzip
 import io
 import re
 import shutil
-import urllib.request
 import zipfile
 from round147_common import *
 
@@ -145,10 +144,15 @@ def public(commit):
     def fetch(relative):
         assert spent + time.perf_counter() - tick < 1800
         url = f'https://raw.githubusercontent.com/yifanXovo/TailoredExact/{commit}/{relative}'
-        request = urllib.request.Request(url, headers={'User-Agent': 'Round147-finite-public-recovery'})
-        with urllib.request.urlopen(request, timeout=90) as response:
-            data = response.read()
-        return data, url
+        # Use the existing Windows trust store through Schannel. The MSYS
+        # OpenSSL build lacks the local issuer; never disable TLS verification.
+        client = Path('C:/Windows/System32/curl.exe')
+        destination = target / Path(relative).name
+        run = subprocess.run([str(client), '--disable', '--fail', '--silent', '--show-error',
+            '--location', '--max-time', '90', '--proto', '=https', '--proto-redir', '=https',
+            '--output', str(destination), '--url', url], capture_output=True, timeout=100)
+        assert run.returncode == 0, run.stderr.decode(errors='replace')
+        return destination.read_bytes(), url
 
     try:
         data, manifest_url = fetch('results/unified_exact_round147/carrier_manifest.json')
@@ -176,6 +180,9 @@ def public(commit):
         receipt = dict(PASS=True, UTC=utc(), fixed_commit=commit, archives=records,
             seconds=time.perf_counter() - tick, manifest_url=manifest_url, member_index_url=index_url,
             manifest_SHA256=sha(OUT / 'carrier_manifest.json'), credentials_used=False,
+            transport='Windows curl / Schannel; curlrc disabled; HTTPS only; default certificate verification enabled',
+            TLS_verification_enabled=True, helper_SHA256=sha(__file__),
+            transport_helper_is_late_delivery_only=True,
             Optimize=0, Native_load=0, compile=0, only_public_bytes_and_members=True)
     except BaseException as error:
         receipt = dict(PASS=False, UTC=utc(), fixed_commit=commit, archives=records,
@@ -225,7 +232,10 @@ def cleanup():
     idle()
     assert read(OUT / 'public_restore_receipt.json')['PASS'] and read(OUT / 'PR_readback.json')['draft']
     before = shutil.disk_usage(WORK).free
-    roots = [OUT, TEMP, Path(read(OUT / 'public_restore_owner.json')['directory'])]
+    roots = [OUT, TEMP]
+    for i, attempt in enumerate(read(OUT / 'public_attempt_history.json'), 1):
+        assert re.fullmatch('[0-9a-f]{40}', attempt['fixed_commit'])
+        roots.append(WORK / 'restore' / f'round147-public-{attempt["fixed_commit"][:12]}-attempt{i:02}')
     retained = []
     for root in roots:
         assert root.resolve().is_relative_to(WORK.resolve())
