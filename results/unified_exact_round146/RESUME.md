@@ -1,6 +1,6 @@
 # Round146 continuation record
 
-Active goal: direct state-conditioned Gini deviation rows. All new assets
+Completed study: direct state-conditioned Gini deviation rows. All new assets
 are under E:/codes/ExactEBRP-work. Preserve the original ExactEBRP tree,
 its three tracked user modifications, old rounds, unique raw and failures.
 Post-PR cleanup is limited to this round's reconstructible duplicates after
@@ -39,36 +39,55 @@ verification and all Native calls returned. One stable BASE pressure bridge
 is registered in base_bridge_matrix.json and independently admitted by
 review/base_bridge_admission.json. It is complete and qualified:
 BASE U/L=.34464262559194814/.2189859496034747. It addresses the
-materially better historical BASE U
-without substituting a cross-PE value for a new same-PE comparison. No K35,
-RN-P bridge or extra seed is admitted. Do not automatically expand. The optional state-Hoover
+materially better historical BASE U without substituting a cross-PE value for
+a new same-PE comparison. No complete K35, RN-P bridge or extra seed was
+entered. No further expansion is planned. The optional state-Hoover
 extension remains unnecessary given real direct-row LP information.
 
 Use D:/msys64/ucrt64/bin/python.exe -B. scripts/round146_common.py budget
 and status <fee_label> read small status files. active_position.json identifies
-the current fee. Never rerun a fee or sealed producer. Continue a healthy
-running process rather than launching a duplicate. Complete experiments are
-metered through scripts/round146_campaign.py run <batch>; its own-H,
-Native work and necessary verification are counted once in the outer cost.
+the last completed fee; no solver process remains active. Never rerun a fee
+or sealed producer. The retained round146_campaign.py matrices and launchers
+document the completed serial protocol; own-H, Native work and necessary
+verification were counted once in the outer cost.
 Total new experimental ceiling:28800 seconds, Seed0, Threads1, H seed20260626,
 affinity4, serial. Build, pure exact arithmetic, authoring and public I/O are
 separate. No compile, PDF export or heavy I/O during timed runs.
 
-After a batch completes, run round146_analyze.py full and trajectories only
-while idle. Evaluate each completed stage before any further conditional
-expansion. Final experimental outer cost is 7412.786360100145 seconds;
+All batches are closed and the reviewed reports are fixed evidence. Do not
+regenerate them or rerun solvers merely to refresh dates. Final experimental
+outer cost is 7412.786360100145 seconds;
 the fee ledger is authoritative. All entered valid
 difficult arms retained their full registered window. The scientific decision
 is RESEARCH_ONLY: incremental GD gains over STOCK are retained, while the
-combination's same-PE RB35 U regression9.6257% and gap increase1.7379 percentage
+combination's same-PE RB35 U regression 9.6257% and gap increase 1.7379 percentage
 points prevent stable promotion. No further solver runs, K35/RN-P bridge,
 additional Seeds or rescue grid are entered. Stable R137 remains the default.
 The five-page paper PDF has passed actual page-by-page visual inspection.
 Final independent scientific review has PASSed; see review/final_scientific_review.json.
 Its exact reviewed continuation snapshot is review/final_scientific_checkpoint_RESUME.md.
-Draft PR, source/raw carriers, one bounded public byte/member recovery and current-round cleanup
-are still pending at this checkpoint. Do not mark the goal complete
-until scientific and delivery work are both finished.
+English Draft PR: https://github.com/yifanXovo/TailoredExact/pull/208 .
+Its verified base is the R145 branch above; it remains Open/Draft, with no
+merge or force push. Fixed science is
+8ec2aebe46398485019623d9b18a3e30617d4997, distinct from the measured source
+and later commits containing only publication/cleanup receipts.
+PR_delivery.json and PR_readback.json preserve the creation and checked
+science-head snapshot; the PR link identifies the latest delivery head.
+
+Twelve current-round carriers and all 19,686 indexed members passed one
+anonymous fixed-commit byte/member recovery in 25.909753 seconds, with zero
+Optimize, Native load or compilation. See carrier_manifest.json,
+publication_pin.json and public_restore_receipt.json. Two missing sparse
+checkout sidecars were included directly from verified R145 Git blobs;
+inherited_metadata_recovery.json and the retained pack-attempt history
+disclose that pure-I/O correction without changing any old tree or model input.
+
+Post-PR bounded cleanup is complete: zero paths and zero bytes deleted.
+cleanup_record.json records 252,972,342 logical bytes retained at inspection,
+including unique raw/failures, necessary PE/objects, paper QA and public
+recovery carriers. Old rounds, the active tree and original user changes
+are preserved. Delivery costs are separate in delivery_costs.json. No
+scientific or solver work remains for this goal.
 
 The short health used the original offline reader. Independent review then
 changed root selection from lexical path order to the global numeric artifact
