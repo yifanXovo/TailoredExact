@@ -163,3 +163,14 @@ No second route-A panel, boundary/Seed/floor grid or persistent full-RN control
 is added. Source/PE and final science/delivery identities are distinct; actual
 public byte/member recovery, Draft PR and current-round-only cleanup are in
 [RESUME](../results/unified_exact_round145/RESUME.md).
+
+<!-- Round146 evidence -->
+
+The [Round146 direct Gini-deviation study](round146_research.md) adds at most two
+original-selector rows using the classical Gini–Hoover relation and exact
+state-conditioned stock-box bounds. Five matched LPs establish useful information;
+existing K35/RX20 joint witnesses avoid two unnecessary optimizations.
+K20 certifies about 20.52% sooner than same-PE STOCK, RX20 retains certification, and RB35 improves both endpoints over STOCK. A necessary same-PE BASE bridge still shows a 9.63% U regression and 1.74 percentage-point gap increase on RB35. Retain the positive incremental GD results as research-only; stable R137 remains unchanged and no further panel is entered.
+The [decision](../results/unified_exact_round146/candidate_decision.json) and
+[delivery record](../results/unified_exact_round146/RESUME.md) retain all actual
+positive/negative evidence, source/PE identities and the separate publication checks.

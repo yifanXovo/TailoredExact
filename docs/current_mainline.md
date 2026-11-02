@@ -105,3 +105,14 @@ information does not give sufficient complete improvement for promotion.
 Stable R137 and all prior research versions remain intact; the unified
 account preserves the earlier STOCK certificates and RN-P K35 gains.
 Stable R137, prior entries/profiles and its formal manuscript remain unchanged.
+
+<!-- Round146 evidence -->
+
+The [Round146 direct Gini-deviation study](round146_research.md) adds at most two
+original-selector rows using the classical Gini–Hoover relation and exact
+state-conditioned stock-box bounds. Five matched LPs establish useful information;
+existing K35/RX20 joint witnesses avoid two unnecessary optimizations.
+K20 certifies about 20.52% sooner than same-PE STOCK, RX20 retains certification, and RB35 improves both endpoints over STOCK. A necessary same-PE BASE bridge still shows a 9.63% U regression and 1.74 percentage-point gap increase on RB35. Retain the positive incremental GD results as research-only; stable R137 remains unchanged and no further panel is entered.
+The [decision](../results/unified_exact_round146/candidate_decision.json) and
+[delivery record](../results/unified_exact_round146/RESUME.md) retain all actual
+positive/negative evidence, source/PE identities and the separate publication checks.

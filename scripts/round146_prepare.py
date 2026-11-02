@@ -13,4 +13,18 @@ def initial():
         preliminary_attachments_available=False,preliminary_reconstruction='goal and local fixed historical carriers; zero old Optimize',
         policy='All new assets in ExactEBRP-work; bounded post-PR current-round cleanup only'))
     print('Round146 entry and protected status recorded')
+def selection():
+    configure();m=read(OUT/'candidate_manifest.json');lp=[read(p) for p in sorted((OUT/'LP').glob('*/result.json'))]
+    assert len(lp)==5 and all(r['qualified'] and r['gain']>1e-6 for r in lp)
+    write(OUT/'candidate_selection.json',dict(UTC=utc(),candidate='STOCK+GD-state',reference='STOCK',uniform=True,
+        decision_basis='K20 combination objective .251016 exceeds standalone GD .236010 and STOCK .204590; cheap GD has real information beyond joint and on all three BASE domains',
+        frozen_before_formal=True,initial_stage='same-PE K20 pair, cap1200 each; no automatic extension',
+        source_commit=m['source_commit'],PE_SHA=m['production_PE_SHA'],LP_results=lp,root_once=True,new_rows_max=2,new_columns=0,paid_source_solves=0,
+        baseline_reoptimization=0,optional_state_Hoover_diagnostic_needed=False,reason_no_backup='Direct original-variable rows already yield clear real optimized gains'))
+    p=read(ROOT/'config/gi_tbc_round137.json');p.update(schema='round146-direct-GD-frozen-argv-v1',algorithm='GI-TBC + STOCK + direct state-conditioned Gini deviation rows',
+        source_commit=m['source_commit'],research_head=m['source_commit'],default_executable=m['production_PE'],verified_PE_SHA256=m['production_PE_SHA'],
+        round=146,source_manifest='results/unified_exact_round146/candidate_manifest.json',research_profile=True,GD=True,STOCK=True,
+        parent_profile_SHA256=sha(ROOT/'config/gi_tbc_round137.json'))
+    p['argv']+=['--round138-stock-rlt','--round146-gd','on'];write(ROOT/'config/gi_tbc_gd_round146.json',p)
+    print('Uniform STOCK+GD-state candidate and separate research entry frozen')
 if __name__=='__main__':globals()[sys.argv[1]]()

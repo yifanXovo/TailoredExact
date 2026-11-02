@@ -1,0 +1,115 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "Native": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "facts": [
+    {
+      "tag": "positive",
+      "point": "physical_start",
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      },
+      "complete": true
+    },
+    {
+      "tag": "positive",
+      "point": "nonminimal_epigraph",
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      },
+      "complete": true
+    },
+    {
+      "tag": "positive",
+      "model": "on",
+      "GD_rows": 2,
+      "GD_nonzeros": 7,
+      "Native_readback": true,
+      "columns_unchanged": true
+    },
+    {
+      "tag": "positive",
+      "model": "child_on",
+      "GD_rows": 2,
+      "GD_nonzeros": 2,
+      "Native_readback": true,
+      "columns_unchanged": true
+    },
+    {
+      "tag": "fixed",
+      "point": "physical_start",
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      },
+      "complete": true
+    },
+    {
+      "tag": "fixed",
+      "point": "nonminimal_epigraph",
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      },
+      "complete": true
+    },
+    {
+      "tag": "fixed",
+      "model": "on",
+      "GD_rows": 2,
+      "GD_nonzeros": 4,
+      "Native_readback": true,
+      "columns_unchanged": true
+    },
+    {
+      "tag": "zero_lower",
+      "point": "physical_start",
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      },
+      "complete": true
+    },
+    {
+      "tag": "zero_lower",
+      "point": "nonminimal_epigraph",
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      },
+      "complete": true
+    },
+    {
+      "tag": "zero_lower",
+      "model": "on",
+      "GD_rows": 0,
+      "GD_nonzeros": 0,
+      "Native_readback": true,
+      "columns_unchanged": true
+    },
+    {
+      "tag": "K35",
+      "model": "on",
+      "GD_rows": 2,
+      "GD_nonzeros": 405,
+      "Native_readback": true,
+      "columns_unchanged": true
+    }
+  ],
+  "actual_off_K35_equals_historical_BASE": true
+}

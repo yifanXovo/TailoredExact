@@ -1,0 +1,57 @@
+{
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "gd_independent_review",
+  "UTC": "2026-11-02T11:11:29.170028+00:00",
+  "matrix_SHA": "aa595262ebcffb7ed62f39fc9511637a7aa2a12a8e6d000fd12e4487a1a5b4a2",
+  "candidate_manifest_SHA": "a36ffaceb77a0c90dca12ee3a1de3746af0ef2206b0c34d65a5b1247b8ca432a",
+  "source_commit": "1f470aa5d6a8289347b9d4323764e6e74fa83b2b",
+  "production_PE_SHA": "da8fabd315ac6228432b0f3afeba07efef3baf83300e650112d6dcdf9aca2309",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "reverification": 0,
+  "admitted_scope": "One RB35-T2 stable BASE same-PE Seed0 cap2400 bridge only; no repeated STOCK/GD, K35, RN-P, new candidate or extra Seed",
+  "rationale": "The uniform combination improves both endpoints over STOCK, but the historical stable BASE incumbent is materially better. One same-PE BASE run resolves the directly relevant stable-comparison uncertainty before recommendation.",
+  "RB35": [
+    {
+      "method": "STOCK",
+      "U": 0.4012002178390506,
+      "L": 0.22918159966432358,
+      "relative_gap": 0.42876003183960304,
+      "T_produce": 2371.0720311789773,
+      "T_cert": null,
+      "T_verify": 3.82689020014368,
+      "T_total": 2374.898921379121,
+      "H_semantic_SHA": "af1290503013a4c529945e9553359661023494373cca41ed890be99d8eba19d2",
+      "H_fleet_SHA": "e0190e8f4ccd0f83b10183be7625437658052c504edf503c2e8ec0ddbd693a7d",
+      "last_improving_witness_seconds": 569.6560000001919
+    },
+    {
+      "method": "STOCK_GD",
+      "U": 0.37781698354462406,
+      "L": 0.23349894443616206,
+      "relative_gap": 0.38197869707838733,
+      "T_produce": 2371.0903184583876,
+      "T_cert": null,
+      "T_verify": 8.832123799948022,
+      "T_total": 2379.9224422583356,
+      "H_semantic_SHA": "af1290503013a4c529945e9553359661023494373cca41ed890be99d8eba19d2",
+      "H_fleet_SHA": "e0190e8f4ccd0f83b10183be7625437658052c504edf503c2e8ec0ddbd693a7d",
+      "last_improving_witness_seconds": 2217.75
+    }
+  ],
+  "experimental_outer_seconds_before_bridge": 5037.5354857002385,
+  "remaining_experimental_seconds_before_bridge": 23762.46451429976,
+  "new_nominal_caps": 2400,
+  "no_promotion_inferred": true,
+  "historical_BASE_is_cross_PE": true,
+  "unfavorable_bridge_must_not_trigger_automatic_rescue_grid": true,
+  "evidence_SHA": {
+    "stage_rb35.json": "e07bc26b81e30bc9bd0152a56ea2abf6589be2df9289e4f86d1061d18078a13d",
+    "reports\\full.json": "19b1c38eb04250071551fd406138872aebf6f83376527f4975f546cae9cf7723",
+    "reports\\same_PE_pairs.csv": "9690ef699c9509ff5ad792fd9f8bd6418fd084e3a335ce0618ac51c04305d85d",
+    "reports\\verified_U_trajectories.csv": "cfb8009a2912f818cfc2f979151ae947519bc6f1c6bd0b172b9ef96f5f743e89",
+    "rb35_run_return.json": "fb2bf34b842979dced66042401de2f131765da2214bd5d353c9df6c4cdb5de75"
+  }
+}

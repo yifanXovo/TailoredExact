@@ -52,12 +52,19 @@ about41,000 journal JSON objects and≈97MB claims; similar evidence scale does 
 establish a structural verification speedup. No separate cache/I/O engineering
 experiment is opened.
 
-## What the next measurement must establish
+## Answer established by Round145
 
-The open question is the connection of physical stock and integer threshold
-count information to the *same* reciprocal factor. NC/TS validity alone is
-insufficient: saved-extension violation, original-variable separation, matched
-complete-objective reoptimization and full method value must remain separate.
-The strong old RN+stock+TC+TC2 carrier is measured explicitly. A compact joint
-candidate advances only after actual transported projection retention is
-verified. It is not an untested stack of every historical switch.
+The completed NC/TS measurements connect physical stock and integer threshold
+count information to the same reciprocal factor. On K35, joint LP
+.234508197894 exceeds strong RN+stock+TC+TC2 .229222197461 by .005286000433;
+O+joint does not improve it further. Actual compact root losses on K35/RX20
+are about 2.75e-14/1.73e-14. The strict local complementarity theorem and
+accurate root-value retention therefore survive the full-method decision.
+
+Four same-PE OFF/RN-JP pairs and the K35 old RN-P bridge do not support
+promotion. K20 has the same U and weaker L; K35 improves U against OFF but
+loses L/gap and both endpoints against old RN-P; RX20 certifies the same
+objective without material time gain; RB35 has an important U/gap regression.
+The once-root joint trial is closed as research-only. Saved-extension
+violation, original-x exclusion, optimized objective information and complete
+performance remain separate claims. This tense correction adds no Optimize.

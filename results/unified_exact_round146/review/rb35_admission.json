@@ -1,0 +1,78 @@
+{
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "gd_independent_review",
+  "UTC": "2026-11-02T09:48:10.627747+00:00",
+  "matrix_SHA": "9c3720c057586267ddf6288b9b5208176c7e7ebc55d7f9af5f84276348a408d8",
+  "candidate_manifest_SHA": "a36ffaceb77a0c90dca12ee3a1de3746af0ef2206b0c34d65a5b1247b8ca432a",
+  "source_commit": "1f470aa5d6a8289347b9d4323764e6e74fa83b2b",
+  "production_PE_SHA": "da8fabd315ac6228432b0f3afeba07efef3baf83300e650112d6dcdf9aca2309",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "reverification": 0,
+  "admitted_scope": "Only RB35-T2 STOCK / STOCK_GD Seed0 pair, both registered cap2400 windows; no BASE bridge, K35, extra Seed or promotion yet",
+  "rationale": "K20 strong-reference certificate benefit and RX20 same-objective certification with small absolute time benefit warrant one historical-regression pressure role",
+  "RX20": [
+    {
+      "method": "STOCK",
+      "U": 0.6453250303858205,
+      "L": 0.6453250303858192,
+      "T_cert": 14.755773585056886,
+      "T_total": 15.892973785055801,
+      "H_semantic_SHA": "8339d65c0709657dd8801fe524d366e944b15c125d1c9ffbd4d68d8f7f9377b8",
+      "H_fleet_SHA": "cc901e411b971e230989c905bc5b52a8d75c5e4237b00e95d62ece4ebabd185e"
+    },
+    {
+      "method": "STOCK_GD",
+      "U": 0.6453250303858205,
+      "L": 0.6453250273648131,
+      "T_cert": 12.053159367060289,
+      "T_total": 13.659045667154714,
+      "H_semantic_SHA": "8339d65c0709657dd8801fe524d366e944b15c125d1c9ffbd4d68d8f7f9377b8",
+      "H_fleet_SHA": "cc901e411b971e230989c905bc5b52a8d75c5e4237b00e95d62ece4ebabd185e"
+    }
+  ],
+  "RX20_certificate_seconds_saved": 2.7026142179965973,
+  "RX20_L_difference": -3.021006111936231e-09,
+  "original_tolerance_policy_unchanged": true,
+  "stable_BASE_not_yet_same_PE_on_pressure_role": true,
+  "conditional_recommendation_requirement": "If recommending STOCK+GD, obtain needed same-PE BASE pressure-role comparison; superiority to STOCK alone does not establish stable BASE improvement",
+  "experimental_outer_seconds_before_RB35": 282.47139900014736,
+  "remaining_experimental_seconds_before_RB35": 28517.528600999853,
+  "new_nominal_caps": 4800,
+  "previous_review_carriers_retained": [
+    {
+      "logical_path": "stage_k20.json",
+      "SHA": "7773ad9182be9c1dc8ba4ea1fba57aa2674f2b85cbbe11a88d16ee6be74e5203",
+      "retained_path": "stage_k20.json"
+    },
+    {
+      "logical_path": "reports\\full.json",
+      "SHA": "62d1e198b6a8bdfbcf592e15f0e57d033866c2116b3082705dc95d065f9cdb3c",
+      "retained_path": "stages\\62d1e198b6a8bdfbcf592e15f0e57d033866c2116b3082705dc95d065f9cdb3c\\full.json"
+    },
+    {
+      "logical_path": "reports\\same_PE_pairs.csv",
+      "SHA": "1967084202788e658730c48041d5a0dcbbb50230ff3c5db22b16ee0320d5d490",
+      "retained_path": "stages\\62d1e198b6a8bdfbcf592e15f0e57d033866c2116b3082705dc95d065f9cdb3c\\same_PE_pairs.csv"
+    },
+    {
+      "logical_path": "reports\\verified_U_trajectories.csv",
+      "SHA": "b208bd68452f1daf15e1961dd9dd4de0ffc5d09d12269e5705225d54b3ae6fbb",
+      "retained_path": "stages\\62d1e198b6a8bdfbcf592e15f0e57d033866c2116b3082705dc95d065f9cdb3c\\verified_U_trajectories.csv"
+    },
+    {
+      "logical_path": "k20_run_return.json",
+      "SHA": "4d87be7e341712f6b7392a781b170c4b58b3dacd6e78ca877d86831ecd66d027",
+      "retained_path": "k20_run_return.json"
+    }
+  ],
+  "evidence_SHA": {
+    "stage_rx20.json": "c01903aed5c9fb8836c6a26047f0a3dc8be93c4dfb5dd13716dd9c5247129eb7",
+    "reports\\full.json": "fb038f5b14f944b327d18f89ee1c05c0697121738573bad03ed35a8701ccc1d6",
+    "reports\\same_PE_pairs.csv": "a9dd1be3ca0e9cc6662afb5ef6d4910fee3db9faba314b05ed0d2887f4904da7",
+    "reports\\verified_U_trajectories.csv": "80f66cd4d5125572e5dce47a008e1874c914395c5f666274be636d8dd7b5711d",
+    "rx20_run_return.json": "6ed8e1270fa99f3c89e8096adc65ece21dfd8bd232b37632956d2f60973dadb0"
+  }
+}
