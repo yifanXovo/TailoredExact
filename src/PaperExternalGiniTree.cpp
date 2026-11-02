@@ -29,6 +29,7 @@
 #include "Round141Research.hpp"
 #include "Round144Research.hpp"
 #include "Round145Research.hpp"
+#include "Round146Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -1757,6 +1758,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                                        double root_gamma_U) {
     round141ResetRun();
     round144ResetRun();
+    round146ResetRun();
     if (options.round92_handling_activation) {
         if (options.external_gini_scheduling !=
                 "round31-nonblocking-native-bound" ||
@@ -4122,6 +4124,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                 spec);
         }
         state.artifact_stock_rlt = desired_stock;
+        if(round146().enabled&&state.artifact.written){
+            const auto base=state.artifact;
+            state.artifact=round146_detail::embed(instance,base,
+                base.path.parent_path()/(base.path.stem().string()+"_round146_GD.lp"));
+        }
         if(round144().ready&&state.artifact.written) {
             round144_detail::require(native_evidence&&native_evidence->proofUsable(),"inherited_proof_dependency_revoked");
             const auto base=state.artifact;
