@@ -1,0 +1,99 @@
+{
+  "UTC": "2026-11-02T13:28:32.765164+00:00",
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/round147_independent_review",
+  "role": "independent scientific and pre-admission review; no implementation edits",
+  "matrix_SHA": "54acc5ef64e1bb391adfd25aa35652d11952ac3ab9db125b26ba1874669d1da8",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "findings": [],
+  "mathematics": {
+    "GD_valid_without_STOCK": true,
+    "reason": "Gini >= Hoover for nonnegative ratios and positive total; low deviation is increasing and high deviation decreasing in S. State-conditioned physical stock-box lower/upper bounds give each selected state a valid lower deviation bound. STOCK RLT rows are not used in this argument.",
+    "scope": "Same R146 at most two original-selector rows, no columns/source solves, downward coefficient rounding, zero-global-lower skip, compatible sub-support inheritance. No new theorem or full routing hull claim."
+  },
+  "checks": {
+    "all_228_production_source_hashes_unchanged": true,
+    "all_105_frozen_helpers_match": true,
+    "PE_DLL_hashes_match_R146": true,
+    "core_three_cells_and_4800_nominal_seconds_correct": true,
+    "D_argv_STOCK_off_GD_on": true,
+    "B_argv_STOCK_off_GD_off": true,
+    "base_vectors_match_R137_modulo_paths_experiment_values_PE_and_explicit_GD_switch": true,
+    "no_RN_TC_other_research_flags": true,
+    "complete_own_H_supervisor_and_postverification_inherited": true,
+    "H_seed_20260626_source_default_and_reader_readback_enforced": true,
+    "Seed0_Threads1_affinity4": true,
+    "serial_fees_include_H_solves_and_postverification_without_nested_double_count": true,
+    "aggregate_ceiling_18000": true,
+    "sealed_old_seven_cells_reuse_not_recharged": true,
+    "old_stable_and_R146_entry_profile_bytes_preserved": true,
+    "zero_rows_select_actual_original_model_using_root_metadata": true,
+    "H_no_model_path_preserved_and_a_formal_model_without_context_rejected": true,
+    "zero_recompile_zero_repeated_health": true
+  },
+  "actual_saved_model_checks": [
+    {
+      "fixture": "positive",
+      "STOCK_rows": 0,
+      "GD_rows": 2,
+      "same_columns_objective_bounds_types": true,
+      "on_SHA": "468cb7539c5f9af819b4a2d29695eeeb35e0a33a58e741641b9c5fd70411d87b",
+      "off_SHA": "e1c8f6506f5be861849d37363ca76f06ba81260b7e56c54aa0f6a7251d33d412"
+    },
+    {
+      "fixture": "fixed",
+      "STOCK_rows": 0,
+      "GD_rows": 2,
+      "same_columns_objective_bounds_types": true,
+      "on_SHA": "b8127e0531869730f5e4fba700e86e380d0d373a2a101c13905dbe506e736b3d",
+      "off_SHA": "cd67e203fe26e2468adddde562bc3c238e14a7dfe9b2b7be1b015051ed8cc8f9"
+    },
+    {
+      "fixture": "zero_lower",
+      "STOCK_rows": 0,
+      "GD_rows": 0,
+      "same_columns_objective_bounds_types": true,
+      "on_SHA": "4570b32a3237bb3480c8298400ed115c72fdcf0a10b91d468c44761f37a1d487",
+      "off_SHA": "4570b32a3237bb3480c8298400ed115c72fdcf0a10b91d468c44761f37a1d487"
+    }
+  ],
+  "limitations": [
+    "Formal new D models will be checked by complete own postverification after each run; pre-admission saved fixtures already cover standalone GD.",
+    "Same PE does not imply identical date or system load. Small cross-round clock differences must not decide adoption alone.",
+    "Open T_cert must remain null; registered caps are not convergence times; conditional extensions need a frozen purpose and independent admission."
+  ],
+  "corrected_preflight_issue": {
+    "issue": "Initial reuse helper expected a nonexistent PASS key in old verification_closeout",
+    "status": "Corrected before any Optimize; now validates actual complete qualification fields and audit SHA. No old raw changed or run repeated."
+  },
+  "evidence_SHA256": {
+    "WORKSPACE_POLICY.md": "3812091c415a87116472e56f7f9c598c36ee485a654383d15e8b03fca69c042d",
+    "scripts/round147_common.py": "17cc6773b1267d78b958fc1e2e6c4b3b81a53d2d8be7b77da7ab07a2f8eda852",
+    "scripts/round147_campaign.py": "d132c9c63ebd00d280c73b7538ef6d5660cbb0f6806b4692db3c921c57bdea69",
+    "scripts/round147_read.py": "efc777a47e68d1812ba5711567421a36c93d15d89a2b839167a71c127ea48b0a",
+    "scripts/round147_prepare.py": "33a9dcb39a4db0c8be79dfbeea5c07c4ffd65a836a5a895b54b47921ccaa8a04",
+    "scripts/paper_s2_gd_only.py": "6f028fd094d9643bf168069a784cf38306c15794fa0797f65f2272ff8ce53012",
+    "config/gi_tbc_gd_round147.json": "b3568f5bbeb40a5b87dbf7a66c4d2ab6de0a04dcf2ae1dc757c1eb5da970ea4b",
+    "include/Round146Research.hpp": "628461f955de279799fc9213b51af7977d526a32278c0bb76870fb8a5b261e68",
+    "include/Instance.hpp": "e9e396495d431fbb00f412df00929470f9332d5ab57c5561ca0c98b0a456026e",
+    "src/main.cpp": "c83630b8d6f05e4ae4a09a47f34aa548053083d0e59cc95094ea03368b34e815",
+    "src/PaperExternalGiniTree.cpp": "e25d78baac807000963d71dc706e114b5c2fc04d6ea49e69de2a7cbc5b8f9de6",
+    "src/GurobiBaseline.cpp": "0d6ca1e0a3c7fda4ff995ffad10bc2532f11df0d07212c4c9740570379fe18e9",
+    "scripts/round146_writer.cpp": "3e43f082eb0673ce60369577361e35753a5012bb80eb63e5f1df1490be960c89",
+    "scripts/round137_read.py": "c47c6742fc8cfd9b5da998af1c1c02a85131ba1d5c57aba1def87ae2e5d4973b",
+    "scripts/round135_read.py": "8ba64ca6a87e55ff2ea925c70620dfc4397d3ae49c58a77fe4074eac96c6b38c",
+    "scripts/round133_campaign.py": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+    "scripts/round140_common.py": "8b4b1f44484d482b1dad991b2aa0c986f4e904ba964f880dd07f776de4891c45",
+    "results/unified_exact_round146/qualification_exact_rows.json": "8ed08261bb71f7b59230b05370e0827b2e80d7558f5e589c9cce2b7665d213f5",
+    "results/unified_exact_round146/qualification_native_writer.json": "35772823f7852fd133a52cf8e81d75774e33da535ca44c0fac8eb0cb7e6156e3",
+    "results/unified_exact_round146/qualification_units.json": "c1955ab8736c26a819cb0df424b03884af806339cb89ca1e0d652599064187fd",
+    "results/unified_exact_round147/core_matrix.json": "54acc5ef64e1bb391adfd25aa35652d11952ac3ab9db125b26ba1874669d1da8",
+    "results/unified_exact_round147/candidate_manifest.json": "a47a86c315c78b46a5061360d96910fad09bc3341dce600216faf122c1e1bd29",
+    "results/unified_exact_round147/reuse_index.json": "735e51858003eb8611e079b4513a0a1cb6166dbcd2621d2a3cf47ea41ac6e165",
+    "results/unified_exact_round147/qualification_wrapper_reader.json": "118f33467f75c6fdcbf55ac2dc836c4ef1eefc78900f081b635806786c8abb68",
+    "results/unified_exact_round147/goal.md": "ce7a0e68eb421211aa3bb33c0fea3c06d6edb006ade341511d326f3c5350d069"
+  }
+}

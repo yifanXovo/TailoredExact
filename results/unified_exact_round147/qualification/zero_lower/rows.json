@@ -1,0 +1,64 @@
+{
+  "applicable": false,
+  "infeasible": false,
+  "lower": 0,
+  "upper": 0,
+  "seconds": 0,
+  "states": [],
+  "rows": [],
+  "exact_oracle_PASS": true,
+  "scope": {
+    "S_L_exact": "0",
+    "S_U_exact": "3",
+    "tau_L": 0,
+    "tau_U": 3,
+    "minimizer": {
+      "1": 0,
+      "2": 0,
+      "3": 0
+    },
+    "maximizer": {
+      "1": 0,
+      "2": 0,
+      "3": 3
+    },
+    "Bminus": 0,
+    "B": 3,
+    "c_binary64": {
+      "1": 1.0,
+      "2": 1.0,
+      "3": 1.0
+    },
+    "c_exact": {
+      "1": "1",
+      "2": "1",
+      "3": "1"
+    },
+    "supports": {
+      "1": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "2": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "3": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "arithmetic": "Fraction of actual binary64 coefficients",
+    "applicable": false,
+    "reason": "NO_GLOBAL_POSITIVE_DENOMINATOR_BOUND"
+  },
+  "conditional": true,
+  "driver_SHA": "5c5e193ee7a2339da5d54c2df2c8a0c2f6139ad1dee038cbb7bb4343082861c5",
+  "header_SHA": "628461f955de279799fc9213b51af7977d526a32278c0bb76870fb8a5b261e68"
+}

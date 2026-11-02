@@ -1,0 +1,40 @@
+{
+  "UTC": "2026-11-02T14:50:32.619572+00:00",
+  "accounting_reconciliation": true,
+  "clock": "exec_command returned wall_time_seconds for the original outer processes",
+  "conservative_charge_includes_pure_readonly_or_arithmetic_qualification": true,
+  "no_reexecution": true,
+  "no_overlap_with_metered_fees": true,
+  "processes": [
+    {
+      "tool_chunk": "2a8704",
+      "description": "initial sealed-reference qualification; closeout-schema KeyError",
+      "kind": "diagnostic",
+      "outer_seconds": 0.6676746,
+      "exit_code": 1,
+      "Optimize": 0,
+      "Native_load": 0,
+      "old_experiment_not_repeated": true
+    },
+    {
+      "tool_chunk": "57e9e3",
+      "description": "wrapper/zero-lower reader fixture qualification",
+      "kind": "diagnostic",
+      "outer_seconds": 0.8046038,
+      "exit_code": 0,
+      "Optimize": 0,
+      "Native_load": 0,
+      "old_experiment_not_repeated": true
+    },
+    {
+      "tool_chunk": "d42f16",
+      "description": "corrected sealed-reference qualification",
+      "kind": "diagnostic",
+      "outer_seconds": 1.0260383,
+      "exit_code": 0,
+      "Optimize": 0,
+      "Native_load": 0,
+      "old_experiment_not_repeated": true
+    }
+  ]
+}
