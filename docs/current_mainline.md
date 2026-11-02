@@ -93,4 +93,15 @@ incumbent/representation results and a small RX20 proof-clock gain, together
 with an important RB35 adverse endpoint. The overall decision is
 [research-only](../results/unified_exact_round144/candidate_decision.json),
 closing this once-root representation experiment without stable promotion.
+
+The [Round145 normalized count/inventory study](round145_research.md) connects
+NC and TS to the same reciprocal factor, establishes local strictness and a
+real K35 increment beyond strong RN+stock+TC+TC2, and retains essentially all
+measured source-root information in one original-variable row. Four core
+same-PE pairs and one K35 old RN-P bridge provide the complete finite evidence.
+The [decision](../results/unified_exact_round145/candidate_decision.json) keeps
+RN-JP research-only and closes this joint once-root trial: stronger root
+information does not give sufficient complete improvement for promotion.
+Stable R137 and all prior research versions remain intact; the unified
+account preserves the earlier STOCK certificates and RN-P K35 gains.
 Stable R137, prior entries/profiles and its formal manuscript remain unchanged.

@@ -411,3 +411,12 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /include/Round141Research.hpp -text whitespace=cr-at-eol
 /scripts/paper_s2_count_disjunction.py -text whitespace=cr-at-eol
 /config/gi_tbc_count_disjunction_round141.json -text whitespace=cr-at-eol
+
+# Round145 measured helpers and evidence retain their actual hashed bytes.
+/scripts/round145* -text whitespace=cr-at-eol
+/scripts/paper_s2_rnjp.py -text whitespace=cr-at-eol
+/include/Round145Research.hpp -text whitespace=cr-at-eol
+/config/gi_tbc_rnjp_round145.json -text whitespace=cr-at-eol
+/results/unified_exact_round145/** -text whitespace=cr-at-eol
+/results/unified_exact_round145/**/*.log -whitespace
+/results/unified_exact_round145/goal.md whitespace=cr-at-eol,-blank-at-eof

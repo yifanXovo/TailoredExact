@@ -1,0 +1,34 @@
+{
+  "schema": "round145-independent-bridge-admission-v1",
+  "UTC": "2026-11-01T23:32:39.5434442Z",
+  "decision": "ACCEPT",
+  "matrix_SHA": "faac01981cf7ff26cccf9817a17c1aaedc160d2a3ae50d8e4c00d7e83359a6e0",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/independent_math_review",
+  "production_source": "3510d7c15bd0712ff0c57c298721ff111c60cdec",
+  "production_PE_SHA": "044bff47f944c4df09c092aafe3fbb8112a5db708a8bc8a6e26e08f8949558d6",
+  "scope": "Only one same-PE K35 R144 RN-P bridge cap2400 Seed0 Threads1 serial own H; Round145 flag absent/default false, historical RN-P flag on and old method identity retained; compare with sealed same-PE K35 OFF/RNJP, no second full panel",
+  "nominal_caps_seconds": 2400,
+  "joint_new_nominal_resource_plus_bridge_seconds": 9600,
+  "charged_experiment_seconds_at_review": 4908.501817000797,
+  "ceiling_seconds": 28800,
+  "reason": "K35 RN-JP is mixed against BASE, so the existing compact RN-P same-PE bridge is necessary to assess whether new joint information adds full-method value beyond compact normalization itself.",
+  "all_prior_entered_positions_qualified_and_preserved": true,
+  "unchanged_source_helpers_PE_identities_and_physical_objective_checked": true,
+  "no_stable_promotion_or_second_complete_panel": true,
+  "reviewer_new_Optimize": 0,
+  "reviewer_new_compile": 0,
+  "reviewer_commercial_Native_load": 0,
+  "evidence_SHA256": {
+    "pilot_results_at_expansion_SHA": "abb9dd6d769dda9115b6f5e25abca6de51fc1f8ca343dddd32cfe16bdb5c02bc",
+    "pilot_admission_SHA": "242dfd35f135ae18b47dafb16172e362e33efdb7128ec3a51993eb06d248c266",
+    "production_writer_review_SHA": "28e40086c7701953fb7b9186da587586e976d86f4f8d24f3add0fd141436d30f",
+    "candidate_manifest_SHA": "ae38aa71f321a7d36be1e82fd1383fbbbf293a5a2e416c6b366c69b6bded7ed4",
+    "pilot_closeouts": {
+      "R145_pilot_001_K-35-U_S0_OFF": "8ff6d1a665ea89f1d9251d0fcb742f78b722c9e6a947743639d5373ac0154d33",
+      "R145_pilot_002_K-35-U_S0_RNJP": "21465b623dce1aee8ca0826793a6b55f299cdfe78a154432c2f43e92b6b5eba0",
+      "R145_pilot_003_R-X20-S-T1_S0_OFF": "107bee30b4755b2f9d7fc5dad0acefafc568e6a4a49e67dc0a0e11831700821e",
+      "R145_pilot_004_R-X20-S-T1_S0_RNJP": "ccdbfae0a943764d5fd4469006e514a1a0e71bdad448b202f6d535ee63fc416e"
+    }
+  }
+}
