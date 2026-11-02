@@ -90,17 +90,47 @@ round145_analyze.py full, round145_trajectories.py and round145_closeout.py
 are idle-only offline aggregation/authoring, with zero Optimize. Delivery
 helpers do not import a commercial Native module or rebuild the solver.
 
-## Publication handoff
+## Completed publication handoff
 
-At this scientific snapshot the remaining steps are final independent
-scientific review, PDF export and actual page-by-page visual verification,
-local semantic acceptance, finite carriers and a fixed science commit.
-Then normal push and an English Draft PR, actual base/head/Draft readback,
-one bounded anonymous public byte/member verification of only needed new
-carriers, and post-PR current-round cleanup (zero deletion allowed).
+Fixed science: b15e5e645c602420e35a7a65b3b892a230bf87c5.
+English Draft PR: https://github.com/yifanXovo/TailoredExact/pull/207.
+Actual readback is Open, Draft=true, base=codex/round144-rn-projection,
+head=codex/round145-normalized-resource-consistency. Main remains
+b2b940c1e517a72e226ec60fc49ff19651737632 and has not absorbed verified R144
+68041d6a69e14ca7cfbff4e3262ab17331bf792e. The initial PR head is the fixed
+science commit; the later normal delivery commit is identified by
+`git log -1 --format=%H -- results/unified_exact_round145/PR_delivery.json`.
+No merge or force push is performed.
+
+Independent final scientific review PASS and eight-page PDF actual visual
+review PASS are recorded. The local semantic check also verifies unchanged
+old entries/profiles, R137 formal manuscript, old results and original tracked
+status. The 14 finite archives and compressed index bind 154221 members,
+118318553 bytes including the index, with no commercial binary/license.
+Actual source/helper bytes, selected old inputs, all entered raw, math,
+reviews, figures and rendered page evidence are retained.
+
+One anonymous public recovery of only these fixed current-round carriers
+passed archive length/hash and all member-name/byte hashes in 22.525194499874488
+seconds, with zero Optimize/Native load/compile. The public manifest itself
+is checked too. The successful files are retained under
+E:/codes/ExactEBRP-work/restore/round145-public-b15e5e645c60-attempt01.
+No old-round public recovery or semantic rerun is claimed.
+
+Post-PR current-round metadata screening/cleanup is complete: actual deletion
+is zero files/zero bytes, explicitly allowed by the goal. Current raw,
+failures/history, required PE/objects, rendered evidence, public recovery and
+active tree are retained. cleanup_record.json records bounded roots, file
+counts/logical bytes and volume-space observations without attributing the
+volume delta to deletion. Old rounds and user content are not deleted.
+
 publication_pin.json, public_restore_receipt.json, PR_readback.json,
-PR_delivery.json and cleanup_record.json record those steps as completed in
-the later delivery commit. They are intentionally outside the fixed science
-archive's earlier snapshot. Recheck origin/main absorption of R144 immediately
-before choosing main or the verified R144 temporary base; do not wait for merge.
-No merge, force push, historical deletion, email or submission is authorized.
+PR_delivery.json, delivery_costs.json and cleanup_record.json are the late
+delivery authorities. The immutable science archive retains the earlier
+prepublication RESUME snapshot; this section changes only handoff status,
+not scientific results, measured source, PE or experiment costs. Final branch
+head/Draft/base are read back again after the delivery metadata push.
+
+All requested scientific and delivery work is complete; no further solver
+experiment is required. Existing optional launch/matrix commands are retained
+for reproducibility, not as pending work.
