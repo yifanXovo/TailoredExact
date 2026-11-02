@@ -1,0 +1,12 @@
+{
+  "UTC": "2026-11-02T19:51:24.877397+00:00",
+  "failed_fee": "reader_zero_GD_real_sealed_sample",
+  "Optimize": 0,
+  "Native_load": 0,
+  "reason": "Full accepted verification refuses reentry after closeout. Replaced by targeted saved-call/ledger and hash checks; no closeout was deleted or bypassed.",
+  "early_guard_added": true,
+  "producer_seals_and_verification_component_hashes_unchanged": true,
+  "derived_row_evidence_note": "The failed wrapper invoked legacy root arithmetic before the old immutable guard; only round147_offline_root_rows.json was regenerated with the same domain/coefficient content and a new arithmetic timing. It is a postverification derivative, not a producer/endpoint/closeout file.",
+  "derived_file_SHA": "0db03871b7e3367139adbce1dbfb410bdc4381db4a80547811031155153b2367",
+  "actual_success": "qualification_reader_real_source_binding.json"
+}

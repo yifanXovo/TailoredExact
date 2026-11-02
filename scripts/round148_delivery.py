@@ -64,8 +64,9 @@ def pack():
     diagnostics += [p for folder in (OUT/'fees').iterdir() if folder.name not in armfees for p in files(folder)]
     archive('diagnostics_qualification_failures.zip',diagnostics)
     source=[*ROOT.glob('scripts/round148*'),ROOT/'scripts/paper_s2_shared_s.py',
-        ROOT/'include/Round148Research.hpp',ROOT/'config/gi_tbc_shared_s_round148.json',ROOT/'.gitattributes']
+        ROOT/'include/Round148Research.hpp',ROOT/'config/gi_tbc_shared_s_round148.json',ROOT/'.gitattributes',ROOT/'.gitignore']
     source += [ROOT/p for p in ('src/main.cpp','src/PaperExternalGiniTree.cpp','src/GurobiBaseline.cpp')]
+    source.append(ROOT/'docs/round148_research.md')
     archive('new_source_and_helpers.zip',source)
     excluded={'carrier_manifest.json','publication_pin.json','PR_delivery.json','PR_readback.json','PR_description.md',
         'public_restore_receipt.json','public_attempt_history.json','cleanup_record.json','public_restore_owner.json','delivery_costs.json'}
@@ -82,6 +83,31 @@ def pack():
         old_large_history_duplicated=False,commercial_binaries_or_licenses_published=False,
         Optimize=0,Native_load=0,compile=0,seconds=time.perf_counter()-tick))
     print(json.dumps(dict(archives=len(archives),members=sum(len(v) for v in index.values()),seconds=time.perf_counter()-tick)))
+
+
+def scan():
+    idle();tick=time.perf_counter();manifest=read(OUT/'carrier_manifest.json')
+    patterns=[re.compile(p.encode(),re.M) for p in (
+        r'^-----BEGIN(?: [A-Z]+)* PRIVATE KEY-----$',
+        r'gh[pousr]_[A-Za-z0-9]{30,}',r'github_pat_[A-Za-z0-9_]{30,}',
+        r'sk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{32,}',
+        r'AKIA[0-9A-Z]{16}',r'AIza[0-9A-Za-z_-]{35}')]
+    checked=0;hits=[];forbidden=[]
+    for item in manifest['archives']:
+        path=ROOT/item['path'];assert sha(path)==item['SHA256']
+        with zipfile.ZipFile(path) as z:
+            for name in z.namelist():
+                if Path(name).suffix.lower() in {'.exe','.dll','.lic','.o','.obj','.a','.lib','.pyc'}:forbidden.append(name)
+                data=z.read(name)
+                if name.endswith('.gz'):data=gzip.decompress(data)
+                checked+=1
+                if any(p.search(data) for p in patterns):hits.append(name)
+    assert not hits and not forbidden,(hits,forbidden)
+    write(OUT/'publication_safety_check.json',dict(PASS=True,UTC=utc(),archives=len(manifest['archives']),
+        all_carrier_members_checked=checked,credential_marker_hits=hits,forbidden_binaries_or_licenses=forbidden,
+        no_secret_contents_printed=True,Optimize=0,Native_load=0,compile=0,seconds=time.perf_counter()-tick,
+        helper_SHA256=sha(__file__)))
+    print(json.dumps(dict(PASS=True,members=checked,seconds=time.perf_counter()-tick)))
 
 
 def public(commit):

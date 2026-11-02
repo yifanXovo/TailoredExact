@@ -1,0 +1,34 @@
+{
+  "UTC": "2026-11-02T21:24:40.811720+00:00",
+  "charged_new_experiment_seconds": 9670.619385000728,
+  "ceiling_seconds": 18000,
+  "experiment": {
+    "G1_seconds": 9670.619385000728,
+    "remaining_G1_seconds": 8329.380614999272,
+    "by_category": {
+      "diagnostic": 140.77058490104048,
+      "native": 9529.848800099688
+    },
+    "limits": {
+      "diagnostic": 18000.0,
+      "native": 18000.0
+    },
+    "category_remaining": {
+      "diagnostic": 17859.22941509896,
+      "native": 8470.151199900312
+    },
+    "separately_reported_seconds": 45.50021379976533,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "build_seconds_separate": 45.50021379976533,
+  "standalone_LP_Optimize": 5,
+  "complete_Native_Optimize": 28,
+  "complete_Native_returned": 28,
+  "includes_all_own_H_construction_solves_qualification_failures_necessary_verification": true,
+  "nested_H_LP_MIP_Runtime_Work_not_added": true,
+  "historical_cost_not_recharged": true,
+  "pure_math_authoring_and_public_IO_separate": true,
+  "unmetered_independent_review_observations": "infra/external_costs.json",
+  "conservative_unmeasured_review_overhead_reserve_seconds": 5.0
+}

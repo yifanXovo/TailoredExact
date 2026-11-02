@@ -1,0 +1,244 @@
+{
+  "schema": "round148-independent-evidence-review-v1",
+  "PASS": true,
+  "UTC": "2026-11-02T18:24:01.275074+00:00",
+  "reviewer": "/root/round148_independent_review",
+  "implementation_SHA256": "305d65ec416cdfbc3f765ad64f1f6554720de5b98adc0ce999c1857894744d14",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "seconds": 1.0715437999460846,
+  "checked_LPs": [
+    {
+      "domain": "K-20-S_base",
+      "iteration": 1,
+      "original_rows": 6639,
+      "original_columns": 3096,
+      "original_NZ": 38639,
+      "added_rows": [
+        "r148_shared_S_1"
+      ],
+      "independently_parsed_original_semantics_identical": true,
+      "actual_signed_row_coefficients_valid": true,
+      "actual_coefficients_equal_declared": true,
+      "independent_full_matrix_residual": 6.8833827526759706e-15,
+      "independent_objective": 0.2382795887506511,
+      "old_L": 0.2360103023423648,
+      "gain": 0.002269286408286303,
+      "new_row_NZ": 450,
+      "Native_call_and_return_match": true,
+      "exact_rational_optimality_certificate_claim": false
+    },
+    {
+      "domain": "K-20-S_joint",
+      "iteration": 1,
+      "original_rows": 7969,
+      "original_columns": 3758,
+      "original_NZ": 43961,
+      "added_rows": [
+        "r148_shared_S_1"
+      ],
+      "independently_parsed_original_semantics_identical": true,
+      "actual_signed_row_coefficients_valid": true,
+      "actual_coefficients_equal_declared": true,
+      "independent_full_matrix_residual": 2.0095036745715333e-14,
+      "independent_objective": 0.2415117480783027,
+      "old_L": 0.23905218467540965,
+      "gain": 0.00245956340289305,
+      "new_row_NZ": 450,
+      "Native_call_and_return_match": true,
+      "exact_rational_optimality_certificate_claim": false
+    },
+    {
+      "domain": "K-20-S_stock",
+      "iteration": 1,
+      "original_rows": 6643,
+      "original_columns": 3096,
+      "original_NZ": 38763,
+      "added_rows": [
+        "r148_shared_S_1"
+      ],
+      "independently_parsed_original_semantics_identical": true,
+      "actual_signed_row_coefficients_valid": true,
+      "actual_coefficients_equal_declared": true,
+      "independent_full_matrix_residual": 6.912159733474255e-11,
+      "independent_objective": 0.25557049581674857,
+      "old_L": 0.2510161099222611,
+      "gain": 0.004554385894487478,
+      "new_row_NZ": 450,
+      "Native_call_and_return_match": true,
+      "exact_rational_optimality_certificate_claim": false
+    },
+    {
+      "domain": "K-35-U_base",
+      "iteration": 1,
+      "original_rows": 23626,
+      "original_columns": 10007,
+      "original_NZ": 163959,
+      "added_rows": [
+        "r148_shared_S_1"
+      ],
+      "independently_parsed_original_semantics_identical": true,
+      "actual_signed_row_coefficients_valid": true,
+      "actual_coefficients_equal_declared": true,
+      "independent_full_matrix_residual": 9.094947017729282e-12,
+      "independent_objective": 0.2095681590426218,
+      "old_L": 0.20418702816386647,
+      "gain": 0.00538113087875533,
+      "new_row_NZ": 537,
+      "Native_call_and_return_match": true,
+      "exact_rational_optimality_certificate_claim": false
+    },
+    {
+      "domain": "R-X20-S-T1_base",
+      "iteration": 1,
+      "original_rows": 6025,
+      "original_columns": 2480,
+      "original_NZ": 35278,
+      "added_rows": [
+        "r148_shared_S_1"
+      ],
+      "independently_parsed_original_semantics_identical": true,
+      "actual_signed_row_coefficients_valid": true,
+      "actual_coefficients_equal_declared": true,
+      "independent_full_matrix_residual": 2.6645352591003757e-15,
+      "independent_objective": 0.38163629527926685,
+      "old_L": 0.3650046456214907,
+      "gain": 0.016631649657776137,
+      "new_row_NZ": 144,
+      "Native_call_and_return_match": true,
+      "exact_rational_optimality_certificate_claim": false
+    }
+  ],
+  "fee_rows": [
+    {
+      "label": "compile_GurobiBaseline",
+      "kind": "build",
+      "exit_code": 0,
+      "seconds": 0.0
+    },
+    {
+      "label": "compile_main",
+      "kind": "build",
+      "exit_code": 0,
+      "seconds": 0.0
+    },
+    {
+      "label": "compile_PaperExternalGiniTree",
+      "kind": "build",
+      "exit_code": 0,
+      "seconds": 0.0
+    },
+    {
+      "label": "compile_rows",
+      "kind": "build",
+      "exit_code": 0,
+      "seconds": 0.0
+    },
+    {
+      "label": "compile_writer",
+      "kind": "build",
+      "exit_code": 0,
+      "seconds": 0.0
+    },
+    {
+      "label": "independent_LP_evidence_final",
+      "kind": "diagnostic",
+      "exit_code": 1,
+      "seconds": 1.1835227999836206
+    },
+    {
+      "label": "link_production",
+      "kind": "build",
+      "exit_code": 0,
+      "seconds": 0.0
+    },
+    {
+      "label": "LP_K-20-S_base_1",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 1.5365824000909925
+    },
+    {
+      "label": "LP_K-20-S_joint_1",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 1.3475961000658572
+    },
+    {
+      "label": "LP_K-20-S_stock_1",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 1.1694005001336336
+    },
+    {
+      "label": "LP_K-35-U_base_1",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 3.6073664999566972
+    },
+    {
+      "label": "LP_R-X20-S-T1_base_1",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 0.9151030001230538
+    },
+    {
+      "label": "qualification_001",
+      "kind": "diagnostic",
+      "exit_code": 1,
+      "seconds": 63.68157479981892
+    },
+    {
+      "label": "qualification_arithmetic",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 0.9130652998574078
+    },
+    {
+      "label": "qualification_arithmetic_final",
+      "kind": "diagnostic",
+      "exit_code": 1,
+      "seconds": 0.1855995999649167
+    },
+    {
+      "label": "qualification_arithmetic_final02",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 0.757498900173232
+    },
+    {
+      "label": "qualification_native_writer",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 0.3539799000136554
+    },
+    {
+      "label": "qualification_oracle",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 0.20377900009043515
+    },
+    {
+      "label": "qualification_postverify01",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 3.712823399808258
+    },
+    {
+      "label": "qualification_writer_cpp",
+      "kind": "diagnostic",
+      "exit_code": 0,
+      "seconds": 0.6787713000085205
+    }
+  ],
+  "current_outer_pending": [
+    {
+      "label": "independent_LP_evidence_final02",
+      "kind": "diagnostic",
+      "parent_closes_and_charges_after_auditor_exit": true,
+      "current_seconds_not_added_to_audited_closed_fee_sum": true
+    }
+  ],
+  "summed_G1_seconds": 80.2466635000892
+}

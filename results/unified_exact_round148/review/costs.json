@@ -1,0 +1,41 @@
+{
+  "schema": "round148-independent-review-cost-observations-v1",
+  "reviewer": "/root/round148_independent_review",
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "not_already_in_parent_meter": true,
+  "necessary_verification": [
+    {
+      "label": "independent_preflight_original_MPS_and_proposed_rows",
+      "exact_process_outer_seconds_available": false,
+      "observed_enclosing_interval_start_UTC": "2026-11-02T18:11:14.5678382Z",
+      "observed_enclosing_interval_end_UTC": "2026-11-02T18:11:30.7037601Z",
+      "observation_basis": "Review script creation occurred before launch; receipt final mtime occurred after completion of its mathematical and complete-MPS checks. This enclosing interval is conservatively charged, not represented as exact process runtime.",
+      "charged_seconds": 16.1359219,
+      "existing_receipt": "review/preflight.json"
+    },
+    {
+      "label": "independent_first_five_actual_MPS_row_and_point_audit",
+      "measured_full_audit_body_seconds": 31.13864569994621,
+      "exact_process_outer_seconds_available": false,
+      "charged_seconds": 31.13864569994621,
+      "existing_receipt": "review/independent_evidence.json",
+      "observation_basis": "Script perf_counter spans all original/new MPS parsing, rational coefficient checks, full primal residual/objective recomputation, call/return and fee receipt checks. Python startup and final JSON serialization are outside this observed interval; report that limitation rather than invent exact process time.",
+      "followup": "Parent will meter one final execution of the optimized equivalent auditor. Its fee is separate and must not recharge this observation.",
+      "audit_implementation_change": "Only hoist construction of the row-name set outside the per-column membership loop. No change to mathematical checks or production. Retain this first audit cost; final metered run binds the final helper hash."
+    }
+  ],
+  "necessary_verification_charged_seconds": 47.27456759994621,
+  "separate_offline_mathematics": [
+    {
+      "label": "independent_Fraction_oracle_and_strict_fixture",
+      "actual_tool_process_outer_seconds": 0.5153791,
+      "internal_Fraction_domains_seconds": 0.3670987000223249,
+      "already_in_parent_meter": false,
+      "charged_experiment_seconds": 0,
+      "receipt": "review/independent_math.json"
+    }
+  ],
+  "informal_read_only_inspection": "Review reasoning and small source/receipt reads are offline mathematics/document review; they are not Native optimizations or nested producer fees. No claim of an exact unmeasured OS-process total is made."
+}

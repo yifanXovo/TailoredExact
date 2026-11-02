@@ -1,0 +1,101 @@
+{
+  "schema": "round148-independent-preflight-v1",
+  "PASS": true,
+  "UTC": "2026-11-02T18:11:30.703246+00:00",
+  "reviewer": "/root/round148_independent_review",
+  "independent_nonimplementer": true,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "checked_rows": [
+    {
+      "role": "K-20-S",
+      "carrier": "base",
+      "new_rows": 1,
+      "new_columns": 0,
+      "source_model_SHA": "62e7b10799e157614c3ff8ae06d849141915966c2bd918e5cbbe6853c5486bd6",
+      "source_point_SHA": "e9b1b811f9eed2a2d9b0dd33449fcf9717c4c5f3aa5d8a684848afb8132dceca",
+      "actual_proposed_RHS_coefficients_independently_derived": true,
+      "signed_downward_transport_correct": true,
+      "all_selectors_nonnegative_bounded": true,
+      "old_GD_rows_retained": true,
+      "transported_violation": 0.056249267857404465,
+      "new_row_NZ": 450
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "joint",
+      "new_rows": 1,
+      "new_columns": 0,
+      "source_model_SHA": "35acc0fab87b8a0283e663731f3582043b44cefae8a4f3f0c70f29b422a1e806",
+      "source_point_SHA": "222efdabd3b65b0f8a844b899dd0b67e1414e4686638edb9929843193113351e",
+      "actual_proposed_RHS_coefficients_independently_derived": true,
+      "signed_downward_transport_correct": true,
+      "all_selectors_nonnegative_bounded": true,
+      "old_GD_rows_retained": true,
+      "transported_violation": 0.05051436062465712,
+      "new_row_NZ": 450
+    },
+    {
+      "role": "K-20-S",
+      "carrier": "stock",
+      "new_rows": 1,
+      "new_columns": 0,
+      "source_model_SHA": "3af2818187efaccab3191901dc53d663bdfc0933beec2a7cf239ddeabae65345",
+      "source_point_SHA": "1ded8c0d0983f418ef33d905ae1b6a250f55e574d47bc58b49144f0712b66715",
+      "actual_proposed_RHS_coefficients_independently_derived": true,
+      "signed_downward_transport_correct": true,
+      "all_selectors_nonnegative_bounded": true,
+      "old_GD_rows_retained": true,
+      "transported_violation": 0.04435873802368066,
+      "new_row_NZ": 450
+    },
+    {
+      "role": "K-35-U",
+      "carrier": "base",
+      "new_rows": 1,
+      "new_columns": 0,
+      "source_model_SHA": "00112d310618b68bc79853c2451ae4069cef2f3b09b218d11222682af4216896",
+      "source_point_SHA": "43cc4ad35ef30af0b1642c400df40ef6a6e5db7ddde61add4014a2c5345f5364",
+      "actual_proposed_RHS_coefficients_independently_derived": true,
+      "signed_downward_transport_correct": true,
+      "all_selectors_nonnegative_bounded": true,
+      "old_GD_rows_retained": true,
+      "transported_violation": 0.02980326608942642,
+      "new_row_NZ": 537
+    },
+    {
+      "role": "R-X20-S-T1",
+      "carrier": "base",
+      "new_rows": 1,
+      "new_columns": 0,
+      "source_model_SHA": "8d6da1f7caa7621bb2c6ddc4249bd7eb7e520a1d8fac8acb2e6337d1ed765199",
+      "source_point_SHA": "2b27a7415ab6486c345fff69177b0c78598b97a3aeffabafcc4240cff850bbb8",
+      "actual_proposed_RHS_coefficients_independently_derived": true,
+      "signed_downward_transport_correct": true,
+      "all_selectors_nonnegative_bounded": true,
+      "old_GD_rows_retained": true,
+      "transported_violation": 0.10722306353695746,
+      "new_row_NZ": 144
+    }
+  ],
+  "derivation_valid": true,
+  "low_only_three_point_oracle": true,
+  "same_station_shared_slope": true,
+  "strict_fixture_verified": "independent_math.json",
+  "experiment_grid": "Exactly the five saved R146 complete LP domains, three physical instances; one added affine row each, no baseline re-solve, Seed0/Threads1.",
+  "E1_objective_matrix_bounds_cutoff_semantics_retained_by_runner": true,
+  "actual_Native_readback_checked_before_Optimize_by_runner": true,
+  "budget": "Five reservations of 180s, each 120s Native cap; all qualification and failures metered in the 18000s outer ledger.",
+  "finite_decision_gate": "Results before E2; at most two domains may receive iterations2/3. No automatic full algorithm, second research family or matrix expansion.",
+  "findings": [],
+  "resolved_observations": [
+    "Exact moment-domain flag now uses rational inequalities",
+    "Dual objective is explicitly a numerical diagnostic, not an extra rational certificate"
+  ],
+  "identities": {
+    "round148_math.py": "30d76c5a75b36c1e4d7328a6ae208b9015013ee1ab21b8938df19a9995d52ef1",
+    "round148_lp.py": "0e260bd11c3111ca8226d35981af7129b7aaca7cc599be86fc929dcc2658c062",
+    "round148_common.py": "e363cf1cc0660aebee97a7b6d2f426bbe27a1a79dd366369f03253bcadd2c4ac"
+  }
+}

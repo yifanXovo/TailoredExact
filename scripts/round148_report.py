@@ -120,6 +120,13 @@ incumbent trajectories use producer availability clocks in
 No unique causal allocation among static rows, Native branching and AM
 is inferred from this complete comparison.
 
+The per-arm T_produce/T_verify/T_total retain the accepted R134 reader's
+clock boundary. The separate fee_outer_seconds also covers current entry
+startup, wrapper checks and necessary supplementary validation; all of
+that elapsed outer cost is charged once in G1. The inherited clock fields
+are not silently widened between stages, and their small differences on
+open arms are not presented as proof-speed changes.
+
 ## Historical counterpoints retained
 
 R147 D remains a limited uniform paper-enhancement candidate, not the
@@ -149,6 +156,22 @@ reconstruction. All calls remain in model/Native/quality/lifecycle/cost
 audits, and the same sealed producer was reverified without Optimize.
 Other CLI/qualification/reviewer-script failures are retained and charged.
 No failed search is rerun to obtain a better endpoint.
+
+After K35, a targeted zero-GD context correction selects the current
+immutable source by its SHA, avoiding ambiguous generation/suffix sorting.
+Fixtures include a real saved zero-lower model and an explicitly incomplete
+positive-S support schema; synthetic call-binding unit stubs are not Native
+or performance evidence. A real sealed sample verifies SHA/leaf/log and
+actual controller-LP kind: the raw pre-relaxation integer-precondition flag
+is 1 and must not be misread as a non-LP solve. An attempted full reentry of
+an already closed short qualification was refused. No closeout was deleted
+or bypassed; the replacement only checks saved call/ledger and immutable
+hashes. The legacy wrapper had regenerated one auxiliary root-row evidence
+file before its old guard, with identical domain/coefficients and a new
+arithmetic timing. This derivative change is disclosed in
+[the disposition](engineering/reader_closed_reentry_disposition.json);
+producer seals and accepted verification component hashes remain unchanged.
+An early R148 guard now rejects closed reentry before such derivative writes.
 
 '''
     report+=f"All {full['complete_Native_Optimize']} entered complete/qualification Native calls returned; five standalone diagnostic LP calls are separate. Charged new outer cost is **{cost['charged_new_experiment_seconds']:.9f}s / 18000s**, including all own-H, construction, solve, failure and necessary verification costs once. Builds are {cost['build_seconds_separate']:.9f}s separately. The charge includes conservative reviewer enclosing intervals and a disclosed 5s allowance for unmeasured startup/serialization, rather than pretending those are exact process timings. Nested Native runtime/Work is not charged twice. Pure offline mathematics, document authoring and public I/O are separate; old R146/R147 fees remain historical.\n\n"

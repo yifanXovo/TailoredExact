@@ -1,0 +1,98 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "Native": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "facts": [
+    {
+      "tag": "positive",
+      "Start": "physical_start",
+      "complete": true,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "positive",
+      "Start": "nonminimal_epigraph",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "positive",
+      "model": "on",
+      "Native_readback": true,
+      "new_rows": 1
+    },
+    {
+      "tag": "positive",
+      "model": "child_on",
+      "Native_readback": true,
+      "new_rows": 1
+    },
+    {
+      "tag": "fixed",
+      "Start": "physical_start",
+      "complete": true,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "fixed",
+      "Start": "nonminimal_epigraph",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "fixed",
+      "model": "on",
+      "Native_readback": true,
+      "new_rows": 1
+    },
+    {
+      "tag": "zero_lower",
+      "Start": "physical_start",
+      "complete": true,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_lower",
+      "Start": "nonminimal_epigraph",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_lower",
+      "model": "on",
+      "Native_readback": true,
+      "new_rows": 0
+    }
+  ]
+}

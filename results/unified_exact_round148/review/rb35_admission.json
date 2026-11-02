@@ -1,0 +1,145 @@
+{
+  "schema": "round148-independent-formal-admission-v1",
+  "UTC": "2026-11-02T19:54:56.374018+00:00",
+  "decision": "ACCEPT",
+  "PASS": true,
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/round148_independent_review",
+  "matrix_SHA": "4a2bf279cfb1a10e5dd11233ad835b30348a032c76ed6944d9f96d2b855d842a",
+  "candidate_manifest_SHA": "226b1bcb6f46993b495872ceab814e65dd55d8a5e4164e22360fed33499e4f8e",
+  "PE_SHA": "4beb12f8a3de992691fc4ae229fdaff43e35ef00ce29f9f2bd3cb139af792ac2",
+  "production_source_commit": "d5868014c8868cdc305e6ed798bf0d5c86a1bda9",
+  "nominal_new_caps": 4800,
+  "charged_before_admission": 4901.2360255005215,
+  "remainder_before_admission": 13098.763974499478,
+  "qualifications": {
+    "producer_seal_SHA": "d3be894dd897ff2a315feebd9f09496d688546ea15e243b1b7da8cac0f3f5d85",
+    "actual_calls": 6,
+    "returned_calls": 6,
+    "actual_models": 4,
+    "actual_source_call": 1,
+    "source_model_SHA": "1a7cb5641864088f9c8438bef91c8c45854b8bb81e21d81cf90fdaf64fdce8e7",
+    "formal_model_SHA": "741efb64740ef36b2e0afab04b49a1f15011a537678f8955391d8692d4cb4963",
+    "independent_actual_row": {
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 451,
+      "conservative_box_loss": 2.0144086483134366e-12
+    },
+    "root_LP_before": 0.2360103023423648,
+    "root_LP_after": 0.23827958875065106,
+    "old_source_point_and_log_retained": true,
+    "actual_cache_discard_proved_by_nonreuse": true,
+    "complete_H_Start_quality_scope_lifecycle_closeout": true,
+    "reader_view_review": "Only the never-installed source root is omitted from LP-status/cover pairing. It remains in all complete Native/model/quality/lifecycle/cost checks; the control trace and parent-child ledger use the new root. This corrects an old one-LP-per-status assumption without changing production or optimizing again.",
+    "failure_and_recovery_retained": true
+  },
+  "independent_driver_fraction_checks": [
+    {
+      "case": "fixed_denominator",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 2,
+      "conservative_box_loss": 2.868076146948321e-16
+    },
+    {
+      "case": "holes",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 7,
+      "conservative_box_loss": 1.0636379016658238e-15
+    },
+    {
+      "case": "K-20-S_base",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 451,
+      "conservative_box_loss": 2.0144086483134366e-12
+    },
+    {
+      "case": "K-20-S_joint",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 451,
+      "conservative_box_loss": 2.015896373351529e-12
+    },
+    {
+      "case": "K-20-S_stock",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 451,
+      "conservative_box_loss": 2.0213520754498793e-12
+    },
+    {
+      "case": "K-35-U_base",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 539,
+      "conservative_box_loss": 3.0250539552626105e-12
+    },
+    {
+      "case": "moment_upper",
+      "old_GD_rows": 0,
+      "kind": "moment_upper",
+      "independently_checked_moment_station_candidates": [
+        1
+      ]
+    },
+    {
+      "case": "R-X20-S-T1_base",
+      "old_GD_rows": 2,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 143,
+      "conservative_box_loss": 4.769504306263009e-15
+    },
+    {
+      "case": "strict_zero_old_GD",
+      "old_GD_rows": 0,
+      "kind": "affine_low",
+      "independently_recomputed_actual_binary64_slopes": true,
+      "conservative_RHS_coefficients": 4,
+      "conservative_box_loss": 1.304512053934559e-15
+    },
+    {
+      "case": "zero_domain",
+      "omitted_positive_S_unproved": true
+    }
+  ],
+  "conditional_stage_reason": {
+    "prior_role": "K-35-U",
+    "D_U": 0.6767988451958106,
+    "D_L": 0.545729444783031,
+    "shared_S_U": 0.6799175197270872,
+    "shared_S_L": 0.5582838556571678,
+    "delta_U": 0.0031186745312766773,
+    "delta_L": 0.012554410874136779,
+    "delta_relative_gap": -0.014766057692900486,
+    "judgment": "The completed K35 pair has a small incumbent loss and a genuine supported-L/gap benefit. This is a tradeoff, not dominance or faster convergence. It justifies the conditional RB35 pressure pair to test whether the same uniform mechanism preserves D incumbent quality; no automatic wider matrix follows."
+  },
+  "post_K35_reader_repair": {
+    "PASS": true,
+    "source_SHA_context_zero_GD": true,
+    "raw_integer_flag_not_misused_as_LP_kind": true,
+    "targeted_real_binding_checked": true,
+    "reader_only_no_production_or_PE_change": true,
+    "closed_reentry_failure_retained": true,
+    "immutable_guard_not_bypassed": true,
+    "derivative_rewrite_disclosed": true,
+    "derivative_scope": "Only the legacy postverification arithmetic derivative was rewritten before the old guard; same coefficient/domain content with new timing. Producer and endpoint/closeout hashes stayed fixed; no claim that every derivative byte stayed identical."
+  },
+  "actual_physical_pair": "Same new PE, own complete H, original physical problem and uniform one-row/one-added-LP mechanism; D control differs only in the default-off switch.",
+  "findings": [],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "seconds": 1.151875999988988,
+  "execution_hash": "e2926663a0ecf1a4f9cfda7ca6f2ff93f7d3d4b259807096cde8b23b57b19700",
+  "next_gate": "Return and validate both complete RB35 pressure arms. Decide from the actual incumbent/bound tradeoff; do not automatically open K20, RX20, another seed, or a rescue mechanism. Preserve the entered cap windows."
+}

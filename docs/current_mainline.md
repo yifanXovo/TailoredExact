@@ -121,3 +121,15 @@ positive/negative evidence, source/PE identities and the separate publication ch
 
 The [Round147 standalone-GD study](round147_research.md) fills the missing K20 B/D and RB35 D cells using the unchanged R146 PE and seven sealed same-PE references. Seven new own-H positions establish real standalone hard-role incumbent gains: RB35 U improves 2.54% and K35 U improves 3.13%, with smaller relative gaps on both. K35 supported L is 2.03% lower, K20 does not gain certification, and RX20 retains certification with a small 2.34s delay. Recommend one uniform standalone-GD paper enhancement candidate for author review, while preserving stable R137 and the strong historical STOCK/combination references. The claim is limited to four known Seed0 roles, with no instance-specific switching.
 The [decision](../results/unified_exact_round147/candidate_decision.json) and [delivery record](../results/unified_exact_round147/RESUME.md) preserve the actual scope and identities.
+
+<!-- Round148 evidence -->
+
+The [Round148 common-S affine study](round148_research.md) establishes a valid
+low-deviation first-moment family and positive one-row increments on all five
+matched GD LP domains (three instances). Same-new-PE K35 search gains supported
+L/gap at a small U cost, but RB35 loses 10.58% in physical U and has a larger
+signed/relative gap despite slightly higher L. The tested one-row own-root
+implementation is [research only](../results/unified_exact_round148/candidate_decision.json);
+no proof/seed/placement rescue is opened. R147 D remains a limited paper
+candidate and R137 remains stable. [Actual delivery](../results/unified_exact_round148/RESUME.md)
+preserves production, wrapper, scientific and publication identities.
