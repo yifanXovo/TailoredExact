@@ -1,13 +1,13 @@
 {
-  "UTC": "2026-11-02T14:55:35.031165+00:00",
-  "state": "K35_ADMITTED_NOT_STARTED",
-  "stage_RX_SHA": "7171cc6b5a8b92c8ae301d679e5c12b76d3bf9f3469dedb8bb277132fa633fd5",
+  "UTC": "2026-11-02T16:20:42.952351+00:00",
+  "state": "SCIENCE_COMPLETE_FINAL_REVIEW_AND_DELIVERY_PENDING",
+  "decision": "RECOMMEND_D_AS_UNIFORM_PAPER_ENHANCEMENT_CANDIDATE",
   "budget": {
-    "G1_seconds": 4860.266817100009,
-    "remaining_G1_seconds": 13139.733182899992,
+    "G1_seconds": 9613.600887799763,
+    "remaining_G1_seconds": 8386.399112200237,
     "by_category": {
       "diagnostic": 3.217868500051704,
-      "native": 4857.048948599957
+      "native": 9610.383019299712
     },
     "limits": {
       "diagnostic": 18000.0,
@@ -15,12 +15,16 @@
     },
     "category_remaining": {
       "diagnostic": 17996.78213149995,
-      "native": 13142.951051400043
+      "native": 8389.616980700288
     },
     "separately_reported_seconds": 0.0,
     "unclosed": [],
     "nested_H_LP_MIP_Work_not_added": true
   },
-  "next_command": "D:/msys64/ucrt64/bin/python.exe -B scripts/round147_campaign.py run extension",
+  "entered_new_arms": 7,
+  "all_new_arms_verified": true,
+  "new_Native_calls_returned": 34,
+  "no_other_experiment_queued": true,
+  "next_action": "Generate paper/report, obtain independent final review, semantic checks, pack, commit/push, create English Draft PR, anonymous public recovery, bounded cleanup and final readback",
   "never_repeat_existing_fee_or_sealed_arm": true
 }

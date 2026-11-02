@@ -191,6 +191,36 @@ def public(commit):
                           seconds=receipt['seconds'])))
 
 
+def prbody(commit):
+    idle()
+    assert re.fullmatch('[0-9a-f]{40}', commit)
+    full, cost, decision = [read(OUT / name) for name in ['reports/full.json', 'cost_report.json', 'candidate_decision.json']]
+    assert not full['pending'] and read(OUT / 'review/final_scientific_review.json')['PASS']
+    manifest = read(OUT / 'candidate_manifest.json')
+    base = read(OUT / 'PR_base_selection.json')
+    url = f'https://github.com/yifanXovo/TailoredExact/blob/{commit}/results/unified_exact_round147'
+    text = f'''The existing direct Gini-deviation rows had complete-search evidence only on top of STOCK. This adds a separate standalone GD entry/profile and a four-cell reader, preserving the old SD/S entry meanings. Production C++, PE and mathematical construction are unchanged: at most two root-generated selector rows, no new columns or source solves. The reader also handles legitimate zero-row omission using the actual original model and root metadata.
+
+{decision['core_discussion']}
+
+{decision['extension_discussion']}
+
+Decision: **{decision['decision']}**. {decision['decision_discussion']}
+
+The study has {len(full['new_arms'])} new complete own-H positions and seven verified sealed same-PE R146 references. Every new arm retains Seed0/Threads1, H seed20260626 and full physical, Start, scope, quality, lifecycle and R134 proof validation. All {full['new_Native_Optimize']} new Native Optimize calls returned. No standalone LP, source optimization, production build, repeated Native health qualification, placement grid or extra seed was opened. Actual CLI/zero-row fixture checks use zero Optimize and Native load. Charged new outer cost is **{cost['charged_new_experiment_seconds']:.9f} seconds** of 18000, including qualification/failure costs and postverification without nested double counting. Historical fees remain historical; cross-round identity does not assume equal host load. Open certificates are not replaced by caps, and no wall-clock factorial interaction is claimed.
+
+Fixed science `{commit}`:
+
+- [Scientific report]({url}/final_report.md), [decision]({url}/candidate_decision.json), [four-cell results]({url}/reports/four_cell_evidence.csv)
+- [Paper section]({url}/manuscript.md), [mathematics]({url}/mathematical_analysis.md), [verified trajectories]({url}/reports/verified_U_trajectories.csv)
+- [Independent review]({url}/review/final_scientific_review.json), [cost]({url}/cost_report.json), [reuse index]({url}/reuse_index.json), [carriers]({url}/carrier_manifest.json)
+
+Measured production source is `{manifest['source_commit']}`; PE SHA256 is `{manifest['production_PE_SHA']}`. Wrapping, scientific and late delivery commits have separate identities. Stable R137, all earlier entries/profiles and historical results retain their bytes. {base['explanation']}. This remains an English Draft PR; no merge, force push or old-round deletion. Anonymous bounded public byte/member recovery and post-PR current-round cleanup are recorded in the [latest delivery record](https://github.com/yifanXovo/TailoredExact/blob/codex/round147-gd-independent-value/results/unified_exact_round147/RESUME.md).
+'''
+    (OUT / 'PR_description.md').write_text(text, encoding='utf-8', newline='\n')
+    print(str(OUT / 'PR_description.md'))
+
+
 def cleanup():
     idle()
     assert read(OUT / 'public_restore_receipt.json')['PASS'] and read(OUT / 'PR_readback.json')['draft']
@@ -218,7 +248,7 @@ def cleanup():
 
 
 if __name__ == '__main__':
-    if sys.argv[1] == 'public':
-        public(sys.argv[2])
+    if sys.argv[1] in ('public', 'prbody'):
+        globals()[sys.argv[1]](sys.argv[2])
     else:
         globals()[sys.argv[1]]()

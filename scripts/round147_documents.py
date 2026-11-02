@@ -35,8 +35,8 @@ def assemble():
           number(r.get('printed_root_after_cuts_bound'), 9), number(r.get('Native_total_Work'), 8),
           r.get('native_root_simplex_iterations', '—'), number(r.get('terminal_nodes'), 9), r['actual_split_count'],
           f'{r.get("terminal_rows", "—")} / {r.get("terminal_nonzeros", "—")}'] for r in core])
-    protocol = ('B, S, D and SD all retain stable GI-TBC; S enables BOTH STOCK and D enables the two state-conditioned '
-        'GD rows. Every new arm pays for its own complete H (seed 20260626), all LP/MIP calls and mandatory physical, '
+    protocol = ('B, S, D and SD all retain stable GI-TBC; S enables BOTH STOCK and D enables the state-conditioned '
+        'GD mechanism (at most two rows on an applicable domain). Every new arm pays for its own complete H (seed 20260626), all LP/MIP calls and mandatory physical, '
         'Start, model-scope, numerical-quality, lifecycle and R134 proof verification. Gurobi Seed=0, Threads=1, '
         'MIPThreads=1 and affinity=4; timed runs are serial. M-B/VD-P, pair-only, AM=.08, depth=8, minimum width=1e-4 '
         'and AP off remain fixed. Physical horizons, original lambda and process caps are bound in the matrices. '
@@ -119,10 +119,13 @@ independently of whether formal STOCK rows are present. The production
 construction generates root coefficients once with directed arithmetic,
 omits an unproved positive-denominator domain, sets infeasible conditional
 states to zero and inherits rows only to compatible sub-supports. This
-uniform mathematical rule is unchanged. The zero-stock consequence
-\(ng\ge\sum_i s_{i0}\) closes the earlier half/half binary epigraph example
+uniform mathematical rule is unchanged. On domains where \(S>0\) is proved,
+the zero-stock consequence \(ng\ge\sum_i s_{i0}\) closes the earlier
+half/half binary epigraph example (whose \(S>0\))
 at \(g\ge1/2\); it is not a complete routing-hull result or a new general
-inequality theorem.
+inequality theorem. It does not apply at \(S=0\), where the original
+convention is \(G=0\); the production scope rule omits GD on an unproved
+positive-denominator domain.
 
 For a common fixed LP domain let B=BASE, S=STOCK, D=BASE+GD and
 SD=STOCK+GD. Their feasible sets obey \(P_{11}=P_{10}\cap P_{01}\), so
@@ -138,8 +141,9 @@ new optimization.
 
 '''
     text += protocol + compact
-    text += ('The eight core cells distinguish new B/D runs from sealed same-PE R146 references. '
-        'Additional entered roles, if any, are shown in the same table. References retain their original '
+    text += ('The table has seven new R147 arms (K20, RX20 and K35 B/D; RB35 D) and seven sealed '
+        'same-PE R146 references (K20 and RX20 S/SD; RB35 B/S/SD). In particular, RB35 B is a '
+        'cross-round sealed reference, while K20/RX20/K35 B are new R147 controls. References retain their original '
         'dates and fees; equal PE, input, objective, cap, resources and H semantics do not imply identical '
         'host load. Open T_cert values remain absent. No cap is substituted for convergence time, and '
         'the LP interaction is not applied to wall-clock certificates.\n\n')

@@ -174,3 +174,8 @@ K20 certifies about 20.52% sooner than same-PE STOCK, RX20 retains certification
 The [decision](../results/unified_exact_round146/candidate_decision.json) and
 [delivery record](../results/unified_exact_round146/RESUME.md) retain all actual
 positive/negative evidence, source/PE identities and the separate publication checks.
+
+<!-- Round147 evidence -->
+
+The [Round147 standalone-GD study](round147_research.md) fills the missing K20 B/D and RB35 D cells using the unchanged R146 PE and seven sealed same-PE references. Seven new own-H positions establish real standalone hard-role incumbent gains: RB35 U improves 2.54% and K35 U improves 3.13%, with smaller relative gaps on both. K35 supported L is 2.03% lower, K20 does not gain certification, and RX20 retains certification with a small 2.34s delay. Recommend one uniform standalone-GD paper enhancement candidate for author review, while preserving stable R137 and the strong historical STOCK/combination references. The claim is limited to four known Seed0 roles, with no instance-specific switching.
+The [decision](../results/unified_exact_round147/candidate_decision.json) and [delivery record](../results/unified_exact_round147/RESUME.md) preserve the actual scope and identities.

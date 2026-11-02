@@ -53,8 +53,11 @@ domains. Round147's zero-Optimize reader fixture uses the saved original model
 when the production block has zero rows; absence of a suffixed GD file is then
 correct. H completion before model construction is a separate valid path.
 
-For zero states the low coefficient is one, giving the universal local
-inequality \(ng\ge\sum_i s_{i0}\). It closes the R145 half/half binary example
+On a domain with \(S>0\) proved, zero states have low coefficient one, giving
+the local inequality \(ng\ge\sum_i s_{i0}\) uniformly over that domain.
+It does not apply to \(S=0\), where the existing convention is \(G=0\);
+the production positive-denominator scope rule omits GD on an unproved domain.
+The inequality closes the R145 half/half binary example (whose \(S>0\))
 at \(g\ge1/2\). This is a local integer epigraph result, with no claim about the
 complete routing hull or a new general inequality theorem.
 

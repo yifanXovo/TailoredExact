@@ -582,5 +582,31 @@
   "new_Optimize": 0,
   "Native_load": 0,
   "old_cost_not_recharged": true,
-  "old_production_and_stable_identity_retained": true
+  "old_production_and_stable_identity_retained": true,
+  "qualification_bindings": [
+    {
+      "commit": "8ec2aebe46398485019623d9b18a3e30617d4997",
+      "path": "results/unified_exact_round146/qualification_exact_rows.json",
+      "SHA256": "8ed08261bb71f7b59230b05370e0827b2e80d7558f5e589c9cce2b7665d213f5",
+      "PASS": true
+    },
+    {
+      "commit": "8ec2aebe46398485019623d9b18a3e30617d4997",
+      "path": "results/unified_exact_round146/qualification_native_writer.json",
+      "SHA256": "35772823f7852fd133a52cf8e81d75774e33da535ca44c0fac8eb0cb7e6156e3",
+      "PASS": true
+    },
+    {
+      "commit": "8ec2aebe46398485019623d9b18a3e30617d4997",
+      "path": "results/unified_exact_round146/qualification_units.json",
+      "SHA256": "c1955ab8736c26a819cb0df424b03884af806339cb89ca1e0d652599064187fd",
+      "PASS": true
+    }
+  ],
+  "LP_binding": {
+    "commit": "8ec2aebe46398485019623d9b18a3e30617d4997",
+    "path": "results/unified_exact_round146/reports/LP.json",
+    "SHA256": "87b070469e898210aec443e58e867eb525801d291362100feb6a4bfac9519200",
+    "new_Optimize": 0
+  }
 }
