@@ -1,0 +1,44 @@
+{
+  "PASS": true,
+  "UTC": "2026-11-02T13:26:23.362146+00:00",
+  "argv": [
+    {
+      "arm": "R147_core_001_K-20-S_S0_BASE",
+      "method": "BASE",
+      "STOCK": false,
+      "GD": false,
+      "normalized_argv_equal": true
+    },
+    {
+      "arm": "R147_core_002_K-20-S_S0_GD",
+      "method": "GD",
+      "STOCK": false,
+      "GD": true,
+      "normalized_argv_equal": true
+    },
+    {
+      "arm": "R147_core_003_R-B35-S-T2_S0_GD",
+      "method": "GD",
+      "STOCK": false,
+      "GD": true,
+      "normalized_argv_equal": true
+    }
+  ],
+  "zero_lower_fixture": {
+    "source_commit": "8ec2aebe46398485019623d9b18a3e30617d4997",
+    "source": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round146\\qualification\\writer\\zero_lower",
+    "on_SHA": "4570b32a3237bb3480c8298400ed115c72fdcf0a10b91d468c44761f37a1d487",
+    "off_SHA": "4570b32a3237bb3480c8298400ed115c72fdcf0a10b91d468c44761f37a1d487",
+    "actual_models_equal": true,
+    "GD_rows": 0,
+    "renamed_GD_file_required": false,
+    "actual_root_metadata_used": true,
+    "exact_arithmetic_driver_reused": true
+  },
+  "H_finished_without_model": true,
+  "old_entry_profile_unchanged": true,
+  "no_recompile": true,
+  "no_repeated_health": true,
+  "Optimize": 0,
+  "Native_load": 0
+}
