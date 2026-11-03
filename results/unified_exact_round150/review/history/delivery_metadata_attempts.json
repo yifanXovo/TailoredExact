@@ -1,0 +1,32 @@
+{
+  "UTC": "2026-11-03T16:43:36.592751+00:00",
+  "attempts": [
+    {
+      "source": "check_delivery_metadata_before_index_accounting.py",
+      "process_outer_seconds": 0.1337639,
+      "exit_code": 1,
+      "reason": "Review helper assumed compressed_bytes meant seven zip files only. The actual aggregate correctly includes member_index.json.gz; adding its1414589 bytes closes23526310 exactly.",
+      "source_SHA256": "e32d5f0f0c6037d4472c78081ba858438bfa340f0e063976a9ba2534c8ab230a",
+      "stderr_file": "delivery_metadata_attempt1_stderr_from_tool_transcript.txt",
+      "stderr_SHA256": "106672bd3f574d97682796c618af8570665a01c796aaa24030ddf48ab9057061"
+    },
+    {
+      "source": "check_delivery_metadata_before_index_schema.py",
+      "process_outer_seconds": 0.1582769,
+      "exit_code": 1,
+      "reason": "Review helper assumed a top-level members key. The actual member index is a mapping from each archive path to its member list; the corrected metadata-only count sums those seven lists.",
+      "source_SHA256": "da06f48579d428dfe80842e1948a767e3c22da485b4a7e9cfa6a82de9d318cdd",
+      "stderr_file": "delivery_metadata_attempt2_stderr_from_tool_transcript.txt",
+      "stderr_SHA256": "08cc437c24ba96c105313920e58b653994dbc609ca0f24c642404cbc99c41862"
+    }
+  ],
+  "actual_artifact_defect": false,
+  "scientific_conclusion_changed": false,
+  "pure_delivery_IO": true,
+  "no_archive_download_or_open": true,
+  "Native_load": 0,
+  "Optimize": 0,
+  "compile": 0,
+  "old_helper_executed_again": false,
+  "known_total_delivery_IO_process_seconds_before_this_history_write": 3.3007142
+}

@@ -58,9 +58,9 @@ stdout are retained in review/history, without fabricating a failure.
 Final experimental outer cost is **5560.241266800s / 14400s**, including final
 review and disclosed allowances once. There is no build. The mathematical
 analysis, matched LP report, full endpoints/trajectories, decisions and paper
-section are complete. Remaining delivery steps: finite incremental carriers;
-normal commit/push and English Draft PR against the verified R149 temporary
-base; one bounded public byte/member recovery and current-round cleanup.
+section are complete. Finite incremental carriers, scientific commit/push,
+English Draft PR, public byte/member recovery and bounded cleanup are complete.
+Only final delivery-metadata commit/push and latest-head readback remain.
 Main was rechecked atb2b940c1e517a72e226ec60fc49ff19651737632 and has not
 absorbed R149; PR211 is still open Draft atd33d47bb2. Do not start a new
 scientific run to complete delivery.
@@ -69,3 +69,27 @@ All new assets stay under `E:\codes\ExactEBRP-work`. Protect the original
 `E:\codes\ExactEBRP`, user changes and all old history. Closed evidence is
 immutable. Delete only current-round reconstructible duplicates after public
 recovery; zero deletion is accepted. No merge, force-push or old-branch deletion.
+
+## Actual public delivery
+
+- Fixed science: `59c4e398f385aa8525fe87a4212ed97554f093e8`.
+- [English Draft PR212](https://github.com/yifanXovo/TailoredExact/pull/212),
+  read back Open Draft, unmerged and mergeable. Verified base is
+  `codex/round149-penalty-product-feedback` at
+  `d33d47bb224ab3cd4eeacabc731b3fa8b16b7b2c`; initial head is the fixed science.
+  Subsequent delivery metadata commits are separate from the measured wrapper,
+  production source/PE and fixed science.
+- Seven incremental archives cover31,703 indexed new members. One anonymous
+  HTTPS recovery verifies every archive/member byte plus15 fixed-R149 members
+  and2 original R137 inputs in18.927091200s. Native/Optimize/compile=0;
+  TLS verification remains enabled. The public receipt and immutable carrier
+  manifest give the actual byte/hash evidence.
+- Bounded cleanup deletes0 paths /0 bytes. Unique raw and qualification
+  evidence, the initial incomplete independent checker and its exact stdout,
+  required runtime files, the active tree and old history remain. The retained
+  root snapshot totals393,048,492 logical bytes; required runtimes are listed
+  separately. Observed free-space delta is0 and is not attributed to deletion.
+  The private old untracked-path inventory remains local and is not published.
+- Final experimental charge remains5560.241266800s; pure delivery I/O is in
+  `delivery_costs.json`, with small unmetered Git/API metadata steps disclosed.
+  No further solver or compiler action was used for public recovery or cleanup.
