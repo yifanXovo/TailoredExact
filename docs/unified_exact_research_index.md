@@ -205,3 +205,18 @@ moderate loss as a trigger of the severe reference rule. R137 remains stable,
 R147 standalone D remains its prior limited candidate, and no seed, factor,
 AM or dynamic rescue follows. [Actual delivery](../results/unified_exact_round149/RESUME.md)
 records cost, source/PE/helper identity, public recovery and bounded cleanup.
+
+<!-- Round150 evidence -->
+
+The [Round150 confirmation and conditional-feedback study](round150_research.md)
+compares B/D on two additional known/exposed R137 configurations outside GD
+selection, using one reused R149 PE and complete independent own H. It also
+appends one fixed-dual conditional penalty product group to each of three saved
+PF models, with positive numerical LP increments and no baseline reoptimization.
+The [two decisions](../results/unified_exact_round150/candidate_decision.json)
+and [paper section](../results/unified_exact_round150/manuscript.tex) separate
+local validity/strength, saved-point separation, matched LP value and complete
+method behavior. Stable GI-TBC and all old entry/profile bytes remain intact;
+CPF does not enter production or a full panel. The
+[delivery record](../results/unified_exact_round150/RESUME.md) retains actual
+scope, identities, full fees, independent review and bounded public closeout.

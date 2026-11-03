@@ -1,0 +1,11 @@
+{
+  "PASS": true,
+  "independent_nonimplementer_review": true,
+  "scope": "All six old PF/new CPF actual MPS files",
+  "integer_MARKER_or_BV_LI_UI_bounds_found": false,
+  "all_columns_continuous": true,
+  "Native_load": 0,
+  "Optimize": 0,
+  "observed_outer_seconds": 0.7526238,
+  "reason": "The independent semantics reader skips MARKER records; this separate actual-byte scan establishes that no integer markers or integer bounds exist in any compared matrix."
+}

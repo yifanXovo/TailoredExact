@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "E:\codes\ExactEBRP-work\worktrees\paper-current\results\unified_exact_round150\review\check_delivery_metadata.py", line 39, in <module>
+    indexed_count=len(indexed) if isinstance(indexed,list) else len(indexed['members'])
+                                                                    ~~~~~~~^^^^^^^^^^^
+KeyError: 'members'

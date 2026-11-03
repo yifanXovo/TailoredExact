@@ -1,0 +1,161 @@
+{
+  "PASS": true,
+  "independent_nonimplementer_review": true,
+  "UTC": "2026-11-03T16:23:43.066325+00:00",
+  "Native_load": 0,
+  "Optimize": 0,
+  "compile": 0,
+  "new_baseline_solve": 0,
+  "elapsed_seconds": 1.1878800999838859,
+  "independent_script_SHA": "8b5cee3bfba1611806bbf055dda378b635d84cb6caf8be7c1f49cc12e1d5ac82",
+  "bindings": {
+    "confirmation_matrix.json": "d7d86fef25eff960deb945a8237f0b85407415d2ad4cb6b7619c263e53c4b638",
+    "CPF_frozen.json": "edd5306a244a9c205c2a8352283395a76d33fdcca604e6582825f892abe0154c",
+    "candidate_decision.json": "d63e19f543c89e7da40df2e992cee92f9e32a4808c7a759754c769697a42a300",
+    "CPF_decision.json": "b3f75f79ab737cdaa0636132cc5e3ca9980edf07e513a15676943ed6fb91448d",
+    "reports/full.json": "772d91dea78b8d377f75ef91a409d825104c6e1c6947ab650a275c72d00817e1",
+    "reports/comparisons.csv": "889c94c997e399fcf98ff86c3f0a37f857fec42aec8c82ab02f78cae866f4f97",
+    "reports/verified_U_trajectories.csv": "3c9e285bb32001274c9bf24462b53060900b920defb16d1bed8941f3ad5f8dc9",
+    "reports/LP.json": "352deee57191adf47c55e5cc6c766b3c68f1e8db32ca31f07ac2ff174d6284e1",
+    "reports/R147_selection.json": "72bd60769b1afaa56c3f2d14dbacf0ef76f60fe5c809ceb72de3cfca1482cf3e"
+  },
+  "arms": [
+    {
+      "role": "N-C20-U",
+      "method": "B",
+      "U": 0.24550506918249843,
+      "L": 0.24550506918245227,
+      "certificate": true,
+      "T_cert": 284.812924669357,
+      "T_total": 289.5124494691845,
+      "returned_calls": 4,
+      "independently_verified_trajectory_points": 38,
+      "first_final_U_seconds": 37.187999999849126,
+      "fleet_durations": [
+        5335.912281348733,
+        5395.079194551696
+      ],
+      "producer_seal_bound": true,
+      "closeout_hashes_bound": true,
+      "all_call_model_SHAs_bound": true,
+      "GD_rows": 0,
+      "GD_nonzeros": 0
+    },
+    {
+      "role": "N-C20-U",
+      "method": "D",
+      "U": 0.24550506918249843,
+      "L": 0.24550504906626391,
+      "certificate": true,
+      "T_cert": 409.3725229946431,
+      "T_total": 416.4787575947121,
+      "returned_calls": 5,
+      "independently_verified_trajectory_points": 31,
+      "first_final_U_seconds": 165.35900000017136,
+      "fleet_durations": [
+        5395.079194551696,
+        5335.912281348733
+      ],
+      "producer_seal_bound": true,
+      "closeout_hashes_bound": true,
+      "all_call_model_SHAs_bound": true,
+      "GD_rows": 2,
+      "GD_nonzeros": 369
+    },
+    {
+      "role": "N-B35-S",
+      "method": "B",
+      "U": 0.450291503262878,
+      "L": 0.38909791928568277,
+      "certificate": false,
+      "T_cert": null,
+      "T_total": 2375.2456282165367,
+      "returned_calls": 5,
+      "independently_verified_trajectory_points": 23,
+      "first_final_U_seconds": 1435.9689999998081,
+      "fleet_durations": [
+        7040.397915503121,
+        7172.116293597475,
+        7167.079059706208
+      ],
+      "producer_seal_bound": true,
+      "closeout_hashes_bound": true,
+      "all_call_model_SHAs_bound": true,
+      "GD_rows": 0,
+      "GD_nonzeros": 0
+    },
+    {
+      "role": "N-B35-S",
+      "method": "D",
+      "U": 0.46039474835411914,
+      "L": 0.38973852582199137,
+      "certificate": false,
+      "T_cert": null,
+      "T_total": 2378.8929655668326,
+      "returned_calls": 5,
+      "independently_verified_trajectory_points": 20,
+      "first_final_U_seconds": 1328.90699999989,
+      "fleet_durations": [
+        7127.851270192539,
+        7098.323763028941,
+        7195.313530559623
+      ],
+      "producer_seal_bound": true,
+      "closeout_hashes_bound": true,
+      "all_call_model_SHAs_bound": true,
+      "GD_rows": 2,
+      "GD_nonzeros": 379
+    }
+  ],
+  "CPF": [
+    {
+      "role": "K-20-S",
+      "numerical_primal": 0.23782634611670447,
+      "numerical_dual": 0.23782634611670445,
+      "CPF_minus_PF": 0.0007830014031290355,
+      "row_residual": 1.8189894035458565e-12,
+      "bound_violation": 0.0,
+      "stationarity_residual": 1.1102230246251565e-15,
+      "dual_sign_violation": 6.938893903907228e-18,
+      "complementarity_row_residual": 9.580082980432286e-17,
+      "infinite_bound_adverse_RC": 0.0,
+      "model_SHA": "c0fd9fb6c785b7ec70759c7dc511ddee7b5214ca42652023388b79bdac52619f",
+      "solution_SHA": "3697a3c350733f8f7a6c562690b22eb1205f6539f49a80b5627144e53fbc9c3b",
+      "dual_SHA": "f631c537f3c858b76b7d5d50ced86d0f912a4f9a798518e34e6367a40728804f"
+    },
+    {
+      "role": "K-35-U",
+      "numerical_primal": 0.20660335516826356,
+      "numerical_dual": 0.20660335516826242,
+      "CPF_minus_PF": 0.0004983962632433003,
+      "row_residual": 1.8189894035458565e-12,
+      "bound_violation": 0.0,
+      "stationarity_residual": 2.220446049250313e-16,
+      "dual_sign_violation": 2.168404344971009e-19,
+      "complementarity_row_residual": 1.233513539903222e-17,
+      "infinite_bound_adverse_RC": 0.0,
+      "model_SHA": "5e398d77e8fc2711798b474335a2927f3d62b037a9206cfc2872057c2068fbfe",
+      "solution_SHA": "20f9fa4428ff443edbf995343d792827fdc71db88187817ae297157ef594ed9a",
+      "dual_SHA": "434d9b1dd241181e1ed8e5029bb09e271ebc636dae984653a3b4c7121d750b77"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "numerical_primal": 0.3667240258320986,
+      "numerical_dual": 0.36672402583209857,
+      "CPF_minus_PF": 0.0011207779783533045,
+      "row_residual": 9.094947017729282e-13,
+      "bound_violation": 0.0,
+      "stationarity_residual": 2.220446049250313e-16,
+      "dual_sign_violation": 0.0,
+      "complementarity_row_residual": 1.4213545765695857e-17,
+      "infinite_bound_adverse_RC": 0.0,
+      "model_SHA": "13a93ecb040580f95e5478b21ec0386fbf6021ced5d57dcbf55b2cd026908720",
+      "solution_SHA": "ff1b0c54f0dc84f3d064ee33acac4374d543bbf6c38de0334d8b99951d0de9fc",
+      "dual_SHA": "f8b85f1b9160dfc5c2de5d81226ba05307c17f1515f5354a01ea5cf50180cde5"
+    }
+  ],
+  "observed_cost_before_final_review_charge": 5543.6389105000735,
+  "final_review_charge_pending": true,
+  "exact_rational_LP_optimality_claimed": false,
+  "public_delivery_not_yet_verified": true
+}

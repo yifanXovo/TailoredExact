@@ -447,3 +447,9 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round148/** -text whitespace=cr-at-eol
 /results/unified_exact_round148/**/*.log -whitespace
 /results/unified_exact_round148/goal.md -whitespace
+
+# Round150 frozen wrappers, observations and carriers preserve actual bytes.
+/scripts/round150* -text whitespace=cr-at-eol
+/results/unified_exact_round150/** -text whitespace=cr-at-eol
+/results/unified_exact_round150/**/*.log -whitespace
+/results/unified_exact_round150/goal.md -whitespace

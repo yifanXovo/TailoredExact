@@ -1,5 +1,13 @@
 # Current mainline and Round137 paper branch
 
+The [Round150 finite research record](round150_research.md) adds a same-R149-PE
+B/D confirmation on two known/exposed configurations outside GD selection and
+three conditional-feedback LP screens. Its
+[decisions](../results/unified_exact_round150/candidate_decision.json) and
+[paper section](../results/unified_exact_round150/manuscript.tex) keep finite
+enhancement evidence distinct from the stable method below. No production
+source, executable, original entry or profile is replaced by that study.
+
 The [GI-TBC release and paper-S2 run guide](paper_s2_release.md) identifies the
 formal method, source/PE/configuration, command, paper and finite evidence.
 The [review packet](paper_review.md) gives a question-led reading order.
