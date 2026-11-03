@@ -1,0 +1,46 @@
+{
+  "UTC": "2026-11-03T14:39:43.167959+00:00",
+  "goal_SHA": "b87992d6131d39ca4068a89138fd828a4c077cc24df835c1f3c68efb26a5fb3b",
+  "base": "d33d47bb224ab3cd4eeacabc731b3fa8b16b7b2c",
+  "branch": "codex/round150-gd-confirmation-conditional-feedback",
+  "actual_main": "b2b940c1e517a72e226ec60fc49ff19651737632",
+  "main_contains_R149": false,
+  "PR_base": "codex/round149-penalty-product-feedback",
+  "predecessor_PR": {
+    "number": 211,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "head": "d33d47bb224ab3cd4eeacabc731b3fa8b16b7b2c"
+  },
+  "applicable_AGENTS": [],
+  "workspace_policy_SHA": "3812091c415a87116472e56f7f9c598c36ee485a654383d15e8b03fca69c042d",
+  "protected_original_status": " M results/gf_compact_bc_round/handling_convention_test/handling_convention.json\n M results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv\n M results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json\n",
+  "protected_modified_file_hashes": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+  },
+  "active_initial_tracked_status": "",
+  "protected_entry_bytes": {
+    "scripts/paper_s2.py": "58a35f88a5b54c2f4b968ca6b7a862c98bd6573c0e95a0f1abca5d7a52f7bab8",
+    "scripts/paper_s2_gd_only.py": "6f028fd094d9643bf168069a784cf38306c15794fa0797f65f2272ff8ce53012",
+    "config/gi_tbc_round137.json": "9c76a442d97b504abfbb419722000b50fdba7f5bdeae9160cace555ef71c9dd0",
+    "config/gi_tbc_gd_round147.json": "b3568f5bbeb40a5b87dbf7a66c4d2ab6de0a04dcf2ae1dc757c1eb5da970ea4b"
+  },
+  "old_untracked_count": 2137314,
+  "old_untracked_SHA": "270ecc59fb3d74b7e5839520120b8cc8a29a1211e430c8218db4d114c36d09a7",
+  "local_only_old_untracked_inventory": "E:\\codes\\ExactEBRP-work\\temp\\round150\\preexisting_untracked_paths.txt",
+  "reusable_PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round149\\ExactEBRP.exe",
+  "PE_SHA": "373efa9a596aaf02fb332685515fcfe88df1b169cbe53b295ab6027140620295",
+  "DLL": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "outer_ceiling_seconds": 14400,
+  "Seed": 0,
+  "Threads": 1,
+  "H_seed": 20260626,
+  "serial": true,
+  "observed_initial_solver_processes": 0,
+  "review_attachments_available": false,
+  "cleanup_authority": "Current-round reconstructible duplicates only after public recovery; zero deletion acceptable"
+}

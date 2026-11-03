@@ -1,0 +1,118 @@
+{
+  "decision": "ACCEPT",
+  "CPF_frozen_SHA": "edd5306a244a9c205c2a8352283395a76d33fdcca604e6582825f892abe0154c",
+  "independent_nonimplementer_review": true,
+  "UTC": "2026-11-03T14:43:09.045757+00:00",
+  "Native_load": 0,
+  "Optimize": 0,
+  "actual_check_seconds": 1.5743090000469238,
+  "independent_script_SHA": "b283a0306b6766ace5beeb55b7d7cfafca2b8e129d64cc7bbcea4329436b0ea3",
+  "independent_MPS_script_SHA": "4ec7cf8e532ea653490a200e6436aa46491a853dbe81e9579e3b1604f78d8c24",
+  "facts": [
+    {
+      "role": "K-20-S",
+      "source_model_SHA": "7eb0538a8bc77a7fa4e4d864a729aa8aa5877438a28ac5e6ac1240fbe5859962",
+      "model_SHA": "c0fd9fb6c785b7ec70759c7dc511ddee7b5214ca42652023388b79bdac52619f",
+      "states": 451,
+      "actual_rows": 451,
+      "actual_NZ": 902,
+      "beta_min": 0.3984551328025219,
+      "all_state_exact_leave_one_out": true,
+      "all_state_upward_transport": true,
+      "actual_matrix_matches_all_and_only_emitted_rows": true,
+      "old_objective_constant_bounds_types_support_cutoff_rows_identical_after_deleting_CPF": true,
+      "old_point_violations_above_1e_8": 15,
+      "max_old_point_violation": 0.019306833244136394,
+      "samples": [
+        {
+          "i": 1,
+          "y": 0,
+          "conditional_dual_exact": "125656612365667640531284052739963016338764706295481198697118777/851008417523694461583202443195765205718877595203065537057783808",
+          "violation": 0.0,
+          "conditional_oracle_exact": "3212811111622184203384048567452511557622259004070761620514467/21758737948049007327877655303530599958735727461076574538825728"
+        },
+        {
+          "i": 2,
+          "y": 29,
+          "conditional_dual_exact": "9206842664905120436432064314226960407368835809069893438943353785/27232269360758222770662478182264486583004083046498097185849081856",
+          "violation": 0.019306833244136394,
+          "conditional_oracle_exact": "6873483464906394626765640875580711524050772149793/20155928304738647093632301689196639434891516182528"
+        }
+      ],
+      "independent_MPS_seconds": 0.15684630000032485
+    },
+    {
+      "role": "K-35-U",
+      "source_model_SHA": "5bda002d3ff3857410c972680d4f830efee0267ecd00998d6f5a5c8e4a4732e9",
+      "model_SHA": "5e398d77e8fc2711798b474335a2927f3d62b037a9206cfc2872057c2068fbfe",
+      "states": 539,
+      "actual_rows": 539,
+      "actual_NZ": 1078,
+      "beta_min": 0.45591812615328814,
+      "all_state_exact_leave_one_out": true,
+      "all_state_upward_transport": true,
+      "actual_matrix_matches_all_and_only_emitted_rows": true,
+      "old_objective_constant_bounds_types_support_cutoff_rows_identical_after_deleting_CPF": true,
+      "old_point_violations_above_1e_8": 34,
+      "max_old_point_violation": 0.0036558404227513205,
+      "samples": [
+        {
+          "i": 1,
+          "y": 4,
+          "conditional_dual_exact": "419377867409462030903218576555751/2596148429267413814265248164610048",
+          "violation": -0.5613516458196965,
+          "conditional_oracle_exact": "419377867409462030903218576555751/2596148429267413814265248164610048"
+        },
+        {
+          "i": 11,
+          "y": 15,
+          "conditional_dual_exact": "137104318497946499331273135464365/649037107316853453566312041152512",
+          "violation": 0.0036558404227513205,
+          "conditional_oracle_exact": "137104318497946499331273135464365/649037107316853453566312041152512"
+        }
+      ],
+      "independent_MPS_seconds": 0.6522494000382721
+    },
+    {
+      "role": "R-X20-S-T1",
+      "source_model_SHA": "ec4dd3143b6788e9eae262183d2c5a899137bc707c273f47f71017492aa3034b",
+      "model_SHA": "13a93ecb040580f95e5478b21ec0386fbf6021ced5d57dcbf55b2cd026908720",
+      "states": 143,
+      "actual_rows": 143,
+      "actual_NZ": 286,
+      "beta_min": 0.35540132377826905,
+      "all_state_exact_leave_one_out": true,
+      "all_state_upward_transport": true,
+      "actual_matrix_matches_all_and_only_emitted_rows": true,
+      "old_objective_constant_bounds_types_support_cutoff_rows_identical_after_deleting_CPF": true,
+      "old_point_violations_above_1e_8": 8,
+      "max_old_point_violation": 0.05185803293765388,
+      "samples": [
+        {
+          "i": 1,
+          "y": 0,
+          "conditional_dual_exact": "4256450163483754494551393179587/20282409603651670423947251286016",
+          "violation": 0.0,
+          "conditional_oracle_exact": "1239027165028820664135901816798063675171732603/5494367057634973071706941421464666631078674432"
+        },
+        {
+          "i": 3,
+          "y": 16,
+          "conditional_dual_exact": "8065352797778800238291663591363/20282409603651670423947251286016",
+          "violation": 0.05185803293765388,
+          "conditional_oracle_exact": "32261411191115201446518685380487/81129638414606681695789005144064"
+        }
+      ],
+      "independent_MPS_seconds": 0.13445529993623495
+    }
+  ],
+  "code_review": [
+    "Actual binary64 omega already weighted; no extra lambda",
+    "Exact Fraction prefix/suffix avoids subtracting two independent lower bounds",
+    "Conditional beta remains state indexed; signed and empty-branch behavior safe",
+    "Tiny coefficient handling omits entire row and retains all old PF rows",
+    "No new variables, old-point fixing, repeated baseline or fourth domain",
+    "New solve stores primal, dual, reduced costs, residuals and quality separately"
+  ],
+  "numerical_policy": "OPTIMAL and local residual tolerances do not certify exact objective error; K35 old PF primal-dual difference must remain explicit"
+}

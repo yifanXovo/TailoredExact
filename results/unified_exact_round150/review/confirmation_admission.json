@@ -1,0 +1,71 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "d7d86fef25eff960deb945a8237f0b85407415d2ad4cb6b7619c263e53c4b638",
+  "independent_nonimplementer_review": true,
+  "UTC": "2026-11-03T14:42:15.077665+00:00",
+  "Native_load": 0,
+  "Optimize": 0,
+  "independent_script_SHA": "4ad75a487cfd00cdef2099fe0d9485133ddab451d9da28ba4c919825e6e28cfc",
+  "actual_check_seconds": 0.08855640003457665,
+  "facts": [
+    {
+      "role": "N-C20-U",
+      "method": "B",
+      "original_argv_exact_after_declared_path_PE_and_GD_PF_tail": true,
+      "cap": 1200,
+      "lambda_value": 0.15,
+      "physical_T": 5400,
+      "input_SHA": "93b93b6abed55cf97f8ee21ddd85fb8501554b8e4c35bb997ae75782f1f98e16",
+      "known": true,
+      "exposed": true,
+      "used_in_GD_selection": false
+    },
+    {
+      "role": "N-C20-U",
+      "method": "D",
+      "original_argv_exact_after_declared_path_PE_and_GD_PF_tail": true,
+      "cap": 1200,
+      "lambda_value": 0.15,
+      "physical_T": 5400,
+      "input_SHA": "93b93b6abed55cf97f8ee21ddd85fb8501554b8e4c35bb997ae75782f1f98e16",
+      "known": true,
+      "exposed": true,
+      "used_in_GD_selection": false
+    },
+    {
+      "role": "N-B35-S",
+      "method": "B",
+      "original_argv_exact_after_declared_path_PE_and_GD_PF_tail": true,
+      "cap": 2400,
+      "lambda_value": 0.15,
+      "physical_T": 7200,
+      "input_SHA": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "known": true,
+      "exposed": true,
+      "used_in_GD_selection": false
+    },
+    {
+      "role": "N-B35-S",
+      "method": "D",
+      "original_argv_exact_after_declared_path_PE_and_GD_PF_tail": true,
+      "cap": 2400,
+      "lambda_value": 0.15,
+      "physical_T": 7200,
+      "input_SHA": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "known": true,
+      "exposed": true,
+      "used_in_GD_selection": false
+    }
+  ],
+  "production_source": "380a85f866bffb914036190f8ee2700ce8b55978",
+  "PE_SHA": "373efa9a596aaf02fb332685515fcfe88df1b169cbe53b295ab6027140620295",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "code_review": [
+    "Narrow wrapper preserves own-H producer/seal/closeout/R134 chain",
+    "Early closeout guard precedes PF and GD derivative checks",
+    "Root context uses actual first Native call SHA and permits zero rows or no model",
+    "No production C++ or stable entry/config edits",
+    "Four arms fixed before results; experimental caps are not algorithm rules"
+  ],
+  "remaining_checks": "After each arm inspect all actual Native calls, GD rows/readback, PF OFF, seals and verification; no fixed call-count assumption"
+}

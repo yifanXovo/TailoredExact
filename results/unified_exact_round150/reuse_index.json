@@ -1,0 +1,126 @@
+{
+  "fixed_science": "3bb93fa2f4b8c267af8fae409864191e033c5bb2",
+  "archive": "results/unified_exact_round149/artifacts/diagnostics_qualification_failures.zip",
+  "archive_SHA": "09a128897c372e3c46c98af18418852080348c639fea03c843d22aec865b332e",
+  "domains": [
+    {
+      "role": "K-20-S",
+      "PF_L": 0.23704334471357544,
+      "D_L": 0.2360103023423648,
+      "files": [
+        {
+          "path": "results/unified_exact_round149/LP/K-20-S_PF/model.mps",
+          "SHA256": "7eb0538a8bc77a7fa4e4d864a729aa8aa5877438a28ac5e6ac1240fbe5859962",
+          "bytes": 1739938
+        },
+        {
+          "path": "results/unified_exact_round149/LP/K-20-S_PF/result.json",
+          "SHA256": "bd54857a143b06ae328457df599df469df8ee1294188daaabd5569f017f91fa0",
+          "bytes": 2701
+        },
+        {
+          "path": "results/unified_exact_round149/LP/K-20-S_PF/solution.json.gz",
+          "SHA256": "a41f1be2fbe36b0ce829a45cf3f8828dacf20d248baf39547786539d766431b7",
+          "bytes": 11020
+        },
+        {
+          "path": "results/unified_exact_round149/LP/K-20-S_PF/arithmetic.json",
+          "SHA256": "6aced1d49f1621b1e8778fdf55b6a06d188a66b7e731c39dafc892b3c0e98ac4",
+          "bytes": 88684
+        },
+        {
+          "path": "results/unified_exact_round149/LP/K-20-S_PF/construction.json",
+          "SHA256": "b2ff1d6cf2b954a9a93c9c2e5b324b57f46e42c701ec8aca4ff0a48aa494f3c1",
+          "bytes": 87918
+        }
+      ]
+    },
+    {
+      "role": "K-35-U",
+      "PF_L": 0.20610495890502026,
+      "D_L": 0.20418702816386647,
+      "files": [
+        {
+          "path": "results/unified_exact_round149/LP/K-35-U_PF/model.mps",
+          "SHA256": "5bda002d3ff3857410c972680d4f830efee0267ecd00998d6f5a5c8e4a4732e9",
+          "bytes": 7255297
+        },
+        {
+          "path": "results/unified_exact_round149/LP/K-35-U_PF/result.json",
+          "SHA256": "93bd624069df05bdf01e05d8a20b3cdc63c9b3c8cbeae203433425855ddedf31",
+          "bytes": 2710
+        },
+        {
+          "path": "results/unified_exact_round149/LP/K-35-U_PF/solution.json.gz",
+          "SHA256": "8bcc5c877de0e13aff9fa214c60bbb4f4eca247dc56a06adb7d4812d2ffc27ac",
+          "bytes": 31591
+        },
+        {
+          "path": "results/unified_exact_round149/LP/K-35-U_PF/arithmetic.json",
+          "SHA256": "40a309fe28553d0ce7f0f9a1f5ab1ad6e2bb466453075c117fcd745c163a0cbb",
+          "bytes": 107325
+        },
+        {
+          "path": "results/unified_exact_round149/LP/K-35-U_PF/construction.json",
+          "SHA256": "dd83402f494285a8c2826e0b5410748321c5b501d65b3d4af539755538a662f0",
+          "bytes": 106755
+        }
+      ]
+    },
+    {
+      "role": "R-X20-S-T1",
+      "PF_L": 0.3656032478537453,
+      "D_L": 0.3650046456214907,
+      "files": [
+        {
+          "path": "results/unified_exact_round149/LP/R-X20-S-T1_PF/model.mps",
+          "SHA256": "ec4dd3143b6788e9eae262183d2c5a899137bc707c273f47f71017492aa3034b",
+          "bytes": 1546918
+        },
+        {
+          "path": "results/unified_exact_round149/LP/R-X20-S-T1_PF/result.json",
+          "SHA256": "1f79f5aebdb4607ab90df0df088c9cde1aac56ac38a352e7cc17797feed1b295",
+          "bytes": 2688
+        },
+        {
+          "path": "results/unified_exact_round149/LP/R-X20-S-T1_PF/solution.json.gz",
+          "SHA256": "4ce3983f73841057682cfdbf0a1a6e83003eac2affb5fc3fddb0487fcf999f6b",
+          "bytes": 8182
+        },
+        {
+          "path": "results/unified_exact_round149/LP/R-X20-S-T1_PF/arithmetic.json",
+          "SHA256": "fde45d368ec5c8d774b877ccbd8d1e9e2f6b718d1f35327241ce29ff5a24709d",
+          "bytes": 30813
+        },
+        {
+          "path": "results/unified_exact_round149/LP/R-X20-S-T1_PF/construction.json",
+          "SHA256": "738226e94c076b8d8c52e00fbee06b8be635f9becbdfce7bc6d79ac1effaece1",
+          "bytes": 30169
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "role": "N-C20-U",
+      "path": "results/unified_exact_round137/inputs/N-C20-U.txt",
+      "SHA256": "93b93b6abed55cf97f8ee21ddd85fb8501554b8e4c35bb997ae75782f1f98e16",
+      "known": true,
+      "exposed": true,
+      "used_in_GD_selection": false
+    },
+    {
+      "role": "N-B35-S",
+      "path": "results/unified_exact_round137/inputs/N-B35-S.txt",
+      "SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "known": true,
+      "exposed": true,
+      "used_in_GD_selection": false
+    }
+  ],
+  "input_fixed_science": "e735c3447eb1443713c700942d873de1783a4a26",
+  "baseline_Optimize_new": 0,
+  "old_fees_recharged": false,
+  "no_old_producer_loaded": true,
+  "seconds": 40.23425489990041
+}
