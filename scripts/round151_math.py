@@ -1,7 +1,33 @@
 """Independent binary64 Fraction reference for production's fixed-dual caps."""
 from fractions import Fraction as F
-from round149_math import scope_from_model
+import collections,re
 from round151_common import *
+def scope_from_model(model,bm,b):
+    # Independent of GD applicability: a zero service lower bound is allowed.
+    objective,constant=model['objective'];objective=dict(objective)
+    assert constant==0 and objective['G']==1
+    assert all(k=='G' or k.startswith('e_') and v>=0 for k,v in objective.items())
+    counter=collections.Counter(model['rows'])
+    def has(terms,sense,rhs):assert counter[(tuple(sorted(terms.items())),sense,rhs)]>=1,(terms,sense,rhs)
+    supports={}
+    for name in model['order']:
+        match=re.fullmatch(r'state_(\d+)_(\d+)',name)
+        if match:supports.setdefault(int(match[1]),[]).append(int(match[2]))
+    n=max(int(k[2:]) for k in model['order'] if re.fullmatch(r'Y_\d+',k));assert set(supports)==set(range(1,n+1))
+    sites=[];total={}
+    for i in range(1,n+1):
+        ys=sorted(supports[i]);lo,hi=model['bounds'][f'Y_{i}'];assert (lo,hi)==(min(ys),max(ys))
+        ratio=[-dict(t)[f'Y_{i}'] for t,s,rhs in model['rows'] if s=='=' and rhs==0 and len(t)==2 and
+            dict(t).get(f'r_{i}')==1. and f'Y_{i}' in dict(t)]
+        assert len(ratio)==1 and ratio[0]>0;c=ratio[0]
+        has({f'e_{i}':1.,f'r_{i}':-1.},'>=',-1.);has({f'e_{i}':1.,f'r_{i}':1.},'>=',1.)
+        has({f'state_{i}_{y}':1. for y in ys},'=',1.)
+        has({f'state_g_{i}_{y}':1. for y in ys}|{'G':-1.},'=',0.)
+        for y in ys:assert model['bounds'][f'state_{i}_{y}'][0]>=0 and model['bounds'][f'state_{i}_{y}'][1]<=1
+        sites.append(dict(i=i,lo=int(lo),hi=int(hi),c=c,omega=objective.get(f'e_{i}',0.),support=ys));total[f'Y_{i}']=1.
+    has(total,'<=',b);has(total,'>=',bm)
+    cutoffs=[rhs for terms,sense,rhs in model['rows'] if sense=='<=' and dict(terms)==objective];assert cutoffs
+    return dict(Bminus=bm,B=b,gamma_L=model['bounds']['G'][0],gamma_U=model['bounds']['G'][1],cutoff=min(cutoffs),stations=sites)
 def transport(x):
     return (0. if x<0 else 1e-12) if x and abs(x)<1e-12 else x
 def reference(scope,actual):

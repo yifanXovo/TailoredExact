@@ -1,0 +1,68 @@
+{
+  "decision": "ACCEPT_LP_INPUTS_ONLY",
+  "independent_nonimplementer_review": true,
+  "full_campaign_admission": false,
+  "source_commit": "c26382d9b",
+  "reviewed": {
+    "header_SHA": "8bd7559aef7095437c86706b2c57a436f728bd0d695fc9892d9087f97b54aa37",
+    "LP_frozen_SHA": "5777ac984a4574f853b8548808083a2485524cacf45fea22f01af05db6abb823",
+    "source_hashes": {
+      "src/main.cpp": "2a6fbd3dac0885b8237afa88501e35685a74832d159d0d7d453b1421be28d7ac",
+      "src/GurobiBaseline.cpp": "93f568a729bdf3572c66b5a4bb980f9a5d2c755e03bb76ccde26eaf27ecc52d2",
+      "src/PaperExternalGiniTree.cpp": "38d45978fcb2f1dfe8a45e16407468ebbf0b5de174509715d3374956549627c8"
+    }
+  },
+  "mathematical_statement": "Fixed nonnegative duals give safe conditional penalty floors; one cap per covered state. GD is unnecessary.",
+  "findings": [],
+  "domains": [
+    {
+      "role": "N-B35-S",
+      "state_count": 537,
+      "global_floor": 0.24449999999999567,
+      "uniform_only": 35,
+      "conditional_stricter": 502,
+      "conditional_stricter_by_more_than_1e_12": 472,
+      "baseline_max_row_residual": 4.483080573436382e-13,
+      "new_MPS_compared": true,
+      "all_original_rows_bounds_objective_retained": true,
+      "actual_fraction_caps_checked": true,
+      "independent_leave_one_out_sum": true
+    },
+    {
+      "role": "N-C20-U",
+      "state_count": 490,
+      "global_floor": 0,
+      "uniform_only": 20,
+      "conditional_stricter": 470,
+      "conditional_stricter_by_more_than_1e_12": 470,
+      "baseline_max_row_residual": 5.370703881624195e-15,
+      "new_MPS_compared": false,
+      "all_original_rows_bounds_objective_retained": null,
+      "actual_fraction_caps_checked": true,
+      "independent_leave_one_out_sum": true
+    }
+  ],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "static_code_review": {
+    "default_off": true,
+    "old_R149_GD_requirement_retained": true,
+    "independent_final_SHA_expected_map": true,
+    "root_once_before_formal_Optimize": true,
+    "no_floor_positive_group_gate": true,
+    "per_state_child_dominance": true,
+    "signed_non_tiny_caps_valid": true,
+    "tiny_transport_monotone_and_upward": true,
+    "integer_and_nonminimal_epigraph_valid_by_cutoff": true,
+    "local_interval_hull_only_not_full_joint_hull": true
+  },
+  "remaining_for_full_admission": [
+    "production PE/source identity",
+    "writer/Start and nonminimal epigraph",
+    "floor0/child/signed/tiny boundary qualification",
+    "real Native readback",
+    "frozen complete own-H paired matrix and budget"
+  ],
+  "reviewer_outer_seconds": 1.3630955000407994
+}

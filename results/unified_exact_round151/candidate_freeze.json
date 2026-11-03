@@ -1,0 +1,18 @@
+{
+  "schema": "round151-unique-candidate-v1",
+  "A": "C",
+  "GD": false,
+  "production_flag": "--round151-penalty-propagation conditional",
+  "uniform_variant_is_core_candidate": false,
+  "frozen_before_any_complete_arm": true,
+  "scope": "All entered complete roles use C uniformly; no role-based dispatch",
+  "reason": "The matched pure-B N-B35 LP increases from B 0.3278337721771161 to P 0.33216166600112773 and C 0.337310427549131. C contributes 0.00514876154800326 beyond P, larger than P's 0.00432789382401161 increment. Both variants use one cap row per state and zero new columns/source solves/root resolves. This justifies the prescribed single complete B/C pair without treating root gain as complete algorithm benefit.",
+  "LP_C_qualified": true,
+  "LP_P_qualified": true,
+  "first_pair": "N-B35-S B/C, each cap2400, same new PE, independent complete own H",
+  "certificate_pair_condition": "Enter N-C20-U only for substantive first-pair benefit or a specific worthwhile tradeoff; otherwise stop",
+  "clarification_condition": "At most one prespecified question after core evidence; no automatic extra search",
+  "Seed": 0,
+  "Threads": 1,
+  "H_seed": 20260626
+}
