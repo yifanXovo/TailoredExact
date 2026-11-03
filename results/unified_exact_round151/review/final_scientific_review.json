@@ -1,0 +1,114 @@
+{
+  "decision": "ACCEPT_SCIENTIFIC_CLOSEOUT",
+  "independent_nonimplementer_review": true,
+  "source_commit": "c26382d9bf1d4edde538a01c62e57ba563cf865c",
+  "PE_SHA": "fbdd7c2ece5c748e086761f2490fd901ccdaeffa29df357d2d98fd8743e1dc39",
+  "candidate_decision_SHA": "08ca8f3bb1391346bcccfb531f1f0fd7e3fd1d4761dc1d00a31c28daa05df81a",
+  "full_report_SHA": "7415f55b2b7be404cc7ea93e055b70005456c7dd594d53ae2a4b38aaae7d296f",
+  "reviewed_prose_SHA": {
+    "final_report.md": "85f6886ad978091edcf2f33db7b5b90b96a6513e3494ba2168e6b682a0f8b1cb",
+    "LP_report.md": "3ed71dfc62a9172651478b536451fc0856ab9aa4e54c6ad6bcbe5c7ce6c6f176",
+    "manuscript.tex": "59d5283ddb1aa19dc90de99924f00458db4de45d6575179917e6169ac75f2ca0",
+    "mathematical_analysis.md": "bc1d741570c738afa586cf3257ed8e0d647074055dc552d92c8e187e00a90248"
+  },
+  "mathematical_validity_and_actual_inclusion_preserved": true,
+  "LP_and_complete_evidence_kept_separate": true,
+  "original_physical_fleets_and_every_committed_witness_checked": true,
+  "formal_arms": [
+    {
+      "method": "B",
+      "physical_U": 0.450291503262878,
+      "supported_L": 0.3892791982096647,
+      "complete_witnesses_physically_recomputed": 25,
+      "strict_U_events": 23,
+      "calls": 5,
+      "returned": 5,
+      "actual_splits": 0,
+      "target_calls": 1,
+      "sealed_required_members": 8,
+      "all_event_hashes_and_commits_verified": true
+    },
+    {
+      "method": "C",
+      "physical_U": 0.45638193743693234,
+      "supported_L": 0.39018212676940056,
+      "complete_witnesses_physically_recomputed": 30,
+      "strict_U_events": 29,
+      "calls": 4,
+      "returned": 4,
+      "actual_splits": 0,
+      "target_calls": 0,
+      "sealed_required_members": 8,
+      "all_event_hashes_and_commits_verified": true
+    }
+  ],
+  "raw_data_versions_seals_and_expenses_consistent": true,
+  "adoption_conclusion": "The finite prescribed same-PE B/C test provides no sufficient complete benefit; closing promotion while retaining expression/LP results is supported.",
+  "scope_limit": "One known/exposed complete role and one Seed; no complete N-C20 or P attribution result is inferred.",
+  "severe_reference_is_not_adoption_criterion": true,
+  "stop_and_unentered_decisions_supported": true,
+  "costs_before_this_review": {
+    "charged_seconds": 4873.383679499463,
+    "build_seconds": 57.03688610019162,
+    "ceiling": 14400,
+    "failed_processes": [
+      {
+        "label": "compile_rows",
+        "seconds": 0.0
+      },
+      {
+        "label": "LP_prepare",
+        "seconds": 2.338866800069809
+      },
+      {
+        "label": "qualification_native_writer",
+        "seconds": 0.27259459998458624
+      },
+      {
+        "label": "qualification_native_writer_v2",
+        "seconds": 0.2850063000805676
+      },
+      {
+        "label": "qualification_native_writer_v3",
+        "seconds": 0.2684901999309659
+      }
+    ],
+    "fee_receipts_after_current_cost_snapshot": [
+      {
+        "label": "local_semantic_check",
+        "seconds": 0.6968366999644786
+      }
+    ],
+    "refresh_still_required": true
+  },
+  "minor_editorial_comments_resolved": [
+    "P Optimize wall and Runtime are now distinguished.",
+    "Cap-pass complexity is linear after multiplier selection; inherited sorting is now separately disclosed."
+  ],
+  "findings": [],
+  "remaining_delivery_checks": [
+    "Public byte/member restore and Draft PR readback; delivery metadata only."
+  ],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "reviewer_outer_seconds": 0.262211199849844,
+  "PASS": true,
+  "final_cost_readback": {
+    "build_seconds": 57.03688610019162,
+    "new_Optimize": 0,
+    "PASS": true,
+    "new_Native": 0,
+    "metadata_and_prose_only": true,
+    "ceiling_seconds": 14400,
+    "scientific_claims_unchanged": true,
+    "prior_pending_review_and_local_closure_fees_included": true,
+    "cost_report_SHA": "00a4b5a555e8b07371158ea34cf887eb7d384a10fa896b94ba9f9d0ac6f1cafc",
+    "covered_by_existing_30_second_allowance": true,
+    "minor_editorial_corrections_confirmed": true,
+    "charged_seconds": 4875.0555818994635,
+    "printed_Native_root_after_cuts_separated": true,
+    "refresh_required": false,
+    "new_compile": 0
+  }
+}

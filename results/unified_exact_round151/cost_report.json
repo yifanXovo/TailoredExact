@@ -1,0 +1,39 @@
+{
+  "UTC": "2026-11-03T21:15:35.851448+00:00",
+  "charged_new_experiment_seconds": 4875.0555818994635,
+  "ceiling_seconds": 14400,
+  "remaining_seconds": 9524.944418100536,
+  "experiment": {
+    "G1_seconds": 4875.0555818994635,
+    "remaining_G1_seconds": 9524.944418100536,
+    "by_category": {
+      "diagnostic": 119.5171086996434,
+      "native": 4755.53847319982
+    },
+    "limits": {
+      "diagnostic": 14400.0,
+      "native": 14400.0
+    },
+    "category_remaining": {
+      "diagnostic": 14280.482891300357,
+      "native": 9644.46152680018
+    },
+    "separately_reported_seconds": 57.03688610019162,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "build_seconds": 57.03688610019162,
+  "standalone_LP_Optimize": 2,
+  "baseline_Optimize_new": 0,
+  "C20_Optimize_new": 0,
+  "complete_Native_Optimize": 9,
+  "complete_Native_returned": 9,
+  "qualification_Native_Optimize": 4,
+  "qualification_Native_returned": 4,
+  "includes_own_H_construction_all_solves_failures_and_necessary_verification": true,
+  "nested_Runtime_Work_not_added": true,
+  "old_fees_not_recharged": true,
+  "pure_theory_authoring_public_IO_and_build_separate": true,
+  "exact_clock_accounting_incomplete": true,
+  "unmetered_short_qualification_conservative_allowance": "infra/external_costs.json"
+}
