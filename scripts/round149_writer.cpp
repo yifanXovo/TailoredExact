@@ -11,7 +11,7 @@ int main(int argc,char** argv){try{
     const auto check=[&](bool ok,const std::string& why){++checks;if(!ok)throw std::runtime_error(why);};
     for(const std::string tag:{"shortage","fixed","zero_floor","zero_GD"}){
         const auto dir=root/tag;std::filesystem::create_directories(dir);Instance in;in.V=3;in.M=1;
-        in.Q={tag=="fixed"?0:3};
+        in.Q={tag=="fixed"?0:tag=="shortage"?1:3};
         in.initial=tag=="fixed"?std::vector<int>{0,2,0,1}:tag=="zero_floor"?std::vector<int>{0,1,1,1}:
             tag=="zero_GD"?std::vector<int>{0,0,0,0}:std::vector<int>{0,1,0,1};
         in.target={0,1,1,1};in.capacity={0,3,3,3};in.weights={0,1,1,1};
@@ -41,8 +41,14 @@ int main(int argc,char** argv){try{
                 const auto parts=round141_detail::split(name,'_');
                 epigraph[j]=in.initial.at(std::stoi(parts[2]))==std::stoi(parts[3])?g+.01:0.;
             }else if(name.rfind("zprod_",0)==0)epigraph[j]=(g+.01)*in.initial.at(std::stoi(name.substr(6)));
-            else if(name=="e_1")epigraph[j]+=.01;
+            else if(name=="e_1"&&tag!="fixed")epigraph[j]+=.01;
         }
+        // W_SP is the existing ratio-sum times unweighted penalty auxiliary.
+        // A nonminimal e completion must extend it as well as the g products.
+        double S=0,P=0;for(std::size_t j=0;j<d.names.size();++j){const auto& name=d.names[j];
+            if(name.rfind("r_",0)==0&&name.size()>2&&name[2]>='0'&&name[2]<='9')S+=epigraph[j];
+            else if(name.rfind("e_",0)==0)P+=in.weights.at(std::stoi(name.substr(2)))*epigraph[j];}
+        for(std::size_t j=0;j<d.names.size();++j)if(d.names[j]=="W_SP")epigraph[j]=S*P;
         point(dir/"nonminimal_epigraph.json",d,epigraph);
         if(tag=="shortage"){
             const auto child=model(in,opt,dir/"child_off.lp",.01);

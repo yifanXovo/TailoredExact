@@ -46,4 +46,18 @@ def main():
     print(json.dumps(dict(prepared=True,matched_domains=len(records),Optimize=0,Native_load=0)))
 
 
-if __name__=='__main__':main()
+def profile():
+    manifest=read(OUT/'candidate_manifest.json');p=read(ROOT/'config/gi_tbc_gd_round147.json')
+    p.update(schema='round149-penalty-product-feedback-frozen-argv-v1',
+        algorithm='GI-TBC + standalone GD + frozen penalty-floor product feedback',
+        source_commit=manifest['source_commit'],research_head=manifest['source_commit'],
+        default_executable=manifest['production_PE'],verified_PE_SHA256=manifest['production_PE_SHA'],
+        round=149,source_manifest='results/unified_exact_round149/candidate_manifest.json',PF=True,Shared_S=False,
+        parent_GD_profile_SHA256=sha(ROOT/'config/gi_tbc_gd_round147.json'))
+    p['argv']+=['--round149-penalty-feedback','on']
+    write(ROOT/'config/gi_tbc_penalty_feedback_round149.json',p)
+    write(OUT/'infra/external_costs.json',dict(processes=[dict(kind='diagnostic',outer_seconds=2.1,
+        label='independent_static_actual_matrix_review',basis='Reviewer measured .832081s Python; 1.096106s outer plus .911233s read tools; conservative 2.1s, no Optimize')]))
+
+
+if __name__=='__main__':globals()[sys.argv[1] if len(sys.argv)>1 else 'main']()

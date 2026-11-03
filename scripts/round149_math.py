@@ -3,6 +3,35 @@ from fractions import Fraction as F
 from round149_common import *
 
 
+def scope_from_model(model,bm,b):
+    """Read the actual canonical matrix; no filename or instance-name inference."""
+    from collections import Counter
+    from round143_qualify import actual_spec
+    spec=actual_spec(model,bm,b);counter=Counter(model['rows'])
+    objective,constant=model['objective'];objective=dict(objective)
+    assert constant==0 and objective['G']==1
+    assert all(k=='G' or (k.startswith('e_') and v>=0) for k,v in objective.items())
+    cutoffs=[rhs for terms,sense,rhs in model['rows'] if sense=='<=' and dict(terms)==objective]
+    assert cutoffs
+    def has(terms,sense,rhs):assert counter[(tuple(sorted(terms.items())),sense,rhs)]>=1
+    stations=[];total={}
+    for key,ys in spec['supports'].items():
+        i=int(key);c=spec['c_binary64'][key];lo,hi=model['bounds'][f'Y_{i}']
+        assert (lo,hi)==(min(ys),max(ys))
+        has({f'r_{i}':1.,f'Y_{i}':-c},'=',0.)
+        has({f'e_{i}':1.,f'r_{i}':-1.},'>=',-1.)
+        has({f'e_{i}':1.,f'r_{i}':1.},'>=',1.)
+        has({f'state_{i}_{y}':1. for y in ys},'=',1.)
+        has({f'state_g_{i}_{y}':1. for y in ys}|{'G':-1.},'=',0.)
+        for y in ys:
+            assert model['bounds'][f'state_{i}_{y}'][0]>=0 and model['bounds'][f'state_{i}_{y}'][1]<=1
+        stations.append(dict(i=i,lo=int(lo),hi=int(hi),c=c,omega=objective.get(f'e_{i}',0.),support=ys))
+        total[f'Y_{i}']=1.
+    has(total,'<=',b);has(total,'>=',bm)
+    return dict(Bminus=bm,B=b,gamma_L=model['bounds']['G'][0],gamma_U=model['bounds']['G'][1],
+        cutoff=min(cutoffs),stations=stations)
+
+
 def oracle(scope):
     sites=scope['stations'];bm,b=F(scope['Bminus']),F(scope['B'])
     ys={s['i']:min(F(s['hi']),max(F(s['lo']),1/F(s['c']))) for s in sites}

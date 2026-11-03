@@ -1,0 +1,103 @@
+{
+  "schema": "round149-independent-static-review-v1",
+  "decision": "STATIC_ACCEPT_PENDING_ACTUAL_NEW_MATRIX",
+  "independent_nonimplementer": true,
+  "blocking_findings": [],
+  "findings": [
+    "Actual weighted objective coefficients are read once; no repeated lambda factor.",
+    "Arbitrary actual finite nonnegative multipliers certify a dual floor independent of sorting quality.",
+    "Endpoint and possible exact-kink enclosure lower bounds preserve weak duality.",
+    "Upward beta and whole-row tiny omission preserve validity.",
+    "PF append occurs before first backend or solve, after single GD embed, with final-SHA GD migration.",
+    "Compatible support, input/objective/resource identity, gamma and cutoff inheritance are checked.",
+    "No new logical root or AM geometry change and no extra root LP is introduced."
+  ],
+  "limits": [
+    "Actual new PE/Native transport, complete and nonminimal Starts, real first-call SHA, zero-GD reader handling and full experiment admission remain pending.",
+    "Resource containment uses existing accepted physical/model semantics; independent actual new resource audit is still required."
+  ],
+  "historical_exact_checks": [
+    {
+      "role": "K-20-S",
+      "source": "results\\unified_exact_round143\\inherited\\roots\\K-20-S\\inherited\\original.lp",
+      "source_SHA": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+      "p_exact": "3212811111622184203384048567452511557622259004070761620514467/21758737948049007327877655303530599958735727461076574538825728",
+      "p": 0.14765613333333336,
+      "mu_exact": "0",
+      "nu_exact": "3422653916294938729471685868789/649037107316853453566312041152512",
+      "old_cutoff": 0.7752127578025219,
+      "beta_diagnostic": 0.6275566244691886,
+      "actual_objective_penalty_terms": 20,
+      "actual_ratio_penalty_onehot_product_sum_rows_checked": 100,
+      "resource_rows": [
+        {
+          "sense": "<=",
+          "rhs": 208.0,
+          "terms": 20
+        },
+        {
+          "sense": ">=",
+          "rhs": 148.0,
+          "terms": 20
+        }
+      ],
+      "exact_primal_equals_dual": true
+    },
+    {
+      "role": "K-35-U",
+      "source": "results\\unified_exact_round143\\inherited\\roots\\K-35-U\\inherited\\original.lp",
+      "source_SHA": "bf8dab642a2eab74606490887f10b8c200d567525f4a9daba8b4408335690342",
+      "p_exact": "419377867409462030903218576555751/2596148429267413814265248164610048",
+      "p": 0.16153847857142856,
+      "mu_exact": "0",
+      "nu_exact": "0",
+      "old_cutoff": 0.7674566047247167,
+      "beta_diagnostic": 0.6059181261532882,
+      "actual_objective_penalty_terms": 35,
+      "actual_ratio_penalty_onehot_product_sum_rows_checked": 175,
+      "resource_rows": [
+        {
+          "sense": "<=",
+          "rhs": 326.0,
+          "terms": 35
+        },
+        {
+          "sense": ">=",
+          "rhs": 251.0,
+          "terms": 35
+        }
+      ],
+      "exact_primal_equals_dual": true
+    },
+    {
+      "role": "R-X20-S-T1",
+      "source": "results\\unified_exact_round143\\inherited\\roots\\R-X20-S-T1\\inherited\\original.lp",
+      "source_SHA": "ea3fb0de411e188fb5a6b2244d90343d22dcb13b8d393a480798fe44d5d416a4",
+      "p_exact": "17025800653935018866239228545411/81129638414606681695789005144064",
+      "p": 0.2098591955621199,
+      "mu_exact": "0",
+      "nu_exact": "1777488018433431110509506922881/162259276829213363391578010288128",
+      "old_cutoff": 0.7530539180896818,
+      "beta_diagnostic": 0.5431947225275621,
+      "actual_objective_penalty_terms": 20,
+      "actual_ratio_penalty_onehot_product_sum_rows_checked": 100,
+      "resource_rows": [
+        {
+          "sense": ">=",
+          "rhs": 5.0,
+          "terms": 20
+        },
+        {
+          "sense": "<=",
+          "rhs": 65.0,
+          "terms": 20
+        }
+      ],
+      "exact_primal_equals_dual": true
+    }
+  ],
+  "lightweight_verification_seconds": 0.8320805998519063,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0
+}
