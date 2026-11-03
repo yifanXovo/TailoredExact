@@ -8,7 +8,7 @@
 #include "Round145Research.hpp"
 #include "Round146Research.hpp"
 #include "Round148Research.hpp"
-#include "Round149Research.hpp"
+#include "Round151Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -886,6 +886,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             const auto value=requireValue(i,argc,argv);
             if(value!="off"&&value!="on")throw std::runtime_error("Round148 shared S must be off or on");
             ebrp::round148().enabled=value=="on";
+        }
+        else if (arg == "--round151-penalty-propagation") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="uniform"&&value!="conditional")throw std::runtime_error("Round151 propagation must be off, uniform or conditional");
+            ebrp::round151().mode=value;
         }
         else if (arg == "--round149-penalty-feedback") {
             const auto value=requireValue(i,argc,argv);
@@ -3587,6 +3592,19 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round151().mode!="off"){
+        if(ebrp::round127().mode!="ms2"||ebrp::round146().enabled||ebrp::round149().enabled||ebrp::round148().enabled||
+            ebrp::round138().stock_rlt||ebrp::round143().rn||ebrp::round144().enabled||ebrp::round145().enabled||
+            ebrp::round139().enabled()||ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||
+            ebrp::round135AggregatePenalty()||opt.round90_lp_g_split||opt.round119_proof_contraction||opt.round120_native_proof!="off")
+            throw std::runtime_error("Round151 propagation requires isolated stable GI-TBC with GD off");
+        if(!opt.out_path.empty()){
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round151_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"mode\":"<<std::quoted(ebrp::round151().mode)<<",\"GD\":false,\"root_once\":true,\"proof_root_unchanged\":true,\"extra_root_LP\":0,\"source_solves\":0,\"new_columns\":0}\n";
+            if(!f)throw std::runtime_error("Round151 parameter persistence failed");
+        }
+    }
     if(ebrp::round149().enabled){
         if(!ebrp::round146().enabled||ebrp::round138().stock_rlt||ebrp::round148().enabled)
             throw std::runtime_error("Round149 penalty feedback requires standalone D with Shared-S/STOCK off");
