@@ -60,7 +60,10 @@ review and disclosed allowances once. There is no build. The mathematical
 analysis, matched LP report, full endpoints/trajectories, decisions and paper
 section are complete. Finite incremental carriers, scientific commit/push,
 English Draft PR, public byte/member recovery and bounded cleanup are complete.
-Only final delivery-metadata commit/push and latest-head readback remain.
+All requested scientific and public-delivery steps are complete. The completed
+delivery snapshot398c8138fe44901de97eaa5eab61d9a9263b13ba was pushed and
+read back Open Draft and unmerged; the final metadata-only pin records that
+observation without changing the science.
 Main was rechecked atb2b940c1e517a72e226ec60fc49ff19651737632 and has not
 absorbed R149; PR211 is still open Draft atd33d47bb2. Do not start a new
 scientific run to complete delivery.
@@ -74,7 +77,7 @@ recovery; zero deletion is accepted. No merge, force-push or old-branch deletion
 
 - Fixed science: `59c4e398f385aa8525fe87a4212ed97554f093e8`.
 - [English Draft PR212](https://github.com/yifanXovo/TailoredExact/pull/212),
-  read back Open Draft, unmerged and mergeable. Verified base is
+  read back Open Draft and unmerged. Verified base is
   `codex/round149-penalty-product-feedback` at
   `d33d47bb224ab3cd4eeacabc731b3fa8b16b7b2c`; initial head is the fixed science.
   Subsequent delivery metadata commits are separate from the measured wrapper,
@@ -93,3 +96,9 @@ recovery; zero deletion is accepted. No merge, force-push or old-branch deletion
 - Final experimental charge remains5560.241266800s; pure delivery I/O is in
   `delivery_costs.json`, with small unmetered Git/API metadata steps disclosed.
   No further solver or compiler action was used for public recovery or cleanup.
+
+The [completed delivery snapshot](https://github.com/yifanXovo/TailoredExact/commit/398c8138fe44901de97eaa5eab61d9a9263b13ba) is pinned in delivery_snapshot.json and publication_pin.json.
+The final metadata-only confirmation is separate from that verified snapshot,
+fixed science59c4e398f385aa8525fe87a4212ed97554f093e8, executed wrapper
+and production source/PE. Independent delivery metadata review also passes.
+No additional experiment, compile, merge or cleanup deletion is queued.
