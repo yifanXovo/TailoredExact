@@ -1,0 +1,53 @@
+{
+  "schema": "round149-independent-actual-writer-and-frozen-pair-v1",
+  "decision": "QUALIFICATION_AND_MATRIX_ACCEPT_PENDING_SHORT_PRODUCER",
+  "independent_nonimplementer": true,
+  "writer_facts": [
+    {
+      "tag": "shortage",
+      "PF_rows": 8,
+      "beta": 0.6500000000000005,
+      "floor": 0.14999999999999972,
+      "all_original_semantics_unchanged": true,
+      "complete_and_nonminimal_Starts_checked": true
+    },
+    {
+      "tag": "fixed",
+      "PF_rows": 3,
+      "beta": 0.5000000000000003,
+      "floor": 0.29999999999999977,
+      "all_original_semantics_unchanged": true,
+      "complete_and_nonminimal_Starts_checked": true
+    },
+    {
+      "tag": "zero_floor",
+      "PF_rows": 0,
+      "beta": 0.8,
+      "floor": 0,
+      "all_original_semantics_unchanged": true,
+      "complete_and_nonminimal_Starts_checked": true
+    },
+    {
+      "tag": "zero_GD",
+      "PF_rows": 12,
+      "beta": 0.3500000000000004,
+      "floor": 0.4499999999999997,
+      "all_original_semantics_unchanged": true,
+      "complete_and_nonminimal_Starts_checked": true
+    }
+  ],
+  "candidate_manifest_SHA": "06e110011040a3b4f1482076dd872c419466c669882dc4c1d5ba2a496bd29c27",
+  "matrix_SHA": "22596a9714a3e1a7d0263b14f334de734f477b5b6244d5b2eaedf0a73772755b",
+  "same_new_PE": "373efa9a596aaf02fb332685515fcfe88df1b169cbe53b295ab6027140620295",
+  "source_commit": "380a85f866bffb914036190f8ee2700ce8b55978",
+  "frozen_helpers_match": true,
+  "new_LP_optimizes": 4,
+  "old_baseline_optimizes": 0,
+  "LP_numeric_limits": "K35 reported numerical dual gaps retained; PF diagnostic dual .205485913193 exceeds old primal .204187028164; no exact rational LP claim.",
+  "source_solves": 0,
+  "extra_root_LP": 0,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "independent_check_seconds": 0.09598130010999739
+}

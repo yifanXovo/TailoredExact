@@ -31,6 +31,7 @@
 #include "Round145Research.hpp"
 #include "Round146Research.hpp"
 #include "Round148Research.hpp"
+#include "Round149Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -1761,6 +1762,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     round144ResetRun();
     round146ResetRun();
     round148ResetRun();
+    round149ResetRun();
     if (options.round92_handling_activation) {
         if (options.external_gini_scheduling !=
                 "round31-nonblocking-native-bound" ||
@@ -4130,6 +4132,11 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             const auto base=state.artifact;
             state.artifact=round146_detail::embed(instance,base,
                 base.path.parent_path()/(base.path.stem().string()+"_round146_GD.lp"));
+        }
+        if(round149().enabled&&state.artifact.written){
+            const auto base=state.artifact;
+            state.artifact=round149_detail::embed(instance,base,verified_ub,
+                base.path.parent_path()/(base.path.stem().string()+"_round149_PF.lp"));
         }
         if(round148().ready&&state.artifact.written){
             const auto base=state.artifact;

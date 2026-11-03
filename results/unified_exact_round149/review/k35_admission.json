@@ -1,0 +1,47 @@
+{
+  "schema": "round149-independent-k35-admission-v1",
+  "decision": "ACCEPT",
+  "matrix_SHA": "22596a9714a3e1a7d0263b14f334de734f477b5b6244d5b2eaedf0a73772755b",
+  "candidate_manifest_SHA": "06e110011040a3b4f1482076dd872c419466c669882dc4c1d5ba2a496bd29c27",
+  "independent_nonimplementer_review": true,
+  "reason": "Valid conservative weighted resource dual floor and state-product propagation; three positive numerical matched PF LP increments; all targeted writer/Native/Start/zero-GD/CLI checks pass; actual first formal LP already includes PF with migrated GD identity. K35 asks whether the clear fixed-domain LP signal improves the full incumbent/bound tradeoff, using the same new PE and two independent complete own-H arms.",
+  "qualification": {
+    "closeout_SHA": "c5e0b5377cbd7435937cb625a64a9410f812e84fee2cc30a894fd3e0b4ffb198",
+    "control_audit_SHA": "75b08b5aca0b883744d515f8d18fd3b4356606591a5d580c48e977407ac8956d",
+    "first_call": 1,
+    "first_call_SHA": "aa751ac05b29ea9b216d578f8ac826c8f5a66c225e198dde3679fab35704846b",
+    "root_PF_rows": 451,
+    "root_GD_rows": 2,
+    "root_beta": 0.6275566244691911,
+    "root_floor": 0.1476561333333308,
+    "initial_root_LP_calls": 1,
+    "extra_root_LP": 0
+  },
+  "constraints": {
+    "pair_caps": [
+      2400,
+      2400
+    ],
+    "Seed": 0,
+    "Threads": 1,
+    "H_seed": 20260626,
+    "serial": true,
+    "Shared_S": false,
+    "STOCK": false,
+    "no_cross_arm_information": true,
+    "proof_root_unchanged": true
+  },
+  "failures_retained": "Two no-Optimize nonminimal-Start fixture corrections and one mistaken historical zero-GD assumption are preserved and charged; no production failure inferred.",
+  "numerical_limits": "Floating LP qualifications use inherited tolerances; K35 reported dual diagnostics retained; no exact rational LP optimum claim. Full benefit is untested before this pair.",
+  "review_artifacts": [
+    "review/static_review.json",
+    "review/actual_writer_matrix_review.json",
+    "qualification_native_writer_v3.json",
+    "qualification_zero_GD_context.json",
+    "qualification_entry.json"
+  ],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "independent_check_seconds": 0.2856659998651594
+}

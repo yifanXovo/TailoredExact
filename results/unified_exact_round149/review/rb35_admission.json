@@ -1,0 +1,80 @@
+{
+  "schema": "round149-independent-RB35-admission-v1",
+  "decision": "ACCEPT",
+  "matrix_SHA": "cc65ca957002f0b660ecd9190094bc915bdf882d54baa03878642e12239fa96e",
+  "independent_nonimplementer_review": true,
+  "candidate_manifest_SHA": "06e110011040a3b4f1482076dd872c419466c669882dc4c1d5ba2a496bd29c27",
+  "source_commit": "380a85f866bffb914036190f8ee2700ce8b55978",
+  "PE_SHA": "373efa9a596aaf02fb332685515fcfe88df1b169cbe53b295ab6027140620295",
+  "reason": "K35 shows useful physical-incumbent and signed-gap gains at a modest supported-L loss; both remain open. One RB35-T2 pressure pair is the required discriminating test of retained standalone-D incumbent benefit under resource-shortage floor. This is justified conditional continuation, not broad confirmation or promotion.",
+  "k35_checks": {
+    "delta_U": -0.013559550988323621,
+    "delta_L": -0.004788969932568832,
+    "delta_signed_gap": -0.00877058105575479,
+    "U_improvement_percent": 2.003483174443152,
+    "supported_L_declines": true,
+    "both_open": true,
+    "no_speed_claim": true,
+    "all_accepted_Native_returned": 15
+  },
+  "frozen_scope": {
+    "role": "R-B35-S-T2",
+    "V": 35,
+    "M": 3,
+    "T": 7200,
+    "rho": 1,
+    "lambda_value": 0.055125275219827186,
+    "Omega": 18.140499000000002,
+    "same_new_PE": true,
+    "Seed": 0,
+    "Threads": 1,
+    "H_seed": 20260626,
+    "cap_each": 2400,
+    "serial": true,
+    "complete_independent_own_H": true,
+    "no_cross_arm_information": true,
+    "GD": true,
+    "PF_only_difference": true,
+    "STOCK": false,
+    "Shared_S": false,
+    "proof_root_unchanged": true,
+    "source_hashes_match": true,
+    "helper_hashes_match": true
+  },
+  "budget_before": {
+    "G1_seconds": 4853.607362099923,
+    "remaining_G1_seconds": 13146.392637900077,
+    "by_category": {
+      "diagnostic": 88.45713159977458,
+      "native": 4765.150230500149
+    },
+    "limits": {
+      "diagnostic": 18000.0,
+      "native": 18000.0
+    },
+    "category_remaining": {
+      "diagnostic": 17911.542868400225,
+      "native": 13234.849769499851
+    },
+    "separately_reported_seconds": 56.17704300000332,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "reserved_caps": 4800,
+  "verification_reserve": 1800,
+  "next_stage": "Run exactly this frozen pair; judge important incumbent/signed-gap regressions before any further study.",
+  "no_extra_Seed_or_K20_RX20_panel_admitted": true,
+  "helper_recovery": {
+    "only_exact_recorded_byte_hashes": true,
+    "receipt_SHA": "d543c94ad136cbb2c3c6aff5c8b8418ffb3048e92eba48add365c7377a21f601",
+    "recompile": 0,
+    "reoptimize": 0
+  },
+  "blocked_findings": [],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "independent_check_seconds": 0.08541149995289743,
+  "additional_outer_allowance_seconds": 1.0,
+  "measurement_basis": "This continuation review only; prior cumulative 5.5s pre-full allowance remains separate. Small read-only shell/Python durations rounded upward."
+}

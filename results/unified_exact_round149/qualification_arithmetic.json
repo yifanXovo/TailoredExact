@@ -1,0 +1,63 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "Native_load": 0,
+  "cases": [
+    {
+      "tag": "fixed_floor",
+      "feasible": true,
+      "p": 0.19999999999999996,
+      "beta": 0.9,
+      "rows": 0,
+      "exact_outward_PASS": true
+    },
+    {
+      "tag": "shortage",
+      "feasible": true,
+      "p": 0.22499999999999978,
+      "beta": 0.9,
+      "rows": 0,
+      "exact_outward_PASS": true
+    },
+    {
+      "tag": "surplus",
+      "feasible": true,
+      "p": 0.22499999999999934,
+      "beta": 0.9,
+      "rows": 0,
+      "exact_outward_PASS": true
+    },
+    {
+      "tag": "zero",
+      "feasible": true,
+      "p": 0,
+      "beta": 0.9,
+      "rows": 0,
+      "exact_outward_PASS": true
+    },
+    {
+      "tag": "zero_weight",
+      "feasible": true,
+      "p": 0.0999999999999999,
+      "beta": 0.9,
+      "rows": 0,
+      "exact_outward_PASS": true
+    },
+    {
+      "tag": "kink_boundary",
+      "feasible": true,
+      "p": 0,
+      "beta": 0.9,
+      "rows": 0,
+      "exact_outward_PASS": true
+    },
+    {
+      "tag": "infeasible",
+      "feasible": false,
+      "p": 0,
+      "beta": 0.9,
+      "rows": 0,
+      "exact_outward_PASS": true
+    }
+  ]
+}
