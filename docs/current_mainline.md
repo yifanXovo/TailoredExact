@@ -133,3 +133,16 @@ implementation is [research only](../results/unified_exact_round148/candidate_de
 no proof/seed/placement rescue is opened. R147 D remains a limited paper
 candidate and R137 remains stable. [Actual delivery](../results/unified_exact_round148/RESUME.md)
 preserves production, wrapper, scientific and publication identities.
+
+<!-- Round149 evidence -->
+
+The [Round149 penalty-product feedback study](round149_research.md) propagates
+an already implied scalar G bound into the existing state-product envelopes,
+using a certified weighted resource floor and no extra root LP. Three matched
+base-D LPs improve. Same-new-PE K35 gains 2.00% in physical U at a small L cost;
+RB35 gains L but loses 3.09% in U and has a larger signed gap. The final K20
+pair remains unproved with equal U and slightly worse PF L. The complete
+implementation is [research only](../results/unified_exact_round149/candidate_decision.json),
+with no promotion or further experiment queued. R137 stays stable and R147 D
+retains its limited candidate status. The [delivery record](../results/unified_exact_round149/RESUME.md)
+separates scientific, executable, wrapper and publication identities.

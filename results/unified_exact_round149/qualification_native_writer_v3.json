@@ -1,0 +1,134 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "Native": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "facts": [
+    {
+      "tag": "shortage",
+      "Start": "physical_start",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "shortage",
+      "Start": "nonminimal_epigraph",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "shortage",
+      "model": "on",
+      "actual_Native_rows": 8,
+      "matrix_SHA": "c05f80a0e8e2a868052c3397a59916faba3214af2b5cfc39a8d4a738742406ab",
+      "columns": 77,
+      "original_variables_preserved": true
+    },
+    {
+      "tag": "shortage",
+      "model": "child_on",
+      "actual_Native_rows": 0,
+      "matrix_SHA": "abc65bef76a25e49bebcbc59723ff258c1bbbfe1f65a260d21930067695d61c1",
+      "columns": 67,
+      "original_variables_preserved": true
+    },
+    {
+      "tag": "fixed",
+      "Start": "physical_start",
+      "complete": true,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "fixed",
+      "Start": "nonminimal_epigraph",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "fixed",
+      "model": "on",
+      "actual_Native_rows": 3,
+      "matrix_SHA": "97ee481793648e9cfd66b0cd1464c16425768d77cff456e5157e3e6d482bea90",
+      "columns": 67,
+      "original_variables_preserved": true
+    },
+    {
+      "tag": "zero_floor",
+      "Start": "physical_start",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_floor",
+      "Start": "nonminimal_epigraph",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_floor",
+      "model": "on",
+      "actual_Native_rows": 0,
+      "matrix_SHA": "ae61307365474de558a137356d31fd21cd70f398eb798254b878322753c3a335",
+      "columns": 85,
+      "original_variables_preserved": true
+    },
+    {
+      "tag": "zero_GD",
+      "Start": "physical_start",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_GD",
+      "Start": "nonminimal_epigraph",
+      "complete": true,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_GD",
+      "model": "on",
+      "actual_Native_rows": 12,
+      "matrix_SHA": "aff941b15e0c60278d20101e4c262ca92ec5bfa1ac402a69558e554a4ca65946",
+      "columns": 85,
+      "original_variables_preserved": true
+    }
+  ]
+}

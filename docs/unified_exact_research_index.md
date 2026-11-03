@@ -191,3 +191,17 @@ implementation is [research only](../results/unified_exact_round148/candidate_de
 no proof/seed/placement rescue is opened. R147 D remains a limited paper
 candidate and R137 remains stable. [Actual delivery](../results/unified_exact_round148/RESUME.md)
 preserves production, wrapper, scientific and publication identities.
+
+<!-- Round149 evidence -->
+
+The [Round149 penalty-product feedback study](round149_research.md) supplies
+the continuous BRP resource floor, conservative cutoff-to-product propagation,
+three positive matched base-D LP increments and a redundant scalar control.
+Six same-new-PE own-H arms show mixed complete value: K35 improves physical U
+and signed gap, RB35 trades better L for worse U/gap, and K20 gains no proof.
+The [decision](../results/unified_exact_round149/candidate_decision.json) retains
+the default-off implementation as research only, without treating RB35's
+moderate loss as a trigger of the severe reference rule. R137 remains stable,
+R147 standalone D remains its prior limited candidate, and no seed, factor,
+AM or dynamic rescue follows. [Actual delivery](../results/unified_exact_round149/RESUME.md)
+records cost, source/PE/helper identity, public recovery and bounded cleanup.

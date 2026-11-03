@@ -1,0 +1,98 @@
+\section{Returning penalty information to state-product envelopes}
+\label{sec:penalty-product-feedback}
+
+Our objective is a Gini epigraph term plus a weighted inventory penalty,
+$g+\sum_i\omega_i e_i$, where $e_i\geq |c_iY_i-1|$ and $\omega_i$
+already includes the penalty multiplier.  The normal heuristic provides a
+verified incumbent $U_0$.  Over the root inventory boxes and the necessary
+resource interval $B^-\leq\sum_iY_i\leq B$, define
+\[
+ p_*=\min\left\{\sum_i\omega_i|c_iY_i-1|:
+ \ell_i\leq Y_i\leq u_i,\ B^-\leq\sum_iY_i\leq B\right\}.
+\]
+Clipping each station to its preferred inventory $1/c_i$ and allocating any
+resource shortage or surplus in increasing marginal cost $\omega_i c_i$
+solves this continuous resource relaxation in $O(n\log n)$ time.
+For production, the allocation only selects actual finite nonnegative
+dual multipliers $\mu,\nu$.  Outward arithmetic evaluates
+\[
+ \underline p\leq \mu B^- -\nu B+
+ \sum_i\min_{\ell_i\leq y\leq u_i}
+ \{\omega_i|c_iy-1|+(\nu-\mu)y\}\leq p_*.
+\]
+Each station minimum needs only the endpoints and its possible kink.
+An independent exact-arithmetic diagnostic verifies the resource primal
+and dual optima and the conservative production direction.
+
+The original penalty, resource and incumbent-cutoff rows already imply
+$g\leq U_0-\underline p$.  Thus the scalar bound is not new information
+for the old continuous model.  Its propagation into the disaggregated
+products is nevertheless incomplete.  With state selectors $s_{iy}$ and
+products $t_{iy}$, the old block satisfies
+\[
+ \sum_y s_{iy}=1,\qquad \sum_y t_{iy}=g,\qquad
+ \gamma_Ls_{iy}\leq t_{iy}\leq\gamma_Us_{iy}.
+\]
+Set $\beta=\min\{\gamma_U^0,\operatorname{up}(U_0-\underline p)\}$ and
+add $t_{iy}\leq\beta s_{iy}$ for every existing state when the old upper
+bound is larger.  The product-sum equation then also gives
+$t_{iy}\geq g-\beta(1-s_{iy})$.  Integer completions under the old cutoff
+are preserved, since $t_{iy}=gs_{iy}$ and $g\leq\beta$; this argument also
+covers feasible nonminimal epigraph completions.
+
+For strictness at the block level, take the old interval $[0,1]$,
+$\beta=.6$, $s=(.5,.5)$, $g=.5$, and $t=(.4,.1)$.  This point satisfies
+the old block and the scalar bound but violates $t_1\leq .6s_1$.
+This is standard product convexification and bound propagation, not a new
+general theorem.  The question is whether the specific BRP resource floor
+and the observed VD-P propagation gap have useful complete-search value.
+
+Three saved base-D models, on three physical instances, were reoptimized
+after adding only the product upper rows.  No old optimum was recomputed
+and no variable was fixed to its saved value.  The numerical optimum
+increments are $.001033042371$ for K20, $.001917930741$ for K35 and
+$.000598602232$ for RX20.  A K35 scalar-only control differs from the
+saved optimum by $-3.23\cdot10^{-7}$, within the existing quality tolerance.
+These are floating LP qualifications, not exact rational optimality
+certificates.  In particular, K35's PF numerical primal--dual diagnostic
+difference is about $.000619046$ and is reported with its residuals;
+the diagnostic dual still exceeds the saved old primal.  Saved-point
+separation, block strictness, optimized LP gain and complete algorithm
+benefit are distinct claims.
+
+The complete candidate uses only its own paid heuristic, computes beta
+once, and installs the rows before the first formal solve.  It adds no
+source solve, column or extra root reoptimization.  It keeps the logical
+proof-root interval, AM geometry and closed-cover policy.  Compatible
+children inherit the frozen beta; a child upper bound already below beta
+needs no additional row.  Construction, readback, presolve and search
+costs are paid by each complete arm.  The accompanying final report gives
+the entered same-new-executable comparisons, physical incumbents,
+externally supported lower bounds, signed gaps, full costs and adoption
+decision; cap-near time differences on open runs are not convergence speed.
+
+The stable reference remains R137 GI-TBC.  R147 standalone D has only its
+previously established limited candidate status.  Earlier STOCK and
+TC+STOCK results, the corrected AM negative anchors, and R148's serious
+RB35 incumbent/signed-gap loss remain relevant historical boundaries.
+No Shared-S/STOCK/RN combination, AM rescue, extra seed or dynamic
+incumbent rebuilding is part of this intervention.
+% ROUND149 FINAL EVIDENCE
+\paragraph{Complete comparisons.}
+\begin{center}\small\begin{tabular}{llrrrr}
+Role & Method & Physical $U$ & Supported $L$ & Gap (\%) & Total (s) \\
+\hline
+K-20-S & D & 0.716806546 & 0.704552496 & 1.7095 & 1210.762 \\
+K-20-S & D\_PF & 0.716806546 & 0.703950558 & 1.7935 & 1218.140 \\
+K-35-U & D & 0.676798845 & 0.545729445 & 19.3661 & 2378.831 \\
+K-35-U & D\_PF & 0.663239294 & 0.540940475 & 18.4396 & 2386.084 \\
+R-B35-S-T2 & D & 0.335883589 & 0.219657579 & 34.6031 & 2378.742 \\
+R-B35-S-T2 & D\_PF & 0.346246204 & 0.224643138 & 35.1204 & 2383.211 \\
+\end{tabular}\end{center}
+All arms use Seed0/Threads1, independent complete own H, the original physical objective and a matched same-new-executable control. Open runs have no certificate time; cap-near timing differences are not convergence speed.
+For K-20-S, PF changes physical U by +0.000000000, supported L by -0.000601938, and signed gap by +0.000601938.
+For K-35-U, PF changes physical U by -0.013559551, supported L by -0.004788970, and signed gap by -0.008770581.
+For R-B35-S-T2, PF changes physical U by +0.010362615, supported L by +0.004985560, and signed gap by +0.005377055.
+Adoption decision: \texttt{RESEARCH\_ONLY\_PENALTY\_PRODUCT\_FEEDBACK\_NO\_PROMOTION}.
+Retain frozen penalty-product feedback as research only; do not recommend the current uniform D+PF implementation as a paper enhancement. Three same-domain product LP increments and block validity are established. K35 gives a real 2.00348\% physical-U improvement and 6.69155\% smaller signed gap with 0.87754\% lower supported L. RB35 instead loses 3.08518\% in physical U, gains 2.26970\% in L, and has 4.62638\% larger signed gap. This is not a trigger of the inherited severe double-open reference rule, but it gives up important standalone-D incumbent value. The one final K20 proof clarification returns identical U, no certificate on either arm, and a slightly lower PF L. That supplies no proof advantage to justify the mixed hard-role tradeoffs. All six formal own-H arms use the same new PE and original matched windows. Keep the valid implementation and complete evidence; preserve stable R137 and R147's previously limited D candidate. This finite known-Seed0 result neither invalidates the propagation family nor establishes broader robustness. No further experiment is queued.
+Charged experimental outer cost is 12060.885541s of 18000s, including own H, construction, solves, qualification, failures and necessary verification once. Build takes 56.177043s separately. Nested solver runtimes and Work are not charged twice. Stable R137 and the previous limited R147 D status are preserved; no additional experiment is queued.

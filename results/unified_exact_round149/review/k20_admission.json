@@ -1,0 +1,76 @@
+{
+  "schema": "round149-independent-final-K20-admission-v1",
+  "decision": "ACCEPT",
+  "matrix_SHA": "ccf7c379223f7ac5fa4a5b29cd51e9312c20dfd15e5607083c4cb4aff7e3077e",
+  "independent_nonimplementer_review": true,
+  "candidate_manifest_SHA": "06e110011040a3b4f1482076dd872c419466c669882dc4c1d5ba2a496bd29c27",
+  "source_commit": "380a85f866bffb914036190f8ee2700ce8b55978",
+  "PE_SHA": "373efa9a596aaf02fb332685515fcfe88df1b169cbe53b295ab6027140620295",
+  "reason": "The hard-role study has a real mixed tradeoff: K35 improves physical U and signed gap, while RB35 loses incumbent and signed-gap value despite a stronger L. The RB35 loss is below the serious reference rule but still matters. A single final K20 pair asks a different, decision-relevant question: whether PF repairs D certification weakness, supported by the positive K20 matched LP and original resource-shortage mechanism. A substantial proof benefit could justify accepting the measured tradeoffs for a limited candidate; absent such benefit the mixed hard-role results do not support recommendation. This is the sole final clarification, independent of its outcome.",
+  "discriminating_question": "Under identical new-PE cap1200 complete own-H algorithms and the original R134 policy, does D+PF deliver meaningful K20 proof/certificate value versus D?",
+  "current_evidence": {
+    "K35_U_improvement_percent": 2.003483174443152,
+    "K35_signed_gap_improvement_percent": 6.691554,
+    "RB35_U_loss_percent": 3.085180391474161,
+    "RB35_signed_gap_loss_percent": 4.626378326820863,
+    "RB35_serious_double_open_regression": false,
+    "RB35_loss_not_ignored": true,
+    "K20_matched_LP_gain": 0.0010330423712106296,
+    "short_health_arm_is_not_performance_control": true,
+    "all_accepted_Native_returned": 25
+  },
+  "frozen_scope": {
+    "role": "K-20-S",
+    "V": 20,
+    "M": 2,
+    "T": 5400,
+    "lambda_value": 0.15,
+    "same_new_PE": true,
+    "Seed": 0,
+    "Threads": 1,
+    "H_seed": 20260626,
+    "cap_each": 1200,
+    "serial": true,
+    "complete_independent_own_H": true,
+    "no_cross_arm_information": true,
+    "GD": true,
+    "PF_only_difference": true,
+    "STOCK": false,
+    "Shared_S": false,
+    "proof_policy_unchanged": true,
+    "source_hashes_match": true,
+    "helper_hashes_match": true
+  },
+  "budget_before": {
+    "G1_seconds": 9617.667552100029,
+    "remaining_G1_seconds": 8382.332447899971,
+    "by_category": {
+      "diagnostic": 90.34759289980866,
+      "native": 9527.31995920022
+    },
+    "limits": {
+      "diagnostic": 18000.0,
+      "native": 18000.0
+    },
+    "category_remaining": {
+      "diagnostic": 17909.65240710019,
+      "native": 8472.68004079978
+    },
+    "separately_reported_seconds": 56.17704300000332,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "reserved_caps": 2400,
+  "verification_reserve": 1800,
+  "required_stop_after_pair": true,
+  "no_RX20_Seed_extra_time_combination_or_further_clarification": true,
+  "no_automatic_promotion": true,
+  "numerical_limits": "Open cap-adjacent times are not convergence speed; proof outcome must use accepted original R134 numerical qualification. One pair establishes finite known-seed evidence, not robustness.",
+  "blocked_findings": [],
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "independent_check_seconds": 0.06196850002743304,
+  "additional_outer_allowance_seconds": 1.0,
+  "measurement_basis": "This final-clarification admission only; prior cumulative 5.5s and RB35 1.0s review allowances remain separate. Small read-only shell/Python durations rounded upward."
+}

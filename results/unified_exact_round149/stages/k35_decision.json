@@ -1,0 +1,66 @@
+{
+  "decision": "PROCEED_RB35_PRESSURE_PAIR",
+  "reason": "K35 same-new-PE full pair improves physical U 2.003483% and signed gap 6.691554%, with supported L .877536% lower; both open. This useful but finite tradeoff justifies one RB35-T2 pressure pair to test preservation of standalone D incumbent benefit under a resource-shortage floor. It does not justify promotion, extra seeds or an automatic proof panel.",
+  "comparison": {
+    "role": "K-35-U",
+    "seed": 0,
+    "same_new_PE": true,
+    "own_H_equal": true,
+    "timing_relation": "same_round_serial",
+    "identical_host_load_not_claimed": true,
+    "D_U": 0.6767988451958106,
+    "D_L": 0.545729444783031,
+    "D_signed_gap": 0.1310694004127796,
+    "D_relative_gap": 0.19366079204059333,
+    "D_certificate": false,
+    "D_T_produce": 2371.146937299054,
+    "D_T_cert": null,
+    "D_T_verify": 7.683750699972734,
+    "D_T_total": 2378.830687999027,
+    "PF_U": 0.663239294207487,
+    "PF_L": 0.5409404748504621,
+    "PF_signed_gap": 0.1222988193570248,
+    "PF_relative_gap": 0.1843962208288054,
+    "PF_certificate": false,
+    "PF_T_produce": 2371.170971685322,
+    "PF_T_cert": null,
+    "PF_T_verify": 14.913481900002807,
+    "PF_T_total": 2386.084453585325,
+    "delta_U": -0.013559550988323621,
+    "delta_L": -0.004788969932568832,
+    "delta_signed_gap": -0.00877058105575479,
+    "delta_relative_gap": -0.00926457121178792,
+    "U_improvement_percent": 2.003483174443152,
+    "L_improvement_percent": -0.8775355587552751,
+    "no_open_cap_as_convergence": true,
+    "serious_double_open_regression": false
+  },
+  "budget_before": {
+    "G1_seconds": 4851.695579800056,
+    "remaining_G1_seconds": 13148.304420199944,
+    "by_category": {
+      "diagnostic": 86.54534929990768,
+      "native": 4765.150230500149
+    },
+    "limits": {
+      "diagnostic": 18000.0,
+      "native": 18000.0
+    },
+    "category_remaining": {
+      "diagnostic": 17913.454650700092,
+      "native": 13234.849769499851
+    },
+    "separately_reported_seconds": 56.17704300000332,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "complete_cap_reserved": 4800,
+  "verification_reserve": 1800,
+  "no_K20_RX20_or_Seed_panel_admitted": true,
+  "new_PE_unchanged": true,
+  "matrix_SHA": "cc65ca957002f0b660ecd9190094bc915bdf882d54baa03878642e12239fa96e",
+  "independent_admission_required": true,
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0
+}
