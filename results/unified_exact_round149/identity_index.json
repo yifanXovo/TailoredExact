@@ -13,6 +13,8 @@
   },
   "source_hash_manifest_SHA": "06e110011040a3b4f1482076dd872c419466c669882dc4c1d5ba2a496bd29c27",
   "fixed_science": "recorded after scientific commit in publication_pin.json",
-  "delivery_head": "actual PR readback, not production source",
-  "separate_identities": true
+  "delivery_head": "Actual PR head may advance by metadata-only commits; concrete completed payload is delivery_snapshot_commit",
+  "separate_identities": true,
+  "delivery_snapshot_commit": "8862401946ba2bef58b8e78efa4fc20ec2cd9e6a",
+  "delivery_completion_pin": "delivery_completion_pin.json"
 }
