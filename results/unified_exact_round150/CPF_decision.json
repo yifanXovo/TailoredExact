@@ -1,0 +1,25 @@
+{
+  "study_complete": true,
+  "decision": "MATCHED_NUMERICAL_LP_INCREMENT_RETAIN_FOR_FUTURE_UNIFIED_CANDIDATE",
+  "qualification_layer": "three complete matched numerical LP increments beyond PF",
+  "reason": "All three saved PF points are separated and all three free reoptimizations report positive CPF-minus-PF increments, with tight new numerical primal-dual diagnostics and inexpensive Fraction construction. This admits future complete-cost evaluation; it does not establish complete algorithm benefit or exact rational LP optimality.",
+  "CPF_minus_PF": {
+    "K-20-S": 0.0007830014031290355,
+    "K-35-U": 0.0004983962632433003,
+    "R-X20-S-T1": 0.0011207779783533045
+  },
+  "new_LP_Optimize": 3,
+  "repeated_baseline_Optimize": 0,
+  "extra_quality_Optimize": 0,
+  "new_production_implementation": false,
+  "new_build": false,
+  "CPF_complete_arm_entered": false,
+  "automatic_expansion": false,
+  "independent_of_B_D_adoption": true,
+  "next_information": "In a future study, qualify a single fixed-dual CPF implementation on top of D+PF, including actual transport, Start and child scope. The most informative bounded complete comparison is D+PF versus D+PF+CPF on the original RB35 objective, which previously exposed PF incumbent cost. Do not dispatch methods by role and do not start that experiment in Round150.",
+  "risks": [
+    "Presolve and Native search can offset a stronger initial LP.",
+    "Physical incumbent quality, supported L, proof retention and complete fees may trade off.",
+    "Three known fixed domains do not establish broad robustness or the full integer-routing hull."
+  ]
+}

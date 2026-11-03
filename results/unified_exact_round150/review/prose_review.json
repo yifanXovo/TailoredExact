@@ -1,0 +1,36 @@
+{
+  "decision": "ACCEPT_CURRENT_MATHEMATICS_AND_LP_PROSE_WITH_DELIVERY_FOLLOWUP",
+  "independent_nonimplementer_review": true,
+  "reviewed_files": [
+    "mathematical_analysis.md",
+    "LP_report.md",
+    "manuscript.tex"
+  ],
+  "Native_load": 0,
+  "Optimize": 0,
+  "heavy_MPS_scan": false,
+  "actual_light_read_process_outer_seconds": 0.4334406,
+  "nested_read_seconds_not_added_again": 0.2509072,
+  "manual_theoretical_reading_independently_timed": false,
+  "findings": [
+    "Fixed-dual signs, weighted omega units, exact leave-one-out and outward beta direction are correct.",
+    "The local state/product hull is not enlarged into a cross-station, routing or full integer hull claim.",
+    "Integer completion validity retains feasible nonminimal g/e completions and correctly treats empty state branches.",
+    "AP example separates the retained t coordinates and explicitly permits a different t lift at the same projected point.",
+    "All three numerical CPF increments and quality tables agree with the saved result.json records.",
+    "K35 quality discussion correctly compares the new numerical dual with the old saved primal while preserving the old primal-dual diagnostic limitation and making no exact optimum claim.",
+    "CPF has only earned matched numerical LP qualification; no production, end-to-end or broad robustness gain is inferred.",
+    "No additional Optimize is justified by the present numerical screen."
+  ],
+  "delivery_followup": {
+    "status": "TO_CHECK_IN_FINAL_REVIEW",
+    "recommendation": "Make the historical counterpoints concrete in the manuscript section or final report rather than only saying they remain relevant.",
+    "required_information": [
+      "R149 K35 PF U improvement and 583.047s final-incumbent arrival; K20 common U arrival at 131.172s versus 394.906s; RB35 PF U loss 3.08518% and no new certificates.",
+      "K20 STOCK/STOCK+GD certificates about94.261/74.916s; R140 TC+STOCK and R145 RN-P stronger historical endpoints, with scope, negative evidence and source/PE differences preserved.",
+      "R140 Seed1 evidence is not pure seed causality; R52 has three corrected severe false-retain cases plus the genuine correct-retain negative anchor."
+    ]
+  },
+  "final_confirmation_endpoints_reviewed": false,
+  "final_scientific_or_delivery_acceptance": false
+}

@@ -1,34 +1,71 @@
-# Round150 continuation
+# Round150 scientific closeout and delivery
 
-Active branch: `codex/round150-gd-confirmation-conditional-feedback`, based on
-verified R149 delivery `d33d47bb224ab3cd4eeacabc731b3fa8b16b7b2c`. Main has not
-absorbed it; temporary Draft PR base is the R149 branch. No merge is authorized.
+The scientific work is complete. No more Optimize is queued for Round150.
+The four frozen own-H B/D arms and three fixed-dual CPF LPs are closed.
 
-The four B/D own-H launches are frozen in `confirmation_matrix.json` before
-observing a new D result. Both inputs are known/exposed R137 configurations
-outside GD selection, with their original lambda=.15 and physical horizons.
-Same R149 PE SHA `373efa9a596aaf02fb332685515fcfe88df1b169cbe53b295ab6027140620295`,
-source `380a85f866bffb914036190f8ee2700ce8b55978`, Seed0/Threads1 and H seed20260626.
-GD is off/on for B/D; PF, Shared-S, STOCK and AP are off. No new build.
+**D:** retain a limited uniform paper candidate and restrict the claim. The
+two additional known/exposed configurations are outside GD selection; they
+do not establish broader superiority. N-C20-U retains the same positive U
+and qualified certificate but D takes43.73383% more T_cert. On N-B35-S D
+improves supported L0.16464%, loses U2.24371% and enlarges signed gap about
+15.46345%; neither arm certifies. The inherited selected K35/RB35 incumbent
+gains remain real. The ordinary losses do not trigger the severe reference
+rule, and that rule is not the sole adoption criterion. Stable GI-TBC remains
+primary; no default replacement, role-based dispatch or broad robustness claim.
 
-`CPF_frozen.json` identifies three new complete PF+CPF MPS files constructed
-from fixed R149 PF carriers. Preparation preserves the old objective, bounds,
-columns and every old row exactly and leaves every variable free. No baseline
-Optimize has occurred. Independent review gates are required before solving.
+**CPF:** three matched numerical LP increments beyond PF at low construction
+cost justify future evaluation of one unified candidate. Increments are
+.000783001403129 (K20), .000498396263243 (K35), .001120777978353 (RX20).
+All variables were free and every old PF semantic item is retained. The new
+K35 numerical dual exceeds the old saved PF primal; the old .000619046
+diagnostic primal-dual limitation remains visible. These are numerical LP
+qualifications, not exact rational optimum certificates. No baseline or
+extra quality Optimize, fourth LP, production implementation or CPF full run.
 
-Remaining: run the three admitted CPF LPs and the four admitted complete arms
-serially; analyze both tasks independently; write the paper section, decisions,
-costs, identities and independent final review; package, commit, push and create
-an English Draft PR, then verify finite public recovery and bounded cleanup.
-No clarification pair or CPF full run is queued.
+| Role | Arm | U | Supported L | T_cert | T_total |
+|---|---|---:|---:|---:|---:|
+| N-C20-U | B | .245505069182498 | .245505069182452 | 284.812925 | 289.512449 |
+| N-C20-U | D | .245505069182498 | .245505049066264 | 409.372523 | 416.478758 |
+| N-B35-S | B | .450291503262878 | .389097919285683 | null | 2375.245628 |
+| N-B35-S | D | .460394748354119 | .389738525821991 | null | 2378.892966 |
 
-Never rerun an entered arm or LP automatically. Check `fees/*/PID.json` with
-the actual creation FILETIME and observe process exit. A healthy interrupted
-process must finish; a sealed producer can receive missing pure verification
-without another Optimize. Closed verification is immutable. The outer ceiling
-is14400s, counted once through `round150_common.py`, including own H,
-construction, failures and necessary verification; nested Runtime/Work is not
-another charge. New raw/temp/restore assets stay in `E:\codes\ExactEBRP-work`.
-Protect `E:\codes\ExactEBRP`, user changes and all old evidence. Delete only
-current-round reconstructible duplicates after public recovery; zero deletion
-is acceptable.
+All19 actual complete-arm Native calls returned (4/5/5/5), plus3 separate CPF
+LP calls. Actual GD rows/NZ are0/0 and2/369 for N-C20-U B/D, and0/0 and2/379
+for N-B35-S. Neither call counts nor row counts were assumed. First-call-SHA,
+OFF, original physical/R134, own-H, Start and immutable closeout checks pass.
+
+The production source remains380a85f866bffb914036190f8ee2700ce8b55978; reused
+PE SHA is373efa9a596aaf02fb332685515fcfe88df1b169cbe53b295ab6027140620295.
+Source, old method definitions, R150 wrapper commitc160cbc99, frozen design
+commit50d01a4de, fixed science and delivery identities are separate. Both roles
+keep lambda=.15 and original physical inputs/horizons. Seed0/Threads1, H seed
+20260626, PF/Shared-S/STOCK/AP off. No new build or source/default change.
+
+`cost_report.json` is the authoritative final outer ledger; each own H,
+construction, solve, qualification and necessary validation is paid once.
+Nested Runtime/Work and old fees are not added. Manual/startup allowances are
+disclosed, and pure theory/authoring/public I/O are separate. The ceiling is
+14400s, with no optional clarification capacity spent.
+
+Independent final scientific/engineering review has passed, including four
+physical fleets,112 improving trajectory points,19 call/model bindings and
+offline new-CPF primal/dual checks. The independent physical checker initially
+omitted depot return unloading; both its initially incomplete and corrected
+checks are paid and disclosed, with no production change or new solve. The
+initial process returned success rather than an error; its exact source and
+stdout are retained in review/history, without fabricating a failure.
+
+Final experimental outer cost is **5560.241266800s / 14400s**, including final
+review and disclosed allowances once. There is no build. The mathematical
+analysis, matched LP report, full endpoints/trajectories, decisions and paper
+section are complete. Remaining delivery steps: finite incremental carriers;
+normal commit/push and English Draft PR against the verified R149 temporary
+base; one bounded public byte/member recovery and current-round cleanup.
+Main was rechecked atb2b940c1e517a72e226ec60fc49ff19651737632 and has not
+absorbed R149; PR211 is still open Draft atd33d47bb2. Do not start a new
+scientific run to complete delivery.
+
+All new assets stay under `E:\codes\ExactEBRP-work`. Protect the original
+`E:\codes\ExactEBRP`, user changes and all old history. Closed evidence is
+immutable. Delete only current-round reconstructible duplicates after public
+recovery; zero deletion is accepted. No merge, force-push or old-branch deletion.

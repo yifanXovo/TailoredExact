@@ -1,0 +1,201 @@
+% Section fragment for the existing paper; requires amsmath and amssymb.
+\section{Resource and denominator information in the extended formulation}
+\label{sec:resource-denominator-feedback}
+
+The stable complete method is GI-TBC. It combines an independently generated
+physical incumbent with a proof-cover search over the Gini epigraph domain,
+using the shared station states and products of the M-B/VD-P formulation.
+The original physical routes, fleet capacities, time horizon and objective
+remain the objects of optimization and validation. Supported lower bounds
+come from the complete external proof cover. Numerical closure follows the
+accepted R134 policy; a floating solver status is not an exact rational
+optimality certificate. The broad existing GI-TBC experiments are distinct
+from the finite enhancement studies described here.
+
+Let $r_i=c_iY_i\ge0$, $S=\sum_i r_i>0$, and
+$G=\sum_{i<j}|r_i-r_j|/(nS)$. The epigraph variable satisfies $g\ge G$ at
+an integer physical completion. At station $i$ the extended formulation has
+selectors $s_{iy}$ and products $t_{iy}=g s_{iy}$, with
+$\sum_y s_{iy}=1$ and $\sum_y t_{iy}=g$. The question is how existing
+information can be expressed in these extended coordinates, rather than
+how many additional row families can be named.
+
+\paragraph{Denominator information.}
+The classical Gini--Hoover relation is
+\[
+G\ge\sum_i(1/n-r_i/S)_+=\sum_i(r_i/S-1/n)_+.
+\]
+Necessary inventory and support conditions give a state-dependent interval
+$0<D^-_{iy}\le S\le D^+_{iy}$. The low deviation increases with $S$ and
+the high deviation decreases with $S$, giving the two standalone GD rows
+\[
+ng\ge\sum_{i,y}(1-nc_i y/D^-_{iy})_+s_{iy},\qquad
+ng\ge\sum_{i,y}(nc_i y/D^+_{iy}-1)_+s_{iy}.
+\]
+Their validity does not require STOCK rows. A domain on which positivity
+of $S$ is unproved omits the block; zero-row construction and completion
+of the incumbent heuristic before a model exists are legitimate cases.
+
+Shared-S retains the same denominator as a first moment in each station's
+conditional low-deviation mixture. For a finite slope $b_i$ shared by all
+states of station $i$, define
+\[
+\alpha_{iy}(b_i)=\min_{D^-_{iy}\le t\le D^+_{iy}}
+ \{(1/n-c_i y/t)_+-b_i t\}.
+\]
+Then $g\ge\sum_{i,y}\alpha_{iy}(b_i)s_{iy}+(\sum_i b_i)S$.
+The minimum needs endpoints and an in-interval kink. The zero-slope member
+recovers ideal low GD. Retaining GD when appending finite members preserves
+relaxation containment. This is a local convexification with a common first
+moment, not a common joint distribution across stations or a routing hull.
+
+\paragraph{Penalty information and its products.}
+Read the already weighted coefficients from the actual model and write
+$h_i(y)=\omega_i|c_i y-1|$, $p(Y)=\sum_i h_i(Y_i)$ and
+$P_e=\sum_i\omega_i e_i\ge p(Y)$. The cutoff is $g+P_e\le U_0$.
+For the necessary resource box
+\[
+\mathcal R_0=\{Y:\ell_i\le Y_i\le u_i,
+ B^-\le\sum_iY_i\le B\},
+\]
+fix the nonnegative resource multipliers $\mu,\nu$, put $a=\nu-\mu$, and set
+\[
+m_i=\min_{\ell_i\le z\le u_i}\{h_i(z)+az\},\qquad
+d=\mu B^- -\nu B+\sum_i m_i.
+\]
+Weak duality gives $d\le\min_{\mathcal R_0}p(Y)$. A safe global floor
+$\underline p_0$ implies the scalar bound
+$g\le\beta_0=\min\{\gamma_U,\operatorname{up}(U_0-\underline p_0)\}$.
+That scalar bound is already implied in the old LP projection. Uniform PF
+propagates it into $t_{iy}\le\beta_0s_{iy}$, which can strengthen the
+extended product formulation even when the scalar inequality is redundant.
+
+The same fixed dual supplies conditional information without a per-state
+solve. At $Y_i=y$,
+\[
+\delta_i(y)=h_i(y)+ay-m_i\ge0,\qquad
+d_{iy}=\mu B^- -\nu B+\sum_{j\ne i}m_j+h_i(y)+ay=d+\delta_i(y).
+\]
+If $p^*_{iy}$ is the conditional resource minimum, then
+$d\le d_{iy}\le p^*_{iy}$. Define
+\[
+\underline p_{iy}=\max\{\underline p_0,0,\operatorname{down}(d_{iy})\},
+\quad
+\beta_{iy}=\min\{\beta_0,\operatorname{up}(U_0-\underline p_{iy})\}.
+\]
+Conditional penalty feedback (CPF) appends
+$t_{iy}\le\beta_{iy}s_{iy}$ while retaining PF. The construction evaluates
+exact binary64 Fractions with prefix/suffix leave-one-out sums and then
+transports the final penalty downward and beta upward. It never subtracts
+independently rounded lower bounds. Its arithmetic complexity is
+$O(n+\sum_i|\mathcal Y_i|)$ and it uses no source LP, per-state greedy
+optimization or incumbent-triggered update.
+
+At an integer completion an unselected state has $s=t=0$, while a selected
+state has $t=g$ and the cutoff implies $g\le\beta_{iy}$. Thus feasible
+nonminimal epigraph completions are also retained. A conditional beta below
+$\gamma_L$ excludes that state from the improving domain, not the entire
+physical problem. Conditional betas must never be minimized into a global
+g upper bound. For a single station, the simplex, product sum and bounds
+$\gamma_Ls_y\le t_y\le\beta_ys_y$ give the local disjunctive hull: for
+positive mass take the branch value $g_y=t_y/s_y$ and mix. This does not
+describe the cross-station resource or full integer-routing hull.
+
+\paragraph{Evidence and expression relationships.}
+The following levels must be assessed separately: integer validity and local
+expression relations, separation of an actually saved point, free matched
+LP reoptimization, and complete own-incumbent algorithm behavior.
+\begin{center}\small
+\begin{tabular}{p{.12\linewidth}p{.34\linewidth}p{.42\linewidth}}
+Mechanism & Information and mathematical relation & Measured evidence and boundary \\
+\hline
+GD & State-conditioned denominator in Hoover deviation; independent of STOCK
+& Finite selected complete gains; two additional known/exposed configurations
+  outside GD selection are compared below. \\
+Shared-S & Common denominator first moment; zero slopes recover low GD
+& Positive matched LP evidence; measured complete implementation remains
+  research only, including an adverse RB35 incumbent/gap tradeoff. \\
+PF & Global resource penalty floor into product upper facets; scalar bound
+  already implied in projection
+& Three positive LP increments; K35 better U and K20 earlier common final U,
+  with RB35 incumbent cost and no new certificate. \\
+CPF & Fixed-dual conditional cost difference into each product upper facet;
+  retained PF gives containment
+& Three additional positive numerical matched LP increments; no production
+  or complete CPF experiment is inferred. \\
+\end{tabular}
+\end{center}
+
+AP strengthens the penalty epigraph, whereas CPF restricts the product mass
+that a state can carry. With support $\{1,2\}$, $h(y)=.4|y-1|$, $U_0=.8$,
+$\gamma_L=0$ and $\beta_0=.8$, the point $s=(.5,.5)$, $Y=1.5$, $g=.4$,
+$t=(0,.4)$, $P_e=.2$ satisfies AP, cutoff and PF, but violates
+$t_2\le.4s_2$. This is a separation with t retained in a local block.
+Changing t to $(.2,.2)$ restores CPF with the same other coordinates, so
+the example is neither a full BRP witness nor a general AP/CPF ordering.
+All variables must remain free in the complete LP comparison.
+
+\paragraph{Finite LP screen.}
+The new CPF values on K20, K35 and RX20 are respectively
+$.237826346116704$, $.206603355168264$ and $.366724025832099$.
+Their increments over the saved PF values are $.000783001403129$,
+$.000498396263243$ and $.001120777978353$. The earlier PF increments are
+reported separately. The new numerical primal--dual gaps are below
+$1.2\,10^{-15}$; the old K35 PF diagnostic difference remains about
+$.000619046$, with DualVio about $8.92\,10^{-7}$. The new K35 numerical
+dual exceeds the old saved primal, but none of these floating records is
+claimed as an exact rational optimum. Three old baselines are reused without
+Optimize. Low arithmetic cost and these increments justify only future
+evaluation of a unified complete candidate.
+
+The old R149 K35 scalar-only difference is $-3.225086737\,10^{-7}$,
+consistent with exact scalar redundancy and the inherited numerical
+qualification. That control is historical and is not reoptimized or credited
+as CPF evidence.
+
+\paragraph{Historical scope and contribution.}
+R120--122 conditional F bounds rely on solved subdomains, R131 contracts
+domains, GD conditions S, and CPF conditions the fixed resource dual cost.
+R133's integer objective gap is a different difficulty from continuous
+propagation. Prior STOCK and TC+STOCK successes, RN results and corrected AM
+negative anchors remain relevant and are not free matched controls for this
+study. These constructions apply standard duality, conditioning, bound
+propagation and local convexification to this problem. Their contribution
+rests on the expression relationships, inexpensive construction and finite
+evidence; no general new convexification theorem, broad distributional
+robustness or resolution of the full integer epigraph is claimed.
+
+R149 PF improves K35 physical U from $.676798845196$ to $.663239294207$,
+with the improved final incumbent available at583.047s, while its supported L
+falls. On K20, PF reaches the common final U at131.172s versus394.906s for D,
+but neither arm certifies and PF's final L is slightly weaker. On RB35,
+PF loses3.08518\% in U and gains2.26970\% in L, with a larger signed gap;
+it does not trigger the inherited severe double-open reference rule.
+All six R149 arms remain open. These are substantive positive and adverse
+facts; research-only retention does not mean theoretical failure or no gain.
+
+Stronger local historical results remain visible: K20 STOCK/STOCK+GD
+certify around94.261/74.916s; R140 old TC+STOCK Seed0 has K35
+U/L$\approx.650438712/.5682885263$ and RB35
+$\approx.3190804927/.2339272621$; R145 RN-P has K35
+$\approx.660923637174/.550645816146$. Their domains, negative results
+and source/PE differences prevent treating them as free matched controls.
+R140's Seed1 change also changes source/PE/transport and is not a pure
+seed intervention. R52's corrected three severe false-retains coexist with
+a genuine correct-retain negative anchor: parent Work$\approx843.456$
+certifies, while forced midpoint Work$\approx2651.321$ remains capped.
+
+% ROUND150 COMPLETE RESULTS are appended from the accepted endpoints.
+\paragraph{Additional complete comparisons.}
+Both R137 configurations are known/exposed and were outside GD selection. Both retain lambda=.15, original physical inputs/horizons and independent complete own H. The four frozen arms share the R149 executable, Seed0/Threads1 and matched caps.
+\begin{center}\small\begin{tabular}{llrrrr}
+Role & Arm & $U$ & Supported $L$ & Gap (\%) & $T_{\rm total}$ (s) \\
+\hline
+N-C20-U & B & 0.245505069 & 0.245505069 & 0.0000 & 289.512 \\
+N-C20-U & D & 0.245505069 & 0.245505049 & 0.0000 & 416.479 \\
+N-B35-S & B & 0.450291503 & 0.389097919 & 13.5898 & 2375.246 \\
+N-B35-S & D & 0.460394748 & 0.389738526 & 15.3469 & 2378.893 \\
+\end{tabular}\end{center}
+Standalone GD remains a limited uniform candidate for discussion, rather than a replacement for stable GI-TBC. Its selected-role incumbent gains coexist with new costs: N-C20-U retains the same U and accepted certificate but takes 43.73383 percent longer to certify; N-B35-S gains 0.16464 percent in supported L but loses 2.24371 percent in U, and its signed gap is about15.46345 percent larger. Both hard-role arms remain open. The new confirmation does not establish complete superiority outside selection. The same D profile is retained uniformly, with no role-based dispatch and no broad robustness claim.
+R149 PF also improved K35 incumbent U and reached the common K20 final U earlier, while losing RB35 U and gaining no certificate. No-promotion does not invalidate these positive expression and incumbent facts.
+New experimental outer cost is 5560.241267s of14400s. Every own heuristic, construction, solve and necessary verification is charged once; nested Runtime/Work and historical costs are not added. No new build or complete CPF run is entered.
