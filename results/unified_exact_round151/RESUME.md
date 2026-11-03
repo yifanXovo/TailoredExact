@@ -57,3 +57,18 @@ failures, runtime PE/DLL, the active tree and necessary evidence are retained.
 Zero deletion is acceptable; cleanup_record.json records actual metadata and
 volume-space observations. No merge, force-push or branch deletion is authorized
 by this handoff. Future experiments require a separate explicit task.
+
+## Completed publication and workspace closeout
+
+- Fixed science: 3978b0532aec965816a80556988c531bd10be0c2.
+- English Open Draft PR: https://github.com/yifanXovo/TailoredExact/pull/213. Base `codex/round150-gd-confirmation-conditional-feedback` at `7cac24abd8bfffa96a9dc7569d9a93f1697881a7`; head ref `codex/round151-standalone-penalty-propagation`. No merge.
+- Live creation readback matched science head; delivery-only receipts advance the head. The final head ref is checked again after normal push; the stored readback remains a timestamped observation.
+- Public recovery PASS: 7 new carriers /1196 new members,10 inherited members and2 original inputs. All archive and member bytes match the fixed manifests; no producer, Native, Optimize or compiler was invoked.
+- Public recovery took 13.102684s; pack took 3.244139s, separately reported pure I/O.
+- Experimental outer charge remains4875.0555818994635s /14400s; separate build57.03688610019162s.
+- Bounded metadata cleanup complete: zero deletion,0 deleted bytes. Required runtime, unique raw/failures, active tree and public recovery bytes retained. See cleanup_record.json for file-byte estimates and two actual volume-space observations.
+- Independent final scientific/prose review PASS; final delivery metadata readback is recorded under review/.
+
+No further Optimize is queued. A future deeper study needs a distinct object-level gap and explicit preanalysis; this round does not automatically reopen conditional oracles, iterative cutoffs, combinations or more roles.
+
+The indexed diagnostic archive at fixed science already contains the final external-fee ledger, including the finite decision and independent final review. The delivery commit also synchronizes that ledger's thin repository copy. Recover archived raw/fee members by the fixed member index; no expense or experiment changed during publication.
