@@ -24,7 +24,7 @@
 #include "Round145Research.hpp"
 #include "Round146Research.hpp"
 #include "Round148Research.hpp"
-#include "Round149Research.hpp"
+#include "Round151Research.hpp"
 #include "Round97NativeClosure.hpp"
 #include "Round50IntervalMip.hpp"
 #include "Round53CallbackIsolation.hpp"
@@ -818,6 +818,31 @@ void auditRound146Native(const GurobiApi& api,GRBmodel* model,const FixedInterva
     std::ofstream f(request.native_log_path.string()+".round146.native.json");f<<std::setprecision(17)
         <<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)
         <<",\"GD_rows\":"<<actual.size()<<",\"GD_nonzeros\":"<<nz<<",\"new_columns\":0,\"source_solves\":0,\"Optimize_extra\":0}\n";
+    f.close();require(bool(f),"native_audit_write");
+}
+
+void auditRound151Native(const GurobiApi& api,GRBmodel* model,const FixedIntervalMipRequest& request,
+                        const std::vector<std::string>& names){
+    if(round151().mode=="off")return;
+    using namespace round151_detail;
+    const auto expected=round151().expected.find(request.canonical_model_fingerprint);
+    require(expected!=round151().expected.end(),"formal_model_identity");
+    int count=0;require(api.getintattr(model,GRB_INT_ATTR_NUMCONSTRS,&count)==0,"native_row_count");
+    SolverNeutralLinearModel matrix;require(readLinearModel(api,model,int(names.size()),count,matrix),"native_matrix");
+    std::map<std::string,round143_detail::Row> actual;long long nz=0;
+    for(int k=0;k<count;++k){char* name=nullptr;
+        require(api.getstrattrelement(model,GRB_STR_ATTR_CONSTRNAME,k,&name)==0&&name,"native_row_name");
+        if(std::string(name).rfind("r151_",0)!=0)continue;
+        round143_detail::Row row{name,{},matrix.senses[k],matrix.rhs[k]};
+        for(int z=matrix.row_starts[k];z<matrix.row_starts[k+1];++z)
+            row.coefficients[names.at(matrix.column_indices[z])]=matrix.coefficients[z];
+        nz+=row.coefficients.size();require(actual.emplace(row.name,row).second,"duplicate_cap_row");
+    }
+    require(actual.size()==expected->second.size(),"native_cap_count");
+    for(const auto& row:expected->second){const auto hit=actual.find(row.name);
+        require(hit!=actual.end()&&hit->second.coefficients==row.coefficients&&hit->second.sense==row.sense&&hit->second.rhs==row.rhs,"native_cap_transport");}
+    std::ofstream f(request.native_log_path.string()+".round151.native.json");f<<"{\"PASS\":true,\"model_SHA\":"<<std::quoted(request.canonical_model_fingerprint)
+        <<",\"cap_rows\":"<<actual.size()<<",\"cap_nonzeros\":"<<nz<<",\"new_columns\":0,\"source_solves\":0,\"Optimize_extra\":0,\"GD\":false}\n";
     f.close();require(bool(f),"native_audit_write");
 }
 
@@ -2965,6 +2990,7 @@ public:
             auditRound144Native(api_,model,request,native_names);
             auditRound146Native(api_,model,request,native_names);
             auditRound149Native(api_,model,request,native_names);
+            auditRound151Native(api_,model,request,native_names);
             auditRound148Native(api_,model,request,native_names);}
         catch(const std::exception& e){out.failure_reason=e.what();return out;}
         if (request.round68_verified_start) {

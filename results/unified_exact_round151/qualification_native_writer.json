@@ -1,0 +1,138 @@
+{
+  "PASS": true,
+  "Optimize": 0,
+  "Native": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "facts": [
+    {
+      "tag": "shortage",
+      "point": "physical_start",
+      "complete_columns": 77,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "shortage",
+      "point": "nonminimal_epigraph",
+      "complete_columns": 77,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "shortage",
+      "model": "on",
+      "SHA": "844b2f52a116c57c3ea9a67590d7ffa2b2df8fa1793edcab70ee1f757bb30b77",
+      "actual_Native_rows": 8,
+      "actual_Native_nonzeros": 16,
+      "columns": 77
+    },
+    {
+      "tag": "shortage",
+      "model": "child_on",
+      "SHA": "5a2553c5df8cc154d35b0d061e16ed0a71eda585633a1fdd8818ecec27462c41",
+      "actual_Native_rows": 0,
+      "actual_Native_nonzeros": 0,
+      "columns": 67
+    },
+    {
+      "tag": "fixed",
+      "point": "physical_start",
+      "complete_columns": 67,
+      "residual": {
+        "constraints": 2.220446049250313e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "fixed",
+      "point": "nonminimal_epigraph",
+      "complete_columns": 67,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "fixed",
+      "model": "on",
+      "SHA": "601c1777c21f8cacd71db83f1b3eac8c20fbedfce3f29cef165228054fea6f05",
+      "actual_Native_rows": 3,
+      "actual_Native_nonzeros": 6,
+      "columns": 67
+    },
+    {
+      "tag": "zero_floor",
+      "point": "physical_start",
+      "complete_columns": 85,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_floor",
+      "point": "nonminimal_epigraph",
+      "complete_columns": 85,
+      "residual": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "zero_floor",
+      "model": "on",
+      "SHA": "3f61ad6908cad3b7f1d474652b4c548a118ad16e6018a6ff339985a157b1631f",
+      "actual_Native_rows": 9,
+      "actual_Native_nonzeros": 18,
+      "columns": 85
+    },
+    {
+      "tag": "actual_NB35",
+      "point": "physical_start",
+      "complete_columns": 10003,
+      "residual": {
+        "constraints": 1.1102230246251565e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "actual_NB35",
+      "point": "nonminimal_epigraph",
+      "complete_columns": 10003,
+      "residual": {
+        "constraints": 1.1102230246251565e-16,
+        "bounds": 0.0,
+        "integrality": 0
+      }
+    },
+    {
+      "tag": "actual_NB35",
+      "model": "on",
+      "SHA": "537169d2219106d17b5f99163cc15a556f1cbd1cc800622caf9dd8f9c43fa351",
+      "actual_Native_rows": 537,
+      "actual_Native_nonzeros": 1074,
+      "columns": 10003
+    }
+  ],
+  "actual_physical_model_Start": true,
+  "nonminimal_g_and_e_completion": true,
+  "GD": false,
+  "new_columns": 0
+}

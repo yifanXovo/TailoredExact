@@ -1,0 +1,74 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "c0a9e0d6c88e00b0c4909d8cbce92963c507f8887f05ab2a384d4f8097fdac27",
+  "independent_nonimplementer_review": true,
+  "admitted_positions": [
+    1,
+    2
+  ],
+  "conditional_positions": [
+    3,
+    4
+  ],
+  "conditional_entry_requires_separate_after_first_pair_decision": true,
+  "unique_complete_candidate": "C",
+  "GD": false,
+  "source_commit": "c26382d9bf1d4edde538a01c62e57ba563cf865c",
+  "PE_SHA": "fbdd7c2ece5c748e086761f2490fd901ccdaeffa29df357d2d98fd8743e1dc39",
+  "helper_scope_change": {
+    "old_math_SHA": "9c45cf13f8bd89a830be2dced205d459d52dfa44b6c50b15cbe814c681f88e1e",
+    "current_math_SHA": "833fc5dea40ebf04addff0ec2d232b48c2b55ef410ccfc013e1b231d2490c948",
+    "zero_solve_requalification": [
+      {
+        "role": "N-B35-S",
+        "scope_identical": true,
+        "source_SHA": "11ce48dcf73aed7dcc1a74cd60d676ebb5685abc52e2ea3bd695c181e093e191"
+      },
+      {
+        "role": "N-C20-U",
+        "scope_identical": true,
+        "source_SHA": "2f465b77e98bae443e68627f4cabe79c51e3f986c87d1aef9c7261f34d0990b5"
+      }
+    ],
+    "mathematical_caps_unchanged": true
+  },
+  "qualification": {
+    "own_H": true,
+    "first_call_SHA": "537169d2219106d17b5f99163cc15a556f1cbd1cc800622caf9dd8f9c43fa351",
+    "root_cap_rows": 537,
+    "all_calls_returned": 4,
+    "all_sealed_required_members_verified": true,
+    "models": [
+      {
+        "SHA": "f1732f9ed7d257625bc6d33d521bf1ff689c4d67997d397568bb869051398e73",
+        "cap_rows": 210,
+        "Native_audits": 1
+      },
+      {
+        "SHA": "04dee25310811c7609709be540421896f9b65de6605b3ced771ecd1b8eb718e8",
+        "cap_rows": 537,
+        "Native_audits": 1
+      },
+      {
+        "SHA": "537169d2219106d17b5f99163cc15a556f1cbd1cc800622caf9dd8f9c43fa351",
+        "cap_rows": 537,
+        "Native_audits": 2
+      }
+    ],
+    "actual_full_Start_and_nonminimal_g_e": true,
+    "no_model_path_supported": true
+  },
+  "mathematical_and_actual_C_subset_P": true,
+  "findings": [],
+  "initial_LP_is_not_complete_algorithm_benefit": true,
+  "budget": {
+    "spent_before_review": 112.14339109960012,
+    "first_pair_caps": 4800,
+    "explicit_verification_reserve": 1200,
+    "total_limit": 14400
+  },
+  "Optimize": 0,
+  "Native_load": 0,
+  "compile": 0,
+  "reviewer_outer_seconds": 4.4034587000496686
+}

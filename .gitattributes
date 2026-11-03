@@ -453,3 +453,12 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round150/** -text whitespace=cr-at-eol
 /results/unified_exact_round150/**/*.log -whitespace
 /results/unified_exact_round150/goal.md -whitespace
+
+# Round151 measured helpers, new cap header and evidence preserve actual bytes.
+/scripts/round151* -text whitespace=cr-at-eol
+/scripts/paper_s2_penalty_propagation.py -text whitespace=cr-at-eol
+/include/Round151Research.hpp -text whitespace=cr-at-eol
+/config/gi_tbc_penalty_propagation_round151.json -text whitespace=cr-at-eol
+/results/unified_exact_round151/** -text whitespace=cr-at-eol
+/results/unified_exact_round151/**/*.log -whitespace
+/results/unified_exact_round151/goal.md -whitespace

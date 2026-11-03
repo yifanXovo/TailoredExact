@@ -1,0 +1,41 @@
+{
+  "UTC": "2026-11-03T19:35:12.966022+00:00",
+  "goal_SHA": "d5b286ee2798737f64b0b4f96c5fa61e8786a8abda5860135e8bba710771a33a",
+  "base": "7cac24abd8bfffa96a9dc7569d9a93f1697881a7",
+  "branch": "codex/round151-standalone-penalty-propagation",
+  "actual_main": "b2b940c1e517a72e226ec60fc49ff19651737632",
+  "PR_base": "codex/round150-gd-confirmation-conditional-feedback",
+  "main_contains_R150": false,
+  "predecessor_PR": {
+    "number": 212,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "head": "7cac24abd8bfffa96a9dc7569d9a93f1697881a7"
+  },
+  "workspace_policy_SHA": "3812091c415a87116472e56f7f9c598c36ee485a654383d15e8b03fca69c042d",
+  "applicable_AGENTS": [],
+  "protected_original_status": " M results/gf_compact_bc_round/handling_convention_test/handling_convention.json\n M results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv\n M results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json\n",
+  "protected_modified_file_hashes": {
+    "results/gf_compact_bc_round/handling_convention_test/handling_convention.json": "9a5cd06f8a4163cfcbb57147a0b21c0a5e4aec91973ab93faa921baa0553f35b",
+    "results/gf_compact_bc_timeprofile_round/progress_traces/exact_moderate_seed3301_1200s_static300.progress.csv": "4af39fe81263cd8c15ca457f4d4f6473a959630b6ab68a9280bc0a0e0a6b8acb",
+    "results/gf_compact_bc_timeprofile_round/raw/exact_moderate_seed3301_1200s_static300.json": "b11e84e2442c0c7b5ac5aa638b44945de28426fe31753083bff13ad401644202"
+  },
+  "protected_entry_bytes": {
+    "scripts/paper_s2.py": "58a35f88a5b54c2f4b968ca6b7a862c98bd6573c0e95a0f1abca5d7a52f7bab8",
+    "scripts/paper_s2_gd_only.py": "6f028fd094d9643bf168069a784cf38306c15794fa0797f65f2272ff8ce53012",
+    "scripts/paper_s2_penalty_feedback.py": "d66acfbaaadd350821d7abc15105f5ad6fbc4a8a79e22f11ec18c2f55c57dad3",
+    "config/gi_tbc_round137.json": "9c76a442d97b504abfbb419722000b50fdba7f5bdeae9160cace555ef71c9dd0",
+    "config/gi_tbc_gd_round147.json": "b3568f5bbeb40a5b87dbf7a66c4d2ab6de0a04dcf2ae1dc757c1eb5da970ea4b",
+    "config/gi_tbc_penalty_feedback_round149.json": "907b34bd8939624252146a934cb66489e8089652860589149129f9ca3b2b8959"
+  },
+  "observed_initial_solver_processes": 0,
+  "outer_ceiling_seconds": 14400,
+  "Seed": 0,
+  "Threads": 1,
+  "H_seed": 20260626,
+  "serial": true,
+  "attachments_available": false,
+  "attachments_fallback": "Fixed R150 science/member hashes and goal formulas",
+  "cleanup_authority": "Only completed current-round reconstructible duplicates after public recovery; zero deletion acceptable"
+}

@@ -154,3 +154,21 @@ implementation is [research only](../results/unified_exact_round149/candidate_de
 with no promotion or further experiment queued. R137 stays stable and R147 D
 retains its limited candidate status. The [delivery record](../results/unified_exact_round149/RESUME.md)
 separates scientific, executable, wrapper and publication identities.
+
+<!-- Round151 evidence -->
+
+The [Round151 standalone propagation study](round151_research.md) returns to
+stable B with GD off and establishes B/P/C LP values
+.327833772177/.332161666001/.337310427549 without reoptimizing B. The same-new-PE
+N-B35 own-H pair loses 1.35255% in C physical U, gains only .23195% in supported
+L and enlarges signed gap 8.50239%; both remain open. The
+[decision](../results/unified_exact_round151/candidate_decision.json) retains
+valid expression/LP value and closes this root-propagation promotion chain.
+N-C20 and clarification remain unentered under the prescribed condition.
+Stable R137 and old entry/profile bytes remain intact; historical inventory,
+RN and selected GD gains stay visible. [Actual delivery](../results/unified_exact_round151/RESUME.md)
+separates new production, design, science and publication identities.
+
+R150's additional GD roles had a 43.73% certificate-time increase on N-C20 and
+a 2.24% physical-U loss on N-B35. Standalone GD retains its selected R147 gains
+and limited candidate positioning, without a broadened adoption claim.

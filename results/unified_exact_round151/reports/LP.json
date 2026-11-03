@@ -1,0 +1,111 @@
+{
+  "domains": [
+    {
+      "variant": "C",
+      "Status": 2,
+      "qualified": true,
+      "old_B_L": 0.3278337721771161,
+      "model_SHA": "5c6380b254b45173938ba8e33daf95bddc09d662242300f567cb567b7426744a",
+      "Runtime": 1.4770002365112305,
+      "Work": 4.653322754122208,
+      "iterations": 11785.0,
+      "optimize_wall": 1.476509700063616,
+      "Seed": 0,
+      "Threads": 1,
+      "baseline_Optimize_new": 0,
+      "LP_Optimize": 1,
+      "all_variables_free": true,
+      "exact_rational_optimality_certificate": false,
+      "actual_added_rows": 537,
+      "actual_added_nonzeros": 1074,
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "L": 0.337310427549131,
+      "g": 0.06247016329982112,
+      "weighted_penalty": 0.27484026424930985,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 1.5178830414797062e-18,
+        "ConstrResidual": 1.2278178473934531e-11,
+        "DualResidual": 1.454999315475547e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 3.042011087472929e-13,
+        "bounds": 0.0,
+        "objective": 0.33731042754913093
+      },
+      "numerical_dual_objective": 0.3373104275491315,
+      "numerical_primal_dual_gap": -4.996003610813204e-16,
+      "infinite_bound_adverse_reduced_cost": 0.0,
+      "gain_over_B": 0.009476655372014864,
+      "solution_SHA": "a51de2318719319c579e811a3f615fffbb1089da404f77d243a059df91b9c31d",
+      "dual_SHA": "b8d3c83be2e2c10d6841033200d8981c813a223a0f57955d741018f21da33528"
+    },
+    {
+      "variant": "P",
+      "Status": 2,
+      "qualified": true,
+      "old_B_L": 0.3278337721771161,
+      "model_SHA": "843cfb76bb9de262782a04f5e2e56da8d47b1c200f41ddc693d77d95e53329d9",
+      "Runtime": 1.2660000324249268,
+      "Work": 4.071411865524714,
+      "iterations": 10459.0,
+      "optimize_wall": 1.2684654998593032,
+      "Seed": 0,
+      "Threads": 1,
+      "baseline_Optimize_new": 0,
+      "LP_Optimize": 1,
+      "all_variables_free": true,
+      "exact_rational_optimality_certificate": false,
+      "actual_added_rows": 537,
+      "actual_added_nonzeros": 1074,
+      "Native": {
+        "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+        "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+        "loaded_engine_modules": [
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+        ]
+      },
+      "L": 0.33216166600112773,
+      "g": 0.06513275157155604,
+      "weighted_penalty": 0.26702891442957166,
+      "quality": {
+        "ConstrVio": 0.0,
+        "BoundVio": 0.0,
+        "DualVio": 1.3877787807814457e-17,
+        "ConstrResidual": 1.4097167877480388e-11,
+        "DualResidual": 1.942890293094024e-16,
+        "ComplVio": 0.0
+      },
+      "residual": {
+        "constraints": 1.8189894035458565e-12,
+        "bounds": 0.0,
+        "objective": 0.33216166600112773
+      },
+      "numerical_dual_objective": 0.33216166600112795,
+      "numerical_primal_dual_gap": -2.220446049250313e-16,
+      "infinite_bound_adverse_reduced_cost": 0.0,
+      "gain_over_B": 0.004327893824011608,
+      "solution_SHA": "423f674e6523205de681600b19d249f1045efe9db6d85d7c6960a953ee625cbc",
+      "dual_SHA": "557aba8bdeabf8af3a302b8fc0227a18775f4077a2a9d6f33d611672bcb673e1"
+    }
+  ],
+  "baseline_Optimize_new": 0,
+  "C20_Optimize_new": 0,
+  "all_variables_free": true,
+  "B": 0.3278337721771161,
+  "P": 0.33216166600112773,
+  "C": 0.337310427549131,
+  "P_minus_B": 0.004327893824011608,
+  "C_minus_P": 0.005148761548003256,
+  "C_minus_B": 0.009476655372014864
+}

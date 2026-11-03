@@ -1,0 +1,21 @@
+\subsection{Resource penalty propagation without GD}
+
+GI-TBC is the stable complete method. For actual objective weights, define $h_i(y)=\omega_i|c_i y-1|$. One fixed resource dual yields $d=\mu B^- -\nu B+\sum_i m_i$ and $d_{iy}=\mu B^- -\nu B+\sum_{j\ne i}m_j+h_i(y)+(\nu-\mu)y$. Weak duality gives conditional penalty lower bounds without any GD or STOCK assumption. Outward evaluation and the arm's own cutoff produce upper caps $t_{iy}\le\beta_{iy}s_{iy}$ directly in the existing state products. One row per state covers the uniform information as well; no duplicate PF layer or new column is needed.
+
+The resource relaxation retains the root boxes and $B^-\le\sum_iY_i\le B$. Here $m_i=\min_{\ell_i\le z\le u_i}\{h_i(z)+(\nu-\mu)z\}$, with fixed $\mu,\nu\ge0$. Define conservative floors $p_0=\max\{0,\operatorname{down}(d)\}$ and $p_{iy}=\max\{p_0,0,\operatorname{down}(d_{iy})\}$. Uniform and conditional caps are $\beta_0=\min\{\gamma_U^0,\operatorname{up}(U_0-p_0)\}$ and $\beta_{iy}=\min\{\beta_0,\operatorname{up}(U_0-p_{iy})\}$. For an integer selected state, $Y_i=y$ and $t_{iy}=g$; $g+P_e\le U_0$ and $P_e\ge p_{iy}$ establish the cap even for a nonminimal epigraph completion. Prefix/suffix lower sums avoid subtracting independently rounded bounds. The fixed-multiplier propagation pass is linear in stations plus supported states; the inherited multiplier selection also sorts station slopes.
+
+The same monotone upward coefficient transport is used for uniform and conditional caps, preserving the actual relaxation inclusion $Q_C\subseteq Q_P\subseteq Q_B$. A zero global penalty floor can coexist with nonzero conditional information. Caps are frozen at the first own root and inherited only by compatible subdomains; they do not change the physical objective, root proof interval or AM scheduling rules.
+
+On the same saved pure-B N-B35 root, fully free LP values are $L_B=0.327833772177$, $L_P=0.332161666001$ and $L_C=0.337310427549$. These numerically qualified LP increments motivate a finite complete test rather than establish its outcome. The N-C20 saved optimum already satisfies the new rows and is not reoptimized.
+
+\begin{center}\begin{tabular}{llrrrr}\hline Role & Arm & $U$ & $L$ & Gap (\%) & $T_{total}$ \\ \hline
+
+N-B35-S & B & 0.450291503 & 0.389279198 & 13.54951 & 2375.216 \\
+
+N-B35-S & C & 0.456381937 & 0.390182127 & 14.50535 & 2380.096 \\
+
+\hline\end{tabular}\end{center}
+
+Standalone conditional resource-penalty propagation is valid and strengthens the saved pure-B LP. The complete N-B35 test nevertheless loses 1.3526 percent in physical U, gains only 0.2319 percent in supported L and enlarges the signed gap 8.5024 percent, with both arms open. We retain the expression result and do not promote this root propagation as a complete enhancement. Stable GI-TBC remains primary.
+
+Initial LP, Native root cuts and terminal supported bounds remain distinct. R150 GD already demonstrated a stronger root with worse full outcomes. R138--150 inventory proof gains, Native-placement evidence, RN compression and selected GD incumbent gains remain part of the evidence, while the R133 integer-objective and joint routing--loading--time gaps are still open. The local state-interval hull here does not solve those joint integer problems.

@@ -220,3 +220,18 @@ method behavior. Stable GI-TBC and all old entry/profile bytes remain intact;
 CPF does not enter production or a full panel. The
 [delivery record](../results/unified_exact_round150/RESUME.md) retains actual
 scope, identities, full fees, independent review and bounded public closeout.
+
+<!-- Round151 evidence -->
+
+The [Round151 standalone propagation study](round151_research.md) establishes
+fixed-dual conditional caps directly on stable GI-TBC, independent of GD and
+without a duplicate uniform layer. Actual C⊆P⊆B survives upward transport;
+all states, floor0, child scope and physical/nonminimal Starts are qualified.
+Two same-domain LPs provide P and C increments over a saved pure-B root. One
+same-new-PE own-H B/C pair finds insufficient complete value: C worsens U1.35%,
+gains L .23% and enlarges signed gap8.50%, with both open. The
+[decision](../results/unified_exact_round151/candidate_decision.json) closes the
+current implementation chain rather than buying another role, uniform rescue,
+seed or combination. The [paper section](../results/unified_exact_round151/manuscript.tex)
+and [delivery record](../results/unified_exact_round151/RESUME.md) preserve the
+finite theoretical, numerical and cost boundaries. Stable R137 stays primary.
