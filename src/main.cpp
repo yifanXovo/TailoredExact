@@ -8,6 +8,7 @@
 #include "Round145Research.hpp"
 #include "Round146Research.hpp"
 #include "Round148Research.hpp"
+#include "Round149Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -885,6 +886,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             const auto value=requireValue(i,argc,argv);
             if(value!="off"&&value!="on")throw std::runtime_error("Round148 shared S must be off or on");
             ebrp::round148().enabled=value=="on";
+        }
+        else if (arg == "--round149-penalty-feedback") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on")throw std::runtime_error("Round149 penalty feedback must be off or on");
+            ebrp::round149().enabled=value=="on";
         }
         else if (arg == "--round143-rn") {
             const auto value=requireValue(i,argc,argv);
@@ -3581,6 +3587,16 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round149().enabled){
+        if(!ebrp::round146().enabled||ebrp::round138().stock_rlt||ebrp::round148().enabled)
+            throw std::runtime_error("Round149 penalty feedback requires standalone D with Shared-S/STOCK off");
+        if(!opt.out_path.empty()){
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round149_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"PF\":true,\"root_once\":true,\"proof_root_unchanged\":true,\"extra_root_LP\":0,\"source_solves\":0,\"new_columns\":0}\n";
+            if(!f)throw std::runtime_error("Round149 parameter persistence failed");
+        }
+    }
     if(ebrp::round148().enabled){
         if(!ebrp::round146().enabled||ebrp::round138().stock_rlt)
             throw std::runtime_error("Round148 shared S requires standalone D");
