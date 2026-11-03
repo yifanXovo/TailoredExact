@@ -1,0 +1,59 @@
+{
+  "UTC": "2026-11-03T13:48:31.080559+00:00",
+  "deleted_paths": [],
+  "deleted_logical_bytes": 0,
+  "retained": [
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round149",
+      "files": 133250,
+      "logical_bytes": 730289113,
+      "reason": "Unique raw/failures, active science, required runtime/build identity or bounded verified public restore"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\temp\\round149",
+      "files": 4,
+      "logical_bytes": 23396,
+      "reason": "Unique raw/failures, active science, required runtime/build identity or bounded verified public restore"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round149",
+      "files": 8,
+      "logical_bytes": 104065973,
+      "reason": "Unique raw/failures, active science, required runtime/build identity or bounded verified public restore"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\restore\\round149-public-3bb93fa2f4b8-attempt01",
+      "files": 13,
+      "logical_bytes": 89886070,
+      "reason": "Unique raw/failures, active science, required runtime/build identity or bounded verified public restore"
+    }
+  ],
+  "retained_runtime_files": [
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round149\\ExactEBRP.exe",
+      "bytes": 23114539,
+      "SHA256": "373efa9a596aaf02fb332685515fcfe88df1b169cbe53b295ab6027140620295"
+    },
+    {
+      "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+      "bytes": 38766856,
+      "SHA256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88"
+    },
+    {
+      "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round146\\Round146Rows.exe",
+      "bytes": 445577,
+      "SHA256": "5c5e193ee7a2339da5d54c2df2c8a0c2f6139ad1dee038cbb7bb4343082861c5"
+    }
+  ],
+  "free_bytes_before": 178549383168,
+  "free_bytes_after": 178549383168,
+  "observed_volume_delta": 0,
+  "volume_delta_not_attributed_to_deletion": true,
+  "bounded_current_round_only": true,
+  "seconds": 4.395255599869415,
+  "old_rounds_deleted": false,
+  "original_user_tree_modified": false,
+  "zero_deletion_reason": "Retain unique raw/failures, necessary PE/DLL and active tree; goal I explicitly accepts zero deletion",
+  "public_acceptance_SHA": "d2e6671cca107e73141bd9b977cd0ed2de2b86d180033b38979182769d0338cf",
+  "PR_readback_SHA": "bbb8b3ebc7adb0a5e16b78f9c8ecc2998bac625c58a503d646152b67c7d0a17f"
+}
