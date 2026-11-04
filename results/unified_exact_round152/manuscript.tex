@@ -1,0 +1,153 @@
+% Insertion-ready research section. Standard amsmath/booktabs commands only.
+\section{Integer inventory and the original objective epigraph}
+\label{sec:resource-integer-epigraph}
+
+The stable GI-TBC algorithm retains the complete evidence established in
+Round137. Subsequent expression studies yield valid stock and count relations,
+normalization and dual compression, and selected local or complete gains;
+their mixed complete outcomes do not justify replacing that algorithm.
+In particular, aggregate state-weighted penalty (AP) was already studied in
+Rounds 55 and 135, common inventory/Gini products and count relations in
+Rounds 138--142, normalization in Rounds 143--145, and conditional Gini--Hoover
+information in Round146. The independent penalty propagation studied in
+Round151 strengthens a saved root but worsens its matched complete result.
+The present study instead examines the original integer objective epigraph
+under necessary hard inventory resources. It introduces no new routing master.
+
+\paragraph{Object and completion.}
+For supported integer inventories $Y_i\in\mathcal Y_i$, retain
+$B^-\le\sum_iY_i\le B$ and $G(Y)\le\gamma_U$, while relaxing routes,
+loading and travel time. Write this necessary domain as $\mathcal R$ and set
+\[
+ h_i(y)=\omega_i|c_i y-1|,\qquad
+ \phi(Y)=\max\{\gamma_L,G(Y)\}+\sum_i h_i(Y_i).
+\]
+The weights include the penalty multiplier. A legal integer completion may
+have $g>G(Y)$; therefore $\gamma_L$ belongs in the maximum and must not become
+a physical Gini lower bound. Zero stock, when feasible, has completion cost
+$\gamma_L+\sum_i h_i(0)$.
+
+For selector marginals $s$, let $\Theta(s)$ minimize the expected $\phi$ over
+common distributions on $\mathcal R$ having those marginals. At compatible
+marginals, linearity of expectation gives the exact decomposition
+\[
+ \Theta(s)=\sum_{i,y}h_i(y)s_{iy}+\Gamma(s),\qquad
+ \Gamma(s)=\min\mathbb E[\max\{\gamma_L,G(Y)\}].
+\]
+Thus AP already fixes expected minimum penalty. The remaining question is
+the Gini completion under one common resource-feasible distribution, distinct
+from the feasibility of that distribution itself.
+
+\paragraph{A strict finite example.}
+Take $n=3$, $c=(1,1/2,1/4)$, $\omega_i=1/8$, supports
+$\{0,1,2,3,4\}$, resource interval $[2,5]$ and Gini interval $[0,3/4]$.
+The complete declared inventory reference contains local VD-P, pairwise Gini
+epigraphs, AP, both conditional GD inequalities, stock products, TC and TC2,
+all supported-threshold count ranges and their common-Gini product rows.
+An exact extension satisfying all 117 rows and 46 variable bounds has
+\[
+ s_{11}=1,\quad s_{21}=3/4,\quad s_{22}=1/4,\quad
+ s_{32}=s_{33}=1/2,\quad g=1/10,
+\]
+and objective $31/160$. Every active state has zero ideal conditional GD
+coefficient, and all eight count ranges equal exhaustive feasible-inventory
+ranges; the gap is not a small coefficient-rounding artifact.
+
+The hard upper resource excludes $(1,2,3)$. The marginals consequently force
+the unique common distribution
+\[
+ \tfrac14(1,1,2),\qquad\tfrac12(1,1,3),\qquad\tfrac14(1,2,2).
+\]
+Their original objective values are respectively $7/24$, $209/864$ and
+$47/240$, giving
+\[
+ \Theta(s)=1049/4320,\qquad
+ \Theta(s)-31/160=53/1080>0.
+\]
+This is objective information at compatible marginals. Separately,
+enumerating all 125 supported triples and 49 resource-feasible triples gives
+the unique integer minimum $47/240$, exceeding the feasible reference point
+by $1/480$. The equal-target Round133 control is closed by the same strong
+reference. These are complete statements about the declared inventory block,
+not a route-extension theorem or dominance over every normalized or
+disjunctive historical hull.
+
+\paragraph{Qualified support and computation.}
+For finite state potentials $\pi$, any qualified lower bound $L_\pi$ on
+\[
+ \min_{Y\in\mathcal R}\bigl[\phi(Y)-\sum_i\pi_{i,Y_i}\bigr]
+\]
+gives the valid inequality
+\[
+ g+P_e\ge L_\pi+\sum_{i,y}\pi_{iy}s_{iy}.
+\]
+A restricted dual master proposes potentials but not a safe intercept.
+Feasible stocks give pricing upper bounds and are never counted as physical
+BRP incumbents. The experiments distinguish certified separation, a
+nonseparating direction, and unresolved pricing.
+
+The reference implementation covers all positive denominators by bins,
+retains hard inventory in each MILP and gives every unsolved bin an exact
+unary-resource-DP fallback. The zero state is separate. A sparse-state
+refinement prices active states and covers their full parent-domain
+complement by a DP with an explicit ``has inactive state'' flag; the
+installed intercept is the minimum of both lower bounds. It never transports
+a child-only bound to a parent without qualification.
+
+A second formulation reuses the historical RN lift with binary selectors.
+Bounds $t_Lx_{iy}\le w_{iy}\le t_Ux_{iy}$ and
+$\sum_yw_{iy}=t$ force $w_{i,Y_i}=t$. Normalization
+$\sum_{i,y}c_i y w_{iy}=1$ implies $tS(Y)=1$. Normalized pairwise absolute
+differences therefore represent the exact positive-stock Gini objective.
+Hard resource and nonminimal completion remain, and zero is handled
+separately. This removes denominator approximation, not Native MIP gap;
+it is an integer application of known normalization, not new general theory.
+
+\paragraph{Complete free LP evidence.}
+Three preselected saved domains retain their full objective, cutoff, old
+rows and variable freedom. Baselines are reused; K35's same-domain AP result
+is reused only after matrix and point checks. The old strong reference
+includes AP/GD/stock/count/common-factor information; a further RN and
+scaled-stock comparison prevents attribution of old normalization gains to
+the new object.
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+Role & Original B & AP & Strong old reference incl. RN & Final new bound \\
+\midrule
+N-B35-S & .3278337722 & .3843594104 & .3867371866 & .3929789535 \\
+K-35-U  & .2001776619 & .2738576813 & .2788356430 & .2788356430 \\
+N-C20-U & .0483576761 & .1677314332 & .1744652678 & .1747328843 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+N-B35's increase is entirely due to the new scalar inventory-objective floor.
+Eight sparse-lifted rows and a fully priced residual row add no root value
+there. K35's earlier small eight-row gain is covered by old RN, and its new
+fully priced row then has no distinguishable root gain. N-C20 retains a
+small residual-row increment beyond RN. Compatible joint mixtures establish
+that the positive point separations concern the objective epigraph.
+Nevertheless, separating a sparse optimum often only moves the complete
+LP to another optimum with different marginals.
+
+All 274 new Native calls returned, including small qualifications and failed
+attempts. The eight-row loops cost 444.078, 82.955 and 52.914 outer seconds; the
+final full-support discovery/free-LP stages cost 137.216, 6.522 and 4.614 seconds
+for N-B35, K35 and N-C20, respectively. Construction, DP, master and pricing
+are paid once, and nested Native Runtime/Work are not added again. The
+versioned expense ledger includes the subsequent independent verification
+and retains one unresolved small price qualification without relabeling it.
+
+\paragraph{Scope of the conclusion.}
+Hard-resource integer objective information remains after the specified old
+expressions, and qualified separation is executable. The observed free-LP
+effects of small row collections are limited, with an explicit distinction
+between scalar floors and residual support. This round completes an offline
+object-level stage; it does not establish a new complete algorithm,
+physical-incumbent improvement or proof-time gain. No new production entry,
+profile or executable is promoted, and stable GI-TBC remains primary.
+Choosing directions against several marginals on the current optimal face
+is a focused next question; the finite results do not prove that the whole
+epigraph is redundant or uncomputable.

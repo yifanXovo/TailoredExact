@@ -1,5 +1,13 @@
 # Research index
 
+Latest offline addition: [Round152 resource-feasible integer objective
+epigraphs](round152_research.md), with an [exact structural analysis](../results/unified_exact_round152/mathematical_analysis.md),
+[three-domain evidence table](../results/unified_exact_round152/reports/evidence_table.csv),
+[paper section](../results/unified_exact_round152/manuscript.tex),
+[independent review](../results/unified_exact_round152/review/final_scientific_review.md)
+and [delivery record](../results/unified_exact_round152/RESUME.md). This study
+retains stable GI-TBC and makes no new complete-algorithm claim.
+
 Current algorithm, configuration, commands and paper:
 [GI-TBC release / paper-S2 entry](paper_s2_release.md).
 Current advisor/coauthor reading order and specific author facts:

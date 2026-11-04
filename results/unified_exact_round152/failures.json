@@ -1,0 +1,56 @@
+{
+  "attempts": [
+    {
+      "label": "aggregate_checks_001",
+      "outer_seconds": 0.21959479991346598,
+      "exit_code": 1,
+      "stderr": "fees/aggregate_checks_001/stderr.log"
+    },
+    {
+      "label": "lp_NB35_AP_001",
+      "outer_seconds": 0.3862463999539614,
+      "exit_code": 1,
+      "stderr": "fees/lp_NB35_AP_001/stderr.log"
+    },
+    {
+      "label": "lp_NC20_AP_001",
+      "outer_seconds": 0.1887810998596251,
+      "exit_code": 1,
+      "stderr": "fees/lp_NC20_AP_001/stderr.log"
+    },
+    {
+      "label": "normalized_qualify_001",
+      "outer_seconds": 0.23022729996591806,
+      "exit_code": 1,
+      "stderr": "fees/normalized_qualify_001/stderr.log"
+    },
+    {
+      "label": "qualify_001",
+      "outer_seconds": 0.0353606001008302,
+      "exit_code": 1,
+      "stderr": "fees/qualify_001/stderr.log"
+    },
+    {
+      "label": "small_001",
+      "outer_seconds": 0.285434199962765,
+      "exit_code": 1,
+      "stderr": "fees/small_001/stderr.log"
+    },
+    {
+      "label": "strongCP_NB35_001",
+      "outer_seconds": 2.461141800042242,
+      "exit_code": 1,
+      "stderr": "fees/strongCP_NB35_001/stderr.log"
+    }
+  ],
+  "all_preserved_and_charged": true,
+  "interpretations": {
+    "lp_NB35_AP_001": "syntax failure before Optimize",
+    "lp_NC20_AP_001": "same syntax failure before Optimize",
+    "qualify_001": "qualification script syntax failure before Optimize",
+    "aggregate_checks_001": "fixture incorrectly demanded identical floating outward endpoints; replaced by exact containment",
+    "strongCP_NB35_001": "explicit zero coefficients differed from Native sparse readback; zero terms removed before the admitted CP runs; no Optimize in failed attempt",
+    "small_001": "exact-basis verifier attempted Fraction(infinite UB); finite bounds only, one returned LP retained",
+    "normalized_qualify_001": "fixture compared an absolute gap with relative MIPGap=1e-4; preserved/reused returned MIP and actual UNDECIDED label, no repeat Optimize"
+  }
+}

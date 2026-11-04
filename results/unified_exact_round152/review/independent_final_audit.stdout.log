@@ -1,0 +1,166 @@
+{
+  "PASS": true,
+  "Native_calls": 274,
+  "Native_returns": 274,
+  "call_kinds": {
+    "LP_master_candidate_only": 46,
+    "MIP": 143,
+    "MIP_normalized_exact_positive": 5,
+    "LP": 76,
+    "LP_finite_joint": 4
+  },
+  "pricing_records": 52,
+  "pricing_decisions": {
+    "DIRECTION_NONSEPARATING": 21,
+    "SEPARATION": 28,
+    "UNDECIDED": 1,
+    "PRICE_RESOLVED": 2
+  },
+  "independently_recomputed_inventory_uppers": 156,
+  "key_LP_edges": [
+    {
+      "role": "N-B35-S",
+      "parent": "strongRN",
+      "child": "RNfloor",
+      "parent_L": 0.38673718656544753,
+      "child_L": 0.3929789535186392,
+      "gain": 0.006241766953191674,
+      "old_semantics_identical": true,
+      "new_row_readback": true,
+      "parent_check": {
+        "constraint_residual": 2.8888003100746573e-13,
+        "bound_residual": 0.0,
+        "objective": 0.38673718656544753,
+        "dual_objective": 0.38673718656544703,
+        "primal_dual_gap": 4.996003610813204e-16
+      },
+      "child_check": {
+        "constraint_residual": 2.546585164964199e-11,
+        "bound_residual": 3.870015419238371e-12,
+        "objective": 0.3929789535186392,
+        "dual_objective": 0.3929789535186394,
+        "primal_dual_gap": -1.6653345369377348e-16
+      }
+    },
+    {
+      "role": "N-B35-S",
+      "parent": "RNfloor",
+      "child": "global",
+      "parent_L": 0.3929789535186392,
+      "child_L": 0.3929789535186393,
+      "gain": 1.1102230246251565e-16,
+      "old_semantics_identical": true,
+      "new_row_readback": true,
+      "parent_check": {
+        "constraint_residual": 2.546585164964199e-11,
+        "bound_residual": 3.870015419238371e-12,
+        "objective": 0.3929789535186392,
+        "dual_objective": 0.3929789535186394,
+        "primal_dual_gap": -1.6653345369377348e-16
+      },
+      "child_check": {
+        "constraint_residual": 4.2291503632441163e-10,
+        "bound_residual": 3.772804291202192e-11,
+        "objective": 0.39297895351863926,
+        "dual_objective": 0.3929789535186394,
+        "primal_dual_gap": -1.1102230246251565e-16
+      }
+    },
+    {
+      "role": "K-35-U",
+      "parent": "strongRN",
+      "child": "global",
+      "parent_L": 0.2788356429814587,
+      "child_L": 0.27883564298145824,
+      "gain": -4.440892098500626e-16,
+      "old_semantics_identical": true,
+      "new_row_readback": true,
+      "parent_check": {
+        "constraint_residual": 5.284661597215745e-14,
+        "bound_residual": 0.0,
+        "objective": 0.27883564298145874,
+        "dual_objective": 0.2788356429814563,
+        "primal_dual_gap": 2.4424906541753444e-15
+      },
+      "child_check": {
+        "constraint_residual": 2.728928194528635e-13,
+        "bound_residual": 0.0,
+        "objective": 0.2788356429814583,
+        "dual_objective": 0.2788356429814567,
+        "primal_dual_gap": 1.609823385706477e-15
+      }
+    },
+    {
+      "role": "N-C20-U",
+      "parent": "strongRN",
+      "child": "global",
+      "parent_L": 0.17446526778483834,
+      "child_L": 0.17473288430246972,
+      "gain": 0.0002676165176313805,
+      "old_semantics_identical": true,
+      "new_row_readback": true,
+      "parent_check": {
+        "constraint_residual": 1.8189894035458565e-12,
+        "bound_residual": 0.0,
+        "objective": 0.17446526778483834,
+        "dual_objective": 0.17446526778483756,
+        "primal_dual_gap": 7.771561172376096e-16
+      },
+      "child_check": {
+        "constraint_residual": 4.547473508864641e-12,
+        "bound_residual": 4.194981741952488e-14,
+        "objective": 0.17473288430246972,
+        "dual_objective": 0.1747328843024694,
+        "primal_dual_gap": 3.3306690738754696e-16
+      }
+    }
+  ],
+  "floor_scope_and_six_bin_lower_aggregation": true,
+  "global_supports": [
+    {
+      "role": "N-B35-S",
+      "full_scope": true,
+      "lower": 0.3560468001085264,
+      "upper": 0.37533361531288806,
+      "threshold": 0.30922917334159167,
+      "transport_exact": "0",
+      "alpha": 0.3560468001085264,
+      "Native_status": 9,
+      "negative_intercept_retained": false
+    },
+    {
+      "role": "K-35-U",
+      "full_scope": true,
+      "lower": 0.26107786768057556,
+      "upper": 0.26110014772087486,
+      "threshold": 0.24408542475441286,
+      "transport_exact": "0",
+      "alpha": 0.26107786768057556,
+      "Native_status": 2,
+      "negative_intercept_retained": false
+    },
+    {
+      "role": "N-C20-U",
+      "full_scope": true,
+      "lower": -0.00122411999985622,
+      "upper": -0.0012221199998561625,
+      "threshold": -0.024035737438649812,
+      "transport_exact": "0",
+      "alpha": -0.00122411999985622,
+      "Native_status": 2,
+      "negative_intercept_retained": true
+    }
+  ],
+  "charged_seconds_before_this_final_review": 846.4523157993511,
+  "receipt_count": 43,
+  "failed_outer_attempts": 7,
+  "timed_receipts_serial": true,
+  "source_snapshot_count": 30,
+  "source_manifest_matches": true,
+  "unchanged_production_source_and_runtime": true,
+  "new_Optimize": 0,
+  "new_Native_calls": 0,
+  "reviewer_script_SHA256": "e22fc8d016259cd7ac0f42c2fcaf79b88efad6c98e2990d22e931d95e8fb7de5",
+  "proof_policy": "Exact arithmetic for inventory objectives/transport; floating Native bounds and LP certificates retain the existing numerical policy.",
+  "nested_script_seconds": 4.711799900047481
+}

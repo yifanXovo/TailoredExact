@@ -1,0 +1,78 @@
+{
+  "PASS": true,
+  "source_SHA256": {
+    "small\\v2\\heterogeneous_wide\\result.json": "32920dfb9f2e3ad042db6b504211f380ea07227daae4b6614df65f571cdc21b5",
+    "small\\v2\\heterogeneous_wide\\reference.mps": "59f00137cd7ba1874eb326ba2b938aa2f08682ef1785b177dadb2952bcca3948",
+    "small\\v2\\heterogeneous_wide\\exact_extension.json.gz": "89d41a2752c184f1a4b2f067c2f12dbb28269b799fee24341bd5f22a5b45f8c4"
+  },
+  "reviewer_script_SHA256": "c11e2d101e14f241b24e40c0d92b6b26f3d2fd0804fde3130cf742e41fb02734",
+  "enumerated_vectors": 125,
+  "feasible_inventory_vectors": 49,
+  "reference_rows": 117,
+  "reference_variables": 46,
+  "exact_full_reference_extension": true,
+  "ideal_GD_checked": true,
+  "exact_threshold_ranges_equal_saved": true,
+  "threshold_ranges": [
+    {
+      "threshold": "1/4",
+      "lower": 1,
+      "upper": 3
+    },
+    {
+      "threshold": "1/2",
+      "lower": 1,
+      "upper": 3
+    },
+    {
+      "threshold": "3/4",
+      "lower": 0,
+      "upper": 2
+    },
+    {
+      "threshold": "1",
+      "lower": 0,
+      "upper": 2
+    },
+    {
+      "threshold": "3/2",
+      "lower": 0,
+      "upper": 2
+    },
+    {
+      "threshold": "2",
+      "lower": 0,
+      "upper": 1
+    },
+    {
+      "threshold": "3",
+      "lower": 0,
+      "upper": 1
+    },
+    {
+      "threshold": "4",
+      "lower": 0,
+      "upper": 1
+    }
+  ],
+  "common_distribution_unique": true,
+  "reference_objective": "31/160",
+  "integer_minimum": "47/240",
+  "global_strict_gap": "1/480",
+  "Theta": "1049/4320",
+  "AP": "3/32",
+  "Gamma": "161/1080",
+  "same_marginal_objective_gap": "53/1080",
+  "integer_minimizers": [
+    [
+      1,
+      2,
+      2
+    ]
+  ],
+  "new_Optimize": 0,
+  "new_Native_calls": 0,
+  "new_compiler_calls": 0,
+  "scope": "complete declared inventory block, no route-model extension",
+  "outer_experimental_seconds": 0.008901200024411082
+}
