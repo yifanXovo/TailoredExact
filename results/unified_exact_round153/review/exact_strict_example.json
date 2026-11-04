@@ -1,0 +1,2383 @@
+{
+  "PASS": true,
+  "reviewer": "independent nonimplementer",
+  "fixed_science": "d489ec2948f079105e4532a2e06ae4eed9fcd500",
+  "dependencies": [
+    {
+      "member": "results/unified_exact_round152/small/v2/heterogeneous_wide/reference.mps",
+      "SHA256": "59f00137cd7ba1874eb326ba2b938aa2f08682ef1785b177dadb2952bcca3948",
+      "bytes": 29819,
+      "commit": "d489ec2948f079105e4532a2e06ae4eed9fcd500",
+      "archive": "results/unified_exact_round152/artifacts/qualification_failures_and_fees.zip",
+      "archive_SHA256": "c508887df98f402b7b3048b4cbdd652968015b652c97676f2859f8a8975b3006"
+    },
+    {
+      "member": "results/unified_exact_round152/small/v2/heterogeneous_wide/exact_extension.json.gz",
+      "SHA256": "89d41a2752c184f1a4b2f067c2f12dbb28269b799fee24341bd5f22a5b45f8c4",
+      "bytes": 232,
+      "commit": "d489ec2948f079105e4532a2e06ae4eed9fcd500",
+      "archive": "results/unified_exact_round152/artifacts/qualification_failures_and_fees.zip",
+      "archive_SHA256": "c508887df98f402b7b3048b4cbdd652968015b652c97676f2859f8a8975b3006"
+    },
+    {
+      "member": "results/unified_exact_round152/small/v2/heterogeneous_wide/result.json",
+      "SHA256": "32920dfb9f2e3ad042db6b504211f380ea07227daae4b6614df65f571cdc21b5",
+      "bytes": 1575,
+      "commit": "d489ec2948f079105e4532a2e06ae4eed9fcd500",
+      "archive": "results/unified_exact_round152/artifacts/qualification_failures_and_fees.zip",
+      "archive_SHA256": "c508887df98f402b7b3048b4cbdd652968015b652c97676f2859f8a8975b3006"
+    }
+  ],
+  "member_index_SHA256": "225c3535039c803b91055d08700aadee4223ef5d48f9b895ebdd4a8bef407d86",
+  "reviewer_script_SHA256": "34b89b296f1b24eeda9986b2ad5a0d0de07e17323ca9dbddcb7cf1e28031fc2e",
+  "reference_rows": 169,
+  "reference_variables": 68,
+  "old_rows": 117,
+  "added_rows": 52,
+  "no_Optimize": true,
+  "new_Native_calls": 0,
+  "new_compiler_calls": 0,
+  "full_extension_feasible": true,
+  "all_rows_checked": true,
+  "all_variable_bounds_checked": true,
+  "exact_reference_fixed_marginal_optimum": "59/288",
+  "exact_g_minimum": "1/9",
+  "H": "3/32",
+  "Gamma": "161/1080",
+  "Theta": "1049/4320",
+  "strict_fixed_marginal_gap": "41/1080",
+  "global_integer_floor": "47/240",
+  "floor_minus_new_reference": "-13/1440",
+  "old_global_floor_gap_not_inherited": true,
+  "common_distribution_unique": true,
+  "marginal_scope": "inventory block only; no complete route-extension claim",
+  "reciprocal_bounds": {
+    "S_lower": "1/2",
+    "S_upper": "9/2",
+    "L_binary64": "2001599834386887/9007199254740992",
+    "U_binary64": "2"
+  },
+  "extension": {
+    "G": "1/9",
+    "Y_1": "1",
+    "Y_2": "5/4",
+    "Y_3": "5/2",
+    "e_1": "0",
+    "e_2": "3/8",
+    "e_3": "3/8",
+    "h_1_2": "3/8",
+    "h_1_3": "3/8",
+    "h_2_3": "0",
+    "r_1": "1",
+    "r_2": "5/8",
+    "r_3": "5/8",
+    "rn_Y_1": "4/9",
+    "rn_Y_2": "5/9",
+    "rn_Y_3": "10/9",
+    "rn_h_1_2": "1/6",
+    "rn_h_1_3": "1/6",
+    "rn_h_2_3": "0",
+    "rn_t": "4/9",
+    "rn_w_1_0": "0",
+    "rn_w_1_1": "4/9",
+    "rn_w_1_2": "0",
+    "rn_w_1_3": "0",
+    "rn_w_1_4": "0",
+    "rn_w_2_0": "0",
+    "rn_w_2_1": "1/3",
+    "rn_w_2_2": "1/9",
+    "rn_w_2_3": "0",
+    "rn_w_2_4": "0",
+    "rn_w_3_0": "0",
+    "rn_w_3_1": "0",
+    "rn_w_3_2": "2/9",
+    "rn_w_3_3": "2/9",
+    "rn_w_3_4": "0",
+    "state_1_0": "0",
+    "state_1_1": "1",
+    "state_1_2": "0",
+    "state_1_3": "0",
+    "state_1_4": "0",
+    "state_2_0": "0",
+    "state_2_1": "3/4",
+    "state_2_2": "1/4",
+    "state_2_3": "0",
+    "state_2_4": "0",
+    "state_3_0": "0",
+    "state_3_1": "0",
+    "state_3_2": "1/2",
+    "state_3_3": "1/2",
+    "state_3_4": "0",
+    "state_g_1_0": "0",
+    "state_g_1_1": "1/9",
+    "state_g_1_2": "0",
+    "state_g_1_3": "0",
+    "state_g_1_4": "0",
+    "state_g_2_0": "0",
+    "state_g_2_1": "0",
+    "state_g_2_2": "1/9",
+    "state_g_2_3": "0",
+    "state_g_2_4": "0",
+    "state_g_3_0": "0",
+    "state_g_3_1": "0",
+    "state_g_3_2": "1/9",
+    "state_g_3_3": "0",
+    "state_g_3_4": "0",
+    "zprod_1": "1/9",
+    "zprod_2": "2/9",
+    "zprod_3": "2/9"
+  },
+  "appended_rows": [
+    {
+      "name": "rn_lb_1_0",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_0": "1",
+        "state_1_0": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_1_0",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_0": "1",
+        "state_1_0": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_1_1",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_1": "1",
+        "state_1_1": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_1_1",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_1": "1",
+        "state_1_1": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_1_2",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_2": "1",
+        "state_1_2": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_1_2",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_2": "1",
+        "state_1_2": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_1_3",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_3": "1",
+        "state_1_3": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_1_3",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_3": "1",
+        "state_1_3": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_1_4",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_4": "1",
+        "state_1_4": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_1_4",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_4": "1",
+        "state_1_4": "-2"
+      }
+    },
+    {
+      "name": "rn_mass_1",
+      "sense": "E",
+      "rhs": "0",
+      "terms": {
+        "rn_w_1_0": "1",
+        "rn_w_1_1": "1",
+        "rn_w_1_2": "1",
+        "rn_w_1_3": "1",
+        "rn_w_1_4": "1",
+        "rn_t": "-1"
+      }
+    },
+    {
+      "name": "rn_inventory_1",
+      "sense": "E",
+      "rhs": "0",
+      "terms": {
+        "rn_Y_1": "1",
+        "rn_w_1_1": "-1",
+        "rn_w_1_2": "-2",
+        "rn_w_1_3": "-3",
+        "rn_w_1_4": "-4"
+      }
+    },
+    {
+      "name": "rn_lb_2_0",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_0": "1",
+        "state_2_0": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_2_0",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_0": "1",
+        "state_2_0": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_2_1",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_1": "1",
+        "state_2_1": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_2_1",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_1": "1",
+        "state_2_1": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_2_2",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_2": "1",
+        "state_2_2": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_2_2",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_2": "1",
+        "state_2_2": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_2_3",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_3": "1",
+        "state_2_3": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_2_3",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_3": "1",
+        "state_2_3": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_2_4",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_4": "1",
+        "state_2_4": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_2_4",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_4": "1",
+        "state_2_4": "-2"
+      }
+    },
+    {
+      "name": "rn_mass_2",
+      "sense": "E",
+      "rhs": "0",
+      "terms": {
+        "rn_w_2_0": "1",
+        "rn_w_2_1": "1",
+        "rn_w_2_2": "1",
+        "rn_w_2_3": "1",
+        "rn_w_2_4": "1",
+        "rn_t": "-1"
+      }
+    },
+    {
+      "name": "rn_inventory_2",
+      "sense": "E",
+      "rhs": "0",
+      "terms": {
+        "rn_Y_2": "1",
+        "rn_w_2_1": "-1",
+        "rn_w_2_2": "-2",
+        "rn_w_2_3": "-3",
+        "rn_w_2_4": "-4"
+      }
+    },
+    {
+      "name": "rn_lb_3_0",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_0": "1",
+        "state_3_0": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_3_0",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_0": "1",
+        "state_3_0": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_3_1",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_1": "1",
+        "state_3_1": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_3_1",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_1": "1",
+        "state_3_1": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_3_2",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_2": "1",
+        "state_3_2": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_3_2",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_2": "1",
+        "state_3_2": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_3_3",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_3": "1",
+        "state_3_3": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_3_3",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_3": "1",
+        "state_3_3": "-2"
+      }
+    },
+    {
+      "name": "rn_lb_3_4",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_4": "1",
+        "state_3_4": "-2001599834386887/9007199254740992"
+      }
+    },
+    {
+      "name": "rn_ub_3_4",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_4": "1",
+        "state_3_4": "-2"
+      }
+    },
+    {
+      "name": "rn_mass_3",
+      "sense": "E",
+      "rhs": "0",
+      "terms": {
+        "rn_w_3_0": "1",
+        "rn_w_3_1": "1",
+        "rn_w_3_2": "1",
+        "rn_w_3_3": "1",
+        "rn_w_3_4": "1",
+        "rn_t": "-1"
+      }
+    },
+    {
+      "name": "rn_inventory_3",
+      "sense": "E",
+      "rhs": "0",
+      "terms": {
+        "rn_Y_3": "1",
+        "rn_w_3_1": "-1",
+        "rn_w_3_2": "-2",
+        "rn_w_3_3": "-3",
+        "rn_w_3_4": "-4"
+      }
+    },
+    {
+      "name": "rn_normalization",
+      "sense": "E",
+      "rhs": "1",
+      "terms": {
+        "rn_Y_1": "1",
+        "rn_Y_2": "1/2",
+        "rn_Y_3": "1/4"
+      }
+    },
+    {
+      "name": "rn_abs_p_1_2",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_h_1_2": "1",
+        "rn_Y_1": "-1",
+        "rn_Y_2": "1/2"
+      }
+    },
+    {
+      "name": "rn_abs_m_1_2",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_h_1_2": "1",
+        "rn_Y_1": "1",
+        "rn_Y_2": "-1/2"
+      }
+    },
+    {
+      "name": "rn_abs_p_1_3",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_h_1_3": "1",
+        "rn_Y_1": "-1",
+        "rn_Y_3": "1/4"
+      }
+    },
+    {
+      "name": "rn_abs_m_1_3",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_h_1_3": "1",
+        "rn_Y_1": "1",
+        "rn_Y_3": "-1/4"
+      }
+    },
+    {
+      "name": "rn_abs_p_2_3",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_h_2_3": "1",
+        "rn_Y_2": "-1/2",
+        "rn_Y_3": "1/4"
+      }
+    },
+    {
+      "name": "rn_abs_m_2_3",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_h_2_3": "1",
+        "rn_Y_2": "1/2",
+        "rn_Y_3": "-1/4"
+      }
+    },
+    {
+      "name": "rn_gini",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_h_1_2": "1",
+        "rn_h_1_3": "1",
+        "rn_h_2_3": "1",
+        "G": "-3"
+      }
+    },
+    {
+      "name": "r152_known_RN_stock_low",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_Y_1": "1",
+        "rn_Y_2": "1",
+        "rn_Y_3": "1",
+        "rn_t": "-2"
+      }
+    },
+    {
+      "name": "r152_known_RN_stock_high",
+      "sense": "L",
+      "rhs": "0",
+      "terms": {
+        "rn_Y_1": "1",
+        "rn_Y_2": "1",
+        "rn_Y_3": "1",
+        "rn_t": "-5"
+      }
+    },
+    {
+      "name": "r145_NC1",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_h_1_2": "1",
+        "rn_h_1_3": "1",
+        "rn_h_2_3": "1",
+        "rn_w_1_1": "-1/2",
+        "rn_w_1_2": "-2",
+        "rn_w_1_3": "-4",
+        "rn_w_1_4": "-6",
+        "rn_w_2_2": "-1/2",
+        "rn_w_2_3": "-1",
+        "rn_w_2_4": "-2",
+        "rn_w_3_3": "-1/4",
+        "rn_w_3_4": "-1/2"
+      }
+    },
+    {
+      "name": "r145_NC2",
+      "sense": "G",
+      "rhs": "0",
+      "terms": {
+        "rn_h_1_2": "1",
+        "rn_h_1_3": "1",
+        "rn_h_2_3": "1",
+        "rn_t": "-3/2",
+        "rn_w_1_2": "-3/2",
+        "rn_w_1_3": "-7/2",
+        "rn_w_1_4": "-11/2",
+        "rn_w_2_1": "1/2",
+        "rn_w_2_3": "-1/2",
+        "rn_w_2_4": "-3/2",
+        "rn_w_3_1": "1/4",
+        "rn_w_3_2": "1/2",
+        "rn_w_3_3": "1/4"
+      }
+    },
+    {
+      "name": "r145_TS1",
+      "sense": "G",
+      "rhs": "-2001599834386887/4503599627370496",
+      "terms": {
+        "rn_Y_1": "1",
+        "rn_Y_2": "1",
+        "rn_Y_3": "1",
+        "Y_1": "-2001599834386887/9007199254740992",
+        "Y_2": "-2001599834386887/9007199254740992",
+        "Y_3": "-2001599834386887/9007199254740992",
+        "rn_t": "-2"
+      }
+    },
+    {
+      "name": "r145_TS2",
+      "sense": "G",
+      "rhs": "-10",
+      "terms": {
+        "rn_Y_1": "1",
+        "rn_Y_2": "1",
+        "rn_Y_3": "1",
+        "Y_1": "-2",
+        "Y_2": "-2",
+        "Y_3": "-2",
+        "rn_t": "-5"
+      }
+    },
+    {
+      "name": "r145_TS3",
+      "sense": "L",
+      "rhs": "-4",
+      "terms": {
+        "rn_Y_1": "1",
+        "rn_Y_2": "1",
+        "rn_Y_3": "1",
+        "Y_1": "-2",
+        "Y_2": "-2",
+        "Y_3": "-2",
+        "rn_t": "-2"
+      }
+    },
+    {
+      "name": "r145_TS4",
+      "sense": "L",
+      "rhs": "-5003999585967217/4503599627370496",
+      "terms": {
+        "rn_Y_1": "1",
+        "rn_Y_2": "1",
+        "rn_Y_3": "1",
+        "Y_1": "-2001599834386887/9007199254740992",
+        "Y_2": "-2001599834386887/9007199254740992",
+        "Y_3": "-2001599834386887/9007199254740992",
+        "rn_t": "-5"
+      }
+    }
+  ],
+  "row_checks": [
+    {
+      "name": "R0",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R1",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R2",
+      "sense": "G",
+      "activity": "1/9",
+      "rhs": "0",
+      "slack": "1/9"
+    },
+    {
+      "name": "R3",
+      "sense": "L",
+      "activity": "-23/36",
+      "rhs": "0",
+      "slack": "23/36"
+    },
+    {
+      "name": "R4",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R5",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R6",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R7",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R8",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R9",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R10",
+      "sense": "E",
+      "activity": "1",
+      "rhs": "1",
+      "slack": "0"
+    },
+    {
+      "name": "R11",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R12",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R13",
+      "sense": "G",
+      "activity": "-1",
+      "rhs": "-1",
+      "slack": "0"
+    },
+    {
+      "name": "R14",
+      "sense": "G",
+      "activity": "1",
+      "rhs": "1",
+      "slack": "0"
+    },
+    {
+      "name": "R15",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R16",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R17",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R18",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R19",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R20",
+      "sense": "L",
+      "activity": "-9/16",
+      "rhs": "0",
+      "slack": "9/16"
+    },
+    {
+      "name": "R21",
+      "sense": "G",
+      "activity": "1/9",
+      "rhs": "0",
+      "slack": "1/9"
+    },
+    {
+      "name": "R22",
+      "sense": "L",
+      "activity": "-11/144",
+      "rhs": "0",
+      "slack": "11/144"
+    },
+    {
+      "name": "R23",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R24",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R25",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R26",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R27",
+      "sense": "E",
+      "activity": "1",
+      "rhs": "1",
+      "slack": "0"
+    },
+    {
+      "name": "R28",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R29",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R30",
+      "sense": "G",
+      "activity": "-1/4",
+      "rhs": "-1",
+      "slack": "3/4"
+    },
+    {
+      "name": "R31",
+      "sense": "G",
+      "activity": "1",
+      "rhs": "1",
+      "slack": "0"
+    },
+    {
+      "name": "R32",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R33",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R34",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R35",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R36",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R37",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R38",
+      "sense": "G",
+      "activity": "1/9",
+      "rhs": "0",
+      "slack": "1/9"
+    },
+    {
+      "name": "R39",
+      "sense": "L",
+      "activity": "-19/72",
+      "rhs": "0",
+      "slack": "19/72"
+    },
+    {
+      "name": "R40",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R41",
+      "sense": "L",
+      "activity": "-3/8",
+      "rhs": "0",
+      "slack": "3/8"
+    },
+    {
+      "name": "R42",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R43",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R44",
+      "sense": "E",
+      "activity": "1",
+      "rhs": "1",
+      "slack": "0"
+    },
+    {
+      "name": "R45",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R46",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R47",
+      "sense": "G",
+      "activity": "-1/4",
+      "rhs": "-1",
+      "slack": "3/4"
+    },
+    {
+      "name": "R48",
+      "sense": "G",
+      "activity": "1",
+      "rhs": "1",
+      "slack": "0"
+    },
+    {
+      "name": "R49",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R50",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R51",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R52",
+      "sense": "G",
+      "activity": "3/4",
+      "rhs": "0",
+      "slack": "3/4"
+    },
+    {
+      "name": "R53",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R54",
+      "sense": "G",
+      "activity": "3/4",
+      "rhs": "0",
+      "slack": "3/4"
+    },
+    {
+      "name": "R55",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R56",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "R57",
+      "sense": "L",
+      "activity": "-1/12",
+      "rhs": "0",
+      "slack": "1/12"
+    },
+    {
+      "name": "R58",
+      "sense": "G",
+      "activity": "19/4",
+      "rhs": "2",
+      "slack": "11/4"
+    },
+    {
+      "name": "R59",
+      "sense": "L",
+      "activity": "19/4",
+      "rhs": "5",
+      "slack": "1/4"
+    },
+    {
+      "name": "r152_known_AP",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_GD_low",
+      "sense": "G",
+      "activity": "1/3",
+      "rhs": "0",
+      "slack": "1/3"
+    },
+    {
+      "name": "r152_known_GD_high",
+      "sense": "G",
+      "activity": "1/3",
+      "rhs": "0",
+      "slack": "1/3"
+    },
+    {
+      "name": "r152_known_stock_loL",
+      "sense": "G",
+      "activity": "1/3",
+      "rhs": "0",
+      "slack": "1/3"
+    },
+    {
+      "name": "r152_known_stock_loU",
+      "sense": "G",
+      "activity": "-57/16",
+      "rhs": "-15/4",
+      "slack": "3/16"
+    },
+    {
+      "name": "r152_known_stock_hiL",
+      "sense": "L",
+      "activity": "-155/48",
+      "rhs": "-3/2",
+      "slack": "83/48"
+    },
+    {
+      "name": "r152_known_stock_hiU",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_TC",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_TC2",
+      "sense": "G",
+      "activity": "3/2",
+      "rhs": "3/2",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_count_0_low",
+      "sense": "G",
+      "activity": "3",
+      "rhs": "1",
+      "slack": "2"
+    },
+    {
+      "name": "r152_known_count_0_high",
+      "sense": "L",
+      "activity": "3",
+      "rhs": "3",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_count_1_low",
+      "sense": "G",
+      "activity": "3",
+      "rhs": "1",
+      "slack": "2"
+    },
+    {
+      "name": "r152_known_count_1_high",
+      "sense": "L",
+      "activity": "3",
+      "rhs": "3",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_count_2_low",
+      "sense": "G",
+      "activity": "7/4",
+      "rhs": "0",
+      "slack": "7/4"
+    },
+    {
+      "name": "r152_known_count_2_high",
+      "sense": "L",
+      "activity": "7/4",
+      "rhs": "2",
+      "slack": "1/4"
+    },
+    {
+      "name": "r152_known_count_3_low",
+      "sense": "G",
+      "activity": "5/4",
+      "rhs": "0",
+      "slack": "5/4"
+    },
+    {
+      "name": "r152_known_count_3_high",
+      "sense": "L",
+      "activity": "5/4",
+      "rhs": "2",
+      "slack": "3/4"
+    },
+    {
+      "name": "r152_known_count_4_low",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_count_4_high",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "2",
+      "slack": "2"
+    },
+    {
+      "name": "r152_known_count_5_low",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_count_5_high",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "1",
+      "slack": "1"
+    },
+    {
+      "name": "r152_known_count_6_low",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_count_6_high",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "1",
+      "slack": "1"
+    },
+    {
+      "name": "r152_known_count_7_low",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_count_7_high",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "1",
+      "slack": "1"
+    },
+    {
+      "name": "r152_known_CP_0_loL",
+      "sense": "G",
+      "activity": "2/9",
+      "rhs": "0",
+      "slack": "2/9"
+    },
+    {
+      "name": "r152_known_CP_0_loU",
+      "sense": "G",
+      "activity": "-9/4",
+      "rhs": "-9/4",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_0_hiL",
+      "sense": "L",
+      "activity": "-73/36",
+      "rhs": "-3/4",
+      "slack": "23/18"
+    },
+    {
+      "name": "r152_known_CP_0_hiU",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_1_loL",
+      "sense": "G",
+      "activity": "2/9",
+      "rhs": "0",
+      "slack": "2/9"
+    },
+    {
+      "name": "r152_known_CP_1_loU",
+      "sense": "G",
+      "activity": "-9/4",
+      "rhs": "-9/4",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_1_hiL",
+      "sense": "L",
+      "activity": "-73/36",
+      "rhs": "-3/4",
+      "slack": "23/18"
+    },
+    {
+      "name": "r152_known_CP_1_hiU",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_2_loL",
+      "sense": "G",
+      "activity": "2/9",
+      "rhs": "0",
+      "slack": "2/9"
+    },
+    {
+      "name": "r152_known_CP_2_loU",
+      "sense": "G",
+      "activity": "-21/16",
+      "rhs": "-3/2",
+      "slack": "3/16"
+    },
+    {
+      "name": "r152_known_CP_2_hiL",
+      "sense": "L",
+      "activity": "-157/144",
+      "rhs": "0",
+      "slack": "157/144"
+    },
+    {
+      "name": "r152_known_CP_2_hiU",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_3_loL",
+      "sense": "G",
+      "activity": "2/9",
+      "rhs": "0",
+      "slack": "2/9"
+    },
+    {
+      "name": "r152_known_CP_3_loU",
+      "sense": "G",
+      "activity": "-15/16",
+      "rhs": "-3/2",
+      "slack": "9/16"
+    },
+    {
+      "name": "r152_known_CP_3_hiL",
+      "sense": "L",
+      "activity": "-103/144",
+      "rhs": "0",
+      "slack": "103/144"
+    },
+    {
+      "name": "r152_known_CP_3_hiU",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_4_loL",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_4_loU",
+      "sense": "G",
+      "activity": "-2/9",
+      "rhs": "-3/2",
+      "slack": "23/18"
+    },
+    {
+      "name": "r152_known_CP_4_hiL",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_4_hiU",
+      "sense": "L",
+      "activity": "-2/9",
+      "rhs": "0",
+      "slack": "2/9"
+    },
+    {
+      "name": "r152_known_CP_5_loL",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_5_loU",
+      "sense": "G",
+      "activity": "-1/9",
+      "rhs": "-3/4",
+      "slack": "23/36"
+    },
+    {
+      "name": "r152_known_CP_5_hiL",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_5_hiU",
+      "sense": "L",
+      "activity": "-1/9",
+      "rhs": "0",
+      "slack": "1/9"
+    },
+    {
+      "name": "r152_known_CP_6_loL",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_6_loU",
+      "sense": "G",
+      "activity": "-1/9",
+      "rhs": "-3/4",
+      "slack": "23/36"
+    },
+    {
+      "name": "r152_known_CP_6_hiL",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_6_hiU",
+      "sense": "L",
+      "activity": "-1/9",
+      "rhs": "0",
+      "slack": "1/9"
+    },
+    {
+      "name": "r152_known_CP_7_loL",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_7_loU",
+      "sense": "G",
+      "activity": "-1/9",
+      "rhs": "-3/4",
+      "slack": "23/36"
+    },
+    {
+      "name": "r152_known_CP_7_hiL",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_CP_7_hiU",
+      "sense": "L",
+      "activity": "-1/9",
+      "rhs": "0",
+      "slack": "1/9"
+    },
+    {
+      "name": "rn_lb_1_0",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_1_0",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_lb_1_1",
+      "sense": "G",
+      "activity": "18014398509481985/81064793292668928",
+      "rhs": "0",
+      "slack": "18014398509481985/81064793292668928"
+    },
+    {
+      "name": "rn_ub_1_1",
+      "sense": "L",
+      "activity": "-14/9",
+      "rhs": "0",
+      "slack": "14/9"
+    },
+    {
+      "name": "rn_lb_1_2",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_1_2",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_lb_1_3",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_1_3",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_lb_1_4",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_1_4",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_mass_1",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_inventory_1",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_lb_2_0",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_2_0",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_lb_2_1",
+      "sense": "G",
+      "activity": "18014398509481985/108086391056891904",
+      "rhs": "0",
+      "slack": "18014398509481985/108086391056891904"
+    },
+    {
+      "name": "rn_ub_2_1",
+      "sense": "L",
+      "activity": "-7/6",
+      "rhs": "0",
+      "slack": "7/6"
+    },
+    {
+      "name": "rn_lb_2_2",
+      "sense": "G",
+      "activity": "18014398509481985/324259173170675712",
+      "rhs": "0",
+      "slack": "18014398509481985/324259173170675712"
+    },
+    {
+      "name": "rn_ub_2_2",
+      "sense": "L",
+      "activity": "-7/18",
+      "rhs": "0",
+      "slack": "7/18"
+    },
+    {
+      "name": "rn_lb_2_3",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_2_3",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_lb_2_4",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_2_4",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_mass_2",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_inventory_2",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_lb_3_0",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_3_0",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_lb_3_1",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_3_1",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_lb_3_2",
+      "sense": "G",
+      "activity": "18014398509481985/162129586585337856",
+      "rhs": "0",
+      "slack": "18014398509481985/162129586585337856"
+    },
+    {
+      "name": "rn_ub_3_2",
+      "sense": "L",
+      "activity": "-7/9",
+      "rhs": "0",
+      "slack": "7/9"
+    },
+    {
+      "name": "rn_lb_3_3",
+      "sense": "G",
+      "activity": "18014398509481985/162129586585337856",
+      "rhs": "0",
+      "slack": "18014398509481985/162129586585337856"
+    },
+    {
+      "name": "rn_ub_3_3",
+      "sense": "L",
+      "activity": "-7/9",
+      "rhs": "0",
+      "slack": "7/9"
+    },
+    {
+      "name": "rn_lb_3_4",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_ub_3_4",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_mass_3",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_inventory_3",
+      "sense": "E",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_normalization",
+      "sense": "E",
+      "activity": "1",
+      "rhs": "1",
+      "slack": "0"
+    },
+    {
+      "name": "rn_abs_p_1_2",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_abs_m_1_2",
+      "sense": "G",
+      "activity": "1/3",
+      "rhs": "0",
+      "slack": "1/3"
+    },
+    {
+      "name": "rn_abs_p_1_3",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_abs_m_1_3",
+      "sense": "G",
+      "activity": "1/3",
+      "rhs": "0",
+      "slack": "1/3"
+    },
+    {
+      "name": "rn_abs_p_2_3",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_abs_m_2_3",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "rn_gini",
+      "sense": "L",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r152_known_RN_stock_low",
+      "sense": "G",
+      "activity": "11/9",
+      "rhs": "0",
+      "slack": "11/9"
+    },
+    {
+      "name": "r152_known_RN_stock_high",
+      "sense": "L",
+      "activity": "-1/9",
+      "rhs": "0",
+      "slack": "1/9"
+    },
+    {
+      "name": "r145_NC1",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r145_NC2",
+      "sense": "G",
+      "activity": "0",
+      "rhs": "0",
+      "slack": "0"
+    },
+    {
+      "name": "r145_TS1",
+      "sense": "G",
+      "activity": "54043195528445971/324259173170675712",
+      "rhs": "-2001599834386887/4503599627370496",
+      "slack": "198158383604301835/324259173170675712"
+    },
+    {
+      "name": "r145_TS2",
+      "sense": "G",
+      "activity": "-173/18",
+      "rhs": "-10",
+      "slack": "7/18"
+    },
+    {
+      "name": "r145_TS3",
+      "sense": "L",
+      "activity": "-149/18",
+      "rhs": "-4",
+      "slack": "77/18"
+    },
+    {
+      "name": "r145_TS4",
+      "sense": "L",
+      "activity": "-378302368699121645/324259173170675712",
+      "rhs": "-5003999585967217/4503599627370496",
+      "slack": "18014398509482021/324259173170675712"
+    }
+  ],
+  "bound_checks": [
+    {
+      "variable": "G",
+      "value": "1/9",
+      "LB": "0",
+      "UB": "3/4"
+    },
+    {
+      "variable": "Y_1",
+      "value": "1",
+      "LB": "0",
+      "UB": "4"
+    },
+    {
+      "variable": "Y_2",
+      "value": "5/4",
+      "LB": "0",
+      "UB": "4"
+    },
+    {
+      "variable": "Y_3",
+      "value": "5/2",
+      "LB": "0",
+      "UB": "4"
+    },
+    {
+      "variable": "e_1",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "e_2",
+      "value": "3/8",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "e_3",
+      "value": "3/8",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "h_1_2",
+      "value": "3/8",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "h_1_3",
+      "value": "3/8",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "h_2_3",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "r_1",
+      "value": "1",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "r_2",
+      "value": "5/8",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "r_3",
+      "value": "5/8",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "rn_Y_1",
+      "value": "4/9",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "rn_Y_2",
+      "value": "5/9",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "rn_Y_3",
+      "value": "10/9",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "rn_h_1_2",
+      "value": "1/6",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "rn_h_1_3",
+      "value": "1/6",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "rn_h_2_3",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "rn_t",
+      "value": "4/9",
+      "LB": "2001599834386887/9007199254740992",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_1_0",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_1_1",
+      "value": "4/9",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_1_2",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_1_3",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_1_4",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_2_0",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_2_1",
+      "value": "1/3",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_2_2",
+      "value": "1/9",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_2_3",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_2_4",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_3_0",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_3_1",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_3_2",
+      "value": "2/9",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_3_3",
+      "value": "2/9",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "rn_w_3_4",
+      "value": "0",
+      "LB": "0",
+      "UB": "2"
+    },
+    {
+      "variable": "state_1_0",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_1_1",
+      "value": "1",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_1_2",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_1_3",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_1_4",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_2_0",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_2_1",
+      "value": "3/4",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_2_2",
+      "value": "1/4",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_2_3",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_2_4",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_3_0",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_3_1",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_3_2",
+      "value": "1/2",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_3_3",
+      "value": "1/2",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_3_4",
+      "value": "0",
+      "LB": "0",
+      "UB": "1"
+    },
+    {
+      "variable": "state_g_1_0",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_1_1",
+      "value": "1/9",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_1_2",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_1_3",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_1_4",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_2_0",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_2_1",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_2_2",
+      "value": "1/9",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_2_3",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_2_4",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_3_0",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_3_1",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_3_2",
+      "value": "1/9",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_3_3",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "state_g_3_4",
+      "value": "0",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "zprod_1",
+      "value": "1/9",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "zprod_2",
+      "value": "2/9",
+      "LB": "0",
+      "UB": null
+    },
+    {
+      "variable": "zprod_3",
+      "value": "2/9",
+      "LB": "0",
+      "UB": null
+    }
+  ],
+  "threshold_intervals": [
+    {
+      "theta": "1/4",
+      "delta": "1/4",
+      "ell": 1,
+      "u": 3
+    },
+    {
+      "theta": "1/2",
+      "delta": "1/4",
+      "ell": 1,
+      "u": 3
+    },
+    {
+      "theta": "3/4",
+      "delta": "1/4",
+      "ell": 0,
+      "u": 2
+    },
+    {
+      "theta": "1",
+      "delta": "1/4",
+      "ell": 0,
+      "u": 2
+    },
+    {
+      "theta": "3/2",
+      "delta": "1/2",
+      "ell": 0,
+      "u": 2
+    },
+    {
+      "theta": "2",
+      "delta": "1/2",
+      "ell": 0,
+      "u": 1
+    },
+    {
+      "theta": "3",
+      "delta": "1",
+      "ell": 0,
+      "u": 1
+    },
+    {
+      "theta": "4",
+      "delta": "1",
+      "ell": 0,
+      "u": 1
+    }
+  ],
+  "lower_proof": {
+    "normalization": "2t+u/2+v/4=1",
+    "NC_affine": [
+      {
+        "row": "NC1",
+        "t_u_v_coefficients": [
+          "1/2",
+          "1/2",
+          "1/4"
+        ]
+      },
+      {
+        "row": "NC2",
+        "t_u_v_coefficients": [
+          "1/2",
+          "1/2",
+          "1/4"
+        ]
+      }
+    ],
+    "NC_equivalent": "Hhat>=1-3t/2",
+    "absolute_differences": "Hhat>=3t-1",
+    "weights": [
+      "2/3",
+      "1/3"
+    ],
+    "implied_Hhat": "1/3",
+    "implied_g": "1/9"
+  },
+  "mixture": [
+    {
+      "Y": [
+        1,
+        1,
+        2
+      ],
+      "weight": "1/4",
+      "G": "1/6",
+      "penalty": "1/8"
+    },
+    {
+      "Y": [
+        1,
+        1,
+        3
+      ],
+      "weight": "1/2",
+      "G": "4/27",
+      "penalty": "3/32"
+    },
+    {
+      "Y": [
+        1,
+        2,
+        2
+      ],
+      "weight": "1/4",
+      "G": "2/15",
+      "penalty": "1/16"
+    }
+  ],
+  "inside_verification_seconds": 0.02219709986820817,
+  "accounting": "Charged once by parent serial outer ledger; inside time is not an additional fee"
+}

@@ -16,6 +16,21 @@ position tables and historical evidence. The
 
 ## Scientific account and boundaries
 
+The later [Round153 whole-hull study](round153_research.md) is organized as
+a separate research section after the stable method. Its logical sequence
+is historical-reference restoration, fixed-marginal structural separation,
+complete free-LP value intervals, pricing/coupling costs, then a distinct
+own-root algorithm experiment. The [insertion source](../results/unified_exact_round153/manuscript.tex)
+keeps these claims separate from the registered R137 complete panel. Its
+current completion status and remaining work are in
+[RESUME](../results/unified_exact_round153/RESUME.md). No pooled success rate
+or promotion follows merely from a stronger diagnostic root bound. The
+actual Round153 results tightly bound NB35's extra LP value and establish
+positive but unresolved K35/NC20 increments after targeted pricing and
+column probes. Its separately paid eight-arm floor panel is mixed; the
+uniform candidate stays default OFF. The limited domains and single-seed
+complete panel do not support a universal convergence or performance claim.
+
 GI-TBC means Gini-interval tailored branch-and-cut (historical S2, configuration
 ms2). Complete independently paid H, shared integer-inventory/service states,
 VD-P, ordered-supply and pair-support/handling rows, objective estimators and

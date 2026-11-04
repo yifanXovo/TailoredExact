@@ -194,3 +194,64 @@ Reviewed implementation SHA256 values are
 for `scripts/round153_stabilize.py` and
 `2efae33c1d85a356ad84702906c154372930d2e7a4652375ef34e4bf3d7b6c19`
 for `scripts/round153_coupled.py`.
+
+## Legal pool-column enrichment and longer full pricing
+
+The primary agent reports that six zero-center iterations reduced the true
+convexity correction from roughly .05 to roughly .004 and first improved the
+qualified K35 lower to `.27896023619167765`, against reference
+`.27886445393292747` and retained upper `.28749181051555994`. The remaining
+60-second price intervals are about .0013 to .004 wide. These are the
+primary's current observations, not a new reconstruction by this reviewer.
+
+Verdict: **ACCEPT_DESIGN_FOR_LEGAL_POOL_ENRICHMENT_AND_TARGETED_PRICING**.
+Increasing offline full-domain pricing to 300 seconds within a 7200-second
+targeted research window addresses the observed pricing bottleneck. Retain
+the completed interval and all existing legal columns at a normal checkpoint.
+Neither this pricing allocation nor pool policy enters the frozen online
+candidate.
+
+It is valid to add every currently returned, true-revalidated legal stock
+from the existing oracle pool, even if its reduced cost at the selected level
+dual is nonnegative. For K contained in K', every old RMP primal extends with
+zero new lambdas. The restriction remains a subset of the true full-hull
+model, including upward-safe f coefficients and the existing completion
+margin. A newly qualified primal therefore remains an upper on the same
+full-hull value, while an older qualified upper remains available.
+
+The selected level dual need not optimize the old RMP objective. Nonnegative
+reduced cost at that candidate does not establish that the new column is
+useless at an optimal RMP dual. Adding the column asserts only its genuine
+feasibility in the full inventory domain; it makes no reduced-cost or
+improvement theorem. The existing `Master.add` rejects duplicates and checks
+the complete support/resource/Gupper conditions through true stock values.
+It is the required insertion path for positive as well as negative candidates.
+
+The Q matrix and pre-column Q bounds must stay unchanged. The existing
+primal and full-domain lower qualification should finish before insertion;
+the next normal solve includes the enlarged column set. The full-domain
+lower computed before insertion is still valid for the same full R. The next
+certificate recomputes true min_K/a_K across the enlarged set and retains the
+same single full-price correction. No extra Native call, state filtering,
+price upper used as a lower or solver status promotion is authorized here.
+
+Implementation details communicated to the primary agent:
+
+- `level_zero_pool` must activate both stabilization and level continuation,
+  and explicitly retain the zero center; the old exact-string center branch
+  for `level_zero` alone must not silently route this mode to the AP center.
+- `added` counts only actually new legal columns; `added_negative` is its
+  subset meeting the stated candidate reduced-cost threshold. Duplicates do
+  not count as progress. Retain the before/after column count and center/mode.
+- No new column and no material certified-L increase remains an unresolved
+  checkpoint. Nonnegative candidate columns are permitted progress, without
+  a promise that the next RMP objective will improve.
+
+The reviewer checked frozen matrix membership: `round153_coupled.py` and
+`round153_stabilize.py` are absent from its 151 Python helper bindings;
+`round153_pricing.py` and `round153_common.py` are present. Confine this
+adaptation to the offline driver/selector and arguments. Do not change the
+frozen pricing/common files or the admitted production identities. No new
+small-domain run, solver computation or broad qualification is needed for
+this purely legal-column extension; its value is judged from the subsequent
+paid full-domain interval and cost.

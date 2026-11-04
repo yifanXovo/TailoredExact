@@ -1,0 +1,117 @@
+{
+  "UTC": "2026-11-04T06:56:48.961651+00:00",
+  "gates": {
+    "cut_pricing_design_review.md": "1031eeea80cd4a32b8ea8dc1c1ef9a1ec02fb5af61cc6bb309ef5069150acdd4",
+    "k35_targeted_deepening_review.md": "5cabe9c30146c01fc73ac9277514f9cb1a7a19f099052255656c1d78ec5405d1",
+    "nc20_deepening_review.md": "e6f390dc82dc0c5eb6ba94f00bf8ccc1909a44443c8942c21761deba9c195db7"
+  },
+  "steps": [
+    [
+      "graphcut_qualification_v1",
+      600,
+      "round153_graphcut.py",
+      [
+        "qualify",
+        "graphcut_v1"
+      ]
+    ],
+    [
+      "NC20_saved_direction_graphcut_v1",
+      1200,
+      "round153_refine.py",
+      [
+        "N-C20-U",
+        "saved_direction_graphcut",
+        "results/unified_exact_round153/coupled/N-C20-U_saved_direction_transport",
+        "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00008",
+        "600",
+        "16",
+        "graphcut"
+      ]
+    ],
+    [
+      "K35_saved_direction_graphcut_v1",
+      1200,
+      "round153_refine.py",
+      [
+        "K-35-U",
+        "saved_direction_graphcut",
+        "results/unified_exact_round153/coupled/K-35-U_saved_direction_long",
+        "results/unified_exact_round153/coupled/K-35-U_price_deep/iter00003",
+        "600",
+        "16",
+        "graphcut"
+      ]
+    ],
+    [
+      "NC20_saved_direction_long_v1",
+      2200,
+      "round153_refine.py",
+      [
+        "N-C20-U",
+        "saved_direction_long",
+        "results/unified_exact_round153/coupled/N-C20-U_saved_direction_graphcut",
+        "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00008",
+        "1800",
+        "1",
+        "partition"
+      ]
+    ],
+    [
+      "K35_near_optimal_zero_pool_v1",
+      7600,
+      "round153_coupled.py",
+      [
+        "K-35-U",
+        "near_optimal_zero_pool",
+        "7200",
+        "300",
+        "0.0001",
+        "true",
+        "results/unified_exact_round153/coupled/K-35-U_saved_direction_graphcut",
+        "zero_pool"
+      ]
+    ],
+    [
+      "NC20_near_optimal_zero_pool_v1",
+      5800,
+      "round153_coupled.py",
+      [
+        "N-C20-U",
+        "near_optimal_zero_pool",
+        "5400",
+        "300",
+        "0.00001",
+        "true",
+        "results/unified_exact_round153/coupled/N-C20-U_saved_direction_long",
+        "zero_pool"
+      ]
+    ],
+    [
+      "K35_deepened_support_envelope_v1",
+      600,
+      "round153_attribution.py",
+      [
+        "support_close",
+        "K-35-U",
+        "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool",
+        "deepened_support_envelope"
+      ]
+    ],
+    [
+      "NC20_deepened_support_envelope_v1",
+      600,
+      "round153_attribution.py",
+      [
+        "support_close",
+        "N-C20-U",
+        "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool",
+        "deepened_support_envelope"
+      ]
+    ]
+  ],
+  "production_matrix_SHA": "d81767d4adfe9ec20a2f5bfcc6cd26450773f2f93fe3231459603c523210374e",
+  "serial": true,
+  "no_adaptive_oracle_adoption": true,
+  "normal_qualified_arms_complete_their_registered_windows": true
+}

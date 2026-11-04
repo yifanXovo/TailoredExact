@@ -1,5 +1,19 @@
 # Current mainline and Round137 paper branch
 
+The [Round153 coupled-objective study](round153_research.md) extends the
+same-domain reference to both normalized-count rows, all four reciprocal
+product rows and the previous qualified row union. It studies the value of
+the complete inventory objective hull in the free routing relaxation, and
+separately evaluates a default-OFF, own-root scalar-floor candidate. Its
+NB35 value interval is tightly bounded; K35 and NC20 retain positive
+same-Q increments with quantified unresolved pricing/coupling gaps after
+targeted deepening. Eight own-H complete arms show mixed outcomes, so the
+uniform floor candidate remains research-only. Its
+[continuation record](../results/unified_exact_round153/RESUME.md) gives the
+actual execution and delivery status. Stable GI-TBC below retains its
+original entry and configuration; research LP-value uppers are not routing
+incumbents or complete-algorithm performance.
+
 The [Round152 integer-objective study](round152_research.md) completes an
 offline stage on hard-resource objective epigraphs. An exact small-domain
 gap survives the declared AP/GD/stock/count reference; three complete free
