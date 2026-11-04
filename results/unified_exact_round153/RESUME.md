@@ -2,10 +2,11 @@
 
 ## Current status
 
-All registered experiments and the final paid numerical audit are closed.
-No experiment, automatic afterqueue or performance rerun is active or queued.
-The goal remains active until independent final review, publication,
-one finite public recovery and workspace closeout are observed.
+The finite scientific study, independent final review, Draft PR publication,
+one anonymous recovery and bounded workspace closeout are complete. This
+final record is delivered by a normal metadata commit and push, followed
+by remote-head and PR base/head/Draft readback. No experiment, automatic
+afterqueue or performance rerun is active or queued.
 Historical raw RUNNING and FAILED_STOPPED files are retained partial-attempt
 evidence, not current process status. Do not restart those old controllers.
 
@@ -94,21 +95,43 @@ The measured production commit, current offline source versions, delivery
 base and later publication commits are separate identities. See
 source_manifest.json and the per-run preserved source bytes.
 
-## Remaining delivery steps
+## Completed public delivery
 
-1. Read the final independent mathematical/data/scope/identity/cost/claim
-   review; resolve actual blockers before packaging.
-2. Recheck actual main/R152 refs and absorption. Pack only new evidence,
-   commit and push normally, and create/read back the English Draft PR.
-3. Run exactly one bounded anonymous recovery from the fixed new science
-   commit, with all file/part/archive/member hashes checked and no solver,
-   compiler or old producer. Preserve the attempt.
-4. Record bounded current-round cleanup with zero deletion permitted,
-   retaining unique raw, failures, required PE/DLL, active tree and history.
-5. Commit/push the final publication/recovery/cleanup metadata and recheck
-   remote head and PR base/head/Draft. Only then mark the goal complete.
+The final independent review is ACCEPT_COMPLETE_ROUND153 with no remaining
+scientific blockers or required scientific work. Its scope and actual file
+bindings are in review/final_scientific_review.md and .json.
 
-publication.json, public_restore_receipt.json and cleanup_record.json will
-record observed outcomes. The detailed recovery contract is in
-reproducibility.md. No force-push, merge, branch deletion, broad old-history
-cleanup, new performance sample or automatic cap extension is planned.
+Fixed science:7d64c14faac43c6f410d435dd73b5ba5e49f2f30, normally pushed.
+The new carriers contain12 archives and36838 members, compressed to
+541398543 bytes, plus127 thin source/report files in the public manifest.
+Only current evidence is packed; old large carriers are fixed references.
+
+[Draft PR215](https://github.com/yifanXovo/TailoredExact/pull/215) has the
+requested English title. Its base is codex/round152-resource-integer-objective
+at ed058861e5eb094bc22d468a71a791bf558b51ac; actual main remained
+b2b940c1e517a72e226ec60fc49ff19651737632 and had not absorbed R152. PR214 was
+still Open Draft. PR215's science readback confirms Open/Draft, unmerged,
+the correct base/head branches and science head7d64c14faac43c6f410d435dd73b5ba5e49f2f30.
+The final metadata head is distinct from this immutable science commit.
+
+The single anonymous attempt at
+E:/codes/ExactEBRP-work/restore/round153-public-7d64c14faac4-attempt01
+passed all165 manifest-listed downloads, the manifest itself, all12 archives
+and all36838 members (4765809306 uncompressed member bytes). Its elapsed
+I/O time was107.94573729997501 seconds. It downloaded no old carrier and
+ran no Optimize, Native model read, compiler or old producer. The attempt
+is preserved. Manifest SHA256:
+8d8594b5916e2d254ae45b26bfe994ea79cd4692203628ba646c83c128aeaa8b.
+
+The post-PR current-round cleanup record performs zero deletion and no move.
+It retains11734489392 bytes across the bounded current raw/build/temp/
+recovery inventory; observed free-space change is zero. Unique raw,
+failures, necessary PE/DLL, the active tree, user material and old history
+remain protected. This is not a whole-project cleanup or space estimate.
+
+publication.json, public_restore_receipt.json and cleanup_record.json record
+these observed outcomes. The closeout commit carries only these dynamic
+records, this RESUME and the final PR body; fixed science remains unchanged.
+The detailed recovery contract is in reproducibility.md. No force-push,
+merge, branch deletion, new performance sample or automatic cap extension
+was used for this closeout.
