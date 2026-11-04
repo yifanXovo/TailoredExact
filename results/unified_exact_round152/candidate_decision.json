@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-11-04T01:33:23.482701+00:00",
+  "study_complete": true,
+  "stage": "offline_object_and_expression_research",
+  "production_entered": false,
+  "complete_arms": 0,
+  "stable_algorithm": "R137 GI-TBC",
+  "new_default": false,
+  "inventory_object_has_new_information": true,
+  "independent_scientific_review": "ACCEPT_OFFLINE_SCIENTIFIC_STAGE",
+  "independent_review_file": "review/final_scientific_review.json",
+  "exact_small_same_marginal_gap": "53/1080",
+  "exact_small_global_floor_gap": "1/480",
+  "stronger_than_all_historical_formulations": false,
+  "whole_family_redundancy_proved": false,
+  "oracle_undecided_is_negative": false,
+  "real_free_LP_increment_over_RN": {
+    "N-B35-S": 0.006241766953191785,
+    "K-35-U": -4.440892098500626e-16,
+    "N-C20-U": 0.0002676165176313805
+  },
+  "production_gate_reason": "Deliver the explicitly allowed object-level stage: point separation is reliable, but eight lifted rows mostly move marginals; N-B35 gains only a scalar floor, K35 residual gains disappear against old RN, and N-C20 has a small residual-row gain. No uniform production composition and complete-cost benefit have been established. Diagnostic AP/GD/count/RN blocks are not automatically promoted.",
+  "not_claimed": [
+    "new full algorithm speedup",
+    "new physical U or terminal supported L",
+    "whole-epigraph invalidity or redundancy",
+    "oracle uncomputability",
+    "all historical normalized/disjunctive hull dominance"
+  ],
+  "next_question": "Can a potential chosen against several current optimal-face marginals, rather than one sparse optimum, yield a materially stronger free root bound with a small paid row collection?"
+}

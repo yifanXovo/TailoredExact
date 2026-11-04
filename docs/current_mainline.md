@@ -1,5 +1,15 @@
 # Current mainline and Round137 paper branch
 
+The [Round152 integer-objective study](round152_research.md) completes an
+offline stage on hard-resource objective epigraphs. An exact small-domain
+gap survives the declared AP/GD/stock/count reference; three complete free
+LP domains separate scalar-floor gains, residual support and old RN effects.
+The [stage decision](../results/unified_exact_round152/candidate_decision.json)
+and [independent review](../results/unified_exact_round152/review/final_scientific_review.md)
+retain the results as research. No production entry, profile or executable
+changes, and no new complete-method performance is claimed. Publication and
+public recovery are recorded in its [RESUME](../results/unified_exact_round152/RESUME.md).
+
 The [Round150 finite research record](round150_research.md) adds a same-R149-PE
 B/D confirmation on two known/exposed configurations outside GD selection and
 three conditional-feedback LP screens. Its
