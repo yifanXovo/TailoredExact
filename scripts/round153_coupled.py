@@ -126,8 +126,10 @@ def run(role,label='initial',seconds=3000.,price_cap=30.,tolerance=1e-4,old_join
     seconds=float(seconds);price_cap=float(price_cap);tolerance=float(tolerance)
     old_joint=str(old_joint).lower() in ('true','1','yes')
     stabilization_mode=str(stabilize).lower()
-    stabilize=stabilization_mode in ('true','1','yes','level','level_zero')
-    level_mode=stabilization_mode in ('level','level_zero')
+    stabilize=stabilization_mode in ('true','1','yes','level','level_zero','level_zero_pool','level_zero_pool_bins4','zero_pool')
+    level_mode=stabilization_mode.startswith('level')
+    all_pool=stabilization_mode in ('level_zero_pool','level_zero_pool_bins4','zero_pool')
+    bins4=stabilization_mode=='level_zero_pool_bins4'
     target=OUT/'coupled'/f'{role}_{label}';target.mkdir(parents=True,exist_ok=False);tick=time.perf_counter()
     ref=OUT/'reference'/role;scope=read(ref/'domain.json')['scope'];qpath=ref/'direct/model.mps';qresult=read(ref/'direct/result.json')
     columns,source=seeds(role,scope)
@@ -139,7 +141,8 @@ def run(role,label='initial',seconds=3000.,price_cap=30.,tolerance=1e-4,old_join
     write(target/'plan.json',dict(UTC=utc(),role=role,scope=scope,Q_SHA=sha(qpath),initial_columns=len(columns),
           price_cap=price_cap,outer_cap=seconds,absolute_target=tolerance,old_joint_pricing=old_joint,
           default_Seed=0,Threads=1,prior_upper_source=inherited,stabilize_dual=stabilize,
-          stabilization_mode=stabilization_mode,upper_identity='strengthened LP value only'))
+          stabilization_mode=stabilization_mode,full_price_positive_S_parts=4 if bins4 else 1,
+          upper_identity='strengthened LP value only'))
     write(target/'seed_sources.json',source)
     with gp.Env(empty=True) as env:
         env.setParam('OutputFlag',0);env.setParam('Seed',0);env.setParam('Threads',1);env.start()
@@ -147,7 +150,12 @@ def run(role,label='initial',seconds=3000.,price_cap=30.,tolerance=1e-4,old_join
             master=Master(m,scope,gp,env)
             for Y in columns:master.add(Y)
             assert master.columns
-            m.update();oracle=Oracle(scope,env,old_joint=old_joint);reason='outer_budget_checkpoint';iteration=0
+            m.update()
+            if bins4:
+                from round153_partitioned import PartitionedOracle
+                oracle=PartitionedOracle(scope,env,old_joint=old_joint)
+            else:oracle=Oracle(scope,env,old_joint=old_joint)
+            reason='outer_budget_checkpoint';iteration=0
             save_gz(target/'Q_bounds.json.gz',dict(bounds=master.bounds,derivations=master.derivations))
             result=dict(role=role,label=label,scope=scope,Q_SHA=sha(qpath),lower=lower,upper=upper,
                         gap=upper-lower if upper is not None else None,columns=[list(Y) for Y in master.columns],
@@ -173,7 +181,7 @@ def run(role,label='initial',seconds=3000.,price_cap=30.,tolerance=1e-4,old_join
                     # the Q residual support and full-domain pricing below.
                     candidate_upper=min(m.ObjVal,upper) if upper is not None else m.ObjVal
                     band=max(min(1e-7,tolerance/10),m.ObjVal-(lower+candidate_upper)/2) if level_mode else min(1e-7,tolerance/10)
-                    selected,selection_record=select_dual(master,folder/'dual_selection',band=band,cap=min(120.,available),center='zero' if stabilization_mode=='level_zero' else 'AP')
+                    selected,selection_record=select_dual(master,folder/'dual_selection',band=band,cap=min(120.,available),center='zero' if stabilization_mode.startswith('level_zero') or stabilization_mode=='zero_pool' else 'AP')
                     if selected:
                         a=selected['hull_convexity'];pi={k:selected[c.ConstrName] for k,c in master.links.items()};beta=max(0.,selected['hull_gini'])
                 d={k:-v for k,v in pi.items()}
@@ -194,18 +202,21 @@ def run(role,label='initial',seconds=3000.,price_cap=30.,tolerance=1e-4,old_join
                     save_gz(folder/'certificate.json.gz',cert)
                     row,correction=support_row(scope,beta,pi,price['lower'],len(supports))
                     supports.append(dict(row=row,transport_exact=correction,price_path=str((folder/'pricing/result.json').relative_to(ROOT)),beta=beta))
-                added=0
+                added=0;added_negative=0;columns_before=len(master.columns)
                 for v in sorted(price['stocks'],key=lambda v:v['price']):
                     # Several true negative reduced-cost columns reduce master
                     # degeneracy without changing the full pricing domain.
-                    if v['price'] < a-1e-9:added+=master.add(v['Y'])
+                    negative=v['price'] < a-1e-9
+                    if all_pool or negative:
+                        fresh=master.add(v['Y']);added+=fresh;added_negative+=int(fresh and negative)
                 m.update()
                 rec=dict(iteration=iteration,phase_I=master.phase,RMP_objective=rr['objective'],primal=primal,
                          beta=beta,a=a,pricing_lower=price['lower'],pricing_upper=price['upper'],
                          reduced_cost_upper=price['upper']-a if price['upper'] is not None else None,
                          D_K=cert['D_K'] if cert else None,correction=cert['delta'] if cert else None,
                          lower=lower,upper=upper,gap=upper-lower if upper is not None else None,
-                         columns=len(master.columns),added=added,pricing_seconds=price['seconds'],elapsed_seconds=time.perf_counter()-tick,
+                         columns=len(master.columns),columns_before=columns_before,added=added,added_negative=added_negative,
+                         all_true_legal_pool_columns=all_pool,pricing_seconds=price['seconds'],elapsed_seconds=time.perf_counter()-tick,
                          dual_selection=selection_record['status'] if selection_record else 'BASIC_RMP_DUAL',
                          dual_band=selection_record['dual_band'] if selection_record else None,
                          selection_mode=stabilization_mode)

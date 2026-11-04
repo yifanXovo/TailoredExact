@@ -77,4 +77,16 @@ def floor_close(role,coupled,floor,label):
     data['gap']=data['upper']-data['lower'];write(temp/'result.json',data)
     print(json.dumps(dict(role=role,lower=data['lower'],upper=data['upper'],gap=data['gap'])),flush=True)
 
+def support_close(role,coupled,label):
+    supports(role,coupled,label)
+    source=Path(coupled)/'result.json';data=read(source)
+    proof=OUT/'support_LP'/f'{role}_{label}'/'result.json';value=read(proof)['records'][-1]['L']
+    target=OUT/'coupled'/f'{role}_{label}';target.mkdir(parents=True,exist_ok=False)
+    data.update(label=label,lower=max(data['lower'],value),records=[],prior_results=[str(source)],
+        decision='FREE_Q_SUPPORT_BOUND_TRANSFER',new_RMP_solve=False,free_Q_support_result=str(proof),
+        primal_discovery_only=False,no_new_lower_claim=False,primal_sweeps=[],
+        ancestor_primal_evidence_retained_via_prior_results=True)
+    data['gap']=data['upper']-data['lower'];write(target/'result.json',data)
+    print(json.dumps(dict(role=role,lower=data['lower'],upper=data['upper'],gap=data['gap'])),flush=True)
+
 if __name__=='__main__':globals()[sys.argv[1]](*sys.argv[2:])
