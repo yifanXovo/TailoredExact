@@ -10,6 +10,7 @@
 #include "Round148Research.hpp"
 #include "Round151Research.hpp"
 #include "Round153Research.hpp"
+#include "Round154Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -897,6 +898,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             const auto value=requireValue(i,argc,argv);
             if(value!="off"&&value!="on")throw std::runtime_error("Round153 root floor must be off or on");
             ebrp::round153().enabled=value=="on";
+        }
+        else if (arg == "--round154-proof-floor") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on")throw std::runtime_error("Round154 proof floor must be off or on");
+            ebrp::round153().proof_only=value=="on";
         }
         else if (arg == "--round153-python") ebrp::round153().python=requireValue(i,argc,argv);
         else if (arg == "--round153-helper") ebrp::round153().helper=requireValue(i,argc,argv);
