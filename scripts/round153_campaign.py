@@ -34,6 +34,7 @@ def make_launch(role,method,camp,index,cap=None):
     manifest=inherited._candidate(OUT/'candidate_manifest.json')
     old=old_launch(role)
     launch=copy.deepcopy(old);panel=launch['panel'];cap=cap or launch['cap_seconds']
+    panel['cap_seconds']=cap
     panel.update(gurobi_seed=0,round153_method=method,round138_stock_rlt=False,round146_gd=False,
         round149_penalty_feedback=False,known=True,exposed=True,panel_kind='Round153 complete own-H B versus own-root floor J')
     armid=f'R153_{index:03}_{role}_S0_{method}';destination=camp/'raw'/armid
@@ -75,8 +76,10 @@ def qualify(label='own_root_v1',cap=120):
     configure();camp=OUT/'qualification'/label;camp.mkdir(parents=True,exist_ok=False)
     launch,identity=make_launch('N-B35-S','J',camp,0,int(cap))
     result=execute(launch,identity)
+    control=read(Path(launch['destination'])/'round153_control_audit.json')
+    if int(cap)<=40:assert control['root']['global_deadline_stop'] and not control['Native_audits']
     write(camp/'result.json',dict(PASS=True,not_performance_sample=True,arm=result['arm'],own_H=True,
-        source=read(Path(launch['destination'])/'round153_control_audit.json')))
+        actual_launch_cap=int(cap),source=control))
 
 def profile():
     manifest=inherited._candidate(OUT/'candidate_manifest.json');p=read(ROOT/'config/gi_tbc_round137.json')

@@ -7,7 +7,7 @@ from round152_math import h_exact
 from round153_lp import optimize
 from round153_common import *
 
-def select_dual(master,target,band=1e-7,cap=120.):
+def select_dual(master,target,band=1e-7,cap=120.,center='AP'):
     gp=master.gp;primal=master.m;assert not master.phase and primal.Status==2
     target=Path(target);target.mkdir(parents=True,exist_ok=False);start=time.perf_counter()
     vs=primal.getVars();cs=primal.getConstrs();objective=primal.ObjVal
@@ -38,18 +38,19 @@ def select_dual(master,target,band=1e-7,cap=120.):
         for s in master.scope['stations']:
             anchor=s['support'][0]
             for y in s['support'][1:]:
-                center=float(h_exact(s,anchor)-h_exact(s,y));k=s['i'],y;centers[k]=center
+                value_center=0. if center=='zero' else float(h_exact(s,anchor)-h_exact(s,y));k=s['i'],y;centers[k]=value_center
                 p=multipliers[f'hull_link_{s["i"]}_{y}'];dev=dual.addVar(lb=0,obj=1,name=f'dev_{s["i"]}_{y}')
-                dual.addConstr(dev>=p-center);dual.addConstr(dev>=center-p)
+                dual.addConstr(dev>=p-value_center);dual.addConstr(dev>=value_center-p)
         dev=dual.addVar(lb=0,obj=1,name='dev_beta');p=multipliers['hull_gini']
-        dual.addConstr(dev>=p-1.);dual.addConstr(dev>=1.-p)
+        beta_center=0. if center=='zero' else 1.
+        dual.addConstr(dev>=p-beta_center);dual.addConstr(dev>=beta_center-p)
         rr=optimize(dual,target,cap=cap)
         if rr['Status']==2 and rr['primal']['qualified']:
             selected={name:p.X for name,p in multipliers.items()};status='SELECTED'
             selected_objective=dual.getRow(value).getValue()+primal.ObjCon
         else:selected=None;status='FALLBACK_TO_BASIC_RMP_DUAL'
         record=dict(status=status,RMP_objective=objective,dual_band=band,
-                    potential_objective='sum absolute deviations from AP-based price center plus abs(beta-1)',
+                    center=center,potential_objective='sum abs(pi)+abs(beta)' if center=='zero' else 'sum absolute deviations from AP-based price center plus abs(beta-1)',
                     actual_selected_dual_objective=selected_objective if selected else None,
                     selected_dual_deficit=objective-selected_objective if selected else None,
                     candidate_band_is_numerical_not_exact_optimal_face=True,

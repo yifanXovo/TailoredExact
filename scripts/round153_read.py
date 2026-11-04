@@ -11,7 +11,7 @@ from round152_math import h_exact,unary_dp
 from round153_pricing import stock_value
 from round153_common import *
 
-def floor_contract(destination,enabled):
+def floor_contract(destination,enabled,launch,identity):
     models=destination/'external/models';call=first_call(models)
     audits=[read(p) for p in destination.rglob('*.round153.native.json')]
     embeds=[read(p) for p in models.glob('*.round153.json')]
@@ -21,10 +21,15 @@ def floor_contract(destination,enabled):
         assert all('r153_root_floor' not in p.read_text(encoding='utf-8') for p in models.glob('*.lp'))
     else:
         parameters=read(destination/'round153_parameters.json')
+        argv=launch['command'];panel=launch['panel']
+        assert parameters['helper_SHA']==argv[argv.index('--round153-helper-sha')+1]
+        assert parameters['manifest_SHA']==argv[argv.index('--round153-manifest-sha')+1]==identity['helper_manifest_SHA']
         assert parameters['root_once'] and parameters['node_limit']==4096 and parameters['wall_step_limit'] is None
         assert parameters['price_gap_target']==1e-4 and not parameters['offline_data_used']
         if meta is None:assert call is None and not embeds and not audits
         else:
+            assert meta['input_SHA']==panel['input_sha256']==sha(ROOT/panel['input_path'])
+            assert meta['B']==panel['total_initial'] and meta['Bminus']==max(0,panel['total_initial']-sum(panel['Q_vector']))
             assert meta['helper_SHA']==parameters['helper_SHA'] and meta['helper_manifest_SHA']==parameters['manifest_SHA']
             assert meta['root_once'] and not meta['offline_data_used'] and meta['owned_helper_job_kill_on_close']
             assert meta['formal_new_columns']==meta['extra_root_LP']==0 and not meta['formal_AP_GD_RN_NC_TS']
@@ -99,5 +104,5 @@ def verify(launch,identity):
     assert command[command.index('--round149-penalty-feedback')+1]==command[command.index('--round151-penalty-propagation')+1]=='off'
     types.FunctionType(pf_contract.__code__,dict(pf_contract.__globals__,ROOT=ROOT,OUT=OUT))(destination,False)
     types.FunctionType(cap_contract.__code__,dict(cap_contract.__globals__,ROOT=ROOT,OUT=OUT))(destination,'off')
-    floor_contract(destination,enabled)
+    floor_contract(destination,enabled,launch,identity)
     return types.FunctionType(inherited.verify.__code__,dict(vars(inherited),ROOT=ROOT,OUT=OUT,configure=configure,root_context=root_context))(launch,identity)

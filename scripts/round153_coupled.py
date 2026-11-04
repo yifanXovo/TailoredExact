@@ -126,8 +126,8 @@ def run(role,label='initial',seconds=3000.,price_cap=30.,tolerance=1e-4,old_join
     seconds=float(seconds);price_cap=float(price_cap);tolerance=float(tolerance)
     old_joint=str(old_joint).lower() in ('true','1','yes')
     stabilization_mode=str(stabilize).lower()
-    stabilize=stabilization_mode in ('true','1','yes','level')
-    level_mode=stabilization_mode=='level'
+    stabilize=stabilization_mode in ('true','1','yes','level','level_zero')
+    level_mode=stabilization_mode in ('level','level_zero')
     target=OUT/'coupled'/f'{role}_{label}';target.mkdir(parents=True,exist_ok=False);tick=time.perf_counter()
     ref=OUT/'reference'/role;scope=read(ref/'domain.json')['scope'];qpath=ref/'direct/model.mps';qresult=read(ref/'direct/result.json')
     columns,source=seeds(role,scope)
@@ -173,7 +173,7 @@ def run(role,label='initial',seconds=3000.,price_cap=30.,tolerance=1e-4,old_join
                     # the Q residual support and full-domain pricing below.
                     candidate_upper=min(m.ObjVal,upper) if upper is not None else m.ObjVal
                     band=max(min(1e-7,tolerance/10),m.ObjVal-(lower+candidate_upper)/2) if level_mode else min(1e-7,tolerance/10)
-                    selected,selection_record=select_dual(master,folder/'dual_selection',band=band,cap=min(120.,available))
+                    selected,selection_record=select_dual(master,folder/'dual_selection',band=band,cap=min(120.,available),center='zero' if stabilization_mode=='level_zero' else 'AP')
                     if selected:
                         a=selected['hull_convexity'];pi={k:selected[c.ConstrName] for k,c in master.links.items()};beta=max(0.,selected['hull_gini'])
                 d={k:-v for k,v in pi.items()}

@@ -130,6 +130,8 @@ class Oracle:
                   cap=cap if node_limit is None else None,node_limit=node_limit,online_wall_time_switch=False,
                   whole_method_global_deadline_present=global_deadline is not None,
                   actual_Native_TimeLimit=m.Params.TimeLimit if m.Params.TimeLimit<1e99 else None,
+                  actual_Native_NodeLimit=m.Params.NodeLimit if m.Params.NodeLimit<1e99 else None,
+                  actual_Native_MIPGap=m.Params.MIPGap,actual_Native_MIPGapAbs=m.Params.MIPGapAbs,
                   Seed=0,Threads=1,model_SHA=sha(target/'model.mps'),t_bounds=self.t_bounds,
                   scale=scale,anchors_exact={str(i):str(v) for i,v in anchors.items()},
                   numerical_guard_scaled=guard,objective_correction_scaled_exact=str(correction),
