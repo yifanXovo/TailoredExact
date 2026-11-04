@@ -1,0 +1,90 @@
+{
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/review_round154",
+  "matrix_SHA": "5a337c2229357fbb5c102332bf2726689256aec6231fc6fc3d0b272a0e8897b7",
+  "candidate_manifest_SHA": "3209fff9ba2aa003605ba09511eb499bd002ad43eb44c60b9ada3ca67b07351e",
+  "helper_manifest_SHA": "aed6a85f701d3073a6ffd1006d0931402da881428c2b10bfab822926f5a788e6",
+  "measured_source_commit": "d834d62c7a1be599867db04a427f1d43dd3631cb",
+  "PE_SHA": "0d3a94183285cc2794676c717a23dc75a47c872ad48c26d2237dd8634f1a5a01",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "qualifications": {
+    "proof_placement_v1": "2361758414262a459bb89c98c27fdfe63ac960bf42b19f9e673e3042caeb6508",
+    "consumer_control_v1": "34beb40a9ca9973f0a1d80681be460f2eb801591135650679e576049de1af202",
+    "entry_v1": "5d02b50e263caf54d9f6f31376e50aaceb8db7292135b8c028402a7443721a15"
+  },
+  "consumer_control_PE_SHA": "d80935c2c8f1230feb87f71502b89100d818c82bb79e842dfbf838f39f1fef8a",
+  "source_contract": "Unchanged self-paid R153 root producer; E consumes its covered cutoff-complement floor in a separate copy of the existing proof ledger, preserving raw Native/LP/AM/search bounds.",
+  "frozen_positions": [
+    {
+      "position": 1,
+      "role": "N-B35-S",
+      "method": "B",
+      "cap": 2400
+    },
+    {
+      "position": 2,
+      "role": "N-B35-S",
+      "method": "E",
+      "cap": 2400
+    },
+    {
+      "position": 3,
+      "role": "N-B35-S",
+      "method": "J",
+      "cap": 2400
+    },
+    {
+      "position": 4,
+      "role": "K-35-U",
+      "method": "B",
+      "cap": 2400
+    },
+    {
+      "position": 5,
+      "role": "K-35-U",
+      "method": "E",
+      "cap": 2400
+    },
+    {
+      "position": 6,
+      "role": "R-B35-S-T1",
+      "method": "B",
+      "cap": 2400
+    },
+    {
+      "position": 7,
+      "role": "R-B35-S-T1",
+      "method": "E",
+      "cap": 2400
+    },
+    {
+      "position": 8,
+      "role": "N-C20-U",
+      "method": "B",
+      "cap": 1200
+    },
+    {
+      "position": 9,
+      "role": "N-C20-U",
+      "method": "E",
+      "cap": 1200
+    }
+  ],
+  "nominal_core_caps": 19200,
+  "all_nine_identity_and_frozen_helper_hashes_checked": true,
+  "Seed": 0,
+  "H_seed": 20260626,
+  "Threads": 1,
+  "affinity_mask": 4,
+  "serial": true,
+  "all_own_H": true,
+  "RB35_lambda": 0.055125275219827186,
+  "RB35_T": 4800,
+  "qualifications_are_not_complete_window_performance_samples": true,
+  "no_cross_arm_H_floor_columns_or_incumbent_injection": true,
+  "no_new_Optimize_compile_or_performance_run_by_reviewer": true,
+  "cost_rule": "Reserve each producer window and necessary verification before launch; charge outer once and do not add nested helper/H/Native Runtime or Work.",
+  "adoption": "research-only, default OFF; no automatic promotion, merge or per-role switch",
+  "review_notes": "confirmation_admission.md"
+}

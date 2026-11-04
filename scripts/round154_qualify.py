@@ -21,6 +21,10 @@ def check_extension(oracle,value,beta,d,tau,call,inflation=F(0)):
     pairs=list(oracle.a)
     for k,(i,j) in enumerate(pairs):
         point[f'abs[{i},{j}]']=abs(point[f'r[{i}]']-point[f'r[{j}]'])+(inflation if k==0 else 0)
+    if hasattr(oracle,'Dcost'):
+        written=call['residual_coefficients']['state']
+        Dc=sum(F(written[f'{s["i"]}:{y}']) for s,y in zip(ss,Y))
+        point['hard_cost_D']=Dc;point['hard_cost_W']=S*Dc
     checks=0
     for v in oracle.model.getVars():
         if v.LB>-1e90: assert point[v.VarName]>=F(v.LB),(v.VarName,'LB')
@@ -31,10 +35,15 @@ def check_extension(oracle,value,beta,d,tau,call,inflation=F(0)):
         checks+=1
     return checks,residual
 
-def run(label='residual_v1'):
+def run(label='residual_v1',implementation='basic'):
     from round100_gurobi_runtime import gp,binding
     from round150_lp import affinity
     configure();affinity();assert binding()['sha256']==DLL_SHA
+    if implementation=='strong':
+        from round154_strengthened import StrengthenedResidualOracle
+        oracle_class=StrengthenedResidualOracle
+    else:
+        assert implementation=='basic';oracle_class=ResidualOracle
     target=OUT/'qualification'/label;target.mkdir(parents=True,exist_ok=False);facts=[]
     fixtures=[scope([1.,.5],[[0,1,2,3,4]]*2,1,4,.05,.3),
               scope([.5,1.],[[0,1,3],[0,1,2]],0,3,.2,.5),
@@ -51,7 +60,7 @@ def run(label='residual_v1'):
                 values=[stock_value(domain,v['Y'],beta,costs) for v in legal]
                 true=min(v['price'] for v in values); positive=[v for v in values if v['S']>0]
                 true_positive=min(v['price'] for v in positive)
-                oracle=ResidualOracle(domain,env)
+                oracle=oracle_class(domain,env)
                 previous=[]
                 for k,tau in enumerate([true_positive-F(.25),true_positive+F(.25)]):
                     folder=target/f'fixture{j}_beta{float(beta)}_target{k}'
@@ -90,7 +99,7 @@ def run(label='residual_v1'):
                                       auxiliary_completion_not_used_as_true_price=True))
                 oracle.close()
         zero=scope([1.,.5],[[0],[0]],0,0,.2,.5)
-        oracle=ResidualOracle(zero,env);r=oracle.price(0.,{(1,0):F(-1),(2,0):F(.25)},F(-.8),target/'zero_only',lp_cap=0)
+        oracle=oracle_class(zero,env);r=oracle.price(0.,{(1,0):F(-1),(2,0):F(.25)},F(-.8),target/'zero_only',lp_cap=0)
         assert r['lower']==r['upper']==-.75 and not r['calls'];oracle.close()
         facts.append(dict(zero_only=True,price=r['lower']))
     # C3 strictness and the required hard-total limitation, using exact numbers.
@@ -105,6 +114,7 @@ def run(label='residual_v1'):
     assert 2*state_point['z1']<state_point['S'] # total=1 product row cuts it
     write(target/'result.json',dict(PASS=True,facts=facts,residual_source_SHA=sha(ROOT/'scripts/round154_residual.py'),
           qualification_source_SHA=sha(__file__),matrix_readback=True,block_strictness=True,
+          implementation=implementation,strengthening_source_SHA=sha(ROOT/'scripts/round154_strengthened.py') if implementation=='strong' else None,
           tighter_hard_total_counterexample=True,total_product_excludes_counterexample=True,
           no_claim_of_RN_or_full_Q_dominance=True,no_performance_sample=True))
     print(json.dumps(dict(PASS=True,fixtures=len(facts))),flush=True)

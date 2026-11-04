@@ -1,0 +1,66 @@
+{
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/review_round154",
+  "scope": "The two frozen same-original-price tasks and current RN/residual comparison runner; not E or a production panel",
+  "directions": {
+    "K35_saved": "a4411f4cf6d094b092a9fbaee400702a437aa7866c2187b3c5ac5cfb6e4999cd",
+    "NC20_fresh": "caa34388aaba540220b7b81cf194891ac1fef258b198ca16580d5dd5ff7cb7e3"
+  },
+  "reviewed_sources": {
+    "scripts/round154_targets.py": "eef1a2cb587bbcfb002d92486420c9a224bb38a0ba8cc2ac4f1e9ba83db69eb3",
+    "scripts/round154_residual.py": "04bfa84774b7be4603ec08ae88ba015d6351d2bd3109a1d599fd4709f18bbc50",
+    "scripts/round154_qualify.py": "cc231facd85be0976f8aebc347b33c2cfa6b355dfed5697b3878603f20551bd9"
+  },
+  "residual_qualification": {
+    "path": "results/unified_exact_round154/qualification/residual_v3/result.json",
+    "SHA256": "3b1a945a27d0e810f8aed9082a8078473fa10993e0d8c33d0dd50d40531486fd",
+    "PASS": true
+  },
+  "initial_comparison": {
+    "Native_seconds_each": 60,
+    "positions": 4,
+    "implementations": [
+      "RN old_joint",
+      "original-coordinate residual with total-product rows"
+    ],
+    "same_full_domain": true,
+    "same_beta_d_tau": true,
+    "same_four_initial_true_stocks": true,
+    "inherited_lower_only_in_summary": true,
+    "Seed": 0,
+    "Threads": 1,
+    "outer_construction_LP_validation_IO_charged": true,
+    "nested_Runtime_Work_not_added": true
+  },
+  "targets": [
+    {
+      "label": "K35_saved",
+      "target_hull": 0.28722616330431716,
+      "target_price": 0.08077041468890388,
+      "fixed_certificate_ceiling": 0.2873260533067223,
+      "initial_true_price_upper": 0.08087030469130901,
+      "inherited_price_lower": 0.07003842216867079,
+      "initial_columns": 33882,
+      "initial_supports": 82
+    },
+    {
+      "label": "NC20_fresh",
+      "target_hull": 0.1898568005655939,
+      "target_price": 0.05613932415690557,
+      "fixed_certificate_ceiling": 0.1899566905663047,
+      "initial_true_price_upper": 0.05623921415761639,
+      "inherited_price_lower": -0.17279659320625465,
+      "initial_columns": 54210,
+      "initial_supports": 53
+    }
+  ],
+  "closed_issues": [
+    "Exact beta identity preserved in prior residual transport.",
+    "Targeted nonzero downward signed state-cost transport passed saved v3 finite check.",
+    "Removed inherited_lower from residual solver call before fresh_raw_price_lower comparison."
+  ],
+  "continuation": "After initial matched screens, assess useful target reach and fixed ceilings; give a promising direction a documented substantial long proof/deepening within the total serial budget. This is not automatic approval of a variant grid.",
+  "no_new_solve_by_reviewer": true,
+  "method_notes": "fixed_price_admission.md"
+}

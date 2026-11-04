@@ -91,8 +91,13 @@ def compare(label,implementation,cap='60',name='screen'):
     tick=time.perf_counter()
     with gp.Env(empty=True) as env:
         env.setParam('OutputFlag',0);env.setParam('Threads',1);env.setParam('Seed',0);env.start()
-        if implementation=='residual':
-            oracle=ResidualOracle(scope,env)
+        if implementation in ('residual','residual_strong'):
+            if implementation=='residual_strong':
+                from round154_strengthened import StrengthenedResidualOracle
+                qualification=read(OUT/'qualification/strong_residual_v2/result.json')
+                assert qualification['PASS'] and qualification['strengthening_source_SHA']==sha(ROOT/'scripts/round154_strengthened.py')
+                oracle=StrengthenedResidualOracle(scope,env)
+            else: oracle=ResidualOracle(scope,env)
             r=oracle.price(direction['beta'],d,F(direction['tau_exact']),target,cap=float(cap),
                            warm=direction['initial_stocks'])
         else:

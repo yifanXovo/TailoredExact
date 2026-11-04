@@ -78,7 +78,20 @@ def freeze():
     write(target,dict(UTC=utc(),groups=groups,candidate_manifest_SHA=sha(OUT/'candidate_manifest.json'),helpers=helpers,
         helper_manifest_SHA=sha(OUT/'helper_manifest.json'),Seed=0,H_seed=20260626,Threads=1,affinity_mask=4,
         serial=True,all_own_H=True,nominal_core_caps=19200,roles=ROLES,
-        frozen_before_any_new_complete_E_result=True,no_original_H_LP_incumbent_or_cross_arm_injection=True))
+        frozen_before_any_new_complete_E_result=True,prior_E_qualification_only=['proof_placement_v1'],
+        no_original_H_LP_incumbent_or_cross_arm_injection=True))
+    profile()
+
+def profile():
+    manifest=inherited._candidate(OUT/'candidate_manifest.json');p=read(ROOT/'config/gi_tbc_round137.json')
+    p.update(schema='round154-own-proof-floor-frozen-argv-v1',algorithm='GI-TBC plus independent own-root proof floor',
+        round=154,source_commit=manifest['source_commit'],research_head=manifest['source_commit'],
+        default_executable=manifest['production_PE'],verified_PE_SHA256=manifest['production_PE_SHA'],
+        verified_DLL=str(DLL),verified_DLL_SHA256=DLL_SHA,research_profile=True,
+        source_manifest='results/unified_exact_round154/candidate_manifest.json',
+        parent_profile_SHA256=sha(ROOT/'config/gi_tbc_round137.json'),unique_complete_candidate='E',
+        default_AM=.08,maximum_depth=8,minimum_width=.0001,pair_only=True,H_seed=20260626)
+    p['argv']+=arguments('E');write(ROOT/'config/gi_tbc_proof_floor_round154.json',p)
 
 def admission():
     path=OUT/'confirmation_matrix.json';matrix=read(path);gate=read(OUT/'review/confirmation_admission.json')
