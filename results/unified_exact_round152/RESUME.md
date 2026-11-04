@@ -1,8 +1,9 @@
 # Round152 continuation and delivery record
 
 The user explicitly adopted the `/goal` in [goal.md](goal.md). Its offline
-object-level research stage is complete and independently accepted; publication
-steps below are recorded only after their actual completion.
+object-level research stage is complete and independently accepted. The fixed
+science is published, its anonymous public recovery passed, and the English
+Draft PR and bounded workspace closeout are recorded below.
 
 ## Scientific handoff
 
@@ -46,6 +47,43 @@ merge, force push or branch deletion authority.
 
 ## Actual publication and closeout
 
-Fixed-science commit, public restore, English Draft PR readback and cleanup
-are pending at this prepublication snapshot. Their receipts and exact
-identities will be added in a delivery-only commit, without changing science.
+- Fixed science: [`d489ec2948f079105e4532a2e06ae4eed9fcd500`](https://github.com/yifanXovo/TailoredExact/tree/d489ec2948f079105e4532a2e06ae4eed9fcd500/results/unified_exact_round152).
+  It was normally committed and pushed, with 68 explicitly selected paths.
+  The [staging byte check](staging_byte_check.json) verified all 65 public
+  files including the bootstrap manifest against actual Git index bytes.
+- English [Draft PR #214](https://github.com/yifanXovo/TailoredExact/pull/214)
+  is open and unmerged. Actual readback verified base
+  `codex/round151-standalone-penalty-propagation` at
+  `c6e930ffcb84f0c3801c651f28b5f7e8e2062f33`, head
+  `codex/round152-resource-integer-objective`, and `draft=true`.
+  The initial scientific-head readback is recorded in [publication.json](publication.json).
+  Main remained `b2b940c1e517a72e226ec60fc49ff19651737632` and did not contain R151.
+- The [actual anonymous public restore](public_restore_receipt.json) passed
+  on its first attempt at the fixed science commit: 64 listed downloads plus
+  the bootstrap manifest, four archives, **2072 members / 832121812 member
+  bytes**. Its initially empty destination is
+  `E:\codes\ExactEBRP-work\restore\round152-public-d489ec2948f0-attempt01`.
+  Full byte/member recovery took `18.808380299946293` seconds of pure I/O.
+  There was no Native call, Optimize, compiler or old producer, and no old
+  carrier redownload.
+- The [post-PR cleanup record](cleanup_record.json) retains the active tree,
+  unique science, failures, source snapshots, inherited dependencies and
+  accepted recovery. **Deleted paths: zero; deleted bytes: zero.** The bounded
+  scan recorded `2067033159` retained bytes and zero observed free-space
+  change. It is a scan-time snapshot, before later small delivery records.
+- Two staging-only refusals (sparse-checkout paths and ignored review logs)
+  were resolved using `--sparse --force` only for the manifest-enumerated
+  paths. [Delivery attempts](delivery_attempts.json) preserve those actions;
+  they triggered no experiment or evidence loss. Archives and scientific
+  results did not change.
+- Final experimental cost remains **851.5968562993511 seconds**. Publication
+  I/O timings and their scope are separate in [delivery_io_report.json](delivery_io_report.json).
+  Delivery-only commits add these receipts and this handoff; the fixed
+  scientific manifest and source identity remain unchanged.
+- The separate [independent delivery review](review/delivery_review.md)
+  accepted the actual fixed-science, public recovery, PR, cost and cleanup
+  records with no blockers and no new experiments. Final branch-head
+  readback follows the ordinary push of these delivery-only records.
+
+The new carriers and all required scientific documents are publicly recoverable.
+This handoff grants no production adoption or full-method performance claim.

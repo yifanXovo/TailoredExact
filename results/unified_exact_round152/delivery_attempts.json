@@ -1,0 +1,24 @@
+{
+  "attempts": [
+    {
+      "action": "git add exact approved current paths",
+      "outcome": "sparse-checkout path refusal",
+      "correction": "Use git add --sparse for the same explicit paths",
+      "new_Optimize": 0,
+      "experiment": false,
+      "unique_evidence_lost": false
+    },
+    {
+      "action": "git add --sparse exact current paths",
+      "outcome": "ignored review stdout/stderr log refusal",
+      "correction": "Use --force only with the manifest-enumerated explicit paths",
+      "new_Optimize": 0,
+      "experiment": false,
+      "unique_evidence_lost": false
+    }
+  ],
+  "public_restore_attempts_started": 1,
+  "public_restore_attempts_passed": 1,
+  "staging_completed": true,
+  "science_commit": "d489ec2948f079105e4532a2e06ae4eed9fcd500"
+}
