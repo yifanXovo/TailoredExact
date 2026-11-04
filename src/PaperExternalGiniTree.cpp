@@ -32,6 +32,7 @@
 #include "Round146Research.hpp"
 #include "Round148Research.hpp"
 #include "Round151Research.hpp"
+#include "Round153Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -1764,6 +1765,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     round148ResetRun();
     round149ResetRun();
     round151ResetRun();
+    round153ResetRun();
     if (options.round92_handling_activation) {
         if (options.external_gini_scheduling !=
                 "round31-nonblocking-native-bound" ||
@@ -4138,6 +4140,17 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             const auto base=state.artifact;
             state.artifact=round151_detail::embed(instance,base,verified_ub,
                 base.path.parent_path()/(base.path.stem().string()+"_round151_caps.lp"));
+        }
+        if(round153().enabled&&state.artifact.written){
+            const auto base=state.artifact;
+            state.artifact=round153_detail::embed(instance,base,verified_ub,
+                base.path.parent_path()/(base.path.stem().string()+"_round153_floor.lp"),globalDeadlineRemaining());
+            if(round153().global_stop||globalDeadlineRemaining()<=0.0){
+                const double partial_build_seconds=std::chrono::duration<double>(PaperClock::now()-build_started).count();
+                total_model_build_seconds+=partial_build_seconds;
+                if(options.round65_budget)proof_budget.charge(true,0,partial_build_seconds,leaf.id,"canonical_build_deadline",Round65Budget::Grant{});
+                stopAtDeadline();return false;
+            }
         }
         if(round149().enabled&&state.artifact.written){
             const auto base=state.artifact;

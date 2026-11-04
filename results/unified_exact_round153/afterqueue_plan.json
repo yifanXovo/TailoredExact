@@ -1,0 +1,29 @@
+{
+  "UTC": "2026-11-04T13:40:06.345560+00:00",
+  "gate_SHA": "38c0c61f1ec2483cbe4ce76d95837e8bfe79e2b828f917faa6672c6ae03372f3",
+  "implementation_SHA": "ef8190f6b6aa12730d4f6ab82658345fbb44d1358f45cfed363b8b59afa95da5",
+  "probes": [
+    {
+      "role": "K-35-U",
+      "tolerance": 0.0001,
+      "source": "results/unified_exact_round153/coupled/K-35-U_deepened_support_envelope",
+      "source_SHA": "7ec7bdab10fb2dd0d27d598e05645071f58a527f40014a65828916e377b61616",
+      "observed_lower": 0.2828596948801647,
+      "observed_upper": 0.2873261633063073
+    },
+    {
+      "role": "N-C20-U",
+      "tolerance": 1e-05,
+      "source": "results/unified_exact_round153/coupled/N-C20-U_deepened_support_envelope",
+      "source_SHA": "70ecd7408bd5e56f414810fca10b476e128881bfbd33f6ff6ca8ef689f39d7e7",
+      "observed_lower": 0.1833218484555365,
+      "observed_upper": 0.18995680056588546
+    }
+  ],
+  "frozen_eight_endpoints_closed_before_start": true,
+  "qualification_reservation": 300,
+  "each_probe_reservation": 1600,
+  "each_probe_internal_cap": 1200,
+  "final_verification_and_margin_reserve": 8400,
+  "no_automatic_extra_direction_or_production_change": true
+}

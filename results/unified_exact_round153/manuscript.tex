@@ -1,0 +1,187 @@
+% Insertion-ready research section. Requires amsmath/booktabs.
+\section{The value of the inventory objective hull in the routing relaxation}
+\label{sec:coupled-inventory-objective}
+
+The stable GI-TBC method and its complete evidence remain the main algorithmic
+reference. Earlier aggregate penalty, common-factor/count, normalization and
+dual-compression studies supply relevant necessary relations; their mixed
+complete outcomes remain part of the evidence. The present study asks a
+different finite question: after these relations are restored, how much can
+the entire common-inventory objective epigraph improve the original complete
+routing relaxation? Separating a few saved marginal points cannot answer
+that question, since the free relaxation may move to other points.
+
+\paragraph{Reference and object.}
+Let $Q$ contain the original free route, load, time, cutoff and objective
+variables, together with the declared historical reference. In particular,
+we restore both normalized count rows and all four stock--reciprocal product
+rows, and take the union of earlier finite supports before evaluating new
+information. Existing primal/qualified-dual sandwiches avoid re-solving
+redundant extensions. Let $\mathcal R$ be the complete declared integer stock
+domain with both hard total bounds and physical $G(Y)\le\gamma_U$, and set
+$f(Y)=\max\{\gamma_L,G(Y)\}$ and
+$h_i(y)=\omega_i|c_i y-1|$. For a common distribution with marginals $s$,
+the expected penalty is fixed at $H(s)=\sum_{i,y}h_i(y)s_{iy}$; thus the
+minimum total-objective completion is $\Theta(s)=H(s)+\Gamma(s)$.
+We bound
+\[
+ z_\Gamma=\min\left\{g+P_e:x\in Q,\quad
+ s=\sum_{Y\in\mathcal R}\lambda_Yv(Y),\quad
+ \sum_Y\lambda_Y=1,\quad\lambda\ge0,\quad
+ g\ge\sum_Y\lambda_Y f(Y)\right\}.
+\]
+The original routing variables remain free. The stock oracle generates
+inventory-distribution columns and valid supports; it is not an integer
+service master followed by a route oracle and does not replace physical
+incumbent search.
+
+\paragraph{Finite-column bounds and their identities.}
+A restricted legal column set $K$ gives an inner approximation. A qualified
+primal therefore yields an upper $U_K$ on the \emph{strengthened LP value},
+not a BRP physical upper bound. We recompute true stock costs, write column
+costs upward and check true completion; artificial Phase-I objectives never
+supply normal uppers. With convexity multiplier $a$, marginal multiplier
+$\pi$ and $\beta\ge0$, full-domain pricing minimizes
+\[
+ m(\pi,\beta)=\min_{Y\in\mathcal R}
+        \{\beta f(Y)-\pi\cdot v(Y)\}.
+\]
+Write $C_Q$ for the qualified original-$Q$ residual support, and use true
+stock costs to set
+\[
+ a_K=\min\bigl\{a,\min_{Y\in K}[\beta f(Y)-\pi\cdot v(Y)]\bigr\},
+ \qquad D_K=C_Q+a_K.
+\]
+For a full-price lower $L_m$, lowering the convexity intercept once gives
+\[
+ D_K-\max\{0,a_K-L_m\}=C_Q+\min\{a_K,L_m\}\le z_\Gamma\le U_K.
+\]
+The implementation first qualifies the original-$Q$ dual residual using
+finite bounds implied by $Q$, before columns are introduced, and adjusts
+$a$ against true restricted-column costs. It does not replace $D_K$ with a
+numerical primal objective. Negative prices are retained; $\beta=0$ is full
+projection pricing, not a skipped case. A completed price also supplies
+$\beta g-\pi\cdot s\ge L_m$, with finite-domain coefficient transport and
+no division by a small $\beta$. These are classical decomposition and
+pricing tools (Dantzig and Wolfe, 1960); the claim here concerns their finite
+information value and cost for this routing relaxation.
+
+\paragraph{Structural separation and its scope.}
+After the additional historical normalized-count/product information is
+included, the independently checked heterogeneous fixed-marginal example
+has $H=3/32$, $\Gamma=161/1080$ and $\Theta=1049/4320$. Its strengthened
+reference attains $g=1/9$ and objective $59/288$, leaving exact gap
+$41/1080$. This is an inventory-block fixed-marginal separation, not a
+strict complete-routing example. In particular the earlier global-floor
+gap $1/480$ does not carry over to the stronger reference. Here the hard
+total bound removes the high/high corner $(1,2,3)$ of a two-station
+$2\times2$ marginal support. If the high-state marginal probabilities
+are $p$ and $q$, that exclusion forces the remaining joint probabilities
+to be $1-p-q,p,q$ whenever $p+q\le1$. The minimum expected completion is
+therefore fixed by those three true stock values. This elementary mechanism
+explains the structural gap while keeping its scope distinct from the
+free-routing optimum.
+
+\paragraph{Complete free-relaxation evidence.}
+All three reference optima admit legal common stock distributions under the
+declared numerical qualification. Projection compatibility consequently
+explains no material residual root increment there; the expected Gini of
+such a witness is not the minimum completion. On N-B35-S, targeted full-domain
+floor pricing and a complete feasible restricted master give
+\[
+ 0.3960430527066062\le z_\Gamma\le0.39604655895626023,
+\]
+against current reference $0.392978953518639$. The width is about
+$3.51\times10^{-6}$, so little value remains beyond the implemented support
+on this domain. The floor construction takes 6.8013 seconds in its separately
+recorded offline run. The final values for all three domains are shown
+below. Display endpoints are rounded outward; upper endpoints retain the
+declared numerical primal qualification.
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Domain & Coupled LP interval & Width (approx.) & Legal columns\\
+\midrule
+N-B35-S & $[.39604305,.39604656]$ & $3.51\times10^{-6}$ & 575\\
+K-35-U & $[.28285969,.28732617]$ & $.00446647$ & 33882\\
+N-C20-U & $[.18332184,.18995681]$ & $.00663495$ & 54210\\
+\bottomrule
+\end{tabular}
+\end{center}
+The corresponding current-reference numerical values are approximately
+.392978953519, .278864453933 and .174769124714. The 82-row K35 support LP
+has lower/upper .2828596948801659/.2828596948801739; the 53-row NC20 support
+LP gives .18332184845553887/.18332184845554086. Every original $Q$ variable
+remains free. Projection compatibility and positive objective-completion
+value are consequently distinct observations.
+
+K35 and NC20 remain above their interval targets ($10^{-4}$ and $10^{-5}$).
+Long saved-direction prices, renewed dual selection, complete free-support
+reoptimization and large true-column probes were performed before accepting
+this finite-stage boundary. K35's final 1200-second price raised its price
+lower to .07003842216867079, against true upper .08087030469130901, but its
+fixed original-$Q$ certificate remained below the accumulated lower. The
+Native bound was still advancing late in that run. NC20's fresh midpoint
+directions added 23 stocks in five full prices; their large unresolved
+price corrections prevented a better lower. Its final three stocks were
+then included in one optimal complete master solve with a qualified primal,
+which did not improve the retained upper. The remaining uncertainty is
+therefore reported explicitly as a direction-dependent global-pricing and
+coupling barrier, not a negative result or exhausted hull potential.
+The companion tables retain every completed phase, failed attempt and
+unique outer cost, including the partition, CDF and integer-flow variants
+that returned weaker bounds on the tested directions.
+
+\paragraph{Uniform transfer is a separate experiment.}
+A scalar opportunity is assessed relative to pure GI-TBC $B$, not merely
+relative to the diagnostic reference. The offline floors on N-B35 and K35
+justify testing a single uniform own-root candidate $J$; the near-zero NC20
+stock witness is a contrasting negative scalar opportunity. Each complete
+arm performs its own $H$, constructs the oracle from its actual current
+model and pays its own costs. The fixed rule uses exact hard-total DP first,
+then Seed 0 / Threads 1 normalized integer pricing with 4096 nodes and an
+original-price absolute Native gap target $10^{-4}$. The ordinary global
+method deadline stops the entire method; there is no internal fixed-time
+switch to another algorithm. Only a qualified total-objective floor row is
+added to the formal model. The switch defaults OFF, and paired arms use the
+same new executable. Complete U/L/gap, certificate time when one exists,
+and total cost must be read separately from the LP-value intervals above.
+
+A near-zero stock-objective witness can rule out a useful scalar floor
+while leaving substantial value in the coupled completion. Such a stock
+need not extend to a feasible complete routing point; the coupled master
+must reproduce marginals selected by the free routing constraints. NC20
+exhibits this contrast, whereas NB35's global floor captures almost all
+of the additional LP value within the reported numerical interval.
+Neither structural observation alone determines complete-search performance.
+
+\paragraph{Complete-method result.}
+The frozen panel contains three difficult pairs (N-B35-S, K-35-U and
+RB35-T1, 2400 seconds per arm) and one certificate pair (N-C20-U,
+1200 seconds per arm). All eight closeouts qualify. Each arm uses its own
+$H$ with seed 20260626; equal paired semantic-trace and canonical-fleet
+hashes do not represent shared or free preprocessing. The endpoint values
+are as follows; a dash denotes an open arm, not an imputed certificate.
+\begin{center}
+\begin{tabular}{llrrr}
+\toprule
+Role & Method & Physical $U$ & Complete $L$ & $T_{\rm cert}$ (s)\\
+\midrule
+N-B35-S & B & .4502915033 & .3893106016 & ---\\
+        & J & .4603947484 & .3959564087 & ---\\
+K-35-U  & B & .6928543586 & .5654063361 & ---\\
+        & J & .6613267951 & .5397233893 & ---\\
+RB35-T1 & B & .5915176348 & .4559038913 & ---\\
+        & J & .6160491839 & .4610973729 & ---\\
+N-C20-U & B & .2455050692 & .2455050692 & 266.7020\\
+        & J & .2455050692 & .2455050692 & 267.2542\\
+\bottomrule
+\end{tabular}
+\end{center}
+The NB35 and RB35 lowers improve while the physical uppers and gaps worsen.
+K35 has a better upper and slightly smaller absolute gap but a weaker lower;
+its relative gap is nearly unchanged. NC20 reaches the same certificate,
+with a small time cost. The eight outer receipts total 14801.1454 seconds,
+including both own-$H$ and helper work. This mixed single-seed panel supports
+retaining the uniform candidate as research-only with the default OFF.
+It does not support a negative statement about all scalar-floor methods.

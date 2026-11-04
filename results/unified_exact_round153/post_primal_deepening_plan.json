@@ -1,0 +1,58 @@
+{
+  "state_at_creation": "PENDING_INDEPENDENT_CONDITIONAL_DESIGN_ACCEPTANCE",
+  "screen": "results/unified_exact_round153/diagnostics/post_primal_v1/result.json",
+  "no_production_outcome_used_for_selection": true,
+  "complete_panel_will_not_be_rerun": true,
+  "reason": "Large true feasible pools leave both numerical uppers unchanged. The K35 latest stable direction survives the new pool and can nearly certify U; the NC20 latest direction is genuinely violated by new columns and has a lower fixed-certificate ceiling, motivating a refreshed midpoint dual rather than a repeat of that old price.",
+  "steps": [
+    {
+      "fee": "K35_post_primal_fixed_long_v1",
+      "outer_reservation": 1600,
+      "script": "round153_refine.py",
+      "arguments": ["K-35-U", "post_primal_fixed_long", "results/unified_exact_round153/coupled/K-35-U_primal_pool_resume_v2", "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00010", "1200", "1", "partition"],
+      "Native_price_cap": 1200,
+      "positive_S_parts": 1,
+      "inherited_result_SHA": "3dbc5e2f6315599836b937166a2440166630c58924613220e724c8e5066df78d",
+      "fixed_certificate_SHA": "3e21789104c754ae2a92f33caddc589e096bd6249774890eccb1d356872efd99",
+      "known_true_price_upper": 0.08087030469130901,
+      "fixed_certificate_ceiling": 0.2873260533067223,
+      "material_gain_threshold": 0.00044664684241524366
+    },
+    {
+      "fee": "K35_post_primal_support_envelope_v1",
+      "outer_reservation": 300,
+      "script": "round153_attribution.py",
+      "arguments": ["support_close", "K-35-U", "results/unified_exact_round153/coupled/K-35-U_post_primal_fixed_long", "post_primal_support_envelope"]
+    },
+    {
+      "fee": "NC20_post_primal_level_v1",
+      "outer_reservation": 2200,
+      "script": "round153_exact_worker.py",
+      "arguments": ["execute", "NC20_post_primal_level_v1", "round153_coupled.py", "exact_text_v1", "N-C20-U", "post_primal_level", "1800", "300", "0.00001", "true", "results/unified_exact_round153/coupled/N-C20-U_primal_pool", "level_zero_pool"],
+      "internal_cap": 1800,
+      "price_cap": 300,
+      "inherited_result_SHA": "7cd6aae6d7b10e68857f03d9dd4116bb50a72670fd1321a4cf1201f92afd3c95",
+      "initial_midpoint_level_approx": 0.1866393245105652,
+      "old_latest_refreshed_price_upper": 0.039555519359850036,
+      "old_latest_fixed_certificate_ceiling": 0.18544776474345698,
+      "material_gain_threshold": 0.0006634952110057379
+    },
+    {
+      "fee": "NC20_post_primal_support_envelope_v1",
+      "outer_reservation": 300,
+      "script": "round153_attribution.py",
+      "arguments": ["support_close", "N-C20-U", "results/unified_exact_round153/coupled/N-C20-U_post_primal_level", "post_primal_support_envelope"]
+    }
+  ],
+  "same_Q_and_full_inventory_domain": true,
+  "unchanged_core_pricing_and_coupled_algebra": true,
+  "all_prior_bounds_and_true_legal_columns_retained": true,
+  "one_convexity_correction_only": true,
+  "fixed_certificate_ceiling_is_not_a_hull_or_support_family_upper": true,
+  "lowering_a_price_upper_does_not_raise_a_lower_bound": true,
+  "material_threshold_is_not_a_bound_eligibility_or_convergence_rule": true,
+  "retain_smaller_valid_gains": true,
+  "final_verification_and_margin_reserve": 8400,
+  "no_automatic_further_grid_or_cap_extension": true,
+  "endpoint_requires_actual_cost_progress_and_remaining_bottleneck_assessment": true
+}

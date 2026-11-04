@@ -1,0 +1,19 @@
+{
+  "purpose": "Check the numerical-upper effect of final newly priced stocks that have not yet participated in a complete restricted master.",
+  "conditional_roles": ["K-35-U", "N-C20-U"],
+  "activation": "After the registered full-price/level phase and support_close, run only if the final price added true legal stocks not yet evaluated in an RMP solve. Record the actual activation or skip in the final decision.",
+  "script": "round153_refresh.py",
+  "execution": "Call round153_common.run directly; the unchanged exact_worker.execute allowlist does not contain refresh.",
+  "maximum_one_refresh_per_role": true,
+  "native_LP_cap_seconds": 180,
+  "outer_reservation_seconds_per_activated_role": 400,
+  "same_complete_Q_and_all_accumulated_legal_columns": true,
+  "new_pricing": false,
+  "new_lower_claim": false,
+  "no_free_variable_fixed": true,
+  "qualified_primal_required_for_upper_update": true,
+  "timeout_without_qualified_primal_retains_prior_upper": true,
+  "qualification_reuse": ["primal_pool_v1 unchanged Master", "exact_text_v1 process-local Fraction serialization"],
+  "chain_rule": "An activated refresh is the final phase for that domain in the present chain. Do not call support_close or refine on its result; the selected support evidence remains the preceding support_close.",
+  "final_audit": "Metadata inheritance checks plus the existing independent selected-endpoint original-Q, mass, all-marginal and true-completion verification; no additional Native model reads or qualification loop."
+}

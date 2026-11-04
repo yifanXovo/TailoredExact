@@ -1,0 +1,36 @@
+{
+  "reason": "Retain the failed partial K35 probe and resume exact serialization with a process-local runtime wrapper; no stock/master/pricing algorithm is changed.",
+  "original_afterqueue_failure_preserved": true,
+  "failed_fee": "K35U_primal_pool_v1",
+  "failed_receipt_SHA": "0939c553b820ba03707b2d532ad604b72b636801e26c75fdd6717f07b08a24e6",
+  "failed_G1_seconds": 280.0080881998874,
+  "K35_partial_result_SHA": "f9ed5a1dd1a5cef748b0054ce7755560d841e5df3aec85cc37cfe56f1f22d262",
+  "worker_qualification": "exact_text_v1",
+  "qualification_reservation": 300,
+  "worker_SHA": "f40ea001ea1a56bc2eb11536aa49574e2606356098751653a365d0030497d40d",
+  "unchanged_primal_source_SHA": "ef8190f6b6aa12730d4f6ab82658345fbb44d1358f45cfed363b8b59afa95da5",
+  "roles": {
+    "K-35-U": {
+      "fee": "K35U_primal_pool_resume_v2",
+      "result": "results/unified_exact_round153/coupled/K-35-U_primal_pool_resume_v2/result.json",
+      "resume": "results/unified_exact_round153/coupled/K-35-U_primal_pool",
+      "internal_seconds": 900,
+      "outer_reservation": 1300,
+      "absolute_target": 0.0001
+    },
+    "N-C20-U": {
+      "fee": "NC20U_primal_pool_v1",
+      "result": "results/unified_exact_round153/coupled/N-C20-U_primal_pool/result.json",
+      "resume": "results/unified_exact_round153/coupled/N-C20-U_deepened_support_envelope",
+      "internal_seconds": 1200,
+      "outer_reservation": 1600,
+      "absolute_target": 0.00001
+    }
+  },
+  "screen_reservation": 300,
+  "final_verification_and_margin_reserve": 8400,
+  "all_new_computation_serial_and_outer_metered": true,
+  "no_full_panel_rerun": true,
+  "no_automatic_long_price_or_level_continuation": true,
+  "state_at_creation": "PENDING_STATIC_RUNTIME_REVIEW_AND_PAID_QUALIFICATION"
+}

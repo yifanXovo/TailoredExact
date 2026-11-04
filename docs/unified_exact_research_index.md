@@ -1,5 +1,18 @@
 # Research index
 
+Current study: [Round153 coupled inventory objective hull](round153_research.md),
+with the [mathematical account](../results/unified_exact_round153/mathematical_analysis.md),
+[deepening plan](../results/unified_exact_round153/deepening_plan.md),
+[uniform own-root floor design](../results/unified_exact_round153/production_plan.md),
+[paper insertion](../results/unified_exact_round153/manuscript.tex) and
+[actual continuation record](../results/unified_exact_round153/RESUME.md).
+The coupled LP value and the separately paid full-algorithm comparison
+answer different questions. Stable GI-TBC remains the algorithmic reference.
+NB35's coupled interval closes to about3.51e-6; K35/NC20 remain unresolved
+after meaningful targeted work. The eight-arm floor panel is mixed and
+does not change the default. See the [final report](../results/unified_exact_round153/final_report.md)
+for actual intervals, costs, failed attempts and the scope of these conclusions.
+
 Latest offline addition: [Round152 resource-feasible integer objective
 epigraphs](round152_research.md), with an [exact structural analysis](../results/unified_exact_round152/mathematical_analysis.md),
 [three-domain evidence table](../results/unified_exact_round152/reports/evidence_table.csv),

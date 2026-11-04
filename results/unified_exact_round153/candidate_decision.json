@@ -1,0 +1,82 @@
+{
+  "study_complete": true,
+  "state": "SCIENTIFIC_ENDPOINT_AUDITED",
+  "goal_source": "results/unified_exact_round153/goal.md",
+  "experiment_capacity_seconds": 115200,
+  "capacity_is_not_a_minimum_runtime": true,
+  "stable_method": "R137 GI-TBC",
+  "stable_entry_and_profile_unchanged": true,
+  "production_decision": "RESEARCH_ONLY_DEFAULT_OFF",
+  "production_reason": "The frozen eight-arm own-H panel has mixed complete outcomes: NB35 and RB35 raise L but worsen U/gap; K35 improves U and absolute gap while weakening L; NC20 returns the same certificate with a small producer-time cost. This does not justify changing the stable default.",
+  "no_instance_specific_switch": true,
+  "complete_panel": "results/unified_exact_round153/confirmation_matrix.json",
+  "complete_panel_positions": 8,
+  "complete_panel_component_review": "results/unified_exact_round153/review/complete_panel_review.md",
+  "complete_panel_own_H_paid_separately": true,
+  "no_offline_floor_or_columns_in_complete_producers": true,
+  "fixed_marginal_strict_gap": "41/1080",
+  "fixed_marginal_example_is_not_a_complete_routing_strict_example": true,
+  "old_global_floor_gap_not_inherited": true,
+  "numerical_upper_policy": "Complete numerical original-Q and all-marginal primal qualification with true stock completion; not a rational primal certificate or physical routing incumbent.",
+  "lower_policy": "Original-Q-only finite residual support and qualified complete-domain pricing with one convexity correction, combined with independently qualified same-Q support lower bounds.",
+  "full_original_Q_variables_free": true,
+  "full_declared_integer_domain_retained": true,
+  "beta_zero_and_signed_prices_retained": true,
+  "science_evidence": {
+    "N-B35-S": {
+      "coupled_result": "results/unified_exact_round153/coupled/N-B35-S_floor_closed/result.json",
+      "support_result": "results/unified_exact_round153/support_LP/N-B35-S_floor_closed/result.json",
+      "absolute_target": 0.0001,
+      "outcome": "TARGET_MET_FLOOR_NEARLY_EXHAUSTS_COUPLED_VALUE"
+    },
+    "K-35-U": {
+      "coupled_result": "results/unified_exact_round153/coupled/K-35-U_post_primal_support_envelope/result.json",
+      "support_result": "results/unified_exact_round153/support_LP/K-35-U_post_primal_support_envelope/result.json",
+      "absolute_target": 0.0001,
+      "outcome": "POSITIVE_VALUE_WITH_QUANTIFIED_UNRESOLVED_FULL_PRICE_BOTTLENECK",
+      "endpoint_review": "results/unified_exact_round153/review/k35_endpoint_assessment.md"
+    },
+    "N-C20-U": {
+      "coupled_result": "results/unified_exact_round153/coupled/N-C20-U_post_primal_refresh/result.json",
+      "support_result": "results/unified_exact_round153/support_LP/N-C20-U_post_primal_support_envelope/result.json",
+      "absolute_target": 0.00001,
+      "outcome": "POSITIVE_COUPLED_VALUE_SCALAR_CONTRAST_WITH_UNRESOLVED_PRICE_AND_DIRECTION_BOTTLENECK",
+      "endpoint_review": "results/unified_exact_round153/review/nc20_endpoint_assessment.md"
+    }
+  },
+  "primal_refresh": {
+    "plan": "results/unified_exact_round153/primal_refresh_plan.json",
+    "K-35-U": "SKIPPED_NO_NEW_STOCKS_IN_FINAL_PRICE_33882_COLUMNS_UNCHANGED",
+    "N-C20-U": "COMPLETED_ONE_OPTIMAL_RMP_SOLVE_54210_COLUMNS_QUALIFIED_PRIMAL_PRIOR_UPPER_RETAINED",
+    "N-C20-U_fee": "NC20_final_primal_refresh_v1"
+  },
+  "unresolved_is_not_negative": true,
+  "fixed_direction_ceiling_is_not_a_support_family_upper": true,
+  "late_price_bound_progress_not_called_a_plateau": true,
+  "stage_endpoint_reason": "NB35 meets the declared value accuracy. K35 and NC20 establish valuable positive same-Q increments but remain above their interval targets after longer saved-direction prices, renewed dual selection, support transfer, denominator/CDF/flow comparisons and large true-column probes. The last distinct targeted steps and NC final master refresh do not materially shrink those intervals. This is a quantified unresolved finite-stage endpoint, not a negative family result or a price-bound plateau; no automatic extra cap or grid follows.",
+  "all_failures_and_partial_exits_retained": true,
+  "serial_outer_costs_only_nested_Runtime_and_Work_not_added": true,
+  "untimed_setup_and_identity_bookkeeping_disclosed_as_measurement_gap": true,
+  "no_full_algorithm_rerun_for_delivery": true,
+  "final_verification": {
+    "path": "results/unified_exact_round153/qualification/final_evidence_v2/result.json",
+    "postprocessing": "results/unified_exact_round153/qualification/final_evidence_v2/postprocessing.json",
+    "PASS": true,
+    "qualified_iteration_certificates": 133,
+    "distinct_resolved_price_evidence_records": 167,
+    "conditional_slice_price_records_included": 23,
+    "full_domain_lower_qualification": "Parent coverage composition is checked; conditional slice records are not counted as independent full-domain prices.",
+    "same_direction_refinements": 10,
+    "selected_complete_Q_primals": 3,
+    "independent_free_Q_support_checks": 3,
+    "Native_model_reads": 6,
+    "Optimize": 0,
+    "failed_v1_receipt_retained": true
+  },
+  "cost_report": "results/unified_exact_round153/cost_report.json",
+  "closed_G1_seconds": 41579.48800390004,
+  "separate_compilation_seconds": 80.10179629991762,
+  "final_independent_review": "results/unified_exact_round153/review/final_scientific_review.json",
+  "delivery_requires_independent_ACCEPT_COMPLETE_ROUND153_and_no_scientific_blockers": true,
+  "publication_and_goal_closeout_are_reported_separately_in_RESUME": true
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "round153-independent-complete-panel-admission-v1",
+  "UTC": "2026-11-04T04:08:59Z",
+  "decision": "ACCEPT",
+  "matrix_SHA": "d81767d4adfe9ec20a2f5bfcc6cd26450773f2f93fe3231459603c523210374e",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/independent_review",
+  "source_commit": "36d085cc7012690b8ab38d7ace70f487f54aec7e",
+  "candidate_manifest_SHA": "c967115083253e238cbb05a4a56740eab5cec046d1b94c0ce86c2ee53254edcc",
+  "production_PE_SHA": "44e593db8e3442925ce7dbd7bc16c077e79ab1646c7507b72541d8e697b996f7",
+  "helper_manifest_SHA": "24be18f4d03fae8ed8b21d14f2974b761a5e043dbf84f67715ed1ba632647504",
+  "helper_entry_SHA": "510d01a368e2f63532a42aff9d8150d68f28f7b43b0dff85c0b741345d88f665",
+  "python_SHA": "2204195cec25879507d958a8b6949add67091244b8b4da9cf3672f993548fa49",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "profile_SHA": "9a07c189e5e7ca49b1be712bcfb9262e23943f6bb6463fe830a08dd1983cd0f1",
+  "source_checks": {
+    "Cxx_source_files": 232,
+    "matrix_Python_helpers": 151,
+    "helper_transitive_dependencies": 140,
+    "unique_source_files_hashed": 383,
+    "all_current_hashes_match": true,
+    "all_eight_identity_hashes_match": true,
+    "compiled_source_map_identical_to_prequalification_v2": true,
+    "qualified_PE_unchanged_after_source_commit_rebinding": true,
+    "tracked_source_clean_against_HEAD": true,
+    "stable_entry_and_R137_profile_unchanged": true,
+    "helper_change_since_own_root_control": "Only two call-log fields recording actual NodeLimit and gap parameters; no mathematical or stopping change.",
+    "helper_dependencies_identical_to_global_deadline_control": true
+  },
+  "panel": {
+    "positions": 8,
+    "role_order": ["N-B35-S", "K-35-U", "R-B35-S-T1", "N-C20-U"],
+    "method_order_per_role": ["B", "J"],
+    "caps_per_arm": [2400, 2400, 2400, 1200],
+    "nominal_complete_window_seconds": 16800,
+    "Seed": 0,
+    "H_seed": 20260626,
+    "Threads": 1,
+    "affinity_mask": 4,
+    "same_new_PE_for_B_and_J": true,
+    "all_own_H_and_Start": true,
+    "original_role_scientific_parameters_preserved": true,
+    "exact_argv_changes_limited_to_paths_PE_caps_and_declared_R153_flags": true,
+    "RB35_T1_lambda": 0.055125275219827186,
+    "full_arm_destinations_preexisting_at_admission": 0,
+    "no_offline_floor_inventory_or_incumbent_injection": true
+  },
+  "qualification_result_SHA": {
+    "online_exits_v1": "fcf60f83f0b44622e5cfb4f2170d0417770b247a664f09dd85d4d37778cb8e56",
+    "own_root_v2": "408d4040b5d827573e0fb3b790b56cdf1bede74be1ff6581ad7599729854879e",
+    "own_global_deadline_v1": "d01e85a1506f43505a7a9d01337e61a07f96f5a8455987b8e317a0beae962022"
+  },
+  "budget_metadata_snapshot": {
+    "closed_fee_count": 34,
+    "closed_G1_seconds": 2891.142470000079,
+    "separately_reported_seconds": 80.10179629991762,
+    "pending_research_label": "K35_level_zero_01",
+    "pending_reservation_seconds": 7500,
+    "remaining_after_pending_reservations": 104808.85752999992,
+    "panel_plus_600_seconds_verification_per_arm_reserve": 21600,
+    "sufficient": true
+  },
+  "execution_requirements": [
+    "Run serially after the active research process is closed; keep compilation and heavy I/O outside timed arms.",
+    "Use this exact frozen matrix and source/PE/helper chain; preserve each own-H complete window and validation charge.",
+    "Retain failed or unresolved observations and all outer costs; no substitution of roles based on a full-arm outcome.",
+    "This gate admits the finite experiment and does not assert a performance benefit, certificate, or default adoption."
+  ],
+  "review_activity": "Static source, SHA and small saved-metadata inspection only; no Native call, compilation or heavy verification.",
+  "review_document": "results/unified_exact_round153/review/confirmation_admission.md"
+}
