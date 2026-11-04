@@ -143,11 +143,14 @@ def audit_price(path, seen, ancestors=()):
 
 def witnesses(result_path,seen=None):
     seen=set() if seen is None else seen;path=Path(result_path)
+    path=(path if path.is_absolute() else ROOT/path).resolve()
     if path in seen:return []
     seen.add(path);data=read(path);found=[]
     own=path.parent/'best_primal.json.gz'
     if own.exists():found.append(own)
-    if data.get('upper_witness_source'):found.append(Path(data['upper_witness_source']))
+    if data.get('upper_witness_source'):
+        witness=Path(data['upper_witness_source'])
+        found.append((witness if witness.is_absolute() else ROOT/witness).resolve())
     for previous in data.get('prior_results',[]):found.extend(witnesses(previous,seen))
     return sorted(set(found))
 
