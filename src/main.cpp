@@ -9,6 +9,7 @@
 #include "Round146Research.hpp"
 #include "Round148Research.hpp"
 #include "Round151Research.hpp"
+#include "Round153Research.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -892,6 +893,16 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             if(value!="off"&&value!="uniform"&&value!="conditional")throw std::runtime_error("Round151 propagation must be off, uniform or conditional");
             ebrp::round151().mode=value;
         }
+        else if (arg == "--round153-root-floor") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on")throw std::runtime_error("Round153 root floor must be off or on");
+            ebrp::round153().enabled=value=="on";
+        }
+        else if (arg == "--round153-python") ebrp::round153().python=requireValue(i,argc,argv);
+        else if (arg == "--round153-helper") ebrp::round153().helper=requireValue(i,argc,argv);
+        else if (arg == "--round153-helper-sha") ebrp::round153().helper_sha=requireValue(i,argc,argv);
+        else if (arg == "--round153-manifest") ebrp::round153().manifest=requireValue(i,argc,argv);
+        else if (arg == "--round153-manifest-sha") ebrp::round153().manifest_sha=requireValue(i,argc,argv);
         else if (arg == "--round149-penalty-feedback") {
             const auto value=requireValue(i,argc,argv);
             if(value!="off"&&value!="on")throw std::runtime_error("Round149 penalty feedback must be off or on");
@@ -3592,6 +3603,26 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round153().enabled){
+        if(ebrp::round127().mode!="ms2"||ebrp::round146().enabled||ebrp::round149().enabled||ebrp::round148().enabled||
+            ebrp::round151().mode!="off"||ebrp::round138().stock_rlt||ebrp::round143().rn||ebrp::round144().enabled||ebrp::round145().enabled||
+            ebrp::round139().enabled()||ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||
+            ebrp::round135AggregatePenalty()||opt.round90_lp_g_split||opt.round119_proof_contraction||opt.round120_native_proof!="off")
+            throw std::runtime_error("Round153 floor requires isolated stable GI-TBC");
+        const auto& c=ebrp::round153();
+        if(!std::filesystem::is_regular_file(c.python)||!std::filesystem::is_regular_file(c.helper)||
+           !std::filesystem::is_regular_file(c.manifest)||c.helper_sha.size()!=64||ebrp::fileSha256(c.helper)!=c.helper_sha||
+           c.manifest_sha.size()!=64||ebrp::fileSha256(c.manifest)!=c.manifest_sha)
+            throw std::runtime_error("Round153 helper execution chain is missing or changed");
+        if(!opt.out_path.empty()){
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round153_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"enabled\":true,\"root_once\":true,\"node_limit\":4096,\"price_gap_target\":0.0001,\"wall_step_limit\":null"
+                <<",\"helper_SHA\":"<<std::quoted(c.helper_sha)<<",\"manifest_SHA\":"<<std::quoted(c.manifest_sha)
+                <<",\"offline_data_used\":false,\"formal_new_columns\":0,\"extra_root_LP\":0}\n";
+            if(!f)throw std::runtime_error("Round153 parameter persistence failed");
+        }
+    }
     if(ebrp::round151().mode!="off"){
         if(ebrp::round127().mode!="ms2"||ebrp::round146().enabled||ebrp::round149().enabled||ebrp::round148().enabled||
             ebrp::round138().stock_rlt||ebrp::round143().rn||ebrp::round144().enabled||ebrp::round145().enabled||
