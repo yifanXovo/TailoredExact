@@ -1,0 +1,35 @@
+{
+  "UTC": "2026-11-05T04:22:53.974407+00:00",
+  "stable_method": "R137 GI-TBC",
+  "stable_entry_unchanged": true,
+  "default_candidate": "B",
+  "E_default": false,
+  "J_default": false,
+  "E_status": "research-only",
+  "residual_status": "qualified research oracle; no universal RN dominance or speed claim",
+  "recommendation": "Temporarily close this inventory-pricing branch and prioritize the remaining full routing/loading coupling.",
+  "precision": 0.0001,
+  "full_hull_target_met": {
+    "N-B35-S": true,
+    "K-35-U": false,
+    "N-C20-U": false
+  },
+  "science_evidence": {
+    "N-B35-S": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round153\\coupled\\N-B35-S_floor_closed\\result.json",
+    "K-35-U": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round154\\support_LP\\K-35-U_target_residual_v2\\result.json",
+    "N-C20-U": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round154\\coupled\\N-C20-U_interior_final_refresh\\result.json"
+  },
+  "full_confirmation_positions": 9,
+  "all_own_H": true,
+  "same_PE": true,
+  "no_instance_conditioned_hybrid": true,
+  "fixed_direction_rejection_is_not_full_hull_rejection": true,
+  "LP_upper_is_not_physical": true,
+  "unresolved": [
+    "K35/NC20 full-hull interval where width exceeds1e-4",
+    "General value of E beyond this four-role single-seed panel",
+    "Full routing and loading coupling not represented by inventory-only completion"
+  ],
+  "audit": "qualification/final_evidence_v3/result.json",
+  "independent_review": "review/final_scientific_review.md"
+}

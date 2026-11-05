@@ -16,6 +16,21 @@ position tables and historical evidence. The
 
 ## Scientific account and boundaries
 
+The [Round154 section](round154_research.md) adds a qualified signed
+state-product residual, its precise Cartesian product-block relationship,
+actual proof thresholds/counterexamples and a separate proof-placement
+experiment. Its [paper insertion](../results/unified_exact_round154/manuscript.tex)
+and [final report](../results/unified_exact_round154/final_report.md) distinguish
+fixed-direction ceilings, complete-hull LP uppers and physical fleet results.
+K35/NC20 retain unresolved hull intervals after meaningful targeted work;
+the full nine-arm experiment gives finite positive NB35 proof evidence for
+E, identical B/E endpoint bounds/certificates in the three controls and a
+direct same-PE J placement contrast. No generic fractional-programming,
+RN-dominance, sole-AM causal or universal performance claim follows.
+The [independent review](../results/unified_exact_round154/review/final_scientific_review.md)
+and [continuation record](../results/unified_exact_round154/RESUME.md) record
+actual validation and publication status. Stable GI-TBC remains unchanged.
+
 The later [Round153 whole-hull study](round153_research.md) is organized as
 a separate research section after the stable method. Its logical sequence
 is historical-reference restoration, fixed-marginal structural separation,

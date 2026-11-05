@@ -1,0 +1,81 @@
+\section{Target integer pricing and independent proof bounds}
+We retain the complete free routing relaxation $Q$ and every original legal
+inventory state. Let $S=\sum_i c_iY_i>0$, $A=\sum_{i<j}|c_iY_i-c_jY_j|$,
+$f=\max\{\gamma_L,A/(nS)\}$, $D=\sum_i d_i(Y_i)$ and $p=\beta f+D$.
+Classical fractional parameterization (Dinkelbach,1967) gives\footnote{W. Dinkelbach, On Nonlinear Fractional Programming, Management Science13(7):492--498. DOI:10.1287/mnsc.13.7.492.}
+\[
+R_\tau=S(p-\tau)=\max\{S(\beta\gamma_L+D-\tau),\beta A/n+S(D-\tau)\}.
+\]
+We use no continuous convergence guarantee. With complete one-hot states,
+four binary-product inequalities and $\sum_y z_{iy}=S$ impose
+$z_{iy}=Sx_{iy}$ at integer points, including signed state potentials.
+The epigraph permits negative residuals. Legal zero inventory is evaluated
+separately; hard totals and the physical Gini cap remain when $\beta=0$.
+
+On Cartesian station-cost bounds the state-product block implies the four
+aggregate McCormick inequalities, with a strict two-station example.
+It does not automatically imply products from tighter hard-total cost
+bounds, nor does it dominate the complete normalized pricing formulation.
+Our strengthened variant retains valid total-resource products, conditional
+denominator bounds and hard-total DP cost products. Written coefficients,
+outward transport and the Native numerical guard are saved explicitly.
+A qualified residual lower $\ell$ gives price lower
+$\tau+\ell/u$ for $\ell\ge0$ and $\tau+\ell/l$ otherwise.
+
+The coupling follows the established Dantzig--Wolfe framework. For a certified $Q$ residual $C_Q$, true-column intercept $a_K$ and qualified
+full-domain price lower $L_m$, the hull lower is
+$C_Q+\min\{a_K,L_m\}$. A true stock price upper only limits this individual
+certificate; it is not a full-hull upper. Verified stocks below the target
+terminate that proof task and enter the complete column pool. Each new
+direction, certificate and target is frozen before pricing. All supports
+are replayed in the complete free $Q$, and the final columns are evaluated
+by a qualified complete RMP primal. RMP uppers are LP-value bounds, not
+physical routing incumbents. Table data are in reports/scientific_table.csv
+and reports/pricing_results.csv.
+
+The bound ledger is a standard proof-management device; our experiment concerns where a paid inventory proof is consumed. The separate candidate E pays the same own-root producer as the previous
+row candidate J, but uses its floor in the scoped proof ledger. Native rows,
+raw LP bounds, ordering and adaptive-mass inputs remain the base inputs on
+the same domain. Covered leaves use $\max\{L_j,\min(U_0,\ell_j)\}$, with
+the cutoff complement and coverage checked before taking the frontier
+minimum. Nine same-PE independent-own-H arms compare B/E in four roles and
+B/E/J for NB35. Their full outcomes and timing are recorded in
+reports/complete_pairs.csv; no causal claim assigns all trajectory changes
+to adaptive-mass decisions. Open runs have no certificate time.
+
+The finite data support a qualified research oracle and a research-only
+proof-placement candidate. Stable GI-TBC remains the algorithmic reference.
+We make no universal formulation dominance, pricing speed, fleet-performance
+or journal-tier claim. The inherited $\Theta=H+\Gamma$ decomposition,
+compatible reference marginals and fixed-marginal $41/1080$ strict example
+retain their original scope. Exact equations, citations, actual numerical
+tables, failures, source identities and independent review accompany this
+section in the Round154 evidence packet.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrr}
+Domain & Hull lower & Hull upper & Width \\ \hline
+N-B35-S & 0.396043053 & 0.396046559 & 0.000003506 \\
+K-35-U & 0.282859695 & 0.287326163 & 0.004466468 \\
+N-C20-U & 0.183321848 & 0.189867703 & 0.006545855 \\
+\end{tabular}
+\caption{Complete inventory hull in the same free $Q$. Uppers are qualified numerical LP-value bounds; entries are rounded for display.}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llrrr}
+Role & Method & Own feasible $U$ & Supported $L$ & Absolute gap \\ \hline
+N-B35-S & B & 0.450291503 & 0.389310602 & 0.060980902 \\
+N-B35-S & E & 0.450291503 & 0.395956409 & 0.054335095 \\
+N-B35-S & J & 0.460394748 & 0.395956409 & 0.064438340 \\
+K-35-U & B & 0.692854359 & 0.565324134 & 0.127530225 \\
+K-35-U & E & 0.692854359 & 0.565324134 & 0.127530225 \\
+R-B35-S-T1 & B & 0.591517635 & 0.455903891 & 0.135613744 \\
+R-B35-S-T1 & E & 0.591517635 & 0.455903891 & 0.135613744 \\
+N-C20-U & B & 0.245505069 & 0.245505069 & 0.000000000 \\
+N-C20-U & E & 0.245505069 & 0.245505069 & 0.000000000 \\
+\end{tabular}
+\caption{Nine same-PE independent-own-H complete arms, Seed0/Threads1. Time limits are2400s except NC20 at1200s; values are rounded for display.}
+\end{table}

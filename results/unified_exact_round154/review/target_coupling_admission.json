@@ -1,0 +1,58 @@
+{
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/review_round154",
+  "source_SHA": "84ed0005049137bfb9dd88ac95dca8fa492666a277f332833f001f9bda1bd958",
+  "goal_qualification_SHA": "f8b7998872b4dcfb7e0442a43fd2f8fd0a00ceb151c5b088f3f74aa24868330c",
+  "goal_oracle_SHA": "8952bd342b0d8ad6de92dbb5fcd70faedfa0b161df0fb56873bb2d8e9ac9bdbf",
+  "core_SHA": "04bfa84774b7be4603ec08ae88ba015d6351d2bd3109a1d599fd4709f18bbc50",
+  "strong_SHA": "670d385ef6f9239b705fea92345709d4d4edbfe17dd732bb95b76b9b18460824",
+  "RN_core_SHA": "8ed325356a9171a3e1aaafbc4a5c0526a764f0c35148dd6de2ea15d0d925e558",
+  "generated_sources": {
+    "RN": "e63c465a4a122e51135888a19817151358d187bb61ba4486ae94bb333108ecaa",
+    "residual": "e862255f7672c3e8e0020723909c73b93964da24a9528b7b16331bd37db9b32a"
+  },
+  "admitted_rule": {
+    "roles": [
+      "K-35-U",
+      "N-C20-U"
+    ],
+    "implementation": "residual_goal",
+    "maximum_iterations": 8,
+    "Native_price_cap_seconds": 600,
+    "whole_offline_phase_allowance_seconds": 6000,
+    "absolute_hull_tolerance": 0.0001,
+    "dual_selection": "near-optimal zero-center band1e-7; when unqualified, current optimal-RMP basic dual; full original-Q certificate still required",
+    "Seed": 0,
+    "Threads": 1,
+    "uniform_rule": true,
+    "same_original_Q_and_full_support": true,
+    "direction_saved_before_each_price": true,
+    "insufficient_ceiling_not_priced": true,
+    "same_direction_price_lower_only": true,
+    "negative_columns_reference": "true_column_corrected_a_K",
+    "last_new_columns_require_qualified_complete_RMP_refresh": true
+  },
+  "qualification_facts": {
+    "finite_cases": 23,
+    "actual_bound_stop_status": 15,
+    "own_true_counterexample_status": 11,
+    "guard_at_true_status": 2,
+    "unsupported_status": 10,
+    "unsupported_only_DP_retained": true,
+    "mixed_zero_prevents_false_full_target": true,
+    "outer_seconds": 1.305602699983865,
+    "no_new_Optimize_by_reviewer": true
+  },
+  "next_required_step": "After each completed target-coupling phase, replay all accumulated supports in the complete free Q, or explicitly reuse saved qualified point/dual evidence proving the same value. A finite-support primal upper must not replace the full-hull upper.",
+  "cost_rule": "Run serially with sufficient remaining outer budget; reserve phase allowance plus necessary final validation; charge actual outer elapsed once, never add nested LP/MIP/H/Runtime/Work.",
+  "scope_limit": "This accepts the bounded registered dynamic-direction mechanism after actual interface qualification, not any unrun coupled result, a wider parameter grid, stable adoption or a changed B/E/J execution chain.",
+  "review_notes": "target_coupling_admission.md",
+  "source_admission_history": [
+    {
+      "source_SHA": "1e8fc630635cb9dffc9aca969456b207f2564adcaac9d802826abafb8950e57d",
+      "note": "Original no-fallback gate preserved as target_coupling_admission_before_basic_fallback.json. K v1 stopped on unqualified stabilization before any inventory price; not a negative pricing result."
+    }
+  ],
+  "basic_dual_fallback_review": "basic_dual_fallback_addendum.md"
+}

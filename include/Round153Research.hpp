@@ -9,7 +9,7 @@
 
 namespace ebrp {
 struct Round153Controls {
-    bool enabled=false,generated=false,accepted=false,global_stop=false;
+    bool enabled=false,generated=false,accepted=false,global_stop=false,proof_only=false;
     std::string python,helper,manifest,helper_sha,manifest_sha,input_sha,root_source_sha;
     long long bm=0,b=0;
     double gamma_L=0,gamma_U=0,cutoff=0,lower=0,helper_seconds=0;
@@ -23,6 +23,7 @@ inline void round153ResetRun(){
     const auto old=round153();round153()=Round153Controls{};
     auto& c=round153();c.enabled=old.enabled;c.python=old.python;c.helper=old.helper;
     c.manifest=old.manifest;c.helper_sha=old.helper_sha;c.manifest_sha=old.manifest_sha;
+    c.proof_only=old.proof_only;
 }
 namespace round153_detail {
 inline void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error("round153_"+why);}
@@ -128,7 +129,7 @@ inline CanonicalCompactModelArtifact embed(const Instance& instance,const Canoni
     for(int i=1;i<=instance.V;++i)
         require(std::includes(c.support[i].begin(),c.support[i].end(),support[i].begin(),support[i].end()),"support_expanded");
     std::vector<round143_detail::Row> rows;
-    if(c.accepted&&c.lower>base.gamma_L+1e-7)rows.push_back({"r153_root_floor",objective.coefficients,'>',c.lower});
+    if(!c.proof_only&&c.accepted&&c.lower>base.gamma_L+1e-7)rows.push_back({"r153_root_floor",objective.coefficients,'>',c.lower});
     auto out=base;
     if(!rows.empty()){
         out=round144_detail::append(base,rows,{},path,"R153");

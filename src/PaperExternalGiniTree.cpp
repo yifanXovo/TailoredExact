@@ -33,6 +33,7 @@
 #include "Round148Research.hpp"
 #include "Round151Research.hpp"
 #include "Round153Research.hpp"
+#include "Round154Research.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -1766,6 +1767,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     round149ResetRun();
     round151ResetRun();
     round153ResetRun();
+    round154ResetRun();
     if (options.round92_handling_activation) {
         if (options.external_gini_scheduling !=
                 "round31-nonblocking-native-bound" ||
@@ -4145,6 +4147,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             const auto base=state.artifact;
             state.artifact=round153_detail::embed(instance,base,verified_ub,
                 base.path.parent_path()/(base.path.stem().string()+"_round153_floor.lp"),globalDeadlineRemaining());
+            if(round154Enabled()&&!round154().complete_root){
+                round154().complete_root=leaf.id=="L0"&&leaf.parent_id.empty()&&initial.size()==1&&
+                    base.gamma_L==root_gamma_L&&base.gamma_U==root_gamma_U&&
+                    round153().gamma_L==root_gamma_L&&round153().gamma_U==root_gamma_U&&
+                    round153().root_source_sha==base.sha256;
+            }
             if(round153().global_stop||globalDeadlineRemaining()<=0.0){
                 const double partial_build_seconds=std::chrono::duration<double>(PaperClock::now()-build_started).count();
                 total_model_build_seconds+=partial_build_seconds;
@@ -5015,6 +5023,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             stopAtDeadline();
             break;
         }
+        if(round154Enabled()){
+            const auto proof=round154ProofLedger(scheduler,!native_evidence||native_evidence->proofUsable());
+            if(proof.everyRelevantLeafClosed()&&proof.globalLowerBound()>=verified_ub-scheduler.certificateTolerance()){
+                round154().stopped=true;break;
+            }
+        }
         const double global_before = scheduler.globalLowerBound();
         ControllingLeafSelection selection =
             scheduler.selectNextByBoundOnly();
@@ -5077,6 +5091,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         if (!solveLp(selected, selected_state)) {
             if (!global_deadline_stop) hard_failure = true;
             break;
+        }
+        if(round154Enabled()){
+            const auto proof=round154ProofLedger(scheduler,!native_evidence||native_evidence->proofUsable());
+            if(proof.everyRelevantLeafClosed()&&proof.globalLowerBound()>=verified_ub-scheduler.certificateTolerance()){
+                round154().stopped=true;break;
+            }
         }
         if (selected_state.lp.infeasible) {
             if (round127Md()) {
@@ -9591,6 +9611,9 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
             <<gini_max_possible<<",OPEN,0,"<<verified_ub<<','
             <<csvField(native_evidence->proofFailureReason())<<'\n';
     }
+    const auto round154_proof_scheduler=round154ProofLedger(scheduler,!source_state_abandoned);
+    round154WriteLedger(artifact_dir/"round154_proof_ledger.json",scheduler,round154_proof_scheduler,!source_state_abandoned);
+    const auto& final_proof_scheduler=round154Enabled()?round154_proof_scheduler:scheduler;
     std::ofstream leaves(leaf_path);
     leaves << "leaf_id,parent_id,depth,child_index,gamma_L,gamma_U,"
               "base_lower_bound,lower_bound,status,lp_complete,lp_optimal,"
@@ -9606,7 +9629,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     long long open_count = 0;
     long long closed_count = 0;
     bool all_bounds_valid = true;
-    for (const ControllingLeaf& leaf : scheduler.leaves()) {
+    for (const ControllingLeaf& leaf : final_proof_scheduler.leaves()) {
         const auto state_it = runtime.find(leaf.id);
         const PaperLeafRuntime* state = state_it == runtime.end()
             ? nullptr : &state_it->second;
@@ -9664,7 +9687,7 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
     result.external_gini_tree_parent_child_coverage_valid =
         scheduler.parentChildCoverageValid(&coverage_reason);
     result.external_gini_tree_all_relevant_leaves_closed =
-        !source_state_abandoned && scheduler.everyRelevantLeafClosed();
+        !source_state_abandoned && final_proof_scheduler.everyRelevantLeafClosed();
     if (round128_requires_chain) {
         const auto* root = scheduler.findLeaf("L0");
         result.external_gini_tree_all_relevant_leaves_closed =
@@ -9677,12 +9700,12 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
         scheduler.leafBoundsMonotone();
     result.external_gini_tree_global_bound_monotone =
         scheduler.globalBoundMonotone();
-    result.external_gini_tree_global_lower_bound = scheduler.globalLowerBound();
+    result.external_gini_tree_global_lower_bound = final_proof_scheduler.globalLowerBound();
     result.external_gini_tree_verified_upper_bound = verified_ub;
     result.external_gini_tree_final_leaf_count = final_count;
     result.external_gini_tree_open_leaf_count = open_count;
     result.external_gini_tree_closed_leaf_count = closed_count;
-    result.lower_bound = scheduler.globalLowerBound();
+    result.lower_bound = final_proof_scheduler.globalLowerBound();
     result.round62_archive_mode=options.round61_candidate_mode;
     result.round62_threshold_mode=options.round62_threshold_mode;
     result.round62_archive_evidence_persisted=round61_session && round61_session->evidence_persisted;
@@ -9870,6 +9893,8 @@ SolveResult solvePaperExternalGiniTree(const Instance& instance,
                   "bound_over_round30_c5_leaves"
                 : "minimum_valid_inherited_lp_or_terminal_mip_bound_over_"
                   "paper_leaves"))));
+    if(round154Enabled()&&round153().accepted&&round154().complete_root&&!source_state_abandoned)
+        result.strict_lower_bound_source="minimum_over_covered_frontier_of_max_raw_search_bound_and_cutoff_complement_own_root_floor";
     result.status = certificate.certified
         ? "optimal"
         : (hard_failure

@@ -482,3 +482,19 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /docs/current_mainline.md -text whitespace=cr-at-eol
 /docs/unified_exact_research_index.md -text whitespace=cr-at-eol
 /docs/paper_review.md -text whitespace=cr-at-eol
+
+# Round154 executed source and incremental evidence preserve actual bytes.
+/scripts/round154* -text whitespace=cr-at-eol
+/scripts/paper_s2_proof_floor.py -text whitespace=cr-at-eol
+/include/Round154Research.hpp -text whitespace=cr-at-eol
+/config/gi_tbc_proof_floor_round154.json -text whitespace=cr-at-eol
+/results/unified_exact_round154/** -text whitespace=cr-at-eol
+/results/unified_exact_round154/**/*.log -whitespace
+/results/unified_exact_round154/goal.md -whitespace
+/docs/round154_research.md -text whitespace=cr-at-eol
+
+# Compressed parts and immutable generated evidence retain exact bytes.
+/.gitignore -text whitespace=cr-at-eol
+/results/unified_exact_round154/artifacts/** -text -diff -whitespace
+/results/unified_exact_round154/figures/*.svg -whitespace
+/results/unified_exact_round154/review/** -whitespace
