@@ -1,0 +1,63 @@
+{
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/review_round154",
+  "source_SHA": "2bd162ab3530d7cc24aade2fce18e6803e4e389419b03a0b203c357000b9fbcb",
+  "directions": {
+    "NC20_updated_midpoint": "1c6685c393b61783bb252607961cd1fccfc67371195f691402dc0bc932cc6a1a"
+  },
+  "certificates": {
+    "NC20_updated_midpoint": "746e5b867757b8ceafed3a7591e7377dac8cca4907d2a3fbd6f35abb0042343c"
+  },
+  "qualification_SHA": "f8b7998872b4dcfb7e0442a43fd2f8fd0a00ceb151c5b088f3f74aa24868330c",
+  "source_iteration": "results/unified_exact_round154/coupled/N-C20-U_target_residual_v1/iter00007",
+  "frozen_pool": {
+    "columns": 54227,
+    "supports": 62,
+    "refresh_required": false,
+    "Q_SHA": "fefd769b819d36a93dfaa8dc39670512109323cdd0123366e768443cdf2a1d45"
+  },
+  "task": {
+    "target_hull": 0.18659477577615025,
+    "target_price": 0.052369508028890836,
+    "inherited_hull_lower": 0.18332184845553887,
+    "inherited_hull_upper": 0.18986770309676165,
+    "initial_true_price_upper": 0.054407688847774444,
+    "fixed_certificate_ceiling": 0.18863295659503387,
+    "rule": "midpoint of the current full interval, capped below recomputed single-certificate ceiling; this admitted target is the midpoint and has substantial margin",
+    "not_full_hull_accuracy_claim": true
+  },
+  "sequence": {
+    "screen_implementations": [
+      "RN_goal",
+      "residual_goal"
+    ],
+    "Native_screen_seconds_each": 600,
+    "outer_screen_reservation_seconds_each": 900,
+    "skip_longs_if_any_screen_refutes_or_proves": true,
+    "long_implementations": [
+      "residual_goal",
+      "RN_goal"
+    ],
+    "Native_long_seconds_each": 3600,
+    "outer_long_reservation_seconds_each": 3900,
+    "stop_remaining_long_after_true_stock_refutation": true,
+    "matched_RN_long_after_residual_proof": "Allowed only as the registered same-initial-information proof-cost control, when neither screen already proved/refuted the target.",
+    "same_four_true_initial_stocks_and_DP": true,
+    "inherited_lower_only_in_summary": true,
+    "Seed": 0,
+    "Threads": 1,
+    "serial": true
+  },
+  "metadata_repair": {
+    "original_direction_retained_SHA": "d307f331ba87d2dc05566434b4768ae3acb3c24cc35b7476d97b53390ca1de16",
+    "correction_record_SHA": "2ec01e0bfddc025b0db9ee11ab99fd6971f917900b62d3f035ded954e30a0f23",
+    "exact_aliases_now_consistent": true,
+    "no_change_to_math_or_target": true
+  },
+  "no_new_Optimize_by_reviewer": true,
+  "limits": "Only this frozen direction/task is admitted. No automatic new midpoint/tau/direction grid. Reserve actual outer time and necessary verification in remaining total capacity. Useful returned supports/columns require full-Q replay and a qualified final RMP refresh.",
+  "review_notes": "interior_proof_admission.md",
+  "plan_SHA": "75011afc9e8aa874db29111bf55096f24208cee8c9d8329db527fd2de160b067",
+  "old_fixed_long_plan_SHA": "39640d4d3f81ea03c68a9a35c471176da21322b22511b55b2e9707299ea3b981"
+}

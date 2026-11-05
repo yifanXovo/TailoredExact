@@ -492,3 +492,8 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round154/**/*.log -whitespace
 /results/unified_exact_round154/goal.md -whitespace
 /docs/round154_research.md -text whitespace=cr-at-eol
+
+# Compressed parts and immutable generated evidence retain exact bytes.
+/results/unified_exact_round154/artifacts/** -text -diff -whitespace
+/results/unified_exact_round154/figures/*.svg -whitespace
+/results/unified_exact_round154/review/** -whitespace

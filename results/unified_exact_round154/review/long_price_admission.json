@@ -1,0 +1,39 @@
+{
+  "decision": "ACCEPT",
+  "independent_nonimplementer_review": true,
+  "reviewer": "/root/review_round154",
+  "plan_SHA": "39640d4d3f81ea03c68a9a35c471176da21322b22511b55b2e9707299ea3b981",
+  "direction_SHA": "a4411f4cf6d094b092a9fbaee400702a437aa7866c2187b3c5ac5cfb6e4999cd",
+  "study_source_SHA": "7f66049931b04c7f619d0ae287f0627737773e942e7dcf65556791120cf56597",
+  "comparison_source_SHA": "e14d09042e62a0f4b3082228f18eb3d69c2af0c4d75bbe9074c446e5697196e8",
+  "strengthening_source_SHA": "670d385ef6f9239b705fea92345709d4d4edbfe17dd732bb95b76b9b18460824",
+  "qualification_SHA": "94ab47cb42d774d956f4e9a25a6677e7464a104037f63dd455f12255abee39c7",
+  "sequence": [
+    {
+      "label": "K35_strong_long_v1",
+      "implementation": "residual_strong",
+      "Native_seconds": 3600,
+      "outer_reservation_seconds": 3900
+    },
+    {
+      "label": "K35_RN_long_v1",
+      "implementation": "RN",
+      "Native_seconds": 3600,
+      "outer_reservation_seconds": 3900,
+      "conditional": "Skip only if the first long true-stock upper refutes the frozen target; retain skip reason and resulting fixed-certificate ceiling."
+    }
+  ],
+  "target_price": 0.08077041468890388,
+  "target_hull": 0.28722616330431716,
+  "fixed_certificate_ceiling": 0.2873260533067223,
+  "same_original_price_domain_and_initial_information": true,
+  "inherited_price_lower_only_in_summary": true,
+  "fresh_price_lower_distinct_from_inherited": true,
+  "Seed": 0,
+  "Threads": 1,
+  "serial": true,
+  "remaining_work": "Use actual returned stocks/bounds to decide coupling/direction changes. The NC20 rejected target is not extended. Final raw and supported intervals, no-target/no-superiority outcomes and all costs remain reportable.",
+  "no_automatic_cap_or_variant_grid": true,
+  "review_notes": "long_price_admission.md",
+  "reviewer_new_Optimize": 0
+}

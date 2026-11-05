@@ -8,13 +8,15 @@ from round153_pricing import stock_value
 from round153_stabilize import select_dual
 from round154_common import *
 
-def prepare(role,label,mode='fresh_near_optimal'):
+def prepare(role,label,mode='fresh_near_optimal',prior_override='none'):
     from round100_gurobi_runtime import gp,binding
     from round150_lp import affinity
-    configure();affinity();assert binding()['sha256']==DLL_SHA
+    from round153_exact_worker import enable
+    configure();affinity();enable();assert binding()['sha256']==DLL_SHA
     tick=time.perf_counter();folder=OUT/'directions'/label;folder.mkdir(parents=True,exist_ok=False)
     table=next(r for r in read(OLD153/'reports/scientific_table.json')['rows'] if r['role']==role)
-    priorpath=ROOT/table['coupled_result'];prior=read(priorpath);scope=prior['scope']
+    priorpath=ROOT/table['coupled_result'] if prior_override=='none' else Path(prior_override)
+    prior=read(priorpath);scope=prior['scope']
     qpath=OLD153/'reference'/role/'direct/model.mps';assert prior['Q_SHA']==sha(qpath)
     write(folder/'plan.json',dict(UTC=utc(),role=role,mode=mode,prior_result=str(priorpath),prior_SHA=sha(priorpath),
           Q_SHA=sha(qpath),columns=len(prior['columns']),supports=len(prior['supports']),
@@ -22,7 +24,7 @@ def prepare(role,label,mode='fresh_near_optimal'):
           full_original_Q=True,full_support=True,absolute_hull_target=1e-4,no_production_results_used=True))
     values={tuple(Y):stock_value(scope,Y) for Y in prior['columns']}
     assert all(v['feasible'] for v in values.values())
-    inherited_price=[];original=None
+    inherited_price=[];original=None;qualified_RMP_upper_source=None
     if mode=='saved_near_optimal':
         original=OLD153/'coupled'/f'{role}_near_optimal_zero_pool/iter00010'
         cert=load_gz(original/'certificate.json.gz');p=read(original/'pricing/result.json')
@@ -44,6 +46,19 @@ def prepare(role,label,mode='fresh_near_optimal'):
                 assert rr['Status']==2 and master.primal()['qualified']
                 save_gz(folder/'primal.json.gz',dict(point={v.VarName:v.X for v in m.getVars()},check=master.primal(),
                          stocks=[dict(Y=list(Y),weight=var.X,f_exact=str(master.values[Y]['f'])) for Y,var in master.columns.items() if abs(var.X)>1e-14]))
+                # This complete RMP already evaluates every newly ingested
+                # stock. Consume its qualified upper and discharge that
+                # refresh obligation without buying a duplicate solve.
+                previous_upper=prior['upper'];prior=dict(prior,upper=min(previous_upper,m.ObjVal))
+                refreshed=dict(prior,gap=prior['upper']-prior['lower'],refresh_required=False,
+                    prior_results=[str(priorpath)],refresh=dict(Native_status=rr['Status'],RMP_objective=m.ObjVal,
+                    primal=master.primal(),all_columns=len(values),upper_updated=prior['upper']<previous_upper,
+                    no_new_lower_claim=True,primal_witness=str(folder/'primal.json.gz')),
+                    decision='DIRECTION_PREPARATION_ALSO_REFRESHED_ALL_COLUMNS')
+                write(folder/'refreshed_pool.json',refreshed)
+                qualified_RMP_upper_source=dict(refreshed_pool=str(folder/'refreshed_pool.json'),
+                    refreshed_pool_SHA=sha(folder/'refreshed_pool.json'),primal=str(folder/'primal.json.gz'),
+                    primal_SHA=sha(folder/'primal.json.gz'),return_SHA=sha(folder/'RMP/return.json'))
                 selected,record=select_dual(master,folder/'selection',band=1e-7,cap=180.,center='zero')
                 assert selected,'inspect selection before any expensive price'
                 a=selected['hull_convexity'];pi={k:selected[c.ConstrName] for k,c in master.links.items()};beta=max(0.,selected['hull_gini'])
@@ -57,17 +72,18 @@ def prepare(role,label,mode='fresh_near_optimal'):
     prices={Y:F(beta)*v['f']+sum(d[s['i'],y] for s,y in zip(scope['stations'],Y)) for Y,v in values.items()}
     best=sorted(prices,key=lambda Y:(prices[Y],Y))[:4];U=min(prices.values())
     cq=F(cert['lower_exact']);aK=F(cert['a_true_RMP_exact']);ceiling=cq+min(aK,U)
-    desired=F(table['coupled_U'])-F(1e-4);assert desired>F(table['coupled_L'])
+    desired=F(prior['upper'])-F(1e-4);assert desired>F(prior['lower'])
     # Freeze the task before viewing either current oracle's result.
-    zeta=min(desired,ceiling-F(1e-7));assert zeta>F(table['coupled_L'])+F(1e-4),(role,float(ceiling))
+    zeta=min(desired,ceiling-F(1e-7));assert zeta>F(prior['lower'])+F(1e-4),(role,float(ceiling))
     tau=zeta-cq
     save_gz(folder/'certificate.json.gz',cert)
     result=dict(UTC=utc(),role=role,label=label,scope=scope,Q_SHA=sha(qpath),Q_path=str(qpath),
                 prior_result=str(priorpath),prior_result_SHA=sha(priorpath),columns=len(values),supports=len(prior['supports']),
                 mode=mode,source_iteration=str(original) if original else None,beta=beta,beta_exact=str(F(beta)),
+                qualified_RMP_upper_source=qualified_RMP_upper_source,
                 d_exact={f'{i}:{y}':str(v) for (i,y),v in d.items()},
                 C_Q_exact=str(cq),a_K_exact=str(aK),tau_exact=str(tau),zeta_exact=str(zeta),
-                inherited_hull_lower=table['coupled_L'],inherited_hull_upper=table['coupled_U'],
+                inherited_hull_lower=prior['lower'],inherited_hull_upper=prior['upper'],
                 inherited_price_lower=outward(old_lower,False),inherited_price_sources=inherited_price,
                 initial_true_price_upper=outward(U,True),initial_true_price_upper_exact=str(U),
                 fixed_certificate_ceiling=outward(ceiling,True),fixed_certificate_ceiling_exact=str(ceiling),

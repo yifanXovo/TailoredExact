@@ -1,6 +1,18 @@
 # Research index
 
-Current study: [Round153 coupled inventory objective hull](round153_research.md),
+Current study: [Round154 target integer pricing and proof placement](round154_research.md),
+with [mathematics](../results/unified_exact_round154/mathematical_analysis.md),
+[complete-hull intervals](../results/unified_exact_round154/reports/scientific_table.csv),
+[nine-arm paired results](../results/unified_exact_round154/reports/complete_pairs.csv),
+[paper insertion](../results/unified_exact_round154/manuscript.tex),
+[independent review](../results/unified_exact_round154/review/final_scientific_review.md)
+and [delivery/continuation record](../results/unified_exact_round154/RESUME.md).
+The new residual is qualified but does not establish a general RN proof-cost
+advantage. E gives a paid NB35 proof-bound benefit while retaining B's U;
+three control endpoint pairs agree. All four E arms use the same uniform
+rule and their own H. E and J remain research-only, default OFF.
+
+Previous study: [Round153 coupled inventory objective hull](round153_research.md),
 with the [mathematical account](../results/unified_exact_round153/mathematical_analysis.md),
 [deepening plan](../results/unified_exact_round153/deepening_plan.md),
 [uniform own-root floor design](../results/unified_exact_round153/production_plan.md),

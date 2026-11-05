@@ -1,5 +1,18 @@
 # Current mainline and Round137 paper branch
 
+The [Round154 target-pricing and proof-placement study](round154_research.md)
+qualifies signed state-product residual prices and evaluates an independent
+own-root proof floor without changing Native or AM search inputs. Targeted
+long pricing and complete-pool updates give no material K35/NC20 lower
+gain; NC20's LP upper decreases by about 8.91e-5. In nine matched-PE complete
+arms, E preserves B's U in all four roles and improves NB35's proof lower;
+the other three endpoint bounds/certificates agree. The same-PE NB35 row
+candidate J has a worse U than E. These are finite research results;
+E and J remain default OFF and stable GI-TBC retains its original entry and
+profile. See the [report](../results/unified_exact_round154/final_report.md),
+[decision](../results/unified_exact_round154/candidate_decision.json) and
+[actual delivery record](../results/unified_exact_round154/RESUME.md).
+
 The [Round153 coupled-objective study](round153_research.md) extends the
 same-domain reference to both normalized-count rows, all four reciprocal
 product rows and the previous qualified row union. It studies the value of
