@@ -4,8 +4,8 @@
   "files": [
     {
       "path": ".gitattributes",
-      "SHA256": "9b879f2a5ba9754bb7275e2fcc8cb4fd8c290636db6eef20240180b6abe15653",
-      "bytes": 25453
+      "SHA256": "df0c70b4ba730d8ce85455f7f14ec58ad2f97bee4588d7eb6873c246df6aa379",
+      "bytes": 25492
     },
     {
       "path": ".gitignore",
@@ -61,6 +61,11 @@
       "path": "results/unified_exact_round154/candidate_manifest.json",
       "SHA256": "3209fff9ba2aa003605ba09511eb499bd002ad43eb44c60b9ada3ca67b07351e",
       "bytes": 28687
+    },
+    {
+      "path": "results/unified_exact_round154/commit_payload_initial_failure.json",
+      "SHA256": "b3ffe8ea9a14f0138e5ed38370b13cbedadbb46857f8f29db09a4f7ab463fbe9",
+      "bytes": 575
     },
     {
       "path": "results/unified_exact_round154/confirmation_matrix.json",
@@ -533,14 +538,14 @@
       "bytes": 18215
     },
     {
-      "path": "src/main.cpp",
-      "SHA256": "d3d8c49912ebda7a371596c3f198d62a3fa5e36053f782e59ce70a83388331a5",
-      "bytes": 1146897
-    },
-    {
       "path": "src/PaperExternalGiniTree.cpp",
       "SHA256": "b13919e0f7f3eb253208af4cfc96cc2b60fc9a6f8d475c11ced91c515956dff3",
       "bytes": 563139
+    },
+    {
+      "path": "src/main.cpp",
+      "SHA256": "d3d8c49912ebda7a371596c3f198d62a3fa5e36053f782e59ce70a83388331a5",
+      "bytes": 1146897
     }
   ],
   "archives": [
@@ -819,8 +824,8 @@
   ],
   "pack_IO_seconds": 47.62958179996349,
   "packaging_attribute_readback": {
-    "UTC": "2026-11-05T04:42:10.682897+00:00",
-    "reason": "explicit binary diff attributes for compressed parts; generated SVG/review whitespace retained byte-exact",
+    "UTC": "2026-11-05T04:45:05.089046+00:00",
+    "reason": "explicit binary attributes and exact-byte .gitignore preserve public Git payload hashes; initial prepublication mismatch record retained",
     "carrier_members_changed": 0,
     "scientific_files_changed": 0
   }
