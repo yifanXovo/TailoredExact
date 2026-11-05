@@ -1,39 +1,73 @@
-# Round154 active continuation
+# Round154 delivery and continuation
 
-Goal goal.md remains active/incomplete. Worktree E:/codes/ExactEBRP-work/worktrees/paper-current; branch codex/round154-target-pricing-proof-ledger from temporary R153 base ffcfb59899611cbefa1cfe0d739cba5f9b6e5fe5. Protect original tree, all old raw/user files and ui.app/ui.supervisor. No heavy overlap.
+All requested science, implementation and experiments are complete. Final
+independent scientific review ACCEPT has no open scientific blockers. The
+English Draft PR is https://github.com/yifanXovo/TailoredExact/pull/216 and
+remains Draft/unmerged; no merge, force push or branch deletion is authorized
+or performed. The verified temporary base is
+codex/round153-coupled-objective-hull at
+ffcfb59899611cbefa1cfe0d739cba5f9b6e5fe5. Main remains
+b2b940c1e517a72e226ec60fc49ff19651737632 and PR215 remains Open Draft.
 
-Measured production d834d62c7a1be599867db04a427f1d43dd3631cb; PE E:/codes/ExactEBRP-work/build-cache/round154/v1/ExactEBRP.exe SHA2560d3a94183285cc2794676c717a23dc75a47c872ad48c26d2237dd8634f1a5a01. DLL9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88. No later C++ edits. Frozen confirmation matrix/helper chain must remain unchanged. All nine complete B/E plus NB35 J arms mandatory, not started.
+Fixed science: a1a3a8d1d88d0af35163e7f134bac09e1ad2077c. Publication,
+recovery and cleanup are separate metadata in the normal follow-up commit;
+its exact final head is the PR/branch head, read back after that push.
 
-Qualification: residual v3, strong v2, goal-stop23, E120s, seven header controls, nine dry entries all PASS. Fixed K/NC RN/residual60s, K strong60/3600 retained. K long raw lower .06825210 below inherited .07003842; legal stock ceiling .28612376 rejects old target. RN long skipped; no matched-long speed claim. NC initial target rejected. New columns/supports ingested/full-Q replayed.
+Signed state-product residuals, resource/zero/negative-q/transport and
+mathematical target stopping are qualified. The K3600s proof opportunity,
+matched fixed tasks,16 full-pool update directions and renewed NC midpoint
+task all completed with true stocks/certificates retained. K35 remains
+[.282859694880169,.28732616330431715],33896 columns90 supports. NC20 remains
+[.18332184845553887,.1898677030967615],54235 columns63 supports; its upper
+reduces8.90974688324e-5. Neither reaches1e-4 width. NB35's inherited narrow
+interval is retained, with no redundant long pricing. Every new column
+was evaluated, all accumulated supports replayed in the full free Q, and
+three actual last-refresh points independently checked. Fixed-direction
+ceilings are not full-hull uppers; LP-value uppers are not routing incumbents.
+Pause this inventory-pricing branch; no automatic identical continuation.
 
-NC target_residual_v1 eight steps complete, all targets rejected by legal stocks. Complete hull upper .18986770309676165 (old .1899568005655939), lower .18332184845553887 unchanged;54227cols62supports, pending refresh false. support_LP/N-C20-U_target_residual_v1 done. New frozen NC20_updated_midpoint target .18659477577615025, price .052369508028890836, true-stock single-certificate ceiling .18863295659503387. New round154_deepen.py matched goal-directed600s screens then, if not rejected,3600s long proofs; independent admission pending.
+All9 pre-frozen same-PE independent-own-H arms passed closeout, Seed0/
+Threads1, H seed20260626: NB35 B/E/J2400, K35/RB35 B/E2400, NC20 B/E1200.
+E preserves B U in all4 roles. NB35 L rises by.0066458070819850334, with
+same U .450291503262878; J has essentially the same L but worse
+U .46039474835411914. B/E AM records agree; J's floor row changes AM inputs.
+No sole-AM causal claim follows. K/RB/NC endpoint bounds/certificates agree;
+NC20 closes in both arms. E/J remain research-only/default OFF; original
+stable GI-TBC entry/profile and old J entry/profile retain their bytes.
 
-K35_target_coupled_v1 failed before pricing: RMP Status2, selection Status9/120s, assertion retained,178.8087475s charged. Never overwrite/relaunch this label. round154_loop.py now uniformly falls back to basic current optimal RMP dual, still must pass full-Q certificate; readmission pending. Retry with new folder/fee labels.
+Measured production source d834d62c7a1be599867db04a427f1d43dd3631cb;
+PE E:/codes/ExactEBRP-work/build-cache/round154/v1/ExactEBRP.exe SHA256
+0d3a94183285cc2794676c717a23dc75a47c872ad48c26d2237dd8634f1a5a01.
+DLL9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88.
+No later C++ change or extra performance rerun. Final v3 audit PASS reads37
+Native models/0 Optimize and29 price records,3 standalone fixed tasks plus
+16 loop directions,5 full-Q support replays and9 identity/clock chains.
+Independent last-refresh readback PASS covers all3 saved lambda/solution/
+true-stock marginal/completion tuples; its saved full-Q qualification scope
+is distinguished from the main audit's actual-Q checks.
 
-Existing reviewer /root/review_round154, static only, handles admissions/final actual-data review. Pending: useful main deepening and final RMP/support replay; all nine frozen complete arms; finish/run audit (actual model/price/Cq/primal/source/scope/cost, zero Optimize), reports/manuscript/final decision/review; new-only carriers with fixed R153 member references; normal commit/push and English Draft PR/readback; one anonymous fixed-commit new-carrier recovery; bounded zero-delete cleanup; publication metacommit push/readback. Goal complete only after all.
+Final experimental G1=24588.354128699146/144000 seconds, including50 closed
+receipts plus the explicitly recorded.170762s diagnostic. Compilation is
+42.734852500027046s separately. Four failed metered attempts, raw stderr and
+exact source snapshots remain. Nested Runtime/Work/H/helper is never added
+again. Pure writing/formatting/public I/O are separate; prelaunch hash and
+history-bookkeeping timing gaps are disclosed. All fees are closed.
 
-Sparse reapplication de-materialized clean tracked old evidence; shared-Git exact thin metadata and all12 R153 carriers repaired, manifests infra/*availability.json. No overwrite, old raw/member extraction, network download, producer or repack. Old status files historical. Do not stage/reset old materialization/text-attribute status entries. Explicit new-round stage paths only.
+New-only public recovery PASS:140 files,12 archives,33178 members,
+3179872398 member bytes,63.2436122s. No old carrier download, Native,
+Optimize, compiler or old producer. Fixed R153 science/member references
+avoid repacking its old4.7GB evidence. Git payloads were byte-checked before
+push; prepublication attribute/line-ending mismatch was corrected with
+normal commits and its small record retained. No science bytes changed.
 
-Budget via round154_common.py. Cap144000 G1 outer seconds; no nested H/helper/Runtime/Work double fee. Compilation42.73485s separate; pure theory/writing/public I/O separate; prelaunch hashes/history bookkeeping gaps disclosed. Actual receipts include all failures. No current heavy fee after completed midpoint freeze; inspect before next launch.
+Post-PR cleanup completed with zero deletion. Unique raw, original failures,
+source bytes, required PE/DLL, active tree, new carriers and successful
+restore remain. See cleanup_record.json for retained bytes and actual
+volume-space observations. Original E:/codes/ExactEBRP and UI processes
+are protected.44 older status-M materializations were checked byte-equal
+to fixed BASE and were never staged/reset/deleted.
 
-## Live update (supersedes earlier execution notes)
-
-K35_target_coupled_v2 is active under the readmitted source84ed0005... and uniform basic-dual fallback; six legal counterexample columns saved so far, no hull interval gain. Never restart its existing fee/folder. After it closes: fullQ support replay, then admitted round154_deepen.py study NC20_updated_midpoint serially; consume all new stocks, fullQ supports and final RMP refresh before all nine frozen complete arms. Interior gate and latest plan SHA75011afc... accepted. Original long plan retained as deepening_plan_fixed_long_v1.md, matching original gate.
-
-New round154_audit.py (unrun) includes actual fullQ+all-support matrix identity, scalar proof-chain reconstruction, explicit inherited witness distributions (no old lambda index reassignment), residual continuous/free/zero-constant checks, goal wrapper/generated source binds, selected support replay, endpoint sealed values/timing identity. Reviewer is reading latest statically; final actual-data approval still awaits successful finite audit and all9 complete arms. round154_reports/writeup/figures/delivery/reuse index remain pending final execution. Source/production/matrix helpers remain frozen. Public recovery is new-only; reproducibility.md explains fixed old references and path mapping.
-
-## Main research closed; complete panel next
-
-Main serial research closed successfully at G1=7075.673592499084s (compilation42.7348525s separate). K35 v2 completed8 steps,33896 columns90supports; no material hull gain, support replay complete. NC interior RN600 returned fresh lower .020898278629124446 with true upper .05313822591856864, target undecided; residual586.4589s outer returned lower .006575570503531851 and true stock .05082419309578479 below tau .052369508028890836. Target rejected, both long trials correctly skipped. Single-certificate ceiling .18504946084304422 is NOT full-hull upper. New columns/two supports ingested, all supports replayed and final complete RMP refreshed. science_state.json selects final data; reports pricing/coupled/science/cost generated successfully. No final science approval claimed.
-
-Next mandatory frozen nine-arm complete panel: round154_campaign.py complete. Check active_position.json, per-position identities, fees/confirmation_NNN and Native PID birth/receipt before resuming. Do not duplicate any existing fee. Keep production/matrix/helper files byte-identical. After all9: report complete, reuse index, finite full audit (zero Optimize), cost refresh, evidence-driven writeup/figures visual QA, independent actual-data final review, new-only carriers/commits/push, Draft PR/readback, anonymous fixed-commit recovery, zero-delete cleanup/metacommit/readback. Complete goal only then.
-
-## Final science and panel verified; publication pending
-
-All9 frozen complete arms closed qualified (7open;2NC20certified). E preserves B U in all4 roles; NB35 raises proof L by .0066458070819850334 and matches B U .450291503262878; same-PE J U .46039474835411914. K/RB/NC endpoint bounds/certificates equalB, ownfloors inactive at terminal. NC Tcert266.81546091265 B vs268.60364548210 E.
-
-Actual finite audit final_evidence_v3 PASS:29prices/3directions/5full-free-Q support replays,37Native reads,0Optimize, all9 identity/clock tuples and scalar proofchains. Earlier v2 failed only older NCprepare missing newer refresh metadata;30.1768903s fee/raw/source retained. Additional independent last_refresh_readback PASS for all K33896/NC54227/NC54235 lambda/points/stocks/marginals/completion, verification0.802452s. No last-column obligation remains. FinalG1=24588.354128699146/144000, compilation42.7348525separate; allfeesclosed. Cost/report refreshed. source_manifest and successfulauditv3 immutable; laterreview-only source/result have ownmanifest/snapshot/fee.
-
-Finalreport/decision/TeX/docs and SVG+PNG generated, visualQA complete. Existing R137 matplotlib deps reused read-only, allnewcaches WORK/temp/round154; default-import ModuleNotFound failure disclosed in formatting_environment. 44older status-M files allbyteequalBASE, infra/historical_status_screen.json; retain/no old staging/reset. Remote prepublication rereadmain b2b940c andPR215openDraftunmergedheadffcf; selectedtemporarybase remainsR153branch.
-
-Independent reviewer /root/review_round154 is doing final actual claims/cost/failure review. Await its final ACCEPT/correct concreteissues, then new-onlypack (no old4.7GBrepack), explicitstage/normalcommits/push, EnglishDraftPR/readback, oneanonymous fixedscience recovery, boundedzero-deletecleanup, finalmetadata commit/push/readback and goalcomplete. NoNative or compilation remains planned; do not rerun historical/performance jobs. No fullgoal completion has been claimed yet.
+No scientific or experimental work remains. The final delivery operation is
+the metadata commit/push and PR base/head/Draft readback. Do not restart old
+RUNNING/FAILED statuses or create a new pricing grid. Goal completion is
+recorded only after that actual final readback.
