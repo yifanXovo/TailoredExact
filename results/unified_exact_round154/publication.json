@@ -27,5 +27,11 @@
   "compilation_seconds_separate": 42.734852500027046,
   "publication_IO_separate": true,
   "metadata_commit": "Normal follow-up commit; derive its exact id from PR216 head after the final push",
-  "final_remote_readback_required_after_metadata_push": true
+  "final_remote_readback_required_after_metadata_push": false,
+  "status": "COMPLETE",
+  "remote_readback": "final_remote_readback.json",
+  "head_after_publication_metadata_push": "df3a01b29cab181821859c146cdd55cdc632080f",
+  "remote_readback_UTC": "2026-11-05 04:59:09 UTC",
+  "receipt_only_followup": true,
+  "head_note": "The readback names the actual publication metadata head. A normal receipt-only follow-up records it; derive the latest exact head from PR216 rather than an impossible self-reference."
 }

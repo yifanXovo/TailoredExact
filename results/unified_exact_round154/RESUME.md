@@ -67,7 +67,11 @@ volume-space observations. Original E:/codes/ExactEBRP and UI processes
 are protected.44 older status-M materializations were checked byte-equal
 to fixed BASE and were never staged/reset/deleted.
 
-No scientific or experimental work remains. The final delivery operation is
-the metadata commit/push and PR base/head/Draft readback. Do not restart old
-RUNNING/FAILED statuses or create a new pricing grid. Goal completion is
-recorded only after that actual final readback.
+Science, publication, public recovery and bounded cleanup are complete.
+The actual publication metadata head df3a01b29cab181821859c146cdd55cdc632080f
+was read back as Open Draft PR216, base ffcfb59899611cbefa1cfe0d739cba5f9b6e5fe5;
+see final_remote_readback.json. A normal receipt-only follow-up records that
+observed state and may advance the head. The latest exact head is the PR/
+branch head, verified again after the receipt push; no self-referential
+commit hash is embedded. No required research or delivery work remains.
+Do not restart historical RUNNING/FAILED states or open an identical grid.
