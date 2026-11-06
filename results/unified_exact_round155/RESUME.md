@@ -1,6 +1,73 @@
-# Round155 active goal: continuation and delivery record
+# Round155: completed study and delivery record
 
-## Latest state: 2026-11-06T10:14:21.986052+00:00
+## Latest state: 2026-11-06T10:25:47.048057+00:00
+
+The scientific study, normal science publication, actual anonymous public
+recovery and bounded post-PR cleanup are COMPLETE. No experiment, queue,
+observer or metered audit is active. Historical RUNNING/FAILED records below
+are retained evidence and must not be automatically restarted.
+
+- English Draft PR: https://github.com/yifanXovo/TailoredExact/pull/217
+- Fixed science: 1a73c0fad8fd7298e04920efc482072d191dfb97.
+- Verified temporary base: codex/round154-target-pricing-proof-ledger at
+  c0b64d66cb0fda36528f764e9b1264df68f45c8b. Main remains
+  b2b940c1e517a72e226ec60fc49ff19651737632; PR216 is Open Draft/unmerged.
+- Head branch: codex/round155-complete-coupling-proof-gains. Actual creation
+  readback confirms the science head, correct base, Open/Draft and unmerged.
+  Delivery receipts use a normal metadata follow-up; final head/base/Draft
+  are read back after that push. No merge, force push or branch deletion.
+
+K35 retains [.2828596948801708,.287326162801573], width
+.004466467921402206, with 40585 columns/565 supports. NC20 retains
+[.18332184845553887,.18986770309524809], width .00654585463970922,
+with 55398 columns/774 supports. Neither reaches 1e-4; zero levels resolve.
+The finite D3 stopping judgment follows substantive feedback, a targeted
+level adjustment, actual support replays and column-use checks. It does not
+prove full-hull saturation. Pause repetition of these tested policies and
+retain the unresolved questions in candidate_decision.json.
+
+All six complete arms pass. E improves the paired supported lower by
+.005211582896773537 on NB35 and .00805702603106112 on R-X35, while the
+fast R-X20 control certifies 1.22927s later and costs 2.34416s more total
+time. Stable GI-TBC and E/J research-only/default OFF remain unchanged.
+No C++/production configuration change or rebuild occurs.
+
+Final G1 is 54336.51933150017 seconds (15.09h), no open fee, below 48h.
+It includes actual failures and necessary checks without nested double
+charging. Separate arithmetic/model/chronology readers pass all 1210
+price/feedback records and 10 support replays; usage reconciliation covers
+1220 observations, of which 27 have complete saved primal projections and
+1193 tracking only. Same-agent independent reconstruction is not described
+as a nonimplementer-agent review. Final provenance and factual readbacks
+PASS, and the manual scientific disposition is ACCEPT_COMPLETE_ROUND155.
+
+Actual public recovery PASS in 68.69276460004039s from the literal science
+commit: 131 manifest-listed files, 9 archives, 28344 members and
+4372174269 member bytes. It downloads zero old carriers and runs no Native,
+Optimize, compiler or old producer. The initial destination was empty:
+E:/codes/ExactEBRP-work/restore/round155-public-1a73c0fad8fd-attempt01.
+See public_restore_receipt.json and reproducibility.md.
+
+Bounded post-PR cleanup deletes zero paths/bytes and records zero observed
+volume-free-space change. The screening retains 10990286529 bytes across
+its recorded current-round areas; this is a file-byte estimate, not a claim
+about newly freed disk space. Unique science, failures, runtime dependencies,
+active trees and the accepted public recovery remain available. All 47
+protected paths match the actual later snapshot. The initial hash table was
+empty; no pre-task byte comparison is claimed. See cleanup_record.json,
+final_protection_readback.json and review/workspace_snapshot_scope.md.
+
+Packaging, staging, commit/push, PR operations, recovery and cleanup are
+public I/O, separate from scientific G1. publication.json records the named
+measurements and exact identities. Science-manifest files and carriers are
+unchanged by delivery metadata. These receipts belong to the normal metadata
+follow-up; its hash is not embedded in its own content. The final remote
+head/base/Draft readback accompanies delivery without redefining fixed science.
+
+The following dated sections are historical records.
+
+
+## Historical scientific freeze: 2026-11-06T10:14:21.986052+00:00
 
 Scientific work is CLOSED and accepted at a finite unresolved endpoint.
 All experiment queues, observers and metered checks have exited. Do not
