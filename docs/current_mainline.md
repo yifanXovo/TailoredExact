@@ -1,5 +1,18 @@
 # Current mainline and Round137 paper branch
 
+The [Round155 continuation](round155_research.md) keeps the same stable
+GI-TBC entry, production executable and default-OFF E/J profiles. Its six-arm
+complete panel is verified: E retains a proof-bound gain at7200 seconds on
+NB35 and the new R-X35-S-T2 role, while the fast R-X20 control pays extra
+helper/verification time without an endpoint-bound gain. Substantive
+complete-Q feedback and one level adjustment leave K35/NC20 wider than1e-4
+without material new interval gains. Their finite endpoint is supported by
+actual price/primal/support/usage readbacks, not by the earlier small screens.
+See the [final report](../results/unified_exact_round155/final_report.md) and
+[actual delivery record](../results/unified_exact_round155/RESUME.md).
+More returned inventory columns, cheaper selection, coupled-LP precision
+and physical complete-algorithm performance remain separate claims.
+
 The [Round154 target-pricing and proof-placement study](round154_research.md)
 qualifies signed state-product residual prices and evaluates an independent
 own-root proof floor without changing Native or AM search inputs. Targeted

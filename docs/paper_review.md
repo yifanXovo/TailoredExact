@@ -16,6 +16,25 @@ position tables and historical evidence. The
 
 ## Scientific account and boundaries
 
+The [Round155 section](round155_research.md) continues the actual large-pool
+inventory feedback study and tests persistent proof-floor benefits in a
+predeclared six-arm panel. Its [paper insertion](../results/unified_exact_round155/manuscript.tex)
+explains why a negative column can remove one optimal dual point without
+changing the optimal value, and retains the classical attribution. The
+actual matrix readback also documents a narrowly repaired omitted-coefficient
+transport with the original numerical guard and complete-domain cost bounds.
+The two difficult E pairs retain their proof benefit, and the fast control
+records its overhead. These completed panel findings do not establish a
+universal default. The [final report](../results/unified_exact_round155/final_report.md)
+and [review](../results/unified_exact_round155/review/final_scientific_review.md)
+accept the finite study while retaining K35/NC20's unresolved precision.
+All1210 prices,10 support replays and1220 usage observations receive their
+declared readbacks; only27 usage observations have a complete saved primal
+for an independent projection comparison. Tiny recorded weights remain
+distinct from exact zero, and support-LP objectives from complete-hull
+primal uppers. Actual delivery is recorded in
+[RESUME](../results/unified_exact_round155/RESUME.md).
+
 The [Round154 section](round154_research.md) adds a qualified signed
 state-product residual, its precise Cartesian product-block relationship,
 actual proof thresholds/counterexamples and a separate proof-placement

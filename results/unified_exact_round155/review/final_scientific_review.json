@@ -1,0 +1,217 @@
+{
+  "UTC": "2026-11-06T10:14:21.986052+00:00",
+  "disposition": "ACCEPT_COMPLETE_ROUND155",
+  "scientific_blockers": [],
+  "science_complete": true,
+  "user_goal_complete_at_scientific_freeze": false,
+  "delivery_requirements_at_freeze": [
+    "Normal commit and push",
+    "English Draft PR and actual base/head/Draft readback",
+    "Anonymous fixed-science-commit new-only public recovery",
+    "Bounded current-round cleanup and later-byte protection checks"
+  ],
+  "manual_review": "review/final_scientific_review.md",
+  "method": "Primary-agent manual claim review based on separate exact arithmetic/model/chronology/usage readbacks",
+  "nonimplementer_agent_review": false,
+  "goal_D3_finite_unresolved_endpoint_accepted": true,
+  "full_hull_saturation_proved": false,
+  "actual_readbacks": {
+    "factual": true,
+    "provenance": true,
+    "usage": true,
+    "price_feedback_records": 1210,
+    "support_replays": 10,
+    "complete_arms": 6,
+    "common_checkpoints": 18
+  },
+  "usage_coverage": {
+    "observations": 1220,
+    "complete_saved_primal_projections": 27,
+    "tracking_only": 1193
+  },
+  "full_current_minimum_coverage": {
+    "K-35-U_bounded_screen_v1": {
+      "directions": 12,
+      "independently_recomputed_full_current_minima": 2,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    },
+    "K-35-U_first_screen_v1": {
+      "directions": 12,
+      "independently_recomputed_full_current_minima": 2,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    },
+    "N-C20-U_bounded_screen_v1": {
+      "directions": 12,
+      "independently_recomputed_full_current_minima": 2,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    },
+    "N-C20-U_first_screen_v1": {
+      "directions": 12,
+      "independently_recomputed_full_current_minima": 2,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    },
+    "K-35-U_bounded_deep_v1": {
+      "directions": 112,
+      "independently_recomputed_full_current_minima": 8,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    },
+    "K-35-U_feasible_level_deep_v2": {
+      "directions": 18,
+      "independently_recomputed_full_current_minima": 3,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    },
+    "N-C20-U_feasible_level_deep_v2": {
+      "directions": 1,
+      "independently_recomputed_full_current_minima": 1,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    },
+    "K-35-U_bounded_remaining_v1": {
+      "directions": 333,
+      "independently_recomputed_full_current_minima": 22,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    },
+    "N-C20-U_bounded_remaining_v1": {
+      "directions": 45,
+      "independently_recomputed_full_current_minima": 4,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    },
+    "N-C20-U_first_stalled_continuation_v1": {
+      "directions": 653,
+      "independently_recomputed_full_current_minima": 42,
+      "scope": "every lower-improving direction plus first/last/every16; all Q certificates and all price/feedback arithmetic"
+    }
+  },
+  "eight_failed_metered_children_preserved": 8,
+  "charged_G1_seconds": 54336.51933150017,
+  "unclosed_fees": [],
+  "initial_protected_byte_snapshot_available": false,
+  "later_protected_paths": 47,
+  "unresolved_scientific_questions": [
+    "K35/NC20 complete-Q precision remains above 1e-4",
+    "No proof of complete-hull saturation or all-policy impossibility",
+    "No universal/default E improvement",
+    "Future routing/loading proposal needs a gap distinct from R63-66/R91-107"
+  ],
+  "references": [
+    {
+      "path": "results/unified_exact_round155/goal.md",
+      "SHA256": "f20cf13c5d086aacccc08448f232b31ab1a272bdb95ab8400a3ea37b3213c513",
+      "bytes": 24015
+    },
+    {
+      "path": "results/unified_exact_round155/candidate_decision.json",
+      "SHA256": "a50f83f6dd5815c84de7f10a39627db5e1c128bcf39e1413bced0f3be0181ea3",
+      "bytes": 5551
+    },
+    {
+      "path": "results/unified_exact_round155/final_report.md",
+      "SHA256": "9c6f62219a13f8124f1d20e21c4c03c98caf2e559be9686931b5f4d5dbfe2750",
+      "bytes": 15681
+    },
+    {
+      "path": "results/unified_exact_round155/manuscript.tex",
+      "SHA256": "82a5d6df796aeb57c6f608d1a1ba828bb0d3ced3d102653035228528f4ba2778",
+      "bytes": 15793
+    },
+    {
+      "path": "results/unified_exact_round155/mathematical_analysis.md",
+      "SHA256": "1b00b89f28724fcf44d3f5d6a6fde250b621f35d6484bf2a3d5a04ff336c15c9",
+      "bytes": 6436
+    },
+    {
+      "path": "results/unified_exact_round155/history_dedup.md",
+      "SHA256": "740df5a8a305b0872dfee649f98c84093703c4b8cc2426c119aaea6952e5b191",
+      "bytes": 6925
+    },
+    {
+      "path": "results/unified_exact_round155/reproducibility.md",
+      "SHA256": "e58ccaedbe29c659d043958d3363a6e4334d2822a102defa5108e6d21365471d",
+      "bytes": 4680
+    },
+    {
+      "path": "results/unified_exact_round155/cost_report.json",
+      "SHA256": "1a7e877b272c20b25c6f38d11f9d0ff5ca2b6bf5e5aaee7125f39ec3acb4f19c",
+      "bytes": 25599
+    },
+    {
+      "path": "results/unified_exact_round155/source_manifest.json",
+      "SHA256": "753222c014c9fd44f726fee16286b101347a327f96889243089a417579c90da2",
+      "bytes": 283372
+    },
+    {
+      "path": "results/unified_exact_round155/reuse_index.json",
+      "SHA256": "e04740c89e7700abfa9022831662af2aaaeda58d3ccf7f2fe54674bc83458487",
+      "bytes": 175599
+    },
+    {
+      "path": "results/unified_exact_round155/production_identity.json",
+      "SHA256": "6c1ec9ff221ceb9590d15115b6d57ed1ab1c5a282a7800b8645f4f7014765e9e",
+      "bytes": 16091
+    },
+    {
+      "path": "results/unified_exact_round155/qualification/final_evidence_readback_v1/result.json",
+      "SHA256": "532ec523008f04df28d32131a6f9107777553c718b331ddd5489341ceeb082fe",
+      "bytes": 34206
+    },
+    {
+      "path": "results/unified_exact_round155/fees/final_evidence_readback_v1/receipt.json",
+      "SHA256": "3ecb1bf3325c53b6c74ba5a4061a3540eda3868de46b30eaea453d63e6b6f1c9",
+      "bytes": 353
+    },
+    {
+      "path": "results/unified_exact_round155/fees/final_provenance_v2/receipt.json",
+      "SHA256": "ab95779169710e4b7ffa91f1b4eb7af2e73793a38b2a4c9460a9b20c3ed6d54b",
+      "bytes": 351
+    },
+    {
+      "path": "results/unified_exact_round155/qualification/column_usage_readback_v1/result.json",
+      "SHA256": "eef2a9b73add73e45f7c22878a8506cd151c6c7fc8b527f5c077fc683126e937",
+      "bytes": 566836
+    },
+    {
+      "path": "results/unified_exact_round155/fees/column_usage_readback_v1/receipt.json",
+      "SHA256": "116927d566a09d3f725a93ec90f2a7af47b38f5ff396c914445c62f2b518461e",
+      "bytes": 353
+    },
+    {
+      "path": "results/unified_exact_round155/reports/research_phases.csv",
+      "SHA256": "cf52b99751af7c240f563d8bbce0f4c633ba19c634ad3bdd063a4c0d0ffef502",
+      "bytes": 13376
+    },
+    {
+      "path": "results/unified_exact_round155/reports/coupled_trajectory.csv",
+      "SHA256": "7072d751a464490cc70d1ce134a159194f6e39272b0397e659192f51b9082014",
+      "bytes": 722746
+    },
+    {
+      "path": "results/unified_exact_round155/reports/column_quality.csv",
+      "SHA256": "3762d3123960c4e1c331769ba695bfdbf0e3cc2dd16f6e499b9a6f26e0b2a1e3",
+      "bytes": 6163019
+    },
+    {
+      "path": "results/unified_exact_round155/reports/complete_pairs.json",
+      "SHA256": "7023ad106cf4db8b9736133e86d306155440b078bc2543c91998a4247789acfb",
+      "bytes": 2878
+    },
+    {
+      "path": "results/unified_exact_round155/reports/common_checkpoints.json",
+      "SHA256": "32129bbeb2567d770cd6dabf47a8b544b04704bc61eef6520d61e22ac0d83bc2",
+      "bytes": 14677
+    },
+    {
+      "path": "results/unified_exact_round155/review/final_scientific_review.md",
+      "SHA256": "899ac749db5d740eeefd19b18c52ae4bcaf94c4d81ab733244d142d74cf70ef5",
+      "bytes": 9187
+    },
+    {
+      "path": "results/unified_exact_round155/review/later_protected_bytes.json",
+      "SHA256": "cc184555fe3fda28126c45e6e8575a249aaaefb7497ecd0da5358e444740ad4a",
+      "bytes": 18610
+    },
+    {
+      "path": "results/unified_exact_round155/review/remaining_readback_bindings.json",
+      "SHA256": "7f80db27c65f05c8f80b5aaa969077c91c981f0b6d7fe656e32357f1f836e733",
+      "bytes": 7643
+    }
+  ]
+}

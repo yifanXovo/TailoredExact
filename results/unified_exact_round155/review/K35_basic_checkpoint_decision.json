@@ -1,0 +1,82 @@
+{
+  "UTC": "2026-11-05T21:11:30.942454+00:00",
+  "decision": "ORDERLY_RESEARCH_CHECKPOINT",
+  "reason": "More than one hundred completed feedback/reoptimizations returned over fifteen hundred new columns with no recorded positive new-column weight or material U/L gain; selection overhead is already negligible. Reallocate the remaining K35 deep capacity to the single fixed-level feasible-selector adjustment after its targeted qualification and actual checkpoint readback.",
+  "observed_status": {
+    "role": "K-35-U",
+    "label": "bounded_deep_v1",
+    "decision": "RUNNING",
+    "iteration": 110,
+    "RMP_objective": 0.28732616330634125,
+    "lower": 0.2828596948801708,
+    "upper": 0.2873261633037888,
+    "gap": 0.004466468423617975,
+    "C_Q": -0.3851313577924095,
+    "a_K": 0.6724575110976192,
+    "beta": 1.0,
+    "target_hull": 0.2872261633037888,
+    "target_price": 0.6723575210961983,
+    "price_lower": 0.13693010152336532,
+    "price_upper": 0.6094720533047583,
+    "target_proved": false,
+    "target_disproved": true,
+    "columns": 35645,
+    "supports": 213,
+    "added": 15,
+    "added_negative": 14,
+    "duplicate_returns": 4,
+    "new_columns_used": 0,
+    "new_column_total_weight": 0.0,
+    "pricing_seconds": 11.299795900005847,
+    "selection_seconds": 0.040428000036627054,
+    "selection_LP_Optimize": 0,
+    "RMP_seconds": 10.19134010002017,
+    "cumulative_costs": {
+      "build": 18.24583170004189,
+      "RMP": 1748.0370572011452,
+      "selection": 4.493108400143683,
+      "certificate": 329.3305096991826,
+      "pricing": 1057.8443205992226,
+      "feedback": 4.263567499816418
+    },
+    "elapsed_seconds": 3204.9953952999786,
+    "Native_status": 8,
+    "rule": "bounded"
+  },
+  "completed_stdout_records": 111,
+  "new_columns": 1593,
+  "maximum_recorded_new_columns_used": 0,
+  "maximum_recorded_new_column_total_weight": 0.0,
+  "live_process": {
+    "label": "K35_bounded_deep_v1",
+    "state": "RUNNING_OR_INTERRUPTED",
+    "process": {
+      "pid": 49312,
+      "same_process_alive": true,
+      "recorded_creation_filetime": 134383834704451959,
+      "actual": {
+        "creation_filetime": 134383834704451959,
+        "creation_unix": 1793909870.4451962
+      },
+      "command": [
+        "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+        "-B",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\scripts\\round155_loop.py",
+        "run",
+        "K-35-U",
+        "bounded_deep_v1",
+        "bounded",
+        "28200",
+        "0",
+        "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\support_LP\\K-35-U_bounded_screen_support_v1\\result.json",
+        "120"
+      ]
+    }
+  },
+  "original_deep_plan_SHA": "0fe9a66d0060a12d2de03105941086cf13e10abd8417771aecc34c1c98a8b3f7",
+  "no_hull_saturation_claim": true,
+  "original_K_deep_capacity_seconds": 28800,
+  "remaining_capacity_reallocated_not_cancelled": true,
+  "qualification_pending": true,
+  "not_an_elapsed_time_switch_inside_algorithm": true
+}

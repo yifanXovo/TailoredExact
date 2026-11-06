@@ -1,0 +1,107 @@
+{
+  "UTC": "2026-11-05T21:17:00.082114+00:00",
+  "decision": "ADMIT_ONE_FIXED_LEVEL_ADJUSTMENT",
+  "roles": [
+    {
+      "role": "K-35-U",
+      "label": "feasible_level_deep_v1",
+      "fee_label": "K35_feasible_level_deep_v1",
+      "source": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\support_LP\\K-35-U_bounded_deep_support_v1\\result.json",
+      "source_SHA": "1b086d6ed4805628f53fea5f7e18200738890d476bb5a479f4f5a8824333a73d",
+      "rule": "fixed_level_feasible_AP",
+      "outer_reservation_seconds": 25555,
+      "phase_seconds": 24955,
+      "price_cap": 120,
+      "selection_cap": 120,
+      "selection_iteration_limit": 2000,
+      "iteration_limit": null,
+      "Seed": 0,
+      "Threads": 1,
+      "tolerance": 0.0001,
+      "deterministic_node_limit": 256,
+      "pool_solutions": 20,
+      "lower": 0.2828596948801708,
+      "upper": 0.2873261633037888,
+      "columns": 35658,
+      "supports": 214,
+      "Q_SHA": "9816772328dd5e53c0dfd00e5f714fbaf08d2f93ac3cf0652ce5226a2452fcb5",
+      "source_readback_SHA": "8c297ba3f4ae352d8110f9e54337cff94300c6f184f028b9b751af3e9bba8951",
+      "interface_gate_SHA": "1bc59c0bd47cdc5e546af23b313c49f068587ae7b7a213ed44e0faf658637ac0"
+    },
+    {
+      "role": "N-C20-U",
+      "label": "feasible_level_deep_v1",
+      "fee_label": "NC20_feasible_level_deep_v1",
+      "source": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\support_LP\\N-C20-U_bounded_screen_support_v1\\result.json",
+      "source_SHA": "1e3797ad83008c68aebeb23d0e617ab0b96522dc03683da492df91e2f22f4de0",
+      "rule": "fixed_level_feasible_AP",
+      "outer_reservation_seconds": 28800,
+      "phase_seconds": 28200,
+      "price_cap": 120,
+      "selection_cap": 120,
+      "selection_iteration_limit": 2000,
+      "iteration_limit": null,
+      "Seed": 0,
+      "Threads": 1,
+      "tolerance": 0.0001,
+      "deterministic_node_limit": 256,
+      "pool_solutions": 20,
+      "lower": 0.18332184845553887,
+      "upper": 0.1898677030967613,
+      "columns": 54344,
+      "supports": 75,
+      "Q_SHA": "fefd769b819d36a93dfaa8dc39670512109323cdd0123366e768443cdf2a1d45",
+      "source_readback_SHA": "07bd66dff176a70153bc10f96df7bb2879c04fd79d3ff8b234a43e7fc56b422c",
+      "interface_gate_SHA": "1bc59c0bd47cdc5e546af23b313c49f068587ae7b7a213ed44e0faf658637ac0"
+    }
+  ],
+  "supersedes_unstarted_rule_only": "deep_plan.json NC20; K35 remaining capacity follows its actual reviewed checkpoint",
+  "original_plan_SHA": "0fe9a66d0060a12d2de03105941086cf13e10abd8417771aecc34c1c98a8b3f7",
+  "K_checkpoint_SHA": "bdc2d0d2ab1c79722c76fb7b6cd42dfddc97297269633892c34c12a2133a45d0",
+  "K_checkpoint_audit_SHA": "d2744686c070e9e782c1ca89a7662384b6c3e70a5ef45c15fc980f7bcbe8f680",
+  "K_completed_iterations": 112,
+  "K_added_columns": 1606,
+  "K_outer_seconds": 3244.787604100071,
+  "budget": {
+    "G1_seconds": 11717.52526450064,
+    "remaining_G1_seconds": 161082.47473549936,
+    "by_category": {
+      "research": 4492.0831841006875,
+      "verification": 0.0,
+      "native": 7225.442080399953
+    },
+    "limits": {
+      "research": 172800.0,
+      "verification": 172800.0,
+      "native": 172800.0
+    },
+    "category_remaining": {
+      "research": 168307.9168158993,
+      "verification": 172800.0,
+      "native": 165574.55791960005
+    },
+    "separately_reported_seconds": 0.0,
+    "unclosed": [
+      {
+        "label": "prepare_level_deep_v2",
+        "kind": "research",
+        "reservation": 120.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\fees\\prepare_level_deep_v2\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "reserved_capacity": {
+    "level_continuations": 54355,
+    "remaining_E_with_verification": 24300,
+    "unused_adjustment_or_followup_capacity": 14400,
+    "final_review_failure_margin": 21600
+  },
+  "reason": "Sustained valid basic-dual negative columns did not receive positive later RMP weights or improve the interval. Test the already-qualified fixed interior-level feasible AP selector with the remaining substantive capacity, uniformly on both domains.",
+  "not_a_saturation_claim": true,
+  "no_instance_specific_algorithm_switch": true,
+  "no_elapsed_time_switch_inside_any_algorithm": true,
+  "full_Q_and_price_domain_unchanged": true,
+  "selection_failure_is_unresolved_not_a_bound": true,
+  "unspent_capacity_remains_available": true
+}

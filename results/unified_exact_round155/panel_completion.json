@@ -1,0 +1,70 @@
+{
+  "UTC": "2026-11-06T03:51:33.215925+00:00",
+  "decision": "ALL_SIX_FROZEN_ARMS_VERIFIED",
+  "matrix_SHA": "b56956674010f3ed8ce2c1b1e81270010752faab3f29cf44ee54a2114afe0c5f",
+  "accepted_arms": [
+    {
+      "position": 1,
+      "arm_id": "R155_001_N-B35-S_S0_B",
+      "fee_label": "confirmation_001",
+      "receipt_SHA": "7a4ce1a5fb8156f469d39f32834bf25d3c2a6a8d241750c23b8221ca7c7f8947",
+      "G1_seconds": 7175.880293099908,
+      "endpoint_SHA": "1defbf77b819880e8281ef6ae53be3f5581002d74ada3a887dd0a39f2d66cabe",
+      "closeout_SHA": "8945481839da86e4e22af93a0580f5774afda595d109f0dd6a7000984bc18f3d"
+    },
+    {
+      "position": 2,
+      "arm_id": "R155_002_N-B35-S_S0_E",
+      "fee_label": "confirmation_002",
+      "receipt_SHA": "8430c7eb8ea51252363e702335ba643f25b5761eead5278a73a73abefff6b4cc",
+      "G1_seconds": 7183.030154600041,
+      "endpoint_SHA": "37a6f3c738727028fc4f6b890f8d2c45df2116e28d675ffc4a2b3d0871998094",
+      "closeout_SHA": "cd64bfaf5e864ae05ee0e90c52537e5ad8042537b86cd4f871ed1c75588142f2"
+    },
+    {
+      "position": 3,
+      "arm_id": "R155_003_R-X35-S-T2_S0_B",
+      "fee_label": "confirmation_003_retry_v1",
+      "receipt_SHA": "2b0ebb9d8665327a0e2875d402e40fa4e1efc1bae67d657eaf0fe0356976e9c8",
+      "G1_seconds": 7177.600106999977,
+      "endpoint_SHA": "979ef369be2efaa3e9d79525e6530b920a8a57a5b3547abf085cf1db4d2db4ab",
+      "closeout_SHA": "94e4c990f6bacccb4cf2552638279db429737b33a5e639590bd73f630ca0e14d"
+    },
+    {
+      "position": 4,
+      "arm_id": "R155_004_R-X35-S-T2_S0_E",
+      "fee_label": "confirmation_004",
+      "receipt_SHA": "22c164fa36329b45108c1ab9950a0852a316f8930ee496764311344b09ef5a0c",
+      "G1_seconds": 7182.282141600037,
+      "endpoint_SHA": "918171e92d6cba90ca59cc4239dd5c55512a192a311fc2c8fcac1afffc2504ee",
+      "closeout_SHA": "2c6a3a8e859933ded878c9e7bfdf1ea9f4649f4ef3579cb8895121fa13033f81"
+    },
+    {
+      "position": 5,
+      "arm_id": "R155_005_R-X20-S-T1_S0_B",
+      "fee_label": "confirmation_005",
+      "receipt_SHA": "79358bff9b1a7ed9d29d951e04c3cd9ae8655da4e3f1d556fcdd66540f8b7def",
+      "G1_seconds": 23.61082200007513,
+      "endpoint_SHA": "2e1575ba9f73d000f83b5a0d5fb158931771e5dee328e26830592e9c29236e82",
+      "closeout_SHA": "6a985489e9c75b5d018a7a89fe1155ca4cba8a115eb23c2524460e7aea6d5142"
+    },
+    {
+      "position": 6,
+      "arm_id": "R155_006_R-X20-S-T1_S0_E",
+      "fee_label": "confirmation_006",
+      "receipt_SHA": "2cc6860227d05ec490e616bf82ae43e4dfc18b8bf015cce1438614204339300a",
+      "G1_seconds": 25.95096529996954,
+      "endpoint_SHA": "6a9d568afc86c1fee137994e7cd435995d3c71fc4627a4b63630aa67605caecb",
+      "closeout_SHA": "4c8559faf0217524a213da7459b6429475717c2b24329afc4b13dd184db9391b"
+    }
+  ],
+  "recovery_plan_SHA": "0af0f0e8481090ab90e493a696e6cdbd2bce6a81555e9c334dda5415ec4049e3",
+  "failed_attempts": [
+    {
+      "label": "confirmation_003",
+      "receipt_SHA": "b6ad5bef026529ce902340c0fbc2147dc5472e138daf4d46976956060f17e137"
+    }
+  ],
+  "no_production_or_algorithm_change": true,
+  "no_free_cross_arm_information": true
+}

@@ -1,0 +1,272 @@
+% Round155 scientific section; exact numerical records and delivery metadata
+% are in final_report.md, reports/, source_manifest.json and RESUME.md.
+\section{Completing the inventory coupling and consuming independent proofs}
+\emph{The finite study retains unresolved complete-hull intervals and
+separates those results from the paid complete-algorithm proof gains.}
+
+Let $\mathcal R$ contain every declared integer station state satisfying
+the hard inventory totals and the physical Gini cap. For positive total
+$S(Y)=\sum_i c_iY_i$, write
+$G(Y)=\sum_{i<j}|c_iY_i-c_jY_j|/(nS(Y))$ and
+$f(Y)=\max\{\gamma_L,G(Y)\}$; a legal zero state has true Gini zero.
+At fixed state marginals $s$, the expected unary penalty
+$H(s)=\sum_{i,y}\omega_i|c_i y-1|s_{iy}$ is independent of the common
+inventory distribution. Thus the minimum expected inventory objective is
+$\Theta(s)=H(s)+\Gamma(s)$, where $\Gamma$ minimizes expected $f$ over
+distributions on $\mathcal R$. This inherited decomposition concerns the
+inventory completion. The physical startup heuristic, also called own-H
+in the experiments, is a distinct, separately paid computation.
+
+We couple that completion to the same complete routing relaxation $Q$:
+\[
+ \min\{g+P_e:x\in Q,\quad
+ s=\sum_{Y\in\mathcal R}\lambda_Y\chi(Y),\quad
+ \sum_Y\lambda_Y=1,\quad\lambda\ge0,\quad
+ g\ge\sum_Y\lambda_Y f(Y)\}.
+\]
+All original route, load, time, cutoff and auxiliary variables remain free.
+A finite inventory pool $K$ gives an inner restriction, whose qualified
+primal provides an upper bound on this LP value. It does not provide a
+physical route incumbent. Conversely, whole-domain inventory pricing,
+together with a residual certificate for the entire $Q$, supplies a lower
+bound. With $\beta\ge0$, $p_d(Y)=\beta f(Y)-\pi^\top\chi(Y)$ and
+$a_K=\min\{\alpha,\min_{Y\in K}p_d(Y)\}$, the retained certificate is
+\[
+ L(d)=C_Q(d)+\min\{a_K(d),L_m(d)\},\qquad
+ L_m(d)\le\min_{Y\in\mathcal R}p_d(Y).
+\]
+The correction uses the true inventory completion and is paid once because
+the distribution has unit mass. Neither a selection-LP objective nor a
+fixed direction's price upper substitutes for the complete primal upper.
+
+The signed residual oracle is inherited from the preceding study. On a
+safe positive branch $0<l\le S\le u$, it prices
+$R_\tau(Y)=S(Y)[p_d(Y)-\tau]$ using complete binary state products,
+conditional denominator bounds and hard-total cost products. A qualified
+residual lower $\ell$ gives price lower $\tau+\ell/u$ when $\ell\ge0$
+and $\tau+\ell/l$ otherwise. The legal zero branch is combined separately.
+Existing whole-domain price lowers are retained for the same direction.
+Because $S$ varies, the most negative residual need not have the smallest
+original price. Every returned stock is therefore evaluated in the
+original price, checked against the full legal domain and deduplicated
+before entering the current master.
+
+The actual fixed-level model readback exposed a small but relevant
+coefficient-transport discrepancy: Native omitted some state-cost terms.
+Let $a_{iy}$ be the actual scaled Native costs and $b_{iy}$ the exact
+centered original costs divided by the positive scaling factor $\sigma$.
+For the observed matrices, all affected cost definitions and epigraph
+rows use the same $a_{iy}$. The additional one-sided residual error is
+bounded by
+\[
+ \varepsilon=u\sum_i\max\{0,\max_y(a_{iy}-b_{iy})\}.
+\]
+Retaining the entire original numerical guard $g_{\rm num}$, a qualified
+Native bound $B$ is transported as
+$\ell=\sigma(B-g_{\rm num}-\varepsilon)$ before the unchanged signed conversion.
+An independent hard-total dynamic program on the actual $a_{iy}$ checks
+that the saved cost bounds and product rows still cover every legal stock.
+Small coefficients alone would not establish that domain property.
+Seven saved K35 local price/support lowers required a one-step binary64
+decrease; the retained full-hull interval and inventory pool did not change.
+The raw results and failed readback remain preserved alongside hash-linked
+corrections. Both domains subsequently passed the independent price,
+original-$Q$, selector and corrected-support readbacks. This repairs the
+observed transport while retaining the inherited numerical policy.
+
+Column generation and stabilization are established methods.\footnote{
+M. E. L\"ubbecke and J. Desrosiers, Selected Topics in Column Generation,
+Operations Research 53(6):1007--1023, 2005, doi:10.1287/opre.1050.0234;
+A. Pessoa, R. Sadykov, E. Uchoa and F. Vanderbeck, Automation and Combination
+of Linear-Programming Based Stabilization Techniques in Column Generation,
+INFORMS Journal on Computing 30(2):339--360, 2018,
+doi:10.1287/ijoc.2017.0784.}
+Persistent masters, basis reoptimization, midpoint dual bands and multiple
+incumbent columns already occurred in Round153. Round154's successful
+K35 loop nevertheless spent approximately 991 seconds on eight failed
+auxiliary selections before using basic RMP duals, whereas its eight
+counterexample prices together took approximately 6.79 seconds. NC20's
+selections succeeded. These observations motivate a fresh matched-pool
+comparison; they are not themselves contemporary performance controls.
+
+There is also a geometric reason to separate negative-column discovery
+from LP-value progress. In the ideal exact-coefficient LP, let
+$\mathcal D_K^*$ be the attained optimal dual face with finite value
+$U_K$. If both old and augmented primal--dual pairs are feasible with
+finite attained optima, then for any added set $A$,
+\[
+ U_{K\cup A}=U_K\quad\Longleftrightarrow\quad
+ \mathcal D_K^*\cap\bigcap_{Y\in A}
+ \{d:\alpha\le p_d(Y)\}\ne\varnothing.
+\]
+Adding columns expands the primal domain and intersects the dual domain
+with their inequalities. Any surviving old optimal dual point gives the
+reverse weak-duality inequality; an attained augmented optimum of equal
+value proves the converse. A negative column at one dual optimum can
+therefore leave the optimal value unchanged. For example, a covering
+master with demand $(1,1)$ and one column $(1,1)$ of cost 1 has dual
+optima $u_1,u_2\ge0$, $u_1+u_2=1$. Adding $(1,0)$ of cost $1/2$ violates
+the optimum $(1,0)$ but retains $(0,1)$, so the primal optimum remains 1.
+This is classical LP geometry; tiny floating-point changes are not an
+exact optimal-face certificate.
+
+Round155's experiment starts from the actual final Round154 pools and
+supports. The lightweight arm uses a qualified current basic dual and
+the existing first-counterexample stop. Its matched alternative retains
+the same oracle with a deterministic node allowance and multiple legal
+incumbents. Each arm owns its newly discovered columns. Short comparisons
+serve implementation and strategy selection; substantive continuations
+are judged by valid cumulative intervals, subsequent column weights and
+marginal contributions, and complete costs. The target remains a hull
+width of $10^{-4}$. A failed direction or an arbitrary small iteration
+limit does not establish saturation of the whole coupling.
+
+Following a sustained basic-dual plateau, the single additional experiment
+uses a fixed interior level $\zeta=(L+U)/2$. A persistent explicit RMP dual
+minimizes the inherited AP-based $\ell_1$ deviation, with a start derived
+from the current optimal RMP multipliers and reduced costs. The deterministic
+iteration allowance includes a model-sized provision for converting that
+start to a basis. A returned feasible candidate need not optimize the
+secondary objective, but it must separately pass the complete original-$Q$
+residual and true-column gate
+\[
+ C_Q(d)+a_K(d)\ge\zeta,\qquad \tau=\zeta-C_Q(d).
+\]
+The nominal selection-level row is only a search aid; its numerical feasibility
+does not replace this corrected gate. Recorded omissions in the nominal row
+do not remove any original term from the exact original-$Q$ certificate.
+A legal price $p_d(Y)<\tau$ adds a new column and retains
+the same $\zeta$. Only a whole-domain price lower $L_m\ge\tau$ or a qualified
+complete primal with $U<\zeta$ resolves the level and permits the next
+midpoint. Selection failure, an undecided price and the offline phase
+allowance are explicit unresolved exits. Neither infeasibility of the
+numerical selector nor its objective is used as a hull bound. This experiment
+extends the existing midpoint and stabilization implementation; it does not
+introduce a new general column-generation theorem.
+
+Finally, inventory proof strength and complete-algorithm benefit require
+separate evidence. The unchanged proof-only candidate E pays its own
+original floor producer and combines each covered leaf by
+$\max\{L_j,\min(U_0,\ell_j)\}$ before taking the complete-frontier
+minimum. It does not insert the new offline prices into a complete arm.
+The preceding NB35 comparison improved the supported lower from
+0.38931060164210607 to 0.3959564087240911 at the same physical upper
+0.450291503262878; its E raw search lower was 0.3892936193183539.
+That earlier gain came from proof composition. The new frozen panel
+tests its persistence at 7200 seconds, another difficult role at the
+same allowance, and a fast-certifying role at 1200 seconds. Each arm pays
+its own startup, helper and verification. Checkpoints use only evidence
+already available within that long run, with unavailable exact-time
+snapshots identified explicitly. Stable GI-TBC and the default-off
+status of E and J are retained.
+
+The six complete arms have now passed their endpoint and chronological
+checks. At7200 seconds, NB35 B and E share physical upper
+0.4297444110493129 and raw search lower0.39074482582731757; E retains
+supported lower0.3959564087240911, an absolute paired gain of
+0.005211582896773537. The new R-X35-S-T2 pair shares upper
+0.2996694007364017 and raw lower0.21420555388926832; E supports
+0.22226257992032944, a gain of0.00805702603106112. Neither hard pair
+certifies. Their independently paid floor helpers take15.523269 and
+35.2585302 seconds, respectively. These costs are already inside the
+corresponding outer charges.
+
+The fast R-X20-S-T1 pair certifies at the common physical upper
+0.6453250303858205. B and E have production/certificate times22.5845122372
+and23.8137845208 seconds and production-plus-verification times23.5440619371
+and25.8882214208 seconds. E's1.1278163-second helper is paid despite giving
+no endpoint-bound improvement. This control limits the interpretation of
+the two positive difficult-role results; the panel supports an explainable
+proof enhancement but does not justify a universal default or a policy
+that switches by instance name.
+
+The immutable availability chain records the NB35 and R-X35 floors by
+20.157 and38.953 seconds. They remain active at the respective endpoints;
+raw search has not overtaken them. The fast role records its floor by
+1.860 seconds and a raw-bound crossing in the observation batch available
+at3.078 seconds. Below- and above-floor observations share that batch time,
+which is not an exact Native crossing instant. Hard-arm checkpoints at
+2400,3600,4800 and7200 seconds use only the latest already committed
+qualified information; unavailable exact-time snapshots are marked.
+They describe these long runs and are not independent short-budget arms.
+
+The audited matched screens each perform12 complete feedback steps from
+identical original pools. K35 first/bounded return13/156 new columns in
+248.109/394.261 outer seconds; NC20 returns12/109 in129.537/190.990 seconds.
+The strictly negative counts are12/155 and12/109, respectively. Neither
+screen materially advances the interval. Their greater column throughput
+does not by itself establish a stronger complete hull.
+
+Substantive K35 work comprises112 initial bounded feedback steps,18
+fixed-level steps and333 further bounded steps, plus the unsuccessful
+initial level conversion. NC20 receives one fixed-level step,45 bounded
+steps and653 further first-return steps after an unresolved node-limited
+price. The last continuation uses the existing qualified first-return
+oracle without a fixed node cap and with a1200-second per-price safety cap;
+it has no iteration-count cap. A later true stock also refutes the earlier
+unresolved direction's target. Its refreshed Q correction differs, so this
+sequential bridge is not a matched performance experiment.
+
+\begin{center}
+\begin{tabular}{lrrrr}
+Domain & Deep feedback steps & Deep hours & Final columns & Supports\\
+\hline
+K35 & 463 & 4.082 & 40585 & 565\\
+NC20 & 699 & 2.230 & 55398 & 774\\
+\end{tabular}
+\end{center}
+The step counts exclude the matched screens; the final pools include each
+main branch's own bounded screen. The actual deep outer costs are
+14695.749561 and8029.041276 seconds. The eight-hour domain figures are
+adjustable capacity references, not elapsed charges. The original target
+of width$10^{-4}$ is unchanged. The final intervals, displayed outward at
+eight decimal places, are
+\[
+ K35:[0.28285969,0.28732617],\qquad
+ NC20:[0.18332184,0.18986771].
+\]
+Their recorded widths are0.004466467921402206 and0.00654585463970922.
+No level resolves. K's lower changes only about$1.8\times10^{-15}$ and its
+upper about$5.03\times10^{-10}$; NC's lower is unchanged and its upper
+decreases about$1.51\times10^{-12}$. These changes are numerically tiny.
+Complete free-Q replays of all565 and774 supports do not improve the
+retained lowers. NB35's already tight inherited interval is retained
+without a new symmetric long price.
+
+The independent usage reconciliation covers1220 observations in11 phases;
+27 have a complete saved primal for a projection comparison, while1193
+check tracking records only. NC's main branch adds1163 columns without a
+recorded weight above$10^{-10}$. K adds6689 columns, of which48 later have
+tiny recorded weights, with maximum$6.4456033397\times10^{-10}$;28 originate
+in its last bounded phase and20 in earlier phases. Thus an unqualified
+statement that every new column is never used would be false. These tiny
+weights do not provide a meaningful bound gain or a rational exact-zero
+certificate. Unsaved intermediate primals are not reconstructed.
+
+In the last K phase, RMP/selection/certificate/pricing costs are
+5247.865/13.498/1017.232/3598.783 seconds; in the last NC phase they are
+2683.998/9.087/1798.770/2433.908 seconds. The repeated failed-selection
+expense has been removed, but the complete master and pricing/certificate
+work remain. Sustained feedback, the unsuccessful single level adjustment,
+unchanged combined-support bounds and the observed use records justify a
+finite stopping decision for these policies. They do not prove saturation
+of the entire inventory hull or preclude a substantively different method.
+
+All1210 completed price records receive separate arithmetic readback.
+The general checker recomputes full current-column minima for improving
+directions and first/last/every16 positions; the level checker additionally
+checks every accepted candidate. Complete-Q certificates, true returned
+prices, selected model reconstructions and retained full primal witnesses
+are checked separately. All10 support replays pass complete-matrix and
+dual/primal readbacks. This is independent reconstruction by the same
+research agent, not a nonimplementer-agent review.
+
+The final charged outer cost is54336.51933150017 seconds, about15.09 hours,
+including actual failures and necessary verification. Nested helper and
+solver counters are not added again. There is no C++ rebuild; pure writing,
+public I/O and lightweight tool-only bookkeeping are disclosed separately.
+The resulting recommendation is to pause repetition of these inventory
+feedback policies, preserve the unresolved intervals and integrate the
+finite E evidence into the stable GI-TBC account. A routing/loading
+follow-up requires a concrete gap distinct from the earlier resource,
+handling, closure and feasibility-learning work.
