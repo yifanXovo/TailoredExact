@@ -904,6 +904,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             if(value!="off"&&value!="on")throw std::runtime_error("Round154 proof floor must be off or on");
             ebrp::round153().proof_only=value=="on";
         }
+        else if (arg == "--round156-rn-refinement") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on")throw std::runtime_error("Round156 RN refinement must be off or on");
+            ebrp::round153().refine_rn=value=="on";
+        }
         else if (arg == "--round153-python") ebrp::round153().python=requireValue(i,argc,argv);
         else if (arg == "--round153-helper") ebrp::round153().helper=requireValue(i,argc,argv);
         else if (arg == "--round153-helper-sha") ebrp::round153().helper_sha=requireValue(i,argc,argv);
@@ -3609,6 +3614,8 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     if (!ebrp::round98KnownStateService(opt.round98_state_service))
         throw std::runtime_error("Invalid Round98 state/service mode");
     ebrp::round137Apply(opt, ebrp::round127().mode);
+    if(ebrp::round153().refine_rn&&(!ebrp::round153().enabled||!ebrp::round153().proof_only))
+        throw std::runtime_error("Round156 RN refinement requires the isolated proof-only floor");
     if(ebrp::round153().enabled){
         if(ebrp::round127().mode!="ms2"||ebrp::round146().enabled||ebrp::round149().enabled||ebrp::round148().enabled||
             ebrp::round151().mode!="off"||ebrp::round138().stock_rlt||ebrp::round143().rn||ebrp::round144().enabled||ebrp::round145().enabled||
@@ -3623,7 +3630,9 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         if(!opt.out_path.empty()){
             const auto path=std::filesystem::path(opt.out_path).parent_path()/"round153_parameters.json";
             std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
-            f<<"{\"enabled\":true,\"root_once\":true,\"node_limit\":4096,\"price_gap_target\":0.0001,\"wall_step_limit\":null"
+            f<<"{\"enabled\":true,\"root_once\":true,\"node_limit\":"<<(c.refine_rn?16384:4096)
+                <<(c.refine_rn?",\"producer_rule\":\"RN16384_original_gap\"":"")
+                <<",\"price_gap_target\":0.0001,\"wall_step_limit\":null"
                 <<",\"helper_SHA\":"<<std::quoted(c.helper_sha)<<",\"manifest_SHA\":"<<std::quoted(c.manifest_sha)
                 <<",\"offline_data_used\":false,\"formal_new_columns\":0,\"extra_root_LP\":0}\n";
             if(!f)throw std::runtime_error("Round153 parameter persistence failed");

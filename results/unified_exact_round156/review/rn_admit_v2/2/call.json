@@ -1,0 +1,101 @@
+{
+  "UTC": "2026-11-06T19:24:38.156783+00:00",
+  "kind": "MIP_full_domain",
+  "scope": {
+    "Bminus": 1,
+    "B": 3,
+    "gamma_L": 0.0,
+    "gamma_U": 1.0,
+    "cutoff": 2.0,
+    "stations": [
+      {
+        "i": 1,
+        "lo": 0,
+        "hi": 2,
+        "support": [
+          0,
+          1,
+          2
+        ],
+        "c": 1.0,
+        "omega": 0.17
+      },
+      {
+        "i": 2,
+        "lo": 0,
+        "hi": 3,
+        "support": [
+          0,
+          1,
+          3
+        ],
+        "c": 0.5,
+        "omega": 0.17
+      }
+    ]
+  },
+  "beta": 1.0,
+  "d": {
+    "1:0": 0.17,
+    "1:1": 0.0,
+    "1:2": 0.17,
+    "2:0": 0.17,
+    "2:1": 0.085,
+    "2:3": 0.085
+  },
+  "d_exact": {
+    "1:0": "6124895493223875/36028797018963968",
+    "1:1": "0",
+    "1:2": "6124895493223875/36028797018963968",
+    "2:0": "6124895493223875/36028797018963968",
+    "2:1": "6124895493223875/72057594037927936",
+    "2:3": "6124895493223875/72057594037927936"
+  },
+  "cap": null,
+  "node_limit": 64,
+  "online_wall_time_switch": false,
+  "whole_method_global_deadline_present": false,
+  "actual_Native_TimeLimit": null,
+  "actual_Native_NodeLimit": 64.0,
+  "actual_Native_MIPGap": 0.0,
+  "actual_Native_MIPGapAbs": 0.0001,
+  "Seed": 0,
+  "Threads": 1,
+  "model_SHA": "ebe05ecbf7badd54dce62f0c5116d9973be96dd3ffa22df92db78444a4c57369",
+  "t_bounds": [
+    0.39999999999999997,
+    2.0
+  ],
+  "scale": 1.0,
+  "anchors_exact": {
+    "1": "6124895493223875/72057594037927936",
+    "2": "18374686479671625/144115188075855872"
+  },
+  "numerical_guard_scaled": 2.1275e-06,
+  "objective_correction_scaled_exact": "0",
+  "full_support": true,
+  "old_joint": true,
+  "joint_transport": [
+    {
+      "row": "old_TS1",
+      "onehot_coefficient_correction_exact": "-1/18014398509481984",
+      "rhs": -0.4
+    },
+    {
+      "row": "old_TS2",
+      "onehot_coefficient_correction_exact": "0",
+      "rhs": -6.0
+    },
+    {
+      "row": "old_TS3",
+      "onehot_coefficient_correction_exact": "0",
+      "rhs": -2.0
+    },
+    {
+      "row": "old_TS4",
+      "onehot_coefficient_correction_exact": "0",
+      "rhs": -1.1999999999999997
+    }
+  ],
+  "matrix_readback": true
+}

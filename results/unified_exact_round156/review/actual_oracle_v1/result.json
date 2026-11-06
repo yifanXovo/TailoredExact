@@ -1,0 +1,39 @@
+{
+  "PASS": true,
+  "facts": [
+    {
+      "role": "R-X35-S-T2",
+      "method": "residual",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "calls": 1,
+      "positive_actual_row_lifts": 11,
+      "endpoint_SHA": "93cfb8b32edc045ca1551f8f4a0a50ce075b1d37d34faeb14bde1c71c148d341",
+      "Optimize": 0
+    },
+    {
+      "role": "R-X35-S-T2",
+      "method": "residual_U",
+      "lower": 0.22956027144967478,
+      "upper": 0.23612171136420015,
+      "calls": 2,
+      "positive_actual_row_lifts": 18,
+      "endpoint_SHA": "8f9ae6de02c9f62eada7784a62c8c44c5efd9b0a2c49acb6a81cd05ce76340fb",
+      "Optimize": 0
+    },
+    {
+      "role": "R-X35-S-T2",
+      "method": "RN",
+      "lower": 0.23603837292376867,
+      "upper": 0.23612171136420015,
+      "calls": 1,
+      "positive_actual_row_lifts": 0,
+      "endpoint_SHA": "297312718f945677db3ce43b6b703c07a9715946e113e5144de58d8a74df7d2f",
+      "Optimize": 0
+    }
+  ],
+  "Optimize": 0,
+  "source_SHA": "fde99c70e4737c2c241eee21751a2325708623c58b6cbc6d61ca8a7482480eb0",
+  "source_residual_SHA": "e5263c43d5f8a2dd787472dcb15b6837171e1eaa22bd15d6be1bfd09f5fb5e62",
+  "same_agent_independent_reconstruction": true
+}
