@@ -1,6 +1,23 @@
 # Research index
 
-Current study: [Round154 target integer pricing and proof placement](round154_research.md),
+Current finite study: [Round155 complete inventory coupling and persistent
+proof-floor gains](round155_research.md), with
+[mathematics](../results/unified_exact_round155/mathematical_analysis.md),
+[matched feedback loops](../results/unified_exact_round155/reports/matched_loop_comparisons.csv),
+[complete B/E pairs](../results/unified_exact_round155/reports/complete_pairs.csv),
+[within-run checkpoints](../results/unified_exact_round155/reports/common_checkpoints.json),
+[paper insertion](../results/unified_exact_round155/manuscript.tex) and
+[actual continuation record](../results/unified_exact_round155/RESUME.md).
+The six complete arms, substantive inventory continuations and final
+scientific checks have closed. K35/NC20 remain wider than1e-4 after sustained
+stagnation and one targeted level adjustment; E retains two difficult-pair
+proof gains with overhead on the fast control. See the
+[final report](../results/unified_exact_round155/final_report.md) and
+[scientific review](../results/unified_exact_round155/review/final_scientific_review.md).
+Actual publication/recovery/cleanup are tracked separately in RESUME.
+Stable GI-TBC and E/J default OFF are unchanged.
+
+Previous study: [Round154 target integer pricing and proof placement](round154_research.md),
 with [mathematics](../results/unified_exact_round154/mathematical_analysis.md),
 [complete-hull intervals](../results/unified_exact_round154/reports/scientific_table.csv),
 [nine-arm paired results](../results/unified_exact_round154/reports/complete_pairs.csv),

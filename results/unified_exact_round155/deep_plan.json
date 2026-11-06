@@ -1,0 +1,136 @@
+{
+  "UTC": "2026-11-05T20:17:19.489014+00:00",
+  "decision": "ADMIT_SUBSTANTIVE_CONTINUATIONS",
+  "roles": [
+    {
+      "role": "K-35-U",
+      "label": "bounded_deep_v1",
+      "fee_label": "K35_bounded_deep_v1",
+      "source": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\support_LP\\K-35-U_bounded_screen_support_v1\\result.json",
+      "source_SHA": "a722e226b1b9bbae474409ef90d8410a72146980cd430542b3cdc1984143444f",
+      "rule": "bounded",
+      "phase_seconds": 28200,
+      "outer_reservation_seconds": 28800,
+      "iterations": 0,
+      "price_cap": 120,
+      "deterministic_node_limit": 256,
+      "pool_solutions": 20,
+      "Seed": 0,
+      "Threads": 1,
+      "tolerance": 0.0001,
+      "lower": 0.2828596948801708,
+      "upper": 0.28732616330431715,
+      "columns": 34052,
+      "supports": 102,
+      "Q_SHA": "9816772328dd5e53c0dfd00e5f714fbaf08d2f93ac3cf0652ce5226a2452fcb5",
+      "retained_upper_witness": {
+        "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round153\\coupled\\K-35-U_near_optimal_zero_pool\\best_primal.json.gz",
+        "SHA256": "45ddbb73e7d5db774bcb1b3f413151b13ae1f5ceed0d638532b8ea5f9c304750",
+        "upper": 0.28732616330431715,
+        "objective": 0.2873261633063073,
+        "mass": 0.9999999999999597,
+        "negative_mass": 8.350750646535232e-12,
+        "full_marginal_error": 1.524558257415265e-12,
+        "true_completion_slack": 9.999995481296226e-09,
+        "original_Q_primal": {
+          "qualified": true,
+          "constraints": 9.822542779147625e-11,
+          "bounds": 1.3057332992616466e-12,
+          "objective": 0.2873261633063073,
+          "policy": "Inherited numerical LP feasibility qualification; not a rational primal certificate"
+        }
+      },
+      "first_new_columns_per_outer_second": 0.052396377146962825,
+      "bounded_new_columns_per_outer_second": 0.395677347235576,
+      "no_positive_weight_or_hull_improvement_claim_from_screen": true,
+      "interface_gate_SHA": "30f3446c1fcfa64aaa0dd153af20bb09c6bc8fb6145c5e5b590e4be491179479"
+    },
+    {
+      "role": "N-C20-U",
+      "label": "bounded_deep_v1",
+      "fee_label": "NC20_bounded_deep_v1",
+      "source": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\support_LP\\N-C20-U_bounded_screen_support_v1\\result.json",
+      "source_SHA": "1e3797ad83008c68aebeb23d0e617ab0b96522dc03683da492df91e2f22f4de0",
+      "rule": "bounded",
+      "phase_seconds": 28200,
+      "outer_reservation_seconds": 28800,
+      "iterations": 0,
+      "price_cap": 120,
+      "deterministic_node_limit": 256,
+      "pool_solutions": 20,
+      "Seed": 0,
+      "Threads": 1,
+      "tolerance": 0.0001,
+      "lower": 0.18332184845553887,
+      "upper": 0.1898677030967613,
+      "columns": 54344,
+      "supports": 75,
+      "Q_SHA": "fefd769b819d36a93dfaa8dc39670512109323cdd0123366e768443cdf2a1d45",
+      "retained_upper_witness": {
+        "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\coupled\\N-C20-U_bounded_screen_v1\\iter000005\\primal.json.gz",
+        "SHA256": "80a288d0b97160c698048b945da265d9abbed3bede4d276c261e5487a35de876",
+        "upper": 0.1898677030967613,
+        "objective": 0.18986770309676132,
+        "mass": 0.9999999999999947,
+        "negative_mass": 0.0,
+        "full_marginal_error": 2.1316282072803006e-14,
+        "true_completion_slack": 9.999999993709192e-09,
+        "original_Q_primal": {
+          "qualified": true,
+          "constraints": 9.094947017729282e-13,
+          "bounds": 4.6629367034256575e-15,
+          "objective": 0.18986770309676132,
+          "policy": "Inherited numerical LP feasibility qualification; not a rational primal certificate"
+        }
+      },
+      "first_new_columns_per_outer_second": 0.09263764894318822,
+      "bounded_new_columns_per_outer_second": 0.5707116247854047,
+      "no_positive_weight_or_hull_improvement_claim_from_screen": true,
+      "interface_gate_SHA": "30f3446c1fcfa64aaa0dd153af20bb09c6bc8fb6145c5e5b590e4be491179479"
+    }
+  ],
+  "budget": {
+    "G1_seconds": 8337.92544870032,
+    "remaining_G1_seconds": 164462.07455129968,
+    "by_category": {
+      "research": 1112.4833683003671,
+      "verification": 0.0,
+      "native": 7225.442080399953
+    },
+    "limits": {
+      "research": 172800.0,
+      "verification": 172800.0,
+      "native": 172800.0
+    },
+    "category_remaining": {
+      "research": 171687.51663169963,
+      "verification": 172800.0,
+      "native": 165574.55791960005
+    },
+    "separately_reported_seconds": 0.0,
+    "unclosed": [
+      {
+        "label": "prepare_deep_v1",
+        "kind": "research",
+        "reservation": 600.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\fees\\prepare_deep_v1\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "reserved_capacity": {
+    "two_substantive_continuations": 57600,
+    "remaining_three_E_arms_with_verification": 24300,
+    "one_observation_based_adjustment": 14400,
+    "final_verification_failure_margin": 21600
+  },
+  "selection_reason": "Bounded pricing returned more distinct legal columns per total paid second in both matched tests. Neither rule improved the hull materially or gave a tracked positive new-column weight; the longer opportunity tests whether more complete feedback removes the degeneracy.",
+  "loop_readback_SHA": "3da608e6b1c95e2c6632b0424c7a03fa4f4269b0c2642716e989bb8e613634ce",
+  "support_readback_SHA": "07bd66dff176a70153bc10f96df7bb2879c04fd79d3ff8b234a43e7fc56b422c",
+  "small_screens_do_not_establish_saturation": true,
+  "scope_is_complete_original_Q": true,
+  "independent_review_method": "separate exact arithmetic, actual matrix reconstruction and saved-primal readback; not a nonimplementer-agent review",
+  "no_runtime_instance_switch": true,
+  "offline_phase_capacity_not_a_hardware_based_algorithm_switch": true,
+  "targeted_adjustment_only_after_observed_stagnation": true
+}

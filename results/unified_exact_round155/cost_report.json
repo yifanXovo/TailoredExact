@@ -1,0 +1,840 @@
+{
+  "UTC": "2026-11-06T09:58:12.906824+00:00",
+  "budget": {
+    "G1_seconds": 54336.51933150017,
+    "remaining_G1_seconds": 118463.48066849983,
+    "by_category": {
+      "research": 24008.923871400533,
+      "verification": 1557.302975599654,
+      "native": 28770.29248449998
+    },
+    "limits": {
+      "research": 172800.0,
+      "verification": 172800.0,
+      "native": 172800.0
+    },
+    "category_remaining": {
+      "research": 148791.07612859947,
+      "verification": 171242.69702440035,
+      "native": 144029.70751550002
+    },
+    "separately_reported_seconds": 0.0,
+    "unclosed": [],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "receipts": [
+    {
+      "label": "column_usage_readback_v1",
+      "kind": "verification",
+      "reservation": 3600.0,
+      "G1": 15.114310499979183,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "116927d566a09d3f725a93ec90f2a7af47b38f5ff396c914445c62f2b518461e"
+    },
+    {
+      "label": "confirmation_001",
+      "kind": "native",
+      "reservation": 8100.0,
+      "G1": 7175.880293099908,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "7a4ce1a5fb8156f469d39f32834bf25d3c2a6a8d241750c23b8221ca7c7f8947"
+    },
+    {
+      "label": "confirmation_002",
+      "kind": "native",
+      "reservation": 8100.0,
+      "G1": 7183.030154600041,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "8430c7eb8ea51252363e702335ba643f25b5761eead5278a73a73abefff6b4cc"
+    },
+    {
+      "label": "confirmation_003",
+      "kind": "native",
+      "reservation": 8100.0,
+      "G1": 1.938000899972394,
+      "exit": 1,
+      "timeout": false,
+      "receipt_SHA": "b6ad5bef026529ce902340c0fbc2147dc5472e138daf4d46976956060f17e137"
+    },
+    {
+      "label": "confirmation_003_retry_v1",
+      "kind": "native",
+      "reservation": 8100.0,
+      "G1": 7177.600106999977,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "2b0ebb9d8665327a0e2875d402e40fa4e1efc1bae67d657eaf0fe0356976e9c8"
+    },
+    {
+      "label": "confirmation_004",
+      "kind": "native",
+      "reservation": 8100.0,
+      "G1": 7182.282141600037,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "22c164fa36329b45108c1ab9950a0852a316f8930ee496764311344b09ef5a0c"
+    },
+    {
+      "label": "confirmation_005",
+      "kind": "native",
+      "reservation": 2100.0,
+      "G1": 23.61082200007513,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "79358bff9b1a7ed9d29d951e04c3cd9ae8655da4e3f1d556fcdd66540f8b7def"
+    },
+    {
+      "label": "confirmation_006",
+      "kind": "native",
+      "reservation": 2100.0,
+      "G1": 25.95096529996954,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "2cc6860227d05ec490e616bf82ae43e4dfc18b8bf015cce1438614204339300a"
+    },
+    {
+      "label": "final_evidence_readback_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 14.173919399967417,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "3ecb1bf3325c53b6c74ba5a4061a3540eda3868de46b30eaea453d63e6b6f1c9"
+    },
+    {
+      "label": "final_provenance_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 3.5576203998643905,
+      "exit": 1,
+      "timeout": false,
+      "receipt_SHA": "0312d28e28c525d4e3a34454057998d481a5a3fc0ff17ca6827526bf7bb4d75a"
+    },
+    {
+      "label": "final_provenance_v2",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 11.39311489998363,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "ab95779169710e4b7ffa91f1b4eb7af2e73793a38b2a4c9460a9b20c3ed6d54b"
+    },
+    {
+      "label": "final_raw_checkpoint_report_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 0.2572977999225259,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "93508378d25508d06852fe722adcdf6578ec18fb4182485a2ec1533fbb2935ac"
+    },
+    {
+      "label": "final_raw_complete_report_v1",
+      "kind": "verification",
+      "reservation": 300.0,
+      "G1": 0.278435799991712,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "481cc82215e3044644325dc247a44943cf036f9690dd31536a412cfc0b1b3a9c"
+    },
+    {
+      "label": "final_raw_research_report_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 4.579760800115764,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "f8619f7017cc35f7b5a561b38250830988393739cccc7997a7c054c955de2c8a"
+    },
+    {
+      "label": "final_raw_research_report_v2",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 4.498714699875563,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "177f0dab49eb7e7d21f2c059ced8d263d5b5d6b0493baca236848d2e7f93c87a"
+    },
+    {
+      "label": "freeze_panel_v1",
+      "kind": "research",
+      "reservation": 300.0,
+      "G1": 2.6461130999960005,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "daf2167b37ae9a261233c7ffab1927e3559f7f1537ef91ce027251494d932181"
+    },
+    {
+      "label": "interfaces_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 0.667145499959588,
+      "exit": 1,
+      "timeout": false,
+      "receipt_SHA": "f4ad14e0b41b5ad852c2ffe6a06c14016d2f3c6b66aa33c553ebc8a5a1e4f4c2"
+    },
+    {
+      "label": "interfaces_v2",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 0.528896699892357,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "b4d04fb3f66f0c31814ed135eb6fedccbb63c3c2949526499cba9693c5ae33f1"
+    },
+    {
+      "label": "interfaces_v3",
+      "kind": "verification",
+      "reservation": 180.0,
+      "G1": 1.209882800001651,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "0fde93a8d70c1765608a2041ed9b90de8a934fb2cf076711d9d023f83a885c16"
+    },
+    {
+      "label": "interfaces_v4",
+      "kind": "verification",
+      "reservation": 180.0,
+      "G1": 0.8211009001825005,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "044a38dd3fb0da39e1597e7ac3a84b497a14f058b4e3442bf4ec22aba8aba5e4"
+    },
+    {
+      "label": "interfaces_v5",
+      "kind": "verification",
+      "reservation": 180.0,
+      "G1": 0.7882169999647886,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "174fabcd36d90ebd42bb1765a4560a3061961b4269f15145f140bc839d6b3b98"
+    },
+    {
+      "label": "K35_basic_checkpoint_readback_v1",
+      "kind": "research",
+      "reservation": 900.0,
+      "G1": 119.29276299988851,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "272ea9f5293138379ba71d7396e5930205c05b7621c7b6ec7cb20471cedcee0f"
+    },
+    {
+      "label": "K35_basic_support_readback_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 5.455024200025946,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "88534a63b61d00c981ef25b4536f9dc50827714226b6fde240210af5aa2571e4"
+    },
+    {
+      "label": "K35_bounded_deep_support_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 8.098835200071335,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "6cd3dfd126657c695e2109554f8d60d939bce2d48d11e76fabbbf3b8c83323e8"
+    },
+    {
+      "label": "K35_bounded_deep_v1",
+      "kind": "research",
+      "reservation": 28800.0,
+      "G1": 3244.787604100071,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "6eb653843cce56e926e973f292df1de880838fc3d649f52e212ebb1a8a789f65"
+    },
+    {
+      "label": "K35_bounded_remaining_v1",
+      "kind": "research",
+      "reservation": 24151.0,
+      "G1": 10047.581780399894,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "7fc153cd6c69594d10bb119f55cdf58e134204a4aa8d9655e5a3449e9234f867"
+    },
+    {
+      "label": "K35_bounded_screen_support_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 7.57159320008941,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "11042b9ad52521ebd157ca704913dc23e0800bb3c20258e3d0ead14e79af694b"
+    },
+    {
+      "label": "K35_bounded_screen_v1",
+      "kind": "research",
+      "reservation": 2100.0,
+      "G1": 394.2606295000296,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "f1b9e25de4625245699bc039ca68f78ec0376208114da4c230b6d554c3117cef"
+    },
+    {
+      "label": "K35_feasible_level_deep_v1",
+      "kind": "research",
+      "reservation": 25555.0,
+      "G1": 61.94101840001531,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "11033e0645591052bb4c6d2996660bb5f1e474f91e172d7bb9a980f79399ad07"
+    },
+    {
+      "label": "K35_feasible_level_deep_v2",
+      "kind": "research",
+      "reservation": 25493.0,
+      "G1": 1341.4391581001692,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "997e9f0a85d14f3aaf6ad225a9bfec68f99010d89c3599c5662c1c23484786c3"
+    },
+    {
+      "label": "K35_first_screen_support_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 7.532226900104433,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "aa2345ef8acd50e845e05b15ffec464bc271aeaab5bbf8480fb0f005bd78f020"
+    },
+    {
+      "label": "K35_first_screen_v1",
+      "kind": "research",
+      "reservation": 2100.0,
+      "G1": 248.1087569000665,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "449f1b77739892aebd8b6706af42f489ea29ecb81e4a537e5d81b5a82b1e248a"
+    },
+    {
+      "label": "K35_level_deep_support_v2",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 8.408092200057581,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "47ce288cfb075c5ea27c27d7f73a0b632229b86f4cd8b7a183c4dc1fe104e3f2"
+    },
+    {
+      "label": "K35_level_initial_readback_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 9.12887019990012,
+      "exit": 1,
+      "timeout": false,
+      "receipt_SHA": "4e26133cc291a078f672115fadcf721f09b6cdfe10694e52f39c42c4d830278d"
+    },
+    {
+      "label": "K35_level_initial_readback_v2",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 9.528721800073981,
+      "exit": 1,
+      "timeout": false,
+      "receipt_SHA": "ff87e352d6d35aff98970119623315a74a5db3969d45a0d0a5c6113c1424f7bd"
+    },
+    {
+      "label": "K35_level_initial_readback_v3",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 11.250085799954832,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "af30af7802da9f50e5573d67879c297fe31c8ee16aad4e561d747338eeb5af85"
+    },
+    {
+      "label": "K35_level_support_readback_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 5.587604200001806,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "1b35fe285dbc994097c242a8d2fcba56efbbe8fe93d8bb43e62b0a4a588d3ec1"
+    },
+    {
+      "label": "K35_level_v2_readback_v1",
+      "kind": "research",
+      "reservation": 1200.0,
+      "G1": 3.7558556001167744,
+      "exit": 1,
+      "timeout": false,
+      "receipt_SHA": "84c79fb1edb500a016817c70c8acb0ce1a908b93437982fa4c7b46b5a6e9daf6"
+    },
+    {
+      "label": "K35_level_v2_readback_v2",
+      "kind": "verification",
+      "reservation": 1200.0,
+      "G1": 47.25549310003407,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "b5ae9930bbefbe1bc0bdd77abc7cc447d0d0b91ef694c58b0480fe5ce84cd27e"
+    },
+    {
+      "label": "K35_level_v2_selector_readback_v1",
+      "kind": "verification",
+      "reservation": 1800.0,
+      "G1": 154.36812680005096,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "96a351b55d25cdb5ab2ff3ef15ff88ec7d435f64452402408c1dd3c5e98bcc80"
+    },
+    {
+      "label": "K35_remaining_deep_readback_v1",
+      "kind": "verification",
+      "reservation": 10800.0,
+      "G1": 420.309250399936,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "f13874292398ee82a71cabcdb240632763f3087a9bbe9f59b3453a0f8aeccdf9"
+    },
+    {
+      "label": "K35_remaining_deep_support_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 8.918971200007945,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "73df53ac00acc147b5382c39ce0e0add546ee5b1dfaabcc0fa5c128c6cf31dbc"
+    },
+    {
+      "label": "K35_remaining_support_readback_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 6.30601659999229,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "12f060c299d0b777ea84cef878d8f231d8d18e00a8eec91600a1c08039774f20"
+    },
+    {
+      "label": "level_admission_v2",
+      "kind": "research",
+      "reservation": 120.0,
+      "G1": 0.1958753999788314,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "0cdb731e10e861c94f99bdae6c5771ac1157855099f199eaf3a68c4fdd1c4b88"
+    },
+    {
+      "label": "level_admission_v4",
+      "kind": "research",
+      "reservation": 120.0,
+      "G1": 0.20465789991430938,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "20b36e0d2b172731ea555513706a831f76a14e4b1affb9039c5b9b0e9f75569f"
+    },
+    {
+      "label": "level_interfaces_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 0.5594974001869559,
+      "exit": 1,
+      "timeout": false,
+      "receipt_SHA": "7d61a14666e8c06f96b739cf544bed58afa1ce8020b09ebdc91aca7af0006806"
+    },
+    {
+      "label": "level_interfaces_v2",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 0.4143294000532478,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "7ce4a3ffc39e2d9a3777d46354b8d42270fc0bf6c4b1cf03dd4a516756c6a755"
+    },
+    {
+      "label": "level_interfaces_v3",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 0.41355399996973574,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "36aa7842edc1477491c1d0e918849f8ca0df8a29fe91377a499e5ae507f46b60"
+    },
+    {
+      "label": "level_interfaces_v4",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 0.42523769987747073,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "7aae7a0449aa055c96aeda03e3aa52161fa3b0f462d56acea157528fb083c161"
+    },
+    {
+      "label": "level_price_matrix_diagnostic_v1",
+      "kind": "verification",
+      "reservation": 120.0,
+      "G1": 0.7737317001447082,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "dd705a2e56b2e5185b193ff38063145eab1071502944764eacc97fb9cf090ffb"
+    },
+    {
+      "label": "level_price_omission_assessment_v1",
+      "kind": "verification",
+      "reservation": 180.0,
+      "G1": 12.00169870001264,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "021a857782b295050ccf8a17bbeb18d582468a99e94773fa3b74acec4193d905"
+    },
+    {
+      "label": "loop_admission_v2",
+      "kind": "research",
+      "reservation": 120.0,
+      "G1": 0.20020870002917945,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "a9dfcef82aab53e1ae5de38337cb8dc0bb110dcf3582907f2ae2bfae7d7f3a58"
+    },
+    {
+      "label": "loop_admission_v3",
+      "kind": "verification",
+      "reservation": 120.0,
+      "G1": 0.21613620012067258,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "fb4f935dc43db6bccc2315ed7f880777bf2403fe1d55e7e20e434066aba1be03"
+    },
+    {
+      "label": "loop_admission_v4",
+      "kind": "verification",
+      "reservation": 120.0,
+      "G1": 0.22419130010530353,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "6a26027f662c549f910c2c86e6f56c7d598bae271b894e7802ec42cf223a4fd1"
+    },
+    {
+      "label": "loop_admission_v5",
+      "kind": "verification",
+      "reservation": 120.0,
+      "G1": 0.21801539999432862,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "08cf35bcce88febe5e08637e34543b97d08dbbc3e71e7fc48509e85348eb75e7"
+    },
+    {
+      "label": "matched_readback_v1",
+      "kind": "research",
+      "reservation": 3600.0,
+      "G1": 97.9248158999253,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "0a497b939e2754c32273c3f4a1c2352292f4f803aec82583d9e5e4a4234f677e"
+    },
+    {
+      "label": "matched_report_v1",
+      "kind": "research",
+      "reservation": 300.0,
+      "G1": 0.6037789999973029,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "4faa84761e45f8cb459b71acf77106bf16ef09c66a1cc7d8068b0ec083a18b88"
+    },
+    {
+      "label": "NC20_bounded_remaining_v1",
+      "kind": "research",
+      "reservation": 28698.0,
+      "G1": 632.7089007999748,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "f82e85d26e2a95cc1161f056937e34e5f9a5f651c7f39f71c223460331100fd3"
+    },
+    {
+      "label": "NC20_bounded_screen_support_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 5.675490699941292,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "bb8144b632a63dcde0b529cfab50bc684b31d477f21f16aa7d23a0f5ddd99582"
+    },
+    {
+      "label": "NC20_bounded_screen_v1",
+      "kind": "research",
+      "reservation": 2100.0,
+      "G1": 190.9896264001727,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "260264c2e06ee7a1e9411c61a14a83c008c93f9edcdf82abd6cda2ab46264dc7"
+    },
+    {
+      "label": "NC20_feasible_level_deep_v2",
+      "kind": "research",
+      "reservation": 28800.0,
+      "G1": 101.86480799992569,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "eadad9cbba8fb83275fe27807a018dc9f9581e117ad72571054f495e99f05d11"
+    },
+    {
+      "label": "NC20_first_screen_support_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 5.65516240010038,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "7da774935b66d3b6098c695307e08cec7cf9f8197719ab546ccb0c42f045f36f"
+    },
+    {
+      "label": "NC20_first_screen_v1",
+      "kind": "research",
+      "reservation": 2100.0,
+      "G1": 129.53696619998664,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "4accad6aa9fdb301ae191c6a0d085456ee93fe77b32efd3dd89397f45e3dbd54"
+    },
+    {
+      "label": "NC20_first_stalled_continuation_v1",
+      "kind": "research",
+      "reservation": 28065.0,
+      "G1": 7294.46756749996,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "9577f55fe26940d6b9f60bf0098f7459686435f0c68d478f8ccedb3fb3bbdc9b"
+    },
+    {
+      "label": "NC20_level_deep_support_v2",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 5.935161300003529,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "935bad3333ad564ca50cd404df30b92a5221f4e5cb7ef35e0334f618f32c8ca9"
+    },
+    {
+      "label": "NC20_level_support_readback_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 3.811372499912977,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "1d24cf7fea4d7722b268cf49db79f4a97b9ebf03c08ad52aafb0b6f5844ec53b"
+    },
+    {
+      "label": "NC20_level_v2_readback_v1",
+      "kind": "verification",
+      "reservation": 1200.0,
+      "G1": 21.746189499972388,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "67b34dd37564286dfe5aa6f324d8eaea271ecda21c4b5f468b1e969ee74b325c"
+    },
+    {
+      "label": "NC20_level_v2_selector_readback_v1",
+      "kind": "verification",
+      "reservation": 1800.0,
+      "G1": 56.38562840013765,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "c7655d6e8494f684fc1492456bfe3a5fcc20a861350c36cb9fd956a78eb71aee"
+    },
+    {
+      "label": "NC20_remaining_deep_readback_v1",
+      "kind": "verification",
+      "reservation": 10800.0,
+      "G1": 64.63925519981422,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "2046cd44f9156723fd3f8987e63eb691731040e3e7ab73582e8677e10ebfa985"
+    },
+    {
+      "label": "NC20_remaining_deep_support_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 5.74073680001311,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "38025d974c268dc27665ae029861c139549db97b645be9ed4a52e037b46775be"
+    },
+    {
+      "label": "NC20_remaining_support_readback_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 3.726605299860239,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "f1ea256874905caf3d57044dc6c688fa5146e7424c85f95a6f2184c3a740796d"
+    },
+    {
+      "label": "NC20_stalled_continuation_readback_v1",
+      "kind": "verification",
+      "reservation": 10800.0,
+      "G1": 641.0481116001029,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "1fddf0bf6502b17c94e42da025b00ac7a065cacaafadc6d4a87bdd4accc70174"
+    },
+    {
+      "label": "NC20_stalled_continuation_support_readback_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 5.553563499823213,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "a5ad48642fc9b12fda54402e2395e1fc693367e1c199ce473d385f78d7c6dae8"
+    },
+    {
+      "label": "NC20_stalled_continuation_support_v1",
+      "kind": "verification",
+      "reservation": 600.0,
+      "G1": 7.3642229998949915,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "a007f14b72efa65f86a79a15a78949662898f2bf4d393e6f722cbb1a0eb2e47a"
+    },
+    {
+      "label": "panel_admission_v1",
+      "kind": "research",
+      "reservation": 300.0,
+      "G1": 1.7639832000713795,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "8e8cef6f18a931a25e4f8c7095cd11e9c7b3325130711a9614e0d03e3b97cacb"
+    },
+    {
+      "label": "panel_recovery_admission_v1",
+      "kind": "verification",
+      "reservation": 120.0,
+      "G1": 1.3290115999989212,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "ecde18aba6be2ac46d81a80452454c856bd1ba973bb7dc3b620e18db10b78345"
+    },
+    {
+      "label": "partial_checkpoint_report_v1",
+      "kind": "research",
+      "reservation": 300.0,
+      "G1": 0.12678609997965395,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "9d04e498877b4c20df34693022a08f9d22e66d539de8c4af646794017eb7eea4"
+    },
+    {
+      "label": "partial_complete_report_v1",
+      "kind": "research",
+      "reservation": 300.0,
+      "G1": 0.13428250001743436,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "0ff66d783f1facd48ccc95bcf127b5d90dbf304aa78d3149ce2983be7c519dbe"
+    },
+    {
+      "label": "prepare_deep_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 0.31353799998760223,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "98cdb8ec9e8828c7b659bfdf71e86ef5b6d2609bef1045be31339a86b47a6534"
+    },
+    {
+      "label": "prepare_identity_v1",
+      "kind": "research",
+      "reservation": 300.0,
+      "G1": 2.3794883000664413,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "dc8c2d6d3e5691f22730d38e1f4815bae4109075da429a3c3039d213e309181b"
+    },
+    {
+      "label": "prepare_level_deep_v1",
+      "kind": "research",
+      "reservation": 120.0,
+      "G1": 0.4823491000570357,
+      "exit": 1,
+      "timeout": false,
+      "receipt_SHA": "739bdaf4fdeffb01c7de66d8ac410c632e4e9a786b60618b7c4f767919ca0b19"
+    },
+    {
+      "label": "prepare_level_deep_v2",
+      "kind": "research",
+      "reservation": 120.0,
+      "G1": 0.4754886000882834,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "158af6394720a11f32bb6c6f2f0811420b12ccde2bf4a1233cf69ea0fd4b358d"
+    },
+    {
+      "label": "prepare_level_deep_v3",
+      "kind": "research",
+      "reservation": 120.0,
+      "G1": 0.28869549999944866,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "09d921e2c667808f1d2df5a9f1a84b98f91f0d74ab092cb5c371cc7e5a40f3e5"
+    },
+    {
+      "label": "prepare_nc_stalled_continuation_v1",
+      "kind": "research",
+      "reservation": 120.0,
+      "G1": 1.3662870000116527,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "c63e3432b90457a88167fe5748a50ad127f56a76d9b152020cab80b8c05ac7e2"
+    },
+    {
+      "label": "prepare_remaining_capacity_queue_v2",
+      "kind": "verification",
+      "reservation": 120.0,
+      "G1": 1.3994561000727117,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "fed9079611e383fa33583ae0e6881c8053aa6e4069ed4c0ab2a0e6ac69780e04"
+    },
+    {
+      "label": "prepare_remaining_capacity_queue_v3",
+      "kind": "verification",
+      "reservation": 180.0,
+      "G1": 1.898138599935919,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "92568324cb9c9150edb01bbb98096a566ca8de471cdb4d54661e94cf864d12ef"
+    },
+    {
+      "label": "prepare_remaining_deep_v1",
+      "kind": "verification",
+      "reservation": 120.0,
+      "G1": 0.8955559998285025,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "9fda9c3cd174b93f637523a7683afe1c3293a66233cef4f9fc6e8a5e82aff494"
+    },
+    {
+      "label": "price_transport_requalification_v1",
+      "kind": "verification",
+      "reservation": 180.0,
+      "G1": 14.424786200048402,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "8171404ee2fb4f187f22e7f6e2eeedc49e94f9056e1a1341ee1648769b4f4fe6"
+    },
+    {
+      "label": "source_checkout_diagnostic_v1",
+      "kind": "verification",
+      "reservation": 120.0,
+      "G1": 0.1454771999269724,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "de920636913e742ac838e20f0963d4f742d5b54e4ee0f1a3b9954b0732a8d135"
+    },
+    {
+      "label": "support_readback_v1",
+      "kind": "research",
+      "reservation": 600.0,
+      "G1": 16.177417099941522,
+      "exit": 0,
+      "timeout": false,
+      "receipt_SHA": "30f409388db7d8d7b32fa5915d1897ee79eb9e3b0df144b706228e60e974a396"
+    }
+  ],
+  "nested_Runtime_Work_H_helper_not_added": true,
+  "measurement_gaps": "Lightweight tool-only source/history/status/schema reads and prelaunch source hashing are not separately G1-metered. Reads during a running outer experiment do not add a second charge. Pure writing and public I/O are separate.",
+  "not_a_claim_of_complete_wall_clock_accounting": true
+}

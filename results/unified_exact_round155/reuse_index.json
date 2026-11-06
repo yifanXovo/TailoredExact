@@ -1,0 +1,4278 @@
+{
+  "UTC": "2026-11-06T09:53:56.516046+00:00",
+  "fixed_R153_science": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+  "fixed_R154_science": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+  "inherited_runtime_and_source_base": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+  "providers": {
+    "round153": {
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "path": "results/unified_exact_round153/public_manifest.json",
+      "SHA256": "8d8594b5916e2d254ae45b26bfe994ea79cd4692203628ba646c83c128aeaa8b"
+    },
+    "round154": {
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "path": "results/unified_exact_round154/public_manifest.json",
+      "SHA256": "41c3c4780ed47ea239e48f8b76c740193e0c3ca6588d4c696e92601afaa21bfd"
+    }
+  },
+  "dependencies": [
+    {
+      "member": "results/unified_exact_round137/inputs/N-B35-S.txt",
+      "SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "bytes": 2102,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "original N-B35-S complete-arm input"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "working_bytes": 2102
+    },
+    {
+      "member": "results/unified_exact_round137/inputs/R-X20-S.txt",
+      "SHA256": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "bytes": 1256,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "original R-X20-S-T1 complete-arm input"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "working_bytes": 1256
+    },
+    {
+      "member": "results/unified_exact_round137/inputs/R-X35-S.txt",
+      "SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "bytes": 2078,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "original R-X35-S-T2 complete-arm input"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "working_bytes": 2078
+    },
+    {
+      "member": "results/unified_exact_round153/candidate_decision.json",
+      "SHA256": "8a08ba10822ec968edd46d9bc873068b2ae54a8c1b787a3c712b47b89af30459",
+      "bytes": 5491,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "transitive inherited identity and proof references"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/candidate_manifest.json",
+      "SHA256": "c967115083253e238cbb05a4a56740eab5cec046d1b94c0ce86c2ee53254edcc",
+      "bytes": 28776,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "transitive inherited identity and proof references"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00000/pricing/result.json",
+      "SHA256": "98ea6809329e590af8dbda96b3c1e671464a03d805c03a859d36b7cce3cd665f",
+      "bytes": 56272,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00001/pricing/result.json",
+      "SHA256": "6ab98977ea0c33cc1f09a804ce6ae61d71f74a2095c7cb7b56cab33939174f38",
+      "bytes": 63098,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00002/pricing/result.json",
+      "SHA256": "e9fba393a2fc8186c2db99a546b9674ed4a71714c9a673c57adb5a20e24073ac",
+      "bytes": 55458,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00003/pricing/result.json",
+      "SHA256": "3ef359b36515c7c46aba523d8a4a8a9c19e28d4996bdcd7b31b555dd1bc5c28e",
+      "bytes": 61044,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00004/pricing/result.json",
+      "SHA256": "94d738e8965814bc0bf7446f57425d19598e9dedc88e4a50354b3362b53c622a",
+      "bytes": 52200,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00005/pricing/result.json",
+      "SHA256": "92cbbb10745121d3d2c31a3ea8e64ae82ad261522c392bc9b9e6353a28057945",
+      "bytes": 53913,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00006/pricing/result.json",
+      "SHA256": "a34715aacf8306dc14d2a82f6cc7371853889bf5f2715213bc71a6f808f8883d",
+      "bytes": 57970,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00007/pricing/result.json",
+      "SHA256": "bdfc71cae82a4a33945ed43d1b3d93caf113dbb59883533f08712c8a33112853",
+      "bytes": 53124,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00008/pricing/result.json",
+      "SHA256": "7f5f94d8fa7533ca30fe3a0da45a5213cbc69ddf6f86b64644a9cc827269ceed",
+      "bytes": 55814,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00009/pricing/result.json",
+      "SHA256": "76b0e934c3283f7ea20328e1e2420e179cf458a3b464bd83dd930ee3102dd4e5",
+      "bytes": 54212,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00010/pricing/result.json",
+      "SHA256": "2be823d4d378283031dca8cac5489da7d9c221ac49bb354beb0657e35d9dfc96",
+      "bytes": 60227,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00011/pricing/result.json",
+      "SHA256": "95649f428b4e09fcad0622f7d66af340b177a891ab8219bf5bc476a5ad2e4a3f",
+      "bytes": 58790,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00012/pricing/result.json",
+      "SHA256": "668d9ea446dc209f07e8f3597a8a7b7c49ece1b313b4babc6d8c4add82969656",
+      "bytes": 60879,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00013/pricing/result.json",
+      "SHA256": "0f330748bf2f8dd2b0a1cac8c0499743968e8d38d8b7754d3b2e5564be7247d4",
+      "bytes": 68116,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00014/pricing/result.json",
+      "SHA256": "b8538a25e82d6195aff687f37271ebdb91cf677218ae2fce2f06033d6c164472",
+      "bytes": 69170,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00015/pricing/result.json",
+      "SHA256": "f359b06c7872b073be9c2a68b6957e94ea39566c4750bbd7c72bd39ad6867bd9",
+      "bytes": 67204,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_initial/iter00016/pricing/result.json",
+      "SHA256": "3b4da4c048107ce7aa4356b05d433ee103dc789034b35d4eb16a8a4063b0662c",
+      "bytes": 67056,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level/iter00000/pricing/result.json",
+      "SHA256": "87f67f7bf4df56a1a99337e31e6157e32ba6d41581029901bac2bd4730c6ba8c",
+      "bytes": 68701,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level/iter00001/pricing/result.json",
+      "SHA256": "3999f66cc6fe51b088bf2759137c83e8309ca352859f082813ec47d8a7da0728",
+      "bytes": 72897,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level/iter00002/pricing/result.json",
+      "SHA256": "a3cfff36b66385725e0314ce2c2b9974a0592c20dfeb8530691654ec97621f6b",
+      "bytes": 70368,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level/iter00003/pricing/result.json",
+      "SHA256": "2aec7916a18e3dd07a59b1bec0844430a807aecb6290b55add3c7264ff3dc9c6",
+      "bytes": 72849,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level/iter00004/pricing/result.json",
+      "SHA256": "8e2468db4a1e4d4e3c595625d20340e1c455af363d2ec6fcca8f9e444200fb60",
+      "bytes": 68737,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level/iter00005/pricing/result.json",
+      "SHA256": "5dbbd8ae5eda1a503f46599d3157931b56d758e27a162c672768da929855bebc",
+      "bytes": 71196,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level_zero/iter00000/pricing/result.json",
+      "SHA256": "19956c981f65338d34b5dfbf483a4c3ff4a1077854dd4af9df8be31f5fbc80b4",
+      "bytes": 47451,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level_zero/iter00001/pricing/result.json",
+      "SHA256": "abd9f4384fba37a3947efa9b9d5cf9eaa7d0db47972a36141bbdd431d8f55b01",
+      "bytes": 52503,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level_zero/iter00002/pricing/result.json",
+      "SHA256": "d8c2aa35533fa8928d82c5c2f16b475458677935fa2022f2edfc91344cbd6f63",
+      "bytes": 44282,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level_zero/iter00003/pricing/result.json",
+      "SHA256": "64d5009e3dc48ab40448ba3758a2652732e328d7aae858fb17d0a4740262cb39",
+      "bytes": 41695,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level_zero/iter00004/pricing/result.json",
+      "SHA256": "527b590da3b5646f3e8d024cdb3176aaf7bd5b1e5c1125257325240aa81ba706",
+      "bytes": 43338,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level_zero/iter00005/pricing/result.json",
+      "SHA256": "ecd0a1f9289886a34715fffc0b7575686a1af235bf4fc251bf0affb76843e665",
+      "bytes": 42547,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level_zero/iter00006/pricing/result.json",
+      "SHA256": "d6b3f12f24304935497bc96e142a883146d23d90a0457471f2a6a5bc4d40d4bd",
+      "bytes": 42543,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level_zero/iter00007/pricing/result.json",
+      "SHA256": "602a5cc603b55429de7db2f835ae256c47e691b380f95aa9ab0a67501766953b",
+      "bytes": 41837,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_level_zero/iter00008/pricing/result.json",
+      "SHA256": "536e90593cc24e140a3a13d21a3b31da1270d232d08db791031310dcd32c519d",
+      "bytes": 41827,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/best_primal.json.gz",
+      "SHA256": "45ddbb73e7d5db774bcb1b3f413151b13ae1f5ceed0d638532b8ea5f9c304750",
+      "bytes": 47730,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "actual retained upper witness"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00000/pricing/result.json",
+      "SHA256": "d5bbf81b1695d691779f2ec4583d9cd5a87c128df6e015896114555e12bb6d80",
+      "bytes": 48350,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00001/pricing/result.json",
+      "SHA256": "4868e26fb7e92dbb7ca2cd8400e0f505536bec5a6af9eafcb8d720791d56a14d",
+      "bytes": 44482,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00002/pricing/result.json",
+      "SHA256": "9fe8efd4feaac38ac7dd20fa0424f04503dd28517f51e5c78990e696f5d9bffd",
+      "bytes": 46334,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00003/pricing/result.json",
+      "SHA256": "8371594fbdbbc467ee55ef3c7531dd37f2b8930b51e954824440ee6c3622a71e",
+      "bytes": 46438,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00004/pricing/result.json",
+      "SHA256": "20762135e774ad9de0222878344c7b217399766d740c6e606d3e913954f3fcd6",
+      "bytes": 42683,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00005/pricing/result.json",
+      "SHA256": "d181ce49d9d1b1c707cb65d77133b264d61bf0f5db142e8f99df56972f3fc3d5",
+      "bytes": 40143,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00006/pricing/result.json",
+      "SHA256": "04b35f0e785abf31730952e999f770656b72d738bc705dfe8523c96bece26e1d",
+      "bytes": 46130,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00007/pricing/result.json",
+      "SHA256": "04e345fe827ef955a02b8c5cca4d59d64dc3264b6969ae2f6ddb802ff05756e8",
+      "bytes": 43620,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00008/pricing/result.json",
+      "SHA256": "5299127ee3894b0a0c8b6536dcad867c5972428ac73c97ad6a468b567dbbc07a",
+      "bytes": 39475,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00009/pricing/result.json",
+      "SHA256": "5324a9e53855dc43f9f4aacc83840ea4d0fccef44e9a1ae945a86a67d398a897",
+      "bytes": 40354,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_near_optimal_zero_pool/iter00010/pricing/result.json",
+      "SHA256": "ed1be4f66ec365c5aab36939a7c186c225654df067827f4a8474362729b418ba",
+      "bytes": 37668,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_paid_partition_overlay_v2/pricing/result.json",
+      "SHA256": "23e5f3ff1951c739ca20df2245383e72b4a9f5def1c007efb01e8418c7037bb2",
+      "bytes": 923573,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_post_primal_fixed_long/pricing/result.json",
+      "SHA256": "f1854caa0bbb70e68ac9610a96e4beb420945162fd0b029d455e5c5cbd922bda",
+      "bytes": 51540,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_price_deep/iter00000/pricing/result.json",
+      "SHA256": "d37a6cd7bc83b0fdfa4a04772d3aec74731624f7fc6a0fb7ccd38d1726b7527e",
+      "bytes": 46148,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_price_deep/iter00001/pricing/result.json",
+      "SHA256": "1848347470dd849b9a270ba9107d46559c7ef46cf7cf087fd2a619fd54551636",
+      "bytes": 42067,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_price_deep/iter00002/pricing/result.json",
+      "SHA256": "28024b44df45447b94f06e6493c122eaa74bd328ec3cdad86362b48f0fe175a4",
+      "bytes": 41196,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_price_deep/iter00003/pricing/result.json",
+      "SHA256": "39201e20cddd7f23cab0fba099028ad9dd03b5dc09865c5de3dede534de414cf",
+      "bytes": 43145,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_price_deep/iter00004/pricing/result.json",
+      "SHA256": "2929df71aca055e9c89a2294683ef4f00084bb2fbcb2bc1c51cfe944526e1fbc",
+      "bytes": 46432,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_saved_direction_bins16/pricing/result.json",
+      "SHA256": "5c0c876ff60e4e4c29f73b08cb1962e381c8c8f92ffb08e17d20ec3cfd66623a",
+      "bytes": 229941,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_saved_direction_bins4/pricing/result.json",
+      "SHA256": "dfd658d32cf814c1d99335e06dbee6888168be9543aa9df816373deafb5231f0",
+      "bytes": 86702,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_saved_direction_graphcut/pricing/result.json",
+      "SHA256": "880c7369eb9f358b148336f5f51ad5830fc191430876f62872531e518b620e98",
+      "bytes": 124010,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_saved_direction_long/pricing/result.json",
+      "SHA256": "c74b9c20a16a098ef1566d18ed6514aa785337d48ddc7a494eb8783b3ec25173",
+      "bytes": 51928,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_saved_direction_transport/pricing/result.json",
+      "SHA256": "51d45dda6c3f9065f1e03c0e703797d28534292886e712a8462ae850eca88be5",
+      "bytes": 38791,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00000/pricing/result.json",
+      "SHA256": "6b096ad8bd2e3b3637bdbfa8bdab31a0c2d3dcf26acb4037dfd22eb7ae247a89",
+      "bytes": 65958,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00001/pricing/result.json",
+      "SHA256": "f915f10df9095b41c6ed97ff263ca7825deb1f258e57ef210bace4b95f230dd3",
+      "bytes": 64525,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00002/pricing/result.json",
+      "SHA256": "eee6de17692817cc87daefb96e6b4e21fbcc8ea4a5687e07c0b6e89c64626c08",
+      "bytes": 66185,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00003/pricing/result.json",
+      "SHA256": "d1df46fb61525c6f03cfad36171de042e453cde189de624a4dc43569f32baf9e",
+      "bytes": 69538,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00004/pricing/result.json",
+      "SHA256": "f0ecc3e1a6a626594cd28b8b5173e558abdff7120ba98bc06b77c03af1afa17a",
+      "bytes": 66214,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00005/pricing/result.json",
+      "SHA256": "7722982a14311a709fe8b641f3be13fd49d03edd5175de04eb2f8c8d7ed061e1",
+      "bytes": 67084,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00006/pricing/result.json",
+      "SHA256": "355ac80fc57ba1d595cf802bc796cc2ccc38906170b6fd44745dd141e97a54a5",
+      "bytes": 69544,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00007/pricing/result.json",
+      "SHA256": "f79e6dcf5f6d54371db88e2c09797394392ce7535f1b189ad898bbac94f2baa9",
+      "bytes": 77080,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00008/pricing/result.json",
+      "SHA256": "a05eef22395c062f97ad871016473fcab703534e329e8e74649877c3dc912fc3",
+      "bytes": 68683,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00009/pricing/result.json",
+      "SHA256": "b9b990b38199ac6873e93045fed825dcb8c4e11e26ba42cf873a428c25f50c09",
+      "bytes": 66242,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00010/pricing/result.json",
+      "SHA256": "de036e6beb33c04e8b552663a670942aa338772f4209d575e6a8a972444c367f",
+      "bytes": 68748,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00011/pricing/result.json",
+      "SHA256": "d93533414dada81fadc121122986a85be9fc81ea6711fc81002897d84a703999",
+      "bytes": 69571,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00012/pricing/result.json",
+      "SHA256": "22b4e7c8e023e5b8ef29e8f1a43302b854bc0e22a8f84a039ba736c29d52ecfd",
+      "bytes": 72833,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00013/pricing/result.json",
+      "SHA256": "fb0226afe12419b4157bd09274c580a4f5af0bb6d96dfae2ff714494437b5597",
+      "bytes": 71275,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00014/pricing/result.json",
+      "SHA256": "732e31a9b05a9e14b887697fb096b49df16fd322efa9d8a9bb2d98942f898b1f",
+      "bytes": 68743,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00015/pricing/result.json",
+      "SHA256": "0a1d644d794cb8956c9ea36866955b7b145cd278df53ff727c362311ccf67061",
+      "bytes": 68761,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00016/pricing/result.json",
+      "SHA256": "aa54dadd4eb891bbde00642d9d23dc866157b14c0e3abe672e5bcb693c9a754d",
+      "bytes": 72044,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00017/pricing/result.json",
+      "SHA256": "6f5bd5c847d3d70267c6fe55b8fd113ff54b2f1edd8243685c370cbe358cf153",
+      "bytes": 74483,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00018/pricing/result.json",
+      "SHA256": "0bd8b2d9ed675d8cd98f52760f6872ae0e6d822fc996a5acbb79fab308f83473",
+      "bytes": 70383,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00019/pricing/result.json",
+      "SHA256": "a475b678559745423de1b291837db3d680e9d57f04a1a399f9b048aaa9919c1b",
+      "bytes": 76236,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00020/pricing/result.json",
+      "SHA256": "d7f16c6e78693442cd097c58c18bf0da93ba7480b2941932f6f145f7185c3036",
+      "bytes": 69573,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00021/pricing/result.json",
+      "SHA256": "d90f3b782144e21dfdf595bf91016e4e894f78067a26933fb6ff75560f68019b",
+      "bytes": 69489,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00022/pricing/result.json",
+      "SHA256": "930791b61a17004d90c6b713360b98fc8a690ce2c991c08ed9056234679ae6f2",
+      "bytes": 69551,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00023/pricing/result.json",
+      "SHA256": "af0023ad76c2ec6af09ea2b7f75066ad7bddee3272dcf72786d3bd83d08e46b2",
+      "bytes": 77064,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00024/pricing/result.json",
+      "SHA256": "66ca88830b29bbc4a47b7bdfb85c13441a893ecefa37279c689c6951174651c3",
+      "bytes": 64516,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00025/pricing/result.json",
+      "SHA256": "606944570cf100d7d33927c58b035d746a9dc1d2af7d06e399e46cdc709c1e89",
+      "bytes": 74514,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/K-35-U_stabilized/iter00026/pricing/result.json",
+      "SHA256": "6b92b7d44d39df3cc4bbf388b4dac9634ef3d41fb7d55d02a860fd3556c5c2b7",
+      "bytes": 68705,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-B35-S_floor_closed/result.json",
+      "SHA256": "a564e1ccc4d46140ee102819e3a1c082bcc4b14db12cad344325aada21b6bd7c",
+      "bytes": 418188,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S starting full pool/supports/interval"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-B35-S_initial_v2/iter00000/pricing/result.json",
+      "SHA256": "c4bbfdaeeedbebc01fd7ed89d1ae92ad594fa55a64b9102a1de6b813fea8332f",
+      "bytes": 71874,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-B35-S_initial_v2/iter00001/pricing/result.json",
+      "SHA256": "bc6d8212fb6b4e4147433d2218d1e7a472717cf79e2800da73c28b4abdf60e3f",
+      "bytes": 65470,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-B35-S_initial_v2/iter00002/pricing/result.json",
+      "SHA256": "0fadc8834d986e28ec58380ad7ceda0815aad9bfce08d21c282c2b6fe402167e",
+      "bytes": 60606,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-B35-S_initial_v2/iter00003/pricing/result.json",
+      "SHA256": "d4c9754c8f2d8c8d7ee74f2441a2d2b218659f3eb201e71601e7fa1bbda6465f",
+      "bytes": 69378,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-B35-S_initial_v2/iter00004/pricing/result.json",
+      "SHA256": "b979432bb7629a8169ef05561cb61a38b5f0e6c0e49a2f7a2e6666bfd96c3b37",
+      "bytes": 63585,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-B35-S_initial_v2/iter00005/pricing/result.json",
+      "SHA256": "3819dd2e7d52191e8bac3e60f9f891560e308605e88a43a4b96f7b23f33d3aaa",
+      "bytes": 71239,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-B35-S_initial_v2/iter00006/pricing/result.json",
+      "SHA256": "d0922bdbf412b0597c006dde795afcdc4a7a175010f5be0b1f52f36fbd618c0b",
+      "bytes": 66060,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-B35-S_initial_v2/iter00007/pricing/result.json",
+      "SHA256": "374c8abe09658461692ec4b23a9c07fe6b0a8917dda9a560cdee296cc82d4e6f",
+      "bytes": 76407,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00000/pricing/result.json",
+      "SHA256": "898da2c28edc69d853ca5ed6289cea8f2d88af795504f0675d9f3780434b454f",
+      "bytes": 54451,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00001/pricing/result.json",
+      "SHA256": "557e946692f052fd0c1bc044b10b9dbf6f7b3bd19dc57694bf9496620f77a78a",
+      "bytes": 58538,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00002/pricing/result.json",
+      "SHA256": "b97f504a304b05eb79cc8ebc8016a5b3900335b75d5b86251d791fea4cba3c93",
+      "bytes": 56654,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00003/pricing/result.json",
+      "SHA256": "fa2db8159ee30a52063f3e8a78452856043df421cb45feab7fe5ac3cb44fc419",
+      "bytes": 56653,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00004/pricing/result.json",
+      "SHA256": "1fabd57ef07d19f0acf7635e078f6c5c91eebbc036e84c17fa781c39de370de4",
+      "bytes": 55981,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00005/pricing/result.json",
+      "SHA256": "fe34707747007dcbf15f4d50ff1da4796df56d4fc8a042838894e553f3068fa3",
+      "bytes": 62007,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00006/pricing/result.json",
+      "SHA256": "44fa2982780041c04ab40174e37ec36627baf9b2d2a487dedd2ee574d7b8a971",
+      "bytes": 58644,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00007/pricing/result.json",
+      "SHA256": "ada63f8dd8de9cdc0e1393843534f765483a13465c751886691e03dd1071da29",
+      "bytes": 59383,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00008/pricing/result.json",
+      "SHA256": "4e05c61513e267f6c55ffcadd30fc3844083a62f73672e498412ab6ef55cfbb5",
+      "bytes": 56055,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00009/pricing/result.json",
+      "SHA256": "9fb01e5a2525efc00ed389736c480606323daad27c3c93eccc959120dcc7f514",
+      "bytes": 59368,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00010/pricing/result.json",
+      "SHA256": "b31db2015243e6c314064421bbed970c0ab6cc96411d15e772292bbcf3978faf",
+      "bytes": 57367,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_initial/iter00011/pricing/result.json",
+      "SHA256": "358c8f9819909126571b51abcf90b597b4e8565a38fe5bda89d93aec3e83c728",
+      "bytes": 59371,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00000/pricing/result.json",
+      "SHA256": "ecae8af926f1de6418750faffa7bcf443265a338dbe051c7711c4a5542f77ff0",
+      "bytes": 38545,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00001/pricing/result.json",
+      "SHA256": "452b848b8bee08db053966dd30a48eb940911409a0c7970b0980fb5d0f5ce89f",
+      "bytes": 37491,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00002/pricing/result.json",
+      "SHA256": "277d1cd4e6e3c7c29bb5e3b7080a32e541e643a120c94a02f3eece63d8b2540f",
+      "bytes": 35380,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00003/pricing/result.json",
+      "SHA256": "d917642d5191fb04d44c6d7e4635a9783e486aad8403b4e1f5f9136485484c31",
+      "bytes": 37338,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00004/pricing/result.json",
+      "SHA256": "a40fd93f29606fb27347c8eb2d1427699ba5e4b5bdfbe050e97046f3f4a22088",
+      "bytes": 38741,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00005/pricing/result.json",
+      "SHA256": "ceeb3f64f5d77b1bb336beeacabb5ffff42fed43b38e312a97bc4a1b10d730f0",
+      "bytes": 36718,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00006/pricing/result.json",
+      "SHA256": "9c03e10ce32d13b16c126894dfcf1812d238213323f6be67c195f3dfb31ad643",
+      "bytes": 36209,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00007/pricing/result.json",
+      "SHA256": "f00822e3c7dc2d6df1f833aa94e1afb93b50d837ece0a1fd0ef87fc082ba2f27",
+      "bytes": 41752,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_continued/iter00008/pricing/result.json",
+      "SHA256": "67b1a91469d5af7f156213266f607e892c6af2600cbb40ef4e62c64b569a31f7",
+      "bytes": 41558,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_deep/iter00000/pricing/result.json",
+      "SHA256": "0275c679ec41d14a8fd75f7eed2579aa8877e09cfc740cbd8b4e6535b02b3da0",
+      "bytes": 35739,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_deep/iter00001/pricing/result.json",
+      "SHA256": "537a14f20b9a99a1068a09358e2615a58e5bcdc5250733f5015eb001941cabe5",
+      "bytes": 34248,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_deep/iter00002/pricing/result.json",
+      "SHA256": "4d3c83c1574fdba8866c86241bd0f6d7cda559320fe42aea1336b78400e20e50",
+      "bytes": 42397,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_deep/iter00003/pricing/result.json",
+      "SHA256": "213880ca9acf62a74fc93541e255db90d6147e4742c1194cc65e74a8b15353d5",
+      "bytes": 35044,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_deep/iter00004/pricing/result.json",
+      "SHA256": "ea2f5fd480b76205c8b78748b601aa791afec7674287b37deabf96f94bbddd50",
+      "bytes": 40074,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_deep/iter00005/pricing/result.json",
+      "SHA256": "206899b34540358d815e1c542e4faf3763e9dbca39f36bdc187530fedd98f14e",
+      "bytes": 38685,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_level_zero_deep/iter00006/pricing/result.json",
+      "SHA256": "dc5a6a38387e9c9f36bee91d1c23437dd736668f037c96f0c18f8913b85e78af",
+      "bytes": 38428,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00000/pricing/result.json",
+      "SHA256": "f0653333f212c974b6277a827a544f98a36ccb51e5704a60810b9b4dc57892b4",
+      "bytes": 47859,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00001/pricing/result.json",
+      "SHA256": "93e8bdd0226ccff5cf244d1d253922b90de75942f27a129b0af9ba74db847599",
+      "bytes": 48161,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00002/pricing/result.json",
+      "SHA256": "476f1999768046d6ce070d94e39e11d2bad2499f195dc6dcbe781972d04f31df",
+      "bytes": 37657,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00003/pricing/result.json",
+      "SHA256": "f4cced0f2d1159eb96468059e68e91e7aedea1d6a74f7f1bec3808b9484ac5e0",
+      "bytes": 40672,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00004/pricing/result.json",
+      "SHA256": "b4951d7a3a1adc7dbf90c67cc974ed755646e747335e34e0ad1dd52980adc5a4",
+      "bytes": 44449,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00005/pricing/result.json",
+      "SHA256": "47c350df4020905ca5fdc1c62736db5929a211aed0c34efb907f94d1ff7c2d7e",
+      "bytes": 41648,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00006/pricing/result.json",
+      "SHA256": "ecce7af8529336a54b9c2b254a914353045c6a64168bdf09af9a9b16b2ee01de",
+      "bytes": 39612,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00007/pricing/result.json",
+      "SHA256": "aaeabd793d1cc1cce8fec88093f6b8cdf4fa367060c70bcbfa040a212123cf88",
+      "bytes": 42542,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00008/pricing/result.json",
+      "SHA256": "4ef82eba3bb6ff750616c0f0f274badd033716d4b64e6ff43ffbdaac54111f1e",
+      "bytes": 43158,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00009/pricing/result.json",
+      "SHA256": "a7bad0735f235c9832909b0c11d7217e53bbc2a4f9100c93499d7fadedbf895b",
+      "bytes": 42006,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00010/pricing/result.json",
+      "SHA256": "71f43fb33eeaf9f0e018d220b0c7d650cde8cb4b2e93a8504007af7b64723fb6",
+      "bytes": 39318,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00011/pricing/result.json",
+      "SHA256": "97ff0322a977296a94da8927979af3ecbd5fe65cf27aa44c2f44972fb3152416",
+      "bytes": 38544,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00012/pricing/result.json",
+      "SHA256": "3ea442dbe6110e9da6f1579d6aa683087a0b7a3e67047a218e030a4b465adf6c",
+      "bytes": 40683,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00013/pricing/result.json",
+      "SHA256": "b50f827b8f551042f8737a360a591736e12613dd229d1d4cf43d76d54364edad",
+      "bytes": 39435,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00014/pricing/result.json",
+      "SHA256": "c417d67f2b480dd949cec872502e80ec6e81d8f2591024906c8e19c5270d4bb6",
+      "bytes": 40854,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00015/pricing/result.json",
+      "SHA256": "d3521316429137a9a8606b49ef6266a20dd2234a6c27ab0dad86777ef030559f",
+      "bytes": 40745,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_near_optimal_zero_pool/iter00016/pricing/result.json",
+      "SHA256": "dcaa467816af976bed021ddbc32d50541bdb5f9cf89c5de22e89cdfe40cbadb0",
+      "bytes": 41224,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_post_primal_level/iter00000/pricing/result.json",
+      "SHA256": "c0de9272aa1ea123cc53d248d685fe1fed71e9aed2e47ef6aa3d01c91230b49e",
+      "bytes": 39067,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_post_primal_level/iter00001/pricing/result.json",
+      "SHA256": "cbf838a012b795e7d71a129dcc64ef88033679f9b99653f21478b087374ece23",
+      "bytes": 39110,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_post_primal_level/iter00002/pricing/result.json",
+      "SHA256": "8f47eab653f03b18a64cda121f70a0053d91b0a45588e87041d1f4e89489a773",
+      "bytes": 39227,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_post_primal_level/iter00003/pricing/result.json",
+      "SHA256": "5af1a9c32a296819fdc2ccc3bc5e5bf58868ed1205e18dd64a74104cda6d700a",
+      "bytes": 37686,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_post_primal_level/iter00004/pricing/result.json",
+      "SHA256": "a7fc1b6260ea68df3e92c8ce98946d0cd91324b22a75aa5f4db5c75e84f35765",
+      "bytes": 38508,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_saved_direction_graphcut/pricing/result.json",
+      "SHA256": "c962f4182beaacf1ab9eeafa092c122f1d7064fd9df7436ff303e4d5b2cb0419",
+      "bytes": 106995,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_saved_direction_long/pricing/result.json",
+      "SHA256": "5246514e967e0adf296d031ce76dd1b2feec8ab3cc46c743f5ede50c71dba66b",
+      "bytes": 45564,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/coupled/N-C20-U_saved_direction_transport/pricing/result.json",
+      "SHA256": "662591c693317c1efed8d423c919b33f4ddaeb64ca75c2d6714823dc02cf2109",
+      "bytes": 34180,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/floor/N-B35-S_deepening/pricing/result.json",
+      "SHA256": "14ceddda2fc362d1391fb707d44356e736e4815f2466002b818a09eea29cae6d",
+      "bytes": 69976,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/reference/K-35-U/direct/model.mps",
+      "SHA256": "9816772328dd5e53c0dfd00e5f714fbaf08d2f93ac3cf0652ce5226a2452fcb5",
+      "bytes": 21477500,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U complete original free Q"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/reference/N-B35-S/direct/model.mps",
+      "SHA256": "2dc40ea292e2d335b76844d8da63ed35bf797f440a0771cf094026e14adfaf4d",
+      "bytes": 15891759,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-B35-S.zip",
+      "used_for": [
+        "N-B35-S complete original free Q"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/reference/N-C20-U/direct/model.mps",
+      "SHA256": "fefd769b819d36a93dfaa8dc39670512109323cdd0123366e768443cdf2a1d45",
+      "bytes": 22795026,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed archive member",
+      "archive_reference": "round153/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U complete original free Q"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/reuse_index.json",
+      "SHA256": "7b34bf47df3708236078b6594dcf3eb26d7b92000207ad521751b446293d2a9d",
+      "bytes": 363961,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "transitive inherited identity and proof references"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round153/source_manifest.json",
+      "SHA256": "477ba76dd88647ccd929976e7f3ba481ce69da35174519c0836142e1415aaf7a",
+      "bytes": 103014,
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "transitive inherited identity and proof references"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/candidate_decision.json",
+      "SHA256": "fd5a75306769c2b285ae5cc7a030cea761068f8d4e83a9eeb23e371d245c9fb5",
+      "bytes": 1617,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "transitive inherited identity and proof references"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/candidate_manifest.json",
+      "SHA256": "3209fff9ba2aa003605ba09511eb499bd002ad43eb44c60b9ada3ca67b07351e",
+      "bytes": 28687,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "transitive inherited identity and proof references"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/K-35-U_target_residual_v2/iter00000/pricing/result.json",
+      "SHA256": "7c5d064247369dfb21c7c8096bea711ebdf4f17012d0ddbe9b88b7deb74b589a",
+      "bytes": 227118,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/K-35-U_target_residual_v2/iter00001/pricing/result.json",
+      "SHA256": "fb8f8dc7c904161bd49154ab77c64f2781fd6af7fdbbf4c660a3fe8ba7c42d70",
+      "bytes": 227244,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/K-35-U_target_residual_v2/iter00002/pricing/result.json",
+      "SHA256": "5181fca62f32bae66cc0b8573f045a7ed16edd7dbbcc4d4ad01fbd5ca2ff8145",
+      "bytes": 227323,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/K-35-U_target_residual_v2/iter00003/pricing/result.json",
+      "SHA256": "06290f060f7e437939edb5748469a3251ed836f2bd736a5f08baa9f26445a8f0",
+      "bytes": 227321,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/K-35-U_target_residual_v2/iter00004/pricing/result.json",
+      "SHA256": "f401fc29c074e509a443a6c4bad08c040c6f17b4043685d0be8ff400eb2345f2",
+      "bytes": 227467,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/K-35-U_target_residual_v2/iter00005/pricing/result.json",
+      "SHA256": "04a149151aaf69486f53791b3746b439566371d45503757ea3b1ff66c4251525",
+      "bytes": 227318,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/K-35-U_target_residual_v2/iter00006/pricing/result.json",
+      "SHA256": "8715a66b493c2cb368a6a3dfa70ff2912330e01e5b90bfc7acb2b06bba4fc3ad",
+      "bytes": 227382,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/K-35-U_target_residual_v2/iter00007/pricing/result.json",
+      "SHA256": "3cc9dcb4cf8ef20c6e58126aac57306f75889fcee0f6db61d62396847f10f311",
+      "bytes": 227421,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/N-C20-U_interior_final_refresh/result.json",
+      "SHA256": "cae53c3a85f6c7ad71ea81cb7b5747d6139a5612c15d0e3bb5e3c97e579b405d",
+      "bytes": 11673778,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U starting full pool/supports/interval"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/N-C20-U_target_residual_v1/iter00000/pricing/result.json",
+      "SHA256": "738922db5354d2ff32ce7cd8972c2abac84fd7da659e8ec84c95abc42fae3fb7",
+      "bytes": 188315,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/N-C20-U_target_residual_v1/iter00001/pricing/result.json",
+      "SHA256": "3609e410b9369d8edab2c2bad6093478b4447030d3ce1b1293a131f00288a6bf",
+      "bytes": 188423,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/N-C20-U_target_residual_v1/iter00002/pricing/result.json",
+      "SHA256": "be093474e356bf38613bd2578763f7f56ddd31014a295db542ebb2e68e936c2e",
+      "bytes": 188960,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/N-C20-U_target_residual_v1/iter00003/pricing/result.json",
+      "SHA256": "e9d96f8396c5284f801cb2653827ba4d319df469723de3063388a6f691d81e64",
+      "bytes": 189685,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/N-C20-U_target_residual_v1/iter00004/pricing/result.json",
+      "SHA256": "82ef173925b3c319895c3732bf903d6bc6396e1f76154250ae51a9334e2cb0de",
+      "bytes": 189084,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/N-C20-U_target_residual_v1/iter00005/pricing/result.json",
+      "SHA256": "f5877fd65b673c16cb24b07c35175da2f52b11d3caac43b4bec59192476e50db",
+      "bytes": 189743,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/N-C20-U_target_residual_v1/iter00006/pricing/result.json",
+      "SHA256": "e7ba3c1b1b3ae9b03182559c050370a0868dc7e86f237faa2e20c8655d561969",
+      "bytes": 189633,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/coupled/N-C20-U_target_residual_v1/iter00007/pricing/result.json",
+      "SHA256": "4293376f74f0399e7c48d2d13f57131ed0063cd4739aaa99a7b2fa5deef8c461",
+      "bytes": 189125,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/fixed_prices/NC20_fresh/RN_screen/result.json",
+      "SHA256": "0b04b1646600ab10a0dcc2e03167a0b5c8ce07e65f6a71147f79a5e405ab926f",
+      "bytes": 37961,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/fixed_prices/NC20_updated_midpoint/RN_goal_screen/result.json",
+      "SHA256": "f54bc2694ea0e47524fe213cb9f494553bd8d23a4e84d3a37e6ca1fe120aa37a",
+      "bytes": 39501,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_N-C20-U.zip",
+      "used_for": [
+        "N-C20-U inherited support price"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/helper_manifest.json",
+      "SHA256": "aed6a85f701d3073a6ffd1006d0931402da881428c2b10bfab822926f5a788e6",
+      "bytes": 15373,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "unchanged paid own-floor helper identity"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/qualification/goal_stop_v1/result.json",
+      "SHA256": "f8b7998872b4dcfb7e0442a43fd2f8fd0a00ceb151c5b088f3f74aa24868330c",
+      "bytes": 8092,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/qualification_failures_and_fees.zip",
+      "used_for": [
+        "inherited oracle qualification"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/reuse_index.json",
+      "SHA256": "2074a70a19b1a609de1b351903a8f93e54f5f9f3647cc6783c7f36f3aa0114dd",
+      "bytes": 129857,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "transitive inherited identity and proof references"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/source_manifest.json",
+      "SHA256": "83c144898e172bc1d7974db82b03651dcff02ff4ad95339133723e9257b475fa",
+      "bytes": 81991,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "transitive inherited identity and proof references"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/support_LP/K-35-U_target_residual_v2/result.json",
+      "SHA256": "826cc514fccd18bcad26cf043d84fc8ef9abb79fba3412d93bd234b7e8fe7102",
+      "bytes": 12824572,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/research_K-35-U.zip",
+      "used_for": [
+        "K-35-U starting full pool/supports/interval"
+      ]
+    },
+    {
+      "member": "scripts/round100_campaign.py",
+      "SHA256": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "bytes": 11142,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "working_bytes": 11142
+    },
+    {
+      "member": "scripts/round100_common.py",
+      "SHA256": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca",
+      "bytes": 2347,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca",
+      "working_bytes": 2347
+    },
+    {
+      "member": "scripts/round100_gurobi_runtime.py",
+      "SHA256": "ef393a7c466fe5bdbca0fd5e6b834ad9c4731d0341a7e6ae91d42bb4a39aa2cc",
+      "bytes": 1989,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "ef393a7c466fe5bdbca0fd5e6b834ad9c4731d0341a7e6ae91d42bb4a39aa2cc",
+      "working_bytes": 1989
+    },
+    {
+      "member": "scripts/round100_idle.py",
+      "SHA256": "093ced41cdae00ed1eab56fb6c1e94b9f22bacfac637da803b8e41ee06821639",
+      "bytes": 1069,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "093ced41cdae00ed1eab56fb6c1e94b9f22bacfac637da803b8e41ee06821639",
+      "working_bytes": 1069
+    },
+    {
+      "member": "scripts/round101_common.py",
+      "SHA256": "6ea42060b3804c125888ffff76facea0519a5219a5110ba8524bf1e9e75d7ce1",
+      "bytes": 2270,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "6ea42060b3804c125888ffff76facea0519a5219a5110ba8524bf1e9e75d7ce1",
+      "working_bytes": 2270
+    },
+    {
+      "member": "scripts/round103_common.py",
+      "SHA256": "67fc725b0a440bf8c557a93da3f9a2c02decfc2b2ffebbbcc7d0d8571bf247d0",
+      "bytes": 2099,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "67fc725b0a440bf8c557a93da3f9a2c02decfc2b2ffebbbcc7d0d8571bf247d0",
+      "working_bytes": 2099
+    },
+    {
+      "member": "scripts/round107_reader.py",
+      "SHA256": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2",
+      "bytes": 48416,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2",
+      "working_bytes": 48416
+    },
+    {
+      "member": "scripts/round108_decisions.py",
+      "SHA256": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46",
+      "bytes": 7997,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46",
+      "working_bytes": 7997
+    },
+    {
+      "member": "scripts/round108_reader.py",
+      "SHA256": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "bytes": 48982,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "working_bytes": 48982
+    },
+    {
+      "member": "scripts/round108_scopes.py",
+      "SHA256": "4a9b9570d1142265fdc96b56df4a91021521732b521a649fe0609ac72de0c733",
+      "bytes": 4248,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "4a9b9570d1142265fdc96b56df4a91021521732b521a649fe0609ac72de0c733",
+      "working_bytes": 4248
+    },
+    {
+      "member": "scripts/round109_campaign.py",
+      "SHA256": "881c8a4d818f7c94a08e72a1714c1713cf823ab908406dd0425f2c16ae9db693",
+      "bytes": 17169,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "881c8a4d818f7c94a08e72a1714c1713cf823ab908406dd0425f2c16ae9db693",
+      "working_bytes": 17169
+    },
+    {
+      "member": "scripts/round109_common.py",
+      "SHA256": "4804f3db87ad5b6e6770f300691b125dac9ab122df48c4b2c7a77fb53fc0dcdf",
+      "bytes": 3257,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "4804f3db87ad5b6e6770f300691b125dac9ab122df48c4b2c7a77fb53fc0dcdf",
+      "working_bytes": 3257
+    },
+    {
+      "member": "scripts/round109_data.py",
+      "SHA256": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+      "bytes": 6442,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+      "working_bytes": 6442
+    },
+    {
+      "member": "scripts/round109_prepare.py",
+      "SHA256": "e8684188f2b015d68702d0400570415ec6ef1f15d1f6b46ad5e8b4bb7913342a",
+      "bytes": 10013,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "e8684188f2b015d68702d0400570415ec6ef1f15d1f6b46ad5e8b4bb7913342a",
+      "working_bytes": 10013
+    },
+    {
+      "member": "scripts/round109_seed_audit.py",
+      "SHA256": "e0e2a076096ba8979ba3a59f376cc0293cb4b5da2a3bb90bfe0311f6085a570e",
+      "bytes": 3632,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "e0e2a076096ba8979ba3a59f376cc0293cb4b5da2a3bb90bfe0311f6085a570e",
+      "working_bytes": 3632
+    },
+    {
+      "member": "scripts/round109_seed_scope.py",
+      "SHA256": "08bc7c282a29815b26efac54efa9880d660674328f12a5c83aeef7441044368b",
+      "bytes": 8695,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "08bc7c282a29815b26efac54efa9880d660674328f12a5c83aeef7441044368b",
+      "working_bytes": 8695
+    },
+    {
+      "member": "scripts/round110_common.py",
+      "SHA256": "5816ba204c8be606d6dfee36b0823fcd95fb6cc2e4ce90eb46b5a812e91da120",
+      "bytes": 3967,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "5816ba204c8be606d6dfee36b0823fcd95fb6cc2e4ce90eb46b5a812e91da120",
+      "working_bytes": 3967
+    },
+    {
+      "member": "scripts/round111_seed_audit.py",
+      "SHA256": "528ab1b02b90c5d4d82113c15e617278114dcf72f1cb79f15dc4be42a92ac667",
+      "bytes": 7179,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "da70eb1a01cdcf988fcfe0963ef39692d513cc5ae20ecae18835832bed45e2c5",
+      "working_bytes": 7300
+    },
+    {
+      "member": "scripts/round112_audit.py",
+      "SHA256": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+      "bytes": 6424,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+      "working_bytes": 6424
+    },
+    {
+      "member": "scripts/round112_campaign.py",
+      "SHA256": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85",
+      "bytes": 11408,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85",
+      "working_bytes": 11408
+    },
+    {
+      "member": "scripts/round112_common.py",
+      "SHA256": "de18376ad23be0789a726c4f7bc8bbc09f074571c1afdbefdf7092a068d6d2a8",
+      "bytes": 2687,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "de18376ad23be0789a726c4f7bc8bbc09f074571c1afdbefdf7092a068d6d2a8",
+      "working_bytes": 2687
+    },
+    {
+      "member": "scripts/round113_audit.py",
+      "SHA256": "02af4e0de90b425b51889e1df860597236fc7ca32c567363e0de982834dfdfe7",
+      "bytes": 15512,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "02af4e0de90b425b51889e1df860597236fc7ca32c567363e0de982834dfdfe7",
+      "working_bytes": 15512
+    },
+    {
+      "member": "scripts/round113_campaign.py",
+      "SHA256": "b76c63ad8a09683e43b737721d55523bd7c1c6ab2aadb5070aa5c6e8b29fd447",
+      "bytes": 10378,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "b76c63ad8a09683e43b737721d55523bd7c1c6ab2aadb5070aa5c6e8b29fd447",
+      "working_bytes": 10378
+    },
+    {
+      "member": "scripts/round113_common.py",
+      "SHA256": "f100749161fad2487d652991da0fa6086cce75aad0e037a43d8823a0abf95c1b",
+      "bytes": 3088,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "f100749161fad2487d652991da0fa6086cce75aad0e037a43d8823a0abf95c1b",
+      "working_bytes": 3088
+    },
+    {
+      "member": "scripts/round113_progress.py",
+      "SHA256": "51a0969ded9e0896b85d264fbe30af3cd30813d579136c3c822c845da384b45a",
+      "bytes": 2821,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "51a0969ded9e0896b85d264fbe30af3cd30813d579136c3c822c845da384b45a",
+      "working_bytes": 2821
+    },
+    {
+      "member": "scripts/round114_audit.py",
+      "SHA256": "38b9275afd045e9d5b72cb901a3fbe9f939f474811b0b47d3a34275cb02df9d4",
+      "bytes": 20480,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "a8c55a0bcd3d5a7083d1109850fa728f35378c4dafb5a4cc185089c6c530b758",
+      "working_bytes": 20750
+    },
+    {
+      "member": "scripts/round114_campaign.py",
+      "SHA256": "6b40ca1f7f1a133478eaf3a89d8f8c7eba13ffe3b6f80bae0358f86d787716c7",
+      "bytes": 13132,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "abdc9f5fa08965696e17982b0092cae95425e3fb4cad86368b57592893a8b8ab",
+      "working_bytes": 13305
+    },
+    {
+      "member": "scripts/round114_claims.py",
+      "SHA256": "5b166b07da359e50b663c4655a29ce6789aaaec04ef1b8b8230b8b69cfef06fd",
+      "bytes": 5032,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "d0fc9e2ea15cf37a463c895adf8cfd784762706fd73744c2a99720eebd010149",
+      "working_bytes": 5103
+    },
+    {
+      "member": "scripts/round114_common.py",
+      "SHA256": "25ee8c762fc230f956905c00835eb70e2ad97e8758bcff9b2c8813d1686deaa6",
+      "bytes": 2753,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "5fc5e753a51a655d7526ee08177da16df5699495a02eadf55575ed88dca30d9e",
+      "working_bytes": 2803
+    },
+    {
+      "member": "scripts/round114_ps.py",
+      "SHA256": "9ed84c968781d7dcd0dc0764377fe9df8d91266e9ae40d74f09b3a35671f867d",
+      "bytes": 15679,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "6bf8d31541bce73d33b5fc2d861cacb85da9fe18ecdcf574cfcbff24f4499a3c",
+      "working_bytes": 15917
+    },
+    {
+      "member": "scripts/round115_campaign.py",
+      "SHA256": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03",
+      "bytes": 11334,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03",
+      "working_bytes": 11334
+    },
+    {
+      "member": "scripts/round115_common.py",
+      "SHA256": "105efd354e72f46abc7fbb30b42949a5f8d6db5d4deb01d2c73f4eac6149d841",
+      "bytes": 4606,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "105efd354e72f46abc7fbb30b42949a5f8d6db5d4deb01d2c73f4eac6149d841",
+      "working_bytes": 4606
+    },
+    {
+      "member": "scripts/round115_verify.py",
+      "SHA256": "d225751afb1dfc7b29f20d6b1f231c8baed4d6b842ebed8fc0799bdd4523a001",
+      "bytes": 3478,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "d225751afb1dfc7b29f20d6b1f231c8baed4d6b842ebed8fc0799bdd4523a001",
+      "working_bytes": 3478
+    },
+    {
+      "member": "scripts/round118_call_logs.py",
+      "SHA256": "0c719ad386ed7ad3c793ce93bab7bc4f190cd2a2317aeccdccff6279c7b3dca4",
+      "bytes": 9760,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "0c719ad386ed7ad3c793ce93bab7bc4f190cd2a2317aeccdccff6279c7b3dca4",
+      "working_bytes": 9760
+    },
+    {
+      "member": "scripts/round118_data.py",
+      "SHA256": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+      "bytes": 10434,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+      "working_bytes": 10434
+    },
+    {
+      "member": "scripts/round120_campaign.py",
+      "SHA256": "6874f524b6d6387d4492656c39c1e1068bd5c9238b31823df18f5c02c322b9e6",
+      "bytes": 5165,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "561bd20a09fc1347a8188831979646603bc08e0ce7c98377c30f176945c6d5f0",
+      "working_bytes": 5229
+    },
+    {
+      "member": "scripts/round120_common.py",
+      "SHA256": "f6a04a22cb1dcc7660bf3b9efb61543c5947b56de9874d41ac6f87a25ab479fe",
+      "bytes": 6459,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "a1302c682e146294e48e5f78e086a1c0af713775358f64875756b1a222256077",
+      "working_bytes": 6559
+    },
+    {
+      "member": "scripts/round120_evidence.py",
+      "SHA256": "2cfd75746ae7a61c628647bc56217ae6b80f474999ec3215fe4cd5cc49f6b653",
+      "bytes": 9047,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "db89c758b238bfe2836001c4cf5e270a84d2b2834aa5a552589cb1863a4d9be5",
+      "working_bytes": 9178
+    },
+    {
+      "member": "scripts/round120_math_audit.py",
+      "SHA256": "f341106a8ef4286caef70493c3660bba18ea62aea609f7b29134a912a9b07b36",
+      "bytes": 6599,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "7334f742647aaffa4e29b41d09b43902e9ff399482ef2e83fc02a588400b1afa",
+      "working_bytes": 6678
+    },
+    {
+      "member": "scripts/round120_prepare.py",
+      "SHA256": "992656c509780565b7a1624465a3350cf73d0c688a8d6a8479cfe6d1ee6f42bb",
+      "bytes": 11575,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "d0354d810ce2278a220e7d2f58490397b4dd080f5dc290ff1bc15ff9247d6964",
+      "working_bytes": 11703
+    },
+    {
+      "member": "scripts/round121_campaign.py",
+      "SHA256": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0",
+      "bytes": 5533,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0",
+      "working_bytes": 5533
+    },
+    {
+      "member": "scripts/round121_common.py",
+      "SHA256": "1a401ff0a4ffffbab0265e62d6c46d89b60bad2d2587ffd12999b5db042029f6",
+      "bytes": 6181,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "1a401ff0a4ffffbab0265e62d6c46d89b60bad2d2587ffd12999b5db042029f6",
+      "working_bytes": 6181
+    },
+    {
+      "member": "scripts/round121_evidence.py",
+      "SHA256": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2",
+      "bytes": 10292,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2",
+      "working_bytes": 10292
+    },
+    {
+      "member": "scripts/round122_common.py",
+      "SHA256": "5bfe6890df669a43c11cee2724c99c535ec05f61adce2a42cda4be85070040ec",
+      "bytes": 7396,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "1afde640f299d64fe810506aaedc0d59a2cf3c0b7129b87dc9d84688830e587e",
+      "working_bytes": 7515
+    },
+    {
+      "member": "scripts/round122_data.py",
+      "SHA256": "273efa690ade7097e4a3278b2d06837b86e5f19bf705286f152dc4ffced6645b",
+      "bytes": 10959,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "b7997dcd173ee301be7f34949c99cb5f791bf22b84f548d1adceb8d11054d6b9",
+      "working_bytes": 11091
+    },
+    {
+      "member": "scripts/round122_evidence.py",
+      "SHA256": "c37bb09e82a8f3fa0ceaa1d79cd276813a56a228099701096fa1f640e2ec4f9d",
+      "bytes": 10551,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "bb3e1e711f4ae1f48c7ef1a1b2092d75627e1104711653fd98aa605fe7a74ea4",
+      "working_bytes": 10699
+    },
+    {
+      "member": "scripts/round122_prepare.py",
+      "SHA256": "38442f900e16c5a7485ec26afec7629c260f69775e5658a4b6f65af7c9062c9d",
+      "bytes": 10513,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "dbd8544440a9e7a37310984141af86f2d9f9ad8929d41ba181e209cd2c6484ce",
+      "working_bytes": 10625
+    },
+    {
+      "member": "scripts/round126_common.py",
+      "SHA256": "0a8252da3c37c2e50c8f24acad67bba57f8f073dd900b1faf275c3fdc3f4d5ac",
+      "bytes": 5574,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "beb4c87e81d7a745d3d7f3d94d4e146e4826df4289f6482e45230cb6a8a025b7",
+      "working_bytes": 5668
+    },
+    {
+      "member": "scripts/round126_data.py",
+      "SHA256": "2ece33430653f63f456d74125c809ae63f32f8eb392b6f706823df01dee96345",
+      "bytes": 9774,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "5a1f8078f76a74a7d7c862abc1ee489b327c145a695c74e6f982163ebcd7ed21",
+      "working_bytes": 9892
+    },
+    {
+      "member": "scripts/round126_run.py",
+      "SHA256": "d3f7bdf51d40100f6bcc57a76c543fe6946364b60dfcb6cc501b90ce85eb3cc3",
+      "bytes": 3424,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "d121a5414c1919bbc1893fff25e2a51ca18a259772bc4a04850f87a2a3f0d939",
+      "working_bytes": 3481
+    },
+    {
+      "member": "scripts/round127_analysis.py",
+      "SHA256": "18582a4b98fef8595a557adc7edc318f18b90d5d6dcef00a0fc9353676eb5e83",
+      "bytes": 22631,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "18582a4b98fef8595a557adc7edc318f18b90d5d6dcef00a0fc9353676eb5e83",
+      "working_bytes": 22631
+    },
+    {
+      "member": "scripts/round127_campaign.py",
+      "SHA256": "287d33761e3a1d003e35e44eec467697e6218d3b98383daf293e2e1d245b293f",
+      "bytes": 7752,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "287d33761e3a1d003e35e44eec467697e6218d3b98383daf293e2e1d245b293f",
+      "working_bytes": 7752
+    },
+    {
+      "member": "scripts/round127_clocks.py",
+      "SHA256": "55f550d153aadf13a2c0dfd52dbef661830567cba5fbb4ca955a425787d34427",
+      "bytes": 2497,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "55f550d153aadf13a2c0dfd52dbef661830567cba5fbb4ca955a425787d34427",
+      "working_bytes": 2497
+    },
+    {
+      "member": "scripts/round127_common.py",
+      "SHA256": "ba0e4a93a6ad90d17784f1ee2a5ef8fcf8905aef0f1b44346a9221eb9ea90e37",
+      "bytes": 6113,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "ba0e4a93a6ad90d17784f1ee2a5ef8fcf8905aef0f1b44346a9221eb9ea90e37",
+      "working_bytes": 6113
+    },
+    {
+      "member": "scripts/round127_data.py",
+      "SHA256": "de063492c429bc545e87a1fbdb4f7e00c3ad4cb5cff2b2feaada5a3f74aae275",
+      "bytes": 8698,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "de063492c429bc545e87a1fbdb4f7e00c3ad4cb5cff2b2feaada5a3f74aae275",
+      "working_bytes": 8698
+    },
+    {
+      "member": "scripts/round127_evidence.py",
+      "SHA256": "d776d0dc999e6199cd376e693885abbd5a3f86616e8238b37645f4c80c96626a",
+      "bytes": 5972,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "d776d0dc999e6199cd376e693885abbd5a3f86616e8238b37645f4c80c96626a",
+      "working_bytes": 5972
+    },
+    {
+      "member": "scripts/round127_pipeline.py",
+      "SHA256": "8a621c714d6f04ef046b16745ce8493fccdf023ae05c120b680075d72433edf6",
+      "bytes": 9394,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "8a621c714d6f04ef046b16745ce8493fccdf023ae05c120b680075d72433edf6",
+      "working_bytes": 9394
+    },
+    {
+      "member": "scripts/round127_qualify.py",
+      "SHA256": "ab5c0c12783e7b852dd42642afdc1a276e775b7cc643817959200826518106b6",
+      "bytes": 5972,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "ab5c0c12783e7b852dd42642afdc1a276e775b7cc643817959200826518106b6",
+      "working_bytes": 5972
+    },
+    {
+      "member": "scripts/round128_common.py",
+      "SHA256": "719bc515fcc6fe530fd8baa645162702c18618dadbc8d0537ba9bf97bf0777f1",
+      "bytes": 4508,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "719bc515fcc6fe530fd8baa645162702c18618dadbc8d0537ba9bf97bf0777f1",
+      "working_bytes": 4508
+    },
+    {
+      "member": "scripts/round128_evidence.py",
+      "SHA256": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+      "bytes": 2758,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+      "working_bytes": 2758
+    },
+    {
+      "member": "scripts/round130_campaign.py",
+      "SHA256": "eed2b7e00face643768fd37111bfd035c7ebce54a34d14279a95522ea7b25c95",
+      "bytes": 7385,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "eed2b7e00face643768fd37111bfd035c7ebce54a34d14279a95522ea7b25c95",
+      "working_bytes": 7385
+    },
+    {
+      "member": "scripts/round130_common.py",
+      "SHA256": "1750849e9c9e0442a96d74f106319a16d75c2a469e538e5c07ca35a3fbb69150",
+      "bytes": 5219,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "1750849e9c9e0442a96d74f106319a16d75c2a469e538e5c07ca35a3fbb69150",
+      "working_bytes": 5219
+    },
+    {
+      "member": "scripts/round130_evidence.py",
+      "SHA256": "bfb6eb014b5f8e95c696a845a5a7df22bef073188c4b097d28a8e4e85d25b5c3",
+      "bytes": 8186,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "bfb6eb014b5f8e95c696a845a5a7df22bef073188c4b097d28a8e4e85d25b5c3",
+      "working_bytes": 8186
+    },
+    {
+      "member": "scripts/round133_campaign.py",
+      "SHA256": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+      "bytes": 14629,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+      "working_bytes": 14629
+    },
+    {
+      "member": "scripts/round133_common.py",
+      "SHA256": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+      "bytes": 12788,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+      "working_bytes": 12788
+    },
+    {
+      "member": "scripts/round133_joint_check.py",
+      "SHA256": "892fac7d3396f1a27f3c18c051ad054f1a273ddd8e84e6cd55b97faee26381db",
+      "bytes": 12446,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "892fac7d3396f1a27f3c18c051ad054f1a273ddd8e84e6cd55b97faee26381db",
+      "working_bytes": 12446
+    },
+    {
+      "member": "scripts/round133_postverify_repair.py",
+      "SHA256": "8feae1d544d92fba843f4836f0c685c2cf38151f20386cd2538396ac34af6640",
+      "bytes": 19896,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "8feae1d544d92fba843f4836f0c685c2cf38151f20386cd2538396ac34af6640",
+      "working_bytes": 19896
+    },
+    {
+      "member": "scripts/round133_read.py",
+      "SHA256": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+      "bytes": 60903,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+      "working_bytes": 60903
+    },
+    {
+      "member": "scripts/round134_common.py",
+      "SHA256": "af13361ae1523d2504dbde534e5fc5768a352649cd111f44748dbb5db0088f67",
+      "bytes": 13043,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "af13361ae1523d2504dbde534e5fc5768a352649cd111f44748dbb5db0088f67",
+      "working_bytes": 13043
+    },
+    {
+      "member": "scripts/round134_count_bound.py",
+      "SHA256": "d364f56bbb91108e9265938112ba6df3446efa79e95fc2576184a14da5e11457",
+      "bytes": 10111,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "d364f56bbb91108e9265938112ba6df3446efa79e95fc2576184a14da5e11457",
+      "working_bytes": 10111
+    },
+    {
+      "member": "scripts/round135_ap_audit.py",
+      "SHA256": "da5a71cb166dddf7407cd46e2ba567322439278d42087afd4a43a59bd5880137",
+      "bytes": 1682,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "da5a71cb166dddf7407cd46e2ba567322439278d42087afd4a43a59bd5880137",
+      "working_bytes": 1682
+    },
+    {
+      "member": "scripts/round135_common.py",
+      "SHA256": "1c70cb856b2368381ab92e3e00f00cffa9ffd9b998fb5847a43090fc0750aa5e",
+      "bytes": 13043,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "1c70cb856b2368381ab92e3e00f00cffa9ffd9b998fb5847a43090fc0750aa5e",
+      "working_bytes": 13043
+    },
+    {
+      "member": "scripts/round135_read.py",
+      "SHA256": "8ba64ca6a87e55ff2ea925c70620dfc4397d3ae49c58a77fe4074eac96c6b38c",
+      "bytes": 63816,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "8ba64ca6a87e55ff2ea925c70620dfc4397d3ae49c58a77fe4074eac96c6b38c",
+      "working_bytes": 63816
+    },
+    {
+      "member": "scripts/round137_common.py",
+      "SHA256": "b133b9ef972e40731e394086187379151f99759fe93719f6a3798d156bb9499f",
+      "bytes": 12773,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "b133b9ef972e40731e394086187379151f99759fe93719f6a3798d156bb9499f",
+      "working_bytes": 12773
+    },
+    {
+      "member": "scripts/round137_read.py",
+      "SHA256": "c47c6742fc8cfd9b5da998af1c1c02a85131ba1d5c57aba1def87ae2e5d4973b",
+      "bytes": 3606,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "c47c6742fc8cfd9b5da998af1c1c02a85131ba1d5c57aba1def87ae2e5d4973b",
+      "working_bytes": 3606
+    },
+    {
+      "member": "scripts/round138_common.py",
+      "SHA256": "bb011d4a4f43e79a1b9b92807faabfad483bb75089fb3c4799b1e261202dd42a",
+      "bytes": 12770,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "bb011d4a4f43e79a1b9b92807faabfad483bb75089fb3c4799b1e261202dd42a",
+      "working_bytes": 12770
+    },
+    {
+      "member": "scripts/round138_delivery.py",
+      "SHA256": "81dfffff7652d0523dcc431fe1086323af5b45961867289751a776fa8c016b2b",
+      "bytes": 9909,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "81dfffff7652d0523dcc431fe1086323af5b45961867289751a776fa8c016b2b",
+      "working_bytes": 9909
+    },
+    {
+      "member": "scripts/round138_math.py",
+      "SHA256": "3d1480db5c58703a81c0eb221a29ea6b9ad6c19ff719ace187dd7ad7d70ebea6",
+      "bytes": 5911,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "3d1480db5c58703a81c0eb221a29ea6b9ad6c19ff719ace187dd7ad7d70ebea6",
+      "working_bytes": 5911
+    },
+    {
+      "member": "scripts/round138_offline_products.py",
+      "SHA256": "e1b43d4a2460907cf326429d9acd01f2d97a5b46684792af2444214cab29c854",
+      "bytes": 3925,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "e1b43d4a2460907cf326429d9acd01f2d97a5b46684792af2444214cab29c854",
+      "working_bytes": 3925
+    },
+    {
+      "member": "scripts/round138_read.py",
+      "SHA256": "b677146dbc86953ef8930294140d299cfe914b767f8bff48b5cd89be53debf5a",
+      "bytes": 2565,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "b677146dbc86953ef8930294140d299cfe914b767f8bff48b5cd89be53debf5a",
+      "working_bytes": 2565
+    },
+    {
+      "member": "scripts/round138_repair.py",
+      "SHA256": "8b4e8f55a1dec1f1d79c1cd40302d57969246e677d91d5fddace3e27d09b48df",
+      "bytes": 13606,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "8b4e8f55a1dec1f1d79c1cd40302d57969246e677d91d5fddace3e27d09b48df",
+      "working_bytes": 13606
+    },
+    {
+      "member": "scripts/round138_scaled_read.py",
+      "SHA256": "8e83742b45e488ce4af900879239fb100d4c1b67e094f75d694f4523f0be1428",
+      "bytes": 784,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "8e83742b45e488ce4af900879239fb100d4c1b67e094f75d694f4523f0be1428",
+      "working_bytes": 784
+    },
+    {
+      "member": "scripts/round138_setup.py",
+      "SHA256": "b7e65e658ce543b0ce9b8898d04ca831f11353be82007b3ff4f18d4ca5cf9e0e",
+      "bytes": 6260,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "b7e65e658ce543b0ce9b8898d04ca831f11353be82007b3ff4f18d4ca5cf9e0e",
+      "working_bytes": 6260
+    },
+    {
+      "member": "scripts/round138_tiny_read.py",
+      "SHA256": "cc796738d83c2ab2b8dc7505d2c63af75805b7d3b5cda6b6e574949c5e530b85",
+      "bytes": 5431,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "cc796738d83c2ab2b8dc7505d2c63af75805b7d3b5cda6b6e574949c5e530b85",
+      "working_bytes": 5431
+    },
+    {
+      "member": "scripts/round140_common.py",
+      "SHA256": "8b4b1f44484d482b1dad991b2aa0c986f4e904ba964f880dd07f776de4891c45",
+      "bytes": 12872,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "8b4b1f44484d482b1dad991b2aa0c986f4e904ba964f880dd07f776de4891c45",
+      "working_bytes": 12872
+    },
+    {
+      "member": "scripts/round140_math.py",
+      "SHA256": "87e108f90b978c6d9f273a491c40c17cc9bc88cf73a22aa65a73d12223772319",
+      "bytes": 11388,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "87e108f90b978c6d9f273a491c40c17cc9bc88cf73a22aa65a73d12223772319",
+      "working_bytes": 11388
+    },
+    {
+      "member": "scripts/round143_build.py",
+      "SHA256": "f27754c3fa7ee860e38170d1f58f72511c1c2e3f1429abb7c19359dc299f7adb",
+      "bytes": 2530,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "f27754c3fa7ee860e38170d1f58f72511c1c2e3f1429abb7c19359dc299f7adb",
+      "working_bytes": 2530
+    },
+    {
+      "member": "scripts/round143_common.py",
+      "SHA256": "5330b30c487a844df36e1b6f44b57e0ff83102b2b4f61525382eb7d8f8c703b6",
+      "bytes": 1229,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "5330b30c487a844df36e1b6f44b57e0ff83102b2b4f61525382eb7d8f8c703b6",
+      "working_bytes": 1229
+    },
+    {
+      "member": "scripts/round143_lp.py",
+      "SHA256": "f99f2c3bda0487cd421e38d15607254f44cf009da9072804ddf94a4fd0fce57c",
+      "bytes": 9376,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "f99f2c3bda0487cd421e38d15607254f44cf009da9072804ddf94a4fd0fce57c",
+      "working_bytes": 9376
+    },
+    {
+      "member": "scripts/round143_math.py",
+      "SHA256": "d939c1629a02b32d31eb56891dece9534e2ee7416dd1addf24cc6e2a943f263c",
+      "bytes": 6442,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "d939c1629a02b32d31eb56891dece9534e2ee7416dd1addf24cc6e2a943f263c",
+      "working_bytes": 6442
+    },
+    {
+      "member": "scripts/round143_qualify.py",
+      "SHA256": "76d251593f75a5050799bdc9950af14941b870abaf3f0325d0aebf0e5303acd3",
+      "bytes": 6449,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "76d251593f75a5050799bdc9950af14941b870abaf3f0325d0aebf0e5303acd3",
+      "working_bytes": 6449
+    },
+    {
+      "member": "scripts/round145_common.py",
+      "SHA256": "720ee4a18a90d864dfa97bf5737190744ef305dd2d805ac5498cfaa158ad70c7",
+      "bytes": 1040,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "720ee4a18a90d864dfa97bf5737190744ef305dd2d805ac5498cfaa158ad70c7",
+      "working_bytes": 1040
+    },
+    {
+      "member": "scripts/round145_lp.py",
+      "SHA256": "487ed5c5b2c0edcc59edb93b1b556c3b68291d7dc38715d77087c8f10a0537e3",
+      "bytes": 8710,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "487ed5c5b2c0edcc59edb93b1b556c3b68291d7dc38715d77087c8f10a0537e3",
+      "working_bytes": 8710
+    },
+    {
+      "member": "scripts/round145_math.py",
+      "SHA256": "a13e6c87d2351eb4201dc56e0a97584aa697ba4e9b05ef8a2fb4f53e3f46e0eb",
+      "bytes": 4771,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "a13e6c87d2351eb4201dc56e0a97584aa697ba4e9b05ef8a2fb4f53e3f46e0eb",
+      "working_bytes": 4771
+    },
+    {
+      "member": "scripts/round146_common.py",
+      "SHA256": "5d183b9a1a4e8f6346a187aa09dd9f19fdf8773cbf89c905acf45a0ed227a968",
+      "bytes": 979,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "5d183b9a1a4e8f6346a187aa09dd9f19fdf8773cbf89c905acf45a0ed227a968",
+      "working_bytes": 979
+    },
+    {
+      "member": "scripts/round146_math.py",
+      "SHA256": "c927cd9ae29f265615cd1316138abec0edbf5f3e76bd6a9f924717e089eb8245",
+      "bytes": 4732,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "c927cd9ae29f265615cd1316138abec0edbf5f3e76bd6a9f924717e089eb8245",
+      "working_bytes": 4732
+    },
+    {
+      "member": "scripts/round147_common.py",
+      "SHA256": "17cc6773b1267d78b958fc1e2e6c4b3b81a53d2d8be7b77da7ab07a2f8eda852",
+      "bytes": 1106,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "17cc6773b1267d78b958fc1e2e6c4b3b81a53d2d8be7b77da7ab07a2f8eda852",
+      "working_bytes": 1106
+    },
+    {
+      "member": "scripts/round147_read.py",
+      "SHA256": "efc777a47e68d1812ba5711567421a36c93d15d89a2b839167a71c127ea48b0a",
+      "bytes": 6028,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "efc777a47e68d1812ba5711567421a36c93d15d89a2b839167a71c127ea48b0a",
+      "working_bytes": 6028
+    },
+    {
+      "member": "scripts/round149_common.py",
+      "SHA256": "566719a73b81e0f79ed5152f456db20d0b7954c96aa9509daf540429644ed443",
+      "bytes": 1103,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "566719a73b81e0f79ed5152f456db20d0b7954c96aa9509daf540429644ed443",
+      "working_bytes": 1103
+    },
+    {
+      "member": "scripts/round149_context.py",
+      "SHA256": "b29fb107a941d2ae88cb58f9b03323087e70af590c042fe33cf53a98b6d25708",
+      "bytes": 1816,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "b29fb107a941d2ae88cb58f9b03323087e70af590c042fe33cf53a98b6d25708",
+      "working_bytes": 1816
+    },
+    {
+      "member": "scripts/round149_math.py",
+      "SHA256": "70b59b8850295704a2cc2cb82437c27dd6cd7a59e91a09cab25967946b007e40",
+      "bytes": 5929,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "70b59b8850295704a2cc2cb82437c27dd6cd7a59e91a09cab25967946b007e40",
+      "working_bytes": 5929
+    },
+    {
+      "member": "scripts/round149_read.py",
+      "SHA256": "ef8439fd97eabdb4efdfbb1e0c6e341b933fc6d2e292fd9ead8a00ef190a36d9",
+      "bytes": 6207,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "ef8439fd97eabdb4efdfbb1e0c6e341b933fc6d2e292fd9ead8a00ef190a36d9",
+      "working_bytes": 6207
+    },
+    {
+      "member": "scripts/round150_common.py",
+      "SHA256": "6e962900b462e0ac95ba231c7c4156d5cac0166a5d947cff569f82b4c485c5e4",
+      "bytes": 1162,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "6e962900b462e0ac95ba231c7c4156d5cac0166a5d947cff569f82b4c485c5e4",
+      "working_bytes": 1162
+    },
+    {
+      "member": "scripts/round150_lp.py",
+      "SHA256": "cba1e6178108fcd31027ea453b608b395d198e539ebdd9235976a4b56e51a620",
+      "bytes": 12194,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "cba1e6178108fcd31027ea453b608b395d198e539ebdd9235976a4b56e51a620",
+      "working_bytes": 12194
+    },
+    {
+      "member": "scripts/round150_math.py",
+      "SHA256": "9e7ea7468724ab5b9269e75324ef4dd25484712d5b8d4b24efa7b77cabd75c10",
+      "bytes": 3795,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "9e7ea7468724ab5b9269e75324ef4dd25484712d5b8d4b24efa7b77cabd75c10",
+      "working_bytes": 3795
+    },
+    {
+      "member": "scripts/round151_common.py",
+      "SHA256": "b0faf9f30bea7323c244123a6a02bea15c5d7c727f6afbcc41c9a4a1c54d6b9d",
+      "bytes": 1006,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "b0faf9f30bea7323c244123a6a02bea15c5d7c727f6afbcc41c9a4a1c54d6b9d",
+      "working_bytes": 1006
+    },
+    {
+      "member": "scripts/round151_math.py",
+      "SHA256": "833fc5dea40ebf04addff0ec2d232b48c2b55ef410ccfc013e1b231d2490c948",
+      "bytes": 5658,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "833fc5dea40ebf04addff0ec2d232b48c2b55ef410ccfc013e1b231d2490c948",
+      "working_bytes": 5658
+    },
+    {
+      "member": "scripts/round151_read.py",
+      "SHA256": "33dc713d66a174409894bc419b6ed6aee5dbb2c2a9f677842f6ea32777a59048",
+      "bytes": 5829,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "33dc713d66a174409894bc419b6ed6aee5dbb2c2a9f677842f6ea32777a59048",
+      "working_bytes": 5829
+    },
+    {
+      "member": "scripts/round152_common.py",
+      "SHA256": "7b1a5a53623cb097b618106347d60caae0cf7f27f1b204524dd659165cb5ad76",
+      "bytes": 1985,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "7b1a5a53623cb097b618106347d60caae0cf7f27f1b204524dd659165cb5ad76",
+      "working_bytes": 1985
+    },
+    {
+      "member": "scripts/round152_math.py",
+      "SHA256": "a2639fa1a1572e09ac8f183dbd2882c1ea797fc5f96c67b33cc0a28a352c593a",
+      "bytes": 6580,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "a2639fa1a1572e09ac8f183dbd2882c1ea797fc5f96c67b33cc0a28a352c593a",
+      "working_bytes": 6580
+    },
+    {
+      "member": "scripts/round152_oracle.py",
+      "SHA256": "570c6d5b6353df2b8620dc0988e5b681c3b7f4f75a3483508729e3ec9d255014",
+      "bytes": 10968,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "570c6d5b6353df2b8620dc0988e5b681c3b7f4f75a3483508729e3ec9d255014",
+      "working_bytes": 10968
+    },
+    {
+      "member": "scripts/round152_qualify.py",
+      "SHA256": "0eae8fd2e78824e564fcc4816f545f8a3cff64161b12c2a1526b7884b4bfe68f",
+      "bytes": 4258,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "0eae8fd2e78824e564fcc4816f545f8a3cff64161b12c2a1526b7884b4bfe68f",
+      "working_bytes": 4258
+    },
+    {
+      "member": "scripts/round153_audit.py",
+      "SHA256": "c600b8ba910eb798ca09fc6ff4f6da4cc7e3d84056413f4ce8d9db4c160ec5cf",
+      "bytes": 35058,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "c600b8ba910eb798ca09fc6ff4f6da4cc7e3d84056413f4ce8d9db4c160ec5cf",
+      "working_bytes": 35058
+    },
+    {
+      "member": "scripts/round153_campaign.py",
+      "SHA256": "09f4a0bfe5f2c69b8852636c10ddaaa83e47b24dada5dfc016dbbf40e63689b0",
+      "bytes": 10018,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "09f4a0bfe5f2c69b8852636c10ddaaa83e47b24dada5dfc016dbbf40e63689b0",
+      "working_bytes": 10018
+    },
+    {
+      "member": "scripts/round153_common.py",
+      "SHA256": "7f4138d995e53b53aed39d255048d8f9ca4aeb368e2d1cea1d4821883fda0233",
+      "bytes": 2071,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "7f4138d995e53b53aed39d255048d8f9ca4aeb368e2d1cea1d4821883fda0233",
+      "working_bytes": 2071
+    },
+    {
+      "member": "scripts/round153_coupled.py",
+      "SHA256": "7bdb6eb0957f4f9571a0d728ad07e30f055e3a301d0952e7310fc9ce509ee6c9",
+      "bytes": 17322,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "7bdb6eb0957f4f9571a0d728ad07e30f055e3a301d0952e7310fc9ce509ee6c9",
+      "working_bytes": 17322
+    },
+    {
+      "member": "scripts/round153_delivery.py",
+      "SHA256": "cc9ee2bb92d321635e4e27e2951b0b380cc23433ca49974dfea67295f02b1ec6",
+      "bytes": 10977,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "cc9ee2bb92d321635e4e27e2951b0b380cc23433ca49974dfea67295f02b1ec6",
+      "working_bytes": 10977
+    },
+    {
+      "member": "scripts/round153_exact_worker.py",
+      "SHA256": "f40ea001ea1a56bc2eb11536aa49574e2606356098751653a365d0030497d40d",
+      "bytes": 2798,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "f40ea001ea1a56bc2eb11536aa49574e2606356098751653a365d0030497d40d",
+      "working_bytes": 2798
+    },
+    {
+      "member": "scripts/round153_graphcut.py",
+      "SHA256": "6cb2fa990c259e15d5faf696c4626f1c86165dbef55489de3ab9a72f3ca986c4",
+      "bytes": 23944,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "6cb2fa990c259e15d5faf696c4626f1c86165dbef55489de3ab9a72f3ca986c4",
+      "working_bytes": 23944
+    },
+    {
+      "member": "scripts/round153_lp.py",
+      "SHA256": "18280fe215da42838e8e04f1a4cee6ee611685e734d3de31667559f2fb468340",
+      "bytes": 6033,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "18280fe215da42838e8e04f1a4cee6ee611685e734d3de31667559f2fb468340",
+      "working_bytes": 6033
+    },
+    {
+      "member": "scripts/round153_partitioned.py",
+      "SHA256": "d9e7c23e64dd2a96a5bf5fda58a881345c4ab31e6f34bf2a71b3a99632b90a9e",
+      "bytes": 12540,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "d9e7c23e64dd2a96a5bf5fda58a881345c4ab31e6f34bf2a71b3a99632b90a9e",
+      "working_bytes": 12540
+    },
+    {
+      "member": "scripts/round153_pricing.py",
+      "SHA256": "8ed325356a9171a3e1aaafbc4a5c0526a764f0c35148dd6de2ea15d0d925e558",
+      "bytes": 11904,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "8ed325356a9171a3e1aaafbc4a5c0526a764f0c35148dd6de2ea15d0d925e558",
+      "working_bytes": 11904
+    },
+    {
+      "member": "scripts/round153_read.py",
+      "SHA256": "7daf2592f228a322db88fd1f447f4e6ea3d4b8d78338f3ec0ec9686830ab49ab",
+      "bytes": 8860,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "7daf2592f228a322db88fd1f447f4e6ea3d4b8d78338f3ec0ec9686830ab49ab",
+      "working_bytes": 8860
+    },
+    {
+      "member": "scripts/round153_stabilize.py",
+      "SHA256": "2ab44f6208832ac3f8ab3066fc74ed7c1776604006d771f746a6e6a962256549",
+      "bytes": 3880,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "2ab44f6208832ac3f8ab3066fc74ed7c1776604006d771f746a6e6a962256549",
+      "working_bytes": 3880
+    },
+    {
+      "member": "scripts/round154_audit.py",
+      "SHA256": "ed994e076cb5ca6004d0dd4a7acdd00c5f9774282201182ccf7cc49a7514559d",
+      "bytes": 35996,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "ed994e076cb5ca6004d0dd4a7acdd00c5f9774282201182ccf7cc49a7514559d",
+      "working_bytes": 35996
+    },
+    {
+      "member": "scripts/round154_campaign.py",
+      "SHA256": "e2d9d3920ef34a4e9574a04b54952890ec910a26465e42abd980fdf913babb0d",
+      "bytes": 8504,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "e2d9d3920ef34a4e9574a04b54952890ec910a26465e42abd980fdf913babb0d",
+      "working_bytes": 8504
+    },
+    {
+      "member": "scripts/round154_common.py",
+      "SHA256": "d3e4ff626eb6a169872e555afa6b56ba773e7eb363264654e9d3d2bd03c17b21",
+      "bytes": 1528,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "d3e4ff626eb6a169872e555afa6b56ba773e7eb363264654e9d3d2bd03c17b21",
+      "working_bytes": 1528
+    },
+    {
+      "member": "scripts/round154_goal_oracle.py",
+      "SHA256": "8952bd342b0d8ad6de92dbb5fcd70faedfa0b161df0fb56873bb2d8e9ac9bdbf",
+      "bytes": 4768,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "8952bd342b0d8ad6de92dbb5fcd70faedfa0b161df0fb56873bb2d8e9ac9bdbf",
+      "working_bytes": 4768
+    },
+    {
+      "member": "scripts/round154_read.py",
+      "SHA256": "1d83843803fd0c239b5eefb97f1049c6c0da9983e774968e80f51c052ce946cd",
+      "bytes": 6484,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "1d83843803fd0c239b5eefb97f1049c6c0da9983e774968e80f51c052ce946cd",
+      "working_bytes": 6484
+    },
+    {
+      "member": "scripts/round154_residual.py",
+      "SHA256": "04bfa84774b7be4603ec08ae88ba015d6351d2bd3109a1d599fd4709f18bbc50",
+      "bytes": 12258,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "04bfa84774b7be4603ec08ae88ba015d6351d2bd3109a1d599fd4709f18bbc50",
+      "working_bytes": 12258
+    },
+    {
+      "member": "scripts/round154_strengthened.py",
+      "SHA256": "670d385ef6f9239b705fea92345709d4d4edbfe17dd732bb95b76b9b18460824",
+      "bytes": 5559,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "670d385ef6f9239b705fea92345709d4d4edbfe17dd732bb95b76b9b18460824",
+      "working_bytes": 5559
+    },
+    {
+      "member": "scripts/round61_research.py",
+      "SHA256": "088b5a4c4626b528658e403e163958074676f4ea8b58ed8548a54f4727c18571",
+      "bytes": 13473,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "3a288c045e58bbc7e19dad330db2bdae4257daaf63a66313ee32b89205e14955",
+      "working_bytes": 13710
+    },
+    {
+      "member": "scripts/round69_research.py",
+      "SHA256": "d7579acdaf24beea19a6724b1a6d57269b5036fb67e0d53f6e152a2db24ce272",
+      "bytes": 9887,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "d7579acdaf24beea19a6724b1a6d57269b5036fb67e0d53f6e152a2db24ce272",
+      "working_bytes": 9887
+    },
+    {
+      "member": "scripts/round69_topology.py",
+      "SHA256": "80254cd7cdaf8cdadc7d31fddc1c196f55fd6754d56da18cb2e4010223864212",
+      "bytes": 2219,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "80254cd7cdaf8cdadc7d31fddc1c196f55fd6754d56da18cb2e4010223864212",
+      "working_bytes": 2219
+    },
+    {
+      "member": "scripts/round70_affinity.py",
+      "SHA256": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+      "bytes": 4509,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+      "working_bytes": 4509
+    },
+    {
+      "member": "scripts/round73_qualify.py",
+      "SHA256": "ad6062138d6dce6ab049cb6bc5986ba68fdecbda4588dbeda14a51b00de978c0",
+      "bytes": 3500,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "b4428f5a42b2e58d8ca6c84fbb5d28ae1c678f8f41e9bdbba4f6954c01e88efd",
+      "working_bytes": 3559
+    },
+    {
+      "member": "scripts/round73_seed_diagnostic.py",
+      "SHA256": "08b23e80febe63627f8ae79d22df115d4c127d809de411f21e87a3e305a1dca0",
+      "bytes": 12559,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "3263595bf7ddda4472d6c519b136faec7b3f9d4ab4e3009bb5bf108d9cc0e3c8",
+      "working_bytes": 12727
+    },
+    {
+      "member": "scripts/round75_qualify.py",
+      "SHA256": "c82f757cde7e0915f097749925e54e19cf9e9d0c483ada6d9654439ce580232f",
+      "bytes": 5227,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "c82f757cde7e0915f097749925e54e19cf9e9d0c483ada6d9654439ce580232f",
+      "working_bytes": 5227
+    },
+    {
+      "member": "scripts/round75_startup.py",
+      "SHA256": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "bytes": 12402,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "working_bytes": 12402
+    },
+    {
+      "member": "scripts/round76_qualify.py",
+      "SHA256": "c56ab8d49cd664d1433d5dfa0fbe2670ccc390a05ea3a2abd60e479ba26dca72",
+      "bytes": 5321,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "c56ab8d49cd664d1433d5dfa0fbe2670ccc390a05ea3a2abd60e479ba26dca72",
+      "working_bytes": 5321
+    },
+    {
+      "member": "scripts/round76_startup.py",
+      "SHA256": "993c448dd466d5288ed61003ac339c63002452c86737c9d7ee46457b56e6f929",
+      "bytes": 14239,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "993c448dd466d5288ed61003ac339c63002452c86737c9d7ee46457b56e6f929",
+      "working_bytes": 14239
+    },
+    {
+      "member": "scripts/round78_audit.py",
+      "SHA256": "57f4aa7ba6d1b0c20d95779c08d27fd4f1d25164cbbe26ca2a0ae7c090fa58ea",
+      "bytes": 7346,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "57f4aa7ba6d1b0c20d95779c08d27fd4f1d25164cbbe26ca2a0ae7c090fa58ea",
+      "working_bytes": 7346
+    },
+    {
+      "member": "scripts/round83_audit_v2.py",
+      "SHA256": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+      "bytes": 7547,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+      "working_bytes": 7547
+    },
+    {
+      "member": "scripts/round86_native_evidence.py",
+      "SHA256": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+      "bytes": 11468,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+      "working_bytes": 11468
+    },
+    {
+      "member": "scripts/round88_a1_g3.py",
+      "SHA256": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+      "bytes": 35352,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+      "working_bytes": 35352
+    },
+    {
+      "member": "scripts/round88_ot_closure.py",
+      "SHA256": "129b9224ac36e44b52fcc911604938a024d79986f8bd5fe8a8ffd6b14d1b2934",
+      "bytes": 40362,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "129b9224ac36e44b52fcc911604938a024d79986f8bd5fe8a8ffd6b14d1b2934",
+      "working_bytes": 40362
+    },
+    {
+      "member": "scripts/round88_ot_diagnostic.py",
+      "SHA256": "c1cb1776d1b1eef0f03977e00060c1690e5505517d0e4baa71feb3b672fa0756",
+      "bytes": 32547,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "c1cb1776d1b1eef0f03977e00060c1690e5505517d0e4baa71feb3b672fa0756",
+      "working_bytes": 32547
+    },
+    {
+      "member": "scripts/round88_ot_epigraph.py",
+      "SHA256": "5d49c3fc12cc806a8008e43d756bf9c46810b21e7efc2b64c2383da4624bd7da",
+      "bytes": 31375,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "5d49c3fc12cc806a8008e43d756bf9c46810b21e7efc2b64c2383da4624bd7da",
+      "working_bytes": 31375
+    },
+    {
+      "member": "scripts/round88_ot_math.py",
+      "SHA256": "2b8855609cf469098d050fcd9c89efac01b2cb41ee07f023b5a7b79f9ff71840",
+      "bytes": 6864,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "2b8855609cf469098d050fcd9c89efac01b2cb41ee07f023b5a7b79f9ff71840",
+      "working_bytes": 6864
+    },
+    {
+      "member": "scripts/round90_lp_g_g3.py",
+      "SHA256": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996",
+      "bytes": 51527,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996",
+      "working_bytes": 51527
+    },
+    {
+      "member": "scripts/round94_lpg_contemporary.py",
+      "SHA256": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a",
+      "bytes": 55473,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a",
+      "working_bytes": 55473
+    },
+    {
+      "member": "scripts/round94_lpg_formal_recovery_v3.py",
+      "SHA256": "7d54f6bfd2a0fec302b7cdf5d0291809254ea1ffdbc864face54ecc704b7ce01",
+      "bytes": 25366,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "7d54f6bfd2a0fec302b7cdf5d0291809254ea1ffdbc864face54ecc704b7ce01",
+      "working_bytes": 25366
+    },
+    {
+      "member": "scripts/round96_external.py",
+      "SHA256": "4d8f917ce46aa0945319d69e8001006a7cb039ff4a274844e53c6774eeb5d57e",
+      "bytes": 7554,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "4d8f917ce46aa0945319d69e8001006a7cb039ff4a274844e53c6774eeb5d57e",
+      "working_bytes": 7554
+    },
+    {
+      "member": "scripts/round96_prepare.py",
+      "SHA256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+      "bytes": 8730,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "identity",
+      "working_SHA256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+      "working_bytes": 8730
+    },
+    {
+      "member": "scripts/round99_common.py",
+      "SHA256": "760bf112a9c9c0cd1388c842aaa71b715b2958b44fb37541a5a3a2194c024ee0",
+      "bytes": 2345,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "bd1ecd710fa4e52093e6027a247ce77c4ddaa00b56ee0ef499cd45ccd41f8208",
+      "working_bytes": 2378
+    },
+    {
+      "member": "scripts/round99_pure_start_audit.py",
+      "SHA256": "4157be5495f22b91e2ee0ac5e8680d0ce33768bba3f55b66027315d5cf02dad9",
+      "bytes": 7880,
+      "commit": "c0b64d66cb0fda36528f764e9b1264df68f45c8b",
+      "resolution": "fixed Git file",
+      "used_for": [
+        "static project Python dependency of current Round155 source"
+      ],
+      "checkout_transform": "LF_to_CRLF",
+      "working_SHA256": "c769dbdc978025ba84cbb8f566d493018f912f35c74346047434e2e21af4f882",
+      "working_bytes": 8007
+    }
+  ],
+  "archives": {
+    "round153/research_K-35-U.zip": {
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "name": "research_K-35-U.zip",
+      "SHA256": "398a8b55db60d8c8d7363e0dab5646dca9c46f30c421feda7489c30c53cf4132",
+      "bytes": 264613841,
+      "parts": [
+        {
+          "path": "results/unified_exact_round153/artifacts/research_K-35-U.zip.part001",
+          "SHA256": "a6c9a5a6624d4b929d77dd2bd8ed98b5f7687e8b8e757cc22fbc7a1259405b1a",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_K-35-U.zip.part002",
+          "SHA256": "d0887a133e52365a648da10a68151c3cd14c60251e5142448e9334d7f7bc6c01",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_K-35-U.zip.part003",
+          "SHA256": "e6e4fdd059fab8d8a6cc3b4393f009841cdc5882fc60e2ba10d7a3009a0843a5",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_K-35-U.zip.part004",
+          "SHA256": "28a16780a9d2afd57c7d0cb27b901fd680dd27298160a0116c7d8432b087b68b",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_K-35-U.zip.part005",
+          "SHA256": "46672cd9ebfa4d1b9a9f1b700529cdae91044c575e5593b1a2de5048bc0c954c",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_K-35-U.zip.part006",
+          "SHA256": "2f56838ea798e072de27d564cfee0734688cbcc125712a8bbbfe4f751908cd68",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_K-35-U.zip.part007",
+          "SHA256": "e11bbe6b23fff27163e6e9d114ce497052d60d921fcd43a4d739f1bbcb59d91f",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_K-35-U.zip.part008",
+          "SHA256": "ee370a4e4977ca5db3a0e4847e400842898c5770b497c8ab141692fab9916d24",
+          "bytes": 29732817
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round153/artifacts/research_K-35-U.members.json.gz",
+        "SHA256": "4d18b306a75c4cdb138ebea26d2f0d72848507641c648f2008b02f977446f543",
+        "bytes": 124389
+      },
+      "members": 2646,
+      "uncompressed_bytes": 2275236245
+    },
+    "round153/research_N-B35-S.zip": {
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "name": "research_N-B35-S.zip",
+      "SHA256": "9d4ff5bd1c4492101134bcd8d2720a34ae6f1f30a98ad42f588e83c1ad670127",
+      "bytes": 11142342,
+      "parts": [
+        {
+          "path": "results/unified_exact_round153/artifacts/research_N-B35-S.zip",
+          "SHA256": "9d4ff5bd1c4492101134bcd8d2720a34ae6f1f30a98ad42f588e83c1ad670127",
+          "bytes": 11142342
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round153/artifacts/research_N-B35-S.members.json.gz",
+        "SHA256": "4b751af449bf0404f0b3fa05843f1b3e9a39a0bf24efa3292e2d7a6e4607fc95",
+        "bytes": 8687
+      },
+      "members": 173,
+      "uncompressed_bytes": 106900424
+    },
+    "round153/research_N-C20-U.zip": {
+      "commit": "7d64c14faac43c6f410d435dd73b5ba5e49f2f30",
+      "name": "research_N-C20-U.zip",
+      "SHA256": "8fb5a540cdebe596d6598cc56ca87933ed63d0ae48328b290c8031e63fbd0227",
+      "bytes": 235322045,
+      "parts": [
+        {
+          "path": "results/unified_exact_round153/artifacts/research_N-C20-U.zip.part001",
+          "SHA256": "ec695315833412f3f8eb515776df0d27a7bc81ec86aed30054ea5136315a96fe",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_N-C20-U.zip.part002",
+          "SHA256": "5bd96e5fd73e25926fa727cb8830cedabdf1a2e66c7afc5ca3ee195a0b771c8e",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_N-C20-U.zip.part003",
+          "SHA256": "69ef87d7b6a56c7e19211f1f80fa286d111d7486e3b46d22d94234e0c73ce1e7",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_N-C20-U.zip.part004",
+          "SHA256": "8908c709f19fb27e5f1e12dcb99f0b68924e69ab4d209e71ee0fd3eabdda89fd",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_N-C20-U.zip.part005",
+          "SHA256": "c116d3618a9dec2207695806034ff7c61400847a2fd34fd2ef3ff880affc4b41",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_N-C20-U.zip.part006",
+          "SHA256": "a0a1619099ea99260a905ee9f42d2dd4289125daed68214f4e9752f20287cc58",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_N-C20-U.zip.part007",
+          "SHA256": "13d70dd83ac7bbf33425f8d699c3e83a085a97d9ff5008e98c2cf93c22711404",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round153/artifacts/research_N-C20-U.zip.part008",
+          "SHA256": "e5f2848e2640bd4b93930c9bd989189b70ebb386574d40798c7bc7852006c6fd",
+          "bytes": 441021
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round153/artifacts/research_N-C20-U.members.json.gz",
+        "SHA256": "bba319168699bb11bde076c96580519d62f7bc506fc41b8bd3c863a2aae4b6bd",
+        "bytes": 108120
+      },
+      "members": 2300,
+      "uncompressed_bytes": 2183721780
+    },
+    "round154/qualification_failures_and_fees.zip": {
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "name": "qualification_failures_and_fees.zip",
+      "SHA256": "899b0c04962fbf33de178df6b5a604a63ba0ee8b5a073e773cd08cebf8e15314",
+      "bytes": 2732169,
+      "parts": [
+        {
+          "path": "results/unified_exact_round154/artifacts/qualification_failures_and_fees.zip",
+          "SHA256": "899b0c04962fbf33de178df6b5a604a63ba0ee8b5a073e773cd08cebf8e15314",
+          "bytes": 2732169
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round154/artifacts/qualification_failures_and_fees.members.json.gz",
+        "SHA256": "04b571668e2d227a44c90bb20210a7905f4eb11dfde2414150d55522bba5456c",
+        "bytes": 58901
+      },
+      "members": 1332,
+      "uncompressed_bytes": 16222631
+    },
+    "round154/research_K-35-U.zip": {
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "name": "research_K-35-U.zip",
+      "SHA256": "a8e3bce3f49e2673034a8aac63d9c70190a8a4c24fa8a9f01f27adf300f97cf8",
+      "bytes": 123410271,
+      "parts": [
+        {
+          "path": "results/unified_exact_round154/artifacts/research_K-35-U.zip.part001",
+          "SHA256": "4595d29f97d87bdfc2328fc09f1d31b493e406dd7d889afe3b2a2ee695d53f50",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round154/artifacts/research_K-35-U.zip.part002",
+          "SHA256": "15ffd4880da4cfaa4ff21408ecdb324c457e5c2732994ecd35861e77e3428a92",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round154/artifacts/research_K-35-U.zip.part003",
+          "SHA256": "27bac467ec78159d383978c3c7d730dc3ffc7132467f41bcbda16d45585cf57d",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round154/artifacts/research_K-35-U.zip.part004",
+          "SHA256": "fd1c0c0c254c5a411941c1d2a787a2449f42d0065136161b6a1f803d0886fda1",
+          "bytes": 22746975
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round154/artifacts/research_K-35-U.members.json.gz",
+        "SHA256": "9d8351d15a4f19e723992648b6568b13e4a500bf389640e92b8d9a78c223aa12",
+        "bytes": 15331
+      },
+      "members": 318,
+      "uncompressed_bytes": 1400437082
+    },
+    "round154/research_N-C20-U.zip": {
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "name": "research_N-C20-U.zip",
+      "SHA256": "257516b2a8c29a8bb7da7423d5503778e1b8c61dc83e337889731d8c98f520e1",
+      "bytes": 145957492,
+      "parts": [
+        {
+          "path": "results/unified_exact_round154/artifacts/research_N-C20-U.zip.part001",
+          "SHA256": "745af9687f647b742d0a6e95b8ceb7ac1d357b36c01936c1fd9010ec2ca10254",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round154/artifacts/research_N-C20-U.zip.part002",
+          "SHA256": "6b9087ff979c81530cc13c04d8e03e8664d618c8faccbd50143546a581931e06",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round154/artifacts/research_N-C20-U.zip.part003",
+          "SHA256": "0a85bf3f3e79b96fb37e283f3c1d3ed536af77f87d498a5707f26462fa8efc93",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round154/artifacts/research_N-C20-U.zip.part004",
+          "SHA256": "359c4d0d37304258a6f44a9629dd30791221df10a9371f2810898015238fd28b",
+          "bytes": 33554432
+        },
+        {
+          "path": "results/unified_exact_round154/artifacts/research_N-C20-U.zip.part005",
+          "SHA256": "15df4847332cfd2d92323a9f0cbf749cd2423393e49147b34ff3ced9f34dcba3",
+          "bytes": 11739764
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round154/artifacts/research_N-C20-U.members.json.gz",
+        "SHA256": "0014cf16f199a1d4ba2b9c7446d1093e4e0560857bd284b93ca7569bf130a6d3",
+        "bytes": 17307
+      },
+      "members": 354,
+      "uncompressed_bytes": 1594081907
+    }
+  },
+  "resolution": "Resolve unlisted transitive old paths through the fixed provider manifests and their own reuse indexes.",
+  "old_carriers_downloaded": 0,
+  "old_carriers_repacked": 0,
+  "old_producers_or_compilers_run": 0
+}

@@ -1,0 +1,114 @@
+{
+  "UTC": "2026-11-05T21:23:38.656176+00:00",
+  "decision": "ADMIT_ONE_FIXED_LEVEL_ADJUSTMENT",
+  "roles": [
+    {
+      "role": "K-35-U",
+      "label": "feasible_level_deep_v2",
+      "fee_label": "K35_feasible_level_deep_v2",
+      "source": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\coupled\\K-35-U_feasible_level_deep_v1\\result.json",
+      "source_SHA": "b9f3c415f7d9390f82b41d6fee3376e776e91e92a6353f55eb074d2d9febcbb6",
+      "rule": "fixed_level_feasible_AP",
+      "outer_reservation_seconds": 25493,
+      "phase_seconds": 24893,
+      "price_cap": 120,
+      "selection_cap": 120,
+      "iteration_limit": null,
+      "Seed": 0,
+      "Threads": 1,
+      "tolerance": 0.0001,
+      "deterministic_node_limit": 256,
+      "pool_solutions": 20,
+      "lower": 0.2828596948801708,
+      "upper": 0.2873261633037888,
+      "columns": 35658,
+      "supports": 214,
+      "Q_SHA": "9816772328dd5e53c0dfd00e5f714fbaf08d2f93ac3cf0652ce5226a2452fcb5",
+      "source_readback_SHA": "131c7347cfc4bfb5e80910f00d6e92333aafbbc2f4815e0e8a88d762622a7790",
+      "interface_gate_SHA": "4f49ff420fe249b427dc3c1d7695d548a914a47a61da0f91f048267a51ebf10e",
+      "selection_iteration_rule": "selector_variable_count_plus_2000",
+      "source_readback_scope": "complete actual selector matrix and warm point; no new prices or pools"
+    },
+    {
+      "role": "N-C20-U",
+      "label": "feasible_level_deep_v2",
+      "fee_label": "NC20_feasible_level_deep_v2",
+      "source": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\support_LP\\N-C20-U_bounded_screen_support_v1\\result.json",
+      "source_SHA": "1e3797ad83008c68aebeb23d0e617ab0b96522dc03683da492df91e2f22f4de0",
+      "rule": "fixed_level_feasible_AP",
+      "outer_reservation_seconds": 28800,
+      "phase_seconds": 28200,
+      "price_cap": 120,
+      "selection_cap": 120,
+      "iteration_limit": null,
+      "Seed": 0,
+      "Threads": 1,
+      "tolerance": 0.0001,
+      "deterministic_node_limit": 256,
+      "pool_solutions": 20,
+      "lower": 0.18332184845553887,
+      "upper": 0.1898677030967613,
+      "columns": 54344,
+      "supports": 75,
+      "Q_SHA": "fefd769b819d36a93dfaa8dc39670512109323cdd0123366e768443cdf2a1d45",
+      "source_readback_SHA": "07bd66dff176a70153bc10f96df7bb2879c04fd79d3ff8b234a43e7fc56b422c",
+      "interface_gate_SHA": "4f49ff420fe249b427dc3c1d7695d548a914a47a61da0f91f048267a51ebf10e",
+      "selection_iteration_rule": "selector_variable_count_plus_2000"
+    }
+  ],
+  "supersedes_unstarted_rule_only": "deep_plan.json NC20; K35 remaining capacity follows its actual reviewed checkpoint",
+  "original_plan_SHA": "0fe9a66d0060a12d2de03105941086cf13e10abd8417771aecc34c1c98a8b3f7",
+  "K_checkpoint_SHA": "bdc2d0d2ab1c79722c76fb7b6cd42dfddc97297269633892c34c12a2133a45d0",
+  "K_checkpoint_audit_SHA": "d2744686c070e9e782c1ca89a7662384b6c3e70a5ef45c15fc980f7bcbe8f680",
+  "K_completed_iterations": 112,
+  "K_added_columns": 1606,
+  "K_outer_seconds": 3244.787604100071,
+  "budget": {
+    "G1_seconds": 11810.892898900434,
+    "remaining_G1_seconds": 160989.10710109957,
+    "by_category": {
+      "research": 4585.450818500482,
+      "verification": 0.0,
+      "native": 7225.442080399953
+    },
+    "limits": {
+      "research": 172800.0,
+      "verification": 172800.0,
+      "native": 172800.0
+    },
+    "category_remaining": {
+      "research": 168214.54918149952,
+      "verification": 172800.0,
+      "native": 165574.55791960005
+    },
+    "separately_reported_seconds": 0.0,
+    "unclosed": [
+      {
+        "label": "prepare_level_deep_v3",
+        "kind": "research",
+        "reservation": 120.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\fees\\prepare_level_deep_v3\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "reserved_capacity": {
+    "level_continuations": 54293,
+    "remaining_E_with_verification": 24300,
+    "unused_adjustment_or_followup_capacity": 14400,
+    "final_review_failure_margin": 21600
+  },
+  "reason": "Sustained valid basic-dual negative columns did not receive positive later RMP weights or improve the interval. Test the already-qualified fixed interior-level feasible AP selector with the remaining substantive capacity, uniformly on both domains.",
+  "not_a_saturation_claim": true,
+  "no_instance_specific_algorithm_switch": true,
+  "no_elapsed_time_switch_inside_any_algorithm": true,
+  "full_Q_and_price_domain_unchanged": true,
+  "selection_failure_is_unresolved_not_a_bound": true,
+  "unspent_capacity_remains_available": true,
+  "revision_of_SHA": "125f7b91545191da345b5b46d2c443b10826311e84a2672cab7cfbe48062d772",
+  "repair": "The observed full-PStart conversion had3172 superbasic variables and exhausted2000 iterations before producing a Native solution. Allow NumVars+2000 iterations uniformly, retain the120s cap, same AP center and exact level gate. Explicitly record two Native-omitted nominal-level coefficients; no original dual-domain constraint or original-Q certificate is omitted.",
+  "first_attempt_SHA": "b9f3c415f7d9390f82b41d6fee3376e776e91e92a6353f55eb074d2d9febcbb6",
+  "first_attempt_receipt_SHA": "11033e0645591052bb4c6d2996660bb5f1e474f91e172d7bb9a980f79399ad07",
+  "actual_initial_readback_SHA": "131c7347cfc4bfb5e80910f00d6e92333aafbbc2f4815e0e8a88d762622a7790",
+  "not_a_new_selector_or_parameter_grid": true
+}

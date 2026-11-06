@@ -1,0 +1,54 @@
+{
+  "decision": "ACCEPT",
+  "matrix_SHA": "b56956674010f3ed8ce2c1b1e81270010752faab3f29cf44ee54a2114afe0c5f",
+  "independent_argv_reconstruction": true,
+  "nonimplementer_agent_review": false,
+  "review_method": "separate readback against fixed R137 argv and R154 qualifications",
+  "source_SHA": "0863231f7f08d343208c43df30f57b38073848bcbea5641ec8482c568efe9d80",
+  "facts": [
+    {
+      "role": "N-B35-S",
+      "method": "B",
+      "cap": 7200,
+      "original_semantics_preserved": true,
+      "own_H": true
+    },
+    {
+      "role": "N-B35-S",
+      "method": "E",
+      "cap": 7200,
+      "original_semantics_preserved": true,
+      "own_H": true
+    },
+    {
+      "role": "R-X35-S-T2",
+      "method": "B",
+      "cap": 7200,
+      "original_semantics_preserved": true,
+      "own_H": true
+    },
+    {
+      "role": "R-X35-S-T2",
+      "method": "E",
+      "cap": 7200,
+      "original_semantics_preserved": true,
+      "own_H": true
+    },
+    {
+      "role": "R-X20-S-T1",
+      "method": "B",
+      "cap": 1200,
+      "original_semantics_preserved": true,
+      "own_H": true
+    },
+    {
+      "role": "R-X20-S-T1",
+      "method": "E",
+      "cap": 1200,
+      "original_semantics_preserved": true,
+      "own_H": true
+    }
+  ],
+  "Optimize": 0,
+  "no_CPP_or_producer_change": true
+}

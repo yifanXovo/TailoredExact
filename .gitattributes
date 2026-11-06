@@ -498,3 +498,12 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round154/artifacts/** -text -diff -whitespace
 /results/unified_exact_round154/figures/*.svg -whitespace
 /results/unified_exact_round154/review/** -whitespace
+
+# Round155 executed Python sources and new-only evidence preserve actual bytes.
+/scripts/round155* -text whitespace=cr-at-eol
+/results/unified_exact_round155/** -text whitespace=cr-at-eol
+/results/unified_exact_round155/**/*.log -whitespace
+/results/unified_exact_round155/goal.md -whitespace
+/results/unified_exact_round155/artifacts/** -text -diff -whitespace
+/docs/round155_research.md -text whitespace=cr-at-eol
+/.gitattributes -text whitespace=cr-at-eol

@@ -1,0 +1,170 @@
+{
+  "UTC": "2026-11-06T04:27:40.525309+00:00",
+  "decision": "ADMIT_REMAINING_SUBSTANTIVE_BASIC_CONTINUATIONS",
+  "roles": [
+    {
+      "role": "K-35-U",
+      "label": "bounded_remaining_v1",
+      "fee_label": "K35_bounded_remaining_v1",
+      "source": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\support_LP\\K-35-U_level_deep_support_v2\\result.json",
+      "source_SHA": "f16b44047e8f49ef51c21848e5067c60e5fa1462f25d03b821b3b6f4d21e3303",
+      "rule": "bounded",
+      "phase_seconds": 23551,
+      "outer_reservation_seconds": 24151,
+      "iterations": 0,
+      "price_cap": 120,
+      "deterministic_node_limit": 256,
+      "pool_solutions": 20,
+      "Seed": 0,
+      "Threads": 1,
+      "tolerance": 0.0001,
+      "lower": 0.2828596948801708,
+      "upper": 0.2873261633037888,
+      "columns": 35890,
+      "supports": 232,
+      "Q_SHA": "9816772328dd5e53c0dfd00e5f714fbaf08d2f93ac3cf0652ce5226a2452fcb5",
+      "completed_deep_outer_seconds": 4648.167780600255,
+      "completed_deep_receipts": [
+        {
+          "label": "K35_bounded_deep_v1",
+          "seconds": 3244.787604100071,
+          "receipt_SHA": "6eb653843cce56e926e973f292df1de880838fc3d649f52e212ebb1a8a789f65"
+        },
+        {
+          "label": "K35_feasible_level_deep_v1",
+          "seconds": 61.94101840001531,
+          "receipt_SHA": "11033e0645591052bb4c6d2996660bb5f1e474f91e172d7bb9a980f79399ad07"
+        },
+        {
+          "label": "K35_feasible_level_deep_v2",
+          "seconds": 1341.4391581001692,
+          "receipt_SHA": "997e9f0a85d14f3aaf6ad225a9bfec68f99010d89c3599c5662c1c23484786c3"
+        }
+      ],
+      "interface_gate_SHA": "7fe7a3fa61198b06a22e00b42030b41169ae11d16accc3ba94e8f2988b3f0ca3",
+      "actual_price_transport_binding_SHA": "7f80db27c65f05c8f80b5aaa969077c91c981f0b6d7fe656e32357f1f836e733",
+      "raw_level_result_SHA": "f9bd038348e5b278275a38eeabbfb5a206d77319f7ec1b65479f4a63b72ab711",
+      "qualified_level_result_SHA": "4220c022f9157371ccb122fad53d87ca55985019650bfedc3bb781ea4f9b2509",
+      "loop_readback_SHA": "83ae0bba8b2e66679f5e1bc21ec26a3cf55adb103df40e72e3b86e575c2cf089",
+      "level_readback_SHA": "c8b57f9c54b437c12ddc00e23e19d2d1cc6dbf7b76fd61f3e03da4bbf6cca406",
+      "support_readback_SHA": "3ce3a66604b64ec6cca35bc78c98ad4ab165fa19acb26644a193ff8d81d05de8",
+      "retained_upper_witness": {
+        "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\coupled\\K-35-U_bounded_deep_v1\\iter000056\\primal.json.gz",
+        "SHA256": "8e9c3a8da46f90d4ec743a8cb9846e1cec43403350bacdd8b7a2c1cf4f8f1649",
+        "upper": 0.2873261633037888,
+        "objective": 0.2873261633037888,
+        "mass": 0.9999999999910636,
+        "negative_mass": 4.538965137806894e-10,
+        "full_marginal_error": 2.621336481212211e-11,
+        "true_completion_slack": 1.0000010924344558e-08,
+        "original_Q_primal": {
+          "qualified": true,
+          "constraints": 1.4551915228366852e-11,
+          "bounds": 7.696954185121285e-12,
+          "objective": 0.2873261633037888,
+          "policy": "Inherited numerical LP feasibility qualification; not a rational primal certificate"
+        }
+      }
+    },
+    {
+      "role": "N-C20-U",
+      "label": "bounded_remaining_v1",
+      "fee_label": "NC20_bounded_remaining_v1",
+      "source": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\support_LP\\N-C20-U_level_deep_support_v2\\result.json",
+      "source_SHA": "8dcafe9df8bc778f0c6eb825aadd30c78adf755ba9efdc0e31912f838bdcedaf",
+      "rule": "bounded",
+      "phase_seconds": 28098,
+      "outer_reservation_seconds": 28698,
+      "iterations": 0,
+      "price_cap": 120,
+      "deterministic_node_limit": 256,
+      "pool_solutions": 20,
+      "Seed": 0,
+      "Threads": 1,
+      "tolerance": 0.0001,
+      "lower": 0.18332184845553887,
+      "upper": 0.1898677030967613,
+      "columns": 54354,
+      "supports": 76,
+      "Q_SHA": "fefd769b819d36a93dfaa8dc39670512109323cdd0123366e768443cdf2a1d45",
+      "completed_deep_outer_seconds": 101.86480799992569,
+      "completed_deep_receipts": [
+        {
+          "label": "NC20_feasible_level_deep_v2",
+          "seconds": 101.86480799992569,
+          "receipt_SHA": "eadad9cbba8fb83275fe27807a018dc9f9581e117ad72571054f495e99f05d11"
+        }
+      ],
+      "interface_gate_SHA": "7fe7a3fa61198b06a22e00b42030b41169ae11d16accc3ba94e8f2988b3f0ca3",
+      "actual_price_transport_binding_SHA": "7f80db27c65f05c8f80b5aaa969077c91c981f0b6d7fe656e32357f1f836e733",
+      "raw_level_result_SHA": "50c57bd870895af9c9921780036f4ac57def6c4be15a57398df8bf95c71221e7",
+      "qualified_level_result_SHA": "797a68dfdba8d0fe92af71529ff38cb5cc305be799b84399c94c1ad7fdd388d8",
+      "loop_readback_SHA": "d68ac6ba99820337f668f05732842872db567c7284023ad560cb9b75db09a097",
+      "level_readback_SHA": "9096e0a59970b730207ccf26f856c6800ec3403157026c3c0a0df8b49cb899b1",
+      "support_readback_SHA": "4a43272ff590a7eeddc6960ca0886895c751693431bc432a8334074f3cb4fdbe",
+      "retained_upper_witness": {
+        "path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\coupled\\N-C20-U_bounded_screen_v1\\iter000005\\primal.json.gz",
+        "SHA256": "80a288d0b97160c698048b945da265d9abbed3bede4d276c261e5487a35de876",
+        "upper": 0.1898677030967613,
+        "objective": 0.18986770309676132,
+        "mass": 0.9999999999999947,
+        "negative_mass": 0.0,
+        "full_marginal_error": 2.1316282072803006e-14,
+        "true_completion_slack": 9.999999993709192e-09,
+        "original_Q_primal": {
+          "qualified": true,
+          "constraints": 9.094947017729282e-13,
+          "bounds": 4.6629367034256575e-15,
+          "objective": 0.18986770309676132,
+          "policy": "Inherited numerical LP feasibility qualification; not a rational primal certificate"
+        }
+      }
+    }
+  ],
+  "budget": {
+    "G1_seconds": 35141.893854701426,
+    "remaining_G1_seconds": 137658.10614529857,
+    "by_category": {
+      "research": 6032.799335700693,
+      "verification": 338.8020345007535,
+      "native": 28770.29248449998
+    },
+    "limits": {
+      "research": 172800.0,
+      "verification": 172800.0,
+      "native": 172800.0
+    },
+    "category_remaining": {
+      "research": 166767.2006642993,
+      "verification": 172461.19796549925,
+      "native": 144029.70751550002
+    },
+    "separately_reported_seconds": 0.0,
+    "unclosed": [
+      {
+        "label": "prepare_remaining_deep_v1",
+        "kind": "verification",
+        "reservation": 120.0,
+        "PID_path": "E:\\codes\\ExactEBRP-work\\worktrees\\paper-current\\results\\unified_exact_round155\\fees\\prepare_remaining_deep_v1\\PID.json"
+      }
+    ],
+    "nested_H_LP_MIP_Work_not_added": true
+  },
+  "reserved_capacity": {
+    "remaining_substantive": 52849,
+    "final_review_and_failures": 21600,
+    "unallocated_adjustment_capacity": 14400
+  },
+  "original_deep_plan_SHA": "0fe9a66d0060a12d2de03105941086cf13e10abd8417771aecc34c1c98a8b3f7",
+  "level_plan_SHA": "3f62022834befded7b22c36c5b3f59e6583ada23a518dd7a7e3f2352e0314287",
+  "panel_completion_SHA": "f6d29f2ccad59b5f50d5970bbe3d62ebfb6710a0829f679796c0573bf9648fbc",
+  "panel_recovery_status_SHA": "35bf236dd6fb0df9969c8588c2621eb1095d9ccdd17ed6f10e62bc56b1defe9a",
+  "actual_price_transport_binding_SHA": "7f80db27c65f05c8f80b5aaa969077c91c981f0b6d7fe656e32357f1f836e733",
+  "reason": "Both fixed-level attempts ended at unavailable selected candidates without a level or interval gain. Retain every paid valid new column/support and the remaining original8h/domain capacities. Resume the already-qualified basic-dual bounded-price loop without further L1 selection Optimize.",
+  "source_is_own_branch_only": true,
+  "no_new_oracle_or_selector_variant": true,
+  "full_Q_and_original_price_definition_unchanged": true,
+  "actual_native_state_transport_qualified_before_continuation": true,
+  "no_saturation_claim_from_selector_exit": true,
+  "no_instance_specific_or_elapsed_time_algorithm_switch": true
+}
