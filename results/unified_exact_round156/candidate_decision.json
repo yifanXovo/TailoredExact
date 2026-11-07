@@ -1,0 +1,36 @@
+{
+  "UTC": "2026-11-06T19:25:11.075540+00:00",
+  "stage": "frozen_producer_selection_before_complete_panel",
+  "selected": "RN16384_original_gap",
+  "node_limit": 16384,
+  "original_price_gap": 0.0001,
+  "beta": 1,
+  "d": "exact original h",
+  "fixed_initial_RN_capacity": true,
+  "old_4096_restart": false,
+  "instance_identity_conditions": false,
+  "time_based_component_switch": false,
+  "Seed": 0,
+  "Threads": 1,
+  "only_whole_method_deadline": true,
+  "lower_gain": 0.01377579300343923,
+  "matched_RN_interval": [
+    0.23603837292376867,
+    0.23612171136420015
+  ],
+  "matched_RN_outer_seconds": 53.110873099882156,
+  "reason": "RN closes the original price interval below 1e-4 before either residual arm; a larger 65536 tier has no remaining precision need.",
+  "depth_capacity_not_required_to_be_spent": true,
+  "residual_finite_negative_for_efficiency": true,
+  "original_inventory_upper_is_not_physical": true,
+  "proof_only_consumer_unchanged": true,
+  "preliminary_full_panel_admission_requires": [
+    "fresh helper checks including preselected K20",
+    "same-PE B/E/Eplus smoke",
+    "frozen argv audit"
+  ],
+  "complete_panel_results_not_yet_available": true,
+  "stable_GI_TBC_default_unchanged": true,
+  "source_report_SHA": "ae8f1abbe5186e1406ce1553a557ac244d4cfc5b1df3d99bba59628a2b75262e",
+  "source_audit_SHA": "9ac7d86902ae93e954d9fbf7e2dda609d97c357bb678299481f5e32ab71af742"
+}

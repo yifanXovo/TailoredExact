@@ -1,0 +1,101 @@
+{
+  "scope": {
+    "Bminus": 1,
+    "B": 3,
+    "gamma_L": 0.0,
+    "gamma_U": 1.0,
+    "cutoff": 2.0,
+    "stations": [
+      {
+        "i": 1,
+        "lo": 0,
+        "hi": 2,
+        "support": [
+          0,
+          1,
+          2
+        ],
+        "c": 1.0,
+        "omega": 4.440892098500626e-16
+      },
+      {
+        "i": 2,
+        "lo": 0,
+        "hi": 2,
+        "support": [
+          0,
+          1,
+          2
+        ],
+        "c": 0.5,
+        "omega": 0.17
+      }
+    ]
+  },
+  "tau_exact": "-5764607523034235/288230376151711744",
+  "lower": 0.0,
+  "lower_exact": "0",
+  "upper": 0.0,
+  "upper_exact": "0",
+  "stocks": [
+    {
+      "Y": [
+        2,
+        1
+      ],
+      "feasible": true,
+      "G": 0.3,
+      "f": 0.3,
+      "price": 0.38500000000000045,
+      "penalty": 0.08500000000000045,
+      "phi": 0.38500000000000045,
+      "total": 3,
+      "S": 2.5,
+      "f_exact": "3/10",
+      "price_exact": "138710868523011439/360287970189639680"
+    },
+    {
+      "Y": [
+        1,
+        2
+      ],
+      "feasible": true,
+      "G": 0.0,
+      "f": 0.0,
+      "price": 0.0,
+      "penalty": 0.0,
+      "phi": 0.0,
+      "total": 3,
+      "S": 2.0,
+      "f_exact": "0",
+      "price_exact": "0"
+    }
+  ],
+  "residual_lower_exact": "47215430202141695223/1180591620717411303424",
+  "restricted_phi_lower_exact": "0",
+  "complete_domain": true,
+  "condition_upper": false,
+  "inventory_upper_used": 0.38500000000090995,
+  "target_proved": true,
+  "target_disproved": false,
+  "zero_exact": null,
+  "fallback_exact": "0",
+  "LP": null,
+  "global_deadline_stop": false,
+  "calls": [
+    {
+      "Status": 2,
+      "Runtime": 0.0,
+      "Work": 0.00036097438356164383,
+      "nodes": 0.0,
+      "native_bound": 0.010000000000000085,
+      "native_incumbent": 0.010000000000000085,
+      "bound_status_qualified": true,
+      "counterexample_stop": false,
+      "construct_DP_LP_seconds": 0.02240190003067255,
+      "optimize_seconds": 0.0017113001085817814
+    }
+  ],
+  "seconds": 0.0247533000074327,
+  "upper_is_inventory_only": true
+}

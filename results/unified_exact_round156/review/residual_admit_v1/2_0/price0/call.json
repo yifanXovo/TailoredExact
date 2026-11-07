@@ -1,0 +1,209 @@
+{
+  "UTC": "2026-11-06T19:07:59.967848+00:00",
+  "scope": {
+    "Bminus": 1,
+    "B": 3,
+    "gamma_L": 0.0,
+    "gamma_U": 1.0,
+    "cutoff": 2.0,
+    "stations": [
+      {
+        "i": 1,
+        "lo": 0,
+        "hi": 2,
+        "support": [
+          0,
+          1,
+          2
+        ],
+        "c": 1.0,
+        "omega": 4.440892098500626e-16
+      },
+      {
+        "i": 2,
+        "lo": 0,
+        "hi": 2,
+        "support": [
+          0,
+          1,
+          2
+        ],
+        "c": 0.5,
+        "omega": 0.17
+      }
+    ]
+  },
+  "beta_exact": "1",
+  "d_exact": {
+    "1:0": "1/2251799813685248",
+    "1:1": "0",
+    "1:2": "1/2251799813685248",
+    "2:0": "6124895493223875/36028797018963968",
+    "2:1": "6124895493223875/72057594037927936",
+    "2:2": "0"
+  },
+  "tau_exact": "-5764607523034235/288230376151711744",
+  "inventory_upper_exact": "138710868523339119/360287970189639680",
+  "condition_upper": false,
+  "anchors_exact": {
+    "1": "1/4503599627370496",
+    "2": "6124895493223875/72057594037927936"
+  },
+  "anchor_sum_exact": "6124895493223891/72057594037927936",
+  "scale": 4.0,
+  "intended_costs": {
+    "1:0": 5.551115123125783e-17,
+    "1:1": -5.551115123125783e-17,
+    "1:2": 5.551115123125783e-17,
+    "2:0": 0.02125,
+    "2:1": 0.0,
+    "2:2": -0.02125
+  },
+  "actual_costs": {
+    "1:0": -0.0,
+    "1:1": -0.0,
+    "1:2": -0.0,
+    "2:0": 0.02125,
+    "2:1": -0.0,
+    "2:2": -0.02125
+  },
+  "actual_cost_DP_exact": [
+    "-6124895493223875/288230376151711744",
+    "6124895493223875/288230376151711744"
+  ],
+  "eplus_exact": "1/18014398509481984",
+  "cap_actual_D_exact": "3377699720538117/45035996273704960",
+  "cost_bounds": [
+    -0.02125,
+    0.02125
+  ],
+  "original_cost_upper": 0.02125,
+  "positive_S_bounds": [
+    0.5,
+    2.5
+  ],
+  "residual_guard_scaled": 1.7437500000000002e-06,
+  "additional_scaled_error_exact": "5/36028797018963968",
+  "original_guard_retained": true,
+  "q_can_be_negative": true,
+  "full_original_support": true,
+  "preserved_objective_not_residual_minimum": true,
+  "restoration": "min(inventory_upper, restricted_phi_lower)",
+  "matrix_evidence": {
+    "model_SHA": "06a71955ae2fbd53a0cdad8cfd38cb8eff7c76adbf5fa1419bdbb7f4bb9ea324",
+    "full_readback": true,
+    "matrix_evidence": "E:\\codes\\ExactEBRP-work\\worktrees\\round156\\results\\unified_exact_round156\\review\\residual_admit_v1\\2_0\\price0\\matrix_delta.json.gz",
+    "matrix_evidence_SHA": "315b4b1a93983937e3899c3ae2e74409e09d0e1a3023c8fbbbffb69fb5cffb2e",
+    "semantics_SHA": "332b891650f7aa7944ecd248e134b4dfc706dc781c427daaef180c67f9fb1b46"
+  },
+  "witness": {
+    "Y": [
+      1,
+      2
+    ],
+    "feasible": true,
+    "G": 0.0,
+    "f": 0.0,
+    "price": 0.0,
+    "penalty": 0.0,
+    "phi": 0.0,
+    "total": 3,
+    "S": 2.0,
+    "f_exact": "0",
+    "price_exact": "0"
+  },
+  "witness_actual_D_exact": "-6124895493223875/288230376151711744",
+  "conditional_S_bounds": [
+    {
+      "i": 1,
+      "y": 0,
+      "parts": {
+        "True": {
+          "lower": 0.5,
+          "upper": 1.0
+        },
+        "False": {
+          "lower": 1.0,
+          "upper": 2.5
+        }
+      }
+    },
+    {
+      "i": 1,
+      "y": 1,
+      "parts": {
+        "True": {
+          "lower": 1.0,
+          "upper": 2.0
+        },
+        "False": {
+          "lower": 0.5,
+          "upper": 2.5
+        }
+      }
+    },
+    {
+      "i": 1,
+      "y": 2,
+      "parts": {
+        "True": {
+          "lower": 2.0,
+          "upper": 2.5
+        },
+        "False": {
+          "lower": 0.5,
+          "upper": 2.0
+        }
+      }
+    },
+    {
+      "i": 2,
+      "y": 0,
+      "parts": {
+        "True": {
+          "lower": 1.0,
+          "upper": 2.0
+        },
+        "False": {
+          "lower": 0.5,
+          "upper": 2.5
+        }
+      }
+    },
+    {
+      "i": 2,
+      "y": 1,
+      "parts": {
+        "True": {
+          "lower": 0.5,
+          "upper": 2.5
+        },
+        "False": {
+          "lower": 0.5,
+          "upper": 2.5
+        }
+      }
+    },
+    {
+      "i": 2,
+      "y": 2,
+      "parts": {
+        "True": {
+          "lower": 1.0,
+          "upper": 2.0
+        },
+        "False": {
+          "lower": 0.5,
+          "upper": 2.5
+        }
+      }
+    }
+  ],
+  "conditional_construct_seconds": 0.0012345998547971249,
+  "initial_dp_seconds": 9.489990770816803e-05,
+  "cost_dp_seconds": 4.9900030717253685e-05,
+  "absolute_gap": 0.0001,
+  "node_limit": 256,
+  "Seed": 0,
+  "Threads": 1
+}

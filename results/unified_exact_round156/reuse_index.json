@@ -1,0 +1,3390 @@
+{
+  "UTC": "2026-11-07T04:21:54.543363+00:00",
+  "providers": {
+    "137": {
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "path": "results/unified_exact_round137/raw_archive_manifest.json",
+      "SHA256": "39f3e2af20965c6986966b4c88127838d7cc6a47a1fed90760012b452634b8e9",
+      "bytes": 96091
+    },
+    "154": {
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "path": "results/unified_exact_round154/public_manifest.json",
+      "SHA256": "41c3c4780ed47ea239e48f8b76c740193e0c3ca6588d4c696e92601afaa21bfd",
+      "bytes": 30891
+    },
+    "155": {
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "path": "results/unified_exact_round155/public_manifest.json",
+      "SHA256": "a69089bb17c0cdb3d5992cdafb9e0e82bd5d03395d05162eec83e1aeca3d72fb",
+      "bytes": 28544
+    }
+  },
+  "dependencies": [
+    {
+      "member": "results/unified_exact_round132/inputs/K-20-S.txt",
+      "SHA256": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "bytes": 1287,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "working_bytes": 1287,
+      "checkout_transform": "identity",
+      "used_for": [
+        "preselected historical CITI K20 input"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/external/models/L0_epoch_0_generation_1.lp",
+      "SHA256": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+      "bytes": 834348,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed archive member",
+      "archive_reference": "round137/campaign_012.zip",
+      "working_SHA256": "f59c8a149eb6bf9bc0fea82fbafe8fe3c0fd3ef6b32f8c11e28917efa0e6215b",
+      "working_bytes": 834348,
+      "checkout_transform": "identity",
+      "used_for": [
+        "preselected K20 first actual Native root scope"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round137/campaign/012/raw/R137_012_K-20-S_S0_S2/observations.json",
+      "SHA256": "b14d3a59235b6810112cd5756ceca1d2abad670c2b786776d1e23193fe730520",
+      "bytes": 29823644,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed archive member",
+      "archive_reference": "round137/campaign_012.zip",
+      "working_SHA256": "b14d3a59235b6810112cd5756ceca1d2abad670c2b786776d1e23193fe730520",
+      "working_bytes": 29823644,
+      "checkout_transform": "identity",
+      "used_for": [
+        "K20 saved first actual Native call and chronological root identity"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round137/inputs/N-B35-S.txt",
+      "SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "bytes": 2102,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed Git file",
+      "working_SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "working_bytes": 2102,
+      "checkout_transform": "identity",
+      "used_for": [
+        "N-B35-S original physical input"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round137/inputs/R-B35-S.txt",
+      "SHA256": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+      "bytes": 2109,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed Git file",
+      "working_SHA256": "64f9a5dfdfb09fcfbe705c1edfa16e94ea8bbf30281c5d25bb919c63c503a71a",
+      "working_bytes": 2109,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-B35-S-T1 original physical input"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round137/inputs/R-X20-S.txt",
+      "SHA256": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "bytes": 1256,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed Git file",
+      "working_SHA256": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "working_bytes": 1256,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X20-S-T1 original physical input"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round137/inputs/R-X35-S.txt",
+      "SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "bytes": 2078,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "working_bytes": 2078,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X35-S-T2 original physical input"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round137/matrix_frozen.json",
+      "SHA256": "26f295da36097cd662b9c2ca049ab2452f0b295dfcdb12dd4b726ff25190c894",
+      "bytes": 647926,
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "resolution": "fixed Git file",
+      "working_SHA256": "26f295da36097cd662b9c2ca049ab2452f0b295dfcdb12dd4b726ff25190c894",
+      "working_bytes": 647926,
+      "checkout_transform": "identity",
+      "used_for": [
+        "K20 original physical role and own-H identity"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/campaign_confirmation/007/raw/R154_007_R-B35-S-T1_S0_E/external/models/L0_epoch_0_generation_1.lp",
+      "SHA256": "3e9b6a244670c03daaae032b4c250d56beb5183e03fb332dabe43994cb5190de",
+      "bytes": 3599634,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/complete_arm_007.zip",
+      "working_SHA256": "3e9b6a244670c03daaae032b4c250d56beb5183e03fb332dabe43994cb5190de",
+      "working_bytes": 3599634,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-B35-S-T1 saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/campaign_confirmation/007/raw/R154_007_R-B35-S-T1_S0_E/external/round153_floor/pricing/call.json",
+      "SHA256": "4261520357c40546ed8ddba8b71bbc7905edcbf56f0f48229e950ee540ce274f",
+      "bytes": 78541,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/complete_arm_007.zip",
+      "working_SHA256": "4261520357c40546ed8ddba8b71bbc7905edcbf56f0f48229e950ee540ce274f",
+      "working_bytes": 78541,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-B35-S-T1 saved original-objective starting scope/interval/true stocks and original RN stop/settings"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/campaign_confirmation/007/raw/R154_007_R-B35-S-T1_S0_E/external/round153_floor/pricing/result.json",
+      "SHA256": "a789df61d8133ea209fe6e5e4b0048bc4012c085a7f5bdfa9964fba144474e4f",
+      "bytes": 80454,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/complete_arm_007.zip",
+      "working_SHA256": "a789df61d8133ea209fe6e5e4b0048bc4012c085a7f5bdfa9964fba144474e4f",
+      "working_bytes": 80454,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-B35-S-T1 saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/campaign_confirmation/007/raw/R154_007_R-B35-S-T1_S0_E/external/round153_floor/result.json",
+      "SHA256": "1815193b5c7c79489acc4b011365abd95a384c71dea93c7ec6737e5dcfe8c06f",
+      "bytes": 16940,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/complete_arm_007.zip",
+      "working_SHA256": "1815193b5c7c79489acc4b011365abd95a384c71dea93c7ec6737e5dcfe8c06f",
+      "working_bytes": 16940,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-B35-S-T1 saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/campaign_confirmation/007/raw/R154_007_R-B35-S-T1_S0_E/external/round153_floor/source.json",
+      "SHA256": "8d8fe6871117cf31d71ff4154854659d44ac0bd248258ded0174331b95e0e6fe",
+      "bytes": 29339,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed archive member",
+      "archive_reference": "round154/complete_arm_007.zip",
+      "working_SHA256": "8d8fe6871117cf31d71ff4154854659d44ac0bd248258ded0174331b95e0e6fe",
+      "working_bytes": 29339,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-B35-S-T1 saved original-objective starting scope/interval/true stocks and source binding"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/candidate_manifest.json",
+      "SHA256": "3209fff9ba2aa003605ba09511eb499bd002ad43eb44c60b9ada3ca67b07351e",
+      "bytes": 28687,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "working_SHA256": "3209fff9ba2aa003605ba09511eb499bd002ad43eb44c60b9ada3ca67b07351e",
+      "working_bytes": 28687,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/confirmation_matrix.json",
+      "SHA256": "5a337c2229357fbb5c102332bf2726689256aec6231fc6fc3d0b272a0e8897b7",
+      "bytes": 71181,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "working_SHA256": "5a337c2229357fbb5c102332bf2726689256aec6231fc6fc3d0b272a0e8897b7",
+      "working_bytes": 71181,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/helper_manifest.json",
+      "SHA256": "aed6a85f701d3073a6ffd1006d0931402da881428c2b10bfab822926f5a788e6",
+      "bytes": 15373,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "working_SHA256": "aed6a85f701d3073a6ffd1006d0931402da881428c2b10bfab822926f5a788e6",
+      "working_bytes": 15373,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/reuse_index.json",
+      "SHA256": "2074a70a19b1a609de1b351903a8f93e54f5f9f3647cc6783c7f36f3aa0114dd",
+      "bytes": 129857,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "working_SHA256": "2074a70a19b1a609de1b351903a8f93e54f5f9f3647cc6783c7f36f3aa0114dd",
+      "working_bytes": 129857,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round154/source_manifest.json",
+      "SHA256": "83c144898e172bc1d7974db82b03651dcff02ff4ad95339133723e9257b475fa",
+      "bytes": 81991,
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "resolution": "fixed Git file",
+      "working_SHA256": "83c144898e172bc1d7974db82b03651dcff02ff4ad95339133723e9257b475fa",
+      "working_bytes": 81991,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/001/raw/R155_001_N-B35-S_S0_B/audit.json",
+      "SHA256": "e0a1089e3b5a8f26a61ba1159c91d1e8d7ce4f543f9b92e1f7999983ad778ad2",
+      "bytes": 192961,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_001.zip",
+      "working_SHA256": "e0a1089e3b5a8f26a61ba1159c91d1e8d7ce4f543f9b92e1f7999983ad778ad2",
+      "working_bytes": 192961,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_001_N-B35-S_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/001/raw/R155_001_N-B35-S_S0_B/observations.json",
+      "SHA256": "1e99b435a03c44938b2fc94cb032b53384d11667f0ae16df7a649935a0035689",
+      "bytes": 305081,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_001.zip",
+      "working_SHA256": "1e99b435a03c44938b2fc94cb032b53384d11667f0ae16df7a649935a0035689",
+      "working_bytes": 305081,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_001_N-B35-S_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/001/raw/R155_001_N-B35-S_S0_B/process_start_marker.json",
+      "SHA256": "d8a9f17cbe1ae73d114f6b351a7a0a960b7c46e76f76da1b25a743868807874a",
+      "bytes": 161,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_001.zip",
+      "working_SHA256": "d8a9f17cbe1ae73d114f6b351a7a0a960b7c46e76f76da1b25a743868807874a",
+      "working_bytes": 161,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_001_N-B35-S_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/001/raw/R155_001_N-B35-S_S0_B/producer_receipt.json",
+      "SHA256": "427eae13d1b03f2614ed45048f1d736f864eadacb72ee2279d349eef2413285f",
+      "bytes": 745,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_001.zip",
+      "working_SHA256": "427eae13d1b03f2614ed45048f1d736f864eadacb72ee2279d349eef2413285f",
+      "working_bytes": 745,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_001_N-B35-S_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/001/raw/R155_001_N-B35-S_S0_B/round153_control_audit.json",
+      "SHA256": "18caf406b5a9c3280c22bd977386ab3f671a2a9bc6795241ec325776548afd17",
+      "bytes": 256,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_001.zip",
+      "working_SHA256": "18caf406b5a9c3280c22bd977386ab3f671a2a9bc6795241ec325776548afd17",
+      "working_bytes": 256,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_001_N-B35-S_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/001/raw/R155_001_N-B35-S_S0_B/round154_endpoint.json",
+      "SHA256": "1defbf77b819880e8281ef6ae53be3f5581002d74ada3a887dd0a39f2d66cabe",
+      "bytes": 3358,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_001.zip",
+      "working_SHA256": "1defbf77b819880e8281ef6ae53be3f5581002d74ada3a887dd0a39f2d66cabe",
+      "working_bytes": 3358,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_001_N-B35-S_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/audit.json",
+      "SHA256": "f251aeb6fda33c8723740df6e5f3f9c6024aba228d294a6729d1eba19a3c874d",
+      "bytes": 193252,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "f251aeb6fda33c8723740df6e5f3f9c6024aba228d294a6729d1eba19a3c874d",
+      "working_bytes": 193252,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_002_N-B35-S_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/external/models/L0_epoch_0_generation_1.lp",
+      "SHA256": "11ce48dcf73aed7dcc1a74cd60d676ebb5685abc52e2ea3bd695c181e093e191",
+      "bytes": 3614439,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "11ce48dcf73aed7dcc1a74cd60d676ebb5685abc52e2ea3bd695c181e093e191",
+      "working_bytes": 3614439,
+      "checkout_transform": "identity",
+      "used_for": [
+        "N-B35-S saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/external/round153_floor/pricing/call.json",
+      "SHA256": "f59d13f5ae81f9ea60992f71564dd52c6b67ecae480a7f51d1c396fb200b104d",
+      "bytes": 67004,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "f59d13f5ae81f9ea60992f71564dd52c6b67ecae480a7f51d1c396fb200b104d",
+      "working_bytes": 67004,
+      "checkout_transform": "identity",
+      "used_for": [
+        "N-B35-S saved original-objective starting scope/interval/true stocks and original RN stop/settings"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/external/round153_floor/pricing/result.json",
+      "SHA256": "f9ae095b396fd172c3ea2a2f1a38ba9e1d802c50b2540aeda84f458604bda634",
+      "bytes": 74293,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "f9ae095b396fd172c3ea2a2f1a38ba9e1d802c50b2540aeda84f458604bda634",
+      "working_bytes": 74293,
+      "checkout_transform": "identity",
+      "used_for": [
+        "N-B35-S saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/external/round153_floor/result.json",
+      "SHA256": "01251cab54784b440ab4ac98b409c25c38783847dccb752ad44fb0b9a9a33e73",
+      "bytes": 16005,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "01251cab54784b440ab4ac98b409c25c38783847dccb752ad44fb0b9a9a33e73",
+      "working_bytes": 16005,
+      "checkout_transform": "identity",
+      "used_for": [
+        "N-B35-S saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/external/round153_floor/source.json",
+      "SHA256": "3c936e73cf003e2166e1d1150de938d359b3702e7213854e42a119a2ebb8e1f9",
+      "bytes": 28401,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "3c936e73cf003e2166e1d1150de938d359b3702e7213854e42a119a2ebb8e1f9",
+      "working_bytes": 28401,
+      "checkout_transform": "identity",
+      "used_for": [
+        "N-B35-S saved original-objective starting scope/interval/true stocks and source binding"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/observations.json",
+      "SHA256": "0e7cbeae5c8605f492791084c29ecbd3b9819d35325d4d38857daf83e548a600",
+      "bytes": 305132,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "0e7cbeae5c8605f492791084c29ecbd3b9819d35325d4d38857daf83e548a600",
+      "working_bytes": 305132,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_002_N-B35-S_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/process_start_marker.json",
+      "SHA256": "fed68259ac8ba1f4820386738bd958541223a268aec86f01653911c37f5e7c3f",
+      "bytes": 160,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "fed68259ac8ba1f4820386738bd958541223a268aec86f01653911c37f5e7c3f",
+      "working_bytes": 160,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_002_N-B35-S_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/producer_receipt.json",
+      "SHA256": "f1b81f11e084881cdcef8d71194898fd067978eb96591a2eeb6d2477c6432948",
+      "bytes": 744,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "f1b81f11e084881cdcef8d71194898fd067978eb96591a2eeb6d2477c6432948",
+      "working_bytes": 744,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_002_N-B35-S_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/round153_control_audit.json",
+      "SHA256": "abdead4419d5432ff7b442b89e18f678aea2c757f9a048f8e9c055c5f5707bdf",
+      "bytes": 3837,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "abdead4419d5432ff7b442b89e18f678aea2c757f9a048f8e9c055c5f5707bdf",
+      "working_bytes": 3837,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_002_N-B35-S_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/round154_control_audit.json",
+      "SHA256": "5346b16b5c00aadb1a8e1a40ff254e3eeb2818fc97f5613db40c33befd8fb9b0",
+      "bytes": 4880,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "5346b16b5c00aadb1a8e1a40ff254e3eeb2818fc97f5613db40c33befd8fb9b0",
+      "working_bytes": 4880,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_002_N-B35-S_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/002/raw/R155_002_N-B35-S_S0_E/round154_endpoint.json",
+      "SHA256": "37a6f3c738727028fc4f6b890f8d2c45df2116e28d675ffc4a2b3d0871998094",
+      "bytes": 3446,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_002.zip",
+      "working_SHA256": "37a6f3c738727028fc4f6b890f8d2c45df2116e28d675ffc4a2b3d0871998094",
+      "working_bytes": 3446,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_002_N-B35-S_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/003/raw/R155_003_R-X35-S-T2_S0_B/audit.json",
+      "SHA256": "cf2f20a95dcc66fa0be840dfd544faad40c7996a5245fcfe4f5355e9f07ddb0a",
+      "bytes": 185321,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_003.zip",
+      "working_SHA256": "cf2f20a95dcc66fa0be840dfd544faad40c7996a5245fcfe4f5355e9f07ddb0a",
+      "working_bytes": 185321,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_003_R-X35-S-T2_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/003/raw/R155_003_R-X35-S-T2_S0_B/observations.json",
+      "SHA256": "24f30dbfa067ea92a7fe6e46450c0d6779717141f82e20b31aa8d89df858833f",
+      "bytes": 317300,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_003.zip",
+      "working_SHA256": "24f30dbfa067ea92a7fe6e46450c0d6779717141f82e20b31aa8d89df858833f",
+      "working_bytes": 317300,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_003_R-X35-S-T2_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/003/raw/R155_003_R-X35-S-T2_S0_B/process_start_marker.json",
+      "SHA256": "7ddc846e48adfda471b381b70d7c45995b75088a9bad0d53415b8eba99bdd3f5",
+      "bytes": 161,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_003.zip",
+      "working_SHA256": "7ddc846e48adfda471b381b70d7c45995b75088a9bad0d53415b8eba99bdd3f5",
+      "working_bytes": 161,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_003_R-X35-S-T2_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/003/raw/R155_003_R-X35-S-T2_S0_B/producer_receipt.json",
+      "SHA256": "c1a425502dd7c6b0d3df5af027b2b3b0e1c5470e349bce36e051fe3b0545b8b0",
+      "bytes": 747,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_003.zip",
+      "working_SHA256": "c1a425502dd7c6b0d3df5af027b2b3b0e1c5470e349bce36e051fe3b0545b8b0",
+      "working_bytes": 747,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_003_R-X35-S-T2_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/003/raw/R155_003_R-X35-S-T2_S0_B/round153_control_audit.json",
+      "SHA256": "18caf406b5a9c3280c22bd977386ab3f671a2a9bc6795241ec325776548afd17",
+      "bytes": 256,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_003.zip",
+      "working_SHA256": "18caf406b5a9c3280c22bd977386ab3f671a2a9bc6795241ec325776548afd17",
+      "working_bytes": 256,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_003_R-X35-S-T2_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/003/raw/R155_003_R-X35-S-T2_S0_B/round154_endpoint.json",
+      "SHA256": "979ef369be2efaa3e9d79525e6530b920a8a57a5b3547abf085cf1db4d2db4ab",
+      "bytes": 3360,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_003.zip",
+      "working_SHA256": "979ef369be2efaa3e9d79525e6530b920a8a57a5b3547abf085cf1db4d2db4ab",
+      "working_bytes": 3360,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_003_R-X35-S-T2_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/audit.json",
+      "SHA256": "6ba4bfbceb42f761f07d867e90c59c7dbbfd242ee45528ed99ac9b0a93cafe0e",
+      "bytes": 185811,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "6ba4bfbceb42f761f07d867e90c59c7dbbfd242ee45528ed99ac9b0a93cafe0e",
+      "working_bytes": 185811,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_004_R-X35-S-T2_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/external/models/L0_epoch_0_generation_1.lp",
+      "SHA256": "c7ce593e01494b8d5f531959fbd3bf230748bcc9abfe7a236dcffe81cec6e493",
+      "bytes": 3574225,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "c7ce593e01494b8d5f531959fbd3bf230748bcc9abfe7a236dcffe81cec6e493",
+      "working_bytes": 3574225,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X35-S-T2 saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/external/round153_floor/pricing/call.json",
+      "SHA256": "9f6056dc8d389cad77645a57c9a4db16f289d0c23c53f3fd883bf6d9310059be",
+      "bytes": 55054,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "9f6056dc8d389cad77645a57c9a4db16f289d0c23c53f3fd883bf6d9310059be",
+      "working_bytes": 55054,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X35-S-T2 saved original-objective starting scope/interval/true stocks and original RN stop/settings"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/external/round153_floor/pricing/result.json",
+      "SHA256": "f6a187c6f78fd3292af20a362c69cf795d8fb47fd67ec35c3ecca35b938e601a",
+      "bytes": 58130,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "f6a187c6f78fd3292af20a362c69cf795d8fb47fd67ec35c3ecca35b938e601a",
+      "working_bytes": 58130,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X35-S-T2 saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/external/round153_floor/result.json",
+      "SHA256": "84fc89d6f601fac6f8596120a02e9e1cd75346bc3cf898d59ad1602853f05ce4",
+      "bytes": 14617,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "84fc89d6f601fac6f8596120a02e9e1cd75346bc3cf898d59ad1602853f05ce4",
+      "working_bytes": 14617,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X35-S-T2 saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/external/round153_floor/source.json",
+      "SHA256": "f99697cd7e4df68c3217a75d1921d4b52a6b227351be5bf23b917bd973f1f7d4",
+      "bytes": 27016,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "f99697cd7e4df68c3217a75d1921d4b52a6b227351be5bf23b917bd973f1f7d4",
+      "working_bytes": 27016,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X35-S-T2 saved original-objective starting scope/interval/true stocks and source binding"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/observations.json",
+      "SHA256": "32aec3b28f8837a9a6358dbf181448aa5d2ed66924714deeaf5e56cc77121068",
+      "bytes": 317358,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "32aec3b28f8837a9a6358dbf181448aa5d2ed66924714deeaf5e56cc77121068",
+      "working_bytes": 317358,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_004_R-X35-S-T2_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/process_start_marker.json",
+      "SHA256": "a064e6b75dfb9fbfbcf5b97548aedb09ed458878724d521cbafc3e349d751346",
+      "bytes": 159,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "a064e6b75dfb9fbfbcf5b97548aedb09ed458878724d521cbafc3e349d751346",
+      "working_bytes": 159,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_004_R-X35-S-T2_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/producer_receipt.json",
+      "SHA256": "24df292e2224d00c6b0fea3adff5e2738aed4e233d07111d5f3d70f67637a997",
+      "bytes": 747,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "24df292e2224d00c6b0fea3adff5e2738aed4e233d07111d5f3d70f67637a997",
+      "working_bytes": 747,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_004_R-X35-S-T2_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/round153_control_audit.json",
+      "SHA256": "936860888442b2abcc3323769b8ae640d40ea8c4a6e3d50731d219bed5bdd85a",
+      "bytes": 3473,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "936860888442b2abcc3323769b8ae640d40ea8c4a6e3d50731d219bed5bdd85a",
+      "working_bytes": 3473,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_004_R-X35-S-T2_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/round154_control_audit.json",
+      "SHA256": "7f6632a920b7d5f88714f93a18111c5c66de946abbdd042b23eb40124d478db0",
+      "bytes": 4519,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "7f6632a920b7d5f88714f93a18111c5c66de946abbdd042b23eb40124d478db0",
+      "working_bytes": 4519,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_004_R-X35-S-T2_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/004/raw/R155_004_R-X35-S-T2_S0_E/round154_endpoint.json",
+      "SHA256": "918171e92d6cba90ca59cc4239dd5c55512a192a311fc2c8fcac1afffc2504ee",
+      "bytes": 3463,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_004.zip",
+      "working_SHA256": "918171e92d6cba90ca59cc4239dd5c55512a192a311fc2c8fcac1afffc2504ee",
+      "working_bytes": 3463,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_004_R-X35-S-T2_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/005/raw/R155_005_R-X20-S-T1_S0_B/audit.json",
+      "SHA256": "f3b8e899cc4ca6b000cd92ab8c8241649974f768b4f73894b30bd3d0fbc89252",
+      "bytes": 261221,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_005.zip",
+      "working_SHA256": "f3b8e899cc4ca6b000cd92ab8c8241649974f768b4f73894b30bd3d0fbc89252",
+      "working_bytes": 261221,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_005_R-X20-S-T1_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/005/raw/R155_005_R-X20-S-T1_S0_B/observations.json",
+      "SHA256": "674df954599acb2c688f2218c65e872ebf98a2678c0c275d8fe5b67d8fd6211c",
+      "bytes": 277586,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_005.zip",
+      "working_SHA256": "674df954599acb2c688f2218c65e872ebf98a2678c0c275d8fe5b67d8fd6211c",
+      "working_bytes": 277586,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_005_R-X20-S-T1_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/005/raw/R155_005_R-X20-S-T1_S0_B/process_start_marker.json",
+      "SHA256": "bdac468cc462b4846a785826f92b739c7ebd0353f6b46a97d2d7f86fe38b8a15",
+      "bytes": 161,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_005.zip",
+      "working_SHA256": "bdac468cc462b4846a785826f92b739c7ebd0353f6b46a97d2d7f86fe38b8a15",
+      "working_bytes": 161,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_005_R-X20-S-T1_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/005/raw/R155_005_R-X20-S-T1_S0_B/producer_receipt.json",
+      "SHA256": "b49d7f83ee438355d975cbe408015780633e7ff07c9faede3e6edb2862fd8073",
+      "bytes": 748,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_005.zip",
+      "working_SHA256": "b49d7f83ee438355d975cbe408015780633e7ff07c9faede3e6edb2862fd8073",
+      "working_bytes": 748,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_005_R-X20-S-T1_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/005/raw/R155_005_R-X20-S-T1_S0_B/round153_control_audit.json",
+      "SHA256": "18caf406b5a9c3280c22bd977386ab3f671a2a9bc6795241ec325776548afd17",
+      "bytes": 256,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_005.zip",
+      "working_SHA256": "18caf406b5a9c3280c22bd977386ab3f671a2a9bc6795241ec325776548afd17",
+      "working_bytes": 256,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_005_R-X20-S-T1_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/005/raw/R155_005_R-X20-S-T1_S0_B/round154_endpoint.json",
+      "SHA256": "2e1575ba9f73d000f83b5a0d5fb158931771e5dee328e26830592e9c29236e82",
+      "bytes": 3236,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_005.zip",
+      "working_SHA256": "2e1575ba9f73d000f83b5a0d5fb158931771e5dee328e26830592e9c29236e82",
+      "working_bytes": 3236,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_005_R-X20-S-T1_S0_B exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/audit.json",
+      "SHA256": "94d4c266cdf0414bb64038ab8c34a41540eee5b551c673b053d75d135e906208",
+      "bytes": 261843,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "94d4c266cdf0414bb64038ab8c34a41540eee5b551c673b053d75d135e906208",
+      "working_bytes": 261843,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_006_R-X20-S-T1_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/external/models/L0_epoch_0_generation_1.lp",
+      "SHA256": "ea3fb0de411e188fb5a6b2244d90343d22dcb13b8d393a480798fe44d5d416a4",
+      "bytes": 740793,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "ea3fb0de411e188fb5a6b2244d90343d22dcb13b8d393a480798fe44d5d416a4",
+      "working_bytes": 740793,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X20-S-T1 saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/external/round153_floor/pricing/call.json",
+      "SHA256": "ac4a1294d63a47fa19c09c46cb57ad6a2f9154bcc4bb43429429e615bbd797fb",
+      "bytes": 20781,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "ac4a1294d63a47fa19c09c46cb57ad6a2f9154bcc4bb43429429e615bbd797fb",
+      "working_bytes": 20781,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X20-S-T1 saved original-objective starting scope/interval/true stocks and original RN stop/settings"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/external/round153_floor/pricing/result.json",
+      "SHA256": "e5903ed2dc2fd0ea25261e068a8a575fe71c827855a5d32dd81dc42fb6852bbb",
+      "bytes": 21802,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "e5903ed2dc2fd0ea25261e068a8a575fe71c827855a5d32dd81dc42fb6852bbb",
+      "working_bytes": 21802,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X20-S-T1 saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/external/round153_floor/result.json",
+      "SHA256": "988c2b76f961fabfb448e937efcb4a2e2ca41a2e5032cf4fa6ea2217e52a4f71",
+      "bytes": 8736,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "988c2b76f961fabfb448e937efcb4a2e2ca41a2e5032cf4fa6ea2217e52a4f71",
+      "working_bytes": 8736,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X20-S-T1 saved original-objective starting scope/interval/true stocks"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/external/round153_floor/source.json",
+      "SHA256": "19b27bd457cacd1504cb4e21c56900319eabafbdf2627cb60384a90c5a344c35",
+      "bytes": 21136,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "19b27bd457cacd1504cb4e21c56900319eabafbdf2627cb60384a90c5a344c35",
+      "working_bytes": 21136,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R-X20-S-T1 saved original-objective starting scope/interval/true stocks and source binding"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/observations.json",
+      "SHA256": "b29149647eedd944d1c03d2e91ffd032a6d61123d6c3f47d949d813149d66c31",
+      "bytes": 277280,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "b29149647eedd944d1c03d2e91ffd032a6d61123d6c3f47d949d813149d66c31",
+      "working_bytes": 277280,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_006_R-X20-S-T1_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/process_start_marker.json",
+      "SHA256": "caae14fed5519d8e9f999600d533ad8bdd33f094d087f5be725c219b395b40b2",
+      "bytes": 159,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "caae14fed5519d8e9f999600d533ad8bdd33f094d087f5be725c219b395b40b2",
+      "working_bytes": 159,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_006_R-X20-S-T1_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/producer_receipt.json",
+      "SHA256": "d710dc9b44d55b4ebd460002a0b6d6b3bbb80076232ec35c990cd82457522df9",
+      "bytes": 749,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "d710dc9b44d55b4ebd460002a0b6d6b3bbb80076232ec35c990cd82457522df9",
+      "working_bytes": 749,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_006_R-X20-S-T1_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/round153_control_audit.json",
+      "SHA256": "e108b388328166977e27bfaa090d457829b5cb800152a3f15ef4ba2c5358fa09",
+      "bytes": 3829,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "e108b388328166977e27bfaa090d457829b5cb800152a3f15ef4ba2c5358fa09",
+      "working_bytes": 3829,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_006_R-X20-S-T1_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/round154_control_audit.json",
+      "SHA256": "d5d858ede22c06e0c09cab94b87a378721608e64a1d60c5bbc0dc1de544e7898",
+      "bytes": 4869,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "d5d858ede22c06e0c09cab94b87a378721608e64a1d60c5bbc0dc1de544e7898",
+      "working_bytes": 4869,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_006_R-X20-S-T1_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/campaign_confirmation/006/raw/R155_006_R-X20-S-T1_S0_E/round154_endpoint.json",
+      "SHA256": "6a9d568afc86c1fee137994e7cd435995d3c71fc4627a4b63630aa67605caecb",
+      "bytes": 3338,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed archive member",
+      "archive_reference": "round155/complete_arm_006.zip",
+      "working_SHA256": "6a9d568afc86c1fee137994e7cd435995d3c71fc4627a4b63630aa67605caecb",
+      "working_bytes": 3338,
+      "checkout_transform": "identity",
+      "used_for": [
+        "R155_006_R-X20-S-T1_S0_E exact time-origin correction"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/candidate_manifest.json",
+      "SHA256": "3209fff9ba2aa003605ba09511eb499bd002ad43eb44c60b9ada3ca67b07351e",
+      "bytes": 28687,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed Git file",
+      "working_SHA256": "3209fff9ba2aa003605ba09511eb499bd002ad43eb44c60b9ada3ca67b07351e",
+      "working_bytes": 28687,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/confirmation_matrix.json",
+      "SHA256": "b56956674010f3ed8ce2c1b1e81270010752faab3f29cf44ee54a2114afe0c5f",
+      "bytes": 53185,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b56956674010f3ed8ce2c1b1e81270010752faab3f29cf44ee54a2114afe0c5f",
+      "working_bytes": 53185,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/helper_manifest.json",
+      "SHA256": "aed6a85f701d3073a6ffd1006d0931402da881428c2b10bfab822926f5a788e6",
+      "bytes": 15373,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed Git file",
+      "working_SHA256": "aed6a85f701d3073a6ffd1006d0931402da881428c2b10bfab822926f5a788e6",
+      "working_bytes": 15373,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/reports/common_checkpoints.json",
+      "SHA256": "32129bbeb2567d770cd6dabf47a8b544b04704bc61eef6520d61e22ac0d83bc2",
+      "bytes": 14677,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed Git file",
+      "working_SHA256": "32129bbeb2567d770cd6dabf47a8b544b04704bc61eef6520d61e22ac0d83bc2",
+      "working_bytes": 14677,
+      "checkout_transform": "identity",
+      "used_for": [
+        "unaltered prior checkpoint export"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/reuse_index.json",
+      "SHA256": "e04740c89e7700abfa9022831662af2aaaeda58d3ccf7f2fe54674bc83458487",
+      "bytes": 175599,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed Git file",
+      "working_SHA256": "e04740c89e7700abfa9022831662af2aaaeda58d3ccf7f2fe54674bc83458487",
+      "working_bytes": 175599,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round155/source_manifest.json",
+      "SHA256": "753222c014c9fd44f726fee16286b101347a327f96889243089a417579c90da2",
+      "bytes": 283372,
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "resolution": "fixed Git file",
+      "working_SHA256": "753222c014c9fd44f726fee16286b101347a327f96889243089a417579c90da2",
+      "working_bytes": 283372,
+      "checkout_transform": "identity",
+      "used_for": [
+        "inherited identity/recovery chain"
+      ]
+    },
+    {
+      "member": "results/unified_exact_round94/preregistration.json",
+      "SHA256": "767b8abe628bb5e84c8c44ddf2b65869f44212e17bea362fc0284b4afb445774",
+      "bytes": 5832,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "767b8abe628bb5e84c8c44ddf2b65869f44212e17bea362fc0284b4afb445774",
+      "working_bytes": 5832,
+      "checkout_transform": "identity",
+      "used_for": [
+        "read-only inherited import prerequisite"
+      ]
+    },
+    {
+      "member": "scripts/analyze_round61.py",
+      "SHA256": "2bad5dee645a7c173255a38051c0260b5b0280ec3759aebbf90aef044f665861",
+      "bytes": 21597,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "fad9154b399dd9eb3463510f8480dd1e8a22974729902e0a25ec78a9ae551cce",
+      "working_bytes": 21878,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/compare_round112_startup.py",
+      "SHA256": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2",
+      "bytes": 4703,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "9fb8ecf86c75239dc68ebb1983d9f26bb7a99c49ff8d21fe618dbd9ea6c2dbd2",
+      "working_bytes": 4703,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/generate_citibike443_regional_v1.py",
+      "SHA256": "05b60dc92e4f81edaa134fbcb556dcb18efbf36ac02f333712e0b7e8364491c1",
+      "bytes": 125151,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "bddf05501c89081df04bc93e9d37b6b09d473ba9e4b7d46d5c65c25d1d6b58e8",
+      "working_bytes": 127494,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/qualify_round120.py",
+      "SHA256": "c7586285f9dcfe04f874e0d1b3bb9ad0b93dfab45f7f733c7ac80ec087145a14",
+      "bytes": 9663,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "24e6c41494abb723d006660b08b754c0075f84dc1279e4bf8bf70a5081ac689a",
+      "working_bytes": 9792,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/read_round113.py",
+      "SHA256": "84f98aadd30681080af723d4f874f007f0222431f2fb15bffbd6b7fcfc716cc2",
+      "bytes": 29114,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "84f98aadd30681080af723d4f874f007f0222431f2fb15bffbd6b7fcfc716cc2",
+      "working_bytes": 29114,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/read_round116.py",
+      "SHA256": "ed5865c5011d239815000f1bf15c591eee8d9e8d933edd857f3a990762230d28",
+      "bytes": 22710,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "ed5865c5011d239815000f1bf15c591eee8d9e8d933edd857f3a990762230d28",
+      "working_bytes": 22710,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/read_round118.py",
+      "SHA256": "d9a8e887f10abfb9bdead5b765d033316c96d6134b42163aeb37acdb5b16dbc7",
+      "bytes": 7451,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d9a8e887f10abfb9bdead5b765d033316c96d6134b42163aeb37acdb5b16dbc7",
+      "working_bytes": 7451,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/read_round120.py",
+      "SHA256": "d1bc2284c457740387ef7b0904f1ebcb797a430f087c258b166ecafdd04c77d2",
+      "bytes": 5364,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b7e0e1e81735ae9cc4fe8651f1835688ff404a0d6b78077bec19feddd62735e1",
+      "working_bytes": 5429,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/read_round121.py",
+      "SHA256": "f7e0b68a903095509bc248b0f47480dd5e1867ccb5924690edf9cd5fadff9e0b",
+      "bytes": 3176,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "f7e0b68a903095509bc248b0f47480dd5e1867ccb5924690edf9cd5fadff9e0b",
+      "working_bytes": 3176,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round100_campaign.py",
+      "SHA256": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "bytes": 11142,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "fd5d416d97090401a8cd680eff423150cb437b8e96ee87204ee9251c1f4a7c66",
+      "working_bytes": 11142,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round100_common.py",
+      "SHA256": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca",
+      "bytes": 2347,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "7ad8935d44647f47b55fe52b690949ad6476e6a9b3b7775989eddb42cdf3f4ca",
+      "working_bytes": 2347,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round100_gurobi_runtime.py",
+      "SHA256": "ef393a7c466fe5bdbca0fd5e6b834ad9c4731d0341a7e6ae91d42bb4a39aa2cc",
+      "bytes": 1989,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "ef393a7c466fe5bdbca0fd5e6b834ad9c4731d0341a7e6ae91d42bb4a39aa2cc",
+      "working_bytes": 1989,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round100_idle.py",
+      "SHA256": "093ced41cdae00ed1eab56fb6c1e94b9f22bacfac637da803b8e41ee06821639",
+      "bytes": 1069,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "093ced41cdae00ed1eab56fb6c1e94b9f22bacfac637da803b8e41ee06821639",
+      "working_bytes": 1069,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round101_common.py",
+      "SHA256": "6ea42060b3804c125888ffff76facea0519a5219a5110ba8524bf1e9e75d7ce1",
+      "bytes": 2270,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "6ea42060b3804c125888ffff76facea0519a5219a5110ba8524bf1e9e75d7ce1",
+      "working_bytes": 2270,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round103_common.py",
+      "SHA256": "67fc725b0a440bf8c557a93da3f9a2c02decfc2b2ffebbbcc7d0d8571bf247d0",
+      "bytes": 2099,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "67fc725b0a440bf8c557a93da3f9a2c02decfc2b2ffebbbcc7d0d8571bf247d0",
+      "working_bytes": 2099,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round107_reader.py",
+      "SHA256": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2",
+      "bytes": 48416,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "4b212556327453775b36f27c596c534892fc3510a9ae40b684f02bd5a24aa3b2",
+      "working_bytes": 48416,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round108_decisions.py",
+      "SHA256": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46",
+      "bytes": 7997,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "9a827d2fccd9b37483c2d3a5f8aa5877abb5c2db434554d18abed28d13c63c46",
+      "working_bytes": 7997,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round108_reader.py",
+      "SHA256": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "bytes": 48982,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "ac58d2b19d3a504e0af5778e57a62cb6e68a84ab1acb8baec486c4386a600abd",
+      "working_bytes": 48982,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round108_scopes.py",
+      "SHA256": "4a9b9570d1142265fdc96b56df4a91021521732b521a649fe0609ac72de0c733",
+      "bytes": 4248,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "4a9b9570d1142265fdc96b56df4a91021521732b521a649fe0609ac72de0c733",
+      "working_bytes": 4248,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round109_campaign.py",
+      "SHA256": "881c8a4d818f7c94a08e72a1714c1713cf823ab908406dd0425f2c16ae9db693",
+      "bytes": 17169,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "881c8a4d818f7c94a08e72a1714c1713cf823ab908406dd0425f2c16ae9db693",
+      "working_bytes": 17169,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round109_common.py",
+      "SHA256": "4804f3db87ad5b6e6770f300691b125dac9ab122df48c4b2c7a77fb53fc0dcdf",
+      "bytes": 3257,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "4804f3db87ad5b6e6770f300691b125dac9ab122df48c4b2c7a77fb53fc0dcdf",
+      "working_bytes": 3257,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round109_data.py",
+      "SHA256": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+      "bytes": 6442,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "1580d112da93a2d49c0eb32a0521e761dec61c9e9c54edb560197b50bc536ec5",
+      "working_bytes": 6442,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round109_decisions.py",
+      "SHA256": "47483e89f7184762541276b7f5200c3611ca800866708e9ae5c2bb7aa98bae3d",
+      "bytes": 3446,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "47483e89f7184762541276b7f5200c3611ca800866708e9ae5c2bb7aa98bae3d",
+      "working_bytes": 3446,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round109_interval_pairs.py",
+      "SHA256": "61f4f3e8ef00c5bd0ca5bbe9571532772fb1450f1c2fa6ef573e273a4935e279",
+      "bytes": 2976,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "61f4f3e8ef00c5bd0ca5bbe9571532772fb1450f1c2fa6ef573e273a4935e279",
+      "working_bytes": 2976,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round109_prepare.py",
+      "SHA256": "e8684188f2b015d68702d0400570415ec6ef1f15d1f6b46ad5e8b4bb7913342a",
+      "bytes": 10013,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "e8684188f2b015d68702d0400570415ec6ef1f15d1f6b46ad5e8b4bb7913342a",
+      "working_bytes": 10013,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round109_seed_audit.py",
+      "SHA256": "e0e2a076096ba8979ba3a59f376cc0293cb4b5da2a3bb90bfe0311f6085a570e",
+      "bytes": 3632,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "e0e2a076096ba8979ba3a59f376cc0293cb4b5da2a3bb90bfe0311f6085a570e",
+      "working_bytes": 3632,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round109_seed_scope.py",
+      "SHA256": "08bc7c282a29815b26efac54efa9880d660674328f12a5c83aeef7441044368b",
+      "bytes": 8695,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "08bc7c282a29815b26efac54efa9880d660674328f12a5c83aeef7441044368b",
+      "working_bytes": 8695,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round110_common.py",
+      "SHA256": "5816ba204c8be606d6dfee36b0823fcd95fb6cc2e4ce90eb46b5a812e91da120",
+      "bytes": 3967,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "5816ba204c8be606d6dfee36b0823fcd95fb6cc2e4ce90eb46b5a812e91da120",
+      "working_bytes": 3967,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round111_decisions.py",
+      "SHA256": "64feb5d4e98157eb0c5759703b16096f74b807c18bc41a9d0825fc49ebe332ec",
+      "bytes": 4551,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "bb9a27d5e15cbe52175b228a52f1c8c6c394bdbef5ea227fa9d54924c44a6f63",
+      "working_bytes": 4603,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round111_seed_audit.py",
+      "SHA256": "528ab1b02b90c5d4d82113c15e617278114dcf72f1cb79f15dc4be42a92ac667",
+      "bytes": 7179,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "da70eb1a01cdcf988fcfe0963ef39692d513cc5ae20ecae18835832bed45e2c5",
+      "working_bytes": 7300,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round112_audit.py",
+      "SHA256": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+      "bytes": 6424,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "757d4e570a7cb1f9daa13c112f13b03090b352807096ac43ae4359315428e1e6",
+      "working_bytes": 6424,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round112_campaign.py",
+      "SHA256": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85",
+      "bytes": 11408,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "6b2dfc552484096d597cd7d2e3b2445ca435f3b21d87191be6f3033245e28f85",
+      "working_bytes": 11408,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round112_common.py",
+      "SHA256": "de18376ad23be0789a726c4f7bc8bbc09f074571c1afdbefdf7092a068d6d2a8",
+      "bytes": 2687,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "de18376ad23be0789a726c4f7bc8bbc09f074571c1afdbefdf7092a068d6d2a8",
+      "working_bytes": 2687,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round113_audit.py",
+      "SHA256": "02af4e0de90b425b51889e1df860597236fc7ca32c567363e0de982834dfdfe7",
+      "bytes": 15512,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "02af4e0de90b425b51889e1df860597236fc7ca32c567363e0de982834dfdfe7",
+      "working_bytes": 15512,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round113_campaign.py",
+      "SHA256": "b76c63ad8a09683e43b737721d55523bd7c1c6ab2aadb5070aa5c6e8b29fd447",
+      "bytes": 10378,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b76c63ad8a09683e43b737721d55523bd7c1c6ab2aadb5070aa5c6e8b29fd447",
+      "working_bytes": 10378,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round113_common.py",
+      "SHA256": "f100749161fad2487d652991da0fa6086cce75aad0e037a43d8823a0abf95c1b",
+      "bytes": 3088,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "f100749161fad2487d652991da0fa6086cce75aad0e037a43d8823a0abf95c1b",
+      "working_bytes": 3088,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round113_progress.py",
+      "SHA256": "51a0969ded9e0896b85d264fbe30af3cd30813d579136c3c822c845da384b45a",
+      "bytes": 2821,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "51a0969ded9e0896b85d264fbe30af3cd30813d579136c3c822c845da384b45a",
+      "working_bytes": 2821,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round114_audit.py",
+      "SHA256": "38b9275afd045e9d5b72cb901a3fbe9f939f474811b0b47d3a34275cb02df9d4",
+      "bytes": 20480,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "a8c55a0bcd3d5a7083d1109850fa728f35378c4dafb5a4cc185089c6c530b758",
+      "working_bytes": 20750,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round114_campaign.py",
+      "SHA256": "6b40ca1f7f1a133478eaf3a89d8f8c7eba13ffe3b6f80bae0358f86d787716c7",
+      "bytes": 13132,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "abdc9f5fa08965696e17982b0092cae95425e3fb4cad86368b57592893a8b8ab",
+      "working_bytes": 13305,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round114_claims.py",
+      "SHA256": "5b166b07da359e50b663c4655a29ce6789aaaec04ef1b8b8230b8b69cfef06fd",
+      "bytes": 5032,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d0fc9e2ea15cf37a463c895adf8cfd784762706fd73744c2a99720eebd010149",
+      "working_bytes": 5103,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round114_common.py",
+      "SHA256": "25ee8c762fc230f956905c00835eb70e2ad97e8758bcff9b2c8813d1686deaa6",
+      "bytes": 2753,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "5fc5e753a51a655d7526ee08177da16df5699495a02eadf55575ed88dca30d9e",
+      "working_bytes": 2803,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round114_ps.py",
+      "SHA256": "9ed84c968781d7dcd0dc0764377fe9df8d91266e9ae40d74f09b3a35671f867d",
+      "bytes": 15679,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "6bf8d31541bce73d33b5fc2d861cacb85da9fe18ecdcf574cfcbff24f4499a3c",
+      "working_bytes": 15917,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round115_campaign.py",
+      "SHA256": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03",
+      "bytes": 11334,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "8d387c4c8c46800ba1a5231eb48ebfb4e50c4618095db089a4bdc2c0e7cedf03",
+      "working_bytes": 11334,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round115_common.py",
+      "SHA256": "105efd354e72f46abc7fbb30b42949a5f8d6db5d4deb01d2c73f4eac6149d841",
+      "bytes": 4606,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "105efd354e72f46abc7fbb30b42949a5f8d6db5d4deb01d2c73f4eac6149d841",
+      "working_bytes": 4606,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round115_verify.py",
+      "SHA256": "d225751afb1dfc7b29f20d6b1f231c8baed4d6b842ebed8fc0799bdd4523a001",
+      "bytes": 3478,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d225751afb1dfc7b29f20d6b1f231c8baed4d6b842ebed8fc0799bdd4523a001",
+      "working_bytes": 3478,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round118_call_logs.py",
+      "SHA256": "0c719ad386ed7ad3c793ce93bab7bc4f190cd2a2317aeccdccff6279c7b3dca4",
+      "bytes": 9760,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "0c719ad386ed7ad3c793ce93bab7bc4f190cd2a2317aeccdccff6279c7b3dca4",
+      "working_bytes": 9760,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round118_data.py",
+      "SHA256": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+      "bytes": 10434,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "7ca3bd756fce08f276f0ba91da0e9db06b4676b200af29402f401fc5e768b699",
+      "working_bytes": 10434,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round120_campaign.py",
+      "SHA256": "6874f524b6d6387d4492656c39c1e1068bd5c9238b31823df18f5c02c322b9e6",
+      "bytes": 5165,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "561bd20a09fc1347a8188831979646603bc08e0ce7c98377c30f176945c6d5f0",
+      "working_bytes": 5229,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round120_common.py",
+      "SHA256": "f6a04a22cb1dcc7660bf3b9efb61543c5947b56de9874d41ac6f87a25ab479fe",
+      "bytes": 6459,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "a1302c682e146294e48e5f78e086a1c0af713775358f64875756b1a222256077",
+      "working_bytes": 6559,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round120_evidence.py",
+      "SHA256": "2cfd75746ae7a61c628647bc56217ae6b80f474999ec3215fe4cd5cc49f6b653",
+      "bytes": 9047,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "db89c758b238bfe2836001c4cf5e270a84d2b2834aa5a552589cb1863a4d9be5",
+      "working_bytes": 9178,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round120_math_audit.py",
+      "SHA256": "f341106a8ef4286caef70493c3660bba18ea62aea609f7b29134a912a9b07b36",
+      "bytes": 6599,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "7334f742647aaffa4e29b41d09b43902e9ff399482ef2e83fc02a588400b1afa",
+      "working_bytes": 6678,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round120_prepare.py",
+      "SHA256": "992656c509780565b7a1624465a3350cf73d0c688a8d6a8479cfe6d1ee6f42bb",
+      "bytes": 11575,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d0354d810ce2278a220e7d2f58490397b4dd080f5dc290ff1bc15ff9247d6964",
+      "working_bytes": 11703,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round121_campaign.py",
+      "SHA256": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0",
+      "bytes": 5533,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c3018a3b2670bfb70e2b6a4e5fe7b2c0b84f96fb5c4e3799d1e83acfd033dca0",
+      "working_bytes": 5533,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round121_common.py",
+      "SHA256": "1a401ff0a4ffffbab0265e62d6c46d89b60bad2d2587ffd12999b5db042029f6",
+      "bytes": 6181,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "1a401ff0a4ffffbab0265e62d6c46d89b60bad2d2587ffd12999b5db042029f6",
+      "working_bytes": 6181,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round121_evidence.py",
+      "SHA256": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2",
+      "bytes": 10292,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "79c69312b6de06ceb3356a288b67d35925ca259820ff13719f5bb9826db96ab2",
+      "working_bytes": 10292,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round122_common.py",
+      "SHA256": "5bfe6890df669a43c11cee2724c99c535ec05f61adce2a42cda4be85070040ec",
+      "bytes": 7396,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "1afde640f299d64fe810506aaedc0d59a2cf3c0b7129b87dc9d84688830e587e",
+      "working_bytes": 7515,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round122_data.py",
+      "SHA256": "273efa690ade7097e4a3278b2d06837b86e5f19bf705286f152dc4ffced6645b",
+      "bytes": 10959,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b7997dcd173ee301be7f34949c99cb5f791bf22b84f548d1adceb8d11054d6b9",
+      "working_bytes": 11091,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round122_evidence.py",
+      "SHA256": "c37bb09e82a8f3fa0ceaa1d79cd276813a56a228099701096fa1f640e2ec4f9d",
+      "bytes": 10551,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "bb3e1e711f4ae1f48c7ef1a1b2092d75627e1104711653fd98aa605fe7a74ea4",
+      "working_bytes": 10699,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round122_prepare.py",
+      "SHA256": "38442f900e16c5a7485ec26afec7629c260f69775e5658a4b6f65af7c9062c9d",
+      "bytes": 10513,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "dbd8544440a9e7a37310984141af86f2d9f9ad8929d41ba181e209cd2c6484ce",
+      "working_bytes": 10625,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round126_common.py",
+      "SHA256": "0a8252da3c37c2e50c8f24acad67bba57f8f073dd900b1faf275c3fdc3f4d5ac",
+      "bytes": 5574,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "beb4c87e81d7a745d3d7f3d94d4e146e4826df4289f6482e45230cb6a8a025b7",
+      "working_bytes": 5668,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round126_data.py",
+      "SHA256": "2ece33430653f63f456d74125c809ae63f32f8eb392b6f706823df01dee96345",
+      "bytes": 9774,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "5a1f8078f76a74a7d7c862abc1ee489b327c145a695c74e6f982163ebcd7ed21",
+      "working_bytes": 9892,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round126_run.py",
+      "SHA256": "d3f7bdf51d40100f6bcc57a76c543fe6946364b60dfcb6cc501b90ce85eb3cc3",
+      "bytes": 3424,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d121a5414c1919bbc1893fff25e2a51ca18a259772bc4a04850f87a2a3f0d939",
+      "working_bytes": 3481,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round127_analysis.py",
+      "SHA256": "18582a4b98fef8595a557adc7edc318f18b90d5d6dcef00a0fc9353676eb5e83",
+      "bytes": 22631,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "18582a4b98fef8595a557adc7edc318f18b90d5d6dcef00a0fc9353676eb5e83",
+      "working_bytes": 22631,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round127_campaign.py",
+      "SHA256": "287d33761e3a1d003e35e44eec467697e6218d3b98383daf293e2e1d245b293f",
+      "bytes": 7752,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "287d33761e3a1d003e35e44eec467697e6218d3b98383daf293e2e1d245b293f",
+      "working_bytes": 7752,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round127_clocks.py",
+      "SHA256": "55f550d153aadf13a2c0dfd52dbef661830567cba5fbb4ca955a425787d34427",
+      "bytes": 2497,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "55f550d153aadf13a2c0dfd52dbef661830567cba5fbb4ca955a425787d34427",
+      "working_bytes": 2497,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round127_common.py",
+      "SHA256": "ba0e4a93a6ad90d17784f1ee2a5ef8fcf8905aef0f1b44346a9221eb9ea90e37",
+      "bytes": 6113,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "ba0e4a93a6ad90d17784f1ee2a5ef8fcf8905aef0f1b44346a9221eb9ea90e37",
+      "working_bytes": 6113,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round127_data.py",
+      "SHA256": "de063492c429bc545e87a1fbdb4f7e00c3ad4cb5cff2b2feaada5a3f74aae275",
+      "bytes": 8698,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "de063492c429bc545e87a1fbdb4f7e00c3ad4cb5cff2b2feaada5a3f74aae275",
+      "working_bytes": 8698,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round127_evidence.py",
+      "SHA256": "d776d0dc999e6199cd376e693885abbd5a3f86616e8238b37645f4c80c96626a",
+      "bytes": 5972,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d776d0dc999e6199cd376e693885abbd5a3f86616e8238b37645f4c80c96626a",
+      "working_bytes": 5972,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round127_pipeline.py",
+      "SHA256": "8a621c714d6f04ef046b16745ce8493fccdf023ae05c120b680075d72433edf6",
+      "bytes": 9394,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "8a621c714d6f04ef046b16745ce8493fccdf023ae05c120b680075d72433edf6",
+      "working_bytes": 9394,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round127_qualify.py",
+      "SHA256": "ab5c0c12783e7b852dd42642afdc1a276e775b7cc643817959200826518106b6",
+      "bytes": 5972,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "ab5c0c12783e7b852dd42642afdc1a276e775b7cc643817959200826518106b6",
+      "working_bytes": 5972,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round128_common.py",
+      "SHA256": "719bc515fcc6fe530fd8baa645162702c18618dadbc8d0537ba9bf97bf0777f1",
+      "bytes": 4508,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "719bc515fcc6fe530fd8baa645162702c18618dadbc8d0537ba9bf97bf0777f1",
+      "working_bytes": 4508,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round128_evidence.py",
+      "SHA256": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+      "bytes": 2758,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "1a3d7beec3400c1004250d8e49e73696bcda92973ad111e7734d8826a17ca022",
+      "working_bytes": 2758,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round130_campaign.py",
+      "SHA256": "eed2b7e00face643768fd37111bfd035c7ebce54a34d14279a95522ea7b25c95",
+      "bytes": 7385,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "eed2b7e00face643768fd37111bfd035c7ebce54a34d14279a95522ea7b25c95",
+      "working_bytes": 7385,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round130_common.py",
+      "SHA256": "1750849e9c9e0442a96d74f106319a16d75c2a469e538e5c07ca35a3fbb69150",
+      "bytes": 5219,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "1750849e9c9e0442a96d74f106319a16d75c2a469e538e5c07ca35a3fbb69150",
+      "working_bytes": 5219,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round130_evidence.py",
+      "SHA256": "bfb6eb014b5f8e95c696a845a5a7df22bef073188c4b097d28a8e4e85d25b5c3",
+      "bytes": 8186,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "bfb6eb014b5f8e95c696a845a5a7df22bef073188c4b097d28a8e4e85d25b5c3",
+      "working_bytes": 8186,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round133_campaign.py",
+      "SHA256": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+      "bytes": 14629,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "85a0867c981368f1ee7a161155626c120422d482f5f2eaffeca020b80d780807",
+      "working_bytes": 14629,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round133_common.py",
+      "SHA256": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+      "bytes": 12788,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "80c6951d3fbd368853fd2c447b34c82dda0d422097614ab707579ea74a0757d0",
+      "working_bytes": 12788,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round133_joint_check.py",
+      "SHA256": "892fac7d3396f1a27f3c18c051ad054f1a273ddd8e84e6cd55b97faee26381db",
+      "bytes": 12446,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "892fac7d3396f1a27f3c18c051ad054f1a273ddd8e84e6cd55b97faee26381db",
+      "working_bytes": 12446,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round133_postverify_repair.py",
+      "SHA256": "8feae1d544d92fba843f4836f0c685c2cf38151f20386cd2538396ac34af6640",
+      "bytes": 19896,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "8feae1d544d92fba843f4836f0c685c2cf38151f20386cd2538396ac34af6640",
+      "working_bytes": 19896,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round133_read.py",
+      "SHA256": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+      "bytes": 60903,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "933af994bf3def115d9870c33f409709d5509a1b42f7b0546645691ce1b7c80a",
+      "working_bytes": 60903,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round134_common.py",
+      "SHA256": "af13361ae1523d2504dbde534e5fc5768a352649cd111f44748dbb5db0088f67",
+      "bytes": 13043,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "af13361ae1523d2504dbde534e5fc5768a352649cd111f44748dbb5db0088f67",
+      "working_bytes": 13043,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round134_count_bound.py",
+      "SHA256": "d364f56bbb91108e9265938112ba6df3446efa79e95fc2576184a14da5e11457",
+      "bytes": 10111,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d364f56bbb91108e9265938112ba6df3446efa79e95fc2576184a14da5e11457",
+      "working_bytes": 10111,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round135_ap_audit.py",
+      "SHA256": "da5a71cb166dddf7407cd46e2ba567322439278d42087afd4a43a59bd5880137",
+      "bytes": 1682,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "da5a71cb166dddf7407cd46e2ba567322439278d42087afd4a43a59bd5880137",
+      "working_bytes": 1682,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round135_common.py",
+      "SHA256": "1c70cb856b2368381ab92e3e00f00cffa9ffd9b998fb5847a43090fc0750aa5e",
+      "bytes": 13043,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "1c70cb856b2368381ab92e3e00f00cffa9ffd9b998fb5847a43090fc0750aa5e",
+      "working_bytes": 13043,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round135_read.py",
+      "SHA256": "8ba64ca6a87e55ff2ea925c70620dfc4397d3ae49c58a77fe4074eac96c6b38c",
+      "bytes": 63816,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "8ba64ca6a87e55ff2ea925c70620dfc4397d3ae49c58a77fe4074eac96c6b38c",
+      "working_bytes": 63816,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round137_common.py",
+      "SHA256": "b133b9ef972e40731e394086187379151f99759fe93719f6a3798d156bb9499f",
+      "bytes": 12773,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b133b9ef972e40731e394086187379151f99759fe93719f6a3798d156bb9499f",
+      "working_bytes": 12773,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round137_read.py",
+      "SHA256": "c47c6742fc8cfd9b5da998af1c1c02a85131ba1d5c57aba1def87ae2e5d4973b",
+      "bytes": 3606,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c47c6742fc8cfd9b5da998af1c1c02a85131ba1d5c57aba1def87ae2e5d4973b",
+      "working_bytes": 3606,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round138_common.py",
+      "SHA256": "bb011d4a4f43e79a1b9b92807faabfad483bb75089fb3c4799b1e261202dd42a",
+      "bytes": 12770,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "bb011d4a4f43e79a1b9b92807faabfad483bb75089fb3c4799b1e261202dd42a",
+      "working_bytes": 12770,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round138_delivery.py",
+      "SHA256": "81dfffff7652d0523dcc431fe1086323af5b45961867289751a776fa8c016b2b",
+      "bytes": 9909,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "81dfffff7652d0523dcc431fe1086323af5b45961867289751a776fa8c016b2b",
+      "working_bytes": 9909,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round138_math.py",
+      "SHA256": "3d1480db5c58703a81c0eb221a29ea6b9ad6c19ff719ace187dd7ad7d70ebea6",
+      "bytes": 5911,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "3d1480db5c58703a81c0eb221a29ea6b9ad6c19ff719ace187dd7ad7d70ebea6",
+      "working_bytes": 5911,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round138_offline_products.py",
+      "SHA256": "e1b43d4a2460907cf326429d9acd01f2d97a5b46684792af2444214cab29c854",
+      "bytes": 3925,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "e1b43d4a2460907cf326429d9acd01f2d97a5b46684792af2444214cab29c854",
+      "working_bytes": 3925,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round138_read.py",
+      "SHA256": "b677146dbc86953ef8930294140d299cfe914b767f8bff48b5cd89be53debf5a",
+      "bytes": 2565,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b677146dbc86953ef8930294140d299cfe914b767f8bff48b5cd89be53debf5a",
+      "working_bytes": 2565,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round138_repair.py",
+      "SHA256": "8b4e8f55a1dec1f1d79c1cd40302d57969246e677d91d5fddace3e27d09b48df",
+      "bytes": 13606,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "8b4e8f55a1dec1f1d79c1cd40302d57969246e677d91d5fddace3e27d09b48df",
+      "working_bytes": 13606,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round138_scaled_read.py",
+      "SHA256": "8e83742b45e488ce4af900879239fb100d4c1b67e094f75d694f4523f0be1428",
+      "bytes": 784,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "8e83742b45e488ce4af900879239fb100d4c1b67e094f75d694f4523f0be1428",
+      "working_bytes": 784,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round138_setup.py",
+      "SHA256": "b7e65e658ce543b0ce9b8898d04ca831f11353be82007b3ff4f18d4ca5cf9e0e",
+      "bytes": 6260,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b7e65e658ce543b0ce9b8898d04ca831f11353be82007b3ff4f18d4ca5cf9e0e",
+      "working_bytes": 6260,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round138_tiny_read.py",
+      "SHA256": "cc796738d83c2ab2b8dc7505d2c63af75805b7d3b5cda6b6e574949c5e530b85",
+      "bytes": 5431,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "cc796738d83c2ab2b8dc7505d2c63af75805b7d3b5cda6b6e574949c5e530b85",
+      "working_bytes": 5431,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round140_common.py",
+      "SHA256": "8b4b1f44484d482b1dad991b2aa0c986f4e904ba964f880dd07f776de4891c45",
+      "bytes": 12872,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "8b4b1f44484d482b1dad991b2aa0c986f4e904ba964f880dd07f776de4891c45",
+      "working_bytes": 12872,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round140_math.py",
+      "SHA256": "87e108f90b978c6d9f273a491c40c17cc9bc88cf73a22aa65a73d12223772319",
+      "bytes": 11388,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "87e108f90b978c6d9f273a491c40c17cc9bc88cf73a22aa65a73d12223772319",
+      "working_bytes": 11388,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round143_build.py",
+      "SHA256": "f27754c3fa7ee860e38170d1f58f72511c1c2e3f1429abb7c19359dc299f7adb",
+      "bytes": 2530,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "063ec23ea25698de7aeb5823afa34be694db03656878096d6ef8992ad3c6761e",
+      "working_bytes": 2565,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round143_common.py",
+      "SHA256": "5330b30c487a844df36e1b6f44b57e0ff83102b2b4f61525382eb7d8f8c703b6",
+      "bytes": 1229,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b04438295c9617658eb22f09b7289f96c39443e2a42c41840426b6e6413d0d5a",
+      "working_bytes": 1258,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round143_lp.py",
+      "SHA256": "f99f2c3bda0487cd421e38d15607254f44cf009da9072804ddf94a4fd0fce57c",
+      "bytes": 9376,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "04fb3e5d69d7fd7df54467429a0cf6f78f3efa36e467abc84dffaf8e72b4c3a7",
+      "working_bytes": 9500,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round143_math.py",
+      "SHA256": "d939c1629a02b32d31eb56891dece9534e2ee7416dd1addf24cc6e2a943f263c",
+      "bytes": 6442,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "304adbae5cdaea46e7589ef73d4474e1916c8db8bd5f2cf7a08968dbead8f206",
+      "working_bytes": 6571,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round143_qualify.py",
+      "SHA256": "76d251593f75a5050799bdc9950af14941b870abaf3f0325d0aebf0e5303acd3",
+      "bytes": 6449,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c54ff25e00725d3e63737255ca655bec7bd3e08ad1cdb0a284ec378aa27a5451",
+      "working_bytes": 6556,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round145_common.py",
+      "SHA256": "720ee4a18a90d864dfa97bf5737190744ef305dd2d805ac5498cfaa158ad70c7",
+      "bytes": 1040,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "720ee4a18a90d864dfa97bf5737190744ef305dd2d805ac5498cfaa158ad70c7",
+      "working_bytes": 1040,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round145_lp.py",
+      "SHA256": "487ed5c5b2c0edcc59edb93b1b556c3b68291d7dc38715d77087c8f10a0537e3",
+      "bytes": 8710,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "487ed5c5b2c0edcc59edb93b1b556c3b68291d7dc38715d77087c8f10a0537e3",
+      "working_bytes": 8710,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round145_math.py",
+      "SHA256": "a13e6c87d2351eb4201dc56e0a97584aa697ba4e9b05ef8a2fb4f53e3f46e0eb",
+      "bytes": 4771,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "a13e6c87d2351eb4201dc56e0a97584aa697ba4e9b05ef8a2fb4f53e3f46e0eb",
+      "working_bytes": 4771,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round146_common.py",
+      "SHA256": "5d183b9a1a4e8f6346a187aa09dd9f19fdf8773cbf89c905acf45a0ed227a968",
+      "bytes": 979,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "5d183b9a1a4e8f6346a187aa09dd9f19fdf8773cbf89c905acf45a0ed227a968",
+      "working_bytes": 979,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round146_math.py",
+      "SHA256": "c927cd9ae29f265615cd1316138abec0edbf5f3e76bd6a9f924717e089eb8245",
+      "bytes": 4732,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c927cd9ae29f265615cd1316138abec0edbf5f3e76bd6a9f924717e089eb8245",
+      "working_bytes": 4732,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round147_common.py",
+      "SHA256": "17cc6773b1267d78b958fc1e2e6c4b3b81a53d2d8be7b77da7ab07a2f8eda852",
+      "bytes": 1106,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "17cc6773b1267d78b958fc1e2e6c4b3b81a53d2d8be7b77da7ab07a2f8eda852",
+      "working_bytes": 1106,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round147_read.py",
+      "SHA256": "efc777a47e68d1812ba5711567421a36c93d15d89a2b839167a71c127ea48b0a",
+      "bytes": 6028,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "efc777a47e68d1812ba5711567421a36c93d15d89a2b839167a71c127ea48b0a",
+      "working_bytes": 6028,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round149_common.py",
+      "SHA256": "566719a73b81e0f79ed5152f456db20d0b7954c96aa9509daf540429644ed443",
+      "bytes": 1103,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "cf56dec2aa76b16ae78c83455c211558b14525cee74a76a122400c745046421d",
+      "working_bytes": 1132,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round149_context.py",
+      "SHA256": "b29fb107a941d2ae88cb58f9b03323087e70af590c042fe33cf53a98b6d25708",
+      "bytes": 1816,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "9e2a237605a70dc4d179e4edf40875402bea23a11b0eaf1fc2a9cf37e57ca290",
+      "working_bytes": 1857,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round149_math.py",
+      "SHA256": "70b59b8850295704a2cc2cb82437c27dd6cd7a59e91a09cab25967946b007e40",
+      "bytes": 5929,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "e5be15a8eb4d3c40bb19ef83c4e32aa5ee962533495ec8c670ef555520ada108",
+      "working_bytes": 6042,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round149_read.py",
+      "SHA256": "ef8439fd97eabdb4efdfbb1e0c6e341b933fc6d2e292fd9ead8a00ef190a36d9",
+      "bytes": 6207,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "ca2e7abf0f331a06331d4c353790d87ee0b2826caf1c27b844cde7d6495496ec",
+      "working_bytes": 6293,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round150_common.py",
+      "SHA256": "6e962900b462e0ac95ba231c7c4156d5cac0166a5d947cff569f82b4c485c5e4",
+      "bytes": 1162,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "6e962900b462e0ac95ba231c7c4156d5cac0166a5d947cff569f82b4c485c5e4",
+      "working_bytes": 1162,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round150_lp.py",
+      "SHA256": "cba1e6178108fcd31027ea453b608b395d198e539ebdd9235976a4b56e51a620",
+      "bytes": 12194,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "cba1e6178108fcd31027ea453b608b395d198e539ebdd9235976a4b56e51a620",
+      "working_bytes": 12194,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round150_math.py",
+      "SHA256": "9e7ea7468724ab5b9269e75324ef4dd25484712d5b8d4b24efa7b77cabd75c10",
+      "bytes": 3795,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "9e7ea7468724ab5b9269e75324ef4dd25484712d5b8d4b24efa7b77cabd75c10",
+      "working_bytes": 3795,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round151_common.py",
+      "SHA256": "b0faf9f30bea7323c244123a6a02bea15c5d7c727f6afbcc41c9a4a1c54d6b9d",
+      "bytes": 1006,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b0faf9f30bea7323c244123a6a02bea15c5d7c727f6afbcc41c9a4a1c54d6b9d",
+      "working_bytes": 1006,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round151_math.py",
+      "SHA256": "833fc5dea40ebf04addff0ec2d232b48c2b55ef410ccfc013e1b231d2490c948",
+      "bytes": 5658,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "833fc5dea40ebf04addff0ec2d232b48c2b55ef410ccfc013e1b231d2490c948",
+      "working_bytes": 5658,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round151_read.py",
+      "SHA256": "33dc713d66a174409894bc419b6ed6aee5dbb2c2a9f677842f6ea32777a59048",
+      "bytes": 5829,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "33dc713d66a174409894bc419b6ed6aee5dbb2c2a9f677842f6ea32777a59048",
+      "working_bytes": 5829,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round152_math.py",
+      "SHA256": "a2639fa1a1572e09ac8f183dbd2882c1ea797fc5f96c67b33cc0a28a352c593a",
+      "bytes": 6580,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "a2639fa1a1572e09ac8f183dbd2882c1ea797fc5f96c67b33cc0a28a352c593a",
+      "working_bytes": 6580,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round153_build.py",
+      "SHA256": "308afe3ec28e11685c3a99831fed9a22280d12356c5d7dc073171efb1f1a2af9",
+      "bytes": 4614,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "308afe3ec28e11685c3a99831fed9a22280d12356c5d7dc073171efb1f1a2af9",
+      "working_bytes": 4614,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round153_campaign.py",
+      "SHA256": "09f4a0bfe5f2c69b8852636c10ddaaa83e47b24dada5dfc016dbbf40e63689b0",
+      "bytes": 10018,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "09f4a0bfe5f2c69b8852636c10ddaaa83e47b24dada5dfc016dbbf40e63689b0",
+      "working_bytes": 10018,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round153_common.py",
+      "SHA256": "7f4138d995e53b53aed39d255048d8f9ca4aeb368e2d1cea1d4821883fda0233",
+      "bytes": 2071,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "7f4138d995e53b53aed39d255048d8f9ca4aeb368e2d1cea1d4821883fda0233",
+      "working_bytes": 2071,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round153_delivery.py",
+      "SHA256": "cc9ee2bb92d321635e4e27e2951b0b380cc23433ca49974dfea67295f02b1ec6",
+      "bytes": 10977,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "cc9ee2bb92d321635e4e27e2951b0b380cc23433ca49974dfea67295f02b1ec6",
+      "working_bytes": 10977,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round153_online.py",
+      "SHA256": "510d01a368e2f63532a42aff9d8150d68f28f7b43b0dff85c0b741345d88f665",
+      "bytes": 5260,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "510d01a368e2f63532a42aff9d8150d68f28f7b43b0dff85c0b741345d88f665",
+      "working_bytes": 5260,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round153_pricing.py",
+      "SHA256": "8ed325356a9171a3e1aaafbc4a5c0526a764f0c35148dd6de2ea15d0d925e558",
+      "bytes": 11904,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "8ed325356a9171a3e1aaafbc4a5c0526a764f0c35148dd6de2ea15d0d925e558",
+      "working_bytes": 11904,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round153_read.py",
+      "SHA256": "7daf2592f228a322db88fd1f447f4e6ea3d4b8d78338f3ec0ec9686830ab49ab",
+      "bytes": 8860,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "7daf2592f228a322db88fd1f447f4e6ea3d4b8d78338f3ec0ec9686830ab49ab",
+      "working_bytes": 8860,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round154_campaign.py",
+      "SHA256": "e2d9d3920ef34a4e9574a04b54952890ec910a26465e42abd980fdf913babb0d",
+      "bytes": 8504,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "e2d9d3920ef34a4e9574a04b54952890ec910a26465e42abd980fdf913babb0d",
+      "working_bytes": 8504,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round154_common.py",
+      "SHA256": "d3e4ff626eb6a169872e555afa6b56ba773e7eb363264654e9d3d2bd03c17b21",
+      "bytes": 1528,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d3e4ff626eb6a169872e555afa6b56ba773e7eb363264654e9d3d2bd03c17b21",
+      "working_bytes": 1528,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round154_goal_oracle.py",
+      "SHA256": "8952bd342b0d8ad6de92dbb5fcd70faedfa0b161df0fb56873bb2d8e9ac9bdbf",
+      "bytes": 4768,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "8952bd342b0d8ad6de92dbb5fcd70faedfa0b161df0fb56873bb2d8e9ac9bdbf",
+      "working_bytes": 4768,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round154_read.py",
+      "SHA256": "1d83843803fd0c239b5eefb97f1049c6c0da9983e774968e80f51c052ce946cd",
+      "bytes": 6484,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "1d83843803fd0c239b5eefb97f1049c6c0da9983e774968e80f51c052ce946cd",
+      "working_bytes": 6484,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round154_residual.py",
+      "SHA256": "04bfa84774b7be4603ec08ae88ba015d6351d2bd3109a1d599fd4709f18bbc50",
+      "bytes": 12258,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "04bfa84774b7be4603ec08ae88ba015d6351d2bd3109a1d599fd4709f18bbc50",
+      "working_bytes": 12258,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round154_strengthened.py",
+      "SHA256": "670d385ef6f9239b705fea92345709d4d4edbfe17dd732bb95b76b9b18460824",
+      "bytes": 5559,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "670d385ef6f9239b705fea92345709d4d4edbfe17dd732bb95b76b9b18460824",
+      "working_bytes": 5559,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round155_common.py",
+      "SHA256": "a6e917ffb342b9744a0004a27a592a5e294c31e0ff2f31cb1e7c76c6ddfcbaa7",
+      "bytes": 1615,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "a6e917ffb342b9744a0004a27a592a5e294c31e0ff2f31cb1e7c76c6ddfcbaa7",
+      "working_bytes": 1615,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round155_oracle.py",
+      "SHA256": "b9f241d46cac381d75b3f58f31f7bdd5fecb79f6d7c39f6c2dc3a565374fd043",
+      "bytes": 7769,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b9f241d46cac381d75b3f58f31f7bdd5fecb79f6d7c39f6c2dc3a565374fd043",
+      "working_bytes": 7769,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round155_price_certificate.py",
+      "SHA256": "99b69b768e4cb445a2a0296a4b55cec64f2f5a8c3a73ececa358d1e2139b6a5d",
+      "bytes": 6120,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "99b69b768e4cb445a2a0296a4b55cec64f2f5a8c3a73ececa358d1e2139b6a5d",
+      "working_bytes": 6120,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round61_research.py",
+      "SHA256": "088b5a4c4626b528658e403e163958074676f4ea8b58ed8548a54f4727c18571",
+      "bytes": 13473,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "3a288c045e58bbc7e19dad330db2bdae4257daaf63a66313ee32b89205e14955",
+      "working_bytes": 13710,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round69_research.py",
+      "SHA256": "d7579acdaf24beea19a6724b1a6d57269b5036fb67e0d53f6e152a2db24ce272",
+      "bytes": 9887,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d7579acdaf24beea19a6724b1a6d57269b5036fb67e0d53f6e152a2db24ce272",
+      "working_bytes": 9887,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round69_topology.py",
+      "SHA256": "80254cd7cdaf8cdadc7d31fddc1c196f55fd6754d56da18cb2e4010223864212",
+      "bytes": 2219,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "80254cd7cdaf8cdadc7d31fddc1c196f55fd6754d56da18cb2e4010223864212",
+      "working_bytes": 2219,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round70_affinity.py",
+      "SHA256": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+      "bytes": 4509,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c64ce9455569960e79fd5a1078fa23f14f14fd32c01be4b452154c42e8662445",
+      "working_bytes": 4509,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round73_qualify.py",
+      "SHA256": "ad6062138d6dce6ab049cb6bc5986ba68fdecbda4588dbeda14a51b00de978c0",
+      "bytes": 3500,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "b4428f5a42b2e58d8ca6c84fbb5d28ae1c678f8f41e9bdbba4f6954c01e88efd",
+      "working_bytes": 3559,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round73_seed_diagnostic.py",
+      "SHA256": "08b23e80febe63627f8ae79d22df115d4c127d809de411f21e87a3e305a1dca0",
+      "bytes": 12559,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "3263595bf7ddda4472d6c519b136faec7b3f9d4ab4e3009bb5bf108d9cc0e3c8",
+      "working_bytes": 12727,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round75_qualify.py",
+      "SHA256": "c82f757cde7e0915f097749925e54e19cf9e9d0c483ada6d9654439ce580232f",
+      "bytes": 5227,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c82f757cde7e0915f097749925e54e19cf9e9d0c483ada6d9654439ce580232f",
+      "working_bytes": 5227,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round75_startup.py",
+      "SHA256": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "bytes": 12402,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "772d0e5dbd92990382b45c4a1ff0eeba30604f1558967eb9c2b121cc0a620ff6",
+      "working_bytes": 12402,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round76_qualify.py",
+      "SHA256": "c56ab8d49cd664d1433d5dfa0fbe2670ccc390a05ea3a2abd60e479ba26dca72",
+      "bytes": 5321,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c56ab8d49cd664d1433d5dfa0fbe2670ccc390a05ea3a2abd60e479ba26dca72",
+      "working_bytes": 5321,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round76_startup.py",
+      "SHA256": "993c448dd466d5288ed61003ac339c63002452c86737c9d7ee46457b56e6f929",
+      "bytes": 14239,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "993c448dd466d5288ed61003ac339c63002452c86737c9d7ee46457b56e6f929",
+      "working_bytes": 14239,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round78_audit.py",
+      "SHA256": "57f4aa7ba6d1b0c20d95779c08d27fd4f1d25164cbbe26ca2a0ae7c090fa58ea",
+      "bytes": 7346,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "57f4aa7ba6d1b0c20d95779c08d27fd4f1d25164cbbe26ca2a0ae7c090fa58ea",
+      "working_bytes": 7346,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round83_audit_v2.py",
+      "SHA256": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+      "bytes": 7547,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "e70200bddf32c115f976385e757c7493fe6459ce71a6079799e5dfcbb3766a55",
+      "working_bytes": 7547,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round86_native_evidence.py",
+      "SHA256": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+      "bytes": 11468,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "d88cd16dd3e2c93b70ed42f3cbd269bf7f3184bc1ad801a1712dc867e387ee58",
+      "working_bytes": 11468,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round88_a1_g3.py",
+      "SHA256": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+      "bytes": 35352,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "178e83fcb56143109d00f407af770b711a7e69c5816e63a0aa094dee8ff3eadd",
+      "working_bytes": 35352,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round88_ot_closure.py",
+      "SHA256": "129b9224ac36e44b52fcc911604938a024d79986f8bd5fe8a8ffd6b14d1b2934",
+      "bytes": 40362,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "129b9224ac36e44b52fcc911604938a024d79986f8bd5fe8a8ffd6b14d1b2934",
+      "working_bytes": 40362,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round88_ot_diagnostic.py",
+      "SHA256": "c1cb1776d1b1eef0f03977e00060c1690e5505517d0e4baa71feb3b672fa0756",
+      "bytes": 32547,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c1cb1776d1b1eef0f03977e00060c1690e5505517d0e4baa71feb3b672fa0756",
+      "working_bytes": 32547,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round88_ot_epigraph.py",
+      "SHA256": "5d49c3fc12cc806a8008e43d756bf9c46810b21e7efc2b64c2383da4624bd7da",
+      "bytes": 31375,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "5d49c3fc12cc806a8008e43d756bf9c46810b21e7efc2b64c2383da4624bd7da",
+      "working_bytes": 31375,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round88_ot_math.py",
+      "SHA256": "2b8855609cf469098d050fcd9c89efac01b2cb41ee07f023b5a7b79f9ff71840",
+      "bytes": 6864,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "2b8855609cf469098d050fcd9c89efac01b2cb41ee07f023b5a7b79f9ff71840",
+      "working_bytes": 6864,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round90_lp_g_g3.py",
+      "SHA256": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996",
+      "bytes": 51527,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "6ae015c273a83513b736ad73008d9e095490a797b33ee78bd2f6432e9edb3996",
+      "working_bytes": 51527,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round94_lpg_contemporary.py",
+      "SHA256": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a",
+      "bytes": 55473,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "02f78bba3397462f47b04f6ecec486ce739533e944948099c5773d18562c935a",
+      "working_bytes": 55473,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round94_lpg_formal_recovery_v3.py",
+      "SHA256": "7d54f6bfd2a0fec302b7cdf5d0291809254ea1ffdbc864face54ecc704b7ce01",
+      "bytes": 25366,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "7d54f6bfd2a0fec302b7cdf5d0291809254ea1ffdbc864face54ecc704b7ce01",
+      "working_bytes": 25366,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round96_external.py",
+      "SHA256": "4d8f917ce46aa0945319d69e8001006a7cb039ff4a274844e53c6774eeb5d57e",
+      "bytes": 7554,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "4d8f917ce46aa0945319d69e8001006a7cb039ff4a274844e53c6774eeb5d57e",
+      "working_bytes": 7554,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round96_prepare.py",
+      "SHA256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+      "bytes": 8730,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "1708be14cb731cefac5719b1a956fe59cb6e06fd8581ba5b224a1343ffa9fcbe",
+      "working_bytes": 8730,
+      "checkout_transform": "identity",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round99_common.py",
+      "SHA256": "760bf112a9c9c0cd1388c842aaa71b715b2958b44fb37541a5a3a2194c024ee0",
+      "bytes": 2345,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "bd1ecd710fa4e52093e6027a247ce77c4ddaa00b56ee0ef499cd45ccd41f8208",
+      "working_bytes": 2378,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    },
+    {
+      "member": "scripts/round99_pure_start_audit.py",
+      "SHA256": "4157be5495f22b91e2ee0ac5e8680d0ce33768bba3f55b66027315d5cf02dad9",
+      "bytes": 7880,
+      "commit": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+      "resolution": "fixed Git file",
+      "working_SHA256": "c769dbdc978025ba84cbb8f566d493018f912f35c74346047434e2e21af4f882",
+      "working_bytes": 8007,
+      "checkout_transform": "LF_to_CRLF",
+      "used_for": [
+        "static Python dependency of Round156 source"
+      ]
+    }
+  ],
+  "archives": {
+    "round137/campaign_012.zip": {
+      "commit": "e735c3447eb1443713c700942d873de1783a4a26",
+      "name": "campaign_012.zip",
+      "SHA256": "c9ebe9e0fef1f824e765450447b4e15759666bedf60886b0f73ce3addbb076c2",
+      "compressed_bytes": 39353491,
+      "uncompressed_bytes": 181459310,
+      "file_count": 81775,
+      "pieces": [
+        {
+          "path": "results/unified_exact_round137/artifacts/campaign_012.zip",
+          "bytes": 39353491,
+          "SHA256": "c9ebe9e0fef1f824e765450447b4e15759666bedf60886b0f73ce3addbb076c2"
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round137/evidence/campaign_012.members.json.gz",
+        "bytes": 3579802,
+        "SHA256": "d995754b3f71f7b101397bc4e15ff508699a9aba8ad839002849f837808277af"
+      },
+      "existing_completed_carrier_verified_and_reused": true
+    },
+    "round154/complete_arm_007.zip": {
+      "commit": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+      "name": "complete_arm_007.zip",
+      "SHA256": "410763023af75fc7694298702a9567ec4a3c5f598bf70fa947a7d011acd4815f",
+      "bytes": 1620171,
+      "parts": [
+        {
+          "path": "results/unified_exact_round154/artifacts/complete_arm_007.zip",
+          "SHA256": "410763023af75fc7694298702a9567ec4a3c5f598bf70fa947a7d011acd4815f",
+          "bytes": 1620171
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round154/artifacts/complete_arm_007.members.json.gz",
+        "SHA256": "65b866f11b8147a84de4e5aaf8ec1f42d0a649e8b95fb4b9b2f8fe458ed0adbd",
+        "bytes": 25597
+      },
+      "members": 549,
+      "uncompressed_bytes": 13589624
+    },
+    "round155/complete_arm_001.zip": {
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "name": "complete_arm_001.zip",
+      "SHA256": "e402bb4ef16d2f80bfe807c3a36b78c890338ace5af49a3a1a39b76d62876484",
+      "bytes": 1546808,
+      "parts": [
+        {
+          "path": "results/unified_exact_round155/artifacts/complete_arm_001.zip",
+          "SHA256": "e402bb4ef16d2f80bfe807c3a36b78c890338ace5af49a3a1a39b76d62876484",
+          "bytes": 1546808
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round155/artifacts/complete_arm_001.members.json.gz",
+        "SHA256": "3f4f21ad86d6cf10dd24f4f3b6825b5b50d1f0bb698dc1def5c87403811bdfdd",
+        "bytes": 25881
+      },
+      "members": 560,
+      "uncompressed_bytes": 13092414
+    },
+    "round155/complete_arm_002.zip": {
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "name": "complete_arm_002.zip",
+      "SHA256": "9be52f4966e9dae1df3daf28cbed03d3453b8be7edf439d733231c7b63e347a6",
+      "bytes": 1657311,
+      "parts": [
+        {
+          "path": "results/unified_exact_round155/artifacts/complete_arm_002.zip",
+          "SHA256": "9be52f4966e9dae1df3daf28cbed03d3453b8be7edf439d733231c7b63e347a6",
+          "bytes": 1657311
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round155/artifacts/complete_arm_002.members.json.gz",
+        "SHA256": "59167467efed4c989b2c9034163b70e9c85b1ca999dbebee1a1557ce963a9f65",
+        "bytes": 27027
+      },
+      "members": 583,
+      "uncompressed_bytes": 13915219
+    },
+    "round155/complete_arm_003.zip": {
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "name": "complete_arm_003.zip",
+      "SHA256": "e09a8dde1fc4f1109256aa7359a58a8ab442f3e4d407ac1b91e0cc7a530061eb",
+      "bytes": 1499283,
+      "parts": [
+        {
+          "path": "results/unified_exact_round155/artifacts/complete_arm_003.zip",
+          "SHA256": "e09a8dde1fc4f1109256aa7359a58a8ab442f3e4d407ac1b91e0cc7a530061eb",
+          "bytes": 1499283
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round155/artifacts/complete_arm_003.members.json.gz",
+        "SHA256": "d3a7e4089d752fd2bc402af17653d2cbb446da684157c6414a866ed622f83bee",
+        "bytes": 25825
+      },
+      "members": 557,
+      "uncompressed_bytes": 12765456
+    },
+    "round155/complete_arm_004.zip": {
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "name": "complete_arm_004.zip",
+      "SHA256": "08caeeffbe7c02c49d60cada02c2b500389c22d109c2dcda9c79732655579ca2",
+      "bytes": 1596268,
+      "parts": [
+        {
+          "path": "results/unified_exact_round155/artifacts/complete_arm_004.zip",
+          "SHA256": "08caeeffbe7c02c49d60cada02c2b500389c22d109c2dcda9c79732655579ca2",
+          "bytes": 1596268
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round155/artifacts/complete_arm_004.members.json.gz",
+        "SHA256": "d882715ecd7416caa1172d56ab069233516c3dfe8c832ef9ccdd38d3bd242d49",
+        "bytes": 26959
+      },
+      "members": 579,
+      "uncompressed_bytes": 13457730
+    },
+    "round155/complete_arm_005.zip": {
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "name": "complete_arm_005.zip",
+      "SHA256": "c66d22fc642c34a2651bd57851a3e758b4ff172ccb91300996a19457bf826c11",
+      "bytes": 722782,
+      "parts": [
+        {
+          "path": "results/unified_exact_round155/artifacts/complete_arm_005.zip",
+          "SHA256": "c66d22fc642c34a2651bd57851a3e758b4ff172ccb91300996a19457bf826c11",
+          "bytes": 722782
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round155/artifacts/complete_arm_005.members.json.gz",
+        "SHA256": "d459ee4cc56ddad461fc1b41f6a074ac651dc9a1d0f3f1543e161844f75215f7",
+        "bytes": 34976
+      },
+      "members": 766,
+      "uncompressed_bytes": 4119590
+    },
+    "round155/complete_arm_006.zip": {
+      "commit": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+      "name": "complete_arm_006.zip",
+      "SHA256": "53ea69ff22f28119af9d4ebeb07746a18b83a87f0faefd5a228655806e88e056",
+      "bytes": 776625,
+      "parts": [
+        {
+          "path": "results/unified_exact_round155/artifacts/complete_arm_006.zip",
+          "SHA256": "53ea69ff22f28119af9d4ebeb07746a18b83a87f0faefd5a228655806e88e056",
+          "bytes": 776625
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round155/artifacts/complete_arm_006.members.json.gz",
+        "SHA256": "25031220a7e2316f514863c96fad6c6a5e1326adb2aceefc1f6e171af79c29d5",
+        "bytes": 36116
+      },
+      "members": 789,
+      "uncompressed_bytes": 4393564
+    }
+  },
+  "scope": "Only actual starting prices, complete inputs, original time-chain evidence and source dependencies.",
+  "fixed_R137_science": "e735c3447eb1443713c700942d873de1783a4a26",
+  "fixed_R154_science": "a1a3a8d1d88d0af35163e7f134bac09e1ad2077c",
+  "fixed_R155_science": "1a73c0fad8fd7298e04920efc482072d191dfb97",
+  "old_carriers_downloaded": 0,
+  "old_carriers_repacked": 0,
+  "old_producers_run": 0,
+  "transitive_resolution": "Other prior paths resolve through the fixed provider manifests and their fixed reuse indexes."
+}

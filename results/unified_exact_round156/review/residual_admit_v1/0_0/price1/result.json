@@ -1,0 +1,105 @@
+{
+  "scope": {
+    "Bminus": 1,
+    "B": 4,
+    "gamma_L": 0.05,
+    "gamma_U": 0.7,
+    "cutoff": 2.0,
+    "stations": [
+      {
+        "i": 1,
+        "lo": 0,
+        "hi": 4,
+        "support": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "c": 1.0,
+        "omega": 0.17
+      },
+      {
+        "i": 2,
+        "lo": 0,
+        "hi": 4,
+        "support": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "c": 0.5,
+        "omega": 0.17
+      }
+    ]
+  },
+  "tau_exact": "20176126330619823/288230376151711744",
+  "lower": 0.05,
+  "lower_exact": "3602879701896397/72057594037927936",
+  "upper": 0.05,
+  "upper_exact": "3602879701896397/72057594037927936",
+  "stocks": [
+    {
+      "Y": [
+        1,
+        1
+      ],
+      "feasible": true,
+      "G": 0.16666666666666666,
+      "f": 0.16666666666666666,
+      "price": 0.25166666666666665,
+      "penalty": 0.085,
+      "phi": 0.25166666666666665,
+      "total": 2,
+      "S": 1.5,
+      "f_exact": "1/6",
+      "price_exact": "54403483498635593/216172782113783808"
+    },
+    {
+      "Y": [
+        1,
+        2
+      ],
+      "feasible": true,
+      "G": 0.0,
+      "f": 0.05,
+      "price": 0.05,
+      "penalty": 0.0,
+      "phi": 0.05,
+      "total": 3,
+      "S": 2.0,
+      "f_exact": "3602879701896397/72057594037927936",
+      "price_exact": "3602879701896397/72057594037927936"
+    }
+  ],
+  "residual_lower_exact": null,
+  "restricted_phi_lower_exact": "3602879701896397/72057594037927936",
+  "complete_domain": true,
+  "condition_upper": false,
+  "inventory_upper_used": 0.25166666666757614,
+  "target_proved": false,
+  "target_disproved": true,
+  "zero_exact": null,
+  "fallback_exact": "3602879701896397/72057594037927936",
+  "LP": null,
+  "global_deadline_stop": false,
+  "calls": [
+    {
+      "Status": 11,
+      "Runtime": 0.0,
+      "Work": 5.8389e-05,
+      "nodes": 0.0,
+      "native_bound": null,
+      "native_incumbent": -0.010000000000000599,
+      "bound_status_qualified": false,
+      "counterexample_stop": true,
+      "construct_DP_LP_seconds": 0.011152999941259623,
+      "optimize_seconds": 0.0011873000767081976
+    }
+  ],
+  "seconds": 0.012954500038176775,
+  "upper_is_inventory_only": true
+}

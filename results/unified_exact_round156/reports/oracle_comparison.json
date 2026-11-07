@@ -1,0 +1,273 @@
+{
+  "rows": [
+    {
+      "role": "R-X35-S-T2",
+      "method": "residual",
+      "label": "residual16384_v1",
+      "initial_lower": 0.22226257992032944,
+      "initial_upper": 0.23685400930608239,
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "qualified_gap": 0.013859131443870715,
+      "resolved": false,
+      "oracle_construct_seconds": 0.27914929995313287,
+      "arm_seconds": 316.33691620011814,
+      "fee_label": "rx35_residual16384_v1",
+      "outer_seconds": 316.5549226999283,
+      "non_body_overhead": 0.2180064998101443,
+      "lower_gain": 0.0,
+      "upper_decrease": 0.0007322979418822317,
+      "stop": "undecided_target",
+      "result_SHA": "93cfb8b32edc045ca1551f8f4a0a50ce075b1d37d34faeb14bde1c71c148d341",
+      "nodes": 16384.0,
+      "Native_Runtime": 315.49900007247925,
+      "Native_Work": 633.5593574787708,
+      "calls": 1
+    },
+    {
+      "role": "R-X35-S-T2",
+      "method": "residual_U",
+      "label": "residualU16384_v1",
+      "initial_lower": 0.22226257992032944,
+      "initial_upper": 0.23685400930608239,
+      "lower": 0.22956027144967478,
+      "upper": 0.23612171136420015,
+      "qualified_gap": 0.006561439914525374,
+      "resolved": false,
+      "oracle_construct_seconds": 0.27901790011674166,
+      "arm_seconds": 644.8028791001998,
+      "fee_label": "rx35_residualU16384_v1",
+      "outer_seconds": 645.014925000025,
+      "non_body_overhead": 0.21204589982517064,
+      "lower_gain": 0.00729769152934534,
+      "upper_decrease": 0.0007322979418822317,
+      "stop": "undecided_target",
+      "result_SHA": "8f9ae6de02c9f62eada7784a62c8c44c5efd9b0a2c49acb6a81cd05ce76340fb",
+      "nodes": 16384.0,
+      "Native_Runtime": 643.6180000305176,
+      "Native_Work": 1392.3788727961228,
+      "calls": 2
+    },
+    {
+      "role": "R-X35-S-T2",
+      "method": "RN",
+      "label": "rn16384_v1",
+      "initial_lower": 0.22226257992032944,
+      "initial_upper": 0.23685400930608239,
+      "lower": 0.23603837292376867,
+      "upper": 0.23612171136420015,
+      "qualified_gap": 8.33384404314852e-05,
+      "resolved": true,
+      "oracle_construct_seconds": 0.1500268999952823,
+      "arm_seconds": 52.9209141000174,
+      "fee_label": "rx35_rn16384_v1",
+      "outer_seconds": 53.110873099882156,
+      "non_body_overhead": 0.18995899986475706,
+      "lower_gain": 0.01377579300343923,
+      "upper_decrease": 0.0007322979418822317,
+      "stop": "original_price_precision",
+      "result_SHA": "297312718f945677db3ce43b6b703c07a9715946e113e5144de58d8a74df7d2f",
+      "nodes": 7593.0,
+      "Native_Runtime": 52.51699995994568,
+      "Native_Work": 95.55901677223936,
+      "calls": 1
+    }
+  ],
+  "product_comparison": [
+    {
+      "method": "residual",
+      "first_target": 0.22955829461320593,
+      "actual_D_lower": -0.012819131399483395,
+      "actual_D_upper": 0.016455560004090156,
+      "old_actual_D_upper": 0.016455560004090156,
+      "width_fraction": 1.0,
+      "LP_scaled_residual": -0.059993631104487,
+      "LP_converted_guarded_lower": 0.11636571534741638,
+      "LP_seconds": 0.015999794006347656,
+      "LP_Work": 0.022311159847572867,
+      "first_target_proved": false
+    },
+    {
+      "method": "residual_U",
+      "first_target": 0.22955829461320593,
+      "actual_D_lower": -0.012819131399483395,
+      "actual_D_upper": -0.00905387221327508,
+      "old_actual_D_upper": 0.016455560004090156,
+      "width_fraction": 0.12861823662976998,
+      "LP_scaled_residual": -0.047698587400369766,
+      "LP_converted_guarded_lower": 0.11636571534741638,
+      "LP_seconds": 0.02500009536743164,
+      "LP_Work": 0.025963667090020966,
+      "first_target_proved": true
+    }
+  ],
+  "common_cost": [
+    {
+      "actual_outer_cost_position": 30.0,
+      "method": "residual",
+      "lower": 0.22226257992032944,
+      "upper": 0.2365418455066189,
+      "gap": 0.014279265586289447,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 30.0,
+      "method": "residual_U",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "gap": 0.013859131443870715,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 30.0,
+      "method": "RN",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "gap": 0.013859131443870715,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 53.110873099882156,
+      "method": "residual",
+      "lower": 0.22226257992032944,
+      "upper": 0.23637208321458011,
+      "gap": 0.014109503294250675,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 53.110873099882156,
+      "method": "residual_U",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "gap": 0.013859131443870715,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 53.110873099882156,
+      "method": "RN",
+      "lower": 0.23603837292376867,
+      "upper": 0.23612171136420015,
+      "gap": 8.33384404314852e-05,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 60.0,
+      "method": "residual",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "gap": 0.013859131443870715,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 60.0,
+      "method": "residual_U",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "gap": 0.013859131443870715,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 60.0,
+      "method": "RN",
+      "lower": 0.23603837292376867,
+      "upper": 0.23612171136420015,
+      "gap": 8.33384404314852e-05,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 120.0,
+      "method": "residual",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "gap": 0.013859131443870715,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 120.0,
+      "method": "residual_U",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "gap": 0.013859131443870715,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 120.0,
+      "method": "RN",
+      "lower": 0.23603837292376867,
+      "upper": 0.23612171136420015,
+      "gap": 8.33384404314852e-05,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 316.5549226999283,
+      "method": "residual",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "gap": 0.013859131443870715,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 316.5549226999283,
+      "method": "residual_U",
+      "lower": 0.2288107391481912,
+      "upper": 0.23612171136420015,
+      "gap": 0.00731097221600896,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 316.5549226999283,
+      "method": "RN",
+      "lower": 0.23603837292376867,
+      "upper": 0.23612171136420015,
+      "gap": 8.33384404314852e-05,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 645.014925000025,
+      "method": "residual",
+      "lower": 0.22226257992032944,
+      "upper": 0.23612171136420015,
+      "gap": 0.013859131443870715,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 645.014925000025,
+      "method": "residual_U",
+      "lower": 0.22956027144967478,
+      "upper": 0.23612171136420015,
+      "gap": 0.006561439914525374,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    },
+    {
+      "actual_outer_cost_position": 645.014925000025,
+      "method": "RN",
+      "lower": 0.23603837292376867,
+      "upper": 0.23612171136420015,
+      "gap": 8.33384404314852e-05,
+      "conservative_all_nonbody_overhead_prepaid": true,
+      "not_exact_callback_wall_timestamp": true
+    }
+  ],
+  "same_scope_and_initial_information": true,
+  "rebuild_paid": true,
+  "no_inherited_branch_bound_tree": true,
+  "actual_outer_fees_include_all_runtime_and_driver_IO": true,
+  "posthoc_validation_fees_separate": true
+}

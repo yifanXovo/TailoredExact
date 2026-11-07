@@ -9,7 +9,7 @@
 
 namespace ebrp {
 struct Round153Controls {
-    bool enabled=false,generated=false,accepted=false,global_stop=false,proof_only=false;
+    bool enabled=false,generated=false,accepted=false,global_stop=false,proof_only=false,refine_rn=false;
     std::string python,helper,manifest,helper_sha,manifest_sha,input_sha,root_source_sha;
     long long bm=0,b=0;
     double gamma_L=0,gamma_U=0,cutoff=0,lower=0,helper_seconds=0;
@@ -24,6 +24,7 @@ inline void round153ResetRun(){
     auto& c=round153();c.enabled=old.enabled;c.python=old.python;c.helper=old.helper;
     c.manifest=old.manifest;c.helper_sha=old.helper_sha;c.manifest_sha=old.manifest_sha;
     c.proof_only=old.proof_only;
+    c.refine_rn=old.refine_rn;
 }
 namespace round153_detail {
 inline void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error("round153_"+why);}
@@ -105,7 +106,11 @@ inline CanonicalCompactModelArtifact embed(const Instance& instance,const Canoni
         if(c.helper_exit==0){
             std::ifstream response(target/"response.txt");std::string protocol,source_sha,manifest_sha,helper_sha;int qualified=0;double lower=0;
             if(response>>protocol>>source_sha>>manifest_sha>>helper_sha>>qualified>>lower){
-                c.accepted=protocol=="R153-FLOOR-v2"&&source_sha==base.sha256&&manifest_sha==c.manifest_sha&&helper_sha==c.helper_sha&&qualified==1&&
+                int returned_nodes=4096;
+                const bool protocol_ok=c.refine_rn?
+                    (protocol=="R156-FLOOR-v1"&&bool(response>>returned_nodes)&&returned_nodes==16384):
+                    protocol=="R153-FLOOR-v2";
+                c.accepted=protocol_ok&&source_sha==base.sha256&&manifest_sha==c.manifest_sha&&helper_sha==c.helper_sha&&qualified==1&&
                     std::isfinite(lower)&&lower>=0&&lower<=cutoff+1e-8;
                 if(c.accepted)c.lower=lower;
             }
@@ -120,7 +125,9 @@ inline CanonicalCompactModelArtifact embed(const Instance& instance,const Canoni
             <<",\"helper_exit\":"<<c.helper_exit<<",\"helper_process_seconds\":"<<c.helper_seconds
             <<",\"whole_method_remaining_at_launch\":"<<remaining<<",\"global_deadline_stop\":"<<(c.global_stop?"true":"false")
             <<",\"owned_helper_job_kill_on_close\":true"
-            <<",\"node_limit\":4096,\"price_gap_target\":0.0001,\"root_once\":true,\"offline_data_used\":false"
+            <<",\"node_limit\":"<<(c.refine_rn?16384:4096)
+            <<(c.refine_rn?",\"producer_rule\":\"RN16384_original_gap\"":"")
+            <<",\"price_gap_target\":0.0001,\"root_once\":true,\"offline_data_used\":false"
             <<",\"formal_AP_GD_RN_NC_TS\":false,\"formal_new_columns\":0,\"extra_root_LP\":0}\n";
         f.close();require(bool(f),"root_evidence_write");
     }

@@ -1,0 +1,101 @@
+{
+  "scope": {
+    "Bminus": 0,
+    "B": 3,
+    "gamma_L": 0.0,
+    "gamma_U": 1.0,
+    "cutoff": 2.0,
+    "stations": [
+      {
+        "i": 1,
+        "lo": 0,
+        "hi": 2,
+        "support": [
+          0,
+          1,
+          2
+        ],
+        "c": 1.0,
+        "omega": 0.17
+      },
+      {
+        "i": 2,
+        "lo": 0,
+        "hi": 2,
+        "support": [
+          0,
+          1,
+          2
+        ],
+        "c": 0.5,
+        "omega": 0.17
+      }
+    ]
+  },
+  "tau_exact": "5764607523034235/288230376151711744",
+  "lower": 0.0,
+  "lower_exact": "0",
+  "upper": 0.0,
+  "upper_exact": "0",
+  "stocks": [
+    {
+      "Y": [
+        0,
+        0
+      ],
+      "feasible": true,
+      "G": 0.0,
+      "f": 0.0,
+      "price": 0.34,
+      "penalty": 0.34,
+      "phi": 0.34,
+      "total": 0,
+      "S": 0.0,
+      "f_exact": "0",
+      "price_exact": "6124895493223875/18014398509481984"
+    },
+    {
+      "Y": [
+        1,
+        2
+      ],
+      "feasible": true,
+      "G": 0.0,
+      "f": 0.0,
+      "price": 0.0,
+      "penalty": 0.0,
+      "phi": 0.0,
+      "total": 3,
+      "S": 2.0,
+      "f_exact": "0",
+      "price_exact": "0"
+    }
+  ],
+  "residual_lower_exact": null,
+  "restricted_phi_lower_exact": "0",
+  "complete_domain": true,
+  "condition_upper": true,
+  "inventory_upper_used": 0.3400000000009095,
+  "target_proved": false,
+  "target_disproved": true,
+  "zero_exact": "6124895493223875/18014398509481984",
+  "fallback_exact": "0",
+  "LP": null,
+  "global_deadline_stop": false,
+  "calls": [
+    {
+      "Status": 11,
+      "Runtime": 0.0010001659393310547,
+      "Work": 4.2599e-05,
+      "nodes": 0.0,
+      "native_bound": null,
+      "native_incumbent": -0.01000000000000005,
+      "bound_status_qualified": false,
+      "counterexample_stop": true,
+      "construct_DP_LP_seconds": 0.009862200124189258,
+      "optimize_seconds": 0.0009669000282883644
+    }
+  ],
+  "seconds": 0.01143640000373125,
+  "upper_is_inventory_only": true
+}
