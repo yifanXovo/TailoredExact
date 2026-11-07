@@ -518,3 +518,12 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round156/figures/*.svg -whitespace
 /docs/round156_research.md -text whitespace=cr-at-eol
 /config/gi_tbc_proof_floor_round156.json -text whitespace=cr-at-eol
+
+# Round157 measured fleet interfaces and new-only evidence retain their bytes.
+/scripts/round157* -text whitespace=cr-at-eol
+/results/unified_exact_round157/** -text whitespace=cr-at-eol
+/results/unified_exact_round157/**/*.log -whitespace
+/results/unified_exact_round157/**/*.mps -whitespace
+/results/unified_exact_round157/goal.md -whitespace
+/results/unified_exact_round157/artifacts/** -text -diff -whitespace
+/docs/round157_research.md -text whitespace=cr-at-eol

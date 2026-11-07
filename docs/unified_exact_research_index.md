@@ -1,6 +1,16 @@
 # Research index
 
-Current finite study: [Round156 fixed original inventory certificates and
+Current finite study: [Round157 near-optimal inventory physical realization](round157_research.md),
+with [mathematics](../results/unified_exact_round157/mathematical_analysis.md),
+[free-fleet and resource evidence](../results/unified_exact_round157/reports/oracle_results.csv),
+[paper section](../results/unified_exact_round157/manuscript.tex),
+[final report](../results/unified_exact_round157/final_report.md) and
+[actual delivery](../results/unified_exact_round157/RESUME.md).
+The complete best-price RX35 family is resource-infeasible at original T;
+NB35 remains UNKNOWN. Finite family exclusion does not by itself certify
+all inventories at that objective level. Stable GI-TBC/B remains the default.
+
+Previous finite study: [Round156 fixed original inventory certificates and
 paid proof refinement](round156_research.md), with
 [mathematics](../results/unified_exact_round156/mathematical_analysis.md),
 [matched original-objective oracles](../results/unified_exact_round156/reports/oracle_comparison.csv),

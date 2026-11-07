@@ -1,0 +1,75 @@
+{
+  "UTC": "2026-11-07T09:21:24.881779+00:00",
+  "PASS": true,
+  "scientific_blockers": [],
+  "review_kind": "same-agent separate reconstruction routines; no independent-person or subagent claim",
+  "Optimize": 0,
+  "source_SHA": "4d4cb839d40924b5a08fee834da47532ead1bbed478f320544b746de3997a33a",
+  "inventory_and_physical_checks": [
+    {
+      "role": "N-B35-S",
+      "input_SHA": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "families": [
+        1,
+        21
+      ],
+      "positive_original_T": 7172.116293597475,
+      "non_time_true_Tstar_upper": 24384.99133375971
+    },
+    {
+      "role": "R-X35-S-T2",
+      "input_SHA": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "families": [
+        6,
+        20
+      ],
+      "positive_original_T": 6292.598374289002,
+      "non_time_true_Tstar_upper": 20647.927516050306
+    }
+  ],
+  "fixed_queries": [
+    {
+      "path": "results/unified_exact_round157/fleet/nb35_fixed4096_v1/result.json",
+      "result_SHA": "259026faec31a5fafb2e6d173d9edec1ccda1dc7e78199c597194de7fba86060",
+      "classification": "UNKNOWN"
+    },
+    {
+      "path": "results/unified_exact_round157/fleet/rx35_fixed4096_v1/result.json",
+      "result_SHA": "22db3b6a777161f09d52e2f803093db967b483de2edbb2724ea16f764c80c108",
+      "classification": "UNKNOWN"
+    }
+  ],
+  "unfinished_full_domain_calls": [
+    {
+      "label": "deepen_rx35_resource_floor_v1",
+      "charged": 256.5245488001965,
+      "receipt_SHA": "ee9a00bb9c0ebdbf44ce21fdf11ab9d0da7d560861b916b8a1c80cc4e54fc5c2",
+      "new_bound_consumed": false
+    },
+    {
+      "label": "deepen_rx35_resource_floor_v2",
+      "charged": 4099.307925999863,
+      "receipt_SHA": "8a3b36564daf20d02e5030f56c0dc3146b5e206f22bc8e0a9a19890d94f73814",
+      "new_bound_consumed": false
+    }
+  ],
+  "finite_original_objective_prices": [
+    {
+      "role": "R-X35-S-T2",
+      "original_lower": 0.2360521029074557,
+      "new_inventory_upper": 0.23685400930608239,
+      "forbidden_inventories": 26,
+      "global_scope": true,
+      "physical_upper_claim": false,
+      "model_SHA": "544c5c6700e97e630ba1da8cadf336c86761db5208bb7e646979a2110e72d15e"
+    }
+  ],
+  "protected_tracked_dirty_files": 3,
+  "closed_fee_intervals_serial": true,
+  "unknown_does_not_change_physical_bounds": true,
+  "finite_family_not_entire_objective_level": true,
+  "resource_feasible_points_not_routes": true,
+  "excluded_old_upper_not_reused": true,
+  "complete_performance_not_claimed": true,
+  "current_review_fee_closed_by_parent": true
+}

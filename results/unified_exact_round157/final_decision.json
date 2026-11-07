@@ -1,0 +1,32 @@
+{
+  "UTC": "2026-11-07T09:21:05.603822+00:00",
+  "study_complete": true,
+  "disposition": "FINITE_FAMILY_RESOURCE_PROOFS_NO_COMPLETE_CANDIDATE",
+  "complete_candidate_frozen": false,
+  "complete_panel_started": false,
+  "new_Cpp_build": false,
+  "new_physical_route": false,
+  "new_global_original_J_lower_gain": 0.0,
+  "RX35_proved_families": 2,
+  "RX35_proved_member_vectors": 26,
+  "NB35_status": "UNKNOWN",
+  "NB35_second_family_queried": false,
+  "NB35_second_family_disposition": "Preselected and retained; the one substantive deepening focused on RX35 proof propagation after its first family exclusion. No posthoc role or stock replacement.",
+  "fixed_full_fleet_raw_returns": "UNKNOWN on both roles; RX35 fixed stock is excluded by the stronger family resource proof",
+  "target_level": 0.23648786033514127,
+  "target_level_excluded": false,
+  "physical_bounds_unchanged": {
+    "N-B35-S": {
+      "U": 0.450291503262878,
+      "L": 0.3959564087240911
+    },
+    "R-X35-S-T2": {
+      "U": 0.2996694007364017,
+      "L": 0.2360521029074557
+    }
+  },
+  "finite_batch_maximum_increment": 0.0008019063986266512,
+  "repeated_stagnation_not_a_structural_impossibility_claim": true,
+  "stable_default": "GI-TBC/B",
+  "explanation": "Do not freeze a complete E+R candidate. The two preselected RX35 families have meaningful original-T resource impossibility proofs, but they supply no physical route. One finite26-member exclusion/repricing batch returns at16384 nodes with no global lower gain and does not exclude its selected level. The full-inventory resource diagnostic also stalls at the prior floor despite the valid prior lower and known-route start. The checked retained inventory caps this finite batch's possible increment at0.0008019063986266512, about1.26% of the inherited physical gap, whereas its two resource proofs plus repricing already cost572.2466407998 outer seconds before qualifications. There is no demonstrated useful and plausibly affordable uniform mechanism for a fresh self-paid complete method. The conditional panel is therefore not started. Further route/global-level questions remain open; the60-hour capacity is a ceiling, not a reason to repeat a stalled mechanism."
+}

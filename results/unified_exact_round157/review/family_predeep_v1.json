@@ -1,0 +1,41 @@
+{
+  "UTC": "2026-11-07T07:51:12.425132+00:00",
+  "PASS": true,
+  "source_SHA": "227ff1b23259b8eec2fef357339edd5c22f823cd26bd7c4b01131d0052c91608",
+  "Optimize": 0,
+  "actual_matrix_rebuilt": true,
+  "actual_exact_travel_bounds_rebuilt": true,
+  "all_six_legal_members_covered": true,
+  "Native_lower": 6300.62843442682,
+  "original_T": 6300,
+  "margin": 0.063,
+  "family_preserves_total_initial_inventory": true,
+  "all_vehicle_return_loads_forced_zero": true,
+  "largest_single_service": 7,
+  "individual_capacity_assignment_filter_inactive": true,
+  "explanation": "Per-vehicle pickup/delivery balance, handling and small-subset travel already exclude the family without exact route order or prefix-load constraints.",
+  "native_return_qualified": true,
+  "inherited_R61_numerical_gate": {
+    "constraints": 5.4569682106375694e-12,
+    "bounds": 0.0,
+    "objective": 6867.600856318251,
+    "integer": 0.0
+  },
+  "global_original_J_lower_gain": 0.0,
+  "excluded_scope": "exact six-member objective-invariant class family only",
+  "resource_upper_is_not_physical_time_upper": true,
+  "existing_R107_physical_positive_checks": [
+    {
+      "role": "N-B35-S",
+      "F": 0.450291503262878,
+      "maximum_duration": 7172.116293597475
+    },
+    {
+      "role": "R-X35-S-T2",
+      "F": 0.2996694007364017,
+      "maximum_duration": 6292.598374289002
+    }
+  ],
+  "same_agent_separate_reconstruction": true,
+  "fee_SHA": "9572f5ead999a212f59ba928b2c029b2ea6d83ed8adf9aac1b18eb60bb004560"
+}

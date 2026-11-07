@@ -1,5 +1,13 @@
 # Advisor/coauthor review packet
 
+The [physical-realization section](../results/unified_exact_round157/manuscript.pdf)
+adds a thematic continuation from integer inventory certificates to the
+original fleet. Its [source](../results/unified_exact_round157/manuscript.tex)
+and [finite report](../results/unified_exact_round157/final_report.md) keep
+family resource impossibility, whole-level objective proof and paid complete
+algorithm performance distinct. It supplements the stable paper below;
+the default GI-TBC method and the maintained Round137 lineage are retained.
+
 This packet is prepared for the Round137 GI-TBC stage draft and its
 English Draft PR targeting `main`. It supports scientific discussion after the recorded PDF and independent
 integration checks; it makes no journal-tier or submission-readiness claim.

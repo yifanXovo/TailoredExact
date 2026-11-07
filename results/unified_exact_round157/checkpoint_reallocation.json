@@ -1,0 +1,16 @@
+{
+  "role": "R-X35-S-T2",
+  "active_outer": "deepen_rx35_resource_floor_v2",
+  "offline_research_checkpoint_observed_nodes": 1024,
+  "criterion": "If the full resource/inventory MIP still reports the prior-floor plateau without a new qualified global bound, preserve the unfinished diagnostic and reallocate to the preselected second family as a source of a valid stronger-domain upper, followed by at most one finite family-exclusion repricing batch.",
+  "basis": "The full-domain primal search remains far above the preselected second inventory price, while its reported global bound remains at the already qualified floor. A targeted same-domain feasible point can bound the enhancement's opportunity or make a subsequent proof much easier.",
+  "no_new_bound_from_an_unfinished_log": true,
+  "rank2_preselected_before_physical_results": true,
+  "rank2_resource_query_NodeLimit": 4096,
+  "rank2_resource_query_TimeLimit_seconds": 900,
+  "all_route_assignment_order_freedom_retained_in_resource_certificate": true,
+  "resource_feasibility_not_a_physical_route": true,
+  "global_proof_method": "one finite exact-member no-good batch and one original-objective price; no long no-good loop",
+  "stopped_job_fees_and_source_are_preserved": true,
+  "goal_remains_active": true
+}
