@@ -1,4 +1,4 @@
-# Round156: science complete, publication in progress
+# Round156: science and public recovery complete
 
 The user explicitly invoked the attached /goal; goal.md is its exact byte
 copy. All nine preselected complete arms finished on 2026-11-07 at 04:13 UTC.
@@ -85,10 +85,35 @@ publication I/O are separate. See cost_report.json and cost_summary.md.
 
 ## Delivery state
 
-The final report, stage paper insertion, corrected R155 tables, source/reuse
-indexes, costs, reviews and raw new evidence are ready. Scientific files
-will be frozen in a normal commit. Publication is not yet complete in this
-snapshot: new-only packing, push, English Draft PR, one bounded anonymous
-fixed-commit recovery and post-PR cleanup remain. Actual commit/PR identities
-and receipts will replace this delivery paragraph after those steps.
-No merge, force push or branch deletion is authorized or planned.
+Fixed science commit: 751de842a0264a146701de6669b1f3dd6dc764b1.
+English Draft PR: https://github.com/yifanXovo/TailoredExact/pull/218.
+Actual initial PR readback is Open Draft, head
+codex/round156-inventory-objective-certificates at that science commit,
+base codex/round155-complete-coupling-proof-gains at
+5675acd0da875b4c7ac51f145ec151ee5c14d68a. PR217 remains Open Draft/unmerged.
+The final metadata follow-up is a normal commit/push on the same branch;
+GitHub's PR head supplies its final commit identity without a self-reference
+inside this record. Final head/base/Draft are read back after that push.
+
+One anonymous new-only recovery from the fixed science commit PASS:
+198 manifest-listed files, 11 archives and all 7919 members match their
+byte counts and SHA256 hashes. Member bytes total 123327278; recovery costs
+161.44245520001277 seconds separately from experiments. Packaging costs
+22.797000400023535 seconds. No Optimize, compiler, Native or old producer
+runs during recovery; old-carrier downloads remain zero. The accepted tree
+is E:/codes/ExactEBRP-work/restore/round156-public-751de842a026-attempt01.
+See public_restore_receipt.json and publication.json.
+
+Bounded post-PR cleanup records zero deletion and retains unique evidence,
+failed attempts, the measured PE, required runtime files, active worktree
+and accepted recovery. All 47 initially protected user-modified files match
+again after recovery. See cleanup_record.json and
+final_protection_readback.json. All 202 declared staged science paths had
+exact index-byte verification. Fixed-science files still match the public
+manifest before the metadata follow-up.
+
+The fixed-science final_decision.json and execution_state.json intentionally
+retain their pre-publication pending flags; publication.json resolves them
+with the actual completed events. No scientific experiment or required
+model review remains pending. No merge, force push or branch deletion was
+performed. Stable GI-TBC/B remains the default; E/E+ remain research candidates.

@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-11-07T04:34:46.644996+00:00",
+  "state": "DRAFT_PR_OPEN_SCIENCE_ACCEPTED_PUBLIC_RECOVERY_PASS_CLEANUP_RECORDED",
+  "fixed_science_commit": "751de842a0264a146701de6669b1f3dd6dc764b1",
+  "measured_production_source_commit": "092bad58d677cd8bef934d91e11d8abff93cba83",
+  "PR": {
+    "number": 218,
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/218",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round155-complete-coupling-proof-gains",
+    "base_sha": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+    "head": "codex/round156-inventory-objective-certificates",
+    "head_at_initial_readback": "751de842a0264a146701de6669b1f3dd6dc764b1"
+  },
+  "base_selection": {
+    "PR217_open_draft_unmerged": true,
+    "main": "b2b940c1e517a72e226ec60fc49ff19651737632",
+    "checked_before_publication": true
+  },
+  "public_recovery": {
+    "UTC": "2026-11-07T04:31:10.490350+00:00",
+    "commit": "751de842a0264a146701de6669b1f3dd6dc764b1",
+    "destination": "E:\\codes\\ExactEBRP-work\\restore\\round156-public-751de842a026-attempt01",
+    "initially_empty": true,
+    "owner": "Round156 current-only anonymous public recovery",
+    "state": "PASS",
+    "files": 198,
+    "archives": 11,
+    "members": 7919,
+    "member_bytes": 123327278,
+    "IO_seconds": 161.44245520001277,
+    "no_Optimize_compiler_Native_or_old_producer": true,
+    "old_carriers_downloaded": 0,
+    "manifest_SHA": "c0f091794e4d4497d900660d6841faba8bbada21cc7dc4a901fffe48adae48a6"
+  },
+  "cleanup": {
+    "deleted_bytes": 0,
+    "protected_files": 47,
+    "record_SHA": "079a100094e7683bd4b3cb7debc40b27b5022d7f010e61794b6e239454670cae",
+    "protection_readback_SHA": "291a4b111266e7b1b6061eb7c276909936ab92b881145b884808e2426986c3b7"
+  },
+  "cost_G1_seconds": 32373.91247199988,
+  "compile_seconds_separate": 36.42399509972893,
+  "pack_IO_seconds": 22.797000400023535,
+  "restore_IO_seconds": 161.44245520001277,
+  "public_manifest_SHA": "c0f091794e4d4497d900660d6841faba8bbada21cc7dc4a901fffe48adae48a6",
+  "frozen_scientific_files_still_match": true,
+  "metadata_delivery": "Normal follow-up commit; final branch head/base/Draft readback occurs after its push. The commit containing this record is intentionally not self-hashed.",
+  "historical_pending_flags": "The fixed-science final_decision.json and execution_state.json retain their pre-publication snapshot. This actual publication/recovery/cleanup record resolves those pending delivery flags.",
+  "no_merge_force_push_or_branch_deletion": true
+}
