@@ -1,5 +1,22 @@
 # Current mainline and Round137 paper branch
 
+The [Round156 fixed-objective study](round156_research.md) keeps stable
+GI-TBC/B as the default while refining E's independent original inventory
+proof. The unchanged RN model with uniform capacity 16384 reaches the
+requested price precision more efficiently than the tested residual/product
+alternative. Nine independently paid same-PE arms are complete. On RX35,
+E+ retains E's physical upper and improves its supported lower by
+.013789522987126268; the other three E/E+ pairs retain their physical uppers
+and supported lowers. The new PE only adds explicit producer capacity and
+protocol/log identity; formal Native constraints, AM, ordering and splitting
+remain unchanged. E/E+ stay research candidates. See the
+[report](../results/unified_exact_round156/final_report.md),
+[complete comparisons](../results/unified_exact_round156/reports/complete_pairs.csv)
+and [delivery record](../results/unified_exact_round156/RESUME.md).
+Round155's checkpoint times and single affected bound are superseded by the
+[Round156 errata](../results/unified_exact_round156/r155_errata.md); the
+fixed historical commit remains unchanged.
+
 The [Round155 continuation](round155_research.md) keeps the same stable
 GI-TBC entry, production executable and default-OFF E/J profiles. Its six-arm
 complete panel is verified: E retains a proof-bound gain at7200 seconds on

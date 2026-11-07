@@ -1,0 +1,28 @@
+{
+  "UTC": "2026-11-07T04:27:27.1064440Z",
+  "PASS": true,
+  "reviewer": "Same agent, separate arithmetic/model readers and manual source/data readback",
+  "nonimplementer_agent_review": false,
+  "checked_files": {
+    "results/unified_exact_round156/final_report.md": "562b52520a7a39f941e90ea445984fcf7e3730b6de9889893fd0238af3ca5826",
+    "results/unified_exact_round156/manuscript.tex": "e8aac6917146f24b6512b094574c54ded54b9232c530e5bc97e8f1e40c7fd6b2",
+    "results/unified_exact_round156/mathematical_analysis.md": "969a20cb3332ed5eaa176006f57fa354e48771ce281cc44ec0e2487dd94f531a",
+    "results/unified_exact_round156/r155_errata.md": "7144c32c27d8331598ce5cdb3f0d18f5cd78fa91999a25119cf5a408e7b46c8b",
+    "results/unified_exact_round156/review/final_scientific_review.md": "3503f4f5a22dec033b0cab53ba0e649c91d3427be1575d0f3f63cfbb20ec2037",
+    "results/unified_exact_round156/reproducibility.md": "9fd88be715d2258c789ee66ef6cf480076affbb63a508c7331de8a36e886b53d",
+    "docs/round156_research.md": "7a2dcf2251b2da6b89f96286431cbd5e81d54d9be7f515beb587d43157216479",
+    "docs/current_mainline.md": "aabb0c873ae606d1ea920253c518dd24a5cb9e1ccd12475dc65e27f4dc5f2cf7",
+    "docs/unified_exact_research_index.md": "22b23baebfcd7f9c5a8e15669dbb1a258dff1f27b7824d534a84dc50c6cf717e",
+    "docs/paper_review.md": "f258fe730cf6a6e220d360a552d115680322747c0390653c5630e180414fdc6a"
+  },
+  "checks": [
+    "Fixed original objective, signed residual conversion and optimum-preserving restriction match actual audited formulation.",
+    "Offline intervals, actual outer costs, nodes, Work and counterexample limitation match oracle_comparison.json.",
+    "All nine complete endpoints and timing tables match complete_arms.json and complete_pairs.json; NB35 raw difference and null unachieved certificate times preserved.",
+    "K20 remains unresolved and is not a new holdout. No default promotion, role switching or universal ranking is claimed.",
+    "R155 has exactly one corrected checkpoint bound among 18, using actual Unix-origin difference; selector executed with zero resolved levels.",
+    "Costs defer to final closed receipts; setup gap, four failed children, same-agent review and separate publication I/O are disclosed.",
+    "Production commit, PE/DLL and current versus prebuild source identities match provenance.",
+    "Final plot visually inspected; labels and legend clear, conservative availability and carried-forward tails disclosed."
+  ]
+}

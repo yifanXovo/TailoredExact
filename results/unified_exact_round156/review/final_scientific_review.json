@@ -1,0 +1,59 @@
+{
+  "UTC": "2026-11-07T04:27:28.188157+00:00",
+  "disposition": "ACCEPT_COMPLETE_ROUND156",
+  "scientific_blockers": [],
+  "audits": [
+    {
+      "path": "review/residual_admit_v1/result.json",
+      "SHA256": "07a1867c32a0bb208f20b7b5f948e9fd2881d3210f7b78f7a17ebec6962ae3e4"
+    },
+    {
+      "path": "review/rn_admit_v2/result.json",
+      "SHA256": "effa059121190e3e094b20f4f19c2e5eaeb7461b51fcd7eb92513fd57e460307"
+    },
+    {
+      "path": "review/actual_oracle_v1/result.json",
+      "SHA256": "9ac7d86902ae93e954d9fbf7e2dda609d97c357bb678299481f5e32ab71af742"
+    },
+    {
+      "path": "review/fresh_producer_audit_v1/result.json",
+      "SHA256": "4546fbdf7b38613b05a8e3e8e65c88ba6f647bc082eba709b73e22470c87b811"
+    },
+    {
+      "path": "review/r155_clock_correction.json",
+      "SHA256": "61ffe1041fafe066115da5d137a495f8b4950d7831a8ffbdfa60bf7371b4263e"
+    },
+    {
+      "path": "review/complete_price_audit_v1/result.json",
+      "SHA256": "20af21b4a00e7eb6d503d7839003c9ff5c92f421b93bc38ba93cbefa5ec56a42"
+    },
+    {
+      "path": "review/relocated_model_readback_v1/result.json",
+      "SHA256": "8e4762c27e182c1855bc2756f906be4e38ff3dcc034d0c68cf234f39bc32a41c"
+    }
+  ],
+  "complete_arms": 9,
+  "complete_inventory_price_reconstructions": 8,
+  "matched_oracle_calls": 4,
+  "actual_residual_stock_lifts": 29,
+  "fresh_rule_checks": 5,
+  "original_goal_SHA": "ceda0e2763cd9d209a4bf006b88c673079a7a1d5a5affab209eefdc104c3dcee",
+  "matrix_SHA": "dbae5db2358103a30ba8f30f0b85413934143fecbaf54efd00891c88a940e1c3",
+  "source_manifest_SHA": "400e0c1fceff98290bce0ee97b688781d3f8d15ef036d15fd0a2bdd420cb07f8",
+  "reuse_index_SHA": "da71b61009db09adfbaf62ee1592f7bd508a116d0cb36bde49a131604b5f275c",
+  "manual_claim_readback_SHA": "7cc75c98580565eab0c8de1323bd3b621b189332229a52108d258a7104a09271",
+  "final_decision_SHA": "87513aeb46b737d50695b7d498c83e52d91f7d3584b592f3b9dfe43290d44443",
+  "same_agent_independent_reconstruction": true,
+  "nonimplementer_agent_review": false,
+  "Optimize": 0,
+  "protected_initial_files_checked": 47,
+  "final_reader_snapshot": {
+    "path": "engineering/source_snapshots/final_scientific_check_v1.json",
+    "SHA256": "d0d2cba0155544a9eea4f8fbda8e71e7c2d0b38cb90d93421c068a2a1f3882e6"
+  },
+  "cost_status": "This final verification outer is still open inside this reader; export costs only after its actual receipt closes.",
+  "closed_cost_before_this_verification": 32372.928381499834,
+  "current_fee_label": "final_scientific_check_v1",
+  "remaining_capacity_before_this_verification": 140427.07161850017,
+  "source_SHA": "ffca92658bafc09de05fb12f0698bdad142c3da328548710030a0914a18a43ae"
+}

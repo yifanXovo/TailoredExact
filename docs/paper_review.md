@@ -16,6 +16,23 @@ position tables and historical evidence. The
 
 ## Scientific account and boundaries
 
+The [Round156 section](round156_research.md) connects the structural and
+complete-coupling studies to E's fixed original inventory objective. Its
+[paper insertion](../results/unified_exact_round156/manuscript.tex) separates
+the optimum-preserving restriction from residual-minimum preservation,
+retains classical fractional-programming attribution and reports the actual
+product/LP qualification. RN16384 reaches the main original-price precision
+more efficiently than the residual alternatives. All nine complete arms and
+the independent readback of eight actual RN prices pass. E+ reduces RX35's
+complete gap by .013789522987126268 at equal physical U; controls retain
+their supported endpoints while their raw/time differences remain visible.
+The unresolved preselected K20 check, finite one-Seed historical scope and
+research-only status remain explicit. Review uses separate readers by the
+same agent. See the [final report](../results/unified_exact_round156/final_report.md),
+[scientific review](../results/unified_exact_round156/review/final_scientific_review.md),
+[R155 corrections](../results/unified_exact_round156/r155_errata.md) and
+[actual publication record](../results/unified_exact_round156/RESUME.md).
+
 The [Round155 section](round155_research.md) continues the actual large-pool
 inventory feedback study and tests persistent proof-floor benefits in a
 predeclared six-arm panel. Its [paper insertion](../results/unified_exact_round155/manuscript.tex)

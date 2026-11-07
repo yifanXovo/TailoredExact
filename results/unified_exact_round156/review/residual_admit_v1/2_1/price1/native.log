@@ -1,0 +1,45 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Nov  7 03:08:00 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP-work\worktrees\round156\results\unified_exact_round156\review\residual_admit_v1\2_1\price1\native.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+NodeLimit  256
+TimeLimit  2.9990592899965122e+01
+BestBdStop  1.7187500001387782e-06
+IntFeasTol  1e-06
+MIPGap  0
+MIPGapAbs  1.25e-05
+LogToConsole  0
+Threads  1
+PoolSolutions  20
+
+Optimize a model with 72 rows, 21 columns and 196 nonzeros (Min)
+Model fingerprint: 0x658a4422
+Model has 1 linear objective coefficients
+Variable types: 15 continuous, 6 integer (6 binary)
+Coefficient statistics:
+  Matrix range     [2e-02, 3e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [2e-02, 3e+00]
+  RHS range        [1e-02, 3e+00]
+
+User MIP start produced solution with objective -0.01 (0.00s)
+Loaded user MIP start with objective -0.01
+MIP start from previous solve did not produce a new incumbent solution
+
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 1: -0.01 
+No other solutions better than 0
+
+Solve interrupted
+Best objective -1.000000000000e-02, best bound -, gap -
+
+User-callback calls 42, time in user-callback 0.00 sec

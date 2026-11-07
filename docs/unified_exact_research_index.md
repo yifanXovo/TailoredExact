@@ -1,6 +1,24 @@
 # Research index
 
-Current finite study: [Round155 complete inventory coupling and persistent
+Current finite study: [Round156 fixed original inventory certificates and
+paid proof refinement](round156_research.md), with
+[mathematics](../results/unified_exact_round156/mathematical_analysis.md),
+[matched original-objective oracles](../results/unified_exact_round156/reports/oracle_comparison.csv),
+[nine complete arms](../results/unified_exact_round156/reports/complete_arms.csv),
+[paid contrasts](../results/unified_exact_round156/reports/complete_pairs.csv),
+[paper insertion](../results/unified_exact_round156/manuscript.tex),
+[final report](../results/unified_exact_round156/final_report.md) and
+[actual delivery record](../results/unified_exact_round156/RESUME.md).
+More RN capacity meets the main price precision target and yields a paid
+RX35 complete-gap gain. The residual product restriction helps that model
+but does not beat RN here. The preselected K20 check stays unresolved;
+the three complete controls retain their paired supported endpoints.
+Stable GI-TBC/B remains the default and E/E+ remain research candidates.
+The [R155 errata](../results/unified_exact_round156/r155_errata.md) and
+[corrected checkpoints](../results/unified_exact_round156/reports/r155_common_checkpoints.json)
+replace the earlier checkpoint time-origin reporting without rerunning it.
+
+Previous study: [Round155 complete inventory coupling and persistent
 proof-floor gains](round155_research.md), with
 [mathematics](../results/unified_exact_round155/mathematical_analysis.md),
 [matched feedback loops](../results/unified_exact_round155/reports/matched_loop_comparisons.csv),

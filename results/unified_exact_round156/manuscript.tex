@@ -1,0 +1,263 @@
+% Round156 paper insertion; all nine paid arms and separate price readbacks
+% have closed. Exact intervals, costs and identities are in the data tables.
+\section{Refining a fixed inventory objective before consuming its proof}
+
+The inventory studies distinguish four questions: the strength of an
+integer objective representation, the price of one dual direction, the
+value of the complete inventory coupling within the free routing relaxation,
+and the benefit to the complete physical algorithm. The structural results
+of Rounds 152--153 address the first question. Round155's complete-coupling
+continuations address the third: after 463 K35 and 699 NC20 deep feedback
+steps, their respective intervals remain approximately
+$[0.28285969,0.28732617]$ and $[0.18332184,0.18986771]$, displayed outward.
+The actual single level adjustment was executed and no level was resolved.
+Further columns and cheaper selection did not produce a meaningful value
+gain for those policies. This finite conclusion does not prove saturation
+of the inventory hull. The present experiment instead refines the fixed
+original inventory objective already used by the proof-only enhancement E.
+
+Round154 established the distinction between inserting an inventory floor
+into search and composing it only into a complete proof. With the latter
+consumer, Round155's independently paid 7200-second pairs retain supported
+lowers $0.3959564087240911$ on NB35 and $0.22226257992032944$ on RX35,
+compared with B's $0.39074482582731757$ and $0.21420555388926832$.
+The respective paired physical uppers are unchanged at
+$0.4297444110493129$ and $0.2996694007364017$. Neither pair certifies.
+These results motivate improving the original floor producer while leaving
+the consumer and the physical search mechanism fixed. They do not establish
+that more elaborate complete-hull pricing or a stronger isolated floor
+must improve a complete time-limited run.
+
+Let $\mathcal D$ be the complete legal inventory domain of the actual
+root scope, including station supports, hard inventory totals, the true
+Gini cap and a legal zero branch. With the original ratio coefficients
+$c_i$, define
+\[
+ S(Y)=\sum_i c_iY_i,\quad
+ A(Y)=\sum_{i<j}|c_iY_i-c_jY_j|,\quad
+ H(Y)=\sum_i h_i(Y_i),\qquad
+ F=\min_{Y\in\mathcal D}\phi(Y),
+\]
+where $\phi(Y)=\max\{\gamma_L,A(Y)/(nS(Y))\}+H(Y)$ for $S(Y)>0$.
+Zero uses the original model definition. The coefficients of $h_i$ already
+contain the original penalty normalization and $\lambda$; no further
+penalty factor is introduced. Thus $\beta=1$ and $d=h$ stay fixed throughout
+this study, although the centered Native cost coefficients can be signed.
+
+Given a qualified interval $L\le F\le U_{\rm inv}$, a target such as
+$\tau=(L+U_{\rm inv})/2$ gives the positive-branch residual
+\[
+ R_\tau(Y)=S(Y)(\phi(Y)-\tau)
+ =\max\{\gamma_L S+SH-\tau S,\ A/n+SH-\tau S\}.
+\]
+For $0<l\le S\le u$ and a qualified residual lower $\ell$,
+\[
+ F_+\ge\tau+
+ \begin{cases}\ell/u,&\ell\ge0,\\\ell/l,&\ell<0.\end{cases}
+\]
+This follows by dividing $R_\tau\ge\ell$ by the positive, bounded $S$;
+the safe endpoint depends on the sign of $\ell$. The legal zero branch
+is combined by a minimum, and the previously established full-domain
+lower is retained by a maximum. A real inventory with $\phi(Y)<\tau$
+improves the upper of this same fixed objective. It need not wait for a
+new column to change a subsequent master objective. A finite price may
+nevertheless leave both midpoint decisions unresolved. Parameterization
+is classical, as in Dinkelbach's fractional programming analysis; the
+residual formula, bisection and product envelopes are not new general
+theory.\footnote{W. Dinkelbach, On Nonlinear Fractional Programming,
+Management Science 13(7):492--498, 1967, doi:10.1287/mnsc.13.7.492.}
+
+One measured strengthening uses a checked feasible inventory upper. Since
+$\phi\ge\gamma_L+H$, the set
+\[
+ \mathcal D_U=\{Y\in\mathcal D:H(Y)\le U_{\rm inv}-\gamma_L\}
+\]
+retains its witness and every original minimizer; every excluded point has
+$\phi>U_{\rm inv}$. This preserves the optimum of $\phi$, not the minimum
+of $R_\tau$. A lower on the restricted residual is first converted into
+a restricted original-objective lower $L_U$; the conservative original
+domain lower is $\min\{U_{\rm inv},L_U\}$, followed by the zero-branch and
+inherited-lower composition. The restriction is used only by the separate
+inventory proof problem. An inventory upper is neither a physical BRP
+incumbent nor permission to cut inventory or routes from the BRP.
+
+The implementation tightens the four inherited aggregate McCormick rows
+for a cost product. In its actual centered coordinates, let
+$D^*=(H-A_0)/\sigma$, $\sigma>0$, and let $a_{iy}$ be the coefficients
+actually retained in the Native cost definition. The existing one-sided
+transport qualification gives
+\[
+ e^+=\sum_i\max\{0,\max_y[a_{iy}-(h_i(y)-\mathrm{anchor}_i)/\sigma]\},
+ \qquad
+ \widehat D\le (U_{\rm inv}-\gamma_L-A_0)/\sigma+e^+.
+\]
+The written upper is rounded outward and intersected with an exact
+hard-total dynamic-programming upper on these same actual coefficients.
+All product and epigraph rows use that coefficient system. The full
+inherited numerical guard and the additional one-sided omission error
+are paid before transporting a Native bound to original objective units.
+Small-domain enumeration covers signed costs, negative residual epigraphs,
+zero and actual omitted terms. Separate model readers lift the retained
+original stocks into every actual row and reconstruct the saved base plus
+exact row/bound deltas. They do not rely on an intended symbolic model
+when it differs from the written matrix.
+
+The main comparison starts from the saved RX35 root interval
+$[0.22226257992032944,0.23685400930608239]$. The prior RN call stopped
+at its 4096-node limit (Native status 8), with an unresolved original price
+gap; it did not establish that a stronger lower was unavailable. Each new
+arm receives the same saved scope, valid interval and true stocks and pays
+for construction and solving. No saved branch-and-bound tree is inherited.
+The RN model, old count/TS rows and original absolute price precision
+$10^{-4}$ remain unchanged; its node capacity is increased to 16384.
+The residual arms share a total capacity of 16384 nodes across their
+deterministic midpoint calls. Node counts specify allowances, not equal
+computational cost.
+
+\begin{center}
+\begin{tabular}{lrrrr}
+Oracle & Final lower & Final upper & Width & Outer seconds\\
+\hline
+RN16384 & .2360383729 & .2361217114 & $8.334\,10^{-5}$ &53.111\\
+Residual & .2222625799 & .2361217114 & .0138591314 &316.555\\
+Residual with $U_{\rm inv}$ products & .2295602714 & .2361217114 & .0065614399 &645.015\\
+\end{tabular}
+\end{center}
+Displayed table endpoints are rounded for readability; exact recorded
+binary64 intervals and outward reporting are provided in the data tables.
+RN reaches the target precision at 7593 nodes and 95.559 Native Work units.
+The plain residual exhausts its allowance without improving the lower.
+The conditioned products retain about 12.862\% of the old actual cost
+range and improve the first scaled LP residual from$-.05999363$ to
+$-.04769859$. Both guarded LP conversions still fall back to the same
+hard-total penalty lower$0.11636571534741638$. The strengthened MIP does
+prove the first midpoint$0.22955829461320593$, then leaves the second
+target unresolved. Its two calls consume 1392.379 Work units, compared with
+633.559 for the unconditioned residual. All three arms discover the same
+better true inventory upper. That upper remains above the first midpoint:
+the measured RX35 midpoint progress is a proof, not a counterexample
+crossing. Counterexample stopping is exercised separately in qualification.
+Thus the product restriction improves this residual formulation, but
+the unchanged RN formulation with a larger allowance is much more
+effective at the required precision on this scope.
+
+The frozen complete-algorithm candidate E+ therefore runs one RN call
+with capacity 16384 after its own exact dynamic-programming check. It
+returns naturally when the same original price tolerance is reached;
+there is no 4096-node restart, instance-name exception or elapsed-time
+mechanism switch. Whole-method termination still ends the entire method.
+A from-zero RX35 check, with no saved interval or stock, obtains
+$[0.2360521029074557,0.23612171136420015]$ at 10268 nodes in 59.840 outer
+seconds. The NB35, RB35 and RX20 controls stop at 2700, 1590 and 65 nodes
+and preserve their original intervals. These are rule and overhead
+checks, not claims of equal starting information with the matched offline
+screen. The preselected historical CITI K20 check uses the same rule,
+its original model $T=5400$, $\lambda=.15$ and first legitimate root scope.
+It remains unresolved at 16384 nodes with interval
+$[0.21757222003539808,0.22041955009535988]$, costing 25.564 outer seconds.
+It is retained as a finite portability limitation and is not replaced by
+a more favorable role or described as previously unseen data.
+
+E+ changes only the root producer. The established R154 consumer combines
+the qualified scalar floor with the original search proof; formal Native
+rows, AM inputs, ordering and splitting are unchanged. The executable and
+the protocol/log readers explicitly distinguish capacities 4096 and 16384.
+The nine preselected complete arms use one rebuilt executable, Seed 0,
+Threads 1 and independently paid own-H seed 20260626. Their windows are
+RX35 B/E/E+ at 7200 seconds, NB35 E/E+ and RB35 E/E+ at 2400 seconds,
+and RX20 E/E+ at 1200 seconds. Each arm constructs its own root scope and
+floor and receives no offline stock, historical incumbent or another
+arm's proof. Final comparison must include physical $U$, raw and supported
+lowers, gap, production and verification time, and certificate time where
+obtained. In particular,
+\[
+ (U_+-L_+)-(U_E-L_E)=(U_+-U_E)-(L_+-L_E),
+\]
+so a higher inventory floor alone does not establish a better complete
+algorithm. The posthoc quantity
+$[U_{\rm inv}-\max\{L_{\rm search},L_{\rm inventory}\}]_+$ bounds the
+remaining opportunity of this same scalar floor; it neither forces a new
+root LP nor supplies future search information to the early helper.
+
+The prior checkpoint report receives two bounded corrections. The selector
+was executed in Round155 and no level resolved. All 18 checkpoint states
+now use the producer outer origin, translating each observation by the
+actual difference between the process marker Unix time and producer
+start Unix time. Only RX35-B at 4800 seconds changes its bound, from
+$0.2141444605048453$ to$0.21414084957658006$; the physical upper, endpoint
+bounds, certificate times and charges are unchanged. The fast E raw-bound
+crossing is an observation batch at 4.255399397 outer seconds, not an exact
+Native event time. Checkpoints of these long runs remain distinct from
+independent short-deadline experiments.
+
+All nine complete arms have now closed with qualified physical and proof
+evidence. In the RX35 comparison, B, E and E+ share physical upper
+$0.2996694007364017$ and raw search lower $0.21420555388926832$.
+The supported lower increases from B's raw bound to
+$0.22226257992032944$ for E and $0.2360521029074557$ for E+.
+Their absolute gaps are respectively $0.08546384684713337$,
+$0.07740682081607225$ and $0.06361729782894598$; none certifies.
+Here $\Delta U=0$ and E+ gains $0.013789522987126268$ in supported
+lower relative to E, so the full gap decreases by exactly the same amount.
+The relative gap falls from about $25.831\%$ to $21.229\%$.
+This is a paid complete-run gain, not merely an isolated producer result.
+
+\begin{center}
+\small
+\begin{tabular}{llrrrrr}
+Role & Method & $T_{\rm produce}$ & $T_{\rm verify}$ & $T_{\rm total}$ & $T_{\rm cert}$ & Helper\\
+\hline
+RX20 & E  &21.997&1.890&23.887&21.997&.897\\
+     & E+ &22.009&1.906&23.915&22.009&.884\\
+RB35 & E  &2371.230&7.573&2378.804&--&9.634\\
+     & E+ &2376.642&7.591&2384.233&--&9.670\\
+NB35 & E  &2371.240&7.514&2378.755&--&14.500\\
+     & E+ &2371.230&7.568&2378.798&--&14.821\\
+RX35 & B  &7171.250&2.724&7173.973&--&0\\
+     & E  &7171.398&7.189&7178.587&--&33.215\\
+     & E+ &7171.329&9.047&7180.376&--&60.256\\
+\end{tabular}
+\end{center}
+Times are seconds, rounded here; all unrounded values are retained. A dash
+means no certificate. The helper is nested inside production and is not
+added to $T_{\rm total}$ again. The common whole-method deadline and its
+existing shutdown margin remain in force. Consequently, the extra RX35
+helper cost of $27.0409035$ seconds consumes search time within the same
+window, even though its production time is nearly unchanged. The observed
+production-plus-verification difference is $1.788351207$ seconds. This
+does not claim the extra helper was free.
+
+The three controls preserve their paired physical uppers and supported
+lowers. NB35 retains $U=0.450291503262878$ and
+$L=0.3959564087240911$. Its raw lowers are
+$0.3892936193183539$ and $0.38928848058102483$, so a statement that every
+raw search endpoint is identical would be inaccurate. RB35 retains
+$U=0.59151763477047$ and raw/proof $L=0.45590389125187164$; its inventory
+floor is inactive. RX20 certifies at the common $U=0.6453250303858205$,
+with E+ certificate time $0.0120193304$ seconds later and total time
+$0.0279746305$ seconds greater. The corresponding total-time differences
+on NB35 and RB35 are $0.0430583316$ and $5.4293881517$ seconds. These
+actual differences are retained rather than normalized away.
+
+The posthoc remaining opportunity for this same scalar floor is zero on
+RB35 and RX20, $9.014023257\,10^{-5}$ on NB35, and
+$6.960845674\,10^{-5}$ on RX35 E+. The original RX35 E interval instead
+leaves $0.014591429385752946$. Thus further precision of this same floor
+can provide little additional lower-bound improvement at the measured E+ endpoint, while a much
+larger physical BRP gap remains. This does not establish saturation of the
+full inventory coupling or exclude a different resource-dependent proof.
+
+Separate readback reconstructs all eight complete-arm RN matrices,
+original penalties, retained stocks and signed bound transports; the
+qualified physical and chronological verifiers are reused without rewriting
+sealed evidence. The actual residual experiment has four price calls and
+29 preserved-stock row lifts, and the small-domain qualification includes
+legal zero, signed costs, negative residual values and observed omitted
+coefficients. This is separate arithmetic/model reconstruction by the same
+research agent. The finite panel is historical and uses one Seed; it does
+not establish a universal ranking. Stable GI-TBC/B remains the default,
+and E/E+ remain research candidates. The main original-objective precision
+question is answered by more RN capacity; the less efficient residual
+strengthening and unresolved preselected K20 check are retained. Exact
+outer charges, including failed startup and provenance attempts and final
+verification, are reported separately from compilation and publication I/O.

@@ -1,0 +1,60 @@
+
+Gurobi 13.0.2 (win64) logging started Sat Nov  7 03:07:59 2026
+
+Set parameter LogFile to value "E:\codes\ExactEBRP-work\worktrees\round156\results\unified_exact_round156\review\residual_admit_v1\0_0\price0\native.log"
+Gurobi Optimizer version 13.0.2 build v13.0.2rc1 (win64 - Windows 10.0 (19045.2))
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-12700KF, instruction set [SSE2|AVX|AVX2]
+Thread count: 12 physical cores, 20 logical processors, using up to 1 threads
+
+Non-default parameters:
+NodeLimit  256
+TimeLimit  2.9976136500015855e+01
+BestBdStop  2.4000000000000003e-06
+IntFeasTol  1e-06
+MIPGap  0
+MIPGapAbs  1.25e-05
+LogToConsole  0
+Threads  1
+PoolSolutions  20
+
+Optimize a model with 104 rows, 29 columns and 320 nonzeros (Min)
+Model fingerprint: 0xf1442c05
+Model has 1 linear objective coefficients
+Variable types: 19 continuous, 10 integer (10 binary)
+Coefficient statistics:
+  Matrix range     [2e-02, 4e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [9e-02, 4e+00]
+  RHS range        [4e-02, 4e+00]
+
+User MIP start produced solution with objective 0.01 (0.00s)
+Loaded user MIP start with objective 0.01
+
+Presolve removed 104 rows and 29 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 20 available processors)
+
+Solution count 1: 0.01 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 9.999999999999e-03, best bound 9.999999999999e-03, gap 0.0000%
+
+User-callback calls 368, time in user-callback 0.00 sec
+Set parameter Threads to value 1
+Set parameter Seed to value 0
+Set parameter FeasibilityTol to value 1e-06
+Set parameter IntFeasTol to value 1e-06
+Set parameter OptimalityTol to value 1e-06
+Set parameter OutputFlag to value 1
+Set parameter LogToConsole to value 0
+Set parameter TimeLimit to value 2.9989455899922177e+01
+Set parameter NodeLimit to value 256
+Set parameter MIPGap to value 0
+Set parameter MIPGapAbs to value 1.25e-05
+Set parameter BestBdStop to value 2.3600000000000003e-06
+Set parameter BestObjStop to value -1e+100
+Set parameter PoolSolutions to value 20
