@@ -1,6 +1,6 @@
 # Round157 continuation and delivery
 
-Scientific study complete; all serial fees closed. Publication, one public recovery and post-PR cleanup remain pending; the overall /goal is still active.
+Scientific study complete; all serial fees closed. Draft PR, anonymous public recovery and bounded zero-delete cleanup are complete.
 
 The exact user-authorized attached /goal is goal.md. Its scientific and delivery requirements are distinguished from historical evidence.
 
@@ -32,7 +32,76 @@ All new raw/build/temp/restore objects stay in E-work. Protected original/paper-
 
 ## Publication state
 
-No PR has yet been created or pushed for this round. Normal commits/push and an English Draft PR are authorized; merge, force push and branch deletion are not.
+```json
+{
+  "recorded_UTC": "2026-11-07 09:31:58 UTC",
+  "fixed_science_commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+  "PR_created_readback": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/219",
+    "number": 219,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round156-inventory-objective-certificates",
+    "base_sha": "e10ffd01de6cf2fa9db71ba5a51f7d9eab8efb05",
+    "head": "codex/round157-physical-inventory-realizability",
+    "head_sha": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+    "created_at": "2026-11-07T09:29:14Z"
+  },
+  "PR_readback_before_metadata_followup": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/219",
+    "number": 219,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round156-inventory-objective-certificates",
+    "base_sha": "e10ffd01de6cf2fa9db71ba5a51f7d9eab8efb05",
+    "head": "codex/round157-physical-inventory-realizability",
+    "head_sha": "9889473a9b64c749ea8841bac1d38fec8be21d96"
+  },
+  "R156_readback_before_metadata_followup": {
+    "url": "https://github.com/yifanXovo/TailoredExact/pull/218",
+    "number": 218,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "base": "codex/round155-complete-coupling-proof-gains",
+    "base_sha": "5675acd0da875b4c7ac51f145ec151ee5c14d68a",
+    "head": "codex/round156-inventory-objective-certificates",
+    "head_sha": "e10ffd01de6cf2fa9db71ba5a51f7d9eab8efb05"
+  },
+  "main_sha_at_delivery": "b2b940c1e517a72e226ec60fc49ff19651737632",
+  "normal_push": true,
+  "force_push": false,
+  "merge_performed": false,
+  "branch_deletion": false,
+  "recovery_state": "PASS",
+  "new_only_recovery_attempts": 1,
+  "recovery_manifest_files": 86,
+  "recovery_archives": 6,
+  "recovery_raw_members": 332,
+  "recovery_member_bytes": 198913261,
+  "recovery_IO_seconds": 89.7368042001035,
+  "recovery_receipt": "public_restore_receipt.json",
+  "cleanup_state": "PASS",
+  "deleted_bytes": 0,
+  "protected_tracked_dirty_files": 3,
+  "science_G1_seconds": 7969.82523870049,
+  "all_scientific_fees_closed": true,
+  "delivery_metadata_excluded_from_fixed_science_manifest": true,
+  "metadata_followup": "Normal append-only delivery metadata commit; its head may advance beyond the fixed science commit. Final remote head/base/Draft and exact Git blobs are read back after that push.",
+  "final_remote_readback_local_path": "E:/codes/ExactEBRP-work/temp/round157/final_remote_readback.json",
+  "no_Gurobi_engine_modules_observed_during_recovery": true,
+  "recovery_process_observation_PIDs": [
+    97968,
+    79728
+  ]
+}
+```
+
+One bounded anonymous fixed-commit recovery: PASS, commit 9889473a9b64c749ea8841bac1d38fec8be21d96, files 86, archives 6, members 332. No Optimize, compiler, old producer or old-carrier download. Receipt: public_restore_receipt.json.
+
+Bounded metadata cleanup retained all required evidence/runtime/active trees and deleted 0 bytes. Actual volume readbacks and retained-byte estimates are in cleanup_record.json. Protected-byte readback is final_protection_readback.json.
 
 Fixed science recovery excludes mutable delivery metadata (RESUME, PR/publication, recovery/cleanup and final readback records). These are normally committed in a metadata follow-up and verified against the final Git head. No second public science recovery is needed for that follow-up.
 
