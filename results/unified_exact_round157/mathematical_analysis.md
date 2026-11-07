@@ -85,3 +85,39 @@ UNKNOWN and changes neither physical U nor physical L. Even a family INFEAS
 has only its recorded finite-family scope. Any future original-objective
 level query must cover all physical inventories in that level and preserve
 the inherited global coverage rules.
+
+## First actual family result and selected next question
+
+The RX35 fixedY free-flow query exhausts4096 nodes without a route; its own
+status is UNKNOWN, at1507.1708263999317 outer seconds. The subsequent
+necessary-resource query retains all six legal family members, all vehicle
+attributions and all original heterogeneous capacities. At1320 nodes it
+produces required-time lower6300.62843442682, exceeding original T6300 plus
+the inherited.063-second margin. Its outer cost is181.39043179992586 seconds.
+The Native status11 is an explicit guarded-bound stop, not a timeout or a
+feasible-route return. This proves the complete finite family impossible,
+and hence also excludes the earlier fixed point by implication. The saved
+MPS/exact-coefficient/numerical readback is a separate required audit.
+
+The proof relaxes detailed route order and prefix loads. Family stock totals
+equal original total stock, while empty departure implies nonnegative return
+on every vehicle; thus every vehicle must return empty. Its pickups and
+deliveries must balance individually. Together with the per-vehicle handling
+and1/2/3-station tour lower bounds, those conditions already conflict with T.
+The resource assignment upper6867.600856318251 is not an upper on true
+required fleet time. The global mandatory-tour lower plus minimum handling
+is only17793.65053263172, below the total fleet allowance18900; aggregate
+time alone therefore does not explain the exclusion. This is a vehicle
+partition/balance obstruction in the necessary model, not a proved scarcity
+of aggregate time and not an inference from a fixed route template.
+
+All six members still have the same original J=.23612171136420015. None of
+these facts proves that every other inventory with J below that value, or
+below a slightly larger level, is impossible. The global original-objective
+lower remains.2360521029074557 at this stage. A substantive next query adds
+the same necessary resource conditions to the complete original RN inventory
+domain. It retains all supports, hard totals and old RN rows, uses the
+inherited original-objective guard/transport, and checks a true physical
+route as an upper for the new relaxation. The excluded inventory witness
+is not reused as an upper. A qualified objective lower above a level can
+exclude the entire covered level, unlike the finite-family result.

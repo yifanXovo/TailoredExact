@@ -6,6 +6,8 @@ permitted inventory set is fixed. No vehicle assignment or route is fixed.
 """
 from round157_inventory import instance, value, classes, family
 from round157_common import *
+from round143_math import outward
+from fractions import Fraction as F
 
 def verify(data,witness):
     n=data['n'];Y=list(data['initial']);seen=set();vehicles=set();durations=[];returns=[]
@@ -186,7 +188,7 @@ def solve_one(role,rank,mode,label,nodes=4096,cap=3600):
             assert checked['original_T_feasible']
             write(target/'witness.json',witness);write(target/'physical_check.json',checked)
             save_gz(target/'solution.json.gz',point)
-            result.update(classification='FEAS',physical_U=candidate['J'],quality=quality,
+            result.update(classification='FEAS',physical_U=outward(F(candidate['J_exact']),True),quality=quality,
                           maximum_duration=checked['maximum_duration'],inventory=checked['Y'],
                           witness_SHA=sha(target/'witness.json'))
         elif model.Status==gp.GRB.INFEASIBLE:
