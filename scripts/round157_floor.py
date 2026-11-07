@@ -67,6 +67,16 @@ def objective(oracle):
 def original_lower(native,transport):
     return F(transport['scale'])*(F(native)-F(transport['guard'])-transport['correction'])+sum(transport['anchors'].values(),F(0))
 
+def retain_known_lower(oracle,lower):
+    from round100_gurobi_runtime import gp
+    # At integral inventories q>=G and the upward coefficients bound H
+    # from above. Hence this expression is >=J>=the already qualified L.
+    # This is a helper-pricing row, never a row in the physical main search.
+    terms={(s['i'],y):outward(h_exact(s,y),True) for s in oracle.scope['stations'] for y in s['support']}
+    row=oracle.model.addConstr(oracle.q+gp.quicksum(a*oracle.x[k] for k,a in terms.items())>=outward(F(lower),False),
+                              name='known_original_inventory_lower')
+    oracle.model.update();return row
+
 def lifted(data,scope,oracle,ref,witness):
     checked=verify(data,witness);Y=checked['Y'];v=stock_value(scope,Y,1,{(s['i'],y):h_exact(s,y) for s in scope['stations'] for y in s['support']})
     assert v['feasible'] and v['S']>0
@@ -94,7 +104,7 @@ def run(role,label,nodes=16384,cap=21600):
     from round100_gurobi_runtime import gp,binding
     from round150_lp import affinity
     affinity();assert binding()['sha256']==DLL_SHA
-    assert read(OUT/'qualification/floor_v1/result.json')['PASS']
+    assert read(OUT/'qualification/floor_v2/result.json')['PASS']
     assert read(OUT/'review/family_predeep_v1.json')['PASS']
     source=read(OUT/'inventory_sources.json')[role];scope=source['scope'];data=instance(source['panel'])
     assert scope['gamma_L']==0
@@ -112,12 +122,14 @@ def run(role,label,nodes=16384,cap=21600):
         cols={v.VarName for v in m.getVars()};rows={c.ConstrName for c in m.getConstrs()}
         ref=attach(oracle,data,bounds)
         assert semantics(m,cols,rows)==old
+        retain_known_lower(oracle,baseline)
         positive,checked=lifted(data,scope,oracle,ref,family_source['positive_control']['witness'])
         quality=residual(m,positive);assert quality['constraints']<=1e-7 and quality['bounds']<=1e-7,quality
-        # The known physical route is a valid upper for the new relaxation.
-        # It is checked, but is neither loaded as a start nor added as a row.
+        # This known route is a legal point in the stronger relaxation. A
+        # MIP start fixes no bounds, assignment or order in the free model.
+        for var in m.getVars():var.Start=positive[var.VarName]
         write(folder/'positive_lift.json',dict(point=positive,quality=quality,physical=checked,
-            source_SHA=family_source['positive_control']['SHA'],no_MIP_start=True))
+            source_SHA=family_source['positive_control']['SHA'],known_route_MIP_start=True))
         m.Params.Threads=1;m.Params.Seed=0;m.Params.NodeLimit=int(nodes);m.Params.TimeLimit=float(cap)
         m.Params.MIPGap=0;m.Params.MIPGapAbs=1e-4/transport['scale'];m.Params.IntFeasTol=1e-6
         m.Params.FeasibilityTol=1e-6;m.Params.OptimalityTol=1e-6;m.Params.MIPFocus=3;m.Params.DualReductions=0
@@ -130,7 +142,8 @@ def run(role,label,nodes=16384,cap=21600):
             inventory_hints_are_not_physical_or_new_domain_uppers=True,
             old_RN_rows_columns_unchanged=True,positive_control_all_rows=quality,
             valid_new_domain_upper=outward(F(str(stock_value(scope,checked['Y'],1,transport['d'])['phi'])),True),
-            deleted_best_inventory_not_used_as_new_upper=True,historical_start=False,
+            deleted_best_inventory_not_used_as_new_upper=True,known_physical_route_MIP_start=True,
+            saved_BB_tree=False,known_inventory_lower_row=baseline,physical_main_search_row_changes=0,
             scale=transport['scale'],anchors_exact={str(k):str(v) for k,v in transport['anchors'].items()},
             correction_exact=str(transport['correction']),numerical_guard_scaled=transport['guard'],
             NodeLimit=int(nodes),TimeLimit=float(cap),Seed=0,Threads=1,MIPFocus=3,

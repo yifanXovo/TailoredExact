@@ -1,7 +1,7 @@
 """Audit RN preservation, resource projection and original-objective transport."""
 from itertools import product
 from fractions import Fraction as F
-from round157_floor import attach,objective,lifted,original_lower
+from round157_floor import attach,objective,lifted,original_lower,retain_known_lower
 from round157_resource import travel_bounds
 from round157_inventory import instance
 from round157_qualify import micro,enumerated
@@ -9,11 +9,11 @@ from round153_pricing import Oracle,stock_value
 from round143_lp import semantics,residual
 from round157_common import *
 
-def run():
+def run(label='floor_v1'):
     from round100_gurobi_runtime import gp,binding
     from round150_lp import affinity
     affinity();assert binding()['sha256']==DLL_SHA
-    target=OUT/'qualification/floor_v1';target.mkdir(parents=True,exist_ok=False);facts=[]
+    target=OUT/'qualification'/label;target.mkdir(parents=True,exist_ok=False);facts=[]
     with gp.Env(empty=True) as env:
         env.setParam('OutputFlag',0);env.start()
         for role,source in read(OUT/'inventory_families.json').items():
@@ -21,6 +21,7 @@ def run():
             t=objective(o);old=semantics(o.model);cols={v.VarName for v in o.model.getVars()};rows={c.ConstrName for c in o.model.getConstrs()}
             bounds=travel_bounds(data,list(range(1,data['n']+1)));ref=attach(o,data,bounds)
             assert semantics(o.model,cols,rows)==old
+            retain_known_lower(o,read(OUT/'inventory_sources.json')[role]['lower'])
             p,physical=lifted(data,scope,o,ref,source['positive_control']['witness']);q=residual(o.model,p)
             assert q['constraints']<=1e-7 and q['bounds']<=1e-7,q
             reconstructed=F(t['scale'])*F(q['objective'])+sum(t['anchors'].values(),F(0))
@@ -44,7 +45,7 @@ def run():
             if enumerated(data,[list(Y)]) is not None:physical_prices.append(v['phi'])
         plain=min(exact_prices);physical=min(physical_prices)
         assert float(physical)>float(plain)+.4
-        o=Oracle(scope,env,old_joint=True);t=objective(o);attach(o,data,travel_bounds(data,[1,2]))
+        o=Oracle(scope,env,old_joint=True);t=objective(o);attach(o,data,travel_bounds(data,[1,2]));retain_known_lower(o,plain)
         m=o.model;m.Params.Seed=0;m.Params.Threads=1;m.Params.MIPGap=0;m.Params.MIPGapAbs=0
         m.Params.TimeLimit=30;m.Params.NodeLimit=4096;m.Params.IntFeasTol=1e-6
         m.write(str(target/'tiny_full_level.mps'));m.optimize();assert m.Status==gp.GRB.OPTIMAL
@@ -60,4 +61,4 @@ def run():
         actual_positive_controls_and_saved_matrices=True,review='same agent, separate exhaustive and model-row reconstruction'))
     print(json.dumps(facts),flush=True)
 
-if __name__=='__main__':run()
+if __name__=='__main__':run(*sys.argv[1:])
