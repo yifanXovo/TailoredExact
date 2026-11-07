@@ -121,3 +121,37 @@ inherited original-objective guard/transport, and checks a true physical
 route as an upper for the new relaxation. The excluded inventory witness
 is not reused as an upper. A qualified objective lower above a level can
 exclude the entire covered level, unlike the finite-family result.
+
+## Final propagation result and limit of the conclusion
+
+The preselected second RX35 family is also resource-infeasible. Its20 legal
+members have the same J approximately.2365418455066189. Native required-time
+lower6300.45285949651, less the.063 margin, remains above original T6300.
+The saved-matrix readback reconstructs all selectors, class counts, exact
+shortest-path coefficients and free assignments without Optimize.
+
+Exactly one batch adds the26 finite member no-goods
+sum_i x[i,Y_i]<=n-1 in the unchanged original RN model. Every original
+physical inventory survives because each removed member is impossible at
+original T. The old qualified lower remains valid. The new-domain upper is
+revalidated at the retained stock's exact price (upward-rounded display
+.23685400930608239); the excluded original stock is not an upper of this
+domain. This is a conventional finite logical exclusion, not a new general
+Benders result or an iterative assignment master.
+
+The resulting RN16384 call returns at NodeLimit in200.85133249987848 outer
+seconds, Work437.27086304962415, without improving original lower
+.2360521029074557. The complete target level.23648786033514127 is not
+excluded. Thus no positive global physical-versus-inventory optimum gap is
+proved this round, despite the two strict family impossibility proofs.
+The finite batch's price ceiling permits at most.0008019063986266512 more
+than the baseline lower; it does not constrain other future mechanisms.
+
+The full-domain resource MIP was qualified and substantively tried, with
+one information-use revision supplying the valid lower and physical route
+start. Its two incomplete attempts cost256.5245488001965 and4099.307925999863
+seconds; no new bound is consumed. The latter's last observed node773 is
+below the proposed1024 checkpoint. Early reallocation is recorded openly,
+not described as exhaustion of its declared16384-node/21600-second capacity.
+Together with the finite repricing result, these data explain the decision
+not to freeze a complete E+R mechanism or run the conditional panel.

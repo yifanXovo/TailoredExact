@@ -60,4 +60,52 @@ def family_proof():
         same_agent_separate_reconstruction=True,fee_SHA=sha(OUT/'fees/resource_rx35_family4096_v1/receipt.json')))
     print(json.dumps(read(target)),flush=True)
 
+def resource_readback(role,label,output_label):
+    """Rebuild a selected saved necessary model; no new optimization."""
+    from round100_gurobi_runtime import gp,binding
+    from round150_lp import affinity
+    affinity();assert binding()['sha256']==DLL_SHA
+    source=read(OUT/'inventory_families.json')[role];data=instance(source['panel'])
+    folder=OUT/'resource'/label;condition=read(folder/'condition.json');result=read(folder/'result.json')
+    candidate=source['candidates'][condition['rank']-1]
+    members=family(source['scope'],candidate['Y']) if condition['mode']=='family' else [candidate['Y']]
+    assert members==condition['members'] and condition['role']==result['role']==role
+    assert result['condition_SHA']==sha(folder/'condition.json') and result['canonical_SHA']==sha(folder/'model.mps')
+    digest=condition['source_SHA'];assert sha(OUT/'engineering/source_bytes'/f'{digest}.txt')==digest
+    matches=[p for p in (OUT/'engineering/source_snapshots').glob('*.json')
+             if read(p)['files'].get('scripts/round157_resource.py')==digest]
+    assert matches
+    supports={i:sorted({Y[i-1] for Y in members}) for i in range(1,data['n']+1)}
+    active=[i for i,vs in supports.items() if any(v!=data['initial'][i] for v in vs)]
+    bounds=travel_bounds(data,active);assert bounds==read(folder/'travel_bounds.json')
+    assert condition['bounds_SHA']==sha(folder/'travel_bounds.json')
+    quality=None
+    with gp.Env(empty=True) as env:
+        env.setParam('OutputFlag',0);env.start()
+        expected,ref=fixed_model(data,supports,classes(source['scope'],candidate['Y']) if condition['mode']=='family' else None,env,bounds)
+        with gp.read(str(folder/'model.mps'),env=env) as actual:
+            assert semantics(actual)==semantics(expected)
+            assert (actual.NumVars,actual.NumConstrs,actual.NumNZs)==(result['NumVars'],result['NumConstrs'],result['NumNZs'])
+            if result['SolCount']:
+                point=load_gz(folder/'solution.json.gz');quality=residual(actual,point)
+                quality['integer']=max(abs(point[v.VarName]-round(point[v.VarName])) for v in actual.getVars() if v.VType!='C')
+                assert max(quality[k] for k in ('constraints','bounds','integer'))<=1e-5,quality
+        expected.dispose()
+    log=(folder/'native.log').read_text(encoding='utf-8').lower()
+    assert not any(s in log for s in ('numerical trouble','unscaled primal violation','unscaled dual violation'))
+    assert result['bound_status_qualified']
+    assert result['status'] in (2,8,9,15) or (result['status']==11 and (result['bound_stop'] or result['necessary_relaxation_feasible_stop']))
+    if result['classification']=='RESOURCE_INFEAS':
+        assert result['required_time_lower']>data['T']+result['margin']
+    else:assert result['classification']=='RESOURCE_UNRESOLVED'
+    assert result['physical_U'] is None and result['physical_L_change']==0 and result['no_route_claim']
+    output=OUT/'review'/f'{output_label}.json';assert not output.exists()
+    record=dict(UTC=utc(),PASS=True,role=role,label=label,Optimize=0,member_count=len(members),
+        actual_matrix_rebuilt=True,exact_travel_bounds_rebuilt=True,point_quality=quality,
+        classification=result['classification'],required_time_lower=result['required_time_lower'],
+        original_T=data['T'],margin=result['margin'],global_J_lower_gain_from_family_alone=0,
+        result_SHA=sha(folder/'result.json'),model_SHA=sha(folder/'model.mps'),
+        execution_source_SHA=digest,review_source_SHA=sha(__file__),same_agent_separate_reconstruction=True)
+    write(output,record);print(json.dumps(record),flush=True)
+
 if __name__=='__main__':globals()[sys.argv[1]](*sys.argv[2:])

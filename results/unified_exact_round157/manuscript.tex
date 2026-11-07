@@ -1,0 +1,288 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\newtheorem{proposition}{Proposition}
+\title{Inventory Objective Certificates and Physical Fleet Realization}
+\author{A research section accompanying the stable GI-TBC method}
+\date{}
+\begin{document}
+\maketitle
+
+\section{What a tight inventory relaxation establishes}
+Let $D$ be a qualified integer-inventory relaxation of the complete
+improving physical domain. With the original coefficients and normalization,
+write
+\[
+ r_i=c_iY_i,\quad S=\sum_i r_i,\quad
+ A=\sum_{i<j}|r_i-r_j|,\quad
+ H=\sum_i\omega_i|r_i-1|,\quad J=G+H,
+\]
+where $G=A/(nS)$ for $S>0$, with the original zero convention otherwise.
+The coefficient $\omega_i$ already includes the objective weight; it is
+not multiplied by that weight again. For the root scopes considered here,
+the pricing epigraph has $\gamma_L=0$, so its original inventory objective
+is $J$. Denote physical realizability with the original time limit and
+fleet by $R(Y)$, and define
+\[
+ F_I=\min_{Y\in D}J(Y),\qquad
+ F_P=\min_{Y\in D:R(Y)}J(Y).
+\]
+Thus $F_I\le F_P$. The integer-inventory pricing and proof-consumption
+studies refine $F_I$ and its scope-valid contribution to the complete
+GI-TBC ledger. Their inventory upper bounds do not supply vehicle routes.
+
+This separates the roles of structural relaxation and physical search.
+Integer inventory states, normalized ratio products and qualified pricing
+can strengthen the original objective relaxation while leaving routing
+unresolved. A root inventory lower that covers the entire improving
+domain can supplement the complete search's physical lower in the proof
+ledger. The search may continue to use its own bounds for adaptive-mass
+decisions: a stronger proof floor need not change interval branching,
+native rows or incumbent production. Conditional child floors instead
+require complete child coverage and their corresponding local scopes.
+These proof-placement choices are separate from whether a good inventory
+can be turned into a route.
+
+\begin{proposition}
+Suppose $L_I\le F_I\le J(\widehat Y)=U_I$. If an inventory with objective
+$U_I$ has a verified complete physical fleet, then
+$L_I\le F_P\le U_I$ and $0\le F_P-F_I\le U_I-L_I$.
+\end{proposition}
+\begin{proof}
+Restricting the inventory domain to physically realizable vectors cannot
+lower its minimum. The checked fleet supplies a member of that restricted
+domain with value $U_I$. Combining the two inequalities gives the result.
+\end{proof}
+
+The conclusion is about the recorded domain. If $D$ is an improving
+domain, its incumbent-cutoff complement must also be covered before a
+global certificate is asserted. A pricing tolerance of $10^{-4}$ is not
+substituted for the original complete-method certification tolerance.
+In particular, infeasibility of $\widehat Y$ alone does not imply
+$F_P>U_I$: other inventories can have the same or slightly greater price.
+
+\section{Objective invariance with spatial freedom}
+Partition stations by identical actual coefficients $(c_i,\omega_i)$.
+For a class $C$, let $m_{Cv}$ be the multiplicity of inventory value $v$
+in $\widehat Y$. The class family is encoded by
+\[
+ \sum_v z_{iv}=1,\qquad Y_i=\sum_v vz_{iv},\qquad
+ \sum_{i\in C}z_{iv}=m_{Cv},\qquad z_{iv}\in\{0,1\},
+\]
+using only each original station's permitted support. The original hard
+inventory total and all physical conditions retain their meaning.
+
+\begin{proposition}
+Every member of this family has the same $S,A,G,H,J$ and unweighted
+inventory total as $\widehat Y$.
+\end{proposition}
+\begin{proof}
+Within a class, $c_i$ is constant, so preserving inventory multiplicities
+preserves its ratio multiset. Taking the union across classes preserves
+the global ratio multiset, hence $S,A,G$. Constant $\omega_i$ also
+preserves the class sum of absolute deviations from one. Inventory
+multiplicities directly preserve the unweighted total.
+\end{proof}
+
+Initial inventories and geographical locations need not coincide within
+a class. Consequently, the required pickups, deliveries and routing
+difficulty can change. This is a practical use of objective invariance,
+not a new general symmetry or Benders theorem. Coefficients are compared
+by their exact binary representations, without epsilon grouping. The
+preselected best RX35 family has six legal members and total pickup 56--57;
+the best NB35 family is a singleton. This is a small finite opportunity,
+not an established large symmetry space.
+
+\section{A complete free-fleet physical query}
+The physical projection retains empty departures, at most one nonzero
+one-direction service per station, free vehicle attribution and route
+order, original heterogeneous capacities $Q_k$, and legal loaded returns.
+The depot's placeholder inventory supplies no bikes. Once the inventory
+family fixes $J$, the Gini and penalty objective formulation is unnecessary
+for the feasibility question.
+
+For a selected state $v\ne b_i$, binary service assignments satisfy
+$\sum_k w_{kiv}=z_{iv}$. Only assignments with $|b_i-v|\le Q_k$ are
+permitted. Their sums define each vehicle's station-service indicator and
+pickup/delivery quantities. Binary arc in/out degrees equal that indicator;
+depot departure equals return and is at most one. Standard ordering
+potentials eliminate disconnected station cycles. Instead of node-load
+big-$M$ implications, arc loads satisfy
+\[
+ 0\le f_{kij}\le Q_kx_{kij},\qquad f_{k0j}=0,\qquad
+ \sum_j f_{kij}-\sum_j f_{kji}=p_{ki}-d_{ki}.
+\]
+At integer arcs, these equations give exactly the physical load sequence
+from empty departure. Return-arc load remains free within $Q_k$. Every
+real route lifts into these variables, and every integer solution decodes
+into a complete free fleet. This is the established inventory-time oracle
+projection with a standard arc-flow load formulation.
+
+For each route, pickups $P_k$ equal station deliveries $D_k$ plus returned
+load $R_k$. The evaluator's handling time is therefore
+\[
+ t_pP_k+t_d(D_k+R_k)=(t_p+t_d)P_k.
+\]
+The model charges this quantity plus travel against the original $T$.
+Total pickups can exceed $Q_k$ when intermediate deliveries free capacity;
+only prefix loads are capacity-bounded. The time limit of an experiment
+is separate from the physical model's $T$.
+
+Feasible status and an independently checked route are recorded separately.
+A truncated query without such a route is \textsc{unknown}. A qualified
+infeasibility result for the selector model covers exactly its finite
+family, not every inventory with that objective value.
+
+\section{Resource explanations and objective-level coverage}
+A necessary resource projection can preserve free station/vehicle
+attribution while replacing exact tours by lower bounds. Let $\ell(S)$
+be a downward-rounded shortest depot tour through a small station subset
+$S$, computed from exact rational shortest paths of the actual travel
+coefficients. A route visiting $S$ has travel at least $\ell(S)$, even
+if it also visits other stations. For vehicle service indicators $s_{ki}$,
+the following inequalities are necessary:
+\[
+ 0\le P_k-D_k\le Q_k,\qquad
+ T^*\ge(t_p+t_d)P_k+
+ \ell(S)\left(\sum_{i\in S}s_{ki}-|S|+1\right).
+\]
+Together with $T^*\ge(t_p+t_d)P_k$, a subset row is active only when
+all its stations are served by that vehicle. Singles, pairs and triples
+provide a finite, reproducible family of such conditions. A qualified
+resource lower greater than $T$ can rule out its inventory condition;
+a feasible resource assignment is not a complete route.
+
+To establish a physical objective gap, the exclusion must cover a whole
+level, for example all original physical solutions with $J(Y)\le\tau$.
+Infeasibility of a valid necessary relaxation of that entire level is
+sufficient; infeasibility of one inventory or one class family is not.
+A level-specific proof is consumed only in that level and its qualified
+coverage. If new exclusions delete an old inventory upper witness, it
+cannot remain an upper bound for a newly strengthened inventory problem.
+Logical no-goods and infeasibility learning retain their classical
+attribution~\cite{hooker2003,codato2006}; no replacement assignment master
+or unlimited learning loop is presumed here.
+
+For a proposed complete enhancement, both the inventory and any physical
+completion must be generated and paid within that method's own run. An
+offline route establishes physical possibility, but its reuse would not
+measure an independently paid algorithm. At a common outer time origin,
+the absolute-gap difference decomposes as
+\[
+ (U_R-L_R)-(U_{E+}-L_{E+})
+   =(U_R-U_{E+})-(L_R-L_{E+}).
+\]
+Thus a reported improvement can be attributed to upper-bound production,
+lower-bound proof, or both without equating stronger inventory prices to
+faster routing. Unachieved certificate times remain undefined. Stable
+GI-TBC remains the reference while additional mechanisms are evaluated.
+
+\section{Evidence from near-optimal inventory states}
+The two prespecified roles use their original physical data:
+RX35 has three vehicles with capacities $(20,25,30)$ and $T=6300$ seconds;
+NB35 has the same capacities and $T=7200$ seconds. Their best saved
+inventory prices are approximately $0.23612171$ and $0.39604655$,
+respectively. The corresponding inherited physical uppers are
+$0.29966940$ and $0.45029150$. These inherited endpoints identify the
+unresolved physical opportunity; they are not fresh complete runs.
+
+At a deterministic capacity of 4096 nodes, the exact fixed-inventory fleet
+models find no route and return \textsc{unknown} on both roles. Their
+measured outer costs are 1507.17 and 1285.90 seconds. In contrast, the
+necessary resource model proves a time lower of 6300.62843 seconds for
+the complete six-member RX35 family. After the inherited time-proof margin
+of 0.063 seconds, the lower remains 6300.56543, strictly greater than 6300.
+The original inventory and every permitted rearrangement are therefore
+impossible under the original time limit. This certificate costs 181.39
+outer seconds. The difference in these costs compares two formulations;
+it does not isolate a speed benefit from class rearrangement.
+
+For NB35, the resource call at 4096 nodes instead gives a guarded time lower
+of 6993.96882 seconds, below 7200. Its relaxed assignment upper of 7245.92316
+seconds is not a fleet-time upper, because it has no complete tour.
+The singleton inventory remains \textsc{unknown}. Neither this unresolved
+query nor the RX35 family certificate changes a global original-objective
+bound by itself.
+
+The resource obstruction has a concrete physical interpretation. Every
+member of the RX35 best family preserves total station inventory equal
+to the initial total. Since vehicles start empty, all return loads are
+zero and each vehicle's pickups equal its deliveries. The maximum
+individual station service is seven bikes, below every vehicle capacity,
+so the simple individual-assignment capacity filter is inactive. The
+exclusion already follows from per-vehicle balance, handling and the
+small-subset travel inequalities, before exact route order and prefix
+loads are imposed. Conversely, a separate metric tour lower combined
+with minimum aggregate handling gives 17793.65 seconds, below the fleet
+budget 18900. Aggregate handling and travel alone do not prove this
+family impossible.
+
+To test propagation beyond a family, the same necessary conditions were
+appended to the complete original inventory domain, preserving the
+normalized objective formulation. An unfixed valid physical-route start
+and the qualified prior inventory lower were supplied. The revised
+diagnostic was stopped after 4099.31 outer seconds with 773 observed
+nodes: its reported global bound still remained at the prior floor and
+its node cost was rising. This was an early evidence-based reallocation
+before a proposed 1024-node checkpoint, not exhaustion of the 16384-node
+capacity. The earlier cold attempt cost 256.52 seconds and was stopped
+for the documented information-use revision. Both incomplete attempts
+are charged and preserved; neither yields a new objective certificate.
+
+The preselected second RX35 family, with 20 legal members and original
+price approximately 0.23654185, is also excluded by the same necessary
+model. Its Native time lower 6300.45286 remains above 6300 after the
+0.063 margin; the outer cost is 190.00 seconds. Both complete families,
+26 vectors in total, can therefore be removed in a single finite
+counterfactual pricing batch. A nonexcluded saved stock of price
+0.23685401 supplies a checked upper for that retained inventory domain,
+without asserting physical feasibility. This finite exclusion alone
+cannot raise the old physical proof lower by more than 0.00080191,
+about 1.26\% of the inherited unresolved physical gap. This is a ceiling
+for that particular batch, not a limit on other resource conditions or
+route constructions.
+
+\begin{center}
+\begin{tabular}{lrrl}
+\toprule
+Family & Members & Guarded time lower (s) & Original-$T$ conclusion\\
+\midrule
+RX35, best & 6 & 6300.56543 & Infeasible ($T=6300$)\\
+RX35, second & 20 & 6300.38986 & Infeasible ($T=6300$)\\
+NB35, best & 1 & 6993.96882 & Unknown ($T=7200$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+Complete legal fleets constructed with time relaxed give genuine, albeit
+loose, upper bounds on the best-family minimum required time: 20647.93
+seconds for RX35 and 24384.99 for NB35. The original physical reader
+independently validates their services and loads. These are time uppers,
+not original-$T$ objective incumbents.
+
+The single finite exclusion batch is repriced with the unchanged original
+RN objective at 16384 nodes. It costs 200.85 outer seconds and returns
+the same qualified lower $0.2360521029074557$. The selected complete
+objective level $0.23648786033514127$ remains unresolved. Thus the
+26-vector impossibility proof has not established a strict gap between
+the global inventory and physical optima. The two resource proofs plus
+repricing cost 572.25 seconds before qualification, without a new physical
+upper or global lower. Together with the whole-domain diagnostic and the
+small finite-batch opportunity ceiling, this provides no sufficiently
+promising uniform completion mechanism for a fresh complete algorithm.
+No complete enhancement is frozen and the conditional eight-arm panel
+is not run. Stable GI-TBC remains the default. The family obstruction is
+a mathematical result; more general low-price physical realization and
+objective-level exclusion remain open computational questions.
+
+\begin{thebibliography}{9}
+\bibitem{hooker2003} J. N. Hooker and G. Ottosson.
+Logic-based Benders decomposition. \emph{Mathematical Programming},
+96:33--60, 2003. doi:10.1007/s10107-003-0375-9.
+\bibitem{codato2006} G. Codato and M. Fischetti.
+Combinatorial Benders' cuts for mixed-integer linear programming.
+\emph{Operations Research}, 54(4):756--766, 2006.
+doi:10.1287/opre.1060.0286.
+\end{thebibliography}
+\end{document}

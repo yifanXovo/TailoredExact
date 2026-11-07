@@ -1,5 +1,20 @@
 # Current mainline and Round137 paper branch
 
+The [Round157 physical-realization study](round157_research.md) tests whether
+near-optimal integer inventories can be served by the original fleet.
+Free-assignment resource conditions exclude RX35's complete best-price
+six-member family; NB35 remains UNKNOWN. Family impossibility, full-level
+coverage and complete-algorithm benefit are kept separate in the
+[thematic paper section](../results/unified_exact_round157/manuscript.tex)
+and [report](../results/unified_exact_round157/final_report.md).
+Stable GI-TBC/B remains the default.
+
+The second preselected RX35 family is also excluded, for 26 inventory
+vectors total. One finite no-good batch and one RN16384 repricing return
+without a global lower gain. No complete E+R candidate or conditional panel
+is started. The five-page section and actual source/runtime/fee evidence
+are included in the research delivery.
+
 The [Round156 fixed-objective study](round156_research.md) keeps stable
 GI-TBC/B as the default while refining E's independent original inventory
 proof. The unchanged RN model with uniform capacity 16384 reaches the
