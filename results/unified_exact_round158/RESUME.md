@@ -1,4 +1,4 @@
-# Round158: science and paper complete, publication pending
+# Round158: science, paper and public recovery complete
 
 Current authoritative state: the full declared36-hour actual-C++ RX35 hard
 level returned normally with TIME_LIMIT/UNKNOWN,258972 final nodes and no
@@ -22,12 +22,27 @@ b2b940c1e517a72e226ec60fc49ff19651737632. Use the verified R157 temporary
 branch. No production source/configuration change, new build, production
 PE execution or old producer rerun occurred; no E+R/panel was entered.
 
-Still required: new-only indexed package, exact staged-byte verification,
-normal commit/push, English Draft PR and real base/head/Draft readback,
-one bounded anonymous current-only public recovery, protected-byte
-readback, current-round metadata cleanup and final /goal acceptance audit.
-No merge, force-push, branch deletion or filesystem deletion is authorized
-by this record. Keep the goal active until delivery is actually verified.
+Fixed science is163b1b3d0dbcc7be3a84d94108ef4a26ae9baba3, normally pushed.
+English Draft PR220 is open at https://github.com/yifanXovo/TailoredExact/pull/220.
+Actual base/head/Draft readback passed against the verified R157 temporary
+base. The four new-only carriers contain282 members and20118495 compressed
+bytes; all82 staged science paths passed exact byte checks.
+
+The one bounded anonymous current-only public recovery is PASS:78 listed
+files,4 archives,282 members and169068422 member bytes match, in
+65.37163589987904 seconds, with no Native/Optimize/compiler/old producer
+execution and no old carrier download. Its new empty destination is
+E:/codes/ExactEBRP-work/restore/round158-public-163b1b3d0dbc-attempt01.
+Post-PR current-round metadata screening retains all unique evidence,
+failures, necessary runtime references and the active tree. Cleanup deletes
+zero paths/bytes; all3 protected tracked dirty files retain initial bytes.
+See publication.json, public_restore_receipt.json, cleanup_record.json and
+final_protection_readback.json. Public I/O is separate from scientific G1.
+
+These actual delivery receipts are carried by a normal metadata follow-up.
+Final remote metadata-byte readback and the explicit /goal acceptance
+audit remain to be recorded. No merge, force-push or branch deletion has
+occurred. Keep the goal active through that final external-state check.
 
 The complete active research history below is retained as historical state;
 its exact pre-closeout copy is also in infra/resume_active_history.md,
