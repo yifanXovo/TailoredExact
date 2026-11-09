@@ -1,5 +1,15 @@
 # Round159 delivery and continuation
 
+Delivered as English [Open Draft PR221](https://github.com/yifanXovo/TailoredExact/pull/221),
+unmerged, on `codex/round158-resource-value-levels`. Fixed science is
+`a64e27f5e5668c036069c354529901803bec5a84`. The creation/readback head was
+that science commit; a normal metadata follow-up carries the actual
+publication, public recovery, stage-byte and cleanup receipts. It does not
+identify a newly measured binary. The final post-push head/readback is also
+recorded outside the worktree at
+`E:/codes/ExactEBRP-work/evidence/round159_final_delivery.json` to avoid a
+self-referential commit-hash loop.
+
 Science is complete after the successful saved-evidence audit. Resource
 uppers are RX35 .29118539321285497 and NB35 .4235630179611202. Selected fixed
 Y/owner combinations fail complete DP. The sole RX35 fixed-Y/all-owner
@@ -21,12 +31,21 @@ The new raw carrier preserves every failure and required measured object.
 Old carriers and the historical report copies are not repackaged.
 
 The four-page paper compiled twice and all actual pages passed visual review.
-Remaining delivery work: commit/push the new-only science;
-create/read back the English Draft PR on the R158 base;
-perform the one current-only anonymous fixed-commit recovery; perform
-bounded post-PR metadata screening/cleanup, retaining the active tree,
-new PE, unique evidence, failures and accepted recovery; push the actual
-delivery receipts normally. These steps may advance head beyond fixed science.
+The new-only carrier contains 432 indexed raw members, including the new
+research PE, in 19760786 compressed bytes; 57 thin manifest files accompany it.
+All 63 staged science paths match their actual index bytes. The single
+anonymous current-only public recovery PASS verifies all 60 downloaded files
+and 432 members / 176875603 uncompressed member bytes in 35.4523592 outer
+seconds. It runs no Optimize/compiler and downloads no old carrier.
+
+Post-PR bounded metadata screening is complete. It deletes zero files/bytes,
+observes zero free-space change, and retains the active tree, measured PE,
+necessary temps, unique science/failures and accepted recovery. Old rounds
+were not screened for deletion. Actual records are publication.json,
+public_restore_receipt.json, stage_verification.json and cleanup_record.json.
+The final delivery step is the normal metadata commit/push and fresh remote
+readback recorded in the external final receipt above; no science rerun is
+needed for ordinary reading or future continuation.
 
 Reviews are separate routines by the same agent, not an independent reviewer.
 Three protected tracked dirty files retain their initial bytes; the original
