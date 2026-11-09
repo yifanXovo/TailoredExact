@@ -1,0 +1,248 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\newtheorem{proposition}{Proposition}
+\title{The Value of Fleet-Resource Coupling: Objective Levels and Physical Realization}
+\author{A research section accompanying the stable GI-TBC method}
+\date{}
+\begin{document}
+\maketitle
+
+\section{Inventory proof and the physical optimum}
+The stable Gini-interval tailored branch-and-cut method (GI-TBC) maintains
+complete improving-domain coverage, a ledger of scope-valid bounds, and
+independently verified fleet incumbents. Integer-inventory pricing can
+strengthen the ledger without changing the interval controller or route
+producer. This separation makes it possible to study a stronger relaxation
+without silently making it part of the complete algorithm. The default
+method remains GI-TBC/B; E+ is the enhanced comparison baseline inherited
+from the original-objective inventory study.
+
+Let $r_i=c_iY_i$, $S=\sum_i r_i$, and
+\[
+ G(Y)=\frac{\sum_{i<j}|r_i-r_j|}{nS},\qquad
+ H(Y)=\sum_i\omega_i|r_i-1|,\qquad J(Y)=G(Y)+H(Y).
+\]
+The original zero convention is retained. The coefficient $\omega_i$
+already includes $\lambda$. All domains below lie in the same qualified
+improving inventory scope, with the original supports, hard total and
+coverage rules. The present scopes have $\gamma_L=0$ and a strictly
+positive stock denominator.
+
+Write $D_I$ for the integer inventory relaxation. For RX35, let $D_F$ delete
+the 26 vectors excluded by the two preceding RX35 family certificates.
+This deletion set is specific to RX35; for the NB35 comparison take
+$D_F=D_I$. Later family exclusions do not silently redefine $D_F$.
+Let $D_R(T)$ be the inventory projection of free vehicle assignment,
+per-vehicle pickup/drop and return-load balance, handling, and valid
+closed-tour lower bounds for at most three stations. Finally, $D_P(T)$
+contains inventories realized by a complete original fleet. Under the
+inherited physical and numerical qualification,
+\[
+ D_P(T)\subseteq D_R(T)\subseteq D_F\subseteq D_I,
+ \qquad F_I\le F_F\le F_R\le F_P,
+\]
+where $F_D=\min_{Y\in D}J(Y)$. A strict set inclusion does not by itself
+make the corresponding minimum strictly larger. In particular, the best
+saved inventory families are not a proved ordering of the global
+$k$-best inventories.
+
+\begin{proposition}[A resource witness bounds same-source cut value]
+Suppose $L_I\le F_I$ and a fully checked original-$T$ resource assignment
+realizes inventory $Y^R$ of price $U_R=J(Y^R)$. If a cut domain $D_C$
+satisfies $D_R(T)\subseteq D_C\subseteq D_I$, then
+\[
+ F_C\le F_R\le U_R,\qquad
+ 0\le F_R-F_I\le U_R-L_I.
+\]
+\end{proposition}
+\begin{proof}
+Domain containment orders the minima; $Y^R$ supplies an actual member of
+the resource domain. The inventory lower bounds $F_I$ from below.
+\end{proof}
+
+Thus a low resource witness limits every original-objective floor derived
+solely from rearranging the same resource facts, including projection,
+core and no-good cuts. The limit does not apply to stronger travel or
+prefix-load information, or to producing a real route. An inventory-only
+upper cannot play the role of $U_R$. A known physical route supplies a
+valid but potentially loose resource upper by projection; a resource
+assignment alone supplies no physical upper.
+
+\section{Whole objective levels, rather than isolated exclusions}
+The principal question can be posed as the hard level
+\[
+ \mathcal R(\tau,T)=\{(Y,a):Y\in D_I,\ J(Y)\le\tau,
+               \ a\text{ satisfies the full necessary resource model}\}.
+\]
+A qualified infeasibility result excludes the complete level, so
+$F_R>\tau$ and $F_P>\tau$. Within the inherited proof policy, a conservative
+recorded lower is $\tau$. Feasibility instead requires a complete saved
+integer inventory and assignment, followed by independent evaluation of
+the true objective and original time conditions. An unfinished query
+does not improve either side of the prior interval.
+
+The predeclared primary level is
+\[
+ \tau_* = L_I+\tfrac14(U_P-L_I).
+\]
+For RX35 this is approximately $0.2519564273646922$. Excluding it would
+remove one quarter of the inherited physical gap. Since the known
+inventory upper is approximately $0.23612171136420015$, that conclusion
+would also establish a structural resource/inventory difference of about
+$0.015834716$. These are implications of a complete-level proof, not
+consequences of excluding further stored points.
+
+The normalized inventory formulation uses a Gini epigraph $q$. At an
+integer stock with $\gamma_L=0$, $q=G(Y)$ is available; hence
+$q+H\le\tau$ covers every true low-objective stock. For each station choose
+an exact coefficient anchor $a_i$ and a power-of-two scale $s$. Actual
+emitted coefficients $\widehat c_{iy}$ represent
+$(h_i(y)-a_i)/s$, rounded downward except for deliberate tiny omissions.
+Let
+\[
+ \epsilon=\sum_i\max\bigl(0,\max_y\{
+ \widehat c_{iy}-(h_i(y)-a_i)/s\}\bigr).
+\]
+The actual cutoff is
+\[
+ q/s+\sum_{i,y}\widehat c_{iy}x_{iy}
+ \le \operatorname{up}\!\left((\tau-\sum_i a_i)/s+\epsilon\right).
+\]
+Every coefficient and the RHS are checked in the Native matrix. The
+one-hot relations bound the total positive coefficient excess, so no
+omitted tiny coefficient silently deletes a valid low-objective point.
+A returned point is still repriced exactly; a relaxed cutoff value is
+not sufficient to assert membership in the true level. The old
+known-lower auxiliary row is not used in these level models.
+
+\section{A qualified integer budget expression}
+The resource projection inherits classical vehicle-resource and tour
+necessary conditions. Its integer rounding follows the earlier rounded
+handling and anchor/whole-handling studies; it is not a new general cut
+theory. The old production H-ACT mechanism remains parked.
+
+Let $h>0$ be a common lower handling coefficient and $\ell(S)$ a valid
+closed-tour lower for visiting $S$. Raw physical and emitted canonical
+coefficients first share a coefficient-wise lower envelope. The
+shortest-path and subset-tour computations use exact binary-rational
+arithmetic and downward enclosures. A common upper horizon $\overline T$
+covers the original physical acceptance rule, its arithmetic envelope,
+and the inherited time guard. Both tested expressions use the identical
+coefficient package; a bare floor at nominal $T$ is not substituted.
+
+Total pickups $P_k$ are integral sums of integer quantities and binary
+service decisions. Define
+\[
+ U=\left\lfloor\frac{\overline T}{h}\right\rfloor,\qquad
+ b_S=\left\lfloor\frac{\overline T-\ell(S)}h\right\rfloor.
+\]
+Always $P_k\le U$. For $0\le b_S<U$, replace the real-valued time row by
+\[
+ P_k+(U-b_S)\sum_{i\in S}s_{ki}
+ \le b_S+(U-b_S)|S|.                         \tag{1}
+\]
+If $b_S<0$, impose $\sum_{i\in S}s_{ki}\le |S|-1$.
+Total pickups are never incorrectly bounded by $Q_k$: deliveries can
+free space for later pickups, while the physical capacity applies to
+prefix loads and the returned load.
+
+\begin{proposition}[Integer equivalence and subset dominance]
+In the same coefficient package, (1), the forbidden-set rows and
+$P_k\le U$ preserve the integer service domain and imply the old
+real-valued resource rows in the LP relaxation. If a proper subset
+$R\subset S$ has $b_R\le b_S$, its budget row and the global budget
+imply the $S$ row. A forbidden subset forbids its supersets.
+\end{proposition}
+\begin{proof}
+Put $\delta_S=|S|-\sum_{i\in S}s_{ki}$. At integer visits, $\delta_S=0$
+activates the exact integer budget, whereas $\delta_S\ge1$ leaves the
+global budget sufficient. For $0\le\delta_S\le1$, the new bound connects
+the downward-rounded budgets at both endpoints, and therefore lies below
+the old real-valued time bound. For $\delta_S\ge1$, $P_k\le U$ already
+implies that old bound. For dominance, $\delta_R\le\delta_S$ and, on
+$[0,1]$, $b_R+(U-b_R)\delta_S\le b_S+(U-b_S)\delta_S$; the global budget
+covers the remaining range. The forbidden-set statement follows directly.
+\end{proof}
+
+Under the qualified acceptance horizon, RX35 retains 4087 of 7175 subset
+rows per vehicle; its 264 negative budgets reduce to 81 minimal forbidden
+sets. NB35 retains 4755 subsets, with four minimal forbidden sets. Two
+RX35 and five NB35 budgets cross an integer threshold when the time
+acceptance margin is included. These counts explain the scale of the
+expression opportunity; they establish no speedup on their own.
+
+\subsection{A fractional ownership obstruction}
+An integer stock can be difficult for the resource model even when its
+inventory variables already have an exact normalized lift. The following
+elementary construction separates inventory integrality from vehicle
+ownership integrality. It concerns the explicit bare LPs, before additional
+integer-valid cuts or branching.
+
+\begin{proposition}
+Let an integer stock have an inventory LP lift in the hard level. Suppose
+there are $M\ge2$ vehicles, every nonzero service is individually eligible
+for every vehicle, and its total pickups/drops $P,D$ satisfy
+\[
+ 0\le(P-D)/M\le\min_k Q_k,\qquad P\le(M-1)U.
+\]
+If every singleton tour lower is at most $\overline T$, assigning a fraction
+$1/M$ of each nonzero service to every vehicle extends that stock to a
+feasible LP point of both ideal resource expressions, including all their
+rounded and forbidden-subset rows.
+\end{proposition}
+\begin{proof}
+Each vehicle receives pickup $P/M$, drop $D/M$ and visit value at most
+$1/M$ per station. Assignment and return balance hold. The global budget
+holds since $P/M\le(M-1)U/M\le U$. For a singleton, the old time row is at
+most $(hP+\overline T)/M\le\overline T$. For $|S|\ge2$,
+$\sum_{i\in S}s_{ki}-|S|+1\le0$, so handling alone suffices for the old
+row. For a rounded nonforbidden singleton,
+$P/M\le(M-1)U/M\le b_S+(U-b_S)(1-1/M)$.
+For larger sets, $\delta_S\ge1$ makes the global budget sufficient.
+A forbidden set has size at least two under the singleton assumption,
+and $\sum_{i\in S}s_{ki}\le |S|/M\le |S|-1$.
+\end{proof}
+
+This is a standard fractional-assignment weakness, not an integer resource
+upper. A checked instantiation at price $J(Y)$ can upper-bound the
+original-price optimum of those fixed bare LPs. It cannot upper-bound
+$F_R$, and additional integer-valid cuts can remove it. In particular,
+survival of one impossible stock in the LP does not establish a strict
+gap between the global inventory and resource minima. Actual binary-matrix
+coefficients and RHS values require a separate saved-point check before
+an exact numerical LP witness is reported.
+
+\input{empirical_results.tex}
+
+\section{Evidence consumption and the complete method}
+A whole-level resource lower is a bound for the original inventory scope
+and can enter the GI-TBC ledger only with that scope and its coverage
+qualification. A local family proof cannot close all low-objective
+inventories. A physical route can update $U$ only after the unchanged
+original-time, station, vehicle, operation and prefix-load checks. A
+relaxed-time assignment, a log objective or an unfinished callback point
+does not substitute for either certificate.
+
+Any complete E+R candidate must pay for its own inventory pricing,
+resource-level computation, route construction and verification. Offline
+stocks, old assignments and proofs are not free starts for a nominal
+fresh arm. A uniform rule may use current mathematical bounds and fixed
+node/iteration capacities; it may not dispatch on instance names,
+historical wins or a timer switch. A worthwhile structural finding need
+not become a production mechanism. Stable GI-TBC exposition and the
+maintained paper continue independently of whether this research branch
+produces such a candidate.
+
+\paragraph{Attribution and scope.}
+This section continues the support-duration studies (R51--52), the
+free-fleet/time-oracle studies (R61), the
+physical-envelope rounded handling repair (R92), full handling with
+anchors (R103), resource propagation (R150--151), and integer-inventory
+objective proof consumption (R152--157). Results, scope identities,
+actual Native matrices, source snapshots, fees and same-agent separate
+readbacks accompany the present finite study. No reviewer independence,
+universal performance benefit or default promotion is inferred.
+\end{document}

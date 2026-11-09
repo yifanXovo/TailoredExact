@@ -1,0 +1,365 @@
+{
+  "UTC": "2026-11-07T18:51:35.587964+00:00",
+  "references": [
+    {
+      "role": "N-B35-S",
+      "commit": "751de842a0264a146701de6669b1f3dd6dc764b1",
+      "path": "results/unified_exact_round156/campaign_confirmation/006/raw/R156_006_N-B35-S_S0_Eplus/external/round153_floor/pricing/result.json",
+      "SHA256": "564a7209698913d1095ec13db3e33dec8dac47f98b12e3061309192fb3ee0ea6",
+      "bytes": 74293,
+      "resolution": "fixed archive member",
+      "archive": "complete_arm_006.zip",
+      "archive_SHA": "391dc57a9fb69f3084cfc90206b1f384bffa10b659940a444b3c8e662ed0a67e",
+      "member_index": {
+        "path": "results/unified_exact_round156/artifacts/complete_arm_006.members.json.gz",
+        "SHA256": "ee000c4fdc15fd9e5d69d83af2f131713a778acd6b3ccada20e048784784aa99",
+        "bytes": 17464
+      }
+    },
+    {
+      "role": "N-B35-S",
+      "commit": "751de842a0264a146701de6669b1f3dd6dc764b1",
+      "path": "results/unified_exact_round156/campaign_confirmation/006/raw/R156_006_N-B35-S_S0_Eplus/external/models/L0_epoch_0_generation_1.lp",
+      "SHA256": "11ce48dcf73aed7dcc1a74cd60d676ebb5685abc52e2ea3bd695c181e093e191",
+      "bytes": 3614439,
+      "resolution": "fixed archive member",
+      "archive": "complete_arm_006.zip",
+      "archive_SHA": "391dc57a9fb69f3084cfc90206b1f384bffa10b659940a444b3c8e662ed0a67e",
+      "member_index": {
+        "path": "results/unified_exact_round156/artifacts/complete_arm_006.members.json.gz",
+        "SHA256": "ee000c4fdc15fd9e5d69d83af2f131713a778acd6b3ccada20e048784784aa99",
+        "bytes": 17464
+      }
+    },
+    {
+      "role": "N-B35-S",
+      "commit": "751de842a0264a146701de6669b1f3dd6dc764b1",
+      "path": "results/unified_exact_round156/campaign_confirmation/006/raw/R156_006_N-B35-S_S0_Eplus/external/native_1_witness.json",
+      "SHA256": "c47fcfcf11e6ab5fc281a3da110131299e11ff55e6588b8f5c1afb5c72f0688a",
+      "bytes": 1411,
+      "resolution": "fixed archive member",
+      "archive": "complete_arm_006.zip",
+      "archive_SHA": "391dc57a9fb69f3084cfc90206b1f384bffa10b659940a444b3c8e662ed0a67e",
+      "member_index": {
+        "path": "results/unified_exact_round156/artifacts/complete_arm_006.members.json.gz",
+        "SHA256": "ee000c4fdc15fd9e5d69d83af2f131713a778acd6b3ccada20e048784784aa99",
+        "bytes": 17464
+      }
+    },
+    {
+      "role": "N-B35-S",
+      "commit": "e10ffd01de6cf2fa9db71ba5a51f7d9eab8efb05",
+      "path": "results/unified_exact_round137/inputs/N-B35-S.txt",
+      "SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "bytes": 2102,
+      "resolution": "fixed Git input blob",
+      "original_physical_panel": {
+        "id": "N-B35-S",
+        "base_id": "N-B35-S",
+        "V": 35,
+        "M": 3,
+        "source": "CABI",
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 1,
+        "Q_vector": [
+          20,
+          25,
+          30
+        ],
+        "input_path": "results/unified_exact_round137/inputs/N-B35-S.txt",
+        "instance_path": "results/unified_exact_round137/inputs/N-B35-S.txt",
+        "input_sha256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+        "source_identity_SHA": "d4e664c3ecb8c580e95d39541555be9cf592666a515cb854a857fb1d117ff0b8",
+        "known": true,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "cap_seconds": 2400,
+        "gurobi_seed": 0,
+        "Omega": 18.32,
+        "sum_weights": 18.32,
+        "total_initial": 211,
+        "total_target": 246,
+        "total_capacity": 502,
+        "lambda": 0.15,
+        "rho": 2.7479999999999998,
+        "panel_kind": "Round156 preselected paid producer panel",
+        "selection_path": "results/unified_exact_round137/inputs/N-B35-S_selection.json",
+        "module": "B1",
+        "T_seconds": 7200,
+        "reference": {
+          "optimizer_calls": 0,
+          "canonical_sha256": "4f41f6f12829f150a4408c2be2ee48485863f135092e9d4c67ed27a2fbfaaf48",
+          "rows": 13979,
+          "columns": 5450,
+          "nonzeros": 67488,
+          "fingerprint": -934676649
+        },
+        "round137_delete_ab": false,
+        "round154_method": "E",
+        "round138_stock_rlt": false,
+        "round146_gd": false,
+        "round149_penalty_feedback": false,
+        "exposed": true,
+        "round156_method": "Eplus"
+      }
+    },
+    {
+      "role": "R-X35-S-T2",
+      "commit": "751de842a0264a146701de6669b1f3dd6dc764b1",
+      "path": "results/unified_exact_round156/campaign_confirmation/009/raw/R156_009_R-X35-S-T2_S0_Eplus/external/round153_floor/pricing/result.json",
+      "SHA256": "320a84ef0b62840b028d47085f3d38e85ada2811f1b6d532e67a71d1eb4a7f25",
+      "bytes": 59834,
+      "resolution": "fixed archive member",
+      "archive": "complete_arm_009.zip",
+      "archive_SHA": "a08cfd9c09ba795a5155f5ef56435c3fce360cd24cb7d4fde2f063809ebfceda",
+      "member_index": {
+        "path": "results/unified_exact_round156/artifacts/complete_arm_009.members.json.gz",
+        "SHA256": "16b17caac358a90f4744ec01e4f7b007847a1929e614b6a0d4c30b643ba41b86",
+        "bytes": 27076
+      }
+    },
+    {
+      "role": "R-X35-S-T2",
+      "commit": "751de842a0264a146701de6669b1f3dd6dc764b1",
+      "path": "results/unified_exact_round156/campaign_confirmation/009/raw/R156_009_R-X35-S-T2_S0_Eplus/external/models/L0_epoch_0_generation_1.lp",
+      "SHA256": "c7ce593e01494b8d5f531959fbd3bf230748bcc9abfe7a236dcffe81cec6e493",
+      "bytes": 3574225,
+      "resolution": "fixed archive member",
+      "archive": "complete_arm_009.zip",
+      "archive_SHA": "a08cfd9c09ba795a5155f5ef56435c3fce360cd24cb7d4fde2f063809ebfceda",
+      "member_index": {
+        "path": "results/unified_exact_round156/artifacts/complete_arm_009.members.json.gz",
+        "SHA256": "16b17caac358a90f4744ec01e4f7b007847a1929e614b6a0d4c30b643ba41b86",
+        "bytes": 27076
+      }
+    },
+    {
+      "role": "R-X35-S-T2",
+      "commit": "751de842a0264a146701de6669b1f3dd6dc764b1",
+      "path": "results/unified_exact_round156/campaign_confirmation/009/raw/R156_009_R-X35-S-T2_S0_Eplus/external/native_0_witness.json",
+      "SHA256": "05fa35a9a3d515d0764f7d88943bd31b4d5a493c134bea76eb2a63f203bd6a05",
+      "bytes": 1375,
+      "resolution": "fixed archive member",
+      "archive": "complete_arm_009.zip",
+      "archive_SHA": "a08cfd9c09ba795a5155f5ef56435c3fce360cd24cb7d4fde2f063809ebfceda",
+      "member_index": {
+        "path": "results/unified_exact_round156/artifacts/complete_arm_009.members.json.gz",
+        "SHA256": "16b17caac358a90f4744ec01e4f7b007847a1929e614b6a0d4c30b643ba41b86",
+        "bytes": 27076
+      }
+    },
+    {
+      "role": "R-X35-S-T2",
+      "commit": "e10ffd01de6cf2fa9db71ba5a51f7d9eab8efb05",
+      "path": "results/unified_exact_round137/inputs/R-X35-S.txt",
+      "SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "bytes": 2078,
+      "resolution": "fixed Git input blob",
+      "original_physical_panel": {
+        "id": "R-X35-S-T2",
+        "base_id": "R-X35-S",
+        "V": 35,
+        "M": 3,
+        "source": "DIVVY",
+        "inventory": "shortage",
+        "geometry": "compact",
+        "replicate": 2,
+        "Q_vector": [
+          20,
+          25,
+          30
+        ],
+        "input_path": "results/unified_exact_round137/inputs/R-X35-S.txt",
+        "instance_path": "results/unified_exact_round137/inputs/R-X35-S.txt",
+        "input_sha256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+        "source_identity_SHA": "abec7e9a784c78b55c1d1f19bd4e49fd4776f87bf9b56fc48b2f2b107b9f2324",
+        "known": true,
+        "pickup_seconds": 60,
+        "drop_seconds": 60,
+        "cap_seconds": 7200,
+        "gurobi_seed": 0,
+        "Omega": 13.261724000000001,
+        "sum_weights": 13.261724000000001,
+        "total_initial": 146,
+        "total_target": 181,
+        "total_capacity": 365,
+        "lambda": 0.0754049775127276,
+        "rho": 1.0,
+        "panel_kind": "Round156 preselected paid producer panel",
+        "selection_path": "results/unified_exact_round137/inputs/R-X35-S_selection.json",
+        "module": "B2",
+        "T_seconds": 6300,
+        "positive_objective_floor": 0.09774709532486123,
+        "T_design_base": 5490.874759471588,
+        "shortage": 35,
+        "reference": {
+          "optimizer_calls": 0,
+          "canonical_sha256": "f8b830ec4bf1d7762a90094ab13654bb03a67d4cdbb90d774126e08c969906c3",
+          "rows": 13922,
+          "columns": 5412,
+          "nonzeros": 67329,
+          "fingerprint": 436348787
+        },
+        "round137_delete_ab": false,
+        "round154_method": "E",
+        "round138_stock_rlt": false,
+        "round146_gd": false,
+        "round149_penalty_feedback": false,
+        "exposed": true,
+        "round156_method": "Eplus"
+      }
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/inventory_sources.json",
+      "SHA256": "a09d3e5e573fab07d9407ba15897de1a47feb71f1fbe7df80cbe0f65e8a93829",
+      "bytes": 73167,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/inventory_families.json",
+      "SHA256": "a37532afa657fa73fe988a6d4171a8ae2742ab4d23eaa5ad75e72ec87304458b",
+      "bytes": 81003,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/mathematical_analysis.md",
+      "SHA256": "ea907296b1b69b141e8b90d661dceab4e53165d75b616d0f9270d59a7c68d88e",
+      "bytes": 9725,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/final_report.md",
+      "SHA256": "fa8e11d03e33ef12c764729ce1aaeb740e06cb1f84893b359a2470a91da11b46",
+      "bytes": 10749,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/source_manifest.json",
+      "SHA256": "718674948f6b4544d5708455686d18351388ff26c1cbcee09e5a60cbefd16221",
+      "bytes": 33787,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/reuse_index.json",
+      "SHA256": "cb9df2815c0bd983094e3b1f6023099bccd4c586c2daf79746369e17e4aef928",
+      "bytes": 9209,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/finite_counterfactual_plan.md",
+      "SHA256": "06efc55a3858c2302f6e17ea55babd6c95655aa38c2f550577ed060014ada114",
+      "bytes": 2897,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/family_floor/rx35_two_families_v1/new_upper.json",
+      "SHA256": "0d662dc1e7d96ad23914fd4c342f2b11211d3a1cbc53f7c0d4b32838dcb0744e",
+      "resolution": "fixed archive member",
+      "archive": "family_floor.zip",
+      "archive_SHA": "aff727972a26bc252372e271f51ab1e940b64c77fded01339faf58c3b1e17f55",
+      "parts": [
+        {
+          "path": "results/unified_exact_round157/artifacts/family_floor.zip",
+          "SHA256": "aff727972a26bc252372e271f51ab1e940b64c77fded01339faf58c3b1e17f55",
+          "bytes": 75920
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round157/artifacts/family_floor.members.json.gz",
+        "SHA256": "627495ec7a39d0d998ac8b9d862c265f95caf41eaf6e7b46d2396e149dc53133",
+        "bytes": 483
+      }
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/resource/nb35_family4096_v1/solution.json.gz",
+      "SHA256": "b8f74dc4bae33c7774e781e6cf9af4ac4dfb12d8c0c45190ab509553471ab3fb",
+      "resolution": "fixed archive member",
+      "archive": "resource.zip",
+      "archive_SHA": "bd8e39e49e7453cb2746052f00cdd4765f4a66fc867c65d4cdc18ca625e5b023",
+      "parts": [
+        {
+          "path": "results/unified_exact_round157/artifacts/resource.zip",
+          "SHA256": "bd8e39e49e7453cb2746052f00cdd4765f4a66fc867c65d4cdc18ca625e5b023",
+          "bytes": 7548728
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round157/artifacts/resource.members.json.gz",
+        "SHA256": "ccb10ba7ba90e0b03c55c5f873540e35d463b84f1813dd7dee606b0b70eef964",
+        "bytes": 1020
+      }
+    },
+    {
+      "commit": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+      "path": "results/unified_exact_round157/floor/rx35_resource_floor_v2/native.log",
+      "SHA256": "2d684c33480a120c2608d3fb91db9a2b482a12029c89bd11d071389a1497e4aa",
+      "resolution": "fixed archive member",
+      "archive": "floor.zip",
+      "archive_SHA": "ca795e7d6d620864d5b8b4becb37809b6c660540c3fa4d550065b9a420eadd18",
+      "parts": [
+        {
+          "path": "results/unified_exact_round157/artifacts/floor.zip",
+          "SHA256": "ca795e7d6d620864d5b8b4becb37809b6c660540c3fa4d550065b9a420eadd18",
+          "bytes": 3066397
+        }
+      ],
+      "member_index": {
+        "path": "results/unified_exact_round157/artifacts/floor.members.json.gz",
+        "SHA256": "bf0b17571bb160f0698b306ebf9fa06a1c6075f356cd6fe2a12adc17629cb7e5",
+        "bytes": 619
+      }
+    },
+    {
+      "commit": "7f9f0d31ee6963e58c620b029469c90c2d92a6cc",
+      "path": "results/unified_exact_round92/handling_activation_physical_envelope_note.md",
+      "SHA256": "cbb8293919f715b63c6766b01d3045ee2f4f1d2dd1f09ccf0f31ed5a87fb691a",
+      "bytes": 15694,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "7f9f0d31ee6963e58c620b029469c90c2d92a6cc",
+      "path": "results/unified_exact_round92/physical_envelope_independent_static_review.md",
+      "SHA256": "0d7912851bd7aa024cbe5acb26165c657949e1cd6a4010bd6e5b98fea815d7f5",
+      "bytes": 6018,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "7f9f0d31ee6963e58c620b029469c90c2d92a6cc",
+      "path": "scripts/round103_hull.py",
+      "SHA256": "5d14a539eeaf8bd7e2a93065f94b3a9cf4f364df888ca0a30cf68c044921cedd",
+      "bytes": 12652,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "7f9f0d31ee6963e58c620b029469c90c2d92a6cc",
+      "path": "scripts/round103_anchor_analysis.py",
+      "SHA256": "68bef9b277d7ccc685fc775c9b12caa29677718f3e751f722991ca19a66ab104",
+      "bytes": 4235,
+      "resolution": "fixed Git blob"
+    },
+    {
+      "commit": "7f9f0d31ee6963e58c620b029469c90c2d92a6cc",
+      "path": "WORKSPACE_POLICY.md",
+      "SHA256": "457104207419b3bcb05419cd02cef5ea71a85579322c96dd94d8cb5043aa4b9f",
+      "bytes": 1386,
+      "resolution": "fixed Git blob"
+    }
+  ],
+  "fixed_dependency_base": "7f9f0d31ee6963e58c620b029469c90c2d92a6cc",
+  "source_science": "9889473a9b64c749ea8841bac1d38fec8be21d96",
+  "archive_downloads_or_repacking_in_this_metadata_step": 0,
+  "old_producer_executions": 0,
+  "Optimize": 0,
+  "metadata_IO_seconds": 0.23479649983346462,
+  "source_version_note": "R157 corrected report/RESUME bytes on the R158 branch are new errata; original R157 science remains pinned at its original commit and hashes."
+}

@@ -1,5 +1,17 @@
 # Current mainline and Round137 paper branch
 
+The [Round158 resource-value study](round158_research.md) completes a full
+36-hour hard objective level on RX35: UNKNOWN after258972 nodes, with no
+new integer resource upper, original-J lower or route. It excludes the
+preselected10-member RX35 Y3 family and NB35 singleton under free vehicle
+assignment, and saves an exact fractional-ownership point in both bare LP
+expressions. The [five-page supplement](../results/unified_exact_round158/manuscript.pdf)
+keeps those scopes separate and leaves the integer value question open.
+Stable GI-TBC/B remains default; E+ is the enhanced reference and no E+R
+or conditional complete panel is entered. The maintained Round137 formal
+paper is unchanged. The preceding-round summary below records R157's
+then-current NB35 UNKNOWN; Round158 supersedes that singleton status.
+
 The [Round157 physical-realization study](round157_research.md) tests whether
 near-optimal integer inventories can be served by the original fleet.
 Free-assignment resource conditions exclude RX35's complete best-price

@@ -1,0 +1,94 @@
+{
+  "UTC": "2026-11-09T06:45:27.430699+00:00",
+  "dependency_base": "7f9f0d31ee6963e58c620b029469c90c2d92a6cc",
+  "production_source": "092bad58d677cd8bef934d91e11d8abff93cba83",
+  "production_PE": {
+    "path": "E:\\codes\\ExactEBRP-work\\build-cache\\round156\\v1\\ExactEBRP.exe",
+    "SHA256": "e5efe978f33e5c812fc9a0484caaae80696e4197ae27e289b4894d586af9d7e6",
+    "executions": 0,
+    "new_builds": 0
+  },
+  "runtime": {
+    "UTC": "2026-11-07T19:27:04.1026850Z",
+    "Experiment": "level_rx35_raw_quarter_deep_v3",
+    "LauncherPID": 19872,
+    "NativeWorkerPID": 97032,
+    "NativeWorkerParentPID": 19872,
+    "NativeWorkerCreationUTC": "2026-11-07T18:34:17.9914590Z",
+    "NativeWorkerExecutable": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "NativeWorkerExecutableSHA": "3c48fbdcc2ed5c55290e39bef50bd6b1da76f43f3069a4a2624d0b8876a605f5",
+    "LauncherSHA": "2204195cec25879507d958a8b6949add67091244b8b4da9cf3672f993548fa49",
+    "LoadedModules": [
+      {
+        "Name": "python312.dll",
+        "Path": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python312.dll"
+      },
+      {
+        "Name": "python3.DLL",
+        "Path": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python3.DLL"
+      },
+      {
+        "Name": "gurobi130.dll",
+        "Path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+      }
+    ],
+    "GurobiDLLSHA_verified_by_child_binding_at_start": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "UserCPU_seconds": 3144.890625,
+    "KernelCPU_seconds": 15.171875,
+    "WorkingSet_bytes": 145993728,
+    "NativeOptimize_new_calls": 0,
+    "MetadataOnly": true
+  },
+  "current_scripts": {
+    "scripts/round158_checkpoint.py": "3002029b387008fb0432247495ffbf4ec852017f33400c4becf7d507c148e270",
+    "scripts/round158_coefficients.py": "7ef85a442725cb95825d5a9148d1931ba3d2369f9939335420de22c7ad811e48",
+    "scripts/round158_common.py": "940ebd3ae2cd2989ab771da8d9e2cf46d4778f519e66756d12c02ec3c6597b80",
+    "scripts/round158_delivery.py": "de24a94f11c2351844f4dfb0f6be4635d7c1188a2659aa7df1cd085f6bde6873",
+    "scripts/round158_final_review.py": "512cb56a9e8d3966ec1f9f1694f0b2b1d658d066c4fb892d6859bff74716aa8b",
+    "scripts/round158_level.py": "53c33c052127f756ed4ae43944f9b8cfa3dee59e5c7a5fe4f417c64399f269a0",
+    "scripts/round158_lp_witness.py": "2cc26c55237a5e5943dafcca9dce63eb796f0531db645fb5da27dcb346e22d1f",
+    "scripts/round158_paper.py": "396df4925beafe391bc5173a6ae6a5d26d57ff0b6531ab26e45f63a7124cd074",
+    "scripts/round158_physical.py": "f290ede66de2e3d25ace32749319995b1fa1b8c40df1dd74a979ac5d73a32435",
+    "scripts/round158_prepare.py": "2f454d945626c3aa3415c3c98ee7de691515dd862abfc11518388bdaa01b0191",
+    "scripts/round158_primal.py": "29db5e8ed8e9d8965dcac9036a7e00e16d771b9f90f5b89b2e23889c5396e4dc",
+    "scripts/round158_qualify.py": "fa3f9afc90d3e814a96c9dc135d3fa06b1f6a91f6f2b6612929510c013ae7ccd",
+    "scripts/round158_references.py": "9f3e80332d7b684ea0e9447750457a06781feaee905b460fd678b933a2cccd29",
+    "scripts/round158_resource.py": "9e4fb3b8c9990d78d67df26387947efccf5aceda06a2df89f2ce21173a9873ad",
+    "scripts/round158_review.py": "79e82a245abca906ff344e3e82b35586474f0baa5e910624489f09386123b212",
+    "scripts/round158_saved_audit.py": "3dbd1909f2a966bf5a70137563ea06382e6eebc48090ce8ae60994752ba2ab02",
+    "scripts/round158_status.py": "3cb2f43b8ef89611941e8283511b0f6b675585896a79da3c422caa7b1294ee40",
+    "scripts/round158_supervisor.py": "526ea2cf334de829b4e73470bc8fa8a637a623bb40a3bb5f36c4e51850ba8076"
+  },
+  "actual_main_source_snapshot": {
+    "UTC": "2026-11-07T18:34:17.956345+00:00",
+    "files": {
+      "scripts/round158_checkpoint.py": "3002029b387008fb0432247495ffbf4ec852017f33400c4becf7d507c148e270",
+      "scripts/round158_coefficients.py": "7ef85a442725cb95825d5a9148d1931ba3d2369f9939335420de22c7ad811e48",
+      "scripts/round158_common.py": "940ebd3ae2cd2989ab771da8d9e2cf46d4778f519e66756d12c02ec3c6597b80",
+      "scripts/round158_delivery.py": "de24a94f11c2351844f4dfb0f6be4635d7c1188a2659aa7df1cd085f6bde6873",
+      "scripts/round158_level.py": "ebdef25d40632222c5a89a430187d6a9593addd35e17d76235ff2265c2261264",
+      "scripts/round158_paper.py": "396df4925beafe391bc5173a6ae6a5d26d57ff0b6531ab26e45f63a7124cd074",
+      "scripts/round158_physical.py": "f290ede66de2e3d25ace32749319995b1fa1b8c40df1dd74a979ac5d73a32435",
+      "scripts/round158_prepare.py": "2f454d945626c3aa3415c3c98ee7de691515dd862abfc11518388bdaa01b0191",
+      "scripts/round158_primal.py": "29db5e8ed8e9d8965dcac9036a7e00e16d771b9f90f5b89b2e23889c5396e4dc",
+      "scripts/round158_qualify.py": "fa3f9afc90d3e814a96c9dc135d3fa06b1f6a91f6f2b6612929510c013ae7ccd",
+      "scripts/round158_resource.py": "9e4fb3b8c9990d78d67df26387947efccf5aceda06a2df89f2ce21173a9873ad",
+      "scripts/round158_review.py": "79e82a245abca906ff344e3e82b35586474f0baa5e910624489f09386123b212",
+      "scripts/round158_saved_audit.py": "3dbd1909f2a966bf5a70137563ea06382e6eebc48090ce8ae60994752ba2ab02",
+      "scripts/round158_status.py": "6b2534c4c73b53e38b8c982ef75c2e9b7f64ae0f78517d955eeb215c1ca63a11",
+      "scripts/round158_supervisor.py": "526ea2cf334de829b4e73470bc8fa8a637a623bb40a3bb5f36c4e51850ba8076"
+    },
+    "dependency_base": "7f9f0d31ee6963e58c620b029469c90c2d92a6cc"
+  },
+  "actual_main_script_SHA": "ebdef25d40632222c5a89a430187d6a9593addd35e17d76235ff2265c2261264",
+  "current_level_script_SHA": "53c33c052127f756ed4ae43944f9b8cfa3dee59e5c7a5fe4f417c64399f269a0",
+  "late_assertion_note": "Future-call pre-Optimize hash assertion was added after launch; actual launched bytes and manual/closed-matrix hash admission are authoritative. The late assertion is not claimed executed by the completed main.",
+  "inherited_tracked_changes": [
+    ".gitattributes",
+    ".gitignore",
+    "results/unified_exact_round157/RESUME.md",
+    "results/unified_exact_round157/final_report.md"
+  ],
+  "production_CPP_or_configuration_changes": false,
+  "protected_dirty_files": 3
+}
