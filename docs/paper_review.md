@@ -1,5 +1,13 @@
 # Advisor/coauthor review packet
 
+The [Round159 joint-resource supplement](../results/unified_exact_round159/manuscript.pdf)
+adds two qualified resource uppers, a same-block owner-necessity contrast,
+and exact fixed-combination tour/prefix decomposition. The free-owner query
+remains UNKNOWN, with no physical/global lower benefit or complete E+R arm.
+The [report](../results/unified_exact_round159/final_report.md) retains all
+scope, language, history and cost limits. This thematic addition does not
+change the stable GI-TBC formal entry or claim a new general DP theory.
+
 The new [resource-coupling supplement](../results/unified_exact_round158/manuscript.pdf)
 separates domain contraction from optimum improvement and an integer
 resource upper from a bare-LP witness. Its full36-hour hard-level call is

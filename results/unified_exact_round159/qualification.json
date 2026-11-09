@@ -1,0 +1,99 @@
+{
+  "UTC": "2026-11-09T19:46:48.310531+00:00",
+  "PASS": true,
+  "Optimize": 0,
+  "facts": [
+    {
+      "role": "R-X35-S-T2",
+      "mode": "baseline",
+      "model_SHA": "5c3753125715db646602ad35116f0b643a883cbea0dc7f375261768ae4c6d655",
+      "rows": 14889,
+      "columns": 2673,
+      "all_RN_rows_preserved": true,
+      "objective_mapping_error": -2.5777133557727402e-17,
+      "full_start": {
+        "constraints": 2.42861286636753e-17,
+        "bounds": 0.0,
+        "objective": -0.23204097780351174
+      },
+      "independent_lift": {
+        "constraints": 4.649058915617843e-16,
+        "bounds": 0.0,
+        "objective": -0.23204097780351174
+      },
+      "release_and_owner_bounds_checked": true,
+      "conditional_budget_rows_checked": 12261,
+      "duplicate_owner_rejected": true
+    },
+    {
+      "role": "R-X35-S-T2",
+      "mode": "joint",
+      "model_SHA": "dc0caff4374345a241e166708e6fff638f9192a759a52e47cc45ffa9a000b0a1",
+      "rows": 14886,
+      "columns": 2673,
+      "all_RN_rows_preserved": true,
+      "objective_mapping_error": -2.5777133557727402e-17,
+      "full_start": {
+        "constraints": 2.42861286636753e-17,
+        "bounds": 0.0,
+        "objective": -0.23204097780351174
+      },
+      "independent_lift": {
+        "constraints": 4.649058915617843e-16,
+        "bounds": 0.0,
+        "objective": -0.23204097780351174
+      },
+      "release_and_owner_bounds_checked": true,
+      "conditional_budget_rows_checked": 12261,
+      "duplicate_owner_rejected": true
+    },
+    {
+      "role": "N-B35-S",
+      "mode": "baseline",
+      "model_SHA": "be7374220b7c01ee25866d4deb2de1c2e9e2a6fbcc2b3aa4aa12db5ff68e5687",
+      "rows": 17304,
+      "columns": 3358,
+      "all_RN_rows_preserved": true,
+      "objective_mapping_error": -1.285528603754341e-16,
+      "full_start": {
+        "constraints": 6.938893903907228e-18,
+        "bounds": 0.0,
+        "objective": -1.045958496737122
+      },
+      "independent_lift": {
+        "constraints": 5.551115123125783e-17,
+        "bounds": 0.0,
+        "objective": -1.045958496737122
+      },
+      "release_and_owner_bounds_checked": true,
+      "conditional_budget_rows_checked": 14265,
+      "duplicate_owner_rejected": true
+    },
+    {
+      "role": "N-B35-S",
+      "mode": "joint",
+      "model_SHA": "34154fa425167d2140d1f84617bb528ffe29cf4baeea3c028c2bb0ab625f0aae",
+      "rows": 17301,
+      "columns": 3358,
+      "all_RN_rows_preserved": true,
+      "objective_mapping_error": -1.285528603754341e-16,
+      "full_start": {
+        "constraints": 6.938893903907228e-18,
+        "bounds": 0.0,
+        "objective": -1.045958496737122
+      },
+      "independent_lift": {
+        "constraints": 5.551115123125783e-17,
+        "bounds": 0.0,
+        "objective": -1.045958496737122
+      },
+      "release_and_owner_bounds_checked": true,
+      "conditional_budget_rows_checked": 14265,
+      "duplicate_owner_rejected": true
+    }
+  ],
+  "review_identity": "same agent; separate Python exact arithmetic/saved C++ model reader",
+  "inherited_boundary_qualification": "R158 actual_raw_implication and R92 envelope; no nominal-floor substitution",
+  "global_lower_transport": false,
+  "not_an_online_production_admission": true
+}

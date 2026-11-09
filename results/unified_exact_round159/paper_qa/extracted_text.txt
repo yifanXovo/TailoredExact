@@ -1,0 +1,192 @@
+    Joint Quantities, Vehicle Ownership, and Physical Realization
+                   A bounded resource study accompanying stable GI-TBC
+
+
+1    From inventory prices to physical fleets
+The stable Gini-interval tailored branch-and-cut method (GI-TBC/B, S2/ms2) retains complete
+improving-domain coverage, valid cutoffs and a scope-aware proof ledger. E+ retains RN16384 and
+the inherited proof-only consumer. The present study is an isolated primal resource experiment.
+Neither a resource witness nor an inner-domain bound is silently consumed by the complete exact
+engine.                                                                 P
+   With the original binary64 input coefficients, write ri = ci Yi , S = i ri , and, for S > 0,
+                     P
+                       i<j |ri − rj |
+                                                X
+            G(Y ) =                   , H(Y ) =    ωi |ri − 1|, J(Y ) = G(Y ) + H(Y ).
+                          nS
+                                                    i
+
+The coefficient ωi includes λ. The repaired independent zero branch is retained; the two studied
+RN scopes have a qualified positive stock denominator and γL = 0. All comparisons bind the same
+inventory supports, original improvement scope, weights and numerical contract.
+    Let DI denote the inherited integer inventory relaxation. For RX35, DF removes precisely
+the original 26 vectors excluded by the R157 necessary-resource certificates; for NB35, DF = DI .
+Let DR (T ) project unique legal station service, eligible integer ownership, per-car balances, return
+capacity, complete handling and necessary tours of at most three stations. Let DP (T ) be the
+physical fleet projection. In the inherited qualified contract,
+
+                      DP (T ) ⊆ DR (T ) ⊆ DF ⊆ DI ,         FI ≤ FF ≤ FR ≤ FP .
+
+The middle inclusion uses the R157 resource exclusions and R158’s actual C++ duration/budget
+qualification, rather than physical impossibility alone. Later finite exclusions do not redefine DF .
+   An independently verified integer resource point gives UR and hence
+                                                                   UR − LI
+                            0 ≤ FR − FI ≤ UR − LI ,         ηR =              .
+                                                                   UPref − LI
+
+The reference UPref is held fixed for each role. This scalar interval indicator is not realized complete-
+algorithm gap reduction. If DR ⊆ DC ⊆ DI , then FC ≤ FR ≤ UR . This statement does not cap the
+joint benefit of cuts in a full routing relaxation Q: the resource point may have no compatible full
+lift into Q. Likewise, UP − UR is a witness-price difference, not a lower bound on FP − FR .
+
+
+2    A bounded simultaneous inner domain
+For vehicle k, let Pk and Dk be cumulative pickups and deliveries. Empty departure gives return
+Rk = Pk − Dk , with 0 ≤ Rk ≤ Qk . Including return unloading,
+
+                                  tp Pk + td (Dk + Rk ) = (tp + td )Pk .
+
+                                                    1
+Cumulative Pk may exceed Qk . Only each single station operation and the return are bounded by
+vehicle capacity in the resource model; physical prefix loads are checked separately.
+    The short fixed-owner reference optimizes original J over full supported quantities on the initial
+disjoint owner sets Ak . It allows zero service and direction changes, while initially unassigned
+stations retain Yi = bi . A full-Ak three-stop budget remains conservative after zeroing a station. This
+is an inner restriction, not exhaustive fixed-owner quantity search. The original RN centering/scale
+and one-sided envelope are retained.
+    The joint mechanism releases all supported quantities and eligible owners on eight stations
+at once. Every outside quantity and nonzero owner remains fixed, with its full pickup, delivery
+and return contribution included. Conditional active-subset budgets are rebuilt for every vehicle.
+Activation, zero service, direction changes, cross-car ownership and unequal-net quantity/ownership
+compensation are permitted without inheriting an uncovered old active-set budget.
+
+    1. Score station i by its best unconstrained single-stock reduction in true J, multiplied by one
+       plus current owner handling pressure.
+
+    2. Choose the step-ranked anchor, then seven stations by that score plus anchor-weighted
+       geometric proximity; break ties by station index.
+
+    3. Solve the joint original-J subproblem with a complete feasible Start, Seed 0, Threads 1 and at
+       most 512 nodes. Retain strict true-J improvements and read them back independently in the
+       complete original resource domain.
+
+    4. Stop after 12 blocks or the ordinary whole-method deadline. No nondecreasing intermediate
+       move or time-triggered algorithm switch is used.
+
+    Both roles use the same rule and capacities. The short references use 2048 nodes each. The
+declared domain can coordinate eight changes beyond one single-stock change, owner move/swap or
+pair transfer. This is not a reachability theorem against every sequence of historical moves. Trace
+evidence distinguishes allowed freedoms from those actually exercised. Every subproblem lies inside
+DR . Its feasible point can give a global resource upper; its bound, optimum or failure remains local.
+None enters the global proof ledger.
+    The new repeated model construction, block selection, callback and completion are C++. The
+standalone tool loads an explicitly exported, unchanged qualified RN objective;
+                                                                          P     this offline boundary
+is not represented as a fully integrated production candidate. With s = i |Yi |, the new model has
+O(M s + n2 ) columns and O(M n3 + s + n2 ) rows. A node limit does not bound presolve time or
+establish polynomial complexity.
+
+
+3     Resource improvements and physical obstructions
+                 Role             UPref   Fixed-owner UR        Joint UR           ηR
+                 RX35    .2996694007         .2945369423    .2911853932     .86663993
+                 NB35    .4502915033         .4258556867    .4235630180     .50808063
+
+The RX35 fixed-owner start is the inherited review-side resource witness. Its short reference uses
+59.078 seconds without a new accepted point. NB35’s reference uses 17.581 seconds and accepts
+seven quantity improvements. The 12-block joint calls use 4.765/5.879 outer seconds and 31/246
+total nodes, with two/four accepted improvements, respectively. Every block returns normally with
+
+
+                                                   2
+Native OPTIMAL; this numerical status is not an unguarded exact original-J optimum. Original
+fractions and complete raw-resource lifts qualify the reported uppers independently.
+    RX35 improves by .0033515491 beyond its short fixed-owner reference; NB35 improves by
+.0022926687. Both trajectories contain nonzero quantity-net changes on old owners compensated by
+ownership changes. NB35 also activates station 26. No accepted zero-service or direction-flip event
+is observed, although both are open in the declared domain.
+    One post-trace same-block RX35 contrast fixes owner without adding a full-A budget. It
+finishes at 21 nodes in 1.020 outer seconds. Its guarded, transported restricted original-J lower
+is .2945344157494531, while the joint event attains .2922946074975457 by changing quantities at
+stations 19/35 and moving ownership of station 25. Owner freedom is necessary for that improvement
+in that block and outside state. This does not close all fixed-owner quantities or prove impossibility
+under every historical move sequence.
+
+                     Role    Car   Pk   Unloaded tour   Prefix extra   Total time
+                     RX35    0     13        5335.219         0.000     6895.219
+                             1     16        3986.951       241.486     6148.436
+                             2     25        3412.088         0.000     6412.088
+                     NB35    0     32        3470.606         0.679     7311.285
+                             1     29        4052.116       482.803     8014.919
+                             2     14        5740.652        74.377     7495.029
+
+These are complete fixed-Y/owner DP minima at the joint best points; T = 6300/7200 for
+RX35/NB35. Every car has Pk = Dk and zero return. The RX35 car 2 obstruction matches
+the inherited review-side explanation. The new car 0 active set yields a pure-tour pickup budget of
+8 instead of the 13 used by the resource point. RX35 car 1 has a genuine prefix penalty but still
+fits. NB35 car 1 is over time even without prefixes; prefixes add 482.803 seconds and reduce its
+fixed-combination pickup budget from 26 to 22. All three NB35 joint cars fail the physical horizon.
+These conclusions remain fixed-combination statements.                            P
+     For fixed inventory and ownership, the load after a visited subset S is i∈S (bi − Yi ). The
+classical (S, last) dynamic program therefore covers every elementary order while retaining only
+0 ≤ load(S) ≤ Qk . A second, unloaded recurrence isolates the tour contribution. Both use exact
+additions of the supplied dyadic travel coefficients at scale 253 in 128-bit integers, with a common
+capacity of 16777216 subset/last slots. An exhausted complete recurrence gives a fixed-combination
+minimum; insufficient capacity gives UNKNOWN. Work is O(m2 2m ) and storage O(m2m ).
+     These are inherited classical tools, not new theory. Their precision is bound to the supplied
+discrete coefficients and acceptance contract, not all symbolic Euclidean calculations. A loaded-tour
+minimum at an old Y is not transported as a necessary lower for variable new quantities. No new
+variable-Y tour cut or complete-Q extension ceiling is claimed.
+
+
+4    Evidence, cost and the stopping boundary
+The fixed-owner RX35 review-side point is an inherited control, not a new R159 result. Its car 2
+already needs 6412.088151837445 seconds at T = 6300; its identical fixed-combination problem is
+not sent to another heavy oracle. The new joint point changes the physical structure and receives
+its own finite completion. Fixed-owner failures exclude only their actual inventory/ownership
+combinations. A fully free-owner fixed-Y oracle is reported in its separately recorded scope; an
+UNKNOWN excludes nothing.
+
+
+                                                  3
+    Original-J fractions, all accepted quantities/owners, per-car balances, nominal-T resource times,
+active sets, raw full-resource lifts, DP routes and exact costs are retained. Qualification in-
+cludes actual saved model and Start readback, original RN preservation, objective transport,
+eligibility and outside bounds, all conditional budgets, duplicate-owner rejection, brute-force prefix-
+load/empty/over-time fixtures and capacity UNKNOWN. All reviews are separate routines by the
+same agent; no independent-person review is claimed.
+    The sole deeper query fixes RX35’s new Y and releases every eligible owner, route order and
+load variable. Assignment is only a Start, confirmed by actual bounds. It returns normally at 8192
+nodes in 1329.576 outer seconds (Native 1328.935 seconds, Work 2462.051), with zero solutions and
+status NODE LIMIT/UNKNOWN. It excludes neither the fixed Y nor any objective level. The
+constant-zero feasibility bound is not an original-J lower. No E2 structure branch or E3 whole-level
+time query is entered.
+    All scientific outer calls, including qualification, failures, DP, independent readback and the final
+audit, cost 1438.3466242998838 seconds against 129600 seconds of capacity. Nested Runtime/Work
+is not added twice. The four failed metadata/readback launches remain with source bytes and
+closed receipts; no Native optimization failure is hidden. The single compile costs 5.8637514999
+seconds separately; writing/render/public I/O has separate receipts. The 36-hour capacity is not a
+minimum expenditure or a calendar deadline.
+    No physical incumbent or global original-J lower improves. The two physical reference uppers
+and inherited inventory lowers remain unchanged. Consequently F is not entered: there is no
+integrated E+R candidate or empty complete panel, no injected offline assignment, and no formal
+performance or C++-versus-Python speedup claim. The cheap resource construction is retained as
+a bounded component, with its tour/prefix conversion obstacles and local owner-necessity evidence.
+A future online candidate needs a useful qualified own-state route/proof benefit and full self-paid
+integration. Another unchanged UNKNOWN window or parameter grid is not justified by unused
+capacity.
+    R76/R83 already provide activation, quantity closure and equal-net block exchange; R96 already
+provides full fixed-route quantities and reorder diagnostics. R103 establishes per-car resource
+hulls. R105–107 retain negative complete evidence for master/oracle/conflict architectures. R157
+already uses original-J resource optimization and free-fleet completion; R158 already jointly perturbs
+inventory and ownership and records a 36-hour quarter-level UNKNOWN. Handling identities,
+original-J modeling, owner exchange and subset DP are not new contributions here. The present
+evidence concerns one finite simultaneous inner domain, two same-rule sources, and explicit resource-
+to-physical obstructions. It does not establish universal novelty, distributional generalization or a
+complete-method speedup. Stable GI-TBC/B remains the formal entry.
+
+
+
+
+                                                   4
+

@@ -1,0 +1,58 @@
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+Role & $U_P^{\rm ref}$ & Fixed-owner $U_R$ & Joint $U_R$ & $\eta_R$\\
+\midrule
+RX35 & .2996694007 & .2945369423 & .2911853932 & .86663993\\
+NB35 & .4502915033 & .4258556867 & .4235630180 & .50808063\\
+\bottomrule
+\end{tabular}
+\end{center}
+The RX35 fixed-owner start is the inherited review-side resource witness.
+Its short reference uses 59.078 seconds without a new accepted point. NB35's
+reference uses 17.581 seconds and accepts seven quantity improvements.
+The 12-block joint calls use 4.765/5.879 outer seconds and 31/246 total nodes,
+with two/four accepted improvements, respectively. Every block returns
+normally with Native OPTIMAL; this numerical status is not an unguarded
+exact original-J optimum. Original fractions and complete raw-resource
+lifts qualify the reported uppers independently.
+
+RX35 improves by .0033515491 beyond its short fixed-owner reference;
+NB35 improves by .0022926687. Both trajectories contain nonzero quantity-net
+changes on old owners compensated by ownership changes. NB35 also
+activates station 26. No accepted zero-service or direction-flip event is
+observed, although both are open in the declared domain.
+
+One post-trace same-block RX35 contrast fixes owner without adding a full-A
+budget. It finishes at 21 nodes in 1.020 outer seconds. Its guarded,
+transported restricted original-J lower is .2945344157494531, while the
+joint event attains .2922946074975457 by changing quantities at stations 19/35
+and moving ownership of station 25. Owner freedom is necessary for that
+improvement in that block and outside state. This does not close all
+fixed-owner quantities or prove impossibility under every historical move
+sequence.
+
+\begin{center}
+\small
+\begin{tabular}{llrrrr}
+\toprule
+Role & Car & $P_k$ & Unloaded tour & Prefix extra & Total time\\
+\midrule
+RX35 &0&13&5335.219&0.000&6895.219\\
+     &1&16&3986.951&241.486&6148.436\\
+     &2&25&3412.088&0.000&6412.088\\
+NB35 &0&32&3470.606&0.679&7311.285\\
+     &1&29&4052.116&482.803&8014.919\\
+     &2&14&5740.652&74.377&7495.029\\
+\bottomrule
+\end{tabular}
+\end{center}
+These are complete fixed-Y/owner DP minima at the joint best points;
+$T=6300/7200$ for RX35/NB35. Every car has $P_k=D_k$ and zero return.
+The RX35 car 2 obstruction matches the inherited review-side explanation.
+The new car 0 active set yields a pure-tour pickup budget of 8 instead of
+the 13 used by the resource point. RX35 car 1 has a genuine prefix penalty
+but still fits. NB35 car 1 is over time even without prefixes; prefixes add
+482.803 seconds and reduce its fixed-combination pickup budget from 26 to 22.
+All three NB35 joint cars fail the physical horizon. These conclusions
+remain fixed-combination statements.

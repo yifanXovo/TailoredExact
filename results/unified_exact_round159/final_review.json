@@ -1,0 +1,100 @@
+{
+  "UTC": "2026-11-09T20:18:10.006152+00:00",
+  "PASS": true,
+  "Optimize": 0,
+  "facts": [
+    {
+      "label": "baseline_rx",
+      "J": 0.29453694232737326,
+      "J_exact": "53479593056830315041420782091893493405343450472395547/181571766971725310832917143964057992450020736269025280",
+      "full_raw_rows": 24153,
+      "columns": 2673,
+      "residual": {
+        "constraints": 4.649058915617843e-16,
+        "bounds": 0.0,
+        "objective": 0.0
+      },
+      "integer": 0.0,
+      "model_SHA": "2c111daba7359ed41e432337d144d31cd1334d7b345b5fbf2d55761ac2730492",
+      "point_SHA": "f22c505246c6e26e09757ea19d859b6f4df2674f07f6717225e3a5506f817b77"
+    },
+    {
+      "label": "joint_rx",
+      "J": 0.29118539321285497,
+      "J_exact": "26864495653386365554592574198903972611671249519280407/92259077136292205594353964303150802908537022442373120",
+      "full_raw_rows": 24153,
+      "columns": 2673,
+      "residual": {
+        "constraints": 1.734723475976807e-16,
+        "bounds": 0.0,
+        "objective": 0.0
+      },
+      "integer": 0.0,
+      "model_SHA": "2c111daba7359ed41e432337d144d31cd1334d7b345b5fbf2d55761ac2730492",
+      "point_SHA": "d062a05233f26d5f5f0ea63eea14bb111d75b699689939869cd0f2e34b6704d5"
+    },
+    {
+      "label": "baseline_nb",
+      "J": 0.425855686698408,
+      "J_exact": "254076389951562208654970273583115291685024904653847/596625565626178203786337480855673214668481121746944",
+      "full_raw_rows": 24564,
+      "columns": 3358,
+      "residual": {
+        "constraints": 7.355227538141662e-16,
+        "bounds": 0.0,
+        "objective": 0.0
+      },
+      "integer": 0.0,
+      "model_SHA": "5cc4a72101b303e50fb6ac427ae312cd4952bccfdc2fa803c6941052ed746369",
+      "point_SHA": "00beee2931bc033c3ce0d62bf406136007510a534524d3af6deb72a74b1a73cb"
+    },
+    {
+      "label": "joint_nb",
+      "J": 0.4235630179611202,
+      "J_exact": "20412298035537861946010333139974496547822819904323511/48191879767490821619867066017057374979159268094115840",
+      "full_raw_rows": 24564,
+      "columns": 3358,
+      "residual": {
+        "constraints": 1.5612511283791264e-16,
+        "bounds": 0.0,
+        "objective": 0.0
+      },
+      "integer": 0.0,
+      "model_SHA": "5cc4a72101b303e50fb6ac427ae312cd4952bccfdc2fa803c6941052ed746369",
+      "point_SHA": "58c5ca91c9f670016e2a09fdf69e07ab83cfeb00b2174959ba677e9839130f19"
+    }
+  ],
+  "E1": {
+    "classification": "UNKNOWN",
+    "rows": 6700,
+    "columns": 6563,
+    "all_eligible_owners_free": true,
+    "inventory_scope": "one saved Y"
+  },
+  "protected_dirty_files": 3,
+  "PE_SHA": "9052e2c3d0403d59ae5c4d5bc3ef70d36e298ea61b46381175a5f1e193da256a",
+  "DLL": {
+    "path": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "production_sha256": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+    "loaded_engine_modules": [
+      "D:\\gurobi1302\\win64\\bin\\gurobi130.dll"
+    ]
+  },
+  "review_identity": "same agent, separate saved-data/model/exact-arithmetic routine",
+  "independent_person_or_agent_review": false,
+  "global_proof_ledger_changes": 0,
+  "stable_production_changes": 0,
+  "scopes": [
+    "resource upper",
+    "fixed-combination physical failure",
+    "free-owner query status"
+  ],
+  "rejected_claims": [
+    "full-Q ceiling",
+    "global resource lower from restricted bound",
+    "all-owner exclusion from DP",
+    "complete performance gain",
+    "new DP/handling theory"
+  ]
+}

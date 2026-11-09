@@ -1,0 +1,41 @@
+{
+  "UTC": "2026-11-09T19:44:42.214813+00:00",
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\g++.exe",
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-IE:\\codes\\ExactEBRP-work\\worktrees\\round159\\include",
+    "-ID:/gurobi1302/win64/include",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round159\\src\\Round159JointResource.cpp",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round159\\src\\round159_research_main.cpp",
+    "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "-o",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round159\\Round159Research.exe"
+  ],
+  "compiler": "D:\\msys64\\ucrt64\\bin\\g++.exe",
+  "compiler_SHA": "8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1",
+  "flags": [
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-IE:\\codes\\ExactEBRP-work\\worktrees\\round159\\include",
+    "-ID:/gurobi1302/win64/include"
+  ],
+  "PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round159\\Round159Research.exe",
+  "PE_SHA": "9052e2c3d0403d59ae5c4d5bc3ef70d36e298ea61b46381175a5f1e193da256a",
+  "DLL": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "source_base": "d58cbcca6d2c656a2af09d701bcd9ca0c7a07e85",
+  "sources": {
+    "src\\Round159JointResource.cpp": "2b227cff878b8b9ab9ee8e11ffe1f2559eb93c2ae52465c4d2205c31c1a03d89",
+    "include\\Round159JointResource.hpp": "8f5631a4ebde6e8b27b2c5911d50fa8bd4947ba96a811d52ed7c35e376c1a67f",
+    "src\\round159_research_main.cpp": "9f3833043d2caf269b3b8a3e6fb7929f61f449d09db601c7ec66ef56794ad5d4"
+  },
+  "standalone_research_only": true,
+  "production_PE_executions": 0,
+  "production_source": "092bad58d677cd8bef934d91e11d8abff93cba83",
+  "historical_production_PE_SHA": "e5efe978f33e5c812fc9a0484caaae80696e4197ae27e289b4894d586af9d7e6"
+}
