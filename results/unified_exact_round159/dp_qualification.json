@@ -1,0 +1,65 @@
+{
+  "UTC": "2026-11-09T19:48:55.051332+00:00",
+  "PASS": true,
+  "facts": [
+    {
+      "label": "prefix",
+      "P": 4,
+      "Q": 3,
+      "travel_exact": "20",
+      "unloaded_exact": "20",
+      "brute_force_orders": 24,
+      "classification": "PHYSICAL_FEAS",
+      "chosen_route": [
+        0,
+        1,
+        4,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "label": "tour_over_T",
+      "P": 3,
+      "Q": 3,
+      "travel_exact": "6",
+      "unloaded_exact": "6",
+      "brute_force_orders": 120,
+      "classification": "FIXED_COMBINATION_INFEAS",
+      "chosen_route": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ]
+    },
+    {
+      "label": "empty",
+      "P": 0,
+      "Q": 1,
+      "travel_exact": "0",
+      "unloaded_exact": "0",
+      "brute_force_orders": 1,
+      "classification": "PHYSICAL_FEAS",
+      "chosen_route": [
+        0,
+        0
+      ]
+    },
+    {
+      "label": "capacity",
+      "P": 21,
+      "Q": 21,
+      "classification": "UNKNOWN",
+      "slots_required": 44040192
+    }
+  ],
+  "PE_SHA": "9052e2c3d0403d59ae5c4d5bc3ef70d36e298ea61b46381175a5f1e193da256a",
+  "recurrence": "cost[S,j] minimizes exact dyadic travel for every admissible load(S); predecessor removes j",
+  "not_a_new_theoretical_contribution": true,
+  "Optimize": 0
+}

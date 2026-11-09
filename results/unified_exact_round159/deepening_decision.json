@@ -1,0 +1,14 @@
+{
+  "stage": "E1",
+  "decision": "One fixed-Y free-owner physical query on the RX35 joint best point",
+  "Y_source": "runs/joint_rx/best.json",
+  "decision_to_change": "Can the improved resource inventory become a real route fleet after changing ownership? Fixed-owner failure alone does not answer this.",
+  "evidence": "J=.29118539321285497 improves the short fixed-owner baseline .29453694232737326. Its fixed combination is fully DP-infeasible: cars0/2 need6895.218758077511/6412.088151837445 seconds at T6300. Different ownership is the remaining specific open freedom.",
+  "capacity": {"outer_reservation_seconds": 1900, "Native_seconds": 1800, "nodes": 8192, "SolutionLimit": 1, "Seed": 0, "Threads": 1},
+  "scope": "Only Y fixed; all eligible owners, elementary orders and prefix loads free. Assignment is a Start only. Original accepted physical horizon covered by guarded lower-envelope model; found routes checked at raw original T.",
+  "save_stop": "Normal NodeLimit/TimeLimit/SolutionLimit return, durable integer callback, saved model/solution/witness. External watchdog only a final lifecycle guard.",
+  "E2": "Not entered: no new generally valid structure beyond inherited tour/handling/prefix information has been established.",
+  "E3": "Not entered: no different whole-level information source justifies another time-level call.",
+  "no_automatic_second_long_query": true,
+  "F": "Decide after this query using actual physical/proof benefit and the demonstrated ability to construct it from own state in a qualified C++ candidate."
+}

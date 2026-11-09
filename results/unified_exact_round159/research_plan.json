@@ -1,0 +1,28 @@
+{
+  "schema": "round159-frozen-joint-block-v1",
+  "science_capacity_seconds": 129600,
+  "base": "d58cbcca6d2c656a2af09d701bcd9ca0c7a07e85",
+  "stable_GI_TBC_unchanged": true,
+  "Eplus_reference": "RN16384 plus R154 proof-only consumer",
+  "baseline": {"nodes": 2048, "quantity": "all original supports on initial owner sets", "unassigned": "Y=b", "fixed_A_budget": "conservative inner restriction"},
+  "joint": {
+    "block_size": 8,
+    "blocks": 12,
+    "nodes_per_block": 512,
+    "Seed": 0,
+    "Threads": 1,
+    "MIPFocus": 1,
+    "scoring": "gain_i = J(Y)-min_y J(Y with only i changed), ignoring feasibility for scoring; score_i=gain_i*(1+120*P_owner/max(1,T-L3_owner)); absent owner pressure zero",
+    "anchor": "rank step modulo n in freshly descending score, station index breaks ties",
+    "remaining_members": "descending score_j+gain_anchor*(1-distance(anchor,j)/max(1,max_station_distance_from_anchor)); station index breaks ties",
+    "released": "all supported stock and all eligible owners on the block, including activation, zero, direction change and non-equal net transfers",
+    "fixed": "every outside Y and nonzero service owner; complete outside P/D/return retained",
+    "acceptance": "strict original-J decrease >1e-10 plus complete rounded resource predicate; independent exact original-T full D_R readback before reporting U_R",
+    "termination": "12 blocks or ordinary whole-method deadline, no time-triggered algorithm switch; no nondecreasing move",
+    "scope": "bounded inner domains, no global lower/proof consumption"
+  },
+  "completion": {"method": "same subset,last DP for both load-constrained and unloaded tours", "slots": 16777216, "scale": 9007199254740992, "capacity_exhaustion": "UNKNOWN", "orders": "all elementary visit orders with fixed Y/owner"},
+  "predeclared_execution_order": ["both model/start admissions", "RX baseline", "RX baseline physical check", "NB baseline", "NB baseline physical check", "RX joint", "RX selected physical check", "NB joint", "NB selected physical check"],
+  "deepening": "choose at most one E path only after saved D evidence; record object, decision and capacity before execution",
+  "F": "conditional on useful physical/global proof benefit, plausible self-paid cost, and qualified integrated C++ candidate; no offline-witness injection"
+}

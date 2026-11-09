@@ -1,5 +1,13 @@
 # Current mainline and Round137 paper branch
 
+The [Round159 continuation](round159_research.md) improves qualified integer
+resource witnesses with a uniform C++ quantity/owner block. Complete local
+DP explains full-tour/handling and prefix-load failures; the free-owner
+fixed-Y query is UNKNOWN. No physical/global proof improvement or complete
+candidate is claimed. Its [paper supplement](../results/unified_exact_round159/manuscript.pdf)
+extends the inventory/resource/physical distinction while stable GI-TBC/B,
+E+ and the maintained formal paper retain their established contracts.
+
 The [Round158 resource-value study](round158_research.md) completes a full
 36-hour hard objective level on RX35: UNKNOWN after258972 nodes, with no
 new integer resource upper, original-J lower or route. It excludes the

@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\newtheorem{proposition}{Proposition}
+\title{Joint Quantities, Vehicle Ownership, and Physical Realization}
+\author{A bounded resource study accompanying stable GI-TBC}
+\date{}
+\begin{document}
+\maketitle
+
+\section{From inventory prices to physical fleets}
+The stable Gini-interval tailored branch-and-cut method (GI-TBC/B, S2/ms2)
+retains complete improving-domain coverage, valid cutoffs and a scope-aware
+proof ledger. E+ retains RN16384 and the inherited proof-only consumer.
+The present study is an isolated primal resource experiment. Neither a
+resource witness nor an inner-domain bound is silently consumed by the
+complete exact engine.
+
+With the original binary64 input coefficients, write $r_i=c_iY_i$,
+$S=\sum_i r_i$, and, for $S>0$,
+\[
+ G(Y)=\frac{\sum_{i<j}|r_i-r_j|}{nS},\quad
+ H(Y)=\sum_i\omega_i|r_i-1|,\quad J(Y)=G(Y)+H(Y).
+\]
+The coefficient $\omega_i$ includes $\lambda$. The repaired independent zero
+branch is retained; the two studied RN scopes have a qualified positive
+stock denominator and $\gamma_L=0$. All comparisons bind the same inventory
+supports, original improvement scope, weights and numerical contract.
+
+Let $D_I$ denote the inherited integer inventory relaxation. For RX35,
+$D_F$ removes precisely the original 26 vectors excluded by the R157
+necessary-resource certificates; for NB35, $D_F=D_I$. Let $D_R(T)$ project
+unique legal station service, eligible integer ownership, per-car balances,
+return capacity, complete handling and necessary tours of at most three
+stations. Let $D_P(T)$ be the physical fleet projection. In the inherited
+qualified contract,
+\[
+ D_P(T)\subseteq D_R(T)\subseteq D_F\subseteq D_I,
+ \qquad F_I\le F_F\le F_R\le F_P.
+\]
+The middle inclusion uses the R157 resource exclusions and R158's actual
+C++ duration/budget qualification, rather than physical impossibility alone.
+Later finite exclusions do not redefine $D_F$.
+
+An independently verified integer resource point gives $U_R$ and hence
+\[
+ 0\le F_R-F_I\le U_R-L_I,\qquad
+ \eta_R=\frac{U_R-L_I}{U_P^{\rm ref}-L_I}.
+\]
+The reference $U_P^{\rm ref}$ is held fixed for each role. This scalar
+interval indicator is not realized complete-algorithm gap reduction.
+If $D_R\subseteq D_C\subseteq D_I$, then $F_C\le F_R\le U_R$.
+This statement does not cap the joint benefit of cuts in a full routing
+relaxation $Q$: the resource point may have no compatible full lift into $Q$.
+Likewise, $U_P-U_R$ is a witness-price difference, not a lower bound on
+$F_P-F_R$.
+
+\section{A bounded simultaneous inner domain}
+For vehicle $k$, let $P_k$ and $D_k$ be cumulative pickups and deliveries.
+Empty departure gives return $R_k=P_k-D_k$, with $0\le R_k\le Q_k$.
+Including return unloading,
+\[
+ t_pP_k+t_d(D_k+R_k)=(t_p+t_d)P_k.
+\]
+Cumulative $P_k$ may exceed $Q_k$. Only each single station operation and
+the return are bounded by vehicle capacity in the resource model; physical
+prefix loads are checked separately.
+
+The short fixed-owner reference optimizes original $J$ over full supported
+quantities on the initial disjoint owner sets $A_k$. It allows zero service
+and direction changes, while initially unassigned stations retain $Y_i=b_i$.
+A full-$A_k$ three-stop budget remains conservative after zeroing a station.
+This is an inner restriction, not exhaustive fixed-owner quantity search.
+The original RN centering/scale and one-sided envelope are retained.
+
+The joint mechanism releases all supported quantities and eligible owners
+on eight stations at once. Every outside quantity and nonzero owner remains
+fixed, with its full pickup, delivery and return contribution included.
+Conditional active-subset budgets are rebuilt for every vehicle. Activation,
+zero service, direction changes, cross-car ownership and unequal-net
+quantity/ownership compensation are permitted without inheriting an
+uncovered old active-set budget.
+
+\begin{enumerate}
+\item Score station $i$ by its best unconstrained single-stock reduction in
+true $J$, multiplied by one plus current owner handling pressure.
+\item Choose the step-ranked anchor, then seven stations by that score plus
+anchor-weighted geometric proximity; break ties by station index.
+\item Solve the joint original-J subproblem with a complete feasible Start,
+Seed 0, Threads 1 and at most 512 nodes. Retain strict true-J improvements and
+read them back independently in the complete original resource domain.
+\item Stop after 12 blocks or the ordinary whole-method deadline. No
+nondecreasing intermediate move or time-triggered algorithm switch is used.
+\end{enumerate}
+
+Both roles use the same rule and capacities. The short references use 2048
+nodes each. The declared domain can coordinate eight changes beyond one
+single-stock change, owner move/swap or pair transfer. This is not a
+reachability theorem against every sequence of historical moves. Trace
+evidence distinguishes allowed freedoms from those actually exercised.
+Every subproblem lies inside $D_R$. Its feasible point can give a global
+resource upper; its bound, optimum or failure remains local. None enters
+the global proof ledger.
+
+The new repeated model construction, block selection, callback and completion
+are C++. The standalone tool loads an explicitly exported, unchanged
+qualified RN objective; this offline boundary is not represented as a
+fully integrated production candidate. With $s=\sum_i|\mathcal Y_i|$, the
+new model has $O(Ms+n^2)$ columns and $O(Mn^3+s+n^2)$ rows. A node limit
+does not bound presolve time or establish polynomial complexity.
+
+\section{Resource improvements and physical obstructions}
+\input{empirical_results.tex}
+
+For fixed inventory and ownership, the load after a visited subset $S$ is
+$\sum_{i\in S}(b_i-Y_i)$. The classical $(S,\mathrm{last})$ dynamic program
+therefore covers every elementary order while retaining only
+$0\le\mathrm{load}(S)\le Q_k$. A second, unloaded recurrence isolates the
+tour contribution. Both use exact additions of the supplied dyadic travel
+coefficients at scale $2^{53}$ in 128-bit integers, with a common capacity
+of 16777216 subset/last slots. An exhausted complete recurrence gives a
+fixed-combination minimum; insufficient capacity gives UNKNOWN.
+Work is $O(m^2 2^m)$ and storage $O(m2^m)$.
+
+These are inherited classical tools, not new theory. Their precision is
+bound to the supplied discrete coefficients and acceptance contract, not
+all symbolic Euclidean calculations. A loaded-tour minimum at an old $Y$
+is not transported as a necessary lower for variable new quantities. No
+new variable-Y tour cut or complete-$Q$ extension ceiling is claimed.
+
+\section{Evidence, cost and the stopping boundary}
+The fixed-owner RX35 review-side point is an inherited control, not a new
+R159 result. Its car 2 already needs 6412.088151837445 seconds at $T=6300$;
+its identical fixed-combination problem is not sent to another heavy oracle.
+The new joint point changes the physical structure and receives its own
+finite completion. Fixed-owner failures exclude only their actual
+inventory/ownership combinations. A fully free-owner fixed-Y oracle is
+reported in its separately recorded scope; an UNKNOWN excludes nothing.
+
+Original-J fractions, all accepted quantities/owners, per-car balances,
+nominal-T resource times, active sets, raw full-resource lifts, DP routes
+and exact costs are retained. Qualification includes actual saved model and
+Start readback, original RN preservation, objective transport, eligibility
+and outside bounds, all conditional budgets, duplicate-owner rejection,
+brute-force prefix-load/empty/over-time fixtures and capacity UNKNOWN.
+All reviews are separate routines by the same agent; no independent-person
+review is claimed.
+
+\input{decision_and_cost.tex}
+
+R76/R83 already provide activation, quantity closure and equal-net block
+exchange; R96 already provides full fixed-route quantities and reorder
+diagnostics. R103 establishes per-car resource hulls. R105--107 retain
+negative complete evidence for master/oracle/conflict architectures.
+R157 already uses original-J resource optimization and free-fleet
+completion; R158 already jointly perturbs inventory and ownership and
+records a 36-hour quarter-level UNKNOWN. Handling identities, original-J
+modeling, owner exchange and subset DP are not new contributions here.
+The present evidence concerns one finite simultaneous inner domain, two
+same-rule sources, and explicit resource-to-physical obstructions. It does
+not establish universal novelty, distributional generalization or a
+complete-method speedup. Stable GI-TBC/B remains the formal entry.
+\end{document}

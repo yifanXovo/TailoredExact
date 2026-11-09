@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-11-09T20:15:51.735883+00:00",
+  "PASS": true,
+  "status": 2,
+  "NodeCount": 21.0,
+  "Runtime": 0.3619999885559082,
+  "Work": 0.5308359108435012,
+  "true_J_fixed_owner": 0.29453694232737326,
+  "restricted_J_lower": 0.2945344157494531,
+  "joint_selected_J": 0.2922946074975457,
+  "owner_freedom_needed_for_this_improvement": true,
+  "objective_transport_guard_applied": true,
+  "quality": {
+    "numerical_warning": false,
+    "primal": {
+      "constraints": 2.353672812205332e-14,
+      "bounds": 0.0,
+      "integer": 0.0
+    },
+    "numeric_ok": true,
+    "policy": "inherited R61 threshold-time quality and log gate"
+  },
+  "residual": {
+    "constraints": 1.2202044930020861e-14,
+    "bounds": 0.0,
+    "objective": -0.23204097780351174
+  },
+  "scope": "only the selected block and its fixed outside state",
+  "global_lower": null,
+  "global_proof_ledger_changes": 0
+}

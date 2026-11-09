@@ -1,0 +1,1132 @@
+{
+  "UTC": "2026-11-09T20:15:50.608476+00:00",
+  "roles": {
+    "R-X35-S-T2": {
+      "L_I": 0.2360521029074557,
+      "U_I": 0.23612171136420015,
+      "U_P_ref": 0.2996694007364017,
+      "U_P": 0.2996694007364017,
+      "initial_U_R": 0.29453694232737326,
+      "initial_eta": 0.9193229108405615,
+      "chain": [
+        {
+          "stage": "baseline",
+          "U_R": 0.29453694232737326,
+          "J_exact": "53479593056830315041420782091893493405343450472395547/181571766971725310832917143964057992450020736269025280",
+          "eta_R": 0.9193229108405615,
+          "accepted_events": 0,
+          "seconds": 59.07750409981236,
+          "calls": 1,
+          "nodes": 2048,
+          "quantity_change_events": 0,
+          "owner_change_events": 0,
+          "activation_events": 0,
+          "zero_events": 0,
+          "direction_flip_events": 0,
+          "non_equal_net_events": 0,
+          "resource_witness": {
+            "Y": [
+              6,
+              7,
+              5,
+              6,
+              6,
+              3,
+              6,
+              5,
+              4,
+              2,
+              4,
+              5,
+              3,
+              2,
+              3,
+              7,
+              2,
+              4,
+              3,
+              4,
+              2,
+              6,
+              1,
+              7,
+              1,
+              3,
+              2,
+              2,
+              4,
+              3,
+              4,
+              7,
+              4,
+              6,
+              7
+            ],
+            "owner": [
+              -1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              -1,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0
+            ],
+            "J": 0.29453694232737326,
+            "J_exact": "53479593056830315041420782091893493405343450472395547/181571766971725310832917143964057992450020736269025280",
+            "G": 0.09806513335554733,
+            "H": 0.19647180897182592,
+            "vehicles": [
+              {
+                "vehicle": 0,
+                "stations": [
+                  22,
+                  24,
+                  28,
+                  29,
+                  30,
+                  33,
+                  35
+                ],
+                "P": 12,
+                "D": 12,
+                "return_load": 0,
+                "required_time": 5780.760041327465,
+                "required_time_exact": "3178006441411209/549755813888"
+              },
+              {
+                "vehicle": 1,
+                "stations": [
+                  17,
+                  18,
+                  19,
+                  20,
+                  21,
+                  25,
+                  26,
+                  27,
+                  31,
+                  32,
+                  34
+                ],
+                "P": 16,
+                "D": 16,
+                "return_load": 0,
+                "required_time": 5844.611332115582,
+                "required_time_exact": "6426218119492459/1099511627776"
+              },
+              {
+                "vehicle": 2,
+                "stations": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  15,
+                  16
+                ],
+                "P": 25,
+                "D": 25,
+                "return_load": 0,
+                "required_time": 6249.7962479000835,
+                "required_time_exact": "3435861822898479/549755813888"
+              }
+            ],
+            "original_T_resource_feasible": true,
+            "physical_U": null,
+            "global_lower": null
+          }
+        },
+        {
+          "stage": "joint",
+          "U_R": 0.29118539321285497,
+          "J_exact": "26864495653386365554592574198903972611671249519280407/92259077136292205594353964303150802908537022442373120",
+          "eta_R": 0.8666399263552738,
+          "accepted_events": 2,
+          "seconds": 4.764557700138539,
+          "calls": 12,
+          "nodes": 31,
+          "quantity_change_events": 2,
+          "owner_change_events": 1,
+          "activation_events": 0,
+          "zero_events": 0,
+          "direction_flip_events": 0,
+          "non_equal_net_events": 1,
+          "resource_witness": {
+            "Y": [
+              6,
+              7,
+              5,
+              6,
+              6,
+              3,
+              6,
+              5,
+              4,
+              2,
+              4,
+              5,
+              3,
+              2,
+              3,
+              7,
+              2,
+              4,
+              4,
+              4,
+              2,
+              6,
+              1,
+              6,
+              2,
+              3,
+              2,
+              2,
+              4,
+              3,
+              4,
+              7,
+              4,
+              6,
+              6
+            ],
+            "owner": [
+              -1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              -1,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0
+            ],
+            "J": 0.29118539321285497,
+            "J_exact": "26864495653386365554592574198903972611671249519280407/92259077136292205594353964303150802908537022442373120",
+            "G": 0.08824365996873988,
+            "H": 0.2029417332441151,
+            "vehicles": [
+              {
+                "vehicle": 0,
+                "stations": [
+                  22,
+                  24,
+                  25,
+                  28,
+                  29,
+                  30,
+                  33,
+                  35
+                ],
+                "P": 13,
+                "D": 13,
+                "return_load": 0,
+                "required_time": 6145.925183358495,
+                "required_time_exact": "3378758101272005/549755813888"
+              },
+              {
+                "vehicle": 1,
+                "stations": [
+                  17,
+                  18,
+                  19,
+                  20,
+                  21,
+                  26,
+                  27,
+                  31,
+                  32,
+                  34
+                ],
+                "P": 16,
+                "D": 16,
+                "return_load": 0,
+                "required_time": 5844.611332115582,
+                "required_time_exact": "6426218119492459/1099511627776"
+              },
+              {
+                "vehicle": 2,
+                "stations": [
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  15,
+                  16
+                ],
+                "P": 25,
+                "D": 25,
+                "return_load": 0,
+                "required_time": 6249.7962479000835,
+                "required_time_exact": "3435861822898479/549755813888"
+              }
+            ],
+            "original_T_resource_feasible": true,
+            "physical_U": null,
+            "global_lower": null
+          }
+        }
+      ],
+      "global_resource_lower": "UNKNOWN above inherited L_I",
+      "price_reduction_from_fixed_owner": 0.003351549114518293,
+      "price_reduction_from_old_ref": 0.008484007523546722,
+      "whole_Q_ceiling_claim": false
+    },
+    "N-B35-S": {
+      "L_I": 0.3959564087240911,
+      "U_I": 0.39604654895666136,
+      "U_P_ref": 0.450291503262878,
+      "U_P": 0.450291503262878,
+      "initial_U_R": 0.4502915032628781,
+      "initial_eta": 1.000000000000002,
+      "chain": [
+        {
+          "stage": "baseline",
+          "U_R": 0.425855686698408,
+          "J_exact": "254076389951562208654970273583115291685024904653847/596625565626178203786337480855673214668481121746944",
+          "eta_R": 0.5502756225623834,
+          "accepted_events": 7,
+          "seconds": 17.580831199884415,
+          "calls": 1,
+          "nodes": 2048,
+          "quantity_change_events": 7,
+          "owner_change_events": 0,
+          "activation_events": 0,
+          "zero_events": 0,
+          "direction_flip_events": 0,
+          "non_equal_net_events": 0,
+          "resource_witness": {
+            "Y": [
+              10,
+              6,
+              7,
+              6,
+              7,
+              4,
+              7,
+              10,
+              4,
+              10,
+              4,
+              6,
+              7,
+              7,
+              8,
+              5,
+              9,
+              9,
+              3,
+              5,
+              7,
+              6,
+              4,
+              7,
+              6,
+              0,
+              6,
+              7,
+              7,
+              3,
+              2,
+              4,
+              6,
+              4,
+              8
+            ],
+            "owner": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              2,
+              0,
+              1,
+              1,
+              0,
+              2,
+              0,
+              1,
+              0,
+              2,
+              0,
+              1,
+              1,
+              2,
+              1,
+              1,
+              1,
+              -1,
+              1,
+              1,
+              1,
+              2,
+              -1,
+              2,
+              1,
+              1,
+              2
+            ],
+            "J": 0.425855686698408,
+            "J_exact": "254076389951562208654970273583115291685024904653847/596625565626178203786337480855673214668481121746944",
+            "G": 0.08985568669840795,
+            "H": 0.3360000000000001,
+            "vehicles": [
+              {
+                "vehicle": 0,
+                "stations": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  6,
+                  7,
+                  8,
+                  10,
+                  13,
+                  15,
+                  17,
+                  19
+                ],
+                "P": 31,
+                "D": 31,
+                "return_load": 0,
+                "required_time": 6776.201814065446,
+                "required_time_exact": "7450512686721783/1099511627776"
+              },
+              {
+                "vehicle": 1,
+                "stations": [
+                  11,
+                  12,
+                  16,
+                  20,
+                  21,
+                  23,
+                  24,
+                  25,
+                  27,
+                  28,
+                  29,
+                  33,
+                  34
+                ],
+                "P": 29,
+                "D": 29,
+                "return_load": 0,
+                "required_time": 7185.733232944214,
+                "required_time_exact": "15801594487437183/2199023255552"
+              },
+              {
+                "vehicle": 2,
+                "stations": [
+                  5,
+                  9,
+                  14,
+                  18,
+                  22,
+                  30,
+                  32,
+                  35
+                ],
+                "P": 14,
+                "D": 14,
+                "return_load": 0,
+                "required_time": 7118.375308865811,
+                "required_time_exact": "7826736422971535/1099511627776"
+              }
+            ],
+            "original_T_resource_feasible": true,
+            "physical_U": null,
+            "global_lower": null
+          }
+        },
+        {
+          "stage": "joint",
+          "U_R": 0.4235630179611202,
+          "J_exact": "20412298035537861946010333139974496547822819904323511/48191879767490821619867066017057374979159268094115840",
+          "eta_R": 0.5080806331775546,
+          "accepted_events": 4,
+          "seconds": 5.879192300140858,
+          "calls": 12,
+          "nodes": 246,
+          "quantity_change_events": 4,
+          "owner_change_events": 2,
+          "activation_events": 1,
+          "zero_events": 0,
+          "direction_flip_events": 0,
+          "non_equal_net_events": 1,
+          "resource_witness": {
+            "Y": [
+              10,
+              5,
+              7,
+              6,
+              7,
+              4,
+              7,
+              10,
+              4,
+              10,
+              4,
+              6,
+              6,
+              7,
+              8,
+              5,
+              9,
+              9,
+              3,
+              5,
+              7,
+              6,
+              4,
+              7,
+              6,
+              3,
+              6,
+              7,
+              7,
+              3,
+              2,
+              3,
+              6,
+              4,
+              8
+            ],
+            "owner": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              1,
+              1,
+              0,
+              2,
+              0,
+              1,
+              0,
+              2,
+              2,
+              1,
+              1,
+              2,
+              1,
+              1,
+              1,
+              2,
+              1,
+              1,
+              1,
+              2,
+              -1,
+              2,
+              1,
+              1,
+              2
+            ],
+            "J": 0.4235630179611202,
+            "J_exact": "20412298035537861946010333139974496547822819904323511/48191879767490821619867066017057374979159268094115840",
+            "G": 0.07556301796112018,
+            "H": 0.34800000000000003,
+            "vehicles": [
+              {
+                "vehicle": 0,
+                "stations": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  10,
+                  13,
+                  15,
+                  17
+                ],
+                "P": 32,
+                "D": 32,
+                "return_load": 0,
+                "required_time": 6750.5838199806785,
+                "required_time_exact": "14844690808690569/2199023255552"
+              },
+              {
+                "vehicle": 1,
+                "stations": [
+                  11,
+                  12,
+                  16,
+                  20,
+                  21,
+                  23,
+                  24,
+                  25,
+                  27,
+                  28,
+                  29,
+                  33,
+                  34
+                ],
+                "P": 29,
+                "D": 29,
+                "return_load": 0,
+                "required_time": 7185.733232944214,
+                "required_time_exact": "15801594487437183/2199023255552"
+              },
+              {
+                "vehicle": 2,
+                "stations": [
+                  9,
+                  14,
+                  18,
+                  19,
+                  22,
+                  26,
+                  30,
+                  32,
+                  35
+                ],
+                "P": 14,
+                "D": 14,
+                "return_load": 0,
+                "required_time": 7118.375308865811,
+                "required_time_exact": "7826736422971535/1099511627776"
+              }
+            ],
+            "original_T_resource_feasible": true,
+            "physical_U": null,
+            "global_lower": null
+          }
+        }
+      ],
+      "global_resource_lower": "UNKNOWN above inherited L_I",
+      "price_reduction_from_fixed_owner": 0.002292668737287784,
+      "price_reduction_from_old_ref": 0.026728485301757754,
+      "whole_Q_ceiling_claim": false
+    }
+  },
+  "events": [
+    {
+      "role": "R-X35-S-T2",
+      "stage": "joint",
+      "iteration": 1,
+      "before_J": 0.29453694232737326,
+      "after_J": 0.2922946074975457,
+      "quantity_stations": [
+        19,
+        35
+      ],
+      "owner_changes": [
+        25
+      ],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        1,
+        -1,
+        0
+      ],
+      "owner_net_compensation": [
+        -1,
+        1,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/joint_rx/call_1_events.jsonl",
+      "seconds": 0.2604461
+    },
+    {
+      "role": "R-X35-S-T2",
+      "stage": "joint",
+      "iteration": 2,
+      "before_J": 0.2922946074975457,
+      "after_J": 0.29118539321285497,
+      "quantity_stations": [
+        24,
+        25
+      ],
+      "owner_changes": [],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/joint_rx/call_2_events.jsonl",
+      "seconds": 0.3203552
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "baseline",
+      "iteration": 0,
+      "before_J": 0.4502915032628781,
+      "after_J": 0.44492492964740943,
+      "quantity_stations": [
+        14,
+        30,
+        32
+      ],
+      "owner_changes": [],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/baseline_nb/call_0_events.jsonl",
+      "seconds": 0.7576218
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "baseline",
+      "iteration": 0,
+      "before_J": 0.44492492964740943,
+      "after_J": 0.43875646026328624,
+      "quantity_stations": [
+        14,
+        22
+      ],
+      "owner_changes": [],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/baseline_nb/call_0_events.jsonl",
+      "seconds": 0.8536371
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "baseline",
+      "iteration": 0,
+      "before_J": 0.43875646026328624,
+      "after_J": 0.43784227256219715,
+      "quantity_stations": [
+        9,
+        22
+      ],
+      "owner_changes": [],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/baseline_nb/call_0_events.jsonl",
+      "seconds": 4.0972352
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "baseline",
+      "iteration": 0,
+      "before_J": 0.43784227256219715,
+      "after_J": 0.4333268209219893,
+      "quantity_stations": [
+        12,
+        16,
+        25,
+        28
+      ],
+      "owner_changes": [],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/baseline_nb/call_0_events.jsonl",
+      "seconds": 5.3070684
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "baseline",
+      "iteration": 0,
+      "before_J": 0.4333268209219893,
+      "after_J": 0.4305780325213383,
+      "quantity_stations": [
+        9,
+        11,
+        12,
+        22,
+        24,
+        25,
+        28,
+        29
+      ],
+      "owner_changes": [],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/baseline_nb/call_0_events.jsonl",
+      "seconds": 5.6501808
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "baseline",
+      "iteration": 0,
+      "before_J": 0.4305780325213383,
+      "after_J": 0.4297137984266457,
+      "quantity_stations": [
+        9,
+        22
+      ],
+      "owner_changes": [],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/baseline_nb/call_0_events.jsonl",
+      "seconds": 5.9537857
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "baseline",
+      "iteration": 0,
+      "before_J": 0.4297137984266457,
+      "after_J": 0.425855686698408,
+      "quantity_stations": [
+        11,
+        28
+      ],
+      "owner_changes": [],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/baseline_nb/call_0_events.jsonl",
+      "seconds": 7.0817889
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "joint",
+      "iteration": 1,
+      "before_J": 0.425855686698408,
+      "after_J": 0.4240846006149602,
+      "quantity_stations": [
+        26,
+        32
+      ],
+      "owner_changes": [],
+      "activated": [
+        26
+      ],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/joint_nb/call_1_events.jsonl",
+      "seconds": 0.3260068
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "joint",
+      "iteration": 1,
+      "before_J": 0.4240846006149602,
+      "after_J": 0.4239087949982585,
+      "quantity_stations": [
+        13,
+        14,
+        26,
+        32
+      ],
+      "owner_changes": [
+        14,
+        19
+      ],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        1,
+        0,
+        -1
+      ],
+      "owner_net_compensation": [
+        -1,
+        0,
+        1
+      ],
+      "event": "results/unified_exact_round159/runs/joint_nb/call_1_events.jsonl",
+      "seconds": 0.5713175
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "joint",
+      "iteration": 2,
+      "before_J": 0.4239087949982585,
+      "after_J": 0.42368561383763526,
+      "quantity_stations": [
+        2,
+        5,
+        13,
+        32
+      ],
+      "owner_changes": [
+        5,
+        14
+      ],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/joint_nb/call_2_events.jsonl",
+      "seconds": 0.2914517
+    },
+    {
+      "role": "N-B35-S",
+      "stage": "joint",
+      "iteration": 2,
+      "before_J": 0.42368561383763526,
+      "after_J": 0.4235630179611202,
+      "quantity_stations": [
+        5,
+        13,
+        14,
+        32
+      ],
+      "owner_changes": [],
+      "activated": [],
+      "zeroed": [],
+      "direction_flips": [],
+      "per_car_net_change": [
+        0,
+        0,
+        0
+      ],
+      "quantity_net_on_old_owner": [
+        0,
+        0,
+        0
+      ],
+      "owner_net_compensation": [
+        0,
+        0,
+        0
+      ],
+      "event": "results/unified_exact_round159/runs/joint_nb/call_2_events.jsonl",
+      "seconds": 0.3754129
+    }
+  ],
+  "scope": "Saved strict accepted trajectories only; not a closure/reachability theorem for historical move sequences"
+}

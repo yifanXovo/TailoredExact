@@ -1,6 +1,17 @@
 # Research index
 
-Current finite study: [Round158 resource-coupling value and objective levels](round158_research.md),
+Current finite study: [Round159 joint quantities, ownership and physical realization](round159_research.md).
+One frozen C++ joint restriction gives RX35/NB35 integer resource uppers
+.29118539321285497/.4235630179611202. A scoped owner-fixed contrast and
+complete fixed-combination DP separate owner/quantity compensation,
+tour/handling and prefix-load obstructions. The one free-owner query is
+UNKNOWN at 8192 nodes; no physical/global proof gain or F panel is claimed.
+Stable GI-TBC/B and E+ remain unchanged. See the
+[report](../results/unified_exact_round159/final_report.md),
+[paper](../results/unified_exact_round159/manuscript.pdf) and
+[actual delivery](../results/unified_exact_round159/RESUME.md).
+
+Previous finite study: [Round158 resource-coupling value and objective levels](round158_research.md),
 with [mathematics](../results/unified_exact_round158/mathematical_analysis.md),
 [value intervals](../results/unified_exact_round158/reports/value_intervals.csv),
 [finite queries](../results/unified_exact_round158/reports/finite_queries.csv),
