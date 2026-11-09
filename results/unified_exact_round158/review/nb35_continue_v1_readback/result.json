@@ -1,0 +1,61 @@
+{
+  "UTC": "2026-11-07T17:21:32.299418+00:00",
+  "PASS": true,
+  "Optimize": 0,
+  "role": "N-B35-S",
+  "points": [
+    {
+      "path": "incumbent_00.json.gz",
+      "SHA256": "c66f947e8f47163b85b09bddec1d90a1bf65cb7286f22ecfaad5accfb7cf259e",
+      "matrix": {
+        "constraints": 1.8189894035458565e-12,
+        "bounds": 0.0,
+        "objective": 7245.923163202398
+      },
+      "integer": 0.0,
+      "original_T_resource_feasible": false,
+      "required_time": 7245.9231632024
+    },
+    {
+      "path": "incumbent_01.json.gz",
+      "SHA256": "31927ab1a01a647e883f72f95671e642ff92a607ed5ae12a7e0b90440a2a2929",
+      "matrix": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "objective": 7238.006414765686
+      },
+      "integer": 0.0,
+      "original_T_resource_feasible": false,
+      "required_time": 7238.006414765685
+    },
+    {
+      "path": "incumbent_best.json.gz",
+      "SHA256": "7c573b847a7923f06ef818af45d90b7bd54f34349d1a8e9ed7c6de3e644d96e0",
+      "matrix": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "objective": 7238.006414765686
+      },
+      "integer": 0.0,
+      "original_T_resource_feasible": false,
+      "required_time": 7238.006414765685
+    },
+    {
+      "path": "solution.json.gz",
+      "SHA256": "d53517e169963f19c5c5389283fd5ec954ec3fe36f93c4126bf883033b580cfc",
+      "matrix": {
+        "constraints": 0.0,
+        "bounds": 0.0,
+        "objective": 7238.006414765686
+      },
+      "integer": 0.0,
+      "original_T_resource_feasible": false,
+      "required_time": 7238.006414765685
+    }
+  ],
+  "U_R": null,
+  "physical_U": null,
+  "full_inventory_resource_lift": false,
+  "source_result_SHA": "ecea915636dff0736d0b159fcdd4e11e411276237a79c7e0824a293155b921c4",
+  "review": "Same agent separate exact arithmetic and saved full-matrix readback"
+}

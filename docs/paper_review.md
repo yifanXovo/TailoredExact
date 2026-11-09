@@ -1,5 +1,16 @@
 # Advisor/coauthor review packet
 
+The new [resource-coupling supplement](../results/unified_exact_round158/manuscript.pdf)
+separates domain contraction from optimum improvement and an integer
+resource upper from a bare-LP witness. Its full36-hour hard-level call is
+UNKNOWN; the preselected RX35 Y3 and NB35 families are excluded only in
+their stated scopes. The [report](../results/unified_exact_round158/final_report.md),
+[source](../results/unified_exact_round158/manuscript.tex) and
+[actual five-page visual review](../results/unified_exact_round158/paper_qa/visual_review.json)
+retain the open resource-value question and measured costs. It supplements
+the stable Round137 paper below, with no new production mechanism or
+complete-arm performance claim.
+
 The [physical-realization section](../results/unified_exact_round157/manuscript.pdf)
 adds a thematic continuation from integer inventory certificates to the
 original fleet. Its [source](../results/unified_exact_round157/manuscript.tex)

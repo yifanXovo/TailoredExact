@@ -527,3 +527,12 @@ results/unified_exact_round118/**/raw/** -text whitespace=cr-at-eol
 /results/unified_exact_round157/goal.md -whitespace
 /results/unified_exact_round157/artifacts/** -text -diff -whitespace
 /docs/round157_research.md -text whitespace=cr-at-eol
+
+# Round158 actual measured bytes and new-only evidence.
+/scripts/round158* -text whitespace=cr-at-eol
+/results/unified_exact_round158/** -text whitespace=cr-at-eol
+/results/unified_exact_round158/**/*.log -whitespace
+/results/unified_exact_round158/**/*.mps -whitespace
+/results/unified_exact_round158/goal.md -whitespace
+/results/unified_exact_round158/artifacts/** -text -diff -whitespace
+/docs/round158_research.md -text whitespace=cr-at-eol

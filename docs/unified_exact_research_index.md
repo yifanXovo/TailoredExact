@@ -1,6 +1,20 @@
 # Research index
 
-Current finite study: [Round157 near-optimal inventory physical realization](round157_research.md),
+Current finite study: [Round158 resource-coupling value and objective levels](round158_research.md),
+with [mathematics](../results/unified_exact_round158/mathematical_analysis.md),
+[value intervals](../results/unified_exact_round158/reports/value_intervals.csv),
+[finite queries](../results/unified_exact_round158/reports/finite_queries.csv),
+[complete level calls](../results/unified_exact_round158/reports/level_calls.csv),
+[thematic PDF](../results/unified_exact_round158/manuscript.pdf),
+[final report](../results/unified_exact_round158/final_report.md) and
+[actual delivery](../results/unified_exact_round158/RESUME.md).
+The full36-hour RX35 level returns UNKNOWN; the Y3 ten-member and NB35
+singleton resource families are excluded. An exact point survives both
+bare LP matrices through fractional ownership, without supplying an integer
+upper. The integer value question remains open; no E+R is frozen.
+Stable GI-TBC/B remains default and E+ remains the enhanced reference.
+
+Previous finite study: [Round157 near-optimal inventory physical realization](round157_research.md),
 with [mathematics](../results/unified_exact_round157/mathematical_analysis.md),
 [free-fleet and resource evidence](../results/unified_exact_round157/reports/oracle_results.csv),
 [paper section](../results/unified_exact_round157/manuscript.tex),

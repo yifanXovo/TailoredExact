@@ -1,0 +1,281 @@
+{
+  "UTC": "2026-11-09T06:45:27.467128+00:00",
+  "PASS": true,
+  "scientific_checks_PASS": true,
+  "own_receipt_pending_seal": false,
+  "Optimize": 0,
+  "review_method": "Same agent separate saved-original matrix, rational point, inventory-price, scope and outer-fee readback; no independent reviewer identity",
+  "main": {
+    "UTC": "2026-11-09T06:34:19.707347+00:00",
+    "role": "R-X35-S-T2",
+    "variant": "raw",
+    "tau": 0.2519564273646922,
+    "tau_exact": "4538843489572917/18014398509481984",
+    "status": 9,
+    "SolCount": 0,
+    "NodeCount": 258972.0,
+    "Runtime": 129600.0039999485,
+    "Work": 318526.526959261,
+    "IterCount": 160559495.0,
+    "numerical_quality": {
+      "numerical_warning": false,
+      "primal": null,
+      "numeric_ok": true,
+      "policy": "inherited R61 threshold-time quality and log gate"
+    },
+    "classification": "UNKNOWN",
+    "U_R": null,
+    "physical_U": null,
+    "level_excluded": false,
+    "new_lower": 0.2360521029074557,
+    "NumVars": 2673,
+    "NumConstrs": 24154,
+    "NumNZs": 100149,
+    "normal_Optimize_return": true,
+    "graceful_external_stop": false,
+    "model_SHA": "05c8d7e903195896d459e444dfebede8b788e2f2e666550b0f536a244f3c038b",
+    "total_seconds": 129601.48854170041
+  },
+  "main_result_SHA": "beab5331f3f22630aacd421d3ebecec422549c30b8710490d85762a0cc9a0e13",
+  "main_fee_SHA": "922480eee9266e1b24670165914de6d4000d1da66c07e8043bbeab182fee275d",
+  "old_RN_preserved": {
+    "columns": 1467,
+    "rows": 2143,
+    "objective_deliberately_replaced_by_constant_zero": true
+  },
+  "finite_family_scope_checks": [
+    {
+      "role": "R-X35-S-T2",
+      "members": 10,
+      "classification": "FAMILY_RESOURCE_INFEAS",
+      "queried_v1_time_lower": 6310.129749041621,
+      "actual_cpp_fixed_T_exclusion_preserved": true,
+      "no_novel_U_R": true,
+      "result_SHA": "f411df5fc83ba2e96e9231787c09f7d47a0e7f9b288674f3a8e6a471e503c279",
+      "readback_SHA": "922586b883aa07a865ea766ffebac3592c373babb8cf9b910feb38509b65498e"
+    },
+    {
+      "role": "N-B35-S",
+      "members": 1,
+      "classification": "FAMILY_RESOURCE_INFEAS",
+      "queried_v1_time_lower": 7206.982290055626,
+      "actual_cpp_fixed_T_exclusion_preserved": true,
+      "no_novel_U_R": true,
+      "result_SHA": "ecea915636dff0736d0b159fcdd4e11e411276237a79c7e0824a293155b921c4",
+      "readback_SHA": "00dfac64e6d88dd8189ff0e37c58b99870418cd918c19ada689d400e667aea84"
+    }
+  ],
+  "lp_saved_point_exact_checks": [
+    {
+      "variant": "raw",
+      "rows": 24154,
+      "columns": 2673,
+      "exact_rows_and_bounds_satisfied": true,
+      "nonintegral_columns": 102,
+      "model_SHA": "05c8d7e903195896d459e444dfebede8b788e2f2e666550b0f536a244f3c038b"
+    },
+    {
+      "variant": "rounded",
+      "rows": 14890,
+      "columns": 2673,
+      "exact_rows_and_bounds_satisfied": true,
+      "nonintegral_columns": 102,
+      "model_SHA": "a76f94124ed5e6f36e2e09260e2057a32b562e13e8c2d7879ee170a4cc96f37f"
+    }
+  ],
+  "prior_qualification_reused": true,
+  "no_historical_producer_or_performance_reruns": true,
+  "closed_other_fees": [
+    {
+      "label": "audit_expression_saved",
+      "exit_code": 0,
+      "outer_seconds": 0.7697514998726547,
+      "receipt_SHA": "c297585f73efcb73fec1febc0ab0ad14a8d7a350b7d3b22bf62af2093b760c6e",
+      "launch_SHA": "e3e609182b73ded2727ed556538a5f0142df1bb4e474519ef2c2c55da7991627",
+      "source_snapshot_SHA": "a5d0f23be24d1d2119f5bf1e699caacbd34ea23ed0d6e3d34872800ba945fde6"
+    },
+    {
+      "label": "level_rx35_raw_quarter",
+      "exit_code": 0,
+      "outer_seconds": 753.3065504999831,
+      "receipt_SHA": "963e6658203de122c3006083ae42c8adf2621f9ab0481b61b63f19c2b296a9e8",
+      "launch_SHA": "155db096e781aa0bbb7196f313b6a4708c2e4dd1563236220e54798a0de5ffd2",
+      "source_snapshot_SHA": "3ded9fdfa52d1f7b9fcd78cd00fe1da7f9ccf09b9e6f839527bf67a6ef885379"
+    },
+    {
+      "label": "level_rx35_raw_quarter_deep",
+      "exit_code": 0,
+      "outer_seconds": 42.69819260016084,
+      "receipt_SHA": "966024020fca69255ab54eb056a6f8356bb8deb9f791a5e96bb55106d9df13b1",
+      "launch_SHA": "03afd1e2757677b0cefeb4ebaa8f44c7d5bd1a51c0913c8a1bc620ecd8ed7f6c",
+      "source_snapshot_SHA": "44c6c8635906d944cf32de80c5cf4dae80d188446de4c052c2edc5428324d405"
+    },
+    {
+      "label": "level_rx35_raw_quarter_deep_v2",
+      "exit_code": 0,
+      "outer_seconds": 1913.3163368003443,
+      "receipt_SHA": "4742bf8ecf30bf365fd6c77e1ebfa668afac2518ebd098619f8a0c295da3668d",
+      "launch_SHA": "a8613bf658d07ed11e3b850de9bb5b8a6982f47afa85c6a3b0744c27f1044f5d",
+      "source_snapshot_SHA": "4c7b9acf4aef3396d4b2b98a5c70751c849da647f0ba77f705b155c95f6b2a8e"
+    },
+    {
+      "label": "level_rx35_raw_quarter_deep_v3",
+      "exit_code": 0,
+      "outer_seconds": 129601.83248030022,
+      "receipt_SHA": "922480eee9266e1b24670165914de6d4000d1da66c07e8043bbeab182fee275d",
+      "launch_SHA": "a28c1f53976f46b400f7ba756335c77ef338606e38cef03fbf5baf3582d2c496",
+      "source_snapshot_SHA": "b47ec927965932c45110f0a9daa1c13e1de864b8de006f13f304f6739df54913"
+    },
+    {
+      "label": "level_rx35_rounded_quarter_diag",
+      "exit_code": 0,
+      "outer_seconds": 847.8244789000601,
+      "receipt_SHA": "d6d6986e3035bc9e3f3561ed8b7ed4cd71528d7f58c08157b61346e26c3deae6",
+      "launch_SHA": "12a390f2e0449418bde105713d9809b2c892475d211db4e56859dd50ca6685b4",
+      "source_snapshot_SHA": "a0bb1d17d6c57826bc13098c5f6ad9679785480e83137e01d115c1a915bd4b43"
+    },
+    {
+      "label": "lp_fractional_witness",
+      "exit_code": 1,
+      "outer_seconds": 0.8070773999206722,
+      "receipt_SHA": "9b95b479acbba8297c013038e384f1b068de827e4c411c87ebd4ba93a17a5c75",
+      "launch_SHA": "3e9a3b6290489d05114a6844e5b60e5a3e318d6b502d5ce114231f9aec4a7d3e",
+      "source_snapshot_SHA": "6e600d26b1006820effe1621458598080df1a585c540271364b729e7c87efe39"
+    },
+    {
+      "label": "lp_fractional_witness_v2",
+      "exit_code": 0,
+      "outer_seconds": 1.1057110000401735,
+      "receipt_SHA": "534c1c858c09fbcc69bfd9bf23ce82473e447f67d66e098c3a66ffb49eb87aef",
+      "launch_SHA": "7714e99131954fec09489642204d680424e53bd38ba74cb8302434b312c733f4",
+      "source_snapshot_SHA": "2eb127acfc59e0c0bcc19f2fd36286ee101b44cb44bb1b350a9d4f33ff2da8d3"
+    },
+    {
+      "label": "prepare",
+      "exit_code": 1,
+      "outer_seconds": 2.0013151997700334,
+      "receipt_SHA": "ca90843bd9637d43e684e65fb390060128dd7b390adfb54e262239e457690701",
+      "launch_SHA": "2ad6aedd73594476db177d1d9f55c1b5275ef36274b05a2c29a27823abcc77ba",
+      "source_snapshot_SHA": "b6198dc6803837777e750664d55f9fe0a943745b7014416550954535be7b0462"
+    },
+    {
+      "label": "prepare_v2",
+      "exit_code": 0,
+      "outer_seconds": 1.2165604000911117,
+      "receipt_SHA": "37e81260260d03b65297ceb637856328aaa8d80bfab43b8e42ca6161409cd078",
+      "launch_SHA": "309e22933016542a2e1cc53324d89c6a1d081b94c36848b30c29b7c956de53f4",
+      "source_snapshot_SHA": "4b7b25a0c656e886bb0b9513145f198ed233ed98b7a6f96830614dd67dd909b4"
+    },
+    {
+      "label": "primal_rx35_joint",
+      "exit_code": 0,
+      "outer_seconds": 3.52502779988572,
+      "receipt_SHA": "fd2761b34cd88150ff61d9387ef02111c6864699288d09c51733e2acb475addc",
+      "launch_SHA": "915e618d431648072ffc0bf341722438b31568caf2ccff4e9b57a5f2e3176b4e",
+      "source_snapshot_SHA": "248c5f6f2904e75c2c38998546f4444b33deb476942171a4b3d3b8f9215462ae"
+    },
+    {
+      "label": "qualify_actual_cpp_coefficients",
+      "exit_code": 0,
+      "outer_seconds": 1.6367504000663757,
+      "receipt_SHA": "4e478f0f2510260c2ed392fdfc23a9bb7141a118e622a3431230466220af2dba",
+      "launch_SHA": "bf8a98f807df8d39953c94b8734c5bd1a76d89ba954735ff95625ad4b05ba989",
+      "source_snapshot_SHA": "489cfdd1ae7d941ff9df08fc8b3748bd27dd92da0cf43e799006a11fe0eb90a0"
+    },
+    {
+      "label": "qualify_actual_level_v2",
+      "exit_code": 0,
+      "outer_seconds": 7.144648700021207,
+      "receipt_SHA": "bf8eed8bef6c9dab28a1f5d599130f47548f2e73d3f45f30d8921599cac73056",
+      "launch_SHA": "bab24285f8f7597aca0ede6b0a67e60397a22750aa5d8a4253bfccab57853174",
+      "source_snapshot_SHA": "12e4d8d20012679effab96c3d03b5906e3e752aac13514c7f62ecf7e666cbc2b"
+    },
+    {
+      "label": "qualify_actual_raw_implication_v2",
+      "exit_code": 0,
+      "outer_seconds": 2.1285827001556754,
+      "receipt_SHA": "bcd0b123361771dc81cb18a20524edac1662974bd75920f8955fe8e58326b32f",
+      "launch_SHA": "09cef5a6dcf4ffd1e244fb81857d2b5bfce65bf58eeea6605d2a4f6893f0d145",
+      "source_snapshot_SHA": "eb9c5058d2c5fa9acc0daa8254564b0037b1b22e8ec46d445ed350e3a70c486f"
+    },
+    {
+      "label": "qualify_level_v1",
+      "exit_code": 0,
+      "outer_seconds": 7.83143090037629,
+      "receipt_SHA": "946591545f358f291dd69b8bbf3020a24e20823d54b5d83f3c3faaabfdfdf30e",
+      "launch_SHA": "aa35c2c1399650bc596c9ed681752124c462d57841a7488e517c524e62e42748",
+      "source_snapshot_SHA": "916ed8b3519ca4a0f4f4988414bc337a7ae1e0976b863dbdde015ae31f914aee"
+    },
+    {
+      "label": "resource_nb35_continue",
+      "exit_code": 0,
+      "outer_seconds": 143.08300090022385,
+      "receipt_SHA": "8cf189ee7fc8e98d4cf1b6457fa8036a0af2a14834ec556780e8a3c003458f67",
+      "launch_SHA": "e5deef7f4645b37fd300a6fc04b55257ae37d0e046b8e6b16ebcff809ab86cfb",
+      "source_snapshot_SHA": "e7014dae841d47f39ad941758e6d87b8a643824b6bc2fcad75d9d6752df35933"
+    },
+    {
+      "label": "resource_rx35_y3",
+      "exit_code": 0,
+      "outer_seconds": 49.844331899657845,
+      "receipt_SHA": "04a5ebe12143400e5970c14beef35a77e65587d540c2baff30e637cfb762899d",
+      "launch_SHA": "cee765812065ab2b2c593e54844e1e17f236f5f1e7aa1532dd0c6c1b188043d3",
+      "source_snapshot_SHA": "6d31cab1d539657889af344f256b76fa46b5ab7997f4a5de27677dbf463510e4"
+    },
+    {
+      "label": "review_nb35_continue",
+      "exit_code": 0,
+      "outer_seconds": 2.774074799846858,
+      "receipt_SHA": "f9b41bfd30fced87eaf44a0bfbf59ebc670314af70d62b322cfd3554f266fd62",
+      "launch_SHA": "bb0a5ffdd24a03a934d2d371c0fa998c83e1474660c10a70aa1c5639736a5af8",
+      "source_snapshot_SHA": "c58df49d039a5a6ebc031aa65ecb2a006d7e78b96181cea3087d63f2fd472f0a"
+    },
+    {
+      "label": "review_rx35_deep_v3",
+      "exit_code": 0,
+      "outer_seconds": 0.9746633996255696,
+      "receipt_SHA": "18b3f76fe598fe5110bf66f6fea9717c9aca528c9a8dbfa79f4275296ff63b90",
+      "launch_SHA": "6e8ec2af8eb90bbccd011028f6ccff3d0931b62ab4cb1598417bc5309afbf4df",
+      "source_snapshot_SHA": "4405e2b19e2a142de9ef637429132d6c17300552a777ed4a96854e503aa22ca0"
+    },
+    {
+      "label": "review_rx35_y3",
+      "exit_code": 0,
+      "outer_seconds": 8.774054900277406,
+      "receipt_SHA": "f22b1424209c348c9fac104196c28267a9ac30cc93625bedf112543ace693157",
+      "launch_SHA": "2753278775c6bdb69330d5eb45ffcd5ec695376e1fe0e23f6b4bb948a8e919b5",
+      "source_snapshot_SHA": "74adc7c980e0fca380fe4bc369f995b72c1de33469e2465731a23aff39f1a989"
+    }
+  ],
+  "failed_calls_retained": [
+    {
+      "label": "lp_fractional_witness",
+      "exit_code": 1,
+      "outer_seconds": 0.8070773999206722,
+      "receipt_SHA": "9b95b479acbba8297c013038e384f1b068de827e4c411c87ebd4ba93a17a5c75",
+      "launch_SHA": "3e9a3b6290489d05114a6844e5b60e5a3e318d6b502d5ce114231f9aec4a7d3e",
+      "source_snapshot_SHA": "6e600d26b1006820effe1621458598080df1a585c540271364b729e7c87efe39"
+    },
+    {
+      "label": "prepare",
+      "exit_code": 1,
+      "outer_seconds": 2.0013151997700334,
+      "receipt_SHA": "ca90843bd9637d43e684e65fb390060128dd7b390adfb54e262239e457690701",
+      "launch_SHA": "2ad6aedd73594476db177d1d9f55c1b5275ef36274b05a2c29a27823abcc77ba",
+      "source_snapshot_SHA": "b6198dc6803837777e750664d55f9fe0a943745b7014416550954535be7b0462"
+    }
+  ],
+  "other_G1_seconds": 133392.5950210006,
+  "source_manifest_SHA": "4d398811949506a9e59c51762712873aa76c4b89d98643aa77d30f8a49f587f7",
+  "own_receipt": "fees/final_scientific_review/receipt.json",
+  "science_question_open": true,
+  "new_integer_resource_upper": null,
+  "new_physical_U": null,
+  "new_original_J_lower": null,
+  "conditional_EplusR_panel_entered": false,
+  "paper_and_public_delivery": "Separate pending acceptance gates",
+  "own_receipt_SHA": "41caab99e29f91676d0300634c09c2cd161462e47c9f570fa162b2e2708f713a",
+  "closed_G1_seconds": 133395.4361426006,
+  "all_fees_closed_at_seal": true,
+  "seal_UTC": "2026-11-09T06:45:38.269308+00:00"
+}
