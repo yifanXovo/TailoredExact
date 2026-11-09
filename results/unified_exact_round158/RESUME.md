@@ -1,4 +1,4 @@
-# Round158: science, paper and public recovery complete
+# Round158: accepted finite study and verified delivery
 
 Current authoritative state: the full declared36-hour actual-C++ RX35 hard
 level returned normally with TIME_LIMIT/UNKNOWN,258972 final nodes and no
@@ -39,10 +39,24 @@ zero paths/bytes; all3 protected tracked dirty files retain initial bytes.
 See publication.json, public_restore_receipt.json, cleanup_record.json and
 final_protection_readback.json. Public I/O is separate from scientific G1.
 
-These actual delivery receipts are carried by a normal metadata follow-up.
-Final remote metadata-byte readback and the explicit /goal acceptance
-audit remain to be recorded. No merge, force-push or branch deletion has
-occurred. Keep the goal active through that final external-state check.
+These actual delivery receipts were normally committed and pushed at
+1285dbe39e99a1b0690dd7e4f3c304113f611268. Actual API/ls-remote readback
+confirms that published head, the expected base, Open Draft and unmerged
+state. All seven delivery metadata paths match that commit's Git blobs.
+The explicit A--H acceptance audit passes25 grouped requirements,
+including the conditional physical/E+R branches not entered under their
+stated gates. See [the audit](final_acceptance_audit.json),
+[audit source](final_acceptance_check.py) and
+[actual remote readback](remote_final_readback.json).
+
+This final audit/readback-record follow-up advances the PR head normally;
+the exact published follow-up bytes and actual Draft/base/head are checked
+again after push. Fixed science and the single public recovery stay pinned
+to163b1b3d0dbcc7be3a84d94108ef4a26ae9baba3. No second recovery is needed
+for these mutable delivery records. No merge, force-push or branch deletion
+has occurred. There is no active scientific call or queued required Native
+work to resume. Further scientific work requires a new requested scope
+and its own paid capacity; the resource-value question remains open.
 
 The complete active research history below is retained as historical state;
 its exact pre-closeout copy is also in infra/resume_active_history.md,
