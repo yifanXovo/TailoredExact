@@ -1,38 +1,42 @@
-# Round160 continuation and closeout
+# Round160 delivered
 
-All scientific stages are complete: two-source physical research, one uniform
-revision, matched owner control, late-parent/semantic bridge, eight fresh
-same-PE complete arms, and final same-agent saved-evidence audit (PASS).
+English Open Draft PR: https://github.com/yifanXovo/TailoredExact/pull/222
+Base: codex/round159-joint-quantity-ownership, verified R159 head
+51473276867e802ce729aae3d4a2563ea23a8fe8; R159 remains unmerged.
+Fixed science: 695ea68caad088a54ebed45b7d49360d12bd0e8d.
+The normal delivery-metadata commit advances the head; final GitHub readback
+is retained in the chat/local receipt, avoiding self-reference commits.
 
-The mechanism improves early RX35/NB35 own-H to
-.4016200111731245/.4900715637577154, but complete E+R ends worse than E+
-on both sources. K20 final U is equal. RX20T1 final U/certificate is equal,
-with production certification delayed from21.937043 to36.606473 seconds.
-Keep default off; no further grid, fallback or benchmark.
-See final_report.md, decision.json, reports/complete.csv and cost_report.json.
+All requested research is finished: C++ physical joint neighborhoods,
+two complete 35-anchor source passes, one uniform evidence-based revision,
+matched owner control, late-parent/semantic bridge, eight fresh same-PE arms,
+and the final same-agent saved-evidence audit (PASS).
 
-Measured C++ source: d1da99b85219f4f0a1b5a703fc6ebf1c6dee4431.
-Production PE: dd39a3671c114a9e60d1d169bf6ffb533595f1a632cdd5876fe03f08d0e4da08.
-All measured C++/PE bytes remain frozen. The CMake-only link dependency is
-clean-built (149.8410497s, no Optimize), separate from performance samples.
-Scientific receipts closed at22022.356969899964/129600s; compilation at
-217.00670880032703s before public I/O. No live panel remains.
+Early RX35/NB35 improve to .4016200111731245/.4900715637577154, above old
+late physical uppers. Full E+R ends worse than E+ on both sources. K20 final U
+is equal; RX20T1 final U/certificate is equal with certification delayed from
+21.937043 to36.606473 seconds. Keep the component default off. No new historical
+best, local-to-global lower, owner-necessity theorem, general P-GRB comparison
+or independent confirmation is claimed. No further sweep/fallback is pending.
 
-Original and previous trees are protected. Exact hashes for all initially
-dirty tracked files (original3 plus paper-current44) are private local
-infra/protected_status_bytes.json, excluded from carriers. No global settings
-or previous-round files have been modified/deleted.
+Scientific costs are closed at22022.356969899964/129600s, including failures.
+Compilation is217.00670880032703s separately. See cost_report.json and
+publication_costs.json for actual fees and writing/control wall accounting.
+C++ source/actual PE are frozen; the delivery-only CMake link fix clean-builds.
+No timed producer, compile or public recovery remains active.
 
-Remaining delivery actions:
+The one anonymous current-only recovery is PASS:72 payload downloads,
+nine archives,164880 members,575087486 uncompressed member bytes, four fixed
+old input blobs, zero old archive downloads/Optimize/compilation. The public
+manifest remains pinned to fixed science. See public_restore_receipt.json.
 
-1. New-only carriers, staged-byte manifest, normal science commit/push.
-2. One finite anonymous public recovery, no solve/old carrier replay.
-3. English Open Draft PR stacked on R159, followed by bounded current-only
-   metadata screening/cleanup (zero deletion allowed), verifying protected bytes.
-4. Normal delivery metadata commit, actual PR base/head/Open/Draft readback,
-   then goal completion. See publication.json and actual receipts when present.
+Post-PR bounded cleanup screened164970 files /753983987 bytes; deleted zero
+files/bytes and observed zero free-space change. All47 protected initially
+dirty tracked-file hashes match. Keep the active tree, unique science/failures,
+measured runtime and accepted recovery. Commercial DLL/licenses/credentials
+and private dirty-file inventories are excluded from public carriers. No old
+round, global setting, branch or merge action was taken.
 
-R159#221 remains Open Draft/unmerged at51473276867e802ce729aae3d4a2563ea23a8fe8;
-main remains b2b940c1e517a72e226ec60fc49ff19651737632. Required base is
-codex/round159-joint-quantity-ownership. Local runtimes and accepted recovery
-stay under ExactEBRP-work. No merge, force push, branch deletion or old cleanup.
+Publication, mathematical/paper section, full goal, models/events/logs,
+qualification, complete comparison and final decision are recorded. No
+scientific follow-up is required to complete this round's finite conclusion.

@@ -1,0 +1,1062 @@
+{
+  "UTC": "2026-11-10T16:51:06.368497+00:00",
+  "cutoff_unix": 1794329466.3539438,
+  "scientific_seconds": 22022.356969899964,
+  "compile_seconds": 217.00670880032703,
+  "public_IO_seconds": 372.9511873004958,
+  "all_separate_metered_seconds": 589.9578961008228,
+  "receipts": [
+    {
+      "label": "cmake_delivery_build",
+      "launch": {
+        "UTC": "2026-11-10T16:35:01.550890+00:00",
+        "kind": "build",
+        "command": [
+          "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\scripts\\round160_buildcheck.py"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 600.0,
+        "reservation_seconds": 600.0,
+        "budget_before": {
+          "G1_seconds": 22022.356969899964,
+          "remaining_G1_seconds": 107577.64303010004,
+          "by_category": {
+            "research": 438.4326831009239,
+            "verification": 0.0,
+            "native": 21583.92428679904
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129161.56731689908,
+            "verification": 129600.0,
+            "native": 108016.07571320096
+          },
+          "separately_reported_seconds": 67.16565910028294,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 82112,
+        "parent_birth": {
+          "creation_filetime": 134388021014528071,
+          "creation_unix": 1794328501.4528065
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 149.8410497000441,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 149.8410497000441,
+        "start_unix": 1794328501.5508904,
+        "end_unix": 1794328651.3947527,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "compile_v1",
+      "launch": {
+        "UTC": "2026-11-10T10:03:16.223424+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-ID:/gurobi1302/win64/include",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Round160PhysicalNeighborhood.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\round160_research_main.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Parser.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Evaluator.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Result.cpp",
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\Round160Research.exe"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 300.0,
+        "reservation_seconds": 300.0,
+        "budget_before": {
+          "G1_seconds": 0.0,
+          "remaining_G1_seconds": 129600.0,
+          "by_category": {
+            "research": 0.0,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 0.0,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 75628,
+        "parent_birth": {
+          "creation_filetime": 134387785961172904,
+          "creation_unix": 1794304996.1172905
+        }
+      },
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 9.888491899706423,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 9.888491899706423,
+        "start_unix": 1794304996.2234247,
+        "end_unix": 1794305006.1136951,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "58337559dd50c080e0aa07735c629df4ce1ba2f3f8b77070be78d36533979620"
+    },
+    {
+      "label": "compile_v2",
+      "launch": {
+        "UTC": "2026-11-10T10:04:15.489619+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-ID:/gurobi1302/win64/include",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Round160PhysicalNeighborhood.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\round160_research_main.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Parser.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Evaluator.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Result.cpp",
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\Round160Research.exe"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 300.0,
+        "reservation_seconds": 300.0,
+        "budget_before": {
+          "G1_seconds": 0.0,
+          "remaining_G1_seconds": 129600.0,
+          "by_category": {
+            "research": 0.0,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 9.888491899706423,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 70788,
+        "parent_birth": {
+          "creation_filetime": 134387786554038930,
+          "creation_unix": 1794305055.4038925
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 8.796834300272167,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 8.796834300272167,
+        "start_unix": 1794305055.4896197,
+        "end_unix": 1794305064.2826798,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "compile_v3",
+      "launch": {
+        "UTC": "2026-11-10T10:06:31.098480+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-ID:/gurobi1302/win64/include",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Round160PhysicalNeighborhood.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\round160_research_main.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Parser.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Evaluator.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Result.cpp",
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\Round160Research.exe"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 300.0,
+        "reservation_seconds": 300.0,
+        "budget_before": {
+          "G1_seconds": 0.47096259985119104,
+          "remaining_G1_seconds": 129599.52903740015,
+          "by_category": {
+            "research": 0.47096259985119104,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129599.52903740015,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 18.68532619997859,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 102648,
+        "parent_birth": {
+          "creation_filetime": 134387787910067907,
+          "creation_unix": 1794305191.0067902
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 8.567827600054443,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 8.567827600054443,
+        "start_unix": 1794305191.098481,
+        "end_unix": 1794305199.66586,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "3a10d44676fe13dafe685e108acdc47723739f8ce49645b4a1d63bf278a07959"
+    },
+    {
+      "label": "compile_v4",
+      "launch": {
+        "UTC": "2026-11-10T10:16:11.171036+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-ID:/gurobi1302/win64/include",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Round160PhysicalNeighborhood.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\round160_research_main.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Parser.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Evaluator.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Result.cpp",
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\Round160Research.exe"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 300.0,
+        "reservation_seconds": 300.0,
+        "budget_before": {
+          "G1_seconds": 359.9647400001995,
+          "remaining_G1_seconds": 129240.0352599998,
+          "by_category": {
+            "research": 359.9647400001995,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129240.0352599998,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 27.253153800033033,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 80868,
+        "parent_birth": {
+          "creation_filetime": 134387793710962997,
+          "creation_unix": 1794305771.0963001
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 8.477932800073177,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 8.477932800073177,
+        "start_unix": 1794305771.1710367,
+        "end_unix": 1794305779.6555028,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "production_compile_main_v1",
+      "launch": {
+        "UTC": "2026-11-10T10:24:11.128489+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\scripts",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-c",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\main.cpp",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\production_v1\\main.o"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 600.0,
+        "reservation_seconds": 600.0,
+        "budget_before": {
+          "G1_seconds": 367.94048110069707,
+          "remaining_G1_seconds": 129232.0595188993,
+          "by_category": {
+            "research": 367.94048110069707,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129232.0595188993,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 35.73108660010621,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 103264,
+        "parent_birth": {
+          "creation_filetime": 134387798425883327,
+          "creation_unix": 1794306242.5883331
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 9.598631900269538,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 9.598631900269538,
+        "start_unix": 1794306251.1284895,
+        "end_unix": 1794306260.7205622,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "c962a8111bcc4f73bceacf233b28403b8c9a63662f51270730edd35935f94e43"
+    },
+    {
+      "label": "production_compile_main_v2",
+      "launch": {
+        "UTC": "2026-11-10T10:25:49.072471+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\scripts",
+          "-ID:/gurobi1302/win64/include",
+          "-c",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\main.cpp",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\production_v2\\main.o"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 600.0,
+        "reservation_seconds": 600.0,
+        "budget_before": {
+          "G1_seconds": 367.94048110069707,
+          "remaining_G1_seconds": 129232.0595188993,
+          "by_category": {
+            "research": 367.94048110069707,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129232.0595188993,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 45.528928600717336,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 66556,
+        "parent_birth": {
+          "creation_filetime": 134387799399717229,
+          "creation_unix": 1794306339.9717236
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 9.17587810009718,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 9.17587810009718,
+        "start_unix": 1794306349.0724714,
+        "end_unix": 1794306358.2582066,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "c962a8111bcc4f73bceacf233b28403b8c9a63662f51270730edd35935f94e43"
+    },
+    {
+      "label": "production_compile_Round160PhysicalNeighborhood_v1",
+      "launch": {
+        "UTC": "2026-11-10T10:24:20.736233+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\scripts",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-c",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Round160PhysicalNeighborhood.cpp",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\production_v1\\Round160PhysicalNeighborhood.o"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 600.0,
+        "reservation_seconds": 600.0,
+        "budget_before": {
+          "G1_seconds": 367.94048110069707,
+          "remaining_G1_seconds": 129232.0595188993,
+          "by_category": {
+            "research": 367.94048110069707,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129232.0595188993,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 45.32971850037575,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 103264,
+        "parent_birth": {
+          "creation_filetime": 134387798425883327,
+          "creation_unix": 1794306242.5883331
+        }
+      },
+      "receipt": {
+        "exit_code": 1,
+        "outer_seconds": 0.19921010034158826,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 0.19921010034158826,
+        "start_unix": 1794306260.7362332,
+        "end_unix": 1794306260.9395647,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "625dcb38fe96c84a4400f3e7dbd903a73908473792c9eccd51e81619fc637b0c"
+    },
+    {
+      "label": "production_compile_Round160PhysicalNeighborhood_v2",
+      "launch": {
+        "UTC": "2026-11-10T10:25:58.271793+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-DEXACT_EBRP_ENABLE_GUROBI=1",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\scripts",
+          "-ID:/gurobi1302/win64/include",
+          "-c",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Round160PhysicalNeighborhood.cpp",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\production_v2\\Round160PhysicalNeighborhood.o"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 600.0,
+        "reservation_seconds": 600.0,
+        "budget_before": {
+          "G1_seconds": 367.94048110069707,
+          "remaining_G1_seconds": 129232.0595188993,
+          "by_category": {
+            "research": 367.94048110069707,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129232.0595188993,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 54.704806700814515,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 66556,
+        "parent_birth": {
+          "creation_filetime": 134387799399717229,
+          "creation_unix": 1794306339.9717236
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 2.9651583996601403,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 2.9651583996601403,
+        "start_unix": 1794306358.2717938,
+        "end_unix": 1794306361.2327058,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "production_link_v2",
+      "launch": {
+        "UTC": "2026-11-10T10:26:01.248336+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\production_v2\\main.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\production_v2\\Round160PhysicalNeighborhood.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round142\\NativeEvidenceJournal.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round133\\ControllingLeafScheduler.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round156\\v1\\GurobiBaseline.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round156\\v1\\PaperExternalGiniTree.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round137\\IntervalRowFactory.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round143\\CplexBaseline.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round143\\MipStartMapping.o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round144-v4\\ObjectiveResourceCompression.o",
+          "C:\\Users\\Administrator\\.codex\\worktrees\\round120-native-proof-disjunction\\ExactEBRP\\build\\research\\round120\\libexact_ebrp_core.a",
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+          "-lkernel32",
+          "-luser32",
+          "-lgdi32",
+          "-lwinspool",
+          "-lshell32",
+          "-lole32",
+          "-loleaut32",
+          "-luuid",
+          "-lcomdlg32",
+          "-ladvapi32",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\production_v2\\ExactEBRP.exe"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 120.0,
+        "reservation_seconds": 120.0,
+        "budget_before": {
+          "G1_seconds": 367.94048110069707,
+          "remaining_G1_seconds": 129232.0595188993,
+          "by_category": {
+            "research": 367.94048110069707,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129232.0595188993,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 57.669965100474656,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 66556,
+        "parent_birth": {
+          "creation_filetime": 134387799399717229,
+          "creation_unix": 1794306339.9717236
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 1.0549985999241471,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 1.0549985999241471,
+        "start_unix": 1794306361.248336,
+        "end_unix": 1794306362.3070319,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "public_cleanup",
+      "launch": {
+        "UTC": "2026-11-10T16:49:15.802956+00:00",
+        "kind": "public",
+        "command": [
+          "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\scripts\\round160_delivery.py",
+          "cleanup",
+          "https://github.com/yifanXovo/TailoredExact/pull/222"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 300.0,
+        "reservation_seconds": 300.0,
+        "budget_before": {
+          "G1_seconds": 22022.356969899964,
+          "remaining_G1_seconds": 107577.64303010004,
+          "by_category": {
+            "research": 438.4326831009239,
+            "verification": 0.0,
+            "native": 21583.92428679904
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129161.56731689908,
+            "verification": 129600.0,
+            "native": 108016.07571320096
+          },
+          "separately_reported_seconds": 584.727283700835,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 29096,
+        "parent_birth": {
+          "creation_filetime": 134388029557172886,
+          "creation_unix": 1794329355.717287
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 5.230612399987876,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 5.230612399987876,
+        "start_unix": 1794329355.8029566,
+        "end_unix": 1794329361.0395422,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "public"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "public_manifest",
+      "launch": {
+        "UTC": "2026-11-10T16:42:55.670451+00:00",
+        "kind": "public",
+        "command": [
+          "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\scripts\\round160_delivery.py",
+          "manifest"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 120.0,
+        "reservation_seconds": 120.0,
+        "budget_before": {
+          "G1_seconds": 22022.356969899964,
+          "remaining_G1_seconds": 107577.64303010004,
+          "by_category": {
+            "research": 438.4326831009239,
+            "verification": 0.0,
+            "native": 21583.92428679904
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129161.56731689908,
+            "verification": 129600.0,
+            "native": 108016.07571320096
+          },
+          "separately_reported_seconds": 346.1961812004447,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 25980,
+        "parent_birth": {
+          "creation_filetime": 134388025755826567,
+          "creation_unix": 1794328975.5826569
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 4.180381300393492,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 4.180381300393492,
+        "start_unix": 1794328975.6704514,
+        "end_unix": 1794328979.8558505,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "public"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "public_package",
+      "launch": {
+        "UTC": "2026-11-10T16:40:04.910821+00:00",
+        "kind": "public",
+        "command": [
+          "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\scripts\\round160_delivery.py",
+          "package"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 600.0,
+        "reservation_seconds": 600.0,
+        "budget_before": {
+          "G1_seconds": 22022.356969899964,
+          "remaining_G1_seconds": 107577.64303010004,
+          "by_category": {
+            "research": 438.4326831009239,
+            "verification": 0.0,
+            "native": 21583.92428679904
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129161.56731689908,
+            "verification": 129600.0,
+            "native": 108016.07571320096
+          },
+          "separately_reported_seconds": 217.00670880032703,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 99304,
+        "parent_birth": {
+          "creation_filetime": 134388024048175492,
+          "creation_unix": 1794328804.8175488
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 129.18947240011767,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 129.18947240011767,
+        "start_unix": 1794328804.9108214,
+        "end_unix": 1794328934.0992057,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "public"
+      },
+      "stdout_SHA": "5288c66bb2806fe075fd7ce4b90b23fe0ea570957afe3797d203ac77fb83a97b",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "public_push_science",
+      "launch": {
+        "UTC": "2026-11-10T16:44:10.515616+00:00",
+        "kind": "public",
+        "command": [
+          "git",
+          "-c",
+          "gc.auto=0",
+          "-c",
+          "maintenance.auto=false",
+          "push",
+          "--set-upstream",
+          "origin",
+          "codex/round160-physical-neighborhood"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 900.0,
+        "reservation_seconds": 900.0,
+        "budget_before": {
+          "G1_seconds": 22022.356969899964,
+          "remaining_G1_seconds": 107577.64303010004,
+          "by_category": {
+            "research": 438.4326831009239,
+            "verification": 0.0,
+            "native": 21583.92428679904
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129161.56731689908,
+            "verification": 129600.0,
+            "native": 108016.07571320096
+          },
+          "separately_reported_seconds": 350.3765625008382,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 68624,
+        "parent_birth": {
+          "creation_filetime": 134388026504463042,
+          "creation_unix": 1794329050.4463043
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 38.77372119994834,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 38.77372119994834,
+        "start_unix": 1794329050.5156162,
+        "end_unix": 1794329089.2978628,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "public"
+      },
+      "stdout_SHA": "01fa8ff6d5b967c1c88bb7da44c00b599e6d0c40049173f7173947452d7b866e",
+      "stderr_SHA": "93bdf9cd30bde70ecd834bca42a74b58d00cf8245c3b3be43132211cf950ebf9"
+    },
+    {
+      "label": "public_restore",
+      "launch": {
+        "UTC": "2026-11-10T16:44:57.183688+00:00",
+        "kind": "public",
+        "command": [
+          "E:\\codes\\ExactEBRP\\build\\research\\round88-ot\\venv\\Scripts\\python.exe",
+          "-B",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\scripts\\round160_delivery.py",
+          "restore",
+          "695ea68caad088a54ebed45b7d49360d12bd0e8d"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 1800.0,
+        "reservation_seconds": 1800.0,
+        "budget_before": {
+          "G1_seconds": 22022.356969899964,
+          "remaining_G1_seconds": 107577.64303010004,
+          "by_category": {
+            "research": 438.4326831009239,
+            "verification": 0.0,
+            "native": 21583.92428679904
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129161.56731689908,
+            "verification": 129600.0,
+            "native": 108016.07571320096
+          },
+          "separately_reported_seconds": 389.15028370078653,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 97584,
+        "parent_birth": {
+          "creation_filetime": 134388026971026750,
+          "creation_unix": 1794329097.1026745
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 195.57700000004843,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 195.57700000004843,
+        "start_unix": 1794329097.1836886,
+        "end_unix": 1794329292.7727761,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "public"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "recover_core_v3_build",
+      "launch": {
+        "UTC": "2026-11-10T10:31:30.529087+00:00",
+        "kind": "build",
+        "command": [
+          "D:\\msys64\\ucrt64\\bin\\g++.exe",
+          "-std=c++17",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+          "-ID:/gurobi1302/win64/include",
+          "E:\\codes\\ExactEBRP-work\\temp\\round160\\recover_core_v3\\Round160PhysicalNeighborhood.cpp",
+          "E:\\codes\\ExactEBRP-work\\temp\\round160\\recover_core_v3\\round160_research_main.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Parser.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Evaluator.cpp",
+          "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Result.cpp",
+          "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+          "-o",
+          "E:\\codes\\ExactEBRP-work\\temp\\round160\\recover_core_v3\\Round160Research.exe"
+        ],
+        "cwd": "E:\\codes\\ExactEBRP-work\\worktrees\\round160",
+        "timeout_seconds": 300.0,
+        "reservation_seconds": 300.0,
+        "budget_before": {
+          "G1_seconds": 433.47977340081707,
+          "remaining_G1_seconds": 129166.52022659918,
+          "by_category": {
+            "research": 433.47977340081707,
+            "verification": 0.0,
+            "native": 0.0
+          },
+          "limits": {
+            "research": 129600.0,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "category_remaining": {
+            "research": 129166.52022659918,
+            "verification": 129600.0,
+            "native": 129600.0
+          },
+          "separately_reported_seconds": 58.7249637003988,
+          "unclosed": [],
+          "nested_H_LP_MIP_Work_not_added": true
+        },
+        "parent_pid": 100176,
+        "parent_birth": {
+          "creation_filetime": 134387802902730601,
+          "creation_unix": 1794306690.2730618
+        }
+      },
+      "receipt": {
+        "exit_code": 0,
+        "outer_seconds": 8.440695399884135,
+        "G1_seconds": 0.0,
+        "separately_reported_seconds": 8.440695399884135,
+        "start_unix": 1794306690.5290878,
+        "end_unix": 1794306698.9696407,
+        "timeout": false,
+        "supervisor_failure": null,
+        "exit_observed": true,
+        "nested_H_LP_MIP_not_added": true,
+        "budget_category": "build"
+      },
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA": "bc61f31f7fceec32e71c03a0592fd3263cc1849cb41b3671cc35cbcc211bde1e"
+    }
+  ],
+  "goal_clock_start_unix": 1794304383.0,
+  "observed_goal_wall_to_cutoff_seconds": 25083.353943824768,
+  "writing_and_control_wall_outside_metered_intervals_seconds": 2470.9776027202606,
+  "writing_time_policy": "Observed wall outside the union of metered outer intervals includes pure writing, orchestration, light metadata and Git/API control. Writing during a metered wait overlaps that interval and is not added. This residual is not a scientific charge or an exclusive writing-only timer.",
+  "later_metadata_commit_push": "After this cutoff; retain its actual local receipt, avoid recursive self-publication",
+  "old_scientific_cost_added": 0
+}
