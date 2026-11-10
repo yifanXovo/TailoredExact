@@ -90,8 +90,8 @@ Round161Artifact replaceRound161Objective(const Instance& in,const std::filesyst
             out.zero_only=true;
         }
         if(out.zero_only) {
-            int j=-1;ck(GRBgetvarbyname(m,"G",&j));ck(GRBsetdblattrelement(m,"UB",j,0));
-            for(int i=1;i<=in.V;++i){ck(GRBgetvarbyname(m,("Y_"+std::to_string(i)).c_str(),&j));ck(GRBsetdblattrelement(m,"UB",j,0));}
+            int j=-1;double one=1;ck(GRBgetvarbyname(m,"G",&j));
+            ck(GRBaddconstr(m,1,&j,&one,'=',0,"rn_zero_only_g"));
         } else {
             out.s_lower=block.sl;out.s_upper=block.su;out.t_lower=block.lt;out.t_upper=block.ut;
             if(out.zero_possible) {

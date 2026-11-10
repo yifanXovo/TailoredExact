@@ -73,6 +73,8 @@ def tiny():
                 J=G+sum(F(.1)*abs(x-1) for x in r);best=min(best,float(J));feasible.append(dict(Y=Y,J=float(J)))
         for form in ('OLD','RN'):
             dest=folder/form;cmd=[PE,inp,100,2,3,.1,parent,dest,form,'MIP',30,-1]
+            if tag=='zero_only' and form=='RN' and (dest/'outcome.json').exists() and not (folder/'RN_bound_fix_v2').exists():
+                dest.rename(folder/'RN_bound_fix_v2')
             if not (dest/'outcome.json').exists():
                 if dest.exists():dest.rename(folder/(form+'_failed_v1'))
                 rc=subprocess.run(list(map(str,cmd)),cwd=ROOT,env=meter.environment(),capture_output=True)
