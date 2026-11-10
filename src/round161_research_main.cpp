@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <iostream>
 #include <chrono>
+#include <algorithm>
 
 using namespace ebrp;
 int main(int argc,char** argv) {try {

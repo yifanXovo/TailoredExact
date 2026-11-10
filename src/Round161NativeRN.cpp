@@ -137,7 +137,10 @@ Round161Artifact replaceRound161Objective(const Instance& in,const std::filesyst
         }
         if(penalty_envelope&&!out.zero_only){auto p=penaltyBounds(in,a,indices,supports,cutoff);penalty_sl=p.first;penalty_su=p.second;
             block.sl=std::max(block.sl,p.first);block.su=std::min(block.su,p.second);
-            if(!(block.sl>0&&block.su>=block.sl))throw std::runtime_error("round161_penalty_positive_domain_empty");
+            if(!(block.sl>0&&block.su>=block.sl)){
+                if(!out.zero_possible)throw std::runtime_error("round161_penalty_positive_domain_empty");out.zero_only=true;
+            }
+            if(!out.zero_only){
             block.lt=std::nextafter(1./block.su,-std::numeric_limits<double>::infinity());block.ut=std::nextafter(1./block.sl,std::numeric_limits<double>::infinity());
             block.columns["rn_t"]={block.lt,block.ut};
             for(int i=1;i<=in.V;++i){block.columns[round143_detail::Y(i)].second=supports[i].back()?std::nextafter(block.ut*supports[i].back(),std::numeric_limits<double>::infinity()):0;
@@ -145,6 +148,7 @@ Round161Artifact replaceRound161Objective(const Instance& in,const std::filesyst
             for(auto& row:block.rows)if(row.name.rfind("rn_lb_",0)==0||row.name.rfind("rn_ub_",0)==0){double factor=0;
                 for(const auto& term:row.coefficients)if(term.first.rfind("rn_w_",0)==0)factor=term.second;
                 for(auto& term:row.coefficients)if(inventory_names.count(term.first))term.second=-factor*(row.name.rfind("rn_lb_",0)==0?block.lt:block.ut);}
+            }
         }
         if(out.zero_only) {
             int j=-1;double one=1;ck(GRBgetvarbyname(m,"G",&j));
