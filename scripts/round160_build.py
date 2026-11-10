@@ -18,7 +18,7 @@ def production(version='v1'):
     assert not semantic,semantic
     flags=[]
     for flag in old['flags']:
-        if flag.startswith('-I') and Path(flag[2:]).name in ('include','scripts'):
+        if flag.startswith('-I') and 'ExactEBRP-work' in flag and Path(flag[2:]).name in ('include','scripts'):
             flag='-I'+str(ROOT/Path(flag[2:]).name)
         flags.append(flag)
     target=BUILD/('production_'+version);target.mkdir(parents=True,exist_ok=False)

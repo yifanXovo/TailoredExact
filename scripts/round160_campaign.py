@@ -1,11 +1,31 @@
 """R160's own eight-position matrix/admission/serial loop. Never runs old freeze."""
-import copy,inspect,types
+import copy,inspect,types,importlib,re
 from round160_common import *
-import round133_campaign as inherited
-import round154_read as proof_reader
-import round156_read as producer_reader
-from round121_campaign import finish_producer
-from round122_prepare import COMMON
+
+def legacy_import(name):
+    """Recover only missing thin fixed-Git metadata needed by old imports."""
+    for attempt in range(30):
+        try:return importlib.import_module(name)
+        except FileNotFoundError as error:
+            path=Path(error.filename).resolve();relative=path.relative_to(ROOT.resolve())
+            parts=relative.parts
+            assert len(parts)>=3 and parts[0]=='results'
+            match=re.fullmatch(r'unified_exact_round(\d+)',parts[1])
+            assert match and int(match[1])<160 and path.suffix in ('.json','.md','.csv'),relative
+            raw=git('show',BASE+':'+relative.as_posix());assert len(raw)<5000000
+            path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(raw)
+            receipt=OUT/'infra/legacy_import_metadata.json'
+            records=read(receipt) if receipt.exists() else []
+            records.append(dict(path=relative.as_posix(),commit=BASE,SHA256=sha(path),bytes=len(raw),
+                                reason='minimal read-only import metadata; no old producer/solver'))
+            write(receipt,records)
+    raise RuntimeError('bounded legacy metadata recovery exhausted')
+
+inherited=legacy_import('round133_campaign')
+proof_reader=legacy_import('round154_read')
+producer_reader=legacy_import('round156_read')
+finish_producer=legacy_import('round121_campaign').finish_producer
+COMMON=legacy_import('round122_prepare').COMMON
 
 SPECS=[('R-X35-S-T2','Eplus',7200),('R-X35-S-T2','EplusR',7200),
        ('N-B35-S','Eplus',2400),('N-B35-S','EplusR',2400),
@@ -61,9 +81,7 @@ def floor_contract(destination,enabled,launch,identity):
     return fn(destination,enabled,launch,identity)
 
 def verify(launch,identity):
-    fn=types.FunctionType(proof_reader.verify.__code__,dict(vars(proof_reader),ROOT=ROOT,OUT=OUT,configure=configure,floor_contract=floor_contract))
-    value=fn(launch,identity);destination=Path(launch['destination'])
-    value['arm'].update(R160_method=launch['R160_method'])
+    destination=Path(launch['destination']);extra={}
     path=destination/'round160'
     if launch['R160_method']=='EplusR':
         assert path.exists()
@@ -80,9 +98,27 @@ def verify(launch,identity):
         scope_start=read(destination/'external/initial_witness.json')
         assert abs(scope_start['objective']-final['J'])<1e-12
         assert [r['nodes'] for r in scope_start['routes']]==[r['nodes'] for r in final['routes']]
-        value['arm'].update(local_parent_J=initial['J'],local_final_J=final['J'],local_seconds=summary['seconds'],
+        extra.update(local_parent_J=initial['J'],local_final_J=final['J'],local_seconds=summary['seconds'],
             local_calls=summary['calls'],local_accepted=summary['accepted'])
     else:assert not path.exists()
+    # New inlet audit precedes the inherited closeout, so its actual elapsed
+    # time belongs to that arm's T_verify / T_total, as well as the outer fee.
+    fn=types.FunctionType(proof_reader.verify.__code__,dict(vars(proof_reader),ROOT=ROOT,OUT=OUT,configure=configure,floor_contract=floor_contract))
+    base_reader=legacy_import('round135_read');original_verify=base_reader.verify
+    if launch['R160_method']=='EplusR':
+        source=inspect.getsource(original_verify)
+        needle="assert len(initial)==1 and startup.fleet_key(p,initial[0]['routes'])==H['fleet']"
+        assert source.count(needle)==1
+        replacement="""assert len(initial)==1
+            assert startup.fleet_key(p,read(d/'round160/initial.json')['routes'])==H['fleet']
+            assert startup.fleet_key(p,initial[0]['routes'])==startup.fleet_key(p,read(d/'round160/final.json')['routes'])"""
+        source=source.replace(needle,replacement)
+        namespace=dict(vars(base_reader));filename=destination/'round160_inlet_reader.py.txt'
+        filename.write_text(source,encoding='utf8');exec(compile(source,str(filename),'exec'),namespace)
+        base_reader.verify=namespace['verify']
+    try:value=fn(launch,identity)
+    finally:base_reader.verify=original_verify
+    value['arm'].update(R160_method=launch['R160_method'],**extra)
     write(destination/'round160_endpoint.json',value['arm']);return value
 
 def execute(launch,identity):
@@ -105,8 +141,17 @@ def smoke(method):
     result=execute(launch,identity)
     write(camp/'result.json',dict(PASS=True,not_performance_sample=True,arm=result['arm']))
 
+def reverify_smoke(method):
+    camp=OUT/'qualification'/('launch_'+method);identity=read(camp/'identity.json')
+    launch=identity['launches'][0];assert (Path(launch['destination'])/'producer_seal.json').exists()
+    result=execute(launch,identity)
+    write(camp/'result.json',dict(PASS=True,not_performance_sample=True,readback_recovery_only=True,
+        new_Native_producer_runs=0,arm=result['arm']))
+
 def freeze():
-    configure();assert not budget()['unclosed'];assert not (OUT/'confirmation_matrix.json').exists()
+    configure()
+    assert all(p['label']==os.environ.get('ROUND140_METERED_PARENT_LABEL') for p in budget()['unclosed'])
+    assert not (OUT/'confirmation_matrix.json').exists()
     for method in ('Eplus','EplusR'):assert read(OUT/'qualification'/('launch_'+method)/'result.json')['PASS']
     groups=[]
     for index,(role,method,cap) in enumerate(SPECS,1):

@@ -14,6 +14,9 @@ def build(version='v1'):
         PE=str(PE),PE_SHA=sha(PE),DLL=str(DLL),DLL_SHA=sha(DLL),source_base=BASE,
         sources={str(p.relative_to(ROOT)):sha(p) for p in sources+[ROOT/'include/Round160PhysicalNeighborhood.hpp']},
         optimization_policy='inherited GNU C++17 flags; no optimization override or fast-math',production=False)
+    import shutil
+    runtime=OUT/'runtime'/f'Round160Research_{version}.exe';runtime.parent.mkdir(parents=True,exist_ok=True)
+    shutil.copyfile(PE,runtime);manifest['carrier_PE']=runtime.relative_to(ROOT).as_posix()
     write(OUT/f'engineering/build_{version}.json',manifest);write(OUT/'build_manifest.json',manifest)
 
 def execute(role,label,seconds='21600',nodes='512',passes='1',mode='joint',*block):
