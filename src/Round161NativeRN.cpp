@@ -78,6 +78,39 @@ void registry(GRBmodel* m,const std::filesystem::path& dir,const std::string& la
         for(int k=a.start[i];k<a.start[i+1];++k){if(k>a.start[i])r<<',';r<<quoted(a.names[a.index[k]])<<':'<<a.coef[k];}r<<"}}\n";}
     if(!c||!r)throw std::runtime_error("round161_registry_write");
 }
+void zeroBranch(round143_detail::Block& block,const std::vector<std::vector<int>>& supports,long long B,double gu) {
+    block.columns["rn_z0"]={0,1};block.columns["rn_t"].first=0;
+    std::set<std::string> states;for(size_t i=1;i<supports.size();++i)for(int y:supports[i])states.insert(round143_detail::state(int(i),y));
+    for(auto& row:block.rows) {
+        if(row.name.rfind("rn_lb_",0)==0){double stored=0;for(const auto& term:row.coefficients)if(states.count(term.first))stored=-term.second;row.coefficients["rn_z0"]=stored;}
+        if(row.name=="rn_normalization")row.coefficients["rn_z0"]=row.rhs;
+    }
+    using R=round143_detail::Row;
+    std::map<std::string,double> lo{{"rn_z0",1}},hi{{"rn_z0",double(B)}};
+    for(size_t i=1;i<supports.size();++i){lo["Y_"+std::to_string(i)]=1;hi["Y_"+std::to_string(i)]=1;}
+    block.rows.push_back(R{"rn_positive_stock",lo,'>',1});block.rows.push_back(R{"rn_zero_stock",hi,'<',double(B)});
+    block.rows.push_back(R{"rn_t_positive",{{"rn_t",1},{"rn_z0",block.lt}},'>',block.lt});
+    block.rows.push_back(R{"rn_t_zero",{{"rn_t",1},{"rn_z0",block.ut}},'<',block.ut});
+    block.rows.push_back(R{"rn_G_zero",{{"G",1},{"rn_z0",gu}},'<',gu});
+}
+}
+void qualifyRound161ScaledZeroKernel(const std::filesystem::path& output) {
+    // An algebraic objective-block unit, not an admissible route input: the
+    // project reader stores integer demands. No Native environment/Optimize.
+    std::vector<std::vector<int>> supports{{},{0,1},{0,1}};std::vector<double> c{0,1e13,1e13};
+    auto b=round143_detail::block(supports,c,1,1);zeroBranch(b,supports,1,.5);
+    std::map<std::string,double> point{{"G",0},{"Y_1",0},{"Y_2",0},{"rn_z0",1}};
+    for(const auto& col:b.columns)if(col.first!="rn_z0")point[col.first]=0;
+    for(int i=1;i<=2;++i){point[round143_detail::state(i,0)]=1;point[round143_detail::state(i,1)]=0;}
+    int scaled=0;for(const auto& row:b.rows){long double lhs=0;
+        for(const auto& term:row.coefficients)lhs+=static_cast<long double>(term.second)*point.at(term.first);
+        const long double residual=lhs-row.rhs;
+        if(row.sense=='='?residual!=0:row.sense=='<'?residual>0:residual<0)throw std::runtime_error("round161_scaled_zero_kernel:"+row.name);
+        if(row.name.rfind("rn_lb_",0)==0)for(const auto& term:row.coefficients)if(term.first.rfind("rn_w_",0)==0&&term.second>1)++scaled;
+    }
+    if(!scaled)throw std::runtime_error("round161_kernel_did_not_exercise_scaling");
+    std::ofstream f(output);f<<"{\"PASS\":true,\"scaled_lower_rows\":"<<scaled<<",\"kernel_only\":true,\"route_input\":false,\"Native_Optimize\":0,\"integer_target_reader_unchanged\":true}\n";
+    if(!f)throw std::runtime_error("round161_kernel_receipt_write");
 }
 Round161Artifact replaceRound161Objective(const Instance& in,const std::filesystem::path& old_lp,
         const std::filesystem::path& output,bool rn,double gu,bool penalty_envelope,double cutoff) {
@@ -156,18 +189,7 @@ Round161Artifact replaceRound161Objective(const Instance& in,const std::filesyst
         } else {
             out.s_lower=block.sl;out.s_upper=block.su;out.t_lower=block.lt;out.t_upper=block.ut;
             if(out.zero_possible) {
-                block.columns["rn_z0"]={0,1};block.columns["rn_t"].first=0;
-                for(auto& row:block.rows) {
-                    if(row.name.rfind("rn_lb_",0)==0){double stored=0;for(const auto& term:row.coefficients)if(inventory_names.count(term.first))stored=-term.second;row.coefficients["rn_z0"]=stored;}
-                    if(row.name=="rn_normalization")row.coefficients["rn_z0"]=row.rhs;
-                }
-                using R=round143_detail::Row;
-                std::map<std::string,double> lo{{"rn_z0",1}},hi{{"rn_z0",double(B)}};
-                for(int i=1;i<=in.V;++i){lo["Y_"+std::to_string(i)]=1;hi["Y_"+std::to_string(i)]=1;}
-                block.rows.push_back(R{"rn_positive_stock",lo,'>',1});block.rows.push_back(R{"rn_zero_stock",hi,'<',double(B)});
-                block.rows.push_back(R{"rn_t_positive",{{"rn_t",1},{"rn_z0",block.lt}},'>',block.lt});
-                block.rows.push_back(R{"rn_t_zero",{{"rn_t",1},{"rn_z0",block.ut}},'<',block.ut});
-                block.rows.push_back(R{"rn_G_zero",{{"G",1},{"rn_z0",gu}},'<',gu});
+                zeroBranch(block,supports,B,gu);
             }
             for(const auto& [name,b]:block.columns)ck(GRBaddvar(m,0,nullptr,nullptr,0,b.first,b.second,name=="rn_z0"?GRB_BINARY:GRB_CONTINUOUS,name.c_str()));
             ck(GRBupdatemodel(m));

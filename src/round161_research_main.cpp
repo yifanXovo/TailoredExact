@@ -13,6 +13,7 @@
 
 using namespace ebrp;
 int main(int argc,char** argv) {try {
+    if(argc==3&&std::string(argv[1])=="--qualify-zero-kernel"){qualifyRound161ScaledZeroKernel(argv[2]);return 0;}
     if(argc!=12)throw std::runtime_error("Round161Research input T tp td lambda parent out OLD|RN|RN-P export|export-zero|LP|MIP seconds nodes(-1=unlimited)");
     const auto began=std::chrono::steady_clock::now();const double cap=std::stod(argv[10]);
     auto elapsed=[&](){return std::chrono::duration<double>(std::chrono::steady_clock::now()-began).count();};

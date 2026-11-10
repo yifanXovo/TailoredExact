@@ -22,4 +22,5 @@ Round161Artifact replaceRound161Objective(const Instance&, const std::filesystem
     bool penalty_envelope=false, double cutoff=0);
 SolverNeutralModelDomain round161Domain(const std::filesystem::path&);
 double round161StartResidual(const std::filesystem::path&, const std::vector<double>&);
+void qualifyRound161ScaledZeroKernel(const std::filesystem::path&);
 }
