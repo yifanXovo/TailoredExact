@@ -1,0 +1,20 @@
+{
+  "selected": "physical-block-v1-node512-one-pass",
+  "block_size": 8,
+  "total_extra_internal_ports": 8,
+  "nodes_per_block": 512,
+  "passes": 1,
+  "Seed": 0,
+  "Threads": 1,
+  "inlet": "Own H plus existing R83 processing, immediately before scope/RN consumption",
+  "revision_outcome": "The sole uniform 2048-node revision completes more individual blocks but changes subsequent greedy parent/block trajectories. It is more expensive and ends worse on both sources: RX .4186767011062194 versus .4016200111731245; NB .49513071157478306 versus .4900715637577154. Retain the original common 512-node rule for complete self-paid testing.",
+  "v1_outer_seconds": [40.966859499923885,65.66959699988365],
+  "v2_outer_seconds": [100.34560370026156,148.8609334998764],
+  "positive_physical_gate": "Both intended own-H parents yield original-verifier-passed physical improvements at a plausible startup cost. Neither v1 endpoint is below the stronger historical late physical reference; that is not a prerequisite for evaluating an early component.",
+  "no_further_recipe_revision": true,
+  "no_free_offline_information": true,
+  "no_local_bound_to_global_proof": true,
+  "formal_panel": "Eight fresh same-PE Eplus/EplusR positions, four fixed roles and windows from goal F, after finite new launch qualification",
+  "default_off": true,
+  "proof_of_complete_benefit": "Pending complete self-paid panel"
+}

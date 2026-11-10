@@ -1,0 +1,26 @@
+{
+  "UTC": "2026-11-10T10:31:40.795090+00:00",
+  "target_SHA": "4616ea0d018a7f78989b3e5ad64a2e8dc3decba47f46ed4061b2c2c0b3381eb5",
+  "finite_rebuild": true,
+  "original_sources": {
+    "UTC": "2026-11-10T10:06:31.093635+00:00",
+    "base": "51473276867e802ce729aae3d4a2563ea23a8fe8",
+    "files": {
+      "scripts/round160_common.py": "bcafcf723666584df02b001431f18c09e046a37b41b95eebde0afb1577739ff3",
+      "scripts/round160_execute.py": "d832a68e586af0e5a9631c5c646bc5f2dd2e6ead4f728c77603b12705962de40",
+      "scripts/round160_prepare.py": "69d720a5bebe1041eb68d544087a781174bbbd870ed3c1f2f2a5f5a58f73608c",
+      "scripts/round160_qualify.py": "d16510575859cee138766a7fb50a36e54f5b985c796063213c31bbca54aa60a6",
+      "src/Round160PhysicalNeighborhood.cpp": "65314c0fe849aec2000e00590a751b1194ea702ab3432349fdd59f8bdc2ba60f",
+      "src/round160_research_main.cpp": "c6869be7d2cacd86eee32fd627e9aa27beeecc692ce727f77497dfbee6554192",
+      "include/Round160PhysicalNeighborhood.hpp": "c4c2b4a6d7f434eb071eff6af9e1fcb174d88af7a32503910073c2d91996503a",
+      "CMakeLists.txt": "83e6db3fc0c8b6d15a4a8dad5c7f6e0747fb801aceee9ec51671bf69267a6491"
+    }
+  },
+  "compilation_separately_metered": true,
+  "new_Optimize": 0,
+  "tries": 14,
+  "reason": "Development build v4 replaced the common build output; retain exact measured v3 identity by finite source/PE metadata recovery",
+  "exact_measured_bytes_recovered": true,
+  "carrier_PE": "results/unified_exact_round160/runtime/Round160Research_core_v3.exe",
+  "TimeDateStamp": 1794305199
+}

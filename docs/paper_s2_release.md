@@ -1,5 +1,9 @@
 # GI-TBC release and paper-S2 run guide
 
+Round160's optional physical-neighborhood research is documented in
+[the mathematical section](round160_physical_neighborhood.md). Its new
+switch is default-off and does not redefine the stable GI-TBC/S2 profile.
+
 This guide describes the Round137 branch from verified main
 `b2b940c1e517a72e226ec60fc49ff19651737632`. The English Draft PR targets
 `main` and must remain a Draft; its actual identity/readback belongs in the
