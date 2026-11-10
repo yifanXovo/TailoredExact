@@ -1,0 +1,114 @@
+{
+  "UTC": "2026-11-10T16:42:13.987176+00:00",
+  "archives": [
+    {
+      "path": "results/unified_exact_round160/artifacts/new_core.zip",
+      "SHA256": "a2071d154c0b69f40acb98f8e5f39243a7f07a589e32e18da8666ac82606a60b",
+      "bytes": 12963395,
+      "members": 3800,
+      "uncompressed_bytes": 102269646,
+      "index": "results/unified_exact_round160/artifacts/new_core.members.json"
+    },
+    {
+      "path": "results/unified_exact_round160/artifacts/complete_001.zip",
+      "SHA256": "545c9cbb2396647ba1505cf8baf219828ec81c5193f254c46afeab683e90c292",
+      "bytes": 1603855,
+      "members": 580,
+      "uncompressed_bytes": 13467659,
+      "index": "results/unified_exact_round160/artifacts/complete_001.members.json"
+    },
+    {
+      "path": "results/unified_exact_round160/artifacts/complete_002.zip",
+      "SHA256": "b51224cd3713ebc51e21bc6b647003e9892d981b2242588aecebaf9728ebbade",
+      "bytes": 3850764,
+      "members": 826,
+      "uncompressed_bytes": 32277763,
+      "index": "results/unified_exact_round160/artifacts/complete_002.members.json"
+    },
+    {
+      "path": "results/unified_exact_round160/artifacts/complete_003.zip",
+      "SHA256": "12165f07e24a56b12e7365e544f1fc014168455fb60fd8c820d335a0148954cd",
+      "bytes": 1534636,
+      "members": 370,
+      "uncompressed_bytes": 13338068,
+      "index": "results/unified_exact_round160/artifacts/complete_003.members.json"
+    },
+    {
+      "path": "results/unified_exact_round160/artifacts/complete_004.zip",
+      "SHA256": "af8815d8fe9da7ad74c03f5acad982ad463e9cf9f64643fd823858ea5d06fa1c",
+      "bytes": 4046242,
+      "members": 667,
+      "uncompressed_bytes": 34538786,
+      "index": "results/unified_exact_round160/artifacts/complete_004.members.json"
+    },
+    {
+      "path": "results/unified_exact_round160/artifacts/complete_005.zip",
+      "SHA256": "4dea6f818c647351d0dfc136850f93dea34208ddb7d209a7d8e8854af1b0bfe0",
+      "bytes": 40522414,
+      "members": 78852,
+      "uncompressed_bytes": 176348662,
+      "index": "results/unified_exact_round160/artifacts/complete_005.members.json"
+    },
+    {
+      "path": "results/unified_exact_round160/artifacts/complete_006.zip",
+      "SHA256": "a9247809bf07ca664773006f4eef16653ab370d3752785235abb96c7baca281a",
+      "bytes": 41604200,
+      "members": 78106,
+      "uncompressed_bytes": 186214212,
+      "index": "results/unified_exact_round160/artifacts/complete_006.members.json"
+    },
+    {
+      "path": "results/unified_exact_round160/artifacts/complete_007.zip",
+      "SHA256": "edc8c2b786e5e788f1122af97efdffe9d83a3b522937c55dffda06770cda32c4",
+      "bytes": 785155,
+      "members": 790,
+      "uncompressed_bytes": 4399659,
+      "index": "results/unified_exact_round160/artifacts/complete_007.members.json"
+    },
+    {
+      "path": "results/unified_exact_round160/artifacts/complete_008.zip",
+      "SHA256": "7cd472ec4280cd1709dc3ece09be316292adad15d1ad01ba096bd13429e7175d",
+      "bytes": 1743633,
+      "members": 889,
+      "uncompressed_bytes": 12233031,
+      "index": "results/unified_exact_round160/artifacts/complete_008.members.json"
+    }
+  ],
+  "reused_fixed_input_blobs": [
+    {
+      "role": "K-20-S",
+      "commit": "51473276867e802ce729aae3d4a2563ea23a8fe8",
+      "path": "results/unified_exact_round132/inputs/K-20-S.txt",
+      "SHA256": "d1a65be4b87dead2ae351068ece3c3ce486a51c93652d778e055f2684606ea42",
+      "destination": "results/unified_exact_round160/inputs/K-20-S/instance.txt"
+    },
+    {
+      "role": "N-B35-S",
+      "commit": "51473276867e802ce729aae3d4a2563ea23a8fe8",
+      "path": "results/unified_exact_round137/inputs/N-B35-S.txt",
+      "SHA256": "80c75e509adba393e0f693043de0fff7412d97f92ee295465edaa011bde98c98",
+      "destination": "results/unified_exact_round160/inputs/N-B35-S/instance.txt"
+    },
+    {
+      "role": "R-X20-S-T1",
+      "commit": "51473276867e802ce729aae3d4a2563ea23a8fe8",
+      "path": "results/unified_exact_round137/inputs/R-X20-S.txt",
+      "SHA256": "2b467b5bb1e650a4c1e792e808dcf9575bcc76752fe378e16c838015344ddac6",
+      "destination": "results/unified_exact_round160/inputs/R-X20-S-T1/instance.txt"
+    },
+    {
+      "role": "R-X35-S-T2",
+      "commit": "51473276867e802ce729aae3d4a2563ea23a8fe8",
+      "path": "results/unified_exact_round137/inputs/R-X35-S.txt",
+      "SHA256": "c874d76142dc4e3ca43072d89a45d95a0f90c790d5bb4c06ca06c85dab0fbbd2",
+      "destination": "results/unified_exact_round160/inputs/R-X35-S-T2/instance.txt"
+    }
+  ],
+  "commercial_runtime_or_credentials_included": false,
+  "project_PE_retained_locally": true,
+  "private_protected_user_metadata_not_published": [
+    "infra/protected_initial.json",
+    "infra/protected_status_bytes.json"
+  ],
+  "new_only": true
+}

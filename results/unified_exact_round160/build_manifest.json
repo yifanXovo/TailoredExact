@@ -1,0 +1,45 @@
+{
+  "UTC": "2026-11-10T10:16:19.671098+00:00",
+  "command": [
+    "D:\\msys64\\ucrt64\\bin\\g++.exe",
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+    "-ID:/gurobi1302/win64/include",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Round160PhysicalNeighborhood.cpp",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\round160_research_main.cpp",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Parser.cpp",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Evaluator.cpp",
+    "E:\\codes\\ExactEBRP-work\\worktrees\\round160\\src\\Result.cpp",
+    "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+    "-o",
+    "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\Round160Research.exe"
+  ],
+  "compiler": "D:\\msys64\\ucrt64\\bin\\g++.exe",
+  "compiler_SHA": "8cd0aa578687e4182532222c8734439b3f34ac78b6ce23cba1071c5838025fc1",
+  "flags": [
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-IE:\\codes\\ExactEBRP-work\\worktrees\\round160\\include",
+    "-ID:/gurobi1302/win64/include"
+  ],
+  "PE": "E:\\codes\\ExactEBRP-work\\build-cache\\round160\\Round160Research.exe",
+  "PE_SHA": "9a4a641ea804f012ba08e348ccdc71f3403cc55422a0b67d18c60d08a04921c6",
+  "DLL": "D:\\gurobi1302\\win64\\bin\\gurobi130.dll",
+  "DLL_SHA": "9b5fccef82043cc9a0f052d31fa9c12b6d59cec999ad0cc19ca1b68ed6d18a88",
+  "source_base": "51473276867e802ce729aae3d4a2563ea23a8fe8",
+  "sources": {
+    "src\\Round160PhysicalNeighborhood.cpp": "dc39db99c795d6f114811907ea8750c5d1487b76691490e9ac27fb87e089dd81",
+    "src\\round160_research_main.cpp": "c6869be7d2cacd86eee32fd627e9aa27beeecc692ce727f77497dfbee6554192",
+    "src\\Parser.cpp": "acc0897e687dde82355f2153272e2fb1c68c1ec5507a549894109dd51b4b4ccc",
+    "src\\Evaluator.cpp": "f35b483d1bee8d0b563c5afb9075611e052b7f0b65da9bf1efad7b3e5f5a6a41",
+    "src\\Result.cpp": "2dfb77e873ffeab856ef01735b36a21c81305666c88b045340f39a9a60895c6b",
+    "include\\Round160PhysicalNeighborhood.hpp": "c4c2b4a6d7f434eb071eff6af9e1fcb174d88af7a32503910073c2d91996503a"
+  },
+  "optimization_policy": "inherited GNU C++17 flags; no optimization override or fast-math",
+  "production": false
+}

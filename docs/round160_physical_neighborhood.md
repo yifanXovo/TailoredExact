@@ -21,6 +21,10 @@ and eligible ownership changes are open. Zero service has no visit/owner.
 Outside stock/owners are fixed; old-car quantity net need not be conserved.
 Empty cars remain available.
 
+N_B(X) also retains the original legal stock supports, total-stock bounds,
+and the parent-inclusive nonstrict original-J scope J<=J(X)+1e-8. Thus the
+contraction statement below concerns this complete declared domain.
+
 The domain fixes indivisible runs and is smaller than allowing insertion at
 every outside arc. With a active released visits, there are at most a+M
 runs, then at most a+M+g after extra cuts. The nondepot primitive count is
@@ -113,6 +117,22 @@ Alternate purely nearest geometric seats and best current marginal-gain
 seats, skipping duplicates and tying by ID, to min(8,releasable) stations.
 Rebuild runs/tables from the accepted parent after each improvement.
 
+~~~text
+X := original_verify(parent)
+A := freeze_queue(all stations with legal stock variation, gain then ID)
+for anchor in A:
+    B := alternate_nearest_and_current_gain(anchor, X, min(8, releasable))
+    ports := fixed_round_robin_minimum_insertion_cuts(X, B, total_g <= |B|)
+    M := compact_full_J + mandatory_runs + joint_service + connected_load_time
+    lift X into the complete MIP Start
+    solve M with Seed0, Threads1 and the frozen node capacity
+    on every strict improving stock incumbent:
+        expand routes; recompute original J; original_verify
+        save every accepted event and its time; retain the best valid fleet
+    X := retained fleet (or unchanged X)
+return X
+~~~
+
 For each outside internal arc, minimize true insertion increment over
 free stations having some eligible nonzero operation on that car. Sort per
 car by increment/endpoints and take the best unused cut in ascending-car
@@ -157,3 +177,60 @@ unvisited activation/eligible owners equally open. Necessity requires a
 qualified restricted lower above the joint physical upper; raw Native
 bounds are insufficient. Complete self-paid results are needed for any
 complete-method gain claim.
+
+## Finite physical evidence and complete-method outcome
+
+The intended pre-scope/RN own-H parents have J=.4246498451636405 (RX35)
+and .5772179446388801 (NB35). A complete 35-anchor pass with b=8, total
+g<=8 and 512 nodes per block obtains .4016200111731245 and
+.4900715637577154, with 12/22 strictly improving, fully physical events.
+Outer costs are 40.9668595/65.6695970 seconds. All quantity vectors,
+eligible owners, complete routes and original-T checks are saved. These are
+early-parent gains, above the historical late uppers .2996694007364017 and
+.450291503262878; they are not new historical-best physical bounds.
+
+RX/NB cover all 35 releasable anchors, 28/31 unique blocks and 36/42
+unique extra vehicle-arc ports. Across 280 selected ports per source,
+87.14%/85.0% repeat. Native statuses are 12/16 OPTIMAL and 23/19 NODE_LIMIT.
+One uniform evidence-based revision to 2048 nodes raises OPTIMAL counts
+to 18/22 but yields worse terminal J=.4186767011062194/.4951307115747831
+at 100.3456037/148.8609335 seconds. More local work changes the sequence of
+accepted parents, so it need not improve a bounded pass. No further grid is
+run; the 512-node recipe is frozen for complete comparison.
+
+In one NB joint event quantities at 7,11,12,16 and old served owners 12,16
+change together with order on car0. Block-parent J=.5749270842499868 falls
+to .5596946598780417; car nets change by [1,-1,0]. The matched old-owner-fixed
+control, retaining unvisited activation/ownership freedom, finds
+.573413506045513 in 0.8298238 seconds at 512 nodes. Its raw restricted
+bound is not transported, so the observed difference does not prove owner
+necessity. No claim about unreachability by all historical closure sequences
+is made. Tiny exhaustive/locked-arc checks establish semantic equivalence,
+not a compression-speed benchmark.
+
+Eight fresh serial same-PE off/on arms pay all components from one total
+production deadline, followed by separately charged verification. E+R runs
+only after its own H/R83 and before scope/RN; no offline route or local lower
+is loaded. Seed0/Threads1, own-H seed20260626 and the shared E+ helpers are
+fixed. The resulting complete uppers and production time to certificate are:
+
+|Role|E+ U|E+R U|E+ / E+R T_cert (s)|
+|---|---:|---:|---:|
+|RX35|.2996694007364017|.3750434752252407|open / open|
+|NB35|.4502915032628780|.4540598501089633|open / open|
+|K20|.7168065462777502|.7168065462777502|open / open|
+|RX20T1|.6453250303858205|.6453250303858205|21.937043 / 36.606473|
+
+The local online costs are 41.4654254,65.6103181,14.6207349,15.1338196
+seconds respectively, with 35,35,20,20 calls and 12,22,0,5 accepted events.
+RX20T1 T_total including verification rises from 23.829507 to 38.497449
+seconds. Complete raw/proof lowers, gaps, cost components and call counts
+are in results/unified_exact_round160/reports/complete.csv. A qualified
+OPEN certificate state is distinct from an actual certificate.
+
+This finite study supports a mathematically valid, physically productive
+local construction but no complete-method U gain on the four roles, with
+two worse endpoints and a fast-certificate delay. The interface remains
+default off. These data do not establish global impossibility, general
+performance, P-GRB superiority or independent confirmation. All local
+bounds stay outside the global proof ledger.

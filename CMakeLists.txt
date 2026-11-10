@@ -150,6 +150,9 @@ if(EXACT_EBRP_ENABLE_GUROBI)
     message(FATAL_ERROR
       "EXACT_EBRP_ENABLE_GUROBI=ON but gurobi_c.h was not found. Set GUROBI_ROOT or GUROBI_HOME to the installed Gurobi win64 root; no fallback backend will be selected.")
   endif()
+  find_library(GUROBI_C_LIBRARY NAMES gurobi130
+    HINTS "${GUROBI_ROOT}" "$ENV{GUROBI_HOME}"
+    PATH_SUFFIXES lib win64/lib REQUIRED)
   list(APPEND EXACT_EBRP_LIB_SOURCES src/GurobiBaseline.cpp)
   list(APPEND EXACT_EBRP_LIB_SOURCES src/Round160PhysicalNeighborhood.cpp)
 else()
@@ -231,6 +234,8 @@ add_test(NAME NativeEvidenceJournalTests COMMAND NativeEvidenceJournalTests)
 
 if(EXACT_EBRP_ENABLE_GUROBI)
   target_include_directories(exact_ebrp_core PRIVATE "${GUROBI_INCLUDE_DIR}")
+  # Round160 uses the C API directly; propagate its import library to consumers.
+  target_link_libraries(exact_ebrp_core PUBLIC "${GUROBI_C_LIBRARY}")
   target_compile_definitions(exact_ebrp_core PUBLIC EXACT_EBRP_ENABLE_GUROBI=1)
   if(GUROBI_ROOT)
     string(REPLACE "\\" "/" GUROBI_ROOT_NORMALIZED "${GUROBI_ROOT}")
