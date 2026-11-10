@@ -1,0 +1,22 @@
+{
+  "schema": "round160-physical-block-v1",
+  "science_capacity_seconds": 129600,
+  "block_size": 8,
+  "extra_internal_ports_total": 8,
+  "nodes_per_positive_block": 512,
+  "Seed": 0,
+  "Threads": 1,
+  "MIPFocus": 1,
+  "strict_original_J_acceptance": 1e-10,
+  "anchor_queue": "At pass start, every station with more than one legal inventory is sorted by best unconstrained single-stock original-J gain descending, station index ascending on ties. The queue remains fixed throughout that pass, including zero-gain and unvisited anchors.",
+  "other_members": "Alternate nearest geometric candidate (first seat) and best current single-stock J marginal, skip already selected, ties by station index. At least four of seven seats are purely geometric even when anchor gain is zero.",
+  "ports": "Form maximal outside runs on the ORIGINAL parent, preserving holes. For each true outside internal arc compute minimum insertion increment over released stations with some legal nonzero stock for that car. Sort by increment, endpoints on ties. Take best unused per vehicle in ascending vehicle round-robin, globally capped at min(8,b). Depot gaps and original B holes always remain.",
+  "scope": "Original capacity and per-operation eligible-vehicle support; total stock between max(0,sum(initial)-sum(Q)) and sum(initial); original G/H with parent-inclusive nonstrict J cutoff parentJ+1e-8. Every accepted point rechecked against original T, coefficients and complete routes.",
+  "objective": "Compact RN with all outside-outside pairs and all outside-block unary tables; lambda already absorbed once into alpha. Full original n. Independent zero-stock physical branch when applicable, never normalized at S=0.",
+  "physical": "Mandatory immutable runs keep car and relative order; free nonzero stations have one eligible owner; arc load flows, full segment prefix summaries, connected MTZ order, depot bypass and original T including final unloading.",
+  "initial_offline": "One complete anchor pass per own-H source RX35 then NB35, 21600s ordinary whole-call deadline each. No time-triggered mechanism switch. Optional second pass only if sustained useful improvements justify it; record a common revised pass cap before use.",
+  "major_revision": "At most one evidence-driven uniform change after both initial traces; no parameter grid.",
+  "formal_candidate": "Conditional; freeze online pass/node capacity and one own-H-before-scope/RN inlet after finite development. All components share the production deadline.",
+  "proof": "No local bound, infeasibility or lack of improvement is ever sent to global proof ledger.",
+  "fixed_source_parent": "R156 complete Eplus arm initial_witness equals saved R83 closure final; production source and full input/H-seed chain verified before development. No old producer rerun. Formal arms regenerate their own state."
+}

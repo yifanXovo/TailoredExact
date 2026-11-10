@@ -1,0 +1,12 @@
+{
+  "version": "v2-node2048",
+  "major_uniform_revision_number": 1,
+  "evidence": "Initial v1 completed 35/35 anchors on each own-H source and accepted 12/22 physically verified improvements in 40.97/65.67 outer seconds. 23/35 RX and 19/35 NB blocks ended NODE_LIMIT at 512 nodes; 42/70 blocks remain bounded unfinished searches.",
+  "change": "Increase only the common per-block NodeLimit from 512 to 2048. Preserve b=8, total g<=8, queue/membership/ports, Seed0/Threads1, one pass, parent-inclusive scope and original objective. Run both sources from their identical original own-H parents.",
+  "reason": "The observed bottleneck is incomplete branch-and-bound rather than root/model construction or physical conversion. Initial total outer cost is small enough for a single fourfold work allowance with plausible online use.",
+  "not_changed": ["selection", "ports", "objective", "model", "parent provenance", "pass count", "acceptance"],
+  "no_parameter_grid": true,
+  "initial_failures_and_cost_retained": true,
+  "new_ordinary_whole_call_deadline_seconds": 21600,
+  "formal_candidate": "Not yet frozen; use the qualified common C++ implementation after this finite revision and matched controls."
+}

@@ -11,6 +11,7 @@
 #include "Round151Research.hpp"
 #include "Round153Research.hpp"
 #include "Round154Research.hpp"
+#include "Round160PhysicalNeighborhood.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -94,6 +95,7 @@ void usage() {
         << "[--external-gini-interval-mip-policy <uniform-policy>] "
         << "[--round62-archive-mode off|passive-observe|passive-cert|outer|submit] "
         << "[--round102-service-cuts off|shell|shadow|submit] "
+        << "[--round160-physical-neighborhood off|on] "
         << "[--round103-resource-hull off|shadow|submit] "
         << "[--round62-threshold-mode off|events|conflicts|projection|service|service-conflicts|projection-rlt|projection-service] "
         << "[--process-wall-time-limit <seconds>] [--process-shutdown-margin <seconds>] [--process-phase-ledger <csv>] "
@@ -908,6 +910,11 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             const auto value=requireValue(i,argc,argv);
             if(value!="off"&&value!="on")throw std::runtime_error("Round156 RN refinement must be off or on");
             ebrp::round153().refine_rn=value=="on";
+        }
+        else if (arg == "--round160-physical-neighborhood") {
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on")throw std::runtime_error("Round160 physical neighborhood requires off|on");
+            ebrp::round160::enabled()=value=="on";
         }
         else if (arg == "--round153-python") ebrp::round153().python=requireValue(i,argc,argv);
         else if (arg == "--round153-helper") ebrp::round153().helper=requireValue(i,argc,argv);
@@ -3616,6 +3623,10 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
     ebrp::round137Apply(opt, ebrp::round127().mode);
     if(ebrp::round153().refine_rn&&(!ebrp::round153().enabled||!ebrp::round153().proof_only))
         throw std::runtime_error("Round156 RN refinement requires the isolated proof-only floor");
+    if(ebrp::round160::enabled()&&
+        (opt.method!="gcap-frontier"||ebrp::round127().mode!="ms2"||
+         !ebrp::round153().enabled||!ebrp::round153().proof_only||!ebrp::round153().refine_rn))
+        throw std::runtime_error("Round160 physical neighborhood requires the opt-in Eplus GI-TBC entry");
     if(ebrp::round153().enabled){
         if(ebrp::round127().mode!="ms2"||ebrp::round146().enabled||ebrp::round149().enabled||ebrp::round148().enabled||
             ebrp::round151().mode!="off"||ebrp::round138().stock_rlt||ebrp::round143().rn||ebrp::round144().enabled||ebrp::round145().enabled||
@@ -8918,6 +8929,18 @@ PaperPrimalHeuristicResult runPaperPrimalHeuristic(
                  << ", verification_failed=" << closed.stats.verification_failed
                  << ", trace=" << trace_path.string();
             out.notes.push_back(note.str());
+        }
+        if (ebrp::round160::enabled() && out.found && !ebrp::processWorkDeadlineReached(opt)) {
+            // Exactly one paid inlet: own-H and its existing R83 closure are
+            // complete; no scope/RN/native model has yet consumed this state.
+            ebrp::recordProcessPhase(opt,"round160_physical_neighborhood","begin");
+            const auto evidence=std::filesystem::path(opt.out_path).parent_path()/"round160";
+            ebrp::round160::Config capacity; // Frozen after bounded development.
+            const auto improved=ebrp::round160::optimize(instance,opt.lambda,out.routes,evidence,capacity,
+                [&](){return ebrp::processWorkRemainingSeconds(opt);});
+            consider(improved.routes,"round160_joint_physical_neighborhood");
+            ebrp::recordProcessPhase(opt,"round160_physical_neighborhood","complete",
+                "calls="+std::to_string(improved.calls)+";accepted="+std::to_string(improved.improvements));
         }
         if (mode == "hga-tgbc") {
             finalizeHeuristic();
