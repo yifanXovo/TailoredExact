@@ -208,8 +208,9 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
     if(rn_columns) {
         long double denominator=0;
         for(int i=1;i<=instance.V;++i)denominator+=static_cast<long double>(1./instance.target[i])*final_inventory[i];
-        if(!(denominator>0))return finish("round143_start_nonpositive_denominator");
-        rn_t=static_cast<double>(1.L/denominator);
+        const bool rn_zero=std::find(domain.names.begin(),domain.names.end(),"rn_z0")!=domain.names.end();
+        if(!(denominator>0) && !rn_zero)return finish("round143_start_nonpositive_denominator");
+        rn_t=denominator>0?static_cast<double>(1.L/denominator):0;
         for(int i=1;i<=instance.V;++i){rn_y[i]=rn_t*final_inventory[i];rn_v[i]=(1./instance.target[i])*rn_y[i];}
     }
     auto routeFamily = [&](const std::string& name) {
@@ -236,6 +237,8 @@ SolverNeutralMipStart mapVerifiedRoutesToCanonicalModel(
             value = 0.0;
         } else if (name == "G") {
             value = out.G;
+        } else if(name=="rn_z0"&&rn_columns) {
+            value=rn_t==0?1:0;
         } else if(name=="rn_t"&&rn_columns) {
             value=rn_t;
         } else if(rn_columns&&parseIndexedName(name,"rn_w_",2,indices)&&indices[0]>=1&&indices[0]<=instance.V) {
