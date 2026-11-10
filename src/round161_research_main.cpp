@@ -12,7 +12,7 @@
 
 using namespace ebrp;
 int main(int argc,char** argv) {try {
-    if(argc!=12)throw std::runtime_error("Round161Research input T tp td lambda parent out OLD|RN export|LP|MIP seconds nodes(-1=unlimited)");
+    if(argc!=12)throw std::runtime_error("Round161Research input T tp td lambda parent out OLD|RN|RN-P export|export-zero|LP|MIP seconds nodes(-1=unlimited)");
     const auto began=std::chrono::steady_clock::now();const double cap=std::stod(argv[10]);
     auto elapsed=[&](){return std::chrono::duration<double>(std::chrono::steady_clock::now()-began).count();};
     auto in=parseInstanceFile(argv[1],std::stod(argv[2]),std::stod(argv[3]),std::stod(argv[4]));
@@ -22,9 +22,10 @@ int main(int argc,char** argv) {try {
     opt.process_start_time=began;opt.process_start_time_valid=true;
     round127().mode="ms2";round137Apply(opt,"ms2");round161().active=true;
     round161().development_node_limit=std::stod(argv[11]);
-    const bool rn=std::string(argv[8])=="RN";const std::string mode=argv[9];
+    const bool penalty_envelope=std::string(argv[8])=="RN-P";
+    const bool rn=std::string(argv[8])=="RN"||penalty_envelope;const std::string mode=argv[9];
     if(!rn&&std::string(argv[8])!="OLD")throw std::runtime_error("unknown formulation");
-    if(mode!="export"&&mode!="LP"&&mode!="MIP")throw std::runtime_error("unknown solve mode");
+    if(mode!="export"&&mode!="export-zero"&&mode!="LP"&&mode!="MIP")throw std::runtime_error("unknown solve mode");
     std::filesystem::path dir(argv[7]);if(!std::filesystem::create_directories(dir))throw std::runtime_error("output must be new");
     std::ifstream f(argv[6]);int count=0;f>>count;std::vector<RoutePlan> routes;
     for(int k=0;k<count;++k){RoutePlan r;int n=0;f>>r.vehicle>>n;if(n<2)throw std::runtime_error("parent nodes");r.nodes.resize(n);for(int& i:r.nodes)f>>i;
@@ -38,7 +39,7 @@ int main(int argc,char** argv) {try {
     spec.gamma_L=0;spec.gamma_U=gu;spec.verified_incumbent=cutoff;spec.incumbent_epsilon=0;
     spec.station_state_formulation="vd-p";spec.round51_subset_duration_big_m="off";
     auto old=writeCanonicalCompactModel(in,opt,dir/"original.lp",spec);if(!old.written)throw std::runtime_error(old.failure_reason);
-    auto art=replaceRound161Objective(in,old.path,dir/"model.lp",rn,gu);
+    auto art=replaceRound161Objective(in,old.path,dir/"model.lp",rn,gu,penalty_envelope,cutoff);
     auto domain=round161Domain(dir/"model.lp");
     auto start=mapVerifiedRoutesToCanonicalModel(in,opt,routes,"offline_own_H",0,gu,cutoff,domain);
     if(!start.complete)throw std::runtime_error("Start:"+start.failure_reason);
@@ -46,6 +47,19 @@ int main(int argc,char** argv) {try {
     {std::ofstream s(dir/"start.json");s<<std::setprecision(17)<<'{';for(size_t j=0;j<domain.names.size();++j){if(j)s<<',';s<<std::quoted(domain.names[j])<<':'<<start.values[j];}s<<"}\n";}
     {std::ofstream s(dir/"admission.json");s<<std::setprecision(17)<<"{\"parent_J\":"<<parent.objective<<",\"G\":"<<parent.G<<",\"P\":"<<parent.P<<",\"cutoff\":"<<cutoff<<",\"gamma_U\":"<<gu<<",\"Start_residual\":"<<residual<<",\"Start_complete\":true,\"build_seconds\":"<<elapsed()<<"}\n";}
     if(residual>1e-6)throw std::runtime_error("Start matrix residual");
+    if(mode=="export-zero") {
+        // Qualification only: the file appends a second, zero-stock fleet.
+        int cars=0;f>>cars;std::vector<RoutePlan> zero_routes;
+        for(int k=0;k<cars;++k){RoutePlan r;int n=0;f>>r.vehicle>>n;if(n<2)throw std::runtime_error("zero probe nodes");r.nodes.resize(n);for(int& i:r.nodes)f>>i;
+            for(int j=1;j+1<n;++j){int delta=0;f>>delta;r.operations.push_back({r.nodes[j],std::max(0,delta),std::max(0,-delta)});}zero_routes.push_back(r);}
+        if(!f)throw std::runtime_error("zero probe read");
+        auto zero=mapVerifiedRoutesToCanonicalModel(in,opt,zero_routes,"zero_branch_same_scope_probe",0,gu,cutoff,domain);
+        if(!zero.complete||zero.G!=0)throw std::runtime_error("zero probe mapping:"+zero.failure_reason);
+        auto zv=verifySolution(in,zero_routes,opt.lambda);if(std::any_of(zv.final_inventory.begin()+1,zv.final_inventory.end(),[](int y){return y!=0;}))throw std::runtime_error("zero probe inventory");
+        std::ofstream s(dir/"zero_start.json");s<<std::setprecision(17)<<'{';for(size_t j=0;j<domain.names.size();++j){if(j)s<<',';s<<std::quoted(domain.names[j])<<':'<<zero.values[j];}s<<"}\n";
+        if(round161StartResidual(dir/"model.lp",zero.values)>1e-6)throw std::runtime_error("zero probe residual");
+        return 0;
+    }
     if(mode=="export")return 0;
     opt.native_evidence_dir=(dir/"journal").string();
     auto journal=std::make_shared<NativeEvidenceJournal>(in,opt);journal->witness(routes,"same_own_H_parent");
@@ -70,6 +84,7 @@ int main(int argc,char** argv) {try {
     std::ofstream s(dir/"outcome.json");s<<std::setprecision(17)<<std::boolalpha<<"{\"formulation\":\""<<argv[8]<<"\",\"mode\":\""<<mode
         <<"\",\"status\":"<<std::quoted(out.native_status)<<",\"failure\":"<<std::quoted(out.failure_reason)<<",\"available\":"<<out.available
         <<",\"bound_available\":"<<out.native_bound_available<<",\"qualified_lower\":"<<out.native_bound
+        <<",\"global_floor_available\":"<<(out.native_bound_available&&journal->proofUsable())<<",\"global_transported_floor\":"<<out.native_bound
         <<",\"physical_U\":"<<journal->bestObjective()<<",\"proof_usable\":"<<journal->proofUsable()<<",\"source_rejected\":"<<journal->sourceRejected()
         <<",\"runtime\":"<<out.solver_runtime_seconds<<",\"work\":"<<out.work<<",\"nodes\":"<<out.nodes<<",\"outer_seconds\":"<<elapsed()
         <<",\"rows\":"<<out.model_linear_constraint_count<<",\"cols\":"<<out.model_variable_count<<",\"nonzeros\":"<<out.model_nonzero_count

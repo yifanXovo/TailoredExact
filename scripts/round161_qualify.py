@@ -2,6 +2,7 @@
 from round161_common import *
 from fractions import Fraction as F
 from itertools import product,permutations
+import re
 
 def rows(folder,label):
     return {r['name']:r for r in map(json.loads,(folder/f'{label}_rows.jsonl').read_text().splitlines())}
@@ -18,11 +19,15 @@ def matrix(folder):
     assert {s:v for s,v in original.items() if s not in deleted}=={s:v for s,v in actual.items() if not s.startswith('rn_')}
     assert {s for s,v in original.items() if set(v['terms'])&removed}==deleted
     assert all(not set(r['terms'])&removed for r in actual.values())
+    physical_pattern=r'(?:x_\d+_\d+_\d+|(?:p|d|z|mode|load|ord)_\d+_\d+|conn_\d+_\d+_\d+)'
+    physical={s for s in oc if re.fullmatch(physical_pattern,s)}
+    assert physical and all(not physical.intersection(original[s]['terms']) for s in deleted)
     assert all(v['type']=='B' for s,v in ac.items() if s.startswith('state_'))
     # Check original penalty epigraph rows and objective byte-value equality.
     assert all(actual[s]==r for s,r in original.items() if any(t.startswith('e_') for t in r['terms']) and not set(r['terms'])&removed)
     return dict(PASS=True,common_rows=len(original)-len(deleted),common_columns=len(oc)-len(removed),
-        removed_rows=len(deleted),removed_columns=len(removed),penalty_objective_same=True,physical_types_same=True)
+        removed_rows=len(deleted),removed_columns=len(removed),penalty_objective_same=True,physical_types_same=True,
+        removed_rows_with_physical_variables=0,physical_columns_checked=len(physical))
 
 def exact_witnesses():
     # First declared basic block. OLD lower 1/16 attained at G=z1=z2=1/16.

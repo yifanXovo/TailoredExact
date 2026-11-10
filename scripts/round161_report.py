@@ -1,0 +1,108 @@
+"""Finite research report and closed fee table; does not launch solvers."""
+from round161_common import *
+
+def costs():
+    records=[]
+    for p in sorted((OUT/'fees').glob('*/receipt.json')):
+        records.append(dict(label=p.parent.name,launch=read(p.parent/'launch.json'),receipt=read(p)))
+    write(OUT/'cost_report.json',dict(UTC=utc(),TOTAL=86400,**budget(),actual_closed_receipts=records,
+        capacity_is_not_minimum_spend=True,old_producer_scientific_charge=0,
+        nested_Runtime_Work_and_callback_validation_not_added_twice=True,
+        development_outer_cost_includes_model_build_conversion_Start_validation_Native_and_return=True,
+        public_IO_separate='publication_costs.json'))
+
+def report():
+    v=read(OUT/'reports/bridge.json');decision=read(OUT/'decision.json');m=read(OUT/'measured_manifest.json')
+    lines=['# Round161 final research report','',decision['conclusion'],'',
+        'The C++ RN replacement is a real complete-carrier Native model. Its integer',
+        'and objective correspondence, including the zero-stock union, is established',
+        'algebraically and checked on tiny exhaustive physical cases. This finite',
+        'study keeps stable GI-TBC/B, E+ and the bare CLI defaults unchanged.','',
+        '## Matched whole-native comparison','',
+        'The two inputs are the identity-complete offline own-H/R83 parents used at',
+        'the intended pre-scope inlet: RX35 J=.4246498451636405 and NB35',
+        'J=.5772179446388801. They are development inputs, not fresh complete-arm',
+        'performance. There is no online old-parent or old-floor consumption.','',
+        '|Role|Form|Mode|Physical U|Raw L|Qualified/global floor|Work|Nodes|Native s|Outer s|Stop|',
+        '|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|']
+    for x in v['samples']:
+        lines.append(f"|{x['role']}|{x['formulation']}|{x['mode']}|{x['physical_U']:.12g}|{x['raw_lower']:.12g}|{x['qualified_lower']:.12g}|{x['Work']:.8g}|{x['nodes']:.0f}|{x['Native_Runtime']:.6g}|{x['T_outer']:.6g}|{x['status']}|")
+    lines+=['','Each LP has a 300s outer allowance; each MIP has NodeLimit=4096 and',
+        'a 900s outer allowance. The same complete inclusive initial improvement',
+        'scope, original parent, support, cutoff, physical/common rows, Start and',
+        'Seed0/Threads1/MIPFocus0 contract are used within each pair. TIME_LIMIT is',
+        'censored; identical node capacity does not imply equal work or runtime.',
+        'The LP physical U column is the independently validated input parent.',
+        'Full verified-U trajectories and first/best observation times, absolute/',
+        'relative gaps and presolve sizes are in reports/bridge.json and bridge.csv.',
+        'Raw bound observations are retained in each journal/progress file.','',
+        'All reported lowers pass the existing model/source/parameter/numerical and',
+        'same-scope witness qualification. The complete J<=c region transports a',
+        'qualified ell by min(ell,c); G>c is also excluded by nonnegative penalty.',
+        'No local R160 bound is used. There is no independently paid inventory',
+        'helper in this development-only bridge. No full gap is closed, so T_cert',
+        'is empty and certified=false. Qualified OPEN is not a certificate.','',
+        '## Matrix, penalty and physical domain','',
+        '|Role|Form|Rows|Columns|Nonzeros|B/I/C|Presolved rows/cols/nz|Matrix min/max|',
+        '|---|---|---:|---:|---:|---|---|---|']
+    for x in v['samples']:
+        if x['mode']!='LP':continue
+        lines.append(f"|{x['role']}|{x['formulation']}|{x['rows']}|{x['columns']}|{x['nonzeros']}|{x['binaries']}/{x['integers']}/{x['continuous']}|{x['presolved_rows']}/{x['presolved_columns']}/{x['presolved_nonzeros']}|{x['min_coefficient']:.6g}/{x['max_coefficient']:.6g}|")
+    lines+=['','The registry explicitly removes state_g, zprod, unscaled h and W_SP plus',
+        'their exact row-consumer closure. Objective-dependent caps, spread and',
+        'estimators leave with that module. Original G+sum alpha_i e_i, r/e links,',
+        'e bounds, cutoff/penalty-common information and all remaining original',
+        'rows/column types are equal. No state-unary penalty was introduced. The',
+        'actual complete removed list and both full named matrices are saved.',
+        'The contrast concerns this declared replacement, not just a coefficient.',
+        'RN is not smaller in column count here; a reduction relative to old+RN',
+        'is not presented as a reduction relative to the original carrier.','',
+        'The two exact basic-subblock witnesses show neither selector/G LP',
+        'projection dominates: RN permits G=0 where OLD needs 1/16, while R143\'s',
+        'three-station point permits OLD G=1/3 and requires RN G>=5/12. They do',
+        'not prove strict separation of arbitrary full routing LPs. Saved LP',
+        'rho-t*cY and zprod-GY residuals explain product slack without extra',
+        'Optimize calls or a causal claim. See reports/LP_product_diagnostics.json.','',
+        'Every saved improving fleet is rechecked under original T with complete',
+        'stock, owner, routes, per-car travel/handling/unloading and prefix loads.',
+        'The exact loaded-c objective and original evaluator agree within the',
+        'existing numerical policy. Complete details are in reports/fleets.json.','',
+        '## Decision and scope','',decision['reason'],'',decision['next_question'],'',
+        'The conditional complete E+/N-RN panel is '+('entered.' if decision['complete_panel_entered'] else 'not entered.'),
+        'No fresh E+ result is inferred from R160, and no historical main comparison',
+        'CSV is updated. The data cover two sources and one Seed, not stable',
+        'promotion, independent confirmation, a P-GRB comparison or a universal',
+        'impossibility theorem. No automatic backup mechanism or seed/grid study',
+        'is started to spend unused capacity.','',
+        '## Verification, identities, costs and delivery','',
+        'The separate final saved-evidence audit is by the same agent, not an',
+        'independent person. It checks actual source/PE/DLL/input identities,',
+        'common physical rows/types and penalty, denominator/zero coverage,',
+        'complete Starts, original-J routes, source scope and all failed fees.',
+        'The initial archive-selection and zero-only construction failures remain',
+        'in their original trees/receipts; correctness repairs are distinguished',
+        'from a major scientific recipe revision.','',
+        f"Measured full bridge PE SHA256: `{m['research_PE_SHA']}`.",
+        f"Verified matching C++ commit: `{m['verified_CPP_commit']}`.",
+        f"Gurobi 13.0.2 DLL SHA256: `{DLL_SHA}`.",
+        'The OS module receipt records the actual loaded DLL path. Build flags',
+        'retain inherited GNU C++17/warnings, with no optimization, fast-math or',
+        'tolerance change. Later delivery builds are not performance samples.',
+        'Source, measured executable, scientific snapshot and delivery commits',
+        'are separate. The exact measured changed-source bytes are retained.','',
+        'Closed scientific outer costs, including every failure, scientific',
+        'readback and necessary verification, are in cost_report.json against',
+        '86400s capacity. Nested Runtime/Work/callback validation are decompositions',
+        'and are not added again. Compile and public recovery/push costs are',
+        'separate. Capacity is not a minimum spend.','',
+        'The new-only public carrier excludes commercial runtime, licenses and',
+        'protected user metadata. Old inputs and parent provenance use fixed',
+        'commit/member/SHA references. One finite anonymous new-artifact recovery',
+        'and bounded metadata cleanup are recorded by the delivery commit.','',
+        'See [mathematical/paper section](../../docs/round161_native_rn.md),',
+        '[history and increment](history_dedup.md), [decision](decision.json),',
+        '[full goal](goal.md), [final review](final_review.json) and',
+        '[continuation/publication](RESUME.md).']
+    (OUT/'final_report.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
+
+if __name__=='__main__':globals()[sys.argv[1]](*sys.argv[2:])

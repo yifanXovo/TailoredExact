@@ -18,7 +18,8 @@ struct Round161Artifact {
 // Read the actual canonical matrix, register old objective columns and delete
 // their complete row-consumer closure. All other rows/columns are unchanged.
 Round161Artifact replaceRound161Objective(const Instance&, const std::filesystem::path& old_lp,
-    const std::filesystem::path& output, bool rn, double gamma_upper);
+    const std::filesystem::path& output, bool rn, double gamma_upper,
+    bool penalty_envelope=false, double cutoff=0);
 SolverNeutralModelDomain round161Domain(const std::filesystem::path&);
 double round161StartResidual(const std::filesystem::path&, const std::vector<double>&);
 }
