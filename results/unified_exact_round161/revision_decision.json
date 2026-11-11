@@ -1,0 +1,20 @@
+{
+  "major_revision_number": 1,
+  "version": "RN-P",
+  "reason": "Core RN is dominated in physical U and qualified L at matched whole-native budgets on both sources. A zero-Optimize exact diagnostic finds an existing original-e penalty/cutoff implication that tightens the reciprocal envelopes and excludes BOTH saved RN LP optima.",
+  "evidence": {
+    "RX35_S_lower_box": 8.61111111111111,
+    "RX35_S_lower_penalty": 11.001145153938541,
+    "RX35_saved_point_envelope_violation": 0.0049657875417436215,
+    "NB35_S_lower_box": 14.844444444444443,
+    "NB35_S_lower_penalty": 21.391592589947212,
+    "NB35_saved_point_envelope_violation": 0.006246158050820314
+  },
+  "change": "Intersect the existing stock-box S bounds with a continuous ratio-box bound implied by sum alpha_i e_i <= initial cutoff, using ORIGINAL actual alpha_i and e_i >= abs(r_i-1). Compute by exact checked dyadic fractional-knapsack accounting in C++, with outward conversion for the final partial item. Update only RN t/w/Yhat bounds and envelope coefficients.",
+  "same_rule_all_sources": true,
+  "not_changed": ["physical carrier", "penalty objective or e rows", "supports", "initial own-H fleet", "G bounds", "cutoff", "Seed", "Threads", "MIPFocus", "numerical tolerances", "Native controller"],
+  "finite_confirmation": "Two affected RN-P LPs (300s each), two RN-P MIPs (4096 nodes / 900s outer each). Reuse this round's paid unchanged OLD controls, explicitly identifying PE/source changes and validating exact OLD model/Start/native-backend equivalence. Do not call this a new same-PE OLD panel.",
+  "root_alone_does_not_decide": true,
+  "no_second_recipe_revision": true,
+  "zero_interface_hardening": "Separate correctness repairs for scaled zero rows, actual coefficient admission and semantic physical-consumer guard; all first-round real domains are structurally positive and their original coefficients are preserved. Keep measured v3 identities distinct."
+}

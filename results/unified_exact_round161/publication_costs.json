@@ -1,0 +1,78 @@
+{
+  "category": "publication/archive/recovery/cleanup I/O; excluded from scientific meter",
+  "records": [
+    {
+      "action": "package",
+      "args": [],
+      "start_UTC": "2026-11-11T00:42:10.764906+00:00",
+      "end_UTC": "2026-11-11T00:42:19.050944+00:00",
+      "elapsed_seconds": 8.292017300147563,
+      "success": true
+    },
+    {
+      "action": "manifest",
+      "args": [],
+      "start_UTC": "2026-11-11T00:42:37.671473+00:00",
+      "end_UTC": "2026-11-11T00:42:41.694937+00:00",
+      "elapsed_seconds": 4.015896100085229,
+      "success": true
+    },
+    {
+      "action": "gitio",
+      "args": [
+        "commit",
+        "-m",
+        "Report finite full-carrier RN study and publish new evidence carrier"
+      ],
+      "start_UTC": "2026-11-11T00:42:49.561490+00:00",
+      "end_UTC": "2026-11-11T00:42:50.519379+00:00",
+      "elapsed_seconds": 0.9643289004452527,
+      "success": true
+    },
+    {
+      "action": "gitio",
+      "args": [
+        "push",
+        "--set-upstream",
+        "origin",
+        "codex/round161-full-physical-rn"
+      ],
+      "start_UTC": "2026-11-11T00:42:54.401144+00:00",
+      "end_UTC": "2026-11-11T00:43:16.017346+00:00",
+      "elapsed_seconds": 21.617330399807543,
+      "success": true
+    },
+    {
+      "action": "restore",
+      "args": [
+        "fcd83fdf4d8980cbfdd6a860d5fe44fb7aa98158"
+      ],
+      "start_UTC": "2026-11-11T00:44:15.827459+00:00",
+      "end_UTC": "2026-11-11T00:44:59.262290+00:00",
+      "elapsed_seconds": 43.429221800062805,
+      "success": true
+    },
+    {
+      "action": "cleanup",
+      "args": [],
+      "start_UTC": "2026-11-11T00:45:04.884515+00:00",
+      "end_UTC": "2026-11-11T00:45:05.236109+00:00",
+      "elapsed_seconds": 0.34115410037338734,
+      "success": true
+    },
+    {
+      "action": "metadata_assembly_failed",
+      "elapsed_seconds": 0.3598831,
+      "success": false,
+      "measurement": "exec_command observed outer wall time",
+      "reason": "Publication schema lookup corrected from decision to status; no scientific computation or Optimize."
+    }
+  ],
+  "total_seconds": 84.34583170092178,
+  "no_new_Optimize": true,
+  "final_metadata_push": "Receipt after the metadata commit is retained locally; no self-referential commit loop.",
+  "shell_IO_seconds": 79.01983170092178,
+  "API_IO_seconds": 5.326,
+  "API_receipts": "infra/publication_api_calls.json",
+  "final_metadata_commit_push_and_final_PR_readback": "Separately retained locally at E:/codes/ExactEBRP-work/temp/round161_delivery_local_close.json; no self-referential commit loop."
+}

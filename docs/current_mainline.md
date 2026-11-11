@@ -1,5 +1,17 @@
 # Current mainline and Round137 paper branch
 
+The [Round161 full physical RN study](round161_native_rn.md) replaces the
+old G-products on the original carrier. Six continuous LPs and six limited
+whole-native MIPs include one uniform penalty-implied reciprocal-bound
+revision. Both RN versions remain inferior in physical U and qualified L
+to OLD on RX35/NB35, so the conditional complete E+/N-RN panel is not entered.
+The default-off research entry, integer/zero equivalence, model registries,
+full costs and negative evidence are retained in the
+[report](../results/unified_exact_round161/final_report.md). Stable GI-TBC/B,
+E+ and historical main comparisons remain unchanged. The preceding
+[Round160 neighborhood study](round160_physical_neighborhood.md) retains its
+own fixed science and complete-method negative result.
+
 The [Round159 continuation](round159_research.md) improves qualified integer
 resource witnesses with a uniform C++ quantity/owner block. Complete local
 DP explains full-tour/handling and prefix-load failures; the free-owner

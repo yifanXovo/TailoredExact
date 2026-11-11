@@ -1,0 +1,171 @@
+[
+  {
+    "label": "R-X35-S-T2_OLD_MIP_v1",
+    "parent_J": 0.4246498451636405,
+    "best_J": 0.40113978843811804,
+    "Y_changed": [
+      4,
+      6,
+      7,
+      11,
+      13,
+      14,
+      15,
+      16,
+      28,
+      29,
+      31,
+      32,
+      35
+    ],
+    "activated": [
+      14,
+      35
+    ],
+    "deactivated": [
+      28,
+      29
+    ],
+    "owner_changed": [],
+    "interpretation": "Original J depends only on Y; routes/owners/orders supply the verified physical implementation. Endpoint changes do not isolate Native search causality."
+  },
+  {
+    "label": "R-X35-S-T2_RN_MIP_v1",
+    "parent_J": 0.4246498451636405,
+    "best_J": 0.4155480568870448,
+    "Y_changed": [
+      7,
+      11,
+      15,
+      22,
+      35
+    ],
+    "activated": [
+      35
+    ],
+    "deactivated": [
+      22
+    ],
+    "owner_changed": [],
+    "interpretation": "Original J depends only on Y; routes/owners/orders supply the verified physical implementation. Endpoint changes do not isolate Native search causality."
+  },
+  {
+    "label": "R-X35-S-T2_RNP_MIP_v2",
+    "parent_J": 0.4246498451636405,
+    "best_J": 0.406923269363301,
+    "Y_changed": [
+      4,
+      7,
+      11,
+      19,
+      21
+    ],
+    "activated": [],
+    "deactivated": [],
+    "owner_changed": [],
+    "interpretation": "Original J depends only on Y; routes/owners/orders supply the verified physical implementation. Endpoint changes do not isolate Native search causality."
+  },
+  {
+    "label": "N-B35-S_OLD_MIP_v1",
+    "parent_J": 0.5772179446388801,
+    "best_J": 0.46342619047619055,
+    "Y_changed": [
+      2,
+      5,
+      6,
+      9,
+      11,
+      12,
+      14,
+      16,
+      19,
+      20,
+      21,
+      23,
+      27,
+      29,
+      30,
+      34
+    ],
+    "activated": [
+      30
+    ],
+    "deactivated": [
+      6,
+      34
+    ],
+    "owner_changed": [
+      12
+    ],
+    "interpretation": "Original J depends only on Y; routes/owners/orders supply the verified physical implementation. Endpoint changes do not isolate Native search causality."
+  },
+  {
+    "label": "N-B35-S_RN_MIP_v1",
+    "parent_J": 0.5772179446388801,
+    "best_J": 0.46680591542410177,
+    "Y_changed": [
+      2,
+      5,
+      6,
+      9,
+      11,
+      12,
+      14,
+      16,
+      19,
+      20,
+      21,
+      23,
+      24,
+      26,
+      27,
+      30,
+      32,
+      34
+    ],
+    "activated": [
+      26,
+      30,
+      32
+    ],
+    "deactivated": [
+      6,
+      14,
+      16
+    ],
+    "owner_changed": [
+      12
+    ],
+    "interpretation": "Original J depends only on Y; routes/owners/orders supply the verified physical implementation. Endpoint changes do not isolate Native search causality."
+  },
+  {
+    "label": "N-B35-S_RNP_MIP_v2",
+    "parent_J": 0.5772179446388801,
+    "best_J": 0.4974250873242434,
+    "Y_changed": [
+      2,
+      6,
+      9,
+      11,
+      12,
+      13,
+      16,
+      23,
+      25,
+      26,
+      33,
+      34
+    ],
+    "activated": [
+      26
+    ],
+    "deactivated": [
+      6,
+      25
+    ],
+    "owner_changed": [
+      19
+    ],
+    "interpretation": "Original J depends only on Y; routes/owners/orders supply the verified physical implementation. Endpoint changes do not isolate Native search causality."
+  }
+]
