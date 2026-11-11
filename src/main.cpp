@@ -12,6 +12,7 @@
 #include "Round153Research.hpp"
 #include "Round154Research.hpp"
 #include "Round160PhysicalNeighborhood.hpp"
+#include "Round162PhysicalCompletion.hpp"
 #include "Round98StateService.hpp"
 #include "Round64SharedResource.hpp"
 #include "Branching.hpp"
@@ -915,6 +916,13 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             const auto value=requireValue(i,argc,argv);
             if(value!="off"&&value!="on")throw std::runtime_error("Round160 physical neighborhood requires off|on");
             ebrp::round160::enabled()=value=="on";
+        }
+        else if(arg=="--round162-physical-completion"){
+            const auto value=requireValue(i,argc,argv);
+            if(value!="off"&&value!="on"&&value!="stock")throw std::runtime_error("Round162 physical completion requires off|stock|on");
+            ebrp::round162().enabled=value=="on";
+            ebrp::round162().stock_control=value=="stock";
+            if(value!="off")ebrp::round138().stock_rlt=true;
         }
         else if (arg == "--round153-python") ebrp::round153().python=requireValue(i,argc,argv);
         else if (arg == "--round153-helper") ebrp::round153().helper=requireValue(i,argc,argv);
@@ -3629,7 +3637,7 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
         throw std::runtime_error("Round160 physical neighborhood requires the opt-in Eplus GI-TBC entry");
     if(ebrp::round153().enabled){
         if(ebrp::round127().mode!="ms2"||ebrp::round146().enabled||ebrp::round149().enabled||ebrp::round148().enabled||
-            ebrp::round151().mode!="off"||ebrp::round138().stock_rlt||ebrp::round143().rn||ebrp::round144().enabled||ebrp::round145().enabled||
+            ebrp::round151().mode!="off"||(ebrp::round138().stock_rlt&&!(ebrp::round162().enabled||ebrp::round162().stock_control))||ebrp::round143().rn||ebrp::round144().enabled||ebrp::round145().enabled||
             ebrp::round139().enabled()||ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||
             ebrp::round135AggregatePenalty()||opt.round90_lp_g_split||opt.round119_proof_contraction||opt.round120_native_proof!="off")
             throw std::runtime_error("Round153 floor requires isolated stable GI-TBC");
@@ -3693,6 +3701,25 @@ ebrp::SolveOptions parseArgs(int argc, char** argv) {
             f<<"{\"GD\":true,\"conditional\":true,\"root_once\":true,\"new_columns\":0,\"source_solves\":0,\"stock\":"
                 <<(ebrp::round138().stock_rlt?"true":"false")<<",\"Seed\":"<<opt.gurobi_seed<<",\"H_seed\":"<<opt.primal_heuristic_seed<<"}\n";
             if(!f)throw std::runtime_error("Round146 parameter persistence failed");
+        }
+    }
+    if(ebrp::round162().enabled||ebrp::round162().stock_control){
+#if !EXACT_EBRP_ENABLE_GUROBI
+        throw std::runtime_error("Round162 requires the existing Native Gurobi backend");
+#endif
+        if(ebrp::round127().mode!="ms2"||!ebrp::round138().stock_rlt||ebrp::round139().enabled()||
+            ebrp::round143().rn||ebrp::round144().enabled||ebrp::round145().enabled||ebrp::round160::enabled()||
+            ebrp::round140().enabled()||ebrp::round141().enabled()||ebrp::round142().enabled()||
+            ebrp::round146().enabled||ebrp::round148().enabled||ebrp::round149().enabled||ebrp::round151().mode!="off"||
+            ebrp::round135AggregatePenalty()||opt.round90_lp_g_split||opt.round119_proof_contraction||opt.round120_native_proof!="off")
+            throw std::runtime_error("Round162 requires isolated GI-TBC ms2 plus symmetric STOCK and unchanged optional proof-only Eplus helper");
+        if(!ebrp::round153().enabled||!ebrp::round154Enabled()||!ebrp::round153().refine_rn)throw std::runtime_error("Round162 formal arms require the common paid Eplus RN16384 helper in proof-only mode");
+        if(!opt.out_path.empty()){
+            const auto path=std::filesystem::path(opt.out_path).parent_path()/"round162_parameters.json";
+            std::filesystem::create_directories(path.parent_path());std::ofstream f(path);
+            f<<"{\"PC\":"<<(ebrp::round162().enabled?"true":"false")<<",\"stock\":true,\"source_policy\":\""<<(ebrp::round162().enabled?"once_initial_full_physical_root":"none")<<"\",\"formal_new_columns\":0,\"source_lower_formal_floor\":false,\"NodeLimit_development_override\":false,\"Seed\":"
+                <<opt.gurobi_seed<<",\"Threads\":1,\"H_seed\":"<<opt.primal_heuristic_seed<<"}\n";
+            if(!f)throw std::runtime_error("Round162 parameter persistence failed");
         }
     }
     if(ebrp::round145().enabled){

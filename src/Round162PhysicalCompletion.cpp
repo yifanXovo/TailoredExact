@@ -204,8 +204,9 @@ void saveRound162LpEvidence(const FixedIntervalMipOutcome& out,const std::filesy
     if(!p||!v||!r)throw std::runtime_error("round162_evidence_write");
 }
 Round162Artifact projectRound162Completion(const std::filesystem::path& baseline,const std::filesystem::path& source,
-        const std::filesystem::path& duals,const std::filesystem::path& output){
+        const std::filesystem::path& duals,const std::filesystem::path& output,Round162Row* projected_row){
     Model base(baseline),full(source);Matrix b(base.m),a(full.m);unchanged(b,a);const auto dir=output.parent_path();
+    registry(b,dir,"original");
     const auto indices=ids(a);std::map<std::string,double> pi;std::ifstream f(duals);std::string line;
     const std::regex pattern("\\{\"name\":\"([^\"]+)\",\"dual\":([^,]+),.*\\}");std::smatch match;
     while(std::getline(f,line)){if(!std::regex_match(line,match,pattern))throw std::runtime_error("round162_dual_syntax");
@@ -229,6 +230,7 @@ Round162Artifact projectRound162Completion(const std::filesystem::path& baseline
         if(eliminate.at(projected.indices[k])||!original.count(name))throw std::runtime_error("round162_projection_not_original");
         cut[name]=projected.coefficients[k];js.push_back(original.at(name));cs.push_back(projected.coefficients[k]);}
     const bool active=!cut.empty();if(!active&&projected.rhs<0)throw std::runtime_error("round162_empty_infeasible_projection");
+    if(projected_row)*projected_row={cut,projected.rhs,active};
     if(active)ck(GRBaddconstr(base.m,int(js.size()),js.data(),cs.data(),'<',projected.rhs,"pc162_projected"));
     ck(GRBupdatemodel(base.m));Matrix intended(base.m);unchanged(b,intended);exactLp(base.m,intended,output);
     ck(GRBwrite(base.m,(dir/"model.mps").string().c_str()));Model loaded(output);Matrix actual(loaded.m);unchanged(intended,actual);registry(actual,dir,"actual");
@@ -238,5 +240,14 @@ Round162Artifact projectRound162Completion(const std::filesystem::path& baseline
     bool first=true;for(const auto& term:cut){if(!first)evidence<<',';first=false;evidence<<q(term.first)<<':'<<term.second;}evidence<<"}},\"original_physical_terms_retained\":true,\"new_columns_submitted\":0,\"loaded_row_exact\":true}\n";
     std::ofstream nr(dir/"new_rows_intended.jsonl");if(active){nr<<std::setprecision(17)<<"{\"name\":\"pc162_projected\",\"sense\":\"<\",\"rhs\":"<<projected.rhs<<",\"terms\":{";first=true;for(const auto& term:cut){if(!first)nr<<',';first=false;nr<<q(term.first)<<':'<<term.second;}nr<<"}}\n";}
     Round162Artifact result;result.sha256=fileSha256(output);result.row_signature=fileSha256(dir/"actual_rows.jsonl");return result;
+}
+Round162Artifact appendRound162Row(const std::filesystem::path& path,const std::filesystem::path& output,const Round162Row& row){
+    Model model(path);Matrix before(model.m);auto index=ids(before);std::vector<int> js;std::vector<double> cs;
+    if(!row.active)throw std::runtime_error("round162_append_inactive_row");
+    for(const auto& term:row.coefficients){js.push_back(index.at(term.first));cs.push_back(term.second);}
+    ck(GRBaddconstr(model.m,int(js.size()),js.data(),cs.data(),'<',row.rhs,"pc162_projected"));ck(GRBupdatemodel(model.m));
+    Matrix intended(model.m);unchanged(before,intended);exactLp(model.m,intended,output);
+    Model loaded(output);unchanged(intended,Matrix(loaded.m));
+    Round162Artifact out;out.sha256=fileSha256(output);out.row_signature=out.sha256;return out;
 }
 }
